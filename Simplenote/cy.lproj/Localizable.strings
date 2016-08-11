@@ -1,0 +1,345 @@
+/* No comment provided by engineer. */
+"%d Result" = "%d Canlyniad";
+
+/* Number of found search results */
+"%d Results" = "%d Canlyniad ";
+
+/* Number of words in a note */
+"%d Word" = "%d Gair";
+
+/* Number of words in a note */
+"%d Words" = "%d Gair";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
+
+/* Label of accept button on alert dialog */
+"Accept" = "Derbyn";
+
+/* A user's Simplenote account */
+"Account" = "Cyfrif";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Add a new collaborator..." = "Ychwanegu cydweithredwr newydd...";
+
+/* Label on button to add a new tag to a note */
+"Add tag" = "Ychwanegu tag";
+
+/* Title of option to display all notes */
+"All Notes" = "Pob Nodyn";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "Eisoes â chyfrif?";
+
+/* No comment provided by engineer. */
+"Cancel" = "Canslo";
+
+/* Verb - work with others on a note */
+"Collaborate" = "Cydweithredu";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Collaborators" = "Cydweithredwyr";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Rhestr gryno o nodiadau";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "Cadarnhau";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "Nid oedd modd creu cyfrif gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Nid oedd modd mewngofnodi gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd. ";
+
+/* No comment provided by engineer. */
+"Create a new note" = "Creu nodyn newydd";
+
+/* No comment provided by engineer. */
+"Current Collaborators" = "Cydweithredwyr Cyfredol";
+
+/* Option to enable the dark app theme. */
+"Dark Theme" = "Thema Tywyll";
+
+/* No comment provided by engineer. */
+"Dismiss keyboard" = "Cau'r bysellfwrdd";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Heb greu cyfrif?";
+
+/* No comment provided by engineer. */
+"Done" = "Gorffen";
+
+/* Re-order or delete tags */
+"Edit Tags" = "Golygu Tagiau";
+
+/* Verb - empty causes all notes to be removed permenently from the trash */
+"Empty" = "Gwagio";
+
+/* Remove all notes from the trash */
+"Empty trash" = "Clirio'r sbwriel";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Rhowch god cyfrin";
+
+/* Pin Lock */
+"Enter your passcode" = "Rhowch eich cod cyfrin";
+
+/* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "Dewch o hyd i nodiadau'n gyflym gyda'r gallu i chwilio ar unwaith a thagiau syml.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "Cychwyn Arni";
+
+/* Noun - the version history of a note */
+"History" = "Hanes";
+
+/* Action - view the version history of a note */
+"History..." = "Hanes...";
+
+/* Terminoligy used for sidebar UI element where tags are displayed */
+"Menu" = "Dewislen";
+
+/* Label to create a new note */
+"New note" = "Nodyn newydd";
+
+/* Message shown in note list when no notes are in the current view */
+"No Notes" = "Dim Nodiadau";
+
+/* Message shown when no notes match a search string */
+"No Results" = "Dim Canlyniadau";
+
+/* Confirmation shown when a note is published */
+"Note Published" = "Cyhoeddwyd y nodyn";
+
+/* No comment provided by engineer. */
+"Note not published" = "Nid yw'r nodyn wedi ei gyhoeddi";
+
+/* Plural form of notes */
+"Notes" = "Nodiadau";
+
+/* No comment provided by engineer. */
+"OK" = "IAWN";
+
+/* No comment provided by engineer. */
+"Off" = "I ffwrdd";
+
+/* No comment provided by engineer. */
+"On" = "Ymlaen";
+
+/* Select a note to view in the note editor */
+"Open note" = "Agor nodyn";
+
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "Cod cyfrin";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Nid oedd y codau cyfrin yn cyfateb. Rhowch gynnig arall arni.";
+
+/* Hint displayed in the password field */
+"Password" = "Cyfrinair";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "Rhaid i'r cyfrinair gynnwys o leiaf 4 nod.";
+
+/* Action to mark a note as pinned */
+"Pin note" = "Pinio'r nodyn";
+
+/* Denotes when note is pinned to the top of the note list */
+"Pin to Top" = "Pinio'r i'r top";
+
+/* Switch which marks a note as pinned or unpinned */
+"Pin toggle" = "Pinio'r togl";
+
+/* Pinned notes are stuck to the note of the note list */
+"Pinned" = "Piniwyd";
+
+/* No comment provided by engineer. */
+"Preferences" = "Dewisiadau";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+"Publish" = "Cyhoeddi";
+
+/* Failure message after attempting to publish a note */
+"Publish Failed" = "Wedi methu cyhoeddi";
+
+/* Action which published a note to a web page */
+"Publish note" = "Cyhoeddi nodyn";
+
+/* Switch which marks a note as published or unpublished */
+"Publish toggle" = "Cyhoeddi togl";
+
+/* No comment provided by engineer. */
+"Published" = "Cyhoeddwyd";
+
+/* Message shown when a note is in the processes of being published */
+"Publishing..." = "Wrthi'n cyhoeddi...";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Nodwch eich cod cyfrin eto";
+
+/* Delete a tag and remove it from all associated notes */
+"Remove Tag" = "Tynnu'r tag";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Cael gwared â'r holl nodiadau o'r sbwriel";
+
+/* Prompt asking user to confirm the removal of a tag from a note */
+"Remove tag?" = "Tynnu'r tag?";
+
+/* Rename a tag */
+"Rename" = "Ailenwi";
+
+/* Restore a note from the trash, markking it as undeleted */
+"Restore" = "Adfer";
+
+/* Restore a note to a previous version */
+"Restore Note" = "Adfer Nodyn";
+
+/* Verb - send the content of the note by email, message, etc */
+"Send" = "Anfon";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Gosodwch god cyfrin";
+
+/* Title of options screen */
+"Settings" = "Gosodiadau";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "Rhannwch restr, postiwch rai cyfarwyddiadau, neu cyhoeddwch eich meddyliau.";
+
+/* No comment provided by engineer. */
+"Share note" = "Rhannu nodyn";
+
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Bar ochr";
+
+/* Title of button for logging in (must be short) */
+"Sign In" = "Mewngofnodi";
+
+/* Sign out of the active account in the app */
+"Sign Out" = "Allgofnodi";
+
+/* Title of button to create a new account (must be short) */
+"Sign Up" = "Cofrestru";
+
+/* A short link to access the account login screen */
+"Sign in" = "Mewngofnodi";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Cofrestru";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "Trefnu Nodiadau yn Nhrefn yr Wyddor";
+
+/* Message shown in first launch view */
+"Stay organized" = "Cadw trefn ar bethau";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
+
+/* Text used to display the name of a tag */
+"Tag: %@" = "Tag: %@";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "Mae problem gyda'r cysylltiad. Rhowch gynnig arall arni nes ymlaen.";
+
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Heddiw";
+
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Bar ochr toglo tagiau";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Enw Cyffwrdd";
+
+/* Trash (noun) - the location where deleted notes are stored */
+"Trash-noun" = "Sbwriel";
+
+/* Trash (verb) - the action of deleting a note */
+"Trash-verb" = "Sbwriel";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Diffodd y cod cyfrin";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Datgloi %@";
+
+/* Action to mark a note as unpinned */
+"Unpin note" = "Dadbinio'r nodyn";
+
+/* Action which unpublishes a note */
+"Unpublish note" = "Dad-gyhoeddi'r nodyn";
+
+/* Message shown when unpublishing a note */
+"Unpublishing..." = "Wrthi'n dad-gyhoeddi...";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "Defnyddio'r ap ym mhob man";
+
+/* Represents a snapshot in time for a note */
+"Version" = "Fersiwn";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "Croeso i Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "Gweithio gyda'ch gilydd";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Ddoe";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid." = "Nid yw eich cyfeiriad e-bost yn ddilys.";
+
+/* Description of Simplenote shown in first launch view */
+"Your notes stay updated across all your devices. No buttons to press. It just works." = "Mae'ch nodiadau yn cael eu diweddaru ar draws pob un o'ch dyfeisiau. Dim botymau i'w gwthio. Mae jyst yn gweithio.";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "Galluogi i eraill gydweithredu";
+
+/* No comment provided by engineer. */
+"collaborators-description" = "Ychwanegwch gyfeiriad e-bost i rannu'r nodyn hwn gyda rhywun. Yna byddwch chi'n dau yn gallu gwneud newidiadau iddo.";
+
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "Dilëwyd y nodyn hwn ar ddyfais arall.";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "Adfer y nodyn i'r fersiwn blaenorol";
+
+/* iTunes app description */
+"iTunes-description" = "Mae Simplenote yn ddull syml o gadw nodiadau, rhestrau, syniadau a mwy. Mae'ch nodiadau yn cydweddu rhwng pob un o'ch dyfeisiau - am ddim.\n\nByddwch yn profi cyflymder ac effeithiolrwydd drwy Simplenote. Agorwch yr ap, ysgrifennwch ryw syniadau, a dyna chi. Wrth i'ch casgliad o nodiadau dyfu, gallwch chwilio trwyddynt ar unwaith a'u cadw mewn trefn gyda thagiau a phinnau. Gallwch hefyd rannu nodiadau a'u cyhoeddi ar gyfer pobl eraill.\n\nY ffordd orau i ddysgu am Simplenote yw rhoi cynnig arno. Bydd gofyn i chi greu cyfrif. Bydd hyn yn caniatáu i chi wneud copi wrth gefn o'ch nodiadau ar-lein a byddant yn cael eu cysoni'n awtomatig.\n\nAr ôl i chi gofrestru, rhowch gynnig ar ysgrifennu rhai nodiadau! Yna ewch i simplenote.com i lawrlwytho Simplenote ar gyfer eich dyfeisiau eraill.";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "Dangos y dewisiadau ar gyfer y nodyn";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "Cau'r nodyn cyfredol";
+
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "Rhannu cynnwys y nodyn cyfredol";
+
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "Ychwanegu tag i'r nodyn cyfredol";
+
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "Tynnu'r tag o'r nodyn cyfredol";
+
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "Symud y nodyn cyfredol i'r sbwriel";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "Cysylltwch â'r rhyngrwyd i gael mynediad at fersiynau blaenorol";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "Newid i'r fersiwn hwn";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "Wrthi'n ôl y fersiwn";
+
+/* A welcome note for new iOS users */
+"welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
+

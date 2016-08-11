@@ -1,0 +1,246 @@
+@charset "UTF-8";
+* , body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    line-height: 1.4;
+    font-size: 14px;
+    background: transparent;
+}
+
+img {
+    border: 0;
+}
+
+* :focus {
+    outline: none;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    background: #fcfcfc;
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    color: #333;
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    font-weight: 100;
+    font-size: 36px;
+    line-height: 1.2;
+    color: #333;
+    margin: 0 0 0.1em 0;
+    padding: 0 0 1em 0;
+}
+
+h3 {
+    margin: 0.25em 0 1em 0;
+    font-weight: normal;
+}
+
+legend, h2 {
+    font-weight: 200;
+    font-size: 30px;
+    color: #666;
+    padding: 1em 0 1em 0;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.2;
+    margin: 0 0 0.25em 0;
+    color: #666;
+}
+
+h5 {
+    font-size: 0.9em;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 0 0 0 0;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ol {
+    padding: 0 0 0 2em;
+    list-style-type: decimal;
+}
+
+ol li {
+    margin: 0 0 0.5em 0;
+}
+
+a {
+    cursor: pointer;
+    color: #aaa;
+    text-decoration: none;
+}
+
+a:link, a:visited, a {
+    text-decoration: none;
+    color: #aaa;
+}
+
+a:focus, a:hover {
+    color: #333;
+    border-bottom: 1px solid #9a9c9f;
+}
+
+a.img {
+    border: 0;
+}
+
+.note {
+    padding-top: 4px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    line-height: 1.4em;
+}
+
+.note a {
+    text-decoration: underline;
+}
+
+.note h3 {
+    margin: 0;
+}
+
+.note img {
+    max-width: 100%;
+    height: auto;
+}
+
+.note #static_content {
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    word-wrap: break-word;
+    font-size: 18px;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #333;
+    font-weight: 400;
+    line-height: 1.4em;
+    color: #333;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.note #static_content h1, .note #static_content h2, .note #static_content h3,
+.note #static_content h4 {
+    line-height: 1.1em;
+    color: #333;
+    font-weight: 300;
+    padding: 0;
+}
+
+.note #static_content a {
+    color: #448ac9;
+    text-decoration: none;
+}
+
+.note #static_content a:hover {
+    text-decoration: underline;
+    border: 0;
+}
+
+.note #static_content h1 {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 2em;
+}
+
+.note #static_content h2 {
+    margin-bottom: .5em;
+    font-size: 1.4em;
+}
+
+.note #static_content h3 {
+    margin-bottom: .6em;
+    font-size: 1.2em;
+}
+
+.note #static_content h4 {
+    margin-bottom: .71em;
+    font-size: 1.1em;
+}
+
+.note #static_content p, .note #static_content dd, .note #static_content dt,
+.note #static_content pre, .note #static_content ul, .note #static_content ol,
+.note #static_content table.text, .note #static_content div.warn {
+    padding-bottom: 17.6px;
+    line-height: 1.45em;
+}
+
+.note #static_content ul, .note #static_content ol {
+    padding-left: 24.8864px;
+}
+
+.note #static_content ul ul, .note #static_content ul ol, .note #static_content ol ul,
+.note #static_content ol ol {
+    margin-bottom: 0;
+}
+
+.note #static_content ul {
+    list-style-type: square;
+}
+
+.note #static_content ol {
+    list-style-type: decimal;
+}
+
+.note #static_content dt {
+    font-weight: bold;
+}
+
+.note #static_content dd {
+    padding-left: 24.8864px;
+}
+
+.note #static_content blockquote {
+    border-left: 3px solid #d0d0d0;
+    margin-left: 11.4432px;
+    padding: 0 12.4432px 0 10.4432px;
+    color: #4c4c4c;
+}
+
+.note #static_content hr {
+    display: block;
+    border-width: 0;
+    height: 1px;
+    background: #F0F0F0;
+    margin-bottom: 14.6px;
+}
+
+.note #static_content pre, .note #static_content code {
+    white-space: pre-wrap;
+    font-size: 16px;
+}
+
+/* iPad regular */
+@media only screen and (min-width: 694px) {
+    .note #static_content {
+        padding-left: 64px;
+        padding-right: 64px;
+    }
+}
+
+/* iPad landscape full width */
+@media only screen and (min-width: 1024px) {
+    .note #static_content {
+        padding-left: 192px;
+        padding-right: 192px;
+    }
+}

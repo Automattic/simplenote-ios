@@ -1,0 +1,395 @@
+/* Number of found search results */
+"%d Result" = "%d Result";
+
+/* Number of found search results */
+"%d Results" = "%d Results";
+
+/* Number of words in a note */
+"%d Word" = "%d Word";
+
+/* Number of words in a note */
+"%d Words" = "%d Words";
+
+/* Label of accept button on alert dialog */
+"Accept" = "Accept";
+
+/* A user's Simplenote account */
+"Account" = "Account";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Add a new collaborator..." = "Add a new collaborator...";
+
+/* Label on button to add a new tag to a note */
+"Add tag" = "Add tag";
+
+/* Title of option to display all notes */
+"All Notes" = "All Notes";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* Verb - work with others on a note */
+"Collaborate" = "Collaborate";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "Enable others to collaborate";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Collaborators" = "Collaborators";
+
+/* No comment provided by engineer. */
+"collaborators-description" = "Add an email address to share this note with someone. Then you can both make changes to it.";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "Sort Notes Alphabetically";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Condensed Note List";
+
+/* No comment provided by engineer. */
+"Create a new note" = "Create a new note";
+
+/* No comment provided by engineer. */
+"Current Collaborators" = "Current Collaborators";
+
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "This note was deleted on another device.";
+
+/* No comment provided by engineer. */
+"Dismiss keyboard" = "Dismiss keyboard";
+
+/* No comment provided by engineer. */
+"Done" = "Done";
+
+/* Re-order or delete tags */
+"Edit Tags" = "Edit Tags";
+
+/* Verb - empty causes all notes to be removed permenently from the trash */
+"Empty" = "Empty";
+
+/* Remove all notes from the trash */
+"Empty trash" = "Empty trash";
+
+/* Noun - the version history of a note */
+"History" = "History";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "Restore note to previous version";
+
+/* Action - view the version history of a note */
+"History..." = "History...";
+
+/* Terminoligy used for sidebar UI element where tags are displayed */
+"Menu" = "Menu";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "Show options for note";
+
+/* Label to create a new note */
+"New note" = "New note";
+
+/* Message shown in note list when no notes are in the current view */
+"No Notes" = "No Notes";
+
+/* Message shown when no notes match a search string */
+"No Results" = "No Results";
+
+/* No comment provided by engineer. */
+"Note not published" = "Note not published";
+
+/* Confirmation shown when a note is published */
+"Note Published" = "Note Published";
+
+/* Plural form of notes */
+"Notes" = "Notes";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "Close current note";
+
+/* No comment provided by engineer. */
+"Off" = "Off";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"On" = "On";
+
+/* Select a note to view in the note editor */
+"Open note" = "Open note";
+
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "Passcode";
+
+/* Action to mark a note as pinned */
+"Pin note" = "Pin note";
+
+/* Denotes when note is pinned to the top of the note list */
+"Pin to Top" = "Pin to Top";
+
+/* Switch which marks a note as pinned or unpinned */
+"Pin toggle" = "Pin toggle";
+
+/* Pinned notes are stuck to the note of the note list */
+"Pinned" = "Pinned";
+
+/* No comment provided by engineer. */
+"Preferences" = "Preferences";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+"Publish" = "Publish";
+
+/* Failure message after attempting to publish a note */
+"Publish Failed" = "Publish Failed";
+
+/* Action which published a note to a web page */
+"Publish note" = "Publish note";
+
+/* Switch which marks a note as published or unpublished */
+"Publish toggle" = "Publish toggle";
+
+/* No comment provided by engineer. */
+"Published" = "Published";
+
+/* Message shown when a note is in the processes of being published */
+"Publishing..." = "Publishing...";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Remove all notes from trash";
+
+/* Delete a tag and remove it from all associated notes */
+"Remove Tag" = "Remove Tag";
+
+/* Prompt asking user to confirm the removal of a tag from a note */
+"Remove tag?" = "Remove tag?";
+
+/* Rename a tag */
+"Rename" = "Rename";
+
+/* Restore a note from the trash, markking it as undeleted */
+"Restore" = "Restore";
+
+/* Restore a note to a previous version */
+"Restore Note" = "Restore Note";
+
+/* Verb - send the content of the note by email, message, etc */
+"Send" = "Send";
+
+/* Title of options screen */
+"Settings" = "Settings";
+
+/* No comment provided by engineer. */
+"Share note" = "Share note";
+
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "Share the content of the current note";
+
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Sidebar";
+
+/* Sign out of the active account in the app */
+"Sign Out" = "Sign Out";
+
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "Add a tag to the current note";
+
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "Remove tag from the current note";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
+
+/* Text used to display the name of a tag */
+"Tag: %@" = "Tag: %@";
+
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Today";
+
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Toggle tag sidebar";
+
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "Move the current note to trash";
+
+/* Trash (noun) - the location where deleted notes are stored */
+"Trash-noun" = "Trash";
+
+/* Trash (verb) - the action of deleting a note */
+"Trash-verb" = "Trash";
+
+/* Action to mark a note as unpinned */
+"Unpin note" = "Unpin note";
+
+/* Action which unpublishes a note */
+"Unpublish note" = "Unpublish note";
+
+/* Message shown when unpublishing a note */
+"Unpublishing..." = "Unpublishing...";
+
+/* Represents a snapshot in time for a note */
+"Version" = "Version";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "Connect to the Internet to Access Previous Versions";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "Switch to this version";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "Fetching version";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Yesterday";
+
+/* Option to enable the dark app theme. */
+"Dark Theme" = "Dark Theme";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "Security";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Touch ID";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Debug";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Failed Passcode Attempt";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Enter a passcode";
+
+/* Pin Lock */
+"Enter your passcode" = "Enter your passcode";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Passcodes did not match. Try again.";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Re-enter a passcode";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Set Passcode";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Turn off Passcode";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Unlock %@";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "Already have an account?";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "By signing up, you agree to our Terms of Service »";
+
+/* Forgot Password */
+"Forgot password? »" = "Forgot your password? »";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "Confirm";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "Could not create an account with the provided email address and password.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Could not login with the provided email address and password.";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Don't have an account?";
+
+/* Hint displayed in the password field */
+"Password" = "Password";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "Password must contain at least 4 characters.";
+
+/* A short link to access the account login screen */
+"Sign in" = "Sign in";
+
+/* Title of button for logging in (must be short) */
+"Sign In" = "Sign In";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Sign up";
+
+/* Title of button to create a new account (must be short) */
+"Sign Up" = "Sign Up";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "There's a problem with the connection.  Please try again later.";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid." = "Your email address is not valid.";
+
+/* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "Find notes quickly with instant searching and simple tags.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "Get Started";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "Share a list, post some instructions, or publish your thoughts.";
+
+/* Message shown in first launch view */
+"Stay organized" = "Stay organized";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "Use it everywhere";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "Welcome to Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "Work together";
+
+/* Description of Simplenote shown in first launch view */
+"Your notes stay updated across all your devices. No buttons to press. It just works." = "Your notes stay updated across all your devices. No buttons to press. It just works.";
+
+/* Month and day date formatter */
+"MMM d" = "MMM d";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "MMM d, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "MMM d, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
+/* A welcome note for new iOS users */
+"welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
+
+/* iTunes app description */
+"iTunes-description" = "Simplenote is an easy way to keep notes, lists, ideas and more. Your notes stay in sync with all your devices for free.\n\nThe Simplenote experience is all about speed and efficiency. Open it, write some thoughts, and you're done. As your collection of notes grows, you can search them instantly and keep them organized with tags and pins. You can also share notes and publish them for other people.\n\nThe best way to learn about Simplenote is to try it. You'll be asked to create an account. This allows your notes to be backed up online and synchronized automatically.\n\nAfter you sign up, try creating some notes! Then go to simplenote.com to download Simplenote for your other devices.";
+
+/* iTunes keywords used to discover app in the App Store */
+"iTunes-keywords" = "notes,note,sync,simplenote,simple,todo,list";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "What do you think about Simplenote?";
+"I Like It" = "I Like It";
+"Could Be Better" = "Could Be Better";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?\r\nIt really helps." = "Great! Could you leave us a nice review?\r\nIt really helps.";
+"Leave a Review" = "Leave a Review";
+"No Thanks" = "No Thanks";
+
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Could you tell us how we could improve?";
+"Send Feedback" = "Send Feedback";
+"No Thanks" = "No Thanks";
+
+/* Ratings View: Contact */
+"Contact" = "Contact";
+"Your Email:" = "Your Email:";
+"How can we help?" = "How can we help?";
+
+/* Markdown Preview */
+"markdown-preview-title" = "Preview";
+"markdown-back-button-title" = "Back";

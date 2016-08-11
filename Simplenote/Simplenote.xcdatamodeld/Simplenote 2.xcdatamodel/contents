@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3389" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Note" representedClassName="Note" parentEntity="SPManagedObject" syncable="YES">
+        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" syncable="YES"/>
+        <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="lastPosition" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="modificationDate" attributeType="Date" syncable="YES"/>
+        <attribute name="noteSynced" optional="YES" attributeType="Boolean" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pinned" attributeType="Boolean" defaultValueString="NO" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="publishURL" attributeType="String" syncable="YES"/>
+        <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="shareURL" attributeType="String" syncable="YES"/>
+        <attribute name="systemTags" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="SPManagedObject" representedClassName="SPManagedObject" isAbstract="YES" syncable="YES">
+        <attribute name="ghostData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="simperiumKey" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" parentEntity="SPManagedObject" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="share" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <elements>
+        <element name="Note" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SPManagedObject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Tag" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
