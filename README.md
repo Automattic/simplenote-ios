@@ -20,7 +20,7 @@ A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](htt
     </dict>
 ```
 
-3: Run `pod install` from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
+3: Run [`pod install`](https://cocoapods.org/) from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
