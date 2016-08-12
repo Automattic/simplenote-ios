@@ -2,8 +2,10 @@
 A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](https://simplenote.com).
 
 ## Development Requirements
-* A Simperium account. [Sign up here](https://simperium.com/signup/)
-* A Simperium Application ID and key. [Create a new app here](https://simperium.com/app/new/)
+* A Simperium account ([sign up here](https://simperium.com/signup/)).
+* A Simperium Application ID and key ([create a new app here](https://simperium.com/app/new/)).
+* [CocoaPods](https://cocoapods.org/).
+* [Xcode](https://developer.apple.com/xcode/).
 
 ## Running
 
@@ -20,7 +22,7 @@ A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](htt
     </dict>
 ```
 
-3: Run [`pod install`](https://cocoapods.org/) from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
+3: Run `pod install` from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
