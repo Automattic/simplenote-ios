@@ -506,8 +506,8 @@
 
 - (void)cancel:(id)sender
 {
-    [self.view endEditing:YES];
-    
+    [self dismissKeyboard];
+  
 	// if there is a delegate method, then we let it deal with it
 	if (pinLockDelegate && [pinLockDelegate respondsToSelector:@selector(pinLockControllerDidCancel)])
 	{
