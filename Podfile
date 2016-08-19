@@ -27,7 +27,7 @@ abstract_target 'Automattic' do
 		# Automattic
 		#
 		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => '0.1.0'
-		pod 'Simperium', '0.8.16'
+		pod 'Simperium', '0.8.17'
 		pod 'WordPress-AppbotX', :git => 'https://github.com/wordpress-mobile/appbotx.git', :commit => '479d05f7d6b963c9b44040e6ea9f190e8bd9a47a'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
 	end
