@@ -32,7 +32,8 @@
     
     // set navigation bar
     self.navigationItem.title = NSLocalizedString(@"Collaborators", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
-
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStyleDone target:self action:@selector(onDone)];
+    
     entryTextField.placeholder = NSLocalizedString(@"Add a new collaborator...", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
 
     if (!self.dataSource)
@@ -259,6 +260,14 @@
     }
     
     [self updatedAutoCompleteMatches];
+}
+
+#pragma mark - Buttons
+
+- (void)onDone
+{
+    [self processTextInField];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark ABPeoplePickerNavigationControllerDelegate methods
