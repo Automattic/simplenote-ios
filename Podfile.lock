@@ -23,17 +23,17 @@ PODS:
     - hoedown/standard (= 3.0.3)
   - hoedown/standard (3.0.3)
   - Reachability (3.2)
-  - Simperium (0.8.16):
-    - Simperium/DiffMatchPach (= 0.8.16)
-    - Simperium/JRSwizzle (= 0.8.16)
-    - Simperium/SocketRocket (= 0.8.16)
-    - Simperium/SPReachability (= 0.8.16)
-    - Simperium/SSKeychain (= 0.8.16)
-  - Simperium/DiffMatchPach (0.8.16)
-  - Simperium/JRSwizzle (0.8.16)
-  - Simperium/SocketRocket (0.8.16)
-  - Simperium/SPReachability (0.8.16)
-  - Simperium/SSKeychain (0.8.16)
+  - Simperium (0.8.17):
+    - Simperium/DiffMatchPach (= 0.8.17)
+    - Simperium/JRSwizzle (= 0.8.17)
+    - Simperium/SocketTrust (= 0.8.17)
+    - Simperium/SPReachability (= 0.8.17)
+    - Simperium/SSKeychain (= 0.8.17)
+  - Simperium/DiffMatchPach (0.8.17)
+  - Simperium/JRSwizzle (0.8.17)
+  - Simperium/SocketTrust (0.8.17)
+  - Simperium/SPReachability (0.8.17)
+  - Simperium/SSKeychain (0.8.17)
   - SSKeychain (1.2.2)
   - SVProgressHUD (1.1.2)
   - UIDeviceIdentifier (0.5.0)
@@ -48,7 +48,7 @@ DEPENDENCIES:
   - GoogleAnalytics (= 3.14.0)
   - HockeySDK (~> 3.8.0)
   - hoedown (~> 3.0.3)
-  - Simperium (= 0.8.16)
+  - Simperium (= 0.8.17)
   - SSKeychain (= 1.2.2)
   - SVProgressHUD (= 1.1.2)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
@@ -80,13 +80,13 @@ SPEC CHECKSUMS:
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   hoedown: c1327bbbc96d269595ed86bf97f1d09867ec7529
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Simperium: 07a07d958dfdbd65febde942214d10525d49aa0c
+  Simperium: 0111b16b6d72bc598a99e244ef87025ae433b27e
   SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: b04108f7a45867844ba47a240bb6295ca747eebf
 
-PODFILE CHECKSUM: 85792041d567f2099884924acdc40b1a646f6b91
+PODFILE CHECKSUM: 2d182e50997cbe1e2b8976426df9b496171dd193
 
 COCOAPODS: 1.0.1
