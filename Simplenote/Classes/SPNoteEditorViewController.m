@@ -1660,7 +1660,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     [SPTracker trackEditorNoteContentShared];
 	   
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[_currentNote.content]
+    UISimpleTextPrintFormatter *print = [[UISimpleTextPrintFormatter alloc] initWithText:_currentNote.content];
+
+    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[_currentNote.content, print]
                                                                       applicationActivities:nil];
     
     if ([UIDevice isPad]) {
