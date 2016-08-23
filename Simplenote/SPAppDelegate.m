@@ -229,10 +229,13 @@
     NSLog(@"Initializing Crashlytics...");
     
     NSString *email = self.simperium.user.email;
-
     NSString *key = [SPCredentials simplenoteCrashlyticsKey];
-    [Fabric with:key];
-    [Crashlytics setObjectValue:email forKey:@"email"];
+
+    [Fabric with:@[CrashlyticsKit]];
+
+    [Crashlytics startWithAPIKey:key];
+    [[Crashlytics sharedInstance] setObjectValue:email forKey:@"email"];
+
 #endif
 }
 
