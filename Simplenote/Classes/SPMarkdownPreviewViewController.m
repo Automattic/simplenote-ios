@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"markdown-preview-title", @"Title of Markdown preview screen");
+    self.title = NSLocalizedString(@"Preview", @"Title of Markdown preview screen");
     
     [self configureWebView];
     [self applyStyle];
@@ -65,7 +65,7 @@
     self.webView.backgroundColor = backgroundColor;
     self.webView.opaque = NO;
 
-    UIBarButtonItem *backButton = [UIBarButtonItem backBarButtonWithTitle:NSLocalizedString(@"markdown-back-button-title", @"Title of Back button for Markdown preview")
+    UIBarButtonItem *backButton = [UIBarButtonItem backBarButtonWithTitle:NSLocalizedString(@"Back", @"Title of Back button for Markdown preview")
                                                                     target:self
                                                                     action:@selector(backButtonAction:)];
 
