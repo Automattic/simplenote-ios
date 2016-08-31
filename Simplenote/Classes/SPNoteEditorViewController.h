@@ -50,8 +50,6 @@
     // sheets
     SPActivityView *noteActivityView;
     SPActionSheet *noteActionSheet;
-    UIPopoverController *noteActionPopover;
-    UIPopoverArrowDirection *sharePopover;
     SPActionSheet *versionActionSheet;
     UIActionSheet *deleteActionSheet;
     
