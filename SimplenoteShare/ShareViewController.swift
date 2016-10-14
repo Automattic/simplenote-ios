@@ -13,17 +13,17 @@ import SSKeychain
 
 /// Simplenote's Share Extension.
 
-public class ShareViewController: SLComposeServiceViewController
+open class ShareViewController: SLComposeServiceViewController
 {
     // MARK: - Private Properties
-    private var simperiumToken: String? {
-        return SSKeychain.passwordForService(kShareExtensionServiceName, account: kShareExtensionAccountName)
+    fileprivate var simperiumToken: String? {
+        return SSKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
     }
     
     
     
     // MARK: - UIViewController Methods
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         dismissIfNeeded()
     }
@@ -31,7 +31,7 @@ public class ShareViewController: SLComposeServiceViewController
     
     
     // MARK: - Private Helpers
-    private func dismissIfNeeded() {
+    fileprivate func dismissIfNeeded() {
         guard simperiumToken == nil else {
             return
         }
@@ -40,16 +40,16 @@ public class ShareViewController: SLComposeServiceViewController
         let message = NSLocalizedString("Please log into your Simplenote account first by using the Simplenote app.", comment: "Extension Missing Token Alert Title")
         let accept = NSLocalizedString("Cancel Share", comment: "")
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let alertAction = UIAlertAction(title: accept, style: .Default) { (action: UIAlertAction) -> Void in
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: accept, style: .default) { (action: UIAlertAction) -> Void in
             self.cancel()
         }
         
         alertController.addAction(alertAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    private func contentWithSourceURL(url: NSURL?) -> String {
+    fileprivate func contentWithSourceURL(_ url: URL?) -> String {
         guard let url = url else {
             return contentText
         }
@@ -58,7 +58,7 @@ public class ShareViewController: SLComposeServiceViewController
         return contentText + "\n\n[" + url.absoluteString + "]"
     }
     
-    private func loadWebsiteUrl(completion: (NSURL? -> Void)) {
+    fileprivate func loadWebsiteUrl(_ completion: @escaping ((URL?) -> Void)) {
         guard let item = extensionContext?.inputItems.first as? NSExtensionItem,
             let itemProvider = item.attachments?.first as? NSItemProvider else
         {
@@ -71,8 +71,8 @@ public class ShareViewController: SLComposeServiceViewController
             return
         }
         
-        itemProvider.loadItemForTypeIdentifier("public.url", options: nil) { (url, error) -> Void in
-            if let theURL = url as? NSURL {
+        itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { (url, error) -> Void in
+            if let theURL = url as? URL {
                 completion(theURL)
             } else {
                 completion(nil)
@@ -80,7 +80,7 @@ public class ShareViewController: SLComposeServiceViewController
         }
     }
     
-    private func submitNote(content: String, url: NSURL?) {
+    fileprivate func submitNote(_ content: String, url: URL?) {
         let note = Note(content: contentWithSourceURL(url))
         let uploader = Uploader(simperiumToken: simperiumToken!)
         uploader.send(note)
@@ -89,18 +89,18 @@ public class ShareViewController: SLComposeServiceViewController
     
     
     // MARK: - ComposeService Methods
-    override public func isContentValid() -> Bool {
+    override open func isContentValid() -> Bool {
         return contentText.isEmpty == false
     }
     
-    override public func didSelectPost() {
-        loadWebsiteUrl { (url: NSURL?) in
+    override open func didSelectPost() {
+        loadWebsiteUrl { (url: URL?) in
             self.submitNote(self.contentText, url: url)
-            self.extensionContext!.completeRequestReturningItems([], completionHandler: nil)
+            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         }
     }
     
-    override public func configurationItems() -> [AnyObject]! {
+    override open func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
         return []
     }
@@ -110,15 +110,15 @@ public class ShareViewController: SLComposeServiceViewController
     /// The purpose of this class is to encapsulate NSURLSession's interaction code, required to upload
     /// a note to Simperium's REST endpoint.
     
-    private class Uploader: NSObject, NSURLSessionDelegate
+    fileprivate class Uploader: NSObject, URLSessionDelegate
     {
         // MARK: - Properties
-        private let token : String
+        fileprivate let token : String
 
         // MARK: - Constants
-        private let authHeader  = "X-Simperium-Token"
-        private let bucketName  = "note"
-        private let httpMethod  = "POST"
+        fileprivate let authHeader  = "X-Simperium-Token"
+        fileprivate let bucketName  = "note"
+        fileprivate let httpMethod  = "POST"
 
         // MARK: - Initializers
         init(simperiumToken: String) {
@@ -128,37 +128,37 @@ public class ShareViewController: SLComposeServiceViewController
         
         
         // MARK: - Public Methods
-        func send(note: Note) {
+        func send(_ note: Note) {
             // Build the targetURL
             let endpoint = String(format: "%@/%@/%@/i/%@", kSimperiumBaseURL, SPCredentials.simperiumAppID(), bucketName, note.simperiumKey)
-            let targetURL = NSURL(string: endpoint.lowercaseString)!
+            let targetURL = URL(string: endpoint.lowercased())!
             
             // Request
-            let request = NSMutableURLRequest(URL: targetURL)
-            request.HTTPMethod = httpMethod
-            request.HTTPBody = note.toJsonData()
+            var request = URLRequest(url: targetURL)
+            request.httpMethod = httpMethod
+            request.httpBody = note.toJsonData()
             request.setValue(token, forHTTPHeaderField: authHeader)
 
             // Task!
-            let sc = NSURLSessionConfiguration.backgroundSessionConfigurationWithRandomizedIdentifier()
+            let sc = URLSessionConfiguration.backgroundSessionConfigurationWithRandomizedIdentifier()
 
-            let session = NSURLSession(configuration: sc, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
-            let task = session.downloadTaskWithRequest(request)
+            let session = Foundation.URLSession(configuration: sc, delegate: self, delegateQueue: OperationQueue.main)
+            let task = session.downloadTask(with: request)
             task.resume()
         }
         
         
         
         // MARK: - NSURLSessionDelegate
-        @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+        @objc func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
             print("<> Uploader.didCompleteWithError: \(error)")
         }
         
-        @objc func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+        @objc func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
             print("<> Uploader.didBecomeInvalidWithError: \(error)")
         }
         
-        @objc func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
             print("<> Uploader.URLSessionDidFinishEventsForBackgroundURLSession")
         }
     }
@@ -167,20 +167,20 @@ public class ShareViewController: SLComposeServiceViewController
     
     /// This class encapsulates the Note entity. It's the main project (non core data) counterpart.
     
-    private class Note
+    fileprivate class Note
     {
         // MARK: - Properties
         let simperiumKey : String
         let content : String
-        let modificationDate : NSDate
+        let modificationDate : Date
         
         
         
         // MARK: - Initializers
         init(content: String) {
             self.content = content
-            self.simperiumKey = NSUUID().UUIDString.stringByReplacingOccurrencesOfString("-", withString: "")
-            self.modificationDate = NSDate()
+            self.simperiumKey = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+            self.modificationDate = Date()
         }
         
         
@@ -199,9 +199,9 @@ public class ShareViewController: SLComposeServiceViewController
             ]
         }
         
-        func toJsonData() -> NSData? {
+        func toJsonData() -> Data? {
             do {
-                return try NSJSONSerialization.dataWithJSONObject(toDictionary(), options: .PrettyPrinted)
+                return try JSONSerialization.data(withJSONObject: toDictionary(), options: .prettyPrinted)
             } catch {
                 print("Error converting Note to JSON: \(error)")
                 return nil

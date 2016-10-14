@@ -8,61 +8,61 @@
 
 import UIKit
 
-public class SPCredentials: NSObject
+open class SPCredentials: NSObject
 {
     static let configName = "config"
     static let plistType = "plist"
     
-    public static func simperiumAppID() -> String {
-        if let value = configDictionary().valueForKey("SPSimperiumAppID") {
+    open static func simperiumAppID() -> String {
+        if let value = configDictionary().value(forKey: "SPSimperiumAppID") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func simperiumApiKey() -> String {
-        if let value = configDictionary().valueForKey("SPSimperiumApiKey") {
+    open static func simperiumApiKey() -> String {
+        if let value = configDictionary().value(forKey: "SPSimperiumApiKey") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func simperiumSettingsObjectKey() -> String {
-        if let value = configDictionary().valueForKey("SPSimperiumSettingsObjectKey") {
+    open static func simperiumSettingsObjectKey() -> String {
+        if let value = configDictionary().value(forKey: "SPSimperiumSettingsObjectKey") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func simplenoteCrashlyticsKey() -> String {
-        if let value = configDictionary().valueForKey("SimplenoteCrashlyticsKey") {
+    open static func simplenoteCrashlyticsKey() -> String {
+        if let value = configDictionary().value(forKey: "SimplenoteCrashlyticsKey") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func bitHockeyIdentifier() -> String {
-        if let value = configDictionary().valueForKey("BitHockeyIdentifier") {
+    open static func bitHockeyIdentifier() -> String {
+        if let value = configDictionary().value(forKey: "BitHockeyIdentifier") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func googleAnalyticsID() -> String {
-        if let value = configDictionary().valueForKey("GoogleAnalyticsID") {
+    open static func googleAnalyticsID() -> String {
+        if let value = configDictionary().value(forKey: "GoogleAnalyticsID") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func appbotKey() -> String {
-        if let value = configDictionary().valueForKey("AppbotKey") {
+    open static func appbotKey() -> String {
+        if let value = configDictionary().value(forKey: "AppbotKey") {
             return value as! String
         } else {
             return ""
@@ -70,24 +70,24 @@ public class SPCredentials: NSObject
     }
 
     
-    public static func iTunesAppId() -> String {
-        if let value = configDictionary().valueForKey("SimplenoteiTunesAppId") {
+    open static func iTunesAppId() -> String {
+        if let value = configDictionary().value(forKey: "SimplenoteiTunesAppId") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    public static func iTunesReviewURL() -> String {
-        if let value = configDictionary().valueForKey("SimplenoteiTunesReviewURL") {
+    open static func iTunesReviewURL() -> String {
+        if let value = configDictionary().value(forKey: "SimplenoteiTunesReviewURL") {
             return value as! String
         } else {
             return ""
         }
     }
     
-    private static func configDictionary() -> NSDictionary {
-        guard let plistPath = NSBundle.mainBundle().pathForResource(configName, ofType: plistType) else {
+    fileprivate static func configDictionary() -> NSDictionary {
+        guard let plistPath = Bundle.main.path(forResource: configName, ofType: plistType) else {
             return NSDictionary()
         }
         
