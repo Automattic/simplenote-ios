@@ -154,8 +154,6 @@
     _simperium.authenticator.providerString         = @"simplenote.com";
 	
     SPAuthenticationConfiguration *configuration    = [SPAuthenticationConfiguration sharedInstance];
-    configuration.regularFontName                   = @"SourceSansPro-Regular";
-    configuration.mediumFontName                    = @"SourceSansPro-Semibold";
     configuration.logoImageName                     = @"logo_login";
     configuration.forgotPasswordURL                 = kSimperiumForgotPasswordURL;
     configuration.termsOfServiceURL                 = kSimperiumTermsOfServiceURL;

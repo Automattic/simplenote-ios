@@ -195,8 +195,8 @@ NSString * const SPOnboardingDidFinish = @"SPOnboardDidFinish";
     [self.view addSubview:pageControl];
     
     
-    UIFont *titleFont = [UIFont fontWithName:@"SourceSansPro-Light" size:([UIDevice isPad] ? 52.0 : 36.0)];
-    UIFont *bodyFont = [UIFont fontWithName:@"SourceSansPro-Regular" size:([UIDevice isPad] ? 26.0 : 18.0)];
+    UIFont *titleFont = [UIFont systemFontOfSize:([UIDevice isPad] ? 52.0 : 36.0)];
+    UIFont *bodyFont = [UIFont systemFontOfSize:([UIDevice isPad] ? 26.0 : 18.0)];
     
     
     
@@ -252,7 +252,7 @@ NSString * const SPOnboardingDidFinish = @"SPOnboardDidFinish";
     getStartedButton.backgroundColor = [UIColor whiteColor];
     getStartedButton.backgroundHighlightColor = [UIColor colorWithWhite:0.97 alpha:1.0];
     [getStartedButton setTitleColor:blueColor forState:UIControlStateNormal];
-    getStartedButton.titleLabel.font = [UIFont fontWithName:@"SourceSansPro-Regular" size:21.0];
+    getStartedButton.titleLabel.font = [UIFont systemFontOfSize:21.0];
     [getStartedButton addTarget:self action:@selector(getStartedButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:getStartedButton];
     
