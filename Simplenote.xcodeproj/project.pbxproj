@@ -1038,7 +1038,6 @@
 				B5EB1EE91C204EBD0080A1B3 /* Frameworks */,
 				B5EB1EEA1C204EBD0080A1B3 /* Resources */,
 				B596467F1C46BD83001537E5 /* ShellScript */,
-				559EB79119919974CA6E3098 /* [CP] Embed Pods Frameworks */,
 				607333470D732FBB99CB86F9 /* [CP] Copy Pods Resources */,
 				B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */,
 			);
@@ -1081,6 +1080,7 @@
 				TargetAttributes = {
 					46A3C96017DFA81A002865AE = {
 						DevelopmentTeam = QXKWK6Q52N;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1096,6 +1096,7 @@
 					B5EB1EEB1C204EBD0080A1B3 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = QXKWK6Q52N;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1222,22 +1223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		559EB79119919974CA6E3098 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		607333470D732FBB99CB86F9 /* [CP] Copy Pods Resources */ = {
@@ -1322,7 +1308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1559,6 +1545,7 @@
 				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1595,6 +1582,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1684,6 +1672,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "96a9375d-8f28-46d5-83fe-2a63d5cd7817";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Distribution AppStore";
@@ -1774,6 +1763,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "67e99035-d0cc-4203-8efa-72fea8e7cfad";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Distribution Internal";
@@ -1801,6 +1791,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1827,6 +1818,7 @@
 				PROVISIONING_PROFILE = "0ca1e7ef-b6ac-4c6e-84f4-0949bbd768f5";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1854,6 +1846,7 @@
 				PROVISIONING_PROFILE = "8d95ca7b-32c7-4082-8f77-6d02ef545bcf";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Distribution Internal";
 		};
@@ -1886,6 +1879,7 @@
 				PROVISIONING_PROFILE = "55325f77-bf57-41cc-a238-0bab488daaa6";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Distribution AppStore";
 		};
