@@ -9,9 +9,9 @@
 		<key>dark</key>
 		<false/>
 		<key>fontName</key>
-		<string>SourceSansPro-Light</string>
+		<string>SanFranciscoDisplay-Light</string>
 		<key>boldFontName</key>
-		<string>SourceSansPro-Regular</string>
+		<string>SanFranciscoDisplay-Regular</string>
 		<key>textColor</key>
 		<string>333333</string>
 		<key>lightBlueColor</key>

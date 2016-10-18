@@ -89,14 +89,6 @@
 		46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4417848E8500E55842 /* InfoPlist.strings */; };
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
-		46A3C9C517DFA81A002865AE /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */; };
-		46A3C9C617DFA81A002865AE /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */; };
-		46A3C9CB17DFA81A002865AE /* SourceSansPro-SemiboldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */; };
-		46A3C9CC17DFA81A002865AE /* SourceSansPro-It.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */; };
-		46A3C9CE17DFA81A002865AE /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */; };
-		46A3C9D017DFA81A002865AE /* SourceSansPro-LightIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */; };
-		46A3C9D217DFA81A002865AE /* SourceSansPro-BoldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */; };
-		46A3C9D317DFA81A002865AE /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
 		B50789FF1C1F5592009F097A /* markdown-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 1748382E1BC1CC2D00E834AF /* markdown-default.css */; };
 		B5078A001C1F5595009F097A /* markdown-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 17BC3D461BC46BA800535DF3 /* markdown-dark.css */; };
@@ -447,14 +439,6 @@
 		E2FCA5F6178911FC00FC229D /* VSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTheme.m; sourceTree = "<group>"; };
 		E2FCA5F7178911FC00FC229D /* VSThemeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSThemeLoader.h; sourceTree = "<group>"; };
 		E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeLoader.m; sourceTree = "<group>"; };
-		E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
-		E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BoldIt.ttf"; sourceTree = "<group>"; };
-		E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-It.ttf"; sourceTree = "<group>"; };
-		E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
-		E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-LightIt.ttf"; sourceTree = "<group>"; };
-		E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
-		E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
-		E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiboldIt.ttf"; sourceTree = "<group>"; };
 		E2FCA6141789146D00FC229D /* VSThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSThemeManager.h; sourceTree = "<group>"; };
 		E2FCA6151789146D00FC229D /* VSThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeManager.m; sourceTree = "<group>"; };
 		EC63A736071A5E8129D97C5B /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
@@ -616,21 +600,6 @@
 				B512AF961C20B14200FE76D8 /* SPAnimations.m */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		B512AF9A1C20B2EB00FE76D8 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */,
-				E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */,
-				E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */,
-				E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */,
-				E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */,
-				E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */,
-				E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */,
-				E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		B521A19B1BC8452800E1CF2A /* Trackers */ = {
@@ -977,7 +946,6 @@
 			isa = PBXGroup;
 			children = (
 				1748382D1BC1CAAB00E834AF /* CSS */,
-				B512AF9A1C20B2EB00FE76D8 /* Fonts */,
 				E29ADD4D17848E8500E55842 /* Images.xcassets */,
 				B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */,
 				B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */,
@@ -1157,20 +1125,12 @@
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
-				46A3C9C517DFA81A002865AE /* SourceSansPro-Regular.ttf in Resources */,
-				46A3C9C617DFA81A002865AE /* SourceSansPro-Light.ttf in Resources */,
-				46A3C9CB17DFA81A002865AE /* SourceSansPro-SemiboldIt.ttf in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
-				46A3C9CC17DFA81A002865AE /* SourceSansPro-It.ttf in Resources */,
-				46A3C9CE17DFA81A002865AE /* SourceSansPro-Bold.ttf in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
 				B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */,
-				46A3C9D017DFA81A002865AE /* SourceSansPro-LightIt.ttf in Resources */,
-				46A3C9D217DFA81A002865AE /* SourceSansPro-BoldIt.ttf in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
-				46A3C9D317DFA81A002865AE /* SourceSansPro-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
