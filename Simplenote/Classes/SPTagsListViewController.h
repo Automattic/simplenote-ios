@@ -14,6 +14,8 @@
 
 @interface SPTagsListViewController : SPSidebarViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SPTagListViewCellDelegate> {
 
+    UIButton *allNotesButton;
+    UIButton *trashButton;
     UIButton *settingsButton;
     SPBorderedView *customView;
     
