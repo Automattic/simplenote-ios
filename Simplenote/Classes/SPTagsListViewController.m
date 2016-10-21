@@ -22,7 +22,6 @@
 #define kSectionTrash 2
 #define kSectionTags 1
 #define kSectionEdit 3
-#define kSectionSettings 4
 
 #define kActionSheetDeleteIndex 0
 #define kActionSheetRenameIndex 1
@@ -74,9 +73,12 @@ static NSString * const SPTagTrashKey = @"trash";
     
     // apply styling
     self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+
+    settingsButton = [self buildSettingsButton];
+    [self.view addSubview:settingsButton];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
@@ -131,6 +133,16 @@ static NSString * const SPTagTrashKey = @"trash";
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    CGRect settingsFrame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 40.0f, self.view.frame.size.width, 40.0f);
+    settingsButton.frame = settingsFrame;
+
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame.size.height = self.view.frame.size.height - 40.0f;
+    self.tableView.frame = tableViewFrame;
+}
+
 - (VSTheme *)theme {
     
     return [[VSThemeManager sharedManager] theme];
@@ -155,6 +167,31 @@ static NSString * const SPTagTrashKey = @"trash";
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
 
+- (UIButton *)buildSettingsButton {
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+    [button setImage:[UIImage imageNamed:@"icon_settings"] forState:UIControlStateNormal];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [button setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
+    [button setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [button setBackgroundColor:[self.theme colorForKey:@"backgroundColor"]];
+    [button addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, button.frame.size.width, 1)];
+    separatorView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    separatorView.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    [button addSubview:separatorView];
+
+    return button;
+}
+
+-(void)settingsTap:(UIButton*)sender
+{
+    [[SPAppDelegate sharedDelegate] showOptions];
+}
 
 #pragma mark - Table view data source
 
@@ -187,7 +224,7 @@ static NSString * const SPTagTrashKey = @"trash";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (section == kSectionSettings || section == kSectionEdit)
+    if (section == kSectionEdit)
         return 1;
     else if ((section == kSectionTrash || section == kSectionTags) &&
              self.fetchedResultsController.fetchedObjects.count == 0)
@@ -212,7 +249,7 @@ static NSString * const SPTagTrashKey = @"trash";
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == kSectionAllNotes || section == kSectionTrash || section == kSectionSettings)
+    if (section == kSectionAllNotes || section == kSectionTrash)
 		return bEditing ? 0 : 1;
     else if (section == kSectionEdit)
         return (self.numTags == 0 || bEditing) ? 0 : 1;
@@ -281,14 +318,6 @@ static NSString * const SPTagTrashKey = @"trash";
         
         selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
         
-    } else if (indexPath.section == kSectionSettings) {
-        
-        cellText = NSLocalizedString(@"Settings", nil);
-        cellIcon = _settingsImage;
-        
-        selected = NO;
-        
-        
     } else if (indexPath.section == kSectionEdit) {
         
         cellText = NSLocalizedString(@"Edit Tags", @"Re-order or delete tags");
@@ -350,11 +379,6 @@ static NSString * const SPTagTrashKey = @"trash";
             [self openNoteListForTagName:tag.name];
 		}
         
-    } else if (indexPath.section == kSectionSettings) {
-        
-        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-        [[SPAppDelegate sharedDelegate] showOptions];
-
     } else if (indexPath.section == kSectionEdit) {
         [self setEditing:YES];
     }

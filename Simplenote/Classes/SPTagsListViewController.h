@@ -13,7 +13,8 @@
 @class SPBorderedView;
 
 @interface SPTagsListViewController : SPSidebarViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SPTagListViewCellDelegate> {
-    
+
+    UIButton *settingsButton;
     SPBorderedView *customView;
     
     BOOL bEditing;
