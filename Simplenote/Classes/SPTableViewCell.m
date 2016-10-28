@@ -67,7 +67,7 @@
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
 
-    self.backgroundColor = [theme colorForKey:@"spbackgroundColor"];
+    self.backgroundColor = [theme colorForKey:@"backgroundColor"];
     self.contentView.backgroundColor = [theme colorForKey:@"backgroundColor"];
     
     // set selection view
