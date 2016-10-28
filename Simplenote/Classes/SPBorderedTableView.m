@@ -18,8 +18,8 @@
     self = [super init];
     if (self) {
         self.leftBorder = [CALayer layer];
-        self.leftBorder.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"].CGColor;
         self.leftBorder.opacity = 0;
+        [self applyTheme];
         [self.layer addSublayer:self.leftBorder];
     }
     return self;
@@ -37,6 +37,11 @@
 
 - (VSTheme *)theme {
     return [[VSThemeManager sharedManager] theme];
+}
+
+- (void)applyTheme {
+    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.leftBorder.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"].CGColor;
 }
 
 @end

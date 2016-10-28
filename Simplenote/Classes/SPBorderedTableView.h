@@ -12,5 +12,6 @@
 @property CALayer *leftBorder;
 
 - (void)setBorderVisibile:(BOOL)isVisible;
+- (void)applyTheme;
 
 @end

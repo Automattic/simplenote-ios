@@ -14,10 +14,13 @@
 
 @interface SPTagsListViewController : SPSidebarViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SPTagListViewCellDelegate> {
 
+    UIView *headerSeparator;
+    UIView *footerSeparator;
     UIButton *allNotesButton;
     UIButton *trashButton;
     UIButton *settingsButton;
     UIButton *editTagsButton;
+    UILabel *tagsLabel;
     SPBorderedView *customView;
     
     BOOL bEditing;

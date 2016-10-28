@@ -107,7 +107,6 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
         
-        self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self updateRowHeight:nil];
         
@@ -169,7 +168,7 @@
     
     // Use a new cellIdentifier so cells redraw with new theme
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
-    self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    [self.tableView applyTheme];
     [self.tableView reloadData];
 
     // Restyle the TransitionController

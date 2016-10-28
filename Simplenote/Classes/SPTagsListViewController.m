@@ -96,11 +96,12 @@ static NSString * const SPTagTrashKey = @"trash";
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
     // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    [nc addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
@@ -118,16 +119,15 @@ static NSString * const SPTagTrashKey = @"trash";
     [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
     [[UIMenuController sharedMenuController] update];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    [nc addObserver:self
                                              selector:@selector(menuDidChangeVisibility:)
                                                  name:UIMenuControllerDidHideMenuNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
+    [nc addObserver:self
                                              selector:@selector(menuDidChangeVisibility:)
                                                  name:UIMenuControllerDidShowMenuNotification
                                                object:nil];
 
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
@@ -149,6 +149,7 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (void)themeDidChange {
+    [self updateHeaderColors];
     customView.fillColor = [self.theme colorForKey:@"backgroundColor"];
     customView.borderColor = [self.theme colorForKey:@"tagListSeparatorColor"];
 
@@ -162,97 +163,27 @@ static NSString * const SPTagTrashKey = @"trash";
     [self.view setNeedsLayout];
 }
 
+- (void)updateHeaderColors
+{
+    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    footerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    tagsLabel.textColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
+    [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+
+    [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+
+    [settingsButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [settingsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+    [settingsButton setTintColor:[self.theme colorForKey:@"textColor"]];
+
+    [editTagsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+}
+
 - (void)menuDidChangeVisibility:(UIMenuController *)menuController {
     
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
-}
-
-- (UIButton *)buildSettingsButton {
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
-    [button setImage:[UIImage imageNamed:@"icon_settings"] forState:UIControlStateNormal];
-    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [button setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
-    [button setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [button setBackgroundColor:[self.theme colorForKey:@"backgroundColor"]];
-    [button addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, button.frame.size.width, 0.5)];
-    separatorView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    separatorView.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
-    [button addSubview:separatorView];
-
-    return button;
-}
-
-- (UIView *)buildTableHeaderView {
-
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 114)];
-
-    allNotesButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
-    allNotesButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [allNotesButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
-    [allNotesButton setImage:[[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [allNotesButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [allNotesButton setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
-    [allNotesButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
-    [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
-    [allNotesButton setBackgroundColor:[self.theme colorForKey:@"backgroundColor"]];
-    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:allNotesButton];
-
-    trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
-    trashButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [trashButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
-    [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [trashButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [trashButton setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
-    [trashButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    [trashButton setTitle:NSLocalizedString(@"Trash", nil) forState:UIControlStateNormal];
-    [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
-    [trashButton setBackgroundColor:[self.theme colorForKey:@"backgroundColor"]];
-    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:trashButton];
-
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 83.5, 0, 0.5)];
-    separatorView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    separatorView.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
-    [headerView addSubview:separatorView];
-
-    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
-    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    UILabel *tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
-    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
-    tagsLabel.textColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
-    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [tagsView addSubview:tagsLabel];
-
-    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
-    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
-    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
-    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [editTagsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
-    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
-    [tagsView addSubview:editTagsButton];
-
-    [headerView addSubview:tagsView];
-
-    return headerView;
 }
 
 #pragma mark - Button actions
@@ -457,7 +388,6 @@ static NSString * const SPTagTrashKey = @"trash";
     }
 }
 
-
 #pragma mark UITagListViewCellDelegate
 
 - (void)tagListViewCellShouldRenameTag:(SPTagListViewCell *)cell {
@@ -507,9 +437,6 @@ static NSString * const SPTagTrashKey = @"trash";
     
     [self setEditing:NO];
 }
-
-
-
 
 -(void)openNoteListForTagName:(NSString *)tag {
     
@@ -808,6 +735,86 @@ static NSString * const SPTagTrashKey = @"trash";
                          self.tableView.frame = newFrame;
                      }];
     
+}
+
+#pragma mark UI builders
+
+- (UIButton *)buildSettingsButton {
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [settingsButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+    [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
+    [settingsButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
+    [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, 0.5)];
+    footerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [settingsButton addSubview:footerSeparator];
+
+    return settingsButton;
+}
+
+- (UIView *)buildTableHeaderView {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 114)];
+
+    allNotesButton = [self buildHeaderButton];
+    allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
+    [allNotesButton setImage:[[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
+    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    [headerView addSubview:allNotesButton];
+
+    trashButton = [self buildHeaderButton];
+    trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
+    [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [trashButton setTitle:NSLocalizedString(@"Trash", nil) forState:UIControlStateNormal];
+    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    [headerView addSubview:trashButton];
+
+    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 83.5, 0, 0.5)];
+    headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    [headerView addSubview:headerSeparator];
+
+    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
+    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
+    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
+    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [tagsView addSubview:tagsLabel];
+
+    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
+    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    [tagsView addSubview:editTagsButton];
+
+    [self updateHeaderColors];
+
+    [headerView addSubview:tagsView];
+    
+    return headerView;
+}
+
+- (UIButton *)buildHeaderButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [button setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+
+    return button;
 }
 
 @end
