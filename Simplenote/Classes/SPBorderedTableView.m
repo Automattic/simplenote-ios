@@ -28,7 +28,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    self.leftBorder.frame = CGRectMake(0, 0, 0.5, self.contentSize.height);
+    self.leftBorder.frame = CGRectMake(0, 0, 0.5, MAX(self.contentSize.height, self.bounds.size.height));
 }
 
 - (void)setBorderVisibile:(BOOL)isVisible {

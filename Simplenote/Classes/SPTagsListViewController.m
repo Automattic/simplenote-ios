@@ -19,7 +19,6 @@
 #import "SPTracker.h"
 
 #define kSectionTags 0
-#define kSectionEdit 1
 
 #define kActionSheetDeleteIndex 0
 #define kActionSheetRenameIndex 1
@@ -171,6 +170,7 @@ static NSString * const SPTagTrashKey = @"trash";
 - (UIButton *)buildSettingsButton {
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
     [button setImage:[UIImage imageNamed:@"icon_settings"] forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -191,7 +191,7 @@ static NSString * const SPTagTrashKey = @"trash";
 
 - (UIView *)buildTableHeaderView {
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 84)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 119)];
 
     allNotesButton = [UIButton buttonWithType:UIButtonTypeCustom];
     allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
@@ -230,8 +230,32 @@ static NSString * const SPTagTrashKey = @"trash";
     separatorView.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
     [headerView addSubview:separatorView];
 
+    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
+    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    UILabel *tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
+    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
+    tagsLabel.textColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
+    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [tagsView addSubview:tagsLabel];
+
+    UIButton *editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    editButton.frame = CGRectMake(0, 0, 0, 20);
+    editButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    editButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [editButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    editButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [editButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [editButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+    [editButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    [tagsView addSubview:editButton];
+
+    [headerView addSubview:tagsView];
+
     return headerView;
 }
+
+#pragma mark - Button actions
 
 -(void)allNotesTap:(UIButton *)sender
 {
@@ -247,6 +271,11 @@ static NSString * const SPTagTrashKey = @"trash";
 -(void)settingsTap:(UIButton *)sender
 {
     [[SPAppDelegate sharedDelegate] showOptions];
+}
+
+-(void)editTagsTap:(UIButton *)sender
+{
+    [self setEditing:YES];
 }
 
 
@@ -281,22 +310,16 @@ static NSString * const SPTagTrashKey = @"trash";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (section == kSectionEdit)
+    if ((section == kSectionTags) &&
+        self.fetchedResultsController.fetchedObjects.count == 0) {
         return 1;
-    else if ((section == kSectionTags) &&
-             self.fetchedResultsController.fetchedObjects.count == 0)
-        return 1;
+    }
     
     return 10;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    if (section == kSectionEdit)
-        return 1;
-    
     return 10;
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -306,10 +329,9 @@ static NSString * const SPTagTrashKey = @"trash";
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == kSectionEdit)
-        return (self.numTags == 0 || bEditing) ? 0 : 1;
-	else if (section == kSectionTags)
+    if (section == kSectionTags) {
 		return [self numTags];
+    }
     
 	return 0;
 }
@@ -355,13 +377,6 @@ static NSString * const SPTagTrashKey = @"trash";
         cell.accessoryType = bEditing ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
         
         selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
-        
-    } else if (indexPath.section == kSectionEdit) {
-        
-        cellText = NSLocalizedString(@"Edit Tags", @"Re-order or delete tags");
-        cellIcon = _sortImage;
-        
-        selected = NO;
     }
     
     if (cellText) {
@@ -424,8 +439,6 @@ static NSString * const SPTagTrashKey = @"trash";
             [SPTracker trackListTagViewed];
             [self openNoteListForTagName:tag.name];
 		}
-    } else if (indexPath.section == kSectionEdit) {
-        [self setEditing:YES];
     }
 
     [self updateHeaderButtonHighlight];
@@ -589,7 +602,7 @@ static NSString * const SPTagTrashKey = @"trash";
         
         // scroll editing cell to visible
         if (self.fetchedResultsController.fetchedObjects.count > 0)
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:kSectionEdit]
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:kSectionTags]
                                   atScrollPosition:UITableViewScrollPositionMiddle
                                           animated:NO];
         
