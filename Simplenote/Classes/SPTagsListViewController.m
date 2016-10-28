@@ -191,7 +191,7 @@ static NSString * const SPTagTrashKey = @"trash";
 
 - (UIView *)buildTableHeaderView {
 
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 119)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 114)];
 
     allNotesButton = [UIButton buttonWithType:UIButtonTypeCustom];
     allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
@@ -239,16 +239,16 @@ static NSString * const SPTagTrashKey = @"trash";
     tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [tagsView addSubview:tagsLabel];
 
-    UIButton *editButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    editButton.frame = CGRectMake(0, 0, 0, 20);
-    editButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
-    editButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [editButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
-    editButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [editButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [editButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
-    [editButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
-    [tagsView addSubview:editButton];
+    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
+    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [editTagsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    [tagsView addSubview:editTagsButton];
 
     [headerView addSubview:tagsView];
 
@@ -275,7 +275,7 @@ static NSString * const SPTagTrashKey = @"trash";
 
 -(void)editTagsTap:(UIButton *)sender
 {
-    [self setEditing:YES];
+    [self setEditing:!bEditing];
 }
 
 
@@ -318,13 +318,6 @@ static NSString * const SPTagTrashKey = @"trash";
     return 10;
     
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
-}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -339,19 +332,10 @@ static NSString * const SPTagTrashKey = @"trash";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SPTagListViewCell *cell;
-    if (indexPath.section == kSectionTags) {
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-        if (!cell) {
-            cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-                
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:cellWithIconIdentifier];
-
-        if (!cell) {
-            cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellWithIconIdentifier];
-        }
+    if (!cell) {
+        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
     [cell resetCellForReuse];
@@ -367,17 +351,12 @@ static NSString * const SPTagTrashKey = @"trash";
     NSString *cellText;
     UIImage *cellIcon;
     BOOL selected = NO;
-    
-    if (indexPath.section == kSectionTags) {
-        Tag *tag = [self tagAtRow: indexPath.row];
-        
-        cellText = tag.name;
-        cellIcon = nil;
-        
-        cell.accessoryType = bEditing ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-        
-        selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
-    }
+
+    Tag *tag = [self tagAtRow: indexPath.row];
+    cellText = tag.name;
+    cellIcon = nil;
+    cell.accessoryType = bEditing ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+    selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
@@ -427,45 +406,26 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == kSectionTags) {
-        
-        Tag *tag = [self tagAtRow: indexPath.row];
+    Tag *tag = [self tagAtRow: indexPath.row];
 
-        if (bEditing) {
-            [SPTracker trackTagRowRenamed];
-            [self renameTagAction:tag];
-        } else {
-            [SPTracker trackListTagViewed];
-            [self openNoteListForTagName:tag.name];
-		}
+    if (bEditing) {
+        [SPTracker trackTagRowRenamed];
+        [self renameTagAction:tag];
+    } else {
+        [SPTracker trackListTagViewed];
+        [self openNoteListForTagName:tag.name];
     }
 
     [self updateHeaderButtonHighlight];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return indexPath.section == kSectionTags;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return indexPath.section == kSectionTags;
-}
-
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    
-    
     if (sourceIndexPath.section == kSectionTags && destinationIndexPath.section == kSectionTags) {
         
         [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row
                                                   toIndex:destinationIndexPath.row];
         
     }
-    
-    
-    
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
@@ -481,7 +441,7 @@ static NSString * const SPTagTrashKey = @"trash";
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Detemine if it's in editing mode
-    if (indexPath.section == kSectionTags && bEditing)
+    if (bEditing)
     {
         return UITableViewCellEditingStyleDelete;
     }
@@ -525,89 +485,14 @@ static NSString * const SPTagTrashKey = @"trash";
     bEditing = editing;
     
     self.tableView.allowsSelectionDuringEditing = YES;
-    
-    
-    UIView *snapshot = [self.tableView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = self.tableView.frame;
-    snapshot.contentMode = UIViewContentModeTop;
-    [self.view insertSubview:snapshot aboveSubview:self.tableView];
-    self.tableView.alpha = 0.0;
-    
-    [self.tableView setEditing:editing animated:NO];
-    [self.tableView reloadData];
+    [self.tableView setEditing:editing animated:YES];
     
     if (editing) {
-        
+        [editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
 		[SPTracker trackTagEditorAccessed];
-		      
-        SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
-        
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditingAction:)];
-        doneButton.accessibilityHint = @"Finish editing tags";
-        
-        [noteListViewController showFullSidePanelWithTemporaryBarButton:doneButton
-                                                             completion:nil];
-        
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             snapshot.alpha = 0.0;
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-        
-        CGRect newTableViewFrame = self.tableView.frame;
-        newTableViewFrame.size.width = MIN(self.view.bounds.size.width, 500);
-        newTableViewFrame.origin.x = (self.view.bounds.size.width - newTableViewFrame.size.width) / 2.0;
-        self.tableView.frame = newTableViewFrame;
-        
-        CGFloat borderInsetLength = newTableViewFrame.origin.x - customView.borderWidth;;
-        customView.borderInset = UIEdgeInsetsMake(0, borderInsetLength, 0, borderInsetLength);
-        customView.showLeftBorder = YES;
-        customView.showRightBorder = YES;
-        [customView setNeedsDisplay];
-        
-        [UIView animateWithDuration:0.3
-                              delay:0.05
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             self.tableView.alpha = 1.0;
-                         } completion:^(BOOL finished) {
-                             nil;
-                         }];
-
     } else {
-        
-        if (bVisible) {
-            [[self containerViewController] showSidePanel:nil];
-        }
-        
-        self.tableView.frame = self.view.bounds;
-        [self.tableView reloadData];
-        
-        customView.showLeftBorder = NO;
-        customView.showRightBorder = NO;
-        [customView setNeedsDisplay];
-
-        [UIView animateWithDuration:0.2
-                         animations:^{
-                             
-                             snapshot.alpha = 0.0;
-                             self.tableView.alpha = 1.0;
-                             
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-        
-
-        
-        // scroll editing cell to visible
-        if (self.fetchedResultsController.fetchedObjects.count > 0)
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:kSectionTags]
-                                  atScrollPosition:UITableViewScrollPositionMiddle
-                                          animated:NO];
-        
+        [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     }
-    
     
     return;
 }

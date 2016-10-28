@@ -17,6 +17,7 @@
     UIButton *allNotesButton;
     UIButton *trashButton;
     UIButton *settingsButton;
+    UIButton *editTagsButton;
     SPBorderedView *customView;
     
     BOOL bEditing;
