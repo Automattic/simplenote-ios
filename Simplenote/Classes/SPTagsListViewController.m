@@ -741,6 +741,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 #pragma mark UI builders
 
+- (CGFloat)thinLineSize {
+    return 1.0 / [[UIScreen mainScreen] scale];
+}
+
 - (UIButton *)buildSettingsButton {
     settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -752,7 +756,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
     [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
 
-    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, 0.5)];
+    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, self.thinLineSize)];
     footerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [settingsButton addSubview:footerSeparator];
 
@@ -779,9 +783,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     [headerView addSubview:trashButton];
 
-    CGFloat separatorWidth = 1.0 / [[UIScreen mainScreen] scale];
-
-    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - separatorWidth, 0, separatorWidth)];
+    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
     headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
     [headerView addSubview:headerSeparator];
