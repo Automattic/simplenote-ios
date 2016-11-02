@@ -194,7 +194,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
+    [self setBackButtonTitleForSearchingMode: bSearching];
+
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self.navigationController setToolbarHidden:!bSearching animated:YES];
 
@@ -381,17 +382,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // back button
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [backButton setTitle:NSLocalizedString(@"Notes", @"Plural form of notes")
-                forState:UIControlStateNormal];
     [backButton setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 forState:UIControlStateNormal];
     backButton.titleLabel.font = [self.theme fontForKey:@"barButtonFont"];
     backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
-    [backButton sizeToFit];
     backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
-    backButton.accessibilityLabel = NSLocalizedString(@"Notes", nil);
     backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
-    
     [backButton addTarget:self
                    action:@selector(backButtonAction:)
          forControlEvents:UIControlEventTouchUpInside];
@@ -524,6 +520,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         keyboardButton.hidden = !editing;
         newButton.hidden = editing;
     }
+}
+
+- (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
+    NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
+    [backButton setTitle:backButtonTitle
+                forState:UIControlStateNormal];
+    backButton.accessibilityLabel = backButtonTitle;
+    [backButton sizeToFit];
 }
 
 - (void)prepareToPopView {
