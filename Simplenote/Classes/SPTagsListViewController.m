@@ -18,6 +18,9 @@
 #import "SPButton.h"
 #import "SPTracker.h"
 
+
+// MARK: - Constants
+//
 #define kSectionTags 0
 
 #define kActionSheetDeleteIndex 0
@@ -25,8 +28,13 @@
 #define kActionSheetCancelIndex 2
 
 static NSString * const SPTagTrashKey = @"trash";
+static CGFloat const SPSettingsButtonHeight = 40;
+static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
+static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 
+// MARK: - Private
+//
 @interface SPTagsListViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -40,6 +48,9 @@ static NSString * const SPTagTrashKey = @"trash";
 
 @end
 
+
+// MARK: - SPTagsListViewController Implementation
+//
 @implementation SPTagsListViewController
 @synthesize fetchedResultsController=__fetchedResultsController;
 
@@ -97,20 +108,14 @@ static NSString * const SPTagTrashKey = @"trash";
     
     // Register for keyboard notifications
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [nc addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     _tagImage = [[UIImage imageNamed:@"icon_tag"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _sortImage = [[UIImage imageNamed:@"icon_sort"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _sortImage = [[UIImage imageNamed:@"icon_sort"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -119,25 +124,22 @@ static NSString * const SPTagTrashKey = @"trash";
     [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
     [[UIMenuController sharedMenuController] update];
     
-    [nc addObserver:self
-                                             selector:@selector(menuDidChangeVisibility:)
-                                                 name:UIMenuControllerDidHideMenuNotification
-                                               object:nil];
-    [nc addObserver:self
-                                             selector:@selector(menuDidChangeVisibility:)
-                                                 name:UIMenuControllerDidShowMenuNotification
-                                               object:nil];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
 
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    CGRect settingsFrame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 40.0f, self.view.frame.size.width, 40.0f);
-    settingsButton.frame = settingsFrame;
+    CGRect viewFrame = self.view.frame;
+    settingsButton.frame = CGRectMake(viewFrame.origin.x,
+                                      viewFrame.size.height - SPSettingsButtonHeight,
+                                      viewFrame.size.width,
+                                      SPSettingsButtonHeight);
 
     CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.size.height = self.view.frame.size.height - 40.0f;
+    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
     self.tableView.frame = tableViewFrame;
 
     [self updateHeaderButtonHighlight];
@@ -745,8 +747,8 @@ static NSString * const SPTagTrashKey = @"trash";
     [settingsButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
     [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [settingsButton setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
-    [settingsButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
+    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
     [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
     [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -758,7 +760,8 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (UIView *)buildTableHeaderView {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 114)];
+    CGRect headerFrame = CGRectMake(0, 0, 0, 114);
+    UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
 
     allNotesButton = [self buildHeaderButton];
     allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
@@ -776,7 +779,9 @@ static NSString * const SPTagTrashKey = @"trash";
 
     [headerView addSubview:trashButton];
 
-    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 83.5, 0, 0.5)];
+    CGFloat separatorWidth = 1.0 / [[UIScreen mainScreen] scale];
+
+    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - separatorWidth, 0, separatorWidth)];
     headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
     [headerView addSubview:headerSeparator];
@@ -810,8 +815,8 @@ static NSString * const SPTagTrashKey = @"trash";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [button setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 0)];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    [button setContentEdgeInsets:SPButtonContentInsets];
+    [button setImageEdgeInsets:SPButtonImageInsets];
     [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
 
     return button;
