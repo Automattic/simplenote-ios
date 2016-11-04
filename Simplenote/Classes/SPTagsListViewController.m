@@ -208,7 +208,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 -(void)editTagsTap:(UIButton *)sender
 {
-    [self setEditing:!bEditing];
+    [self setEditing:!bEditing canceled:NO];
 }
 
 
@@ -288,7 +288,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     Tag *tag = [self tagAtRow: indexPath.row];
     cellText = tag.name;
     cellIcon = nil;
-    cell.accessoryType = bEditing ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
@@ -408,14 +407,14 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [self removeTagAtIndexPath:path];
 }
 
-- (void)setEditing:(BOOL)editing {
+- (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
     
     if (bEditing == editing) {
         return;
     }
     
     bEditing = editing;
-    
+
     self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView setEditing:editing animated:YES];
     
@@ -427,23 +426,28 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     }
 
     SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
-    [UIView animateWithDuration:0.3
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         CGFloat newWidth = editing
-                             ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
-                             : [self.theme floatForKey:@"containerViewSidePanelWidth"];
-                         CGRect frame = self.view.frame;
-                         frame.size.width = newWidth;
-                         self.view.frame = frame;
+    CGFloat newWidth = editing
+        ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
+        : [self.theme floatForKey:@"containerViewSidePanelWidth"];
+    CGRect frame = self.view.frame;
+    frame.size.width = newWidth;
 
-                         CGRect notesFrame = noteListViewController.rootView.frame;
-                         notesFrame.origin.x = newWidth;
-                         noteListViewController.rootView.frame = notesFrame;
-                     } completion:^(BOOL finished) {
-                         nil;
-                     }];
+    CGRect notesFrame = noteListViewController.rootView.frame;
+    notesFrame.origin.x = newWidth;
+    if (!isCanceled) {
+        // Make the tags list wider, and move the notes list over to accomodate for the new width
+        [UIView animateWithDuration:0.3
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             self.view.frame = frame;
+                             noteListViewController.rootView.frame = notesFrame;
+                         } completion:^(BOOL finished) {
+                             nil;
+                         }];
+    } else {
+        self.view.frame = frame;
+    }
     
     return;
 }
@@ -456,7 +460,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [cell.tagNameTextField endEditing:YES];
     }
     
-    [self setEditing:NO];
+    [self setEditing:NO canceled:NO];
 }
 
 -(void)openNoteListForTagName:(NSString *)tag {
@@ -608,7 +612,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
     
     bVisible = NO;
-    [self setEditing:NO];
+    [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
