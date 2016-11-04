@@ -13,7 +13,7 @@
 		<key>boldFontName</key>
 		<string>SanFranciscoDisplay-Regular</string>
 		<key>textColor</key>
-		<string>333333</string>
+		<string>2d3034</string>
 		<key>lightBlueColor</key>
 		<string>eef3f8</string>
 		<key>noteHeadlineFont</key>
@@ -39,7 +39,7 @@
 		<key>noteBodyFontSize~ipad</key>
 		<string>19</string>
 		<key>noteBodyFontPreviewColor</key>
-		<string>666666</string>
+		<string>899198</string>
 		<key>noteCellBackgroundSelectionColor</key>
 		<string>@lightBlueColor</string>
 		<key>noteSidePadding</key>
@@ -85,7 +85,7 @@
 		<key>editorViewAboveKeyboardPadding</key>
 		<integer>10</integer>
 		<key>tintColor</key>
-		<string>448ac9</string>
+		<string>4895d9</string>
 		<key>barTintColor</key>
 		<string>ffffff</string>
 		<key>backgroundColor</key>
@@ -376,11 +376,11 @@
 		<key>lightBlueColor</key>
 		<string>2e3b49</string>
 		<key>textColor</key>
-		<string>71889f</string>
+		<string>dbdee0</string>
 		<key>secondaryTextColor</key>
-		<string>5b6780</string>
+		<string>899198</string>
 		<key>dividerColor</key>
-		<string>444444</string>
+		<string>4b5157</string>
 		<key>noteHeadlineFontColor</key>
 		<string>@textColor</string>
 		<key>noteBodyFontPreviewColor</key>
@@ -392,9 +392,9 @@
 		<key>switchOnTintColor</key>
 		<string>@textColor</string>
 		<key>barTintColor</key>
-		<string>232323</string>
+		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
-		<string>24272b</string>
+		<string>2d3034</string>
 		<key>cellHighlightBackgroundColor</key>
 		<string>@tintColor</string>
 		<key>cellHighlightTextColor</key>
@@ -408,7 +408,7 @@
 		<key>actionSheetDividerColor</key>
 		<string>@dividerColor</string>
 		<key>actionSheetBackgroundColor</key>
-		<string>2f333a</string>
+		<string>@backgroundColor</string>
 		<key>actionSheetButtonFontColor</key>
 		<string>@tintColor</string>
 		<key>actionSheetButtonBackgroundHighlightColor</key>
