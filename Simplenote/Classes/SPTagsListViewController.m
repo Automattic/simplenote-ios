@@ -425,6 +425,25 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     } else {
         [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     }
+
+    SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         CGFloat newWidth = editing
+                             ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
+                             : [self.theme floatForKey:@"containerViewSidePanelWidth"];
+                         CGRect frame = self.view.frame;
+                         frame.size.width = newWidth;
+                         self.view.frame = frame;
+
+                         CGRect notesFrame = noteListViewController.rootView.frame;
+                         notesFrame.origin.x = newWidth;
+                         noteListViewController.rootView.frame = notesFrame;
+                     } completion:^(BOOL finished) {
+                         nil;
+                     }];
     
     return;
 }
@@ -764,7 +783,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (UIView *)buildTableHeaderView {
-    CGRect headerFrame = CGRectMake(0, 0, 0, 114);
+    CGRect headerFrame = CGRectMake(0, 0, 0, 121);
     UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
 
     allNotesButton = [self buildHeaderButton];

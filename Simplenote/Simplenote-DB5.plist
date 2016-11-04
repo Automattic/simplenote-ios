@@ -248,6 +248,8 @@
 		<integer>3</integer>
 		<key>containerViewSidePanelWidth</key>
 		<integer>200</integer>
+		<key>containerViewSidePanelWidthExpanded</key>
+		<string>300</string>
 		<key>containerViewPanThreshold</key>
 		<integer>0</integer>
 		<key>containerViewSpringAnimationDamping</key>
