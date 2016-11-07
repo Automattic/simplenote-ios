@@ -87,9 +87,9 @@
 		<key>tintColor</key>
 		<string>4895d9</string>
 		<key>barTintColor</key>
-		<string>ffffff</string>
+		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
-		<string>fcfcfc</string>
+		<string>ffffff</string>
 		<key>cellDeletionBackgroundColor</key>
 		<string>ff3b30</string>
 		<key>cellHighlightBackgroundColor</key>
@@ -259,7 +259,7 @@
 		<key>containerViewSpringAnimationInitialVelocity</key>
 		<real>6</real>
 		<key>tagsListBackgroundColor</key>
-		<string>f9f9f9</string>
+		<string>@backgroundColor</string>
 		<key>tagListImageViewSide</key>
 		<integer>15</integer>
 		<key>tagListLeftPadding</key>
@@ -283,7 +283,7 @@
 		<key>tagListSeparatorColor</key>
 		<string>e3e3e6</string>
 		<key>tableViewBackgroundColor</key>
-		<string>fafafa</string>
+		<string>@backgroundColor</string>
 		<key>tableViewSeparatorColor</key>
 		<string>cccccc</string>
 		<key>tableViewTextLabelColor</key>
