@@ -738,7 +738,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
     
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height -= keyboardHeight + [self.theme floatForKey:@"editorViewAboveKeyboardPadding"];
+    newFrame.size.height = newFrame.size.height - keyboardHeight + SPSettingsButtonHeight;
     
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
@@ -751,7 +751,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)keyboardWillHide:(NSNotification *)notification {
     
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y;
+    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
 
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
