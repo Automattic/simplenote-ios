@@ -402,7 +402,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
-    newButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_new"]
+    newButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_new_note"]
                                    target:self
                                  selector:@selector(newButtonAction:)];
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");

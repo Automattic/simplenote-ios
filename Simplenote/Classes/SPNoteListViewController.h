@@ -24,7 +24,6 @@ typedef enum {
     // Navigation Bar
     UIBarButtonItem *addButton;
     UIBarButtonItem *sidebarButton;
-    UIView *sideBarButtonTransformView;
     
     // the container is only used to limit the width of the search bar.
     UIView *searchBarContainer;
