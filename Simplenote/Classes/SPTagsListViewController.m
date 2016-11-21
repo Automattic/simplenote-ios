@@ -132,15 +132,14 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    CGRect viewFrame = self.view.frame;
-    settingsButton.frame = CGRectMake(viewFrame.origin.x,
-                                      viewFrame.size.height - SPSettingsButtonHeight,
-                                      viewFrame.size.width,
-                                      SPSettingsButtonHeight);
-
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
     self.tableView.frame = tableViewFrame;
+
+    settingsButton.frame = CGRectMake(tableViewFrame.origin.x,
+                                      tableViewFrame.size.height,
+                                      tableViewFrame.size.width,
+                                      SPSettingsButtonHeight);
 
     [self updateHeaderButtonHighlight];
 }
