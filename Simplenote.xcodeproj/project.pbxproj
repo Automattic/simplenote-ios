@@ -147,6 +147,7 @@
 		E29ADD5F17848E8500E55842 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD5D17848E8500E55842 /* InfoPlist.strings */; };
 		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
 		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
+		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -442,6 +443,7 @@
 		E2FCA6141789146D00FC229D /* VSThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSThemeManager.h; sourceTree = "<group>"; };
 		E2FCA6151789146D00FC229D /* VSThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeManager.m; sourceTree = "<group>"; };
 		EC63A736071A5E8129D97C5B /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
+		F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CSSearchable+Helpers.swift"; path = "Classes/CSSearchable+Helpers.swift"; sourceTree = "<group>"; };
 		FE6E920DC2B6ABC021AF145F /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -620,6 +622,7 @@
 			children = (
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
+				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1356,6 +1359,7 @@
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
+				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A517DFA81A002865AE /* UIView+ImageRepresentation.m in Sources */,

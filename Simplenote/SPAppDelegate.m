@@ -557,6 +557,8 @@
             [defaults removeObjectForKey:kSimplenoteMarkdownDefaultKey];
 			[defaults synchronize];
 			
+            [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
+            
             // Always fall back to the default theme
             [[VSThemeManager sharedManager] swapTheme:kSimplenoteDefaultThemeName];
             
@@ -683,6 +685,17 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         [_noteListViewController setWaitingForIndex:NO];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            NSArray *deleted = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
+            if (deleted.count > 0) {
+                NSArray *deletedIDs = [deleted valueForKey:@"simperiumKey"];
+                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:deletedIDs completionHandler:nil];
+            }
+            
+            NSArray *notes = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
+        });
     }
 }
 

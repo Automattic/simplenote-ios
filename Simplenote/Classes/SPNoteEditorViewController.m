@@ -1185,6 +1185,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         // Simperum: save
         [[SPAppDelegate sharedDelegate] save];
         [SPTracker trackEditorNoteEdited];
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:_currentNote];
         
         bModified = NO;
 	}
@@ -1861,6 +1862,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         [self.view addSubview:snapshot];
         
         [[SPObjectManager sharedManager] trashNote:_currentNote];
+        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
         
         [self clearNote];
         
