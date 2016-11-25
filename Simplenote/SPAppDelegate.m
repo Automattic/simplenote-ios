@@ -295,6 +295,25 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    
+    if (userActivity.userInfo != nil) {
+        if (userActivity.userInfo[CSSearchableItemActivityIdentifier] != nil) {
+            NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
+            SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
+            Note *note = [noteBucket objectForKey:uniqueIdentifier];
+            double delayInSeconds = 0.05;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+                [self showPasscodeLockIfNecessary];
+            });
+        }
+    }
+    
+    return true;
+}
+
 - (void)onboardingDidFinish:(NSNotification *)notification
 {
     [self.window makeKeyAndVisible];
