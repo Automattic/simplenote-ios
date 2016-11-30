@@ -22,7 +22,7 @@ NSString *const SPAnimationOptionsName = @"SPAnimationOptionsName";
 
 @implementation SPTransitionSnapshot
 
-- (id)initWithSnapshot:(UIView *)snapshot animatedValues:(NSDictionary *)animatedValues animationProperties:(NSDictionary *)animationProperties superView:(UIView *)superView {
+- (instancetype)initWithSnapshot:(UIView *)snapshot animatedValues:(NSDictionary *)animatedValues animationProperties:(NSDictionary *)animationProperties superView:(UIView *)superView {
     
     self = [super init];
     if (self) {

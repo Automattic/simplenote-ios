@@ -761,50 +761,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     }
     
     return;
-    
-    
-    if (sender.numberOfTouches < 2)
-        return;
-    
-    CGPoint point1 = [sender locationOfTouch:0 inView:sender.view];
-    CGPoint point2 = [sender locationOfTouch:1 inView:sender.view];
-    CGFloat distance = sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
-    
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        
-        if (self.hasActiveInteraction || _transitioning)
-            return;
-        
-        self.initialPinchDistance = distance;
-        self.hasActiveInteraction = TRUE;
-        [self.delegate interactionBegan];
-        return;
-    }
-    
-    if (!self.hasActiveInteraction)
-        return;
-    
-    if (sender.state == UIGestureRecognizerStateChanged) {
-        
-        CGFloat distanceDelta = distance - self.initialPinchDistance;
-        if (self.navigationOperation == UINavigationControllerOperationPop)
-            distanceDelta = -distanceDelta;
-    
-        CGFloat dimension = sqrt(sender.view.bounds.size.width*sender.view.bounds.size.width + sender.view.bounds.size.height*sender.view.bounds.size.height) * 0.25;
-        percentComplete = MAX(MIN((distanceDelta / dimension), 1.0), 0.0);
-        
-        [self animateTransitionSnapshotsToPercentCompletion:percentComplete animated:NO decrementUseCount:NO];
-        return;
-    }
-    
-    if (sender.state == UIGestureRecognizerStateCancelled) {
-        
-        [self endInteractionWithSuccess:FALSE];
-        return;
-    } else {
-        [self endInteractionWithSuccess:TRUE];
-        return;
-    }
 }
 
 - (void)postPopGestureNotification {

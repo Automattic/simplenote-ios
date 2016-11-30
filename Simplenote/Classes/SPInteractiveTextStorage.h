@@ -1,8 +1,8 @@
-
 #import <UIKit/UIKit.h>
 
-NSString *const SPDefaultTokenName;
-NSString *const SPHeadlineTokenName;
+
+extern NSString *const SPDefaultTokenName;
+extern NSString *const SPHeadlineTokenName;
 
 @interface SPInteractiveTextStorage : NSTextStorage
 
