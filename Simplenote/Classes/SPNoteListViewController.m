@@ -228,7 +228,7 @@
 - (void)updateNavigationBar {
     
     if (!addButton) {
-        addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"button_new"]
+        addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
                      imageAlignment:UIBarButtonImageAlignmentRight
                                                  target:self
                                                selector:@selector(addButtonAction:)];
@@ -238,16 +238,13 @@
     
     
     if (!sidebarButton) {
-        sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"back_chevron"]
+        sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
                                               imageAlignment:UIBarButtonImageAlignmentLeft
                                                  target:self
                                                selector:@selector(sidebarButtonAction:)];
         sidebarButton.isAccessibilityElement = YES;
         sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
         sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
-        
-        // this view is the view rotates when the tags list is shown
-        sideBarButtonTransformView =(UIView *)[[(UIButton *)sidebarButton.customView subviews] firstObject];
     }
     
     if (!emptyTrashButton) {
@@ -980,20 +977,6 @@
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
-
-- (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible {
-    
-    // when 100% visible, the sidebarButotn should be transformed 90 degrees
-    // when 0% visible, the transform should be identity
-    
-    // calculate transform
-    CGFloat transformAngle = - percentVisible * (90 * M_PI / 180.0);
-    CGFloat horizontalTransformDistance = percentVisible;
-    CGFloat verticalTransformDistance = percentVisible * -2.75;
-    sideBarButtonTransformView.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(transformAngle),
-                                                      CGAffineTransformMakeTranslation(horizontalTransformDistance, verticalTransformDistance));
-}
-
 
 #pragma mark - Index progress
 
