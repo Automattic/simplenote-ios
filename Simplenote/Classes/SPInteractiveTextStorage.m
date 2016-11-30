@@ -13,7 +13,7 @@ NSString *const SPHeadlineTokenName = @"SPHeadlineTokenName";
 
 @implementation SPInteractiveTextStorage
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
