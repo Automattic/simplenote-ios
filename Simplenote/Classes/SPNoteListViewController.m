@@ -12,6 +12,7 @@
 #import "SPNoteEditorViewController.h"
 
 #import "SPAppDelegate.h"
+#import "SPBorderedTableView.h"
 #import "SPTableViewCell.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
@@ -68,11 +69,12 @@
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
         
-        self.tableView = [[UITableView alloc] init];
+        self.tableView = [[SPBorderedTableView alloc] init];
         self.tableView.frame = self.rootView.bounds;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
         [self.rootView addSubview:_tableView];
 
         cellIdentifier = [[VSThemeManager sharedManager] theme].name;
@@ -105,7 +107,6 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
         
-        self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self updateRowHeight:nil];
         
@@ -167,7 +168,7 @@
     
     // Use a new cellIdentifier so cells redraw with new theme
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
-    self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    [self.tableView applyTheme];
     [self.tableView reloadData];
 
     // Restyle the TransitionController
@@ -945,6 +946,7 @@
     
     self.tableView.scrollEnabled = NO;
     self.tableView.allowsSelection = NO;
+    [self.tableView setBorderVisibile:YES];
     
     addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     addButton.enabled = NO;
@@ -964,6 +966,7 @@
     
     self.tableView.scrollEnabled = YES;
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+    [self.tableView setBorderVisibile:NO];
     
     addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     addButton.enabled = YES;

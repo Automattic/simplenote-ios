@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E2337828456992D0A53E514 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6E920DC2B6ABC021AF145F /* Pods_Automattic_Simplenote.framework */; };
+		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */; };
@@ -185,6 +186,8 @@
 		17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownPreviewViewController.h; path = Classes/SPMarkdownPreviewViewController.h; sourceTree = "<group>"; };
 		17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownPreviewViewController.m; path = Classes/SPMarkdownPreviewViewController.m; sourceTree = "<group>"; };
 		36966A74C74B55D0F708DD57 /* Pods_Automattic_SimplenoteShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_SimplenoteShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
+		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
 		37CD04B91A60538B00C4A8E0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BA1A6053CC00C4A8E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BB1A6053E900C4A8E0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -673,6 +676,8 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
+				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				E23D43B117A8235B006811F2 /* MagnifierView.h */,
 				E23D43B217A8235B006811F2 /* MagnifierView.m */,
@@ -1367,6 +1372,7 @@
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
+				37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */,
 				B521A19A1BC8452100E1CF2A /* SPGoogleTracker.m in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				46A3C9AC17DFA81A002865AE /* UIView+Subviews.m in Sources */,

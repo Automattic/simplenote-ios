@@ -23,7 +23,6 @@
         
         
         // style the cell
-        
         self.backgroundColor = [UIColor clearColor];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
