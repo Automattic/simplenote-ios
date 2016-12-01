@@ -638,10 +638,17 @@
 {
     if ([bucket.name isEqualToString:NSStringFromClass([Note class])]) {
         // Note change
+        Note *note;
         switch (change) {
             case SPBucketChangeUpdate:
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
                     [_noteEditorViewController didReceiveNewContent];
+                }
+                note = [bucket objectForKey:key];
+                if (note && !note.deleted) {
+                    [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
+                } else {
+                    [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
                 }
                 break;
             case SPBucketChangeInsert:
@@ -650,6 +657,7 @@
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
 					[_noteEditorViewController didDeleteCurrentNote];
 				}
+                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
 				break;
             default:
                 break;
@@ -704,17 +712,22 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         [_noteListViewController setWaitingForIndex:NO];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSArray *deleted = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
-            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotes:deleted];
-            
-            NSArray *notes = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
-            [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
-        });
+        [self indexSpotlightItems];
     }
 }
 
+- (void)indexSpotlightItems {
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setParentContext:self.simperium.managedObjectContext];
+    
+    [context performBlock:^{
+        NSArray *deleted = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
+        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotes:deleted];
+        
+        NSArray *notes = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
+    }];
+}
 
 #pragma mark ================================================================================
 #pragma mark URL scheme
