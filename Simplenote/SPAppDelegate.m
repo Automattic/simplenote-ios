@@ -296,20 +296,20 @@
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    
-    if (userActivity.userInfo != nil) {
-        if (userActivity.userInfo[CSSearchableItemActivityIdentifier] != nil) {
-            NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
-            SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
-            Note *note = [noteBucket objectForKey:uniqueIdentifier];
-            double delayInSeconds = 0.05;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
-                [self showPasscodeLockIfNecessary];
-            });
-        }
+
+    NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
+    if (uniqueIdentifier == nil) {
+        return false;
     }
+    
+    SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
+    Note *note = [noteBucket objectForKey:uniqueIdentifier];
+    
+    if (note == nil) {
+        return false;
+    }
+    
+    [self presentNote:note];
     
     return true;
 }
@@ -757,30 +757,32 @@
         }
         [_simperium save];
         
-        // Hide any modals
-        [self dismissAllModalsAnimated:NO completion:nil];
-        
-        // If root tag list is currently being viewed, push All Notes instead
-        [self.noteListViewController hideSidePanelAnimated:NO completion:nil];
-        
-        // On iPhone, make sure a note isn't currently being edited
-        if (self.navigationController.visibleViewController == _noteEditorViewController) {
-            [self.navigationController popViewControllerAnimated:NO];
-        }
-        
-        // Little trick to postpone until next run loop to ensure controllers have a chance to pop
-        double delayInSeconds = 0.05;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [_noteListViewController openNote:newNote fromIndexPath:nil animated:NO];
-            [self showPasscodeLockIfNecessary];
-        });
+        [self presentNote:newNote];
     }
     
     return true;
 }
 
-
+- (void)presentNote:(Note *)note {
+    // Hide any modals
+    [self dismissAllModalsAnimated:NO completion:nil];
+    
+    // If root tag list is currently being viewed, push All Notes instead
+    [self.noteListViewController hideSidePanelAnimated:NO completion:nil];
+    
+    // On iPhone, make sure a note isn't currently being edited
+    if (self.navigationController.visibleViewController == _noteEditorViewController) {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    
+    // Little trick to postpone until next run loop to ensure controllers have a chance to pop
+    double delayInSeconds = 0.05;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+        [self showPasscodeLockIfNecessary];
+    });
+}
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock
