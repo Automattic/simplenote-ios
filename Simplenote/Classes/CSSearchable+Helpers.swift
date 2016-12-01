@@ -24,8 +24,8 @@ extension CSSearchableItemAttributeSet {
 extension CSSearchableItem {
 
     convenience init(note: Note) {
-        let set = CSSearchableItemAttributeSet(note: note)
-        self.init(uniqueIdentifier: note.simperiumKey, domainIdentifier:"notes", attributeSet: set)
+        let attributeSet = CSSearchableItemAttributeSet(note: note)
+        self.init(uniqueIdentifier: note.simperiumKey, domainIdentifier:"notes", attributeSet: attributeSet)
     }
 
 }
@@ -34,7 +34,7 @@ extension CSSearchableIndex {
 
     func indexSearchableNote(_ note: Note) {
         let item = CSSearchableItem(note: note)
-        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+        indexSearchableItems([item]) { error in
             if let error = error {
                 NSLog("Couldn't index note in spotlight: \(error.localizedDescription)");
             }
@@ -42,13 +42,11 @@ extension CSSearchableIndex {
     }
     
     func indexSearchableNotes(_ notes: [Note]) {
-        var items: [CSSearchableItem] = []
-        
-        for note in notes {
-            items.append(CSSearchableItem(note: note))
+        let items = notes.map {
+            return CSSearchableItem(note: $0)
         }
         
-        CSSearchableIndex.default().indexSearchableItems(items) { error in
+        indexSearchableItems(items) { error in
             if let error = error {
                 NSLog("Couldn't index notes in spotlight: \(error.localizedDescription)");
             }
@@ -56,9 +54,17 @@ extension CSSearchableIndex {
     }
     
     func deleteSearchableNote(_ note: Note) {
-        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [note.simperiumKey]) { error in
+        deleteSearchableNotes([note])
+    }
+
+    func deleteSearchableNotes(_ notes: [Note]) {
+        let ids = notes.map {
+            return $0.simperiumKey!
+        }
+        
+        deleteSearchableItems(withIdentifiers: ids) { error in
             if let error = error {
-                NSLog("Couldn't delete note from spotlight index: \(error.localizedDescription)");
+                NSLog("Couldn't delete notes from spotlight index: \(error.localizedDescription)");
             }
         }
     }

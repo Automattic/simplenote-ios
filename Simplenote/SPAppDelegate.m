@@ -707,10 +707,7 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSArray *deleted = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
-            if (deleted.count > 0) {
-                NSArray *deletedIDs = [deleted valueForKey:@"simperiumKey"];
-                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:deletedIDs completionHandler:nil];
-            }
+            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotes:deleted];
             
             NSArray *notes = [bucket objectsForPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
             [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
