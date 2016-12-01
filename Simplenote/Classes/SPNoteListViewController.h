@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
 @class Note, SPEmptyListView;
@@ -24,7 +25,6 @@ typedef enum {
     // Navigation Bar
     UIBarButtonItem *addButton;
     UIBarButtonItem *sidebarButton;
-    UIView *sideBarButtonTransformView;
     
     // the container is only used to limit the width of the search bar.
     UIView *searchBarContainer;
@@ -54,7 +54,7 @@ typedef enum {
 @property (nonatomic) BOOL firstLaunch;
 
 @property (nonatomic, strong) SPEmptyListView *emptyListView;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) SPBorderedTableView *tableView;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

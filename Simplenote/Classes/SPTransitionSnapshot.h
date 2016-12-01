@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-NSString *const SPAnimationAlphaValueName;
-NSString *const SPAnimationFrameValueName;
+extern NSString *const SPAnimationAlphaValueName;
+extern NSString *const SPAnimationFrameValueName;
 
-NSString *const SPAnimationInitialValueName;
-NSString *const SPAnimationFinalValueName;
+extern NSString *const SPAnimationInitialValueName;
+extern NSString *const SPAnimationFinalValueName;
 
-NSString *const SPAnimationDurationName;
-NSString *const SPAnimationDelayName;
-NSString *const SPAnimationSpringDampingName;
-NSString *const SPAnimationInitialVeloctyName;
-NSString *const SPAnimationOptionsName;
+extern NSString *const SPAnimationDurationName;
+extern NSString *const SPAnimationDelayName;
+extern NSString *const SPAnimationSpringDampingName;
+extern NSString *const SPAnimationInitialVeloctyName;
+extern NSString *const SPAnimationOptionsName;
 
 @interface SPTransitionSnapshot : NSObject {
     

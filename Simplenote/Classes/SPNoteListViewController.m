@@ -12,6 +12,7 @@
 #import "SPNoteEditorViewController.h"
 
 #import "SPAppDelegate.h"
+#import "SPBorderedTableView.h"
 #import "SPTableViewCell.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
@@ -68,11 +69,12 @@
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
         
-        self.tableView = [[UITableView alloc] init];
+        self.tableView = [[SPBorderedTableView alloc] init];
         self.tableView.frame = self.rootView.bounds;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
         [self.rootView addSubview:_tableView];
 
         cellIdentifier = [[VSThemeManager sharedManager] theme].name;
@@ -105,7 +107,6 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
         
-        self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self updateRowHeight:nil];
         
@@ -167,7 +168,7 @@
     
     // Use a new cellIdentifier so cells redraw with new theme
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
-    self.tableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    [self.tableView applyTheme];
     [self.tableView reloadData];
 
     // Restyle the TransitionController
@@ -227,7 +228,7 @@
 - (void)updateNavigationBar {
     
     if (!addButton) {
-        addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"button_new"]
+        addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
                      imageAlignment:UIBarButtonImageAlignmentRight
                                                  target:self
                                                selector:@selector(addButtonAction:)];
@@ -237,16 +238,13 @@
     
     
     if (!sidebarButton) {
-        sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"back_chevron"]
+        sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
                                               imageAlignment:UIBarButtonImageAlignmentLeft
                                                  target:self
                                                selector:@selector(sidebarButtonAction:)];
         sidebarButton.isAccessibilityElement = YES;
         sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
         sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
-        
-        // this view is the view rotates when the tags list is shown
-        sideBarButtonTransformView =(UIView *)[[(UIButton *)sidebarButton.customView subviews] firstObject];
     }
     
     if (!emptyTrashButton) {
@@ -946,6 +944,7 @@
     
     self.tableView.scrollEnabled = NO;
     self.tableView.allowsSelection = NO;
+    [self.tableView setBorderVisibile:YES];
     
     addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     addButton.enabled = NO;
@@ -965,6 +964,7 @@
     
     self.tableView.scrollEnabled = YES;
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+    [self.tableView setBorderVisibile:NO];
     
     addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     addButton.enabled = YES;
@@ -978,20 +978,6 @@
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
-
-- (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible {
-    
-    // when 100% visible, the sidebarButotn should be transformed 90 degrees
-    // when 0% visible, the transform should be identity
-    
-    // calculate transform
-    CGFloat transformAngle = - percentVisible * (90 * M_PI / 180.0);
-    CGFloat horizontalTransformDistance = percentVisible;
-    CGFloat verticalTransformDistance = percentVisible * -2.75;
-    sideBarButtonTransformView.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation(transformAngle),
-                                                      CGAffineTransformMakeTranslation(horizontalTransformDistance, verticalTransformDistance));
-}
-
 
 #pragma mark - Index progress
 
