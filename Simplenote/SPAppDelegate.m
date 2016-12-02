@@ -295,8 +295,8 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
     if (uniqueIdentifier == nil) {
         return false;
@@ -729,6 +729,7 @@
     }];
 }
 
+
 #pragma mark ================================================================================
 #pragma mark URL scheme
 #pragma mark ================================================================================
@@ -773,7 +774,8 @@
     return true;
 }
 
-- (void)presentNote:(Note *)note {
+- (void)presentNote:(Note *)note
+{
     // Hide any modals
     [self dismissAllModalsAnimated:NO completion:nil];
     
@@ -793,6 +795,7 @@
         [self showPasscodeLockIfNecessary];
     });
 }
+
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock
