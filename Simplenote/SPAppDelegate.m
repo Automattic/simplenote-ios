@@ -638,26 +638,29 @@
 {
     if ([bucket.name isEqualToString:NSStringFromClass([Note class])]) {
         // Note change
-        Note *note;
         switch (change) {
-            case SPBucketChangeUpdate:
+            case SPBucketChangeTypeUpdate:
+            {
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
                     [_noteEditorViewController didReceiveNewContent];
                 }
-                note = [bucket objectForKey:key];
+                Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
                     [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
                 } else {
                     [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
                 }
+            }
                 break;
-            case SPBucketChangeInsert:
+            case SPBucketChangeTypeInsert:
                 break;
-			case SPBucketChangeDelete:
+			case SPBucketChangeTypeDelete:
+            {
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
 					[_noteEditorViewController didDeleteCurrentNote];
 				}
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
+            }
 				break;
             default:
                 break;
@@ -665,7 +668,8 @@
     } else if ([bucket.name isEqualToString:NSStringFromClass([Tag class])]) {
         // Tag deleted
         switch (change) {
-            case SPBucketChangeDelete: {
+            case SPBucketChangeTypeDelete:
+            {
                 // if selected tag is deleted, swap the note list view controller
                 if ([key isEqual:self.selectedTag]) {
                     self.selectedTag = nil;
