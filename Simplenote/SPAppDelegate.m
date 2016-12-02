@@ -291,7 +291,10 @@
 	
     // Integrity Check: Fallback to GhostData, if needed
     [SPIntegrityHelper reloadInconsistentNotesIfNeeded:self.simperium];
-    
+
+    // Index (All of the) Spotlight Items if the user upgraded
+    [self indexSpotlightItemsIfNeeded];
+
     return YES;
 }
 
@@ -720,7 +723,33 @@
     }
 }
 
-- (void)indexSpotlightItems {
+
+#pragma mark ================================================================================
+#pragma mark Spotlight
+#pragma mark ================================================================================
+
+- (void)indexSpotlightItemsIfNeeded
+{
+    // This process should be executed *just once*, and only if the user is already logged in (AKA "Upgrade")
+    NSString *kSpotlightDidRunKey = @"SpotlightDidRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if ([defaults boolForKey:kSpotlightDidRunKey] == true) {
+        return;
+    }
+
+    [defaults setBool:true forKey:kSpotlightDidRunKey];
+    [defaults synchronize];
+
+    if (self.simperium.user.authenticated == false) {
+        return;
+    }
+
+    [self indexSpotlightItems];
+}
+
+- (void)indexSpotlightItems
+{
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [context setParentContext:self.simperium.managedObjectContext];
     
