@@ -523,12 +523,13 @@
         // delete note at index path
         Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
         
-        if (note.deleted)
+        if (note.deleted) {
             [[SPObjectManager sharedManager] restoreNote:note];
-        else {
-            
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
+        } else {
             [SPTracker trackListNoteDeleted];
             [[SPObjectManager sharedManager] trashNote:note];
+            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
         }
         
         [self updateViewIfEmpty];

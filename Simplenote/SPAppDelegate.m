@@ -295,6 +295,25 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+
+    NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
+    if (uniqueIdentifier == nil) {
+        return false;
+    }
+    
+    SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
+    Note *note = [noteBucket objectForKey:uniqueIdentifier];
+    
+    if (note == nil) {
+        return false;
+    }
+    
+    [self presentNote:note];
+    
+    return true;
+}
+
 - (void)onboardingDidFinish:(NSNotification *)notification
 {
     [self.window makeKeyAndVisible];
@@ -557,6 +576,8 @@
             [defaults removeObjectForKey:kSimplenoteMarkdownDefaultKey];
 			[defaults synchronize];
 			
+            [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
+            
             // Always fall back to the default theme
             [[VSThemeManager sharedManager] swapTheme:kSimplenoteDefaultThemeName];
             
@@ -617,10 +638,17 @@
 {
     if ([bucket.name isEqualToString:NSStringFromClass([Note class])]) {
         // Note change
+        Note *note;
         switch (change) {
             case SPBucketChangeUpdate:
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
                     [_noteEditorViewController didReceiveNewContent];
+                }
+                note = [bucket objectForKey:key];
+                if (note && !note.deleted) {
+                    [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
+                } else {
+                    [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
                 }
                 break;
             case SPBucketChangeInsert:
@@ -629,6 +657,7 @@
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
 					[_noteEditorViewController didDeleteCurrentNote];
 				}
+                [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
 				break;
             default:
                 break;
@@ -683,9 +712,22 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         [_noteListViewController setWaitingForIndex:NO];
+        [self indexSpotlightItems];
     }
 }
 
+- (void)indexSpotlightItems {
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setParentContext:self.simperium.managedObjectContext];
+    
+    [context performBlock:^{
+        NSArray *deleted = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
+        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotes:deleted];
+        
+        NSArray *notes = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
+    }];
+}
 
 #pragma mark ================================================================================
 #pragma mark URL scheme
@@ -725,30 +767,32 @@
         }
         [_simperium save];
         
-        // Hide any modals
-        [self dismissAllModalsAnimated:NO completion:nil];
-        
-        // If root tag list is currently being viewed, push All Notes instead
-        [self.noteListViewController hideSidePanelAnimated:NO completion:nil];
-        
-        // On iPhone, make sure a note isn't currently being edited
-        if (self.navigationController.visibleViewController == _noteEditorViewController) {
-            [self.navigationController popViewControllerAnimated:NO];
-        }
-        
-        // Little trick to postpone until next run loop to ensure controllers have a chance to pop
-        double delayInSeconds = 0.05;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [_noteListViewController openNote:newNote fromIndexPath:nil animated:NO];
-            [self showPasscodeLockIfNecessary];
-        });
+        [self presentNote:newNote];
     }
     
     return true;
 }
 
-
+- (void)presentNote:(Note *)note {
+    // Hide any modals
+    [self dismissAllModalsAnimated:NO completion:nil];
+    
+    // If root tag list is currently being viewed, push All Notes instead
+    [self.noteListViewController hideSidePanelAnimated:NO completion:nil];
+    
+    // On iPhone, make sure a note isn't currently being edited
+    if (self.navigationController.visibleViewController == _noteEditorViewController) {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    
+    // Little trick to postpone until next run loop to ensure controllers have a chance to pop
+    double delayInSeconds = 0.05;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+        [self showPasscodeLockIfNecessary];
+    });
+}
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock
