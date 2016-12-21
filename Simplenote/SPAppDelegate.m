@@ -291,12 +291,15 @@
 	
     // Integrity Check: Fallback to GhostData, if needed
     [SPIntegrityHelper reloadInconsistentNotesIfNeeded:self.simperium];
-    
+
+    // Index (All of the) Spotlight Items if the user upgraded
+    [self indexSpotlightItemsIfNeeded];
+
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
     if (uniqueIdentifier == nil) {
         return false;
@@ -638,26 +641,29 @@
 {
     if ([bucket.name isEqualToString:NSStringFromClass([Note class])]) {
         // Note change
-        Note *note;
         switch (change) {
-            case SPBucketChangeUpdate:
+            case SPBucketChangeTypeUpdate:
+            {
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
                     [_noteEditorViewController didReceiveNewContent];
                 }
-                note = [bucket objectForKey:key];
+                Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
                     [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
                 } else {
                     [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
                 }
+            }
                 break;
-            case SPBucketChangeInsert:
+            case SPBucketChangeTypeInsert:
                 break;
-			case SPBucketChangeDelete:
+			case SPBucketChangeTypeDelete:
+            {
                 if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
 					[_noteEditorViewController didDeleteCurrentNote];
 				}
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
+            }
 				break;
             default:
                 break;
@@ -665,7 +671,8 @@
     } else if ([bucket.name isEqualToString:NSStringFromClass([Tag class])]) {
         // Tag deleted
         switch (change) {
-            case SPBucketChangeDelete: {
+            case SPBucketChangeTypeDelete:
+            {
                 // if selected tag is deleted, swap the note list view controller
                 if ([key isEqual:self.selectedTag]) {
                     self.selectedTag = nil;
@@ -716,7 +723,33 @@
     }
 }
 
-- (void)indexSpotlightItems {
+
+#pragma mark ================================================================================
+#pragma mark Spotlight
+#pragma mark ================================================================================
+
+- (void)indexSpotlightItemsIfNeeded
+{
+    // This process should be executed *just once*, and only if the user is already logged in (AKA "Upgrade")
+    NSString *kSpotlightDidRunKey = @"SpotlightDidRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if ([defaults boolForKey:kSpotlightDidRunKey] == true) {
+        return;
+    }
+
+    [defaults setBool:true forKey:kSpotlightDidRunKey];
+    [defaults synchronize];
+
+    if (self.simperium.user.authenticated == false) {
+        return;
+    }
+
+    [self indexSpotlightItems];
+}
+
+- (void)indexSpotlightItems
+{
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [context setParentContext:self.simperium.managedObjectContext];
     
@@ -728,6 +761,7 @@
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
     }];
 }
+
 
 #pragma mark ================================================================================
 #pragma mark URL scheme
@@ -773,7 +807,8 @@
     return true;
 }
 
-- (void)presentNote:(Note *)note {
+- (void)presentNote:(Note *)note
+{
     // Hide any modals
     [self dismissAllModalsAnimated:NO completion:nil];
     
@@ -793,6 +828,7 @@
         [self showPasscodeLockIfNecessary];
     });
 }
+
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock

@@ -18,7 +18,8 @@ extension CSSearchableItemAttributeSet {
             note.createPreview()
         }
         title = note.titlePreview
-        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.utf16.count)
+
+        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.characters.count)
         contentDescription = note.preview.substring(from: index)
     }
     
@@ -39,7 +40,7 @@ extension CSSearchableIndex {
         let item = CSSearchableItem(note: note)
         indexSearchableItems([item]) { error in
             if let error = error {
-                NSLog("Couldn't index note in spotlight: \(error.localizedDescription)");
+                NSLog("Couldn't index note in spotlight: \(error.localizedDescription)")
             }
         }
     }
@@ -51,7 +52,7 @@ extension CSSearchableIndex {
         
         indexSearchableItems(items) { error in
             if let error = error {
-                NSLog("Couldn't index notes in spotlight: \(error.localizedDescription)");
+                NSLog("Couldn't index notes in spotlight: \(error.localizedDescription)")
             }
         }
     }
@@ -67,7 +68,7 @@ extension CSSearchableIndex {
         
         deleteSearchableItems(withIdentifiers: ids) { error in
             if let error = error {
-                NSLog("Couldn't delete notes from spotlight index: \(error.localizedDescription)");
+                NSLog("Couldn't delete notes from spotlight index: \(error.localizedDescription)")
             }
         }
     }
