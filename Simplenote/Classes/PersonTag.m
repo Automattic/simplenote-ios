@@ -19,7 +19,21 @@
     }
 
     return self;
-    
+}
+
+- (NSUInteger)hash
+{
+    return self.name.hash + self.email.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[PersonTag class]] == false) {
+        return false;
+    }
+
+    PersonTag *second = (PersonTag *)object;
+    return [self.name isEqual:second.name] && [self.email isEqual:second.email];
 }
 
 - (NSComparisonResult)compareName:(PersonTag *)anotherTag
