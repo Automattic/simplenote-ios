@@ -113,7 +113,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         navigationBarTransform = CGAffineTransformIdentity;
         
         bDisableShrinkingNavigationBar = NO;
-        bShouldDelete = NO;
         _keyboardHeight = 0;
         
         // Notifications
@@ -1623,13 +1622,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if ([actionSheet isEqual:deleteActionSheet] && buttonIndex == 0) {
-        bShouldDelete = YES;
-        [self trashNoteAction:nil];
-    }
-}
 
 #pragma mark Note Actions
 
@@ -1830,55 +1822,29 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 }
 
 - (void)trashNoteAction:(id)sender {
+
+    // create a snapshot before the animation
+    UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
+    snapshot.frame = _noteEditorTextView.frame;
+    [self.view addSubview:snapshot];
     
-    bShouldDelete = YES; // quick way to disable action sheet confirmat.
-    // can re-enable in the future
+    [[SPObjectManager sharedManager] trashNote:_currentNote];
+    [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
     
-    // have prompt to make sure user wants to delete
-    if (!bShouldDelete) {
-        
-        deleteActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                        delegate:self
-                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                          destructiveButtonTitle:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")
-                                               otherButtonTitles:nil];
-        
-        if ([UIDevice isPad]) {
-            [deleteActionSheet showFromRect:[self presentationRectForActionButton]
-                                     inView:self.view
-                                   animated:YES];
-        } else {
-            [deleteActionSheet showInView:self.navigationController.view];
-        }
-        
-        
-    } else {
-        
-        bShouldDelete = NO;
+    [self clearNote];
     
-        // create a snapshot before the animation
-        UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-        snapshot.frame = _noteEditorTextView.frame;
-        [self.view addSubview:snapshot];
-        
-        [[SPObjectManager sharedManager] trashNote:_currentNote];
-        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
-        
-        [self clearNote];
-        
-        [UIView animateWithDuration:0.25
-                         animations:^{
-                             
-                             snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
-                             snapshot.alpha = 0.0;
-                             
-                         } completion:^(BOOL finished) {
-                             
-                             [snapshot removeFromSuperview];
-                             [self backButtonAction:nil];
-                             
-                         }];
-    }
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         
+                         snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
+                         snapshot.alpha = 0.0;
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         [snapshot removeFromSuperview];
+                         [self backButtonAction:nil];
+                         
+                     }];
 }
 
 #pragma mark SPHorizontalPickerView delegate methods
