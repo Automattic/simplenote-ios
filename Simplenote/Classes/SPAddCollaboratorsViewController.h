@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import "SPEntryListViewController.h"
 
 
@@ -25,15 +24,10 @@
 
 @end
 
-@interface SPAddCollaboratorsViewController : SPEntryListViewController <ABPeoplePickerNavigationControllerDelegate> {
-    
-    id<SPCollaboratorDelegate> collaboratorDelegate;
-    BOOL hasPermissions;
-}
+@interface SPAddCollaboratorsViewController : SPEntryListViewController
 
-@property (nonatomic, assign) id<SPCollaboratorDelegate> collaboratorDelegate;
+@property (nonatomic, weak) id<SPCollaboratorDelegate> collaboratorDelegate;
 
 - (void)setupWithCollaborators:(NSArray *)collaborators;
-
 
 @end
