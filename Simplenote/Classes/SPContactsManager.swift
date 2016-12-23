@@ -35,6 +35,20 @@ class SPContactsManager: NSObject {
     }
 
 
+    /// Deinitializer
+    ///
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+
+    /// Designed Initializer
+    ///
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(resetCache), name: .CNContactStoreDidChange, object: nil)
+    }
+
     /// Whenever the Auth Status is undetermined, this helper will request access!
     ///
     func requestAuthorizationIfNeeded(completion: ((Bool) -> Void)?) {
@@ -121,5 +135,11 @@ private extension SPContactsManager {
         }
 
         return contacts
+    }
+
+    /// Nukes the People Cache. Useful to deal with "Contacts Updated" Notifications
+    ///
+    @objc func resetCache() {
+        peopleCache = nil
     }
 }
