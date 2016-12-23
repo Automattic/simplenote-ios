@@ -28,12 +28,21 @@
 
 @implementation SPAddCollaboratorsViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setupContactsManager];
+    }
+
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self setupNavigationItem];
-    [self setupContactsManager];
     [self setupTextFields];
 
     if (!self.dataSource) {
