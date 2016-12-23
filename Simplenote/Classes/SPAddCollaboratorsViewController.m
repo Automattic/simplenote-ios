@@ -66,6 +66,12 @@
     });
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
 
 #pragma mark - Private Helpers
 
