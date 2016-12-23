@@ -1057,8 +1057,9 @@
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
 					46A3C96017DFA81A002865AE = {
-						DevelopmentTeam = QXKWK6Q52N;
+						DevelopmentTeam = 99KV9Z6BKV;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1073,7 +1074,7 @@
 					};
 					B5EB1EEB1C204EBD0080A1B3 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QXKWK6Q52N;
+						DevelopmentTeam = 99KV9Z6BKV;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1485,8 +1486,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1514,7 +1516,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1531,8 +1534,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1552,7 +1556,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
@@ -1627,6 +1632,7 @@
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Codality, Inc. (QXKWK6Q52N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Codality, Inc. (QXKWK6Q52N)";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1650,7 +1656,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "96a9375d-8f28-46d5-83fe-2a63d5cd7817";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
@@ -1725,6 +1732,7 @@
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1749,7 +1757,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "67e99035-d0cc-4203-8efa-72fea8e7cfad";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Internal";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
@@ -1765,7 +1774,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = SimplenoteShare/SimplenoteShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1776,7 +1787,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ca1e7ef-b6ac-4c6e-84f4-0949bbd768f5";
+				PROVISIONING_PROFILE = "00e9d04a-06b1-48d6-98c4-c3f6ae9b7c76";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Development";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1805,7 +1817,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ca1e7ef-b6ac-4c6e-84f4-0949bbd768f5";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Development";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -1834,7 +1847,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8d95ca7b-32c7-4082-8f77-6d02ef545bcf";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Internal";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -1868,7 +1882,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55325f77-bf57-41cc-a238-0bab488daaa6";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Distribution";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
