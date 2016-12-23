@@ -68,8 +68,9 @@ class SPContactsManager: NSObject {
             return []
         }
 
+        let normalizedKeyword = keyword.lowercased()
         return people.filter { person in
-            return person.email.contains(keyword) || person.name.contains(keyword)
+            return person.email.contains(normalizedKeyword) || person.name.contains(normalizedKeyword)
         }
     }
 }
