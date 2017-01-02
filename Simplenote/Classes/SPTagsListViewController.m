@@ -132,6 +132,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
     self.tableView.frame = tableViewFrame;
