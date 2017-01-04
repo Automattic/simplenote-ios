@@ -41,7 +41,6 @@ class SPContactsManager: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
 
-
     /// Designed Initializer
     ///
     override init() {
