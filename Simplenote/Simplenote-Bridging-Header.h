@@ -4,4 +4,5 @@
 
 
 #import "SPConstants.h"
+#import "PersonTag.h"
 #import "Note.h"

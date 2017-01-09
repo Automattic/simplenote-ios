@@ -12,165 +12,185 @@
 #import "VSThemeManager.h"
 #import "NSString+Metadata.h"
 #import "PersonTag.h"
-#import "SPAddressBookManager.h"
+#import <ContactsUI/ContactsUI.h>
+#import "Simplenote-Swift.h"
+
+
+
+#pragma mark - Private Helpers
+
+@interface SPAddCollaboratorsViewController () <CNContactPickerDelegate>
+@property (nonatomic, strong) SPContactsManager *contactsManager;
+@end
+
+
+#pragma mark - Implementation
 
 @implementation SPAddCollaboratorsViewController
 
-- (id<SPCollaboratorDelegate>)collaboratorDelegate
+- (instancetype)init
 {
-    return collaboratorDelegate;
-}
-- (void)setCollaboratorDelegate:(id<SPCollaboratorDelegate>)newCollaboratorDelegate
-{
-    collaboratorDelegate = newCollaboratorDelegate;
-}
+    self = [super init];
+    if (self) {
+        [self setupContactsManager];
+    }
 
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // set navigation bar
-    self.navigationItem.title = NSLocalizedString(@"Collaborators", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStyleDone target:self action:@selector(onDone)];
-    
-    entryTextField.placeholder = NSLocalizedString(@"Add a new collaborator...", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
+    [self setupNavigationItem];
+    [self setupTextFields];
 
-    if (!self.dataSource)
+    if (!self.dataSource) {
         self.dataSource = [NSMutableArray arrayWithCapacity:3];
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+
     [primaryTableView reloadData];
-    
-    hasPermissions = [[SPAddressBookManager sharedManager] authorizationStatus] == kABAuthorizationStatusAuthorized;
-    
-    if (hasPermissions)
-        [[SPAddressBookManager sharedManager] loadPeople];
-    
-    
+    [self.contactsManager requestAuthorizationIfNeededWithCompletion:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
- 
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
-    
-    if ([[SPAddressBookManager sharedManager] authorizationStatus] == kABAuthorizationStatusNotDetermined)
-        [[SPAddressBookManager sharedManager] requestAddressBookPermissions:^(BOOL success) {
-            
-            hasPermissions = success;
-            
-        }];
-    else if (!(self.dataSource.count > 0)) {
-        
-        // GDC is used to call becomeFirstResponder asynchronously to fix
-        // a layout issue on iPad in landscape. Views presented as a UIModalPresentationFormSheet
-        // and present a keyboard in viewDidAppear layout incorrectly
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [entryTextField becomeFirstResponder];
-        });
+
+    if (self.dataSource.count == 0) {
+        return;
     }
 
+    // GDC is used to call becomeFirstResponder asynchronously to fix
+    // a layout issue on iPad in landscape. Views presented as a UIModalPresentationFormSheet
+    // and present a keyboard in viewDidAppear layout incorrectly
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [entryTextField becomeFirstResponder];
+    });
 }
 
-- (void)setupWithCollaborators:(NSArray *)collaborators {
-    
-    NSInteger count = collaborators.count;
-    self.dataSource = [NSMutableArray arrayWithCapacity:(count > 0 ? count : 2)];
-    
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
+
+#pragma mark - Private Helpers
+
+- (void)setupNavigationItem
+{
+    self.title = NSLocalizedString(@"Collaborators", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil)
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self
+                                                                             action:@selector(onDone)];
+}
+
+- (void)setupContactsManager
+{
+    self.contactsManager = [SPContactsManager new];
+}
+
+- (void)setupTextFields
+{
+    entryTextField.placeholder = NSLocalizedString(@"Add a new collaborator...", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
+}
+
+- (void)setupWithCollaborators:(NSArray *)collaborators
+{
+    NSMutableSet *merged = [NSMutableSet set];
+
     for (NSString *tag in collaborators) {
-        
-        NSArray *matchingPeople = [[SPAddressBookManager sharedManager] matchingPeopleForString:tag filterOutPeople:nil];
-        
-        PersonTag *person;
-        if (matchingPeople.count == 1)
-            person = matchingPeople[0];
-        else
-            person = [[PersonTag alloc] initWithName:nil
-                                               email:tag];
-        
-        person.active = YES;
-        [self.dataSource addObject:person];
-        
+        NSArray *filtered = [self.contactsManager peopleWith:tag];
+        if (filtered.count == 0) {
+            PersonTag *person = [[PersonTag alloc] initWithName:nil email:tag];
+            [merged addObject:person];
+            continue;
+        }
+
+        [merged addObjectsFromArray:filtered];
     }
-    
+
+    self.dataSource = [[[merged allObjects] sortedArrayUsingSelector:@selector(compareName:)] mutableCopy];
+
     [primaryTableView reloadData];
 }
 
 
 #pragma mark UITableViewDataSource Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if ([tableView isEqual:primaryTableView])
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if ([tableView isEqual:primaryTableView]) {
         return self.dataSource.count;
-    else
-        return [super tableView:tableView numberOfRowsInSection:section];
-    
-    return 0;
-    
+    }
+
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    if ([tableView isEqual:primaryTableView])
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([tableView isEqual:primaryTableView]) {
         return self.dataSource.count > 0 ? NSLocalizedString(@"Current Collaborators", nil) : nil;
-    else
-        return [super tableView:tableView titleForHeaderInSection:section];
-    
+    }
+
+    return [super tableView:tableView titleForHeaderInSection:section];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    
-    if ([tableView isEqual:primaryTableView])
-        return self.dataSource.count > 0? nil : NSLocalizedString(@"collaborators-description", nil);
-    else
-        return [super tableView:tableView titleForFooterInSection:section];
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if ([tableView isEqual:primaryTableView]) {
+        return self.dataSource.count > 0 ? nil : NSLocalizedString(@"collaborators-description", nil);
+    }
+
+    return [super tableView:tableView titleForFooterInSection:section];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     SPEntryListCell *cell = (SPEntryListCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-    
     PersonTag *personTag;
-    if ([tableView isEqual:primaryTableView])
+
+    if ([tableView isEqual:primaryTableView]) {
         personTag = self.dataSource[indexPath.row];
-    else
+    } else {
         personTag = self.autoCompleteDataSource[indexPath.row];
+    }
     
     BOOL hasName = personTag.name.length > 0;
     NSString *primaryText = hasName ? personTag.name : personTag.email;
     NSString *secondaryText = hasName ? personTag.email : nil;
     
-    [cell setupWithPrimaryText:primaryText
-                 secondaryText:secondaryText
-                   checkmarked:personTag.active];
+    [cell setupWithPrimaryText:primaryText secondaryText:secondaryText checkmarked:personTag.active];
     
     return cell;
-    
 }
 
-- (void)removeItemFromDataSourceAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)removeItemFromDataSourceAtIndexPath:(NSIndexPath *)indexPath
+{
     PersonTag *person = self.dataSource[indexPath.row];
-    [collaboratorDelegate collaboratorViewController:self
-                               didRemoveCollaborator:person.email];
-    
+
+    [self.collaboratorDelegate collaboratorViewController:self didRemoveCollaborator:person.email];
     [super removeItemFromDataSourceAtIndexPath:indexPath];
 }
 
+
 #pragma mark UITableViewDelegate Methods
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
@@ -179,12 +199,11 @@
         PersonTag *person = self.dataSource[indexPath.row];
         person.active = !person.active;
         
-        if (person.active)
-            [collaboratorDelegate collaboratorViewController:self
-                                          didAddCollaborator:person.email];
-        else
-            [collaboratorDelegate collaboratorViewController:self
-                                       didRemoveCollaborator:person.email];
+        if (person.active) {
+            [self.collaboratorDelegate collaboratorViewController:self didAddCollaborator:person.email];
+        } else {
+            [self.collaboratorDelegate collaboratorViewController:self didRemoveCollaborator:person.email];
+        }
         
         [tableView reloadData];
         
@@ -193,22 +212,19 @@
         PersonTag *person = self.autoCompleteDataSource[indexPath.row];
         [self addPersonTag:person];
     }
-    
 }
 
-
-- (void)addPersonTag:(PersonTag *)person {
-    
+- (void)addPersonTag:(PersonTag *)person
+{
     // make sure email address is actually an email address
     person.email = [person.email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (![person.email containsEmailAddress])
+    if (![person.email containsEmailAddress]) {
         return;
+    }
     
     // check to see from delegate if should add collaborator
-    if ([collaboratorDelegate collaboratorViewController:self
-                                   shouldAddCollaborator:person.email]) {
-        [collaboratorDelegate collaboratorViewController:self
-                                      didAddCollaborator:person.email];
+    if ([self.collaboratorDelegate collaboratorViewController:self shouldAddCollaborator:person.email]) {
+        [self.collaboratorDelegate collaboratorViewController:self didAddCollaborator:person.email];
         
         person.active = YES;
         [self.dataSource addObject:person];
@@ -218,47 +234,40 @@
                       withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self updateAutoCompleteMatchesForString:nil];
-        
     }
 }
 
-- (void)processTextInField {
-    
-    // make sure text is an email address
-    
-    UITextField *textField = entryTextField;
-    if ([textField.text containsEmailAddress]) {
-        
-        NSString *email = textField.text;
-        
-        // check to see if this person is in the addressbook
-        NSArray *matchingPeople = [[SPAddressBookManager sharedManager] matchingPeopleForString:email filterOutPeople:nil];
-        
-        PersonTag *person;
-        if (matchingPeople.count == 1)
-            person = matchingPeople[0];
-        else
-            person = [[PersonTag alloc] initWithName:nil
-                                               email:email];
-        
-        [self addPersonTag:person];
-        
-    }
-}
-
-
-- (void)updateAutoCompleteMatchesForString:(NSString *)string {
-    
-    if (!hasPermissions)
+- (void)processTextInField
+{
+    NSString *email = entryTextField.text;
+    if (email.containsEmailAddress == false) {
         return;
-    
+    }
+
+    NSArray *filtered = [self.contactsManager peopleWith:email];
+    PersonTag *person = filtered.firstObject ?: [[PersonTag alloc] initWithName:nil email:email];
+
+    [self addPersonTag:person];
+}
+
+
+- (void)updateAutoCompleteMatchesForString:(NSString *)string
+{
+    if (self.contactsManager.authorized == false) {
+        return;
+    }
+
     if (string.length > 0) {
-        self.autoCompleteDataSource = [[SPAddressBookManager sharedManager] matchingPeopleForString:string
-                                                                             filterOutPeople:self.dataSource];
+        NSArray *peopleFiltered = [self.contactsManager peopleWith:string];
+        NSSet *datasourceSet = [NSSet setWithArray:self.dataSource];
+        NSMutableSet *peopleSet = [NSMutableSet setWithArray:peopleFiltered];
+        [peopleSet minusSet:datasourceSet];
+
+        self.autoCompleteDataSource = [peopleSet.allObjects sortedArrayUsingSelector:@selector(compareName:)];
     } else {
         self.autoCompleteDataSource = nil;
     }
-    
+
     [self updatedAutoCompleteMatches];
 }
 
@@ -270,82 +279,47 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark ABPeoplePickerNavigationControllerDelegate methods
 
-- (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker
+#pragma mark CNContactPickerDelegate Conformance
+
+- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self createPeronTagFromProperty:contactProperty];
 }
 
 
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-    
-    // see if only 1 email address exists. If so, dismiss picker
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person, kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses) > 1) {
-        CFRelease(emailAddresses);
-        return YES;
-    }
-    
-    [self createPeronTagFromPerson:person emailIdentifier:0];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+#pragma mark - Helpers
 
-    CFRelease(emailAddresses);
-    
-    return NO;
-}
-
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
-      shouldContinueAfterSelectingPerson:(ABRecordRef)person
-                                property:(ABPropertyID)property
-                              identifier:(ABMultiValueIdentifier)identifier
+- (void)createPeronTagFromProperty:(CNContactProperty *)property
 {
-    [self createPeronTagFromPerson:person emailIdentifier:identifier];
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
-    return NO;
+    NSString *name = [CNContactFormatter stringFromContact:property.contact style:CNContactFormatterStyleFullName];
+    NSString *email = property.value;
+
+    if (email.length == 0) {
+        return;
+    }
+
+    PersonTag *personTag = [[PersonTag alloc] initWithName:name email:email];
+    [self addPersonTag:personTag];
 }
 
-- (void)createPeronTagFromPerson:(ABRecordRef)person emailIdentifier:(ABMultiValueIdentifier)identifier {
-    
-    NSString* name = (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
-    
-    NSString* email = nil;
-    ABMultiValueRef emailAddresses = ABRecordCopyValue(person,
-                                                       kABPersonEmailProperty);
-    if (ABMultiValueGetCount(emailAddresses) > 0) {
-        email = (__bridge_transfer NSString*)
-        ABMultiValueCopyValueAtIndex(emailAddresses,identifier);
-    }
-    
-    CFRelease(emailAddresses);
-    
-    
-    if (email.length > 0) {
-        PersonTag *personTag = [[PersonTag alloc] initWithName:name email:email];
-        [self addPersonTag:personTag];
-    }
-}
+
+#pragma mark - Action Helpers
 
 - (void)entryFieldPlusButtonTapped:(id)sender {
     
-    [self showAddressPickerAction:sender];
+    [self displayAddressPicker];
 }
 
-- (void)showAddressPickerAction:(id)sender {
-    
-    ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-    picker.displayedProperties = @[[NSNumber numberWithInt:kABPersonEmailProperty]];
-    picker.peoplePickerDelegate = self;
-    picker.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:picker
-                                            animated:YES
-                                          completion:nil];
-    
-}
+- (void)displayAddressPicker
+{
+    CNContactPickerViewController *pickerViewController = [CNContactPickerViewController new];
+    pickerViewController.predicateForEnablingContact = [NSPredicate predicateWithFormat:@"emailAddresses.@count > 0"];
+    pickerViewController.displayedPropertyKeys = @[CNContactEmailAddressesKey];
+    pickerViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    pickerViewController.delegate = self;
 
+    [self presentViewController:pickerViewController animated:YES completion:nil];
+}
 
 @end

@@ -58,6 +58,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
     entryTextField.keyboardAppearance = self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+    entryTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     entryTextField.delegate = self;
     [entryFieldBackground addSubview:entryTextField];
     
