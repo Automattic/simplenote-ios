@@ -22,7 +22,7 @@
 
 @end
 
-NSString *const SPCondensedNoteListPref;
-NSString *const SPCondensedNoteListPreferenceChangedNotification;
-NSString *const SPAlphabeticalSortPref;
-NSString *const SPAlphabeticalSortPreferenceChangedNotification;
+extern NSString *const SPCondensedNoteListPref;
+extern NSString *const SPCondensedNoteListPreferenceChangedNotification;
+extern NSString *const SPAlphabeticalSortPref;
+extern NSString *const SPAlphabeticalSortPreferenceChangedNotification;

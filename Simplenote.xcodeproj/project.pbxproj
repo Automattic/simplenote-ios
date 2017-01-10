@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E2337828456992D0A53E514 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6E920DC2B6ABC021AF145F /* Pods_Automattic_Simplenote.framework */; };
+		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */; };
@@ -20,7 +21,6 @@
 		46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E239601017B6A22800504FFB /* SPOutsideTouchView.m */; };
 		46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */; };
 		46A3C96F17DFA81A002865AE /* SPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCE0117960CBC00A17ED2 /* SPButton.m */; };
-		46A3C97017DFA81A002865AE /* SPAddressBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39D817A42D4C00B2591A /* SPAddressBookManager.m */; };
 		46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */ = {isa = PBXBuildFile; fileRef = E2450950179466F5008C5922 /* UIButton+Images.m */; };
 		46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = E235CE3417CBAC1400F5AE02 /* SPTransitionSnapshot.m */; };
 		46A3C97717DFA81A002865AE /* SPTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F0C33E1797077300CF9413 /* SPTagView.m */; };
@@ -73,8 +73,6 @@
 		46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */; };
 		46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D444041799F1DD0060FDE2 /* SPTextView.m */; };
 		46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C751788D0FF00785EF3 /* NSString+Condensing.m */; };
-		46A3C9B117DFA81A002865AE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C39DC17A452C300B2591A /* AddressBookUI.framework */; };
-		46A3C9B217DFA81A002865AE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25C39DA17A42DA600B2591A /* AddressBook.framework */; };
 		46A3C9B317DFA81A002865AE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C6D1788A59800785EF3 /* libz.dylib */; };
 		46A3C9B417DFA81A002865AE /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C691788A58100785EF3 /* libicucore.dylib */; };
 		46A3C9B517DFA81A002865AE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149421799F4BD00DC9690 /* CoreFoundation.framework */; };
@@ -89,14 +87,6 @@
 		46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4417848E8500E55842 /* InfoPlist.strings */; };
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
-		46A3C9C517DFA81A002865AE /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */; };
-		46A3C9C617DFA81A002865AE /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */; };
-		46A3C9CB17DFA81A002865AE /* SourceSansPro-SemiboldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */; };
-		46A3C9CC17DFA81A002865AE /* SourceSansPro-It.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */; };
-		46A3C9CE17DFA81A002865AE /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */; };
-		46A3C9D017DFA81A002865AE /* SourceSansPro-LightIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */; };
-		46A3C9D217DFA81A002865AE /* SourceSansPro-BoldIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */; };
-		46A3C9D317DFA81A002865AE /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
 		B50789FF1C1F5592009F097A /* markdown-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 1748382E1BC1CC2D00E834AF /* markdown-default.css */; };
 		B5078A001C1F5595009F097A /* markdown-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 17BC3D461BC46BA800535DF3 /* markdown-dark.css */; };
@@ -105,6 +95,9 @@
 		B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */; };
 		B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = B512AF961C20B14200FE76D8 /* SPAnimations.m */; };
+		B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */; };
+		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
+		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B51EC6FC1B8FCEA900DFB4A5 /* SPTextLinkifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B51EC6FA1B8FCEA900DFB4A5 /* SPTextLinkifier.m */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
 		B521A19A1BC8452100E1CF2A /* SPGoogleTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1981BC8452100E1CF2A /* SPGoogleTracker.m */; };
@@ -155,6 +148,7 @@
 		E29ADD5F17848E8500E55842 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD5D17848E8500E55842 /* InfoPlist.strings */; };
 		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
 		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
+		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +187,8 @@
 		17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownPreviewViewController.h; path = Classes/SPMarkdownPreviewViewController.h; sourceTree = "<group>"; };
 		17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownPreviewViewController.m; path = Classes/SPMarkdownPreviewViewController.m; sourceTree = "<group>"; };
 		36966A74C74B55D0F708DD57 /* Pods_Automattic_SimplenoteShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_SimplenoteShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
+		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
 		37CD04B91A60538B00C4A8E0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BA1A6053CC00C4A8E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BB1A6053E900C4A8E0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -230,6 +226,9 @@
 		B512AF931C20A39700FE76D8 /* Simplenote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Simplenote.entitlements; sourceTree = "<group>"; };
 		B512AF951C20B14200FE76D8 /* SPAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnimations.h; sourceTree = "<group>"; };
 		B512AF961C20B14200FE76D8 /* SPAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnimations.m; sourceTree = "<group>"; };
+		B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPContactsManager.swift; path = Classes/SPContactsManager.swift; sourceTree = "<group>"; };
+		B518899F1E0D5F2200E71B83 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		B51889A31E0DB01E00E71B83 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		B51EC6F91B8FCEA900DFB4A5 /* SPTextLinkifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTextLinkifier.h; path = Classes/SPTextLinkifier.h; sourceTree = "<group>"; };
 		B51EC6FA1B8FCEA900DFB4A5 /* SPTextLinkifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTextLinkifier.m; path = Classes/SPTextLinkifier.m; sourceTree = "<group>"; };
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
@@ -351,8 +350,6 @@
 		E25C39D217A41FCC00B2591A /* SPEntryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPEntryListCell.m; path = Classes/SPEntryListCell.m; sourceTree = "<group>"; };
 		E25C39D417A42C4900B2591A /* PersonTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonTag.h; path = Classes/PersonTag.h; sourceTree = "<group>"; };
 		E25C39D517A42C4900B2591A /* PersonTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonTag.m; path = Classes/PersonTag.m; sourceTree = "<group>"; };
-		E25C39D717A42D4C00B2591A /* SPAddressBookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAddressBookManager.h; path = Classes/SPAddressBookManager.h; sourceTree = "<group>"; };
-		E25C39D817A42D4C00B2591A /* SPAddressBookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAddressBookManager.m; path = Classes/SPAddressBookManager.m; sourceTree = "<group>"; };
 		E25C39DA17A42DA600B2591A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		E25C39DC17A452C300B2591A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPEntryListAutoCompleteCell.h; path = Classes/SPEntryListAutoCompleteCell.h; sourceTree = "<group>"; };
@@ -447,17 +444,10 @@
 		E2FCA5F6178911FC00FC229D /* VSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTheme.m; sourceTree = "<group>"; };
 		E2FCA5F7178911FC00FC229D /* VSThemeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSThemeLoader.h; sourceTree = "<group>"; };
 		E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeLoader.m; sourceTree = "<group>"; };
-		E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
-		E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BoldIt.ttf"; sourceTree = "<group>"; };
-		E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-It.ttf"; sourceTree = "<group>"; };
-		E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
-		E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-LightIt.ttf"; sourceTree = "<group>"; };
-		E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
-		E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
-		E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiboldIt.ttf"; sourceTree = "<group>"; };
 		E2FCA6141789146D00FC229D /* VSThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSThemeManager.h; sourceTree = "<group>"; };
 		E2FCA6151789146D00FC229D /* VSThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeManager.m; sourceTree = "<group>"; };
 		EC63A736071A5E8129D97C5B /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
+		F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CSSearchable+Helpers.swift"; path = "Classes/CSSearchable+Helpers.swift"; sourceTree = "<group>"; };
 		FE6E920DC2B6ABC021AF145F /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -467,10 +457,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5BDD8771BEA6C19006EB940 /* AdSupport.framework in Frameworks */,
+				B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */,
+				B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */,
 				B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */,
 				B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */,
-				46A3C9B117DFA81A002865AE /* AddressBookUI.framework in Frameworks */,
-				46A3C9B217DFA81A002865AE /* AddressBook.framework in Frameworks */,
 				46A3C9B317DFA81A002865AE /* libz.dylib in Frameworks */,
 				46A3C9B417DFA81A002865AE /* libicucore.dylib in Frameworks */,
 				46A3C9B517DFA81A002865AE /* CoreFoundation.framework in Frameworks */,
@@ -618,21 +608,6 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		B512AF9A1C20B2EB00FE76D8 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E2FCA5FE1789136D00FC229D /* SourceSansPro-Bold.ttf */,
-				E2FCA5FF1789136D00FC229D /* SourceSansPro-BoldIt.ttf */,
-				E2FCA6021789136D00FC229D /* SourceSansPro-It.ttf */,
-				E2FCA6031789136D00FC229D /* SourceSansPro-Light.ttf */,
-				E2FCA6041789136D00FC229D /* SourceSansPro-LightIt.ttf */,
-				E2FCA6051789136D00FC229D /* SourceSansPro-Regular.ttf */,
-				E2FCA6061789136D00FC229D /* SourceSansPro-Semibold.ttf */,
-				E2FCA6071789136D00FC229D /* SourceSansPro-SemiboldIt.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
 		B521A19B1BC8452800E1CF2A /* Trackers */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +626,7 @@
 			children = (
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
+				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -685,6 +661,7 @@
 				B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */,
 				174838271BBDCAA400E834AF /* SPMarkdownParser.h */,
 				174838281BBDCAA400E834AF /* SPMarkdownParser.m */,
+				B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -704,6 +681,8 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
+				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				E23D43B117A8235B006811F2 /* MagnifierView.h */,
 				E23D43B217A8235B006811F2 /* MagnifierView.m */,
@@ -806,6 +785,8 @@
 		E29ADD3A17848E8500E55842 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B51889A31E0DB01E00E71B83 /* ContactsUI.framework */,
+				B518899F1E0D5F2200E71B83 /* Contacts.framework */,
 				E25C39DC17A452C300B2591A /* AddressBookUI.framework */,
 				E25C39DA17A42DA600B2591A /* AddressBook.framework */,
 				B566A1DD189AA74600DC3F2D /* AdSupport.framework */,
@@ -905,8 +886,6 @@
 				B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
-				E25C39D717A42D4C00B2591A /* SPAddressBookManager.h */,
-				E25C39D817A42D4C00B2591A /* SPAddressBookManager.m */,
 				E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */,
 				E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */,
 				E215C790180B115C00AD36B5 /* SPNavigationController.h */,
@@ -977,7 +956,6 @@
 			isa = PBXGroup;
 			children = (
 				1748382D1BC1CAAB00E834AF /* CSS */,
-				B512AF9A1C20B2EB00FE76D8 /* Fonts */,
 				E29ADD4D17848E8500E55842 /* Images.xcassets */,
 				B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */,
 				B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */,
@@ -1038,7 +1016,6 @@
 				B5EB1EE91C204EBD0080A1B3 /* Frameworks */,
 				B5EB1EEA1C204EBD0080A1B3 /* Resources */,
 				B596467F1C46BD83001537E5 /* ShellScript */,
-				559EB79119919974CA6E3098 /* [CP] Embed Pods Frameworks */,
 				607333470D732FBB99CB86F9 /* [CP] Copy Pods Resources */,
 				B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */,
 			);
@@ -1076,11 +1053,13 @@
 			attributes = {
 				CLASSPREFIX = SP;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
 					46A3C96017DFA81A002865AE = {
-						DevelopmentTeam = QXKWK6Q52N;
+						DevelopmentTeam = 99KV9Z6BKV;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1095,7 +1074,8 @@
 					};
 					B5EB1EEB1C204EBD0080A1B3 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QXKWK6Q52N;
+						DevelopmentTeam = 99KV9Z6BKV;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1156,20 +1136,12 @@
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
-				46A3C9C517DFA81A002865AE /* SourceSansPro-Regular.ttf in Resources */,
-				46A3C9C617DFA81A002865AE /* SourceSansPro-Light.ttf in Resources */,
-				46A3C9CB17DFA81A002865AE /* SourceSansPro-SemiboldIt.ttf in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
-				46A3C9CC17DFA81A002865AE /* SourceSansPro-It.ttf in Resources */,
-				46A3C9CE17DFA81A002865AE /* SourceSansPro-Bold.ttf in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
 				B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */,
-				46A3C9D017DFA81A002865AE /* SourceSansPro-LightIt.ttf in Resources */,
-				46A3C9D217DFA81A002865AE /* SourceSansPro-BoldIt.ttf in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
-				46A3C9D317DFA81A002865AE /* SourceSansPro-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,22 +1194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		559EB79119919974CA6E3098 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		607333470D732FBB99CB86F9 /* [CP] Copy Pods Resources */ = {
@@ -1322,7 +1279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1352,7 +1309,6 @@
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
-				46A3C97017DFA81A002865AE /* SPAddressBookManager.m in Sources */,
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
@@ -1379,6 +1335,7 @@
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				46A3C98717DFA81A002865AE /* MagnifierView.m in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
+				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
@@ -1410,6 +1367,7 @@
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
+				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A517DFA81A002865AE /* UIView+ImageRepresentation.m in Sources */,
@@ -1421,6 +1379,7 @@
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
+				37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */,
 				B521A19A1BC8452100E1CF2A /* SPGoogleTracker.m in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				46A3C9AC17DFA81A002865AE /* UIView+Subviews.m in Sources */,
@@ -1522,13 +1481,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 120A86031FEA806F779515C0 /* Pods-Automattic-Simplenote.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1556,9 +1516,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1567,13 +1529,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50598176A2CE081E99C2E695 /* Pods-Automattic-Simplenote.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1593,8 +1556,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "06b1b84f-41fb-4cd3-8eff-a09298fe11ed";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1602,7 +1567,9 @@
 		B50789F61C1F4F5A009F097A /* Distribution AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1612,13 +1579,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1652,13 +1625,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6C1D37AEEF2D6D7B8CA1407 /* Pods-Automattic-Simplenote.distribution appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Codality, Inc. (QXKWK6Q52N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Codality, Inc. (QXKWK6Q52N)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1682,8 +1656,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "96a9375d-8f28-46d5-83fe-2a63d5cd7817";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Distribution AppStore";
@@ -1691,7 +1667,9 @@
 		B50789FA1C1F4F63009F097A /* Distribution Internal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1701,13 +1679,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1741,13 +1725,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A0290D16DDD82B07B4D2B5B5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1772,8 +1757,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote;
 				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "67e99035-d0cc-4203-8efa-72fea8e7cfad";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote iOS Internal";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Distribution Internal";
@@ -1782,11 +1769,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 142BB042A41077A3F1E05F57 /* Pods-Automattic-SimplenoteShare.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = SimplenoteShare/SimplenoteShare.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1797,10 +1787,12 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ca1e7ef-b6ac-4c6e-84f4-0949bbd768f5";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Development";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1808,6 +1800,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC63A736071A5E8129D97C5B /* Pods-Automattic-SimplenoteShare.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = SimplenoteShare/SimplenoteShare.entitlements;
@@ -1824,9 +1817,11 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0ca1e7ef-b6ac-4c6e-84f4-0949bbd768f5";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Development";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1834,6 +1829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3ADF01B37A9429A7D6FAC94C /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = SimplenoteShare/SimplenoteShare.entitlements;
@@ -1851,9 +1847,11 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8d95ca7b-32c7-4082-8f77-6d02ef545bcf";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Internal";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Distribution Internal";
 		};
@@ -1861,6 +1859,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D805D59818FC99438F2F637 /* Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-AppStore.entitlements";
@@ -1883,16 +1882,20 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55325f77-bf57-41cc-a238-0bab488daaa6";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Share iOS Distribution";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Distribution AppStore";
 		};
 		E29ADD6217848E8500E55842 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1902,20 +1905,26 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1932,7 +1941,9 @@
 		E29ADD6317848E8500E55842 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1942,13 +1953,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -1957,6 +1974,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

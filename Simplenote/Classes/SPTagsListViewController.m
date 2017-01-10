@@ -18,19 +18,23 @@
 #import "SPButton.h"
 #import "SPTracker.h"
 
-#define kSectionAllNotes 0
-#define kSectionTrash 2
-#define kSectionTags 1
-#define kSectionEdit 3
-#define kSectionSettings 4
+
+// MARK: - Constants
+//
+#define kSectionTags 0
 
 #define kActionSheetDeleteIndex 0
 #define kActionSheetRenameIndex 1
 #define kActionSheetCancelIndex 2
 
 static NSString * const SPTagTrashKey = @"trash";
+static CGFloat const SPSettingsButtonHeight = 40;
+static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
+static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 
+// MARK: - Private
+//
 @interface SPTagsListViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -44,6 +48,9 @@ static NSString * const SPTagTrashKey = @"trash";
 
 @end
 
+
+// MARK: - SPTagsListViewController Implementation
+//
 @implementation SPTagsListViewController
 @synthesize fetchedResultsController=__fetchedResultsController;
 
@@ -74,15 +81,18 @@ static NSString * const SPTagTrashKey = @"trash";
     
     // apply styling
     self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+
+    settingsButton = [self buildSettingsButton];
+    [self.view addSubview:settingsButton];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.alwaysBounceVertical = YES;
     self.tableView.rowHeight = 36;
     self.tableView.allowsSelection = YES;
@@ -94,22 +104,18 @@ static NSString * const SPTagTrashKey = @"trash";
            forCellReuseIdentifier:cellIdentifier];
     [self.tableView registerClass:[SPTagListViewCell class]
            forCellReuseIdentifier:cellWithIconIdentifier];
+    [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
     // Register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     _tagImage = [[UIImage imageNamed:@"icon_tag"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _sortImage = [[UIImage imageNamed:@"icon_sort"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _sortImage = [[UIImage imageNamed:@"icon_sort"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -118,17 +124,26 @@ static NSString * const SPTagTrashKey = @"trash";
     [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
     [[UIMenuController sharedMenuController] update];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(menuDidChangeVisibility:)
-                                                 name:UIMenuControllerDidHideMenuNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(menuDidChangeVisibility:)
-                                                 name:UIMenuControllerDidShowMenuNotification
-                                               object:nil];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
 
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
+    self.tableView.frame = tableViewFrame;
+
+    settingsButton.frame = CGRectMake(tableViewFrame.origin.x,
+                                      tableViewFrame.size.height,
+                                      tableViewFrame.size.width,
+                                      SPSettingsButtonHeight);
+
+    [self updateHeaderButtonHighlight];
 }
 
 - (VSTheme *)theme {
@@ -137,6 +152,7 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (void)themeDidChange {
+    [self updateHeaderColors];
     customView.fillColor = [self.theme colorForKey:@"backgroundColor"];
     customView.borderColor = [self.theme colorForKey:@"tagListSeparatorColor"];
 
@@ -150,9 +166,50 @@ static NSString * const SPTagTrashKey = @"trash";
     [self.view setNeedsLayout];
 }
 
+- (void)updateHeaderColors
+{
+    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    footerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    tagsLabel.textColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
+    [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+
+    [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+
+    [settingsButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+    [settingsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+    [settingsButton setTintColor:[self.theme colorForKey:@"textColor"]];
+
+    [editTagsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+}
+
 - (void)menuDidChangeVisibility:(UIMenuController *)menuController {
     
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
+}
+
+#pragma mark - Button actions
+
+-(void)allNotesTap:(UIButton *)sender
+{
+    [self openNoteListForTagName:nil];
+}
+
+-(void)trashTap:(UIButton *)sender
+{
+    [SPTracker trackTrashViewed];
+    [self openNoteListForTagName:SPTagTrashKey];
+}
+
+-(void)settingsTap:(UIButton *)sender
+{
+    [[SPAppDelegate sharedDelegate] showOptions];
+}
+
+-(void)editTagsTap:(UIButton *)sender
+{
+    [self setEditing:!bEditing canceled:NO];
 }
 
 
@@ -187,37 +244,21 @@ static NSString * const SPTagTrashKey = @"trash";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (section == kSectionSettings || section == kSectionEdit)
+    if ((section == kSectionTags) &&
+        self.fetchedResultsController.fetchedObjects.count == 0) {
         return 1;
-    else if ((section == kSectionTrash || section == kSectionTags) &&
-             self.fetchedResultsController.fetchedObjects.count == 0)
-        return 1;
+    }
     
     return 10;
     
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    if (section == kSectionTrash || section == kSectionEdit)
-        return 1;
-    
-    return 10;
-    
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == kSectionAllNotes || section == kSectionTrash || section == kSectionSettings)
-		return bEditing ? 0 : 1;
-    else if (section == kSectionEdit)
-        return (self.numTags == 0 || bEditing) ? 0 : 1;
-	else if (section == kSectionTags)
+    if (section == kSectionTags) {
 		return [self numTags];
+    }
     
 	return 0;
 }
@@ -225,19 +266,10 @@ static NSString * const SPTagTrashKey = @"trash";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SPTagListViewCell *cell;
-    if (indexPath.section == kSectionTags) {
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-        if (!cell) {
-            cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-                
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:cellWithIconIdentifier];
-
-        if (!cell) {
-            cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellWithIconIdentifier];
-        }
+    if (!cell) {
+        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
     [cell resetCellForReuse];
@@ -247,55 +279,17 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
-    
     cell.tagNameTextField.delegate = self;
     cell.delegate = self;
     
     NSString *cellText;
     UIImage *cellIcon;
     BOOL selected = NO;
-    
-    if (indexPath.section == kSectionAllNotes) {
-        
-        cellText = NSLocalizedString(@"All Notes", @"Title of option to display all notes");
-        cellIcon = _allNotesImage;
-        
-        selected = [SPAppDelegate sharedDelegate].selectedTag == nil;
-        
-    } else if (indexPath.section == kSectionTrash) {
-        
-        // Set up the cell...
-        cellText = NSLocalizedString(@"Trash-noun", @"Trash (noun) - the location where deleted notes are stored");
-        cellIcon = _trashImage;
-        
-        selected = [[SPAppDelegate sharedDelegate].selectedTag  isEqual:@"trash"];
-        
-    } else if (indexPath.section == kSectionTags) {
-        Tag *tag = [self tagAtRow: indexPath.row];
-        
-        cellText = tag.name;
-        cellIcon = nil;
-        
-        cell.accessoryType = bEditing ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-        
-        selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
-        
-    } else if (indexPath.section == kSectionSettings) {
-        
-        cellText = NSLocalizedString(@"Settings", nil);
-        cellIcon = _settingsImage;
-        
-        selected = NO;
-        
-        
-    } else if (indexPath.section == kSectionEdit) {
-        
-        cellText = NSLocalizedString(@"Edit Tags", @"Re-order or delete tags");
-        cellIcon = _sortImage;
-        
-        selected = NO;
-    }
+
+    Tag *tag = [self tagAtRow: indexPath.row];
+    cellText = tag.name;
+    cellIcon = nil;
+    selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
@@ -309,7 +303,24 @@ static NSString * const SPTagTrashKey = @"trash";
     });
 }
 
-
+- (void)updateHeaderButtonHighlight {
+    if ([SPAppDelegate sharedDelegate].selectedTag == nil) {
+        [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+        [allNotesButton setTintColor:[self.theme colorForKey:@"tintColor"]];
+        [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+        [trashButton setTintColor:[self.theme colorForKey:@"textColor"]];
+    } else if ([[SPAppDelegate sharedDelegate].selectedTag  isEqual:@"trash"]) {
+        [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+        [trashButton setTintColor:[self.theme colorForKey:@"tintColor"]];
+        [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+        [allNotesButton setTintColor:[self.theme colorForKey:@"textColor"]];
+    } else {
+        [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+        [trashButton setTintColor:[self.theme colorForKey:@"textColor"]];
+        [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
+        [allNotesButton setTintColor:[self.theme colorForKey:@"textColor"]];
+    }
+}
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -328,60 +339,26 @@ static NSString * const SPTagTrashKey = @"trash";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == kSectionAllNotes) {
-        
-        [self openNoteListForTagName:nil];
-        
-    } else if (indexPath.section == kSectionTrash) {
-        
-        [SPTracker trackTrashViewed];
-        [self openNoteListForTagName:SPTagTrashKey];
-        
-    }else if (indexPath.section == kSectionTags) {
-        
-        Tag *tag = [self tagAtRow: indexPath.row];
+    Tag *tag = [self tagAtRow: indexPath.row];
 
-        if (bEditing) {
-            [SPTracker trackTagRowRenamed];
-            [self renameTagAction:tag];
-        } else {
-            [SPTracker trackListTagViewed];
-            [self openNoteListForTagName:tag.name];
-		}
-        
-    } else if (indexPath.section == kSectionSettings) {
-        
-        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-        [[SPAppDelegate sharedDelegate] showOptions];
-
-    } else if (indexPath.section == kSectionEdit) {
-        [self setEditing:YES];
+    if (bEditing) {
+        [SPTracker trackTagRowRenamed];
+        [self renameTagAction:tag];
+    } else {
+        [SPTracker trackListTagViewed];
+        [self openNoteListForTagName:tag.name];
     }
-}
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return indexPath.section == kSectionTags;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return indexPath.section == kSectionTags;
+    [self updateHeaderButtonHighlight];
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    
-    
     if (sourceIndexPath.section == kSectionTags && destinationIndexPath.section == kSectionTags) {
         
         [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row
                                                   toIndex:destinationIndexPath.row];
         
     }
-    
-    
-    
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
@@ -397,7 +374,7 @@ static NSString * const SPTagTrashKey = @"trash";
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Detemine if it's in editing mode
-    if (indexPath.section == kSectionTags && bEditing)
+    if (bEditing)
     {
         return UITableViewCellEditingStyleDelete;
     }
@@ -412,7 +389,6 @@ static NSString * const SPTagTrashKey = @"trash";
 		[self removeTagAtIndexPath:indexPath];
     }
 }
-
 
 #pragma mark UITagListViewCellDelegate
 
@@ -432,98 +408,47 @@ static NSString * const SPTagTrashKey = @"trash";
     [self removeTagAtIndexPath:path];
 }
 
-- (void)setEditing:(BOOL)editing {
+- (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
     
     if (bEditing == editing) {
         return;
     }
     
     bEditing = editing;
-    
+
     self.tableView.allowsSelectionDuringEditing = YES;
-    
-    
-    UIView *snapshot = [self.tableView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = self.tableView.frame;
-    snapshot.contentMode = UIViewContentModeTop;
-    [self.view insertSubview:snapshot aboveSubview:self.tableView];
-    self.tableView.alpha = 0.0;
-    
-    [self.tableView setEditing:editing animated:NO];
-    [self.tableView reloadData];
+    [self.tableView setEditing:editing animated:YES];
     
     if (editing) {
-        
+        [editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
 		[SPTracker trackTagEditorAccessed];
-		      
-        SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
-        
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditingAction:)];
-        doneButton.accessibilityHint = @"Finish editing tags";
-        
-        [noteListViewController showFullSidePanelWithTemporaryBarButton:doneButton
-                                                             completion:nil];
-        
+    } else {
+        [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    }
+
+    SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
+    CGFloat newWidth = editing
+        ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
+        : [self.theme floatForKey:@"containerViewSidePanelWidth"];
+    CGRect frame = self.view.frame;
+    frame.size.width = newWidth;
+
+    CGRect notesFrame = noteListViewController.rootView.frame;
+    notesFrame.origin.x = newWidth;
+    if (!isCanceled) {
+        // Make the tags list wider, and move the notes list over to accomodate for the new width
         [UIView animateWithDuration:0.3
-                         animations:^{
-                             snapshot.alpha = 0.0;
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-        
-        CGRect newTableViewFrame = self.tableView.frame;
-        newTableViewFrame.size.width = MIN(self.view.bounds.size.width, 500);
-        newTableViewFrame.origin.x = (self.view.bounds.size.width - newTableViewFrame.size.width) / 2.0;
-        self.tableView.frame = newTableViewFrame;
-        
-        CGFloat borderInsetLength = newTableViewFrame.origin.x - customView.borderWidth;;
-        customView.borderInset = UIEdgeInsetsMake(0, borderInsetLength, 0, borderInsetLength);
-        customView.showLeftBorder = YES;
-        customView.showRightBorder = YES;
-        [customView setNeedsDisplay];
-        
-        [UIView animateWithDuration:0.3
-                              delay:0.05
+                              delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             self.tableView.alpha = 1.0;
+                             self.view.frame = frame;
+                             noteListViewController.rootView.frame = notesFrame;
                          } completion:^(BOOL finished) {
                              nil;
                          }];
-
     } else {
-        
-        if (bVisible) {
-            [[self containerViewController] showSidePanel:nil];
-        }
-        
-        self.tableView.frame = self.view.bounds;
-        [self.tableView reloadData];
-        
-        customView.showLeftBorder = NO;
-        customView.showRightBorder = NO;
-        [customView setNeedsDisplay];
-
-        [UIView animateWithDuration:0.2
-                         animations:^{
-                             
-                             snapshot.alpha = 0.0;
-                             self.tableView.alpha = 1.0;
-                             
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-        
-
-        
-        // scroll editing cell to visible
-        if (self.fetchedResultsController.fetchedObjects.count > 0)
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:kSectionEdit]
-                                  atScrollPosition:UITableViewScrollPositionMiddle
-                                          animated:NO];
-        
+        self.view.frame = frame;
     }
-    
     
     return;
 }
@@ -536,11 +461,8 @@ static NSString * const SPTagTrashKey = @"trash";
         [cell.tagNameTextField endEditing:YES];
     }
     
-    [self setEditing:NO];
+    [self setEditing:NO canceled:NO];
 }
-
-
-
 
 -(void)openNoteListForTagName:(NSString *)tag {
     
@@ -691,7 +613,7 @@ static NSString * const SPTagTrashKey = @"trash";
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
     
     bVisible = NO;
-    [self setEditing:NO];
+    [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
@@ -817,7 +739,7 @@ static NSString * const SPTagTrashKey = @"trash";
     CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
     
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height -= keyboardHeight + [self.theme floatForKey:@"editorViewAboveKeyboardPadding"];
+    newFrame.size.height = newFrame.size.height - keyboardHeight + SPSettingsButtonHeight;
     
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
@@ -830,7 +752,7 @@ static NSString * const SPTagTrashKey = @"trash";
 - (void)keyboardWillHide:(NSNotification *)notification {
     
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y;
+    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
 
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
@@ -839,6 +761,91 @@ static NSString * const SPTagTrashKey = @"trash";
                          self.tableView.frame = newFrame;
                      }];
     
+}
+
+#pragma mark UI builders
+
+- (CGFloat)thinLineSize {
+    return 1.0 / [[UIScreen mainScreen] scale];
+}
+
+- (UIButton *)buildSettingsButton {
+    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [settingsButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+    [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
+    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
+    [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
+    [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, self.thinLineSize)];
+    footerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [settingsButton addSubview:footerSeparator];
+
+    return settingsButton;
+}
+
+- (UIView *)buildTableHeaderView {
+    CGRect headerFrame = CGRectMake(0, 0, 0, 121);
+    UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
+
+    allNotesButton = [self buildHeaderButton];
+    allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
+    [allNotesButton setImage:[[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
+    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    [headerView addSubview:allNotesButton];
+
+    trashButton = [self buildHeaderButton];
+    trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
+    [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [trashButton setTitle:NSLocalizedString(@"Trash", nil) forState:UIControlStateNormal];
+    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    [headerView addSubview:trashButton];
+
+    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
+    headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    [headerView addSubview:headerSeparator];
+
+    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
+    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
+    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
+    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [tagsView addSubview:tagsLabel];
+
+    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
+    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    [tagsView addSubview:editTagsButton];
+
+    [self updateHeaderColors];
+
+    [headerView addSubview:tagsView];
+    
+    return headerView;
+}
+
+- (UIButton *)buildHeaderButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [button setContentEdgeInsets:SPButtonContentInsets];
+    [button setImageEdgeInsets:SPButtonImageInsets];
+    [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+
+    return button;
 }
 
 @end

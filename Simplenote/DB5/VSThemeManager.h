@@ -10,9 +10,9 @@
 #import "VSTheme.h"
 #import "VSThemeLoader.h"
 
-NSString *const VSThemeManagerThemeWillChangeNotification;
-NSString *const VSThemeManagerThemeDidChangeNotification;
-NSString *const VSThemeManagerThemePrefKey;
+extern NSString *const VSThemeManagerThemeWillChangeNotification;
+extern NSString *const VSThemeManagerThemeDidChangeNotification;
+extern NSString *const VSThemeManagerThemePrefKey;
 
 @interface VSThemeManager : NSObject
 

@@ -9,30 +9,43 @@
 #import "PersonTag.h"
 
 @implementation PersonTag
-@synthesize name;
-@synthesize email;
 
--(id)initWithName:(NSString *)aName email:(NSString *)anEmail {
-    
+- (instancetype)initWithName:(NSString *)aName email:(NSString *)anEmail
+{
     if ((self = [super init])) {
         self.name = aName;
         self.email = anEmail;
+        self.active = YES;
     }
+
     return self;
-    
+}
+
+- (NSUInteger)hash
+{
+    return self.name.hash + self.email.hash;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[PersonTag class]] == false) {
+        return false;
+    }
+
+    PersonTag *second = (PersonTag *)object;
+    return [self.name isEqual:second.name] && [self.email isEqual:second.email];
 }
 
 - (NSComparisonResult)compareName:(PersonTag *)anotherTag
 {
-	NSString *str1, *str2;
-	
-	str1 = self.name.length == 0 ? email : self.name;
-	str2 = anotherTag.name.length == 0 ? anotherTag.email : anotherTag.name;
+	NSString *str1 = _name.length == 0 ? _email : _name;
+	NSString *str2 = anotherTag.name.length == 0 ? anotherTag.email : anotherTag.name;
+
 	return [str1 localizedCaseInsensitiveCompare:str2];
 }
 
-- (NSComparisonResult)compareEmail:(PersonTag *)anotherTag {
-    
+- (NSComparisonResult)compareEmail:(PersonTag *)anotherTag
+{
 	return [self.email localizedCaseInsensitiveCompare:anotherTag.email];
 }
 

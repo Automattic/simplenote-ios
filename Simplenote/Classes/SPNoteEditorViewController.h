@@ -51,7 +51,6 @@
     SPActivityView *noteActivityView;
     SPActionSheet *noteActionSheet;
     SPActionSheet *versionActionSheet;
-    UIActionSheet *deleteActionSheet;
     
     SPHorizontalPickerView *versionPickerView;
     

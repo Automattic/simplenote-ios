@@ -25,8 +25,8 @@ html {
 }
 
 body {
-    font-family: "Source Sans Pro", sans-serif;
-    color: #333;
+    font-family: "SanFranciscoDisplay-Regular", sans-serif;
+    color: #2d3034;
     text-rendering: optimizeLegibility;
 }
 
@@ -130,7 +130,7 @@ a.img {
     word-wrap: break-word;
     font-size: 18px;
     font-family: "Source Sans Pro", sans-serif;
-    color: #333;
+    color: #2d3034;
     font-weight: 400;
     line-height: 1.4em;
     color: #333;
@@ -141,7 +141,7 @@ a.img {
 .note #static_content h1, .note #static_content h2, .note #static_content h3,
 .note #static_content h4 {
     line-height: 1.1em;
-    color: #333;
+    color: #2d3034;
     font-weight: 300;
     padding: 0;
 }

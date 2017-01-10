@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "icon_trash.png"
+      "filename" : "icon_trash.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "icon_trash@2x.png"
+      "filename" : "icon_trash@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon_trash@3x.png",
       "scale" : "3x"
     }
   ],
