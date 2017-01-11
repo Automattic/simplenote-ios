@@ -341,11 +341,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                       SPBarButtonYOriginAdjustment,
                                       buttonWidth,
                                       buttonHeight);
-    
-    CGFloat newButtonImageWidth = [newButton imageForState:UIControlStateNormal].size.width;
-    CGFloat newButtonPadding = isPad ? (buttonWidth - newButtonImageWidth) : buttonWidth;
-    
-    newButton.frame = CGRectMake(previousXOrigin - newButtonPadding,
+        
+    newButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                  SPBarButtonYOriginAdjustment,
                                  buttonWidth,
                                  buttonHeight);
