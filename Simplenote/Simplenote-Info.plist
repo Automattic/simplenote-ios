@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4422</string>
+	<string>4423</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -62,6 +62,8 @@
 	<string>This app requires contacts access to properly share data with other users.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app does not require Photo Library access.</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
