@@ -42,6 +42,7 @@
 - (NSString *)getPin:(BOOL)checkLegacy;
 - (void)setPin:(NSString *)newPin;
 - (void)removePin;
+- (BOOL)isPresentingPinLock;
 
 + (SPAppDelegate *)sharedDelegate;
 

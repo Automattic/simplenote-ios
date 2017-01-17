@@ -21,6 +21,7 @@
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "JSONKit+Simplenote.h"
+#import "DTPinLockController.h"
 #import "SPHorizontalPickerView.h"
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
@@ -1443,7 +1444,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 }
 
 - (void)dismissActivityView {
-    if (self.presentedViewController) {
+    if (self.presentedViewController && ![[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 

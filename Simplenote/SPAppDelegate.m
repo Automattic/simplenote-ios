@@ -850,7 +850,7 @@
     
     NSString *pin = [self getPin:YES];
     
-    if (!pin || pin.length == 0 || [[self topMostController] class] == [DTPinLockController class]) {
+    if (!pin || pin.length == 0 || [self isPresentingPinLock]) {
         return;
 	}
     
@@ -911,6 +911,11 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:allowTouchIDInsteadOfPin forKey:kSimplenoteUseTouchIDKey];
     [userDefaults synchronize];
+}
+
+- (BOOL)isPresentingPinLock
+{
+    return [[self topMostController] class] == [DTPinLockController class];
 }
 
 
