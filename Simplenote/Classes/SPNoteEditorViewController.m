@@ -21,7 +21,6 @@
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "JSONKit+Simplenote.h"
-#import "DTPinLockController.h"
 #import "SPHorizontalPickerView.h"
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
