@@ -106,11 +106,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    // Register for keyboard notifications
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     _tagImage = [[UIImage imageNamed:@"icon_tag"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -124,6 +119,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
     [[UIMenuController sharedMenuController] update];
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
 
@@ -133,6 +129,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Register for keyboard notifications
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
@@ -144,6 +145,15 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
                                       SPSettingsButtonHeight);
 
     [self updateHeaderButtonHighlight];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // un-register for keyboard notifications
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver: self name:UIKeyboardWillHideNotification object:nil];
+    [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (VSTheme *)theme {
@@ -733,6 +743,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark KeyboardNotifications	
 
 - (void)keyboardWillShow:(NSNotification *)notification {
+    if ([[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
+        return;
+    }
     
     CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
@@ -750,6 +763,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    if ([[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
+        return;
+    }
     
     CGRect newFrame = self.tableView.frame;
     newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
