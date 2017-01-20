@@ -747,10 +747,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark KeyboardNotifications	
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    if ([[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
-        return;
-    }
-    
     CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
@@ -767,10 +763,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    if ([[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
-        return;
-    }
-    
     CGRect newFrame = self.tableView.frame;
     newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
 
