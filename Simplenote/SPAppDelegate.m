@@ -876,6 +876,7 @@
                      completion:^(BOOL finished) {
                          [self.window makeKeyAndVisible];
                          [self.pinLockWindow removeFromSuperview];
+                         self.pinLockWindow = nil;
                      }];
 }
 
@@ -905,6 +906,7 @@
 - (void)removePin
 {
     [SSKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
+    [self setAllowTouchIDInsteadOfPin:NO];
 }
 
 - (BOOL)allowTouchIDInsteadOfPin
