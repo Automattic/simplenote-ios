@@ -7,6 +7,7 @@
 //
 
 #import "SPAppDelegate.h"
+#import <Contacts/Contacts.h>
 #import "Simplenote-Swift.h"
 
 #import "SPConstants.h"
@@ -850,7 +851,7 @@
     
     NSString *pin = [self getPin:YES];
     
-    if (!pin || pin.length == 0 || [self isPresentingPinLock]) {
+    if (!pin || pin.length == 0 || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
         return;
 	}
     
@@ -861,13 +862,20 @@
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
-	[[self topMostController] presentViewController:controller animated:NO completion:nil];
+    self.pinLockWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.pinLockWindow.rootViewController = controller;
+    [self.pinLockWindow makeKeyAndVisible];
 	[controller fixLayout];
 }
 
 - (void)pinLockControllerDidFinishUnlocking
 {
-	[[self topMostController] dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.3
+                     animations:^{ self.pinLockWindow.alpha = 0.0; }
+                     completion:^(BOOL finished) {
+                         [self.window makeKeyAndVisible];
+                         [self.pinLockWindow removeFromSuperview];
+                     }];
 }
 
 - (NSString *)getPin:(BOOL)checkLegacy
@@ -915,7 +923,16 @@
 
 - (BOOL)isPresentingPinLock
 {
-    return [[self topMostController] class] == [DTPinLockController class];
+    return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
+}
+
+-(BOOL)isRequestingContactsPermission
+{
+    NSArray *topChildren = self.topMostController.childViewControllers;
+    BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];
+    BOOL isNotDeterminedAuth = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusNotDetermined;
+    
+    return isShowingCollaborators && isNotDeterminedAuth;
 }
 
 

@@ -130,10 +130,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusChanged
                                                    object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationWillResignActive:)
-                                                     name:UIApplicationWillResignActiveNotification
-                                                   object:nil];
     }
     
     return self;
@@ -284,10 +280,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 {
     [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     [self refreshNavBarSizeWithCoordinator:coordinator];
-}
-
-- (void)applicationWillResignActive:(NSNotification *)notification {
-    [self dismissActivityView];
 }
 
 - (void)refreshNavBarSizeWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -1443,7 +1435,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 }
 
 - (void)dismissActivityView {
-    if (self.presentedViewController && ![[SPAppDelegate sharedDelegate] isPresentingPinLock]) {
+    if (self.presentedViewController) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
