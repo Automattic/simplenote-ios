@@ -150,7 +150,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    
     [self removeKeyboardObservers];
 }
 
