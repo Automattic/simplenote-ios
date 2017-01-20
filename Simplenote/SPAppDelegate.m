@@ -326,6 +326,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];

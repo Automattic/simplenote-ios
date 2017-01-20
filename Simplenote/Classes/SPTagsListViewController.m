@@ -150,7 +150,12 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    // un-register for keyboard notifications
+    
+    [self removeKeyboardObservers];
+}
+
+- (void)removeKeyboardObservers
+{
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver: self name:UIKeyboardWillHideNotification object:nil];
     [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];

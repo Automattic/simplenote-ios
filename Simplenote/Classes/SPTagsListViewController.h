@@ -34,5 +34,6 @@
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
+- (void)removeKeyboardObservers;
 
 @end
