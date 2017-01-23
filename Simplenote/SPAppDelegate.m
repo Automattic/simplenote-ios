@@ -7,7 +7,6 @@
 //
 
 #import "SPAppDelegate.h"
-#import <Contacts/Contacts.h>
 #import "Simplenote-Swift.h"
 
 #import "SPConstants.h"
@@ -40,6 +39,7 @@
 #import "GAI.h"
 #import "SPTracker.h"
 
+@import Contacts;
 @import SSKeychain;
 @import Simperium;
 @import WordPress_AppbotX;
