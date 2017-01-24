@@ -18,6 +18,7 @@
 @interface SPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow *pinLockWindow;
 
 @property (strong, nonatomic, readonly) Simperium						*simperium;
 @property (strong, nonatomic, readonly) NSManagedObjectContext			*managedObjectContext;
