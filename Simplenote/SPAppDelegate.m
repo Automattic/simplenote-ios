@@ -39,6 +39,7 @@
 #import "GAI.h"
 #import "SPTracker.h"
 
+@import Contacts;
 @import SSKeychain;
 @import Simperium;
 @import WordPress_AppbotX;
@@ -325,6 +326,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];
@@ -850,7 +852,7 @@
     
     NSString *pin = [self getPin:YES];
     
-    if (!pin || pin.length == 0 || [[self topMostController] class] == [DTPinLockController class]) {
+    if (!pin || pin.length == 0 || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
         return;
 	}
     
@@ -861,13 +863,21 @@
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
-	[[self topMostController] presentViewController:controller animated:NO completion:nil];
+    self.pinLockWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.pinLockWindow.rootViewController = controller;
+    [self.pinLockWindow makeKeyAndVisible];
 	[controller fixLayout];
 }
 
 - (void)pinLockControllerDidFinishUnlocking
 {
-	[[self topMostController] dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.3
+                     animations:^{ self.pinLockWindow.alpha = 0.0; }
+                     completion:^(BOOL finished) {
+                         [self.window makeKeyAndVisible];
+                         [self.pinLockWindow removeFromSuperview];
+                         self.pinLockWindow = nil;
+                     }];
 }
 
 - (NSString *)getPin:(BOOL)checkLegacy
@@ -896,6 +906,7 @@
 - (void)removePin
 {
     [SSKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
+    [self setAllowTouchIDInsteadOfPin:NO];
 }
 
 - (BOOL)allowTouchIDInsteadOfPin
@@ -911,6 +922,20 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:allowTouchIDInsteadOfPin forKey:kSimplenoteUseTouchIDKey];
     [userDefaults synchronize];
+}
+
+- (BOOL)isPresentingPinLock
+{
+    return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
+}
+
+-(BOOL)isRequestingContactsPermission
+{
+    NSArray *topChildren = self.topMostController.childViewControllers;
+    BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];
+    BOOL isNotDeterminedAuth = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusNotDetermined;
+    
+    return isShowingCollaborators && isNotDeterminedAuth;
 }
 
 
