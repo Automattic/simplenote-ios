@@ -814,7 +814,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     trashButton = [self buildHeaderButton];
     trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
     [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [trashButton setTitle:NSLocalizedString(@"Trash", nil) forState:UIControlStateNormal];
+    [trashButton setTitle:NSLocalizedString(@"Trash-noun", nil) forState:UIControlStateNormal];
     [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
 
     [headerView addSubview:trashButton];
