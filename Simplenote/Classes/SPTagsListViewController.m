@@ -660,7 +660,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (NSArray *)sortDescriptors
 {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     return sortDescriptors;

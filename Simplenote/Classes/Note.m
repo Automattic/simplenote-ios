@@ -395,7 +395,7 @@ SEL notifySelector;
 }
 
 - (void)updateTagsArray {
-    tagsArray = tags.length > 0 ? [[tags objectFromJSONString] mutableCopy] : [NSMutableArray arrayWithCapacity:2];
+    tagsArray = tags.length > 0 ? [[[tags objectFromJSONString] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] mutableCopy] : [NSMutableArray arrayWithCapacity:2];
 }
 
 - (void)updateEmailTagsArray {
