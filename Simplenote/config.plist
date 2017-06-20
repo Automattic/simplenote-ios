@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SPSimperiumAppID</key>
+	<string>history-analyst-dad</string>
+	<key>SPSimperiumApiKey</key>
+	<string>6805ca9a091e45ada8a9d8988367f14e</string>
+	<key>SPSimperiumSettingsObjectKey</key>
+	<string>not-required</string>
+	<key>SimplenoteCrashlyticsKey</key>
+	<string>not-required</string>
+	<key>BitHockeyIdentifier</key>
+	<string>not-required</string>
+	<key>GoogleAnalyticsID</key>
+	<string>not-required</string>
+	<key>AppbotKey</key>
+	<string>not-required</string>
+	<key>SimplenoteiTunesAppId</key>
+	<string>not-required</string>
+	<key>SimplenoteiTunesReviewURL</key>
+	<string>not-required</string>
+</dict>
+</plist>
