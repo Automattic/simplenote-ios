@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>SPSimperiumAppID</key>
-	<string>your-app-id</string>
+	<string>history-analyst-dad</string>
 	<key>SPSimperiumApiKey</key>
-	<string>your-api-key</string>
+	<string>6805ca9a091e45ada8a9d8988367f14e</string>
 	<key>SPSimperiumSettingsObjectKey</key>
 	<string>not-required</string>
 	<key>SimplenoteCrashlyticsKey</key>
