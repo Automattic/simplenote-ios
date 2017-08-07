@@ -537,7 +537,7 @@
 
     if (tagFilterType == SPTagFilterTypeDeleted) {
         
-        return  @[permanentDelete,restore];
+        return  @[restore,permanentDelete];
     }else{
         
         return @[delete];
