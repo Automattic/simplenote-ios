@@ -525,7 +525,7 @@
                                     }];
     restore.backgroundColor = [UIColor blueColor];
    
-    UITableViewRowAction *permanentDelete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    UITableViewRowAction *permanentDelete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         // Delete something here
                                         [SPTracker trackListNoteDeleted];

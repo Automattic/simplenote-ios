@@ -396,3 +396,6 @@
 
 /* Passcode Failed Attempts */
 "FailedAttempts" = "Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account.";
+
+/* Permanent Delete */
+"Delete" = "Delete";
