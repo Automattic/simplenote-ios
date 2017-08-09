@@ -108,6 +108,17 @@
         return NO;
     }
     
+    NSString *jsCallPrefix = @"jscall://";
+    NSString *fullURLRequested = request.URL.absoluteString;
+    
+    BOOL isJavaScriptCall = ([fullURLRequested hasPrefix:jsCallPrefix]);
+    
+    if (isJavaScriptCall) {
+        NSString *messageConveyed = [fullURLRequested substringFromIndex:jsCallPrefix.length];
+        NSLog(@"Your message was: %@", messageConveyed);
+        return NO;
+    }
+    
     return YES;
 }
 

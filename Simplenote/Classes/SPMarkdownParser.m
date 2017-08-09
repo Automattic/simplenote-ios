@@ -29,22 +29,40 @@
     hoedown_html_renderer_free(renderer);
     
     NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
+                                  @"\n\\s+- \\[(x|X|o|o| )\\]\\s+([^\n]+)" options:0 error:nil];
+    
+    NSString *withTodos = [regex stringByReplacingMatchesInString:htmlString options:0 range:NSMakeRange(0, [htmlString length]) withTemplate:@"<div><input type=\"checkbox\" onClick=\"javascript:bridge.sendRawMessageToiOS('todoClicked')\">$2</input></div>"];
 
-    return [[[self htmlHeader] stringByAppendingString:htmlString] stringByAppendingString:[self htmlFooter]];
+    return [[[self htmlHeader] stringByAppendingString:withTodos] stringByAppendingString:[self htmlFooter]];
 }
 
 + (NSString *)htmlHeader
 {
-    NSString *headerStart = @"<html><head><style media=\"screen\" type=\"text/css\">\n";
+    NSString *headerStart = @"<html><head>";
+    NSString *headerStyle = @"<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note\"><div id=\"static_content\">";
-    
+    NSString *headerScript = @"<script>"
+                              "function iOSNativeBridge(){"
+                              "  this.sendRawMessageToiOS = function(message){"
+                              "    console.log(\"Message string to iOS: [\" + message+ \"]\");"
+                              "    var iframe = document.createElement(\"IFRAME\");"
+                              "    iframe.setAttribute(\"src\", \"jscall://\" + message);"
+                              "    document.documentElement.appendChild(iframe);"
+                              "    iframe.parentNode.removeChild(iframe);"
+                              "    iframe = null;"
+                              "  };"
+                              "}"
+                              "</script>";
+
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     NSString *path = [self cssPathForTheme:theme];
     
     NSString *css = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:path withExtension:nil]
                                              encoding:NSUTF8StringEncoding error:nil];
     
-    return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
+    return [[[[headerStart stringByAppendingString:headerScript] stringByAppendingString:headerStyle] stringByAppendingString:css] stringByAppendingString:headerEnd];
 }
 
 + (NSString *)cssPathForTheme:(VSTheme *)theme
