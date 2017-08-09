@@ -509,7 +509,7 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         // Delete something here
                                         [SPTracker trackListNoteDeleted];
@@ -525,7 +525,7 @@
                                     }];
     restore.backgroundColor = [UIColor orangeColor];
    
-    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         // Delete something here
                                         [SPTracker trackListNoteDeleted];
