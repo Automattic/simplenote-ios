@@ -494,12 +494,6 @@
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    return tagFilterType == SPTagFilterTypeDeleted ? NSLocalizedString(@"Restore", @"Restore a note from the trash, markking it as undeleted") : NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note");
-}
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return !bDisableUserInteraction;
@@ -511,28 +505,41 @@
     return NO;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
-    return UITableViewCellEditingStyleDelete;
-}
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        // Delete something here
+                                        [SPTracker trackListNoteDeleted];
+                                        [[SPObjectManager sharedManager] trashNote:note];
+                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
+                                    }];
+    trash.backgroundColor = [UIColor redColor];
+    
+    UITableViewRowAction *restore = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Restore", @"Restore a note from the trash, markking it as undeleted")  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        [[SPObjectManager sharedManager] restoreNote:note];
+                                        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
+                                    }];
+    restore.backgroundColor = [UIColor orangeColor];
+   
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        // Delete something here
+                                        [SPTracker trackListNoteDeleted];
+                                        [[SPObjectManager sharedManager] permenentlyDeleteNote:note];
+                                    }];
+    delete.backgroundColor = [UIColor redColor];
+    
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-    
-        // delete note at index path
-        Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (tagFilterType == SPTagFilterTypeDeleted) {
         
-        if (note.deleted) {
-            [[SPObjectManager sharedManager] restoreNote:note];
-            [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
-        } else {
-            [SPTracker trackListNoteDeleted];
-            [[SPObjectManager sharedManager] trashNote:note];
-            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
-        }
+        return  @[delete,restore];
+    } else {
         
-        [self updateViewIfEmpty];
+        return @[trash];
     }
 }
 

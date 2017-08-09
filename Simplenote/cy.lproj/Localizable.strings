@@ -345,3 +345,6 @@
 
 /* Passcode Failed Attempts */
 "FailedAttempts" = "Ydych chi wedi colli mynediad i Simplenote? Gallwch adennill mynediad drwy ail-osod y app a mewngofnodi i'ch cyfrif.";
+
+/* Permanent Delete */
+"Delete" = "Dileu";
