@@ -509,38 +509,37 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         // Delete something here
                                         [SPTracker trackListNoteDeleted];
                                         [[SPObjectManager sharedManager] trashNote:note];
                                         [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
                                     }];
-    delete.backgroundColor = [UIColor redColor];
+    trash.backgroundColor = [UIColor redColor];
     
     UITableViewRowAction *restore = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Restore", @"Restore a note from the trash, markking it as undeleted")  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         [[SPObjectManager sharedManager] restoreNote:note];
                                         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
                                     }];
-    restore.backgroundColor = [UIColor blueColor];
+    restore.backgroundColor = [UIColor orangeColor];
    
-    UITableViewRowAction *permanentDelete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                     {
                                         // Delete something here
                                         [SPTracker trackListNoteDeleted];
                                         [[SPObjectManager sharedManager] permenentlyDeleteNote:note];
-                                        
                                     }];
-    permanentDelete.backgroundColor = [UIColor redColor];
+    delete.backgroundColor = [UIColor redColor];
     
 
     if (tagFilterType == SPTagFilterTypeDeleted) {
         
-        return  @[restore,permanentDelete];
-    }else{
+        return  @[delete,restore];
+    } else {
         
-        return @[delete];
+        return @[trash];
     }
 }
 
