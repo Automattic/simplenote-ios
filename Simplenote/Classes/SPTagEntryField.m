@@ -20,12 +20,12 @@
     newTagText.placeholdTextColor = [newTagText.theme colorForKey:@"tagViewPlaceholderColor"];
     newTagText.tagDelegate = tagDelegate;
     newTagText.textAlignment = NSTextAlignmentLeft;
-    newTagText.placeholder = @"Tag...";
+    newTagText.placeholder = @"Add a tag...";
     newTagText.returnKeyType = UIReturnKeyNext;
     newTagText.autocorrectionType = UITextAutocorrectionTypeNo;
     newTagText.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
-    [newTagText setPlaceholder:NSLocalizedString(@"Tag...", @"Placeholder test in textfield when adding a new tag to a note")];
+    [newTagText setPlaceholder:NSLocalizedString(@"Add a tag...", @"Placeholder test in textfield when adding a new tag to a note")];
     
     newTagText.accessibilityLabel = NSLocalizedString(@"Add tag", @"Label on button to add a new tag to a note");
     newTagText.accessibilityHint = NSLocalizedString(@"tag-add-accessibility-hint", @"Accessibility hint for adding a tag to a note");
