@@ -197,7 +197,7 @@
 "tag-delete-accessibility-hint" = "Remove tag from the current note";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
+"Add a tag..." = "Tag...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Tag: %@";
