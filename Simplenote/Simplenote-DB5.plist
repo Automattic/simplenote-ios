@@ -46,6 +46,8 @@
 		<integer>15</integer>
 		<key>noteSidePadding~regular</key>
 		<integer>64</integer>
+		<key>noteSidePaddingPhoneX</key>
+		<integer>59</integer>
 		<key>noteTopPadding</key>
 		<string>8</string>
 		<key>noteVerticalPadding</key>

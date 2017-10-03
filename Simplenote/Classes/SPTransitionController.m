@@ -237,6 +237,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self.tableView];
+    if ([UIDevice isPhoneX]
+        && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        padding = [theme floatForKey:@"noteSidePaddingPhoneX" contextView:self.tableView];
+    }
+    
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     
     if (width - 2 * padding > maxWidth && maxWidth > 0)
