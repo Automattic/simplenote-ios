@@ -34,7 +34,6 @@
 #import "UIDevice+Extensions.h"
 #import "UIView+Subviews.h"
 #import "UIImage+Colorization.h"
-#import "Simplenote-Swift.h"
 
 #import <Simperium/Simperium.h>
 @import WordPress_AppbotX;
@@ -130,12 +129,6 @@
     }
     
     return self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    searchBarContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -258,23 +251,15 @@
         UIOffset titleOffset = [UIDevice isPad] ? UIOffsetMake(7, 0) : UIOffsetZero;
         [emptyTrashButton setTitlePositionAdjustment:titleOffset forBarMetrics:UIBarMetricsDefault];
     }
-    
         
     if (!searchBar) {
-        
-        CGFloat const kSearchBarHeight = 44.0;
-        
-        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
-                                                                  0,
-                                                                  self.view.frame.size.width,
-                                                                  kSearchBarHeight)];
-        searchBarContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kSearchBarHeight)];
-
-        searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        searchBar = [[UISearchBar alloc] init];
+        searchBarContainer = [[SPTitleView alloc] init];
+        searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
         searchBarContainer.clipsToBounds = NO;
         searchBar.center = searchBarContainer.center;
         
-        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
         searchBar.searchBarStyle = UISearchBarStyleMinimal;
 
@@ -282,7 +267,6 @@
 
         searchBar.delegate = self;
         [searchBarContainer addSubview:searchBar];
-
     }
     
     if (bSearching) {

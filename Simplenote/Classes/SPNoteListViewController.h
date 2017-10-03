@@ -10,6 +10,7 @@
 #import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
+#import "Simplenote-Swift.h"
 @class Note, SPEmptyListView;
 
 typedef enum {
@@ -27,7 +28,7 @@ typedef enum {
     UIBarButtonItem *sidebarButton;
     
     // the container is only used to limit the width of the search bar.
-    UIView *searchBarContainer;
+    SPTitleView *searchBarContainer;
     UISearchBar *searchBar;
     UIBarButtonItem *emptyTrashButton;
         

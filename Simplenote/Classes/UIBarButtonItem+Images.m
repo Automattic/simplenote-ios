@@ -13,7 +13,7 @@
 
 static CGFloat const UIBarButtonSidePaddingPad      = 9.0;
 static CGFloat const UIBarButtonSidePaddingPhone    = 13.0;
-
+static CGFloat const UIBarButtonWidth               = 44.0;
 
 @implementation UIBarButtonItem (Images)
 
@@ -29,13 +29,12 @@ static CGFloat const UIBarButtonSidePaddingPhone    = 13.0;
 
 + (UIBarButtonItem *)barButtonContainingCustomViewWithImage:(UIImage *)image imageAlignment:(UIBarButtonImageAlignment)imageAlignment target:(id)target selector:(SEL)action
 {
-    CGFloat buttonWidth = 44.0;
     CGFloat sideAdjustment = [UIDevice isPad] ? UIBarButtonSidePaddingPad : UIBarButtonSidePaddingPhone;
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(imageAlignment == UIBarButtonImageAlignmentLeft ? -sideAdjustment : 0,
                                                                   -1,
-                                                                  MAX(buttonWidth, image.size.width),
-                                                                  MAX(buttonWidth, image.size.height))];
+                                                                  UIBarButtonWidth,
+                                                                  image.size.height)];
     button.isAccessibilityElement = NO;
 
     // use UIImageRenderingModeAlwaysTemplate to get button to adopt tint color
