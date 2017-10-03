@@ -253,9 +253,20 @@
     }
         
     if (!searchBar) {
-        searchBar = [[UISearchBar alloc] init];
-        searchBarContainer = [[SPTitleView alloc] init];
-        searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+        // titleView was changed to use autolayout in iOS 11
+        if (@available(iOS 11.0, *)) {
+            searchBar = [[UISearchBar alloc] init];
+            searchBarContainer = [[SPTitleView alloc] init];
+            searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+        } else {
+            CGFloat searchBarHeight = 44.0;
+            searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
+                                                                      0,
+                                                                      self.view.frame.size.width,
+                                                                      searchBarHeight)];
+            searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
+            searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        }
         searchBarContainer.clipsToBounds = NO;
         searchBar.center = searchBarContainer.center;
         
