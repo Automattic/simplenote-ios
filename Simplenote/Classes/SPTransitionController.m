@@ -237,8 +237,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self.tableView];
-    if ([UIDevice isPhoneX]
-        && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    if ([UIDevice isPhoneX] && [UIDevice isLandscape]) {
         padding = [theme floatForKey:@"noteSidePaddingPhoneX" contextView:self.tableView];
     }
     
