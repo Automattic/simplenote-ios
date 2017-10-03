@@ -372,6 +372,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
         finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.frame.origin.y;
+        if (@available(iOS 11.0, *)) {
+            finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
+        }
         finalEditorPosition.origin.x = 0;
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
