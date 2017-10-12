@@ -11,5 +11,9 @@
 @interface UIDevice (Extensions)
 
 + (BOOL)isPad;
++ (BOOL)isPhone;
++ (BOOL)isPhoneX;
++ (BOOL)isLandscape;
++ (BOOL)isPhoneLandscape;
 
 @end

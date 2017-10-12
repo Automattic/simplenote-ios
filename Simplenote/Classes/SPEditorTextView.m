@@ -11,6 +11,7 @@
 #import "VSThemeManager.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSString+Attributed.h"
+#import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 
 @interface SPEditorTextView ()
@@ -93,6 +94,10 @@
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
+    if ([UIDevice isPhoneX]
+        && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        padding = [theme floatForKey:@"noteSidePaddingPhoneX" contextView:self];
+    }
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
     

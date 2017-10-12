@@ -587,7 +587,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     // push off updating note text in order to speed up animated transition
     dispatch_async(dispatch_get_main_queue(), ^{
         _noteEditorTextView.attributedText = [note.content attributedString];
-        _noteEditorTextView.contentOffset = CGPointMake(0, -_noteEditorTextView.contentInset.top);
     });
     
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
