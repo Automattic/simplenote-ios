@@ -17,3 +17,7 @@ profile
 DerivedData
 .idea/
 Pods/
+
+
+# Settings
+Simplenote/config.plist
