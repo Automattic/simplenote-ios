@@ -278,7 +278,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.textLabel.text = NSLocalizedString(@"Touch ID", @"Offer to enable Touch ID support if available and passcode is on.");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-                    BOOL isTouchIDTurnedOn = [[SPAppDelegate sharedDelegate] allowTouchIDInsteadOfPin];
+                    BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
 
                     self.touchIDSwitch.on = isTouchIDTurnedOn;
                     cell.accessoryView = self.touchIDSwitch;
@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [SPTracker trackSettingsPinlockEnabled:NO];
     
     [[SPAppDelegate sharedDelegate] removePin];
-    [[SPAppDelegate sharedDelegate] setAllowTouchIDInsteadOfPin:false];
+    [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
     
     [self.tableView reloadData];
 	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -433,7 +433,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     // Make sure the UI is consistent
     NSString *pin = [[SPAppDelegate sharedDelegate] getPin:false];
     if (pin.length == 0) {
-        [[SPAppDelegate sharedDelegate] setAllowTouchIDInsteadOfPin:false];
+        [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
     }
     
     [self.tableView reloadData];
@@ -495,7 +495,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)touchIdSwitchDidChangeValue:(UISwitch *)sender
 {
-    [[SPAppDelegate sharedDelegate] setAllowTouchIDInsteadOfPin:sender.on];
+    [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:sender.on];
     
     NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
     if (pin.length == 0) {
