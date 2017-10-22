@@ -29,8 +29,9 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @property (nonatomic, strong) UISwitch  *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch  *alphabeticalSortSwitch;
 @property (nonatomic, strong) UISwitch  *themeListSwitch;
-@property (nonatomic, strong) UISwitch  *touchIDSwitch;
-@property (nonatomic, assign) BOOL      touchIDIsAvailable;
+@property (nonatomic, strong) UISwitch  *biometrySwitch;
+@property (nonatomic, assign) BOOL      biometryIsAvailable;
+@property (nonatomic, copy) NSString    *biometryTitle;
 @end
 
 @implementation SPOptionsViewController
@@ -64,7 +65,7 @@ typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
-    SPOptionsSecurityRowRowTouchID      = 1,
+    SPOptionsSecurityRowRowBiometry     = 1,
     SPOptionsSecurityRowRowCount        = 2
 };
 
@@ -113,8 +114,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                              action:@selector(themeSwitchDidChangeValue:)
                    forControlEvents:UIControlEventValueChanged];
 
-    self.touchIDSwitch = [UISwitch new];
-    [self.touchIDSwitch addTarget:self
+    self.biometrySwitch = [UISwitch new];
+    [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
     
@@ -131,16 +132,33 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     [super viewWillAppear:animated];
     
+    [self checkForBiometry];
+    
+    [self.tableView reloadData];
+}
+
+- (void)checkForBiometry
+{
     if ([LAContext class]) {
         LAContext *context = [LAContext new];
         NSError *error;
         if([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                                 error:&error]) {
-            self.touchIDIsAvailable = YES;
+            self.biometryIsAvailable = YES;
+
+            BOOL faceIDAvailable = NO;
+            
+            if (@available(iOS 11.0, *)) {
+                if (context.biometryType == LABiometryTypeFaceID) {
+                    faceIDAvailable = YES;
+                }
+            }
+
+            self.biometryTitle = (faceIDAvailable) ?
+                NSLocalizedString(@"Face ID", @"Offer to enable Face ID support if available and passcode is on.") :
+                NSLocalizedString(@"Touch ID", @"Offer to enable Touch ID support if available and passcode is on.");
         }
     }
-    
-    [self.tableView reloadData];
 }
 
 - (void)doneAction:(id)sender
@@ -172,7 +190,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsSecurity: {
-            return self.touchIDIsAvailable ? SPOptionsSecurityRowRowCount : SPOptionsSecurityRowRowCount - 1;
+            return self.biometryIsAvailable ? SPOptionsSecurityRowRowCount : SPOptionsSecurityRowRowCount - 1;
         }
             
         case SPOptionsViewSectionsDebug: {
@@ -274,14 +292,14 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     
                     break;
                 }
-                case SPOptionsSecurityRowRowTouchID: {
-                    cell.textLabel.text = NSLocalizedString(@"Touch ID", @"Offer to enable Touch ID support if available and passcode is on.");
+                case SPOptionsSecurityRowRowBiometry: {
+                    cell.textLabel.text = self.biometryTitle;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
                     BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
 
-                    self.touchIDSwitch.on = isTouchIDTurnedOn;
-                    cell.accessoryView = self.touchIDSwitch;
+                    self.biometrySwitch.on = isBiometryOn;
+                    cell.accessoryView = self.biometrySwitch;
                     cell.tag = kTagTouchID;
                 }
                     
@@ -517,7 +535,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     // Reload Switch Styles
     VSTheme *theme          = [[VSThemeManager sharedManager] theme];
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _touchIDSwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
