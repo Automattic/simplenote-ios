@@ -564,12 +564,15 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [[self.navigationController transitionCoordinator] animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {} completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        // clear the current note after pop animation completes if it wasn't cancelled
-        if (!context.isCancelled) {
-            [self clearNote];
-        }
-    }];
+    [[self.navigationController transitionCoordinator]
+         animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {}
+         completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+            // clear the current note after pop animation completes if it wasn't cancelled
+            if (!context.isCancelled) {
+                [self clearNote];
+            }
+         }
+     ];
 }
 
 - (void)updateNote:(Note *)note {
