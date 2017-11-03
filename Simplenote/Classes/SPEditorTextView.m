@@ -116,7 +116,15 @@
     CGFloat yOrigin = self.contentSize.height - height + self.contentInset.top;
     yOrigin = MAX(yOrigin, self.contentOffset.y + self.bounds.size.height - height);
     
-    CGRect footerViewFrame = CGRectMake(0, yOrigin, self.bounds.size.width, height);
+    CGFloat tagPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        tagPadding = self.safeAreaInsets.left;
+    }
+    
+    CGRect footerViewFrame = CGRectMake(tagPadding,
+                                        yOrigin,
+                                        self.bounds.size.width - 2 * tagPadding,
+                                        height);
     _tagView.frame = footerViewFrame;
 }
 
