@@ -100,11 +100,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         // Data Detectors:
         // Disabled by default. This will be entirely handled by SPTextLinkifier
         _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeNone;
-
-        if (@available(iOS 11.0, *)) {
-            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-        }
         
         // TagView
         _tagView = _noteEditorTextView.tagView;
