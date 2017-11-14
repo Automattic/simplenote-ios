@@ -100,9 +100,8 @@
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
-    if ([UIDevice isPhoneX]
-        && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        padding = [theme floatForKey:@"noteSidePaddingPhoneX" contextView:self];
+    if (@available(iOS 11.0, *)) {
+        padding += self.safeAreaInsets.left;
     }
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
