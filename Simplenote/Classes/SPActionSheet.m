@@ -412,6 +412,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
                                      boxFrame.origin.y + padding,
                                      contentWidth + 2 * moveDistance,
                                      contentHeight + moveDistance);
+    if (@available(iOS 11.0, *)) {
+        contentFrame.origin.y -= view.safeAreaInsets.bottom;
+        contentFrame.size.height += view.safeAreaInsets.bottom;
+    }
     contentView.frame = contentFrame;
     contentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
