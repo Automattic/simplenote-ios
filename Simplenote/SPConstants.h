@@ -32,7 +32,7 @@ extern NSString *const kSelectedTagKey;
 extern NSString *const kSelectedNoteKey;
 extern NSString *const kSimplenotePinKey;
 extern NSString *const kSimplenotePinLegacyKey;
-extern NSString *const kSimplenoteUseTouchIDKey;
+extern NSString *const kSimplenoteUseBiometryKey;
 extern NSString *const kSimplenoteMarkdownDefaultKey;
 
 extern NSString *const kSimplenotePublishURL;

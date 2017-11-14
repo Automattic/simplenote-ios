@@ -33,7 +33,7 @@
 @property (strong, nonatomic) NSString									*selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
-@property (assign, nonatomic) BOOL                                      allowTouchIDInsteadOfPin;
+@property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
 
 - (void)showOptions;
 

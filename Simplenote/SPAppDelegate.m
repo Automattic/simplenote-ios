@@ -856,8 +856,8 @@
         return;
 	}
     
-    BOOL useTouchID = self.allowTouchIDInsteadOfPin;
-    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useTouchID ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
+    BOOL useBiometry = self.allowBiometryInsteadOfPin;
+    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
 	controller.pin = pin;
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -906,21 +906,21 @@
 - (void)removePin
 {
     [SSKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
-    [self setAllowTouchIDInsteadOfPin:NO];
+    [self setAllowBiometryInsteadOfPin:NO];
 }
 
-- (BOOL)allowTouchIDInsteadOfPin
+- (BOOL)allowBiometryInsteadOfPin
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL useTouchID = [userDefaults boolForKey:kSimplenoteUseTouchIDKey];
+    BOOL useTouchID = [userDefaults boolForKey:kSimplenoteUseBiometryKey];
 
     return useTouchID;
 }
 
-- (void)setAllowTouchIDInsteadOfPin:(BOOL)allowTouchIDInsteadOfPin
+- (void)setAllowBiometryInsteadOfPin:(BOOL)allowBiometryInsteadOfPin
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:allowTouchIDInsteadOfPin forKey:kSimplenoteUseTouchIDKey];
+    [userDefaults setBool:allowBiometryInsteadOfPin forKey:kSimplenoteUseBiometryKey];
     [userDefaults synchronize];
 }
 

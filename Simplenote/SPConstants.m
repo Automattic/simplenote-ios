@@ -37,7 +37,7 @@ NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
 NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenotePinLegacyKey             = @"PIN";
-NSString *const kSimplenoteUseTouchIDKey            = @"SimplenoteUseTouchID";
+NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
 
 NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
