@@ -1284,7 +1284,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"Distribution AppStore\" != \"${CONFIGURATION}\" ]]; then\n   echo \"Skipping Fabric\";\n   exit 0;\nfi\n\n\"${PODS_ROOT}/Fabric/run\" 39f00d04d6837320a9c583f4d201332394364204 29f13b9ff2837f01a648d9a17aae09d50b1cdd0c0be66fbee6fb859b642b27b2\n";
+			shellScript = "if [[ \"Distribution AppStore\" != \"${CONFIGURATION}\" ]]; then\n   echo \"Skipping Fabric\";\n   exit 0;\nfi\n\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		B596467F1C46BD83001537E5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
