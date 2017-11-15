@@ -638,8 +638,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
-    
-    self.tableView.frame = self.view.bounds;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!bVisible)
