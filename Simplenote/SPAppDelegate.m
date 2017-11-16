@@ -231,7 +231,7 @@
     NSString *key = [SPCredentials simplenoteCrashlyticsKey];
 
     [Fabric with:@[CrashlyticsKit]];
-
+    
     [Crashlytics startWithAPIKey:key];
     [[Crashlytics sharedInstance] setObjectValue:email forKey:@"email"];
 
