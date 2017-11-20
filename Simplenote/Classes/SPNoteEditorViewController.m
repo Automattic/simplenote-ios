@@ -101,11 +101,15 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         // Disabled by default. This will be entirely handled by SPTextLinkifier
         _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeNone;
 
+        // Note:
+        // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
         if (@available(iOS 11.0, *)) {
-            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
+                _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
+                _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
+            }
         }
-        
+
         // TagView
         _tagView = _noteEditorTextView.tagView;
         _noteEditorTextView.tagView.tagDelegate = self;
