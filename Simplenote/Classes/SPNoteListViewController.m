@@ -281,20 +281,27 @@
     }
     
     if (bSearching) {
+        // Add a Cancel button to the toolbar, only needed for iPads
+        if ([UIDevice isPad]) {
+            if (!iPadCancelButton) {
+                iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
+                                                 style:UIBarButtonItemStylePlain
+                                                target:self
+                                                action:@selector(cancelSearchButtonAction:)];
+            }
+            
+            [self.navigationItem setRightBarButtonItem:iPadCancelButton animated:YES];
+        } else {
+           [self.navigationItem setRightBarButtonItem:nil animated:YES];
+        }
         
-        [self.navigationItem setRightBarButtonItem:nil animated:YES];
         [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-        
     } else if (tagFilterType == SPTagFilterTypeDeleted) {
-        
         [self.navigationItem setRightBarButtonItem:emptyTrashButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
-        
-    }else {
-
+    } else {
         [self.navigationItem setRightBarButtonItem:addButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
-
     }
     
     self.navigationItem.titleView = searchBarContainer;

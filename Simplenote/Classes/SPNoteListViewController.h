@@ -26,6 +26,7 @@ typedef enum {
     // Navigation Bar
     UIBarButtonItem *addButton;
     UIBarButtonItem *sidebarButton;
+    UIBarButtonItem *iPadCancelButton;
     
     // the container is only used to limit the width of the search bar.
     SPTitleView *searchBarContainer;
