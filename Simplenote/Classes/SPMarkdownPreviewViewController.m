@@ -12,10 +12,11 @@
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
 
+@import WebKit;
 @import SafariServices;
 
-@interface SPMarkdownPreviewViewController ()<UIWebViewDelegate>
-@property (nonatomic, strong) UIWebView *webView;
+@interface SPMarkdownPreviewViewController ()<WKNavigationDelegate>
+@property (nonatomic, strong) WKWebView *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
@@ -33,7 +34,12 @@
 
 - (void)configureWebView
 {
-    UIWebView *webView = [UIWebView new];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    WKPreferences *prefs = [[WKPreferences alloc] init];
+    prefs.javaScriptEnabled = NO;
+    config.preferences = prefs;
+    
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.view addSubview:webView];
@@ -51,7 +57,7 @@
         webView.allowsLinkPreview = YES;
     }
     
-    webView.delegate = self;
+    webView.navigationDelegate = self;
     
     self.webView = webView;
 }
@@ -92,23 +98,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKNavigationDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    // Prevent links from being opened within this webview.
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         if ([SFSafariViewController class]) {
-            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[request URL]];
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:navigationAction.request.URL];
             [self presentViewController:sfvc animated:YES completion:nil];
         } else {
-            [[UIApplication sharedApplication] openURL:[request URL]];
+            [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         }
-
-        return NO;
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
-    
-    return YES;
 }
 
 @end
