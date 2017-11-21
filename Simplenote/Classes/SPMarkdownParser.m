@@ -35,7 +35,10 @@
 
 + (NSString *)htmlHeader
 {
-    NSString *headerStart = @"<html><head><style media=\"screen\" type=\"text/css\">\n";
+    NSString *headerStart =
+        @"<html><head>"
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+            "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note\"><div id=\"static_content\">";
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
