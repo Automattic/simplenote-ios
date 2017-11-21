@@ -44,6 +44,8 @@
 @import Simperium;
 @import WordPress_AppbotX;
 
+@class KeychainMigrator;
+
 #if USE_HOCKEY
 #import <HockeySDK/HockeySDK.h>
 #elif USE_CRASHLYTICS
@@ -259,6 +261,9 @@
 {
 	// Old School!
     [self importLegacyPreferences];
+    
+    // Migrate keychain items
+    [KeychainMigrator migrateIfNecessary];
 
 	// Setup Frameworks
     [self setupThemeNotifications];
