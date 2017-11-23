@@ -14,15 +14,15 @@ Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium
 
 In order to create your own Simperium.com Application, please, [head over to our website](https://www.simperium.com) and signup for free.
 
-After you've created your own Simperium application, copy the Sample Config as follows:
+After you've created your own Simperium application, copy the sample config. For example:
 
 ```
-cp ./Simplenote/Simplenote/config-demo.plist ./Simplenote/config.plist
+cp Simplenote/config-demo.plist Simplenote/config.plist
 ```
 
-Then edit the ./Simplenote/config.plist file and change the SPSimperiumAppID and SPSimperiumApiKey fields to the values you got for your app.
+Then edit the new config.plist file and change the SPSimperiumAppID and SPSimperiumApiKey fields to the correct values for your new app.
 
-This will allow you to compile and run the app on a device or an emulator.
+This will allow you to compile and run the app on a device or a simulator.
 
 
 ## Running
