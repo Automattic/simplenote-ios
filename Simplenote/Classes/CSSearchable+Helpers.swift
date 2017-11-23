@@ -19,7 +19,7 @@ extension CSSearchableItemAttributeSet {
         }
         title = note.titlePreview
 
-        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.characters.count)
+        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.count)
         contentDescription = note.preview.substring(from: index)
     }
     

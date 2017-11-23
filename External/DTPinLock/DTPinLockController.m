@@ -192,10 +192,12 @@
 - (void) setupDigitViews
 {
     // remove existing pin views
-    [firstPagePinGroup removeFromSuperview], firstPagePinGroup = nil;
-    [secondPagePinGroup removeFromSuperview], secondPagePinGroup = nil;
-    
-    
+    [firstPagePinGroup removeFromSuperview];
+    firstPagePinGroup = nil;
+
+    [secondPagePinGroup removeFromSuperview];
+    secondPagePinGroup = nil;
+        
     NSMutableArray *tmpArray = [NSMutableArray array];
     NSMutableArray *tmpArray2 = [NSMutableArray array];
     
