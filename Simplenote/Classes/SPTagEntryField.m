@@ -20,7 +20,7 @@
     newTagText.placeholdTextColor = [newTagText.theme colorForKey:@"tagViewPlaceholderColor"];
     newTagText.tagDelegate = tagDelegate;
     newTagText.textAlignment = NSTextAlignmentLeft;
-    newTagText.placeholder = @"Add a tag...";
+    newTagText.placeholder = NSLocalizedString(@"Add a tag...", nil);
     newTagText.returnKeyType = UIReturnKeyNext;
     newTagText.autocorrectionType = UITextAutocorrectionTypeNo;
     newTagText.autocapitalizationType = UITextAutocapitalizationTypeNone;

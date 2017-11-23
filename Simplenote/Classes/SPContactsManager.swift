@@ -16,7 +16,7 @@ class SPContactsManager: NSObject {
 
     /// Checks if we've got permission to access the Contacts Store, or not
     ///
-    var authorized: Bool {
+    @objc var authorized: Bool {
         return status == .authorized
     }
 
@@ -50,7 +50,7 @@ class SPContactsManager: NSObject {
 
     /// Whenever the Auth Status is undetermined, this helper will request access!
     ///
-    func requestAuthorizationIfNeeded(completion: ((Bool) -> Void)?) {
+    @objc func requestAuthorizationIfNeeded(completion: ((Bool) -> Void)?) {
         guard status == .notDetermined else {
             return
         }
@@ -62,7 +62,7 @@ class SPContactsManager: NSObject {
 
     /// Returns the subset of Persons that contain a specified keyword, in either their email or name
     ///
-    func people(with keyword: String) -> [PersonTag] {
+    @objc func people(with keyword: String) -> [PersonTag] {
         guard let people = loadPeopleIfNeeded() else {
             return []
         }
