@@ -21,8 +21,8 @@ abstract_target 'Automattic' do
 		pod 'HockeySDK', '~>3.8.0'
 		pod 'hoedown', '~>3.0.3'
 		pod 'SVProgressHUD', '1.1.2'
-		pod 'Fabric', '1.6.7'
-		pod 'Crashlytics', '3.7.0'
+		pod 'Fabric', '1.7.0'
+		pod 'Crashlytics', '3.9'
 
 		# Automattic
 		#
