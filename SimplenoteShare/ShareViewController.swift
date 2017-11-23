@@ -8,7 +8,7 @@
 
 import UIKit
 import Social
-import SSKeychain
+import SAMKeychain
 
 
 /// Simplenote's Share Extension.
@@ -17,7 +17,7 @@ open class ShareViewController: SLComposeServiceViewController
 {
     // MARK: - Private Properties
     fileprivate var simperiumToken: String? {
-        return SSKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
+        return SAMKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
     }
     
     
