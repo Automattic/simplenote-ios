@@ -50,7 +50,7 @@
 - (void)performActivity
 {
     if (openURL) {
-        [[UIApplication sharedApplication] openURL:openURL];
+        [[UIApplication sharedApplication] openURL:openURL options:@{} completionHandler:nil];
     }
     
     [self activityDidFinish:YES];

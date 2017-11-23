@@ -78,12 +78,14 @@ class SPCredentials: NSObject {
         }
     }
     
-    @objc static func iTunesReviewURL() -> String {
-        if let value = configDictionary().value(forKey: "SimplenoteiTunesReviewURL") {
-            return value as! String
-        } else {
-            return ""
+    @objc static func iTunesReviewURL() -> URL? {
+        guard let value = configDictionary().value(forKey: "SimplenoteiTunesReviewURL") as? String,
+            let targetURL = URL(string: value)
+        else {
+            return nil
         }
+
+        return targetURL
     }
     
     fileprivate static func configDictionary() -> NSDictionary {

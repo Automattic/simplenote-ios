@@ -1107,7 +1107,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
         [self presentViewController:sfvc animated:YES completion:nil];
     } else {
-        [[UIApplication sharedApplication] openURL:URL];
+        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
     }
     
     return NO;

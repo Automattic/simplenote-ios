@@ -107,7 +107,7 @@
             SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:navigationAction.request.URL];
             [self presentViewController:sfvc animated:YES completion:nil];
         } else {
-            [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+            [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@{} completionHandler:nil];
         }
         
         decisionHandler(WKNavigationActionPolicyCancel);
