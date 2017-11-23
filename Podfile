@@ -9,7 +9,7 @@ use_frameworks!
 abstract_target 'Automattic' do
 	# Shared Dependencies
 	#
-	pod 'SSKeychain', '1.2.2'
+	pod 'SAMKeychain', '1.5.2'
 
 	# Main Target
 	#

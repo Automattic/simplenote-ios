@@ -40,7 +40,7 @@
 #import "SPTracker.h"
 
 @import Contacts;
-@import SSKeychain;
+@import SAMKeychain;
 @import Simperium;
 @import WordPress_AppbotX;
 
@@ -102,7 +102,7 @@
     if (legacyAuthToken && [username length] > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"SPUsername"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [SSKeychain setPassword:legacyAuthToken forService:[SPCredentials simperiumAppID] account:username];
+        [SAMKeychain setPassword:legacyAuthToken forService:[SPCredentials simperiumAppID] account:username];
     }
     
     // Clear legacy data
@@ -615,7 +615,7 @@
 {
     // Store the Token: Required by the Share Extension!
     NSString *token = simperium.user.authToken;
-    [SSKeychain setPassword:token forService:kShareExtensionServiceName account:kShareExtensionAccountName];
+    [SAMKeychain setPassword:token forService:kShareExtensionServiceName account:kShareExtensionAccountName];
     
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
@@ -624,7 +624,7 @@
 - (void)simperiumDidLogout:(Simperium *)simperium
 {
     // Nuke Extension Token
-    [SSKeychain deletePasswordForService:kShareExtensionServiceName account:kShareExtensionAccountName];
+    [SAMKeychain deletePasswordForService:kShareExtensionServiceName account:kShareExtensionAccountName];
     
     // Tracker!
     [SPTracker refreshMetadataForAnonymousUser];
@@ -882,7 +882,7 @@
 
 - (NSString *)getPin:(BOOL)checkLegacy
 {
-    NSString *pin   = [SSKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
+    NSString *pin   = [SAMKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
     
     if (checkLegacy && (!pin || pin.length == 0)) {
         
@@ -900,12 +900,12 @@
 
 - (void)setPin:(NSString *)newPin
 {
-    [SSKeychain setPassword:newPin forService:kSimplenotePinKey account:kSimplenotePinKey];
+    [SAMKeychain setPassword:newPin forService:kSimplenotePinKey account:kSimplenotePinKey];
 }
 
 - (void)removePin
 {
-    [SSKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
+    [SAMKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
     [self setAllowBiometryInsteadOfPin:NO];
 }
 
