@@ -16,13 +16,13 @@ abstract_target 'Automattic' do
 	target 'Simplenote' do
 		# Third Party
 		#
-		pod '1PasswordExtension', '1.1.2'
+		pod '1PasswordExtension', '1.8.4'
 		pod 'GoogleAnalytics', '3.14.0'
 		pod 'HockeySDK', '~>3.8.0'
 		pod 'hoedown', '~>3.0.3'
 		pod 'SVProgressHUD', '1.1.2'
-		pod 'Fabric', '1.6.7'
-		pod 'Crashlytics', '3.7.0'
+		pod 'Fabric', '1.7.0'
+		pod 'Crashlytics', '3.9'
 
 		# Automattic
 		#

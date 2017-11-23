@@ -151,11 +151,11 @@ open class ShareViewController: SLComposeServiceViewController
         
         // MARK: - NSURLSessionDelegate
         @objc func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-            print("<> Uploader.didCompleteWithError: \(error)")
+            print("<> Uploader.didCompleteWithError: \(String(describing: error))")
         }
         
         @objc func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
-            print("<> Uploader.didBecomeInvalidWithError: \(error)")
+            print("<> Uploader.didBecomeInvalidWithError: \(String(describing: error))")
         }
         
         @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {

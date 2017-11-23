@@ -19,8 +19,8 @@ extension CSSearchableItemAttributeSet {
         }
         title = note.titlePreview
 
-        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.characters.count)
-        contentDescription = note.preview.substring(from: index)
+        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.count)
+        contentDescription = String(note.preview[index...])
     }
     
 }
@@ -36,7 +36,7 @@ extension CSSearchableItem {
 
 extension CSSearchableIndex {
 
-    func indexSearchableNote(_ note: Note) {
+    @objc func indexSearchableNote(_ note: Note) {
         let item = CSSearchableItem(note: note)
         indexSearchableItems([item]) { error in
             if let error = error {
@@ -45,7 +45,7 @@ extension CSSearchableIndex {
         }
     }
     
-    func indexSearchableNotes(_ notes: [Note]) {
+    @objc func indexSearchableNotes(_ notes: [Note]) {
         let items = notes.map {
             return CSSearchableItem(note: $0)
         }
@@ -57,11 +57,11 @@ extension CSSearchableIndex {
         }
     }
     
-    func deleteSearchableNote(_ note: Note) {
+    @objc func deleteSearchableNote(_ note: Note) {
         deleteSearchableNotes([note])
     }
 
-    func deleteSearchableNotes(_ notes: [Note]) {
+    @objc func deleteSearchableNotes(_ notes: [Note]) {
         let ids = notes.map {
             return $0.simperiumKey!
         }
