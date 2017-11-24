@@ -25,6 +25,8 @@ NSString *const kShareExtensionServiceName          = @"SimplenoteShare";
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow";
 #elif INTERNAL_DISTRIBUTION
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Internal";
+#elif RELEASE
+NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow";
 #else
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Development";
 #endif
