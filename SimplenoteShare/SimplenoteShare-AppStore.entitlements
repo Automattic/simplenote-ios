@@ -9,6 +9,7 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.codality.NotationalFlow</string>
+		<string>4ESDVWK654.com.codality.NotationalFlow</string>
 	</array>
 </dict>
 </plist>
