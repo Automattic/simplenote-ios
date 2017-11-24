@@ -8,12 +8,12 @@
 
 import UIKit
 
-open class SPCredentials: NSObject
-{
+class SPCredentials: NSObject {
+
     static let configName = "config"
     static let plistType = "plist"
     
-    open static func simperiumAppID() -> String {
+    @objc static func simperiumAppID() -> String {
         if let value = configDictionary().value(forKey: "SPSimperiumAppID") {
             return value as! String
         } else {
@@ -21,7 +21,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func simperiumApiKey() -> String {
+    @objc static func simperiumApiKey() -> String {
         if let value = configDictionary().value(forKey: "SPSimperiumApiKey") {
             return value as! String
         } else {
@@ -29,7 +29,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func simperiumSettingsObjectKey() -> String {
+    @objc static func simperiumSettingsObjectKey() -> String {
         if let value = configDictionary().value(forKey: "SPSimperiumSettingsObjectKey") {
             return value as! String
         } else {
@@ -37,7 +37,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func simplenoteCrashlyticsKey() -> String {
+    @objc static func simplenoteCrashlyticsKey() -> String {
         if let value = configDictionary().value(forKey: "SimplenoteCrashlyticsKey") {
             return value as! String
         } else {
@@ -45,7 +45,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func bitHockeyIdentifier() -> String {
+    @objc static func bitHockeyIdentifier() -> String {
         if let value = configDictionary().value(forKey: "BitHockeyIdentifier") {
             return value as! String
         } else {
@@ -53,7 +53,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func googleAnalyticsID() -> String {
+    @objc static func googleAnalyticsID() -> String {
         if let value = configDictionary().value(forKey: "GoogleAnalyticsID") {
             return value as! String
         } else {
@@ -61,7 +61,7 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func appbotKey() -> String {
+    @objc static func appbotKey() -> String {
         if let value = configDictionary().value(forKey: "AppbotKey") {
             return value as! String
         } else {
@@ -70,7 +70,7 @@ open class SPCredentials: NSObject
     }
 
     
-    open static func iTunesAppId() -> String {
+    @objc static func iTunesAppId() -> String {
         if let value = configDictionary().value(forKey: "SimplenoteiTunesAppId") {
             return value as! String
         } else {
@@ -78,12 +78,14 @@ open class SPCredentials: NSObject
         }
     }
     
-    open static func iTunesReviewURL() -> String {
-        if let value = configDictionary().value(forKey: "SimplenoteiTunesReviewURL") {
-            return value as! String
-        } else {
-            return ""
+    @objc static func iTunesReviewURL() -> URL? {
+        guard let value = configDictionary().value(forKey: "SimplenoteiTunesReviewURL") as? String,
+            let targetURL = URL(string: value)
+        else {
+            return nil
         }
+
+        return targetURL
     }
     
     fileprivate static func configDictionary() -> NSDictionary {

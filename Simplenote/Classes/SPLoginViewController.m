@@ -10,7 +10,7 @@
 #import "SPConstants.h"
 #import "SPTracker.h"
 
-@import _1PasswordExtension;
+@import OnePasswordExtension;
 
 
 

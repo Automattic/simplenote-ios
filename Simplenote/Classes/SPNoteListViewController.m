@@ -1164,7 +1164,7 @@
 - (void)appbotPromptForReview
 {
     [SPTracker trackRatingsAppRated];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[SPCredentials iTunesReviewURL]]];
+    [[UIApplication sharedApplication] openURL:[SPCredentials iTunesReviewURL] options:@{} completionHandler:nil];
     [[SPRatingsHelper sharedInstance] ratedCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
