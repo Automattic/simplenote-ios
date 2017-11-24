@@ -1674,7 +1674,7 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				INFOPLIST_FILE = "SimplenoteTests/SimplenoteTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codality.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1784,7 +1784,7 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				INFOPLIST_FILE = "SimplenoteTests/SimplenoteTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codality.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1814,7 +1814,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"BETA_DISTRIBUTION=1",
+					"INTERNAL_DISTRIBUTION=1",
 					"USE_HOCKEY=1",
 					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
@@ -1917,6 +1917,11 @@
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"INTERNAL_DISTRIBUTION=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteShare/Info.plist;
@@ -2086,7 +2091,7 @@
 				);
 				INFOPLIST_FILE = "SimplenoteTests/SimplenoteTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codality.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -2102,7 +2107,7 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				INFOPLIST_FILE = "SimplenoteTests/SimplenoteTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.codality.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
