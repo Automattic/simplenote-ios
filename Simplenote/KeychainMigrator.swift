@@ -11,8 +11,9 @@ import Foundation
     static let bundleId = "com.codality.NotationalFlow"
     static let shareBundleId = bundleId + ".Share"
     static let usernameKey = "SPUsername"
-    
-    public static func migrateIfNecessary() {
+
+    @objc
+    static func migrateIfNecessary() {
         let username: String! = UserDefaults.standard.string(forKey: usernameKey)
         
         if (username != nil) {
