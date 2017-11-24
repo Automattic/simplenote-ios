@@ -228,8 +228,6 @@
 		B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsHelper.m; path = Classes/SPRatingsHelper.m; sourceTree = "<group>"; };
 		B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Extensions.swift"; path = "Classes/NSURL+Extensions.swift"; sourceTree = "<group>"; };
 		B512AF8E1C209DD900FE76D8 /* Simplenote-Share-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Share-Bridging-Header.h"; sourceTree = "<group>"; };
-		B512AF921C20A38500FE76D8 /* SimplenoteShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SimplenoteShare.entitlements; sourceTree = "<group>"; };
-		B512AF931C20A39700FE76D8 /* Simplenote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Simplenote.entitlements; sourceTree = "<group>"; };
 		B512AF951C20B14200FE76D8 /* SPAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnimations.h; sourceTree = "<group>"; };
 		B512AF961C20B14200FE76D8 /* SPAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnimations.m; sourceTree = "<group>"; };
 		B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPContactsManager.swift; path = Classes/SPContactsManager.swift; sourceTree = "<group>"; };
@@ -289,6 +287,9 @@
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
+		B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Development.entitlements"; sourceTree = "<group>"; };
+		B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Internal.entitlements"; sourceTree = "<group>"; };
+		B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Simplenote.entitlements; sourceTree = "<group>"; };
 		B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
 		B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -597,7 +598,8 @@
 			isa = PBXGroup;
 			children = (
 				B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */,
-				B512AF921C20A38500FE76D8 /* SimplenoteShare.entitlements */,
+				B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */,
+				B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */,
 				B5EB1EF31C204EBD0080A1B3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -847,7 +849,7 @@
 				37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */,
 				37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */,
 				46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */,
-				B512AF931C20A39700FE76D8 /* Simplenote.entitlements */,
+				B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */,
 				E29ADD4417848E8500E55842 /* InfoPlist.strings */,
 				E29ADD4717848E8500E55842 /* main.m */,
 				E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */,
