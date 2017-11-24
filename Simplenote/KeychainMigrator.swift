@@ -14,36 +14,36 @@ import Foundation
 
     @objc
     static func migrateIfNecessary() {
-        let username: String! = UserDefaults.standard.string(forKey: usernameKey)
-        
-        if (username != nil) {
-            let newPasswordItem = KeychainPasswordItem(
+        guard let username = UserDefaults.standard.string(forKey: usernameKey) else {
+            return
+        }
+
+        let newPasswordItem = KeychainPasswordItem(
+            service: SPCredentials.simperiumAppID(),
+            account: username,
+            accessGroup: newPrefix + bundleId
+        )
+        do {
+            try newPasswordItem.readPassword()
+            // We have the token!
+            return;
+        } catch {
+            // Looks like we need to attempt a migration...
+            let oldPasswordItem = KeychainPasswordItem(
                 service: SPCredentials.simperiumAppID(),
                 account: username,
-                accessGroup: newPrefix + bundleId
+                accessGroup: oldPrefix + bundleId
             )
+
             do {
-                try newPasswordItem.readPassword()
-                // We have the token!
-                return;
-            } catch {
-                // Looks like we need to attempt a migration...
-                let oldPasswordItem = KeychainPasswordItem(
+                let password = try oldPasswordItem.readPassword()
+                let migratedPasswordItem = KeychainPasswordItem(
                     service: SPCredentials.simperiumAppID(),
-                    account: username,
-                    accessGroup: oldPrefix + bundleId
+                    account: username
                 )
-                
-                do {
-                    let password = try oldPasswordItem.readPassword()
-                    let migratedPasswordItem = KeychainPasswordItem(
-                        service: SPCredentials.simperiumAppID(),
-                        account: username
-                    )
-                    try migratedPasswordItem.savePassword(password)
-                } catch {
-                    // :(
-                }
+                try migratedPasswordItem.savePassword(password)
+            } catch {
+                // :(
             }
         }
     }
