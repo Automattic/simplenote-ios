@@ -392,6 +392,17 @@
     [self trackGoogleEventWithCategory:@"keychain" action:@"migration" label:@"failure" value:nil];
 }
 
++ (void)trackKeychainFailsafeSucceeded
+{
+    [self trackAutomatticEventWithName:@"keychain_failsafe_succeeded" properties:nil];
+    [self trackGoogleEventWithCategory:@"keychain" action:@"failsafe" label:@"succeeded" value:nil];
+}
+
++ (void)trackKeychainFailsafeFailed
+{
+    [self trackAutomatticEventWithName:@"keychain_failsafe_failed" properties:nil];
+    [self trackGoogleEventWithCategory:@"keychain" action:@"failsafe" label:@"failure" value:nil];
+}
 
 
 #pragma mark - Google Analytics Helpers

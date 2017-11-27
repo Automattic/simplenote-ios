@@ -93,5 +93,7 @@
 #pragma mark - Keychain Migration
 + (void)trackKeychainMigrationSucceeded;
 + (void)trackKeychainMigrationFailed;
++ (void)trackKeychainFailsafeSucceeded;
++ (void)trackKeychainFailsafeFailed;
 
 @end

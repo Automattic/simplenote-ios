@@ -77,22 +77,37 @@ extension KeychainMigrator {
     /// Migrates the Keychain Entry associated with the Old TeamID Prefix
     ///
     func migrateLegacyPassword() {
-        guard let username = self.username else {
+        guard let username = self.username,
+            let legacyPassword = try? loadKeychainEntry(accessGroup: .legacy, username: username)
+        else {
             return
         }
 
         // Looks like we need to attempt a migration...
         do {
-            let legacyPassword = try loadKeychainEntry(accessGroup: .legacy, username: username)
             try deleteKeychainEntry(accessGroup: .legacy, username: username)
             try saveKeychainEntry(accessGroup: .new, username: username, password: legacyPassword)
 
             SPTracker.trackKeychainMigrationSucceeded()
         } catch {
             // :(
-            NSLog("Error: \(error)")
+            NSLog("Keychain Migration Error: \(error)")
 
             SPTracker.trackKeychainMigrationFailed()
+            self.restoreLegacyPassword(password: legacyPassword, for: username)
+        }
+    }
+
+    /// On error, we'll attempt to restore the legacy Password
+    ///
+    func restoreLegacyPassword(password: String, for username: String) {
+        do {
+            try saveKeychainEntry(accessGroup: .legacy, username: username, password: password)
+            SPTracker.trackKeychainFailsafeSucceeded()
+        } catch {
+            NSLog("Keychain Failsafe Error: \(error)")
+
+            SPTracker.trackKeychainFailsafeFailed()
         }
     }
 }
