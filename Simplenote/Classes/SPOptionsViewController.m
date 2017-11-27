@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#if BETA_DISTRIBUTION
+#if INTERNAL_DISTRIBUTION
     return SPOptionsViewSectionsCount;
 #else
     return SPOptionsViewSectionsCount - 1;
@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-#if BETA_DISTRIBUTION
+#if INTERNAL_DISTRIBUTION
     if (section == SPOptionsViewSectionsDebug) {
         return [[NSString alloc] initWithFormat:@"Beta Distribution Channel\nv%@ (%@)", [NSString stringWithFormat:@"%@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]], [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey]];
     }

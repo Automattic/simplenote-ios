@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 inhibit_all_warnings!
 use_frameworks!
 
@@ -30,6 +30,12 @@ abstract_target 'Automattic' do
 		pod 'Simperium', '0.8.19'
 		pod 'WordPress-AppbotX', :git => 'https://github.com/wordpress-mobile/appbotx.git', :commit => '479d05f7d6b963c9b44040e6ea9f190e8bd9a47a'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
+
+		# Testing Target
+		#
+		target 'SimplenoteTests' do
+			inherit! :search_paths
+		end
 	end
 
 	# Extension Target

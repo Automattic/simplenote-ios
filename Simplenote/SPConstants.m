@@ -23,8 +23,12 @@ NSString *const kShareExtensionServiceName          = @"SimplenoteShare";
 
 #ifdef APPSTORE_DISTRIBUTION
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow";
+#elif INTERNAL_DISTRIBUTION
+NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Internal";
+#elif RELEASE
+NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow";
 #else
-NSString *const kShareExtensionGroupName            = @"group.com.automattic.simplenote";
+NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Development";
 #endif
 
 NSString *const kOnePasswordSimplenoteTitle         = @"Simplenote";
