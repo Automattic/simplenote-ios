@@ -69,7 +69,7 @@ extension KeychainMigrator {
         let newPasswordItem = KeychainPasswordItem(
             service: SPCredentials.simperiumAppID(),
             account: username,
-            accessGroup: newPrefix + bundleId
+            accessGroup: newAccessGroup
         )
 
         return (try? newPasswordItem.readPassword()) == nil
@@ -86,7 +86,7 @@ extension KeychainMigrator {
         let oldPasswordItem = KeychainPasswordItem(
             service: SPCredentials.simperiumAppID(),
             account: username,
-            accessGroup: oldPrefix + bundleId
+            accessGroup: legacyAccessGroup
         )
 
         do {
