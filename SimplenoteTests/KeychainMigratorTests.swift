@@ -64,7 +64,8 @@ private extension KeychainMigratorTests {
     func loadNewKeychainEntry() -> String? {
         let passwordItem = KeychainPasswordItem(
             service: SPCredentials.simperiumAppID(),
-            account: testingUsername
+            account: testingUsername,
+            accessGroup: KeychainMigrator.newAccessGroup
         )
 
         return try? passwordItem.readPassword()
