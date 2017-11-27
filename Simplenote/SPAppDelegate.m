@@ -263,7 +263,10 @@
     [self importLegacyPreferences];
     
     // Migrate keychain items
-    [KeychainMigrator migrateIfNecessary];
+    KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
+// Keychain Migration Testing: Should only run in *release* targets. Uncomment / use at will
+//    [keychainMigrator test];
+    [keychainMigrator migrateIfNecessary];
 
 	// Setup Frameworks
     [self setupThemeNotifications];

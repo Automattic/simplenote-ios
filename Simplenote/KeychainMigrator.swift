@@ -10,39 +10,43 @@ import Foundation
 //
 @objc
 class KeychainMigrator: NSObject {
-    /// Legacy TeamID
-    ///
-    private static let oldPrefix = "4ESDVWK654."
 
-    /// New TeamID!
+    /// Keychain Constants
     ///
-    private static let newPrefix = "PZYM8XX95Q."
+    private struct Constants {
+        /// Legacy TeamID
+        ///
+        static let oldPrefix = "4ESDVWK654."
 
-    /// Main App's Bundle ID
-    ///
-    private static let bundleId = "com.codality.NotationalFlow"
+        /// New TeamID!
+        ///
+        static let newPrefix = "PZYM8XX95Q."
 
-    /// Share Extension's Bundle ID
-    ///
-    private static let shareBundleId = bundleId + ".Share"
+        /// Main App's Bundle ID
+        ///
+        static let bundleId = "com.codality.NotationalFlow"
 
-    /// Username's User Defaults Key
-    ///
-    static let usernameKey = "SPUsername"
+        /// Share Extension's Bundle ID
+        ///
+        static let shareBundleId = bundleId + ".Share"
 
-    /// Legacy TeamID Access Group
-    ///
-    static let legacyAccessGroup = oldPrefix + bundleId
+        /// Username's User Defaults Key
+        ///
+        static let usernameKey = "SPUsername"
 
-    /// New TeamID Access Group
-    ///
-    static let newAccessGroup = newPrefix + bundleId
+        /// Legacy TeamID Access Group
+        ///
+        static let legacyAccessGroup = oldPrefix + bundleId
 
+        /// New TeamID Access Group
+        ///
+        static let newAccessGroup = newPrefix + bundleId
+    }
 
     /// Migrates the Legacy Keychain Entry over to the new Access Group
     ///
     @objc
-    static func migrateIfNecessary() {
+    func migrateIfNecessary() {
         guard needsPasswordMigration() else {
             return
         }
@@ -52,7 +56,7 @@ class KeychainMigrator: NSObject {
 }
 
 
-// MARK: - Private Methods
+// MARK: - Internal Helpers: This should actually be *private*, but for unit testing purposes, we're keeping them this way.
 //
 extension KeychainMigrator {
 
@@ -61,46 +65,122 @@ extension KeychainMigrator {
     /// - The Username is accessible
     /// - There is no current password
     ///
-    static func needsPasswordMigration() -> Bool {
-        guard let username = UserDefaults.standard.string(forKey: usernameKey) else {
+    func needsPasswordMigration() -> Bool {
+        guard let username = self.username else {
             return false
         }
 
-        let newPasswordItem = KeychainPasswordItem(
-            service: SPCredentials.simperiumAppID(),
-            account: username,
-            accessGroup: newAccessGroup
-        )
-
-        return (try? newPasswordItem.readPassword()) == nil
+        let newKeychainEntry = try? loadKeychainEntry(accessGroup: .new, username: username)
+        return newKeychainEntry == nil
     }
 
     /// Migrates the Keychain Entry associated with the Old TeamID Prefix
     ///
-    static func migrateLegacyPassword() {
-        guard let username = UserDefaults.standard.string(forKey: usernameKey) else {
+    func migrateLegacyPassword() {
+        guard let username = self.username else {
             return
         }
 
         // Looks like we need to attempt a migration...
-        let oldPasswordItem = KeychainPasswordItem(
-            service: SPCredentials.simperiumAppID(),
-            account: username,
-            accessGroup: legacyAccessGroup
-        )
-
         do {
-            let password = try oldPasswordItem.readPassword()
-            let migratedPasswordItem = KeychainPasswordItem(
-                service: SPCredentials.simperiumAppID(),
-                account: username,
-                accessGroup: newAccessGroup
-            )
-
-            try migratedPasswordItem.savePassword(password)
+            let legacyPassword = try loadKeychainEntry(accessGroup: .legacy, username: username)
+            try deleteKeychainEntry(accessGroup: .legacy, username: username)
+            try saveKeychainEntry(accessGroup: .new, username: username, password: legacyPassword)
         } catch {
             // :(
             NSLog("Error: \(error)")
         }
     }
+}
+
+
+// MARK: - User Defaults Wrappers
+//
+extension KeychainMigrator {
+    /// Username
+    ///
+    var username: String? {
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.usernameKey)
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            return UserDefaults.standard.string(forKey: Constants.usernameKey)
+        }
+    }
+}
+
+
+// MARK: - Keychain Wrappers: This should actually be *private*, but for unit testing purposes, we're keeping them this way.
+//
+extension KeychainMigrator {
+
+    enum AccessGroup {
+        case new
+        case legacy
+
+        var stringValue: String {
+            switch self {
+            case .new:
+                return Constants.newAccessGroup
+            case .legacy:
+                return Constants.legacyAccessGroup
+            }
+        }
+    }
+
+    func loadKeychainEntry(accessGroup: AccessGroup, username: String) throws -> String {
+        let passwordItem = KeychainPasswordItem(
+            service: SPCredentials.simperiumAppID(),
+            account: username,
+            accessGroup: accessGroup.stringValue
+        )
+
+        return try passwordItem.readPassword()
+    }
+
+    func deleteKeychainEntry(accessGroup: AccessGroup, username: String) throws {
+        let passwordItem = KeychainPasswordItem(
+            service: SPCredentials.simperiumAppID(),
+            account: username,
+            accessGroup: accessGroup.stringValue
+        )
+
+        try passwordItem.deleteItem()
+    }
+
+    func saveKeychainEntry(accessGroup: AccessGroup, username: String, password: String) throws {
+        let passwordItem = KeychainPasswordItem(
+            service: SPCredentials.simperiumAppID(),
+            account: username,
+            accessGroup: accessGroup.stringValue
+        )
+
+        try passwordItem.savePassword(password)
+    }
+
+#if RELEASE
+    /// This method tests the Migration Flow. This should only be executed in the *Release* target, since the AppID's won't
+    /// match with the one(s) used in the other targets.
+    ///
+    /// For testing purposes only.
+    ///
+    @objc
+    func testMigration() {
+        let dummyUsername = "TestingUsername"
+        let dummyPassword = "TestingPassword"
+
+        // Recreate Pre-Migration Scenario
+        username = dummyUsername
+        try? deleteKeychainEntry(accessGroup: .new, username: dummyUsername)
+        try? saveKeychainEntry(accessGroup: .legacy, username: dummyUsername, password: dummyPassword)
+
+        // Migrate
+        migrateIfNecessary()
+
+        // Verify
+        let migrated = try? loadKeychainEntry(accessGroup: .new, username: dummyUsername)
+        assert(loaded == dummyPassword)
+    }
+#endif
 }
