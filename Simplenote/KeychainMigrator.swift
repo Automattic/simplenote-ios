@@ -93,11 +93,14 @@ extension KeychainMigrator {
             let password = try oldPasswordItem.readPassword()
             let migratedPasswordItem = KeychainPasswordItem(
                 service: SPCredentials.simperiumAppID(),
-                account: username
+                account: username,
+                accessGroup: newAccessGroup
             )
+
             try migratedPasswordItem.savePassword(password)
         } catch {
             // :(
+            NSLog("Error: \(error)")
         }
     }
 }
