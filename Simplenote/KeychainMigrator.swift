@@ -199,7 +199,7 @@ extension KeychainMigrator {
 
         // Verify
         let migrated = try? loadKeychainEntry(accessGroup: .new, username: dummyUsername)
-        assert(loaded == dummyPassword)
+        assert(migrated == dummyPassword)
     }
 #endif
 }
