@@ -90,4 +90,8 @@
 + (void)trackUserSignedIn;
 + (void)trackUserSignedOut;
 
+#pragma mark - Keychain Migration
++ (void)trackKeychainMigrationSucceeded;
++ (void)trackKeychainMigrationFailed;
+
 @end

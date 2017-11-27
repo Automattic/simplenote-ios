@@ -378,6 +378,20 @@
     [self trackGoogleEventWithCategory:@"user" action:@"signed_out" label:nil value:nil];
 }
 
+#pragma mark - Keychain Migration
+
++ (void)trackKeychainMigrationSucceeded
+{
+    [self trackAutomatticEventWithName:@"keychain_migration_succeeded" properties:nil];
+    [self trackGoogleEventWithCategory:@"keychain" action:@"migraiton" label:@"success" value:nil];
+}
+
++ (void)trackKeychainMigrationFailed
+{
+    [self trackAutomatticEventWithName:@"keychain_migration_failed" properties:nil];
+    [self trackGoogleEventWithCategory:@"keychain" action:@"migration" label:@"failure" value:nil];
+}
+
 
 
 #pragma mark - Google Analytics Helpers

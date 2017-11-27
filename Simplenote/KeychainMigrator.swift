@@ -86,9 +86,13 @@ extension KeychainMigrator {
             let legacyPassword = try loadKeychainEntry(accessGroup: .legacy, username: username)
             try deleteKeychainEntry(accessGroup: .legacy, username: username)
             try saveKeychainEntry(accessGroup: .new, username: username, password: legacyPassword)
+
+            SPTracker.trackKeychainMigrationSucceeded()
         } catch {
             // :(
             NSLog("Error: \(error)")
+
+            SPTracker.trackKeychainMigrationFailed()
         }
     }
 }
