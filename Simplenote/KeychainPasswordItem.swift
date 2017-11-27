@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+/// Ref. https://developer.apple.com/library/content/samplecode/GenericKeychain/Listings/GenericKeychain_KeychainPasswordItem_swift.html
+///
 struct KeychainPasswordItem {
     // MARK: Types
     
