@@ -190,7 +190,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                 tagViewHeight);
 
     [self.view addSubview:_noteEditorTextView];
-    _noteEditorTextView.frame = self.view.frame;
+    _noteEditorTextView.frame = self.view.bounds;
     _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _noteEditorTextView.delegate = self;
     
