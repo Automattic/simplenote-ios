@@ -171,6 +171,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 }
 
+- (void)viewWillLayoutSubviews {
+    if (@available(iOS 11.0, *)) {
+        CGRect viewFrame = _noteEditorTextView.frame;
+        viewFrame.size.height = self.view.frame.size.height - self.view.safeAreaInsets.bottom;
+        _noteEditorTextView.frame = viewFrame;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -182,7 +190,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                 tagViewHeight);
 
     [self.view addSubview:_noteEditorTextView];
-    _noteEditorTextView.frame = self.view.bounds;
+    _noteEditorTextView.frame = self.view.frame;
     _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _noteEditorTextView.delegate = self;
     
