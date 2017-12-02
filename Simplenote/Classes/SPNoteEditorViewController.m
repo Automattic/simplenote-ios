@@ -171,14 +171,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 }
 
-- (void)viewWillLayoutSubviews {
-    if (@available(iOS 11.0, *)) {
-        CGRect viewFrame = _noteEditorTextView.frame;
-        viewFrame.size.height = self.view.frame.size.height - self.view.safeAreaInsets.bottom;
-        _noteEditorTextView.frame = viewFrame;
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -214,10 +206,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self sizeNavigationContainer];
 }
 
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    if (@available(iOS 11.0, *)) {
+        CGRect viewFrame = _noteEditorTextView.frame;
+        viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
+        _noteEditorTextView.frame = viewFrame;
+    }
     
     if (!_currentNote)
         [self newButtonAction:nil];

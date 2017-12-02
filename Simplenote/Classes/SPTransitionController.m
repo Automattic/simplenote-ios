@@ -30,6 +30,7 @@
 #import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 
+#define kEditorTransitionOffset 8
 
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
@@ -174,7 +175,13 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         _snapshotTextView.textContainer.lineFragmentPadding = 0;
     }
     
-     _snapshotTextView.frame = CGRectMake(0, 0, width, [[UIScreen mainScreen] bounds].size.height);
+    CGFloat snapHeight = self.tableView.frame.size.height;
+    if (@available(iOS 11.0, *)) {
+        // Adjust the height of the transition preview for safeAreaInsets.
+        // Fixes awkward looking transition at the bottom of the editor on iPhone X
+        snapHeight -= self.tableView.safeAreaInsets.top + self.tableView.safeAreaInsets.bottom + kEditorTransitionOffset;
+    }
+    _snapshotTextView.frame = CGRectMake(0, 0, width, snapHeight);
     
     NSString *content = preview ? note.preview : note.content;
     if (content.length > transitionControllerMaxTextLength)
