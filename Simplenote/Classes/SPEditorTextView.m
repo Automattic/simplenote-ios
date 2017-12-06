@@ -90,12 +90,6 @@
     
     [super layoutSubviews];
     
-    if (@available(iOS 11.0, *)) {
-        CGRect viewFrame = self.frame;
-        viewFrame.size.height = self.bounds.size.height - self.safeAreaInsets.bottom;
-        self.frame = viewFrame;
-    }
-    
     // Set content insets on side
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
