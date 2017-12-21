@@ -24,12 +24,14 @@ NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPConden
 NSString *const SPAlphabeticalSortPref                              = @"SPAlphabeticalSortPref";
 NSString *const SPAlphabeticalSortPreferenceChangedNotification     = @"SPAlphabeticalSortPreferenceChangedNotification";
 NSString *const SPThemePref                                         = @"SPThemePref";
+NSString *const SPFontPref                                          = @"SPFontPref";
 
 @interface SPOptionsViewController ()
 @property (nonatomic, strong) UISwitch  *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch  *alphabeticalSortSwitch;
 @property (nonatomic, strong) UISwitch  *themeListSwitch;
 @property (nonatomic, strong) UISwitch  *biometrySwitch;
+@property (nonatomic, strong) UISwitch  *fontSwitch;
 @property (nonatomic, assign) BOOL      biometryIsAvailable;
 @property (nonatomic, copy) NSString    *biometryTitle;
 @end
@@ -41,6 +43,7 @@ NSString *const SPThemePref                                         = @"SPThemeP
 #define kTagTheme               3
 #define kTagPasscode            4
 #define kTagTouchID             5
+#define kTagFont                6
 
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
@@ -60,7 +63,8 @@ typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
     SPOptionsPreferencesRowSort         = 0,
     SPOptionsPreferencesRowCondensed    = 1,
     SPOptionsPreferencesRowTheme        = 2,
-    SPOptionsPreferencesRowCount        = 3
+    SPOptionsPreferencesRowFont         = 3,
+    SPOptionsPreferencesRowCount        = 4
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
@@ -118,6 +122,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
+    
+    self.fontSwitch = [UISwitch new];
+    [self.fontSwitch addTarget:self
+                             action:@selector(fontSwitchDidChangeValue:)
+                   forControlEvents:UIControlEventValueChanged];
     
     // Listen to Theme Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -270,6 +279,16 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.accessoryView = self.themeListSwitch;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.tag = kTagTheme;
+                    break;
+                }
+                case SPOptionsPreferencesRowFont: {
+                    cell.textLabel.text = NSLocalizedString(@"Monospace Font", @"Option to enable a monospace font in the note editor.");
+                    
+                    [self.fontSwitch setOn:[self fontPref]];
+                    
+                    cell.accessoryView = self.fontSwitch;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.tag = kTagFont;
                     break;
                 }
             }
@@ -521,6 +540,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 }
 
+- (void)fontSwitchDidChangeValue:(UISwitch *)sender
+{
+    BOOL isOn = [(UISwitch *)sender isOn];
+    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:SPFontPref];
+}
+
 
 #pragma mark - Darkness
 
@@ -535,7 +560,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     // Reload Switch Styles
     VSTheme *theme          = [[VSThemeManager sharedManager] theme];
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch, _fontSwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
@@ -575,6 +600,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (BOOL)themePref
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
+}
+
+- (BOOL)fontPref
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SPFontPref];
 }
 
 @end

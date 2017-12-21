@@ -45,6 +45,7 @@
 #import "SPInteractivePushPopAnimationController.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
+#import "SPOptionsViewController.h"
 
 @import SafariServices;
 
@@ -151,8 +152,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)applyStyle {
     
-    _bodyFont = [self.theme fontWithSystemSizeForKey:@"noteBodyFont"];
-    _headlineFont = [self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SPFontPref]) {
+        _bodyFont = [self.theme fontWithSystemSizeForKey:@"monospaceFont"];
+        _headlineFont = [self.theme fontWithSystemSizeForKey:@"monospaceFontBold"];
+    } else {
+        _bodyFont = [self.theme fontWithSystemSizeForKey:@"noteBodyFont"];
+        _headlineFont = [self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"];
+    }
+    
     _fontColor = [self.theme colorForKey:@"noteHeadlineFontColor"];
     _lightFontColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
     

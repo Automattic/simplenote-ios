@@ -29,6 +29,7 @@
 #import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
+#import "SPOptionsViewController.h"
 
 #define kEditorTransitionOffset 8
 
@@ -133,10 +134,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                       [toVC isKindOfClass:[SPNoteEditorViewController class]];
     BOOL navigatingFromEditorToList = [fromVC isKindOfClass:[SPNoteEditorViewController class]] &&
                                       [toVC isKindOfClass:[SPNoteListViewController class]];
-
+    
     if (navigatingFromListToEditor || navigatingFromEditorToList) {
-        // return self since ViewController adopts UIViewControllerAnimatedTransitioningProtocal
-        self.navigationOperation = operation;
+        BOOL isUsingMonospaceFont = ([[NSUserDefaults standardUserDefaults] boolForKey:SPFontPref]);
+        if (isUsingMonospaceFont) {
+            // use standard transition when using monospace font in the editor
+            return nil;
+        } else {
+            // return self since ViewController adopts UIViewControllerAnimatedTransitioningProtocal
+            self.navigationOperation = operation;
+        }
         return self;
     } else {
         self.pushPopAnimationController.navigationOperation = operation;

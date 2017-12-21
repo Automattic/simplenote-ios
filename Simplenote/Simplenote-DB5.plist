@@ -12,6 +12,10 @@
 		<string>SanFranciscoDisplay-Light</string>
 		<key>boldFontName</key>
 		<string>SanFranciscoDisplay-Regular</string>
+		<key>monospaceFont</key>
+		<string>Courier</string>
+		<key>monospaceFontBold</key>
+		<string>Courier-Bold</string>
 		<key>textColor</key>
 		<string>2d3034</string>
 		<key>lightBlueColor</key>
