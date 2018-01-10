@@ -10,6 +10,10 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373897BB1F8328DE00CEDF91 /* SPTitleView.swift */; };
 		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
+		37E03B5B2005916400572ED1 /* iAWriterDuospace-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37E03B572005916300572ED1 /* iAWriterDuospace-Bold.otf */; };
+		37E03B5C2005916400572ED1 /* iAWriterDuospace-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37E03B582005916300572ED1 /* iAWriterDuospace-Regular.otf */; };
+		37E03B5D2005916400572ED1 /* iAWriterDuospace-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37E03B592005916300572ED1 /* iAWriterDuospace-BoldItalic.otf */; };
+		37E03B5E2005916400572ED1 /* iAWriterDuospace-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37E03B5A2005916300572ED1 /* iAWriterDuospace-RegularItalic.otf */; };
 		37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */; };
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
@@ -204,6 +208,10 @@
 		37CD04BB1A6053E900C4A8E0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BC1A60540500C4A8E0 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BD1A6054E900C4A8E0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37E03B572005916300572ED1 /* iAWriterDuospace-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterDuospace-Bold.otf"; sourceTree = "<group>"; };
+		37E03B582005916300572ED1 /* iAWriterDuospace-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterDuospace-Regular.otf"; sourceTree = "<group>"; };
+		37E03B592005916300572ED1 /* iAWriterDuospace-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterDuospace-BoldItalic.otf"; sourceTree = "<group>"; };
+		37E03B5A2005916300572ED1 /* iAWriterDuospace-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterDuospace-RegularItalic.otf"; sourceTree = "<group>"; };
 		37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainMigrator.swift; sourceTree = "<group>"; };
 		37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -523,6 +531,17 @@
 				17BC3D461BC46BA800535DF3 /* markdown-dark.css */,
 			);
 			name = CSS;
+			sourceTree = "<group>";
+		};
+		37E03B562005912E00572ED1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				37E03B572005916300572ED1 /* iAWriterDuospace-Bold.otf */,
+				37E03B592005916300572ED1 /* iAWriterDuospace-BoldItalic.otf */,
+				37E03B582005916300572ED1 /* iAWriterDuospace-Regular.otf */,
+				37E03B5A2005916300572ED1 /* iAWriterDuospace-RegularItalic.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		467D9C601788A53700785EF3 /* Models */ = {
@@ -995,6 +1014,7 @@
 			isa = PBXGroup;
 			children = (
 				1748382D1BC1CAAB00E834AF /* CSS */,
+				37E03B562005912E00572ED1 /* Fonts */,
 				E29ADD4D17848E8500E55842 /* Images.xcassets */,
 				B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */,
 				B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */,
@@ -1165,13 +1185,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
+				37E03B5D2005916400572ED1 /* iAWriterDuospace-BoldItalic.otf in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
+				37E03B5B2005916400572ED1 /* iAWriterDuospace-Bold.otf in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
+				37E03B5C2005916400572ED1 /* iAWriterDuospace-Regular.otf in Resources */,
 				B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */,
+				37E03B5E2005916400572ED1 /* iAWriterDuospace-RegularItalic.otf in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

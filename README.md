@@ -38,4 +38,7 @@ _Note: Simplenote API features such as sharing and publishing will not work with
 
 Follow the same guidelines as [WordPress for iOS](https://make.wordpress.org/mobile/handbook/pathways/ios/how-to-contribute/).
 
+## Acknowledgements
+This app utilizes the [iA Writer Duospace font](https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Duospace) for the editor with the monospace option enabled.
+
 Happy noting!

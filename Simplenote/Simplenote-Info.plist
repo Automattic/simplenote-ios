@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iAWriterDuospace-Regular.otf</string>
+		<string>iAWriterDuospace-RegularItalic.otf</string>
+		<string>iAWriterDuospace-Bold.otf</string>
+		<string>iAWriterDuospace-BoldItalic.otf</string>
+	</array>
+	<key>ATSApplicationFontsPath</key>
+	<string>Fonts</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

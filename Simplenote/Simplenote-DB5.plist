@@ -13,9 +13,9 @@
 		<key>boldFontName</key>
 		<string>SanFranciscoDisplay-Regular</string>
 		<key>monospaceFont</key>
-		<string>Courier</string>
+		<string>iAWriterDuospace-Regular</string>
 		<key>monospaceFontBold</key>
-		<string>Courier-Bold</string>
+		<string>iAWriterDuospace-Bold</string>
 		<key>textColor</key>
 		<string>2d3034</string>
 		<key>lightBlueColor</key>
