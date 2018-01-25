@@ -13,6 +13,7 @@
 #import "UIView+ImageRepresentation.h"
 #import "UITableView+Styling.h"
 #import "VSThemeManager.h"
+#import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
 #import "UIDevice+Extensions.h"
@@ -470,8 +471,41 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)signOutAction:(id)sender
 {
-    [SPTracker trackUserSignedOut];
-    [[SPAppDelegate sharedDelegate] logoutAndReset:sender];
+    // Safety first: Check for unsynced notes before they are deleted!
+    if ([[SPObjectManager sharedManager] hasUnsyncedNotes]) {
+        UIAlertController* alert = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(@"Unsynced Notes Detected", @"Alert title displayed in settings when an account has unsynced notes")
+                                    message:NSLocalizedString(@"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App.", @"Alert message displayed when an account has unsynced notes")
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* signOutAction = [UIAlertAction
+                                        actionWithTitle:NSLocalizedString(@"Sign Out", @"Verb: Sign out of the app")
+                                        style:UIAlertActionStyleDestructive
+                                        handler:^(UIAlertAction * action) {
+                                            [SPTracker trackUserSignedOut];
+                                            [[SPAppDelegate sharedDelegate] logoutAndReset:sender];
+                                        }];
+        UIAlertAction* viewWebAction = [UIAlertAction
+                                        actionWithTitle:NSLocalizedString(@"Visit Web App", @"Visit app.simplenote.com in the browser")
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action) {
+                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://app.simplenote.com"] options:@{} completionHandler:nil];
+                                        }];
+        UIAlertAction* cancelAction = [UIAlertAction
+                                       actionWithTitle:NSLocalizedString(@"Cancel", @"Verb, cancel an alert dialog")
+                                       style:UIAlertActionStyleCancel
+                                       handler:^(UIAlertAction * action) {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                           
+                                       }];
+        [alert addAction:signOutAction];
+        [alert addAction:viewWebAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [SPTracker trackUserSignedOut];
+        [[SPAppDelegate sharedDelegate] logoutAndReset:sender];
+    }
 }
 
 

@@ -26,6 +26,7 @@
 - (Tag *)tagForName:(NSString *)tagName;
 - (void)moveTagFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 
+- (BOOL)hasUnsyncedNotes;
 - (void)trashNote:(Note *)note;
 - (void)restoreNote:(Note *)note;
 - (void)permenentlyDeleteNote:(Note *)note;
