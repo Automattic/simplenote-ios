@@ -13,7 +13,7 @@
 #import "Note.h"
 #import "Tag.h"
 #import "NSString+Metadata.h"
-#import "JSONKit+Simplenote.h"
+
 
 @implementation SPObjectManager
 
@@ -35,24 +35,6 @@
 - (NSArray *)notes {
     
     return [[SPAppDelegate sharedDelegate].simperium.managedObjectContext fetchAllObjectsForEntityName:@"Note"];
-}
-
-// Unsycned notes have version "0" in the ghost data
-- (BOOL)hasUnsyncedNotes
-{
-    for (Note *note in self.notes) {
-        NSDictionary *parsedGhost   = [note.ghostData objectFromJSONString];
-        id version = [parsedGhost objectForKey:@"version"];
-        if (version == nil) {
-            continue;
-        }
-        
-        if ([version integerValue] == 0) {
-            return YES;
-        }
-    }
-    
-    return NO;
 }
 
 - (NSArray *)tags {
