@@ -486,7 +486,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                 preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* signOutAction = [UIAlertAction
-                                    actionWithTitle:NSLocalizedString(@"Sign Out", @"Verb: Sign out of the app")
+                                    actionWithTitle:NSLocalizedString(@"Delete Notes", @"Verb: Delete notes and sign out of the app")
                                     style:UIAlertActionStyleDestructive
                                     handler:^(UIAlertAction * action) {
                                         [SPTracker trackUserSignedOut];
