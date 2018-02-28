@@ -14,6 +14,7 @@
 #import "Tag.h"
 #import "NSString+Metadata.h"
 
+
 @implementation SPObjectManager
 
 + (SPObjectManager *)sharedManager
@@ -35,6 +36,7 @@
     
     return [[SPAppDelegate sharedDelegate].simperium.managedObjectContext fetchAllObjectsForEntityName:@"Note"];
 }
+
 - (NSArray *)tags {
     
     // sort by index
