@@ -34,6 +34,7 @@ extern NSString *const kSimplenotePinKey;
 extern NSString *const kSimplenotePinLegacyKey;
 extern NSString *const kSimplenoteUseBiometryKey;
 extern NSString *const kSimplenoteMarkdownDefaultKey;
+extern NSString *const kSignInErrorNotificationName;
 
 extern NSString *const kSimplenotePublishURL;
 extern NSString *const kSimplenoteDarkThemeName;

@@ -44,6 +44,8 @@ NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
 
+NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
+
 NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
 NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";

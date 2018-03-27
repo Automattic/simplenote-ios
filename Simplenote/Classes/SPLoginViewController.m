@@ -9,7 +9,9 @@
 #import "SPLoginViewController.h"
 #import "SPConstants.h"
 #import "SPTracker.h"
+#import "Simplenote-Swift.h"
 
+@import SafariServices;
 @import OnePasswordExtension;
 
 
@@ -23,6 +25,8 @@ static UIEdgeInsets SPLoginOnePasswordImageInsets       = {0.0f, 16.0f, 0.0f, 0.
 static UIEdgeInsets SPLoginOnePasswordImageInsetsSmall  = {0.0f, 16.0f, 3.0f, 0.0f};
 
 static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
+
+static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
 
 
 #pragma mark ================================================================================
@@ -39,11 +43,16 @@ static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(signingIn))];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *blueColor      = [UIColor colorWithRed:66.0 / 255.0 green:137 / 255.0 blue:201 / 255.0 alpha:1.0];
+    UIColor *greyColor      = [UIColor colorWithWhite:0.7 alpha:1.0];
+    UIColor *darkGreyColor      = [UIColor colorWithWhite:0.4 alpha:1.0];
 
     // Add OnePassword
     UIButton *onePasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -55,9 +64,27 @@ static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
     // Attach the OnePassword button
     self.usernameField.rightView = self.onePasswordButton;
     
+    // Add the sign in with wordpress.com buton
+    CGRect footerFrame = self.tableView.tableFooterView.frame;
+    footerFrame.size.height += 40;
+    self.tableView.tableFooterView.frame = footerFrame;
+    UIButton *wpccButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [wpccButton setUserInteractionEnabled:YES];
+    [wpccButton setTitle:@"Sign in with WordPress.com" forState:UIControlStateNormal];
+    [wpccButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 16.0f, 0.0f, 0.0f)];
+    [wpccButton setImage:[UIImage imageNamed:@"icon_wpcom"] forState:UIControlStateNormal];
+    [wpccButton setTitleColor:darkGreyColor forState:UIControlStateNormal];
+    [wpccButton setTitleColor:greyColor forState:UIControlStateHighlighted];
+    [wpccButton addTarget:self action:@selector(wpccSignInAction:) forControlEvents:UIControlEventTouchUpInside];
+    wpccButton.frame = CGRectMake(0, 120.0, self.tableView.frame.size.width-20.0, 40.0);
+    [self.tableView.tableFooterView addSubview:wpccButton];
+    
     // Observe SigningIn Changes
     NSKeyValueObservingOptions options = (NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial);
     [self addObserver:self forKeyPath:NSStringFromSelector(@selector(signingIn)) options:options context:nil];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(signInErrorAction:) name:kSignInErrorNotificationName object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,11 +93,36 @@ static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
     [self reloadOnePassword];
 }
 
+- (IBAction)wpccSignInAction:(id)sender
+{
+    NSString *sessionState = [[NSUUID UUID] UUIDString];
+    sessionState = [@"app-" stringByAppendingString:sessionState];
+    [[NSUserDefaults standardUserDefaults] setObject:sessionState forKey:SPAuthSessionKey];
+    NSString *authUrl = @"https://public-api.wordpress.com/oauth2/authenticate?response_type=code&client_id=%@&redirect_uri=%@&state=%@";
+    NSString *requestUrl = [NSString stringWithFormat:authUrl, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
+    NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
+    [self presentViewController:sfvc animated:YES completion:nil];
+}
+
+- (IBAction)signInErrorAction:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Couldn't Sign In"
+                                                                   message:@"An error was encountered while signing in."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [errorAlert addAction:defaultAction];
+    [self presentViewController:errorAlert animated:YES completion:nil];
+}
+
 - (BOOL)isSmallScreen
 {
     return CGRectGetHeight(self.view.bounds) <= SPLoginScreenSmallThreshold;
 }
-
 
 #pragma mark - Overriden Methods
 

@@ -812,9 +812,64 @@
         [_simperium save];
         
         [self presentNote:newNote];
+    } else if ([[url host] isEqualToString:@"auth"]) {
+        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:url
+                                                    resolvingAgainstBaseURL:NO];
+        NSArray *queryItems = urlComponents.queryItems;
+        NSString *state = [self valueForKey:@"state" fromQueryItems:queryItems];
+        NSString *user = [self valueForKey:@"user" fromQueryItems:queryItems];
+        NSString *token = [self valueForKey:@"token" fromQueryItems:queryItems];
+        NSString *isNew = [self valueForKey:@"new" fromQueryItems:queryItems];
+        
+        if (state == nil || user == nil || token == nil) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
+                                                                object:nil];
+            return false;
+        }
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *storedState = [defaults stringForKey:@"SPAuthSessionKey"];
+        if (![state isEqualToString: storedState]) {
+            // States don't match!
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
+                                                                object:nil];
+            return false;
+        }
+        
+        if (self.simperium.user.authenticated) {
+            // We're already signed in
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
+                                                                object:nil];
+            return false;
+        }
+        
+        [defaults removeObjectForKey:@"SPAuthSessionKey"];
+        [defaults setObject:user forKey:@"SPUsername"];
+        NSError *error = nil;
+        BOOL success = [SPKeychain setPassword:token forService:[SPCredentials simperiumAppID] account:user error:&error];
+        if (success == NO) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
+                                                                object:nil];
+            return false;
+        }
+        
+        self.simperium.user = [[SPUser alloc] initWithEmail:user token:token];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.simperium authenticationDidSucceedForUsername:user token:token];
+        
+        if ([isNew isEqualToString:@"true"]) {
+            [self createWelcomeNoteAfterDelay];
+        }
     }
     
     return true;
+}
+
+- (NSString *)valueForKey:(NSString *)key fromQueryItems:(NSArray *)queryItems
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
+    NSURLQueryItem *queryItem = [[queryItems filteredArrayUsingPredicate:predicate] firstObject];
+    return queryItem.value;
 }
 
 - (void)presentNote:(Note *)note
