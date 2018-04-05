@@ -38,6 +38,7 @@
     NSString *headerStart =
         @"<html><head>"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+            "<link href=\"https://fonts.googleapis.com/css?family=Noto+Serif\" rel=\"stylesheet\">"
             "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
     
