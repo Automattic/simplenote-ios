@@ -39,7 +39,7 @@
         @"<html><head>"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
             "<style media=\"screen\" type=\"text/css\">\n";
-    NSString *headerEnd = @"</style></head><body><div class=\"note\"><div id=\"static_content\">";
+    NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     NSString *path = [self cssPathForTheme:theme];
@@ -61,7 +61,7 @@
 
 + (NSString *)htmlFooter
 {
-    return @"</div></div></body></html>";
+    return @"</div></body></html>";
 }
 
 @end
