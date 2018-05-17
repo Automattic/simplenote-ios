@@ -136,16 +136,25 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    CGFloat safeBottomInset = 0;
+    if (@available(iOS 11.0, *)) {
+        safeBottomInset = self.view.safeAreaInsets.bottom;
+    }
+    
     CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight;
+    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight - safeBottomInset;
     self.tableView.frame = tableViewFrame;
-
+    
     settingsButton.frame = CGRectMake(tableViewFrame.origin.x,
                                       tableViewFrame.size.height,
                                       tableViewFrame.size.width,
                                       SPSettingsButtonHeight);
-
+    
     [self updateHeaderButtonHighlight];
 }
 
@@ -648,6 +657,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
+
+    if (@available(iOS 11.0, *)) {
+        contentInset.bottom = self.tableView.contentInset.bottom;
+    }
     
     self.tableView.contentInset = contentInset;
     self.tableView.scrollIndicatorInsets = contentInset;
