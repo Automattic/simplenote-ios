@@ -573,6 +573,9 @@
     self.bSigningUserOut = YES;
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
+    // Remove WordPress token
+    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
+    
     double delayInSeconds = 0.75;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -820,6 +823,7 @@
         NSString *user = [self valueForKey:@"user" fromQueryItems:queryItems];
         NSString *token = [self valueForKey:@"token" fromQueryItems:queryItems];
         NSString *isNew = [self valueForKey:@"new" fromQueryItems:queryItems];
+        NSString *wpcomToken = [self valueForKey:@"wp_token" fromQueryItems:queryItems];
         
         if (state == nil || user == nil || token == nil) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
@@ -851,6 +855,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                                 object:nil];
             return false;
+        }
+        
+        // Store wpcom token for future integrations
+        if (wpcomToken != nil) {
+            [SPKeychain setPassword:token forService:kSimplenoteWPServiceName account:user error:&error];
         }
         
         self.simperium.user = [[SPUser alloc] initWithEmail:user token:token];

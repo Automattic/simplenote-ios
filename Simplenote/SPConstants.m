@@ -43,6 +43,7 @@ NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
+NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
 
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 

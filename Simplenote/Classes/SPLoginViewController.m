@@ -48,10 +48,12 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
 
 - (void)viewDidLoad
 {
+    // Force the 'sign in' layout
+    [self setSigningIn:YES];
     [super viewDidLoad];
     
-    UIColor *blueColor      = [UIColor colorWithRed:66.0 / 255.0 green:137 / 255.0 blue:201 / 255.0 alpha:1.0];
-    UIColor *greyColor      = [UIColor colorWithWhite:0.7 alpha:1.0];
+    UIColor *lightGreyColor     = [UIColor colorWithWhite:0.9 alpha:1.0];
+    UIColor *greyColor          = [UIColor colorWithWhite:0.7 alpha:1.0];
     UIColor *darkGreyColor      = [UIColor colorWithWhite:0.4 alpha:1.0];
 
     // Add OnePassword
@@ -64,20 +66,32 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     // Attach the OnePassword button
     self.usernameField.rightView = self.onePasswordButton;
     
-    // Add the sign in with wordpress.com buton
+    // Add the sign in with wordpress.com button
     CGRect footerFrame = self.tableView.tableFooterView.frame;
     footerFrame.size.height += 40;
     self.tableView.tableFooterView.frame = footerFrame;
+    /*UILabel *orLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 120.0, self.tableView.frame.size.width, 20.0)];
+    [orLabel setTextAlignment:NSTextAlignmentCenter];
+    [orLabel setText:NSLocalizedString(@"or", @"Divider text above WordPress.com singin button")];
+    [self.tableView.tableFooterView addSubview:orLabel];*/
     UIButton *wpccButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [wpccButton setUserInteractionEnabled:YES];
-    [wpccButton setTitle:@"Sign in with WordPress.com" forState:UIControlStateNormal];
-    [wpccButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 16.0f, 0.0f, 0.0f)];
+    [wpccButton setTitle:NSLocalizedString(@"Sign in with WordPress.com", "Button title for connecting a WordPress.com account") forState:UIControlStateNormal];
+    [wpccButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 16.0, 0.0, 0.0)];
     [wpccButton setImage:[UIImage imageNamed:@"icon_wpcom"] forState:UIControlStateNormal];
     [wpccButton setTitleColor:darkGreyColor forState:UIControlStateNormal];
     [wpccButton setTitleColor:greyColor forState:UIControlStateHighlighted];
     [wpccButton addTarget:self action:@selector(wpccSignInAction:) forControlEvents:UIControlEventTouchUpInside];
-    wpccButton.frame = CGRectMake(0, 120.0, self.tableView.frame.size.width-20.0, 40.0);
+    wpccButton.frame = CGRectMake(0, 134.0, self.tableView.frame.size.width-20.0, 40.0);
     [self.tableView.tableFooterView addSubview:wpccButton];
+    
+    UIView *topDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 130.0, self.tableView.frame.size.width, 1.0)];
+    [topDivider setBackgroundColor:lightGreyColor];
+    [self.tableView.tableFooterView addSubview:topDivider];
+    
+    UIView *bottomDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 177.0, self.tableView.frame.size.width, 1.0)];
+    [bottomDivider setBackgroundColor:lightGreyColor];
+    [self.tableView.tableFooterView addSubview:bottomDivider];
     
     // Observe SigningIn Changes
     NSKeyValueObservingOptions options = (NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial);
@@ -98,7 +112,7 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     NSString *sessionState = [[NSUUID UUID] UUIDString];
     sessionState = [@"app-" stringByAppendingString:sessionState];
     [[NSUserDefaults standardUserDefaults] setObject:sessionState forKey:SPAuthSessionKey];
-    NSString *authUrl = @"https://public-api.wordpress.com/oauth2/authenticate?response_type=code&client_id=%@&redirect_uri=%@&state=%@";
+    NSString *authUrl = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";
     NSString *requestUrl = [NSString stringWithFormat:authUrl, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
     NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];

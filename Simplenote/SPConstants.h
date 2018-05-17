@@ -21,6 +21,7 @@ extern NSString *const kSimperiumTermsOfServiceURL;
 extern NSString *const kShareExtensionAccountName;
 extern NSString *const kShareExtensionGroupName;
 extern NSString *const kShareExtensionServiceName;
+extern NSString *const kSimplenoteWPServiceName;
 
 extern NSString *const kOnePasswordSimplenoteTitle;
 extern NSString *const kOnePasswordSimplenoteURL;

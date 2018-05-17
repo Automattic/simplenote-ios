@@ -24,5 +24,11 @@
 	<string>not-required</string>
 	<key>FabricBuildKey</key>
 	<string>not-required</string>
+	<key>WPCCClientID</key>
+	<string>not-required</string>
+	<key>WPCCClientSecret</key>
+	<string>not-required</string>
+	<key>WPCCRedirectURL</key>
+	<string>not-required</string>
 </dict>
 </plist>
