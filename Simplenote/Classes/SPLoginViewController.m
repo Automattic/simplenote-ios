@@ -70,10 +70,6 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     CGRect footerFrame = self.tableView.tableFooterView.frame;
     footerFrame.size.height += 40;
     self.tableView.tableFooterView.frame = footerFrame;
-    /*UILabel *orLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 120.0, self.tableView.frame.size.width, 20.0)];
-    [orLabel setTextAlignment:NSTextAlignmentCenter];
-    [orLabel setText:NSLocalizedString(@"or", @"Divider text above WordPress.com singin button")];
-    [self.tableView.tableFooterView addSubview:orLabel];*/
     UIButton *wpccButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [wpccButton setUserInteractionEnabled:YES];
     [wpccButton setTitle:NSLocalizedString(@"Sign in with WordPress.com", "Button title for connecting a WordPress.com account") forState:UIControlStateNormal];
