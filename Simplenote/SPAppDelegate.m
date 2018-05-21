@@ -32,6 +32,7 @@
 #import "Settings.h"
 #import "SPIntegrityHelper.h"
 #import "SPRatingsHelper.h"
+#import "WPAuthHandler.h"
 
 #import "VSThemeManager.h"
 #import "VSTheme.h"
@@ -815,70 +816,23 @@
         [_simperium save];
         
         [self presentNote:newNote];
-    } else if ([[url host] isEqualToString:@"auth"]) {
-        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:url
-                                                    resolvingAgainstBaseURL:NO];
-        NSArray *queryItems = urlComponents.queryItems;
-        NSString *state = [self valueForKey:@"state" fromQueryItems:queryItems];
-        NSString *user = [self valueForKey:@"user" fromQueryItems:queryItems];
-        NSString *token = [self valueForKey:@"token" fromQueryItems:queryItems];
-        NSString *isNew = [self valueForKey:@"new" fromQueryItems:queryItems];
-        NSString *wpcomToken = [self valueForKey:@"wp_token" fromQueryItems:queryItems];
-        
-        if (state == nil || user == nil || token == nil) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
-                                                                object:nil];
-            return false;
-        }
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *storedState = [defaults stringForKey:@"SPAuthSessionKey"];
-        if (![state isEqualToString: storedState]) {
-            // States don't match!
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
-                                                                object:nil];
-            return false;
-        }
-        
+    } else if ([WPAuthHandler isWPAuthenticationUrl: url]) {
         if (self.simperium.user.authenticated) {
             // We're already signed in
             [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                                 object:nil];
-            return false;
+            return NO;
         }
         
-        [defaults removeObjectForKey:@"SPAuthSessionKey"];
-        [defaults setObject:user forKey:@"SPUsername"];
-        NSError *error = nil;
-        BOOL success = [SPKeychain setPassword:token forService:[SPCredentials simperiumAppID] account:user error:&error];
-        if (success == NO) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
-                                                                object:nil];
-            return false;
-        }
-        
-        // Store wpcom token for future integrations
-        if (wpcomToken != nil) {
-            [SPKeychain setPassword:token forService:kSimplenoteWPServiceName account:user error:&error];
-        }
-        
-        self.simperium.user = [[SPUser alloc] initWithEmail:user token:token];
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        [self.simperium authenticationDidSucceedForUsername:user token:token];
-        
-        if ([isNew isEqualToString:@"true"]) {
-            [self createWelcomeNoteAfterDelay];
+        SPUser *newUser = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
+        if (newUser != nil) {
+            self.simperium.user = newUser;
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [self.simperium authenticationDidSucceedForUsername:newUser.email token:newUser.authToken];
         }
     }
     
-    return true;
-}
-
-- (NSString *)valueForKey:(NSString *)key fromQueryItems:(NSArray *)queryItems
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
-    NSURLQueryItem *queryItem = [[queryItems filteredArrayUsingPredicate:predicate] firstObject];
-    return queryItem.value;
+    return YES;
 }
 
 - (void)presentNote:(Note *)note
