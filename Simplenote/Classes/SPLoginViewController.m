@@ -113,6 +113,7 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     NSString *requestUrl = [NSString stringWithFormat:authUrl, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
     NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
+    sfvc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:sfvc animated:YES completion:nil];
 }
 
