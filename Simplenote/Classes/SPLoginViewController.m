@@ -25,7 +25,7 @@ static UIEdgeInsets SPLoginOnePasswordImageInsets       = {0.0f, 16.0f, 0.0f, 0.
 static UIEdgeInsets SPLoginOnePasswordImageInsetsSmall  = {0.0f, 16.0f, 3.0f, 0.0f};
 
 static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
-static CGFloat SPLoginFieldWidth                        = 400.0f;
+static CGFloat SPLoginFieldMaxWidth                     = 400.0f;
 
 static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
 
@@ -67,6 +67,10 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     // Attach the OnePassword button
     self.usernameField.rightView = self.onePasswordButton;
     
+    CGFloat fieldWidth = self.view.frame.size.width >= SPLoginFieldMaxWidth ?
+        SPLoginFieldMaxWidth :
+        self.view.frame.size.width;
+    
     // Add the sign in with wordpress.com button
     CGRect footerFrame = self.tableView.tableFooterView.frame;
     footerFrame.size.height += 40;
@@ -79,14 +83,14 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     [wpccButton setTitleColor:darkGreyColor forState:UIControlStateNormal];
     [wpccButton setTitleColor:greyColor forState:UIControlStateHighlighted];
     [wpccButton addTarget:self action:@selector(wpccSignInAction:) forControlEvents:UIControlEventTouchUpInside];
-    wpccButton.frame = CGRectMake(0, 134.0, SPLoginFieldWidth-20.0, 40.0);
+    wpccButton.frame = CGRectMake(0, 134.0, fieldWidth-20.0, 40.0);
     [self.tableView.tableFooterView addSubview:wpccButton];
     
-    UIView *topDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 130.0, SPLoginFieldWidth, 1.0)];
+    UIView *topDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 130.0, fieldWidth, 1.0)];
     [topDivider setBackgroundColor:lightGreyColor];
     [self.tableView.tableFooterView addSubview:topDivider];
     
-    UIView *bottomDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 177.0, SPLoginFieldWidth, 1.0)];
+    UIView *bottomDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 177.0, fieldWidth, 1.0)];
     [bottomDivider setBackgroundColor:lightGreyColor];
     [self.tableView.tableFooterView addSubview:bottomDivider];
     
