@@ -119,6 +119,8 @@ static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
     sfvc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:sfvc animated:YES completion:nil];
+    
+    [SPTracker trackWPCCButtonPressed];
 }
 
 - (IBAction)signInErrorAction:(NSNotification *)notification

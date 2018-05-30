@@ -829,6 +829,8 @@
             self.simperium.user = newUser;
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             [self.simperium authenticationDidSucceedForUsername:newUser.email token:newUser.authToken];
+            
+            [SPTracker trackWPCCLoginSucceeded];
         }
     }
     

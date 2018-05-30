@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 #import "WPAuthHandler.h"
 #import "SPConstants.h"
+#import "SPTracker.h"
 
 @import Simperium;
 
@@ -39,7 +40,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                             object:nil
                                                           userInfo:errorInfo];
-        return false;
+        [SPTracker trackWPCCLoginFailed];
+        return nil;
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -48,6 +50,7 @@
         // States don't match!
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                             object:nil];
+        [SPTracker trackWPCCLoginFailed];
         return nil;
     }
     
@@ -58,6 +61,7 @@
     if (success == NO) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                             object:nil];
+        [SPTracker trackWPCCLoginFailed];
         return nil;
     }
     
