@@ -404,6 +404,23 @@
     [self trackGoogleEventWithCategory:@"keychain" action:@"failsafe" label:@"failure" value:nil];
 }
 
+#pragma mark - WP.com Sign In
+
++ (void)trackWPCCButtonPressed
+{
+    [self trackAutomatticEventWithName:@"wpcc_button_pressed" properties:nil];
+}
+
++ (void)trackWPCCLoginSucceeded
+{
+    [self trackAutomatticEventWithName:@"wpcc_login_succeeded" properties:nil];
+}
+
++ (void)trackWPCCLoginFailed
+{
+    [self trackAutomatticEventWithName:@"wpcc_login_failed" properties:nil];
+}
+
 
 #pragma mark - Google Analytics Helpers
 
