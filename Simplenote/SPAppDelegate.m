@@ -32,6 +32,7 @@
 #import "Settings.h"
 #import "SPIntegrityHelper.h"
 #import "SPRatingsHelper.h"
+#import "WPAuthHandler.h"
 
 #import "VSThemeManager.h"
 #import "VSTheme.h"
@@ -573,6 +574,9 @@
     self.bSigningUserOut = YES;
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
+    // Remove WordPress token
+    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
+    
     double delayInSeconds = 0.75;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -812,9 +816,25 @@
         [_simperium save];
         
         [self presentNote:newNote];
+    } else if ([WPAuthHandler isWPAuthenticationUrl: url]) {
+        if (self.simperium.user.authenticated) {
+            // We're already signed in
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
+                                                                object:nil];
+            return NO;
+        }
+        
+        SPUser *newUser = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
+        if (newUser != nil) {
+            self.simperium.user = newUser;
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [self.simperium authenticationDidSucceedForUsername:newUser.email token:newUser.authToken];
+            
+            [SPTracker trackWPCCLoginSucceeded];
+        }
     }
     
-    return true;
+    return YES;
 }
 
 - (void)presentNote:(Note *)note
