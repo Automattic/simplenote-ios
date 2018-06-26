@@ -190,6 +190,9 @@
 /* Sign out of the active account in the app */
 "Sign Out" = "Sign Out";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App.";
+
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Add a tag to the current note";
 
@@ -225,6 +228,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Unpublishing...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Unsynced Notes Detected";
 
 /* Represents a snapshot in time for a note */
 "Version" = "Version";
