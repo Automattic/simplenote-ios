@@ -54,8 +54,6 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         addHeaderView()
         addFooterView()
         addDoneButton()
-    
-        self.view.addSubview(doneButton)
     }
     
     func addHeaderView() {
@@ -139,6 +137,8 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         doneButton.setTitleColor(lightBlue, for: UIControlState.highlighted)
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControlEvents.touchUpInside)
         doneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
+        
+        self.view.addSubview(doneButton)
     }
     
     override func viewDidLayoutSubviews() {
