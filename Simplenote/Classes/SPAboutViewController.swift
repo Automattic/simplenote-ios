@@ -33,68 +33,146 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     private let headerView = UIView()
     private let footerView = UIView()
     private let tableView = UITableView()
+    private let containerView = UIStackView()
     private let doneButton = UIButton(type: UIButtonType.custom)
     
     private let simpleBlue = UIColor(red: 74/255, green: 149/255, blue: 213/255, alpha: 1.0)
     private let lightBlue = UIColor(red: 118/255, green: 175/255, blue: 223/255, alpha: 1.0)
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = simpleBlue
-        self.view.addSubview(tableView)
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
-        self.tableView.separatorColor = lightBlue
-        self.tableView.backgroundColor = UIColor.clear
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
-        addHeaderView()
-        addFooterView()
+        view.backgroundColor = simpleBlue
+
         addDoneButton()
+        addContainerView()
+        addHeaderView()
+        addTableView()
+        addFooterView()
     }
-    
+
+    func addDoneButton() {
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControlState.normal)
+        doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        doneButton.setTitleColor(lightBlue, for: UIControlState.highlighted)
+        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControlEvents.touchUpInside)
+        doneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
+
+        view.addSubview(doneButton)
+
+        NSLayoutConstraint.activate([
+            doneButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15.0)
+            ])
+    }
+
+    func addContainerView() {
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.axis = .vertical
+        containerView.alignment = .fill
+        containerView.spacing = 10.0
+        view.insertSubview(containerView, belowSubview: doneButton)
+
+        var bottomAnchor = bottomLayoutGuide.topAnchor
+        if #available(iOS 11.0, *) {
+            bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
+        }
+
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: -14.0),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14.0)
+            ])
+    }
+
     func addHeaderView() {
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = simpleBlue
-        
+
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        headerView.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor)
+            ])
+
         let imageView = UIImageView(image: UIImage(named: "logo_about"))
-        imageView.frame = CGRect(x: 0, y: 20, width: 100, height: 100)
-        imageView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-        
-        let appNameLabel = UILabel(frame:CGRect(x: 0, y: 120, width: 320, height: 24))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 100)
+            ])
+
+        stackView.addArrangedSubview(imageView)
+
+        let appNameLabel = UILabel()
+        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         appNameLabel.text = Bundle.main.infoDictionary!["CFBundleName"] as? String
         appNameLabel.textColor = UIColor.white
         appNameLabel.font = UIFont.systemFont(ofSize: 24)
         appNameLabel.textAlignment = NSTextAlignment.center
-        appNameLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-        
-        let versionLabel = UILabel(frame:CGRect(x: 0, y: 146, width: 320, height: 14))
+        stackView.addArrangedSubview(appNameLabel)
+
+        NSLayoutConstraint.activate([
+            appNameLabel.widthAnchor.constraint(equalToConstant: 320),
+            appNameLabel.heightAnchor.constraint(equalToConstant: 24)
+            ])
+
+        let spacer = UIView()
+        spacer.translatesAutoresizingMaskIntoConstraints = false
+        spacer.heightAnchor.constraint(equalToConstant: 3.0).isActive = true
+        stackView.addArrangedSubview(spacer)
+
+        let versionLabel = UILabel()
         let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+        versionLabel.translatesAutoresizingMaskIntoConstraints = false
         versionLabel.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
         versionLabel.textColor = UIColor.white
         versionLabel.font = UIFont.systemFont(ofSize: 14)
         versionLabel.textAlignment = NSTextAlignment.center
-        versionLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
-        
-        headerView.addSubview(imageView)
-        headerView.addSubview(appNameLabel)
-        headerView.addSubview(versionLabel)
-        
-        self.view.addSubview(headerView)
+        stackView.addArrangedSubview(versionLabel)
+
+        NSLayoutConstraint.activate([
+            versionLabel.widthAnchor.constraint(equalToConstant: 320),
+            versionLabel.heightAnchor.constraint(equalToConstant: 14)
+            ])
+
+        containerView.addArrangedSubview(headerView)
     }
     
     func addFooterView() {
-        let frame = self.view.frame;
-        // UITextViews have padding, so height of 26 is needed to accomodate the extra space
-        let serviceTextView = UITextView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 26))
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 2.0
+        footerView.addSubview(stackView)
+
+        let serviceTextView = UITextView()
+        serviceTextView.translatesAutoresizingMaskIntoConstraints = false
         serviceTextView.backgroundColor = UIColor.clear
         serviceTextView.font = UIFont.systemFont(ofSize: 14)
         serviceTextView.textAlignment = NSTextAlignment.center
         serviceTextView.textColor = UIColor.white
         serviceTextView.isEditable = false
-        serviceTextView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+
+        // UITextViews have padding, so height of 26 is needed to accommodate the extra space
+        serviceTextView.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
         
         let privacyString = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
         let termsString = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
@@ -116,49 +194,38 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         let linkAttributes: [String : Any] = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
         serviceTextView.linkTextAttributes = linkAttributes
         
-        let copyrightLabel = UILabel(frame: CGRect(x: 0, y: 30, width: 200, height: 14))
+        let copyrightLabel = UILabel()
+        copyrightLabel.translatesAutoresizingMaskIntoConstraints = false
         copyrightLabel.font = UIFont.systemFont(ofSize: 14)
         copyrightLabel.textAlignment = NSTextAlignment.center
         copyrightLabel.textColor = UIColor.white
-        copyrightLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         copyrightLabel.text = String(format: "\u{00A9} %@ Automattic", formatter.string(from: Date()))
-        
-        footerView.addSubview(serviceTextView)
-        footerView.addSubview(copyrightLabel)
-        
-        self.view.addSubview(footerView)
+
+        stackView.addArrangedSubview(serviceTextView)
+        stackView.addArrangedSubview(copyrightLabel)
+
+        containerView.addArrangedSubview(footerView)
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: footerView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: footerView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
     }
-    
-    func addDoneButton() {
-        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControlState.normal)
-        doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)
-        doneButton.setTitleColor(lightBlue, for: UIControlState.highlighted)
-        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControlEvents.touchUpInside)
-        doneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
-        
-        self.view.addSubview(doneButton)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        let frame = self.view.frame;
-        var headerYPosition: CGFloat = 0
-        var adjustedFooterHeight: CGFloat = footerHeight
-        var doneButtonXPosition = frame.size.width - doneButtonWidth - 15
-        
-        // Adjust positioning of view on devices like iPhone X
-        if #available(iOS 11.0, *) {
-            headerYPosition += self.view.safeAreaInsets.top
-            adjustedFooterHeight += self.view.safeAreaInsets.bottom
-            doneButtonXPosition -= self.view.safeAreaInsets.right
-        }
-        let headerSize = headerHeight + headerYPosition
-        
-        headerView.frame = CGRect(x: 0, y: headerYPosition, width: frame.size.width, height: headerHeight)
-        tableView.frame = CGRect(x: frame.origin.x, y: headerSize, width: frame.size.width, height: frame.size.height - adjustedFooterHeight - headerSize)
-        footerView.frame = CGRect(x: 0, y: frame.size.height - adjustedFooterHeight, width: frame.size.width, height: adjustedFooterHeight)
-        doneButton.frame = CGRect(x: doneButtonXPosition, y: headerYPosition + 10, width: doneButtonWidth, height: 17)
+
+    func addTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.separatorColor = lightBlue
+        tableView.backgroundColor = UIColor.clear
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.indicatorStyle = .white
+
+        containerView.addArrangedSubview(tableView)
     }
 
     // MARK: - Table view data source
@@ -220,6 +287,6 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func onDoneTap(_ sender:UIButton) {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
