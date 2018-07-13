@@ -10,6 +10,7 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373897BB1F8328DE00CEDF91 /* SPTitleView.swift */; };
 		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
+		3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762530520F54FFB00C1F239 /* SPAboutViewController.swift */; };
 		37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E10E7620B3368700864E43 /* WPAuthHandler.m */; };
 		37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */; };
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
@@ -201,6 +202,7 @@
 		373897BB1F8328DE00CEDF91 /* SPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTitleView.swift; path = Classes/SPTitleView.swift; sourceTree = "<group>"; };
 		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
 		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
+		3762530520F54FFB00C1F239 /* SPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAboutViewController.swift; path = Classes/SPAboutViewController.swift; sourceTree = "<group>"; };
 		37CD04B91A60538B00C4A8E0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BA1A6053CC00C4A8E0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37CD04BB1A6053E900C4A8E0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -981,6 +983,7 @@
 				E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */,
 				B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */,
 				B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */,
+				3762530520F54FFB00C1F239 /* SPAboutViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1425,6 +1428,7 @@
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
 				46A3C96B17DFA81A002865AE /* NSAttributedString+Styling.m in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
+				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
