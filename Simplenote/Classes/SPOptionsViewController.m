@@ -18,7 +18,7 @@
 #import "SPDebugViewController.h"
 #import "UIDevice+Extensions.h"
 #import <LocalAuthentication/LocalAuthentication.h>
-
+#import "Simplenote-Swift.h"
 
 NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
 NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
@@ -47,8 +47,9 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
     SPOptionsViewSectionsSecurity       = 1,
     SPOptionsViewSectionsAccount        = 2,
-    SPOptionsViewSectionsDebug          = 3,
-    SPOptionsViewSectionsCount          = 4
+    SPOptionsViewSectionsAbout          = 3,
+    SPOptionsViewSectionsDebug          = 4,
+    SPOptionsViewSectionsCount          = 5
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -68,6 +69,11 @@ typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
     SPOptionsSecurityRowRowBiometry     = 1,
     SPOptionsSecurityRowRowCount        = 2
+};
+
+typedef NS_ENUM(NSInteger, SPOptionsAboutRow) {
+    SPOptionsAboutRowTitle              = 0,
+    SPOptionsAboutRowCount              = 1
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
@@ -192,6 +198,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsSecurity: {
             return self.biometryIsAvailable ? SPOptionsSecurityRowRowCount : SPOptionsSecurityRowRowCount - 1;
+        }
+            
+        case SPOptionsViewSectionsAbout: {
+            return SPOptionsAboutRowCount;
         }
             
         case SPOptionsViewSectionsDebug: {
@@ -327,6 +337,16 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+        } case SPOptionsViewSectionsAbout: {
+            
+            switch (indexPath.row) {
+                case SPOptionsAboutRowTitle: {
+                    cell.textLabel.text = NSLocalizedString(@"About", @"Display app about screen");
+                    break;
+                }
+            }
+            
+            break;
         } case SPOptionsViewSectionsDebug: {
 
             switch (indexPath.row) {
@@ -336,6 +356,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
             }
+            
+            break;
         }
 
         default:
@@ -375,6 +397,17 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+        } case SPOptionsViewSectionsAbout: {
+            switch (indexPath.row) {
+                case SPOptionsAboutRowTitle: {
+                    SPAboutViewController *aboutController = [[SPAboutViewController alloc] init];
+                    aboutController.modalPresentationStyle = UIModalPresentationFormSheet;
+                    [[self navigationController] presentViewController:aboutController animated:YES completion:nil];
+                    break;
+                }
+            }
+            
+            break;
         } case SPOptionsViewSectionsDebug: {
             switch (indexPath.row) {
                 case SPOptionsDebugRowStats: {
@@ -382,6 +415,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
             }
+            
+            break;
         }
             
 
