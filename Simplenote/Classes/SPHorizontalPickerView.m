@@ -8,7 +8,6 @@
 
 #import "SPHorizontalPickerView.h"
 #import "VSThemeManager.h"
-#import "MagnifierView.h"
 #import "SPHorizontalPickerGradientView.h"
 
 static CGSize PickerDefaultSize = {88.0, 88.0};
@@ -113,15 +112,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
         itemCollectionView.backgroundColor = [UIColor clearColor];
         
         self.backgroundColor = [self.theme colorForKey:@"actionSheetBackgroundColor"];
-        
-        // magnifier view
-        selectionMagnifierView = [[MagnifierView alloc] initWithFrame:CGRectMake(0, collectionViewYOrigin, self.itemWidth, self.bounds.size.height - collectionViewYOrigin - verticalPadding)];
-		selectionMagnifierView.viewToMagnify = self;
-        selectionMagnifierView.touchPoint = itemCollectionView.center;
-        selectionMagnifierView.userInteractionEnabled = NO;
-        [self addSubview:selectionMagnifierView];
-        
-        
+
         // add gradients
         leftGradientView = [[SPHorizontalPickerGradientView alloc] initWithGradientViewDirection:SPHorizontalPickerGradientViewDirectionLeft];
         [self addSubview:leftGradientView];
@@ -141,24 +132,16 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
     
     [super layoutSubviews];
     
-    selectionMagnifierView.touchPoint = itemCollectionView.center;
-    selectionMagnifierView.center = itemCollectionView.center;
-    
+    CGFloat gradientLeftPosition = itemCollectionView.center.x - (self.itemWidth / 2);
+    CGFloat gradientRightPosition = itemCollectionView.center.x + (self.itemWidth / 2);
     leftGradientView.frame = CGRectMake(0,
                                         itemCollectionView.frame.origin.y,
-                                        selectionMagnifierView.frame.origin.x,
+                                        gradientLeftPosition,
                                         itemCollectionView.frame.size.height);
-    rightGradientView.frame = CGRectMake(selectionMagnifierView.frame.origin.x + selectionMagnifierView.frame.size.width,
+    rightGradientView.frame = CGRectMake(gradientRightPosition,
                                          itemCollectionView.frame.origin.y,
-                                         self.bounds.size.width - selectionMagnifierView.frame.origin.x - selectionMagnifierView.frame.size.width,
+                                         self.bounds.size.width - gradientRightPosition,
                                          itemCollectionView.frame.size.height);
-    
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [selectionMagnifierView setNeedsDisplay];
-    });
-    
-
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -215,14 +198,6 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
 }
 
 #pragma mark UIScrollViewDelegate methods
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    [selectionMagnifierView setNeedsDisplay];
-    
-}
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
         [self selectItemAtPoint:scrollView.contentOffset sendDelegateCallback:YES];
@@ -250,19 +225,10 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
     index = MIN(index, [delegate numberOfItemsInPickerView:self] - 1);
         
     [self selectItemAtIndex:index sendDelegateCallback:send animated:YES];
-    
 }
 
 - (void)setSelectedIndex:(NSInteger)index {
-    
-//    selectedIndex = index;
-//    
-//    [itemCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]
-//                                     animated:NO
-//                               scrollPosition:UICollectionViewScrollPositionNone];
-    
     selectedIndex = index;
-
 }
 
 - (void)selectItemAtIndex:(NSInteger)index {
@@ -331,10 +297,6 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
 
 - (void)reloadData {
     [itemCollectionView reloadData];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [selectionMagnifierView setNeedsDisplay];
-    });
-
 }
 
 @end

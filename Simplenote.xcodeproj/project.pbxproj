@@ -43,7 +43,6 @@
 		46A3C98317DFA81A002865AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD4717848E8500E55842 /* main.m */; };
 		46A3C98417DFA81A002865AE /* SPHorizontalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E29B7C1417A7354F00A996F5 /* SPHorizontalPickerView.m */; };
 		46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */; };
-		46A3C98717DFA81A002865AE /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D43B217A8235B006811F2 /* MagnifierView.m */; };
 		46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
 		46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD4B17848E8500E55842 /* SPAppDelegate.m */; };
 		46A3C98B17DFA81A002865AE /* SPHorizontalPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ACA87F17A7692E00EF801C /* SPHorizontalPickerViewCell.m */; };
@@ -367,8 +366,6 @@
 		E235CE3417CBAC1400F5AE02 /* SPTransitionSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTransitionSnapshot.m; path = Classes/SPTransitionSnapshot.m; sourceTree = "<group>"; };
 		E239600F17B6A22800504FFB /* SPOutsideTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPOutsideTouchView.h; path = Classes/SPOutsideTouchView.h; sourceTree = "<group>"; };
 		E239601017B6A22800504FFB /* SPOutsideTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPOutsideTouchView.m; path = Classes/SPOutsideTouchView.m; sourceTree = "<group>"; };
-		E23D43B117A8235B006811F2 /* MagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagnifierView.h; path = Classes/MagnifierView.h; sourceTree = "<group>"; };
-		E23D43B217A8235B006811F2 /* MagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagnifierView.m; path = Classes/MagnifierView.m; sourceTree = "<group>"; };
 		E23D43B717A8322C006811F2 /* SPHorizontalPickerGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPHorizontalPickerGradientView.h; path = Classes/SPHorizontalPickerGradientView.h; sourceTree = "<group>"; };
 		E23D43B817A8322C006811F2 /* SPHorizontalPickerGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPHorizontalPickerGradientView.m; path = Classes/SPHorizontalPickerGradientView.m; sourceTree = "<group>"; };
 		E245094F179466F5008C5922 /* UIButton+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+Images.h"; path = "Classes/UIButton+Images.h"; sourceTree = "<group>"; };
@@ -748,8 +745,6 @@
 				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
 				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
-				E23D43B117A8235B006811F2 /* MagnifierView.h */,
-				E23D43B217A8235B006811F2 /* MagnifierView.m */,
 				E201864617A4892300217E0B /* SPActionButton.h */,
 				E201864717A4892300217E0B /* SPActionButton.m */,
 				E22BCDF81794F55000A17ED2 /* SPActionSheet.h */,
@@ -1460,7 +1455,6 @@
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
-				46A3C98717DFA81A002865AE /* MagnifierView.m in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
