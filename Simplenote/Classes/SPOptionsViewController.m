@@ -153,7 +153,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.doneToolbar sizeToFit];
     
     UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Done", @"Done toolbar button")                                                                                    style:UIBarButtonItemStylePlain target:self                                                                 action:@selector(pinTimeoutDoneAction:)];
-    
     UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace                                                                                    target:nil action:nil];
     
     fixedSpace.width = self.doneToolbar.frame.size.width;
