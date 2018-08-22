@@ -50,3 +50,6 @@ NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificatio
 NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
 NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";
+
+NSString *const kAppLastUsedDatePreferencesKey      = @"kAppLastUsedDatePreferencesKey";
+NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";

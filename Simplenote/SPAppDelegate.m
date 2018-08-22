@@ -308,6 +308,52 @@
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
+    if (self.pinLockWindow != nil
+        && [self.pinLockWindow isKeyWindow]
+        && [self shouldBypassPinLock]) {
+        // Bring the main window to the front, which 'dismisses' the pin lock window
+        [self.window makeKeyAndVisible];
+    }
+}
+
+- (BOOL)shouldBypassPinLock {
+    NSDate *lastUsedDate = [[NSUserDefaults standardUserDefaults] objectForKey:kAppLastUsedDatePreferencesKey];
+    if (lastUsedDate == nil) {
+        return NO;
+    }
+    
+    NSDate *nowDate = [[NSDate alloc] init];
+    NSTimeInterval intervalSinceLastUsed = [nowDate timeIntervalSinceDate:lastUsedDate];
+    NSInteger maxTimeoutSeconds = [self getPinLockTimeoutSeconds];
+
+    return intervalSinceLastUsed < maxTimeoutSeconds;
+}
+
+// Returns the number of seconds of the 'Timeout Lock' setting selected in SPOptionsViewController
+- (NSInteger)getPinLockTimeoutSeconds {
+    NSInteger timeoutPref = [[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey];
+    switch(timeoutPref) {
+        case 1:
+            return 15;
+        case 2:
+            return 30;
+        case 3:
+            return 60;
+        case 4:
+            return 120;
+        case 5:
+            return 180;
+        case 6:
+            return 240;
+        case 7:
+            return 300;
+        default:
+            return 0;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
@@ -335,6 +381,8 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    NSDate *nowDate = [[NSDate alloc] init];
+    [[NSUserDefaults standardUserDefaults] setObject:nowDate forKey:kAppLastUsedDatePreferencesKey];
     [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;

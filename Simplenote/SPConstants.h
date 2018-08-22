@@ -40,3 +40,6 @@ extern NSString *const kSignInErrorNotificationName;
 extern NSString *const kSimplenotePublishURL;
 extern NSString *const kSimplenoteDarkThemeName;
 extern NSString *const kSimplenoteDefaultThemeName;
+
+extern NSString *const kAppLastUsedDatePreferencesKey;
+extern NSString *const kPinTimeoutPreferencesKey;
