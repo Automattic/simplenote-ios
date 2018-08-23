@@ -319,13 +319,20 @@
 }
 
 - (BOOL)shouldBypassPinLock {
-    NSDate *lastUsedDate = [[NSUserDefaults standardUserDefaults] objectForKey:kAppLastUsedDatePreferencesKey];
-    if (lastUsedDate == nil) {
+    NSString *lastUsedString = [SPKeychain passwordForService:kSimplenotePasscodeServiceName account:kShareExtensionAccountName];
+    if (lastUsedString == nil) {
         return NO;
     }
     
-    NSDate *nowDate = [[NSDate alloc] init];
-    NSTimeInterval intervalSinceLastUsed = [nowDate timeIntervalSinceDate:lastUsedDate];
+    long lastUsedSeconds = lastUsedString.longLongValue;
+    if (lastUsedSeconds == 0) {
+        return NO;
+    }
+    
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+    long nowSeconds = (long)ts.tv_sec;
+    long intervalSinceLastUsed = nowSeconds - lastUsedSeconds;
     NSInteger maxTimeoutSeconds = [self getPinLockTimeoutSeconds];
 
     return intervalSinceLastUsed < maxTimeoutSeconds;
@@ -334,24 +341,13 @@
 // Returns the number of seconds of the 'Timeout Lock' setting selected in SPOptionsViewController
 - (NSInteger)getPinLockTimeoutSeconds {
     NSInteger timeoutPref = [[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey];
-    switch(timeoutPref) {
-        case 1:
-            return 15;
-        case 2:
-            return 30;
-        case 3:
-            return 60;
-        case 4:
-            return 120;
-        case 5:
-            return 180;
-        case 6:
-            return 240;
-        case 7:
-            return 300;
-        default:
-            return 0;
+    NSArray *timeoutValues = @[@0, @15, @30, @60, @120, @180, @240, @300];
+    
+    if (timeoutPref > timeoutValues.count) {
+        return 0;
     }
+    
+    return [timeoutValues[timeoutPref] integerValue];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
@@ -381,8 +377,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    NSDate *nowDate = [[NSDate alloc] init];
-    [[NSUserDefaults standardUserDefaults] setObject:nowDate forKey:kAppLastUsedDatePreferencesKey];
     [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
@@ -390,6 +384,14 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
+    
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self passcodeLockIsEnabled]) {
+        struct timespec ts;
+        clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+        NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)ts.tv_sec];
+        [SPKeychain setPassword:nowTime forService:kSimplenotePasscodeServiceName account:kShareExtensionAccountName];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -925,17 +927,14 @@
 
 -(void)showPasscodeLockIfNecessary
 {
-    
-    NSString *pin = [self getPin:YES];
-    
-    if (!pin || pin.length == 0 || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
+    if (![self passcodeLockIsEnabled] || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
         return;
 	}
     
     BOOL useBiometry = self.allowBiometryInsteadOfPin;
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
-	controller.pin = pin;
+	controller.pin = [self getPin:YES];
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
@@ -943,6 +942,12 @@
     self.pinLockWindow.rootViewController = controller;
     [self.pinLockWindow makeKeyAndVisible];
 	[controller fixLayout];
+}
+
+- (BOOL)passcodeLockIsEnabled {
+    NSString *pin = [self getPin:YES];
+    
+    return pin != nil && pin.length != 0;
 }
 
 - (void)pinLockControllerDidFinishUnlocking

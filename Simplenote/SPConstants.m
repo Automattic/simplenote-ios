@@ -44,6 +44,7 @@ NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
 NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
+NSString *const kSimplenotePasscodeServiceName      = @"simplenote-passcode";
 
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 
@@ -51,5 +52,4 @@ NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/"
 NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";
 
-NSString *const kAppLastUsedDatePreferencesKey      = @"kAppLastUsedDatePreferencesKey";
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
