@@ -235,8 +235,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsSecurity: {
-            int rowsToRemove = [self pinLockIsEnabled] ? 1 : 2;
-            return self.biometryIsAvailable ? SPOptionsSecurityRowRowCount : SPOptionsSecurityRowRowCount - rowsToRemove;
+            int rowsToRemove = self.biometryIsAvailable ? 0 : 1;
+            int disabledPinLockRows = [self biometryIsAvailable] ? 2 : 1;
+            return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
             
         case SPOptionsViewSectionsAbout: {
@@ -341,14 +342,19 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsSecurityRowRowBiometry: {
-                    cell.textLabel.text = self.biometryTitle;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-                    BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
-
-                    self.biometrySwitch.on = isBiometryOn;
-                    cell.accessoryView = self.biometrySwitch;
-                    cell.tag = kTagTouchID;
+                    // Let the timeout row render the cell (next switch statement) if biometry is unavailable
+                    if ([self biometryIsAvailable]) {
+                        cell.textLabel.text = self.biometryTitle;
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        
+                        BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
+                        
+                        self.biometrySwitch.on = isBiometryOn;
+                        cell.accessoryView = self.biometrySwitch;
+                        cell.tag = kTagTouchID;
+                        
+                        break;
+                    }
                 }
                 case SPOptionsSecurityRowTimeout: {
                     cell.textLabel.text = NSLocalizedString(@"Lock Timeout", @"Setting for when the passcode lock should enable");
@@ -358,6 +364,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     
                     NSInteger timeoutPref = [[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey];
                     [cell.detailTextLabel setText:timeoutPickerOptions[timeoutPref]];
+                    
+                    break;
                 }
                     
                 default:
