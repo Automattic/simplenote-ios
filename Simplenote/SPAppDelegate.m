@@ -312,42 +312,10 @@
     // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
     if (self.pinLockWindow != nil
         && [self.pinLockWindow isKeyWindow]
-        && [self shouldBypassPinLock]) {
+        && [SPPinLockManager shouldBypassPinLock]) {
         // Bring the main window to the front, which 'dismisses' the pin lock window
         [self.window makeKeyAndVisible];
     }
-}
-
-- (BOOL)shouldBypassPinLock {
-    NSString *lastUsedString = [SPKeychain passwordForService:kSimplenotePasscodeServiceName account:kShareExtensionAccountName];
-    if (lastUsedString == nil) {
-        return NO;
-    }
-    
-    long lastUsedSeconds = lastUsedString.longLongValue;
-    if (lastUsedSeconds == 0) {
-        return NO;
-    }
-    
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-    long nowSeconds = (long)ts.tv_sec;
-    long intervalSinceLastUsed = nowSeconds - lastUsedSeconds;
-    NSInteger maxTimeoutSeconds = [self getPinLockTimeoutSeconds];
-
-    return intervalSinceLastUsed < maxTimeoutSeconds;
-}
-
-// Returns the number of seconds of the 'Timeout Lock' setting selected in SPOptionsViewController
-- (NSInteger)getPinLockTimeoutSeconds {
-    NSInteger timeoutPref = [[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey];
-    NSArray *timeoutValues = @[@0, @15, @30, @60, @120, @180, @240, @300];
-    
-    if (timeoutPref > timeoutValues.count) {
-        return 0;
-    }
-    
-    return [timeoutValues[timeoutPref] integerValue];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler

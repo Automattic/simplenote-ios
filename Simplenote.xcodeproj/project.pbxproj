@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
+		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373897BB1F8328DE00CEDF91 /* SPTitleView.swift */; };
 		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762530520F54FFB00C1F239 /* SPAboutViewController.swift */; };
@@ -198,6 +199,7 @@
 		183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_SimplenoteShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BBEDD4EB11FC7D576AE690 /* Pods-SimplenoteTests.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
 		373897BB1F8328DE00CEDF91 /* SPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTitleView.swift; path = Classes/SPTitleView.swift; sourceTree = "<group>"; };
 		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
 		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
@@ -723,6 +725,7 @@
 				B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */,
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
+				371A862F213DF00E002E9120 /* SPPinLockManager.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1514,6 +1517,7 @@
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
+				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
