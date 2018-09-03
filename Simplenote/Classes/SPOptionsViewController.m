@@ -739,8 +739,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    NSAttributedString *attributedTitle =
-    [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:@{NSForegroundColorAttributeName:[theme colorForKey:@"textColor"]}];
+    NSDictionary *attributes = @{NSForegroundColorAttributeName:[theme colorForKey:@"textColor"]};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];
     
     return attributedTitle;
 }
