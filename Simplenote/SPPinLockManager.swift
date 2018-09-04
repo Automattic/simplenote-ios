@@ -38,4 +38,11 @@ class SPPinLockManager: NSObject {
         
         return timeoutValues[timeoutPref]
     }
+    
+    @objc static func storeLastUsedTime() {
+        var ts = timespec.init()
+        clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
+        let nowTime = String.init(format: "%ld", ts.tv_sec)
+        SPKeychain.setPassword(nowTime, forService: kSimplenotePasscodeServiceName, account: kShareExtensionAccountName)
+    }
 }

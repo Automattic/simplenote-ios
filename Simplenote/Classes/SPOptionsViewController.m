@@ -342,7 +342,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsSecurityRowRowBiometry: {
-                    // Let the timeout row render the cell (next switch statement) if biometry is unavailable
                     if ([self biometryIsAvailable]) {
                         cell.textLabel.text = self.biometryTitle;
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -355,6 +354,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                         
                         break;
                     }
+                    
+                    // No break here so we intentionally render the Timeout cell if biometry is disabled
                 }
                 case SPOptionsSecurityRowTimeout: {
                     cell.textLabel.text = NSLocalizedString(@"Lock Timeout", @"Setting for when the passcode lock should enable");

@@ -355,10 +355,7 @@
     
     // For the passcode lock, store the current clock time for comparison when returning to the app
     if ([self passcodeLockIsEnabled]) {
-        struct timespec ts;
-        clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-        NSString *nowTime = [NSString stringWithFormat:@"%ld", (long)ts.tv_sec];
-        [SPKeychain setPassword:nowTime forService:kSimplenotePasscodeServiceName account:kShareExtensionAccountName];
+        [SPPinLockManager storeLastUsedTime];
     }
 }
 
