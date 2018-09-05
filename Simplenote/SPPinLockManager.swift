@@ -10,12 +10,12 @@ import Foundation
 class SPPinLockManager: NSObject {
     @objc static func shouldBypassPinLock() -> Bool {
         let lastUsedString = SPKeychain.password(forService: kSimplenotePasscodeServiceName, account: kShareExtensionAccountName)
-        if (lastUsedString == nil) {
+        if lastUsedString == nil {
             return false
         }
         
         let lastUsedSeconds = Int(lastUsedString!);
-        if (lastUsedSeconds == 0) {
+        if lastUsedSeconds == 0 {
             return false
         }
         
@@ -32,7 +32,7 @@ class SPPinLockManager: NSObject {
         let timeoutPref = UserDefaults.standard.integer(forKey: kPinTimeoutPreferencesKey)
         let timeoutValues = [0, 15, 30, 60, 120, 180, 240, 300]
         
-        if (timeoutPref > timeoutValues.count) {
+        if timeoutPref > timeoutValues.count {
             return 0
         }
         
@@ -42,7 +42,7 @@ class SPPinLockManager: NSObject {
     @objc static func storeLastUsedTime() {
         var ts = timespec.init()
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
-        let nowTime = String.init(format: "%ld", ts.tv_sec)
+        let nowTime = String(format: "%ld", ts.tv_sec)
         SPKeychain.setPassword(nowTime, forService: kSimplenotePasscodeServiceName, account: kShareExtensionAccountName)
     }
 }
