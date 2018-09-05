@@ -162,6 +162,11 @@
 
 - (void)displayTouchIDIfAppropriate
 {
+    // Don't show biometry prompt if user-set timeout hasn't expired yet
+    if ([SPPinLockManager shouldBypassPinLock]) {
+        return;
+    }
+    
     BOOL appIsActive = [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
     BOOL localAuthIsAvailable = !![LAContext class];
     BOOL modeIsUnlockWithTouchID = mode == PinLockControllerModeUnlockAllowTouchID;
