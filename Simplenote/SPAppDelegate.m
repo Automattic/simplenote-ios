@@ -308,13 +308,15 @@
     return YES;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
     if (self.pinLockWindow != nil
         && [self.pinLockWindow isKeyWindow]
         && [SPPinLockManager shouldBypassPinLock]) {
         // Bring the main window to the front, which 'dismisses' the pin lock window
         [self.window makeKeyAndVisible];
+        [self.pinLockWindow removeFromSuperview];
+        self.pinLockWindow = nil;
     }
 }
 
