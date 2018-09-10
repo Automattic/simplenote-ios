@@ -10,7 +10,7 @@
 #import "DTPinLockController.h"
 #import "SPTableViewController.h"
 
-@interface SPOptionsViewController : SPTableViewController <PinLockDelegate> {
+@interface SPOptionsViewController : SPTableViewController <PinLockDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
     
     //Preferences
     NSNumber *sortOrderPref;
