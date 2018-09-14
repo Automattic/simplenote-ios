@@ -18,7 +18,7 @@
 
 @interface DTPinLockController ()
 
-@property (nonatomic, assign) BOOL wasInBackground;
+@property (nonatomic, assign) BOOL biometryUnlockWasSuccessful;
 
 - (void) switchToConfirmPageAnimated:(BOOL)animated;
 - (void) setupDigitViews;
@@ -116,7 +116,6 @@
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         }
     }
     
@@ -147,21 +146,23 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)appDidEnterBackground:(NSNotification *)notification
-{
-    self.wasInBackground = YES;
-}
-
 - (void)appDidEnterForeground:(NSNotification *)notification
 {
-    if (self.wasInBackground == YES) {
-        self.wasInBackground = NO;
-        [self displayTouchIDIfAppropriate];
-    }
+    [self displayTouchIDIfAppropriate];
 }
 
 - (void)displayTouchIDIfAppropriate
 {
+    // Don't show biometry prompt if user-set timeout hasn't expired yet
+    if ([SPPinLockManager shouldBypassPinLock]) {
+        return;
+    }
+    
+    // Prevent duplicate biometry prompts
+    if (self.biometryUnlockWasSuccessful) {
+        return;
+    }
+    
     BOOL appIsActive = [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
     BOOL localAuthIsAvailable = !![LAContext class];
     BOOL modeIsUnlockWithTouchID = mode == PinLockControllerModeUnlockAllowTouchID;
@@ -180,6 +181,7 @@
                                       dispatch_async(dispatch_get_main_queue(), ^{
                                           [self dismissKeyboard];
                                           [self didFinishUnlocking];
+                                          self.biometryUnlockWasSuccessful = YES;
                                       });
                                   }
                               }];

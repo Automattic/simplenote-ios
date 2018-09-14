@@ -22,6 +22,7 @@ extern NSString *const kShareExtensionAccountName;
 extern NSString *const kShareExtensionGroupName;
 extern NSString *const kShareExtensionServiceName;
 extern NSString *const kSimplenoteWPServiceName;
+extern NSString *const kSimplenotePasscodeServiceName;
 
 extern NSString *const kOnePasswordSimplenoteTitle;
 extern NSString *const kOnePasswordSimplenoteURL;
@@ -40,3 +41,5 @@ extern NSString *const kSignInErrorNotificationName;
 extern NSString *const kSimplenotePublishURL;
 extern NSString *const kSimplenoteDarkThemeName;
 extern NSString *const kSimplenoteDefaultThemeName;
+
+extern NSString *const kPinTimeoutPreferencesKey;

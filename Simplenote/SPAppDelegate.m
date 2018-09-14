@@ -308,6 +308,18 @@
     return YES;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
+    if (self.pinLockWindow != nil
+        && [self.pinLockWindow isKeyWindow]
+        && [SPPinLockManager shouldBypassPinLock]) {
+        // Bring the main window to the front, which 'dismisses' the pin lock window
+        [self.window makeKeyAndVisible];
+        [self.pinLockWindow removeFromSuperview];
+        self.pinLockWindow = nil;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
 {
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
@@ -342,6 +354,11 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
+    
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self passcodeLockIsEnabled]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -877,17 +894,14 @@
 
 -(void)showPasscodeLockIfNecessary
 {
-    
-    NSString *pin = [self getPin:YES];
-    
-    if (!pin || pin.length == 0 || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
+    if (![self passcodeLockIsEnabled] || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
         return;
 	}
     
     BOOL useBiometry = self.allowBiometryInsteadOfPin;
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
-	controller.pin = pin;
+	controller.pin = [self getPin:YES];
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
@@ -895,6 +909,12 @@
     self.pinLockWindow.rootViewController = controller;
     [self.pinLockWindow makeKeyAndVisible];
 	[controller fixLayout];
+}
+
+- (BOOL)passcodeLockIsEnabled {
+    NSString *pin = [self getPin:YES];
+    
+    return pin != nil && pin.length != 0;
 }
 
 - (void)pinLockControllerDidFinishUnlocking

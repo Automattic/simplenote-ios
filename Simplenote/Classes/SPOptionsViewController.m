@@ -27,21 +27,27 @@ NSString *const SPAlphabeticalSortPreferenceChangedNotification     = @"SPAlphab
 NSString *const SPThemePref                                         = @"SPThemePref";
 
 @interface SPOptionsViewController ()
-@property (nonatomic, strong) UISwitch  *condensedNoteListSwitch;
-@property (nonatomic, strong) UISwitch  *alphabeticalSortSwitch;
-@property (nonatomic, strong) UISwitch  *themeListSwitch;
-@property (nonatomic, strong) UISwitch  *biometrySwitch;
-@property (nonatomic, assign) BOOL      biometryIsAvailable;
-@property (nonatomic, copy) NSString    *biometryTitle;
+@property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
+@property (nonatomic, strong) UISwitch      *alphabeticalSortSwitch;
+@property (nonatomic, strong) UISwitch      *themeListSwitch;
+@property (nonatomic, strong) UISwitch      *biometrySwitch;
+@property (nonatomic, assign) BOOL          biometryIsAvailable;
+@property (nonatomic, copy) NSString        *biometryTitle;
+@property (nonatomic, strong) UITextField   *pinTimeoutTextField;
+@property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
+@property (nonatomic, strong) UIToolbar     *doneToolbar;
 @end
 
-@implementation SPOptionsViewController
+@implementation SPOptionsViewController {
+    NSArray *timeoutPickerOptions;
+}
 
 #define kTagAlphabeticalSort    1
 #define kTagCondensedNoteList   2
 #define kTagTheme               3
 #define kTagPasscode            4
-#define kTagTouchID             5
+#define kTagTimeout             5
+#define kTagTouchID             6
 
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
@@ -68,7 +74,8 @@ typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
     SPOptionsSecurityRowRowBiometry     = 1,
-    SPOptionsSecurityRowRowCount        = 2
+    SPOptionsSecurityRowTimeout         = 2,
+    SPOptionsSecurityRowRowCount        = 3
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAboutRow) {
@@ -99,6 +106,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     [super viewDidLoad];
     
+    timeoutPickerOptions = @[NSLocalizedString(@"Off", @"Instant passcode lock timeout"),
+                       NSLocalizedString(@"15 Seconds", @"15 seconds passcode lock timeout"),
+                       NSLocalizedString(@"30 Seconds", @"30 seconds passcode lock timeout"),
+                       NSLocalizedString(@"1 Minute", @"1 minute passcode lock timeout"),
+                       NSLocalizedString(@"2 Minutes", @"2 minutes passcode lock timeout"),
+                       NSLocalizedString(@"3 Minutes", @"3 minutes passcode lock timeout"),
+                       NSLocalizedString(@"4 Minutes", @"4 minutes passcode lock timeout"),
+                       NSLocalizedString(@"5 Minutes", @"5 minutes passcode lock timeout")];
+    
     self.navigationController.navigationBar.translucent = YES;
     self.navigationItem.title = NSLocalizedString(@"Settings", @"Title of options screen");
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -125,6 +141,28 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
+    
+    self.pinTimeoutPickerView = [UIPickerView new];
+    self.pinTimeoutPickerView.delegate = self;
+    self.pinTimeoutPickerView.dataSource = self;
+    [self.pinTimeoutPickerView selectRow:[[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey] inComponent:0 animated:NO];
+    
+    self.doneToolbar = [UIToolbar new];
+    self.doneToolbar.barStyle = UIBarStyleDefault;
+    self.doneToolbar.translucent = NO;
+    [self.doneToolbar sizeToFit];
+    
+    UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Done", @"Done toolbar button")                                                                                    style:UIBarButtonItemStylePlain target:self                                                                 action:@selector(pinTimeoutDoneAction:)];
+    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace                                                                                    target:nil action:nil];
+    
+    fixedSpace.width = self.doneToolbar.frame.size.width;
+    [self.doneToolbar setItems:[NSArray arrayWithObjects:fixedSpace, doneButtonItem, nil]];
+    
+    self.pinTimeoutTextField = [UITextField new];
+    self.pinTimeoutTextField.frame = CGRectMake(0, 0, 0, 0);
+    self.pinTimeoutTextField.inputView = self.pinTimeoutPickerView;
+    self.pinTimeoutTextField.inputAccessoryView = self.doneToolbar;
+    [self.view addSubview:self.pinTimeoutTextField];
     
     // Listen to Theme Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -197,7 +235,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsSecurity: {
-            return self.biometryIsAvailable ? SPOptionsSecurityRowRowCount : SPOptionsSecurityRowRowCount - 1;
+            int rowsToRemove = self.biometryIsAvailable ? 0 : 1;
+            int disabledPinLockRows = [self biometryIsAvailable] ? 2 : 1;
+            return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
             
         case SPOptionsViewSectionsAbout: {
@@ -291,9 +331,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 case SPOptionsSecurityRowRowPasscode: {
                     cell.textLabel.text = NSLocalizedString(@"Passcode", @"A 4-digit code to lock the app when it is closed");
                     
-                    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
-                    
-                    if (pin != nil && pin.length > 0)
+                    if ([self pinLockIsEnabled])
                         cell.detailTextLabel.text = NSLocalizedString(@"On", nil);
                     else
                         cell.detailTextLabel.text = NSLocalizedString(@"Off", nil);
@@ -304,14 +342,31 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsSecurityRowRowBiometry: {
-                    cell.textLabel.text = self.biometryTitle;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-                    BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
-
-                    self.biometrySwitch.on = isBiometryOn;
-                    cell.accessoryView = self.biometrySwitch;
-                    cell.tag = kTagTouchID;
+                    if ([self biometryIsAvailable]) {
+                        cell.textLabel.text = self.biometryTitle;
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        
+                        BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
+                        
+                        self.biometrySwitch.on = isBiometryOn;
+                        cell.accessoryView = self.biometrySwitch;
+                        cell.tag = kTagTouchID;
+                        
+                        break;
+                    }
+                    
+                    // No break here so we intentionally render the Timeout cell if biometry is disabled
+                }
+                case SPOptionsSecurityRowTimeout: {
+                    cell.textLabel.text = NSLocalizedString(@"Lock Timeout", @"Setting for when the passcode lock should enable");
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                    cell.accessoryView = nil;
+                    cell.tag = kTagTimeout;
+                    
+                    NSInteger timeoutPref = [[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey];
+                    [cell.detailTextLabel setText:timeoutPickerOptions[timeoutPref]];
+                    
+                    break;
                 }
                     
                 default:
@@ -369,6 +424,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     return cell;
 }
 
+- (BOOL)pinLockIsEnabled {
+    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
+    
+    return pin != nil && pin.length > 0;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -380,6 +441,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             switch (cell.tag) {
                 case kTagPasscode: {
                     [self showPinLockViewController];
+                    break;
+                case kTagTimeout:
+                    [self.pinTimeoutTextField becomeFirstResponder];
                     break;
                 }
             }
@@ -614,6 +678,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         theSwitch.tintColor     = [theme colorForKey:@"switchTintColor"];
     }
     
+    [self.pinTimeoutPickerView setBackgroundColor:[theme colorForKey:@"backgroundColor"]];
+    [self.doneToolbar setTintColor:[theme colorForKey:@"tintColor"]];
+    [self.doneToolbar setBarTintColor:[theme colorForKey:@"backgroundColor"]];
+    
     // Refresh the Table
     [self.tableView applyDefaultGroupedStyling];
 }
@@ -647,6 +715,35 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (BOOL)themePref
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
+}
+
+#pragma mark - Picker view delegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [timeoutPickerOptions count];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    [self.pinTimeoutTextField setText:timeoutPickerOptions[row]];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:row forKey:kPinTimeoutPreferencesKey];
+    [self.tableView reloadData];
+}
+
+- (void)pinTimeoutDoneAction:(id)sender
+{
+    [self.pinTimeoutTextField resignFirstResponder];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    VSTheme *theme = [[VSThemeManager sharedManager] theme];
+    NSDictionary *attributes = @{NSForegroundColorAttributeName:[theme colorForKey:@"textColor"]};
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];
+    
+    return attributedTitle;
 }
 
 @end
