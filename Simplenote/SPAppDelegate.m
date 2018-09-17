@@ -347,6 +347,11 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self passcodeLockIsEnabled] && [self.window isKeyWindow]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
+    
     [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
@@ -354,11 +359,6 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
-    
-    // For the passcode lock, store the current clock time for comparison when returning to the app
-    if ([self passcodeLockIsEnabled]) {
-        [SPPinLockManager storeLastUsedTime];
-    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
