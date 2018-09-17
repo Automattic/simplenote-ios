@@ -148,6 +148,7 @@
 
 - (void)appDidEnterForeground:(NSNotification *)notification
 {
+    [hiddenTextField becomeFirstResponder];
     [self displayTouchIDIfAppropriate];
 }
 
