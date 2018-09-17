@@ -1137,7 +1137,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (NSInteger)charCount {
     if (_noteEditorTextView.text == nil)
         return 0;
-    return _noteEditorTextView.text.count;
+    return _noteEditorTextView.text.charCount;
 }
 
 #pragma mark Simperium

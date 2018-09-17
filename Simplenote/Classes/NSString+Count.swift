@@ -6,6 +6,17 @@ import Foundation
         return aString.count
     }
     
+    var charCount:Int {
+        let aString = self as String
+        var result = 0
+        for char in aString {
+            if !CharacterSet.newlines.contains(char.unicodeScalars.first!) {
+                result += 1
+            }
+        }
+        return result
+    }
+    
     var wordCount:Int {
         guard length>0 else {
             return 0
@@ -15,7 +26,7 @@ import Foundation
         enumerateSubstrings(in: NSMakeRange(0, length), options: [.byWords,.localized]) { (substring, substringRange, enclosingRange, stop) in
             if ChineseCharacterSet.contains(substring!.unicodeScalars.first!) {
                 result += substring!.count
-            } else {
+            } else if !CharacterSet.whitespacesAndNewlines.contains(substring!.unicodeScalars.first!) { // Sometimes NSString treat "\n" and " " as a word.
                 result += 1
             }
         }
