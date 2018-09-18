@@ -32,7 +32,6 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @property (nonatomic, strong) UISwitch      *alphabeticalSortSwitch;
 @property (nonatomic, strong) UISwitch      *themeListSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
-@property (nonatomic, strong) UISwitch      *analyticsSwitch;
 @property (nonatomic, assign) BOOL          biometryIsAvailable;
 @property (nonatomic, copy) NSString        *biometryTitle;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
@@ -55,21 +54,16 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
     SPOptionsViewSectionsSecurity       = 1,
     SPOptionsViewSectionsAccount        = 2,
-    SPOptionsViewSectionsPrivacy        = 3,
-    SPOptionsViewSectionsAbout          = 4,
-    SPOptionsViewSectionsDebug          = 5,
-    SPOptionsViewSectionsCount          = 6
+    SPOptionsViewSectionsAbout          = 3,
+    SPOptionsViewSectionsDebug          = 4,
+    SPOptionsViewSectionsCount          = 5
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
     SPOptionsAccountRowDescription      = 0,
-    SPOptionsAccountRowLogout           = 1,
-    SPOptionsAccountRowCount            = 2
-};
-
-typedef NS_ENUM(NSInteger, SPOptionsPrivacyRow) {
-    SPOptionsPrivacyRowSwitch           = 0,
-    SPOptionsPrivacyRowCount            = 1
+    SPOptionsAccountRowPrivacy          = 1,
+    SPOptionsAccountRowLogout           = 2,
+    SPOptionsAccountRowCount            = 3
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
@@ -149,11 +143,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
-
-    self.analyticsSwitch = [UISwitch new];
-    [self.analyticsSwitch addTarget:self
-                             action:@selector(analyticsSwitchDidChangeValue:)
-                   forControlEvents:UIControlEventValueChanged];
 
     self.pinTimeoutPickerView = [UIPickerView new];
     self.pinTimeoutPickerView.delegate = self;
@@ -253,10 +242,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
 
-        case SPOptionsViewSectionsPrivacy: {
-            return SPOptionsPrivacyRowCount;
-        }
-            
         case SPOptionsViewSectionsAbout: {
             return SPOptionsAboutRowCount;
         }
@@ -281,9 +266,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
 
-        case SPOptionsViewSectionsPrivacy:
-            return NSLocalizedString(@"Privacy", nil);
-
         case SPOptionsViewSectionsAccount:
             return NSLocalizedString(@"Account", nil);
 
@@ -291,15 +273,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             break;
     }
     
-    return nil;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if (section == SPOptionsViewSectionsPrivacy) {
-        return [self privacyFooterView];
-    }
-
     return nil;
 }
 
@@ -415,6 +388,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
+                case SPOptionsAccountRowPrivacy: {
+                    cell.textLabel.text = NSLocalizedString(@"Privacy Settings", @"Privacy Settings");
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    break;
+                }
                 case SPOptionsAccountRowLogout: {
                     cell.textLabel.text = NSLocalizedString(@"Sign Out", @"Sign out of the active account in the app");
                     break;
@@ -423,19 +401,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
             }
             
-            break;
-        } case SPOptionsViewSectionsPrivacy: {
-            switch (indexPath.row) {
-                case SPOptionsPrivacyRowSwitch: {
-                    cell.textLabel.text = NSLocalizedString(@"Share Analytics", @"Option to disable Analytics.");
-
-                    [self.analyticsSwitch setOn:[self analyticsEnabledPref]];
-
-                    cell.accessoryView = self.analyticsSwitch;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    break;
-                }
-            }
             break;
 
         } case SPOptionsViewSectionsAbout: {
@@ -479,9 +444,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	
+
     switch (indexPath.section) {
-            
+
         case SPOptionsViewSectionsSecurity: {
             
             switch (cell.tag) {
@@ -498,6 +463,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         } case SPOptionsViewSectionsAccount: {
             
             switch (indexPath.row) {
+                case SPOptionsAccountRowPrivacy: {
+                    SPPrivacyViewController *test = [[SPPrivacyViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                    [self.navigationController pushViewController:test animated:true];
+                    break;
+                }
+
                 case SPOptionsAccountRowLogout: {
                     [self signOutAction:nil];
                     break;
@@ -566,29 +537,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     if ([UIDevice isPad]) {
         [controller fixLayout];
     }
-}
-
-
-#pragma mark - Footers
-
-- (UITableViewHeaderFooterView *)privacyFooterView
-{
-    UITableViewHeaderFooterView *footerView = [UITableViewHeaderFooterView new];
-    footerView.textLabel.text = NSLocalizedString(@"Help us improve Simplenote by sharing usage data with our analytics tool. Learn More.", nil);
-    footerView.textLabel.numberOfLines = 0;
-    footerView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-    footerView.textLabel.userInteractionEnabled = YES;
-
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayPrivacyLink)];
-    [footerView addGestureRecognizer:recognizer];
-
-    return footerView;
-}
-
-- (void)displayPrivacyLink
-{
-    NSURL *url = [NSURL URLWithString:kAutomatticAnalyticLearnMoreURL];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
 
@@ -726,14 +674,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 }
 
-- (void)analyticsSwitchDidChangeValue:(UISwitch *)sender
-{
-    Simperium *simperium = [[SPAppDelegate sharedDelegate] simperium];
-    Preferences *preferences = [simperium preferencesObject];
-
-    preferences.analytics_enabled = @(sender.isOn);
-    [simperium save];
-}
 
 #pragma mark - Darkness
 
@@ -748,7 +688,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     // Reload Switch Styles
     VSTheme *theme          = [[VSThemeManager sharedManager] theme];
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch, _analyticsSwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
@@ -792,14 +732,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (BOOL)themePref
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
-}
-
-- (BOOL)analyticsEnabledPref
-{
-    Simperium *simperium = [[SPAppDelegate sharedDelegate] simperium];
-    NSNumber *enabled = [[simperium preferencesObject] analytics_enabled];
-
-    return enabled == nil || [enabled boolValue] == true;
 }
 
 

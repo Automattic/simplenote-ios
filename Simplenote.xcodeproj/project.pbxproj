@@ -131,6 +131,7 @@
 		B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */; };
 		B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE054C1AB75902002417BF /* NSProcessInfo+Util.m */; };
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
+		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
@@ -315,6 +316,7 @@
 		B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 3.xcdatamodel"; sourceTree = "<group>"; };
 		B5BE05511AB75C3B002417BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Classes/Settings.h; sourceTree = "<group>"; };
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
+		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Simperium+Simplenote.h"; path = "Classes/Simperium+Simplenote.h"; sourceTree = "<group>"; };
@@ -990,6 +992,7 @@
 			children = (
 				E26AC90E179DA25F00C4BFB6 /* SPOptionsViewController.h */,
 				E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */,
+				B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */,
 				B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */,
 				B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */,
 				3762530520F54FFB00C1F239 /* SPAboutViewController.swift */,
@@ -1399,6 +1402,7 @@
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
+				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
 				46A3C97917DFA81A002865AE /* UIBarButtonItem+Images.m in Sources */,
