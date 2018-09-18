@@ -54,6 +54,22 @@ DEPENDENCIES:
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
   - WordPress-Ratings-iOS (= 0.0.2)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - 1PasswordExtension
+    - CocoaLumberjack
+    - Crashlytics
+    - Fabric
+    - GoogleAnalytics
+    - HockeySDK
+    - hoedown
+    - Reachability
+    - SAMKeychain
+    - Simperium
+    - SVProgressHUD
+    - UIDeviceIdentifier
+    - WordPress-Ratings-iOS
+
 EXTERNAL SOURCES:
   Automattic-Tracks-iOS:
     :git: https://github.com/Automattic/Automattic-Tracks-iOS.git
@@ -85,8 +101,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
-  WordPress-Ratings-iOS: b04108f7a45867844ba47a240bb6295ca747eebf
+  WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
 PODFILE CHECKSUM: f6767479ddf21dd5c487fc2774dad6048bd1262c
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
