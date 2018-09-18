@@ -17,6 +17,7 @@
 NSString *const kSimperiumBaseURL                   = @"https://api.simperium.com/1";
 NSString *const kSimperiumForgotPasswordURL         = @"https://app.simplenote.com/forgot/";
 NSString *const kSimperiumTermsOfServiceURL         = @"http://simplenote.com/terms/";
+NSString *const kAutomatticAnalyticLearnMoreURL     = @"https://automattic.com/cookies";
 
 NSString *const kShareExtensionAccountName          = @"Main";
 NSString *const kShareExtensionServiceName          = @"SimplenoteShare";

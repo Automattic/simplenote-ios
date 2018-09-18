@@ -54,8 +54,8 @@ NSString *const SPThemePref                                         = @"SPThemeP
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
     SPOptionsViewSectionsSecurity       = 1,
-    SPOptionsViewSectionsPrivacy        = 2,
-    SPOptionsViewSectionsAccount        = 3,
+    SPOptionsViewSectionsAccount        = 2,
+    SPOptionsViewSectionsPrivacy        = 3,
     SPOptionsViewSectionsAbout          = 4,
     SPOptionsViewSectionsDebug          = 5,
     SPOptionsViewSectionsCount          = 6
@@ -284,10 +284,22 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsPrivacy:
             return NSLocalizedString(@"Privacy", nil);
 
+        case SPOptionsViewSectionsAccount:
+            return NSLocalizedString(@"Account", nil);
+
         default:
             break;
     }
     
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == SPOptionsViewSectionsPrivacy) {
+        return [self privacyFooterView];
+    }
+
     return nil;
 }
 
@@ -299,10 +311,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 #endif
 
-    if (section == SPOptionsViewSectionsPrivacy) {
-        return NSLocalizedString(@"Help us improve Simplenote by sharing usage data with our analytics tool.", nil);
-    }
-    
     return nil;
 }
 
@@ -402,7 +410,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             switch (indexPath.row) {
                 case SPOptionsAccountRowDescription: {
-                    cell.textLabel.text = NSLocalizedString(@"Account", @"A user's Simplenote account");
+                    cell.textLabel.text = NSLocalizedString(@"Username", @"A user's Simplenote account");
                     cell.detailTextLabel.text = [SPAppDelegate sharedDelegate].simperium.user.email;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
@@ -558,6 +566,29 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     if ([UIDevice isPad]) {
         [controller fixLayout];
     }
+}
+
+
+#pragma mark - Footers
+
+- (UITableViewHeaderFooterView *)privacyFooterView
+{
+    UITableViewHeaderFooterView *footerView = [UITableViewHeaderFooterView new];
+    footerView.textLabel.text = NSLocalizedString(@"Help us improve Simplenote by sharing usage data with our analytics tool. Learn More.", nil);
+    footerView.textLabel.numberOfLines = 0;
+    footerView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    footerView.textLabel.userInteractionEnabled = YES;
+
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayPrivacyLink)];
+    [footerView addGestureRecognizer:recognizer];
+
+    return footerView;
+}
+
+- (void)displayPrivacyLink
+{
+    NSURL *url = [NSURL URLWithString:kAutomatticAnalyticLearnMoreURL];
+    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
 
