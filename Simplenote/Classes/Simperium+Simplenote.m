@@ -7,13 +7,12 @@
 - (Preferences *)preferencesObject
 {
     SPBucket *bucket = [self bucketForName:NSStringFromClass([Preferences class])];
-    NSString *key = [SPCredentials simperiumPreferencesObjectKey];
-    Preferences *preferences = [bucket objectForKey:key];
+    Preferences *preferences = [bucket objectForKey:kSimperiumPreferencesObjectKey];
     if (preferences != nil) {
         return preferences;
     }
 
-    return [bucket insertNewObjectForKey:[SPCredentials simperiumPreferencesObjectKey]];
+    return [bucket insertNewObjectForKey:kSimperiumPreferencesObjectKey];
 }
 
 @end
