@@ -422,11 +422,8 @@
                           properties:(NSDictionary *)properties
 {
     if ([self isTrackingDisabled]) {
-        NSLog(@"## Tracking TRACKS OFF: %@", name);
         return;
     }
-
-    NSLog(@"## Tracking TRACKS ON: %@", name);
     [[SPAutomatticTracker sharedInstance] trackEventWithName:name properties:properties];
 }
 
@@ -440,11 +437,8 @@
                                value:(NSNumber *)value
 {
     if ([self isTrackingDisabled]) {
-        NSLog(@"## Tracking GOOGLE OFF: %@", category);
         return;
     }
-
-    NSLog(@"## Tracking GOOGLE ON: %@", category);
     [[SPGoogleTracker sharedInstance] trackEventWithCategory:category action:action label:label value:value];
 }
 
