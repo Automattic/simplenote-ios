@@ -54,10 +54,11 @@ NSString *const SPThemePref                                         = @"SPThemeP
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsPreferences    = 0,
     SPOptionsViewSectionsSecurity       = 1,
-    SPOptionsViewSectionsAccount        = 2,
-    SPOptionsViewSectionsAbout          = 3,
-    SPOptionsViewSectionsDebug          = 4,
-    SPOptionsViewSectionsCount          = 5
+    SPOptionsViewSectionsPrivacy        = 2,
+    SPOptionsViewSectionsAccount        = 3,
+    SPOptionsViewSectionsAbout          = 4,
+    SPOptionsViewSectionsDebug          = 5,
+    SPOptionsViewSectionsCount          = 6
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -66,12 +67,16 @@ typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
     SPOptionsAccountRowCount            = 2
 };
 
+typedef NS_ENUM(NSInteger, SPOptionsPrivacyRow) {
+    SPOptionsPrivacyRowSwitch           = 0,
+    SPOptionsPrivacyRowCount            = 1
+};
+
 typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
     SPOptionsPreferencesRowSort         = 0,
     SPOptionsPreferencesRowCondensed    = 1,
     SPOptionsPreferencesRowTheme        = 2,
-    SPOptionsPreferencesAnalytics       = 3,
-    SPOptionsPreferencesRowCount        = 4
+    SPOptionsPreferencesRowCount        = 3
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
@@ -247,6 +252,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             int disabledPinLockRows = [self biometryIsAvailable] ? 2 : 1;
             return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
+
+        case SPOptionsViewSectionsPrivacy: {
+            return SPOptionsPrivacyRowCount;
+        }
             
         case SPOptionsViewSectionsAbout: {
             return SPOptionsAboutRowCount;
@@ -271,7 +280,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
-            
+
+        case SPOptionsViewSectionsPrivacy:
+            return NSLocalizedString(@"Privacy", nil);
+
         default:
             break;
     }
@@ -286,6 +298,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         return [[NSString alloc] initWithFormat:@"Beta Distribution Channel\nv%@ (%@)", [NSString stringWithFormat:@"%@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]], [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey]];
     }
 #endif
+
+    if (section == SPOptionsViewSectionsPrivacy) {
+        return NSLocalizedString(@"Help us improve Simplenote by sharing usage data with our analytics tool.", nil);
+    }
     
     return nil;
 }
@@ -329,15 +345,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.accessoryView = self.themeListSwitch;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.tag = kTagTheme;
-                    break;
-                }
-                case SPOptionsPreferencesAnalytics: {
-                    cell.textLabel.text = NSLocalizedString(@"Share Analytics", @"Option to disable Analytics.");
-
-                    [self.analyticsSwitch setOn:[self analyticsEnabledPref]];
-
-                    cell.accessoryView = self.analyticsSwitch;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
             }
@@ -409,6 +416,20 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+        } case SPOptionsViewSectionsPrivacy: {
+            switch (indexPath.row) {
+                case SPOptionsPrivacyRowSwitch: {
+                    cell.textLabel.text = NSLocalizedString(@"Share Analytics", @"Option to disable Analytics.");
+
+                    [self.analyticsSwitch setOn:[self analyticsEnabledPref]];
+
+                    cell.accessoryView = self.analyticsSwitch;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+            }
+            break;
+
         } case SPOptionsViewSectionsAbout: {
             
             switch (indexPath.row) {
