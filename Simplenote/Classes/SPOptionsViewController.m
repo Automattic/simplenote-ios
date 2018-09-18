@@ -19,6 +19,7 @@
 #import "UIDevice+Extensions.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "Simplenote-Swift.h"
+#import "Simperium+Simplenote.h"
 
 NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
 NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
@@ -31,6 +32,7 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @property (nonatomic, strong) UISwitch      *alphabeticalSortSwitch;
 @property (nonatomic, strong) UISwitch      *themeListSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
+@property (nonatomic, strong) UISwitch      *analyticsSwitch;
 @property (nonatomic, assign) BOOL          biometryIsAvailable;
 @property (nonatomic, copy) NSString        *biometryTitle;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
@@ -68,7 +70,8 @@ typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
     SPOptionsPreferencesRowSort         = 0,
     SPOptionsPreferencesRowCondensed    = 1,
     SPOptionsPreferencesRowTheme        = 2,
-    SPOptionsPreferencesRowCount        = 3
+    SPOptionsPreferencesAnalytics       = 3,
+    SPOptionsPreferencesRowCount        = 4
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
@@ -141,7 +144,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
-    
+
+    self.analyticsSwitch = [UISwitch new];
+    [self.analyticsSwitch addTarget:self
+                             action:@selector(analyticsSwitchDidChangeValue:)
+                   forControlEvents:UIControlEventValueChanged];
+
     self.pinTimeoutPickerView = [UIPickerView new];
     self.pinTimeoutPickerView.delegate = self;
     self.pinTimeoutPickerView.dataSource = self;
@@ -321,6 +329,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.accessoryView = self.themeListSwitch;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.tag = kTagTheme;
+                    break;
+                }
+                case SPOptionsPreferencesAnalytics: {
+                    cell.textLabel.text = NSLocalizedString(@"Share Analytics", @"Option to disable Analytics.");
+
+                    [self.analyticsSwitch setOn:[self analyticsEnabledPref]];
+
+                    cell.accessoryView = self.analyticsSwitch;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
             }
@@ -657,6 +674,14 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 }
 
+- (void)analyticsSwitchDidChangeValue:(UISwitch *)sender
+{
+    Simperium *simperium = [[SPAppDelegate sharedDelegate] simperium];
+    Preferences *preferences = [simperium preferencesObject];
+
+    preferences.analytics_enabled = @(sender.isOn);
+    [simperium save];
+}
 
 #pragma mark - Darkness
 
@@ -671,7 +696,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     // Reload Switch Styles
     VSTheme *theme          = [[VSThemeManager sharedManager] theme];
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalSortSwitch, _themeListSwitch, _biometrySwitch, _analyticsSwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
@@ -716,6 +741,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
 }
+
+- (BOOL)analyticsEnabledPref
+{
+    Simperium *simperium = [[SPAppDelegate sharedDelegate] simperium];
+    NSNumber *enabled = [[simperium preferencesObject] analytics_enabled];
+
+    return enabled == nil || [enabled boolValue] == true;
+}
+
 
 #pragma mark - Picker view delegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
