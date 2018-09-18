@@ -36,6 +36,11 @@ class SPCredentials: NSObject {
             return ""
         }
     }
+
+    @objc static func simperiumPreferencesObjectKey() -> String {
+        let output = configDictionary().value(forKey: "SPSimperiumPreferencesObjectKey") as? String
+        return output ?? String()
+    }
     
     @objc static func simplenoteCrashlyticsKey() -> String {
         if let value = configDictionary().value(forKey: "SimplenoteCrashlyticsKey") {
@@ -111,7 +116,7 @@ class SPCredentials: NSObject {
             return ""
         }
     }
-    
+
     fileprivate static func configDictionary() -> NSDictionary {
         guard let plistPath = Bundle.main.path(forResource: configName, ofType: plistType) else {
             return NSDictionary()
