@@ -1,11 +1,3 @@
-//
-//  SPTracker.m
-//  Simplenote
-//
-//  Created by Jorge Leandro Perez on 3/17/15.
-//  Copyright (c) 2015 Automattic. All rights reserved.
-//
-
 #import "SPTracker.h"
 #import "SPAutomatticTracker.h"
 #import "SPGoogleTracker.h"
