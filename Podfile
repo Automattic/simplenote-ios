@@ -17,7 +17,6 @@ abstract_target 'Automattic' do
 		# Third Party
 		#
 		pod '1PasswordExtension', '1.8.4'
-		pod 'GoogleAnalytics', '3.14.0'
 		pod 'HockeySDK', '~>3.8.0'
 		pod 'hoedown', '~>3.0.3'
 		pod 'SVProgressHUD', '1.1.2'

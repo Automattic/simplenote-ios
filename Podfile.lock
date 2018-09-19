@@ -15,7 +15,6 @@ PODS:
   - Crashlytics (3.9.0):
     - Fabric (~> 1.7.0)
   - Fabric (1.7.0)
-  - GoogleAnalytics (3.14.0)
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
@@ -45,7 +44,6 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (from `https://github.com/Automattic/Automattic-Tracks-iOS.git`, tag `0.1.0`)
   - Crashlytics (= 3.9)
   - Fabric (= 1.7.0)
-  - GoogleAnalytics (= 3.14.0)
   - HockeySDK (~> 3.8.0)
   - hoedown (~> 3.0.3)
   - SAMKeychain (= 1.5.2)
@@ -53,6 +51,21 @@ DEPENDENCIES:
   - SVProgressHUD (= 1.1.2)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
   - WordPress-Ratings-iOS (= 0.0.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - 1PasswordExtension
+    - CocoaLumberjack
+    - Crashlytics
+    - Fabric
+    - HockeySDK
+    - hoedown
+    - Reachability
+    - SAMKeychain
+    - Simperium
+    - SVProgressHUD
+    - UIDeviceIdentifier
+    - WordPress-Ratings-iOS
 
 EXTERNAL SOURCES:
   Automattic-Tracks-iOS:
@@ -76,7 +89,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
   Fabric: e6be012366472553807dada21243c5ab8d904151
-  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   hoedown: c1327bbbc96d269595ed86bf97f1d09867ec7529
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -85,8 +97,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
-  WordPress-Ratings-iOS: b04108f7a45867844ba47a240bb6295ca747eebf
+  WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: f6767479ddf21dd5c487fc2774dad6048bd1262c
+PODFILE CHECKSUM: da5282d6045d9c151c9dc211359e048be40b0e33
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
