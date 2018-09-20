@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Gridicons
 
 
 /// Privacy: Lets our users Opt Out from any (and all) trackers.
@@ -10,10 +11,19 @@ class SPPrivacyViewController: SPTableViewController {
     ///
     private let analyticsSwitch = UISwitch()
 
-    /// FooterView: Legend displayed below the Switch Row
+    /// TableView Sections
     ///
-    private let footerView = UITableViewHeaderFooterView()
+    private let sections = [ Section(rows: [.share, .legend, .learn]) ]
 
+    /// Indicates if Analytics are Enabled
+    ///
+    private var isAnalyticsEnabled: Bool {
+        guard let simperium = SPAppDelegate.shared()?.simperium, let preferences = simperium.preferencesObject() else {
+            return true
+        }
+
+        return preferences.analytics_enabled?.boolValue ==  true
+    }
 
 
     // MARK: - Overridden Methods
@@ -22,35 +32,46 @@ class SPPrivacyViewController: SPTableViewController {
         super.viewDidLoad()
         setupNavigationItem()
         setupTableView()
-        setupFooterView()
         setupSwitch()
     }
 
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Defaults.sectionsCount
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Defaults.rowCount
+        return sections[section].rows.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        setupAnalyticsCell(cell)
+
+        switch rowAtIndexPath(indexPath) {
+        case .share:
+            setupAnalyticsCell(cell)
+        case .legend:
+            setupLegendCell(cell)
+        case .learn:
+            setupLearnMoreCell(cell)
+        }
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return footerView
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        switch rowAtIndexPath(indexPath) {
+        case .learn:
+            displayPrivacyLink()
+        default:
+            break
+        }
     }
 
-    var isAnalyticsEnabled: Bool {
-        guard let simperium = SPAppDelegate.shared()?.simperium, let preferences = simperium.preferencesObject() else {
-            return true
-        }
-
-        return preferences.analytics_enabled?.boolValue ==  true
+    /// Returns the Row at the specified IndexPath
+    ///
+    private func rowAtIndexPath(_ indexPath: IndexPath) -> Row {
+        return sections[indexPath.section].rows[indexPath.row]
     }
 }
 
@@ -108,32 +129,47 @@ private extension SPPrivacyViewController {
         analyticsSwitch.isOn = isAnalyticsEnabled
     }
 
-    /// Setup: Footer View
-    ///
-    func setupFooterView() {
-        let textLabel = footerView.textLabel
-        textLabel?.text = NSLocalizedString("Help us improve Simplenote by sharing usage data with our analytics tool. Learn More.", comment: "Privacy Footer Text")
-        textLabel?.numberOfLines = 0
-        textLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
-        textLabel?.isUserInteractionEnabled = true
-
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(displayPrivacyLink))
-        footerView.addGestureRecognizer(recognizer)
-    }
-
     /// Setup: UITableViewCell so that the current Analytics Settings are displayed
     ///
     func setupAnalyticsCell(_ cell: UITableViewCell) {
+        cell.imageView?.image = Gridicon.iconOfType(.stats)
         cell.textLabel?.text = NSLocalizedString("Share Analytics", comment: "Option to disable Analytics.")
         cell.selectionStyle = .none
         cell.accessoryView = analyticsSwitch
     }
+
+    /// Setup: Legend
+    ///
+    func setupLegendCell(_ cell: UITableViewCell) {
+        cell.imageView?.image = Gridicon.iconOfType(.info)
+        cell.textLabel?.text = NSLocalizedString("Help us improve Simplenote by sharing usage data with our analytics tool.", comment: "Privacy Details")
+        cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
+    }
+
+    /// Setup: Learn More
+    ///
+    func setupLearnMoreCell(_ cell: UITableViewCell) {
+        // Placeholder: This way we'll get an even left padding
+        UIGraphicsBeginImageContext(Gridicon.defaultSize)
+        cell.imageView?.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        // And the actual text!
+        cell.textLabel?.text = NSLocalizedString("Learn more", comment: "Learn More Action")
+        cell.textLabel?.textColor = VSThemeManager.shared()?.theme()?.color(forKey: "tintColor")
+    }
 }
 
 
-// MARK: - Constants
+// MARK: - Private Types
 //
-private enum Defaults {
-    static let rowCount = 1
-    static let sectionsCount = 1
+private struct Section {
+    let rows: [Row]
+}
+
+private enum Row {
+    case share
+    case legend
+    case learn
 }
