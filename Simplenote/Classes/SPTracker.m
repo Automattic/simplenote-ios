@@ -1,13 +1,7 @@
-//
-//  SPTracker.m
-//  Simplenote
-//
-//  Created by Jorge Leandro Perez on 3/17/15.
-//  Copyright (c) 2015 Automattic. All rights reserved.
-//
-
 #import "SPTracker.h"
 #import "SPAutomatticTracker.h"
+#import "SPAppDelegate.h"
+#import "Simperium+Simplenote.h"
 
 
 @implementation SPTracker
@@ -368,7 +362,21 @@
 + (void)trackAutomatticEventWithName:(NSString *)name
                           properties:(NSDictionary *)properties
 {
+    if ([self isTrackingDisabled]) {
+        return;
+    }
     [[SPAutomatticTracker sharedInstance] trackEventWithName:name properties:properties];
+}
+
+
+#pragma mark - Automattic Tracks Helpers
+
++ (BOOL)isTrackingDisabled
+{
+    Preferences *preferences = [[[SPAppDelegate sharedDelegate] simperium] preferencesObject];
+    NSNumber *enabled = [preferences analytics_enabled];
+
+    return [enabled boolValue] == false;
 }
 
 @end
