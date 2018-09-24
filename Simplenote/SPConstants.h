@@ -17,6 +17,9 @@
 extern NSString *const kSimperiumBaseURL;
 extern NSString *const kSimperiumForgotPasswordURL;
 extern NSString *const kSimperiumTermsOfServiceURL;
+extern NSString *const kSimperiumPreferencesObjectKey;
+
+extern NSString *const kAutomatticAnalyticLearnMoreURL;
 
 extern NSString *const kShareExtensionAccountName;
 extern NSString *const kShareExtensionGroupName;

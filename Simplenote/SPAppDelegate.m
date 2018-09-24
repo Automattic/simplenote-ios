@@ -37,7 +37,6 @@
 #import "VSThemeManager.h"
 #import "VSTheme.h"
 #import "DTPinLockController.h"
-#import "GAI.h"
 #import "SPTracker.h"
 
 @import Contacts;
@@ -241,11 +240,6 @@
 #endif
 }
 
-- (void)setupGoogleAnalytics
-{
-    [[GAI sharedInstance] trackerWithTrackingId:[SPCredentials googleAnalyticsID]];
-}
-
 - (void)setupThemeNotifications
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -274,7 +268,6 @@
     [self setupSimperium];
 	[self setupBitHockey];
     [self setupCrashlytics];
-	[self setupGoogleAnalytics];
     [self setupDefaultWindow];
     [self setupAppRatings];
     
@@ -347,6 +340,11 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self passcodeLockIsEnabled] && [self.window isKeyWindow]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
+    
     [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;

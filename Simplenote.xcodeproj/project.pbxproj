@@ -106,7 +106,6 @@
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B51EC6FC1B8FCEA900DFB4A5 /* SPTextLinkifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B51EC6FA1B8FCEA900DFB4A5 /* SPTextLinkifier.m */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
-		B521A19A1BC8452100E1CF2A /* SPGoogleTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1981BC8452100E1CF2A /* SPGoogleTracker.m */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52B8A271BAB0DF0002CC55D /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A251BAB0DF0002CC55D /* UIView+Extensions.m */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
@@ -118,6 +117,7 @@
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */; };
 		B59484BF1D6CE2580006D427 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
+		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */; };
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
@@ -130,7 +130,9 @@
 		B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */; };
 		B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE054C1AB75902002417BF /* NSProcessInfo+Util.m */; };
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
+		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
+		B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
@@ -258,8 +260,6 @@
 		B51EC6FA1B8FCEA900DFB4A5 /* SPTextLinkifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTextLinkifier.m; path = Classes/SPTextLinkifier.m; sourceTree = "<group>"; };
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
-		B521A1971BC8452100E1CF2A /* SPGoogleTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPGoogleTracker.h; path = Classes/SPGoogleTracker.h; sourceTree = "<group>"; };
-		B521A1981BC8452100E1CF2A /* SPGoogleTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPGoogleTracker.m; path = Classes/SPGoogleTracker.m; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
 		B52B8A241BAB0DF0002CC55D /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "Classes/UIView+Extensions.h"; sourceTree = "<group>"; };
@@ -290,6 +290,9 @@
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		B59314DC1A486C0100B651ED /* VSTheme+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Simplenote.h"; path = "Classes/VSTheme+Simplenote.h"; sourceTree = "<group>"; };
 		B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Simplenote.m"; path = "Classes/VSTheme+Simplenote.m"; sourceTree = "<group>"; };
+		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
+		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
@@ -310,8 +313,11 @@
 		B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 3.xcdatamodel"; sourceTree = "<group>"; };
 		B5BE05511AB75C3B002417BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Classes/Settings.h; sourceTree = "<group>"; };
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
+		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
+		B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Simperium+Simplenote.h"; path = "Classes/Simperium+Simplenote.h"; sourceTree = "<group>"; };
+		B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Simperium+Simplenote.m"; path = "Classes/Simperium+Simplenote.m"; sourceTree = "<group>"; };
 		B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Development.entitlements"; sourceTree = "<group>"; };
 		B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Internal.entitlements"; sourceTree = "<group>"; };
 		B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Simplenote.entitlements; sourceTree = "<group>"; };
@@ -535,6 +541,8 @@
 		467D9C601788A53700785EF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B594E61421508247001577EE /* Preferences.h */,
+				B594E61321508247001577EE /* Preferences.m */,
 				B5BE05511AB75C3B002417BF /* Settings.h */,
 				B5BE05521AB75C3B002417BF /* Settings.m */,
 				467D9C611788A54900785EF3 /* Note.h */,
@@ -664,8 +672,6 @@
 				B53971A11AB8DCDC00B1A582 /* SPTracker.m */,
 				B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */,
 				B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */,
-				B521A1971BC8452100E1CF2A /* SPGoogleTracker.h */,
-				B521A1981BC8452100E1CF2A /* SPGoogleTracker.m */,
 			);
 			name = Trackers;
 			sourceTree = "<group>";
@@ -676,6 +682,8 @@
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
+				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
+				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -979,6 +987,7 @@
 			children = (
 				E26AC90E179DA25F00C4BFB6 /* SPOptionsViewController.h */,
 				E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */,
+				B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */,
 				B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */,
 				B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */,
 				3762530520F54FFB00C1F239 /* SPAboutViewController.swift */,
@@ -1050,8 +1059,6 @@
 				B58218931FCC45170094ECA1 /* Sources */,
 				B58218941FCC45170094ECA1 /* Frameworks */,
 				B58218951FCC45170094ECA1 /* Resources */,
-				AF628433F0CF0AC1E04FCC02 /* [CP] Embed Pods Frameworks */,
-				CE2E7A6B13C2BC991319A0B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1073,7 +1080,6 @@
 				B5EB1EEA1C204EBD0080A1B3 /* Resources */,
 				B596467F1C46BD83001537E5 /* ShellScript */,
 				B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */,
-				ECEB8563A7181FFF69A35537 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1215,11 +1221,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1236,6 +1242,7 @@
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS/AutomatticTracks.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Gridicons/Gridicons.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -1250,6 +1257,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutomatticTracks.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gridicons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -1298,21 +1306,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF628433F0CF0AC1E04FCC02 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */ = {
@@ -1373,36 +1366,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE2E7A6B13C2BC991319A0B4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ECEB8563A7181FFF69A35537 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1429,12 +1392,14 @@
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
+				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
+				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
 				46A3C97917DFA81A002865AE /* UIBarButtonItem+Images.m in Sources */,
@@ -1463,6 +1428,7 @@
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
+				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
 				46A3C98B17DFA81A002865AE /* SPHorizontalPickerViewCell.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
@@ -1505,7 +1471,6 @@
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
 				37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */,
-				B521A19A1BC8452100E1CF2A /* SPGoogleTracker.m in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				46A3C9AC17DFA81A002865AE /* UIView+Subviews.m in Sources */,
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,
@@ -2479,11 +2444,12 @@
 		467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */,
 				B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */,
 				467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */,
 				467D9C5E1788A4FB00785EF3 /* Simplenote.xcdatamodel */,
 			);
-			currentVersion = B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */;
+			currentVersion = B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */;
 			name = Simplenote.xcdatamodeld;
 			path = ../Simplenote.xcdatamodeld;
 			sourceTree = "<group>";
