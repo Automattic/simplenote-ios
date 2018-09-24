@@ -166,6 +166,28 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     self.pinTimeoutTextField.inputAccessoryView = self.doneToolbar;
     [self.view addSubview:self.pinTimeoutTextField];
     
+    self.pinTimeoutPickerView = [UIPickerView new];
+    self.pinTimeoutPickerView.delegate = self;
+    self.pinTimeoutPickerView.dataSource = self;
+    [self.pinTimeoutPickerView selectRow:[[NSUserDefaults standardUserDefaults] integerForKey:kPinTimeoutPreferencesKey] inComponent:0 animated:NO];
+    
+    self.doneToolbar = [UIToolbar new];
+    self.doneToolbar.barStyle = UIBarStyleDefault;
+    self.doneToolbar.translucent = NO;
+    [self.doneToolbar sizeToFit];
+    
+    UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Done", @"Done toolbar button")                                                                                    style:UIBarButtonItemStylePlain target:self                                                                 action:@selector(pinTimeoutDoneAction:)];
+    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace                                                                                    target:nil action:nil];
+    
+    fixedSpace.width = self.doneToolbar.frame.size.width;
+    [self.doneToolbar setItems:[NSArray arrayWithObjects:fixedSpace, doneButtonItem, nil]];
+    
+    self.pinTimeoutTextField = [UITextField new];
+    self.pinTimeoutTextField.frame = CGRectMake(0, 0, 0, 0);
+    self.pinTimeoutTextField.inputView = self.pinTimeoutPickerView;
+    self.pinTimeoutTextField.inputAccessoryView = self.doneToolbar;
+    [self.view addSubview:self.pinTimeoutTextField];
+    
     // Listen to Theme Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(themeDidChange)
@@ -733,6 +755,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
 }
+
 
 
 #pragma mark - Picker view delegate

@@ -352,6 +352,11 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
+    
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self passcodeLockIsEnabled]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
