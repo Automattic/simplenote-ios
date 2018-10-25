@@ -19,12 +19,22 @@ class SPPinLockManager: NSObject {
             return false
         }
         
+        let maxTimeoutSeconds = getPinLockTimeoutSeconds()
+        // User has timeout set to 'Off' setting (0)
+        if (maxTimeoutSeconds == 0) {
+            return false
+        }
+        
         var ts = timespec.init()
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
-        let nowSeconds = ts.tv_sec
-        let intervalSinceLastUsed = Int(nowSeconds) - lastUsedSeconds!
-        let maxTimeoutSeconds = getPinLockTimeoutSeconds()
+        let nowSeconds = max(0, Int(ts.tv_sec)) // The running clock time of the device
         
+        // User may have recently rebooted their device, so we'll enforce lock screen
+        if (lastUsedSeconds! > nowSeconds) {
+            return false
+        }
+        
+        let intervalSinceLastUsed = nowSeconds - lastUsedSeconds!
         return intervalSinceLastUsed < maxTimeoutSeconds;
     }
     
