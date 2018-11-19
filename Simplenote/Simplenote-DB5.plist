@@ -376,13 +376,13 @@
 		<key>lightBlueColor</key>
 		<string>2e3b49</string>
 		<key>textColor</key>
-		<string>dbdee0</string>
+		<string>FFFFFF</string>
 		<key>secondaryTextColor</key>
-		<string>899198</string>
+		<string>999999</string>
 		<key>dividerColor</key>
 		<string>4b5157</string>
 		<key>noteHeadlineFontColor</key>
-		<string>@textColor</string>
+		<string>DDDDDD</string>
 		<key>noteBodyFontPreviewColor</key>
 		<string>@secondaryTextColor</string>
 		<key>noteCellBackgroundSelectionColor</key>
@@ -394,7 +394,7 @@
 		<key>barTintColor</key>
 		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
-		<string>2d3034</string>
+		<string>1e1e1e</string>
 		<key>cellHighlightBackgroundColor</key>
 		<string>@tintColor</string>
 		<key>cellHighlightTextColor</key>
@@ -456,7 +456,7 @@
 		<key>tagListSeparatorColor</key>
 		<string>@dividerColor</string>
 		<key>tableViewBackgroundColor</key>
-		<string>1c1e21</string>
+		<string>1e1e1e</string>
 		<key>tableViewCellBackgroundHighlightColor</key>
 		<string>@lightBlueColor</string>
 		<key>tableViewSeparatorColor</key>
