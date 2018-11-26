@@ -16,6 +16,7 @@
 #import "SPObjectManager.h"
 #import "SPBorderedView.h"
 #import "SPButton.h"
+#import "SPOptionsViewController.h"
 #import "SPTracker.h"
 
 
@@ -124,6 +125,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
+    [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
 
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
@@ -276,6 +278,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     
     return 10;
     
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
 }
 
 // Customize the number of rows in the table view.
@@ -673,7 +679,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (NSArray *)sortDescriptors
 {
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:isAlphaSort ? @"name" : @"index" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     return sortDescriptors;
@@ -684,13 +691,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error])
     {
-	    /*
-	     Replace this implementation with code to handle the error appropriately.
-         
-	     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-	     */
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
 	}
     
     [self.tableView reloadData];
@@ -871,6 +872,17 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
 
     return button;
+}
+
+- (void)updateSortOrder:(id)sender {
+    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[self sortDescriptors]];
+    
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    [self.tableView reloadData];
 }
 
 @end
