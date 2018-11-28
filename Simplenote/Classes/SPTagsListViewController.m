@@ -680,9 +680,17 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (NSArray *)sortDescriptors
 {
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:isAlphaSort ? @"name" : @"index" ascending:YES];
+    NSSortDescriptor *sortDescriptor;
+    if (isAlphaSort) {
+        sortDescriptor = [[NSSortDescriptor alloc]
+                          initWithKey:@"name"
+                          ascending:YES
+                          selector:@selector(localizedCaseInsensitiveCompare:)];
+    } else {
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    }
+
     NSArray *sortDescriptors = @[sortDescriptor];
-    
     return sortDescriptors;
 }
 
@@ -692,6 +700,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 	if (![self.fetchedResultsController performFetch:&error])
     {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
 	}
     
     [self.tableView reloadData];
@@ -880,6 +889,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
     }
     
     [self.tableView reloadData];
