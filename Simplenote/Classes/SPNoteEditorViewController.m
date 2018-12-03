@@ -1360,9 +1360,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     NSInteger wordCount = [self wordCount];
     NSInteger charCount = [self charCount];
     
-    NSString *wordFormat = wordCount == 1 ? NSLocalizedString(@"%d Word", @"Number of words in a note") : NSLocalizedString(@"%d Words", @"Number of words in a note");
-    NSString *charFormat = charCount == 1 ? NSLocalizedString(@"%d Character", @"Number of Characters in a note") : NSLocalizedString(@"%d Characters", @"Number of Characters in a note");
-    NSString *status = [[[NSString stringWithFormat:wordFormat, wordCount] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, charCount]];
+    NSString *words = [NSNumberFormatter localizedStringFromNumber:@(wordCount) numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *characters = [NSNumberFormatter localizedStringFromNumber:@(charCount) numberStyle:NSNumberFormatterDecimalStyle];
+    
+    NSString *wordFormat = wordCount == 1 ? NSLocalizedString(@"%@ Word", @"Number of words in a note") : NSLocalizedString(@"%@ Words", @"Number of words in a note");
+    NSString *charFormat = charCount == 1 ? NSLocalizedString(@"%@ Character", @"Number of Characters in a note") : NSLocalizedString(@"%@ Characters", @"Number of Characters in a note");
+    NSString *status = [[[NSString stringWithFormat:wordFormat, words] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, characters]];
     
     
     noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
