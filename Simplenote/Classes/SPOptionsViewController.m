@@ -19,6 +19,7 @@
 #import "UIDevice+Extensions.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "Simplenote-Swift.h"
+#import "Simperium+Simplenote.h"
 
 NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
 NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
@@ -60,8 +61,9 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
     SPOptionsAccountRowDescription      = 0,
-    SPOptionsAccountRowLogout           = 1,
-    SPOptionsAccountRowCount            = 2
+    SPOptionsAccountRowPrivacy          = 1,
+    SPOptionsAccountRowLogout           = 2,
+    SPOptionsAccountRowCount            = 3
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsPreferencesRow) {
@@ -141,7 +143,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
-    
+
     self.pinTimeoutPickerView = [UIPickerView new];
     self.pinTimeoutPickerView.delegate = self;
     self.pinTimeoutPickerView.dataSource = self;
@@ -239,7 +241,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             int disabledPinLockRows = [self biometryIsAvailable] ? 2 : 1;
             return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
-            
+
         case SPOptionsViewSectionsAbout: {
             return SPOptionsAboutRowCount;
         }
@@ -263,7 +265,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
-            
+
+        case SPOptionsViewSectionsAccount:
+            return NSLocalizedString(@"Account", nil);
+
         default:
             break;
     }
@@ -278,7 +283,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         return [[NSString alloc] initWithFormat:@"Beta Distribution Channel\nv%@ (%@)", [NSString stringWithFormat:@"%@", [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"]], [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey]];
     }
 #endif
-    
+
     return nil;
 }
 
@@ -378,9 +383,14 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             switch (indexPath.row) {
                 case SPOptionsAccountRowDescription: {
-                    cell.textLabel.text = NSLocalizedString(@"Account", @"A user's Simplenote account");
+                    cell.textLabel.text = NSLocalizedString(@"Username", @"A user's Simplenote account");
                     cell.detailTextLabel.text = [SPAppDelegate sharedDelegate].simperium.user.email;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                case SPOptionsAccountRowPrivacy: {
+                    cell.textLabel.text = NSLocalizedString(@"Privacy Settings", @"Privacy Settings");
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
                 }
                 case SPOptionsAccountRowLogout: {
@@ -392,6 +402,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+
         } case SPOptionsViewSectionsAbout: {
             
             switch (indexPath.row) {
@@ -433,9 +444,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	
+
     switch (indexPath.section) {
-            
+
         case SPOptionsViewSectionsSecurity: {
             
             switch (cell.tag) {
@@ -452,6 +463,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         } case SPOptionsViewSectionsAccount: {
             
             switch (indexPath.row) {
+                case SPOptionsAccountRowPrivacy: {
+                    SPPrivacyViewController *test = [[SPPrivacyViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                    [self.navigationController pushViewController:test animated:true];
+                    break;
+                }
+
                 case SPOptionsAccountRowLogout: {
                     [self signOutAction:nil];
                     break;
@@ -716,6 +733,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
 }
+
 
 #pragma mark - Picker view delegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

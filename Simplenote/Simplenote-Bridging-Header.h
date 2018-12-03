@@ -7,3 +7,9 @@
 #import "SPConstants.h"
 #import "PersonTag.h"
 #import "Note.h"
+#import "SPTableViewController.h"
+#import "UITableView+Styling.h"
+#import "SPAppDelegate.h"
+#import <Simperium/Simperium.h>
+#import "Simperium+Simplenote.h"
+#import "VSThemeManager.h"

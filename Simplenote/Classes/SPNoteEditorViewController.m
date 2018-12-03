@@ -39,7 +39,6 @@
 #import "SPAcitivitySafari.h"
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
-#import "SPTextLinkifier.h"
 #import "UIDevice+Extensions.h"
 #import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
@@ -68,7 +67,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) SPTextLinkifier           *textLinkifier;
 @property (nonatomic, strong) UIFont                    *bodyFont;
 @property (nonatomic, strong) NSMutableParagraphStyle   *paragraphStyle;
 @property (nonatomic, strong) UIFont                    *headlineFont;
@@ -97,9 +95,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         // Editor
         _noteEditorTextView = [[SPEditorTextView alloc] init];
         
-        // Data Detectors:
-        // Disabled by default. This will be entirely handled by SPTextLinkifier
-        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeNone;
+        // Add Link Data Detector:
+        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeLink;
 
         // Note:
         // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
@@ -113,9 +110,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         // TagView
         _tagView = _noteEditorTextView.tagView;
         _noteEditorTextView.tagView.tagDelegate = self;
-        
-        // Linkifier
-        _textLinkifier = [SPTextLinkifier linkifierWithTextView:_noteEditorTextView];
         
         // Helpers
         scrollPosition = _noteEditorTextView.contentOffset.y;
@@ -247,7 +241,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         return;
     }
     
-    self.textLinkifier.enabled = NO;
     NSString *searchText = _noteEditorTextView.text;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -736,7 +729,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     if (string.length > 0) {
         bSearching = YES;
-        self.textLinkifier.enabled = NO;
         _searchString = string;
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
@@ -785,7 +777,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if ([sender isEqual:doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
-    self.textLinkifier.enabled = YES;
     _noteEditorTextView.attributedText = [_noteEditorTextView.text attributedString];
     
     _searchString = nil;
@@ -885,8 +876,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     bDisableShrinkingNavigationBar = NO;
-
-    [self.textLinkifier scrollViewDidEndDecelerating:scrollView];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
@@ -894,11 +883,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if (velocity.y < -1.0) {
         [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
-    [self.textLinkifier scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {

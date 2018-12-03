@@ -18,7 +18,7 @@
 
 @interface DTPinLockController ()
 
-@property (nonatomic, assign) BOOL biometryUnlockWasSuccessful;
+@property (nonatomic, assign) BOOL biometryUnlockDidDismiss;
 
 - (void) switchToConfirmPageAnimated:(BOOL)animated;
 - (void) setupDigitViews;
@@ -148,6 +148,7 @@
 
 - (void)appDidEnterForeground:(NSNotification *)notification
 {
+    [hiddenTextField becomeFirstResponder];
     [self displayTouchIDIfAppropriate];
 }
 
@@ -159,7 +160,7 @@
     }
     
     // Prevent duplicate biometry prompts
-    if (self.biometryUnlockWasSuccessful) {
+    if (self.biometryUnlockDidDismiss) {
         return;
     }
     
@@ -181,9 +182,10 @@
                                       dispatch_async(dispatch_get_main_queue(), ^{
                                           [self dismissKeyboard];
                                           [self didFinishUnlocking];
-                                          self.biometryUnlockWasSuccessful = YES;
                                       });
                                   }
+                                  
+                                  self.biometryUnlockDidDismiss = YES;
                               }];
         }
     }

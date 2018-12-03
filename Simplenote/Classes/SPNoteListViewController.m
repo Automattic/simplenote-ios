@@ -941,7 +941,8 @@
     BOOL showSidePanelOveride = bShouldShowSidePanel;
     bShouldShowSidePanel = NO;
 
-    return !(self.tableView.dragging || bSearching) || showSidePanelOveride;
+    // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
+    return !(self.tableView.dragging || self.tableView.isEditing || bSearching) || showSidePanelOveride;
 }
 
 - (void)resetNavigationBar {
