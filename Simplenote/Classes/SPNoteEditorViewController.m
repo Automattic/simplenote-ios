@@ -1112,25 +1112,16 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 #pragma mark Note information
 
-- (NSUInteger)wordCount {
-    // countWordsInString returns -1 for a zero length string; handle that
+- (NSInteger)wordCount {
     if (_noteEditorTextView.text == nil || [_noteEditorTextView.text length] == 0)
         return 0;
-    
-    __block NSUInteger wordCount = 0;
-    [_noteEditorTextView.text enumerateSubstringsInRange:NSMakeRange(0, _noteEditorTextView.text.length)
-                               options:NSStringEnumerationByWords
-                            usingBlock:^(NSString *character, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-                                wordCount++;
-                            }];
-    return wordCount;}
+    return _noteEditorTextView.text.wordCount;
+}
 
-- (NSUInteger)charCount {
-    
+- (NSInteger)charCount {
     if (_noteEditorTextView.text == nil)
         return 0;
-    
-    return [_noteEditorTextView.text length];
+    return _noteEditorTextView.text.charCount;
 }
 
 #pragma mark Simperium
@@ -1351,9 +1342,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     buttonStrings = @[NSLocalizedString(@"Note not published", nil)];
     
     NSInteger wordCount = [self wordCount];
+    NSInteger charCount = [self charCount];
     
-    NSString *statusFormat = wordCount == 1 ? NSLocalizedString(@"%d Word", @"Number of words in a note") : NSLocalizedString(@"%d Words", @"Number of words in a note");
-    NSString *status = [NSString stringWithFormat:statusFormat, wordCount];
+    NSString *words = [NSNumberFormatter localizedStringFromNumber:@(wordCount) numberStyle:NSNumberFormatterDecimalStyle];
+    NSString *characters = [NSNumberFormatter localizedStringFromNumber:@(charCount) numberStyle:NSNumberFormatterDecimalStyle];
+    
+    NSString *wordFormat = wordCount == 1 ? NSLocalizedString(@"%@ Word", @"Number of words in a note") : NSLocalizedString(@"%@ Words", @"Number of words in a note");
+    NSString *charFormat = charCount == 1 ? NSLocalizedString(@"%@ Character", @"Number of Characters in a note") : NSLocalizedString(@"%@ Characters", @"Number of Characters in a note");
+    NSString *status = [[[NSString stringWithFormat:wordFormat, words] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, characters]];
     
     
     noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
