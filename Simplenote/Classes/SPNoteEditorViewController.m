@@ -814,6 +814,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     void (^animations)() = ^void() {
         CGRect newFrame            = _noteEditorTextView.frame;
         newFrame.size.height       = self.view.frame.size.height - (bVoiceoverEnabled ? _tagView.frame.size.height : 0) - visibleHeight;
+        if (@available(iOS 11.0, *)) {
+            if (!isEditing) {
+                newFrame.size.height -= self.view.safeAreaInsets.bottom;
+            }
+        }
         _noteEditorTextView.frame  = newFrame;
         
         if (bVoiceoverEnabled) {
