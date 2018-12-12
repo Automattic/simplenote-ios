@@ -10,9 +10,11 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373897BB1F8328DE00CEDF91 /* SPTitleView.swift */; };
+		374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */; };
 		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762530520F54FFB00C1F239 /* SPAboutViewController.swift */; };
 		37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E10E7620B3368700864E43 /* WPAuthHandler.m */; };
+		37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */; };
 		37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */; };
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
@@ -203,6 +205,7 @@
 		3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
 		373897BB1F8328DE00CEDF91 /* SPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTitleView.swift; path = Classes/SPTitleView.swift; sourceTree = "<group>"; };
+		374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPChecklistTest.swift; sourceTree = "<group>"; };
 		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
 		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
 		3762530520F54FFB00C1F239 /* SPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAboutViewController.swift; path = Classes/SPAboutViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 		37CD04BD1A6054E900C4A8E0 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37E10E7620B3368700864E43 /* WPAuthHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WPAuthHandler.m; path = Classes/WPAuthHandler.m; sourceTree = "<group>"; };
 		37E10E7920B3477800864E43 /* WPAuthHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WPAuthHandler.h; path = Classes/WPAuthHandler.h; sourceTree = "<group>"; };
+		37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextAttachment.swift; sourceTree = "<group>"; };
 		37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainMigrator.swift; sourceTree = "<group>"; };
 		37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -694,6 +698,7 @@
 				B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */,
 				B582189B1FCC45170094ECA1 /* Info.plist */,
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
+				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			path = SimplenoteTests;
 			sourceTree = "<group>";
@@ -794,6 +799,7 @@
 				E2465A2217AD70810097B19B /* SPToggle.m */,
 				E2922AB3180C7322003AF914 /* Tag View */,
 				373897BB1F8328DE00CEDF91 /* SPTitleView.swift */,
+				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1468,6 +1474,7 @@
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
+				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
 				37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				46A3C9AC17DFA81A002865AE /* UIView+Subviews.m in Sources */,
@@ -1489,6 +1496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
+				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

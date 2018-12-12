@@ -13,3 +13,4 @@
 #import <Simperium/Simperium.h>
 #import "Simperium+Simplenote.h"
 #import "VSThemeManager.h"
+#import "SPEditorTextView.h"

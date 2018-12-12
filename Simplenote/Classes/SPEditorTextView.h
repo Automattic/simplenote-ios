@@ -9,6 +9,8 @@
 #import "SPTextView.h"
 @class SPTagView;
 
+extern NSString *const CheckListRegExPattern;
+
 @interface SPEditorTextView : SPTextView {
     BOOL touchBegan;
 	CGPoint tappedPoint;
@@ -21,5 +23,8 @@
 @property (nonatomic, strong) SPTagView *tagView;
 
 - (void)scrollToBottom;
+- (void)processChecklists;
+- (NSString *)getPlainTextContent;
+- (void)insertNewChecklist;
 
 @end

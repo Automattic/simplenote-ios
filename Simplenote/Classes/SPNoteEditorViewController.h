@@ -42,6 +42,7 @@
     UIButton *actionButton;
     UIButton *newButton;
     UIButton *keyboardButton;
+    UIButton *checklistButton;
     
     UIBarButtonItem *nextSearchButton;
     UIBarButtonItem *prevSearchButton;

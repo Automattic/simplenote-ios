@@ -208,8 +208,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     BOOL searching = searchString.length > 0;
     
+    // Add checklist images if needed
+    NSAttributedString *attributedContent = [NSAttributedString attributedStringWithChecklistAttachments:[content attributedString] withColor:[theme colorForKey:@"noteBodyFontPreviewColor"]];
+    
     if (note.pinned && preview) {
-        NSAttributedString *attributedContent = [content mutableAttributedString];
+        NSAttributedString *pinAttributedContent = attributedContent;
         if (!_pinIcon) {
             _pinIcon = [[UIImage imageNamed:@"icon_pin"] imageWithOverlayColor:transitionControllerHeadlineColor];
             _searchPinIcon = [[UIImage imageNamed:@"icon_pin"] imageWithOverlayColor:transitionControllerBodyColor];
@@ -217,12 +220,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         // New note summary contains a pin image
         UIImage *pinImage = searching ? _searchPinIcon : _pinIcon;
-        attributedContent = [attributedContent attributedStringWithLeadingImage:pinImage
+        pinAttributedContent = [pinAttributedContent attributedStringWithLeadingImage:pinImage
                              lineHeight:transitionControllerHeadlineFont.capHeight];
+        _snapshotTextView.attributedText = pinAttributedContent;
+    } else {
         _snapshotTextView.attributedText = attributedContent;
-    } else
-        _snapshotTextView.attributedText = [content attributedString];
-
+    }
     
     if (searching)
         [_snapshotTextView.textStorage applyColorAttribute:[theme colorForKey:@"tintColor"]

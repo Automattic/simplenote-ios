@@ -12,5 +12,6 @@
 
 + (NSAttributedString *)attributedStringWithImage:(UIImage *)image;
 - (NSAttributedString *)attributedStringWithLeadingImage:(UIImage *)image lineHeight:(CGFloat)lineHeight;
++ (NSAttributedString *)attributedStringWithChecklistAttachments: (NSAttributedString *)sourceString withColor: (UIColor *)color;
 
 @end

@@ -209,8 +209,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         _noteEditorTextView.frame = viewFrame;
     }
     
-    if (!_currentNote)
+    if (!_currentNote) {
         [self newButtonAction:nil];
+    } else {
+        [_noteEditorTextView processChecklists];
+    }
     
     if (!(_noteEditorTextView.text.length > 0) && !bActionSheetVisible)
         [_noteEditorTextView becomeFirstResponder];
@@ -351,6 +354,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                     SPBarButtonYOriginAdjustment,
                                     buttonWidth,
                                     buttonHeight);
+    
+    previousXOrigin = actionButton.frame.origin.x;
+    
+    checklistButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+                                    SPBarButtonYOriginAdjustment,
+                                    buttonWidth,
+                                    buttonHeight);
 }
 
 
@@ -396,6 +406,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
+    checklistButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_checklist"]
+                                      target:self
+                                    selector:@selector(insertChecklistAction:)];
+    
     newButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_new_note"]
                                    target:self
                                  selector:@selector(newButtonAction:)];
@@ -411,10 +425,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     newButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     
     [navigationButtonContainer addSubview:keyboardButton];
     [navigationButtonContainer addSubview:newButton];
     [navigationButtonContainer addSubview:actionButton];
+    [navigationButtonContainer addSubview:checklistButton];
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
@@ -699,7 +715,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (UIViewController *)nextViewControllerForInteractivePush
 {
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
-    previewViewController.markdownText = self.noteEditorTextView.text;
+    previewViewController.markdownText = [self.noteEditorTextView getPlainTextContent];
     
     return previewViewController;
 }
@@ -923,6 +939,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         newButton.alpha = 1.0;
         actionButton.transform = CGAffineTransformIdentity;
         actionButton.alpha = 1.0;
+        checklistButton.transform = CGAffineTransformIdentity;
+        checklistButton.alpha = 1.0;
         keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = navigationBarTransform;
         
@@ -1046,6 +1064,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     return !appliedAutoBullets;
 }
 
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    
+    // Don't allow "3d press" on our checkbox images
+    return interaction != UITextItemInteractionPresentActions;
+}
+
 - (void)textViewDidChange:(UITextView *)textView {
     
     bBlankNote = NO;
@@ -1077,6 +1101,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                 [_noteEditorTextView setContentOffset:bottomOffset animated:YES];
         });
     }
+    
+    [_noteEditorTextView processChecklists];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -1150,7 +1176,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 	if (bModified || _currentNote.deleted == YES)
 	{
         // Update note
-        _currentNote.content = _noteEditorTextView.text;
+        _currentNote.content = [_noteEditorTextView getPlainTextContent];
         _currentNote.modificationDate = [NSDate date];
 
         // Force an update of the note's content preview in case only tags changed
@@ -1310,6 +1336,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     });
     
     bDisableShrinkingNavigationBar = NO;
+}
+
+- (void)insertChecklistAction:(id)sender {
+    [_noteEditorTextView insertNewChecklist];
 }
 
 - (void)actionButtonAction:(id)sender {

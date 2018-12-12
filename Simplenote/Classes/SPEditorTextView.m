@@ -10,9 +10,16 @@
 #import "SPTagView.h"
 #import "VSThemeManager.h"
 #import "SPInteractiveTextStorage.h"
+#import "NSAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"
+#import "UIImage+Colorization.h"
 #import "VSTheme+Extensions.h"
+#import "Simplenote-Swift.h"
+
+NSString *const CheckListRegExPattern = @"^- (\\[([ |x])\\])";
+NSString *const MarkdownUnchecked = @"- [ ]";
+NSString *const MarkdownChecked = @"- [x]";
 
 @interface SPEditorTextView ()
 
@@ -68,6 +75,12 @@
                                                  selector:@selector(didEndEditing:)
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self
+                                                        action:@selector(onTextTapped:)];
+        tapGestureRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:tapGestureRecognizer];
         
         [self setEditing:NO];
     }
@@ -412,6 +425,84 @@
     
     BOOL newMovement = noPreviousStartPosition || caretMovedSinceLastPosition || directionChanged;
     return newMovement;
+}
+
+#pragma mark checklists
+- (void)processChecklists {
+    if (self.attributedText.length == 0) {
+        return;
+    }
+    
+    VSTheme *theme = [[VSThemeManager sharedManager] theme];
+    
+    [self.textStorage setAttributedString:[NSAttributedString attributedStringWithChecklistAttachments: self.attributedText withColor:[theme colorForKey:@"textColor"]]];
+}
+
+// Processes content of note editor, and replaces special string attachments with their plain
+// text counterparts. Currently supports markdown checklists.
+- (NSString *)getPlainTextContent {
+    NSMutableAttributedString *adjustedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    // Replace checkbox images with their markdown syntax equivalent
+    [adjustedString enumerateAttribute:NSAttachmentAttributeName inRange:[adjustedString.string rangeOfString:adjustedString.string] options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+        if ([value isKindOfClass:[SPTextAttachment class]]) {
+            SPTextAttachment *attachment = (SPTextAttachment *)value;
+            NSString *checkboxMarkdown = attachment.isChecked ? MarkdownChecked : MarkdownUnchecked;
+            [adjustedString replaceCharactersInRange:range withString:checkboxMarkdown];
+        }
+    }];
+    
+    return adjustedString.string;
+}
+
+- (void)insertNewChecklist {
+    NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    [newString appendAttributedString:[[NSAttributedString alloc] initWithString:@"- [ ] "]];
+    NSString *checkboxText = [MarkdownUnchecked stringByAppendingString:@" "];
+    if (self.selectedRange.location > 0) {
+        checkboxText = [@"\n" stringByAppendingString:checkboxText];
+    }
+    
+    [self replaceRange:self.selectedTextRange withText:checkboxText];
+    [self processChecklists];
+}
+
+- (void)onTextTapped:(UITapGestureRecognizer *)recognizer
+{
+    VSTheme *theme = [[VSThemeManager sharedManager] theme];
+    UITextView *textView = (UITextView *)recognizer.view;
+    
+    // Location of the tap in text-container coordinates
+    NSLayoutManager *layoutManager = textView.layoutManager;
+    CGPoint location = [recognizer locationInView:textView];
+    location.x -= textView.textContainerInset.left;
+    location.y -= textView.textContainerInset.top;
+    
+    // Find the character that's been tapped on
+    NSUInteger characterIndex;
+    characterIndex = [layoutManager characterIndexForPoint:location
+                                           inTextContainer:textView.textContainer
+                  fractionOfDistanceBetweenInsertionPoints:NULL];
+    
+    if (characterIndex < textView.textStorage.length) {
+        NSRange range;
+        if ([textView.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
+            id value = [textView.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+            // A checkbox was tapped!
+            SPTextAttachment *attachment = (SPTextAttachment *)value;
+            BOOL wasChecked = attachment.isChecked;
+            if (wasChecked) {
+                attachment.image = [[UIImage imageNamed:@"icon_task_unchecked"] imageWithOverlayColor:[theme colorForKey:@"textColor"]];
+            } else {
+                attachment.image = [[UIImage imageNamed:@"icon_task_checked"] imageWithOverlayColor:[theme colorForKey:@"textColor"]];
+            }
+            [attachment setIsChecked:!wasChecked];
+            [self.delegate textViewDidChange:self];
+            [self setNeedsDisplay];
+            recognizer.cancelsTouchesInView = YES;
+        } else {
+            recognizer.cancelsTouchesInView = NO;
+        }
+    }
 }
 
 @end

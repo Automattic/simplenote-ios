@@ -40,7 +40,7 @@
         _previewView.frame = [self previewViewRectForWidth:frame.size.width
                                                      fast:YES];
         
-        _previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
+        _previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _previewView.scrollEnabled = NO;
         _previewView.userInteractionEnabled = NO;
         _previewView.editable = NO;
