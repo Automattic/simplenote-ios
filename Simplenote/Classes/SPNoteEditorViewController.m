@@ -793,7 +793,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if ([sender isEqual:doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
-    _noteEditorTextView.attributedText = [_noteEditorTextView.text attributedString];
+    _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
+    [_noteEditorTextView processChecklists];
     
     _searchString = nil;
     searchResultRanges = nil;
@@ -1612,6 +1613,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
             [self save];
         }
         
+        [_noteEditorTextView processChecklists];
         // Unload versions and re-enable editor
         [_noteEditorTextView setEditable:YES];
         noteVersionData = nil;
@@ -1948,6 +1950,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         [self.view insertSubview:snapshot aboveSubview:_noteEditorTextView];
         
         _noteEditorTextView.attributedText = [(NSString *)[versionData objectForKey:@"content"] attributedString];
+        [_noteEditorTextView processChecklists];
         
         [UIView animateWithDuration:0.25
                          animations:^{

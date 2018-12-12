@@ -51,6 +51,7 @@
     NSRange newSelectedRange            = self.selectedRange;
     NSString *insertionString           = nil;
     NSRange insertionRange              = lineRange;
+    BOOL isApplyingChecklist = [lineString hasPrefix:textAttachmentCode];
     
     // Tab entered: Move the bullet along
     if (replacementText.isTabString) {
@@ -70,11 +71,10 @@
     // Empty Line: Remove the bullet
     } else if (cleanLineString.length == 1) {
         insertionString                 = [NSString newLineString];
-        newSelectedRange.location       -= lineRange.length - bulletLength;
+        newSelectedRange.location       -= lineRange.length - (isApplyingChecklist ? 1 :  bulletLength);
         
     // Attempt to apply the bullet
     } else  {
-        BOOL isApplyingChecklist = [lineString hasPrefix:textAttachmentCode];
         // Substring: [0 - Bullet]
         if (!isApplyingChecklist) {
             NSRange bulletPrefixRange       = NSMakeRange(0, [lineString rangeOfString:stringToAppendToNewLine].location + bulletLength);
