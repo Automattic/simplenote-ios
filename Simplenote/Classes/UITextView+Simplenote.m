@@ -29,7 +29,7 @@
     NSRange lineRange                   = [rawString lineRangeForRange:replacementRange];
     NSString *lineString                = [rawString substringWithRange:lineRange];
     NSString *cleanLineString           = [lineString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSString *textAttachmentCode = @"\U0000fffc";
+    NSString *textAttachmentCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
     NSArray *const bullets              = @[@"*", @"+", @"-", textAttachmentCode];
     NSString *stringToAppendToNewLine   = nil;
     
