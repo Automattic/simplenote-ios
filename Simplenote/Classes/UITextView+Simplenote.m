@@ -109,6 +109,10 @@
     // Signal that the text was changed!
     [self.delegate textViewDidChange:self];
     
+    // Set the capitalization type to 'Words' temporarily so that we get a capital word next to the bullet.
+    self.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    [self reloadInputViews];
+    
     return YES;
 }
 

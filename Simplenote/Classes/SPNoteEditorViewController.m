@@ -1103,6 +1103,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     }
     
     [_noteEditorTextView processChecklists];
+    
+    // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
+    // See UITextView+Simplenote 
+    if (_noteEditorTextView.autocapitalizationType != UITextAutocapitalizationTypeSentences) {
+        _noteEditorTextView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        [_noteEditorTextView reloadInputViews];
+    }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
