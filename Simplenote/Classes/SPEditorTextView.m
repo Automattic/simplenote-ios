@@ -8,7 +8,6 @@
 
 #import "SPEditorTextView.h"
 #import "SPTagView.h"
-#import "VSThemeManager.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSAttributedString+Styling.h"
 #import "NSString+Attributed.h"
@@ -41,7 +40,7 @@ NSString *const MarkdownChecked = @"- [x]";
     self = [super init];
     if (self) {
         
-        VSTheme *theme = [[VSThemeManager sharedManager] theme];
+        theme = [[VSThemeManager sharedManager] theme];
         
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
@@ -102,9 +101,6 @@ NSString *const MarkdownChecked = @"- [x]";
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-    // Set content insets on side
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
     if (@available(iOS 11.0, *)) {
@@ -432,8 +428,6 @@ NSString *const MarkdownChecked = @"- [x]";
     if (self.attributedText.length == 0) {
         return;
     }
-    
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     [self.textStorage setAttributedString:[NSAttributedString attributedStringWithChecklistAttachments: self.attributedText withColor:[theme colorForKey:@"textColor"]]];
 }

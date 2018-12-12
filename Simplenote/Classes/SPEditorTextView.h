@@ -7,6 +7,7 @@
 //
 
 #import "SPTextView.h"
+#import "VSThemeManager.h"
 @class SPTagView;
 
 extern NSString *const CheckListRegExPattern;
@@ -14,6 +15,7 @@ extern NSString *const CheckListRegExPattern;
 @interface SPEditorTextView : SPTextView {
     BOOL touchBegan;
 	CGPoint tappedPoint;
+    VSTheme *theme;
 }
 
 @property (nonatomic) BOOL editing;
