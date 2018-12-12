@@ -1105,7 +1105,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [_noteEditorTextView processChecklists];
     
     // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
-    // See UITextView+Simplenote 
+    // See UITextView+Simplenote
     if (_noteEditorTextView.autocapitalizationType != UITextAutocapitalizationTypeSentences) {
         _noteEditorTextView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         [_noteEditorTextView reloadInputViews];
@@ -1202,10 +1202,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)willReceiveNewContent {
     
     cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    noteContentBeforeRemoteUpdate = _noteEditorTextView.text;
+    noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
-        _currentNote.content = _noteEditorTextView.text;
+        _currentNote.content = [_noteEditorTextView getPlainTextContent];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
     }
 }
@@ -1217,6 +1217,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 									 currentLocation:cursorLocationBeforeRemoteUpdate];
 	
 	_noteEditorTextView.attributedText = [_currentNote.content attributedString];
+    [_noteEditorTextView processChecklists];
 	
 	NSRange newRange = NSMakeRange(newLocation, 0);
 	[_noteEditorTextView setSelectedRange:newRange];

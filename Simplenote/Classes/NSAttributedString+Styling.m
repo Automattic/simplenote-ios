@@ -73,7 +73,7 @@
                           imageWithOverlayColor:color];
         [attachment setIsChecked: isChecked];
         CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
-        attachment.bounds = CGRectMake(0, -4, fontSize, fontSize);
+        attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
         attachment.image = image;
         
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
