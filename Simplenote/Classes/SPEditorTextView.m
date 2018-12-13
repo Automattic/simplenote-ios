@@ -456,8 +456,20 @@ NSString *const MarkdownChecked = @"- [x]";
         checkboxText = [@"\n" stringByAppendingString:checkboxText];
     }
     
-    [self replaceRange:self.selectedTextRange withText:checkboxText];
+    NSTextStorage *storage = self.textStorage;
+    [storage beginEditing];
+    [storage replaceCharactersInRange:self.selectedRange withString:checkboxText];
+    [storage endEditing];
+    
+    // Update the cursor position
+    [self setSelectedRange:NSMakeRange(self.selectedRange.location + 3, self.selectedRange.length)];
+    
     [self processChecklists];
+    [self.delegate textViewDidChange:self];
+    
+    // Set the capitalization type to 'Words' temporarily so that we get a capital word next to the bullet.
+    self.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    [self reloadInputViews];
 }
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
