@@ -9,7 +9,7 @@ class SPChecklistTest: XCTestCase {
     func testRegexOnlyCapturesNewlines() {
         let inlineChecklist = "This is a badly formed todo - [ ] Buy avocados"
         
-        let regex = try! NSRegularExpression.init(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
+        let regex = try! NSRegularExpression(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
         
         let matches = regex.matches(in: inlineChecklist, options: [], range: NSMakeRange(0, inlineChecklist.count))
         
@@ -19,7 +19,7 @@ class SPChecklistTest: XCTestCase {
     func testMatchProperlyFormattedChecklistSyntax() {
         let inlineChecklist = "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct."
         
-        let regex = try! NSRegularExpression.init(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
+        let regex = try! NSRegularExpression(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
         
         let matches = regex.matches(in: inlineChecklist, options: [], range: NSMakeRange(0, inlineChecklist.count))
         
