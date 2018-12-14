@@ -10,6 +10,7 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSAttributedString+Styling.h"
+#import "NSMutableAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"
 #import "UIImage+Colorization.h"
@@ -429,7 +430,7 @@ NSString *const MarkdownChecked = @"- [x]";
         return;
     }
     
-    [self.textStorage setAttributedString:[NSAttributedString attributedStringWithChecklistAttachments: self.attributedText withColor:[theme colorForKey:@"textColor"]]];
+    [self.textStorage addChecklistAttachmentsForColor:[theme colorForKey:@"textColor"]];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain

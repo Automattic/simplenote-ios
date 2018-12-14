@@ -18,6 +18,7 @@
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
 #import "NSAttributedString+Styling.h"
+#import "NSMutableAttributedString+Styling.h"
 #import "SPTransitionSnapshot.h"
 #import "SPTextView.h"
 #import "SPInteractiveTextStorage.h"
@@ -209,7 +210,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     BOOL searching = searchString.length > 0;
     
     // Add checklist images if needed
-    NSAttributedString *attributedContent = [NSAttributedString attributedStringWithChecklistAttachments:[content attributedString] withColor:[theme colorForKey:@"noteBodyFontPreviewColor"]];
+    NSMutableAttributedString *attributedContent = content.attributedString.mutableCopy;
+    [attributedContent addChecklistAttachmentsForColor: [theme colorForKey:@"noteBodyFontPreviewColor"]];
     
     if (note.pinned && preview) {
         NSAttributedString *pinAttributedContent = attributedContent;

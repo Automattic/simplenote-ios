@@ -39,42 +39,4 @@
     return combinedString;
 }
 
-// Replaces checklist markdown syntax with SPTextAttachment images in an attributed string
-+ (NSAttributedString *)attributedStringWithChecklistAttachments: (NSAttributedString *)sourceString withColor: (UIColor *)color {
-    if (!sourceString || sourceString.length == 0) {
-        return [[NSAttributedString alloc] initWithString:@""];
-    }
-    
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:CheckListRegExPattern options:NSRegularExpressionAnchorsMatchLines error:&error];
-    
-    NSString *noteString = sourceString.string;
-    NSArray *matches = [regex matchesInString:noteString options:0 range:[noteString rangeOfString:noteString]];
-    
-    if (matches.count == 0) {
-        return sourceString;
-    }
-    
-    NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithAttributedString:sourceString];
-    
-    int positionAdjustment = 0;
-    for (NSTextCheckingResult *match in matches) {
-        NSString *markdownTag = [noteString substringWithRange:match.range];
-        BOOL isChecked = [markdownTag containsString:@"x"];
-        
-        SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor: color];
-        [attachment setIsChecked: isChecked];
-        CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
-        attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
-        
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
-        NSRange adjustedRange = NSMakeRange(match.range.location - positionAdjustment, match.range.length);
-        [newString replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
-        
-        positionAdjustment += markdownTag.length - 1;
-    }
-    
-    return newString;
-}
-
 @end

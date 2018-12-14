@@ -10,6 +10,7 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373897BB1F8328DE00CEDF91 /* SPTitleView.swift */; };
+		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
 		374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */; };
 		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762530520F54FFB00C1F239 /* SPAboutViewController.swift */; };
@@ -205,6 +206,8 @@
 		3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
 		373897BB1F8328DE00CEDF91 /* SPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTitleView.swift; path = Classes/SPTitleView.swift; sourceTree = "<group>"; };
+		373AD30621C4739300A4EA89 /* NSMutableAttributedString+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Styling.h"; sourceTree = "<group>"; };
+		373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Styling.m"; sourceTree = "<group>"; };
 		374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPChecklistTest.swift; sourceTree = "<group>"; };
 		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
 		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
@@ -576,6 +579,8 @@
 			children = (
 				E2911E5B17B4959A00F13AD9 /* NSAttributedString+Styling.h */,
 				E2911E5C17B4959A00F13AD9 /* NSAttributedString+Styling.m */,
+				373AD30621C4739300A4EA89 /* NSMutableAttributedString+Styling.h */,
+				373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */,
 				E22A17CE17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.h */,
 				E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */,
 				B557381E1AB8950A006043E4 /* NSDate+Helper.h */,
@@ -1414,6 +1419,7 @@
 				46A3C97D17DFA81A002865AE /* NSTextStorage+Highlight.m in Sources */,
 				B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */,
 				B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */,
+				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
 				46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */,
 				E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */,
 				46A3C97F17DFA81A002865AE /* SPSideBySideView.m in Sources */,

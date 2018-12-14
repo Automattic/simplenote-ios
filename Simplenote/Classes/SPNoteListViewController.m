@@ -28,6 +28,7 @@
 #import "Note.h"
 
 #import "NSAttributedString+Styling.h"
+#import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
 #import "UIBarButtonItem+Images.h"
@@ -468,7 +469,8 @@
     if (!note.preview)
         [note createPreview];
     
-    NSAttributedString *attributedContent = [NSAttributedString attributedStringWithChecklistAttachments:[[NSAttributedString alloc] initWithString:note.preview] withColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+    NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
+    [attributedContent addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
     
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
