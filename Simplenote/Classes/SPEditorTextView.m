@@ -474,7 +474,6 @@ NSString *const MarkdownChecked = @"- [x]";
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
     UITextView *textView = (UITextView *)recognizer.view;
     
     // Location of the tap in text-container coordinates
@@ -496,11 +495,6 @@ NSString *const MarkdownChecked = @"- [x]";
             // A checkbox was tapped!
             SPTextAttachment *attachment = (SPTextAttachment *)value;
             BOOL wasChecked = attachment.isChecked;
-            if (wasChecked) {
-                attachment.image = [[UIImage imageNamed:@"icon_task_unchecked"] imageWithOverlayColor:[theme colorForKey:@"textColor"]];
-            } else {
-                attachment.image = [[UIImage imageNamed:@"icon_task_checked"] imageWithOverlayColor:[theme colorForKey:@"textColor"]];
-            }
             [attachment setIsChecked:!wasChecked];
             [self.delegate textViewDidChange:self];
             [self setNeedsDisplay];

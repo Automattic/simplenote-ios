@@ -59,22 +59,13 @@
     
     int positionAdjustment = 0;
     for (NSTextCheckingResult *match in matches) {
-        NSRange range = match.range;
-        if ([newString attribute:NSAttachmentAttributeName atIndex:match.range.location - positionAdjustment effectiveRange:&range]) {
-            // We've got one already!
-            continue;
-        }
-        
         NSString *markdownTag = [noteString substringWithRange:match.range];
         BOOL isChecked = [markdownTag containsString:@"x"];
         
-        SPTextAttachment *attachment = [[SPTextAttachment alloc] init];
-        UIImage *image = [[UIImage imageNamed: isChecked ? @"icon_task_checked" : @"icon_task_unchecked"]
-                          imageWithOverlayColor:color];
+        SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor: color];
         [attachment setIsChecked: isChecked];
         CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
         attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
-        attachment.image = image;
         
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
         NSRange adjustedRange = NSMakeRange(match.range.location - positionAdjustment, match.range.length);
