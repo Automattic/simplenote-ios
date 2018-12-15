@@ -79,11 +79,13 @@ NSInteger const ChecklistCursorAdjustment = 3;
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
         
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                                        initWithTarget:self
-                                                        action:@selector(onTextTapped:)];
-        tapGestureRecognizer.cancelsTouchesInView = NO;
-        [self addGestureRecognizer:tapGestureRecognizer];
+        if (@available(iOS 11.0, *)) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                            initWithTarget:self
+                                                            action:@selector(onTextTapped:)];
+            tapGestureRecognizer.cancelsTouchesInView = NO;
+            [self addGestureRecognizer:tapGestureRecognizer];
+        }
         
         [self setEditing:NO];
     }
