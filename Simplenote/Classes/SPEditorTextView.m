@@ -21,6 +21,9 @@ NSString *const CheckListRegExPattern = @"^- (\\[([ |x])\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 
+// One unicode character plus a space and a newline
+NSInteger const ChecklistCursorAdjustment = 3;
+
 @interface SPEditorTextView ()
 
 @property (strong, nonatomic) NSArray *textCommands;
@@ -463,7 +466,7 @@ NSString *const MarkdownChecked = @"- [x]";
     [storage endEditing];
     
     // Update the cursor position
-    [self setSelectedRange:NSMakeRange(self.selectedRange.location + 3, self.selectedRange.length)];
+    [self setSelectedRange:NSMakeRange(self.selectedRange.location + ChecklistCursorAdjustment, self.selectedRange.length)];
     
     [self processChecklists];
     [self.delegate textViewDidChange:self];
@@ -475,24 +478,22 @@ NSString *const MarkdownChecked = @"- [x]";
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    UITextView *textView = (UITextView *)recognizer.view;
-    
     // Location of the tap in text-container coordinates
-    NSLayoutManager *layoutManager = textView.layoutManager;
-    CGPoint location = [recognizer locationInView:textView];
-    location.x -= textView.textContainerInset.left;
-    location.y -= textView.textContainerInset.top;
+    NSLayoutManager *layoutManager = self.layoutManager;
+    CGPoint location = [recognizer locationInView:self];
+    location.x -= self.textContainerInset.left;
+    location.y -= self.textContainerInset.top;
     
     // Find the character that's been tapped on
     NSUInteger characterIndex;
     characterIndex = [layoutManager characterIndexForPoint:location
-                                           inTextContainer:textView.textContainer
+                                           inTextContainer:self.textContainer
                   fractionOfDistanceBetweenInsertionPoints:NULL];
     
-    if (characterIndex < textView.textStorage.length) {
+    if (characterIndex < self.textStorage.length) {
         NSRange range;
-        if ([textView.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
-            id value = [textView.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+        if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
+            id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
             // A checkbox was tapped!
             SPTextAttachment *attachment = (SPTextAttachment *)value;
             BOOL wasChecked = attachment.isChecked;
