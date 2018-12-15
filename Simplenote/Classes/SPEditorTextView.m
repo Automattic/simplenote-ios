@@ -499,7 +499,7 @@ NSInteger const ChecklistCursorAdjustment = 3;
             BOOL wasChecked = attachment.isChecked;
             [attachment setIsChecked:!wasChecked];
             [self.delegate textViewDidChange:self];
-            [self setNeedsDisplay];
+            [self.layoutManager invalidateDisplayForCharacterRange:range];
             recognizer.cancelsTouchesInView = YES;
         } else {
             recognizer.cancelsTouchesInView = NO;
