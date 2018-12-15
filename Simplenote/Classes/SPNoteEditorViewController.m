@@ -1039,6 +1039,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                   CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
     actionButton.alpha = alphaAmount;
     
+    checklistButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+                                                     CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
+    checklistButton.alpha = alphaAmount;
+    
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
     
