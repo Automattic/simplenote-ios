@@ -455,8 +455,6 @@ NSInteger const ChecklistCursorAdjustment = 3;
 }
 
 - (void)insertNewChecklist {
-    NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
-    [newString appendAttributedString:[[NSAttributedString alloc] initWithString:@"- [ ] "]];
     NSString *checkboxText = [MarkdownUnchecked stringByAppendingString:@" "];
     if (self.selectedRange.location > 0) {
         checkboxText = [@"\n" stringByAppendingString:checkboxText];
