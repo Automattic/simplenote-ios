@@ -8,6 +8,8 @@
 
 #import "NSAttributedString+Styling.h"
 #import "UIImage+Extensions.h"
+#import "UIImage+Colorization.h"
+#import "Simplenote-Swift.h"
 
 @implementation NSAttributedString (Styling)
 

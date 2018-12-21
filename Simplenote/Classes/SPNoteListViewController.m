@@ -28,6 +28,7 @@
 #import "Note.h"
 
 #import "NSAttributedString+Styling.h"
+#import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
 #import "UIBarButtonItem+Images.h"
@@ -468,8 +469,11 @@
     if (!note.preview)
         [note createPreview];
     
+    NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
+    [attributedContent addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+    
     if (note.pinned) {
-        NSAttributedString *attributedSummary = [[NSAttributedString alloc] initWithString:note.preview];
+        NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
             _pinImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
             _pinSearchImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
@@ -478,16 +482,16 @@
         
         // New note summary contains a pin image
         UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
-        attributedSummary = [attributedSummary attributedStringWithLeadingImage:pinImage
+        pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
                              lineHeight:[self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"].capHeight];
-        cell.previewView.attributedText = attributedSummary;
-    } else
-        cell.previewView.text = note.preview;
+        cell.previewView.attributedText = pinnedContent;
+    } else {
+        cell.previewView.attributedText = attributedContent;
+    }
     
     cell.previewView.alpha = 1.0;
     
     if (bSearching) {
-        
         [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }

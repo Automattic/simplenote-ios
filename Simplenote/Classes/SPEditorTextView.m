@@ -8,11 +8,21 @@
 
 #import "SPEditorTextView.h"
 #import "SPTagView.h"
-#import "VSThemeManager.h"
 #import "SPInteractiveTextStorage.h"
+#import "NSAttributedString+Styling.h"
+#import "NSMutableAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"
+#import "UIImage+Colorization.h"
 #import "VSTheme+Extensions.h"
+#import "Simplenote-Swift.h"
+
+NSString *const CheckListRegExPattern = @"^- (\\[([ |x])\\])";
+NSString *const MarkdownUnchecked = @"- [ ]";
+NSString *const MarkdownChecked = @"- [x]";
+
+// One unicode character plus a space and a newline
+NSInteger const ChecklistCursorAdjustment = 3;
 
 @interface SPEditorTextView ()
 
@@ -34,7 +44,7 @@
     self = [super init];
     if (self) {
         
-        VSTheme *theme = [[VSThemeManager sharedManager] theme];
+        theme = [[VSThemeManager sharedManager] theme];
         
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
@@ -69,6 +79,14 @@
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
         
+        if (@available(iOS 11.0, *)) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                            initWithTarget:self
+                                                            action:@selector(onTextTapped:)];
+            tapGestureRecognizer.cancelsTouchesInView = NO;
+            [self addGestureRecognizer:tapGestureRecognizer];
+        }
+        
         [self setEditing:NO];
     }
     return self;
@@ -89,9 +107,6 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-    // Set content insets on side
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
     if (@available(iOS 11.0, *)) {
@@ -412,6 +427,84 @@
     
     BOOL newMovement = noPreviousStartPosition || caretMovedSinceLastPosition || directionChanged;
     return newMovement;
+}
+
+#pragma mark checklists
+- (void)processChecklists {
+    if (self.attributedText.length == 0) {
+        return;
+    }
+    
+    [self.textStorage addChecklistAttachmentsForColor:[theme colorForKey:@"textColor"]];
+}
+
+// Processes content of note editor, and replaces special string attachments with their plain
+// text counterparts. Currently supports markdown checklists.
+- (NSString *)getPlainTextContent {
+    NSMutableAttributedString *adjustedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    // Replace checkbox images with their markdown syntax equivalent
+    [adjustedString enumerateAttribute:NSAttachmentAttributeName inRange:[adjustedString.string rangeOfString:adjustedString.string] options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+        if ([value isKindOfClass:[SPTextAttachment class]]) {
+            SPTextAttachment *attachment = (SPTextAttachment *)value;
+            NSString *checkboxMarkdown = attachment.isChecked ? MarkdownChecked : MarkdownUnchecked;
+            [adjustedString replaceCharactersInRange:range withString:checkboxMarkdown];
+        }
+    }];
+    
+    return adjustedString.string;
+}
+
+- (void)insertNewChecklist {
+    NSString *checkboxText = [MarkdownUnchecked stringByAppendingString:@" "];
+    if (self.selectedRange.location > 0) {
+        checkboxText = [@"\n" stringByAppendingString:checkboxText];
+    }
+    
+    NSTextStorage *storage = self.textStorage;
+    [storage beginEditing];
+    [storage replaceCharactersInRange:self.selectedRange withString:checkboxText];
+    [storage endEditing];
+    
+    // Update the cursor position
+    [self setSelectedRange:NSMakeRange(self.selectedRange.location + ChecklistCursorAdjustment, self.selectedRange.length)];
+    
+    [self processChecklists];
+    [self.delegate textViewDidChange:self];
+    
+    // Set the capitalization type to 'Words' temporarily so that we get a capital word next to the bullet.
+    self.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    [self reloadInputViews];
+}
+
+- (void)onTextTapped:(UITapGestureRecognizer *)recognizer
+{
+    // Location of the tap in text-container coordinates
+    NSLayoutManager *layoutManager = self.layoutManager;
+    CGPoint location = [recognizer locationInView:self];
+    location.x -= self.textContainerInset.left;
+    location.y -= self.textContainerInset.top;
+    
+    // Find the character that's been tapped on
+    NSUInteger characterIndex;
+    characterIndex = [layoutManager characterIndexForPoint:location
+                                           inTextContainer:self.textContainer
+                  fractionOfDistanceBetweenInsertionPoints:NULL];
+    
+    if (characterIndex < self.textStorage.length) {
+        NSRange range;
+        if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
+            id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+            // A checkbox was tapped!
+            SPTextAttachment *attachment = (SPTextAttachment *)value;
+            BOOL wasChecked = attachment.isChecked;
+            [attachment setIsChecked:!wasChecked];
+            [self.delegate textViewDidChange:self];
+            [self.layoutManager invalidateDisplayForCharacterRange:range];
+            recognizer.cancelsTouchesInView = YES;
+        } else {
+            recognizer.cancelsTouchesInView = NO;
+        }
+    }
 }
 
 @end
