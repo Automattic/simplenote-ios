@@ -85,27 +85,6 @@
 }
 
 - (void)onTextChanged:(UITextField *)textField {
-    BOOL endEditing = NO;
-
-    NSString *text = textField.text;
-    if ([text hasPrefix:@" "]) {
-        text = nil;
-        endEditing = YES;
-    } else if ([text rangeOfString:@" "].location != NSNotFound) {
-        text = [text substringWithRange:NSMakeRange(0, [text rangeOfString:@" "].location)];
-        endEditing = YES;
-    }
-
-    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
-    if (text) {
-        [super setText:text];
-    }
-
-    if (endEditing) {
-        [self.delegate textFieldShouldReturn:self];
-    }
-
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([tagDelegate respondsToSelector:@selector(tagEntryFieldDidChange:)]) {
             [tagDelegate tagEntryFieldDidChange:self];
