@@ -20,9 +20,10 @@
 NSString *const CheckListRegExPattern = @"^- (\\[([ |x])\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
+NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
-// One unicode character plus a space and a newline
-NSInteger const ChecklistCursorAdjustment = 3;
+// One unicode character plus a space
+NSInteger const ChecklistCursorAdjustment = 2;
 
 @interface SPEditorTextView ()
 
@@ -454,19 +455,29 @@ NSInteger const ChecklistCursorAdjustment = 3;
     return adjustedString.string;
 }
 
-- (void)insertNewChecklist {
-    NSString *checkboxText = [MarkdownUnchecked stringByAppendingString:@" "];
-    if (self.selectedRange.location > 0) {
-        checkboxText = [@"\n" stringByAppendingString:checkboxText];
+- (void)insertOrRemoveChecklist {
+    NSRange lineRange = [self.text lineRangeForRange:self.selectedRange];
+    NSString *lineString = [self.text substringWithRange:lineRange];
+    
+    BOOL didInsertCheckbox = NO;
+    if ([lineString hasPrefix:TextAttachmentCharacterCode] && [lineString length] >= 2) {
+        // Remove the checkbox
+        lineString = [lineString stringByReplacingCharactersInRange:NSMakeRange(0, 2) withString:@""];
+    } else {
+        // Add a checkbox
+        NSString *checkboxString = [MarkdownUnchecked stringByAppendingString:@" "];
+        lineString = [checkboxString stringByAppendingString:[self.text substringWithRange:lineRange]];
+        didInsertCheckbox = YES;
     }
     
     NSTextStorage *storage = self.textStorage;
     [storage beginEditing];
-    [storage replaceCharactersInRange:self.selectedRange withString:checkboxText];
+    [storage replaceCharactersInRange:lineRange withString:lineString];
     [storage endEditing];
     
     // Update the cursor position
-    [self setSelectedRange:NSMakeRange(self.selectedRange.location + ChecklistCursorAdjustment, self.selectedRange.length)];
+    int cursorAdjustment = didInsertCheckbox ? ChecklistCursorAdjustment : -ChecklistCursorAdjustment;
+    [self setSelectedRange:NSMakeRange(self.selectedRange.location + cursorAdjustment, self.selectedRange.length)];
     
     [self processChecklists];
     [self.delegate textViewDidChange:self];

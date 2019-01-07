@@ -27,6 +27,6 @@ extern NSString *const CheckListRegExPattern;
 - (void)scrollToBottom;
 - (void)processChecklists;
 - (NSString *)getPlainTextContent;
-- (void)insertNewChecklist;
+- (void)insertOrRemoveChecklist;
 
 @end

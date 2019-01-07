@@ -1355,7 +1355,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 }
 
 - (void)insertChecklistAction:(id)sender {
-    [_noteEditorTextView insertNewChecklist];
+    [_noteEditorTextView insertOrRemoveChecklist];
 }
 
 - (void)actionButtonAction:(id)sender {
