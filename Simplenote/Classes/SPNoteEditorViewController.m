@@ -94,8 +94,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
         // Editor
         _noteEditorTextView = [[SPEditorTextView alloc] init];
-        
-        // Add Link Data Detector:
         _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
 
         // Note:
