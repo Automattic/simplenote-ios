@@ -7,7 +7,7 @@
 //
 
 #import "SPMarkdownParser.h"
-#import <hoedown/html.h>
+#import "html.h"
 #import "VSTheme+Simplenote.h"
 #import "VSThemeManager.h"
 
@@ -15,13 +15,16 @@
 
 + (NSString *)renderHTMLFromMarkdownString:(NSString *)markdown
 {
-    hoedown_renderer *renderer = hoedown_html_renderer_new(HOEDOWN_HTML_SKIP_HTML, 0);
+    hoedown_renderer *renderer = hoedown_html_renderer_new(
+                                                           HOEDOWN_HTML_SKIP_HTML |
+                                                           HOEDOWN_HTML_USE_TASK_LIST,
+                                                           0);
     hoedown_document *document = hoedown_document_new(renderer,
                                                       HOEDOWN_EXT_AUTOLINK |
                                                       HOEDOWN_EXT_FENCED_CODE |
                                                       HOEDOWN_EXT_FOOTNOTES |
                                                       HOEDOWN_EXT_TABLES,
-                                                      16);
+                                                      16, 0, NULL, NULL);
     hoedown_buffer *html = hoedown_buffer_new(16);
     
     NSData *markdownData = [markdown dataUsingEncoding:NSUTF8StringEncoding];

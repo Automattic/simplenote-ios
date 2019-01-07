@@ -172,6 +172,19 @@ html {
     font-weight: 600;
 }
 
+.note-detail-markdown input {
+    pointer-events: none;
+}
+
+.note-detail-markdown .task-list {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.note-detail-markdown .task-list li input {
+    margin-right: 6px;
+}
+
 @media only screen and (max-width: 480px) {
     .note-detail-markdown {
         font-size: 16px;
