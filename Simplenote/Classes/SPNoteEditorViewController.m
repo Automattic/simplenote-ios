@@ -94,9 +94,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
         // Editor
         _noteEditorTextView = [[SPEditorTextView alloc] init];
-        
-        // Add Link Data Detector:
-        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeLink;
+        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
 
         // Note:
         // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
