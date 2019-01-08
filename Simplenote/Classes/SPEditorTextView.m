@@ -44,9 +44,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     
     self = [super init];
     if (self) {
-        
-        theme = [[VSThemeManager sharedManager] theme];
-        
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
         self.scrollEnabled = YES;
@@ -55,7 +52,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         
         // add tag view
         
-        CGFloat tagViewHeight = [theme floatForKey:@"tagViewHeight"];
+        CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
         _tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, tagViewHeight)];
         _tagView.isAccessibilityElement = NO;
         
@@ -63,7 +60,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         
         UIEdgeInsets contentInset = self.contentInset;
         contentInset.bottom += 2 * tagViewHeight;
-        contentInset.top += [theme floatForKey:@"noteTopPadding"];
+        contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
         
         [self addObserver:self
@@ -93,6 +90,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return self;
 }
 
+- (VSTheme *)theme {
+    return [[VSThemeManager sharedManager] theme];
+}
+
 - (NSDictionary *)typingAttributes {
     
     return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
@@ -109,11 +110,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
     
     [super layoutSubviews];
     
-    CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
+    CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
     if (@available(iOS 11.0, *)) {
         padding += self.safeAreaInsets.left;
     }
-    CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
+    CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
     
     if (width - 2 * padding > maxWidth && maxWidth > 0)
@@ -436,7 +437,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
     
-    [self.textStorage addChecklistAttachmentsForColor:[theme colorForKey:@"textColor"]];
+    [self.textStorage addChecklistAttachmentsForColor:[self.theme colorForKey:@"textColor"]];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain
