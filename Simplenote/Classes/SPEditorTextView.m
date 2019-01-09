@@ -484,7 +484,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         for (int i=0; i < [stringLines count]; i++) {
             NSString *line = stringLines[i];
             // Skip the last line if it is empty
-            if (i == [stringLines count] - 1 && [line length] == 0) {
+            if (i != 0 && i == [stringLines count] - 1 && [line length] == 0) {
                 continue;
             }
             
