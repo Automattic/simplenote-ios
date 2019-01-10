@@ -15,7 +15,6 @@ extern NSString *const CheckListRegExPattern;
 @interface SPEditorTextView : SPTextView {
     BOOL touchBegan;
 	CGPoint tappedPoint;
-    VSTheme *theme;
 }
 
 @property (nonatomic) BOOL editing;
@@ -27,6 +26,6 @@ extern NSString *const CheckListRegExPattern;
 - (void)scrollToBottom;
 - (void)processChecklists;
 - (NSString *)getPlainTextContent;
-- (void)insertNewChecklist;
+- (void)insertOrRemoveChecklist;
 
 @end

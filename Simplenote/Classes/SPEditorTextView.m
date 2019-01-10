@@ -20,9 +20,10 @@
 NSString *const CheckListRegExPattern = @"^- (\\[([ |x])\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
+NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
-// One unicode character plus a space and a newline
-NSInteger const ChecklistCursorAdjustment = 3;
+// One unicode character plus a space
+NSInteger const ChecklistCursorAdjustment = 2;
 
 @interface SPEditorTextView ()
 
@@ -43,9 +44,6 @@ NSInteger const ChecklistCursorAdjustment = 3;
     
     self = [super init];
     if (self) {
-        
-        theme = [[VSThemeManager sharedManager] theme];
-        
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
         self.scrollEnabled = YES;
@@ -54,7 +52,7 @@ NSInteger const ChecklistCursorAdjustment = 3;
         
         // add tag view
         
-        CGFloat tagViewHeight = [theme floatForKey:@"tagViewHeight"];
+        CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
         _tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, tagViewHeight)];
         _tagView.isAccessibilityElement = NO;
         
@@ -62,7 +60,7 @@ NSInteger const ChecklistCursorAdjustment = 3;
         
         UIEdgeInsets contentInset = self.contentInset;
         contentInset.bottom += 2 * tagViewHeight;
-        contentInset.top += [theme floatForKey:@"noteTopPadding"];
+        contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
         
         [self addObserver:self
@@ -92,6 +90,10 @@ NSInteger const ChecklistCursorAdjustment = 3;
     return self;
 }
 
+- (VSTheme *)theme {
+    return [[VSThemeManager sharedManager] theme];
+}
+
 - (NSDictionary *)typingAttributes {
     
     return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
@@ -108,11 +110,11 @@ NSInteger const ChecklistCursorAdjustment = 3;
     
     [super layoutSubviews];
     
-    CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
+    CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
     if (@available(iOS 11.0, *)) {
         padding += self.safeAreaInsets.left;
     }
-    CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
+    CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
     
     if (width - 2 * padding > maxWidth && maxWidth > 0)
@@ -435,7 +437,7 @@ NSInteger const ChecklistCursorAdjustment = 3;
         return;
     }
     
-    [self.textStorage addChecklistAttachmentsForColor:[theme colorForKey:@"textColor"]];
+    [self.textStorage addChecklistAttachmentsForColor:[self.theme colorForKey:@"textColor"]];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain
@@ -454,19 +456,65 @@ NSInteger const ChecklistCursorAdjustment = 3;
     return adjustedString.string;
 }
 
-- (void)insertNewChecklist {
-    NSString *checkboxText = [MarkdownUnchecked stringByAppendingString:@" "];
-    if (self.selectedRange.location > 0) {
-        checkboxText = [@"\n" stringByAppendingString:checkboxText];
+- (void)insertOrRemoveChecklist {
+    NSRange lineRange = [self.text lineRangeForRange:self.selectedRange];
+    NSUInteger cursorPosition = self.selectedRange.location;
+    NSUInteger selectionLength = self.selectedRange.length;
+    
+    // Check if cursor is at a checkbox, if so we won't adjust cursor position
+    BOOL cursorIsAtCheckbox = NO;
+    if (self.text.length >= self.selectedRange.location + 1) {
+        NSString *characterAtCursor = [self.text substringWithRange:NSMakeRange(self.selectedRange.location, 1)];
+        cursorIsAtCheckbox = [characterAtCursor isEqualToString:TextAttachmentCharacterCode];
+    }
+    
+    NSString *lineString = [self.text substringWithRange:lineRange];
+    BOOL didInsertCheckbox = NO;
+    NSString *resultString = @"";
+    
+    int addedCheckboxCount = 0;
+    if ([lineString hasPrefix:TextAttachmentCharacterCode] && [lineString length] >= ChecklistCursorAdjustment) {
+        // Remove the checkboxes in the selection
+        NSString *codeAndSpace = [TextAttachmentCharacterCode stringByAppendingString:@" "];
+        resultString = [lineString stringByReplacingOccurrencesOfString:codeAndSpace withString:@""];
+    } else {
+        // Add checkboxes to the selection
+        NSString *checkboxString = [MarkdownUnchecked stringByAppendingString:@" "];
+        NSArray *stringLines = [lineString componentsSeparatedByString:@"\n"];
+        for (int i=0; i < [stringLines count]; i++) {
+            NSString *line = stringLines[i];
+            // Skip the last line if it is empty
+            if (i != 0 && i == [stringLines count] - 1 && [line length] == 0) {
+                continue;
+            }
+            
+            resultString = [resultString stringByAppendingString:[checkboxString stringByAppendingString:line]];
+            // Skip adding newline to the last line
+            if (i != [stringLines count] - 1) {
+                resultString = [resultString stringByAppendingString:@"\n"];
+            }
+            addedCheckboxCount++;
+        }
+
+        didInsertCheckbox = YES;
     }
     
     NSTextStorage *storage = self.textStorage;
     [storage beginEditing];
-    [storage replaceCharactersInRange:self.selectedRange withString:checkboxText];
+    [storage replaceCharactersInRange:lineRange withString:resultString];
     [storage endEditing];
     
     // Update the cursor position
-    [self setSelectedRange:NSMakeRange(self.selectedRange.location + ChecklistCursorAdjustment, self.selectedRange.length)];
+    NSUInteger cursorAdjustment = 0;
+    if (!cursorIsAtCheckbox) {
+        if (selectionLength > 0 && didInsertCheckbox) {
+            // Places cursor at end of insertion when text was selected
+            cursorAdjustment = selectionLength + (ChecklistCursorAdjustment * addedCheckboxCount);
+        } else {
+            cursorAdjustment = didInsertCheckbox ? ChecklistCursorAdjustment : -ChecklistCursorAdjustment;
+        }
+    }
+    [self setSelectedRange:NSMakeRange(cursorPosition + cursorAdjustment, 0)];
     
     [self processChecklists];
     [self.delegate textViewDidChange:self];
