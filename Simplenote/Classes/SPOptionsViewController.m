@@ -787,17 +787,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     // HACK:
     // Yes, another one. Reference: http://stackoverflow.com/questions/17070582/using-uiappearance-and-switching-themes
     // This is required, so UINavigationBar picks up the new style
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
-        if ([window.class.description isEqual:@"UITextEffectsWindow"]) {
-            // HACKS ON HACKS :(
-            // We shouldn't be messing with the UITextEffectsWindow (Soft Keyboard), see #268
-            continue;
-        }
-        
-        for (UIView *view in window.subviews) {
-            [view removeFromSuperview];
-            [window addSubview:view];
-        }
+    // The linked solution loops through all app windows, but we need
+    // to only update views in the keyWindow. See #269.
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    for (UIView *view in keyWindow.subviews) {
+        [view removeFromSuperview];
+        [keyWindow addSubview:view];
     }
 }
 
