@@ -17,7 +17,7 @@ profile
 DerivedData
 .idea/
 Pods/
-
+/vendor
 
 # Settings
 Simplenote/config.plist

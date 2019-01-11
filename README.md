@@ -28,7 +28,7 @@ This will allow you to compile and run the app on a device or a simulator.
 ## Running
 
 1. Clone the repo: `git clone https://github.com/Automattic/simplenote-ios.git`
-2. Run `pod install` from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
+2. Run `bundle install && bundle exec pod install` from the root directory, and then open `Simplenote.xcworkspace` file in Xcode.
 3. Sign up for a new account within the app. Use the account for **testing purposes only** as all note data will be periodically cleared out on the server.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
