@@ -37,8 +37,14 @@
     int positionAdjustment = 0;
     CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
     for (NSTextCheckingResult *match in matches) {
+        if ([match numberOfRanges] < 3) {
+            continue;
+        }
+        NSRange prefixRange = [match rangeAtIndex:1];
+        NSRange checkboxRange = [match rangeAtIndex:2];
+        
         NSString *markdownTag = [noteString substringWithRange:match.range];
-        BOOL isChecked = [markdownTag containsString:@"x"];
+        BOOL isChecked = [markdownTag localizedCaseInsensitiveContainsString:@"x"];
         
         SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor:color];
         [attachment setIsChecked: isChecked];
@@ -46,10 +52,10 @@
         attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
         
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
-        NSRange adjustedRange = NSMakeRange(match.range.location - positionAdjustment, match.range.length);
+        NSRange adjustedRange = NSMakeRange(checkboxRange.location - positionAdjustment, checkboxRange.length);
         [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
         
-        positionAdjustment += markdownTag.length - 1;
+        positionAdjustment += markdownTag.length - 1 - prefixRange.length;
     }
 }
 
