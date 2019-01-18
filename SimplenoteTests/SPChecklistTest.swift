@@ -6,7 +6,7 @@
 import XCTest
 
 class SPChecklistTest: XCTestCase {
-    func testRegexOnlyCapturesNewlines() {
+    func testChecklistShouldNotRenderWithinText() {
         let inlineChecklist = "This is a badly formed todo - [ ] Buy avocados"
         
         let regex = try! NSRegularExpression(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
@@ -14,6 +14,16 @@ class SPChecklistTest: XCTestCase {
         let matches = regex.matches(in: inlineChecklist, options: [], range: NSMakeRange(0, inlineChecklist.count))
         
         XCTAssertTrue(matches.count == 0)
+    }
+    
+    func testChecklistRenderWithPrefixedWhitespace() {
+        let inlineChecklist = "       - [ ] Buy avocados - [ ] "
+        
+        let regex = try! NSRegularExpression(pattern: CheckListRegExPattern, options: NSRegularExpression.Options.anchorsMatchLines)
+        
+        let matches = regex.matches(in: inlineChecklist, options: [], range: NSMakeRange(0, inlineChecklist.count))
+        
+        XCTAssertTrue(matches.count == 1)
     }
     
     func testMatchProperlyFormattedChecklistSyntax() {
