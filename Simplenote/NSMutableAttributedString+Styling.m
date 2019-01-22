@@ -12,6 +12,10 @@
 
 @implementation NSMutableAttributedString (Styling)
 
+const int RegexExpectedMatchGroups  = 3;
+const int RegexGroupIndexPrefix     = 1;
+const int RegexGroupIndexContent    = 2;
+
 // Replaces checklist markdown syntax with SPTextAttachment images in an attributed string
 - (void)addChecklistAttachmentsForColor: (UIColor *)color  {
     // Sorry iOS 10 :(
@@ -37,8 +41,14 @@
     int positionAdjustment = 0;
     CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
     for (NSTextCheckingResult *match in matches) {
+        if ([match numberOfRanges] < RegexExpectedMatchGroups) {
+            continue;
+        }
+        NSRange prefixRange = [match rangeAtIndex:RegexGroupIndexPrefix];
+        NSRange checkboxRange = [match rangeAtIndex:RegexGroupIndexContent];
+        
         NSString *markdownTag = [noteString substringWithRange:match.range];
-        BOOL isChecked = [markdownTag containsString:@"x"];
+        BOOL isChecked = [markdownTag localizedCaseInsensitiveContainsString:@"x"];
         
         SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor:color];
         [attachment setIsChecked: isChecked];
@@ -46,10 +56,10 @@
         attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
         
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
-        NSRange adjustedRange = NSMakeRange(match.range.location - positionAdjustment, match.range.length);
+        NSRange adjustedRange = NSMakeRange(checkboxRange.location - positionAdjustment, checkboxRange.length);
         [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
         
-        positionAdjustment += markdownTag.length - 1;
+        positionAdjustment += markdownTag.length - 1 - prefixRange.length;
     }
 }
 
