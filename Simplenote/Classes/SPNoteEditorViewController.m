@@ -1357,6 +1357,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)insertChecklistAction:(id)sender {
     [_noteEditorTextView insertOrRemoveChecklist];
+    
+    [SPTracker trackEditorChecklistInserted];
 }
 
 - (void)actionButtonAction:(id)sender {

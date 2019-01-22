@@ -107,6 +107,11 @@
     [self trackAutomatticEventWithName:@"editor_activities_accessed" properties:nil];
 }
 
++ (void)trackEditorChecklistInserted
+{
+    [self trackAutomatticEventWithName:@"editor_checklist_inserted" properties:nil];
+}
+
 + (void)trackEditorCollaboratorsAccessed
 {
     [self trackAutomatticEventWithName:@"editor_collaborators_accessed" properties:nil];
