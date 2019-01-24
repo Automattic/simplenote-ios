@@ -24,6 +24,7 @@ extern NSString *const CheckListRegExPattern;
 @property (nonatomic, strong) SPTagView *tagView;
 
 - (void)scrollToBottom;
+- (void)scrollToTop;
 - (void)processChecklists;
 - (NSString *)getPlainTextContent;
 - (void)insertOrRemoveChecklist;

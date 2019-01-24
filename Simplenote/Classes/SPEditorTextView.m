@@ -241,6 +241,12 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 }
 
+- (void)scrollToTop {
+    CGFloat yOffset = self.bounds.origin.y - self.contentInset.top;
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
+    [self setContentOffset:scrollOffset animated:NO];
+}
+
 #pragma mark Notifications
 
 - (void)didEndEditing:(NSNotification *)notification {
