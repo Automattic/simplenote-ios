@@ -598,6 +598,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     }
     
     _currentNote = note;
+    [_noteEditorTextView scrollToTop];
     
     // push off updating note text in order to speed up animated transition
     dispatch_async(dispatch_get_main_queue(), ^{
