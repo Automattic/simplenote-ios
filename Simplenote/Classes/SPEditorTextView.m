@@ -31,6 +31,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
+@property (nonatomic) NSInteger lastCursorPosition;
 
 @end
 
@@ -77,14 +78,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
         
-        if (@available(iOS 11.0, *)) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                                            initWithTarget:self
-                                                            action:@selector(onTextTapped:)];
-            tapGestureRecognizer.cancelsTouchesInView = NO;
-            [self addGestureRecognizer:tapGestureRecognizer];
-        }
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self
+                                                        action:@selector(onTextTapped:)];
+        tapGestureRecognizer.cancelsTouchesInView = NO;
         
+        [self addGestureRecognizer:tapGestureRecognizer];
         [self setEditing:NO];
     }
     return self;
@@ -167,8 +167,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 }
 
 - (BOOL)becomeFirstResponder {
- 
-    touchBegan = YES;
     [self setEditing:YES];
     return [super becomeFirstResponder];
 }
@@ -178,57 +176,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     BOOL response = [super resignFirstResponder];
     [self setNeedsLayout];
     return response;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    touchBegan = YES;
-    UITouch *touch = [touches anyObject];
-	tappedPoint = [touch locationInView: self];
-	[super touchesBegan:touches withEvent:event];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
- 
-    if (touchBegan) {
-        [self setEditing:YES];
-        [self performSelector:@selector(postEdit) withObject:nil afterDelay:0.05];
-        touchBegan = NO;
-    }
-    [super touchesEnded:touches withEvent:event];
-}
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    touchBegan = NO;
-    [super touchesCancelled:touches withEvent:event];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    touchBegan = NO;
-    [super touchesMoved:touches withEvent:event];
-}
-
-
--(void)postEdit {
-    
-//  Note: This is causing lags in large notes. Plus, not needed anymore in iOS 7.1.
-//
-//    // The text is reset in order to remove the coloring from the automatic
-//    // data detectors. Phone numbers and URLs remain blue without this fix,
-//    // while other data detectors are properly turned black.
-//    self.attributedText = [self.text attributedString];
-//
-    
-	[self becomeFirstResponder];
-    
-    NSInteger tappedIndex = [self.layoutManager characterIndexForPoint:tappedPoint
-                                                       inTextContainer:self.textContainer fractionOfDistanceBetweenInsertionPoints:nil];
-    
-    if (tappedIndex >= self.text.length - 2)
-        tappedIndex ++;
-
-	self.selectedRange = NSMakeRange(tappedIndex, 0);
 }
 
 - (void)scrollToBottom {
@@ -540,33 +487,56 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    // Location of the tap in text-container coordinates
-    NSLayoutManager *layoutManager = self.layoutManager;
-    CGPoint location = [recognizer locationInView:self];
-    location.x -= self.textContainerInset.left;
-    location.y -= self.textContainerInset.top;
+    if (@available(iOS 11.0, *)) {
+        // Location of the tap in text-container coordinates
+        NSLayoutManager *layoutManager = self.layoutManager;
+        CGPoint location = [recognizer locationInView:self];
+        location.x -= self.textContainerInset.left;
+        location.y -= self.textContainerInset.top;
     
-    // Find the character that's been tapped on
-    NSUInteger characterIndex;
-    characterIndex = [layoutManager characterIndexForPoint:location
-                                           inTextContainer:self.textContainer
-                  fractionOfDistanceBetweenInsertionPoints:NULL];
-    
-    if (characterIndex < self.textStorage.length) {
-        NSRange range;
-        if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
-            id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
-            // A checkbox was tapped!
-            SPTextAttachment *attachment = (SPTextAttachment *)value;
-            BOOL wasChecked = attachment.isChecked;
-            [attachment setIsChecked:!wasChecked];
-            [self.delegate textViewDidChange:self];
-            [self.layoutManager invalidateDisplayForCharacterRange:range];
-            recognizer.cancelsTouchesInView = YES;
-        } else {
-            recognizer.cancelsTouchesInView = NO;
+        // Find the character that's been tapped on
+        NSUInteger characterIndex;
+        characterIndex = [layoutManager characterIndexForPoint:location
+                                               inTextContainer:self.textContainer
+                      fractionOfDistanceBetweenInsertionPoints:NULL];
+        if (characterIndex < self.textStorage.length) {
+            NSRange range;
+            if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
+                id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+                // A checkbox was tapped!
+                SPTextAttachment *attachment = (SPTextAttachment *)value;
+                BOOL wasChecked = attachment.isChecked;
+                [attachment setIsChecked:!wasChecked];
+                [self.delegate textViewDidChange:self];
+                [self.layoutManager invalidateDisplayForCharacterRange:range];
+                recognizer.cancelsTouchesInView = YES;
+                
+                return;
+            }
         }
     }
+    
+    // Move the cursor to the tapped position
+    [self becomeFirstResponder];
+    CGPoint point = [recognizer locationInView:self];
+    UITextPosition *position = [self closestPositionToPoint:point];
+    UITextRange *range = [self textRangeFromPosition:position toPosition:position];
+    [self setSelectedTextRange:range];
+    recognizer.cancelsTouchesInView = NO;
+    
+    // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
+    // on the same cursor location twice, so we're controlling the menu manually.
+    NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    if (self.lastCursorPosition == startOffset) {
+        CGRect caretFrame = [self caretRectForPosition:position];
+        [menuController setTargetRect:caretFrame inView:self];
+        [menuController setMenuVisible:YES animated:YES];
+    } else if ([menuController isMenuVisible]) {
+        [menuController setMenuVisible:NO animated:YES];
+    }
+    
+    self.lastCursorPosition = startOffset;
 }
 
 @end

@@ -428,7 +428,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [navigationButtonContainer addSubview:keyboardButton];
     [navigationButtonContainer addSubview:newButton];
     [navigationButtonContainer addSubview:actionButton];
-    [navigationButtonContainer addSubview:checklistButton];
+    if (@available(iOS 11.0, *)) {
+        [navigationButtonContainer addSubview:checklistButton];
+    }
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
