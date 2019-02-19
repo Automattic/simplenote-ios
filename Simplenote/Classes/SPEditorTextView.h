@@ -12,10 +12,7 @@
 
 extern NSString *const CheckListRegExPattern;
 
-@interface SPEditorTextView : SPTextView {
-    BOOL touchBegan;
-	CGPoint tappedPoint;
-}
+@interface SPEditorTextView : SPTextView
 
 @property (nonatomic) BOOL editing;
 @property (nonatomic) BOOL lockContentOffset;
