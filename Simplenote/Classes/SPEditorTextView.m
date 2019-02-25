@@ -25,7 +25,7 @@ NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the g
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
 
-@interface SPEditorTextView ()
+@interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSArray *textCommands;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
@@ -82,6 +82,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self
                                                         action:@selector(onTextTapped:)];
+        tapGestureRecognizer.delegate = self;
         tapGestureRecognizer.cancelsTouchesInView = NO;
         
         [self addGestureRecognizer:tapGestureRecognizer];
@@ -164,6 +165,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
     // God, forgive me. After enabling edit mode, "former" linkified substrings are rendered with a black color.
     // This forces UITextView to render those substrings with the same color as the rest of the TextView.
     self.textColor = self.textColor;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
+    return [touch.view isKindOfClass:[SPTextView class]];
 }
 
 - (BOOL)becomeFirstResponder {
