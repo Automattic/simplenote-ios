@@ -61,7 +61,7 @@ static NSString *const TracksAuthenticatedUserTypeKey       = @"simplenote:user_
 - (void)refreshMetadataWithEmail:(NSString *)email
 {
     NSParameterAssert(self.tracksService);
-    [self.tracksService switchToAuthenticatedUserWithUsername:email userID:@"" skipAliasEventCreation:NO];
+    [self.tracksService switchToAuthenticatedUserWithUsername:@"" userID:email skipAliasEventCreation:NO];
 }
 
 - (void)refreshMetadataForAnonymousUser
