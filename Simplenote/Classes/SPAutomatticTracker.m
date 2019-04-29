@@ -1,11 +1,3 @@
-//
-//  SPAutomatticTracker.m
-//  Simplenote
-//
-//  Created by Jorge Leandro Perez on 10/9/15.
-//  Copyright © 2015 Automattic. All rights reserved.
-//
-
 #import "SPAutomatticTracker.h"
 #import "TracksService.h"
 
@@ -61,7 +53,7 @@ static NSString *const TracksAuthenticatedUserTypeKey       = @"simplenote:user_
 - (void)refreshMetadataWithEmail:(NSString *)email
 {
     NSParameterAssert(self.tracksService);
-    [self.tracksService switchToAuthenticatedUserWithUsername:@"" userID:email skipAliasEventCreation:NO];
+    [self.tracksService switchToAuthenticatedUserWithUsername:email userID:email skipAliasEventCreation:NO];
 }
 
 - (void)refreshMetadataForAnonymousUser
@@ -76,6 +68,11 @@ static NSString *const TracksAuthenticatedUserTypeKey       = @"simplenote:user_
     NSParameterAssert(self.tracksService);
     
     [self.tracksService trackEventName:name withCustomProperties:properties];
+    if (properties == nil) {
+        NSLog(@"🔵 Tracked: %@", name);
+    } else {
+        NSLog(@"🔵 Tracked: %@, properties: %@", name, properties);
+    }
 }
 
 - (NSString *)anonymousID
