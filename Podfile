@@ -16,7 +16,7 @@ abstract_target 'Automattic' do
 	target 'Simplenote' do
 		# Third Party
 		#
-		pod '1PasswordExtension', '1.8.4'
+		pod '1PasswordExtension', '1.8.5'
 		pod 'Gridicons', '0.16'
 		pod 'HockeySDK', '5.1.4'
 		pod 'SVProgressHUD', '2.2.5'
@@ -25,7 +25,7 @@ abstract_target 'Automattic' do
 
 		# Automattic
 		#
-		pod 'Automattic-Tracks-iOS', '0.3.5-beta.1'
+		pod 'Automattic-Tracks-iOS', '0.3.4'
 		pod 'Simperium', '0.8.19'
 		pod 'WordPress-AppbotX', :git => 'https://github.com/wordpress-mobile/appbotx.git', :commit => '479d05f7d6b963c9b44040e6ea9f190e8bd9a47a'
 		pod 'WordPress-Ratings-iOS', '0.0.2'

@@ -1,12 +1,15 @@
 PODS:
-  - 1PasswordExtension (1.8.4)
-  - Automattic-Tracks-iOS (0.3.5-beta.1):
-    - CocoaLumberjack (~> 3.5.2)
+  - 1PasswordExtension (1.8.5)
+  - Automattic-Tracks-iOS (0.3.4):
+    - CocoaLumberjack (~> 3.4.1)
     - Reachability (~> 3.1)
     - UIDeviceIdentifier (~> 1.1.4)
-  - CocoaLumberjack (3.5.3):
-    - CocoaLumberjack/Core (= 3.5.3)
-  - CocoaLumberjack/Core (3.5.3)
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
+    - CocoaLumberjack/Default
   - Crashlytics (3.9.0):
     - Fabric (~> 1.7.0)
   - Fabric (1.7.0)
@@ -33,8 +36,8 @@ PODS:
   - WordPress-Ratings-iOS (0.0.2)
 
 DEPENDENCIES:
-  - 1PasswordExtension (= 1.8.4)
-  - Automattic-Tracks-iOS (= 0.3.5-beta.1)
+  - 1PasswordExtension (= 1.8.5)
+  - Automattic-Tracks-iOS (= 0.3.4)
   - Crashlytics (= 3.9)
   - Fabric (= 1.7.0)
   - Gridicons (= 0.16)
@@ -72,9 +75,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 SPEC CHECKSUMS:
-  1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  Automattic-Tracks-iOS: 3032acd3450dcd397b06acd9853292534343674a
-  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
+  1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+  Automattic-Tracks-iOS: 67d00f2f20e1978ee09154f26cdf3475d158508c
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
   Fabric: e6be012366472553807dada21243c5ab8d904151
   Gridicons: 8cc5cb666d5ad8b8f1771d3c7a93d27ae25b7c2e
@@ -87,6 +90,6 @@ SPEC CHECKSUMS:
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: ef5315f9be8e6007ef85339226c3bc5a5db42fe0
+PODFILE CHECKSUM: 1b6583bb255701d07740719d0615f928fdd363c5
 
 COCOAPODS: 1.6.1
