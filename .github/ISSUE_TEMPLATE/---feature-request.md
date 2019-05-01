@@ -3,7 +3,7 @@ name: "\U0001F680 Feature request"
 about: "Suggest a new feature or enhancement to an existing one. \U0001F389 We'll
   consider building it if it receives sufficient interest! \U0001F44D"
 title: ''
-labels: enhancement
+labels: feature request
 assignees: ''
 
 ---
