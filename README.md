@@ -12,7 +12,7 @@ A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](htt
 
 Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid.
 
-In order to create your own Simperium.com Application, please, [head over to our website](https://www.simperium.com) and signup for free.
+(**Please note** → We're not accepting any new Simperium accounts at this time.)
 
 After you've created your own Simperium application, copy the sample config. For example:
 
@@ -36,6 +36,10 @@ _Note: Simplenote API features such as sharing and publishing will not work with
 
 ## Contributing
 
-Follow the same guidelines as [WordPress for iOS](https://make.wordpress.org/mobile/handbook/pathways/ios/how-to-contribute/).
+Read our [Contributing Guide](CONTRIBUTING.md) to learn about reporting issues, contributing code, and more ways to contribute.
+
+## License
+
+Simplenote for iOS is an Open Source project covered by the [GNU General Public License version 2](LICENSE.md).
 
 Happy noting!
