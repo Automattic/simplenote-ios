@@ -313,8 +313,11 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
-{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+#else
+    - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+#endif
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
     if (uniqueIdentifier == nil) {
         return false;
