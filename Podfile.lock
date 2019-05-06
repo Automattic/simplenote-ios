@@ -13,7 +13,7 @@ PODS:
   - Crashlytics (3.9.0):
     - Fabric (~> 1.7.0)
   - Fabric (1.7.0)
-  - Gridicons (0.16)
+  - Gridicons (0.18)
   - HockeySDK (5.1.4):
     - HockeySDK/DefaultLib (= 5.1.4)
   - HockeySDK/DefaultLib (5.1.4)
@@ -40,7 +40,7 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (= 0.3.4)
   - Crashlytics (= 3.9)
   - Fabric (= 1.7.0)
-  - Gridicons (= 0.16)
+  - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
   - Simperium (= 0.8.19)
@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
   Fabric: e6be012366472553807dada21243c5ab8d904151
-  Gridicons: 8cc5cb666d5ad8b8f1771d3c7a93d27ae25b7c2e
+  Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
@@ -90,6 +90,6 @@ SPEC CHECKSUMS:
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: 1b6583bb255701d07740719d0615f928fdd363c5
+PODFILE CHECKSUM: 7b805ad8dbe84862069c23e8ed6224e4e0bc28e7
 
 COCOAPODS: 1.6.1

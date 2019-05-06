@@ -1,8 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '10.0'
 inhibit_all_warnings!
 use_frameworks!
+
+platform :ios, '10.0'
+workspace 'Simplenote.xcworkspace'
+
+plugin 'cocoapods-repo-update'
 
 # Main
 #
@@ -17,7 +21,7 @@ abstract_target 'Automattic' do
 		# Third Party
 		#
 		pod '1PasswordExtension', '1.8.5'
-		pod 'Gridicons', '0.16'
+		pod 'Gridicons', '~> 0.18'
 		pod 'HockeySDK', '5.1.4'
 		pod 'SVProgressHUD', '2.2.5'
 		pod 'Fabric', '1.7.0'
