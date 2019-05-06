@@ -1,6 +1,14 @@
-# Xcode
+# OS X
 .DS_Store
-build/
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode
+*/build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -16,8 +24,25 @@ profile
 *.moved-aside
 DerivedData
 .idea/
-Pods/
-/vendor
+*.hmap
+*.xcscmblueprint
+Simplenote/DerivedSources/
 
 # Settings
 Simplenote/config.plist
+
+# Bundler
+/vendor/bundle/
+.bundle/
+
+# Dependencies
+/vendor/
+Pods/
+Carthage/Build
+
+# Fastlane
+Scripts/fastlane/Preview.html
+Scripts/fastlane/report.xml
+Scripts/fastlane/README.md
+Scripts/Preview.html
+Scripts/fastlane/test_output/
