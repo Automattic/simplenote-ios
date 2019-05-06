@@ -112,8 +112,8 @@
                      animations:^{
                          
                          self.titleLabel.alpha = 0.3;
-                         _deletionOverlayView.alpha = 1.0;
-                         _deletionButtonImageView.alpha = 1.0;
+                         self->_deletionOverlayView.alpha = 1.0;
+                         self->_deletionButtonImageView.alpha = 1.0;
                      }];
 }
 
@@ -125,12 +125,12 @@
                     animations:^{
                         
                         self.titleLabel.alpha = 1.0;
-                        _deletionOverlayView.alpha = 0.0;
-                        _deletionButtonImageView.alpha = 0.0;
+                        self->_deletionOverlayView.alpha = 0.0;
+                        self->_deletionButtonImageView.alpha = 0.0;
                     } completion:^(BOOL finished) {
                     
-                        [_deletionOverlayView removeFromSuperview];
-                        [_deletionButtonImageView removeFromSuperview];
+                        [self->_deletionOverlayView removeFromSuperview];
+                        [self->_deletionButtonImageView removeFromSuperview];
                     }];
 }
 

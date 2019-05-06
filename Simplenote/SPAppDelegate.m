@@ -594,11 +594,11 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 
-        [_simperium signOutAndRemoveLocalData:YES completion:^{
+        [self->_simperium signOutAndRemoveLocalData:YES completion:^{
 			        
-			[_noteEditorViewController clearNote];
-			_selectedTag = nil;
-			[_noteListViewController update];
+            [self->_noteEditorViewController clearNote];
+            self->_selectedTag = nil;
+            [self->_noteListViewController update];
 			
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
@@ -619,8 +619,8 @@
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
-				[_simperium authenticateIfNecessary];
-				_bSigningUserOut = NO;
+                [self->_simperium authenticateIfNecessary];
+                self->_bSigningUserOut = NO;
 			}];
 		}];
     });
@@ -867,7 +867,7 @@
     double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+        [self->_noteListViewController openNote:note fromIndexPath:nil animated:NO];
         [self showPasscodeLockIfNecessary];
     });
 }

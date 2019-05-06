@@ -293,8 +293,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if ([tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
-            [tagDelegate tagViewDidBeginEditing:self];
+        if ([self->tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
+            [self->tagDelegate tagViewDidBeginEditing:self];
         
         [self scrollEntryFieldToVisible:YES];
     });

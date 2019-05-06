@@ -86,8 +86,8 @@
 
 - (void)onTextChanged:(UITextField *)textField {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([tagDelegate respondsToSelector:@selector(tagEntryFieldDidChange:)]) {
-            [tagDelegate tagEntryFieldDidChange:self];
+        if ([self->tagDelegate respondsToSelector:@selector(tagEntryFieldDidChange:)]) {
+            [self->tagDelegate tagEntryFieldDidChange:self];
         }
 
         [self sizeField];

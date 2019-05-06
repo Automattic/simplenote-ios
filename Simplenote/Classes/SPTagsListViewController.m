@@ -655,7 +655,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!bVisible)
+        if (!self->bVisible)
             [self.tableView reloadData];
     });
     
