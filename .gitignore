@@ -41,8 +41,7 @@ Pods/
 Carthage/Build
 
 # Fastlane
-Scripts/fastlane/Preview.html
-Scripts/fastlane/report.xml
-Scripts/fastlane/README.md
-Scripts/Preview.html
-Scripts/fastlane/test_output/
+fastlane/Preview.html
+fastlane/report.xml
+fastlane/README.md
+fastlane/test_output/
