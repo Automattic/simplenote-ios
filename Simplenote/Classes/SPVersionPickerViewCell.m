@@ -94,9 +94,9 @@
     [UIView animateWithDuration:animated ? 0.3 : 0.0
                      animations:^{
                          
-                         _activityIndicator.alpha = visible ? 1.0 : 0.0;
-                         _timeLabel.alpha = visible ? 0.0 : 1.0;
-                         _dateLabel.alpha = visible ? 0.0 : 1.0;
+                         self->_activityIndicator.alpha = visible ? 1.0 : 0.0;
+                         self->_timeLabel.alpha = visible ? 0.0 : 1.0;
+                         self->_dateLabel.alpha = visible ? 0.0 : 1.0;
                          
                      }];
 }

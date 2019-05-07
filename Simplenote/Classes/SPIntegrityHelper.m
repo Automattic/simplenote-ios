@@ -56,7 +56,8 @@ static NSString *kContentKey            = @"content";
     }
     
     // Proceed Asynchronously on the main thread: Don't risk getting the process killed by the watchdog!
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD show];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self reloadInconsistentNotes:simperium];

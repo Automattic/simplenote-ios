@@ -76,7 +76,7 @@
                                                      
                                                      
                                                      [self addSubview:highlightView];
-                                                     [highlightViews addObject:highlightView];
+                                                     [self->highlightViews addObject:highlightView];
                                                      
                                                      if (animated) {
                                                          

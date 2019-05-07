@@ -60,7 +60,7 @@ open class ShareViewController: SLComposeServiceViewController
     
     fileprivate func loadWebsiteUrl(_ completion: @escaping ((URL?) -> Void)) {
         guard let item = extensionContext?.inputItems.first as? NSExtensionItem,
-            let itemProvider = item.attachments?.first as? NSItemProvider else
+            let itemProvider = item.attachments?.first else
         {
             completion(nil)
             return

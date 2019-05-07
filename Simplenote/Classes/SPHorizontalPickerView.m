@@ -156,7 +156,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
     double delayInSeconds = 0.15;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [itemCollectionView setContentOffset:[self scrollOffsetForIndex:selectedIndex]];
+        [self->itemCollectionView setContentOffset:[self scrollOffsetForIndex:self->selectedIndex]];
         
         [UIView animateWithDuration:0.2
                          animations:^{
@@ -248,10 +248,10 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         // only dend delegate method if the view isn't scrolling
         // and have a delay in case the user starts scrolling again immediately
-        if (send && !itemCollectionView.isDecelerating && !itemCollectionView.isDragging &&
+        if (send && !self->itemCollectionView.isDecelerating && !self->itemCollectionView.isDragging &&
             
-            [delegate respondsToSelector:@selector(pickerView:didSelectItemAtIndex:)])
-            [delegate pickerView:self didSelectItemAtIndex:index];
+            [self->delegate respondsToSelector:@selector(pickerView:didSelectItemAtIndex:)])
+            [self->delegate pickerView:self didSelectItemAtIndex:index];
     });
     
     selectedIndex = index;

@@ -966,7 +966,7 @@
     
     [UIView animateWithDuration:0.1
                      animations:^{
-                         searchBar.alpha = 0.5;
+                         self->searchBar.alpha = 0.5;
                      }];
     
     bDisableUserInteraction = YES;
@@ -986,7 +986,7 @@
     
     [UIView animateWithDuration:0.1
                      animations:^{
-                         searchBar.alpha = 1.0;
+                         self->searchBar.alpha = 1.0;
                      }];
     
     bDisableUserInteraction = NO;
@@ -1042,9 +1042,9 @@
                                               if (completion)
                                                   completion();
                                               
-                                              bTitleViewAnimating = NO;
+                                              self->bTitleViewAnimating = NO;
                                               
-                                              if (bResetTitleView)
+                                              if (self->bResetTitleView)
                                                   [self resetTitleView];
                                               
                                           }];
@@ -1056,8 +1056,8 @@
     
     [self animateTitleViewSwapWithNewView:searchBarContainer
                                completion:^{
-                                   bResetTitleView = NO;
-                                   [activityIndicator stopAnimating];
+                                   self->bResetTitleView = NO;
+                                   [self->activityIndicator stopAnimating];
                                }];
     
 }

@@ -71,7 +71,7 @@
     // and present a keyboard in viewDidAppear layout incorrectly
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [entryTextField becomeFirstResponder];
+        [self->entryTextField becomeFirstResponder];
     });
 }
 

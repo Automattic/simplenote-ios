@@ -178,7 +178,7 @@ static CGFloat sidePanelWidth;
     _sidePanelViewController.view.frame = sidePanelFrame;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.view insertSubview:_sidePanelViewController.view atIndex:0];
+        [self.view insertSubview:self->_sidePanelViewController.view atIndex:0];
     });
     
     _sidePanelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
@@ -240,27 +240,27 @@ static CGFloat sidePanelWidth;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          
-                         _rootView.frame = newRootFrame;
-                         _sidePanelViewController.view.frame = newSidePanelFrame;
+                         self->_rootView.frame = newRootFrame;
+                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
                          
                         [self sidebarDidSlideToPercentVisible:1.0];
                          
                      } completion:^(BOOL finished) {
                          
-                         [_rootView removeGestureRecognizer:rootViewTapGesture];
+                         [self->_rootView removeGestureRecognizer:self->rootViewTapGesture];
                          
-                         rootViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                         self->rootViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                       action:@selector(rootViewTapped:)];
-                         rootViewTapGesture.numberOfTapsRequired = 1;
-                         rootViewTapGesture.numberOfTouchesRequired = 1;
-                         rootViewTapGesture.delegate = self;
-                         [_rootView addGestureRecognizer:rootViewTapGesture];
+                         self->rootViewTapGesture.numberOfTapsRequired = 1;
+                         self->rootViewTapGesture.numberOfTouchesRequired = 1;
+                         self->rootViewTapGesture.delegate = self;
+                         [self->_rootView addGestureRecognizer:self->rootViewTapGesture];
                          
-                         _bSidePanelVisible = YES;
+                         self->_bSidePanelVisible = YES;
                          [self sidebarDidShow];
                          
-                         if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
-                             [sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
+                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
+                             [self->sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
                          
                          if (completion)
                              completion();
@@ -308,17 +308,17 @@ static CGFloat sidePanelWidth;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          
-                         _rootView.frame = newRootFrame;
-                         _sidePanelViewController.view.frame = newSidePanelFrame;
+                         self->_rootView.frame = newRootFrame;
+                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
                          
                      } completion:^(BOOL finished) {
                          
-                         _bSidePanelVisible = YES;
+                         self->_bSidePanelVisible = YES;
                          
                          [self sidebarDidShow];
                          
-                         if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
-                             [sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
+                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
+                             [self->sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
                          
                          if (completion)
                              completion();
@@ -348,27 +348,27 @@ static CGFloat sidePanelWidth;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          
-                         _rootView.frame = newRootFrame;
-                         _sidePanelViewController.view.frame = newSidePanelFrame;
+                         self->_rootView.frame = newRootFrame;
+                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
                          
                          [self sidebarDidSlideToPercentVisible:0.0];
                          
                      } completion:^(BOOL finished) {
                          
-                         [_rootView removeGestureRecognizer:rootViewTapGesture];
-                         rootViewTapGesture = nil;
+                         [self->_rootView removeGestureRecognizer:self->rootViewTapGesture];
+                         self->rootViewTapGesture = nil;
                          
-                         _bSidePanelVisible = NO;
+                         self->_bSidePanelVisible = NO;
                          
                          // remove side panel from view
-                         [_sidePanelViewController.view removeFromSuperview];
+                         [self->_sidePanelViewController.view removeFromSuperview];
                          
-                         bSetupForPanning = NO;
+                         self->bSetupForPanning = NO;
                          
                          [self sidebarDidHide];
                          
-                         if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidHideSidePanel:)])
-                             [sidePanelViewDelegate containerViewControllerDidHideSidePanel:self];
+                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidHideSidePanel:)])
+                             [self->sidePanelViewDelegate containerViewControllerDidHideSidePanel:self];
                          
                          [UIViewController attemptRotationToDeviceOrientation];
                          

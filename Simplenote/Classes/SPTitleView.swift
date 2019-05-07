@@ -11,7 +11,7 @@ import UIKit
 class SPTitleView: UIView {
 
     override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
+        return UIView.layoutFittingExpandedSize
     }
 
 }
