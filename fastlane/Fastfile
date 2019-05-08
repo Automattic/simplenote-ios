@@ -1,0 +1,10 @@
+default_platform(:ios)
+fastlane_require 'dotenv'
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    build_app(workspace: "Simplenote.xcworkspace", scheme: "Simplenote")
+    upload_to_testflight
+  end
+end
