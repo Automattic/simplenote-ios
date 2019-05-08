@@ -32,8 +32,8 @@ Simplenote/DerivedSources/
 Simplenote/config.plist
 
 # Bundler
+/vendor/
 /vendor/bundle/
-.bundle/
 
 # Dependencies
 /vendor/
