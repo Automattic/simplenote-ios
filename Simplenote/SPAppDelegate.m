@@ -48,9 +48,6 @@
 
 #if USE_HOCKEY
 #import <HockeySDK/HockeySDK.h>
-#elif USE_CRASHLYTICS
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 #endif
 
 
@@ -224,20 +221,9 @@
 #endif
 }
 
-- (void)setupCrashlytics
+- (void)setupCrashLogging
 {
-#if USE_CRASHLYTICS
-    NSLog(@"Initializing Crashlytics...");
-    
-    NSString *email = self.simperium.user.email;
-    NSString *key = [SPCredentials simplenoteCrashlyticsKey];
-
-    [Fabric with:@[CrashlyticsKit]];
-    
-    [Crashlytics startWithAPIKey:key];
-    [[Crashlytics sharedInstance] setObjectValue:email forKey:@"email"];
-
-#endif
+    [CrashLogging startWithSimperium: self.simperium];
 }
 
 - (void)setupThemeNotifications
@@ -267,7 +253,7 @@
     [self setupThemeNotifications];
     [self setupSimperium];
 	[self setupBitHockey];
-    [self setupCrashlytics];
+    [self setupCrashLogging];
     [self setupDefaultWindow];
     [self setupAppRatings];
     

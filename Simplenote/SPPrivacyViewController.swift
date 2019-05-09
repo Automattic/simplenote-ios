@@ -13,7 +13,15 @@ class SPPrivacyViewController: SPTableViewController {
 
     /// TableView Sections
     ///
-    private let sections = [ Section(rows: [.share, .legend, .learn]) ]
+    private var sections: [Section] {
+        var sections = [ Section(rows: [.share, .legend, .learn]) ]
+
+        if _isDebugAssertConfiguration() {
+            sections.append(Section(rows: [.crash]))
+        }
+
+        return sections
+    }
 
     /// Indicates if Analytics are Enabled
     ///
@@ -53,6 +61,8 @@ class SPPrivacyViewController: SPTableViewController {
             setupLegendCell(cell)
         case .learn:
             setupLearnMoreCell(cell)
+        case .crash:
+            setupCrashCell(cell)
         }
         return cell
     }
@@ -63,6 +73,8 @@ class SPPrivacyViewController: SPTableViewController {
         switch rowAtIndexPath(indexPath) {
         case .learn:
             displayPrivacyLink()
+        case .crash:
+            WPCrashLogging.crash()
         default:
             break
         }
@@ -159,6 +171,15 @@ private extension SPPrivacyViewController {
         cell.textLabel?.text = NSLocalizedString("Learn more", comment: "Learn More Action")
         cell.textLabel?.textColor = VSThemeManager.shared()?.theme()?.color(forKey: "tintColor")
     }
+
+    /// Setup: Crash
+    ///
+    func setupCrashCell(_ cell: UITableViewCell) {
+        cell.imageView?.image = Gridicon.iconOfType(.bug)
+        cell.textLabel?.text = NSLocalizedString("Send a Test Crash", comment: "For debugging use")
+        cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
+    }
 }
 
 
@@ -170,6 +191,7 @@ private struct Section {
 
 private enum Row {
     case share
+    case crash
     case legend
     case learn
 }

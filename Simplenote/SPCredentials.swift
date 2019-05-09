@@ -42,8 +42,8 @@ class SPCredentials: NSObject {
         return output ?? String()
     }
     
-    @objc static func simplenoteCrashlyticsKey() -> String {
-        if let value = configDictionary().value(forKey: "SimplenoteCrashlyticsKey") {
+    @objc static func simplenoteSentryDSN() -> String {
+        if let value = configDictionary().value(forKey: "simplenoteSentryDSN") {
             return value as! String
         } else {
             return ""

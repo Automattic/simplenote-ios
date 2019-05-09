@@ -24,8 +24,7 @@ abstract_target 'Automattic' do
 		pod 'Gridicons', '~> 0.18'
 		pod 'HockeySDK', '5.1.4'
 		pod 'SVProgressHUD', '2.2.5'
-		pod 'Fabric', '1.7.0'
-		pod 'Crashlytics', '3.9'
+		pod 'Sentry', '4.3.1'
 
 		# Automattic
 		#
