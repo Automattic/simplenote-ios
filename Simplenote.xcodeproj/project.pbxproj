@@ -170,7 +170,6 @@
 		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
 		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
 		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
-		F9E197D22283C8180092B3E1 /* WPCrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E197D12283C8180092B3E1 /* WPCrashLogging.swift */; };
 		F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E197D32283D05C0092B3E1 /* CrashLogging.swift */; };
 /* End PBXBuildFile section */
 
@@ -524,7 +523,6 @@
 		E2FCA6151789146D00FC229D /* VSThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeManager.m; sourceTree = "<group>"; };
 		F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CSSearchable+Helpers.swift"; path = "Classes/CSSearchable+Helpers.swift"; sourceTree = "<group>"; };
 		F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplenoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9E197D12283C8180092B3E1 /* WPCrashLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPCrashLogging.swift; sourceTree = "<group>"; };
 		F9E197D32283D05C0092B3E1 /* CrashLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLogging.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -808,7 +806,6 @@
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
 				371A862F213DF00E002E9120 /* SPPinLockManager.swift */,
-				F9E197D12283C8180092B3E1 /* WPCrashLogging.swift */,
 				F9E197D32283D05C0092B3E1 /* CrashLogging.swift */,
 			);
 			name = Tools;
@@ -1528,7 +1525,6 @@
 				B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
-				F9E197D22283C8180092B3E1 /* WPCrashLogging.swift in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
 				46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */,

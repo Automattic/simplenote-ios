@@ -1,23 +1,26 @@
 import Foundation
+import AutomatticTracks
 
+/// This exists to bridge CrashLogging with Objective-C. Once the App Delegate is moved over to Swift,
+/// this shim can be deleted.
 @objc(CrashLogging)
 class CrashLoggingShim: NSObject {
     @objc static func start(withSimperium simperium: Simperium) {
-        let dataProvider = CrashLoggingDataProvider(withSimperium: simperium)
-        WPCrashLogging.start(withDataProvider: dataProvider)
+        let dataProvider = SNCrashLoggingDataProvider(withSimperium: simperium)
+        CrashLogging.start(withDataProvider: dataProvider)
     }
 
     @objc static var userHasOptedOut: Bool {
         get {
-            return WPCrashLogging.userHasOptedOut
+            return CrashLogging.userHasOptedOut
         }
         set {
-            WPCrashLogging.userHasOptedOut = newValue
+            CrashLogging.userHasOptedOut = newValue
         }
     }
 }
 
-class CrashLoggingDataProvider: WPCrashLoggingDataProvider {
+class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
 
     let simperium: Simperium
 
@@ -26,11 +29,15 @@ class CrashLoggingDataProvider: WPCrashLoggingDataProvider {
     }
 
     var sentryDSN: String {
-        return "https://f1f0b9c022994f7a9b2ca1c96fce1227@sentry.io/1455556"
+        return SPCredentials.simplenoteSentryDSN()
     }
 
     var userHasOptedOut: Bool {
-        return simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
+        guard let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue else {
+            return true
+        }
+
+        return !analyticsEnabled
     }
 
     var buildType: String {
@@ -50,11 +57,11 @@ class CrashLoggingDataProvider: WPCrashLoggingDataProvider {
         return "unknown"
     }
 
-    var currentUser: WPCrashLoggingUser? {
+    var currentUser: CrashLoggingUser? {
         guard let user = self.simperium.user, let email = user.email else {
             return nil
         }
 
-        return WPCrashLoggingUser(userID: email, email: email, username: email)
+        return CrashLoggingUser(userID: email, email: email, username: email)
     }
 }

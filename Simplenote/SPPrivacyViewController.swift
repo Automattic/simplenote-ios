@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import Gridicons
-
+import AutomatticTracks
 
 /// Privacy: Lets our users Opt Out from any (and all) trackers.
 ///
@@ -74,7 +74,7 @@ class SPPrivacyViewController: SPTableViewController {
         case .learn:
             displayPrivacyLink()
         case .crash:
-            WPCrashLogging.crash()
+            CrashLogging.crash()
         default:
             break
         }
