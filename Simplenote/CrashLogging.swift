@@ -57,11 +57,11 @@ class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
         return "unknown"
     }
 
-    var currentUser: CrashLoggingUser? {
+    var currentUser: TracksUser? {
         guard let user = self.simperium.user, let email = user.email else {
             return nil
         }
 
-        return CrashLoggingUser(userID: email, email: email, username: email)
+        return TracksUser(userID: email, email: email, username: email)
     }
 }
