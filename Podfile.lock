@@ -14,9 +14,9 @@ PODS:
   - HockeySDK/DefaultLib (5.1.4)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
-  - Sentry (4.3.1):
-    - Sentry/Core (= 4.3.1)
-  - Sentry/Core (4.3.1)
+  - Sentry (4.3.4):
+    - Sentry/Core (= 4.3.4)
+  - Sentry/Core (4.3.4)
   - Simperium (0.8.21):
     - Simperium/DiffMatchPach (= 0.8.21)
     - Simperium/JRSwizzle (= 0.8.21)
@@ -39,7 +39,6 @@ DEPENDENCIES:
   - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
-  - Sentry (= 4.3.1)
   - Simperium (= 0.8.21)
   - SVProgressHUD (= 2.2.5)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
@@ -83,13 +82,13 @@ SPEC CHECKSUMS:
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
-  Sentry: 5267d493a398663538317e4dcc438c12c66202ed
+  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
   Simperium: 57f3c6f603416030212721a8af69f1f61fc92ce6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: d4a18825e3762cee76a82eb83da5a802f1d636aa
+PODFILE CHECKSUM: 835fbb475900e290de55cea1745fb649f0459643
 
 COCOAPODS: 1.6.1
