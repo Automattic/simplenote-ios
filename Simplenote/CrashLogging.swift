@@ -41,20 +41,7 @@ class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
     }
 
     var buildType: String {
-
-        #if APPSTORE_DISTRIBUTION
-            return  "app-store"
-        #endif
-
-        #if INTERNAL_DISTRIBUTION
-            return "internal"
-        #endif
-
-        #if RELEASE
-            return "public"
-        #endif
-
-        return "unknown"
+        return BuildConfiguration.current.description
     }
 
     var currentUser: TracksUser? {

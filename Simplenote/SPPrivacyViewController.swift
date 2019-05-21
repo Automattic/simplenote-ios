@@ -16,7 +16,7 @@ class SPPrivacyViewController: SPTableViewController {
     private var sections: [Section] {
         var sections = [ Section(rows: [.share, .legend, .learn]) ]
 
-        if _isDebugAssertConfiguration() {
+        if BuildConfiguration.is(.debug) {
             sections.append(Section(rows: [.crash]))
         }
 
