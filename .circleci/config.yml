@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   # This uses the Orbs located at https://github.com/wordpress-mobile/circleci-orbs
-  ios: wordpress-mobile/ios@0.0.25
+  ios: wordpress-mobile/ios@dev:ios-updates
 
 workflows:
   simplenote_ios:
@@ -13,4 +13,3 @@ workflows:
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone XS
-ios-version: "12.2"
