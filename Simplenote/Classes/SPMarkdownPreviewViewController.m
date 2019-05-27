@@ -101,19 +101,25 @@
 #pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    
-    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
-        if ([SFSafariViewController class]) {
-            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:navigationAction.request.URL];
-            [self presentViewController:sfvc animated:YES completion:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@{} completionHandler:nil];
-        }
-        
-        decisionHandler(WKNavigationActionPolicyCancel);
-    } else {
+    NSURL* targetURL = navigationAction.request.URL;
+    NSURL* bundleURL = NSBundle.mainBundle.bundleURL;
+    BOOL isAnchorURL = targetURL != nil && [targetURL.absoluteString containsString:bundleURL.absoluteString];
+
+    /// Detect scenarios such as markdown/#someInternalLink
+    ///
+    if (navigationAction.navigationType != WKNavigationTypeLinkActivated || isAnchorURL) {
         decisionHandler(WKNavigationActionPolicyAllow);
+        return;
     }
+
+    if ([SFSafariViewController class]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:targetURL options:@{} completionHandler:nil];
+    }
+
+    decisionHandler(WKNavigationActionPolicyCancel);
 }
 
 @end
