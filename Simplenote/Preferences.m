@@ -14,7 +14,7 @@
 - (void) didChangeValueForKey:(NSString *)key
 {
     if ([key isEqualToString:@"analytics_enabled"]) {
-        [CrashLogging setUserHasOptedOut:self.analytics_enabled.boolValue];
+        [CrashLogging cacheOptOutSetting: !self.analytics_enabled.boolValue];
     }
 
     [super didChangeValueForKey:key];

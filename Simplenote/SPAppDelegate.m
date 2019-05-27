@@ -630,6 +630,11 @@
     
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
+
+    // Now that the user info is present, cache it for use by the crash logging system.
+    // See the docs there for details on why this is necessary.
+    [CrashLogging cacheUser:simperium.user];
+    [CrashLogging cacheOptOutSetting: !simperium.preferencesObject.analytics_enabled.boolValue];
 }
 
 - (void)simperiumDidLogout:(Simperium *)simperium
