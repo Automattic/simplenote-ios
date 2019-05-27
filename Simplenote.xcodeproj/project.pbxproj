@@ -1825,7 +1825,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APPSTORE_DISTRIBUTION=1",
-					"USE_CRASHLYTICS=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -2143,7 +2142,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APPSTORE_DISTRIBUTION=1",
-					"USE_CRASHLYTICS=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
