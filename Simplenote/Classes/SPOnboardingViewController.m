@@ -281,9 +281,10 @@ NSString * const SPOnboardingDidFinish = @"SPOnboardDidFinish";
     pageControl.currentPage = scrollView.contentOffset.x / scrollView.bounds.size.width;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    
-    contentScrollView.contentOffset = CGPointMake(contentScrollView.frame.size.width * pageControl.currentPage, 0);
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        self->contentScrollView.contentOffset = CGPointMake(self->contentScrollView.frame.size.width * self->pageControl.currentPage, 0);
+    } completion:nil];
 }
 
 - (void)getStartedButtonAction:(id)sender {
