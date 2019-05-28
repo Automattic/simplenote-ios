@@ -16,7 +16,7 @@ class CrashLoggingShim: NSObject {
 
     @objc static func cacheUser(_ user: SPUser) {
         CrashLoggingCache.emailAddress = user.email
-        CrashLogging.setCurrentUser(TracksUser(email: user.email))
+        CrashLogging.updateCurrentUser()
     }
 
     @objc static func cacheOptOutSetting(_ didOptOut: Bool) {
