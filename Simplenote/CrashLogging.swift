@@ -2,16 +2,13 @@ import Foundation
 import AutomatticTracks
 
 /// This exists to bridge CrashLogging with Objective-C. Once the App Delegate is moved over to Swift,
-/// this shim can be deleted.
+/// this shim can be removed, and the cache methods moved to a `CrashLogging` extension. At that time,
+/// you, future developer, can just set up the Crash Logging system in the App Delegate using `SNCrashLoggingDataProvider`.
 @objc(CrashLogging)
 class CrashLoggingShim: NSObject {
     @objc static func start(withSimperium simperium: Simperium) {
         let dataProvider = SNCrashLoggingDataProvider(withSimperium: simperium)
         CrashLogging.start(withDataProvider: dataProvider)
-    }
-
-    @objc static var userHasOptedOut: Bool {
-        return CrashLogging.userHasOptedOut
     }
 
     @objc static func cacheUser(_ user: SPUser) {
@@ -24,9 +21,9 @@ class CrashLoggingShim: NSObject {
     }
 }
 
-class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
+private class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
 
-    let simperium: Simperium
+    private let simperium: Simperium
 
     init(withSimperium simperium: Simperium) {
         self.simperium = simperium
@@ -79,13 +76,13 @@ class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
 
  SNCrashLoggingDataProvider will use this cache in `currentUser` to fetch data on the user.
  */
-struct CrashLoggingCache {
+private struct CrashLoggingCache {
 
     struct User: Codable {
         var emailAddress: String?
         var didOptOut: Bool = true
 
-        static var empty = User(emailAddress: nil, didOptOut: true)
+        static var empty = User()
     }
 
     static var emailAddress: String? {
@@ -110,6 +107,7 @@ struct CrashLoggingCache {
         }
     }
 
+    private(set)
     fileprivate static var cachedUser: User? {
         get {
             guard let data = UserDefaults.standard.object(forKey: key) as? Data else { return nil }
