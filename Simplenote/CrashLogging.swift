@@ -81,8 +81,6 @@ private struct CrashLoggingCache {
     struct User: Codable {
         var emailAddress: String?
         var didOptOut: Bool = true
-
-        static var empty = User()
     }
 
     static var emailAddress: String? {
@@ -90,7 +88,7 @@ private struct CrashLoggingCache {
             return cachedUser?.emailAddress
         }
         set {
-            var updatedUser = cachedUser ?? User.empty
+            var updatedUser = cachedUser ?? User()
             updatedUser.emailAddress = newValue
             cachedUser = updatedUser
         }
@@ -101,7 +99,7 @@ private struct CrashLoggingCache {
             return cachedUser?.didOptOut ?? true
         }
         set {
-            var updatedUser = cachedUser ?? User.empty
+            var updatedUser = cachedUser ?? User()
             updatedUser.didOptOut = newValue
             cachedUser = updatedUser
         }
