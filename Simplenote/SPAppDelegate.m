@@ -785,7 +785,7 @@
 #pragma mark URL scheme
 #pragma mark ================================================================================
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {    
     // Support opening Simplenote and optionally creating a new note
     if ([[url host] isEqualToString:@"new"]) {

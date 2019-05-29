@@ -1130,7 +1130,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
 {
     if (![URL containsHttpScheme]) {
         return YES;
