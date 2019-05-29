@@ -108,11 +108,17 @@ private struct CrashLoggingCache {
     private(set)
     static var cachedUser: User? {
         get {
-            guard let data = UserDefaults.standard.object(forKey: key) as? Data else { return nil }
+            guard let data = UserDefaults.standard.object(forKey: key) as? Data else {
+                return nil
+            }
+
             return try? PropertyListDecoder().decode(User.self, from: data)
         }
         set {
-            guard let data = try? PropertyListEncoder().encode(newValue) else { return }
+            guard let data = try? PropertyListEncoder().encode(newValue) else {
+                return
+            }
+
             UserDefaults.standard.set(data, forKey: key)
         }
     }
