@@ -1,24 +1,22 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Automattic-Tracks-iOS (0.3.4):
-    - CocoaLumberjack (~> 3.4.1)
+  - Automattic-Tracks-iOS (0.3.5):
+    - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
+    - Sentry (~> 4)
     - UIDeviceIdentifier (~> 1.1.4)
-  - CocoaLumberjack (3.4.2):
-    - CocoaLumberjack/Default (= 3.4.2)
-    - CocoaLumberjack/Extensions (= 3.4.2)
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Extensions (3.4.2):
-    - CocoaLumberjack/Default
-  - Crashlytics (3.9.0):
-    - Fabric (~> 1.7.0)
-  - Fabric (1.7.0)
+  - CocoaLumberjack (3.5.3):
+    - CocoaLumberjack/Core (= 3.5.3)
+  - CocoaLumberjack/Core (3.5.3)
   - Gridicons (0.18)
   - HockeySDK (5.1.4):
     - HockeySDK/DefaultLib (= 5.1.4)
   - HockeySDK/DefaultLib (5.1.4)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
+  - Sentry (4.3.4):
+    - Sentry/Core (= 4.3.4)
+  - Sentry/Core (4.3.4)
   - Simperium (0.8.21):
     - Simperium/DiffMatchPach (= 0.8.21)
     - Simperium/JRSwizzle (= 0.8.21)
@@ -37,9 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
-  - Automattic-Tracks-iOS (= 0.3.4)
-  - Crashlytics (= 3.9)
-  - Fabric (= 1.7.0)
+  - Automattic-Tracks-iOS (from `https://github.com/Automattic/Automattic-Tracks-iOS.git`, branch `add/support-for-tracking-crashes`)
   - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
@@ -51,45 +47,48 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
-    - Automattic-Tracks-iOS
     - CocoaLumberjack
-    - Crashlytics
-    - Fabric
     - Gridicons
     - HockeySDK
     - Reachability
     - SAMKeychain
+    - Sentry
     - Simperium
     - SVProgressHUD
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
 
 EXTERNAL SOURCES:
+  Automattic-Tracks-iOS:
+    :branch: add/support-for-tracking-crashes
+    :git: https://github.com/Automattic/Automattic-Tracks-iOS.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 CHECKOUT OPTIONS:
+  Automattic-Tracks-iOS:
+    :commit: 7eded3b336a89d2906d68ce10a44cb81b61d4c68
+    :git: https://github.com/Automattic/Automattic-Tracks-iOS.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Automattic-Tracks-iOS: 67d00f2f20e1978ee09154f26cdf3475d158508c
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
-  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
-  Fabric: e6be012366472553807dada21243c5ab8d904151
+  Automattic-Tracks-iOS: f70428b35a07ede94edbddf403e56637b758ec66
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
+  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
   Simperium: 57f3c6f603416030212721a8af69f1f61fc92ce6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: 7707c8919e51d417e7a41dcc87b53605d1089782
+PODFILE CHECKSUM: 835fbb475900e290de55cea1745fb649f0459643
 
 COCOAPODS: 1.6.1

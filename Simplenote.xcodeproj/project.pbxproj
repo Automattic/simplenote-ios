@@ -170,6 +170,8 @@
 		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
 		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
 		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
+		F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F920265A2294661C0061B1DE /* BuildConfiguration.swift */; };
+		F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E197D32283D05C0092B3E1 /* CrashLogging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -522,6 +524,8 @@
 		E2FCA6151789146D00FC229D /* VSThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSThemeManager.m; sourceTree = "<group>"; };
 		F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CSSearchable+Helpers.swift"; path = "Classes/CSSearchable+Helpers.swift"; sourceTree = "<group>"; };
 		F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimplenoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F920265A2294661C0061B1DE /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
+		F9E197D32283D05C0092B3E1 /* CrashLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLogging.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +808,8 @@
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
 				371A862F213DF00E002E9120 /* SPPinLockManager.swift */,
+				F9E197D32283D05C0092B3E1 /* CrashLogging.swift */,
+				F920265A2294661C0061B1DE /* BuildConfiguration.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1107,7 +1113,6 @@
 				46A3C96117DFA81A002865AE /* Sources */,
 				46A3C9B017DFA81A002865AE /* Frameworks */,
 				46A3C9C117DFA81A002865AE /* Resources */,
-				B58CF2191A813CD200A9B4D2 /* ShellScript */,
 				B5EB1EFC1C204EBE0080A1B3 /* Embed App Extensions */,
 				730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */,
 				00DEF5ADDA7A81D9BDBAA952 /* [CP] Copy Pods Resources */,
@@ -1318,6 +1323,7 @@
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
 				"${BUILT_PRODUCTS_DIR}/Simperium/Simperium.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
 				"${BUILT_PRODUCTS_DIR}/WordPress-AppbotX/WordPress_AppbotX.framework",
@@ -1332,6 +1338,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Simperium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WordPress_AppbotX.framework",
@@ -1390,20 +1397,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Taken from https://github.com/CocoaPods/CocoaPods/issues/4203#issuecomment-147550871\n# Prevents ITMS-90206 - fixed with issue https://github.com/wordpress-mobile/WordPress-iOS/issues/5081\ncd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nls -laF\nif [[ -d \"Frameworks\" ]]; then\necho DELETING FRAMEWORKS\nrm -fr Frameworks\nfi\necho After delete\nls -laF";
-		};
-		B58CF2191A813CD200A9B4D2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "FABRIC_API_KEY=$(defaults read ${SRCROOT}/Simplenote/config.plist FabricApiKey);\nFABRIC_BUILD_KEY=$(defaults read ${SRCROOT}/Simplenote/config.plist FabricBuildKey);\n\nif [[ \"Distribution AppStore\" != \"${CONFIGURATION}\" ]]; then\necho \"Skipping Fabric\";\nexit 0;\nfi\n\nif [ ${FABRIC_API_KEY} == \"not-required\" ] || [ ${FABRIC_BUILD_KEY} == \"not-required\" ]; then\necho \"Could not find fabric keys. Check your config.plist.\";\nexit 0;\nfi\n\n\"${PODS_ROOT}/Fabric/run\" ${FABRIC_API_KEY} ${FABRIC_BUILD_KEY}\n";
+			shellScript = "# Taken from https://github.com/CocoaPods/CocoaPods/issues/4203#issuecomment-147550871\n# Prevents ITMS-90206 - fixed with issue https://github.com/wordpress-mobile/WordPress-iOS/issues/5081\ncd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nls -laF\nif [[ -d \"Frameworks\" ]]; then\necho DELETING FRAMEWORKS\nrm -fr Frameworks\nfi\necho After delete\nls -laF\n";
 		};
 		B596467F1C46BD83001537E5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1480,6 +1474,7 @@
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
 				E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */,
 				373897BC1F8328DE00CEDF91 /* SPTitleView.swift in Sources */,
+				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				46A3C97D17DFA81A002865AE /* NSTextStorage+Highlight.m in Sources */,
 				B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */,
@@ -1506,6 +1501,7 @@
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
+				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
@@ -1697,6 +1693,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1745,6 +1742,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Release";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1827,7 +1825,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APPSTORE_DISTRIBUTION=1",
-					"USE_CRASHLYTICS=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -1843,6 +1840,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AppStore";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BUILD_APP_STORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
@@ -1941,6 +1939,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Internal";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BUILD_INTERNAL;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
@@ -2143,7 +2142,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APPSTORE_DISTRIBUTION=1",
-					"USE_CRASHLYTICS=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -2159,6 +2157,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AdHoc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BUILD_AD_HOC;
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
