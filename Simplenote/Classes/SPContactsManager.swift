@@ -47,7 +47,7 @@ class SPContactsManager: NSObject {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(resetCache), name: .CNContactStoreDidChange, object: nil)
     }
-
+    
     /// Whenever the Auth Status is undetermined, this helper will request access!
     ///
     @objc func requestAuthorizationIfNeeded(completion: ((Bool) -> Void)?) {
@@ -62,7 +62,8 @@ class SPContactsManager: NSObject {
 
     /// Returns the subset of Persons that contain a specified keyword, in either their email or name
     ///
-    @objc func people(with keyword: String) -> [PersonTag] {
+    @objc func people(with keyword: String) -> [PersonTag] 
+    {
         guard let people = loadPeopleIfNeeded() else {
             return []
         }
