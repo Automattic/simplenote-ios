@@ -134,22 +134,3 @@ private enum Row: CaseIterable {
         }
     }
 }
-
-
-//
-//
-enum ThemeKey: String {
-    case backgroundColor
-    case noteCellBackgroundSelectionColor
-    case tableViewTextLabelColor
-    case tableViewDetailTextLabelColor
-}
-
-
-//
-//
-extension VSTheme {
-    func color(forKey key: ThemeKey) -> UIColor? {
-        return color(forKey: key.rawValue)
-    }
-}
