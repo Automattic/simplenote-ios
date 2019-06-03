@@ -2,7 +2,6 @@
 //  VSTheme+Keys.swift
 //  Simplenote
 //
-//  Created by Lantean on 5/31/19.
 //  Copyright © 2019 Automattic. All rights reserved.
 //
 
