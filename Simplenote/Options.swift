@@ -51,6 +51,19 @@ extension Options {
 }
 
 
+// MARK: - ObjC Convenience Methods
+//
+extension Options {
+
+    /// Returns the *Description* for the current List's Sort Mode
+    ///
+    @objc
+    var listSortModeDescription: String {
+        return listSortMode.description
+    }
+}
+
+
 // MARK: - Private
 //
 private extension Options {
