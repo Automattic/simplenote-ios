@@ -22,11 +22,7 @@
 #import "Simperium+Simplenote.h"
 
 NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
-NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
-NSString *const SPAlphabeticalSortPref                              = @"SPAlphabeticalSortPref";
-NSString *const SPAlphabeticalSortPreferenceChangedNotification     = @"SPAlphabeticalSortPreferenceChangedNotification";
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
-NSString *const SPAlphabeticalTagSortPreferenceChangedNotification  = @"SPAlphabeticalTagSortPreferenceChangedNotification";
 NSString *const SPThemePref                                         = @"SPThemePref";
 
 @interface SPOptionsViewController ()
