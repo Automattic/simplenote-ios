@@ -47,6 +47,7 @@ extension Options {
         set {
             defaults.set(newValue.rawValue, forKey: .listSortMode)
             SPTracker.trackSettingsNoteListSortMode(newValue.description)
+            NotificationCenter.default.post(name: .SPNotesListSortModeChanged, object: nil)
         }
     }
 }
