@@ -2,7 +2,6 @@
 //  SPSortOrderViewController.swift
 //  Simplenote
 //
-//  Created by Lantean on 5/31/19.
 //  Copyright © 2019 Automattic. All rights reserved.
 //
 
@@ -10,7 +9,7 @@ import Foundation
 import UIKit
 
 
-// MARK: -
+// MARK: - Settings: Sort Order
 //
 class SPSortOrderViewController: UITableViewController {
 
@@ -25,17 +24,17 @@ class SPSortOrderViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
-        refreshStyle()
+        setupTableView()
     }
 }
 
 
-// MARK: -
+// MARK: - UITableViewDelegate Conformance
 //
 extension SPSortOrderViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Settings.numberOfSections
+        return Constants.numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,7 +42,7 @@ extension SPSortOrderViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = dequeueCell(from: tableView)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SPDefaultTableViewCell.reusableIdentifier) ?? SPDefaultTableViewCell()
         let row = Row.allCases[indexPath.row]
 
         setupCell(cell, with: row)
@@ -57,7 +56,7 @@ extension SPSortOrderViewController {
 }
 
 
-// MARK: -
+// MARK: - Private
 //
 private extension SPSortOrderViewController {
 
@@ -65,49 +64,24 @@ private extension SPSortOrderViewController {
         title = NSLocalizedString("Sort Order", comment: "Sort Order for the Notes List")
     }
 
+    func setupTableView() {
+        tableView.applyDefaultGroupedStyling()
+    }
+    
     func setupCell(_ cell: UITableViewCell, with row: Row) {
         cell.textLabel?.text = row.description
     }
-
-    func applyStyle(to cell: UITableViewCell) {
-        guard let theme = VSThemeManager.shared()?.theme() else {
-            fatalError()
-        }
-
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = theme.color(forKey: .noteCellBackgroundSelectionColor)
-
-        cell.backgroundColor = theme.color(forKey: .backgroundColor)
-        cell.selectedBackgroundView = backgroundView
-        cell.detailTextLabel?.textColor = theme.color(forKey: .tableViewDetailTextLabelColor)
-        cell.textLabel?.textColor = theme.color(forKey: .tableViewTextLabelColor)
-    }
-
-    func refreshStyle() {
-        tableView.applyDefaultGroupedStyling()
-    }
-
-    func dequeueCell(from tableView: UITableView) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Settings.reusableIdentifier) {
-            return cell
-        }
-
-        let cell = UITableViewCell(style: .default, reuseIdentifier: Settings.reusableIdentifier)
-        applyStyle(to: cell)
-        return cell
-    }
 }
 
 
+// MARK: - Constants
 //
-//
-enum Settings {
+private enum Constants {
     static let numberOfSections = 1
-    static let reusableIdentifier = "reusableIdentifier"
 }
 
 
-//
+// MARK: - SortOrder Rows
 //
 private enum Row: CaseIterable {
     case modifiedNewest
