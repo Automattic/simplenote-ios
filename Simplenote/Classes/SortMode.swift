@@ -46,13 +46,13 @@ enum SortMode: Int, CaseIterable {
         case .alphabeticallyDescending:
             return NSLocalizedString("Alphabetically, Z-A", comment: "")
         case .createdNewest:
-            return NSLocalizedString("Newest created date", comment: "")
+            return NSLocalizedString("Created: Newest", comment: "")
         case .createdOldest:
-            return NSLocalizedString("Oldest created date", comment: "")
+            return NSLocalizedString("Created: Oldest", comment: "")
         case .modifiedNewest:
-            return NSLocalizedString("Newest modified date", comment: "")
+            return NSLocalizedString("Modified: Newest", comment: "")
         case .modifiedOldest:
-            return NSLocalizedString("Oldest modified date", comment: "")
+            return NSLocalizedString("Modified: Oldest", comment: "")
         }
     }
 }
