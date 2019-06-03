@@ -155,6 +155,7 @@
 		B5DF734222A565DA00602CE7 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734122A565DA00602CE7 /* Options.swift */; };
 		B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
 		B5DF734622A5713600602CE7 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
+		B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734E22A599D100602CE7 /* SPNotifications.m */; };
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
 		B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */; };
 		B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */; };
@@ -376,6 +377,8 @@
 		B5DF734122A565DA00602CE7 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Simplenote.swift"; path = "Classes/UserDefaults+Simplenote.swift"; sourceTree = "<group>"; };
 		B5DF734522A5713600602CE7 /* SortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SortMode.swift; path = Classes/SortMode.swift; sourceTree = "<group>"; };
+		B5DF734D22A599D100602CE7 /* SPNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SPNotifications.h; path = Classes/SPNotifications.h; sourceTree = "<group>"; };
+		B5DF734E22A599D100602CE7 /* SPNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SPNotifications.m; path = Classes/SPNotifications.m; sourceTree = "<group>"; };
 		B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		B5EB1EF11C204EBD0080A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -749,6 +752,8 @@
 				B512AF961C20B14200FE76D8 /* SPAnimations.m */,
 				B5DF734122A565DA00602CE7 /* Options.swift */,
 				B5DF734522A5713600602CE7 /* SortMode.swift */,
+				B5DF734D22A599D100602CE7 /* SPNotifications.h */,
+				B5DF734E22A599D100602CE7 /* SPNotifications.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1528,6 +1533,7 @@
 				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
 				46A3C98B17DFA81A002865AE /* SPHorizontalPickerViewCell.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
+				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
