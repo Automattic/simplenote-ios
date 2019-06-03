@@ -13,6 +13,23 @@ import UIKit
 //
 class SPSortOrderViewController: UITableViewController {
 
+    /// Selected SortMode
+    ///
+    @objc
+    var selectedMode: SortMode = .alphabeticallyAscending {
+        didSet {
+            updateSelectedCell(oldSortMode: oldValue, newSortMode: selectedMode)
+            onChange?(selectedMode)
+        }
+    }
+
+    /// Closure to be executed whenever a new Sort Mode is selected
+    ///
+    @objc
+    var onChange: ((SortMode) -> Void)?
+
+    /// Designated Initializer
+    ///
     init() {
         super.init(style: .grouped)
     }
@@ -38,19 +55,21 @@ extension SPSortOrderViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Row.allCases.count
+        return SortMode.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SPDefaultTableViewCell.reusableIdentifier) ?? SPDefaultTableViewCell()
-        let row = Row.allCases[indexPath.row]
+        let mode = SortMode.allCases[indexPath.row]
 
-        setupCell(cell, with: row)
+        setupCell(cell, with: mode)
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedMode = SortMode.allCases[indexPath.row]
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -68,8 +87,30 @@ private extension SPSortOrderViewController {
         tableView.applyDefaultGroupedStyling()
     }
     
-    func setupCell(_ cell: UITableViewCell, with row: Row) {
-        cell.textLabel?.text = row.description
+    func setupCell(_ cell: UITableViewCell, with mode: SortMode) {
+        let selected = mode == selectedMode
+
+        cell.textLabel?.text = mode.description
+        cell.accessoryType = selected ? .checkmark : .none
+    }
+
+    func updateSelectedCell(oldSortMode: SortMode, newSortMode: SortMode) {
+        let oldIndexPath = indexPath(for: oldSortMode)
+        let newIndexPath = indexPath(for: newSortMode)
+
+        let oldSelectedCell = tableView.cellForRow(at: oldIndexPath)
+        let newSelectedCell = tableView.cellForRow(at: newIndexPath)
+
+        oldSelectedCell?.accessoryType = .none
+        newSelectedCell?.accessoryType = .checkmark
+    }
+
+    func indexPath(for mode: SortMode) -> IndexPath {
+        guard let selectedIndex = SortMode.allCases.firstIndex(of: mode) else {
+            fatalError()
+        }
+
+        return IndexPath(row: selectedIndex, section: Constants.firstSectionIndex)
     }
 }
 
@@ -78,33 +119,5 @@ private extension SPSortOrderViewController {
 //
 private enum Constants {
     static let numberOfSections = 1
-}
-
-
-// MARK: - SortOrder Rows
-//
-private enum Row: CaseIterable {
-    case modifiedNewest
-    case modifiedOldest
-    case createdNewest
-    case createdOldest
-    case alphabeticallyAscending
-    case alphabeticallyDescending
-
-    var description: String {
-        switch self {
-        case .modifiedNewest:
-            return NSLocalizedString("Newest modified date", comment: "")
-        case .modifiedOldest:
-            return NSLocalizedString("Oldest modified date", comment: "")
-        case .createdNewest:
-            return NSLocalizedString("Newest created date", comment: "")
-        case .createdOldest:
-            return NSLocalizedString("Oldest created date", comment: "")
-        case .alphabeticallyAscending:
-            return NSLocalizedString("Alphabetically, A-Z", comment: "")
-        case .alphabeticallyDescending:
-            return NSLocalizedString("Alphabetically, Z-A", comment: "")
-        }
-    }
+    static let firstSectionIndex = 0
 }
