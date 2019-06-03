@@ -152,6 +152,9 @@
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
 		B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */; };
+		B5DF734222A565DA00602CE7 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734122A565DA00602CE7 /* Options.swift */; };
+		B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
+		B5DF734622A5713600602CE7 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
 		B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */; };
 		B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */; };
@@ -370,6 +373,9 @@
 		B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusChecker.h; path = Classes/StatusChecker.h; sourceTree = "<group>"; };
 		B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
 		B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPDefaultTableViewCell.swift; path = Classes/SPDefaultTableViewCell.swift; sourceTree = "<group>"; };
+		B5DF734122A565DA00602CE7 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Simplenote.swift"; path = "Classes/UserDefaults+Simplenote.swift"; sourceTree = "<group>"; };
+		B5DF734522A5713600602CE7 /* SortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SortMode.swift; path = Classes/SortMode.swift; sourceTree = "<group>"; };
 		B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		B5EB1EF11C204EBD0080A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -697,7 +703,6 @@
 				B52B8A251BAB0DF0002CC55D /* UIView+Extensions.m */,
 				B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */,
 				B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */,
-				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -742,6 +747,8 @@
 				B59314D61A486B3800B651ED /* SPConstants.m */,
 				B512AF951C20B14200FE76D8 /* SPAnimations.h */,
 				B512AF961C20B14200FE76D8 /* SPAnimations.m */,
+				B5DF734122A565DA00602CE7 /* Options.swift */,
+				B5DF734522A5713600602CE7 /* SortMode.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -766,6 +773,8 @@
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
+				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1447,6 +1456,7 @@
 			files = (
 				B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */,
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
+				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
 				B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */,
@@ -1473,6 +1483,7 @@
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
+				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
 				375D24B921E01131007AB25A /* version.c in Sources */,
@@ -1537,6 +1548,7 @@
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
+				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
