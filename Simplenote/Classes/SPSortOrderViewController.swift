@@ -86,7 +86,7 @@ private extension SPSortOrderViewController {
     func setupTableView() {
         tableView.applyDefaultGroupedStyling()
     }
-    
+
     func setupCell(_ cell: UITableViewCell, with mode: SortMode) {
         let selected = mode == selectedMode
 
