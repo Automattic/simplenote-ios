@@ -42,17 +42,17 @@ enum SortMode: Int, CaseIterable {
     var description: String {
         switch self {
         case .alphabeticallyAscending:
-            return NSLocalizedString("Alphabetically: A-Z", comment: "")
+            return NSLocalizedString("Alphabetically: A-Z", comment: "Sort Mode: Alphabetically, ascending")
         case .alphabeticallyDescending:
-            return NSLocalizedString("Alphabetically: Z-A", comment: "")
+            return NSLocalizedString("Alphabetically: Z-A", comment: "Sort Mode: Alphabetically, descending")
         case .createdNewest:
-            return NSLocalizedString("Created: Newest", comment: "")
+            return NSLocalizedString("Created: Newest", comment: "Sort Mode: Creation Date, descending")
         case .createdOldest:
-            return NSLocalizedString("Created: Oldest", comment: "")
+            return NSLocalizedString("Created: Oldest", comment: "Sort Mode: Creation Date, ascending")
         case .modifiedNewest:
-            return NSLocalizedString("Modified: Newest", comment: "")
+            return NSLocalizedString("Modified: Newest", comment: "Sort Mode: Modified Date, descending")
         case .modifiedOldest:
-            return NSLocalizedString("Modified: Oldest", comment: "")
+            return NSLocalizedString("Modified: Oldest", comment: "Sort Mode: Creation Date, ascending")
         }
     }
 }
