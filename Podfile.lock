@@ -1,6 +1,6 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Automattic-Tracks-iOS (0.3.5):
+  - Automattic-Tracks-iOS (0.3.6):
     - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
     - Sentry (~> 4)
@@ -35,7 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
-  - Automattic-Tracks-iOS (from `https://github.com/Automattic/Automattic-Tracks-iOS.git`, branch `add/support-for-tracking-crashes`)
+  - Automattic-Tracks-iOS (= 0.3.6)
   - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
@@ -47,6 +47,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
+    - Automattic-Tracks-iOS
     - CocoaLumberjack
     - Gridicons
     - HockeySDK
@@ -59,24 +60,18 @@ SPEC REPOS:
     - WordPress-Ratings-iOS
 
 EXTERNAL SOURCES:
-  Automattic-Tracks-iOS:
-    :branch: add/support-for-tracking-crashes
-    :git: https://github.com/Automattic/Automattic-Tracks-iOS.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 CHECKOUT OPTIONS:
-  Automattic-Tracks-iOS:
-    :commit: 7eded3b336a89d2906d68ce10a44cb81b61d4c68
-    :git: https://github.com/Automattic/Automattic-Tracks-iOS.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Automattic-Tracks-iOS: f70428b35a07ede94edbddf403e56637b758ec66
+  Automattic-Tracks-iOS: 65f6d57d6ea3b6a5716dabff72db68d36e672761
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
@@ -89,6 +84,6 @@ SPEC CHECKSUMS:
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: 835fbb475900e290de55cea1745fb649f0459643
+PODFILE CHECKSUM: 094118785ab4420b1e0ada8fd9780360fa2052a0
 
 COCOAPODS: 1.6.1
