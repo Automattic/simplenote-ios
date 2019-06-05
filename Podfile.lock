@@ -1,6 +1,6 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Automattic-Tracks-iOS (0.3.6):
+  - Automattic-Tracks-iOS (0.4.0):
     - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
     - Sentry (~> 4)
@@ -35,7 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
-  - Automattic-Tracks-iOS (= 0.3.6)
+  - Automattic-Tracks-iOS (~> 0.4)
   - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
@@ -71,7 +71,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Automattic-Tracks-iOS: 65f6d57d6ea3b6a5716dabff72db68d36e672761
+  Automattic-Tracks-iOS: f7a8284999a5ce2f4e768717d86a640a32f43b7c
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
@@ -84,6 +84,6 @@ SPEC CHECKSUMS:
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: 094118785ab4420b1e0ada8fd9780360fa2052a0
+PODFILE CHECKSUM: 0542923c47aef133b2f25617db596d594054bfeb
 
 COCOAPODS: 1.6.1
