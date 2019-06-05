@@ -13,6 +13,7 @@ class CrashLoggingShim: NSObject {
 
     @objc static func cacheUser(_ user: SPUser) {
         CrashLoggingCache.emailAddress = user.email
+        CrashLogging.setNeedsDataRefresh()
     }
 
     @objc static func cacheOptOutSetting(_ didOptOut: Bool) {
@@ -45,16 +46,16 @@ private class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
         return BuildConfiguration.current.description
     }
 
-    var currentUser: CrashLoggingUser? {
+    var currentUser: TracksUser? {
 
         /// Prefer data from the up-to-date simperium user
         if let user = self.simperium.user, let email = user.email {
-            return CrashLoggingUser(userID: email, email: email, username: email)
+            return TracksUser(userID: email, email: email, username: email)
         }
 
         /// If that's not available, fall back to the cache instead
         if let user = CrashLoggingCache.cachedUser, let email = user.emailAddress {
-            return CrashLoggingUser(userID: email, email: email, username: email)
+            return TracksUser(userID: email, email: email, username: email)
         }
 
         return nil
