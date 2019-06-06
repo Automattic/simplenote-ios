@@ -76,7 +76,7 @@ private extension Options {
         }
 
         let newMode: SortMode = legacySortAscending ? .alphabeticallyAscending : .alphabeticallyDescending
-        defaults.set(newMode, forKey: .listSortMode)
+        defaults.set(newMode.rawValue, forKey: .listSortMode)
         defaults.removeObject(forKey: .listSortModeLegacy)
     }
 }
