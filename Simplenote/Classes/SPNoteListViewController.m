@@ -38,6 +38,7 @@
 
 #import <Simperium/Simperium.h>
 @import WordPress_AppbotX;
+#import "Simplenote-Swift.h"
 
 #import "VSThemeManager.h"
 #import "VSTheme+Simplenote.h"
@@ -85,11 +86,12 @@
                                                  selector:@selector(updateRowHeight:)
                                                      name:SPCondensedNoteListPreferenceChangedNotification
                                                    object:nil];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(updateSortOrder:)
-                                                     name:SPAlphabeticalSortPreferenceChangedNotification
+                                                     name:SPNotesListSortModeChangedNotification
                                                    object:nil];
-        
+
         // voiceover status is tracked because the custom animated transition
         // is not used when enabled
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -646,40 +648,38 @@
     NSString *sortKey = nil;
     BOOL ascending = NO;
     SEL sortSelector = nil;
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalSortPref]) {
-        
-        sortKey = @"content";
-        ascending = YES;
-        sortSelector = @selector(caseInsensitiveCompare:);
-    } else
-        sortKey = @"modificationDate";
-    
-    //    switch (appDelegate.sortMode) {
-    //		case kSortModify:
-    //            sortKey = @"modificationDate";
-    //			break;
-    //		case kSortCreation:
-    //            sortKey = @"creationDate";
-    //			break;
-    //		case kSortAlpha:
-    //            sortKey = @"content";
-    //			//[self.notes sortUsingSelector:@selector(compareAlpha:)];
-    //            sortSelector = @selector(caseInsensitiveCompare:);
-    //            ascending = YES;
-    //			break;
-    //		case kSortModifyReverse:
-    //            sortKey = @"modificationDate";
-    //            ascending = YES;
-    //			break;
-    //		case kSortCreationReverse:
-    //            sortKey = @"creationDate";
-    //            ascending = YES;
-    //			break;
-    //		case kSortAlphaReverse:
-    //            sortKey = @"content";
-    //			break;
-    //    }
+
+    SortMode mode = [[Options shared] listSortMode];
+
+    switch (mode) {
+        case SortModeAlphabeticallyAscending:
+            sortKey = @"content";
+            ascending = YES;
+            sortSelector = @selector(caseInsensitiveCompare:);
+            break;
+        case SortModeAlphabeticallyDescending:
+            sortKey = @"content";
+            ascending = NO;
+            sortSelector = @selector(caseInsensitiveCompare:);
+            break;
+        case SortModeCreatedNewest:
+            sortKey = @"creationDate";
+            ascending = NO;
+            break;
+        case SortModeCreatedOldest:
+            sortKey = @"creationDate";
+            ascending = YES;
+            break;
+        case SortModeModifiedNewest:
+            sortKey = @"modificationDate";
+            ascending = NO;
+            break;
+        case SortModeModifiedOldest:
+            sortKey = @"modificationDate";
+            ascending = YES;
+            break;
+    }
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:sortSelector];
     NSSortDescriptor *pinnedSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pinned" ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:pinnedSortDescriptor, sortDescriptor, nil];

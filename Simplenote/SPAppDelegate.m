@@ -115,20 +115,6 @@
         CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
     }
 }
-    
-- (void)importLegacyPreferences
-{
-    NSNumber *legacySortPref = (__bridge_transfer NSNumber *)CFPreferencesCopyAppValue(CFSTR("sortMode"), kCFPreferencesCurrentApplication);
-    if (legacySortPref != nil) {
-        
-        if ([legacySortPref integerValue] == 2) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SPAlphabeticalSortPref];
-        }
-        
-        CFPreferencesSetAppValue(CFSTR("sortMode"), NULL, kCFPreferencesCurrentApplication);
-        CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
-    }
-}
 
 
 #pragma mark ================================================================================
@@ -240,9 +226,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Old School!
-    [self importLegacyPreferences];
-    
     // Migrate keychain items
     KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
 // Keychain Migration Testing: Should only run in *release* targets. Uncomment / use at will
