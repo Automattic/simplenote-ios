@@ -1,18 +1,10 @@
-//
-//  ShareViewController.swift
-//  SimplenoteShare
-//
-//  Created by Jorge Leandro Perez on 12/15/15.
-//  Copyright © 2015 Automattic. All rights reserved.
-//
-
 import UIKit
 import Social
 import SAMKeychain
 
 
-/// Simplenote's Share Extension.
-
+/// Simplenote's Share Extension
+///
 class ShareViewController: SLComposeServiceViewController {
 
     /// Returns the Main App's SimperiumToken
@@ -23,7 +15,7 @@ class ShareViewController: SLComposeServiceViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        dismissIfNeeded()
+        ensureSimperiumTokenIsValid()
     }
 
     override func isContentValid() -> Bool {
@@ -44,15 +36,23 @@ class ShareViewController: SLComposeServiceViewController {
 }
 
 
-// MARK: - Private Methods
+// MARK: - Token Validation
 //
 private extension ShareViewController {
 
-    func dismissIfNeeded() {
-        guard simperiumToken == nil else {
+    func ensureSimperiumTokenIsValid() {
+        guard isSimperiumTokenInvalid() else {
             return
         }
 
+        displayMissingAccountAlert()
+    }
+
+    func isSimperiumTokenInvalid() -> Bool {
+        return simperiumToken == nil
+    }
+
+    func displayMissingAccountAlert() {
         let title = NSLocalizedString("No Simplenote Account", comment: "Extension Missing Token Alert Title")
         let message = NSLocalizedString("Please log into your Simplenote account first by using the Simplenote app.", comment: "Extension Missing Token Alert Title")
         let accept = NSLocalizedString("Cancel Share", comment: "")
@@ -65,6 +65,12 @@ private extension ShareViewController {
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
     }
+}
+
+
+// MARK: - Uploader
+//
+private extension ShareViewController {
 
     func contentWithSourceURL(_ url: URL?) -> String {
         guard let url = url else {
@@ -89,11 +95,8 @@ private extension ShareViewController {
         }
 
         itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { (url, error) in
-            if let theURL = url as? URL {
-                completion(theURL)
-            } else {
-                completion(nil)
-            }
+            let theURL = url as? URL
+            completion(theURL)
         }
     }
 
