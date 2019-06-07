@@ -5,6 +5,9 @@
       location = "group:Simplenote.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:RELEASE-NOTES.txt">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
