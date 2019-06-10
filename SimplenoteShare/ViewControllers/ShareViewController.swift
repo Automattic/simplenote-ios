@@ -13,6 +13,11 @@ class ShareViewController: SLComposeServiceViewController {
         return SAMKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadContent()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ensureSimperiumTokenIsValid()
@@ -23,10 +28,12 @@ class ShareViewController: SLComposeServiceViewController {
     }
     
     override func didSelectPost() {
-        loadWebsiteUrl { url in
-            self.submitNote(self.contentText, url: url)
-            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        guard let extensionContext = extensionContext else {
+            fatalError()
         }
+
+        submitNote(with: contentText)
+        extensionContext.completeRequest(returningItems: [], completionHandler: nil)
     }
     
     override func configurationItems() -> [Any]! {
@@ -68,41 +75,34 @@ private extension ShareViewController {
 }
 
 
+// MARK: - Loading!
+//
+private extension ShareViewController {
+
+    func loadContent() {
+        guard let extensionContext = extensionContext else {
+            fatalError()
+        }
+
+        let extractor = NoteExtractor(extensionContext: extensionContext)
+        extractor.extractContent { content in
+            self.textView.text = content
+        }
+    }
+}
+
+
 // MARK: - Uploader
 //
 private extension ShareViewController {
 
-    func contentWithSourceURL(_ url: URL?) -> String {
-        guard let url = url else {
-            return contentText
+    func submitNote(with content: String) {
+        guard let simperiumToken = simperiumToken else {
+            fatalError()
         }
 
-        // Append the URL to the content itself
-        return contentText + "\n\n[" + url.absoluteString + "]"
-    }
-
-    func loadWebsiteUrl(_ completion: @escaping ((URL?) -> Void)) {
-        guard let item = extensionContext?.inputItems.first as? NSExtensionItem,
-            let itemProvider = item.attachments?.first else
-        {
-            completion(nil)
-            return
-        }
-
-        if itemProvider.hasItemConformingToTypeIdentifier("public.url") == false {
-            completion(nil)
-            return
-        }
-
-        itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { (url, error) in
-            let theURL = url as? URL
-            completion(theURL)
-        }
-    }
-
-    func submitNote(_ content: String, url: URL?) {
-        let note = Note(content: contentWithSourceURL(url))
-        let uploader = Uploader(simperiumToken: simperiumToken!)
+        let note = Note(content: content)
+        let uploader = Uploader(simperiumToken: simperiumToken)
         uploader.send(note)
     }
 }
