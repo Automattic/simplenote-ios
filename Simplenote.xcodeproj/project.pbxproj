@@ -128,6 +128,11 @@
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B55E428E22A1C0B90018C0CE /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
+		B56A9FF522AE8858003F85CB /* NoteExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FF422AE8858003F85CB /* NoteExtractor.swift */; };
+		B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Extensions.swift */; };
+		B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFB22AECC15003F85CB /* Extractor.swift */; };
+		B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */; };
+		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
@@ -333,6 +338,11 @@
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VSTheme+Keys.swift"; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B56A9FF422AE8858003F85CB /* NoteExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteExtractor.swift; sourceTree = "<group>"; };
+		B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSExtensionContext+Extensions.swift"; sourceTree = "<group>"; };
+		B56A9FFB22AECC15003F85CB /* Extractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
+		B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtractor.swift; sourceTree = "<group>"; };
+		B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextExtractor.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
 		B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -794,6 +804,26 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B56A9FF722AEBF33003F85CB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */,
+				B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B56A9FFA22AECBF2003F85CB /* Extractors */ = {
+			isa = PBXGroup;
+			children = (
+				B56A9FF422AE8858003F85CB /* NoteExtractor.swift */,
+				B56A9FFB22AECC15003F85CB /* Extractor.swift */,
+				B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */,
+				B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */,
+			);
+			path = Extractors;
+			sourceTree = "<group>";
+		};
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -803,14 +833,6 @@
 				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			path = SimplenoteTests;
-			sourceTree = "<group>";
-		};
-		B5AD7AB21D1C82DE009725FB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 		B5B8AE7B1AB9ECF80082775D /* Ratings */ = {
@@ -874,7 +896,8 @@
 		B5EB1EED1C204EBD0080A1B3 /* SimplenoteShare */ = {
 			isa = PBXGroup;
 			children = (
-				B5AD7AB21D1C82DE009725FB /* Extensions */,
+				B56A9FF722AEBF33003F85CB /* Extensions */,
+				B56A9FFA22AECBF2003F85CB /* Extractors */,
 				B5CFFFE522AA9DA200B968CD /* Simperium */,
 				B5CFFFDF22AA9AD100B968CD /* Tools */,
 				B5CFFFEA22AAA18000B968CD /* ViewControllers */,
@@ -1647,12 +1670,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Extensions.swift in Sources */,
 				BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */,
+				B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */,
 				B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */,
+				B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */,
 				B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */,
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
+				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
 				B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */,
+				B56A9FF522AE8858003F85CB /* NoteExtractor.swift in Sources */,
 				B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
