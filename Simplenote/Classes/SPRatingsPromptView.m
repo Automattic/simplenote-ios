@@ -97,12 +97,12 @@ static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
     self.backgroundColor            = [UIColor clearColor];
     
     // Update Label Style
-    self.label.font                 = [theme fontForKey:@"ratingsTitleFont"];
+    self.label.font                 = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.label.textColor            = [theme colorForKey:@"noteHeadlineFontColor"];
     
     // Update Buttons Style
     UIColor *buttonColor            = [theme colorForKey:@"tintColor"];
-    UIFont *buttonFont              = [theme fontForKey:@"ratingsButtonFont"];
+    UIFont *buttonFont              = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     
     for (UIButton *button in @[self.leftButton, self.rightButton]) {
         button.backgroundColor      = [UIColor clearColor];

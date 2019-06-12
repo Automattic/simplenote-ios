@@ -23,13 +23,13 @@
         
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        primaryLabel.font = [self.theme fontForKey:@"collaboratorCellPrimaryLabelFont"];
+        primaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         primaryLabel.textColor = [self.theme colorForKey:@"collaboratorCellPrimaryLabelFontColor"];
         [self.contentView addSubview:primaryLabel];
         
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         secondaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        secondaryLabel.font = [self.theme fontForKey:@"collaboratorCellSecondaryLabelFont"];
+        secondaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         secondaryLabel.textColor = [self.theme colorForKey:@"collaboratorCellSecondaryLabelFontColor"];
         [self.contentView addSubview:secondaryLabel];
         

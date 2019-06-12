@@ -15,7 +15,7 @@
     
     SPTagEntryField *newTagText = [[SPTagEntryField alloc] init];
     newTagText.backgroundColor = [UIColor clearColor];
-    newTagText.font = [newTagText.theme fontForKey:@"tagViewFont"];
+    newTagText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     newTagText.textColor = [newTagText.theme colorForKey:@"tagViewFontColor"];
     newTagText.placeholdTextColor = [newTagText.theme colorForKey:@"tagViewPlaceholderColor"];
     newTagText.tagDelegate = tagDelegate;

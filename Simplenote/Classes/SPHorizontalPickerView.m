@@ -76,7 +76,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
                                       frame.size.width - 2 * horizontalPadding,
                                       [self.theme floatForKey:@"horizontalPickerTitleHeight"]);
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [self.theme fontForKey:@"horizontalPickerTitleFont"];
+        titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         titleLabel.textColor = [self.theme colorForKey:@"horizontalPickerTitleFontColor"];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         [self addSubview:titleLabel];

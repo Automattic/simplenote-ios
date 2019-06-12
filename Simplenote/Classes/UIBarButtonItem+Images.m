@@ -67,7 +67,7 @@ static CGFloat const UIBarButtonWidth               = 44.0;
     
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 
-    button.titleLabel.font = [theme fontForKey:@"barButtonFont"];
+    button.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
     [button sizeToFit];
     

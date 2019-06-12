@@ -49,7 +49,7 @@
     
     _textLabel = [[UILabel alloc] init];
     _textLabel.text = text;
-    _textLabel.font = [[[VSThemeManager sharedManager] theme] fontForKey:@"emptyListViewFont"];
+    _textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _textLabel.textAlignment = NSTextAlignmentCenter;
     _textLabel.numberOfLines = 0;
     _textLabel.backgroundColor = [UIColor clearColor];
