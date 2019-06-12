@@ -155,7 +155,6 @@
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */; };
 		B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */; };
-		B5CFFFE422AA9B1900B968CD /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5CFFFE322AA9B1900B968CD /* CoreServices.framework */; };
 		B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
 		B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE822AA9DD700B968CD /* Note.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
@@ -379,6 +378,7 @@
 		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
+		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
 		B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Simperium+Simplenote.h"; path = "Classes/Simperium+Simplenote.h"; sourceTree = "<group>"; };
 		B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Simperium+Simplenote.m"; path = "Classes/Simperium+Simplenote.m"; sourceTree = "<group>"; };
 		B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBundleWrapper.m; sourceTree = "<group>"; };
@@ -999,6 +999,7 @@
 				E29ADD3A17848E8500E55842 /* Frameworks */,
 				E29ADD3917848E8500E55842 /* Products */,
 				564CAA42AA330D16FDBDD081 /* Pods */,
+				B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */,
 			);
 			sourceTree = "<group>";
 		};
