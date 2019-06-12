@@ -6,93 +6,108 @@ import MobileCoreServices
 //
 struct URLExtractor: Extractor {
 
-    ///
+    /// Accepted File Extension
     ///
     let acceptedType = kUTTypeURL as String
 
-    ///
+    /// Indicates if a given Extension Context can be handled by the Extractor
     ///
     func canHandle(context: NSExtensionContext) -> Bool {
         return context.itemProviders(ofType: acceptedType).isEmpty == false
     }
 
+    /// Extracts a Note entity contained within a given Extension Context (If possible!)
     ///
-    ///
-    func extract(context: NSExtensionContext, onCompletion: @escaping (String?) -> Void) {
-        let providers = context.itemProviders(ofType: acceptedType)
+    func extractNote(from context: NSExtensionContext, onCompletion: @escaping (Note?) -> Void) {
+        guard let provider = context.itemProviders(ofType: acceptedType).first else {
+            onCompletion(nil)
+            return
+        }
 
-        for provider in providers {
-            provider.loadItem(forTypeIdentifier: acceptedType, options: nil) { (payload, _) in
-                guard let url = payload as? URL else {
-                    onCompletion(nil)
-                    return
-                }
-
-                let output = self.handleURL(url: url)
-                onCompletion(output)
+        provider.loadItem(forTypeIdentifier: acceptedType, options: nil) { (payload, _) in
+            guard let url = payload as? URL else {
+                onCompletion(nil)
+                return
             }
+
+            let note = self.loadNote(from: url) ?? self.buildExternalLinkNote(with: url, context: context)
+            onCompletion(note)
         }
     }
 }
 
 
-// MARK: - Private
+// MARK: - Loading Notes from a file!
 //
 private extension URLExtractor {
 
-    func handleURL(url: URL) -> String {
-        guard url.isFileURL else {
-            return handleExternalLink(url: url)
-        }
-
-        guard let `extension` = SupportedFileExtension(rawValue: url.pathExtension) else {
-            // Unsupported
-            return String()
+    /// Loads the contents from the specified file, and returns a Note instance with its contents
+    ///
+    func loadNote(from url: URL) -> Note? {
+        guard let `extension` = SupportedPathExtension(rawValue: url.pathExtension) else {
+            return nil
         }
 
         switch `extension` {
-        case .textbundle:
-            return handleTextBundle(url: url)
         case .textpack:
-            return handleTextPack(url: url)
+            return loadTextPack(from: url)
+        case .textbundle:
+            return loadTextBundle(from: url)
         case .text, .txt:
-            return handlePlainText(url: url)
+            return loadContents(from: url)
         case .markdown, .md:
-            return handleMarkdown(url: url)
+            return loadContents(from: url, isMarkdown: true)
         }
     }
 
-    func handleTextBundle(url: URL) -> String {
+    ///
+    ///
+    func loadTextPack(from url: URL) -> Note {
 // TODO
-        return "TextBundle"
+        return Note(content: "TextPack")
     }
 
-    func handleTextPack(url: URL) -> String {
-// TODO
-        return "TextPack"
+    /// Loads a TextBundle file from the specified URL.
+    ///
+    func loadTextBundle(from url: URL) -> Note {
+        let bundleWrapper = TextBundleWrapper(contentsOf: url, options: .immediate, error: nil)
+        let isMarkdownNote = bundleWrapper.type == kUTTypeMarkdown
+
+        return Note(content: bundleWrapper.text, markdown: isMarkdownNote)
     }
 
-    func handlePlainText(url: URL) -> String {
-// TODO
-        return "PlainText"
-    }
+    /// Loads the String contents from a given URL.
+    ///
+    func loadContents(from url: URL, isMarkdown: Bool = false) -> Note? {
+        guard let content = try? String(contentsOf: url) else {
+            return nil
+        }
 
-    func handleMarkdown(url: URL) -> String {
-// TODO
-        return "Markdown"
+        return Note(content: content, markdown: isMarkdown)
     }
+}
 
-    func handleExternalLink(url: URL) -> String {
-// TODO
-        let contentText = ""
-        return contentText + "\n\n[" + url.absoluteString + "]"
+
+// MARK: - Fallback: Handling external URL(s)
+//
+private extension URLExtractor {
+
+    ///
+    ///
+    func buildExternalLinkNote(with url: URL, context: NSExtensionContext) -> Note? {
+        guard url.isFileURL == false, let payload = context.attributedContentText?.string else {
+            return nil
+        }
+
+        let content = payload + "\n\n[" + url.absoluteString + "]"
+        return Note(content: content)
     }
 }
 
 
 // MARK: - URLExtension
 //
-private enum SupportedFileExtension: String {
+private enum SupportedPathExtension: String {
     case textbundle
     case textpack
     case text
