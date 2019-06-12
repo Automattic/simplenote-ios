@@ -5,15 +5,15 @@ import Foundation
 //
 protocol Extractor {
 
-    ///
+    /// Accepted File Extension
     ///
     var acceptedType: String { get }
 
-    ///
+    /// Indicates if a given Extension Context can be handled by the Extractor
     ///
     func canHandle(context: NSExtensionContext) -> Bool
 
+    /// Extracts a Note entity contained within a given Extension Context (If possible!)
     ///
-    ///
-    func extract(context: NSExtensionContext, onCompletion: @escaping (String?) -> Void)
+    func extractNote(from context: NSExtensionContext, onCompletion: @escaping (Note?) -> Void)
 }
