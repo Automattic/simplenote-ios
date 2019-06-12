@@ -7,11 +7,17 @@ class Note {
 
     /// Note's Simperium Unique Key
     ///
-    let simperiumKey: String
+    let simperiumKey: String = {
+        return UUID().uuidString.replacingOccurrences(of: "-", with: "")
+    }()
 
     /// Payload
     ///
     let content: String
+
+    /// Indicates if the Note is a Markdown document
+    ///
+    let markdown: Bool
 
     /// Creation Date: Now, by default!
     ///
@@ -24,21 +30,26 @@ class Note {
 
     /// Designated Initializer
     ///
-    init(content: String) {
+    init(content: String, markdown: Bool = false) {
         self.content = content
-        self.simperiumKey = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        self.markdown = markdown
     }
 
     func toDictionary() -> [String: Any] {
+        var systemTags = [String]()
+        if markdown {
+            systemTags.append("markdown")
+        }
+
         return [
-            "tags"              : [],
-            "deleted"           : 0,
-            "shareURL"          : String(),
-            "publishURL"        : String(),
-            "content"           : content,
-            "systemTags"        : [],
-            "creationDate"      : creationDate.timeIntervalSince1970,
-            "modificationDate"  : modificationDate.timeIntervalSince1970
+            "tags":             [],
+            "deleted":          0,
+            "shareURL":         String(),
+            "publishURL":       String(),
+            "content":          content,
+            "systemTags":       systemTags,
+            "creationDate":     creationDate.timeIntervalSince1970,
+            "modificationDate": modificationDate.timeIntervalSince1970
         ]
     }
 
