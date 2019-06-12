@@ -31,7 +31,8 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
-			<string>                SUBQUERY(
+			<string>
+                SUBQUERY(
                 extensionItems,
                 $extensionItem,
                 (SUBQUERY(
@@ -39,7 +40,7 @@
                 $attachment,
                 ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.plain-text&quot;
                 || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.text&quot;
-                ).@count == 1
+                ).@count &gt;= 1
                 OR
                 SUBQUERY(
                 $extensionItem.attachments,
@@ -47,6 +48,13 @@
                 ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.url&quot;
                 || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.file-url&quot;
                 ).@count == 1)
+                AND
+                SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.appextension.find-login-action&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.appextension.save-login-action&quot;
+                ).@count == 0
                 ).@count &gt;= 1
             </string>
 		</dict>
