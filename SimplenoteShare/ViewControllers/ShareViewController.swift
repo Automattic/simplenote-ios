@@ -13,6 +13,13 @@ class ShareViewController: SLComposeServiceViewController {
         return SAMKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
     }
 
+    /// Indicates if the Markdown flag should be enabled
+    ///
+    private var isMarkdown = false
+
+
+    // MARK: - UIViewController Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadContent()
@@ -32,7 +39,9 @@ class ShareViewController: SLComposeServiceViewController {
             fatalError()
         }
 
-        submitNote(with: contentText)
+        let note = Note(content: contentText, markdown: isMarkdown)
+        submit(note: note)
+
         extensionContext.completeRequest(returningItems: [], completionHandler: nil)
     }
     
@@ -79,29 +88,38 @@ private extension ShareViewController {
 //
 private extension ShareViewController {
 
+    /// Attempts to extract the Note's Payload from the current ExtensionContext
+    ///
     func loadContent() {
         guard let extensionContext = extensionContext else {
             fatalError()
         }
 
-        let extractor = NoteExtractor(extensionContext: extensionContext)
-        extractor.extractContent { content in
-            self.textView.text = content
+        extensionContext.extractNote(from: extensionContext) { note in
+            guard let note = note else {
+                return
+            }
+
+            self.display(note: note)
         }
     }
-}
 
+    /// Displays a given Note's payload onScreen
+    ///
+    func display(note: Note) {
+        isMarkdown = note.markdown
+        textView.text = note.content
 
-// MARK: - Uploader
-//
-private extension ShareViewController {
+        validateContent()
+    }
 
-    func submitNote(with content: String) {
+    /// Submits a given Note to the user's Simplenote account
+    ///
+    func submit(note: Note) {
         guard let simperiumToken = simperiumToken else {
             fatalError()
         }
 
-        let note = Note(content: content)
         let uploader = Uploader(simperiumToken: simperiumToken)
         uploader.send(note)
     }
