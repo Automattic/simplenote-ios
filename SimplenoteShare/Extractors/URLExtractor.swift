@@ -44,7 +44,7 @@ private extension URLExtractor {
     /// Loads the contents from the specified file, and returns a Note instance with its contents
     ///
     func loadNote(from url: URL) -> Note? {
-        guard let `extension` = SupportedPathExtension(rawValue: url.pathExtension) else {
+        guard let `extension` = PathExtension(rawValue: url.pathExtension) else {
             return nil
         }
 
@@ -60,14 +60,14 @@ private extension URLExtractor {
         }
     }
 
+    /// Returns a Note matching the payload of a given TextPack file
     ///
-    ///
-    func loadTextPack(from url: URL) -> Note {
-// TODO
-        return Note(content: "TextPack")
+    func loadTextPack(from url: URL) -> Note? {
+        // TODO: Implement Me!
+        return nil
     }
 
-    /// Loads a TextBundle file from the specified URL.
+    /// Returns a Note matching the payload of a given TextBundle file
     ///
     func loadTextBundle(from url: URL) -> Note {
         let bundleWrapper = TextBundleWrapper(contentsOf: url, options: .immediate, error: nil)
@@ -76,7 +76,7 @@ private extension URLExtractor {
         return Note(content: bundleWrapper.text, markdown: isMarkdownNote)
     }
 
-    /// Loads the String contents from a given URL.
+    /// Returns a Note matching the payload of a given text file
     ///
     func loadContents(from url: URL, isMarkdown: Bool = false) -> Note? {
         guard let content = try? String(contentsOf: url) else {
@@ -92,7 +92,7 @@ private extension URLExtractor {
 //
 private extension URLExtractor {
 
-    ///
+    /// Builds a Note for an external link
     ///
     func buildExternalLinkNote(with url: URL, context: NSExtensionContext) -> Note? {
         guard url.isFileURL == false, let payload = context.attributedContentText?.string else {
@@ -105,9 +105,9 @@ private extension URLExtractor {
 }
 
 
-// MARK: - URLExtension
+// MARK: - Path Extensions
 //
-private enum SupportedPathExtension: String {
+private enum PathExtension: String {
     case textbundle
     case textpack
     case text
