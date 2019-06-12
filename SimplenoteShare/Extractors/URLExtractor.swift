@@ -1,5 +1,6 @@
 import Foundation
 import MobileCoreServices
+import ZIPFoundation
 
 
 // MARK: - URLExtractor
@@ -49,7 +50,7 @@ private extension URLExtractor {
         }
 
         switch `extension` {
-        case .textpack:
+        case .bearnote, .textpack:
             return loadTextPack(from: url)
         case .textbundle:
             return loadTextBundle(from: url)
@@ -63,8 +64,28 @@ private extension URLExtractor {
     /// Returns a Note matching the payload of a given TextPack file
     ///
     func loadTextPack(from url: URL) -> Note? {
-        // TODO: Implement Me!
-        return nil
+        guard let temporaryDirectoryURL = try? FileManager.default.url(for: .itemReplacementDirectory,
+                                                                       in: .userDomainMask,
+                                                                       appropriateFor: url,
+                                                                       create: true) else {
+            return nil
+        }
+
+        defer {
+            try? FileManager.default.removeItem(at: temporaryDirectoryURL)
+        }
+
+        do {
+            try FileManager.default.unzipItem(at: url, to: temporaryDirectoryURL)
+
+            let unzippedBundleURL = temporaryDirectoryURL.appendingPathComponent(url.lastPathComponent)
+
+            NSLog("URL: \(unzippedBundleURL)")
+            return loadTextBundle(from: unzippedBundleURL)
+        } catch {
+            NSLog("TextPack opening failed: \(error.localizedDescription)")
+            return nil
+        }
     }
 
     /// Returns a Note matching the payload of a given TextBundle file
@@ -108,10 +129,11 @@ private extension URLExtractor {
 // MARK: - Path Extensions
 //
 private enum PathExtension: String {
+    case bearnote
+    case markdown
+    case md
     case textbundle
     case textpack
     case text
     case txt
-    case markdown
-    case md
 }
