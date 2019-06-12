@@ -128,6 +128,8 @@
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B55E428E22A1C0B90018C0CE /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
+		B56AA00A22B14C2B003F85CB /* TextBundleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00822B14C2B003F85CB /* TextBundleWrapper.m */; };
+		B56AA00B22B14C41003F85CB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C6B1788A58C00785EF3 /* MobileCoreServices.framework */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
@@ -329,6 +331,8 @@
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VSTheme+Keys.swift"; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B56AA00822B14C2B003F85CB /* TextBundleWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBundleWrapper.m; sourceTree = "<group>"; };
+		B56AA00922B14C2B003F85CB /* TextBundleWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBundleWrapper.h; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
 		B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -580,6 +584,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56AA00B22B14C41003F85CB /* MobileCoreServices.framework in Frameworks */,
 				D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,6 +789,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B56AA00722B14C2B003F85CB /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				B56AA00822B14C2B003F85CB /* TextBundleWrapper.m */,
+				B56AA00922B14C2B003F85CB /* TextBundleWrapper.h */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +853,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AD7AB21D1C82DE009725FB /* Extensions */,
+				B56AA00722B14C2B003F85CB /* Tools */,
 				B512AF8F1C209DE800FE76D8 /* Supporting Files */,
 				B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */,
 				B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */,
@@ -1610,6 +1625,7 @@
 			files = (
 				BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */,
 				B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */,
+				B56AA00A22B14C2B003F85CB /* TextBundleWrapper.m in Sources */,
 				B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */,
 				B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */,
 			);
