@@ -6,8 +6,9 @@ import Foundation
 ///
 class Uploader: NSObject {
 
-    // MARK: - Properties
-    let token: String
+    /// Simperium's Token
+    ///
+    private let token: String
 
     /// Designated Initializer
     ///
