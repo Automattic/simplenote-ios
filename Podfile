@@ -42,5 +42,9 @@ abstract_target 'Automattic' do
 
 	# Extension Target
 	#
-	target 'SimplenoteShare'
+	target 'SimplenoteShare' do
+		# Third Party
+		#
+	    pod 'ZIPFoundation', '~> 0.9.9'
+	end
 end

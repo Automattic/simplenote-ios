@@ -32,6 +32,7 @@ PODS:
   - UIDeviceIdentifier (1.1.4)
   - WordPress-AppbotX (1.0.6)
   - WordPress-Ratings-iOS (0.0.2)
+  - ZIPFoundation (0.9.9)
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - SVProgressHUD (= 2.2.5)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
   - WordPress-Ratings-iOS (= 0.0.2)
+  - ZIPFoundation (~> 0.9.9)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -58,6 +60,7 @@ SPEC REPOS:
     - SVProgressHUD
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
+    - ZIPFoundation
 
 EXTERNAL SOURCES:
   WordPress-AppbotX:
@@ -83,7 +86,8 @@ SPEC CHECKSUMS:
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
   WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
+  ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
 
-PODFILE CHECKSUM: 0542923c47aef133b2f25617db596d594054bfeb
+PODFILE CHECKSUM: 69daa32afb58dc4282cdc324df11d3e74c697c4a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.0
