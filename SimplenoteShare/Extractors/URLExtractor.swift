@@ -77,10 +77,8 @@ private extension URLExtractor {
 
         do {
             try FileManager.default.unzipItem(at: url, to: temporaryDirectoryURL)
-
             let unzippedBundleURL = temporaryDirectoryURL.appendingPathComponent(url.lastPathComponent)
 
-            NSLog("URL: \(unzippedBundleURL)")
             return loadTextBundle(from: unzippedBundleURL)
         } catch {
             NSLog("TextPack opening failed: \(error.localizedDescription)")
@@ -90,11 +88,13 @@ private extension URLExtractor {
 
     /// Returns a Note matching the payload of a given TextBundle file
     ///
+    /// - NOTE: We're always setting the markdown flag to true. Several 3rd party apps are using TextBundle, zipped,
+    ///         without proper Markdown extensions.
+    ///
     func loadTextBundle(from url: URL) -> Note {
         let bundleWrapper = TextBundleWrapper(contentsOf: url, options: .immediate, error: nil)
-        let isMarkdownNote = bundleWrapper.type == kUTTypeMarkdown
 
-        return Note(content: bundleWrapper.text, markdown: isMarkdownNote)
+        return Note(content: bundleWrapper.text, markdown: true)
     }
 
     /// Returns a Note matching the payload of a given text file
