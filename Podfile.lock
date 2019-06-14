@@ -40,7 +40,7 @@ DEPENDENCIES:
   - Gridicons (~> 0.18)
   - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
-  - Simperium (= 0.8.21)
+  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, commit `f608a05cbc7681fcea03a5c6b6b3854756787373`)
   - SVProgressHUD (= 2.2.5)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
   - WordPress-Ratings-iOS (= 0.0.2)
@@ -56,18 +56,23 @@ SPEC REPOS:
     - Reachability
     - SAMKeychain
     - Sentry
-    - Simperium
     - SVProgressHUD
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
 
 EXTERNAL SOURCES:
+  Simperium:
+    :commit: f608a05cbc7681fcea03a5c6b6b3854756787373
+    :git: https://github.com/Simperium/simperium-ios.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
 
 CHECKOUT OPTIONS:
+  Simperium:
+    :commit: f608a05cbc7681fcea03a5c6b6b3854756787373
+    :git: https://github.com/Simperium/simperium-ios.git
   WordPress-AppbotX:
     :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
@@ -88,6 +93,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
 
-PODFILE CHECKSUM: 69daa32afb58dc4282cdc324df11d3e74c697c4a
+PODFILE CHECKSUM: e31fd42640073beffee85473372923fc9bc5d51c
 
 COCOAPODS: 1.6.1
