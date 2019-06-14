@@ -1,10 +1,3 @@
-//
-//  VSTheme+Keys.swift
-//  Simplenote
-//
-//  Copyright © 2019 Automattic. All rights reserved.
-//
-
 import Foundation
 
 
