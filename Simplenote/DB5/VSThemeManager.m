@@ -109,7 +109,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:barButtonFont}
                                                 forState:UIControlStateNormal];
     
-    UIFont *navigationBarTitleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    UIFont *navigationBarTitleFont = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
     UIColor *navigationBarTitleColor = [theme colorForKey:@"navigationBarTitleFontColor"];
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setTitleTextAttributes:@{NSFontAttributeName: navigationBarTitleFont,
                                                            NSForegroundColorAttributeName: navigationBarTitleColor}];
