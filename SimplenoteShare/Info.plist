@@ -31,12 +31,32 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
-			<dict>
-				<key>NSExtensionActivationSupportsText</key>
-				<true/>
-				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-				<integer>1</integer>
-			</dict>
+			<string>
+                SUBQUERY(
+                extensionItems,
+                $extensionItem,
+                (SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.plain-text&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.text&quot;
+                ).@count &gt;= 1
+                OR
+                SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.url&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.file-url&quot;
+                ).@count == 1)
+                AND
+                SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.appextension.find-login-action&quot;
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;org.appextension.save-login-action&quot;
+                ).@count == 0
+                ).@count &gt;= 1
+            </string>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
