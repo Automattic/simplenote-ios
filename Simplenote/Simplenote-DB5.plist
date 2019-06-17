@@ -17,9 +17,9 @@
 		<key>noteHeadlineFontColor</key>
 		<string>111111</string>
 		<key>noteBodyLineHeightPercentage</key>
-		<string>0.055</string>
+		<string>0.20</string>
 		<key>noteBodyLineHeightPercentage~ipad</key>
-		<string>0.075</string>
+		<string>0.40</string>
 		<key>noteBodyFontPreviewColor</key>
 		<string>808080</string>
 		<key>noteCellBackgroundSelectionColor</key>
