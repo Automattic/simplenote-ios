@@ -49,7 +49,7 @@ static CGFloat const imageSide = 34.0;
     self.titleLabel.numberOfLines = 1;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.backgroundColor = [UIColor clearColor];
-    self.titleLabel.font = [[[VSThemeManager sharedManager] theme] fontForKey:@"actionButtonFont"];
+    self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     

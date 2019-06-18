@@ -42,7 +42,7 @@
         self.selectedBackgroundView = selectedBackgroundView;
         
         _tagNameTextField = [[UITextField alloc] init];
-        _textFont = [self.theme fontForKey:@"tagListFont"];
+        _textFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         _tagNameTextField.font = _textFont;
         _tagNameTextField.textColor = _textColor;
         _tagNameTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

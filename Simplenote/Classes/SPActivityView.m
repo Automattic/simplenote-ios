@@ -211,7 +211,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
             [newToggle setTitle:toggleSelectedTitles[i] forState:UIControlStateHighlighted];
             [newToggle setTitleColor:[self.theme colorForKey:@"tintColor"]
                             forState:UIControlStateNormal];
-            newToggle.titleLabel.font = [self.theme fontForKey:@"actionViewStatusFont"];
+            newToggle.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
             
             [newToggle addTarget:self
                           action:@selector(toggleDidChangeValue:)
@@ -226,7 +226,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         [self addSubview:statusView];
 
         statusLabel = [[UILabel alloc] init];
-        statusLabel.font = [self.theme fontForKey:@"actionViewStatusFont"];
+        statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         statusLabel.textColor = [self.theme colorForKey:@"actionViewStatusFontColor"];
         statusLabel.adjustsFontSizeToFitWidth = YES;
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -325,7 +325,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
             
             newButton.backgroundHighlightColor = [self.theme colorForKey:@"tintColor"];
             
-            newButton.titleLabel.font = [self.theme fontForKey:@"actionButtonFont"];
+            newButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
             newButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
             
             [newButton addTarget:self

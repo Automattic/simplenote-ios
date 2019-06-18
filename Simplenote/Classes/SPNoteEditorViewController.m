@@ -143,8 +143,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)applyStyle {
     
-    _bodyFont = [self.theme fontWithSystemSizeForKey:@"noteBodyFont"];
-    _headlineFont = [self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"];
+    _bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _fontColor = [self.theme colorForKey:@"noteHeadlineFontColor"];
     _lightFontColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
     
@@ -155,7 +155,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     _paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     _paragraphStyle.lineSpacing = _bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
     
-    _noteEditorTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : @{ NSForegroundColorAttributeName : _fontColor, NSFontAttributeName : _bodyFont, NSParagraphStyleAttributeName : _paragraphStyle, NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[self.theme floatForKey:@"noteBodyStrokeWidth"]] }, SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor, NSFontAttributeName : _headlineFont, NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[self.theme floatForKey:@"noteHeadlineStrokeWidth"]]} };
+    _noteEditorTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : @{ NSForegroundColorAttributeName : _fontColor,
+                                                                                  NSFontAttributeName : _bodyFont,
+                                                                                  NSParagraphStyleAttributeName : _paragraphStyle},
+                                                          SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor,
+                                                                                  NSFontAttributeName : _headlineFont} };
     
     _noteEditorTextView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
     
@@ -386,7 +390,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                 forState:UIControlStateNormal];
-    backButton.titleLabel.font = [self.theme fontForKey:@"barButtonFont"];
+    backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
     backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
     backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
@@ -462,7 +466,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     
     searchDetailLabel = [[UILabel alloc] init];
-    searchDetailLabel.font = [self.theme fontForKey:@"barButtonFont"];
+    searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     searchDetailLabel.frame = CGRectMake(0, 0, 180, searchDetailLabel.font.lineHeight);
     searchDetailLabel.textColor = [self.theme colorForKey:@"noteHeadlineFontColor"];
     searchDetailLabel.textAlignment = NSTextAlignmentCenter;

@@ -79,13 +79,11 @@
     
     _previewView.backgroundColor = [theme colorForKey:@"backgroundColor"];
     
-    NSDictionary *defaultAttributes = @{NSFontAttributeName:[theme fontWithSystemSizeForKey:@"noteBodyFont"],
-                                        NSForegroundColorAttributeName:[theme colorForKey:@"noteBodyFontPreviewColor"],
-                                        NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[theme floatForKey:@"noteBodyStrokeWidth"]]};
+    NSDictionary *defaultAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+                                        NSForegroundColorAttributeName:[theme colorForKey:@"noteBodyFontPreviewColor"]};
     
-    NSDictionary *headlineAttributes = @{NSFontAttributeName: [theme fontWithSystemSizeForKey:@"noteHeadlineFont"],
-                                         NSForegroundColorAttributeName: [theme colorForKey:@"noteHeadlineFontColor"],
-                                         NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[theme floatForKey:@"noteHeadlineStrokeWidth"]]};
+    NSDictionary *headlineAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
+                                         NSForegroundColorAttributeName: [theme colorForKey:@"noteHeadlineFontColor"]};
     
     _previewView.interactiveTextStorage.tokens = @{SPDefaultTokenName : defaultAttributes,
                                                    SPHeadlineTokenName : headlineAttributes

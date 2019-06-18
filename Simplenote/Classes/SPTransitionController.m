@@ -98,8 +98,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
-    transitionControllerBodyFont = [theme fontWithSystemSizeForKey:@"noteBodyFont"];
-    transitionControllerHeadlineFont = [theme fontWithSystemSizeForKey:@"noteHeadlineFont"];
+    transitionControllerBodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    transitionControllerHeadlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     transitionControllerBodyColor = [theme colorForKey:@"noteBodyFontPreviewColor"];
     transitionControllerHeadlineColor = [theme colorForKey:@"noteHeadlineFontColor"];
     
@@ -191,18 +191,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     NSDictionary *defaultAttributes;
     if (preview)
         defaultAttributes = @{ NSForegroundColorAttributeName : transitionControllerBodyColor,
-                                     NSFontAttributeName : transitionControllerBodyFont,
-                               NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[theme floatForKey:@"noteBodyStrokeWidth"]]};
+                                     NSFontAttributeName : transitionControllerBodyFont};
     else
         defaultAttributes = @{ NSForegroundColorAttributeName : transitionControllerHeadlineColor,
                                NSFontAttributeName : transitionControllerBodyFont,
-                               NSParagraphStyleAttributeName : transitionControllerParagraphStyle,
-                               NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[theme floatForKey:@"noteBodyStrokeWidth"]]};
+                               NSParagraphStyleAttributeName : transitionControllerParagraphStyle};
 
     NSDictionary *headlineAttributes  = @{
                                           NSForegroundColorAttributeName: transitionControllerHeadlineColor,
-                                          NSFontAttributeName : transitionControllerHeadlineFont,
-                                          NSStrokeWidthAttributeName:[NSNumber numberWithFloat:[theme floatForKey:@"noteHeadlineStrokeWidth"]]};
+                                          NSFontAttributeName : transitionControllerHeadlineFont};
 
     _snapshotTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : defaultAttributes,
                                                         SPHeadlineTokenName : headlineAttributes};

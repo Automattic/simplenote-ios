@@ -33,7 +33,7 @@
         _timeLabel.textAlignment = NSTextAlignmentCenter;
         _timeLabel.isAccessibilityElement = NO;
         
-        UIFont *font = [[[VSThemeManager sharedManager] theme] fontForKey:@"versionPickerDateFont"];
+        UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         UIColor *textColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"versionPickerDateFontColor"];
         
         _dateLabel.font = font;

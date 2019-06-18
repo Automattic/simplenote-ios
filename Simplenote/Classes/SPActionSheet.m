@@ -119,7 +119,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     NSMutableArray *labelArray = [[NSMutableArray alloc] initWithCapacity:stringArray.count];
 
-    UIFont *font = [self.theme fontForKey:@"actionSheetButtonFont"];
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
     CGFloat labelPadding = [self.theme floatForKey:@"actionSheetLabelPadding"];
     
@@ -191,7 +191,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     UILabel *titleLabel;
     
     if (message) {
-        NSDictionary *titleAttributes = @{NSFontAttributeName: [self.theme fontForKey:@"actionSheetFont"],
+        NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
                                           NSForegroundColorAttributeName: [self.theme colorForKey:@"actionSheetFontColor"]};
         NSAttributedString *titleAttributedString = [[NSAttributedString alloc] initWithString:message
                                                                                     attributes:titleAttributes];

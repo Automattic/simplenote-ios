@@ -194,7 +194,7 @@
             continue;
         }
         
-        [(UITextField *)subview setFont:[self.theme fontForKey:@"searchBarFont"]];
+        [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         [(UITextField *)subview setTextColor:[self.theme colorForKey:@"searchBarFontColor"]];
         [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
@@ -209,7 +209,7 @@
     CGFloat topTextViewPadding = verticalPadding;
     
     CGFloat numberLines = condensedNoteList ? 1.0 : 3.0;
-    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"]}].height;
+    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
     
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
     
@@ -485,7 +485,7 @@
         // New note summary contains a pin image
         UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
         pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
-                             lineHeight:[self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"].capHeight];
+                                                             lineHeight:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].capHeight];
         cell.previewView.attributedText = pinnedContent;
     } else {
         cell.previewView.attributedText = attributedContent;
