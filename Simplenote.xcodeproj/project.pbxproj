@@ -108,6 +108,10 @@
 		46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4417848E8500E55842 /* InfoPlist.strings */; };
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
+		74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */; };
+		74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */; };
+		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
+		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
 		B50789FF1C1F5592009F097A /* markdown-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 1748382E1BC1CC2D00E834AF /* markdown-default.css */; };
 		B5078A001C1F5595009F097A /* markdown-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 17BC3D461BC46BA800535DF3 /* markdown-dark.css */; };
@@ -297,6 +301,10 @@
 		697B9622931545E466B5E186 /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		6AE4CF60906DA6D08F64E5B3 /* Pods-Automattic-Simplenote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.release.xcconfig"; sourceTree = "<group>"; };
 		6BCBD402CC18FF32DD97B404 /* Pods-Automattic-Simplenote.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution appstore.xcconfig"; sourceTree = "<group>"; };
+		74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTransitioningManager.swift; sourceTree = "<group>"; };
+		74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationController.swift; sourceTree = "<group>"; };
+		74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationAnimator.swift; sourceTree = "<group>"; };
+		74F6638222BADD0300FA147E /* SharePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresentationController.swift; sourceTree = "<group>"; };
 		7B29128DBC9F14CBA5F4683F /* Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
@@ -751,6 +759,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		74F6637B22BADADD00FA147E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */,
+				74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */,
+				74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */,
+			);
+			name = Presentation;
+			path = SimplenoteShare/Presentation;
+			sourceTree = SOURCE_ROOT;
+		};
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +907,7 @@
 			isa = PBXGroup;
 			children = (
 				B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */,
+				74F6638222BADD0300FA147E /* SharePresentationController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -899,6 +919,7 @@
 				B56A9FFA22AECBF2003F85CB /* Extractors */,
 				B5CFFFE522AA9DA200B968CD /* Simperium */,
 				B5CFFFDF22AA9AD100B968CD /* Tools */,
+				74F6637B22BADADD00FA147E /* Presentation */,
 				B5CFFFEA22AAA18000B968CD /* ViewControllers */,
 				B512AF8F1C209DE800FE76D8 /* Supporting Files */,
 				B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */,
@@ -1673,6 +1694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
+				74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */,
 				BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */,
 				B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */,
 				B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */,
@@ -1681,7 +1703,10 @@
 				B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */,
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
+				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
+				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
+				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
 				B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */,
 				B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */,
 			);

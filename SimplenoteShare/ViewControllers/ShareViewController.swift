@@ -3,9 +3,18 @@ import Social
 import SAMKeychain
 
 
-/// Simplenote's Share Extension
+typealias CompletionBlock = () -> Void
+
+/// Main VC for Simplenote's Share Extension
 ///
-class ShareViewController: SLComposeServiceViewController {
+class ShareViewController: UIViewController {
+
+    /// This completion handler closure is executed when this VC is dismissed
+    ///
+    @objc var dismissalCompletionBlock: CompletionBlock?
+
+
+    // MARK: Private Properties
 
     /// Returns the Main App's SimperiumToken
     ///
@@ -17,8 +26,45 @@ class ShareViewController: SLComposeServiceViewController {
     ///
     private var isMarkdown = false
 
+    /// The extension context data provided from the host app
+    ///
+    private var context: NSExtensionContext?
 
-    // MARK: - UIViewController Lifecycle
+    private var originalNote: Note?
+
+    /// Cancel Bar Button
+    ///
+    private lazy var cancelButton: UIBarButtonItem = {
+        let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel action on share extension.")
+        let button = UIBarButtonItem(title: cancelTitle, style: .plain, target: self, action: #selector(cancelWasPressed))
+        button.accessibilityIdentifier = "Cancel Button"
+        return button
+    }()
+
+    /// Next Bar Button
+    ///
+    private lazy var nextButton: UIBarButtonItem = {
+        let nextButtonTitle = NSLocalizedString("Save", comment: "Save action on share extension.")
+        let button = UIBarButtonItem(title: nextButtonTitle, style: .plain, target: self, action: #selector(saveWasPressed))
+        button.accessibilityIdentifier = "Save Button"
+        return button
+    }()
+
+
+    // MARK: UIViewController Lifecycle
+
+    /// Designated Initializer
+    ///
+    init(context: NSExtensionContext?) {
+        self.context = context
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: UIViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,25 +75,27 @@ class ShareViewController: SLComposeServiceViewController {
         super.viewDidAppear(animated)
         ensureSimperiumTokenIsValid()
     }
+}
 
-    override func isContentValid() -> Bool {
-        return contentText.isEmpty == false
+
+// MARK: - Actions
+//
+private extension ShareViewController {
+
+    @objc func cancelWasPressed() {
+        dismiss(animated: true, completion: self.dismissalCompletionBlock)
     }
-    
-    override func didSelectPost() {
-        guard let extensionContext = extensionContext else {
+
+    @objc func saveWasPressed() {
+//        guard let extensionContext = context else {
+//            fatalError()
+//        }
+        guard let note = originalNote else {
             fatalError()
         }
 
-        let note = Note(content: contentText, markdown: isMarkdown)
         submit(note: note)
-
-        extensionContext.completeRequest(returningItems: [], completionHandler: nil)
-    }
-    
-    override func configurationItems() -> [Any]! {
-        // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-        return []
+        dismissalCompletionBlock?()
     }
 }
 
@@ -75,7 +123,7 @@ private extension ShareViewController {
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: accept, style: .default) { _ in
-            self.cancel()
+            self.cancelWasPressed()
         }
 
         alertController.addAction(alertAction)
@@ -91,15 +139,15 @@ private extension ShareViewController {
     /// Attempts to extract the Note's Payload from the current ExtensionContext
     ///
     func loadContent() {
-        guard let extensionContext = extensionContext else {
+        guard let context = context else {
             fatalError()
         }
 
-        extensionContext.extractNote(from: extensionContext) { note in
+        context.extractNote(from: context) { note in
             guard let note = note else {
                 return
             }
-
+            self.originalNote = note
             self.display(note: note)
         }
     }
@@ -108,9 +156,7 @@ private extension ShareViewController {
     ///
     func display(note: Note) {
         isMarkdown = note.markdown
-        textView.text = note.content
-
-        validateContent()
+        //textView.text = note.content
     }
 
     /// Submits a given Note to the user's Simplenote account
