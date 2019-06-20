@@ -1,0 +1,1 @@
+notes,note,sync,simplenote,simple,todo,list
