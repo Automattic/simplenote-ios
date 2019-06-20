@@ -32,4 +32,15 @@ extension NSUserActivity {
             suggestedInvocationPhrase = type.suggestedInvocationPhrase
         }
     }
+
+    /// Removes all of the shared UserActivities, whenever the API allows.
+    ///
+    @objc
+    class func deleteAllSavedUserActivitiesIfPossible() {
+        if #available(iOS 12.0, *) {
+            deleteAllSavedUserActivities {
+                // No-Op: The SDK's API... doesn't take a nil callback. Neat!
+            }
+        }
+    }
 }

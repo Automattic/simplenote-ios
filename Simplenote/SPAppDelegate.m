@@ -547,9 +547,7 @@
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
 
     // Remove Siri Shortcuts
-    if (@available(iOS 12.0, *)) {
-        [NSUserActivity deleteAllSavedUserActivitiesWithCompletionHandler:^{ }];
-    }
+    [NSUserActivity deleteAllSavedUserActivitiesIfPossible];
 
     // Actual Simperium Logout
     double delayInSeconds = 0.75;
