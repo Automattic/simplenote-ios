@@ -126,8 +126,8 @@
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
-		B550F93322BA6A3300091939 /* SPAppDelegate+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* SPAppDelegate+Shortcuts.swift */; };
-		B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */; };
+		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
+		B550F93622BA7E9100091939 /* NSUserActivity+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93522BA7E9100091939 /* NSUserActivity+Shortcuts.swift */; };
 		B550F93822BA814D00091939 /* UIViewController+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93722BA814D00091939 /* UIViewController+Shortcuts.swift */; };
 		B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B557381F1AB8950A006043E4 /* NSDate+Helper.m */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
@@ -329,8 +329,8 @@
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
-		B550F93222BA6A3300091939 /* SPAppDelegate+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPAppDelegate+Shortcuts.swift"; path = "Classes/SPAppDelegate+Shortcuts.swift"; sourceTree = "<group>"; };
-		B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Simplenote.swift"; path = "Classes/NSUserActivity+Simplenote.swift"; sourceTree = "<group>"; };
+		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
+		B550F93522BA7E9100091939 /* NSUserActivity+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Shortcuts.swift"; path = "Classes/NSUserActivity+Shortcuts.swift"; sourceTree = "<group>"; };
 		B550F93722BA814D00091939 /* UIViewController+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Shortcuts.swift"; path = "Classes/UIViewController+Shortcuts.swift"; sourceTree = "<group>"; };
 		B5536B861B8E46AC00FF190A /* cy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cy; path = cy.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5536B871B8E47B400FF190A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -802,8 +802,8 @@
 			isa = PBXGroup;
 			children = (
 				B550F93022BA65CD00091939 /* ActivityType.swift */,
-				B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */,
-				B550F93222BA6A3300091939 /* SPAppDelegate+Shortcuts.swift */,
+				B550F93222BA6A3300091939 /* ShortcutsHandler.swift */,
+				B550F93522BA7E9100091939 /* NSUserActivity+Shortcuts.swift */,
 				B550F93722BA814D00091939 /* UIViewController+Shortcuts.swift */,
 			);
 			name = Siri;
@@ -1566,7 +1566,7 @@
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
-				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
+				B550F93622BA7E9100091939 /* NSUserActivity+Shortcuts.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
@@ -1652,7 +1652,7 @@
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
-				B550F93322BA6A3300091939 /* SPAppDelegate+Shortcuts.swift in Sources */,
+				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
