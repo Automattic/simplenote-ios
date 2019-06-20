@@ -11,6 +11,25 @@ class ShortcutsHandler: NSObject {
     @objc
     static var shared = ShortcutsHandler()
 
+    /// Exports the main Simplenote Activities
+    ///
+    @objc
+    func registerSimplenoteActivities() {
+        NSUserActivity.launchActivity().becomeCurrent()
+        NSUserActivity.newNoteActivity().becomeCurrent()
+    }
+
+    /// Removes all of the shared UserActivities, whenever the API allows.
+    ///
+    @objc
+    func unregisterSimplenoteActivities() {
+        if #available(iOS 12.0, *) {
+            NSUserActivity.deleteAllSavedUserActivities {
+                // No-Op: The SDK's API... doesn't take a nil callback. Neat!
+            }
+        }
+    }
+
     /// Handles a UserActivity instance. Returns true on success.
     ///
     @objc

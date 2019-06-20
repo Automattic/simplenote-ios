@@ -1,37 +1,42 @@
 import Foundation
 import CoreSpotlight
-import Intents
-import MobileCoreServices
 
 
-
-// MARK: - NSUserActivity Convenience Methods
+// MARK: - Simplenote's NSUserActivities
 //
 extension NSUserActivity {
 
-    /// Initializes a UserActivity Instance with a given Activity Type
+    /// Registers the Launch Activity
     ///
-    convenience init(type: ActivityType, title: String, suggestedInvocationPhrase: String? = nil) {
-        self.init(activityType: type.rawValue)
+    class func launchActivity() -> NSUserActivity {
+        let title = NSLocalizedString("Open Simplenote", comment: "Siri Suggestion to open our app")
+        let activity = NSUserActivity(type: .launch, title: title)
 
-        self.title = title
-        isEligibleForSearch = true
-        isEligibleForHandoff = false
-
-        if #available(iOS 12.0, *) {
-            isEligibleForPrediction = true
-            self.suggestedInvocationPhrase = suggestedInvocationPhrase ?? title
-        }
+        return activity
     }
 
-    /// Convenience wrapper API that removes all of the shared UserActivities, whenever the API allows.
+    /// Registers the New Note Activity
+    ///
+    class func newNoteActivity() -> NSUserActivity {
+        let title = NSLocalizedString("Create a New Note", comment: "Siri Suggestion to create a New Note")
+        let activity = NSUserActivity(type: .newNote, title: title)
+
+        return activity
+    }
+
+    /// Register the Open Note Activity
     ///
     @objc
-    class func deleteAllSavedUserActivitiesIfPossible() {
-        if #available(iOS 12.0, *) {
-            deleteAllSavedUserActivities {
-                // No-Op: The SDK's API... doesn't take a nil callback. Neat!
-            }
+    class func openNoteActivity(for note: Note) -> NSUserActivity? {
+        guard let uniqueIdentifier = note.simperiumKey, let preview = note.titlePreview else {
+            NSLog("Note with missing SimperiumKey!!")
+            return nil
         }
+
+        let title = NSLocalizedString("Open \"\(preview)\"", comment: "Siri Suggestion to open a specific Note")
+        let activity = NSUserActivity(type: .openNote, title: title)
+        activity.userInfo = [CSSearchableItemActivityIdentifier: uniqueIdentifier]
+
+        return activity
     }
 }

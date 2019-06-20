@@ -547,7 +547,7 @@
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
 
     // Remove Siri Shortcuts
-    [NSUserActivity deleteAllSavedUserActivitiesIfPossible];
+    [[ShortcutsHandler shared] unregisterSimplenoteActivities];
 
     // Actual Simperium Logout
     double delayInSeconds = 0.75;
@@ -604,6 +604,9 @@
     
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
+
+    // Siri Shortcuts
+    [[ShortcutsHandler shared] registerSimplenoteActivities];
 
     // Now that the user info is present, cache it for use by the crash logging system.
     // See the docs there for details on why this is necessary.
