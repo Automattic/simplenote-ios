@@ -558,7 +558,13 @@
     
     // Remove WordPress token
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
-    
+
+    // Remove Siri Shortcuts
+    if (@available(iOS 12.0, *)) {
+        [NSUserActivity deleteAllSavedUserActivitiesWithCompletionHandler:^{ }];
+    }
+
+    // Actual Simperium Logout
     double delayInSeconds = 0.75;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
