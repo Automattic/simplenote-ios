@@ -15,6 +15,8 @@
 @class SPNavigationController;
 @class SPModalActivityIndicator;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -30,7 +32,7 @@
 @property (strong, nonatomic) SPNoteListViewController					*noteListViewController;
 @property (strong, nonatomic) SPNoteEditorViewController				*noteEditorViewController;
 
-@property (strong, nonatomic) NSString									*selectedTag;
+@property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
 @property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
@@ -47,3 +49,6 @@
 + (SPAppDelegate *)sharedDelegate;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

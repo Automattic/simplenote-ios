@@ -26,7 +26,8 @@ class SPPrivacyViewController: SPTableViewController {
     /// Indicates if Analytics are Enabled
     ///
     private var isAnalyticsEnabled: Bool {
-        guard let simperium = SPAppDelegate.shared()?.simperium, let preferences = simperium.preferencesObject() else {
+        let simperium = SPAppDelegate.shared().simperium
+        guard let preferences = simperium.preferencesObject() else {
             return true
         }
 
@@ -95,7 +96,8 @@ extension SPPrivacyViewController {
     /// Updates the Analytics Setting
     ///
     @objc func switchDidChange(sender: UISwitch) {
-        guard let simperium = SPAppDelegate.shared()?.simperium, let preferences = simperium.preferencesObject() else {
+        let simperium = SPAppDelegate.shared().simperium
+        guard let preferences = simperium.preferencesObject() else {
             return
         }
 
