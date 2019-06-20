@@ -16,7 +16,7 @@ class ShortcutsHandler: NSObject {
     @objc
     func handleUserActivity(_ userActivity: NSUserActivity) -> Bool {
         guard let type = ActivityType(rawValue: userActivity.activityType) else {
-            return presentNote(for: userActivity)
+            return false
         }
 
         switch type {
@@ -24,6 +24,9 @@ class ShortcutsHandler: NSObject {
             break
         case .newNote:
             SPAppDelegate.shared().presentNewNoteEditor()
+        case .openNote,
+             .openSpotlightItem:
+            presentNote(for: userActivity)
         }
 
         return true
@@ -31,13 +34,11 @@ class ShortcutsHandler: NSObject {
 
     /// Displays a Note, whenever the UniqueIdentifier is contained within a given UserActivity instance.
     ///
-    func presentNote(for userActivity: NSUserActivity) -> Bool {
+    private func presentNote(for userActivity: NSUserActivity) {
         guard let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
-            return false
+            return
         }
 
         SPAppDelegate.shared().presentNote(withUniqueIdentifier: uniqueIdentifier)
-
-        return true
     }
 }
