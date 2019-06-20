@@ -28,7 +28,7 @@ extension ActivityType {
     /// Date after which this activity is no longer eligible to be indexed or handed off
     ///
     var expirationDate: Date? {
-        return .oneWeekFromNow
+        return nil
     }
 
     /// A human-understandable string that can be used to suggest a voice shortcut phrase to the user
