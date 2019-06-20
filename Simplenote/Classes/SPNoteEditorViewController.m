@@ -213,7 +213,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     if (!_currentNote) {
         [self newButtonAction:nil];
-        self.userActivity = [NSUserActivity newNoteActivity];
     } else {
         [_noteEditorTextView processChecklists];
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];

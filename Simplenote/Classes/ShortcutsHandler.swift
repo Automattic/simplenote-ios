@@ -11,6 +11,30 @@ class ShortcutsHandler: NSObject {
     @objc
     static var shared = ShortcutsHandler()
 
+    /// Supported Activities
+    ///
+    private let activities = [
+        NSUserActivity.newNoteActivity(),
+        NSUserActivity.launchActivity()
+    ]
+
+    /// Registers all of the Simplenote-Y Activities.
+    ///
+    /// - Note:
+    ///     1. Calling `becomeCurrent()` sequentially causes the OS not to register anything, (OR) register
+    ///        just the last activity.
+    ///     2. Not keeping the Activities around... also causes `becomeCurrent` to fail. That's why `activities` is
+    ///        an ivar!
+    ///
+    @objc
+    func registerSimplenoteActivities() {
+        for (index, activity) in activities.enumerated() {
+            let delay = DispatchTime.now() + DispatchTimeInterval.seconds(index)
+            DispatchQueue.main.asyncAfter(deadline: delay) {
+                activity.becomeCurrent()
+            }
+        }
+    }
 
     /// Removes all of the shared UserActivities, whenever the API allows.
     ///
