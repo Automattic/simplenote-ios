@@ -16,10 +16,13 @@ extension NSUserActivity {
         expirationDate = type.expirationDate
         title = type.title
 
-        let contentAttributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        contentAttributeSet.contentDescription = type.description
-        contentAttributeSet.contentCreationDate = nil // Set this to nil so it doesn't display in spotlight
-        self.contentAttributeSet = contentAttributeSet
+        if let description = type.description {
+            let contentAttributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+            contentAttributeSet.contentDescription = description
+            contentAttributeSet.contentCreationDate = nil // Set this to nil so it doesn't display in spotlight
+            contentAttributeSet.relatedUniqueIdentifier = type.rawValue
+            self.contentAttributeSet = contentAttributeSet
+        }
 
         isEligibleForSearch = true
         isEligibleForHandoff = false
