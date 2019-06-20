@@ -24,17 +24,22 @@ class ShortcutsHandler: NSObject {
             break
         case .newNote:
             SPAppDelegate.shared().presentNewNoteEditor()
-        case .openNote,
-             .openSpotlightItem:
+        case .openNote, .openSpotlightItem:
             presentNote(for: userActivity)
         }
 
         return true
     }
+}
+
+
+// MARK: - Private Methods
+//
+private extension ShortcutsHandler {
 
     /// Displays a Note, whenever the UniqueIdentifier is contained within a given UserActivity instance.
     ///
-    private func presentNote(for userActivity: NSUserActivity) {
+    func presentNote(for userActivity: NSUserActivity) {
         guard let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
             return
         }
