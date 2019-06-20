@@ -285,23 +285,10 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
 #else
-    - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
 #endif
-    NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
-    if (uniqueIdentifier == nil) {
-        return false;
-    }
-    
-    SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
-    Note *note = [noteBucket objectForKey:uniqueIdentifier];
-    
-    if (note == nil) {
-        return false;
-    }
-    
-    [self presentNote:note];
-    
-    return true;
+
+    return [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
 - (void)onboardingDidFinish:(NSNotification *)notification
@@ -828,6 +815,24 @@
     }
     
     return YES;
+}
+
+- (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
+{
+    NSString *bucketName = NSStringFromClass([Note class]);
+    SPBucket *noteBucket = [_simperium bucketForName:bucketName];
+    Note *note = [noteBucket objectForKey:uuid];
+
+    if (note == nil) {
+        return;
+    }
+
+    [self presentNote:note];
+}
+
+- (void)presentNewNoteEditor
+{
+    [self presentNote:nil];
 }
 
 - (void)presentNote:(Note *)note
