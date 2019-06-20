@@ -138,6 +138,7 @@
 {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
+    [self registerLaunchActivity];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
