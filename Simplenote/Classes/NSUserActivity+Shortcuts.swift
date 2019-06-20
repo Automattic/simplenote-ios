@@ -8,6 +8,7 @@ extension NSUserActivity {
 
     /// Registers the Launch Activity
     ///
+    @objc
     class func launchActivity() -> NSUserActivity {
         let title = NSLocalizedString("Open Simplenote", comment: "Siri Suggestion to open our app")
         let activity = NSUserActivity(type: .launch, title: title)
@@ -17,6 +18,7 @@ extension NSUserActivity {
 
     /// Registers the New Note Activity
     ///
+    @objc
     class func newNoteActivity() -> NSUserActivity {
         let title = NSLocalizedString("Create a New Note", comment: "Siri Suggestion to create a New Note")
         let activity = NSUserActivity(type: .newNote, title: title)

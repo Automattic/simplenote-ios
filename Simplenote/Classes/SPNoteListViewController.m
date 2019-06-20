@@ -138,6 +138,7 @@
 {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
+    self.userActivity = [NSUserActivity launchActivity];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

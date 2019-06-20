@@ -605,9 +605,6 @@
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
 
-    // Siri Shortcuts
-    [[ShortcutsHandler shared] registerSimplenoteActivities];
-
     // Now that the user info is present, cache it for use by the crash logging system.
     // See the docs there for details on why this is necessary.
     [CrashLogging cacheUser:simperium.user];
