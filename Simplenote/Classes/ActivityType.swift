@@ -12,6 +12,14 @@ enum ActivityType: String {
     /// New Note Activity
     ///
     case newNote = "com.codality.NotationalFlow.newNote"
+
+    /// Open a Note!
+    ///
+    case openNote = "com.codality.NotationalFlow.openNote"
+
+    /// Open an Item that was indexed by Spotlight
+    ///
+    case openSpotlightItem = "com.apple.corespotlightitem"
 }
 
 
@@ -33,23 +41,27 @@ extension ActivityType {
 
     /// A human-understandable string that can be used to suggest a voice shortcut phrase to the user
     ///
-    var suggestedInvocationPhrase: String {
+    var suggestedInvocationPhrase: String? {
         switch self {
         case .launch:
             return NSLocalizedString("Open Simplenote", comment: "Siri Suggestion to open our app")
         case .newNote:
             return NSLocalizedString("Create a New Note", comment: "Siri Suggestion to create a New Note")
+        default:
+            return nil
         }
     }
 
     /// User-visible title for this activity
     ///
-    var title: String {
+    var title: String? {
         switch self {
         case .launch:
             return NSLocalizedString("Open Simplenote", comment: "Siri Suggestion to open our app")
         case .newNote:
             return NSLocalizedString("Create a New Note", comment: "Siri Suggestion to create a New Note")
+        default:
+            return nil
         }
     }
 }

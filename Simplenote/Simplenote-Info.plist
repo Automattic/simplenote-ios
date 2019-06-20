@@ -12,6 +12,7 @@
 	<array>
 		<string>com.codality.NotationalFlow.launch</string>
 		<string>com.codality.NotationalFlow.newNote</string>
+		<string>com.codality.NotationalFlow.openNote</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
