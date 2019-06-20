@@ -11,29 +11,20 @@ extension NSUserActivity {
 
     /// Initializes a UserActivity Instance with a given Activity Type
     ///
-    convenience init(type: ActivityType) {
+    convenience init(type: ActivityType, title: String, suggestedInvocationPhrase: String? = nil) {
         self.init(activityType: type.rawValue)
-        expirationDate = type.expirationDate
-        title = type.title
 
-        if let description = type.description {
-            let contentAttributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-            contentAttributeSet.contentDescription = description
-            contentAttributeSet.contentCreationDate = nil // Set this to nil so it doesn't display in spotlight
-            contentAttributeSet.relatedUniqueIdentifier = type.rawValue
-            self.contentAttributeSet = contentAttributeSet
-        }
-
+        self.title = title
         isEligibleForSearch = true
         isEligibleForHandoff = false
 
         if #available(iOS 12.0, *) {
             isEligibleForPrediction = true
-            suggestedInvocationPhrase = type.suggestedInvocationPhrase
+            self.suggestedInvocationPhrase = suggestedInvocationPhrase ?? title
         }
     }
 
-    /// Removes all of the shared UserActivities, whenever the API allows.
+    /// Convenience wrapper API that removes all of the shared UserActivities, whenever the API allows.
     ///
     @objc
     class func deleteAllSavedUserActivitiesIfPossible() {
