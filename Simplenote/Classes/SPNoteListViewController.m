@@ -456,9 +456,9 @@
     if (!cell) {
         // this shouldn't be needed, but offscreen collection view cells are sometimes called on
         // and this can lead to an occasional crash
-        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:cellIdentifier];
+        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -468,17 +468,19 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    if (!note.preview)
+    if (!note.preview) {
         [note createPreview];
+    }
     
+    UIColor *previewColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
-    [attributedContent addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+    [attributedContent addChecklistAttachmentsForColor:previewColor];
     
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            _pinImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            _pinImage = [[[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
+            _pinSearchImage = [[[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
         }
         
         
@@ -497,6 +499,9 @@
         [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
+
+    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
