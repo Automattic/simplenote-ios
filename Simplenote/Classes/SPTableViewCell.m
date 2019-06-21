@@ -21,6 +21,11 @@
 #import "SPNotifications.h"
 
 
+@interface SPTableViewCell ()
+@property (nonatomic, strong) UIImageView *accessoryImageView;
+@end
+
+
 @implementation SPTableViewCell
 
 - (void)dealloc {
@@ -52,7 +57,11 @@
         _previewView.isAccessibilityElement = NO;
         _previewView.clipsToBounds = NO;
         [self.contentView addSubview:_previewView];
-        
+
+        _accessoryImageView = [UIImageView new];
+        _accessoryImageView.contentMode = UIViewContentModeCenter;
+        self.accessoryView = _accessoryImageView;
+
         [self applyStyle];
         
         // add notification for condensed view
@@ -63,6 +72,29 @@
     }
     return self;
     
+}
+
+- (void)setAccessoryImage:(UIImage *)accessoryImage {
+    _accessoryImageView.image = accessoryImage;
+    [self resizeAccessoryImageView:accessoryImage.size];
+}
+
+- (UIImage*)accessoryImage {
+    return _accessoryImageView.image;
+}
+
+- (UIColor *)accessoryTintColor {
+    return _accessoryImageView.tintColor;
+}
+
+- (void)setAccessoryTintColor:(UIColor *)accessoryTintColor {
+    _accessoryImageView.tintColor = accessoryTintColor;
+}
+
+- (void)resizeAccessoryImageView:(CGSize)newSize {
+    CGRect frame = _accessoryImageView.frame;
+    frame.size = newSize;
+    _accessoryImageView.frame = frame;
 }
 
 - (void)applyStyle {

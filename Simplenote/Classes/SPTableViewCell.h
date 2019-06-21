@@ -12,6 +12,8 @@
 
 @interface SPTableViewCell : UITableViewCell 
 
+@property (nonatomic, strong) UIImage *accessoryImage;
+@property (nonatomic, strong) UIColor *accessoryTintColor;
 @property (nonatomic, strong) SPTextView *previewView;
 
 - (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast;
