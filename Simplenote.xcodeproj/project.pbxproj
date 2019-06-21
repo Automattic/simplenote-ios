@@ -138,6 +138,7 @@
 		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00522B03CBB003F85CB /* Extractors.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
+		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */; };
@@ -352,6 +353,7 @@
 		B56AA00522B03CBB003F85CB /* Extractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractors.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
+		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B582189B1FCC45170094ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -810,14 +812,15 @@
 		B569DBFE1C03411500EC1FE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
-				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
-				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
+				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
+				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
-				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
+				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
+				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1554,6 +1557,7 @@
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
+				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
