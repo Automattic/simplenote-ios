@@ -16,9 +16,9 @@
 #import "SPOptionsViewController.h"
 #import "SPInteractiveTextStorage.h"
 #import "UIDevice+Extensions.h"
-#import "UIView+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "SPNotifications.h"
+#import "Simplenote-Swift.h"
 
 
 @interface SPTableViewCell ()
