@@ -1,7 +1,7 @@
 4.9.0
 =====
-
+-   Simplenote now works with Siri shortcuts allowing you to open the app, open existing notes, and create new notes directly from Siri
 
 4.8.0
------
+=====
 -   The Notes List can now be sorted by creation and modification dates.

@@ -285,23 +285,10 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
 #else
-    - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
 #endif
-    NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
-    if (uniqueIdentifier == nil) {
-        return false;
-    }
-    
-    SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
-    Note *note = [noteBucket objectForKey:uniqueIdentifier];
-    
-    if (note == nil) {
-        return false;
-    }
-    
-    [self presentNote:note];
-    
-    return true;
+
+    return [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
 - (void)onboardingDidFinish:(NSNotification *)notification
@@ -558,7 +545,11 @@
     
     // Remove WordPress token
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
-    
+
+    // Remove Siri Shortcuts
+    [[ShortcutsHandler shared] unregisterSimplenoteActivities];
+
+    // Actual Simperium Logout
     double delayInSeconds = 0.75;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -613,6 +604,9 @@
     
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
+
+    // Shortcuts!
+    [[ShortcutsHandler shared] registerSimplenoteActivities];
 
     // Now that the user info is present, cache it for use by the crash logging system.
     // See the docs there for details on why this is necessary.
@@ -822,6 +816,24 @@
     }
     
     return YES;
+}
+
+- (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
+{
+    NSString *bucketName = NSStringFromClass([Note class]);
+    SPBucket *noteBucket = [_simperium bucketForName:bucketName];
+    Note *note = [noteBucket objectForKey:uuid];
+
+    if (note == nil) {
+        return;
+    }
+
+    [self presentNote:note];
+}
+
+- (void)presentNewNoteEditor
+{
+    [self presentNote:nil];
 }
 
 - (void)presentNote:(Note *)note
