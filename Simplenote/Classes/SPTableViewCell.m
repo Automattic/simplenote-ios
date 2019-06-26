@@ -39,7 +39,7 @@
         
         self.clipsToBounds = YES;
         self.contentView.clipsToBounds = NO;
-        
+
         // setup preview view
         CGRect frame = self.bounds;
         
@@ -127,15 +127,29 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-    if ([UIDevice isPad]) {
-        CGRect frame = self.bounds;
-        
-        if (_previewView) {
-            _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
-        }
-        self.contentView.frame = frame;
+
+    /// Note:
+    /// We check if we're on an iPad device because of its multitasking capabilities.
+    /// We just cannot check if we're in Regular x Regular. WHY? because the user may resize the window,
+    /// and we'll end up stuck with the wrong frame sizes!
+    ///
+    if (![UIDevice isPad]) {
+        return;
     }
+
+    CGRect frame = self.bounds;
+    self.contentView.frame = frame;
+
+    _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
+
+    self.accessoryView.frame = [self adjustAccessoryViewFrameLocation:self.accessoryView.frame
+                                                    afterContentFrame:_previewView.frame];
+}
+
+- (CGRect)adjustAccessoryViewFrameLocation:(CGRect)accessoryFrame afterContentFrame:(CGRect)contentFrame {
+    CGRect output = accessoryFrame;
+    output.origin.x = CGRectGetMaxX(contentFrame);
+    return output;
 }
 
 - (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast {
@@ -147,22 +161,27 @@
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self];
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     CGFloat verticalPadding = [theme floatForKey:@"noteVerticalPadding"];
-    
+
     // calculate width of view based on max width
     CGFloat previewWidth = width - 2 * padding;
-    if (maxWidth > 0 && previewWidth > maxWidth)
+    if (maxWidth > 0 && previewWidth > maxWidth) {
         previewWidth = maxWidth;
-    
+    }
+
+    // Acccomodate for Accessory Width
+    CGFloat accessoryWidth = self.accessoryImage.size.width;
+
     CGFloat height;
-    if (fast)
+    if (fast) {
         height = self.bounds.size.height - verticalPadding;
-    else
+    }
+    else {
         height = [_previewView sizeThatFits:CGSizeMake(previewWidth, CGFLOAT_MAX)].height;
-    
-    
+    }
+
     return CGRectMake((width - previewWidth) / 2.0,
                       verticalPadding,
-                      previewWidth,
+                      previewWidth - accessoryWidth,
                       height + (fast ? 15.0 : 0.0));
 }
 
