@@ -252,8 +252,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     
-    if (width - 2 * padding > maxWidth && maxWidth > 0)
+    if (width - 2 * padding > maxWidth && maxWidth > 0) {
         padding = (width - maxWidth) / 2.0;
+    }
     
     return width - 2 * padding;
 }
