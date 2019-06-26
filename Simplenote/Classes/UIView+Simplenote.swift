@@ -12,11 +12,4 @@ extension UIView {
     func isHorizontallyCompact() -> Bool {
         return traitCollection.horizontalSizeClass == .compact
     }
-
-    /// Indicates if the receiver is Regular x Regular (Vertically and Horizontally)
-    ///
-    @objc
-    func isRegularByRegular() -> Bool {
-        return traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
-    }
 }
