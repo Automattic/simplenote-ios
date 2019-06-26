@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
@@ -452,7 +452,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SPTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+
     if (!cell) {
         // this shouldn't be needed, but offscreen collection view cells are sometimes called on
         // and this can lead to an occasional crash
@@ -1071,7 +1071,7 @@
 
 - (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
     
-    BOOL isVoiceOverRunning =UIAccessibilityIsVoiceOverRunning();
+    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
     self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
 	
 	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
