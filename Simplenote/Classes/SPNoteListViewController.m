@@ -479,8 +479,9 @@
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            _pinImage = [[[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [[[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            _pinImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
+            _pinSearchImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
         }
         
         
