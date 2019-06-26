@@ -44,8 +44,7 @@
         CGRect frame = self.bounds;
         
         _previewView = [[SPTextView alloc] init];
-        _previewView.frame = [self previewViewRectForWidth:frame.size.width
-                                                     fast:YES];
+        _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
         
         _previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _previewView.scrollEnabled = NO;
@@ -125,7 +124,7 @@
 
 
 - (void)layoutSubviews {
-    
+
     [super layoutSubviews];
 
     /// Note:
@@ -138,12 +137,18 @@
     }
 
     CGRect frame = self.bounds;
+
+    CGFloat accessoryWidth = self.accessoryImage.size.width;
+    CGRect previewFrame = [self previewViewRectForWidth:frame.size.width fast:YES accessoryWidth:accessoryWidth];
+    CGRect accessoryFrame = [self adjustAccessoryViewFrameLocation:self.accessoryView.frame
+                                                 afterContentFrame:previewFrame];
+
+    /// Note II:
+    /// The order in which we set the frames is actually important. Setting the frame at last causes autosizingMask to kick in.
+    ///
     self.contentView.frame = frame;
-
-    _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
-
-    self.accessoryView.frame = [self adjustAccessoryViewFrameLocation:self.accessoryView.frame
-                                                    afterContentFrame:_previewView.frame];
+    self.accessoryView.frame = accessoryFrame;
+    _previewView.frame = previewFrame;
 }
 
 - (CGRect)adjustAccessoryViewFrameLocation:(CGRect)accessoryFrame afterContentFrame:(CGRect)contentFrame {
@@ -153,6 +158,10 @@
 }
 
 - (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast {
+    return [self previewViewRectForWidth:width fast:fast accessoryWidth:CGRectZero.size.width];
+}
+
+- (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast accessoryWidth:(CGFloat)accessoryWidth {
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
@@ -167,9 +176,6 @@
     if (maxWidth > 0 && previewWidth > maxWidth) {
         previewWidth = maxWidth;
     }
-
-    // Acccomodate for Accessory Width
-    CGFloat accessoryWidth = self.accessoryImage.size.width;
 
     CGFloat height;
     if (fast) {
