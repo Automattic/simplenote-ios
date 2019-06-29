@@ -519,6 +519,12 @@ NSInteger const ChecklistCursorAdjustment = 2;
                 SPTextAttachment *attachment = (SPTextAttachment *)value;
                 BOOL wasChecked = attachment.isChecked;
                 [attachment setIsChecked:!wasChecked];
+
+                if (self.selectedRange.location == self.text.length) {
+                    // If the current selection is the end of the note, the keyboard has never shown,
+                    // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
+                    self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+                }
                 [self.delegate textViewDidChange:self];
                 [self.layoutManager invalidateDisplayForCharacterRange:range];
                 recognizer.cancelsTouchesInView = YES;
