@@ -130,6 +130,7 @@
 		B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B557381F1AB8950A006043E4 /* NSDate+Helper.m */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B55E428E22A1C0B90018C0CE /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */; };
+		B568596322C56DBB00F2F13C /* SnapshotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
 		B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */; };
 		B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFB22AECC15003F85CB /* Extractor.swift */; };
@@ -344,6 +345,7 @@
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VSTheme+Keys.swift"; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotRenderer.swift; path = Classes/SnapshotRenderer.swift; sourceTree = "<group>"; };
 		B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSExtensionContext+Simplenote.swift"; sourceTree = "<group>"; };
 		B56A9FFB22AECC15003F85CB /* Extractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
 		B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtractor.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 				E235CE3417CBAC1400F5AE02 /* SPTransitionSnapshot.m */,
 				17C421CD1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.h */,
 				17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */,
+				B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -1579,6 +1582,7 @@
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
+				B568596322C56DBB00F2F13C /* SnapshotRenderer.swift in Sources */,
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
