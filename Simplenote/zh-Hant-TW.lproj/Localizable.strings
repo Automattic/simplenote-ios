@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=1; plural=0; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: zh_TW */
+
+/* Number of found search results */
 "%d Result" = "%d 個搜尋結果";
 
 /* Number of found search results */
@@ -25,14 +30,23 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "新增協作者…";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "標籤…";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "新增標籤";
 
 /* Title of option to display all notes */
-"All Notes" = "所有筆記";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "已經有帳號了？";
+
+/* No comment provided by engineer. */
+"Back" = "上一步";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "註冊即代表你同意我們的「服務條款」»";
 
 /* No comment provided by engineer. */
 "Cancel" = "取消";
@@ -44,10 +58,13 @@
 "Collaborators" = "協作者";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "精簡版筆記清單";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "確認";
+
+/* Ratings View: Contact */
+"Contact" = "聯絡";
 
 /* No comment provided by engineer. */
 "Could Be Better" = "可以再好一點";
@@ -58,6 +75,9 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "無法使用提供的電子郵件地址和密碼登入。";
 
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "你可以告訴我們哪裡該改進嗎？";
+
 /* No comment provided by engineer. */
 "Create a new note" = "建立新筆記";
 
@@ -66,6 +86,12 @@
 
 /* Option to enable the dark app theme. */
 "Dark Theme" = "深色系佈景主題";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "偵錯";
+
+/* Permanent Delete */
+"Delete" = "刪除";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "收起鍵盤";
@@ -91,14 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "輸入你的密碼";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "是否無法存取 Simplenote？重新安裝應用程式並登入帳號即可再次存取 Simplenote。";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "利用即時搜尋和簡單的標籤，快速找到筆記。";
 
 /* Forgot Password */
-"Forgot password? »" = "忘了密碼？»";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "開始使用";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?
+\nIt really helps." = "太棒了！你可以給我們一些回饋嗎？\n\n\n您的回饋會使我們更好";
 
 /* Noun - the version history of a note */
 "History" = "歷史紀錄";
@@ -107,13 +140,31 @@
 "History..." = "歷史紀錄…";
 
 /* No comment provided by engineer. */
+"How can we help?" = "需要什麼協助？";
+
+/* No comment provided by engineer. */
 "I Like It" = "我喜歡";
+
+/* No comment provided by engineer. */
+"Leave a Review" = "留下評語";
+
+/* Month and day date formatter */
+"MMM d" = "MMM d";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "MMM d, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "MMM d, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "選單";
 
 /* Label to create a new note */
-"New note" = "新增筆記";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "沒有筆記";
@@ -121,11 +172,14 @@
 /* Message shown when no notes match a search string */
 "No Results" = "沒有任何搜尋結果";
 
+/* No comment provided by engineer. */
+"No Thanks" = "不用了，謝謝";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "筆記已發表";
 
 /* No comment provided by engineer. */
-"Note not published" = "筆記未發表";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "筆記";
@@ -169,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "喜好設定";
 
+/* Markdown Preview */
+"Preview" = "預覽";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "發表";
 
@@ -208,8 +265,14 @@
 /* Restore a note to a previous version */
 "Restore Note" = "還原筆記";
 
+/* Title displayed in the Option's Security section. */
+"Security" = "安全性";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "傳送";
+
+/* No comment provided by engineer. */
+"Send Feedback" = "傳送回饋意見";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "設定密碼";
@@ -221,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "分享清單、張貼說明，或是發表你的想法，都沒問題。";
 
 /* No comment provided by engineer. */
-"Share note" = "分享筆記";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "側選單";
@@ -241,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "註冊";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "登出將會刪除任何尚未同步的備註。登入網頁應用程式即可驗證已同步的備註。";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "以字母排序筆記";
 
 /* Message shown in first launch view */
 "Stay organized" = "有條不紊";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "標籤…";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "標籤：%@";
@@ -266,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "垃圾桶";
+"Trash" = "垃圾桶";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "移至垃圾桶";
+"Trash" = "移至垃圾桶";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "關閉密碼";
@@ -285,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "正在取消發表...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "偵測到尚未同步的備註";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "隨時隨地都可使用";
@@ -304,6 +370,9 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
 
+/* No comment provided by engineer. */
+"Your Email:" = "你的電子郵件：";
+
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "你的電子郵件地址無效。";
 
@@ -311,55 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "你的筆記會在你所有的裝置上更新。不用按按鈕。就是這麼簡單好用。";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "將其他人加入協作";
+"Enable others to collaborate" = "將其他人加入協作";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "新增電子郵件地址，將此筆記與他人分享。這樣雙方都能變更筆記內容。";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "新增電子郵件地址，將此筆記與他人分享。這樣雙方都能變更筆記內容。";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "此筆記已在另一部裝置上刪除。";
+"This note was deleted on another device." = "此筆記已在另一部裝置上刪除。";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "將筆記還原至先前版本";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote 可讓你輕鬆作筆記，記下備忘、各式清單、想法等。你的筆記內容會同步至你所有的裝置，而且免費。\n\nSimplenote 給你快速有效率的使用體驗。開啟程式、寫下想法，大功告成。當你的筆記越來越多時，可以利用搜尋功能立即找出筆記，更可使用標籤和釘選功能妥善整理。你也可以分享筆記並將其發表，讓更多人知道。\n\n要瞭解 Simplenote 的最好方式就是親身體驗。系統將會要求你建立帳號。如此一來你的筆記就能在網路上備份和自動同步。\n\n註冊完後，不妨著手建立一些筆記吧！接著前往 simplenote.com 將 Simplenote 下載至其他裝置。";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "";
+"Restore note to previous version" = "將筆記還原至先前版本";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "顯示筆記選項";
+"Show options for note" = "顯示筆記選項";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "關閉目前筆記";
+"Close current note" = "關閉目前筆記";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "分享目前筆記的內容";
+"Share the content of the current note" = "分享目前筆記的內容";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "將標籤新增至目前筆記";
+"Add a tag to the current note" = "將標籤新增至目前筆記";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "移除目前筆記的標籤";
+"Remove tag from the current note" = "移除目前筆記的標籤";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "將目前筆記移至垃圾桶";
+"Move the current note to trash" = "將目前筆記移至垃圾桶";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "連線至網際網路以存取先前版本";
+"Connect to the Internet to Access Previous Versions" = "連線至網際網路以存取先前版本";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "切換至此版本";
+"Switch to this version" = "切換至此版本";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "正在擷取此版本";
+"Fetching version" = "正在擷取此版本";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "歡迎使用 Simplenote iOS 版！\n\n若要新增筆記，請點選加號按鈕。\n\n撥動清單即可瀏覽你的筆記。點選標題可瀏覽筆記，然後點選內容則可進行變更。\n\n你可以在筆記清單頂端的搜尋欄位內輸入關鍵字搜尋你全部的筆記。\n\n點選左上方的箭號按鈕或撥動筆記清單可檢視標籤。在筆記編輯器底部可將標籤新增至筆記，然後使用側選單可協助你妥善整理筆記。\n\n若有需要，還有更多筆記選項可供使用。你可以將其他人新增為筆記的協作者，或是將筆記發表至網頁。\n\n前往 http:\/\/simplenote.com 將 Simplenote 下載至你的 Mac、Android 裝置或在網頁瀏覽器中使用。你的筆記將會隨時隨地保持更新。";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "歡迎使用 Simplenote iOS 版！\n\n若要新增筆記，請點選加號按鈕。\n\n撥動清單即可瀏覽你的筆記。點選標題可瀏覽筆記，然後點選內容則可進行變更。\n\n你可以在筆記清單頂端的搜尋欄位內輸入關鍵字搜尋你全部的筆記。\n\n點選左上方的箭號按鈕或撥動筆記清單可檢視標籤。在筆記編輯器底部可將標籤新增至筆記，然後使用側選單可協助你妥善整理筆記。\n\n若有需要，還有更多筆記選項可供使用。你可以將其他人新增為筆記的協作者，或是將筆記發表至網頁。\n\n前往 http:\/\/simplenote.com 將 Simplenote 下載至你的 Mac、Android 裝置或在網頁瀏覽器中使用。你的筆記將會隨時隨地保持更新。";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "你有没有进入Simplenote？ 您可以通过重新安装应用并登录到您的帐户来重新获得访问权限。";
-
-/* Permanent Delete */
-"Delete" = "刪除";

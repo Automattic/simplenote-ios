@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=n != 1; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: sv_SE */
+
+/* Number of found search results */
 "%d Result" = "%d sökresultat";
 
 /* Number of found search results */
@@ -25,6 +30,9 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Lägg till ny redigerare...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Etikett…";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Lägg till etikett";
 
@@ -33,6 +41,9 @@
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Har du redan ett konto?";
+
+/* No comment provided by engineer. */
+"Back" = "Tillbaka";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Genom att skapa ett konto godkänner du användaravtalet »";
@@ -47,13 +58,13 @@
 "Collaborators" = "Redigerare";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Enkel lista";
+"Condensed Note List" = "Komprimerad anteckningslista";
 
 /* Hint displayed in the password confirmation field */
-"Confirm" = "Repetera lösenord";
+"Confirm" = "Bekräfta";
 
 /* Ratings View: Contact */
-"Contact" = "Kontakta oss";
+"Contact" = "Kontakt";
 
 /* No comment provided by engineer. */
 "Could Be Better" = "Kunde vara bättre";
@@ -65,7 +76,7 @@
 "Could not login with the provided email address and password." = "Kunde inte logga in med den e-postadressen och det lösenordet.";
 
 /* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Vad kan vi förbättra?";
+"Could you tell us how we could improve?" = "Kan du berätta för oss vad vi kan förbättra?";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Skapa ny anteckning";
@@ -78,6 +89,9 @@
 
 /* Debug Screen Title Display internal debug status */
 "Debug" = "Felsök";
+
+/* Permanent Delete */
+"Delete" = "Ta bort";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Göm tangentbord";
@@ -103,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Ange lösenkod";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Har du förlorat åtkomsten till Simplenote? Du kan få åtkomst igen genom att installera om appen och logga in på ditt konto.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Hitta anteckningar snabbt genom att söka i realtid och använda etiketter.";
 
 /* Forgot Password */
-"Forgot password? »" = "Glömt ditt lösenord? »";
+"Forgot your password? »" = "Glömt ditt lösenord? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Kom igång";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "Vad kul! Kan du tänka dig att ge oss en bra recension?\n\nDet skulle verkligen uppskattas.";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "Vad kul! Kan du tänka dig att ge oss en bra recension?\\n\\nDet skulle verkligen uppskattas.";
 
 /* Noun - the version history of a note */
 "History" = "Historik";
@@ -161,7 +179,7 @@
 "Note Published" = "Anteckning publicerad";
 
 /* No comment provided by engineer. */
-"Note not published" = "Anteckningen kunde inte publiceras";
+"Note not published" = "Anteckning inte publicerad";
 
 /* Plural form of notes */
 "Notes" = "Anteckningar";
@@ -204,6 +222,9 @@
 
 /* No comment provided by engineer. */
 "Preferences" = "Alternativ";
+
+/* Markdown Preview */
+"Preview" = "Förhandsgranska";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Publicera";
@@ -251,7 +272,7 @@
 "Send" = "Skicka";
 
 /* No comment provided by engineer. */
-"Send Feedback" = "Säg vad du tycker";
+"Send Feedback" = "Skicka feedback";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "Ställ in lösenkod";
@@ -283,23 +304,23 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Skapa konto";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Utloggning kommer att radera alla osynkroniserade anteckningar. Du kan verifiera dina synkroniserade anteckningar genom att logga in på webbappen.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Sortera anteckningar alfabetiskt";
 
 /* Message shown in first launch view */
 "Stay organized" = "Håll ordning";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Ny etikett...";
-
 /* Text used to display the name of a tag */
 "Tag: %@" = "Etikett: %@";
 
 /* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Ett nätverksfel uppstod. Vänligen försök igen senare.";
+"There's a problem with the connection.  Please try again later." = "Det var ett problem med anslutningen. Försök igen senare.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "I dag";
+"Today" = "Idag";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Slå på\/av etiketter i sidopanelen";
@@ -308,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Papperskorgen";
+"Trash" = "Papperskorgen";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Kasta bort";
+"Trash" = "Kasta bort";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Stäng av lösenkod";
@@ -328,6 +349,9 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Slutar publicera...";
 
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Osynkroniserade anteckningar upptäckta";
+
 /* Message shown in first launch view */
 "Use it everywhere" = "Använd var som helst";
 
@@ -341,72 +365,59 @@
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
 
 /* Message shown in first launch view */
-"Work together" = "Redigera tillsammans";
+"Work together" = "Arbeta tillsammans";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "I går";
+"Yesterday" = "Igår";
 
 /* No comment provided by engineer. */
-"Your Email:" = "Din e-postadress:";
+"Your Email:" = "Din e-post:";
 
 /* Message displayed when email address is invalid */
-"Your email address is not valid." = "E-postadressen är ogiltig.";
+"Your email address is not valid." = "Din e-postadress är inte giltig.";
 
 /* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Dina anteckningar synkroniseras till alla dina enheter. Du behöver inte ställa in någonting. Det bara fungerar.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Gör så att andra kan hjälpa till och redigera";
+"Enable others to collaborate" = "Gör så att andra kan hjälpa till och redigera";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Denna anteckning har blivit borttagen på en annan enhet.";
+"This note was deleted on another device." = "Denna anteckning har blivit borttagen på en annan enhet.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Återställ anteckning till tidigare version";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote är ett enkelt sätt att hantera anteckningar, listor, idéer, med mera. Dina anteckningar synkroniseras med alla dina enheter helt gratis.\n\nSimplenote handlar om snabbhet och effektivitet. Öppna appen, skriv ner dina tankar och du är klar. När din samling av anteckningar växer kan du söka igenom allt i realtid och organisera med etiketter samt genom att nåla fast viktiga texter.\n\nDet bästa sättet att lära sig om Simplenote är att testa det. Du kommer att bli ombedd att skapa ett konto, detta gör att dina anteckningar säkerhetskopieras och synkroniseras automatiskt.\n\nNär du har skapat ett konto, testa att skapa några anteckningar! Gå sedan till simplenote.com för att ladda ner Simplenote för dina andra enheter.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "anteckningar,anteckning,synka,simplenote,simple,todo,list,att göra,inköpslista";
+"Restore note to previous version" = "Återställ anteckning till tidigare version";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Visa alternativ för anteckning";
+"Show options for note" = "Visa alternativ för anteckning";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Stäng anteckningen";
+"Close current note" = "Stäng nuvarande anteckning";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Dela innehållet i anteckningen";
+"Share the content of the current note" = "Dela innehåll i nuvarande anteckning";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Lägg till en etikett för anteckningen";
+"Add a tag to the current note" = "Lägg till en etikett för anteckningen";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Ta bort en etikett för anteckningen";
+"Remove tag from the current note" = "Ta bort etikett från den nuvarande anteckningen";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Kasta anteckningen i papperskorgen";
+"Move the current note to trash" = "Kasta anteckningen i papperskorgen";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Anslut till ett nätverk för att se tidigare versioner";
+"Connect to the Internet to Access Previous Versions" = "Anslut till ett nätverk för att se tidigare versioner";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Välj denna version";
+"Switch to this version" = "Välj denna version";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Hämtar version";
+"Fetching version" = "Hämtar version";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
-
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Har du förlorat tillgång till Simplenote? Du kan få åtkomst genom att du installerar appen och logga in på ditt konto.";
-
-/* Permanent Delete */
-"Delete" = "Radera";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
 

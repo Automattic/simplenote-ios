@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=1; plural=0; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: ja_JP */
+
+/* Number of found search results */
 "%d Result" = "%d件の検索結果";
 
 /* Number of found search results */
@@ -25,14 +30,20 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "共同編集者を追加";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "タグ ...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "タグを追加";
 
 /* Title of option to display all notes */
-"All Notes" = "すべてのノート";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "すでにアカウントを持ちですか ?";
+
+/* No comment provided by engineer. */
+"Back" = "戻る";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "登録すると、利用規約に合意したものとみなされます。»";
@@ -47,7 +58,7 @@
 "Collaborators" = "共同編集者";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "要約ノート一覧";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "確認";
@@ -79,6 +90,9 @@
 /* Debug Screen Title Display internal debug status */
 "Debug" = "デバッグ";
 
+/* Permanent Delete */
+"Delete" = "削除";
+
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "キーボードを閉じる";
 
@@ -103,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "パスコードを入力してください";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Simplenote にアクセスできなくなりましたか ?再びアクセスできるようにするには、アプリを再インストールしてアカウントにログインします。";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "インスタントサーチとシンプルなタグで、ノートをすばやく見つけることができます。";
 
 /* Forgot Password */
-"Forgot password? »" = "パスワードをお忘れですか ? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "スタート";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "ありがとうございます。良い評価をつけていただけませんか ?\n\nとても助かります。";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "ありがとうございます。レビューを書いてもらえると、とても助かります。";
 
 /* Noun - the version history of a note */
 "History" = "履歴";
@@ -128,13 +146,25 @@
 "I Like It" = "満足している";
 
 /* No comment provided by engineer. */
-"Leave a Review" = "レビューを残す";
+"Leave a Review" = "レビューを書く";
+
+/* Month and day date formatter */
+"MMM d" = "M月d日";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "M月d日 h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "yyyy年M月d日";
+
+/* Month and year date formatter */
+"MMM yyyy" = "yyyy年M月";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "メニュー";
 
 /* Label to create a new note */
-"New note" = "新規ノート";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "ノートがありません";
@@ -149,7 +179,7 @@
 "Note Published" = "ノートを公開しました";
 
 /* No comment provided by engineer. */
-"Note not published" = "非公開ノート";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "メモ";
@@ -192,6 +222,9 @@
 
 /* No comment provided by engineer. */
 "Preferences" = "設定";
+
+/* Markdown Preview */
+"Preview" = "プレビュー";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "公開";
@@ -251,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "リストを共有したり、指示を投稿したり、考えを公開したりしましょう。";
 
 /* No comment provided by engineer. */
-"Share note" = "ノートを共有";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "サイドバー";
@@ -271,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "登録";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "ログアウトすると、同期されていないメモはすべて削除されます。同期したメモを確認するには、Web アプリにログインします。";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "ABC順にノートを並べる";
+"Sort Notes Alphabetically" = "ABC 順にノートを並べる";
 
 /* Message shown in first launch view */
 "Stay organized" = "ノートを整理";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "タグ…";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "タグ: %@";
@@ -296,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "ゴミ箱";
+"Trash" = "ゴミ箱";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "ゴミ箱に移動";
+"Trash" = "ゴミ箱に移動";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "パスコードを無効化";
@@ -316,6 +349,9 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "非公開設定中…";
 
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "同期されていないメモが検出されました";
+
 /* Message shown in first launch view */
 "Use it everywhere" = "どこでも利用可能";
 
@@ -326,7 +362,7 @@
 "Welcome to Simplenote" = "Simplenote へようこそ";
 
 /* Ratings View */
-"What do you think about Simplenote?" = "Simplenote アプリについてどう思いますか ??";
+"What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
 
 /* Message shown in first launch view */
 "Work together" = "複数デバイス対応";
@@ -344,58 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "各種デバイスで常にノートが同期されます。ボタンをクリックする必要もなく、同期は自動的に完了します。";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "ノートの共同編集を有効化";
+"Enable others to collaborate" = "ノートの共同編集を有効化";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "このノートは他のデバイスから削除されました。";
+"This note was deleted on another device." = "このノートは他のデバイスから削除されました。";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "以前のバージョンにノートを復元";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote は簡単にノート、リスト、アイディアなどを書き留めることができるツールです。ノートはお持ちのデバイス間で無料同期できます。\n\nSimplenote ではスピードと効率性を優先させています。アプリを開き、何かを書き込むだけで終わりです。ノートが増えたらインスタントサーチやタグ、上部固定で整理することもできます。ノートを公開して他の人と共有することも可能です。\n\nSimplenote の使い方を知る一番の方法は使ってみることです。アカウントをを作れば、オンラインでノートをバックアップして自動同期できます。\n\nアカウント登録後、ノートを作ってみましょう。その後 simplenote.com で他のデバイス向け Simplenote クライアントアプリをダウンロードできます。";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "ノート,同期,simplenote,シンプル,TODO,リスト";
+"Restore note to previous version" = "以前のバージョンにノートを復元";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "ノートのオプションを表示";
+"Show options for note" = "ノートのオプションを表示";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "現在のノートを閉じる";
+"Close current note" = "現在のノートを閉じる";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "現在のノートのコンテンツを共有";
+"Share the content of the current note" = "現在のノートのコンテンツを共有";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "現在のノートにタグを追加";
+"Add a tag to the current note" = "現在のノートにタグを追加";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "現在のノートからタグを削除";
+"Remove tag from the current note" = "現在のノートからタグを削除";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "現在のノートをゴミ箱へ移動";
+"Move the current note to trash" = "現在のノートをゴミ箱へ移動";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
+"Connect to the Internet to Access Previous Versions" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "このバージョンにスイッチ";
+"Switch to this version" = "このバージョンにスイッチ";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "バージョンを取得中";
+"Fetching version" = "バージョンを取得中";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
-
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Simplenoteへのアクセスを失ったことはありますか？ アプリを再インストールしてアカウントにログインすることで、アクセスを取り戻すことができます。";
-
-/* Permanent Delete */
-"Delete" = "削除";
-
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
 
