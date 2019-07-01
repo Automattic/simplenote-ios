@@ -1,4 +1,9 @@
-﻿/* No comment provided by engineer. */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=(n > 1); */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: tr */
+
+/* Number of found search results */
 "%d Result" = "%d Sonuç";
 
 /* Number of found search results */
@@ -25,14 +30,23 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Etiketle…";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Etiket ekle";
 
 /* Title of option to display all notes */
-"All Notes" = "Tüm Notlar";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Hesabınız zaten var mı?";
+
+/* No comment provided by engineer. */
+"Back" = "Geri";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Kaydolmakla Hizmet Koşulları'nı kabul etmiş olursunuz »";
 
 /* No comment provided by engineer. */
 "Cancel" = "İptal";
@@ -44,10 +58,13 @@
 "Collaborators" = "Çalışma Arkadaşları";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Sıkıştırılmış Not Listesi";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "Onayla";
+
+/* Ratings View: Contact */
+"Contact" = "İletişim";
 
 /* No comment provided by engineer. */
 "Could Be Better" = "Daha İyi Olabilir";
@@ -58,6 +75,9 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
 
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
+
 /* No comment provided by engineer. */
 "Create a new note" = "Yeni not oluştur";
 
@@ -66,6 +86,12 @@
 
 /* Option to enable the dark app theme. */
 "Dark Theme" = "Koyu Tema";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Hata ayıklama";
+
+/* Permanent Delete */
+"Delete" = "Sil";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Klavyeyi kapat";
@@ -91,14 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Parolanızı girin";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Simplenote'a erişim sağlayamıyor musunuz? Uygulamayı yeniden yükleyip hesabınızda oturum açarak tekrar erişim elde edebilirsiniz.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Anında arama ve basit etiketlerle notları hızlı bir şekilde bulabilirsiniz.";
 
 /* Forgot Password */
-"Forgot password? »" = "Parolanızı mı unuttunuz? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Başlayın";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?
+\nIt really helps." = "";
 
 /* Noun - the version history of a note */
 "History" = "Geçmiş";
@@ -106,11 +139,32 @@
 /* Action - view the version history of a note */
 "History..." = "Geçmiş…";
 
+/* No comment provided by engineer. */
+"How can we help?" = "Nasıl yardımcı olabiliriz?";
+
+/* No comment provided by engineer. */
+"I Like It" = "Beğendim";
+
+/* No comment provided by engineer. */
+"Leave a Review" = "Görüşünüzü Paylaşın";
+
+/* Month and day date formatter */
+"MMM d" = "AAA g";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "g, AAA, sa:dkdk sn";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "g, AAA, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "AAA yyyy";
+
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menü";
 
 /* Label to create a new note */
-"New note" = "Yeni not";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Not Yok";
@@ -118,11 +172,14 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Sonuç Yok";
 
+/* No comment provided by engineer. */
+"No Thanks" = "Hayır, teşekkürler";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "Not Yayınlandı";
 
 /* No comment provided by engineer. */
-"Note not published" = "Not yayınlanmadı";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "Notlar";
@@ -166,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "Tercihler";
 
+/* Markdown Preview */
+"Preview" = "Önizleme";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Yayınla";
 
@@ -205,8 +265,14 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Notu Geri Yükle";
 
+/* Title displayed in the Option's Security section. */
+"Security" = "Güvenlik";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Gönder";
+
+/* No comment provided by engineer. */
+"Send Feedback" = "Geri Bildirim Gönder";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "Parolayı Ayarla";
@@ -218,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "Liste paylaşın, yönergeler gönderin veya düşüncelerinizi yayınlayın.";
 
 /* No comment provided by engineer. */
-"Share note" = "Notu paylaş";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Kenar çubuğu";
@@ -238,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Kaydol";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Notları Alfabetik Olarak Sırala";
 
 /* Message shown in first launch view */
 "Stay organized" = "Düzenli olun";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Etiket…";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Etiket: %@";
@@ -263,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Çöpe At";
+"Trash" = "Çöpe At";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Çöpe At";
+"Trash" = "Çöpe At";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Parolayı Kapat";
@@ -282,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Yayından kaldırılıyor...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Senkronize Edilmemiş Notlar Tespit Edildi";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "İstediğiniz yerde kullanın";
@@ -301,6 +370,9 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Dün";
 
+/* No comment provided by engineer. */
+"Your Email:" = "E-posta adresiniz:";
+
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "E-posta adresiniz geçerli değil.";
 
@@ -308,54 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Notlarınız tüm cihazlarınızda güncel kalır. Basılacak düğme yok. Kendiliğinden çalışır.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Diğer kişilerin iş birliği kurmasını sağlayın";
+"Enable others to collaborate" = "Diğer kişilerin iş birliği kurmasını sağlayın";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Bu not bir başka aygıtta silindi.";
+"This note was deleted on another device." = "Bu not bir başka aygıtta silindi.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Notu önceki sürüme geri yükle";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote notları, listeleri, fikirleri ve pek çok içeriği saklamanın kolay bir yoludur. Notlarınız ücretsiz olarak tüm cihazlarınızda eşitlenir.\n\nSimplenote deneyimi hız ve verimlilik demektir. Açıp düşüncelerinizi yazmanız yeterlidir. Biriken notlarınızda anında arama yapabilir, etiketler ve iğnelerle notlarınızın düzenli olmasını sağlayabilirsiniz. Ayrıca notlarınızı diğer kişilerle paylaşabilir ve yayınlayabilirsiniz.\n\nSimplenote hakkında bilgi edinmenin en iyi yolu kullanmayı denemektir. Önce bir hesap açmanız istenir. Hesap açtığınızda notlarınız çevrimiçi olarak yedeklenir ve otomatik olarak eşitlenir.\n\nOturum açtıktan sonra birkaç not oluşturmayı deneyin! Ardından simplenote.com adresine giderek diğer aygıtlarınıza da Simplenote uygulamasını indirin.";
+"Restore note to previous version" = "Notu önceki sürüme geri yükle";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Not seçeneklerini göster";
+"Show options for note" = "Not seçeneklerini göster";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Geçerli notu kapat";
+"Close current note" = "Geçerli notu kapat";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Geçerli notun içeriğini paylaş";
+"Share the content of the current note" = "Geçerli notun içeriğini paylaş";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Geçerli nota etiket ekle";
+"Add a tag to the current note" = "Geçerli nota etiket ekle";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Geçerli nottan etiket kaldır";
+"Remove tag from the current note" = "Geçerli nottan etiket kaldır";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Geçerli notu çöp kutusuna taşı";
+"Move the current note to trash" = "Geçerli notu çöp kutusuna taşı";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
+"Connect to the Internet to Access Previous Versions" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Bu sürümü değiştir";
+"Switch to this version" = "Bu sürümü değiştir";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Sürüm alınıyor";
+"Fetching version" = "Sürüm alınıyor";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "iOS için Simplenote’a hoş geldiniz!\n\nYeni bir not eklemek için artı düğmesine dokunun.\n\nNotlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.\n\nNot listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.\n\nSol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.\n\nGerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.\n\nSimplenote’u Mac’inizde, Android aygıtınızda veya http:\/\/simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "iOS için Simplenote’a hoş geldiniz!\n\nYeni bir not eklemek için artı düğmesine dokunun.\n\nNotlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.\n\nNot listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.\n\nSol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.\n\nGerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.\n\nSimplenote’u Mac’inizde, Android aygıtınızda veya http:\/\/simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
 
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Simplenote'a erişimi kaybettiniz mi? Uygulamayı tekrar yükleyip hesabınıza giriş yaparak tekrar erişebilirsiniz.";
-
-
-/* Permanent Delete */
-"Delete" = "Silmek";

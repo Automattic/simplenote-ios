@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=(n > 1); */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: pt_BR */
+
+/* Number of found search results */
 "%d Result" = "%d resultado";
 
 /* Number of found search results */
@@ -25,6 +30,9 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Adicionar novo colaborador";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "tag...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Adicionar tag";
 
@@ -33,6 +41,12 @@
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Já tem uma conta?";
+
+/* No comment provided by engineer. */
+"Back" = "Voltar";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Ao se registrar, você concorda com os nossos Termos de Serviço »";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancelar";
@@ -49,6 +63,9 @@
 /* Hint displayed in the password confirmation field */
 "Confirm" = "Confirmar";
 
+/* Ratings View: Contact */
+"Contact" = "Contato";
+
 /* No comment provided by engineer. */
 "Could Be Better" = "Poderia ser melhor";
 
@@ -58,6 +75,9 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Não foi possível fazer login com o endereço de email e senha fornecidos.";
 
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Poderia nos dizer o que podemos fazer para melhorar?";
+
 /* No comment provided by engineer. */
 "Create a new note" = "Criar uma nova anotação";
 
@@ -66,6 +86,12 @@
 
 /* Option to enable the dark app theme. */
 "Dark Theme" = "Tema Escuro";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Depurar";
+
+/* Permanent Delete */
+"Delete" = "Excluir";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Dispensar teclado";
@@ -91,14 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Insira sua senha";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Perdeu o acesso ao Simplenote? Você pode recuperá-lo ao reinstalar o aplicativo e entrar na sua conta.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Localize rapidamente suas anotações com busca instantânea e tags simplificadas.";
 
 /* Forgot Password */
-"Forgot password? »" = "Esqueceu sua senha? »";
+"Forgot your password? »" = "Esqueceu sua senha? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Começar";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?
+\nIt really helps." = "Legal! Que tal deixar suas impressoes sobre o aplicativo?\n\nIsso realmente ajudará!";
 
 /* Noun - the version history of a note */
 "History" = "Histórico";
@@ -107,7 +140,25 @@
 "History..." = "Histórico";
 
 /* No comment provided by engineer. */
+"How can we help?" = "Como podemos ajudar?";
+
+/* No comment provided by engineer. */
 "I Like It" = "Curti";
+
+/* No comment provided by engineer. */
+"Leave a Review" = "Faça uma avaliação";
+
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
@@ -120,6 +171,9 @@
 
 /* Message shown when no notes match a search string */
 "No Results" = "Nenhum resultado";
+
+/* No comment provided by engineer. */
+"No Thanks" = "Não, obrigado!";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "Anotação publicada";
@@ -169,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "Preferências";
 
+/* Markdown Preview */
+"Preview" = "Visualizar";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Publicar";
 
@@ -208,8 +265,14 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Restaurar anotação";
 
+/* Title displayed in the Option's Security section. */
+"Security" = "Segurança";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Enviar";
+
+/* No comment provided by engineer. */
+"Send Feedback" = "Enviar feedback";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "Definir senha";
@@ -241,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Registrar-se";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Sair resultará na exclusão de quaisquer anotações não sincronizadas. Para verificar suas anotações sincronizadas, entre no Aplicativo para Web.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Exibir em ordem alfabética";
 
 /* Message shown in first launch view */
 "Stay organized" = "Organize-se";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Add a tag...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Tag: %@";
@@ -266,10 +329,10 @@
 "Touch ID" = "Identificação por toque";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Lixeira";
+"Trash" = "Lixeira";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Lixeira";
+"Trash" = "Lixeira";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Desativar senha";
@@ -285,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Cancelando publicação...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Anotações não sincronizadas detectadas";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "Use em qualquer lugar";
@@ -304,6 +370,9 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Ontem";
 
+/* No comment provided by engineer. */
+"Your Email:" = "Seu email:";
+
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "Seu endereço de email é inválido.";
 
@@ -311,53 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Suas anotações são atualizadas automaticamente em todos os dispositivos. Sem apertar nenhum botão. Simples assim.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Habilitar outros a colaborar";
+"Enable others to collaborate" = "Habilitar outros a colaborar";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Adicione um endereço de email para compartilhar esta anotação com alguém. Em seguida, ambos poderão fazer alterações.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Adicione um endereço de email para compartilhar esta anotação com alguém. Em seguida, ambos poderão fazer alterações.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Esta anotação foi excluída em outro dispositivo.";
+"This note was deleted on another device." = "Esta anotação foi excluída em outro dispositivo.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Restaurar anotação para versão anterior";
-
-/* iTunes app description */
-"iTunes-description" = "O Simplenote é uma maneira fácil de guardar anotações, listas, ideias e muito mais. Suas anotações ficam em sincronia com todos os seus dispositivos gratuitamente.\n\nA experiência do Simplenote se resume à velocidade e eficiência. Abra-o, escreva o que desejar e pronto. Conforme o conjunto de suas anotações aumentar, você poderá pesquisá-las instantaneamente e mantê-las organizadas com tags e pins. Você também pode compartilhar anotações e publicá-las para outras pessoas.\n\nA melhor forma de conhecer o Simplenote é experimentando. Você será solicitado a criar uma conta. Isso permite que o backup online e a sincronização de suas anotações sejam feitos imediatamente.\n\nApós o registro, tente criar algumas anotações! Em seguida, acesse simplenote.com para baixar o Simplenote em outros dispositivos.";
+"Restore note to previous version" = "Restaurar anotação para versão anterior";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Mostrar opções para anotação";
+"Show options for note" = "Mostrar opções para anotação";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Fechar anotação atual";
+"Close current note" = "Fechar anotação atual";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Compartilhar o conteúdo da anotação atual";
+"Share the content of the current note" = "Compartilhar o conteúdo da anotação atual";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Adicionar uma tag à anotação atual";
+"Add a tag to the current note" = "Adicionar uma tag à anotação atual";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Remover tag da anotação atual";
+"Remove tag from the current note" = "Remover tag da anotação atual";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Mover a anotação atual para a lixeira";
+"Move the current note to trash" = "Mover a anotação atual para a lixeira";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Conecte-se à Internet para acessar as versões anteriores";
+"Connect to the Internet to Access Previous Versions" = "Conecte-se à Internet para acessar as versões anteriores";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Alternar para essa versão";
+"Switch to this version" = "Alternar para essa versão";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Obtendo a versão";
+"Fetching version" = "Obtendo a versão";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Bem-vindo ao Simplenote para iOS!\n\nPara adicionar uma anotação, toque no botão de adição.\n\nMexa na lista para procurar suas anotações. Toque em um título para visualizar uma anotação e no conteúdo para alterá-lo.\n\nVocê pode pesquisar todas as suas anotações tocando no campo de pesquisa no topo da lista de anotações.\n\nToque no botão de seta na parte superior à esquerda ou deslize os dedos pela lista de anotações para visualizar suas tags. Você pode adicionar tags a uma anotação na parte inferior do editor de anotações e usar a barra lateral para ajudá-lo com a organização.\n\nHá mais opções de anotação, se necessário. Você pode adicionar outras pessoas como colaboradores a uma anotação ou publicá-la como uma página na web.\n\nUse o Simplenote no seu dispositivo Mac, Android ou no navegador em http:\/\/simplenote.com. Suas anotações serão atualizadas automaticamente em qualquer lugar.";
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Você perdeu o acesso ao Simplenote? Você pode recuperar o acesso reinstalando o aplicativo e efetuando login em sua conta.";
-
-/* Permanent Delete */
-"Delete" = "Excluir";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Bem-vindo ao Simplenote para iOS!\n\nPara adicionar uma anotação, toque no botão de adição.\n\nMexa na lista para procurar suas anotações. Toque em um título para visualizar uma anotação e no conteúdo para alterá-lo.\n\nVocê pode pesquisar todas as suas anotações tocando no campo de pesquisa no topo da lista de anotações.\n\nToque no botão de seta na parte superior à esquerda ou deslize os dedos pela lista de anotações para visualizar suas tags. Você pode adicionar tags a uma anotação na parte inferior do editor de anotações e usar a barra lateral para ajudá-lo com a organização.\n\nHá mais opções de anotação, se necessário. Você pode adicionar outras pessoas como colaboradores a uma anotação ou publicá-la como uma página na web.\n\nUse o Simplenote no seu dispositivo Mac, Android ou no navegador em http:\/\/simplenote.com. Suas anotações serão atualizadas automaticamente em qualquer lugar.";
 

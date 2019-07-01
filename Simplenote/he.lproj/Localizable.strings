@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=n != 1; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: he_IL */
+
+/* Number of found search results */
 "%d Result" = "תוצאה %d";
 
 /* Number of found search results */
@@ -25,14 +30,23 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "הוספת שותף עריכה חדש...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "תגית...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "הוספת תגית";
 
 /* Title of option to display all notes */
-"All Notes" = "כל הפתקים";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "יש לך כבר חשבון?";
+
+/* No comment provided by engineer. */
+"Back" = "חזרה";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "הרשמתך מהווה הסכמה לתנאי השימוש שלנו »";
 
 /* No comment provided by engineer. */
 "Cancel" = "ביטול";
@@ -44,10 +58,13 @@
 "Collaborators" = "שותפי עריכה";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "רשימת פתקים מכווצת";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "פעם נוספת";
+
+/* Ratings View: Contact */
+"Contact" = "איש קשר";
 
 /* No comment provided by engineer. */
 "Could Be Better" = "יכול להיות יותר טוב";
@@ -58,6 +75,9 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "לא ניתן להיכנס באמצעות כתובת האימייל והסיסמה שסופקו.";
 
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "באפשרותך לומר לנו כיצד נוכל להשתפר?";
+
 /* No comment provided by engineer. */
 "Create a new note" = "יצירת פתק חדש";
 
@@ -66,6 +86,12 @@
 
 /* Option to enable the dark app theme. */
 "Dark Theme" = "ערכת עיצוב כהה";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "איתור באגים";
+
+/* Permanent Delete */
+"Delete" = "מחיקה";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "ביטול מקלדת";
@@ -91,14 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "האם אבדה לך הגישה ל-Simplenote? אפשר להשיב את הגישה באמצעות התקנה חוזרת של האפליקציה וכניסה לחשבון שלך.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "איתור פתקים במהירות באמצעות חיפוש מהיר ותגיות פשוטות.";
 
 /* Forgot Password */
-"Forgot password? »" = "שכחת סיסמה? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "התחלה";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?
+\nIt really helps." = "נהדר! תוכל\/י אולי לדרג אותנו?\n\n\nזה ממש יעזור.";
 
 /* Noun - the version history of a note */
 "History" = "היסטוריה";
@@ -107,13 +140,31 @@
 "History..." = "היסטוריה...";
 
 /* No comment provided by engineer. */
+"How can we help?" = "כיצד נוכל לעזור?";
+
+/* No comment provided by engineer. */
 "I Like It" = "אהבתי את זה";
+
+/* No comment provided by engineer. */
+"Leave a Review" = "השארת חוות דעת";
+
+/* Month and day date formatter */
+"MMM d" = "d ‏MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d ‏MMM, ‏hh:mm";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d ‏MMM, ‏yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM ‏yyyy";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "תפריט";
 
 /* Label to create a new note */
-"New note" = "פתק חדש";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "אין פתקים";
@@ -121,11 +172,14 @@
 /* Message shown when no notes match a search string */
 "No Results" = "אין תוצאות";
 
+/* No comment provided by engineer. */
+"No Thanks" = "לא תודה";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "הפתק פורסם";
 
 /* No comment provided by engineer. */
-"Note not published" = "הפתק לא פורסם";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "פתקים";
@@ -169,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "העדפות";
 
+/* Markdown Preview */
+"Preview" = "תצוגה מקדימה";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "לפרסם";
 
@@ -208,8 +265,14 @@
 /* Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
 
+/* Title displayed in the Option's Security section. */
+"Security" = "אבטחה";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "שליחה";
+
+/* No comment provided by engineer. */
+"Send Feedback" = "שליחת משוב";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "הגדרת קוד סיסמה";
@@ -221,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "שיתוף רשימה, פרסום הנחיות או פרסום מחשבות.";
 
 /* No comment provided by engineer. */
-"Share note" = "שיתוף פתק";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "סרגל צדדי";
@@ -241,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "הרשמה";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "לאחר ההתנתקות, כל הפתקים שלא סוכרנו יימחקו. אפשר לאמת אילו פתקים סונכרנו באמצעות התחברות לאפליקציית הרשת.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "מיון פתקים בסדר אלפביתי";
 
 /* Message shown in first launch view */
 "Stay organized" = "שמירה על ארגון";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "תגית...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "תגית: ‎%@";
@@ -266,10 +329,10 @@
 "Touch ID" = "מזהה מגע";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "העברה לפח";
+"Trash" = "העברה לפח";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "העברה לפח";
+"Trash" = "העברה לפח";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "השבתת קוד סיסמה";
@@ -285,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "ביטול פרסום...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "אותרו הערות שלא סונכרנו";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "להשתמש בו בכל מקום";
@@ -304,6 +370,9 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
 
+/* No comment provided by engineer. */
+"Your Email:" = "כתובת האימייל שלך:";
+
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "כתובת האימייל שלך אינה חוקית.";
 
@@ -311,53 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "הפתקים שלך תמיד מעודכנים, בכל המכשירים שלך. בלי לחיצות מיותרות. זה פשוט עובד.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "מאפשר לאחרים לשתף פעולה";
+"Enable others to collaborate" = "מאפשר לאחרים לשתף פעולה";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "יש להוסיף כתובת אימייל כדי לשתף פתק זה עם מישהו. לאחר מכן תוכלו שניכם לערוך בו שינויים.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "יש להוסיף כתובת אימייל כדי לשתף פתק זה עם מישהו. לאחר מכן תוכלו שניכם לערוך בו שינויים.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "הפתק נמחק במכשיר אחר.";
+"This note was deleted on another device." = "הפתק נמחק במכשיר אחר.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "החזרת פתק לגרסה הקודמת";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote היא אפליקציה שמאפשרת לשמור פתקים, רשימות, רעיונות ועוד בקלות רבה. הפתקים נשארים מסונכרנים עם כל המכשירים שלך, בחינם.\n\nחווית Simplenote מתמקדת במהירות וביעילות. פותחים את האפליקציה, כותבים כמה מחשבות, וזה הכל... ככל שאוסף הפתקים שלך גדל, אפשר יהיה לחפש בהם באופן מיידי ולשמור אותם מאורגנים בעזרת תגיות ונעצים. אפשר גם לשתף פתקים ולפרסם אותם עבור אנשים אחרים.\n\nהדרך הטובה ביותר ללמוד על אפליקציית Simplenote היא לנסות אותה. תופיע בקשה ליצור חשבון. באופן זה ניתן לגבות את הפתקים באופן מקוון ולסנכרן אותם באופן אוטומטי.\n\nלאחר ההרשמה, מומלץ לנסות ליצור מספר פתקים! לאחר מכן יש לעבור אל simplenote.com כדי להוריד את Simplenote לשאר המכשירים שלך.";
+"Restore note to previous version" = "החזרת פתק לגרסה הקודמת";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "הצגת אפשרויות לפתק";
+"Show options for note" = "הצגת אפשרויות לפתק";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "סגירת פתק נוכחי";
+"Close current note" = "סגירת פתק נוכחי";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "שיתוף תוכן הפתק הנוכחי";
+"Share the content of the current note" = "שיתוף תוכן הפתק הנוכחי";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "הוספת תגית לפתק הנוכחי";
+"Add a tag to the current note" = "הוספת תגית לפתק הנוכחי";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "הסרת תגית מהפתק הנוכחי";
+"Remove tag from the current note" = "הסרת תגית מהפתק הנוכחי";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "העבר את הפתק הנוכחי לפח";
+"Move the current note to trash" = "העבר את הפתק הנוכחי לפח";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "התחברות לאינטרנט לצורך גישה לגרסאות קודמות";
+"Connect to the Internet to Access Previous Versions" = "התחברות לאינטרנט לצורך גישה לגרסאות קודמות";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "מעבר לגרסה זו";
+"Switch to this version" = "מעבר לגרסה זו";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "הורדת גרסה";
+"Fetching version" = "הורדת גרסה";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "האם איבדת את הגישה ל- Simplenote? תוכל לקבל גישה מחדש על ידי התקנה מחדש של האפליקציה וכניסה לחשבונך.";
-
-/* Permanent Delete */
-"Delete" = "לִמְחוֹק";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
 

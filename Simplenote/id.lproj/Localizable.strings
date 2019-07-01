@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=n > 1; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: id */
+
+/* Number of found search results */
 "%d Result" = "%d Hasil";
 
 /* Number of found search results */
@@ -22,29 +27,29 @@
 /* A user's Simplenote account */
 "Account" = "Account";
 
-/* A user's Simplenote account */
-"Account" = "Akun";
-
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Tambahkan kolaborator baru...";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tambahkan label";
 
 /* Title of option to display all notes */
-"All Notes" = "Semua Catatan";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Sudah memiliki akun?";
+
+/* No comment provided by engineer. */
+"Back" = "Kembali";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
-
-/* No comment provided by engineer. */
-"Cancel" = "Batalkan";
 
 /* Verb - work with others on a note */
 "Collaborate" = "Kolaborasi";
@@ -53,7 +58,7 @@
 "Collaborators" = "Kolaborator";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Daftar Catatan Ringkas";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "Konfirmasi";
@@ -85,6 +90,9 @@
 /* Debug Screen Title Display internal debug status */
 "Debug" = "Debug";
 
+/* Permanent Delete */
+"Delete" = "Hapus";
+
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Abaikan keyboard";
 
@@ -109,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Masukkan kode sandi Anda";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Apakah Anda tidak dapat mengakses Simplenote? Anda dapat mengaksesnya lagi dengan menginstal ulang aplikasi dan masuk ke akun Anda.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Temukan catatan dengan cepat menggunakan pencarian instan dan label sederhana.";
 
 /* Forgot Password */
-"Forgot password? »" = "Lupa kata sandi? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Memulai";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "Bagus! Dapatkah Anda memberi kami ulasan yang menarik?\n\nIni benar-benar membantu.";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "Bagus! Dapatkah Anda memberi kami ulasan yang menarik?\\n\\nIni benar-benar membantu.";
 
 /* Noun - the version history of a note */
 "History" = "Riwayat";
@@ -152,7 +164,7 @@
 "Menu" = "Menu";
 
 /* Label to create a new note */
-"New note" = "Catatan baru";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Tidak ada Catatan";
@@ -167,7 +179,7 @@
 "Note Published" = "Catatan Diterbitkan";
 
 /* No comment provided by engineer. */
-"Note not published" = "Catatan tidak diterbitkan";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "Catatan";
@@ -210,6 +222,9 @@
 
 /* No comment provided by engineer. */
 "Preferences" = "Preferensi";
+
+/* Markdown Preview */
+"Preview" = "Pratinjau";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Terbitkan";
@@ -263,16 +278,13 @@
 "Set Passcode" = "Atur Kode Sandi";
 
 /* Title of options screen */
-"Settings" = "Pengaturan";
-
-/* Title of options screen */
 "Settings" = "Settings";
 
 /* Description of Simplenote shown in first launch view */
 "Share a list, post some instructions, or publish your thoughts." = "Bagikan daftar, kirimkan instruksi, atau terbitkan ide Anda.";
 
 /* No comment provided by engineer. */
-"Share note" = "Bagikan catatan";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Panel Sisi";
@@ -292,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Mendaftar";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Catatan yang tidak disinkronkan akan dihapus saat Anda keluar. Anda dapat memverifikasi catatan Anda yang disinkronkan dengan masuk ke Aplikasi Web.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Urutkan Catatan sesuai Abjad";
 
 /* Message shown in first launch view */
 "Stay organized" = "Tetap tertata";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Label...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Label: %@";
@@ -310,9 +322,6 @@
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Hari ini";
 
-/* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "Today";
-
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Panel sisi label pilihan";
 
@@ -320,10 +329,10 @@
 "Touch ID" = "ID Sentuhan";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Sampah";
+"Trash" = "Sampah";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Sampah";
+"Trash" = "Sampah";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Matikan Kode Sandi";
@@ -339,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Batal menerbitkan...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Catatan yang Tidak Disinkronkan Terdeteksi";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "Gunakan di mana saja";
@@ -358,9 +370,6 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Kemarin";
 
-/* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "Yesterday";
-
 /* No comment provided by engineer. */
 "Your Email:" = "Email Anda:";
 
@@ -371,55 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Catatan Anda diperbarui lintas seluruh perangkat Anda. Tidak ada tombol untuk ditekan. Ini langsung bekerja.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Aktifkan yang lain untuk berkolaborasi";
+"Enable others to collaborate" = "Aktifkan yang lain untuk berkolaborasi";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Catatan ini dihapus pada perangkat lain.";
+"This note was deleted on another device." = "Catatan ini dihapus pada perangkat lain.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Pulihkan catatan ke versi sebelumnya";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote adalah cara mudah untuk menyimpan catatan, daftar, ide, dan masih banyak lagi. Catatan Anda akan disinkronkan dengan semua perangkat secara gratis.\n\nPengalaman Simplenote adalah tentang kecepatan dan efisiensi. Buka, tulis ide, dan selesai. Seiring dengan bertambahnya catatan Anda, Anda dapat mencarinya seketika dan menjaganya tetap tertata dengan label dan sematan. Anda juga dapat berbagi catatan dan menerbitkannya untuk orang lain.\n\nCara terbaik untuk mempelajari tentang Simplenote adalah dengan mencobanya. Anda akan diminta untuk membuat sebuah akun. Ini memungkinkan catatan Anda dicadangkan secara online dan disinkronkan secara otomatis.\n\nSetelah mendaftar, cobalah membuat beberapa catatan! Kemudian buka simplenote.com untuk mengunduh Simplenote bagi perangkat Anda yang lain.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "catatan,catat,sinkr,catatansimpel,simpel,tugas,daftar";
+"Restore note to previous version" = "Pulihkan catatan ke versi sebelumnya";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Tampilkan opsi untuk catatan";
+"Show options for note" = "Tampilkan opsi untuk catatan";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Tutup catatan saat ini";
+"Close current note" = "Tutup catatan saat ini";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Bagikan konten dari catatan saat ini";
+"Share the content of the current note" = "Bagikan konten dari catatan saat ini";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Tambahkan label pada catatan saat ini";
+"Add a tag to the current note" = "Tambahkan label pada catatan saat ini";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Buang label dari catatan saat ini";
+"Remove tag from the current note" = "Buang label dari catatan saat ini";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Pindahkan catatan saat ini ke sampah";
+"Move the current note to trash" = "Pindahkan catatan saat ini ke sampah";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
+"Connect to the Internet to Access Previous Versions" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Beralih ke versi ini";
+"Switch to this version" = "Beralih ke versi ini";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Mengambil versi";
+"Fetching version" = "Mengambil versi";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Apakah Anda kehilangan akses ke Simplenote? Anda bisa mendapatkan kembali akses dengan menginstal ulang aplikasi dan login ke akun Anda.";
-
-/* Permanent Delete */
-"Delete" = "Menghapus";
