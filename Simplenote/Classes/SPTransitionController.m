@@ -30,6 +30,7 @@
 #import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
+#import "Simplenote-Swift.h"
 
 #define kEditorTransitionOffset 8
 
@@ -39,15 +40,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     int useCount;
     CGFloat percentComplete;
-    
-    UIFont *transitionControllerBodyFont;
-    UIFont *transitionControllerHeadlineFont;
-    UIColor *transitionControllerBodyColor;
-    UIColor *transitionControllerHeadlineColor;
-    NSInteger transitionControllerMaxTextLength;
-    NSParagraphStyle *transitionControllerParagraphStyle;
 }
 
+@property (nonatomic, strong) SnapshotRenderer *renderer;
 @property (nonatomic) id <UIViewControllerContextTransitioning> context;
 @property (nonatomic) CGFloat initialPinchDistance;
 @property (nonatomic) CGPoint initialPinchPoint;
@@ -70,6 +65,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     self = [super init];
     if (self) {
         self.tableView = tableView;
+        self.renderer = [SnapshotRenderer new];
         useCount = 0;
         
         if ([UIDevice isPad]) {
@@ -88,27 +84,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
         
         self.navigationController = navigationController;
-        
-        [self applyStyle];
     }
     return self;
 }
 
-- (void)applyStyle {
-    
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    
-    transitionControllerBodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    transitionControllerHeadlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    transitionControllerBodyColor = [theme colorForKey:@"noteBodyFontPreviewColor"];
-    transitionControllerHeadlineColor = [theme colorForKey:@"noteHeadlineFontColor"];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = transitionControllerBodyFont.lineHeight * [theme floatForKey:@"noteBodyLineHeightPercentage"];
-    transitionControllerParagraphStyle = [paragraphStyle copy];
-    
-    transitionControllerMaxTextLength = [UIDevice isPad] ? 3100 : 1200;
-}
 
 #pragma mark UIViewControllerTransitioningDelegate methods — Supporting Custom Transition Animations
 
@@ -121,6 +100,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     return self;
 }
+
 
 #pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
 
@@ -161,83 +141,24 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return nil;
 }
 
+
 #pragma mark CustomTransition
 
 - (UIView *)textViewSnapshotForNote:(Note *)note
                               width:(CGFloat)width
                        searchString:(NSString *)searchString
                             preview:(BOOL)preview {
-    
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    
-    if (!_snapshotTextView) {
-        
-        _snapshotTextView = [[SPTextView alloc] init];
-        _snapshotTextView.textContainer.lineFragmentPadding = 0;
-    }
-    
+
     CGFloat snapHeight = self.tableView.frame.size.height;
     if (@available(iOS 11.0, *)) {
         // Adjust the height of the transition preview for safeAreaInsets.
         // Fixes awkward looking transition at the bottom of the editor on iPhone X
         snapHeight -= self.tableView.safeAreaInsets.top + self.tableView.safeAreaInsets.bottom + kEditorTransitionOffset;
     }
-    _snapshotTextView.frame = CGRectMake(0, 0, width, snapHeight);
-    
-    NSString *content = preview ? note.preview : note.content;
-    if (content.length > transitionControllerMaxTextLength)
-        content = [content substringToIndex:transitionControllerMaxTextLength];
-    
-    NSDictionary *defaultAttributes;
-    if (preview)
-        defaultAttributes = @{ NSForegroundColorAttributeName : transitionControllerBodyColor,
-                                     NSFontAttributeName : transitionControllerBodyFont};
-    else
-        defaultAttributes = @{ NSForegroundColorAttributeName : transitionControllerHeadlineColor,
-                               NSFontAttributeName : transitionControllerBodyFont,
-                               NSParagraphStyleAttributeName : transitionControllerParagraphStyle};
 
-    NSDictionary *headlineAttributes  = @{
-                                          NSForegroundColorAttributeName: transitionControllerHeadlineColor,
-                                          NSFontAttributeName : transitionControllerHeadlineFont};
+    CGSize size = CGSizeMake(width, snapHeight);
 
-    _snapshotTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : defaultAttributes,
-                                                        SPHeadlineTokenName : headlineAttributes};
-    
-    BOOL searching = searchString.length > 0;
-    
-    // Add checklist images if needed
-    NSMutableAttributedString *attributedContent = content.attributedString.mutableCopy;
-    [attributedContent addChecklistAttachmentsForColor: [theme colorForKey:@"noteBodyFontPreviewColor"]];
-    
-    if (note.pinned && preview) {
-        NSAttributedString *pinAttributedContent = attributedContent;
-        if (!_pinIcon) {
-            _pinIcon = [[UIImage imageNamed:@"icon_pin"] imageWithOverlayColor:transitionControllerHeadlineColor];
-            _searchPinIcon = [[UIImage imageNamed:@"icon_pin"] imageWithOverlayColor:transitionControllerBodyColor];
-        }
-        
-        // New note summary contains a pin image
-        UIImage *pinImage = searching ? _searchPinIcon : _pinIcon;
-        pinAttributedContent = [pinAttributedContent attributedStringWithLeadingImage:pinImage
-                             lineHeight:transitionControllerHeadlineFont.capHeight];
-        _snapshotTextView.attributedText = pinAttributedContent;
-    } else {
-        _snapshotTextView.attributedText = attributedContent;
-    }
-    
-    if (searching)
-        [_snapshotTextView.textStorage applyColorAttribute:[theme colorForKey:@"tintColor"]
-                                                 forRanges:[_snapshotTextView.text rangesForTerms:searchString]];
-
-    _snapshotTextView.backgroundColor = [theme colorForKey:@"backgroundColor"];
-    [[_snapshotTextView layoutManager] ensureLayoutForBoundingRect:[[UIScreen mainScreen] bounds]
-                                                   inTextContainer:_snapshotTextView.textContainer];
-
-    UIImageView *snapshot = [_snapshotTextView imageRepresentationWithinImageView];
-    snapshot.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-    return snapshot;
+    return [_renderer renderWithNote:note size:size searchQuery:searchString preview:preview];
 }
 
 - (CGFloat)textViewTextWidthForWidth:(CGFloat)width {
@@ -369,9 +290,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         UIView *cleanSnapshot, *dirtySnapshot;
         
         cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                       width:finalWidth
-                                                searchString:editorController.searchString
-                                             preview:YES];
+                                                width:finalWidth
+                                         searchString:editorController.searchString
+                                              preview:YES];
         
         dirtySnapshot = [self textViewSnapshotForNote:editorController.currentNote
                                                 width:finalWidth
