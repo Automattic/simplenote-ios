@@ -2,27 +2,45 @@ import Foundation
 import UIKit
 
 
-///
+/// Tool that allows us to generate a snapshot (UIView) for animation purposes.
 ///
 @objc
 class SnapshotRenderer: NSObject {
 
+    /// Rendering TextView
     ///
-    ///
-    private var textView: SPTextView = {
+    private lazy var textView: SPTextView = {
         let output = SPTextView()
+        output.addSubview(self.accessoryImageView)
         output.textContainer.lineFragmentPadding = 0
         return output
     }()
 
+    /// Rendering AccessoryImageView
     ///
+    private lazy var accessoryImageView: UIImageView = {
+        let output = UIImageView()
+        output.contentMode = .center
+        return output
+    }()
+
+
+    /// Returns a UIView representation of a given Note, with the specified parameters:
+    ///
+    /// - Parameter:
+    ///     - note: The entity we're about to render
+    ///     - size: Output UIView's size
+    ///     - searchQuery: Search String (if any) that should be highlighted
+    ///     - preview: Indicates if the screenshot will be used to represent the Note List Cell, or the full editor
+    ///
+    /// - Returns: UIImageView containing a UIImage representation of the Note.
     ///
     @objc
     func render(note: Note, size: CGSize, searchQuery: String?, preview: Bool) -> UIView {
-
-        // Setup: TextView
-        textView.frame.size = size
-        textView.backgroundColor = theme.color(forKey: .backgroundColor)
+        // Setup: Skin
+        let backgroundColor = theme.color(forKey: .backgroundColor)
+        accessoryImageView.backgroundColor = backgroundColor
+        textView.backgroundColor = backgroundColor
         textView.interactiveTextStorage.tokens = [
             SPDefaultTokenName:     defaultAttributes(preview: preview),
             SPHeadlineTokenName:    headlineAttributes()
@@ -39,6 +57,23 @@ class SnapshotRenderer: NSObject {
 
             textView.textStorage.applyColorAttribute(color, forRanges: ranges)
         }
+
+        // Setup: AccessoryImage
+        let accessoryImage = note.published && preview ? UIImage.sharedImage.withRenderingMode(.alwaysTemplate) : nil
+        let accessorySize = accessoryImage?.size ?? CGSize.zero
+
+        accessoryImageView.image = accessoryImage
+        accessoryImageView.tintColor = bodyColor
+
+// TODO: Nuke magic numbers
+
+        accessoryImageView.frame.origin.x = size.width - accessorySize.width * 0.5
+        accessoryImageView.frame.origin.y = accessorySize.height + 13
+        textView.textContainerInset.right = preview ? 30 : 0
+
+        // Setup: Layout
+        textView.frame.size = size
+        textView.layoutIfNeeded()
 
         // Render!
         textView.layoutManager.ensureLayout(forBoundingRect: UIScreen.main.bounds, in: textView.textContainer)
