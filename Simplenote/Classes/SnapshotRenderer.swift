@@ -64,20 +64,18 @@ class SnapshotRenderer: NSObject {
 
         accessoryImageView.image = accessoryImage
         accessoryImageView.tintColor = bodyColor
-
-// TODO: Nuke magic numbers
-
-        accessoryImageView.frame.origin.x = size.width - accessorySize.width * 0.5
-        accessoryImageView.frame.origin.y = accessorySize.height + 13
-        textView.textContainerInset.right = preview ? 30 : 0
+        accessoryImageView.sizeToFit()
 
         // Setup: Layout
         textView.frame.size = size
+        textView.textContainerInset.right = preview ? accessorySize.width * 1.5 : 0
+
+        accessoryImageView.frame.origin.x = size.width - accessorySize.width
+        accessoryImageView.frame.origin.y = accessorySize.height + 1
+
         textView.layoutIfNeeded()
 
-        // Render!
-        textView.layoutManager.ensureLayout(forBoundingRect: UIScreen.main.bounds, in: textView.textContainer)
-
+        // Setup: Render
         guard let snapshot = textView.imageRepresentationWithinImageView() else {
             fatalError()
         }
