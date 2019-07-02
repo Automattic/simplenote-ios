@@ -1,0 +1,1 @@
+* Il est désormais possible de trier la liste de notes par dates de création et de modification.
