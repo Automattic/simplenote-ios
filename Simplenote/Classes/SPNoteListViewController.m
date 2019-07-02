@@ -167,11 +167,6 @@
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
-    // Restyle the TransitionController
-    if (self.transitionController) {
-        [self.transitionController applyStyle];
-    }
-
     // Restyle the search bar
     [self styleSearchBar];
 }
