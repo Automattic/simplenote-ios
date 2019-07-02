@@ -401,8 +401,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     
                     // two snapshots are used for note content since the preview is a "clean" versio of a note
 
-                    startingFrame = [containerView convertRect:[(SPTableViewCell *)cell previewViewRectForWidth:cell.frame.size.width fast:NO]
-                                                      fromView:[(SPTableViewCell *)cell contentView].superview];
+                    startingFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
+                                                      fromView:[cell contentView].superview];
                     
                     startingFrame.size.height -= 5; // corrects for line spacing added to final row
                     
@@ -572,8 +572,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
                 // final frame is note the frame of the cell of the frame of the
                 // textView within the cell
-                finalFrame = [containerView convertRect:[(SPTableViewCell *)cell previewViewRectForWidth:cell.frame.size.width fast:NO]
-                                                  fromView:[(SPTableViewCell *)cell contentView].superview];
+                finalFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
+                                               fromView:[cell contentView].superview];
                 finalFrame.size.width = editorController.view.frame.size.width;
                 finalFrame.origin.x = 0;
                 finalFrame.size.height -= 5; // corrects for line spacing added to final row
