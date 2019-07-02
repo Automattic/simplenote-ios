@@ -44,7 +44,7 @@
         CGRect frame = self.bounds;
         
         _previewView = [[SPTextView alloc] init];
-        _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
+        _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES accessoryWidth:CGRectZero.size.width];
         
         _previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _previewView.scrollEnabled = NO;
@@ -157,8 +157,14 @@
     return output;
 }
 
-- (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast {
-    return [self previewViewRectForWidth:width fast:fast accessoryWidth:CGRectZero.size.width];
+- (CGRect)listAnimationFrameForWidth:(CGFloat)width {
+    /// If the Preview Frame's height is less than the accessoryImage's height (considering yPos), we'll
+    /// correct the output's height. Otherwise the accessoryImage might get clipped.
+    ///
+    CGRect previewFrame = [self previewViewRectForWidth:width fast:NO accessoryWidth:CGRectZero.size.width];
+    previewFrame.size.height = MAX(CGRectGetHeight(previewFrame), CGRectGetMaxY(_accessoryImageView.frame));
+
+    return previewFrame;
 }
 
 - (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast accessoryWidth:(CGFloat)accessoryWidth {

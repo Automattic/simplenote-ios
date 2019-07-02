@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIColor *accessoryTintColor;
 @property (nonatomic, strong) SPTextView *previewView;
 
-- (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast;
+- (CGRect)listAnimationFrameForWidth:(CGFloat)width;
 - (void)applyStyle;
 
 @end
