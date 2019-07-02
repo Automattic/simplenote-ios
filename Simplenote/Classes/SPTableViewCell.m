@@ -44,7 +44,7 @@
         CGRect frame = self.bounds;
         
         _previewView = [[SPTextView alloc] init];
-        _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES accessoryWidth:CGRectZero.size.width];
+        _previewView.frame = [self previewViewRectForWidth:frame.size.width fast:YES];
         
         _previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _previewView.scrollEnabled = NO;
@@ -137,11 +137,11 @@
     }
 
     CGRect frame = self.bounds;
+    CGRect previewFrame = [self previewViewRectForWidth:frame.size.width fast:YES];
+    CGRect accessoryFrame = self.accessoryView.frame;
 
-    CGFloat accessoryWidth = self.accessoryImage.size.width;
-    CGRect previewFrame = [self previewViewRectForWidth:frame.size.width fast:YES accessoryWidth:accessoryWidth];
-    CGRect accessoryFrame = [self adjustAccessoryViewFrameLocation:self.accessoryView.frame
-                                                 afterContentFrame:previewFrame];
+    previewFrame.size.width -= CGRectGetWidth(accessoryFrame);
+    accessoryFrame.origin.x = CGRectGetMaxX(previewFrame);
 
     /// Note II:
     /// The order in which we set the frames is actually important. Setting the frame at last causes autosizingMask to kick in.
@@ -151,23 +151,17 @@
     _previewView.frame = previewFrame;
 }
 
-- (CGRect)adjustAccessoryViewFrameLocation:(CGRect)accessoryFrame afterContentFrame:(CGRect)contentFrame {
-    CGRect output = accessoryFrame;
-    output.origin.x = CGRectGetMaxX(contentFrame);
-    return output;
-}
-
 - (CGRect)listAnimationFrameForWidth:(CGFloat)width {
     /// If the Preview Frame's height is less than the accessoryImage's height (considering yPos), we'll
     /// correct the output's height. Otherwise the accessoryImage might get clipped.
     ///
-    CGRect previewFrame = [self previewViewRectForWidth:width fast:NO accessoryWidth:CGRectZero.size.width];
+    CGRect previewFrame = [self previewViewRectForWidth:width fast:NO];
     previewFrame.size.height = MAX(CGRectGetHeight(previewFrame), CGRectGetMaxY(_accessoryImageView.frame));
 
     return previewFrame;
 }
 
-- (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast accessoryWidth:(CGFloat)accessoryWidth {
+- (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast {
     
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
@@ -193,7 +187,7 @@
 
     return CGRectMake((width - previewWidth) / 2.0,
                       verticalPadding,
-                      previewWidth - accessoryWidth,
+                      previewWidth,
                       height + (fast ? 15.0 : 0.0));
 }
 
