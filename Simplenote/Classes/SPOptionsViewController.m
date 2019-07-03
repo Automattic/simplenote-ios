@@ -22,16 +22,11 @@
 #import "Simperium+Simplenote.h"
 
 NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
-NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
-NSString *const SPAlphabeticalSortPref                              = @"SPAlphabeticalSortPref";
-NSString *const SPAlphabeticalSortPreferenceChangedNotification     = @"SPAlphabeticalSortPreferenceChangedNotification";
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
-NSString *const SPAlphabeticalTagSortPreferenceChangedNotification  = @"SPAlphabeticalTagSortPreferenceChangedNotification";
 NSString *const SPThemePref                                         = @"SPThemePref";
 
 @interface SPOptionsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
-@property (nonatomic, strong) UISwitch      *alphabeticalNoteSortSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
 @property (nonatomic, strong) UISwitch      *themeListSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
@@ -46,8 +41,8 @@ NSString *const SPThemePref                                         = @"SPThemeP
     NSArray *timeoutPickerOptions;
 }
 
-#define kTagAlphabeticalSort    1
-#define kTagAlphabeticalTagSort 2
+#define kTagNoteListSort        1
+#define kTagTagsListSort        2
 #define kTagCondensedNoteList   3
 #define kTagTheme               4
 #define kTagPasscode            5
@@ -110,7 +105,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (instancetype)initWithStyle:(UITableViewStyle)style
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped])
     {
@@ -139,11 +134,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                                                            action:@selector(doneAction:)];
     
     // Setup the Switches
-    self.alphabeticalNoteSortSwitch = [UISwitch new];
-    [self.alphabeticalNoteSortSwitch addTarget:self
-                                    action:@selector(sortSwitchDidChangeValue:)
-                          forControlEvents:UIControlEventValueChanged];
-    
     self.alphabeticalTagSortSwitch = [UISwitch new];
     [self.alphabeticalTagSortSwitch addTarget:self
                                         action:@selector(tagSortSwitchDidChangeValue:)
@@ -333,13 +323,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             switch (indexPath.row) {
                 case SPOptionsPreferencesRowSort: {
-                    cell.textLabel.text = NSLocalizedString(@"Sort Alphabetically", @"Option to sort notes in the note list alphabetically. The default is by modification date");
-                    
-                    [self.alphabeticalNoteSortSwitch setOn:[self alphabeticalSortPref]];
-                    
-                    cell.accessoryView = self.alphabeticalNoteSortSwitch;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.tag = kTagAlphabeticalSort;
+                    cell.textLabel.text = NSLocalizedString(@"Sort Order", @"Option to sort notes in the note list alphabetically. The default is by modification date");
+                    cell.detailTextLabel.text = [[Options shared] listSortModeDescription];
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.tag = kTagNoteListSort;
                     break;
                 }
                 case SPOptionsPreferencesRowCondensed: {
@@ -368,7 +356,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     
                     cell.accessoryView = self.alphabeticalTagSortSwitch;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.tag = kTagAlphabeticalSort;
+                    cell.tag = kTagTagsListSort;
                     break;
                 }
                 
@@ -514,6 +502,22 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
     switch (indexPath.section) {
+
+        case SPOptionsViewSectionsNotes: {
+            switch (cell.tag) {
+                case kTagNoteListSort: {
+                    SPSortOrderViewController *controller = [SPSortOrderViewController new];
+                    controller.selectedMode = [[Options shared] listSortMode];
+                    controller.onChange = ^(SortMode newMode) {
+                        [[Options shared] setListSortMode:newMode];
+                    };
+
+                    [self.navigationController pushViewController:controller animated:true];
+                    break;
+                }
+            }
+            break;
+        }
 
         case SPOptionsViewSectionsSecurity: {
             
@@ -711,20 +715,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                         object:notificationObject];
 }
 
-
-- (void)sortSwitchDidChangeValue:(UISwitch *)sender
-{
-    BOOL isOn = [(UISwitch *)sender isOn];
-    NSNumber *notificationObject = [NSNumber numberWithBool:isOn];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:SPAlphabeticalSortPref];
-    
-    [SPTracker trackSettingsAlphabeticalSortEnabled:isOn];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SPAlphabeticalSortPreferenceChangedNotification
-                                                        object:notificationObject];
-}
-
 - (void)tagSortSwitchDidChangeValue:(UISwitch *)sender
 {
     BOOL isOn = [(UISwitch *)sender isOn];
@@ -767,7 +757,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     // Reload Switch Styles
     VSTheme *theme          = [[VSThemeManager sharedManager] theme];
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalNoteSortSwitch, _alphabeticalTagSortSwitch,  _themeListSwitch, _biometrySwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch,  _themeListSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
@@ -798,11 +788,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 
 #pragma mark - Preferences
-
-- (BOOL)alphabeticalSortPref
-{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalSortPref];
-}
 
 - (BOOL)alphabeticalTagSortPref
 {

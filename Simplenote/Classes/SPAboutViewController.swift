@@ -34,7 +34,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     private let footerView = UIView()
     private let tableView = UITableView()
     private let containerView = UIStackView()
-    private let doneButton = UIButton(type: UIButtonType.custom)
+    private let doneButton = UIButton(type: UIButton.ButtonType.custom)
     
     private let simpleBlue = UIColor(red: 74/255, green: 149/255, blue: 213/255, alpha: 1.0)
     private let lightBlue = UIColor(red: 118/255, green: 175/255, blue: 223/255, alpha: 1.0)
@@ -57,11 +57,11 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func addDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControlState.normal)
-        doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)
-        doneButton.setTitleColor(lightBlue, for: UIControlState.highlighted)
-        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControlEvents.touchUpInside)
-        doneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
+        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControl.State.normal)
+        doneButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        doneButton.setTitleColor(lightBlue, for: UIControl.State.highlighted)
+        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControl.Event.touchUpInside)
+        doneButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
 
         view.addSubview(doneButton)
 
@@ -181,18 +181,18 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         let serviceString = NSMutableAttributedString(string: String(format: "%@ \u{2022} %@", privacyString, termsString), attributes: [
-            NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)
             ])
         
         
-        serviceString.addAttribute(NSAttributedStringKey.link, value: "https://simplenote.com/privacy/", range: NSMakeRange(0, privacyString.count))
-        serviceString.addAttribute(NSAttributedStringKey.link, value: "https://simplenote.com/terms/", range: NSMakeRange(privacyString.count + 3, termsString.count))
+        serviceString.addAttribute(NSAttributedString.Key.link, value: "https://simplenote.com/privacy/", range: NSMakeRange(0, privacyString.count))
+        serviceString.addAttribute(NSAttributedString.Key.link, value: "https://simplenote.com/terms/", range: NSMakeRange(privacyString.count + 3, termsString.count))
         serviceTextView.attributedText = serviceString
         
-        let linkAttributes: [String : Any] = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
-        serviceTextView.linkTextAttributes = linkAttributes
+        let linkAttributes: [String : Any] = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.white]
+        serviceTextView.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(linkAttributes)
         
         let copyrightLabel = UILabel()
         copyrightLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -239,7 +239,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
 
         cell.textLabel?.text = titles[indexPath.row]
         cell.detailTextLabel?.text = descriptions[indexPath.row]
@@ -289,4 +289,10 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     @objc func onDoneTap(_ sender:UIButton) {
         dismiss(animated: true)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

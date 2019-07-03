@@ -246,26 +246,26 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        searchResultRanges = [searchText rangesForTerms:_searchString];
+        self->searchResultRanges = [searchText rangesForTerms:self->_searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UIColor *tintColor = [self.theme colorForKey:@"tintColor"];
-            [_noteEditorTextView.textStorage applyColorAttribute:tintColor forRanges:searchResultRanges];
+            [self->_noteEditorTextView.textStorage applyColorAttribute:tintColor forRanges:self->searchResultRanges];
             
-            NSInteger count = searchResultRanges.count;
+            NSInteger count = self->searchResultRanges.count;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
-            searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
+            self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
             
             [UIView animateWithDuration:0.3
                              animations:^{
                                  
-                                 searchDetailLabel.alpha = 1.0;
+                                 self->searchDetailLabel.alpha = 1.0;
                              }];
             
-            highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
+            self->highlightedSearchResultIndex = 0;
+            [self highlightSearchResultAtIndex:self->highlightedSearchResultIndex];
         });
     });
 }
@@ -294,10 +294,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        bDisableShrinkingNavigationBar = YES;
+        self->bDisableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        bDisableShrinkingNavigationBar = NO;
+        self->bDisableShrinkingNavigationBar = NO;
     }];
 }
 
@@ -604,8 +604,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // push off updating note text in order to speed up animated transition
     dispatch_async(dispatch_get_main_queue(), ^{
-        _noteEditorTextView.attributedText = [note.content attributedString];
-        [_noteEditorTextView processChecklists];
+        self->_noteEditorTextView.attributedText = [note.content attributedString];
+        [self->_noteEditorTextView processChecklists];
     });
     
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
@@ -688,7 +688,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
 
-                    bounceMarkdownPreviewOnActivityViewDismiss = NO;
+                    self->bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -736,7 +736,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         [self.noteEditorTextView endEditing:YES];
         
         [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
-            bDisableShrinkingNavigationBar = YES;
+            self->bDisableShrinkingNavigationBar = YES;
         }];
     });
 }
@@ -780,7 +780,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
                               // scroll to block
                               highlightFrame.origin.y += highlightFrame.size.height;
-                              [_noteEditorTextView scrollRectToVisible:highlightFrame
+                              [self->_noteEditorTextView scrollRectToVisible:highlightFrame
                                                       animated:YES];
                               
                               
@@ -811,8 +811,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                      } completion:^(BOOL finished) {
                          [self.navigationController setToolbarHidden:YES animated:NO];
                          self.navigationController.toolbar.transform = CGAffineTransformIdentity;
-                         searchDetailLabel.alpha = 0.0;
-                         searchDetailLabel.text = nil;
+                         self->searchDetailLabel.alpha = 0.0;
+                         self->searchDetailLabel.text = nil;
 
                      }];
     
@@ -831,19 +831,19 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL isEditing          = visibleHeight > 0;
     
     void (^animations)() = ^void() {
-        CGRect newFrame            = _noteEditorTextView.frame;
-        newFrame.size.height       = self.view.frame.size.height - (bVoiceoverEnabled ? _tagView.frame.size.height : 0) - visibleHeight;
+        CGRect newFrame            = self->_noteEditorTextView.frame;
+        newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - visibleHeight;
         if (@available(iOS 11.0, *)) {
             if (!isEditing) {
                 newFrame.size.height -= self.view.safeAreaInsets.bottom;
             }
         }
-        _noteEditorTextView.frame  = newFrame;
+        self->_noteEditorTextView.frame  = newFrame;
         
-        if (bVoiceoverEnabled) {
-            CGRect newFrame        = _tagView.frame;
-            newFrame.origin.y      = self.view.frame.size.height - _tagView.frame.size.height - visibleHeight;
-            _tagView.frame         = newFrame;
+        if (self->bVoiceoverEnabled) {
+            CGRect newFrame        = self->_tagView.frame;
+            newFrame.origin.y      = self.view.frame.size.height - self->_tagView.frame.size.height - visibleHeight;
+            self->_tagView.frame         = newFrame;
         }
     };
     
@@ -941,26 +941,26 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     animationBlock = ^() {
         
-        backButton.transform = CGAffineTransformIdentity;
-        keyboardButton.transform = CGAffineTransformIdentity;
-        newButton.transform = CGAffineTransformIdentity;
-        newButton.alpha = 1.0;
-        actionButton.transform = CGAffineTransformIdentity;
-        actionButton.alpha = 1.0;
-        checklistButton.transform = CGAffineTransformIdentity;
-        checklistButton.alpha = 1.0;
-        keyboardButton.alpha = 1.0;
-        self.navigationController.navigationBar.transform = navigationBarTransform;
+        self->backButton.transform = CGAffineTransformIdentity;
+        self->keyboardButton.transform = CGAffineTransformIdentity;
+        self->newButton.transform = CGAffineTransformIdentity;
+        self->newButton.alpha = 1.0;
+        self->actionButton.transform = CGAffineTransformIdentity;
+        self->actionButton.alpha = 1.0;
+        self->checklistButton.transform = CGAffineTransformIdentity;
+        self->checklistButton.alpha = 1.0;
+        self->keyboardButton.alpha = 1.0;
+        self.navigationController.navigationBar.transform = self->navigationBarTransform;
         
-        backButton.alpha = 1.0;
+        self->backButton.alpha = 1.0;
     };
     
     void (^completionBlock)();
     
     completionBlock = ^() {
         
-        if (!_noteEditorTextView.dragging && !_noteEditorTextView.decelerating) {
-            bDisableShrinkingNavigationBar = NO;
+        if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
+            self->bDisableShrinkingNavigationBar = NO;
         }
         
         if (completion)
@@ -1108,9 +1108,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            CGPoint bottomOffset = CGPointMake(0, _noteEditorTextView.contentSize.height - _noteEditorTextView.bounds.size.height);
-            if (_noteEditorTextView.contentOffset.y < bottomOffset.y)
-                [_noteEditorTextView setContentOffset:bottomOffset animated:YES];
+            CGPoint bottomOffset = CGPointMake(0, self->_noteEditorTextView.contentSize.height - self->_noteEditorTextView.bounds.size.height);
+            if (self->_noteEditorTextView.contentOffset.y < bottomOffset.y)
+                [self->_noteEditorTextView setContentOffset:bottomOffset animated:YES];
         });
     }
     
@@ -1130,7 +1130,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
 {
     if (![URL containsHttpScheme]) {
         return YES;
@@ -1352,7 +1352,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_noteEditorTextView becomeFirstResponder];
+        [self->_noteEditorTextView becomeFirstResponder];
     });
     
     bDisableShrinkingNavigationBar = NO;
@@ -2019,7 +2019,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)tagViewDidBeginEditing:(SPTagView *)tagView {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_noteEditorTextView scrollToBottom];
+        [self->_noteEditorTextView scrollToBottom];
     });
 }
 

@@ -15,3 +15,4 @@
 #import "UIImage+Colorization.h"
 #import "VSThemeManager.h"
 #import "SPEditorTextView.h"
+#import "SPNotifications.h"

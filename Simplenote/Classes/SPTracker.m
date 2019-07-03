@@ -175,9 +175,9 @@
     [self trackAutomatticEventWithName:@"settings_list_condensed_enabled" properties:@{ @"enabled" : @(isOn) }];
 }
 
-+ (void)trackSettingsAlphabeticalSortEnabled:(BOOL)isOn
++ (void)trackSettingsNoteListSortMode:(NSString *)description
 {
-    [self trackAutomatticEventWithName:@"settings_alphabetical_sort_enabled" properties:@{ @"enabled" : @(isOn) }];
+    [self trackAutomatticEventWithName:@"settings_note_list_sort_mode" properties:@{ @"description" : description }];
 }
 
 + (void)trackSettingsThemeUpdated:(NSString *)themeName

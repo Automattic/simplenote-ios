@@ -21,22 +21,42 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.7.0</string>
+	<string>4.8.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4700</string>
+	<string>4801</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
-			<dict>
-				<key>NSExtensionActivationSupportsText</key>
-				<true/>
-				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-				<integer>1</integer>
-			</dict>
+			<string>
+                SUBQUERY(
+                extensionItems,
+                $extensionItem,
+                (SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.plain-text"
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.text"
+                ).@count &gt;= 1
+                OR
+                SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.url"
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.file-url"
+                ).@count == 1)
+                AND
+                SUBQUERY(
+                $extensionItem.attachments,
+                $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "org.appextension.find-login-action"
+                || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "org.appextension.save-login-action"
+                ).@count == 0
+                ).@count &gt;= 1
+            </string>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
