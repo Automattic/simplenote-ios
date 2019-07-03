@@ -1,0 +1,1 @@
+* The Notes List can now be sorted by creation and modification dates.

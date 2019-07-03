@@ -1,0 +1,1 @@
+* Daftar Catatan kini dapat diurutkan berdasarkan tanggal pembuatan dan modifikasi.

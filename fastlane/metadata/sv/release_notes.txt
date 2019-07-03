@@ -1,0 +1,1 @@
+* Anteckningslistan kan nu sorteras enligt datum för skapande och ändring.

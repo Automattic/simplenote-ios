@@ -1,0 +1,1 @@
+* Notlar Listesi artık oluşturulma ve değiştirilme tarihlerine göre sıralanabilir.
