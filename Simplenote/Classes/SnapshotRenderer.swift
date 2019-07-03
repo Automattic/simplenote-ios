@@ -68,10 +68,10 @@ class SnapshotRenderer: NSObject {
 
         // Setup: Layout
         textView.frame.size = size
-        textView.textContainerInset.right = preview ? accessorySize.width * 1.5 : 0
+        textView.textContainerInset.right = preview ? accessorySize.width : 0
 
         accessoryImageView.frame.origin.x = size.width - accessorySize.width
-        accessoryImageView.frame.origin.y = accessorySize.height + 1
+        accessoryImageView.frame.origin.y = accessorySize.height
 
         textView.layoutIfNeeded()
 
