@@ -215,6 +215,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         [self newButtonAction:nil];
     } else {
         [_noteEditorTextView processChecklists];
+        self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
     
     if (!(_noteEditorTextView.text.length > 0) && !bActionSheetVisible)
@@ -1291,7 +1292,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if ([sender isEqual:newButton]) {
         [SPTracker trackEditorNoteCreated];
     }
-
     
     bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
     

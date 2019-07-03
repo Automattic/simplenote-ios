@@ -370,12 +370,6 @@
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
 
-/* iTunes app description */
-"iTunes-description" = "Simplenote is an easy way to keep notes, lists, ideas and more. Your notes stay in sync with all your devices for free.\n\nThe Simplenote experience is all about speed and efficiency. Open it, write some thoughts, and you're done. As your collection of notes grows, you can search them instantly and keep them organized with tags and pins. You can also share notes and publish them for other people.\n\nThe best way to learn about Simplenote is to try it. You'll be asked to create an account. This allows your notes to be backed up online and synchronized automatically.\n\nAfter you sign up, try creating some notes! Then go to simplenote.com to download Simplenote for your other devices.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "notes,note,sync,simplenote,simple,todo,list";
-
 /* Ratings View */
 "What do you think about Simplenote?" = "What do you think about Simplenote?";
 "I Like It" = "I Like It";

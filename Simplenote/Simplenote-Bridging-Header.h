@@ -16,3 +16,4 @@
 #import "VSThemeManager.h"
 #import "SPEditorTextView.h"
 #import "SPNotifications.h"
+#import "SPAppDelegate.h"

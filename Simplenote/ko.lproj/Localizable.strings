@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=1; plural=0; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: ko_KR */
+
+/* Number of found search results */
 "%d Result" = "결과 %d개";
 
 /* Number of found search results */
@@ -25,14 +30,20 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "새 공동 작업자 추가...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "태그...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "태그 추가";
 
 /* Title of option to display all notes */
-"All Notes" = "모든 메모";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "이미 계정이 있으세요?";
+
+/* No comment provided by engineer. */
+"Back" = "뒤로";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "가입하려면 서비스 약관에 동의해야 합니다. »";
@@ -47,7 +58,7 @@
 "Collaborators" = "공동 작업자";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "메모 요약 목록";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "확인";
@@ -79,6 +90,9 @@
 /* Debug Screen Title Display internal debug status */
 "Debug" = "디버그";
 
+/* Permanent Delete */
+"Delete" = "삭제";
+
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "키보드 비활성화";
 
@@ -92,7 +106,7 @@
 "Edit Tags" = "태그 편집";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
-"Empty" = "비어 있음";
+"Empty" = "비우기";
 
 /* Remove all notes from the trash */
 "Empty trash" = "휴지통 비우기";
@@ -103,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "패스코드 입력";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Simplenote에 대한 액세스 권한을 잃어버리셨나요? 앱을 다시 설치하고 계정에 로그인하여 액세스 권한을 다시 얻을 수 있습니다.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "빠른 검색과 간편한 태그로 메모를 바로 찾을 수 있습니다.";
 
 /* Forgot Password */
-"Forgot password? »" = "비밀번호를 잊으셨나요? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "시작하기";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "훌륭합니다! 좋은 리뷰를 남겨주시겠어요?\n\n\n많은 도움이 될 겁니다.";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "훌륭합니다! 좋은 리뷰를 남겨주시겠어요?\\n\\n\\n많은 도움이 될 겁니다.";
 
 /* Noun - the version history of a note */
 "History" = "내역";
@@ -137,16 +155,16 @@
 "MMM d, h:mm a" = "MMM d, h:mm a";
 
 /* Month, day, and year date formatter */
-"MMM d, yyyy" = "MMM d, yyyy";
+"MMM d, yyyy" = "yyyy MMM d";
 
 /* Month and year date formatter */
-"MMM yyyy" = "MMM yyyy";
+"MMM yyyy" = "yyyy MMM";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "메뉴";
 
 /* Label to create a new note */
-"New note" = "새 메모";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "메모 없음";
@@ -161,7 +179,7 @@
 "Note Published" = "메모 게시됨";
 
 /* No comment provided by engineer. */
-"Note not published" = "메모 게시 안 됨";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "메모";
@@ -205,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "기본 설정";
 
+/* Markdown Preview */
+"Preview" = "미리보기";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "게시";
 
@@ -215,7 +236,7 @@
 "Publish note" = "메모 게시";
 
 /* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Publish Toggle";
+"Publish toggle" = "게시 상태 전환";
 
 /* No comment provided by engineer. */
 "Published" = "게시됨";
@@ -263,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "목록을 공유하거나 지침을 게시하거나 본인의 생각을 게시할 수 있습니다.";
 
 /* No comment provided by engineer. */
-"Share note" = "메모 공유";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "사이드바";
@@ -283,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "가입";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "로그아웃하면 동기화되지 않은 모든 메모가 삭제됩니다. 웹 앱에 로그인하여 동기화된 메모를 확인할 수 있습니다.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "알파벳순으로 메모 정렬";
 
 /* Message shown in first launch view */
 "Stay organized" = "효율적으로 정리하기";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "태그...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "태그: %@";
@@ -308,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "휴지통";
+"Trash" = "휴지통";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "휴지통";
+"Trash" = "휴지통";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
@@ -327,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "게시 취소 중...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "동기화되지 않은 메모 감지됨";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "어디서나 사용 가능";
@@ -356,57 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "모든 장치에서 메모 내용을 최신으로 유지할 수 있습니다. 버튼을 누를 필요도 없습니다. 자동으로 업데이트됩니다.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "다른 사람과 협업할 수 있습니다.";
+"Enable others to collaborate" = "다른 사람과 협업할 수 있습니다.";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "이 메모를 다른 사람과 공유하려면 이메일 주소를 추가하세요. 그러면 두 사람 모두 메모를 수정할 수 있습니다.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "이 메모를 다른 사람과 공유하려면 이메일 주소를 추가하세요. 그러면 두 사람 모두 메모를 수정할 수 있습니다.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "이 메모는 다른 장치에서 삭제됐습니다.";
+"This note was deleted on another device." = "이 메모는 다른 장치에서 삭제됐습니다.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "이전 버전에 메모 복원";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote로 메모, 목록, 아이디어 등을 손쉽게 보관할 수 있습니다. 메모가 모든 장치에서 무료로 동기화됩니다.\n\nSimplenote는 최고의 속도와 효율성을 자랑합니다. 메모를 열고 아이디어를 작성하면 끝입니다. 메모 개수가 많아지면 태그와 핀을 사용하여 정리해 두고 바로바로 검색할 수 있습니다. 또한 메모를 공유하고 다른 사람을 위해 메모를 게시할 수도 있습니다.\n\nSimplenote를 익히는 최고의 방법은 직접 사용해보는 것입니다. 계정을 생성하라는 메시지가 나타납니다. 계정을 생성하면 온라인으로 메모를 백업하고 자동으로 동기화할 수 있습니다.\n\n가입한 다음 메모를 작성해 보세요. 그런 다음 simplenote.com으로 이동하여 다른 장치에 Simplenote를 다운로드하세요.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "메모,동기화,simplenote,simple,할일,목록";
+"Restore note to previous version" = "이전 버전에 메모 복원";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "메모 옵션 표시";
+"Show options for note" = "메모 옵션 표시";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "현재 메모 닫기";
+"Close current note" = "현재 메모 닫기";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "현재 메모 내용 공유";
+"Share the content of the current note" = "현재 메모 내용 공유";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "현재 메모에 태그 추가";
+"Add a tag to the current note" = "현재 메모에 태그 추가";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "현재 메모에서 태그 제거";
+"Remove tag from the current note" = "현재 메모에서 태그 제거";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "휴지통으로 현재 메모 이동";
+"Move the current note to trash" = "휴지통으로 현재 메모 이동";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "이전 버전을 사용하려면 인터넷에 연결해야 합니다.";
+"Connect to the Internet to Access Previous Versions" = "이전 버전을 사용하려면 인터넷에 연결해야 합니다.";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "이 버전으로 전환";
+"Switch to this version" = "이 버전으로 전환";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "버전 패치";
+"Fetching version" = "버전 패치";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "iOS용 Simplenote 시작하기\n\n메모를 추가하려면 더하기 버튼을 누르세요.\n\n메모를 탐색하려면 목록을 누르세요 메모를 보려면 제목을 누르고 메모를 수정하려면 메모 내용을 누르세요.\n\n메모 목록 상단의 검색 필드에 검색어를 입력해서 모든 메모를 검색할 수 있습니다.\n\n태그를 보려면 왼쪽 상단의 화살표 버튼을 누르거나 메모 목록을 옆으로 쓸어 넘기세요. 메모 에디터 하단에서 메모에 태그를 추가하고 사이드바를 사용해서 메모를 정리할 수 있습니다.\n\n필요한 경우 더욱 다양한 메모 옵션을 사용할 수 있습니다. 다른 사용자를 메모 공유자로 추가하거나 메모를 웹 페이지로 게시할 수 있습니다.\n\nMac, Android 장치나 웹 브라우저(http:\/\/simplenote.com)에서 Simplenote를 사용할 수 있습니다. 어디에 있든 메모 내용이 자동으로 업데이트됩니다.";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "iOS용 Simplenote 시작하기\n\n메모를 추가하려면 더하기 버튼을 누르세요.\n\n메모를 탐색하려면 목록을 누르세요 메모를 보려면 제목을 누르고 메모를 수정하려면 메모 내용을 누르세요.\n\n메모 목록 상단의 검색 필드에 검색어를 입력해서 모든 메모를 검색할 수 있습니다.\n\n태그를 보려면 왼쪽 상단의 화살표 버튼을 누르거나 메모 목록을 옆으로 쓸어 넘기세요. 메모 에디터 하단에서 메모에 태그를 추가하고 사이드바를 사용해서 메모를 정리할 수 있습니다.\n\n필요한 경우 더욱 다양한 메모 옵션을 사용할 수 있습니다. 다른 사용자를 메모 공유자로 추가하거나 메모를 웹 페이지로 게시할 수 있습니다.\n\nMac, Android 장치나 웹 브라우저(http:\/\/simplenote.com)에서 Simplenote를 사용할 수 있습니다. 어디에 있든 메모 내용이 자동으로 업데이트됩니다.";
 
-
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Simplenote에 액세스 할 수 없습니까? 앱을 다시 설치하고 계정에 로그인하면 다시 액세스 할 수 있습니다.";
-
-/* Permanent Delete */
-"Delete" = "지우다";

@@ -8,6 +8,12 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.codality.NotationalFlow.launch</string>
+		<string>com.codality.NotationalFlow.newNote</string>
+		<string>com.codality.NotationalFlow.openNote</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -32,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4800</string>
+	<string>4801</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
