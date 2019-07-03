@@ -59,7 +59,10 @@
 
         _accessoryImageView = [UIImageView new];
         _accessoryImageView.contentMode = UIViewContentModeCenter;
-        self.accessoryView = _accessoryImageView;
+
+        // Believe me: Using the cell's accessoryView is a nightmare. iPhone Xs Max and iPad has different metrics.
+        // This way we're avoiding magic numbers, and hacked positions.
+        [_previewView addSubview:_accessoryImageView];
 
         [self applyStyle];
         
@@ -75,7 +78,8 @@
 
 - (void)setAccessoryImage:(UIImage *)accessoryImage {
     _accessoryImageView.image = accessoryImage;
-    [self resizeAccessoryImageView:accessoryImage.size];
+    [_accessoryImageView sizeToFit];
+    [self adjustTextViewInsets];
 }
 
 - (UIImage*)accessoryImage {
@@ -90,26 +94,25 @@
     _accessoryImageView.tintColor = accessoryTintColor;
 }
 
-- (void)resizeAccessoryImageView:(CGSize)newSize {
-    CGRect frame = _accessoryImageView.frame;
-    frame.size = newSize;
-    _accessoryImageView.frame = frame;
+- (void)adjustTextViewInsets {
+    UIEdgeInsets previewInsets = _previewView.textContainerInset;
+    previewInsets.right = _accessoryImageView.image.size.width;
+    _previewView.textContainerInset = previewInsets;
 }
 
 - (void)applyStyle {
-    
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
 
     self.backgroundColor = [theme colorForKey:@"backgroundColor"];
     self.contentView.backgroundColor = [theme colorForKey:@"backgroundColor"];
-    
+
     // set selection view
     UIView *selectionView = [[UIView alloc] initWithFrame:self.bounds];
     selectionView.backgroundColor = [theme colorForKey:@"noteCellBackgroundSelectionColor"];
     self.selectedBackgroundView = selectionView;
-    
+
     _previewView.backgroundColor = [theme colorForKey:@"backgroundColor"];
-    
+
     NSDictionary *defaultAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
                                         NSForegroundColorAttributeName:[theme colorForKey:@"noteBodyFontPreviewColor"]};
     
@@ -119,7 +122,6 @@
     _previewView.interactiveTextStorage.tokens = @{SPDefaultTokenName : defaultAttributes,
                                                    SPHeadlineTokenName : headlineAttributes
                                                    };
-    
 }
 
 
@@ -127,38 +129,26 @@
 
     [super layoutSubviews];
 
-    /// Note:
-    /// We check if we're on an iPad device because of its multitasking capabilities.
+    /// We check if we're running on iPad devices because of its multitasking capabilities.
     /// We just cannot check if we're in Regular x Regular. WHY? because the user may resize the window,
     /// and we'll end up stuck with the wrong frame sizes!
     ///
-    if (![UIDevice isPad]) {
-        return;
+    if ([UIDevice isPad]) {
+        CGRect bounds = self.bounds;
+        self.contentView.frame = bounds;
+        _previewView.frame = [self previewViewRectForWidth:bounds.size.width fast:YES];
     }
 
-    CGRect frame = self.bounds;
-    CGRect previewFrame = [self previewViewRectForWidth:frame.size.width fast:YES];
-    CGRect accessoryFrame = self.accessoryView.frame;
-
-    previewFrame.size.width -= CGRectGetWidth(accessoryFrame);
-    accessoryFrame.origin.x = CGRectGetMaxX(previewFrame);
-
-    /// Note II:
-    /// The order in which we set the frames is actually important. Setting the frame at last causes autosizingMask to kick in.
+    /// AccessoryView: Top Right Corner
     ///
-    self.contentView.frame = frame;
-    self.accessoryView.frame = accessoryFrame;
-    _previewView.frame = previewFrame;
+    CGRect accessoryFrame = _accessoryImageView.frame;
+    accessoryFrame.origin.x = CGRectGetWidth(_previewView.frame) - CGRectGetWidth(accessoryFrame);
+    accessoryFrame.origin.y = CGRectGetHeight(accessoryFrame);
+    _accessoryImageView.frame = accessoryFrame;
 }
 
 - (CGRect)listAnimationFrameForWidth:(CGFloat)width {
-    /// If the Preview Frame's height is less than the accessoryImage's height (considering yPos), we'll
-    /// correct the output's height. Otherwise the accessoryImage might get clipped.
-    ///
-    CGRect previewFrame = [self previewViewRectForWidth:width fast:NO];
-    previewFrame.size.height = MAX(CGRectGetHeight(previewFrame), CGRectGetMaxY(_accessoryImageView.frame));
-
-    return previewFrame;
+    return [self previewViewRectForWidth:width fast:NO];
 }
 
 - (CGRect)previewViewRectForWidth:(CGFloat)width fast:(BOOL)fast {
@@ -182,7 +172,11 @@
         height = self.bounds.size.height - verticalPadding;
     }
     else {
-        height = [_previewView sizeThatFits:CGSizeMake(previewWidth, CGFLOAT_MAX)].height;
+        const CGFloat SPAccessoryImageViewPaddingBottom = 1;
+        CGFloat previewHeight = [_previewView sizeThatFits:CGSizeMake(previewWidth, CGFLOAT_MAX)].height;
+        CGFloat accessoryMaximumY = CGRectGetMaxY(_accessoryImageView.frame) + SPAccessoryImageViewPaddingBottom;
+
+        height = MAX(previewHeight, accessoryMaximumY);
     }
 
     return CGRectMake((width - previewWidth) / 2.0,
