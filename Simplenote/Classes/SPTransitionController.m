@@ -455,8 +455,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         UIView *cleanSnapshot, *dirtySnapshot;
         
         cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                       width:finalWidth
-                                                searchString:editorController.searchString
+                                                width:finalWidth
+                                         searchString:editorController.searchString
                                               preview:YES];
         
         // tap a snapshot of the current view to avoid the need for creating a textview
