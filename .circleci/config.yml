@@ -1,0 +1,26 @@
+version: 2.1
+
+orbs:
+  # This uses the Orbs located at https://github.com/wordpress-mobile/circleci-orbs
+  ios: wordpress-mobile/ios@0.0.26
+
+jobs:
+  Test:
+    executor:
+      name: ios/default
+      xcode-version: "10.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Copy demo config.plist
+          command: cp Simplenote/config-demo.plist Simplenote/config.plist
+      - ios/test:
+          xcode-version: "10.2.0"
+          workspace: Simplenote.xcworkspace
+          scheme: Simplenote
+          device: iPhone XS
+
+workflows:
+  simplenote_ios:
+    jobs:
+      - Test

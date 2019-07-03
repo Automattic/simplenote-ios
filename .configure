@@ -1,0 +1,13 @@
+{
+  "branch": "master",
+  "pinned_hash": "eed1c0ec8d89ce5d1160a2df3e8870c2bc8438ee",
+  "files_to_copy": [
+    {
+      "file": "iOS/simplenote/config.plist",
+      "destination": "Simplenote/config.plist"
+    }
+  ],
+  "file_dependencies": [
+
+  ]
+}

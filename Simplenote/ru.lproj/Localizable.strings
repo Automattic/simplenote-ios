@@ -1,5 +1,10 @@
-﻿/* Number of found search results */
-"%d Result" = "% результат";
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: ru */
+
+/* Number of found search results */
+"%d Result" = "%d Найдено";
 
 /* Number of found search results */
 "%d Results" = "%d результатов";
@@ -25,6 +30,9 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Добавить нового партнера";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Метка...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Добавить тег";
 
@@ -33,6 +41,9 @@
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Уже есть учетная запись?";
+
+/* No comment provided by engineer. */
+"Back" = "Назад";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Регистрируясь, вы подтверждаете свое согласие с нашими Условиями предоставления услуг »";
@@ -79,6 +90,9 @@
 /* Debug Screen Title Display internal debug status */
 "Debug" = "Отладка";
 
+/* Permanent Delete */
+"Delete" = "Удалить";
+
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Скрыть клавиатуру";
 
@@ -103,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Введите ваш пароль";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Потеряли доступ к Simplenote? Чтобы восстановить доступ, переустановите приложение и войдите в учётную запись.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Быстро найти заметки через мгновенный поиск и теги. ";
 
 /* Forgot Password */
-"Forgot password? »" = "Забыли пароль? »";
+"Forgot your password? »" = "Забыли пароль? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Начало работы";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "Замечательно! Не могли бы вы оставить нам хороший отзыв?\n\nЗаранее благодарим.";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "Замечательно! Не могли бы вы оставить нам хороший отзыв?\n\nЗаранее благодарим.";
 
 /* Noun - the version history of a note */
 "History" = "История";
@@ -129,6 +147,18 @@
 
 /* No comment provided by engineer. */
 "Leave a Review" = "Оставить отзыв";
+
+/* Month and day date formatter */
+"MMM d" = "Д ммм";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "Д ммм, чч:мм";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "Д ммм гггг";
+
+/* Month and year date formatter */
+"MMM yyyy" = "МММ гггг";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Меню";
@@ -149,7 +179,7 @@
 "Note Published" = "Заметка опубликована ";
 
 /* No comment provided by engineer. */
-"Note not published" = "Заметка неопубликованна";
+"Note not published" = "Заметка не опубликована";
 
 /* Plural form of notes */
 "Notes" = "Заметки";
@@ -192,6 +222,9 @@
 
 /* No comment provided by engineer. */
 "Preferences" = "Параметры";
+
+/* Markdown Preview */
+"Preview" = "Предварительный просмотр";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Публикация";
@@ -271,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Зарегистрироваться";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "При выходе из учётной записи все несинхронизированные заметки будут удалены. Чтобы убедиться, что заметки синхронизированы, войдите в веб-приложение.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Сортировать заметки по алфавиту";
 
 /* Message shown in first launch view */
 "Stay organized" = "Оставайтесь организованным";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Тег…";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Тег: %@";
@@ -296,10 +329,10 @@
 "Touch ID" = "Идентификатор прикосновения";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Корзина";
+"Trash" = "Корзина";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Удалить";
+"Trash" = "Удалить";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Отключить пароль";
@@ -315,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Отмена публикации…";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Обнаружены несинхронизированные заметки";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "Пользуйтесь им везде";
@@ -344,55 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Ваши заметки обновляются на всех ваших устройствах. Ничего нажимать не нужно. Это просто работает. ";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Разрешить другим сотрудничать";
+"Enable others to collaborate" = "Разрешить другим сотрудничать";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Эта заметка была удалена на другом устройстве";
+"This note was deleted on another device." = "Эта заметка была удалена на другом устройстве";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Восстановить предыдущую версию заметки";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote - это простой способ сохранить свои заметки, планы, идеи и многое другое. Ваши записи синхронизируются на всех подключенных устройствах абсолютно бесплатно.\n\nКлючевой особенностью Simplenote является исключительная скорость и эффективность работы. Откройте приложение, запишите несколько мыслей и готово. Поскольку коллекция ваших заметок будет увеличиваться, мы обеспечили возможность мгновенно найти нужные, а также упорядочить их, закрепив вверху списка или отметив метками. Также вы можете поделиться своими заметками и опубликовать их для других людей.\n\nЛучший способ изучить Simplenote - попробовать. Вам будет предложено создать учетную запись. Это позволит сохранять ваши заметки онлайн и синхронизировать их автоматически.\n\nПосле авторизации попробуйте создать несколько заметок! Затем переходите на simplenote.com, где вы сможете скачать Simplenote для всех ваших устройств.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "заметки,заметка,синхронизация,simplenote,simple,список дел,список";
+"Restore note to previous version" = "Восстановить предыдущую версию заметки";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Показать опции заметки";
+"Show options for note" = "Показать опции заметки";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Закрыть текущую заметку";
+"Close current note" = "Закрыть текущую заметку";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Поделится содержанием данной заметки";
+"Share the content of the current note" = "Поделится содержанием данной заметки";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Добавить тег к текущей заметке";
+"Add a tag to the current note" = "Добавить тег к текущей заметке";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
+"Remove tag from the current note" = "Удалить тег в текущей заметке";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Отправить текущую заметку в корзину";
+"Move the current note to trash" = "Отправить текущую заметку в корзину";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
+"Connect to the Internet to Access Previous Versions" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Оставить этот вариант";
+"Switch to this version" = "Оставить этот вариант";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Извлечение версии";
+"Fetching version" = "Извлечение версии";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Вы потеряли доступ к Simplenote? Вы можете восстановить доступ, повторно установив приложение и войдя в свою учетную запись.";
-
-/* Permanent Delete */
-"Delete" = "Удалить";

@@ -1,0 +1,7 @@
+4.9.0
+=====
+
+
+4.8.0
+-----
+-   The Notes List can now be sorted by creation and modification dates.

@@ -102,20 +102,20 @@ NSString *const SPAnimationOptionsName = @"SPAnimationOptionsName";
     
     animationBlock = ^() {
         
-        [_animatedValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [self->_animatedValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             
             if ([key isEqualToString:SPAnimationAlphaValueName]) {
                 
                 CGFloat interpolatedValue = [self interpolatedFloatBetweenInitialFloat:[(NSNumber *)[(NSDictionary *)obj objectForKey:SPAnimationInitialValueName] floatValue]
                                                                             finalFloat:[(NSNumber *)[(NSDictionary *)obj objectForKey:SPAnimationFinalValueName] floatValue]
                                                                                percent:interpolatedPercent];
-                _snapshot.alpha = interpolatedValue;
+                self->_snapshot.alpha = interpolatedValue;
             } else if ([key isEqualToString:SPAnimationFrameValueName]) {
                 
                 CGRect interpolatedRect = [self interpolatedRectBetweenIntialRect:[(NSValue *)[(NSDictionary *)obj objectForKey:SPAnimationInitialValueName] CGRectValue]
                                                                         finalRect:[(NSValue *)[(NSDictionary *)obj objectForKey:SPAnimationFinalValueName] CGRectValue]
                                                                           percent:interpolatedPercent];
-                _snapshot.frame = interpolatedRect;
+                self->_snapshot.frame = interpolatedRect;
             }
             
         }];
@@ -126,7 +126,7 @@ NSString *const SPAnimationOptionsName = @"SPAnimationOptionsName";
     
     completionBlock = ^() {
         
-        percentComplete = percent;
+        self->percentComplete = percent;
 
         if (completion)
             completion();

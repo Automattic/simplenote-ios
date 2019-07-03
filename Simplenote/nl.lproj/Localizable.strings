@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=n != 1; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: nl */
+
+/* Number of found search results */
 "%d Result" = "%d resultaat";
 
 /* Number of found search results */
@@ -25,14 +30,23 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Een nieuwe samenwerker toevoegen...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tag toevoegen";
 
 /* Title of option to display all notes */
-"All Notes" = "Alle notities";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Heb je al een account?";
+
+/* No comment provided by engineer. */
+"Back" = "Terug";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Als je je registreert, ga je akkoord met onze Terms of Service »";
 
 /* No comment provided by engineer. */
 "Cancel" = "Annuleren";
@@ -44,10 +58,13 @@
 "Collaborators" = "Samenwerkers";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Beknopte notitielijst";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "Bevestigen";
+
+/* Ratings View: Contact */
+"Contact" = "Contact";
 
 /* No comment provided by engineer. */
 "Could Be Better" = "Kan beter";
@@ -58,6 +75,9 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kan niet inloggen met het opgegeven e-mailadres en wachtwoord.";
 
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Kun je ons vertellen wat we kunnen verbeteren?";
+
 /* No comment provided by engineer. */
 "Create a new note" = "Een nieuwe notitie maken";
 
@@ -66,6 +86,12 @@
 
 /* Option to enable the dark app theme. */
 "Dark Theme" = "Donker thema";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Debug";
+
+/* Permanent Delete */
+"Delete" = "Verwijderen";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Toetsenbord sluiten";
@@ -91,14 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Voer je wachtwoordcode in";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Heb je geen toegang meer tot Simplenote? Je kunt weer toegang krijgen door de app opnieuw te installeren en in te loggen op je account.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Vind notities snel terug met instant search en simple tags.";
 
 /* Forgot Password */
-"Forgot password? »" = "Wachtwoord vergeten? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Aan de slag";
+
+/* Ratings View: Like */
+"Great! Could you leave us a nice review?
+\nIt really helps." = "";
 
 /* Noun - the version history of a note */
 "History" = "Geschiedenis";
@@ -107,13 +140,31 @@
 "History..." = "Geschiedenis...";
 
 /* No comment provided by engineer. */
+"How can we help?" = "Hoe kunnen we helpen?";
+
+/* No comment provided by engineer. */
 "I Like It" = "Ik vind het leuk";
+
+/* No comment provided by engineer. */
+"Leave a Review" = "Laat een beoordeling achter";
+
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM, u:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM jjjj";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM jjjj";
 
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
 /* Label to create a new note */
-"New note" = "Nieuwe notitie";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Geen notities";
@@ -121,11 +172,14 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Geen resultaten";
 
+/* No comment provided by engineer. */
+"No Thanks" = "Nee, liever niet";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "Notitie gepubliceerd";
 
 /* No comment provided by engineer. */
-"Note not published" = "Notitie niet gepubliceerd";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "Notities";
@@ -169,6 +223,9 @@
 /* No comment provided by engineer. */
 "Preferences" = "Voorkeuren";
 
+/* Markdown Preview */
+"Preview" = "Voorbeeld bekijken";
+
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Publiceren";
 
@@ -208,8 +265,14 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
 
+/* Title displayed in the Option's Security section. */
+"Security" = "Beveiliging";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Verzenden";
+
+/* No comment provided by engineer. */
+"Send Feedback" = "Stuur feedback";
 
 /* Prompt when setting up a passcode */
 "Set Passcode" = "Wachtwoordcode instellen";
@@ -221,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "Deel een lijst, plaats instructies of publiceer je gedachten.";
 
 /* No comment provided by engineer. */
-"Share note" = "Notitie delen";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Sidebar";
@@ -241,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Registreren";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Door je af te melden worden gesynchroniseerde notities verwijderd. Je kunt je gesynchroniseerde notities verifiëren door je aan te melden via de web-app.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Notities alfabetisch sorteren";
 
 /* Message shown in first launch view */
 "Stay organized" = "Houd het overzicht";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Tag...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Tag: %@";
@@ -266,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Prullenbak";
+"Trash" = "Prullenbak";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Naar prullenbak";
+"Trash" = "Naar prullenbak";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Wachtwoordcode uitschakelen";
@@ -285,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Verwijderen ...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Ongesynchroniseerde notities gedetecteerd";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "Gebruik het overal";
@@ -304,6 +370,9 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Gisteren";
 
+/* No comment provided by engineer. */
+"Your Email:" = "Je e-mailadres:";
+
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "Je e-mailadres is niet geldig.";
 
@@ -311,53 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Je notities blijven bijgewerkt op al je apparaten. Je hoeft geen knoppen in te drukken. Het gaat allemaal vanzelf.";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Samenwerking met anderen inschakelen";
+"Enable others to collaborate" = "Samenwerking met anderen inschakelen";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Deze notitie is verwijderd op een ander apparaat.";
+"This note was deleted on another device." = "Deze notitie is verwijderd op een ander apparaat.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Notitie herstellen naar eerdere versie";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote is een eenvoudige manier om notities, lijstjes, ideeën en andere zaken bij te houden. Je notities blijven gratis gesynchroniseerd op al je apparaten.\n\nDe Simplenote-ervaring draait om snelheid en efficiency. Open Simplenote, schrijf je gedachten op en je bent klaar. Naarmate je collectie met notities groeit, kun je er snel in zoeken en ze geordend houden met tags en pins. Je kunt ook notities delen en ze publiceren voor anderen.\n\nDe beste manier om Simplenote te leren kennen, is het te proberen. Je wordt gevraagd een account aan te maken. Hierdoor kunnen back-ups worden gemaakt van je notities en kunnen ze automatisch worden gesynchroniseerd.\n\nAls je je geregistreerd hebt, kun je een paar notities maken! Ga vervolgens naar simplenote.com om Simplenote te downloaden voor je andere apparaten.";
+"Restore note to previous version" = "Notitie herstellen naar eerdere versie";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Opties tonen voor notitie";
+"Show options for note" = "Opties tonen voor notitie";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Huidige notitie sluiten";
+"Close current note" = "Huidige notitie sluiten";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "De inhoud van de huidige notitie delen";
+"Share the content of the current note" = "De inhoud van de huidige notitie delen";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Een tag toevoegen aan de huidige notitie";
+"Add a tag to the current note" = "Een tag toevoegen aan de huidige notitie";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Tag verwijderen uit de huidige notitie";
+"Remove tag from the current note" = "Tag verwijderen uit de huidige notitie";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "De huidige notitie verplaatsen naar de prullenbak";
+"Move the current note to trash" = "De huidige notitie verplaatsen naar de prullenbak";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Maak verbinding met internet voor toegang tot eerdere versies";
+"Connect to the Internet to Access Previous Versions" = "Maak verbinding met internet voor toegang tot eerdere versies";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Overschakelen naar deze versie";
+"Switch to this version" = "Overschakelen naar deze versie";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Versie ophalen";
+"Fetching version" = "Versie ophalen";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Ben je geen toegang meer tot Simplenote? U kunt de toegang door het opnieuw installeren van de app en in te loggen op je account terug te krijgen.";
-
-/* Permanent Delete */
-"Delete" = "Verwijder";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
 

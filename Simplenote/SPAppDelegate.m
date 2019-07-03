@@ -48,9 +48,6 @@
 
 #if USE_HOCKEY
 #import <HockeySDK/HockeySDK.h>
-#elif USE_CRASHLYTICS
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 #endif
 
 
@@ -115,20 +112,6 @@
     
     if (username) {
         CFPreferencesSetAppValue(CFSTR("email"), NULL, kCFPreferencesCurrentApplication);
-        CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
-    }
-}
-    
-- (void)importLegacyPreferences
-{
-    NSNumber *legacySortPref = (__bridge_transfer NSNumber *)CFPreferencesCopyAppValue(CFSTR("sortMode"), kCFPreferencesCurrentApplication);
-    if (legacySortPref != nil) {
-        
-        if ([legacySortPref integerValue] == 2) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SPAlphabeticalSortPref];
-        }
-        
-        CFPreferencesSetAppValue(CFSTR("sortMode"), NULL, kCFPreferencesCurrentApplication);
         CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
     }
 }
@@ -224,20 +207,9 @@
 #endif
 }
 
-- (void)setupCrashlytics
+- (void)setupCrashLogging
 {
-#if USE_CRASHLYTICS
-    NSLog(@"Initializing Crashlytics...");
-    
-    NSString *email = self.simperium.user.email;
-    NSString *key = [SPCredentials simplenoteCrashlyticsKey];
-
-    [Fabric with:@[CrashlyticsKit]];
-    
-    [Crashlytics startWithAPIKey:key];
-    [[Crashlytics sharedInstance] setObjectValue:email forKey:@"email"];
-
-#endif
+    [CrashLogging startWithSimperium: self.simperium];
 }
 
 - (void)setupThemeNotifications
@@ -254,9 +226,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Old School!
-    [self importLegacyPreferences];
-    
     // Migrate keychain items
     KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
 // Keychain Migration Testing: Should only run in *release* targets. Uncomment / use at will
@@ -267,7 +236,7 @@
     [self setupThemeNotifications];
     [self setupSimperium];
 	[self setupBitHockey];
-    [self setupCrashlytics];
+    [self setupCrashLogging];
     [self setupDefaultWindow];
     [self setupAppRatings];
     
@@ -313,8 +282,11 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
-{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+#else
+    - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+#endif
     NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
     if (uniqueIdentifier == nil) {
         return false;
@@ -591,11 +563,11 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 
-        [_simperium signOutAndRemoveLocalData:YES completion:^{
+        [self->_simperium signOutAndRemoveLocalData:YES completion:^{
 			        
-			[_noteEditorViewController clearNote];
-			_selectedTag = nil;
-			[_noteListViewController update];
+            [self->_noteEditorViewController clearNote];
+            self->_selectedTag = nil;
+            [self->_noteListViewController update];
 			
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
@@ -616,8 +588,8 @@
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
-				[_simperium authenticateIfNecessary];
-				_bSigningUserOut = NO;
+                [self->_simperium authenticateIfNecessary];
+                self->_bSigningUserOut = NO;
 			}];
 		}];
     });
@@ -641,6 +613,11 @@
     
     // Tracker!
     [SPTracker refreshMetadataWithEmail:simperium.user.email];
+
+    // Now that the user info is present, cache it for use by the crash logging system.
+    // See the docs there for details on why this is necessary.
+    [CrashLogging cacheUser:simperium.user];
+    [CrashLogging cacheOptOutSetting:!simperium.preferencesObject.analytics_enabled.boolValue];
 }
 
 - (void)simperiumDidLogout:(Simperium *)simperium
@@ -791,7 +768,7 @@
 #pragma mark URL scheme
 #pragma mark ================================================================================
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {    
     // Support opening Simplenote and optionally creating a new note
     if ([[url host] isEqualToString:@"new"]) {
@@ -864,7 +841,7 @@
     double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+        [self->_noteListViewController openNote:note fromIndexPath:nil animated:NO];
         [self showPasscodeLockIfNecessary];
     });
 }

@@ -1,4 +1,9 @@
-﻿/* Number of found search results */
+/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Plural-Forms: nplurals=2; plural=n != 1; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: it */
+
+/* Number of found search results */
 "%d Result" = "%d Resultato";
 
 /* Number of found search results */
@@ -25,14 +30,20 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Aggiungi un nuovo collaboratore...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Aggiungi tag";
 
 /* Title of option to display all notes */
-"All Notes" = "Tutte le note";
+"All Notes" = "All Notes";
 
 /* A short description to access the account login screen */
 "Already have an account?" = "Hai già un account?";
+
+/* No comment provided by engineer. */
+"Back" = "Indietro";
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Iscrivendoti, accetti i nostri Termini di servizio »";
@@ -47,7 +58,7 @@
 "Collaborators" = "Collaboratori";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Vista note ristretta";
+"Condensed Note List" = "Condensed Note List";
 
 /* Hint displayed in the password confirmation field */
 "Confirm" = "Conferma";
@@ -79,6 +90,9 @@
 /* Debug Screen Title Display internal debug status */
 "Debug" = "Debug";
 
+/* Permanent Delete */
+"Delete" = "Elimina";
+
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Nascondi la tastiera";
 
@@ -103,17 +117,21 @@
 /* Pin Lock */
 "Enter your passcode" = "Inserisci il tuo PIN";
 
+/* Passcode Failed Attempts */
+"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Hai perso l’accesso a Simplenote? Puoi ottenerlo nuovamente reinstallando l’app e accedendo al tuo account.";
+
 /* Description of Simplenote shown in first launch view */
 "Find notes quickly with instant searching and simple tags." = "Trova le note facilmente con la ricerca in tempo reale e tramite i tag.";
 
 /* Forgot Password */
-"Forgot password? »" = "Password dimenticata? »";
+"Forgot your password? »" = "Forgot your password? »";
 
 /* Button label shown on first launch screen to start the log in process */
 "Get Started" = "Inizia";
 
 /* Ratings View: Like */
-"Great! Could you leave us a nice review?\nIt really helps." = "Grande! Potresti lasciarci una recensione?\n\n\nAiuterebbe molto.";
+"Great! Could you leave us a nice review?
+\nIt really helps." = "Grande! Potresti lasciarci una recensione?\\n\\n\\nAiuterebbe molto.";
 
 /* Noun - the version history of a note */
 "History" = "Storia";
@@ -130,11 +148,23 @@
 /* No comment provided by engineer. */
 "Leave a Review" = "Lascia una recensione";
 
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
 /* Label to create a new note */
-"New note" = "Nuova nota";
+"New note" = "New note";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Nessuna nota presente";
@@ -149,7 +179,7 @@
 "Note Published" = "Nota pubblicata";
 
 /* No comment provided by engineer. */
-"Note not published" = "Nota non pubblicata";
+"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "Note";
@@ -192,6 +222,9 @@
 
 /* No comment provided by engineer. */
 "Preferences" = "Preferenze";
+
+/* Markdown Preview */
+"Preview" = "Visualizzare in anteprima";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Pubblica";
@@ -251,7 +284,7 @@
 "Share a list, post some instructions, or publish your thoughts." = "Condividere una lista di to-do, gli appunti, o pubblicarli sul web, è facile con Simplenote.";
 
 /* No comment provided by engineer. */
-"Share note" = "Condividi nota";
+"Share note" = "Share note";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Barra laterale";
@@ -271,14 +304,14 @@
 /* A short link to access the account creation screen */
 "Sign up" = "Registrati";
 
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "La disconnessione causerà l’eliminazione di tutte le note non sincronizzate. È possibile verificare le note sincronizzate accedendo all’app web.";
+
 /* Option to sort notes in the note list alphabetically. The default is by modification date */
 "Sort Notes Alphabetically" = "Ordina le note alfabeticamente";
 
 /* Message shown in first launch view */
 "Stay organized" = "Rimani organizzato";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Tag...";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Tag: %@";
@@ -296,10 +329,10 @@
 "Touch ID" = "Touch ID";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Cestino";
+"Trash" = "Cestino";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Elimina";
+"Trash" = "Elimina";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Disabilita il PIN";
@@ -315,6 +348,9 @@
 
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Rimuovendo dalla pubblicazione";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Note non sincronizzate rilevate";
 
 /* Message shown in first launch view */
 "Use it everywhere" = "Usa l'app su qualunque dispositivo";
@@ -344,56 +380,44 @@
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Le tue note sono disponibili ed aggiornate in tempo reale su tutti i tuoi dispositivi, senza bisogno di alcuna configurazione. ";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Aggiungi collaboratori";
+"Enable others to collaborate" = "Aggiungi collaboratori";
 
 /* No comment provided by engineer. */
-"collaborators-description" = "Aggiungi un indirizzo email con cui condividere questa nota. Dopo la condivisione entrambi gli utenti potranno modificare la nota.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Aggiungi un indirizzo email con cui condividere questa nota. Dopo la condivisione entrambi gli utenti potranno modificare la nota.";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Questa nota è stata cancellata da un altro dispositivo.";
+"This note was deleted on another device." = "Questa nota è stata cancellata da un altro dispositivo.";
 
 /* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Ripristina da una versione precedente";
-
-/* iTunes app description */
-"iTunes-description" = "Simplenote è un modo semplice per tenere note, liste, idee e tanto altro ancora. Le tue note saranno sincronizzate su tutti i tuoi dispositivi senza alcun costo aggiuntivo.\n\nSimplenote è tutta questione di velocità ed efficienza. Apri l'app per scrivere brevi appunti, memo, ed il gioco è fatto. E quando la vostra raccolta di note cresce, è possibile organizzarle con l'uso dei tag, ed usare la ricerca in tempo reale per accedere alle note nel più breve tempo possibile.\n\nIl modo migliore per conoscere Simplenote è provarlo. Ti sarà chiesto di creare un account, questo ci consentirà di creare copie di sicurezza delle tue note e di sincronizzarle automaticamente online.\n\nUna volta installata l'app, visita simplenote.com per leggere le note dal web, scaricare l'app anche su altri dispositivi ed iniziare ad accedere alle vostre note senza alcun limite.";
-
-/* iTunes keywords used to discover app in the App Store */
-"iTunes-keywords" = "note,nota,sincronizzazione,Simplenote,semplice,cose da fare,elenco";
+"Restore note to previous version" = "Ripristina da una versione precedente";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Mostra opzioni nota";
+"Show options for note" = "Mostra opzioni nota";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Chiudi la nota";
+"Close current note" = "Chiudi la nota";
 
 /* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Condividi il contenuto della nota";
+"Share the content of the current note" = "Condividi il contenuto della nota";
 
 /* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Aggiungi un tag alla nota";
+"Add a tag to the current note" = "Aggiungi un tag alla nota";
 
 /* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Rimuovi il tag dalla nota";
+"Remove tag from the current note" = "Rimuovi il tag dalla nota";
 
 /* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Sposta la nota nel cestino";
+"Move the current note to trash" = "Sposta la nota nel cestino";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Collegati ad internet per accedere alle versioni precedenti";
+"Connect to the Internet to Access Previous Versions" = "Collegati ad internet per accedere alle versioni precedenti";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Usa questa versione";
+"Switch to this version" = "Usa questa versione";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Caricamento versioni";
+"Fetching version" = "Caricamento versioni";
 
 /* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Benvenuto in Simplenote per iOS!\n\nPer creare una nuova nota, clicca sul bottone con il segno +.\n\nScorri la lista per vedere tutte le tue note. Tocca il titolo della nota per aprire il dettaglio, e tocca il contenuto per modificarlo.\n\nPer effettuare una ricerca, scrivi nella barra di ricerca presente in alto nella schermata delle note.\n\nClicca il pulsante in alto a sinistra della nota, oppure effettua uno swiping su di essa, per accedere ai tags. E' possibile aggiungere nuovi tags alla nota usando l'apposito campo presente in basso nella schermata di editing. Usa la barra laterale per accedere alle note filtrare per tag.\n\nCi sono anche altre opzioni se le desideri. E' per esempio possibile aggiungere collaboratori ad una nota, oppure pubblicare una nota su una pagina web.\n\nUsa Simplenote per Mac, per Android, oppure visita http:\/\/simplenote.com per accedere alle tue note da qualunque posto e da qualunque dispositivo.";
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Benvenuto in Simplenote per iOS!\n\nPer creare una nuova nota, clicca sul bottone con il segno +.\n\nScorri la lista per vedere tutte le tue note. Tocca il titolo della nota per aprire il dettaglio, e tocca il contenuto per modificarlo.\n\nPer effettuare una ricerca, scrivi nella barra di ricerca presente in alto nella schermata delle note.\n\nClicca il pulsante in alto a sinistra della nota, oppure effettua uno swiping su di essa, per accedere ai tags. E' possibile aggiungere nuovi tags alla nota usando l'apposito campo presente in basso nella schermata di editing. Usa la barra laterale per accedere alle note filtrare per tag.\n\nCi sono anche altre opzioni se le desideri. E' per esempio possibile aggiungere collaboratori ad una nota, oppure pubblicare una nota su una pagina web.\n\nUsa Simplenote per Mac, per Android, oppure visita http:\/\/simplenote.com per accedere alle tue note da qualunque posto e da qualunque dispositivo.";
 
-
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Avete perso l'accesso a Simplenote? È possibile recuperare l'accesso da re-installare l'applicazione e accedendo al proprio account.";
-
-/* Permanent Delete */
-"Delete" = "Elimina";

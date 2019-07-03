@@ -356,8 +356,8 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
                          
                      } completion:^(BOOL finished) {
                          
-                         if (delegate && [delegate respondsToSelector:@selector(actionSheetDidShow:)])
-                             [delegate actionSheetDidShow:self];
+                         if (self->delegate && [self->delegate respondsToSelector:@selector(actionSheetDidShow:)])
+                             [self->delegate actionSheetDidShow:self];
                      }];
     
 

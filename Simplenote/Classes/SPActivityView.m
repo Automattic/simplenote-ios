@@ -374,9 +374,9 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
                      animations:^{
                          
                          if (hidden)
-                            statusActivityIndicator.alpha = 0.0;
+                             self->statusActivityIndicator.alpha = 0.0;
                          else
-                            statusLabel.alpha = 0.0;
+                             self->statusLabel.alpha = 0.0;
                          
                      }];
     
@@ -384,14 +384,14 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
                      animations:^{
                          
                          if (!hidden)
-                            statusActivityIndicator.alpha = 1.0;
+                             self->statusActivityIndicator.alpha = 1.0;
                          else
-                            statusLabel.alpha = 1.0;
+                             self->statusLabel.alpha = 1.0;
                          
                      } completion:^(BOOL finished) {
                          
                          if (hidden)
-                            [statusActivityIndicator stopAnimating];
+                             [self->statusActivityIndicator stopAnimating];
                          
                      }];
     
