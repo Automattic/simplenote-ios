@@ -42,8 +42,8 @@ class SnapshotRenderer: NSObject {
         accessoryImageView.backgroundColor = backgroundColor
         textView.backgroundColor = backgroundColor
         textView.interactiveTextStorage.tokens = [
-            SPDefaultTokenName:     defaultAttributes(preview: preview),
-            SPHeadlineTokenName:    headlineAttributes()
+            SPDefaultTokenName: defaultAttributes(preview: preview),
+            SPHeadlineTokenName: headlineAttributes()
         ]
 
         // Setup: Payload
