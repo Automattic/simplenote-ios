@@ -933,8 +933,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate: {
-            
-            if (newIndexPath == nil)
+            if (newIndexPath == nil || [indexPath isEqual:newIndexPath])
             {
                 // remove current preview
                 Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
