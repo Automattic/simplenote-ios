@@ -172,7 +172,13 @@
         height = self.bounds.size.height - verticalPadding;
     }
     else {
+        /// Note:
+        /// We must consider the scenario in which there's an accessoryImageView being displayed, and its maximumY
+        /// is effectively beyond the previewView's Height. This could cause an animation glitch, in which the
+        /// accessoryImageView gets clipped.
+        ///
         const CGFloat SPAccessoryImageViewPaddingBottom = 1;
+
         CGFloat previewHeight = [_previewView sizeThatFits:CGSizeMake(previewWidth, CGFLOAT_MAX)].height;
         CGFloat accessoryMaximumY = CGRectGetMaxY(_accessoryImageView.frame) + SPAccessoryImageViewPaddingBottom;
 
