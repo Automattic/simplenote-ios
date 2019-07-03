@@ -134,15 +134,15 @@ private extension SnapshotRenderer {
     func defaultAttributes(preview: Bool) -> [NSAttributedString.Key: Any] {
         if preview {
             return [
-                .foregroundColor:   bodyColor,
-                .font:              bodyFont
+                .foregroundColor: bodyColor,
+                .font: bodyFont
             ]
         }
 
         return [
-            .foregroundColor:   headlineColor,
-            .font:              bodyFont,
-            .paragraphStyle:    paragraphStyle
+            .foregroundColor: headlineColor,
+            .font: bodyFont,
+            .paragraphStyle: paragraphStyle
         ]
     }
 
@@ -150,8 +150,8 @@ private extension SnapshotRenderer {
     ///
     func headlineAttributes() -> [NSAttributedString.Key: Any] {
         return [
-            .foregroundColor:   headlineColor,
-            .font:              headlineFont
+            .foregroundColor: headlineColor,
+            .font: headlineFont
         ]
     }
 
@@ -187,8 +187,8 @@ private struct Constants {
 
     /// Maximum Text Length on iPhone / iPad Devices
     ///
-    static let maximumLengthPhone  = 1200
-    static let maximumLengthPad    = 3100
+    static let maximumLengthPhone = 1200
+    static let maximumLengthPad = 3100
 
     /// Returns the Maximum Length of a snapshot, for the current device.
     /// NOTE: Why don't we use Size Classes? Because on iPad Multitasking we may get compact width. And we want
