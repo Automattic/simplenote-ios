@@ -579,14 +579,14 @@
                                                                  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                      [self togglePinnedNote:note];
                                                                  }];
-    togglePin.backgroundColor = [UIColor simplenoteBlue];
+    togglePin.backgroundColor = [UIColor simplenoteSecondaryActionColor];
 
     UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                      title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")
                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                        [self shareNote:note sourceIndexPath:indexPath];
                                                                    }];
-    share.backgroundColor = [UIColor simplenoteGray500];
+    share.backgroundColor = [UIColor simplenoteTertiaryActionColor];
 
     return @[trash, togglePin, share];
 }
