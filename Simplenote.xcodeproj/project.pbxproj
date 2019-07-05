@@ -122,6 +122,10 @@
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
+		B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */; };
+		B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */; };
+		B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */; };
+		B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
@@ -329,6 +333,10 @@
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
+		B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Simplenote.swift"; sourceTree = "<group>"; };
+		B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+Simplenote.swift"; path = "Classes/FileManager+Simplenote.swift"; sourceTree = "<group>"; };
+		B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteActivityItemSource.swift; path = Classes/SimplenoteActivityItemSource.swift; sourceTree = "<group>"; };
+		B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIActivity+Simplenote.swift"; path = "Classes/UIActivity+Simplenote.swift"; sourceTree = "<group>"; };
 		B53971A01AB8DCDC00B1A582 /* SPTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SPTracker.h; path = Classes/SPTracker.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -814,6 +822,16 @@
 			name = Trackers;
 			sourceTree = "<group>";
 		};
+		B52BB74C22CFD14C0042C162 /* Exporter */ = {
+			isa = PBXGroup;
+			children = (
+				B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */,
+				B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */,
+				B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */,
+			);
+			name = Exporter;
+			sourceTree = "<group>";
+		};
 		B550F92F22BA643800091939 /* Siri */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
+				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
@@ -1091,6 +1110,7 @@
 			children = (
 				467D9C7A1788D10400785EF3 /* Categories */,
 				B569DBFE1C03411500EC1FE8 /* Extensions */,
+				B52BB74C22CFD14C0042C162 /* Exporter */,
 				467D9C601788A53700785EF3 /* Models */,
 				B5B8AE7B1AB9ECF80082775D /* Ratings */,
 				B512AF981C20B1A200FE76D8 /* Settings */,
@@ -1574,6 +1594,7 @@
 				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
 				B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */,
+				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
 				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
@@ -1586,8 +1607,10 @@
 				46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */,
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
 				46A3C96B17DFA81A002865AE /* NSAttributedString+Styling.m in Sources */,
+				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
+				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
@@ -1641,6 +1664,7 @@
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
+				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,

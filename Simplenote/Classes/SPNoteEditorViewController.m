@@ -1705,22 +1705,17 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self save];
     
     [SPTracker trackEditorNoteContentShared];
-	   
-    UISimpleTextPrintFormatter *print = [[UISimpleTextPrintFormatter alloc] initWithText:_currentNote.content];
 
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[_currentNote.content, print]
-                                                                      applicationActivities:nil];
-    
+    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:_currentNote];
+
     if ([UIDevice isPad]) {
         acv.modalPresentationStyle = UIModalPresentationPopover;
         acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
         acv.popoverPresentationController.sourceView = self.view;
-        [self presentViewController:acv animated:YES completion:nil];
-    } else {
-        [self.navigationController presentViewController:acv animated:YES completion:nil];
     }
-    
+
+    [self presentViewController:acv animated:YES completion:nil];
 }
 
 - (void)shareNoteURLAction:(id)sender {
