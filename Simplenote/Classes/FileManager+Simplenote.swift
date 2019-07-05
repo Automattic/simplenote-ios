@@ -25,11 +25,13 @@ extension FileManager {
         let filename = String(format: "%@.txt", note.simperiumKey)
         let targetURL = FileManager.documentsURL.appendingPathComponent(filename)
 
-        guard let error = try? payload.write(to: targetURL, atomically: true, encoding: .utf8) else {
-            return targetURL
+        do {
+            try payload.write(to: targetURL, atomically: true, encoding: .utf8)
+        } catch {
+            NSLog("Note Exporter Failure: \(error)")
+            return nil
         }
 
-        NSLog("Note Exporter Failure: \(error)")
-        return nil
+        return targetURL
     }
 }
