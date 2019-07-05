@@ -10,6 +10,6 @@
 
 @interface NSString (Search)
 
--(NSMutableArray *)rangesForTerms:(NSString *)terms;
+-(NSArray *)rangesForTerms:(NSString *)terms;
 
 @end

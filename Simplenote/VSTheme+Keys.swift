@@ -5,9 +5,13 @@ import Foundation
 //
 enum ThemeKey: String {
     case backgroundColor
+    case noteBodyFontPreviewColor
+    case noteBodyLineHeightPercentage
     case noteCellBackgroundSelectionColor
+    case noteHeadlineFontColor
     case tableViewTextLabelColor
     case tableViewDetailTextLabelColor
+    case tintColor
 }
 
 
@@ -19,5 +23,11 @@ extension VSTheme {
     ///
     func color(forKey key: ThemeKey) -> UIColor? {
         return color(forKey: key.rawValue)
+    }
+
+    /// Returns the Float Value associated to a given ThemeKey
+    ///
+    func float(forKey key: ThemeKey) -> CGFloat {
+        return float(forKey: key.rawValue)
     }
 }
