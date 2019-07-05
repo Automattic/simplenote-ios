@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
@@ -166,11 +166,6 @@
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
     [self.tableView applyTheme];
     [self.tableView reloadData];
-
-    // Restyle the TransitionController
-    if (self.transitionController) {
-        [self.transitionController applyStyle];
-    }
 
     // Restyle the search bar
     [self styleSearchBar];
@@ -452,13 +447,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SPTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+
     if (!cell) {
         // this shouldn't be needed, but offscreen collection view cells are sometimes called on
         // and this can lead to an occasional crash
-        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:cellIdentifier];
+        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -468,17 +463,20 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    if (!note.preview)
+    if (!note.preview) {
         [note createPreview];
+    }
     
+    UIColor *previewColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
-    [attributedContent addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+    [attributedContent addChecklistAttachmentsForColor:previewColor];
     
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            _pinImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            _pinImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
+            _pinSearchImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
         }
         
         
@@ -497,6 +495,9 @@
         [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
+
+    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
@@ -1118,7 +1119,7 @@
 
 - (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
     
-    BOOL isVoiceOverRunning =UIAccessibilityIsVoiceOverRunning();
+    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
     self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
 	
 	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];

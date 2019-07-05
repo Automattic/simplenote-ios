@@ -1,0 +1,1 @@
+* A Lista de Notas pode ser classificada pelas datas de criação e modificação.
