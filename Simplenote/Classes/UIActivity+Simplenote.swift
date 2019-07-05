@@ -5,6 +5,18 @@ import Foundation
 //
 extension UIActivity.ActivityType {
 
+    /// WordPress Draft Extension (AppStore)
+    ///
+    static var wordPressDraftAppStore: UIActivity.ActivityType {
+        return UIActivity.ActivityType("org.wordpress.WordPressDraftAction")
+    }
+
+    /// WordPress Draft Extension (Internal Beta)
+    ///
+    static var wordPressDraftInternal: UIActivity.ActivityType {
+        return UIActivity.ActivityType("org.wordpress.internal.WordPressDraftAction")
+    }
+
     /// WordPress Share Extension (AppStore)
     ///
     static var wordPressShareAppStore: UIActivity.ActivityType {
@@ -21,6 +33,8 @@ extension UIActivity.ActivityType {
     ///
     var isWordPressActivity: Bool {
         let wordpressActivities: [UIActivity.ActivityType] = [
+            .wordPressDraftAppStore,
+            .wordPressDraftInternal,
             .wordPressShareAppStore,
             .wordPressShareInternal
         ]
