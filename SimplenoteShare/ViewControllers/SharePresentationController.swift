@@ -26,10 +26,10 @@ class SharePresentationController: UIViewController {
 private extension SharePresentationController {
     func setupAppearance() {
         let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.barTintColor = .brown
+        navigationBarAppearace.barTintColor = .white
         navigationBarAppearace.barStyle = .default
-        navigationBarAppearace.tintColor = .green
-        navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.red]
+        navigationBarAppearace.tintColor = .blue
+        navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.blue]
         navigationBarAppearace.isTranslucent = false
     }
 

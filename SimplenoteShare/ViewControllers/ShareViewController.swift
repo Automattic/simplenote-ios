@@ -13,6 +13,7 @@ class ShareViewController: UIViewController {
     ///
     @objc var dismissalCompletionBlock: CompletionBlock?
 
+    @IBOutlet private weak var textView: UITextView!
 
     // MARK: Private Properties
 
@@ -57,7 +58,7 @@ class ShareViewController: UIViewController {
     ///
     init(context: NSExtensionContext?) {
         self.context = context
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: type(of: self).nibName, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -68,6 +69,7 @@ class ShareViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         loadContent()
     }
 
@@ -136,6 +138,11 @@ private extension ShareViewController {
 //
 private extension ShareViewController {
 
+    func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = nextButton
+    }
+
     /// Attempts to extract the Note's Payload from the current ExtensionContext
     ///
     func loadContent() {
@@ -156,7 +163,7 @@ private extension ShareViewController {
     ///
     func display(note: Note) {
         isMarkdown = note.markdown
-        //textView.text = note.content
+        textView.text = note.content
     }
 
     /// Submits a given Note to the user's Simplenote account

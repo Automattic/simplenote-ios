@@ -171,16 +171,16 @@ private extension ExtensionPresentationController {
         static let zeroAlpha: CGFloat = 0.0
         static let defaultAnimationDuration: Double = 0.33
         static let bottomKeyboardMarginPortrait: CGFloat = 8.0
-        static let bottomKeyboardMarginLandscape: CGFloat = 4.0
+        static let bottomKeyboardMarginLandscape: CGFloat = 8.0
     }
 
     struct Appearance {
         static let dimmingViewBGColor = UIColor(white: 0.0, alpha: 0.5)
-        static let cornerRadius: CGFloat = 13.0
-        static let widthRatio: CGFloat = 0.95
-        static let widthRatioCompactVertical: CGFloat = 0.91
-        static let heightRatio: CGFloat = 0.90
-        static let heightRatioCompactVertical: CGFloat = 0.97
+        static let cornerRadius: CGFloat = 4.0
+        static let widthRatio: CGFloat = 0.90
+        static let widthRatioCompactVertical: CGFloat = 0.90
+        static let heightRatio: CGFloat = 0.85
+        static let heightRatioCompactVertical: CGFloat = 0.90
     }
 }
 
