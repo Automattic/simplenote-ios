@@ -17,6 +17,10 @@ class SharePresentationController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
+    }
+
+    override open func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         loadAndPresentMainVC()
     }
 }
