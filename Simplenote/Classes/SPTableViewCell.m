@@ -21,6 +21,10 @@
 #import "Simplenote-Swift.h"
 
 
+
+static CGFloat const kAccessoryImagePaddingLeft = 16;
+
+
 @interface SPTableViewCell ()
 @property (nonatomic, strong) UIImageView *accessoryImageView;
 @end
@@ -96,7 +100,7 @@
 
 - (void)adjustTextViewInsets {
     UIEdgeInsets previewInsets = _previewView.textContainerInset;
-    previewInsets.right = _accessoryImageView.image.size.width;
+    previewInsets.right = _accessoryImageView.image.size.width + kAccessoryImagePaddingLeft;
     _previewView.textContainerInset = previewInsets;
 }
 

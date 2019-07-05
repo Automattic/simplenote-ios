@@ -68,7 +68,7 @@ class SnapshotRenderer: NSObject {
 
         // Setup: Layout
         textView.frame.size = size
-        textView.textContainerInset.right = preview ? accessorySize.width : 0
+        textView.textContainerInset.right = preview ? accessorySize.width + Constants.accessoryImageViewPadding.left: 0
 
         accessoryImageView.frame.origin.x = size.width - accessorySize.width
         accessoryImageView.frame.origin.y = accessorySize.height
@@ -185,6 +185,10 @@ private extension SnapshotRenderer {
 //
 private struct Constants {
 
+    /// Insets to be applied over the AccessoryImageView
+    ///
+    static let accessoryImageViewPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    
     /// Maximum Text Length on iPhone / iPad Devices
     ///
     static let maximumLengthPhone = 1200
