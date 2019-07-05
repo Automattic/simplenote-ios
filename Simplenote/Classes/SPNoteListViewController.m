@@ -604,10 +604,7 @@
 
     [SPTracker trackEditorNoteContentShared];
 
-    UISimpleTextPrintFormatter *print = [[UISimpleTextPrintFormatter alloc] initWithText:note.content];
-
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[note.content, print]
-                                                                      applicationActivities:nil];
+    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:note];
 
     if ([UIDevice isPad]) {
         acv.modalPresentationStyle = UIModalPresentationPopover;
