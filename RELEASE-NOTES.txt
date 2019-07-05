@@ -1,6 +1,9 @@
 4.9.0
 =====
 -   Simplenote now works with Siri shortcuts allowing you to open the app, open existing notes, and create new notes directly from Siri
+-   New Swipe Actions available in the Notes List: Pin and Share!
+-   The Notes List now displays an icon, outlining notes that have been published.
+-   When sharing to the WordPress App, Notes will no longer be blockquoted.
 
 4.8.0
 =====

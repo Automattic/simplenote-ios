@@ -1,34 +1,7 @@
-//
-//  SPAboutViewController.swift
-//  Simplenote
-//  The About view for Simplenote
-//
-
 import UIKit
 
-class SPAboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    private let titles: [String] = [
-        NSLocalizedString("Blog", comment: "The Simplenote blog"),
-        "Twitter",
-        NSLocalizedString("Apps", comment: "Other Simplenote apps"),
-        "Simperium",
-        NSLocalizedString("Contribute", comment: "Contribute to the Simplenote apps on github"),
-        NSLocalizedString("Work With Us", comment: "Work at Automattic")
-    ]
-    
-    private let descriptions: [String] = [
-        "simplenote.com/blog",
-        "@simplenoteapp",
-        "simplenote.com",
-        NSLocalizedString("Add data sync to your app", comment: "Simperium description"),
-        "GitHub.com",
-        NSLocalizedString("Are you a developer? Automattic is hiring.", comment: "Automattic hiring description")
-    ]
-    
-    private let headerHeight: CGFloat = 170
-    private let footerHeight: CGFloat = 60
-    private let doneButtonWidth: CGFloat = 100
+
+class SPAboutViewController: UIViewController {
     
     private let headerView = UIView()
     private let footerView = UIView()
@@ -48,14 +21,20 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         
         view.backgroundColor = simpleBlue
 
-        addDoneButton()
-        addContainerView()
-        addHeaderView()
-        addTableView()
-        addFooterView()
+        setupDoneButton()
+        setupContainerView()
+        setupHeaderView()
+        setupTableView()
+        setupFooterView()
     }
+}
 
-    func addDoneButton() {
+
+// MARK: - Configuration
+//
+private extension SPAboutViewController {
+
+    func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControl.State.normal)
         doneButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
@@ -71,7 +50,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
             ])
     }
 
-    func addContainerView() {
+    func setupContainerView() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.axis = .vertical
         containerView.alignment = .fill
@@ -91,7 +70,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
             ])
     }
 
-    func addHeaderView() {
+    func setupHeaderView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = simpleBlue
 
@@ -153,7 +132,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         containerView.addArrangedSubview(headerView)
     }
     
-    func addFooterView() {
+    func setupFooterView() {
         footerView.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = UIStackView()
@@ -173,22 +152,19 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
 
         // UITextViews have padding, so height of 26 is needed to accommodate the extra space
         serviceTextView.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
-        
-        let privacyString = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
-        let termsString = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
-        
+
         // Set up attributed string with clickable links for privacy and terms
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let serviceString = NSMutableAttributedString(string: String(format: "%@ \u{2022} %@", privacyString, termsString), attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.paragraphStyle: paragraphStyle,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)
-            ])
+        let serviceString = NSMutableAttributedString(string: String(format: "%@ \u{2022} %@", Constants.privacyString, Constants.termsString),
+                                                      attributes: [
+                                                        NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                        NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)
+        ])
         
-        
-        serviceString.addAttribute(NSAttributedString.Key.link, value: "https://simplenote.com/privacy/", range: NSMakeRange(0, privacyString.count))
-        serviceString.addAttribute(NSAttributedString.Key.link, value: "https://simplenote.com/terms/", range: NSMakeRange(privacyString.count + 3, termsString.count))
+        serviceString.addAttribute(NSAttributedString.Key.link, value: Constants.privacyURLString, range: NSMakeRange(0, Constants.privacyString.count))
+        serviceString.addAttribute(NSAttributedString.Key.link, value: Constants.termsURLString, range: NSMakeRange(Constants.privacyString.count + 3, Constants.termsString.count))
         serviceTextView.attributedText = serviceString
         
         let linkAttributes: [String : Any] = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.white]
@@ -199,9 +175,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         copyrightLabel.font = UIFont.systemFont(ofSize: 14)
         copyrightLabel.textAlignment = NSTextAlignment.center
         copyrightLabel.textColor = UIColor.white
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        copyrightLabel.text = String(format: "\u{00A9} %@ Automattic", formatter.string(from: Date()))
+        copyrightLabel.text = createCopyrightString()
 
         stackView.addArrangedSubview(serviceTextView)
         stackView.addArrangedSubview(copyrightLabel)
@@ -216,7 +190,7 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
             ])
     }
 
-    func addTableView() {
+    func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
@@ -227,22 +201,26 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
 
         containerView.addArrangedSubview(tableView)
     }
+}
 
-    // MARK: - Table view data source
+
+// MARK: - UITableViewDataSource Conformance
+//
+extension SPAboutViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titles.count
+        return Constants.titles.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
 
-        cell.textLabel?.text = titles[indexPath.row]
-        cell.detailTextLabel?.text = descriptions[indexPath.row]
+        cell.textLabel?.text = Constants.titles[indexPath.row]
+        cell.detailTextLabel?.text = Constants.descriptions[indexPath.row]
         
         cell.textLabel?.textColor = UIColor.white
         cell.detailTextLabel?.textColor = UIColor.white
@@ -258,31 +236,15 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
         
         return cell
     }
+}
+
+
+// MARK: - UITableViewDelegate Conformance
+//
+extension SPAboutViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch(indexPath.row) {
-        case 0:
-            UIApplication.shared.open(URL(string: "https://simplenote.com/blog")!)
-            break;
-        case 1:
-            UIApplication.shared.open(URL(string: "https://twitter.com/simplenoteapp")!)
-            break;
-        case 2:
-            UIApplication.shared.open(URL(string: "https://simplenote.com")!)
-            break;
-        case 3:
-            UIApplication.shared.open(URL(string: "https://simperium.com")!)
-            break;
-        case 4:
-            UIApplication.shared.open(URL(string: "https://github.com/automattic/simplenote-ios")!)
-            break;
-        case 5:
-            UIApplication.shared.open(URL(string: "https://automattic.com/work-with-us")!)
-            break;
-        default:
-            break;
-        }
-        
+        UIApplication.shared.open(Constants.urls[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -291,8 +253,59 @@ class SPAboutViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
-	guard let input = input else { return nil }
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+
+// MARK: - Private Helpers
+//
+private extension SPAboutViewController {
+
+    func createCopyrightString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return String(format: "\u{00A9} %@ Automattic", formatter.string(from: Date()))
+    }
+
+    // Helper function inserted by Swift 4.2 migrator.
+    func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+        guard let input = input else { return nil }
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+    }
+}
+
+
+// MARK: - Constants
+//
+private enum Constants {
+
+    static let headerHeight: CGFloat    = 170
+    static let footerHeight: CGFloat    = 60
+    static let doneButtonWidth: CGFloat = 100
+
+    static let privacyString    = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
+    static let privacyURLString = "https://simplenote.com/privacy/"
+    static let termsString      = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
+    static let termsURLString   = "https://simplenote.com/terms/"
+
+    static let titles: [String] = [
+        NSLocalizedString("Blog", comment: "The Simplenote blog"),
+        "Twitter",
+        NSLocalizedString("Apps", comment: "Other Simplenote apps"),
+        NSLocalizedString("Contribute", comment: "Contribute to the Simplenote apps on github"),
+        NSLocalizedString("Work With Us", comment: "Work at Automattic")
+    ]
+
+    static let descriptions: [String] = [
+        "simplenote.com/blog",
+        "@simplenoteapp",
+        "simplenote.com",
+        "GitHub.com",
+        NSLocalizedString("Are you a developer? Automattic is hiring.", comment: "Automattic hiring description")
+    ]
+
+    static let urls: [URL] = [
+        URL(string: "https://simplenote.com/blog")!,
+        URL(string: "https://twitter.com/simplenoteapp")!,
+        URL(string: "https://simplenote.com")!,
+        URL(string: "https://github.com/automattic/simplenote-ios")!,
+        URL(string: "https://automattic.com/work-with-us")!
+    ]
 }
