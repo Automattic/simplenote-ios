@@ -1,12 +1,12 @@
 import UIKit
 
 
-
 class SharePresentationController: UIViewController {
 
     private let extensionTransitioningManager: ExtensionTransitioningManager = {
         let manager = ExtensionTransitioningManager()
-        manager.direction = .bottom
+        manager.presentDirection = .bottom
+        manager.dismissDirection = .top
         return manager
     }()
 
@@ -25,15 +25,18 @@ class SharePresentationController: UIViewController {
     }
 }
 
-// MARK: - Private Helpers
 
+// MARK: - Private Helpers
+//
 private extension SharePresentationController {
+
     func setupAppearance() {
+        // FIXME: We should account for dark mode when setting up these 👇 values in the near future.
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.barTintColor = .white
         navigationBarAppearace.barStyle = .default
-        navigationBarAppearace.tintColor = .blue
-        navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.blue]
+        navigationBarAppearace.tintColor = UIColor.simplenoteBlue()
+        navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.simplenoteBlue()]
         navigationBarAppearace.isTranslucent = false
     }
 
@@ -49,5 +52,4 @@ private extension SharePresentationController {
 
         present(shareNavController, animated: true)
     }
-
 }

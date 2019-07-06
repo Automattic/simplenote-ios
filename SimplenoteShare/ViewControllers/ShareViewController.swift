@@ -9,13 +9,14 @@ typealias CompletionBlock = () -> Void
 ///
 class ShareViewController: UIViewController {
 
-    /// This completion handler closure is executed when this VC is dismissed
+    /// This completion handler closure is executed when this VC is dismissed.
     ///
     @objc var dismissalCompletionBlock: CompletionBlock?
 
-    @IBOutlet private weak var textView: UITextView!
 
     // MARK: Private Properties
+
+    @IBOutlet private weak var textView: UITextView!
 
     /// Returns the Main App's SimperiumToken
     ///
@@ -25,12 +26,16 @@ class ShareViewController: UIViewController {
 
     /// Indicates if the Markdown flag should be enabled
     ///
-    private var isMarkdown = false
+    private var isMarkdown: Bool {
+        return originalNote?.markdown ?? false
+    }
 
     /// The extension context data provided from the host app
     ///
     private var context: NSExtensionContext?
 
+    /// The original, unmodified note extracted from the NSExtensionContext
+    ///
     private var originalNote: Note?
 
     /// Cancel Bar Button
@@ -52,7 +57,7 @@ class ShareViewController: UIViewController {
     }()
 
 
-    // MARK: UIViewController Lifecycle
+    // MARK: Initialization
 
     /// Designated Initializer
     ///
@@ -64,6 +69,7 @@ class ShareViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 
     // MARK: UIViewController Lifecycle
 
@@ -85,19 +91,41 @@ class ShareViewController: UIViewController {
 private extension ShareViewController {
 
     @objc func cancelWasPressed() {
-        dismiss(animated: true, completion: self.dismissalCompletionBlock)
+        dismissExtension()
     }
 
     @objc func saveWasPressed() {
-//        guard let extensionContext = context else {
-//            fatalError()
-//        }
-        guard let note = originalNote else {
-            fatalError()
+        guard let updatedText = textView.text else {
+            dismissExtension()
+            return
+        }
+        guard updatedText.isEmpty == false else {
+            // Don't bother saving empty notes.
+            dismissExtension()
+            return
         }
 
-        submit(note: note)
-        dismissalCompletionBlock?()
+        let updatedNote = Note(content: updatedText, markdown: isMarkdown)
+        submit(note: updatedNote)
+        dismissExtension()
+    }
+
+    /// Submits a given Note to the user's Simplenote account
+    ///
+    func submit(note: Note) {
+        guard let simperiumToken = simperiumToken else {
+            return
+        }
+
+        let uploader = Uploader(simperiumToken: simperiumToken)
+        uploader.send(note)
+    }
+
+    /// Dismiss the extension and call the appropriate completion block
+    /// from the original `NSExtensionContext`
+    ///
+    func dismissExtension() {
+        dismiss(animated: true, completion: self.dismissalCompletionBlock)
     }
 }
 
@@ -134,7 +162,7 @@ private extension ShareViewController {
 }
 
 
-// MARK: - Loading!
+// MARK: - Configuration
 //
 private extension ShareViewController {
 
@@ -155,25 +183,7 @@ private extension ShareViewController {
                 return
             }
             self.originalNote = note
-            self.display(note: note)
+            self.textView.text = note.content
         }
-    }
-
-    /// Displays a given Note's payload onScreen
-    ///
-    func display(note: Note) {
-        isMarkdown = note.markdown
-        textView.text = note.content
-    }
-
-    /// Submits a given Note to the user's Simplenote account
-    ///
-    func submit(note: Note) {
-        guard let simperiumToken = simperiumToken else {
-            fatalError()
-        }
-
-        let uploader = Uploader(simperiumToken: simperiumToken)
-        uploader.send(note)
     }
 }

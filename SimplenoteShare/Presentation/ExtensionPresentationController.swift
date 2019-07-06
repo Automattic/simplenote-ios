@@ -3,16 +3,18 @@ import UIKit
 
 /// Allows certain presented view controllers to request themselves to be
 /// presented at full size instead of inset within the container.
+///
 protocol ExtensionPresentationTarget {
     var shouldFillContentContainer: Bool { get }
 }
 
 
-class ExtensionPresentationController: UIPresentationController {
+final class ExtensionPresentationController: UIPresentationController {
 
     // MARK: - Private Properties
 
-    private var direction: Direction
+    private var presentDirection: Direction
+    private var dismissDirection: Direction
 
     private let dimmingView: UIView = {
         let view = UIView()
@@ -24,8 +26,13 @@ class ExtensionPresentationController: UIPresentationController {
 
     // MARK: Initializers
 
-    init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, direction: Direction) {
-        self.direction = direction
+    init(presentedViewController: UIViewController,
+         presenting presentingViewController: UIViewController?,
+         presentDirection: Direction,
+         dismissDirection: Direction) {
+
+        self.presentDirection = presentDirection
+        self.dismissDirection = dismissDirection
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 
         self.registerKeyboardObservers()
@@ -93,8 +100,9 @@ class ExtensionPresentationController: UIPresentationController {
 
 
 // MARK: - External Helper Methods
-
+//
 extension ExtensionPresentationController {
+
     func resetViewUsingKeyboardFrame(_ keyboardFrame: CGRect = .zero) {
         animateForWithKeyboardFrame(keyboardFrame, duration: Constants.defaultAnimationDuration, force: true)
     }
@@ -102,8 +110,9 @@ extension ExtensionPresentationController {
 
 
 // MARK: - Keyboard Handling
-
+//
 private extension ExtensionPresentationController {
+
     func registerKeyboardObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWasShown(notification:)),
@@ -163,9 +172,26 @@ private extension ExtensionPresentationController {
 }
 
 
-// MARK: - Constants
+// MARK: - Notification + UIKeyboardInfo
+//
+private extension Notification {
 
+    /// Gets the optional CGRect value of the UIKeyboardFrameEndUserInfoKey from a UIKeyboard notification
+    func keyboardEndFrame () -> CGRect? {
+        return (self.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    }
+
+    /// Gets the optional AnimationDuration value of the UIKeyboardAnimationDurationUserInfoKey from a UIKeyboard notification
+    func keyboardAnimationDuration () -> Double? {
+        return (self.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+    }
+}
+
+
+// MARK: - Constants
+//
 private extension ExtensionPresentationController {
+
     struct Constants {
         static let fullAlpha: CGFloat = 1.0
         static let zeroAlpha: CGFloat = 0.0
@@ -181,21 +207,5 @@ private extension ExtensionPresentationController {
         static let widthRatioCompactVertical: CGFloat = 0.90
         static let heightRatio: CGFloat = 0.85
         static let heightRatioCompactVertical: CGFloat = 0.85
-    }
-}
-
-
-// MARK: - Notification + UIKeyboardInfo
-
-private extension Notification {
-
-    /// Gets the optional CGRect value of the UIKeyboardFrameEndUserInfoKey from a UIKeyboard notification
-    func keyboardEndFrame () -> CGRect? {
-        return (self.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-    }
-
-    /// Gets the optional AnimationDuration value of the UIKeyboardAnimationDurationUserInfoKey from a UIKeyboard notification
-    func keyboardAnimationDuration () -> Double? {
-        return (self.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
     }
 }

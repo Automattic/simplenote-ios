@@ -1,6 +1,13 @@
 import UIKit
 
 
+/// Direction to transition from/to.
+///
+/// - left: Enter/leave screen via the left edge.
+/// - top: Enter/leave screen via the top edge.
+/// - right: Enter/leave screen via the left edge.
+/// - bottom: Enter/leave screen via the bottom edge.
+///
 enum Direction {
     case left
     case top
@@ -9,22 +16,32 @@ enum Direction {
 }
 
 final class ExtensionTransitioningManager: NSObject {
-    var direction = Direction.bottom
+    var presentDirection = Direction.bottom
+    var dismissDirection = Direction.bottom
 }
 
-// MARK: - UIViewControllerTransitioningDelegate
 
+// MARK: - UIViewControllerTransitioningDelegate Conformance
+//
 extension ExtensionTransitioningManager: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        let presentationController = ExtensionPresentationController(presentedViewController: presented, presenting: presenting, direction: direction)
+
+    func presentationController(forPresented presented: UIViewController,
+                                presenting: UIViewController?,
+                                source: UIViewController) -> UIPresentationController? {
+        let presentationController = ExtensionPresentationController(presentedViewController: presented,
+                                                                     presenting: presenting,
+                                                                     presentDirection: presentDirection,
+                                                                     dismissDirection: dismissDirection)
         return presentationController
     }
 
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ExtensionPresentationAnimator(direction: direction, isPresentation: true)
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ExtensionPresentationAnimator(direction: presentDirection, isPresentation: true)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ExtensionPresentationAnimator(direction: direction, isPresentation: false)
+        return ExtensionPresentationAnimator(direction: dismissDirection, isPresentation: false)
     }
 }
