@@ -32,12 +32,11 @@ private extension SharePresentationController {
 
     func setupAppearance() {
         // FIXME: We should account for dark mode when setting up these 👇 values in the near future.
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.barTintColor = .white
-        navigationBarAppearace.barStyle = .default
-        navigationBarAppearace.tintColor = UIColor.simplenoteBlue()
-        navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.simplenoteBlue()]
-        navigationBarAppearace.isTranslucent = false
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().barStyle = .default
+        UINavigationBar.appearance().tintColor = UIColor.simplenoteBlue()
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.simplenoteBlue()]
+        UINavigationBar.appearance().isTranslucent = false
     }
 
     func loadAndPresentMainVC() {
