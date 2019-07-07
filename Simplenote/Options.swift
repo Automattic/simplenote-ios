@@ -25,7 +25,9 @@ class Options: NSObject {
 
     /// Designated Initializer
     ///
-    override private init() {
+    /// - Note: Should be *private*, but for unit testing purposes, we're opening this up.
+    ///
+    override init() {
         super.init()
         migrateLegacyOptions()
     }
@@ -71,11 +73,13 @@ extension Options {
 private extension Options {
 
     func migrateLegacyOptions() {
-        guard let legacySortAscending: Bool = defaults[.listSortModeLegacy] else {
+        guard defaults.containsObject(forKey: .listSortMode) == false else {
             return
         }
 
-        let newMode: SortMode = legacySortAscending ? .alphabeticallyAscending : .alphabeticallyDescending
+        let legacySortAlphabetically = defaults.bool(forKey: .listSortModeLegacy)
+        let newMode: SortMode = legacySortAlphabetically ? .alphabeticallyAscending : .modifiedNewest
+
         defaults.set(newMode.rawValue, forKey: .listSortMode)
         defaults.removeObject(forKey: .listSortModeLegacy)
     }
