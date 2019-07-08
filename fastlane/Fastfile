@@ -7,8 +7,9 @@ platform :ios do
 ########################################################################
 Dotenv.load('~/.simplenoteios-env.default')
 ENV[GHHELPER_REPO="Automattic/simplenote-ios"]
+ENV["PROJECT_NAME"]="Simplenote"
 ENV["PROJECT_ROOT_FOLDER"]="./"
-ENV["PUBLIC_CONFIG_FILE"]="../config/Version.Public.xcconfig"
+ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
 ENV["PROJECT_ROOT_FOLDER"]="./"
 
@@ -37,9 +38,8 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
     setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
 
-    ios_localize_project()
     ios_tag_build()
-    get_prs_list(repository:GHHELPER_REPO, start_tag:"#{old_version}", report_path:"#{File.expand_path('~')}/wpios_prs_list_#{old_version}_#{new_version}.txt")
+    get_prs_list(repository:GHHELPER_REPO, start_tag:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
   end
 
   #####################################################################################
