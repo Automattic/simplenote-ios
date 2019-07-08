@@ -60,6 +60,12 @@ private extension MigrationsHandler {
 //
 private extension MigrationsHandler {
 
+    /// Display the Sort Options Reset Alert whenever:
+    ///
+    /// A.  The user comes from 4.8.0
+    /// B.  The user is actually logged
+    /// C.  The "bad Sort Mode" flag is detected
+    ///
     func processMigrationFromMark4_8_0() {
         guard Options.shared.listSortMode == .alphabeticallyDescending,
             SPAppDelegate.shared()?.simperium.user.authenticated() == true
