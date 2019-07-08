@@ -8,10 +8,39 @@ platform :ios do
 Dotenv.load('~/.simplenoteios-env.default')
 ENV[GHHELPER_REPO="Automattic/simplenote-ios"]
 ENV["PROJECT_ROOT_FOLDER"]="./"
+ENV["PUBLIC_CONFIG_FILE"]="../config/Version.Public.xcconfig"
+ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
+ENV["PROJECT_ROOT_FOLDER"]="./"
 
 ########################################################################
 # Release Lanes
 ########################################################################
+  #####################################################################################
+  # code_freeze
+  # -----------------------------------------------------------------------------------
+  # This lane executes the steps planned on code freeze
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane code_freeze [skip_confirm:<skip confirm>]
+  #
+  # Example:
+  # bundle exec fastlane code_freeze
+  # bundle exec fastlane code_freeze skip_confirm:true
+  #####################################################################################
+  desc "Creates a new release branch from the current develop"
+  lane :code_freeze do | options |
+    old_version = ios_codefreeze_prechecks(options)
+    
+    ios_bump_version_release()
+    new_version = ios_get_app_version()
+    ios_update_release_notes(new_version: new_version)
+    setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
+    setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
+
+    ios_localize_project()
+    ios_tag_build()
+    get_prs_list(repository:GHHELPER_REPO, start_tag:"#{old_version}", report_path:"#{File.expand_path('~')}/wpios_prs_list_#{old_version}_#{new_version}.txt")
+  end
 
   #####################################################################################
   # update_appstore_strings
