@@ -120,6 +120,7 @@
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
+		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52B8A271BAB0DF0002CC55D /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A251BAB0DF0002CC55D /* UIView+Extensions.m */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
@@ -319,6 +320,7 @@
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
+		B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Simplenote.swift"; path = "Classes/UIViewController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
 		B52B8A241BAB0DF0002CC55D /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "Classes/UIView+Extensions.h"; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1650,6 +1653,7 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
+				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
