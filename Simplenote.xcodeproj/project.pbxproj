@@ -154,6 +154,8 @@
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
+		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
+		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
 		B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */; };
 		B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */; };
 		B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
@@ -382,6 +384,8 @@
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
+		B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MigrationsHandler.swift; path = Classes/MigrationsHandler.swift; sourceTree = "<group>"; };
+		B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Bundle+Simplenote.swift"; path = "Classes/Bundle+Simplenote.swift"; sourceTree = "<group>"; };
 		B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Simperium+Simplenote.h"; path = "Classes/Simperium+Simplenote.h"; sourceTree = "<group>"; };
 		B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Simperium+Simplenote.m"; path = "Classes/Simperium+Simplenote.m"; sourceTree = "<group>"; };
 		B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBundleWrapper.m; sourceTree = "<group>"; };
@@ -811,6 +815,7 @@
 		B569DBFE1C03411500EC1FE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
@@ -868,6 +873,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5BE053F1AB75225002417BF /* SPIntegrityHelper.h */,
 				B5BE05401AB75225002417BF /* SPIntegrityHelper.m */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
@@ -1567,6 +1573,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
+				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
@@ -1660,6 +1667,7 @@
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
 				46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
+				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
