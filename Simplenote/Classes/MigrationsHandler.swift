@@ -100,6 +100,7 @@ private extension MigrationsHandler {
     ///
     func presentSortOptionsViewController() {
         let sortingViewController = SPSortOrderViewController()
+        sortingViewController.displaysDismissButton = true
         sortingViewController.selectedMode = Options.shared.listSortMode
         sortingViewController.onChange = { newMode in
             Options.shared.listSortMode = newMode
