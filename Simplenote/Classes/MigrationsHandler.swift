@@ -76,6 +76,8 @@ private extension MigrationsHandler {
         presentSortOptionsResetAlert()
     }
 
+    /// Presents the Sort Options Alert
+    ///
     func presentSortOptionsResetAlert() {
         let title = String()
         let message = NSLocalizedString("Our update may have changed the order in which your notes appear. Would you like to review sort settings?",
@@ -84,17 +86,28 @@ private extension MigrationsHandler {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let cancelText = NSLocalizedString("No", comment: "Alert's Cancel Action")
-        let cancelAction = UIAlertAction(title: cancelText, style: .cancel, handler: nil)
+        controller.addActionWithTitle(cancelText, style: .cancel)
 
         let okText = NSLocalizedString("Yes", comment: "Alert's Accept Action")
-        let okAction = UIAlertAction(title: okText, style: .default) { _ in
-
+        controller.addActionWithTitle(okText, style: .default) { _ in
+            self.presentSortOptionsViewController()
         }
 
-        controller.addAction(cancelAction)
-        controller.addAction(okAction)
-
         controller.presentFromRootViewController()
+    }
+
+    /// Presents (Modally) the SortOptions Interface
+    ///
+    func presentSortOptionsViewController() {
+        let sortingViewController = SPSortOrderViewController()
+        sortingViewController.selectedMode = Options.shared.listSortMode
+        sortingViewController.onChange = { newMode in
+            Options.shared.listSortMode = newMode
+        }
+
+        let navigationController = SPNavigationController(rootViewController: sortingViewController)
+        navigationController.modalPresentationStyle = .formSheet
+        navigationController.presentFromRootViewController()
     }
 }
 
