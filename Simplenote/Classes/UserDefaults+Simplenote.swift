@@ -15,7 +15,13 @@ extension UserDefaults {
 //
 extension UserDefaults {
 
-    /// Returns the Object (if any) associated with the specified Key.
+    /// Returns the Booolean associated with the specified Key.
+    ///
+    func bool(forKey key: Key) -> Bool {
+        return bool(forKey: key.rawValue)
+    }
+
+    /// Returns the Integer (if any) associated with the specified Key.
     ///
     func integer(forKey key: Key) -> Int {
         return integer(forKey: key.rawValue)
