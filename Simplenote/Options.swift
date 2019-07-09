@@ -44,7 +44,7 @@ extension Options {
     var listSortMode: SortMode {
         get {
             let payload = defaults.integer(forKey: .listSortMode)
-            return SortMode(rawValue: payload) ?? .alphabeticallyAscending
+            return SortMode(rawValue: payload) ?? .modifiedNewest
         }
         set {
             defaults.set(newValue.rawValue, forKey: .listSortMode)
