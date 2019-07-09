@@ -5,6 +5,8 @@ import Foundation
 //
 extension UserDefaults {
     enum Key: String {
+        case lastKnownVersion
+        case lastKnownVersionByRatingsFramework = "WPRatingsCurrentVersion"
         case listSortMode
         case listSortModeLegacy = "SPAlphabeticalSortPref"
     }
@@ -31,6 +33,12 @@ extension UserDefaults {
     ///
     func object<T>(forKey key: Key) -> T? {
         return value(forKey: key.rawValue) as? T
+    }
+
+    /// Returns the String (if any) associated with the specified Key.
+    ///
+    func string(forKey key: Key) -> String? {
+        return value(forKey: key.rawValue) as? String
     }
 
     /// Stores the Key/Value Pair.
