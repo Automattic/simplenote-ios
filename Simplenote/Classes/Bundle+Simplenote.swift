@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 
-/// Bundle: Woo Methods
+/// Bundle: Simplenote Methods
 ///
 extension Bundle {
 
