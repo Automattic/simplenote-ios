@@ -72,6 +72,48 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
   end
 
   #####################################################################################
+  # new_beta_release
+  # -----------------------------------------------------------------------------------
+  # This lane updates the release branch for a new beta release. It will update the
+  # current release branch by default. If you want to update a different branch
+  # (i.e. hotfix branch) pass the related version with the 'base_version' param
+  # (example: base_version:10.6.1 will work on the 10.6.1 branch)
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane new_beta_release [skip_confirm:<skip confirm>] [base_version:<version>]
+  #
+  # Example:
+  # bundle exec fastlane new_beta_release
+  # bundle exec fastlane new_beta_release skip_confirm:true
+  # bundle exec fastlane new_beta_release base_version:10.6.1
+  #####################################################################################
+  desc "Updates a release branch for a new beta release"
+  lane :new_beta_release do | options |
+    ios_betabuild_prechecks(options)
+    ios_bump_version_beta()
+    ios_tag_build()
+  end
+
+  #####################################################################################
+  # new_hotfix_release
+  # -----------------------------------------------------------------------------------
+  # This lane updates the release branch for a new hotix release. 
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane new_hotfix_release [skip_confirm:<skip confirm>] [version:<version>]
+  #
+  # Example:
+  # bundle exec fastlane new_hotfix_release version:10.6.1
+  # bundle exec fastlane new_hotfix_release skip_confirm:true version:10.6.1
+  #####################################################################################
+  desc "Creates a new hotfix branch from the given tag"
+  lane :new_hotfix_release do | options |
+    prev_ver = ios_hotfix_prechecks(options)
+    ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
+    ios_tag_build()
+  end
+  
+  #####################################################################################
   # build_and_upload_release
   # -----------------------------------------------------------------------------------
   # This lane builds the app and upload it for both internal and external distribution 
