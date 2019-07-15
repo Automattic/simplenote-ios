@@ -12,7 +12,6 @@
 #import "SPConstants.h"
 
 #import "SPNavigationController.h"
-#import "SPLoginViewController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPOptionsViewController.h"
@@ -134,14 +133,15 @@
     [_simperium setVerboseLoggingEnabled:NO];
 #endif
     
-    _simperium.authenticationViewControllerClass    = [SPLoginViewController class];
+    _simperium.authenticationViewControllerClass    = [SPOnboardingViewController class];
     _simperium.authenticator.providerString         = @"simplenote.com";
 	
     SPAuthenticationConfiguration *configuration    = [SPAuthenticationConfiguration sharedInstance];
     configuration.logoImageName                     = @"logo_login";
     configuration.forgotPasswordURL                 = kSimperiumForgotPasswordURL;
     configuration.termsOfServiceURL                 = kSimperiumTermsOfServiceURL;
-    
+
+    [_simperium setAuthenticationShouldBeEmbeddedInNavigationController:YES];
     [_simperium setAllBucketDelegates:self];
     [_simperium setDelegate:self];
     
