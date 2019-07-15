@@ -13,7 +13,6 @@
 
 #import "SPNavigationController.h"
 #import "SPLoginViewController.h"
-#import "SPOnboardingViewController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPOptionsViewController.h"
@@ -70,7 +69,6 @@
 @property (strong, nonatomic) NSManagedObjectContext		*managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel			*managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
-@property (strong, nonatomic) UIWindow                      *welcomeWindow;
 @property (weak,   nonatomic) SPModalActivityIndicator		*signOutActivityIndicator;
 
 @end
@@ -249,7 +247,7 @@
     
     // Check to see if first time user
     if ([self isFirstLaunch]) {        
-        [self showOnboardingScreen];
+        [self removePin];
         [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
@@ -289,12 +287,6 @@
 #endif
 
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
-}
-
-- (void)onboardingDidFinish:(NSNotification *)notification
-{
-    [self.window makeKeyAndVisible];
-    self.welcomeWindow = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -390,18 +382,6 @@
     [self save];
     
     _noteListViewController.firstLaunch = YES;
-}
-
-- (void)showOnboardingScreen
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onboardingDidFinish:) name:SPOnboardingDidFinish object:nil];
-    self.welcomeWindow = [[UIWindow alloc] initWithFrame:self.window.frame];
-    self.welcomeWindow.backgroundColor = [UIColor clearColor];
-    self.welcomeWindow.rootViewController = [SPOnboardingViewController new];
-    [self.welcomeWindow makeKeyAndVisible];
-    
-    // Remove any stored pin code
-    [self removePin];
 }
 
 - (void)markFirstLaunch
