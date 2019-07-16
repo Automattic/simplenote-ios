@@ -1,20 +1,6 @@
 import UIKit
 
 
-/// Direction to transition from/to.
-///
-/// - left: Enter/leave screen via the left edge.
-/// - top: Enter/leave screen via the top edge.
-/// - right: Enter/leave screen via the left edge.
-/// - bottom: Enter/leave screen via the bottom edge.
-///
-enum Direction {
-    case left
-    case top
-    case right
-    case bottom
-}
-
 final class ExtensionTransitioningManager: NSObject {
     var presentDirection = Direction.bottom
     var dismissDirection = Direction.bottom

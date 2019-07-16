@@ -6,7 +6,7 @@ class SharePresentationController: UIViewController {
     private let extensionTransitioningManager: ExtensionTransitioningManager = {
         let manager = ExtensionTransitioningManager()
         manager.presentDirection = .bottom
-        manager.dismissDirection = .top
+        manager.dismissDirection = .bottom
         return manager
     }()
 

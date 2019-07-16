@@ -9,7 +9,7 @@ protocol ExtensionPresentationTarget {
 }
 
 
-final class ExtensionPresentationController: UIPresentationController {
+final class ExtensionPresentationController: UIPresentationController, KeyboardObservable {
 
     // MARK: - Private Properties
 
@@ -34,8 +34,7 @@ final class ExtensionPresentationController: UIPresentationController {
         self.presentDirection = presentDirection
         self.dismissDirection = dismissDirection
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-
-        self.registerKeyboardObservers()
+        self.addKeyboardObservers()
     }
 
     deinit {
@@ -99,53 +98,23 @@ final class ExtensionPresentationController: UIPresentationController {
 }
 
 
-// MARK: - External Helper Methods
+// MARK: - KeyboardObservable Conformance
 //
 extension ExtensionPresentationController {
 
-    func resetViewUsingKeyboardFrame(_ keyboardFrame: CGRect = .zero) {
-        animateForWithKeyboardFrame(keyboardFrame, duration: Constants.defaultAnimationDuration, force: true)
-    }
-}
-
-
-// MARK: - Keyboard Handling
-//
-private extension ExtensionPresentationController {
-
-    func registerKeyboardObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWasShown(notification:)),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-
-    func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
-    }
-
-    @objc func keyboardWasShown(notification: Notification) {
-        let keyboardFrame = notification.keyboardEndFrame() ?? .zero
-        let duration = notification.keyboardAnimationDuration() ?? Constants.defaultAnimationDuration
+    func keyboardWillShow(endFrame: CGRect?, animationDuration: Double?) {
+        let keyboardFrame = endFrame ?? .zero
+        let duration = animationDuration ?? Constants.defaultAnimationDuration
         animateForWithKeyboardFrame(presentedView!.convert(keyboardFrame, from: nil), duration: duration)
     }
 
-    @objc func keyboardWillHide (notification: Notification) {
-        let keyboardFrame = notification.keyboardEndFrame() ?? .zero
-        let duration = notification.keyboardAnimationDuration() ?? Constants.defaultAnimationDuration
+    func keyboardWillHide(endFrame: CGRect?, animationDuration: Double?) {
+        let keyboardFrame = endFrame ?? .zero
+        let duration = animationDuration ?? Constants.defaultAnimationDuration
         animateForWithKeyboardFrame(presentedView!.convert(keyboardFrame, from: nil), duration: duration)
     }
 
-    func animateForWithKeyboardFrame(_ keyboardFrame: CGRect, duration: Double, force: Bool = false) {
+    private func animateForWithKeyboardFrame(_ keyboardFrame: CGRect, duration: Double, force: Bool = false) {
         let presentedFrame = frameOfPresentedViewInContainerView
         let translatedFrame = getTranslationFrame(keyboardFrame: keyboardFrame, presentedFrame: presentedFrame)
         if force || translatedFrame != presentedFrame {
@@ -155,7 +124,7 @@ private extension ExtensionPresentationController {
         }
     }
 
-    func getTranslationFrame(keyboardFrame: CGRect, presentedFrame: CGRect) -> CGRect {
+    private func getTranslationFrame(keyboardFrame: CGRect, presentedFrame: CGRect) -> CGRect {
         let keyboardTopPadding = traitCollection.verticalSizeClass != .compact ? Constants.bottomKeyboardMarginPortrait : Constants.bottomKeyboardMarginLandscape
         let keyboardTop = UIScreen.main.bounds.height - (keyboardFrame.size.height + keyboardTopPadding)
         let presentedViewBottom = presentedFrame.origin.y + presentedFrame.height
@@ -172,40 +141,24 @@ private extension ExtensionPresentationController {
 }
 
 
-// MARK: - Notification + UIKeyboardInfo
-//
-private extension Notification {
-
-    /// Gets the optional CGRect value of the UIKeyboardFrameEndUserInfoKey from a UIKeyboard notification
-    func keyboardEndFrame () -> CGRect? {
-        return (self.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-    }
-
-    /// Gets the optional AnimationDuration value of the UIKeyboardAnimationDurationUserInfoKey from a UIKeyboard notification
-    func keyboardAnimationDuration () -> Double? {
-        return (self.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
-    }
-}
-
-
 // MARK: - Constants
 //
 private extension ExtensionPresentationController {
 
     struct Constants {
-        static let fullAlpha: CGFloat = 1.0
-        static let zeroAlpha: CGFloat = 0.0
-        static let defaultAnimationDuration: Double = 0.33
-        static let bottomKeyboardMarginPortrait: CGFloat = 8.0
+        static let fullAlpha: CGFloat                     = 1.0
+        static let zeroAlpha: CGFloat                     = 0.0
+        static let defaultAnimationDuration: Double       = 0.25
+        static let bottomKeyboardMarginPortrait: CGFloat  = 8.0
         static let bottomKeyboardMarginLandscape: CGFloat = 8.0
     }
 
     struct Appearance {
-        static let dimmingViewBGColor = UIColor(white: 0.0, alpha: 0.5)
-        static let cornerRadius: CGFloat = 4.0
-        static let widthRatio: CGFloat = 0.90
-        static let widthRatioCompactVertical: CGFloat = 0.90
-        static let heightRatio: CGFloat = 0.85
-        static let heightRatioCompactVertical: CGFloat = 0.85
+        static let dimmingViewBGColor                  = UIColor(white: 0.0, alpha: 0.5)
+        static let cornerRadius: CGFloat               = 4.0
+        static let widthRatio: CGFloat                 = 0.90
+        static let widthRatioCompactVertical: CGFloat  = 0.90
+        static let heightRatio: CGFloat                = 0.50
+        static let heightRatioCompactVertical: CGFloat = 0.50
     }
 }

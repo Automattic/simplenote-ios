@@ -115,6 +115,8 @@
 		74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74388F4922CFFB8B001C5EC0 /* ShareViewController.xib */; };
 		74800B1522D1024E00217A00 /* UIColor+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */; };
 		74800B1622D1025D00217A00 /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */; };
+		74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */; };
+		74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */; };
 		74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */; };
 		74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */; };
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
@@ -324,6 +326,7 @@
 		74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Helpers.swift"; sourceTree = "<group>"; };
 		74388F4922CFFB8B001C5EC0 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+DarkMode.swift"; path = "Classes/UIColor+DarkMode.swift"; sourceTree = "<group>"; };
+		74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardObservable.swift; path = Classes/KeyboardObservable.swift; sourceTree = "<group>"; };
 		74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTransitioningManager.swift; sourceTree = "<group>"; };
 		74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationController.swift; sourceTree = "<group>"; };
 		74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationAnimator.swift; sourceTree = "<group>"; };
@@ -954,6 +957,7 @@
 				371A862F213DF00E002E9120 /* SPPinLockManager.swift */,
 				F9E197D32283D05C0092B3E1 /* CrashLogging.swift */,
 				F920265A2294661C0061B1DE /* BuildConfiguration.swift */,
+				74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1690,6 +1694,7 @@
 				46A3C98017DFA81A002865AE /* UIImage+Colorization.m in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
 				46A3C98117DFA81A002865AE /* VSTheme.m in Sources */,
+				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
 				46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */,
 				B5BE05421AB75225002417BF /* SPIntegrityHelper.m in Sources */,
@@ -1801,6 +1806,7 @@
 				74800B1622D1025D00217A00 /* UIColor+Simplenote.swift in Sources */,
 				74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */,
 				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
+				74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
