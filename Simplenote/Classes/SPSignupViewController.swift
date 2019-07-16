@@ -39,6 +39,6 @@ private extension SPSignupViewController {
     func setupNavigationController() {
         title = NSLocalizedString("Sign Up", comment: "Sign Up Title")
         navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.applySimplenoteStyle()
+        navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 }
