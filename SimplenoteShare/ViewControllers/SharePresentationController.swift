@@ -35,7 +35,7 @@ private extension SharePresentationController {
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().barStyle = .default
         UINavigationBar.appearance().tintColor = UIColor.simplenoteBlue()
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.simplenoteBlue()]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
         UINavigationBar.appearance().isTranslucent = false
     }
 

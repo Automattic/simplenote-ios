@@ -149,7 +149,7 @@ private extension ShareViewController {
     func displayMissingAccountAlert() {
         let title = NSLocalizedString("No Simplenote Account", comment: "Extension Missing Token Alert Title")
         let message = NSLocalizedString("Please log into your Simplenote account first by using the Simplenote app.", comment: "Extension Missing Token Alert Title")
-        let accept = NSLocalizedString("Cancel Share", comment: "")
+        let accept = NSLocalizedString("Cancel Share", comment: "Name of button to cancel iOS share extension in missing token alert ")
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: accept, style: .default) { _ in
@@ -169,6 +169,7 @@ private extension ShareViewController {
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = nextButton
+        navigationItem.title = NSLocalizedString("Simplenote", comment: "Title of main share extension view")
     }
 
     /// Attempts to extract the Note's Payload from the current ExtensionContext
