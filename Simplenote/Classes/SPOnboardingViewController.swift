@@ -46,6 +46,13 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 private extension SPOnboardingViewController {
 
     func setupNavigationController() {
+        // Don't show the previous VC's title in the next-view's back button
+        let backButton = UIBarButtonItem(title: String(),
+                                         style: .plain,
+                                         target: nil,
+                                         action: nil)
+
+        navigationItem.backBarButtonItem = backButton
         navigationController?.isNavigationBarHidden = true
     }
 }
