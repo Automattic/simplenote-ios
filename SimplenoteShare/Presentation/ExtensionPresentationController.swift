@@ -9,7 +9,7 @@ protocol ExtensionPresentationTarget {
 }
 
 
-final class ExtensionPresentationController: UIPresentationController, KeyboardObservable {
+final class ExtensionPresentationController: UIPresentationController {
 
     // MARK: - Private Properties
 
@@ -100,28 +100,31 @@ final class ExtensionPresentationController: UIPresentationController, KeyboardO
 
 // MARK: - KeyboardObservable Conformance
 //
-extension ExtensionPresentationController {
+extension ExtensionPresentationController: KeyboardObservable {
 
-    func keyboardWillShow(endFrame: CGRect?, animationDuration: Double?) {
+    func keyboardWillShow(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         let keyboardFrame = endFrame ?? .zero
         let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animateForWithKeyboardFrame(presentedView!.convert(keyboardFrame, from: nil), duration: duration)
+        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
     }
 
-    func keyboardWillHide(endFrame: CGRect?, animationDuration: Double?) {
+    func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         let keyboardFrame = endFrame ?? .zero
         let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animateForWithKeyboardFrame(presentedView!.convert(keyboardFrame, from: nil), duration: duration)
+        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
     }
 
-    private func animateForWithKeyboardFrame(_ keyboardFrame: CGRect, duration: Double, force: Bool = false) {
+    private func animate(with keyboardFrame: CGRect, duration: TimeInterval, animationCurve: UInt?) {
         let presentedFrame = frameOfPresentedViewInContainerView
         let translatedFrame = getTranslationFrame(keyboardFrame: keyboardFrame, presentedFrame: presentedFrame)
-        if force || translatedFrame != presentedFrame {
-            UIView.animate(withDuration: duration, animations: {
-                self.presentedView?.frame = translatedFrame
-            })
+        var animationOptions: UIView.AnimationOptions = []
+        if let animationCurve = animationCurve {
+            animationOptions = UIView.AnimationOptions(rawValue: animationCurve)
         }
+        
+        UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
+            self.presentedView?.frame = translatedFrame
+        })
     }
 
     private func getTranslationFrame(keyboardFrame: CGRect, presentedFrame: CGRect) -> CGRect {
@@ -158,7 +161,7 @@ private extension ExtensionPresentationController {
         static let cornerRadius: CGFloat               = 4.0
         static let widthRatio: CGFloat                 = 0.90
         static let widthRatioCompactVertical: CGFloat  = 0.90
-        static let heightRatio: CGFloat                = 0.50
-        static let heightRatioCompactVertical: CGFloat = 0.50
+        static let heightRatio: CGFloat                = 0.90
+        static let heightRatioCompactVertical: CGFloat = 0.90
     }
 }
