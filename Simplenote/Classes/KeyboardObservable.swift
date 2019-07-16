@@ -85,7 +85,7 @@ extension KeyboardObservable {
 //
 private extension Notification {
 
-    /// Gets the optional CGRect value of the UIKeyboardFrameEndUserInfoKey from a UIKeyboard notification
+    /// Gets the optional CGRect value of the UIKeyboardFrameBeginUserInfoKey from a UIKeyboard notification
     ///
     func keyboardBeginFrame () -> CGRect? {
         return (self.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
