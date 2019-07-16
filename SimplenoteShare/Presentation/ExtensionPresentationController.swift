@@ -161,7 +161,7 @@ private extension ExtensionPresentationController {
         static let cornerRadius: CGFloat               = 4.0
         static let widthRatio: CGFloat                 = 0.90
         static let widthRatioCompactVertical: CGFloat  = 0.90
-        static let heightRatio: CGFloat                = 0.90
-        static let heightRatioCompactVertical: CGFloat = 0.90
+        static let heightRatio: CGFloat                = 0.80
+        static let heightRatioCompactVertical: CGFloat = 0.80
     }
 }
