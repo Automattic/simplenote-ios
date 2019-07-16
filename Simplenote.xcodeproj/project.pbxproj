@@ -143,6 +143,7 @@
 		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00522B03CBB003F85CB /* Extractors.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
+		B56DDC5B22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56DDC5A22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift */; };
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
 		B57AEABF22DD03B200470277 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */; };
@@ -372,6 +373,7 @@
 		B56AA00522B03CBB003F85CB /* Extractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractors.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
+		B56DDC5A22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Simplenote.swift"; path = "Classes/UINavigationBar+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
 		B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
@@ -861,11 +863,12 @@
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
-				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */,
-				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
+				B56DDC5A22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1621,6 +1624,7 @@
 				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
+				B56DDC5B22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
