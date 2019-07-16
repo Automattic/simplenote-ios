@@ -6,19 +6,25 @@ import UIKit
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
+    /// SignUp Button
     ///
+    @IBOutlet var signUpButton: UIButton!
+
+    /// Login Button
+    ///
+    @IBOutlet var loginButton: UIButton!
+
+    /// Simperium's Authenticator Instance
     ///
     var authenticator: SPAuthenticator?
 
-    ///
-    ///
-    var optional = false
 
-    ///
-    ///
+    // MARK: - Overridden Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
+        setupActionButtons()
     }
 
     @IBAction func signupWasPressed() {
@@ -47,12 +53,20 @@ private extension SPOnboardingViewController {
 
     func setupNavigationController() {
         // Don't show the previous VC's title in the next-view's back button
-        let backButton = UIBarButtonItem(title: String(),
-                                         style: .plain,
-                                         target: nil,
-                                         action: nil)
-
-        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: String(), style: .plain, target: nil, action: nil)
         navigationController?.isNavigationBarHidden = true
     }
+
+    func setupActionButtons() {
+        signUpButton.layer.cornerRadius = Constants.actionButtonRadius
+        signUpButton.setTitleColor(.white, for: .normal)
+        signUpButton.backgroundColor = .simplenoteBlue()
+    }
+}
+
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let actionButtonRadius = CGFloat(4)
 }
