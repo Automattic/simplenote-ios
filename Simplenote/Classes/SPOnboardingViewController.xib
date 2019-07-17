@@ -39,12 +39,12 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The simplest way to keep notes." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Du-WL-hgy">
                     <rect key="frame" x="68.5" y="431" width="277" height="24"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYz-ya-QmI" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="43.5" y="740" width="327" height="44"/>
+                    <rect key="frame" x="43.5" y="746" width="327" height="44"/>
                     <color key="backgroundColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="327" id="bYd-4S-WqV"/>
@@ -77,7 +77,7 @@
             <constraints>
                 <constraint firstItem="WbO-Sw-z3Q" firstAttribute="top" secondItem="FSo-hZ-mnC" secondAttribute="bottom" constant="28" id="0zT-1P-JrH"/>
                 <constraint firstItem="PYz-ya-QmI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3l0-4U-A9X"/>
-                <constraint firstItem="5ac-gG-0lC" firstAttribute="top" secondItem="PYz-ya-QmI" secondAttribute="bottom" constant="14" id="K8n-Q3-Asb"/>
+                <constraint firstItem="5ac-gG-0lC" firstAttribute="top" secondItem="PYz-ya-QmI" secondAttribute="bottom" constant="8" id="K8n-Q3-Asb"/>
                 <constraint firstItem="5ac-gG-0lC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bSc-GU-tgx"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5ac-gG-0lC" secondAttribute="bottom" constant="20" id="bXJ-L5-CdQ"/>
                 <constraint firstItem="1Du-WL-hgy" firstAttribute="top" secondItem="WbO-Sw-z3Q" secondAttribute="bottom" constant="8" id="cce-Z3-qiP"/>

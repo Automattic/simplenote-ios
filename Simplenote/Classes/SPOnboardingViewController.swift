@@ -6,7 +6,7 @@ import UIKit
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
-    /// Our awesome brand
+    /// Top Label
     ///
     @IBOutlet var simplenoteLabel: UILabel!
 
@@ -32,8 +32,12 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
-        setupActionButtons()
         setupLabels()
+        setupActionButtons()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     @IBAction func signupWasPressed() {
@@ -61,24 +65,39 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 private extension SPOnboardingViewController {
 
     func setupNavigationController() {
-        // Don't show the previous VC's title in the next-view's back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: String(), style: .plain, target: nil, action: nil)
         navigationController?.isNavigationBarHidden = true
     }
 
     func setupActionButtons() {
-        let signupText = NSLocalizedString("Create an account", comment: "Signup Action")
-        signUpButton.setTitle(signupText, for: .normal)
+        signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.backgroundColor = .simplenoteMidBlue()
 
-        let loginText = NSLocalizedString("Log In", comment: "Login Action")
-        loginButton.setTitle(loginText, for: .normal)
+        loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
         loginButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
     }
 
     func setupLabels() {
+        simplenoteLabel.text = OnboardingStrings.brandText
         simplenoteLabel.textColor = .simplenoteAlmostBlack()
+
+        headerLabel.text = OnboardingStrings.headerText
         headerLabel.textColor = .simplenoteAlmostBlack()
+
+        if #available(iOS 11, *) {
+            simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
+            headerLabel.font = .preferredFont(forTextStyle: .title3)
+        }
     }
+}
+
+
+// MARK: - Private Types
+//
+private struct OnboardingStrings {
+    static let brandText    = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
+    static let signupText   = NSLocalizedString("Create an account", comment: "Signup Action")
+    static let loginText    = NSLocalizedString("Log In", comment: "Login Action")
+    static let headerText   = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
 }
