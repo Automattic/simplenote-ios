@@ -39,7 +39,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The simplest way to keep notes." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Du-WL-hgy">
                     <rect key="frame" x="68.5" y="431" width="277" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -50,8 +50,8 @@
                         <constraint firstAttribute="width" constant="327" id="bYd-4S-WqV"/>
                         <constraint firstAttribute="height" constant="44" id="dTN-er-Mj7"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="Create an account">
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <state key="normal" title="#Create an account#">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -59,12 +59,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ac-gG-0lC">
-                    <rect key="frame" x="183.5" y="798" width="47" height="44"/>
+                    <rect key="frame" x="43.5" y="798" width="327" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Gzi-8S-0W2"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Log In">
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" title="#Log In#">
                         <color key="titleColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </state>
                     <connections>
@@ -83,6 +83,7 @@
                 <constraint firstItem="1Du-WL-hgy" firstAttribute="top" secondItem="WbO-Sw-z3Q" secondAttribute="bottom" constant="8" id="cce-Z3-qiP"/>
                 <constraint firstItem="1Du-WL-hgy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iXZ-2T-ZCe"/>
                 <constraint firstItem="WbO-Sw-z3Q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="n0Q-n7-Tvs"/>
+                <constraint firstItem="5ac-gG-0lC" firstAttribute="width" secondItem="PYz-ya-QmI" secondAttribute="width" id="nib-dj-A5f"/>
                 <constraint firstItem="FSo-hZ-mnC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="w42-7c-k5u"/>
                 <constraint firstItem="FSo-hZ-mnC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-141" id="zdB-CV-Q4x"/>
             </constraints>

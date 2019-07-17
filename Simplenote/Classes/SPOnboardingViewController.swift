@@ -67,10 +67,14 @@ private extension SPOnboardingViewController {
     }
 
     func setupActionButtons() {
-        signUpButton.layer.cornerRadius = Constants.actionButtonRadius
+        let signupText = NSLocalizedString("Create an account", comment: "Signup Action")
+        signUpButton.setTitle(signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
+        signUpButton.layer.cornerRadius = Constants.actionButtonRadius
         signUpButton.backgroundColor = .simplenoteMidBlue()
 
+        let loginText = NSLocalizedString("Log In", comment: "Login Action")
+        loginButton.setTitle(loginText, for: .normal)
         loginButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
     }
 
