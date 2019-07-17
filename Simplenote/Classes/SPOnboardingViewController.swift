@@ -6,6 +6,14 @@ import UIKit
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
+    /// Our awesome brand
+    ///
+    @IBOutlet var simplenoteLabel: UILabel!
+
+    /// Header
+    ///
+    @IBOutlet var headerLabel: UILabel!
+
     /// SignUp Button
     ///
     @IBOutlet var signUpButton: UIButton!
@@ -25,6 +33,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         super.viewDidLoad()
         setupNavigationController()
         setupActionButtons()
+        setupLabels()
     }
 
     @IBAction func signupWasPressed() {
@@ -60,7 +69,14 @@ private extension SPOnboardingViewController {
     func setupActionButtons() {
         signUpButton.layer.cornerRadius = Constants.actionButtonRadius
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.backgroundColor = .simplenoteBlue()
+        signUpButton.backgroundColor = .simplenoteMidBlue()
+
+        loginButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
+    }
+
+    func setupLabels() {
+        simplenoteLabel.textColor = .simplenoteAlmostBlack()
+        headerLabel.textColor = .simplenoteAlmostBlack()
     }
 }
 
