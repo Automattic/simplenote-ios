@@ -16,7 +16,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
     /// SignUp Button
     ///
-    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var signUpButton: SPSquaredButton!
 
     /// Login Button
     ///
@@ -70,7 +70,6 @@ private extension SPOnboardingViewController {
         let signupText = NSLocalizedString("Create an account", comment: "Signup Action")
         signUpButton.setTitle(signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.layer.cornerRadius = Constants.actionButtonRadius
         signUpButton.backgroundColor = .simplenoteMidBlue()
 
         let loginText = NSLocalizedString("Log In", comment: "Login Action")
@@ -82,11 +81,4 @@ private extension SPOnboardingViewController {
         simplenoteLabel.textColor = .simplenoteAlmostBlack()
         headerLabel.textColor = .simplenoteAlmostBlack()
     }
-}
-
-
-// MARK: - Constants
-//
-private struct Constants {
-    static let actionButtonRadius = CGFloat(4)
 }
