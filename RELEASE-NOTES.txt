@@ -4,6 +4,7 @@
 -   New Swipe Actions available in the Notes List: Pin and Share!
 -   The Notes List now displays an icon, outlining notes that have been published.
 -   When sharing to the WordPress App, Notes will no longer be blockquoted.
+-   The iOS share extension UI has been completly updated.
 
 4.8.0
 =====
