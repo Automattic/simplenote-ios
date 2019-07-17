@@ -238,10 +238,14 @@
 	[self setupBitHockey];
     [self setupCrashLogging];
     [self setupDefaultWindow];
-    [self setupAppRatings];
-    
+
 	// Once the UI is wired, Auth Simperium
 	[self authenticateSimperium];
+
+    // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
+    // TODO: Cleanup after 4.8.1 has been released!
+    [[MigrationsHandler new] ensureUpdateIsHandled];
+    [self setupAppRatings];
     
     // Initialize UI
     [self loadLastSelectedNote];
@@ -984,7 +988,7 @@
     [[ABXApiClient instance] setApiKey:[SPCredentials appbotKey]];
     
     // Initialize AppRatings Helper
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *version = [[NSBundle mainBundle] shortVersionString];
     
     [[SPRatingsHelper sharedInstance] initializeForVersion:version];
     [[SPRatingsHelper sharedInstance] reloadSettings];
