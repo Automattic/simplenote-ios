@@ -135,6 +135,8 @@
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
 		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
+		B526FA6E22DF86EA00831994 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526FA6D22DF86EA00831994 /* SPTextInputView.swift */; };
+		B526FA7022DF870A00831994 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526FA6F22DF870A00831994 /* SPSquaredButton.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */; };
 		B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */; };
@@ -364,6 +366,8 @@
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
 		B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Simplenote.swift"; path = "Classes/UIViewController+Simplenote.swift"; sourceTree = "<group>"; };
+		B526FA6D22DF86EA00831994 /* SPTextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTextInputView.swift; path = Classes/SPTextInputView.swift; sourceTree = "<group>"; };
+		B526FA6F22DF870A00831994 /* SPSquaredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSquaredButton.swift; path = Classes/SPSquaredButton.swift; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
 		B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityViewController+Simplenote.swift"; sourceTree = "<group>"; };
@@ -915,9 +919,6 @@
 			isa = PBXGroup;
 			children = (
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
-				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
-				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
-				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
@@ -1064,9 +1065,8 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
-				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
+				E2922AB3180C7322003AF914 /* Tag View */,
 				E201864617A4892300217E0B /* SPActionButton.h */,
 				E201864717A4892300217E0B /* SPActionButton.m */,
 				E22BCDF81794F55000A17ED2 /* SPActionSheet.h */,
@@ -1075,6 +1075,8 @@
 				E22BCDF61794F53600A17ED2 /* SPActivityView.m */,
 				E201864A17A57A7C00217E0B /* SPBorderedView.h */,
 				E201864B17A57A7C00217E0B /* SPBorderedView.m */,
+				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
+				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E22BCE0017960CBC00A17ED2 /* SPButton.h */,
 				E22BCE0117960CBC00A17ED2 /* SPButton.m */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
@@ -1096,19 +1098,20 @@
 				E239601017B6A22800504FFB /* SPOutsideTouchView.m */,
 				E213C2D117A87246009BE49E /* SPSideBySideView.h */,
 				E213C2D217A87246009BE49E /* SPSideBySideView.m */,
+				B526FA6F22DF870A00831994 /* SPSquaredButton.swift */,
 				E29ADD6E17848ED300E55842 /* SPTableViewCell.h */,
 				E29ADD6F17848ED300E55842 /* SPTableViewCell.m */,
 				E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */,
 				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
+				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
+				B526FA6D22DF86EA00831994 /* SPTextInputView.swift */,
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
 				E215C79C180B228800AD36B5 /* SPTextField.m */,
 				E2D444031799F1DD0060FDE2 /* SPTextView.h */,
 				E2D444041799F1DD0060FDE2 /* SPTextView.m */,
 				E2465A2117AD70810097B19B /* SPToggle.h */,
 				E2465A2217AD70810097B19B /* SPToggle.m */,
-				E2922AB3180C7322003AF914 /* Tag View */,
 				373897BB1F8328DE00CEDF91 /* SPTitleView.swift */,
-				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1709,6 +1712,7 @@
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				74800B1522D1024E00217A00 /* UIColor+DarkMode.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
+				B526FA7022DF870A00831994 /* SPSquaredButton.swift in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
@@ -1768,6 +1772,7 @@
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
+				B526FA6E22DF86EA00831994 /* SPTextInputView.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
