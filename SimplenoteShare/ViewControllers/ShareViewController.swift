@@ -76,6 +76,7 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        textView.textContainerInset = Constants.textViewInsets
         loadContent()
     }
 
@@ -187,4 +188,11 @@ private extension ShareViewController {
             self.textView.text = note.content
         }
     }
+}
+
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let textViewInsets =  UIEdgeInsets(top: 8.0, left: 12.0, bottom: 8.0, right: 12.0)
 }
