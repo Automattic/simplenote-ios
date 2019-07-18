@@ -27,17 +27,24 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     var authenticator: SPAuthenticator?
 
 
+    // MARK: - Overriden Properties
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
     // MARK: - Overridden Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationItem()
         setupNavigationController()
         setupLabels()
         setupActionButtons()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
     @IBAction func signupWasPressed() {
@@ -64,9 +71,16 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 //
 private extension SPOnboardingViewController {
 
-    func setupNavigationController() {
+    func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: String(), style: .plain, target: nil, action: nil)
-        navigationController?.isNavigationBarHidden = true
+    }
+
+    func setupNavigationController() {
+        guard let navigationController = navigationController else {
+            return
+        }
+
+        navigationController.isNavigationBarHidden = true
     }
 
     func setupActionButtons() {
