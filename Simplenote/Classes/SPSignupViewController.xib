@@ -29,7 +29,7 @@
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-m0-1IK" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
-                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="327" id="Zu6-14-lLy"/>
                                 <constraint firstAttribute="height" constant="44" id="az3-Sw-z79"/>
@@ -37,7 +37,7 @@
                         </view>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="eSJ-L3-2I1" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="52" width="327" height="44"/>
-                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="327" id="CHD-HW-mou"/>
                                 <constraint firstAttribute="height" constant="44" id="Cs0-Nn-DOT"/>

@@ -11,13 +11,12 @@ class SPSignupViewController: UIViewController {
     ///
     @IBOutlet private var emailInputView: SPTextInputView! {
         didSet {
-            emailInputView.backgroundColor = .clear
             emailInputView.keyboardType = .emailAddress
+            emailInputView.placeholder = SignupStrings.emailPlaceholder
             emailInputView.returnKeyType = .next
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = Constants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.placeholder = SignupStrings.emailPlaceholder
             emailInputView.textColor = .simplenoteAlmostBlack()
         }
     }
@@ -26,13 +25,12 @@ class SPSignupViewController: UIViewController {
     ///
     @IBOutlet private var passwordInputView: SPTextInputView! {
         didSet {
-            passwordInputView.backgroundColor = .clear
             passwordInputView.isSecureTextEntry = true
+            passwordInputView.placeholder = SignupStrings.passwordPlaceholder
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = Constants.onePasswordInsets
-            passwordInputView.placeholder = SignupStrings.passwordPlaceholder
             passwordInputView.textColor = .simplenoteAlmostBlack()
         }
     }
@@ -72,15 +70,17 @@ class SPSignupViewController: UIViewController {
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(.visibilityOffImage, for: .normal)
+        button.setImage(.visibilityOnImage, for: .highlighted)
         button.tintColor = .simplenoteSlateGrey()
-        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
+        button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.sizeToFit()
         return button
     }()
 
     /// Simperium's Authenticator Instance
     ///
-    private let authenticator: SPAuthenticator
+    private let simperiumAuthenticator: SPAuthenticator
 
     ///
     ///
@@ -98,8 +98,8 @@ class SPSignupViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(authenticator: SPAuthenticator) {
-        self.authenticator = authenticator
+    init(simperiumAuthenticator: SPAuthenticator) {
+        self.simperiumAuthenticator = simperiumAuthenticator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -124,6 +124,7 @@ extension SPSignupViewController {
 
     @IBAction func signupWasPressed() {
 // TODO
+    //        [SPTracker trackUserAccountCreated];
     }
 
     @IBAction func termsWasPressed() {
@@ -135,7 +136,11 @@ extension SPSignupViewController {
     }
 
     @IBAction func revealPasswordWasPressed() {
-// TODO
+        passwordInputView.isSecureTextEntry = false
+    }
+
+    @IBAction func revealPasswordWasReleased() {
+        passwordInputView.isSecureTextEntry = true
     }
 }
 

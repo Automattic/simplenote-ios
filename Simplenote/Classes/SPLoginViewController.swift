@@ -11,13 +11,12 @@ class SPLoginViewController: UIViewController {
     ///
     @IBOutlet private var emailInputView: SPTextInputView! {
         didSet {
-            emailInputView.backgroundColor = .clear
             emailInputView.keyboardType = .emailAddress
             emailInputView.placeholder = LoginStrings.emailPlaceholder
             emailInputView.returnKeyType = .next
             emailInputView.rightView = onePasswordButton
-            emailInputView.rightViewMode = .always
             emailInputView.rightViewInsets = Constants.onePasswordInsets
+            emailInputView.rightViewMode = .always
             emailInputView.textColor = .simplenoteAlmostBlack()
         }
     }
@@ -26,7 +25,6 @@ class SPLoginViewController: UIViewController {
     ///
     @IBOutlet private var passwordInputView: SPTextInputView! {
         didSet {
-            passwordInputView.backgroundColor = .clear
             passwordInputView.isSecureTextEntry = true
             passwordInputView.placeholder = LoginStrings.passwordPlaceholder
             passwordInputView.returnKeyType = .done
@@ -71,15 +69,17 @@ class SPLoginViewController: UIViewController {
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(.visibilityOffImage, for: .normal)
+        button.setImage(.visibilityOnImage, for: .highlighted)
         button.tintColor = .simplenoteSlateGrey()
-        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
+        button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.sizeToFit()
         return button
     }()
 
     /// Simperium's Authenticator Instance
     ///
-    private let authenticator: SPAuthenticator
+    private let controller: SPAuthenticationController
 
     ///
     ///
@@ -97,8 +97,8 @@ class SPLoginViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(authenticator: SPAuthenticator) {
-        self.authenticator = authenticator
+    init(simperiumAuthenticator: SPAuthenticator) {
+        self.controller = SPAuthenticationController(simperiumService: simperiumAuthenticator)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -123,6 +123,7 @@ extension SPLoginViewController {
 
     @IBAction func loginWasPressed() {
 // TODO
+//        [SPTracker trackUserSignedIn];
     }
 
     @IBAction func forgotWasPressed() {
@@ -132,10 +133,20 @@ extension SPLoginViewController {
 
     @IBAction func onePasswordWasPressed() {
 // TODO
+        view.endEditing(true)
+
+        controller.findOnePasswordLogin(presenter: self) { (username, password) in
+            self.emailInputView.text = username
+            self.passwordInputView.text = password
+        }
     }
 
     @IBAction func revealPasswordWasPressed() {
-// TODO
+        passwordInputView.isSecureTextEntry = false
+    }
+
+    @IBAction func revealPasswordWasReleased() {
+        passwordInputView.isSecureTextEntry = true
     }
 }
 
@@ -164,7 +175,41 @@ private extension SPLoginViewController {
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
     }
+
 }
+
+
+//- (void)reloadOnePassword
+//{
+//    // Update the OnePassword Handler
+//    SEL hander = self.signingIn ? @selector(findLoginFromOnePassword:) : @selector(saveLoginToOnePassword:);
+//    [self.onePasswordButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+//    [self.onePasswordButton addTarget:self action:hander forControlEvents:UIControlEventTouchUpInside];
+//
+//    // Show the OnePassword view, if it's available
+//    BOOL isOnePasswordAvailable         = [[OnePasswordExtension sharedExtension] isAppExtensionAvailable];
+//    self.usernameField.rightViewMode    = isOnePasswordAvailable ? UITextFieldViewModeAlways : UITextFieldViewModeNever;
+//}
+
+
+//- (IBAction)signInErrorAction:(NSNotification *)notification
+//{
+//    NSString *errorMessage = NSLocalizedString(@"An error was encountered while signing in.", @"Sign in error message");
+//    if (notification.userInfo != nil && notification.userInfo[@"errorString"]) {
+//        errorMessage = [notification.userInfo valueForKey:@"errorString"];
+//    }
+//
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Couldn't Sign In", @"Alert dialog title displayed on sign in error")
+//                                                                   message:errorMessage
+//                                                            preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                          handler:^(UIAlertAction * action) {}];
+//
+//    [errorAlert addAction:defaultAction];
+//    [self presentViewController:errorAlert animated:YES completion:nil];
+//}
 
 
 // MARK: - Private Types
