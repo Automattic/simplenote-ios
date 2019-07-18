@@ -37,6 +37,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         return false
     }
 
+
     // MARK: - Overridden Methods
 
     override func viewDidLoad() {

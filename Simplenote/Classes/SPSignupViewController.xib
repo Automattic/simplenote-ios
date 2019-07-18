@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSignupViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="emailTextInputView" destination="MRE-m0-1IK" id="YcC-ko-gRh"/>
-                <outlet property="passwordTextInputView" destination="eSJ-L3-2I1" id="4cn-qc-V8D"/>
+                <outlet property="emailInputView" destination="MRE-m0-1IK" id="2Ud-jd-ZIQ"/>
+                <outlet property="passwordInputView" destination="eSJ-L3-2I1" id="3Ct-Qz-5hA"/>
                 <outlet property="signupButton" destination="JY0-Aq-57f" id="q69-Wg-e7P"/>
                 <outlet property="termsOfServiceButton" destination="Gjh-YJ-IHz" id="dqN-cF-3bb"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6tQ-OA-nWF"/>

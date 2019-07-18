@@ -9,23 +9,74 @@ class SPSignupViewController: UIViewController {
 
     /// Email Input
     ///
-    @IBOutlet private var emailTextInputView: SPTextInputView!
+    @IBOutlet private var emailInputView: SPTextInputView! {
+        didSet {
+            emailInputView.backgroundColor = .clear
+            emailInputView.keyboardType = .emailAddress
+            emailInputView.returnKeyType = .next
+            emailInputView.rightView = onePasswordButton
+            emailInputView.rightViewInsets = Constants.onePasswordInsets
+            emailInputView.rightViewMode = .always
+            emailInputView.placeholder = SignupStrings.emailPlaceholder
+            emailInputView.textColor = .simplenoteAlmostBlack()
+        }
+    }
 
     /// Password Input
     ///
-    @IBOutlet private var passwordTextInputView: SPTextInputView!
+    @IBOutlet private var passwordInputView: SPTextInputView! {
+        didSet {
+            passwordInputView.backgroundColor = .clear
+            passwordInputView.isSecureTextEntry = true
+            passwordInputView.returnKeyType = .done
+            passwordInputView.rightView = revealPasswordButton
+            passwordInputView.rightViewMode = .always
+            passwordInputView.rightViewInsets = Constants.onePasswordInsets
+            passwordInputView.placeholder = SignupStrings.passwordPlaceholder
+            passwordInputView.textColor = .simplenoteAlmostBlack()
+        }
+    }
 
     /// SignUp Action
     ///
-    @IBOutlet private var signupButton: SPSquaredButton!
+    @IBOutlet private var signupButton: SPSquaredButton! {
+        didSet {
+            signupButton.setTitle(SignupStrings.signupActionText, for: .normal)
+            signupButton.setTitleColor(.white, for: .normal)
+        }
+    }
 
     /// ToS Action
     ///
-    @IBOutlet private var termsOfServiceButton: UIButton!
+    @IBOutlet private var termsOfServiceButton: UIButton! {
+        didSet {
+            termsOfServiceButton.setTitle(SignupStrings.termsText, for: .normal)
+            termsOfServiceButton.titleLabel?.numberOfLines = 0
+            termsOfServiceButton.titleLabel?.textAlignment = .center
+        }
+    }
 
-    /// 1Password Button
+    /// OnePassword Button
     ///
-    private let onePasswordButton = UIButton(type: .custom)
+    private lazy var onePasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(.onePasswordImage, for: .normal)
+        button.tintColor = .simplenoteSlateGrey()
+        button.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
+        button.sizeToFit()
+        return button
+    }()
+
+    /// Reveal Password Button
+    ///
+    private lazy var revealPasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(.visibilityOffImage, for: .normal)
+        button.tintColor = .simplenoteSlateGrey()
+        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: .touchUpInside)
+        button.sizeToFit()
+        return button
+    }()
 
     /// Simperium's Authenticator Instance
     ///
@@ -34,7 +85,7 @@ class SPSignupViewController: UIViewController {
     ///
     ///
     private var isInputValid: Bool {
-        // TODO
+// TODO
         return false
     }
 
@@ -57,13 +108,12 @@ class SPSignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
-        setupTextFields()
-        setupActionButtons()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextInputView.becomeFirstResponder()
+        emailInputView.becomeFirstResponder()
+        refreshButtonsStyle()
     }
 }
 
@@ -73,7 +123,7 @@ class SPSignupViewController: UIViewController {
 extension SPSignupViewController {
 
     @IBAction func signupWasPressed() {
-        // TODO
+// TODO
     }
 
     @IBAction func termsWasPressed() {
@@ -81,7 +131,11 @@ extension SPSignupViewController {
     }
 
     @IBAction func onePasswordWasPressed() {
-        // TODO
+// TODO
+    }
+
+    @IBAction func revealPasswordWasPressed() {
+// TODO
     }
 }
 
@@ -94,39 +148,6 @@ private extension SPSignupViewController {
         title = SignupStrings.title
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.applySimplenoteLightStyle()
-    }
-
-    func setupTextFields() {
-        emailTextInputView.rightView = onePasswordButton
-        emailTextInputView.rightViewMode = .always
-        emailTextInputView.textColor = .simplenoteAlmostBlack()
-        emailTextInputView.placeholder = SignupStrings.emailPlaceholder
-        emailTextInputView.keyboardType = .emailAddress
-        emailTextInputView.returnKeyType = .next
-        emailTextInputView.backgroundColor = .clear
-
-        passwordTextInputView.textColor = .simplenoteAlmostBlack()
-        passwordTextInputView.placeholder = SignupStrings.passwordPlaceholder
-        passwordTextInputView.isSecureTextEntry = true
-        passwordTextInputView.returnKeyType = .done
-        passwordTextInputView.backgroundColor = .clear
-    }
-
-    func setupActionButtons() {
-        onePasswordButton.setImage(.onePasswordImage, for: .normal)
-        onePasswordButton.sizeToFit()
-        onePasswordButton.imageEdgeInsets = Constants.onePasswordInsets
-        onePasswordButton.frame.size.width += Constants.onePasswordInsets.right
-        onePasswordButton.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
-
-        signupButton.setTitle(SignupStrings.signupActionText, for: .normal)
-        signupButton.setTitleColor(.white, for: .normal)
-        signupButton.backgroundColor = .simplenoteLightNavy()
-
-        let termsText = NSLocalizedString("By creating an account you agree to our Terms and Conditions",
-                                          comment: "Terms of Service Legend")
-        termsOfServiceButton.setTitle(termsText, for: .normal)
-        termsOfServiceButton.titleLabel?.numberOfLines = 0
     }
 
     func refreshButtonsStyle() {
@@ -152,6 +173,7 @@ private struct SignupStrings {
     static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let signupActionText     = NSLocalizedString("Sign Up", comment: "Sign Up Action")
+    static let termsText            = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
 }
 
 private struct Constants {

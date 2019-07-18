@@ -9,23 +9,73 @@ class SPLoginViewController: UIViewController {
 
     /// Email Input
     ///
-    @IBOutlet private var emailTextInputView: SPTextInputView!
+    @IBOutlet private var emailInputView: SPTextInputView! {
+        didSet {
+            emailInputView.backgroundColor = .clear
+            emailInputView.keyboardType = .emailAddress
+            emailInputView.placeholder = LoginStrings.emailPlaceholder
+            emailInputView.returnKeyType = .next
+            emailInputView.rightView = onePasswordButton
+            emailInputView.rightViewMode = .always
+            emailInputView.rightViewInsets = Constants.onePasswordInsets
+            emailInputView.textColor = .simplenoteAlmostBlack()
+        }
+    }
 
     /// Password Input
     ///
-    @IBOutlet private var passwordTextInputView: SPTextInputView!
+    @IBOutlet private var passwordInputView: SPTextInputView! {
+        didSet {
+            passwordInputView.backgroundColor = .clear
+            passwordInputView.isSecureTextEntry = true
+            passwordInputView.placeholder = LoginStrings.passwordPlaceholder
+            passwordInputView.returnKeyType = .done
+            passwordInputView.rightView = revealPasswordButton
+            passwordInputView.rightViewMode = .always
+            passwordInputView.rightViewInsets = Constants.onePasswordInsets
+            passwordInputView.textColor = .simplenoteAlmostBlack()
+        }
+    }
 
     /// Login Action
     ///
-    @IBOutlet private var loginButton: SPSquaredButton!
+    @IBOutlet private var loginButton: SPSquaredButton! {
+        didSet {
+            loginButton.setTitle(LoginStrings.loginActionText, for: .normal)
+            loginButton.setTitleColor(.white, for: .normal)
+        }
+    }
 
     /// Forgot Password Action
     ///
-    @IBOutlet private var forgotButton: UIButton!
+    @IBOutlet private var forgotButton: UIButton! {
+        didSet {
+            forgotButton.setTitle(LoginStrings.forgotActionText, for: .normal)
+            forgotButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
+        }
+    }
 
     /// 1Password Button
     ///
-    private let onePasswordButton = UIButton(type: .custom)
+    private lazy var onePasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(.onePasswordImage, for: .normal)
+        button.tintColor = .simplenoteSlateGrey()
+        button.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
+        button.sizeToFit()
+        return button
+    }()
+
+    /// Reveal Password Button
+    ///
+    private lazy var revealPasswordButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(.visibilityOffImage, for: .normal)
+        button.tintColor = .simplenoteSlateGrey()
+        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: .touchUpInside)
+        button.sizeToFit()
+        return button
+    }()
 
     /// Simperium's Authenticator Instance
     ///
@@ -57,13 +107,12 @@ class SPLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
-        setupTextFields()
-        setupActionButtons()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextInputView.becomeFirstResponder()
+        emailInputView.becomeFirstResponder()
+        refreshButtonsStyle()
     }
 }
 
@@ -77,11 +126,15 @@ extension SPLoginViewController {
     }
 
     @IBAction func forgotWasPressed() {
-        let email = emailTextInputView.text ?? String()
+        let email = emailInputView.text ?? String()
         presentPasswordReset(for: email)
     }
 
     @IBAction func onePasswordWasPressed() {
+// TODO
+    }
+
+    @IBAction func revealPasswordWasPressed() {
 // TODO
     }
 }
@@ -95,37 +148,6 @@ private extension SPLoginViewController {
         title = LoginStrings.title
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.applySimplenoteLightStyle()
-    }
-
-    func setupTextFields() {
-        emailTextInputView.rightView = onePasswordButton
-        emailTextInputView.rightViewMode = .always
-        emailTextInputView.textColor = .simplenoteAlmostBlack()
-        emailTextInputView.placeholder = LoginStrings.emailPlaceholder
-        emailTextInputView.keyboardType = .emailAddress
-        emailTextInputView.returnKeyType = .next
-        emailTextInputView.backgroundColor = .clear
-
-        passwordTextInputView.textColor = .simplenoteAlmostBlack()
-        passwordTextInputView.placeholder = LoginStrings.passwordPlaceholder
-        passwordTextInputView.isSecureTextEntry = true
-        passwordTextInputView.returnKeyType = .done
-        passwordTextInputView.backgroundColor = .clear
-    }
-
-    func setupActionButtons() {
-        onePasswordButton.setImage(.onePasswordImage, for: .normal)
-        onePasswordButton.sizeToFit()
-        onePasswordButton.imageEdgeInsets = Constants.onePasswordInsets
-        onePasswordButton.frame.size.width += Constants.onePasswordInsets.right
-        onePasswordButton.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
-
-        loginButton.setTitle(LoginStrings.loginActionText, for: .normal)
-        loginButton.backgroundColor = .simplenotePalePurple()
-        loginButton.setTitleColor(.white, for: .normal)
-
-        forgotButton.setTitle(LoginStrings.forgotActionText, for: .normal)
-        forgotButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
     }
 
     func refreshButtonsStyle() {

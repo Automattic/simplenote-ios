@@ -12,10 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPLoginViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="emailTextInputView" destination="hW6-K1-OyV" id="Jfu-kQ-Y62"/>
+                <outlet property="emailInputView" destination="hW6-K1-OyV" id="fY2-9W-AoB"/>
                 <outlet property="forgotButton" destination="PfS-vU-7i3" id="Sce-3C-XTR"/>
                 <outlet property="loginButton" destination="q3p-Ji-dOm" id="x5h-dL-hYU"/>
-                <outlet property="passwordTextInputView" destination="pdF-nK-gXE" id="OHO-o1-GAB"/>
+                <outlet property="passwordInputView" destination="pdF-nK-gXE" id="K8k-We-bTv"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CDw-cr-NTD"/>
             </connections>
         </placeholder>
