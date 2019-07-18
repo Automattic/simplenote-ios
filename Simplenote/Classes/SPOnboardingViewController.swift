@@ -49,20 +49,20 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     }
 
     @IBAction func signupWasPressed() {
-        guard let authenticator = authenticator else {
+        guard let simperiumAuthenticator = authenticator else {
             fatalError()
         }
 
-        let viewController = SPSignupViewController(authenticator: authenticator)
+        let viewController = SPSignupViewController(simperiumAuthenticator: simperiumAuthenticator)
         navigationController?.pushViewController(viewController, animated: true)
     }
 
     @IBAction func loginWasPressed() {
-        guard let authenticator = authenticator else {
+        guard let simperiumAuthenticator = authenticator else {
             fatalError()
         }
 
-        let viewController = SPLoginViewController(authenticator: authenticator)
+        let viewController = SPLoginViewController(simperiumAuthenticator: simperiumAuthenticator)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

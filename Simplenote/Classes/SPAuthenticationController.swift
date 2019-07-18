@@ -2,7 +2,15 @@ import Foundation
 import OnePasswordExtension
 
 
+// MARK: - SPAuthenticationError
 //
+enum SPAuthenticationError: Error {
+    case onePasswordCancelled
+    case onePasswordError
+}
+
+
+// MARK: - SPAuthenticationController
 //
 class SPAuthenticationController {
 
@@ -24,35 +32,28 @@ class SPAuthenticationController {
 
     ///
     ///
-    func findOnePasswordLogin(presenter: UIViewController, onCompletion: @escaping (String, String) -> Void) {
-        onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: nil) { (payload, error) in
-            guard let dictionary = payload,
-                let username = dictionary[AppExtensionUsernameKey] as? String,
-                let password = dictionary[AppExtensionPasswordKey] as? String else {
+    func findOnePasswordLogin(presenter: UIViewController, onCompletion: @escaping (String?, String?, SPAuthenticationError?) -> Void) {
+        onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: nil) { (dictionary, error) in
+            guard let username = dictionary?[AppExtensionUsernameKey] as? String,
+                let password = dictionary?[AppExtensionPasswordKey] as? String
+                else {
+                    let wrappedError = self.errorFromOnePasswordError(error)
+                    onCompletion(nil, nil, wrappedError)
                     return
             }
 
-            onCompletion(username,password)
+            onCompletion(username, password, nil)
+        }
+    }
+
+    ///
+    ///
+    private func errorFromOnePasswordError(_ error: Error?) -> SPAuthenticationError? {
+        guard let error = error as NSError? else {
+            return nil
         }
 
-        //    [[OnePasswordExtension sharedExtension] findLoginForURLString:kOnePasswordSimplenoteURL
-        //                                                forViewController:self
-        //                                                           sender:sender
-        //                                                       completion:^(NSDictionary *loginDict, NSError *error) {
-        //                                                           if (!loginDict) {
-        //                                                               if (error.code != AppExtensionErrorCodeCancelledByUser) {
-        //                                                                   NSLog(@"OnePassword Error: %@", error);
-        //                                                                   [SPTracker trackOnePasswordLoginFailure];
-        //                                                               }
-        //                                                               return;
-        //                                                           }
-        //
-        //                                                           self.usernameField.text = loginDict[AppExtensionUsernameKey];
-        //                                                           self.passwordField.text = loginDict[AppExtensionPasswordKey];
-        //
-        //                                                           [SPTracker trackOnePasswordLoginSuccess];
-        //                                                           [super performAction:nil];
-        //                                                       }];
+        return error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
     }
 
 
@@ -87,7 +88,6 @@ class SPAuthenticationController {
         //
         //                                                            self.usernameField.text = loginDict[AppExtensionUsernameKey] ?: [NSString string];
         //                                                            self.passwordField.text = loginDict[AppExtensionPasswordKey] ?: [NSString string];
-        //                                                            self.passwordConfirmField.text = self.passwordField.text;
         //
         //                                                            [SPTracker trackOnePasswordSignupSuccess];
         //                                                        }];

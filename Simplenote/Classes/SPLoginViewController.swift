@@ -123,7 +123,7 @@ extension SPLoginViewController {
 
     @IBAction func loginWasPressed() {
 // TODO
-//        [SPTracker trackUserSignedIn];
+        SPTracker.trackUserSignedIn()
     }
 
     @IBAction func forgotWasPressed() {
@@ -132,12 +132,22 @@ extension SPLoginViewController {
     }
 
     @IBAction func onePasswordWasPressed() {
-// TODO
         view.endEditing(true)
 
-        controller.findOnePasswordLogin(presenter: self) { (username, password) in
+        controller.findOnePasswordLogin(presenter: self) { (username, password, error) in
+            guard let username = username, let password = password else {
+                if error == .onePasswordError {
+                    SPTracker.trackOnePasswordLoginFailure()
+                }
+
+                return
+            }
+
             self.emailInputView.text = username
             self.passwordInputView.text = password
+
+            self.loginWasPressed()
+            SPTracker.trackOnePasswordLoginSuccess()
         }
     }
 
