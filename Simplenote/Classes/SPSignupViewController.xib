@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSignupViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextInputView" destination="MRE-m0-1IK" id="YcC-ko-gRh"/>
+                <outlet property="passwordTextInputView" destination="eSJ-L3-2I1" id="4cn-qc-V8D"/>
+                <outlet property="signupButton" destination="JY0-Aq-57f" id="q69-Wg-e7P"/>
+                <outlet property="termsOfServiceButton" destination="Gjh-YJ-IHz" id="dqN-cF-3bb"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6tQ-OA-nWF"/>
             </connections>
         </placeholder>
@@ -19,7 +23,58 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mh7-gj-xMH">
+                    <rect key="frame" x="43.5" y="84" width="327" height="200"/>
+                    <subviews>
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-m0-1IK" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="Zu6-14-lLy"/>
+                                <constraint firstAttribute="height" constant="44" id="az3-Sw-z79"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="eSJ-L3-2I1" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="52" width="327" height="44"/>
+                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="CHD-HW-mou"/>
+                                <constraint firstAttribute="height" constant="44" id="Cs0-Nn-DOT"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY0-Aq-57f" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="104" width="327" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="XF2-Ms-vVV"/>
+                                <constraint firstAttribute="width" constant="327" id="anB-ed-HV2"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="#SignUp#"/>
+                            <connections>
+                                <action selector="signupWasPressed" destination="-1" eventType="touchUpInside" id="99n-Iw-eeN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjh-YJ-IHz">
+                            <rect key="frame" x="0.0" y="156" width="327" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="bE8-tJ-WVH"/>
+                                <constraint firstAttribute="height" constant="44" id="dHf-KY-yEY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <state key="normal" title="#TermsOfServices#"/>
+                            <connections>
+                                <action selector="termsWasPressed" destination="-1" eventType="touchUpInside" id="rwj-fv-kkq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Mh7-gj-xMH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BJJ-Ir-1QN"/>
+                <constraint firstItem="Mh7-gj-xMH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="qj1-v5-PVE"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>
