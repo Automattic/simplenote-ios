@@ -169,6 +169,7 @@
 		B57AEAC522DD0C9500470277 /* SPSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AEAC422DD0C9500470277 /* SPSignupViewController.swift */; };
 		B57AEAC722DD0CBD00470277 /* SPSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEAC622DD0CBD00470277 /* SPSignupViewController.xib */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
+		B589E16C22E0B09F003FFF04 /* SPAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */; };
 		B59484BF1D6CE2580006D427 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
@@ -178,7 +179,6 @@
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
 		B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */; };
 		B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */; };
-		B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */; };
 		B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */; };
 		B5BDD8771BEA6C19006EB940 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B566A1DD189AA74600DC3F2D /* AdSupport.framework */; };
 		B5BE05421AB75225002417BF /* SPIntegrityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05401AB75225002417BF /* SPIntegrityHelper.m */; };
@@ -417,6 +417,7 @@
 		B582189B1FCC45170094ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMigratorTests.swift; sourceTree = "<group>"; };
+		B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthenticationController.swift; path = Classes/SPAuthenticationController.swift; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		B59314DC1A486C0100B651ED /* VSTheme+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Simplenote.h"; path = "Classes/VSTheme+Simplenote.h"; sourceTree = "<group>"; };
@@ -432,7 +433,6 @@
 		B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsPromptView.m; path = Classes/SPRatingsPromptView.m; sourceTree = "<group>"; };
 		B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
 		B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+Extensions.m"; path = "Classes/UIDevice+Extensions.m"; sourceTree = "<group>"; };
-		B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPLoginViewController.m; path = Classes/SPLoginViewController.m; sourceTree = "<group>"; };
 		B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5BE053F1AB75225002417BF /* SPIntegrityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPIntegrityHelper.h; path = Classes/SPIntegrityHelper.h; sourceTree = "<group>"; };
 		B5BE05401AB75225002417BF /* SPIntegrityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPIntegrityHelper.m; path = Classes/SPIntegrityHelper.m; sourceTree = "<group>"; };
@@ -1042,6 +1042,7 @@
 				B57AEAC222DD0BDD00470277 /* SPLoginViewController.xib */,
 				B57AEAC422DD0C9500470277 /* SPSignupViewController.swift */,
 				B57AEAC622DD0CBD00470277 /* SPSignupViewController.xib */,
+				B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1263,7 +1264,6 @@
 			children = (
 				B5D26AE522DCCCB400104C39 /* Onboarding */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
-				B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
 				E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */,
@@ -1744,7 +1744,6 @@
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				46A3C97D17DFA81A002865AE /* NSTextStorage+Highlight.m in Sources */,
-				B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */,
 				B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
@@ -1785,6 +1784,7 @@
 				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */,
+				B589E16C22E0B09F003FFF04 /* SPAuthenticationController.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,
