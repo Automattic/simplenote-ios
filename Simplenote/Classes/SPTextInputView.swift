@@ -3,6 +3,7 @@ import Foundation
 
 // MARK: - SPTextInputView
 //
+@IBDesignable
 class SPTextInputView: UIView {
 
     /// Internal TextField
@@ -11,7 +12,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Autocapitalization Type
     ///
-    var autocapitalizationType: UITextAutocapitalizationType {
+    @IBInspectable var autocapitalizationType: UITextAutocapitalizationType {
         get {
             return textField.autocapitalizationType
         }
@@ -22,7 +23,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Autocorrection Type
     ///
-    var autocorrectionType: UITextAutocorrectionType {
+    @IBInspectable var autocorrectionType: UITextAutocorrectionType {
         get {
             return textField.autocorrectionType
         }
@@ -33,7 +34,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Enabled State
     ///
-    var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
+    @IBInspectable var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
         didSet {
             refreshBorderStyle()
         }
@@ -41,7 +42,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Disabled State
     ///
-    var borderColorDisabled: UIColor? = Defaults.borderColorDisabled {
+    @IBInspectable var borderColorDisabled: UIColor? = Defaults.borderColorDisabled {
         didSet {
             refreshBorderStyle()
         }
@@ -49,7 +50,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Radius
     ///
-    var borderCornerRadius: CGFloat = Defaults.cornerRadius {
+    @IBInspectable var borderCornerRadius: CGFloat = Defaults.cornerRadius {
         didSet {
             refreshBorderStyle()
         }
@@ -57,7 +58,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Width
     ///
-    var borderWidth: CGFloat = Defaults.borderWidth {
+    @IBInspectable var borderWidth: CGFloat = Defaults.borderWidth {
         didSet {
             refreshBorderStyle()
         }
@@ -65,7 +66,7 @@ class SPTextInputView: UIView {
 
     /// Indicates if the input text should be obfuscated
     ///
-    var isSecureTextEntry: Bool {
+    @IBInspectable var isSecureTextEntry: Bool {
         get {
             return textField.isSecureTextEntry
         }
@@ -76,7 +77,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Keyboard Type
     ///
-    var keyboardType: UIKeyboardType {
+    @IBInspectable var keyboardType: UIKeyboardType {
         get {
             return textField.keyboardType
         }
@@ -87,7 +88,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Placeholder Color
     ///
-    var placeholderColor: UIColor? {
+    @IBInspectable var placeholderColor: UIColor? {
         get {
             return textField.placeholdTextColor
         }
@@ -98,7 +99,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Return Key Type
     ///
-    var returnKeyType: UIReturnKeyType {
+    @IBInspectable var returnKeyType: UIReturnKeyType {
         get {
             return textField.returnKeyType
         }
@@ -142,7 +143,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Text
     ///
-    var text: String? {
+    @IBInspectable var text: String? {
         get {
             return textField.text
         }
@@ -153,7 +154,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Text Color
     ///
-    var textColor: UIColor? {
+    @IBInspectable var textColor: UIColor? {
         get {
             return textField.textColor
         }
@@ -164,7 +165,7 @@ class SPTextInputView: UIView {
 
     /// TextField Placeholder
     ///
-    var placeholder: String? {
+    @IBInspectable var placeholder: String? {
         get {
             return textField.placeholder
         }
