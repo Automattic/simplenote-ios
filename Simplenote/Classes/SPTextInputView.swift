@@ -5,52 +5,94 @@ import Foundation
 //
 class SPTextInputView: UIView {
 
-    /// Default Border Radius
+    /// Internal TextField
     ///
-    private let defaultCornerRadius = CGFloat(4)
+    private let textField = UITextField()
 
-    /// Default Border Width
+    /// Outer Border Color: Enabled State
     ///
-    private let defaultBorderWidth = CGFloat(1)
-
-    /// Default TextView Insets
-    ///
-    private let defaultInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-
-    /// Input TextView
-    ///
-    let textField = UITextField()
-
-    /// Outer Border (Corner) Radius
-    ///
-    var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
+    var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
+        didSet {
+            refreshBorderStyle()
         }
-        set {
-            layer.cornerRadius = newValue
+    }
+
+    /// Outer Border Color: Disabled State
+    ///
+    var borderColorDisabled: UIColor? = Defaults.borderColorDisabled {
+        didSet {
+            refreshBorderStyle()
+        }
+    }
+
+    /// Outer Border Radius
+    ///
+    var borderCornerRadius: CGFloat = Defaults.cornerRadius {
+        didSet {
+            refreshBorderStyle()
         }
     }
 
     /// Outer Border Width
     ///
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
+    var borderWidth: CGFloat = Defaults.borderWidth {
+        didSet {
+            refreshBorderStyle()
         }
     }
 
-    /// Outer Border Color
+    /// Indicates if the input text should be obfuscated
     ///
-    var borderColor: CGColor? {
+    var isSecureTextEntry: Bool {
         get {
-            return layer.borderColor
+            return textField.isSecureTextEntry
         }
         set {
-            layer.borderColor = newValue
+            textField.isSecureTextEntry = newValue
+        }
+    }
+
+    /// TextField's Keyboard Type
+    ///
+    var keyboardType: UIKeyboardType {
+        get {
+            return textField.keyboardType
+        }
+        set {
+            textField.keyboardType = newValue
+        }
+    }
+
+    /// TextField's Return Key Type
+    ///
+    var returnKeyType: UIReturnKeyType {
+        get {
+            return textField.returnKeyType
+        }
+        set {
+            textField.returnKeyType = newValue
+        }
+    }
+
+    /// TextField's Text Color
+    ///
+    var textColor: UIColor? {
+        get {
+            return textField.textColor
+        }
+        set {
+            textField.textColor = newValue
+        }
+    }
+
+    /// TextField Placeholder
+    ///
+    var placeholder: String? {
+        get {
+            return textField.placeholder
+        }
+        set {
+            textField.placeholder = newValue
         }
     }
 
@@ -60,13 +102,23 @@ class SPTextInputView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
-        setupBorder()
+        setupLayout()
+        refreshBorderStyle()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
-        setupBorder()
+        setupLayout()
+        refreshBorderStyle()
+    }
+
+
+    // MARK: - Public Methods
+
+    @discardableResult
+    override func becomeFirstResponder() -> Bool {
+        return textField.becomeFirstResponder()
     }
 }
 
@@ -77,19 +129,47 @@ private extension SPTextInputView {
 
     func setupSubviews() {
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         addSubview(textField)
+    }
 
+    func setupLayout() {
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: defaultInsets.left),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: defaultInsets.right),
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: defaultInsets.top),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: defaultInsets.bottom),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Defaults.insets.left),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Defaults.insets.right),
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: Defaults.insets.top),
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Defaults.insets.bottom),
             ])
     }
 
-    func setupBorder() {
-        cornerRadius = defaultCornerRadius
-        borderWidth = defaultBorderWidth
-        borderColor = UIColor.gray.cgColor
+    func refreshBorderStyle() {
+        layer.borderColor = textField.isFirstResponder ? borderColorEnabled?.cgColor : borderColorDisabled?.cgColor
+        layer.cornerRadius = borderCornerRadius
+        layer.borderWidth = borderWidth
     }
+}
+
+
+// MARK: - UITextFieldDelegate
+//
+extension SPTextInputView: UITextFieldDelegate {
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        refreshBorderStyle()
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        refreshBorderStyle()
+    }
+}
+
+
+// MARK: - Default Settings
+//
+private enum Defaults {
+    static let cornerRadius         = CGFloat(4)
+    static let borderWidth          = CGFloat(1)
+    static let insets               = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    static let borderColorEnabled   = UIColor.simplenotePalePurple()
+    static let borderColorDisabled  = UIColor.simplenoteLightPink()
 }
