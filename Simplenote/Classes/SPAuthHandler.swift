@@ -2,17 +2,17 @@ import Foundation
 import OnePasswordExtension
 
 
-// MARK: - SPAuthenticationError
+// MARK: - SPAuthError
 //
-enum SPAuthenticationError: Error {
+enum SPAuthError: Error {
     case onePasswordCancelled
     case onePasswordError
 }
 
 
-// MARK: - SPAuthenticationController
+// MARK: - SPAuthHandler
 //
-class SPAuthenticationController {
+class SPAuthHandler {
 
     ///
     ///
@@ -32,7 +32,7 @@ class SPAuthenticationController {
 
     ///
     ///
-    func findOnePasswordLogin(presenter: UIViewController, onCompletion: @escaping (String?, String?, SPAuthenticationError?) -> Void) {
+    func findOnePasswordLogin(presenter: UIViewController, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
         onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: nil) { (dictionary, error) in
             guard let username = dictionary?[AppExtensionUsernameKey] as? String,
                 let password = dictionary?[AppExtensionPasswordKey] as? String
@@ -44,16 +44,6 @@ class SPAuthenticationController {
 
             onCompletion(username, password, nil)
         }
-    }
-
-    ///
-    ///
-    private func errorFromOnePasswordError(_ error: Error?) -> SPAuthenticationError? {
-        guard let error = error as NSError? else {
-            return nil
-        }
-
-        return error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
     }
 
 
@@ -110,5 +100,21 @@ class SPAuthenticationController {
         //    [self presentViewController:sfvc animated:YES completion:nil];
         //
         //    [SPTracker trackWPCCButtonPressed];
+    }
+}
+
+
+// MARK: - Private Methods
+//
+private extension SPAuthHandler {
+
+    ///
+    ///
+    func errorFromOnePasswordError(_ error: Error?) -> SPAuthError? {
+        guard let error = error as NSError? else {
+            return nil
+        }
+
+        return error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
     }
 }

@@ -167,7 +167,7 @@
 		B57AEAC122DD0B0E00470277 /* SPAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */; };
 		B57AEAC322DD0BDD00470277 /* SPAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
-		B589E16C22E0B09F003FFF04 /* SPAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */; };
+		B589E16C22E0B09F003FFF04 /* SPAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */; };
 		B59484BF1D6CE2580006D427 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
@@ -413,7 +413,7 @@
 		B582189B1FCC45170094ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMigratorTests.swift; sourceTree = "<group>"; };
-		B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthenticationController.swift; path = Classes/SPAuthenticationController.swift; sourceTree = "<group>"; };
+		B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthHandler.swift; path = Classes/SPAuthHandler.swift; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		B59314DC1A486C0100B651ED /* VSTheme+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Simplenote.h"; path = "Classes/VSTheme+Simplenote.h"; sourceTree = "<group>"; };
@@ -1036,7 +1036,7 @@
 				B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */,
 				B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */,
 				B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */,
-				B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */,
+				B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1777,7 +1777,7 @@
 				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */,
-				B589E16C22E0B09F003FFF04 /* SPAuthenticationController.swift in Sources */,
+				B589E16C22E0B09F003FFF04 /* SPAuthHandler.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,

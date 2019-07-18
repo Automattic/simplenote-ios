@@ -53,7 +53,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
             fatalError()
         }
 
-        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator)
+        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: .signup)
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -62,7 +62,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
             fatalError()
         }
 
-        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator)
+        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: .login)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

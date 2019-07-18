@@ -57,9 +57,6 @@
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <state key="normal" title="#Primary#"/>
-                            <connections>
-                                <action selector="primaryActionWasPressed" destination="-1" eventType="touchUpInside" id="ewd-gg-UPo"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
                             <rect key="frame" x="0.0" y="156" width="327" height="44"/>
@@ -69,9 +66,6 @@
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="#Secondary#"/>
-                            <connections>
-                                <action selector="secondaryActionWasPressed" destination="-1" eventType="touchUpInside" id="PN9-Ig-giH"/>
-                            </connections>
                         </button>
                     </subviews>
                 </stackView>
