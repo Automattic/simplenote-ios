@@ -10,13 +10,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPLoginViewController" customModule="Simplenote" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAuthViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="emailInputView" destination="hW6-K1-OyV" id="fY2-9W-AoB"/>
-                <outlet property="forgotButton" destination="PfS-vU-7i3" id="Sce-3C-XTR"/>
-                <outlet property="loginButton" destination="q3p-Ji-dOm" id="x5h-dL-hYU"/>
-                <outlet property="passwordInputView" destination="pdF-nK-gXE" id="K8k-We-bTv"/>
-                <outlet property="view" destination="iN0-l3-epB" id="CDw-cr-NTD"/>
+                <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
+                <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
+                <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
+                <outlet property="secondaryActionButton" destination="PfS-vU-7i3" id="zj3-Ly-5X9"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bxN-Zo-xBW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,6 +34,9 @@
                                 <constraint firstAttribute="width" constant="327" id="Csa-Xu-cei"/>
                                 <constraint firstAttribute="height" constant="44" id="fUk-5j-zZS"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Email#"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="52" width="327" height="44"/>
@@ -42,6 +45,9 @@
                                 <constraint firstAttribute="width" constant="327" id="jhu-YL-4ba"/>
                                 <constraint firstAttribute="height" constant="44" id="uss-fG-PtW"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Password#"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="104" width="327" height="44"/>
@@ -50,9 +56,9 @@
                                 <constraint firstAttribute="width" constant="327" id="Dec-QY-2Qc"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                            <state key="normal" title="#LogIn#"/>
+                            <state key="normal" title="#Primary#"/>
                             <connections>
-                                <action selector="loginWasPressed" destination="-1" eventType="touchUpInside" id="vq6-WT-hLG"/>
+                                <action selector="primaryActionWasPressed" destination="-1" eventType="touchUpInside" id="ewd-gg-UPo"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
@@ -62,9 +68,9 @@
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <state key="normal" title="#PasswordReset#"/>
+                            <state key="normal" title="#Secondary#"/>
                             <connections>
-                                <action selector="forgotWasPressed" destination="-1" eventType="touchUpInside" id="YD9-VC-CGx"/>
+                                <action selector="secondaryActionWasPressed" destination="-1" eventType="touchUpInside" id="PN9-Ig-giH"/>
                             </connections>
                         </button>
                     </subviews>

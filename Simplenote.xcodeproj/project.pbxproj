@@ -164,10 +164,8 @@
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
 		B57AEABF22DD03B200470277 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */; };
-		B57AEAC122DD0B0E00470277 /* SPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AEAC022DD0B0E00470277 /* SPLoginViewController.swift */; };
-		B57AEAC322DD0BDD00470277 /* SPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEAC222DD0BDD00470277 /* SPLoginViewController.xib */; };
-		B57AEAC522DD0C9500470277 /* SPSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AEAC422DD0C9500470277 /* SPSignupViewController.swift */; };
-		B57AEAC722DD0CBD00470277 /* SPSignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEAC622DD0CBD00470277 /* SPSignupViewController.xib */; };
+		B57AEAC122DD0B0E00470277 /* SPAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */; };
+		B57AEAC322DD0BDD00470277 /* SPAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B589E16C22E0B09F003FFF04 /* SPAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
@@ -409,10 +407,8 @@
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
 		B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
-		B57AEAC022DD0B0E00470277 /* SPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPLoginViewController.swift; path = Classes/SPLoginViewController.swift; sourceTree = "<group>"; };
-		B57AEAC222DD0BDD00470277 /* SPLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPLoginViewController.xib; path = Classes/SPLoginViewController.xib; sourceTree = "<group>"; };
-		B57AEAC422DD0C9500470277 /* SPSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSignupViewController.swift; path = Classes/SPSignupViewController.swift; sourceTree = "<group>"; };
-		B57AEAC622DD0CBD00470277 /* SPSignupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSignupViewController.xib; path = Classes/SPSignupViewController.xib; sourceTree = "<group>"; };
+		B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthViewController.swift; path = Classes/SPAuthViewController.swift; sourceTree = "<group>"; };
+		B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPAuthViewController.xib; path = Classes/SPAuthViewController.xib; sourceTree = "<group>"; };
 		B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B582189B1FCC45170094ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1038,10 +1034,8 @@
 			children = (
 				B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */,
 				B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */,
-				B57AEAC022DD0B0E00470277 /* SPLoginViewController.swift */,
-				B57AEAC222DD0BDD00470277 /* SPLoginViewController.xib */,
-				B57AEAC422DD0C9500470277 /* SPSignupViewController.swift */,
-				B57AEAC622DD0CBD00470277 /* SPSignupViewController.xib */,
+				B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */,
+				B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */,
 				B589E16B22E0B09F003FFF04 /* SPAuthenticationController.swift */,
 			);
 			name = Onboarding;
@@ -1511,9 +1505,8 @@
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
 				B57AEABF22DD03B200470277 /* SPOnboardingViewController.xib in Resources */,
 				8C573B0E22CD1AD6005BC6F5 /* Version.Public.xcconfig in Resources */,
-				B57AEAC322DD0BDD00470277 /* SPLoginViewController.xib in Resources */,
+				B57AEAC322DD0BDD00470277 /* SPAuthViewController.xib in Resources */,
 				B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */,
-				B57AEAC722DD0CBD00470277 /* SPSignupViewController.xib in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1791,7 +1784,7 @@
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
 				B55E428E22A1C0B90018C0CE /* VSTheme+Keys.swift in Sources */,
 				46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */,
-				B57AEAC122DD0B0E00470277 /* SPLoginViewController.swift in Sources */,
+				B57AEAC122DD0B0E00470277 /* SPAuthViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
 				46A3C99717DFA81A002865AE /* SPEmptyListView.m in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
@@ -1808,7 +1801,6 @@
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
-				B57AEAC522DD0C9500470277 /* SPSignupViewController.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,

@@ -3,9 +3,9 @@ import UIKit
 import SafariServices
 
 
-// MARK: - SPLoginViewController
+// MARK: - SPAuthViewController
 //
-class SPLoginViewController: UIViewController {
+class SPAuthViewController: UIViewController {
 
     /// Email Input
     ///
@@ -37,19 +37,20 @@ class SPLoginViewController: UIViewController {
 
     /// Login Action
     ///
-    @IBOutlet private var loginButton: SPSquaredButton! {
+    @IBOutlet private var primaryActionButton: SPSquaredButton! {
         didSet {
-            loginButton.setTitle(LoginStrings.loginActionText, for: .normal)
-            loginButton.setTitleColor(.white, for: .normal)
+            primaryActionButton.setTitle(LoginStrings.loginActionText, for: .normal)
+            primaryActionButton.setTitleColor(.white, for: .normal)
         }
     }
 
     /// Forgot Password Action
     ///
-    @IBOutlet private var forgotButton: UIButton! {
+    @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
-            forgotButton.setTitle(LoginStrings.forgotActionText, for: .normal)
-            forgotButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
+            secondaryActionButton.setTitle(LoginStrings.forgotActionText, for: .normal)
+            secondaryActionButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
+            secondaryActionButton.titleLabel?.textAlignment = .center
         }
     }
 
@@ -59,7 +60,8 @@ class SPLoginViewController: UIViewController {
         let button = UIButton(type: .custom)
         button.setImage(.onePasswordImage, for: .normal)
         button.tintColor = .simplenoteSlateGrey()
-        button.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
+// TODO
+//        button.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
         button.sizeToFit()
         return button
     }()
@@ -71,8 +73,9 @@ class SPLoginViewController: UIViewController {
         button.setImage(.visibilityOffImage, for: .normal)
         button.setImage(.visibilityOnImage, for: .highlighted)
         button.tintColor = .simplenoteSlateGrey()
-        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
-        button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
+// TODO
+//        button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
+//        button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.sizeToFit()
         return button
     }()
@@ -119,19 +122,32 @@ class SPLoginViewController: UIViewController {
 
 // MARK: - Actions
 //
-extension SPLoginViewController {
+extension SPAuthViewController {
 
-    @IBAction func loginWasPressed() {
+    @IBAction func primaryActionWasPressed() {
+
+    }
+
+    @IBAction func secondaryActionWasPressed() {
+
+    }
+
+    private func signupWasPressed() {
+        // TODO
+        //        [SPTracker trackUserAccountCreated];
+    }
+
+    private func loginWasPressed() {
 // TODO
         SPTracker.trackUserSignedIn()
     }
 
-    @IBAction func forgotWasPressed() {
+    private func forgotWasPressed() {
         let email = emailInputView.text ?? String()
         presentPasswordReset(for: email)
     }
 
-    @IBAction func onePasswordWasPressed() {
+    private func onePasswordWasPressed() {
         view.endEditing(true)
 
         controller.findOnePasswordLogin(presenter: self) { (username, password, error) in
@@ -151,11 +167,11 @@ extension SPLoginViewController {
         }
     }
 
-    @IBAction func revealPasswordWasPressed() {
+    private func revealPasswordWasPressed() {
         passwordInputView.isSecureTextEntry = false
     }
 
-    @IBAction func revealPasswordWasReleased() {
+    private func revealPasswordWasReleased() {
         passwordInputView.isSecureTextEntry = true
     }
 }
@@ -163,7 +179,7 @@ extension SPLoginViewController {
 
 // MARK: - Private
 //
-private extension SPLoginViewController {
+private extension SPAuthViewController {
 
     func setupNavigationController() {
         title = LoginStrings.title
@@ -172,7 +188,7 @@ private extension SPLoginViewController {
     }
 
     func refreshButtonsStyle() {
-        loginButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
     }
 
     func presentPasswordReset(for email: String) {
@@ -186,6 +202,15 @@ private extension SPLoginViewController {
         present(safariViewController, animated: true, completion: nil)
     }
 
+    func presentTermsOfService() {
+        guard let targetURL = URL(string: kSimperiumTermsOfServiceURL) else {
+            return
+        }
+
+        let safariViewController = SFSafariViewController(url: targetURL)
+        safariViewController.modalPresentationStyle = .overFullScreen
+        present(safariViewController, animated: true, completion: nil)
+    }
 }
 
 
@@ -230,6 +255,14 @@ private struct LoginStrings {
     static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let loginActionText      = NSLocalizedString("Log In", comment: "Log In Action")
     static let forgotActionText     = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+}
+
+private struct SignupStrings {
+    static let title                = NSLocalizedString("Sign Up", comment: "Sign Up Title")
+    static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
+    static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let signupActionText     = NSLocalizedString("Sign Up", comment: "Sign Up Action")
+    static let termsText            = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
 }
 
 private struct Constants {
