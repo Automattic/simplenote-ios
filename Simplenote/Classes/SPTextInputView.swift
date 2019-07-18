@@ -9,6 +9,17 @@ class SPTextInputView: UIView {
     ///
     private let textField = UITextField()
 
+    /// TextField's Autocapitalization Type
+    ///
+    var autocapitalizationType: UITextAutocapitalizationType {
+        get {
+            return textField.autocapitalizationType
+        }
+        set {
+            textField.autocapitalizationType = newValue
+        }
+    }
+
     /// Outer Border Color: Enabled State
     ///
     var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
@@ -74,6 +85,17 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// TextField's Text
+    ///
+    var text: String? {
+        get {
+            return textField.text
+        }
+        set {
+            textField.text = newValue
+        }
+    }
+
     /// TextField's Text Color
     ///
     var textColor: UIColor? {
@@ -130,6 +152,7 @@ private extension SPTextInputView {
     func setupSubviews() {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
+        textField.autocapitalizationType = .none
         addSubview(textField)
     }
 
