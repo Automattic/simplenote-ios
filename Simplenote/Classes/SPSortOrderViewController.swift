@@ -28,6 +28,10 @@ class SPSortOrderViewController: UITableViewController {
     @objc
     var onChange: ((SortMode) -> Void)?
 
+    /// Indicates if an Action button should be attached to the navigationBar
+    ///
+    var displaysDismissButton = false
+
     /// Designated Initializer
     ///
     init() {
@@ -81,6 +85,12 @@ private extension SPSortOrderViewController {
 
     func setupNavigationItem() {
         title = NSLocalizedString("Sort Order", comment: "Sort Order for the Notes List")
+
+        if displaysDismissButton {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(dismissWasPressed))
+        }
     }
 
     func setupTableView() {
@@ -114,6 +124,14 @@ private extension SPSortOrderViewController {
     }
 }
 
+
+extension SPSortOrderViewController {
+
+    @objc
+    func dismissWasPressed() {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
 // MARK: - Constants
 //

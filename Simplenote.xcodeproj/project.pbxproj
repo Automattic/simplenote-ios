@@ -120,11 +120,13 @@
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
+		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52B8A271BAB0DF0002CC55D /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A251BAB0DF0002CC55D /* UIView+Extensions.m */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B557381F1AB8950A006043E4 /* NSDate+Helper.m */; };
+		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B55E428E22A1C0B90018C0CE /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
@@ -153,6 +155,8 @@
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
+		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
+		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
 		B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */; };
 		B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */; };
 		B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
@@ -316,6 +320,7 @@
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
+		B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Simplenote.swift"; path = "Classes/UIViewController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
 		B52B8A241BAB0DF0002CC55D /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "Classes/UIView+Extensions.h"; sourceTree = "<group>"; };
@@ -335,6 +340,7 @@
 		B5536B8F1B8E4B8A00FF190A /* zh-Hans-CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B557381E1AB8950A006043E4 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Helper.h"; path = "Classes/NSDate+Helper.h"; sourceTree = "<group>"; };
 		B557381F1AB8950A006043E4 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Helper.m"; path = "Classes/NSDate+Helper.m"; sourceTree = "<group>"; };
+		B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTests.swift; sourceTree = "<group>"; };
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VSTheme+Keys.swift"; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -380,6 +386,8 @@
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
+		B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MigrationsHandler.swift; path = Classes/MigrationsHandler.swift; sourceTree = "<group>"; };
+		B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Bundle+Simplenote.swift"; path = "Classes/Bundle+Simplenote.swift"; sourceTree = "<group>"; };
 		B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Simperium+Simplenote.h"; path = "Classes/Simperium+Simplenote.h"; sourceTree = "<group>"; };
 		B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Simperium+Simplenote.m"; path = "Classes/Simperium+Simplenote.m"; sourceTree = "<group>"; };
 		B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBundleWrapper.m; sourceTree = "<group>"; };
@@ -789,9 +797,27 @@
 			name = Trackers;
 			sourceTree = "<group>";
 		};
+		B55AC57822D27B7F00D8CEB2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		B55AC57B22D27BA300D8CEB2 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
+				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		B569DBFE1C03411500EC1FE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
@@ -800,6 +826,7 @@
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -827,10 +854,10 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				B55AC57822D27B7F00D8CEB2 /* Settings */,
+				B55AC57B22D27BA300D8CEB2 /* Tools */,
 				B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */,
 				B582189B1FCC45170094ECA1 /* Info.plist */,
-				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
-				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			path = SimplenoteTests;
 			sourceTree = "<group>";
@@ -849,6 +876,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5BE053F1AB75225002417BF /* SPIntegrityHelper.h */,
 				B5BE05401AB75225002417BF /* SPIntegrityHelper.m */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
@@ -1548,6 +1576,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
+				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
@@ -1624,6 +1653,7 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
+				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
@@ -1641,6 +1671,7 @@
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
 				46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
+				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
@@ -1667,6 +1698,7 @@
 			files = (
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
+				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
