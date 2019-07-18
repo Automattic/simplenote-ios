@@ -57,6 +57,11 @@ extension UIColor {
     }
 
     @objc
+    static func simplenoteSlateGrey() -> UIColor {
+        return UIColor(red: 104.0 / 255.0, green: 107.0 / 255.0, blue: 117.0 / 255.0, alpha: 1.0)
+    }
+
+    @objc
     static func simplenoteYellow() -> UIColor {
         return UIColor(red: 214.0/255.0, green: 176.0/255.0, blue: 44.0/255.0, alpha: 1.0)
     }

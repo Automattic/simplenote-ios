@@ -7,7 +7,7 @@ class SPTextInputView: UIView {
 
     /// Internal TextField
     ///
-    private let textField = UITextField()
+    private let textField = SPTextField()
 
     /// TextField's Autocapitalization Type
     ///
@@ -82,6 +82,17 @@ class SPTextInputView: UIView {
         }
         set {
             textField.keyboardType = newValue
+        }
+    }
+
+    /// TextField's Placeholder Color
+    ///
+    var placeholderColor: UIColor? {
+        get {
+            return textField.placeholdTextColor
+        }
+        set {
+            textField.placeholdTextColor = newValue
         }
     }
 
@@ -187,6 +198,7 @@ private extension SPTextInputView {
         textField.delegate = self
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.placeholdTextColor = Defaults.placeholderColor
         addSubview(textField)
     }
 
@@ -229,4 +241,5 @@ private enum Defaults {
     static let insets               = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     static let borderColorEnabled   = UIColor.simplenotePalePurple()
     static let borderColorDisabled  = UIColor.simplenoteLightPink()
+    static let placeholderColor     = UIColor.simplenoteSlateGrey()
 }
