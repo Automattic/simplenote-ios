@@ -23,6 +23,10 @@ class SPSignupViewController: UIViewController {
     ///
     @IBOutlet private var termsOfServiceButton: UIButton!
 
+    /// 1Password Button
+    ///
+    private let onePasswordButton = UIButton(type: .custom)
+
     /// Simperium's Authenticator Instance
     ///
     private let authenticator: SPAuthenticator
@@ -75,6 +79,10 @@ extension SPSignupViewController {
     @IBAction func termsWasPressed() {
         presentTermsOfService()
     }
+
+    @IBAction func onePasswordWasPressed() {
+        // TODO
+    }
 }
 
 
@@ -89,6 +97,8 @@ private extension SPSignupViewController {
     }
 
     func setupTextFields() {
+        emailTextInputView.rightView = onePasswordButton
+        emailTextInputView.rightViewMode = .always
         emailTextInputView.textColor = .simplenoteAlmostBlack()
         emailTextInputView.placeholder = SignupStrings.emailPlaceholder
         emailTextInputView.keyboardType = .emailAddress
@@ -103,6 +113,12 @@ private extension SPSignupViewController {
     }
 
     func setupActionButtons() {
+        onePasswordButton.setImage(.onePasswordImage, for: .normal)
+        onePasswordButton.sizeToFit()
+        onePasswordButton.imageEdgeInsets = Constants.onePasswordInsets
+        onePasswordButton.frame.size.width += Constants.onePasswordInsets.right
+        onePasswordButton.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
+
         signupButton.setTitle(SignupStrings.signupActionText, for: .normal)
         signupButton.setTitleColor(.white, for: .normal)
         signupButton.backgroundColor = .simplenoteLightNavy()
@@ -136,4 +152,8 @@ private struct SignupStrings {
     static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let signupActionText     = NSLocalizedString("Sign Up", comment: "Sign Up Action")
+}
+
+private struct Constants {
+    static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 }

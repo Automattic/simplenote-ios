@@ -23,6 +23,10 @@ class SPLoginViewController: UIViewController {
     ///
     @IBOutlet private var forgotButton: UIButton!
 
+    /// 1Password Button
+    ///
+    private let onePasswordButton = UIButton(type: .custom)
+
     /// Simperium's Authenticator Instance
     ///
     private let authenticator: SPAuthenticator
@@ -73,8 +77,12 @@ extension SPLoginViewController {
     }
 
     @IBAction func forgotWasPressed() {
-        let email = emailTextInputView.text ?? ""
+        let email = emailTextInputView.text ?? String()
         presentPasswordReset(for: email)
+    }
+
+    @IBAction func onePasswordWasPressed() {
+// TODO
     }
 }
 
@@ -90,6 +98,8 @@ private extension SPLoginViewController {
     }
 
     func setupTextFields() {
+        emailTextInputView.rightView = onePasswordButton
+        emailTextInputView.rightViewMode = .always
         emailTextInputView.textColor = .simplenoteAlmostBlack()
         emailTextInputView.placeholder = LoginStrings.emailPlaceholder
         emailTextInputView.keyboardType = .emailAddress
@@ -104,6 +114,12 @@ private extension SPLoginViewController {
     }
 
     func setupActionButtons() {
+        onePasswordButton.setImage(.onePasswordImage, for: .normal)
+        onePasswordButton.sizeToFit()
+        onePasswordButton.imageEdgeInsets = Constants.onePasswordInsets
+        onePasswordButton.frame.size.width += Constants.onePasswordInsets.right
+        onePasswordButton.addTarget(self, action: #selector(onePasswordWasPressed), for: .touchUpInside)
+
         loginButton.setTitle(LoginStrings.loginActionText, for: .normal)
         loginButton.backgroundColor = .simplenotePalePurple()
         loginButton.setTitleColor(.white, for: .normal)
@@ -132,9 +148,13 @@ private extension SPLoginViewController {
 // MARK: - Private Types
 //
 private struct LoginStrings {
-    static let title                = NSLocalizedString("Log In", comment: "LogIn Title")
+    static let title                = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let loginActionText      = NSLocalizedString("Log In", comment: "Log In Action")
     static let forgotActionText     = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+}
+
+private struct Constants {
+    static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 }

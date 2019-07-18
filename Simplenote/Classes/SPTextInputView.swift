@@ -20,6 +20,17 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// TextField's Autocorrection Type
+    ///
+    var autocorrectionType: UITextAutocorrectionType {
+        get {
+            return textField.autocorrectionType
+        }
+        set {
+            textField.autocorrectionType = newValue
+        }
+    }
+
     /// Outer Border Color: Enabled State
     ///
     var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
@@ -82,6 +93,28 @@ class SPTextInputView: UIView {
         }
         set {
             textField.returnKeyType = newValue
+        }
+    }
+
+    /// TextField's Right View
+    ///
+    var rightView: UIView? {
+        get {
+            return textField.rightView
+        }
+        set {
+            textField.rightView = newValue
+        }
+    }
+
+    /// TextField's Right View Visibility Mode
+    ///
+    var rightViewMode: UITextField.ViewMode {
+        get {
+            return textField.rightViewMode
+        }
+        set {
+            textField.rightViewMode = newValue
         }
     }
 
@@ -153,6 +186,7 @@ private extension SPTextInputView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         addSubview(textField)
     }
 

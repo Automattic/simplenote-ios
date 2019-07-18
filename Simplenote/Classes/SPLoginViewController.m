@@ -2,13 +2,6 @@
 //#pragma mark Constants
 //#pragma mark ================================================================================
 //
-//static CGRect SPLoginOnePasswordButtonFrame             = {0.0f, 0.0f, 38.0f, 38.0f};
-//static UIEdgeInsets SPLoginOnePasswordImageInsets       = {0.0f, 16.0f, 0.0f, 0.0f};
-//static UIEdgeInsets SPLoginOnePasswordImageInsetsSmall  = {0.0f, 16.0f, 3.0f, 0.0f};
-//
-//static CGFloat SPLoginScreenSmallThreshold              = 480.0f;
-//static CGFloat SPLoginFieldMaxWidth                     = 400.0f;
-//
 //static NSString *SPAuthSessionKey                       = @"SPAuthSessionKey";
 //
 //
@@ -16,101 +9,11 @@
 //#pragma mark SPLoginViewController
 //#pragma mark ================================================================================
 //
-//@interface SPLoginViewController ()
-//@property (nonatomic, strong) UIButton *onePasswordButton;
-//@property (nonatomic, strong) UIButton *wpccButton;
-//@end
-//
-//
-//@implementation SPLoginViewController
-
-//- (void)viewDidLoad
-//{
-//    // Force the 'sign in' layout
-//    [self setSigningIn:YES];
-//    [super viewDidLoad];
-//
-//    [self setupOnePasswordInterface];
-//    [self setupWordPressSignInInterface];
-//    [self startObservingChanges];
-//    [self startListeningToNotifications];
-//}
-//
 //- (void)viewWillAppear:(BOOL)animated
 //{
 //    [super viewWillAppear:animated];
 //    [self reloadOnePassword];
 //}
-
-//#pragma mark - Interface Initialization
-//
-//- (void)setupOnePasswordInterface
-//{
-//    // Add OnePassword
-//    UIButton *onePasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [onePasswordButton setImage:[UIImage imageNamed:@"onepassword_button"] forState:UIControlStateNormal];
-//    onePasswordButton.frame = SPLoginOnePasswordButtonFrame;
-//    onePasswordButton.imageEdgeInsets = self.isSmallScreen ? SPLoginOnePasswordImageInsetsSmall : SPLoginOnePasswordImageInsets;
-//    self.onePasswordButton = onePasswordButton;
-//
-//    // Attach the OnePassword button
-//    self.usernameField.rightView = self.onePasswordButton;
-//}
-//
-//- (void)setupWordPressSignInInterface
-//{
-//    CGFloat fieldWidth = MIN(self.view.frame.size.width, SPLoginFieldMaxWidth);
-//    UIColor *lightGreyColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-//    UIColor *greyColor = [UIColor colorWithWhite:0.7 alpha:1.0];
-//    UIColor *darkGreyColor = [UIColor colorWithWhite:0.4 alpha:1.0];
-//
-//    // Add the sign in with wordpress.com button
-//    CGRect footerFrame = self.tableView.tableFooterView.frame;
-//    footerFrame.size.height += 40;
-//    self.tableView.tableFooterView.frame = footerFrame;
-//
-//    UIButton *wpccButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    wpccButton.autoresizingMask = UIViewAutoresizingNone;
-//    [wpccButton setUserInteractionEnabled:YES];
-//    [wpccButton setTitle:NSLocalizedString(@"Sign in with WordPress.com", "Button title for connecting a WordPress.com account") forState:UIControlStateNormal];
-//    [wpccButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 16.0, 0.0, 0.0)];
-//    [wpccButton setImage:[UIImage imageNamed:@"icon_wpcom"] forState:UIControlStateNormal];
-//    [wpccButton setTitleColor:darkGreyColor forState:UIControlStateNormal];
-//    [wpccButton setTitleColor:greyColor forState:UIControlStateHighlighted];
-//    [wpccButton addTarget:self action:@selector(wpccSignInAction:) forControlEvents:UIControlEventTouchUpInside];
-//    wpccButton.frame = CGRectMake(0, 134.0, fieldWidth-20.0, 40.0);
-//    [self.tableView.tableFooterView addSubview:wpccButton];
-//
-//    UIView *topDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 130.0, fieldWidth, 1.0)];
-//    topDivider.autoresizingMask = UIViewAutoresizingNone;
-//    [topDivider setBackgroundColor:lightGreyColor];
-//    [self.tableView.tableFooterView addSubview:topDivider];
-//
-//    UIView *bottomDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 177.0, fieldWidth, 1.0)];
-//    bottomDivider.autoresizingMask = UIViewAutoresizingNone;
-//    [bottomDivider setBackgroundColor:lightGreyColor];
-//    [self.tableView.tableFooterView addSubview:bottomDivider];
-//
-//    self.wpccButton = wpccButton;
-//    self.topDivider = topDivider;
-//    self.bottomDivider = bottomDivider;
-//}
-//
-//
-//#pragma mark - Publisher/Subscriber
-//
-//- (void)startObservingChanges
-//{
-//    NSKeyValueObservingOptions options = (NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial);
-//    [self addObserver:self forKeyPath:NSStringFromSelector(@selector(signingIn)) options:options context:nil];
-//}
-//
-//- (void)startListeningToNotifications
-//{
-//    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-//    [nc addObserver:self selector:@selector(signInErrorAction:) name:kSignInErrorNotificationName object:nil];
-//}
-//
 //
 //#pragma mark - WordPress SignIn
 //

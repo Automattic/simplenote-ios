@@ -6,6 +6,13 @@ import UIKit
 //
 extension UIImage {
 
+    /// Returns the One Password Icon
+    ///
+    @objc
+    static var onePasswordImage: UIImage {
+        return UIImage(named: "onepassword_button")!
+    }
+
     /// Returns the Pinned Icon, to be used by the Notes List
     ///
     @objc
