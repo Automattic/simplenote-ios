@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPLoginViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextInputView" destination="hW6-K1-OyV" id="Jfu-kQ-Y62"/>
+                <outlet property="forgotButton" destination="PfS-vU-7i3" id="Sce-3C-XTR"/>
+                <outlet property="loginButton" destination="q3p-Ji-dOm" id="x5h-dL-hYU"/>
+                <outlet property="passwordTextInputView" destination="pdF-nK-gXE" id="OHO-o1-GAB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CDw-cr-NTD"/>
             </connections>
         </placeholder>
@@ -19,8 +23,60 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
+                    <rect key="frame" x="43.5" y="84" width="327" height="200"/>
+                    <subviews>
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="Csa-Xu-cei"/>
+                                <constraint firstAttribute="height" constant="44" id="fUk-5j-zZS"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="52" width="327" height="44"/>
+                            <color key="backgroundColor" red="0.35608011480000001" green="0.57671457530000003" blue="0.82750791310000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="jhu-YL-4ba"/>
+                                <constraint firstAttribute="height" constant="44" id="uss-fG-PtW"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="104" width="327" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Dd9-ee-gQN"/>
+                                <constraint firstAttribute="width" constant="327" id="Dec-QY-2Qc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="#LogIn#"/>
+                            <connections>
+                                <action selector="loginWasPressed" destination="-1" eventType="touchUpInside" id="vq6-WT-hLG"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
+                            <rect key="frame" x="0.0" y="156" width="327" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="FFG-kR-63u"/>
+                                <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <state key="normal" title="#PasswordReset#"/>
+                            <connections>
+                                <action selector="forgotWasPressed" destination="-1" eventType="touchUpInside" id="YD9-VC-CGx"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CJS-5O-pxK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="Cyh-nE-ql7"/>
+                <constraint firstItem="CJS-5O-pxK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H6h-v9-Uwb"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
 </document>
