@@ -174,6 +174,10 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// Delegate Wrapper
+    ///
+    weak var delegate: UITextFieldDelegate?
+
 
     // MARK: - Initializers
 
@@ -235,12 +239,33 @@ private extension SPTextInputView {
 //
 extension SPTextInputView: UITextFieldDelegate {
 
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldBeginEditing?(textField) ?? true
+    }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         refreshBorderStyle()
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldClear?(textField) ?? true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldEndEditing?(textField) ?? true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        delegate?.textFieldDidEndEditing?(textField)
         refreshBorderStyle()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldReturn?(textField) ?? true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return delegate?.textField?(textField, shouldChangeCharactersIn: range, replacementString: string) ?? true
     }
 }
 
