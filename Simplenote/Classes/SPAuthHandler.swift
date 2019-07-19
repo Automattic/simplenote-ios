@@ -101,10 +101,21 @@ class SPAuthHandler {
     func loginWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         simperiumService.authenticate(withUsername: username, password: password, success: {
             onCompletion(nil)
-        }) { (responseCode, responseString) in
+        }, failure: { (responseCode, responseString) in
             let wrappedError = self.errorFromSimperiumError(responseCode: Int(responseCode))
             onCompletion(wrappedError)
-        }
+        })
+    }
+
+    ///
+    ///
+    func signupWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+        simperiumService.create(withUsername: username, password: password, success: {
+            onCompletion(nil)
+        }, failure: { (responseCode, responseString) in
+            let wrappedError = self.errorFromSimperiumError(responseCode: Int(responseCode))
+            onCompletion(wrappedError)
+        })
     }
 
     ///

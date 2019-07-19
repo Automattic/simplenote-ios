@@ -95,13 +95,13 @@ class SPAuthViewController: UIViewController {
         return validator.validateUsername(email) && validator.validatePasswordSecurity(password)
     }
 
-    ///
+    /// Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var email: String {
         return emailInputView.text ?? String()
     }
 
-    ///
+    /// Returns the PasswordInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var password: String {
         return passwordInputView.text ?? String()
@@ -157,7 +157,7 @@ extension SPAuthViewController {
 }
 
 
-// MARK: - Private
+// MARK: - Interface
 //
 private extension SPAuthViewController {
 
@@ -173,17 +173,6 @@ private extension SPAuthViewController {
 
     func ensureOnePasswordIsAvailable() {
         emailInputView.rightViewMode = controller.isOnePasswordAvailable() ? .always : .never
-    }
-
-    func present(error: SPAuthError) {
-// TODO
-
-//        switch error {
-//        case .invalidEmailOrPassword:
-//        NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
-//        case .unknown:
-//        NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
-//        }
     }
 }
 
@@ -206,10 +195,16 @@ private extension SPAuthViewController {
     }
 
     @IBAction func performSignUp() {
-// TODO
         view.endEditing(true)
 
-        SPTracker.trackUserAccountCreated()
+        controller.signupWithCredentials(username: email, password: password) { error in
+            guard let error = error else {
+                SPTracker.trackUserAccountCreated()
+                return
+            }
+
+            self.present(error: error)
+        }
     }
 
     @IBAction func performOnePasswordLogIn() {
@@ -245,7 +240,6 @@ private extension SPAuthViewController {
 
             self.primaryActionButton.sendActions(for: .touchUpInside)
             SPTracker.trackOnePasswordSignupSuccess()
-
         }
     }
 
@@ -272,6 +266,20 @@ private extension SPAuthViewController {
 }
 
 
+// MARK: - Error Handling
+//
+private extension SPAuthViewController {
+
+    func present(error: SPAuthError) {
+// TODO
+
+//        switch error {
+//        case .invalidEmailOrPassword:
+//        NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
+//        case .unknown:
+//        NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
+//        }
+
 //- (IBAction)signInErrorAction:(NSNotification *)notification
 //{
 //    NSString *errorMessage = NSLocalizedString(@"An error was encountered while signing in.", @"Sign in error message");
@@ -290,6 +298,8 @@ private extension SPAuthViewController {
 //    [errorAlert addAction:defaultAction];
 //    [self presentViewController:errorAlert animated:YES completion:nil];
 //}
+    }
+}
 
 
 // MARK: - AuthenticationMode: Signup / Login
