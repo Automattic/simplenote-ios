@@ -7,7 +7,9 @@ import OnePasswordExtension
 enum SPAuthError: Error {
     case onePasswordCancelled
     case onePasswordError
-    case invalidEmailOrPassword
+    case loginBadCredentials
+    case signupBadCredentials
+    case signupUserAlreadyExists
     case unknown
 }
 
@@ -102,7 +104,7 @@ class SPAuthHandler {
         simperiumService.authenticate(withUsername: username, password: password, success: {
             onCompletion(nil)
         }, failure: { (responseCode, responseString) in
-            let wrappedError = self.errorFromSimperiumError(responseCode: Int(responseCode))
+            let wrappedError = self.errorFromSimperiumLoginError(responseCode: Int(responseCode))
             onCompletion(wrappedError)
         })
     }
@@ -113,7 +115,7 @@ class SPAuthHandler {
         simperiumService.create(withUsername: username, password: password, success: {
             onCompletion(nil)
         }, failure: { (responseCode, responseString) in
-            let wrappedError = self.errorFromSimperiumError(responseCode: Int(responseCode))
+            let wrappedError = self.errorFromSimperiumSignupError(responseCode: Int(responseCode))
             onCompletion(wrappedError)
         })
     }
@@ -142,12 +144,26 @@ private extension SPAuthHandler {
 
     ///
     ///
-    func errorFromSimperiumError(responseCode: Int) -> SPAuthError? {
+    func errorFromSimperiumLoginError(responseCode: Int) -> SPAuthError? {
         switch responseCode {
         case 401:
-            return .invalidEmailOrPassword
+            return .loginBadCredentials
         default:
             return .unknown
         }
     }
+
+    ///
+    ///
+    func errorFromSimperiumSignupError(responseCode: Int) -> SPAuthError? {
+        switch responseCode {
+        case 409:
+            return .signupUserAlreadyExists
+        case 401:
+            return .signupBadCredentials
+        default:
+            return .unknown
+        }
+    }
+
 }

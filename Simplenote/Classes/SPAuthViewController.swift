@@ -274,10 +274,14 @@ private extension SPAuthViewController {
 // TODO
 
 //        switch error {
-//        case .invalidEmailOrPassword:
-//        NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
+//        case .loginBadCredentials:
+//            NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
+//        case .signupBadCredentials:
+//            NSLocalizedString("Could not create an account with the provided email address and password.", "Error for bad email or password")
+//        case .signupUserAlreadyExists:
+//            NSLocalizedString("That email is already being used", "Error when address is in use")
 //        case .unknown:
-//        NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
+//            NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
 //        }
 
 //- (IBAction)signInErrorAction:(NSNotification *)notification
