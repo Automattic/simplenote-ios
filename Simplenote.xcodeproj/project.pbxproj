@@ -925,13 +925,13 @@
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */,
 				74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */,
-				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
 				B56DDC5A22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
-				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";

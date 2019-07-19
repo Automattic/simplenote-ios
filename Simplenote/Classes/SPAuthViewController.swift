@@ -157,7 +157,7 @@ extension SPAuthViewController {
 }
 
 
-// MARK: - Interface
+// MARK: - Private
 //
 private extension SPAuthViewController {
 
@@ -170,6 +170,21 @@ private extension SPAuthViewController {
     func ensureButtonStylesMatchInputState() {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
     }
+
+    func ensureOnePasswordIsAvailable() {
+        emailInputView.rightViewMode = controller.isOnePasswordAvailable() ? .always : .never
+    }
+
+    func present(error: SPAuthError) {
+// TODO
+
+//        switch error {
+//        case .invalidEmailOrPassword:
+//        NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
+//        case .unknown:
+//        NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
+//        }
+    }
 }
 
 
@@ -178,19 +193,26 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
-// TODO
-        controller.loginWithCredentials(username: email, password: password)
-        SPTracker.trackUserSignedIn()
+        view.endEditing(true)
+
+        controller.loginWithCredentials(username: email, password: password) { error in
+            guard let error = error else {
+                SPTracker.trackUserSignedIn()
+                return
+            }
+
+            self.present(error: error)
+        }
     }
 
     @IBAction func performSignUp() {
 // TODO
+        view.endEditing(true)
+
         SPTracker.trackUserAccountCreated()
     }
 
     @IBAction func performOnePasswordLogIn() {
-        view.endEditing(true)
-
         controller.findOnePasswordLogin(presenter: self) { (username, password, error) in
             guard let username = username, let password = password else {
                 if error == .onePasswordError {
@@ -203,17 +225,31 @@ private extension SPAuthViewController {
             self.emailInputView.text = username
             self.passwordInputView.text = password
 
-            self.performLogIn()
+            self.primaryActionButton.sendActions(for: .touchUpInside)
             SPTracker.trackOnePasswordLoginSuccess()
         }
     }
 
     @IBAction func performOnePasswordSignUp() {
-// TODO
+        controller.saveLoginToOnePassword(presenter: self, username: email, password: password) { (username, password, error) in
+            guard let username = username, let password = password else {
+                if error == .onePasswordError {
+                    SPTracker.trackOnePasswordSignupFailure()
+                }
+
+                return
+            }
+
+            self.emailInputView.text = username
+            self.passwordInputView.text = password
+
+            self.primaryActionButton.sendActions(for: .touchUpInside)
+            SPTracker.trackOnePasswordSignupSuccess()
+
+        }
     }
 
     @IBAction func presentPasswordReset() {
-        let email = emailInputView.text ?? ""
         let resetPasswordPath = kSimperiumForgotPasswordURL + "?email=" + email
         guard let forgotPasswordURL = URL(string: resetPasswordPath) else {
             return
@@ -232,16 +268,6 @@ private extension SPAuthViewController {
         let safariViewController = SFSafariViewController(url: targetURL)
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
-    }
-}
-
-
-// MARK: - Private
-//
-private extension SPAuthViewController {
-
-    func ensureOnePasswordIsAvailable() {
-        emailInputView.rightViewMode = controller.isOnePasswordAvailable() ? .always : .never
     }
 }
 

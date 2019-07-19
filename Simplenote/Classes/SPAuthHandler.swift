@@ -7,6 +7,8 @@ import OnePasswordExtension
 enum SPAuthError: Error {
     case onePasswordCancelled
     case onePasswordError
+    case invalidEmailOrPassword
+    case unknown
 }
 
 
@@ -49,44 +51,36 @@ class SPAuthHandler {
 
     ///
     ///
-    func saveLoginToOnePassword(username: String, password: String) {
-        //    NSDictionary *newLoginDetails = @{
-        //        AppExtensionTitleKey        : kOnePasswordSimplenoteTitle,
-        //        AppExtensionUsernameKey     : self.usernameField.text ?: [NSString string],
-        //        AppExtensionPasswordKey     : self.passwordField.text ?: [NSString string],
-        //    };
-        //
-        //    NSDictionary *passwordGenerationOptions = @{
-        //        AppExtensionGeneratedPasswordMinLengthKey: @(kOnePasswordGeneratedMinLength),
-        //        AppExtensionGeneratedPasswordMaxLengthKey: @(kOnePasswordGeneratedMaxLength)
-        //    };
-        //
-        //    [[OnePasswordExtension sharedExtension] storeLoginForURLString:kOnePasswordSimplenoteURL
-        //                                                      loginDetails:newLoginDetails
-        //                                         passwordGenerationOptions:passwordGenerationOptions
-        //                                                 forViewController:self
-        //                                                            sender:sender
-        //                                                        completion:^(NSDictionary *loginDict, NSError *error) {
-        //
-        //                                                            if (!loginDict) {
-        //                                                                if (error.code != AppExtensionErrorCodeCancelledByUser) {
-        //                                                                    NSLog(@"OnePassword Error: %@", error);
-        //                                                                    [SPTracker trackOnePasswordSignupFailure];
-        //                                                                }
-        //                                                                return;
-        //                                                            }
-        //
-        //                                                            self.usernameField.text = loginDict[AppExtensionUsernameKey] ?: [NSString string];
-        //                                                            self.passwordField.text = loginDict[AppExtensionPasswordKey] ?: [NSString string];
-        //
-        //                                                            [SPTracker trackOnePasswordSignupSuccess];
-        //                                                        }];
+    func saveLoginToOnePassword(presenter: UIViewController, username: String, password: String, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
+        let details = [
+            AppExtensionTitleKey: kOnePasswordSimplenoteTitle,
+            AppExtensionUsernameKey: username,
+            AppExtensionPasswordKey: password
+        ]
+
+        let options = [
+            AppExtensionGeneratedPasswordMinLengthKey: kOnePasswordGeneratedMinLength,
+            AppExtensionGeneratedPasswordMaxLengthKey: kOnePasswordGeneratedMaxLength
+        ]
+
+        onePasswordService.storeLogin(forURLString: kOnePasswordSimplenoteURL, loginDetails: details, passwordGenerationOptions: options, for: presenter, sender: nil) { (dictionary, error) in
+
+            guard let username = dictionary?[AppExtensionUsernameKey] as? String,
+                let password = dictionary?[AppExtensionPasswordKey] as? String
+                else {
+                    let wrappedError = self.errorFromOnePasswordError(error)
+                    onCompletion(nil, nil, wrappedError)
+                    return
+            }
+
+            onCompletion(username, password, nil)
+        }
     }
 
 
     ///
     ///
-    func loginUsingWordPressSSO() {
+    func loginWithWordPressSSO() {
         //  static NSString *SPAuthSessionKey = @"SPAuthSessionKey";
         //
         //    NSString *sessionState = [[NSUUID UUID] UUIDString];
@@ -104,11 +98,12 @@ class SPAuthHandler {
 
     ///
     ///
-    func loginWithCredentials(username: String, password: String) {
+    func loginWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         simperiumService.authenticate(withUsername: username, password: password, success: {
-
+            onCompletion(nil)
         }) { (responseCode, responseString) in
-
+            let wrappedError = self.errorFromSimperiumError(responseCode: Int(responseCode))
+            onCompletion(wrappedError)
         }
     }
 
@@ -132,5 +127,16 @@ private extension SPAuthHandler {
         }
 
         return error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
+    }
+
+    ///
+    ///
+    func errorFromSimperiumError(responseCode: Int) -> SPAuthError? {
+        switch responseCode {
+        case 401:
+            return .invalidEmailOrPassword
+        default:
+            return .unknown
+        }
     }
 }
