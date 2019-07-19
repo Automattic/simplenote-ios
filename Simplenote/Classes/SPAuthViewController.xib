@@ -25,13 +25,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="43.5" y="84" width="327" height="200"/>
+                    <rect key="frame" x="27" y="84" width="360" height="200"/>
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="327" id="Csa-Xu-cei"/>
                                 <constraint firstAttribute="height" constant="44" id="fUk-5j-zZS"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -39,10 +38,9 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="52" width="327" height="44"/>
+                            <rect key="frame" x="0.0" y="52" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="327" id="jhu-YL-4ba"/>
                                 <constraint firstAttribute="height" constant="44" id="uss-fG-PtW"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -50,30 +48,41 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="104" width="327" height="44"/>
+                            <rect key="frame" x="0.0" y="104" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Dd9-ee-gQN"/>
-                                <constraint firstAttribute="width" constant="327" id="Dec-QY-2Qc"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <state key="normal" title="#Primary#"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="156" width="327" height="44"/>
+                            <rect key="frame" x="0.0" y="156" width="360" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="327" id="FFG-kR-63u"/>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <state key="normal" title="#Secondary#"/>
                         </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="PfS-vU-7i3" secondAttribute="trailing" id="0QL-Iw-KLz"/>
+                        <constraint firstItem="PfS-vU-7i3" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="314-fc-3eX"/>
+                        <constraint firstAttribute="trailing" secondItem="pdF-nK-gXE" secondAttribute="trailing" id="51g-0D-Oyv"/>
+                        <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
+                        <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
+                        <constraint firstAttribute="trailing" secondItem="q3p-Ji-dOm" secondAttribute="trailing" id="e0F-e2-Zw4"/>
+                        <constraint firstItem="q3p-Ji-dOm" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="m2e-tC-EO0"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
+                        <constraint firstItem="pdF-nK-gXE" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="xzh-aD-Ag5"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CJS-5O-pxK" secondAttribute="trailing" priority="999" constant="24" id="825-dL-WrZ"/>
                 <constraint firstItem="CJS-5O-pxK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="Cyh-nE-ql7"/>
                 <constraint firstItem="CJS-5O-pxK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H6h-v9-Uwb"/>
+                <constraint firstItem="CJS-5O-pxK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="999" constant="24" id="R8s-dV-2n6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

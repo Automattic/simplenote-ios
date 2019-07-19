@@ -121,7 +121,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Right View Insets
     ///
-    var rightViewInsets: UIEdgeInsets {
+    @IBInspectable var rightViewInsets: UIEdgeInsets {
         get {
             return textField.rightViewInsets
         }
@@ -132,7 +132,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Right View Visibility Mode
     ///
-    var rightViewMode: UITextField.ViewMode {
+    @IBInspectable var rightViewMode: UITextField.ViewMode {
         get {
             return textField.rightViewMode
         }

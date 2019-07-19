@@ -3,6 +3,7 @@ import Foundation
 
 // MARK: - SPSquaredButton: Simple convenience UIButton subclass, with a default corner radius
 //
+@IBDesignable
 class SPSquaredButton: UIButton {
 
     /// Default Radius
@@ -11,7 +12,7 @@ class SPSquaredButton: UIButton {
 
     /// Outer Border Radius
     ///
-    var cornerRadius: CGFloat {
+    @IBInspectable var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
