@@ -12,7 +12,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var emailInputView: SPTextInputView! {
         didSet {
             emailInputView.keyboardType = .emailAddress
-            emailInputView.placeholder = Strings.emailPlaceholder
+            emailInputView.placeholder = Constants.emailPlaceholder
             emailInputView.returnKeyType = .next
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = Constants.onePasswordInsets
@@ -26,7 +26,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var passwordInputView: SPTextInputView! {
         didSet {
             passwordInputView.isSecureTextEntry = true
-            passwordInputView.placeholder = Strings.passwordPlaceholder
+            passwordInputView.placeholder = Constants.passwordPlaceholder
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
@@ -61,8 +61,8 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(.onePasswordImage, for: .normal)
         button.tintColor = .simplenoteSlateGrey()
+        button.setImage(.onePasswordImage, for: .normal)
         button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
         button.sizeToFit()
         return button
@@ -72,9 +72,9 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.tintColor = .simplenoteSlateGrey()
         button.setImage(.visibilityOffImage, for: .normal)
         button.setImage(.visibilityOnImage, for: .highlighted)
-        button.tintColor = .simplenoteSlateGrey()
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
         button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.sizeToFit()
@@ -85,16 +85,31 @@ class SPAuthViewController: UIViewController {
     ///
     private let controller: SPAuthHandler
 
+    /// Simperium's Validator
     ///
+    private let validator = SPAuthenticationValidator()
+
+    /// Indicates if we've got a valid Email + Password
     ///
     private var isInputValid: Bool {
-// TODO
-        return false
+        return validator.validateUsername(email) && validator.validatePasswordSecurity(password)
     }
 
     ///
     ///
-    let mode: Mode
+    private var email: String {
+        return emailInputView.text ?? String()
+    }
+
+    ///
+    ///
+    private var password: String {
+        return passwordInputView.text ?? String()
+    }
+
+    /// Authentication Mode: Signup or Login
+    ///
+    let mode: AuthenticationMode
 
 
     /// NSCodable Required Initializer
@@ -105,11 +120,12 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(simperiumAuthenticator: SPAuthenticator, mode: Mode = .login) {
+    init(simperiumAuthenticator: SPAuthenticator, mode: AuthenticationMode = .login) {
         self.controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
+
 
     // MARK: - Overridden Methods
 
@@ -121,7 +137,8 @@ class SPAuthViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailInputView.becomeFirstResponder()
-        refreshButtonsStyle()
+        ensureOnePasswordIsAvailable()
+        ensureButtonStylesMatchInputState()
     }
 }
 
@@ -150,7 +167,7 @@ private extension SPAuthViewController {
         navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 
-    func refreshButtonsStyle() {
+    func ensureButtonStylesMatchInputState() {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
     }
 }
@@ -162,6 +179,7 @@ private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
 // TODO
+        controller.loginWithCredentials(username: email, password: password)
         SPTracker.trackUserSignedIn()
     }
 
@@ -218,17 +236,14 @@ private extension SPAuthViewController {
 }
 
 
-//- (void)reloadOnePassword
-//{
-//    // Update the OnePassword Handler
-//    SEL hander = self.signingIn ? @selector(findLoginFromOnePassword:) : @selector(saveLoginToOnePassword:);
-//    [self.onePasswordButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-//    [self.onePasswordButton addTarget:self action:hander forControlEvents:UIControlEventTouchUpInside];
+// MARK: - Private
 //
-//    // Show the OnePassword view, if it's available
-//    BOOL isOnePasswordAvailable         = [[OnePasswordExtension sharedExtension] isAppExtensionAvailable];
-//    self.usernameField.rightViewMode    = isOnePasswordAvailable ? UITextFieldViewModeAlways : UITextFieldViewModeNever;
-//}
+private extension SPAuthViewController {
+
+    func ensureOnePasswordIsAvailable() {
+        emailInputView.rightViewMode = controller.isOnePasswordAvailable() ? .always : .never
+    }
+}
 
 
 //- (IBAction)signInErrorAction:(NSNotification *)notification
@@ -251,30 +266,26 @@ private extension SPAuthViewController {
 //}
 
 
-// MARK: -
+// MARK: - AuthenticationMode: Signup / Login
 //
-extension SPAuthViewController {
-
-    ///
-    ///
-    struct Mode {
-        let title: String
-        let onePasswordSelector: Selector
-        let primaryActionSelector: Selector
-        let primaryActionText: String
-        let secondaryActionSelector: Selector
-        let secondaryActionText: String
-    }
+struct AuthenticationMode {
+    let title: String
+    let onePasswordSelector: Selector
+    let primaryActionSelector: Selector
+    let primaryActionText: String
+    let secondaryActionSelector: Selector
+    let secondaryActionText: String
 }
 
 
-// MARK: -
+// MARK: - Default Operation Modes
 //
-extension SPAuthViewController.Mode {
+extension AuthenticationMode {
 
+    /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles
+    /// authentication scenarios.
     ///
-    ///
-    static var login: SPAuthViewController.Mode {
+    static var login: AuthenticationMode {
         let title               = NSLocalizedString("Log In", comment: "LogIn Interface Title")
         let onePasswordSelector = #selector(SPAuthViewController.performOnePasswordLogIn)
         let primaryText         = NSLocalizedString("Log In", comment: "LogIn Action")
@@ -282,17 +293,18 @@ extension SPAuthViewController.Mode {
         let secondaryText       = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
         let secondarySelector   = #selector(SPAuthViewController.presentPasswordReset)
 
-        return SPAuthViewController.Mode(title: title,
-                                         onePasswordSelector: onePasswordSelector,
-                                         primaryActionSelector: primarySelector,
-                                         primaryActionText: primaryText,
-                                         secondaryActionSelector: secondarySelector,
-                                         secondaryActionText: secondaryText)
+        return AuthenticationMode(title: title,
+                                  onePasswordSelector: onePasswordSelector,
+                                  primaryActionSelector: primarySelector,
+                                  primaryActionText: primaryText,
+                                  secondaryActionSelector: secondarySelector,
+                                  secondaryActionText: secondaryText)
     }
 
+    /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles
+    /// user account creation scenarios.
     ///
-    ///
-    static var signup: SPAuthViewController.Mode {
+    static var signup: AuthenticationMode {
         let title               = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
         let onePasswordSelector = #selector(SPAuthViewController.performOnePasswordSignUp)
         let primaryText         = NSLocalizedString("Sign Up", comment: "SignUp Action")
@@ -300,26 +312,20 @@ extension SPAuthViewController.Mode {
         let secondaryText       = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
         let secondarySelector   = #selector(SPAuthViewController.presentTermsOfService)
 
-        return SPAuthViewController.Mode(title: title,
-                                         onePasswordSelector: onePasswordSelector,
-                                         primaryActionSelector: primarySelector,
-                                         primaryActionText: primaryText,
-                                         secondaryActionSelector: secondarySelector,
-                                         secondaryActionText: secondaryText)
+        return AuthenticationMode(title: title,
+                                  onePasswordSelector: onePasswordSelector,
+                                  primaryActionSelector: primarySelector,
+                                  primaryActionText: primaryText,
+                                  secondaryActionSelector: secondarySelector,
+                                  secondaryActionText: secondaryText)
     }
 }
 
 
-// MARK: -
-//
-private struct Strings {
-    static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
-    static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
-}
-
-
-// MARK: -
+// MARK: - Constants
 //
 private struct Constants {
-    static let onePasswordInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+    static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
+    static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 }

@@ -86,7 +86,7 @@ class SPAuthHandler {
 
     ///
     ///
-    func signIntoWordPress() {
+    func loginUsingWordPressSSO() {
         //  static NSString *SPAuthSessionKey = @"SPAuthSessionKey";
         //
         //    NSString *sessionState = [[NSUUID UUID] UUIDString];
@@ -100,6 +100,22 @@ class SPAuthHandler {
         //    [self presentViewController:sfvc animated:YES completion:nil];
         //
         //    [SPTracker trackWPCCButtonPressed];
+    }
+
+    ///
+    ///
+    func loginWithCredentials(username: String, password: String) {
+        simperiumService.authenticate(withUsername: username, password: password, success: {
+
+        }) { (responseCode, responseString) in
+
+        }
+    }
+
+    ///
+    ///
+    func isOnePasswordAvailable() -> Bool {
+        return OnePasswordExtension.shared().isAppExtensionAvailable()
     }
 }
 
