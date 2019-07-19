@@ -150,6 +150,7 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
   lane :build_and_upload_release do | options |
     ios_build_prechecks(skip_confirm: options[:skip_confirm], 
       internal: false,
+      internal_on_single_version: true, 
       external: true)
     ios_build_preflight()
     build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm])
