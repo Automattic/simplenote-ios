@@ -1,6 +1,25 @@
 import Foundation
 
 
+// MARK: - SPTextInputViewDelegate
+//
+@objc
+protocol SPTextInputViewDelegate : NSObjectProtocol {
+
+    @objc optional
+    func textInputDidBeginEditing(_ textInput: SPTextInputView)
+
+    @objc optional
+    func textInputDidEndEditing(_ textInput: SPTextInputView)
+
+    @objc optional
+    func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool
+
+    @objc optional
+    func textInput(_ textInput: SPTextInputView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+}
+
+
 // MARK: - SPTextInputView
 //
 @IBDesignable
@@ -176,7 +195,7 @@ class SPTextInputView: UIView {
 
     /// Delegate Wrapper
     ///
-    weak var delegate: UITextFieldDelegate?
+    weak var delegate: SPTextInputViewDelegate?
 
 
     // MARK: - Initializers
@@ -239,33 +258,22 @@ private extension SPTextInputView {
 //
 extension SPTextInputView: UITextFieldDelegate {
 
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return delegate?.textFieldShouldBeginEditing?(textField) ?? true
-    }
-
     func textFieldDidBeginEditing(_ textField: UITextField) {
         refreshBorderStyle()
+        delegate?.textInputDidBeginEditing?(self)
     }
 
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return delegate?.textFieldShouldClear?(textField) ?? true
-    }
-
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return delegate?.textFieldShouldEndEditing?(textField) ?? true
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        delegate?.textFieldDidEndEditing?(textField)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.textInputDidBeginEditing?(self)
         refreshBorderStyle()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return delegate?.textFieldShouldReturn?(textField) ?? true
+        return delegate?.textInputShouldReturn?(self) ?? true
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return delegate?.textField?(textField, shouldChangeCharactersIn: range, replacementString: string) ?? true
+        return delegate?.textInput?(self, shouldChangeCharactersIn: range, replacementString: string) ?? true
     }
 }
 

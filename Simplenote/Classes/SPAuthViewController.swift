@@ -18,6 +18,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightViewInsets = Constants.onePasswordInsets
             emailInputView.rightViewMode = .always
             emailInputView.textColor = .simplenoteAlmostBlack()
+            emailInputView.delegate = self
         }
     }
 
@@ -32,6 +33,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = Constants.onePasswordInsets
             passwordInputView.textColor = .simplenoteAlmostBlack()
+            passwordInputView.delegate = self
         }
     }
 
@@ -302,6 +304,40 @@ private extension SPAuthViewController {
 //    [errorAlert addAction:defaultAction];
 //    [self presentViewController:errorAlert animated:YES completion:nil];
 //}
+    }
+}
+
+
+// MARK: - UITextFieldDelegate Conformance
+//
+extension SPAuthViewController: SPTextInputViewDelegate {
+
+    func textInput(_ textInput: SPTextInputView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+// TODO: Clear error messages
+        return true
+    }
+
+    func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
+        switch textInput {
+        case emailInputView:
+// TODO:
+//        if ([self validateUsername]) {
+            passwordInputView.becomeFirstResponder()
+//        }
+            return false
+
+        case passwordInputView:
+// TODO:
+//       if ([self validateData]) {
+            primaryActionButton.sendActions(for: .touchUpInside)
+//        }
+            return true
+
+        default:
+            break
+        }
+
+        return true
     }
 }
 
