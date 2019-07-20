@@ -140,7 +140,7 @@ class SPAuthViewController: UIViewController {
         super.viewWillAppear(animated)
         emailInputView.becomeFirstResponder()
         ensureOnePasswordIsAvailable()
-        ensureButtonStylesMatchInputState()
+        ensureStylesMatchValidationState()
     }
 }
 
@@ -169,7 +169,7 @@ private extension SPAuthViewController {
         navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 
-    func ensureButtonStylesMatchInputState() {
+    func ensureStylesMatchValidationState() {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
     }
 
@@ -312,9 +312,9 @@ private extension SPAuthViewController {
 //
 extension SPAuthViewController: SPTextInputViewDelegate {
 
-    func textInput(_ textInput: SPTextInputView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textInputDidChange(_ textInput: SPTextInputView) {
 // TODO: Clear error messages
-        return true
+        ensureStylesMatchValidationState()
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {

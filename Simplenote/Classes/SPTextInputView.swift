@@ -13,6 +13,9 @@ protocol SPTextInputViewDelegate : NSObjectProtocol {
     func textInputDidEndEditing(_ textInput: SPTextInputView)
 
     @objc optional
+    func textInputDidChange(_ textInput: SPTextInputView)
+
+    @objc optional
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool
 
     @objc optional
@@ -234,6 +237,7 @@ private extension SPTextInputView {
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.placeholdTextColor = Defaults.placeholderColor
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         addSubview(textField)
     }
 
@@ -250,6 +254,16 @@ private extension SPTextInputView {
         layer.borderColor = textField.isFirstResponder ? borderColorEnabled?.cgColor : borderColorDisabled?.cgColor
         layer.cornerRadius = borderCornerRadius
         layer.borderWidth = borderWidth
+    }
+}
+
+
+// MARK: - Relaying editingChanged Events
+//
+extension SPTextInputView {
+
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        delegate?.textInputDidChange?(self)
     }
 }
 
