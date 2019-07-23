@@ -126,7 +126,7 @@ private extension SnapshotRenderer {
     /// Returns the current Theme. Eventually... nuke this please!
     ///
     var theme: VSTheme {
-        return VSThemeManager.shared()!.theme()
+        return VSThemeManager.shared().theme()
     }
 
     /// Returns the TextView's Default Attributes

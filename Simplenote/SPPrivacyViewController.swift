@@ -136,9 +136,9 @@ private extension SPPrivacyViewController {
     /// Setup: Switch
     ///
     func setupSwitch() {
-        let theme = VSThemeManager.shared()?.theme()
-        analyticsSwitch.onTintColor = theme?.color(forKey: "switchOnTintColor")
-        analyticsSwitch.tintColor = theme?.color(forKey: "switchTintColor")
+        let theme = VSThemeManager.shared().theme()
+        analyticsSwitch.onTintColor = theme.color(forKey: "switchOnTintColor")
+        analyticsSwitch.tintColor = theme.color(forKey: "switchTintColor")
         analyticsSwitch.addTarget(self, action: #selector(switchDidChange(sender:)), for: .valueChanged)
         analyticsSwitch.isOn = isAnalyticsEnabled
     }
@@ -171,7 +171,7 @@ private extension SPPrivacyViewController {
 
         // And the actual text!
         cell.textLabel?.text = NSLocalizedString("Learn more", comment: "Learn More Action")
-        cell.textLabel?.textColor = VSThemeManager.shared()?.theme()?.color(forKey: "tintColor")
+        cell.textLabel?.textColor = VSThemeManager.shared().theme().color(forKey: "tintColor")
     }
 
     /// Setup: Crash

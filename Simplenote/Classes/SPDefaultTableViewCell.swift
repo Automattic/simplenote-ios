@@ -37,9 +37,7 @@ class SPDefaultTableViewCell: UITableViewCell {
 private extension SPDefaultTableViewCell {
 
     func applySimplenoteStyle() {
-        guard let theme = VSThemeManager.shared()?.theme() else {
-            fatalError()
-        }
+        let theme = VSThemeManager.shared().theme()
 
         let backgroundView = UIView()
         backgroundView.backgroundColor = theme.color(forKey: .noteCellBackgroundSelectionColor)
