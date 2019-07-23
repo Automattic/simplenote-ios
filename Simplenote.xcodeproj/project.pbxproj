@@ -113,8 +113,6 @@
 		74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
 		74388F4822CFFABD001C5EC0 /* NSObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */; };
 		74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74388F4922CFFB8B001C5EC0 /* ShareViewController.xib */; };
-		74800B1522D1024E00217A00 /* UIColor+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */; };
-		74800B1622D1025D00217A00 /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */; };
 		74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */; };
 		74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */; };
 		74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */; };
@@ -178,6 +176,7 @@
 		B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE054C1AB75902002417BF /* NSProcessInfo+Util.m */; };
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
+		B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
 		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
@@ -329,7 +328,6 @@
 		74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Helpers.swift"; path = "Classes/UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Helpers.swift"; sourceTree = "<group>"; };
 		74388F4922CFFB8B001C5EC0 /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
-		74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+DarkMode.swift"; path = "Classes/UIColor+DarkMode.swift"; sourceTree = "<group>"; };
 		74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardObservable.swift; path = Classes/KeyboardObservable.swift; sourceTree = "<group>"; };
 		74F6637C22BADB2100FA147E /* ExtensionTransitioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTransitioningManager.swift; sourceTree = "<group>"; };
 		74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationController.swift; sourceTree = "<group>"; };
@@ -429,6 +427,7 @@
 		B5BE05511AB75C3B002417BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Classes/Settings.h; sourceTree = "<group>"; };
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
 		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
+		B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Simplenote.swift"; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
@@ -905,9 +904,6 @@
 			isa = PBXGroup;
 			children = (
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
-				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
-				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
-				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
@@ -918,7 +914,6 @@
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */,
-				74800B1422D1024E00217A00 /* UIColor+DarkMode.swift */,
 				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
@@ -931,6 +926,7 @@
 		B56A9FF722AEBF33003F85CB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */,
 				B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */,
 				B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */,
 			);
@@ -1681,7 +1677,6 @@
 				46A3C96B17DFA81A002865AE /* NSAttributedString+Styling.m in Sources */,
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
-				74800B1522D1024E00217A00 /* UIColor+DarkMode.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
@@ -1838,12 +1833,12 @@
 				B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */,
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
-				74800B1622D1025D00217A00 /* UIColor+Simplenote.swift in Sources */,
 				74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */,
 				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
 				74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
+				B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
 				74388F4822CFFABD001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */,
