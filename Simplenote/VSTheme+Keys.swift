@@ -5,6 +5,9 @@ import Foundation
 //
 enum ThemeKey: String {
     case backgroundColor
+    case destructiveActionColor
+    case secondaryActionColor
+    case tertiaryActionColor
     case noteBodyFontPreviewColor
     case noteBodyLineHeightPercentage
     case noteCellBackgroundSelectionColor
