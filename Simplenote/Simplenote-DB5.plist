@@ -14,6 +14,14 @@
 		<string>eef3f8</string>
 		<key>dividerColor</key>
 		<string>dedede</string>
+		<key>simplenoteBlueColor</key>
+		<string>4895D9</string>
+		<key>destructiveActionColor</key>
+		<string>CA2622</string>
+		<key>secondaryActionColor</key>
+		<string>@simplenoteBlueColor</string>
+		<key>tertiaryActionColor</key>
+		<string>899199</string>
 		<key>noteHeadlineFontColor</key>
 		<string>111111</string>
 		<key>noteBodyLineHeightPercentage</key>
@@ -289,6 +297,8 @@
 		<string>999999</string>
 		<key>dividerColor</key>
 		<string>343434</string>
+		<key>tertiaryActionColor</key>
+		<string>6F7780</string>
 		<key>noteHeadlineFontColor</key>
 		<string>DDDDDD</string>
 		<key>noteBodyFontPreviewColor</key>
