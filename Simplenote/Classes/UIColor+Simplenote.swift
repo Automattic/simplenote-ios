@@ -10,9 +10,12 @@ extension UIColor {
     ///
     @objc
     static func color(name: UIColorName) -> UIColor? {
-        if #available(iOS 13.0, *) {
-            return UIColor(named: name.assetCatalogName)
-        }
+// TODO: Unlock when:
+//  1.  The Colors are properly populated
+//  2.  The Dark Mode switch is enhanced to deal with Traits
+//        if #available(iOS 13.0, *) {
+//            return UIColor(named: name.assetCatalogName)
+//        }
 
         return theme.color(forKey: name.legacyThemeKey)
     }
