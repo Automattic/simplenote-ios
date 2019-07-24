@@ -583,11 +583,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)refreshTableViewCellStyle:(UITableViewCell *)cell
 {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    cell.backgroundColor = [theme colorForKey:@"backgroundColor"];
-    cell.selectedBackgroundView.backgroundColor = [theme colorForKey:@"noteCellBackgroundSelectionColor"];
-    cell.textLabel.textColor = [theme colorForKey:@"tableViewTextLabelColor"];
-    cell.detailTextLabel.textColor = [theme colorForKey:@"tableViewDetailTextLabelColor"];
+    cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithName:UIColorNameNoteCellBackgroundSelectionColor];
+    cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTableViewTextLabelColor];
+    cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
 }
 
 
@@ -756,17 +755,19 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)refreshThemeStyles
 {
     // Reload Switch Styles
-    VSTheme *theme          = [[VSThemeManager sharedManager] theme];
     NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch,  _themeListSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
-        theSwitch.onTintColor   = [theme colorForKey:@"switchOnTintColor"];
-        theSwitch.tintColor     = [theme colorForKey:@"switchTintColor"];
+        theSwitch.onTintColor   = [UIColor colorWithName:UIColorNameSwitchOnTintColor];
+        theSwitch.tintColor     = [UIColor colorWithName:UIColorNameSwitchTintColor];
     }
-    
-    [self.pinTimeoutPickerView setBackgroundColor:[theme colorForKey:@"backgroundColor"]];
-    [self.doneToolbar setTintColor:[theme colorForKey:@"tintColor"]];
-    [self.doneToolbar setBarTintColor:[theme colorForKey:@"backgroundColor"]];
+
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+
+    [self.pinTimeoutPickerView setBackgroundColor:backgroundColor];
+    [self.doneToolbar setTintColor:tintColor];
+    [self.doneToolbar setBarTintColor:backgroundColor];
     
     // Refresh the Table
     [self.tableView applyDefaultGroupedStyling];
@@ -827,8 +828,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    NSDictionary *attributes = @{NSForegroundColorAttributeName:[theme colorForKey:@"textColor"]};
+    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
+
+    NSDictionary *attributes = @{
+        NSForegroundColorAttributeName: textColor
+    };
+
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];
     
     return attributedTitle;

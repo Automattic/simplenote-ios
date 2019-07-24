@@ -64,7 +64,7 @@
 }
 
 - (void)applyStyle {
-    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     addTagField.keyboardAppearance = (self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 

@@ -34,13 +34,9 @@
     self.leftBorder.opacity = isVisible ? 1 : 0;
 }
 
-- (VSTheme *)theme {
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (void)applyTheme {
-    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
-    self.leftBorder.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"].CGColor;
+    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor].CGColor;
 }
 
 @end

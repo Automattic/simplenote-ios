@@ -57,8 +57,9 @@
     [self addSubview:_textLabel];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-    
-    [self setColor:[[[VSThemeManager sharedManager] theme] colorForKey:@"emptyListViewFontColor"]];
+
+    UIColor *emptyListColor = [UIColor colorWithName:UIColorNameEmptyListViewFontColor];
+    [self setColor:emptyListColor];
     [self setNeedsLayout];
 }
 

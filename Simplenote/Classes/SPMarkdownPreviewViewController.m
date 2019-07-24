@@ -65,8 +65,7 @@
 
 - (void)applyStyle
 {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    UIColor *backgroundColor = [theme colorForKey:@"backgroundColor"];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;

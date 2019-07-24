@@ -52,11 +52,12 @@ static CGFloat const imageSide = 34.0;
     self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    
-    [self setTitleColor:[[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"]
-               forState:UIControlStateNormal];
-    [self setTitleColor:[[[VSThemeManager sharedManager] theme] colorForKey:@"actionViewButtonDisabledColor"]
-               forState:UIControlStateDisabled];
+
+    UIColor *titleColorNormal = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *actionDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+
+    [self setTitleColor:titleColorNormal forState:UIControlStateNormal];
+    [self setTitleColor:actionDisabledColor forState:UIControlStateDisabled];
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 

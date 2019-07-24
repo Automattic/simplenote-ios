@@ -53,10 +53,9 @@ static CGFloat const UIBarButtonWidth               = 44.0;
 + (UIBarButtonItem *)backBarButtonWithTitle:(NSString *)title
                                      target:(id)target
                                      action:(SEL)action
-{
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    
+{    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
 
     [button setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
             forState:UIControlStateNormal];
@@ -65,7 +64,7 @@ static CGFloat const UIBarButtonWidth               = 44.0;
     [button setImageEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
     
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+    [button setTitleColor:tintColor forState:UIControlStateNormal];
     
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 

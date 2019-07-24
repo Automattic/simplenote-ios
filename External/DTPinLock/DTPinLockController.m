@@ -49,8 +49,7 @@
 {
     if (self = [super init])
     {
-        VSTheme *theme = [[VSThemeManager sharedManager] theme];
-        UIColor *textColor = [theme colorForKey:@"lockTextColor"];
+        UIColor *textColor = [UIColor colorWithName:UIColorNameLockTextColor];
         
         self.navigationBar.translucent = NO;
         
@@ -63,7 +62,7 @@
         hiddenTextField.alpha = 0;
         hiddenTextField.keyboardType = UIKeyboardTypeNumberPad;
         hiddenTextField.delegate = self;
-        hiddenTextField.keyboardAppearance = [theme isDark] ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+        hiddenTextField.keyboardAppearance = [[[VSThemeManager sharedManager] theme] isDark] ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
         [baseViewController.view addSubview:hiddenTextField];
         
         // message on page 1
@@ -111,7 +110,7 @@
         numberOfDigits = 4;
         
         // get snapshot of presenting view
-        self.view.backgroundColor = [theme colorForKey:@"lockBackgroundColor"];
+        self.view.backgroundColor = [UIColor colorWithName:UIColorNameLockBackgroundColor];
         baseViewController.view.backgroundColor = [UIColor clearColor];
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {
@@ -230,8 +229,7 @@
     [baseViewController.secondPageView addSubview:secondPagePinGroup];
     
     
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    UIColor *textColor = [theme colorForKey:@"lockTextColor"];
+    UIColor *textColor = [UIColor colorWithName:UIColorNameLockTextColor];
     
     for (int i=0;i<numberOfDigits;i++)
     {

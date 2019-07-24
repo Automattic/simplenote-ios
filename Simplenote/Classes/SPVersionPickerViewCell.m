@@ -35,7 +35,7 @@
         _timeLabel.isAccessibilityElement = NO;
         
         UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        UIColor *textColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"versionPickerDateFontColor"];
+        UIColor *textColor = [UIColor colorWithName:UIColorNameVersionPickerDateFontColor];
         
         _dateLabel.font = font;
         _dateLabel.textColor = textColor;

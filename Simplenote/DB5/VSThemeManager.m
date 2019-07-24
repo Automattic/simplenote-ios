@@ -111,10 +111,12 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
                                                 forState:UIControlStateNormal];
     
     UIFont *navigationBarTitleFont = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
-    UIColor *navigationBarTitleColor = [theme colorForKey:@"navigationBarTitleFontColor"];
+    UIColor *navigationBarTitleColor = [UIColor colorWithName:UIColorNameNavigationBarTitleFontColor];
+    UIColor *barTintColor = [UIColor colorWithName:UIColorNameBarTintColor];
+
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setTitleTextAttributes:@{NSFontAttributeName: navigationBarTitleFont,
                                                            NSForegroundColorAttributeName: navigationBarTitleColor}];
-    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBarTintColor:[theme colorForKey:@"barTintColor"]];
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBarTintColor:barTintColor];
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setShadowImage:[[theme imageForKey:@"navigationBarShadowImage"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 0, 0, 0) resizingMode:UIImageResizingModeTile]];
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBackgroundImage:[[theme imageForKey:@"navigationBarBackgroundImage"]
                                                       resizableImageWithCapInsets:UIEdgeInsetsMake(44, 0, 0, 0)]

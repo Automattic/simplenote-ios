@@ -11,28 +11,26 @@
 #import "Simplenote-Swift.h"
 
 
-@interface SPEntryListCell ()
-@end
 
 @implementation SPEntryListCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+
+        self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         primaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        primaryLabel.textColor = [self.theme colorForKey:@"collaboratorCellPrimaryLabelFontColor"];
+        primaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorCellPrimaryLabelFontColor];
         [self.contentView addSubview:primaryLabel];
         
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         secondaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secondaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        secondaryLabel.textColor = [self.theme colorForKey:@"collaboratorCellSecondaryLabelFontColor"];
+        secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorCellSecondaryLabelFontColor];
         [self.contentView addSubview:secondaryLabel];
         
         UIImage *checkedImage = [[UIImage imageNamed:@"icon_checkmark_checked"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

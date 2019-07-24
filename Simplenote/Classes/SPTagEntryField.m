@@ -14,11 +14,11 @@
 
 + (SPTagEntryField *)tagEntryFieldWithdelegate:(id<SPTagEntryFieldDelegate>)tagDelegate {
     
-    SPTagEntryField *newTagText = [[SPTagEntryField alloc] init];
+    SPTagEntryField *newTagText = [SPTagEntryField new];
     newTagText.backgroundColor = [UIColor clearColor];
     newTagText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    newTagText.textColor = [newTagText.theme colorForKey:@"tagViewFontColor"];
-    newTagText.placeholdTextColor = [newTagText.theme colorForKey:@"tagViewPlaceholderColor"];
+    newTagText.textColor = [UIColor colorWithName:UIColorNameTagViewFontColor];
+    newTagText.placeholdTextColor = [UIColor colorWithName:UIColorNameTagViewPlaceholderColor];
     newTagText.tagDelegate = tagDelegate;
     newTagText.textAlignment = NSTextAlignmentLeft;
     newTagText.placeholder = NSLocalizedString(@"Add a tag...", nil);
@@ -36,7 +36,7 @@
     return newTagText;
 }
 
--(id)init {
+-(instancetype)init {
     self = [super init];
     if (self) {
         [self addTarget:self action:@selector(onTextChanged:) forControlEvents:UIControlEventEditingChanged];

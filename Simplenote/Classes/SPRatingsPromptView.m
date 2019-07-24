@@ -93,16 +93,14 @@ static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
 
 - (void)applySimplenoteStyle
 {
-    VSTheme *theme                  = [[VSThemeManager sharedManager] theme];
-    
     self.backgroundColor            = [UIColor clearColor];
     
     // Update Label Style
     self.label.font                 = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.label.textColor            = [theme colorForKey:@"noteHeadlineFontColor"];
-    
+    self.label.textColor            = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
+
     // Update Buttons Style
-    UIColor *buttonColor            = [theme colorForKey:@"tintColor"];
+    UIColor *buttonColor            = [UIColor colorWithName:UIColorNameTintColor];
     UIFont *buttonFont              = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     
     for (UIButton *button in @[self.leftButton, self.rightButton]) {

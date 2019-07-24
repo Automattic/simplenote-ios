@@ -29,7 +29,7 @@ static CGFloat sidePanelWidth;
     self = [super init];
     if (self) {
         
-        self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+        self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         
         // add root view to screen
         self.rootView = [[UIView alloc] initWithFrame:self.view.bounds];
