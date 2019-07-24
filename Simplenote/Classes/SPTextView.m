@@ -13,6 +13,7 @@
 #import "VSThemeManager.h"
 #import "NSString+Search.h"
 #import "SPInteractiveTextStorage.h"
+#import "Simplenote-Swift.h"
 
 @implementation SPTextView
 

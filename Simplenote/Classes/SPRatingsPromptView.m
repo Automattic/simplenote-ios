@@ -9,6 +9,7 @@
 #import "SPRatingsPromptView.h"
 #import "UIDevice+Extensions.h"
 #import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
 
 

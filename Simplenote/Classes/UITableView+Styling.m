@@ -7,7 +7,8 @@
 //
 
 #import "UITableView+Styling.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation UITableView (Styling)
 

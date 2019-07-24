@@ -8,6 +8,7 @@
 
 #import "SPTagPill.h"
 #import "SPTagStub.h"
+#import "Simplenote-Swift.h"
 
 @interface SPTagPill ()
 

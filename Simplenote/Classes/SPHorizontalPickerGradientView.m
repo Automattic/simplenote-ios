@@ -7,7 +7,8 @@
 //
 
 #import "SPHorizontalPickerGradientView.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPHorizontalPickerGradientView
 

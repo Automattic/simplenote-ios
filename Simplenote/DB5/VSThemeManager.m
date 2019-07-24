@@ -10,6 +10,7 @@
 #import "SPAppDelegate.h"
 #import "SPNavigationController.h"
 #import "SPTracker.h"
+#import "Simplenote-Swift.h"
 
 NSString *const VSThemeManagerThemeWillChangeNotification = @"VSThemeManagerThemeWillChangeNotification";
 NSString *const VSThemeManagerThemeDidChangeNotification = @"VSThemeManagerThemeDidChangeNotification";

@@ -7,6 +7,8 @@
 //
 
 #import "SPTagCompletionPill.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPTagCompletionPill
 

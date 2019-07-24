@@ -7,7 +7,7 @@
 //
 
 #import "SPActionButton.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
 static CGFloat const imageSide = 34.0;
 

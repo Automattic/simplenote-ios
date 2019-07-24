@@ -9,6 +9,7 @@
 #import "SPTagListViewCell.h"
 #import "VSThemeManager.h"
 #import "SPBorderedView.h"
+#import "Simplenote-Swift.h"
 
 @interface SPTagListViewCell ()
 

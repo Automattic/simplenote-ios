@@ -11,6 +11,7 @@
 #import "VSThemeManager.h"
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
 
 @import WebKit;
 @import SafariServices;

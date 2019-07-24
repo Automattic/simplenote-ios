@@ -7,7 +7,7 @@
 //
 
 #import "SPEmptyListView.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 #import "UIImage+Colorization.h"
 
 @implementation SPEmptyListView

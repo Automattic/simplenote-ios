@@ -7,6 +7,7 @@
 //
 
 #import "SPTagEntryField.h"
+#import "Simplenote-Swift.h"
 #import "VSThemeManager.h"
 
 @implementation SPTagEntryField

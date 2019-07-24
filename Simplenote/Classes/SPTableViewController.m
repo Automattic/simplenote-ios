@@ -8,6 +8,7 @@
 
 #import "SPTableViewController.h"
 #import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
 @interface SPTableViewController ()
 

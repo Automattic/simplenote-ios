@@ -4,6 +4,8 @@
 #import "VSThemeManager.h"
 #import "SPButton.h"
 #import "SPSideBySideView.h"
+#import "Simplenote-Swift.h"
+
 
 #pragma mark - Implementation
 

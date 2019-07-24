@@ -8,6 +8,8 @@
 
 #import "SPEntryListCell.h"
 #import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @interface SPEntryListCell ()
 @end

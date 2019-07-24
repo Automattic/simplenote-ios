@@ -7,6 +7,7 @@
 //
 
 #import "SPVersionPickerViewCell.h"
+#import "Simplenote-Swift.h"
 #import "VSThemeManager.h"
 
 @interface SPVersionPickerViewCell ()

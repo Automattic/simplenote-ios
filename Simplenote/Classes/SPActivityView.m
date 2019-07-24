@@ -16,6 +16,7 @@
 #import "UIImage+Colorization.h"
 #import "SPToggle.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
 
 
 @interface SPActivityView ()

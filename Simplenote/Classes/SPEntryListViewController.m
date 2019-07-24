@@ -9,6 +9,7 @@
 #import "SPEntryListViewController.h"
 #import "VSThemeManager.h"
 #import "VSTheme+Simplenote.h"
+#import "Simplenote-Swift.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
 

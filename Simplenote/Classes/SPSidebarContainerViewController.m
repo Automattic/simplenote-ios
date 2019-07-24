@@ -11,6 +11,7 @@
 #import "SPSidebarViewController.h"
 #import "VSThemeManager.h"
 #import "SPTracker.h"
+#import "Simplenote-Swift.h"
 
 static CGFloat sidePanelWidth;
 

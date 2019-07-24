@@ -7,9 +7,8 @@
 
 #import "SPBorderedTableView.h"
 #import <Foundation/Foundation.h>
+#import "Simplenote-Swift.h"
 
-#import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 
 @implementation SPBorderedTableView
 

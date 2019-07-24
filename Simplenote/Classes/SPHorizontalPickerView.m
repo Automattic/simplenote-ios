@@ -9,6 +9,7 @@
 #import "SPHorizontalPickerView.h"
 #import "VSThemeManager.h"
 #import "SPHorizontalPickerGradientView.h"
+#import "Simplenote-Swift.h"
 
 static CGSize PickerDefaultSize = {88.0, 88.0};
 static NSString *itemIdentifier = @"horizontalPickerItem";

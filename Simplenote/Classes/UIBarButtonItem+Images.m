@@ -10,6 +10,8 @@
 #import "VSThemeManager.h"
 #import "SPOutsideTouchView.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
+
 
 static CGFloat const UIBarButtonSidePaddingPad      = 9.0;
 static CGFloat const UIBarButtonSidePaddingPhone    = 13.0;
