@@ -569,7 +569,7 @@
                                                                        [[SPObjectManager sharedManager] trashNote:note];
                                                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
                                                                    }];
-    trash.backgroundColor = [UIColor simplenoteRed];
+    trash.backgroundColor = [UIColor colorWithName:UIColorNameDestructiveActionColor];
 
     NSString *pinText = note.pinned
                             ? NSLocalizedString(@"Unpin", @"Unpin (verb) - the action of Unpinning a note")
@@ -580,14 +580,14 @@
                                                                  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                      [self togglePinnedNote:note];
                                                                  }];
-    togglePin.backgroundColor = [UIColor simplenoteSecondaryActionColor];
+    togglePin.backgroundColor = [UIColor colorWithName:UIColorNameSecondaryActionColor];
 
     UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                      title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")
                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                        [self shareNote:note sourceIndexPath:indexPath];
                                                                    }];
-    share.backgroundColor = [UIColor simplenoteTertiaryActionColor];
+    share.backgroundColor = [UIColor colorWithName:UIColorNameTertiaryActionColor];
 
     return @[trash, togglePin, share];
 }
