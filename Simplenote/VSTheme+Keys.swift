@@ -55,6 +55,8 @@ enum ThemeKey: String {
     case tintColor
     case versionPickerDateFontColor
 
+    /// TODO: Nuke VSTheme *entirely* and implement a simpler way to access UI Constants
+    ///
     case noteBodyLineHeightPercentage
 }
 
