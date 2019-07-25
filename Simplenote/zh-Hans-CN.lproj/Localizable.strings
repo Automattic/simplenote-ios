@@ -15,12 +15,6 @@
 /* Number of words in a note */
 "%d Words" = "%d 个字";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "密码尝试失败 %i 次";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "密码尝试失败 %i 次";
-
 /* Label of accept button on alert dialog */
 "Accept" = "接受";
 
@@ -30,53 +24,23 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "添加新协作者...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Label on button to add a new tag to a note */
 "Add tag" = "添加标签";
-
-/* Title of option to display all notes */
-"All Notes" = "All Notes";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "已有帐户？";
-
-/* No comment provided by engineer. */
-"Back" = "返回";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "注册即表示您同意我们的服务条款 »";
 
 /* No comment provided by engineer. */
 "Cancel" = "取消";
 
-/* Verb - work with others on a note */
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborate" = "协作";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "同意他人进行协作";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "协作者";
 
-/* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Condensed Note List";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "确认";
-
-/* Ratings View: Contact */
-"Contact" = "联系";
-
 /* No comment provided by engineer. */
-"Could Be Better" = "还可以更好";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "无法使用所提供的电子邮件地址和密码创建帐户。";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "无法使用所提供的电子邮件地址和密码登录。";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "您可以告诉我们如何改进吗？";
+"collaborators-description" = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";
 
 /* No comment provided by engineer. */
 "Create a new note" = "创建新笔记";
@@ -84,20 +48,11 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "当前协作者";
 
-/* Option to enable the dark app theme. */
-"Dark Theme" = "深色主题";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "调试";
-
-/* Permanent Delete */
-"Delete" = "Delete";
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "此笔记已从其他设备上删除。";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "关闭键盘";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "还没有帐户？";
 
 /* No comment provided by engineer. */
 "Done" = "完成";
@@ -111,60 +66,20 @@
 /* Remove all notes from the trash */
 "Empty trash" = "清空回收站";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "输入密码";
-
-/* Pin Lock */
-"Enter your passcode" = "输入您的密码";
-
-/* Passcode Failed Attempts */
-"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "使用快速搜索以及简单的标签来迅速查找笔记。";
-
-/* Forgot Password */
-"Forgot your password? »" = "Forgot your password? »";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "开始";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-\nIt really helps." = "";
-
 /* Noun - the version history of a note */
 "History" = "历史";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "将笔记恢复至之前版本";
 
 /* Action - view the version history of a note */
 "History..." = "历史…";
 
-/* No comment provided by engineer. */
-"How can we help?" = "您希望我们如何为您提供帮助？";
-
-/* No comment provided by engineer. */
-"I Like It" = "我喜欢";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "留下评价";
-
-/* Month and day date formatter */
-"MMM d" = "MMM d";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "MMM d h:mm a";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "yyyy MMM d";
-
-/* Month and year date formatter */
-"MMM yyyy" = "yyyy MMM";
-
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "菜单";
 
-/* Label to create a new note */
-"New note" = "New note";
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "显示笔记选项";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "无笔记";
@@ -172,23 +87,20 @@
 /* Message shown when no notes match a search string */
 "No Results" = "无结果";
 
-/* No comment provided by engineer. */
-"No Thanks" = "不用了，谢谢";
-
 /* Confirmation shown when a note is published */
 "Note Published" = "笔记已发布";
 
 /* No comment provided by engineer. */
-"Note not published" = "Note not published";
-
-/* Plural form of notes */
 "Notes" = "笔记";
 
-/* No comment provided by engineer. */
-"OK" = "确定";
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "关闭当前笔记";
 
 /* No comment provided by engineer. */
 "Off" = "关闭";
+
+/* No comment provided by engineer. */
+"OK" = "确定";
 
 /* No comment provided by engineer. */
 "On" = "打开";
@@ -196,17 +108,8 @@
 /* Select a note to view in the note editor */
 "Open note" = "打开笔记";
 
-/* A 4-digit code to lock the app when it is closed */
+/* Number of failed entries entering in passcode */
 "Passcode" = "密码";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "密码不匹配。重试。";
-
-/* Hint displayed in the password field */
-"Password" = "密码";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "密码中必须至少包含 4 个字符。";
 
 /* Action to mark a note as pinned */
 "Pin note" = "固定笔记";
@@ -223,10 +126,7 @@
 /* No comment provided by engineer. */
 "Preferences" = "偏好设置";
 
-/* Markdown Preview */
-"Preview" = "Preview";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Confirmation shown when a note is published */
 "Publish" = "发布";
 
 /* Failure message after attempting to publish a note */
@@ -238,20 +138,17 @@
 /* Switch which marks a note as published or unpublished */
 "Publish toggle" = "发布切换";
 
-/* No comment provided by engineer. */
+/* Confirmation shown when a note is published */
 "Published" = "已发布";
 
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "正在发布...";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "再次输入密码";
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "从回收站中移除所有笔记";
 
 /* Delete a tag and remove it from all associated notes */
 "Remove Tag" = "删除标签";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "从回收站中移除所有笔记";
 
 /* Prompt asking user to confirm the removal of a tag from a note */
 "Remove tag?" = "要删除标签吗？";
@@ -265,59 +162,29 @@
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "安全";
-
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "发送";
 
 /* No comment provided by engineer. */
-"Send Feedback" = "发送反馈";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "设置密码";
-
-/* Title of options screen */
 "Settings" = "设置";
 
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "分享列表、发布一些说明或发表自己的想法。";
-
-/* No comment provided by engineer. */
-"Share note" = "Share note";
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "分享当前笔记的内容";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "侧边栏";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "登录";
-
 /* Sign out of the active account in the app */
 "Sign Out" = "注销";
 
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "注册";
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "向当前笔记中添加标签";
 
-/* A short link to access the account login screen */
-"Sign in" = "登录";
-
-/* A short link to access the account creation screen */
-"Sign up" = "注册";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "注销会删除所有未同步的备注。您可以通过登录 Web 应用程序以确认您已同步的备注。";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "按字母顺序对笔记进行排序";
-
-/* Message shown in first launch view */
-"Stay organized" = "井井有条";
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "将标签从当前笔记中删除";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "标签：%@";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "连接出错。请稍后重试。";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
@@ -325,20 +192,14 @@
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "切换标签侧边栏";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "触摸 ID";
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "将当前笔记移至回收站";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash" = "移到回收站";
+"Trash-noun" = "移到回收站";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash" = "移到回收站";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "关闭密码";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "解锁 %@";
+/* Trash (noun) - the location where deleted notes are stored */
+"Trash-verb" = "移到回收站";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "取消固定笔记";
@@ -349,75 +210,191 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "正在取消发布...";
 
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "检测到未同步的备注";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "随时随地使用";
-
 /* Represents a snapshot in time for a note */
 "Version" = "版本";
 
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "欢迎使用 Simplenote";
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "连接至互联网，访问之前版本";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "您觉得 Simplenote 怎么样？";
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "切换至此版本";
 
-/* Message shown in first launch view */
-"Work together" = "协同运作";
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "正在获取版本";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
 
-/* No comment provided by engineer. */
-"Your Email:" = "您的电子邮件：";
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "密码尝试失败 %i 次";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "输入密码";
+
+/* Pin Lock */
+"Enter your passcode" = "输入您的密码";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "密码不匹配。重试。";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "再次输入密码";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "设置密码";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "关闭密码";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "解锁 %@";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "密码尝试失败 %i 次";
+
+"welcomeNote-iOS" = "欢迎使用 iOS 版 Simplenote！
+
+要添加笔记，请轻点“加号”按钮。
+
+弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。
+
+您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。
+
+要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。
+
+您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。
+
+您可以通过 Mac、Android 设备或网络浏览器 (http://simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "按字母顺序对笔记进行排序";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "已有帐户？";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "确认";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "无法使用所提供的电子邮件地址和密码创建帐户。";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "无法使用所提供的电子邮件地址和密码登录。";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "还没有帐户？";
+
+/* Number of failed entries entering in passcode */
+"Password" = "密码";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "密码中必须至少包含 4 个字符。";
+
+/* Message displayed when login fails */
+"Sign in" = "登录";
+
+/* Message displayed when login fails */
+"Sign In" = "登录";
+
+/* TOS */
+"Sign up" = "注册";
+
+/* TOS */
+"Sign Up" = "注册";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "连接出错。请稍后重试。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "您输入的电子邮件地址无效。";
 
 /* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "使用快速搜索以及简单的标签来迅速查找笔记。";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "开始";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "分享列表、发布一些说明或发表自己的想法。";
+
+/* Message shown in first launch view */
+"Stay organized" = "井井有条";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "随时随地使用";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "欢迎使用 Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "协同运作";
+
+/* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "您所有设备上的笔记会同步更新。无需按任何按钮。就是这么方便。";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "同意他人进行协作";
+/* Option to enable the dark app theme. */
+"Dark Theme" = "深色主题";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "调试";
+
+/* Month and day date formatter */
+"MMM d" = "MMM d";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "MMM d h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "yyyy MMM d";
+
+/* Month, day, and year date formatter */
+"MMM yyyy" = "yyyy MMM";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "触摸 ID";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "安全";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "注册即表示您同意我们的服务条款 »";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "您觉得 Simplenote 怎么样？";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";
+"I Like It" = "我喜欢";
 
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "此笔记已从其他设备上删除。";
+/* No comment provided by engineer. */
+"Could Be Better" = "还可以更好";
 
-/* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "将笔记恢复至之前版本";
+/* No comment provided by engineer. */
+"Leave a Review" = "留下评价";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "显示笔记选项";
+/* No comment provided by engineer. */
+"No Thanks" = "不用了，谢谢";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "关闭当前笔记";
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "您可以告诉我们如何改进吗？";
 
-/* Accessibility hint on button to share note */
-"Share the content of the current note" = "分享当前笔记的内容";
+/* No comment provided by engineer. */
+"Send Feedback" = "发送反馈";
 
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "向当前笔记中添加标签";
+/* Ratings View: Contact */
+"Contact" = "联系";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"Remove tag from the current note" = "将标签从当前笔记中删除";
+/* No comment provided by engineer. */
+"Your Email:" = "您的电子邮件：";
 
-/* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "将当前笔记移至回收站";
+/* No comment provided by engineer. */
+"How can we help?" = "您希望我们如何为您提供帮助？";
 
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "连接至互联网，访问之前版本";
+/* No comment provided by engineer. */
+"Back" = "返回";
 
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "切换至此版本";
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "注销会删除所有未同步的备注。您可以通过登录 Web 应用程序以确认您已同步的备注。";
 
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "正在获取版本";
-
-/* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "欢迎使用 iOS 版 Simplenote！\n\n要添加笔记，请轻点“加号”按钮。\n\n弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。\n\n您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。\n\n要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。\n\n您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。\n\n您可以通过 Mac、Android 设备或网络浏览器 (http:\/\/simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "检测到未同步的备注";
 

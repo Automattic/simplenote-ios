@@ -15,12 +15,6 @@
 /* Number of words in a note */
 "%d Words" = "%d من الكلمات";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i محاولات فاشلة لإدخال رمز المرور";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i محاولات فاشلة لإدخال رمز المرور";
-
 /* Label of accept button on alert dialog */
 "Accept" = "قبول";
 
@@ -30,23 +24,8 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "إضافة مشارك جديد...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "العلامة...";
-
 /* Label on button to add a new tag to a note */
 "Add tag" = "إضافة وسم";
-
-/* Title of option to display all notes */
-"All Notes" = "All Notes";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "هل لديك حساب بالفعل؟";
-
-/* No comment provided by engineer. */
-"Back" = "رجوع";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "يعني تسجيلك موافقتك على شروط الخدمة »";
 
 /* No comment provided by engineer. */
 "Cancel" = "إلغاء";
@@ -54,29 +33,14 @@
 /* Verb - work with others on a note */
 "Collaborate" = "تشارك";
 
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "تمكين الآخرين للتعاون";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "المشاركون";
 
-/* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Condensed Note List";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "تأكيد";
-
-/* Ratings View: Contact */
-"Contact" = "جهة الاتصال";
-
 /* No comment provided by engineer. */
-"Could Be Better" = "قد يكون أفضل";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "تعذر إنشاء حساب بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "تعذر تسجيل الدخول بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "هل بإمكانك إبلاغنا بكيفية تحسين ذلك؟";
+"collaborators-description" = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
 
 /* No comment provided by engineer. */
 "Create a new note" = "إنشاء ملاحظة جديدة";
@@ -84,22 +48,13 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "المشاركون الحاليون";
 
-/* Option to enable the dark app theme. */
-"Dark Theme" = "قالب داكن";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "إصلاح الخطأ";
-
-/* Permanent Delete */
-"Delete" = "حذف";
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "تم حذف هذه الملاحظة من جهاز آخر.";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "تجاهل لوحة المفاتيح";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "ليس لديك حساب؟";
-
-/* No comment provided by engineer. */
+/* An error message */
 "Done" = "تم";
 
 /* Re-order or delete tags */
@@ -111,60 +66,20 @@
 /* Remove all notes from the trash */
 "Empty trash" = "إفراغ سلة المهملات";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "إدخال رمز مرور";
-
-/* Pin Lock */
-"Enter your passcode" = "إدخال رمز المرور الخاص بك";
-
-/* Passcode Failed Attempts */
-"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "هل فقدت الوصول إلى Simplenote؟ يمكنك الحصول على حق الوصول مرة أخرى عن طريق تثبيت التطبيق مجددًا وتسجيل الدخول إلى حسابك.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "ابحث عن الملاحظات بسرعة باستخدام ميزة البحث الفوري والوسوم البسيطة.";
-
-/* Forgot Password */
-"Forgot your password? »" = "Forgot your password? »";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "البدء";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-\nIt really helps." = "";
-
 /* Noun - the version history of a note */
 "History" = "سجل الأحداث";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "استعادة ملاحظة إلى إصدار سابق";
 
 /* Action - view the version history of a note */
 "History..." = "سجل الأحداث...";
 
-/* No comment provided by engineer. */
-"How can we help?" = "كيف نساعدك؟";
-
-/* No comment provided by engineer. */
-"I Like It" = "يعجبني هذا";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "اترك رأيًا";
-
-/* Month and day date formatter */
-"MMM d" = "MMM d";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "MMM d، h:mm a";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "MMM d، yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "MMM yyyy";
-
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "القائمة";
 
-/* Label to create a new note */
-"New note" = "New note";
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "عرض خيارات للملاحظة";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "لا توجد ملاحظات";
@@ -172,23 +87,20 @@
 /* Message shown when no notes match a search string */
 "No Results" = "لا توجد نتائج";
 
-/* No comment provided by engineer. */
-"No Thanks" = "لا شكرًا";
-
 /* Confirmation shown when a note is published */
 "Note Published" = "تم نشر الملاحظة";
 
-/* No comment provided by engineer. */
-"Note not published" = "Note not published";
-
-/* Plural form of notes */
+/* Description of Simplenote shown in first launch view */
 "Notes" = "ملاحظات";
 
-/* No comment provided by engineer. */
-"OK" = "موافق";
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "إغلاق الملاحظة الحالية";
 
 /* No comment provided by engineer. */
 "Off" = "إيقاف تشغيل";
+
+/* TOS */
+"OK" = "موافق";
 
 /* No comment provided by engineer. */
 "On" = "تشغيل";
@@ -196,17 +108,8 @@
 /* Select a note to view in the note editor */
 "Open note" = "فتح الملاحظة";
 
-/* A 4-digit code to lock the app when it is closed */
+/* Number of failed entries entering in passcode */
 "Passcode" = "رمز المرور";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "رموز المرور غير متطابقة. حاول مرة أخرى.";
-
-/* Hint displayed in the password field */
-"Password" = "كلمة المرور";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل.";
 
 /* Action to mark a note as pinned */
 "Pin note" = "تثبيت الملاحظة";
@@ -223,16 +126,13 @@
 /* No comment provided by engineer. */
 "Preferences" = "التفضيلات";
 
-/* Markdown Preview */
-"Preview" = "معاينة";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Confirmation shown when a note is published */
 "Publish" = "نشر";
 
 /* Failure message after attempting to publish a note */
 "Publish Failed" = "فشل النشر";
 
-/* Action which published a note to a web page */
+/* Confirmation shown when a note is published */
 "Publish note" = "نشر الملاحظة";
 
 /* Switch which marks a note as published or unpublished */
@@ -244,14 +144,11 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "جار النشر...";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "إعادة إدخال رمز المرور";
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "إزالة كل الملاحظات من سلة المهملات";
 
 /* Delete a tag and remove it from all associated notes */
 "Remove Tag" = "إزالة الوسم";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "إزالة كل الملاحظات من سلة المهملات";
 
 /* Prompt asking user to confirm the removal of a tag from a note */
 "Remove tag?" = "هل تريد إزالة الوسم؟";
@@ -265,59 +162,29 @@
 /* Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "الأمان";
-
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "إرسال";
-
-/* No comment provided by engineer. */
-"Send Feedback" = "إرسال الملاحظات";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "تعيين رمز المرور";
 
 /* Title of options screen */
 "Settings" = "إعدادات";
 
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "يمكنك مشاركة قائمة أو نشر بعض التعليقات أو نشر أفكارك.";
-
-/* No comment provided by engineer. */
-"Share note" = "Share note";
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "مشاركة محتوى الملاحظة الحالية";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "الشريط الجانبي";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "تسجيل الدخول";
-
 /* Sign out of the active account in the app */
 "Sign Out" = "تسجيل الخروج";
 
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "التسجيل";
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "إضافة وسم إلى الملاحظة الحالية";
 
-/* A short link to access the account login screen */
-"Sign in" = "تسجيل الدخول";
-
-/* A short link to access the account creation screen */
-"Sign up" = "التسجيل";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "سيؤدي تسجيل الخروج إلى حذف أي ملحوظات غير متزامنة. يمكنك التحقق من ملحوظاتك المتزامنة عن طريق تسجيل الدخول إلى تطبيق الويب.";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "فرز الملاحظات أبجديًا";
-
-/* Message shown in first launch view */
-"Stay organized" = "البقاء منظمًا";
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "إزالة وسم من الملاحظة الحالية";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "الوسم: %@";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "هناك مشكلة بالاتصال.  يُرجى المحاولة مرة أخرى لاحقاً.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "اليوم";
@@ -325,20 +192,14 @@
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "تبديل الشريط الجانبي للوسوم";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "معرف اللمس";
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "نقل الملاحظة الحالية إلى سلة المهملات";
 
-/* Trash (noun) - the location where deleted notes are stored */
-"Trash" = "سلة المهملات";
+/* Remove all notes from the trash */
+"Trash-noun" = "سلة المهملات";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash" = "سلة المهملات";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "إيقاف رمز المرور";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "إلغاء تأمين %@";
+/* Remove all notes from the trash */
+"Trash-verb" = "سلة المهملات";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "إلغاء تثبيت الملاحظة";
@@ -349,75 +210,203 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "جارٍ إلغاء النشر...";
 
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "تم الكشف عن ملحوظات غير متزامنة";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "استخدامها في كل مكان";
-
 /* Represents a snapshot in time for a note */
 "Version" = "النسخة";
 
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "مرحبًا بك في Simplenote";
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "الاتصال بالإنترنت للوصول إلى الإصدارات السابقة";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "التحول إلى هذا الإصدار";
 
-/* Message shown in first launch view */
-"Work together" = "العمل معًا";
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "جلب الإصدار";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "أمس";
 
-/* No comment provided by engineer. */
-"Your Email:" = "بريدك الإلكتروني:";
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i محاولات فاشلة لإدخال رمز المرور";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "إدخال رمز مرور";
+
+/* Pin Lock */
+"Enter your passcode" = "إدخال رمز المرور الخاص بك";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "رموز المرور غير متطابقة. حاول مرة أخرى.";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "إعادة إدخال رمز المرور";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "تعيين رمز المرور";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "إيقاف رمز المرور";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "إلغاء تأمين %@";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i محاولات فاشلة لإدخال رمز المرور";
+
+"welcomeNote-iOS" = "أهلاً بك في Simplenote لنظام التشغيل iOS!
+
+لإضافة ملاحظة، انقر فوق زر علامة الزائد.
+
+انقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.
+
+يمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.
+
+انقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.
+
+هناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.
+
+استخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http://simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "فرز الملاحظات أبجديًا";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "هل لديك حساب بالفعل؟";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "تأكيد";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "تعذر إنشاء حساب بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "تعذر تسجيل الدخول بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "ليس لديك حساب؟";
+
+/* An error message */
+"Password" = "كلمة المرور";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل.";
+
+/* Message displayed when login fails */
+"Sign in" = "تسجيل الدخول";
+
+/* Message displayed when login fails */
+"Sign In" = "تسجيل الدخول";
+
+/* Title of button to create a new account (must be short) */
+"Sign up" = "التسجيل";
+
+/* Title of button to create a new account (must be short) */
+"Sign Up" = "التسجيل";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "هناك مشكلة بالاتصال.  يُرجى المحاولة مرة أخرى لاحقاً.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "عنوان البريد الإلكتروني الخاص بك غير صالح.";
 
 /* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "ابحث عن الملاحظات بسرعة باستخدام ميزة البحث الفوري والوسوم البسيطة.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "البدء";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "يمكنك مشاركة قائمة أو نشر بعض التعليقات أو نشر أفكارك.";
+
+/* Message shown in first launch view */
+"Stay organized" = "البقاء منظمًا";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "استخدامها في كل مكان";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "مرحبًا بك في Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "العمل معًا";
+
+/* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "تظل ملاحظاتك محدثة عبر أجهزتك كلها. لا توجد أزرار للضغط عليها. إنها تعمل بدقة.";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "تمكين الآخرين للتعاون";
+/* Option to enable the dark app theme. */
+"Dark Theme" = "قالب داكن";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "إصلاح الخطأ";
+
+/* Month and day date formatter */
+"MMM d" = "MMM d";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "MMM d، h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "MMM d، yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "معرف اللمس";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "الأمان";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "يعني تسجيلك موافقتك على شروط الخدمة »";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
+"I Like It" = "يعجبني هذا";
 
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "تم حذف هذه الملاحظة من جهاز آخر.";
+/* No comment provided by engineer. */
+"Could Be Better" = "قد يكون أفضل";
 
-/* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "استعادة ملاحظة إلى إصدار سابق";
+/* No comment provided by engineer. */
+"Leave a Review" = "اترك رأيًا";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "عرض خيارات للملاحظة";
+/* No comment provided by engineer. */
+"No Thanks" = "لا شكرًا";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "إغلاق الملاحظة الحالية";
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "هل بإمكانك إبلاغنا بكيفية تحسين ذلك؟";
 
-/* Accessibility hint on button to share note */
-"Share the content of the current note" = "مشاركة محتوى الملاحظة الحالية";
+/* No comment provided by engineer. */
+"Send Feedback" = "إرسال الملاحظات";
 
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "إضافة وسم إلى الملاحظة الحالية";
+/* Ratings View: Contact */
+"Contact" = "جهة الاتصال";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"Remove tag from the current note" = "إزالة وسم من الملاحظة الحالية";
+/* No comment provided by engineer. */
+"Your Email:" = "بريدك الإلكتروني:";
 
-/* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "نقل الملاحظة الحالية إلى سلة المهملات";
+/* No comment provided by engineer. */
+"How can we help?" = "كيف نساعدك؟";
 
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "الاتصال بالإنترنت للوصول إلى الإصدارات السابقة";
+/* No comment provided by engineer. */
+"Back" = "رجوع";
 
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "التحول إلى هذا الإصدار";
+/* Permanent Delete */
+"Delete" = "حذف";
 
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "جلب الإصدار";
+/* Markdown Preview */
+"Preview" = "معاينة";
 
-/* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "أهلاً بك في Simplenote لنظام التشغيل iOS!\n\nلإضافة ملاحظة، انقر فوق زر علامة الزائد.\n\nانقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.\n\nيمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.\n\nانقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.\n\nهناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.\n\nاستخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http:\/\/simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "سيؤدي تسجيل الخروج إلى حذف أي ملحوظات غير متزامنة. يمكنك التحقق من ملحوظاتك المتزامنة عن طريق تسجيل الدخول إلى تطبيق الويب.";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "تم الكشف عن ملحوظات غير متزامنة";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Add a tag..." = "العلامة...";
+
+/* Passcode Failed Attempts */
+"FailedAttempts" = "هل فقدت الوصول إلى Simplenote؟ يمكنك الحصول على حق الوصول مرة أخرى عن طريق تثبيت التطبيق مجددًا وتسجيل الدخول إلى حسابك.";
 
