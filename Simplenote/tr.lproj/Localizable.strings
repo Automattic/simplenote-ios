@@ -15,12 +15,6 @@
 /* Number of words in a note */
 "%d Words" = "%d Sözcük";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i Başarısız Parola Denemesi";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i Başarısız Parola Denemesi";
-
 /* Label of accept button on alert dialog */
 "Accept" = "Kabul";
 
@@ -30,23 +24,8 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Etiketle…";
-
 /* Label on button to add a new tag to a note */
 "Add tag" = "Etiket ekle";
-
-/* Title of option to display all notes */
-"All Notes" = "All Notes";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Hesabınız zaten var mı?";
-
-/* No comment provided by engineer. */
-"Back" = "Geri";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Kaydolmakla Hizmet Koşulları'nı kabul etmiş olursunuz »";
 
 /* No comment provided by engineer. */
 "Cancel" = "İptal";
@@ -54,29 +33,14 @@
 /* Verb - work with others on a note */
 "Collaborate" = "İşbirliği Yap";
 
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "Diğer kişilerin iş birliği kurmasını sağlayın";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Çalışma Arkadaşları";
 
-/* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Condensed Note List";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Onayla";
-
-/* Ratings View: Contact */
-"Contact" = "İletişim";
-
 /* No comment provided by engineer. */
-"Could Be Better" = "Daha İyi Olabilir";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
+"collaborators-description" = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Yeni not oluştur";
@@ -84,20 +48,11 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "Şu Anki Çalışma Arkadaşları";
 
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Koyu Tema";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "Hata ayıklama";
-
-/* Permanent Delete */
-"Delete" = "Sil";
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "Bu not bir başka aygıtta silindi.";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Klavyeyi kapat";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Hesabınız yok mu?";
 
 /* No comment provided by engineer. */
 "Done" = "Bitti";
@@ -111,60 +66,20 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Çöpü boşalt";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Parola girin";
-
-/* Pin Lock */
-"Enter your passcode" = "Parolanızı girin";
-
-/* Passcode Failed Attempts */
-"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Simplenote'a erişim sağlayamıyor musunuz? Uygulamayı yeniden yükleyip hesabınızda oturum açarak tekrar erişim elde edebilirsiniz.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Anında arama ve basit etiketlerle notları hızlı bir şekilde bulabilirsiniz.";
-
-/* Forgot Password */
-"Forgot your password? »" = "Forgot your password? »";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Başlayın";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-\nIt really helps." = "";
-
 /* Noun - the version history of a note */
 "History" = "Geçmiş";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "Notu önceki sürüme geri yükle";
 
 /* Action - view the version history of a note */
 "History..." = "Geçmiş…";
 
-/* No comment provided by engineer. */
-"How can we help?" = "Nasıl yardımcı olabiliriz?";
-
-/* No comment provided by engineer. */
-"I Like It" = "Beğendim";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "Görüşünüzü Paylaşın";
-
-/* Month and day date formatter */
-"MMM d" = "AAA g";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "g, AAA, sa:dkdk sn";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "g, AAA, yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "AAA yyyy";
-
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menü";
 
-/* Label to create a new note */
-"New note" = "New note";
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "Not seçeneklerini göster";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Not Yok";
@@ -172,23 +87,20 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Sonuç Yok";
 
-/* No comment provided by engineer. */
-"No Thanks" = "Hayır, teşekkürler";
-
 /* Confirmation shown when a note is published */
 "Note Published" = "Not Yayınlandı";
-
-/* No comment provided by engineer. */
-"Note not published" = "Note not published";
 
 /* Plural form of notes */
 "Notes" = "Notlar";
 
-/* No comment provided by engineer. */
-"OK" = "Tamam";
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "Geçerli notu kapat";
 
 /* No comment provided by engineer. */
 "Off" = "Kapalı";
+
+/* No comment provided by engineer. */
+"OK" = "Tamam";
 
 /* No comment provided by engineer. */
 "On" = "Açık";
@@ -199,23 +111,13 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Geçiş kodu";
 
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Parolalar eşleşmiyor. Tekrar deneyin.";
-
-/* Hint displayed in the password field */
-"Password" = "Parola";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Parola en az 4 karakter olmalıdır.";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Notu iğnele";
 
 /* Denotes when note is pinned to the top of the note list */
 "Pin to Top" = "Üste İğnele";
 
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "İğneyi aç\/kapat";
+"Pin toggle" = "İğneyi aç/kapat";
 
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "İğnelendi";
@@ -223,10 +125,7 @@
 /* No comment provided by engineer. */
 "Preferences" = "Tercihler";
 
-/* Markdown Preview */
-"Preview" = "Önizleme";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Confirmation shown when a note is published */
 "Publish" = "Yayınla";
 
 /* Failure message after attempting to publish a note */
@@ -235,23 +134,19 @@
 /* Action which published a note to a web page */
 "Publish note" = "Notu yayınla";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Yayınlamayı aç\/kapat";
+"Publish toggle" = "Yayınlamayı aç/kapat";
 
-/* No comment provided by engineer. */
+/* Confirmation shown when a note is published */
 "Published" = "Yayınlandı";
 
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Yayınlanıyor…";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Yeniden bir parola girin";
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
 
 /* Delete a tag and remove it from all associated notes */
 "Remove Tag" = "Etiketi Kaldır";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
 
 /* Prompt asking user to confirm the removal of a tag from a note */
 "Remove tag?" = "Etiket kaldırılsın mı?";
@@ -265,80 +160,43 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Notu Geri Yükle";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "Güvenlik";
-
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Gönder";
-
-/* No comment provided by engineer. */
-"Send Feedback" = "Geri Bildirim Gönder";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Parolayı Ayarla";
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
 
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Liste paylaşın, yönergeler gönderin veya düşüncelerinizi yayınlayın.";
-
-/* No comment provided by engineer. */
-"Share note" = "Share note";
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "Geçerli notun içeriğini paylaş";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Kenar çubuğu";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Oturum Aç";
-
 /* Sign out of the active account in the app */
 "Sign Out" = "Çıkış Yap";
 
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "Kaydol";
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "Geçerli nota etiket ekle";
 
-/* A short link to access the account login screen */
-"Sign in" = "Oturum aç";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Kaydol";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Notları Alfabetik Olarak Sırala";
-
-/* Message shown in first launch view */
-"Stay organized" = "Düzenli olun";
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "Geçerli nottan etiket kaldır";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Etiket: %@";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Bağlantıyla ilgili bir sorun oluştu.  Lütfen daha sonra tekrar deneyin.";
-
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Bugün";
 
-/* Accessibility hint used to show or hide the sidebar */
-"Toggle tag sidebar" = "Etiket kenar çubuğunu aç\/kapat";
+"Toggle tag sidebar" = "Etiket kenar çubuğunu aç/kapat";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "Touch ID";
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "Geçerli notu çöp kutusuna taşı";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash" = "Çöpe At";
+"Trash-noun" = "Çöpe At";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash" = "Çöpe At";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Parolayı Kapat";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ öğesinin kilidini aç";
+/* Trash (noun) - the location where deleted notes are stored */
+"Trash-verb" = "Çöpe At";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "Notu kaldır";
@@ -349,75 +207,203 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Yayından kaldırılıyor...";
 
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "Senkronize Edilmemiş Notlar Tespit Edildi";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "İstediğiniz yerde kullanın";
-
 /* Represents a snapshot in time for a note */
 "Version" = "Sürüm";
 
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Simplenote'a Hoş Geldiniz";
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "Bu sürümü değiştir";
 
-/* Message shown in first launch view */
-"Work together" = "Birlikte çalışın";
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "Sürüm alınıyor";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Dün";
 
-/* No comment provided by engineer. */
-"Your Email:" = "E-posta adresiniz:";
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Başarısız Parola Denemesi";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Parola girin";
+
+/* Pin Lock */
+"Enter your passcode" = "Parolanızı girin";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Parolalar eşleşmiyor. Tekrar deneyin.";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Yeniden bir parola girin";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Parolayı Ayarla";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Parolayı Kapat";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "%@ öğesinin kilidini aç";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Başarısız Parola Denemesi";
+
+"welcomeNote-iOS" = "iOS için Simplenote’a hoş geldiniz!
+
+Yeni bir not eklemek için artı düğmesine dokunun.
+
+Notlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.
+
+Not listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.
+
+Sol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.
+
+Gerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.
+
+Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "Notları Alfabetik Olarak Sırala";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "Hesabınız zaten var mı?";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "Onayla";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Hesabınız yok mu?";
+
+/* Number of failed entries entering in passcode */
+"Password" = "Parola";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "Parola en az 4 karakter olmalıdır.";
+
+/* A short link to access the account login screen */
+"Sign in" = "Oturum aç";
+
+/* Title of button for logging in (must be short) */
+"Sign In" = "Oturum Aç";
+
+/* TOS */
+"Sign up" = "Kaydol";
+
+/* TOS */
+"Sign Up" = "Kaydol";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "Bağlantıyla ilgili bir sorun oluştu.  Lütfen daha sonra tekrar deneyin.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "E-posta adresiniz geçerli değil.";
 
 /* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "Anında arama ve basit etiketlerle notları hızlı bir şekilde bulabilirsiniz.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "Başlayın";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "Liste paylaşın, yönergeler gönderin veya düşüncelerinizi yayınlayın.";
+
+/* Message shown in first launch view */
+"Stay organized" = "Düzenli olun";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "İstediğiniz yerde kullanın";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "Simplenote'a Hoş Geldiniz";
+
+/* Message shown in first launch view */
+"Work together" = "Birlikte çalışın";
+
+/* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Notlarınız tüm cihazlarınızda güncel kalır. Basılacak düğme yok. Kendiliğinden çalışır.";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Diğer kişilerin iş birliği kurmasını sağlayın";
+/* Option to enable the dark app theme. */
+"Dark Theme" = "Koyu Tema";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Hata ayıklama";
+
+/* Month and day date formatter */
+"MMM d" = "AAA g";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "g, AAA, sa:dkdk sn";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "g, AAA, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "AAA yyyy";
+
+
+"Touch ID" = "Touch ID";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "Güvenlik";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Kaydolmakla Hizmet Koşulları'nı kabul etmiş olursunuz »";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
+"I Like It" = "Beğendim";
 
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Bu not bir başka aygıtta silindi.";
+/* No comment provided by engineer. */
+"Could Be Better" = "Daha İyi Olabilir";
 
-/* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Notu önceki sürüme geri yükle";
+/* No comment provided by engineer. */
+"Leave a Review" = "Görüşünüzü Paylaşın";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Not seçeneklerini göster";
+/* No comment provided by engineer. */
+"No Thanks" = "Hayır, teşekkürler";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Geçerli notu kapat";
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
 
-/* Accessibility hint on button to share note */
-"Share the content of the current note" = "Geçerli notun içeriğini paylaş";
+/* No comment provided by engineer. */
+"Send Feedback" = "Geri Bildirim Gönder";
 
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Geçerli nota etiket ekle";
+/* Ratings View: Contact */
+"Contact" = "İletişim";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"Remove tag from the current note" = "Geçerli nottan etiket kaldır";
+/* No comment provided by engineer. */
+"Your Email:" = "E-posta adresiniz:";
 
-/* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Geçerli notu çöp kutusuna taşı";
+/* No comment provided by engineer. */
+"How can we help?" = "Nasıl yardımcı olabiliriz?";
 
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
+/* No comment provided by engineer. */
+"Back" = "Geri";
 
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Bu sürümü değiştir";
+/* Permanent Delete */
+"Delete" = "Sil";
 
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Sürüm alınıyor";
+/* Markdown Preview */
+"Preview" = "Önizleme";
 
-/* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "iOS için Simplenote’a hoş geldiniz!\n\nYeni bir not eklemek için artı düğmesine dokunun.\n\nNotlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.\n\nNot listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.\n\nSol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.\n\nGerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.\n\nSimplenote’u Mac’inizde, Android aygıtınızda veya http:\/\/simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Senkronize Edilmemiş Notlar Tespit Edildi";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Add a tag..." = "Etiketle…";
+
+/* Passcode Failed Attempts */
+"FailedAttempts" = "Simplenote'a erişim sağlayamıyor musunuz? Uygulamayı yeniden yükleyip hesabınızda oturum açarak tekrar erişim elde edebilirsiniz.";
 

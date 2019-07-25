@@ -42,7 +42,7 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
     if (self) {
         
         self.clipsToBounds = YES;
-        self.contentView.clipsToBounds = NO;
+        self.contentView.clipsToBounds = YES;
 
         // setup preview view
         CGRect frame = self.bounds;
