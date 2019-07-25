@@ -7,7 +7,6 @@
 //
 
 #import "UIBarButtonItem+Images.h"
-#import "VSThemeManager.h"
 #import "SPOutsideTouchView.h"
 #import "UIDevice+Extensions.h"
 #import "Simplenote-Swift.h"

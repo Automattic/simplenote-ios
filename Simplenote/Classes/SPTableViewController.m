@@ -7,16 +7,10 @@
 //
 
 #import "SPTableViewController.h"
-#import "VSThemeManager.h"
 #import "Simplenote-Swift.h"
 
 
 @implementation SPTableViewController
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

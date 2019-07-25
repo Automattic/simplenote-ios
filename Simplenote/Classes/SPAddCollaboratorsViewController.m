@@ -9,7 +9,6 @@
 #import "SPAddCollaboratorsViewController.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
-#import "VSThemeManager.h"
 #import "NSString+Metadata.h"
 #import "PersonTag.h"
 #import <ContactsUI/ContactsUI.h>
