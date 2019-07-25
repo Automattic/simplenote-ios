@@ -13,21 +13,21 @@ static CGFloat const imageSide = 34.0;
 
 @implementation SPActionButton
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        initialSetupComplete = NO;
+        [self setupViews];
     }
+
     return self;
 }
 
 
 - (void)layoutSubviews {
-    
+
     [super layoutSubviews];
-    
-    [self setupViews];
+
     
     // center images in background
     
@@ -60,8 +60,6 @@ static CGFloat const imageSide = 34.0;
     [self setTitleColor:actionDisabledColor forState:UIControlStateDisabled];
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-    initialSetupComplete = YES;
 }
 
 
