@@ -828,10 +828,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-
     NSDictionary *attributes = @{
-        NSForegroundColorAttributeName: textColor
+        NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
     };
 
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];
