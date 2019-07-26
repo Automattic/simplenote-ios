@@ -5,7 +5,7 @@ import UIKit
 // MARK: - Simplenote Named Colors
 //
 @objc
-enum UIColorName: Int {
+enum UIColorName: Int, CaseIterable {
     case destructiveActionColor
     case secondaryActionColor
     case tertiaryActionColor
@@ -62,15 +62,6 @@ enum UIColorName: Int {
 // MARK: - Public Methods
 //
 extension UIColorName {
-
-    /// Returns the matching Asset Catalog  Name
-    ///
-    var assetCatalogName: String {
-        switch self {
-        default:
-            return ""
-        }
-    }
 
     /// Returns the matching Legacy VSTheme Key
     ///
