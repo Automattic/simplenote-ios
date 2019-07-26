@@ -80,6 +80,11 @@ class ShareViewController: UIViewController {
         loadContent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        textView.becomeFirstResponder()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ensureSimperiumTokenIsValid()
@@ -126,6 +131,7 @@ private extension ShareViewController {
     /// from the original `NSExtensionContext`
     ///
     func dismissExtension() {
+        view.endEditing(true)
         dismiss(animated: true, completion: self.dismissalCompletionBlock)
     }
 }
