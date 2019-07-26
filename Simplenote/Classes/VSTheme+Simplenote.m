@@ -7,13 +7,14 @@
 //
 
 #import "VSTheme+Simplenote.h"
+#import "SPConstants.h"
 
 
 @implementation VSTheme (Simplenote)
 
 - (BOOL)isDark
 {
-    return [self boolForKey:@"dark"];
+    return [self boolForKey:kSimplenoteDarkThemeName];
 }
 
 @end
