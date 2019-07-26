@@ -65,7 +65,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     if (!customView) {
         customView = [SPBorderedView new];
         customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-        customView.borderColor = [UIColor colorWithName:UIColorNameTagListSeparatorColor];
+        customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
         customView.showLeftBorder = NO;
         customView.showBottomBorder = NO;
         customView.showTopBorder = NO;
@@ -181,7 +181,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)themeDidChange {
     [self updateHeaderColors];
     customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    customView.borderColor = [UIColor colorWithName:UIColorNameTagListSeparatorColor];
+    customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
@@ -197,7 +197,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 {
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
     UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-    UIColor *separatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
     UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
 
     headerSeparator.backgroundColor = separatorColor;
@@ -852,7 +852,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
     headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerSeparator.backgroundColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+    headerSeparator.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
     [headerView addSubview:headerSeparator];
 
     UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];

@@ -125,7 +125,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     // self
     self.view.backgroundColor = tableBackgroundColor;
@@ -134,8 +134,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryFieldBackground.backgroundColor = backgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    entryTextField.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldTextColor];
-    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldPlaceholderTextColor];
+    entryTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,

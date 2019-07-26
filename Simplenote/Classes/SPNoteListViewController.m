@@ -185,7 +185,7 @@
 
     // Apply font to search field by traversing subviews
     NSArray *searchBarSubviews = [searchBar subviewsRespondingToSelector:@selector(setFont:)];
-    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameSearchBarFontColor];
+    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameTextColor];
 
     for (UIView *subview in searchBarSubviews) {
         if ([subview isKindOfClass:[UITextField class]] == false) {

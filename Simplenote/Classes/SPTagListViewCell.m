@@ -24,12 +24,12 @@
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
         
-        _textColor = [UIColor colorWithName:UIColorNameTagListFontColor];
-        _highlightedTextColor = [UIColor colorWithName:UIColorNameTagListFontHighlightColor];
+        _textColor = [UIColor colorWithName:UIColorNameTextColor];
+        _highlightedTextColor = [UIColor colorWithName:UIColorNameTintColor];
         
         SPBorderedView *selectedBackgroundView = [[SPBorderedView alloc] initWithFrame:self.bounds];
         selectedBackgroundView.borderInset = [self.theme edgeInsetsForKey:@"tagListHighlightInset"];
-        selectedBackgroundView.fillColor = [UIColor colorWithName:UIColorNameTagListHighlightBackgroundColor];
+        selectedBackgroundView.fillColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         selectedBackgroundView.showLeftBorder = NO;
         selectedBackgroundView.showRightBorder = NO;
         selectedBackgroundView.showBottomBorder = NO;

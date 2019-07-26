@@ -1468,7 +1468,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameActionSheetBackgroundColor] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];

@@ -40,11 +40,11 @@ private extension SPDefaultTableViewCell {
         let theme = VSThemeManager.shared().theme()
 
         let backgroundView = UIView()
-        backgroundView.backgroundColor = theme.color(forKey: .noteCellBackgroundSelectionColor)
+        backgroundView.backgroundColor = theme.color(forKey: .lightBlueColor)
 
         backgroundColor = theme.color(forKey: .backgroundColor)
         selectedBackgroundView = backgroundView
         detailTextLabel?.textColor = theme.color(forKey: .tableViewDetailTextLabelColor)
-        textLabel?.textColor = theme.color(forKey: .tableViewTextLabelColor)
+        textLabel?.textColor = theme.color(forKey: .textColor)
     }
 }

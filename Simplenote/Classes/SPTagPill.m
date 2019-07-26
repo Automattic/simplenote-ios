@@ -91,7 +91,7 @@
                                                                         self.frame.size.width - horizontalSpacing,
                                                                         self.frame.size.height - verticalSpacing)];
         
-        _deletionOverlayView.backgroundColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundColor];
+        _deletionOverlayView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         _deletionOverlayView.layer.cornerRadius = 4.0;
         _deletionOverlayView.clipsToBounds = YES;
         _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;

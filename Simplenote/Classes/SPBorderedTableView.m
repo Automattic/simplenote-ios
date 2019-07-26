@@ -36,7 +36,7 @@
 
 - (void)applyTheme {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor].CGColor;
+    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
 }
 
 @end

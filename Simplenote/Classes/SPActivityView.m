@@ -64,7 +64,7 @@
 
     // draw borders
     CGFloat borderThickness = 1.0 / [[UIScreen mainScreen] scale];
-    [[UIColor colorWithName:UIColorNameActionSheetDividerColor] setFill];
+    [[UIColor colorWithName:UIColorNameDividerColor] setFill];
 
     CGRect borderRect = CGRectMake(0, 0, self.frame.size.width, borderThickness);
 
@@ -198,7 +198,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         
         UIImage *toggleBackground = [[[UIImage imageNamed:@"toggle_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *toggleBackgroundHighlighted = [[[UIImage imageNamed:@"toggle_background_highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameActionViewToggleTintColor];
+        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         UIColor *toggleTitleColor = [UIColor colorWithName:UIColorNameTintColor];
 
         for (int i = 0; i < toggleTitles.count; i++) {
