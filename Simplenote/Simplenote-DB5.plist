@@ -70,12 +70,6 @@
 		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
 		<string>ffffff</string>
-		<key>cellDeletionBackgroundColor</key>
-		<string>ff3b30</string>
-		<key>cellHighlightBackgroundColor</key>
-		<string>@tintColor</string>
-		<key>cellHighlightTextColor</key>
-		<string>fcfcfc</string>
 		<key>barButtonFontColor</key>
 		<string>@tintColor</string>
 		<key>barButtonSpacing</key>
@@ -132,8 +126,6 @@
 		<integer>100</integer>
 		<key>actionButtonWidth</key>
 		<string>76</string>
-		<key>actionViewActivityIndicatorFontColor</key>
-		<string>@textColor</string>
 		<key>actionViewStatusFontColor</key>
 		<string>aaaaaa</string>
 		<key>actionViewToggleHeight</key>
@@ -202,8 +194,6 @@
 		<real>0.4</real>
 		<key>containerViewSpringAnimationInitialVelocity</key>
 		<real>6</real>
-		<key>tagsListBackgroundColor</key>
-		<string>@backgroundColor</string>
 		<key>tagListImageViewSide</key>
 		<integer>15</integer>
 		<key>tagListLeftPadding</key>
@@ -270,12 +260,6 @@
 		<string>navigation_bar_background_landscape_prompt</string>
 		<key>navigationBarShadowImage</key>
 		<string>navigation_bar_shadow</string>
-		<key>toolbarBackgroundImage</key>
-		<string>toolbar_background</string>
-		<key>toolbarBackgroundLandscapeImage</key>
-		<string>toolbar_background_landscape</string>
-		<key>toolbarShadowImage</key>
-		<string>@navigationBarShadowImage</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
@@ -313,10 +297,6 @@
 		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
 		<string>1e1e1e</string>
-		<key>cellHighlightBackgroundColor</key>
-		<string>@tintColor</string>
-		<key>cellHighlightTextColor</key>
-		<string>fcfcfc</string>
 		<key>actionSheetFontColor</key>
 		<string>@textColor</string>
 		<key>actionSheetTextFieldFontColor</key>
@@ -331,8 +311,6 @@
 		<string>@tintColor</string>
 		<key>actionSheetButtonBackgroundHighlightColor</key>
 		<string>@lightBlueColor</string>
-		<key>actionViewActivityIndicatorFontColor</key>
-		<string>@secondaryTextColor</string>
 		<key>actionViewStatusFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>actionViewToggleTintColor</key>
@@ -363,8 +341,6 @@
 		<string>f9f9f9</string>
 		<key>searchBarImageColor</key>
 		<string>@textColor</string>
-		<key>tagsListBackgroundColor</key>
-		<string>f9f9f9</string>
 		<key>tagListFontColor</key>
 		<string>@textColor</string>
 		<key>tagListFontHighlightColor</key>
@@ -409,12 +385,6 @@
 		<string>navigation_bar_background_landscape_prompt_dark</string>
 		<key>navigationBarShadowImage</key>
 		<string>navigation_bar_shadow_dark</string>
-		<key>toolbarBackgroundImage</key>
-		<string>toolbar_background_dark</string>
-		<key>toolbarBackgroundLandscapeImage</key>
-		<string>toolbar_background_landscape_dark</string>
-		<key>toolbarShadowImage</key>
-		<string>@navigationBarShadowImage</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>lockBackgroundColor</key>
