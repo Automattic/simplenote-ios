@@ -7,53 +7,36 @@ enum ThemeKey: String {
     case destructiveActionColor
     case secondaryActionColor
     case tertiaryActionColor
-    case actionSheetBackgroundColor
     case actionSheetButtonFontColor
     case actionSheetButtonBackgroundHighlightColor
-    case actionSheetDividerColor
-    case actionSheetFontColor
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
-    case actionViewToggleTintColor
     case backgroundColor
-    case barTintColor
-    case collaboratorCellPrimaryLabelFontColor
-    case collaboratorCellSecondaryLabelFontColor
-    case collaboratorTextFieldTextColor
-    case collaboratorTextFieldPlaceholderTextColor
+    case collaboratorTextColor
+    case dividerColor
     case emptyListViewFontColor
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
-    case lockBackgroundColor
+    case lightBlueColor
     case lockTextColor
+    case lockBackgroundColor
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
-    case noteCellBackgroundSelectionColor
     case noteHeadlineFontColor
     case searchBarImageColor
-    case searchBarFontColor
     case searchHighlightFontColor
     case switchTintColor
     case switchOnTintColor
     case tableViewBackgroundColor
-    case tableViewCellBackgroundHighlightColor
     case tableViewDetailTextLabelColor
-    case tableViewSeparatorColor
-    case tableViewTextLabelColor
-    case tagListFontColor
-    case tagListFontHighlightColor
-    case tagListHighlightBackgroundColor
-    case tagListSeparatorColor
     case tagViewAutoCompleteFontColor
     case tagViewFontColor
     case tagViewFontColorSelected
     case tagViewFontHighlightedColor
     case tagViewPlaceholderColor
-    case tagViewDeletionBackgroundColor
     case tagViewDeletionBackgroundBorderColor
     case textColor
     case tintColor
-    case versionPickerDateFontColor
 
     /// TODO: Nuke VSTheme *entirely* and implement a simpler way to access UI Constants
     ///
