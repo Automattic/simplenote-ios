@@ -7,6 +7,7 @@
 
 #import <Simperium/Simperium.h>
 #import "VSThemeManager.h"
+#import "VSTheme+Simplenote.h"
 
 #pragma mark - Simplenote-Y
 
