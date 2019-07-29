@@ -7,7 +7,6 @@
 //
 
 #import "SPTextView.h"
-#import "VSThemeManager.h"
 @class SPTagView;
 
 extern NSString *const CheckListRegExPattern;

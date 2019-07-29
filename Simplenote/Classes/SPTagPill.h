@@ -18,7 +18,6 @@
 
 
 - (id)initWithTagStub:(SPTagStub *)tagStub target:(id)target action:(SEL)action deletionAction:(SEL)deletionAction;
-- (VSTheme *)theme;
 
 - (void)showDeletionView;
 - (void)hideDeletionView;

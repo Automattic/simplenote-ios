@@ -7,7 +7,8 @@
 //
 
 #import "SPHorizontalPickerGradientView.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPHorizontalPickerGradientView
 
@@ -34,14 +35,18 @@
     
     CGRect borderRect = CGRectMake(xOrigin, 0, borderWidth, rect.size.height);
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:borderRect];
-    [[[[VSThemeManager sharedManager] theme] colorForKey:@"horizontalPickerBorderColor"] setFill];
+    [[UIColor colorWithName:UIColorNameHorizontalPickerBorderColor] setFill];
     [borderPath fill];
     
     
     
     if (!gradientLayer) {
-        
-        NSArray *gradientColors = [NSArray arrayWithObjects:(id)[[[[VSThemeManager sharedManager] theme] colorForKey:@"actionSheetBackgroundColor"] colorWithAlphaComponent:0.0].CGColor, (id)[[[VSThemeManager sharedManager] theme] colorForKey:@"actionSheetBackgroundColor"].CGColor, nil];
+
+        UIColor *actionSheetBackgroundColor = [UIColor colorWithName:UIColorNameActionSheetBackgroundColor];
+        NSArray *gradientColors = @[
+            (id)[actionSheetBackgroundColor colorWithAlphaComponent:0.0].CGColor,
+            (id)actionSheetBackgroundColor.CGColor
+        ];
 		
         BOOL leftToRight = gradientDirection == SPHorizontalPickerGradientViewDirectionLeft;
         gradientLayer = [CAGradientLayer layer];

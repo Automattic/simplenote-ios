@@ -7,18 +7,10 @@
 //
 
 #import "SPTableViewController.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
-@interface SPTableViewController ()
-
-@end
 
 @implementation SPTableViewController
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,9 +20,9 @@
 
 - (void)applyStyle {
     
-    self.view.backgroundColor = [self.theme colorForKey:@"tableViewBackgroundColor"];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
 }
 
 
@@ -53,15 +45,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier:@"UITableViewCell"];
         
-        VSTheme *theme = [[VSThemeManager sharedManager] theme];
-        cell.backgroundColor = [theme colorForKey:@"backgroundColor"];
+        cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         
         UIView *selectionView = [[UIView alloc] initWithFrame:cell.bounds];
-        selectionView.backgroundColor = [theme colorForKey:@"tableViewCellBackgroundHighlightColor"];
+        selectionView.backgroundColor = [UIColor colorWithName:UIColorNameTableViewCellBackgroundHighlightColor];
         cell.selectedBackgroundView = selectionView;
         
-        cell.textLabel.textColor = [theme colorForKey:@"tableViewTextLabelColor"];
-        cell.detailTextLabel.textColor = [theme colorForKey:@"tableViewDetailTextLabelColor"];
+        cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTableViewTextLabelColor];
+        cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
         
     }
     

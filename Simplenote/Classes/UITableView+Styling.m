@@ -7,16 +7,14 @@
 //
 
 #import "UITableView+Styling.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation UITableView (Styling)
 
 - (void)applyDefaultGroupedStyling {
-    
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    
-    self.backgroundColor = [theme colorForKey:@"tableViewBackgroundColor"];
-    self.separatorColor = [theme colorForKey:@"tableViewSeparatorColor"];
+    self.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
+    self.separatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
 }
 
 @end

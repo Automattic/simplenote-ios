@@ -9,6 +9,7 @@
 #import "SPEntryListViewController.h"
 #import "VSThemeManager.h"
 #import "VSTheme+Simplenote.h"
+#import "Simplenote-Swift.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
 
@@ -57,7 +58,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
                                                                    entryFieldBackground.frame.size.height)];
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
-    entryTextField.keyboardAppearance = self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+
+    entryTextField.keyboardAppearance = [[VSThemeManager sharedManager] theme].isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
     entryTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     entryTextField.delegate = self;
     [entryFieldBackground addSubview:entryTextField];
@@ -120,30 +122,34 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 }
 
 - (void)applyDefaultStyle {
-    
+
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
+    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+
     // self
-    self.view.backgroundColor = [self.theme colorForKey:@"tableViewBackgroundColor"];
+    self.view.backgroundColor = tableBackgroundColor;
     
     // entry field
-    entryFieldBackground.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    entryFieldBackground.backgroundColor = backgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    entryTextField.textColor = [self.theme colorForKey:@"collaboratorTextFieldTextColor"];
-    entryTextField.placeholdTextColor = [self.theme colorForKey:@"collaboratorTextFieldPlaceholderTextColor"];
+    entryTextField.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldTextColor];
+    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldPlaceholderTextColor];
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,
                                         entryFieldBackground.bounds.size.height - 1.0 / [[UIScreen mainScreen] scale],
                                         MAX(self.view.frame.size.width, self.view.frame.size.height),
                                         1.0 / [[UIScreen mainScreen] scale]);
-    entryFieldBorder.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"].CGColor;
+    entryFieldBorder.backgroundColor = tableSeparatorColor.CGColor;
     [entryFieldBackground.layer addSublayer:entryFieldBorder];
     
     // tableview
     primaryTableView.backgroundColor = [UIColor clearColor];
-    primaryTableView.separatorColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
-    autoCompleteTableView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
-    autoCompleteTableView.separatorColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    primaryTableView.separatorColor = tableSeparatorColor;
+    autoCompleteTableView.backgroundColor = backgroundColor;
+    autoCompleteTableView.separatorColor = tableSeparatorColor;
 }
 
 - (void)dismiss:(id)sender {

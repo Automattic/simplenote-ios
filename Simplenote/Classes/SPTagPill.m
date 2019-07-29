@@ -8,6 +8,7 @@
 
 #import "SPTagPill.h"
 #import "SPTagStub.h"
+#import "Simplenote-Swift.h"
 
 @interface SPTagPill ()
 
@@ -63,12 +64,12 @@
 
 - (UIColor *)color {
     
-    return [self.theme colorForKey:@"tagViewFontColor"];
+    return [UIColor colorWithName:UIColorNameTagViewFontColor];
 }
 
 - (UIColor *)highlightedColor {
     
-    return [self.theme colorForKey:@"tagViewFontColorSelected"];
+    return [UIColor colorWithName:UIColorNameTagViewFontColorSelected];
 }
 
 
@@ -90,10 +91,10 @@
                                                                         self.frame.size.width - horizontalSpacing,
                                                                         self.frame.size.height - verticalSpacing)];
         
-        _deletionOverlayView.backgroundColor = [self.theme colorForKey:@"tagViewDeletionBackgroundColor"];
+        _deletionOverlayView.backgroundColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundColor];
         _deletionOverlayView.layer.cornerRadius = 4.0;
         _deletionOverlayView.clipsToBounds = YES;
-        _deletionOverlayView.layer.borderColor = [self.theme colorForKey:@"tagViewDeletionBackgroundBorderColor"].CGColor;
+        _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;
         _deletionOverlayView.layer.borderWidth = 1.0 / [[UIScreen mainScreen] scale];
         
         _deletionButtonImageView = [[UIImageView alloc] initWithImage:[self.theme imageForKey:@"tagViewDeletionImage"]];

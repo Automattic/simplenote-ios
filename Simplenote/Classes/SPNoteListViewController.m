@@ -160,7 +160,7 @@
     _pinImage = nil;
 
     // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
     // Use a new cellIdentifier so cells redraw with new theme
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
@@ -177,12 +177,15 @@
                                     forState:UIControlStateNormal];
     searchBarContainer.backgroundColor = [UIColor clearColor];
 
-    [searchBar setImage:[[UIImage imageNamed:@"search_icon"] imageWithOverlayColor:[self.theme colorForKey:@"searchBarImageColor"]]
+    UIColor *searchBarImageColor = [UIColor colorWithName:UIColorNameSearchBarImageColor];
+
+    [searchBar setImage:[[UIImage imageNamed:@"search_icon"] imageWithOverlayColor:searchBarImageColor]
        forSearchBarIcon:UISearchBarIconSearch
                   state:UIControlStateNormal];
 
     // Apply font to search field by traversing subviews
     NSArray *searchBarSubviews = [searchBar subviewsRespondingToSelector:@selector(setFont:)];
+    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameSearchBarFontColor];
 
     for (UIView *subview in searchBarSubviews) {
         if ([subview isKindOfClass:[UITextField class]] == false) {
@@ -190,7 +193,7 @@
         }
         
         [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-        [(UITextField *)subview setTextColor:[self.theme colorForKey:@"searchBarFontColor"]];
+        [(UITextField *)subview setTextColor:searchBarFontColor];
         [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
     }
@@ -467,7 +470,7 @@
         [note createPreview];
     }
     
-    UIColor *previewColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
+    UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
     
@@ -475,8 +478,8 @@
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
             UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            _pinImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
+            _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
         }
         
         
@@ -492,7 +495,8 @@
     cell.previewView.alpha = 1.0;
     
     if (bSearching) {
-        [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
+        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        [cell.previewView.textStorage applyColorAttribute:tintColor
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
 

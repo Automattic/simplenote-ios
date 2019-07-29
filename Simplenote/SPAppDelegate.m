@@ -168,9 +168,9 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
-    
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
+
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
     if (selectedTag != nil) {
@@ -453,9 +453,8 @@
 
 - (void)themeDidChange
 {
-    // Update window coloring
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
 }
 
 
