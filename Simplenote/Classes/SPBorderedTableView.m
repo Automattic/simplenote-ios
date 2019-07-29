@@ -39,4 +39,10 @@
     self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self applyTheme];
+}
+
 @end
