@@ -12,7 +12,7 @@
 
 @implementation SPHorizontalPickerGradientView
 
-- (id)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction {
+- (instancetype)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction {
     
     self = [super initWithFrame:CGRectZero];
     if (self) {
@@ -41,24 +41,38 @@
     
     
     if (!gradientLayer) {
-
-        UIColor *actionSheetBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-        NSArray *gradientColors = @[
-            (id)[actionSheetBackgroundColor colorWithAlphaComponent:0.0].CGColor,
-            (id)actionSheetBackgroundColor.CGColor
-        ];
-		
         BOOL leftToRight = gradientDirection == SPHorizontalPickerGradientViewDirectionLeft;
         gradientLayer = [CAGradientLayer layer];
         [gradientLayer setLocations:@[@0.0001]];
         [gradientLayer setStartPoint:CGPointMake(leftToRight ? 1.0 : 0.0, 0.5)];
         [gradientLayer setEndPoint:CGPointMake(leftToRight ? 0.0 : 1.0, 0.5)];
-        [gradientLayer setColors:gradientColors];
+        [gradientLayer setColors:self.gradientColors];
         [[self layer] addSublayer:gradientLayer];
     }
     [gradientLayer setFrame:rect];
-    
-    
+}
+
+
+- (NSArray *)gradientColors
+{
+    UIColor *actionSheetBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    NSArray *gradientColors = @[
+        (id)[actionSheetBackgroundColor colorWithAlphaComponent:0.0].CGColor,
+        (id)actionSheetBackgroundColor.CGColor
+    ];
+
+    return gradientColors;
+}
+
+- (void)refreshStyle
+{
+    gradientLayer.colors = [self gradientColors];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self refreshStyle];
 }
 
 @end
