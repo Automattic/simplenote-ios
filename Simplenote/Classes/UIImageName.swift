@@ -5,7 +5,7 @@ import UIKit
 // MARK: - Simplenote Named Images
 //
 @objc
-enum UIImageName: Int {
+enum UIImageName: Int, CaseIterable {
     case backImage
     case pinImage
     case sharedImage
