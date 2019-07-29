@@ -12,8 +12,8 @@
 
 @implementation SPHorizontalPickerGradientView
 
-- (instancetype)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction {
-    
+- (instancetype)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction
+{    
     self = [super initWithFrame:CGRectZero];
     if (self) {
         // Initialization code
@@ -25,9 +25,8 @@
     return self;
 }
 
-
-- (void)drawRect:(CGRect)rect {
-    
+- (void)drawRect:(CGRect)rect
+{
     CGFloat borderWidth = 1.0 / [[UIScreen mainScreen] scale];
     
     // draw border based on gradient direction
@@ -37,9 +36,7 @@
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:borderRect];
     [[UIColor colorWithName:UIColorNameHorizontalPickerBorderColor] setFill];
     [borderPath fill];
-    
-    
-    
+
     if (!gradientLayer) {
         BOOL leftToRight = gradientDirection == SPHorizontalPickerGradientViewDirectionLeft;
         gradientLayer = [CAGradientLayer layer];
@@ -51,7 +48,6 @@
     }
     [gradientLayer setFrame:rect];
 }
-
 
 - (NSArray *)gradientColors
 {
