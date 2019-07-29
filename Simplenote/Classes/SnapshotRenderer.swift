@@ -38,7 +38,7 @@ class SnapshotRenderer: NSObject {
     @objc
     func render(note: Note, size: CGSize, searchQuery: String?, preview: Bool) -> UIView {
         // Setup: Skin
-        let backgroundColor = theme.color(forKey: .backgroundColor)
+        let backgroundColor = UIColor.color(name: .backgroundColor)
         accessoryImageView.backgroundColor = backgroundColor
         textView.backgroundColor = backgroundColor
         textView.interactiveTextStorage.tokens = [
@@ -52,7 +52,7 @@ class SnapshotRenderer: NSObject {
 
         // Setup: Highlighted Keywords
         if let searchQuery = searchQuery {
-            let color = theme.color(forKey: .tintColor)
+            let color = UIColor.color(name: .tintColor)
             let ranges = (textView.text as NSString).ranges(forTerms: searchQuery)
 
             textView.textStorage.applyColorAttribute(color, forRanges: ranges)
@@ -94,7 +94,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Body Color
     ///
     var bodyColor: UIColor {
-        return theme.color(forKey: .noteBodyFontPreviewColor)!
+        return UIColor.color(name: .noteBodyFontPreviewColor)!
     }
 
     /// Returns the Body Font
@@ -106,7 +106,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Headline Color
     ///
     var headlineColor: UIColor {
-        return theme.color(forKey: .noteHeadlineFontColor)!
+        return UIColor.color(name: .noteHeadlineFontColor)!
     }
 
     /// Returns the Headline Font
