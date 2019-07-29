@@ -171,6 +171,12 @@
     [self styleSearchBar];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self themeDidChange];
+}
+
 - (void)styleSearchBar {
     UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
     [searchBar setSearchFieldBackgroundImage:background
