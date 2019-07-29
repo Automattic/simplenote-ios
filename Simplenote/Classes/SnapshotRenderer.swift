@@ -37,6 +37,9 @@ class SnapshotRenderer: NSObject {
     ///
     @objc
     func render(note: Note, size: CGSize, searchQuery: String?, preview: Bool) -> UIView {
+        // Setup: iOS 13 Dark Mode
+        ensureAppearanceMatchesSystem()
+
         // Setup: Skin
         let backgroundColor = UIColor.color(name: .backgroundColor)
         accessoryImageView.backgroundColor = backgroundColor
@@ -176,6 +179,16 @@ private extension SnapshotRenderer {
         }
 
         return output.withLeading(pinImage, lineHeight: headlineFont.capHeight)
+    }
+
+    /// Sets our rendering TextView's Override User Interface
+    ///
+    func ensureAppearanceMatchesSystem() {
+        guard #available(iOS 13, *) else {
+            return
+        }
+
+        textView.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
     }
 }
 
