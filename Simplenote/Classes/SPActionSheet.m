@@ -298,11 +298,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
             
             dividerRect.origin.y -= [self.theme floatForKey:@"actionSheetBoxPadding"] / 2.0;;
             dividerRect.size.width += 2 * motionEffectDistance;
-            
-            CALayer *divider = [[CALayer alloc] init];
-            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
-            divider.frame = dividerRect;
-            [container.layer addSublayer:divider];
+
+            UIView *divider = [[UIView alloc] initWithFrame:dividerRect];
+            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
+            [container addSubview:divider];
         }
         
         i++;
