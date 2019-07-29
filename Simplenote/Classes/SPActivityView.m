@@ -399,18 +399,24 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
 }
 
-- (void)setButtonImage:(UIImage *)image atIndex:(NSInteger)index {
-    
-    SPButton *button = (SPButton *)[self buttonAtIndex:index];
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+- (void)refreshButtonImages
+{
+    UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 
-    [button setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-            forState:UIControlStateNormal];
-    [button setImage:[image imageWithOverlayColor:disabledColor]
-            forState:UIControlStateDisabled];
-    [button setImage:[image imageWithOverlayColor:backgroundColor]
-            forState:UIControlStateHighlighted];
+    for (SPActionButton *button in actionButtonArray) {
+        UIImage *disabledImage = [[button imageForState:UIControlStateDisabled] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
+        UIImage *highligtedImage = [[button imageForState:UIControlStateHighlighted] imageWithOverlayColor:actionButtonBackgroundColor];
+
+        [button setImage:disabledImage forState:UIControlStateDisabled];
+        [button setImage:highligtedImage forState:UIControlStateHighlighted];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self refreshButtonImages];
 }
 
 
