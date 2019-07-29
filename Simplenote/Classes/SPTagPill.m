@@ -96,8 +96,9 @@
         _deletionOverlayView.clipsToBounds = YES;
         _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;
         _deletionOverlayView.layer.borderWidth = 1.0 / [[UIScreen mainScreen] scale];
-        
-        _deletionButtonImageView = [[UIImageView alloc] initWithImage:[self.theme imageForKey:@"tagViewDeletionImage"]];
+
+        UIImage *image = [UIImage imageWithName:UIImageNameTagViewDeletionImage];
+        _deletionButtonImageView = [[UIImageView alloc] initWithImage:image];
         [_deletionButtonImageView sizeToFit];
         
         _deletionButtonImageView.center = [self convertPoint:self.center fromView:self.superview];

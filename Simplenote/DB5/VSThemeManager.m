@@ -105,7 +105,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
 
 
 - (void)applyAppearanceStylingForTheme:(VSTheme *)theme {
-    
+
     UIFont *barButtonFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:barButtonFont}
                                                 forState:UIControlStateNormal];
@@ -113,15 +113,18 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
     UIFont *navigationBarTitleFont = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
     UIColor *navigationBarTitleColor = [UIColor colorWithName:UIColorNameNavigationBarTitleFontColor];
     UIColor *barTintColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIImage *navbarShadowImage = [UIImage imageWithName:UIImageNameNavigationBarShadowImage];
+    UIImage *navbarBackgroundImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundImage];
+    UIImage *navbarPromptImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundPromptImage];
 
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setTitleTextAttributes:@{NSFontAttributeName: navigationBarTitleFont,
                                                            NSForegroundColorAttributeName: navigationBarTitleColor}];
     [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBarTintColor:barTintColor];
-    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setShadowImage:[[theme imageForKey:@"navigationBarShadowImage"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 0, 0, 0) resizingMode:UIImageResizingModeTile]];
-    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBackgroundImage:[[theme imageForKey:@"navigationBarBackgroundImage"]
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setShadowImage:[navbarShadowImage resizableImageWithCapInsets:UIEdgeInsetsMake(1, 0, 0, 0) resizingMode:UIImageResizingModeTile]];
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBackgroundImage:[navbarBackgroundImage
                                                       resizableImageWithCapInsets:UIEdgeInsetsMake(44, 0, 0, 0)]
                                        forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBackgroundImage:[[theme imageForKey:@"navigationBarBackgroundPromptImage"]
+    [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]] setBackgroundImage:[navbarPromptImage
                                                       resizableImageWithCapInsets:UIEdgeInsetsMake(64, 0, 0, 0)]
                                        forBarMetrics:UIBarMetricsDefaultPrompt];
 }

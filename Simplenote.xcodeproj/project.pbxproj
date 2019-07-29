@@ -170,6 +170,7 @@
 		B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */; };
 		B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */; };
 		B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */; };
+		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */; };
 		B5BDD8771BEA6C19006EB940 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B566A1DD189AA74600DC3F2D /* AdSupport.framework */; };
 		B5BE05421AB75225002417BF /* SPIntegrityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05401AB75225002417BF /* SPIntegrityHelper.m */; };
@@ -419,6 +420,7 @@
 		B5B8AE801ABA0C7B0082775D /* SPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPLoginViewController.h; path = Classes/SPLoginViewController.h; sourceTree = "<group>"; };
 		B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPLoginViewController.m; path = Classes/SPLoginViewController.m; sourceTree = "<group>"; };
 		B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
+		B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageName.swift; path = Classes/UIImageName.swift; sourceTree = "<group>"; };
 		B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5BE053F1AB75225002417BF /* SPIntegrityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPIntegrityHelper.h; path = Classes/SPIntegrityHelper.h; sourceTree = "<group>"; };
 		B5BE05401AB75225002417BF /* SPIntegrityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPIntegrityHelper.m; path = Classes/SPIntegrityHelper.m; sourceTree = "<group>"; };
@@ -917,7 +919,6 @@
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
-				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
@@ -1005,6 +1006,8 @@
 			children = (
 				B5C57A4022E78F4D009166EA /* UIColorName.swift */,
 				B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */,
+				B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */,
+				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
 				B55E428D22A1C0B90018C0CE /* VSTheme+Keys.swift */,
 			);
 			name = Themes;
@@ -1684,6 +1687,7 @@
 				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
 				B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */,
+				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
 				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,

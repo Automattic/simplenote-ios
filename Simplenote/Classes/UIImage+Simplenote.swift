@@ -6,17 +6,24 @@ import UIKit
 //
 extension UIImage {
 
-    /// Returns the Pinned Icon, to be used by the Notes List
+    /// Returns the UIColor instance matching a given UIColorName. If any
     ///
     @objc
-    static var pinImage: UIImage {
-        return UIImage(named: "icon_pin")!
-    }
+    static func image(name: UIImageName) -> UIImage? {
+        if #available(iOS 13.0, *) {
+            return UIImage(named: name.legacyThemeKey.rawValue)
+        }
 
-    /// Returns the Shared Icon, to be used by the Notes List
-    ///
-    @objc
-    static var sharedImage: UIImage {
-        return UIImage(named: "icon_shared")!
+        return theme.image(forKey: name.legacyThemeKey.rawValue)
+    }
+}
+
+
+// MARK: - Private
+//
+private extension UIImage {
+
+    static var theme: VSTheme {
+        return VSThemeManager.shared().theme()
     }
 }

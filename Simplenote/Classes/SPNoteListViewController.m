@@ -172,7 +172,7 @@
 }
 
 - (void)styleSearchBar {
-    UIImage *background = [[self.theme imageForKey:@"searchBarBackgroundImage"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
+    UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
     [searchBar setSearchFieldBackgroundImage:background
                                     forState:UIControlStateNormal];
     searchBarContainer.backgroundColor = [UIColor clearColor];
@@ -477,7 +477,7 @@
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage *templateImage = [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
             _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
         }
@@ -500,7 +500,7 @@
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
 
-    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
     cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;

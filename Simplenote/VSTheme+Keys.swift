@@ -4,6 +4,9 @@ import Foundation
 // MARK: - ThemeKey represents all of the available Keys for the current theme.
 //
 enum ThemeKey: String {
+
+    /// Legacy Color Names
+    ///
     case destructiveActionColor
     case secondaryActionColor
     case tertiaryActionColor
@@ -38,25 +41,19 @@ enum ThemeKey: String {
     case textColor
     case tintColor
 
+    /// Legacy Float Names
     /// TODO: Nuke VSTheme *entirely* and implement a simpler way to access UI Constants
     ///
     case noteBodyLineHeightPercentage
-}
 
-
-// MARK: - Public Methods
-//
-extension VSTheme {
-
-    /// Returns the color associated to a given Key
+    /// Legacy Image Names
     ///
-    func color(forKey key: ThemeKey) -> UIColor? {
-        return color(forKey: key.rawValue)
-    }
-
-    /// Returns the Float Value associated to a given ThemeKey
-    ///
-    func float(forKey key: ThemeKey) -> CGFloat {
-        return float(forKey: key.rawValue)
-    }
+    case backImage = "back_chevron"
+    case pinImage = "icon_pin"
+    case sharedImage = "icon_shared"
+    case navigationBarShadowImage
+    case navigationBarBackgroundImage
+    case navigationBarBackgroundPromptImage
+    case searchBarBackgroundImage
+    case tagViewDeletionImage
 }

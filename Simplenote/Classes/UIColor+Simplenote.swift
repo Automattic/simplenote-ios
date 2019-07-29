@@ -14,7 +14,7 @@ extension UIColor {
             return UIColor(named: name.legacyThemeKey.rawValue)
         }
 
-        return theme.color(forKey: name.legacyThemeKey)
+        return theme.color(forKey: name.legacyThemeKey.rawValue)
     }
 }
 

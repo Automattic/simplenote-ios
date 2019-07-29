@@ -59,8 +59,8 @@ class SnapshotRenderer: NSObject {
         }
 
         // Setup: AccessoryImage
-        let accessoryImage = note.published && preview ? UIImage.sharedImage.withRenderingMode(.alwaysTemplate) : nil
-        let accessorySize = accessoryImage?.size ?? CGSize.zero
+        let accessoryImage = note.published && preview ? UIImage.image(name: .sharedImage)?.withRenderingMode(.alwaysTemplate) : nil
+        let accessorySize = accessoryImage?.size ?? .zero
 
         accessoryImageView.image = accessoryImage
         accessoryImageView.tintColor = bodyColor
@@ -119,7 +119,7 @@ private extension SnapshotRenderer {
     ///
     var paragraphStyle: NSParagraphStyle {
         let style =  NSMutableParagraphStyle()
-        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: .noteBodyLineHeightPercentage)
+        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: ThemeKey.noteBodyLineHeightPercentage.rawValue)
         return style
     }
 
@@ -171,7 +171,7 @@ private extension SnapshotRenderer {
         output.addChecklistAttachments(for: bodyColor)
 
         // Attachments: Pinned!
-        guard note.pinned, preview, let pinImage = UIImage.pinImage.withOverlayColor(attachmentsTintColor) else {
+        guard note.pinned, preview, let pinImage = UIImage.image(name: .pinImage)?.withOverlayColor(attachmentsTintColor) else {
             return output
         }
 
