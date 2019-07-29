@@ -41,7 +41,6 @@
 #import "Simplenote-Swift.h"
 
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>

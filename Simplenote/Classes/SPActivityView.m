@@ -8,7 +8,6 @@
 
 #import "SPActivityView.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "SPActionButton.h"
 #import "Note.h"
 #import "SPButton.h"

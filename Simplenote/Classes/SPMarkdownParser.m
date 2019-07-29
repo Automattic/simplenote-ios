@@ -8,7 +8,6 @@
 
 #import "SPMarkdownParser.h"
 #import "html.h"
-#import "VSTheme+Simplenote.h"
 #import "VSThemeManager.h"
 
 @implementation SPMarkdownParser

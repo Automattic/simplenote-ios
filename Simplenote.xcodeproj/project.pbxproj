@@ -160,7 +160,6 @@
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
-		B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */; };
 		B59484BF1D6CE2580006D427 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
@@ -405,8 +404,6 @@
 		B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMigratorTests.swift; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
-		B59314DC1A486C0100B651ED /* VSTheme+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Simplenote.h"; path = "Classes/VSTheme+Simplenote.h"; sourceTree = "<group>"; };
-		B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Simplenote.m"; path = "Classes/VSTheme+Simplenote.m"; sourceTree = "<group>"; };
 		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
@@ -780,8 +777,6 @@
 				E2FCA5E21787749C00FC229D /* UIView+ImageRepresentation.m */,
 				E2C63C8F17B0048A00CB7772 /* UIView+Subviews.h */,
 				E2C63C9017B0048A00CB7772 /* UIView+Subviews.m */,
-				B59314DC1A486C0100B651ED /* VSTheme+Simplenote.h */,
-				B59314DD1A486C0100B651ED /* VSTheme+Simplenote.m */,
 				B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */,
 				B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */,
 				B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */,
@@ -1793,7 +1788,6 @@
 				46A3C99A17DFA81A002865AE /* DTTwoPageViewController.m in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
-				B59314DF1A486C0100B651ED /* VSTheme+Simplenote.m in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,

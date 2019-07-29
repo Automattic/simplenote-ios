@@ -8,7 +8,7 @@
 
 #import "SPNavigationController.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
+
 
 @interface SPNavigationController ()
 

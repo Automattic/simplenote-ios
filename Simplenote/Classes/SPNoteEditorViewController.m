@@ -9,7 +9,6 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "UIBarButtonItem+Images.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"

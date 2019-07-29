@@ -11,7 +11,6 @@
 #import "DTPinErrorView.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "Simplenote-Swift.h"
 
 #define MARGIN_SIDES 23.0

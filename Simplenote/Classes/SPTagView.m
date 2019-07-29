@@ -8,7 +8,6 @@
 
 #import "SPTagView.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "SPTagStub.h"
 #import <Simperium/Simperium.h>
 #import "SPAppDelegate.h"
