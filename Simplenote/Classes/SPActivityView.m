@@ -235,7 +235,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         statusLabel.backgroundColor = [UIColor clearColor];
         statusLabel.text = status;
 
-        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         statusActivityIndicator.alpha = 0.0;
         [statusActivityIndicator hidesWhenStopped];
         

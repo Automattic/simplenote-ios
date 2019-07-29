@@ -7,7 +7,7 @@
 //
 
 #import "SPNavigationController.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
 
 @interface SPNavigationController ()
@@ -17,9 +17,7 @@
 @implementation SPNavigationController
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    
-    BOOL dark = [[[VSThemeManager sharedManager] theme] isDark];
-    return dark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+    return SPUserInterface.isDark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
 - (BOOL)shouldAutorotate {

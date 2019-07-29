@@ -61,7 +61,7 @@
         hiddenTextField.alpha = 0;
         hiddenTextField.keyboardType = UIKeyboardTypeNumberPad;
         hiddenTextField.delegate = self;
-        hiddenTextField.keyboardAppearance = [[[VSThemeManager sharedManager] theme] isDark] ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+        hiddenTextField.keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
         [baseViewController.view addSubview:hiddenTextField];
         
         // message on page 1

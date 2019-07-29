@@ -9,6 +9,8 @@
 #import "SPMarkdownParser.h"
 #import "html.h"
 #import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPMarkdownParser
 
@@ -48,23 +50,20 @@
             "<link href=\"https://fonts.googleapis.com/css?family=Noto+Serif\" rel=\"stylesheet\">"
             "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
-    
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    NSString *path = [self cssPathForTheme:theme];
-    
-    NSString *css = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:path withExtension:nil]
+
+    NSString *css = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:self.cssPath withExtension:nil]
                                              encoding:NSUTF8StringEncoding error:nil];
     
     return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
 }
 
-+ (NSString *)cssPathForTheme:(VSTheme *)theme
++ (NSString *)cssPath
 {
-    if (theme.isDark) {
+    if (SPUserInterface.isDark) {
         return @"markdown-dark.css";
-    } else {
-        return @"markdown-default.css";
     }
+
+    return @"markdown-default.css";
 }
 
 + (NSString *)htmlFooter

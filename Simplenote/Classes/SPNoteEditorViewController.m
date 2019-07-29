@@ -162,7 +162,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
-    _noteEditorTextView.keyboardAppearance = (self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
 }
 

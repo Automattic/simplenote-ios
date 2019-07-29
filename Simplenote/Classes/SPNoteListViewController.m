@@ -199,7 +199,7 @@
         
         [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         [(UITextField *)subview setTextColor:searchBarFontColor];
-        [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
+        [(UITextField *)subview setKeyboardAppearance:(SPUserInterface.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
     }
 }
@@ -1063,7 +1063,7 @@
     if (waiting && self.navigationItem.titleView != activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
         if (!activityIndicator)
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         
         [activityIndicator startAnimating];
         bResetTitleView = NO;
