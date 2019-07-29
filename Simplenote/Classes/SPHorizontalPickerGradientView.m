@@ -68,7 +68,14 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self refreshStyle];
+
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self refreshStyle];
+    }
 }
 
 @end

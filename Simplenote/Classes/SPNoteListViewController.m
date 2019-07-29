@@ -173,7 +173,14 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self themeDidChange];
+
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self themeDidChange];
+    }
 }
 
 - (void)styleSearchBar {
