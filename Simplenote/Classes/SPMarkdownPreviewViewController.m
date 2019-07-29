@@ -121,4 +121,19 @@
     decisionHandler(WKNavigationActionPolicyCancel);
 }
 
+#pragma mark - Traits
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self displayMarkdown];
+    }
+}
+
 @end
