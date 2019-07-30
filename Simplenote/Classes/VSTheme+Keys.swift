@@ -51,9 +51,9 @@ enum ThemeKey: String {
     case backImage = "back_chevron"
     case pinImage = "icon_pin"
     case sharedImage = "icon_shared"
-    case navigationBarShadowImage
-    case navigationBarBackgroundImage
-    case navigationBarBackgroundPromptImage
-    case searchBarBackgroundImage
-    case tagViewDeletionImage
+    case navigationBarShadowImage = "navigation_bar_shadow"
+    case navigationBarBackgroundImage = "navigation_bar_background"
+    case navigationBarBackgroundPromptImage = "navigation_bar_background_prompt"
+    case searchBarBackgroundImage = "searchbar_background"
+    case tagViewDeletionImage = "button_delete_small"
 }
