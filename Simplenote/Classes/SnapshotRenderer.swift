@@ -122,7 +122,7 @@ private extension SnapshotRenderer {
     ///
     var paragraphStyle: NSParagraphStyle {
         let style =  NSMutableParagraphStyle()
-        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: ThemeKey.noteBodyLineHeightPercentage.rawValue)
+        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: "noteBodyLineHeightPercentage")
         return style
     }
 

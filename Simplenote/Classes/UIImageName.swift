@@ -23,7 +23,7 @@ extension UIImageName {
 
     /// Returns the matching Legacy VSTheme Key
     ///
-    var legacyThemeKey: ThemeKey {
+    var legacyImageKey: ThemeImageKey {
         switch self {
         case .backImage:
             return .backImage

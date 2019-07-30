@@ -10,11 +10,14 @@ extension UIImage {
     ///
     @objc
     static func image(name: UIImageName) -> UIImage? {
+        // Note:
+        // We must differentiate between *Filename* and *rawValue* since, internally, the legacy VSTheme tooling maps
+        // the "rawValue" into the actual filename, based on the current theme.
         if #available(iOS 13.0, *) {
-            return UIImage(named: name.legacyThemeKey.rawValue)
+            return UIImage(named: name.legacyImageKey.filename)
         }
 
-        return theme.image(forKey: name.legacyThemeKey.rawValue)
+        return theme.image(forKey: name.legacyImageKey.rawValue)
     }
 }
 

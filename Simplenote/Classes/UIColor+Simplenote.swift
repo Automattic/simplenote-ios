@@ -11,10 +11,10 @@ extension UIColor {
     @objc
     static func color(name: UIColorName) -> UIColor? {
         if #available(iOS 13.0, *) {
-            return UIColor(named: name.legacyThemeKey.rawValue)
+            return UIColor(named: name.legacyColorKey.rawValue)
         }
 
-        return theme.color(forKey: name.legacyThemeKey.rawValue)
+        return theme.color(forKey: name.legacyColorKey.rawValue)
     }
 }
 

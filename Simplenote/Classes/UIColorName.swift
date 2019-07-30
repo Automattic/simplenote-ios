@@ -48,7 +48,7 @@ extension UIColorName {
 
     /// Returns the matching Legacy VSTheme Key
     ///
-    var legacyThemeKey: ThemeKey {
+    var legacyColorKey: ThemeColorKey {
         switch self {
         case .destructiveActionColor:
             return .destructiveActionColor

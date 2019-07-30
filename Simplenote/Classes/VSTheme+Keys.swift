@@ -1,12 +1,9 @@
 import Foundation
 
 
-// MARK: - ThemeKey represents all of the available Keys for the current theme.
+// MARK: - ThemeColorKey represents all of the available Color Keys
 //
-enum ThemeKey: String {
-
-    /// Legacy Color Names
-    ///
+enum ThemeColorKey: String {
     case destructiveActionColor
     case secondaryActionColor
     case tertiaryActionColor
@@ -40,20 +37,43 @@ enum ThemeKey: String {
     case tagViewDeletionBackgroundBorderColor
     case textColor
     case tintColor
+}
 
-    /// Legacy Float Names
-    /// TODO: Nuke VSTheme *entirely* and implement a simpler way to access UI Constants
-    ///
-    case noteBodyLineHeightPercentage
 
-    /// Legacy Image Names
-    ///
-    case backImage = "back_chevron"
-    case pinImage = "icon_pin"
-    case sharedImage = "icon_shared"
-    case navigationBarShadowImage = "navigation_bar_shadow"
-    case navigationBarBackgroundImage = "navigation_bar_background"
-    case navigationBarBackgroundPromptImage = "navigation_bar_background_prompt"
-    case searchBarBackgroundImage = "searchbar_background"
-    case tagViewDeletionImage = "button_delete_small"
+// MARK: - ThemeImageKey represents all of the available Image Keys
+//
+enum ThemeImageKey: String {
+    case backImage
+    case pinImage
+    case sharedImage
+    case navigationBarShadowImage
+    case navigationBarBackgroundImage
+    case navigationBarBackgroundPromptImage
+    case searchBarBackgroundImage
+    case tagViewDeletionImage
+}
+
+
+extension ThemeImageKey {
+
+    var filename: String {
+        switch self {
+        case .backImage:
+            return "back_chevron"
+        case .pinImage:
+            return "icon_pin"
+        case .sharedImage:
+            return "icon_shared"
+        case .navigationBarShadowImage:
+            return "navigation_bar_shadow"
+        case .navigationBarBackgroundImage:
+            return "navigation_bar_background"
+        case .navigationBarBackgroundPromptImage:
+            return "navigation_bar_background_prompt"
+        case .searchBarBackgroundImage:
+            return "searchbar_background"
+        case .tagViewDeletionImage:
+            return "button_delete_small"
+        }
+    }
 }
