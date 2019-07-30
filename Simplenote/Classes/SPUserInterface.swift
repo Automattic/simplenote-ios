@@ -11,7 +11,7 @@ class SPUserInterface: NSObject {
     ///
     @objc
     static var isDark: Bool {
-#if XCODE11
+#if IS_XCODE_11
         if #available(iOS 13.0, *) {
             return UITraitCollection.current.userInterfaceStyle == .dark
         }

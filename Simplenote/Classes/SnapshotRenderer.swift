@@ -188,7 +188,7 @@ private extension SnapshotRenderer {
             return
         }
 
-#if XCODE11
+#if IS_XCODE_11
         textView.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
 #endif
     }
