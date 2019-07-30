@@ -127,6 +127,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
+#if XCODE11
     if (@available(iOS 13.0, *)) {
         if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
             return;
@@ -134,6 +135,7 @@
 
         [self displayMarkdown];
     }
+#endif
 }
 
 @end

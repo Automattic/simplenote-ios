@@ -11,10 +11,12 @@ class SPUserInterface: NSObject {
     ///
     @objc
     static var isDark: Bool {
-        guard #available(iOS 13.0, *) else {
-            return VSThemeManager.shared().theme().bool(forKey: kSimplenoteDarkThemeName)
+#if XCODE11
+        if #available(iOS 13.0, *) {
+            return UITraitCollection.current.userInterfaceStyle == .dark
         }
+#endif
 
-        return UITraitCollection.current.userInterfaceStyle == .dark
+        return VSThemeManager.shared().theme().bool(forKey: kSimplenoteDarkThemeName)
     }
 }
