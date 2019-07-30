@@ -10,8 +10,8 @@ class UIImageSimplenoteTests: XCTestCase {
     /// Verify every single UIColorName in existance yields a valid UIColor instancce
     ///
     func testEverySingleUIImageNameEffectivelyYieldsSomeUIImageInstance() {
-        for colorName in UIImageName.allCases {
-            XCTAssertNotNil(UIImage.image(name: colorName))
+        for imageName in UIImageName.allCases {
+            XCTAssertNotNil(UIImage.image(name: imageName))
         }
     }
 }
