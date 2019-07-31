@@ -1,3 +1,6 @@
+5.0
+-----
+ 
 4.9.0
 =====
 -   Simplenote now works with Siri shortcuts allowing you to open the app, open existing notes, and create new notes directly from Siri
