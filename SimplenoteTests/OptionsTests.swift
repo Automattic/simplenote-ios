@@ -26,18 +26,18 @@ class OptionsTests: XCTestCase {
         XCTAssert(options.listSortMode == .alphabeticallyAscending)
     }
 
-    func testEmptyLegacyThemeYieldsSystemTheme() {
+    func testLegacyUnspecifiedThemeIsProperlyMigrated() {
         let options = Options(defaults: defaults)
         XCTAssert(options.theme == .system)
     }
 
-    func testLegacyDarkModeIsProperlyMigrated() {
+    func testLegacyDarkThemeIsProperlyMigrated() {
         defaults.set(true, forKey: .themeLegacy)
         let options = Options(defaults: defaults)
         XCTAssert(options.theme == .dark)
     }
 
-    func testLegacyLightModeIsProperlyMigrated() {
+    func testLegacyLightThemeIsProperlyMigrated() {
         defaults.set(false, forKey: .themeLegacy)
         let options = Options(defaults: defaults)
         XCTAssert(options.theme == .light)
