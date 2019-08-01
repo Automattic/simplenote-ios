@@ -43,4 +43,12 @@ extension Theme {
     static var legacyThemes: [Theme] {
         return [.dark, .light]
     }
+
+    static var defaultThemeForCurrentOS: Theme {
+        guard #available(iOS 13, *) else {
+            return .light
+        }
+
+        return .system
+    }
 }

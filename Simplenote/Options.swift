@@ -14,6 +14,8 @@ class Options: NSObject {
     ///
     private let defaults: UserDefaults
 
+
+
     /// Designated Initializer
     ///
     /// - Note: Should be *private*, but for unit testing purposes, we're opening this up.
@@ -51,8 +53,12 @@ extension Options {
     @objc
     var theme: Theme {
         get {
+            guard defaults.containsObject(forKey: .theme) else {
+                return Theme.defaultThemeForCurrentOS
+            }
+
             let payload = defaults.integer(forKey: .theme)
-            return Theme(rawValue: payload) ?? .system
+            return Theme(rawValue: payload) ?? Theme.defaultThemeForCurrentOS
         }
         set {
             defaults.set(newValue.rawValue, forKey: .theme)
@@ -99,18 +105,11 @@ private extension Options {
     }
 
     func migrateLegacyTheme() {
-        guard defaults.containsObject(forKey: .theme) == false else {
+        guard defaults.containsObject(forKey: .theme) == false, defaults.containsObject(forKey: .themeLegacy) else {
             return
         }
 
-        let newTheme: Theme
-
-        if defaults.containsObject(forKey: .themeLegacy) == false {
-            newTheme = .system
-        } else {
-            newTheme = defaults.bool(forKey: .themeLegacy) ? .dark : .light
-        }
-
+        let newTheme: Theme = defaults.bool(forKey: .themeLegacy) ? .dark : .light
         defaults.set(newTheme.rawValue, forKey: .theme)
     }
 }
