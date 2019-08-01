@@ -56,6 +56,7 @@ extension Options {
         }
         set {
             defaults.set(newValue.rawValue, forKey: .theme)
+            NotificationCenter.default.post(name: .SPSimplenoteThemeChanged, object: nil)
         }
     }
 }
