@@ -72,17 +72,27 @@ private extension SPUserInterface {
     
     @available (iOS 13, *)
     func refreshUserInterfaceStyleIOS13() {
-        let window = SPAppDelegate.shared().window
-
 #if IS_XCODE_11
-        switch Options.shared.theme {
-        case .light:
-            window.overrideUserInterfaceStyle = .light
-        case .dark:
-            window.overrideUserInterfaceStyle = .dark
-        case .system:
-            window.overrideUserInterfaceStyle = .unspecified
-        }
+        let window = SPAppDelegate.shared().window
+        window.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
 #endif
+    }
+}
+
+
+// MARK: - Private Theme Methods
+//
+private extension Theme {
+
+    @available (iOS 13, *)
+    var userInterfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        case .system:
+            return .unspecified
+        }
     }
 }
