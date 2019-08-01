@@ -28,7 +28,6 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @interface SPOptionsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
-@property (nonatomic, strong) UISwitch      *themeListSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
 @property (nonatomic, assign) BOOL          biometryIsAvailable;
 @property (nonatomic, copy) NSString        *biometryTitle;
@@ -143,11 +142,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.condensedNoteListSwitch addTarget:self
                                      action:@selector(condensedSwitchDidChangeValue:)
                            forControlEvents:UIControlEventValueChanged];
-
-    self.themeListSwitch = [UISwitch new];
-    [self.themeListSwitch addTarget:self
-                             action:@selector(themeSwitchDidChangeValue:)
-                   forControlEvents:UIControlEventValueChanged];
 
     self.biometrySwitch = [UISwitch new];
     [self.biometrySwitch addTarget:self
@@ -370,12 +364,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsAppearance: {
             switch (indexPath.row) {
                 case SPOptionsPreferencesRowTheme: {
-                    cell.textLabel.text = NSLocalizedString(@"Dark Theme", @"Option to enable the dark app theme.");
-                    
-                    [self.themeListSwitch setOn:[self themePref]];
-                    
-                    cell.accessoryView = self.themeListSwitch;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.textLabel.text = NSLocalizedString(@"Theme", @"Option to enable the dark app theme.");
+                    cell.detailTextLabel.text = [[Options shared] themeDescription];
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.tag = kTagTheme;
                     break;
                 }
@@ -510,6 +502,22 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     controller.selectedMode = [[Options shared] listSortMode];
                     controller.onChange = ^(SortMode newMode) {
                         [[Options shared] setListSortMode:newMode];
+                    };
+
+                    [self.navigationController pushViewController:controller animated:true];
+                    break;
+                }
+            }
+            break;
+        }
+
+        case SPOptionsViewSectionsAppearance: {
+            switch (cell.tag) {
+                case kTagTheme: {
+                    SPThemeViewController *controller = [SPThemeViewController new];
+                    controller.selectedTheme = [[Options shared] theme];
+                    controller.onChange = ^(Theme newTheme) {
+                        [[Options shared] setTheme:newTheme];
                     };
 
                     [self.navigationController pushViewController:controller animated:true];
@@ -725,13 +733,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                         object:notificationObject];
 }
 
-- (void)themeSwitchDidChangeValue:(UISwitch *)sender
-{
-    BOOL isOn = [(UISwitch *)sender isOn];
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:SPThemePref];
-    [[VSThemeManager sharedManager] swapTheme:(isOn) ? @"dark" : @"default"];
-}
-
 - (void)touchIdSwitchDidChangeValue:(UISwitch *)sender
 {
     [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:sender.on];
@@ -755,7 +756,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)refreshThemeStyles
 {
     // Reload Switch Styles
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch,  _themeListSwitch, _biometrySwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [UIColor colorWithName:UIColorNameSwitchOnTintColor];
@@ -798,11 +799,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (BOOL)condesedNoteListPref
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPCondensedNoteListPref];
-}
-
-- (BOOL)themePref
-{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SPThemePref];
 }
 
 
