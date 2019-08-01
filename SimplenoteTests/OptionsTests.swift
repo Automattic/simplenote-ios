@@ -7,33 +7,40 @@ import XCTest
 //
 class OptionsTests: XCTestCase {
 
+    private let suiteName = OptionsTests.classNameWithoutNamespaces.debugDescription
+    private lazy var defaults = UserDefaults(suiteName: suiteName)!
+
     override func setUp() {
         super.setUp()
-        resetUserDefaults()
+        defaults.reset()
     }
 
     func testEmptyLegacySortSettingsYieldModifiedNewest() {
-        let options = Options()
+        let options = Options(defaults: defaults)
         XCTAssert(options.listSortMode == .modifiedNewest)
     }
 
     func testLegacyAlphabeticalSortIsProperlyMigrated() {
-        UserDefaults.standard.set(true, forKey: .listSortModeLegacy)
-        let options = Options()
+        defaults.set(true, forKey: .listSortModeLegacy)
+        let options = Options(defaults: defaults)
         XCTAssert(options.listSortMode == .alphabeticallyAscending)
     }
-}
 
+    func testEmptyLegacyThemeYieldsSystemTheme() {
+        let options = Options(defaults: defaults)
+        XCTAssert(options.theme == .system)
+    }
 
-// MARK: - Private Methods
-//
-private extension OptionsTests {
+    func testLegacyDarkModeIsProperlyMigrated() {
+        defaults.set(true, forKey: .themeLegacy)
+        let options = Options(defaults: defaults)
+        XCTAssert(options.theme == .dark)
+    }
 
-    func resetUserDefaults() {
-        guard let identifier = Bundle.main.bundleIdentifier else {
-            return
-        }
-
-        UserDefaults.standard.removePersistentDomain(forName: identifier)
+    func testLegacyLightModeIsProperlyMigrated() {
+        defaults.set(false, forKey: .themeLegacy)
+        let options = Options(defaults: defaults)
+        XCTAssert(options.theme == .light)
     }
 }
+
