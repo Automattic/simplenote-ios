@@ -434,6 +434,8 @@
 
 - (void)loadSelectedTheme
 {
+    // TODO: Eventually nuke VSThemeManager. Please
+    [[VSThemeManager sharedManager] applyAppearanceStyling];
     [[SPUserInterface shared] refreshUserInterfaceStyle];
 }
 

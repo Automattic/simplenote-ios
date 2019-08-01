@@ -93,7 +93,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
                                                   forKey:VSThemeManagerThemePrefKey];
         
         _theme = theme;
-        [self applyAppearanceStylingForTheme:_theme];
+        [self applyAppearanceStyling];
         [[NSNotificationCenter defaultCenter] postNotificationName:VSThemeManagerThemeDidChangeNotification
                                                             object:nil];
         
@@ -104,7 +104,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
 }
 
 
-- (void)applyAppearanceStylingForTheme:(VSTheme *)theme {
+- (void)applyAppearanceStyling {
 
     /// Style: BarButtonItem
     ///
