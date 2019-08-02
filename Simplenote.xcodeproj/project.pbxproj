@@ -166,6 +166,10 @@
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59484BF1D6CE2580006D427 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
+		B5AA4B5222F46A0F0072BF5D /* UIColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A4022E78F4D009166EA /* UIColorName.swift */; };
+		B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */; };
+		B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
+		B5AA4B5B22F46B820072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */; };
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
@@ -415,6 +419,7 @@
 		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		B5AA4B5922F46B300072BF5D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Simplenote/Colors.xcassets; sourceTree = SOURCE_ROOT; };
 		B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
@@ -1353,6 +1358,7 @@
 			isa = PBXGroup;
 			children = (
 				1748382D1BC1CAAB00E834AF /* CSS */,
+				B5AA4B5922F46B300072BF5D /* Colors.xcassets */,
 				E29ADD4D17848E8500E55842 /* Images.xcassets */,
 				B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */,
 				B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */,
@@ -1520,6 +1526,7 @@
 			files = (
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
+				B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
@@ -1545,6 +1552,7 @@
 				74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */,
 				B59484BF1D6CE2580006D427 /* config.plist in Resources */,
 				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
+				B5AA4B5B22F46B820072BF5D /* Colors.xcassets in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
 			);
@@ -1875,6 +1883,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */,
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
 				74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */,
 				BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */,
@@ -1886,6 +1895,7 @@
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
 				74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */,
+				B5AA4B5222F46A0F0072BF5D /* UIColorName.swift in Sources */,
 				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
 				74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
