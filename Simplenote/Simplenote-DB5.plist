@@ -216,6 +216,18 @@
 		<string>button_visibility_on</string>
 		<key>visibilityOffImage</key>
 		<string>button_visibility_off</string>
+		<key>simplenoteAlmostBlack</key>
+		<string>12171a</string>
+		<key>simplenoteLightNavy</key>
+		<string>135d95</string>
+		<key>simplenoteLightPink</key>
+		<string>e3e0e2</string>
+		<key>simplenoteMidBlue</key>
+		<string>2170b0</string>
+		<key>simplenotePalePurple</key>
+		<string>b6b2b8</string>
+		<key>simplenoteSlateGrey</key>
+		<string>686b75</string>
 	</dict>
 	<key>Dark</key>
 	<dict>
