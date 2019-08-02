@@ -24,13 +24,13 @@
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         primaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        primaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorCellPrimaryLabelFontColor];
+        primaryLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
         [self.contentView addSubview:primaryLabel];
         
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         secondaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secondaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorCellSecondaryLabelFontColor];
+        secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
         [self.contentView addSubview:secondaryLabel];
         
         UIImage *checkedImage = [[UIImage imageNamed:@"icon_checkmark_checked"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

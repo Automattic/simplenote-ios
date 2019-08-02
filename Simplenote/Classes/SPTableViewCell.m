@@ -112,7 +112,7 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
 
     // set selection view
     UIView *selectionView = [[UIView alloc] initWithFrame:self.bounds];
-    selectionView.backgroundColor = [UIColor colorWithName:UIColorNameNoteCellBackgroundSelectionColor];
+    selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
     self.selectedBackgroundView = selectionView;
 
     _previewView.backgroundColor = backgroundColor;

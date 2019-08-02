@@ -8,7 +8,6 @@
 
 #import "SPActivityView.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "SPActionButton.h"
 #import "Note.h"
 #import "SPButton.h"
@@ -64,7 +63,7 @@
 
     // draw borders
     CGFloat borderThickness = 1.0 / [[UIScreen mainScreen] scale];
-    [[UIColor colorWithName:UIColorNameActionSheetDividerColor] setFill];
+    [[UIColor colorWithName:UIColorNameDividerColor] setFill];
 
     CGRect borderRect = CGRectMake(0, 0, self.frame.size.width, borderThickness);
 
@@ -198,7 +197,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         
         UIImage *toggleBackground = [[[UIImage imageNamed:@"toggle_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *toggleBackgroundHighlighted = [[[UIImage imageNamed:@"toggle_background_highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameActionViewToggleTintColor];
+        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         UIColor *toggleTitleColor = [UIColor colorWithName:UIColorNameTintColor];
 
         for (int i = 0; i < toggleTitles.count; i++) {
@@ -236,7 +235,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         statusLabel.backgroundColor = [UIColor clearColor];
         statusLabel.text = status;
 
-        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         statusActivityIndicator.alpha = 0.0;
         [statusActivityIndicator hidesWhenStopped];
         
@@ -399,18 +398,33 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
 }
 
-- (void)setButtonImage:(UIImage *)image atIndex:(NSInteger)index {
-    
-    SPButton *button = (SPButton *)[self buttonAtIndex:index];
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+- (void)refreshButtonImages
+{
+    UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 
-    [button setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-            forState:UIControlStateNormal];
-    [button setImage:[image imageWithOverlayColor:disabledColor]
-            forState:UIControlStateDisabled];
-    [button setImage:[image imageWithOverlayColor:backgroundColor]
-            forState:UIControlStateHighlighted];
+    for (SPActionButton *button in actionButtonArray) {
+        UIImage *disabledImage = [[button imageForState:UIControlStateDisabled] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
+        UIImage *highligtedImage = [[button imageForState:UIControlStateHighlighted] imageWithOverlayColor:actionButtonBackgroundColor];
+
+        [button setImage:disabledImage forState:UIControlStateDisabled];
+        [button setImage:highligtedImage forState:UIControlStateHighlighted];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self refreshButtonImages];
+    }
+#endif
 }
 
 

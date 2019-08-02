@@ -132,7 +132,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         textButton.backgroundHighlightColor = [UIColor colorWithName:UIColorNameActionSheetButtonBackgroundHighlightColor];
         textButton.titleLabel.font = font;
         textButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        textButton.titleLabel.textColor = [UIColor colorWithName:UIColorNameActionSheetFontColor];
+        textButton.titleLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
         [textButton setTitle:string forState:UIControlStateNormal];
         
         [textButton setTitleColor:[UIColor colorWithName:UIColorNameActionSheetButtonFontColor]
@@ -195,7 +195,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     if (message) {
         NSDictionary *titleAttributes = @{
             NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
-            NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameActionSheetFontColor]
+            NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
         };
         NSAttributedString *titleAttributedString = [[NSAttributedString alloc] initWithString:message
                                                                                     attributes:titleAttributes];
@@ -298,11 +298,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
             
             dividerRect.origin.y -= [self.theme floatForKey:@"actionSheetBoxPadding"] / 2.0;;
             dividerRect.size.width += 2 * motionEffectDistance;
-            
-            CALayer *divider = [[CALayer alloc] init];
-            divider.backgroundColor = [UIColor colorWithName:UIColorNameActionSheetDividerColor].CGColor;
-            divider.frame = dividerRect;
-            [container.layer addSublayer:divider];
+
+            UIView *divider = [[UIView alloc] initWithFrame:dividerRect];
+            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
+            [container addSubview:divider];
         }
         
         i++;
@@ -321,7 +320,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     container.frame = CGRectMake(0, 0, totalWidth, totalHeight);
     
-    container.backgroundColor = [[UIColor colorWithName:UIColorNameActionSheetBackgroundColor] colorWithAlphaComponent:0.97];
+    container.backgroundColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
     
     self.subviewsArray = viewArray;
     

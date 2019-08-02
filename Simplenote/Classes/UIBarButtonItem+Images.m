@@ -55,8 +55,9 @@ static CGFloat const UIBarButtonWidth               = 44.0;
 {    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIImage *backImage = [UIImage imageWithName:UIImageNameBackImage];
 
-    [button setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+    [button setImage:[backImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
             forState:UIControlStateNormal];
 
     // Inset by -1 to match notes list chevron position

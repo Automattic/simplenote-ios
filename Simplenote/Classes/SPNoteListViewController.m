@@ -41,7 +41,6 @@
 #import "Simplenote-Swift.h"
 
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
@@ -171,8 +170,23 @@
     [self styleSearchBar];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self themeDidChange];
+    }
+#endif
+}
+
 - (void)styleSearchBar {
-    UIImage *background = [[self.theme imageForKey:@"searchBarBackgroundImage"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
+    UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
     [searchBar setSearchFieldBackgroundImage:background
                                     forState:UIControlStateNormal];
     searchBarContainer.backgroundColor = [UIColor clearColor];
@@ -185,7 +199,7 @@
 
     // Apply font to search field by traversing subviews
     NSArray *searchBarSubviews = [searchBar subviewsRespondingToSelector:@selector(setFont:)];
-    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameSearchBarFontColor];
+    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameTextColor];
 
     for (UIView *subview in searchBarSubviews) {
         if ([subview isKindOfClass:[UITextField class]] == false) {
@@ -194,7 +208,7 @@
         
         [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         [(UITextField *)subview setTextColor:searchBarFontColor];
-        [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
+        [(UITextField *)subview setKeyboardAppearance:(SPUserInterface.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
     }
 }
@@ -477,7 +491,7 @@
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            UIImage *templateImage = [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
             _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
             _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
         }
@@ -500,7 +514,7 @@
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
 
-    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
     cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
@@ -1058,7 +1072,7 @@
     if (waiting && self.navigationItem.titleView != activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
         if (!activityIndicator)
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         
         [activityIndicator startAnimating];
         bResetTitleView = NO;

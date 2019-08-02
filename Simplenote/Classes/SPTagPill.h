@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @class SPTagStub;
-#import "VSThemeManager.h"
 
 @interface SPTagPill : UIButton {
     
@@ -17,7 +16,7 @@
 }
 
 
-- (id)initWithTagStub:(SPTagStub *)tagStub target:(id)target action:(SEL)action deletionAction:(SEL)deletionAction;
+- (instancetype)initWithTagStub:(SPTagStub *)tagStub target:(id)target action:(SEL)action deletionAction:(SEL)deletionAction;
 
 - (void)showDeletionView;
 - (void)hideDeletionView;

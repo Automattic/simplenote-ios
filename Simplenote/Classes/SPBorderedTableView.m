@@ -36,7 +36,22 @@
 
 - (void)applyTheme {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor].CGColor;
+    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self applyTheme];
+    }
+#endif
 }
 
 @end

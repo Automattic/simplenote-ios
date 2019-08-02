@@ -127,15 +127,13 @@ static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    
-    VSTheme *theme                  = [[VSThemeManager sharedManager] theme];
-    
-    // Draw the Separator
-    UIImage *shadowImage            = [theme imageForKey:@"navigationBarShadowImage"];
-    shadowImage                     = [shadowImage resizableImageWithCapInsets:SPRatingPromptSeparatorCapInsets resizingMode:UIImageResizingModeTile];
 
-    CGFloat borderThickness         = SPRatingPromptSeparatorHeight / [[UIScreen mainScreen] scale];
-    CGRect borderFrame              = CGRectMake(0.0f, CGRectGetHeight(self.frame) - borderThickness, CGRectGetWidth(self.frame), borderThickness);
+    // Draw the Separator
+    UIImage *shadowImage    = [UIImage imageWithName:UIImageNameNavigationBarShadowImage];
+    shadowImage             = [shadowImage resizableImageWithCapInsets:SPRatingPromptSeparatorCapInsets resizingMode:UIImageResizingModeTile];
+
+    CGFloat borderThickness = SPRatingPromptSeparatorHeight / [[UIScreen mainScreen] scale];
+    CGRect borderFrame      = CGRectMake(0.0f, CGRectGetHeight(self.frame) - borderThickness, CGRectGetWidth(self.frame), borderThickness);
     [shadowImage drawInRect:borderFrame];
 }
 

@@ -8,7 +8,6 @@
 
 #import "SPVersionPickerViewCell.h"
 #import "Simplenote-Swift.h"
-#import "VSThemeManager.h"
 
 @interface SPVersionPickerViewCell ()
 
@@ -35,7 +34,7 @@
         _timeLabel.isAccessibilityElement = NO;
         
         UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        UIColor *textColor = [UIColor colorWithName:UIColorNameVersionPickerDateFontColor];
+        UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
         
         _dateLabel.font = font;
         _dateLabel.textColor = textColor;

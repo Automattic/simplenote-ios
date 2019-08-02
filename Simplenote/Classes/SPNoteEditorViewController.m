@@ -9,7 +9,6 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "UIBarButtonItem+Images.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
@@ -163,7 +162,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
-    _noteEditorTextView.keyboardAppearance = (self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
 }
 
@@ -1468,7 +1467,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameActionSheetBackgroundColor] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];

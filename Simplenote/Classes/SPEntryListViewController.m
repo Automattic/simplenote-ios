@@ -8,7 +8,6 @@
 
 #import "SPEntryListViewController.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "Simplenote-Swift.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
@@ -59,7 +58,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
 
-    entryTextField.keyboardAppearance = [[VSThemeManager sharedManager] theme].isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+    entryTextField.keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
     entryTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     entryTextField.delegate = self;
     [entryFieldBackground addSubview:entryTextField];
@@ -125,7 +124,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     // self
     self.view.backgroundColor = tableBackgroundColor;
@@ -134,8 +133,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryFieldBackground.backgroundColor = backgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    entryTextField.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldTextColor];
-    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextFieldPlaceholderTextColor];
+    entryTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,

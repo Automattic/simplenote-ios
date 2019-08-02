@@ -22,7 +22,7 @@
     
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameTableViewSeparatorColor];
+    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 }
 
 
@@ -48,10 +48,10 @@
         cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         
         UIView *selectionView = [[UIView alloc] initWithFrame:cell.bounds];
-        selectionView.backgroundColor = [UIColor colorWithName:UIColorNameTableViewCellBackgroundHighlightColor];
+        selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         cell.selectedBackgroundView = selectionView;
         
-        cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTableViewTextLabelColor];
+        cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
         cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
         
     }
