@@ -66,6 +66,8 @@
 		<string>4895d9</string>
 		<key>barTintColor</key>
 		<string>@backgroundColor</string>
+		<key>backImage</key>
+		<string>back_chevron</string>
 		<key>backgroundColor</key>
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
@@ -114,6 +116,10 @@
 		<integer>360</integer>
 		<key>actionSheetButtonHeight</key>
 		<integer>55</integer>
+		<key>pinImage</key>
+		<string>icon_pin</string>
+		<key>sharedImage</key>
+		<string>icon_shared</string>
 		<key>tagViewHeight</key>
 		<integer>44</integer>
 		<key>tagViewPlaceholderColor</key>

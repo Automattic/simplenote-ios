@@ -28,6 +28,12 @@ class OptionsTests: XCTestCase {
 
     func testLegacyUnspecifiedThemeIsProperlyMigrated() {
         let options = Options(defaults: defaults)
+
+        guard #available(iOS 13, *) else {
+            XCTAssert(options.theme == .light)
+            return
+        }
+
         XCTAssert(options.theme == .system)
     }
 
