@@ -210,6 +210,12 @@
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
 		<string>448AC9</string>
+		<key>onePasswordImage</key>
+		<string>button_onepassword</string>
+		<key>visibilityOnImage</key>
+		<string>button_visibility_on</string>
+		<key>visibilityOffImage</key>
+		<string>button_visibility_off</string>
 	</dict>
 	<key>Dark</key>
 	<dict>

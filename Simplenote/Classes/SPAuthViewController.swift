@@ -64,7 +64,7 @@ class SPAuthViewController: UIViewController {
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
         button.tintColor = .simplenoteSlateGrey()
-        button.setImage(.onePasswordImage, for: .normal)
+        button.setImage(.image(name: .onePasswordImage), for: .normal)
         button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
         button.sizeToFit()
         return button
@@ -75,11 +75,12 @@ class SPAuthViewController: UIViewController {
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
         button.tintColor = .simplenoteSlateGrey()
-        button.setImage(.visibilityOffImage, for: .normal)
-        button.setImage(.visibilityOnImage, for: .highlighted)
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
         button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
+        button.setImage(.image(name: .visibilityOffImage), for: .normal)
+        button.setImage(.image(name: .visibilityOnImage), for: .highlighted)
         button.sizeToFit()
+
         return button
     }()
 
