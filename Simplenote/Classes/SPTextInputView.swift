@@ -56,7 +56,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Enabled State
     ///
-    @IBInspectable var borderColorEnabled: UIColor? = Defaults.borderColorEnabled {
+    @IBInspectable var borderColorEnabled: UIColor? = .color(name: .simplenotePalePurple) {
         didSet {
             refreshBorderStyle()
         }
@@ -64,7 +64,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Disabled State
     ///
-    @IBInspectable var borderColorDisabled: UIColor? = Defaults.borderColorDisabled {
+    @IBInspectable var borderColorDisabled: UIColor? = .color(name: .simplenoteLightPink) {
         didSet {
             refreshBorderStyle()
         }
@@ -236,7 +236,7 @@ private extension SPTextInputView {
         textField.delegate = self
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.placeholdTextColor = Defaults.placeholderColor
+        textField.placeholdTextColor = .color(name: .simplenoteSlateGrey)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         addSubview(textField)
     }
@@ -295,10 +295,7 @@ extension SPTextInputView: UITextFieldDelegate {
 // MARK: - Default Settings
 //
 private enum Defaults {
-    static let cornerRadius         = CGFloat(4)
-    static let borderWidth          = CGFloat(1)
-    static let insets               = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-    static let borderColorEnabled   = UIColor.simplenotePalePurple()
-    static let borderColorDisabled  = UIColor.simplenoteLightPink()
-    static let placeholderColor     = UIColor.simplenoteSlateGrey()
+    static let cornerRadius = CGFloat(4)
+    static let borderWidth  = CGFloat(1)
+    static let insets       = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }

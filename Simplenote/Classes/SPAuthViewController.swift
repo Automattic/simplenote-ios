@@ -17,7 +17,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = Constants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.textColor = .simplenoteAlmostBlack()
+            emailInputView.textColor = .color(name: .simplenoteAlmostBlack)
             emailInputView.delegate = self
         }
     }
@@ -32,7 +32,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = Constants.onePasswordInsets
-            passwordInputView.textColor = .simplenoteAlmostBlack()
+            passwordInputView.textColor = .color(name: .simplenoteAlmostBlack)
             passwordInputView.delegate = self
         }
     }
@@ -51,8 +51,10 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
+            let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
+
             secondaryActionButton.setTitle(mode.secondaryActionText, for: .normal)
-            secondaryActionButton.setTitleColor(.simplenoteLightNavy(), for: .normal)
+            secondaryActionButton.setTitleColor(simplenoteLightNavy, for: .normal)
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
@@ -63,7 +65,7 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.tintColor = .simplenoteSlateGrey()
+        button.tintColor = .color(name: .simplenoteSlateGrey)
         button.setImage(.image(name: .onePasswordImage), for: .normal)
         button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
         button.sizeToFit()
@@ -74,7 +76,7 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.tintColor = .simplenoteSlateGrey()
+        button.tintColor = .color(name: .simplenoteSlateGrey)
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
         button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.setImage(.image(name: .visibilityOffImage), for: .normal)
@@ -171,7 +173,8 @@ private extension SPAuthViewController {
     }
 
     func ensureStylesMatchValidationState() {
-        primaryActionButton.backgroundColor = isInputValid ? .simplenoteLightNavy() : .simplenotePalePurple()
+        let name: UIColorName = isInputValid ? .simplenoteLightNavy : .simplenotePalePurple
+        primaryActionButton.backgroundColor = UIColor.color(name: name)
     }
 
     func ensureOnePasswordIsAvailable() {
