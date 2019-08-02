@@ -434,7 +434,9 @@
 
 - (void)loadSelectedTheme
 {
-    [[VSThemeManager sharedManager] applyAppearanceStylingForTheme:[[VSThemeManager sharedManager] theme]];
+    // TODO: Eventually nuke VSThemeManager. Please
+    [[VSThemeManager sharedManager] applyAppearanceStyling];
+    [[SPUserInterface shared] refreshUserInterfaceStyle];
 }
 
 
@@ -572,7 +574,7 @@
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
             // Always fall back to the default theme
-            [[VSThemeManager sharedManager] swapTheme:kSimplenoteDefaultThemeName];
+            [[Options shared] setTheme:ThemeSystem];
             
 			// remove the pin lock
 			[self removePin];

@@ -9,6 +9,8 @@ extension UserDefaults {
         case lastKnownVersionByRatingsFramework = "WPRatingsCurrentVersion"
         case listSortMode
         case listSortModeLegacy = "SPAlphabeticalSortPref"
+        case theme
+        case themeLegacy = "SPThemePref"
     }
 }
 
