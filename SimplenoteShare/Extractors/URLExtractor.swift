@@ -116,11 +116,16 @@ private extension URLExtractor {
     /// Builds a Note for an external link
     ///
     func buildExternalLinkNote(with url: URL, context: NSExtensionContext) -> Note? {
-        guard url.isFileURL == false, let payload = context.attributedContentText?.string else {
+        guard url.isFileURL == false else {
             return nil
         }
 
-        let content = payload + "\n\n[" + url.absoluteString + "]"
+        var content = ""
+        if let payload = context.attributedContentText?.string {
+            content += payload + "\n\n"
+        }
+
+        content += "[" + url.absoluteString + "]"
         return Note(content: content)
     }
 }
