@@ -17,7 +17,6 @@ class UIColorSimplenoteTests: XCTestCase {
 
     /// Verify every single UIColorName in existance yields a valid UIColor instancce
     ///
-    @available (iOS 13, *)
     func testUIColorInstancesObtainedViaUIColorNameResolveToLightAndDarkModeEffectiveColors() {
         guard #available(iOS 13, *) else {
             return
