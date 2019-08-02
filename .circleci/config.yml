@@ -8,14 +8,14 @@ jobs:
   Test:
     executor:
       name: ios/default
-      xcode-version: "11"
+      xcode-version: "10.2.0"
     steps:
       - checkout
       - run:
           name: Copy demo config.plist
           command: cp Simplenote/config-demo.plist Simplenote/config.plist
       - ios/test:
-          xcode-version: "11"
+          xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone XS
