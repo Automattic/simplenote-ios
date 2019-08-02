@@ -6,6 +6,7 @@
 -   When sharing to the WordPress App, Notes will no longer be blockquoted.
 -   The iOS share extension UI has been completly updated.
 -   Fixed an iOS 13 bug that caused the Notes List to get clipped upon Swipe Actions.
+-   iOS 13 Now has a new Theme: System default, which will match iOS's style.
 
 4.8.0
 =====
