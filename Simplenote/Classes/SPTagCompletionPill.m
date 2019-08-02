@@ -7,6 +7,8 @@
 //
 
 #import "SPTagCompletionPill.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPTagCompletionPill
 
@@ -17,12 +19,12 @@
 
 - (UIColor *)color {
     
-    return [self.theme colorForKey:@"tagViewAutoCompleteFontColor"];
+    return [UIColor colorWithName:UIColorNameTagViewAutoCompleteFontColor];
 }
 
 - (UIColor *)highlightedColor {
     
-    return [self.theme colorForKey:@"tagViewFontHighlightedColor"];
+    return [UIColor colorWithName:UIColorNameTagViewFontHighlightedColor];
 }
 
 

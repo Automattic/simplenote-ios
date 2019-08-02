@@ -6,38 +6,27 @@ import UIKit
 //
 extension UIImage {
 
-    /// Returns the One Password Icon
+    /// Returns the UIColor instance matching a given UIColorName. If any
     ///
     @objc
-    static var onePasswordImage: UIImage {
-        return UIImage(named: "button_onepassword")!
-    }
+    static func image(name: UIImageName) -> UIImage? {
+        // Note:
+        // We must differentiate between *Filename* and *rawValue* since, internally, the legacy VSTheme tooling maps
+        // the "rawValue" into the actual filename, based on the current theme.
+        if #available(iOS 13.0, *) {
+            return UIImage(named: name.legacyImageKey.filename)
+        }
 
-    /// Returns the Pinned Icon, to be used by the Notes List
-    ///
-    @objc
-    static var pinImage: UIImage {
-        return UIImage(named: "icon_pin")!
+        return theme.image(forKey: name.legacyImageKey.rawValue)
     }
+}
 
-    /// Returns the Shared Icon, to be used by the Notes List
-    ///
-    @objc
-    static var sharedImage: UIImage {
-        return UIImage(named: "icon_shared")!
-    }
 
-    /// Returns the Visibility On Image
-    ///
-    @objc
-    static var visibilityOnImage: UIImage {
-        return UIImage(named: "button_visibility_on")!
-    }
+// MARK: - Private
+//
+private extension UIImage {
 
-    /// Returns the Visibility Off Image
-    ///
-    @objc
-    static var visibilityOffImage: UIImage {
-        return UIImage(named: "button_visibility_off")!
+    static var theme: VSTheme {
+        return VSThemeManager.shared().theme()
     }
 }

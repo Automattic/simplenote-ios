@@ -7,12 +7,13 @@
 //
 
 #import "SPHorizontalPickerGradientView.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPHorizontalPickerGradientView
 
-- (id)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction {
-    
+- (instancetype)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction
+{    
     self = [super initWithFrame:CGRectZero];
     if (self) {
         // Initialization code
@@ -24,9 +25,8 @@
     return self;
 }
 
-
-- (void)drawRect:(CGRect)rect {
-    
+- (void)drawRect:(CGRect)rect
+{
     CGFloat borderWidth = 1.0 / [[UIScreen mainScreen] scale];
     
     // draw border based on gradient direction
@@ -34,26 +34,50 @@
     
     CGRect borderRect = CGRectMake(xOrigin, 0, borderWidth, rect.size.height);
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:borderRect];
-    [[[[VSThemeManager sharedManager] theme] colorForKey:@"horizontalPickerBorderColor"] setFill];
+    [[UIColor colorWithName:UIColorNameHorizontalPickerBorderColor] setFill];
     [borderPath fill];
-    
-    
-    
+
     if (!gradientLayer) {
-        
-        NSArray *gradientColors = [NSArray arrayWithObjects:(id)[[[[VSThemeManager sharedManager] theme] colorForKey:@"actionSheetBackgroundColor"] colorWithAlphaComponent:0.0].CGColor, (id)[[[VSThemeManager sharedManager] theme] colorForKey:@"actionSheetBackgroundColor"].CGColor, nil];
-		
         BOOL leftToRight = gradientDirection == SPHorizontalPickerGradientViewDirectionLeft;
         gradientLayer = [CAGradientLayer layer];
         [gradientLayer setLocations:@[@0.0001]];
         [gradientLayer setStartPoint:CGPointMake(leftToRight ? 1.0 : 0.0, 0.5)];
         [gradientLayer setEndPoint:CGPointMake(leftToRight ? 0.0 : 1.0, 0.5)];
-        [gradientLayer setColors:gradientColors];
+        [gradientLayer setColors:self.gradientColors];
         [[self layer] addSublayer:gradientLayer];
     }
     [gradientLayer setFrame:rect];
-    
-    
+}
+
+- (NSArray *)gradientColors
+{
+    UIColor *actionSheetBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    NSArray *gradientColors = @[
+        (id)[actionSheetBackgroundColor colorWithAlphaComponent:0.0].CGColor,
+        (id)actionSheetBackgroundColor.CGColor
+    ];
+
+    return gradientColors;
+}
+
+- (void)refreshStyle
+{
+    gradientLayer.colors = [self gradientColors];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self refreshStyle];
+    }
+#endif
 }
 
 @end

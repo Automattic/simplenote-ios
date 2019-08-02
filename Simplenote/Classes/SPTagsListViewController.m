@@ -63,9 +63,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)loadView {
     
     if (!customView) {
-        customView = [[SPBorderedView alloc] init];
-        customView.fillColor = [self.theme colorForKey:@"backgroundColor"];
-        customView.borderColor = [self.theme colorForKey:@"tagListSeparatorColor"];
+        customView = [SPBorderedView new];
+        customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
         customView.showLeftBorder = NO;
         customView.showBottomBorder = NO;
         customView.showTopBorder = NO;
@@ -80,7 +80,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [super viewDidLoad];
     
     // apply styling
-    self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     settingsButton = [self buildSettingsButton];
     [self.view addSubview:settingsButton];
@@ -180,10 +180,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)themeDidChange {
     [self updateHeaderColors];
-    customView.fillColor = [self.theme colorForKey:@"backgroundColor"];
-    customView.borderColor = [self.theme colorForKey:@"tagListSeparatorColor"];
+    customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
 
-    self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     cellIdentifier = self.theme.name;
     cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
@@ -195,20 +195,25 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)updateHeaderColors
 {
-    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
-    footerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
-    tagsLabel.textColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
-    [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
+    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
 
-    [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
+    headerSeparator.backgroundColor = separatorColor;
+    footerSeparator.backgroundColor = separatorColor;
+    tagsLabel.textColor = tagsTextColor;
+    [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
+    [allNotesButton setTitleColor:tintColor forState:UIControlStateHighlighted];
 
-    [settingsButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-    [settingsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateHighlighted];
-    [settingsButton setTintColor:[self.theme colorForKey:@"textColor"]];
+    [trashButton setTitleColor:textColor forState:UIControlStateNormal];
+    [trashButton setTitleColor:tintColor forState:UIControlStateHighlighted];
 
-    [editTagsButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+    [settingsButton setTitleColor:textColor forState:UIControlStateNormal];
+    [settingsButton setTitleColor:tintColor forState:UIControlStateHighlighted];
+    [settingsButton setTintColor:textColor];
+
+    [editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
 }
 
 - (void)menuDidChangeVisibility:(UIMenuController *)menuController {
@@ -335,21 +340,24 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)updateHeaderButtonHighlight {
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
+
     if ([SPAppDelegate sharedDelegate].selectedTag == nil) {
-        [allNotesButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
-        [allNotesButton setTintColor:[self.theme colorForKey:@"tintColor"]];
-        [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-        [trashButton setTintColor:[self.theme colorForKey:@"textColor"]];
+        [allNotesButton setTitleColor:tintColor forState:UIControlStateNormal];
+        [allNotesButton setTintColor:tintColor];
+        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
+        [trashButton setTintColor:textColor];
     } else if ([[SPAppDelegate sharedDelegate].selectedTag  isEqual:@"trash"]) {
-        [trashButton setTitleColor:[self.theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
-        [trashButton setTintColor:[self.theme colorForKey:@"tintColor"]];
-        [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-        [allNotesButton setTintColor:[self.theme colorForKey:@"textColor"]];
+        [trashButton setTitleColor:tintColor forState:UIControlStateNormal];
+        [trashButton setTintColor:tintColor];
+        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
+        [allNotesButton setTintColor:textColor];
     } else {
-        [trashButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-        [trashButton setTintColor:[self.theme colorForKey:@"textColor"]];
-        [allNotesButton setTitleColor:[self.theme colorForKey:@"textColor"] forState:UIControlStateNormal];
-        [allNotesButton setTintColor:[self.theme colorForKey:@"textColor"]];
+        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
+        [trashButton setTintColor:textColor];
+        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
+        [allNotesButton setTintColor:textColor];
     }
 }
 
@@ -844,7 +852,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
     headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerSeparator.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"];
+    headerSeparator.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
     [headerView addSubview:headerSeparator];
 
     UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];

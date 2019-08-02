@@ -42,7 +42,7 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
     if (self) {
         
         self.clipsToBounds = YES;
-        self.contentView.clipsToBounds = NO;
+        self.contentView.clipsToBounds = YES;
 
         // setup preview view
         CGRect frame = self.bounds;
@@ -105,23 +105,27 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
 }
 
 - (void)applyStyle {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    self.backgroundColor = [theme colorForKey:@"backgroundColor"];
-    self.contentView.backgroundColor = [theme colorForKey:@"backgroundColor"];
+    self.backgroundColor = backgroundColor;
+    self.contentView.backgroundColor = backgroundColor;
 
     // set selection view
     UIView *selectionView = [[UIView alloc] initWithFrame:self.bounds];
-    selectionView.backgroundColor = [theme colorForKey:@"noteCellBackgroundSelectionColor"];
+    selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
     self.selectedBackgroundView = selectionView;
 
-    _previewView.backgroundColor = [theme colorForKey:@"backgroundColor"];
+    _previewView.backgroundColor = backgroundColor;
 
-    NSDictionary *defaultAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
-                                        NSForegroundColorAttributeName:[theme colorForKey:@"noteBodyFontPreviewColor"]};
+    NSDictionary *defaultAttributes = @{
+        NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody],
+        NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]
+    };
     
-    NSDictionary *headlineAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
-                                         NSForegroundColorAttributeName: [theme colorForKey:@"noteHeadlineFontColor"]};
+    NSDictionary *headlineAttributes = @{
+        NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
+        NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameNoteHeadlineFontColor]
+    };
     
     _previewView.interactiveTextStorage.tokens = @{SPDefaultTokenName : defaultAttributes,
                                                    SPHeadlineTokenName : headlineAttributes

@@ -9,7 +9,6 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "UIBarButtonItem+Images.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
@@ -145,9 +144,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     _bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _fontColor = [self.theme colorForKey:@"noteHeadlineFontColor"];
-    _lightFontColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
-    
+    _fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
+    _lightFontColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+
     _noteEditorTextView.font = _bodyFont;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
@@ -161,9 +160,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                           SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor,
                                                                                   NSFontAttributeName : _headlineFont} };
     
-    _noteEditorTextView.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
-    _noteEditorTextView.keyboardAppearance = (self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
 }
 
@@ -255,7 +254,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIColor *tintColor = [self.theme colorForKey:@"tintColor"];
+            UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
             [self->_noteEditorTextView.textStorage applyColorAttribute:tintColor forRanges:self->searchResultRanges];
             
             NSInteger count = self->searchResultRanges.count;
@@ -469,7 +468,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     searchDetailLabel = [[UILabel alloc] init];
     searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     searchDetailLabel.frame = CGRectMake(0, 0, 180, searchDetailLabel.font.lineHeight);
-    searchDetailLabel.textColor = [self.theme colorForKey:@"noteHeadlineFontColor"];
+    searchDetailLabel.textColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
     searchDetailLabel.textAlignment = NSTextAlignmentCenter;
     searchDetailLabel.alpha = 0.0;
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:searchDetailLabel];
@@ -1468,7 +1467,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[self.theme colorForKey:@"actionSheetBackgroundColor"] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];

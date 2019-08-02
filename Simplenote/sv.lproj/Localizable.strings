@@ -15,12 +15,6 @@
 /* Number of words in a note */
 "%d Words" = "%d ord";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i felaktig inmatning";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i felaktiga inmatningar";
-
 /* Label of accept button on alert dialog */
 "Accept" = "Godkänn";
 
@@ -30,23 +24,11 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Lägg till ny redigerare...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Etikett…";
-
 /* Label on button to add a new tag to a note */
 "Add tag" = "Lägg till etikett";
 
 /* Title of option to display all notes */
 "All Notes" = "Alla anteckningar";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Har du redan ett konto?";
-
-/* No comment provided by engineer. */
-"Back" = "Tillbaka";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Genom att skapa ett konto godkänner du användaravtalet »";
 
 /* No comment provided by engineer. */
 "Cancel" = "Avbryt";
@@ -54,29 +36,17 @@
 /* Verb - work with others on a note */
 "Collaborate" = "Samarbeta";
 
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "Gör så att andra kan hjälpa till och redigera";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Redigerare";
 
+/* No comment provided by engineer. */
+"collaborators-description" = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
+
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Komprimerad anteckningslista";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Bekräfta";
-
-/* Ratings View: Contact */
-"Contact" = "Kontakt";
-
-/* No comment provided by engineer. */
-"Could Be Better" = "Kunde vara bättre";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "Kunde inte skapa ett konto med den e-postadressen och det lösenordet.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Kunde inte logga in med den e-postadressen och det lösenordet.";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Kan du berätta för oss vad vi kan förbättra?";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Skapa ny anteckning";
@@ -84,20 +54,11 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "Nuvarande redigerare";
 
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Mörkt tema";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "Felsök";
-
-/* Permanent Delete */
-"Delete" = "Ta bort";
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "Denna anteckning har blivit borttagen på en annan enhet.";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Göm tangentbord";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Har du inget konto?";
 
 /* No comment provided by engineer. */
 "Done" = "Klar";
@@ -111,57 +72,20 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Töm papperskorgen";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Ange en lösenkod";
-
-/* Pin Lock */
-"Enter your passcode" = "Ange lösenkod";
-
-/* Passcode Failed Attempts */
-"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Har du förlorat åtkomsten till Simplenote? Du kan få åtkomst igen genom att installera om appen och logga in på ditt konto.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Hitta anteckningar snabbt genom att söka i realtid och använda etiketter.";
-
-/* Forgot Password */
-"Forgot your password? »" = "Glömt ditt lösenord? »";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Kom igång";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-\nIt really helps." = "Vad kul! Kan du tänka dig att ge oss en bra recension?\\n\\nDet skulle verkligen uppskattas.";
-
 /* Noun - the version history of a note */
 "History" = "Historik";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "Återställ anteckning till tidigare version";
 
 /* Action - view the version history of a note */
 "History..." = "Historik...";
 
-/* No comment provided by engineer. */
-"How can we help?" = "Hur kan vi hjälpa till?";
-
-/* No comment provided by engineer. */
-"I Like It" = "Jag gillar den";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "Skriv en recension";
-
-/* Month and day date formatter */
-"MMM d" = "d MMM";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "d MMM, h:mm";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "d MMM, yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "MMM yyyy";
-
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Meny";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "Visa alternativ för anteckning";
 
 /* Label to create a new note */
 "New note" = "Ny anteckning";
@@ -173,22 +97,22 @@
 "No Results" = "Inga sökresultat";
 
 /* No comment provided by engineer. */
-"No Thanks" = "Nej, tack";
+"Note not published" = "Anteckning inte publicerad";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "Anteckning publicerad";
 
-/* No comment provided by engineer. */
-"Note not published" = "Anteckning inte publicerad";
-
 /* Plural form of notes */
 "Notes" = "Anteckningar";
 
-/* No comment provided by engineer. */
-"OK" = "OK";
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "Stäng nuvarande anteckning";
 
 /* No comment provided by engineer. */
 "Off" = "Av";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
 
 /* No comment provided by engineer. */
 "On" = "På";
@@ -199,32 +123,19 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Lösenkod";
 
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Lösenkoderna matchar inte varandra. Försök igen.";
-
-/* Hint displayed in the password field */
-"Password" = "Lösenord";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Lösenord måste innehålla minst 4 tecken.";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Nåla fast anteckning";
 
 /* Denotes when note is pinned to the top of the note list */
 "Pin to Top" = "Nåla fast högst upp";
 
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Slå på\/av fastnålning";
+"Pin toggle" = "Slå på/av fastnålning";
 
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "Fastnålad";
 
 /* No comment provided by engineer. */
 "Preferences" = "Alternativ";
-
-/* Markdown Preview */
-"Preview" = "Förhandsgranska";
 
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Publicera";
@@ -235,8 +146,7 @@
 /* Action which published a note to a web page */
 "Publish note" = "Publicera anteckning";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Publicera på\/av";
+"Publish toggle" = "Publicera på/av";
 
 /* No comment provided by engineer. */
 "Published" = "Publicerad";
@@ -244,14 +154,11 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Publicerar...";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Ange lösenkoden en gång till";
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Ta bort alla anteckningar från papperskorgen";
 
 /* Delete a tag and remove it from all associated notes */
 "Remove Tag" = "Ta bort etikett";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Ta bort alla anteckningar från papperskorgen";
 
 /* Prompt asking user to confirm the removal of a tag from a note */
 "Remove tag?" = "Ta bort etikett?";
@@ -265,80 +172,46 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "Säkerhet";
-
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Skicka";
-
-/* No comment provided by engineer. */
-"Send Feedback" = "Skicka feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Ställ in lösenkod";
 
 /* Title of options screen */
 "Settings" = "Inställningar";
 
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Dela en lista, skriv ner instruktioner, eller publicera dina tankar.";
-
 /* No comment provided by engineer. */
 "Share note" = "Dela anteckning";
+
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "Dela innehåll i nuvarande anteckning";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Sidopanel";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Logga in";
-
 /* Sign out of the active account in the app */
 "Sign Out" = "Logga ut";
 
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "Skapa konto";
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "Lägg till en etikett för anteckningen";
 
-/* A short link to access the account login screen */
-"Sign in" = "Logga in";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Skapa konto";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Utloggning kommer att radera alla osynkroniserade anteckningar. Du kan verifiera dina synkroniserade anteckningar genom att logga in på webbappen.";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Sortera anteckningar alfabetiskt";
-
-/* Message shown in first launch view */
-"Stay organized" = "Håll ordning";
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "Ta bort etikett från den nuvarande anteckningen";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Etikett: %@";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Det var ett problem med anslutningen. Försök igen senare.";
-
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Idag";
 
-/* Accessibility hint used to show or hide the sidebar */
-"Toggle tag sidebar" = "Slå på\/av etiketter i sidopanelen";
+"Toggle tag sidebar" = "Slå på/av etiketter i sidopanelen";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "Touch ID";
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "Kasta anteckningen i papperskorgen";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash" = "Papperskorgen";
+"Trash-noun" = "Papperskorgen";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Kasta bort";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Stäng av lösenkod";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Lås upp %@";
+"Trash-verb" = "Kasta bort";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "Ta bort nål";
@@ -349,75 +222,209 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Slutar publicera...";
 
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "Osynkroniserade anteckningar upptäckta";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Använd var som helst";
-
 /* Represents a snapshot in time for a note */
 "Version" = "Version";
 
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Välkommen till Simplenote";
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "Anslut till ett nätverk för att se tidigare versioner";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "Välj denna version";
 
-/* Message shown in first launch view */
-"Work together" = "Arbeta tillsammans";
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "Hämtar version";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Igår";
 
-/* No comment provided by engineer. */
-"Your Email:" = "Din e-post:";
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i felaktig inmatning";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Ange en lösenkod";
+
+/* Pin Lock */
+"Enter your passcode" = "Ange lösenkod";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Lösenkoderna matchar inte varandra. Försök igen.";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Ange lösenkoden en gång till";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Ställ in lösenkod";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Stäng av lösenkod";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Lås upp %@";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i felaktiga inmatningar";
+
+"welcomeNote-iOS" = "Välkommen till Simplenote för iOS!
+
+För att skapa en anteckning, tryck på plus-knappen.
+
+Scrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.
+
+Du kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.
+
+Tryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.
+
+Det finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.
+
+Använd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http://simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "Sortera anteckningar alfabetiskt";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "Har du redan ett konto?";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "Bekräfta";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "Kunde inte skapa ett konto med den e-postadressen och det lösenordet.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Kunde inte logga in med den e-postadressen och det lösenordet.";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Har du inget konto?";
+
+/* Hint displayed in the password field */
+"Password" = "Lösenord";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "Lösenord måste innehålla minst 4 tecken.";
+
+/* Title of button for logging in (must be short) */
+"Sign in" = "Logga in";
+
+/* Title of button for logging in (must be short) */
+"Sign In" = "Logga in";
+
+/* Title of button to create a new account (must be short) */
+"Sign up" = "Skapa konto";
+
+/* Title of button to create a new account (must be short) */
+"Sign Up" = "Skapa konto";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "Det var ett problem med anslutningen. Försök igen senare.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "Din e-postadress är inte giltig.";
 
 /* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "Hitta anteckningar snabbt genom att söka i realtid och använda etiketter.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "Kom igång";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "Dela en lista, skriv ner instruktioner, eller publicera dina tankar.";
+
+/* Message shown in first launch view */
+"Stay organized" = "Håll ordning";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "Använd var som helst";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "Välkommen till Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "Arbeta tillsammans";
+
+/* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Dina anteckningar synkroniseras till alla dina enheter. Du behöver inte ställa in någonting. Det bara fungerar.";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Gör så att andra kan hjälpa till och redigera";
+/* Option to enable the dark app theme. */
+"Dark Theme" = "Mörkt tema";
+
+/* Debug Screen Title Display internal debug status */
+"Debug" = "Felsök";
+
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM, h:mm";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
+
+"Touch ID" = "Touch ID";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "Säkerhet";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Genom att skapa ett konto godkänner du användaravtalet »";
+
+/* Forgot Password */
+"Forgot password? »" = "Glömt ditt lösenord? »";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
+"I Like It" = "Jag gillar den";
 
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Denna anteckning har blivit borttagen på en annan enhet.";
+/* No comment provided by engineer. */
+"Could Be Better" = "Kunde vara bättre";
 
-/* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Återställ anteckning till tidigare version";
+"Great! Could you leave us a nice review?
+It really helps." = "Vad kul! Kan du tänka dig att ge oss en bra recension?\n\nDet skulle verkligen uppskattas.";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Visa alternativ för anteckning";
+/* No comment provided by engineer. */
+"Leave a Review" = "Skriv en recension";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Stäng nuvarande anteckning";
+/* No comment provided by engineer. */
+"No Thanks" = "Nej, tack";
 
-/* Accessibility hint on button to share note */
-"Share the content of the current note" = "Dela innehåll i nuvarande anteckning";
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Kan du berätta för oss vad vi kan förbättra?";
 
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Lägg till en etikett för anteckningen";
+/* No comment provided by engineer. */
+"Send Feedback" = "Skicka feedback";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"Remove tag from the current note" = "Ta bort etikett från den nuvarande anteckningen";
+/* Ratings View: Contact */
+"Contact" = "Kontakt";
 
-/* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Kasta anteckningen i papperskorgen";
+/* No comment provided by engineer. */
+"Your Email:" = "Din e-post:";
 
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Anslut till ett nätverk för att se tidigare versioner";
+/* No comment provided by engineer. */
+"How can we help?" = "Hur kan vi hjälpa till?";
 
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Välj denna version";
+/* No comment provided by engineer. */
+"Back" = "Tillbaka";
 
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Hämtar version";
+/* Permanent Delete */
+"Delete" = "Ta bort";
 
-/* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
+/* Markdown Preview */
+"Preview" = "Förhandsgranska";
+
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Utloggning kommer att radera alla osynkroniserade anteckningar. Du kan verifiera dina synkroniserade anteckningar genom att logga in på webbappen.";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Osynkroniserade anteckningar upptäckta";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Add a tag..." = "Etikett…";
+
+/* Passcode Failed Attempts */
+"FailedAttempts" = "Har du förlorat åtkomsten till Simplenote? Du kan få åtkomst igen genom att installera om appen och logga in på ditt konto.";
 

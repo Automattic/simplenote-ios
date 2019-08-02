@@ -126,20 +126,6 @@ static UIColor *colorWithHexString(NSString *hexString);
 	return [obj floatValue];
 }
 
-- (NSNumber *)numberForKey:(NSString *)key {
-
-	return [NSNumber numberWithFloat:[self floatForKey:key]];
-}
-
-- (NSTimeInterval)timeIntervalForKey:(NSString *)key {
-
-	id obj = [self objectForKey:key];
-	if (obj == nil)
-		return 0.0;
-	return [obj doubleValue];
-}
-
-
 - (UIImage *)imageForKey:(NSString *)key {
 	
 	NSString *imageName = [self stringForKey:key];
@@ -179,151 +165,12 @@ static UIColor *colorWithHexString(NSString *hexString);
 }
 
 
-- (UIFont *)fontForKey:(NSString *)key {
 
-	UIFont *cachedFont = [self.fontCache objectForKey:key];
-	if (cachedFont != nil)
-		return cachedFont;
-    
-	NSString *fontName = [self stringForKey:key];
-	CGFloat fontSize = [self floatForKey:[key stringByAppendingString:@"Size"]];
-
-	if (fontSize < 1.0f)
-		fontSize = 15.0f;
-
-	UIFont *font = nil;
-    
-	if (stringIsEmpty(fontName))
-		font = [UIFont systemFontOfSize:fontSize];
-	else
-		font = [UIFont fontWithName:fontName size:fontSize];
-
-	if (font == nil)
-		font = [UIFont systemFontOfSize:fontSize];
-    
-	[self.fontCache setObject:font forKey:key];
-
-	return font;
-}
-
-- (UIFont *)fontWithSystemSizeForKey:(NSString *)key {
-    
-    UIFont *cachedFont = [self.userSizedFontCache objectForKey:key];
-	if (cachedFont != nil)
-		return cachedFont;
-    
-	NSString *fontName = [self stringForKey:key];
-	CGFloat fontSize = _systemBodyFont.pointSize;
-    
-	if (fontSize < 1.0f)
-		fontSize = 15.0f;
-    else if (fontSize > 26.0f) // implement max font size
-        fontSize = 26.0f;
-        
-	UIFont *font = nil;
-    
-	if (stringIsEmpty(fontName))
-		font = _systemBodyFont;
-	else
-		font = [UIFont fontWithName:fontName size:fontSize];
-    
-	if (font == nil)
-		font = _systemBodyFont;
-    
-	[self.userSizedFontCache setObject:font forKey:key];
-    
-	return font;
-}
-
-
-- (CGPoint)pointForKey:(NSString *)key {
-
-	CGFloat pointX = [self floatForKey:[key stringByAppendingString:@"X"]];
-	CGFloat pointY = [self floatForKey:[key stringByAppendingString:@"Y"]];
-
-	CGPoint point = CGPointMake(pointX, pointY);
-	return point;
-}
-
-
-- (CGSize)sizeForKey:(NSString *)key {
-
-	CGFloat width = [self floatForKey:[key stringByAppendingString:@"Width"]];
-	CGFloat height = [self floatForKey:[key stringByAppendingString:@"Height"]];
-
-	CGSize size = CGSizeMake(width, height);
-	return size;
-}
-
-
-- (UIViewAnimationOptions)curveForKey:(NSString *)key {
-    
-	NSString *curveString = [self stringForKey:key];
-	if (stringIsEmpty(curveString))
-		return UIViewAnimationOptionCurveEaseInOut;
-
-	curveString = [curveString lowercaseString];
-	if ([curveString isEqualToString:@"easeinout"])
-		return UIViewAnimationOptionCurveEaseInOut;
-	else if ([curveString isEqualToString:@"easeout"])
-		return UIViewAnimationOptionCurveEaseOut;
-	else if ([curveString isEqualToString:@"easein"])
-		return UIViewAnimationOptionCurveEaseIn;
-	else if ([curveString isEqualToString:@"linear"])
-		return UIViewAnimationOptionCurveLinear;
-    
-	return UIViewAnimationOptionCurveEaseInOut;
-}
-
-
-- (VSAnimationSpecifier *)animationSpecifierForKey:(NSString *)key {
-
-	VSAnimationSpecifier *animationSpecifier = [VSAnimationSpecifier new];
-
-	animationSpecifier.duration = [self timeIntervalForKey:[key stringByAppendingString:@"Duration"]];
-	animationSpecifier.delay = [self timeIntervalForKey:[key stringByAppendingString:@"Delay"]];
-	animationSpecifier.curve = [self curveForKey:[key stringByAppendingString:@"Curve"]];
-
-	return animationSpecifier;
-}
-
-
-- (VSTextCaseTransform)textCaseTransformForKey:(NSString *)key {
-
-	NSString *s = [self stringForKey:key];
-	if (s == nil)
-		return VSTextCaseTransformNone;
-
-	if ([s caseInsensitiveCompare:@"lowercase"] == NSOrderedSame)
-		return VSTextCaseTransformLower;
-	else if ([s caseInsensitiveCompare:@"uppercase"] == NSOrderedSame)
-		return VSTextCaseTransformUpper;
-
-	return VSTextCaseTransformNone;
-}
-
-
-@end
-
-
-@implementation VSTheme (Animations)
-
-
-- (void)animateWithAnimationSpecifierKey:(NSString *)animationSpecifierKey animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion {
-
-    VSAnimationSpecifier *animationSpecifier = [self animationSpecifierForKey:animationSpecifierKey];
-
-    [UIView animateWithDuration:animationSpecifier.duration delay:animationSpecifier.delay options:animationSpecifier.curve animations:animations completion:completion];
-}
 
 @end
 
 
 #pragma mark -
-
-@implementation VSAnimationSpecifier
-
-@end
 
 
 static BOOL stringIsEmpty(NSString *s) {

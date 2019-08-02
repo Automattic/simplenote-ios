@@ -10,6 +10,8 @@
 #import "VSTheme.h"
 #import "VSThemeLoader.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString *const VSThemeManagerThemeWillChangeNotification;
 extern NSString *const VSThemeManagerThemeDidChangeNotification;
 extern NSString *const VSThemeManagerThemePrefKey;
@@ -22,7 +24,8 @@ extern NSString *const VSThemeManagerThemePrefKey;
 - (VSThemeLoader *)themeLoader;
 
 - (void)swapTheme:(NSString *)theme;
-
-- (void)applyAppearanceStylingForTheme:(VSTheme *)theme;
+- (void)applyAppearanceStyling;
 
 @end
+
+NS_ASSUME_NONNULL_END

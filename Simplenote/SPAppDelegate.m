@@ -162,9 +162,9 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
-    
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
+
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
     if (selectedTag != nil) {
@@ -410,7 +410,9 @@
 
 - (void)loadSelectedTheme
 {
-    [[VSThemeManager sharedManager] applyAppearanceStylingForTheme:[[VSThemeManager sharedManager] theme]];
+    // TODO: Eventually nuke VSThemeManager. Please
+    [[VSThemeManager sharedManager] applyAppearanceStyling];
+    [[SPUserInterface shared] refreshUserInterfaceStyle];
 }
 
 
@@ -429,9 +431,8 @@
 
 - (void)themeDidChange
 {
-    // Update window coloring
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
 }
 
 
@@ -549,7 +550,7 @@
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
             // Always fall back to the default theme
-            [[VSThemeManager sharedManager] swapTheme:kSimplenoteDefaultThemeName];
+            [[Options shared] setTheme:ThemeSystem];
             
 			// remove the pin lock
 			[self removePin];

@@ -9,6 +9,7 @@
 #import "SPHorizontalPickerView.h"
 #import "VSThemeManager.h"
 #import "SPHorizontalPickerGradientView.h"
+#import "Simplenote-Swift.h"
 
 static CGSize PickerDefaultSize = {88.0, 88.0};
 static NSString *itemIdentifier = @"horizontalPickerItem";
@@ -77,7 +78,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
                                       [self.theme floatForKey:@"horizontalPickerTitleHeight"]);
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        titleLabel.textColor = [self.theme colorForKey:@"horizontalPickerTitleFontColor"];
+        titleLabel.textColor = [UIColor colorWithName:UIColorNameHorizontalPickerTitleFontColor];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         [self addSubview:titleLabel];
         
@@ -111,7 +112,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
         itemCollectionView.showsHorizontalScrollIndicator = NO;
         itemCollectionView.backgroundColor = [UIColor clearColor];
         
-        self.backgroundColor = [self.theme colorForKey:@"actionSheetBackgroundColor"];
+        self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
         // add gradients
         leftGradientView = [[SPHorizontalPickerGradientView alloc] initWithGradientViewDirection:SPHorizontalPickerGradientViewDirectionLeft];

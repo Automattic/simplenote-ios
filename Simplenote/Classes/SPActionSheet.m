@@ -4,6 +4,8 @@
 #import "VSThemeManager.h"
 #import "SPButton.h"
 #import "SPSideBySideView.h"
+#import "Simplenote-Swift.h"
+
 
 #pragma mark - Implementation
 
@@ -68,7 +70,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
 
 #pragma mark - View Lifecycle
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -127,13 +129,13 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         CGSize textSize = [string sizeWithAttributes:@{NSFontAttributeName : font}];
         SPButton *textButton = [[SPButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width + labelPadding, [self.theme floatForKey:@"actionSheetButtonHeight"])];
 
-        textButton.backgroundHighlightColor = [self.theme colorForKey:@"actionSheetButtonBackgroundHighlightColor"];
+        textButton.backgroundHighlightColor = [UIColor colorWithName:UIColorNameActionSheetButtonBackgroundHighlightColor];
         textButton.titleLabel.font = font;
         textButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        textButton.titleLabel.textColor = [self.theme colorForKey:@"actionSheetFontColor"];
+        textButton.titleLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
         [textButton setTitle:string forState:UIControlStateNormal];
         
-        [textButton setTitleColor:[self.theme colorForKey:@"actionSheetButtonFontColor"]
+        [textButton setTitleColor:[UIColor colorWithName:UIColorNameActionSheetButtonFontColor]
                          forState:UIControlStateNormal];
 
         [textButton addTarget:self
@@ -191,8 +193,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     UILabel *titleLabel;
     
     if (message) {
-        NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
-                                          NSForegroundColorAttributeName: [self.theme colorForKey:@"actionSheetFontColor"]};
+        NSDictionary *titleAttributes = @{
+            NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
+            NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
+        };
         NSAttributedString *titleAttributedString = [[NSAttributedString alloc] initWithString:message
                                                                                     attributes:titleAttributes];
         titleSize = [titleAttributedString boundingRectWithSize:CGSizeMake([self.theme floatForKey:@"actionSheetMaxTitleWidth"], [self.theme floatForKey:@"actionSheetMaxTitleHeight"])
@@ -294,11 +298,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
             
             dividerRect.origin.y -= [self.theme floatForKey:@"actionSheetBoxPadding"] / 2.0;;
             dividerRect.size.width += 2 * motionEffectDistance;
-            
-            CALayer *divider = [[CALayer alloc] init];
-            divider.backgroundColor = [self.theme colorForKey:@"actionSheetDividerColor"].CGColor;
-            divider.frame = dividerRect;
-            [container.layer addSublayer:divider];
+
+            UIView *divider = [[UIView alloc] initWithFrame:dividerRect];
+            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
+            [container addSubview:divider];
         }
         
         i++;
@@ -317,7 +320,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     container.frame = CGRectMake(0, 0, totalWidth, totalHeight);
     
-    container.backgroundColor = [[self.theme colorForKey:@"actionSheetBackgroundColor"] colorWithAlphaComponent:0.97];
+    container.backgroundColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
     
     self.subviewsArray = viewArray;
     

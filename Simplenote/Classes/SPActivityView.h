@@ -50,8 +50,6 @@
 - (void)showActivityIndicator;
 - (void)hideActivityIndicator;
 
-- (void)setButtonImage:(UIImage *)image atIndex:(NSInteger)index;
-
 // access controlls
 
 - (UIButton *)toggleAtIndex:(NSInteger)index;

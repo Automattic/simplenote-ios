@@ -9,10 +9,8 @@
 #import "SPTagListViewCell.h"
 #import "VSThemeManager.h"
 #import "SPBorderedView.h"
+#import "Simplenote-Swift.h"
 
-@interface SPTagListViewCell ()
-
-@end
 
 @implementation SPTagListViewCell
 
@@ -21,18 +19,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        
         // style the cell
         self.backgroundColor = [UIColor clearColor];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
         
-        _textColor = [self.theme colorForKey:@"tagListFontColor"];
-        _highlightedTextColor = [self.theme colorForKey:@"tagListFontHighlightColor"];
+        _textColor = [UIColor colorWithName:UIColorNameTextColor];
+        _highlightedTextColor = [UIColor colorWithName:UIColorNameTintColor];
         
         SPBorderedView *selectedBackgroundView = [[SPBorderedView alloc] initWithFrame:self.bounds];
         selectedBackgroundView.borderInset = [self.theme edgeInsetsForKey:@"tagListHighlightInset"];
-        selectedBackgroundView.fillColor = [self.theme colorForKey:@"tagListHighlightBackgroundColor"];
+        selectedBackgroundView.fillColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         selectedBackgroundView.showLeftBorder = NO;
         selectedBackgroundView.showRightBorder = NO;
         selectedBackgroundView.showBottomBorder = NO;
@@ -163,7 +160,7 @@
 - (void)resetCellForReuse {
     [self setTextFieldEditable:NO];
     self.accessoryType = UITableViewCellAccessoryNone;
-    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

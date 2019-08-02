@@ -8,7 +8,6 @@
 
 #import "SPTagView.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "SPTagStub.h"
 #import <Simperium/Simperium.h>
 #import "SPAppDelegate.h"
@@ -64,8 +63,8 @@
 }
 
 - (void)applyStyle {
-    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
-    addTagField.keyboardAppearance = (self.theme.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 
 - (void)layoutSubviews {

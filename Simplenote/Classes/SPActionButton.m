@@ -7,27 +7,27 @@
 //
 
 #import "SPActionButton.h"
-#import "VSThemeManager.h"
+#import "Simplenote-Swift.h"
 
 static CGFloat const imageSide = 34.0;
 
 @implementation SPActionButton
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        initialSetupComplete = NO;
+        [self setupViews];
     }
+
     return self;
 }
 
 
 - (void)layoutSubviews {
-    
+
     [super layoutSubviews];
-    
-    [self setupViews];
+
     
     // center images in background
     
@@ -52,15 +52,14 @@ static CGFloat const imageSide = 34.0;
     self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    
-    [self setTitleColor:[[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"]
-               forState:UIControlStateNormal];
-    [self setTitleColor:[[[VSThemeManager sharedManager] theme] colorForKey:@"actionViewButtonDisabledColor"]
-               forState:UIControlStateDisabled];
+
+    UIColor *titleColorNormal = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *actionDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+
+    [self setTitleColor:titleColorNormal forState:UIControlStateNormal];
+    [self setTitleColor:actionDisabledColor forState:UIControlStateDisabled];
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-    initialSetupComplete = YES;
 }
 
 

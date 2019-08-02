@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPActionButton : UIButton {
-    
-    bool initialSetupComplete;
-}
+@interface SPActionButton : UIButton
 
 @end

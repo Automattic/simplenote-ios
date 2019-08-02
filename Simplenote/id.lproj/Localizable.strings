@@ -15,12 +15,6 @@
 /* Number of words in a note */
 "%d Words" = "%d Kata";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i Upaya Kode Sandi Gagal";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i Upaya Kode Sandi Gagal";
-
 /* Label of accept button on alert dialog */
 "Accept" = "Terima";
 
@@ -30,23 +24,8 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Tambahkan kolaborator baru...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tambahkan label";
-
-/* Title of option to display all notes */
-"All Notes" = "All Notes";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Sudah memiliki akun?";
-
-/* No comment provided by engineer. */
-"Back" = "Kembali";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
 
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
@@ -54,29 +33,14 @@
 /* Verb - work with others on a note */
 "Collaborate" = "Kolaborasi";
 
+/* Accessibility hint on button which shows the current collaborators on a note */
+"collaborate-accessibility-hint" = "Aktifkan yang lain untuk berkolaborasi";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Kolaborator";
 
-/* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Condensed Note List";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Konfirmasi";
-
-/* Ratings View: Contact */
-"Contact" = "Hubungi";
-
 /* No comment provided by engineer. */
-"Could Be Better" = "Bisa Lebih Baik";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "Tidak dapat membuat akun dengan alamat email dan kata sandi yang diberikan.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Tidak dapat masuk dengan alamat email dan kata sandi yang diberikan.";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Menurut Anda, penyempurnaan apa yang dapat kami lakukan?";
+"collaborators-description" = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Buat catatan baru";
@@ -84,20 +48,11 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "Kolaborator Saat Ini";
 
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Tema gelap";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "Debug";
-
-/* Permanent Delete */
-"Delete" = "Hapus";
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "Catatan ini dihapus pada perangkat lain.";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Abaikan keyboard";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Belum memiliki akun?";
 
 /* No comment provided by engineer. */
 "Done" = "Selesai";
@@ -111,60 +66,20 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Kosongkan sampah";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Masukkan kode sandi";
-
-/* Pin Lock */
-"Enter your passcode" = "Masukkan kode sandi Anda";
-
-/* Passcode Failed Attempts */
-"Have you lost access to Simplenote? You can regain access by re-installing the app and logging into your account." = "Apakah Anda tidak dapat mengakses Simplenote? Anda dapat mengaksesnya lagi dengan menginstal ulang aplikasi dan masuk ke akun Anda.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Temukan catatan dengan cepat menggunakan pencarian instan dan label sederhana.";
-
-/* Forgot Password */
-"Forgot your password? »" = "Forgot your password? »";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Memulai";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-\nIt really helps." = "Bagus! Dapatkah Anda memberi kami ulasan yang menarik?\\n\\nIni benar-benar membantu.";
-
 /* Noun - the version history of a note */
 "History" = "Riwayat";
+
+/* Accessibility hint on button which shows the history of a note */
+"history-accessibility-hint" = "Pulihkan catatan ke versi sebelumnya";
 
 /* Action - view the version history of a note */
 "History..." = "Riwayat...";
 
-/* No comment provided by engineer. */
-"How can we help?" = "Apa yang dapat kami bantu?";
-
-/* No comment provided by engineer. */
-"I Like It" = "Saya Menyukainya";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "Berikan Tinjauan";
-
-/* Month and day date formatter */
-"MMM d" = "d MMM";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "d MMM, h:mm a";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "d MMM yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "MMM yyyy";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Ratings View: Don't Like */
 "Menu" = "Menu";
 
-/* Label to create a new note */
-"New note" = "New note";
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"menu-accessibility-hint" = "Tampilkan opsi untuk catatan";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Tidak ada Catatan";
@@ -172,23 +87,20 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Tidak ada Hasil";
 
-/* No comment provided by engineer. */
-"No Thanks" = "Tidak, Terima Kasih";
-
 /* Confirmation shown when a note is published */
 "Note Published" = "Catatan Diterbitkan";
 
-/* No comment provided by engineer. */
-"Note not published" = "Note not published";
-
-/* Plural form of notes */
+/* Message shown in note list when no notes are in the current view */
 "Notes" = "Catatan";
 
-/* No comment provided by engineer. */
-"OK" = "OK";
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"notes-accessibility-hint" = "Tutup catatan saat ini";
 
 /* No comment provided by engineer. */
 "Off" = "Matikan";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
 
 /* No comment provided by engineer. */
 "On" = "Menyala";
@@ -198,15 +110,6 @@
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Kode sandi";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Kode sandi tidak cocok. Coba lagi.";
-
-/* Hint displayed in the password field */
-"Password" = "Kata sandi";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Kata sandi harus berisi sedikitnya 4 karakter.";
 
 /* Action to mark a note as pinned */
 "Pin note" = "Sematkan catatan";
@@ -223,9 +126,6 @@
 /* No comment provided by engineer. */
 "Preferences" = "Preferensi";
 
-/* Markdown Preview */
-"Preview" = "Pratinjau";
-
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Terbitkan";
 
@@ -238,20 +138,17 @@
 /* Switch which marks a note as published or unpublished */
 "Publish toggle" = "Terbitkan pilihan";
 
-/* No comment provided by engineer. */
+/* Confirmation shown when a note is published */
 "Published" = "Diterbitkan";
 
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Menerbitkan...";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Masukkan ulang kode sandi";
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Buang semua catatan dari sampah";
 
 /* Delete a tag and remove it from all associated notes */
 "Remove Tag" = "Buang Label";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Buang semua catatan dari sampah";
 
 /* Prompt asking user to confirm the removal of a tag from a note */
 "Remove tag?" = "Buang label?";
@@ -265,59 +162,29 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "Keamanan";
-
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Kirim";
-
-/* No comment provided by engineer. */
-"Send Feedback" = "Kirim Masukan";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Atur Kode Sandi";
 
 /* Title of options screen */
 "Settings" = "Settings";
 
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Bagikan daftar, kirimkan instruksi, atau terbitkan ide Anda.";
-
-/* No comment provided by engineer. */
-"Share note" = "Share note";
+/* Accessibility hint on button to share note */
+"share-accessibility-hint" = "Bagikan konten dari catatan saat ini";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Panel Sisi";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Masuk";
-
 /* Sign out of the active account in the app */
 "Sign Out" = "Keluar";
 
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "Mendaftar";
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "Tambahkan label pada catatan saat ini";
 
-/* A short link to access the account login screen */
-"Sign in" = "Masuk";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Mendaftar";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Catatan yang tidak disinkronkan akan dihapus saat Anda keluar. Anda dapat memverifikasi catatan Anda yang disinkronkan dengan masuk ke Aplikasi Web.";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Urutkan Catatan sesuai Abjad";
-
-/* Message shown in first launch view */
-"Stay organized" = "Tetap tertata";
+/* Accessibility hint on button to remove a tag from a current note */
+"tag-delete-accessibility-hint" = "Buang label dari catatan saat ini";
 
 /* Text used to display the name of a tag */
 "Tag: %@" = "Label: %@";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Ada masalah dengan koneksi. Coba lagi nanti.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Hari ini";
@@ -325,20 +192,14 @@
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Panel sisi label pilihan";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "ID Sentuhan";
+/* Accessibility hint on button which moves a note to the trash */
+"trash-accessibility-hint" = "Pindahkan catatan saat ini ke sampah";
 
 /* Trash (noun) - the location where deleted notes are stored */
-"Trash" = "Sampah";
+"Trash-noun" = "Sampah";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash" = "Sampah";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Matikan Kode Sandi";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Buka kunci %@";
+/* Trash (noun) - the location where deleted notes are stored */
+"Trash-verb" = "Sampah";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "Lepas sematan catatan";
@@ -349,75 +210,206 @@
 /* Message shown when unpublishing a note */
 "Unpublishing..." = "Batal menerbitkan...";
 
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "Catatan yang Tidak Disinkronkan Terdeteksi";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Gunakan di mana saja";
-
 /* Represents a snapshot in time for a note */
 "Version" = "Versi";
 
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Selamat Datang di Simplenote";
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"version-alert-message" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "Apa pendapat Anda tentang Simplenote?";
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"version-cell-accessibility-hint" = "Beralih ke versi ini";
 
-/* Message shown in first launch view */
-"Work together" = "Bekerja sama";
+/* Accessibility hint used when previous versions of a note are being fetched */
+"version-cell-fetching-accessibility-hint" = "Mengambil versi";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Kemarin";
 
-/* No comment provided by engineer. */
-"Your Email:" = "Email Anda:";
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Upaya Kode Sandi Gagal";
+
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Masukkan kode sandi";
+
+/* Pin Lock */
+"Enter your passcode" = "Masukkan kode sandi Anda";
+
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Kode sandi tidak cocok. Coba lagi.";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Masukkan ulang kode sandi";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Atur Kode Sandi";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Matikan Kode Sandi";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Buka kunci %@";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Upaya Kode Sandi Gagal";
+
+"welcomeNote-iOS" = "Selamat Datang di Simplenote untuk iOS!
+
+Untuk menambahkan catatan, ketuk tombol plus.
+
+Sentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.
+
+Anda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.
+
+Ketuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.
+
+Ada opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.
+
+Gunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http://simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date */
+"Sort Notes Alphabetically" = "Urutkan Catatan sesuai Abjad";
+
+/* A short description to access the account login screen */
+"Already have an account?" = "Sudah memiliki akun?";
+
+/* Hint displayed in the password confirmation field */
+"Confirm" = "Konfirmasi";
+
+/* An error message */
+"Could not create an account with the provided email address and password." = "Tidak dapat membuat akun dengan alamat email dan kata sandi yang diberikan.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Tidak dapat masuk dengan alamat email dan kata sandi yang diberikan.";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Belum memiliki akun?";
+
+/* Hint displayed in the password field */
+"Password" = "Kata sandi";
+
+/* Message displayed when password is invalid */
+"Password must contain at least 4 characters." = "Kata sandi harus berisi sedikitnya 4 karakter.";
+
+/* Message shown on passcode lock screen */
+"Sign in" = "Masuk";
+
+/* Message shown on passcode lock screen */
+"Sign In" = "Masuk";
+
+/* Title of button to create a new account (must be short) */
+"Sign up" = "Mendaftar";
+
+/* Title of button to create a new account (must be short) */
+"Sign Up" = "Mendaftar";
+
+/* Details for a dialog that is displayed when there's a connection problem */
+"There's a problem with the connection.  Please try again later." = "Ada masalah dengan koneksi. Coba lagi nanti.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid." = "Alamat email Anda tidak valid.";
 
 /* Description of Simplenote shown in first launch view */
+"Find notes quickly with instant searching and simple tags." = "Temukan catatan dengan cepat menggunakan pencarian instan dan label sederhana.";
+
+/* Button label shown on first launch screen to start the log in process */
+"Get Started" = "Memulai";
+
+/* Description of Simplenote shown in first launch view */
+"Share a list, post some instructions, or publish your thoughts." = "Bagikan daftar, kirimkan instruksi, atau terbitkan ide Anda.";
+
+/* Message shown in first launch view */
+"Stay organized" = "Tetap tertata";
+
+/* Message shown in first launch view */
+"Use it everywhere" = "Gunakan di mana saja";
+
+/* Message shown in first launch view */
+"Welcome to Simplenote" = "Selamat Datang di Simplenote";
+
+/* Message shown in first launch view */
+"Work together" = "Bekerja sama";
+
+/* Description of Simplenote shown in first launch view */
 "Your notes stay updated across all your devices. No buttons to press. It just works." = "Catatan Anda diperbarui lintas seluruh perangkat Anda. Tidak ada tombol untuk ditekan. Ini langsung bekerja.";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Aktifkan yang lain untuk berkolaborasi";
+/* Option to enable the dark app theme. */
+"Dark Theme" = "Tema gelap";
+
+
+"Debug" = "Debug";
+
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM yyyy";
+
+/* Month, day, and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "ID Sentuhan";
+
+/* Title displayed in the Option's Security section. */
+"Security" = "Keamanan";
+
+/* TOS */
+"By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
+
+/* Ratings View */
+"What do you think about Simplenote?" = "Apa pendapat Anda tentang Simplenote?";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
+"I Like It" = "Saya Menyukainya";
 
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Catatan ini dihapus pada perangkat lain.";
+/* No comment provided by engineer. */
+"Could Be Better" = "Bisa Lebih Baik";
 
-/* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Pulihkan catatan ke versi sebelumnya";
+"Great! Could you leave us a nice review?
+It really helps." = "Bagus! Dapatkah Anda memberi kami ulasan yang menarik?\n\nIni benar-benar membantu.";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Tampilkan opsi untuk catatan";
+/* No comment provided by engineer. */
+"Leave a Review" = "Berikan Tinjauan";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Tutup catatan saat ini";
+/* No comment provided by engineer. */
+"No Thanks" = "Tidak, Terima Kasih";
 
-/* Accessibility hint on button to share note */
-"Share the content of the current note" = "Bagikan konten dari catatan saat ini";
+/* Ratings View: Don't Like */
+"Could you tell us how we could improve?" = "Menurut Anda, penyempurnaan apa yang dapat kami lakukan?";
 
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Tambahkan label pada catatan saat ini";
+/* No comment provided by engineer. */
+"Send Feedback" = "Kirim Masukan";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"Remove tag from the current note" = "Buang label dari catatan saat ini";
+/* Ratings View: Contact */
+"Contact" = "Hubungi";
 
-/* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Pindahkan catatan saat ini ke sampah";
+/* No comment provided by engineer. */
+"Your Email:" = "Email Anda:";
 
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
+/* No comment provided by engineer. */
+"How can we help?" = "Apa yang dapat kami bantu?";
 
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Beralih ke versi ini";
+/* No comment provided by engineer. */
+"Back" = "Kembali";
 
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Mengambil versi";
+/* Permanent Delete */
+"Delete" = "Hapus";
 
-/* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
+/* Markdown Preview */
+"Preview" = "Pratinjau";
+
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Catatan yang tidak disinkronkan akan dihapus saat Anda keluar. Anda dapat memverifikasi catatan Anda yang disinkronkan dengan masuk ke Aplikasi Web.";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Catatan yang Tidak Disinkronkan Terdeteksi";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Add a tag..." = "Tag...";
+
+/* Passcode Failed Attempts */
+"FailedAttempts" = "Apakah Anda tidak dapat mengakses Simplenote? Anda dapat mengaksesnya lagi dengan menginstal ulang aplikasi dan masuk ke akun Anda.";
 
