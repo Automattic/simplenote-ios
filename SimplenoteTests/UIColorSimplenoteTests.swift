@@ -18,10 +18,6 @@ class UIColorSimplenoteTests: XCTestCase {
     /// Verify every single UIColorName in existance yields a valid UIColor instancce
     ///
     func testUIColorInstancesObtainedViaUIColorNameResolveToLightAndDarkModeEffectiveColors() {
-        guard #available(iOS 13, *) else {
-            return
-        }
-
         let lightTraits = UITraitCollection(userInterfaceStyle: .light)
         let darkTraits = UITraitCollection(userInterfaceStyle: .dark)
 
