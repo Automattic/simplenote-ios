@@ -161,6 +161,13 @@ class SPAuthViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+    /// Deinitializer!
+    ///
+    deinit {
+        stopListeningToNotifications()
+    }
+
     /// Designated Initializer
     ///
     init(simperiumAuthenticator: SPAuthenticator, mode: AuthenticationMode = .login) {
@@ -175,12 +182,13 @@ class SPAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
+        startListeningToNotifications()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailInputView.becomeFirstResponder()
-        ensureOnePasswordIsAvailable()
+        refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
     }
 }
@@ -197,6 +205,8 @@ extension SPAuthViewController {
     @IBAction func revealPasswordWasReleased() {
         passwordInputView.isSecureTextEntry = true
     }
+
+
 }
 
 
@@ -210,12 +220,21 @@ private extension SPAuthViewController {
         navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(refreshOnePasswordAvailability), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func ensureStylesMatchValidationState() {
         let name: UIColorName = isInputValid ? .simplenoteLightNavy : .simplenotePalePurple
         primaryActionButton.backgroundColor = .color(name: name)
     }
 
-    func ensureOnePasswordIsAvailable() {
+    @objc func refreshOnePasswordAvailability() {
         emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
     }
 }
