@@ -197,6 +197,8 @@
 		B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE822AA9DD700B968CD /* Note.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
+		B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982CF22F8643200C37C29 /* SPTextInputView.swift */; };
+		B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D122F8644000C37C29 /* SPSquaredButton.swift */; };
 		B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */; };
 		B5DF734222A565DA00602CE7 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734122A565DA00602CE7 /* Options.swift */; };
 		B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
@@ -465,6 +467,8 @@
 		B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusChecker.m; path = Classes/StatusChecker.m; sourceTree = "<group>"; };
 		B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusChecker.h; path = Classes/StatusChecker.h; sourceTree = "<group>"; };
 		B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
+		B5D982CF22F8643200C37C29 /* SPTextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPTextInputView.swift; path = Classes/SPTextInputView.swift; sourceTree = "<group>"; };
+		B5D982D122F8644000C37C29 /* SPSquaredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSquaredButton.swift; path = Classes/SPSquaredButton.swift; sourceTree = "<group>"; };
 		B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPDefaultTableViewCell.swift; path = Classes/SPDefaultTableViewCell.swift; sourceTree = "<group>"; };
 		B5DF734122A565DA00602CE7 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Simplenote.swift"; path = "Classes/UserDefaults+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1114,6 +1118,7 @@
 				E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */,
 				E239600F17B6A22800504FFB /* SPOutsideTouchView.h */,
 				E239601017B6A22800504FFB /* SPOutsideTouchView.m */,
+				B5D982D122F8644000C37C29 /* SPSquaredButton.swift */,
 				E213C2D117A87246009BE49E /* SPSideBySideView.h */,
 				E213C2D217A87246009BE49E /* SPSideBySideView.m */,
 				E29ADD6E17848ED300E55842 /* SPTableViewCell.h */,
@@ -1122,6 +1127,7 @@
 				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
 				E215C79C180B228800AD36B5 /* SPTextField.m */,
+				B5D982CF22F8643200C37C29 /* SPTextInputView.swift */,
 				E2D444031799F1DD0060FDE2 /* SPTextView.h */,
 				E2D444041799F1DD0060FDE2 /* SPTextView.m */,
 				E2465A2117AD70810097B19B /* SPToggle.h */,
@@ -1733,6 +1739,7 @@
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
+				B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
@@ -1792,6 +1799,7 @@
 				B5C57A4122E78F4D009166EA /* UIColorName.swift in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
+				B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */,
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
