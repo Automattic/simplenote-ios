@@ -155,6 +155,7 @@
 		B561215F22F8759F00567871 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526FA6D22DF86EA00831994 /* SPTextInputView.swift */; };
 		B561216022F875A400567871 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D322F8656D00C37C29 /* SPSquaredButton.swift */; };
 		B561216222F8942400567871 /* SPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B561216122F8942400567871 /* SPLabel.swift */; };
+		B561216422F8A19400567871 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B561216322F8A19400567871 /* UIView+Animations.swift */; };
 		B568596322C56DBB00F2F13C /* SnapshotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
 		B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */; };
@@ -409,6 +410,7 @@
 		B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTests.swift; sourceTree = "<group>"; };
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B561216122F8942400567871 /* SPLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPLabel.swift; path = Classes/SPLabel.swift; sourceTree = "<group>"; };
+		B561216322F8A19400567871 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Animations.swift"; path = "Classes/UIView+Animations.swift"; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotRenderer.swift; path = Classes/SnapshotRenderer.swift; sourceTree = "<group>"; };
 		B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSExtensionContext+Simplenote.swift"; sourceTree = "<group>"; };
@@ -954,6 +956,7 @@
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B56DDC5A22DE615E00DD3D69 /* UINavigationBar+Simplenote.swift */,
+				B561216322F8A19400567871 /* UIView+Animations.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
@@ -1877,6 +1880,7 @@
 				E2922AC7180CAC62003AF914 /* SPSidebarViewController.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
+				B561216422F8A19400567871 /* UIView+Animations.swift in Sources */,
 				46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
