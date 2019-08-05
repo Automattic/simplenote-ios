@@ -10,8 +10,8 @@
 
 @implementation SPTextField
 
-- (void)drawPlaceholderInRect:(CGRect)rect {
-    
+- (void)drawPlaceholderInRect:(CGRect)rect
+{    
     if (_placeholdTextColor && self.placeholder.length > 0) {
         
         [_placeholdTextColor setFill];
@@ -35,6 +35,16 @@
                                          NSForegroundColorAttributeName: _placeholdTextColor}];
     } else
         [super drawPlaceholderInRect:rect];
+}
+
+- (CGRect)rightViewRectForBounds:(CGRect)bounds
+{
+    CGRect textRect = [super rightViewRectForBounds:bounds];
+    if (CGRectGetWidth(textRect) > 0) {
+        textRect.origin.x -= _rightViewInsets.right;
+    }
+
+    return textRect;
 }
 
 @end
