@@ -25,6 +25,12 @@ enum ThemeColorKey: String {
     case noteHeadlineFontColor
     case searchBarImageColor
     case searchHighlightFontColor
+    case simplenoteAlmostBlack
+    case simplenoteLightNavy
+    case simplenoteLightPink
+    case simplenoteMidBlue
+    case simplenotePalePurple
+    case simplenoteSlateGrey
     case switchTintColor
     case switchOnTintColor
     case tableViewBackgroundColor
@@ -49,8 +55,11 @@ enum ThemeImageKey: String {
     case navigationBarShadowImage
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
+    case onePasswordImage
     case searchBarBackgroundImage
     case tagViewDeletionImage
+    case visibilityOnImage
+    case visibilityOffImage
 }
 
 
@@ -70,10 +79,16 @@ extension ThemeImageKey {
             return "navigation_bar_background"
         case .navigationBarBackgroundPromptImage:
             return "navigation_bar_background_prompt"
+        case .onePasswordImage:
+            return "button_onepassword"
         case .searchBarBackgroundImage:
             return "searchbar_background"
         case .tagViewDeletionImage:
             return "button_delete_small"
+        case .visibilityOnImage:
+            return "button_visibility_on"
+        case .visibilityOffImage:
+            return "button_visibility_off"
         }
     }
 }
