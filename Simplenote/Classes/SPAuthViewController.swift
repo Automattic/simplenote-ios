@@ -226,25 +226,28 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
-// TODO: Disable UserInteraction
-
         view.endEditing(true)
+        view.isUserInteractionEnabled = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
         primaryActionSpinner.startAnimating()
 
         controller.loginWithCredentials(username: email, password: password) { error in
-            guard let error = error else {
-                SPTracker.trackUserSignedIn()
-                return
+            if let error = error {
+                self.presentError(error: error)
             }
 
-            self.presentError(error: error)
+            self.view.isUserInteractionEnabled = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            SPTracker.trackUserSignedIn()
         }
     }
 
     @IBAction func performSignUp() {
-// TODO: Disable UserInteraction
-
         view.endEditing(true)
+        view.isUserInteractionEnabled = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
         primaryActionSpinner.startAnimating()
 
         controller.signupWithCredentials(username: email, password: password) { error in
@@ -253,6 +256,8 @@ private extension SPAuthViewController {
             }
 
             self.primaryActionSpinner.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             SPTracker.trackUserAccountCreated()
         }
     }
