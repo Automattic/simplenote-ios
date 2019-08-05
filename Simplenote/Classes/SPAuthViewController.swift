@@ -12,10 +12,10 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var emailInputView: SPTextInputView! {
         didSet {
             emailInputView.keyboardType = .emailAddress
-            emailInputView.placeholder = Constants.emailPlaceholder
+            emailInputView.placeholder = AuthenticationStrings.emailPlaceholder
             emailInputView.returnKeyType = .next
             emailInputView.rightView = onePasswordButton
-            emailInputView.rightViewInsets = Constants.onePasswordInsets
+            emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
             emailInputView.textColor = .color(name: .simplenoteAlmostBlack)
             emailInputView.delegate = self
@@ -27,11 +27,11 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var passwordInputView: SPTextInputView! {
         didSet {
             passwordInputView.isSecureTextEntry = true
-            passwordInputView.placeholder = Constants.passwordPlaceholder
+            passwordInputView.placeholder = AuthenticationStrings.passwordPlaceholder
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
-            passwordInputView.rightViewInsets = Constants.onePasswordInsets
+            passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             passwordInputView.textColor = .color(name: .simplenoteAlmostBlack)
             passwordInputView.delegate = self
         }
@@ -362,50 +362,44 @@ struct AuthenticationMode {
 //
 extension AuthenticationMode {
 
-    /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles
-    /// authentication scenarios.
+    /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
     static var login: AuthenticationMode {
-        let title               = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-        let onePasswordSelector = #selector(SPAuthViewController.performOnePasswordLogIn)
-        let primaryText         = NSLocalizedString("Log In", comment: "LogIn Action")
-        let primarySelector     = #selector(SPAuthViewController.performLogIn)
-        let secondaryText       = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
-        let secondarySelector   = #selector(SPAuthViewController.presentPasswordReset)
-
-        return AuthenticationMode(title: title,
-                                  onePasswordSelector: onePasswordSelector,
-                                  primaryActionSelector: primarySelector,
-                                  primaryActionText: primaryText,
-                                  secondaryActionSelector: secondarySelector,
-                                  secondaryActionText: secondaryText)
+        return .init(title:                     AuthenticationStrings.loginTitle,
+                     onePasswordSelector:       #selector(SPAuthViewController.performOnePasswordLogIn),
+                     primaryActionSelector:     #selector(SPAuthViewController.performLogIn),
+                     primaryActionText:         AuthenticationStrings.loginPrimaryAction,
+                     secondaryActionSelector:   #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText:       AuthenticationStrings.loginSecondaryAction)
     }
 
-    /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles
-    /// user account creation scenarios.
+    /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        let title               = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
-        let onePasswordSelector = #selector(SPAuthViewController.performOnePasswordSignUp)
-        let primaryText         = NSLocalizedString("Sign Up", comment: "SignUp Action")
-        let primarySelector     = #selector(SPAuthViewController.performSignUp)
-        let secondaryText       = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
-        let secondarySelector   = #selector(SPAuthViewController.presentTermsOfService)
-
-        return AuthenticationMode(title: title,
-                                  onePasswordSelector: onePasswordSelector,
-                                  primaryActionSelector: primarySelector,
-                                  primaryActionText: primaryText,
-                                  secondaryActionSelector: secondarySelector,
-                                  secondaryActionText: secondaryText)
+        return .init(title:                     AuthenticationStrings.signupTitle,
+                     onePasswordSelector:       #selector(SPAuthViewController.performOnePasswordSignUp),
+                     primaryActionSelector:     #selector(SPAuthViewController.performSignUp),
+                     primaryActionText:         AuthenticationStrings.signupPrimaryAction,
+                     secondaryActionSelector:   #selector(SPAuthViewController.presentTermsOfService),
+                     secondaryActionText:       AuthenticationStrings.signupSecondaryAction)
     }
 }
 
 
 // MARK: - Constants
 //
-private struct Constants {
-    static let emailPlaceholder     = NSLocalizedString("Email", comment: "Email TextField Placeholder")
-    static let passwordPlaceholder  = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+private struct AuthenticationStrings {
+    static let loginTitle               = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let loginPrimaryAction       = NSLocalizedString("Log In", comment: "LogIn Action")
+    static let loginSecondaryAction     = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let signupTitle              = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
+    static let signupPrimaryAction      = NSLocalizedString("Sign Up", comment: "SignUp Action")
+    static let signupSecondaryAction    = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
+    static let emailPlaceholder         = NSLocalizedString("Email", comment: "Email TextField Placeholder")
+    static let passwordPlaceholder      = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+}
+
+
+private struct AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 }
