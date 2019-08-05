@@ -15,6 +15,7 @@
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
                 <outlet property="passwordWarningLabel" destination="UyC-If-pXj" id="D2M-PR-Tph"/>
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
+                <outlet property="primaryActionSpinner" destination="o3M-2A-urw" id="pe9-Bb-Kf7"/>
                 <outlet property="secondaryActionButton" destination="PfS-vU-7i3" id="zj3-Ly-5X9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bxN-Zo-xBW"/>
             </connections>
@@ -59,14 +60,29 @@
                             <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
                             <rect key="frame" x="0.0" y="156" width="360" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <state key="normal" title="#Primary#"/>
+                                </button>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="o3M-2A-urw">
+                                    <rect key="frame" x="322" y="12" width="20" height="20"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="Dd9-ee-gQN"/>
+                                <constraint firstAttribute="bottom" secondItem="q3p-Ji-dOm" secondAttribute="bottom" id="42P-Dw-g8A"/>
+                                <constraint firstAttribute="trailing" secondItem="o3M-2A-urw" secondAttribute="trailing" constant="18" id="5zP-Ho-8zY"/>
+                                <constraint firstItem="q3p-Ji-dOm" firstAttribute="leading" secondItem="CGr-O3-MBQ" secondAttribute="leading" id="FFb-pZ-fm5"/>
+                                <constraint firstAttribute="height" constant="44" id="W2x-0n-6Ya"/>
+                                <constraint firstAttribute="trailing" secondItem="q3p-Ji-dOm" secondAttribute="trailing" id="W8R-80-nWL"/>
+                                <constraint firstItem="q3p-Ji-dOm" firstAttribute="top" secondItem="CGr-O3-MBQ" secondAttribute="top" id="wMk-bX-erq"/>
+                                <constraint firstItem="o3M-2A-urw" firstAttribute="centerY" secondItem="CGr-O3-MBQ" secondAttribute="centerY" id="wvA-qg-zbY"/>
                             </constraints>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                            <state key="normal" title="#Primary#"/>
-                        </button>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
                             <rect key="frame" x="0.0" y="208" width="360" height="44"/>
                             <constraints>
@@ -80,11 +96,11 @@
                         <constraint firstAttribute="trailing" secondItem="PfS-vU-7i3" secondAttribute="trailing" id="0QL-Iw-KLz"/>
                         <constraint firstItem="PfS-vU-7i3" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="314-fc-3eX"/>
                         <constraint firstAttribute="trailing" secondItem="pdF-nK-gXE" secondAttribute="trailing" id="51g-0D-Oyv"/>
+                        <constraint firstItem="CGr-O3-MBQ" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="BIX-Fy-gqY"/>
                         <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
                         <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
-                        <constraint firstAttribute="trailing" secondItem="q3p-Ji-dOm" secondAttribute="trailing" id="e0F-e2-Zw4"/>
-                        <constraint firstItem="q3p-Ji-dOm" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="m2e-tC-EO0"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
+                        <constraint firstAttribute="trailing" secondItem="CGr-O3-MBQ" secondAttribute="trailing" id="vUF-qZ-Vmm"/>
                         <constraint firstItem="pdF-nK-gXE" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="xzh-aD-Ag5"/>
                     </constraints>
                 </stackView>

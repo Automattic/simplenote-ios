@@ -55,13 +55,21 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// # Login Action
+    /// # Primary Action: LogIn / SignUp
     ///
     @IBOutlet private var primaryActionButton: SPSquaredButton! {
         didSet {
             primaryActionButton.setTitle(mode.primaryActionText, for: .normal)
             primaryActionButton.setTitleColor(.white, for: .normal)
             primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
+        }
+    }
+
+    /// # Primary Action Spinner!
+    ///
+    @IBOutlet private var primaryActionSpinner: UIActivityIndicatorView! {
+        didSet {
+            primaryActionSpinner.style = .white
         }
     }
 
@@ -218,9 +226,10 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
-// TODO: Spinner
-// TODO: Validation
+// TODO: Disable UserInteraction
+
         view.endEditing(true)
+        primaryActionSpinner.startAnimating()
 
         controller.loginWithCredentials(username: email, password: password) { error in
             guard let error = error else {
@@ -233,18 +242,18 @@ private extension SPAuthViewController {
     }
 
     @IBAction func performSignUp() {
-// TODO: Spinner
-// TODO: Validation
+// TODO: Disable UserInteraction
 
         view.endEditing(true)
+        primaryActionSpinner.startAnimating()
 
         controller.signupWithCredentials(username: email, password: password) { error in
-            guard let error = error else {
-                SPTracker.trackUserAccountCreated()
-                return
+            if let error = error {
+                self.presentError(error: error)
             }
 
-            self.presentError(error: error)
+            self.primaryActionSpinner.stopAnimating()
+            SPTracker.trackUserAccountCreated()
         }
     }
 
