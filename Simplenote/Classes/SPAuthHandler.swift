@@ -13,6 +13,24 @@ enum SPAuthError: Error {
     case unknown
 }
 
+extension SPAuthError {
+
+    var description: String? {
+        switch self {
+        case .loginBadCredentials:
+            return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
+        case .signupBadCredentials:
+            return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
+        case .signupUserAlreadyExists:
+            return NSLocalizedString("That email is already being used", comment: "Error when address is in use")
+        case .unknown:
+            return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
+        default:
+            return nil
+        }
+    }
+}
+
 
 // MARK: - SPAuthHandler
 //
@@ -165,5 +183,4 @@ private extension SPAuthHandler {
             return .unknown
         }
     }
-
 }
