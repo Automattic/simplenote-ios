@@ -64,11 +64,11 @@
                                 PinLockDelegate>
 
 
-@property (strong, nonatomic) Simperium						*simperium;
-@property (strong, nonatomic) NSManagedObjectContext		*managedObjectContext;
-@property (strong, nonatomic) NSManagedObjectModel			*managedObjectModel;
-@property (strong, nonatomic) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
-@property (weak,   nonatomic) SPModalActivityIndicator		*signOutActivityIndicator;
+@property (strong, nonatomic) Simperium                     *simperium;
+@property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
+@property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
 
 @end
 
