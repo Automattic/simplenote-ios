@@ -23,7 +23,8 @@ protocol SPTextInputViewDelegate : NSObjectProtocol {
 }
 
 
-// MARK: - SPTextInputView
+// MARK: - SPTextInputView:
+//         Renders a custom UITextView with bezel. When becomes the first responder, the border color will be refreshed.
 //
 @IBDesignable
 class SPTextInputView: UIView {
