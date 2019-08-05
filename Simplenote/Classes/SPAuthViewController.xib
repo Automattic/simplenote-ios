@@ -83,7 +83,7 @@
                                 <constraint firstItem="o3M-2A-urw" firstAttribute="centerY" secondItem="CGr-O3-MBQ" secondAttribute="centerY" id="wvA-qg-zbY"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
                             <rect key="frame" x="0.0" y="208" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>

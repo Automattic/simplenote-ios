@@ -204,6 +204,7 @@
 		B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
 		B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE822AA9DD700B968CD /* Note.swift */; };
 		B5D1A58122F8BA8E009E952B /* SPAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D1A58022F8BA8E009E952B /* SPAuthError.swift */; };
+		B5D1A58322F8D242009E952B /* NSMutableAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D1A58222F8D242009E952B /* NSMutableAttributedString+Simplenote.swift */; };
 		B5D26AE422DCCCAC00104C39 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
@@ -476,6 +477,7 @@
 		B5CFFFE622AA9DB100B968CD /* Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
 		B5CFFFE822AA9DD700B968CD /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		B5D1A58022F8BA8E009E952B /* SPAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthError.swift; path = Classes/SPAuthError.swift; sourceTree = "<group>"; };
+		B5D1A58222F8D242009E952B /* NSMutableAttributedString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+Simplenote.swift"; path = "Classes/NSMutableAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
 		B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPOnboardingViewController.swift; path = Classes/SPOnboardingViewController.swift; sourceTree = "<group>"; };
 		B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Development.entitlements"; sourceTree = "<group>"; };
 		B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Internal.entitlements"; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
+				B5D1A58222F8D242009E952B /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
@@ -1772,6 +1775,7 @@
 				B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
+				B5D1A58322F8D242009E952B /* NSMutableAttributedString+Simplenote.swift in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,

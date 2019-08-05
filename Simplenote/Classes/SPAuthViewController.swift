@@ -77,10 +77,15 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
-            let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
+            if let title = mode.secondaryActionText {
+                secondaryActionButton.setTitle(title, for: .normal)
+                secondaryActionButton.setTitleColor(.color(name: .simplenoteLightNavy), for: .normal)
+            }
 
-            secondaryActionButton.setTitle(mode.secondaryActionText, for: .normal)
-            secondaryActionButton.setTitleColor(simplenoteLightNavy, for: .normal)
+            if let attributedTitle = mode.secondaryActionAttributedText {
+                secondaryActionButton.setAttributedTitle(attributedTitle, for: .normal)
+            }
+
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
@@ -375,26 +380,6 @@ private extension SPAuthViewController {
             passwordWarningLabel.animateVisibility(isHidden: true)
         }
     }
-
-
-//- (IBAction)signInErrorAction:(NSNotification *)notification
-//{
-//    NSString *errorMessage = NSLocalizedString(@"An error was encountered while signing in.", @"Sign in error message");
-//    if (notification.userInfo != nil && notification.userInfo[@"errorString"]) {
-//        errorMessage = [notification.userInfo valueForKey:@"errorString"];
-//    }
-//
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//    UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Couldn't Sign In", @"Alert dialog title displayed on sign in error")
-//                                                                   message:errorMessage
-//                                                            preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-//                                                          handler:^(UIAlertAction * action) {}];
-//
-//    [errorAlert addAction:defaultAction];
-//    [self presentViewController:errorAlert animated:YES completion:nil];
-//}
 }
 
 
@@ -443,7 +428,8 @@ struct AuthenticationMode {
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
-    let secondaryActionText: String
+    let secondaryActionText: String?
+    let secondaryActionAttributedText: NSAttributedString?
 }
 
 
@@ -454,45 +440,70 @@ extension AuthenticationMode {
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
     static var login: AuthenticationMode {
-        return .init(title:                     AuthenticationStrings.loginTitle,
-                     onePasswordSelector:       #selector(SPAuthViewController.performOnePasswordLogIn),
-                     primaryActionSelector:     #selector(SPAuthViewController.performLogIn),
-                     primaryActionText:         AuthenticationStrings.loginPrimaryAction,
-                     secondaryActionSelector:   #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText:       AuthenticationStrings.loginSecondaryAction)
+        return .init(title:                         AuthenticationStrings.loginTitle,
+                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
+                     primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
+                     primaryActionText:             AuthenticationStrings.loginPrimaryAction,
+                     secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
+                     secondaryActionAttributedText: nil)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        return .init(title:                     AuthenticationStrings.signupTitle,
-                     onePasswordSelector:       #selector(SPAuthViewController.performOnePasswordSignUp),
-                     primaryActionSelector:     #selector(SPAuthViewController.performSignUp),
-                     primaryActionText:         AuthenticationStrings.signupPrimaryAction,
-                     secondaryActionSelector:   #selector(SPAuthViewController.presentTermsOfService),
-                     secondaryActionText:       AuthenticationStrings.signupSecondaryAction)
+        return .init(title:                         AuthenticationStrings.signupTitle,
+                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
+                     primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
+                     primaryActionText:             AuthenticationStrings.signupPrimaryAction,
+                     secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
+                     secondaryActionText:           nil,
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
     }
 }
 
 
-// MARK: - Constants
+// MARK: - Authentication Strings
 //
-private struct AuthenticationStrings {
-    static let loginTitle               = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-    static let loginPrimaryAction       = NSLocalizedString("Log In", comment: "LogIn Action")
-    static let loginSecondaryAction     = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
-    static let signupTitle              = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
-    static let signupPrimaryAction      = NSLocalizedString("Sign Up", comment: "SignUp Action")
-    static let signupSecondaryAction    = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
-    static let emailPlaceholder         = NSLocalizedString("Email", comment: "Email TextField Placeholder")
-    static let passwordPlaceholder      = NSLocalizedString("Password", comment: "Password TextField Placeholder")
-    static let acceptActionText         = NSLocalizedString("Accept", comment: "Accept error message")
-    static let usernameInvalid          = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalid          = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
+private enum AuthenticationStrings {
+    static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
+    static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
+    static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
+    static let signupSecondaryActionPrefix  = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
+    static let signupSecondaryActionSuffix  = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
+    static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
+    static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept error message")
+    static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
+    static let passwordInvalid              = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
 }
 
 
-private struct AuthenticationConstants {
+// MARK: - Strings >> Authenticated Strings Convenience Properties
+//
+private extension AuthenticationStrings {
+
+    /// Returns a properly formatted Secondary Action String for Signup
+    ///
+    static var signupSecondaryAttributedAction: NSAttributedString {
+        let output = NSMutableAttributedString(string: String(), attributes: [
+            .font: UIFont.preferredFont(forTextStyle: .subheadline)
+        ])
+
+        output.append(string: signupSecondaryActionPrefix, foregroundColor: .color(name: .simplenoteGunmetal))
+        output.append(string: " ")
+        output.append(string: signupSecondaryActionSuffix, foregroundColor: .color(name: .simplenoteLightNavy))
+
+        return output
+    }
+}
+
+
+// MARK: - Authentication Constants
+//
+private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }

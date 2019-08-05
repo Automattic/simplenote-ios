@@ -146,4 +146,23 @@ class SPAuthHandler {
 //
 //    [SPTracker trackWPCCButtonPressed];
     }
+
+//- (IBAction)signInErrorAction:(NSNotification *)notification
+//{
+//    NSString *errorMessage = NSLocalizedString(@"An error was encountered while signing in.", @"Sign in error message");
+//    if (notification.userInfo != nil && notification.userInfo[@"errorString"]) {
+//        errorMessage = [notification.userInfo valueForKey:@"errorString"];
+//    }
+//
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Couldn't Sign In", @"Alert dialog title displayed on sign in error")
+//                                                                   message:errorMessage
+//                                                            preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                          handler:^(UIAlertAction * action) {}];
+//
+//    [errorAlert addAction:defaultAction];
+//    [self presentViewController:errorAlert animated:YES completion:nil];
+//}
 }
