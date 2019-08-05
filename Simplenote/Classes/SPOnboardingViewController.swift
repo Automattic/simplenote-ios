@@ -49,21 +49,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     }
 
     @IBAction func signupWasPressed() {
-        guard let simperiumAuthenticator = authenticator else {
-            fatalError()
-        }
-
-        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: .signup)
-        navigationController?.pushViewController(viewController, animated: true)
+        presentAuthenticationInterface(mode: .signup)
     }
 
     @IBAction func loginWasPressed() {
-        guard let simperiumAuthenticator = authenticator else {
-            fatalError()
-        }
-
-        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: .login)
-        navigationController?.pushViewController(viewController, animated: true)
+        presentAuthenticationInterface(mode: .login)
     }
 }
 
@@ -77,11 +67,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        guard let navigationController = navigationController else {
-            return
-        }
-
-        navigationController.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
 
     func setupActionButtons() {
@@ -108,6 +94,15 @@ private extension SPOnboardingViewController {
             simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
             headerLabel.font = .preferredFont(forTextStyle: .title3)
         }
+    }
+
+    func presentAuthenticationInterface(mode: AuthenticationMode) {
+        guard let simperiumAuthenticator = authenticator else {
+            fatalError()
+        }
+
+        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: mode)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
