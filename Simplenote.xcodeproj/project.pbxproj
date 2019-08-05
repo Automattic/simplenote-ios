@@ -203,6 +203,7 @@
 		B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE022AA9AD100B968CD /* TextBundleWrapper.m */; };
 		B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
 		B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE822AA9DD700B968CD /* Note.swift */; };
+		B5D1A58122F8BA8E009E952B /* SPAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D1A58022F8BA8E009E952B /* SPAuthError.swift */; };
 		B5D26AE422DCCCAC00104C39 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
@@ -474,6 +475,7 @@
 		B5CFFFE322AA9B1900B968CD /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		B5CFFFE622AA9DB100B968CD /* Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
 		B5CFFFE822AA9DD700B968CD /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		B5D1A58022F8BA8E009E952B /* SPAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPAuthError.swift; path = Classes/SPAuthError.swift; sourceTree = "<group>"; };
 		B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPOnboardingViewController.swift; path = Classes/SPOnboardingViewController.swift; sourceTree = "<group>"; };
 		B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Development.entitlements"; sourceTree = "<group>"; };
 		B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-Internal.entitlements"; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 				B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */,
 				B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */,
 				B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */,
+				B5D1A58022F8BA8E009E952B /* SPAuthError.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1897,6 +1900,7 @@
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
 				BE83424E1D5AA83B0000811F /* SPCredentials.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
+				B5D1A58122F8BA8E009E952B /* SPAuthError.swift in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				B561216022F875A400567871 /* SPSquaredButton.swift in Sources */,
