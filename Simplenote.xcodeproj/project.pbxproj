@@ -135,7 +135,6 @@
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
 		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
-		B526FA6E22DF86EA00831994 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526FA6D22DF86EA00831994 /* SPTextInputView.swift */; };
 		B526FA7022DF870A00831994 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526FA6F22DF870A00831994 /* SPSquaredButton.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */; };
@@ -204,7 +203,6 @@
 		B5D26AE422DCCCAC00104C39 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D26AE322DCCCAC00104C39 /* SPOnboardingViewController.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D43FED1BA8CBBE00EF5104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5D43FEB1BA8CBBE00EF5104 /* LaunchScreen.xib */; };
-		B5D982D422F8656E00C37C29 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D322F8656D00C37C29 /* SPSquaredButton.swift */; };
 		B5D982D622F8658A00C37C29 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D522F8658A00C37C29 /* SPTextInputView.swift */; };
 		B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */; };
 		B5DF734222A565DA00602CE7 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734122A565DA00602CE7 /* Options.swift */; };
@@ -1826,7 +1824,6 @@
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
-				B526FA6E22DF86EA00831994 /* SPTextInputView.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
@@ -1839,7 +1836,6 @@
 				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */,
-				B5D982D422F8656E00C37C29 /* SPSquaredButton.swift in Sources */,
 				B589E16C22E0B09F003FFF04 /* SPAuthHandler.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,

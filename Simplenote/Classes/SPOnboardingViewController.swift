@@ -91,7 +91,10 @@ private extension SPOnboardingViewController {
         headerLabel.textColor = simplenoteAlmostBlack
 
         if #available(iOS 11, *) {
+            simplenoteLabel.adjustsFontSizeToFitWidth = true
             simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
+
+            headerLabel.adjustsFontSizeToFitWidth = true
             headerLabel.font = .preferredFont(forTextStyle: .title3)
         }
     }
