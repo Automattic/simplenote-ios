@@ -254,11 +254,13 @@ private extension SPAuthViewController {
         controller.loginWithCredentials(username: email, password: password) { error in
             if let error = error {
                 self.presentError(error: error)
+            } else {
+                SPTracker.trackUserSignedIn()
             }
 
+            self.primaryActionSpinner.stopAnimating()
             self.view.isUserInteractionEnabled = true
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            SPTracker.trackUserSignedIn()
         }
     }
 
@@ -272,12 +274,13 @@ private extension SPAuthViewController {
         controller.signupWithCredentials(username: email, password: password) { error in
             if let error = error {
                 self.presentError(error: error)
+            } else {
+                SPTracker.trackUserAccountCreated()
             }
 
             self.primaryActionSpinner.stopAnimating()
             self.view.isUserInteractionEnabled = true
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            SPTracker.trackUserAccountCreated()
         }
     }
 
