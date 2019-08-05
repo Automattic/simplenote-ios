@@ -11,7 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAuthViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
+                <outlet property="emailWarningLabel" destination="n7T-Gj-plH" id="STx-wz-jKg"/>
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
+                <outlet property="passwordWarningLabel" destination="UyC-If-pXj" id="D2M-PR-Tph"/>
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
                 <outlet property="secondaryActionButton" destination="PfS-vU-7i3" id="zj3-Ly-5X9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bxN-Zo-xBW"/>
@@ -23,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="27" y="84" width="360" height="200"/>
+                    <rect key="frame" x="27" y="84" width="360" height="252"/>
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -35,8 +37,14 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Email#"/>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid email#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7T-Gj-plH" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="52" width="102.5" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="52" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="78" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="uss-fG-PtW"/>
@@ -45,8 +53,14 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Password#"/>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid password#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyC-If-pXj" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="130" width="132" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="104" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="156" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Dd9-ee-gQN"/>
                             </constraints>
@@ -54,7 +68,7 @@
                             <state key="normal" title="#Primary#"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="156" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="208" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>

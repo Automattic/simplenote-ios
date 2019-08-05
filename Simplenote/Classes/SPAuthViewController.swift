@@ -7,7 +7,7 @@ import SafariServices
 //
 class SPAuthViewController: UIViewController {
 
-    /// Email Input
+    /// # Email: Input Field
     ///
     @IBOutlet private var emailInputView: SPTextInputView! {
         didSet {
@@ -22,7 +22,16 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// Password Input
+    /// # Email: Warning Label
+    ///
+    @IBOutlet private var emailWarningLabel: SPLabel! {
+        didSet {
+            emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
+            emailWarningLabel.isHidden = true
+        }
+    }
+
+    /// # Password: Input Field
     ///
     @IBOutlet private var passwordInputView: SPTextInputView! {
         didSet {
@@ -37,7 +46,16 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// Login Action
+    /// # Password: Warning Label
+    ///
+    @IBOutlet private var passwordWarningLabel: SPLabel! {
+        didSet {
+            passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
+            passwordWarningLabel.isHidden = true
+        }
+    }
+
+    /// # Login Action
     ///
     @IBOutlet private var primaryActionButton: SPSquaredButton! {
         didSet {
@@ -47,7 +65,7 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// Forgot Password Action
+    /// # Forgot Password Action
     ///
     @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
@@ -61,7 +79,7 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// 1Password Button
+    /// # 1Password Button
     ///
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -72,7 +90,7 @@ class SPAuthViewController: UIViewController {
         return button
     }()
 
-    /// Reveal Password Button
+    /// # Reveal Password Button
     ///
     private lazy var revealPasswordButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -86,33 +104,45 @@ class SPAuthViewController: UIViewController {
         return button
     }()
 
-    /// Simperium's Authenticator Instance
+    /// # Simperium's Authenticator Instance
     ///
     private let controller: SPAuthHandler
 
-    /// Simperium's Validator
+    /// # Simperium's Validator
     ///
     private let validator = SPAuthenticationValidator()
 
-    /// Indicates if we've got a valid Email + Password
+    /// # Indicates if we've got a valid Username. Doesn't display any validation warnings onscreen
     ///
-    private var isInputValid: Bool {
-        return validator.validateUsername(email) && validator.validatePasswordSecurity(password)
+    private var isUsernameValid: Bool {
+        return validator.validateUsername(email)
     }
 
-    /// Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
+    /// # Indicates if we've got a valid Password. Doesn't display any validation warnings onscreen
+    ///
+    private var isPasswordValid: Bool {
+        return validator.validatePasswordSecurity(password)
+    }
+
+    /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
+    ///
+    private var isInputValid: Bool {
+        return isUsernameValid && isPasswordValid
+    }
+
+    /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var email: String {
         return emailInputView.text ?? String()
     }
 
-    /// Returns the PasswordInputView's Text: When empty this getter returns an empty string, instead of nil
+    /// # Returns the PasswordInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var password: String {
         return passwordInputView.text ?? String()
     }
 
-    /// Authentication Mode: Signup or Login
+    /// # Authentication Mode: Signup or Login
     ///
     let mode: AuthenticationMode
 
@@ -188,6 +218,8 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
+// TODO: Spinner
+// TODO: Validation
         view.endEditing(true)
 
         controller.loginWithCredentials(username: email, password: password) { error in
@@ -196,11 +228,14 @@ private extension SPAuthViewController {
                 return
             }
 
-            self.present(error: error)
+            self.presentError(error: error)
         }
     }
 
     @IBAction func performSignUp() {
+// TODO: Spinner
+// TODO: Validation
+
         view.endEditing(true)
 
         controller.signupWithCredentials(username: email, password: password) { error in
@@ -209,7 +244,7 @@ private extension SPAuthViewController {
                 return
             }
 
-            self.present(error: error)
+            self.presentError(error: error)
         }
     }
 
@@ -276,19 +311,36 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func present(error: SPAuthError) {
-// TODO
+    func presentError(error: SPAuthError) {
+        guard let description = error.description else {
+            return
+        }
 
-//        switch error {
-//        case .loginBadCredentials:
-//            NSLocalizedString("Could not login with the provided email address and password.", "Message displayed when login fails");
-//        case .signupBadCredentials:
-//            NSLocalizedString("Could not create an account with the provided email address and password.", "Error for bad email or password")
-//        case .signupUserAlreadyExists:
-//            NSLocalizedString("That email is already being used", "Error when address is in use")
-//        case .unknown:
-//            NSLocalizedString("We're having problems. Please try again soon.", "Generic error");
-//        }
+        let alertController = UIAlertController(title: nil, message: description, preferredStyle: .alert)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.acceptActionText)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func displayInvalidEmailWarning() {
+        emailWarningLabel.text = AuthenticationStrings.usernameInvalid
+        emailWarningLabel.animateVisibility(isHidden: false)
+    }
+
+    func displayInvalidPasswordWarning() {
+        passwordWarningLabel.text = AuthenticationStrings.passwordInvalid
+        passwordWarningLabel.animateVisibility(isHidden: false)
+    }
+
+    func ensureValidationWarningsAreDismissed() {
+        if isUsernameValid {
+            emailWarningLabel.animateVisibility(isHidden: true)
+        }
+
+        if isPasswordValid {
+            passwordWarningLabel.animateVisibility(isHidden: true)
+        }
+    }
+
 
 //- (IBAction)signInErrorAction:(NSNotification *)notification
 //{
@@ -308,7 +360,6 @@ private extension SPAuthViewController {
 //    [errorAlert addAction:defaultAction];
 //    [self presentViewController:errorAlert animated:YES completion:nil];
 //}
-    }
 }
 
 
@@ -317,27 +368,30 @@ private extension SPAuthViewController {
 extension SPAuthViewController: SPTextInputViewDelegate {
 
     func textInputDidChange(_ textInput: SPTextInputView) {
-// TODO: Clear error messages
         ensureStylesMatchValidationState()
+        ensureValidationWarningsAreDismissed()
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
         switch textInput {
         case emailInputView:
-// TODO:
-//        if ([self validateUsername]) {
-            passwordInputView.becomeFirstResponder()
-//        }
+            if isUsernameValid {
+                passwordInputView.becomeFirstResponder()
+            } else {
+                displayInvalidEmailWarning()
+            }
+
             return false
 
         case passwordInputView:
-// TODO:
-//       if ([self validateData]) {
-            primaryActionButton.sendActions(for: .touchUpInside)
-//        }
-            return true
+            if isPasswordValid {
+                primaryActionButton.sendActions(for: .touchUpInside)
+            } else {
+                displayInvalidPasswordWarning()
+            }
 
         default:
+            // NO-OP
             break
         }
 
@@ -397,9 +451,13 @@ private struct AuthenticationStrings {
     static let signupSecondaryAction    = NSLocalizedString("By creating an account you agree to our Terms and Conditions", comment: "Terms of Service Legend")
     static let emailPlaceholder         = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder      = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let acceptActionText         = NSLocalizedString("Accept", comment: "Accept error message")
+    static let usernameInvalid          = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
+    static let passwordInvalid          = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
 }
 
 
 private struct AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+    static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }
