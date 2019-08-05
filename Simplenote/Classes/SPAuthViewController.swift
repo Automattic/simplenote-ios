@@ -216,7 +216,7 @@ private extension SPAuthViewController {
     }
 
     func ensureOnePasswordIsAvailable() {
-        emailInputView.rightViewMode = controller.isOnePasswordAvailable() ? .always : .never
+        emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
     }
 }
 

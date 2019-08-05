@@ -1092,8 +1092,8 @@
 				B57AEABE22DD03B200470277 /* SPOnboardingViewController.xib */,
 				B57AEAC022DD0B0E00470277 /* SPAuthViewController.swift */,
 				B57AEAC222DD0BDD00470277 /* SPAuthViewController.xib */,
-				B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */,
 				B5D1A58022F8BA8E009E952B /* SPAuthError.swift */,
+				B589E16B22E0B09F003FFF04 /* SPAuthHandler.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
