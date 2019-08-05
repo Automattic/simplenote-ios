@@ -205,8 +205,6 @@ extension SPAuthViewController {
     @IBAction func revealPasswordWasReleased() {
         passwordInputView.isSecureTextEntry = true
     }
-
-
 }
 
 
@@ -245,11 +243,7 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
-        view.endEditing(true)
-        view.isUserInteractionEnabled = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
-        primaryActionSpinner.startAnimating()
+        lockdownInterface()
 
         controller.loginWithCredentials(username: email, password: password) { error in
             if let error = error {
@@ -258,18 +252,12 @@ private extension SPAuthViewController {
                 SPTracker.trackUserSignedIn()
             }
 
-            self.primaryActionSpinner.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.unlockInterface()
         }
     }
 
     @IBAction func performSignUp() {
-        view.endEditing(true)
-        view.isUserInteractionEnabled = false
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
-        primaryActionSpinner.startAnimating()
+        lockdownInterface()
 
         controller.signupWithCredentials(username: email, password: password) { error in
             if let error = error {
@@ -278,9 +266,7 @@ private extension SPAuthViewController {
                 SPTracker.trackUserAccountCreated()
             }
 
-            self.primaryActionSpinner.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.unlockInterface()
         }
     }
 
@@ -339,6 +325,19 @@ private extension SPAuthViewController {
         let safariViewController = SFSafariViewController(url: targetURL)
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
+    }
+
+    func lockdownInterface() {
+        view.endEditing(true)
+        view.isUserInteractionEnabled = false
+        primaryActionSpinner.startAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    func unlockInterface() {
+        view.isUserInteractionEnabled = true
+        primaryActionSpinner.stopAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
