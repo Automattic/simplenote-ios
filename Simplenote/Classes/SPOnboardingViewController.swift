@@ -49,11 +49,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     }
 
     @IBAction func signupWasPressed() {
-//        presentAuthenticationInterface(mode: .signup)
+        presentAuthenticationInterface(mode: .signup)
     }
 
     @IBAction func loginWasPressed() {
-//        presentAuthenticationInterface(mode: .login)
+        presentAuthenticationInterface(mode: .login)
     }
 }
 
@@ -99,15 +99,15 @@ private extension SPOnboardingViewController {
         }
     }
 
-//    func presentAuthenticationInterface(mode: AuthenticationMode) {
-//        guard let simperiumAuthenticator = authenticator else {
-//            fatalError()
-//        }
-//
-//        let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
-//        let viewController = SPAuthViewController(controller: controller, mode: mode)
-//        navigationController?.pushViewController(viewController, animated: true)
-//    }
+    func presentAuthenticationInterface(mode: AuthenticationMode) {
+        guard let simperiumAuthenticator = authenticator else {
+            fatalError()
+        }
+
+        let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
+        let viewController = SPAuthViewController(controller: controller, mode: mode)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 
