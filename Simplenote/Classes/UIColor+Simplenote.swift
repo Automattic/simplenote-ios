@@ -18,7 +18,6 @@ extension UIColor {
     }
 }
 
-
 // MARK: - Private
 //
 private extension UIColor {
