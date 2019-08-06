@@ -146,13 +146,23 @@ class SPAuthViewController: UIViewController {
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var email: String {
-        return emailInputView.text ?? String()
+        get {
+            return emailInputView.text ?? String()
+        }
+        set {
+            emailInputView.text = newValue
+        }
     }
 
     /// # Returns the PasswordInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var password: String {
-        return passwordInputView.text ?? String()
+        get {
+            return passwordInputView.text ?? String()
+        }
+        set {
+            passwordInputView.text = newValue
+        }
     }
 
     /// # Authentication Mode: Signup or Login
@@ -196,25 +206,6 @@ class SPAuthViewController: UIViewController {
         refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
-    }
-
-
-    // MARK: - Public Methods
-
-    /// Executes the Primary Action: Either Login or Signup
-    ///
-    func performPrimaryAction() {
-        primaryActionButton.sendActions(for: .touchUpInside)
-    }
-
-    /// Whenever the input is Valid, we'll perform the Primary Action
-    ///
-    func performPrimaryActionIfPossible() {
-        guard isInputValid else {
-            return
-        }
-
-        performPrimaryAction()
     }
 }
 
@@ -280,6 +271,16 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
+    /// Whenever the input is Valid, we'll perform the Primary Action
+    ///
+    func performPrimaryActionIfPossible() {
+        guard isInputValid else {
+            return
+        }
+
+        perform(mode.primaryActionSelector)
+    }
+
     @IBAction func performLogIn() {
         lockdownInterface()
 
@@ -318,10 +319,10 @@ private extension SPAuthViewController {
                 return
             }
 
-            self.emailInputView.text = username
-            self.passwordInputView.text = password
+            self.email = username
+            self.password = password
 
-            self.performPrimaryAction()
+            self.performLogIn()
             SPTracker.trackOnePasswordLoginSuccess()
         }
     }
@@ -336,10 +337,10 @@ private extension SPAuthViewController {
                 return
             }
 
-            self.emailInputView.text = username
-            self.passwordInputView.text = password
+            self.email = username
+            self.password = password
 
-            self.performPrimaryAction()
+            self.performSignUp()
             SPTracker.trackOnePasswordSignupSuccess()
         }
     }
@@ -402,8 +403,8 @@ private extension SPAuthViewController {
         let loginViewController = SPAuthViewController(controller: controller, mode: .login)
 
         loginViewController.loadViewIfNeeded()
-        loginViewController.emailInputView.text = email
-        loginViewController.passwordInputView.text = password
+        loginViewController.email = email
+        loginViewController.password = password
 
         // Swap the current VC
         var updatedHierarchy = navigationController.viewControllers.filter { ($0 is SPAuthViewController) == false }
@@ -461,13 +462,12 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 
         case passwordInputView:
             if isPasswordValid {
-                performPrimaryAction()
+                performPrimaryActionIfPossible()
             } else {
                 displayInvalidPasswordWarning()
             }
 
         default:
-            // NO-OP
             break
         }
 
