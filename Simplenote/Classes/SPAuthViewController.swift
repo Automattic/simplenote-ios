@@ -312,14 +312,7 @@ private extension SPAuthViewController {
     }
 
     @IBAction func presentPasswordReset() {
-        let resetPasswordPath = kSimperiumForgotPasswordURL + "?email=" + email
-        guard let forgotPasswordURL = URL(string: resetPasswordPath) else {
-            return
-        }
-
-        let safariViewController = SFSafariViewController(url: forgotPasswordURL)
-        safariViewController.modalPresentationStyle = .overFullScreen
-        present(safariViewController, animated: true, completion: nil)
+        controller.presentPasswordReset(from: self, username: email)
     }
 
     @IBAction func presentTermsOfService() {

@@ -1,5 +1,6 @@
 import Foundation
 import OnePasswordExtension
+import SafariServices
 
 
 // MARK: - SPAuthHandler
@@ -126,6 +127,19 @@ class SPAuthHandler {
             let wrappedError = SPAuthError(simperiumSignupErrorCode: Int(responseCode))
             onCompletion(wrappedError)
         })
+    }
+
+
+    /// Presents the Password Reset (Web) Interface
+    ///
+    func presentPasswordReset(from sourceViewController: UIViewController, username: String) {
+        guard let targetURL = URL(string: kSimperiumForgotPasswordURL + "?email=" + username) else {
+            return
+        }
+
+        let safariViewController = SFSafariViewController(url: targetURL)
+        safariViewController.modalPresentationStyle = .overFullScreen
+        sourceViewController.present(safariViewController, animated: true, completion: nil)
     }
 
 
