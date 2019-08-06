@@ -58,20 +58,37 @@ extension SPAuthError {
 //
 extension SPAuthError {
 
-    /// Returns  a User Friendly description, if any
+    /// Returns the Error Title, for Alert purposes
     ///
-    var description: String? {
+    var title: String? {
+        switch self {
+        case .signupUserAlreadyExists:
+            return NSLocalizedString("Email in use", comment: "Email Taken Alert Title")
+        default:
+            return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
+        }
+    }
+
+    /// Returns the Error Message, for Alert purposes
+    ///
+    var message: String? {
         switch self {
         case .loginBadCredentials:
             return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
         case .signupBadCredentials:
             return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:
-            return NSLocalizedString("That email is already being used", comment: "Error when address is in use")
+            return NSLocalizedString("The email you've entered is already associated with a simplenote account.", comment: "Error when address is in use")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         default:
             return nil
         }
+    }
+
+    /// Indicates if the Error is User Facing, or should be kept internally
+    ///
+    var shouldBePresentedOnscreen: Bool {
+        return message != nil
     }
 }

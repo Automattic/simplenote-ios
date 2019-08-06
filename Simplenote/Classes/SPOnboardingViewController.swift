@@ -104,7 +104,8 @@ private extension SPOnboardingViewController {
             fatalError()
         }
 
-        let viewController = SPAuthViewController(simperiumAuthenticator: simperiumAuthenticator, mode: mode)
+        let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
+        let viewController = SPAuthViewController(controller: controller, mode: mode)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

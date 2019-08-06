@@ -175,8 +175,8 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(simperiumAuthenticator: SPAuthenticator, mode: AuthenticationMode = .login) {
-        self.controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .login) {
+        self.controller = controller
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
@@ -195,6 +195,26 @@ class SPAuthViewController: UIViewController {
         emailInputView.becomeFirstResponder()
         refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
+        performPrimaryActionIfPossible()
+    }
+
+
+    // MARK: - Public Methods
+
+    /// Executes the Primary Action: Either Login or Signup
+    ///
+    func performPrimaryAction() {
+        primaryActionButton.sendActions(for: .touchUpInside)
+    }
+
+    /// Whenever the input is Valid, we'll perform the Primary Action
+    ///
+    func performPrimaryActionIfPossible() {
+        guard isInputValid else {
+            return
+        }
+
+        performPrimaryAction()
     }
 }
 
@@ -240,6 +260,19 @@ private extension SPAuthViewController {
     @objc func refreshOnePasswordAvailability() {
         emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
     }
+
+    private func lockdownInterface() {
+        view.endEditing(true)
+        view.isUserInteractionEnabled = false
+        primaryActionSpinner.startAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    private func unlockInterface() {
+        view.isUserInteractionEnabled = true
+        primaryActionSpinner.stopAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }
 
 
@@ -252,7 +285,7 @@ private extension SPAuthViewController {
 
         controller.loginWithCredentials(username: email, password: password) { error in
             if let error = error {
-                self.presentError(error: error)
+                self.handleError(error: error)
             } else {
                 SPTracker.trackUserSignedIn()
             }
@@ -266,7 +299,7 @@ private extension SPAuthViewController {
 
         controller.signupWithCredentials(username: email, password: password) { error in
             if let error = error {
-                self.presentError(error: error)
+                self.handleError(error: error)
             } else {
                 SPTracker.trackUserAccountCreated()
             }
@@ -288,7 +321,7 @@ private extension SPAuthViewController {
             self.emailInputView.text = username
             self.passwordInputView.text = password
 
-            self.primaryActionButton.sendActions(for: .touchUpInside)
+            self.performPrimaryAction()
             SPTracker.trackOnePasswordLoginSuccess()
         }
     }
@@ -306,7 +339,7 @@ private extension SPAuthViewController {
             self.emailInputView.text = username
             self.passwordInputView.text = password
 
-            self.primaryActionButton.sendActions(for: .touchUpInside)
+            self.performPrimaryAction()
             SPTracker.trackOnePasswordSignupSuccess()
         }
     }
@@ -324,19 +357,6 @@ private extension SPAuthViewController {
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
     }
-
-    func lockdownInterface() {
-        view.endEditing(true)
-        view.isUserInteractionEnabled = false
-        primaryActionSpinner.startAnimating()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-
-    func unlockInterface() {
-        view.isUserInteractionEnabled = true
-        primaryActionSpinner.stopAnimating()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
 }
 
 
@@ -344,15 +364,58 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func presentError(error: SPAuthError) {
-        guard let description = error.description else {
+    func handleError(error: SPAuthError) {
+        guard error.shouldBePresentedOnscreen else {
             return
         }
 
-        let alertController = UIAlertController(title: nil, message: description, preferredStyle: .alert)
+        switch error {
+        case .signupUserAlreadyExists:
+            presentUserAlreadyExistsError(error: error)
+        default:
+            presentGenericError(error: error)
+        }
+    }
+
+    func presentUserAlreadyExistsError(error: SPAuthError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        alertController.addCancelActionWithTitle(AuthenticationStrings.cancelActionText)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.loginActionText) { _ in
+            self.attemptLoginWithCurrentCredentials()
+        }
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func presentGenericError(error: SPAuthError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         alertController.addDefaultActionWithTitle(AuthenticationStrings.acceptActionText)
         present(alertController, animated: true, completion: nil)
     }
+
+    func attemptLoginWithCurrentCredentials() {
+        guard let navigationController = navigationController else {
+            fatalError()
+        }
+
+        // Prefill the LoginViewController
+        let loginViewController = SPAuthViewController(controller: controller, mode: .login)
+
+        loginViewController.loadViewIfNeeded()
+        loginViewController.emailInputView.text = email
+        loginViewController.passwordInputView.text = password
+
+        // Swap the current VC
+        var updatedHierarchy = navigationController.viewControllers.filter { ($0 is SPAuthViewController) == false }
+        updatedHierarchy.append(loginViewController)
+        navigationController.setViewControllers(updatedHierarchy, animated: true)
+    }
+}
+
+
+// MARK: - Validation
+//
+private extension SPAuthViewController {
 
     func displayInvalidEmailWarning() {
         emailWarningLabel.text = AuthenticationStrings.usernameInvalid
@@ -398,7 +461,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 
         case passwordInputView:
             if isPasswordValid {
-                primaryActionButton.sendActions(for: .touchUpInside)
+                performPrimaryAction()
             } else {
                 displayInvalidPasswordWarning()
             }
@@ -468,7 +531,9 @@ private enum AuthenticationStrings {
     static let signupSecondaryActionSuffix  = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
-    static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept error message")
+    static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
+    static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
+    static let loginActionText              = NSLocalizedString("Sign In", comment: "Sign In Action")
     static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
     static let passwordInvalid              = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
 }
