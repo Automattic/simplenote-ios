@@ -3,7 +3,7 @@
 
 4.10.0
 ======
--   Redesigned Onboarding Interface.
+-   Redesigned Onboarding and Authentication Interface(s).
 
 
 4.9.0
