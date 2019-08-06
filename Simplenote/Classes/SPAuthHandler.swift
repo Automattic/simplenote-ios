@@ -141,42 +141,4 @@ class SPAuthHandler {
         safariViewController.modalPresentationStyle = .overFullScreen
         sourceViewController.present(safariViewController, animated: true, completion: nil)
     }
-
-
-    ///
-    ///
-    func loginWithWordPressSSO() {
-//  static NSString *SPAuthSessionKey = @"SPAuthSessionKey";
-//
-//    NSString *sessionState = [[NSUUID UUID] UUIDString];
-//    sessionState = [@"app-" stringByAppendingString:sessionState];
-//    [[NSUserDefaults standardUserDefaults] setObject:sessionState forKey:SPAuthSessionKey];
-//    NSString *authUrl = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";
-//    NSString *requestUrl = [NSString stringWithFormat:authUrl, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
-//    NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
-//    sfvc.modalPresentationStyle = UIModalPresentationFormSheet;
-//    [self presentViewController:sfvc animated:YES completion:nil];
-//
-//    [SPTracker trackWPCCButtonPressed];
-    }
-
-//- (IBAction)signInErrorAction:(NSNotification *)notification
-//{
-//    NSString *errorMessage = NSLocalizedString(@"An error was encountered while signing in.", @"Sign in error message");
-//    if (notification.userInfo != nil && notification.userInfo[@"errorString"]) {
-//        errorMessage = [notification.userInfo valueForKey:@"errorString"];
-//    }
-//
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//    UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Couldn't Sign In", @"Alert dialog title displayed on sign in error")
-//                                                                   message:errorMessage
-//                                                            preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-//                                                          handler:^(UIAlertAction * action) {}];
-//
-//    [errorAlert addAction:defaultAction];
-//    [self presentViewController:errorAlert animated:YES completion:nil];
-//}
 }
