@@ -70,9 +70,11 @@ private extension SPOnboardingViewController {
         navigationController?.isNavigationBarHidden = true
 
         // All of the Authentication Flows are meant to be rendered in Light Mode
+#if IS_XCODE_11
         if #available(iOS 13.0, *) {
             navigationController?.overrideUserInterfaceStyle = .light
         }
+#endif
     }
 
     func setupActionButtons() {
