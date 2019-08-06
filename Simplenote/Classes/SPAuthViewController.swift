@@ -26,6 +26,7 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var emailWarningLabel: SPLabel! {
         didSet {
+            emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
             emailWarningLabel.isHidden = true
         }
@@ -50,6 +51,7 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var passwordWarningLabel: SPLabel! {
         didSet {
+            passwordWarningLabel.text = AuthenticationStrings.passwordInvalid
             passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
             passwordWarningLabel.isHidden = true
         }
@@ -282,6 +284,10 @@ private extension SPAuthViewController {
     }
 
     @IBAction func performLogIn() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+
         lockdownInterface()
 
         controller.loginWithCredentials(username: email, password: password) { error in
@@ -296,6 +302,10 @@ private extension SPAuthViewController {
     }
 
     @IBAction func performSignUp() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+
         lockdownInterface()
 
         controller.signupWithCredentials(username: email, password: password) { error in
@@ -418,23 +428,36 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func displayInvalidEmailWarning() {
-        emailWarningLabel.text = AuthenticationStrings.usernameInvalid
-        emailWarningLabel.animateVisibility(isHidden: false)
+    func refreshEmailWarning(isHidden: Bool) {
+        emailWarningLabel.animateVisibility(isHidden: isHidden)
     }
 
-    func displayInvalidPasswordWarning() {
-        passwordWarningLabel.text = AuthenticationStrings.passwordInvalid
-        passwordWarningLabel.animateVisibility(isHidden: false)
+    func refreshPasswordWarning(isHidden: Bool) {
+        passwordWarningLabel.animateVisibility(isHidden: isHidden)
     }
 
-    func ensureValidationWarningsAreDismissed() {
+    func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
+        let isUsernameOkay = isUsernameValid
+        let isPasswordOkay = isPasswordValid
+
+        if !isUsernameOkay {
+            refreshPasswordWarning(isHidden: false)
+        }
+
+        if !isPasswordOkay {
+            refreshEmailWarning(isHidden: false)
+        }
+
+        return isUsernameOkay && isPasswordOkay
+    }
+
+    func ensureWarningsAreDismissedWhenNeeded() {
         if isUsernameValid {
-            emailWarningLabel.animateVisibility(isHidden: true)
+            refreshEmailWarning(isHidden: true)
         }
 
         if isPasswordValid {
-            passwordWarningLabel.animateVisibility(isHidden: true)
+            refreshPasswordWarning(isHidden: true)
         }
     }
 }
@@ -446,7 +469,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 
     func textInputDidChange(_ textInput: SPTextInputView) {
         ensureStylesMatchValidationState()
-        ensureValidationWarningsAreDismissed()
+        ensureWarningsAreDismissedWhenNeeded()
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
@@ -455,7 +478,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             if isUsernameValid {
                 passwordInputView.becomeFirstResponder()
             } else {
-                displayInvalidEmailWarning()
+                refreshEmailWarning(isHidden: false)
             }
 
             return false
@@ -464,7 +487,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             if isPasswordValid {
                 performPrimaryActionIfPossible()
             } else {
-                displayInvalidPasswordWarning()
+                refreshPasswordWarning(isHidden: false)
             }
 
         default:
