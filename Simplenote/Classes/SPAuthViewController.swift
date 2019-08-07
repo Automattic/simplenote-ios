@@ -441,11 +441,11 @@ private extension SPAuthViewController {
         let isPasswordOkay = isPasswordValid
 
         if !isUsernameOkay {
-            refreshPasswordWarning(isHidden: false)
+            refreshEmailWarning(isHidden: false)
         }
 
         if !isPasswordOkay {
-            refreshEmailWarning(isHidden: false)
+            refreshPasswordWarning(isHidden: false)
         }
 
         return isUsernameOkay && isPasswordOkay
