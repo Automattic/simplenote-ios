@@ -20,11 +20,19 @@ class SPSheetController: UIViewController {
 
     /// Button #0: Top Button!
     ///
-    @IBOutlet private var button0: SPSquaredButton!
+    @IBOutlet private var button0: SPSquaredButton! {
+        didSet {
+            button0.backgroundColor = UIColor.color(name: .simplenoteMidBlue)
+        }
+    }
 
     /// Button #1: Bottom Button!
     ///
-    @IBOutlet private var button1: SPSquaredButton!
+    @IBOutlet private var button1: SPSquaredButton! {
+        didSet {
+            button1.backgroundColor = UIColor.color(name: .simplenoteDeepSeaBlue)
+        }
+    }
 
     /// Closure to be executed whenever button0 is clicked
     ///
