@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SafariServices
 
 
 // MARK: - SPOnboardingViewController
@@ -37,6 +38,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         return false
     }
 
+    /// Deinitializer
+    ///
+    deinit {
+        stopListeningToNotifications()
+    }
 
     // MARK: - Overridden Methods
 
@@ -46,23 +52,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         setupNavigationController()
         setupLabels()
         setupActionButtons()
-    }
-
-    @IBAction func signupWasPressed() {
-        presentAuthenticationInterface(mode: .signup)
-    }
-
-    @IBAction func loginWasPressed() {
-        let sheetController = SPSheetController()
-
-        sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
-        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
-
-        sheetController.onClickButton0 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .login)
-        }
-
-        sheetController.present(from: self)
+        startListeningToNotifications()
     }
 }
 
@@ -114,6 +104,33 @@ private extension SPOnboardingViewController {
             headerLabel.font = .preferredFont(forTextStyle: .title3)
         }
     }
+}
+
+
+// MARK: - Actions
+//
+private extension SPOnboardingViewController {
+
+    @IBAction func signupWasPressed() {
+        presentAuthenticationInterface(mode: .signup)
+    }
+
+    @IBAction func loginWasPressed() {
+        let sheetController = SPSheetController()
+
+        sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
+        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
+
+        sheetController.onClickButton0 = { [weak self] in
+            self?.presentAuthenticationInterface(mode: .login)
+        }
+
+        sheetController.onClickButton1 = { [weak self] in
+            self?.presentWordpressSSO()
+        }
+
+        sheetController.present(from: self)
+    }
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
         guard let simperiumAuthenticator = authenticator else {
@@ -124,6 +141,36 @@ private extension SPOnboardingViewController {
         let viewController = SPAuthViewController(controller: controller, mode: mode)
         navigationController?.pushViewController(viewController, animated: true)
     }
+
+    func presentWordpressSSO() {
+        WPAuthHandler.presentWordPressSSO(from: self)
+    }
+}
+
+
+// MARK: - Actions
+//
+private extension SPOnboardingViewController {
+
+    func startListeningToNotifications() {
+        let name = NSNotification.Name(rawValue: kSignInErrorNotificationName)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func handleSignInError(note: Notification) {
+        let message = note.userInfo?[NSLocalizedDescriptionKey] as? String ?? SignInError.genericErrorText
+        let alertController = UIAlertController(title: SignInError.title, message: message, preferredStyle: .alert)
+
+        alertController.addDefaultActionWithTitle(SignInError.acceptButtonText)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
 }
 
 
@@ -136,4 +183,11 @@ private struct OnboardingStrings {
     static let headerText           = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
     static let loginWithEmailText   = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
     static let loginWithWpcomText   = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
+}
+
+
+private struct SignInError {
+    static let title = NSLocalizedString("Couldn't Sign In", comment: "Alert dialog title displayed on sign in error")
+    static let genericErrorText = NSLocalizedString("An error was encountered while signing in.", comment: "Sign in error message")
+    static let acceptButtonText = NSLocalizedString("OK", comment: "Dismisses an AlertController")
 }

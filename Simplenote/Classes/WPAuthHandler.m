@@ -5,16 +5,40 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SafariServices/SafariServices.h>
 #import "WPAuthHandler.h"
 #import "SPConstants.h"
 #import "SPTracker.h"
+#import "Simplenote-Swift.h"
+
 
 @import Simperium;
+
+static NSString * const SPAuthSessionKey = @"SPAuthSessionKey";
+
 
 @implementation WPAuthHandler
 
 + (BOOL)isWPAuthenticationUrl:(NSURL*)url {
     return [[url host] isEqualToString:@"auth"];
+}
+
++ (void)presentWordPressSSOFromViewController:(UIViewController *)presenter
+{
+    NSString *sessionState = [[NSUUID UUID] UUIDString];
+    sessionState = [@"app-" stringByAppendingString:sessionState];
+    [[NSUserDefaults standardUserDefaults] setObject:sessionState forKey:SPAuthSessionKey];
+
+    NSString *authUrl = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";
+    NSString *requestUrl = [NSString stringWithFormat:authUrl, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
+    NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
+    sfvc.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    [presenter presentViewController:sfvc animated:YES completion:nil];
+
+    [SPTracker trackWPCCButtonPressed];
 }
 
 + (SPUser *)authorizeSimplenoteUserFromUrl:(NSURL*)url forAppId:(NSString *)appId {
@@ -30,12 +54,12 @@
     NSString *token = [self valueForKey:@"token" fromQueryItems:queryItems];
     NSString *wpcomToken = [self valueForKey:@"wp_token" fromQueryItems:queryItems];
     NSString *errorCode = [self valueForKey:@"code" fromQueryItems:queryItems];
-    
+
     if (state == nil || user == nil || token == nil) {
         NSDictionary *errorInfo;
         if (errorCode != nil && [errorCode isEqualToString:@"1"]) {
             NSString *errorMessage = NSLocalizedString(@"Please activate your WordPress.com account via email and try again.", @"Error message displayed when user has not verified their WordPress.com account");
-            errorInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:@"errorString"];
+            errorInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                             object:nil
@@ -43,9 +67,9 @@
         [SPTracker trackWPCCLoginFailed];
         return nil;
     }
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *storedState = [defaults stringForKey:@"SPAuthSessionKey"];
+    NSString *storedState = [defaults stringForKey:SPAuthSessionKey];
     if (![state isEqualToString: storedState]) {
         // States don't match!
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
@@ -53,8 +77,8 @@
         [SPTracker trackWPCCLoginFailed];
         return nil;
     }
-    
-    [defaults removeObjectForKey:@"SPAuthSessionKey"];
+
+    [defaults removeObjectForKey:SPAuthSessionKey];
     [defaults setObject:user forKey:@"SPUsername"];
     NSError *error = nil;
     BOOL success = [SPKeychain setPassword:token forService:appId account:user error:&error];
@@ -64,12 +88,12 @@
         [SPTracker trackWPCCLoginFailed];
         return nil;
     }
-    
+
     // Store wpcom token for future integrations
     if (wpcomToken != nil) {
         [SPKeychain setPassword:token forService:kSimplenoteWPServiceName account:user error:&error];
     }
-    
+
     SPUser *spUser = [[SPUser alloc] initWithEmail:user token:token];
     return spUser;
 }
