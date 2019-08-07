@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSheetController" customModule="Simplenote" customModuleProvider="target">
+            <connections>
+                <outlet property="actionsBottomConstraint" destination="cCf-cX-Hvp" id="cEi-VJ-E4O"/>
+                <outlet property="actionsView" destination="5iK-Jf-G9m" id="PTm-0D-5fV"/>
+                <outlet property="backgroundView" destination="WuN-6h-ONb" id="UXH-AM-GBI"/>
+                <outlet property="button0" destination="SQq-Wy-YFf" id="g5R-Lb-yHg"/>
+                <outlet property="button1" destination="LEy-5c-bV7" id="vAR-mR-2Ko"/>
+                <outlet property="view" destination="Jfs-a1-Lyq" id="7qw-wv-Mkf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfs-a1-Lyq" userLabel="Sheet View">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuN-6h-ONb" userLabel="Background View">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="vHm-tY-brA" appends="YES" id="dq0-N3-SRT"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
+                    <rect key="frame" x="0.0" y="718" width="414" height="144"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKe-xk-oRG" userLabel="Container View">
+                            <rect key="frame" x="27" y="24" width="360" height="96"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQq-Wy-YFf" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
+                                    <color key="backgroundColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="FVB-i5-juB"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <state key="normal" title="#Button 0#">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="button0WasPressed" destination="-1" eventType="touchUpInside" id="qvF-TW-uu5"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEy-5c-bV7" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="52" width="360" height="44"/>
+                                    <color key="backgroundColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="HT8-1l-T3v"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <state key="normal" title="#Button 1#">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="button1WasPressed" destination="-1" eventType="touchUpInside" id="57k-IQ-lug"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="LEy-5c-bV7" secondAttribute="bottom" id="0AW-Ci-QoN"/>
+                                <constraint firstAttribute="trailing" secondItem="LEy-5c-bV7" secondAttribute="trailing" id="8YM-7L-3vS"/>
+                                <constraint firstItem="LEy-5c-bV7" firstAttribute="leading" secondItem="ZKe-xk-oRG" secondAttribute="leading" id="Upr-8M-zJh"/>
+                                <constraint firstAttribute="trailing" secondItem="SQq-Wy-YFf" secondAttribute="trailing" id="VzR-zg-65e"/>
+                                <constraint firstItem="SQq-Wy-YFf" firstAttribute="top" secondItem="ZKe-xk-oRG" secondAttribute="top" id="ZA8-X6-c4m"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="geH-Ek-mc3"/>
+                                <constraint firstItem="LEy-5c-bV7" firstAttribute="top" secondItem="SQq-Wy-YFf" secondAttribute="bottom" constant="8" id="jxH-XY-Ops"/>
+                                <constraint firstItem="SQq-Wy-YFf" firstAttribute="leading" secondItem="ZKe-xk-oRG" secondAttribute="leading" id="zmo-wf-fbm"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ZKe-xk-oRG" secondAttribute="trailing" priority="999" constant="24" id="EPl-S5-QMu"/>
+                        <constraint firstAttribute="trailing" secondItem="ZKe-xk-oRG" secondAttribute="trailing" priority="999" id="WuI-WY-Vs9"/>
+                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="centerX" secondItem="5iK-Jf-G9m" secondAttribute="centerX" id="Xgb-1u-tqg"/>
+                        <constraint firstAttribute="bottom" secondItem="ZKe-xk-oRG" secondAttribute="bottom" constant="24" id="bmb-Mh-rgg"/>
+                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" id="ff3-YI-qRI"/>
+                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="top" secondItem="5iK-Jf-G9m" secondAttribute="top" constant="24" id="hoh-pp-xK7"/>
+                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" constant="24" id="n24-MO-C9h"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mM-lJ-jc1" userLabel="Bottom View">
+                    <rect key="frame" x="0.0" y="862" width="414" height="34"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7mM-lJ-jc1" secondAttribute="trailing" id="0Jh-eK-hO0"/>
+                <constraint firstItem="WuN-6h-ONb" firstAttribute="top" secondItem="Jfs-a1-Lyq" secondAttribute="top" id="1lu-uZ-Ush"/>
+                <constraint firstItem="WuN-6h-ONb" firstAttribute="bottom" secondItem="Jfs-a1-Lyq" secondAttribute="bottom" id="Kd5-ej-Q3F"/>
+                <constraint firstAttribute="bottom" secondItem="7mM-lJ-jc1" secondAttribute="bottom" priority="999" id="MTD-ta-1Gd"/>
+                <constraint firstItem="WuN-6h-ONb" firstAttribute="leading" secondItem="Jfs-a1-Lyq" secondAttribute="leading" id="Ryf-ek-qpY"/>
+                <constraint firstItem="5iK-Jf-G9m" firstAttribute="bottom" secondItem="3nE-EP-iDe" secondAttribute="bottom" id="cCf-cX-Hvp"/>
+                <constraint firstItem="7mM-lJ-jc1" firstAttribute="top" secondItem="5iK-Jf-G9m" secondAttribute="bottom" id="cDh-MG-bwg"/>
+                <constraint firstItem="3nE-EP-iDe" firstAttribute="trailing" secondItem="5iK-Jf-G9m" secondAttribute="trailing" id="eGZ-JB-Dp0"/>
+                <constraint firstItem="5iK-Jf-G9m" firstAttribute="leading" secondItem="3nE-EP-iDe" secondAttribute="leading" id="h7d-lS-26Z"/>
+                <constraint firstItem="7mM-lJ-jc1" firstAttribute="leading" secondItem="Jfs-a1-Lyq" secondAttribute="leading" id="iLq-7J-k6T"/>
+                <constraint firstAttribute="trailing" secondItem="WuN-6h-ONb" secondAttribute="trailing" id="sRv-1y-ZUQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="3nE-EP-iDe"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-547.76785714285711"/>
+        </view>
+        <tapGestureRecognizer id="vHm-tY-brA">
+            <connections>
+                <action selector="backgroundWasPressed" destination="-1" id="it2-QG-ZRv"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>
