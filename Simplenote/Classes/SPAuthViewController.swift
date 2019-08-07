@@ -481,8 +481,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
                 refreshEmailWarning(isHidden: false)
             }
 
-            return false
-
         case passwordInputView:
             if isPasswordValid {
                 performPrimaryActionIfPossible()
@@ -494,7 +492,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             break
         }
 
-        return true
+        return false
     }
 }
 
