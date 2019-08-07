@@ -53,7 +53,16 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     }
 
     @IBAction func loginWasPressed() {
-        presentAuthenticationInterface(mode: .login)
+        let sheetController = SPSheetController()
+
+        sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
+        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
+
+        sheetController.onClickButton0 = { [weak self] in
+            self?.presentAuthenticationInterface(mode: .login)
+        }
+
+        sheetController.present(from: self)
     }
 }
 
@@ -121,8 +130,10 @@ private extension SPOnboardingViewController {
 // MARK: - Private Types
 //
 private struct OnboardingStrings {
-    static let brandText    = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
-    static let signupText   = NSLocalizedString("Create an account", comment: "Signup Action")
-    static let loginText    = NSLocalizedString("Log In", comment: "Login Action")
-    static let headerText   = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
+    static let brandText            = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
+    static let signupText           = NSLocalizedString("Create an account", comment: "Signup Action")
+    static let loginText            = NSLocalizedString("Log In", comment: "Login Action")
+    static let headerText           = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
+    static let loginWithEmailText   = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
+    static let loginWithWpcomText   = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
 }
