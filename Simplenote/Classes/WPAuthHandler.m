@@ -70,7 +70,7 @@ static NSString * const SPAuthSessionKey = @"SPAuthSessionKey";
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *storedState = [defaults stringForKey:SPAuthSessionKey];
-    if (![state isEqualToString: storedState]) {
+    if (true) {
         // States don't match!
         [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
                                                             object:nil];
