@@ -17,6 +17,8 @@
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
                 <outlet property="primaryActionSpinner" destination="o3M-2A-urw" id="pe9-Bb-Kf7"/>
                 <outlet property="secondaryActionButton" destination="PfS-vU-7i3" id="zj3-Ly-5X9"/>
+                <outlet property="stackView" destination="CJS-5O-pxK" id="Grg-ZD-DYy"/>
+                <outlet property="stackViewTopConstraint" destination="Cyh-nE-ql7" id="WHM-m6-Cht"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bxN-Zo-xBW"/>
             </connections>
         </placeholder>
@@ -41,7 +43,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid email#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7T-Gj-plH" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="52" width="102.5" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <color key="textColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
@@ -57,7 +59,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid password#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyC-If-pXj" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="130" width="132" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
