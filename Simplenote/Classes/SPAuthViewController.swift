@@ -7,6 +7,14 @@ import SafariServices
 //
 class SPAuthViewController: UIViewController {
 
+    /// # Links to the StackView and the container view
+    ///
+    @IBOutlet private var stackViewTopConstraint: NSLayoutConstraint!
+
+    /// # StackView: Contains the entire UI
+    ///
+    @IBOutlet private var stackView: UIStackView!
+
     /// # Email: Input Field
     ///
     @IBOutlet private var emailInputView: SPTextInputView! {
@@ -199,6 +207,7 @@ class SPAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
+        setupAutolayoutConstraints()
         startListeningToNotifications()
     }
 
@@ -234,6 +243,23 @@ private extension SPAuthViewController {
     func setupNavigationController() {
         title = mode.title
         navigationController?.navigationBar.applySimplenoteLightStyle()
+    }
+
+    func setupAutolayoutConstraints() {
+        if #available(iOS 11, *) {
+            return
+        }
+
+        /// Nuke the current constraint: it's set against safeLayoutGuide, non existant in iOS 10
+        stackViewTopConstraint.isActive = false
+        stackView.removeConstraint(stackViewTopConstraint)
+
+        /// Establish a new top constraint, against the topLayoutGuide.
+        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor,
+                                                                constant: stackViewTopConstraint.constant)
+
+        /// And, please, forgive me for pushing this awful method.
+        stackViewTopConstraint.isActive = true
     }
 
     func startListeningToNotifications() {
