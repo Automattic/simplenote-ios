@@ -208,6 +208,7 @@ class SPAuthViewController: UIViewController {
         refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
+        ensureNavigationBarIsVisible()
     }
 }
 
@@ -232,7 +233,6 @@ private extension SPAuthViewController {
 
     func setupNavigationController() {
         title = mode.title
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 
@@ -243,6 +243,10 @@ private extension SPAuthViewController {
 
     func stopListeningToNotifications() {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func ensureNavigationBarIsVisible() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func ensureStylesMatchValidationState() {

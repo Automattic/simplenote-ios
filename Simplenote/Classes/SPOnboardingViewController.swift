@@ -48,6 +48,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         setupActionButtons()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ensureNavigationBarIsHidden()
+    }
+
     @IBAction func signupWasPressed() {
         presentAuthenticationInterface(mode: .signup)
     }
@@ -67,7 +72,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.applySimplenoteLightStyle()
 
         // All of the Authentication Flows are meant to be rendered in Light Mode
 #if IS_XCODE_11
@@ -104,6 +109,10 @@ private extension SPOnboardingViewController {
             headerLabel.adjustsFontSizeToFitWidth = true
             headerLabel.font = .preferredFont(forTextStyle: .title3)
         }
+    }
+
+    func ensureNavigationBarIsHidden() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
