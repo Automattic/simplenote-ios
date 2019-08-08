@@ -8,8 +8,10 @@ extension UINavigationBar {
     /// Applies the Simplenote *LIGHT* Style
     ///
     func applySimplenoteLightStyle() {
+        let solidBackgroundImage = UIImage(color: .white)
+
         barTintColor = .white
-        shadowImage = UIImage()
-        setBackgroundImage(UIImage(), for: .default)
+        shadowImage = solidBackgroundImage
+        setBackgroundImage(solidBackgroundImage, for: .default)
     }
 }

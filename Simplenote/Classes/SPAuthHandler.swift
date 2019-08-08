@@ -39,10 +39,11 @@ class SPAuthHandler {
     ///
     /// - Parameters:
     ///     - presenter: Source UIViewController from which the extension should be presented.
+    ///     - sender: The sender which triggers the share sheet to show.
     ///     - onCompletion: Closure to be executed on completion.
     ///
-    func findOnePasswordLogin(presenter: UIViewController, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
-        onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: nil) { (dictionary, error) in
+    func findOnePasswordLogin(presenter: UIViewController, sender: Any, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
+        onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: sender) { (dictionary, error) in
             guard let username = dictionary?[AppExtensionUsernameKey] as? String,
                 let password = dictionary?[AppExtensionPasswordKey] as? String
                 else {
@@ -62,11 +63,12 @@ class SPAuthHandler {
     ///
     /// - Parameters:
     ///     - presenter: Source UIViewController from which the extension should be presented.
+    ///     - sender: The sender which triggers the share sheet to show.
     ///     - username: Simperium Username
     ///     - password: Simperium Password
     ///     - onCompletion: Closure to be executed on completion.
     ///
-    func saveLoginToOnePassword(presenter: UIViewController, username: String, password: String, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
+    func saveLoginToOnePassword(presenter: UIViewController, sender: Any, username: String, password: String, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
         let details = [
             AppExtensionTitleKey: kOnePasswordSimplenoteTitle,
             AppExtensionUsernameKey: username,
@@ -78,7 +80,7 @@ class SPAuthHandler {
             AppExtensionGeneratedPasswordMaxLengthKey: kOnePasswordGeneratedMaxLength
         ]
 
-        onePasswordService.storeLogin(forURLString: kOnePasswordSimplenoteURL, loginDetails: details, passwordGenerationOptions: options, for: presenter, sender: nil) { (dictionary, error) in
+        onePasswordService.storeLogin(forURLString: kOnePasswordSimplenoteURL, loginDetails: details, passwordGenerationOptions: options, for: presenter, sender: sender) { (dictionary, error) in
             guard let username = dictionary?[AppExtensionUsernameKey] as? String,
                 let password = dictionary?[AppExtensionPasswordKey] as? String
                 else {

@@ -208,6 +208,7 @@ class SPAuthViewController: UIViewController {
         refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
+        ensureNavigationBarIsVisible()
     }
 }
 
@@ -232,7 +233,6 @@ private extension SPAuthViewController {
 
     func setupNavigationController() {
         title = mode.title
-        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.applySimplenoteLightStyle()
     }
 
@@ -243,6 +243,10 @@ private extension SPAuthViewController {
 
     func stopListeningToNotifications() {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func ensureNavigationBarIsVisible() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func ensureStylesMatchValidationState() {
@@ -319,8 +323,8 @@ private extension SPAuthViewController {
         }
     }
 
-    @IBAction func performOnePasswordLogIn() {
-        controller.findOnePasswordLogin(presenter: self) { (username, password, error) in
+    @IBAction func performOnePasswordLogIn(sender: Any) {
+        controller.findOnePasswordLogin(presenter: self, sender: sender) { (username, password, error) in
             guard let username = username, let password = password else {
                 if error == .onePasswordError {
                     SPTracker.trackOnePasswordLoginFailure()
@@ -337,8 +341,8 @@ private extension SPAuthViewController {
         }
     }
 
-    @IBAction func performOnePasswordSignUp() {
-        controller.saveLoginToOnePassword(presenter: self, username: email, password: password) { (username, password, error) in
+    @IBAction func performOnePasswordSignUp(sender: Any) {
+        controller.saveLoginToOnePassword(presenter: self, sender: sender, username: email, password: password) { (username, password, error) in
             guard let username = username, let password = password else {
                 if error == .onePasswordError {
                     SPTracker.trackOnePasswordSignupFailure()
@@ -441,11 +445,11 @@ private extension SPAuthViewController {
         let isPasswordOkay = isPasswordValid
 
         if !isUsernameOkay {
-            refreshPasswordWarning(isHidden: false)
+            refreshEmailWarning(isHidden: false)
         }
 
         if !isPasswordOkay {
-            refreshEmailWarning(isHidden: false)
+            refreshPasswordWarning(isHidden: false)
         }
 
         return isUsernameOkay && isPasswordOkay
@@ -481,8 +485,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
                 refreshEmailWarning(isHidden: false)
             }
 
-            return false
-
         case passwordInputView:
             if isPasswordValid {
                 performPrimaryActionIfPossible()
@@ -494,7 +496,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             break
         }
 
-        return true
+        return false
     }
 }
 

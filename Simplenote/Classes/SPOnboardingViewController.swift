@@ -54,6 +54,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         setupActionButtons()
         startListeningToNotifications()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ensureNavigationBarIsHidden()
+    }
 }
 
 
@@ -66,7 +71,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.applySimplenoteLightStyle()
 
         // All of the Authentication Flows are meant to be rendered in Light Mode
 #if IS_XCODE_11
@@ -130,6 +135,10 @@ private extension SPOnboardingViewController {
         }
 
         sheetController.present(from: self)
+    }
+
+    func ensureNavigationBarIsHidden() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
