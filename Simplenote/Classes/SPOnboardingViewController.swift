@@ -177,6 +177,8 @@ private extension SPOnboardingViewController {
 
         alertController.addDefaultActionWithTitle(SignInError.acceptButtonText)
 
+        /// SFSafariViewController _might_ be onscreen
+        presentedViewController?.dismiss(animated: true, completion: nil)
         present(alertController, animated: true, completion: nil)
     }
 
