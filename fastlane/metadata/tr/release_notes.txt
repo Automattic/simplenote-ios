@@ -1,0 +1,6 @@
+- Simplenote artık Siri kısayollarıyla çalıştığından doğrudan Siri’den uygulamayı açmanızı, mevcut notları açmanızı ve yeni notlar oluşturmanızı sağlar.
+- Notlar Listesinde yeni Kaydırma Hareketleri mevcuttur: İğne Ekleyin ve Paylaşın!
+- Notlar Listesinde artık notların yayımlandığını gösteren bir simge görüntülenir.
+- WordPress Uygulamasında paylaşım yapılırken Notlarda artık blok alıntı yapılmaz.
+- iOS paylaşım uzantısı kullanıcı arayüzü tamamen güncellendi.
+- Kaydırma Hareketleri kullanıldığında Notlar Listesinin kırpılmasına neden olan bir hata düzeltildi.
