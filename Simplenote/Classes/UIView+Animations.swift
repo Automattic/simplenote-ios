@@ -6,7 +6,7 @@ import UIKit
 //
 extension UIView {
 
-    /// Indicates if the receiver has the horizontal compact trait
+    /// Animates a visibility switch, when applicable
     ///
     func animateVisibility(isHidden: Bool, duration: TimeInterval = 0.3) {
         guard self.isHidden != isHidden else {

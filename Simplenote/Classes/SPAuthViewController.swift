@@ -116,12 +116,13 @@ class SPAuthViewController: UIViewController {
     /// # Reveal Password Button
     ///
     private lazy var revealPasswordButton: UIButton = {
+        let selected = UIImage.image(name: .visibilityOnImage)
         let button = UIButton(type: .custom)
         button.tintColor = .color(name: .simplenoteSlateGrey)
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
-        button.addTarget(self, action: #selector(revealPasswordWasReleased), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
         button.setImage(.image(name: .visibilityOffImage), for: .normal)
-        button.setImage(.image(name: .visibilityOnImage), for: .highlighted)
+        button.setImage(selected, for: .highlighted)
+        button.setImage(selected, for: .selected)
         button.sizeToFit()
 
         return button
@@ -227,11 +228,9 @@ class SPAuthViewController: UIViewController {
 extension SPAuthViewController {
 
     @IBAction func revealPasswordWasPressed() {
-        passwordInputView.isSecureTextEntry = false
-    }
-
-    @IBAction func revealPasswordWasReleased() {
-        passwordInputView.isSecureTextEntry = true
+        let isPasswordVisible = !revealPasswordButton.isSelected
+        revealPasswordButton.isSelected = isPasswordVisible
+        passwordInputView.isSecureTextEntry = !isPasswordVisible
     }
 }
 
@@ -584,7 +583,7 @@ private enum AuthenticationStrings {
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
-    static let loginActionText              = NSLocalizedString("Sign In", comment: "Sign In Action")
+    static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
     static let passwordInvalid              = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
 }
