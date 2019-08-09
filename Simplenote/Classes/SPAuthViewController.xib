@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
@@ -24,11 +24,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="27" y="84" width="360" height="252"/>
+                    <rect key="frame" x="332" y="40" width="360" height="252"/>
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -101,7 +101,7 @@
                         <constraint firstItem="CGr-O3-MBQ" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="BIX-Fy-gqY"/>
                         <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
                         <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
+                        <constraint firstAttribute="width" constant="360" id="nLp-JP-Ott"/>
                         <constraint firstAttribute="trailing" secondItem="CGr-O3-MBQ" secondAttribute="trailing" id="vUF-qZ-Vmm"/>
                         <constraint firstItem="pdF-nK-gXE" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="xzh-aD-Ag5"/>
                     </constraints>
@@ -109,10 +109,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CJS-5O-pxK" secondAttribute="trailing" priority="999" constant="24" id="825-dL-WrZ"/>
                 <constraint firstItem="CJS-5O-pxK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="Cyh-nE-ql7"/>
                 <constraint firstItem="CJS-5O-pxK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H6h-v9-Uwb"/>
-                <constraint firstItem="CJS-5O-pxK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="999" constant="24" id="R8s-dV-2n6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
