@@ -1,1 +1,0 @@
-* Die Notizenliste lässt sich nun nach Erstellungs- und Änderungsdatum ordnen.

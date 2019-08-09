@@ -1,1 +1,0 @@
-* Ahora la lista de notas se puede ordenar por fecha de creación o modificación.

@@ -1,1 +1,0 @@
-* De notitielijst kan nu gesorteerd worden op aanmaak- en wijzigingsdatum.
