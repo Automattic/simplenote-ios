@@ -143,7 +143,7 @@ private extension SPOnboardingViewController {
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
         guard let simperiumAuthenticator = authenticator else {
-            fatalError()
+            fatalError("Missing Simperium Authenticator Instance")
         }
 
         let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
