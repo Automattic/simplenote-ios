@@ -461,10 +461,12 @@ private extension SPAuthViewController {
 
     func refreshEmailWarning(isHidden: Bool) {
         emailWarningLabel.animateVisibility(isHidden: isHidden)
+        emailInputView.inErrorState = !isHidden
     }
 
     func refreshPasswordWarning(isHidden: Bool) {
         passwordWarningLabel.animateVisibility(isHidden: isHidden)
+        passwordInputView.inErrorState = !isHidden
     }
 
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
