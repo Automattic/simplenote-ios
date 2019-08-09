@@ -1,1 +1,6 @@
-* Daftar Catatan kini dapat diurutkan berdasarkan tanggal pembuatan dan modifikasi.
+- Simplenote kini dapat digunakan bersama pintasan Siri sehingga Anda dapat membuka aplikasi, membuka catatan yang sudah ada, dan membuat catatan baru langsung dari Siri.
+- Tindakan Geser baru kini tersedia di Daftar Catatan: Pin dan Bagikan!
+- Daftar Catatan kini menampilkan ikon, yang menunjukkan catatan yang telah dipublikasikan.
+- Saat berbagi ke Aplikasi WordPress, Catatan tidak lagi diblok kutipan.
+- UI ekstensi berbagi iOS telah diperbarui secara menyeluruh.
+- Bug yang menyebabkan Daftar Catatan terpotong saat menggunakan Tindakan Geser telah diperbaiki.
