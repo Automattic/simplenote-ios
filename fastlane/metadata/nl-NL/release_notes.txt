@@ -1,1 +1,6 @@
-* De notitielijst kan nu gesorteerd worden op aanmaak- en wijzigingsdatum.
+- Simplenote werkt nu met snelkoppelingen van Siri die je in staat stellen de app te openen, bestaande notities te openen, en nieuwe notities rechtstreeks vanuit Siri aan te maken.
+- nieuwe veegacties zijn beschikbaar in de notitielijst: Vastmaken en delen!
+- de notitielijst geeft nu een pictogram weer dat gepubliceerde notities laat zien.
+- notities worden niet langer weergegeven als blokcitaat als je ze met de WordPress app deelt.
+De UI-extensie van iOS voor delen is volledig bijgewerkt.
+- een bug gerepareerd die ervoor zorgde dat de notitielijst vastgezet werd als er veegacties werden gebruikt.
