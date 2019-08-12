@@ -157,6 +157,13 @@
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
 		B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */; };
 		B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */; };
+		B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695C22F9D53300B90398 /* SPAuthHandler.swift */; };
+		B56A696122F9D53400B90398 /* SPAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695D22F9D53300B90398 /* SPAuthError.swift */; };
+		B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695E22F9D53300B90398 /* SPAuthViewController.xib */; };
+		B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695F22F9D53400B90398 /* SPAuthViewController.swift */; };
+		B56A696522F9D54600B90398 /* SPLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A696422F9D54600B90398 /* SPLabel.swift */; };
+		B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A696622F9D55F00B90398 /* UIView+Animations.swift */; };
+		B56A696922F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */; };
 		B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */; };
 		B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFB22AECC15003F85CB /* Extractor.swift */; };
 		B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */; };
@@ -179,7 +186,6 @@
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
 		B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */; };
 		B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */; };
-		B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */; };
 		B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
@@ -408,6 +414,13 @@
 		B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
 		B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPOnboardingViewController.swift; path = Classes/SPOnboardingViewController.swift; sourceTree = "<group>"; };
 		B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Simplenote.swift"; path = "Classes/UINavigationBar+Simplenote.swift"; sourceTree = "<group>"; };
+		B56A695C22F9D53300B90398 /* SPAuthHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPAuthHandler.swift; path = Classes/SPAuthHandler.swift; sourceTree = "<group>"; };
+		B56A695D22F9D53300B90398 /* SPAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPAuthError.swift; path = Classes/SPAuthError.swift; sourceTree = "<group>"; };
+		B56A695E22F9D53300B90398 /* SPAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPAuthViewController.xib; path = Classes/SPAuthViewController.xib; sourceTree = "<group>"; };
+		B56A695F22F9D53400B90398 /* SPAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPAuthViewController.swift; path = Classes/SPAuthViewController.swift; sourceTree = "<group>"; };
+		B56A696422F9D54600B90398 /* SPLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLabel.swift; path = Classes/SPLabel.swift; sourceTree = "<group>"; };
+		B56A696622F9D55F00B90398 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Animations.swift"; path = "Classes/UIView+Animations.swift"; sourceTree = "<group>"; };
+		B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+Simplenote.swift"; path = "Classes/NSMutableAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
 		B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSExtensionContext+Simplenote.swift"; sourceTree = "<group>"; };
 		B56A9FFB22AECC15003F85CB /* Extractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
 		B56A9FFD22AEDCB0003F85CB /* URLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtractor.swift; sourceTree = "<group>"; };
@@ -437,8 +450,6 @@
 		B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsPromptView.m; path = Classes/SPRatingsPromptView.m; sourceTree = "<group>"; };
 		B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
 		B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+Extensions.m"; path = "Classes/UIDevice+Extensions.m"; sourceTree = "<group>"; };
-		B5B8AE801ABA0C7B0082775D /* SPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPLoginViewController.h; path = Classes/SPLoginViewController.h; sourceTree = "<group>"; };
-		B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPLoginViewController.m; path = Classes/SPLoginViewController.m; sourceTree = "<group>"; };
 		B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageName.swift; path = Classes/UIImageName.swift; sourceTree = "<group>"; };
 		B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSimplenoteTests.swift; sourceTree = "<group>"; };
@@ -940,6 +951,7 @@
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
+				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
@@ -947,6 +959,7 @@
 				B5CDE61E2150834C00C3FED4 /* Simperium+Simplenote.m */,
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */,
+				B56A696622F9D55F00B90398 /* UIView+Animations.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
@@ -960,6 +973,10 @@
 			children = (
 				B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */,
 				B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */,
+				B56A695D22F9D53300B90398 /* SPAuthError.swift */,
+				B56A695C22F9D53300B90398 /* SPAuthHandler.swift */,
+				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
+				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1101,9 +1118,9 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
 				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
-				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				E201864617A4892300217E0B /* SPActionButton.h */,
 				E201864717A4892300217E0B /* SPActionButton.m */,
 				E22BCDF81794F55000A17ED2 /* SPActionSheet.h */,
@@ -1127,6 +1144,7 @@
 				E2ACA87F17A7692E00EF801C /* SPHorizontalPickerViewCell.m */,
 				E219EAF517C5322400179B40 /* SPInteractiveTextStorage.h */,
 				E219EAF617C5322400179B40 /* SPInteractiveTextStorage.m */,
+				B56A696422F9D54600B90398 /* SPLabel.swift */,
 				E230E39C17D0F33B009B5EBB /* SPModalActivityIndicator.h */,
 				E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */,
 				E239600F17B6A22800504FFB /* SPOutsideTouchView.h */,
@@ -1300,8 +1318,6 @@
 			children = (
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
-				B5B8AE801ABA0C7B0082775D /* SPLoginViewController.h */,
-				B5B8AE811ABA0C7B0082775D /* SPLoginViewController.m */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
 				E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */,
@@ -1549,6 +1565,7 @@
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
+				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
@@ -1733,6 +1750,7 @@
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
+				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
@@ -1749,9 +1767,11 @@
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
 				46A3C96B17DFA81A002865AE /* NSAttributedString+Styling.m in Sources */,
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
+				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
+				B56A696922F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift in Sources */,
 				B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */,
 				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
@@ -1785,7 +1805,6 @@
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				46A3C97D17DFA81A002865AE /* NSTextStorage+Highlight.m in Sources */,
-				B5B8AE831ABA0C7B0082775D /* SPLoginViewController.m in Sources */,
 				B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
@@ -1806,6 +1825,7 @@
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				46A3C98417DFA81A002865AE /* SPHorizontalPickerView.m in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
+				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
@@ -1841,6 +1861,7 @@
 				46A3C99A17DFA81A002865AE /* DTTwoPageViewController.m in Sources */,
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
+				B56A696122F9D53400B90398 /* SPAuthError.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
@@ -1865,6 +1886,7 @@
 				E2922AC7180CAC62003AF914 /* SPSidebarViewController.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
+				B56A696522F9D54600B90398 /* SPLabel.swift in Sources */,
 				46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,

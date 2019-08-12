@@ -48,12 +48,17 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         setupActionButtons()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ensureNavigationBarIsHidden()
+    }
+
     @IBAction func signupWasPressed() {
-//        presentAuthenticationInterface(mode: .signup)
+        presentAuthenticationInterface(mode: .signup)
     }
 
     @IBAction func loginWasPressed() {
-//        presentAuthenticationInterface(mode: .login)
+        presentAuthenticationInterface(mode: .login)
     }
 }
 
@@ -67,7 +72,14 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.applySimplenoteLightStyle()
+
+        // All of the Authentication Flows are meant to be rendered in Light Mode
+#if IS_XCODE_11
+        if #available(iOS 13.0, *) {
+            navigationController?.overrideUserInterfaceStyle = .light
+        }
+#endif
     }
 
     func setupActionButtons() {
@@ -99,15 +111,19 @@ private extension SPOnboardingViewController {
         }
     }
 
-//    func presentAuthenticationInterface(mode: AuthenticationMode) {
-//        guard let simperiumAuthenticator = authenticator else {
-//            fatalError()
-//        }
-//
-//        let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
-//        let viewController = SPAuthViewController(controller: controller, mode: mode)
-//        navigationController?.pushViewController(viewController, animated: true)
-//    }
+    func ensureNavigationBarIsHidden() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    func presentAuthenticationInterface(mode: AuthenticationMode) {
+        guard let simperiumAuthenticator = authenticator else {
+            fatalError("Missing Simperium Authenticator Instance")
+        }
+
+        let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
+        let viewController = SPAuthViewController(controller: controller, mode: mode)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 

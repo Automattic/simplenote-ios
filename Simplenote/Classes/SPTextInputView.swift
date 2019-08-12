@@ -71,6 +71,14 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// Outer Border Color: Disabled State
+    ///
+    @IBInspectable var borderColorError: UIColor? = .color(name: .simplenoteLipstick) {
+        didSet {
+            refreshBorderStyle()
+        }
+    }
+
     /// Outer Border Radius
     ///
     @IBInspectable var borderCornerRadius: CGFloat = Defaults.cornerRadius {
@@ -197,6 +205,14 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// When toggled, the border color will be updated to borderColorError
+    ///
+    var inErrorState: Bool = false {
+        didSet {
+            refreshBorderStyle()
+        }
+    }
+
     /// Delegate Wrapper
     ///
     weak var delegate: SPTextInputViewDelegate?
@@ -252,7 +268,9 @@ private extension SPTextInputView {
     }
 
     func refreshBorderStyle() {
-        layer.borderColor = textField.isFirstResponder ? borderColorEnabled?.cgColor : borderColorDisabled?.cgColor
+        let borderColor = inErrorState ? borderColorError
+                            : (textField.isFirstResponder ? borderColorEnabled : borderColorDisabled)
+        layer.borderColor = borderColor?.cgColor
         layer.cornerRadius = borderCornerRadius
         layer.borderWidth = borderWidth
     }
