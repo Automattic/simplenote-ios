@@ -29,7 +29,7 @@
         [self setTitleColor:[self color] forState:UIControlStateNormal];
         [self setTitleColor:[self highlightedColor] forState:UIControlStateHighlighted];
         
-        self.titleLabel.font = [self.theme fontForKey:@"tagViewFont"];
+        self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         
         [self addTarget:t
                     action:a

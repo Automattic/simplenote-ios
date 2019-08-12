@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
@@ -167,11 +167,6 @@
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
-    // Restyle the TransitionController
-    if (self.transitionController) {
-        [self.transitionController applyStyle];
-    }
-
     // Restyle the search bar
     [self styleSearchBar];
 }
@@ -194,7 +189,7 @@
             continue;
         }
         
-        [(UITextField *)subview setFont:[self.theme fontForKey:@"searchBarFont"]];
+        [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         [(UITextField *)subview setTextColor:[self.theme colorForKey:@"searchBarFontColor"]];
         [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
@@ -209,7 +204,7 @@
     CGFloat topTextViewPadding = verticalPadding;
     
     CGFloat numberLines = condensedNoteList ? 1.0 : 3.0;
-    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"]}].height;
+    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
     
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
     
@@ -452,13 +447,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SPTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+
     if (!cell) {
         // this shouldn't be needed, but offscreen collection view cells are sometimes called on
         // and this can lead to an occasional crash
-        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:cellIdentifier];
+        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -468,24 +463,27 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    if (!note.preview)
+    if (!note.preview) {
         [note createPreview];
+    }
     
+    UIColor *previewColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
-    [attributedContent addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+    [attributedContent addChecklistAttachmentsForColor:previewColor];
     
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            _pinImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [[[UIImage imageNamed:@"icon_pin"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            _pinImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
+            _pinSearchImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
         }
         
         
         // New note summary contains a pin image
         UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
         pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
-                             lineHeight:[self.theme fontWithSystemSizeForKey:@"noteHeadlineFont"].capHeight];
+                                                             lineHeight:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].capHeight];
         cell.previewView.attributedText = pinnedContent;
     } else {
         cell.previewView.attributedText = attributedContent;
@@ -497,6 +495,9 @@
         [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
+
+    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
@@ -516,39 +517,11 @@
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                    {
-                                        // Delete something here
-                                        [SPTracker trackListNoteDeleted];
-                                        [[SPObjectManager sharedManager] trashNote:note];
-                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
-                                    }];
-    trash.backgroundColor = [UIColor redColor];
-    
-    UITableViewRowAction *restore = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:NSLocalizedString(@"Restore", @"Restore a note from the trash, markking it as undeleted")  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                    {
-                                        [[SPObjectManager sharedManager] restoreNote:note];
-                                        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
-                                    }];
-    restore.backgroundColor = [UIColor orangeColor];
-   
-    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note") handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                    {
-                                        // Delete something here
-                                        [SPTracker trackListNoteDeleted];
-                                        [[SPObjectManager sharedManager] permenentlyDeleteNote:note];
-                                    }];
-    delete.backgroundColor = [UIColor redColor];
-    
-
     if (tagFilterType == SPTagFilterTypeDeleted) {
-        
-        return  @[delete,restore];
-    } else {
-        
-        return @[trash];
+        return [self rowActionsForDeletedNote:note];
     }
+
+    return [self rowActionsForNote:note];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -563,6 +536,84 @@
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self openNote:note fromIndexPath:indexPath animated:YES];
+}
+
+
+#pragma mark - Row Actions
+
+- (NSArray<UITableViewRowAction*> *)rowActionsForDeletedNote:(Note *)note {
+    UITableViewRowAction *restore = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                                                       title:NSLocalizedString(@"Restore", @"Restore a note from the trash, markking it as undeleted")
+                                                                     handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+                                                                         [[SPObjectManager sharedManager] restoreNote:note];
+                                                                         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
+                                                                     }];
+    restore.backgroundColor = [UIColor orangeColor];
+
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                      title:NSLocalizedString(@"Delete", @"Trash (verb) - the action of deleting a note")
+                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+                                                                        [SPTracker trackListNoteDeleted];
+                                                                        [[SPObjectManager sharedManager] permenentlyDeleteNote:note];
+                                                                    }];
+    delete.backgroundColor = [UIColor redColor];
+
+    return @[delete, restore];
+}
+
+- (NSArray<UITableViewRowAction*> *)rowActionsForNote:(Note *)note {
+    UITableViewRowAction *trash = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                     title:NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")
+                                                                   handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+                                                                       [SPTracker trackListNoteDeleted];
+                                                                       [[SPObjectManager sharedManager] trashNote:note];
+                                                                       [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
+                                                                   }];
+    trash.backgroundColor = [UIColor colorWithName:UIColorNameDestructiveActionColor];
+
+    NSString *pinText = note.pinned
+                            ? NSLocalizedString(@"Unpin", @"Unpin (verb) - the action of Unpinning a note")
+                            : NSLocalizedString(@"Pin", @"Pin (verb) - the action of Pinning a note");
+
+    UITableViewRowAction *togglePin = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                                                   title:pinText
+                                                                 handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+                                                                     [self togglePinnedNote:note];
+                                                                 }];
+    togglePin.backgroundColor = [UIColor colorWithName:UIColorNameSecondaryActionColor];
+
+    UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                                                     title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")
+                                                                   handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+                                                                       [self shareNote:note sourceIndexPath:indexPath];
+                                                                   }];
+    share.backgroundColor = [UIColor colorWithName:UIColorNameTertiaryActionColor];
+
+    return @[trash, togglePin, share];
+}
+
+- (void)togglePinnedNote:(Note *)note {
+    note.pinned = !note.pinned;
+    [[SPAppDelegate sharedDelegate] save];
+}
+
+- (void)shareNote:(Note *)note sourceIndexPath:(NSIndexPath *)sourceIndexPath {
+    if (note.content == nil) {
+        return;
+    }
+
+    [SPTracker trackEditorNoteContentShared];
+
+    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:note];
+
+    if ([UIDevice isPad]) {
+        acv.modalPresentationStyle = UIModalPresentationPopover;
+        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        acv.popoverPresentationController.sourceRect = [self.tableView rectForRowAtIndexPath:sourceIndexPath];
+        acv.popoverPresentationController.sourceView = self.tableView;
+    }
+
+    [self presentViewController:acv animated:YES completion:nil];
 }
 
 
@@ -880,8 +931,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate: {
-            
-            if (newIndexPath == nil)
+            if (newIndexPath == nil || [indexPath isEqual:newIndexPath])
             {
                 // remove current preview
                 Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -1066,7 +1116,7 @@
 
 - (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
     
-    BOOL isVoiceOverRunning =UIAccessibilityIsVoiceOverRunning();
+    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
     self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
 	
 	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];

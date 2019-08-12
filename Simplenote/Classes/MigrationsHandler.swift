@@ -67,8 +67,9 @@ private extension MigrationsHandler {
     /// C.  The "bad Sort Mode" flag is detected
     ///
     func processMigrationFromMark4_8_0() {
+        let simperium = SPAppDelegate.shared().simperium
         guard Options.shared.listSortMode == .alphabeticallyDescending,
-            SPAppDelegate.shared()?.simperium.user.authenticated() == true
+            simperium.user.authenticated() == true
             else {
                     return
         }

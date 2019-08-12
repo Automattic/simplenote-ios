@@ -1,0 +1,6 @@
+- O Simplenote agora funciona com os atalhos da Siri, permitindo que você abra o aplicativo e notas existentes e crie novas notas diretamente da Siri.
+- Novas ações de deslizar estão disponíveis na Lista de Notas: Selecione e compartilhe!
+- A Lista de Notas agora exibe um ícone que mostra as notas já publicadas.
+- Ao serem compartilhadas com o aplicativo do WordPress, as Notas não terão blockquote.
+- A interface do usuário da extensão de compartilhamento do iOS foi atualizada por completo.
+- Corrigimos um bug que fazia com que a Lista de Notas sumisse quando as ações de deslizar eram usadas.

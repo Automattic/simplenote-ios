@@ -1,7 +1,7 @@
 import Foundation
 
 
-// MARK: - WooCommerce UserDefaults Keys
+// MARK: - Simplenote UserDefaults Keys
 //
 extension UserDefaults {
     enum Key: String {

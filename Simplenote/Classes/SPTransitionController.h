@@ -26,6 +26,5 @@ extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName
 @property (nonatomic) NSIndexPath *selectedPath;
 
 -(instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController;
-- (void)applyStyle;
 
 @end

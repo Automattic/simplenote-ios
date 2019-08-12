@@ -807,7 +807,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (UIButton *)buildSettingsButton {
     settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [settingsButton.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+    [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [settingsButton setContentEdgeInsets:SPButtonContentInsets];
@@ -878,7 +878,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [button setContentEdgeInsets:SPButtonContentInsets];
     [button setImageEdgeInsets:SPButtonImageInsets];
-    [button.titleLabel setFont:[self.theme fontForKey:@"tagListFont"]];
+    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
 
     return button;
 }

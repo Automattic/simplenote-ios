@@ -1,0 +1,6 @@
+- Simplenote ora funziona con i tasti di scelta rapida di Siri consentendoti di aprire l'app, visualizzare note esistenti e crearne di nuove direttamente con Siri.
+- Nell'Elenco delle note sono disponibili nuove azioni di scorrimento: Aggancia e Condividi!
+- Nell'Elenco delle note è ora visualizzata un'icona che mostra le note pubblicate.
+- Con la condivisione sull'app WordPress, le note non vengono più visualizzate come estratti.
+- L'UI dell'estensione per la condivisione iOS è stata interamente aggiornata.
+- È stato corretto un bug a causa del quale l'Elenco delle note veniva tagliato se si utilizzavano le azioni di scorrimento.

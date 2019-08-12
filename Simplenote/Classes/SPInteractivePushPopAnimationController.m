@@ -9,7 +9,7 @@
 
 #import "SPInteractivePushPopAnimationController.h"
 #import "UIDevice+Extensions.h"
-#import "UIView+Extensions.h"
+#import "Simplenote-Swift.h"
 
 CGFloat const SPStandardInteractivePopGestureWidth = 20.0f;
 CGFloat const SPGestureTargetSwipeVelocity = 100.0f;

@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.8.1</string>
+	<string>${VERSION_SHORT}</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4811</string>
+	<string>${VERSION_LONG}</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -64,6 +64,12 @@
 	<string>This app requires Face ID access to secure your notes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app does not require Photo Library access.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.codality.NotationalFlow.launch</string>
+		<string>com.codality.NotationalFlow.newNote</string>
+		<string>com.codality.NotationalFlow.openNote</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIPrerenderedIcon</key>
