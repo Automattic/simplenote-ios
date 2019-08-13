@@ -45,6 +45,7 @@
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
 
+@property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -188,7 +189,7 @@
     UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
     [searchBar setSearchFieldBackgroundImage:background
                                     forState:UIControlStateNormal];
-    searchBarContainer.backgroundColor = [UIColor clearColor];
+    _searchBarContainer.backgroundColor = [UIColor clearColor];
 
     UIColor *searchBarImageColor = [UIColor colorWithName:UIColorNameSearchBarImageColor];
 
@@ -270,19 +271,19 @@
         // titleView was changed to use autolayout in iOS 11
         if (@available(iOS 11.0, *)) {
             searchBar = [[UISearchBar alloc] init];
-            searchBarContainer = [[SPTitleView alloc] init];
-            searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+            _searchBarContainer = [[SPTitleView alloc] init];
+            _searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
         } else {
             CGFloat searchBarHeight = 44.0;
             searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
                                                                       0,
                                                                       self.view.frame.size.width,
                                                                       searchBarHeight)];
-            searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
-            searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            _searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
+            _searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
-        searchBarContainer.clipsToBounds = NO;
-        searchBar.center = searchBarContainer.center;
+        _searchBarContainer.clipsToBounds = NO;
+        searchBar.center = _searchBarContainer.center;
         
         searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
@@ -291,7 +292,7 @@
         [self styleSearchBar];
 
         searchBar.delegate = self;
-        [searchBarContainer addSubview:searchBar];
+        [_searchBarContainer addSubview:searchBar];
     }
     
     if (bSearching) {
@@ -318,7 +319,7 @@
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
     }
     
-    self.navigationItem.titleView = searchBarContainer;
+    self.navigationItem.titleView = _searchBarContainer;
     self.navigationItem.titleView.hidden = NO;
     
     // Title must be set to an empty string because we're using a custom titleView,
@@ -1078,7 +1079,7 @@
         [self animateTitleViewSwapWithNewView:activityIndicator
                                    completion:nil];
         
-    } else if (!waiting && self.navigationItem.titleView != searchBarContainer && !bTitleViewAnimating) {
+    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !bTitleViewAnimating) {
         
         [self resetTitleView];
         
@@ -1121,7 +1122,7 @@
 
 - (void)resetTitleView {
     
-    [self animateTitleViewSwapWithNewView:searchBarContainer
+    [self animateTitleViewSwapWithNewView:_searchBarContainer
                                completion:^{
                                    self->bResetTitleView = NO;
                                    [self->activityIndicator stopAnimating];
