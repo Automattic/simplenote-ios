@@ -126,7 +126,8 @@
 
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-        
+
+        [self registerForPeekAndPop];
         [self update];
     }
     
