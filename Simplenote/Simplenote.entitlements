@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>previous-application-identifiers</key>
+	<key>com.apple.developer.applesignin</key>
 	<array>
-		<string>4ESDVWK654.com.codality.NotationalFlow</string>
+		<string>Default</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
@@ -13,6 +13,10 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)$(CFBundleIdentifier)</string>
+		<string>4ESDVWK654.com.codality.NotationalFlow</string>
+	</array>
+	<key>previous-application-identifiers</key>
+	<array>
 		<string>4ESDVWK654.com.codality.NotationalFlow</string>
 	</array>
 </dict>
