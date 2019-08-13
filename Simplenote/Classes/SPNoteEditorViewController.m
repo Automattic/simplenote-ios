@@ -193,41 +193,50 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self setBackButtonTitleForSearchingMode: bSearching];
 
+    [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self.navigationController setToolbarHidden:!bSearching animated:YES];
-
     [self sizeNavigationContainer];
-}
+    [self adjustFrameForSafeInsets];
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    if (@available(iOS 11.0, *)) {
-        CGRect viewFrame = _noteEditorTextView.frame;
-        viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
-        _noteEditorTextView.frame = viewFrame;
-    }
-    
     if (!_currentNote) {
         [self newButtonAction:nil];
     } else {
         [_noteEditorTextView processChecklists];
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
-    
-    if (!(_noteEditorTextView.text.length > 0) && !bActionSheetVisible)
-        [_noteEditorTextView becomeFirstResponder];
 
-    if (_tagView.alpha < 1.0) {
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             self.tagView.alpha = 1.0;
-                         }];
-    }
-    
+    [self ensureEditorIsFirstResponder];
+    [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
+}
+
+- (void)ensureEditorIsFirstResponder
+{
+    if ((_noteEditorTextView.text.length == 0) && !bActionSheetVisible && !_isPreviewing) {
+        [_noteEditorTextView becomeFirstResponder];
+    }
+}
+
+- (void)ensureTagViewIsVisible
+{
+    if (_tagView.alpha >= 1.0) {
+        return;
+    }
+
+    [UIView animateWithDuration:0.3 animations:^{
+         self.tagView.alpha = 1.0;
+     }];
+}
+
+- (void)adjustFrameForSafeInsets
+{
+    if (@available(iOS 11.0, *)) {
+        CGRect viewFrame = _noteEditorTextView.frame;
+        viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
+        _noteEditorTextView.frame = viewFrame;
+    }
 }
 
 - (void)startListeningToNotifications {
@@ -372,7 +381,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     self.navigationItem.hidesBackButton = YES;
     
     // container view
-    SPOutsideTouchView *titleView =[[SPOutsideTouchView alloc] init];
+    SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     navigationButtonContainer = [[SPOutsideTouchView alloc] init];
@@ -520,9 +529,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                    viewFrame.size.height -_keyboardHeight);;
             [_noteEditorTextView setNeedsLayout];
         }
-        
     }
-    
 }
 
 - (void)setVisibleRightBarButtonsForEditingMode:(BOOL)editing {
@@ -534,6 +541,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         keyboardButton.hidden = !editing;
         newButton.hidden = editing;
     }
+}
+
+- (void)setIsPreviewing:(BOOL)isPreviewing {
+    _isPreviewing = isPreviewing;
+    [self ensureEditorIsFirstResponder];
 }
 
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
@@ -627,7 +639,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     bBlankNote = NO;
     bModified = NO;
-    
+    _isPreviewing = false;
+
     // hide the tags field
     if (!bVoiceoverEnabled) {
         self.tagView.alpha = 0.0;
@@ -1281,8 +1294,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 }
 
 - (void)newButtonAction:(id)sender {
-    
-    
+
     if (_currentNote && bBlankNote) {
         [_noteEditorTextView becomeFirstResponder];
         return;
