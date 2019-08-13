@@ -20,6 +20,8 @@
 #import "SPTextView.h"
 #import "SPTextField.h"
 #import "SPTableViewController.h"
+#import "SPNoteListViewController.h"
+#import "SPNoteEditorViewController.h"
 #import "SPTracker.h"
 
 
