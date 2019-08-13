@@ -645,23 +645,19 @@
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
     [SPTracker trackListNoteOpened];
-    
-	SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    SPNoteEditorViewController *editor = [appDelegate noteEditorViewController];
-    if (!editor) {
-        editor = [[SPNoteEditorViewController alloc] init];
-        [appDelegate setNoteEditorViewController:editor];
-        
+
+    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
+    if (!_transitionController) {
         self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
         self.transitionController.delegate = self;
-        
-        BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-        self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-        editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
-        
     }
-    
+        
+    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
+    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
+    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
+
     [editor updateNote:note];
+
     if (bSearching) {
         [editor setSearchString:_searchText];
     }
