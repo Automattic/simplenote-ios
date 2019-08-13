@@ -51,7 +51,7 @@ typedef enum {
     SPTagFilterType tagFilterType;
 }
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController<Note *> *fetchedResultsController;
 @property (nonatomic, strong) NSString *searchText;
 @property (nonatomic) BOOL firstLaunch;
 

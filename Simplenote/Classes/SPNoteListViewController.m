@@ -57,7 +57,6 @@
 @end
 
 @implementation SPNoteListViewController
-@synthesize fetchedResultsController=__fetchedResultsController;
 
 - (void)dealloc
 {
@@ -879,9 +878,9 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
-    if (__fetchedResultsController != nil)
+    if (_fetchedResultsController != nil)
     {
-        return __fetchedResultsController;
+        return _fetchedResultsController;
     }
     
     // Set appDelegate here because this might get called before it gets an opportunity to be set previously
@@ -922,7 +921,7 @@
 	    abort();
 	}
     
-    return __fetchedResultsController;
+    return _fetchedResultsController;
 }
 
 
