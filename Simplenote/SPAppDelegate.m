@@ -171,11 +171,12 @@
 		[self setSelectedTag:selectedTag];
 	}
     
-    _tagListViewController = [[SPTagsListViewController alloc] init];
+    _tagListViewController = [SPTagsListViewController new];
 
     _noteListViewController = [[SPNoteListViewController alloc] initWithSidebarViewController:_tagListViewController];
     _noteListViewController.sidePanelViewDelegate = _tagListViewController;
 
+    _noteEditorViewController = [SPNoteEditorViewController new];
     
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
     self.navigationController.navigationBar.translucent = YES;
