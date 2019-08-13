@@ -15,6 +15,7 @@
                 <outlet property="backgroundView" destination="WuN-6h-ONb" id="UXH-AM-GBI"/>
                 <outlet property="button0" destination="SQq-Wy-YFf" id="g5R-Lb-yHg"/>
                 <outlet property="button1" destination="LEy-5c-bV7" id="vAR-mR-2Ko"/>
+                <outlet property="stackView" destination="vuR-2S-IZk" id="1cb-r6-A9u"/>
                 <outlet property="view" destination="Jfs-a1-Lyq" id="7qw-wv-Mkf"/>
             </connections>
         </placeholder>

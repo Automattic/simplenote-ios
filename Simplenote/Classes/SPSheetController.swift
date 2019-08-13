@@ -16,7 +16,7 @@ class SPSheetController: UIViewController {
 
     /// View containing the Buttons
     ///
-    @IBOutlet private var stackView: UIView!
+    @IBOutlet private var stackView: UIStackView!
 
     /// Constraint attaching the Actions View to the bottom of its container
     ///
@@ -94,6 +94,10 @@ class SPSheetController: UIViewController {
     func setTitleForButton1(title: String) {
         loadViewIfNeeded()
         button1.setTitle(title, for: .normal)
+    }
+
+    func addArrangedSubview(_ view: UIView) {
+        stackView.addArrangedSubview(view)
     }
 }
 
