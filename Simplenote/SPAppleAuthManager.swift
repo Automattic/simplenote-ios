@@ -2,6 +2,8 @@ import Foundation
 import AuthenticationServices
 
 
+#if IS_XCODE_11
+
 // MARK: - AppleAuthenticationManagerDelegate
 //
 @available(iOS 13.0, *)
@@ -84,3 +86,6 @@ extension SPAppleAuthManager: ASAuthorizationControllerPresentationContextProvid
         return window
     }
 }
+
+
+#endif
