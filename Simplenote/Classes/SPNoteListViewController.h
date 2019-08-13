@@ -10,7 +10,8 @@
 #import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
-#import "Simplenote-Swift.h"
+#import "Note.h"
+
 @class Note, SPEmptyListView;
 
 typedef enum {
