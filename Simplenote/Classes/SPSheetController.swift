@@ -14,6 +14,10 @@ class SPSheetController: UIViewController {
     ///
     @IBOutlet private var actionsView: UIView!
 
+    /// View containing the Buttons
+    ///
+    @IBOutlet private var stackView: UIView!
+
     /// Constraint attaching the Actions View to the bottom of its container
     ///
     @IBOutlet private var actionsBottomConstraint: NSLayoutConstraint!

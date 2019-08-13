@@ -33,7 +33,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
                     <rect key="frame" x="0.0" y="718" width="414" height="144"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKe-xk-oRG" userLabel="Container View">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-2S-IZk">
                             <rect key="frame" x="27" y="24" width="360" height="96"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQq-Wy-YFf" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
@@ -65,28 +65,20 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="LEy-5c-bV7" secondAttribute="bottom" id="0AW-Ci-QoN"/>
-                                <constraint firstAttribute="trailing" secondItem="LEy-5c-bV7" secondAttribute="trailing" id="8YM-7L-3vS"/>
-                                <constraint firstItem="LEy-5c-bV7" firstAttribute="leading" secondItem="ZKe-xk-oRG" secondAttribute="leading" id="Upr-8M-zJh"/>
-                                <constraint firstAttribute="trailing" secondItem="SQq-Wy-YFf" secondAttribute="trailing" id="VzR-zg-65e"/>
-                                <constraint firstItem="SQq-Wy-YFf" firstAttribute="top" secondItem="ZKe-xk-oRG" secondAttribute="top" id="ZA8-X6-c4m"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="geH-Ek-mc3"/>
-                                <constraint firstItem="LEy-5c-bV7" firstAttribute="top" secondItem="SQq-Wy-YFf" secondAttribute="bottom" constant="8" id="jxH-XY-Ops"/>
-                                <constraint firstItem="SQq-Wy-YFf" firstAttribute="leading" secondItem="ZKe-xk-oRG" secondAttribute="leading" id="zmo-wf-fbm"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="Km5-2y-azg"/>
                             </constraints>
-                        </view>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="ZKe-xk-oRG" secondAttribute="trailing" priority="999" constant="24" id="EPl-S5-QMu"/>
-                        <constraint firstAttribute="trailing" secondItem="ZKe-xk-oRG" secondAttribute="trailing" priority="999" id="WuI-WY-Vs9"/>
-                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="centerX" secondItem="5iK-Jf-G9m" secondAttribute="centerX" id="Xgb-1u-tqg"/>
-                        <constraint firstAttribute="bottom" secondItem="ZKe-xk-oRG" secondAttribute="bottom" constant="24" id="bmb-Mh-rgg"/>
-                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" id="ff3-YI-qRI"/>
-                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="top" secondItem="5iK-Jf-G9m" secondAttribute="top" constant="24" id="hoh-pp-xK7"/>
-                        <constraint firstItem="ZKe-xk-oRG" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" constant="24" id="n24-MO-C9h"/>
+                        <constraint firstItem="vuR-2S-IZk" firstAttribute="top" secondItem="5iK-Jf-G9m" secondAttribute="top" constant="24" id="BUs-Da-BDB"/>
+                        <constraint firstAttribute="trailing" secondItem="vuR-2S-IZk" secondAttribute="trailing" priority="999" id="GQz-ph-xVa"/>
+                        <constraint firstItem="vuR-2S-IZk" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" constant="24" id="HMO-QK-iIM"/>
+                        <constraint firstItem="vuR-2S-IZk" firstAttribute="leading" secondItem="5iK-Jf-G9m" secondAttribute="leading" priority="999" id="KdN-l5-ojD"/>
+                        <constraint firstItem="vuR-2S-IZk" firstAttribute="centerX" secondItem="5iK-Jf-G9m" secondAttribute="centerX" id="biv-AR-eEb"/>
+                        <constraint firstAttribute="trailing" secondItem="vuR-2S-IZk" secondAttribute="trailing" priority="999" constant="24" id="cj3-J3-nxQ"/>
+                        <constraint firstAttribute="bottom" secondItem="vuR-2S-IZk" secondAttribute="bottom" priority="999" constant="24" id="mGH-Eg-mML"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mM-lJ-jc1" userLabel="Bottom View">
