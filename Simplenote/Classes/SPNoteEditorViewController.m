@@ -226,7 +226,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     }
 
     [UIView animateWithDuration:0.3 animations:^{
-         self.tagView.alpha = 1.0;
+        self.tagView.alpha = 1.0;
      }];
 }
 
