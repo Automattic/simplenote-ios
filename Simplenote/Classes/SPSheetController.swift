@@ -22,30 +22,6 @@ class SPSheetController: UIViewController {
     ///
     @IBOutlet private var actionsBottomConstraint: NSLayoutConstraint!
 
-    /// Button #0: Top Button!
-    ///
-    @IBOutlet private var button0: SPSquaredButton! {
-        didSet {
-            button0.backgroundColor = UIColor.color(name: .simplenoteMidBlue)
-        }
-    }
-
-    /// Button #1: Bottom Button!
-    ///
-    @IBOutlet private var button1: SPSquaredButton! {
-        didSet {
-            button1.backgroundColor = UIColor.color(name: .simplenoteDeepSeaBlue)
-        }
-    }
-
-    /// Closure to be executed whenever button0 is clicked
-    ///
-    var onClickButton0: (() -> Void)?
-
-    /// Closure to be executed whenever button1 is clicked
-    ///
-    var onClickButton1: (() -> Void)?
-
 
 
     /// Designated Initializer
@@ -86,18 +62,10 @@ class SPSheetController: UIViewController {
         attachView(to: containerView)
     }
 
-    func setTitleForButton0(title: String) {
+    func insertButton(_ button: UIControl) {
+        setupButton(button)
         loadViewIfNeeded()
-        button0.setTitle(title, for: .normal)
-    }
-
-    func setTitleForButton1(title: String) {
-        loadViewIfNeeded()
-        button1.setTitle(title, for: .normal)
-    }
-
-    func addArrangedSubview(_ view: UIView) {
-        stackView.addArrangedSubview(view)
+        stackView.addArrangedSubview(button)
     }
 }
 
@@ -105,6 +73,12 @@ class SPSheetController: UIViewController {
 // MARK: - Private Methods
 //
 private extension SPSheetController {
+
+    func setupButton(_ button: UIControl) {
+        button.heightAnchor.constraint(equalToConstant: SPSheetConstants.buttonHeight).isActive = true
+        button.layer.cornerRadius = SPSheetConstants.buttonCornerRadius
+        button.addTarget(self, action: #selector(buttonWasPressed), for: .touchUpInside)
+    }
 
     func attachView(to containerView: UIView) {
         containerView.addSubview(view)
@@ -130,14 +104,8 @@ private extension SPSheetController {
 //
 private extension SPSheetController {
 
-    @IBAction func button0WasPressed() {
+    @IBAction func buttonWasPressed() {
         dismissWithAnimation()
-        onClickButton0?()
-    }
-
-    @IBAction func button1WasPressed() {
-        dismissWithAnimation()
-        onClickButton1?()
     }
 
     @IBAction func backgroundWasPressed() {
@@ -178,4 +146,12 @@ private extension SPSheetController {
         actionsBottomConstraint.constant = .zero
         view.layoutIfNeeded()
     }
+}
+
+
+// MARK: - Constants
+//
+private enum SPSheetConstants {
+    static let buttonHeight = CGFloat(44)
+    static let buttonCornerRadius = CGFloat(4)
 }

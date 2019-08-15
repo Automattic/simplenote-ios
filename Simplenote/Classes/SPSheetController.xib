@@ -13,8 +13,6 @@
                 <outlet property="actionsBottomConstraint" destination="cCf-cX-Hvp" id="cEi-VJ-E4O"/>
                 <outlet property="actionsView" destination="5iK-Jf-G9m" id="PTm-0D-5fV"/>
                 <outlet property="backgroundView" destination="WuN-6h-ONb" id="UXH-AM-GBI"/>
-                <outlet property="button0" destination="SQq-Wy-YFf" id="g5R-Lb-yHg"/>
-                <outlet property="button1" destination="LEy-5c-bV7" id="vAR-mR-2Ko"/>
                 <outlet property="stackView" destination="vuR-2S-IZk" id="1cb-r6-A9u"/>
                 <outlet property="view" destination="Jfs-a1-Lyq" id="7qw-wv-Mkf"/>
             </connections>
@@ -31,41 +29,11 @@
                         <outletCollection property="gestureRecognizers" destination="vHm-tY-brA" appends="YES" id="dq0-N3-SRT"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
-                    <rect key="frame" x="0.0" y="718" width="414" height="144"/>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
+                    <rect key="frame" x="0.0" y="770" width="414" height="92"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-2S-IZk">
-                            <rect key="frame" x="27" y="24" width="360" height="96"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQq-Wy-YFf" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
-                                    <color key="backgroundColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="FVB-i5-juB"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                    <state key="normal" title="#Button 0#">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="button0WasPressed" destination="-1" eventType="touchUpInside" id="qvF-TW-uu5"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEy-5c-bV7" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="52" width="360" height="44"/>
-                                    <color key="backgroundColor" red="0.28777331109999998" green="0.45977264639999998" blue="0.66279113290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="HT8-1l-T3v"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                    <state key="normal" title="#Button 1#">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="button1WasPressed" destination="-1" eventType="touchUpInside" id="57k-IQ-lug"/>
-                                    </connections>
-                                </button>
-                            </subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-2S-IZk">
+                            <rect key="frame" x="27" y="24" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="Km5-2y-azg"/>
                             </constraints>

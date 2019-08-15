@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import AuthenticationServices
 
 
 // MARK: - SPOnboardingViewController
@@ -62,7 +63,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 }
 
 
-// MARK: - Private
+// MARK: - Initialization
 //
 private extension SPOnboardingViewController {
 
@@ -109,6 +110,10 @@ private extension SPOnboardingViewController {
             headerLabel.font = .preferredFont(forTextStyle: .title3)
         }
     }
+
+    func ensureNavigationBarIsHidden() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 }
 
 
@@ -121,24 +126,55 @@ private extension SPOnboardingViewController {
     }
 
     @IBAction func loginWasPressed() {
+        presentLoginSheet()
+    }
+
+    @IBAction func emailLoginWasPressed() {
+        presentAuthenticationInterface(mode: .login)
+    }
+
+    @IBAction func dotcomLoginWasPressed() {
+        presentWordpressSSO()
+    }
+
+    @IBAction func aaplLoginWasPressed() {
+// TODO
+//    Notification: ASAuthorizationAppleIDProviderCredentialRevoked
+//            appleIDCredential.user        // UserIdentifier. Stable thru sessions
+//            appleIDCredential.email
+//            appleIDCredential.identityToken
+//            appleIDCredential.authorizationCode
+//            appleIDCredential.realUserStatus
+    }
+}
+
+
+// MARK: - Presenting
+//
+private extension SPOnboardingViewController {
+
+    func presentLoginSheet() {
+        let emailButton = SPSquaredButton(type: .custom)
+        emailButton.setTitle(OnboardingStrings.loginWithEmailText, for: .normal)
+        emailButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        emailButton.addTarget(self, action: #selector(emailLoginWasPressed), for: .touchUpInside)
+
+        let dotcomButton = SPSquaredButton(type: .custom)
+        dotcomButton.setTitle(OnboardingStrings.loginWithDotcomText, for: .normal)
+        dotcomButton.backgroundColor = .color(name: .simplenoteDeepSeaBlue)
+        dotcomButton.addTarget(self, action: #selector(dotcomLoginWasPressed), for: .touchUpInside)
+
         let sheetController = SPSheetController()
+        sheetController.insertButton(emailButton)
+        sheetController.insertButton(dotcomButton)
 
-        sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
-        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
-
-        sheetController.onClickButton0 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .login)
-        }
-
-        sheetController.onClickButton1 = { [weak self] in
-            self?.presentWordpressSSO()
+        if #available(iOS 13.0, *) {
+            let siwaButton = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .black)
+            siwaButton.addTarget(self, action: #selector(aaplLoginWasPressed), for: .touchUpInside)
+            sheetController.insertButton(siwaButton)
         }
 
         sheetController.present(from: self)
-    }
-
-    func ensureNavigationBarIsHidden() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
@@ -157,7 +193,7 @@ private extension SPOnboardingViewController {
 }
 
 
-// MARK: - Actions
+// MARK: - Notifications
 //
 private extension SPOnboardingViewController {
 
@@ -181,7 +217,6 @@ private extension SPOnboardingViewController {
         presentedViewController?.dismiss(animated: true, completion: nil)
         present(alertController, animated: true, completion: nil)
     }
-
 }
 
 
@@ -193,12 +228,12 @@ private struct OnboardingStrings {
     static let loginText            = NSLocalizedString("Log In", comment: "Login Action")
     static let headerText           = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
     static let loginWithEmailText   = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
-    static let loginWithWpcomText   = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
+    static let loginWithDotcomText  = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
 }
 
 
 private struct SignInError {
-    static let title = NSLocalizedString("Couldn't Sign In", comment: "Alert dialog title displayed on sign in error")
-    static let genericErrorText = NSLocalizedString("An error was encountered while signing in.", comment: "Sign in error message")
-    static let acceptButtonText = NSLocalizedString("OK", comment: "Dismisses an AlertController")
+    static let title                = NSLocalizedString("Couldn't Sign In", comment: "Alert dialog title displayed on sign in error")
+    static let genericErrorText     = NSLocalizedString("An error was encountered while signing in.", comment: "Sign in error message")
+    static let acceptButtonText     = NSLocalizedString("OK", comment: "Dismisses an AlertController")
 }
