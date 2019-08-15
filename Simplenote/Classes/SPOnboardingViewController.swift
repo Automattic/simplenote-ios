@@ -38,11 +38,6 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         return false
     }
 
-    /// Deinitializer
-    ///
-    deinit {
-        stopListeningToNotifications()
-    }
 
     // MARK: - Overridden Methods
 
@@ -165,10 +160,6 @@ private extension SPOnboardingViewController {
         let name = NSNotification.Name(rawValue: kSignInErrorNotificationName)
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
-    }
-
-    func stopListeningToNotifications() {
-        NotificationCenter.default.removeObserver(self)
     }
 
     @objc func handleSignInError(note: Notification) {

@@ -190,12 +190,6 @@ class SPAuthViewController: UIViewController {
     }
 
 
-    /// Deinitializer!
-    ///
-    deinit {
-        stopListeningToNotifications()
-    }
-
     /// Designated Initializer
     ///
     init(controller: SPAuthHandler, mode: AuthenticationMode = .login) {
@@ -266,10 +260,6 @@ private extension SPAuthViewController {
     func startListeningToNotifications() {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(refreshOnePasswordAvailability), name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
-
-    func stopListeningToNotifications() {
-        NotificationCenter.default.removeObserver(self)
     }
 
     func ensureNavigationBarIsVisible() {
