@@ -29,13 +29,14 @@
                         <outletCollection property="gestureRecognizers" destination="vHm-tY-brA" appends="YES" id="dq0-N3-SRT"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iK-Jf-G9m" userLabel="Actions View">
                     <rect key="frame" x="0.0" y="770" width="414" height="92"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-2S-IZk">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-2S-IZk">
                             <rect key="frame" x="27" y="24" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="Km5-2y-azg"/>
+                                <constraint firstAttribute="height" priority="250" constant="44" id="pV7-NG-Hdg"/>
                             </constraints>
                         </stackView>
                     </subviews>
