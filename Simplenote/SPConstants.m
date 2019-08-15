@@ -56,3 +56,5 @@ NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";
 
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
+
+NSString *const kWordPressAuthURL                   = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";
