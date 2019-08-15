@@ -4,7 +4,7 @@
 4.10.0
 ======
 -   Redesigned Onboarding and Authentication Interface(s).
-
+-   Notes List now supports Peek and Pop.
 
 4.9.0
 =====
