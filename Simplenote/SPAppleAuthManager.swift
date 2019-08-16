@@ -4,19 +4,10 @@ import AuthenticationServices
 
 #if IS_XCODE_11
 
-// MARK: - AppleAuthenticationManagerDelegate
-//
-@available(iOS 13.0, *)
-protocol AppleAuthenticationManagerDelegate: NSObject {
-    func authenticationManager(manager: SPAppleAuthManager, didCompleteWithCredentials credentials: ASAuthorizationAppleIDCredential)
-    func authenticationManager(manager: SPAppleAuthManager, didCompleteWithError error: Error)
-}
-
-
 // MARK: - AppleAuthenticationManagerContextProvider
 //
 @available(iOS 13.0, *)
-protocol AppleAuthenticationManagerContextProvider: NSObject {
+protocol SPAppleAuthManagerContextProvider: NSObject {
     func presentationAnchor(for controller: SPAppleAuthManager) -> UIWindow
 }
 
@@ -26,44 +17,47 @@ protocol AppleAuthenticationManagerContextProvider: NSObject {
 @available(iOS 13.0, *)
 class SPAppleAuthManager: NSObject {
 
-    /// Delegate to be notified of (several) events
+    /// Ladies and gentlemen, this is yet another singleton
     ///
-    weak var delegate: AppleAuthenticationManagerDelegate?
+    static let shared = SPAppleAuthManager()
+
+    /// Callback Map!
+    ///
+    private var callbackMap = [ObjectIdentifier: (ASAuthorizationAppleIDCredential?, Error?) -> Void]()
 
     /// UIWindow reference provider
     ///
-    weak var presentationContextProvider: AppleAuthenticationManagerContextProvider?
+    weak var presentationContextProvider: SPAppleAuthManagerContextProvider?
+
 
 
     /// Presents the SIWA Interface from a given UIWindow instance
     ///
-    func presentSignInWithApple() {
-        assert(delegate != nil)
-
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
+    func presentSignInWithApple(onCompletion: @escaping ((ASAuthorizationAppleIDCredential?, Error?) -> Void)) {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.email]
 
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+
+        storeCallback(for: controller, callback: onCompletion)
     }
 
 
     /// Presents the SIWA Interface whenever an account was already created.
     ///
-    func presentExistingAccountSetupFlows() {
-        assert(delegate != nil)
+    func presentExistingAccountSetupFlows(onCompletion: @escaping ((ASAuthorizationAppleIDCredential?, Error?) -> Void)) {
+        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                               ASAuthorizationPasswordProvider().createRequest()]
 
-        // Prepare requests for both Apple ID and password providers.
-        let requests = [ASAuthorizationAppleIDProvider().createRequest()]
+        let controller = ASAuthorizationController(authorizationRequests: requests)
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
 
-        // Create an authorization controller with the given requests.
-        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+        storeCallback(for: controller, callback: onCompletion)
     }
 
 
@@ -76,7 +70,28 @@ class SPAppleAuthManager: NSObject {
 }
 
 
-// MARK: - ASAuthorizationControllerDelegate Conformance
+// MARK: - Private Methods
+//
+@available(iOS 13.0, *)
+private extension SPAppleAuthManager {
+
+    func storeCallback(for controller: ASAuthorizationController, callback: @escaping ((ASAuthorizationAppleIDCredential?, Error?) -> Void)) {
+        callbackMap[ObjectIdentifier(controller)] = callback
+    }
+
+    func callbackForController(_ controller: ASAuthorizationController) -> ((ASAuthorizationAppleIDCredential?, Error?) -> Void)? {
+        let key = ObjectIdentifier(controller)
+        guard let callback = callbackMap[key] else {
+            return nil
+        }
+
+        callbackMap.removeValue(forKey: key)
+        return callback
+    }
+}
+
+
+// MARK: - ASAuthorizationControllerDelegate
 ///
 @available(iOS 13.0, *)
 extension SPAppleAuthManager: ASAuthorizationControllerDelegate {
@@ -86,16 +101,16 @@ extension SPAppleAuthManager: ASAuthorizationControllerDelegate {
             fatalError("AppleAuthManager only supports AppleID Requests")
         }
 
-        delegate?.authenticationManager(manager: self, didCompleteWithCredentials: credentials)
+        callbackForController(controller)?(credentials, nil)
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        delegate?.authenticationManager(manager: self, didCompleteWithError: error)
+        callbackForController(controller)?(nil, error)
     }
 }
 
 
-// MARK: - ASAuthorizationControllerPresentationContextProviding Conformance
+// MARK: - ASAuthorizationControllerPresentationContextProviding
 //
 @available(iOS 13.0, *)
 extension SPAppleAuthManager: ASAuthorizationControllerPresentationContextProviding {
