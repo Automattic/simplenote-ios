@@ -53,12 +53,18 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         setupNavigationController()
         setupLabels()
         setupActionButtons()
+        setupAppleAuthentication()
         startListeningToNotifications()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ensureNavigationBarIsHidden()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        performPreexistingSignInWithAppleFlow()
     }
 }
 
@@ -111,6 +117,14 @@ private extension SPOnboardingViewController {
         }
     }
 
+    func setupAppleAuthentication() {
+        guard #available(iOS 13, *) else {
+            return
+        }
+
+        SPAppleAuthManager.shared.presentationContextProvider = self
+    }
+
     func ensureNavigationBarIsHidden() {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -137,14 +151,9 @@ private extension SPOnboardingViewController {
         presentWordpressSSO()
     }
 
+    @available(iOS 13.0, *)
     @IBAction func aaplLoginWasPressed() {
-// TODO
-//    Notification: ASAuthorizationAppleIDProviderCredentialRevoked
-//            appleIDCredential.user        // UserIdentifier. Stable thru sessions
-//            appleIDCredential.email
-//            appleIDCredential.identityToken
-//            appleIDCredential.authorizationCode
-//            appleIDCredential.realUserStatus
+        presentSignInWithApple()
     }
 }
 
@@ -190,6 +199,47 @@ private extension SPOnboardingViewController {
     func presentWordpressSSO() {
         WPAuthHandler.presentWordPressSSO(from: self)
     }
+
+
+    @available(iOS 13.0, *)
+    func presentSignInWithApple() {
+        SPAppleAuthManager.shared.presentSignInWithApple { (credentials, error) in
+            guard let credentials = credentials else {
+                NSLog("### SIWA Error \(error)")
+                return
+            }
+
+            NSLog("### SIWA Credentials")
+            NSLog("###   User \(credentials.user)")
+            NSLog("###   Name \(credentials.fullName)")
+            NSLog("###   Email \(credentials.email)")
+            NSLog("###   Token \(credentials.identityToken)")
+            NSLog("###   Code \(credentials.authorizationCode)")
+            NSLog("###   Status \(credentials.realUserStatus)")
+        }
+    }
+
+    func performPreexistingSignInWithAppleFlow() {
+        guard #available(iOS 13.0, *) else {
+            return
+        }
+
+        SPAppleAuthManager.shared.presentExistingAccountSetupFlows { (credentials, error) in
+            guard let credentials = credentials else {
+                NSLog("### SIWA Error \(error)")
+                return
+            }
+
+
+            NSLog("### SIWA Credentials")
+            NSLog("###   User \(credentials.user)")
+            NSLog("###   Name \(credentials.fullName)")
+            NSLog("###   Email \(credentials.email)")
+            NSLog("###   Token \(credentials.identityToken)")
+            NSLog("###   Code \(credentials.authorizationCode)")
+            NSLog("###   Status \(credentials.realUserStatus)")
+        }
+    }
 }
 
 
@@ -216,6 +266,17 @@ private extension SPOnboardingViewController {
         /// SFSafariViewController _might_ be onscreen
         presentedViewController?.dismiss(animated: true, completion: nil)
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - SPAppleAuthManagerContextProvider
+//
+@available(iOS 13.0, *)
+extension SPOnboardingViewController: SPAppleAuthManagerContextProvider {
+
+    func presentationAnchor(for controller: SPAppleAuthManager) -> UIWindow {
+        return view.window!
     }
 }
 
