@@ -13,23 +13,31 @@ protocol AppleAuthenticationManagerDelegate: NSObject {
 }
 
 
-// MARK: - SPAppleAuthManager: Encapsulates all of the SIWA SDK interactions
+// MARK: - AppleAuthenticationManagerContextProvider
+//
+@available(iOS 13.0, *)
+protocol AppleAuthenticationManagerContextProvider: NSObject {
+    func presentationAnchor(for controller: SPAppleAuthManager) -> UIWindow
+}
+
+
+// MARK: - SPAppleAuthManager: Wraps all of the SIWA SDK interactions
 //
 @available(iOS 13.0, *)
 class SPAppleAuthManager: NSObject {
-
-    /// Presentation Context
-    ///
-    private var window: UIWindow?
 
     /// Delegate to be notified of (several) events
     ///
     weak var delegate: AppleAuthenticationManagerDelegate?
 
+    /// UIWindow reference provider
+    ///
+    weak var presentationContextProvider: AppleAuthenticationManagerContextProvider?
+
 
     /// Presents the SIWA Interface from a given UIWindow instance
     ///
-    func presentSignInWithApple(from window: UIWindow) {
+    func presentSignInWithApple() {
         assert(delegate != nil)
 
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -40,8 +48,22 @@ class SPAppleAuthManager: NSObject {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+    }
 
-        self.window = window
+
+    /// Presents the SIWA Interface whenever an account was already created.
+    ///
+    func presentExistingAccountSetupFlows() {
+        assert(delegate != nil)
+
+        // Prepare requests for both Apple ID and password providers.
+        let requests = [ASAuthorizationAppleIDProvider().createRequest()]
+
+        // Create an authorization controller with the given requests.
+        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
 
 
@@ -79,13 +101,12 @@ extension SPAppleAuthManager: ASAuthorizationControllerDelegate {
 extension SPAppleAuthManager: ASAuthorizationControllerPresentationContextProviding {
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        guard let window = window else {
+        guard let window = presentationContextProvider?.presentationAnchor(for: self) else {
             fatalError("AppleAuthManager needs a window!")
         }
 
         return window
     }
 }
-
 
 #endif
