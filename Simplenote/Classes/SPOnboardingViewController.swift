@@ -24,6 +24,10 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     ///
     @IBOutlet var loginButton: UIButton!
 
+    /// Let's avoid going thru the Preexisting SIWA flow more than just once
+    ///
+    private var preexistingAppleSignInPresented = false
+
     /// Simperium's Authenticator Instance
     ///
     var authenticator: SPAuthenticator?
@@ -205,17 +209,17 @@ private extension SPOnboardingViewController {
     func presentSignInWithApple() {
         SPAppleAuthManager.shared.presentSignInWithApple { (credentials, error) in
             guard let credentials = credentials else {
-                NSLog("### SIWA Error \(error)")
+//                NSLog("### SIWA Error \(error)")
                 return
             }
 
-            NSLog("### SIWA Credentials")
-            NSLog("###   User \(credentials.user)")
-            NSLog("###   Name \(credentials.fullName)")
-            NSLog("###   Email \(credentials.email)")
-            NSLog("###   Token \(credentials.identityToken)")
-            NSLog("###   Code \(credentials.authorizationCode)")
-            NSLog("###   Status \(credentials.realUserStatus)")
+//            NSLog("### SIWA Credentials")
+//            NSLog("###   User \(credentials.user)")
+//            NSLog("###   Name \(credentials.fullName)")
+//            NSLog("###   Email \(credentials.email)")
+//            NSLog("###   Token \(credentials.identityToken)")
+//            NSLog("###   Code \(credentials.authorizationCode)")
+//            NSLog("###   Status \(credentials.realUserStatus)")
         }
     }
 
@@ -224,20 +228,24 @@ private extension SPOnboardingViewController {
             return
         }
 
+        guard !preexistingAppleSignInPresented else {
+            return
+        }
+
+        preexistingAppleSignInPresented = true
         SPAppleAuthManager.shared.presentExistingAccountSetupFlows { (credentials, error) in
             guard let credentials = credentials else {
-                NSLog("### SIWA Error \(error)")
+//                NSLog("### SIWA Error \(error)")
                 return
             }
 
-
-            NSLog("### SIWA Credentials")
-            NSLog("###   User \(credentials.user)")
-            NSLog("###   Name \(credentials.fullName)")
-            NSLog("###   Email \(credentials.email)")
-            NSLog("###   Token \(credentials.identityToken)")
-            NSLog("###   Code \(credentials.authorizationCode)")
-            NSLog("###   Status \(credentials.realUserStatus)")
+//            NSLog("### SIWA Credentials")
+//            NSLog("###   User \(credentials.user)")
+//            NSLog("###   Name \(credentials.fullName)")
+//            NSLog("###   Email \(credentials.email)")
+//            NSLog("###   Token \(credentials.identityToken)")
+//            NSLog("###   Code \(credentials.authorizationCode)")
+//            NSLog("###   Status \(credentials.realUserStatus)")
         }
     }
 }
