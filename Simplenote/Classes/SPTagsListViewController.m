@@ -18,6 +18,7 @@
 #import "SPButton.h"
 #import "SPOptionsViewController.h"
 #import "SPTracker.h"
+#import "Simplenote-Swift.h"
 
 
 // MARK: - Constants
