@@ -214,7 +214,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_noteEditorTextView.text.length == 0) && !bActionSheetVisible && !_isPreviewing) {
+    if ((_currentNote.content.length == 0) && !bActionSheetVisible && !_isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
