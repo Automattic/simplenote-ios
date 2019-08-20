@@ -29,7 +29,7 @@ static NSString * const SPAuthSessionKey = @"SPAuthSessionKey";
     sessionState = [@"app-" stringByAppendingString:sessionState];
     [[NSUserDefaults standardUserDefaults] setObject:sessionState forKey:SPAuthSessionKey];
 
-    NSString *requestUrl = [NSString stringWithFormat:kWordPressAuthURL, [SPCredentials WPCCClientID], [SPCredentials WPCCRedirectURL], sessionState];
+    NSString *requestUrl = [NSString stringWithFormat:kWordPressAuthURL, [SPCredentials wpcomClientID], [SPCredentials wpcomRedirectURL], sessionState];
     NSString *encodedUrl = [requestUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:encodedUrl]];
