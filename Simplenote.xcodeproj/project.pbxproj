@@ -182,6 +182,9 @@
 		B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */; };
 		B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
 		B5AA4B5B22F46B820072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
+		B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */; };
+		B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB169922FA128000B4EBA5 /* SPSheetController.xib */; };
+		B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */; };
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
@@ -443,6 +446,9 @@
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B5AA4B5922F46B300072BF5D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Simplenote/Colors.xcassets; sourceTree = SOURCE_ROOT; };
+		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
+		B5AB169922FA128000B4EBA5 /* SPSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSheetController.xib; path = Classes/SPSheetController.xib; sourceTree = "<group>"; };
+		B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIKitConstants.swift; path = Classes/UIKitConstants.swift; sourceTree = "<group>"; };
 		B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
@@ -886,6 +892,7 @@
 				B5DF734D22A599D100602CE7 /* SPNotifications.h */,
 				B5DF734E22A599D100602CE7 /* SPNotifications.m */,
 				B52F35D022F3254800724793 /* Theme.swift */,
+				B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -979,6 +986,8 @@
 				B56A695C22F9D53300B90398 /* SPAuthHandler.swift */,
 				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
+				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
+				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1571,6 +1580,7 @@
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
+				B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */,
 				BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */,
 				8C573B0E22CD1AD6005BC6F5 /* Version.Public.xcconfig in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
@@ -1790,6 +1800,7 @@
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
+				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
@@ -1882,6 +1893,7 @@
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
 				B52F35D122F3254800724793 /* Theme.swift in Sources */,
+				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,

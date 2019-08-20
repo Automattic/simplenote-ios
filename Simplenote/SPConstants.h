@@ -53,3 +53,6 @@ extern NSString *const kSimplenoteDarkThemeName;
 extern NSString *const kSimplenoteDefaultThemeName;
 
 extern NSString *const kPinTimeoutPreferencesKey;
+
+extern NSString *const kWordPressAuthURL;
+

@@ -93,7 +93,7 @@ class SPCredentials: NSObject {
         return targetURL
     }
     
-    @objc static func WPCCClientID() -> String? {
+    @objc static func WPCCClientID() -> String {
         if let value = configDictionary().value(forKey: "WPCCClientID") {
             return (value as! String)
         } else {
@@ -101,7 +101,7 @@ class SPCredentials: NSObject {
         }
     }
     
-    @objc static func WPCCClientSecret() -> String? {
+    @objc static func WPCCClientSecret() -> String {
         if let value = configDictionary().value(forKey: "WPCCClientSecret") {
             return (value as! String)
         } else {
@@ -109,7 +109,7 @@ class SPCredentials: NSObject {
         }
     }
     
-    @objc static func WPCCRedirectURL() -> String? {
+    @objc static func WPCCRedirectURL() -> String {
         if let value = configDictionary().value(forKey: "WPCCRedirectURL") {
             return (value as! String)
         } else {
