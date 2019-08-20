@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SPCredentials: NSObject {
+class SPLegacyCredentials: NSObject {
 
     static let configName = "config"
     static let plistType = "plist"
@@ -101,13 +101,13 @@ class SPCredentials: NSObject {
         }
     }
     
-    @objc static func WPCCClientSecret() -> String {
-        if let value = configDictionary().value(forKey: "WPCCClientSecret") {
-            return (value as! String)
-        } else {
-            return ""
-        }
-    }
+//    @objc static func WPCCClientSecret() -> String {
+//        if let value = configDictionary().value(forKey: "WPCCClientSecret") {
+//            return (value as! String)
+//        } else {
+//            return ""
+//        }
+//    }
     
     @objc static func WPCCRedirectURL() -> String {
         if let value = configDictionary().value(forKey: "WPCCRedirectURL") {
