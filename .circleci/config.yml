@@ -11,9 +11,6 @@ jobs:
       xcode-version: "10.2.0"
     steps:
       - checkout
-      - run:
-          name: Copy demo config.plist
-          command: cp Simplenote/config-demo.plist Simplenote/config.plist
       - ios/test:
           xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace
