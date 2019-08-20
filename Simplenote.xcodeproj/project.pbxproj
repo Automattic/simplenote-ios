@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B5C7BF97230C59F5000DEC91 /* GenerateCredentials */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "GenerateCredentials" */;
+			buildPhases = (
+				B5C7BF9E230C5A79000DEC91 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = GenerateCredentials;
+			productName = GenerateCredentials;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
@@ -202,6 +216,11 @@
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
 		B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */; };
 		B5C57A4122E78F4D009166EA /* UIColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A4022E78F4D009166EA /* UIColorName.swift */; };
+		B5C7BFA8230C7190000DEC91 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7BFA1230C5D96000DEC91 /* SPCredentials.swift */; };
+		B5C7BFA9230C7190000DEC91 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7BFA1230C5D96000DEC91 /* SPCredentials.swift */; };
+		B5C7BFAA230C7637000DEC91 /* SPLegacyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */; };
+		B5C7BFAB230C7637000DEC91 /* SPLegacyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */; };
+		B5C7BFAE230C76DF000DEC91 /* SPCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7BFAD230C76DF000DEC91 /* SPCredentialsTests.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
 		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
@@ -225,8 +244,6 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F52F0622CCEEF100B376F9 /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */; };
 		BE7F27BC1D5A47DE00A1A0A9 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7F27BB1D5A47DE00A1A0A9 /* config.plist */; };
-		BE83424E1D5AA83B0000811F /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83424D1D5AA83B0000811F /* SPCredentials.swift */; };
-		BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83424D1D5AA83B0000811F /* SPCredentials.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
@@ -249,6 +266,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 46A3C96017DFA81A002865AE;
 			remoteInfo = Simplenote;
+		};
+		B5C7BF9F230C5AC9000DEC91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5C7BF97230C59F5000DEC91;
+			remoteInfo = GenerateCredentials;
 		};
 		B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -474,6 +498,9 @@
 		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
 		B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Simplenote.swift"; sourceTree = "<group>"; };
 		B5C57A4022E78F4D009166EA /* UIColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorName.swift; path = Classes/UIColorName.swift; sourceTree = "<group>"; };
+		B5C7BFA1230C5D96000DEC91 /* SPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = "<group>"; };
+		B5C7BFA4230C5E2F000DEC91 /* SPCredentials.tpl */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = SPCredentials.tpl; sourceTree = "<group>"; };
+		B5C7BFAD230C76DF000DEC91 /* SPCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCredentialsTests.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
@@ -506,7 +533,7 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F52F0522CCEEF100B376F9 /* UIColor+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Simplenote.swift"; path = "Classes/UIColor+Simplenote.swift"; sourceTree = "<group>"; };
 		BE7F27BB1D5A47DE00A1A0A9 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
-		BE83424D1D5AA83B0000811F /* SPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = "<group>"; };
+		BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLegacyCredentials.swift; path = ../SPLegacyCredentials.swift; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
 		E201864617A4892300217E0B /* SPActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActionButton.h; path = Classes/SPActionButton.h; sourceTree = "<group>"; };
@@ -1016,6 +1043,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5C7BFAC230C76CC000DEC91 /* Credentials */,
 				B52F35D422F3573300724793 /* Extensions */,
 				B5B9AB4122EA6FE1001CB0AD /* Themes */,
 				B55AC57822D27B7F00D8CEB2 /* Settings */,
@@ -1080,6 +1108,31 @@
 				B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */,
 			);
 			name = Themes;
+			sourceTree = "<group>";
+		};
+		B5C7BF92230C592B000DEC91 /* Credentials */ = {
+			isa = PBXGroup;
+			children = (
+				B5C7BFA4230C5E2F000DEC91 /* SPCredentials.tpl */,
+			);
+			path = Credentials;
+			sourceTree = "<group>";
+		};
+		B5C7BF94230C5950000DEC91 /* DerivedSources */ = {
+			isa = PBXGroup;
+			children = (
+				BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */,
+				B5C7BFA1230C5D96000DEC91 /* SPCredentials.swift */,
+			);
+			path = DerivedSources;
+			sourceTree = "<group>";
+		};
+		B5C7BFAC230C76CC000DEC91 /* Credentials */ = {
+			isa = PBXGroup;
+			children = (
+				B5C7BFAD230C76DF000DEC91 /* SPCredentialsTests.swift */,
+			);
+			name = Credentials;
 			sourceTree = "<group>";
 		};
 		B5CFFFDF22AA9AD100B968CD /* Tools */ = {
@@ -1272,6 +1325,8 @@
 			isa = PBXGroup;
 			children = (
 				467D9C7A1788D10400785EF3 /* Categories */,
+				B5C7BF92230C592B000DEC91 /* Credentials */,
+				B5C7BF94230C5950000DEC91 /* DerivedSources */,
 				B569DBFE1C03411500EC1FE8 /* Extensions */,
 				B52BB74C22CFD14C0042C162 /* Exporter */,
 				467D9C601788A53700785EF3 /* Models */,
@@ -1305,7 +1360,6 @@
 				E29ADD4717848E8500E55842 /* main.m */,
 				E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */,
 				BE7F27BB1D5A47DE00A1A0A9 /* config.plist */,
-				BE83424D1D5AA83B0000811F /* SPCredentials.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1433,6 +1487,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */,
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
 			);
 			name = Simplenote;
@@ -1512,6 +1567,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 46A3C96017DFA81A002865AE;
 					};
+					B5C7BF97230C59F5000DEC91 = {
+						CreatedOnToolsVersion = 11.0;
+						ProvisioningStyle = Automatic;
+					};
 					B5EB1EEB1C204EBD0080A1B3 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = PZYM8XX95Q;
@@ -1561,6 +1620,7 @@
 				46A3C96017DFA81A002865AE /* Simplenote */,
 				B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */,
 				B58218961FCC45170094ECA1 /* SimplenoteTests */,
+				B5C7BF97230C59F5000DEC91 /* GenerateCredentials */,
 			);
 		};
 /* End PBXProject section */
@@ -1733,6 +1793,27 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
+		B5C7BF9E230C5A79000DEC91 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Simplenote/Credentials/replace_secrets.rb",
+				"$(SRCROOT)/Simplenote/Credentials/SPCredentials.tpl",
+				"~/.mobile-secrets/iOS/simplenote/credentials.json",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Simplenote/DerivedSources/SPCredentials.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Scripts/build-phases/generate_credentials.sh\n";
+		};
 		C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1828,6 +1909,7 @@
 				46A3C97F17DFA81A002865AE /* SPSideBySideView.m in Sources */,
 				B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */,
 				46A3C98017DFA81A002865AE /* UIImage+Colorization.m in Sources */,
+				B5C7BFA8230C7190000DEC91 /* SPCredentials.swift in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
 				46A3C98117DFA81A002865AE /* VSTheme.m in Sources */,
 				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
@@ -1882,6 +1964,7 @@
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */,
+				B5C7BFAB230C7637000DEC91 /* SPLegacyCredentials.swift in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
@@ -1916,7 +1999,6 @@
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,
 				46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */,
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
-				BE83424E1D5AA83B0000811F /* SPCredentials.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
@@ -1930,6 +2012,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C7BFAE230C76DF000DEC91 /* SPCredentialsTests.swift in Sources */,
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
@@ -1946,19 +2029,20 @@
 				B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */,
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
 				74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */,
-				BE83424F1D5AB7D00000811F /* SPCredentials.swift in Sources */,
 				B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */,
 				B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */,
 				B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */,
 				B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */,
 				B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */,
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
+				B5C7BFAA230C7637000DEC91 /* SPLegacyCredentials.swift in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
 				74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */,
 				B5AA4B5222F46A0F0072BF5D /* UIColorName.swift in Sources */,
 				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
 				74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
+				B5C7BFA9230C7190000DEC91 /* SPCredentials.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
 				B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
@@ -1975,6 +2059,11 @@
 			isa = PBXTargetDependency;
 			target = 46A3C96017DFA81A002865AE /* Simplenote */;
 			targetProxy = B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */;
+		};
+		B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5C7BF97230C59F5000DEC91 /* GenerateCredentials */;
+			targetProxy = B5C7BF9F230C5AC9000DEC91 /* PBXContainerItemProxy */;
 		};
 		B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2461,6 +2550,51 @@
 			};
 			name = "Distribution AppStore";
 		};
+		B5C7BF99230C59F5000DEC91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
+			};
+			name = Debug;
+		};
+		B5C7BF9A230C59F5000DEC91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
+			};
+			name = Release;
+		};
+		B5C7BF9B230C59F5000DEC91 /* Distribution Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
+			};
+			name = "Distribution Internal";
+		};
+		B5C7BF9C230C59F5000DEC91 /* Distribution AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
+			};
+			name = "Distribution AppStore";
+		};
+		B5C7BF9D230C59F5000DEC91 /* Distribution AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
+			};
+			name = "Distribution AdHoc";
+		};
 		B5CCE3221FCC6B6A006B123B /* Distribution AdHoc */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */;
@@ -2908,6 +3042,18 @@
 				B58218A11FCC45170094ECA1 /* Distribution Internal */,
 				B58218A21FCC45170094ECA1 /* Distribution AppStore */,
 				B5CCE3251FCC6B6A006B123B /* Distribution AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "GenerateCredentials" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5C7BF99230C59F5000DEC91 /* Debug */,
+				B5C7BF9A230C59F5000DEC91 /* Release */,
+				B5C7BF9B230C59F5000DEC91 /* Distribution Internal */,
+				B5C7BF9C230C59F5000DEC91 /* Distribution AppStore */,
+				B5C7BF9D230C59F5000DEC91 /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
