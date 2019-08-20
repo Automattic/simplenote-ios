@@ -11,6 +11,9 @@ jobs:
       xcode-version: "10.2.0"
     steps:
       - checkout
+      - run:
+          name: Copy demo config.plist
+          command: cp Simplenote/simplenote_app_credentials_demo.json ~/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json
       - ios/test:
           xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace
