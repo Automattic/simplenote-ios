@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+// TODO: We're keeping this class around until `SPCredentialsTests` is verified to be evergreen. Nuke this class along with
+//       the unit test ASAP.
+//
 class SPLegacyCredentials: NSObject {
 
     static let configName = "config"

@@ -1121,8 +1121,8 @@
 		B5C7BF94230C5950000DEC91 /* DerivedSources */ = {
 			isa = PBXGroup;
 			children = (
-				BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */,
 				B5C7BFA1230C5D96000DEC91 /* SPCredentials.swift */,
+				BE83424D1D5AA83B0000811F /* SPLegacyCredentials.swift */,
 			);
 			path = DerivedSources;
 			sourceTree = "<group>";
