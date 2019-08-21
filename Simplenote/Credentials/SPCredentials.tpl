@@ -1,4 +1,4 @@
-/// WooCommerce API Credentials. Generated on %{timestamp}
+/// Simplenote API Credentials. Generated on %{timestamp}
 ///
 @objcMembers
 class SPCredentials: NSObject {
