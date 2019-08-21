@@ -1803,7 +1803,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Simplenote/Credentials/replace_secrets.rb",
 				"$(SRCROOT)/Simplenote/Credentials/SPCredentials.tpl",
-				"~/.mobile-secrets/iOS/simplenote/credentials.json",
+				"~/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json",
 			);
 			outputFileListPaths = (
 			);
