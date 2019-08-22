@@ -11,6 +11,9 @@ jobs:
       xcode-version: "10.2.0"
     steps:
       - checkout
+      - run:
+            name: Copy demo SPCredentials
+            command: cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
       - ios/test:
           xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace
