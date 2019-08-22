@@ -6,7 +6,7 @@ SCRIPT_PATH=${SOURCE_ROOT}/Scripts/build-phases/replace_secrets.rb
 CREDS_INPUT_PATH=${SOURCE_ROOT}/Simplenote/Credentials/SPCredentials.tpl
 CREDS_OUTPUT_PATH=${DERIVED_PATH}/SPCredentials.swift
 
-CREDS_TEMPLATE_PATH=${SOURCE_ROOT}/Simplenote/Credentials/Templates/SPCredentials-Template.swift
+CREDS_TEMPLATE_PATH=${SOURCE_ROOT}/Simplenote/Credentials/SPCredentials.tpl
 
 ## Validate Secrets!
 ##
