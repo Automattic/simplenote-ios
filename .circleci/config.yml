@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Copy demo SPCredentials
-          command: mkdir Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
+          command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
       - ios/test:
           xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace

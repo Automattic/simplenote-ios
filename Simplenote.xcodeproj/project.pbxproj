@@ -1789,7 +1789,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Copying Credentials...\"\n\ncp ~/.mobile-secrets/iOS/simplenote/SPCredentials.swift  ${SRCROOT}/Simplenote/Credentials/SPCredentials.swift\n";
+			shellScript = "echo \"Copying Credentials...\"\n\nmkdir -p ${SRCROOT}/Simplenote/Credentials\n\ncp ~/.mobile-secrets/iOS/simplenote/SPCredentials.swift  ${SRCROOT}/Simplenote/Credentials/SPCredentials.swift\n";
 		};
 		C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
