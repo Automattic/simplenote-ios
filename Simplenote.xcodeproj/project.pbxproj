@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		B5C7BF97230C59F5000DEC91 /* GenerateCredentials */ = {
+		B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "GenerateCredentials" */;
+			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */;
 			buildPhases = (
 				B5C7BF9E230C5A79000DEC91 /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = GenerateCredentials;
+			name = SimplenoteSecrets;
 			productName = GenerateCredentials;
 		};
 /* End PBXAggregateTarget section */
@@ -268,6 +268,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = B5C7BF97230C59F5000DEC91;
 			remoteInfo = GenerateCredentials;
+		};
+		B5E196BD230F554500F5658A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5C7BF97230C59F5000DEC91;
+			remoteInfo = Credentials;
 		};
 		B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1501,6 +1508,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B5E196BE230F554500F5658A /* PBXTargetDependency */,
 			);
 			name = SimplenoteShare;
 			productName = SimplenoteShare;
@@ -1593,7 +1601,7 @@
 				46A3C96017DFA81A002865AE /* Simplenote */,
 				B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */,
 				B58218961FCC45170094ECA1 /* SimplenoteTests */,
-				B5C7BF97230C59F5000DEC91 /* GenerateCredentials */,
+				B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */,
 			);
 		};
 /* End PBXProject section */
@@ -2028,8 +2036,13 @@
 		};
 		B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B5C7BF97230C59F5000DEC91 /* GenerateCredentials */;
+			target = B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */;
 			targetProxy = B5C7BF9F230C5AC9000DEC91 /* PBXContainerItemProxy */;
+		};
+		B5E196BE230F554500F5658A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */;
+			targetProxy = B5E196BD230F554500F5658A /* PBXContainerItemProxy */;
 		};
 		B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2521,7 +2534,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
 			};
 			name = Debug;
 		};
@@ -2530,7 +2542,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
 			};
 			name = Release;
 		};
@@ -2539,7 +2550,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
 			};
 			name = "Distribution Internal";
 		};
@@ -2548,7 +2558,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
 			};
 			name = "Distribution AppStore";
 		};
@@ -2557,7 +2566,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SECRETS_PATH = "$HOME/.mobile-secrets/iOS/simplenote/simplenote_app_credentials.json";
 			};
 			name = "Distribution AdHoc";
 		};
@@ -3012,7 +3020,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "GenerateCredentials" */ = {
+		B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5C7BF99230C59F5000DEC91 /* Debug */,
