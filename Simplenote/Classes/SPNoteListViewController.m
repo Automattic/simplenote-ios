@@ -43,7 +43,15 @@
 #import "VSThemeManager.h"
 
 
-@interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
+@interface SPNoteListViewController () <ABXPromptViewDelegate,
+                                        ABXFeedbackViewControllerDelegate,
+                                        UITableViewDataSource,
+                                        UITableViewDelegate,
+                                        NSFetchedResultsControllerDelegate,
+                                        UIGestureRecognizerDelegate,
+                                        UISearchBarDelegate,
+                                        UITextFieldDelegate,
+                                        SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
@@ -56,11 +64,6 @@
 @end
 
 @implementation SPNoteListViewController
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
@@ -89,8 +92,7 @@
                                                      name:SPNotesListSortModeChangedNotification
                                                    object:nil];
 
-        // voiceover status is tracked because the custom animated transition
-        // is not used when enabled
+        // voiceover status is tracked because the custom animated transition is not used when enabled
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceoverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusChanged
@@ -894,13 +896,11 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     
-    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
     [self.tableView beginUpdates];
 }
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    
     
     UITableView *tableView = self.tableView;
     
@@ -962,7 +962,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     
-    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
     
     // update the empty list view
