@@ -126,6 +126,7 @@
 		B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */; };
 		B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */; };
 		B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */; };
+		B510767F231074E70054586C /* NSIndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510767E231074E70054586C /* NSIndexPath+Simplenote.swift */; };
 		B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = B512AF961C20B14200FE76D8 /* SPAnimations.m */; };
 		B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */; };
@@ -371,6 +372,7 @@
 		B50F47A21D1D78EA00822748 /* SPRatingsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsHelper.h; path = Classes/SPRatingsHelper.h; sourceTree = "<group>"; };
 		B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsHelper.m; path = Classes/SPRatingsHelper.m; sourceTree = "<group>"; };
 		B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Extensions.swift"; path = "Classes/NSURL+Extensions.swift"; sourceTree = "<group>"; };
+		B510767E231074E70054586C /* NSIndexPath+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSIndexPath+Simplenote.swift"; path = "Classes/NSIndexPath+Simplenote.swift"; sourceTree = "<group>"; };
 		B512AF8E1C209DD900FE76D8 /* Simplenote-Share-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Share-Bridging-Header.h"; sourceTree = "<group>"; };
 		B512AF951C20B14200FE76D8 /* SPAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnimations.h; sourceTree = "<group>"; };
 		B512AF961C20B14200FE76D8 /* SPAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnimations.m; sourceTree = "<group>"; };
@@ -960,6 +962,7 @@
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
+				B510767E231074E70054586C /* NSIndexPath+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
@@ -1866,6 +1869,7 @@
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
+				B510767F231074E70054586C /* NSIndexPath+Simplenote.swift in Sources */,
 				46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */,
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
