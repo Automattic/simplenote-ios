@@ -7,7 +7,6 @@ import UIKit
 @objc
 enum UIImageName: Int, CaseIterable {
     case backImage
-    case pinImage
     case sharedImage
     case navigationBarShadowImage
     case navigationBarBackgroundImage
@@ -30,8 +29,6 @@ extension UIImageName {
         switch self {
         case .backImage:
             return .backImage
-        case .pinImage:
-            return .pinImage
         case .sharedImage:
             return .sharedImage
         case .navigationBarShadowImage:

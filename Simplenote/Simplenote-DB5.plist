@@ -116,8 +116,6 @@
 		<integer>360</integer>
 		<key>actionSheetButtonHeight</key>
 		<integer>55</integer>
-		<key>pinImage</key>
-		<string>icon_pin</string>
 		<key>sharedImage</key>
 		<string>icon_shared</string>
 		<key>tagViewHeight</key>
