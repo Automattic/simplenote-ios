@@ -12,9 +12,9 @@
 
 @implementation SPBorderedTableView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
-    self = [super init];
+    self = [super initWithFrame:frame style:style];
     if (self) {
         self.leftBorder = [CALayer layer];
         self.leftBorder.opacity = 0;

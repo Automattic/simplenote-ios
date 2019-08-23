@@ -9,7 +9,7 @@
 
 @interface SPBorderedTableView : UITableView
 
-@property CALayer *leftBorder;
+@property (nonatomic, strong) CALayer *leftBorder;
 
 - (void)setBorderVisibile:(BOOL)isVisible;
 - (void)applyTheme;

@@ -69,8 +69,7 @@
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
-        
-        self.tableView = [[SPBorderedTableView alloc] init];
+        self.tableView = [[SPBorderedTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         self.tableView.frame = self.rootView.bounds;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
