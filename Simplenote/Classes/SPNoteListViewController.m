@@ -447,15 +447,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+
+    return self.fetchedResultsController.sections.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -687,6 +689,11 @@
 
 #pragma mark - NSFetchedResultsController
 
+- (NSString *)sectionNameKeyPath
+{
+    return NSStringFromSelector(@selector(pinned));
+}
+
 - (NSArray *)sortDescriptors
 {
     NSString *sortKey = nil;
@@ -724,11 +731,10 @@
             break;
     }
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:sortSelector];
-    NSSortDescriptor *pinnedSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pinned" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:pinnedSortDescriptor, sortDescriptor, nil];
-    
-    return sortDescriptors;
+    return @[
+        [[NSSortDescriptor alloc] initWithKey:self.sectionNameKeyPath ascending:NO],
+        [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:sortSelector]
+    ];
 }
 
 - (void)updateViewIfEmpty {
@@ -870,7 +876,7 @@
 
     NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                                         managedObjectContext:mainContext
-                                                                                          sectionNameKeyPath:nil
+                                                                                          sectionNameKeyPath:self.sectionNameKeyPath
                                                                                                    cacheName:nil];
     resultsController.delegate = self;
     self.fetchedResultsController = resultsController;
