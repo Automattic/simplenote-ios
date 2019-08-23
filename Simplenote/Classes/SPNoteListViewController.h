@@ -12,7 +12,7 @@
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
-@class Note, SPEmptyListView;
+@class SPEmptyListView;
 
 typedef enum {
 	SPTagFilterTypeUserTag = 0,

@@ -880,41 +880,26 @@
     {
         return _fetchedResultsController;
     }
-    
-    // Set appDelegate here because this might get called before it gets an opportunity to be set previously
-    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    
-    // Create the fetch request for the entity.
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:appDelegate.simperium.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Don't fetch deleted notes.
-    NSPredicate *predicate = [self fetchPredicate];
-    [fetchRequest setPredicate: predicate];
-    
-    // Edit the sort key as appropriate.
-    NSArray *sortDescriptors = [self sortDescriptors];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:appDelegate.simperium.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
+
+    NSManagedObjectContext *mainContext = [[[SPAppDelegate sharedDelegate] simperium] managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:mainContext];
+
+    NSFetchRequest *request = [NSFetchRequest new];
+    request.entity = entity;
+    request.fetchBatchSize = 20;
+    request.predicate = [self fetchPredicate];
+    request.sortDescriptors = [self sortDescriptors];
+
+    NSFetchedResultsController *resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                                        managedObjectContext:mainContext
+                                                                                          sectionNameKeyPath:nil
+                                                                                                   cacheName:nil];
+    resultsController.delegate = self;
+    self.fetchedResultsController = resultsController;
     
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error])
     {
-	    /*
-	     Replace this implementation with code to handle the error appropriately.
-         
-	     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-	     */
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
