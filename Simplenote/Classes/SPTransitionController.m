@@ -318,7 +318,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 CGRect startingFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 startingFrame.size.height -= 5; // corrects for line spacing added to final row
                 
-                if (_selectedPath && path.row == _selectedPath.row) {
+                if (_selectedPath && path.row == _selectedPath.row && path.section == _selectedPath.section) {
                     
                     // two snapshots are used for note content since the preview is a "clean" versio of a note
 
@@ -381,13 +381,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                         CGRect endingFrame = startingFrame;
                         CGFloat moveAmount = [UIDevice isPad] ? 1200 : 700;
                         
-                        if (path.row < _selectedPath.row)
+                        if ((path.section == _selectedPath.section && path.row < _selectedPath.row) ||
+                            (path.section < _selectedPath.section)) {
                             moveAmount = moveAmount * -1;
+                        }
                         
                         endingFrame.origin.y += moveAmount;
                         
                         // add delay based on position to selected cell
-                        CGFloat delay = MAX(0, 0.05 - ABS(_selectedPath.row - path.row) * 0.0125);
+                        CGFloat delay = MAX(0, 0.05 - ABS(_selectedPath.integerValue - path.integerValue) * 0.0125);
                         
                         NSDictionary *animationProperties = @{SPAnimationDurationName: @0.5,
                                                               SPAnimationDelayName: [NSNumber numberWithFloat:delay],
@@ -482,7 +484,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             finalFrame.size.height -= cell.previewView.textContainer.lineFragmentPadding; // corrects for line spacing added to final row
             
             
-            if (_selectedPath && path.row == _selectedPath.row) {
+            if (_selectedPath && path.row == _selectedPath.row && path.section == _selectedPath.section) {
                 
                 // two snapshots are used for note content since the preview is a "clean" version of a note
                 
@@ -548,12 +550,14 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     CGRect startingFrame = finalFrame;
                     CGFloat moveAmount = [UIDevice isPad] ? 1200 : 700;
                     
-                    if (path.row < _selectedPath.row)
+                    if ((path.section == _selectedPath.section && path.row < _selectedPath.row) ||
+                        (path.section < _selectedPath.section)) {
                         moveAmount = moveAmount * -1;
+                    }
                     
                     startingFrame.origin.y += moveAmount;
                     
-                    CGFloat delay = MIN(ABS(_selectedPath.row - path.row) * 0.02 * (isPad ? 0.4 : 0.5), 0.15);
+                    CGFloat delay = MIN(ABS(_selectedPath.integerValue - path.integerValue) * 0.02 * (isPad ? 0.4 : 0.5), 0.15);
 
                     NSDictionary *animationProperties = @{SPAnimationDurationName: @0.45,
                                                           SPAnimationDelayName: [NSNumber numberWithFloat:delay],
