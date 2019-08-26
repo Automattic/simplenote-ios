@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - SPTableViewHeaderFooterView
 //
-@objcMembers
+@objc
 class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
 
     /// Label: Text
@@ -21,6 +21,10 @@ class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
         return UIView()
     }()
 
+    /// Border: Bottom Height
+    ///
+    private var bottomBorderHeightConstraint: NSLayoutConstraint!
+
     /// Bottom Border's Color
     ///
     var bottomBorderColor: UIColor? {
@@ -32,6 +36,14 @@ class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
         }
     }
 
+    /// Bottom Border Height
+    ///
+    var bottomBorderIsThick: Bool = false {
+        didSet {
+            refreshBottomBorderHeight()
+        }
+    }
+
     /// String to be displayed onscreen
     ///
     var title: String? {
@@ -40,6 +52,28 @@ class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
         }
         set {
             titleLabel.text = newValue
+        }
+    }
+
+    /// Title Color
+    ///
+    var titleColor: UIColor? {
+        get {
+            return titleLabel.textColor
+        }
+        set {
+            titleLabel.textColor = newValue
+        }
+    }
+
+    /// Title Visibility
+    ///
+    var titleIsHiden: Bool {
+        get {
+            return titleLabel.isHidden
+        }
+        set {
+            titleLabel.isHidden = newValue
         }
     }
 
@@ -80,12 +114,17 @@ private extension SPTableViewHeaderFooterView {
         ])
 
         bottomBorderView.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorderHeightConstraint = bottomBorderView.heightAnchor.constraint(equalToConstant: Constants.borderHeightThin)
         NSLayoutConstraint.activate([
             bottomBorderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bottomBorderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             bottomBorderView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            bottomBorderView.heightAnchor.constraint(equalToConstant: Constants.borderHeight)
+            bottomBorderHeightConstraint,
         ])
+    }
+
+    func refreshBottomBorderHeight() {
+        bottomBorderHeightConstraint.constant = bottomBorderIsThick ? Constants.borderHeightThick : Constants.borderHeightThin
     }
 }
 
@@ -93,6 +132,7 @@ private extension SPTableViewHeaderFooterView {
 // MARK: - Private Constants
 //
 private struct Constants {
-    static let borderHeight = CGFloat(1) / UIScreen.main.scale
+    static let borderHeightThin = CGFloat(1) / UIScreen.main.scale
+    static let borderHeightThick = CGFloat(4)
     static let titleInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
 }
