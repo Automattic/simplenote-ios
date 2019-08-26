@@ -26,6 +26,7 @@ enum ThemeColorKey: String {
     case searchBarImageColor
     case searchHighlightFontColor
     case simplenoteAlmostBlack
+    case simplenoteCloudyBlue
     case simplenoteDeepSeaBlue
     case simplenoteGunmetal
     case simplenoteLightNavy

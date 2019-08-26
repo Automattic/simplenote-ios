@@ -28,6 +28,7 @@ enum UIColorName: Int, CaseIterable {
     case searchBarImageColor
     case searchHighlightFontColor
     case simplenoteAlmostBlack
+    case simplenoteCloudyBlue
     case simplenoteDeepSeaBlue
     case simplenoteGunmetal
     case simplenoteLightNavy
@@ -103,6 +104,8 @@ extension UIColorName {
             return .searchHighlightFontColor
         case .simplenoteAlmostBlack:
             return .simplenoteAlmostBlack
+        case .simplenoteCloudyBlue:
+            return .simplenoteCloudyBlue
         case .simplenoteDeepSeaBlue:
             return .simplenoteDeepSeaBlue
         case .simplenoteGunmetal:

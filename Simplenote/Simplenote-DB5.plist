@@ -216,6 +216,8 @@
 		<string>button_visibility_off</string>
 		<key>simplenoteAlmostBlack</key>
 		<string>12171a</string>
+		<key>simplenoteCloudyBlue</key>
+		<string>c3c4c7</string>
 		<key>simplenoteLightNavy</key>
 		<string>135d95</string>
 		<key>simplenoteLightPink</key>
