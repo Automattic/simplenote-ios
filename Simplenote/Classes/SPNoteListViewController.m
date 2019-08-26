@@ -79,6 +79,7 @@
 
         cellIdentifier = [[VSThemeManager sharedManager] theme].name;
         [self.tableView registerClass:[SPTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self.tableView registerClass:[SPTableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:SPTableViewHeaderFooterView.reuseIdentifier];
         self.tableView.alwaysBounceVertical = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -451,7 +452,6 @@
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
