@@ -48,17 +48,23 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 extension SPNoteListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let _ = self.section(atIndex: section) else {
+            return .zero
+        }
+
         return UITableView.automaticDimension
     }
 
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let reuseIdentifier = SPTableViewHeaderFooterView.reuseIdentifier
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseIdentifier) as? SPTableViewHeaderFooterView else {
+        guard let section = self.section(atIndex: section) else {
+            return nil
+        }
+
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SPTableViewHeaderFooterView.reuseIdentifier) as? SPTableViewHeaderFooterView else {
             assertionFailure()
             return nil
         }
 
-        let section = self.section(atIndex: section)
         headerView.title = section.title?.uppercased()
         headerView.titleColor = section.titleColor
         headerView.titleIsHiden = section.titleIsHidden
@@ -69,12 +75,12 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
 
-    private func section(atIndex index: Int) -> Section {
+    private func section(atIndex index: Int) -> Section? {
         guard let sections = fetchedResultsController.sections, sections.count > 1 else {
-            return .everything
+            return nil
         }
 
-        return Section(rawValue: index) ?? .everything
+        return Section(rawValue: index)
     }
 }
 
@@ -84,7 +90,6 @@ extension SPNoteListViewController: UITableViewDelegate {
 private enum Section: Int {
     case pinned     = 0
     case unpinned   = 1
-    case everything = 1000
 }
 
 extension Section {
