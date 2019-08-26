@@ -78,7 +78,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         return headerView
     }
 
-
     private func section(atIndex index: Int) -> Section? {
         guard let sections = fetchedResultsController.sections, sections.count > 1 else {
             return nil
