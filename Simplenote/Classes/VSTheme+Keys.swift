@@ -34,6 +34,7 @@ enum ThemeColorKey: String {
     case simplenoteLipstick
     case simplenoteMidBlue
     case simplenotePalePurple
+    case simplenoteLightPeriwinkle
     case simplenoteSlateGrey
     case switchTintColor
     case switchOnTintColor

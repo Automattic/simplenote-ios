@@ -36,6 +36,7 @@ enum UIColorName: Int, CaseIterable {
     case simplenoteLipstick
     case simplenoteMidBlue
     case simplenotePalePurple
+    case simplenoteLightPeriwinkle
     case simplenoteSlateGrey
     case switchTintColor
     case switchOnTintColor
@@ -120,6 +121,8 @@ extension UIColorName {
             return .simplenoteMidBlue
         case .simplenotePalePurple:
             return .simplenotePalePurple
+        case .simplenoteLightPeriwinkle:
+            return .simplenoteLightPeriwinkle
         case .simplenoteSlateGrey:
             return .simplenoteSlateGrey
         case .switchTintColor:

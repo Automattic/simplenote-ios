@@ -218,22 +218,24 @@
 		<string>12171a</string>
 		<key>simplenoteCloudyBlue</key>
 		<string>c3c4c7</string>
+		<key>simplenoteDeepSeaBlue</key>
+		<string>006088</string>
+		<key>simplenoteGunmetal</key>
+		<string>525760</string>
 		<key>simplenoteLightNavy</key>
 		<string>135d95</string>
+		<key>simplenoteLightPeriwinkle</key>
+		<string>dcdcde</string>
 		<key>simplenoteLightPink</key>
 		<string>e3e0e2</string>
+		<key>simplenoteLipstick</key>
+		<string>C42628</string>
 		<key>simplenoteMidBlue</key>
 		<string>2170b0</string>
 		<key>simplenotePalePurple</key>
 		<string>b6b2b8</string>
 		<key>simplenoteSlateGrey</key>
 		<string>686b75</string>
-		<key>simplenoteGunmetal</key>
-		<string>525760</string>
-		<key>simplenoteDeepSeaBlue</key>
-		<string>006088</string>
-		<key>simplenoteLipstick</key>
-		<string>C42628</string>
 	</dict>
 	<key>Dark</key>
 	<dict>
