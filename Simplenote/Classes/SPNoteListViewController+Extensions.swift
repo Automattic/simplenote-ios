@@ -41,3 +41,81 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         navigationController?.pushViewController(editorViewController, animated: true)
     }
 }
+
+
+// MARK: - UITableViewDelegate Conformance
+//
+extension SPNoteListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let reuseIdentifier = SPTableViewHeaderFooterView.reuseIdentifier
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: reuseIdentifier) as? SPTableViewHeaderFooterView else {
+            assertionFailure()
+            return nil
+        }
+
+        let section = self.section(atIndex: section)
+        headerView.title = section.title?.uppercased()
+        headerView.titleColor = section.titleColor
+        headerView.titleIsHiden = section.titleIsHidden
+        headerView.bottomBorderColor = section.bottomBorderColor
+        headerView.bottomBorderIsThick = section.bottomBorderIsExtraThick
+
+        return headerView
+    }
+
+
+    private func section(atIndex index: Int) -> Section {
+        guard let sections = fetchedResultsController.sections, sections.count > 1 else {
+            return .everything
+        }
+
+        return Section(rawValue: index) ?? .everything
+    }
+}
+
+
+// MARK: - List Sections
+//
+private enum Section: Int {
+    case pinned     = 0
+    case unpinned   = 1
+    case everything = 1000
+}
+
+extension Section {
+
+    var title: String? {
+        switch self {
+        case .pinned:
+            return NSLocalizedString("Pinned", comment: "Pinned List Section Title")
+        default:
+            return nil
+        }
+    }
+
+    var titleColor: UIColor? {
+        return .color(name: .simplenoteSlateGrey)
+    }
+
+    var titleIsHidden: Bool {
+        return self != .pinned
+    }
+
+    var bottomBorderColor: UIColor? {
+        switch self {
+        case .unpinned:
+            return .color(name: .simplenoteLightPeriwinkle)
+        default:
+            return .color(name: .simplenoteCloudyBlue)
+        }
+    }
+
+    var bottomBorderIsExtraThick: Bool {
+        return self == .unpinned
+    }
+}
