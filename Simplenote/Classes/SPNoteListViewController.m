@@ -74,6 +74,7 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.tableView.sectionFooterHeight = CGFLOAT_MIN;
 
         [self.rootView addSubview:_tableView];
 
@@ -222,7 +223,6 @@
     CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
     
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
-    
     [self.tableView reloadData];
 }
 

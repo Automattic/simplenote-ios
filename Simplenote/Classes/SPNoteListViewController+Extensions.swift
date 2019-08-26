@@ -55,6 +55,10 @@ extension SPNoteListViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let section = self.section(atIndex: section) else {
             return nil

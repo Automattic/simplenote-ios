@@ -81,16 +81,16 @@ class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
     ///
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        setupSubviews()
-        setupLayout()
+        setupTitleLabel()
+        setupBottomBorder()
     }
 
     /// Requiredd Initializer
     ///
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupSubviews()
-        setupLayout()
+        setupTitleLabel()
+        setupBottomBorder()
     }
 }
 
@@ -99,12 +99,8 @@ class SPTableViewHeaderFooterView: UITableViewHeaderFooterView {
 //
 private extension SPTableViewHeaderFooterView {
 
-    func setupSubviews() {
-        contentView.addSubview(bottomBorderView)
+    func setupTitleLabel() {
         contentView.addSubview(titleLabel)
-    }
-
-    func setupLayout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
@@ -112,7 +108,10 @@ private extension SPTableViewHeaderFooterView {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.titleInsets.top),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.titleInsets.bottom * -1)
         ])
+    }
 
+    func setupBottomBorder() {
+        contentView.addSubview(bottomBorderView)
         bottomBorderView.translatesAutoresizingMaskIntoConstraints = false
         bottomBorderHeightConstraint = bottomBorderView.heightAnchor.constraint(equalToConstant: Constants.borderHeightThin)
         NSLayoutConstraint.activate([
