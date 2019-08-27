@@ -38,7 +38,7 @@ msgstr ""
 
 msgctxt "v4.10.0-whats-new"
 msgid ""
-"-   Redesigned Onboarding and Authentication Interface(s).\n"
-"-   Notes List now supports Peek and Pop.\n"
+"- We have redesigned the screens for getting started and logging into the app.\n"
+"- You can now use Peek and Pop to on the notes list screen.\n"
 msgstr ""
 

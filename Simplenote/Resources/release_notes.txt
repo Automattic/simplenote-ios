@@ -1,2 +1,2 @@
--   Redesigned Onboarding and Authentication Interface(s).
--   Notes List now supports Peek and Pop.
+- We have redesigned the screens for getting started and logging into the app.
+- You can now use Peek and Pop to on the notes list screen.
