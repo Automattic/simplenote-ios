@@ -57,7 +57,6 @@
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
-@property (nonatomic, strong) SPTableViewCell           *heightCalculationCell;
 @property (nonatomic, strong) UIImage                   *panImageDelete;
 @property (nonatomic, strong) UIImage                   *panImageRestore;
 @property (nonatomic, strong) UIImage                   *pinImage;
