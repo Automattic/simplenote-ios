@@ -26,7 +26,8 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
 
 
 @interface SPTableViewCell ()
-@property (nonatomic, strong) UIImageView *accessoryImageView;
+@property (nonatomic, strong) UIImageView *accessoryImageView0;
+@property (nonatomic, strong) UIImageView *accessoryImageView1;
 @end
 
 
@@ -61,12 +62,12 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
         _previewView.clipsToBounds = NO;
         [self.contentView addSubview:_previewView];
 
-        _accessoryImageView = [UIImageView new];
-        _accessoryImageView.contentMode = UIViewContentModeCenter;
+        _accessoryImageView0 = [UIImageView new];
+        _accessoryImageView0.contentMode = UIViewContentModeCenter;
 
         // Believe me: Using the cell's accessoryView is a nightmare. iPhone Xs Max and iPad has different metrics.
         // This way we're avoiding magic numbers, and hacked positions.
-        [_previewView addSubview:_accessoryImageView];
+        [_previewView addSubview:_accessoryImageView0];
 
         [self applyStyle];
         
@@ -80,27 +81,27 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
     
 }
 
-- (void)setAccessoryImage:(UIImage *)accessoryImage {
-    _accessoryImageView.image = accessoryImage;
-    [_accessoryImageView sizeToFit];
+- (void)setAccessoryImage0:(UIImage *)accessoryImage {
+    _accessoryImageView0.image = accessoryImage;
+    [_accessoryImageView0 sizeToFit];
     [self adjustTextViewInsets];
 }
 
-- (UIImage*)accessoryImage {
-    return _accessoryImageView.image;
+- (UIImage*)accessoryImage0 {
+    return _accessoryImageView0.image;
 }
 
-- (UIColor *)accessoryTintColor {
-    return _accessoryImageView.tintColor;
+- (UIColor *)accessoryTintColor0 {
+    return _accessoryImageView0.tintColor;
 }
 
-- (void)setAccessoryTintColor:(UIColor *)accessoryTintColor {
-    _accessoryImageView.tintColor = accessoryTintColor;
+- (void)setAccessoryTintColor0:(UIColor *)accessoryTintColor {
+    _accessoryImageView0.tintColor = accessoryTintColor;
 }
 
 - (void)adjustTextViewInsets {
     UIEdgeInsets previewInsets = _previewView.textContainerInset;
-    previewInsets.right = _accessoryImageView.image.size.width + kAccessoryImagePaddingLeft;
+    previewInsets.right = _accessoryImageView0.image.size.width + kAccessoryImagePaddingLeft;
     _previewView.textContainerInset = previewInsets;
 }
 
@@ -149,10 +150,10 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
 
     /// AccessoryView: Top Right Corner
     ///
-    CGRect accessoryFrame = _accessoryImageView.frame;
+    CGRect accessoryFrame = _accessoryImageView0.frame;
     accessoryFrame.origin.x = CGRectGetWidth(_previewView.frame) - CGRectGetWidth(accessoryFrame);
     accessoryFrame.origin.y = CGRectGetHeight(accessoryFrame);
-    _accessoryImageView.frame = accessoryFrame;
+    _accessoryImageView0.frame = accessoryFrame;
 }
 
 - (CGRect)listAnimationFrameForWidth:(CGFloat)width {
@@ -188,7 +189,7 @@ static CGFloat const kAccessoryImagePaddingLeft = 16;
         const CGFloat SPAccessoryImageViewPaddingBottom = 1;
 
         CGFloat previewHeight = [_previewView sizeThatFits:CGSizeMake(previewWidth, CGFLOAT_MAX)].height;
-        CGFloat accessoryMaximumY = CGRectGetMaxY(_accessoryImageView.frame) + SPAccessoryImageViewPaddingBottom;
+        CGFloat accessoryMaximumY = CGRectGetMaxY(_accessoryImageView0.frame) + SPAccessoryImageViewPaddingBottom;
 
         height = MAX(previewHeight, accessoryMaximumY);
     }

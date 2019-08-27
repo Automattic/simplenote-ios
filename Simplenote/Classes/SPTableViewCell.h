@@ -12,8 +12,10 @@
 
 @interface SPTableViewCell : UITableViewCell 
 
-@property (nonatomic, strong) UIImage *accessoryImage;
-@property (nonatomic, strong) UIColor *accessoryTintColor;
+@property (nonatomic, strong) UIImage *accessoryImage0;
+@property (nonatomic, strong) UIImage *accessoryImage1;
+@property (nonatomic, strong) UIColor *accessoryTintColor0;
+@property (nonatomic, strong) UIColor *accessoryTintColor1;
 @property (nonatomic, strong) SPTextView *previewView;
 
 - (CGRect)listAnimationFrameForWidth:(CGFloat)width;
