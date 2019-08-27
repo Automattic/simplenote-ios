@@ -43,7 +43,15 @@
 #import "VSThemeManager.h"
 
 
-@interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
+@interface SPNoteListViewController () <ABXPromptViewDelegate,
+                                        ABXFeedbackViewControllerDelegate,
+                                        UITableViewDataSource,
+                                        UITableViewDelegate,
+                                        NSFetchedResultsControllerDelegate,
+                                        UIGestureRecognizerDelegate,
+                                        UISearchBarDelegate,
+                                        UITextFieldDelegate,
+                                        SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
@@ -58,11 +66,6 @@
 @end
 
 @implementation SPNoteListViewController
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
