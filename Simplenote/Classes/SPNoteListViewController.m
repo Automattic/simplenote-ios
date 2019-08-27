@@ -59,8 +59,6 @@
 
 @property (nonatomic, strong) UIImage                   *panImageDelete;
 @property (nonatomic, strong) UIImage                   *panImageRestore;
-@property (nonatomic, strong) UIImage                   *pinImage;
-@property (nonatomic, strong) UIImage                   *pinSearchImage;
 
 @end
 
@@ -158,9 +156,6 @@
 }
 
 - (void)themeDidChange {
-    // Reset the pin image so it gets reskinned
-    _pinImage = nil;
-
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
@@ -490,25 +485,8 @@
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
-    
-    if (note.pinned) {
-        NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
-        if (!_pinImage) {
-            UIImage *templateImage = [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
-            _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
-        }
-        
-        
-        // New note summary contains a pin image
-        UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
-        pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
-                                                             lineHeight:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].capHeight];
-        cell.previewView.attributedText = pinnedContent;
-    } else {
-        cell.previewView.attributedText = attributedContent;
-    }
-    
+
+    cell.previewView.attributedText = attributedContent;
     cell.previewView.alpha = 1.0;
     
     if (bSearching) {

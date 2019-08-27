@@ -26,17 +26,4 @@
     return attachmentString;
 }
 
-- (NSAttributedString *)attributedStringWithLeadingImage:(UIImage *)image lineHeight:(CGFloat)lineHeight {
-    
-    // Make new leading image based on lineheight. This ensures that it
-    // is centered vertically in the first line of text.
-    UIImage *newImage = [image imageInCanvas:CGRectMake(0, 0, image.size.width, lineHeight)];
-    
-    NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithImage:newImage];
-    NSMutableAttributedString *combinedString = [[NSMutableAttributedString alloc] initWithAttributedString:imageAttributedString];
-    [combinedString appendAttributedString:self];
-    
-    return combinedString;
-}
-
 @end

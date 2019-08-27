@@ -11,6 +11,5 @@
 @interface NSAttributedString (Styling)
 
 + (NSAttributedString *)attributedStringWithImage:(UIImage *)image;
-- (NSAttributedString *)attributedStringWithLeadingImage:(UIImage *)image lineHeight:(CGFloat)lineHeight;
 
 @end

@@ -170,15 +170,9 @@ private extension SnapshotRenderer {
         let trimmedText = String(text.prefix(Constants.maximumLength))
         let output = NSMutableAttributedString(string: trimmedText)
 
-        // Attachments: Checklists
         output.addChecklistAttachments(for: bodyColor)
 
-        // Attachments: Pinned!
-        guard note.pinned, preview, let pinImage = UIImage.image(name: .pinImage)?.withOverlayColor(attachmentsTintColor) else {
-            return output
-        }
-
-        return output.withLeading(pinImage, lineHeight: headlineFont.capHeight)
+        return output
     }
 
     /// Sets our rendering TextView's Override User Interface
