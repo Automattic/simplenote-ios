@@ -491,12 +491,15 @@
     
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-        [cell.previewView.textStorage applyColorAttribute:tintColor
-                                                forRanges:[cell.previewView.text rangesForTerms:_searchText]];
+        NSArray *ranges = [cell.previewView.text rangesForTerms:_searchText];
+
+        [cell.previewView.textStorage applyColorAttribute:tintColor forRanges:ranges];
     }
 
-    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryTintColor = previewColor;
+    cell.accessoryImage0 = note.pinned ? [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryImage1 = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor0 = previewColor;
+    cell.accessoryTintColor1 = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
