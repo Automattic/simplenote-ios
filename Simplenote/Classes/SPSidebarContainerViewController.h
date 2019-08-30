@@ -37,6 +37,7 @@
 }
 
 @property (nonatomic, assign) id<SPContainerSidePanelViewDelegate> sidePanelViewDelegate;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, strong) UIView *rootView;
 @property (nonatomic, strong) SPSidebarViewController *sidePanelViewController;
 

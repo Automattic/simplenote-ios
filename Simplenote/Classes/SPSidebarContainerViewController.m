@@ -24,7 +24,7 @@ static CGFloat sidePanelWidth;
 
 @implementation SPSidebarContainerViewController
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
     self = [super init];
     if (self) {
@@ -37,10 +37,9 @@ static CGFloat sidePanelWidth;
         [self.view addSubview:_rootView];
         
         // setup gesture recognizers
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(viewDidPan:)];
-        panGesture.delegate = self;
-        [self.rootView addGestureRecognizer:panGesture];
+        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+        self.panGestureRecognizer.delegate = self;
+        [self.rootView addGestureRecognizer:_panGestureRecognizer];
         
         _sidePanelViewController = sidebarViewController;
         _sidePanelViewController.containerViewController = self;
