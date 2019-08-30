@@ -78,7 +78,7 @@ extension SPAuthError {
         case .signupBadCredentials:
             return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:
-            return NSLocalizedString("The email you've entered is already associated with a simplenote account.", comment: "Error when address is in use")
+            return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         default:

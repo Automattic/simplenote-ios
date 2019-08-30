@@ -60,7 +60,6 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var passwordWarningLabel: SPLabel! {
         didSet {
-            passwordWarningLabel.text = AuthenticationStrings.passwordInvalid
             passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
             passwordWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
             passwordWarningLabel.isHidden = true
@@ -136,7 +135,11 @@ class SPAuthViewController: UIViewController {
 
     /// # Simperium's Validator
     ///
-    private let validator = SPAuthenticationValidator()
+    private lazy var validator: SPAuthenticationValidator = {
+        let output = SPAuthenticationValidator()
+        output.minimumPasswordLength = mode.passwordMinimumLength
+        return output
+    }()
 
     /// # Indicates if we've got a valid Username. Doesn't display any validation warnings onscreen
     ///
@@ -455,6 +458,7 @@ private extension SPAuthViewController {
     }
 
     func refreshPasswordWarning(isHidden: Bool) {
+        passwordWarningLabel.text = mode.passwordInvalidText
         passwordWarningLabel.animateVisibility(isHidden: isHidden)
         passwordInputView.inErrorState = !isHidden
     }
@@ -530,6 +534,8 @@ struct AuthenticationMode {
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
+    let passwordInvalidText: String
+    let passwordMinimumLength: UInt
 }
 
 
@@ -546,7 +552,9 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil)
+                     secondaryActionAttributedText: nil,
+                     passwordInvalidText:           AuthenticationStrings.passwordInvalidLogin,
+                     passwordMinimumLength:         AuthenticationConstants.loginPasswordLength)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -558,7 +566,9 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
+                     passwordInvalidText:           AuthenticationStrings.passwordInvalidSignup,
+                     passwordMinimumLength:         AuthenticationConstants.signupPasswordLength)
     }
 }
 
@@ -579,7 +589,8 @@ private enum AuthenticationStrings {
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalid              = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
+    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 6 characters", comment: "Message displayed when password is invalid (Signup)")
+    static let passwordInvalidLogin         = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid (Login)")
 }
 
 
@@ -608,4 +619,6 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    static let loginPasswordLength  = UInt(4)
+    static let signupPasswordLength = UInt(6)
 }
