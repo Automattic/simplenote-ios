@@ -13,7 +13,6 @@
 
 #import "SPAppDelegate.h"
 #import "SPBorderedTableView.h"
-#import "SPTableViewCell.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
 #import "SPEmptyListView.h"
@@ -76,8 +75,7 @@
 
         [self.rootView addSubview:_tableView];
 
-        cellIdentifier = [[VSThemeManager sharedManager] theme].name;
-        [self.tableView registerClass:[SPTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
         self.tableView.alwaysBounceVertical = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -460,21 +458,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SPTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    if (!cell) {
-        // this shouldn't be needed, but offscreen collection view cells are sometimes called on
-        // and this can lead to an occasional crash
-        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    SPNoteTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SPNoteTableViewCell.reuseIdentifier forIndexPath:indexPath];
 
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
-- (void)configureCell:(SPTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
@@ -499,17 +491,16 @@
         UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
         pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
                                                              lineHeight:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].capHeight];
-        cell.previewView.attributedText = pinnedContent;
+        cell.previewText = pinnedContent;
     } else {
-        cell.previewView.attributedText = attributedContent;
+        cell.previewText = attributedContent;
     }
     
-    cell.previewView.alpha = 1.0;
+    cell.previewAlpha = 1.0;
     
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-        [cell.previewView.textStorage applyColorAttribute:tintColor
-                                                forRanges:[cell.previewView.text rangesForTerms:_searchText]];
+        [cell highlightSubstringsMatching:_searchText color:tintColor];
     }
 
     cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
@@ -948,7 +939,7 @@
                 // remove current preview
                 Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
                 note.preview = nil;
-                [self configureCell:(SPTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [self configureCell:(SPNoteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             }
             else
             {
