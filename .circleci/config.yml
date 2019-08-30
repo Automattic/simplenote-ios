@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Copy demo config.plist
-          command: cp Simplenote/config-demo.plist Simplenote/config.plist
+          name: Copy demo SPCredentials
+          command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
       - ios/test:
           xcode-version: "10.2.0"
           workspace: Simplenote.xcworkspace

@@ -150,7 +150,7 @@ extension KeychainMigrator {
 
     func loadKeychainEntry(accessGroup: AccessGroup, username: String) throws -> String {
         let passwordItem = KeychainPasswordItem(
-            service: SPCredentials.simperiumAppID(),
+            service: SPCredentials.simperiumAppID,
             account: username,
             accessGroup: accessGroup.stringValue
         )
@@ -160,7 +160,7 @@ extension KeychainMigrator {
 
     func deleteKeychainEntry(accessGroup: AccessGroup, username: String) throws {
         let passwordItem = KeychainPasswordItem(
-            service: SPCredentials.simperiumAppID(),
+            service: SPCredentials.simperiumAppID,
             account: username,
             accessGroup: accessGroup.stringValue
         )
@@ -170,7 +170,7 @@ extension KeychainMigrator {
 
     func saveKeychainEntry(accessGroup: AccessGroup, username: String, password: String) throws {
         let passwordItem = KeychainPasswordItem(
-            service: SPCredentials.simperiumAppID(),
+            service: SPCredentials.simperiumAppID,
             account: username,
             accessGroup: accessGroup.stringValue
         )
