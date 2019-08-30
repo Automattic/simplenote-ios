@@ -135,7 +135,8 @@ class SPAuthHandler {
     /// Presents the Password Reset (Web) Interface
     ///
     func presentPasswordReset(from sourceViewController: UIViewController, username: String) {
-        guard let targetURL = URL(string: kSimperiumForgotPasswordURL + "?email=" + username) else {
+        let escapedUsername = username.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? username
+        guard let targetURL = URL(string: kSimperiumForgotPasswordURL + "?email=" + escapedUsername) else {
             return
         }
 
