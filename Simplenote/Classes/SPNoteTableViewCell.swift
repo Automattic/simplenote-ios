@@ -11,6 +11,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     private lazy var previewTextView = SPTextView()
 
+    /// Note's Accessory ImageView
+    ///
+    private lazy var accessoryImageView = UIImageView()
+
     /// Note's Text
     ///
     var previewText: NSAttributedString? {
@@ -33,13 +37,27 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
+    /// Accessory Image
     ///
-    ///
-    var accessoryImage: UIImage?
+    var accessoryImage: UIImage? {
+        get {
+            return accessoryImageView.image
+        }
+        set {
+            accessoryImageView.image = newValue
+        }
+    }
 
+    /// Accessory Image's Tint
     ///
-    ///
-    var accessoryTintColor: UIColor?
+    var accessoryTintColor: UIColor? {
+        get {
+            return accessoryImageView.tintColor
+        }
+        set {
+            accessoryImageView.tintColor = newValue
+        }
+    }
 
 
     /// Designated Initializer
@@ -47,6 +65,7 @@ class SPNoteTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupTextView()
+        setupImageView()
         setupSubviews()
         refreshStyle()
     }
@@ -65,6 +84,29 @@ class SPNoteTableViewCell: UITableViewCell {
 //
 private extension SPNoteTableViewCell {
 
+    /// Setup: TextView
+    ///
+    func setupTextView() {
+        previewTextView.isScrollEnabled = false
+        previewTextView.isUserInteractionEnabled = false
+        previewTextView.isEditable = false
+        previewTextView.isAccessibilityElement = false
+        previewTextView.backgroundColor = .clear
+
+        let container = previewTextView.textContainer
+        container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
+        container.lineFragmentPadding = 0
+        container.lineBreakMode = .byWordWrapping
+    }
+
+    /// Setup: ImageView
+    ///
+    func setupImageView() {
+        accessoryImageView.contentMode = .center
+    }
+
+    /// Autolayout Init
+    ///
     func setupSubviews() {
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(previewTextView)
@@ -80,24 +122,9 @@ private extension SPNoteTableViewCell {
 }
 
 
-// MARK: - Private Methods
+// MARK: - Private Methods: Skinning
 //
 private extension SPNoteTableViewCell {
-
-    /// Setup: TextView
-    ///
-    func setupTextView() {
-        previewTextView.isScrollEnabled = false
-        previewTextView.isUserInteractionEnabled = false
-        previewTextView.isEditable = false
-        previewTextView.isAccessibilityElement = false
-        previewTextView.backgroundColor = .clear
-
-        let container = previewTextView.textContainer
-        container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
-        container.lineFragmentPadding = 0
-        container.lineBreakMode = .byWordWrapping
-    }
 
     /// Applies the current style
     ///
