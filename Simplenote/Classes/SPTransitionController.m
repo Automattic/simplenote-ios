@@ -14,7 +14,6 @@
 #import "UIView+ImageRepresentation.h"
 #import "Note.h"
 #import "SPNoteListViewController.h"
-#import "SPTableViewCell.h"
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
 #import "NSAttributedString+Styling.h"
@@ -314,7 +313,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             for (NSIndexPath *path in visiblePaths) {
                 
                 
-                SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+                SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
                 CGRect startingFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 startingFrame.size.height -= 5; // corrects for line spacing added to final row
                 
@@ -476,7 +475,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         for (NSIndexPath *path in visiblePaths) {
             
             
-            SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+            SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
             
             CGRect finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
             finalFrame.size.height -= cell.previewView.textContainer.lineFragmentPadding; // corrects for line spacing added to final row
