@@ -210,13 +210,11 @@
 }
 
 - (void)updateRowHeight:(id)sender {
-    
-    BOOL condensedNoteList = [[NSUserDefaults standardUserDefaults] boolForKey:SPCondensedNoteListPref];
-    
+        
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
-    
-    CGFloat numberLines = condensedNoteList ? 1.0 : 3.0;
+
+    CGFloat numberLines = [[Options shared] numberOfPreviewLines];
     CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
     
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
