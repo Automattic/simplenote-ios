@@ -9,20 +9,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// TextView to act as Note's Text container
     ///
-    private lazy var previewTextView: SPTextView = {
-        let textView = SPTextView()
-        textView.isScrollEnabled = false
-        textView.isUserInteractionEnabled = false
-        textView.isEditable = false
-        textView.isAccessibilityElement = false
-        textView.backgroundColor = .clear
-
-        let container = textView.textContainer
-        container.maximumNumberOfLines = 3
-        container.lineFragmentPadding = 0
-        container.lineBreakMode = .byWordWrapping
-        return textView
-    }()
+    private lazy var previewTextView = SPTextView()
 
     /// Note's Text
     ///
@@ -59,6 +46,7 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupTextView()
         setupSubviews()
         refreshStyle()
     }
@@ -92,9 +80,24 @@ private extension SPNoteTableViewCell {
 }
 
 
-// MARK: - Private Methods: Skinning
+// MARK: - Private Methods
 //
 private extension SPNoteTableViewCell {
+
+    /// Setup: TextView
+    ///
+    func setupTextView() {
+        previewTextView.isScrollEnabled = false
+        previewTextView.isUserInteractionEnabled = false
+        previewTextView.isEditable = false
+        previewTextView.isAccessibilityElement = false
+        previewTextView.backgroundColor = .clear
+
+        let container = previewTextView.textContainer
+        container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
+        container.lineFragmentPadding = 0
+        container.lineBreakMode = .byWordWrapping
+    }
 
     /// Applies the current style
     ///
