@@ -86,6 +86,9 @@ class SPNoteTableViewCell: UITableViewCell {
 
 
     ///
+
+
+    /// Highlights the partial matches with the specified color.
     ///
     func highlightSubstrings(matching keywords: String, color: UIColor) {
         previewTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
@@ -105,6 +108,7 @@ private extension SPNoteTableViewCell {
         previewTextView.isEditable = false
         previewTextView.isAccessibilityElement = false
         previewTextView.backgroundColor = .clear
+        previewTextView.textContainerInset = .zero
 
         let container = previewTextView.textContainer
         container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
