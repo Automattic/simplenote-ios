@@ -2,20 +2,12 @@ import Foundation
 import UIKit
 
 
-//
+// MARK: - SPNoteTableViewCell
 //
 @objcMembers
 class SPNoteTableViewCell: UITableViewCell {
 
-    ///
-    ///
-    override var backgroundColor: UIColor? {
-        didSet {
-            refreshBackgrounds()
-        }
-    }
-
-    ///
+    /// TextView to act as Note's Text container
     ///
     private lazy var previewTextView: SPTextView = {
         let textView = SPTextView()
@@ -23,6 +15,8 @@ class SPNoteTableViewCell: UITableViewCell {
         textView.isUserInteractionEnabled = false
         textView.isEditable = false
         textView.isAccessibilityElement = false
+        textView.backgroundColor = .clear
+
         let container = textView.textContainer
         container.maximumNumberOfLines = 3
         container.lineFragmentPadding = 0
@@ -30,7 +24,7 @@ class SPNoteTableViewCell: UITableViewCell {
         return textView
     }()
 
-    ///
+    /// Note's Text
     ///
     var previewText: NSAttributedString? {
         get {
@@ -41,9 +35,16 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
+    /// Note's Text Alpha Value
     ///
-    ///
-    var previewAlpha: CGFloat = 0
+    var previewAlpha: CGFloat {
+        get {
+            return previewTextView.alpha
+        }
+        set {
+            previewTextView.alpha = newValue
+        }
+    }
 
     ///
     ///
@@ -54,12 +55,12 @@ class SPNoteTableViewCell: UITableViewCell {
     var accessoryTintColor: UIColor?
 
 
-    ///
+    /// Designated Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
-        applyStyle()
+        refreshStyle()
     }
 
 
@@ -95,9 +96,9 @@ private extension SPNoteTableViewCell {
 //
 private extension SPNoteTableViewCell {
 
+    /// Applies the current style
     ///
-    ///
-    func applyStyle() {
+    func refreshStyle() {
         backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
@@ -115,51 +116,44 @@ private extension SPNoteTableViewCell {
             ]
         ]
     }
-
-    ///
-    ///
-    func refreshBackgrounds() {
-        contentView.backgroundColor = backgroundColor
-        previewTextView.backgroundColor = backgroundColor
-    }
 }
 
 
-// MARK: -
+// MARK: - Cell Styles
 //
 private enum Style {
 
-    ///
+    /// Returns the Cell's Background Color
     ///
     static var backgroundColor: UIColor {
         return .color(name: .backgroundColor)!
     }
 
-    ///
+    /// Headline Color: To be applied over the first preview line
     ///
     static var headlineColor: UIColor {
         return UIColor.color(name: .noteHeadlineFontColor)!
     }
 
-    ///
+    /// Headline Font: To be applied over the first preview line
     ///
     static var headlineFont: UIFont {
         return UIFont.preferredFont(forTextStyle: .headline)
     }
 
-    ///
+    /// Preview Color: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewColor: UIColor {
         return .color(name: .noteBodyFontPreviewColor)!
     }
 
-    ///
+    /// Preview Font: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewFont: UIFont {
         return UIFont.preferredFont(forTextStyle: .body)
     }
 
-    ///
+    /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
         return .color(name: .lightBlueColor)!
