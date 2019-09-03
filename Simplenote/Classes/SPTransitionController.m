@@ -478,7 +478,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
             
             CGRect finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
-            finalFrame.size.height -= cell.previewView.textContainer.lineFragmentPadding; // corrects for line spacing added to final row
+            finalFrame.size.height -= cell.previewLineFragmentPadding; // corrects for line spacing added to final row
             
             
             if (_selectedPath && path.row == _selectedPath.row) {

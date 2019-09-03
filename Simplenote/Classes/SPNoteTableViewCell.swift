@@ -19,6 +19,28 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     private lazy var accessoryImageView = UIImageView()
 
+    /// Accessory Image
+    ///
+    var accessoryImage: UIImage? {
+        get {
+            return accessoryImageView.image
+        }
+        set {
+            accessoryImageView.image = newValue
+        }
+    }
+
+    /// Accessory Image's Tint
+    ///
+    var accessoryTintColor: UIColor? {
+        get {
+            return accessoryImageView.tintColor
+        }
+        set {
+            accessoryImageView.tintColor = newValue
+        }
+    }
+
     /// Note's Text
     ///
     var previewText: NSAttributedString? {
@@ -41,26 +63,10 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Accessory Image
+    /// Returns the Preview's Fragment Padding
     ///
-    var accessoryImage: UIImage? {
-        get {
-            return accessoryImageView.image
-        }
-        set {
-            accessoryImageView.image = newValue
-        }
-    }
-
-    /// Accessory Image's Tint
-    ///
-    var accessoryTintColor: UIColor? {
-        get {
-            return accessoryImageView.tintColor
-        }
-        set {
-            accessoryImageView.tintColor = newValue
-        }
+    var previewLineFragmentPadding: CGFloat {
+        return previewTextView.textContainer.lineFragmentPadding
     }
 
 
