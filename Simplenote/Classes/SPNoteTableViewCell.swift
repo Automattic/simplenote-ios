@@ -7,6 +7,10 @@ import UIKit
 @objcMembers
 class SPNoteTableViewCell: UITableViewCell {
 
+    /// Master View
+    ///
+    @IBOutlet private var containerView: UIView!
+
     /// TextView to act as Note's Text container
     ///
     private lazy var previewTextView = SPTextView()
@@ -64,6 +68,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupTextView()
         setupImageView()
         setupSubviews()
@@ -73,9 +81,8 @@ class SPNoteTableViewCell: UITableViewCell {
 
     ///
     ///
-    func highlightSubstrings(matching string: String, color: UIColor) {
-//        [cell.previewView.textStorage applyColorAttribute:tintColor
-//                                                forRanges:[cell.previewView.text rangesForTerms:_searchText]];
+    func highlightSubstrings(matching keywords: String, color: UIColor) {
+        previewTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
     }
 }
 
@@ -109,14 +116,15 @@ private extension SPNoteTableViewCell {
     ///
     func setupSubviews() {
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(previewTextView)
+        containerView.addSubview(previewTextView)
 
-        let layoutGuide = contentView.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            previewTextView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
-            previewTextView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
-            previewTextView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            previewTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            previewTextView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            previewTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+//            previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 5),
+//            previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 5),
+            previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 8),
             ])
     }
 }
@@ -162,13 +170,13 @@ private enum Style {
     /// Headline Color: To be applied over the first preview line
     ///
     static var headlineColor: UIColor {
-        return UIColor.color(name: .noteHeadlineFontColor)!
+        return .color(name: .noteHeadlineFontColor)!
     }
 
     /// Headline Font: To be applied over the first preview line
     ///
     static var headlineFont: UIFont {
-        return UIFont.preferredFont(forTextStyle: .headline)
+        return .preferredFont(forTextStyle: .headline)
     }
 
     /// Preview Color: To be applied over  the preview's body (everything minus the first line)
@@ -180,7 +188,7 @@ private enum Style {
     /// Preview Font: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewFont: UIFont {
-        return UIFont.preferredFont(forTextStyle: .body)
+        return .preferredFont(forTextStyle: .body)
     }
 
     /// Color to be applied over the cell upon selection

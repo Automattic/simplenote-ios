@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9rounded" orientation="landscape">
+        <adaptation id="splitview1_3"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,10 +15,57 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r12-sA-Uh4" id="D1J-20-bJ0">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="98.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvM-Gy-mrn">
+                        <rect key="frame" x="20" y="0.0" width="374" height="98.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="xfJ-6r-TnJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="xfJ-6r-TnJ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="Bpw-0D-EaB" userLabel="ContainerView &gt;= Trailing"/>
+                    <constraint firstAttribute="bottom" secondItem="mvM-Gy-mrn" secondAttribute="bottom" id="E2B-ei-Wh0" userLabel="ContainerView Bottom"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" id="p13-Xe-Asr" userLabel="ContainerView Top"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="zc8-Cv-txf" userLabel="ContainerView = Leading"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Bpw-0D-EaB"/>
+                        <exclude reference="Nmc-iO-oVe"/>
+                        <exclude reference="xI2-yh-0d0"/>
+                    </mask>
+                </variation>
+                <variation key="heightClass=regular-widthClass=regular">
+                    <mask key="constraints">
+                        <include reference="Bpw-0D-EaB"/>
+                        <include reference="Nmc-iO-oVe"/>
+                        <exclude reference="jTZ-gL-Aap"/>
+                        <include reference="xI2-yh-0d0"/>
+                        <exclude reference="zc8-Cv-txf"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="171.09375"/>
         </tableViewCell>
     </objects>
