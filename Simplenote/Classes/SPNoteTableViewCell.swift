@@ -121,10 +121,8 @@ private extension SPNoteTableViewCell {
         NSLayoutConstraint.activate([
             previewTextView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             previewTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-//            previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 5),
-//            previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 5),
-            previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 8),
+            previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
             ])
     }
 }
