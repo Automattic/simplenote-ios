@@ -10,6 +10,7 @@
 
 @interface NSTextStorage (Highlight)
 
+- (void)applyColor:(UIColor *)color toSubstringMatchingKeywords:(NSString *)keywords;
 - (void)applyColorAttribute:(id)color forRanges:(NSArray *)wordRanges;
 - (void)applyAttributes:(NSDictionary *)attributes matchingStrings:(NSArray *)strings characterLimit:(NSInteger)characterLimit;
 
