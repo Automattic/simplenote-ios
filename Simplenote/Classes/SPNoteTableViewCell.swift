@@ -92,10 +92,15 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshStyle()
     }
 
+/// TODO: RE-Wire
+///     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNumberOfLines) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
+///
+///     previewTextView.textContainer.maximumNumberOfLines = Options.shared.numberOfPreviewLines
 
-    ///
+/// TODO: Re-Call
+///     ApplyStyle
 
-    // TODO: Nuke
+/// TODO: Nuke
     @objc
     func previewFrame(in view: UIView) -> CGRect {
         return view.convert(previewTextView.frame, from: previewTextView)
