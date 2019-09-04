@@ -12,6 +12,7 @@ class SnapshotRenderer: NSObject {
     private lazy var textView: SPTextView = {
         let output = SPTextView()
         output.addSubview(self.accessoryImageView)
+        output.textContainerInset = .zero
         output.textContainer.lineFragmentPadding = 0
         return output
     }()

@@ -298,9 +298,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                          searchString:editorController.searchString
                                               preview:NO];
         
-        
+
         CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
-        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.frame.origin.y;
+        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
         if (@available(iOS 11.0, *)) {
             finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
         }
@@ -320,12 +320,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 if (_selectedPath && path.row == _selectedPath.row) {
                     
                     // two snapshots are used for note content since the preview is a "clean" versio of a note
-
-                    startingFrame = [containerView convertRect:cell.contentView.bounds
-                                                      fromView:cell.contentView.superview];
+                    startingFrame = [cell previewFrameIn:containerView];
                     
                     startingFrame.size.height -= 5; // corrects for line spacing added to final row
-                    
+
                     cleanSnapshot.contentMode = UIViewContentModeTop;
                     cleanSnapshot.clipsToBounds = YES;
                     dirtySnapshot.contentMode = UIViewContentModeTop;
@@ -492,12 +490,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
                 // final frame is note the frame of the cell of the frame of the
                 // textView within the cell
-                finalFrame = [containerView convertRect:cell.contentView.bounds
-                                               fromView:cell.contentView.superview];
+                finalFrame = [cell previewFrameIn:containerView];
                 finalFrame.size.width = editorController.view.frame.size.width;
                 finalFrame.origin.x = 0;
                 finalFrame.size.height -= 5; // corrects for line spacing added to final row
-                
+
                 cleanSnapshot.contentMode = UIViewContentModeTop;
                 cleanSnapshot.clipsToBounds = YES;
                 dirtySnapshot.contentMode = UIViewContentModeTop;

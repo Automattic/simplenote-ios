@@ -87,6 +87,11 @@ class SPNoteTableViewCell: UITableViewCell {
 
     ///
 
+    // TODO: Nuke
+    @objc
+    func previewFrame(in view: UIView) -> CGRect {
+        return view.convert(previewTextView.frame, from: previewTextView)
+    }
 
     /// Highlights the partial matches with the specified color.
     ///
