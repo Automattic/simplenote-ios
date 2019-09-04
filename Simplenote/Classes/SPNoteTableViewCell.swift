@@ -11,6 +11,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var containerView: UIView!
 
+    /// Accessory StackView
+    ///
+    @IBOutlet private var accessoryStackView: UIStackView!
+
     /// TextView to act as Note's Text container
     ///
     private lazy var previewTextView = SPTextView()
@@ -27,6 +31,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryImageView.image = newValue
+            refreshTextViewInsets()
         }
     }
 
@@ -76,11 +81,14 @@ class SPNoteTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
+    // MARK: - Overridden Methods
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTextView()
         setupImageView()
         setupSubviews()
+        setupStackView()
         refreshStyle()
     }
 
@@ -127,6 +135,12 @@ private extension SPNoteTableViewCell {
         accessoryImageView.contentMode = .center
     }
 
+    /// Setup: StackView
+    ///
+    func setupStackView() {
+        accessoryStackView.addArrangedSubview(accessoryImageView)
+    }
+
     /// Autolayout Init
     ///
     func setupSubviews() {
@@ -167,12 +181,23 @@ private extension SPNoteTableViewCell {
             ]
         ]
     }
+
+    /// Applies the TextView Insets, based on the accessoryStack's Width
+    ///
+    func refreshTextViewInsets() {
+        let width = accessoryImageView.image?.size.width ?? CGFloat.zero
+        previewTextView.textContainerInset.right = width + Style.previewInsets.right
+    }
 }
 
 
 // MARK: - Cell Styles
 //
 private enum Style {
+
+    /// Preview's Text Insets
+    ///
+    static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 
     /// Returns the Cell's Background Color
     ///

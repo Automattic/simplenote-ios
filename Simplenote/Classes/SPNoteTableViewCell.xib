@@ -22,7 +22,7 @@
                         <rect key="frame" x="20" y="16" width="374" height="76.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
+                            <constraint firstAttribute="width" priority="1" constant="640" id="xfJ-6r-TnJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -35,6 +35,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
+                        <rect key="frame" x="394" y="16" width="0.0" height="80.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="1" id="mxC-B8-cQI"/>
+                        </constraints>
+                    </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -42,11 +48,15 @@
                     <constraint firstAttribute="bottom" secondItem="mvM-Gy-mrn" secondAttribute="bottom" constant="3" id="E2B-ei-Wh0" userLabel="ContainerView Bottom">
                         <variation key="heightClass=regular-widthClass=regular" constant="6"/>
                     </constraint>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="LSc-22-kIN"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="top" secondItem="mvM-Gy-mrn" secondAttribute="top" id="Yz8-WM-tEF"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="centerY" secondItem="mvM-Gy-mrn" secondAttribute="centerY" constant="2" id="c08-yR-g5p"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                     </constraint>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="bottom" id="rvV-gj-ki1"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="zc8-Cv-txf" userLabel="ContainerView = Leading"/>
                 </constraints>
@@ -68,9 +78,10 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="accessoryStackView" destination="XmC-CY-iIl" id="cXz-hX-iTI"/>
                 <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="171.09375"/>
+            <point key="canvasLocation" x="137.61467889908258" y="170.80078125"/>
         </tableViewCell>
     </objects>
 </document>
