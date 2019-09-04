@@ -36,8 +36,9 @@
                         </variation>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="394" y="16" width="0.0" height="80.5"/>
+                        <rect key="frame" x="394" y="16" width="0.0" height="0.0"/>
                         <constraints>
+                            <constraint firstAttribute="height" priority="1" id="792-13-EEt"/>
                             <constraint firstAttribute="width" priority="1" id="mxC-B8-cQI"/>
                         </constraints>
                     </stackView>
@@ -50,13 +51,11 @@
                     </constraint>
                     <constraint firstItem="XmC-CY-iIl" firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="LSc-22-kIN"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="top" secondItem="mvM-Gy-mrn" secondAttribute="top" id="Yz8-WM-tEF"/>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="centerY" secondItem="mvM-Gy-mrn" secondAttribute="centerY" constant="2" id="c08-yR-g5p"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="firstBaseline" secondItem="mvM-Gy-mrn" secondAttribute="firstBaseline" id="dAJ-HC-c2F"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                     </constraint>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="bottom" id="rvV-gj-ki1"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="zc8-Cv-txf" userLabel="ContainerView = Leading"/>
                 </constraints>

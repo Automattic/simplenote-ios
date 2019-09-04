@@ -75,7 +75,7 @@ class SnapshotRenderer: NSObject {
         textView.textContainerInset.right = preview ? accessorySize.width + Constants.accessoryImageViewPadding.left: 0
 
         accessoryImageView.frame.origin.x = size.width - accessorySize.width
-        accessoryImageView.frame.origin.y = accessorySize.height
+        accessoryImageView.frame.origin.y = 0
 
         textView.layoutIfNeeded()
 
