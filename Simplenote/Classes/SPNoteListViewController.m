@@ -77,19 +77,25 @@
 
         [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
         self.tableView.alwaysBounceVertical = YES;
-        
+
+        // Dynamic Fonts!
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateRowHeight:)
+                                                 selector:@selector(contentSizeWasUpdated:)
+                                                     name:UIContentSizeCategoryDidChangeNotification
+                                                   object:nil];
+
+        // Condensed Notes
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(condensedPreferenceWasUpdated:)
                                                      name:SPCondensedNoteListPreferenceChangedNotification
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateSortOrder:)
+                                                 selector:@selector(sortOrderPreferenceWasUpdated:)
                                                      name:SPNotesListSortModeChangedNotification
                                                    object:nil];
 
-        // voiceover status is tracked because the custom animated transition
-        // is not used when enabled
+        // Voiceover status is tracked because the custom animated transition is not used when enabled
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceoverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusChanged
@@ -104,9 +110,14 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
-        
+        // Themes
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(themeDidChange)
+                                                     name:VSThemeManagerThemeDidChangeNotification
+                                                   object:nil];
+
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self updateRowHeight:nil];
+        [self updateRowHeight];
         
         [self updateNavigationBar];
         
@@ -120,9 +131,6 @@
         _emptyListView.frame = self.view.bounds;
         _emptyListView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _emptyListView.userInteractionEnabled = false;
-
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 
         [self registerForPeekAndPop];
         [self update];
@@ -209,7 +217,17 @@
     }
 }
 
-- (void)updateRowHeight:(id)sender {
+- (void)refreshTableViewCellStyles {
+
+    for (UIView *subview in self.tableView.subviews) {
+        if ([subview isKindOfClass:[SPNoteTableViewCell class]]) {
+            SPNoteTableViewCell *cell = (SPNoteTableViewCell *) subview;
+            [cell refreshStyle];
+        }
+    }
+}
+
+- (void)updateRowHeight {
         
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
@@ -222,7 +240,18 @@
     [self.tableView reloadData];
 }
 
-- (void)updateSortOrder:(id)sender {
+- (void)condensedPreferenceWasUpdated:(id)sender {
+
+    [self updateRowHeight];
+}
+
+- (void)contentSizeWasUpdated:(id)sender {
+
+    [self refreshTableViewCellStyles];
+    [self updateRowHeight];
+}
+
+- (void)sortOrderPreferenceWasUpdated:(id)sender {
 
     [self update];
 }
