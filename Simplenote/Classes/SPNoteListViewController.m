@@ -167,6 +167,10 @@
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
+    // Refresh the Cell's UI
+    [self refreshTableViewCellStyles];
+
+    // Refresh the Table's UI
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
