@@ -471,11 +471,19 @@
     if (!note.preview) {
         [note createPreview];
     }
-    
+
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+
+    cell.accessibilityLabel = note.titlePreview;
+    cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
+    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor = previewColor;
+    cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
+    cell.previewAlpha = 1.0;
+
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
-    
+
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
@@ -493,20 +501,11 @@
     } else {
         cell.previewText = attributedContent;
     }
-    
-    cell.previewAlpha = 1.0;
-    cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
-    
+
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
         [cell highlightSubstringsMatching:_searchText color:tintColor];
     }
-
-    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryTintColor = previewColor;
-
-    cell.accessibilityLabel = note.titlePreview;
-    cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
