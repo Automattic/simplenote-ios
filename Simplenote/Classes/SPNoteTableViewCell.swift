@@ -46,6 +46,17 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
+    /// Number of Maximum Preview lines to be rendered
+    ///
+    var numberOfPreviewLines: Int {
+        get {
+            return previewTextView.textContainer.maximumNumberOfLines
+        }
+        set {
+            previewTextView.textContainer.maximumNumberOfLines = newValue
+        }
+    }
+
     /// Note's Text
     ///
     var previewText: NSAttributedString? {

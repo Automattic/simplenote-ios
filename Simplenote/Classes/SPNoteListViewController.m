@@ -495,6 +495,7 @@
     }
     
     cell.previewAlpha = 1.0;
+    cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
     
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
