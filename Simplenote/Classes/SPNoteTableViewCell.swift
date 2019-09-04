@@ -85,7 +85,6 @@ class SPNoteTableViewCell: UITableViewCell {
         return previewTextView.textContainer.lineFragmentPadding
     }
 
-
     /// Designated Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
@@ -103,15 +102,10 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshStyle()
     }
 
-/// TODO: RE-Wire
-///     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNumberOfLines) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
-///
-///     previewTextView.textContainer.maximumNumberOfLines = Options.shared.numberOfPreviewLines
-
-/// TODO: Re-Call
-///     ApplyStyle
-
-/// TODO: Nuke
+    /// Returns the Preview TextView's frame in the specified view's coordinates.
+    ///
+    /// TODO: Nuke this. And forgive me for pushing it, in the first place.
+    ///
     @objc
     func previewFrame(in view: UIView) -> CGRect {
         return view.convert(previewTextView.frame, from: previewTextView)
@@ -175,10 +169,11 @@ private extension SPNoteTableViewCell {
 
 // MARK: - Private Methods: Skinning
 //
-private extension SPNoteTableViewCell {
+extension SPNoteTableViewCell {
 
-    /// Applies the current style
+    /// Refreshes the current Style current style
     ///
+    @objc
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
 
@@ -200,7 +195,7 @@ private extension SPNoteTableViewCell {
 
     /// Applies the TextView Insets, based on the accessoryStack's Width
     ///
-    func refreshTextViewInsets() {
+    private func refreshTextViewInsets() {
         let width = accessoryImageView.image?.size.width ?? CGFloat.zero
         previewTextView.textContainerInset.right = width + Style.previewInsets.right
     }
