@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9rounded" orientation="landscape">
-        <adaptation id="splitview2_3"/>
+    <device id="ipad12_9rounded" orientation="portrait">
+        <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -22,7 +22,7 @@
                         <rect key="frame" x="20" y="16" width="374" height="76.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" priority="1" constant="640" id="xfJ-6r-TnJ"/>
+                            <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
