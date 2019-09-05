@@ -63,7 +63,7 @@ class SnapshotRenderer: NSObject {
         }
 
         // Setup: AccessoryImage
-        let accessoryImage = note.published && preview ? UIImage.image(name: .sharedImage)?.withRenderingMode(.alwaysTemplate) : nil
+        let accessoryImage = note.published && preview ? UIImage.image(name: .sharedImage) : nil
         let accessorySize = accessoryImage?.size ?? .zero
 
         accessoryImageView.image = accessoryImage
