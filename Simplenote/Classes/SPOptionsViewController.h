@@ -17,10 +17,6 @@
     NSNumber *numPreviewLinesPref;
 }
 
-//Preferences
-- (BOOL)condesedNoteListPref;
-
 @end
 
-extern NSString *const SPCondensedNoteListPref;
 extern NSString *const SPAlphabeticalTagSortPref;

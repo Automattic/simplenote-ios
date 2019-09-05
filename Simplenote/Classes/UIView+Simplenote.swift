@@ -21,6 +21,7 @@ extension UIView {
 
     /// Returns the Nib associated with the received: It's filename is expected to match the Class Name
     ///
+    @objc
     class func loadNib() -> UINib {
         return UINib(nibName: classNameWithoutNamespaces, bundle: nil)
     }

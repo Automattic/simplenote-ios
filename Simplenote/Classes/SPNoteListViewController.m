@@ -13,7 +13,6 @@
 
 #import "SPAppDelegate.h"
 #import "SPBorderedTableView.h"
-#import "SPTableViewCell.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
 #import "SPEmptyListView.h"
@@ -77,22 +76,27 @@
 
         [self.rootView addSubview:_tableView];
 
-        cellIdentifier = [[VSThemeManager sharedManager] theme].name;
-        [self.tableView registerClass:[SPTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
         self.tableView.alwaysBounceVertical = YES;
-        
+
+        // Dynamic Fonts!
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateRowHeight:)
+                                                 selector:@selector(contentSizeWasUpdated:)
+                                                     name:UIContentSizeCategoryDidChangeNotification
+                                                   object:nil];
+
+        // Condensed Notes
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(condensedPreferenceWasUpdated:)
                                                      name:SPCondensedNoteListPreferenceChangedNotification
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(updateSortOrder:)
+                                                 selector:@selector(sortOrderPreferenceWasUpdated:)
                                                      name:SPNotesListSortModeChangedNotification
                                                    object:nil];
 
-        // voiceover status is tracked because the custom animated transition
-        // is not used when enabled
+        // Voiceover status is tracked because the custom animated transition is not used when enabled
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceoverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusChanged
@@ -107,9 +111,14 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
-        
+        // Themes
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(themeDidChange)
+                                                     name:VSThemeManagerThemeDidChangeNotification
+                                                   object:nil];
+
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self updateRowHeight:nil];
+        [self updateRowHeight];
         
         [self updateNavigationBar];
         
@@ -123,9 +132,6 @@
         _emptyListView.frame = self.view.bounds;
         _emptyListView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _emptyListView.userInteractionEnabled = false;
-
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 
         [self registerForPeekAndPop];
         [self update];
@@ -158,9 +164,11 @@
 - (void)themeDidChange {
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    
-    // Use a new cellIdentifier so cells redraw with new theme
-    cellIdentifier = [[VSThemeManager sharedManager] theme].name;
+
+    // Refresh the Cell's UI
+    [self refreshTableViewCellStyles];
+
+    // Refresh the Table's UI
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
@@ -211,14 +219,22 @@
     }
 }
 
-- (void)updateRowHeight:(id)sender {
-    
-    BOOL condensedNoteList = [[NSUserDefaults standardUserDefaults] boolForKey:SPCondensedNoteListPref];
-    
+- (void)refreshTableViewCellStyles {
+
+    for (UIView *subview in self.tableView.subviews) {
+        if ([subview isKindOfClass:[SPNoteTableViewCell class]]) {
+            SPNoteTableViewCell *cell = (SPNoteTableViewCell *) subview;
+            [cell refreshStyle];
+        }
+    }
+}
+
+- (void)updateRowHeight {
+        
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
-    
-    CGFloat numberLines = condensedNoteList ? 1.0 : 3.0;
+
+    CGFloat numberLines = [[Options shared] numberOfPreviewLines];
     CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
     
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
@@ -226,7 +242,18 @@
     [self.tableView reloadData];
 }
 
-- (void)updateSortOrder:(id)sender {
+- (void)condensedPreferenceWasUpdated:(id)sender {
+
+    [self updateRowHeight];
+}
+
+- (void)contentSizeWasUpdated:(id)sender {
+
+    [self refreshTableViewCellStyles];
+    [self updateRowHeight];
+}
+
+- (void)sortOrderPreferenceWasUpdated:(id)sender {
 
     [self update];
 }
@@ -460,49 +487,41 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SPTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    if (!cell) {
-        // this shouldn't be needed, but offscreen collection view cells are sometimes called on
-        // and this can lead to an occasional crash
-        cell = [[SPTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    SPNoteTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SPNoteTableViewCell.reuseIdentifier forIndexPath:indexPath];
 
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
-- (void)configureCell:(SPTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if (!note.preview) {
         [note createPreview];
     }
-    
+
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
 
-    cell.previewView.attributedText = attributedContent;
-    cell.previewView.alpha = 1.0;
-    
-    if (bSearching) {
-        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-        NSArray *ranges = [cell.previewView.text rangesForTerms:_searchText];
-
-        [cell.previewView.textStorage applyColorAttribute:tintColor forRanges:ranges];
-    }
-
-    cell.accessoryImage0 = note.pinned ? [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryImage1 = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryTintColor0 = previewColor;
-    cell.accessoryTintColor1 = previewColor;
-
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
+    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryTintColor = previewColor;
+    cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
+    cell.previewAlpha = 1.0;
+    cell.previewText = attributedContent;
+
+    //    cell.accessoryImage = note.pinned ? [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    //    cell.accessoryImage1 = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+
+    if (bSearching) {
+        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        [cell highlightSubstringsMatching:_searchText color:tintColor];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -934,7 +953,7 @@
                 // remove current preview
                 Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
                 note.preview = nil;
-                [self configureCell:(SPTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [self configureCell:(SPNoteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             }
             else
             {

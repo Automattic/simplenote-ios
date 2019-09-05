@@ -91,7 +91,6 @@
 		46A3C99B17DFA81A002865AE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C641788A54900785EF3 /* Tag.m */; };
 		46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C5C73F17CAD2FD003B9795 /* NSString+Bullets.m */; };
 		46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */; };
-		46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD6F17848ED300E55842 /* SPTableViewCell.m */; };
 		46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA6151789146D00FC229D /* VSThemeManager.m */; };
 		46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5E8179EDAFB0095CD24 /* SPTagsListViewController.m */; };
 		46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E7D17B49F4600F13AD9 /* DTPinDigitView.m */; };
@@ -142,6 +141,9 @@
 		B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */; };
 		B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = B512AF961C20B14200FE76D8 /* SPAnimations.m */; };
+		B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */; };
+		B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */; };
+		B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */; };
 		B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */; };
 		B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */; };
 		B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */; };
@@ -401,6 +403,9 @@
 		B512AF8E1C209DD900FE76D8 /* Simplenote-Share-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Share-Bridging-Header.h"; sourceTree = "<group>"; };
 		B512AF951C20B14200FE76D8 /* SPAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnimations.h; sourceTree = "<group>"; };
 		B512AF961C20B14200FE76D8 /* SPAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnimations.m; sourceTree = "<group>"; };
+		B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteTableViewCell.swift; path = Classes/SPNoteTableViewCell.swift; sourceTree = "<group>"; };
+		B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteTableViewCell.xib; path = Classes/SPNoteTableViewCell.xib; sourceTree = "<group>"; };
+		B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewCell+Simplenote.swift"; path = "Classes/UITableViewCell+Simplenote.swift"; sourceTree = "<group>"; };
 		B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPUserInterface.swift; path = Classes/SPUserInterface.swift; sourceTree = "<group>"; };
 		B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VSTheme+Keys.swift"; path = "Classes/VSTheme+Keys.swift"; sourceTree = "<group>"; };
 		B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPContactsManager.swift; path = Classes/SPContactsManager.swift; sourceTree = "<group>"; };
@@ -637,8 +642,6 @@
 		E29ADD4B17848E8500E55842 /* SPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SPAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E29ADD4D17848E8500E55842 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		E29ADD5417848E8500E55842 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		E29ADD6E17848ED300E55842 /* SPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTableViewCell.h; path = Classes/SPTableViewCell.h; sourceTree = "<group>"; };
-		E29ADD6F17848ED300E55842 /* SPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTableViewCell.m; path = Classes/SPTableViewCell.m; sourceTree = "<group>"; };
 		E29ADD791784905800E55842 /* SPNoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPNoteListViewController.h; path = Classes/SPNoteListViewController.h; sourceTree = "<group>"; };
 		E29ADD7A1784905800E55842 /* SPNoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPNoteListViewController.m; path = Classes/SPNoteListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E29ADD821784B12400E55842 /* SPTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTransitionController.h; path = Classes/SPTransitionController.h; sourceTree = "<group>"; };
@@ -1001,6 +1004,7 @@
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1199,8 +1203,6 @@
 				B5D982D122F8644000C37C29 /* SPSquaredButton.swift */,
 				E213C2D117A87246009BE49E /* SPSideBySideView.h */,
 				E213C2D217A87246009BE49E /* SPSideBySideView.m */,
-				E29ADD6E17848ED300E55842 /* SPTableViewCell.h */,
-				E29ADD6F17848ED300E55842 /* SPTableViewCell.m */,
 				E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */,
 				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
@@ -1213,6 +1215,8 @@
 				E2922AB3180C7322003AF914 /* Tag View */,
 				373897BB1F8328DE00CEDF91 /* SPTitleView.swift */,
 				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
+				B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */,
+				B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1620,6 +1624,7 @@
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
+				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */,
@@ -1920,6 +1925,7 @@
 				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
+				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */,
@@ -1942,7 +1948,6 @@
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
-				46A3C99E17DFA81A002865AE /* SPTableViewCell.m in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
@@ -1950,6 +1955,7 @@
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
+				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
