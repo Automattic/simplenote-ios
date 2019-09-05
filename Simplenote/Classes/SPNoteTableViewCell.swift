@@ -19,30 +19,57 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     private lazy var previewTextView = SPTextView()
 
-    /// Note's Accessory ImageView
+    /// Note's Left Accessory ImageView
     ///
-    private lazy var accessoryImageView = UIImageView()
+    private lazy var accessoryLeftImageView = UIImageView()
+
+    /// Note's Right Accessory ImageView
+    ///
+    private lazy var accessoryRightImageView = UIImageView()
 
     /// Accessory Image
     ///
-    var accessoryImage: UIImage? {
+    var accessoryRightImage: UIImage? {
         get {
-            return accessoryImageView.image
+            return accessoryRightImageView.image
         }
         set {
-            accessoryImageView.image = newValue
+            accessoryRightImageView.image = newValue
             refreshTextViewInsets()
         }
     }
 
     /// Accessory Image's Tint
     ///
-    var accessoryTintColor: UIColor? {
+    var accessoryRightTintColor: UIColor? {
         get {
-            return accessoryImageView.tintColor
+            return accessoryRightImageView.tintColor
         }
         set {
-            accessoryImageView.tintColor = newValue
+            accessoryRightImageView.tintColor = newValue
+        }
+    }
+
+    /// Accessory Image Left
+    ///
+    var accessoryLeftImage: UIImage? {
+        get {
+            return accessoryLeftImageView.image
+        }
+        set {
+            accessoryLeftImageView.image = newValue
+            refreshTextViewInsets()
+        }
+    }
+
+    /// Accessory Image's Tint
+    ///
+    var accessoryLeftTintColor: UIColor? {
+        get {
+            return accessoryLeftImageView.tintColor
+        }
+        set {
+            accessoryLeftImageView.tintColor = newValue
         }
     }
 
@@ -142,13 +169,14 @@ private extension SPNoteTableViewCell {
     /// Setup: ImageView
     ///
     func setupImageView() {
-        accessoryImageView.contentMode = .center
+        accessoryRightImageView.contentMode = .center
     }
 
     /// Setup: StackView
     ///
     func setupStackView() {
-        accessoryStackView.addArrangedSubview(accessoryImageView)
+        accessoryStackView.addArrangedSubview(accessoryLeftImageView)
+        accessoryStackView.addArrangedSubview(accessoryRightImageView)
     }
 
     /// Autolayout Init
@@ -196,7 +224,7 @@ extension SPNoteTableViewCell {
     /// Applies the TextView Insets, based on the accessoryStack's Width
     ///
     private func refreshTextViewInsets() {
-        let width = accessoryImageView.image?.size.width ?? CGFloat.zero
+        let width = accessoryRightImageView.image?.size.width ?? CGFloat.zero
         previewTextView.textContainerInset.right = width + Style.previewInsets.right
     }
 }
