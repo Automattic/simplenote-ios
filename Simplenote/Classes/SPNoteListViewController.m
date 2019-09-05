@@ -508,14 +508,15 @@
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
-    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryTintColor = previewColor;
+
+    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameSharedImage] : nil;
+    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePinImage] : nil;
+    cell.accessoryLeftTintColor = previewColor;
+    cell.accessoryRightTintColor = previewColor;
+
     cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
     cell.previewAlpha = 1.0;
     cell.previewText = attributedContent;
-
-    //    cell.accessoryImage = note.pinned ? [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    //    cell.accessoryImage1 = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
 
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
