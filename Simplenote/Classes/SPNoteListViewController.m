@@ -26,7 +26,6 @@
 #import "SPConstants.h"
 #import "Note.h"
 
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"

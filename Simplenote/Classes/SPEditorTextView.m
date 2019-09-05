@@ -9,7 +9,6 @@
 #import "SPEditorTextView.h"
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"

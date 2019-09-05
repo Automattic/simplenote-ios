@@ -16,7 +16,6 @@
 #import "SPNoteListViewController.h"
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "SPTransitionSnapshot.h"
 #import "SPTextView.h"

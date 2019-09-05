@@ -30,8 +30,6 @@
 #pragma mark - Extensions
 
 #import "UIImage+Colorization.h"
-#import "NSAttributedString+Styling.h"
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
