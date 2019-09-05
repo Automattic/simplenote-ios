@@ -515,7 +515,7 @@
     cell.accessoryRightTintColor = previewColor;
 
     cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
-    cell.previewAlpha = 1.0;
+    cell.previewAlpha = UIKitConstants.alphaFull;
     cell.previewText = attributedContent;
 
     if (bSearching) {
