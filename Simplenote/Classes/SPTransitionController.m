@@ -316,15 +316,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
                 SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
                 CGRect startingFrame = [containerView convertRect:cell.frame fromView:cell.superview];
-                startingFrame.size.height -= 5; // corrects for line spacing added to final row
-                
+
                 if (_selectedPath && path.row == _selectedPath.row) {
                     
-                    // two snapshots are used for note content since the preview is a "clean" versio of a note
-                    startingFrame = [cell previewFrameIn:containerView];
-                    
-                    startingFrame.size.height -= 5; // corrects for line spacing added to final row
-
+                    // two snapshots are used for note content since the preview is a "clean" version of a note
                     cleanSnapshot.contentMode = UIViewContentModeTop;
                     cleanSnapshot.clipsToBounds = YES;
                     dirtySnapshot.contentMode = UIViewContentModeTop;
@@ -495,7 +490,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 // final frame is note the frame of the cell of the frame of the textView within the cell
                 finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 finalFrame.origin.x = 0;
-                finalFrame.size.height -= 5; // corrects for line spacing added to final row
 
                 cleanSnapshot.contentMode = UIViewContentModeTop;
                 cleanSnapshot.clipsToBounds = YES;
