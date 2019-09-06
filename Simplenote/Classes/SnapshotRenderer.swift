@@ -7,11 +7,11 @@ import UIKit
 @objc
 class SnapshotRenderer: NSObject {
 
-    /// NoteTableViewCell: We rely on this instance to render cells from the Notes List.
+    /// Note Cell: We rely on this instance to render cells from the Notes List.
     ///
     private let noteTableViewCell = SPNoteTableViewCell.instantiateFromNib() as SPNoteTableViewCell
 
-    /// EditorTextView: We rely on this instance to render the Notes Editor.
+    /// Editor TextView: We rely on this instance to render the Notes Editor.
     ///
     private let editorTextView: SPTextView = {
         let output = SPTextView()
@@ -30,6 +30,7 @@ class SnapshotRenderer: NSObject {
     ///
     @objc
     func renderPreviewSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
+
         // Setup: iOS 13 Dark Mode
         ensureAppearanceMatchesSystem(view: noteTableViewCell)
 
@@ -57,6 +58,7 @@ class SnapshotRenderer: NSObject {
     ///
     @objc
     func renderEditorSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
+
         // Setup: iOS 13 Dark Mode
         ensureAppearanceMatchesSystem(view: editorTextView)
 
@@ -107,6 +109,7 @@ private extension SnapshotRenderer {
     /// Configures a given SPNoteTableViewCell instance in order to properly render a given Note, with the specified Search Query.
     ///
     func configureTableViewCell(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
+        tableViewCell.prepareForReuse()
         tableViewCell.previewText = attributedText(from: note.preview)
         tableViewCell.accessoryLeftImage = note.published ? .image(name: .sharedImage) : nil
         tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pinImage) : nil
