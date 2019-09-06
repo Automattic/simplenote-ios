@@ -164,9 +164,6 @@
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    // Refresh the Cell's UI
-    [self refreshTableViewCellStyles];
-
     // Refresh the Table's UI
     [self.tableView applyTheme];
     [self.tableView reloadData];
@@ -218,16 +215,6 @@
     }
 }
 
-- (void)refreshTableViewCellStyles {
-
-    for (UIView *subview in self.tableView.subviews) {
-        if ([subview isKindOfClass:[SPNoteTableViewCell class]]) {
-            SPNoteTableViewCell *cell = (SPNoteTableViewCell *) subview;
-            [cell refreshStyle];
-        }
-    }
-}
-
 - (void)updateRowHeight {
         
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
@@ -248,7 +235,6 @@
 
 - (void)contentSizeWasUpdated:(id)sender {
 
-    [self refreshTableViewCellStyles];
     [self updateRowHeight];
 }
 
@@ -487,7 +473,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    SPNoteTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SPNoteTableViewCell.reuseIdentifier forIndexPath:indexPath];
+    SPNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPNoteTableViewCell.reuseIdentifier forIndexPath:indexPath];
 
     [self configureCell:cell atIndexPath:indexPath];
     
