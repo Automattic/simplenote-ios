@@ -16,7 +16,7 @@ class SnapshotRenderer: NSObject {
     private let editorTextView: SPTextView = {
         let output = SPTextView()
         output.textContainerInset = .zero
-        output.textContainer.lineFragmentPadding = 0
+        output.textContainer.lineFragmentPadding = .zero
         return output
     }()
 
@@ -102,7 +102,7 @@ private extension SnapshotRenderer {
         textView.attributedText = attributedText(from: note.content)
 
         if let searchQuery = searchQuery {
-            textView.textStorage.apply(.color(name: .tintColor), toSubstringMatchingKeywords: searchQuery)
+            textView.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
         }
     }
 

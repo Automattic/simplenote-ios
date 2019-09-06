@@ -50,7 +50,12 @@
     return self;
 }
 
-#pragma mark words
+#pragma mark - Words
+
+- (void)highlightSubstringsMatching:(NSString *)keywords color:(UIColor *)color {
+
+    [self.textStorage applyColor:color toSubstringMatchingKeywords:keywords];
+}
 
 - (void)highlightRange:(NSRange)range animated:(BOOL)animated withBlock:(void (^)(CGRect))block {
     
