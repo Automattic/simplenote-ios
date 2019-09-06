@@ -7,86 +7,133 @@ import UIKit
 @objc
 class SnapshotRenderer: NSObject {
 
-    /// Rendering TextView
+    /// NoteTableViewCell: We rely on this instance to render cells from the Notes List.
     ///
-    private lazy var textView: SPTextView = {
+    private let noteTableViewCell = SPNoteTableViewCell.instantiateFromNib() as SPNoteTableViewCell
+
+    /// EditorTextView: We rely on this instance to render the Notes Editor.
+    ///
+    private let editorTextView: SPTextView = {
         let output = SPTextView()
-        output.addSubview(self.accessoryImageView)
         output.textContainerInset = .zero
         output.textContainer.lineFragmentPadding = 0
         return output
     }()
 
-    /// Rendering AccessoryImageView
-    ///
-    private lazy var accessoryImageView: UIImageView = {
-        let output = UIImageView()
-        output.contentMode = .center
-        return output
-    }()
 
-
-    /// Returns a UIView representation of a given Note, with the specified parameters:
+    /// Returns a Preview Snapshot (Notes List!) representation of a given Note.
     ///
-    /// - Parameter:
-    ///     - note: The entity we're about to render
-    ///     - size: Output UIView's size
-    ///     - searchQuery: Search String (if any) that should be highlighted
-    ///     - preview: Indicates if the screenshot will be used to represent the Note List Cell, or the full editor
-    ///
-    /// - Returns: UIImageView containing a UIImage representation of the Note.
+    /// - Parameters:
+    ///     -   note:           The entity we're about to render
+    ///     -   size:           Output UIView's size
+    ///     -   searchQuery:    Search String (if any) that should be highlighted
     ///
     @objc
-    func render(note: Note, size: CGSize, searchQuery: String?, preview: Bool) -> UIView {
+    func renderPreviewSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
         // Setup: iOS 13 Dark Mode
-        ensureAppearanceMatchesSystem()
+        ensureAppearanceMatchesSystem(view: noteTableViewCell)
 
-        // Setup: Skin
-        let backgroundColor = UIColor.color(name: .backgroundColor)
-        accessoryImageView.backgroundColor = backgroundColor
-        textView.backgroundColor = backgroundColor
-        textView.interactiveTextStorage.tokens = [
-            SPDefaultTokenName: defaultAttributes(preview: preview),
-            SPHeadlineTokenName: headlineAttributes()
-        ]
-
-        // Setup: Payload
-        let tintColor = searchQuery != nil ? bodyColor : headlineColor
-        textView.attributedText = attributedText(for: note, preview: preview, attachmentsTintColor: tintColor)
-
-        // Setup: Highlighted Keywords
-        if let searchQuery = searchQuery {
-            let color = UIColor.color(name: .tintColor)
-            let ranges = (textView.text as NSString).ranges(forTerms: searchQuery)
-
-            textView.textStorage.applyColorAttribute(color, forRanges: ranges)
-        }
-
-        // Setup: AccessoryImage
-        let accessoryImage = note.published && preview ? UIImage.image(name: .sharedImage) : nil
-        let accessorySize = accessoryImage?.size ?? .zero
-
-        accessoryImageView.image = accessoryImage
-        accessoryImageView.tintColor = bodyColor
-        accessoryImageView.sizeToFit()
+        // Setup: Contents
+        configureTableViewCell(tableViewCell: noteTableViewCell, note: note, searchQuery: searchQuery)
 
         // Setup: Layout
-        textView.frame.size = size
-        textView.textContainerInset.right = preview ? accessorySize.width + Constants.accessoryImageViewPadding.left: 0
-
-        accessoryImageView.frame.origin.x = size.width - accessorySize.width
-        accessoryImageView.frame.origin.y = 0
-
-        textView.layoutIfNeeded()
+        let targetView = noteTableViewCell
+        targetView.frame.size = size
+        targetView.layoutIfNeeded()
 
         // Setup: Render
-        guard let snapshot = textView.imageRepresentationWithinImageView() else {
-            fatalError()
-        }
-
+        let snapshot = targetView.imageRepresentationWithinImageView()
         snapshot.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         return snapshot
+    }
+
+    /// Returns an Editor Snapshot representation of a given Note.
+    ///
+    /// - Parameters:
+    ///     -   note:           The entity we're about to render
+    ///     -   size:           Output UIView's size
+    ///     -   searchQuery:    Search String (if any) that should be highlighted
+    ///
+    @objc
+    func renderEditorSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
+        // Setup: iOS 13 Dark Mode
+        ensureAppearanceMatchesSystem(view: editorTextView)
+
+        // Setup: Contents
+        configureEditorTextView(textView: editorTextView, note: note, searchQuery: searchQuery)
+
+        // Setup: Layout
+        let targetView = editorTextView
+        targetView.frame.size = size
+        targetView.layoutIfNeeded()
+
+        // Setup: Render
+        let snapshot = targetView.imageRepresentationWithinImageView()
+        snapshot.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        return snapshot
+    }
+}
+
+// MARK: - Private Methods
+//
+private extension SnapshotRenderer {
+
+    /// Sets our rendering TextView's Override User Interface
+    ///
+    func ensureAppearanceMatchesSystem(view: UIView) {
+        guard #available(iOS 13, *) else {
+            return
+        }
+
+#if IS_XCODE_11
+        view.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+#endif
+    }
+
+    /// Configures a given SPTextView instance in order to properly render a given Note, with the specified Search Query.
+    ///
+    func configureEditorTextView(textView: SPTextView, note: Note, searchQuery: String?) {
+        textView.backgroundColor = .color(name: .backgroundColor)
+        textView.interactiveTextStorage.tokens = storageAttributes
+        textView.attributedText = attributedText(from: note.content)
+
+        if let searchQuery = searchQuery {
+            textView.textStorage.apply(.color(name: .tintColor), toSubstringMatchingKeywords: searchQuery)
+        }
+    }
+
+    /// Configures a given SPNoteTableViewCell instance in order to properly render a given Note, with the specified Search Query.
+    ///
+    func configureTableViewCell(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
+        tableViewCell.previewText = attributedText(from: note.preview)
+        tableViewCell.accessoryLeftImage = note.published ? .image(name: .sharedImage) : nil
+        tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pinImage) : nil
+        tableViewCell.accessoryLeftTintColor = bodyColor
+        tableViewCell.accessoryRightTintColor = bodyColor
+        tableViewCell.numberOfPreviewLines = Options.shared.numberOfPreviewLines
+
+        if let searchQuery = searchQuery {
+            tableViewCell.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
+        }
+    }
+
+    /// Returns a NSMutableAttributedString instance representing a given note:
+    ///
+    /// - Note: Checklist and Pinned Attachments are inserted, when appropriate.
+    ///
+    func attributedText(from text: String?) -> NSAttributedString {
+        guard let text = text else {
+            return NSAttributedString()
+        }
+
+        let trimmedText = String(text.prefix(Constants.maximumLength))
+        let output = NSMutableAttributedString(string: trimmedText)
+
+        output.addChecklistAttachments(for: bodyColor)
+
+        return output
     }
 }
 
@@ -122,82 +169,33 @@ private extension SnapshotRenderer {
     /// Returns the TextView's Paragraph Style
     ///
     var paragraphStyle: NSParagraphStyle {
+        let theme = VSThemeManager.shared().theme()
         let style =  NSMutableParagraphStyle()
         style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: "noteBodyLineHeightPercentage")
         return style
     }
 
-    /// Returns the current Theme. Eventually... nuke this please!
-    ///
-    var theme: VSTheme {
-        return VSThemeManager.shared().theme()
-    }
-
-    /// Returns the TextView's Default Attributes
-    ///
-    func defaultAttributes(preview: Bool) -> [NSAttributedString.Key: Any] {
-        if preview {
-            return [
-                .foregroundColor: bodyColor,
-                .font: bodyFont
-            ]
-        }
-
-        return [
-            .foregroundColor: headlineColor,
-            .font: bodyFont,
-            .paragraphStyle: paragraphStyle
-        ]
-    }
-
     /// Returns the TextView's Headline Attributes
     ///
-    func headlineAttributes() -> [NSAttributedString.Key: Any] {
+    var storageAttributes: [String: [NSAttributedString.Key: Any]] {
         return [
-            .foregroundColor: headlineColor,
-            .font: headlineFont
+            SPHeadlineTokenName: [
+                .foregroundColor: headlineColor,
+                .font: headlineFont
+            ],
+            SPDefaultTokenName: [
+                .foregroundColor: headlineColor,
+                .font: bodyFont,
+                .paragraphStyle: paragraphStyle
+            ]
         ]
     }
-
-    /// Returns a NSMutableAttributedString instance representing a given note:
-    ///
-    /// - Note: Checklist and Pinned Attachments are inserted, when appropriate.
-    ///
-    func attributedText(for note: Note, preview: Bool, attachmentsTintColor: UIColor) -> NSAttributedString {
-        guard let text = (preview ? note.preview : note.content) else {
-            return NSAttributedString()
-        }
-
-        let trimmedText = String(text.prefix(Constants.maximumLength))
-        let output = NSMutableAttributedString(string: trimmedText)
-
-        output.addChecklistAttachments(for: bodyColor)
-
-        return output
-    }
-
-    /// Sets our rendering TextView's Override User Interface
-    ///
-    func ensureAppearanceMatchesSystem() {
-        guard #available(iOS 13, *) else {
-            return
-        }
-
-#if IS_XCODE_11
-        textView.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-#endif
-    }
 }
-
 
 
 // MARK: - Constants
 //
 private struct Constants {
-
-    /// Insets to be applied over the AccessoryImageView
-    ///
-    static let accessoryImageViewPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
     /// Maximum Text Length on iPhone / iPad Devices
     ///

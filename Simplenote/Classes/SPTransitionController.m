@@ -153,7 +153,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
     CGSize size = CGSizeMake(width, snapHeight);
 
-    return [_renderer renderWithNote:note size:size searchQuery:searchString preview:preview];
+    if (preview) {
+        return [_renderer renderPreviewSnapshotFor:note size:size searchQuery:searchString];
+    }
+
+    return [_renderer renderEditorSnapshotFor:note size:size searchQuery:searchString];
 }
 
 - (CGFloat)listTextViewWidth {
