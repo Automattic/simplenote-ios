@@ -368,8 +368,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     
                 } else {
                     
-                    UIView *snapshot;
-                    snapshot = [cell snapshotViewAfterScreenUpdates:NO];
+                    UIView *snapshot = [cell snapshotViewAfterScreenUpdates:NO];
                     if (snapshot) {
                         
                         snapshot.contentMode = UIViewContentModeTop;
@@ -379,9 +378,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                         CGRect endingFrame = startingFrame;
                         CGFloat moveAmount = [UIDevice isPad] ? 1200 : 700;
                         
-                        if (path.row < _selectedPath.row)
+                        if (path.row < _selectedPath.row) {
                             moveAmount = moveAmount * -1;
-                        
+                        }
+
                         endingFrame.origin.y += moveAmount;
                         
                         // add delay based on position to selected cell
@@ -472,8 +472,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         
         for (NSIndexPath *path in visiblePaths) {
-            
-            
+
             SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
             
             CGRect finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
