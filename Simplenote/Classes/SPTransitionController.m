@@ -285,19 +285,19 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         }
         
         // get snapshots of the final editor text
+
+        CGFloat initialWidth = [self listTextViewWidth];
+        CGFloat finalWidth = [self editorTextViewWidthForWidth:CGRectGetWidth(editorController.noteEditorTextView.frame)];
+
+        UIView *cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:initialWidth
+                                                 searchString:editorController.searchString
+                                                      preview:YES];
         
-        CGFloat finalWidth = [self textViewTextWidthForWidth:editorController.noteEditorTextView.frame.size.width];
-        UIView *cleanSnapshot, *dirtySnapshot;
-        
-        cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:YES];
-        
-        dirtySnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:NO];
+        UIView *dirtySnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:finalWidth
+                                                 searchString:editorController.searchString
+                                                      preview:NO];
         
 
         CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
@@ -449,18 +449,22 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         // get snapshots of the final editor text
         
-        CGFloat finalWidth = [self textViewTextWidthForWidth:editorController.noteEditorTextView.frame.size.width];
-        UIView *cleanSnapshot, *dirtySnapshot;
-        
-        cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:YES];
+        CGFloat finalWidth = [self listTextViewWidth];
+
+        UIView *cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:finalWidth
+                                                 searchString:editorController.searchString
+                                                      preview:YES];
         
         // tap a snapshot of the current view to avoid the need for creating a textview
-        dirtySnapshot = [editorController.view resizableSnapshotViewFromRect:CGRectMake(editorController.noteEditorTextView.frame.origin.x, editorController.noteEditorTextView.frame.origin.y + editorController.noteEditorTextView.contentInset.top, editorController.noteEditorTextView.frame.size.width, editorController.noteEditorTextView.frame.size.height - editorController.noteEditorTextView.contentInset.top - editorController.noteEditorTextView.frame.origin.y)
-                                                          afterScreenUpdates:NO
-                                                               withCapInsets:UIEdgeInsetsZero];
+        CGRect dirtySnapshotFrame = CGRectMake(editorController.noteEditorTextView.frame.origin.x,
+                                               editorController.noteEditorTextView.frame.origin.y + editorController.noteEditorTextView.contentInset.top,
+                                               editorController.noteEditorTextView.frame.size.width,
+                                               editorController.noteEditorTextView.frame.size.height - editorController.noteEditorTextView.contentInset.top - editorController.noteEditorTextView.frame.origin.y);
+
+        UIView *dirtySnapshot = [editorController.view resizableSnapshotViewFromRect:dirtySnapshotFrame
+                                                                  afterScreenUpdates:NO
+                                                                       withCapInsets:UIEdgeInsetsZero];
         dirtySnapshot.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         dirtySnapshot.contentMode = UIViewContentModeTop;
         dirtySnapshot.clipsToBounds = YES;
@@ -488,10 +492,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 startingFrame.origin.x = editorController.noteEditorTextView.frame.origin.x;
                 startingFrame.size.width = editorController.noteEditorTextView.frame.size.width;
                 
-                // final frame is note the frame of the cell of the frame of the
-                // textView within the cell
-                finalFrame = [cell previewFrameIn:containerView];
-                finalFrame.size.width = editorController.view.frame.size.width;
+                // final frame is note the frame of the cell of the frame of the textView within the cell
+                finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 finalFrame.origin.x = 0;
                 finalFrame.size.height -= 5; // corrects for line spacing added to final row
 
