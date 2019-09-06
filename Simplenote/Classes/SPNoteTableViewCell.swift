@@ -35,6 +35,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryRightImageView.image = newValue
+            accessoryRightImageView.isHidden = newValue == nil
             refreshTextViewInsets()
         }
     }
@@ -58,6 +59,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryLeftImageView.image = newValue
+            accessoryLeftImageView.isHidden = newValue == nil
             refreshTextViewInsets()
         }
     }
@@ -228,8 +230,8 @@ private extension SPNoteTableViewCell {
     /// Applies the TextView Insets, based on the accessoryStack's Width
     ///
     func refreshTextViewInsets() {
-        let width = accessoryRightImageView.image?.size.width ?? CGFloat.zero
-        previewTextView.textContainerInset.right = width + Style.previewInsets.right
+        accessoryStackView.layoutIfNeeded()
+        previewTextView.textContainerInset.right = Style.previewInsets.right + accessoryStackView.frame.width
     }
 }
 
@@ -240,7 +242,7 @@ private enum Style {
 
     /// Preview's Text Insets
     ///
-    static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+    static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
 
     /// Returns the Cell's Background Color
     ///
