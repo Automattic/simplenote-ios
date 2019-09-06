@@ -102,6 +102,11 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshStyle()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        refreshStyle()
+    }
+
     /// Returns the Preview TextView's frame in the specified view's coordinates.
     ///
     /// TODO: Nuke this. And forgive me for pushing it, in the first place.
@@ -169,11 +174,10 @@ private extension SPNoteTableViewCell {
 
 // MARK: - Private Methods: Skinning
 //
-extension SPNoteTableViewCell {
+private extension SPNoteTableViewCell {
 
     /// Refreshes the current Style current style
     ///
-    @objc
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
 
@@ -195,7 +199,7 @@ extension SPNoteTableViewCell {
 
     /// Applies the TextView Insets, based on the accessoryStack's Width
     ///
-    private func refreshTextViewInsets() {
+    func refreshTextViewInsets() {
         let width = accessoryImageView.image?.size.width ?? CGFloat.zero
         previewTextView.textContainerInset.right = width + Style.previewInsets.right
     }
