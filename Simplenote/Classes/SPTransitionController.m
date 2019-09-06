@@ -51,8 +51,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 @property (nonatomic, weak) UINavigationController *navigationController;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController *pushPopAnimationController;
 
-@property (nonatomic, strong) SPTextView *snapshotTextView;
-
 @end
 
 @implementation SPTransitionController
@@ -298,11 +296,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
 
         CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
+        finalEditorPosition.origin.x = 0;
         finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
         if (@available(iOS 11.0, *)) {
             finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
         }
-        finalEditorPosition.origin.x = 0;
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {
@@ -532,8 +530,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
             } else {
                 
-                UIView *snapshot;
-                snapshot = [cell imageRepresentationWithinImageView];
+                UIView *snapshot = [cell imageRepresentationWithinImageView];
                 if (snapshot) {
                     
                     snapshot.contentMode = UIViewContentModeTop;
