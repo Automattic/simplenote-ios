@@ -97,17 +97,6 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Note's Text Alpha Value
-    ///
-    var previewAlpha: CGFloat {
-        get {
-            return previewTextView.alpha
-        }
-        set {
-            previewTextView.alpha = newValue
-        }
-    }
-
     /// Returns the Preview's Fragment Padding
     ///
     var previewLineFragmentPadding: CGFloat {
