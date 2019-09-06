@@ -12,6 +12,7 @@ class SnapshotRenderer: NSObject {
     private lazy var textView: SPTextView = {
         let output = SPTextView()
         output.addSubview(self.accessoryImageView)
+        output.textContainerInset = .zero
         output.textContainer.lineFragmentPadding = 0
         return output
     }()
@@ -74,7 +75,7 @@ class SnapshotRenderer: NSObject {
         textView.textContainerInset.right = preview ? accessorySize.width + Constants.accessoryImageViewPadding.left: 0
 
         accessoryImageView.frame.origin.x = size.width - accessorySize.width
-        accessoryImageView.frame.origin.y = accessorySize.height
+        accessoryImageView.frame.origin.y = 0
 
         textView.layoutIfNeeded()
 

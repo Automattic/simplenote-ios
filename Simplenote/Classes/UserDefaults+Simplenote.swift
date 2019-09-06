@@ -5,6 +5,7 @@ import Foundation
 //
 extension UserDefaults {
     enum Key: String {
+        case condensedNotes = "SPCondensedNoteListPref"
         case lastKnownVersion
         case lastKnownVersionByRatingsFramework = "WPRatingsCurrentVersion"
         case listSortMode
