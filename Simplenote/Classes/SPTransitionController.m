@@ -41,10 +41,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @property (nonatomic, strong) SnapshotRenderer *renderer;
 @property (nonatomic) id <UIViewControllerContextTransitioning> context;
-@property (nonatomic) CGFloat initialPinchDistance;
-@property (nonatomic) CGPoint initialPinchPoint;
+@property (nonatomic, assign) CGFloat initialPinchDistance;
+@property (nonatomic, assign) CGPoint initialPinchPoint;
 
-@property (nonatomic) NSMutableArray *temporaryTransitionViews;
+@property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
 @property (nonatomic, strong) UIImage *pinIcon;
 @property (nonatomic, strong) UIImage *searchPinIcon;
 
@@ -55,8 +55,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @implementation SPTransitionController
 
--(instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController
-{
+- (instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController {
     self = [super init];
     if (self) {
         self.tableView = tableView;
@@ -77,9 +76,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         }
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
-        
         self.navigationController = navigationController;
     }
+
     return self;
 }
 
@@ -129,11 +128,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     if (self.hasActiveInteraction) {
         return self;
     }
-    else {
-        return self.pushPopAnimationController.interactiveTransition;
-    }
-    
-    return nil;
+
+    return self.pushPopAnimationController.interactiveTransition;
 }
 
 
@@ -268,7 +264,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         if (!listController.emptyListView.hidden) {
             
             CGRect emptyListViewFrame = [containerView convertRect:listController.emptyListView.frame
-                                         fromView:listController.emptyListView.superview];
+                                                          fromView:listController.emptyListView.superview];
             
             UIView *emptyListViewSnapshot = [listController.emptyListView snapshotViewAfterScreenUpdates:NO];
             
@@ -572,7 +568,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     }
 }
 
--(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     
     [self incrementUseCount];
     
@@ -625,20 +621,21 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     useCount++;
 }
+
 - (void)decrementUseCount {
     
     useCount--;
-    if (useCount == 0)
+    if (useCount == 0) {
         [self completeTransition];
+    }
 }
 
--(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     
     return 0.1;
 }
 
-- (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext
-{
+- (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
     [self incrementUseCount];
     [self setupTransition:transitionContext];
@@ -647,7 +644,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 #pragma mark Interactive Transition
 
--(void)endInteractionWithSuccess:(BOOL)success {
+- (void)endInteractionWithSuccess:(BOOL)success {
     
     self.hasActiveInteraction = FALSE;
 
@@ -682,9 +679,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return;
 }
 
+- (void)handlePinch:(UIPinchGestureRecognizer*)sender {
 
--(void)handlePinch:(UIPinchGestureRecognizer*)sender
-{
     if (!_transitioning &&
         sender.numberOfTouches >= 2 && // require two fingers
         sender.scale < 1.0 && // pinch in
