@@ -156,7 +156,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return [_renderer renderWithNote:note size:size searchQuery:searchString preview:preview];
 }
 
-- (CGFloat)textViewTextWidthForWidth:(CGFloat)width {
+- (CGFloat)listTextViewWidth {
+
+    return CGRectGetWidth(self.tableView.frame);
+}
+
+- (CGFloat)editorTextViewWidthForWidth:(CGFloat)width {
     
     // set content insets on side
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
