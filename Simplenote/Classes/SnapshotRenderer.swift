@@ -98,25 +98,25 @@ private extension SnapshotRenderer {
     /// Returns the (current) Body Color
     ///
     var bodyColor: UIColor {
-        return UIColor.color(name: .noteBodyFontPreviewColor)!
+        return .color(name: .noteBodyFontPreviewColor)!
     }
 
     /// Returns the Body Font
     ///
     var bodyFont: UIFont {
-        return UIFont.preferredFont(forTextStyle: .body)
+        return .preferredFont(forTextStyle: .body)
     }
 
     /// Returns the (current) Headline Color
     ///
     var headlineColor: UIColor {
-        return UIColor.color(name: .noteHeadlineFontColor)!
+        return .color(name: .noteHeadlineFontColor)!
     }
 
     /// Returns the Headline Font
     ///
     var headlineFont: UIFont {
-        return UIFont.preferredFont(forTextStyle: .headline)
+        return .preferredFont(forTextStyle: .headline)
     }
 
     /// Returns the TextView's Paragraph Style
