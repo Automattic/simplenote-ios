@@ -33,7 +33,6 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
-#import "UIView+ImageRepresentation.h"
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "UITableView+Styling.h"

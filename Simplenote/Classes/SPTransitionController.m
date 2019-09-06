@@ -11,7 +11,6 @@
 #import "SPAppDelegate.h"
 #import "SPNoteEditorViewController.h"
 #import "VSThemeManager.h"
-#import "UIView+ImageRepresentation.h"
 #import "Note.h"
 #import "SPNoteListViewController.h"
 #import "SPTextView.h"

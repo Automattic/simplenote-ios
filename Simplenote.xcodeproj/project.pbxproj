@@ -95,7 +95,6 @@
 		46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E7D17B49F4600F13AD9 /* DTPinDigitView.m */; };
 		46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B60017A063020095CD24 /* SPTagEntryField.m */; };
 		46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = E2465A2217AD70810097B19B /* SPToggle.m */; };
-		46A3C9A517DFA81A002865AE /* UIView+ImageRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA5E21787749C00FC229D /* UIView+ImageRepresentation.m */; };
 		46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF91794F55000A17ED2 /* SPActionSheet.m */; };
 		46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E8117B49F4600F13AD9 /* DTPinLockController.m */; };
 		46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E201864B17A57A7C00217E0B /* SPBorderedView.m */; };
@@ -674,8 +673,6 @@
 		E2F149421799F4BD00DC9690 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E2F149471799F5A500DC9690 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E2F1494A1799F5BC00DC9690 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		E2FCA5E11787749C00FC229D /* UIView+ImageRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ImageRepresentation.h"; path = "Classes/UIView+ImageRepresentation.h"; sourceTree = "<group>"; };
-		E2FCA5E21787749C00FC229D /* UIView+ImageRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ImageRepresentation.m"; path = "Classes/UIView+ImageRepresentation.m"; sourceTree = "<group>"; };
 		E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Simplenote-DB5.plist"; path = "../Simplenote-DB5.plist"; sourceTree = "<group>"; };
 		E2FCA5F5178911FC00FC229D /* VSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSTheme.h; sourceTree = "<group>"; };
 		E2FCA5F6178911FC00FC229D /* VSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSTheme.m; sourceTree = "<group>"; };
@@ -838,8 +835,6 @@
 				E2EEAE0B17C7BBB4002BEDA2 /* UITableView+Styling.m */,
 				B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */,
 				B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */,
-				E2FCA5E11787749C00FC229D /* UIView+ImageRepresentation.h */,
-				E2FCA5E21787749C00FC229D /* UIView+ImageRepresentation.m */,
 				E2C63C8F17B0048A00CB7772 /* UIView+Subviews.h */,
 				E2C63C9017B0048A00CB7772 /* UIView+Subviews.m */,
 				B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */,
@@ -1958,7 +1953,6 @@
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
-				46A3C9A517DFA81A002865AE /* UIView+ImageRepresentation.m in Sources */,
 				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
 				E2922AC7180CAC62003AF914 /* SPSidebarViewController.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,

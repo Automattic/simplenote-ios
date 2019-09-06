@@ -24,7 +24,6 @@
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
 #import "SPOutsideTouchView.h"
-#import "UIView+ImageRepresentation.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
 #import "SPInteractiveTextStorage.h"
