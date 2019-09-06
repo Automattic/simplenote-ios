@@ -7,10 +7,6 @@ import UIKit
 @objc
 class SnapshotRenderer: NSObject {
 
-    /// Note Cell: We rely on this instance to render cells from the Notes List.
-    ///
-    private let noteTableViewCell = SPNoteTableViewCell.instantiateFromNib() as SPNoteTableViewCell
-
     /// Editor TextView: We rely on this instance to render the Notes Editor.
     ///
     private let editorTextView: SPTextView = {
@@ -31,19 +27,20 @@ class SnapshotRenderer: NSObject {
     @objc
     func renderPreviewSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
 
+        let tableViewCell = SPNoteTableViewCell.instantiateFromNib() as SPNoteTableViewCell
+
         // Setup: iOS 13 Dark Mode
-        ensureAppearanceMatchesSystem(view: noteTableViewCell)
+        ensureAppearanceMatchesSystem(view: tableViewCell)
 
         // Setup: Contents
-        configureTableViewCell(tableViewCell: noteTableViewCell, note: note, searchQuery: searchQuery)
+        configure(tableViewCell: tableViewCell, note: note, searchQuery: searchQuery)
 
         // Setup: Layout
-        let targetView = noteTableViewCell
-        targetView.frame.size = size
-        targetView.layoutIfNeeded()
+        tableViewCell.frame.size = size
+        tableViewCell.layoutIfNeeded()
 
         // Setup: Render
-        let snapshot = targetView.imageRepresentationWithinImageView()
+        let snapshot = tableViewCell.imageRepresentationWithinImageView()
         snapshot.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         return snapshot
@@ -63,7 +60,7 @@ class SnapshotRenderer: NSObject {
         ensureAppearanceMatchesSystem(view: editorTextView)
 
         // Setup: Contents
-        configureEditorTextView(textView: editorTextView, note: note, searchQuery: searchQuery)
+        configure(editorTextView: editorTextView, note: note, searchQuery: searchQuery)
 
         // Setup: Layout
         let targetView = editorTextView
@@ -96,20 +93,19 @@ private extension SnapshotRenderer {
 
     /// Configures a given SPTextView instance in order to properly render a given Note, with the specified Search Query.
     ///
-    func configureEditorTextView(textView: SPTextView, note: Note, searchQuery: String?) {
-        textView.backgroundColor = .color(name: .backgroundColor)
-        textView.interactiveTextStorage.tokens = storageAttributes
-        textView.attributedText = attributedText(from: note.content)
+    func configure(editorTextView: SPTextView, note: Note, searchQuery: String?) {
+        editorTextView.backgroundColor = .color(name: .backgroundColor)
+        editorTextView.interactiveTextStorage.tokens = storageAttributes
+        editorTextView.attributedText = attributedText(from: note.content)
 
         if let searchQuery = searchQuery {
-            textView.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
+            editorTextView.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
         }
     }
 
     /// Configures a given SPNoteTableViewCell instance in order to properly render a given Note, with the specified Search Query.
     ///
-    func configureTableViewCell(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
-        tableViewCell.prepareForReuse()
+    func configure(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
         tableViewCell.previewText = attributedText(from: note.preview)
         tableViewCell.accessoryLeftImage = note.published ? .image(name: .sharedImage) : nil
         tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pinImage) : nil
