@@ -29,6 +29,13 @@ class SnapshotRenderer: NSObject {
     @objc
     func renderPreviewSnapshot(for note: Note, size: CGSize, searchQuery: String?) -> UIView {
 
+        // Okay. We've got to talk. Why do we return an actual TableViewCell?
+        // The answer is stunning. NoteTableViewCell uses Autolayout, and has different traits, based on the size classes.
+        // So far so good.
+        //
+        // Now... unless you attach the Cell as a subview, there is simply no way to set the require Traits.
+        // For that reason, rather than implementing hacks... we're opting for simply returning a new Instance each time.
+        //
         let tableViewCell = SPNoteTableViewCell.instantiateFromNib() as SPNoteTableViewCell
 
         // Setup: iOS 13 Dark Mode
@@ -41,11 +48,7 @@ class SnapshotRenderer: NSObject {
         tableViewCell.frame.size = size
         tableViewCell.layoutIfNeeded()
 
-        // Setup: Render
-        let snapshot = tableViewCell.imageRepresentationWithinImageView()
-        snapshot.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        return snapshot
+        return tableViewCell
     }
 
     /// Returns an Editor Snapshot representation of a given Note.
