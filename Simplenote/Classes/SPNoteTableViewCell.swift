@@ -15,43 +15,19 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryStackView: UIStackView!
 
-    /// TextView to act as Note's Text container
-    ///
-    private lazy var previewTextView = SPTextView()
-
     /// Note's Left Accessory ImageView
     ///
-    private lazy var accessoryLeftImageView = UIImageView()
+    @IBOutlet private var accessoryLeftImageView: UIImageView!
 
     /// Note's Right Accessory ImageView
     ///
-    private lazy var accessoryRightImageView = UIImageView()
+    @IBOutlet private var accessoryRightImageView: UIImageView!
 
-    /// Accessory Image
+    /// TextView to act as Note's Text container
     ///
-    var accessoryRightImage: UIImage? {
-        get {
-            return accessoryRightImageView.image
-        }
-        set {
-            accessoryRightImageView.image = newValue
-            accessoryRightImageView.isHidden = newValue == nil
-            refreshTextViewInsets()
-        }
-    }
+    private let previewTextView = SPTextView()
 
-    /// Accessory Image's Tint
-    ///
-    var accessoryRightTintColor: UIColor? {
-        get {
-            return accessoryRightImageView.tintColor
-        }
-        set {
-            accessoryRightImageView.tintColor = newValue
-        }
-    }
-
-    /// Accessory Image Left
+    /// Left Accessory Image
     ///
     var accessoryLeftImage: UIImage? {
         get {
@@ -64,7 +40,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Accessory Image's Tint
+    /// Left AccessoryImage's Tint
     ///
     var accessoryLeftTintColor: UIColor? {
         get {
@@ -72,6 +48,30 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryLeftImageView.tintColor = newValue
+        }
+    }
+
+    /// Right AccessoryImage
+    ///
+    var accessoryRightImage: UIImage? {
+        get {
+            return accessoryRightImageView.image
+        }
+        set {
+            accessoryRightImageView.image = newValue
+            accessoryRightImageView.isHidden = newValue == nil
+            refreshTextViewInsets()
+        }
+    }
+
+    /// Right AccessoryImage's Tint
+    ///
+    var accessoryRightTintColor: UIColor? {
+        get {
+            return accessoryRightImageView.tintColor
+        }
+        set {
+            accessoryRightImageView.tintColor = newValue
         }
     }
 
@@ -114,9 +114,7 @@ class SPNoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTextView()
-        setupImageView()
-        setupSubviews()
-        setupStackView()
+        setupLayout()
         refreshStyle()
     }
 
@@ -149,26 +147,13 @@ private extension SPNoteTableViewCell {
 
         let container = previewTextView.textContainer
         container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
-        container.lineFragmentPadding = 0
+        container.lineFragmentPadding = .zero
         container.lineBreakMode = .byWordWrapping
-    }
-
-    /// Setup: ImageView
-    ///
-    func setupImageView() {
-        accessoryRightImageView.contentMode = .center
-    }
-
-    /// Setup: StackView
-    ///
-    func setupStackView() {
-        accessoryStackView.addArrangedSubview(accessoryLeftImageView)
-        accessoryStackView.addArrangedSubview(accessoryRightImageView)
     }
 
     /// Autolayout Init
     ///
-    func setupSubviews() {
+    func setupLayout() {
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(previewTextView)
 
