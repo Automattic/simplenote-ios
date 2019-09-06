@@ -136,15 +136,6 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshStyle()
     }
 
-    /// Returns the Preview TextView's frame in the specified view's coordinates.
-    ///
-    /// TODO: Nuke this. And forgive me for pushing it, in the first place.
-    ///
-    @objc
-    func previewFrame(in view: UIView) -> CGRect {
-        return view.convert(previewTextView.frame, from: previewTextView)
-    }
-
     /// Highlights the partial matches with the specified color.
     ///
     func highlightSubstrings(matching keywords: String, color: UIColor) {
