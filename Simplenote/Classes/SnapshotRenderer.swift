@@ -91,9 +91,7 @@ private extension SnapshotRenderer {
             return
         }
 
-#if IS_XCODE_11
         view.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-#endif
     }
 
     /// Configures a given SPTextView instance in order to properly render a given Note, with the specified Search Query.

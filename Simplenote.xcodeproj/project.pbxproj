@@ -486,7 +486,6 @@
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
 		B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "SimplenoteShare-AppStore.entitlements"; sourceTree = "<group>"; };
-		B5B8146F22F083770061D77D /* SDKVersions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SDKVersions.xcconfig; sourceTree = "<group>"; };
 		B5B8AE771AB9ECF00082775D /* SPRatingsPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsPromptView.h; path = Classes/SPRatingsPromptView.h; sourceTree = "<group>"; };
 		B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsPromptView.m; path = Classes/SPRatingsPromptView.m; sourceTree = "<group>"; };
 		B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
@@ -886,7 +885,6 @@
 				8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */,
 				8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */,
 				8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */,
-				B5B8146F22F083770061D77D /* SDKVersions.xcconfig */,
 			);
 			path = config;
 			sourceTree = "<group>";
