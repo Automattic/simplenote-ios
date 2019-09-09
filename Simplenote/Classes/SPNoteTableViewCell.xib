@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="landscape" layout="splitview2_3" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvM-Gy-mrn">
-                        <rect key="frame" x="15" y="13" width="384" height="74"/>
+                        <rect key="frame" x="64" y="16" width="286" height="71"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
@@ -34,7 +34,7 @@
                         </variation>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="291" y="13" width="108" height="128"/>
+                        <rect key="frame" x="242" y="16" width="108" height="128"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="128"/>
@@ -51,7 +51,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="Bpw-0D-EaB" userLabel="ContainerView &gt;= Trailing"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="trailing" constant="64" id="Bpw-0D-EaB" userLabel="ContainerView &gt;= Trailing"/>
                     <constraint firstAttribute="bottom" secondItem="mvM-Gy-mrn" secondAttribute="bottom" id="E2B-ei-Wh0" userLabel="ContainerView Bottom">
                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                     </constraint>
@@ -62,7 +62,7 @@
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                     </constraint>
-                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="64" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="15" id="zc8-Cv-txf" userLabel="ContainerView = Leading"/>
                 </constraints>
                 <variation key="default">
