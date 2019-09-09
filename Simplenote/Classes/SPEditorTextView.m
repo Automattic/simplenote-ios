@@ -117,9 +117,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
     
-    if (width - 2 * padding > maxWidth && maxWidth > 0)
+    if (width - 2 * padding > maxWidth && maxWidth > 0) {
         padding = (width - maxWidth) / 2.0;
-    
+    }
+
     self.textContainer.lineFragmentPadding = padding;
     
     // position tag view at bottom
