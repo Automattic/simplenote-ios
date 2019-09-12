@@ -34,7 +34,7 @@
                         </variation>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="292" y="16" width="58" height="25"/>
+                        <rect key="frame" x="292" y="3.5" width="58" height="25"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -61,7 +61,7 @@
                     </constraint>
                     <constraint firstItem="XmC-CY-iIl" firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="LSc-22-kIN"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="top" secondItem="mvM-Gy-mrn" secondAttribute="top" id="dAJ-HC-c2F"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="centerY" secondItem="mvM-Gy-mrn" secondAttribute="top" id="dAJ-HC-c2F"/>
                     <constraint firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" constant="15" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
@@ -90,6 +90,7 @@
                 <outlet property="accessoryLeftImageView" destination="TZs-9B-NXz" id="4Nc-fi-4dX"/>
                 <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="c1B-W5-oqn"/>
                 <outlet property="accessoryStackView" destination="XmC-CY-iIl" id="cXz-hX-iTI"/>
+                <outlet property="accessoryStackViewCenterConstraintY" destination="dAJ-HC-c2F" id="mHP-Zd-Xwr"/>
                 <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
             </connections>
             <point key="canvasLocation" x="136.23188405797103" y="166.40625"/>
