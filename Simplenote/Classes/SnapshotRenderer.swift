@@ -104,8 +104,8 @@ private extension SnapshotRenderer {
         editorTextView.attributedText = attributedText(from: note.content)
         editorTextView.contentOffset = .zero
 
-        if let searchQuery = searchQuery {
-            editorTextView.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
+        if let searchQuery = searchQuery, let tintColor = UIColor.color(name: .tintColor) {
+            editorTextView.highlightSubstrings(matching: searchQuery, color: tintColor)
         }
     }
 
@@ -119,8 +119,8 @@ private extension SnapshotRenderer {
         tableViewCell.accessoryRightTintColor = bodyColor
         tableViewCell.numberOfPreviewLines = Options.shared.numberOfPreviewLines
 
-        if let searchQuery = searchQuery {
-            tableViewCell.highlightSubstrings(matching: searchQuery, color: .color(name: .tintColor)!)
+        if let searchQuery = searchQuery, let tintColor = UIColor.color(name: .tintColor) {
+            tableViewCell.highlightSubstrings(matching: searchQuery, color: tintColor)
         }
     }
 

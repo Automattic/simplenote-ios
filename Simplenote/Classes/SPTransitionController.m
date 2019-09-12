@@ -41,8 +41,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @property (nonatomic, strong) SnapshotRenderer *renderer;
 @property (nonatomic) id <UIViewControllerContextTransitioning> context;
-@property (nonatomic, assign) CGFloat initialPinchDistance;
-@property (nonatomic, assign) CGPoint initialPinchPoint;
+@property (nonatomic) CGFloat initialPinchDistance;
+@property (nonatomic) CGPoint initialPinchPoint;
 
 @property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
 @property (nonatomic, strong) UIImage *pinIcon;
@@ -452,10 +452,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                       preview:YES];
         
         // tap a snapshot of the current view to avoid the need for creating a textview
-        CGRect dirtySnapshotFrame = CGRectMake(editorController.noteEditorTextView.frame.origin.x,
-                                               editorController.noteEditorTextView.frame.origin.y + editorController.noteEditorTextView.contentInset.top,
-                                               editorController.noteEditorTextView.frame.size.width,
-                                               editorController.noteEditorTextView.frame.size.height - editorController.noteEditorTextView.contentInset.top - editorController.noteEditorTextView.frame.origin.y);
+        CGRect editorFrame = editorController.noteEditorTextView.frame;
+        UIEdgeInsets editorContentInsets = editorController.noteEditorTextView.contentInset;
+        CGRect dirtySnapshotFrame = CGRectMake(editorFrame.origin.x,
+                                               editorFrame.origin.y + editorContentInsets.top,
+                                               editorFrame.size.width,
+                                               editorFrame.size.height - editorContentInsets.top - editorFrame.origin.y);
 
         UIView *dirtySnapshot = [editorController.view resizableSnapshotViewFromRect:dirtySnapshotFrame
                                                                   afterScreenUpdates:NO
@@ -487,7 +489,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 startingFrame.origin.x = editorController.noteEditorTextView.frame.origin.x;
                 startingFrame.size.width = editorController.noteEditorTextView.frame.size.width;
                 
-                // final frame is note the frame of the cell of the frame of the textView within the cell
+                // Final frame is *not* the frame of the cell of the frame of the textView within the cell
                 finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 finalFrame.origin.x = 0;
 
