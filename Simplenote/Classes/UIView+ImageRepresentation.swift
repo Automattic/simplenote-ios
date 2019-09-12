@@ -11,7 +11,7 @@ extension UIView {
     @objc
     func imageRepresentation() -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { rendererContext in
+        return renderer.image { [unowned self] rendererContext in
             self.layer.render(in: rendererContext.cgContext)
         }
     }
