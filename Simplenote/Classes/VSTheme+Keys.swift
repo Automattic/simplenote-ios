@@ -59,7 +59,6 @@ enum ThemeImageKey: String {
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
-    case searchBarBackgroundImage
     case tagViewDeletionImage
     case visibilityOnImage
     case visibilityOffImage
@@ -84,8 +83,6 @@ extension ThemeImageKey {
             return "navigation_bar_background_prompt"
         case .onePasswordImage:
             return "button_onepassword"
-        case .searchBarBackgroundImage:
-            return "searchbar_background"
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:

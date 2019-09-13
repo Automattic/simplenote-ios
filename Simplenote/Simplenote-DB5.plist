@@ -140,8 +140,6 @@
 		<string>cbdff3</string>
 		<key>tagViewDeletionImage</key>
 		<string>button_delete_small</string>
-		<key>searchBarBackgroundImage</key>
-		<string>searchbar_background</string>
 		<key>searchBarImageColor</key>
 		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
@@ -285,8 +283,6 @@
 		<string>2d4259</string>
 		<key>tagViewDeletionImage</key>
 		<string>button_delete_small_dark</string>
-		<key>searchBarBackgroundImage</key>
-		<string>searchbar_background_dark</string>
 		<key>searchHighlightFontColor</key>
 		<string>f9f9f9</string>
 		<key>searchBarImageColor</key>
