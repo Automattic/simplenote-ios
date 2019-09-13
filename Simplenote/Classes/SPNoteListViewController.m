@@ -44,7 +44,6 @@
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
 
-@property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -218,7 +217,7 @@
     }
 }
 
-- (void)updateRowHeight {
+ - (void)updateRowHeight {
         
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
@@ -280,32 +279,32 @@
         [emptyTrashButton setTitlePositionAdjustment:titleOffset forBarMetrics:UIBarMetricsDefault];
     }
         
-    if (!searchBar) {
+    if (!_searchBar) {
         // titleView was changed to use autolayout in iOS 11
         if (@available(iOS 11.0, *)) {
-            searchBar = [[UISearchBar alloc] init];
+            _searchBar = [[UISearchBar alloc] init];
             _searchBarContainer = [[SPTitleView alloc] init];
             _searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
         } else {
             CGFloat searchBarHeight = 44.0;
-            searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
-                                                                      0,
-                                                                      self.view.frame.size.width,
-                                                                      searchBarHeight)];
+            _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
+                                                                       0,
+                                                                       self.view.frame.size.width,
+                                                                       searchBarHeight)];
             _searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
             _searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
         _searchBarContainer.clipsToBounds = NO;
-        searchBar.center = _searchBarContainer.center;
+        _searchBar.center = _searchBarContainer.center;
         
-        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
-        searchBar.searchBarStyle = UISearchBarStyleMinimal;
+        _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
+        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
 
         [self styleSearchBar];
 
-        searchBar.delegate = self;
-        [_searchBarContainer addSubview:searchBar];
+        _searchBar.delegate = self;
+        [_searchBarContainer addSubview:_searchBar];
     }
     
     if (bSearching) {
@@ -370,13 +369,13 @@
     
     bSearching = NO;
     
-    searchBar.text = @"";
+    self.searchBar.text = @"";
     self.searchText = nil;
-    [searchBar resignFirstResponder];
+    [self.searchBar resignFirstResponder];
     
     [self update];
     
-    [searchBar setShowsCancelButton:NO animated:YES];
+    [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 #pragma mark - SearchBar Delegate methods
@@ -389,7 +388,7 @@
     bSearching = YES;
     
     [self updateNavigationBar];
-    [searchBar setShowsCancelButton:YES animated:YES];
+    [self.searchBar setShowsCancelButton:YES animated:YES];
     
     [self.tableView reloadData];
     
@@ -414,12 +413,12 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)s {
-    [searchBar endEditing:YES];
+    [self.searchBar endEditing:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)s {
     
-    [self cancelSearchButtonAction:searchBar];
+    [self cancelSearchButtonAction:self.searchBar];
 }
 
 - (void)performSearch
@@ -810,12 +809,12 @@
         [appDelegate.selectedTag compare:@"trash"] == NSOrderedSame) {
         
         tagFilterType = SPTagFilterTypeDeleted;
-        searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
+        _searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
     }
     else {
         
         tagFilterType = SPTagFilterTypeUserTag;
-        searchBar.placeholder = appDelegate.selectedTag;
+        _searchBar.placeholder = appDelegate.selectedTag;
     }
     
     NSPredicate *predicate = [self fetchPredicate];
@@ -1034,10 +1033,9 @@
     addButton.enabled = NO;
     emptyTrashButton.enabled = NO;
     
-    [UIView animateWithDuration:0.1
-                     animations:^{
-                         self->searchBar.alpha = 0.5;
-                     }];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.searchBar.alpha = 0.5;
+    }];
     
     bDisableUserInteraction = YES;
     
@@ -1054,10 +1052,9 @@
     addButton.enabled = YES;
     emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
     
-    [UIView animateWithDuration:0.1
-                     animations:^{
-                         self->searchBar.alpha = 1.0;
-                     }];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.searchBar.alpha = 1.0;
+    }];
     
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
