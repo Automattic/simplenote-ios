@@ -6,6 +6,13 @@ import UIKit
 //
 extension UIImage {
 
+    /// Returns the NavigationBar Shadow Image
+    ///
+    @objc
+    class var navigationBarShadowImage: UIImage? {
+        return UIColor.color(name: .backgroundColor)?.imageRepresentation()
+    }
+
     /// Returns the SearchBar Background Image
     ///
     class var searchBarBackgroundImage: UIImage? {
