@@ -1,0 +1,2 @@
+- Novo design para as telas de login e inscrição no aplicativo.
+- Agora é possível usar a função Peek and Pop na tela lista de notas.

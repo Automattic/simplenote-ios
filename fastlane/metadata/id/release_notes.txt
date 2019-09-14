@@ -1,0 +1,2 @@
+- Kami telah mendesain ulang layar untuk memulai dan masuk ke aplikasi.
+- Sekarang Anda dapat menggunakan Peek and Pop pada layar daftar catatan.

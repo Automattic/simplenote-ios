@@ -1,0 +1,2 @@
+- Abbiamo riprogettato le schermate per iniziare e accedere all'app.
+- Ora puoi usare le funzioni Peek e Pop sulla schermata di elenco delle note.

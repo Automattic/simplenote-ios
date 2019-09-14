@@ -1,0 +1,2 @@
+- Nous avons repensé les écrans de démarrage et de connexion à l'application.
+- Vous pouvez désormais utiliser Aperçu et Accéder à sur l'écran de liste des notes.

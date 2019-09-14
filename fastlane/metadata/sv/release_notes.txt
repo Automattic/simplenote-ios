@@ -1,0 +1,2 @@
+- Vi har designat om skärmarna för att komma igång och logga in på appen.
+- Du kan nu använda Peek and Poop på skärmen för anteckningslistan.

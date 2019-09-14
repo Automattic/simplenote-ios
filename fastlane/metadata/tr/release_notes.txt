@@ -1,0 +1,2 @@
+- Başlangıç ve uygulamada oturum açma ekranlarını yeniden tasarladık.
+- Artık notlar listesi ekranında Peek and Pop özelliğini kullanabilirsiniz.

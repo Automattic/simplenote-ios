@@ -1,0 +1,2 @@
+- Wir haben die Bildschirme für den Einstieg und für das Anmelden bei der App überarbeitet.
+- Du kannst auf dem Notizlisten-Bildschirm jetzt „Peek and Pop“ verwenden.
