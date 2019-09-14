@@ -129,7 +129,7 @@ static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
     [super drawRect:rect];
 
     // Draw the Separator
-    UIImage *shadowImage    = [UIImage imageWithName:UIImageNameNavigationBarShadowImage];
+    UIImage *shadowImage    = [UIImage navigationBarShadowImage];
     shadowImage             = [shadowImage resizableImageWithCapInsets:SPRatingPromptSeparatorCapInsets resizingMode:UIImageResizingModeTile];
 
     CGFloat borderThickness = SPRatingPromptSeparatorHeight / [[UIScreen mainScreen] scale];
