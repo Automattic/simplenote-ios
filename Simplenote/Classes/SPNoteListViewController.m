@@ -189,34 +189,6 @@
 #endif
 }
 
-- (void)styleSearchBar {
-    UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
-    [searchBar setSearchFieldBackgroundImage:background
-                                    forState:UIControlStateNormal];
-    _searchBarContainer.backgroundColor = [UIColor clearColor];
-
-    UIColor *searchBarImageColor = [UIColor colorWithName:UIColorNameSearchBarImageColor];
-
-    [searchBar setImage:[[UIImage imageNamed:@"search_icon"] imageWithOverlayColor:searchBarImageColor]
-       forSearchBarIcon:UISearchBarIconSearch
-                  state:UIControlStateNormal];
-
-    // Apply font to search field by traversing subviews
-    NSArray *searchBarSubviews = [searchBar subviewsRespondingToSelector:@selector(setFont:)];
-    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameTextColor];
-
-    for (UIView *subview in searchBarSubviews) {
-        if ([subview isKindOfClass:[UITextField class]] == false) {
-            continue;
-        }
-        
-        [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-        [(UITextField *)subview setTextColor:searchBarFontColor];
-        [(UITextField *)subview setKeyboardAppearance:(SPUserInterface.isDark ?
-                                                       UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
-    }
-}
-
  - (void)updateRowHeight {
         
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
