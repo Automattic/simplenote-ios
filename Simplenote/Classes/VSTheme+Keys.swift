@@ -56,7 +56,6 @@ enum ThemeImageKey: String {
     case backImage
     case pinImage
     case sharedImage
-    case navigationBarShadowImage
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
@@ -77,8 +76,6 @@ extension ThemeImageKey {
             return "icon_pin"
         case .sharedImage:
             return "icon_shared"
-        case .navigationBarShadowImage:
-            return "navigation_bar_shadow"
         case .navigationBarBackgroundImage:
             return "navigation_bar_background"
         case .navigationBarBackgroundPromptImage:

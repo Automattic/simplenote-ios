@@ -202,8 +202,6 @@
 		<string>navigation_bar_background_landscape</string>
 		<key>navigationBarBackgroundLandscapePhonePrompt</key>
 		<string>navigation_bar_background_landscape_prompt</string>
-		<key>navigationBarShadowImage</key>
-		<string>navigation_bar_shadow</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
@@ -309,8 +307,6 @@
 		<string>navigation_bar_background_landscape_dark</string>
 		<key>navigationBarBackgroundLandscapePhonePrompt</key>
 		<string>navigation_bar_background_landscape_prompt_dark</string>
-		<key>navigationBarShadowImage</key>
-		<string>navigation_bar_shadow_dark</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>lockBackgroundColor</key>

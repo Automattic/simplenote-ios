@@ -9,7 +9,6 @@ enum UIImageName: Int, CaseIterable {
     case backImage
     case pinImage
     case sharedImage
-    case navigationBarShadowImage
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
@@ -34,8 +33,6 @@ extension UIImageName {
             return .pinImage
         case .sharedImage:
             return .sharedImage
-        case .navigationBarShadowImage:
-            return .navigationBarShadowImage
         case .navigationBarBackgroundImage:
             return .navigationBarBackgroundImage
         case .navigationBarBackgroundPromptImage:
