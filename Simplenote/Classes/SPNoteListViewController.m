@@ -32,7 +32,6 @@
 #import "NSTextStorage+Highlight.h"
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
-#import "UIView+Subviews.h"
 #import "UIImage+Colorization.h"
 
 #import <Simperium/Simperium.h>
