@@ -189,6 +189,7 @@
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
 		B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */; };
+		B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5757369232C567000443C2E /* UIImage+Dynamic.swift */; };
 		B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
@@ -468,6 +469,7 @@
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
 		B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIBezierPath+Simplenote.swift"; path = "Classes/UIBezierPath+Simplenote.swift"; sourceTree = "<group>"; };
+		B5757369232C567000443C2E /* UIImage+Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Dynamic.swift"; path = "Classes/UIImage+Dynamic.swift"; sourceTree = "<group>"; };
 		B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B582189B1FCC45170094ECA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */,
+				B5757369232C567000443C2E /* UIImage+Dynamic.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1861,6 +1864,7 @@
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
+				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				46A3C97417DFA81A002865AE /* SPTransitionSnapshot.m in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
