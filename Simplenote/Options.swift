@@ -85,6 +85,14 @@ extension Options {
     var themeDescription: String {
         return theme.description
     }
+
+    /// Nukes all of the Options. Useful for *logout* scenarios
+    ///
+    @objc
+    func reset() {
+        defaults.removeObject(forKey: .theme)
+        defaults.removeObject(forKey: .listSortMode)
+    }
 }
 
 
