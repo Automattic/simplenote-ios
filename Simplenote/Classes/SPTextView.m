@@ -13,6 +13,7 @@
 #import "VSThemeManager.h"
 #import "NSString+Search.h"
 #import "SPInteractiveTextStorage.h"
+#import "Simplenote-Swift.h"
 
 @implementation SPTextView
 
@@ -123,9 +124,9 @@
     
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:attributedString];
     [mutableAttributedString addAttribute:NSForegroundColorAttributeName
-                                    value:[theme colorForKey:@"searchHighlightFontColor"]
+                                    value:[UIColor colorWithName:UIColorNameSearchHighlightFontColor]
                                     range:NSMakeRange(0, mutableAttributedString.length)];
-    
+
     highlightLabel.attributedText = mutableAttributedString;
     
     highlightLabel.textAlignment = NSTextAlignmentCenter;

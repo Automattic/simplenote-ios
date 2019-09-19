@@ -30,15 +30,6 @@ class SharePresentationController: UIViewController {
 //
 private extension SharePresentationController {
 
-    func setupAppearance() {
-        // FIXME: We should account for dark mode when setting up these 👇 values in the near future.
-        UINavigationBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().barStyle = .default
-        UINavigationBar.appearance().tintColor = UIColor.simplenoteBlue()
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
-        UINavigationBar.appearance().isTranslucent = false
-    }
-
     func loadAndPresentMainVC() {
         let shareController = ShareViewController(context: extensionContext)
         shareController.dismissalCompletionBlock = {
@@ -50,5 +41,41 @@ private extension SharePresentationController {
         shareNavController.modalPresentationStyle = .custom
 
         present(shareNavController, animated: true)
+    }
+}
+
+
+// MARK: - Appearance Helpers
+//
+private extension SharePresentationController {
+
+    func setupAppearance() {
+        guard #available(iOS 13, *) else {
+            setupAppearanceIOS10()
+            return
+        }
+
+        setupAppearanceIOS12()
+    }
+
+    func setupAppearanceIOS10() {
+        let appearance = UINavigationBar.appearance()
+        appearance.barTintColor = .white
+        appearance.barStyle = .default
+        appearance.tintColor = UIColor.simplenoteBlue()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.isTranslucent = false
+    }
+
+    @available (iOS 12, *)
+    func setupAppearanceIOS12() {
+        let appearance = UINavigationBar.appearance()
+        appearance.barTintColor = UIColor.color(name: .backgroundColor)
+        appearance.barStyle = .default
+        appearance.tintColor = UIColor.color(name: .tintColor)
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.color(name: .navigationBarTitleFontColor)!
+        ]
+        appearance.isTranslucent = false
     }
 }

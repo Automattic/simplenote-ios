@@ -8,7 +8,6 @@
 
 #import "SPActivityView.h"
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 #import "SPActionButton.h"
 #import "Note.h"
 #import "SPButton.h"
@@ -16,6 +15,7 @@
 #import "UIImage+Colorization.h"
 #import "SPToggle.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
 
 
 @interface SPActivityView ()
@@ -63,7 +63,7 @@
 
     // draw borders
     CGFloat borderThickness = 1.0 / [[UIScreen mainScreen] scale];
-    [[self.theme colorForKey:@"actionSheetDividerColor"] setFill];
+    [[UIColor colorWithName:UIColorNameDividerColor] setFill];
 
     CGRect borderRect = CGRectMake(0, 0, self.frame.size.width, borderThickness);
 
@@ -197,6 +197,8 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         
         UIImage *toggleBackground = [[[UIImage imageNamed:@"toggle_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *toggleBackgroundHighlighted = [[[UIImage imageNamed:@"toggle_background_highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+        UIColor *toggleTitleColor = [UIColor colorWithName:UIColorNameTintColor];
 
         for (int i = 0; i < toggleTitles.count; i++) {
             
@@ -206,11 +208,10 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
                                  forState:UIControlStateNormal];
             [newToggle setBackgroundImage:toggleBackgroundHighlighted
                                  forState:UIControlStateHighlighted];
-            newToggle.tintColor = [self.theme colorForKey:@"actionViewToggleTintColor"];
+            newToggle.tintColor = toggleTintColor;
             [newToggle setTitle:toggleTitles[i] forState:UIControlStateNormal];
             [newToggle setTitle:toggleSelectedTitles[i] forState:UIControlStateHighlighted];
-            [newToggle setTitleColor:[self.theme colorForKey:@"tintColor"]
-                            forState:UIControlStateNormal];
+            [newToggle setTitleColor:toggleTitleColor forState:UIControlStateNormal];
             newToggle.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
             
             [newToggle addTarget:self
@@ -227,14 +228,14 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
         statusLabel = [[UILabel alloc] init];
         statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        statusLabel.textColor = [self.theme colorForKey:@"actionViewStatusFontColor"];
+        statusLabel.textColor = [UIColor colorWithName:UIColorNameActionViewStatusFontColor];
         statusLabel.adjustsFontSizeToFitWidth = YES;
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         statusLabel.textAlignment = NSTextAlignmentCenter;
         statusLabel.backgroundColor = [UIColor clearColor];
         statusLabel.text = status;
 
-        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        statusActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         statusActivityIndicator.alpha = 0.0;
         [statusActivityIndicator hidesWhenStopped];
         
@@ -261,10 +262,13 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         NSInteger actionButtonCount = actionButtonImages.count;
         actionButtonArray = [NSMutableArray arrayWithCapacity:actionButtonCount];
         
+        UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
         UIImage *actionButtonBackgroundImage = [[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIImage *actionButtonBackgroundDisabledImage = [[[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageWithOverlayColor:[self.theme colorForKey:@"actionViewButtonDisabledColor"]];
+        UIImage *actionButtonBackgroundDisabledImage = [[[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
         UIImage *actionButtonBackgroundHighlightImage = [[UIImage imageNamed:@"action_button_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
+        UIColor *actionButtonTitleColorNormal = [UIColor colorWithName:UIColorNameTintColor];
+
         for (int i = 0; i < actionButtonCount; i ++) {
             SPActionButton *button = [[SPActionButton alloc] initWithFrame:CGRectMake(0,
                                                                                       0,
@@ -275,23 +279,18 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
             [actionButtonArray addObject:button];
             
             UIImage *buttonImage = (UIImage*)actionButtonImages[i];
-            [button setImage:[buttonImage
-                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+            [button setImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
                     forState:UIControlStateNormal];
-            [button setImage:[[buttonImage imageWithOverlayColor:[self.theme colorForKey:@"actionViewButtonDisabledColor"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+            [button setImage:[[buttonImage imageWithOverlayColor:actionButtonBackgroundDisabledColor] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                     forState:UIControlStateDisabled];
-            [button setImage:[[buttonImage imageWithOverlayColor:[self.theme colorForKey:@"backgroundColor"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+            [button setImage:[[buttonImage imageWithOverlayColor:actionButtonBackgroundColor] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                     forState:UIControlStateHighlighted];
             
             // add label
-            [button setTitle:actionButtonTitles[i]
-                    forState:UIControlStateNormal];
-            [button setTitle:actionButtonTitles[i]
-                    forState:UIControlStateHighlighted];
-            [button setTitleColor:[self.theme colorForKey:@"tintColor"]
-                         forState:UIControlStateNormal];
-            [button setTitleColor:[self.theme colorForKey:@"actionViewButtonDisabledColor"]
-                         forState:UIControlStateDisabled];
+            [button setTitle:actionButtonTitles[i] forState:UIControlStateNormal];
+            [button setTitle:actionButtonTitles[i] forState:UIControlStateHighlighted];
+            [button setTitleColor:actionButtonTitleColorNormal forState:UIControlStateNormal];
+            [button setTitleColor:actionButtonBackgroundDisabledColor forState:UIControlStateDisabled];
             
             [button setBackgroundImage:actionButtonBackgroundImage
                               forState:UIControlStateNormal];
@@ -311,19 +310,20 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         buttonArray = [NSMutableArray arrayWithCapacity:buttonTitles.count];
         buttonView = [[UIView alloc] init];
         [self addSubview:buttonView];
-        
+
+        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+
         for (NSString *title in buttonTitles) {
-            SPButton *newButton = [[SPButton alloc] init];
+            SPButton *newButton = [SPButton new];
             
             [newButton setTitle:title forState:UIControlStateNormal];
-            [newButton setTitleColor:[self.theme colorForKey:@"tintColor"]
-                            forState:UIControlStateNormal];
-            [newButton setTitleColor:[self.theme colorForKey:@"backgroundColor"]
-                            forState:UIControlStateHighlighted];
-            [newButton setTitleColor:[self.theme colorForKey:@"actionViewButtonDisabledColor"]
-                            forState:UIControlStateDisabled];
+            [newButton setTitleColor:tintColor forState:UIControlStateNormal];
+            [newButton setTitleColor:backgroundColor forState:UIControlStateHighlighted];
+            [newButton setTitleColor:disabledColor forState:UIControlStateDisabled];
             
-            newButton.backgroundHighlightColor = [self.theme colorForKey:@"tintColor"];
+            newButton.backgroundHighlightColor = tintColor;
             
             newButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
             newButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
@@ -398,16 +398,33 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
 }
 
-- (void)setButtonImage:(UIImage *)image atIndex:(NSInteger)index {
-    
-    SPButton *button = (SPButton *)[self buttonAtIndex:index];
-    
-    [button setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-            forState:UIControlStateNormal];
-    [button setImage:[image imageWithOverlayColor:[self.theme colorForKey:@"actionViewButtonDisabledColor"]]
-            forState:UIControlStateDisabled];
-    [button setImage:[image imageWithOverlayColor:[self.theme colorForKey:@"backgroundColor"]]
-            forState:UIControlStateHighlighted];
+- (void)refreshButtonImages
+{
+    UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+
+    for (SPActionButton *button in actionButtonArray) {
+        UIImage *disabledImage = [[button imageForState:UIControlStateDisabled] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
+        UIImage *highligtedImage = [[button imageForState:UIControlStateHighlighted] imageWithOverlayColor:actionButtonBackgroundColor];
+
+        [button setImage:disabledImage forState:UIControlStateDisabled];
+        [button setImage:highligtedImage forState:UIControlStateHighlighted];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self refreshButtonImages];
+    }
+#endif
 }
 
 

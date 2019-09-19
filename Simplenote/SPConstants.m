@@ -16,7 +16,7 @@
 
 NSString *const kSimperiumBaseURL                   = @"https://api.simperium.com/1";
 NSString *const kSimperiumForgotPasswordURL         = @"https://app.simplenote.com/forgot/";
-NSString *const kSimperiumTermsOfServiceURL         = @"http://simplenote.com/terms/";
+NSString *const kSimperiumTermsOfServiceURL         = @"https://simplenote.com/terms/";
 NSString *const kSimperiumPreferencesObjectKey      = @"preferences-key";
 
 NSString *const kAutomatticAnalyticLearnMoreURL     = @"https://automattic.com/cookies";
@@ -56,3 +56,5 @@ NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";
 
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
+
+NSString *const kWordPressAuthURL                   = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";

@@ -1,6 +1,2 @@
-- Simplenote funktioniert jetzt mit Siri-Shortcuts, sodass du direkt mit Siri die App und bereits vorhandene Notizen öffnen und neue Notizen erstellen kannst.
-- Neue Aktionen sind in der Notizenliste verfügbar: Anheften und teilen per Wischbewegung!
-- Die Notizenliste enthält jetzt ein Icon, das Notizen anzeigt, die bereits veröffentlicht wurden.
-- Beim Teilen in der WordPress-App werden Notizen nicht mehr in Form eines Blocks zitiert.
-- Die Benutzeroberfläche der iOS-Erweiterung zum Teilen wurde komplett aktualisiert.
-- Es wurde ein Fehler behoben, durch den die Notizenliste bei Verwendung von Wischaktionen abgeschnitten wurde.
+- Wir haben die Bildschirme für den Einstieg und für das Anmelden bei der App überarbeitet.
+- Du kannst auf dem Notizlisten-Bildschirm jetzt „Peek and Pop“ verwenden.

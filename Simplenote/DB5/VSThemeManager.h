@@ -24,8 +24,7 @@ extern NSString *const VSThemeManagerThemePrefKey;
 - (VSThemeLoader *)themeLoader;
 
 - (void)swapTheme:(NSString *)theme;
-
-- (void)applyAppearanceStylingForTheme:(VSTheme *)theme;
+- (void)applyAppearanceStyling;
 
 @end
 

@@ -37,8 +37,11 @@ class SnapshotRenderer: NSObject {
     ///
     @objc
     func render(note: Note, size: CGSize, searchQuery: String?, preview: Bool) -> UIView {
+        // Setup: iOS 13 Dark Mode
+        ensureAppearanceMatchesSystem()
+
         // Setup: Skin
-        let backgroundColor = theme.color(forKey: .backgroundColor)
+        let backgroundColor = UIColor.color(name: .backgroundColor)
         accessoryImageView.backgroundColor = backgroundColor
         textView.backgroundColor = backgroundColor
         textView.interactiveTextStorage.tokens = [
@@ -52,15 +55,15 @@ class SnapshotRenderer: NSObject {
 
         // Setup: Highlighted Keywords
         if let searchQuery = searchQuery {
-            let color = theme.color(forKey: .tintColor)
+            let color = UIColor.color(name: .tintColor)
             let ranges = (textView.text as NSString).ranges(forTerms: searchQuery)
 
             textView.textStorage.applyColorAttribute(color, forRanges: ranges)
         }
 
         // Setup: AccessoryImage
-        let accessoryImage = note.published && preview ? UIImage.sharedImage.withRenderingMode(.alwaysTemplate) : nil
-        let accessorySize = accessoryImage?.size ?? CGSize.zero
+        let accessoryImage = note.published && preview ? UIImage.image(name: .sharedImage)?.withRenderingMode(.alwaysTemplate) : nil
+        let accessorySize = accessoryImage?.size ?? .zero
 
         accessoryImageView.image = accessoryImage
         accessoryImageView.tintColor = bodyColor
@@ -94,7 +97,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Body Color
     ///
     var bodyColor: UIColor {
-        return theme.color(forKey: .noteBodyFontPreviewColor)!
+        return UIColor.color(name: .noteBodyFontPreviewColor)!
     }
 
     /// Returns the Body Font
@@ -106,7 +109,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Headline Color
     ///
     var headlineColor: UIColor {
-        return theme.color(forKey: .noteHeadlineFontColor)!
+        return UIColor.color(name: .noteHeadlineFontColor)!
     }
 
     /// Returns the Headline Font
@@ -119,7 +122,7 @@ private extension SnapshotRenderer {
     ///
     var paragraphStyle: NSParagraphStyle {
         let style =  NSMutableParagraphStyle()
-        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: .noteBodyLineHeightPercentage)
+        style.lineSpacing = bodyFont.lineHeight * theme.float(forKey: "noteBodyLineHeightPercentage")
         return style
     }
 
@@ -171,11 +174,23 @@ private extension SnapshotRenderer {
         output.addChecklistAttachments(for: bodyColor)
 
         // Attachments: Pinned!
-        guard note.pinned, preview, let pinImage = UIImage.pinImage.withOverlayColor(attachmentsTintColor) else {
+        guard note.pinned, preview, let pinImage = UIImage.image(name: .pinImage)?.withOverlayColor(attachmentsTintColor) else {
             return output
         }
 
         return output.withLeading(pinImage, lineHeight: headlineFont.capHeight)
+    }
+
+    /// Sets our rendering TextView's Override User Interface
+    ///
+    func ensureAppearanceMatchesSystem() {
+        guard #available(iOS 13, *) else {
+            return
+        }
+
+#if IS_XCODE_11
+        textView.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+#endif
     }
 }
 

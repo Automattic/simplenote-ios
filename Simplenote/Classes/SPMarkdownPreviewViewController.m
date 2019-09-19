@@ -8,9 +8,9 @@
 
 #import "SPMarkdownPreviewViewController.h"
 #import "SPMarkdownParser.h"
-#import "VSThemeManager.h"
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
 
 @import WebKit;
 @import SafariServices;
@@ -64,8 +64,7 @@
 
 - (void)applyStyle
 {
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    UIColor *backgroundColor = [theme colorForKey:@"backgroundColor"];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;
@@ -120,6 +119,23 @@
     }
 
     decisionHandler(WKNavigationActionPolicyCancel);
+}
+
+#pragma mark - Traits
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self displayMarkdown];
+    }
+#endif
 }
 
 @end

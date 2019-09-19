@@ -395,8 +395,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
     if (self.attributedText.length == 0) {
         return;
     }
-    
-    [self.textStorage addChecklistAttachmentsForColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+
+    UIColor *checklistColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    [self.textStorage addChecklistAttachmentsForColor:checklistColor];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain

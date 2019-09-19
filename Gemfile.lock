@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: c555066402074a527a9853932790da8198eb7f21
-  tag: 0.6.0
+  revision: b57127b313fd06519cbebfd4a3f6784eec1ef5fc
+  tag: 0.7.1
   specs:
-    fastlane-plugin-wpmreleasetoolkit (0.6.0)
+    fastlane-plugin-wpmreleasetoolkit (0.7.1)
       diffy (~> 3.3)
       git (~> 1.3)
       jsonlint
-      nokogiri (= 1.10.1)
+      nokogiri (>= 1.10.4)
       octokit (~> 4.13)
       parallel (~> 1.14)
       progress_bar (~> 1.3)
@@ -28,11 +28,11 @@ GEM
     atomos (0.1.3)
     babosa (1.0.2)
     claide (1.0.2)
-    cocoapods (1.7.5)
+    cocoapods (1.6.1)
       activesupport (>= 4.0.2, < 5)
       claide (>= 1.0.2, < 2.0)
-      cocoapods-core (= 1.7.5)
-      cocoapods-deintegrate (>= 1.0.3, < 2.0)
+      cocoapods-core (= 1.6.1)
+      cocoapods-deintegrate (>= 1.0.2, < 2.0)
       cocoapods-downloader (>= 1.2.2, < 2.0)
       cocoapods-plugins (>= 1.0.0, < 2.0)
       cocoapods-search (>= 1.0.0, < 2.0)
@@ -41,13 +41,13 @@ GEM
       cocoapods-try (>= 1.1.0, < 2.0)
       colored2 (~> 3.1)
       escape (~> 0.0.4)
-      fourflusher (>= 2.3.0, < 3.0)
+      fourflusher (>= 2.2.0, < 3.0)
       gh_inspector (~> 1.0)
       molinillo (~> 0.6.6)
       nap (~> 1.0)
       ruby-macho (~> 1.4)
-      xcodeproj (>= 1.10.0, < 2.0)
-    cocoapods-core (1.7.5)
+      xcodeproj (>= 1.8.1, < 2.0)
+    cocoapods-core (1.6.1)
       activesupport (>= 4.0.2, < 6)
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
@@ -72,12 +72,12 @@ GEM
     declarative-option (0.1.0)
     diffy (3.3.0)
     digest-crc (0.4.1)
-    domain_name (0.5.20180417)
+    domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.4)
     emoji_regex (1.0.1)
     escape (0.0.4)
-    excon (0.64.0)
+    excon (0.65.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     faraday-cookie_jar (0.0.6)
@@ -86,7 +86,7 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     fastimage (2.1.5)
-    fastlane (2.126.0)
+    fastlane (2.127.2)
       CFPropertyList (>= 2.3, < 4.0.0)
       addressable (>= 2.3, < 3.0.0)
       babosa (>= 1.0.2, < 2.0.0)
@@ -106,7 +106,7 @@ GEM
       highline (>= 1.7.2, < 2.0.0)
       json (< 3.0.0)
       jwt (~> 2.1.0)
-      mini_magick (~> 4.5.1)
+      mini_magick (>= 4.9.4, < 5.0.0)
       multi_xml (~> 0.5)
       multipart-post (~> 2.0.0)
       plist (>= 3.1.0, < 4.0.0)
@@ -167,7 +167,7 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
-    mini_magick (4.5.1)
+    mini_magick (4.9.5)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     molinillo (0.6.6)
@@ -178,11 +178,11 @@ GEM
     nap (1.1.0)
     naturally (2.2.0)
     netrc (0.11.0)
-    nokogiri (1.10.1)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     octokit (4.14.0)
       sawyer (~> 0.8.0, >= 0.5.3)
-    oj (3.8.0)
+    oj (3.9.0)
     optimist (3.0.0)
     options (2.3.2)
     os (1.0.1)
@@ -247,10 +247,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods (= 1.7.5)!
+  cocoapods (= 1.6.1)!
   cocoapods-repo-update (~> 0.0.3)!
   dotenv!
-  fastlane!
+  fastlane (= 2.127.2)!
   fastlane-plugin-sentry
   fastlane-plugin-wpmreleasetoolkit!
   octokit (~> 4.0)!
@@ -259,4 +259,4 @@ DEPENDENCIES
   xcpretty-travis-formatter!
 
 BUNDLED WITH
-   1.17.3
+   2.0.2

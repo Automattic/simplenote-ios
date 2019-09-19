@@ -37,14 +37,12 @@ class SPDefaultTableViewCell: UITableViewCell {
 private extension SPDefaultTableViewCell {
 
     func applySimplenoteStyle() {
-        let theme = VSThemeManager.shared().theme()
-
         let backgroundView = UIView()
-        backgroundView.backgroundColor = theme.color(forKey: .noteCellBackgroundSelectionColor)
+        backgroundView.backgroundColor = UIColor.color(name: .lightBlueColor)
 
-        backgroundColor = theme.color(forKey: .backgroundColor)
+        backgroundColor = UIColor.color(name: .backgroundColor)
         selectedBackgroundView = backgroundView
-        detailTextLabel?.textColor = theme.color(forKey: .tableViewDetailTextLabelColor)
-        textLabel?.textColor = theme.color(forKey: .tableViewTextLabelColor)
+        detailTextLabel?.textColor = UIColor.color(name: .tableViewDetailTextLabelColor)
+        textLabel?.textColor = UIColor.color(name: .textColor)
     }
 }

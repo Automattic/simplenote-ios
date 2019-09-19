@@ -7,9 +7,10 @@
 //
 
 #import "UIBarButtonItem+Images.h"
-#import "VSThemeManager.h"
 #import "SPOutsideTouchView.h"
 #import "UIDevice+Extensions.h"
+#import "Simplenote-Swift.h"
+
 
 static CGFloat const UIBarButtonSidePaddingPad      = 9.0;
 static CGFloat const UIBarButtonSidePaddingPhone    = 13.0;
@@ -51,19 +52,19 @@ static CGFloat const UIBarButtonWidth               = 44.0;
 + (UIBarButtonItem *)backBarButtonWithTitle:(NSString *)title
                                      target:(id)target
                                      action:(SEL)action
-{
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    
+{    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIImage *backImage = [UIImage imageWithName:UIImageNameBackImage];
 
-    [button setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+    [button setImage:[backImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
             forState:UIControlStateNormal];
 
     // Inset by -1 to match notes list chevron position
     [button setImageEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
     
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[theme colorForKey:@"tintColor"] forState:UIControlStateNormal];
+    [button setTitleColor:tintColor forState:UIControlStateNormal];
     
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 

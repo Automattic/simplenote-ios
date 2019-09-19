@@ -12,8 +12,6 @@
 #import "SPConstants.h"
 
 #import "SPNavigationController.h"
-#import "SPLoginViewController.h"
-#import "SPOnboardingViewController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPOptionsViewController.h"
@@ -66,12 +64,11 @@
                                 PinLockDelegate>
 
 
-@property (strong, nonatomic) Simperium						*simperium;
-@property (strong, nonatomic) NSManagedObjectContext		*managedObjectContext;
-@property (strong, nonatomic) NSManagedObjectModel			*managedObjectModel;
-@property (strong, nonatomic) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
-@property (strong, nonatomic) UIWindow                      *welcomeWindow;
-@property (weak,   nonatomic) SPModalActivityIndicator		*signOutActivityIndicator;
+@property (strong, nonatomic) Simperium                     *simperium;
+@property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
+@property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
 
 @end
 
@@ -136,14 +133,11 @@
     [_simperium setVerboseLoggingEnabled:NO];
 #endif
     
-    _simperium.authenticationViewControllerClass    = [SPLoginViewController class];
+    _simperium.authenticationViewControllerClass    = [SPOnboardingViewController class];
     _simperium.authenticator.providerString         = @"simplenote.com";
 	
-    SPAuthenticationConfiguration *configuration    = [SPAuthenticationConfiguration sharedInstance];
-    configuration.logoImageName                     = @"logo_login";
-    configuration.forgotPasswordURL                 = kSimperiumForgotPasswordURL;
-    configuration.termsOfServiceURL                 = kSimperiumTermsOfServiceURL;
-    
+
+    [_simperium setAuthenticationShouldBeEmbeddedInNavigationController:YES];
     [_simperium setAllBucketDelegates:self];
     [_simperium setDelegate:self];
     
@@ -168,20 +162,21 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
-    
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
+
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
     if (selectedTag != nil) {
 		[self setSelectedTag:selectedTag];
 	}
     
-    _tagListViewController = [[SPTagsListViewController alloc] init];
+    _tagListViewController = [SPTagsListViewController new];
 
     _noteListViewController = [[SPNoteListViewController alloc] initWithSidebarViewController:_tagListViewController];
     _noteListViewController.sidePanelViewDelegate = _tagListViewController;
 
+    _noteEditorViewController = [SPNoteEditorViewController new];
     
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
     self.navigationController.navigationBar.translucent = YES;
@@ -253,7 +248,7 @@
     
     // Check to see if first time user
     if ([self isFirstLaunch]) {        
-        [self showOnboardingScreen];
+        [self removePin];
         [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
@@ -293,12 +288,6 @@
 #endif
 
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
-}
-
-- (void)onboardingDidFinish:(NSNotification *)notification
-{
-    [self.window makeKeyAndVisible];
-    self.welcomeWindow = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -396,18 +385,6 @@
     _noteListViewController.firstLaunch = YES;
 }
 
-- (void)showOnboardingScreen
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onboardingDidFinish:) name:SPOnboardingDidFinish object:nil];
-    self.welcomeWindow = [[UIWindow alloc] initWithFrame:self.window.frame];
-    self.welcomeWindow.backgroundColor = [UIColor clearColor];
-    self.welcomeWindow.rootViewController = [SPOnboardingViewController new];
-    [self.welcomeWindow makeKeyAndVisible];
-    
-    // Remove any stored pin code
-    [self removePin];
-}
-
 - (void)markFirstLaunch
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -434,7 +411,9 @@
 
 - (void)loadSelectedTheme
 {
-    [[VSThemeManager sharedManager] applyAppearanceStylingForTheme:[[VSThemeManager sharedManager] theme]];
+    // TODO: Eventually nuke VSThemeManager. Please
+    [[VSThemeManager sharedManager] applyAppearanceStyling];
+    [[SPUserInterface shared] refreshUserInterfaceStyle];
 }
 
 
@@ -453,9 +432,8 @@
 
 - (void)themeDidChange
 {
-    // Update window coloring
-    self.window.backgroundColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"backgroundColor"];
-    self.window.tintColor = [[[VSThemeManager sharedManager] theme] colorForKey:@"tintColor"];
+    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
 }
 
 
@@ -572,8 +550,8 @@
 			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
-            // Always fall back to the default theme
-            [[VSThemeManager sharedManager] swapTheme:kSimplenoteDefaultThemeName];
+            // Nuke all of the User Preferences
+            [[Options shared] reset];
             
 			// remove the pin lock
 			[self removePin];

@@ -41,11 +41,11 @@
 #import "Simplenote-Swift.h"
 
 #import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
 
+@property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -58,7 +58,6 @@
 @end
 
 @implementation SPNoteListViewController
-@synthesize fetchedResultsController=__fetchedResultsController;
 
 - (void)dealloc
 {
@@ -127,7 +126,8 @@
 
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-        
+
+        [self registerForPeekAndPop];
         [self update];
     }
     
@@ -160,7 +160,7 @@
     _pinImage = nil;
 
     // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
     // Use a new cellIdentifier so cells redraw with new theme
     cellIdentifier = [[VSThemeManager sharedManager] theme].name;
@@ -171,18 +171,36 @@
     [self styleSearchBar];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self themeDidChange];
+    }
+#endif
+}
+
 - (void)styleSearchBar {
-    UIImage *background = [[self.theme imageForKey:@"searchBarBackgroundImage"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
+    UIImage *background = [[UIImage imageWithName:UIImageNameSearchBarBackgroundImage] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 6, 5, 5)];
     [searchBar setSearchFieldBackgroundImage:background
                                     forState:UIControlStateNormal];
-    searchBarContainer.backgroundColor = [UIColor clearColor];
+    _searchBarContainer.backgroundColor = [UIColor clearColor];
 
-    [searchBar setImage:[[UIImage imageNamed:@"search_icon"] imageWithOverlayColor:[self.theme colorForKey:@"searchBarImageColor"]]
+    UIColor *searchBarImageColor = [UIColor colorWithName:UIColorNameSearchBarImageColor];
+
+    [searchBar setImage:[[UIImage imageNamed:@"search_icon"] imageWithOverlayColor:searchBarImageColor]
        forSearchBarIcon:UISearchBarIconSearch
                   state:UIControlStateNormal];
 
     // Apply font to search field by traversing subviews
     NSArray *searchBarSubviews = [searchBar subviewsRespondingToSelector:@selector(setFont:)];
+    UIColor *searchBarFontColor = [UIColor colorWithName:UIColorNameTextColor];
 
     for (UIView *subview in searchBarSubviews) {
         if ([subview isKindOfClass:[UITextField class]] == false) {
@@ -190,8 +208,8 @@
         }
         
         [(UITextField *)subview setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-        [(UITextField *)subview setTextColor:[self.theme colorForKey:@"searchBarFontColor"]];
-        [(UITextField *)subview setKeyboardAppearance:(self.theme.isDark ?
+        [(UITextField *)subview setTextColor:searchBarFontColor];
+        [(UITextField *)subview setKeyboardAppearance:(SPUserInterface.isDark ?
                                                        UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault)];
     }
 }
@@ -254,19 +272,19 @@
         // titleView was changed to use autolayout in iOS 11
         if (@available(iOS 11.0, *)) {
             searchBar = [[UISearchBar alloc] init];
-            searchBarContainer = [[SPTitleView alloc] init];
-            searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
+            _searchBarContainer = [[SPTitleView alloc] init];
+            _searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
         } else {
             CGFloat searchBarHeight = 44.0;
             searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
                                                                       0,
                                                                       self.view.frame.size.width,
                                                                       searchBarHeight)];
-            searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
-            searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            _searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
+            _searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
-        searchBarContainer.clipsToBounds = NO;
-        searchBar.center = searchBarContainer.center;
+        _searchBarContainer.clipsToBounds = NO;
+        searchBar.center = _searchBarContainer.center;
         
         searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
@@ -275,7 +293,7 @@
         [self styleSearchBar];
 
         searchBar.delegate = self;
-        [searchBarContainer addSubview:searchBar];
+        [_searchBarContainer addSubview:searchBar];
     }
     
     if (bSearching) {
@@ -302,7 +320,7 @@
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
     }
     
-    self.navigationItem.titleView = searchBarContainer;
+    self.navigationItem.titleView = _searchBarContainer;
     self.navigationItem.titleView.hidden = NO;
     
     // Title must be set to an empty string because we're using a custom titleView,
@@ -467,16 +485,16 @@
         [note createPreview];
     }
     
-    UIColor *previewColor = [self.theme colorForKey:@"noteBodyFontPreviewColor"];
+    UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
     
     if (note.pinned) {
         NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
         if (!_pinImage) {
-            UIImage *templateImage = [[UIImage pinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            _pinImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteHeadlineFontColor"]];
-            _pinSearchImage = [templateImage imageWithOverlayColor:[self.theme colorForKey:@"noteBodyFontPreviewColor"]];
+            UIImage *templateImage = [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
+            _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
         }
         
         
@@ -492,11 +510,12 @@
     cell.previewView.alpha = 1.0;
     
     if (bSearching) {
-        [cell.previewView.textStorage applyColorAttribute:[self.theme colorForKey:@"tintColor"]
+        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        [cell.previewView.textStorage applyColorAttribute:tintColor
                                                 forRanges:[cell.previewView.text rangesForTerms:_searchText]];
     }
 
-    cell.accessoryImage = note.published ? [[UIImage sharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
+    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
     cell.accessoryTintColor = previewColor;
 
     cell.accessibilityLabel = note.titlePreview;
@@ -627,23 +646,19 @@
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
     [SPTracker trackListNoteOpened];
-    
-	SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    SPNoteEditorViewController *editor = [appDelegate noteEditorViewController];
-    if (!editor) {
-        editor = [[SPNoteEditorViewController alloc] init];
-        [appDelegate setNoteEditorViewController:editor];
-        
+
+    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
+    if (!_transitionController) {
         self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
         self.transitionController.delegate = self;
-        
-        BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-        self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-        editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
-        
     }
-    
+        
+    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
+    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
+    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
+
     [editor updateNote:note];
+
     if (bSearching) {
         [editor setSearchString:_searchText];
     }
@@ -861,9 +876,9 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
-    if (__fetchedResultsController != nil)
+    if (_fetchedResultsController != nil)
     {
-        return __fetchedResultsController;
+        return _fetchedResultsController;
     }
     
     // Set appDelegate here because this might get called before it gets an opportunity to be set previously
@@ -904,7 +919,7 @@
 	    abort();
 	}
     
-    return __fetchedResultsController;
+    return _fetchedResultsController;
 }
 
 
@@ -1054,14 +1069,14 @@
     if (waiting && self.navigationItem.titleView != activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
         if (!activityIndicator)
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(self.theme.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         
         [activityIndicator startAnimating];
         bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:activityIndicator
                                    completion:nil];
         
-    } else if (!waiting && self.navigationItem.titleView != searchBarContainer && !bTitleViewAnimating) {
+    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !bTitleViewAnimating) {
         
         [self resetTitleView];
         
@@ -1104,7 +1119,7 @@
 
 - (void)resetTitleView {
     
-    [self animateTitleViewSwapWithNewView:searchBarContainer
+    [self animateTitleViewSwapWithNewView:_searchBarContainer
                                completion:^{
                                    self->bResetTitleView = NO;
                                    [self->activityIndicator stopAnimating];

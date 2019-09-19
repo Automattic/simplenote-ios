@@ -1,6 +1,11 @@
-5.0
------
- 
+4.11.0
+======
+
+4.10.0
+======
+-   Redesigned Onboarding and Authentication Interface(s).
+-   Notes List now supports Peek and Pop.
+
 4.9.0
 =====
 -   Simplenote now works with Siri shortcuts allowing you to open the app, open existing notes, and create new notes directly from Siri
@@ -9,6 +14,7 @@
 -   When sharing to the WordPress App, Notes will no longer be blockquoted.
 -   The iOS share extension UI has been completly updated.
 -   Fixed an iOS 13 bug that caused the Notes List to get clipped upon Swipe Actions.
+-   iOS 13 Now has a new Theme: System default, which will match iOS's style.
 
 4.8.0
 =====

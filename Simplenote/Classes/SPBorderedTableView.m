@@ -7,9 +7,8 @@
 
 #import "SPBorderedTableView.h"
 #import <Foundation/Foundation.h>
+#import "Simplenote-Swift.h"
 
-#import "VSThemeManager.h"
-#import "VSTheme+Simplenote.h"
 
 @implementation SPBorderedTableView
 
@@ -35,13 +34,24 @@
     self.leftBorder.opacity = isVisible ? 1 : 0;
 }
 
-- (VSTheme *)theme {
-    return [[VSThemeManager sharedManager] theme];
+- (void)applyTheme {
+    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
 }
 
-- (void)applyTheme {
-    self.backgroundColor = [self.theme colorForKey:@"backgroundColor"];
-    self.leftBorder.backgroundColor = [self.theme colorForKey:@"tableViewSeparatorColor"].CGColor;
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+#if IS_XCODE_11
+    if (@available(iOS 13.0, *)) {
+        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+            return;
+        }
+
+        [self applyTheme];
+    }
+#endif
 }
 
 @end

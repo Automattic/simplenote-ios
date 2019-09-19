@@ -8,5 +8,6 @@
 
 @interface WPAuthHandler : NSObject
 + (BOOL)isWPAuthenticationUrl:(NSURL*)url;
++ (void)presentWordPressSSOFromViewController:(UIViewController *)presenter;
 + (SPUser *)authorizeSimplenoteUserFromUrl:(NSURL*)url forAppId:(NSString *)appId;
 @end

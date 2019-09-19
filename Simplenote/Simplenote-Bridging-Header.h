@@ -8,6 +8,7 @@
 #import <Simperium/Simperium.h>
 #import "VSThemeManager.h"
 
+
 #pragma mark - Simplenote-Y
 
 #import "Note.h"
@@ -18,8 +19,12 @@
 #import "SPInteractiveTextStorage.h"
 #import "SPNotifications.h"
 #import "SPTextView.h"
+#import "SPTextField.h"
 #import "SPTableViewController.h"
+#import "SPNoteListViewController.h"
+#import "SPNoteEditorViewController.h"
 #import "SPTracker.h"
+#import "WPAuthHandler.h"
 
 
 #pragma mark - Extensions

@@ -19,6 +19,6 @@ typedef enum {
     CAGradientLayer *gradientLayer;
 }
 
-- (id)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction;
+- (instancetype)initWithGradientViewDirection:(SPHorizontalPickerGradientViewDirection)direction;
 
 @end
