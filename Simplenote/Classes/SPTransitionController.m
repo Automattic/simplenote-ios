@@ -14,7 +14,6 @@
 #import "UIView+ImageRepresentation.h"
 #import "Note.h"
 #import "SPNoteListViewController.h"
-#import "SPTableViewCell.h"
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
 #import "NSAttributedString+Styling.h"
@@ -299,9 +298,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                          searchString:editorController.searchString
                                               preview:NO];
         
-        
+
         CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
-        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.frame.origin.y;
+        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
         if (@available(iOS 11.0, *)) {
             finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
         }
@@ -314,19 +313,17 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             for (NSIndexPath *path in visiblePaths) {
                 
                 
-                SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+                SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
                 CGRect startingFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 startingFrame.size.height -= 5; // corrects for line spacing added to final row
                 
                 if (_selectedPath && path.row == _selectedPath.row) {
                     
                     // two snapshots are used for note content since the preview is a "clean" versio of a note
-
-                    startingFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
-                                                      fromView:[cell contentView].superview];
+                    startingFrame = [cell previewFrameIn:containerView];
                     
                     startingFrame.size.height -= 5; // corrects for line spacing added to final row
-                    
+
                     cleanSnapshot.contentMode = UIViewContentModeTop;
                     cleanSnapshot.clipsToBounds = YES;
                     dirtySnapshot.contentMode = UIViewContentModeTop;
@@ -476,10 +473,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         for (NSIndexPath *path in visiblePaths) {
             
             
-            SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+            SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
             
             CGRect finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
-            finalFrame.size.height -= cell.previewView.textContainer.lineFragmentPadding; // corrects for line spacing added to final row
+            finalFrame.size.height -= cell.previewLineFragmentPadding; // corrects for line spacing added to final row
             
             
             if (_selectedPath && path.row == _selectedPath.row) {
@@ -493,12 +490,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
                 // final frame is note the frame of the cell of the frame of the
                 // textView within the cell
-                finalFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
-                                               fromView:[cell contentView].superview];
+                finalFrame = [cell previewFrameIn:containerView];
                 finalFrame.size.width = editorController.view.frame.size.width;
                 finalFrame.origin.x = 0;
                 finalFrame.size.height -= 5; // corrects for line spacing added to final row
-                
+
                 cleanSnapshot.contentMode = UIViewContentModeTop;
                 cleanSnapshot.clipsToBounds = YES;
                 dirtySnapshot.contentMode = UIViewContentModeTop;

@@ -1,5 +1,4 @@
 import XCTest
-import XCTest
 @testable import Simplenote
 
 

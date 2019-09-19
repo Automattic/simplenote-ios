@@ -29,6 +29,7 @@ Simplenote/DerivedSources/
 
 # Settings
 Simplenote/config.plist
+Simplenote/Credentials/
 
 # Bundler
 /vendor/

@@ -7,8 +7,14 @@
 //
 
 #import "NSTextStorage+Highlight.h"
+#import "NSString+Search.h"
 
 @implementation NSTextStorage (Highlight)
+
+- (void)applyColor:(UIColor *)color toSubstringMatchingKeywords:(NSString *)keywords {
+    NSArray* ranges = [self.string rangesForTerms:keywords];
+    [self applyColorAttribute:color forRanges:ranges];
+}
 
 - (void)applyColorAttribute:(id)color forRanges:(NSArray *)wordRanges {
     

@@ -44,8 +44,6 @@ typedef enum {
     BOOL bResetTitleView;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
-
-    NSString *cellIdentifier;
         
     SPTagFilterType tagFilterType;
 }
