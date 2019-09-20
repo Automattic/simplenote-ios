@@ -10,7 +10,7 @@ extension UIImage {
     ///
     @objc
     class var navigationBarShadowImage: UIImage? {
-        return UIColor.color(name: .backgroundColor)?.imageRepresentation()
+        return UIColor.color(name: .backgroundColor)?.dynamicImageRepresentation()
     }
 
     /// Returns the SearchBar Background Image
