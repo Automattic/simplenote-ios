@@ -115,11 +115,19 @@ class SPNoteTableViewCell: UITableViewCell {
         return previewTextView.textContainer.lineFragmentPadding
     }
 
+    /// Deinitializer
+    ///
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     /// Designated Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        startListeningToNotifications()
     }
+
 
     // MARK: - Overridden Methods
 
@@ -181,6 +189,26 @@ private extension SPNoteTableViewCell {
 }
 
 
+// MARK: - Notifications
+//
+private extension SPNoteTableViewCell {
+
+    /// Wires the (related) notifications to their handlers
+    ///
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(contentSizeCatoryWasUpdated), name: UIContentSizeCategory.didChangeNotification, object: nil)
+    }
+
+    /// Handles the UIContentSizeCategory.didChange Notification
+    ///
+    @objc
+    func contentSizeCatoryWasUpdated() {
+        refreshConstraints()
+    }
+}
+
+
 // MARK: - Private Methods: Skinning
 //
 private extension SPNoteTableViewCell {
@@ -209,7 +237,14 @@ private extension SPNoteTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        accessoryStackViewCenterConstraintY.constant = ceil(Style.headlineFont.lineHeight * 0.5)
+        let lineHeight = Style.headlineFont.lineHeight
+        let centerY = ceil(lineHeight * 0.5)
+        let dimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let cappedDimension = max(min(dimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
+
+        accessoryStackViewCenterConstraintY.constant = centerY
+        accessoryLeftImageViewHeightConstraint.constant = cappedDimension
+        accessoryRightImageViewHeightConstraint.constant = cappedDimension
     }
 
     /// Applies the TextView Insets, based on the accessoryStack's Width
@@ -227,7 +262,19 @@ private enum Style {
 
     /// Preview's Text Insets
     ///
-    static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+    static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+
+    /// Accessory's Ratio (measured against Line Size)
+    ///
+    static let accessoryImageSizeRatio = CGFloat(0.75)
+
+    /// Accessory's Minimum Size
+    ///
+    static let accessoryImageMinimumSize = CGFloat(16)
+
+    /// Accessory's Maximum Size
+    ///
+    static let accessoryImageMaximumSize = CGFloat(24)
 
     /// Returns the Cell's Background Color
     ///
