@@ -19,6 +19,14 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryStackViewCenterConstraintY: NSLayoutConstraint!
 
+    /// Acccesory LeftImage's Height
+    ///
+    @IBOutlet private var accessoryLeftImageViewHeightConstraint: NSLayoutConstraint!
+
+    /// Acccesory RightImage's Height
+    ///
+    @IBOutlet private var accessoryRightImageViewHeightConstraint: NSLayoutConstraint!
+
     /// Note's Left Accessory ImageView
     ///
     @IBOutlet private var accessoryLeftImageView: UIImageView!
