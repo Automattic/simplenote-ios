@@ -550,8 +550,8 @@
 			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
-            // Always fall back to the default theme
-            [[Options shared] setTheme:ThemeSystem];
+            // Nuke all of the User Preferences
+            [[Options shared] reset];
             
 			// remove the pin lock
 			[self removePin];
