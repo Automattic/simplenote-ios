@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="landscape" layout="splitview2_3" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvM-Gy-mrn">
-                        <rect key="frame" x="64" y="16" width="286" height="71"/>
+                        <rect key="frame" x="15" y="13" width="384" height="74"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
@@ -34,20 +34,22 @@
                         </variation>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="292" y="3.5" width="58" height="25"/>
+                        <rect key="frame" x="341" y="0.5" width="58" height="25"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="HlN-8B-Xzh"/>
+                                    <constraint firstAttribute="height" priority="751" constant="25" id="HlN-8B-Xzh"/>
                                     <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="eu6-28-b8t"/>
+                                    <constraint firstAttribute="width" secondItem="TZs-9B-NXz" secondAttribute="height" multiplier="1:1" priority="750" id="wnx-D6-YI9"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JkE-9h-IB9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JkE-9h-IB9">
                                 <rect key="frame" x="33" y="0.0" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="2SH-bw-5qa"/>
-                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="ugA-mm-Glv"/>
+                                    <constraint firstAttribute="width" secondItem="JkE-9h-IB9" secondAttribute="height" multiplier="1:1" priority="750" id="Yoh-kc-uRC"/>
+                                    <constraint firstAttribute="height" priority="751" constant="25" id="ugA-mm-Glv"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -88,7 +90,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="accessoryLeftImageView" destination="TZs-9B-NXz" id="4Nc-fi-4dX"/>
+                <outlet property="accessoryLeftImageViewHeightConstraint" destination="HlN-8B-Xzh" id="z5J-pV-vLi"/>
                 <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="c1B-W5-oqn"/>
+                <outlet property="accessoryRightImageViewHeightConstraint" destination="ugA-mm-Glv" id="Nv9-GJ-FBd"/>
                 <outlet property="accessoryStackView" destination="XmC-CY-iIl" id="cXz-hX-iTI"/>
                 <outlet property="accessoryStackViewCenterConstraintY" destination="dAJ-HC-c2F" id="mHP-Zd-Xwr"/>
                 <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
