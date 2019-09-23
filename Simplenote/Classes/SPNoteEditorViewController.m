@@ -767,6 +767,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if (string.length > 0) {
         bSearching = YES;
         _searchString = string;
+        searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
 }
