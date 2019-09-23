@@ -10,7 +10,6 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "UIView+ImageRepresentation.h"
 #import "UITableView+Styling.h"
 #import "VSThemeManager.h"
 #import "StatusChecker.h"

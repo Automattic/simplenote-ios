@@ -1,6 +1,7 @@
 4.11.0
 ======
 -   Search Bar style refresh!
+-   Notes List refreshed to display Pinned state on the right hand side.
 
 4.10.0
 ======

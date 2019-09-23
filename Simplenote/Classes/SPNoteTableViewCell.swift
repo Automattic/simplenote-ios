@@ -15,34 +15,75 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryStackView: UIStackView!
 
+    /// Accessory StackView's Top Constraint
+    ///
+    @IBOutlet private var accessoryStackViewCenterConstraintY: NSLayoutConstraint!
+
+    /// Acccesory LeftImage's Height
+    ///
+    @IBOutlet private var accessoryLeftImageViewHeightConstraint: NSLayoutConstraint!
+
+    /// Acccesory RightImage's Height
+    ///
+    @IBOutlet private var accessoryRightImageViewHeightConstraint: NSLayoutConstraint!
+
+    /// Note's Left Accessory ImageView
+    ///
+    @IBOutlet private var accessoryLeftImageView: UIImageView!
+
+    /// Note's Right Accessory ImageView
+    ///
+    @IBOutlet private var accessoryRightImageView: UIImageView!
+
     /// TextView to act as Note's Text container
     ///
-    private lazy var previewTextView = SPTextView()
+    private let previewTextView = SPTextView()
 
-    /// Note's Accessory ImageView
+    /// Left Accessory Image
     ///
-    private lazy var accessoryImageView = UIImageView()
-
-    /// Accessory Image
-    ///
-    var accessoryImage: UIImage? {
+    var accessoryLeftImage: UIImage? {
         get {
-            return accessoryImageView.image
+            return accessoryLeftImageView.image
         }
         set {
-            accessoryImageView.image = newValue
+            accessoryLeftImageView.image = newValue
+            accessoryLeftImageView.isHidden = newValue == nil
             refreshTextViewInsets()
         }
     }
 
-    /// Accessory Image's Tint
+    /// Left AccessoryImage's Tint
     ///
-    var accessoryTintColor: UIColor? {
+    var accessoryLeftTintColor: UIColor? {
         get {
-            return accessoryImageView.tintColor
+            return accessoryLeftImageView.tintColor
         }
         set {
-            accessoryImageView.tintColor = newValue
+            accessoryLeftImageView.tintColor = newValue
+        }
+    }
+
+    /// Right AccessoryImage
+    ///
+    var accessoryRightImage: UIImage? {
+        get {
+            return accessoryRightImageView.image
+        }
+        set {
+            accessoryRightImageView.image = newValue
+            accessoryRightImageView.isHidden = newValue == nil
+            refreshTextViewInsets()
+        }
+    }
+
+    /// Right AccessoryImage's Tint
+    ///
+    var accessoryRightTintColor: UIColor? {
+        get {
+            return accessoryRightImageView.tintColor
+        }
+        set {
+            accessoryRightImageView.tintColor = newValue
         }
     }
 
@@ -68,58 +109,46 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Note's Text Alpha Value
-    ///
-    var previewAlpha: CGFloat {
-        get {
-            return previewTextView.alpha
-        }
-        set {
-            previewTextView.alpha = newValue
-        }
-    }
-
     /// Returns the Preview's Fragment Padding
     ///
     var previewLineFragmentPadding: CGFloat {
         return previewTextView.textContainer.lineFragmentPadding
     }
 
+    /// Deinitializer
+    ///
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     /// Designated Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        startListeningToNotifications()
     }
+
 
     // MARK: - Overridden Methods
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTextView()
-        setupImageView()
-        setupSubviews()
-        setupStackView()
+        setupLayout()
         refreshStyle()
+        refreshConstraints()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         refreshStyle()
-    }
-
-    /// Returns the Preview TextView's frame in the specified view's coordinates.
-    ///
-    /// TODO: Nuke this. And forgive me for pushing it, in the first place.
-    ///
-    @objc
-    func previewFrame(in view: UIView) -> CGRect {
-        return view.convert(previewTextView.frame, from: previewTextView)
+        refreshConstraints()
     }
 
     /// Highlights the partial matches with the specified color.
     ///
     func highlightSubstrings(matching keywords: String, color: UIColor) {
-        previewTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+        previewTextView.highlightSubstrings(matching: keywords, color: color)
     }
 }
 
@@ -140,25 +169,13 @@ private extension SPNoteTableViewCell {
 
         let container = previewTextView.textContainer
         container.maximumNumberOfLines = Options.shared.numberOfPreviewLines
-        container.lineFragmentPadding = 0
+        container.lineFragmentPadding = .zero
         container.lineBreakMode = .byWordWrapping
-    }
-
-    /// Setup: ImageView
-    ///
-    func setupImageView() {
-        accessoryImageView.contentMode = .center
-    }
-
-    /// Setup: StackView
-    ///
-    func setupStackView() {
-        accessoryStackView.addArrangedSubview(accessoryImageView)
     }
 
     /// Autolayout Init
     ///
-    func setupSubviews() {
+    func setupLayout() {
         previewTextView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(previewTextView)
 
@@ -168,6 +185,26 @@ private extension SPNoteTableViewCell {
             previewTextView.topAnchor.constraint(equalTo: containerView.topAnchor),
             previewTextView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
             ])
+    }
+}
+
+
+// MARK: - Notifications
+//
+private extension SPNoteTableViewCell {
+
+    /// Wires the (related) notifications to their handlers
+    ///
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(contentSizeCatoryWasUpdated), name: UIContentSizeCategory.didChangeNotification, object: nil)
+    }
+
+    /// Handles the UIContentSizeCategory.didChange Notification
+    ///
+    @objc
+    func contentSizeCatoryWasUpdated() {
+        refreshConstraints()
     }
 }
 
@@ -197,11 +234,24 @@ private extension SPNoteTableViewCell {
         ]
     }
 
+    /// Accessory's StackView should be aligned against the PreviewTextView's first line center
+    ///
+    func refreshConstraints() {
+        let lineHeight = Style.headlineFont.lineHeight
+        let centerY = ceil(lineHeight * 0.5)
+        let dimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let cappedDimension = max(min(dimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
+
+        accessoryStackViewCenterConstraintY.constant = centerY
+        accessoryLeftImageViewHeightConstraint.constant = cappedDimension
+        accessoryRightImageViewHeightConstraint.constant = cappedDimension
+    }
+
     /// Applies the TextView Insets, based on the accessoryStack's Width
     ///
     func refreshTextViewInsets() {
-        let width = accessoryImageView.image?.size.width ?? CGFloat.zero
-        previewTextView.textContainerInset.right = width + Style.previewInsets.right
+        accessoryStackView.layoutIfNeeded()
+        previewTextView.textContainerInset.right = Style.previewInsets.right + accessoryStackView.frame.width
     }
 }
 
@@ -213,6 +263,18 @@ private enum Style {
     /// Preview's Text Insets
     ///
     static let previewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+
+    /// Accessory's Ratio (measured against Line Size)
+    ///
+    static let accessoryImageSizeRatio = CGFloat(0.75)
+
+    /// Accessory's Minimum Size
+    ///
+    static let accessoryImageMinimumSize = CGFloat(16)
+
+    /// Accessory's Maximum Size
+    ///
+    static let accessoryImageMaximumSize = CGFloat(24)
 
     /// Returns the Cell's Background Color
     ///
