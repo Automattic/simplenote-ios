@@ -616,12 +616,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     }
     
     _currentNote = note;
-    [_noteEditorTextView scrollToTop];
-    
-    // push off updating note text in order to speed up animated transition
+    [self.noteEditorTextView scrollToTop];
+
+    // Synchronously set the TextView's contents. Otherwise we risk race conditions with `highlightSearchResults`
+    self.noteEditorTextView.attributedText = [note.content attributedString];
+
+    // Push off Checklist Processing to smoothen out push animation
     dispatch_async(dispatch_get_main_queue(), ^{
-        self->_noteEditorTextView.attributedText = [note.content attributedString];
-        [self->_noteEditorTextView processChecklists];
+        [self.noteEditorTextView processChecklists];
     });
     
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
@@ -765,6 +767,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if (string.length > 0) {
         bSearching = YES;
         _searchString = string;
+        searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
 }
