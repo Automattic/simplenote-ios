@@ -279,36 +279,36 @@ private enum Style {
     /// Returns the Cell's Background Color
     ///
     static var backgroundColor: UIColor {
-        return .color(name: .backgroundColor)!
+        .color(name: .backgroundColor)!
     }
 
     /// Headline Color: To be applied over the first preview line
     ///
     static var headlineColor: UIColor {
-        return .color(name: .noteHeadlineFontColor)!
+        .color(name: .noteHeadlineFontColor)!
     }
 
     /// Headline Font: To be applied over the first preview line
     ///
     static var headlineFont: UIFont {
-        return .preferredFont(forTextStyle: .headline)
+        .preferredFont(forTextStyle: .headline)
     }
 
     /// Preview Color: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewColor: UIColor {
-        return .color(name: .noteBodyFontPreviewColor)!
+        .color(name: .noteBodyFontPreviewColor)!
     }
 
     /// Preview Font: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewFont: UIFont {
-        return .preferredFont(forTextStyle: .subheadline)
+        .preferredFont(forTextStyle: .subheadline)
     }
 
     /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
-        return .color(name: .lightBlueColor)!
+        .color(name: .lightBlueColor)!
     }
 }
