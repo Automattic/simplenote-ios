@@ -22,6 +22,7 @@
 @synthesize modificationDatePreview;
 @synthesize preview;
 @synthesize titlePreview;
+@synthesize bodyPreview;
 @synthesize tagsArray;
 @synthesize emailTagsArray;
 @dynamic content;
@@ -227,12 +228,18 @@ SEL notifySelector;
     if (aString.length > 500)
         aString = [aString substringToIndex:500];
     
-    [aString generatePreviewStrings:^(NSString *title, NSString *c) {
+    [aString generatePreviewStrings:^(NSString *title, NSString *body, NSString *c) {
         self.titlePreview = title;
+        self.bodyPreview = body;
         self.preview = c;
     }];
-    if (self.preview.length == 0)
-        self.preview = @"New note...";
+
+    if (self.preview.length == 0) {
+        NSString *placeholder = NSLocalizedString(@"New note...", @"Empty Note Placeholder");
+        self.titlePreview = placeholder;
+        self.bodyPreview = nil;
+        self.preview = placeholder;
+    }
     
     [self updateTagsArray];
     [self updateEmailTagsArray];
