@@ -489,8 +489,6 @@
     }
 
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
-    NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
-    [attributedContent addChecklistAttachmentsForColor:previewColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
@@ -500,8 +498,9 @@
     cell.accessoryLeftTintColor = previewColor;
     cell.accessoryRightTintColor = previewColor;
 
-    cell.numberOfPreviewLines = Options.shared.numberOfPreviewLines;
-    cell.previewText = attributedContent;
+    cell.rendersInCondensedMode = Options.shared.condensedNotesList;
+    cell.titleText = note.titlePreview;
+    cell.bodyText = note.bodyPreview;
 
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
