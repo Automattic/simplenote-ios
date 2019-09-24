@@ -303,7 +303,7 @@ private enum Style {
     /// Preview Font: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewFont: UIFont {
-        return .preferredFont(forTextStyle: .body)
+        return .preferredFont(forTextStyle: .subheadline)
     }
 
     /// Color to be applied over the cell upon selection
