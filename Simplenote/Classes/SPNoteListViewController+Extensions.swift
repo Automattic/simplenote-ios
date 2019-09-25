@@ -16,13 +16,12 @@ extension SPNoteListViewController {
     /// Refreshes the SearchBar Style.
     ///
     @objc
-    func styleSearchBar() {
+    func styleSearchBar(_ searchBar: UISearchBar) {
         let searchIconColor = UIColor.color(name: .simplenoteSlateGrey)
         let searchIconImage = UIImage.image(name: .searchIconImage)?.withOverlayColor(searchIconColor)
 
         searchBar.setImage(searchIconImage, for: .search, state: .normal)
         searchBar.setSearchFieldBackgroundImage(.searchBarBackgroundImage, for: .normal)
-        searchBarContainer.backgroundColor = .clear
 
         // Apply font to search field by traversing subviews
         for textField in searchBar.subviewsOfType(UITextField.self) {
