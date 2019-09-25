@@ -34,19 +34,23 @@
                         </variation>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="242" y="16" width="108" height="128"/>
+                        <rect key="frame" x="292" y="3.5" width="58" height="25"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="128"/>
+                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="HlN-8B-Xzh"/>
+                                    <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="eu6-28-b8t"/>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JkE-9h-IB9">
-                                <rect key="frame" x="58" y="0.0" width="50" height="128"/>
+                                <rect key="frame" x="33" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="2SH-bw-5qa"/>
+                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="ugA-mm-Glv"/>
+                                </constraints>
                             </imageView>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="height" priority="1" id="792-13-EEt"/>
-                            <constraint firstAttribute="width" priority="1" id="mxC-B8-cQI"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,7 +61,7 @@
                     </constraint>
                     <constraint firstItem="XmC-CY-iIl" firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="LSc-22-kIN"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="firstBaseline" secondItem="mvM-Gy-mrn" secondAttribute="firstBaseline" id="dAJ-HC-c2F"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="centerY" secondItem="mvM-Gy-mrn" secondAttribute="top" id="dAJ-HC-c2F"/>
                     <constraint firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" constant="15" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
@@ -86,6 +90,7 @@
                 <outlet property="accessoryLeftImageView" destination="TZs-9B-NXz" id="4Nc-fi-4dX"/>
                 <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="c1B-W5-oqn"/>
                 <outlet property="accessoryStackView" destination="XmC-CY-iIl" id="cXz-hX-iTI"/>
+                <outlet property="accessoryStackViewCenterConstraintY" destination="dAJ-HC-c2F" id="mHP-Zd-Xwr"/>
                 <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
             </connections>
             <point key="canvasLocation" x="136.23188405797103" y="166.40625"/>

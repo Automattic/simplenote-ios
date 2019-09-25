@@ -1,0 +1,2 @@
+- Hemos rediseñado las pantallas para comenzar y acceder a la aplicación.
+- Ahora puedes usar Peek and Pop en la pantalla de la lista de notas.

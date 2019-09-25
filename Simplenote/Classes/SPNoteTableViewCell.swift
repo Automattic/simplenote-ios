@@ -15,6 +15,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryStackView: UIStackView!
 
+    /// Accessory StackView's Top Constraint
+    ///
+    @IBOutlet private var accessoryStackViewCenterConstraintY: NSLayoutConstraint!
+
     /// Note's Left Accessory ImageView
     ///
     @IBOutlet private var accessoryLeftImageView: UIImageView!
@@ -116,11 +120,13 @@ class SPNoteTableViewCell: UITableViewCell {
         setupTextView()
         setupLayout()
         refreshStyle()
+        refreshConstraints()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         refreshStyle()
+        refreshConstraints()
     }
 
     /// Highlights the partial matches with the specified color.
@@ -190,6 +196,12 @@ private extension SPNoteTableViewCell {
                 .foregroundColor: Style.previewColor
             ]
         ]
+    }
+
+    /// Accessory's StackView should be aligned against the PreviewTextView's first line center
+    ///
+    func refreshConstraints() {
+        accessoryStackViewCenterConstraintY.constant = ceil(Style.headlineFont.lineHeight * 0.5)
     }
 
     /// Applies the TextView Insets, based on the accessoryStack's Width
