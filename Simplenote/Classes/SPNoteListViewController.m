@@ -987,7 +987,7 @@
     addButton.enabled = NO;
     emptyTrashButton.enabled = NO;
     
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
         self.searchBar.alpha = UIKitConstants.alphaMid;
     }];
     
@@ -1006,7 +1006,7 @@
     addButton.enabled = YES;
     emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
     
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
         self.searchBar.alpha = UIKitConstants.alphaFull;
     }];
     
