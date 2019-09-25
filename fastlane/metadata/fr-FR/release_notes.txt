@@ -1,6 +1,2 @@
-- Simplenote fonctionne désormais avec les raccourcis Siri vous permettant d’ouvrir l’application, d’ouvrir des notes existantes et de créer de nouvelles notes directement depuis Siri.
-- De nouvelles actions de balayage de l’écran sont disponibles dans la Liste de notes : Pin and Share!
-- La Liste de notes affiche désormais une icône montrant les notes qui ont été publiées.
-- Lors du partage sur l’application WordPress, les notes ne seront plus affichées en bloc de citation.
-- L’IU de l’extension de partage d’iOS a été complètement mise à jour.
-- Correction d’un bug qui coupait la Liste de notes lors de l’utilisation des Actions de balayage de l’écran.
+- Nous avons repensé les écrans de démarrage et de connexion à l'application.
+- Vous pouvez désormais utiliser Aperçu et Accéder à sur l'écran de liste des notes.
