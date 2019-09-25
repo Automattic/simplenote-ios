@@ -988,7 +988,7 @@
     emptyTrashButton.enabled = NO;
     
     [UIView animateWithDuration:0.1 animations:^{
-        self.searchBar.alpha = 0.5;
+        self.searchBar.alpha = UIKitConstants.alphaMid;
     }];
     
     bDisableUserInteraction = YES;
@@ -1007,7 +1007,7 @@
     emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
     
     [UIView animateWithDuration:0.1 animations:^{
-        self.searchBar.alpha = 1.0;
+        self.searchBar.alpha = UIKitConstants.alphaFull;
     }];
     
     bDisableUserInteraction = NO;
