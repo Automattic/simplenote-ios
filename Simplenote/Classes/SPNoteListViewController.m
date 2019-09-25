@@ -167,7 +167,7 @@
     [self.tableView reloadData];
 
     // Restyle the search bar
-    [self styleSearchBar];
+    [self styleSearchBar:_searchBar];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
