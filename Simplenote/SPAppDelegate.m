@@ -19,7 +19,6 @@
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
 #import "NSProcessInfo+Util.h"
-#import "UIView+ImageRepresentation.h"
 #import "SPModalActivityIndicator.h"
 #import "SPEditorTextView.h"
 #import "SPTransitionController.h"

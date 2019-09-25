@@ -26,7 +26,6 @@
 #import "SPConstants.h"
 #import "Note.h"
 
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
@@ -42,7 +41,15 @@
 #import "VSThemeManager.h"
 
 
-@interface SPNoteListViewController () <ABXPromptViewDelegate, ABXFeedbackViewControllerDelegate>
+@interface SPNoteListViewController () <ABXPromptViewDelegate,
+                                        ABXFeedbackViewControllerDelegate,
+                                        UITableViewDataSource,
+                                        UITableViewDelegate,
+                                        NSFetchedResultsControllerDelegate,
+                                        UIGestureRecognizerDelegate,
+                                        UISearchBarDelegate,
+                                        UITextFieldDelegate,
+                                        SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) SPTitleView               *searchBarContainer;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
@@ -50,17 +57,10 @@
 
 @property (nonatomic, strong) UIImage                   *panImageDelete;
 @property (nonatomic, strong) UIImage                   *panImageRestore;
-@property (nonatomic, strong) UIImage                   *pinImage;
-@property (nonatomic, strong) UIImage                   *pinSearchImage;
 
 @end
 
 @implementation SPNoteListViewController
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
@@ -161,9 +161,6 @@
 }
 
 - (void)themeDidChange {
-    // Reset the pin image so it gets reskinned
-    _pinImage = nil;
-
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
@@ -492,34 +489,19 @@
     }
 
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
-
-    cell.accessibilityLabel = note.titlePreview;
-    cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
-    cell.accessoryImage = note.published ? [[UIImage imageWithName:UIImageNameSharedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] : nil;
-    cell.accessoryTintColor = previewColor;
-    cell.numberOfPreviewLines = [[Options shared] numberOfPreviewLines];
-    cell.previewAlpha = 1.0;
-
     NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
     [attributedContent addChecklistAttachmentsForColor:previewColor];
 
-    if (note.pinned) {
-        NSAttributedString *pinnedContent = [[NSAttributedString alloc] initWithAttributedString:attributedContent];
-        if (!_pinImage) {
-            UIImage *templateImage = [[UIImage imageWithName:UIImageNamePinImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            _pinImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteHeadlineFontColor]];
-            _pinSearchImage = [templateImage imageWithOverlayColor:[UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor]];
-        }
-        
-        
-        // New note summary contains a pin image
-        UIImage *pinImage = bSearching ? _pinSearchImage : _pinImage;
-        pinnedContent = [pinnedContent attributedStringWithLeadingImage:pinImage
-                                                             lineHeight:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].capHeight];
-        cell.previewText = pinnedContent;
-    } else {
-        cell.previewText = attributedContent;
-    }
+    cell.accessibilityLabel = note.titlePreview;
+    cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
+
+    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameSharedImage] : nil;
+    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePinImage] : nil;
+    cell.accessoryLeftTintColor = previewColor;
+    cell.accessoryRightTintColor = previewColor;
+
+    cell.numberOfPreviewLines = Options.shared.numberOfPreviewLines;
+    cell.previewText = attributedContent;
 
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];

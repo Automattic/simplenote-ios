@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape" layout="splitview2_3" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="99" id="r12-sA-Uh4" customClass="SPNoteTableViewCell" customModule="Simplenote" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="87" id="r12-sA-Uh4" customClass="SPNoteTableViewCell" customModule="Simplenote" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r12-sA-Uh4" id="D1J-20-bJ0">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="98.666666666666671"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvM-Gy-mrn">
-                        <rect key="frame" x="15" y="13" width="384" height="85.666666666666671"/>
+                        <rect key="frame" x="64" y="16" width="286" height="71"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="999" constant="640" id="xfJ-6r-TnJ"/>
@@ -35,28 +33,40 @@
                             </mask>
                         </variation>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
-                        <rect key="frame" x="399" y="13" width="0.0" height="0.0"/>
-                        <constraints>
-                            <constraint firstAttribute="height" priority="1" id="792-13-EEt"/>
-                            <constraint firstAttribute="width" priority="1" id="mxC-B8-cQI"/>
-                        </constraints>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XmC-CY-iIl">
+                        <rect key="frame" x="292" y="3.5" width="58" height="25"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TZs-9B-NXz">
+                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="HlN-8B-Xzh"/>
+                                    <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="eu6-28-b8t"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JkE-9h-IB9">
+                                <rect key="frame" x="33" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="25" placeholder="YES" id="2SH-bw-5qa"/>
+                                    <constraint firstAttribute="height" priority="750" constant="25" placeholder="YES" id="ugA-mm-Glv"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="Bpw-0D-EaB" userLabel="ContainerView &gt;= Trailing"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mvM-Gy-mrn" secondAttribute="trailing" constant="64" id="Bpw-0D-EaB" userLabel="ContainerView &gt;= Trailing"/>
                     <constraint firstAttribute="bottom" secondItem="mvM-Gy-mrn" secondAttribute="bottom" id="E2B-ei-Wh0" userLabel="ContainerView Bottom">
                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="XmC-CY-iIl" firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" id="LSc-22-kIN"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="Nmc-iO-oVe" userLabel="ContainerView CenterX"/>
-                    <constraint firstItem="XmC-CY-iIl" firstAttribute="firstBaseline" secondItem="mvM-Gy-mrn" secondAttribute="firstBaseline" id="dAJ-HC-c2F"/>
+                    <constraint firstItem="XmC-CY-iIl" firstAttribute="centerY" secondItem="mvM-Gy-mrn" secondAttribute="top" id="dAJ-HC-c2F"/>
                     <constraint firstAttribute="trailing" secondItem="mvM-Gy-mrn" secondAttribute="trailing" constant="15" id="jTZ-gL-Aap" userLabel="ContainerView = Trailing"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="p13-Xe-Asr" userLabel="ContainerView Top">
                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                     </constraint>
-                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leadingMargin" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
+                    <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="64" id="xI2-yh-0d0" userLabel="ContainerView &gt;= Leading"/>
                     <constraint firstItem="mvM-Gy-mrn" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="15" id="zc8-Cv-txf" userLabel="ContainerView = Leading"/>
                 </constraints>
                 <variation key="default">
@@ -77,10 +87,13 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="accessoryLeftImageView" destination="TZs-9B-NXz" id="4Nc-fi-4dX"/>
+                <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="c1B-W5-oqn"/>
                 <outlet property="accessoryStackView" destination="XmC-CY-iIl" id="cXz-hX-iTI"/>
+                <outlet property="accessoryStackViewCenterConstraintY" destination="dAJ-HC-c2F" id="mHP-Zd-Xwr"/>
                 <outlet property="containerView" destination="mvM-Gy-mrn" id="CBb-Db-ZD1"/>
             </connections>
-            <point key="canvasLocation" x="137.61467889908258" y="170.80078125"/>
+            <point key="canvasLocation" x="136.23188405797103" y="166.40625"/>
         </tableViewCell>
     </objects>
 </document>

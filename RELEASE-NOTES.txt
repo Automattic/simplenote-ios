@@ -1,5 +1,6 @@
 4.11.0
 ======
+-   Notes List refreshed to display Pinned state on the right hand side.
 
 4.10.0
 ======

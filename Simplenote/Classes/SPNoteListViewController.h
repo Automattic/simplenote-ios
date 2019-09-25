@@ -12,7 +12,7 @@
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
-@class Note, SPEmptyListView;
+@class SPEmptyListView;
 
 typedef enum {
 	SPTagFilterTypeUserTag = 0,
@@ -22,7 +22,7 @@ typedef enum {
     SPTagFilterTypeUnread = 4
 } SPTagFilterType;
 
-@interface SPNoteListViewController : SPSidebarContainerViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate, UITextFieldDelegate, SPTransitionControllerDelegate> {
+@interface SPNoteListViewController : SPSidebarContainerViewController {
      
     // Navigation Bar
     UIBarButtonItem *addButton;
