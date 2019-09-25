@@ -43,7 +43,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryLeftImageView.image = newValue
-            accessoryLeftImageView.isHidden = newValue == nil
+            refreshAccessoriesVisibility()
         }
     }
 
@@ -66,7 +66,7 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryRightImageView.image = newValue
-            accessoryRightImageView.isHidden = newValue == nil
+            refreshAccessoriesVisibility()
         }
     }
 
@@ -251,6 +251,17 @@ private extension SPNoteTableViewCell {
 
         accessoryLeftImageViewHeightConstraint.constant = cappedDimension
         accessoryRightImageViewHeightConstraint.constant = cappedDimension
+    }
+
+    /// Refreshes Accessory ImageView(s) and StackView(s) visibility, as needed
+    ///
+    func refreshAccessoriesVisibility() {
+        let isLeftImageEmpty = accessoryLeftImageView.image == nil
+        let isRightImageEmpty = accessoryRightImageView.image == nil
+
+        accessoryLeftImageView.isHidden = isLeftImageEmpty
+        accessoryRightImageView.isHidden = isRightImageEmpty
+        accessoryStackView.isHidden = isLeftImageEmpty && isRightImageEmpty
     }
 
     /// Returns a NSAttributedString instance representing a given String, with the specified Font and Color. We'll also process Checklists!
