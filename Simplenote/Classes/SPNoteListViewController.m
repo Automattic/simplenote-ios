@@ -50,6 +50,7 @@
                                         UITextFieldDelegate,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) UISearchBar               *searchBar;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
