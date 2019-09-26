@@ -251,31 +251,22 @@
     }
         
     if (!_searchBar) {
-        // titleView was changed to use autolayout in iOS 11
-        if (@available(iOS 11.0, *)) {
-            _searchBar = [[UISearchBar alloc] init];
-            _searchBarContainer = [[SPTitleView alloc] init];
-            _searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
-        } else {
-            CGFloat searchBarHeight = 44.0;
-            _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
-                                                                       0,
-                                                                       self.view.frame.size.width,
-                                                                       searchBarHeight)];
-            _searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
-            _searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        }
-        _searchBarContainer.clipsToBounds = NO;
-        _searchBar.center = _searchBarContainer.center;
-        
-        _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchController.hidesNavigationBarDuringPresentation = NO;
+        _searchController.obscuresBackgroundDuringPresentation = NO;
+
+        self.searchBar = _searchController.searchBar;
+        _searchBar.placeholder = NSLocalizedString(@"Search", @"Search UI Placeholder");
         _searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
-        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-
-        [self styleSearchBar];
-
+        _searchBar.searchBarStyle = UISearchBarStyleProminent;
         _searchBar.delegate = self;
-        [_searchBarContainer addSubview:_searchBar];
+        [self styleSearchBar:_searchBar];
+
+        if (@available(iOS 11.0, *)) {
+            self.navigationItem.searchController = _searchController;
+            self.navigationItem.hidesSearchBarWhenScrolling = NO;
+        } else {
+        }
     }
     
     if (bSearching) {
