@@ -228,10 +228,10 @@ SEL notifySelector;
     if (aString.length > 500)
         aString = [aString substringToIndex:500];
     
-    [aString generatePreviewStrings:^(NSString *title, NSString *body, NSString *c) {
+    [aString generatePreviewStrings:^(NSString *title, NSString *body, NSString *content) {
         self.titlePreview = title;
         self.bodyPreview = body;
-        self.preview = c;
+        self.preview = content;
     }];
 
     if (self.preview.length == 0) {
