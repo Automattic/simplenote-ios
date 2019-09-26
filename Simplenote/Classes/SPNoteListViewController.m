@@ -301,14 +301,6 @@
         [self.navigationItem setRightBarButtonItem:addButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
     }
-    
-    self.navigationItem.titleView = _searchBarContainer;
-    self.navigationItem.titleView.hidden = NO;
-    
-    // Title must be set to an empty string because we're using a custom titleView,
-    // and otherwise we get odd navigation bar behaviour when pushing view controllers
-    // onto the navigation controller after the notes editor.
-    self.navigationItem.title = @"";
 }
 
 
