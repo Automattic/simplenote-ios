@@ -221,10 +221,8 @@
     CGFloat topTextViewPadding = verticalPadding;
 
     CGFloat numberLines = [[Options shared] numberOfPreviewLines];
-    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{
-        NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]
-    }].height;
-    
+    CGFloat lineHeight = [[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline] lineHeight];
+
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
     
     [self.tableView reloadData];
