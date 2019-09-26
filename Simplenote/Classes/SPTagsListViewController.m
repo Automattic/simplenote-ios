@@ -29,7 +29,6 @@
 #define kActionSheetRenameIndex 1
 #define kActionSheetCancelIndex 2
 
-static NSString * const SPTagTrashKey = @"trash";
 static CGFloat const SPSettingsButtonHeight = 40;
 static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
 static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
@@ -232,7 +231,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 -(void)trashTap:(UIButton *)sender
 {
     [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:SPTagTrashKey];
+    [self openNoteListForTagName:kSimplenoteTagTrashKey];
 }
 
 -(void)settingsTap:(UIButton *)sender
