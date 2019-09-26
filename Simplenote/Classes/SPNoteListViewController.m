@@ -177,7 +177,6 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
-#if IS_XCODE_11
     if (@available(iOS 13.0, *)) {
         if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
             return;
@@ -185,7 +184,6 @@
 
         [self themeDidChange];
     }
-#endif
 }
 
  - (void)updateRowHeight {

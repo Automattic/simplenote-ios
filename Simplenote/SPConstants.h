@@ -14,13 +14,6 @@
 #pragma mark Constants
 #pragma mark ================================================================================
 
-#define IS_XCODE_11 (SDK_VERSION_MAJOR >= SDK_VERSION_IOS13)
-
-
-#pragma mark ================================================================================
-#pragma mark Constants
-#pragma mark ================================================================================
-
 extern NSString *const kSimperiumBaseURL;
 extern NSString *const kSimperiumForgotPasswordURL;
 extern NSString *const kSimperiumTermsOfServiceURL;

@@ -67,6 +67,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         let editorViewController = SPAppDelegate.shared().noteEditorViewController
         editorViewController.update(note)
         editorViewController.isPreviewing = true
+        editorViewController.searchString = searchText
 
         return editorViewController
     }
