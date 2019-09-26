@@ -745,7 +745,8 @@
 - (void)update {
     
     [self updateFetchPredicate];
-    
+    [self refreshTitle];
+
     if (tagFilterType == SPTagFilterTypeDeleted) {
 		[emptyTrashButton setEnabled: [self numNotes] > 0];
     }
@@ -764,12 +765,10 @@
         [appDelegate.selectedTag compare:@"trash"] == NSOrderedSame) {
         
         tagFilterType = SPTagFilterTypeDeleted;
-        _searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
     }
     else {
         
         tagFilterType = SPTagFilterTypeUserTag;
-        _searchBar.placeholder = appDelegate.selectedTag;
     }
     
     NSPredicate *predicate = [self fetchPredicate];

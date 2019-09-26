@@ -30,6 +30,20 @@ extension SPNoteListViewController {
             textField.keyboardAppearance = SPUserInterface.isDark ? .dark : .default
         }
     }
+
+    /// Refreshes the ListViewController's Title
+    ///
+    @objc
+    func refreshTitle() {
+        let selectedTag = SPAppDelegate.shared().selectedTag ?? NSLocalizedString("All Notes", comment: "Title: No filters applied")
+
+        switch selectedTag {
+        case kSimplenoteTagTrashKey:
+            title = NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
+        default:
+            title = selectedTag
+        }
+    }
 }
 
 
