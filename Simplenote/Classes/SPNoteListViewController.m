@@ -50,6 +50,9 @@
                                         UITextFieldDelegate,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) UISearchBar               *searchBar;
+@property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
+
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -1008,6 +1011,7 @@
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
+
 
 #pragma mark - Index progress
 

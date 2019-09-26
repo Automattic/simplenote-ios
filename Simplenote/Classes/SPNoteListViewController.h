@@ -31,9 +31,7 @@ typedef enum {
     UIBarButtonItem *iPadCancelButton;
 
     UIBarButtonItem *emptyTrashButton;
-        
-    UIActivityIndicatorView *activityIndicator;
-    
+            
     NSTimer *searchTimer;
     
     // Bools
