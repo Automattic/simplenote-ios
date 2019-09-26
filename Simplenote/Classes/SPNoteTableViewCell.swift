@@ -269,7 +269,8 @@ private extension SPNoteTableViewCell {
     func attributedText(from string: String, font: UIFont, color: UIColor) -> NSAttributedString {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
-            .foregroundColor: color
+            .foregroundColor: color,
+            .paragraphStyle: Style.paragraphStyle
         ])
 
         output.addChecklistAttachments(for: color)
@@ -301,6 +302,14 @@ private enum Style {
     /// Body's Maximum Lines
     ///
     static let maximumNumberOfBodyLines = 2
+
+    /// TextView's paragraphStyle
+    ///
+    static let paragraphStyle: NSParagraphStyle = {
+        let style = NSMutableParagraphStyle()
+        style.lineBreakMode = .byTruncatingTail
+        return style
+    }()
 
     /// Returns the Cell's Background Color
     ///
