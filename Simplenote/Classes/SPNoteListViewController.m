@@ -1018,23 +1018,24 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (tagFilterType == SPTagFilterTypeDeleted && waiting)
+    if (tagFilterType == SPTagFilterTypeDeleted && waiting) {
         return;
+    }
     
-    if (waiting && self.navigationItem.titleView != activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+    if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
-        if (!activityIndicator)
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        if (!_activityIndicator) {
+            _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        }
         
-        [activityIndicator startAnimating];
+        [_activityIndicator startAnimating];
         bResetTitleView = NO;
-        [self animateTitleViewSwapWithNewView:activityIndicator
-                                   completion:nil];
+        [self animateTitleViewSwapWithNewView:_activityIndicator completion:nil];
         
-    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !bTitleViewAnimating) {
-        
+    } else if (!waiting && self.navigationItem.titleView != nil && !bTitleViewAnimating) {
+
         [self resetTitleView];
-        
+
     } else if (!waiting) {
         bResetTitleView = YES;
     }
@@ -1047,40 +1048,38 @@
 - (void)animateTitleViewSwapWithNewView:(UIView *)newView completion:(void (^)())completion {
     
     bTitleViewAnimating = YES;
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.navigationItem.titleView.alpha = 0.0;
-                     } completion:^(BOOL finished) {
-                         
-                         self.navigationItem.titleView = newView;
-                         
-                         [UIView animateWithDuration:0.25
-                                          animations:^{
-                                              self.navigationItem.titleView.alpha = 1.0;
-                                          } completion:^(BOOL finished) {
-                                              
-                                              if (completion)
-                                                  completion();
-                                              
-                                              self->bTitleViewAnimating = NO;
-                                              
-                                              if (self->bResetTitleView)
-                                                  [self resetTitleView];
-                                              
-                                          }];
-                     }];
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        self.navigationItem.titleView.alpha = UIKitConstants.alphaZero;
+
+    } completion:^(BOOL finished) {
+        self.navigationItem.titleView = newView;
+
+        [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+            self.navigationItem.titleView.alpha = UIKitConstants.alphaFull;
+
+        } completion:^(BOOL finished) {
+            if (completion) {
+                completion();
+            }
+
+            self->bTitleViewAnimating = NO;
+
+            if (self->bResetTitleView) {
+                [self resetTitleView];
+            }
+         }];
+     }];
     
 }
 
 - (void)resetTitleView {
-    
-    [self animateTitleViewSwapWithNewView:_searchBarContainer
-                               completion:^{
-                                   self->bResetTitleView = NO;
-                                   [self->activityIndicator stopAnimating];
-                               }];
-    
+
+    [self animateTitleViewSwapWithNewView:nil completion:^{
+        self->bResetTitleView = NO;
+        [self.activityIndicator stopAnimating];
+    }];
 }
+
 
 #pragma mark - VoiceOver
 
