@@ -42,6 +42,7 @@ NSInteger const kOnePasswordGeneratedMaxLength      = 50;
 NSString *const kFirstLaunchKey                     = @"SPFirstLaunch";
 NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
+NSString *const kSimplenoteTagTrashKey              = @"trash";
 NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
