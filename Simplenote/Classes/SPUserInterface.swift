@@ -16,11 +16,9 @@ class SPUserInterface: NSObject {
     ///
     @objc
     static var isDark: Bool {
-#if IS_XCODE_11
         if #available(iOS 13.0, *) {
             return UITraitCollection.current.userInterfaceStyle == .dark
         }
-#endif
 
         return VSThemeManager.shared().theme().bool(forKey: kSimplenoteDarkThemeName)
     }
@@ -72,10 +70,8 @@ private extension SPUserInterface {
     
     @available (iOS 13, *)
     func refreshUserInterfaceStyleIOS13() {
-#if IS_XCODE_11
         let window = SPAppDelegate.shared().window
         window.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
-#endif
     }
 }
 

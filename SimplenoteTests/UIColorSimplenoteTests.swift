@@ -17,7 +17,6 @@ class UIColorSimplenoteTests: XCTestCase {
     /// Verify every single UIColorName in existance yields a valid UIColor instancce
     ///
     func testUIColorInstancesObtainedViaUIColorNameResolveToLightAndDarkModeEffectiveColors() {
-#if IS_XCODE_11
         guard #available(iOS 13, *) else {
             return
         }
@@ -35,6 +34,5 @@ class UIColorSimplenoteTests: XCTestCase {
             let darkColor = unresolvedColor?.resolvedColor(with: darkTraits)
             XCTAssertNotNil(darkColor)
         }
-#endif
     }
 }
