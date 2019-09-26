@@ -756,7 +756,7 @@
 {
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     if (appDelegate.selectedTag != nil &&
-        [appDelegate.selectedTag compare:@"trash"] == NSOrderedSame) {
+        [appDelegate.selectedTag compare:kSimplenoteTagTrashKey] == NSOrderedSame) {
         
         tagFilterType = SPTagFilterTypeDeleted;
         _searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
@@ -781,7 +781,6 @@
     
     [self.tableView reloadData];
 }
-
 
 - (NSPredicate *)fetchPredicate {
     
