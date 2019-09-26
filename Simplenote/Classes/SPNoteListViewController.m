@@ -219,8 +219,8 @@
     CGFloat topTextViewPadding = verticalPadding;
 
     CGFloat numberLines = [[Options shared] numberOfPreviewLines];
-    CGFloat lineHeight = [@"Tommy" sizeWithAttributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]}].height;
-    
+    CGFloat lineHeight = [[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline] lineHeight];
+
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
     
     [self.tableView reloadData];
@@ -487,8 +487,6 @@
     }
 
     UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
-    NSMutableAttributedString *attributedContent = [[NSMutableAttributedString alloc] initWithString:note.preview];
-    [attributedContent addChecklistAttachmentsForColor:previewColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
@@ -498,8 +496,9 @@
     cell.accessoryLeftTintColor = previewColor;
     cell.accessoryRightTintColor = previewColor;
 
-    cell.numberOfPreviewLines = Options.shared.numberOfPreviewLines;
-    cell.previewText = attributedContent;
+    cell.rendersInCondensedMode = Options.shared.condensedNotesList;
+    cell.titleText = note.titlePreview;
+    cell.bodyText = note.bodyPreview;
 
     if (bSearching) {
         UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];

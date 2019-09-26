@@ -38,8 +38,6 @@
 		<string>8</string>
 		<key>noteVerticalPadding</key>
 		<integer>5</integer>
-		<key>noteVerticalPadding~ipad</key>
-		<string>8</string>
 		<key>noteMaxWidth~ipad</key>
 		<integer>640</integer>
 		<key>noteListRowHeight</key>
