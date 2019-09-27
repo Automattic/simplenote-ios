@@ -16,13 +16,6 @@ typedef enum {
 } SPTagFilterType;
 
 @interface SPNoteListViewController : SPSidebarContainerViewController {
-     
-    // Navigation Bar
-    UIBarButtonItem *addButton;
-    UIBarButtonItem *sidebarButton;
-    UIBarButtonItem *iPadCancelButton;
-
-    UIBarButtonItem *emptyTrashButton;
             
     NSTimer *searchTimer;
     
