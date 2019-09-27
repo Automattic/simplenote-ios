@@ -98,6 +98,9 @@
     return self;
 }
 
+
+#pragma mark - View Lifecycle
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -111,24 +114,6 @@
     if (![SPAppDelegate sharedDelegate].simperium.user) {
         [self setWaitingForIndex:YES];
     }
-}
-
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
-}
-
-- (void)themeDidChange {
-    // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-
-    // Refresh the Table's UI
-    [self.tableView applyTheme];
-    [self.tableView reloadData];
-
-    // Restyle the search bar
-    [self styleSearchBar];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -146,7 +131,7 @@
 
 - (void)updateRowHeight {
         
-    CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
+    CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
 
     CGFloat numberLines = [[Options shared] numberOfPreviewLines];
@@ -195,6 +180,18 @@
 - (void)sortOrderPreferenceWasUpdated:(id)sender {
 
     [self update];
+}
+
+- (void)themeDidChange {
+    // Refresh the containerView's backgroundColor
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+
+    // Refresh the Table's UI
+    [self.tableView applyTheme];
+    [self.tableView reloadData];
+
+    // Restyle the search bar
+    [self styleSearchBar];
 }
 
 - (void)updateNavigationBar {
@@ -334,6 +331,7 @@
     [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
+
 #pragma mark - SearchBar Delegate methods
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)s {
@@ -373,12 +371,11 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)s {
-    
     [self cancelSearchButtonAction:self.searchBar];
 }
 
-- (void)performSearch
-{
+- (void)performSearch {
+
     if (!self.searchText) {
         return;
     }
