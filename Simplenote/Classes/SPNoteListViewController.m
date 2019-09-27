@@ -79,8 +79,7 @@
         [self updateRowHeight];
         [self configureNavigationButtons];
         [self configureSearchController];
-        [self updateNavigationBar];
-        
+
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _panImageRestore = [[UIImage imageNamed:@"icon_cell_pan_restore"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
@@ -197,10 +196,7 @@
 
 - (void)updateNavigationBar {
 
-    if (bSearching) {
-        [self.navigationItem setRightBarButtonItem:nil animated:YES];
-        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    } else if (tagFilterType == SPTagFilterTypeDeleted) {
+    if (tagFilterType == SPTagFilterTypeDeleted) {
         [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
     } else {
@@ -311,7 +307,6 @@
     
     bSearching = YES;
     
-    [self updateNavigationBar];
     [self.searchBar setShowsCancelButton:YES animated:YES];
     
     [self.tableView reloadData];
