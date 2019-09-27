@@ -44,7 +44,6 @@
 
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
 @property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem           *iPadCancelButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
 
 @property (nonatomic, strong) UISearchController        *searchController;
@@ -213,17 +212,17 @@
 - (void)updateNavigationBar {
 
     if (bSearching) {
-        // Add a Cancel button to the toolbar, only needed for iPads
-        if ([UIDevice isPad]) {
-            [self.navigationItem setRightBarButtonItem:_iPadCancelButton animated:YES];
-        } else {
-           [self.navigationItem setRightBarButtonItem:nil animated:YES];
-        }
-        
+        [self.navigationItem setRightBarButtonItem:nil animated:YES];
         [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     } else if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.navigationItem setRightBarButtonItem:emptyTrashButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
+        [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
+        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
+    } else {
+        [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
+        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
+    }
+}
+
 
 - (void)configureNavigationButtons {
 
@@ -256,16 +255,6 @@
     _emptyTrashButton.isAccessibilityElement = YES;
     _emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
-
-    /// Button: Cancel Search (iPad)
-    ///
-    self.iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(cancelSearchButtonAction:)];
-    _iPadCancelButton.isAccessibilityElement = YES;
-    _iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
-    _iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
 }
 
 - (void)configureSearchController {
