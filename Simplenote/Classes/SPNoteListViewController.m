@@ -69,7 +69,7 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         self.tableView.alwaysBounceVertical = YES;
         [self.rootView addSubview:_tableView];
 
