@@ -75,43 +75,7 @@
 
         [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
 
-        // Dynamic Fonts!
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(contentSizeWasUpdated:)
-                                                     name:UIContentSizeCategoryDidChangeNotification
-                                                   object:nil];
-
-        // Condensed Notes
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(condensedPreferenceWasUpdated:)
-                                                     name:SPCondensedNoteListPreferenceChangedNotification
-                                                   object:nil];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(sortOrderPreferenceWasUpdated:)
-                                                     name:SPNotesListSortModeChangedNotification
-                                                   object:nil];
-
-        // Voiceover status is tracked because the custom animated transition is not used when enabled
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveVoiceoverNotification:)
-                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
-                                                   object:nil];
-        
-        // Register for keyboard notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardWillShowNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
-        // Themes
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(themeDidChange)
-                                                     name:VSThemeManagerThemeDidChangeNotification
-                                                   object:nil];
+        [self startListeningToNotifications];
         [self updateRowHeight];
         [self configureNavigationButtons];
         [self updateNavigationBar];
@@ -180,7 +144,7 @@
     }
 }
 
- - (void)updateRowHeight {
+- (void)updateRowHeight {
         
     CGFloat verticalPadding = [self.theme floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
@@ -191,6 +155,31 @@
     self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
     
     [self.tableView reloadData];
+}
+
+
+#pragma mark - Notifications
+
+- (void)startListeningToNotifications {
+
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+
+    // Dynamic Fonts!
+    [nc addObserver:self selector:@selector(contentSizeWasUpdated:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+
+    // Condensed Notes
+    [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
+
+    // Voiceover status is tracked because the custom animated transition is not used when enabled
+    [nc addObserver:self selector:@selector(didReceiveVoiceoverNotification:) name:UIAccessibilityVoiceOverStatusDidChangeNotification object:nil];
+
+    // Register for keyboard notifications
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    // Themes
+    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
 - (void)condensedPreferenceWasUpdated:(id)sender {
