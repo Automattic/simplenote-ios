@@ -114,6 +114,7 @@
                                                      name:VSThemeManagerThemeDidChangeNotification
                                                    object:nil];
         [self updateRowHeight];
+        [self configureNavigationButtons];
         [self updateNavigationBar];
         
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -209,38 +210,6 @@
 }
 
 - (void)updateNavigationBar {
-    
-    if (!addButton) {
-        addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
-                     imageAlignment:UIBarButtonImageAlignmentRight
-                                                 target:self
-                                               selector:@selector(addButtonAction:)];
-        addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
-        addButton.accessibilityHint =NSLocalizedString(@"Create a new note", nil);
-    }
-    
-    
-    if (!sidebarButton) {
-        sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
-                                              imageAlignment:UIBarButtonImageAlignmentLeft
-                                                 target:self
-                                               selector:@selector(sidebarButtonAction:)];
-        sidebarButton.isAccessibilityElement = YES;
-        sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
-        sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
-    }
-    
-    if (!emptyTrashButton) {
-        emptyTrashButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Empty", @"Verb - empty causes all notes to be removed permenently from the trash")
-                                                            style:UIBarButtonItemStylePlain
-                                                           target:self
-                                                           action:@selector(emptyAction:)];
-        emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
-        emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
-        
-        UIOffset titleOffset = [UIDevice isPad] ? UIOffsetMake(7, 0) : UIOffsetZero;
-        [emptyTrashButton setTitlePositionAdjustment:titleOffset forBarMetrics:UIBarMetricsDefault];
-    }
         
     if (!_searchBar) {
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -264,14 +233,7 @@
     if (bSearching) {
         // Add a Cancel button to the toolbar, only needed for iPads
         if ([UIDevice isPad]) {
-            if (!iPadCancelButton) {
-                iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
-                                                 style:UIBarButtonItemStylePlain
-                                                target:self
-                                                action:@selector(cancelSearchButtonAction:)];
-            }
-            
-            [self.navigationItem setRightBarButtonItem:iPadCancelButton animated:YES];
+            [self.navigationItem setRightBarButtonItem:_iPadCancelButton animated:YES];
         } else {
            [self.navigationItem setRightBarButtonItem:nil animated:YES];
         }
@@ -280,6 +242,52 @@
     } else if (tagFilterType == SPTagFilterTypeDeleted) {
         [self.navigationItem setRightBarButtonItem:emptyTrashButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
+
+- (void)configureNavigationButtons {
+
+    /// Button: New Note
+    ///
+    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
+                                          imageAlignment:UIBarButtonImageAlignmentRight
+                                                  target:self
+                                                selector:@selector(addButtonAction:)];
+    _addButton.isAccessibilityElement = YES;
+    _addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
+    _addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
+
+    /// Button: Display Tags
+    ///
+    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
+                                                                  imageAlignment:UIBarButtonImageAlignmentLeft
+                                                                          target:self
+                                                                        selector:@selector(sidebarButtonAction:)];
+    _sidebarButton.isAccessibilityElement = YES;
+    _sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
+    _sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
+
+    /// Button: Empty Trash
+    ///
+    self.emptyTrashButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Empty", @"Verb - empty causes all notes to be removed permenently from the trash")
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(emptyAction:)];
+    _emptyTrashButton.isAccessibilityElement = YES;
+    _emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
+    _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+
+    UIOffset titleOffset = [UIDevice isPad] ? UIOffsetMake(7, 0) : UIOffsetZero;
+    [self.emptyTrashButton setTitlePositionAdjustment:titleOffset forBarMetrics:UIBarMetricsDefault];
+
+    /// Button: Cancel Search (iPad)
+    ///
+    self.iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(cancelSearchButtonAction:)];
+    _iPadCancelButton.isAccessibilityElement = YES;
+    _iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
+    _iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
+}
     } else {
         [self.navigationItem setRightBarButtonItem:addButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
@@ -634,7 +642,7 @@
 {
     [SPTracker trackListTrashEmptied];
 	[[SPObjectManager sharedManager] emptyTrash];
-	[emptyTrashButton setEnabled:NO];
+	[self.emptyTrashButton setEnabled:NO];
     [self updateViewIfEmpty];
 }
 
@@ -723,7 +731,7 @@
     [self refreshTitle];
 
     if (tagFilterType == SPTagFilterTypeDeleted) {
-		[emptyTrashButton setEnabled: [self numNotes] > 0];
+		[self.emptyTrashButton setEnabled: [self numNotes] > 0];
     }
     
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
@@ -957,9 +965,9 @@
     self.tableView.allowsSelection = NO;
     [self.tableView setBorderVisibile:YES];
     
-    addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-    addButton.enabled = NO;
-    emptyTrashButton.enabled = NO;
+    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+    self.addButton.enabled = NO;
+    self.emptyTrashButton.enabled = NO;
     
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
         self.searchBar.alpha = UIKitConstants.alphaMid;
@@ -976,9 +984,9 @@
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
     [self.tableView setBorderVisibile:NO];
     
-    addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
-    addButton.enabled = YES;
-    emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
+    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
+    self.addButton.enabled = YES;
+    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
     
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
         self.searchBar.alpha = UIKitConstants.alphaFull;
