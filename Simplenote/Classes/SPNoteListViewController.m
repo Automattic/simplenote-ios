@@ -24,12 +24,12 @@
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
 #import "UIImage+Colorization.h"
+#import "VSThemeManager.h"
 
 #import <Simperium/Simperium.h>
-@import WordPress_AppbotX;
 #import "Simplenote-Swift.h"
 
-#import "VSThemeManager.h"
+@import WordPress_AppbotX;
 
 
 @interface SPNoteListViewController () <ABXPromptViewDelegate,
@@ -41,6 +41,11 @@
                                         UISearchBarDelegate,
                                         UITextFieldDelegate,
                                         SPTransitionControllerDelegate>
+
+@property (nonatomic, strong) UIBarButtonItem           *addButton;
+@property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
+@property (nonatomic, strong) UIBarButtonItem           *iPadCancelButton;
+@property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
 
 @property (nonatomic, strong) UISearchController        *searchController;
 @property (nonatomic, strong) UISearchBar               *searchBar;
