@@ -260,7 +260,7 @@
 - (void)configureSearchController {
 
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    _searchController.hidesNavigationBarDuringPresentation = NO;
+    _searchController.hidesNavigationBarDuringPresentation = YES;
     _searchController.obscuresBackgroundDuringPresentation = NO;
 
     self.searchBar = _searchController.searchBar;
