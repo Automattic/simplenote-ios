@@ -1,11 +1,3 @@
-//
-//  SPNoteListViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPNoteListViewController.h"
 #import "SPOptionsViewController.h"
 #import "SPNavigationController.h"
