@@ -304,8 +304,14 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         finalEditorPosition.origin.x = 0;
         finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
         if (@available(iOS 11.0, *)) {
-            finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
+            // Note:
+            // Happy people would tamper into `editorController.noteEditorTextView.safeAreaInsets.top`.
+            // However, that's not possible to us. Why? because the safeAreaInsets, the very first time this code runs,
+            // will not be set.
+            // So... it's time for us to access the navigationBar's frame directly./
+            finalEditorPosition.origin.y += CGRectGetMaxY(editorController.navigationController.navigationBar.frame);
         }
+
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {
