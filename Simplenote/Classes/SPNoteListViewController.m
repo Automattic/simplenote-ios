@@ -70,11 +70,11 @@
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.alwaysBounceVertical = YES;
         [self.rootView addSubview:_tableView];
 
         [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-        self.tableView.alwaysBounceVertical = YES;
 
         // Dynamic Fonts!
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -113,10 +113,7 @@
                                                  selector:@selector(themeDidChange)
                                                      name:VSThemeManagerThemeDidChangeNotification
                                                    object:nil];
-
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self updateRowHeight];
-        
         [self updateNavigationBar];
         
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
