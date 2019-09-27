@@ -907,6 +907,7 @@
         [self updateViewIfEmpty];
 }
 
+
 #pragma mark - SPRootViewContainerDelegate
 
 - (BOOL)shouldShowSidebar {
@@ -942,6 +943,13 @@
     [(SPNavigationController *)self.navigationController setDisableRotation:YES];
 }
 
+- (void)sidebarWillHide {
+
+    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
+        self.searchBar.alpha = UIKitConstants.alphaFull;
+    }];
+}
+
 - (void)sidebarDidHide {
     
     self.tableView.scrollEnabled = YES;
@@ -951,11 +959,7 @@
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
     self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
-    
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
-    }];
-    
+
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
