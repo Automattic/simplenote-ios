@@ -257,9 +257,6 @@
     _emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
 
-    UIOffset titleOffset = [UIDevice isPad] ? UIOffsetMake(7, 0) : UIOffsetZero;
-    [self.emptyTrashButton setTitlePositionAdjustment:titleOffset forBarMetrics:UIBarMetricsDefault];
-
     /// Button: Cancel Search (iPad)
     ///
     self.iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
