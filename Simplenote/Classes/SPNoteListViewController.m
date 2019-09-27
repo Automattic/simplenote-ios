@@ -115,6 +115,7 @@
                                                    object:nil];
         [self updateRowHeight];
         [self configureNavigationButtons];
+        [self configureSearchController];
         [self updateNavigationBar];
         
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -210,26 +211,7 @@
 }
 
 - (void)updateNavigationBar {
-        
-    if (!_searchBar) {
-        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-        _searchController.hidesNavigationBarDuringPresentation = NO;
-        _searchController.obscuresBackgroundDuringPresentation = NO;
 
-        self.searchBar = _searchController.searchBar;
-        _searchBar.placeholder = NSLocalizedString(@"Search", @"Search UI Placeholder");
-        _searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
-        _searchBar.searchBarStyle = UISearchBarStyleProminent;
-        _searchBar.delegate = self;
-        [self styleSearchBar:_searchBar];
-
-        if (@available(iOS 11.0, *)) {
-            self.navigationItem.searchController = _searchController;
-            self.navigationItem.hidesSearchBarWhenScrolling = NO;
-        } else {
-        }
-    }
-    
     if (bSearching) {
         // Add a Cancel button to the toolbar, only needed for iPads
         if ([UIDevice isPad]) {
@@ -288,9 +270,25 @@
     _iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
     _iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
 }
+
+- (void)configureSearchController {
+
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    _searchController.hidesNavigationBarDuringPresentation = NO;
+    _searchController.obscuresBackgroundDuringPresentation = NO;
+
+    self.searchBar = _searchController.searchBar;
+    _searchBar.placeholder = NSLocalizedString(@"Search", @"Search UI Placeholder");
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.delegate = self;
+    [self styleSearchBar:_searchBar];
+
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.searchController = _searchController;
+        self.navigationItem.hidesSearchBarWhenScrolling = NO;
     } else {
-        [self.navigationItem setRightBarButtonItem:addButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
+// TODO: FIXME
+//            _tableView.tableHeaderView = _searchBar;
     }
 }
 
