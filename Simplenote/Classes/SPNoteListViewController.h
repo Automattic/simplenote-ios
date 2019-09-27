@@ -16,9 +16,9 @@ typedef enum {
 } SPTagFilterType;
 
 @interface SPNoteListViewController : SPSidebarContainerViewController {
-            
+
     NSTimer *searchTimer;
-    
+
     // Bools
     BOOL bSearching;
     BOOL bDisableUserInteraction;
@@ -27,7 +27,7 @@ typedef enum {
     BOOL bResetTitleView;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
-        
+
     SPTagFilterType tagFilterType;
 }
 
