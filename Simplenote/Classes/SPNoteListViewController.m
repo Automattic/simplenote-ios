@@ -191,7 +191,7 @@
     [self.tableView reloadData];
 
     // Restyle the search bar
-    [self styleSearchBar];
+    [self.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
@@ -218,7 +218,7 @@
         _searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
         _searchBar.searchBarStyle = UISearchBarStyleMinimal;
 
-        [self styleSearchBar];
+        [_searchBar applySimplenoteStyle];
 
         _searchBar.delegate = self;
         [_searchBarContainer addSubview:_searchBar];
