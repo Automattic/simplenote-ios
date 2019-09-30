@@ -304,11 +304,9 @@
     
     self.searchBar.text = @"";
     self.searchText = nil;
-    [self.searchBar resignFirstResponder];
-    
+    self.searchController.active = NO;
+
     [self update];
-    
-    [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 
@@ -316,13 +314,12 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)s {
     
-    if (bDisableUserInteraction || bListViewIsEmpty)
+    if (bDisableUserInteraction || bListViewIsEmpty) {
         return NO;
-    
+    }
+
     bSearching = YES;
-    
-    [self.searchBar setShowsCancelButton:YES animated:YES];
-    
+
     [self.tableView reloadData];
     
     return bSearching;
