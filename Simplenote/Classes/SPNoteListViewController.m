@@ -98,7 +98,7 @@
         // Voiceover status is tracked because the custom animated transition is not used when enabled
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceoverNotification:)
-                                                     name:UIAccessibilityVoiceOverStatusChanged
+                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
         
         // Register for keyboard notifications
@@ -752,9 +752,9 @@
             [_emptyListView setText:NSLocalizedString(@"No Results", @"Message shown when no notes match a search string")];
         else
             [_emptyListView setText:NSLocalizedString(@"No Notes", @"Message shown in note list when no notes are in the current view")];
-        
+
         CGRect _emptyListViewRect = self.view.bounds;
-        _emptyListViewRect.origin.y += [self.topLayoutGuide length];
+        _emptyListViewRect.origin.y += self.view.safeAreaInsets.top;
         _emptyListViewRect.size.height -= _emptyListViewRect.origin.y + _keyboardHeight;
         _emptyListView.frame = _emptyListViewRect;
         
@@ -1150,13 +1150,13 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     
     _keyboardHeight = 0;
-    
+
     UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom = [[self bottomLayoutGuide] length];
+    tableviewInsets.bottom = self.view.safeAreaInsets.bottom;
     self.tableView.contentInset = tableviewInsets;
     
     UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom = [[self bottomLayoutGuide] length];;
+    scrollInsets.bottom = self.view.safeAreaInsets.bottom;
     self.tableView.scrollIndicatorInsets = tableviewInsets;
 }
 

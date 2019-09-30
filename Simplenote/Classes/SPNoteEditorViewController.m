@@ -127,7 +127,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         bVoiceoverEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceOverNotification:)
-                                                     name:UIAccessibilityVoiceOverStatusChanged
+                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
     }
     
