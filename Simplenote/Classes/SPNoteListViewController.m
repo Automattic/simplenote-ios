@@ -101,14 +101,17 @@
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self.searchBar removeBottomSeparatorOnIOS12AndBelow];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
     [super viewWillDisappear:animated];
     
     if (![SPAppDelegate sharedDelegate].simperium.user) {
