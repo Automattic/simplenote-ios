@@ -38,16 +38,15 @@
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UIGestureRecognizerDelegate,
-                                        UISearchBarDelegate,
                                         UITextFieldDelegate,
+                                        SPSearchControllerDelegate,
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
 @property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
 
-@property (nonatomic, strong) UISearchController        *searchController;
-@property (nonatomic, strong) UISearchBar               *searchBar;
+@property (nonatomic, strong) SPSearchController        *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
@@ -92,11 +91,13 @@
 #pragma mark - View Lifecycle
 
 - (void)viewDidAppear:(BOOL)animated {
+
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+
     [super viewWillDisappear:animated];
     
     if (![SPAppDelegate sharedDelegate].simperium.user) {
@@ -104,8 +105,8 @@
     }
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+
     [super traitCollectionDidChange:previousTraitCollection];
 
     if (@available(iOS 13.0, *)) {
@@ -118,7 +119,7 @@
 }
 
 - (void)updateRowHeight {
-        
+
     CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
 
@@ -172,14 +173,16 @@
 
 - (void)themeDidChange {
     // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = backgroundColor;
+    self.searchController.backgroundColor = [backgroundColor colorWithAlphaComponent:0.9];
 
     // Refresh the Table's UI
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
     // Restyle the search bar
-    [self.searchBar applySimplenoteStyle];
+//    [self.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
@@ -248,24 +251,9 @@
 }
 
 - (void)configureSearchController {
-
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    _searchController.hidesNavigationBarDuringPresentation = YES;
-    _searchController.obscuresBackgroundDuringPresentation = NO;
-
-    self.searchBar = _searchController.searchBar;
-    _searchBar.placeholder = NSLocalizedString(@"Search", @"Search UI Placeholder");
-    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    _searchBar.delegate = self;
-    [self.searchBar applySimplenoteStyle];
-
-    // Ref. https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
-    if (@available(iOS 11.0, *)) {
-        self.navigationItem.searchController = _searchController;
-        self.navigationItem.hidesSearchBarWhenScrolling = NO;
-    } else {
-        _tableView.tableHeaderView = _searchBar;
-    }
+    self.searchController = [SPSearchController new];
+    _searchController.delegate = self;
+    [_searchController attachTo:self.view];
 }
 
 
@@ -288,26 +276,23 @@
     [self toggleSidePanel:nil];
 }
 
-- (void)cancelSearchButtonAction:(id)sender {
-    
-    [self endSearching];
-}
-
 - (void)endSearching {
     
     bSearching = NO;
-    
-    self.searchBar.text = @"";
+
     self.searchText = nil;
-    self.searchController.active = NO;
+    [self.searchController reset];
+
+// TODO
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
     [self update];
 }
 
 
-#pragma mark - SearchBar Delegate methods
+#pragma mark - SearchController Delegate methods
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)s {
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
     
     if (bDisableUserInteraction || bListViewIsEmpty) {
         return NO;
@@ -315,14 +300,17 @@
 
     bSearching = YES;
 
+// TODO:
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
     [self.tableView reloadData];
     
     return bSearching;
 }
 
-- (void)searchBar:(UISearchBar *)s textDidChange:(NSString *)searchText {
+- (void)searchController:(SPSearchController *)controller didChange:(NSString *)keyword {
  
-    self.searchText = s.text;
+    self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
     if (searchTimer) {
@@ -337,12 +325,8 @@
     
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)s {
-    [self.searchBar endEditing:YES];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)s {
-    [self cancelSearchButtonAction:self.searchBar];
+- (void)searchControllerDidEndSearch:(SPSearchController *)controller {
+    [self endSearching];
 }
 
 - (void)performSearch {
@@ -941,7 +925,7 @@
     self.emptyTrashButton.enabled = NO;
     
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaMid;
+        self.searchController.searchBar.alpha = UIKitConstants.alphaMid;
     }];
     
     bDisableUserInteraction = YES;
@@ -952,7 +936,7 @@
 - (void)sidebarWillHide {
 
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
+        self.searchController.searchBar.alpha = UIKitConstants.alphaFull;
     }];
 }
 
