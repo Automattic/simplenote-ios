@@ -91,11 +91,6 @@
 
 #pragma mark - View Lifecycle
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    [self.searchBar removeBottomSeparatorOnIOS12AndBelow];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
