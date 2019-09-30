@@ -1077,13 +1077,6 @@
 
 - (void)showRatingViewIfNeeded {
 
-    if (@available(iOS 11, *)) {
-        // NO-OP
-    } else {
-        // We're disabling Ratings in iOS 10. Temporary measure, deprecating iOS 10 soon!
-        return;
-    }
-
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
         return;
     }
@@ -1110,13 +1103,6 @@
 }
 
 - (void)hideRatingViewIfNeeded {
-
-    if (@available(iOS 11, *)) {
-        // NO-OP
-    } else {
-        // We're disabling Ratings in iOS 10. Temporary measure, deprecating iOS 10 soon!
-        return;
-    }
 
     if (self.tableView.tableHeaderView == nil || [[SPRatingsHelper sharedInstance] shouldPromptForAppReview] == YES) {
         return;
