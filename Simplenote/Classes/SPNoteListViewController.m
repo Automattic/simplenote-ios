@@ -194,7 +194,7 @@
     [self.tableView reloadData];
 
     // Restyle the search bar
-    [self styleSearchBar:_searchBar];
+    [self.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
@@ -251,7 +251,7 @@
     _searchBar.placeholder = NSLocalizedString(@"Search", @"Search UI Placeholder");
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _searchBar.delegate = self;
-    [self styleSearchBar:_searchBar];
+    [self.searchBar applySimplenoteStyle];
 
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = _searchController;

@@ -13,28 +13,6 @@ extension SPNoteListViewController {
         registerForPreviewing(with: self, sourceView: tableView)
     }
 
-    /// Refreshes the SearchBar Style.
-    ///
-    @objc
-    func styleSearchBar(_ searchBar: UISearchBar) {
-        let backgroundImage = UIImage()
-        let backgroundColor = UIColor.color(name: .backgroundColor)?.withAlphaComponent(Constants.searchBarBackgroundAlpha)
-        let searchIconColor = UIColor.color(name: .simplenoteSlateGrey)
-        let searchIconImage = UIImage.image(name: .searchIconImage)?.withOverlayColor(searchIconColor)
-
-        searchBar.backgroundColor = backgroundColor
-        searchBar.setImage(searchIconImage, for: .search, state: .normal)
-        searchBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
-        searchBar.setSearchFieldBackgroundImage(.searchBarBackgroundImage, for: .normal)
-
-        // Apply font to search field by traversing subviews
-        for textField in searchBar.subviewsOfType(UITextField.self) {
-            textField.font = .preferredFont(forTextStyle: .body)
-            textField.textColor = .color(name: .textColor)
-            textField.keyboardAppearance = SPUserInterface.isDark ? .dark : .default
-        }
-    }
-
     /// Refreshes the ListViewController's Title
     ///
     @objc
@@ -84,14 +62,4 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         editorViewController.isPreviewing = false
         navigationController?.pushViewController(editorViewController, animated: true)
     }
-}
-
-
-// MARK: - Constants
-//
-private enum Constants {
-
-    /// SearchBar's Background Alpha, so that it matches with the navigationBar!
-    ///
-    static let searchBarBackgroundAlpha = CGFloat(0.9)
 }
