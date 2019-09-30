@@ -264,6 +264,7 @@
     _searchBar.delegate = self;
     [self.searchBar applySimplenoteStyle];
 
+    // Ref. https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
     if (@available(iOS 11.0, *)) {
         self.navigationItem.searchController = _searchController;
         self.navigationItem.hidesSearchBarWhenScrolling = NO;
