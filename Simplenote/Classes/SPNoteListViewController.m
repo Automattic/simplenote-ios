@@ -63,22 +63,12 @@
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
-        
-        self.tableView = [[SPBorderedTableView alloc] init];
-        self.tableView.frame = self.rootView.bounds;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableView.alwaysBounceVertical = YES;
-        [self.rootView addSubview:_tableView];
-
-        [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-
-        [self startListeningToNotifications];
-        [self updateRowHeight];
+        [self configureTableView];
+        [self configureRootView];
         [self configureNavigationButtons];
         [self configureSearchController];
+        [self updateRowHeight];
+        [self startListeningToNotifications];
 
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _panImageRestore = [[UIImage imageNamed:@"icon_cell_pan_restore"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -206,6 +196,25 @@
         [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
     }
+}
+
+
+#pragma mark - Interface Initialization
+
+- (void)configureTableView {
+    self.tableView = [[SPBorderedTableView alloc] init];
+    _tableView.frame = self.rootView.bounds;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.tableFooterView = [UIView new];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _tableView.alwaysBounceVertical = YES;
+    [_tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
+}
+
+- (void)configureRootView {
+    [self.rootView addSubview:_tableView];
 }
 
 - (void)configureNavigationButtons {
