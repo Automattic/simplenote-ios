@@ -202,6 +202,7 @@
 #pragma mark - Interface Initialization
 
 - (void)configureTableView {
+
     self.tableView = [[SPBorderedTableView alloc] init];
     _tableView.frame = self.rootView.bounds;
     _tableView.delegate = self;
@@ -214,6 +215,7 @@
 }
 
 - (void)configureRootView {
+
     [self.rootView addSubview:_tableView];
 }
 
@@ -266,8 +268,7 @@
         self.navigationItem.searchController = _searchController;
         self.navigationItem.hidesSearchBarWhenScrolling = NO;
     } else {
-// TODO: FIXME
-//            _tableView.tableHeaderView = _searchBar;
+        _tableView.tableHeaderView = _searchBar;
     }
 }
 
@@ -1097,8 +1098,15 @@
 
 #pragma mark - Ratings View Helpers
 
-- (void)showRatingViewIfNeeded
-{
+- (void)showRatingViewIfNeeded {
+
+    if (@available(iOS 11, *)) {
+        // NO-OP
+    } else {
+        // We're disabling Ratings in iOS 10. Temporary measure, deprecating iOS 10 soon!
+        return;
+    }
+
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
         return;
     }
@@ -1124,8 +1132,15 @@
                      completion:nil];
 }
 
-- (void)hideRatingViewIfNeeded
-{
+- (void)hideRatingViewIfNeeded {
+
+    if (@available(iOS 11, *)) {
+        // NO-OP
+    } else {
+        // We're disabling Ratings in iOS 10. Temporary measure, deprecating iOS 10 soon!
+        return;
+    }
+
     if (self.tableView.tableHeaderView == nil || [[SPRatingsHelper sharedInstance] shouldPromptForAppReview] == YES) {
         return;
     }
