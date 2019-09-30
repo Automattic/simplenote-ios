@@ -27,10 +27,6 @@ class SPSearchController: NSObject {
 
     ///
     ///
-    private var topConstraint: NSLayoutConstraint?
-
-    ///
-    ///
     var backgroundColor: UIColor? {
         get {
             containerView.backgroundColor
@@ -61,15 +57,12 @@ class SPSearchController: NSObject {
 
         let sourceMarginsGuide = containerView.layoutMarginsGuide
         let targetMarginsGuide = view.layoutMarginsGuide
-        let topConstraint = containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
 
         NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             sourceMarginsGuide.leadingAnchor.constraint(equalTo: targetMarginsGuide.leadingAnchor),
             sourceMarginsGuide.trailingAnchor.constraint(equalTo: targetMarginsGuide.trailingAnchor),
-            topConstraint
         ])
-
-        self.topConstraint = topConstraint
     }
 
     ///
