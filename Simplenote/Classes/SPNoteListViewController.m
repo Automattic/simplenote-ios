@@ -62,10 +62,10 @@
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
-        [self configureTableView];
-        [self configureRootView];
         [self configureNavigationButtons];
+        [self configureTableView];
         [self configureSearchController];
+        [self configureRootView];
 
         [self updateRowHeight];
         [self startListeningToNotifications];
@@ -198,25 +198,10 @@
 
 #pragma mark - Interface Initialization
 
-- (void)configureTableView {
-
-    self.tableView = [[SPBorderedTableView alloc] init];
-    _tableView.frame = self.rootView.bounds;
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _tableView.tableFooterView = [UIView new];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _tableView.alwaysBounceVertical = YES;
-    [_tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-}
-
-- (void)configureRootView {
-
-    [self.rootView addSubview:_tableView];
-}
-
 - (void)configureNavigationButtons {
+    NSAssert(_addButton == nil, @"_addButton is already initialized!");
+    NSAssert(_sidebarButton == nil, @"_sidebarButton is already initialized!");
+    NSAssert(_emptyTrashButton == nil, @"_emptyTrashButton is already initialized!");
 
     /// Button: New Note
     ///
@@ -249,12 +234,36 @@
     _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
 }
 
+- (void)configureTableView {
+    NSAssert(_tableView == nil, @"_tableView is already initialized!");
+
+    self.tableView = [[SPBorderedTableView alloc] init];
+    _tableView.frame = self.rootView.bounds;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.tableFooterView = [UIView new];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _tableView.alwaysBounceVertical = YES;
+    [_tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
+}
+
 - (void)configureSearchController {
+    NSAssert(_searchController == nil, @"_searchController is already initialized!");
+
     self.searchController = [SPSearchController new];
     _searchController.delegate = self;
     [_searchController.searchBar applySimplenoteStyle];
-    [_searchController attachSearchBarTo:self.view];
 }
+
+- (void)configureRootView {
+    NSAssert(_tableView, @"_tableView must be initialized before this method is executed");
+    NSAssert(_searchController, @"_searchController must be initialized before this method is executed");
+
+    [self.rootView addSubview:_tableView];
+    [_searchController attachSearchBarTo:self.rootView];
+}
+
 
 
 #pragma mark - BarButtonActions
