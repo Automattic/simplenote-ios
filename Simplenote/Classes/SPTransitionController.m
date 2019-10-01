@@ -167,9 +167,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        padding += self.tableView.safeAreaInsets.left;
-    }
+    padding += self.tableView.safeAreaInsets.left;
     
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     
@@ -300,18 +298,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                       preview:NO];
         
 
-        CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
+        UITextView *editorTextView = editorController.noteEditorTextView;
+        CGRect finalEditorPosition = editorTextView.frame;
         finalEditorPosition.origin.x = 0;
-        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
-        if (@available(iOS 11.0, *)) {
-            // Note:
-            // Happy people would tamper into `editorController.noteEditorTextView.safeAreaInsets.top`.
-            // However, that's not possible to us. Why? because the safeAreaInsets, the very first time this code runs,
-            // will not be set.
-            // So... it's time for us to access the navigationBar's frame directly./
-            finalEditorPosition.origin.y += CGRectGetMaxY(editorController.navigationController.navigationBar.frame);
-        }
 
+        // We must tamper into the navigationBar frame directly, rather than safeAreaInsets.top.
+        // Why? because the safeAreaInsets, the very first time this code runs, will not be set.
+        //
+        finalEditorPosition.origin.y += editorTextView.contentInset.top
+                                            + editorTextView.textContainerInset.top
+                                            + CGRectGetMaxY(editorController.navigationController.navigationBar.frame);
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {

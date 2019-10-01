@@ -188,14 +188,11 @@ static CGFloat sidePanelWidth;
 }
 
 - (void)applySidePanelContentInsets {
-    
-    // set contentInsets based on rootViewController
-    UIEdgeInsets contentInset = UIEdgeInsetsMake([[self topLayoutGuide] length],
-                                                 0,
-                                                 [[self bottomLayoutGuide] length],
-                                                 0);
-    [sidePanelViewDelegate containerViewController:self
-                             didChangeContentInset:contentInset];
+
+    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
+    UIEdgeInsets contentInset = UIEdgeInsetsMake(safeInsets.top, 0, safeInsets.bottom, 0);
+
+    [sidePanelViewDelegate containerViewController:self didChangeContentInset:contentInset];
 }
 
 - (void)toggleSidePanel:(void (^)())completion {

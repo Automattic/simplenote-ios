@@ -2,6 +2,7 @@
 ======
 -   Search Bar style refresh!
 -   Notes List refreshed to display Pinned state on the right hand side.
+-   iOS 10 Is now the minimum supported OS.
 
 4.10.0
 ======

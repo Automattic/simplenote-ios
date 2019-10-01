@@ -41,10 +41,10 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 - (void)setupViews {
     
     // setup views
-    CGFloat yOrigin = [self.topLayoutGuide length];
+    CGFloat yOrigin = self.view.safeAreaInsets.top;
     
     entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                    [self.topLayoutGuide length],
+                                                                    yOrigin,
                                                                     self.view.frame.size.width,
                                                                     [self.theme floatForKey:@"collaboratorCellHeight"])];
     entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
