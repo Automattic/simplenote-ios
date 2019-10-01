@@ -7,7 +7,7 @@ import UIKit
 @objc
 protocol SPSearchControllerDelegate: NSObjectProtocol {
     func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
-    func searchController(_ controller: SPSearchController, didChange keyword: String)
+    func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
     func searchControllerDidEndSearch(_ controller: SPSearchController)
 }
 
@@ -19,24 +19,9 @@ class SPSearchController: NSObject {
 
     ///
     ///
-    private(set) lazy var searchBar = UISearchBar()
+    let searchBar = UISearchBar()
 
-    ///
-    ///
-    private(set) lazy var containerView = UIView()
-
-    ///
-    ///
-    var backgroundColor: UIColor? {
-        get {
-            containerView.backgroundColor
-        }
-        set {
-            containerView.backgroundColor = newValue
-        }
-    }
-
-    ///
+    /// SearchController's Delegate
     ///
     weak var delegate: SPSearchControllerDelegate?
 
@@ -45,21 +30,19 @@ class SPSearchController: NSObject {
     override init() {
         super.init()
         setupSearchBar()
-        setupContainerView()
-        setupAutolayout()
     }
 
-    /// Attaches the SearchBar + Background in the specified view's hierarchy
+    /// Attaches the SearchBar to a given target view
     ///
-    func attach(to view: UIView) {
-        view.addSubview(containerView)
-        view.bringSubviewToFront(containerView)
+    func attachSearchBar(to view: UIView) {
+        view.addSubview(searchBar)
+        view.bringSubviewToFront(searchBar)
 
-        let sourceMarginsGuide = containerView.layoutMarginsGuide
+        let sourceMarginsGuide = searchBar.layoutMarginsGuide
         let targetMarginsGuide = view.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             sourceMarginsGuide.leadingAnchor.constraint(equalTo: targetMarginsGuide.leadingAnchor),
             sourceMarginsGuide.trailingAnchor.constraint(equalTo: targetMarginsGuide.trailingAnchor),
         ])
@@ -75,31 +58,16 @@ class SPSearchController: NSObject {
 }
 
 
-// MARK: -
+// MARK: - Private Methods
 //
 private extension SPSearchController {
 
     func setupSearchBar() {
+        searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
         searchBar.searchBarStyle = .minimal
-        searchBar.delegate = self
-        searchBar.sizeToFit()
-    }
-
-    func setupContainerView() {
-        containerView.addSubview(searchBar)
-    }
-
-    func setupAutolayout() {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            containerView.heightAnchor.constraint(equalToConstant: searchBar.frame.size.height),
-            searchBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            searchBar.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-        ])
+        searchBar.sizeToFit()
     }
 }
 

@@ -180,7 +180,7 @@
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
-    // Restyle the search bar
+    // Refresh the SearchBar's UI
     [self.searchController.searchBar applySimplenoteStyle];
 }
 
@@ -252,7 +252,8 @@
 - (void)configureSearchController {
     self.searchController = [SPSearchController new];
     _searchController.delegate = self;
-    [_searchController attachTo:self.view];
+    [_searchController.searchBar applySimplenoteStyle];
+    [_searchController attachSearchBarTo:self.view];
 }
 
 
@@ -301,13 +302,12 @@
 
 // TODO:
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
     [self.tableView reloadData];
     
     return bSearching;
 }
 
-- (void)searchController:(SPSearchController *)controller didChange:(NSString *)keyword {
+- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword {
  
     self.searchText = keyword;
     
