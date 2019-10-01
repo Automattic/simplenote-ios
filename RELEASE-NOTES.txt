@@ -3,6 +3,7 @@
 -   Search Bar style refresh!
 -   Notes List refreshed to display Pinned state on the right hand side.
 -   iOS 10 Is now the minimum supported OS.
+-   Notes List's Search Bar is now looking better than ever!
 
 4.10.0
 ======
