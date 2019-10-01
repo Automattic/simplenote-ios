@@ -90,17 +90,13 @@ private extension SPOnboardingViewController {
 
         simplenoteLabel.text = OnboardingStrings.brandText
         simplenoteLabel.textColor = simplenoteAlmostBlack
+        simplenoteLabel.adjustsFontSizeToFitWidth = true
+        simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
 
         headerLabel.text = OnboardingStrings.headerText
         headerLabel.textColor = simplenoteAlmostBlack
-
-        if #available(iOS 11, *) {
-            simplenoteLabel.adjustsFontSizeToFitWidth = true
-            simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
-
-            headerLabel.adjustsFontSizeToFitWidth = true
-            headerLabel.font = .preferredFont(forTextStyle: .title3)
-        }
+        headerLabel.adjustsFontSizeToFitWidth = true
+        headerLabel.font = .preferredFont(forTextStyle: .title3)
     }
 }
 

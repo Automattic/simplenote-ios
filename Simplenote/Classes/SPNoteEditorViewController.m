@@ -231,11 +231,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)adjustFrameForSafeInsets
 {
-    if (@available(iOS 11.0, *)) {
-        CGRect viewFrame = _noteEditorTextView.frame;
-        viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
-        _noteEditorTextView.frame = viewFrame;
-    }
+    CGRect viewFrame = _noteEditorTextView.frame;
+    viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
+    _noteEditorTextView.frame = viewFrame;
 }
 
 - (void)startListeningToNotifications {
@@ -440,9 +438,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [navigationButtonContainer addSubview:keyboardButton];
     [navigationButtonContainer addSubview:newButton];
     [navigationButtonContainer addSubview:actionButton];
-    if (@available(iOS 11.0, *)) {
-        [navigationButtonContainer addSubview:checklistButton];
-    }
+    [navigationButtonContainer addSubview:checklistButton];
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
@@ -852,10 +848,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     void (^animations)() = ^void() {
         CGRect newFrame            = self->_noteEditorTextView.frame;
         newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - visibleHeight;
-        if (@available(iOS 11.0, *)) {
-            if (!isEditing) {
-                newFrame.size.height -= self.view.safeAreaInsets.bottom;
-            }
+        if (!isEditing) {
+            newFrame.size.height -= self.view.safeAreaInsets.bottom;
         }
         self->_noteEditorTextView.frame  = newFrame;
         

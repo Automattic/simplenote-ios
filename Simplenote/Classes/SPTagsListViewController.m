@@ -90,9 +90,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
