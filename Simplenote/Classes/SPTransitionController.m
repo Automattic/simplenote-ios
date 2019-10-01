@@ -472,8 +472,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         for (UIView *v in dirtySnapshot.subviews) {
             v.contentMode = UIViewContentModeTop;
         }
-        
-        
+
+        // Snapshot: SearchBar
+        SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:searchBarSnapshot];
+
+        // Snapshot: Tableview Rows
         for (NSIndexPath *path in visiblePaths) {
 
             SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
@@ -500,13 +504,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 dirtySnapshot.contentMode = UIViewContentModeTop;
                 dirtySnapshot.clipsToBounds = YES;
                 
-                NSDictionary *animationProperties = @{SPAnimationDurationName: @0.45,
-                                                      SPAnimationDelayName: @0.0,
-                                                      SPAnimationSpringDampingName: @1.0,
-                                                      SPAnimationInitialVeloctyName: @7.0,
-                                                      SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                      };
-                
+                NSDictionary *animationProperties = [self backNoteRowAnimationProperties];
                 NSDictionary *cleanSnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @0.0,
                                                                                            SPAnimationFinalValueName: @1.0},
                                                               SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
@@ -646,7 +644,44 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     [self decrementUseCount];
 }
 
-#pragma mark Interactive Transition
+
+#pragma mark - Snapshots Generation
+
+- (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
+    UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
+    CGRect startingFrame = listController.searchBar.frame;
+    CGRect finalFrame = listController.searchBar.frame;
+
+    NSDictionary *cleanSnapshotAnimatedValues = @{
+        SPAnimationAlphaValueName: @{
+                SPAnimationInitialValueName: @0.0,
+                SPAnimationFinalValueName: @1.0
+        },
+        SPAnimationFrameValueName : @{
+            SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
+            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
+        }
+    };
+
+
+
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
+                                           animatedValues:cleanSnapshotAnimatedValues
+                                      animationProperties:self.backNoteRowAnimationProperties
+                                                superView:containerView];
+}
+
+- (NSDictionary *)backNoteRowAnimationProperties {
+    return @{
+        SPAnimationDurationName: @0.45,
+        SPAnimationDelayName: @0.0,
+        SPAnimationSpringDampingName: @1.0,
+        SPAnimationInitialVeloctyName: @7.0,
+        SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
+    };
+}
+
+#pragma mark - Interactive Transition
 
 - (void)endInteractionWithSuccess:(BOOL)success {
     
