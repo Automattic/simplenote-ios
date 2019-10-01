@@ -2,6 +2,36 @@ import Foundation
 import UIKit
 
 
+// MARK: - Interface Initialization
+//
+extension SPNoteListViewController {
+
+    /// Sets up the Root ViewController
+    ///
+    @objc
+    func configureRootView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+
+        rootView.addSubview(tableView)
+        rootView.addSubview(searchBar)
+
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.layoutMarginsGuide.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            searchBar.layoutMarginsGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: rootView.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor),
+        ])
+    }
+}
+
+
 // MARK: - Internal Methods
 //
 extension SPNoteListViewController {

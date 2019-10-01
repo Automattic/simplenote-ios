@@ -6,6 +6,7 @@
 
 @class SPEmptyListView;
 @class SPTitleView;
+@class SPSearchController;
 
 typedef enum {
 	SPTagFilterTypeUserTag = 0,
@@ -35,6 +36,7 @@ typedef enum {
 @property (nonatomic, strong) NSString                              *searchText;
 @property (nonatomic) BOOL                                          firstLaunch;
 
+@property (nonatomic, strong, readonly) UISearchBar                 *searchBar;
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
 @property (nonatomic, strong) SPBorderedTableView                   *tableView;
 

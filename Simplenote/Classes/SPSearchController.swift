@@ -32,22 +32,6 @@ class SPSearchController: NSObject {
         setupSearchBar()
     }
 
-    /// Attaches the SearchBar to a given target view
-    ///
-    func attachSearchBar(to view: UIView) {
-        view.addSubview(searchBar)
-        view.bringSubviewToFront(searchBar)
-
-        let sourceMarginsGuide = searchBar.layoutMarginsGuide
-        let targetMarginsGuide = view.layoutMarginsGuide
-
-        NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            sourceMarginsGuide.leadingAnchor.constraint(equalTo: targetMarginsGuide.leadingAnchor),
-            sourceMarginsGuide.trailingAnchor.constraint(equalTo: targetMarginsGuide.trailingAnchor),
-        ])
-    }
-
     ///
     ///
     func reset() {
@@ -66,7 +50,6 @@ private extension SPSearchController {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
         searchBar.searchBarStyle = .minimal
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.sizeToFit()
     }
 }

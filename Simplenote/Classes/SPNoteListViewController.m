@@ -133,6 +133,12 @@
 }
 
 
+#pragma mark - Dynamic Properties
+
+- (UISearchBar *)searchBar {
+    return _searchController.searchBar;
+}
+
 #pragma mark - Notifications
 
 - (void)startListeningToNotifications {
@@ -181,7 +187,7 @@
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI
-    [self.searchController.searchBar applySimplenoteStyle];
+    [self.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
@@ -255,15 +261,6 @@
     _searchController.delegate = self;
     [_searchController.searchBar applySimplenoteStyle];
 }
-
-- (void)configureRootView {
-    NSAssert(_tableView, @"_tableView must be initialized before this method is executed");
-    NSAssert(_searchController, @"_searchController must be initialized before this method is executed");
-
-    [self.rootView addSubview:_tableView];
-    [_searchController attachSearchBarTo:self.rootView];
-}
-
 
 
 #pragma mark - BarButtonActions
@@ -609,8 +606,6 @@
 }
 
 
-
-
 #pragma mark - NSFetchedResultsController
 
 - (NSArray *)sortDescriptors
@@ -933,7 +928,7 @@
     self.emptyTrashButton.enabled = NO;
     
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchController.searchBar.alpha = UIKitConstants.alphaMid;
+        self.searchBar.alpha = UIKitConstants.alphaMid;
     }];
     
     bDisableUserInteraction = YES;
@@ -944,7 +939,7 @@
 - (void)sidebarWillHide {
 
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchController.searchBar.alpha = UIKitConstants.alphaFull;
+        self.searchBar.alpha = UIKitConstants.alphaFull;
     }];
 }
 
