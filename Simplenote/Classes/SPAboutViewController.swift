@@ -36,9 +36,9 @@ private extension SPAboutViewController {
 
     func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControl.State.normal)
-        doneButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        doneButton.setTitleColor(lightBlue, for: UIControl.State.highlighted)
+        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: .normal)
+        doneButton.setTitleColor(UIColor.white, for: .normal)
+        doneButton.setTitleColor(lightBlue, for: .highlighted)
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
         doneButton.contentHorizontalAlignment = .right
 
