@@ -85,7 +85,7 @@ extension SPSearchController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        delegate?.searchController(self, didChange: searchText)
+        delegate?.searchController(self, updateSearchResults: searchText)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
