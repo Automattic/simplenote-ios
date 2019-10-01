@@ -50,6 +50,7 @@ class SPSearchController: NSObject {
     func dismiss() {
         searchBar.text = nil
         searchBar.resignFirstResponder()
+        updateSearchBar(showsCancelButton: false)
     }
 }
 
