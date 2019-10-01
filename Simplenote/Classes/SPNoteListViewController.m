@@ -40,6 +40,7 @@
                                         UIGestureRecognizerDelegate,
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
+                                        SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
@@ -264,6 +265,7 @@
 
     self.searchController = [SPSearchController new];
     _searchController.delegate = self;
+    _searchController.presenter = self;
     [_searchController.searchBar applySimplenoteStyle];
 }
 
@@ -297,8 +299,6 @@
     }
 
     bSearching = YES;
-
-    [self updateNavigationBarVisibility:YES];
     [self.tableView reloadData];
     
     return bSearching;
@@ -323,6 +323,10 @@
 
 - (void)searchControllerDidEndSearch:(SPSearchController *)controller {
     [self endSearching];
+}
+
+- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller {
+    return self.navigationController;
 }
 
 - (void)performSearch {
@@ -350,17 +354,9 @@
     bSearching = NO;
 
     self.searchText = nil;
-    [self.searchController reset];
-    [self updateNavigationBarVisibility:NO];
+    [self.searchController dismiss];
 
     [self update];
-}
-
-- (void)updateNavigationBarVisibility:(BOOL)hidden {
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        [self.navigationController setNavigationBarHidden:hidden animated:YES];
-        [self.view layoutIfNeeded];
-    }];
 }
 
 
