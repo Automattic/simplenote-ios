@@ -287,19 +287,6 @@
     [self toggleSidePanel:nil];
 }
 
-- (void)endSearching {
-    
-    bSearching = NO;
-
-    self.searchText = nil;
-    [self.searchController reset];
-
-// TODO
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-    [self update];
-}
-
 
 #pragma mark - SearchController Delegate methods
 
@@ -311,8 +298,7 @@
 
     bSearching = YES;
 
-// TODO:
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self updateNavigationBarVisibility:YES];
     [self.tableView reloadData];
     
     return bSearching;
@@ -359,6 +345,23 @@
     searchTimer = nil;
 }
 
+- (void)endSearching {
+
+    bSearching = NO;
+
+    self.searchText = nil;
+    [self.searchController reset];
+    [self updateNavigationBarVisibility:NO];
+
+    [self update];
+}
+
+- (void)updateNavigationBarVisibility:(BOOL)hidden {
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        [self.navigationController setNavigationBarHidden:hidden animated:YES];
+        [self.view layoutIfNeeded];
+    }];
+}
 
 
 #pragma mark - UITableView Data Source

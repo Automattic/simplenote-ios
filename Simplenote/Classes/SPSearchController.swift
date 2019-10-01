@@ -83,8 +83,3 @@ extension SPSearchController: UISearchBarDelegate {
         delegate?.searchControllerDidEndSearch(self)
     }
 }
-
-// TODO
-//    UIEdgeInsets insets = self.tableView.contentInset;
-//    insets.top += _searchBar.frame.size.height;
-//    self.tableView.contentInset = insets;
