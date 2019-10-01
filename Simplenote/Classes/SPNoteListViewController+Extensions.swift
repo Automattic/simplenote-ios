@@ -29,6 +29,14 @@ extension SPNoteListViewController {
             tableView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor),
         ])
     }
+
+    /// Adjust the TableView's Insets, so that the content falls below the searchBar
+    ///
+    @objc
+    func refreshTableViewInsets() {
+        tableView.contentInset.top = searchBar.frame.height
+        tableView.scrollIndicatorInsets.top = searchBar.frame.height
+    }
 }
 
 
