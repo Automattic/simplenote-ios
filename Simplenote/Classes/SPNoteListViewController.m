@@ -174,16 +174,14 @@
 
 - (void)themeDidChange {
     // Refresh the containerView's backgroundColor
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    self.view.backgroundColor = backgroundColor;
-    self.searchController.backgroundColor = [backgroundColor colorWithAlphaComponent:0.9];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     // Refresh the Table's UI
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
     // Restyle the search bar
-//    [self.searchBar applySimplenoteStyle];
+    [self.searchController.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
@@ -686,7 +684,7 @@
     [self refreshTitle];
 
     if (tagFilterType == SPTagFilterTypeDeleted) {
-		[self.emptyTrashButton setEnabled: [self numNotes] > 0];
+        [self.emptyTrashButton setEnabled: [self numNotes] > 0];
     }
     
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);

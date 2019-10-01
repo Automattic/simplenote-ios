@@ -84,8 +84,6 @@ private extension SPSearchController {
         searchBar.searchBarStyle = .minimal
         searchBar.delegate = self
         searchBar.sizeToFit()
-// TODO
-//    [self.searchBar applySimplenoteStyle];
     }
 
     func setupContainerView() {
@@ -135,14 +133,7 @@ extension SPSearchController: UISearchBarDelegate {
     }
 }
 
-
-//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-//
-//    [_searchBar setBackgroundImage:[UIImage new]];
-//    [_searchBar setBackgroundColor:[UIColor clearColor]];
-//
+// TODO
 //    UIEdgeInsets insets = self.tableView.contentInset;
 //    insets.top += _searchBar.frame.size.height;
 //    self.tableView.contentInset = insets;
