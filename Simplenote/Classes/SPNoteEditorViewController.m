@@ -179,8 +179,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     _noteEditorTextView.frame = self.view.bounds;
     _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _noteEditorTextView.delegate = self;
-    
-    self.automaticallyAdjustsScrollViewInsets = YES;
+
     self.navigationItem.title = nil;
     
     [self startListeningToNotifications];
