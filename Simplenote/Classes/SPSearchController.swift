@@ -60,7 +60,7 @@ class SPSearchController: NSObject {
     func dismiss() {
         searchBar.text = nil
         searchBar.resignFirstResponder()
-        updateSearchBar(showsCancelButton: false)
+        updateStatus(active: false)
     }
 }
 
@@ -76,6 +76,10 @@ private extension SPSearchController {
         searchBar.sizeToFit()
     }
 
+    func updateStatus(active: Bool) {
+        updateSearchBar(showsCancelButton: active)
+        updateNavigationBar(hidden: active)
+    }
 
     func updateNavigationBar(hidden: Bool) {
         guard let navigationController = presenter?.navigationControllerForSearchController(self) else {
@@ -140,8 +144,7 @@ extension SPSearchController: UISearchBarDelegate {
         }
 
         ensureSearchBarBackgroundIsAttached()
-        updateNavigationBar(hidden: shouldBeginEditing)
-        updateSearchBar(showsCancelButton: shouldBeginEditing)
+        updateStatus(active: shouldBeginEditing)
 
         return shouldBeginEditing
     }
@@ -151,9 +154,7 @@ extension SPSearchController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        updateSearchBar(showsCancelButton: false)
-        updateNavigationBar(hidden: false)
-
+        updateStatus(active: false)
         delegate?.searchControllerDidEndSearch(self)
     }
 }
