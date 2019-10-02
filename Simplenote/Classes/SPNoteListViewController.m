@@ -99,13 +99,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-
     [super viewWillDisappear:animated];
     
     if (![SPAppDelegate sharedDelegate].simperium.user) {
@@ -114,7 +112,6 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-
     [super traitCollectionDidChange:previousTraitCollection];
 
     if (@available(iOS 13.0, *)) {
@@ -127,7 +124,6 @@
 }
 
 - (void)updateRowHeight {
-
     CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
 
