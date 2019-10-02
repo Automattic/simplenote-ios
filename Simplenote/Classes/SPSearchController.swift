@@ -25,6 +25,16 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 @objcMembers
 class SPSearchController: NSObject {
 
+    /// When the navigationBar is hidden, there'll be a gap between the top of the screen and the searchBar. We intend to compensate for that with a helper BG View!
+    ///
+    private let statusBarBackground: UIView = {
+        let backgroundView = UIView()
+        backgroundView.alpha = UIKitConstants.alphaZero
+        backgroundView.isUserInteractionEnabled = false
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        return backgroundView
+    }()
+
     /// Internal SearchBar Instance
     ///
     let searchBar = UISearchBar()
@@ -76,7 +86,11 @@ private extension SPSearchController {
             return
         }
 
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+        statusBarBackground.backgroundColor = searchBar.backgroundColor
+        statusBarBackground.alpha = hidden ? UIKitConstants.alphaMid : UIKitConstants.alphaFull
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) { [weak self] in
+            self?.statusBarBackground.alpha = hidden ? UIKitConstants.alphaFull : UIKitConstants.alphaZero
             navigationController.setNavigationBarHidden(hidden, animated: true)
             navigationController.view.layoutIfNeeded()
         }
@@ -87,7 +101,31 @@ private extension SPSearchController {
             return
         }
 
-        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.setShowsCancelButton(showsCancelButton, animated: true)
+    }
+}
+
+
+// MARK: - StatusBar Background
+//
+extension SPSearchController {
+
+    func ensureSearchBarBackgroundIsAttached() {
+        guard let superview = searchBar.superview, statusBarBackground.superview != superview else {
+            return
+        }
+
+        statusBarBackground.removeFromSuperview()
+        superview.addSubview(statusBarBackground)
+
+        NSLayoutConstraint.activate([
+            statusBarBackground.topAnchor.constraint(equalTo: superview.topAnchor),
+            statusBarBackground.bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor),
+            statusBarBackground.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+            statusBarBackground.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+        ])
+
+        superview.layoutIfNeeded()
     }
 }
 
@@ -97,13 +135,15 @@ private extension SPSearchController {
 extension SPSearchController: UISearchBarDelegate {
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        let output = delegate?.searchControllerShouldBeginSearch(self) ?? true
-        if output {
-            updateNavigationBar(hidden: true)
-            updateSearchBar(showsCancelButton: true)
+        guard let shouldBeginEditing = delegate?.searchControllerShouldBeginSearch(self) else {
+            return false
         }
 
-        return output
+        ensureSearchBarBackgroundIsAttached()
+        updateNavigationBar(hidden: shouldBeginEditing)
+        updateSearchBar(showsCancelButton: shouldBeginEditing)
+
+        return shouldBeginEditing
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
