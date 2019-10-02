@@ -17,9 +17,9 @@ extension SPNoteListViewController {
         rootView.addSubview(searchBar)
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.layoutMarginsGuide.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            searchBar.layoutMarginsGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+            searchBar.topAnchor.constraint(equalTo: rootView.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.trailingAnchor)
         ])
 
         NSLayoutConstraint.activate([
