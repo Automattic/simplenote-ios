@@ -473,10 +473,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             v.contentMode = UIViewContentModeTop;
         }
 
-        // Snapshot: SearchBar
-        SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
-        [self storeTransitionSnapshot:searchBarSnapshot];
-
         // Snapshot: Tableview Rows
         for (NSIndexPath *path in visiblePaths) {
 
@@ -566,6 +562,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
+
+            // Snapshot: SearchBar
+            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+            [self storeTransitionSnapshot:searchBarSnapshot];
         }
     }
 }
