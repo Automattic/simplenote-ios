@@ -649,26 +649,32 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 - (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
     UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
-    CGRect startingFrame = listController.searchBar.frame;
-    CGRect finalFrame = listController.searchBar.frame;
+    CGRect targetFrame = listController.searchBar.frame;
+    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
+                                                               finalFrame:targetFrame
+                                                            startingAlpha:UIKitConstants.alphaZero
+                                                               finalAlpha:UIKitConstants.alphaFull];
 
-    NSDictionary *cleanSnapshotAnimatedValues = @{
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
+                                           animatedValues:animatedValues
+                                      animationProperties:self.backNoteRowAnimationProperties
+                                                superView:containerView];
+}
+
+- (NSDictionary *)animationValuesWithStartingFrame:(CGRect)startingFrame
+                                        finalFrame:(CGRect)finalFrame
+                                     startingAlpha:(CGFloat)startingAlpha
+                                        finalAlpha:(CGFloat)finalAlpha {
+    return @{
         SPAnimationAlphaValueName: @{
-                SPAnimationInitialValueName: @0.0,
-                SPAnimationFinalValueName: @1.0
+                SPAnimationInitialValueName: @(startingAlpha),
+                SPAnimationFinalValueName: @(finalAlpha)
         },
-        SPAnimationFrameValueName : @{
+        SPAnimationFrameValueName: @{
             SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
             SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
         }
     };
-
-
-
-    return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
-                                           animatedValues:cleanSnapshotAnimatedValues
-                                      animationProperties:self.backNoteRowAnimationProperties
-                                                superView:containerView];
 }
 
 - (NSDictionary *)backNoteRowAnimationProperties {
