@@ -167,9 +167,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        padding += self.tableView.safeAreaInsets.left;
-    }
+    padding += self.tableView.safeAreaInsets.left;
     
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     
@@ -300,12 +298,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                       preview:NO];
         
 
-        CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
+        UITextView *editorTextView = editorController.noteEditorTextView;
+        CGRect finalEditorPosition = editorTextView.frame;
         finalEditorPosition.origin.x = 0;
-        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.textContainerInset.top;
-        if (@available(iOS 11.0, *)) {
-            finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
-        }
+        finalEditorPosition.origin.y += editorTextView.contentInset.top + editorTextView.textContainerInset.top + self.tableView.safeAreaInsets.top;
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {

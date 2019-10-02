@@ -18,11 +18,7 @@ const int RegexGroupIndexContent    = 2;
 
 // Replaces checklist markdown syntax with SPTextAttachment images in an attributed string
 - (void)addChecklistAttachmentsForColor: (UIColor *)color  {
-    // Sorry iOS 10 :(
-    if (@available(iOS 11.0, *)) {} else {
-        return;
-    }
-    
+
     if (self.length == 0) {
         return;
     }

@@ -196,11 +196,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             self.biometryIsAvailable = YES;
 
             BOOL faceIDAvailable = NO;
-            
-            if (@available(iOS 11.0, *)) {
-                if (context.biometryType == LABiometryTypeFaceID) {
-                    faceIDAvailable = YES;
-                }
+            if (context.biometryType == LABiometryTypeFaceID) {
+                faceIDAvailable = YES;
             }
 
             self.biometryTitle = (faceIDAvailable) ?
