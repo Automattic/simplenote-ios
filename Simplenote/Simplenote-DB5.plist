@@ -138,8 +138,6 @@
 		<string>cbdff3</string>
 		<key>tagViewDeletionImage</key>
 		<string>button_delete_small</string>
-		<key>searchBarBackgroundImage</key>
-		<string>searchbar_background</string>
 		<key>searchBarImageColor</key>
 		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
@@ -202,8 +200,6 @@
 		<string>navigation_bar_background_landscape</string>
 		<key>navigationBarBackgroundLandscapePhonePrompt</key>
 		<string>navigation_bar_background_landscape_prompt</string>
-		<key>navigationBarShadowImage</key>
-		<string>navigation_bar_shadow</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
@@ -228,6 +224,8 @@
 		<string>686b75</string>
 		<key>simplenoteGunmetal</key>
 		<string>525760</string>
+		<key>simplenoteGray10</key>
+		<string>C3C4C7</string>
 		<key>simplenoteDeepSeaBlue</key>
 		<string>006088</string>
 		<key>simplenoteLipstick</key>
@@ -283,8 +281,6 @@
 		<string>2d4259</string>
 		<key>tagViewDeletionImage</key>
 		<string>button_delete_small_dark</string>
-		<key>searchBarBackgroundImage</key>
-		<string>searchbar_background_dark</string>
 		<key>searchHighlightFontColor</key>
 		<string>f9f9f9</string>
 		<key>searchBarImageColor</key>
@@ -309,8 +305,6 @@
 		<string>navigation_bar_background_landscape_dark</string>
 		<key>navigationBarBackgroundLandscapePhonePrompt</key>
 		<string>navigation_bar_background_landscape_prompt_dark</string>
-		<key>navigationBarShadowImage</key>
-		<string>navigation_bar_shadow_dark</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>lockBackgroundColor</key>
