@@ -13,6 +13,7 @@
 #import "Note.h"
 
 @class SPEmptyListView;
+@class SPTitleView;
 
 typedef enum {
 	SPTagFilterTypeUserTag = 0,
@@ -29,7 +30,6 @@ typedef enum {
     UIBarButtonItem *sidebarButton;
     UIBarButtonItem *iPadCancelButton;
 
-    UISearchBar *searchBar;
     UIBarButtonItem *emptyTrashButton;
         
     UIActivityIndicatorView *activityIndicator;
@@ -48,12 +48,14 @@ typedef enum {
     SPTagFilterType tagFilterType;
 }
 
-@property (nonatomic, strong) NSFetchedResultsController<Note *> *fetchedResultsController;
-@property (nonatomic, strong) NSString *searchText;
-@property (nonatomic) BOOL firstLaunch;
+@property (nonatomic, strong) SPTitleView                           *searchBarContainer;
+@property (nonatomic, strong) UISearchBar                           *searchBar;
+@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+@property (nonatomic, strong) NSString                              *searchText;
+@property (nonatomic) BOOL                                          firstLaunch;
 
-@property (nonatomic, strong) SPEmptyListView *emptyListView;
-@property (nonatomic, strong) SPBorderedTableView *tableView;
+@property (nonatomic, strong) SPEmptyListView                       *emptyListView;
+@property (nonatomic, strong) SPBorderedTableView                   *tableView;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

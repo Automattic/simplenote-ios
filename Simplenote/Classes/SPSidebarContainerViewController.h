@@ -43,7 +43,7 @@
 
 @property (nonatomic) BOOL bSidePanelVisible;
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController;
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController;
 
 - (void)toggleSidePanel:(void (^)())completion;;
 - (void)showSidePanel:(void (^)())completion;

@@ -12,6 +12,22 @@ extension UIView {
     func isHorizontallyCompact() -> Bool {
         return traitCollection.horizontalSizeClass == .compact
     }
+
+    /// Returns all of the subviews of a given type
+    ///
+    func subviewsOfType<T: UIView>(_ type: T.Type) -> [T] {
+        var output = [T]()
+
+        for subview in subviews {
+            output += subview.subviewsOfType(type)
+
+            if let subview = subview as? T {
+                output.append(subview)
+            }
+        }
+
+        return output
+    }
 }
 
 

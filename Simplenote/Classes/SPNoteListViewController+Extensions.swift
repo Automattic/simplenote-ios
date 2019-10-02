@@ -6,9 +6,30 @@ import UIKit
 //
 extension SPNoteListViewController {
 
+    /// Registers the ListViewController for Peek and Pop events.
+    ///
     @objc
     func registerForPeekAndPop() {
         registerForPreviewing(with: self, sourceView: tableView)
+    }
+
+    /// Refreshes the SearchBar Style.
+    ///
+    @objc
+    func styleSearchBar() {
+        let searchIconColor = UIColor.color(name: .simplenoteSlateGrey)
+        let searchIconImage = UIImage.image(name: .searchIconImage)?.withOverlayColor(searchIconColor)
+
+        searchBar.setImage(searchIconImage, for: .search, state: .normal)
+        searchBar.setSearchFieldBackgroundImage(.searchBarBackgroundImage, for: .normal)
+        searchBarContainer.backgroundColor = .clear
+
+        // Apply font to search field by traversing subviews
+        for textField in searchBar.subviewsOfType(UITextField.self) {
+            textField.font = .preferredFont(forTextStyle: .body)
+            textField.textColor = .color(name: .textColor)
+            textField.keyboardAppearance = SPUserInterface.isDark ? .dark : .default
+        }
     }
 }
 

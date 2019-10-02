@@ -27,6 +27,7 @@ enum ThemeColorKey: String {
     case searchHighlightFontColor
     case simplenoteAlmostBlack
     case simplenoteDeepSeaBlue
+    case simplenoteGray10
     case simplenoteGunmetal
     case simplenoteLightNavy
     case simplenoteLightPink
@@ -55,11 +56,10 @@ enum ThemeImageKey: String {
     case backImage
     case pinImage
     case sharedImage
-    case navigationBarShadowImage
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
-    case searchBarBackgroundImage
+    case searchIconImage
     case tagViewDeletionImage
     case visibilityOnImage
     case visibilityOffImage
@@ -76,16 +76,14 @@ extension ThemeImageKey {
             return "icon_pin"
         case .sharedImage:
             return "icon_shared"
-        case .navigationBarShadowImage:
-            return "navigation_bar_shadow"
         case .navigationBarBackgroundImage:
             return "navigation_bar_background"
         case .navigationBarBackgroundPromptImage:
             return "navigation_bar_background_prompt"
         case .onePasswordImage:
             return "button_onepassword"
-        case .searchBarBackgroundImage:
-            return "searchbar_background"
+        case .searchIconImage:
+            return "search_icon"
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:
