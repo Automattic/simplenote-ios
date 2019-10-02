@@ -1,7 +1,7 @@
 4.11.0
 ======
 -   Notes List refreshed to display Pinned state on the right hand side.
--   iOS 10 Is now the minimum supported OS.
+-   iOS 11 Is now the minimum supported OS.
 
 4.10.0
 ======
