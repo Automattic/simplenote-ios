@@ -133,11 +133,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat yOrigin = self.contentSize.height - height + self.contentInset.top;
     yOrigin = MAX(yOrigin, self.contentOffset.y + self.bounds.size.height - height);
     
-    CGFloat tagPadding = 0;
-    if (@available(iOS 11.0, *)) {
-        tagPadding = self.safeAreaInsets.left;
-    }
-    
+    CGFloat tagPadding = self.safeAreaInsets.left;    
     CGRect footerViewFrame = CGRectMake(tagPadding,
                                         yOrigin,
                                         self.bounds.size.width - 2 * tagPadding,

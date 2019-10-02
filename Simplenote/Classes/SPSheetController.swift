@@ -155,13 +155,8 @@ private extension SPSheetController {
     }
 
     func hideSubviews() {
-        var safeAreaInsets = UIEdgeInsets.zero
-        if #available(iOS 11.0, *) {
-            safeAreaInsets = view.safeAreaInsets
-        }
-
         backgroundView.alpha = UIKitConstants.alphaZero
-        actionsBottomConstraint.constant = actionsView.frame.height + safeAreaInsets.bottom
+        actionsBottomConstraint.constant = actionsView.frame.height + view.safeAreaInsets.bottom
         view.layoutIfNeeded()
     }
 
