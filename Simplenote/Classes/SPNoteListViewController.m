@@ -47,7 +47,6 @@
 @property (nonatomic, strong) UIBarButtonItem           *iPadCancelButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
 
-@property (nonatomic, strong) UISearchBar               *searchBar;
 @property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController    *transitionController;
@@ -249,8 +248,21 @@
         
         [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     } else if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.navigationItem setRightBarButtonItem:emptyTrashButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
+        [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
+        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
+    } else {
+        [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
+        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
+    }
+
+    self.navigationItem.titleView = _searchBarContainer;
+    self.navigationItem.titleView.hidden = NO;
+
+    // Title must be set to an empty string because we're using a custom titleView,
+    // and otherwise we get odd navigation bar behaviour when pushing view controllers
+    // onto the navigation controller after the notes editor.
+    self.navigationItem.title = @"";
+}
 
 - (void)configureNavigationButtons {
 
@@ -293,19 +305,6 @@
     _iPadCancelButton.isAccessibilityElement = YES;
     _iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
     _iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
-}
-    } else {
-        [self.navigationItem setRightBarButtonItem:addButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:sidebarButton animated:YES];
-    }
-    
-    self.navigationItem.titleView = _searchBarContainer;
-    self.navigationItem.titleView.hidden = NO;
-    
-    // Title must be set to an empty string because we're using a custom titleView,
-    // and otherwise we get odd navigation bar behaviour when pushing view controllers
-    // onto the navigation controller after the notes editor.
-    self.navigationItem.title = @"";
 }
 
 
@@ -1020,14 +1019,14 @@
     if (tagFilterType == SPTagFilterTypeDeleted && waiting)
         return;
     
-    if (waiting && self.navigationItem.titleView != activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+    if (waiting && self.navigationItem.titleView != _activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
-        if (!activityIndicator)
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
+        if (!_activityIndicator)
+            _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         
-        [activityIndicator startAnimating];
+        [_activityIndicator startAnimating];
         bResetTitleView = NO;
-        [self animateTitleViewSwapWithNewView:activityIndicator
+        [self animateTitleViewSwapWithNewView:_activityIndicator
                                    completion:nil];
         
     } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !bTitleViewAnimating) {
@@ -1076,7 +1075,7 @@
     [self animateTitleViewSwapWithNewView:_searchBarContainer
                                completion:^{
                                    self->bResetTitleView = NO;
-                                   [self->activityIndicator stopAnimating];
+                                   [self->_activityIndicator stopAnimating];
                                }];
     
 }
