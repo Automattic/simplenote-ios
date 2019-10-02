@@ -49,6 +49,7 @@
 
 @property (nonatomic, strong) SPSearchController        *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
+
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -980,7 +981,7 @@
     if (tagFilterType == SPTagFilterTypeDeleted && waiting) {
         return;
     }
-    
+
     if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         
         if (!_activityIndicator) {
@@ -990,7 +991,7 @@
         [_activityIndicator startAnimating];
         bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:_activityIndicator completion:nil];
-        
+
     } else if (!waiting && self.navigationItem.titleView != nil && !bTitleViewAnimating) {
 
         [self resetTitleView];
