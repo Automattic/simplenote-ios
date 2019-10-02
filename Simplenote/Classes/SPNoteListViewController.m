@@ -204,7 +204,6 @@
 }
 
 - (void)updateNavigationBar {
-
     if (tagFilterType == SPTagFilterTypeDeleted) {
         [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
