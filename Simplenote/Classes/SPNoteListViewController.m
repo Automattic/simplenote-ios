@@ -145,6 +145,18 @@
 }
 
 
+#pragma mark - Properties
+
+- (UIActivityIndicatorView *)activityIndicator {
+    if (_activityIndicator == nil) {
+        UIActivityIndicatorViewStyle style = SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray;
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
+    }
+
+    return _activityIndicator;
+}
+
+
 #pragma mark - Notifications
 
 - (void)startListeningToNotifications {
@@ -744,8 +756,7 @@
 - (void)updateFetchPredicate
 {
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (appDelegate.selectedTag != nil &&
-        [appDelegate.selectedTag compare:kSimplenoteTagTrashKey] == NSOrderedSame) {
+    if (appDelegate.selectedTag != nil && [appDelegate.selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
         
         tagFilterType = SPTagFilterTypeDeleted;
         _searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
@@ -1007,15 +1018,11 @@
     if (tagFilterType == SPTagFilterTypeDeleted && waiting)
         return;
     
-    if (waiting && self.navigationItem.titleView != _activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
-        
-        if (!_activityIndicator)
-            _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
-        
-        [_activityIndicator startAnimating];
+    if (waiting && self.navigationItem.titleView != self.activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+
+        [self.activityIndicator startAnimating];
         self.bResetTitleView = NO;
-        [self animateTitleViewSwapWithNewView:_activityIndicator
-                                   completion:nil];
+        [self animateTitleViewSwapWithNewView:self.activityIndicator completion:nil];
         
     } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !self.bTitleViewAnimating) {
         
