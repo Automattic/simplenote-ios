@@ -988,7 +988,7 @@
     
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
-    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
+    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
     
     [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
         self.searchBar.alpha = UIKitConstants.alphaFull;
