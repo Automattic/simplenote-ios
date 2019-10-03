@@ -260,9 +260,9 @@
                                           imageAlignment:UIBarButtonImageAlignmentRight
                                                   target:self
                                                 selector:@selector(addButtonAction:)];
-    _addButton.isAccessibilityElement = YES;
-    _addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
-    _addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
+    self.addButton.isAccessibilityElement = YES;
+    self.addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
+    self.addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
 
     /// Button: Display Tags
     ///
@@ -270,9 +270,9 @@
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
-    _sidebarButton.isAccessibilityElement = YES;
-    _sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
-    _sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
+    self.sidebarButton.isAccessibilityElement = YES;
+    self.sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
+    self.sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
 
     /// Button: Empty Trash
     ///
@@ -280,9 +280,9 @@
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(emptyAction:)];
-    _emptyTrashButton.isAccessibilityElement = YES;
-    _emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
-    _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+    self.emptyTrashButton.isAccessibilityElement = YES;
+    self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
+    self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
 
     /// Button: Cancel Search (iPad)
     ///
@@ -290,9 +290,9 @@
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(cancelSearchButtonAction:)];
-    _iPadCancelButton.isAccessibilityElement = YES;
-    _iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
-    _iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
+    self.iPadCancelButton.isAccessibilityElement = YES;
+    self.iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
+    self.iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
 }
 
 
