@@ -1,11 +1,3 @@
-//
-//  SPNoteEditorViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/9/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
