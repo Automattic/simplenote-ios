@@ -116,6 +116,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
+
+        // Apply the current style right away!
+        [self applyStyle];
     }
     
     return self;
@@ -140,7 +143,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
     _noteEditorTextView.font = bodyFont;
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
     _noteEditorTextView.interactiveTextStorage.tokens = @{
@@ -174,7 +176,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     self.navigationItem.title = nil;
     
     [self startListeningToNotifications];
-    [self applyStyle];
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
 }
