@@ -210,12 +210,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)ensureTagViewIsVisible
 {
-    if (_tagView.alpha >= 1.0) {
+    if (_tagView.alpha >= UIKitConstants.alphaFull) {
         return;
     }
 
-    [UIView animateWithDuration:0.3 animations:^{
-        self.tagView.alpha = 1.0;
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        self.tagView.alpha = UIKitConstants.alphaFull;
      }];
 }
 
@@ -273,7 +273,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
@@ -296,7 +295,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self->bDisableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self->bDisableShrinkingNavigationBar = NO;
     }];
 }
@@ -630,7 +629,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
     // hide the tags field
     if (!bVoiceoverEnabled) {
-        self.tagView.alpha = 0.0;
+        self.tagView.alpha = UIKitConstants.alphaZero;
     }
 }
 
@@ -767,7 +766,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     highlightedSearchResultIndex = MAX(0, highlightedSearchResultIndex - 1);
     [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
-    
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
