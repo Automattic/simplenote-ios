@@ -56,6 +56,9 @@
 @property (nonatomic, strong) UIImage                   *panImageDelete;
 @property (nonatomic, strong) UIImage                   *panImageRestore;
 
+@property (nonatomic, assign) BOOL                      bTitleViewAnimating;
+@property (nonatomic, assign) BOOL                      bResetTitleView;
+
 @end
 
 @implementation SPNoteListViewController
@@ -151,6 +154,15 @@
     return _searchController.searchBar;
 }
 
+- (UIActivityIndicatorView *)activityIndicator {
+    if (_activityIndicator == nil) {
+        UIActivityIndicatorViewStyle style = SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray;
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
+    }
+
+    return _activityIndicator;
+}
+
 
 #pragma mark - Notifications
 
@@ -227,9 +239,9 @@
                                           imageAlignment:UIBarButtonImageAlignmentRight
                                                   target:self
                                                 selector:@selector(addButtonAction:)];
-    _addButton.isAccessibilityElement = YES;
-    _addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
-    _addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
+    self.addButton.isAccessibilityElement = YES;
+    self.addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
+    self.addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
 
     /// Button: Display Tags
     ///
@@ -237,9 +249,9 @@
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
-    _sidebarButton.isAccessibilityElement = YES;
-    _sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
-    _sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
+    self.sidebarButton.isAccessibilityElement = YES;
+    self.sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
+    self.sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
 
     /// Button: Empty Trash
     ///
@@ -247,32 +259,33 @@
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(emptyAction:)];
-    _emptyTrashButton.isAccessibilityElement = YES;
-    _emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
-    _emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+
+    self.emptyTrashButton.isAccessibilityElement = YES;
+    self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
+    self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
 }
 
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
     self.tableView = [[SPBorderedTableView alloc] init];
-    _tableView.frame = self.rootView.bounds;
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.tableFooterView = [UIView new];
-    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _tableView.alwaysBounceVertical = YES;
-    [_tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
+    self.tableView.frame = self.rootView.bounds;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.alwaysBounceVertical = YES;
+    [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
 }
 
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
 
     self.searchController = [SPSearchController new];
-    _searchController.delegate = self;
-    _searchController.presenter = self;
-    [_searchController.searchBar applySimplenoteStyle];
+    self.searchController.delegate = self;
+    self.searchController.presenter = self;
+    [self.searchBar applySimplenoteStyle];
 }
 
 
@@ -711,8 +724,7 @@
 - (void)updateFetchPredicate
 {
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (appDelegate.selectedTag != nil &&
-        [appDelegate.selectedTag compare:kSimplenoteTagTrashKey] == NSOrderedSame) {
+    if (appDelegate.selectedTag != nil && [appDelegate.selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
         
         tagFilterType = SPTagFilterTypeDeleted;
     }
@@ -961,8 +973,8 @@
     
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
-    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted ? YES : NO;
-
+    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
+    
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
@@ -978,21 +990,15 @@
     }
 
     if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
-        
-        if (!_activityIndicator) {
-            _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
-        }
-        
-        [_activityIndicator startAnimating];
-        bResetTitleView = NO;
-        [self animateTitleViewSwapWithNewView:_activityIndicator completion:nil];
+        [self.activityIndicator startAnimating];
+        self.bResetTitleView = NO;
+        [self animateTitleViewSwapWithNewView:self.activityIndicator completion:nil];
 
-    } else if (!waiting && self.navigationItem.titleView != nil && !bTitleViewAnimating) {
-
+    } else if (!waiting && self.navigationItem.titleView != nil && !self.bTitleViewAnimating) {
         [self resetTitleView];
 
     } else if (!waiting) {
-        bResetTitleView = YES;
+        self.bResetTitleView = YES;
     }
     
     bIndexingNotes = waiting;
@@ -1001,8 +1007,8 @@
 }
 
 - (void)animateTitleViewSwapWithNewView:(UIView *)newView completion:(void (^)())completion {
-    
-    bTitleViewAnimating = YES;
+
+    self.bTitleViewAnimating = YES;
     [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
         self.navigationItem.titleView.alpha = UIKitConstants.alphaZero;
 
@@ -1017,20 +1023,19 @@
                 completion();
             }
 
-            self->bTitleViewAnimating = NO;
+            self.bTitleViewAnimating = NO;
 
-            if (self->bResetTitleView) {
+            if (self.bResetTitleView) {
                 [self resetTitleView];
             }
          }];
      }];
-    
 }
 
 - (void)resetTitleView {
 
     [self animateTitleViewSwapWithNewView:nil completion:^{
-        self->bResetTitleView = NO;
+        self.bResetTitleView = NO;
         [self.activityIndicator stopAnimating];
     }];
 }
