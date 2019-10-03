@@ -133,28 +133,32 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)applyStyle {
     
-    _bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
-    _lightFontColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    UIColor *fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
 
-    _noteEditorTextView.font = _bodyFont;
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
+
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
-    
-    _paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    _paragraphStyle.lineSpacing = _bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-    
-    _noteEditorTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : @{ NSForegroundColorAttributeName : _fontColor,
-                                                                                  NSFontAttributeName : _bodyFont,
-                                                                                  NSParagraphStyleAttributeName : _paragraphStyle},
-                                                          SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor,
-                                                                                  NSFontAttributeName : _headlineFont} };
-    
+
+    _noteEditorTextView.font = bodyFont;
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
+    _noteEditorTextView.interactiveTextStorage.tokens = @{
+        SPDefaultTokenName : @{
+                NSFontAttributeName : bodyFont,
+                NSForegroundColorAttributeName : fontColor,
+                NSParagraphStyleAttributeName : paragraphStyle
+        },
+        SPHeadlineTokenName : @{
+                NSFontAttributeName : headlineFont,
+                NSForegroundColorAttributeName: fontColor,
+        }
+    };
 }
 
 - (void)viewDidLoad
