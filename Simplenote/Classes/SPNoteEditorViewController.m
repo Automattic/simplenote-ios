@@ -57,11 +57,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) UIFont                    *bodyFont;
-@property (nonatomic, strong) NSMutableParagraphStyle   *paragraphStyle;
-@property (nonatomic, strong) UIFont                    *headlineFont;
-@property (nonatomic, strong) UIColor                   *fontColor;
-@property (nonatomic, strong) UIColor                   *lightFontColor;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
