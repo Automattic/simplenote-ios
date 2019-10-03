@@ -27,7 +27,7 @@ class SPSearchController: NSObject {
 
     /// When the navigationBar is hidden, there'll be a gap between the top of the screen and the searchBar. We intend to compensate for that with a helper BG View!
     ///
-    private let statusBarBackground: UIView = {
+    private lazy var statusBarBackground: UIView = {
         let backgroundView = UIView()
         backgroundView.alpha = UIKitConstants.alphaZero
         backgroundView.isUserInteractionEnabled = false
@@ -82,12 +82,10 @@ private extension SPSearchController {
     }
 
     func updateNavigationBar(hidden: Bool) {
-        guard let navigationController = presenter?.navigationControllerForSearchController(self) else {
-            return
-        }
-
-        guard navigationController.isNavigationBarHidden != hidden else {
-            return
+        guard let navigationController = presenter?.navigationControllerForSearchController(self),
+            navigationController.isNavigationBarHidden != hidden
+            else {
+                return
         }
 
         statusBarBackground.backgroundColor = searchBar.backgroundColor
@@ -119,7 +117,6 @@ extension SPSearchController {
             return
         }
 
-        statusBarBackground.removeFromSuperview()
         superview.addSubview(statusBarBackground)
 
         NSLayoutConstraint.activate([
