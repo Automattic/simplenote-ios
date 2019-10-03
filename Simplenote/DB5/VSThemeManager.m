@@ -117,7 +117,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
     /// Style: NavigationBar
     ///
     UIColor *barTintColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIImage *navbarShadowImage = [UIImage navigationBarShadowImage];
+    UIImage *navbarShadowImage = [UIImage new];
     UIImage *navbarBackgroundImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundImage];
     UIImage *navbarPromptImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundPromptImage];
 
