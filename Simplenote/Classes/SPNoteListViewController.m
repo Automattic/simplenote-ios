@@ -55,6 +55,9 @@
 @property (nonatomic, strong) UIImage                   *panImageDelete;
 @property (nonatomic, strong) UIImage                   *panImageRestore;
 
+@property (nonatomic, assign) BOOL                      bTitleViewAnimating;
+@property (nonatomic, assign) BOOL                      bResetTitleView;
+
 @end
 
 @implementation SPNoteListViewController
@@ -1010,16 +1013,16 @@
             _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray)];
         
         [_activityIndicator startAnimating];
-        bResetTitleView = NO;
+        self.bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:_activityIndicator
                                    completion:nil];
         
-    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !bTitleViewAnimating) {
+    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !self.bTitleViewAnimating) {
         
         [self resetTitleView];
         
     } else if (!waiting) {
-        bResetTitleView = YES;
+        self.bResetTitleView = YES;
     }
     
     bIndexingNotes = waiting;
@@ -1029,7 +1032,7 @@
 
 - (void)animateTitleViewSwapWithNewView:(UIView *)newView completion:(void (^)())completion {
     
-    bTitleViewAnimating = YES;
+    self.bTitleViewAnimating = YES;
     [UIView animateWithDuration:0.25
                      animations:^{
                          self.navigationItem.titleView.alpha = 0.0;
@@ -1045,11 +1048,11 @@
                                               if (completion)
                                                   completion();
                                               
-                                              self->bTitleViewAnimating = NO;
+                                              self.bTitleViewAnimating = NO;
                                               
-                                              if (self->bResetTitleView)
+                                              if (self.bResetTitleView) {
                                                   [self resetTitleView];
-                                              
+                                              }
                                           }];
                      }];
     
@@ -1057,13 +1060,12 @@
 
 - (void)resetTitleView {
     
-    [self animateTitleViewSwapWithNewView:_searchBarContainer
-                               completion:^{
-                                   self->bResetTitleView = NO;
-                                   [self->_activityIndicator stopAnimating];
-                               }];
-    
+    [self animateTitleViewSwapWithNewView:_searchBarContainer completion:^{
+        self.bResetTitleView = NO;
+        [self.activityIndicator stopAnimating];
+    }];
 }
+
 
 #pragma mark - VoiceOver
 

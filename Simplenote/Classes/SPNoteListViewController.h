@@ -23,8 +23,6 @@ typedef enum {
     BOOL bSearching;
     BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
-    BOOL bTitleViewAnimating;
-    BOOL bResetTitleView;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
         
