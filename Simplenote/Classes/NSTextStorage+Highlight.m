@@ -35,11 +35,7 @@
         }
         
         // Maintain current Font
-        NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:[self attributesAtIndex:range.location effectiveRange:nil]];
-        
-        [attributes setObject:color forKey:NSForegroundColorAttributeName];
-        
-        [self setAttributes:attributes range:rangeValue.rangeValue];
+        [self addAttribute:NSForegroundColorAttributeName value:color range:rangeValue.rangeValue];
     }
     
     [self endEditing];
