@@ -6,6 +6,7 @@
 
 @class SPEmptyListView;
 @class SPTitleView;
+@class SPSearchController;
 
 typedef enum {
 	SPTagFilterTypeUserTag = 0,
@@ -16,25 +17,24 @@ typedef enum {
 } SPTagFilterType;
 
 @interface SPNoteListViewController : SPSidebarContainerViewController {
-            
+
     NSTimer *searchTimer;
-    
+
     // Bools
     BOOL bSearching;
     BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
-        
+
     SPTagFilterType tagFilterType;
 }
 
-@property (nonatomic, strong) SPTitleView                           *searchBarContainer;
-@property (nonatomic, strong) UISearchBar                           *searchBar;
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 @property (nonatomic, strong) NSString                              *searchText;
 @property (nonatomic) BOOL                                          firstLaunch;
 
+@property (nonatomic, strong, readonly) UISearchBar                 *searchBar;
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
 @property (nonatomic, strong) SPBorderedTableView                   *tableView;
 

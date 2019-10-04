@@ -301,7 +301,13 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         UITextView *editorTextView = editorController.noteEditorTextView;
         CGRect finalEditorPosition = editorTextView.frame;
         finalEditorPosition.origin.x = 0;
-        finalEditorPosition.origin.y += editorTextView.contentInset.top + editorTextView.textContainerInset.top + self.tableView.safeAreaInsets.top;
+
+        // We must tamper into the navigationBar frame directly, rather than safeAreaInsets.top.
+        // Why? because the safeAreaInsets, the very first time this code runs, will not be set.
+        //
+        finalEditorPosition.origin.y += editorTextView.contentInset.top
+                                            + editorTextView.textContainerInset.top
+                                            + CGRectGetMaxY(editorController.navigationController.navigationBar.frame);
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {
@@ -466,8 +472,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         for (UIView *v in dirtySnapshot.subviews) {
             v.contentMode = UIViewContentModeTop;
         }
-        
-        
+
+        // Snapshot: Tableview Rows
         for (NSIndexPath *path in visiblePaths) {
 
             SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
@@ -494,32 +500,28 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 dirtySnapshot.contentMode = UIViewContentModeTop;
                 dirtySnapshot.clipsToBounds = YES;
                 
-                NSDictionary *animationProperties = @{SPAnimationDurationName: @0.45,
-                                                      SPAnimationDelayName: @0.0,
-                                                      SPAnimationSpringDampingName: @1.0,
-                                                      SPAnimationInitialVeloctyName: @7.0,
-                                                      SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                      };
-                
-                NSDictionary *cleanSnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @0.0,
-                                                                                           SPAnimationFinalValueName: @1.0},
-                                                              SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                                            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
-                                                                           }
-                                                              };
-                
+                NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
+                                                                                    delay:0.0
+                                                                            springDamping:1.0
+                                                                                 velocity:7.0
+                                                                                  options:UIViewAnimationOptionCurveEaseInOut];
+
+                NSDictionary *cleanSnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                        finalFrame:finalFrame
+                                                                                     startingAlpha:UIKitConstants.alphaZero
+                                                                                        finalAlpha:UIKitConstants.alphaFull];
+
                 SPTransitionSnapshot *cleanTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:cleanSnapshot
                                                                                                 animatedValues:cleanSnapshotAnimatedValues
                                                                                            animationProperties:animationProperties
                                                                                                      superView:containerView];
                 [self storeTransitionSnapshot:cleanTransitionSnapshot];
                 
-                NSDictionary *dirtySnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                                           SPAnimationFinalValueName: @0.0},
-                                                              SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                                            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
-                                                                           }
-                                                              };
+                NSDictionary *dirtySnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                        finalFrame:finalFrame
+                                                                                     startingAlpha:UIKitConstants.alphaFull
+                                                                                        finalAlpha:UIKitConstants.alphaZero];
+
                 SPTransitionSnapshot *dirtyTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:dirtySnapshot
                                                                                                 animatedValues:dirtySnapshotAnimatedValues
                                                                                            animationProperties:animationProperties
@@ -562,6 +564,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
+
+            // Snapshot: SearchBar
+            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+            [self storeTransitionSnapshot:searchBarSnapshot];
         }
     }
 }
@@ -640,7 +646,59 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     [self decrementUseCount];
 }
 
-#pragma mark Interactive Transition
+
+#pragma mark - Snapshots Generation
+
+- (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
+    UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
+    CGRect targetFrame = listController.searchBar.frame;
+    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
+                                                               finalFrame:targetFrame
+                                                            startingAlpha:UIKitConstants.alphaZero
+                                                               finalAlpha:UIKitConstants.alphaFull];
+    NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
+                                                                        delay:0.0
+                                                                springDamping:1.0
+                                                                     velocity:7.0
+                                                                      options:UIViewAnimationOptionCurveEaseInOut];
+
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
+                                           animatedValues:animatedValues
+                                      animationProperties:animationProperties
+                                                superView:containerView];
+}
+
+- (NSDictionary *)animationValuesWithStartingFrame:(CGRect)startingFrame
+                                        finalFrame:(CGRect)finalFrame
+                                     startingAlpha:(CGFloat)startingAlpha
+                                        finalAlpha:(CGFloat)finalAlpha {
+    return @{
+        SPAnimationAlphaValueName: @{
+                SPAnimationInitialValueName: @(startingAlpha),
+                SPAnimationFinalValueName: @(finalAlpha)
+        },
+        SPAnimationFrameValueName: @{
+            SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
+            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
+        }
+    };
+}
+
+- (NSDictionary *)animationPropertiesWithDuration:(CGFloat)duration
+                                            delay:(CGFloat)delay
+                                    springDamping:(CGFloat)springDamping
+                                         velocity:(CGFloat)velocity
+                                          options:(UIViewAnimationOptions)options {
+    return @{
+        SPAnimationDurationName: @(duration),
+        SPAnimationDelayName: @(delay),
+        SPAnimationSpringDampingName: @(springDamping),
+        SPAnimationInitialVeloctyName: @(velocity),
+        SPAnimationOptionsName: @(options)
+    };
+}
+
+#pragma mark - Interactive Transition
 
 - (void)endInteractionWithSuccess:(BOOL)success {
     

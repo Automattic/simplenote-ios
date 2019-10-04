@@ -36,6 +36,7 @@
 
 - (void)applyTheme {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
     self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
 }
 

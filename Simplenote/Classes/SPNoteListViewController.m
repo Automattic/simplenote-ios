@@ -38,15 +38,16 @@
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UIGestureRecognizerDelegate,
-                                        UISearchBarDelegate,
                                         UITextFieldDelegate,
+                                        SPSearchControllerDelegate,
+                                        SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
 @property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem           *iPadCancelButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
 
+@property (nonatomic, strong) SPSearchController        *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController    *transitionController;
@@ -66,23 +67,14 @@
     
     self = [super initWithSidebarViewController:sidebarViewController];
     if (self) {
-        
-        self.tableView = [[SPBorderedTableView alloc] init];
-        self.tableView.frame = self.rootView.bounds;
-        self.tableView.delegate = self;
-        self.tableView.dataSource = self;
-        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.tableView.alwaysBounceVertical = YES;
-        [self.rootView addSubview:_tableView];
-
-        [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-
-        [self startListeningToNotifications];
-        [self updateRowHeight];
         [self configureNavigationButtons];
-        [self updateNavigationBar];
-        
+        [self configureTableView];
+        [self configureSearchController];
+        [self configureRootView];
+
+        [self updateRowHeight];
+        [self startListeningToNotifications];
+
         _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         _panImageRestore = [[UIImage imageNamed:@"icon_cell_pan_restore"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
@@ -104,13 +96,17 @@
 
 #pragma mark - View Lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshTableViewInsets];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
     [super viewWillDisappear:animated];
     
     if (![SPAppDelegate sharedDelegate].simperium.user) {
@@ -118,8 +114,7 @@
     }
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
 
     if (@available(iOS 13.0, *)) {
@@ -132,7 +127,6 @@
 }
 
 - (void)updateRowHeight {
-        
     CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
     CGFloat topTextViewPadding = verticalPadding;
 
@@ -145,7 +139,20 @@
 }
 
 
-#pragma mark - Properties
+#pragma mark - Overridden Properties
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    // In iOS <13, whenever the navigationBar is hidden, the system will query the top VC for its preferred bar style.
+    // Nuke this the second iOS 13 is the deployment target, which will probably be around 2021?
+    return self.navigationController.preferredStatusBarStyle;
+}
+
+
+#pragma mark - Dynamic Properties
+
+- (UISearchBar *)searchBar {
+    return _searchController.searchBar;
+}
 
 - (UIActivityIndicatorView *)activityIndicator {
     if (_activityIndicator == nil) {
@@ -204,67 +211,27 @@
     [self.tableView applyTheme];
     [self.tableView reloadData];
 
-    // Restyle the search bar
+    // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
 }
 
 - (void)updateNavigationBar {
-        
-    if (!_searchBar) {
-        // titleView was changed to use autolayout in iOS 11
-        if (@available(iOS 11.0, *)) {
-            _searchBar = [[UISearchBar alloc] init];
-            _searchBarContainer = [[SPTitleView alloc] init];
-            _searchBarContainer.translatesAutoresizingMaskIntoConstraints = NO;
-        } else {
-            CGFloat searchBarHeight = 44.0;
-            _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,
-                                                                       0,
-                                                                       self.view.frame.size.width,
-                                                                       searchBarHeight)];
-            _searchBarContainer = [[SPTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, searchBarHeight)];
-            _searchBarContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        }
-        _searchBarContainer.clipsToBounds = NO;
-        _searchBar.center = _searchBarContainer.center;
-        
-        _searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _searchBar.searchTextPositionAdjustment = UIOffsetMake(5, 1);
-        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-
-        [_searchBar applySimplenoteStyle];
-
-        _searchBar.delegate = self;
-        [_searchBarContainer addSubview:_searchBar];
-    }
-    
-    if (bSearching) {
-        // Add a Cancel button to the toolbar, only needed for iPads
-        if ([UIDevice isPad]) {
-            [self.navigationItem setRightBarButtonItem:_iPadCancelButton animated:YES];
-        } else {
-           [self.navigationItem setRightBarButtonItem:nil animated:YES];
-        }
-        
-        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    } else if (tagFilterType == SPTagFilterTypeDeleted) {
+    if (tagFilterType == SPTagFilterTypeDeleted) {
         [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
     } else {
         [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
         [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
     }
-
-    self.navigationItem.titleView = _searchBarContainer;
-    self.navigationItem.titleView.hidden = NO;
-
-    // Title must be set to an empty string because we're using a custom titleView,
-    // and otherwise we get odd navigation bar behaviour when pushing view controllers
-    // onto the navigation controller after the notes editor.
-    self.navigationItem.title = @"";
 }
 
+
+#pragma mark - Interface Initialization
+
 - (void)configureNavigationButtons {
+    NSAssert(_addButton == nil, @"_addButton is already initialized!");
+    NSAssert(_sidebarButton == nil, @"_sidebarButton is already initialized!");
+    NSAssert(_emptyTrashButton == nil, @"_emptyTrashButton is already initialized!");
 
     /// Button: New Note
     ///
@@ -292,19 +259,33 @@
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(emptyAction:)];
+
     self.emptyTrashButton.isAccessibilityElement = YES;
     self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+}
 
-    /// Button: Cancel Search (iPad)
-    ///
-    self.iPadCancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Verb - dismiss the notes search view")
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(cancelSearchButtonAction:)];
-    self.iPadCancelButton.isAccessibilityElement = YES;
-    self.iPadCancelButton.accessibilityLabel = NSLocalizedString(@"Cancel Search", @"Verb - dismiss the search UI on iPad Devices");
-    self.iPadCancelButton.accessibilityHint = NSLocalizedString(@"Stop searching", @"Accessibility hint for the iPad Cancel Search button");
+- (void)configureTableView {
+    NSAssert(_tableView == nil, @"_tableView is already initialized!");
+
+    self.tableView = [[SPBorderedTableView alloc] init];
+    self.tableView.frame = self.rootView.bounds;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.alwaysBounceVertical = YES;
+    [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
+}
+
+- (void)configureSearchController {
+    NSAssert(_searchController == nil, @"_searchController is already initialized!");
+
+    self.searchController = [SPSearchController new];
+    self.searchController.delegate = self;
+    self.searchController.presenter = self;
+    [self.searchBar applySimplenoteStyle];
 }
 
 
@@ -327,45 +308,24 @@
     [self toggleSidePanel:nil];
 }
 
-- (void)cancelSearchButtonAction:(id)sender {
-    
-    [self endSearching];
-}
 
-- (void)endSearching {
-    
-    bSearching = NO;
-    
-    self.searchBar.text = @"";
-    self.searchText = nil;
-    [self.searchBar resignFirstResponder];
-    
-    [self update];
-    
-    [self.searchBar setShowsCancelButton:NO animated:YES];
-}
+#pragma mark - SearchController Delegate methods
 
-
-#pragma mark - SearchBar Delegate methods
-
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)s {
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
     
-    if (bDisableUserInteraction || bListViewIsEmpty)
+    if (bDisableUserInteraction || bListViewIsEmpty) {
         return NO;
-    
+    }
+
     bSearching = YES;
-    
-    [self updateNavigationBar];
-    [self.searchBar setShowsCancelButton:YES animated:YES];
-    
     [self.tableView reloadData];
     
     return bSearching;
 }
 
-- (void)searchBar:(UISearchBar *)s textDidChange:(NSString *)searchText {
+- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword {
  
-    self.searchText = s.text;
+    self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
     if (searchTimer) {
@@ -380,12 +340,12 @@
     
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)s {
-    [self.searchBar endEditing:YES];
+- (void)searchControllerDidEndSearch:(SPSearchController *)controller {
+    [self endSearching];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)s {
-    [self cancelSearchButtonAction:self.searchBar];
+- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller {
+    return self.navigationController;
 }
 
 - (void)performSearch {
@@ -408,6 +368,15 @@
     searchTimer = nil;
 }
 
+- (void)endSearching {
+
+    bSearching = NO;
+
+    self.searchText = nil;
+    [self.searchController dismiss];
+
+    [self update];
+}
 
 
 #pragma mark - UITableView Data Source
@@ -660,8 +629,6 @@
 }
 
 
-
-
 #pragma mark - NSFetchedResultsController
 
 - (NSArray *)sortDescriptors
@@ -741,9 +708,10 @@
 - (void)update {
     
     [self updateFetchPredicate];
-    
+    [self refreshTitle];
+
     if (tagFilterType == SPTagFilterTypeDeleted) {
-		[self.emptyTrashButton setEnabled: [self numNotes] > 0];
+        [self.emptyTrashButton setEnabled: [self numNotes] > 0];
     }
     
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
@@ -759,12 +727,10 @@
     if (appDelegate.selectedTag != nil && [appDelegate.selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
         
         tagFilterType = SPTagFilterTypeDeleted;
-        _searchBar.placeholder = NSLocalizedString(@"Trash-noun", nil).lowercaseString;
     }
     else {
         
         tagFilterType = SPTagFilterTypeUserTag;
-        _searchBar.placeholder = appDelegate.selectedTag;
     }
     
     NSPredicate *predicate = [self fetchPredicate];
@@ -956,6 +922,7 @@
         [self updateViewIfEmpty];
 }
 
+
 #pragma mark - SPRootViewContainerDelegate
 
 - (BOOL)shouldShowSidebar {
@@ -991,6 +958,13 @@
     [(SPNavigationController *)self.navigationController setDisableRotation:YES];
 }
 
+- (void)sidebarWillHide {
+
+    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
+        self.searchBar.alpha = UIKitConstants.alphaFull;
+    }];
+}
+
 - (void)sidebarDidHide {
     
     self.tableView.scrollEnabled = YES;
@@ -1000,10 +974,6 @@
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
     self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
-    
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
-    }];
     
     bDisableUserInteraction = NO;
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
@@ -1015,19 +985,18 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (tagFilterType == SPTagFilterTypeDeleted && waiting)
+    if (tagFilterType == SPTagFilterTypeDeleted && waiting) {
         return;
-    
-    if (waiting && self.navigationItem.titleView != self.activityIndicator && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+    }
 
+    if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
         [self.activityIndicator startAnimating];
         self.bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:self.activityIndicator completion:nil];
-        
-    } else if (!waiting && self.navigationItem.titleView != _searchBarContainer && !self.bTitleViewAnimating) {
-        
+
+    } else if (!waiting && self.navigationItem.titleView != nil && !self.bTitleViewAnimating) {
         [self resetTitleView];
-        
+
     } else if (!waiting) {
         self.bResetTitleView = YES;
     }
@@ -1038,36 +1007,34 @@
 }
 
 - (void)animateTitleViewSwapWithNewView:(UIView *)newView completion:(void (^)())completion {
-    
+
     self.bTitleViewAnimating = YES;
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.navigationItem.titleView.alpha = 0.0;
-                     } completion:^(BOOL finished) {
-                         
-                         self.navigationItem.titleView = newView;
-                         
-                         [UIView animateWithDuration:0.25
-                                          animations:^{
-                                              self.navigationItem.titleView.alpha = 1.0;
-                                          } completion:^(BOOL finished) {
-                                              
-                                              if (completion)
-                                                  completion();
-                                              
-                                              self.bTitleViewAnimating = NO;
-                                              
-                                              if (self.bResetTitleView) {
-                                                  [self resetTitleView];
-                                              }
-                                          }];
-                     }];
-    
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        self.navigationItem.titleView.alpha = UIKitConstants.alphaZero;
+
+    } completion:^(BOOL finished) {
+        self.navigationItem.titleView = newView;
+
+        [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+            self.navigationItem.titleView.alpha = UIKitConstants.alphaFull;
+
+        } completion:^(BOOL finished) {
+            if (completion) {
+                completion();
+            }
+
+            self.bTitleViewAnimating = NO;
+
+            if (self.bResetTitleView) {
+                [self resetTitleView];
+            }
+         }];
+     }];
 }
 
 - (void)resetTitleView {
-    
-    [self animateTitleViewSwapWithNewView:_searchBarContainer completion:^{
+
+    [self animateTitleViewSwapWithNewView:nil completion:^{
         self.bResetTitleView = NO;
         [self.activityIndicator stopAnimating];
     }];
@@ -1126,8 +1093,8 @@
 
 #pragma mark - Ratings View Helpers
 
-- (void)showRatingViewIfNeeded
-{
+- (void)showRatingViewIfNeeded {
+
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
         return;
     }
@@ -1153,8 +1120,8 @@
                      completion:nil];
 }
 
-- (void)hideRatingViewIfNeeded
-{
+- (void)hideRatingViewIfNeeded {
+
     if (self.tableView.tableHeaderView == nil || [[SPRatingsHelper sharedInstance] shouldPromptForAppReview] == YES) {
         return;
     }
