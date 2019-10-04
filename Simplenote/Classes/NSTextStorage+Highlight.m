@@ -5,10 +5,10 @@
 
 - (void)applyColor:(UIColor *)color toSubstringMatchingKeywords:(NSString *)keywords {
     NSArray* ranges = [self.string rangesForTerms:keywords];
-    [self applyColorAttribute:color forRanges:ranges];
+    [self applyColor:color toRanges:ranges];
 }
 
-- (void)applyColorAttribute:(id)color forRanges:(NSArray *)wordRanges {
+- (void)applyColor:(UIColor *)color toRanges:(NSArray *)wordRanges {
     
     if (!color) {
         return;

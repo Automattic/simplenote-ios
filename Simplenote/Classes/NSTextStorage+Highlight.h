@@ -3,6 +3,6 @@
 @interface NSTextStorage (Highlight)
 
 - (void)applyColor:(UIColor *)color toSubstringMatchingKeywords:(NSString *)keywords;
-- (void)applyColorAttribute:(id)color forRanges:(NSArray *)wordRanges;
+- (void)applyColor:(UIColor *)color toRanges:(NSArray *)wordRanges;
 
 @end
