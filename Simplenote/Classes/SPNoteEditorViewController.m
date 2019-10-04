@@ -192,9 +192,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     [super viewWillAppear:animated];
 
+    [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
-    [self.navigationController setToolbarHidden:!bSearching animated:YES];
     [self sizeNavigationContainer];
     [self adjustFrameForSafeInsets];
 
@@ -208,6 +208,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
+}
+
+- (void)setupNavigationController {
+    // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:!bSearching animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder

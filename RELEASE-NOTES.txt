@@ -1,6 +1,6 @@
 4.11.0
 ======
--   Search Bar style refresh!
+-   Search Bar is now looking better than ever!
 -   Notes List refreshed to display Pinned state on the right hand side.
 -   iOS 11 Is now the minimum supported OS.
 
