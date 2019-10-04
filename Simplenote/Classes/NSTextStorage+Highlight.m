@@ -1,11 +1,3 @@
-//
-//  NSTextStorage+Highlight.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 8/28/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "NSTextStorage+Highlight.h"
 #import "NSString+Search.h"
 
@@ -40,35 +32,5 @@
     
     [self endEditing];
 }
-
-- (void)applyAttributes:(NSDictionary *)attributes matchingStrings:(NSArray *)strings characterLimit:(NSInteger)characterLimit {
-    
-    
-    NSString *content = self.string;
-    
-    [self beginEditing];
-    
-    for (NSString *matchString in strings) {
-        
-        // find all occurances of the matching string
-        
-        NSUInteger count = 0, length = MIN([content length], characterLimit);
-        NSRange range = NSMakeRange(0, length);
-        while(range.location != NSNotFound)
-        {
-            range = [content rangeOfString:matchString options:NSCaseInsensitiveSearch range:range];
-            if(range.location != NSNotFound) {
-                
-                [self setAttributes:attributes range:range];
-                
-                range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
-                count++;
-            }
-        }
-    }
-    
-    [self endEditing];
-}
-
 
 @end
