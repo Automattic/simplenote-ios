@@ -55,6 +55,7 @@
 - (BOOL)shouldShowSidebar;
 - (void)sidebarWillShow;
 - (void)sidebarDidShow;
+- (void)sidebarWillHide;
 - (void)sidebarDidHide;
 - (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible;
 - (void)resetNavigationBar;

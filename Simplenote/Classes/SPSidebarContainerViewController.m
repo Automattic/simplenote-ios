@@ -326,7 +326,8 @@ static CGFloat sidePanelWidth;
 - (void)hideSidePanelAnimated:(BOOL)animated completion:(void (^)())completion {
     
     [self resetNavigationBar];
-    
+    [self sidebarWillHide];
+
     CGRect newRootFrame = _rootView.frame;
     newRootFrame.origin.x = 0;
     
@@ -398,6 +399,10 @@ static CGFloat sidePanelWidth;
 
 - (void)sidebarDidShow {
     
+}
+
+- (void)sidebarWillHide {
+
 }
 
 - (void)sidebarDidHide {

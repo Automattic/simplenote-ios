@@ -35,6 +35,7 @@ extern NSInteger const kOnePasswordGeneratedMaxLength;
 extern NSString *const kFirstLaunchKey;
 extern NSString *const kSelectedTagKey;
 extern NSString *const kSelectedNoteKey;
+extern NSString *const kSimplenoteTagTrashKey;
 extern NSString *const kSimplenotePinKey;
 extern NSString *const kSimplenotePinLegacyKey;
 extern NSString *const kSimplenoteUseBiometryKey;

@@ -1,11 +1,3 @@
-//
-//  SPNoteListViewController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
@@ -24,24 +16,13 @@ typedef enum {
 } SPTagFilterType;
 
 @interface SPNoteListViewController : SPSidebarContainerViewController {
-     
-    // Navigation Bar
-    UIBarButtonItem *addButton;
-    UIBarButtonItem *sidebarButton;
-    UIBarButtonItem *iPadCancelButton;
-
-    UIBarButtonItem *emptyTrashButton;
-        
-    UIActivityIndicatorView *activityIndicator;
-    
+            
     NSTimer *searchTimer;
     
     // Bools
     BOOL bSearching;
     BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
-    BOOL bTitleViewAnimating;
-    BOOL bResetTitleView;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
         
