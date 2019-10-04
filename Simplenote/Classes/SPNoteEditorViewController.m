@@ -1,11 +1,3 @@
-//
-//  SPNoteEditorViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/9/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
@@ -65,11 +57,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) UIFont                    *bodyFont;
-@property (nonatomic, strong) NSMutableParagraphStyle   *paragraphStyle;
-@property (nonatomic, strong) UIFont                    *headlineFont;
-@property (nonatomic, strong) UIColor                   *fontColor;
-@property (nonatomic, strong) UIColor                   *lightFontColor;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
@@ -129,6 +116,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
+
+        // Apply the current style right away!
+        [self applyStyle];
     }
     
     return self;
@@ -141,28 +131,31 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)applyStyle {
     
-    _bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
-    _lightFontColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    UIColor *fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
 
-    _noteEditorTextView.font = _bodyFont;
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
+
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
-    
-    _paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    _paragraphStyle.lineSpacing = _bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-    
-    _noteEditorTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : @{ NSForegroundColorAttributeName : _fontColor,
-                                                                                  NSFontAttributeName : _bodyFont,
-                                                                                  NSParagraphStyleAttributeName : _paragraphStyle},
-                                                          SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor,
-                                                                                  NSFontAttributeName : _headlineFont} };
-    
+
+    _noteEditorTextView.font = bodyFont;
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
+    _noteEditorTextView.interactiveTextStorage.tokens = @{
+        SPDefaultTokenName : @{
+                NSFontAttributeName : bodyFont,
+                NSForegroundColorAttributeName : fontColor,
+                NSParagraphStyleAttributeName : paragraphStyle
+        },
+        SPHeadlineTokenName : @{
+                NSFontAttributeName : headlineFont,
+                NSForegroundColorAttributeName: fontColor,
+        }
+    };
 }
 
 - (void)viewDidLoad
@@ -183,7 +176,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     self.navigationItem.title = nil;
     
     [self startListeningToNotifications];
-    [self applyStyle];
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
 }
@@ -219,12 +211,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)ensureTagViewIsVisible
 {
-    if (_tagView.alpha >= 1.0) {
+    if (_tagView.alpha >= UIKitConstants.alphaFull) {
         return;
     }
 
-    [UIView animateWithDuration:0.3 animations:^{
-        self.tagView.alpha = 1.0;
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        self.tagView.alpha = UIKitConstants.alphaFull;
      }];
 }
 
@@ -282,7 +274,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
@@ -305,7 +296,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self->bDisableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self->bDisableShrinkingNavigationBar = NO;
     }];
 }
@@ -639,7 +630,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
     // hide the tags field
     if (!bVoiceoverEnabled) {
-        self.tagView.alpha = 0.0;
+        self.tagView.alpha = UIKitConstants.alphaZero;
     }
 }
 
@@ -776,7 +767,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     highlightedSearchResultIndex = MAX(0, highlightedSearchResultIndex - 1);
     [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
-    
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
