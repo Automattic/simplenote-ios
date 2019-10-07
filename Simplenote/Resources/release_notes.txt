@@ -1,2 +1,25 @@
-- We have redesigned the screens for getting started and logging into the app.
-- You can now use Peek and Pop to on the notes list screen.
+4.11.0
+======
+-   Search Bar is now looking better than ever!
+-   Notes List refreshed to display Pinned state on the right hand side.
+-   iOS 11 Is now the minimum supported OS.
+-   Fixed a bug in which the Editor Colors might not be properly initialized
+
+4.10.0
+======
+-   Redesigned Onboarding and Authentication Interface(s).
+-   Notes List now supports Peek and Pop.
+
+4.9.0
+=====
+-   Simplenote now works with Siri shortcuts allowing you to open the app, open existing notes, and create new notes directly from Siri
+-   New Swipe Actions available in the Notes List: Pin and Share!
+-   The Notes List now displays an icon, outlining notes that have been published.
+-   When sharing to the WordPress App, Notes will no longer be blockquoted.
+-   The iOS share extension UI has been completly updated.
+-   Fixed an iOS 13 bug that caused the Notes List to get clipped upon Swipe Actions.
+-   iOS 13 Now has a new Theme: System default, which will match iOS's style.
+
+4.8.0
+=====
+-   The Notes List can now be sorted by creation and modification dates.
