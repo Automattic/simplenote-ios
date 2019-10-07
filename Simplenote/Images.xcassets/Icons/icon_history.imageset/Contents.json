@@ -2,17 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "icon_history.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "icon_history@2x.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "icon_new_note.pdf"
     }
   ],
   "info" : {
