@@ -53,7 +53,6 @@ enum ThemeColorKey: String {
 // MARK: - ThemeImageKey represents all of the available Image Keys
 //
 enum ThemeImageKey: String {
-    case backImage
     case pinImage
     case sharedImage
     case navigationBarBackgroundImage
@@ -69,8 +68,6 @@ extension ThemeImageKey {
 
     var filename: String {
         switch self {
-        case .backImage:
-            return "back_chevron"
         case .pinImage:
             return "icon_pin"
         case .sharedImage:

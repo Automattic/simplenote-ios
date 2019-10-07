@@ -64,8 +64,6 @@
 		<string>4895d9</string>
 		<key>barTintColor</key>
 		<string>@backgroundColor</string>
-		<key>backImage</key>
-		<string>back_chevron</string>
 		<key>backgroundColor</key>
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
