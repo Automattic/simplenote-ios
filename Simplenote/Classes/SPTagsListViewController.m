@@ -40,7 +40,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) Tag *renameTag;
-@property (nonatomic, strong) UIImage *tagImage;
 @property (nonatomic, strong) UIImage *allNotesImage;
 @property (nonatomic, strong) UIImage *trashImage;
 @property (nonatomic, strong) UIImage *settingsImage;
@@ -107,7 +106,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    _tagImage = [[UIImage imageNamed:@"icon_tag"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
