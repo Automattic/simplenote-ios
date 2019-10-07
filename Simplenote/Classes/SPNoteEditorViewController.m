@@ -1387,10 +1387,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                       NSLocalizedString(@"History...", @"Action - view the version history of a note"),
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageNamed:@"button_share_note"],
+    actionImages = @[[UIImage imageNamed:@"icon_share"],
                      [UIImage imageNamed:@"icon_history"],
-                     [UIImage imageNamed:@"button_collaborate"],
-                     [UIImage imageNamed:@"icon_trash_large"]];
+                     [UIImage imageNamed:@"icon_user"],
+                     [UIImage imageNamed:@"icon_trash"]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
                     NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
     toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),
