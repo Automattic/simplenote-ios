@@ -12,7 +12,6 @@ enum UIImageName: Int, CaseIterable {
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
-    case searchIconImage
     case tagViewDeletionImage
     case visibilityOnImage
     case visibilityOffImage
@@ -39,8 +38,6 @@ extension UIImageName {
             return .navigationBarBackgroundPromptImage
         case .onePasswordImage:
             return .onePasswordImage
-        case .searchIconImage:
-            return .searchIconImage
         case .tagViewDeletionImage:
             return .tagViewDeletionImage
         case .visibilityOnImage:
