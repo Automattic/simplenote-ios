@@ -207,7 +207,7 @@
 		<key>lockBackgroundColor</key>
 		<string>448AC9</string>
 		<key>onePasswordImage</key>
-		<string>button_onepassword</string>
+		<string>icon_onepassword</string>
 		<key>visibilityOnImage</key>
 		<string>icon_visibility_on</string>
 		<key>visibilityOffImage</key>

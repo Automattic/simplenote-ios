@@ -83,7 +83,7 @@ extension ThemeImageKey {
         case .navigationBarBackgroundPromptImage:
             return "navigation_bar_background_prompt"
         case .onePasswordImage:
-            return "button_onepassword"
+            return "icon_onepassword"
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:
