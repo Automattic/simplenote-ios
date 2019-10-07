@@ -1,3 +1,6 @@
+4.12
+-----
+ 
 4.11.0
 ======
 -   Search Bar is now looking better than ever!
