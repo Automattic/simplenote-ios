@@ -227,6 +227,7 @@ extension SPAboutViewController: UITableViewDataSource {
         cell.selectedBackgroundView = bgColorView
         
         let arrowAccessoryView = UIImageView(image: UIImage(named: "icon_arrow_top_right"))
+        arrowAccessoryView.tintColor = .white
         arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         cell.accessoryView = arrowAccessoryView
         
