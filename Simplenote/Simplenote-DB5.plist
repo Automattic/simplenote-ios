@@ -207,9 +207,9 @@
 		<key>onePasswordImage</key>
 		<string>button_onepassword</string>
 		<key>visibilityOnImage</key>
-		<string>button_visibility_on</string>
+		<string>icon_visibility_on</string>
 		<key>visibilityOffImage</key>
-		<string>button_visibility_off</string>
+		<string>icon_visibility_off</string>
 		<key>simplenoteAlmostBlack</key>
 		<string>12171a</string>
 		<key>simplenoteLightNavy</key>

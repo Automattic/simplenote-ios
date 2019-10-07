@@ -84,9 +84,9 @@ extension ThemeImageKey {
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:
-            return "button_visibility_on"
+            return "icon_visibility_on"
         case .visibilityOffImage:
-            return "button_visibility_off"
+            return "icon_visibility_off"
         }
     }
 }
