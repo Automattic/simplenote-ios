@@ -420,7 +420,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     newButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
-    keyboardButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_keyboard"]
+    keyboardButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_hide_keyboard"]
                                         target:self
                                       selector:@selector(keyboardButtonAction:)];
     keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
