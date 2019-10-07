@@ -6,6 +6,8 @@ import UIKit
 //
 @objc
 enum UIImageName: Int, CaseIterable {
+    case chevronLeftImage
+    case chevronRightImage
     case pinImage
     case sharedImage
     case navigationBarBackgroundImage
@@ -25,6 +27,10 @@ extension UIImageName {
     ///
     var legacyImageKey: ThemeImageKey {
         switch self {
+        case .chevronLeftImage:
+            return .chevronLeftImage
+        case .chevronRightImage:
+            return .chevronRightImage
         case .pinImage:
             return .pinImage
         case .sharedImage:

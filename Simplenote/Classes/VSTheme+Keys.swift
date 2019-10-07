@@ -53,6 +53,8 @@ enum ThemeColorKey: String {
 // MARK: - ThemeImageKey represents all of the available Image Keys
 //
 enum ThemeImageKey: String {
+    case chevronLeftImage
+    case chevronRightImage
     case pinImage
     case sharedImage
     case navigationBarBackgroundImage
@@ -68,6 +70,10 @@ extension ThemeImageKey {
 
     var filename: String {
         switch self {
+        case .chevronLeftImage:
+            return "icon_chevron_left"
+        case .chevronRightImage:
+            return "icon_chevron_right"
         case .pinImage:
             return "icon_pin"
         case .sharedImage:

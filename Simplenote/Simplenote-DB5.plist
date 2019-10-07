@@ -68,6 +68,10 @@
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
 		<string>44</string>
+		<key>chevronRightImage</key>
+		<string>icon_chevron_right</string>
+		<key>chevronLeftImage</key>
+		<string>icon_chevron_left</string>
 		<key>actionSheetShowViewSeparators</key>
 		<true/>
 		<key>actionSheetLabelPadding</key>
