@@ -83,7 +83,7 @@ extension ThemeImageKey {
         case .onePasswordImage:
             return "button_onepassword"
         case .searchIconImage:
-            return "search_icon"
+            return "icon_search"
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:
