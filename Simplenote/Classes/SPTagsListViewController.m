@@ -44,7 +44,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 @property (nonatomic, strong) UIImage *allNotesImage;
 @property (nonatomic, strong) UIImage *trashImage;
 @property (nonatomic, strong) UIImage *settingsImage;
-@property (nonatomic, strong) UIImage *sortImage;
 
 
 @end
@@ -112,7 +111,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _sortImage = [[UIImage imageNamed:@"icon_sort"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
