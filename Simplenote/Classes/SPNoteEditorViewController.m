@@ -39,16 +39,18 @@
 
 NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
-CGFloat const SPCustomTitleViewHeight            = 44.0f;
-CGFloat const SPPaddingiPadCompactWidthPortrait  =  8.0f;
-CGFloat const SPPaddingiPadLeading               =  4.0f;
-CGFloat const SPPaddingiPadTrailing              = -2.0f;
-CGFloat const SPPaddingiPhoneLeadingLandscape    =  0.0f;
-CGFloat const SPPaddingiPhoneLeadingPortrait     =  8.0f;
-CGFloat const SPPaddingiPhoneTrailingLandscape   = 14.0f;
-CGFloat const SPPaddingiPhoneTrailingPortrait    =  6.0f;
-CGFloat const SPBarButtonYOriginAdjustment       = -1.0f;
-CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
+CGFloat const SPCustomTitleViewHeight               = 44.0f;
+CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
+CGFloat const SPPaddingiPadLeading                  = 4.0f;
+CGFloat const SPPaddingiPadTrailing                 = -2.0f;
+CGFloat const SPPaddingiPhoneLeadingLandscape       = 0.0f;
+CGFloat const SPPaddingiPhoneLeadingPortrait        = 8.0f;
+CGFloat const SPPaddingiPhoneTrailingLandscape      = 14.0f;
+CGFloat const SPPaddingiPhoneTrailingPortrait       = 6.0f;
+CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
+CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
+CGFloat const SPBackButtonImagePadding              = -18;
+CGFloat const SPBackButtonTitlePadding              = -15;
 
 
 @interface SPNoteEditorViewController ()<SPInteractivePushViewControllerProvider, UIPopoverPresentationControllerDelegate> {
@@ -396,8 +398,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setImage:chevronLeftImage forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
-    backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
+    backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
+    backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
     [backButton addTarget:self
                    action:@selector(backButtonAction:)
