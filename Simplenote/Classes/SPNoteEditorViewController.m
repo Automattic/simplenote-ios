@@ -404,7 +404,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_action"]
+    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_info"]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
