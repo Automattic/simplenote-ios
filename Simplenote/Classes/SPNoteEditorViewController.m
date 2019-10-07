@@ -372,7 +372,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // setup Navigation Bar
     self.navigationItem.hidesBackButton = YES;
-    
+
+    // Load Assets
+    UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRightImage];
+    UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeftImage];
+
     // container view
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -390,8 +394,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // back button
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [backButton setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                forState:UIControlStateNormal];
+    [backButton setImage:chevronLeftImage forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
     backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
@@ -452,13 +455,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     UIBarButtonItem *flexibleSpaceTwo = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-    UIImage *chevronImage = [UIImage imageNamed:@"back_chevron"];
-    nextSearchButton = [UIBarButtonItem barButtonWithImage:[chevronImage imageRotatedByDegrees:180.0]
+
+    nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightNextSearchResult:)];
         nextSearchButton.width = 34.0;
-    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronImage
+    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightPrevSearchResult:)];
