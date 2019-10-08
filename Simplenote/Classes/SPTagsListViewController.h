@@ -5,7 +5,7 @@
 @class SPButton;
 @class SPBorderedView;
 
-@interface SPTagsListViewController : SPSidebarViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SPTagListViewCellDelegate> {
+@interface SPTagsListViewController : SPSidebarViewController {
 
     UIView *headerSeparator;
     UIView *footerSeparator;
@@ -15,14 +15,6 @@
     UIButton *editTagsButton;
     UILabel *tagsLabel;
     SPBorderedView *customView;
-    
-    BOOL bEditing;
-    BOOL bVisible;
-
-    NSString *cellIdentifier;
-    NSString *cellWithIconIdentifier;
-    
-    NSTimer *reloadTimer;
 }
 
 @end

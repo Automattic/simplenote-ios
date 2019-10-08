@@ -24,7 +24,12 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 // MARK: - Private
 //
-@interface SPTagsListViewController ()
+@interface SPTagsListViewController () <NSFetchedResultsControllerDelegate,
+                                        UITextFieldDelegate,
+                                        UIGestureRecognizerDelegate,
+                                        UITableViewDelegate,
+                                        UITableViewDataSource,
+                                        SPTagListViewCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
@@ -32,6 +37,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 @property (nonatomic, strong) UIImage                       *allNotesImage;
 @property (nonatomic, strong) UIImage                       *trashImage;
 @property (nonatomic, strong) UIImage                       *settingsImage;
+@property (nonatomic, strong) NSString                      *cellIdentifier;
+@property (nonatomic, strong) NSString                      *cellWithIconIdentifier;
+@property (nonatomic, strong) NSTimer                       *reloadTimer;
+@property (nonatomic, assign) BOOL                          bEditing;
+@property (nonatomic, assign) BOOL                          bVisible;
 
 @end
 
@@ -58,12 +68,12 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.tableView.rowHeight = 36;
 
     // register custom cell
-    cellIdentifier = self.theme.name;
-    cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
+    self.cellIdentifier = self.theme.name;
+    self.cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
     [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:cellIdentifier];
+           forCellReuseIdentifier:self.cellIdentifier];
     [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:cellWithIconIdentifier];
+           forCellReuseIdentifier:self.cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
     _settingsImage = [UIImage imageWithName:UIImageNameSettings];
@@ -135,8 +145,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    cellIdentifier = self.theme.name;
-    cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
+    self.cellIdentifier = self.theme.name;
+    self.cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
     [self.tableView reloadData];
 
     [self.view setNeedsDisplay];
@@ -187,7 +197,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)editTagsTap:(UIButton *)sender {
-    [self setEditing:!bEditing canceled:NO];
+    [self setEditing:!self.bEditing canceled:NO];
 }
 
 
@@ -245,9 +255,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
     if (!cell) {
-        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellIdentifier];
     }
 
     [cell resetCellForReuse];
@@ -267,7 +277,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     Tag *tag = [self tagAtRow: indexPath.row];
     cellText = tag.name;
     cellIcon = nil;
-    selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
+    selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
@@ -324,7 +334,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtRow: indexPath.row];
 
-    if (bEditing) {
+    if (self.bEditing) {
         [SPTracker trackTagRowRenamed];
         [self renameTagAction:tag];
     } else {
@@ -355,14 +365,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // Detemine if it's in editing mode
-    if (bEditing)
-    {
-        return UITableViewCellEditingStyleDelete;
-    }
-    
-    return UITableViewCellEditingStyleNone;
+
+    return self.bEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -394,11 +398,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
     
-    if (bEditing == editing) {
+    if (self.bEditing == editing) {
         return;
     }
     
-    bEditing = editing;
+    self.bEditing = editing;
 
     self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView setEditing:editing animated:YES];
@@ -555,7 +559,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
                                                                                                              inSection:kSectionTags]];
     // deselect cell if editing
-    if (bEditing) {
+    if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
     
@@ -596,19 +600,19 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
     
-    bVisible = NO;
+    self.bVisible = NO;
     [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
     
-    bVisible = YES;
+    self.bVisible = YES;
 }
 
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self->bVisible)
+        if (!self.bVisible)
             [self.tableView reloadData];
     });
     
@@ -687,24 +691,24 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     
-    if (!bVisible) {
+    if (!self.bVisible) {
         return;
     }
     
-    [reloadTimer invalidate];
-    reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                   target:self
-                                                 selector:@selector(delayedReloadData)
-                                                 userInfo:nil
-                                                  repeats:NO];
+    [self.reloadTimer invalidate];
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                        target:self
+                                                      selector:@selector(delayedReloadData)
+                                                      userInfo:nil
+                                                       repeats:NO];
 }
 
 - (void)delayedReloadData {
     
     [self.tableView reloadData];
     
-    [reloadTimer invalidate];
-    reloadTimer = nil;
+    [self.reloadTimer invalidate];
+    self.reloadTimer = nil;
 }
 
 
