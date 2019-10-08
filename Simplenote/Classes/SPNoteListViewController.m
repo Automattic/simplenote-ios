@@ -229,7 +229,7 @@
 
     /// Button: New Note
     ///
-    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
+    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageWithName:UIImageNameNewNoteImage]
                                           imageAlignment:UIBarButtonImageAlignmentRight
                                                   target:self
                                                 selector:@selector(addButtonAction:)];
@@ -239,7 +239,7 @@
 
     /// Button: Display Tags
     ///
-    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_menu"]
+    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageWithName:UIImageNameMenuImage]
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
