@@ -416,7 +416,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
-    checklistButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_checklist"]
+    checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklistImage]
                                       target:self
                                     selector:@selector(insertChecklistAction:)];
     
