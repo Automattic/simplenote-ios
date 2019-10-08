@@ -96,9 +96,14 @@
 
 #pragma mark - View Lifecycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     [self refreshTableViewInsets];
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    [self ensureFirstRowIsVisible];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

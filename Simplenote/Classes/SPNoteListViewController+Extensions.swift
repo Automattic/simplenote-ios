@@ -37,6 +37,20 @@ extension SPNoteListViewController {
         tableView.contentInset.top = searchBar.frame.height
         tableView.scrollIndicatorInsets.top = searchBar.frame.height
     }
+
+    /// Workaround: Scroll to the very first row. Expected to be called *just* once, right after the view has been laid out, and has been moved
+    /// to its parent ViewController.
+    ///
+    /// Ref. Issue #452
+    ///
+    @objc
+    func ensureFirstRowIsVisible() {
+        guard tableView.isHidden == false else {
+            return
+        }
+
+        tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
+    }
 }
 
 
