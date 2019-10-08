@@ -6,7 +6,7 @@
 
 @implementation SPTagListViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -57,8 +57,8 @@
     return self;
 }
 
-- (void)willTransitionToState:(UITableViewCellStateMask)state
-{
+- (void)willTransitionToState:(UITableViewCellStateMask)state {
+
     [super willTransitionToState:state];
     
     if (state & UITableViewCellStateShowingDeleteConfirmationMask) {
@@ -66,25 +66,13 @@
     }
 }
 
-- (id<SPTagListViewCellDelegate>)delegate
-{
-    return delegate;
-}
-
-- (void)setDelegate:(id<SPTagListViewCellDelegate>)newDelegate
-{
-    delegate = newDelegate;
-}
-
 - (VSTheme *)theme {
     
     return [[VSThemeManager sharedManager] theme];
-    
 }
 
 - (void)layoutSubviews {
-    
-    
+
     [super layoutSubviews];
 
     if (!performedInitialLayout) {
@@ -113,7 +101,6 @@
         self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
         self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
-    
 }
 
 - (void)setIconImage:(UIImage *)image {
@@ -123,7 +110,6 @@
     
     self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
     self.imageView.image = image;
-    
 }
 
 - (void)setTagNameText:(NSString *)text {
@@ -155,13 +141,6 @@
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    
-    [super setSelected:selected animated:animated];
-}
-
-
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
     
     return (action == @selector(rename:) || action == @selector(delete:)) &&
@@ -170,15 +149,15 @@
 
 - (void)delete:(id)sender {
     
-    if ([delegate respondsToSelector:@selector(tagListViewCellShouldDeleteTag:)]) {
-        [delegate tagListViewCellShouldDeleteTag:self];
+    if ([self.delegate respondsToSelector:@selector(tagListViewCellShouldDeleteTag:)]) {
+        [self.delegate tagListViewCellShouldDeleteTag:self];
     }
-    
 }
+
 - (void)rename:(id)sender {
  
-    if ([delegate respondsToSelector:@selector(tagListViewCellShouldRenameTag:)]) {
-        [delegate tagListViewCellShouldRenameTag:self];
+    if ([self.delegate respondsToSelector:@selector(tagListViewCellShouldRenameTag:)]) {
+        [self.delegate tagListViewCellShouldRenameTag:self];
     }
 }
 
