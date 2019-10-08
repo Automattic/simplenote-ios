@@ -1396,7 +1396,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     actionImages = @[[UIImage imageWithName:UIImageNameShareImage],
                      [UIImage imageWithName:UIImageNameHistoryImage],
                      [UIImage imageWithName:UIImageNameCollaborateImage],
-                     [UIImage imageNamed:@"icon_trash"]];
+                     [UIImage imageWithName:UIImageNameTrashImage]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
                     NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
     toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),
