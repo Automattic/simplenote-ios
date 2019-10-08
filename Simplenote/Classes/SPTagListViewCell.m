@@ -1,11 +1,3 @@
-//
-//  SPTagListViewCell.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/26/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPTagListViewCell.h"
 #import "VSThemeManager.h"
 #import "SPBorderedView.h"

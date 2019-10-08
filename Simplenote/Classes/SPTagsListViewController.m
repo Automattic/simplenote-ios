@@ -1,11 +1,3 @@
-//
-//  SPTagsListViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/23/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPTagsListViewController.h"
 #import "VSThemeManager.h"
 #import "Tag.h"

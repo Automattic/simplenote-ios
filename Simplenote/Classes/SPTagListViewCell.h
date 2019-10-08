@@ -1,11 +1,3 @@
-//
-//  SPTagListViewCell.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/26/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 @class SPTagListViewCell;
 
