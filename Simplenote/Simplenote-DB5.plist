@@ -68,10 +68,6 @@
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
 		<string>44</string>
-		<key>chevronRightImage</key>
-		<string>icon_chevron_right</string>
-		<key>chevronLeftImage</key>
-		<string>icon_chevron_left</string>
 		<key>actionSheetShowViewSeparators</key>
 		<true/>
 		<key>actionSheetLabelPadding</key>
@@ -116,10 +112,6 @@
 		<integer>360</integer>
 		<key>actionSheetButtonHeight</key>
 		<integer>55</integer>
-		<key>pinImage</key>
-		<string>icon_pin</string>
-		<key>sharedImage</key>
-		<string>icon_shared</string>
 		<key>tagViewHeight</key>
 		<integer>44</integer>
 		<key>tagViewPlaceholderColor</key>
@@ -138,8 +130,6 @@
 		<string>444444</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>cbdff3</string>
-		<key>tagViewDeletionImage</key>
-		<string>button_delete_small</string>
 		<key>searchBarImageColor</key>
 		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
@@ -194,24 +184,10 @@
 		<integer>10</integer>
 		<key>horizontalPickerBorderColor</key>
 		<string>d9d9d9</string>
-		<key>navigationBarBackgroundImage</key>
-		<string>navigation_bar_background</string>
-		<key>navigationBarBackgroundPromptImage</key>
-		<string>navigation_bar_background_prompt</string>
-		<key>navigationBarBackgroundLandscapePhone</key>
-		<string>navigation_bar_background_landscape</string>
-		<key>navigationBarBackgroundLandscapePhonePrompt</key>
-		<string>navigation_bar_background_landscape_prompt</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
 		<string>448AC9</string>
-		<key>onePasswordImage</key>
-		<string>icon_onepassword</string>
-		<key>visibilityOnImage</key>
-		<string>icon_visibility_on</string>
-		<key>visibilityOffImage</key>
-		<string>icon_visibility_off</string>
 		<key>simplenoteAlmostBlack</key>
 		<string>12171a</string>
 		<key>simplenoteLightNavy</key>
@@ -281,8 +257,6 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>tagViewDeletionImage</key>
-		<string>button_delete_small_dark</string>
 		<key>searchHighlightFontColor</key>
 		<string>f9f9f9</string>
 		<key>searchBarImageColor</key>
@@ -299,14 +273,6 @@
 		<string>@secondaryTextColor</string>
 		<key>horizontalPickerBorderColor</key>
 		<string>@dividerColor</string>
-		<key>navigationBarBackgroundImage</key>
-		<string>navigation_bar_background_dark</string>
-		<key>navigationBarBackgroundPromptImage</key>
-		<string>navigation_bar_background_prompt_dark</string>
-		<key>navigationBarBackgroundLandscapePhone</key>
-		<string>navigation_bar_background_landscape_dark</string>
-		<key>navigationBarBackgroundLandscapePhonePrompt</key>
-		<string>navigation_bar_background_landscape_prompt_dark</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>lockBackgroundColor</key>

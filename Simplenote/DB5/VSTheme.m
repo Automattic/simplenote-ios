@@ -126,16 +126,6 @@ static UIColor *colorWithHexString(NSString *hexString);
 	return [obj floatValue];
 }
 
-- (UIImage *)imageForKey:(NSString *)key {
-	
-	NSString *imageName = [self stringForKey:key];
-	if (stringIsEmpty(imageName))
-		return nil;
-	
-	return [UIImage imageNamed:imageName];
-}
-
-
 - (UIColor *)colorForKey:(NSString *)key {
 
 	UIColor *cachedColor = [self.colorCache objectForKey:key];
