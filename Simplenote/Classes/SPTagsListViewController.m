@@ -106,9 +106,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [UIImage imageWithName:UIImageNameSettingsImage];
     _allNotesImage = [UIImage imageWithName:UIImageNameAllNotesImage];
+    _trashImage = [UIImage imageWithName:UIImageNameTrashImage];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -832,7 +832,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     trashButton = [self buildHeaderButton];
     trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
-    [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [trashButton setImage:[[UIImage imageWithName:UIImageNameTrashImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [trashButton setTitle:NSLocalizedString(@"Trash-noun", nil) forState:UIControlStateNormal];
     [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
 
