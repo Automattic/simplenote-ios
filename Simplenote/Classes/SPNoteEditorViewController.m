@@ -420,7 +420,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
                                       target:self
                                     selector:@selector(insertChecklistAction:)];
     
-    newButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_new_note"]
+    newButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNoteImage]
                                    target:self
                                  selector:@selector(newButtonAction:)];
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
