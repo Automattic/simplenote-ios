@@ -26,8 +26,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 //
 @interface SPTagsListViewController ()
 
+@property (nonatomic, strong) IBOutlet UITableView          *tableView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
-@property (nonatomic, strong) UITableView                   *tableView;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) UIImage                       *allNotesImage;
 @property (nonatomic, strong) UIImage                       *trashImage;
@@ -53,21 +53,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     settingsButton = [self buildSettingsButton];
     [self.view addSubview:settingsButton];
-    
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    [self.view addSubview:self.tableView];
 
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.alwaysBounceVertical = YES;
     self.tableView.rowHeight = 36;
-    self.tableView.allowsSelection = YES;
-    
+
     // register custom cell
     cellIdentifier = self.theme.name;
     cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
@@ -92,17 +81,12 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
     [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
-
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // Register for keyboard notifications
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self startListeningToKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -123,10 +107,16 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self removeKeyboardObservers];
+    [self stopListeningToKeyboardNotifications];
 }
 
-- (void)removeKeyboardObservers {
+- (void)startListeningToKeyboardNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)stopListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver: self name:UIKeyboardWillHideNotification object:nil];
     [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];
