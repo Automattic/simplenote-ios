@@ -1394,7 +1394,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
     actionImages = @[[UIImage imageWithName:UIImageNameShareImage],
-                     [UIImage imageNamed:@"icon_history"],
+                     [UIImage imageWithName:UIImageNameHistoryImage],
                      [UIImage imageNamed:@"icon_collaborate"],
                      [UIImage imageNamed:@"icon_trash"]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
