@@ -410,7 +410,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_info"]
+    actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfoImage]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");

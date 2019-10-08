@@ -11,6 +11,7 @@ enum UIImageName: Int, CaseIterable {
     case checkmarkUncheckedImage
     case chevronLeftImage
     case chevronRightImage
+    case infoImage
     case pinImage
     case sharedImage
     case navigationBarBackgroundImage
@@ -40,6 +41,8 @@ extension UIImageName {
             return "icon_chevron_left"
         case .chevronRightImage:
             return "icon_chevron_right"
+        case .infoImage:
+            return "icon_info"
         case .pinImage:
             return "icon_pin"
         case .sharedImage:
