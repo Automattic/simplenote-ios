@@ -229,7 +229,7 @@
 
     /// Button: New Note
     ///
-    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageWithName:UIImageNameNewNoteImage]
+    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageWithName:UIImageNameNewNote]
                                           imageAlignment:UIBarButtonImageAlignmentRight
                                                   target:self
                                                 selector:@selector(addButtonAction:)];
@@ -239,7 +239,7 @@
 
     /// Button: Display Tags
     ///
-    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageWithName:UIImageNameMenuImage]
+    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageWithName:UIImageNameMenu]
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
@@ -425,8 +425,8 @@
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 
-    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameSharedImage] : nil;
-    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePinImage] : nil;
+    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
+    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
     cell.accessoryLeftTintColor = previewColor;
     cell.accessoryRightTintColor = previewColor;
 

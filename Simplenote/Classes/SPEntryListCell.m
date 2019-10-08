@@ -33,8 +33,8 @@
         secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
         [self.contentView addSubview:secondaryLabel];
         
-        UIImage *checkedImage = [UIImage imageWithName:UIImageNameCheckmarkCheckedImage];
-        UIImage *uncheckedImage = [UIImage imageWithName:UIImageNameCheckmarkUncheckedImage];
+        UIImage *checkedImage = [UIImage imageWithName:UIImageNameCheckmarkChecked];
+        UIImage *uncheckedImage = [UIImage imageWithName:UIImageNameCheckmarkUnchecked];
 
         checkmarkImageView = [[UIImageView alloc] initWithImage:uncheckedImage
                                                highlightedImage:checkedImage];

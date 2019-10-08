@@ -376,8 +376,8 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     self.navigationItem.hidesBackButton = YES;
 
     // Load Assets
-    UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRightImage];
-    UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeftImage];
+    UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRight];
+    UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeft];
 
     // container view
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
@@ -410,23 +410,23 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfoImage]
+    actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
-    checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklistImage]
+    checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklist]
                                       target:self
                                     selector:@selector(insertChecklistAction:)];
     
-    newButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNoteImage]
+    newButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
                                    target:self
                                  selector:@selector(newButtonAction:)];
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     newButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
-    keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboardImage]
+    keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
                                         target:self
                                       selector:@selector(keyboardButtonAction:)];
     keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
@@ -1393,10 +1393,10 @@ CGFloat const SPBackButtonTitlePadding              = -15;
                       NSLocalizedString(@"History...", @"Action - view the version history of a note"),
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageWithName:UIImageNameShareImage],
-                     [UIImage imageWithName:UIImageNameHistoryImage],
-                     [UIImage imageWithName:UIImageNameCollaborateImage],
-                     [UIImage imageWithName:UIImageNameTrashImage]];
+    actionImages = @[[UIImage imageWithName:UIImageNameShare],
+                     [UIImage imageWithName:UIImageNameHistory],
+                     [UIImage imageWithName:UIImageNameCollaborate],
+                     [UIImage imageWithName:UIImageNameTrash]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
                     NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
     toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),

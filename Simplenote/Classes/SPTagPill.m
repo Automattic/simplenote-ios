@@ -97,7 +97,7 @@
         _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;
         _deletionOverlayView.layer.borderWidth = 1.0 / [[UIScreen mainScreen] scale];
 
-        UIImage *image = [UIImage imageWithName:UIImageNameTagViewDeletionImage];
+        UIImage *image = [UIImage imageWithName:UIImageNameTagViewDeletion];
         _deletionButtonImageView = [[UIImageView alloc] initWithImage:image];
         [_deletionButtonImageView sizeToFit];
         
