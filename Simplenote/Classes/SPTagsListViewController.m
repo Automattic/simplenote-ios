@@ -17,10 +17,6 @@
 //
 #define kSectionTags 0
 
-#define kActionSheetDeleteIndex 0
-#define kActionSheetRenameIndex 1
-#define kActionSheetCancelIndex 2
-
 static CGFloat const SPSettingsButtonHeight = 40;
 static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
 static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
@@ -197,6 +193,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
+
 
 #pragma mark - Button actions
 
@@ -552,8 +549,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-
-#pragma mark UITextFieldDelegate methods
+#pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
@@ -619,7 +615,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return YES;
 }
 
-#pragma mark sidePanelDelegate
+
+#pragma mark - SidePanelDelegate
 
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
     
@@ -649,7 +646,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.tableView.scrollIndicatorInsets = contentInset;
     self.tableView.contentOffset = CGPointMake(0, -contentInset.top);
 }
-
 
 
 #pragma mark - Fetched results controller
