@@ -28,6 +28,7 @@ enum ThemeColorKey: String {
     case simplenoteAlmostBlack
     case simplenoteDeepSeaBlue
     case simplenoteGray10
+    case simplenoteGray50
     case simplenoteGunmetal
     case simplenoteLightNavy
     case simplenoteLightPink
