@@ -1393,7 +1393,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
                       NSLocalizedString(@"History...", @"Action - view the version history of a note"),
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageNamed:@"icon_share"],
+    actionImages = @[[UIImage imageWithName:UIImageNameShareImage],
                      [UIImage imageNamed:@"icon_history"],
                      [UIImage imageNamed:@"icon_collaborate"],
                      [UIImage imageNamed:@"icon_trash"]];
