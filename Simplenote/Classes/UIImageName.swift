@@ -6,6 +6,7 @@ import UIKit
 //
 @objc
 enum UIImageName: Int, CaseIterable {
+    case addImage
     case checkmarkCheckedImage
     case checkmarkUncheckedImage
     case chevronLeftImage
@@ -29,6 +30,8 @@ extension UIImageName {
     ///
     var lightAssetFilename: String {
         switch self {
+        case .addImage:
+            return "icon_add"
         case .checkmarkCheckedImage:
             return "icon_checkmark_checked"
         case .checkmarkUncheckedImage:
