@@ -25,6 +25,4 @@
     NSTimer *reloadTimer;
 }
 
-- (void)removeKeyboardObservers;
-
 @end

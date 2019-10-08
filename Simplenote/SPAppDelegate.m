@@ -296,7 +296,6 @@
         [SPPinLockManager storeLastUsedTime];
     }
     
-    [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];

@@ -82,6 +82,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
     [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
