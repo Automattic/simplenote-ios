@@ -106,9 +106,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _settingsImage = [UIImage imageWithName:UIImageNameSettingsImage];
+    _allNotesImage = [UIImage imageWithName:UIImageNameAllNotesImage];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -824,7 +824,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     allNotesButton = [self buildHeaderButton];
     allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
-    [allNotesButton setImage:[[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [allNotesButton setImage:[[UIImage imageWithName:UIImageNameAllNotesImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
     [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
 
