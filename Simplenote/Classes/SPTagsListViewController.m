@@ -25,8 +25,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 // MARK: - Private
 //
 @interface SPTagsListViewController () <NSFetchedResultsControllerDelegate,
-                                        UITextFieldDelegate,
                                         UIGestureRecognizerDelegate,
+                                        UITextFieldDelegate,
                                         UITableViewDelegate,
                                         UITableViewDataSource,
                                         SPTagListViewCellDelegate>
