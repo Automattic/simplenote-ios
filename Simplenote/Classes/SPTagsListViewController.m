@@ -45,21 +45,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadView {
-    
-    if (!customView) {
-        customView = [SPBorderedView new];
-        customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-        customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
-        customView.showLeftBorder = NO;
-        customView.showBottomBorder = NO;
-        customView.showTopBorder = NO;
-        customView.showRightBorder = NO;
-        self.view = customView;
-    }
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
