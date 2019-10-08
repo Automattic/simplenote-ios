@@ -18,6 +18,7 @@ enum UIImageName: Int, CaseIterable {
     case infoImage
     case newNoteImage
     case pinImage
+    case settingsImage
     case shareImage
     case sharedImage
     case trashImage
@@ -62,6 +63,8 @@ extension UIImageName {
             return "icon_new_note"
         case .pinImage:
             return "icon_pin"
+        case .settingsImage:
+            return "icon_settings"
         case .shareImage:
             return "icon_share"
         case .sharedImage:

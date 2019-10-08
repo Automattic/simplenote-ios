@@ -106,9 +106,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _settingsImage = [UIImage imageWithName:UIImageNameSettingsImage];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -804,7 +804,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettingsImage] forState:UIControlStateNormal];
     [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [settingsButton setContentEdgeInsets:SPButtonContentInsets];
     [settingsButton setImageEdgeInsets:SPButtonImageInsets];
