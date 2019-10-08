@@ -22,7 +22,7 @@
         
         // Out of Range Failsafe
         NSRange range = rangeValue.rangeValue;
-        if (range.location + range.length > maxLength) {
+        if (NSMaxRange(range) > maxLength) {
             continue;
         }
         
