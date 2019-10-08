@@ -57,6 +57,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+@property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
@@ -245,7 +246,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!bSearching || _searchString.length == 0 || searchResultRanges) {
+    if (!bSearching || _searchString.length == 0 || self.searchResultRanges) {
         return;
     }
     
@@ -253,14 +254,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        self->searchResultRanges = [searchText rangesForTerms:self->_searchString];
+        self.searchResultRanges = [searchText rangesForTerms:self->_searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-            [self->_noteEditorTextView.textStorage applyColorAttribute:tintColor forRanges:self->searchResultRanges];
+            [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
             
-            NSInteger count = self->searchResultRanges.count;
+            NSInteger count = self.searchResultRanges.count;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
             self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
@@ -758,14 +759,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if (string.length > 0) {
         bSearching = YES;
         _searchString = string;
-        searchResultRanges = nil;
+        self.searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
 }
 
 - (void)highlightNextSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, searchResultRanges.count);
+    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, self.searchResultRanges.count);
     [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
 }
 
@@ -777,14 +778,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
     
-    NSInteger searchResultCount = searchResultRanges.count;
+    NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
         prevSearchButton.enabled = index > 0;
         nextSearchButton.enabled = index < searchResultCount - 1;
         
-        [_noteEditorTextView highlightRange:[(NSValue *)searchResultRanges[index] rangeValue]
+        [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
                            animated:YES
                           withBlock:^(CGRect highlightFrame) {
 
@@ -809,7 +810,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [_noteEditorTextView processChecklists];
     
     _searchString = nil;
-    searchResultRanges = nil;
+    self.searchResultRanges = nil;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
