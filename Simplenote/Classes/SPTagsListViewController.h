@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "SPTagListViewCell.h"
 #import "SPSidebarViewController.h"
+
 @class SPButton;
 @class SPBorderedView;
 
@@ -23,8 +24,6 @@
     
     NSTimer *reloadTimer;
 }
-
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (void)removeKeyboardObservers;
 
