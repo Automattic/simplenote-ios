@@ -263,15 +263,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.tagNameTextField.delegate = self;
     cell.delegate = self;
-    
-    NSString *cellText;
-    UIImage *cellIcon;
-    BOOL selected = NO;
 
     Tag *tag = [self tagAtRow: indexPath.row];
-    cellText = tag.name;
-    cellIcon = nil;
-    selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
+    NSString *cellText = tag.name;
+    UIImage *cellIcon = nil;
+    BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
@@ -314,7 +310,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [SPTracker trackTagCellPressed];
     }
     
-    return indexPath.section == kSectionTags;
+    return response;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -419,7 +415,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     notesFrame.origin.x = newWidth;
     if (!isCanceled) {
         // Make the tags list wider, and move the notes list over to accomodate for the new width
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration:UIKitConstants.animationShortDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
