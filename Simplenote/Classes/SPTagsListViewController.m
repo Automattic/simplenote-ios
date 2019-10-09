@@ -384,6 +384,10 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     return proposedDestinationIndexPath ? proposedDestinationIndexPath : sourceIndexPath;
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == SPTagsListSectionTags;
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
     return self.bEditing && isTagRow ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
