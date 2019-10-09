@@ -173,21 +173,23 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 #pragma mark - UITableViewDataSource
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
-    NSIndexPath *indexPath = [self indexPathForTag:tag];
+    NSIndexPath *indexPath = [self tableViewIndexPathForTag:tag];
     return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (NSIndexPath *)indexPathForTag:(Tag *)tag {
+- (NSIndexPath *)tableViewIndexPathForTag:(Tag *)tag {
     NSInteger row = [self.fetchedResultsController indexPathForObject:tag].row;
     return [NSIndexPath indexPathForItem:row inSection:SPTagsListSectionTags];
 }
 
-- (Tag *)tagAtIndexPath:(NSIndexPath *)indexPath {
+- (Tag *)tagAtTableViewIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row >= self.fetchedResultsController.fetchedObjects.count || indexPath.section != SPTagsListSectionTags) {
         return nil;
     }
 
-    return [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // Our FRC has just one section!
+    NSIndexPath *resultsIndexPah = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+    return [self.fetchedResultsController objectAtIndexPath:resultsIndexPah];
 }
 
 - (NSInteger)numberOfTags {
@@ -237,6 +239,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     }
 
     [cell resetCellForReuse];
+    [cell applyStyle];
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -292,19 +295,18 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    cell.tagNameTextField.delegate = self;
-    cell.delegate = self;
 
-    Tag *tag = [self tagAtIndexPath:indexPath];
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     NSString *cellText = tag.name;
-    UIImage *cellIcon = [UIImage imageWithName:UIImageNameTag];
     BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
     }
-    [cell setIconImage:cellIcon];
-    
+
+    cell.delegate = self;
+    cell.tagNameTextField.delegate = self;
+    cell.imageView.image = [UIImage imageWithName:UIImageNameTag];
     cell.accessibilityLabel = cellText;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -331,7 +333,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Tag *tag = [self tagAtIndexPath:indexPath];
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
     if (self.bEditing) {
         [SPTracker trackTagRowRenamed];
@@ -381,7 +383,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [SPTracker trackTagMenuRenamed];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    [self renameTagAction:[self tagAtIndexPath:path]];
+    [self renameTagAction:[self tagAtTableViewIndexPath:path]];
 }
 
 - (void)tagListViewCellShouldDeleteTag:(SPTagListViewCell *)cell {
@@ -440,7 +442,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)doneEditingAction:(id)sender {
     
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
+        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -481,7 +483,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)removeTagAtIndexPath:(NSIndexPath *)indexPath {
     
-    Tag *tag = [self tagAtIndexPath:indexPath];
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     if (!tag) {
         return;
     }
@@ -509,7 +511,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)renameTagAction:(Tag *)tag {
     
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
+        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -551,7 +553,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
+    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }

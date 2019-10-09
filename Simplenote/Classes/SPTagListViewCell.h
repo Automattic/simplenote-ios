@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UIColor                       *highlightedTextColor;
 @property (nonatomic, strong) UIFont                        *textFont;
 
-- (void)setIconImage:(UIImage *)image;
+- (void)applyStyle;
 - (void)resetCellForReuse;
 - (void)setTagNameText:(NSString *)text;
 - (void)setTextFieldEditable:(BOOL)editable;

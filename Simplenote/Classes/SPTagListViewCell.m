@@ -53,6 +53,10 @@
     return self;
 }
 
+- (void)applyStyle {
+    self.imageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
+}
+
 - (void)willTransitionToState:(UITableViewCellStateMask)state {
 
     [super willTransitionToState:state];
@@ -97,12 +101,6 @@
         self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
         self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
-}
-
-- (void)setIconImage:(UIImage *)image {
-
-    self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
-    self.imageView.image = image;
 }
 
 - (void)setTagNameText:(NSString *)text {
