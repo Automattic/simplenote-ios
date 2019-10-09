@@ -34,9 +34,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
-@property (nonatomic, strong) UIImage                       *allNotesImage;
-@property (nonatomic, strong) UIImage                       *trashImage;
-@property (nonatomic, strong) UIImage                       *settingsImage;
 @property (nonatomic, strong) NSString                      *cellIdentifier;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
 @property (nonatomic, assign) BOOL                          bEditing;
@@ -69,10 +66,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.cellIdentifier = self.theme.name;
     [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
-    
-    _settingsImage = [UIImage imageWithName:UIImageNameSettings];
-    _allNotesImage = [UIImage imageWithName:UIImageNameAllNotes];
-    _trashImage = [UIImage imageWithName:UIImageNameTrash];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
