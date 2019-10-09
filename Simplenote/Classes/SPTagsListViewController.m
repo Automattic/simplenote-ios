@@ -96,11 +96,12 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     self.tableView.estimatedRowHeight = kSPTagListEstimatedRowHeight;
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
-    [self.tableView setTableHeaderView:self.tableHeaderView];
 }
 
 - (void)configureTableHeaderView {
     self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    self.tagsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.editTagsButton.titleLabel.adjustsFontForContentSizeCategory = YES;
     [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -218,14 +219,22 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 #pragma mark - UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if ((section == SPTagsListSectionTags) &&
-        self.fetchedResultsController.fetchedObjects.count == 0) {
-        return 1;
+    if (section == SPTagsListSectionTags && self.fetchedResultsController.fetchedObjects.count != 0) {
+        return UITableViewAutomaticDimension;
     }
-    
-    return 10;
-    
+
+    return CGFLOAT_MIN;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case SPTagsListSectionTags: {
+            return self.tableHeaderView;
+        }
+        default: {
+            return nil;
+        }
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -258,7 +267,6 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPTagListViewCell.reuseIdentifier forIndexPath:indexPath];
 
-    [cell prepareForReuse];
     [cell applyStyle];
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -302,17 +310,14 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
-    NSString *cellText = tag.name;
     BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
-    
-    if (cellText) {
-        [cell setTagNameText:cellText];
-    }
+    NSString *cellText = tag.name;
 
+    cell.tagNameText = cellText;
+    cell.accessibilityLabel = cellText;
     cell.delegate = self;
     cell.tagNameTextField.delegate = self;
     cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
-    cell.accessibilityLabel = cellText;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         cell.selected = selected;
