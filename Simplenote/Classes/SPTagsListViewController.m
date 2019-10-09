@@ -173,24 +173,20 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 #pragma mark - UITableViewDataSource
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
-
-    NSInteger row = [self rowForTag:tag];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:row inSection:SPTagsListSectionTags];
-
+    NSIndexPath *indexPath = [self indexPathForTag:tag];
     return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (NSInteger)rowForTag:(Tag *)tag {
-    
-    return [self.fetchedResultsController indexPathForObject:tag].row;
+- (NSIndexPath *)indexPathForTag:(Tag *)tag {
+    NSInteger row = [self.fetchedResultsController indexPathForObject:tag].row;
+    return [NSIndexPath indexPathForItem:row inSection:SPTagsListSectionTags];
 }
 
-- (Tag *)tagAtRow:(NSInteger)row {
-    if (row >= self.fetchedResultsController.fetchedObjects.count) {
+- (Tag *)tagAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.fetchedResultsController.fetchedObjects.count || indexPath.section != SPTagsListSectionTags) {
         return nil;
     }
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
@@ -279,11 +275,27 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
         }
     }
 
+//    static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
+//    static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
+
+//    [button setContentEdgeInsets:SPButtonContentInsets];
+//    [button setImageEdgeInsets:SPButtonImageInsets];
+//    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+
+//    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
+//    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
+
+//    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
+//    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
+//    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
+//    [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+}
+
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.tagNameTextField.delegate = self;
     cell.delegate = self;
 
-    Tag *tag = [self tagAtRow: indexPath.row];
+    Tag *tag = [self tagAtIndexPath:indexPath];
     NSString *cellText = tag.name;
     UIImage *cellIcon = [UIImage imageWithName:UIImageNameTag];
     BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
@@ -319,7 +331,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Tag *tag = [self tagAtRow: indexPath.row];
+    Tag *tag = [self tagAtIndexPath:indexPath];
 
     if (self.bEditing) {
         [SPTracker trackTagRowRenamed];
@@ -369,7 +381,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [SPTracker trackTagMenuRenamed];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    [self renameTagAction:[self tagAtRow:path.row]];
+    [self renameTagAction:[self tagAtIndexPath:path]];
 }
 
 - (void)tagListViewCellShouldDeleteTag:(SPTagListViewCell *)cell {
@@ -428,7 +440,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)doneEditingAction:(id)sender {
     
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:SPTagsListSectionTags]];
+        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -469,7 +481,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)removeTagAtIndexPath:(NSIndexPath *)indexPath {
     
-    Tag *tag = [self tagAtRow:indexPath.row];
+    Tag *tag = [self tagAtIndexPath:indexPath];
     if (!tag) {
         return;
     }
@@ -497,8 +509,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)renameTagAction:(Tag *)tag {
     
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                                 inSection:SPTagsListSectionTags]];
+        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -540,9 +551,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                             inSection:SPTagsListSectionTags]];
-    // deselect cell if editing
+    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForTag:_renameTag]];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
