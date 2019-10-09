@@ -100,10 +100,7 @@
 }
 
 - (void)setIconImage:(UIImage *)image {
-    
-    if (image.renderingMode == UIImageRenderingModeAlwaysTemplate)
-        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
+
     self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
     self.imageView.image = image;
 }
