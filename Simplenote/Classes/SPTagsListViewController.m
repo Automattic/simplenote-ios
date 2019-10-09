@@ -756,28 +756,25 @@ static const CGFloat kSPTagListEstimatedRowHeight = 44;
 #pragma mark - KeyboardNotifications
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
-    
-    CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = newFrame.size.height - keyboardHeight;
-    
-    CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-         self.tableView.frame = newFrame;
+    CGRect keyboardFrame = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
+
+    [UIView animateWithDuration:duration animations:^{
+        self.tableView.contentInset = insets;
      }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y;
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom = 0;
 
-    CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration animations:^{
-         self.tableView.frame = newFrame;
+    [UIView animateWithDuration:duration animations:^{
+        self.tableView.contentInset = insets;
      }];
 }
 
