@@ -378,8 +378,8 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return self.bEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+    BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
+    return self.bEditing && isTagRow ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
