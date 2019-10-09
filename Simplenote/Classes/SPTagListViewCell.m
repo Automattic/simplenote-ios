@@ -4,34 +4,39 @@
 
 @implementation SPTagListViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setupTextField];
+    [self refreshStyle];
+}
 
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.backgroundColor = [UIColor clearColor];
-        self.accessoryType = UITableViewCellAccessoryNone;
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-        self.tagNameTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        self.tagNameTextField.enabled = NO;
+- (void)prepareForReuse {
+    [super prepareForReuse];
 
-        [self refreshStyle];
+    [self refreshStyle];
+    self.accessoryType = UITableViewCellAccessoryNone;
+    self.isTextFieldEditable = NO;
+}
+
+- (void)willTransitionToState:(UITableViewCellStateMask)state {
+    [super willTransitionToState:state];
+    
+    if ((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask ||
+        ((state & UITableViewCellStateDefaultMask) == UITableViewCellStateDefaultMask && self.tagNameTextField.isFirstResponder)) {
+
+        [self.tagNameTextField endEditing:true];
     }
+}
 
-    return self;
+- (void)setupTextField {
+    self.tagNameTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.tagNameTextField.enabled = NO;
 }
 
 - (void)refreshStyle {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     self.leftImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
     self.tagNameTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
-}
-
-- (void)willTransitionToState:(UITableViewCellStateMask)state {
-    [super willTransitionToState:state];
-    
-    if (state & UITableViewCellStateShowingDeleteConfirmationMask) {
-        [self.tagNameTextField endEditing:true];
-    }
 }
 
 - (void)setTagNameText:(NSString *)text {
@@ -48,14 +53,6 @@
 
 - (BOOL)isTextFieldEditable {
     return self.tagNameTextField.enabled;
-}
-
-- (void)prepareForReuse {
-    [super prepareForReuse];
-
-    [self refreshStyle];
-    self.accessoryType = UITableViewCellAccessoryNone;
-    self.isTextFieldEditable = NO;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {

@@ -72,6 +72,8 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     [self configureTableHeaderView];
     [self configureMenuController];
     [self startListeningToNotifications];
+
+    [self refreshStyle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -460,10 +462,6 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 
     [self refreshEditTagsButtonForEditionState:editing];
     [self resizeContainerViewForEditonState:editing animated:!isCanceled];
-
-    if (!editing) {
-        [self.view endEditing:YES];
-    }
 }
 
 - (void)resizeContainerViewForEditonState:(BOOL)editing animated:(BOOL)animated {
