@@ -124,11 +124,37 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];
 }
 
+
+#pragma mark - Notification Handlers
+
 - (VSTheme *)theme {
     return [[VSThemeManager sharedManager] theme];
 }
 
 - (void)themeDidChange {
+    [self refreshStyle];
+}
+
+- (void)menuDidChangeVisibility:(UIMenuController *)menuController {
+    self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
+}
+
+- (void)updateSortOrder:(id)sender {
+    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
+
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - Style
+
+- (void)refreshStyle {
     [self updateHeaderColors];
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
@@ -146,10 +172,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
     self.tagsLabel.textColor = tagsTextColor;
     [self.editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
-}
-
-- (void)menuDidChangeVisibility:(UIMenuController *)menuController {
-    self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
 
 
@@ -769,18 +791,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [headerView addSubview:tagsView];
     
     return headerView;
-}
-
-- (void)updateSortOrder:(id)sender {
-    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
-
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    [self.tableView reloadData];
 }
 
 @end
