@@ -23,9 +23,9 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dMw-N6-gUa">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dMw-N6-gUa">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Mtn-TB-Xai"/>
@@ -45,10 +45,10 @@
         </view>
         <view contentMode="scaleToFill" id="muT-a5-QuI">
             <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klb-6j-7Xr">
-                    <rect key="frame" x="16" y="26" width="43.5" height="20.5"/>
+                    <rect key="frame" x="16" y="10" width="43.5" height="52"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" name="simplenoteLipstick"/>
                     <nil key="highlightedColor"/>
@@ -61,16 +61,16 @@
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Klb-6j-7Xr" firstAttribute="centerY" secondItem="muT-a5-QuI" secondAttribute="centerY" id="7Mv-wG-lHA"/>
+                <constraint firstItem="Klb-6j-7Xr" firstAttribute="top" secondItem="muT-a5-QuI" secondAttribute="top" constant="10" id="AAt-7h-jgC"/>
                 <constraint firstAttribute="trailing" secondItem="g3g-gS-VY5" secondAttribute="trailing" constant="16" id="Azq-ju-DIU"/>
                 <constraint firstItem="g3g-gS-VY5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Klb-6j-7Xr" secondAttribute="trailing" constant="10" id="fNO-ob-o4f"/>
                 <constraint firstItem="Klb-6j-7Xr" firstAttribute="leading" secondItem="muT-a5-QuI" secondAttribute="leading" constant="16" id="p88-Qr-BVe"/>
+                <constraint firstAttribute="bottom" secondItem="Klb-6j-7Xr" secondAttribute="bottom" constant="10" id="zUx-NV-UpC"/>
                 <constraint firstItem="g3g-gS-VY5" firstAttribute="centerY" secondItem="muT-a5-QuI" secondAttribute="centerY" id="zsY-nj-eHO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="sXg-so-LfC"/>
             <point key="canvasLocation" x="-71.014492753623188" y="-768.08035714285711"/>
         </view>
     </objects>

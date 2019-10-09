@@ -27,8 +27,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     SPTagsListSystemRowCount    = 3
 };
 
-static const CGFloat kSPTagListEstimatedRowHeight = 44;
-static const NSInteger kSPTagListRequestBatchSize = 20;
+static const CGFloat kSPTagListEstimatedRowHeight       = 44;
+static const CGFloat kSPTagListEstimatedSectionHeight   = 44;
+static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 
 // MARK: - Private
@@ -95,7 +96,9 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 
 - (void)configureTableView {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = kSPTagListEstimatedRowHeight;
+    self.tableView.estimatedSectionHeaderHeight = kSPTagListEstimatedSectionHeight;
     self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
@@ -171,18 +174,15 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 #pragma mark - Style
 
 - (void)refreshStyle {
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
+    UIColor *headerActionColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
+    UIColor *headerTextColor = [UIColor colorWithName:UIColorNameTextColor];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameSimplenoteGray0];
 
     self.view.backgroundColor = backgroundColor;
-    self.tagsLabel.textColor = tagsTextColor;
-    [self.editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
+    self.tagsLabel.textColor = headerTextColor;
+    [self.editTagsButton setTitleColor:headerActionColor forState:UIControlStateNormal];
 
     [self.tableView reloadData];
-
-    [self.view setNeedsDisplay];
-    [self.view setNeedsLayout];
 }
 
 
@@ -226,14 +226,6 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 
 
 #pragma mark - UITableViewDataSource
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == SPTagsListSectionTags && self.fetchedResultsController.fetchedObjects.count != 0) {
-        return UITableViewAutomaticDimension;
-    }
-
-    return CGFLOAT_MIN;
-}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return section == SPTagsListSectionTags ? self.tableHeaderView : nil;
