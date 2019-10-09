@@ -58,6 +58,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -76,6 +79,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [super viewWillDisappear:animated];
     [self stopListeningToKeyboardNotifications];
 }
+
+
+#pragma mark - Interface Initialization
 
 - (void)configureView {
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
@@ -167,7 +173,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 
-#pragma mark - UITableViewDataSource
+#pragma mark - Helper Methods
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
     NSIndexPath *indexPath = [self tableViewIndexPathForTag:tag];
@@ -193,6 +199,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
     return sectionInfo.numberOfObjects;
 }
+
+
+#pragma mark - UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
