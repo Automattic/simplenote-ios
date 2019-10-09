@@ -6,12 +6,10 @@
 
 @implementation SPTagListViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        // style the cell
         self.backgroundColor = [UIColor clearColor];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -122,8 +120,7 @@
     NSAttributedString *titleAttributesString;
     
     if (text) {
-        titleAttributesString = [[NSAttributedString alloc] initWithString:text
-                                                                attributes:textAttributes];
+        titleAttributesString = [[NSAttributedString alloc] initWithString:text attributes:textAttributes];
     }
     
     self.tagNameTextField.attributedText = titleAttributesString;
@@ -135,6 +132,7 @@
 }
 
 - (void)resetCellForReuse {
+
     [self setTextFieldEditable:NO];
     self.accessoryType = UITableViewCellAccessoryNone;
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
@@ -142,8 +140,7 @@
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
     
-    return (action == @selector(rename:) || action == @selector(delete:)) &&
-    !_tagNameTextField.editing;
+    return (action == @selector(rename:) || action == @selector(delete:)) && !_tagNameTextField.editing;
 }
 
 - (void)delete:(id)sender {
