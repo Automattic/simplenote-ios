@@ -177,8 +177,10 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     UIColor *headerActionColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
     UIColor *headerTextColor = [UIColor colorWithName:UIColorNameTextColor];
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameSimplenoteGray0];
+    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     self.view.backgroundColor = backgroundColor;
+    self.tableView.separatorColor = separatorColor;
     self.tagsLabel.textColor = headerTextColor;
     [self.editTagsButton setTitleColor:headerActionColor forState:UIControlStateNormal];
 
