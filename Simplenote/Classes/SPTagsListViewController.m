@@ -177,19 +177,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 #pragma mark - Button actions
 
-- (void)allNotesTap:(UIButton *)sender {
-    [self openNoteListForTagName:nil];
-}
-
-- (void)trashTap:(UIButton *)sender {
-    [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:kSimplenoteTagTrashKey];
-}
-
-- (void)settingsTap:(UIButton *)sender {
-    [[SPAppDelegate sharedDelegate] showOptions];
-}
-
 - (void)editTagsTap:(UIButton *)sender {
     [self setEditing:!self.bEditing canceled:NO];
 }
@@ -401,6 +388,53 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
         [SPTracker trackTagRowDeleted];
 		[self removeTagAtIndexPath:indexPath];
     }
+}
+
+
+#pragma mark - Row Press Handlers
+
+- (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case SPTagsListSystemRowAllNotes: {
+            [self allNotesWasPressed];
+            break;
+        }
+
+        case SPTagsListSystemRowTrash: {
+            [self trashWasPressed];
+            break;
+        }
+
+        case SPTagsListSystemRowSettings: {
+            [self settingsWasPressed];
+            break;
+        }
+    }
+}
+
+- (void)didSelectTagAtIndexPath:(NSIndexPath *)indexPath {
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
+
+    if (self.bEditing) {
+        [SPTracker trackTagRowRenamed];
+        [self renameTagAction:tag];
+    } else {
+        [SPTracker trackListTagViewed];
+        [self openNoteListForTagName:tag.name];
+    }
+}
+
+- (void)allNotesWasPressed {
+    [self openNoteListForTagName:nil];
+}
+
+- (void)trashWasPressed {
+    [SPTracker trackTrashViewed];
+    [self openNoteListForTagName:kSimplenoteTagTrashKey];
+}
+
+- (void)settingsWasPressed {
+    [[SPAppDelegate sharedDelegate] showOptions];
 }
 
 
