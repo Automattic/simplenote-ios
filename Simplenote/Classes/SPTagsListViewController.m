@@ -289,18 +289,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
             break;
         }
     }
-
-//    static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
-//    static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
-
-//    [button setContentEdgeInsets:SPButtonContentInsets];
-//    [button setImageEdgeInsets:SPButtonImageInsets];
-//    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-
-//    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
-//    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
-//    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
-//    [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
 }
 
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
