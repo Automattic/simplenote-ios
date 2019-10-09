@@ -54,28 +54,44 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // apply styling
+
+    [self configureView];
+    [self configureTableView];
+    [self configureMenuController];
+    [self startListeningToNotifications];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self startListeningToKeyboardNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopListeningToKeyboardNotifications];
+}
+
+- (void)configureView {
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+}
 
-    settingsButton = [self buildSettingsButton];
-    [self.view addSubview:settingsButton];
-
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    self.tableView.rowHeight = 36;
-
-    // register custom cell
+- (void)configureTableView {
     self.cellIdentifier = self.theme.name;
+    self.tableView.rowHeight = 36;
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
+}
 
-    // add rename item to manu
+- (void)configureMenuController {
     SEL renameSelector = sel_registerName("rename:");
     UIMenuItem *renameItem = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Rename", @"Rename a tag")
                                                         action:renameSelector];
     [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
     [[UIMenuController sharedMenuController] update];
-    
+}
+
+- (void)startListeningToNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
