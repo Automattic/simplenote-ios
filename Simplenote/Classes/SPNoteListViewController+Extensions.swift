@@ -45,7 +45,7 @@ extension SPNoteListViewController {
     ///
     @objc
     func ensureFirstRowIsVisible() {
-        guard tableView.isHidden == false else {
+        guard !tableView.isHidden else {
             return
         }
 
