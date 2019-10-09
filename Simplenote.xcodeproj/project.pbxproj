@@ -955,6 +955,18 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B546BE9A234E758E00A126DA /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */,
+				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
+				B546BE96234E64F200A126DA /* SPTagListViewCell.xib */,
+				B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */,
+				B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		B550F92F22BA643800091939 /* Siri */ = {
 			isa = PBXGroup;
 			children = (
@@ -1176,6 +1188,8 @@
 			isa = PBXGroup;
 			children = (
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
+				B546BE9A234E758E00A126DA /* TableViewCells */,
+				E2922AB3180C7322003AF914 /* Tag View */,
 				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
 				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E201864617A4892300217E0B /* SPActionButton.h */,
@@ -1209,9 +1223,6 @@
 				B5D982D122F8644000C37C29 /* SPSquaredButton.swift */,
 				E213C2D117A87246009BE49E /* SPSideBySideView.h */,
 				E213C2D217A87246009BE49E /* SPSideBySideView.m */,
-				E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */,
-				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
-				B546BE96234E64F200A126DA /* SPTagListViewCell.xib */,
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
 				E215C79C180B228800AD36B5 /* SPTextField.m */,
 				B5D982CF22F8643200C37C29 /* SPTextInputView.swift */,
@@ -1219,10 +1230,7 @@
 				E2D444041799F1DD0060FDE2 /* SPTextView.m */,
 				E2465A2117AD70810097B19B /* SPToggle.h */,
 				E2465A2217AD70810097B19B /* SPToggle.m */,
-				E2922AB3180C7322003AF914 /* Tag View */,
 				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
-				B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */,
-				B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";

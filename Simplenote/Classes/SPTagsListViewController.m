@@ -100,7 +100,6 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 
 - (void)configureTableHeaderView {
     self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    self.tagsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.editTagsButton.titleLabel.adjustsFontForContentSizeCategory = YES;
     [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
