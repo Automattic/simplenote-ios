@@ -214,9 +214,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
-- (NSInteger)numTags {
+- (NSInteger)numberOfTags {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
-    return [sectionInfo numberOfObjects];
+    return sectionInfo.numberOfObjects;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -457,7 +457,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [appDelegate.noteListViewController update];
     }
     
-    BOOL lastTag = [self numTags] == 1;
+    BOOL lastTag = [self numberOfTags] == 1;
 
     if ([[SPObjectManager sharedManager] removeTag:tag] && !lastTag) {
         
