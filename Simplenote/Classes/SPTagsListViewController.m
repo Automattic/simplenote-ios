@@ -50,7 +50,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 @implementation SPTagsListViewController
 
 - (void)dealloc {
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -195,7 +194,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
     
@@ -217,7 +216,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
--(NSInteger)numTags {
+- (NSInteger)numTags {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
     return [sectionInfo numberOfObjects];
 }
@@ -431,7 +430,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)doneEditingAction:(id)sender {
     
     if (_renameTag) {
-        
         SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:kSectionTags]];
         [cell.tagNameTextField endEditing:YES];
     }
@@ -460,13 +458,13 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [[self containerViewController] hideSidePanelAnimated:YES completion:nil];
 }
 
+
 #pragma mark - UIGestureDelegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     return YES;
 }
-
 
 
 #pragma mark - Tag Actions
@@ -493,8 +491,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
             [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
-    } else
+    } else {
         [self.tableView reloadData];
+    }
 }
 
 - (void)renameTagAction:(Tag *)tag {
@@ -530,12 +529,14 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         endEditing = YES;
     }
     
-    if (string)
+    if (string) {
         [textField setText:[textField.text stringByReplacingCharactersInRange:range
                                                               withString:string]];
+    }
     
-    if (endEditing)
+    if (endEditing) {
         [textField endEditing:YES];
+    }
     
     return NO;
 }
@@ -567,8 +568,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
             [appDelegate.noteListViewController update];
         }
     }
-    else
+    else {
         textField.text = _renameTag.name;
+    }
     
     _renameTag = nil;
     
@@ -629,8 +631,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
     }
 
-    NSArray *sortDescriptors = @[sortDescriptor];
-    return sortDescriptors;
+    return @[sortDescriptor];
 }
 
 - (void)performFetch {
@@ -708,10 +709,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration
-                     animations:^{
-                         self.tableView.frame = newFrame;
-                     }];
+    [UIView animateWithDuration:animationDuration animations:^{
+         self.tableView.frame = newFrame;
+     }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
@@ -720,11 +720,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration
-                     animations:^{
-                         self.tableView.frame = newFrame;
-                     }];
-    
+    [UIView animateWithDuration:animationDuration animations:^{
+         self.tableView.frame = newFrame;
+     }];
 }
 
 
