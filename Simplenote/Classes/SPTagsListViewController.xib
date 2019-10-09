@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPTagsListViewController">
             <connections>
+                <outlet property="editTagsButton" destination="g3g-gS-VY5" id="ktX-HA-49n"/>
+                <outlet property="tableHeaderView" destination="muT-a5-QuI" id="4ho-M1-V3u"/>
                 <outlet property="tableView" destination="dMw-N6-gUa" id="8zx-jy-5ra"/>
+                <outlet property="tagsLabel" destination="Klb-6j-7Xr" id="dHg-US-XJ9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uos-QJ-298"/>
             </connections>
         </placeholder>
@@ -38,6 +41,34 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="153"/>
+        </view>
+        <view contentMode="scaleToFill" id="muT-a5-QuI">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klb-6j-7Xr">
+                    <rect key="frame" x="16" y="26" width="43.5" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3g-gS-VY5">
+                    <rect key="frame" x="347" y="19.5" width="51" height="33"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Klb-6j-7Xr" firstAttribute="centerY" secondItem="muT-a5-QuI" secondAttribute="centerY" id="7Mv-wG-lHA"/>
+                <constraint firstAttribute="trailing" secondItem="g3g-gS-VY5" secondAttribute="trailing" constant="16" id="Azq-ju-DIU"/>
+                <constraint firstItem="g3g-gS-VY5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Klb-6j-7Xr" secondAttribute="trailing" constant="10" id="fNO-ob-o4f"/>
+                <constraint firstItem="Klb-6j-7Xr" firstAttribute="leading" secondItem="muT-a5-QuI" secondAttribute="leading" constant="16" id="p88-Qr-BVe"/>
+                <constraint firstItem="g3g-gS-VY5" firstAttribute="centerY" secondItem="muT-a5-QuI" secondAttribute="centerY" id="zsY-nj-eHO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="sXg-so-LfC"/>
+            <point key="canvasLocation" x="-71.014492753623188" y="-768.08035714285711"/>
         </view>
     </objects>
 </document>

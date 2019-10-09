@@ -27,6 +27,8 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     SPTagsListSystemRowCount    = 3
 };
 
+static const CGFloat kSPTagListEstimatedRowHeight = 44;
+
 
 // MARK: - Private
 //
@@ -38,8 +40,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
-@property (nonatomic, strong) UIButton                      *editTagsButton;
-@property (nonatomic, strong) UILabel                       *tagsLabel;
+@property (nonatomic, strong) IBOutlet UIView               *tableHeaderView;
+@property (nonatomic, strong) IBOutlet UIButton             *editTagsButton;
+@property (nonatomic, strong) IBOutlet UILabel              *tagsLabel;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
@@ -65,6 +68,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
     [self configureView];
     [self configureTableView];
+    [self configureTableHeaderView];
     [self configureMenuController];
     [self startListeningToNotifications];
 }
@@ -88,9 +92,16 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)configureTableView {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = kSPTagListEstimatedRowHeight;
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
-    [self.tableView setTableHeaderView:[self buildTableHeaderView]];
+    [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
+    [self.tableView setTableHeaderView:self.tableHeaderView];
+}
+
+- (void)configureTableHeaderView {
+    self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureMenuController {
@@ -153,22 +164,18 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 #pragma mark - Style
 
 - (void)refreshStyle {
-    [self updateHeaderColors];
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
 
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = backgroundColor;
+    self.tagsLabel.textColor = tagsTextColor;
+    [self.editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
 
     [self.tableView reloadData];
 
     [self.view setNeedsDisplay];
     [self.view setNeedsLayout];
-}
-
-- (void)updateHeaderColors {
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
-
-    self.tagsLabel.textColor = tagsTextColor;
-    [self.editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
 }
 
 
@@ -772,39 +779,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [UIView animateWithDuration:animationDuration animations:^{
          self.tableView.frame = newFrame;
      }];
-}
-
-
-#pragma mark - Interface Setup
-
-- (UIView *)buildTableHeaderView {
-    CGRect headerFrame = CGRectMake(0, 0, 0, 40);
-    UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
-
-    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 0, 20)];
-    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-
-    self.tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
-    self.tagsLabel.font = [UIFont systemFontOfSize: 14];
-    self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    self.tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [tagsView addSubview:self.tagsLabel];
-
-    self.editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.editTagsButton.frame = CGRectMake(0, 0, 0, 20);
-    self.editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
-    self.editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    self.editTagsButton.titleLabel.font = [UIFont systemFontOfSize: 14];
-    self.editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
-    [tagsView addSubview:self.editTagsButton];
-
-    [self updateHeaderColors];
-
-    [headerView addSubview:tagsView];
-    
-    return headerView;
 }
 
 @end

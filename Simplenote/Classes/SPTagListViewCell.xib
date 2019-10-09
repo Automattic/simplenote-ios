@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="CzU-k1-4L7" customClass="SPTagListViewCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="CzU-k1-4L7" customClass="SPTagListViewCell">
             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CzU-k1-4L7" id="xp1-lh-lT4">
@@ -24,16 +24,18 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jm9-sw-6Ik">
-                        <rect key="frame" x="49" y="11.5" width="355" height="21"/>
+                        <rect key="frame" x="49" y="11" width="355" height="22"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done"/>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="jm9-sw-6Ik" secondAttribute="bottom" constant="11" id="5Q4-Xj-1Zo"/>
                     <constraint firstAttribute="trailing" secondItem="jm9-sw-6Ik" secondAttribute="trailing" constant="10" id="R3C-rk-9L0"/>
                     <constraint firstItem="VnD-vW-Ad7" firstAttribute="leading" secondItem="xp1-lh-lT4" secondAttribute="leading" constant="15" id="aIj-bg-SDZ"/>
-                    <constraint firstAttribute="bottom" secondItem="VnD-vW-Ad7" secondAttribute="bottom" constant="10" id="i9A-Hp-Ud1"/>
-                    <constraint firstItem="VnD-vW-Ad7" firstAttribute="top" secondItem="xp1-lh-lT4" secondAttribute="top" constant="10" id="mf6-QD-SVr"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VnD-vW-Ad7" secondAttribute="bottom" constant="10" id="i9A-Hp-Ud1"/>
+                    <constraint firstItem="jm9-sw-6Ik" firstAttribute="top" secondItem="xp1-lh-lT4" secondAttribute="top" constant="11" id="kAy-kt-PuX"/>
+                    <constraint firstItem="VnD-vW-Ad7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xp1-lh-lT4" secondAttribute="top" constant="10" id="mf6-QD-SVr"/>
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="centerY" secondItem="VnD-vW-Ad7" secondAttribute="centerY" id="ojo-iT-VtZ"/>
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="leading" secondItem="VnD-vW-Ad7" secondAttribute="trailing" constant="10" id="xQ0-7n-lKB"/>
                 </constraints>
