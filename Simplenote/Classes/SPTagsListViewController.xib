@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dMw-N6-gUa">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
@@ -36,7 +36,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dMw-N6-gUa" secondAttribute="trailing" id="WwN-pP-oJT"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dMw-N6-gUa" secondAttribute="bottom" id="h4I-wd-bbB"/>
+                <constraint firstAttribute="bottom" secondItem="dMw-N6-gUa" secondAttribute="bottom" id="h4I-wd-bbB"/>
                 <constraint firstItem="dMw-N6-gUa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pfu-gA-vNg"/>
                 <constraint firstItem="dMw-N6-gUa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zRz-kO-ZkU"/>
             </constraints>
