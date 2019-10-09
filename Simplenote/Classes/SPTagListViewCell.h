@@ -10,14 +10,12 @@
 - (void)tagListViewCellShouldRenameTag:(SPTagListViewCell *)cell;
 @end
 
-@interface SPTagListViewCell : UITableViewCell {    
-    BOOL performedInitialLayout;
-}
+
+@interface SPTagListViewCell : UITableViewCell
 
 @property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
-@property (nonatomic, strong) UITextField                   *tagNameTextField;
-@property (nonatomic, strong) UIColor                       *textColor;
-@property (nonatomic, strong) UIFont                        *textFont;
+@property (nonatomic, strong) IBOutlet UITextField          *tagNameTextField;
+@property (nonatomic, strong) IBOutlet UIImageView          *leftImageView;
 @property (nonatomic, assign) BOOL                          isTextFieldEditable;
 @property (nonatomic, strong) NSString                      *tagNameText;
 

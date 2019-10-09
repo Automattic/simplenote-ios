@@ -152,14 +152,6 @@
 		<real>0.4</real>
 		<key>containerViewSpringAnimationInitialVelocity</key>
 		<real>6</real>
-		<key>tagListImageViewSide</key>
-		<integer>15</integer>
-		<key>tagListLeftPadding</key>
-		<integer>15</integer>
-		<key>tagListItemPadding</key>
-		<integer>10</integer>
-		<key>tagListFontTopPadding</key>
-		<integer>1</integer>
 		<key>tableViewBackgroundColor</key>
 		<string>@backgroundColor</string>
 		<key>tableViewDetailTextLabelColor</key>

@@ -42,7 +42,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 @property (nonatomic, strong) UILabel                       *tagsLabel;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
-@property (nonatomic, strong) NSString                      *cellIdentifier;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
 @property (nonatomic, assign) BOOL                          bEditing;
 @property (nonatomic, assign) BOOL                          bVisible;
@@ -88,10 +87,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)configureTableView {
-    self.cellIdentifier = self.theme.name;
-    self.tableView.rowHeight = 36;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
+    [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
 }
 
@@ -159,7 +157,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    self.cellIdentifier = self.theme.name;
     [self.tableView reloadData];
 
     [self.view setNeedsDisplay];
@@ -251,12 +248,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
-    if (!cell) {
-        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellIdentifier];
-    }
+    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPTagListViewCell.reuseIdentifier forIndexPath:indexPath];
 
-    [cell resetCellForReuse];
+    [cell prepareForReuse];
     [cell applyStyle];
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -280,18 +274,18 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
     switch (indexPath.row) {
         case SPTagsListSystemRowAllNotes: {
-            cell.textLabel.text = NSLocalizedString(@"All Notes", nil);
-            cell.imageView.image = [UIImage imageWithName:UIImageNameAllNotes];
+            cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameAllNotes];
             break;
         }
         case SPTagsListSystemRowTrash: {
-            cell.textLabel.text = NSLocalizedString(@"Trash-noun", nil);
-            cell.imageView.image = [UIImage imageWithName:UIImageNameTrash];
+            cell.tagNameTextField.text = NSLocalizedString(@"Trash-noun", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameTrash];
             break;
         }
         case SPTagsListSystemRowSettings: {
-            cell.textLabel.text = NSLocalizedString(@"Settings", nil);
-            cell.imageView.image = [UIImage imageWithName:UIImageNameSettings];
+            cell.tagNameTextField.text = NSLocalizedString(@"Settings", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameSettings];
             break;
         }
     }
@@ -302,9 +296,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 //    [button setContentEdgeInsets:SPButtonContentInsets];
 //    [button setImageEdgeInsets:SPButtonImageInsets];
 //    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-
-//    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
-//    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
 
 //    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
 //    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
@@ -324,7 +315,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
     cell.delegate = self;
     cell.tagNameTextField.delegate = self;
-    cell.imageView.image = [UIImage imageWithName:UIImageNameTag];
+    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
     cell.accessibilityLabel = cellText;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -352,7 +343,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
     switch (indexPath.section) {
         case SPTagsListSectionSystem: {
