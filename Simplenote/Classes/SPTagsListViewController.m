@@ -25,11 +25,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 // MARK: - Private
 //
 @interface SPTagsListViewController () <NSFetchedResultsControllerDelegate,
+                                        SPTagListViewCellDelegate,
                                         UIGestureRecognizerDelegate,
                                         UITextFieldDelegate,
                                         UITableViewDelegate,
-                                        UITableViewDataSource,
-                                        SPTagListViewCellDelegate>
+                                        UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
@@ -217,8 +217,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
--(NSInteger)numTags
-{
+-(NSInteger)numTags {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
     return [sectionInfo numberOfObjects];
 }
@@ -247,8 +246,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 	return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
     if (!cell) {
         cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellIdentifier];
@@ -344,8 +342,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
     if (sourceIndexPath.section != kSectionTags || proposedDestinationIndexPath.section != kSectionTags) {
 
         return sourceIndexPath;
@@ -620,8 +617,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 #pragma mark - Fetched results controller
 
-- (NSArray *)sortDescriptors
-{
+- (NSArray *)sortDescriptors {
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
     NSSortDescriptor *sortDescriptor;
     if (isAlphaSort) {
@@ -649,10 +645,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [self.tableView reloadData];
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil)
-    {
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
     
