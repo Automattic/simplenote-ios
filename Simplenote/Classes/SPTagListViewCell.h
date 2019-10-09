@@ -19,6 +19,4 @@
 @property (nonatomic, assign) BOOL                          isTextFieldEditable;
 @property (nonatomic, strong) NSString                      *tagNameText;
 
-- (void)applyStyle;
-
 @end

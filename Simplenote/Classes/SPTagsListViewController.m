@@ -113,6 +113,9 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     [[UIMenuController sharedMenuController] update];
 }
 
+
+#pragma mark - Notification Hooks
+
 - (void)startListeningToNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
@@ -210,8 +213,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 }
 
 - (NSInteger)numberOfTags {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
-    return sectionInfo.numberOfObjects;
+    return self.fetchedResultsController.sections.firstObject.numberOfObjects;
 }
 
 
@@ -226,14 +228,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case SPTagsListSectionTags: {
-            return self.tableHeaderView;
-        }
-        default: {
-            return nil;
-        }
-    }
+    return section == SPTagsListSectionTags ? self.tableHeaderView : nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -266,7 +261,6 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPTagListViewCell.reuseIdentifier forIndexPath:indexPath];
 
-    [cell applyStyle];
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -733,7 +727,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 }
 
 
-#pragma mark - Fetched results controller delegate
+#pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     

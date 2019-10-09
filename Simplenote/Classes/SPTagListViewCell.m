@@ -13,12 +13,14 @@
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
         self.tagNameTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         self.tagNameTextField.enabled = NO;
+
+        [self refreshStyle];
     }
 
     return self;
 }
 
-- (void)applyStyle {
+- (void)refreshStyle {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     self.leftImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
     self.tagNameTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
@@ -51,6 +53,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
 
+    [self refreshStyle];
     self.accessoryType = UITableViewCellAccessoryNone;
     self.isTextFieldEditable = NO;
 }
