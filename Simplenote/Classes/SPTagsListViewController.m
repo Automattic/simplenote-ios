@@ -109,30 +109,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self startListeningToKeyboardNotifications];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    CGFloat safeBottomInset = self.view.safeAreaInsets.bottom;
-    CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight - safeBottomInset;
-    self.tableView.frame = tableViewFrame;
-    
-    settingsButton.frame = CGRectMake(tableViewFrame.origin.x,
-                                      tableViewFrame.size.height,
-                                      tableViewFrame.size.width,
-                                      SPSettingsButtonHeight);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopListeningToKeyboardNotifications];
-}
-
 - (void)startListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -146,14 +122,11 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (VSTheme *)theme {
-    
     return [[VSThemeManager sharedManager] theme];
 }
 
 - (void)themeDidChange {
     [self updateHeaderColors];
-    customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
@@ -166,28 +139,13 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)updateHeaderColors {
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
     UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
 
-    headerSeparator.backgroundColor = separatorColor;
-    footerSeparator.backgroundColor = separatorColor;
-    tagsLabel.textColor = tagsTextColor;
-    [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-    [allNotesButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-
-    [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-    [trashButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-
-    [settingsButton setTitleColor:textColor forState:UIControlStateNormal];
-    [settingsButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-    [settingsButton setTintColor:textColor];
-
-    [editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
+    self.tagsLabel.textColor = tagsTextColor;
+    [self.editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
 }
 
 - (void)menuDidChangeVisibility:(UIMenuController *)menuController {
-    
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
 
@@ -215,9 +173,11 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 #pragma mark - UITableViewDataSource
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
-    
-    return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:tag]
-                                                                                          inSection:kSectionTags]];
+
+    NSInteger row = [self rowForTag:tag];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:row inSection:SPTagsListSectionTags];
+
+    return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (NSInteger)rowForTag:(Tag *)tag {
@@ -241,7 +201,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if ((section == kSectionTags) &&
+    if ((section == SPTagsListSectionTags) &&
         self.fetchedResultsController.fetchedObjects.count == 0) {
         return 1;
     }
@@ -254,13 +214,24 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     return ![[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return SPTagsListSectionCount;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (section == kSectionTags) {
-		return [self numTags];
+
+    switch (section) {
+        case SPTagsListSectionSystem: {
+            return SPTagsListSystemRowCount;
+        }
+        case SPTagsListSectionTags: {
+            return self.numberOfTags;
+        }
+        default: {
+            NSAssert(false, @"Unsupported section");
+            return 0;
+        }
     }
-    
-	return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,12 +247,45 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            [self configureSystemCell:cell atIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionTags: {
+            [self configureTagCell:cell atIndexPath:indexPath];
+            break;
+        }
+    }
+}
+
+- (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+
+    switch (indexPath.row) {
+        case SPTagsListSystemRowAllNotes: {
+            cell.textLabel.text = NSLocalizedString(@"All Notes", nil);
+            cell.imageView.image = [UIImage imageWithName:UIImageNameAllNotes];
+            break;
+        }
+        case SPTagsListSystemRowTrash: {
+            cell.textLabel.text = NSLocalizedString(@"Trash-noun", nil);
+            cell.imageView.image = [UIImage imageWithName:UIImageNameTrash];
+            break;
+        }
+        case SPTagsListSystemRowSettings: {
+            cell.textLabel.text = NSLocalizedString(@"Settings", nil);
+            cell.imageView.image = [UIImage imageWithName:UIImageNameSettings];
+            break;
+        }
+    }
+
+- (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.tagNameTextField.delegate = self;
     cell.delegate = self;
 
     Tag *tag = [self tagAtRow: indexPath.row];
     NSString *cellText = tag.name;
-    UIImage *cellIcon = nil;
+    UIImage *cellIcon = [UIImage imageWithName:UIImageNameTag];
     BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
@@ -298,7 +302,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BOOL response = indexPath.section == kSectionTags;
+    BOOL response = indexPath.section == SPTagsListSectionTags;
     if (response) {
         [SPTracker trackTagCellPressed];
     }
@@ -327,7 +331,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    if (sourceIndexPath.section == kSectionTags && destinationIndexPath.section == kSectionTags) {
+    if (sourceIndexPath.section == SPTagsListSectionTags && destinationIndexPath.section == SPTagsListSectionTags) {
         
         [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row
                                                   toIndex:destinationIndexPath.row];
@@ -336,7 +340,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-    if (sourceIndexPath.section != kSectionTags || proposedDestinationIndexPath.section != kSectionTags) {
+    if (sourceIndexPath.section != SPTagsListSectionTags || proposedDestinationIndexPath.section != SPTagsListSectionTags) {
 
         return sourceIndexPath;
     }
@@ -388,10 +392,10 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     [self.tableView setEditing:editing animated:YES];
     
     if (editing) {
-        [editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+        [self.editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
 		[SPTracker trackTagEditorAccessed];
     } else {
-        [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+        [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     }
 
     SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
@@ -424,14 +428,14 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)doneEditingAction:(id)sender {
     
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:kSectionTags]];
+        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:SPTagsListSectionTags]];
         [cell.tagNameTextField endEditing:YES];
     }
     
     [self setEditing:NO canceled:NO];
 }
 
--(void)openNoteListForTagName:(NSString *)tag {
+- (void)openNoteListForTagName:(NSString *)tag {
     
     BOOL fetchNeeded = NO;
 
@@ -493,9 +497,8 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)renameTagAction:(Tag *)tag {
     
     if (_renameTag) {
-        
         SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                                 inSection:kSectionTags]];
+                                                                                                                 inSection:SPTagsListSectionTags]];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -518,7 +521,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
         string = nil;
         endEditing = YES;
     } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        
         string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
         endEditing = YES;
     }
@@ -539,13 +541,12 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                             inSection:kSectionTags]];
+                                                                                                             inSection:SPTagsListSectionTags]];
     // deselect cell if editing
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
-    
-    
+
     // see if tag already exists, if not rename. If it does, revert back to original name
     BOOL renameTag = ![[SPObjectManager sharedManager] tagExists:textField.text];
     
@@ -595,8 +596,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.bVisible)
+        if (!self.bVisible) {
             [self.tableView reloadData];
+        }
     });
     
     return YES;
@@ -614,13 +616,13 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 #pragma mark - Fetched results controller
 
 - (NSArray *)sortDescriptors {
+
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
     NSSortDescriptor *sortDescriptor;
     if (isAlphaSort) {
-        sortDescriptor = [[NSSortDescriptor alloc]
-                          initWithKey:@"name"
-                          ascending:YES
-                          selector:@selector(localizedCaseInsensitiveCompare:)];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                     ascending:YES
+                                                      selector:@selector(localizedCaseInsensitiveCompare:)];
     } else {
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
     }
@@ -699,7 +701,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
     
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = newFrame.size.height - keyboardHeight + SPSettingsButtonHeight;
+    newFrame.size.height = newFrame.size.height - keyboardHeight;
     
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
@@ -710,7 +712,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
+    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y;
 
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
@@ -722,70 +724,28 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 
 #pragma mark - Interface Setup
 
-- (CGFloat)thinLineSize {
-    return 1.0 / [[UIScreen mainScreen] scale];
-}
-
-- (UIButton *)buildSettingsButton {
-    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
-    [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
-    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
-    [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
-    [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, self.thinLineSize)];
-    footerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [settingsButton addSubview:footerSeparator];
-
-    return settingsButton;
-}
-
 - (UIView *)buildTableHeaderView {
-    CGRect headerFrame = CGRectMake(0, 0, 0, 121);
+    CGRect headerFrame = CGRectMake(0, 0, 0, 40);
     UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
 
-    allNotesButton = [self buildHeaderButton];
-    allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
-    [allNotesButton setImage:[[UIImage imageWithName:UIImageNameAllNotes] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
-    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:allNotesButton];
-
-    trashButton = [self buildHeaderButton];
-    trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
-    [trashButton setImage:[[UIImage imageWithName:UIImageNameTrash] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [trashButton setTitle:NSLocalizedString(@"Trash-noun", nil) forState:UIControlStateNormal];
-    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:trashButton];
-
-    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
-    headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerSeparator.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
-    [headerView addSubview:headerSeparator];
-
-    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
+    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 0, 20)];
     tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
-    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
-    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [tagsView addSubview:tagsLabel];
 
-    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
-    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
-    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
-    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
-    [tagsView addSubview:editTagsButton];
+    self.tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
+    self.tagsLabel.font = [UIFont systemFontOfSize: 14];
+    self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    self.tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [tagsView addSubview:self.tagsLabel];
+
+    self.editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.editTagsButton.frame = CGRectMake(0, 0, 0, 20);
+    self.editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    self.editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [self.editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    self.editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    [tagsView addSubview:self.editTagsButton];
 
     [self updateHeaderColors];
 
@@ -794,21 +754,10 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     return headerView;
 }
 
-- (UIButton *)buildHeaderButton {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [button setContentEdgeInsets:SPButtonContentInsets];
-    [button setImageEdgeInsets:SPButtonImageInsets];
-    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-
-    return button;
-}
-
 - (void)updateSortOrder:(id)sender {
-    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[self sortDescriptors]];
-    
-    NSError *error;
+    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
+
+    NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
