@@ -53,9 +53,6 @@
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
-@property (nonatomic, strong) UIImage                   *panImageDelete;
-@property (nonatomic, strong) UIImage                   *panImageRestore;
-
 @property (nonatomic, assign) BOOL                      bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                      bResetTitleView;
 
@@ -74,9 +71,6 @@
 
         [self updateRowHeight];
         [self startListeningToNotifications];
-
-        _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _panImageRestore = [[UIImage imageNamed:@"icon_cell_pan_restore"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         // add empty list view
         _emptyListView = [[SPEmptyListView alloc] initWithImage:[UIImage imageNamed:@"logo_login"]
@@ -245,7 +239,7 @@
 
     /// Button: Display Tags
     ///
-    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
+    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_menu"]
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];

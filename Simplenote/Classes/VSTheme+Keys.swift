@@ -28,6 +28,7 @@ enum ThemeColorKey: String {
     case simplenoteAlmostBlack
     case simplenoteDeepSeaBlue
     case simplenoteGray10
+    case simplenoteGray50
     case simplenoteGunmetal
     case simplenoteLightNavy
     case simplenoteLightPink
@@ -53,13 +54,13 @@ enum ThemeColorKey: String {
 // MARK: - ThemeImageKey represents all of the available Image Keys
 //
 enum ThemeImageKey: String {
-    case backImage
+    case chevronLeftImage
+    case chevronRightImage
     case pinImage
     case sharedImage
     case navigationBarBackgroundImage
     case navigationBarBackgroundPromptImage
     case onePasswordImage
-    case searchIconImage
     case tagViewDeletionImage
     case visibilityOnImage
     case visibilityOffImage
@@ -70,8 +71,10 @@ extension ThemeImageKey {
 
     var filename: String {
         switch self {
-        case .backImage:
-            return "back_chevron"
+        case .chevronLeftImage:
+            return "icon_chevron_left"
+        case .chevronRightImage:
+            return "icon_chevron_right"
         case .pinImage:
             return "icon_pin"
         case .sharedImage:
@@ -81,15 +84,13 @@ extension ThemeImageKey {
         case .navigationBarBackgroundPromptImage:
             return "navigation_bar_background_prompt"
         case .onePasswordImage:
-            return "button_onepassword"
-        case .searchIconImage:
-            return "search_icon"
+            return "icon_onepassword"
         case .tagViewDeletionImage:
             return "button_delete_small"
         case .visibilityOnImage:
-            return "button_visibility_on"
+            return "icon_visibility_on"
         case .visibilityOffImage:
-            return "button_visibility_off"
+            return "icon_visibility_off"
         }
     }
 }

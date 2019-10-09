@@ -1,6 +1,7 @@
 4.12
 -----
- 
+-   Simplenote just got brand new Icons!
+
 4.11.0
 ======
 -   Search Bar is now looking better than ever!

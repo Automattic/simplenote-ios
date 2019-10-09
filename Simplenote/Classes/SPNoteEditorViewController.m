@@ -39,16 +39,18 @@
 
 NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
-CGFloat const SPCustomTitleViewHeight            = 44.0f;
-CGFloat const SPPaddingiPadCompactWidthPortrait  =  8.0f;
-CGFloat const SPPaddingiPadLeading               =  4.0f;
-CGFloat const SPPaddingiPadTrailing              = -2.0f;
-CGFloat const SPPaddingiPhoneLeadingLandscape    =  0.0f;
-CGFloat const SPPaddingiPhoneLeadingPortrait     =  8.0f;
-CGFloat const SPPaddingiPhoneTrailingLandscape   = 14.0f;
-CGFloat const SPPaddingiPhoneTrailingPortrait    =  6.0f;
-CGFloat const SPBarButtonYOriginAdjustment       = -1.0f;
-CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
+CGFloat const SPCustomTitleViewHeight               = 44.0f;
+CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
+CGFloat const SPPaddingiPadLeading                  = 4.0f;
+CGFloat const SPPaddingiPadTrailing                 = -2.0f;
+CGFloat const SPPaddingiPhoneLeadingLandscape       = 0.0f;
+CGFloat const SPPaddingiPhoneLeadingPortrait        = 8.0f;
+CGFloat const SPPaddingiPhoneTrailingLandscape      = 14.0f;
+CGFloat const SPPaddingiPhoneTrailingPortrait       = 6.0f;
+CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
+CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
+CGFloat const SPBackButtonImagePadding              = -18;
+CGFloat const SPBackButtonTitlePadding              = -15;
 
 
 @interface SPNoteEditorViewController ()<SPInteractivePushViewControllerProvider, UIPopoverPresentationControllerDelegate> {
@@ -373,7 +375,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // setup Navigation Bar
     self.navigationItem.hidesBackButton = YES;
-    
+
+    // Load Assets
+    UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRightImage];
+    UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeftImage];
+
     // container view
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -391,11 +397,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // back button
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [backButton setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                forState:UIControlStateNormal];
+    [backButton setImage:chevronLeftImage forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
-    backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
+    backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
+    backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
     [backButton addTarget:self
                    action:@selector(backButtonAction:)
@@ -405,7 +411,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_action"]
+    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_info"]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
@@ -421,7 +427,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     newButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
-    keyboardButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_keyboard"]
+    keyboardButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_hide_keyboard"]
                                         target:self
                                       selector:@selector(keyboardButtonAction:)];
     keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
@@ -453,13 +459,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     UIBarButtonItem *flexibleSpaceTwo = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-    UIImage *chevronImage = [UIImage imageNamed:@"back_chevron"];
-    nextSearchButton = [UIBarButtonItem barButtonWithImage:[chevronImage imageRotatedByDegrees:180.0]
+
+    nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightNextSearchResult:)];
         nextSearchButton.width = 34.0;
-    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronImage
+    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightPrevSearchResult:)];
@@ -1388,10 +1394,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                       NSLocalizedString(@"History...", @"Action - view the version history of a note"),
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageNamed:@"button_share_note"],
+    actionImages = @[[UIImage imageNamed:@"icon_share"],
                      [UIImage imageNamed:@"icon_history"],
-                     [UIImage imageNamed:@"button_collaborate"],
-                     [UIImage imageNamed:@"icon_trash_large"]];
+                     [UIImage imageNamed:@"icon_collaborate"],
+                     [UIImage imageNamed:@"icon_trash"]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
                     NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
     toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),

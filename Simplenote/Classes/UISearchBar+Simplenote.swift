@@ -12,13 +12,9 @@ extension UISearchBar {
     func applySimplenoteStyle() {
         let bgImage = UIImage()
         let bgColor = UIColor.color(name: .backgroundColor)?.withAlphaComponent(Constants.backgroundAlpha)
-        let searchIconColor = UIColor.color(name: .simplenoteSlateGrey)
-        let searchIconImage = UIImage.image(name: .searchIconImage)?.withOverlayColor(searchIconColor)
 
         backgroundColor = bgColor
         setBackgroundImage(bgImage, for: .any, barMetrics: .default)
-
-        setImage(searchIconImage, for: .search, state: .normal)
         setSearchFieldBackgroundImage(.searchBarBackgroundImage, for: .normal)
 
         // Apply font to search field by traversing subviews
