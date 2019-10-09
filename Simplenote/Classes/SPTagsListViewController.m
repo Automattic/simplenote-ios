@@ -547,8 +547,8 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     
     // begin editing the text field
     SPTagListViewCell *cell = [self cellForTag:tag];
-    
-    [cell setTextFieldEditable:YES];
+
+    cell.isTextFieldEditable = YES;
     [cell.tagNameTextField becomeFirstResponder];
 }
 
@@ -607,9 +607,9 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     }
     
     _renameTag = nil;
-    
-    [cell setTagNameText:textField.text];
-    [cell setTextFieldEditable:NO];
+
+    cell.tagNameText = textField.text;
+    cell.isTextFieldEditable = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -780,7 +780,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     self.editTagsButton.frame = CGRectMake(0, 0, 0, 20);
     self.editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
     self.editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
+    self.editTagsButton.titleLabel.font = [UIFont systemFontOfSize: 14];
     self.editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
     [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
