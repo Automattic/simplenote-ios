@@ -3,9 +3,6 @@
 #import "SPSidebarViewController.h"
 
 
-@interface SPTagsListViewController : SPSidebarViewController {
-    UIButton *editTagsButton;
-    UILabel *tagsLabel;
-}
+@interface SPTagsListViewController : SPSidebarViewController
 
 @end

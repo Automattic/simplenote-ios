@@ -32,6 +32,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
+@property (nonatomic, strong) UIButton                      *editTagsButton;
+@property (nonatomic, strong) UILabel                       *tagsLabel;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) NSString                      *cellIdentifier;
