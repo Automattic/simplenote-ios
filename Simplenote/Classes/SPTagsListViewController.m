@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 };
 
 static const CGFloat kSPTagListEstimatedRowHeight = 44;
+static const NSInteger kSPTagListRequestBatchSize = 20;
 
 
 // MARK: - Private
@@ -712,7 +713,7 @@ static const CGFloat kSPTagListEstimatedRowHeight = 44;
 
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = entity;
-    [fetchRequest setFetchBatchSize:20];
+    fetchRequest.fetchBatchSize = kSPTagListRequestBatchSize;
     fetchRequest.sortDescriptors = [self sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
