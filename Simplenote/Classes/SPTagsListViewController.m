@@ -350,12 +350,15 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
-    if (self.bEditing) {
-        [SPTracker trackTagRowRenamed];
-        [self renameTagAction:tag];
-    } else {
-        [SPTracker trackListTagViewed];
-        [self openNoteListForTagName:tag.name];
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            [self didSelectSystemRowAtIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionTags: {
+            [self didSelectTagAtIndexPath:indexPath];
+            break;
+        }
     }
 }
 
