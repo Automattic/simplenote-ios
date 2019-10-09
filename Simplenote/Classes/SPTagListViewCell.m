@@ -20,7 +20,7 @@
 
 - (void)willTransitionToState:(UITableViewCellStateMask)state {
     [super willTransitionToState:state];
-    
+
     if ((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask ||
         ((state & UITableViewCellStateDefaultMask) == UITableViewCellStateDefaultMask && self.tagNameTextField.isFirstResponder)) {
 

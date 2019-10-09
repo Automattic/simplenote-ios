@@ -31,11 +31,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="jm9-sw-6Ik" secondAttribute="bottom" constant="11" id="5Q4-Xj-1Zo"/>
+                    <constraint firstItem="jm9-sw-6Ik" firstAttribute="centerY" secondItem="VnD-vW-Ad7" secondAttribute="centerY" id="Ikj-xZ-cNn"/>
                     <constraint firstAttribute="trailing" secondItem="jm9-sw-6Ik" secondAttribute="trailing" constant="10" id="R3C-rk-9L0"/>
                     <constraint firstItem="VnD-vW-Ad7" firstAttribute="leading" secondItem="xp1-lh-lT4" secondAttribute="leading" constant="15" id="aIj-bg-SDZ"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VnD-vW-Ad7" secondAttribute="bottom" constant="10" id="i9A-Hp-Ud1"/>
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="top" secondItem="xp1-lh-lT4" secondAttribute="top" constant="11" id="kAy-kt-PuX"/>
-                    <constraint firstItem="VnD-vW-Ad7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xp1-lh-lT4" secondAttribute="top" constant="10" id="mf6-QD-SVr"/>
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="centerY" secondItem="VnD-vW-Ad7" secondAttribute="centerY" id="ojo-iT-VtZ"/>
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="leading" secondItem="VnD-vW-Ad7" secondAttribute="trailing" constant="10" id="xQ0-7n-lKB"/>
                 </constraints>
