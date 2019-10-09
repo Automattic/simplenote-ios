@@ -38,7 +38,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 @property (nonatomic, strong) UIImage                       *trashImage;
 @property (nonatomic, strong) UIImage                       *settingsImage;
 @property (nonatomic, strong) NSString                      *cellIdentifier;
-@property (nonatomic, strong) NSString                      *cellWithIconIdentifier;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
 @property (nonatomic, assign) BOOL                          bEditing;
 @property (nonatomic, assign) BOOL                          bVisible;
@@ -69,11 +68,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     // register custom cell
     self.cellIdentifier = self.theme.name;
-    self.cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
-    [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:self.cellIdentifier];
-    [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:self.cellWithIconIdentifier];
+    [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
     _settingsImage = [UIImage imageWithName:UIImageNameSettings];
@@ -146,7 +141,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     self.cellIdentifier = self.theme.name;
-    self.cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
     [self.tableView reloadData];
 
     [self.view setNeedsDisplay];
