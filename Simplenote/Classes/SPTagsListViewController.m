@@ -94,6 +94,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (void)configureTableView {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = kSPTagListEstimatedRowHeight;
+    self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
 }
@@ -186,7 +187,12 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 #pragma mark - Button actions
 
 - (void)editTagsTap:(UIButton *)sender {
-    [self setEditing:!self.bEditing canceled:NO];
+    BOOL newState = !self.bEditing;
+    if (newState) {
+        [SPTracker trackTagEditorAccessed];
+    }
+
+    [self setEditing:newState canceled:NO];
 }
 
 
@@ -305,6 +311,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     NSString *cellText = tag.name;
 
+    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
     cell.tagNameText = cellText;
     cell.accessibilityLabel = cellText;
     cell.delegate = self;
@@ -322,8 +329,7 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    // Actions only allowed for Tags!
-    return indexPath.section == SPTagsListSectionTags;
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -347,19 +353,17 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if (sourceIndexPath.section == SPTagsListSectionTags && destinationIndexPath.section == SPTagsListSectionTags) {
         
-        [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row
-                                                  toIndex:destinationIndexPath.row];
+        [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
         
     }
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
     if (sourceIndexPath.section != SPTagsListSectionTags || proposedDestinationIndexPath.section != SPTagsListSectionTags) {
-
         return sourceIndexPath;
     }
     
-    return proposedDestinationIndexPath ? proposedDestinationIndexPath : sourceIndexPath;
+    return proposedDestinationIndexPath ?: sourceIndexPath;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -452,43 +456,47 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     }
     
     self.bEditing = editing;
-
-    self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView setEditing:editing animated:YES];
-    
-    if (editing) {
-        [self.editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
-		[SPTracker trackTagEditorAccessed];
-    } else {
-        [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+
+    [self refreshEditTagsButtonForEditionState:editing];
+    [self resizeContainerViewForEditonState:editing animated:!isCanceled];
+
+    if (!editing) {
         [self.view endEditing:YES];
     }
+}
 
-    SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
-    CGFloat newWidth = editing
-        ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
-        : [self.theme floatForKey:@"containerViewSidePanelWidth"];
-    CGRect frame = self.view.frame;
-    frame.size.width = newWidth;
+- (void)resizeContainerViewForEditonState:(BOOL)editing animated:(BOOL)animated {
+
+    SPSidebarContainerViewController *noteListViewController = [[SPAppDelegate sharedDelegate] noteListViewController];
+
+    NSString *widthKey = editing ? @"containerViewSidePanelWidthExpanded" : @"containerViewSidePanelWidth";
+    CGFloat newWidth = [self.theme floatForKey:widthKey];
+
+    CGRect selfFrame = self.view.frame;
+    selfFrame.size.width = newWidth;
 
     CGRect notesFrame = noteListViewController.rootView.frame;
     notesFrame.origin.x = newWidth;
-    if (!isCanceled) {
+
+    if (animated) {
         // Make the tags list wider, and move the notes list over to accomodate for the new width
         [UIView animateWithDuration:UIKitConstants.animationShortDuration
-                              delay:0.0
+                              delay:UIKitConstants.animationDelayZero
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             self.view.frame = frame;
-                             noteListViewController.rootView.frame = notesFrame;
-                         } completion:^(BOOL finished) {
-                             nil;
-                         }];
+                            noteListViewController.rootView.frame = notesFrame;
+                            self.view.frame = selfFrame;
+                            [self.view layoutIfNeeded];
+                         } completion:nil];
     } else {
-        self.view.frame = frame;
+        self.view.frame = selfFrame;
     }
-    
-    return;
+}
+
+- (void)refreshEditTagsButtonForEditionState:(BOOL)editing {
+    NSString *title = editing ? NSLocalizedString(@"Done", nil) : NSLocalizedString(@"Edit", nil);
+    [self.editTagsButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)openNoteListForTagName:(NSString *)tag {
@@ -540,10 +548,8 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
     BOOL lastTag = [self numberOfTags] == 1;
 
     if ([[SPObjectManager sharedManager] removeTag:tag] && !lastTag) {
-        
         [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
     } else {
         [self.tableView reloadData];
