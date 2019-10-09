@@ -17,11 +17,18 @@
 
 // MARK: - Constants
 //
-#define kSectionTags 0
+typedef NS_ENUM(NSInteger, SPTagsListSection) {
+    SPTagsListSectionSystem = 0,
+    SPTagsListSectionTags   = 1,
+    SPTagsListSectionCount  = 2
+};
 
-static CGFloat const SPSettingsButtonHeight = 40;
-static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
-static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
+typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
+    SPTagsListSystemRowAllNotes = 0,
+    SPTagsListSystemRowTrash    = 1,
+    SPTagsListSystemRowSettings = 2,
+    SPTagsListSystemRowCount    = 3
+};
 
 
 // MARK: - Private
