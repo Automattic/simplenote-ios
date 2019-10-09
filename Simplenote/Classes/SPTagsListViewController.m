@@ -479,6 +479,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 		[SPTracker trackTagEditorAccessed];
     } else {
         [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+        [self.view endEditing:YES];
     }
 
     SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
