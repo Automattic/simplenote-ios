@@ -106,8 +106,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
                                       tableViewFrame.size.height,
                                       tableViewFrame.size.width,
                                       SPSettingsButtonHeight);
-    
-    [self updateHeaderButtonHighlight];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -278,28 +276,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     });
 }
 
-- (void)updateHeaderButtonHighlight {
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-
-    if ([SPAppDelegate sharedDelegate].selectedTag == nil) {
-        [allNotesButton setTitleColor:tintColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:tintColor];
-        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-        [trashButton setTintColor:textColor];
-    } else if ([[SPAppDelegate sharedDelegate].selectedTag  isEqual:@"trash"]) {
-        [trashButton setTitleColor:tintColor forState:UIControlStateNormal];
-        [trashButton setTintColor:tintColor];
-        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:textColor];
-    } else {
-        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-        [trashButton setTintColor:textColor];
-        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:textColor];
-    }
-}
-
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     BOOL response = indexPath.section == kSectionTags;
@@ -328,8 +304,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [SPTracker trackListTagViewed];
         [self openNoteListForTagName:tag.name];
     }
-
-    [self updateHeaderButtonHighlight];
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
