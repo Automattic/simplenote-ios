@@ -1,8 +1,5 @@
 #import "SPTagsListViewController.h"
-#import "VSThemeManager.h"
-#import "Tag.h"
 #import "SPAppDelegate.h"
-#import <Simperium/Simperium.h>
 #import "SPNoteListViewController.h"
 #import "SPTagListViewCell.h"
 #import "SPObjectManager.h"
@@ -10,6 +7,11 @@
 #import "SPButton.h"
 #import "SPOptionsViewController.h"
 #import "SPTracker.h"
+#import "SPTagListViewCell.h"
+#import "Tag.h"
+
+#import "VSThemeManager.h"
+#import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
 

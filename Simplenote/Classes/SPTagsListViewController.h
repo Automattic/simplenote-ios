@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "SPTagListViewCell.h"
 #import "SPSidebarViewController.h"
 
 
