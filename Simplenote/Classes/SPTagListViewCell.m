@@ -41,9 +41,7 @@
         _tagNameTextField.returnKeyType = UIReturnKeyDone;
         _tagNameTextField.isAccessibilityElement = NO;
         [self.contentView addSubview:_tagNameTextField];
-        
-        self.textKerning = [NSNumber numberWithFloat:[self.theme floatForKey:@"tagListFontKerning"]];
-        
+
         UIColor *textColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
         if (![self.tagNameTextField.textColor isEqual:textColor]) {
             self.tagNameTextField.textColor = textColor;
@@ -116,9 +114,10 @@
     
     hasHighlightedTextColor = self.highlighted || self.selected;
     
-    NSDictionary *textAttributes = @{NSFontAttributeName: self.textFont,
-                                     NSForegroundColorAttributeName: hasHighlightedTextColor ? _highlightedTextColor : _textColor,
-                                     NSKernAttributeName: self.textKerning};
+    NSDictionary *textAttributes = @{
+        NSFontAttributeName: self.textFont,
+        NSForegroundColorAttributeName: hasHighlightedTextColor ? _highlightedTextColor : _textColor
+    };
     
     NSAttributedString *titleAttributesString;
     

@@ -20,7 +20,6 @@
 @property (nonatomic, strong) UIColor                       *textColor;
 @property (nonatomic, strong) UIColor                       *highlightedTextColor;
 @property (nonatomic, strong) UIFont                        *textFont;
-@property (nonatomic, strong) NSNumber                      *textKerning;
 
 - (void)setIconImage:(UIImage *)image;
 - (void)resetCellForReuse;

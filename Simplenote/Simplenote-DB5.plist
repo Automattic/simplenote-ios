@@ -160,8 +160,6 @@
 		<integer>10</integer>
 		<key>tagListFontTopPadding</key>
 		<integer>1</integer>
-		<key>tagListFontKerning</key>
-		<real>0</real>
 		<key>tableViewBackgroundColor</key>
 		<string>@backgroundColor</string>
 		<key>tableViewDetailTextLabelColor</key>
