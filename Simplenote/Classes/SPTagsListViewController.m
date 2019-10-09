@@ -224,7 +224,10 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
+    BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
+    BOOL isSortEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
+
+    return isTagRow && !isSortEnabled;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -340,7 +343,8 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    return YES;
+    // Actions only allowed for Tags!
+    return indexPath.section == SPTagsListSectionTags;
 }
 
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
