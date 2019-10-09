@@ -303,18 +303,12 @@ static const NSInteger kSPTagListRequestBatchSize = 20;
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
-    BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     NSString *cellText = tag.name;
 
     cell.tagNameText = cellText;
     cell.accessibilityLabel = cellText;
     cell.delegate = self;
     cell.tagNameTextField.delegate = self;
-    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        cell.selected = selected;
-    });
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
