@@ -501,16 +501,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     return;
 }
 
-- (void)doneEditingAction:(id)sender {
-    
-    if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
-        [cell.tagNameTextField endEditing:YES];
-    }
-    
-    [self setEditing:NO canceled:NO];
-}
-
 - (void)openNoteListForTagName:(NSString *)tag {
     
     BOOL fetchNeeded = NO;
