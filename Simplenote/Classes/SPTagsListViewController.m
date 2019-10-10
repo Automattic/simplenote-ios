@@ -104,7 +104,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 - (void)configureTableHeaderView {
     self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
-    self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    self.tagsHeaderView.titleLabel.text = NSLocalizedString(@"Tags", nil);
 
     UIButton *actionButton = self.tagsHeaderView.actionButton;
     [actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
