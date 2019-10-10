@@ -39,6 +39,7 @@
                     <constraint firstItem="jm9-sw-6Ik" firstAttribute="leading" secondItem="VnD-vW-Ad7" secondAttribute="trailing" constant="10" id="xQ0-7n-lKB"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="49" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="leftImageView" destination="VnD-vW-Ad7" id="qer-Fx-iKs"/>
                 <outlet property="tagNameTextField" destination="jm9-sw-6Ik" id="DfV-Wg-uwb"/>

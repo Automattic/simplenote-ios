@@ -12,8 +12,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     [self refreshStyle];
-    self.accessoryType = UITableViewCellAccessoryNone;
-    self.tagNameTextField.enabled = NO;
+    [self reset];
 }
 
 - (void)willTransitionToState:(UITableViewCellStateMask)state {
@@ -24,6 +23,11 @@
 
         [self.tagNameTextField endEditing:true];
     }
+}
+
+- (void)reset {
+    self.accessoryType = UITableViewCellAccessoryNone;
+    self.tagNameTextField.enabled = NO;
 }
 
 - (void)refreshStyle {
