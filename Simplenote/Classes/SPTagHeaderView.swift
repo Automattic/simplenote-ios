@@ -13,11 +13,7 @@ class SPTagHeaderView: UIView {
 
     /// Right ActionButton
     ///
-    @IBOutlet private(set) var actionButton: UIButton! {
-        didSet {
-            actionButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        }
-    }
+    @IBOutlet private(set) var actionButton: UIButton!
 
 
     // MARK: - Overriden Methods

@@ -174,10 +174,8 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - Style
 
 - (void)refreshStyle {
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
-
     [self.tagsHeaderView refreshStyle];
+    [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
 }
 
