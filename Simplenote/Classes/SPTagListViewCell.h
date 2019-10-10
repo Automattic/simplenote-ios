@@ -13,10 +13,10 @@
 
 @interface SPTagListViewCell : UITableViewCell
 
-@property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
 @property (nonatomic, strong) IBOutlet UITextField          *tagNameTextField;
 @property (nonatomic, strong) IBOutlet UIImageView          *leftImageView;
-@property (nonatomic, assign) BOOL                          isTextFieldEditable;
-@property (nonatomic, strong) NSString                      *tagNameText;
+@property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
+
+- (void)refreshStyle;
 
 @end

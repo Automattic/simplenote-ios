@@ -302,10 +302,10 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     NSString *cellText = tag.name;
 
     cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
-    cell.tagNameText = cellText;
+    cell.tagNameTextField.text = cellText;
+    cell.tagNameTextField.delegate = self;
     cell.accessibilityLabel = cellText;
     cell.delegate = self;
-    cell.tagNameTextField.delegate = self;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -554,7 +554,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     // begin editing the text field
     SPTagListViewCell *cell = [self cellForTag:tag];
 
-    cell.isTextFieldEditable = YES;
+    cell.tagNameTextField.enabled = YES;
     [cell.tagNameTextField becomeFirstResponder];
 }
 
@@ -614,8 +614,8 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     
     _renameTag = nil;
 
-    cell.tagNameText = textField.text;
-    cell.isTextFieldEditable = NO;
+    cell.tagNameTextField.text = textField.text;
+    cell.tagNameTextField.enabled = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

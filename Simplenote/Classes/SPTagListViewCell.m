@@ -6,16 +6,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self setupTextField];
     [self refreshStyle];
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-
     [self refreshStyle];
     self.accessoryType = UITableViewCellAccessoryNone;
-    self.isTextFieldEditable = NO;
+    self.tagNameTextField.enabled = NO;
 }
 
 - (void)willTransitionToState:(UITableViewCellStateMask)state {
@@ -28,31 +26,25 @@
     }
 }
 
-- (void)setupTextField {
-    self.tagNameTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    self.tagNameTextField.enabled = NO;
+- (void)refreshStyle {
+    [self refreshCellStyle];
+    [self refreshSelectionStyle];
+    [self refreshComponentsStyle];
 }
 
-- (void)refreshStyle {
+- (void)refreshCellStyle {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+}
+
+- (void)refreshSelectionStyle {
+    UIView *selectedView = [UIView new];
+    selectedView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+    self.selectedBackgroundView = selectedView;
+}
+
+- (void)refreshComponentsStyle {
     self.leftImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
     self.tagNameTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
-}
-
-- (void)setTagNameText:(NSString *)text {
-    self.tagNameTextField.text = text;
-}
-
-- (NSString *)tagNameText {
-    return self.tagNameTextField.text;
-}
-
-- (void)setIsTextFieldEditable:(BOOL)editable {
-    self.tagNameTextField.enabled = editable;
-}
-
-- (BOOL)isTextFieldEditable {
-    return self.tagNameTextField.enabled;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
