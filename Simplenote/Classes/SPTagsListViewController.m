@@ -42,9 +42,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
-@property (nonatomic, strong) IBOutlet UIView               *tableHeaderView;
-@property (nonatomic, strong) IBOutlet UIButton             *editTagsButton;
-@property (nonatomic, strong) IBOutlet UILabel              *tagsLabel;
+@property (nonatomic, strong) SPTagHeaderView               *tagsHeaderView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
@@ -105,10 +103,9 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)configureTableHeaderView {
-    self.tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    self.editTagsButton.titleLabel.adjustsFontForContentSizeCategory = YES;
-    [self.editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [self.editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+    self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
+    self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    [self.tagsHeaderView.actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
 }
 
 - (void)configureMenuController {
@@ -174,16 +171,10 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - Style
 
 - (void)refreshStyle {
-    UIColor *headerActionColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
-    UIColor *headerTextColor = [UIColor colorWithName:UIColorNameTextColor];
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameSimplenoteGray0];
-    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameSimplenoteGray0];
+    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 
-    self.view.backgroundColor = backgroundColor;
-    self.tableView.separatorColor = separatorColor;
-    self.tagsLabel.textColor = headerTextColor;
-    [self.editTagsButton setTitleColor:headerActionColor forState:UIControlStateNormal];
-
+    [self.tagsHeaderView refreshStyle];
     [self.tableView reloadData];
 }
 
@@ -230,7 +221,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - UITableViewDataSource
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return section == SPTagsListSectionTags ? self.tableHeaderView : nil;
+    return section == SPTagsListSectionTags ? self.tagsHeaderView : nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -488,7 +479,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 - (void)refreshEditTagsButtonForEditionState:(BOOL)editing {
     NSString *title = editing ? NSLocalizedString(@"Done", nil) : NSLocalizedString(@"Edit", nil);
-    [self.editTagsButton setTitle:title forState:UIControlStateNormal];
+    [self.tagsHeaderView.actionButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)openNoteListForTagName:(NSString *)tag {

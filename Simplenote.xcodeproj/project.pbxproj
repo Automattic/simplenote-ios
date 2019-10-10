@@ -161,6 +161,8 @@
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */; };
 		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
+		B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */; };
+		B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
@@ -435,6 +437,8 @@
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPNoteListViewController+Extensions.swift"; path = "Classes/SPNoteListViewController+Extensions.swift"; sourceTree = "<group>"; };
 		B546BE96234E64F200A126DA /* SPTagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagListViewCell.xib; path = Classes/SPTagListViewCell.xib; sourceTree = "<group>"; };
+		B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagHeaderView.swift; path = Classes/SPTagHeaderView.swift; sourceTree = "<group>"; };
+		B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagHeaderView.xib; path = Classes/SPTagHeaderView.xib; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -1231,6 +1235,8 @@
 				E2465A2117AD70810097B19B /* SPToggle.h */,
 				E2465A2217AD70810097B19B /* SPToggle.m */,
 				37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */,
+				B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */,
+				B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1639,6 +1645,7 @@
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
+				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
@@ -1928,6 +1935,7 @@
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
+				B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */,
 				B5C57A4122E78F4D009166EA /* UIColorName.swift in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
