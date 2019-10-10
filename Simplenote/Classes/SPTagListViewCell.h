@@ -17,6 +17,4 @@
 @property (nonatomic, strong) IBOutlet UIImageView          *leftImageView;
 @property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
 
-- (void)refreshStyle;
-
 @end
