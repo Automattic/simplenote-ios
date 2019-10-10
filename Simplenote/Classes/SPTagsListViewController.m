@@ -105,7 +105,10 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 - (void)configureTableHeaderView {
     self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
     self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    [self.tagsHeaderView.actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+
+    UIButton *actionButton = self.tagsHeaderView.actionButton;
+    [actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [actionButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureMenuController {
@@ -171,7 +174,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - Style
 
 - (void)refreshStyle {
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameSimplenoteGray0];
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
     self.tableView.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
 
     [self.tagsHeaderView refreshStyle];
@@ -583,8 +586,8 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
+
+    SPTagListViewCell *cell = [self cellForTag:_renameTag];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
