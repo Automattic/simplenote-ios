@@ -23,30 +23,45 @@ enum UIImageName: Int, CaseIterable {
 //
 extension UIImageName {
 
-    /// Returns the matching Legacy VSTheme Key
+    /// Light Asset Filename
     ///
-    var legacyImageKey: ThemeImageKey {
+    var lightAssetFilename: String {
         switch self {
         case .chevronLeftImage:
-            return .chevronLeftImage
+            return "icon_chevron_left"
         case .chevronRightImage:
-            return .chevronRightImage
+            return "icon_chevron_right"
         case .pinImage:
-            return .pinImage
+            return "icon_pin"
         case .sharedImage:
-            return .sharedImage
+            return "icon_shared"
         case .navigationBarBackgroundImage:
-            return .navigationBarBackgroundImage
+            return "navigation_bar_background"
         case .navigationBarBackgroundPromptImage:
-            return .navigationBarBackgroundPromptImage
+            return "navigation_bar_background_prompt"
         case .onePasswordImage:
-            return .onePasswordImage
+            return "icon_onepassword"
         case .tagViewDeletionImage:
-            return .tagViewDeletionImage
+            return "button_delete_small"
         case .visibilityOnImage:
-            return .visibilityOnImage
+            return "icon_visibility_on"
         case .visibilityOffImage:
-            return .visibilityOffImage
+            return "icon_visibility_off"
+        }
+    }
+
+    /// Dark Asset Filename
+    ///
+    var darkAssetFilename: String? {
+        switch self {
+        case .navigationBarBackgroundImage:
+            return "navigation_bar_background_dark"
+        case .navigationBarBackgroundPromptImage:
+            return "navigation_bar_background_prompt_dark"
+        case .tagViewDeletionImage:
+            return "button_delete_small_dark"
+        default:
+            return nil
         }
     }
 }
