@@ -5,8 +5,8 @@ source 'https://rubygems.org' do
   gem 'xcpretty-travis-formatter'
   gem 'octokit', "~> 4.0"
   gem 'dotenv'
-  gem 'rubyzip', "~> 1.2.2"
-  gem 'fastlane', "2.127.2"
+  gem 'rubyzip', "~> 1.3"
+  gem 'fastlane', "2.133.0"
 end
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
