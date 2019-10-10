@@ -146,10 +146,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 #pragma mark - Notification Handlers
 
-- (VSTheme *)theme {
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (void)themeDidChange {
     [self refreshStyle];
 }
@@ -274,7 +270,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-
     switch (indexPath.row) {
         case SPTagsListSystemRowAllNotes: {
             cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
@@ -295,7 +290,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     NSString *cellText = tag.name;
 
@@ -307,7 +301,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     BOOL response = indexPath.section == SPTagsListSectionTags;
     if (response) {
         [SPTracker trackTagCellPressed];
@@ -325,7 +318,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
     switch (indexPath.section) {
         case SPTagsListSectionSystem: {
             [self didSelectSystemRowAtIndexPath:indexPath];
@@ -340,9 +332,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if (sourceIndexPath.section == SPTagsListSectionTags && destinationIndexPath.section == SPTagsListSectionTags) {
-        
         [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
-        
     }
 }
 
@@ -364,7 +354,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [SPTracker trackTagRowDeleted];
 		[self removeTagAtIndexPath:indexPath];
@@ -422,7 +411,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - UITagListViewCellDelegate
 
 - (void)tagListViewCellShouldRenameTag:(SPTagListViewCell *)cell {
-    
     [SPTracker trackTagMenuRenamed];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
@@ -430,7 +418,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)tagListViewCellShouldDeleteTag:(SPTagListViewCell *)cell {
-    
     [SPTracker trackTagMenuDeleted];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
@@ -438,7 +425,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
-    
     if (self.bEditing == editing) {
         return;
     }
@@ -455,7 +441,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     SPSidebarContainerViewController *noteListViewController = [[SPAppDelegate sharedDelegate] noteListViewController];
 
     NSString *widthKey = editing ? @"containerViewSidePanelWidthExpanded" : @"containerViewSidePanelWidth";
-    CGFloat newWidth = [self.theme floatForKey:widthKey];
+    CGFloat newWidth = [[[VSThemeManager sharedManager] theme] floatForKey:widthKey];
 
     CGRect selfFrame = self.view.frame;
     selfFrame.size.width = newWidth;
@@ -508,7 +494,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - UIGestureDelegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
     return YES;
 }
 
@@ -516,7 +501,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - Tag Actions
 
 - (void)removeTagAtIndexPath:(NSIndexPath *)indexPath {
-    
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     if (!tag) {
         return;
@@ -541,7 +525,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)renameTagAction:(Tag *)tag {
-    
     if (_renameTag) {
         SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
         [cell.tagNameTextField endEditing:YES];
@@ -560,7 +543,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
     BOOL endEditing = NO;
     if ([string hasPrefix:@" "]) {
         string = nil;
@@ -584,7 +566,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-
     SPTagListViewCell *cell = [self cellForTag:_renameTag];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
@@ -617,7 +598,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     [textField resignFirstResponder];
     return YES;
 }
@@ -626,13 +606,11 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - SidePanelDelegate
 
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
-    
     self.bVisible = NO;
     [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
-    
     self.bVisible = YES;
 }
 
@@ -648,7 +626,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
-
     contentInset.bottom = self.tableView.contentInset.bottom;
     self.tableView.contentInset = contentInset;
     self.tableView.scrollIndicatorInsets = contentInset;
@@ -659,7 +636,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - Fetched results controller
 
 - (NSArray *)sortDescriptors {
-
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
     NSSortDescriptor *sortDescriptor;
     if (isAlphaSort) {
@@ -674,7 +650,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)performFetch {
-    
     NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error])
     {
@@ -714,7 +689,6 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
     if (!self.bVisible) {
         return;
     }
