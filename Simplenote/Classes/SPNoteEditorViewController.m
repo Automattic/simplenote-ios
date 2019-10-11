@@ -121,6 +121,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
                                                    object:nil];
 
         // Apply the current style right away!
+        [self startListeningToThemeNotifications];
         [self applyStyle];
     }
     
@@ -177,8 +178,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     _noteEditorTextView.delegate = self;
 
     self.navigationItem.title = nil;
-    
-    [self startListeningToNotifications];
+
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
 }
@@ -203,6 +203,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
+    [self startListeningToKeyboardNotifications];
 }
 
 - (void)setupNavigationController {
@@ -236,9 +237,18 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     _noteEditorTextView.frame = viewFrame;
 }
 
-- (void)startListeningToNotifications {
+- (void)startListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)stopListeningToKeyboardNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)startListeningToThemeNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
@@ -284,6 +294,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
+    [self stopListeningToKeyboardNotifications];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
