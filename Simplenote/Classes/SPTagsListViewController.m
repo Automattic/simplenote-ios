@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
 };
 
 static const NSInteger kSPTagListRequestBatchSize       = 20;
+static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 
 
 // MARK: - Private
@@ -687,7 +688,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     }
     
     [self.reloadTimer invalidate];
-    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:kSPTagListRefreshDelay
                                                         target:self
                                                       selector:@selector(delayedReloadData)
                                                       userInfo:nil
