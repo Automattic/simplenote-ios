@@ -2,7 +2,6 @@
 #import "SPAppDelegate.h"
 #import "SPOptionsViewController.h"
 #import "SPObjectManager.h"
-#import "SPBorderedView.h"
 #import "SPTracker.h"
 #import "SPTagListViewCell.h"
 #import "Tag.h"
@@ -237,51 +236,12 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
     SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPTagListViewCell.reuseIdentifier forIndexPath:indexPath];
 
     [self configureCell:cell atIndexPath:indexPath];
-    
+
     return cell;
 }
 
-- (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
-            [self configureSystemCell:cell atIndexPath:indexPath];
-            break;
-        }
-        case SPTagsListSectionTags: {
-            [self configureTagCell:cell atIndexPath:indexPath];
-            break;
-        }
-    }
-}
-
-- (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case SPTagsListSystemRowAllNotes: {
-            cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameAllNotes];
-            break;
-        }
-        case SPTagsListSystemRowTrash: {
-            cell.tagNameTextField.text = NSLocalizedString(@"Trash-noun", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameTrash];
-            break;
-        }
-        case SPTagsListSystemRowSettings: {
-            cell.tagNameTextField.text = NSLocalizedString(@"Settings", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameSettings];
-            break;
-        }
-    }
-}
-
-- (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
-
-    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
-    cell.tagNameTextField.text = tag.name;
-    cell.tagNameTextField.delegate = self;
-    cell.accessibilityLabel = tag.name;
-    cell.delegate = self;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.selected = [self shouldSelectCellAtIndexPath:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -345,6 +305,78 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 }
 
 
+#pragma mark - Cell Setup
+
+- (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            [self configureSystemCell:cell atIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionTags: {
+            [self configureTagCell:cell atIndexPath:indexPath];
+            break;
+        }
+    }
+}
+
+- (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case SPTagsListSystemRowAllNotes: {
+            cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameAllNotes];
+            break;
+        }
+        case SPTagsListSystemRowTrash: {
+            cell.tagNameTextField.text = NSLocalizedString(@"Trash-noun", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameTrash];
+            break;
+        }
+        case SPTagsListSystemRowSettings: {
+            cell.tagNameTextField.text = NSLocalizedString(@"Settings", nil);
+            cell.leftImageView.image = [UIImage imageWithName:UIImageNameSettings];
+            break;
+        }
+    }
+}
+
+- (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSString *tagName = [self tagAtTableViewIndexPath:indexPath].name;
+
+    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
+    cell.tagNameTextField.text = tagName;
+    cell.tagNameTextField.delegate = self;
+    cell.accessibilityLabel = tagName;
+    cell.delegate = self;
+}
+
+- (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *selectedTag = SPAppDelegate.sharedDelegate.selectedTag;
+
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            switch (indexPath.row) {
+                case SPTagsListSystemRowAllNotes: {
+                    return selectedTag == nil;
+                }
+                case SPTagsListSystemRowTrash: {
+                    return selectedTag == kSimplenoteTagTrashKey;
+                }
+                case SPTagsListSystemRowSettings: {
+                    return NO;
+                }
+            }
+            break;
+        }
+        case SPTagsListSectionTags: {
+            return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
+        }
+    }
+
+    return NO;
+}
+
+
 #pragma mark - Row Press Handlers
 
 - (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -360,6 +392,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
         }
 
         case SPTagsListSystemRowSettings: {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
             [self settingsWasPressed];
             break;
         }
