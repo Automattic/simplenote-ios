@@ -92,7 +92,6 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 }
 
 - (void)configureTableView {
-    self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
 }
 
