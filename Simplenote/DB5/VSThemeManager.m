@@ -118,8 +118,8 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
     ///
     UIColor *barTintColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     UIImage *navbarShadowImage = [UIImage new];
-    UIImage *navbarBackgroundImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundImage];
-    UIImage *navbarPromptImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundPromptImage];
+    UIImage *navbarBackgroundImage = [UIImage imageWithName:UIImageNameNavigationBarBackground];
+    UIImage *navbarPromptImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundPrompt];
 
     if (@available(iOS 13, *)) {
         // WHY we're disabling the `resizableImage:` for iOS +13:

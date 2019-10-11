@@ -6,16 +6,30 @@ import UIKit
 //
 @objc
 enum UIImageName: Int, CaseIterable {
-    case chevronLeftImage
-    case chevronRightImage
-    case pinImage
-    case sharedImage
-    case navigationBarBackgroundImage
-    case navigationBarBackgroundPromptImage
-    case onePasswordImage
-    case tagViewDeletionImage
-    case visibilityOnImage
-    case visibilityOffImage
+    case add
+    case allNotes
+    case checklist
+    case checkmarkChecked
+    case checkmarkUnchecked
+    case chevronLeft
+    case chevronRight
+    case collaborate
+    case hideKeyboard
+    case history
+    case info
+    case menu
+    case newNote
+    case pin
+    case settings
+    case share
+    case shared
+    case trash
+    case navigationBarBackground
+    case navigationBarBackgroundPrompt
+    case onePassword
+    case tagViewDeletion
+    case visibilityOn
+    case visibilityOff
 }
 
 
@@ -27,25 +41,53 @@ extension UIImageName {
     ///
     var lightAssetFilename: String {
         switch self {
-        case .chevronLeftImage:
+        case .add:
+            return "icon_add"
+        case .allNotes:
+            return "icon_allnotes"
+        case .checklist:
+            return "icon_checklist"
+        case .checkmarkChecked:
+            return "icon_checkmark_checked"
+        case .checkmarkUnchecked:
+            return "icon_checkmark_unchecked"
+        case .chevronLeft:
             return "icon_chevron_left"
-        case .chevronRightImage:
+        case .chevronRight:
             return "icon_chevron_right"
-        case .pinImage:
+        case .collaborate:
+            return "icon_collaborate"
+        case .hideKeyboard:
+            return "icon_hide_keyboard"
+        case .history:
+            return "icon_history"
+        case .info:
+            return "icon_info"
+        case .menu:
+            return "icon_menu"
+        case .newNote:
+            return "icon_new_note"
+        case .pin:
             return "icon_pin"
-        case .sharedImage:
+        case .settings:
+            return "icon_settings"
+        case .share:
+            return "icon_share"
+        case .shared:
             return "icon_shared"
-        case .navigationBarBackgroundImage:
+        case .trash:
+            return "icon_trash"
+        case .navigationBarBackground:
             return "navigation_bar_background"
-        case .navigationBarBackgroundPromptImage:
+        case .navigationBarBackgroundPrompt:
             return "navigation_bar_background_prompt"
-        case .onePasswordImage:
+        case .onePassword:
             return "icon_onepassword"
-        case .tagViewDeletionImage:
+        case .tagViewDeletion:
             return "button_delete_small"
-        case .visibilityOnImage:
+        case .visibilityOn:
             return "icon_visibility_on"
-        case .visibilityOffImage:
+        case .visibilityOff:
             return "icon_visibility_off"
         }
     }
@@ -54,11 +96,11 @@ extension UIImageName {
     ///
     var darkAssetFilename: String? {
         switch self {
-        case .navigationBarBackgroundImage:
+        case .navigationBarBackground:
             return "navigation_bar_background_dark"
-        case .navigationBarBackgroundPromptImage:
+        case .navigationBarBackgroundPrompt:
             return "navigation_bar_background_prompt_dark"
-        case .tagViewDeletionImage:
+        case .tagViewDeletion:
             return "button_delete_small_dark"
         default:
             return nil

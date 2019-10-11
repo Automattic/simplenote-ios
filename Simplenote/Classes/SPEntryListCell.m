@@ -33,9 +33,9 @@
         secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
         [self.contentView addSubview:secondaryLabel];
         
-        UIImage *checkedImage = [[UIImage imageNamed:@"icon_checkmark_checked"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        UIImage *uncheckedImage = [UIImage imageNamed:@"icon_checkmark_unchecked"];
-        
+        UIImage *checkedImage = [UIImage imageWithName:UIImageNameCheckmarkChecked];
+        UIImage *uncheckedImage = [UIImage imageWithName:UIImageNameCheckmarkUnchecked];
+
         checkmarkImageView = [[UIImageView alloc] initWithImage:uncheckedImage
                                                highlightedImage:checkedImage];
         checkmarkImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;

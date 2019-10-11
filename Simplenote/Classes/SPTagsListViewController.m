@@ -106,9 +106,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
            forCellReuseIdentifier:cellWithIconIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
-    _settingsImage = [[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _allNotesImage = [[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _trashImage = [[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _settingsImage = [UIImage imageWithName:UIImageNameSettings];
+    _allNotesImage = [UIImage imageWithName:UIImageNameAllNotes];
+    _trashImage = [UIImage imageWithName:UIImageNameTrash];
 
     // add rename item to manu
     SEL renameSelector = sel_registerName("rename:");
@@ -804,7 +804,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [settingsButton setImage:[[UIImage imageNamed:@"icon_settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
     [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [settingsButton setContentEdgeInsets:SPButtonContentInsets];
     [settingsButton setImageEdgeInsets:SPButtonImageInsets];
@@ -824,7 +824,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     allNotesButton = [self buildHeaderButton];
     allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
-    [allNotesButton setImage:[[UIImage imageNamed:@"icon_allnotes"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [allNotesButton setImage:[[UIImage imageWithName:UIImageNameAllNotes] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
     [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -832,7 +832,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     trashButton = [self buildHeaderButton];
     trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
-    [trashButton setImage:[[UIImage imageNamed:@"icon_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [trashButton setImage:[[UIImage imageWithName:UIImageNameTrash] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [trashButton setTitle:NSLocalizedString(@"Trash-noun", nil) forState:UIControlStateNormal];
     [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
 
