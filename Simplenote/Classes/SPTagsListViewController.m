@@ -285,12 +285,11 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
-    NSString *cellText = tag.name;
 
     cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
-    cell.tagNameTextField.text = cellText;
+    cell.tagNameTextField.text = tag.name;
     cell.tagNameTextField.delegate = self;
-    cell.accessibilityLabel = cellText;
+    cell.accessibilityLabel = tag.name;
     cell.delegate = self;
 }
 
@@ -520,7 +519,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 
 - (void)renameTagAction:(Tag *)tag {
     if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[self tableViewIndexPathForTag:_renameTag]];
+        SPTagListViewCell *cell = [self cellForTag:_renameTag];
         [cell.tagNameTextField endEditing:YES];
     }
     
@@ -569,7 +568,6 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
     BOOL renameTag = ![[SPObjectManager sharedManager] tagExists:textField.text];
     
     if (renameTag) {
-        
         NSString *orignalTagName = _renameTag.name;
         NSString *newTagName = textField.text;
         [[SPObjectManager sharedManager] editTag:_renameTag title:newTagName];
@@ -609,7 +607,6 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 }
 
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
-
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!self.bVisible) {
             [self.tableView reloadData];
@@ -645,8 +642,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 
 - (void)performFetch {
     NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error])
-    {
+	if (![self.fetchedResultsController performFetch:&error]) {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
 	}
@@ -696,9 +692,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 }
 
 - (void)delayedReloadData {
-    
     [self.tableView reloadData];
-    
     [self.reloadTimer invalidate];
     self.reloadTimer = nil;
 }
