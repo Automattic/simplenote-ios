@@ -43,6 +43,7 @@ NSString *const kFirstLaunchKey                     = @"SPFirstLaunch";
 NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
 NSString *const kSimplenoteTagTrashKey              = @"trash";
+NSString *const kSimplenoteUntaggedKey              = @"__$$_untagged_$$__";
 NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
