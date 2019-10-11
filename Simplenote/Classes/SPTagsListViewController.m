@@ -716,22 +716,31 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
     CGRect keyboardFrame = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
 
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+    CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
+
+    contentInsets.bottom = keyboardHeight;
+    scrollInsets.bottom = keyboardHeight;
 
     [UIView animateWithDuration:duration animations:^{
-        self.tableView.contentInset = insets;
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollInsets;
      }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    UIEdgeInsets insets = self.tableView.contentInset;
-    insets.bottom = 0;
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+
+    contentInsets.bottom = 0;
+    scrollInsets.bottom = 0;
 
     CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:duration animations:^{
-        self.tableView.contentInset = insets;
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollInsets;
      }];
 }
 
