@@ -27,8 +27,6 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     SPTagsListSystemRowCount    = 3
 };
 
-static const CGFloat kSPTagListEstimatedRowHeight       = 44;
-static const CGFloat kSPTagListEstimatedSectionHeight   = 44;
 static const NSInteger kSPTagListRequestBatchSize       = 20;
 
 
@@ -93,12 +91,7 @@ static const NSInteger kSPTagListRequestBatchSize       = 20;
 }
 
 - (void)configureTableView {
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = kSPTagListEstimatedRowHeight;
-    self.tableView.estimatedSectionHeaderHeight = kSPTagListEstimatedSectionHeight;
     self.tableView.allowsSelectionDuringEditing = YES;
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
 }
 
