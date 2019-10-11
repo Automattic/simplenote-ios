@@ -120,7 +120,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
-    [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(tagsSortOrderWasUpdated:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
     [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
@@ -148,16 +148,8 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
 
-- (void)updateSortOrder:(id)sender {
-    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
-
-    NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-
-    [self.tableView reloadData];
+- (void)tagsSortOrderWasUpdated:(id)sender {
+    [self refreshSortDescriptors];
 }
 
 
@@ -648,6 +640,11 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 	}
     
     [self.tableView reloadData];
+}
+
+- (void)refreshSortDescriptors {
+    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
+    [self performFetch];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
