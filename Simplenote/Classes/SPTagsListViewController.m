@@ -14,9 +14,10 @@
 // MARK: - Constants
 //
 typedef NS_ENUM(NSInteger, SPTagsListSection) {
-    SPTagsListSectionSystem = 0,
-    SPTagsListSectionTags   = 1,
-    SPTagsListSectionCount  = 2
+    SPTagsListSectionSystem     = 0,
+    SPTagsListSectionTags       = 1,
+    SPTagsListSectionBottom     = 2,
+    SPTagsListSectionCount      = 3
 };
 
 typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
@@ -24,6 +25,11 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     SPTagsListSystemRowTrash    = 1,
     SPTagsListSystemRowSettings = 2,
     SPTagsListSystemRowCount    = 3
+};
+
+typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
+    SPTagsListBottomRowUntagged = 0,
+    SPTagsListBottomRowCount    = 1
 };
 
 static const NSInteger kSPTagListRequestBatchSize       = 20;
@@ -225,6 +231,9 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
         case SPTagsListSectionTags: {
             return self.numberOfTags;
         }
+        case SPTagsListSectionBottom: {
+            return SPTagsListBottomRowCount;
+        }
         default: {
             NSAssert(false, @"Unsupported section");
             return 0;
@@ -269,6 +278,10 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
         }
         case SPTagsListSectionTags: {
             [self didSelectTagAtIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionBottom: {
+            [self didSelectBottomRowAtIndex:indexPath];
             break;
         }
     }
@@ -317,6 +330,10 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
             [self configureTagCell:cell atIndexPath:indexPath];
             break;
         }
+        case SPTagsListSectionBottom: {
+            [self configureBottomCell:cell atIndexPath:indexPath];
+            break;
+        }
     }
 }
 
@@ -350,6 +367,13 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
     cell.delegate = self;
 }
 
+- (void)configureBottomCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSString *text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
+
+    cell.tagNameTextField.text = text;
+    cell.leftImageView.image = [UIImage imageWithName:UIImageNameUntagged];
+}
+
 - (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
     NSString *selectedTag = SPAppDelegate.sharedDelegate.selectedTag;
 
@@ -370,6 +394,9 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
         }
         case SPTagsListSectionTags: {
             return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
+        }
+        case SPTagsListSectionBottom: {
+            return selectedTag == kSimplenoteUntaggedKey;
         }
     }
 
@@ -409,6 +436,11 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
         [SPTracker trackListTagViewed];
         [self openNoteListForTagName:tag.name];
     }
+}
+
+- (void)didSelectBottomRowAtIndex:(NSIndexPath *)indexPath {
+    [SPTracker trackListUntaggedViewed];
+    [self openNoteListForTagName:kSimplenoteUntaggedKey];
 }
 
 - (void)allNotesWasPressed {
