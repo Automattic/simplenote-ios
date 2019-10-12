@@ -757,22 +757,22 @@
     switch (tagFilterType) {
         case SPTagFilterTypeShared: {
             NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared];
-            [predicateList addObject: predicate];
+            [predicateList addObject:predicate];
             break;
         }
         case SPTagFilterTypePinned: {
             NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned];
-            [predicateList addObject: predicate];
+            [predicateList addObject:predicate];
             break;
         }
         case SPTagFilterTypeUnread: {
             NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread];
-            [predicateList addObject: predicate];
+            [predicateList addObject:predicate];
             break;
         }
         case SPTagFilterTypeUntagged: {
             NSPredicate *predicate = [NSPredicate predicateForUntaggedNotes];
-            [predicateList addObject: predicate];
+            [predicateList addObject:predicate];
             break;
         }
         case SPTagFilterTypeUserTag: {
@@ -781,7 +781,7 @@
             }
 
             NSPredicate *predicate = [NSPredicate predicateForTagWith:appDelegate.selectedTag];
-            [predicateList addObject: predicate];
+            [predicateList addObject:predicate];
             break;
         }
         default: {
@@ -790,8 +790,8 @@
     }
 
     if (self.searchText.length > 0) {
-        NSArray *searchTextPredicates = [NSPredicate predicatesForSearchText:self.searchText];
-        [predicateList addObjectsFromArray:searchTextPredicates];
+        NSPredicate *predicate = [NSPredicate predicateForSearchText:self.searchText];
+        [predicateList addObject:predicate];
     }
     
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];

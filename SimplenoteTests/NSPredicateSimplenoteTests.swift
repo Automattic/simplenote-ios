@@ -7,40 +7,34 @@ import XCTest
 //
 class NSPredicateSimplenoteTests: XCTestCase {
 
-    ///
+    /// Verifies that `NSPredicate.predicatesForSearchText` match entities that contain a single specified keyword
     ///
     func testPredicatesForSearchTextMatchesNotesContainingTheSpecifiedKeyword() {
         let entity = MockupEntity()
         entity.content = "some content here and maybe a keyword"
 
-        let predicates = NSPredicate.predicatesForSearchText(searchText: "keyword")
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-
-        XCTAssertTrue(compound.evaluate(with: entity))
+        let predicate = NSPredicate.predicateForSearchText(searchText: "keyword")
+        XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
-    ///
+    /// Verifies that `NSPredicate.predicatesForSearchText` match entities that contain multiple specified keywords
     ///
     func testPredicatesForSearchTextMatchesNotesContainingMultipleSpecifiedKeywords() {
         let entity = MockupEntity()
         entity.content = "some keyword1 here and maybe another keyword2 there"
 
-        let predicates = NSPredicate.predicatesForSearchText(searchText: "keyword1 keyword2")
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-
-        XCTAssertTrue(compound.evaluate(with: entity))
+        let predicate = NSPredicate.predicateForSearchText(searchText: "keyword1 keyword2")
+        XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
-    ///
+    /// Verifies that `NSPredicate.predicatesForSearchText` won't match entities that dont contain a given searchText
     ///
     func testPredicatesForSearchTextWontMatchNotesContainingTheSpecifiedKeywords() {
         let entity = MockupEntity()
         entity.content = "some content here and maybe a keyword"
 
-        let predicates = NSPredicate.predicatesForSearchText(searchText: "missing")
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-
-        XCTAssertFalse(compound.evaluate(with: entity))
+        let predicate = NSPredicate.predicateForSearchText(searchText: "missing")
+        XCTAssertFalse(predicate.evaluate(with: entity))
     }
 
     /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Deleted status

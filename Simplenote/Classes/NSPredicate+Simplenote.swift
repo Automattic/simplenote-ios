@@ -7,8 +7,8 @@ extension NSPredicate {
 
     /// Returns a collection of NSPredicates that will match, as a compound, a given Search Text
     ///
-    @objc(predicatesForSearchText:)
-    static func predicatesForSearchText(searchText: String) -> [NSPredicate] {
+    @objc(predicateForSearchText:)
+    static func predicateForSearchText(searchText: String) -> NSPredicate {
         let words = searchText.trimmingCharacters(in: .whitespaces).components(separatedBy: .whitespaces)
         var output = [NSPredicate]()
 
@@ -17,7 +17,7 @@ extension NSPredicate {
             output.append(predicate)
         }
 
-        return output
+        return NSCompoundPredicate(andPredicateWithSubpredicates: output)
     }
 
     /// Returns a NSPredicate that will match Notes with the specified `deleted` flag
