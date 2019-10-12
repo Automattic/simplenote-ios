@@ -723,7 +723,7 @@
 - (void)updateFetchPredicate
 {
     NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
-    if ([selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
+    if ([selectedTag isEqualToString:kSimplenoteTrashKey]) {
         tagFilterType = SPTagFilterTypeDeleted;
     } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
         tagFilterType = SPTagFilterTypeUntagged;

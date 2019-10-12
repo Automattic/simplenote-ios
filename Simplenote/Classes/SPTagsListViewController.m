@@ -384,7 +384,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
                     return selectedTag == nil;
                 }
                 case SPTagsListSystemRowTrash: {
-                    return selectedTag == kSimplenoteTagTrashKey;
+                    return selectedTag == kSimplenoteTrashKey;
                 }
                 case SPTagsListSystemRowSettings: {
                     return NO;
@@ -449,7 +449,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 
 - (void)trashWasPressed {
     [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:kSimplenoteTagTrashKey];
+    [self openNoteListForTagName:kSimplenoteTrashKey];
 }
 
 - (void)settingsWasPressed {
