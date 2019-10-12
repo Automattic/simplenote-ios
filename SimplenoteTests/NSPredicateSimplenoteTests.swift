@@ -42,7 +42,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForTag` matches JSON Arrays that contain a single value, matching our target
     ///
-    func testPredicateForTagMatchesJsonArraysContainingSingleTag() {
+    func testPredicateForTagProperlyMatchesEntitiesThatContainSingleTags() {
         let tag = "Yosemite"
         let entity = MockupEntity()
         entity.tags = "[ \"" + tag + "\"]"
@@ -51,7 +51,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForTag` matches JSON Arrays that contain multiple values, one of them being our target
     ///
-    func testPredicateForTagMatchesJsonArraysContainingMultipleTags() {
+    func testPredicateForTagProperlyMatchesEntitiesThatContainMultipleTags() {
         let tag = "Yosemite"
         let entity = MockupEntity()
         entity.tags = "[ \"second\", \"third\", \"" + tag + "\" ]"
@@ -60,7 +60,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForTag` properly deals with slashes
     ///
-    func testPredicateForTagMatchesTagsContainingSlashes() {
+    func testPredicateForTagProperlyHandlesTagsWithSlashes() {
         let tag = "\\Yosemite"
         let entity = MockupEntity()
         entity.tags = "[ \"\\\\Yosemite\" ]"
@@ -69,11 +69,28 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForTag` won't produce matches for entities that do not contain the target Tag
     ///
-    func testPredicateForTagDoesntMatchMissingTags() {
+    func testPredicateForTagDoesntMatchEntitiesThatDontContainTheTargetTag() {
         let tag = "Missing"
         let entity = MockupEntity()
         entity.tags = "[ \"Tag\" ]"
         XCTAssertFalse(NSPredicate.predicateForTag(with: tag).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForSystemTag` properly matches entities that contain a given systemTag
+    ///
+    func testPredicateForSystemTagMatchesEntitiesThatContainTheTargetSystemTag() {
+        let systemTag = "pinned"
+        let entity = MockupEntity()
+        entity.systemTags = systemTag
+        XCTAssertTrue(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForSystemTag` will not match entities that dont contain a given systemTag
+    ///
+    func testPredicateForSystemTagDoesntMatchEntitiesThatContainTheTargetSystemTag() {
+        let systemTag = "pinned"
+        let entity = MockupEntity()
+        XCTAssertFalse(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
     }
 }
 
@@ -86,4 +103,9 @@ private class MockupEntity: NSObject {
     ///
     @objc
     dynamic var tags: String?
+
+    /// Entity's System Tags
+    ///
+    @objc
+    dynamic var systemTags: String?
 }

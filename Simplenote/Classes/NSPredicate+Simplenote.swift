@@ -30,4 +30,11 @@ extension NSPredicate {
         let format = String(format: "\"%@\"", filtered)
         return NSPredicate(format: "tags CONTAINS[c] %@", format)
     }
+
+    /// Returns a NSPredicate that will match a given Tag
+    ///
+    @objc
+    static func predicateForSystemTag(with name: String) -> NSPredicate {
+        return NSPredicate(format: "systemTags CONTAINS[c] %@", name)
+    }
 }
