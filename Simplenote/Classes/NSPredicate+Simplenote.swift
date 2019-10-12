@@ -5,6 +5,14 @@ import Foundation
 //
 extension NSPredicate {
 
+    /// Returns a NSPredicate that will match Notes with the specified `deleted` flag
+    ///
+    @objc(predicateForNotesWithDeletedStatus:)
+    static func predicateForNotesWithStatus(deleted: Bool) -> NSPredicate {
+        let status = NSNumber(booleanLiteral: deleted)
+        return NSPredicate(format: "deleted == %@", status)
+    }
+
     /// Returns a NSPredicate that will match:
     ///
     ///     A. Empty JSON Arrays (with random padding)

@@ -7,7 +7,6 @@ import XCTest
 //
 class NSPredicateSimplenoteTests: XCTestCase {
 
-
     /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches a perfectly formed empty JSON Array
     ///
     func testPredicateForUntaggedNotesMatchesEmptyJsonArrays() {
@@ -92,20 +91,41 @@ class NSPredicateSimplenoteTests: XCTestCase {
         let entity = MockupEntity()
         XCTAssertFalse(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
     }
+
+    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Deleted status
+    ///
+    func testPredicateForNotesWithDeletedStatusMatchesDeletedNotes() {
+        let entity = MockupEntity()
+        entity.deleted = true
+        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Not Deleted status
+    ///
+    func testPredicateForNotesWithoutDeletedStatusMatchesDeletedNotes() {
+        let entity = MockupEntity()
+        entity.deleted = false
+        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
+    }
 }
 
 
 // MARK: - MockupEntity: Convenience class to help us test NSPredicate(s)
 //
+@objcMembers
 private class MockupEntity: NSObject {
 
     /// Entity's Tags
     ///
-    @objc
     dynamic var tags: String?
 
     /// Entity's System Tags
     ///
-    @objc
     dynamic var systemTags: String?
+
+    /// Deletion Status
+    ///
+    dynamic var deleted = false
 }

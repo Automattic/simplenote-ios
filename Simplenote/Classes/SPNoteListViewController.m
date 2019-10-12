@@ -752,7 +752,7 @@
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
 
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"deleted == %@", @(tagFilterType == SPTagFilterTypeDeleted)]];
+    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(tagFilterType == SPTagFilterTypeDeleted)]];
 
     switch (tagFilterType) {
         case SPTagFilterTypeShared: {
