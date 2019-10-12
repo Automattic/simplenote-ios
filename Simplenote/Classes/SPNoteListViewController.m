@@ -722,73 +722,81 @@
 
 - (void)updateFetchPredicate
 {
-    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (appDelegate.selectedTag != nil && [appDelegate.selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
-        
+    NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
+    if ([selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
         tagFilterType = SPTagFilterTypeDeleted;
-    }
-    else {
-        
+    } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
+        tagFilterType = SPTagFilterTypeUntagged;
+    } else {
         tagFilterType = SPTagFilterTypeUserTag;
     }
-    
-    NSPredicate *predicate = [self fetchPredicate];
+
     [NSFetchedResultsController deleteCacheWithName:@"Root"];
-    [[self.fetchedResultsController fetchRequest] setPredicate: predicate];
-    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
-    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[self sortDescriptors]];
+
+    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
+    fetchRequest.predicate = [self fetchPredicate];
+    fetchRequest.fetchBatchSize = 20;
+    fetchRequest.sortDescriptors = [self sortDescriptors];
     
     
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        // Handle error here
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Error while trying to perform fetch: %@", error);
     }
     
     [self.tableView reloadData];
 }
 
 - (NSPredicate *)fetchPredicate {
-    
+
+    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
 
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"deleted == %@", [NSNumber numberWithBool:tagFilterType == SPTagFilterTypeDeleted]]];
-    
-    if (tagFilterType == SPTagFilterTypeShared)
-        [predicateList addObject: [NSPredicate predicateWithFormat: @"systemTags CONTAINS[c] %@", @"shared"]];
-    
-    if (tagFilterType == SPTagFilterTypePinned)
-        [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"pinned"]];
-    
-    if (tagFilterType == SPTagFilterTypeUnread)
-        [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"unread"]];
-    
-	SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (tagFilterType == SPTagFilterTypeUserTag && appDelegate.selectedTag.length > 0) {
-        
-        // Match against "tagName" (JSON formatted)
-        NSString *tagName = appDelegate.selectedTag;
-        
-        tagName = [tagName stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-        tagName = [tagName stringByReplacingOccurrencesOfString:@"/" withString:@"\\/"];
-        
-        // individual tags are surrounded by quotes, thus adding quotes to the selected tag
-        // ensures only the correct notes are shown
-        NSString *match = [[NSString alloc] initWithFormat:@"\"%@\"", tagName];
-        [predicateList addObject: [NSPredicate predicateWithFormat: @"tags CONTAINS[c] %@",match]];
+    [predicateList addObject: [NSPredicate predicateWithFormat: @"deleted == %@", @(tagFilterType == SPTagFilterTypeDeleted)]];
+
+    switch (tagFilterType) {
+        case SPTagFilterTypeShared: {
+            [predicateList addObject: [NSPredicate predicateWithFormat: @"systemTags CONTAINS[c] %@", @"shared"]];
+            break;
+        }
+        case SPTagFilterTypePinned: {
+            [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"pinned"]];
+            break;
+        }
+        case SPTagFilterTypeUnread: {
+            [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"unread"]];
+            break;
+        }
+        case SPTagFilterTypeUntagged: {
+            NSPredicate *predicate = [NSPredicate predicateForUntaggedNotes];
+            [predicateList addObject: predicate];
+            break;
+        }
+        case SPTagFilterTypeUserTag: {
+            if (appDelegate.selectedTag.length == 0) {
+                break;
+            }
+
+            NSPredicate *predicate = [NSPredicate predicateForTagWith:appDelegate.selectedTag];
+            [predicateList addObject: predicate];
+            break;
+        }
+        default: {
+            break;
+        }
     }
-    
+
     if (self.searchText.length > 0) {
         NSArray *searchStrings = [self.searchText componentsSeparatedByString:@" "];
         for (NSString *word in searchStrings) {
-            if (word.length == 0)
+            if (word.length == 0) {
                 continue;
+            }
             [predicateList addObject: [NSPredicate predicateWithFormat:@"content CONTAINS[c] %@", word]];
         }
     }
     
-    NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
-    
-    return compound;
+    return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
 }
 
 

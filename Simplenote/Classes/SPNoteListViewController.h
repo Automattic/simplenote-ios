@@ -8,13 +8,14 @@
 @class SPTitleView;
 @class SPSearchController;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
 	SPTagFilterTypeDeleted = 1,
 	SPTagFilterTypeShared = 2,
     SPTagFilterTypePinned = 3,
-    SPTagFilterTypeUnread = 4
-} SPTagFilterType;
+    SPTagFilterTypeUnread = 4,
+    SPTagFilterTypeUntagged = 5
+};
 
 @interface SPNoteListViewController : SPSidebarContainerViewController {
 
