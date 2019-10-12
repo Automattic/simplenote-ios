@@ -7,36 +7,75 @@ import XCTest
 //
 class NSPredicateSimplenoteTests: XCTestCase {
 
-    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches a perfectly formed empty JSON Array
     ///
-    func testPredicateForUntaggedNotesMatchesEmptyJsonArrays() {
+    ///
+    func testPredicatesForSearchTextMatchesNotesContainingTheSpecifiedKeyword() {
         let entity = MockupEntity()
-        entity.tags = "[]"
-        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
+        entity.content = "some content here and maybe a keyword"
+
+        let predicates = NSPredicate.predicatesForSearchText(searchText: "keyword")
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+
+        XCTAssertTrue(compound.evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches a JSON Array with random spaces
     ///
-    func testPredicateForUntaggedNotesMatchesEmptyJsonArraysWithRandomSpaces() {
+    ///
+    func testPredicatesForSearchTextMatchesNotesContainingMultipleSpecifiedKeywords() {
         let entity = MockupEntity()
-        entity.tags = "    [ ] "
-        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
+        entity.content = "some keyword1 here and maybe another keyword2 there"
+
+        let predicates = NSPredicate.predicatesForSearchText(searchText: "keyword1 keyword2")
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+
+        XCTAssertTrue(compound.evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches empty strings
     ///
-    func testPredicateForUntaggedNotesMatchesEmptyStrings() {
+    ///
+    func testPredicatesForSearchTextWontMatchNotesContainingTheSpecifiedKeywords() {
         let entity = MockupEntity()
-        entity.tags = ""
-        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
+        entity.content = "some content here and maybe a keyword"
+
+        let predicates = NSPredicate.predicatesForSearchText(searchText: "missing")
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+
+        XCTAssertFalse(compound.evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForUntaggedNotes` won't match a non empty JSON Array
+    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Deleted status
     ///
-    func testPredicateForUntaggedNotesWontMatchNonEmptyJsonArrays() {
+    func testPredicateForNotesWithDeletedStatusMatchesDeletedNotes() {
         let entity = MockupEntity()
-        entity.tags = "[\"tag\"]"
-        XCTAssertFalse(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
+        entity.deleted = true
+        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Not Deleted status
+    ///
+    func testPredicateForNotesWithoutDeletedStatusMatchesDeletedNotes() {
+        let entity = MockupEntity()
+        entity.deleted = false
+        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForSystemTag` properly matches entities that contain a given systemTag
+    ///
+    func testPredicateForSystemTagMatchesEntitiesThatContainTheTargetSystemTag() {
+        let systemTag = "pinned"
+        let entity = MockupEntity()
+        entity.systemTags = systemTag
+        XCTAssertTrue(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForSystemTag` will not match entities that dont contain a given systemTag
+    ///
+    func testPredicateForSystemTagDoesntMatchEntitiesThatContainTheTargetSystemTag() {
+        let systemTag = "pinned"
+        let entity = MockupEntity()
+        XCTAssertFalse(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
     }
 
     /// Verifies that `NSPredicate.predicateForTag` matches JSON Arrays that contain a single value, matching our target
@@ -75,39 +114,36 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertFalse(NSPredicate.predicateForTag(with: tag).evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForSystemTag` properly matches entities that contain a given systemTag
+    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches a perfectly formed empty JSON Array
     ///
-    func testPredicateForSystemTagMatchesEntitiesThatContainTheTargetSystemTag() {
-        let systemTag = "pinned"
+    func testPredicateForUntaggedNotesMatchesEmptyJsonArrays() {
         let entity = MockupEntity()
-        entity.systemTags = systemTag
-        XCTAssertTrue(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
+        entity.tags = "[]"
+        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForSystemTag` will not match entities that dont contain a given systemTag
+    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches a JSON Array with random spaces
     ///
-    func testPredicateForSystemTagDoesntMatchEntitiesThatContainTheTargetSystemTag() {
-        let systemTag = "pinned"
+    func testPredicateForUntaggedNotesMatchesEmptyJsonArraysWithRandomSpaces() {
         let entity = MockupEntity()
-        XCTAssertFalse(NSPredicate.predicateForSystemTag(with: systemTag).evaluate(with: entity))
+        entity.tags = "    [ ] "
+        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Deleted status
+    /// Verifies that `NSPredicate.predicateForUntaggedNotes` matches empty strings
     ///
-    func testPredicateForNotesWithDeletedStatusMatchesDeletedNotes() {
+    func testPredicateForUntaggedNotesMatchesEmptyStrings() {
         let entity = MockupEntity()
-        entity.deleted = true
-        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
-        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
+        entity.tags = ""
+        XCTAssertTrue(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForNotesWithStatus` matches notes with a Not Deleted status
+    /// Verifies that `NSPredicate.predicateForUntaggedNotes` won't match a non empty JSON Array
     ///
-    func testPredicateForNotesWithoutDeletedStatusMatchesDeletedNotes() {
+    func testPredicateForUntaggedNotesWontMatchNonEmptyJsonArrays() {
         let entity = MockupEntity()
-        entity.deleted = false
-        XCTAssertTrue(NSPredicate.predicateForNotesWithStatus(deleted: false).evaluate(with: entity))
-        XCTAssertFalse(NSPredicate.predicateForNotesWithStatus(deleted: true).evaluate(with: entity))
+        entity.tags = "[\"tag\"]"
+        XCTAssertFalse(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 }
 
@@ -117,15 +153,19 @@ class NSPredicateSimplenoteTests: XCTestCase {
 @objcMembers
 private class MockupEntity: NSObject {
 
-    /// Entity's Tags
+    /// Entity's Contents
     ///
-    dynamic var tags: String?
+    dynamic var content: String?
+
+    /// Deletion Status
+    ///
+    dynamic var deleted = false
 
     /// Entity's System Tags
     ///
     dynamic var systemTags: String?
 
-    /// Deletion Status
+    /// Entity's Tags
     ///
-    dynamic var deleted = false
+    dynamic var tags: String?
 }

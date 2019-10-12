@@ -790,13 +790,8 @@
     }
 
     if (self.searchText.length > 0) {
-        NSArray *searchStrings = [self.searchText componentsSeparatedByString:@" "];
-        for (NSString *word in searchStrings) {
-            if (word.length == 0) {
-                continue;
-            }
-            [predicateList addObject: [NSPredicate predicateWithFormat:@"content CONTAINS[c] %@", word]];
-        }
+        NSArray *searchTextPredicates = [NSPredicate predicatesForSearchText:self.searchText];
+        [predicateList addObjectsFromArray:searchTextPredicates];
     }
     
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];

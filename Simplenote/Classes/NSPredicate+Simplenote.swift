@@ -5,6 +5,21 @@ import Foundation
 //
 extension NSPredicate {
 
+    /// Returns a collection of NSPredicates that will match, as a compound, a given Search Text
+    ///
+    @objc(predicatesForSearchText:)
+    static func predicatesForSearchText(searchText: String) -> [NSPredicate] {
+        let words = searchText.trimmingCharacters(in: .whitespaces).components(separatedBy: .whitespaces)
+        var output = [NSPredicate]()
+
+        for word in words where !word.isEmpty {
+            let predicate = NSPredicate(format: "content CONTAINS[c] %@", word)
+            output.append(predicate)
+        }
+
+        return output
+    }
+
     /// Returns a NSPredicate that will match Notes with the specified `deleted` flag
     ///
     @objc(predicateForNotesWithDeletedStatus:)
@@ -13,17 +28,11 @@ extension NSPredicate {
         return NSPredicate(format: "deleted == %@", status)
     }
 
-    /// Returns a NSPredicate that will match:
-    ///
-    ///     A. Empty JSON Arrays (with random padding)
-    ///     B. Empty Strings
+    /// Returns a NSPredicate that will match a given Tag
     ///
     @objc
-    static func predicateForUntaggedNotes() -> NSPredicate {
-        // Since the `Tags` field is a JSON Encoded Array, we'll need to look up for Untagged Notes with a RegEx:
-        // Empty String  (OR)  Spaces* + [ + Spaces* + ] + Spaces*
-        let regex = "^()|(null)|(\\s*\\[\\s*]\\s*)$"
-        return NSPredicate(format: "tags MATCHES[n] %@", regex)
+    static func predicateForSystemTag(with name: String) -> NSPredicate {
+        return NSPredicate(format: "systemTags CONTAINS[c] %@", name)
     }
 
     /// Returns a NSPredicate that will match a given Tag
@@ -38,10 +47,16 @@ extension NSPredicate {
         return NSPredicate(format: "tags CONTAINS[c] %@", format)
     }
 
-    /// Returns a NSPredicate that will match a given Tag
+    /// Returns a NSPredicate that will match:
+    ///
+    ///     A. Empty JSON Arrays (with random padding)
+    ///     B. Empty Strings
     ///
     @objc
-    static func predicateForSystemTag(with name: String) -> NSPredicate {
-        return NSPredicate(format: "systemTags CONTAINS[c] %@", name)
+    static func predicateForUntaggedNotes() -> NSPredicate {
+        // Since the `Tags` field is a JSON Encoded Array, we'll need to look up for Untagged Notes with a RegEx:
+        // Empty String  (OR)  Spaces* + [ + Spaces* + ] + Spaces*
+        let regex = "^()|(null)|(\\s*\\[\\s*]\\s*)$"
+        return NSPredicate(format: "tags MATCHES[n] %@", regex)
     }
 }
