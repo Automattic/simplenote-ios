@@ -12,9 +12,8 @@ extension NSPredicate {
     ///
     @objc
     static func predicateForUntaggedNotes() -> NSPredicate {
-        // We'll need to match `Tags` with the following RegEx:
-        //  Empty String  (OR)  Spaces* + [ + Spaces* + ] + Spaces*
-        // Why: `Tags` contains JSON Encoded arrays.
+        // Since the `Tags` field is a JSON Encoded Array, we'll need to look up for Untagged Notes with a RegEx:
+        // Empty String  (OR)  Spaces* + [ + Spaces* + ] + Spaces*
         let regex = "^()|(null)|(\\s*\\[\\s*]\\s*)$"
         return NSPredicate(format: "tags MATCHES[n] %@", regex)
     }
