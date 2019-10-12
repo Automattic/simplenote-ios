@@ -756,15 +756,18 @@
 
     switch (tagFilterType) {
         case SPTagFilterTypeShared: {
-            [predicateList addObject: [NSPredicate predicateWithFormat: @"systemTags CONTAINS[c] %@", @"shared"]];
+            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared];
+            [predicateList addObject: predicate];
             break;
         }
         case SPTagFilterTypePinned: {
-            [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"pinned"]];
+            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned];
+            [predicateList addObject: predicate];
             break;
         }
         case SPTagFilterTypeUnread: {
-            [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"unread"]];
+            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread];
+            [predicateList addObject: predicate];
             break;
         }
         case SPTagFilterTypeUntagged: {
