@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
 
 static const NSInteger kSPTagListRequestBatchSize       = 20;
 static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
+static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 
 // MARK: - Private
@@ -219,7 +220,7 @@ static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return SPTagsListSectionCount;
+    return (self.numberOfTags == 0) ? kSPTagListEmptyStateSectionCount : SPTagsListSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
