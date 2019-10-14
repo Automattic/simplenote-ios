@@ -932,9 +932,9 @@
 }
 
 
-#pragma mark - SPRootViewContainerDelegate
+#pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)shouldShowSidebar {
+- (BOOL)sidebarContainerShouldDisplayMenu {
  
     BOOL showSidePanelOveride = bShouldShowSidePanel;
     bShouldShowSidePanel = NO;
@@ -943,12 +943,7 @@
     return !(self.tableView.dragging || self.tableView.isEditing || bSearching) || showSidePanelOveride;
 }
 
-- (void)resetNavigationBar {
-    
-    [self updateNavigationBar];
-}
-
-- (void)sidebarWillShow {
+- (void)sidebarContainerWillDisplayMenu {
     
     self.tableView.scrollEnabled = NO;
     self.tableView.allowsSelection = NO;
@@ -960,11 +955,12 @@
     bDisableUserInteraction = YES;
 }
 
-- (void)sidebarWillHide {
+- (void)sidebarContainerWillHideMenu {
 
+    [self updateNavigationBar];
 }
 
-- (void)sidebarDidHide {
+- (void)sidebarContainerDidHideMenu {
     
     self.tableView.scrollEnabled = YES;
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
