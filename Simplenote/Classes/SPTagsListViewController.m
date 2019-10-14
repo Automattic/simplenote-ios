@@ -483,35 +483,6 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     [self.tableView setEditing:editing animated:YES];
 
     [self refreshEditTagsButtonForEditionState:editing];
-    [self resizeContainerViewForEditonState:editing animated:!isCanceled];
-}
-
-- (void)resizeContainerViewForEditonState:(BOOL)editing animated:(BOOL)animated {
-
-    SPSidebarContainerViewController *noteListViewController = [[SPAppDelegate sharedDelegate] noteListViewController];
-
-    NSString *widthKey = editing ? @"containerViewSidePanelWidthExpanded" : @"containerViewSidePanelWidth";
-    CGFloat newWidth = [[[VSThemeManager sharedManager] theme] floatForKey:widthKey];
-
-    CGRect selfFrame = self.view.frame;
-    selfFrame.size.width = newWidth;
-
-    CGRect notesFrame = noteListViewController.rootView.frame;
-    notesFrame.origin.x = newWidth;
-
-    if (animated) {
-        // Make the tags list wider, and move the notes list over to accomodate for the new width
-        [UIView animateWithDuration:UIKitConstants.animationShortDuration
-                              delay:UIKitConstants.animationDelayZero
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                            noteListViewController.rootView.frame = notesFrame;
-                            self.view.frame = selfFrame;
-                            [self.view layoutIfNeeded];
-                         } completion:nil];
-    } else {
-        self.view.frame = selfFrame;
-    }
 }
 
 - (void)refreshEditTagsButtonForEditionState:(BOOL)editing {
