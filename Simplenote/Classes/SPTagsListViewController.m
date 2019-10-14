@@ -372,7 +372,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     NSString *text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
 
     cell.tagNameTextField.text = text;
-    cell.leftImageView.image = [UIImage imageWithName:UIImageNameUntagged];
+    cell.leftImage = [UIImage imageWithName:UIImageNameUntagged];
 }
 
 - (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
