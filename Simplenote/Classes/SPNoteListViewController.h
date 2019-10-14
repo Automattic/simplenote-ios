@@ -4,8 +4,6 @@
 #import "Note.h"
 
 @class SPEmptyListView;
-@class SPTitleView;
-@class SPSearchController;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
@@ -16,7 +14,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     SPTagFilterTypeUntagged = 5
 };
 
-@interface SPNoteListViewController : SPSidebarContainerViewController {
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
     NSTimer *searchTimer;
 

@@ -59,9 +59,9 @@
 
 @implementation SPNoteListViewController
 
-- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)init {
     
-    self = [super initWithSidebarViewController:sidebarViewController];
+    self = [super init];
     if (self) {
         [self configureNavigationButtons];
         [self configureTableView];
