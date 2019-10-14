@@ -207,8 +207,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 #pragma mark - Public API
 
 - (void)toggleSidePanel {
-    [SPTracker trackSidebarButtonPresed];
-
     if (self.isMenuViewVisible) {
         [self hideSidePanelAnimated:YES];
     } else {

@@ -309,6 +309,8 @@
     
     [self.tableView setEditing:NO];
     bShouldShowSidePanel = YES;
+
+    [SPTracker trackSidebarButtonPresed];
     [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidePanel];
 }
 
