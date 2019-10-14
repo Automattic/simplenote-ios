@@ -1,413 +1,293 @@
 #import "SPSidebarContainerViewController.h"
-#import "SPNavigationController.h"
-#import "SPSidebarViewController.h"
-#import "VSThemeManager.h"
 #import "SPTracker.h"
 #import "Simplenote-Swift.h"
 
-static CGFloat sidePanelWidth;
 
-@interface SPSidebarContainerViewController ()
+static const CGFloat SPSidebarContainerSidePanelWidth           = 300;
+static const CGFloat SPSidebarContainerInitialPanThreshold      = 0;
+static const CGFloat SPSidebarContainerMinimumPanThreshold      = 30.0;
+static const CGFloat SPSidebarContainerAnimationDelay           = 0;
+static const CGFloat SPSidebarContainerAnimationDuration        = 0.4;
+static const CGFloat SPSidebarContainerAnimationDurationZero    = 0.0;
+static const CGFloat SPSidebarContainerAnimationDamping         = 1.5;
+static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
-@property (nonatomic) CGPoint rootViewStartingOrigin;
-@property (nonatomic) CGPoint sidePanelStartingOrigin;
+
+@interface SPSidebarContainerViewController () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UIViewController              *menuViewController;
+@property (nonatomic, strong) UIViewController              *mainViewController;
+@property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGesture;
+@property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
+@property (nonatomic, assign) CGPoint                       rootViewStartingOrigin;
+@property (nonatomic, assign) CGPoint                       sidePanelStartingOrigin;
+@property (nonatomic, assign) BOOL                          isMenuViewVisible;
+@property (nonatomic, assign) BOOL                          isMainViewPanning;
+@property (nonatomic, assign) BOOL                          isPanningInitialized;
 
 @end
 
 @implementation SPSidebarContainerViewController
 
-- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
-    
+- (instancetype)initWithMainViewController:(UIViewController *)mainViewController
+                        menuViewController:(UIViewController *)menuViewController {
+
+    NSParameterAssert(mainViewController);
+    NSParameterAssert(menuViewController);
+
     self = [super init];
     if (self) {
-        
-        self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-        
-        // add root view to screen
-        self.rootView = [[UIView alloc] initWithFrame:self.view.bounds];
-        self.rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.view addSubview:_rootView];
-        
-        // setup gesture recognizers
-        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-        self.panGestureRecognizer.delegate = self;
-        [self.rootView addGestureRecognizer:_panGestureRecognizer];
-        
-        _sidePanelViewController = sidebarViewController;
-        _sidePanelViewController.containerViewController = self;
+        self.mainViewController = mainViewController;
+        self.menuViewController = menuViewController;
+
+        [self configureMainView];
+        [self configurePanGestureRecognizer];
+        [self configureTapGestureRecognizer];
+        [self configureViewControllerContainment];
+        [self attachMainView];
     }
     
     return self;
 }
 
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
+
+#pragma mark - Dynamic Properties
+
+- (UIView *)mainView {
+    return self.mainViewController.view;
+}
+
+- (UIView *)menuView {
+    return self.menuViewController.view;
+}
+
+- (UIViewController *)visibleViewController {
+    return self.isMenuViewVisible ? self.menuViewController : self.mainViewController;
 }
 
 
+#pragma mark - Overridden Methods
 
-#pragma mark Delegates
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    if (@available(iOS 13.0, *)) {
+        // In iOS 13 we'll just... let the OS decide
+        return UIStatusBarStyleDefault;
+    }
 
-- (id<SPContainerSidePanelViewDelegate>)sidePanelViewDelegate {
-    
-    return sidePanelViewDelegate;
+    return SPUserInterface.isDark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
-- (void)setSidePanelViewDelegate:(id<SPContainerSidePanelViewDelegate>)newSidePanelViewDelegate {
-    
-    sidePanelViewDelegate = newSidePanelViewDelegate;
+- (BOOL)shouldAutorotate {
+    return [self.visibleViewController shouldAutorotate];
 }
 
 
-#pragma mark UIGestureRecognizers
+#pragma mark - Initialization
+
+- (void)configureMainView {
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+}
+
+- (void)configurePanGestureRecognizer {
+    NSParameterAssert(self.mainView);
+
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.panGestureRecognizer.delegate = self;
+    [self.mainView addGestureRecognizer:_panGestureRecognizer];
+}
+
+- (void)configureTapGestureRecognizer {
+    self.mainViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
+    self.mainViewTapGesture.numberOfTapsRequired = 1;
+    self.mainViewTapGesture.numberOfTouchesRequired = 1;
+    self.mainViewTapGesture.delegate = self;
+}
+
+- (void)configureViewControllerContainment {
+    NSParameterAssert(self.mainViewController);
+    NSParameterAssert(self.menuViewController);
+
+    [self addChildViewController:self.mainViewController];
+    [self addChildViewController:self.menuViewController];
+}
+
+- (void)attachMainView {
+    NSParameterAssert(self.mainView);
+
+    [self.view addSubview:self.mainView];
+}
+
+
+#pragma mark - UIGestureRecognizers
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)gesture {
-    
-    // avoid swiping if collection view is already scrolling
-    if (!bRootViewIsPanning && (![self shouldShowSidebar] ||
-                                ![sidePanelViewDelegate containerViewControllerShouldShowSidePanel:self]))
-        return;
-    
-    
-        if (gesture.state == UIGestureRecognizerStateEnded ||
-            gesture.state == UIGestureRecognizerStateCancelled) {
-        
-        if (!bRootViewIsPanning)
+
+    if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
+
+        if (!self.isMainViewPanning) {
             return;
-        
-        bRootViewIsPanning = NO;
-        
-        UIView *view = gesture.view;
-        
-        // determine whether to show or hide the view
-        if (!_bSidePanelVisible && view.frame.origin.x < _rootViewStartingOrigin.x + 30) {
-            [self hideSidePanelAnimated:YES completion:nil];
-            return;
-        } else if (!_bSidePanelVisible) {
-            [self showSidePanel:nil];
-            return;
-        }
-        
-        if (_bSidePanelVisible && view.frame.origin.x > _rootViewStartingOrigin.x - 30) {
-            [self hideSidePanelAnimated:YES completion:nil];
-            return;
-        } else {
-            [self hideSidePanelAnimated:YES completion:nil];
-            return;
-        }
-        
-    } else if (gesture.state != UIGestureRecognizerStateBegan) {
-        
-        CGFloat translation = [gesture translationInView:gesture.view].x;
-        
-        if (!bRootViewIsPanning) {
-            
-            // see if moved more than 10 pixels in correct direction
-            CGFloat threshold = [self.theme floatForKey:@"containerViewPanThreshold"];
-            
-            if ( (_bSidePanelVisible ? translation : -translation) > threshold )
-                return;
         }
 
-        
-        if (!bRootViewIsPanning && !bSetupForPanning) {
-            
+        self.isMainViewPanning = NO;
+
+        UIView *view = gesture.view;
+        BOOL exceededPanThreshold = view.frame.origin.x >= _rootViewStartingOrigin.x + SPSidebarContainerMinimumPanThreshold;
+
+        if (!self.isMenuViewVisible && exceededPanThreshold) {
+            [self showSidePanel];
+            return;
+        }
+
+        [self hideSidePanelAnimated:YES];
+        return;
+
+    } else if (gesture.state != UIGestureRecognizerStateBegan) {
+
+        CGFloat translation = [gesture translationInView:gesture.view].x;
+
+        if (!self.isMainViewPanning) {
+            // See if moved more than 0 pixels in correct direction
+            if ( (self.isMenuViewVisible ? translation : -translation) > SPSidebarContainerInitialPanThreshold ) {
+                return;
+            }
+        }
+
+        if (!self.isMainViewPanning && !self.isPanningInitialized) {
+            if (![self.delegate sidebarContainerShouldDisplayMenu]) {
+                return;
+            }
+
             [SPTracker trackSidebarSidebarPanned];
             [self setupForPanning];
         }
-        
-        if (!bRootViewIsPanning) {
-            _rootViewStartingOrigin = _rootView.frame.origin;
-            _sidePanelStartingOrigin = _sidePanelViewController.view.frame.origin;
+
+        if (!self.isMainViewPanning) {
+            _rootViewStartingOrigin = self.mainView.frame.origin;
+            _sidePanelStartingOrigin = self.menuView.frame.origin;
         }
-        
-        
-        bRootViewIsPanning = YES;
-        CGRect newRootFrame = _rootView.frame;
-        newRootFrame.origin = _rootViewStartingOrigin;
-        newRootFrame.origin.x += translation;
-        newRootFrame.origin.x = MAX(newRootFrame.origin.x, 0);
-        newRootFrame.origin.x = MIN(newRootFrame.origin.x, sidePanelWidth);
-        _rootView.frame = newRootFrame;
-        
-        CGRect newSidePanelFrame = _sidePanelViewController.view.frame;
-        newSidePanelFrame.origin = _sidePanelStartingOrigin;
-        newSidePanelFrame.origin.x += translation;
-        newSidePanelFrame.origin.x = MAX(newSidePanelFrame.origin.x, -sidePanelWidth);
-        newSidePanelFrame.origin.x = MIN(newSidePanelFrame.origin.x, 0);
-        _sidePanelViewController.view.frame = newSidePanelFrame;
-        
-        if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidSlide:)])
-            [sidePanelViewDelegate containerViewControllerDidSlide:self];
-        
-        // calculate percent visible
-        CGFloat percentVisible = newRootFrame.origin.x / sidePanelWidth;
-        percentVisible = MAX(0.0, percentVisible);
-        percentVisible = MIN(1.0, percentVisible);
-        [self sidebarDidSlideToPercentVisible:percentVisible];
+
+        self.isMainViewPanning = YES;
+        CGRect newMainFrame = self.mainView.frame;
+        newMainFrame.origin = _rootViewStartingOrigin;
+        newMainFrame.origin.x += translation;
+        newMainFrame.origin.x = MIN(MAX(newMainFrame.origin.x, 0), SPSidebarContainerSidePanelWidth);
+        self.mainView.frame = newMainFrame;
+
+        CGRect newMenuFrame = self.menuView.frame;
+        newMenuFrame.origin = _sidePanelStartingOrigin;
+        newMenuFrame.origin.x += translation;
+        newMenuFrame.origin.x = MIN(MAX(newMenuFrame.origin.x, -SPSidebarContainerSidePanelWidth), 0);
+        self.menuView.frame = newMenuFrame;
     }
-}
-
-- (void)setupForPanning {
-    
-    [self sidebarWillShow];
-    
-    if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerWillSlide:)])
-        [sidePanelViewDelegate containerViewControllerWillSlide:self];
-    
-    if ([sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerWillShowSidePanel:)])
-        [sidePanelViewDelegate containerViewControllerWillShowSidePanel:self];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sidePanelWidth = [self.theme floatForKey:@"containerViewSidePanelWidth"];
-    });
-    
-    CGRect sidePanelFrame = self.view.bounds;
-    sidePanelFrame.origin.x -= sidePanelWidth;
-    sidePanelFrame.size.width = sidePanelWidth;
-    _sidePanelViewController.view.frame = sidePanelFrame;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.view insertSubview:self->_sidePanelViewController.view atIndex:0];
-    });
-    
-    _sidePanelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
-    [self applySidePanelContentInsets];
-    
-    bSetupForPanning = YES;
-}
-
-- (void)applySidePanelContentInsets {
-
-    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
-    UIEdgeInsets contentInset = UIEdgeInsetsMake(safeInsets.top, 0, safeInsets.bottom, 0);
-
-    [sidePanelViewDelegate containerViewController:self didChangeContentInset:contentInset];
-}
-
-- (void)toggleSidePanel:(void (^)())completion {
-    
-    if (_bSidePanelVisible)
-        [self hideSidePanelAnimated:YES completion:completion];
-    else
-        [self showSidePanel:completion];
-    
-}
-
-- (void)showSidePanel:(void (^)())completion {
-    
-    if (!bSetupForPanning) {
-        
-        [SPTracker trackSidebarButtonPresed];
-        
-        if (![self shouldShowSidebar] || ![sidePanelViewDelegate containerViewControllerShouldShowSidePanel:self]) {
-            return;
-        }
-        
-        [self setupForPanning];
-    }
-    
-    [self resetNavigationBar];
-    
-    CGRect newRootFrame = _rootView.frame;
-    newRootFrame.origin.x = sidePanelWidth;
-    
-    CGRect newSidePanelFrame = _sidePanelViewController.view.frame;
-    newSidePanelFrame.origin.x = 0;
-    newSidePanelFrame.size.width = sidePanelWidth;
-
-    CGFloat duration = [self.theme floatForKey:@"containerViewSpringAnimationDuration"];
-    CGFloat damping = [self.theme floatForKey:@"containerViewSpringAnimationDamping"];
-    CGFloat initialVelocity = [self.theme floatForKey:@"containerViewSpringAnimationInitialVelocity"];
-    
-    [UIView animateWithDuration:duration
-                          delay:0.0
-         usingSpringWithDamping:damping
-          initialSpringVelocity:initialVelocity
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         
-                         self->_rootView.frame = newRootFrame;
-                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
-                         
-                        [self sidebarDidSlideToPercentVisible:1.0];
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         [self->_rootView removeGestureRecognizer:self->rootViewTapGesture];
-                         
-                         self->rootViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(rootViewTapped:)];
-                         self->rootViewTapGesture.numberOfTapsRequired = 1;
-                         self->rootViewTapGesture.numberOfTouchesRequired = 1;
-                         self->rootViewTapGesture.delegate = self;
-                         [self->_rootView addGestureRecognizer:self->rootViewTapGesture];
-                         
-                         self->_bSidePanelVisible = YES;
-                         [self sidebarDidShow];
-                         
-                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
-                             [self->sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
-                         
-                         if (completion)
-                             completion();
-                     }];
-}
-
-- (void)showFullSidePanelWithTemporaryBarButton:(UIBarButtonItem *)item
-                                     completion:(void (^)())completion {
-    
-    if (!bSetupForPanning) {
-        
-        if (![self shouldShowSidebar] ||
-            ![sidePanelViewDelegate containerViewControllerShouldShowSidePanel:self])
-            return;
-        
-        [self setupForPanning];
-    }
-    
-    CGFloat sidePanelWidth = self.view.bounds.size.width;
-    
-    CGRect newRootFrame = _rootView.frame;
-    newRootFrame.origin.x = sidePanelWidth;
-    
-    CGRect newSidePanelFrame = _sidePanelViewController.view.frame;
-    newSidePanelFrame.origin.x = 0;
-    newSidePanelFrame.size.width = sidePanelWidth;
-    
-    CGFloat duration = 2 * [self.theme floatForKey:@"containerViewSpringAnimationDuration"];
-    CGFloat damping = [self.theme floatForKey:@"containerViewSpringAnimationDamping"];
-    CGFloat initialVelocity = [self.theme floatForKey:@"containerViewSpringAnimationInitialVelocity"];
-    
-    
-    if (item) {
-        
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.rightBarButtonItem = item;
-        self.navigationItem.titleView.hidden = YES;
-        bShowingTemporaryBarButtonItem = YES;
-    }
-    
-    [UIView animateWithDuration:duration
-                          delay:0.0
-         usingSpringWithDamping:damping
-          initialSpringVelocity:initialVelocity
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         
-                         self->_rootView.frame = newRootFrame;
-                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         self->_bSidePanelVisible = YES;
-                         
-                         [self sidebarDidShow];
-                         
-                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidShowSidePanel:)])
-                             [self->sidePanelViewDelegate containerViewControllerDidShowSidePanel:self];
-                         
-                         if (completion)
-                             completion();
-                     }];
-}
-
-
-- (void)hideSidePanelAnimated:(BOOL)animated completion:(void (^)())completion {
-    
-    [self resetNavigationBar];
-    [self sidebarWillHide];
-
-    CGRect newRootFrame = _rootView.frame;
-    newRootFrame.origin.x = 0;
-    
-    CGRect newSidePanelFrame = _sidePanelViewController.view.frame;
-    newSidePanelFrame.origin.x = -newSidePanelFrame.size.width;
-    
-    CGFloat duration = [self.theme floatForKey:@"containerViewSpringAnimationDuration"];
-    CGFloat damping = [self.theme floatForKey:@"containerViewSpringAnimationDamping"];
-    CGFloat initialVelocity = [self.theme floatForKey:@"containerViewSpringAnimationInitialVelocity"];
-    
-    
-    [UIView animateWithDuration:animated ? duration : 0.0
-                          delay:0.0
-         usingSpringWithDamping:damping
-          initialSpringVelocity:initialVelocity
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         
-                         self->_rootView.frame = newRootFrame;
-                         self->_sidePanelViewController.view.frame = newSidePanelFrame;
-                         
-                         [self sidebarDidSlideToPercentVisible:0.0];
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         [self->_rootView removeGestureRecognizer:self->rootViewTapGesture];
-                         self->rootViewTapGesture = nil;
-                         
-                         self->_bSidePanelVisible = NO;
-                         
-                         // remove side panel from view
-                         [self->_sidePanelViewController.view removeFromSuperview];
-                         
-                         self->bSetupForPanning = NO;
-                         
-                         [self sidebarDidHide];
-                         
-                         if ([self->sidePanelViewDelegate respondsToSelector:@selector(containerViewControllerDidHideSidePanel:)])
-                             [self->sidePanelViewDelegate containerViewControllerDidHideSidePanel:self];
-                         
-                         [UIViewController attemptRotationToDeviceOrientation];
-                         
-                         if (completion)
-                             completion();
-                     }];
 }
 
 - (void)rootViewTapped:(UITapGestureRecognizer *)gesture {
-    
-    [self hideSidePanelAnimated:YES completion:nil];
+    [self hideSidePanelAnimated:YES];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
     return YES;
 }
 
-#pragma mark Methods to be overridden by subclasses
+- (void)setupForPanning {
 
-// Methods that should be implemented by subclasses
-- (BOOL)shouldShowSidebar {
-    
-    return YES;
+    [self.delegate sidebarContainerWillDisplayMenu];
+
+    CGRect sidePanelFrame = self.view.bounds;
+    sidePanelFrame.origin.x -= SPSidebarContainerSidePanelWidth;
+    sidePanelFrame.size.width = SPSidebarContainerSidePanelWidth;
+    self.menuView.frame = sidePanelFrame;
+    self.menuView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+
+    [self.view insertSubview:self.menuView atIndex:0];
+
+    self.isPanningInitialized = YES;
 }
 
-- (void)sidebarWillShow {
-    
+
+#pragma mark - Public API
+
+- (void)toggleSidePanel {
+    [SPTracker trackSidebarButtonPresed];
+
+    if (self.isMenuViewVisible) {
+        [self hideSidePanelAnimated:YES];
+    } else {
+        [self showSidePanel];
+    }
 }
 
-- (void)sidebarDidShow {
-    
+- (void)showSidePanel {
+    if (!self.isPanningInitialized) {
+        if (![self.delegate sidebarContainerShouldDisplayMenu]) {
+            return;
+        }
+
+        [self setupForPanning];
+    }
+
+    CGRect newMainViewFrame = self.mainView.frame;
+    newMainViewFrame.origin.x = SPSidebarContainerSidePanelWidth;
+
+    CGRect newMenuViewFrame = self.menuView.frame;
+    newMenuViewFrame.origin.x = 0;
+    newMenuViewFrame.size.width = SPSidebarContainerSidePanelWidth;
+
+    [UIView animateWithDuration:SPSidebarContainerAnimationDuration
+                          delay:SPSidebarContainerAnimationDelay
+         usingSpringWithDamping:SPSidebarContainerAnimationDamping
+          initialSpringVelocity:SPSidebarContainerAnimationInitialVelocity
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+
+                         self.mainView.frame = newMainViewFrame;
+                         self.menuView.frame = newMenuViewFrame;
+
+                     } completion:^(BOOL finished) {
+
+                         [self.mainView addGestureRecognizer:self.mainViewTapGesture];
+
+                         self.isMenuViewVisible = YES;
+                     }];
 }
 
-- (void)sidebarWillHide {
+- (void)hideSidePanelAnimated:(BOOL)animated {
 
+    [self.delegate sidebarContainerWillHideMenu];
+
+    CGRect newMainViewFrame = self.mainView.frame;
+    newMainViewFrame.origin.x = 0;
+
+    CGRect newMenuViewFrame = self.menuView.frame;
+    newMenuViewFrame.origin.x = -newMenuViewFrame.size.width;
+
+    [UIView animateWithDuration:animated ? SPSidebarContainerAnimationDuration : SPSidebarContainerAnimationDurationZero
+                          delay:SPSidebarContainerAnimationDelay
+         usingSpringWithDamping:SPSidebarContainerAnimationDamping
+          initialSpringVelocity:SPSidebarContainerAnimationInitialVelocity
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+
+                         self.mainView.frame = newMainViewFrame;
+                         self.menuView.frame = newMenuViewFrame;
+
+                     } completion:^(BOOL finished) {
+
+                         [self.mainView removeGestureRecognizer:self.mainViewTapGesture];
+                         [self.menuView removeFromSuperview];
+
+                         self.isMenuViewVisible = NO;
+                         self.isPanningInitialized = NO;
+
+                         [self.delegate sidebarContainerDidHideMenu];
+
+                         [UIViewController attemptRotationToDeviceOrientation];
+                     }];
 }
 
-- (void)sidebarDidHide {
-    
+- (void)failPanGestureRecognizer {
+    [self.panGestureRecognizer fail];
 }
-
-- (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible {
-    
-}
-
-- (void)resetNavigationBar {
-    
-}
-
 
 @end
+
