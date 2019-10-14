@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 
     // Bools
     BOOL bSearching;
-    BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;

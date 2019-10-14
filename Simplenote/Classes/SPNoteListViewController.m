@@ -36,7 +36,6 @@
                                         UITableViewDataSource,
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
-                                        UIGestureRecognizerDelegate,
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
@@ -316,7 +315,7 @@
 
 - (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
     
-    if (bDisableUserInteraction || bListViewIsEmpty) {
+    if (bListViewIsEmpty) {
         return NO;
     }
 
@@ -451,7 +450,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return !bDisableUserInteraction;
+    return YES;
     
 }
 
@@ -563,12 +562,7 @@
 }
 
 
-#pragma mark - Gestures
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
-    return YES;
-}
+#pragma mark - Public API
 
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
@@ -944,15 +938,16 @@
 }
 
 - (void)sidebarContainerWillDisplayMenu {
-    
+
+    self.tableView.userInteractionEnabled = NO;
     self.tableView.scrollEnabled = NO;
     self.tableView.allowsSelection = NO;
+
+    self.searchBar.userInteractionEnabled = NO;
 
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     self.addButton.enabled = NO;
     self.emptyTrashButton.enabled = NO;
-        
-    bDisableUserInteraction = YES;
 }
 
 - (void)sidebarContainerWillHideMenu {
@@ -962,14 +957,15 @@
 
 - (void)sidebarContainerDidHideMenu {
     
+    self.tableView.userInteractionEnabled = YES;
     self.tableView.scrollEnabled = YES;
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+
+    self.searchBar.userInteractionEnabled = YES;
 
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
     self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
-    
-    bDisableUserInteraction = NO;
 }
 
 
