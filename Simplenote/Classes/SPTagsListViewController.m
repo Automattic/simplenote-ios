@@ -258,6 +258,10 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 #pragma mark - UITableViewDataSource
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return section == SPTagsListSectionTags ? UITableViewAutomaticDimension : CGFLOAT_MIN;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return section == SPTagsListSectionTags ? self.tagsHeaderView : nil;
 }
