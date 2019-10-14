@@ -103,6 +103,12 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 }
 
 
+#pragma mark - Overridden Methods
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 #pragma mark - Interface Initialization
 
 - (void)configureView {
