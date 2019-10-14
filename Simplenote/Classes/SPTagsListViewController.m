@@ -231,7 +231,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 - (void)adjustTableViewInsets {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
     UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    UIEdgeInsets safeAreaInsets = SPAppDelegate.sharedDelegate.noteListViewController.view.safeAreaInsets;
+    UIEdgeInsets safeAreaInsets = self.additionalSafeAreaInsets;
     BOOL insetsWereUpdated = contentInsets.top != safeAreaInsets.top;
 
     scrollInsets.top = safeAreaInsets.top;

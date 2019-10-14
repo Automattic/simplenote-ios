@@ -66,6 +66,15 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
     return self.isMenuViewVisible ? self.menuViewController : self.mainViewController;
 }
 
+- (UIView *)mainChildView {
+    if ([self.mainViewController isKindOfClass:UINavigationController.class] == false) {
+        return self.mainView;
+    }
+
+    UINavigationController *navigationController = (UINavigationController *)self.mainViewController;
+    return navigationController.visibleViewController.view ?: self.mainView;
+}
+
 
 #pragma mark - Overridden Methods
 
@@ -197,6 +206,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
     sidePanelFrame.size.width = SPSidebarContainerSidePanelWidth;
     self.menuView.frame = sidePanelFrame;
     self.menuView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+    self.menuViewController.additionalSafeAreaInsets = self.mainChildView.safeAreaInsets;
 
     [self.view insertSubview:self.menuView atIndex:0];
 
