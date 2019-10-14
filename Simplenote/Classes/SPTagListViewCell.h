@@ -14,7 +14,7 @@
 @interface SPTagListViewCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UITextField          *tagNameTextField;
-@property (nonatomic, strong) IBOutlet UIImageView          *leftImageView;
+@property (nonatomic, strong) UIImage                       *leftImage;
 @property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
 
 @end

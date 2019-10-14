@@ -2,6 +2,11 @@
 #import "Simplenote-Swift.h"
 
 
+@interface SPTagListViewCell ()
+@property (nonatomic, strong) IBOutlet UIImageView *leftImageView;
+@end
+
+
 @implementation SPTagListViewCell
 
 - (void)awakeFromNib {
@@ -27,6 +32,7 @@
 
 - (void)reset {
     self.accessoryType = UITableViewCellAccessoryNone;
+    self.leftImage = nil;
     self.tagNameTextField.enabled = NO;
 }
 
@@ -49,6 +55,15 @@
 - (void)refreshComponentsStyle {
     self.leftImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
     self.tagNameTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+}
+
+- (UIImage *)leftImage {
+    return self.leftImageView.image;
+}
+
+- (void)setLeftImage:(UIImage *)leftImage {
+    self.leftImageView.image = leftImage;
+    self.leftImageView.hidden = leftImage == nil;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
