@@ -761,9 +761,10 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 - (void)keyboardWillHide:(NSNotification *)notification {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
     UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+    UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
 
-    contentInsets.bottom = 0;
-    scrollInsets.bottom = 0;
+    contentInsets.bottom = safeAreaInsets.bottom;
+    scrollInsets.bottom = safeAreaInsets.bottom;
 
     CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
