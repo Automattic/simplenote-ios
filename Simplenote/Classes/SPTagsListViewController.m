@@ -515,8 +515,8 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     if (fetchNeeded) {
         [[SPAppDelegate sharedDelegate].noteListViewController update];
     }
-	
-    [[self containerViewController] hideSidePanelAnimated:YES completion:nil];
+
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] hideSidePanelAnimated:YES];
 }
 
 
