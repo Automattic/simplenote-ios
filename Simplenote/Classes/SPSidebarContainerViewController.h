@@ -26,8 +26,3 @@
 - (void)failPanGestureRecognizer;
 
 @end
-
-
-// Pendings:
-//  1.  Fix: Recognizer requireToFail
-//  2.  BUG: Attach panGestureRecognizer to the topViewController
