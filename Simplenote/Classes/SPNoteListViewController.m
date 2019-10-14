@@ -266,8 +266,8 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView.frame = self.rootView.bounds;
     self.tableView = [UITableView new];
+    self.tableView.frame = self.view.bounds;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -694,7 +694,7 @@
         _emptyListViewRect.size.height -= _emptyListViewRect.origin.y + _keyboardHeight;
         _emptyListView.frame = _emptyListViewRect;
         
-        [self.rootView addSubview:_emptyListView];
+        [self.view addSubview:_emptyListView];
         
         
     } else {
