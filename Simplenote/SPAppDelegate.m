@@ -1,11 +1,3 @@
-//
-//  SPAppDelegate.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPAppDelegate.h"
 #import "Simplenote-Swift.h"
 
