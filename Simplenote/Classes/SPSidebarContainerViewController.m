@@ -284,9 +284,5 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
                      }];
 }
 
-- (void)failPanGestureRecognizer {
-    [self.mainViewPanGestureRecognizer fail];
-}
-
 @end
 

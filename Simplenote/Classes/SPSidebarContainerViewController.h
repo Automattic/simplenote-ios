@@ -23,6 +23,5 @@
 - (void)toggleSidePanel;
 - (void)showSidePanel;
 - (void)hideSidePanelAnimated:(BOOL)animated;
-- (void)failPanGestureRecognizer;
 
 @end
