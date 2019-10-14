@@ -4,7 +4,6 @@
 #import "SPNoteEditorViewController.h"
 
 #import "SPAppDelegate.h"
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
 #import "SPEmptyListView.h"
@@ -267,8 +266,8 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView = [[SPBorderedTableView alloc] init];
     self.tableView.frame = self.rootView.bounds;
+    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -948,8 +947,7 @@
     
     self.tableView.scrollEnabled = NO;
     self.tableView.allowsSelection = NO;
-    [self.tableView setBorderVisibile:YES];
-    
+
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     self.addButton.enabled = NO;
     self.emptyTrashButton.enabled = NO;
@@ -967,8 +965,7 @@
     
     self.tableView.scrollEnabled = YES;
     self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
-    [self.tableView setBorderVisibile:NO];
-    
+
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
     self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
