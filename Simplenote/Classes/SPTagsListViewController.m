@@ -86,11 +86,20 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startListeningToKeyboardNotifications];
+    [self adjustTableViewInsets];
+    [self reloadDataAsynchronously];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.bVisible = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self stopListeningToKeyboardNotifications];
+    self.bVisible = NO;
+    [self setEditing:NO canceled:YES];
 }
 
 
@@ -211,6 +220,33 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (NSInteger)numberOfTags {
     return self.fetchedResultsController.sections.firstObject.numberOfObjects;
+}
+
+- (void)adjustTableViewInsets {
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+    UIEdgeInsets safeAreaInsets = SPAppDelegate.sharedDelegate.noteListViewController.view.safeAreaInsets;
+    BOOL insetsWereUpdated = contentInsets.top != safeAreaInsets.top;
+
+    scrollInsets.top = safeAreaInsets.top;
+    scrollInsets.bottom = safeAreaInsets.bottom;
+
+    contentInsets.top = safeAreaInsets.top;
+    contentInsets.bottom = safeAreaInsets.bottom;
+
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = scrollInsets;
+
+    /// Always ensure the contentOffset is set to the top, whenever the insets effectively change
+    if (insetsWereUpdated) {
+        [self.tableView scrollToTopWithAnimation:NO];
+    }
+}
+
+- (void)reloadDataAsynchronously {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 
@@ -628,35 +664,6 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
-}
-
-
-#pragma mark - SidePanelDelegate
-
-- (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
-    self.bVisible = NO;
-    [self setEditing:NO canceled:YES];
-    
-}
-- (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
-    self.bVisible = YES;
-}
-
-- (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.bVisible) {
-            [self.tableView reloadData];
-        }
-    });
-    
-    return YES;
-}
-
-- (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
-    contentInset.bottom = self.tableView.contentInset.bottom;
-    self.tableView.contentInset = contentInset;
-    self.tableView.scrollIndicatorInsets = contentInset;
-    self.tableView.contentOffset = CGPointMake(0, -contentInset.top);
 }
 
 
