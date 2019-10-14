@@ -80,6 +80,7 @@
         _emptyListView.userInteractionEnabled = false;
 
         [self registerForPeekAndPop];
+        [self refreshStyle];
         [self update];
     }
     
@@ -202,11 +203,15 @@
 }
 
 - (void)themeDidChange {
+    [self refreshStyle];
+}
+
+- (void)refreshStyle {
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     // Refresh the Table's UI
-    [self.tableView applyTheme];
+    [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI
