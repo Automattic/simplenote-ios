@@ -953,11 +953,7 @@
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     self.addButton.enabled = NO;
     self.emptyTrashButton.enabled = NO;
-    
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaMid;
-    }];
-    
+        
     bDisableUserInteraction = YES;
     
     [(SPNavigationController *)self.navigationController setDisableRotation:YES];
@@ -965,9 +961,6 @@
 
 - (void)sidebarWillHide {
 
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
-    }];
 }
 
 - (void)sidebarDidHide {
