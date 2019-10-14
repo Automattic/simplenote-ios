@@ -1,11 +1,11 @@
 #import <UIKit/UIKit.h>
 #import <Simperium/Simperium.h>
 
+
+@class SPSidebarContainerViewController;
 @class SPTagsListViewController;
 @class SPNoteListViewController;
 @class SPNoteEditorViewController;
-@class SPNavigationController;
-@class SPModalActivityIndicator;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) NSManagedObjectModel			*managedObjectModel;
 @property (strong, nonatomic, readonly) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
 
-@property (strong, nonatomic) SPNavigationController					*navigationController;
-@property (strong, nonatomic) SPTagsListViewController					*tagListViewController;
-@property (strong, nonatomic) SPNoteListViewController					*noteListViewController;
-@property (strong, nonatomic) SPNoteEditorViewController				*noteEditorViewController;
+@property (strong, nonatomic) SPSidebarContainerViewController          *sidebarViewController;
+@property (strong, nonatomic) SPTagsListViewController                  *tagListViewController;
+@property (strong, nonatomic) SPNoteListViewController                  *noteListViewController;
+@property (strong, nonatomic) SPNoteEditorViewController                *noteEditorViewController;
 
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;

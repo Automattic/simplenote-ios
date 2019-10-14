@@ -54,7 +54,7 @@
                                 SPBucketDelegate,
                                 PinLockDelegate>
 
-
+@property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
