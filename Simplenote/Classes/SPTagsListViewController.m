@@ -47,6 +47,8 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
+@property (nonatomic, strong) IBOutlet UIView               *rightBorderView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint   *rightBorderWidthConstraint;
 @property (nonatomic, strong) SPTagHeaderView               *tagsHeaderView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
@@ -74,6 +76,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     [self configureView];
     [self configureTableView];
     [self configureTableHeaderView];
+    [self configureRightBorderView];
     [self configureMenuController];
     [self startListeningToNotifications];
 
@@ -108,6 +111,10 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     UIButton *actionButton = self.tagsHeaderView.actionButton;
     [actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureRightBorderView {
+    self.rightBorderWidthConstraint.constant = UIScreen.mainScreen.pointToPixelRatio;
 }
 
 - (void)configureMenuController {
@@ -161,6 +168,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 #pragma mark - Style
 
 - (void)refreshStyle {
+    self.rightBorderView.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
     [self.tagsHeaderView refreshStyle];
     [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
