@@ -17,9 +17,9 @@ extension SPNoteListViewController {
         view.addSubview(searchBar)
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: rootView.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.trailingAnchor)
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
         ])
 
         NSLayoutConstraint.activate([
@@ -116,4 +116,20 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         editorViewController.isPreviewing = false
         navigationController?.pushViewController(editorViewController, animated: true)
     }
+}
+
+
+// MARK: - Constants
+//
+private enum Constants {
+
+    /// Where do these insets come from?
+    /// `For other subviews in your view hierarchy, the default layout margins are normally 8 points on each side`
+    ///
+    /// We're replicating the (old) view herarchy's behavior, in which the SearchBar would actually be contained within a view with 8pt margins on each side.
+    /// This won't be required anymore *soon*, and it's just a temporary workaround.
+    ///
+    /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
+    ///
+    static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
 }
