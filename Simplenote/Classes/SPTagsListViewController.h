@@ -1,7 +1,6 @@
 #import <UIKit/UIKit.h>
-#import "SPSidebarViewController.h"
 
 
-@interface SPTagsListViewController : SPSidebarViewController
+@interface SPTagsListViewController : UIViewController
 
 @end
