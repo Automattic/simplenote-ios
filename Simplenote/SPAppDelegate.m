@@ -173,6 +173,7 @@
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
                                                                                    menuViewController:self.tagListViewController];
     self.sidebarViewController.delegate = self.noteListViewController;
+    [self.noteListViewController registerSidebarPanRecognizer:self.sidebarViewController.mainViewPanGestureRecognizer];
 
     self.window.rootViewController = self.sidebarViewController;
     

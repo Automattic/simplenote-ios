@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     SPTagFilterType tagFilterType;
 }
 
+@property (nonatomic, strong, readonly) UIGestureRecognizer         *panGestureRecognizer;
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 @property (nonatomic, strong) NSString                              *searchText;
 @property (nonatomic) BOOL                                          firstLaunch;
@@ -35,10 +36,12 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
 @property (nonatomic, strong) UITableView                           *tableView;
 
+- (void)registerSidebarPanRecognizer:(UIGestureRecognizer *)recognizer;
+
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
-- (void)endSearching;
+- (void)endSearching;;
 
 @end

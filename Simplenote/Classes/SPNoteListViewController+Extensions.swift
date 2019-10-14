@@ -88,15 +88,15 @@ extension SPNoteListViewController {
 extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location) else {
+        guard tableView.isUserInteractionEnabled, let indexPath = tableView.indexPathForRow(at: location) else {
             return nil
         }
 
-        /// Prevent any Pan gesture from passing thru
-        panGestureRecognizer.fail()
-
         /// Mark the source of the interaction
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+
+        /// Prevent any Pan gesture from passing thru
+        panGestureRecognizer.fail()
 
         /// Setup the Editor
         let note = fetchedResultsController.object(at: indexPath)

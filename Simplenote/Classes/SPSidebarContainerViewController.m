@@ -58,15 +58,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
     return self.mainViewController.view;
 }
 
-- (UIView *)mainChildView {
-    if ([self.mainViewController isKindOfClass:UINavigationController.class] == false) {
-        return self.mainView;
-    }
-
-    UINavigationController *navigationController = (UINavigationController *)self.mainViewController;
-    return navigationController.visibleViewController.view ?: self.mainView;
-}
-
 - (UIView *)menuView {
     return self.menuViewController.view;
 }
@@ -103,7 +94,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
     self.mainViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
     self.mainViewPanGestureRecognizer.delegate = self;
-    [self.mainChildView addGestureRecognizer:self.mainViewPanGestureRecognizer];
 }
 
 - (void)configureTapGestureRecognizer {

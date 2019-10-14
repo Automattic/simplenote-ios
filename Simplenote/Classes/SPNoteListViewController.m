@@ -41,6 +41,8 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) UIGestureRecognizer       *panGestureRecognizer;
+
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
 @property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
@@ -563,6 +565,11 @@
 
 
 #pragma mark - Public API
+
+- (void)registerSidebarPanRecognizer:(UIGestureRecognizer *)recognizer {
+    [self.view addGestureRecognizer:recognizer];
+    self.panGestureRecognizer = recognizer;
+}
 
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
