@@ -308,7 +308,7 @@
     
     [self.tableView setEditing:NO];
     bShouldShowSidePanel = YES;
-    [self toggleSidePanel:nil];
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidePanel];
 }
 
 
