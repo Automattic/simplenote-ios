@@ -1,6 +1,7 @@
 #import "SPSidebarContainerViewController.h"
 #import "SPTracker.h"
 #import "Simplenote-Swift.h"
+#import <UIKit/UIKit.h>
 
 
 static const CGFloat SPSidebarContainerSidePanelWidth           = 300;
@@ -17,8 +18,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
-@property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGesture;
-@property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRegoznier;
+@property (nonatomic, strong) UIPanGestureRecognizer        *mainViewPanGestureRecognizer;
 @property (nonatomic, assign) CGPoint                       rootViewStartingOrigin;
 @property (nonatomic, assign) CGPoint                       sidePanelStartingOrigin;
 @property (nonatomic, assign) BOOL                          isMenuViewVisible;
@@ -57,6 +58,15 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
     return self.mainViewController.view;
 }
 
+- (UIView *)mainChildView {
+    if ([self.mainViewController isKindOfClass:UINavigationController.class] == false) {
+        return self.mainView;
+    }
+
+    UINavigationController *navigationController = (UINavigationController *)self.mainViewController;
+    return navigationController.visibleViewController.view ?: self.mainView;
+}
+
 - (UIView *)menuView {
     return self.menuViewController.view;
 }
@@ -91,16 +101,16 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 - (void)configurePanGestureRecognizer {
     NSParameterAssert(self.mainView);
 
-    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    self.panGestureRecognizer.delegate = self;
-    [self.mainView addGestureRecognizer:_panGestureRecognizer];
+    self.mainViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.mainViewPanGestureRecognizer.delegate = self;
+    [self.mainChildView addGestureRecognizer:self.mainViewPanGestureRecognizer];
 }
 
 - (void)configureTapGestureRecognizer {
-    self.mainViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
-    self.mainViewTapGesture.numberOfTapsRequired = 1;
-    self.mainViewTapGesture.numberOfTouchesRequired = 1;
-    self.mainViewTapGesture.delegate = self;
+    self.mainViewTapGestureRegoznier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
+    self.mainViewTapGestureRegoznier.numberOfTapsRequired = 1;
+    self.mainViewTapGestureRegoznier.numberOfTouchesRequired = 1;
+    self.mainViewTapGestureRegoznier.delegate = self;
 }
 
 - (void)configureViewControllerContainment {
@@ -130,8 +140,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
         self.isMainViewPanning = NO;
 
-        UIView *view = gesture.view;
-        BOOL exceededPanThreshold = view.frame.origin.x >= _rootViewStartingOrigin.x + SPSidebarContainerMinimumPanThreshold;
+        BOOL exceededPanThreshold = self.mainView.frame.origin.x >= _rootViewStartingOrigin.x + SPSidebarContainerMinimumPanThreshold;
 
         if (!self.isMenuViewVisible && exceededPanThreshold) {
             [self showSidePanel];
@@ -143,7 +152,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
     } else if (gesture.state != UIGestureRecognizerStateBegan) {
 
-        CGFloat translation = [gesture translationInView:gesture.view].x;
+        CGFloat translation = [gesture translationInView:self.mainView].x;
 
         if (!self.isMainViewPanning) {
             // See if moved more than 0 pixels in correct direction
@@ -245,7 +254,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView addGestureRecognizer:self.mainViewTapGesture];
+                         [self.mainView addGestureRecognizer:self.mainViewTapGestureRegoznier];
 
                          self.isMenuViewVisible = YES;
                      }];
@@ -273,7 +282,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView removeGestureRecognizer:self.mainViewTapGesture];
+                         [self.mainView removeGestureRecognizer:self.mainViewTapGestureRegoznier];
                          [self.menuView removeFromSuperview];
 
                          self.isMenuViewVisible = NO;
@@ -286,7 +295,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 }
 
 - (void)failPanGestureRecognizer {
-    [self.panGestureRecognizer fail];
+    [self.mainViewPanGestureRecognizer fail];
 }
 
 @end
