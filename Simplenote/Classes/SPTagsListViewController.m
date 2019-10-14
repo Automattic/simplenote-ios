@@ -103,7 +103,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (void)configureTableHeaderView {
     self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
-    self.tagsHeaderView.titleLabel.text = NSLocalizedString(@"Tags", nil);
+    self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
 
     UIButton *actionButton = self.tagsHeaderView.actionButton;
     [actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
@@ -342,17 +342,17 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     switch (indexPath.row) {
         case SPTagsListSystemRowAllNotes: {
             cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameAllNotes];
+            cell.leftImage = [UIImage imageWithName:UIImageNameAllNotes];
             break;
         }
         case SPTagsListSystemRowTrash: {
             cell.tagNameTextField.text = NSLocalizedString(@"Trash-noun", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameTrash];
+            cell.leftImage = [UIImage imageWithName:UIImageNameTrash];
             break;
         }
         case SPTagsListSystemRowSettings: {
             cell.tagNameTextField.text = NSLocalizedString(@"Settings", nil);
-            cell.leftImageView.image = [UIImage imageWithName:UIImageNameSettings];
+            cell.leftImage = [UIImage imageWithName:UIImageNameSettings];
             break;
         }
     }
@@ -361,9 +361,9 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSString *tagName = [self tagAtTableViewIndexPath:indexPath].name;
 
-    cell.leftImageView.image = [UIImage imageWithName:UIImageNameTag];
     cell.tagNameTextField.text = tagName;
     cell.tagNameTextField.delegate = self;
+    cell.leftImage = nil;
     cell.accessibilityLabel = tagName;
     cell.delegate = self;
 }
