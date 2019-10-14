@@ -958,8 +958,6 @@
     self.emptyTrashButton.enabled = NO;
         
     bDisableUserInteraction = YES;
-    
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
 }
 
 - (void)sidebarWillHide {
@@ -976,7 +974,6 @@
     self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
     
     bDisableUserInteraction = NO;
-    [(SPNavigationController *)self.navigationController setDisableRotation:NO];
 }
 
 
