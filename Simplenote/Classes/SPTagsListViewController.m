@@ -1,11 +1,3 @@
-//
-//  SPTagsListViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/23/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPTagsListViewController.h"
 #import "VSThemeManager.h"
 #import "Tag.h"
@@ -25,10 +17,6 @@
 //
 #define kSectionTags 0
 
-#define kActionSheetDeleteIndex 0
-#define kActionSheetRenameIndex 1
-#define kActionSheetCancelIndex 2
-
 static CGFloat const SPSettingsButtonHeight = 40;
 static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
 static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
@@ -36,14 +24,23 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 // MARK: - Private
 //
-@interface SPTagsListViewController ()
+@interface SPTagsListViewController () <NSFetchedResultsControllerDelegate,
+                                        SPTagListViewCellDelegate,
+                                        UIGestureRecognizerDelegate,
+                                        UITextFieldDelegate,
+                                        UITableViewDelegate,
+                                        UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) Tag *renameTag;
-@property (nonatomic, strong) UIImage *allNotesImage;
-@property (nonatomic, strong) UIImage *trashImage;
-@property (nonatomic, strong) UIImage *settingsImage;
-
+@property (nonatomic, strong) IBOutlet UITableView          *tableView;
+@property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
+@property (nonatomic, strong) Tag                           *renameTag;
+@property (nonatomic, strong) UIImage                       *allNotesImage;
+@property (nonatomic, strong) UIImage                       *trashImage;
+@property (nonatomic, strong) UIImage                       *settingsImage;
+@property (nonatomic, strong) NSString                      *cellIdentifier;
+@property (nonatomic, strong) NSTimer                       *reloadTimer;
+@property (nonatomic, assign) BOOL                          bEditing;
+@property (nonatomic, assign) BOOL                          bVisible;
 
 @end
 
@@ -51,30 +48,12 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 // MARK: - SPTagsListViewController Implementation
 //
 @implementation SPTagsListViewController
-@synthesize fetchedResultsController=__fetchedResultsController;
 
 - (void)dealloc {
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadView {
-    
-    if (!customView) {
-        customView = [SPBorderedView new];
-        customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-        customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
-        customView.showLeftBorder = NO;
-        customView.showBottomBorder = NO;
-        customView.showTopBorder = NO;
-        customView.showRightBorder = NO;
-        self.view = customView;
-    }
-}
-
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // apply styling
@@ -82,28 +61,13 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     settingsButton = [self buildSettingsButton];
     [self.view addSubview:settingsButton];
-    
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    [self.view addSubview:self.tableView];
 
     self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.alwaysBounceVertical = YES;
     self.tableView.rowHeight = 36;
-    self.tableView.allowsSelection = YES;
-    
+
     // register custom cell
-    cellIdentifier = self.theme.name;
-    cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
-    [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:cellIdentifier];
-    [self.tableView registerClass:[SPTagListViewCell class]
-           forCellReuseIdentifier:cellWithIconIdentifier];
+    self.cellIdentifier = self.theme.name;
+    [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
     [self.tableView setTableHeaderView:[self buildTableHeaderView]];
     
     _settingsImage = [UIImage imageWithName:UIImageNameSettings];
@@ -121,18 +85,13 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
     [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
-
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // Register for keyboard notifications
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self startListeningToKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -153,12 +112,16 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [self removeKeyboardObservers];
+    [self stopListeningToKeyboardNotifications];
 }
 
-- (void)removeKeyboardObservers
-{
+- (void)startListeningToKeyboardNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)stopListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver: self name:UIKeyboardWillHideNotification object:nil];
     [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];
@@ -176,16 +139,14 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    cellIdentifier = self.theme.name;
-    cellWithIconIdentifier = [self.theme.name stringByAppendingString:@"WithIcon"];
+    self.cellIdentifier = self.theme.name;
     [self.tableView reloadData];
 
     [self.view setNeedsDisplay];
     [self.view setNeedsLayout];
 }
 
-- (void)updateHeaderColors
-{
+- (void)updateHeaderColors {
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
     UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
     UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
@@ -212,32 +173,28 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
 }
 
+
 #pragma mark - Button actions
 
--(void)allNotesTap:(UIButton *)sender
-{
+- (void)allNotesTap:(UIButton *)sender {
     [self openNoteListForTagName:nil];
 }
 
--(void)trashTap:(UIButton *)sender
-{
+- (void)trashTap:(UIButton *)sender {
     [SPTracker trackTrashViewed];
     [self openNoteListForTagName:kSimplenoteTagTrashKey];
 }
 
--(void)settingsTap:(UIButton *)sender
-{
+- (void)settingsTap:(UIButton *)sender {
     [[SPAppDelegate sharedDelegate] showOptions];
 }
 
--(void)editTagsTap:(UIButton *)sender
-{
-    [self setEditing:!bEditing canceled:NO];
+- (void)editTagsTap:(UIButton *)sender {
+    [self setEditing:!self.bEditing canceled:NO];
 }
 
 
-#pragma mark - Table view data source
-
+#pragma mark - UITableViewDataSource
 
 - (SPTagListViewCell *)cellForTag:(Tag *)tag {
     
@@ -259,8 +216,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
--(NSInteger)numTags
-{
+- (NSInteger)numTags {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
     return [sectionInfo numberOfObjects];
 }
@@ -280,7 +236,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return ![[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
 }
 
-// Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == kSectionTags) {
@@ -290,13 +245,10 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 	return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SPTagListViewCell *cell;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
     if (!cell) {
-        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellIdentifier];
     }
 
     [cell resetCellForReuse];
@@ -308,15 +260,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.tagNameTextField.delegate = self;
     cell.delegate = self;
-    
-    NSString *cellText;
-    UIImage *cellIcon;
-    BOOL selected = NO;
 
     Tag *tag = [self tagAtRow: indexPath.row];
-    cellText = tag.name;
-    cellIcon = nil;
-    selected = bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
+    NSString *cellText = tag.name;
+    UIImage *cellIcon = nil;
+    BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
     
     if (cellText) {
         [cell setTagNameText:cellText];
@@ -359,11 +307,13 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [SPTracker trackTagCellPressed];
     }
     
-    return indexPath.section == kSectionTags;
+    return response;
 }
+
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     return YES;
 }
+
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
     
 }
@@ -371,7 +321,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtRow: indexPath.row];
 
-    if (bEditing) {
+    if (self.bEditing) {
         [SPTracker trackTagRowRenamed];
         [self renameTagAction:tag];
     } else {
@@ -391,8 +341,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
     if (sourceIndexPath.section != kSectionTags || proposedDestinationIndexPath.section != kSectionTags) {
 
         return sourceIndexPath;
@@ -402,14 +351,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // Detemine if it's in editing mode
-    if (bEditing)
-    {
-        return UITableViewCellEditingStyleDelete;
-    }
-    
-    return UITableViewCellEditingStyleNone;
+
+    return self.bEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -420,7 +363,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     }
 }
 
-#pragma mark UITagListViewCellDelegate
+
+#pragma mark - UITagListViewCellDelegate
 
 - (void)tagListViewCellShouldRenameTag:(SPTagListViewCell *)cell {
     
@@ -440,11 +384,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
     
-    if (bEditing == editing) {
+    if (self.bEditing == editing) {
         return;
     }
     
-    bEditing = editing;
+    self.bEditing = editing;
 
     self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView setEditing:editing animated:YES];
@@ -467,7 +411,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     notesFrame.origin.x = newWidth;
     if (!isCanceled) {
         // Make the tags list wider, and move the notes list over to accomodate for the new width
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration:UIKitConstants.animationShortDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
@@ -486,7 +430,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)doneEditingAction:(id)sender {
     
     if (_renameTag) {
-        
         SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:kSectionTags]];
         [cell.tagNameTextField endEditing:YES];
     }
@@ -515,7 +458,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [[self containerViewController] hideSidePanelAnimated:YES completion:nil];
 }
 
-#pragma UIGestureDelegate methods
+
+#pragma mark - UIGestureDelegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
@@ -523,8 +467,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-#pragma mark tag actions 
-
+#pragma mark - Tag Actions
 
 - (void)removeTagAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -548,8 +491,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
             [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
-    } else
+    } else {
         [self.tableView reloadData];
+    }
 }
 
 - (void)renameTagAction:(Tag *)tag {
@@ -571,8 +515,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-
-#pragma mark UITextFieldDelegate methods
+#pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
@@ -586,12 +529,14 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         endEditing = YES;
     }
     
-    if (string)
+    if (string) {
         [textField setText:[textField.text stringByReplacingCharactersInRange:range
                                                               withString:string]];
+    }
     
-    if (endEditing)
+    if (endEditing) {
         [textField endEditing:YES];
+    }
     
     return NO;
 }
@@ -602,7 +547,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
                                                                                                              inSection:kSectionTags]];
     // deselect cell if editing
-    if (bEditing) {
+    if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
     
@@ -623,8 +568,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
             [appDelegate.noteListViewController update];
         }
     }
-    else
+    else {
         textField.text = _renameTag.name;
+    }
     
     _renameTag = nil;
     
@@ -638,23 +584,24 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     return YES;
 }
 
-#pragma mark sidePanelDelegate
+
+#pragma mark - SidePanelDelegate
 
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
     
-    bVisible = NO;
+    self.bVisible = NO;
     [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
     
-    bVisible = YES;
+    self.bVisible = YES;
 }
 
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self->bVisible)
+        if (!self.bVisible)
             [self.tableView reloadData];
     });
     
@@ -670,11 +617,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-
 #pragma mark - Fetched results controller
 
-- (NSArray *)sortDescriptors
-{
+- (NSArray *)sortDescriptors {
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
     NSSortDescriptor *sortDescriptor;
     if (isAlphaSort) {
@@ -686,8 +631,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
     }
 
-    NSArray *sortDescriptors = @[sortDescriptor];
-    return sortDescriptors;
+    return @[sortDescriptor];
 }
 
 - (void)performFetch {
@@ -702,68 +646,58 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [self.tableView reloadData];
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (__fetchedResultsController != nil)
-    {
-        return __fetchedResultsController;
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
     }
     
-    /*
-     Set up the fetched results controller.
-     */
-    // Create the fetch request for the entity.
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
+    NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
+
+    NSFetchRequest *fetchRequest = [NSFetchRequest new];
+    fetchRequest.entity = entity;
     [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSArray *sortDescriptors = [self sortDescriptors];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    fetchRequest.sortDescriptors = [self sortDescriptors];
+
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                                managedObjectContext:context
+                                                                                                  sectionNameKeyPath:nil
+                                                                                                           cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
     [self performFetch];
     
-    return __fetchedResultsController;
+    return _fetchedResultsController;
 }
+
 
 #pragma mark - Fetched results controller delegate
 
-
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     
-    if (!bVisible) {
+    if (!self.bVisible) {
         return;
     }
     
-    [reloadTimer invalidate];
-    reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                   target:self
-                                                 selector:@selector(delayedReloadData)
-                                                 userInfo:nil
-                                                  repeats:NO];
+    [self.reloadTimer invalidate];
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                        target:self
+                                                      selector:@selector(delayedReloadData)
+                                                      userInfo:nil
+                                                       repeats:NO];
 }
 
 - (void)delayedReloadData {
     
     [self.tableView reloadData];
     
-    [reloadTimer invalidate];
-    reloadTimer = nil;
+    [self.reloadTimer invalidate];
+    self.reloadTimer = nil;
 }
 
-#pragma mark KeyboardNotifications	
+
+#pragma mark - KeyboardNotifications
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -775,10 +709,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration
-                     animations:^{
-                         self.tableView.frame = newFrame;
-                     }];
+    [UIView animateWithDuration:animationDuration animations:^{
+         self.tableView.frame = newFrame;
+     }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
@@ -787,14 +720,13 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration
-                     animations:^{
-                         self.tableView.frame = newFrame;
-                     }];
-    
+    [UIView animateWithDuration:animationDuration animations:^{
+         self.tableView.frame = newFrame;
+     }];
 }
 
-#pragma mark UI builders
+
+#pragma mark - Interface Setup
 
 - (CGFloat)thinLineSize {
     return 1.0 / [[UIScreen mainScreen] scale];

@@ -1,11 +1,3 @@
-//
-//  SPTagListViewCell.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/26/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPTagListViewCell.h"
 #import "VSThemeManager.h"
 #import "SPBorderedView.h"
@@ -14,12 +6,10 @@
 
 @implementation SPTagListViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        // style the cell
         self.backgroundColor = [UIColor clearColor];
         self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -49,9 +39,7 @@
         _tagNameTextField.returnKeyType = UIReturnKeyDone;
         _tagNameTextField.isAccessibilityElement = NO;
         [self.contentView addSubview:_tagNameTextField];
-        
-        self.textKerning = [NSNumber numberWithFloat:[self.theme floatForKey:@"tagListFontKerning"]];
-        
+
         UIColor *textColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
         if (![self.tagNameTextField.textColor isEqual:textColor]) {
             self.tagNameTextField.textColor = textColor;
@@ -65,8 +53,8 @@
     return self;
 }
 
-- (void)willTransitionToState:(UITableViewCellStateMask)state
-{
+- (void)willTransitionToState:(UITableViewCellStateMask)state {
+
     [super willTransitionToState:state];
     
     if (state & UITableViewCellStateShowingDeleteConfirmationMask) {
@@ -74,25 +62,13 @@
     }
 }
 
-- (id<SPTagListViewCellDelegate>)delegate
-{
-    return delegate;
-}
-
-- (void)setDelegate:(id<SPTagListViewCellDelegate>)newDelegate
-{
-    delegate = newDelegate;
-}
-
 - (VSTheme *)theme {
     
     return [[VSThemeManager sharedManager] theme];
-    
 }
 
 - (void)layoutSubviews {
-    
-    
+
     [super layoutSubviews];
 
     if (!performedInitialLayout) {
@@ -121,32 +97,27 @@
         self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
         self.imageView.image = [self.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
-    
 }
 
 - (void)setIconImage:(UIImage *)image {
-    
-    if (image.renderingMode == UIImageRenderingModeAlwaysTemplate)
-        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
+
     self.imageView.tintColor = self.highlighted || self.selected ? _highlightedTextColor : _textColor;
     self.imageView.image = image;
-    
 }
 
 - (void)setTagNameText:(NSString *)text {
     
     hasHighlightedTextColor = self.highlighted || self.selected;
     
-    NSDictionary *textAttributes = @{NSFontAttributeName: self.textFont,
-                                     NSForegroundColorAttributeName: hasHighlightedTextColor ? _highlightedTextColor : _textColor,
-                                     NSKernAttributeName: self.textKerning};
+    NSDictionary *textAttributes = @{
+        NSFontAttributeName: self.textFont,
+        NSForegroundColorAttributeName: hasHighlightedTextColor ? _highlightedTextColor : _textColor
+    };
     
     NSAttributedString *titleAttributesString;
     
     if (text) {
-        titleAttributesString = [[NSAttributedString alloc] initWithString:text
-                                                                attributes:textAttributes];
+        titleAttributesString = [[NSAttributedString alloc] initWithString:text attributes:textAttributes];
     }
     
     self.tagNameTextField.attributedText = titleAttributesString;
@@ -158,35 +129,28 @@
 }
 
 - (void)resetCellForReuse {
+
     [self setTextFieldEditable:NO];
     self.accessoryType = UITableViewCellAccessoryNone;
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    
-    [super setSelected:selected animated:animated];
-}
-
-
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
     
-    return (action == @selector(rename:) || action == @selector(delete:)) &&
-    !_tagNameTextField.editing;
+    return (action == @selector(rename:) || action == @selector(delete:)) && !_tagNameTextField.editing;
 }
 
 - (void)delete:(id)sender {
     
-    if ([delegate respondsToSelector:@selector(tagListViewCellShouldDeleteTag:)]) {
-        [delegate tagListViewCellShouldDeleteTag:self];
+    if ([self.delegate respondsToSelector:@selector(tagListViewCellShouldDeleteTag:)]) {
+        [self.delegate tagListViewCellShouldDeleteTag:self];
     }
-    
 }
+
 - (void)rename:(id)sender {
  
-    if ([delegate respondsToSelector:@selector(tagListViewCellShouldRenameTag:)]) {
-        [delegate tagListViewCellShouldRenameTag:self];
+    if ([self.delegate respondsToSelector:@selector(tagListViewCellShouldRenameTag:)]) {
+        [self.delegate tagListViewCellShouldRenameTag:self];
     }
 }
 
