@@ -507,9 +507,9 @@
 {
     SPOptionsViewController *optionsViewController = [[SPOptionsViewController alloc] init];
 	
-    SPNavigationController *navController	= [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
-    navController.disableRotation			= YES;
-    navController.modalPresentationStyle	= UIModalPresentationFormSheet;
+    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
+    navController.disableRotation = YES;
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.sidebarViewController presentViewController:navController animated:YES completion:nil];
 }
