@@ -4,14 +4,15 @@
 #import <UIKit/UIKit.h>
 
 
-static const CGFloat SPSidebarContainerSidePanelWidth           = 300;
-static const CGFloat SPSidebarContainerInitialPanThreshold      = 0;
-static const CGFloat SPSidebarContainerMinimumPanThreshold      = 30.0;
-static const CGFloat SPSidebarContainerAnimationDelay           = 0;
-static const CGFloat SPSidebarContainerAnimationDuration        = 0.4;
-static const CGFloat SPSidebarContainerAnimationDurationZero    = 0.0;
-static const CGFloat SPSidebarContainerAnimationDamping         = 1.5;
-static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
+static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
+static const CGFloat SPSidebarContainerInitialPanThreshold          = 0;
+static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.4
+static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
+static const CGFloat SPSidebarContainerAnimationDelay               = 0;
+static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
+static const CGFloat SPSidebarContainerAnimationDurationZero        = 0.0;
+static const CGFloat SPSidebarContainerAnimationDamping             = 1.5;
+static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 
 @interface SPSidebarContainerViewController ()
@@ -136,9 +137,14 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
         self.isMainViewPanning = NO;
 
-        BOOL exceededPanThreshold = self.mainView.frame.origin.x >= _rootViewStartingOrigin.x + SPSidebarContainerMinimumPanThreshold;
+        CGRect mainViewFrame = self.mainView.frame;
+        CGFloat minimumTranslationThreshold = _rootViewStartingOrigin.x + mainViewFrame.size.width * SPSidebarContainerMinimumVelocityThreshold;
 
-        if (!self.isMenuViewVisible && exceededPanThreshold) {
+        BOOL exceededTranslationThreshold = mainViewFrame.origin.x >= minimumTranslationThreshold;
+        BOOL exceededVelocityThreshold = [gesture velocityInView:gesture.view].x > SPSidebarContainerMinimumVelocityThreshold;
+        BOOL exceededGestureThreshold = exceededTranslationThreshold || exceededVelocityThreshold;
+
+        if (!self.isMenuViewVisible && exceededGestureThreshold) {
             [self showSidePanel];
             return;
         }
@@ -183,6 +189,9 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
         newMenuFrame.origin.x += translation;
         newMenuFrame.origin.x = MIN(MAX(newMenuFrame.origin.x, -SPSidebarContainerSidePanelWidth), 0);
         self.menuView.frame = newMenuFrame;
+
+        NSLog(@"### MainView.x %f", self.mainView.frame.origin.x);
+        NSLog(@"###MenuView.x %f", self.menuView.frame.origin.x);
     }
 }
 
