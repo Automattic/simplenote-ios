@@ -14,7 +14,7 @@ static const CGFloat SPSidebarContainerAnimationDamping         = 1.5;
 static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
 
-@interface SPSidebarContainerViewController () <UIGestureRecognizerDelegate>
+@interface SPSidebarContainerViewController ()
 
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
@@ -80,7 +80,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     if (@available(iOS 13.0, *)) {
-        // In iOS 13 we'll just... let the OS decide
         return UIStatusBarStyleDefault;
     }
 
@@ -102,14 +101,12 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
     NSParameterAssert(self.mainView);
 
     self.mainViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    self.mainViewPanGestureRecognizer.delegate = self;
 }
 
 - (void)configureTapGestureRecognizer {
     self.mainViewTapGestureRegoznier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
     self.mainViewTapGestureRegoznier.numberOfTapsRequired = 1;
     self.mainViewTapGestureRegoznier.numberOfTouchesRequired = 1;
-    self.mainViewTapGestureRegoznier.delegate = self;
 }
 
 - (void)configureViewControllerContainment {
@@ -191,10 +188,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity = 6;
 
 - (void)rootViewTapped:(UITapGestureRecognizer *)gesture {
     [self hideSidePanelAnimated:YES];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
 }
 
 - (void)setupForPanning {
