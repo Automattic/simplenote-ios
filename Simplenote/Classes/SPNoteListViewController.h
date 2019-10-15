@@ -42,6 +42,6 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 - (void)update;
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
-- (void)endSearching;;
+- (void)endSearching;
 
 @end

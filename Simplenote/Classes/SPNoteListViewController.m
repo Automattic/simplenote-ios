@@ -272,8 +272,7 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView = [UITableView new];
-    self.tableView.frame = self.view.bounds;
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -949,9 +948,6 @@
 - (void)sidebarContainerWillDisplayMenu {
 
     self.tableView.userInteractionEnabled = NO;
-    self.tableView.scrollEnabled = NO;
-    self.tableView.allowsSelection = NO;
-
     self.searchBar.userInteractionEnabled = NO;
 
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
@@ -967,10 +963,9 @@
 - (void)sidebarContainerDidHideMenu {
     
     self.tableView.userInteractionEnabled = YES;
-    self.tableView.scrollEnabled = YES;
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
-
     self.searchBar.userInteractionEnabled = YES;
+
+    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
 
     self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
     self.addButton.enabled = YES;
