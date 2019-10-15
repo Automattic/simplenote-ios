@@ -51,7 +51,10 @@ CGFloat const SPBarButtonYOriginAdjustment       = -1.0f;
 CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 
-@interface SPNoteEditorViewController ()<SPInteractivePushViewControllerProvider, UIPopoverPresentationControllerDelegate> {
+@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
+                                        SPInteractivePushViewControllerProvider,
+                                        UIPopoverPresentationControllerDelegate>
+{
     NSUInteger cursorLocationBeforeRemoteUpdate;
     NSString *noteContentBeforeRemoteUpdate;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
@@ -1138,20 +1141,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
-{
-    if (![URL containsHttpScheme]) {
-        return YES;
-    }
-    
-    if ([SFSafariViewController class]) {
-        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
-        [self presentViewController:sfvc animated:YES completion:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
-    }
-    
-    return NO;
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    return ![URL containsHttpScheme];
+}
+
+- (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url {
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:url];
+    [self presentViewController:sfvc animated:YES completion:nil];
 }
 
 - (BOOL)isDictatingText {
