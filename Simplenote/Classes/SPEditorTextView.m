@@ -494,51 +494,39 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return [string substringWithRange:match.range];
 }
 
-- (void)onTextTapped:(UITapGestureRecognizer *)recognizer
-{
-    if (@available(iOS 11.0, *)) {
-        // Location of the tap in text-container coordinates
-        NSLayoutManager *layoutManager = self.layoutManager;
-        CGPoint location = [recognizer locationInView:self];
-        location.x -= self.textContainerInset.left;
-        location.y -= self.textContainerInset.top;
-    
-        // Find the character that's been tapped on
-        NSUInteger characterIndex;
-        characterIndex = [layoutManager characterIndexForPoint:location
-                                               inTextContainer:self.textContainer
-                      fractionOfDistanceBetweenInsertionPoints:NULL];
-        if (characterIndex < self.textStorage.length) {
-            NSRange range;
-            if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
-                id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
-                // A checkbox was tapped!
-                SPTextAttachment *attachment = (SPTextAttachment *)value;
-                BOOL wasChecked = attachment.isChecked;
-                [attachment setIsChecked:!wasChecked];
+- (void)onTextTapped:(UITapGestureRecognizer *)recognizer {
 
-                if (self.selectedRange.location == self.text.length) {
-                    // If the current selection is the end of the note, the keyboard has never shown,
-                    // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
-                    self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
-                }
-                [self.delegate textViewDidChange:self];
-                [self.layoutManager invalidateDisplayForCharacterRange:range];
-                recognizer.cancelsTouchesInView = YES;
-                
-                return;
-            }
+    CGPoint locationInView = [recognizer locationInView:self];
+
+    CGPoint locationInContainer = locationInView;
+    locationInContainer.x -= self.textContainerInset.left;
+    locationInContainer.y -= self.textContainerInset.top;
+
+    NSUInteger characterIndex = [self.layoutManager characterIndexForPoint:locationInContainer
+                                                           inTextContainer:self.textContainer
+                                  fractionOfDistanceBetweenInsertionPoints:NULL];
+
+    if (characterIndex < self.textStorage.length) {
+        if ([self handlePressedAttachmentAtIndex:characterIndex] ||
+            [self handlePressedLinkAtIndex:characterIndex]) {
+
+            recognizer.cancelsTouchesInView = YES;
+            return;
         }
     }
-    
+
+    [self handlePressedLocation:locationInView];
+    recognizer.cancelsTouchesInView = NO;
+}
+
+- (void)handlePressedLocation:(CGPoint)point {
+
     // Move the cursor to the tapped position
     [self becomeFirstResponder];
-    CGPoint point = [recognizer locationInView:self];
     UITextPosition *position = [self closestPositionToPoint:point];
     UITextRange *range = [self textRangeFromPosition:position toPosition:position];
     [self setSelectedTextRange:range];
-    recognizer.cancelsTouchesInView = NO;
-    
+
     // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
     // on the same cursor location twice, so we're controlling the menu manually.
     NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
@@ -552,6 +540,48 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
     
     self.lastCursorPosition = startOffset;
+}
+
+- (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex {
+    NSRange range;
+    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+    if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {
+        return NO;
+    }
+
+    BOOL wasChecked = attachment.isChecked;
+    attachment.isChecked = !wasChecked;
+
+    if (self.selectedRange.location == self.text.length) {
+        // If the current selection is the end of the note, the keyboard has never shown,
+        // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
+        self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+    }
+
+    [self.delegate textViewDidChange:self];
+    [self.layoutManager invalidateDisplayForCharacterRange:range];
+
+    return YES;
+}
+
+
+- (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex {
+    NSURL *link = [self.attributedText attribute:NSLinkAttributeName atIndex:characterIndex effectiveRange:nil];
+    if ([link isKindOfClass:[NSURL class]] == NO || [link containsHttpScheme] == NO) {
+        return NO;
+    }
+
+    [self.editorTextDelegate textView:self receivedInteractionWithURL:link];
+
+    return YES;
+}
+
+- (id<SPEditorTextViewDelegate>)editorTextDelegate {
+    if ([self.delegate conformsToProtocol:@protocol(SPEditorTextViewDelegate)]) {
+        return (id<SPEditorTextViewDelegate>)self.delegate;
+    }
+
+    return nil;
 }
 
 @end
