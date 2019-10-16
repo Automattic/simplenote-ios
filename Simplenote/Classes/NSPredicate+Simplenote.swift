@@ -9,13 +9,8 @@ extension NSPredicate {
     ///
     @objc(predicateForSearchText:)
     static func predicateForSearchText(searchText: String) -> NSPredicate {
-        let words = searchText.trimmingCharacters(in: .whitespaces).components(separatedBy: .whitespaces)
-        var output = [NSPredicate]()
-
-        for word in words where !word.isEmpty {
-            let predicate = NSPredicate(format: "content CONTAINS[c] %@", word)
-            output.append(predicate)
-        }
+        let words = searchText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespaces)
+        let output = words.map { NSPredicate(format: "content CONTAINS[c] %@", $0) }
 
         return NSCompoundPredicate(andPredicateWithSubpredicates: output)
     }

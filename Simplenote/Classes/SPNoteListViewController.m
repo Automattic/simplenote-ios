@@ -761,43 +761,31 @@
     [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(tagFilterType == SPTagFilterTypeDeleted)]];
 
     switch (tagFilterType) {
-        case SPTagFilterTypeShared: {
-            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared];
-            [predicateList addObject:predicate];
+        case SPTagFilterTypeShared:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
             break;
-        }
-        case SPTagFilterTypePinned: {
-            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned];
-            [predicateList addObject:predicate];
+        case SPTagFilterTypePinned:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned]];
             break;
-        }
-        case SPTagFilterTypeUnread: {
-            NSPredicate *predicate = [NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread];
-            [predicateList addObject:predicate];
+        case SPTagFilterTypeUnread:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread]];
             break;
-        }
-        case SPTagFilterTypeUntagged: {
-            NSPredicate *predicate = [NSPredicate predicateForUntaggedNotes];
-            [predicateList addObject:predicate];
+        case SPTagFilterTypeUntagged:
+            [predicateList addObject:[NSPredicate predicateForUntaggedNotes]];
             break;
-        }
-        case SPTagFilterTypeUserTag: {
+        case SPTagFilterTypeUserTag:
             if (appDelegate.selectedTag.length == 0) {
                 break;
             }
 
-            NSPredicate *predicate = [NSPredicate predicateForTagWith:appDelegate.selectedTag];
-            [predicateList addObject:predicate];
+            [predicateList addObject:[NSPredicate predicateForTagWith:appDelegate.selectedTag]];
             break;
-        }
-        default: {
+        default:
             break;
-        }
     }
 
     if (self.searchText.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateForSearchText:self.searchText];
-        [predicateList addObject:predicate];
+        [predicateList addObject:[NSPredicate predicateForSearchText:self.searchText]];
     }
     
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];

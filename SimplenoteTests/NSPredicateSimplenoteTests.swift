@@ -17,6 +17,16 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
+    /// Verifies that `NSPredicate.predicatesForSearchText` produces one subpredicate per word, and disregards newlines and spaces
+    ///
+    func testPredicatesForSearchTextProducesOnePredicatePerWordAndDisregardNewlinesAndSpaces() {
+        let keyword = "     lots of empty spaces   \n   \n  "
+        let numberOfWords = 4
+        let predicate = NSPredicate.predicateForSearchText(searchText: keyword) as! NSCompoundPredicate
+
+        XCTAssertTrue(predicate.subpredicates.count == numberOfWords)
+    }
+
     /// Verifies that `NSPredicate.predicatesForSearchText` match entities that contain multiple specified keywords
     ///
     func testPredicatesForSearchTextMatchesNotesContainingMultipleSpecifiedKeywords() {

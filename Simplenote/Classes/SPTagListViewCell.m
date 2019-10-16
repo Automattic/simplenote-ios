@@ -3,7 +3,7 @@
 
 
 @interface SPTagListViewCell ()
-@property (nonatomic, strong) IBOutlet UIImageView *leftImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *iconImageView;
 @end
 
 
@@ -24,16 +24,16 @@
     [super willTransitionToState:state];
 
     if ((state & UITableViewCellStateShowingDeleteConfirmationMask) == UITableViewCellStateShowingDeleteConfirmationMask ||
-        ((state & UITableViewCellStateDefaultMask) == UITableViewCellStateDefaultMask && self.tagNameTextField.isFirstResponder)) {
+        ((state & UITableViewCellStateDefaultMask) == UITableViewCellStateDefaultMask && self.textField.isFirstResponder)) {
 
-        [self.tagNameTextField endEditing:true];
+        [self.textField endEditing:true];
     }
 }
 
 - (void)reset {
     self.accessoryType = UITableViewCellAccessoryNone;
-    self.leftImage = nil;
-    self.tagNameTextField.enabled = NO;
+    self.iconImage = nil;
+    self.textField.enabled = NO;
 }
 
 - (void)refreshStyle {
@@ -53,21 +53,21 @@
 }
 
 - (void)refreshComponentsStyle {
-    self.leftImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
-    self.tagNameTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    self.iconImageView.tintColor = [UIColor colorWithName:UIColorNameSimplenoteMidBlue];
+    self.textField.textColor = [UIColor colorWithName:UIColorNameTextColor];
 }
 
-- (UIImage *)leftImage {
-    return self.leftImageView.image;
+- (UIImage *)iconImage {
+    return self.iconImageView.image;
 }
 
-- (void)setLeftImage:(UIImage *)leftImage {
-    self.leftImageView.image = leftImage;
-    self.leftImageView.hidden = leftImage == nil;
+- (void)setIconImage:(UIImage *)iconImage {
+    self.iconImageView.image = iconImage;
+    self.iconImageView.hidden = iconImage == nil;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    return (action == @selector(rename:) || action == @selector(delete:)) && !_tagNameTextField.editing;
+    return (action == @selector(rename:) || action == @selector(delete:)) && !self.textField.editing;
 }
 
 - (void)delete:(id)sender {

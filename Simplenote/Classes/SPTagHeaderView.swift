@@ -7,11 +7,11 @@ import UIKit
 @objc @objcMembers
 class SPTagHeaderView: UIView {
 
-    /// Left TitleLabel
+    /// Leading TitleLabel
     ///
     @IBOutlet private(set) var titleLabel: UILabel!
 
-    /// Right ActionButton
+    /// Trailing ActionButton
     ///
     @IBOutlet private(set) var actionButton: UIButton! {
         didSet {

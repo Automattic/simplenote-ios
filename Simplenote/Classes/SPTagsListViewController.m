@@ -32,9 +32,10 @@ typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
     SPTagsListBottomRowCount    = 1
 };
 
-static const NSInteger kSPTagListRequestBatchSize       = 20;
-static const NSTimeInterval kSPTagListRefreshDelay      = 0.5;
-static const NSInteger kSPTagListEmptyStateSectionCount = 1;
+static const NSInteger SPTagListRequestBatchSize        = 20;
+static const NSTimeInterval SPTagListRefreshDelay       = 0.5;
+static const NSInteger SPTagListEmptyStateSectionCount  = 1;
+
 
 
 // MARK: - Private
@@ -116,7 +117,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 }
 
 - (void)configureTableView {
-    [self.tableView registerNib:SPTagListViewCell.loadNib forCellReuseIdentifier:SPTagListViewCell.reuseIdentifier];
+    [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
 }
 
 - (void)configureTableHeaderView {
@@ -124,7 +125,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
 
     UIButton *actionButton = self.tagsHeaderView.actionButton;
-    [actionButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
+    [actionButton setTitle:NSLocalizedString(@"Edit", @"Edit Tags Action: Visible in the Tags List") forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -176,7 +177,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 }
 
 - (void)tagsSortOrderWasUpdated:(id)sender {
-    [self refreshSortDescriptors];
+    [self refreshSortDescriptorsAndPerformFetch];
 }
 
 
@@ -274,25 +275,24 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (self.numberOfTags == 0) ? kSPTagListEmptyStateSectionCount : SPTagsListSectionCount;
+    return (self.numberOfTags == 0) ? SPTagListEmptyStateSectionCount : SPTagsListSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     switch (section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             return SPTagsListSystemRowCount;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             return self.numberOfTags;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             return SPTagsListBottomRowCount;
-        }
-        default: {
+
+        default:
             NSAssert(false, @"Unsupported section");
             return 0;
-        }
     }
 }
 
@@ -327,18 +327,17 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self didSelectSystemRowAtIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self didSelectTagAtIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             [self didSelectBottomRowAtIndex:indexPath];
             break;
-        }
     }
 }
 
@@ -377,82 +376,74 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self configureSystemCell:cell atIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self configureTagCell:cell atIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             [self configureBottomCell:cell atIndexPath:indexPath];
             break;
-        }
     }
 }
 
 - (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case SPTagsListSystemRowAllNotes: {
-            cell.tagNameTextField.text = NSLocalizedString(@"All Notes", nil);
-            cell.leftImage = [UIImage imageWithName:UIImageNameAllNotes];
+        case SPTagsListSystemRowAllNotes:
+            cell.textField.text = NSLocalizedString(@"All Notes", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameAllNotes];
             break;
-        }
-        case SPTagsListSystemRowTrash: {
-            cell.tagNameTextField.text = NSLocalizedString(@"Trash-noun", nil);
-            cell.leftImage = [UIImage imageWithName:UIImageNameTrash];
+
+        case SPTagsListSystemRowTrash:
+            cell.textField.text = NSLocalizedString(@"Trash-noun", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameTrash];
             break;
-        }
-        case SPTagsListSystemRowSettings: {
-            cell.tagNameTextField.text = NSLocalizedString(@"Settings", nil);
-            cell.leftImage = [UIImage imageWithName:UIImageNameSettings];
+
+        case SPTagsListSystemRowSettings:
+            cell.textField.text = NSLocalizedString(@"Settings", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameSettings];
             break;
-        }
     }
 }
 
 - (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSString *tagName = [self tagAtTableViewIndexPath:indexPath].name;
 
-    cell.tagNameTextField.text = tagName;
-    cell.tagNameTextField.delegate = self;
-    cell.leftImage = nil;
+    cell.textField.text = tagName;
+    cell.textField.delegate = self;
+    cell.iconImage = nil;
     cell.accessibilityLabel = tagName;
     cell.delegate = self;
 }
 
 - (void)configureBottomCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSString *text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
-
-    cell.tagNameTextField.text = text;
-    cell.leftImage = [UIImage imageWithName:UIImageNameUntagged];
+    cell.textField.text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
+    cell.iconImage = [UIImage imageWithName:UIImageNameUntagged];
 }
 
 - (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
     NSString *selectedTag = SPAppDelegate.sharedDelegate.selectedTag;
 
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             switch (indexPath.row) {
-                case SPTagsListSystemRowAllNotes: {
+                case SPTagsListSystemRowAllNotes:
                     return selectedTag == nil;
-                }
-                case SPTagsListSystemRowTrash: {
+                case SPTagsListSystemRowTrash:
                     return selectedTag == kSimplenoteTrashKey;
-                }
-                case SPTagsListSystemRowSettings: {
+                case SPTagsListSystemRowSettings:
                     return NO;
-                }
             }
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             return selectedTag == kSimplenoteUntaggedKey;
-        }
     }
 
     return NO;
@@ -463,21 +454,18 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case SPTagsListSystemRowAllNotes: {
+        case SPTagsListSystemRowAllNotes:
             [self allNotesWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowTrash: {
+        case SPTagsListSystemRowTrash:
             [self trashWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowSettings: {
+        case SPTagsListSystemRowSettings:
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
             [self settingsWasPressed];
             break;
-        }
     }
 }
 
@@ -600,18 +588,18 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 }
 
 - (void)renameTagAction:(Tag *)tag {
-    if (_renameTag) {
-        SPTagListViewCell *cell = [self cellForTag:_renameTag];
-        [cell.tagNameTextField endEditing:YES];
+    if (self.renameTag) {
+        SPTagListViewCell *cell = [self cellForTag:self.renameTag];
+        [cell.textField endEditing:YES];
     }
     
-    _renameTag = tag;
+    self.renameTag = tag;
     
     // begin editing the text field
     SPTagListViewCell *cell = [self cellForTag:tag];
 
-    cell.tagNameTextField.enabled = YES;
-    [cell.tagNameTextField becomeFirstResponder];
+    cell.textField.enabled = YES;
+    [cell.textField becomeFirstResponder];
 }
 
 
@@ -619,17 +607,19 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     BOOL endEditing = NO;
-    if ([string hasPrefix:@" "]) {
-        string = nil;
+    NSString *replacementString = string;
+
+    if ([replacementString hasPrefix:@" "]) {
+        replacementString = nil;
         endEditing = YES;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
+    } else if ([replacementString rangeOfString:@" "].location != NSNotFound) {
+        replacementString = [replacementString substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
         endEditing = YES;
     }
     
-    if (string) {
+    if (replacementString) {
         [textField setText:[textField.text stringByReplacingCharactersInRange:range
-                                                              withString:string]];
+                                                                   withString:replacementString]];
     }
     
     if (endEditing) {
@@ -641,7 +631,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    SPTagListViewCell *cell = [self cellForTag:_renameTag];
+    SPTagListViewCell *cell = [self cellForTag:self.renameTag];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
@@ -650,9 +640,9 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     BOOL renameTag = ![[SPObjectManager sharedManager] tagExists:textField.text];
     
     if (renameTag) {
-        NSString *orignalTagName = _renameTag.name;
+        NSString *orignalTagName = self.renameTag.name;
         NSString *newTagName = textField.text;
-        [[SPObjectManager sharedManager] editTag:_renameTag title:newTagName];
+        [[SPObjectManager sharedManager] editTag:self.renameTag title:newTagName];
         
         // see if this is the current tag
 		SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
@@ -662,13 +652,13 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
         }
     }
     else {
-        textField.text = _renameTag.name;
+        textField.text = self.renameTag.name;
     }
     
-    _renameTag = nil;
+    self.renameTag = nil;
 
-    cell.tagNameTextField.text = textField.text;
-    cell.tagNameTextField.enabled = NO;
+    cell.textField.text = textField.text;
+    cell.textField.enabled = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -703,7 +693,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     [self.tableView reloadData];
 }
 
-- (void)refreshSortDescriptors {
+- (void)refreshSortDescriptorsAndPerformFetch {
     self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
     [self performFetch];
 }
@@ -718,7 +708,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
 
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = entity;
-    fetchRequest.fetchBatchSize = kSPTagListRequestBatchSize;
+    fetchRequest.fetchBatchSize = SPTagListRequestBatchSize;
     fetchRequest.sortDescriptors = [self sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -742,7 +732,7 @@ static const NSInteger kSPTagListEmptyStateSectionCount = 1;
     }
     
     [self.reloadTimer invalidate];
-    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:kSPTagListRefreshDelay
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:SPTagListRefreshDelay
                                                         target:self
                                                       selector:@selector(delayedReloadData)
                                                       userInfo:nil
