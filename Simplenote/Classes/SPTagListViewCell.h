@@ -13,8 +13,8 @@
 
 @interface SPTagListViewCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UITextField          *tagNameTextField;
-@property (nonatomic, strong) UIImage                       *leftImage;
+@property (nonatomic, strong) IBOutlet UITextField          *textField;
+@property (nonatomic, strong) UIImage                       *iconImage;
 @property (nonatomic, weak) id<SPTagListViewCellDelegate>   delegate;
 
 @end
