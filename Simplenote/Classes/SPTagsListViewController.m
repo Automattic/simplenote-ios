@@ -227,19 +227,18 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     switch (section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             return SPTagsListSystemRowCount;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             return self.numberOfTags;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             return SPTagsListBottomRowCount;
-        }
-        default: {
+
+        default:
             NSAssert(false, @"Unsupported section");
             return 0;
-        }
     }
 }
 
@@ -274,18 +273,17 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self didSelectSystemRowAtIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self didSelectTagAtIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             [self didSelectBottomRowAtIndex:indexPath];
             break;
-        }
     }
 }
 
@@ -324,18 +322,17 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self configureSystemCell:cell atIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self configureTagCell:cell atIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionBottom: {
+
+        case SPTagsListSectionBottom:
             [self configureBottomCell:cell atIndexPath:indexPath];
             break;
-        }
     }
 }
 
@@ -345,10 +342,12 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
             cell.textField.text = NSLocalizedString(@"All Notes", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameAllNotes];
             break;
+
         case SPTagsListSystemRowTrash:
             cell.textField.text = NSLocalizedString(@"Trash-noun", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameTrash];
             break;
+
         case SPTagsListSystemRowSettings:
             cell.textField.text = NSLocalizedString(@"Settings", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameSettings];
@@ -367,9 +366,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)configureBottomCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSString *text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
-
-    cell.textField.text = text;
+    cell.textField.text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
     cell.iconImage = [UIImage imageWithName:UIImageNameUntagged];
 }
 
@@ -387,8 +384,10 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
                     return NO;
             }
             break;
+
         case SPTagsListSectionTags:
             return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
+
         case SPTagsListSectionBottom:
             return selectedTag == kSimplenoteUntaggedKey;
     }
@@ -401,21 +400,18 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case SPTagsListSystemRowAllNotes: {
+        case SPTagsListSystemRowAllNotes:
             [self allNotesWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowTrash: {
+        case SPTagsListSystemRowTrash:
             [self trashWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowSettings: {
+        case SPTagsListSystemRowSettings:
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
             [self settingsWasPressed];
             break;
-        }
     }
 }
 
