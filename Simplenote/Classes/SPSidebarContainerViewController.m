@@ -6,7 +6,7 @@
 
 static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
 static const CGFloat SPSidebarContainerInitialPanThreshold          = 0;
-static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.4;
+static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.3;
 static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
 static const CGFloat SPSidebarContainerAnimationDelay               = 0;
 static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
@@ -189,9 +189,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         newMenuFrame.origin.x += translation;
         newMenuFrame.origin.x = MIN(MAX(newMenuFrame.origin.x, -SPSidebarContainerSidePanelWidth), 0);
         self.menuView.frame = newMenuFrame;
-
-        NSLog(@"### MainView.x %f", self.mainView.frame.origin.x);
-        NSLog(@"###MenuView.x %f", self.menuView.frame.origin.x);
     }
 }
 
