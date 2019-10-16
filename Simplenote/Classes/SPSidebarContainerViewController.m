@@ -19,7 +19,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
-@property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRegoznier;
+@property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
 @property (nonatomic, strong) UIPanGestureRecognizer        *mainViewPanGestureRecognizer;
 @property (nonatomic, assign) CGPoint                       rootViewStartingOrigin;
 @property (nonatomic, assign) CGPoint                       sidePanelStartingOrigin;
@@ -106,9 +106,9 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 - (void)configureTapGestureRecognizer {
-    self.mainViewTapGestureRegoznier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
-    self.mainViewTapGestureRegoznier.numberOfTapsRequired = 1;
-    self.mainViewTapGestureRegoznier.numberOfTouchesRequired = 1;
+    self.mainViewTapGestureRecognier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rootViewTapped:)];
+    self.mainViewTapGestureRecognier.numberOfTapsRequired = 1;
+    self.mainViewTapGestureRecognier.numberOfTouchesRequired = 1;
 }
 
 - (void)configureViewControllerContainment {
@@ -262,7 +262,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView addGestureRecognizer:self.mainViewTapGestureRegoznier];
+                         [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
 
                          self.isMenuViewVisible = YES;
                      }];
@@ -290,8 +290,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView removeGestureRecognizer:self.mainViewTapGestureRegoznier];
                          [self.menuView removeFromSuperview];
+                         [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
 
                          self.isMenuViewVisible = NO;
                          self.isPanningInitialized = NO;
