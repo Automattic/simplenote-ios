@@ -15,7 +15,7 @@ static const CGFloat SPSidebarContainerAnimationDamping             = 1.5;
 static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 
-@interface SPSidebarContainerViewController ()
+@interface SPSidebarContainerViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
@@ -102,6 +102,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     NSParameterAssert(self.mainView);
 
     self.mainViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.mainViewPanGestureRecognizer.delegate = self;
 }
 
 - (void)configureTapGestureRecognizer {
@@ -122,6 +123,16 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     NSParameterAssert(self.mainView);
 
     [self.view addSubview:self.mainView];
+}
+
+
+#pragma mark - Gestures
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    // Why is this needed:
+    // UITableView's swipe gestures might require our Pan gesture to fail. Capisci?
+    //
+    return YES;
 }
 
 
