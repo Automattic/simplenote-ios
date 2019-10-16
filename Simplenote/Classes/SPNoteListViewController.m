@@ -924,16 +924,18 @@
 
 #pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)sidebarContainerShouldDisplayMenu {
- 
-    BOOL showSidePanelOveride = bShouldShowSidePanel;
-    bShouldShowSidePanel = NO;
+- (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer {
+
+    if (bShouldShowSidePanel) {
+        bShouldShowSidePanel = NO;
+        return YES;
+    }
 
     // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
-    return !(self.tableView.dragging || self.tableView.isEditing || bSearching) || showSidePanelOveride;
+    return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }
 
-- (void)sidebarContainerWillDisplayMenu {
+- (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer {
 
     self.tableView.userInteractionEnabled = NO;
     self.searchBar.userInteractionEnabled = NO;
@@ -943,12 +945,12 @@
     self.emptyTrashButton.enabled = NO;
 }
 
-- (void)sidebarContainerWillHideMenu {
+- (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
 
     [self updateNavigationBar];
 }
 
-- (void)sidebarContainerDidHideMenu {
+- (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
     
     self.tableView.userInteractionEnabled = YES;
     self.searchBar.userInteractionEnabled = YES;

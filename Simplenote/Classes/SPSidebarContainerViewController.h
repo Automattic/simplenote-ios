@@ -1,12 +1,15 @@
 #import <UIKit/UIKit.h>
 
 
+@class SPSidebarContainerViewController;
+
+
 @protocol SPSidebarContainerDelegate <NSObject>
 @required
-- (BOOL)sidebarContainerShouldDisplayMenu;
-- (void)sidebarContainerWillDisplayMenu;
-- (void)sidebarContainerWillHideMenu;
-- (void)sidebarContainerDidHideMenu;
+- (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer;
 @end
 
 
