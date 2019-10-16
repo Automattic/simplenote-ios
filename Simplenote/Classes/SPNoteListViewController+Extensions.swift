@@ -93,7 +93,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         }
 
         /// Prevent any Pan gesture from passing thru
-        SPAppDelegate.shared().sidebarViewController.panRecognizerForFailureRelationship.fail()
+        SPAppDelegate.shared().sidebarViewController.requireToFailPanning()
 
         /// Mark the source of the interaction
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)

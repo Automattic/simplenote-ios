@@ -20,7 +20,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
 @property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
-@property (nonatomic, strong) UIPanGestureRecognizer        *panRecognizerForFailureRelationship;
+@property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
 @property (nonatomic, assign) CGPoint                       rootViewStartingOrigin;
 @property (nonatomic, assign) CGPoint                       sidePanelStartingOrigin;
 @property (nonatomic, assign) BOOL                          isMenuViewVisible;
@@ -142,9 +142,9 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 {
     NSParameterAssert(self.mainView);
 
-    self.panRecognizerForFailureRelationship = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    self.panRecognizerForFailureRelationship.delegate = self;
-    [self.view addGestureRecognizer:self.panRecognizerForFailureRelationship];
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.panGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:self.panGestureRecognizer];
 }
 
 - (void)configureTapGestureRecognizer
@@ -369,6 +369,11 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
                          [UIViewController attemptRotationToDeviceOrientation];
                      }];
+}
+
+- (void)requireToFailPanning
+{
+    [self.panGestureRecognizer fail];
 }
 
 @end
