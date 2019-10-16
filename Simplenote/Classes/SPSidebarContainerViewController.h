@@ -15,10 +15,10 @@
 
 @interface SPSidebarContainerViewController : UIViewController
 
-@property (nonatomic, strong, readonly) UIViewController                *menuViewController;
-@property (nonatomic, strong, readonly) UIViewController                *mainViewController;
-@property (nonatomic, strong, readonly) UIPanGestureRecognizer          *mainViewPanGestureRecognizer;
-@property (nonatomic, weak) id<SPSidebarContainerDelegate>              delegate;
+@property (nonatomic, strong, readonly) UIViewController        *menuViewController;
+@property (nonatomic, strong, readonly) UIViewController        *mainViewController;
+@property (nonatomic, strong, readonly) UIPanGestureRecognizer  *panRecognizerForFailureRelationship;
+@property (nonatomic, weak) id<SPSidebarContainerDelegate>      delegate;
 
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController
                         menuViewController:(UIViewController *)menuViewController;

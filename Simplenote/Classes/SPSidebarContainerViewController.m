@@ -20,7 +20,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
 @property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
-@property (nonatomic, strong) UIPanGestureRecognizer        *mainViewPanGestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer        *panRecognizerForFailureRelationship;
 @property (nonatomic, assign) CGPoint                       rootViewStartingOrigin;
 @property (nonatomic, assign) CGPoint                       sidePanelStartingOrigin;
 @property (nonatomic, assign) BOOL                          isMenuViewVisible;
@@ -109,8 +109,9 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 {
     NSParameterAssert(self.mainView);
 
-    self.mainViewPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    self.mainViewPanGestureRecognizer.delegate = self;
+    self.panRecognizerForFailureRelationship = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.panRecognizerForFailureRelationship.delegate = self;
+    [self.view addGestureRecognizer:self.panRecognizerForFailureRelationship];
 }
 
 - (void)configureTapGestureRecognizer
@@ -202,7 +203,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
         self.isMainViewPanning = YES;
         CGRect newMainFrame = self.mainView.frame;
-        newMainFrame.origin = _rootViewStartingOrigin;
         newMainFrame.origin = self.rootViewStartingOrigin;
         newMainFrame.origin.x += translation;
         newMainFrame.origin.x = MIN(MAX(newMainFrame.origin.x, 0), SPSidebarContainerSidePanelWidth);
