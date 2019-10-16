@@ -6,7 +6,7 @@
 
 static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
 static const CGFloat SPSidebarContainerInitialPanThreshold          = 0;
-static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.4
+static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.4;
 static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
 static const CGFloat SPSidebarContainerAnimationDelay               = 0;
 static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
@@ -138,7 +138,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         self.isMainViewPanning = NO;
 
         CGRect mainViewFrame = self.mainView.frame;
-        CGFloat minimumTranslationThreshold = _rootViewStartingOrigin.x + mainViewFrame.size.width * SPSidebarContainerMinimumVelocityThreshold;
+        CGFloat minimumTranslationThreshold = _rootViewStartingOrigin.x + mainViewFrame.size.width * SPSidebarContainerTranslationRatioThreshold;
 
         BOOL exceededTranslationThreshold = mainViewFrame.origin.x >= minimumTranslationThreshold;
         BOOL exceededVelocityThreshold = [gesture velocityInView:gesture.view].x > SPSidebarContainerMinimumVelocityThreshold;
