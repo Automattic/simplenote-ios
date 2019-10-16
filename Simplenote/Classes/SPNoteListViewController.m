@@ -938,6 +938,11 @@
     self.emptyTrashButton.enabled = NO;
 }
 
+- (void)sidebarContainerDidSDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+{
+    // NO-OP
+}
+
 - (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
 
     [self updateNavigationBar];
