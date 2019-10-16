@@ -8,6 +8,7 @@
 @required
 - (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer;
 - (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerDidSDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer;
 - (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer;
 - (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer;
 @end
