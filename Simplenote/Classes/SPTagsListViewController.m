@@ -231,18 +231,13 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)adjustTableViewInsets {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
     UIEdgeInsets safeAreaInsets = self.additionalSafeAreaInsets;
     BOOL insetsWereUpdated = contentInsets.top != safeAreaInsets.top;
-
-    scrollInsets.top = safeAreaInsets.top;
-    scrollInsets.bottom = safeAreaInsets.bottom;
 
     contentInsets.top = safeAreaInsets.top;
     contentInsets.bottom = safeAreaInsets.bottom;
 
     self.tableView.contentInset = contentInsets;
-    self.tableView.scrollIndicatorInsets = scrollInsets;
 
     /// Always ensure the contentOffset is set to the top, whenever the insets effectively change
     if (insetsWereUpdated) {
@@ -767,17 +762,15 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
     UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
 
     contentInsets.bottom = safeAreaInsets.bottom;
-    scrollInsets.bottom = safeAreaInsets.bottom;
 
     CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:duration animations:^{
         self.tableView.contentInset = contentInsets;
-        self.tableView.scrollIndicatorInsets = scrollInsets;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
      }];
 }
 
