@@ -930,6 +930,7 @@
 
 - (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer {
 
+    self.tableView.scrollEnabled = NO;
     self.tableView.userInteractionEnabled = NO;
     self.searchBar.userInteractionEnabled = NO;
 
@@ -949,7 +950,8 @@
 }
 
 - (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
-    
+
+    self.tableView.scrollEnabled = YES;
     self.tableView.userInteractionEnabled = YES;
     self.searchBar.userInteractionEnabled = YES;
 
