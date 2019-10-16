@@ -553,17 +553,19 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     BOOL endEditing = NO;
-    if ([string hasPrefix:@" "]) {
-        string = nil;
+    NSString *replacementString = string;
+
+    if ([replacementString hasPrefix:@" "]) {
+        replacementString = nil;
         endEditing = YES;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
+    } else if ([replacementString rangeOfString:@" "].location != NSNotFound) {
+        replacementString = [replacementString substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
         endEditing = YES;
     }
     
-    if (string) {
+    if (replacementString) {
         [textField setText:[textField.text stringByReplacingCharactersInRange:range
-                                                              withString:string]];
+                                                                   withString:replacementString]];
     }
     
     if (endEditing) {
