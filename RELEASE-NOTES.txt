@@ -7,6 +7,7 @@
 -   Notes List refreshed to display Pinned state on the right hand side.
 -   iOS 11 Is now the minimum supported OS.
 -   Fixed a bug in which the Editor Colors might not be properly initialized
+-   Fixed an iOS 13 bug that caused links to be accidentally opened
 
 4.10.0
 ======

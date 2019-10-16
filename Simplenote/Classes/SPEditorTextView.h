@@ -11,6 +11,11 @@
 
 extern NSString *const CheckListRegExPattern;
 
+@protocol SPEditorTextViewDelegate <UITextViewDelegate>
+- (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url;
+@end
+
+
 @interface SPEditorTextView : SPTextView
 
 @property (nonatomic) BOOL editing;
