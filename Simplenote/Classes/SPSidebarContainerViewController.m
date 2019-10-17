@@ -5,7 +5,6 @@
 
 
 static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
-static const CGFloat SPSidebarContainerInitialPanThreshold          = 0;
 static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.3;
 static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
 static const CGFloat SPSidebarContainerAnimationDelay               = 0;
@@ -25,7 +24,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 @property (nonatomic, assign) CGPoint                       menuPanelStartingOrigin;
 @property (nonatomic, assign) BOOL                          isMenuViewVisible;
 @property (nonatomic, assign) BOOL                          isMainViewPanning;
-@property (nonatomic, assign) BOOL                          isPanningInitialized;
 
 @end
 
@@ -244,54 +242,62 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 
+#pragma mark - Helpers
+
+- (BOOL)mustHideSidePanelWithTranslation:(CGPoint)translation velocity:(CGPoint)velocity
+{
+    // We'll consider the `intent` in this OP, regardless of the distance covered (AKA Velocity Direction).
+    CGFloat minimumTranslationThreshold = self.mainView.frame.size.width * SPSidebarContainerTranslationRatioThreshold;
+
+    BOOL exceededTranslationThreshold   = ABS(translation.x) >= minimumTranslationThreshold;
+    BOOL exceededVelocityThreshold      = ABS(velocity.x) > SPSidebarContainerMinimumVelocityThreshold;
+    BOOL exceededGestureThreshold       = exceededTranslationThreshold || exceededVelocityThreshold;
+    BOOL directionTowardsRight          = velocity.x > 0;
+    BOOL directionTowardsLeft           = !directionTowardsRight;
+
+    return ((self.isMenuViewVisible && exceededGestureThreshold && directionTowardsLeft) ||
+            (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)));
+}
+
+
 #pragma mark - UIGestureRecognizers
 
 - (void)viewDidPan:(UIPanGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
-
+    if (gesture.state == UIGestureRecognizerStateEnded ||
+        gesture.state == UIGestureRecognizerStateCancelled ||
+        gesture.state == UIGestureRecognizerStateFailed)
+    {
         if (!self.isMainViewPanning) {
             return;
         }
 
+        // End the "Appropriate" Transition: If the menu was visible, we've signaled we would be hiding it
         self.isMainViewPanning = NO;
+        [self endAppropriateTransition];
 
+        // And now: Based on both, Translation and Velocity, we'll figure out if we actually need to Show or Hide the Menu
         CGPoint translation = [gesture translationInView:self.mainView];
         CGPoint velocity = [gesture velocityInView:gesture.view];
-        CGFloat minimumTranslationThreshold = self.mainView.frame.size.width * SPSidebarContainerTranslationRatioThreshold;
 
-        BOOL exceededTranslationThreshold = ABS(translation.x) >= minimumTranslationThreshold;
-        BOOL exceededVelocityThreshold = ABS(velocity.x) > SPSidebarContainerMinimumVelocityThreshold;
-        BOOL exceededGestureThreshold = exceededTranslationThreshold || exceededVelocityThreshold;
-        BOOL directionTowardsRight = velocity.x > 0;
-        BOOL directionTowardsLeft = !directionTowardsRight;
-
-        // We'll consider the `intent` in this OP, regardless of the distance covered (AKA Velocity Direction).
-        if ((self.isMenuViewVisible && exceededGestureThreshold && directionTowardsLeft) ||
-            (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)))
-        {
+        if ([self mustHideSidePanelWithTranslation:translation velocity:velocity]) {
             [self hideSidePanelAnimated:YES];
         } else {
             [self showSidePanel];
         }
 
-        return;
+    } else if (gesture.state == UIGestureRecognizerStateBegan) {
 
-    } else if (gesture.state != UIGestureRecognizerStateBegan) {
+        // When a Pan OP begins, we don't really know if it'll end up showing the Menu, or hiding it.
+        // Let's signal the "Appropriate" next transition. That is: if the menu is hidden, we'd expect to show it.
+        // And, of course, whenever it's visible, we would expect to hide it!
+        [self beginAppropriateTransition];
+        self.mainViewStartingOrigin = self.mainView.frame.origin;
+        self.menuPanelStartingOrigin = self.menuView.frame.origin;
+        self.isMainViewPanning = YES;
 
+    } else {
         CGFloat translation = [gesture translationInView:self.mainView].x;
-
-        if (!self.isMainViewPanning) {
-            if ((self.isMenuViewVisible ? translation : -translation) > SPSidebarContainerInitialPanThreshold) {
-                return;
-            }
-
-            [self ensureMainViewPanningIsInitialized];
-
-            self.mainViewStartingOrigin = self.mainView.frame.origin;
-            self.menuPanelStartingOrigin = self.menuView.frame.origin;
-            self.isMainViewPanning = YES;
-        }
 
         CGRect newMainFrame = self.mainView.frame;
         newMainFrame.origin = self.mainViewStartingOrigin;
@@ -315,22 +321,51 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 #pragma mark - Panning
 
-- (void)ensureMainViewPanningIsInitialized
+- (void)beginAppropriateTransition
 {
-    if (self.isPanningInitialized) {
-        return;
+    if (self.isMenuViewVisible) {
+        [self beginHideMenuTransition];
+    } else {
+        [self beginDisplayMenuTransition];
     }
-
-    [self initializeMainViewPanning];
-    self.isPanningInitialized = YES;
 }
 
-- (void)initializeMainViewPanning
+- (void)endAppropriateTransition
+{
+    if (self.isMenuViewVisible) {
+        [self endHideMenuTransition];
+    } else {
+        [self endDisplayMenuTransition];
+    }
+}
+
+- (void)beginDisplayMenuTransition
 {
     [self.delegate sidebarContainerWillDisplayMenu:self];
-
     self.menuViewController.additionalSafeAreaInsets = self.mainChildView.safeAreaInsets;
     [self.menuViewController beginAppearanceTransition:YES animated:YES];
+}
+
+- (void)endDisplayMenuTransition
+{
+    [self.delegate sidebarContainerDidDisplayMenu:self];
+    [self.menuViewController endAppearanceTransition];
+    [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
+    self.isMenuViewVisible = YES;
+}
+
+- (void)beginHideMenuTransition
+{
+    [self.delegate sidebarContainerWillHideMenu:self];
+    [self.menuViewController beginAppearanceTransition:NO animated:YES];
+}
+
+- (void)endHideMenuTransition
+{
+    [self.delegate sidebarContainerDidHideMenu:self];
+    [self.menuViewController endAppearanceTransition];
+    [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
+    self.isMenuViewVisible = NO;
 }
 
 
@@ -349,7 +384,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (void)showSidePanel
 {
-    [self ensureMainViewPanningIsInitialized];
+    [self beginDisplayMenuTransition];
 
     CGRect newMainViewFrame = self.mainView.frame;
     newMainViewFrame.origin.x = SPSidebarContainerSidePanelWidth;
@@ -370,19 +405,13 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
-
-                         [self.delegate sidebarContainerDidSDisplayMenu:self];
-                         [self.menuViewController endAppearanceTransition];
-
-                         self.isMenuViewVisible = YES;
+                         [self endDisplayMenuTransition];
                      }];
 }
 
 - (void)hideSidePanelAnimated:(BOOL)animated
 {
-    [self.delegate sidebarContainerWillHideMenu:self];
-    [self.menuViewController beginAppearanceTransition:NO animated:YES];
+    [self beginHideMenuTransition];
 
     CGRect newMainViewFrame = self.mainView.frame;
     newMainViewFrame.origin.x = 0;
@@ -402,14 +431,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
                      } completion:^(BOOL finished) {
 
-                         [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
-
-                         [self.delegate sidebarContainerDidHideMenu:self];
-                         [self.menuViewController endAppearanceTransition];
-
-                         self.isMenuViewVisible = NO;
-                         self.isPanningInitialized = NO;
-
+                         [self endHideMenuTransition];
                          [UIViewController attemptRotationToDeviceOrientation];
                      }];
 }

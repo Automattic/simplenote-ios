@@ -939,7 +939,7 @@
     self.emptyTrashButton.enabled = NO;
 }
 
-- (void)sidebarContainerDidSDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (void)sidebarContainerDidDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
 {
     // NO-OP
 }
