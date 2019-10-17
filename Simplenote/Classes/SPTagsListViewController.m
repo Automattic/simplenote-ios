@@ -117,6 +117,10 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)configureTableView {
     [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
+
+    if (@available(iOS 13.0, *)) {
+        self.tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
+    }
 }
 
 - (void)configureTableHeaderView {
@@ -231,12 +235,17 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)adjustTableViewInsets {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
     UIEdgeInsets safeAreaInsets = self.additionalSafeAreaInsets;
+    UIEdgeInsets scrollIndicatorInsets = self.tableView.scrollIndicatorInsets;
     BOOL insetsWereUpdated = contentInsets.top != safeAreaInsets.top;
 
     contentInsets.top = safeAreaInsets.top;
     contentInsets.bottom = safeAreaInsets.bottom;
 
+    scrollIndicatorInsets.top = safeAreaInsets.top;
+    scrollIndicatorInsets.bottom = safeAreaInsets.bottom + self.tableView.sectionFooterHeight;
+
     self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
 
     /// Always ensure the contentOffset is set to the top, whenever the insets effectively change
     if (insetsWereUpdated) {

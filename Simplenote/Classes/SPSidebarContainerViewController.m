@@ -5,7 +5,7 @@
 
 
 static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
-static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.3;
+static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.20;
 static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
 static const CGFloat SPSidebarContainerAnimationDelay               = 0;
 static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
@@ -373,7 +373,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     [self.delegate sidebarContainerDidDisplayMenu:self];
     [self.menuViewController endAppearanceTransition];
     [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
-    self.isMenuViewVisible = YES;
 }
 
 - (void)beginHideMenuTransition
@@ -387,7 +386,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     [self.delegate sidebarContainerDidHideMenu:self];
     [self.menuViewController endAppearanceTransition];
     [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
-    self.isMenuViewVisible = NO;
 }
 
 
@@ -426,6 +424,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
                      } completion:^(BOOL finished) {
 
                          [self endDisplayMenuTransition];
+                        self.isMenuViewVisible = YES;
                      }];
 }
 
@@ -452,6 +451,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
                      } completion:^(BOOL finished) {
 
                          [self endHideMenuTransition];
+                         self.isMenuViewVisible = NO;
                          [UIViewController attemptRotationToDeviceOrientation];
                      }];
 }
