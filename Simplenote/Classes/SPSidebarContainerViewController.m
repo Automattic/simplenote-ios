@@ -5,7 +5,7 @@
 
 
 static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
-static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.20;
+static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.15;
 static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
 static const CGFloat SPSidebarContainerAnimationDelay               = 0;
 static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
