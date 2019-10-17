@@ -1,25 +1,33 @@
 #import "SPTagsListViewController.h"
-#import "VSThemeManager.h"
-#import "Tag.h"
 #import "SPAppDelegate.h"
-#import <Simperium/Simperium.h>
-#import "SPNoteListViewController.h"
-#import "SPTagListViewCell.h"
-#import "SPObjectManager.h"
-#import "SPBorderedView.h"
-#import "SPButton.h"
 #import "SPOptionsViewController.h"
+#import "SPObjectManager.h"
 #import "SPTracker.h"
+#import "SPTagListViewCell.h"
+#import "Tag.h"
+
+#import "VSThemeManager.h"
+#import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
 
 // MARK: - Constants
 //
-#define kSectionTags 0
+typedef NS_ENUM(NSInteger, SPTagsListSection) {
+    SPTagsListSectionSystem = 0,
+    SPTagsListSectionTags   = 1,
+    SPTagsListSectionCount  = 2
+};
 
-static CGFloat const SPSettingsButtonHeight = 40;
-static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
-static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
+typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
+    SPTagsListSystemRowAllNotes = 0,
+    SPTagsListSystemRowTrash    = 1,
+    SPTagsListSystemRowSettings = 2,
+    SPTagsListSystemRowCount    = 3
+};
+
+static const NSInteger SPTagListRequestBatchSize    = 20;
+static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 
 
 // MARK: - Private
@@ -32,12 +40,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
+@property (nonatomic, strong) SPTagHeaderView               *tagsHeaderView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
-@property (nonatomic, strong) UIImage                       *allNotesImage;
-@property (nonatomic, strong) UIImage                       *trashImage;
-@property (nonatomic, strong) UIImage                       *settingsImage;
-@property (nonatomic, strong) NSString                      *cellIdentifier;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
 @property (nonatomic, assign) BOOL                          bEditing;
 @property (nonatomic, assign) BOOL                          bVisible;
@@ -53,40 +58,19 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // apply styling
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
-    settingsButton = [self buildSettingsButton];
-    [self.view addSubview:settingsButton];
+    [self configureView];
+    [self configureTableView];
+    [self configureTableHeaderView];
+    [self configureMenuController];
+    [self startListeningToNotifications];
 
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    self.tableView.rowHeight = 36;
-
-    // register custom cell
-    self.cellIdentifier = self.theme.name;
-    [self.tableView registerClass:[SPTagListViewCell class] forCellReuseIdentifier:self.cellIdentifier];
-    [self.tableView setTableHeaderView:[self buildTableHeaderView]];
-    
-    _settingsImage = [UIImage imageWithName:UIImageNameSettings];
-    _allNotesImage = [UIImage imageWithName:UIImageNameAllNotes];
-    _trashImage = [UIImage imageWithName:UIImageNameTrash];
-
-    // add rename item to manu
-    SEL renameSelector = sel_registerName("rename:");
-    UIMenuItem *renameItem = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Rename", @"Rename a tag")
-                                                        action:renameSelector];
-    [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
-    [[UIMenuController sharedMenuController] update];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
-    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
-    [nc addObserver:self selector:@selector(updateSortOrder:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-    [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
+    [self refreshStyle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,25 +78,49 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [self startListeningToKeyboardNotifications];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    CGFloat safeBottomInset = self.view.safeAreaInsets.bottom;
-    CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight - safeBottomInset;
-    self.tableView.frame = tableViewFrame;
-    
-    settingsButton.frame = CGRectMake(tableViewFrame.origin.x,
-                                      tableViewFrame.size.height,
-                                      tableViewFrame.size.width,
-                                      SPSettingsButtonHeight);
-    
-    [self updateHeaderButtonHighlight];
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self stopListeningToKeyboardNotifications];
+}
+
+
+#pragma mark - Interface Initialization
+
+- (void)configureView {
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+}
+
+- (void)configureTableView {
+    [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
+}
+
+- (void)configureTableHeaderView {
+    self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
+    self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+
+    UIButton *actionButton = self.tagsHeaderView.actionButton;
+    [actionButton setTitle:NSLocalizedString(@"Edit", @"Edit Tags Action: Visible in the Tags List") forState:UIControlStateNormal];
+    [actionButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureMenuController {
+    SEL renameSelector = sel_registerName("rename:");
+    UIMenuItem *renameItem = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Rename", @"Rename a tag")
+                                                        action:renameSelector];
+    [[UIMenuController sharedMenuController] setMenuItems:@[renameItem]];
+    [[UIMenuController sharedMenuController] update];
+}
+
+
+#pragma mark - Notification Hooks
+
+- (void)startListeningToNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
+    [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
+    [nc addObserver:self selector:@selector(tagsSortOrderWasUpdated:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 - (void)startListeningToKeyboardNotifications {
@@ -127,182 +135,117 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     [nc removeObserver: self name:UIKeyboardWillShowNotification object:nil];
 }
 
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
-}
+
+#pragma mark - Notification Handlers
 
 - (void)themeDidChange {
-    [self updateHeaderColors];
-    customView.fillColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    customView.borderColor = [UIColor colorWithName:UIColorNameDividerColor];
-
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-
-    self.cellIdentifier = self.theme.name;
-    [self.tableView reloadData];
-
-    [self.view setNeedsDisplay];
-    [self.view setNeedsLayout];
-}
-
-- (void)updateHeaderColors {
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-    UIColor *separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
-    UIColor *tagsTextColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
-
-    headerSeparator.backgroundColor = separatorColor;
-    footerSeparator.backgroundColor = separatorColor;
-    tagsLabel.textColor = tagsTextColor;
-    [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-    [allNotesButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-
-    [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-    [trashButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-
-    [settingsButton setTitleColor:textColor forState:UIControlStateNormal];
-    [settingsButton setTitleColor:tintColor forState:UIControlStateHighlighted];
-    [settingsButton setTintColor:textColor];
-
-    [editTagsButton setTitleColor:tintColor forState:UIControlStateNormal];
+    [self refreshStyle];
 }
 
 - (void)menuDidChangeVisibility:(UIMenuController *)menuController {
-    
     self.tableView.allowsSelection = ![UIMenuController sharedMenuController].menuVisible;
+}
+
+- (void)tagsSortOrderWasUpdated:(id)sender {
+    [self refreshSortDescriptorsAndPerformFetch];
+}
+
+
+#pragma mark - Style
+
+- (void)refreshStyle {
+    [self.tagsHeaderView refreshStyle];
+    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView reloadData];
 }
 
 
 #pragma mark - Button actions
 
-- (void)allNotesTap:(UIButton *)sender {
-    [self openNoteListForTagName:nil];
-}
-
-- (void)trashTap:(UIButton *)sender {
-    [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:kSimplenoteTagTrashKey];
-}
-
-- (void)settingsTap:(UIButton *)sender {
-    [[SPAppDelegate sharedDelegate] showOptions];
-}
-
 - (void)editTagsTap:(UIButton *)sender {
-    [self setEditing:!self.bEditing canceled:NO];
+    BOOL newState = !self.bEditing;
+    if (newState) {
+        [SPTracker trackTagEditorAccessed];
+    }
+
+    [self setEditing:newState canceled:NO];
+}
+
+
+#pragma mark - Helper Methods
+
+- (SPTagListViewCell *)cellForTag:(Tag *)tag {
+    NSIndexPath *indexPath = [self tableViewIndexPathForTag:tag];
+    return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+}
+
+- (NSIndexPath *)tableViewIndexPathForTag:(Tag *)tag {
+    NSInteger row = [self.fetchedResultsController indexPathForObject:tag].row;
+    return [NSIndexPath indexPathForItem:row inSection:SPTagsListSectionTags];
+}
+
+- (Tag *)tagAtTableViewIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.fetchedResultsController.fetchedObjects.count || indexPath.section != SPTagsListSectionTags) {
+        return nil;
+    }
+
+    // Our FRC has just one section!
+    NSIndexPath *resultsIndexPah = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+    return [self.fetchedResultsController objectAtIndexPath:resultsIndexPah];
+}
+
+- (NSInteger)numberOfTags {
+    return self.fetchedResultsController.sections.firstObject.numberOfObjects;
 }
 
 
 #pragma mark - UITableViewDataSource
 
-- (SPTagListViewCell *)cellForTag:(Tag *)tag {
-    
-    return (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:tag]
-                                                                                          inSection:kSectionTags]];
-}
-
-- (NSInteger)rowForTag:(Tag *)tag {
-    
-    return [self.fetchedResultsController indexPathForObject:tag].row;
-}
-
-- (Tag *)tagAtRow:(NSInteger)row {
-    if (row >= self.fetchedResultsController.fetchedObjects.count) {
-        return nil;
-    }
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    return [self.fetchedResultsController objectAtIndexPath:indexPath];
-}
-
-- (NSInteger)numTags {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
-    return [sectionInfo numberOfObjects];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if ((section == kSectionTags) &&
-        self.fetchedResultsController.fetchedObjects.count == 0) {
-        return 1;
-    }
-    
-    return 10;
-    
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return section == SPTagsListSectionTags ? self.tagsHeaderView : nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ![[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
+    BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
+    BOOL isSortEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
+
+    return isTagRow && !isSortEnabled;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return SPTagsListSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (section == kSectionTags) {
-		return [self numTags];
+
+    switch (section) {
+        case SPTagsListSectionSystem: {
+            return SPTagsListSystemRowCount;
+        }
+        case SPTagsListSectionTags: {
+            return self.numberOfTags;
+        }
+        default: {
+            NSAssert(false, @"Unsupported section");
+            return 0;
+        }
     }
-    
-	return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
-    if (!cell) {
-        cell = [[SPTagListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellIdentifier];
-    }
+    SPTagListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPTagListViewCell.reuseIdentifier forIndexPath:indexPath];
 
-    [cell resetCellForReuse];
     [self configureCell:cell atIndexPath:indexPath];
-    
+
     return cell;
 }
 
-- (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    cell.tagNameTextField.delegate = self;
-    cell.delegate = self;
-
-    Tag *tag = [self tagAtRow: indexPath.row];
-    NSString *cellText = tag.name;
-    UIImage *cellIcon = nil;
-    BOOL selected = self.bEditing ? NO : [[SPAppDelegate sharedDelegate].selectedTag isEqualToString:tag.name];
-    
-    if (cellText) {
-        [cell setTagNameText:cellText];
-    }
-    [cell setIconImage:cellIcon];
-    
-    cell.accessibilityLabel = cellText;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        cell.selected = selected;
-    });
-}
-
-- (void)updateHeaderButtonHighlight {
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
-
-    if ([SPAppDelegate sharedDelegate].selectedTag == nil) {
-        [allNotesButton setTitleColor:tintColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:tintColor];
-        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-        [trashButton setTintColor:textColor];
-    } else if ([[SPAppDelegate sharedDelegate].selectedTag  isEqual:@"trash"]) {
-        [trashButton setTitleColor:tintColor forState:UIControlStateNormal];
-        [trashButton setTintColor:tintColor];
-        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:textColor];
-    } else {
-        [trashButton setTitleColor:textColor forState:UIControlStateNormal];
-        [trashButton setTintColor:textColor];
-        [allNotesButton setTitleColor:textColor forState:UIControlStateNormal];
-        [allNotesButton setTintColor:textColor];
-    }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.selected = [self shouldSelectCellAtIndexPath:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    BOOL response = indexPath.section == kSectionTags;
+    BOOL response = indexPath.section == SPTagsListSectionTags;
     if (response) {
         [SPTracker trackTagCellPressed];
     }
@@ -319,7 +262,137 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Tag *tag = [self tagAtRow: indexPath.row];
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            [self didSelectSystemRowAtIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionTags: {
+            [self didSelectTagAtIndexPath:indexPath];
+            break;
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    if (sourceIndexPath.section == SPTagsListSectionTags && destinationIndexPath.section == SPTagsListSectionTags) {
+        [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    if (sourceIndexPath.section != SPTagsListSectionTags || proposedDestinationIndexPath.section != SPTagsListSectionTags) {
+        return sourceIndexPath;
+    }
+    
+    return proposedDestinationIndexPath ?: sourceIndexPath;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == SPTagsListSectionTags;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
+    return self.bEditing && isTagRow ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [SPTracker trackTagRowDeleted];
+		[self removeTagAtIndexPath:indexPath];
+    }
+}
+
+
+#pragma mark - Cell Setup
+
+- (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem: {
+            [self configureSystemCell:cell atIndexPath:indexPath];
+            break;
+        }
+        case SPTagsListSectionTags: {
+            [self configureTagCell:cell atIndexPath:indexPath];
+            break;
+        }
+    }
+}
+
+- (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case SPTagsListSystemRowAllNotes:
+            cell.textField.text = NSLocalizedString(@"All Notes", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameAllNotes];
+            break;
+        case SPTagsListSystemRowTrash:
+            cell.textField.text = NSLocalizedString(@"Trash-noun", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameTrash];
+            break;
+        case SPTagsListSystemRowSettings:
+            cell.textField.text = NSLocalizedString(@"Settings", nil);
+            cell.iconImage = [UIImage imageWithName:UIImageNameSettings];
+            break;
+    }
+}
+
+- (void)configureTagCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSString *tagName = [self tagAtTableViewIndexPath:indexPath].name;
+
+    cell.textField.text = tagName;
+    cell.textField.delegate = self;
+    cell.iconImage = nil;
+    cell.accessibilityLabel = tagName;
+    cell.delegate = self;
+}
+
+- (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *selectedTag = SPAppDelegate.sharedDelegate.selectedTag;
+
+    switch (indexPath.section) {
+        case SPTagsListSectionSystem:
+            switch (indexPath.row) {
+                case SPTagsListSystemRowAllNotes:
+                    return selectedTag == nil;
+                case SPTagsListSystemRowTrash:
+                    return selectedTag == kSimplenoteTagTrashKey;
+                case SPTagsListSystemRowSettings:
+                    return NO;
+            }
+            break;
+        case SPTagsListSectionTags:
+            return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
+    }
+
+    return NO;
+}
+
+
+#pragma mark - Row Press Handlers
+
+- (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case SPTagsListSystemRowAllNotes: {
+            [self allNotesWasPressed];
+            break;
+        }
+
+        case SPTagsListSystemRowTrash: {
+            [self trashWasPressed];
+            break;
+        }
+
+        case SPTagsListSystemRowSettings: {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [self settingsWasPressed];
+            break;
+        }
+    }
+}
+
+- (void)didSelectTagAtIndexPath:(NSIndexPath *)indexPath {
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
     if (self.bEditing) {
         [SPTracker trackTagRowRenamed];
@@ -328,54 +401,32 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [SPTracker trackListTagViewed];
         [self openNoteListForTagName:tag.name];
     }
-
-    [self updateHeaderButtonHighlight];
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    if (sourceIndexPath.section == kSectionTags && destinationIndexPath.section == kSectionTags) {
-        
-        [[SPObjectManager sharedManager] moveTagFromIndex:sourceIndexPath.row
-                                                  toIndex:destinationIndexPath.row];
-        
-    }
+- (void)allNotesWasPressed {
+    [self openNoteListForTagName:nil];
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-    if (sourceIndexPath.section != kSectionTags || proposedDestinationIndexPath.section != kSectionTags) {
-
-        return sourceIndexPath;
-    }
-    
-    return proposedDestinationIndexPath ? proposedDestinationIndexPath : sourceIndexPath;
+- (void)trashWasPressed {
+    [SPTracker trackTrashViewed];
+    [self openNoteListForTagName:kSimplenoteTagTrashKey];
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return self.bEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [SPTracker trackTagRowDeleted];
-		[self removeTagAtIndexPath:indexPath];
-    }
+- (void)settingsWasPressed {
+    [[SPAppDelegate sharedDelegate] showOptions];
 }
 
 
 #pragma mark - UITagListViewCellDelegate
 
 - (void)tagListViewCellShouldRenameTag:(SPTagListViewCell *)cell {
-    
     [SPTracker trackTagMenuRenamed];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    [self renameTagAction:[self tagAtRow:path.row]];
+    [self renameTagAction:[self tagAtTableViewIndexPath:path]];
 }
 
 - (void)tagListViewCellShouldDeleteTag:(SPTagListViewCell *)cell {
-    
     [SPTracker trackTagMenuDeleted];
     
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
@@ -383,61 +434,51 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
-    
     if (self.bEditing == editing) {
         return;
     }
     
     self.bEditing = editing;
-
-    self.tableView.allowsSelectionDuringEditing = YES;
     [self.tableView setEditing:editing animated:YES];
-    
-    if (editing) {
-        [editTagsButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
-		[SPTracker trackTagEditorAccessed];
-    } else {
-        [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    }
 
-    SPSidebarContainerViewController *noteListViewController = (SPSidebarContainerViewController *)[[SPAppDelegate sharedDelegate] noteListViewController];
-    CGFloat newWidth = editing
-        ? [self.theme floatForKey:@"containerViewSidePanelWidthExpanded"]
-        : [self.theme floatForKey:@"containerViewSidePanelWidth"];
-    CGRect frame = self.view.frame;
-    frame.size.width = newWidth;
+    [self refreshEditTagsButtonForEditionState:editing];
+    [self resizeContainerViewForEditonState:editing animated:!isCanceled];
+}
+
+- (void)resizeContainerViewForEditonState:(BOOL)editing animated:(BOOL)animated {
+
+    SPSidebarContainerViewController *noteListViewController = [[SPAppDelegate sharedDelegate] noteListViewController];
+
+    NSString *widthKey = editing ? @"containerViewSidePanelWidthExpanded" : @"containerViewSidePanelWidth";
+    CGFloat newWidth = [[[VSThemeManager sharedManager] theme] floatForKey:widthKey];
+
+    CGRect selfFrame = self.view.frame;
+    selfFrame.size.width = newWidth;
 
     CGRect notesFrame = noteListViewController.rootView.frame;
     notesFrame.origin.x = newWidth;
-    if (!isCanceled) {
+
+    if (animated) {
         // Make the tags list wider, and move the notes list over to accomodate for the new width
         [UIView animateWithDuration:UIKitConstants.animationShortDuration
-                              delay:0.0
+                              delay:UIKitConstants.animationDelayZero
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             self.view.frame = frame;
-                             noteListViewController.rootView.frame = notesFrame;
-                         } completion:^(BOOL finished) {
-                             nil;
-                         }];
+                            noteListViewController.rootView.frame = notesFrame;
+                            self.view.frame = selfFrame;
+                            [self.view layoutIfNeeded];
+                         } completion:nil];
     } else {
-        self.view.frame = frame;
+        self.view.frame = selfFrame;
     }
-    
-    return;
 }
 
-- (void)doneEditingAction:(id)sender {
-    
-    if (_renameTag) {
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag] inSection:kSectionTags]];
-        [cell.tagNameTextField endEditing:YES];
-    }
-    
-    [self setEditing:NO canceled:NO];
+- (void)refreshEditTagsButtonForEditionState:(BOOL)editing {
+    NSString *title = editing ? NSLocalizedString(@"Done", nil) : NSLocalizedString(@"Edit", nil);
+    [self.tagsHeaderView.actionButton setTitle:title forState:UIControlStateNormal];
 }
 
--(void)openNoteListForTagName:(NSString *)tag {
+- (void)openNoteListForTagName:(NSString *)tag {
     
     BOOL fetchNeeded = NO;
 
@@ -462,7 +503,6 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark - UIGestureDelegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
     return YES;
 }
 
@@ -470,8 +510,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark - Tag Actions
 
 - (void)removeTagAtIndexPath:(NSIndexPath *)indexPath {
-    
-    Tag *tag = [self tagAtRow:indexPath.row];
+    Tag *tag = [self tagAtTableViewIndexPath:indexPath];
     if (!tag) {
         return;
     }
@@ -483,13 +522,11 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         [appDelegate.noteListViewController update];
     }
     
-    BOOL lastTag = [self numTags] == 1;
+    BOOL lastTag = [self numberOfTags] == 1;
 
     if ([[SPObjectManager sharedManager] removeTag:tag] && !lastTag) {
-        
         [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
     } else {
         [self.tableView reloadData];
@@ -497,41 +534,38 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)renameTagAction:(Tag *)tag {
-    
-    if (_renameTag) {
-        
-        SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                                 inSection:kSectionTags]];
-        [cell.tagNameTextField endEditing:YES];
+    if (self.renameTag) {
+        SPTagListViewCell *cell = [self cellForTag:self.renameTag];
+        [cell.textField endEditing:YES];
     }
     
-    _renameTag = tag;
+    self.renameTag = tag;
     
     // begin editing the text field
     SPTagListViewCell *cell = [self cellForTag:tag];
-    
-    [cell setTextFieldEditable:YES];
-    [cell.tagNameTextField becomeFirstResponder];
+
+    cell.textField.enabled = YES;
+    [cell.textField becomeFirstResponder];
 }
 
 
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
     BOOL endEditing = NO;
-    if ([string hasPrefix:@" "]) {
-        string = nil;
+    NSString *replacementString = string;
+
+    if ([replacementString hasPrefix:@" "]) {
+        replacementString = nil;
         endEditing = YES;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
+    } else if ([replacementString rangeOfString:@" "].location != NSNotFound) {
+        replacementString = [replacementString substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
         endEditing = YES;
     }
     
-    if (string) {
+    if (replacementString) {
         [textField setText:[textField.text stringByReplacingCharactersInRange:range
-                                                              withString:string]];
+                                                                   withString:replacementString]];
     }
     
     if (endEditing) {
@@ -543,23 +577,18 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    SPTagListViewCell *cell = (SPTagListViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:[self rowForTag:_renameTag]
-                                                                                                             inSection:kSectionTags]];
-    // deselect cell if editing
+    SPTagListViewCell *cell = [self cellForTag:self.renameTag];
     if (self.bEditing) {
         [cell setSelected:NO animated:YES];
     }
-    
-    
+
     // see if tag already exists, if not rename. If it does, revert back to original name
     BOOL renameTag = ![[SPObjectManager sharedManager] tagExists:textField.text];
     
     if (renameTag) {
-        
-        NSString *orignalTagName = _renameTag.name;
+        NSString *orignalTagName = self.renameTag.name;
         NSString *newTagName = textField.text;
-        [[SPObjectManager sharedManager] editTag:_renameTag title:newTagName];
+        [[SPObjectManager sharedManager] editTag:self.renameTag title:newTagName];
         
         // see if this is the current tag
 		SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
@@ -569,17 +598,16 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
         }
     }
     else {
-        textField.text = _renameTag.name;
+        textField.text = self.renameTag.name;
     }
     
-    _renameTag = nil;
-    
-    [cell setTagNameText:textField.text];
-    [cell setTextFieldEditable:NO];
+    self.renameTag = nil;
+
+    cell.textField.text = textField.text;
+    cell.textField.enabled = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     [textField resignFirstResponder];
     return YES;
 }
@@ -588,28 +616,25 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark - SidePanelDelegate
 
 - (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
-    
     self.bVisible = NO;
     [self setEditing:NO canceled:YES];
     
 }
 - (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
-    
     self.bVisible = YES;
 }
 
 - (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
-
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.bVisible)
+        if (!self.bVisible) {
             [self.tableView reloadData];
+        }
     });
     
     return YES;
 }
 
 - (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
-
     contentInset.bottom = self.tableView.contentInset.bottom;
     self.tableView.contentInset = contentInset;
     self.tableView.scrollIndicatorInsets = contentInset;
@@ -623,10 +648,9 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     BOOL isAlphaSort = [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
     NSSortDescriptor *sortDescriptor;
     if (isAlphaSort) {
-        sortDescriptor = [[NSSortDescriptor alloc]
-                          initWithKey:@"name"
-                          ascending:YES
-                          selector:@selector(localizedCaseInsensitiveCompare:)];
+        sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                     ascending:YES
+                                                      selector:@selector(localizedCaseInsensitiveCompare:)];
     } else {
         sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
     }
@@ -635,15 +659,18 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)performFetch {
-    
     NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error])
-    {
+	if (![self.fetchedResultsController performFetch:&error]) {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
 	}
     
     [self.tableView reloadData];
+}
+
+- (void)refreshSortDescriptorsAndPerformFetch {
+    self.fetchedResultsController.fetchRequest.sortDescriptors = [self sortDescriptors];
+    [self performFetch];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -656,7 +683,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
     NSFetchRequest *fetchRequest = [NSFetchRequest new];
     fetchRequest.entity = entity;
-    [fetchRequest setFetchBatchSize:20];
+    fetchRequest.fetchBatchSize = SPTagListRequestBatchSize;
     fetchRequest.sortDescriptors = [self sortDescriptors];
 
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -672,16 +699,15 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 
-#pragma mark - Fetched results controller delegate
+#pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
     if (!self.bVisible) {
         return;
     }
     
     [self.reloadTimer invalidate];
-    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:SPTagListRefreshDelay
                                                         target:self
                                                       selector:@selector(delayedReloadData)
                                                       userInfo:nil
@@ -689,9 +715,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 }
 
 - (void)delayedReloadData {
-    
     [self.tableView reloadData];
-    
     [self.reloadTimer invalidate];
     self.reloadTimer = nil;
 }
@@ -700,127 +724,35 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 #pragma mark - KeyboardNotifications
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
+    CGRect keyboardFrame = [(NSValue *)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
     CGFloat keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
-    
-    CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = newFrame.size.height - keyboardHeight + SPSettingsButtonHeight;
-    
-    CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-         self.tableView.frame = newFrame;
+
+    contentInsets.bottom = keyboardHeight;
+    scrollInsets.bottom = keyboardHeight;
+
+    [UIView animateWithDuration:duration animations:^{
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollInsets;
      }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGRect newFrame = self.tableView.frame;
-    newFrame.size.height = self.view.superview.frame.size.height - self.view.frame.origin.y - SPSettingsButtonHeight;
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
 
-    CGFloat animationDuration = [(NSNumber *)[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    contentInsets.bottom = 0;
+    scrollInsets.bottom = 0;
+
+    CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
-    [UIView animateWithDuration:animationDuration animations:^{
-         self.tableView.frame = newFrame;
+    [UIView animateWithDuration:duration animations:^{
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollInsets;
      }];
-}
-
-
-#pragma mark - Interface Setup
-
-- (CGFloat)thinLineSize {
-    return 1.0 / [[UIScreen mainScreen] scale];
-}
-
-- (UIButton *)buildSettingsButton {
-    settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [settingsButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [settingsButton setImage:[UIImage imageWithName:UIImageNameSettings] forState:UIControlStateNormal];
-    [settingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [settingsButton setContentEdgeInsets:SPButtonContentInsets];
-    [settingsButton setImageEdgeInsets:SPButtonImageInsets];
-    [settingsButton setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
-    [settingsButton addTarget:self action:@selector(settingsTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    footerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, settingsButton.frame.size.width, self.thinLineSize)];
-    footerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [settingsButton addSubview:footerSeparator];
-
-    return settingsButton;
-}
-
-- (UIView *)buildTableHeaderView {
-    CGRect headerFrame = CGRectMake(0, 0, 0, 121);
-    UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
-
-    allNotesButton = [self buildHeaderButton];
-    allNotesButton.frame = CGRectMake(0, 10, headerView.frame.size.width, 32);
-    [allNotesButton setImage:[[UIImage imageWithName:UIImageNameAllNotes] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [allNotesButton setTitle:NSLocalizedString(@"All Notes", nil) forState:UIControlStateNormal];
-    [allNotesButton addTarget:self action:@selector(allNotesTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:allNotesButton];
-
-    trashButton = [self buildHeaderButton];
-    trashButton.frame = CGRectMake(0, 42, headerView.frame.size.width, 32);
-    [trashButton setImage:[[UIImage imageWithName:UIImageNameTrash] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [trashButton setTitle:NSLocalizedString(@"Trash-noun", nil) forState:UIControlStateNormal];
-    [trashButton addTarget:self action:@selector(trashTap:) forControlEvents:UIControlEventTouchUpInside];
-
-    [headerView addSubview:trashButton];
-
-    headerSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 84 - self.thinLineSize, 0, self.thinLineSize)];
-    headerSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    headerSeparator.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
-    [headerView addSubview:headerSeparator];
-
-    UIView *tagsView = [[UIView alloc] initWithFrame:CGRectMake(0, 101, 0, 20)];
-    tagsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 0, 20)];
-    [tagsLabel setFont: [UIFont systemFontOfSize: 14]];
-    tagsLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
-    tagsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [tagsView addSubview:tagsLabel];
-
-    editTagsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    editTagsButton.frame = CGRectMake(0, 0, 0, 20);
-    editTagsButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
-    editTagsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [editTagsButton.titleLabel setFont: [UIFont systemFontOfSize: 14]];
-    editTagsButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [editTagsButton setTitle:NSLocalizedString(@"Edit", nil) forState:UIControlStateNormal];
-    [editTagsButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
-    [tagsView addSubview:editTagsButton];
-
-    [self updateHeaderColors];
-
-    [headerView addSubview:tagsView];
-    
-    return headerView;
-}
-
-- (UIButton *)buildHeaderButton {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [button setContentEdgeInsets:SPButtonContentInsets];
-    [button setImageEdgeInsets:SPButtonImageInsets];
-    [button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-
-    return button;
-}
-
-- (void)updateSortOrder:(id)sender {
-    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[self sortDescriptors]];
-    
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    [self.tableView reloadData];
 }
 
 @end

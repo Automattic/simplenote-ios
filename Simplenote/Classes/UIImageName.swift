@@ -23,6 +23,7 @@ enum UIImageName: Int, CaseIterable {
     case settings
     case share
     case shared
+    case tag
     case trash
     case navigationBarBackground
     case navigationBarBackgroundPrompt
@@ -75,6 +76,8 @@ extension UIImageName {
             return "icon_share"
         case .shared:
             return "icon_shared"
+        case .tag:
+            return "icon_tag"
         case .trash:
             return "icon_trash"
         case .navigationBarBackground:

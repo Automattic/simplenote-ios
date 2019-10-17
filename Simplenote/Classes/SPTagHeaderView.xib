@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="t2U-RY-Ulw" customClass="SPTagHeaderView" customModule="Simplenote" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHp-el-CsD">
+                    <rect key="frame" x="16" y="5" width="37.5" height="24"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwE-o8-Mhf">
+                    <rect key="frame" x="347" y="5" width="51" height="24"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="aHp-el-CsD" secondAttribute="bottom" constant="5" id="9NS-Yr-ko2"/>
+                <constraint firstItem="FwE-o8-Mhf" firstAttribute="top" secondItem="t2U-RY-Ulw" secondAttribute="top" constant="5" id="HtV-gc-dUn"/>
+                <constraint firstItem="aHp-el-CsD" firstAttribute="leading" secondItem="t2U-RY-Ulw" secondAttribute="leading" constant="16" id="Kac-Yu-sTd"/>
+                <constraint firstItem="HJL-3a-kMx" firstAttribute="bottom" secondItem="FwE-o8-Mhf" secondAttribute="bottom" constant="5" id="LAc-OD-rdq"/>
+                <constraint firstAttribute="trailing" secondItem="FwE-o8-Mhf" secondAttribute="trailing" constant="16" id="XsG-YJ-tsE"/>
+                <constraint firstItem="FwE-o8-Mhf" firstAttribute="centerY" secondItem="t2U-RY-Ulw" secondAttribute="centerY" id="hnq-Tl-QsJ"/>
+                <constraint firstItem="aHp-el-CsD" firstAttribute="top" secondItem="t2U-RY-Ulw" secondAttribute="top" constant="5" id="iXn-aZ-RBC"/>
+                <constraint firstItem="FwE-o8-Mhf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aHp-el-CsD" secondAttribute="trailing" constant="10" id="nZZ-mB-RMj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="HJL-3a-kMx"/>
+            <connections>
+                <outlet property="actionButton" destination="FwE-o8-Mhf" id="YNd-cV-4oq"/>
+                <outlet property="titleLabel" destination="aHp-el-CsD" id="uxr-qy-pBU"/>
+            </connections>
+            <point key="canvasLocation" x="-71.014492753623188" y="-772.76785714285711"/>
+        </view>
+    </objects>
+</document>
