@@ -54,7 +54,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
-@property (nonatomic, assign) BOOL                          bEditing;
 @property (nonatomic, assign) BOOL                          bVisible;
 
 @end
@@ -99,8 +98,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self stopListeningToKeyboardNotifications];
-    self.bVisible = NO;
     [self setEditing:NO canceled:YES];
+    self.bVisible = NO;
 }
 
 
@@ -194,7 +193,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 #pragma mark - Button actions
 
 - (void)editTagsTap:(UIButton *)sender {
-    BOOL newState = !self.bEditing;
+    BOOL newState = !self.isEditing;
     if (newState) {
         [SPTracker trackTagEditorAccessed];
     }
@@ -356,7 +355,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
-    return self.bEditing && isTagRow ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+    return isTagRow && tableView.isEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -467,7 +466,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)didSelectTagAtIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
-    if (self.bEditing) {
+    if (self.isEditing) {
         [SPTracker trackTagRowRenamed];
         [self renameTagAction:tag];
     } else {
@@ -512,13 +511,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
-    if (self.bEditing == editing) {
-        return;
-    }
-    
-    self.bEditing = editing;
+    [super setEditing:editing animated:YES];
     [self.tableView setEditing:editing animated:YES];
-
     [self refreshEditTagsButtonForEditionState:editing];
 }
 
@@ -627,7 +621,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     SPTagListViewCell *cell = [self cellForTag:self.renameTag];
-    if (self.bEditing) {
+    if (self.isEditing) {
         [cell setSelected:NO animated:YES];
     }
 
