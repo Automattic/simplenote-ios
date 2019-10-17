@@ -128,6 +128,10 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (BOOL)shouldAutorotate
 {
+    if (self.isMainViewPanning) {
+        return NO;
+    }
+
     return [self.visibleViewController shouldAutorotate];
 }
 
