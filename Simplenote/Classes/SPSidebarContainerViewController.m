@@ -85,7 +85,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 
-
 #pragma mark - Dynamic Properties
 
 - (UIView *)mainView
@@ -103,14 +102,18 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     return self.isMenuViewVisible ? self.menuViewController : self.mainViewController;
 }
 
-- (UIView *)mainChildView
+- (UINavigationController *)mainNavigationController
 {
-    if ([self.mainViewController isKindOfClass:UINavigationController.class] == false) {
-        return self.mainView;
+    if (![self.mainViewController isKindOfClass:UINavigationController.class]) {
+        return nil;
     }
 
-    UINavigationController *navigationController = (UINavigationController *)self.mainViewController;
-    return navigationController.visibleViewController.view ?: self.mainView;
+    return (UINavigationController *)self.mainViewController;
+}
+
+- (UIView *)mainChildView
+{
+    return self.mainNavigationController.visibleViewController.view ?: self.mainView;
 }
 
 
@@ -188,12 +191,56 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 #pragma mark - Gestures
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recognizer
+{
+    if (recognizer != self.panGestureRecognizer) {
+        return YES;
+    }
+
+    // Scenario A: Menu is visible and in being edited
+    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
+        return NO;
+    }
+
+    // Scenario B: Main is visible, but there are multiple viewControllers in its hierarchy
+    if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
+        return NO;
+    }
+
+    // Scenario C: Main is visible, but the delegate says NO, NO!
+    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
+        return NO;
+    }
+
+    CGPoint translation = [self.panGestureRecognizer translationInView:self.panGestureRecognizer.view];
+
+    // Scenario D: It's a Vertical Swipe
+    if (ABS(translation.x) < ABS(translation.y)) {
+        return NO;
+    }
+
+    // Scenario E: Menu is visible, and we get a left swipe
+    if (self.isMenuViewVisible && translation.x > 0) {
+        return NO;
+    }
+
+    // Scenario F: Menu is NOT visible, and we get a right swipe
+    if (!self.isMenuViewVisible && translation.x < 0) {
+        return NO;
+    }
+
+    return YES;
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    // Why is this needed:
-    // UITableView's swipe gestures might require our Pan gesture to fail. Capisci?
-    //
-    return YES;
+    // Why is this needed: UITableView's swipe gestures might require our Pan gesture to fail. Capisci?
+    if (gestureRecognizer != self.panGestureRecognizer) {
+        return YES;
+    }
+
+    // Whenever we're actually panning, stop this!
+    return !self.isMainViewPanning;
 }
 
 
@@ -296,6 +343,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (void)toggleSidePanel
 {
+    [SPTracker trackSidebarSidebarPanned];
+
     if (self.isMenuViewVisible) {
         [self hideSidePanelAnimated:YES];
     } else {
