@@ -39,6 +39,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     if (self) {
         self.mainViewController = mainViewController;
         self.menuViewController = menuViewController;
+        self.automaticallyMatchMenuInsetsWithMainInsets = YES;
 
         [self configureMainView];
         [self configurePanGestureRecognizer];
@@ -364,7 +365,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 - (void)beginDisplayMenuTransition
 {
     [self.delegate sidebarContainerWillDisplayMenu:self];
-    self.menuViewController.additionalSafeAreaInsets = self.mainChildView.safeAreaInsets;
+    [self ensureMenuTableViewInsetsMatchMainViewInsets];
     [self.menuViewController beginAppearanceTransition:YES animated:YES];
 }
 
@@ -386,6 +387,40 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     [self.delegate sidebarContainerDidHideMenu:self];
     [self.menuViewController endAppearanceTransition];
     [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
+}
+
+
+#pragma mark - Private Helpers
+
+/// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
+/// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
+///
+- (void)automaticallyMatchMenuInsetsWithMainInsets
+{
+    UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
+    UITableView* menuTableView = self.menuChildTableView;
+
+    if (!self.automaticallyMatchMenuInsetsWithMainInsets || menuTableView == nil) {
+        return;
+    }
+
+    UIEdgeInsets contentInsets = menuTableView.contentInset;
+    UIEdgeInsets scrollIndicatorInsets = menuTableView.scrollIndicatorInsets;
+
+    contentInsets.top = mainSafeInsets.top;
+    contentInsets.bottom = mainSafeInsets.bottom;
+
+    scrollIndicatorInsets.top = mainSafeInsets.top;
+    scrollIndicatorInsets.bottom = mainSafeInsets.bottom + menuTableView.sectionFooterHeight;
+
+    if (UIEdgeInsetsEqualToEdgeInsets(menuTableView.contentInset, contentInsets)) {
+        return;
+    }
+
+    menuTableView.contentInset = contentInsets;
+    menuTableView.scrollIndicatorInsets = scrollIndicatorInsets;
+
+    [menuTableView scrollToTopWithAnimation:NO];
 }
 
 
@@ -418,12 +453,12 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
 
-                         self.mainView.frame = newMainViewFrame;
-                         self.menuView.frame = newMenuViewFrame;
+                        self.mainView.frame = newMainViewFrame;
+                        self.menuView.frame = newMenuViewFrame;
 
                      } completion:^(BOOL finished) {
 
-                         [self endDisplayMenuTransition];
+                        [self endDisplayMenuTransition];
                         self.isMenuViewVisible = YES;
                      }];
 }
@@ -445,14 +480,14 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
 
-                         self.mainView.frame = newMainViewFrame;
-                         self.menuView.frame = newMenuViewFrame;
+                        self.mainView.frame = newMainViewFrame;
+                        self.menuView.frame = newMenuViewFrame;
 
                      } completion:^(BOOL finished) {
 
-                         [self endHideMenuTransition];
-                         self.isMenuViewVisible = NO;
-                         [UIViewController attemptRotationToDeviceOrientation];
+                        [self endHideMenuTransition];
+                        self.isMenuViewVisible = NO;
+                        [UIViewController attemptRotationToDeviceOrientation];
                      }];
 }
 
