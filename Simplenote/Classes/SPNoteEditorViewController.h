@@ -10,7 +10,7 @@
 @class SPEditorTextView;
 @class SPOutsideTouchView;
 
-@interface SPNoteEditorViewController : UIViewController  <UITextViewDelegate, SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
     
     // Other Objects
     NSTimer *saveTimer;
