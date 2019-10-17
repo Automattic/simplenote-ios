@@ -197,25 +197,25 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return YES;
     }
 
-    // Scenario A: Menu is visible and in being edited
-    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
+    CGPoint translation = [self.panGestureRecognizer translationInView:self.panGestureRecognizer.view];
+
+    // Scenario A: It's a Vertical Swipe
+    if (ABS(translation.x) < ABS(translation.y)) {
         return NO;
     }
 
-    // Scenario B: Main is visible, but there are multiple viewControllers in its hierarchy
+    // Scenario B: Menu is NOT visible, and we get a right swipe
+    if (!self.isMenuViewVisible && translation.x < 0) {
+        return NO;
+    }
+
+    // Scenario C: Main is visible, but there are multiple viewControllers in its hierarchy
     if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
         return NO;
     }
 
-    // Scenario C: Main is visible, but the delegate says NO, NO!
+    // Scenario D: Main is visible, but the delegate says NO, NO!
     if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
-        return NO;
-    }
-
-    CGPoint translation = [self.panGestureRecognizer translationInView:self.panGestureRecognizer.view];
-
-    // Scenario D: It's a Vertical Swipe
-    if (ABS(translation.x) < ABS(translation.y)) {
         return NO;
     }
 
@@ -224,8 +224,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return NO;
     }
 
-    // Scenario F: Menu is NOT visible, and we get a right swipe
-    if (!self.isMenuViewVisible && translation.x < 0) {
+    // Scenario F: Menu is visible and in being edited
+    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
         return NO;
     }
 
@@ -239,7 +239,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return YES;
     }
 
-    // Whenever we're actually panning, stop this!
+    // Whenever we're actually panning: In the name of your king, stop this madness!
     return !self.isMainViewPanning;
 }
 
@@ -263,13 +263,17 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         BOOL exceededTranslationThreshold = ABS(translation.x) >= minimumTranslationThreshold;
         BOOL exceededVelocityThreshold = ABS(velocity.x) > SPSidebarContainerMinimumVelocityThreshold;
         BOOL exceededGestureThreshold = exceededTranslationThreshold || exceededVelocityThreshold;
+        BOOL directionTowardsRight = velocity.x > 0;
+        BOOL directionTowardsLeft = !directionTowardsRight;
 
-        if ((!self.isMenuViewVisible && exceededGestureThreshold) || (self.isMenuViewVisible && !exceededGestureThreshold)) {
+        if ((self.isMenuViewVisible && exceededGestureThreshold && directionTowardsLeft) ||
+            (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)))
+        {
+            [self hideSidePanelAnimated:YES];
+        } else {
             [self showSidePanel];
-            return;
         }
 
-        [self hideSidePanelAnimated:YES];
         return;
 
     } else if (gesture.state != UIGestureRecognizerStateBegan) {
