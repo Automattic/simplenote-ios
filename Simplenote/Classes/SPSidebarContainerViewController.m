@@ -410,8 +410,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     contentInsets.top = mainSafeInsets.top;
     contentInsets.bottom = mainSafeInsets.bottom;
 
+    // Yes. Not setting the bottomInsets on purpose.
     scrollIndicatorInsets.top = mainSafeInsets.top;
-    scrollIndicatorInsets.bottom = mainSafeInsets.bottom + menuTableView.sectionFooterHeight;
 
     if (UIEdgeInsetsEqualToEdgeInsets(menuTableView.contentInset, contentInsets)) {
         return;
