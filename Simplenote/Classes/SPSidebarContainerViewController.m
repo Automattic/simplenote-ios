@@ -395,7 +395,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 /// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
 /// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
 ///
-- (void)automaticallyMatchMenuInsetsWithMainInsets
+- (void)ensureMenuTableViewInsetsMatchMainViewInsets
 {
     UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
     UITableView* menuTableView = self.menuChildTableView;
