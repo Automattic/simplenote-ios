@@ -209,18 +209,18 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return NO;
     }
 
-    // Scenario C: Main is visible, but there are multiple viewControllers in its hierarchy
+    // Scenario C: Menu is visible, and we get a left swipe
+    if (self.isMenuViewVisible && translation.x > 0) {
+        return NO;
+    }
+
+    // Scenario D: Main is visible, but there are multiple viewControllers in its hierarchy
     if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
         return NO;
     }
 
-    // Scenario D: Main is visible, but the delegate says NO, NO!
+    // Scenario E: Main is visible, but the delegate says NO, NO!
     if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
-        return NO;
-    }
-
-    // Scenario E: Menu is visible, and we get a left swipe
-    if (self.isMenuViewVisible && translation.x > 0) {
         return NO;
     }
 
@@ -266,6 +266,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         BOOL directionTowardsRight = velocity.x > 0;
         BOOL directionTowardsLeft = !directionTowardsRight;
 
+        // We'll consider the `intent` in this OP, regardless of the distance covered (AKA Velocity Direction).
         if ((self.isMenuViewVisible && exceededGestureThreshold && directionTowardsLeft) ||
             (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)))
         {
@@ -326,8 +327,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (void)initializeMainViewPanning
 {
-    [SPTracker trackSidebarSidebarPanned];
-
     [self.delegate sidebarContainerWillDisplayMenu:self];
 
     self.menuViewController.additionalSafeAreaInsets = self.mainChildView.safeAreaInsets;
