@@ -95,7 +95,24 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     return self.menuViewController.view;
 }
 
-- (UIViewController *)visibleViewController
+- (UIView *)mainChildView
+{
+    // We assume that the MainViewController might actually be a UINavigationController, and attempt to
+    // grab the first ViewController's View.
+    return self.mainNavigationController.viewControllers.firstObject.view ?: self.mainView;
+}
+
+- (UITableView *)mainChildTableView
+{
+    return [self.mainChildView firstSubviewAsTableView];
+}
+
+- (UITableView *)menuChildTableView
+{
+    return [self.menuView firstSubviewAsTableView];
+}
+
+- (UIViewController *)activeViewController
 {
     return self.isMenuViewVisible ? self.menuViewController : self.mainViewController;
 }
@@ -107,11 +124,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     }
 
     return (UINavigationController *)self.mainViewController;
-}
-
-- (UIView *)mainChildView
-{
-    return self.mainNavigationController.visibleViewController.view ?: self.mainView;
 }
 
 
@@ -132,7 +144,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return NO;
     }
 
-    return [self.visibleViewController shouldAutorotate];
+    return [self.activeViewController shouldAutorotate];
 }
 
 
@@ -216,18 +228,23 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return NO;
     }
 
-    // Scenario D: Main is visible, but there are multiple viewControllers in its hierarchy
+    // Scenario D: Menu or Main are being dragged
+    if (self.mainChildTableView.dragging || self.menuChildTableView.dragging) {
+        return NO;
+    }
+
+    // Scenario E: Main is visible, but there are multiple viewControllers in its hierarchy
     if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
         return NO;
     }
 
-    // Scenario E: Main is visible, but the delegate says NO, NO!
-    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
+    // Scenario F: Menu is visible and is being edited
+    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
         return NO;
     }
 
-    // Scenario F: Menu is visible and in being edited
-    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
+    // Scenario G: Main is visible, but the delegate says NO, NO!
+    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
         return NO;
     }
 
@@ -299,6 +316,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         self.mainViewStartingOrigin = self.mainView.frame.origin;
         self.menuPanelStartingOrigin = self.menuView.frame.origin;
         self.isMainViewPanning = YES;
+        [SPTracker trackSidebarSidebarPanned];
 
     } else {
         CGFloat translation = [gesture translationInView:self.mainView].x;
@@ -377,8 +395,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (void)toggleSidePanel
 {
-    [SPTracker trackSidebarSidebarPanned];
-
     if (self.isMenuViewVisible) {
         [self hideSidePanelAnimated:YES];
     } else {
