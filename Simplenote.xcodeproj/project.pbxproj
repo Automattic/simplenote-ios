@@ -211,6 +211,8 @@
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */; };
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
+		B5B85BA32351730700AD5221 /* NSPredicate+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */; };
+		B5B85BA5235173BF00AD5221 /* NSPredicateSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */; };
 		B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */; };
 		B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */; };
 		B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */; };
@@ -503,6 +505,8 @@
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
 		B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "SimplenoteShare-AppStore.entitlements"; sourceTree = "<group>"; };
+		B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSPredicate+Simplenote.swift"; path = "Classes/NSPredicate+Simplenote.swift"; sourceTree = "<group>"; };
+		B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicateSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5B8AE771AB9ECF00082775D /* SPRatingsPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsPromptView.h; path = Classes/SPRatingsPromptView.h; sourceTree = "<group>"; };
 		B5B8AE781AB9ECF00082775D /* SPRatingsPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsPromptView.m; path = Classes/SPRatingsPromptView.m; sourceTree = "<group>"; };
 		B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
@@ -954,7 +958,7 @@
 		B52F35D422F3573300724793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
+				B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1007,6 +1011,7 @@
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
+				B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
@@ -1069,6 +1074,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5B85BA6235173D900AD5221 /* Helpers */,
 				B52F35D422F3573300724793 /* Extensions */,
 				B5B9AB4122EA6FE1001CB0AD /* Themes */,
 				B55AC57822D27B7F00D8CEB2 /* Settings */,
@@ -1077,6 +1083,14 @@
 				B582189B1FCC45170094ECA1 /* Info.plist */,
 			);
 			path = SimplenoteTests;
+			sourceTree = "<group>";
+		};
+		B5B85BA6235173D900AD5221 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		B5B8AE7B1AB9ECF80082775D /* Ratings */ = {
@@ -1922,6 +1936,7 @@
 				46A3C98117DFA81A002865AE /* VSTheme.m in Sources */,
 				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */,
+				B5B85BA32351730700AD5221 /* NSPredicate+Simplenote.swift in Sources */,
 				B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */,
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
 				46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */,
@@ -2030,6 +2045,7 @@
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */,
+				B5B85BA5235173BF00AD5221 /* NSPredicateSimplenoteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,17 +18,18 @@ enum UIImageName: Int, CaseIterable {
     case history
     case info
     case menu
+    case navigationBarBackground
+    case navigationBarBackgroundPrompt
     case newNote
+    case onePassword
     case pin
     case settings
     case share
     case shared
     case tag
-    case trash
-    case navigationBarBackground
-    case navigationBarBackgroundPrompt
-    case onePassword
     case tagViewDeletion
+    case trash
+    case untagged
     case visibilityOn
     case visibilityOff
 }
@@ -66,8 +67,14 @@ extension UIImageName {
             return "icon_info"
         case .menu:
             return "icon_menu"
+        case .navigationBarBackground:
+            return "navigation_bar_background"
+        case .navigationBarBackgroundPrompt:
+            return "navigation_bar_background_prompt"
         case .newNote:
             return "icon_new_note"
+        case .onePassword:
+            return "icon_onepassword"
         case .pin:
             return "icon_pin"
         case .settings:
@@ -80,12 +87,8 @@ extension UIImageName {
             return "icon_tag"
         case .trash:
             return "icon_trash"
-        case .navigationBarBackground:
-            return "navigation_bar_background"
-        case .navigationBarBackgroundPrompt:
-            return "navigation_bar_background_prompt"
-        case .onePassword:
-            return "icon_onepassword"
+        case .untagged:
+            return "icon_untagged"
         case .tagViewDeletion:
             return "button_delete_small"
         case .visibilityOn:

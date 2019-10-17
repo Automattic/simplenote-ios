@@ -14,9 +14,10 @@
 // MARK: - Constants
 //
 typedef NS_ENUM(NSInteger, SPTagsListSection) {
-    SPTagsListSectionSystem = 0,
-    SPTagsListSectionTags   = 1,
-    SPTagsListSectionCount  = 2
+    SPTagsListSectionSystem     = 0,
+    SPTagsListSectionTags       = 1,
+    SPTagsListSectionBottom     = 2,
+    SPTagsListSectionCount      = 3
 };
 
 typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
@@ -26,8 +27,15 @@ typedef NS_ENUM(NSInteger, SPTagsListSystemRow) {
     SPTagsListSystemRowCount    = 3
 };
 
-static const NSInteger SPTagListRequestBatchSize    = 20;
-static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
+typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
+    SPTagsListBottomRowUntagged = 0,
+    SPTagsListBottomRowCount    = 1
+};
+
+static const NSInteger SPTagListRequestBatchSize        = 20;
+static const NSTimeInterval SPTagListRefreshDelay       = 0.5;
+static const NSInteger SPTagListEmptyStateSectionCount  = 1;
+
 
 
 // MARK: - Private
@@ -213,22 +221,24 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return SPTagsListSectionCount;
+    return (self.numberOfTags == 0) ? SPTagListEmptyStateSectionCount : SPTagsListSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     switch (section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             return SPTagsListSystemRowCount;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             return self.numberOfTags;
-        }
-        default: {
+
+        case SPTagsListSectionBottom:
+            return SPTagsListBottomRowCount;
+
+        default:
             NSAssert(false, @"Unsupported section");
             return 0;
-        }
     }
 }
 
@@ -263,14 +273,17 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self didSelectSystemRowAtIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self didSelectTagAtIndexPath:indexPath];
             break;
-        }
+
+        case SPTagsListSectionBottom:
+            [self didSelectBottomRowAtIndex:indexPath];
+            break;
     }
 }
 
@@ -309,14 +322,17 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 
 - (void)configureCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case SPTagsListSectionSystem: {
+        case SPTagsListSectionSystem:
             [self configureSystemCell:cell atIndexPath:indexPath];
             break;
-        }
-        case SPTagsListSectionTags: {
+
+        case SPTagsListSectionTags:
             [self configureTagCell:cell atIndexPath:indexPath];
             break;
-        }
+
+        case SPTagsListSectionBottom:
+            [self configureBottomCell:cell atIndexPath:indexPath];
+            break;
     }
 }
 
@@ -326,10 +342,12 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
             cell.textField.text = NSLocalizedString(@"All Notes", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameAllNotes];
             break;
+
         case SPTagsListSystemRowTrash:
             cell.textField.text = NSLocalizedString(@"Trash-noun", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameTrash];
             break;
+
         case SPTagsListSystemRowSettings:
             cell.textField.text = NSLocalizedString(@"Settings", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameSettings];
@@ -347,6 +365,11 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
     cell.delegate = self;
 }
 
+- (void)configureBottomCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    cell.textField.text = NSLocalizedString(@"Untagged Notes", @"Allows selecting notes with no tags");
+    cell.iconImage = [UIImage imageWithName:UIImageNameUntagged];
+}
+
 - (BOOL)shouldSelectCellAtIndexPath:(NSIndexPath *)indexPath {
     NSString *selectedTag = SPAppDelegate.sharedDelegate.selectedTag;
 
@@ -356,13 +379,17 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
                 case SPTagsListSystemRowAllNotes:
                     return selectedTag == nil;
                 case SPTagsListSystemRowTrash:
-                    return selectedTag == kSimplenoteTagTrashKey;
+                    return selectedTag == kSimplenoteTrashKey;
                 case SPTagsListSystemRowSettings:
                     return NO;
             }
             break;
+
         case SPTagsListSectionTags:
             return selectedTag == [self tagAtTableViewIndexPath:indexPath].name;
+
+        case SPTagsListSectionBottom:
+            return selectedTag == kSimplenoteUntaggedKey;
     }
 
     return NO;
@@ -373,21 +400,18 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
 
 - (void)didSelectSystemRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case SPTagsListSystemRowAllNotes: {
+        case SPTagsListSystemRowAllNotes:
             [self allNotesWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowTrash: {
+        case SPTagsListSystemRowTrash:
             [self trashWasPressed];
             break;
-        }
 
-        case SPTagsListSystemRowSettings: {
+        case SPTagsListSystemRowSettings:
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
             [self settingsWasPressed];
             break;
-        }
     }
 }
 
@@ -403,13 +427,18 @@ static const NSTimeInterval SPTagListRefreshDelay   = 0.5;
     }
 }
 
+- (void)didSelectBottomRowAtIndex:(NSIndexPath *)indexPath {
+    [SPTracker trackListUntaggedViewed];
+    [self openNoteListForTagName:kSimplenoteUntaggedKey];
+}
+
 - (void)allNotesWasPressed {
     [self openNoteListForTagName:nil];
 }
 
 - (void)trashWasPressed {
     [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:kSimplenoteTagTrashKey];
+    [self openNoteListForTagName:kSimplenoteTrashKey];
 }
 
 - (void)settingsWasPressed {

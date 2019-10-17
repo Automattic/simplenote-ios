@@ -72,8 +72,10 @@ extension SPNoteListViewController {
         let selectedTag = SPAppDelegate.shared().selectedTag ?? NSLocalizedString("All Notes", comment: "Title: No filters applied")
 
         switch selectedTag {
-        case kSimplenoteTagTrashKey:
+        case kSimplenoteTrashKey:
             title = NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
+        case kSimplenoteUntaggedKey:
+            title = NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
         default:
             title = selectedTag
         }

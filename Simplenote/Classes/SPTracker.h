@@ -42,6 +42,7 @@
 + (void)trackListTrashEmptied;
 + (void)trackListNotesSearched;
 + (void)trackListTagViewed;
++ (void)trackListUntaggedViewed;
 + (void)trackTrashViewed;
 
 #pragma mark - Preferences
