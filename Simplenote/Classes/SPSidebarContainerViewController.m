@@ -281,6 +281,37 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
             (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)));
 }
 
+/// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
+/// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
+///
+- (void)ensureMenuTableViewInsetsMatchMainViewInsets
+{
+    UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
+    UITableView* menuTableView = self.menuChildTableView;
+
+    if (!self.automaticallyMatchMenuInsetsWithMainInsets || menuTableView == nil) {
+        return;
+    }
+
+    UIEdgeInsets contentInsets = menuTableView.contentInset;
+    UIEdgeInsets scrollIndicatorInsets = menuTableView.scrollIndicatorInsets;
+
+    contentInsets.top = mainSafeInsets.top;
+    contentInsets.bottom = mainSafeInsets.bottom;
+
+    // Yes. Not setting the bottomInsets on purpose.
+    scrollIndicatorInsets.top = mainSafeInsets.top;
+
+    if (UIEdgeInsetsEqualToEdgeInsets(menuTableView.contentInset, contentInsets)) {
+        return;
+    }
+
+    menuTableView.contentInset = contentInsets;
+    menuTableView.scrollIndicatorInsets = scrollIndicatorInsets;
+
+    [menuTableView scrollToTopWithAnimation:NO];
+}
+
 
 #pragma mark - UIGestureRecognizers
 
@@ -390,40 +421,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 
-#pragma mark - Private Helpers
-
-/// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
-/// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
-///
-- (void)ensureMenuTableViewInsetsMatchMainViewInsets
-{
-    UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
-    UITableView* menuTableView = self.menuChildTableView;
-
-    if (!self.automaticallyMatchMenuInsetsWithMainInsets || menuTableView == nil) {
-        return;
-    }
-
-    UIEdgeInsets contentInsets = menuTableView.contentInset;
-    UIEdgeInsets scrollIndicatorInsets = menuTableView.scrollIndicatorInsets;
-
-    contentInsets.top = mainSafeInsets.top;
-    contentInsets.bottom = mainSafeInsets.bottom;
-
-    // Yes. Not setting the bottomInsets on purpose.
-    scrollIndicatorInsets.top = mainSafeInsets.top;
-
-    if (UIEdgeInsetsEqualToEdgeInsets(menuTableView.contentInset, contentInsets)) {
-        return;
-    }
-
-    menuTableView.contentInset = contentInsets;
-    menuTableView.scrollIndicatorInsets = scrollIndicatorInsets;
-
-    [menuTableView scrollToTopWithAnimation:NO];
-}
-
-
 #pragma mark - Public API
 
 - (void)toggleSidePanel
@@ -497,4 +494,3 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 @end
-
