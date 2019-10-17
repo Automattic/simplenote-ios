@@ -9,6 +9,7 @@
 -   iOS 11 Is now the minimum supported OS.
 -   Fixed a bug in which the Editor Colors might not be properly initialized
 -   Fixed a Search Highlight issue that affected the Notes List.
+-   Fixed an iOS 13 bug that caused links to be accidentally opened
 
 4.10.0
 ======
