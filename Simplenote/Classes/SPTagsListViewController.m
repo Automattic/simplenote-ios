@@ -97,8 +97,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self stopListeningToKeyboardNotifications];
     [self setEditing:NO canceled:YES];
+    [self stopListeningToKeyboardNotifications];
     self.bVisible = NO;
 }
 
@@ -511,6 +511,11 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
+    // Note: Neither super.setEditing nor tableView.setEditing will resign the first responder.
+    if (!editing) {
+        [self.view endEditing:YES];
+    }
+
     [super setEditing:editing animated:YES];
     [self.tableView setEditing:editing animated:YES];
     [self refreshEditTagsButtonForEditionState:editing];
