@@ -281,9 +281,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
                 return;
             }
 
-            if (![self ensureMainViewPanningIsInitialized]) {
-                return;
-            }
+            [self ensureMainViewPanningIsInitialized];
 
             self.mainViewStartingOrigin = self.mainView.frame.origin;
             self.menuPanelStartingOrigin = self.menuView.frame.origin;
@@ -312,18 +310,14 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 #pragma mark - Panning
 
-- (BOOL)ensureMainViewPanningIsInitialized
+- (void)ensureMainViewPanningIsInitialized
 {
     if (self.isPanningInitialized) {
-        return YES;
-    }
-
-    if (![self.delegate sidebarContainerShouldDisplayMenu:self]) {
-        return NO;
+        return;
     }
 
     [self initializeMainViewPanning];
-    return YES;
+    self.isPanningInitialized = YES;
 }
 
 - (void)initializeMainViewPanning
@@ -334,8 +328,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
     self.menuViewController.additionalSafeAreaInsets = self.mainChildView.safeAreaInsets;
     [self.menuViewController beginAppearanceTransition:YES animated:YES];
-
-    self.isPanningInitialized = YES;
 }
 
 
@@ -354,9 +346,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (void)showSidePanel
 {
-    if (![self ensureMainViewPanningIsInitialized]) {
-        return;
-    }
+    [self ensureMainViewPanningIsInitialized];
 
     CGRect newMainViewFrame = self.mainView.frame;
     newMainViewFrame.origin.x = SPSidebarContainerSidePanelWidth;
