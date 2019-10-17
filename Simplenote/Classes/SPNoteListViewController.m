@@ -917,8 +917,8 @@
 
 #pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer {
-
+- (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+{
     if (bShouldShowSidePanel) {
         bShouldShowSidePanel = NO;
         return YES;
@@ -928,8 +928,8 @@
     return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }
 
-- (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer {
-
+- (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = NO;
     self.tableView.userInteractionEnabled = NO;
     self.searchBar.userInteractionEnabled = NO;
@@ -944,13 +944,13 @@
     // NO-OP
 }
 
-- (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
-
+- (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer
+{
     [self updateNavigationBar];
 }
 
-- (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer {
-
+- (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = YES;
     self.tableView.userInteractionEnabled = YES;
     self.searchBar.userInteractionEnabled = YES;
