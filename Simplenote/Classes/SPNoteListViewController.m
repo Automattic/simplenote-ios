@@ -308,7 +308,7 @@
     bShouldShowSidePanel = YES;
 
     [SPTracker trackSidebarButtonPresed];
-    [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidePanel];
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidebar];
 }
 
 
@@ -915,7 +915,7 @@
 
 #pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)sidebarContainerShouldDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     if (bShouldShowSidePanel) {
         bShouldShowSidePanel = NO;
@@ -926,7 +926,7 @@
     return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }
 
-- (void)sidebarContainerWillDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (void)sidebarContainerWillDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     self.tableView.scrollEnabled = NO;
     self.tableView.userInteractionEnabled = NO;
@@ -935,17 +935,17 @@
     self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 
-- (void)sidebarContainerDidDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (void)sidebarContainerDidDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     // NO-OP
 }
 
-- (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (void)sidebarContainerWillHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     // NO-OP: The navigationBar's top right button is refreshed via the regular `Update` sequence.
 }
 
-- (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer
+- (void)sidebarContainerDidHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     self.tableView.scrollEnabled = YES;
     self.tableView.userInteractionEnabled = YES;

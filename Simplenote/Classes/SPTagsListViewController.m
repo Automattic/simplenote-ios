@@ -531,7 +531,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         [[SPAppDelegate sharedDelegate].noteListViewController update];
     }
 
-    [[[SPAppDelegate sharedDelegate] sidebarViewController] hideSidePanelAnimated:YES];
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] hideSidebarWithAnimation:YES];
 }
 
 

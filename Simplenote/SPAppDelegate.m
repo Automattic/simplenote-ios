@@ -171,7 +171,7 @@
     self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
-                                                                                   menuViewController:self.tagListViewController];
+                                                                                sidebarViewController:self.tagListViewController];
     self.sidebarViewController.delegate = self.noteListViewController;
 
     self.window.rootViewController = self.sidebarViewController;
@@ -550,7 +550,7 @@
 			[self removePin];
 			
 			// hide sidebar of notelist
-            [self.sidebarViewController hideSidePanelAnimated:NO];
+            [self.sidebarViewController hideSidebarWithAnimation:NO];
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
@@ -817,7 +817,7 @@
     [self dismissAllModalsAnimated:NO completion:nil];
     
     // If root tag list is currently being viewed, push All Notes instead
-    [self.sidebarViewController hideSidePanelAnimated:NO];
+    [self.sidebarViewController hideSidebarWithAnimation:NO];
     
     // On iPhone, make sure a note isn't currently being edited
     if (self.navigationController.visibleViewController == _noteEditorViewController) {

@@ -4,7 +4,7 @@
 #import <UIKit/UIKit.h>
 
 
-static const CGFloat SPSidebarMenuWidth                     = 300;
+static const CGFloat SPSidebarWidth                         = 300;
 static const CGFloat SPSidebarAnimationThreshold            = 0.15;
 static const CGFloat SPSidebarAnimationDuration             = 0.4;
 static const CGFloat SPSidebarAnimationDamping              = 1.5;
@@ -16,35 +16,35 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 @interface SPSidebarContainerViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIViewController              *menuViewController;
+@property (nonatomic, strong) UIViewController              *sidebarViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
 @property (nonatomic, strong) UIViewPropertyAnimator        *animator;
 @property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
 @property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
-@property (nonatomic, assign) BOOL                          isMenuViewVisible;
+@property (nonatomic, assign) BOOL                          isSidebarVisible;
 
 @end
 
 @implementation SPSidebarContainerViewController
 
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController
-                        menuViewController:(UIViewController *)menuViewController
+                     sidebarViewController:(UIViewController *)sidebarViewController
 {
     NSParameterAssert(mainViewController);
-    NSParameterAssert(menuViewController);
+    NSParameterAssert(sidebarViewController);
 
     self = [super init];
     if (self) {
         self.mainViewController = mainViewController;
-        self.menuViewController = menuViewController;
-        self.automaticallyMatchMenuInsetsWithMainInsets = YES;
+        self.sidebarViewController = sidebarViewController;
+        self.automaticallyMatchSidebarInsetsWithMainInsets = YES;
 
         [self configureMainView];
         [self configurePanGestureRecognizer];
         [self configureTapGestureRecognizer];
         [self configureViewControllerContainment];
         [self attachMainView];
-        [self attachMenuView];
+        [self attachSidebarView];
     }
     
     return self;
@@ -88,9 +88,9 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     return self.mainViewController.view;
 }
 
-- (UIView *)menuView
+- (UIView *)sidebarView
 {
-    return self.menuViewController.view;
+    return self.sidebarViewController.view;
 }
 
 - (UIView *)mainChildView
@@ -104,14 +104,14 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     return [self.mainChildView firstSubviewAsTableView];
 }
 
-- (UITableView *)menuChildTableView
+- (UITableView *)sideChildTableView
 {
-    return [self.menuView firstSubviewAsTableView];
+    return [self.sidebarView firstSubviewAsTableView];
 }
 
 - (UIViewController *)activeViewController
 {
-    return self.isMenuViewVisible ? self.menuViewController : self.mainViewController;
+    return self.isSidebarVisible ? self.sidebarViewController : self.mainViewController;
 }
 
 - (UINavigationController *)mainNavigationController
@@ -167,10 +167,10 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 - (void)configureViewControllerContainment
 {
     NSParameterAssert(self.mainViewController);
-    NSParameterAssert(self.menuViewController);
+    NSParameterAssert(self.sidebarViewController);
 
     [self addChildViewController:self.mainViewController];
-    [self addChildViewController:self.menuViewController];
+    [self addChildViewController:self.sidebarViewController];
 }
 
 - (void)attachMainView
@@ -180,19 +180,19 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [self.view addSubview:self.mainView];
 }
 
-- (void)attachMenuView
+- (void)attachSidebarView
 {
-    NSParameterAssert(self.menuView);
+    NSParameterAssert(self.sidebarView);
 
     CGRect sidePanelFrame = self.view.bounds;
-    sidePanelFrame.origin.x -= SPSidebarMenuWidth;
-    sidePanelFrame.size.width = SPSidebarMenuWidth;
+    sidePanelFrame.origin.x -= SPSidebarWidth;
+    sidePanelFrame.size.width = SPSidebarWidth;
 
-    UIView *menuView = self.menuView;
-    menuView.frame = sidePanelFrame;
-    menuView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+    UIView *sidebarView = self.sidebarView;
+    sidebarView.frame = sidePanelFrame;
+    sidebarView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 
-    [self.view insertSubview:menuView atIndex:0];
+    [self.view insertSubview:sidebarView atIndex:0];
 }
 
 
@@ -211,28 +211,28 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         return NO;
     }
 
-    // Scenario B: Menu is NOT visible, and we got a Left Swipe (OR) Menu is Visible and we got a Right Swipe
-    if ((!self.isMenuViewVisible && translation.x < 0) || (self.isMenuViewVisible && translation.x > 0)) {
+    // Scenario B: Sidebar is NOT visible, and we got a Left Swipe (OR) Sidebar is Visible and we got a Right Swipe
+    if ((!self.isSidebarVisible && translation.x < 0) || (self.isSidebarVisible && translation.x > 0)) {
         return NO;
     }
 
-    // Scenario C: Menu or Main are being dragged
-    if (self.mainChildTableView.dragging || self.menuChildTableView.dragging) {
+    // Scenario C: Sidebar or Main are being dragged
+    if (self.mainChildTableView.dragging || self.sideChildTableView.dragging) {
         return NO;
     }
 
-    // Scenario D: Main is visible, but there are multiple viewControllers in its hierarchy
-    if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
+    // Scenario D: Sidebar is not visible, but there are multiple viewControllers in its hierarchy
+    if (!self.isSidebarVisible && self.mainNavigationController.viewControllers.count > 1) {
         return NO;
     }
 
-    // Scenario E: Main is visible, but the delegate says NO, NO!
-    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
+    // Scenario E: Sidebar is not visible, but the delegate says NO, NO!
+    if (!self.isSidebarVisible && ![self.delegate sidebarContainerShouldDisplaySidebar:self]) {
         return NO;
     }
 
-    // Scenario F: Menu is visible and is being edited
-    if (self.isMenuViewVisible && self.menuViewController.isEditing) {
+    // Scenario F: Sidebar is visible and is being edited
+    if (self.isSidebarVisible && self.sidebarViewController.isEditing) {
         return NO;
     }
 
@@ -253,20 +253,20 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 #pragma mark - Helpers
 
-// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
-// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
+// The following method will (attempt) to match the Sidebar's TableViewInsets with the MainView's SafeAreaInsets.
+// Ideally, the first Sidebar row will be aligned against the SearchBar on its right hand side.
 //
-- (void)ensureMenuTableViewInsetsMatchMainViewInsets
+- (void)ensureSideTableViewInsetsMatchMainViewInsets
 {
     UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
-    UITableView* menuTableView = self.menuChildTableView;
+    UITableView* sideTableView = self.sideChildTableView;
 
-    if (!self.automaticallyMatchMenuInsetsWithMainInsets || menuTableView == nil) {
+    if (!self.automaticallyMatchSidebarInsetsWithMainInsets || sideTableView == nil) {
         return;
     }
 
-    UIEdgeInsets contentInsets = menuTableView.contentInset;
-    UIEdgeInsets scrollIndicatorInsets = menuTableView.scrollIndicatorInsets;
+    UIEdgeInsets contentInsets = sideTableView.contentInset;
+    UIEdgeInsets scrollIndicatorInsets = sideTableView.scrollIndicatorInsets;
 
     contentInsets.top = mainSafeInsets.top;
     contentInsets.bottom = mainSafeInsets.bottom;
@@ -274,30 +274,30 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     // Yes. Not setting the bottomInsets on purpose.
     scrollIndicatorInsets.top = mainSafeInsets.top;
 
-    if (UIEdgeInsetsEqualToEdgeInsets(menuTableView.contentInset, contentInsets)) {
+    if (UIEdgeInsetsEqualToEdgeInsets(sideTableView.contentInset, contentInsets)) {
         return;
     }
 
-    menuTableView.contentInset = contentInsets;
-    menuTableView.scrollIndicatorInsets = scrollIndicatorInsets;
+    sideTableView.contentInset = contentInsets;
+    sideTableView.scrollIndicatorInsets = scrollIndicatorInsets;
 
-    [menuTableView scrollToTopWithAnimation:NO];
+    [sideTableView scrollToTopWithAnimation:NO];
 }
 
 
 #pragma mark - UIViewPropertyAnimator
 
-- (UIViewPropertyAnimator *)animatorForMenuVisibility:(BOOL)visible
+- (UIViewPropertyAnimator *)animatorForSidebarVisibility:(BOOL)visible
 {
     CGRect mainFrame = self.mainView.frame;
-    CGRect menuFrame = self.menuView.frame;
+    CGRect sideFrame = self.sidebarView.frame;
 
-    if (self.isMenuViewVisible) {
+    if (self.isSidebarVisible) {
         mainFrame.origin.x = 0;
-        menuFrame.origin.x = -menuFrame.size.width;
+        sideFrame.origin.x = -sideFrame.size.width;
     } else {
-        mainFrame.origin.x = SPSidebarMenuWidth;
-        menuFrame.origin.x = 0;
+        mainFrame.origin.x = SPSidebarWidth;
+        sideFrame.origin.x = 0;
     }
 
     UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
@@ -308,7 +308,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
     [animator addAnimations:^{
         self.mainView.frame = mainFrame;
-        self.menuView.frame = menuFrame;
+        self.sidebarView.frame = sideFrame;
     }];
 
     return animator;
@@ -320,9 +320,9 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 - (void)panGestureWasRecognized:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        BOOL newVisibility = !self.isMenuViewVisible;
-        self.animator = [self animatorForMenuVisibility:newVisibility];
-        [self beginMenuTransition:newVisibility];
+        BOOL newVisibility = !self.isSidebarVisible;
+        self.animator = [self animatorForSidebarVisibility:newVisibility];
+        [self beginSidebarTransition:newVisibility];
 
         [SPTracker trackSidebarSidebarPanned];
 
@@ -332,24 +332,24 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
         if (self.animator.fractionComplete < SPSidebarAnimationThreshold) {
             self.animator.reversed = YES;
-            [self beginMenuTransition:self.isMenuViewVisible];
+            [self beginSidebarTransition:self.isSidebarVisible];
         } else {
-            self.isMenuViewVisible = !self.isMenuViewVisible;
+            self.isSidebarVisible = !self.isSidebarVisible;
         }
 
         __weak typeof(self) weakSelf = self;
-        BOOL didBecomeVisible = self.isMenuViewVisible;
+        BOOL didBecomeVisible = self.isSidebarVisible;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-            [weakSelf endMenuTransition:didBecomeVisible];
+            [weakSelf endSidebarTransition:didBecomeVisible];
         }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
-        CGFloat multiplier = self.isMenuViewVisible ? -1 : 1;
-        CGFloat progress = translation.x / SPSidebarMenuWidth * multiplier;
+        CGFloat multiplier = self.isSidebarVisible ? -1 : 1;
+        CGFloat progress = translation.x / SPSidebarWidth * multiplier;
 
         self.animator.fractionComplete = MAX(SPSidebarAnimationCompletionMin, MIN(SPSidebarAnimationCompletionMax, progress));
     }
@@ -357,73 +357,73 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)rootViewTapped:(UITapGestureRecognizer *)gesture
 {
-    [self hideSidePanelAnimated:YES];
+    [self hideSidebarWithAnimation:YES];
 }
 
 
 #pragma mark - Panning
 
-- (void)beginMenuTransition:(BOOL)isAppearing
+- (void)beginSidebarTransition:(BOOL)isAppearing
 {
     if (isAppearing) {
-        [self.delegate sidebarContainerWillDisplayMenu:self];
-        [self ensureMenuTableViewInsetsMatchMainViewInsets];
+        [self.delegate sidebarContainerWillDisplaySidebar:self];
+        [self ensureSideTableViewInsetsMatchMainViewInsets];
     } else {
-        [self.delegate sidebarContainerWillHideMenu:self];
+        [self.delegate sidebarContainerWillHideSidebar:self];
     }
 
-    [self.menuViewController beginAppearanceTransition:isAppearing animated:YES];
+    [self.sidebarViewController beginAppearanceTransition:isAppearing animated:YES];
 }
 
-- (void)endMenuTransition:(BOOL)appeared
+- (void)endSidebarTransition:(BOOL)appeared
 {
     if (appeared) {
-        [self.delegate sidebarContainerDidDisplayMenu:self];
+        [self.delegate sidebarContainerDidDisplaySidebar:self];
         [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
     } else {
-        [self.delegate sidebarContainerDidHideMenu:self];
+        [self.delegate sidebarContainerDidHideSidebar:self];
         [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
     }
 
-    [self.menuViewController endAppearanceTransition];
+    [self.sidebarViewController endAppearanceTransition];
 }
 
 
 #pragma mark - Public API
 
-- (void)toggleSidePanel
+- (void)toggleSidebar
 {
-    if (self.isMenuViewVisible) {
-        [self hideSidePanelAnimated:YES];
+    if (self.isSidebarVisible) {
+        [self hideSidebarWithAnimation:YES];
     } else {
-        [self showSidePanel];
+        [self showSidebar];
     }
 }
 
-- (void)showSidePanel
+- (void)showSidebar
 {
-    [self beginMenuTransition:YES];
+    [self beginSidebarTransition:YES];
 
-    UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:YES];
+    UIViewPropertyAnimator *animator = [self animatorForSidebarVisibility:YES];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endMenuTransition:YES];
-        self.isMenuViewVisible = YES;
+        [self endSidebarTransition:YES];
+        self.isSidebarVisible = YES;
     }];
 
     [animator startAnimation];
     self.animator = animator;
 }
 
-- (void)hideSidePanelAnimated:(BOOL)animated
+- (void)hideSidebarWithAnimation:(BOOL)animated
 {
-    [self beginMenuTransition:NO];
+    [self beginSidebarTransition:NO];
 
-    UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:NO];
+    UIViewPropertyAnimator *animator = [self animatorForSidebarVisibility:NO];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endMenuTransition:NO];
-        self.isMenuViewVisible = NO;
+        [self endSidebarTransition:NO];
+        self.isSidebarVisible = NO;
         [UIViewController attemptRotationToDeviceOrientation];
     }];
 
