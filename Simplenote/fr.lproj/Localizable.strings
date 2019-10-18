@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ajouter un tag";
 
+/* Title of option to display all notes */
+"All Notes" = "Toutes les notes";
+
 /* No comment provided by engineer. */
 "Cancel" = "Annuler";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Ajouter une adresse e-mail pour partager cette note avec quelqu'un. Vous pourrez ensuite  la modifier tous les deux.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Liste de notes condensée";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Créer une nouvelle note";
@@ -81,11 +87,17 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Affiche toutes les options de la note";
 
+/* Label to create a new note */
+"New note" = "Nouvelle note";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Pas de note";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Aucun résultat";
+
+/* No comment provided by engineer. */
+"Note not published" = "Note non publiée";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "Note publiée";
@@ -166,6 +178,9 @@
 
 /* Title of options screen */
 "Settings" = "Paramètres";
+
+/* No comment provided by engineer. */
+"Share note" = "Partager la note";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "Partager le contenu de cette note";
@@ -284,7 +299,7 @@ Vous pouvez accéder à toutes vos notes sur le web ou sur vos autres appareils.
 /* A short description to access the account creation screen */
 "Don't have an account?" = "Vous n'avez pas encore de compte ?";
 
-/* Hint displayed in the password field */
+/* Forgot Password */
 "Password" = "Mot de passe";
 
 /* Message displayed when password is invalid */
@@ -358,6 +373,9 @@ Vous pouvez accéder à toutes vos notes sur le web ou sur vos autres appareils.
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "En vous inscrivant, vous acceptez les conditions d'utilisation »";
+
+/* Forgot Password */
+"Forgot password? »" = "Mot de passe oublié ? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Que pensez-vous de Simplenote ?";
