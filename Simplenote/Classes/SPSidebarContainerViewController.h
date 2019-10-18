@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong, readonly) UIViewController        *sidebarViewController;
 @property (nonatomic, strong, readonly) UIViewController        *mainViewController;
+@property (nonatomic, assign, readonly) BOOL                    isSidebarVisible;
 @property (nonatomic, assign) BOOL                              automaticallyMatchSidebarInsetsWithMainInsets;
 @property (nonatomic, weak) id<SPSidebarContainerDelegate>      delegate;
 

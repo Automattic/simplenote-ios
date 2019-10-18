@@ -357,6 +357,10 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)rootViewTapped:(UITapGestureRecognizer *)gesture
 {
+    if (self.animator.isRunning) {
+        return;
+    }
+
     [self hideSidebarWithAnimation:YES];
 }
 
@@ -402,13 +406,17 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)showSidebar
 {
+    if (self.animator.isRunning || self.isSidebarVisible) {
+        return;
+    }
+
     [self beginSidebarTransition:YES];
 
     UIViewPropertyAnimator *animator = [self animatorForSidebarVisibility:YES];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endSidebarTransition:YES];
         self.isSidebarVisible = YES;
+        [self endSidebarTransition:YES];
     }];
 
     [animator startAnimation];
@@ -417,13 +425,17 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)hideSidebarWithAnimation:(BOOL)animated
 {
+    if (self.animator.isRunning || !self.isSidebarVisible) {
+        return;
+    }
+
     [self beginSidebarTransition:NO];
 
     UIViewPropertyAnimator *animator = [self animatorForSidebarVisibility:NO];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endSidebarTransition:NO];
         self.isSidebarVisible = NO;
+        [self endSidebarTransition:NO];
         [UIViewController attemptRotationToDeviceOrientation];
     }];
 
