@@ -708,11 +708,9 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.emptyTrashButton setEnabled: [self numNotes] > 0];
-    }
-    
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+    BOOL isTrashOnScreen = tagFilterType == SPTagFilterTypeDeleted;
+    self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
+    self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self updateViewIfEmpty];
     [self updateNavigationBar];
@@ -934,9 +932,7 @@
     self.tableView.userInteractionEnabled = NO;
     self.searchBar.userInteractionEnabled = NO;
 
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-    self.addButton.enabled = NO;
-    self.emptyTrashButton.enabled = NO;
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 
 - (void)sidebarContainerDidDisplayMenu:(SPSidebarContainerViewController *)sidebarContainer
@@ -946,7 +942,7 @@
 
 - (void)sidebarContainerWillHideMenu:(SPSidebarContainerViewController *)sidebarContainer
 {
-    [self updateNavigationBar];
+    // NO-OP: The navigationBar's top right button is refreshed via the regular `Update` sequence.
 }
 
 - (void)sidebarContainerDidHideMenu:(SPSidebarContainerViewController *)sidebarContainer
@@ -955,11 +951,7 @@
     self.tableView.userInteractionEnabled = YES;
     self.searchBar.userInteractionEnabled = YES;
 
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
-
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
-    self.addButton.enabled = YES;
-    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 
 
