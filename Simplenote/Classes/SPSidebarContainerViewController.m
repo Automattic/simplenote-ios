@@ -4,26 +4,24 @@
 #import <UIKit/UIKit.h>
 
 
-static const CGFloat SPSidebarContainerSidePanelWidth               = 300;
-static const CGFloat SPSidebarContainerTranslationRatioThreshold    = 0.15;
-static const CGFloat SPSidebarContainerMinimumVelocityThreshold     = 300.0;
-static const CGFloat SPSidebarContainerAnimationDelay               = 0;
-static const CGFloat SPSidebarContainerAnimationDuration            = 0.4;
-static const CGFloat SPSidebarContainerAnimationDurationZero        = 0.0;
-static const CGFloat SPSidebarContainerAnimationDamping             = 1.5;
-static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
-
+static const CGFloat SPSidebarMenuWidth                     = 300;
+static const CGFloat SPSidebarAnimationThreshold            = 0.15;
+static const CGFloat SPSidebarAnimationDuration             = 0.4;
+static const CGFloat SPSidebarAnimationDamping              = 1.5;
+static const CGVector SPSidebarAnimationInitialVelocity     = {6, 0};
+static const CGFloat SPSidebarAnimationCompletionMin        = 0.001;
+static const CGFloat SPSidebarAnimationCompletionMax        = 0.999;
+static const CGFloat SPSidebarAnimationCompletionFactorFull = 1.0;
+static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 @interface SPSidebarContainerViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIViewController              *menuViewController;
 @property (nonatomic, strong) UIViewController              *mainViewController;
+@property (nonatomic, strong) UIViewPropertyAnimator        *animator;
 @property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
 @property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
-@property (nonatomic, assign) CGPoint                       mainViewStartingOrigin;
-@property (nonatomic, assign) CGPoint                       menuPanelStartingOrigin;
 @property (nonatomic, assign) BOOL                          isMenuViewVisible;
-@property (nonatomic, assign) BOOL                          isMainViewPanning;
 
 @end
 
@@ -54,8 +52,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
 {
-    // We're officially taking over the Appearance Methods sequence. Otherwise the MenuViewController will get
-    // Appearance calls when it's actually... not it's time!
+    // We're officially taking over the Appearance Methods sequence, for Child ViewControllers
     return NO;
 }
 
@@ -98,8 +95,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (UIView *)mainChildView
 {
-    // We assume that the MainViewController might actually be a UINavigationController, and attempt to
-    // grab the first ViewController's View.
+    // We assume that the MainViewController might actually be a UINavigationController, and we'll return the Top View
     return self.mainNavigationController.viewControllers.firstObject.view ?: self.mainView;
 }
 
@@ -141,11 +137,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 - (BOOL)shouldAutorotate
 {
-    if (self.isMainViewPanning) {
-        return NO;
-    }
-
-    return [self.activeViewController shouldAutorotate];
+    return !self.animator.isRunning && [self.activeViewController shouldAutorotate];
 }
 
 
@@ -160,7 +152,7 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 {
     NSParameterAssert(self.mainView);
 
-    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureWasRecognized:)];
     self.panGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:self.panGestureRecognizer];
 }
@@ -193,8 +185,8 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
     NSParameterAssert(self.menuView);
 
     CGRect sidePanelFrame = self.view.bounds;
-    sidePanelFrame.origin.x -= SPSidebarContainerSidePanelWidth;
-    sidePanelFrame.size.width = SPSidebarContainerSidePanelWidth;
+    sidePanelFrame.origin.x -= SPSidebarMenuWidth;
+    sidePanelFrame.size.width = SPSidebarMenuWidth;
 
     UIView *menuView = self.menuView;
     menuView.frame = sidePanelFrame;
@@ -219,33 +211,28 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return NO;
     }
 
-    // Scenario B: Menu is NOT visible, and we get a right swipe
-    if (!self.isMenuViewVisible && translation.x < 0) {
+    // Scenario B: Menu is NOT visible, and we got a Left Swipe (OR) Menu is Visible and we got a Right Swipe
+    if ((!self.isMenuViewVisible && translation.x < 0) || (self.isMenuViewVisible && translation.x > 0)) {
         return NO;
     }
 
-    // Scenario C: Menu is visible, and we get a left swipe
-    if (self.isMenuViewVisible && translation.x > 0) {
-        return NO;
-    }
-
-    // Scenario D: Menu or Main are being dragged
+    // Scenario C: Menu or Main are being dragged
     if (self.mainChildTableView.dragging || self.menuChildTableView.dragging) {
         return NO;
     }
 
-    // Scenario E: Main is visible, but there are multiple viewControllers in its hierarchy
+    // Scenario D: Main is visible, but there are multiple viewControllers in its hierarchy
     if (!self.isMenuViewVisible && self.mainNavigationController.viewControllers.count > 1) {
+        return NO;
+    }
+
+    // Scenario E: Main is visible, but the delegate says NO, NO!
+    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
         return NO;
     }
 
     // Scenario F: Menu is visible and is being edited
     if (self.isMenuViewVisible && self.menuViewController.isEditing) {
-        return NO;
-    }
-
-    // Scenario G: Main is visible, but the delegate says NO, NO!
-    if (!self.isMenuViewVisible && ![self.delegate sidebarContainerShouldDisplayMenu:self]) {
         return NO;
     }
 
@@ -259,31 +246,16 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
         return YES;
     }
 
-    // Whenever we're actually panning: In the name of your king, stop this madness!
-    return !self.isMainViewPanning;
+    // In the name of your king, stop this madness!
+    return !self.animator.isRunning;
 }
 
 
 #pragma mark - Helpers
 
-- (BOOL)mustHideSidePanelWithTranslation:(CGPoint)translation velocity:(CGPoint)velocity
-{
-    // We'll consider the `intent` in this OP, regardless of the distance covered (AKA Velocity Direction).
-    CGFloat minimumTranslationThreshold = self.mainView.frame.size.width * SPSidebarContainerTranslationRatioThreshold;
-
-    BOOL exceededTranslationThreshold   = ABS(translation.x) >= minimumTranslationThreshold;
-    BOOL exceededVelocityThreshold      = ABS(velocity.x) > SPSidebarContainerMinimumVelocityThreshold;
-    BOOL exceededGestureThreshold       = exceededTranslationThreshold || exceededVelocityThreshold;
-    BOOL directionTowardsRight          = velocity.x > 0;
-    BOOL directionTowardsLeft           = !directionTowardsRight;
-
-    return ((self.isMenuViewVisible && exceededGestureThreshold && directionTowardsLeft) ||
-            (!self.isMenuViewVisible && !(exceededGestureThreshold && directionTowardsRight)));
-}
-
-/// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
-/// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
-///
+// The following method will (attempt) to match the Menu's TableViewInsets with the MainView's SafeAreaInsets.
+// Ideally, the first Menu row will be aligned against the SearchBar on its right hand side.
+//
 - (void)ensureMenuTableViewInsetsMatchMainViewInsets
 {
     UIEdgeInsets mainSafeInsets = self.mainChildView.safeAreaInsets;
@@ -313,57 +285,61 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 }
 
 
+#pragma mark - UIViewPropertyAnimator
+
+- (UIViewPropertyAnimator *)animatorForMenuVisibility:(BOOL)visible
+{
+    CGRect mainFrame = self.mainView.frame;
+    CGRect menuFrame = self.menuView.frame;
+
+    if (self.isMenuViewVisible) {
+        mainFrame.origin.x = 0;
+        menuFrame.origin.x = -menuFrame.size.width;
+    } else {
+        mainFrame.origin.x = SPSidebarMenuWidth;
+        menuFrame.origin.x = 0;
+    }
+
+    UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
+                                                                                  initialVelocity:SPSidebarAnimationInitialVelocity];
+
+    UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:SPSidebarAnimationDuration
+                                                                       timingParameters:parameters];
+
+    [animator addAnimations:^{
+        self.mainView.frame = mainFrame;
+        self.menuView.frame = menuFrame;
+    }];
+
+    return animator;
+}
+
+
 #pragma mark - UIGestureRecognizers
 
-- (void)viewDidPan:(UIPanGestureRecognizer *)gesture
+- (void)panGestureWasRecognized:(UIPanGestureRecognizer *)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateEnded ||
-        gesture.state == UIGestureRecognizerStateCancelled ||
-        gesture.state == UIGestureRecognizerStateFailed)
-    {
-        if (!self.isMainViewPanning) {
-            return;
-        }
+    if (gesture.state == UIGestureRecognizerStateBegan) {
 
-        // End the "Appropriate" Transition: If the menu was visible, we've signaled we would be hiding it
-        self.isMainViewPanning = NO;
-        [self endAppropriateTransition];
-
-        // And now: Based on both, Translation and Velocity, we'll figure out if we actually need to Show or Hide the Menu
-        CGPoint translation = [gesture translationInView:self.mainView];
-        CGPoint velocity = [gesture velocityInView:gesture.view];
-
-        if ([self mustHideSidePanelWithTranslation:translation velocity:velocity]) {
-            [self hideSidePanelAnimated:YES];
-        } else {
-            [self showSidePanel];
-        }
-
-    } else if (gesture.state == UIGestureRecognizerStateBegan) {
-
-        // When a Pan OP begins, we don't really know if it'll end up showing the Menu, or hiding it.
-        // Let's signal the "Appropriate" next transition. That is: if the menu is hidden, we'd expect to show it.
-        // And, of course, whenever it's visible, we would expect to hide it!
-        [self beginAppropriateTransition];
-        self.mainViewStartingOrigin = self.mainView.frame.origin;
-        self.menuPanelStartingOrigin = self.menuView.frame.origin;
-        self.isMainViewPanning = YES;
+        self.animator = [self animatorForMenuVisibility:!self.isMenuViewVisible];
         [SPTracker trackSidebarSidebarPanned];
 
+    } else if (gesture.state == UIGestureRecognizerStateEnded ||
+               gesture.state == UIGestureRecognizerStateCancelled ||
+               gesture.state == UIGestureRecognizerStateFailed) {
+
+        if (self.animator.fractionComplete > SPSidebarAnimationThreshold) {
+            self.isMenuViewVisible = !self.isMenuViewVisible;
+        } else {
+            self.animator.reversed = YES;
+        }
+
+        [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
+
     } else {
-        CGFloat translation = [gesture translationInView:self.mainView].x;
-
-        CGRect newMainFrame = self.mainView.frame;
-        newMainFrame.origin = self.mainViewStartingOrigin;
-        newMainFrame.origin.x += translation;
-        newMainFrame.origin.x = MIN(MAX(newMainFrame.origin.x, 0), SPSidebarContainerSidePanelWidth);
-        self.mainView.frame = newMainFrame;
-
-        CGRect newMenuFrame = self.menuView.frame;
-        newMenuFrame.origin = self.menuPanelStartingOrigin;
-        newMenuFrame.origin.x += translation;
-        newMenuFrame.origin.x = MIN(MAX(newMenuFrame.origin.x, -SPSidebarContainerSidePanelWidth), 0);
-        self.menuView.frame = newMenuFrame;
+        CGPoint translation = [gesture translationInView:self.mainView];
+        CGFloat progress = ABS(translation.x / SPSidebarMenuWidth);
+        self.animator.fractionComplete = MAX(SPSidebarAnimationCompletionMin, MIN(SPSidebarAnimationCompletionMax, progress));
     }
 }
 
@@ -374,24 +350,6 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 
 
 #pragma mark - Panning
-
-- (void)beginAppropriateTransition
-{
-    if (self.isMenuViewVisible) {
-        [self beginHideMenuTransition];
-    } else {
-        [self beginDisplayMenuTransition];
-    }
-}
-
-- (void)endAppropriateTransition
-{
-    if (self.isMenuViewVisible) {
-        [self endHideMenuTransition];
-    } else {
-        [self endDisplayMenuTransition];
-    }
-}
 
 - (void)beginDisplayMenuTransition
 {
@@ -436,56 +394,37 @@ static const CGFloat SPSidebarContainerAnimationInitialVelocity     = 6;
 {
     [self beginDisplayMenuTransition];
 
-    CGRect newMainViewFrame = self.mainView.frame;
-    newMainViewFrame.origin.x = SPSidebarContainerSidePanelWidth;
+    UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:YES];
 
-    CGRect newMenuViewFrame = self.menuView.frame;
-    newMenuViewFrame.origin.x = 0;
-    newMenuViewFrame.size.width = SPSidebarContainerSidePanelWidth;
+    [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
+        [self endDisplayMenuTransition];
+        self.isMenuViewVisible = YES;
+    }];
 
-    [UIView animateWithDuration:SPSidebarContainerAnimationDuration
-                          delay:SPSidebarContainerAnimationDelay
-         usingSpringWithDamping:SPSidebarContainerAnimationDamping
-          initialSpringVelocity:SPSidebarContainerAnimationInitialVelocity
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-
-                        self.mainView.frame = newMainViewFrame;
-                        self.menuView.frame = newMenuViewFrame;
-
-                     } completion:^(BOOL finished) {
-
-                        [self endDisplayMenuTransition];
-                        self.isMenuViewVisible = YES;
-                     }];
+    [animator startAnimation];
+    self.animator = animator;
 }
 
 - (void)hideSidePanelAnimated:(BOOL)animated
 {
     [self beginHideMenuTransition];
 
-    CGRect newMainViewFrame = self.mainView.frame;
-    newMainViewFrame.origin.x = 0;
+    UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:NO];
 
-    CGRect newMenuViewFrame = self.menuView.frame;
-    newMenuViewFrame.origin.x = -newMenuViewFrame.size.width;
+    [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
+        [self endHideMenuTransition];
+        self.isMenuViewVisible = NO;
+        [UIViewController attemptRotationToDeviceOrientation];
+    }];
 
-    [UIView animateWithDuration:animated ? SPSidebarContainerAnimationDuration : SPSidebarContainerAnimationDurationZero
-                          delay:SPSidebarContainerAnimationDelay
-         usingSpringWithDamping:SPSidebarContainerAnimationDamping
-          initialSpringVelocity:SPSidebarContainerAnimationInitialVelocity
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
+    if (animated) {
+        [animator startAnimation];
+    } else {
+        animator.fractionComplete = 1;
+        [animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorZero];
+    }
 
-                        self.mainView.frame = newMainViewFrame;
-                        self.menuView.frame = newMenuViewFrame;
-
-                     } completion:^(BOOL finished) {
-
-                        [self endHideMenuTransition];
-                        self.isMenuViewVisible = NO;
-                        [UIViewController attemptRotationToDeviceOrientation];
-                     }];
+    self.animator = animator;
 }
 
 - (void)requireToFailPanning
