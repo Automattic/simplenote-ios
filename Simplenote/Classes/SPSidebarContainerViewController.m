@@ -22,6 +22,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 @property (nonatomic, strong) UITapGestureRecognizer        *mainViewTapGestureRecognier;
 @property (nonatomic, strong) UIPanGestureRecognizer        *panGestureRecognizer;
 @property (nonatomic, assign) BOOL                          isSidebarVisible;
+@property (nonatomic, assign) BOOL                          isPanningActive;
 
 @end
 
@@ -137,7 +138,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (BOOL)shouldAutorotate
 {
-    return !self.animator.isRunning && [self.activeViewController shouldAutorotate];
+    return !self.isPanningActive && [self.activeViewController shouldAutorotate];
 }
 
 
@@ -247,7 +248,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     }
 
     // In the name of your king, stop this madness!
-    return !self.animator.isRunning;
+    return !self.isPanningActive;
 }
 
 
@@ -322,8 +323,9 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     if (gesture.state == UIGestureRecognizerStateBegan) {
         BOOL newVisibility = !self.isSidebarVisible;
         self.animator = [self animatorForSidebarVisibility:newVisibility];
-        [self beginSidebarTransition:newVisibility];
+        self.isPanningActive = YES;
 
+        [self beginSidebarTransition:newVisibility];
         [SPTracker trackSidebarSidebarPanned];
 
     } else if (gesture.state == UIGestureRecognizerStateEnded ||
@@ -342,9 +344,11 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
             [weakSelf endSidebarTransition:didBecomeVisible];
+            [UIViewController attemptRotationToDeviceOrientation];
         }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
+        self.isPanningActive = NO;
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
@@ -357,7 +361,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)rootViewTapped:(UITapGestureRecognizer *)gesture
 {
-    if (self.animator.isRunning) {
+    if (self.isPanningActive) {
         return;
     }
 
@@ -406,7 +410,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)showSidebar
 {
-    if (self.animator.isRunning || self.isSidebarVisible) {
+    if (self.isPanningActive || self.isSidebarVisible) {
         return;
     }
 
@@ -425,7 +429,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)hideSidebarWithAnimation:(BOOL)animated
 {
-    if (self.animator.isRunning || !self.isSidebarVisible) {
+    if (self.isPanningActive || !self.isSidebarVisible) {
         return;
     }
 
