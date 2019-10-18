@@ -320,25 +320,37 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 - (void)panGestureWasRecognized:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan) {
+        BOOL newVisibility = !self.isMenuViewVisible;
+        self.animator = [self animatorForMenuVisibility:newVisibility];
+        [self beginMenuTransition:newVisibility];
 
-        self.animator = [self animatorForMenuVisibility:!self.isMenuViewVisible];
         [SPTracker trackSidebarSidebarPanned];
 
     } else if (gesture.state == UIGestureRecognizerStateEnded ||
                gesture.state == UIGestureRecognizerStateCancelled ||
                gesture.state == UIGestureRecognizerStateFailed) {
 
-        if (self.animator.fractionComplete > SPSidebarAnimationThreshold) {
-            self.isMenuViewVisible = !self.isMenuViewVisible;
-        } else {
+        if (self.animator.fractionComplete < SPSidebarAnimationThreshold) {
             self.animator.reversed = YES;
+            [self beginMenuTransition:self.isMenuViewVisible];
+        } else {
+            self.isMenuViewVisible = !self.isMenuViewVisible;
         }
+
+        __weak typeof(self) weakSelf = self;
+        BOOL didBecomeVisible = self.isMenuViewVisible;
+
+        [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
+            [weakSelf endMenuTransition:didBecomeVisible];
+        }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
-        CGFloat progress = ABS(translation.x / SPSidebarMenuWidth);
+        CGFloat multiplier = self.isMenuViewVisible ? -1 : 1;
+        CGFloat progress = translation.x / SPSidebarMenuWidth * multiplier;
+
         self.animator.fractionComplete = MAX(SPSidebarAnimationCompletionMin, MIN(SPSidebarAnimationCompletionMax, progress));
     }
 }
@@ -351,31 +363,29 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 #pragma mark - Panning
 
-- (void)beginDisplayMenuTransition
+- (void)beginMenuTransition:(BOOL)isAppearing
 {
-    [self.delegate sidebarContainerWillDisplayMenu:self];
-    [self ensureMenuTableViewInsetsMatchMainViewInsets];
-    [self.menuViewController beginAppearanceTransition:YES animated:YES];
+    if (isAppearing) {
+        [self.delegate sidebarContainerWillDisplayMenu:self];
+        [self ensureMenuTableViewInsetsMatchMainViewInsets];
+    } else {
+        [self.delegate sidebarContainerWillHideMenu:self];
+    }
+
+    [self.menuViewController beginAppearanceTransition:isAppearing animated:YES];
 }
 
-- (void)endDisplayMenuTransition
+- (void)endMenuTransition:(BOOL)appeared
 {
-    [self.delegate sidebarContainerDidDisplayMenu:self];
+    if (appeared) {
+        [self.delegate sidebarContainerDidDisplayMenu:self];
+        [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
+    } else {
+        [self.delegate sidebarContainerDidHideMenu:self];
+        [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
+    }
+
     [self.menuViewController endAppearanceTransition];
-    [self.mainView addGestureRecognizer:self.mainViewTapGestureRecognier];
-}
-
-- (void)beginHideMenuTransition
-{
-    [self.delegate sidebarContainerWillHideMenu:self];
-    [self.menuViewController beginAppearanceTransition:NO animated:YES];
-}
-
-- (void)endHideMenuTransition
-{
-    [self.delegate sidebarContainerDidHideMenu:self];
-    [self.menuViewController endAppearanceTransition];
-    [self.mainView removeGestureRecognizer:self.mainViewTapGestureRecognier];
 }
 
 
@@ -392,12 +402,12 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)showSidePanel
 {
-    [self beginDisplayMenuTransition];
+    [self beginMenuTransition:YES];
 
     UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:YES];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endDisplayMenuTransition];
+        [self endMenuTransition:YES];
         self.isMenuViewVisible = YES;
     }];
 
@@ -407,12 +417,12 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)hideSidePanelAnimated:(BOOL)animated
 {
-    [self beginHideMenuTransition];
+    [self beginMenuTransition:NO];
 
     UIViewPropertyAnimator *animator = [self animatorForMenuVisibility:NO];
 
     [animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-        [self endHideMenuTransition];
+        [self endMenuTransition:NO];
         self.isMenuViewVisible = NO;
         [UIViewController attemptRotationToDeviceOrientation];
     }];
