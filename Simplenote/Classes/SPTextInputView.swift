@@ -73,7 +73,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Disabled State
     ///
-    @IBInspectable var borderColorError: UIColor? = .color(name: .simplenoteLipstick) {
+    @IBInspectable var borderColorError: UIColor? = .simplenoteRed50Color {
         didSet {
             refreshBorderStyle()
         }

@@ -36,7 +36,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            emailWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            emailWarningLabel.textColor = .simplenoteRed60Color
             emailWarningLabel.isHidden = true
         }
     }
@@ -61,7 +61,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var passwordWarningLabel: SPLabel! {
         didSet {
             passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            passwordWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            passwordWarningLabel.textColor = .simplenoteRed60Color
             passwordWarningLabel.isHidden = true
         }
     }
