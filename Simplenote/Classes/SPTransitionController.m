@@ -27,23 +27,24 @@
 
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
-@interface SPTransitionController () {
-    
-    int useCount;
-    CGFloat percentComplete;
-}
+#pragma mark - Constants
 
 @property (nonatomic, strong) SnapshotRenderer *renderer;
 @property (nonatomic) id <UIViewControllerContextTransitioning> context;
 @property (nonatomic) CGFloat initialPinchDistance;
 @property (nonatomic) CGPoint initialPinchPoint;
 
-@property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
-@property (nonatomic, strong) UIImage *pinIcon;
-@property (nonatomic, strong) UIImage *searchPinIcon;
 
-@property (nonatomic, weak) UINavigationController *navigationController;
+
+@interface SPTransitionController ()
+
+@property (nonatomic, strong) SnapshotRenderer *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController *pushPopAnimationController;
+@property (nonatomic, weak) UINavigationController *navigationController;
+@property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
+@property (nonatomic) id<UIViewControllerContextTransitioning> context;
+@property (nonatomic) NSInteger useCount;
+@property (nonatomic) CGFloat percentComplete;
 
 @end
 
@@ -54,7 +55,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     if (self) {
         self.tableView = tableView;
         self.renderer = [SnapshotRenderer new];
-        useCount = 0;
+        self.useCount = 0;
         
         if ([UIDevice isPad]) {
             
@@ -200,7 +201,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     // perform initial setup for animations
     _context = transitionContext;
-    percentComplete = 0.0;
+    self.percentComplete = 0.0;
     _transitioning = YES;
     [self clearTransitionSnapshots];
     _temporaryTransitionViews = [NSMutableArray arrayWithCapacity:10];
@@ -610,20 +611,20 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     fromViewController.view.alpha = 1.0;
     toViewController.view.alpha = 1.0;
     
-    percentComplete = 1.0;
+    self.percentComplete = 1.0;
     _transitioning = NO;
     [_context completeTransition:YES];
 }
 
 - (void)incrementUseCount {
     
-    useCount++;
+    self.useCount++;
 }
 
 - (void)decrementUseCount {
     
-    useCount--;
-    if (useCount == 0) {
+    self.useCount--;
+    if (self.useCount == 0) {
         [self completeTransition];
     }
 }
@@ -703,7 +704,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         return;
     }
     
-    if ((percentComplete > 0.5) && success) {
+    if ((self.percentComplete > 0.5) && success) {
         
         [self animateTransitionSnapshotsToCompletion];
         [_context finishInteractiveTransition];
