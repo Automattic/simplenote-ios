@@ -11,15 +11,24 @@ extension SPNoteListViewController {
     @objc
     func configureRootView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
+        view.addSubview(navigationBarBackground)
         view.addSubview(searchBar)
 
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
+        ])
+
+        NSLayoutConstraint.activate([
+            navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor),
+            navigationBarBackground.bottomAnchor.constraint(equalTo: searchBar.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
