@@ -252,7 +252,7 @@ private extension SPAuthViewController {
     }
 
     func ensureStylesMatchValidationState() {
-        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue60Color : UIColor.color(name: .simplenotePalePurple)
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue60Color : .simplenoteGray20Color
     }
 
     @objc func refreshOnePasswordAvailability() {

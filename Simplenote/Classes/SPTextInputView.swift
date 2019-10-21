@@ -57,7 +57,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Enabled State
     ///
-    @IBInspectable var borderColorEnabled: UIColor? = .color(name: .simplenotePalePurple) {
+    @IBInspectable var borderColorEnabled: UIColor? = .simplenoteGray20Color {
         didSet {
             refreshBorderStyle()
         }
