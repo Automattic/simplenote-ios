@@ -41,6 +41,7 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) UIVisualEffectView        *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem           *addButton;
 @property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
@@ -63,6 +64,7 @@
     self = [super init];
     if (self) {
         [self configureNavigationButtons];
+        [self configureNavigationBarBackground];
         [self configureTableView];
         [self configureSearchController];
         [self configureRootView];
@@ -206,6 +208,10 @@
 }
 
 - (void)refreshStyle {
+    // NavigationBar's Blur
+    UIBlurEffectStyle style = SPUserInterface.isDark ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
+    self.navigationBarBackground.effect = [UIBlurEffect effectWithStyle:style];
+
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
@@ -265,6 +271,12 @@
     self.emptyTrashButton.isAccessibilityElement = YES;
     self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+}
+
+- (void)configureNavigationBarBackground {
+    UIBlurEffectStyle style = SPUserInterface.isDark ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:style];
+    self.navigationBarBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
 }
 
 - (void)configureTableView {
