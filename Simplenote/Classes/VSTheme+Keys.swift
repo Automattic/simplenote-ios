@@ -27,7 +27,6 @@ enum ThemeColorKey: String {
     case searchHighlightFontColor
     case simplenoteDeepSeaBlue
     case simplenoteLightNavy
-    case simplenoteLightPink
     case simplenoteLipstick
     case simplenoteMidBlue
     case simplenotePalePurple
