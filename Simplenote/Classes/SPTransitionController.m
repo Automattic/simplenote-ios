@@ -206,28 +206,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     [self clearTransitionSnapshots];
     _temporaryTransitionViews = [NSMutableArray arrayWithCapacity:10];
 
-    UIViewController *toViewController =[_context viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIViewController *fromViewController =[_context viewControllerForKey:UITransitionContextFromViewControllerKey];
-    
-    CGRect navigationBarFrame = toViewController.navigationController.navigationBar.frame;
-    UIView *navigationBarSnapshot = [toViewController.navigationController.view resizableSnapshotViewFromRect:navigationBarFrame afterScreenUpdates:NO withCapInsets:UIEdgeInsetsMake(navigationBarFrame.origin.y, 0, 0, 0)];
-    
-    NSDictionary *navigationBarAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                               SPAnimationFinalValueName: @0.0
-                                                                               },
-                                                  SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:navigationBarFrame],
-                                                                                SPAnimationFinalValueName : [NSValue valueWithCGRect:navigationBarFrame]}
-                                                  };
-    NSDictionary *navigationBarAnimationProperties = @{SPAnimationDurationName: @0.4,
-                                                       SPAnimationDelayName: @0.0,
-                                                       SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                       };
-    
-    SPTransitionSnapshot *navigationBarTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:navigationBarSnapshot animatedValues:navigationBarAnimatedValues animationProperties:navigationBarAnimationProperties superView:toViewController.navigationController.view];
-    navigationBarTransitionSnapshot.springAnimation = NO;
-    [self storeTransitionSnapshot:navigationBarTransitionSnapshot];
-    
-    
+    UIViewController *toViewController = [_context viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController *fromViewController = [_context viewControllerForKey:UITransitionContextFromViewControllerKey];
+
     // WORKAROUND:
     // Rotation while the editor is onScreen causes the "To View Controller" to have a different frame size, and thus,
     // breaks awfully this animation
