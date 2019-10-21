@@ -29,3 +29,63 @@ extension UIColor {
 }
 
 
+// MARK: - Simplenote colors!
+//
+extension UIColor {
+
+    @objc
+    static var simplenoteBlue50Color: UIColor {
+        UIColor(studioColor: .blue50)
+    }
+
+    @objc
+    static var simplenoteBlue60Color: UIColor {
+        UIColor(studioColor: .blue60)
+    }
+
+    @objc
+    static var simplenoteGray5Color: UIColor {
+        UIColor(studioColor: .gray5)
+    }
+
+    @objc
+    static var simplenoteGray10Color: UIColor {
+        UIColor(studioColor: .gray10)
+    }
+
+    @objc
+    static var simplenoteGray20Color: UIColor {
+        UIColor(studioColor: .gray20)
+    }
+
+    @objc
+    static var simplenoteGray50Color: UIColor {
+        UIColor(studioColor: .gray50)
+    }
+
+    @objc
+    static var simplenoteGray60Color: UIColor {
+        UIColor(studioColor: .gray60)
+    }
+
+    @objc
+    static var simplenoteGray100Color: UIColor {
+        UIColor(studioColor: .gray100)
+    }
+
+    @objc
+    static var simplenoteRed50Color: UIColor {
+        UIColor(studioColor: .red50)
+    }
+
+    @objc
+    static var simplenoteRed60Color: UIColor {
+        UIColor(studioColor: .red60)
+    }
+
+    @objc
+    static var simplenoteWPBlue50Color: UIColor {
+        UIColor(studioColor: .wpBlue50)
+    }
+
+}
