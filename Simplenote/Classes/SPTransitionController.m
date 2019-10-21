@@ -1,3 +1,5 @@
+#import <CoreGraphics/CoreGraphics.h>
+#import "Simplenote-Swift.h"
 
 #import "SPTransitionController.h"
 #import "SPAppDelegate.h"
@@ -19,7 +21,7 @@
 #import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
-#import "Simplenote-Swift.h"
+
 
 #define kEditorTransitionOffset 8
 
