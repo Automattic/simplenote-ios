@@ -546,11 +546,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
-
-            // Snapshot: SearchBar
-            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
-            [self storeTransitionSnapshot:searchBarSnapshot];
         }
+
+        SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:searchBarSnapshot];
     }
 }
 
