@@ -90,7 +90,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             if let title = mode.secondaryActionText {
                 secondaryActionButton.setTitle(title, for: .normal)
-                secondaryActionButton.setTitleColor(.color(name: .simplenoteLightNavy), for: .normal)
+                secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
             }
 
             if let attributedTitle = mode.secondaryActionAttributedText {
@@ -252,8 +252,7 @@ private extension SPAuthViewController {
     }
 
     func ensureStylesMatchValidationState() {
-        let name: UIColorName = isInputValid ? .simplenoteLightNavy : .simplenotePalePurple
-        primaryActionButton.backgroundColor = .color(name: name)
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue60Color : UIColor.color(name: .simplenotePalePurple)
     }
 
     @objc func refreshOnePasswordAvailability() {
@@ -589,7 +588,7 @@ private extension AuthenticationStrings {
 
         output.append(string: signupSecondaryActionPrefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
-        output.append(string: signupSecondaryActionSuffix, foregroundColor: .color(name: .simplenoteLightNavy))
+        output.append(string: signupSecondaryActionSuffix, foregroundColor: .simplenoteBlue60Color)
 
         return output
     }

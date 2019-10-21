@@ -75,14 +75,12 @@ private extension SPOnboardingViewController {
     }
 
     func setupActionButtons() {
-        let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
-
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
-        loginButton.setTitleColor(simplenoteLightNavy, for: .normal)
+        loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
     }
 
     func setupLabels() {
