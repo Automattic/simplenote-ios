@@ -39,6 +39,10 @@ class SPSearchController: NSObject {
     ///
     let searchBar = UISearchBar()
 
+    /// Indicates if we should inject a background behind
+    ///
+    var injectsStatusBarBackgroundView = false
+
     /// SearchController's Delegate
     ///
     weak var delegate: SPSearchControllerDelegate?
@@ -113,8 +117,11 @@ private extension SPSearchController {
 extension SPSearchController {
 
     func ensureSearchBarBackgroundIsAttached() {
-        guard let superview = searchBar.superview, statusBarBackground.superview != superview else {
-            return
+        guard injectsStatusBarBackgroundView,
+            let superview = searchBar.superview,
+            statusBarBackground.superview != superview
+            else {
+                return
         }
 
         superview.addSubview(statusBarBackground)
