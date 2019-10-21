@@ -587,7 +587,7 @@ private extension AuthenticationStrings {
             .font: UIFont.preferredFont(forTextStyle: .subheadline)
         ])
 
-        output.append(string: signupSecondaryActionPrefix, foregroundColor: .color(name: .simplenoteGunmetal))
+        output.append(string: signupSecondaryActionPrefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
         output.append(string: signupSecondaryActionSuffix, foregroundColor: .color(name: .simplenoteLightNavy))
 
