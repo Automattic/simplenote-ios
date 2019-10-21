@@ -1,5 +1,9 @@
+4.13
+====
+-   Notes List's navigation bar now has a super cool blur effect!
+
 4.12
------
+====
 -   Simplenote just got brand new Icons!
 -   Sidebar's UX has been entirely refreshed.
 
