@@ -29,7 +29,6 @@ enum UIColorName: Int, CaseIterable {
     case searchHighlightFontColor
     case simplenoteLightNavy
     case simplenoteLipstick
-    case simplenoteMidBlue
     case simplenotePalePurple
     case simplenoteSlateGrey
     case switchTintColor
@@ -101,8 +100,6 @@ extension UIColorName {
             return .simplenoteLightNavy
         case .simplenoteLipstick:
             return .simplenoteLipstick
-        case .simplenoteMidBlue:
-            return .simplenoteMidBlue
         case .simplenotePalePurple:
             return .simplenotePalePurple
         case .simplenoteSlateGrey:

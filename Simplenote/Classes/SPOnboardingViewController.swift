@@ -79,7 +79,7 @@ private extension SPOnboardingViewController {
 
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
         loginButton.setTitleColor(simplenoteLightNavy, for: .normal)
