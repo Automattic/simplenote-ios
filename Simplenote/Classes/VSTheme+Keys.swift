@@ -26,7 +26,6 @@ enum ThemeColorKey: String {
     case searchBarImageColor
     case searchHighlightFontColor
     case simplenoteLipstick
-    case simplenoteSlateGrey
     case switchTintColor
     case switchOnTintColor
     case tableViewBackgroundColor

@@ -253,7 +253,7 @@ private extension SPTextInputView {
         textField.delegate = self
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.placeholdTextColor = .color(name: .simplenoteSlateGrey)
+        textField.placeholdTextColor = .simplenoteGray50Color
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         addSubview(textField)
     }
