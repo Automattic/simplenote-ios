@@ -1,12 +1,4 @@
 
-//
-//  SPTransitionController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPTransitionController.h"
 #import "SPAppDelegate.h"
 #import "SPNoteEditorViewController.h"
