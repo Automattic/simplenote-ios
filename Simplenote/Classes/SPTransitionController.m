@@ -25,16 +25,16 @@
 
 #define kEditorTransitionOffset 8
 
-NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
 #pragma mark - Constants
 
-@property (nonatomic, strong) SnapshotRenderer *renderer;
-@property (nonatomic) id <UIViewControllerContextTransitioning> context;
-@property (nonatomic) CGFloat initialPinchDistance;
-@property (nonatomic) CGPoint initialPinchPoint;
+static const CGFloat SPAnimationTableViewRowDuration = 0.45;
+static const CGFloat SPAnimationTableViewRowDamping = 1.0;
+static const CGFloat SPAnimationTableViewRowVelocity = 7.0;
+static const CGFloat SPAnimationDelayZero = 0.0;
 
 
+NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
 @interface SPTransitionController ()
 
