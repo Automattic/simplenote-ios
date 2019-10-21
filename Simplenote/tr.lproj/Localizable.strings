@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Etiket ekle";
 
+/* Title of option to display all notes */
+"All Notes" = "Tüm Notlar";
+
 /* No comment provided by engineer. */
 "Cancel" = "İptal";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Sıkıştırılmış Not Listesi";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Yeni not oluştur";
@@ -81,16 +87,22 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Not seçeneklerini göster";
 
+/* No comment provided by engineer. */
+"New note" = "Yeni not";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Not Yok";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Sonuç Yok";
 
+/* No comment provided by engineer. */
+"Note not published" = "Not yayınlanmadı";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "Not Yayınlandı";
 
-/* Plural form of notes */
+/* Title of option to display all notes */
 "Notes" = "Notlar";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
@@ -165,6 +177,9 @@
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
+
+/* No comment provided by engineer. */
+"Share note" = "Notu paylaş";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "Geçerli notun içeriğini paylaş";
@@ -355,6 +370,9 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Kaydolmakla Hizmet Koşulları'nı kabul etmiş olursunuz »";
+
+/* Forgot Password */
+"Forgot password? »" = "Parolanızı mı unuttunuz? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";

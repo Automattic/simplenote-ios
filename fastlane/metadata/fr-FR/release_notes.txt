@@ -1,2 +1,4 @@
-- Nous avons repensé les écrans de démarrage et de connexion à l'application.
-- Vous pouvez désormais utiliser Aperçu et Accéder à sur l'écran de liste des notes.
+- La barre de recherche est plus belle que jamais !
+- Actualisation de la liste de notes pour afficher l'état « Épinglé » à droite.
+- iOS 11 est désormais le système d'exploitation minimal compatible.
+- Résolution d'un problème dans le cadre duquel les couleurs de l'éditeur ne s'initialisaient pas correctement.

@@ -1,2 +1,4 @@
-- Kami telah mendesain ulang layar untuk memulai dan masuk ke aplikasi.
-- Sekarang Anda dapat menggunakan Peek and Pop pada layar daftar catatan.
+- Bilah Pencarian kini terlihat lebih baik dari sebelumnya!
+- Daftar Catatan disegarkan untuk menampilkan status Disematkan di sisi kanan.
+- iOS 11 adalah minimum OS yang didukung saat ini.
+- Memperbaiki bug tidak dimulainya Warna Penyunting dengan tepat.
