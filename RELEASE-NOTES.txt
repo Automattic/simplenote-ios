@@ -1,3 +1,6 @@
+4.13
+-----
+ 
 4.12
 -----
 -   Simplenote just got brand new Icons!
