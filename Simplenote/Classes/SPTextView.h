@@ -12,12 +12,12 @@
 
 @interface SPTextView : UITextView {
     NSMutableArray *highlightViews;
-    
 }
 
-@property (nonatomic, retain) SPInteractiveTextStorage *interactiveTextStorage;
+@property (nonatomic, retain, nonnull) SPInteractiveTextStorage *interactiveTextStorage;
 
-- (void)highlightRange:(NSRange)range animated:(BOOL)animated withBlock:(void (^)(CGRect highlightFrame))block;
+- (void)highlightSubstringsMatching:(NSString * _Nonnull)keywords color:(UIColor * _Nonnull)color;
+- (void)highlightRange:(NSRange)range animated:(BOOL)animated withBlock:(void (^_Nonnull)(CGRect highlightFrame))block;
 - (void)clearHighlights:(BOOL)animated;
 
 @end

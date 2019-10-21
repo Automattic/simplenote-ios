@@ -1,2 +1,4 @@
-- We have redesigned the screens for getting started and logging into the app.
-- You can now use Peek and Pop to on the notes list screen.
+- Search Bar is now looking better than ever!
+- Notes List refreshed to display Pinned state on the right hand side.
+- iOS 11 Is now the minimum supported OS.
+- Fixed a bug in which the Editor Colors might not be properly initialized.

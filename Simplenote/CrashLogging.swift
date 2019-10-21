@@ -30,7 +30,7 @@ private class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
     }
 
     var sentryDSN: String {
-        return SPCredentials.simplenoteSentryDSN()
+        return SPCredentials.sentryDSN
     }
 
     var userHasOptedOut: Bool {

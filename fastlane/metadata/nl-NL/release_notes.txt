@@ -1,2 +1,4 @@
-- De schermen voor introductie en inloggen in de app zijn vernieuwd.
-- Je kunt nu Gluren en Openen gebruiken op het scherm van de notitielijst.
+- Zoekbalk ziet er beter uit dan ooit!
+- Notitielijst vernieuwd zodat vastgemaakte status aan de rechterzijde staat.
+- iOS 11 Is nu de minimum ondersteunde OS.
+- Een bug verholpen waarbij Editor Colors soms niet goed startte.

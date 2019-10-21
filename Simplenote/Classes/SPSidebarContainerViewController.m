@@ -24,7 +24,7 @@ static CGFloat sidePanelWidth;
 
 @implementation SPSidebarContainerViewController
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
     
     self = [super init];
     if (self) {
@@ -37,10 +37,9 @@ static CGFloat sidePanelWidth;
         [self.view addSubview:_rootView];
         
         // setup gesture recognizers
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(viewDidPan:)];
-        panGesture.delegate = self;
-        [self.rootView addGestureRecognizer:panGesture];
+        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+        self.panGestureRecognizer.delegate = self;
+        [self.rootView addGestureRecognizer:_panGestureRecognizer];
         
         _sidePanelViewController = sidebarViewController;
         _sidePanelViewController.containerViewController = self;
@@ -189,14 +188,11 @@ static CGFloat sidePanelWidth;
 }
 
 - (void)applySidePanelContentInsets {
-    
-    // set contentInsets based on rootViewController
-    UIEdgeInsets contentInset = UIEdgeInsetsMake([[self topLayoutGuide] length],
-                                                 0,
-                                                 [[self bottomLayoutGuide] length],
-                                                 0);
-    [sidePanelViewDelegate containerViewController:self
-                             didChangeContentInset:contentInset];
+
+    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
+    UIEdgeInsets contentInset = UIEdgeInsetsMake(safeInsets.top, 0, safeInsets.bottom, 0);
+
+    [sidePanelViewDelegate containerViewController:self didChangeContentInset:contentInset];
 }
 
 - (void)toggleSidePanel:(void (^)())completion {
@@ -330,7 +326,8 @@ static CGFloat sidePanelWidth;
 - (void)hideSidePanelAnimated:(BOOL)animated completion:(void (^)())completion {
     
     [self resetNavigationBar];
-    
+    [self sidebarWillHide];
+
     CGRect newRootFrame = _rootView.frame;
     newRootFrame.origin.x = 0;
     
@@ -402,6 +399,10 @@ static CGFloat sidePanelWidth;
 
 - (void)sidebarDidShow {
     
+}
+
+- (void)sidebarWillHide {
+
 }
 
 - (void)sidebarDidHide {

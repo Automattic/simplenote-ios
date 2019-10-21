@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tag toevoegen";
 
+/* Title of option to display all notes */
+"All Notes" = "Alle notities";
+
 /* No comment provided by engineer. */
 "Cancel" = "Annuleren";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Beknopte notitielijst";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Een nieuwe notitie maken";
@@ -81,11 +87,17 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Opties tonen voor notitie";
 
+/* Label to create a new note */
+"New note" = "Nieuwe notitie";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Geen notities";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Geen resultaten";
+
+/* No comment provided by engineer. */
+"Note not published" = "Notitie niet gepubliceerd";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "Notitie gepubliceerd";
@@ -167,6 +179,9 @@
 
 /* Title of options screen */
 "Settings" = "Instellingen";
+
+/* No comment provided by engineer. */
+"Share note" = "Notitie delen";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "De inhoud van de huidige notitie delen";
@@ -283,7 +298,7 @@ Gebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http://sim
 /* A short description to access the account creation screen */
 "Don't have an account?" = "Heb je nog geen account?";
 
-/* A 4-digit code to lock the app when it is closed */
+/* Forgot Password */
 "Password" = "Wachtwoord";
 
 /* Message displayed when password is invalid */
@@ -357,6 +372,9 @@ Gebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http://sim
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Als je je registreert, ga je akkoord met onze Terms of Service »";
+
+/* Forgot Password */
+"Forgot password? »" = "Wachtwoord vergeten? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";

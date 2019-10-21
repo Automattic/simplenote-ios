@@ -11,13 +11,10 @@
 #import "SPAppDelegate.h"
 #import "SPNoteEditorViewController.h"
 #import "VSThemeManager.h"
-#import "UIView+ImageRepresentation.h"
 #import "Note.h"
 #import "SPNoteListViewController.h"
-#import "SPTableViewCell.h"
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "SPTransitionSnapshot.h"
 #import "SPTextView.h"
@@ -47,21 +44,18 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 @property (nonatomic) CGFloat initialPinchDistance;
 @property (nonatomic) CGPoint initialPinchPoint;
 
-@property (nonatomic) NSMutableArray *temporaryTransitionViews;
+@property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
 @property (nonatomic, strong) UIImage *pinIcon;
 @property (nonatomic, strong) UIImage *searchPinIcon;
 
 @property (nonatomic, weak) UINavigationController *navigationController;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController *pushPopAnimationController;
 
-@property (nonatomic, strong) SPTextView *snapshotTextView;
-
 @end
 
 @implementation SPTransitionController
 
--(instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController
-{
+- (instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController {
     self = [super init];
     if (self) {
         self.tableView = tableView;
@@ -82,9 +76,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         }
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
-        
         self.navigationController = navigationController;
     }
+
     return self;
 }
 
@@ -134,11 +128,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     if (self.hasActiveInteraction) {
         return self;
     }
-    else {
-        return self.pushPopAnimationController.interactiveTransition;
-    }
-    
-    return nil;
+
+    return self.pushPopAnimationController.interactiveTransition;
 }
 
 
@@ -158,18 +149,25 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
     CGSize size = CGSizeMake(width, snapHeight);
 
-    return [_renderer renderWithNote:note size:size searchQuery:searchString preview:preview];
+    if (preview) {
+        return [_renderer renderPreviewSnapshotFor:note size:size searchQuery:searchString];
+    }
+
+    return [_renderer renderEditorSnapshotFor:note size:size searchQuery:searchString];
 }
 
-- (CGFloat)textViewTextWidthForWidth:(CGFloat)width {
+- (CGFloat)listTextViewWidth {
+
+    return CGRectGetWidth(self.tableView.frame);
+}
+
+- (CGFloat)editorTextViewWidthForWidth:(CGFloat)width {
     
     // set content insets on side
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     
     CGFloat padding = [theme floatForKey:@"noteSidePadding" contextView:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        padding += self.tableView.safeAreaInsets.left;
-    }
+    padding += self.tableView.safeAreaInsets.left;
     
     CGFloat maxWidth = [theme floatForKey:@"noteMaxWidth"];
     
@@ -264,7 +262,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         if (!listController.emptyListView.hidden) {
             
             CGRect emptyListViewFrame = [containerView convertRect:listController.emptyListView.frame
-                                         fromView:listController.emptyListView.superview];
+                                                          fromView:listController.emptyListView.superview];
             
             UIView *emptyListViewSnapshot = [listController.emptyListView snapshotViewAfterScreenUpdates:NO];
             
@@ -285,27 +283,31 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         }
         
         // get snapshots of the final editor text
+
+        CGFloat initialWidth = [self listTextViewWidth];
+        CGFloat finalWidth = [self editorTextViewWidthForWidth:CGRectGetWidth(editorController.noteEditorTextView.frame)];
+
+        UIView *cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:initialWidth
+                                                 searchString:editorController.searchString
+                                                      preview:YES];
         
-        CGFloat finalWidth = [self textViewTextWidthForWidth:editorController.noteEditorTextView.frame.size.width];
-        UIView *cleanSnapshot, *dirtySnapshot;
+        UIView *dirtySnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:finalWidth
+                                                 searchString:editorController.searchString
+                                                      preview:NO];
         
-        cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:YES];
-        
-        dirtySnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:NO];
-        
-        
-        CGRect finalEditorPosition = editorController.noteEditorTextView.frame;
-        finalEditorPosition.origin.y += editorController.noteEditorTextView.contentInset.top + editorController.noteEditorTextView.frame.origin.y;
-        if (@available(iOS 11.0, *)) {
-            finalEditorPosition.origin.y += self.tableView.safeAreaInsets.top;
-        }
+
+        UITextView *editorTextView = editorController.noteEditorTextView;
+        CGRect finalEditorPosition = editorTextView.frame;
         finalEditorPosition.origin.x = 0;
+
+        // We must tamper into the navigationBar frame directly, rather than safeAreaInsets.top.
+        // Why? because the safeAreaInsets, the very first time this code runs, will not be set.
+        //
+        finalEditorPosition.origin.y += editorTextView.contentInset.top
+                                            + editorTextView.textContainerInset.top
+                                            + CGRectGetMaxY(editorController.navigationController.navigationBar.frame);
         finalEditorPosition.size.width = editorController.view.frame.size.width;
         
         if ([visiblePaths containsObject:_selectedPath]  || !_selectedPath) {
@@ -314,19 +316,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             for (NSIndexPath *path in visiblePaths) {
                 
                 
-                SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+                SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
                 CGRect startingFrame = [containerView convertRect:cell.frame fromView:cell.superview];
-                startingFrame.size.height -= 5; // corrects for line spacing added to final row
-                
+
                 if (_selectedPath && path.row == _selectedPath.row) {
                     
-                    // two snapshots are used for note content since the preview is a "clean" versio of a note
-
-                    startingFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
-                                                      fromView:[cell contentView].superview];
-                    
-                    startingFrame.size.height -= 5; // corrects for line spacing added to final row
-                    
+                    // two snapshots are used for note content since the preview is a "clean" version of a note
                     cleanSnapshot.contentMode = UIViewContentModeTop;
                     cleanSnapshot.clipsToBounds = YES;
                     dirtySnapshot.contentMode = UIViewContentModeTop;
@@ -370,8 +365,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     
                 } else {
                     
-                    UIView *snapshot;
-                    snapshot = [cell snapshotViewAfterScreenUpdates:NO];
+                    UIView *snapshot = [cell snapshotViewAfterScreenUpdates:NO];
                     if (snapshot) {
                         
                         snapshot.contentMode = UIViewContentModeTop;
@@ -381,9 +375,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                         CGRect endingFrame = startingFrame;
                         CGFloat moveAmount = [UIDevice isPad] ? 1200 : 700;
                         
-                        if (path.row < _selectedPath.row)
+                        if (path.row < _selectedPath.row) {
                             moveAmount = moveAmount * -1;
-                        
+                        }
+
                         endingFrame.origin.y += moveAmount;
                         
                         // add delay based on position to selected cell
@@ -451,18 +446,24 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         // get snapshots of the final editor text
         
-        CGFloat finalWidth = [self textViewTextWidthForWidth:editorController.noteEditorTextView.frame.size.width];
-        UIView *cleanSnapshot, *dirtySnapshot;
-        
-        cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
-                                                width:finalWidth
-                                         searchString:editorController.searchString
-                                              preview:YES];
+        CGFloat finalWidth = [self listTextViewWidth];
+
+        UIView *cleanSnapshot = [self textViewSnapshotForNote:editorController.currentNote
+                                                        width:finalWidth
+                                                 searchString:editorController.searchString
+                                                      preview:YES];
         
         // tap a snapshot of the current view to avoid the need for creating a textview
-        dirtySnapshot = [editorController.view resizableSnapshotViewFromRect:CGRectMake(editorController.noteEditorTextView.frame.origin.x, editorController.noteEditorTextView.frame.origin.y + editorController.noteEditorTextView.contentInset.top, editorController.noteEditorTextView.frame.size.width, editorController.noteEditorTextView.frame.size.height - editorController.noteEditorTextView.contentInset.top - editorController.noteEditorTextView.frame.origin.y)
-                                                          afterScreenUpdates:NO
-                                                               withCapInsets:UIEdgeInsetsZero];
+        CGRect editorFrame = editorController.noteEditorTextView.frame;
+        UIEdgeInsets editorContentInsets = editorController.noteEditorTextView.contentInset;
+        CGRect dirtySnapshotFrame = CGRectMake(editorFrame.origin.x,
+                                               editorFrame.origin.y + editorContentInsets.top,
+                                               editorFrame.size.width,
+                                               editorFrame.size.height - editorContentInsets.top - editorFrame.origin.y);
+
+        UIView *dirtySnapshot = [editorController.view resizableSnapshotViewFromRect:dirtySnapshotFrame
+                                                                  afterScreenUpdates:NO
+                                                                       withCapInsets:UIEdgeInsetsZero];
         dirtySnapshot.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         dirtySnapshot.contentMode = UIViewContentModeTop;
         dirtySnapshot.clipsToBounds = YES;
@@ -471,15 +472,14 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         for (UIView *v in dirtySnapshot.subviews) {
             v.contentMode = UIViewContentModeTop;
         }
-        
-        
+
+        // Snapshot: Tableview Rows
         for (NSIndexPath *path in visiblePaths) {
-            
-            
-            SPTableViewCell *cell = (SPTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+
+            SPNoteTableViewCell *cell = (SPNoteTableViewCell *)[self.tableView cellForRowAtIndexPath:path];
             
             CGRect finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
-            finalFrame.size.height -= cell.previewView.textContainer.lineFragmentPadding; // corrects for line spacing added to final row
+            finalFrame.size.height -= cell.bodyLineFragmentPadding; // corrects for line spacing added to final row
             
             
             if (_selectedPath && path.row == _selectedPath.row) {
@@ -491,45 +491,37 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 startingFrame.origin.x = editorController.noteEditorTextView.frame.origin.x;
                 startingFrame.size.width = editorController.noteEditorTextView.frame.size.width;
                 
-                // final frame is note the frame of the cell of the frame of the
-                // textView within the cell
-                finalFrame = [containerView convertRect:[cell listAnimationFrameForWidth:cell.frame.size.width]
-                                               fromView:[cell contentView].superview];
-                finalFrame.size.width = editorController.view.frame.size.width;
+                // Final frame is *not* the frame of the cell of the frame of the textView within the cell
+                finalFrame = [containerView convertRect:cell.frame fromView:cell.superview];
                 finalFrame.origin.x = 0;
-                finalFrame.size.height -= 5; // corrects for line spacing added to final row
-                
+
                 cleanSnapshot.contentMode = UIViewContentModeTop;
                 cleanSnapshot.clipsToBounds = YES;
                 dirtySnapshot.contentMode = UIViewContentModeTop;
                 dirtySnapshot.clipsToBounds = YES;
                 
-                NSDictionary *animationProperties = @{SPAnimationDurationName: @0.45,
-                                                      SPAnimationDelayName: @0.0,
-                                                      SPAnimationSpringDampingName: @1.0,
-                                                      SPAnimationInitialVeloctyName: @7.0,
-                                                      SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                      };
-                
-                NSDictionary *cleanSnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @0.0,
-                                                                                           SPAnimationFinalValueName: @1.0},
-                                                              SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                                            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
-                                                                           }
-                                                              };
-                
+                NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
+                                                                                    delay:0.0
+                                                                            springDamping:1.0
+                                                                                 velocity:7.0
+                                                                                  options:UIViewAnimationOptionCurveEaseInOut];
+
+                NSDictionary *cleanSnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                        finalFrame:finalFrame
+                                                                                     startingAlpha:UIKitConstants.alphaZero
+                                                                                        finalAlpha:UIKitConstants.alphaFull];
+
                 SPTransitionSnapshot *cleanTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:cleanSnapshot
                                                                                                 animatedValues:cleanSnapshotAnimatedValues
                                                                                            animationProperties:animationProperties
                                                                                                      superView:containerView];
                 [self storeTransitionSnapshot:cleanTransitionSnapshot];
                 
-                NSDictionary *dirtySnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                                           SPAnimationFinalValueName: @0.0},
-                                                              SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                                            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
-                                                                           }
-                                                              };
+                NSDictionary *dirtySnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                        finalFrame:finalFrame
+                                                                                     startingAlpha:UIKitConstants.alphaFull
+                                                                                        finalAlpha:UIKitConstants.alphaZero];
+
                 SPTransitionSnapshot *dirtyTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:dirtySnapshot
                                                                                                 animatedValues:dirtySnapshotAnimatedValues
                                                                                            animationProperties:animationProperties
@@ -538,8 +530,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 
             } else {
                 
-                UIView *snapshot;
-                snapshot = [cell imageRepresentationWithinImageView];
+                UIView *snapshot = [cell imageRepresentationWithinImageView];
                 if (snapshot) {
                     
                     snapshot.contentMode = UIViewContentModeTop;
@@ -573,11 +564,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
+
+            // Snapshot: SearchBar
+            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+            [self storeTransitionSnapshot:searchBarSnapshot];
         }
     }
 }
 
--(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     
     [self incrementUseCount];
     
@@ -630,29 +625,82 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     useCount++;
 }
+
 - (void)decrementUseCount {
     
     useCount--;
-    if (useCount == 0)
+    if (useCount == 0) {
         [self completeTransition];
+    }
 }
 
--(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     
     return 0.1;
 }
 
-- (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext
-{
+- (void)startInteractiveTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
     [self incrementUseCount];
     [self setupTransition:transitionContext];
     [self decrementUseCount];
 }
 
-#pragma mark Interactive Transition
 
--(void)endInteractionWithSuccess:(BOOL)success {
+#pragma mark - Snapshots Generation
+
+- (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
+    UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
+    CGRect targetFrame = listController.searchBar.frame;
+    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
+                                                               finalFrame:targetFrame
+                                                            startingAlpha:UIKitConstants.alphaZero
+                                                               finalAlpha:UIKitConstants.alphaFull];
+    NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
+                                                                        delay:0.0
+                                                                springDamping:1.0
+                                                                     velocity:7.0
+                                                                      options:UIViewAnimationOptionCurveEaseInOut];
+
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
+                                           animatedValues:animatedValues
+                                      animationProperties:animationProperties
+                                                superView:containerView];
+}
+
+- (NSDictionary *)animationValuesWithStartingFrame:(CGRect)startingFrame
+                                        finalFrame:(CGRect)finalFrame
+                                     startingAlpha:(CGFloat)startingAlpha
+                                        finalAlpha:(CGFloat)finalAlpha {
+    return @{
+        SPAnimationAlphaValueName: @{
+                SPAnimationInitialValueName: @(startingAlpha),
+                SPAnimationFinalValueName: @(finalAlpha)
+        },
+        SPAnimationFrameValueName: @{
+            SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
+            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
+        }
+    };
+}
+
+- (NSDictionary *)animationPropertiesWithDuration:(CGFloat)duration
+                                            delay:(CGFloat)delay
+                                    springDamping:(CGFloat)springDamping
+                                         velocity:(CGFloat)velocity
+                                          options:(UIViewAnimationOptions)options {
+    return @{
+        SPAnimationDurationName: @(duration),
+        SPAnimationDelayName: @(delay),
+        SPAnimationSpringDampingName: @(springDamping),
+        SPAnimationInitialVeloctyName: @(velocity),
+        SPAnimationOptionsName: @(options)
+    };
+}
+
+#pragma mark - Interactive Transition
+
+- (void)endInteractionWithSuccess:(BOOL)success {
     
     self.hasActiveInteraction = FALSE;
 
@@ -687,9 +735,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return;
 }
 
+- (void)handlePinch:(UIPinchGestureRecognizer*)sender {
 
--(void)handlePinch:(UIPinchGestureRecognizer*)sender
-{
     if (!_transitioning &&
         sender.numberOfTouches >= 2 && // require two fingers
         sender.scale < 1.0 && // pinch in

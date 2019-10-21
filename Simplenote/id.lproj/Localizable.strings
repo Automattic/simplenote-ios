@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-28 00:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tambahkan label";
 
+/* Title of option to display all notes */
+"All Notes" = "Semua Catatan";
+
 /* No comment provided by engineer. */
 "Cancel" = "Cancel";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Daftar Catatan Ringkas";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Buat catatan baru";
@@ -81,16 +87,22 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Tampilkan opsi untuk catatan";
 
+/* Label to create a new note */
+"New note" = "Catatan baru";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Tidak ada Catatan";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Tidak ada Hasil";
 
+/* No comment provided by engineer. */
+"Note not published" = "Catatan tidak diterbitkan";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "Catatan Diterbitkan";
 
-/* Message shown in note list when no notes are in the current view */
+/* Title of option to display all notes */
 "Notes" = "Catatan";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
@@ -167,6 +179,9 @@
 
 /* Title of options screen */
 "Settings" = "Settings";
+
+/* No comment provided by engineer. */
+"Share note" = "Bagikan catatan";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "Bagikan konten dari catatan saat ini";
@@ -358,6 +373,9 @@ Gunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:/
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
+
+/* Forgot Password */
+"Forgot password? »" = "Lupa kata sandi? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Apa pendapat Anda tentang Simplenote?";

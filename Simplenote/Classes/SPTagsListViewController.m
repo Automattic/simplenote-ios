@@ -29,7 +29,6 @@
 #define kActionSheetRenameIndex 1
 #define kActionSheetCancelIndex 2
 
-static NSString * const SPTagTrashKey = @"trash";
 static CGFloat const SPSettingsButtonHeight = 40;
 static UIEdgeInsets SPButtonContentInsets = {0, 25, 0, 0};
 static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
@@ -90,9 +89,8 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.tableView];
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+
+    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -144,11 +142,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    CGFloat safeBottomInset = 0;
-    if (@available(iOS 11.0, *)) {
-        safeBottomInset = self.view.safeAreaInsets.bottom;
-    }
-    
+    CGFloat safeBottomInset = self.view.safeAreaInsets.bottom;
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame.size.height = self.view.frame.size.height - SPSettingsButtonHeight - safeBottomInset;
     self.tableView.frame = tableViewFrame;
@@ -232,7 +226,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 -(void)trashTap:(UIButton *)sender
 {
     [SPTracker trackTrashViewed];
-    [self openNoteListForTagName:SPTagTrashKey];
+    [self openNoteListForTagName:kSimplenoteTagTrashKey];
 }
 
 -(void)settingsTap:(UIButton *)sender
@@ -673,10 +667,7 @@ static UIEdgeInsets SPButtonImageInsets = {0, -10, 0, 0};
 
 - (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
 
-    if (@available(iOS 11.0, *)) {
-        contentInset.bottom = self.tableView.contentInset.bottom;
-    }
-    
+    contentInset.bottom = self.tableView.contentInset.bottom;
     self.tableView.contentInset = contentInset;
     self.tableView.scrollIndicatorInsets = contentInset;
     self.tableView.contentOffset = CGPointMake(0, -contentInset.top);

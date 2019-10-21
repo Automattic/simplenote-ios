@@ -1,11 +1,3 @@
-//
-//  SPNoteEditorViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/9/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
@@ -24,7 +16,6 @@
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
 #import "SPOutsideTouchView.h"
-#import "UIView+ImageRepresentation.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
 #import "SPInteractiveTextStorage.h"
@@ -60,17 +51,15 @@ CGFloat const SPBarButtonYOriginAdjustment       = -1.0f;
 CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 
-@interface SPNoteEditorViewController ()<SPInteractivePushViewControllerProvider, UIPopoverPresentationControllerDelegate> {
+@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
+                                        SPInteractivePushViewControllerProvider,
+                                        UIPopoverPresentationControllerDelegate>
+{
     NSUInteger cursorLocationBeforeRemoteUpdate;
     NSString *noteContentBeforeRemoteUpdate;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) UIFont                    *bodyFont;
-@property (nonatomic, strong) NSMutableParagraphStyle   *paragraphStyle;
-@property (nonatomic, strong) UIFont                    *headlineFont;
-@property (nonatomic, strong) UIColor                   *fontColor;
-@property (nonatomic, strong) UIColor                   *lightFontColor;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
@@ -128,8 +117,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
         bVoiceoverEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceOverNotification:)
-                                                     name:UIAccessibilityVoiceOverStatusChanged
+                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
+
+        // Apply the current style right away!
+        [self applyStyle];
     }
     
     return self;
@@ -142,28 +134,31 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)applyStyle {
     
-    _bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
-    _lightFontColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    UIColor *fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
 
-    _noteEditorTextView.font = _bodyFont;
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
+
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
-    
-    _paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    _paragraphStyle.lineSpacing = _bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-    
-    _noteEditorTextView.interactiveTextStorage.tokens = @{SPDefaultTokenName : @{ NSForegroundColorAttributeName : _fontColor,
-                                                                                  NSFontAttributeName : _bodyFont,
-                                                                                  NSParagraphStyleAttributeName : _paragraphStyle},
-                                                          SPHeadlineTokenName : @{NSForegroundColorAttributeName: _fontColor,
-                                                                                  NSFontAttributeName : _headlineFont} };
-    
+
+    _noteEditorTextView.font = bodyFont;
     _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
+    _noteEditorTextView.interactiveTextStorage.tokens = @{
+        SPDefaultTokenName : @{
+                NSFontAttributeName : bodyFont,
+                NSForegroundColorAttributeName : fontColor,
+                NSParagraphStyleAttributeName : paragraphStyle
+        },
+        SPHeadlineTokenName : @{
+                NSFontAttributeName : headlineFont,
+                NSForegroundColorAttributeName: fontColor,
+        }
+    };
 }
 
 - (void)viewDidLoad
@@ -180,12 +175,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     _noteEditorTextView.frame = self.view.bounds;
     _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _noteEditorTextView.delegate = self;
-    
-    self.automaticallyAdjustsScrollViewInsets = YES;
+
     self.navigationItem.title = nil;
     
     [self startListeningToNotifications];
-    [self applyStyle];
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
 }
@@ -194,9 +187,9 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     [super viewWillAppear:animated];
 
+    [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
-    [self.navigationController setToolbarHidden:!bSearching animated:YES];
     [self sizeNavigationContainer];
     [self adjustFrameForSafeInsets];
 
@@ -212,6 +205,12 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self highlightSearchResultsIfNeeded];
 }
 
+- (void)setupNavigationController {
+    // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:!bSearching animated:YES];
+}
+
 - (void)ensureEditorIsFirstResponder
 {
     if ((_currentNote.content.length == 0) && !bActionSheetVisible && !_isPreviewing) {
@@ -221,22 +220,20 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)ensureTagViewIsVisible
 {
-    if (_tagView.alpha >= 1.0) {
+    if (_tagView.alpha >= UIKitConstants.alphaFull) {
         return;
     }
 
-    [UIView animateWithDuration:0.3 animations:^{
-        self.tagView.alpha = 1.0;
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
+        self.tagView.alpha = UIKitConstants.alphaFull;
      }];
 }
 
 - (void)adjustFrameForSafeInsets
 {
-    if (@available(iOS 11.0, *)) {
-        CGRect viewFrame = _noteEditorTextView.frame;
-        viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
-        _noteEditorTextView.frame = viewFrame;
-    }
+    CGRect viewFrame = _noteEditorTextView.frame;
+    viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
+    _noteEditorTextView.frame = viewFrame;
 }
 
 - (void)startListeningToNotifications {
@@ -286,7 +283,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
@@ -309,7 +305,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self->bDisableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self->bDisableShrinkingNavigationBar = NO;
     }];
 }
@@ -441,9 +437,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [navigationButtonContainer addSubview:keyboardButton];
     [navigationButtonContainer addSubview:newButton];
     [navigationButtonContainer addSubview:actionButton];
-    if (@available(iOS 11.0, *)) {
-        [navigationButtonContainer addSubview:checklistButton];
-    }
+    [navigationButtonContainer addSubview:checklistButton];
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
@@ -645,7 +639,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
     // hide the tags field
     if (!bVoiceoverEnabled) {
-        self.tagView.alpha = 0.0;
+        self.tagView.alpha = UIKitConstants.alphaZero;
     }
 }
 
@@ -782,7 +776,6 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     highlightedSearchResultIndex = MAX(0, highlightedSearchResultIndex - 1);
     [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
-    
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
@@ -853,10 +846,8 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     void (^animations)() = ^void() {
         CGRect newFrame            = self->_noteEditorTextView.frame;
         newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - visibleHeight;
-        if (@available(iOS 11.0, *)) {
-            if (!isEditing) {
-                newFrame.size.height -= self.view.safeAreaInsets.bottom;
-            }
+        if (!isEditing) {
+            newFrame.size.height -= self.view.safeAreaInsets.bottom;
         }
         self->_noteEditorTextView.frame  = newFrame;
         
@@ -1150,20 +1141,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
-{
-    if (![URL containsHttpScheme]) {
-        return YES;
-    }
-    
-    if ([SFSafariViewController class]) {
-        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
-        [self presentViewController:sfvc animated:YES completion:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
-    }
-    
-    return NO;
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    return ![URL containsHttpScheme];
+}
+
+- (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url {
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:url];
+    [self presentViewController:sfvc animated:YES completion:nil];
 }
 
 - (BOOL)isDictatingText {

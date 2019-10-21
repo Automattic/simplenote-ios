@@ -19,7 +19,6 @@
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
 #import "NSProcessInfo+Util.h"
-#import "UIView+ImageRepresentation.h"
 #import "SPModalActivityIndicator.h"
 #import "SPEditorTextView.h"
 #import "SPTransitionController.h"
@@ -411,9 +410,11 @@
 
 - (void)loadSelectedTheme
 {
+    // We seriously need to setup the proper traits override, prior to applying the appearance selectors
+    [[SPUserInterface shared] refreshUserInterfaceStyle];
+
     // TODO: Eventually nuke VSThemeManager. Please
     [[VSThemeManager sharedManager] applyAppearanceStyling];
-    [[SPUserInterface shared] refreshUserInterfaceStyle];
 }
 
 

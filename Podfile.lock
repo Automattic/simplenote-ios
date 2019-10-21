@@ -1,6 +1,6 @@
 PODS:
   - 1PasswordExtension (1.8.5)
-  - Automattic-Tracks-iOS (0.4.0):
+  - Automattic-Tracks-iOS (0.4.1):
     - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
     - Sentry (~> 4)
@@ -14,9 +14,9 @@ PODS:
   - HockeySDK/DefaultLib (5.1.4)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
-  - Sentry (4.3.4):
-    - Sentry/Core (= 4.3.4)
-  - Sentry/Core (4.3.4)
+  - Sentry (4.4.0):
+    - Sentry/Core (= 4.4.0)
+  - Sentry/Core (4.4.0)
   - Simperium (0.8.23):
     - Simperium/DiffMatchPach (= 0.8.23)
     - Simperium/JRSwizzle (= 0.8.23)
@@ -30,7 +30,7 @@ PODS:
   - Simperium/SSKeychain (0.8.23)
   - SVProgressHUD (2.2.5)
   - UIDeviceIdentifier (1.1.4)
-  - WordPress-AppbotX (1.0.6)
+  - WordPress-AppbotX (1.0.7)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.9)
 
@@ -42,7 +42,7 @@ DEPENDENCIES:
   - SAMKeychain (= 1.5.2)
   - Simperium (~> 0.8.23)
   - SVProgressHUD (= 2.2.5)
-  - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, commit `479d05f7d6b963c9b44040e6ea9f190e8bd9a47a`)
+  - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, tag `1.0.7`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -64,30 +64,30 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   WordPress-AppbotX:
-    :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
+    :tag: 1.0.7
 
 CHECKOUT OPTIONS:
   WordPress-AppbotX:
-    :commit: 479d05f7d6b963c9b44040e6ea9f190e8bd9a47a
     :git: https://github.com/wordpress-mobile/appbotx.git
+    :tag: 1.0.7
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
-  Automattic-Tracks-iOS: f7a8284999a5ce2f4e768717d86a640a32f43b7c
+  Automattic-Tracks-iOS: a176848be4c95aa208184fe96d0322594ce230eb
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
-  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
+  Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
   Simperium: 71a5028fde163d1efead45b8b45adf4bdcf02039
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
-  WordPress-AppbotX: b5abc0ba45e3da5827f84e9f346c963180f1b545
+  WordPress-AppbotX: 624387ac980fc0663cbb9425e22bf514329be96f
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
 
-PODFILE CHECKSUM: 53dfd6a1d87457ffb2f82ee7be603a373c0b5240
+PODFILE CHECKSUM: ac1230dcc0ef3ec22b03ea22ca29b6005ad547a1
 
 COCOAPODS: 1.7.5

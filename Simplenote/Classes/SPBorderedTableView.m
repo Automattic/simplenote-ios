@@ -36,6 +36,7 @@
 
 - (void)applyTheme {
     self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
     self.leftBorder.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor].CGColor;
 }
 
@@ -43,7 +44,6 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
-#if IS_XCODE_11
     if (@available(iOS 13.0, *)) {
         if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
             return;
@@ -51,7 +51,6 @@
 
         [self applyTheme];
     }
-#endif
 }
 
 @end

@@ -37,12 +37,13 @@
 }
 
 @property (nonatomic, assign) id<SPContainerSidePanelViewDelegate> sidePanelViewDelegate;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, strong) UIView *rootView;
 @property (nonatomic, strong) SPSidebarViewController *sidePanelViewController;
 
 @property (nonatomic) BOOL bSidePanelVisible;
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController;
+- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController;
 
 - (void)toggleSidePanel:(void (^)())completion;;
 - (void)showSidePanel:(void (^)())completion;
@@ -54,6 +55,7 @@
 - (BOOL)shouldShowSidebar;
 - (void)sidebarWillShow;
 - (void)sidebarDidShow;
+- (void)sidebarWillHide;
 - (void)sidebarDidHide;
 - (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible;
 - (void)resetNavigationBar;
