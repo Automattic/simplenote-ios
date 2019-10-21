@@ -25,7 +25,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            emailInputView.textColor = .simplenoteGray100Color
             emailInputView.delegate = self
         }
     }
@@ -51,7 +51,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
-            passwordInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            passwordInputView.textColor = .simplenoteGray100Color
             passwordInputView.delegate = self
         }
     }
