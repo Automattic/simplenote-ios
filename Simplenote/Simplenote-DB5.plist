@@ -130,8 +130,6 @@
 		<string>444444</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>cbdff3</string>
-		<key>searchBarImageColor</key>
-		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
 		<integer>3</integer>
 		<key>searchHighlightVerticalPadding</key>
@@ -229,8 +227,6 @@
 		<string>2d4259</string>
 		<key>searchHighlightFontColor</key>
 		<string>f9f9f9</string>
-		<key>searchBarImageColor</key>
-		<string>@textColor</string>
 		<key>tableViewBackgroundColor</key>
 		<string>1e1e1e</string>
 		<key>tableViewDetailTextLabelColor</key>

@@ -25,7 +25,6 @@ enum UIColorName: Int, CaseIterable {
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor
-    case searchBarImageColor
     case searchHighlightFontColor
     case switchTintColor
     case switchOnTintColor
@@ -88,8 +87,6 @@ extension UIColorName {
             return .noteBodyFontPreviewColor
         case .noteHeadlineFontColor:
             return .noteHeadlineFontColor
-        case .searchBarImageColor:
-            return .searchBarImageColor
         case .searchHighlightFontColor:
             return .searchHighlightFontColor
         case .switchTintColor:
