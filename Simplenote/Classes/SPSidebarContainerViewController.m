@@ -459,7 +459,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     self.animator = animator;
 }
 
-- (void)requireToFailPanning
+- (void)requirePanningToFail
 {
     [self.panGestureRecognizer fail];
 }
