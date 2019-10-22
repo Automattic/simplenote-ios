@@ -25,7 +25,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.textColor = .simplenoteGray100Color
+            emailInputView.textColor = .simplenoteGray80Color
             emailInputView.delegate = self
         }
     }
@@ -51,7 +51,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
-            passwordInputView.textColor = .simplenoteGray100Color
+            passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
         }
     }
@@ -252,7 +252,7 @@ private extension SPAuthViewController {
     }
 
     func ensureStylesMatchValidationState() {
-        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue60Color : .simplenoteGray20Color
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
     @objc func refreshOnePasswordAvailability() {

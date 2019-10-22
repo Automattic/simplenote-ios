@@ -84,7 +84,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupLabels() {
-        let textColor = UIColor.simplenoteGray100Color
+        let textColor = UIColor.simplenoteGray80Color
 
         simplenoteLabel.text = OnboardingStrings.brandText
         simplenoteLabel.textColor = textColor

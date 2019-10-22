@@ -69,8 +69,8 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteGray100Color: UIColor {
-        UIColor(studioColor: .gray100)
+    static var simplenoteGray80Color: UIColor {
+        UIColor(studioColor: .gray80)
     }
 
     @objc
