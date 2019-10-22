@@ -1,2 +1,4 @@
-- Başlangıç ve uygulamada oturum açma ekranlarını yeniden tasarladık.
-- Artık notlar listesi ekranında Peek and Pop özelliğini kullanabilirsiniz.
+- Arama Çubuğu her zamankinden daha iyi görünüyor!
+- Sabitlenmiş durumu sağ tarafta göstermek için Notlar Listesi yenilendi.
+- iOS 11 artık desteklenen en düşük işletim sistemidir.
+- Düzenleyici Renklerinin düzgün bir şekilde başlatılamadığı bir hata düzeltildi.

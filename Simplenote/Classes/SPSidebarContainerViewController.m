@@ -40,15 +40,21 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         self.sidebarViewController = sidebarViewController;
         self.automaticallyMatchSidebarInsetsWithMainInsets = YES;
 
-        [self configureMainView];
         [self configurePanGestureRecognizer];
         [self configureTapGestureRecognizer];
         [self configureViewControllerContainment];
-        [self attachMainView];
-        [self attachSidebarView];
     }
     
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self configureView];
+    [self attachMainView];
+    [self attachSidebarView];
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
@@ -144,18 +150,18 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 #pragma mark - Initialization
 
-- (void)configureMainView
+- (void)configureView
 {
+    NSParameterAssert(self.panGestureRecognizer);
+
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    [self.view addGestureRecognizer:self.panGestureRecognizer];
 }
 
 - (void)configurePanGestureRecognizer
 {
-    NSParameterAssert(self.mainView);
-
     self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureWasRecognized:)];
     self.panGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:self.panGestureRecognizer];
 }
 
 - (void)configureTapGestureRecognizer
@@ -453,7 +459,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     self.animator = animator;
 }
 
-- (void)requireToFailPanning
+- (void)requirePanningToFail
 {
     [self.panGestureRecognizer fail];
 }

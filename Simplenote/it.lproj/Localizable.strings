@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-24 00:54:31+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Aggiungi tag";
 
+/* Title of option to display all notes */
+"All Notes" = "Tutte le note";
+
 /* No comment provided by engineer. */
 "Cancel" = "Annulla";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Aggiungi un indirizzo email con cui condividere questa nota. Dopo la condivisione entrambi gli utenti potranno modificare la nota.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Elenco note ristretto";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Crea una nuova nota";
@@ -81,11 +87,17 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Mostra opzioni nota";
 
+/* Label to create a new note */
+"New note" = "Nuova nota";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Nessuna nota presente";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Nessun risultato";
+
+/* No comment provided by engineer. */
+"Note not published" = "Nota non pubblicata";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "Nota pubblicata";
@@ -167,6 +179,9 @@
 
 /* Title of options screen */
 "Settings" = "Impostazioni";
+
+/* No comment provided by engineer. */
+"Share note" = "Condividi nota";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "Condividi il contenuto della nota";
@@ -358,6 +373,9 @@ Usa Simplenote per Mac, per Android, oppure visita http://simplenote.com per acc
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Iscrivendoti, accetti i nostri Termini di servizio »";
+
+/* Forgot Password */
+"Forgot password? »" = "Password dimenticata? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Che cosa pensi di Simplenote?";

@@ -1,2 +1,4 @@
-- Vi har designat om skärmarna för att komma igång och logga in på appen.
-- Du kan nu använda Peek and Poop på skärmen för anteckningslistan.
+- Sökfältet ser nu bättre ut än någonsin!
+- Anteckningslistan har uppdaterats för att visa läget Fastsatt på höger sida.
+- iOS 11 är nu det äldsta operativsystemet som stöds.
+- Ett fel som gjorde att redigerarens färger inte alltid initierades korrekt har åtgärdats.

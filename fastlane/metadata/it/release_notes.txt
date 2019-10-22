@@ -1,2 +1,4 @@
-- Abbiamo riprogettato le schermate per iniziare e accedere all'app.
-- Ora puoi usare le funzioni Peek e Pop sulla schermata di elenco delle note.
+- La barra di ricerca è più bella che mai.
+- Elenco delle note aggiornato per mostrare lo stato Agganciata sul lato destro.
+- iOS 11 ora è la versione minima supportata di OS.
+- Corretto un bug che causava l'errata inizializzazione dei colori dell'editor.

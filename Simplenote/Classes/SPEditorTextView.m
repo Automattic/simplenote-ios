@@ -36,12 +36,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 @implementation SPEditorTextView
 
-- (void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (instancetype)init {
-    
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         self.alwaysBounceHorizontal = NO;
@@ -90,24 +91,25 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return self;
 }
 
-- (VSTheme *)theme {
+- (VSTheme *)theme
+{
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (NSDictionary *)typingAttributes {
-    
+- (NSDictionary *)typingAttributes
+{
     return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     if (object == self && ([keyPath isEqualToString:@"contentOffset"] || [keyPath isEqualToString:@"contentSize"]))
         [self positionTagView];
 }
 
 
-- (void)layoutSubviews {
-    
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     
     CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
@@ -127,8 +129,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
-- (void)positionTagView {
-    
+- (void)positionTagView
+{
     CGFloat height = _tagView.frame.size.height;
     CGFloat yOrigin = self.contentSize.height - height + self.contentInset.top;
     yOrigin = MAX(yOrigin, self.contentOffset.y + self.bounds.size.height - height);
@@ -141,8 +143,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     _tagView.frame = footerViewFrame;
 }
 
-- (void)setTagView:(SPTagView *)tagView {
-    
+- (void)setTagView:(SPTagView *)tagView
+{
     if (_tagView) {
         [_tagView removeFromSuperview];
     }
@@ -152,8 +154,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setNeedsLayout];
 }
 
-- (void)setEditing:(BOOL)editing {
-    
+- (void)setEditing:(BOOL)editing
+{
     _editing = editing;
     self.editable = editing;
     
@@ -163,25 +165,27 @@ NSInteger const ChecklistCursorAdjustment = 2;
     self.textColor = self.textColor;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
     // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
     return [touch.view isKindOfClass:[SPTextView class]];
 }
 
-- (BOOL)becomeFirstResponder {
+- (BOOL)becomeFirstResponder
+{
     [self setEditing:YES];
     return [super becomeFirstResponder];
 }
 
-- (BOOL)resignFirstResponder {
-        
+- (BOOL)resignFirstResponder
+{
     BOOL response = [super resignFirstResponder];
     [self setNeedsLayout];
     return response;
 }
 
-- (void)scrollToBottom {
-    
+- (void)scrollToBottom
+{
     if (self.contentSize.height > self.bounds.size.height - self.contentInset.top - self.contentInset.bottom) {
         
         CGPoint scrollOffset = CGPointMake(0,
@@ -190,7 +194,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 }
 
-- (void)scrollToTop {
+- (void)scrollToTop
+{
     CGFloat yOffset = self.bounds.origin.y - self.contentInset.top;
     CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:NO];
@@ -198,8 +203,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 #pragma mark Notifications
 
-- (void)didEndEditing:(NSNotification *)notification {
-    
+- (void)didEndEditing:(NSNotification *)notification
+{
     [self setEditing:NO];
 }
 
@@ -207,8 +212,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 #pragma mark fixes for UITextView bugs in iOS 7
 
-- (UITextPosition *)closestPositionToPoint:(CGPoint)point {
-    
+- (UITextPosition *)closestPositionToPoint:(CGPoint)point
+{
     point.y -= self.textContainerInset.top;
     point.x -= self.textContainerInset.left;
     
@@ -386,8 +391,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return newMovement;
 }
 
-#pragma mark checklists
-- (void)processChecklists {
+#pragma mark - Checklists
+
+- (void)processChecklists
+{
     if (self.attributedText.length == 0) {
         return;
     }
@@ -398,7 +405,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 // Processes content of note editor, and replaces special string attachments with their plain
 // text counterparts. Currently supports markdown checklists.
-- (NSString *)getPlainTextContent {
+- (NSString *)getPlainTextContent
+{
     NSMutableAttributedString *adjustedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
     // Replace checkbox images with their markdown syntax equivalent
     [adjustedString enumerateAttribute:NSAttachmentAttributeName inRange:[adjustedString.string rangeOfString:adjustedString.string] options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
@@ -412,7 +420,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return adjustedString.string;
 }
 
-- (void)insertOrRemoveChecklist {
+- (void)insertOrRemoveChecklist
+{
     NSRange lineRange = [self.text lineRangeForRange:self.selectedRange];
     NSUInteger cursorPosition = self.selectedRange.location;
     NSUInteger selectionLength = self.selectedRange.length;
@@ -496,49 +505,37 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    if (@available(iOS 11.0, *)) {
-        // Location of the tap in text-container coordinates
-        NSLayoutManager *layoutManager = self.layoutManager;
-        CGPoint location = [recognizer locationInView:self];
-        location.x -= self.textContainerInset.left;
-        location.y -= self.textContainerInset.top;
-    
-        // Find the character that's been tapped on
-        NSUInteger characterIndex;
-        characterIndex = [layoutManager characterIndexForPoint:location
-                                               inTextContainer:self.textContainer
-                      fractionOfDistanceBetweenInsertionPoints:NULL];
-        if (characterIndex < self.textStorage.length) {
-            NSRange range;
-            if ([self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range]) {
-                id value = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
-                // A checkbox was tapped!
-                SPTextAttachment *attachment = (SPTextAttachment *)value;
-                BOOL wasChecked = attachment.isChecked;
-                [attachment setIsChecked:!wasChecked];
+    CGPoint locationInView = [recognizer locationInView:self];
 
-                if (self.selectedRange.location == self.text.length) {
-                    // If the current selection is the end of the note, the keyboard has never shown,
-                    // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
-                    self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
-                }
-                [self.delegate textViewDidChange:self];
-                [self.layoutManager invalidateDisplayForCharacterRange:range];
-                recognizer.cancelsTouchesInView = YES;
-                
-                return;
-            }
+    CGPoint locationInContainer = locationInView;
+    locationInContainer.x -= self.textContainerInset.left;
+    locationInContainer.y -= self.textContainerInset.top;
+
+    NSUInteger characterIndex = [self.layoutManager characterIndexForPoint:locationInContainer
+                                                           inTextContainer:self.textContainer
+                                  fractionOfDistanceBetweenInsertionPoints:NULL];
+
+    if (characterIndex < self.textStorage.length) {
+        if ([self handlePressedAttachmentAtIndex:characterIndex] ||
+            [self handlePressedLinkAtIndex:characterIndex]) {
+
+            recognizer.cancelsTouchesInView = YES;
+            return;
         }
     }
-    
+
+    [self handlePressedLocation:locationInView];
+    recognizer.cancelsTouchesInView = NO;
+}
+
+- (void)handlePressedLocation:(CGPoint)point
+{
     // Move the cursor to the tapped position
     [self becomeFirstResponder];
-    CGPoint point = [recognizer locationInView:self];
     UITextPosition *position = [self closestPositionToPoint:point];
     UITextRange *range = [self textRangeFromPosition:position toPosition:position];
     [self setSelectedTextRange:range];
-    recognizer.cancelsTouchesInView = NO;
-    
+
     // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
     // on the same cursor location twice, so we're controlling the menu manually.
     NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
@@ -552,6 +549,51 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
     
     self.lastCursorPosition = startOffset;
+}
+
+- (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
+{
+    NSRange range;
+    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+    if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {
+        return NO;
+    }
+
+    BOOL wasChecked = attachment.isChecked;
+    attachment.isChecked = !wasChecked;
+
+    if (self.selectedRange.location == self.text.length) {
+        // If the current selection is the end of the note, the keyboard has never shown,
+        // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
+        self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+    }
+
+    [self.delegate textViewDidChange:self];
+    [self.layoutManager invalidateDisplayForCharacterRange:range];
+
+    return YES;
+}
+
+
+- (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex
+{
+    NSURL *link = [self.attributedText attribute:NSLinkAttributeName atIndex:characterIndex effectiveRange:nil];
+    if ([link isKindOfClass:[NSURL class]] == NO || [link containsHttpScheme] == NO) {
+        return NO;
+    }
+
+    [self.editorTextDelegate textView:self receivedInteractionWithURL:link];
+
+    return YES;
+}
+
+- (id<SPEditorTextViewDelegate>)editorTextDelegate
+{
+    if ([self.delegate conformsToProtocol:@protocol(SPEditorTextViewDelegate)]) {
+        return (id<SPEditorTextViewDelegate>)self.delegate;
+    }
+
+    return nil;
 }
 
 @end

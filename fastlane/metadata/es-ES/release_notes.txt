@@ -1,2 +1,4 @@
-- Hemos rediseñado las pantallas para comenzar y acceder a la aplicación.
-- Ahora puedes usar Peek and Pop en la pantalla de la lista de notas.
+- Ahora, la barra de búsqueda tiene un diseño ideal.
+- Hemos actualizado la lista de notas para mostrar el estado Anclado en la parte derecha.
+- Ahora, iOS 11 es la versión de sistema operativo mínima requerida.
+- Hemos corregido un error por el que el editor de colores no se iniciaba correctamente.

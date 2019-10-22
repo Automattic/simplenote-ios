@@ -28,6 +28,6 @@
 - (void)toggleSidebar;
 - (void)showSidebar;
 - (void)hideSidebarWithAnimation:(BOOL)animated;
-- (void)requireToFailPanning;
+- (void)requirePanningToFail;
 
 @end
