@@ -48,11 +48,12 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
                                         UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView          *tableView;
+@property (nonatomic, strong) IBOutlet UIView               *rightBorderView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint   *rightBorderWidthConstraint;
 @property (nonatomic, strong) SPTagHeaderView               *tagsHeaderView;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) Tag                           *renameTag;
 @property (nonatomic, strong) NSTimer                       *reloadTimer;
-@property (nonatomic, assign) BOOL                          bEditing;
 @property (nonatomic, assign) BOOL                          bVisible;
 
 @end
@@ -75,6 +76,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     [self configureView];
     [self configureTableView];
     [self configureTableHeaderView];
+    [self configureRightBorderView];
     [self configureMenuController];
     [self startListeningToNotifications];
 
@@ -84,13 +86,27 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self startListeningToKeyboardNotifications];
+    [self reloadDataAsynchronously];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.bVisible = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self setEditing:NO canceled:YES];
     [self stopListeningToKeyboardNotifications];
+    self.bVisible = NO;
 }
 
+
+#pragma mark - Overridden Methods
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
 #pragma mark - Interface Initialization
 
@@ -100,6 +116,10 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)configureTableView {
     [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
+
+    if (@available(iOS 13.0, *)) {
+        self.tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
+    }
 }
 
 - (void)configureTableHeaderView {
@@ -109,6 +129,10 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     UIButton *actionButton = self.tagsHeaderView.actionButton;
     [actionButton setTitle:NSLocalizedString(@"Edit", @"Edit Tags Action: Visible in the Tags List") forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(editTagsTap:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)configureRightBorderView {
+    self.rightBorderWidthConstraint.constant = UIScreen.mainScreen.pointToPixelRatio;
 }
 
 - (void)configureMenuController {
@@ -162,6 +186,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 #pragma mark - Style
 
 - (void)refreshStyle {
+    self.rightBorderView.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
     [self.tagsHeaderView refreshStyle];
     [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
@@ -171,7 +196,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 #pragma mark - Button actions
 
 - (void)editTagsTap:(UIButton *)sender {
-    BOOL newState = !self.bEditing;
+    BOOL newState = !self.isEditing;
     if (newState) {
         [SPTracker trackTagEditorAccessed];
     }
@@ -206,8 +231,18 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     return self.fetchedResultsController.sections.firstObject.numberOfObjects;
 }
 
+- (void)reloadDataAsynchronously {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
 
 #pragma mark - UITableViewDataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return section == SPTagsListSectionTags ? UITableViewAutomaticDimension : CGFLOAT_MIN;
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return section == SPTagsListSectionTags ? self.tagsHeaderView : nil;
@@ -307,7 +342,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isTagRow = indexPath.section == SPTagsListSectionTags;
-    return self.bEditing && isTagRow ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+    return isTagRow && tableView.isEditing ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -418,7 +453,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)didSelectTagAtIndexPath:(NSIndexPath *)indexPath {
     Tag *tag = [self tagAtTableViewIndexPath:indexPath];
 
-    if (self.bEditing) {
+    if (self.isEditing) {
         [SPTracker trackTagRowRenamed];
         [self renameTagAction:tag];
     } else {
@@ -463,43 +498,14 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)setEditing:(BOOL)editing canceled:(BOOL)isCanceled {
-    if (self.bEditing == editing) {
-        return;
+    // Note: Neither super.setEditing nor tableView.setEditing will resign the first responder.
+    if (!editing) {
+        [self.view endEditing:YES];
     }
-    
-    self.bEditing = editing;
+
+    [super setEditing:editing animated:YES];
     [self.tableView setEditing:editing animated:YES];
-
     [self refreshEditTagsButtonForEditionState:editing];
-    [self resizeContainerViewForEditonState:editing animated:!isCanceled];
-}
-
-- (void)resizeContainerViewForEditonState:(BOOL)editing animated:(BOOL)animated {
-
-    SPSidebarContainerViewController *noteListViewController = [[SPAppDelegate sharedDelegate] noteListViewController];
-
-    NSString *widthKey = editing ? @"containerViewSidePanelWidthExpanded" : @"containerViewSidePanelWidth";
-    CGFloat newWidth = [[[VSThemeManager sharedManager] theme] floatForKey:widthKey];
-
-    CGRect selfFrame = self.view.frame;
-    selfFrame.size.width = newWidth;
-
-    CGRect notesFrame = noteListViewController.rootView.frame;
-    notesFrame.origin.x = newWidth;
-
-    if (animated) {
-        // Make the tags list wider, and move the notes list over to accomodate for the new width
-        [UIView animateWithDuration:UIKitConstants.animationShortDuration
-                              delay:UIKitConstants.animationDelayZero
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                            noteListViewController.rootView.frame = notesFrame;
-                            self.view.frame = selfFrame;
-                            [self.view layoutIfNeeded];
-                         } completion:nil];
-    } else {
-        self.view.frame = selfFrame;
-    }
 }
 
 - (void)refreshEditTagsButtonForEditionState:(BOOL)editing {
@@ -524,8 +530,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     if (fetchNeeded) {
         [[SPAppDelegate sharedDelegate].noteListViewController update];
     }
-	
-    [[self containerViewController] hideSidePanelAnimated:YES completion:nil];
+
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] hideSidebarWithAnimation:YES];
 }
 
 
@@ -607,7 +613,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     SPTagListViewCell *cell = [self cellForTag:self.renameTag];
-    if (self.bEditing) {
+    if (self.isEditing) {
         [cell setSelected:NO animated:YES];
     }
 
@@ -639,35 +645,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
-}
-
-
-#pragma mark - SidePanelDelegate
-
-- (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container {
-    self.bVisible = NO;
-    [self setEditing:NO canceled:YES];
-    
-}
-- (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container {
-    self.bVisible = YES;
-}
-
-- (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.bVisible) {
-            [self.tableView reloadData];
-        }
-    });
-    
-    return YES;
-}
-
-- (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset {
-    contentInset.bottom = self.tableView.contentInset.bottom;
-    self.tableView.contentInset = contentInset;
-    self.tableView.scrollIndicatorInsets = contentInset;
-    self.tableView.contentOffset = CGPointMake(0, -contentInset.top);
 }
 
 
@@ -771,16 +748,15 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     UIEdgeInsets contentInsets = self.tableView.contentInset;
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+    UIEdgeInsets safeAreaInsets = self.view.safeAreaInsets;
 
-    contentInsets.bottom = 0;
-    scrollInsets.bottom = 0;
+    contentInsets.bottom = safeAreaInsets.bottom;
 
     CGFloat duration = [(NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:duration animations:^{
         self.tableView.contentInset = contentInsets;
-        self.tableView.scrollIndicatorInsets = scrollInsets;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
      }];
 }
 

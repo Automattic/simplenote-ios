@@ -28,6 +28,13 @@ extension UIView {
 
         return output
     }
+
+    /// Returns the first subview in the receiver's hierarchy, downcasted as a UITableView. Returns nil, of course, if it's not a TableView!
+    ///
+    @objc
+    func firstSubviewAsTableView() -> UITableView? {
+        return subviews.first as? UITableView
+    }
 }
 
 

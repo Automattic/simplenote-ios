@@ -140,18 +140,6 @@
 		<string>f9f9f9</string>
 		<key>searhHighlightCornerRadius</key>
 		<integer>3</integer>
-		<key>containerViewSidePanelWidth</key>
-		<integer>200</integer>
-		<key>containerViewSidePanelWidthExpanded</key>
-		<string>300</string>
-		<key>containerViewPanThreshold</key>
-		<integer>0</integer>
-		<key>containerViewSpringAnimationDamping</key>
-		<real>1.5</real>
-		<key>containerViewSpringAnimationDuration</key>
-		<real>0.4</real>
-		<key>containerViewSpringAnimationInitialVelocity</key>
-		<real>6</real>
 		<key>tableViewBackgroundColor</key>
 		<string>@backgroundColor</string>
 		<key>tableViewDetailTextLabelColor</key>

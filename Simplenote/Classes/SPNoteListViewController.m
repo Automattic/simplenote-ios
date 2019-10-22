@@ -4,7 +4,6 @@
 #import "SPNoteEditorViewController.h"
 
 #import "SPAppDelegate.h"
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
 #import "SPEmptyListView.h"
@@ -37,7 +36,6 @@
                                         UITableViewDataSource,
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
-                                        UIGestureRecognizerDelegate,
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
@@ -60,9 +58,9 @@
 
 @implementation SPNoteListViewController
 
-- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)init {
     
-    self = [super initWithSidebarViewController:sidebarViewController];
+    self = [super init];
     if (self) {
         [self configureNavigationButtons];
         [self configureTableView];
@@ -81,6 +79,7 @@
         _emptyListView.userInteractionEnabled = false;
 
         [self registerForPeekAndPop];
+        [self refreshStyle];
         [self update];
     }
     
@@ -203,11 +202,15 @@
 }
 
 - (void)themeDidChange {
+    [self refreshStyle];
+}
+
+- (void)refreshStyle {
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     // Refresh the Table's UI
-    [self.tableView applyTheme];
+    [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI
@@ -267,8 +270,7 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView = [[SPBorderedTableView alloc] init];
-    self.tableView.frame = self.rootView.bounds;
+    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -304,7 +306,9 @@
     
     [self.tableView setEditing:NO];
     bShouldShowSidePanel = YES;
-    [self toggleSidePanel:nil];
+
+    [SPTracker trackSidebarButtonPresed];
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidebar];
 }
 
 
@@ -312,7 +316,7 @@
 
 - (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
     
-    if (bDisableUserInteraction || bListViewIsEmpty) {
+    if (bListViewIsEmpty) {
         return NO;
     }
 
@@ -447,7 +451,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return !bDisableUserInteraction;
+    return YES;
     
 }
 
@@ -559,12 +563,7 @@
 }
 
 
-#pragma mark - Gestures
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
-    return YES;
-}
+#pragma mark - Public API
 
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
@@ -695,7 +694,7 @@
         _emptyListViewRect.size.height -= _emptyListViewRect.origin.y + _keyboardHeight;
         _emptyListView.frame = _emptyListViewRect;
         
-        [self.rootView addSubview:_emptyListView];
+        [self.view addSubview:_emptyListView];
         
         
     } else {
@@ -709,11 +708,9 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.emptyTrashButton setEnabled: [self numNotes] > 0];
-    }
-    
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+    BOOL isTrashOnScreen = tagFilterType == SPTagFilterTypeDeleted;
+    self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
+    self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self updateViewIfEmpty];
     [self updateNavigationBar];
@@ -916,60 +913,45 @@
 }
 
 
-#pragma mark - SPRootViewContainerDelegate
+#pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)shouldShowSidebar {
- 
-    BOOL showSidePanelOveride = bShouldShowSidePanel;
-    bShouldShowSidePanel = NO;
+- (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
+    if (bShouldShowSidePanel) {
+        bShouldShowSidePanel = NO;
+        return YES;
+    }
 
     // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
-    return !(self.tableView.dragging || self.tableView.isEditing || bSearching) || showSidePanelOveride;
+    return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }
 
-- (void)resetNavigationBar {
-    
-    [self updateNavigationBar];
-}
-
-- (void)sidebarWillShow {
-    
+- (void)sidebarContainerWillDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = NO;
-    self.tableView.allowsSelection = NO;
-    [self.tableView setBorderVisibile:YES];
-    
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-    self.addButton.enabled = NO;
-    self.emptyTrashButton.enabled = NO;
-    
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaMid;
-    }];
-    
-    bDisableUserInteraction = YES;
-    
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
+    self.tableView.userInteractionEnabled = NO;
+    self.searchBar.userInteractionEnabled = NO;
+
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 
-- (void)sidebarWillHide {
-
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
-    }];
+- (void)sidebarContainerDidDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
+    // NO-OP
 }
 
-- (void)sidebarDidHide {
-    
+- (void)sidebarContainerWillHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
+    // NO-OP: The navigationBar's top right button is refreshed via the regular `Update` sequence.
+}
+
+- (void)sidebarContainerDidHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = YES;
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
-    [self.tableView setBorderVisibile:NO];
-    
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
-    self.addButton.enabled = YES;
-    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
-    
-    bDisableUserInteraction = NO;
-    [(SPNavigationController *)self.navigationController setDisableRotation:NO];
+    self.tableView.userInteractionEnabled = YES;
+    self.searchBar.userInteractionEnabled = YES;
+
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 
 

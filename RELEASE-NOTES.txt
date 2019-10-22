@@ -4,6 +4,7 @@
 4.12
 -----
 -   Simplenote just got brand new Icons!
+-   Sidebar's UX has been entirely refreshed.
 
 4.11.0
 ======
