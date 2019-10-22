@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" rowHeight="45" id="CzU-k1-4L7" customClass="SPTagListViewCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" rowHeight="46" id="CzU-k1-4L7" customClass="SPTagListViewCell">
             <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CzU-k1-4L7" id="xp1-lh-lT4">
@@ -22,8 +22,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VnD-vW-Ad7">
                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="AL6-ub-Hea"/>
-                                    <constraint firstAttribute="width" constant="24" id="Zxx-nJ-HOL"/>
+                                    <constraint firstAttribute="height" priority="999" constant="24" id="AL6-ub-Hea"/>
+                                    <constraint firstAttribute="width" priority="999" constant="24" id="Zxx-nJ-HOL"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jm9-sw-6Ik">

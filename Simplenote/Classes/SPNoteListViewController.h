@@ -1,12 +1,9 @@
 #import <UIKit/UIKit.h>
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
 @class SPEmptyListView;
-@class SPTitleView;
-@class SPSearchController;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
@@ -17,13 +14,12 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     SPTagFilterTypeUntagged = 5
 };
 
-@interface SPNoteListViewController : SPSidebarContainerViewController {
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
     NSTimer *searchTimer;
 
     // Bools
     BOOL bSearching;
-    BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
@@ -37,7 +33,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 
 @property (nonatomic, strong, readonly) UISearchBar                 *searchBar;
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
-@property (nonatomic, strong) SPBorderedTableView                   *tableView;
+@property (nonatomic, strong) UITableView                           *tableView;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

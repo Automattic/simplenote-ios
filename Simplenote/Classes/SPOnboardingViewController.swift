@@ -172,7 +172,7 @@ private extension SPOnboardingViewController {
 //
 private struct OnboardingStrings {
     static let brandText = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
-    static let signupText = NSLocalizedString("Create an account", comment: "Signup Action")
+    static let signupText = NSLocalizedString("Sign Up", comment: "Signup Action")
     static let loginText = NSLocalizedString("Log In", comment: "Login Action")
     static let headerText = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
     static let loginWithEmailText = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
