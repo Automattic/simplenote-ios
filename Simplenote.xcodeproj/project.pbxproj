@@ -25,7 +25,6 @@
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
 		374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */; };
-		37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */; };
 		375D24B121E01131007AB25A /* html5_blocks.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249D21E0112B007AB25A /* html5_blocks.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B221E01131007AB25A /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249F21E0112C007AB25A /* buffer.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B321E01131007AB25A /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D24A021E0112C007AB25A /* autolink.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -96,7 +95,6 @@
 		46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = E2465A2217AD70810097B19B /* SPToggle.m */; };
 		46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF91794F55000A17ED2 /* SPActionSheet.m */; };
 		46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E8117B49F4600F13AD9 /* DTPinLockController.m */; };
-		46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E201864B17A57A7C00217E0B /* SPBorderedView.m */; };
 		46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */; };
 		46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EEAE0B17C7BBB4002BEDA2 /* UITableView+Styling.m */; };
 		46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DBD917CDA6BD00070550 /* UIImage+Extensions.m */; };
@@ -148,6 +146,8 @@
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
+		B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */; };
+		B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */; };
 		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
 		B52AC186233587F8007B2E75 /* UITraitCollection+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
@@ -258,7 +258,6 @@
 		E215C79E180B228800AD36B5 /* SPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C79C180B228800AD36B5 /* SPTextField.m */; };
 		E280453C180DAE0200670073 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E280453E180DAE0200670073 /* Localizable.strings */; };
 		E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2922AC1180CA06B003AF914 /* SPSidebarContainerViewController.m */; };
-		E2922AC7180CAC62003AF914 /* SPSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2922AC5180CAC62003AF914 /* SPSidebarViewController.m */; };
 		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
 		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
 		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
@@ -328,8 +327,6 @@
 		373AD30621C4739300A4EA89 /* NSMutableAttributedString+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Styling.h"; sourceTree = "<group>"; };
 		373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Styling.m"; sourceTree = "<group>"; };
 		374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPChecklistTest.swift; sourceTree = "<group>"; };
-		37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedTableView.h; path = Classes/SPBorderedTableView.h; sourceTree = "<group>"; };
-		37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedTableView.m; path = Classes/SPBorderedTableView.m; sourceTree = "<group>"; };
 		375D249C21E0112B007AB25A /* html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html.h; sourceTree = "<group>"; };
 		375D249D21E0112B007AB25A /* html5_blocks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = html5_blocks.c; sourceTree = "<group>"; };
 		375D249E21E0112C007AB25A /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
@@ -423,6 +420,8 @@
 		B51889A31E0DB01E00E71B83 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
+		B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView+Simplenote.swift"; path = "Classes/UITableView+Simplenote.swift"; sourceTree = "<group>"; };
+		B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScreen+Simplenote.swift"; path = "Classes/UIScreen+Simplenote.swift"; sourceTree = "<group>"; };
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
 		B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Simplenote.swift"; path = "Classes/UIViewController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITraitCollection+Simplenote.swift"; path = "Classes/UITraitCollection+Simplenote.swift"; sourceTree = "<group>"; };
@@ -563,8 +562,6 @@
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
 		E201864617A4892300217E0B /* SPActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActionButton.h; path = Classes/SPActionButton.h; sourceTree = "<group>"; };
 		E201864717A4892300217E0B /* SPActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPActionButton.m; path = Classes/SPActionButton.m; sourceTree = "<group>"; };
-		E201864A17A57A7C00217E0B /* SPBorderedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPBorderedView.h; path = Classes/SPBorderedView.h; sourceTree = "<group>"; };
-		E201864B17A57A7C00217E0B /* SPBorderedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPBorderedView.m; path = Classes/SPBorderedView.m; sourceTree = "<group>"; };
 		E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPPopoverContainerViewController.h; path = Classes/SPPopoverContainerViewController.h; sourceTree = "<group>"; };
 		E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPPopoverContainerViewController.m; path = Classes/SPPopoverContainerViewController.m; sourceTree = "<group>"; };
 		E213C2D117A87246009BE49E /* SPSideBySideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSideBySideView.h; path = Classes/SPSideBySideView.h; sourceTree = "<group>"; };
@@ -648,8 +645,6 @@
 		E2911E8317B49F4600F13AD9 /* DTTwoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTTwoPageViewController.m; path = DTPinLock/DTTwoPageViewController.m; sourceTree = "<group>"; };
 		E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSidebarContainerViewController.h; path = Classes/SPSidebarContainerViewController.h; sourceTree = "<group>"; };
 		E2922AC1180CA06B003AF914 /* SPSidebarContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPSidebarContainerViewController.m; path = Classes/SPSidebarContainerViewController.m; sourceTree = "<group>"; };
-		E2922AC4180CAC62003AF914 /* SPSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSidebarViewController.h; path = Classes/SPSidebarViewController.h; sourceTree = "<group>"; };
-		E2922AC5180CAC62003AF914 /* SPSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPSidebarViewController.m; path = Classes/SPSidebarViewController.m; sourceTree = "<group>"; };
 		E29ADD3B17848E8500E55842 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E29ADD3D17848E8500E55842 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E29ADD3F17848E8500E55842 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1022,6 +1017,7 @@
 				B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */,
 				B5757369232C567000443C2E /* UIImage+Dynamic.swift */,
 				B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */,
+				B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */,
 				B56A696622F9D55F00B90398 /* UIView+Animations.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
@@ -1031,6 +1027,7 @@
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
+				B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1208,16 +1205,12 @@
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
-				37582B761DBFCD8D00695F36 /* SPBorderedTableView.h */,
-				37582B771DBFCD8D00695F36 /* SPBorderedTableView.m */,
 				E201864617A4892300217E0B /* SPActionButton.h */,
 				E201864717A4892300217E0B /* SPActionButton.m */,
 				E22BCDF81794F55000A17ED2 /* SPActionSheet.h */,
 				E22BCDF91794F55000A17ED2 /* SPActionSheet.m */,
 				E22BCDF51794F53600A17ED2 /* SPActivityView.h */,
 				E22BCDF61794F53600A17ED2 /* SPActivityView.m */,
-				E201864A17A57A7C00217E0B /* SPBorderedView.h */,
-				E201864B17A57A7C00217E0B /* SPBorderedView.m */,
 				E22BCE0017960CBC00A17ED2 /* SPButton.h */,
 				E22BCE0117960CBC00A17ED2 /* SPButton.m */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
@@ -1417,8 +1410,6 @@
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
 				E2922AC1180CA06B003AF914 /* SPSidebarContainerViewController.m */,
-				E2922AC4180CAC62003AF914 /* SPSidebarViewController.h */,
-				E2922AC5180CAC62003AF914 /* SPSidebarViewController.m */,
 				E215C797180B130B00AD36B5 /* SPTableViewController.h */,
 				E215C798180B130B00AD36B5 /* SPTableViewController.m */,
 				E277B5E7179EDAFB0095CD24 /* SPTagsListViewController.h */,
@@ -1925,6 +1916,7 @@
 				B5B8AE7A1AB9ECF00082775D /* SPRatingsPromptView.m in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
+				B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */,
 				375D24B521E01131007AB25A /* context_test.c in Sources */,
 				46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */,
 				E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */,
@@ -1955,6 +1947,7 @@
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B5185CFB23427F2F0060145A /* SPSearchController.swift in Sources */,
+				B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */,
 				B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */,
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
@@ -2007,12 +2000,10 @@
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
-				E2922AC7180CAC62003AF914 /* SPSidebarViewController.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
 				B56A696522F9D54600B90398 /* SPLabel.swift in Sources */,
-				46A3C9A817DFA81A002865AE /* SPBorderedView.m in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
@@ -2020,7 +2011,6 @@
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
-				37582B781DBFCD8D00695F36 /* SPBorderedTableView.m in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */,
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,
