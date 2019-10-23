@@ -305,7 +305,6 @@
 - (void)sidebarButtonAction:(id)sender {
     
     [self.tableView setEditing:NO];
-    bShouldShowSidePanel = YES;
 
     [SPTracker trackSidebarButtonPresed];
     [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidebar];
@@ -917,11 +916,6 @@
 
 - (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
-    if (bShouldShowSidePanel) {
-        bShouldShowSidePanel = NO;
-        return YES;
-    }
-
     // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
     return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }

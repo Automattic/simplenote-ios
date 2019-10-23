@@ -22,7 +22,6 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     BOOL bSearching;
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
-    BOOL bShouldShowSidePanel;
 
     SPTagFilterType tagFilterType;
 }
