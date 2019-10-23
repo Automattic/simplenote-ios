@@ -282,7 +282,7 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-10-03 05:14:36+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "إضافة وسم";
 
+/* Title of option to display all notes */
+"All Notes" = "كل الملاحظات";
+
 /* No comment provided by engineer. */
 "Cancel" = "إلغاء";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "قائمة الملاحظات الموجزة";
 
 /* No comment provided by engineer. */
 "Create a new note" = "إنشاء ملاحظة جديدة";
@@ -81,16 +87,22 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "عرض خيارات للملاحظة";
 
+/* No comment provided by engineer. */
+"New note" = "ملاحظة جديدة";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "لا توجد ملاحظات";
 
 /* Message shown when no notes match a search string */
 "No Results" = "لا توجد نتائج";
 
+/* No comment provided by engineer. */
+"Note not published" = "لم يتم نشر الملاحظة";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "تم نشر الملاحظة";
 
-/* Description of Simplenote shown in first launch view */
+/* Title of option to display all notes */
 "Notes" = "ملاحظات";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
@@ -167,6 +179,9 @@
 
 /* Title of options screen */
 "Settings" = "إعدادات";
+
+/* No comment provided by engineer. */
+"Share note" = "مشاركة الملاحظة";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "مشاركة محتوى الملاحظة الحالية";
@@ -359,6 +374,9 @@
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "يعني تسجيلك موافقتك على شروط الخدمة »";
 
+/* Forgot Password */
+"Forgot password? »" = "هل نسيت كلمة المرور؟ »";
+
 /* Ratings View */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
 
@@ -367,6 +385,11 @@
 
 /* No comment provided by engineer. */
 "Could Be Better" = "قد يكون أفضل";
+
+"Great! Could you leave us a nice review?
+It really helps." = "عظيم! هل يمكن أن تترك لنا مراجعة لطيفة؟
+
+إنها تساعد حقًا.";
 
 /* No comment provided by engineer. */
 "Leave a Review" = "اترك رأيًا";

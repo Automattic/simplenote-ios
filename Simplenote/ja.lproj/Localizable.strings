@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "タグを追加";
 
+/* Title of option to display all notes */
+"All Notes" = "すべてのノート";
+
 /* No comment provided by engineer. */
 "Cancel" = "キャンセル";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "要約ノート一覧";
 
 /* No comment provided by engineer. */
 "Create a new note" = "新規ノートを作成";
@@ -81,11 +87,17 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "ノートのオプションを表示";
 
+/* No comment provided by engineer. */
+"New note" = "新規ノート";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "ノートがありません";
 
 /* Message shown when no notes match a search string */
 "No Results" = "一致する結果がありません";
+
+/* No comment provided by engineer. */
+"Note not published" = "非公開ノート";
 
 /* Confirmation shown when a note is published */
 "Note Published" = "ノートを公開しました";
@@ -167,6 +179,9 @@
 
 /* No comment provided by engineer. */
 "Settings" = "設定";
+
+/* No comment provided by engineer. */
+"Share note" = "ノートを共有";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "現在のノートのコンテンツを共有";
@@ -358,6 +373,9 @@ http://simplenote.com で Mac・Android アプリやブラウザからのアク�
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "登録すると、利用規約に合意したものとみなされます。»";
+
+/* Forgot Password */
+"Forgot password? »" = "パスワードをお忘れですか ?»";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
