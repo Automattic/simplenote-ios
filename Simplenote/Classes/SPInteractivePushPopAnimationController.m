@@ -113,10 +113,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
         
         id<SPInteractivePushViewControllerProvider> topVC = (id<SPInteractivePushViewControllerProvider>)self.navigationController.topViewController;
 
-        // Report the beginning of the transition if possible
-        if ([topVC respondsToSelector:@selector(interactivePushPopAnimationControllerWillBeginPush:)]) {
-            [topVC interactivePushPopAnimationControllerWillBeginPush:self];
-        }
+        [topVC interactivePushPopAnimationControllerWillBeginPush:self];
         
         UIViewController *nextViewController = [topVC nextViewControllerForInteractivePush];
         [self.navigationController pushViewController:nextViewController animated:YES];
