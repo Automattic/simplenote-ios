@@ -14,8 +14,6 @@
 		<string>eef3f8</string>
 		<key>dividerColor</key>
 		<string>dedede</string>
-		<key>lockTextColor</key>
-		<string>ffffff</string>
 		<key>noteHeadlineFontColor</key>
 		<string>111111</string>
 		<key>noteBodyLineHeightPercentage</key>
