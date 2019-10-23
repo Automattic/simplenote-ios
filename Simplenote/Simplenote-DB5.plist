@@ -14,8 +14,6 @@
 		<string>eef3f8</string>
 		<key>dividerColor</key>
 		<string>dedede</string>
-		<key>tertiaryActionColor</key>
-		<string>899199</string>
 		<key>lockTextColor</key>
 		<string>ffffff</string>
 		<key>noteHeadlineFontColor</key>
@@ -175,8 +173,6 @@
 		<string>999999</string>
 		<key>dividerColor</key>
 		<string>343434</string>
-		<key>tertiaryActionColor</key>
-		<string>6F7780</string>
 		<key>noteHeadlineFontColor</key>
 		<string>DDDDDD</string>
 		<key>noteBodyFontPreviewColor</key>

@@ -533,7 +533,7 @@
                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                        [self shareNote:note sourceIndexPath:indexPath];
                                                                    }];
-    share.backgroundColor = [UIColor colorWithName:UIColorNameTertiaryActionColor];
+    share.backgroundColor = [UIColor simplenoteTertiaryActionColor];
 
     return @[trash, togglePin, share];
 }
