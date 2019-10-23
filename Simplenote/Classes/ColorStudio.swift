@@ -136,4 +136,6 @@ enum ColorStudio: String {
     case yellow80   = "453900"
     case yellow90   = "302800"
     case yellow100  = "1c1700"
+    case spYellow0  = "FE9500"
+    case spYellow10 = "FE9F0A"
 }
