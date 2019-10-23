@@ -209,8 +209,7 @@
 
 - (void)refreshStyle {
     // NavigationBar's Blur
-    UIBlurEffectStyle style = SPUserInterface.isDark ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
-    self.navigationBarBackground.effect = [UIBlurEffect effectWithStyle:style];
+    self.navigationBarBackground.effect = [UIBlurEffect simplenoteBlurEffect];
 
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
@@ -274,8 +273,7 @@
 }
 
 - (void)configureNavigationBarBackground {
-    UIBlurEffectStyle style = SPUserInterface.isDark ? UIBlurEffectStyleDark : UIBlurEffectStyleLight;
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:style];
+    UIBlurEffect *effect = [UIBlurEffect simplenoteBlurEffect];
     self.navigationBarBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
 }
 
