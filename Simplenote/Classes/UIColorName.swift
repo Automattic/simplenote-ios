@@ -20,8 +20,6 @@ enum UIColorName: Int, CaseIterable {
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor
-    case switchTintColor
-    case switchOnTintColor
     case tableViewBackgroundColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor
@@ -71,10 +69,6 @@ extension UIColorName {
             return .noteBodyFontPreviewColor
         case .noteHeadlineFontColor:
             return .noteHeadlineFontColor
-        case .switchTintColor:
-            return .switchTintColor
-        case .switchOnTintColor:
-            return .switchOnTintColor
         case .tableViewBackgroundColor:
             return .tableViewBackgroundColor
         case .tableViewDetailTextLabelColor:

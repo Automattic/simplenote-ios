@@ -104,6 +104,16 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteSwitchTintColor: UIColor {
+        UIColor(lightColor: .gray5, darkColor: .darkGray4)
+    }
+
+    @objc
+    static var simplenoteSwitchOnTintColor: UIColor {
+        UIColor(lightColor: .green50, darkColor: .green30)
+    }
+
+    @objc
     static var simplenoteSecondaryActionColor: UIColor {
         UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
     }

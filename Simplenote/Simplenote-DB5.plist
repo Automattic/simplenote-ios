@@ -42,8 +42,6 @@
 		<string>60</string>
 		<key>switchOnTintColor</key>
 		<string>@tintColor</string>
-		<key>switchTintColor</key>
-		<string>@dividerColor</string>
 		<key>editorViewVerticalNoteSpacing</key>
 		<integer>10</integer>
 		<key>editorViewPreviewNoteAlpha</key>
@@ -171,8 +169,6 @@
 		<string>DDDDDD</string>
 		<key>noteBodyFontPreviewColor</key>
 		<string>@secondaryTextColor</string>
-		<key>switchTintColor</key>
-		<string>@dividerColor</string>
 		<key>switchOnTintColor</key>
 		<string>@textColor</string>
 		<key>barTintColor</key>
