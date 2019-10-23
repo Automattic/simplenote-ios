@@ -755,4 +755,17 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                         object:self];
 }
 
+
+#pragma mark - GestureDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recognizer
+{
+    // Note: navigationController.interactivePopGestureRecognizer **must only begin** whenever there's more than
+    // one ViewController.
+    //
+    // Otherwise we... seriously risk all sorts of weird behaviors. And not cool weird behaviors, precisely.
+    //
+    return self.navigationController.viewControllers.count > 1;
+}
+
 @end
