@@ -1787,7 +1787,9 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
     vc.collaboratorDelegate = self;
     [vc setupWithCollaborators:_currentNote.emailTagsArray];
+
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:vc];
+    navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.navigationController presentViewController:navController

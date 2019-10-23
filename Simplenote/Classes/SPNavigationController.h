@@ -2,7 +2,7 @@
 
 @interface SPNavigationController : UINavigationController
 
-@property (nonatomic) BOOL disableBlurEffect;
+@property (nonatomic) BOOL displaysBlurEffect;
 @property (nonatomic) BOOL disableRotation;
 
 @end

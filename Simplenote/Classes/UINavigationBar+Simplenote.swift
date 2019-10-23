@@ -7,6 +7,7 @@ extension UINavigationBar {
 
     /// Applies Simplenote's **LIGHT** Style
     ///
+    @objc
     func applyLightStyle() {
         let bcColor = UIColor.white
         backgroundColor = bcColor

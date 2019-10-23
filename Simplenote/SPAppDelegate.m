@@ -167,7 +167,6 @@
     self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
-    self.navigationController.disableBlurEffect = YES;
     self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
@@ -508,6 +507,7 @@
 	
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
     navController.disableRotation = YES;
+    navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.sidebarViewController presentViewController:navController animated:YES completion:nil];
