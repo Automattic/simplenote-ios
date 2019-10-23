@@ -167,7 +167,7 @@
     self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.disableBlurEffect = YES;
     self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
