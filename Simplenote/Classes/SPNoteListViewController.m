@@ -273,6 +273,13 @@
 }
 
 - (void)configureNavigationBarBackground {
+    // What's going on:
+    //  -   SPNavigationController usually deals with Blur effects
+    //  -   We're using SPSearchController, since it's UIKit counterpart is extremely buggy
+    //  -   Letting SPNavigationController deal with blur, would essentially end up covering the SearchBar (because of
+    //      UIView's hierarchy).
+    //  -   We need to deal with the Blur at the ViewController level.
+    //
     UIBlurEffect *effect = [UIBlurEffect simplenoteBlurEffect];
     self.navigationBarBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
 }
