@@ -14,6 +14,12 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 #pragma mark - Dynamic Properties
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self refreshBlurEffect];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -29,7 +35,10 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
 {
     _displaysBlurEffect = displaysBlurEffect;
-    [self refreshBlurEffect];
+
+    if (self.isViewLoaded) {
+        [self refreshBlurEffect];
+    }
 }
 
 - (UIVisualEffectView *)navigationBarBackground
