@@ -20,6 +20,18 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     [self refreshBlurEffect];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self startListeningToNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self stopListeningToNotifications];
+}
+
 - (void)setDisableBlurEffect:(BOOL)disableBlurEffect
 {
     _disableBlurEffect = disableBlurEffect;
@@ -47,6 +59,22 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 #pragma mark - Blur Effect Support
 
+- (void)startListeningToNotifications
+{
+    // No need to do this in iOS +13
+    if (@available(iOS 13, *)) {
+        return;
+    }
+
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(refreshBlurStyle) name:VSThemeManagerThemeDidChangeNotification object:nil];
+}
+
+- (void)stopListeningToNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)refreshBlurEffect
 {
     if (self.disableBlurEffect) {
@@ -55,6 +83,11 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 
     [self attachNavigationBarBackground:self.navigationBarBackground toNavigationBar:self.navigationBar];
+}
+
+- (void)refreshBlurStyle
+{
+    self.navigationBarBackground.effect = [UIBlurEffect simplenoteBlurEffect];
 }
 
 - (void)detachNavigationBarBackground
