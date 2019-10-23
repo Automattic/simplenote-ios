@@ -1,6 +1,6 @@
 4.13
 ====
--   Notes List's navigation bar now has a super cool blur effect!
+-   Every Navigation Bar in Simplenote now has a super cool blur effect!
 
 -----
  
