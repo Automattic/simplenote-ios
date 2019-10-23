@@ -5,7 +5,7 @@ import Foundation
 //         Ref. https://github.com/Automattic/color-studio/blob/master/dist/colors.json
 //
 enum ColorStudio: String {
-    case black      = "000"
+    case black      = "000000"
     case blue0      = "eff3f7"
     case blue5      = "c6def6"
     case blue10     = "9ac6f0"
