@@ -17,7 +17,6 @@ enum UIColorName: Int, CaseIterable {
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
     case lightBlueColor
-    case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor
     case tableViewBackgroundColor
@@ -63,8 +62,6 @@ extension UIColorName {
             return .horizontalPickerTitleFontColor
         case .lightBlueColor:
             return .lightBlueColor
-        case .navigationBarTitleFontColor:
-            return .navigationBarTitleFontColor
         case .noteBodyFontPreviewColor:
             return .noteBodyFontPreviewColor
         case .noteHeadlineFontColor:
