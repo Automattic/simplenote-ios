@@ -1,6 +1,7 @@
 4.13
 -----
- 
+-   Fixed a bug that caused the StatusBar to be hidden when Simplenote's Settings were displayed
+
 4.12
 -----
 -   Simplenote just got brand new Icons!
