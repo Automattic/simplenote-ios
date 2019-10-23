@@ -33,11 +33,6 @@ extension UIColor {
 //
 extension UIColor {
 
-
-    @objc
-    static var simplenoteDestructiveActionColor: UIColor {
-        UIColor(studioColor: .red50)
-    }
     @objc
     static var simplenoteBlue50Color: UIColor {
         UIColor(studioColor: .blue50)
@@ -92,9 +87,29 @@ extension UIColor {
     static var simplenoteWPBlue50Color: UIColor {
         UIColor(studioColor: .wpBlue50)
     }
+
     @objc
-    static var simplenoteSecondaryActionColor: UIColor {
-        UIColor(studioColor: .blue50)
+    static var simplenoteLockBackgroundColor: UIColor {
+        UIColor(lightColor: .blue50, darkColor: .darkGray1)
     }
 
+    @objc
+    static var simplenoteLockTextColor: UIColor {
+        UIColor(studioColor: .white)
+    }
+
+    @objc
+    static var simplenoteSecondaryActionColor: UIColor {
+        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
+    }
+
+    @objc
+    static var simplenoteTertiaryActionColor: UIColor {
+        UIColor(lightColor: .gray30, darkColor: .gray50)
+    }
+
+    @objc
+    static var simplenoteDestructiveActionColor: UIColor {
+        UIColor(lightColor: .red50, darkColor: .red40)
+    }
 }
