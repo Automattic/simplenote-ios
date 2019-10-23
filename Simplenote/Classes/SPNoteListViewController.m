@@ -526,7 +526,7 @@
                                                                  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                      [self togglePinnedNote:note];
                                                                  }];
-    togglePin.backgroundColor = [UIColor colorWithName:UIColorNameSecondaryActionColor];
+    togglePin.backgroundColor = [UIColor simplenoteSecondaryActionColor];
 
     UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                      title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")

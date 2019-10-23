@@ -92,5 +92,9 @@ extension UIColor {
     static var simplenoteWPBlue50Color: UIColor {
         UIColor(studioColor: .wpBlue50)
     }
+    @objc
+    static var simplenoteSecondaryActionColor: UIColor {
+        UIColor(studioColor: .blue50)
+    }
 
 }
