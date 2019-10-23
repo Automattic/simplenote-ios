@@ -23,8 +23,6 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
-
-    SPTagFilterType tagFilterType;
 }
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
@@ -34,6 +32,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 @property (nonatomic, strong, readonly) UISearchBar                 *searchBar;
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
 @property (nonatomic, strong) UITableView                           *tableView;
+@property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

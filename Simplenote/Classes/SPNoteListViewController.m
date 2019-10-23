@@ -53,6 +53,7 @@
 
 @property (nonatomic, assign) BOOL                      bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                      bResetTitleView;
+@property (nonatomic, assign) SPTagFilterType                       tagFilterType;
 
 @end
 
@@ -218,13 +219,10 @@
 }
 
 - (void)updateNavigationBar {
-    if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
-    } else {
-        [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
-    }
+    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? _emptyTrashButton : _addButton;
+
+    [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
+    [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
 }
 
 
@@ -463,7 +461,7 @@
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (tagFilterType == SPTagFilterTypeDeleted) {
+    if (self.tagFilterType == SPTagFilterTypeDeleted) {
         return [self rowActionsForDeletedNote:note];
     }
 
@@ -708,7 +706,7 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    BOOL isTrashOnScreen = tagFilterType == SPTagFilterTypeDeleted;
+    BOOL isTrashOnScreen = self.tagFilterType == SPTagFilterTypeDeleted;
     self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
     self.tableView.allowsSelection = !isTrashOnScreen;
     
@@ -721,11 +719,11 @@
 {
     NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
     if ([selectedTag isEqualToString:kSimplenoteTrashKey]) {
-        tagFilterType = SPTagFilterTypeDeleted;
+        self.tagFilterType = SPTagFilterTypeDeleted;
     } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
-        tagFilterType = SPTagFilterTypeUntagged;
+        self.tagFilterType = SPTagFilterTypeUntagged;
     } else {
-        tagFilterType = SPTagFilterTypeUserTag;
+        self.tagFilterType = SPTagFilterTypeUserTag;
     }
 
     [NSFetchedResultsController deleteCacheWithName:@"Root"];
@@ -749,9 +747,9 @@
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
 
-    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(tagFilterType == SPTagFilterTypeDeleted)]];
+    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(self.tagFilterType == SPTagFilterTypeDeleted)]];
 
-    switch (tagFilterType) {
+    switch (self.tagFilterType) {
         case SPTagFilterTypeShared:
             [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
             break;
@@ -960,7 +958,7 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (tagFilterType == SPTagFilterTypeDeleted && waiting) {
+    if (self.tagFilterType == SPTagFilterTypeDeleted && waiting) {
         return;
     }
 
