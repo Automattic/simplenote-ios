@@ -223,10 +223,10 @@
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? _emptyTrashButton : _addButton;
+    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? self.emptyTrashButton : self.addButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
-    [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
+    [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
 }
 
 
