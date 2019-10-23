@@ -151,7 +151,7 @@ extension SPSearchController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        updateStatus(active: false)
+        dismiss()
         delegate?.searchControllerDidEndSearch(self)
     }
 }

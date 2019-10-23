@@ -375,7 +375,6 @@
     bSearching = NO;
 
     self.searchText = nil;
-    [self.searchController dismiss];
 
     [self update];
 }
