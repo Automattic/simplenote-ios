@@ -99,6 +99,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteNavigationBarTitleColor: UIColor {
+        UIColor(lightColor: .gray80, darkColor: .white)
+    }
+
+    @objc
     static var simplenoteSearchHighlightTextColor: UIColor {
         UIColor(studioColor: .white)
     }
