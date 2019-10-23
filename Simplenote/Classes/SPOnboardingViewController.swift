@@ -66,7 +66,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        navigationController?.navigationBar.applySimplenoteLightStyle()
+        navigationController?.navigationBar.applyLightStyle()
 
         // All of the Authentication Flows are meant to be rendered in Light Mode
         if #available(iOS 13.0, *) {

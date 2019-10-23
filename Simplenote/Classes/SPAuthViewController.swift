@@ -239,7 +239,7 @@ private extension SPAuthViewController {
 
     func setupNavigationController() {
         title = mode.title
-        navigationController?.navigationBar.applySimplenoteLightStyle()
+        navigationController?.navigationBar.applyLightStyle()
     }
 
     func startListeningToNotifications() {
