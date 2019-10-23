@@ -1,5 +1,6 @@
 4.13
 -----
+-   Fixed a bug that caused Swipe to Dismiss gesture not to properly work in the Editor
  
 4.12
 -----
