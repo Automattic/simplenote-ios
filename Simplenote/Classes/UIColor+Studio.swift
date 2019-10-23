@@ -33,6 +33,11 @@ extension UIColor {
 //
 extension UIColor {
 
+
+    @objc
+    static var simplenoteDestructiveActionColor: UIColor {
+        UIColor(studioColor: .red50)
+    }
     @objc
     static var simplenoteBlue50Color: UIColor {
         UIColor(studioColor: .blue50)

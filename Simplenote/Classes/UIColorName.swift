@@ -6,7 +6,6 @@ import UIKit
 //
 @objc
 enum UIColorName: Int, CaseIterable {
-    case destructiveActionColor
     case secondaryActionColor
     case tertiaryActionColor
     case actionSheetButtonFontColor
@@ -49,8 +48,6 @@ extension UIColorName {
     ///
     var legacyColorKey: ThemeColorKey {
         switch self {
-        case .destructiveActionColor:
-            return .destructiveActionColor
         case .secondaryActionColor:
             return .secondaryActionColor
         case .tertiaryActionColor:

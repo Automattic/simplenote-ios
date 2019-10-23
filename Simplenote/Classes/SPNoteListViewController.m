@@ -515,7 +515,7 @@
                                                                        [[SPObjectManager sharedManager] trashNote:note];
                                                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
                                                                    }];
-    trash.backgroundColor = [UIColor colorWithName:UIColorNameDestructiveActionColor];
+    trash.backgroundColor = [UIColor simplenoteDestructiveActionColor];
 
     NSString *pinText = note.pinned
                             ? NSLocalizedString(@"Unpin", @"Unpin (verb) - the action of Unpinning a note")
