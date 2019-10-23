@@ -111,7 +111,7 @@ enum ColorStudio: String {
     case red80      = "691c1c"
     case red90      = "451313"
     case red100     = "240a0a"
-    case white      = "FFF"
+    case white      = "FFFFFF"
     case wpBlue0    = "#e6f1f5"
     case wpBlue5    = "#bedae6"
     case wpBlue10   = "#98c6d9"

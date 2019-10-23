@@ -15,7 +15,6 @@ enum ThemeColorKey: String {
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
     case lightBlueColor
-    case lockBackgroundColor
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor

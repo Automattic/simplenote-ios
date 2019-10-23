@@ -109,7 +109,7 @@
         numberOfDigits = 4;
         
         // get snapshot of presenting view
-        self.view.backgroundColor = [UIColor colorWithName:UIColorNameLockBackgroundColor];
+        self.view.backgroundColor = [UIColor simplenoteLockBackgroundColor];
         baseViewController.view.backgroundColor = [UIColor clearColor];
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {

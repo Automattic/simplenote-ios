@@ -154,8 +154,6 @@
 		<string>d9d9d9</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
-		<key>lockBackgroundColor</key>
-		<string>448AC9</string>
 	</dict>
 	<key>Dark</key>
 	<dict>
@@ -219,8 +217,6 @@
 		<string>@dividerColor</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
-		<key>lockBackgroundColor</key>
-		<string>@tableViewBackgroundColor</string>
 	</dict>
 </dict>
 </plist>
