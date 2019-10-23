@@ -41,19 +41,23 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
-@property (nonatomic, strong) UIBarButtonItem           *addButton;
-@property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
+@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
-@property (nonatomic, strong) SPSearchController        *searchController;
-@property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
+@property (nonatomic, strong) UIBarButtonItem                       *addButton;
+@property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
+@property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
-@property (nonatomic, strong) SPTransitionController    *transitionController;
-@property (nonatomic, assign) CGFloat                   keyboardHeight;
+@property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, assign) BOOL                      bTitleViewAnimating;
-@property (nonatomic, assign) BOOL                      bResetTitleView;
+@property (nonatomic, strong) SPSearchController                    *searchController;
+@property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
+
+@property (nonatomic, strong) SPTransitionController                *transitionController;
+@property (nonatomic, assign) CGFloat                               keyboardHeight;
+
 @property (nonatomic, assign) SPTagFilterType                       tagFilterType;
+@property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
+@property (nonatomic, assign) BOOL                                  bResetTitleView;
 
 @end
 
