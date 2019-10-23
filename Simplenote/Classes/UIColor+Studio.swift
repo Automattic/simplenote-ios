@@ -99,6 +99,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteSearchHighlightTextColor: UIColor {
+        UIColor(studioColor: .white)
+    }
+
+    @objc
     static var simplenoteSecondaryActionColor: UIColor {
         UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
     }

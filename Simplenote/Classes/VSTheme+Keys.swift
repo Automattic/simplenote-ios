@@ -18,7 +18,6 @@ enum ThemeColorKey: String {
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor
-    case searchHighlightFontColor
     case switchTintColor
     case switchOnTintColor
     case tableViewBackgroundColor

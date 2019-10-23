@@ -129,7 +129,7 @@
     
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:attributedString];
     [mutableAttributedString addAttribute:NSForegroundColorAttributeName
-                                    value:[UIColor colorWithName:UIColorNameSearchHighlightFontColor]
+                                    value:[UIColor simplenoteSearchHighlightTextColor]
                                     range:NSMakeRange(0, mutableAttributedString.length)];
 
     highlightLabel.attributedText = mutableAttributedString;

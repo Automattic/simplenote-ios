@@ -126,8 +126,6 @@
 		<integer>3</integer>
 		<key>searchHighlightVerticalPadding</key>
 		<integer>0</integer>
-		<key>searchHighlightFontColor</key>
-		<string>f9f9f9</string>
 		<key>searhHighlightCornerRadius</key>
 		<integer>3</integer>
 		<key>tableViewBackgroundColor</key>
@@ -201,8 +199,6 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>searchHighlightFontColor</key>
-		<string>f9f9f9</string>
 		<key>tableViewBackgroundColor</key>
 		<string>1e1e1e</string>
 		<key>tableViewDetailTextLabelColor</key>
