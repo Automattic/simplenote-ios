@@ -1,9 +1,8 @@
 4.13
 ====
 -   Every Navigation Bar in Simplenote now has a super cool blur effect!
+-   Fixed a bug that allowed Peek and Pop to open notes in the Trash.
 
------
- 
 4.12
 ====
 -   Simplenote just got brand new Icons!
