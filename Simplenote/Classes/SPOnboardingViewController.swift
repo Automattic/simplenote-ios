@@ -75,26 +75,24 @@ private extension SPOnboardingViewController {
     }
 
     func setupActionButtons() {
-        let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
-
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
-        loginButton.setTitleColor(simplenoteLightNavy, for: .normal)
+        loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
     }
 
     func setupLabels() {
-        let simplenoteAlmostBlack = UIColor.color(name: .simplenoteAlmostBlack)
+        let textColor = UIColor.simplenoteGray80Color
 
         simplenoteLabel.text = OnboardingStrings.brandText
-        simplenoteLabel.textColor = simplenoteAlmostBlack
+        simplenoteLabel.textColor = textColor
         simplenoteLabel.adjustsFontSizeToFitWidth = true
         simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
 
         headerLabel.text = OnboardingStrings.headerText
-        headerLabel.textColor = simplenoteAlmostBlack
+        headerLabel.textColor = textColor
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.font = .preferredFont(forTextStyle: .title3)
     }
