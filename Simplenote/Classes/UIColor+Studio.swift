@@ -16,7 +16,7 @@ extension UIColor {
     ///
     convenience init(lightColor: ColorStudio, darkColor: ColorStudio) {
         guard #available(iOS 13.0, *) else {
-            let targetColor = SPUserInterface.isDark ? lightColor : darkColor
+            let targetColor = SPUserInterface.isDark ? darkColor : lightColor
             self.init(studioColor: targetColor)
             return
         }
