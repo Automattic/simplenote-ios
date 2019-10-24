@@ -437,7 +437,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsAccountRowLogout: {
-                    cell.textLabel.text = NSLocalizedString(@"Sign Out", @"Sign out of the active account in the app");
+                    cell.textLabel.text = NSLocalizedString(@"Log Out", @"Log out of the active account in the app");
                     break;
                 }
                 default:
@@ -676,7 +676,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                 preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* signOutAction = [UIAlertAction
-                                    actionWithTitle:NSLocalizedString(@"Delete Notes", @"Verb: Delete notes and sign out of the app")
+                                    actionWithTitle:NSLocalizedString(@"Delete Notes", @"Verb: Delete notes and log out of the app")
                                     style:UIAlertActionStyleDestructive
                                     handler:^(UIAlertAction * action) {
                                         [SPTracker trackUserSignedOut];
