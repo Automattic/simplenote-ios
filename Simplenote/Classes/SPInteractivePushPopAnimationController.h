@@ -12,7 +12,6 @@
 
 @protocol SPInteractivePushViewControllerProvider <NSObject>
 - (UIViewController *)nextViewControllerForInteractivePush;
-@optional
 - (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller;
 - (void)interactivePushPopAnimationControllerWillBeginPush:(SPInteractivePushPopAnimationController *)controller;
 @end

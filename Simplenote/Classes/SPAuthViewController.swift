@@ -25,7 +25,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            emailInputView.textColor = .simplenoteGray80Color
             emailInputView.delegate = self
         }
     }
@@ -36,7 +36,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            emailWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            emailWarningLabel.textColor = .simplenoteRed60Color
             emailWarningLabel.isHidden = true
         }
     }
@@ -51,7 +51,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
-            passwordInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
         }
     }
@@ -61,7 +61,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var passwordWarningLabel: SPLabel! {
         didSet {
             passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            passwordWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            passwordWarningLabel.textColor = .simplenoteRed60Color
             passwordWarningLabel.isHidden = true
         }
     }
@@ -90,7 +90,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             if let title = mode.secondaryActionText {
                 secondaryActionButton.setTitle(title, for: .normal)
-                secondaryActionButton.setTitleColor(.color(name: .simplenoteLightNavy), for: .normal)
+                secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
             }
 
             if let attributedTitle = mode.secondaryActionAttributedText {
@@ -107,7 +107,7 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.tintColor = .color(name: .simplenoteGray50)
+        button.tintColor = .simplenoteGray50Color
         button.setImage(.image(name: .onePassword), for: .normal)
         button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
         button.sizeToFit()
@@ -119,7 +119,7 @@ class SPAuthViewController: UIViewController {
     private lazy var revealPasswordButton: UIButton = {
         let selected = UIImage.image(name: .visibilityOn)
         let button = UIButton(type: .custom)
-        button.tintColor = .color(name: .simplenoteGray50)
+        button.tintColor = .simplenoteGray50Color
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
         button.setImage(.image(name: .visibilityOff), for: .normal)
         button.setImage(selected, for: .highlighted)
@@ -252,8 +252,7 @@ private extension SPAuthViewController {
     }
 
     func ensureStylesMatchValidationState() {
-        let name: UIColorName = isInputValid ? .simplenoteLightNavy : .simplenotePalePurple
-        primaryActionButton.backgroundColor = .color(name: name)
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
     @objc func refreshOnePasswordAvailability() {
@@ -587,9 +586,9 @@ private extension AuthenticationStrings {
             .font: UIFont.preferredFont(forTextStyle: .subheadline)
         ])
 
-        output.append(string: signupSecondaryActionPrefix, foregroundColor: .color(name: .simplenoteGunmetal))
+        output.append(string: signupSecondaryActionPrefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
-        output.append(string: signupSecondaryActionSuffix, foregroundColor: .color(name: .simplenoteLightNavy))
+        output.append(string: signupSecondaryActionSuffix, foregroundColor: .simplenoteBlue60Color)
 
         return output
     }
