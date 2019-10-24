@@ -51,39 +51,38 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    CGPoint location = [gestureRecognizer locationInView:self.navigationController.navigationBar];
-    
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] == false) {
+        return YES;
+    }
+
+    UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    UIViewController *topViewController = self.navigationController.topViewController;
+    CGPoint location = [panGestureRecognizer locationInView:navigationBar];
+    CGPoint translation = [panGestureRecognizer translationInView:navigationBar];
+    BOOL isLeftTranslation = translation.x < 0;
+
     // Ignore touches within the navigation bar
-    if (CGRectContainsPoint(self.navigationController.navigationBar.bounds, location)) {
+    if (CGRectContainsPoint(navigationBar.bounds, location)) {
         return NO;
     }
 
-    // If the top view controller conforms to the protocol, we're doing an interactive push
-    // which means that we need to leave the system interactive pop gesture's touch area alone
-    if ([self.navigationController.topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerProvider)]) {
-        UIViewController <SPInteractivePushViewControllerProvider> *topViewController = (UIViewController <SPInteractivePushViewControllerProvider> *)self.navigationController.topViewController;
-        if ([topViewController respondsToSelector:@selector(interactivePushPopAnimationControllerShouldBeginPush:)]) {
-            if (![topViewController interactivePushPopAnimationControllerShouldBeginPush:self]) {
-                return NO;
-            }
-        }
-        // `kStandardInteractivePopGestureWidth` is an estimate of how wide the standard navigation
-        // controller interactive pop gesture recognizer's detection area is.
-        if (location.x < SPStandardInteractivePopGestureWidth) {
+    // TopViewController conforms to SPInteractivePushViewControllerProvider AND We're Swiping Right to Left: Support Push!
+    if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerProvider)] && isLeftTranslation) {
+        UIViewController <SPInteractivePushViewControllerProvider> *pushProviderController = (UIViewController <SPInteractivePushViewControllerProvider> *)topViewController;
+        if (![pushProviderController interactivePushPopAnimationControllerShouldBeginPush:self]) {
             return NO;
         }
 
-        return YES;
+        // `StandardInteractivePopGestureWidth` is an estimate of how wide the standard navigation
+        // controller interactive pop gesture recognizer's detection area is.
+        return (location.x >= SPStandardInteractivePopGestureWidth);
     }
 
-    // If the top view controller is content that we've pushed, then then return YES
-    // so that we can detect a swipe back to the provider.
-    if ([self.navigationController.topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)]) {
-        return YES;
-    }
-    
-    return NO;
+    // TopViewController conforms to SPInteractivePushViewControllerContent: Support Swipe Back
+    return [topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)];
 }
+
 
 - (void)handlePanGesture:(UIScreenEdgePanGestureRecognizer *)gesture
 {
@@ -113,10 +112,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
         
         id<SPInteractivePushViewControllerProvider> topVC = (id<SPInteractivePushViewControllerProvider>)self.navigationController.topViewController;
 
-        // Report the beginning of the transition if possible
-        if ([topVC respondsToSelector:@selector(interactivePushPopAnimationControllerWillBeginPush:)]) {
-            [topVC interactivePushPopAnimationControllerWillBeginPush:self];
-        }
+        [topVC interactivePushPopAnimationControllerWillBeginPush:self];
         
         UIViewController *nextViewController = [topVC nextViewControllerForInteractivePush];
         [self.navigationController pushViewController:nextViewController animated:YES];

@@ -88,8 +88,11 @@ extension SPNoteListViewController {
 extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard tableView.isUserInteractionEnabled, let indexPath = tableView.indexPathForRow(at: location) else {
-            return nil
+        guard tableView.isUserInteractionEnabled,
+            tagFilterType != .deleted,
+            let indexPath = tableView.indexPathForRow(at: location)
+            else {
+                return nil
         }
 
         /// Prevent any Pan gesture from passing thru
