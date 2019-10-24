@@ -23,19 +23,7 @@ enum ThemeColorKey: String {
     case navigationBarTitleFontColor
     case noteBodyFontPreviewColor
     case noteHeadlineFontColor
-    case searchBarImageColor
     case searchHighlightFontColor
-    case simplenoteAlmostBlack
-    case simplenoteDeepSeaBlue
-    case simplenoteGray10
-    case simplenoteGray50
-    case simplenoteGunmetal
-    case simplenoteLightNavy
-    case simplenoteLightPink
-    case simplenoteLipstick
-    case simplenoteMidBlue
-    case simplenotePalePurple
-    case simplenoteSlateGrey
     case switchTintColor
     case switchOnTintColor
     case tableViewBackgroundColor
