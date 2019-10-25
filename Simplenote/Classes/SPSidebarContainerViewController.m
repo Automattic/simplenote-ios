@@ -6,9 +6,9 @@
 
 static const CGFloat SPSidebarWidth                         = 300;
 static const CGFloat SPSidebarAnimationThreshold            = 0.15;
-static const CGFloat SPSidebarAnimationDuration             = 0.4;
-static const CGFloat SPSidebarAnimationDamping              = 1.5;
-static const CGVector SPSidebarAnimationInitialVelocity     = {6, 0};
+static const CGFloat SPSidebarAnimationDuration             = 0.35;
+static const CGFloat SPSidebarAnimationDamping              = 10;
+static const CGVector SPSidebarAnimationInitialVelocity     = {-10, 0};
 static const CGFloat SPSidebarAnimationCompletionMin        = 0.001;
 static const CGFloat SPSidebarAnimationCompletionMax        = 0.999;
 static const CGFloat SPSidebarAnimationCompletionFactorFull = 1.0;
