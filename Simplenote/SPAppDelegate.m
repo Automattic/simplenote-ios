@@ -509,6 +509,7 @@
     navController.disableRotation = YES;
     navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalPresentationCapturesStatusBarAppearance = YES;
     
     [self.sidebarViewController presentViewController:navController animated:YES completion:nil];
 }
