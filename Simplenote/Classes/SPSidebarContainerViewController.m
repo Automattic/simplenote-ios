@@ -303,6 +303,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 {
     CGAffineTransform transform = visible ? CGAffineTransformMakeTranslation(SPSidebarWidth, 0) : CGAffineTransformIdentity;
 
+    CGFloat alpha = visible ? UIKitConstants.alphaFull : UIKitConstants.alphaZero;
     UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
                                                                                   initialVelocity:SPSidebarAnimationInitialVelocity];
 
@@ -312,6 +313,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [animator addAnimations:^{
         self.mainView.transform = transform;
         self.sidebarView.transform = transform;
+        self.sidebarView.alpha = alpha;
     }];
 
     return animator;
