@@ -34,6 +34,10 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
 {
+    if (_displaysBlurEffect == displaysBlurEffect) {
+        return;
+    }
+
     _displaysBlurEffect = displaysBlurEffect;
 
     if (self.isViewLoaded) {
