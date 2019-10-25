@@ -243,6 +243,11 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         return NO;
     }
 
+    // Scenario G: We're still tracking something?
+    if (self.isPanningActive) {
+        return NO;
+    }
+
     return YES;
 }
 
@@ -340,12 +345,12 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         BOOL didBecomeVisible = self.isSidebarVisible;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
+            weakSelf.isPanningActive = NO;
             [weakSelf endSidebarTransition:didBecomeVisible];
             [UIViewController attemptRotationToDeviceOrientation];
         }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
-        self.isPanningActive = NO;
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
