@@ -72,7 +72,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             
             [navigationController.interactivePopGestureRecognizer addTarget:self
                                                                      action:@selector(handlePan:)];
-            navigationController.interactivePopGestureRecognizer.delegate = self;
         }
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
@@ -565,10 +564,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 }
             }
 
-            // Snapshot: SearchBar
-            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
-            [self storeTransitionSnapshot:searchBarSnapshot];
         }
+
+        // Snapshot: SearchBar
+        SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:searchBarSnapshot];
     }
 }
 
