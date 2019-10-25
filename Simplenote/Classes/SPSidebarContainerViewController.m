@@ -296,16 +296,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (UIViewPropertyAnimator *)animatorForSidebarVisibility:(BOOL)visible
 {
-    CGRect mainFrame = self.mainView.frame;
-    CGRect sideFrame = self.sidebarView.frame;
-
-    if (self.isSidebarVisible) {
-        mainFrame.origin.x = 0;
-        sideFrame.origin.x = -sideFrame.size.width;
-    } else {
-        mainFrame.origin.x = SPSidebarWidth;
-        sideFrame.origin.x = 0;
-    }
+    CGAffineTransform transform = visible ? CGAffineTransformMakeTranslation(SPSidebarWidth, 0) : CGAffineTransformIdentity;
 
     UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
                                                                                   initialVelocity:SPSidebarAnimationInitialVelocity];
@@ -314,8 +305,8 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
                                                                        timingParameters:parameters];
 
     [animator addAnimations:^{
-        self.mainView.frame = mainFrame;
-        self.sidebarView.frame = sideFrame;
+        self.mainView.transform = transform;
+        self.sidebarView.transform = transform;
     }];
 
     return animator;
