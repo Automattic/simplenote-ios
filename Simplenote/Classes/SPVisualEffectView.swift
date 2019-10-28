@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 
-// MARK: - UIVisualEffectView iOS <13 Dark Mode Friendly
+// MARK: - UIVisualEffectView: Reacts automatically to UserInterfaceStyle Changes
 //
 @objc
 class SPVisualEffectView: UIVisualEffectView {
@@ -23,23 +23,23 @@ class SPVisualEffectView: UIVisualEffectView {
 }
 
 
-//
+// MARK: - Private Methods
 //
 private extension SPVisualEffectView {
 
-    ///
+    /// Starts listening to Theme Notifications
     ///
     func startListeningToNotifications() {
         // No need to do this in iOS +13
         if #available(iOS 13, *) {
             return
         }
-        
+
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(refreshStyle), name: .VSThemeManagerThemeDidChange, object: nil)
     }
 
-    ///
+    /// Updates the VisualEffect Style
     ///
     @objc
     func refreshStyle() {
