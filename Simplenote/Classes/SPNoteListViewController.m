@@ -41,12 +41,12 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+
 @property (nonatomic, strong) UIVisualEffectView                    *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
-
-@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
 @property (nonatomic, strong) UITableView                           *tableView;
 
