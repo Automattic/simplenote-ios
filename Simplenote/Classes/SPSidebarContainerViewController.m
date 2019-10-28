@@ -55,6 +55,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [self configureView];
     [self attachMainView];
     [self attachSidebarView];
+    [self startListeningToNotifications];
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
@@ -200,6 +201,22 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     sidebarView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 
     [self.view insertSubview:sidebarView atIndex:0];
+}
+
+
+#pragma mark - Notifications
+
+- (void)startListeningToNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshStyle)
+                                                 name:VSThemeManagerThemeDidChangeNotification
+                                               object:nil];
+}
+
+- (void)refreshStyle
+{
+    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 }
 
 
