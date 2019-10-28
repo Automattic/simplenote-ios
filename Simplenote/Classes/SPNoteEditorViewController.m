@@ -186,12 +186,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
     [self configureNavigationBarBackground];
-}
-
-- (void)configureNavigationBarBackground
-{
-    self.navigationBarBackground = [SPVisualEffectView new];
-    [self.navigationBarBackground attachTo:self.view];
+    [self configureLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -215,6 +210,27 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)configureNavigationBarBackground
+{
+    NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
+    self.navigationBarBackground = [SPVisualEffectView new];
+}
+
+- (void)configureLayout
+{
+    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
+    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.view addSubview:self.navigationBarBackground];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
 }
 
 - (void)setupNavigationController {
