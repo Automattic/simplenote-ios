@@ -349,8 +349,10 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         BOOL didBecomeVisible = self.isSidebarVisible;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-            weakSelf.isPanningActive = NO;
-            [weakSelf endSidebarTransition:didBecomeVisible];
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+
+            strongSelf.isPanningActive = NO;
+            [strongSelf endSidebarTransition:didBecomeVisible];
             [UIViewController attemptRotationToDeviceOrientation];
         }];
 
