@@ -23,6 +23,25 @@ class SPVisualEffectView: UIVisualEffectView {
 }
 
 
+extension SPVisualEffectView {
+
+    /// Attaches the receiver to the specified ContainerView
+    ///
+    @objc
+    func attach(to containerView: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(self)
+
+        NSLayoutConstraint.activate([
+            leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            rightAnchor.constraint(equalTo: containerView.rightAnchor),
+            topAnchor.constraint(equalTo: containerView.topAnchor),
+            bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor),
+        ])
+    }
+}
+
+
 // MARK: - Private Methods
 //
 private extension SPVisualEffectView {
