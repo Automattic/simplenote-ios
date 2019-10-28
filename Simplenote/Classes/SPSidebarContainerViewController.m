@@ -6,9 +6,9 @@
 
 static const CGFloat SPSidebarWidth                         = 300;
 static const CGFloat SPSidebarAnimationThreshold            = 0.15;
-static const CGFloat SPSidebarAnimationDuration             = 0.4;
-static const CGFloat SPSidebarAnimationDamping              = 1.5;
-static const CGVector SPSidebarAnimationInitialVelocity     = {6, 0};
+static const CGFloat SPSidebarAnimationDuration             = 0.35;
+static const CGFloat SPSidebarAnimationDamping              = 10;
+static const CGVector SPSidebarAnimationInitialVelocity     = {-10, 0};
 static const CGFloat SPSidebarAnimationCompletionMin        = 0.001;
 static const CGFloat SPSidebarAnimationCompletionMax        = 0.999;
 static const CGFloat SPSidebarAnimationCompletionFactorFull = 1.0;
@@ -243,6 +243,11 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         return NO;
     }
 
+    // Scenario G: We're still tracking something?
+    if (self.isPanningActive) {
+        return NO;
+    }
+
     return YES;
 }
 
@@ -298,6 +303,8 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 {
     CGAffineTransform transform = visible ? CGAffineTransformMakeTranslation(SPSidebarWidth, 0) : CGAffineTransformIdentity;
 
+    CGFloat alphaSidebar = visible ? UIKitConstants.alphaFull : UIKitConstants.alphaZero;
+    CGFloat alphaMain = visible ? UIKitConstants.alphaMid : UIKitConstants.alphaFull;
     UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
                                                                                   initialVelocity:SPSidebarAnimationInitialVelocity];
 
@@ -306,7 +313,9 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
     [animator addAnimations:^{
         self.mainView.transform = transform;
+        self.mainView.alpha = alphaMain;
         self.sidebarView.transform = transform;
+        self.sidebarView.alpha = alphaSidebar;
     }];
 
     return animator;
@@ -340,12 +349,14 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         BOOL didBecomeVisible = self.isSidebarVisible;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-            [weakSelf endSidebarTransition:didBecomeVisible];
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+
+            strongSelf.isPanningActive = NO;
+            [strongSelf endSidebarTransition:didBecomeVisible];
             [UIViewController attemptRotationToDeviceOrientation];
         }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
-        self.isPanningActive = NO;
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
