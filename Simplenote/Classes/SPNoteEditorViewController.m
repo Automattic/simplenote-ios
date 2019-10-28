@@ -62,6 +62,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+@property (nonatomic, strong) SPVisualEffectView        *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -184,6 +185,13 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
+    [self configureNavigationBarBackground];
+}
+
+- (void)configureNavigationBarBackground
+{
+    self.navigationBarBackground = [SPVisualEffectView new];
+    [self.navigationBarBackground attachTo:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -980,6 +988,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
         self->checklistButton.alpha = 1.0;
         self->keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
+        self.navigationBarBackground.transform = CGAffineTransformIdentity;
         
         self->backButton.alpha = 1.0;
     };
@@ -1081,8 +1090,9 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-    
-    
+
+    self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
+                                                                    CGAffineTransformMakeTranslation(0, yTransform));
 }
 
 #pragma mark UITextViewDelegate methods
