@@ -213,9 +213,6 @@
 }
 
 - (void)refreshStyle {
-    // NavigationBar's Blur
-    self.navigationBarBackground.effect = [UIBlurEffect simplenoteBlurEffect];
-
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
@@ -282,8 +279,7 @@
     //      UIView's hierarchy).
     //  -   We need to deal with the Blur at the ViewController level.
     //
-    UIBlurEffect *effect = [UIBlurEffect simplenoteBlurEffect];
-    self.navigationBarBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
+    self.navigationBarBackground = [SPVisualEffectView new];
 }
 
 - (void)configureTableView {

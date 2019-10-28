@@ -6,7 +6,7 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 
 @interface SPNavigationController ()
-@property (nonatomic, strong) UIVisualEffectView *navigationBarBackground;
+@property (nonatomic, strong) SPVisualEffectView *navigationBarBackground;
 @end
 
 @implementation SPNavigationController
@@ -18,18 +18,6 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 {
     [super viewDidLoad];
     [self refreshBlurEffect];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self startListeningToNotifications];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self stopListeningToNotifications];
 }
 
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
@@ -45,15 +33,13 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 }
 
-- (UIVisualEffectView *)navigationBarBackground
+- (SPVisualEffectView *)navigationBarBackground
 {
     if (_navigationBarBackground) {
         return _navigationBarBackground;
     };
 
-    UIBlurEffect *effect = [UIBlurEffect simplenoteBlurEffect];
-
-    UIVisualEffectView *navigationBarBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
+    SPVisualEffectView *navigationBarBackground = [SPVisualEffectView new];
     navigationBarBackground.userInteractionEnabled = NO;
     navigationBarBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     navigationBarBackground.layer.zPosition = SPNavigationBarBackgroundPositionZ;
@@ -66,22 +52,6 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 #pragma mark - Blur Effect Support
 
-- (void)startListeningToNotifications
-{
-    // No need to do this in iOS +13
-    if (@available(iOS 13, *)) {
-        return;
-    }
-
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(refreshBlurStyle) name:VSThemeManagerThemeDidChangeNotification object:nil];
-}
-
-- (void)stopListeningToNotifications
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)refreshBlurEffect
 {
     if (!self.displaysBlurEffect) {
@@ -90,11 +60,6 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 
     [self attachNavigationBarBackground:self.navigationBarBackground toNavigationBar:self.navigationBar];
-}
-
-- (void)refreshBlurStyle
-{
-    self.navigationBarBackground.effect = [UIBlurEffect simplenoteBlurEffect];
 }
 
 - (void)detachNavigationBarBackground
