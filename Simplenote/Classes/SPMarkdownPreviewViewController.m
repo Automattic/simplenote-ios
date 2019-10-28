@@ -16,7 +16,8 @@
 @import SafariServices;
 
 @interface SPMarkdownPreviewViewController ()<WKNavigationDelegate>
-@property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) SPVisualEffectView    *navigationBarBackground;
+@property (nonatomic, strong) WKWebView             *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
@@ -28,6 +29,7 @@
     self.title = NSLocalizedString(@"Preview", @"Title of Markdown preview screen");
     
     [self configureWebView];
+    [self configureNavigationBarBackground];
     [self applyStyle];
     [self displayMarkdown];
 }
@@ -60,6 +62,12 @@
     webView.navigationDelegate = self;
     
     self.webView = webView;
+}
+
+- (void)configureNavigationBarBackground
+{
+    self.navigationBarBackground = [SPVisualEffectView new];
+    [self.navigationBarBackground attachTo:self.view];
 }
 
 - (void)applyStyle
