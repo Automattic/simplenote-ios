@@ -167,7 +167,11 @@ extension UIColor {
     static var simplenoteLightBlueColor: UIColor {
         UIColor(lightColor: .blue5, darkColor: .darkGray8)
     }
-    
+
+    @objc
+    static var simplenoteInteractiveTextColor: UIColor {
+        UIColor(lightColor: .blue60, darkColor: .blue20)
+    }
 
 
 ///    #### PENDINGS
