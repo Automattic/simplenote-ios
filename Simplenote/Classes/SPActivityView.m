@@ -63,7 +63,7 @@
 
     // draw borders
     CGFloat borderThickness = 1.0 / [[UIScreen mainScreen] scale];
-    [[UIColor colorWithName:UIColorNameDividerColor] setFill];
+    [[UIColor simplenoteDividerColor] setFill];
 
     CGRect borderRect = CGRectMake(0, 0, self.frame.size.width, borderThickness);
 

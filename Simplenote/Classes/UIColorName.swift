@@ -12,7 +12,6 @@ enum UIColorName: Int, CaseIterable {
     case actionViewStatusFontColor
     case backgroundColor
     case collaboratorTextColor
-    case dividerColor
     case emptyListViewFontColor
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
@@ -50,8 +49,6 @@ extension UIColorName {
             return .backgroundColor
         case .collaboratorTextColor:
             return .collaboratorTextColor
-        case .dividerColor:
-            return .dividerColor
         case .emptyListViewFontColor:
             return .emptyListViewFontColor
         case .horizontalPickerBorderColor:

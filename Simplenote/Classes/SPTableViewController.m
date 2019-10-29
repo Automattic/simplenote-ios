@@ -22,7 +22,7 @@
     
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    self.tableView.separatorColor = [UIColor simplenoteDividerColor];
 }
 
 

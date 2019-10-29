@@ -10,7 +10,6 @@ enum ThemeColorKey: String {
     case actionViewStatusFontColor
     case backgroundColor
     case collaboratorTextColor
-    case dividerColor
     case emptyListViewFontColor
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor

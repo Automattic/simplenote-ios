@@ -143,6 +143,11 @@ extension UIColor {
         UIColor(lightColor: .red50, darkColor: .red40)
     }
 
+    @objc
+    static var simplenoteDividerColor: UIColor {
+        UIColor(lightColor: .gray10, darkColor: .gray70)
+    }
+
 
 
 ///    #### PENDINGS
@@ -175,11 +180,6 @@ extension UIColor {
     @objc
     static var simplenoteCollaboratorTextColor: UIColor {
         UIColor(studioColor: .gray0)
-    }
-
-    @objc
-    static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .gray70)
     }
 
     @objc
