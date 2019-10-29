@@ -34,7 +34,7 @@
         _timeLabel.isAccessibilityElement = NO;
         
         UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        UIColor *textColor = [UIColor colorWithName:UIColorNameTextColor];
+        UIColor *textColor = [UIColor simplenoteTextColor];
         
         _dateLabel.font = font;
         _dateLabel.textColor = textColor;

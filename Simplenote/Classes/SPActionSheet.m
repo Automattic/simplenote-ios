@@ -132,7 +132,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         textButton.backgroundHighlightColor = [UIColor colorWithName:UIColorNameActionSheetButtonBackgroundHighlightColor];
         textButton.titleLabel.font = font;
         textButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        textButton.titleLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+        textButton.titleLabel.textColor = [UIColor simplenoteTextColor];
         [textButton setTitle:string forState:UIControlStateNormal];
         
         [textButton setTitleColor:[UIColor colorWithName:UIColorNameActionSheetButtonFontColor]
@@ -195,7 +195,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     if (message) {
         NSDictionary *titleAttributes = @{
             NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline],
-            NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
+            NSForegroundColorAttributeName: [UIColor simplenoteTextColor]
         };
         NSAttributedString *titleAttributedString = [[NSAttributedString alloc] initWithString:message
                                                                                     attributes:titleAttributes];

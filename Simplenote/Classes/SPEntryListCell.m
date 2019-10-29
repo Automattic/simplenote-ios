@@ -24,7 +24,7 @@
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         primaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        primaryLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+        primaryLabel.textColor = [UIColor simplenoteTextColor];
         [self.contentView addSubview:primaryLabel];
         
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];

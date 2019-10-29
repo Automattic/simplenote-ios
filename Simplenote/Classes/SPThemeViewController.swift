@@ -102,7 +102,7 @@ private extension SPThemeViewController {
         let selected = mode == selectedTheme
 
         cell.textLabel?.text = mode.description
-        cell.textLabel?.textColor = UIColor.color(name: .textColor)
+        cell.textLabel?.textColor = .simplenoteTextColor
         cell.accessoryType = selected ? .checkmark : .none
         cell.backgroundColor = .clear
     }

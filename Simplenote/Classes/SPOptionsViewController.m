@@ -588,7 +588,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     cell.selectedBackgroundView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
-    cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    cell.textLabel.textColor = [UIColor simplenoteTextColor];
     cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
 }
 
@@ -810,7 +810,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSDictionary *attributes = @{
-        NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
+        NSForegroundColorAttributeName: [UIColor simplenoteTextColor]
     };
 
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];

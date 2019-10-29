@@ -54,7 +54,7 @@
 
 - (void)refreshComponentsStyle {
     self.iconImageView.tintColor = [UIColor simplenoteBlue50Color];
-    self.textField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    self.textField.textColor = [UIColor simplenoteTextColor];
 }
 
 - (UIImage *)iconImage {

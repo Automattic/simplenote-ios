@@ -51,7 +51,7 @@
         selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
         cell.selectedBackgroundView = selectionView;
         
-        cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+        cell.textLabel.textColor = [UIColor simplenoteTextColor];
         cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
         
     }

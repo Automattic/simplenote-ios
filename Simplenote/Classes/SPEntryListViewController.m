@@ -131,7 +131,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryFieldBackground.backgroundColor = backgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    entryTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    entryTextField.textColor = [UIColor simplenoteTextColor];
     entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
