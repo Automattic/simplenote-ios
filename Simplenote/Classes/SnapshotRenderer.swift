@@ -149,7 +149,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Body Color
     ///
     var bodyColor: UIColor {
-        return .color(name: .noteBodyFontPreviewColor)!
+        return .simplenoteNoteBodyPreviewColor
     }
 
     /// Returns the Body Font

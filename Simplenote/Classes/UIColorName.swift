@@ -17,7 +17,6 @@ enum UIColorName: Int, CaseIterable {
     case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
     case lightBlueColor
-    case noteBodyFontPreviewColor
     case tableViewBackgroundColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor
@@ -61,8 +60,6 @@ extension UIColorName {
             return .horizontalPickerTitleFontColor
         case .lightBlueColor:
             return .lightBlueColor
-        case .noteBodyFontPreviewColor:
-            return .noteBodyFontPreviewColor
         case .tableViewBackgroundColor:
             return .tableViewBackgroundColor
         case .tableViewDetailTextLabelColor:

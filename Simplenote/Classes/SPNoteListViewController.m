@@ -431,7 +431,7 @@
         [note createPreview];
     }
 
-    UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIColor *previewColor = [UIColor simplenoteNoteBodyPreviewColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");

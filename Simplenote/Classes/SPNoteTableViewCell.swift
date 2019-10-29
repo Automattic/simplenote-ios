@@ -332,7 +332,7 @@ private enum Style {
     /// Preview Color: To be applied over  the preview's body (everything minus the first line)
     ///
     static var previewColor: UIColor {
-        .color(name: .noteBodyFontPreviewColor)!
+        .simplenoteNoteBodyPreviewColor
     }
 
     /// Preview Font: To be applied over  the preview's body (everything minus the first line)

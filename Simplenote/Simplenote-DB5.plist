@@ -18,8 +18,6 @@
 		<string>0.20</string>
 		<key>noteBodyLineHeightPercentage~ipad</key>
 		<string>0.40</string>
-		<key>noteBodyFontPreviewColor</key>
-		<string>808080</string>
 		<key>noteSidePadding</key>
 		<integer>15</integer>
 		<key>noteSidePadding~regular</key>
@@ -161,8 +159,6 @@
 		<string>999999</string>
 		<key>dividerColor</key>
 		<string>343434</string>
-		<key>noteBodyFontPreviewColor</key>
-		<string>@secondaryTextColor</string>
 		<key>switchOnTintColor</key>
 		<string>@textColor</string>
 		<key>barTintColor</key>
