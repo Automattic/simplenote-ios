@@ -130,8 +130,6 @@
 		<string>999999</string>
 		<key>collaboratorCellSidePadding</key>
 		<integer>15</integer>
-		<key>horizontalPickerTitleFontColor</key>
-		<string>999999</string>
 		<key>horizontalPickerTitleHeight</key>
 		<real>16</real>
 		<key>horizontalPickerVerticalPadding</key>
@@ -184,8 +182,6 @@
 		<key>tableViewDetailTextLabelColor</key>
 		<string>@secondaryTextColor</string>
 		<key>collaboratorTextColor</key>
-		<string>@secondaryTextColor</string>
-		<key>horizontalPickerTitleFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>

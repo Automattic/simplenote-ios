@@ -148,6 +148,11 @@ extension UIColor {
         UIColor(lightColor: .gray10, darkColor: .gray70)
     }
 
+    @objc
+    static var simplenoteHorizontalPickerTitleColor: UIColor {
+        UIColor(lightColor: .gray60, darkColor: .gray20)
+    }
+
 
 
 ///    #### PENDINGS
@@ -184,11 +189,6 @@ extension UIColor {
 
     @objc
     static var simplenoteEmptyListViewTextColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteHorizontalPickerTitleColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
 
