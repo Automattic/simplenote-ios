@@ -188,11 +188,6 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteHorizontalPickerBorderColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
     static var simplenoteHorizontalPickerTitleColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }

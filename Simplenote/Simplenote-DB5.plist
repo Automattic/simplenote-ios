@@ -138,8 +138,6 @@
 		<integer>5</integer>
 		<key>horizontalPickerHorizontalPadding</key>
 		<integer>10</integer>
-		<key>horizontalPickerBorderColor</key>
-		<string>d9d9d9</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 	</dict>

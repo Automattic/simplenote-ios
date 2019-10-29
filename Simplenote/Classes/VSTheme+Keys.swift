@@ -11,7 +11,6 @@ enum ThemeColorKey: String {
     case backgroundColor
     case collaboratorTextColor
     case emptyListViewFontColor
-    case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
     case lightBlueColor
     case tableViewBackgroundColor

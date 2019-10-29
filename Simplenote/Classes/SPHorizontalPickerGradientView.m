@@ -34,7 +34,7 @@
     
     CGRect borderRect = CGRectMake(xOrigin, 0, borderWidth, rect.size.height);
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:borderRect];
-    [[UIColor colorWithName:UIColorNameHorizontalPickerBorderColor] setFill];
+    [[UIColor simplenoteDividerColor] setFill];
     [borderPath fill];
 
     if (!gradientLayer) {

@@ -13,7 +13,6 @@ enum UIColorName: Int, CaseIterable {
     case backgroundColor
     case collaboratorTextColor
     case emptyListViewFontColor
-    case horizontalPickerBorderColor
     case horizontalPickerTitleFontColor
     case lightBlueColor
     case tableViewBackgroundColor
@@ -51,8 +50,6 @@ extension UIColorName {
             return .collaboratorTextColor
         case .emptyListViewFontColor:
             return .emptyListViewFontColor
-        case .horizontalPickerBorderColor:
-            return .horizontalPickerBorderColor
         case .horizontalPickerTitleFontColor:
             return .horizontalPickerTitleFontColor
         case .lightBlueColor:
