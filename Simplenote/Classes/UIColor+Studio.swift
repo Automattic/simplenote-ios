@@ -89,6 +89,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteNoteHeadlineColor: UIColor {
+        UIColor(lightColor: .gray80, darkColor: .white)
+    }
+    
+    @objc
     static var simplenoteLockBackgroundColor: UIColor {
         UIColor(lightColor: .blue50, darkColor: .darkGray1)
     }
@@ -197,10 +202,7 @@ extension UIColor {
         UIColor(lightColor: .gray60, darkColor: .gray20)
     }
 
-    @objc
-    static var simplenoteNoteHeadlineColor: UIColor {
-        UIColor(lightColor: .gray80, darkColor: .gray80)
-    }
+
 
     @objc
     static var simplenoteTableViewBackgroundColor: UIColor {

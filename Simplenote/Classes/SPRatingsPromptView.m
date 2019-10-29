@@ -94,7 +94,7 @@ static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
     
     // Update Label Style
     self.label.font                 = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.label.textColor            = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
+    self.label.textColor            = [UIColor simplenoteNoteHeadlineColor];
 
     // Update Buttons Style
     UIColor *buttonColor            = [UIColor colorWithName:UIColorNameTintColor];

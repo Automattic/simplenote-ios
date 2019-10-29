@@ -161,7 +161,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Headline Color
     ///
     var headlineColor: UIColor {
-        return .color(name: .noteHeadlineFontColor)!
+        return .simplenoteNoteHeadlineColor
     }
 
     /// Returns the Headline Font

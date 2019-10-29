@@ -16,7 +16,6 @@ enum ThemeColorKey: String {
     case horizontalPickerTitleFontColor
     case lightBlueColor
     case noteBodyFontPreviewColor
-    case noteHeadlineFontColor
     case tableViewBackgroundColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor

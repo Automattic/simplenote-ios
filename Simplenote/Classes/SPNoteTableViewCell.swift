@@ -320,7 +320,7 @@ private enum Style {
     /// Headline Color: To be applied over the first preview line
     ///
     static var headlineColor: UIColor {
-        .color(name: .noteHeadlineFontColor)!
+        .simplenoteNoteHeadlineColor
     }
 
     /// Headline Font: To be applied over the first preview line
