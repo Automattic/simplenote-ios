@@ -8,8 +8,6 @@
 		<string>Default</string>
 		<key>dark</key>
 		<false/>
-		<key>textColor</key>
-		<string>000000</string>
 		<key>noteBodyLineHeightPercentage</key>
 		<string>0.20</string>
 		<key>noteBodyLineHeightPercentage~ipad</key>
@@ -32,8 +30,6 @@
 		<string>117</string>
 		<key>noteListRowCondensedHeight~ipad</key>
 		<string>60</string>
-		<key>switchOnTintColor</key>
-		<string>@tintColor</string>
 		<key>editorViewVerticalNoteSpacing</key>
 		<integer>10</integer>
 		<key>editorViewPreviewNoteAlpha</key>
@@ -42,10 +38,6 @@
 		<real>0.5</real>
 		<key>editorViewAboveKeyboardPadding</key>
 		<integer>10</integer>
-		<key>tintColor</key>
-		<string>4895d9</string>
-		<key>barTintColor</key>
-		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
@@ -143,21 +135,21 @@
 		<string>Dark</string>
 		<key>dark</key>
 		<true/>
-		<key>textColor</key>
-		<string>FFFFFF</string>
-		<key>secondaryTextColor</key>
-		<string>999999</string>
-		<key>switchOnTintColor</key>
-		<string>@textColor</string>
-		<key>barTintColor</key>
-		<string>@backgroundColor</string>
-		<key>backgroundColor</key>
-		<string>1e1e1e</string>
 		<key>actionSheetButtonFontColor</key>
 		<string>@tintColor</string>
 		<key>actionViewStatusFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>actionViewButtonDisabledColor</key>
+		<string>@secondaryTextColor</string>
+		<key>backgroundColor</key>
+		<string>1e1e1e</string>
+		<key>collaboratorTextColor</key>
+		<string>@secondaryTextColor</string>
+		<key>emptyListViewFontColor</key>
+		<string>@secondaryTextColor</string>
+		<key>tableViewBackgroundColor</key>
+		<string>1e1e1e</string>
+		<key>tableViewDetailTextLabelColor</key>
 		<string>@secondaryTextColor</string>
 		<key>tagViewPlaceholderColor</key>
 		<string>@secondaryTextColor</string>
@@ -171,14 +163,6 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>tableViewBackgroundColor</key>
-		<string>1e1e1e</string>
-		<key>tableViewDetailTextLabelColor</key>
-		<string>@secondaryTextColor</string>
-		<key>collaboratorTextColor</key>
-		<string>@secondaryTextColor</string>
-		<key>emptyListViewFontColor</key>
-		<string>@secondaryTextColor</string>
 	</dict>
 </dict>
 </plist>
