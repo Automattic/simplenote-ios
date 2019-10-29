@@ -311,7 +311,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         buttonView = [[UIView alloc] init];
         [self addSubview:buttonView];
 
-        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *tintColor = [UIColor simplenoteTintColor];
         UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 

@@ -273,7 +273,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+            UIColor *tintColor = [UIColor simplenoteTintColor];
             [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
             
             NSInteger count = self.searchResultRanges.count;

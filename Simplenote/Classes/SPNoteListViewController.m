@@ -446,7 +446,7 @@
     cell.bodyText = note.bodyPreview;
 
     if (bSearching) {
-        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *tintColor = [UIColor simplenoteTintColor];
         [cell highlightSubstringsMatching:_searchText color:tintColor];
     }
 }

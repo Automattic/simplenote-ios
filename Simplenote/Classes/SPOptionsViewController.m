@@ -753,7 +753,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         theSwitch.tintColor     = [UIColor simplenoteSwitchTintColor];
     }
 
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *tintColor = [UIColor simplenoteTintColor];
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     [self.pinTimeoutPickerView setBackgroundColor:backgroundColor];
