@@ -48,7 +48,7 @@
         cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
         
         UIView *selectionView = [[UIView alloc] initWithFrame:cell.bounds];
-        selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+        selectionView.backgroundColor = [UIColor simplenoteLightBlueColor];
         cell.selectedBackgroundView = selectionView;
         
         cell.textLabel.textColor = [UIColor simplenoteTextColor];

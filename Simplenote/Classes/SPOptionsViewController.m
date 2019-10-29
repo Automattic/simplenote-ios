@@ -587,7 +587,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)refreshTableViewCellStyle:(UITableViewCell *)cell
 {
     cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+    cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
     cell.textLabel.textColor = [UIColor simplenoteTextColor];
     cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
 }

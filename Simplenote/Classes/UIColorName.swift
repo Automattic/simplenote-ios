@@ -13,7 +13,6 @@ enum UIColorName: Int, CaseIterable {
     case backgroundColor
     case collaboratorTextColor
     case emptyListViewFontColor
-    case lightBlueColor
     case tableViewBackgroundColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor
@@ -49,8 +48,6 @@ extension UIColorName {
             return .collaboratorTextColor
         case .emptyListViewFontColor:
             return .emptyListViewFontColor
-        case .lightBlueColor:
-            return .lightBlueColor
         case .tableViewBackgroundColor:
             return .tableViewBackgroundColor
         case .tableViewDetailTextLabelColor:

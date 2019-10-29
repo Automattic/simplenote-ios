@@ -197,7 +197,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         
         UIImage *toggleBackground = [[[UIImage imageNamed:@"toggle_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *toggleBackgroundHighlighted = [[[UIImage imageNamed:@"toggle_background_highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+        UIColor *toggleTintColor = [UIColor simplenoteLightBlueColor];
         UIColor *toggleTitleColor = [UIColor simplenoteTintColor];
 
         for (int i = 0; i < toggleTitles.count; i++) {

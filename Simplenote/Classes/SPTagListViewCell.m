@@ -48,7 +48,7 @@
 
 - (void)refreshSelectionStyle {
     UIView *selectedView = [UIView new];
-    selectedView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+    selectedView.backgroundColor = [UIColor simplenoteLightBlueColor];
     self.selectedBackgroundView = selectedView;
 }
 

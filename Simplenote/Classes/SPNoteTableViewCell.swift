@@ -344,6 +344,6 @@ private enum Style {
     /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
-        .color(name: .lightBlueColor)!
+        .simplenoteLightBlueColor
     }
 }

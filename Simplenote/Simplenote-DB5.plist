@@ -10,8 +10,6 @@
 		<false/>
 		<key>textColor</key>
 		<string>000000</string>
-		<key>lightBlueColor</key>
-		<string>eef3f8</string>
 		<key>noteBodyLineHeightPercentage</key>
 		<string>0.20</string>
 		<key>noteBodyLineHeightPercentage~ipad</key>
@@ -145,8 +143,6 @@
 		<string>Dark</string>
 		<key>dark</key>
 		<true/>
-		<key>lightBlueColor</key>
-		<string>2e3b49</string>
 		<key>textColor</key>
 		<string>FFFFFF</string>
 		<key>secondaryTextColor</key>
@@ -159,8 +155,6 @@
 		<string>1e1e1e</string>
 		<key>actionSheetButtonFontColor</key>
 		<string>@tintColor</string>
-		<key>actionSheetButtonBackgroundHighlightColor</key>
-		<string>@lightBlueColor</string>
 		<key>actionViewStatusFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>actionViewButtonDisabledColor</key>

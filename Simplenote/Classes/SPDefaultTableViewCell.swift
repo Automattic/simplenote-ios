@@ -38,7 +38,7 @@ private extension SPDefaultTableViewCell {
 
     func applySimplenoteStyle() {
         let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.color(name: .lightBlueColor)
+        backgroundView.backgroundColor = .simplenoteLightBlueColor
 
         backgroundColor = UIColor.color(name: .backgroundColor)
         selectedBackgroundView = backgroundView
