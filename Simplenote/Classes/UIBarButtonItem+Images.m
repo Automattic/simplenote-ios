@@ -54,7 +54,7 @@ static CGFloat const UIBarButtonWidth               = 44.0;
                                      action:(SEL)action
 {    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *tintColor = [UIColor simplenoteTintColor];
     UIImage *backImage = [UIImage imageWithName:UIImageNameChevronLeft];
 
     [button setImage:[backImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]

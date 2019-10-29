@@ -72,7 +72,7 @@ private extension SharePresentationController {
         let appearance = UINavigationBar.appearance()
         appearance.barTintColor = UIColor.color(name: .backgroundColor)
         appearance.barStyle = .default
-        appearance.tintColor = UIColor.color(name: .tintColor)
+        appearance.tintColor = .simplenoteTintColor
         appearance.titleTextAttributes = [
             .foregroundColor: UIColor.simplenoteNavigationBarTitleColor
         ]

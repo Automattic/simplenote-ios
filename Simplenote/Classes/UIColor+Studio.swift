@@ -157,7 +157,12 @@ extension UIColor {
     static var simplenoteTextColor: UIColor {
         UIColor(lightColor: .gray80, darkColor: .white)
     }
-    
+
+    @objc
+    static var simplenoteTintColor: UIColor {
+        UIColor(lightColor: .blue50, darkColor: .blue30)
+    }
+
 
 
 ///    #### PENDINGS
@@ -240,10 +245,5 @@ extension UIColor {
     @objc
     static var simplenoteTagViewPlaceholderColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteTintColor: UIColor {
-        UIColor(studioColor: .blue30)
     }
 }

@@ -198,7 +198,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         UIImage *toggleBackground = [[[UIImage imageNamed:@"toggle_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *toggleBackgroundHighlighted = [[[UIImage imageNamed:@"toggle_background_highlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIColor *toggleTintColor = [UIColor colorWithName:UIColorNameLightBlueColor];
-        UIColor *toggleTitleColor = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *toggleTitleColor = [UIColor simplenoteTintColor];
 
         for (int i = 0; i < toggleTitles.count; i++) {
             
@@ -267,7 +267,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         UIImage *actionButtonBackgroundImage = [[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *actionButtonBackgroundDisabledImage = [[[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
         UIImage *actionButtonBackgroundHighlightImage = [[UIImage imageNamed:@"action_button_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        UIColor *actionButtonTitleColorNormal = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *actionButtonTitleColorNormal = [UIColor simplenoteTintColor];
 
         for (int i = 0; i < actionButtonCount; i ++) {
             SPActionButton *button = [[SPActionButton alloc] initWithFrame:CGRectMake(0,
