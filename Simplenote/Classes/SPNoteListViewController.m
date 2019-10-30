@@ -431,15 +431,15 @@
         [note createPreview];
     }
 
-    UIColor *previewColor = [UIColor simplenoteNoteBodyPreviewColor];
+    UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 
     cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
     cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
-    cell.accessoryLeftTintColor = previewColor;
-    cell.accessoryRightTintColor = previewColor;
+    cell.accessoryLeftTintColor = accessoryColor;
+    cell.accessoryRightTintColor = accessoryColor;
 
     cell.rendersInCondensedMode = Options.shared.condensedNotesList;
     cell.titleText = note.titlePreview;
