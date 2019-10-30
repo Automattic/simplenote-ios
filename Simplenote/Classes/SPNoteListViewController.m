@@ -214,10 +214,10 @@
 
 - (void)refreshStyle {
     // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
 
     // Refresh the Table's UI
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenotePlainStyle];
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI

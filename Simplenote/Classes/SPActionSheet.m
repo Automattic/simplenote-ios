@@ -320,7 +320,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     container.frame = CGRectMake(0, 0, totalWidth, totalHeight);
     
-    container.backgroundColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
+    container.backgroundColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
     
     self.subviewsArray = viewArray;
     

@@ -19,7 +19,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 
-        self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        self.backgroundColor = [UIColor simplenoteBackgroundColor];
         
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;

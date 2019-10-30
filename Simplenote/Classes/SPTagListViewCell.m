@@ -43,7 +43,7 @@
 }
 
 - (void)refreshCellStyle {
-    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.backgroundColor = [UIColor simplenoteBackgroundColor];
 }
 
 - (void)refreshSelectionStyle {

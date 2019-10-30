@@ -130,7 +130,7 @@ private extension SPPrivacyViewController {
     /// Setup: TableView
     ///
     func setupTableView() {
-        tableView.applyDefaultGroupedStyling()
+        tableView.applySimplenoteGroupedStyle()
     }
 
     /// Setup: Switch

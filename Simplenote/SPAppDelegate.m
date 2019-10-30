@@ -153,7 +153,7 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 
     // check to see if the app terminated with a previously selected tag
@@ -424,7 +424,7 @@
 
 - (void)themeDidChange
 {
-    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.window.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 }
 

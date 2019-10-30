@@ -97,7 +97,7 @@ private extension SnapshotRenderer {
     /// Configures a given SPTextView instance in order to properly render a given Note, with the specified Search Query.
     ///
     func configure(editorTextView: SPTextView, note: Note, searchQuery: String?) {
-        editorTextView.backgroundColor = .color(name: .backgroundColor)
+        editorTextView.backgroundColor = .simplenoteBackgroundColor
         editorTextView.interactiveTextStorage.tokens = storageAttributes
         editorTextView.attributedText = attributedText(from: note.content)
         editorTextView.contentOffset = .zero

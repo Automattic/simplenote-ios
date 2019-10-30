@@ -262,7 +262,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         NSInteger actionButtonCount = actionButtonImages.count;
         actionButtonArray = [NSMutableArray arrayWithCapacity:actionButtonCount];
         
-        UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        UIColor *actionButtonBackgroundColor = [UIColor simplenoteBackgroundColor];
         UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
         UIImage *actionButtonBackgroundImage = [[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *actionButtonBackgroundDisabledImage = [[[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
@@ -312,7 +312,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         [self addSubview:buttonView];
 
         UIColor *tintColor = [UIColor simplenoteTintColor];
-        UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
         UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 
         for (NSString *title in buttonTitles) {
@@ -400,7 +400,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
 - (void)refreshButtonImages
 {
-    UIColor *actionButtonBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *actionButtonBackgroundColor = [UIColor simplenoteBackgroundColor];
     UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 
     for (SPActionButton *button in actionButtonArray) {

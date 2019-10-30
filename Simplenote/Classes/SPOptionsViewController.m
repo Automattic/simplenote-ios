@@ -10,7 +10,6 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "UITableView+Styling.h"
 #import "VSThemeManager.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
@@ -586,7 +585,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)refreshTableViewCellStyle:(UITableViewCell *)cell
 {
-    cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    cell.backgroundColor = [UIColor simplenoteBackgroundColor];
     cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
     cell.textLabel.textColor = [UIColor simplenoteTextColor];
     cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
@@ -754,14 +753,14 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 
     UIColor *tintColor = [UIColor simplenoteTintColor];
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
 
     [self.pinTimeoutPickerView setBackgroundColor:backgroundColor];
     [self.doneToolbar setTintColor:tintColor];
     [self.doneToolbar setBarTintColor:backgroundColor];
     
     // Refresh the Table
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenoteGroupedStyle];
 }
 
 - (void)reloadAppearance

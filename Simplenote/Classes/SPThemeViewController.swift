@@ -104,11 +104,11 @@ private extension SPThemeViewController {
         cell.textLabel?.text = mode.description
         cell.textLabel?.textColor = .simplenoteTextColor
         cell.accessoryType = selected ? .checkmark : .none
-        cell.backgroundColor = .clear
+        cell.backgroundColor = .simplenoteBackgroundColor
     }
 
     func refreshInterfaceStyle() {
-        tableView.applyDefaultGroupedStyling()
+        tableView.applySimplenoteGroupedStyle()
         tableView.reloadData()
     }
 

@@ -314,7 +314,7 @@ private enum Style {
     /// Returns the Cell's Background Color
     ///
     static var backgroundColor: UIColor {
-        .color(name: .backgroundColor)!
+        .simplenoteBackgroundColor
     }
 
     /// Headline Color: To be applied over the first preview line

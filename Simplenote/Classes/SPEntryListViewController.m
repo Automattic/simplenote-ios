@@ -120,8 +120,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
 - (void)applyDefaultStyle {
 
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
+    UIColor *tableBackgroundColor = [UIColor simplenoteTableViewBackgroundColor];
     UIColor *tableSeparatorColor = [UIColor simplenoteDividerColor];
 
     // self
