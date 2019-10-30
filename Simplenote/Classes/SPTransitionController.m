@@ -546,11 +546,14 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
-
-            // Snapshot: SearchBar
-            SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
-            [self storeTransitionSnapshot:searchBarSnapshot];
         }
+
+        // Snapshot(s): Blur + SearchBar
+        SPTransitionSnapshot *blurSnapshot = [self blurSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:blurSnapshot];
+
+        SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:searchBarSnapshot];
     }
 }
 
@@ -630,6 +633,29 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 
 #pragma mark - Snapshots Generation
+
+- (SPTransitionSnapshot *)blurSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
+    UIVisualEffectView *liveBlurView = listController.navigationBarBackground;
+    UIVisualEffectView *snapshotBlurView = [[UIVisualEffectView alloc] initWithEffect:liveBlurView.effect];
+    CGRect targetFrame = liveBlurView.frame;
+
+    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
+                                                               finalFrame:targetFrame
+                                                            startingAlpha:UIKitConstants.alphaZero
+                                                               finalAlpha:UIKitConstants.alphaFull];
+
+    NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPopTableViewRowSelectionDuration
+                                                                        delay:SPAnimationDelayZero
+                                                                springDamping:SPAnimationPopTableViewRowSelectionDamping
+                                                                     velocity:SPAnimationPopTableViewRowSelectionVelocity
+                                                                      options:UIViewAnimationOptionCurveEaseInOut];
+
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:snapshotBlurView
+                                           animatedValues:animatedValues
+                                      animationProperties:animationProperties
+                                                superView:containerView];
+}
+
 
 - (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
     UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];

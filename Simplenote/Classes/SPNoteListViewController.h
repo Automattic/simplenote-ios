@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
+@property (nonatomic, strong, readonly) UIVisualEffectView                  *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
