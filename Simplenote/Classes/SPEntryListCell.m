@@ -30,7 +30,7 @@
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         secondaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secondaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
+        secondaryLabel.textColor = [UIColor simplenoteTitleColor];
         [self.contentView addSubview:secondaryLabel];
         
         UIImage *checkedImage = [UIImage imageWithName:UIImageNameCheckmarkChecked];

@@ -154,7 +154,7 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteHorizontalPickerTitleColor: UIColor {
+    static var simplenoteTitleColor: UIColor {
         UIColor(lightColor: .gray60, darkColor: .gray20)
     }
 
@@ -204,11 +204,6 @@ extension UIColor {
     @objc
     static var simplenoteBackgroundColor: UIColor {
         UIColor(lightColor: .white, darkColor: .gray100)
-    }
-
-    @objc
-    static var simplenoteCollaboratorTextColor: UIColor {
-        UIColor(studioColor: .gray0)
     }
 
     @objc

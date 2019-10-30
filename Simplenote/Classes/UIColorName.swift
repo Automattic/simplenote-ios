@@ -11,7 +11,6 @@ enum UIColorName: Int, CaseIterable {
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
     case backgroundColor
-    case collaboratorTextColor
     case emptyListViewFontColor
     case tableViewBackgroundColor
     case tableViewDetailTextLabelColor
@@ -42,8 +41,6 @@ extension UIColorName {
             return .actionViewStatusFontColor
         case .backgroundColor:
             return .backgroundColor
-        case .collaboratorTextColor:
-            return .collaboratorTextColor
         case .emptyListViewFontColor:
             return .emptyListViewFontColor
         case .tableViewBackgroundColor:
