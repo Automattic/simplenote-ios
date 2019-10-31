@@ -948,6 +948,9 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     }
     
     scrollPosition = scrollView.contentOffset.y;
+
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
