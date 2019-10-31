@@ -397,6 +397,15 @@
 }
 
 
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+}
+
+
 #pragma mark - UITableView Data Source
 
 - (NSInteger)numNotes {
