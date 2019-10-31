@@ -122,7 +122,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    UIColor *tableSeparatorColor = [UIColor simplenoteDividerColor];
 
     // self
     self.view.backgroundColor = tableBackgroundColor;

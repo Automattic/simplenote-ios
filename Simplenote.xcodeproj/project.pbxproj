@@ -149,6 +149,11 @@
 		B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */; };
 		B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */; };
 		B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */; };
+		B52893B12360B7E300DF2571 /* UIColor+Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */; };
+		B52893B22360B7F500DF2571 /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
+		B52893B32360B86500DF2571 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575736B232D454300443C2E /* UIColor+Helpers.swift */; };
+		B52893B42360B86F00DF2571 /* UITraitCollection+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */; };
+		B52893BB2360B91200DF2571 /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52893BA2360B91200DF2571 /* SPUserInterface.swift */; };
 		B52AC186233587F8007B2E75 /* UITraitCollection+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */; };
 		B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */; };
 		B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74722CFBD540042C162 /* UIActivityViewController+Simplenote.swift */; };
@@ -428,6 +433,7 @@
 		B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScreen+Simplenote.swift"; path = "Classes/UIScreen+Simplenote.swift"; sourceTree = "<group>"; };
 		B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Simplenote-Internal.entitlements"; sourceTree = "<group>"; };
 		B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Simplenote.swift"; path = "Classes/UIViewController+Simplenote.swift"; sourceTree = "<group>"; };
+		B52893BA2360B91200DF2571 /* SPUserInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPUserInterface.swift; sourceTree = "<group>"; };
 		B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITraitCollection+Simplenote.swift"; path = "Classes/UITraitCollection+Simplenote.swift"; sourceTree = "<group>"; };
 		B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extensions.h"; path = "Classes/UIViewController+Extensions.h"; sourceTree = "<group>"; };
 		B52B8A211BAAF80B002CC55D /* UIViewController+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extensions.m"; path = "Classes/UIViewController+Extensions.m"; sourceTree = "<group>"; };
@@ -948,6 +954,14 @@
 			name = Trackers;
 			sourceTree = "<group>";
 		};
+		B52893B92360B91200DF2571 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				B52893BA2360B91200DF2571 /* SPUserInterface.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
 		B52BB74C22CFD14C0042C162 /* Exporter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1200,6 +1214,7 @@
 				B56A9FF722AEBF33003F85CB /* Extensions */,
 				B56A9FFA22AECBF2003F85CB /* Extractors */,
 				B5CFFFE522AA9DA200B968CD /* Simperium */,
+				B52893B92360B91200DF2571 /* Themes */,
 				B5CFFFDF22AA9AD100B968CD /* Tools */,
 				74F6637B22BADADD00FA147E /* Presentation */,
 				B5CFFFEA22AAA18000B968CD /* ViewControllers */,
@@ -2061,9 +2076,13 @@
 			files = (
 				B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */,
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
+				B52893B42360B86F00DF2571 /* UITraitCollection+Simplenote.swift in Sources */,
+				B52893BB2360B91200DF2571 /* SPUserInterface.swift in Sources */,
 				74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */,
+				B52893B22360B7F500DF2571 /* ColorStudio.swift in Sources */,
 				B56A9FFC22AECC15003F85CB /* Extractor.swift in Sources */,
 				B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */,
+				B52893B32360B86500DF2571 /* UIColor+Helpers.swift in Sources */,
 				B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */,
 				B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */,
 				B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */,
@@ -2074,6 +2093,7 @@
 				74F6637D22BADB2100FA147E /* ExtensionTransitioningManager.swift in Sources */,
 				74F454EE22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */,
+				B52893B12360B7E300DF2571 /* UIColor+Studio.swift in Sources */,
 				B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
 				B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */,

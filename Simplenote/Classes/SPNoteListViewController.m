@@ -444,15 +444,15 @@
         [note createPreview];
     }
 
-    UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 
     cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
     cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
-    cell.accessoryLeftTintColor = previewColor;
-    cell.accessoryRightTintColor = previewColor;
+    cell.accessoryLeftTintColor = accessoryColor;
+    cell.accessoryRightTintColor = accessoryColor;
 
     cell.rendersInCondensedMode = Options.shared.condensedNotesList;
     cell.titleText = note.titlePreview;
@@ -530,7 +530,7 @@
                                                                        [[SPObjectManager sharedManager] trashNote:note];
                                                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
                                                                    }];
-    trash.backgroundColor = [UIColor colorWithName:UIColorNameDestructiveActionColor];
+    trash.backgroundColor = [UIColor simplenoteDestructiveActionColor];
 
     NSString *pinText = note.pinned
                             ? NSLocalizedString(@"Unpin", @"Unpin (verb) - the action of Unpinning a note")
@@ -541,14 +541,14 @@
                                                                  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                      [self togglePinnedNote:note];
                                                                  }];
-    togglePin.backgroundColor = [UIColor colorWithName:UIColorNameSecondaryActionColor];
+    togglePin.backgroundColor = [UIColor simplenoteSecondaryActionColor];
 
     UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                      title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")
                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                        [self shareNote:note sourceIndexPath:indexPath];
                                                                    }];
-    share.backgroundColor = [UIColor colorWithName:UIColorNameTertiaryActionColor];
+    share.backgroundColor = [UIColor simplenoteTertiaryActionColor];
 
     return @[trash, togglePin, share];
 }

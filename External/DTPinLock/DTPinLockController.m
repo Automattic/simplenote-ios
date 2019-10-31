@@ -48,7 +48,7 @@
 {
     if (self = [super init])
     {
-        UIColor *textColor = [UIColor colorWithName:UIColorNameLockTextColor];
+        UIColor *textColor = [UIColor simplenoteLockTextColor];
 
         self.navigationBar.translucent = NO;
 
@@ -107,13 +107,14 @@
         
         // default
         numberOfDigits = 4;
-        
+
         // NOTE: This entire ViewController will be rebuilt soon. Please forgive the untidy-mess!
-        UIColor *barBackgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        UIColor *barBackgroundColor = [UIColor simplenoteBackgroundColor];
         self.navigationBar.backgroundColor = barBackgroundColor;
         self.navigationBar.barTintColor = barBackgroundColor;
 
-        self.view.backgroundColor = [UIColor colorWithName:UIColorNameLockBackgroundColor];
+        self.view.backgroundColor = [UIColor simplenoteLockBackgroundColor];
+
         baseViewController.view.backgroundColor = [UIColor clearColor];
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {
@@ -232,7 +233,7 @@
     [baseViewController.secondPageView addSubview:secondPagePinGroup];
     
     
-    UIColor *textColor = [UIColor colorWithName:UIColorNameLockTextColor];
+    UIColor *textColor = [UIColor simplenoteLockTextColor];
     
     for (int i=0;i<numberOfDigits;i++)
     {
