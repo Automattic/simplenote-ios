@@ -300,7 +300,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
             dividerRect.size.width += 2 * motionEffectDistance;
 
             UIView *divider = [[UIView alloc] initWithFrame:dividerRect];
-            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
+            divider.backgroundColor = [UIColor simplenoteDividerColor];
             [container addSubview:divider];
         }
         

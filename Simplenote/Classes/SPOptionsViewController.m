@@ -749,8 +749,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
-        theSwitch.onTintColor   = [UIColor colorWithName:UIColorNameSwitchOnTintColor];
-        theSwitch.tintColor     = [UIColor colorWithName:UIColorNameSwitchTintColor];
+        theSwitch.onTintColor   = [UIColor simplenoteSwitchOnTintColor];
+        theSwitch.tintColor     = [UIColor simplenoteSwitchTintColor];
     }
 
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];

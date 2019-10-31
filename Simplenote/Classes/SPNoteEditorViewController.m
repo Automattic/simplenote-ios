@@ -140,7 +140,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    UIColor *fontColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
+    UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
 
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
@@ -489,7 +489,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     searchDetailLabel = [[UILabel alloc] init];
     searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     searchDetailLabel.frame = CGRectMake(0, 0, 180, searchDetailLabel.font.lineHeight);
-    searchDetailLabel.textColor = [UIColor colorWithName:UIColorNameNoteHeadlineFontColor];
+    searchDetailLabel.textColor = [UIColor simplenoteNoteHeadlineColor];
     searchDetailLabel.textAlignment = NSTextAlignmentCenter;
     searchDetailLabel.alpha = 0.0;
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:searchDetailLabel];
