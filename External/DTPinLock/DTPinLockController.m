@@ -114,6 +114,7 @@
         self.navigationBar.barTintColor = barBackgroundColor;
 
         self.view.backgroundColor = [UIColor simplenoteLockBackgroundColor];
+
         baseViewController.view.backgroundColor = [UIColor clearColor];
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {
