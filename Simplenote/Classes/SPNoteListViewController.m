@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
-@property (nonatomic, strong) UIVisualEffectView                    *navigationBarBackground;
+@property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
@@ -279,7 +279,7 @@
     //  -   Since our UISearchBar lives in our View Hierarchy, the blur cannot be dealt with by the NavigationBar.
     //  -   Therefore we must inject the blur on a VC per VC basis.
     //
-    self.navigationBarBackground = [SPVisualEffectView new];
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
 - (void)configureTableView {

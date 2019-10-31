@@ -16,8 +16,8 @@
 @import SafariServices;
 
 @interface SPMarkdownPreviewViewController () <WKNavigationDelegate>
-@property (nonatomic, strong) SPVisualEffectView    *navigationBarBackground;
-@property (nonatomic, strong) WKWebView             *webView;
+@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
+@property (nonatomic, strong) WKWebView         *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
@@ -37,8 +37,8 @@
 
 - (void)configureNavigationBarBackground
 {
-    NSAssert(self.navigationBarBackground == nil, @"WebView was already initialized!");
-    self.navigationBarBackground = [SPVisualEffectView new];
+    NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
 - (void)configureWebView

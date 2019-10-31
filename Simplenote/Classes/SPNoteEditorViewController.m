@@ -62,7 +62,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) SPVisualEffectView        *navigationBarBackground;
+@property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -215,7 +215,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 - (void)configureNavigationBarBackground
 {
     NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
-    self.navigationBarBackground = [SPVisualEffectView new];
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
 - (void)configureLayout

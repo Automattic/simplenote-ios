@@ -6,7 +6,7 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 
 @interface SPNavigationController ()
-@property (nonatomic, strong) SPVisualEffectView *navigationBarBackground;
+@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
 @end
 
 @implementation SPNavigationController
@@ -33,19 +33,17 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 }
 
-- (SPVisualEffectView *)navigationBarBackground
+- (SPBlurEffectView *)navigationBarBackground
 {
     if (_navigationBarBackground) {
         return _navigationBarBackground;
-    };
+    }
 
-    SPVisualEffectView *navigationBarBackground = [SPVisualEffectView new];
-    navigationBarBackground.userInteractionEnabled = NO;
+    SPBlurEffectView *navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
     navigationBarBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     navigationBarBackground.layer.zPosition = SPNavigationBarBackgroundPositionZ;
 
     _navigationBarBackground = navigationBarBackground;
-
     return _navigationBarBackground;
 }
 
