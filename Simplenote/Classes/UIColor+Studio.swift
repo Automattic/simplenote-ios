@@ -164,6 +164,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteWindowBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .black)
+    }
+
+    @objc
     static var simplenoteDividerColor: UIColor {
         UIColor(lightColor: .gray10, darkColor: .gray70)
     }
