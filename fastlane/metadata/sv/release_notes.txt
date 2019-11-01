@@ -1,4 +1,2 @@
-- Sökfältet ser nu bättre ut än någonsin!
-- Anteckningslistan har uppdaterats för att visa läget Fastsatt på höger sida.
-- iOS 11 är nu det äldsta operativsystemet som stöds.
-- Ett fel som gjorde att redigerarens färger inte alltid initierades korrekt har åtgärdats.
+- Simplenote fick just helt nya ikoner!
+- Sidofältets UX har uppdaterats helt.

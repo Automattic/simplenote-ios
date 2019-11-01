@@ -1,4 +1,2 @@
-- Zoekbalk ziet er beter uit dan ooit!
-- Notitielijst vernieuwd zodat vastgemaakte status aan de rechterzijde staat.
-- iOS 11 Is nu de minimum ondersteunde OS.
-- Een bug verholpen waarbij Editor Colors soms niet goed startte.
+- Er zijn gloednieuwe pictogrammen voor Simplenote toegevoegd!
+- De UX van de sidebar is geheel vernieuwd.

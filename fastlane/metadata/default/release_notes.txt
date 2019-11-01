@@ -1,4 +1,2 @@
-- Search Bar is now looking better than ever!
-- Notes List refreshed to display Pinned state on the right hand side.
-- iOS 11 Is now the minimum supported OS.
-- Fixed a bug in which the Editor Colors might not be properly initialized.
+- Simplenote just got brand new Icons!
+- Sidebar's UX has been entirely refreshed.
