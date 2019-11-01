@@ -153,7 +153,7 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
+    self.window.backgroundColor = [UIColor simplenoteWindowBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 
     // check to see if the app terminated with a previously selected tag
