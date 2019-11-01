@@ -15,12 +15,18 @@
 @import WebKit;
 @import SafariServices;
 
-@interface SPMarkdownPreviewViewController () <WKNavigationDelegate>
+@interface SPMarkdownPreviewViewController () <WKNavigationDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
 @property (nonatomic, strong) WKWebView         *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
+
+- (void)dealloc
+{
+    self.webView.scrollView.delegate = nil;
+    self.webView.navigationDelegate = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -53,6 +59,7 @@
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
     webView.allowsLinkPreview = YES;
+    webView.scrollView.delegate = self;
     webView.navigationDelegate = self;
     webView.opaque = NO;
     self.webView = webView;
@@ -117,6 +124,16 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+}
+
 
 #pragma mark - WKNavigationDelegate
 
