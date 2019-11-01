@@ -154,6 +154,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteNavigationBarBackgroundColor: UIColor {
+        UIColor(lightColor: .spWhite, darkColor: .darkGray8).withAlphaComponent(UIKitConstants.alphaQuarter)
+    }
+
+    @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .darkGray0)
     }

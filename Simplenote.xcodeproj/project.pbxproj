@@ -175,6 +175,7 @@
 		B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = B557381F1AB8950A006043E4 /* NSDate+Helper.m */; };
 		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
+		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B568596322C56DBB00F2F13C /* SnapshotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568596222C56DBB00F2F13C /* SnapshotRenderer.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
@@ -2090,6 +2091,7 @@
 				B52893B12360B7E300DF2571 /* UIColor+Studio.swift in Sources */,
 				B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
+				B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */,
 				B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
 				74388F4822CFFABD001C5EC0 /* NSObject+Helpers.swift in Sources */,
