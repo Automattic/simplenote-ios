@@ -1,4 +1,2 @@
-- Arama Çubuğu her zamankinden daha iyi görünüyor!
-- Sabitlenmiş durumu sağ tarafta göstermek için Notlar Listesi yenilendi.
-- iOS 11 artık desteklenen en düşük işletim sistemidir.
-- Düzenleyici Renklerinin düzgün bir şekilde başlatılamadığı bir hata düzeltildi.
+- Simplenote'ta yepyeni Simgeler var!
+- Kenar çubuğunun UX'i tamamen yenilendi.
