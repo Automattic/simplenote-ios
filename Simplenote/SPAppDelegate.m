@@ -1,11 +1,3 @@
-//
-//  SPAppDelegate.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPAppDelegate.h"
 #import "Simplenote-Swift.h"
 
@@ -62,7 +54,7 @@
                                 SPBucketDelegate,
                                 PinLockDelegate>
 
-
+@property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
@@ -169,19 +161,20 @@
     if (selectedTag != nil) {
 		[self setSelectedTag:selectedTag];
 	}
-    
-    _tagListViewController = [SPTagsListViewController new];
 
-    _noteListViewController = [[SPNoteListViewController alloc] initWithSidebarViewController:_tagListViewController];
-    _noteListViewController.sidePanelViewDelegate = _tagListViewController;
+    self.tagListViewController = [SPTagsListViewController new];
+    self.noteListViewController = [SPNoteListViewController new];
+    self.noteEditorViewController = [SPNoteEditorViewController new];
 
-    _noteEditorViewController = [SPNoteEditorViewController new];
-    
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
     self.navigationController.navigationBar.translucent = YES;
-    
-    self.navigationController.delegate	= self;
-    self.window.rootViewController		= self.navigationController;
+    self.navigationController.delegate = self;
+
+    self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
+                                                                                sidebarViewController:self.tagListViewController];
+    self.sidebarViewController.delegate = self.noteListViewController;
+
+    self.window.rootViewController = self.sidebarViewController;
     
     [self.window makeKeyAndVisible];
 }
@@ -296,7 +289,6 @@
         [SPPinLockManager storeLastUsedTime];
     }
     
-    [self.tagListViewController removeKeyboardObservers];
     [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];
@@ -514,11 +506,11 @@
 {
     SPOptionsViewController *optionsViewController = [[SPOptionsViewController alloc] init];
 	
-    SPNavigationController *navController	= [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
-    navController.disableRotation			= self.navigationController.disableRotation;
-    navController.modalPresentationStyle	= UIModalPresentationFormSheet;
+    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
+    navController.disableRotation = YES;
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
-    [self.navigationController presentViewController:navController animated:YES completion:nil];
+    [self.sidebarViewController presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)logoutAndReset:(id)sender
@@ -558,7 +550,7 @@
 			[self removePin];
 			
 			// hide sidebar of notelist
-			[[self noteListViewController] hideSidePanelAnimated:NO completion:nil];
+            [self.sidebarViewController hideSidebarWithAnimation:NO];
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
@@ -825,7 +817,7 @@
     [self dismissAllModalsAnimated:NO completion:nil];
     
     // If root tag list is currently being viewed, push All Notes instead
-    [self.noteListViewController hideSidePanelAnimated:NO completion:nil];
+    [self.sidebarViewController hideSidebarWithAnimation:NO];
     
     // On iPhone, make sure a note isn't currently being edited
     if (self.navigationController.visibleViewController == _noteEditorViewController) {

@@ -28,6 +28,13 @@ extension UIView {
 
         return output
     }
+
+    /// Returns the first subview in the receiver's hierarchy, downcasted as a UITableView. Returns nil, of course, if it's not a TableView!
+    ///
+    @objc
+    func firstSubviewAsTableView() -> UITableView? {
+        return subviews.first as? UITableView
+    }
 }
 
 
@@ -47,5 +54,13 @@ extension UIView {
     ///
     class func instantiateFromNib<T>() -> T {
         return loadNib().instantiate(withOwner: nil, options: nil).first as! T
+    }
+
+    /// ObjC Convenience wrapper: Returns the first object contained within the receiver's nib.
+    /// It's exactly the same as `instantiateFromNib`... but naming it differently to avoid collisions!
+    ///
+    @objc
+    class func loadFromNib() -> Any? {
+        return loadNib().instantiate(withOwner: nil, options: nil).first
     }
 }

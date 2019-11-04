@@ -39,16 +39,18 @@
 
 NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
-CGFloat const SPCustomTitleViewHeight            = 44.0f;
-CGFloat const SPPaddingiPadCompactWidthPortrait  =  8.0f;
-CGFloat const SPPaddingiPadLeading               =  4.0f;
-CGFloat const SPPaddingiPadTrailing              = -2.0f;
-CGFloat const SPPaddingiPhoneLeadingLandscape    =  0.0f;
-CGFloat const SPPaddingiPhoneLeadingPortrait     =  8.0f;
-CGFloat const SPPaddingiPhoneTrailingLandscape   = 14.0f;
-CGFloat const SPPaddingiPhoneTrailingPortrait    =  6.0f;
-CGFloat const SPBarButtonYOriginAdjustment       = -1.0f;
-CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
+CGFloat const SPCustomTitleViewHeight               = 44.0f;
+CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
+CGFloat const SPPaddingiPadLeading                  = 4.0f;
+CGFloat const SPPaddingiPadTrailing                 = -2.0f;
+CGFloat const SPPaddingiPhoneLeadingLandscape       = 0.0f;
+CGFloat const SPPaddingiPhoneLeadingPortrait        = 8.0f;
+CGFloat const SPPaddingiPhoneTrailingLandscape      = 14.0f;
+CGFloat const SPPaddingiPhoneTrailingPortrait       = 6.0f;
+CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
+CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
+CGFloat const SPBackButtonImagePadding              = -18;
+CGFloat const SPBackButtonTitlePadding              = -15;
 
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
@@ -60,6 +62,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+@property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
@@ -121,6 +124,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                                                    object:nil];
 
         // Apply the current style right away!
+        [self startListeningToThemeNotifications];
         [self applyStyle];
     }
     
@@ -145,8 +149,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [_tagView applyStyle];
 
     _noteEditorTextView.font = bodyFont;
-    _noteEditorTextView.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+
+    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.noteEditorTextView.backgroundColor = backgroundColor;
+    self.view.backgroundColor = backgroundColor;
 
     _noteEditorTextView.interactiveTextStorage.tokens = @{
         SPDefaultTokenName : @{
@@ -177,8 +184,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     _noteEditorTextView.delegate = self;
 
     self.navigationItem.title = nil;
-    
-    [self startListeningToNotifications];
+
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
 }
@@ -203,6 +209,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
+    [self startListeningToKeyboardNotifications];
 }
 
 - (void)setupNavigationController {
@@ -236,9 +243,18 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     _noteEditorTextView.frame = viewFrame;
 }
 
-- (void)startListeningToNotifications {
+- (void)startListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)stopListeningToKeyboardNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)startListeningToThemeNotifications {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
@@ -248,7 +264,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!bSearching || _searchString.length == 0 || searchResultRanges) {
+    if (!bSearching || _searchString.length == 0 || self.searchResultRanges) {
         return;
     }
     
@@ -256,14 +272,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        self->searchResultRanges = [searchText rangesForTerms:self->_searchString];
+        self.searchResultRanges = [searchText rangesForTerms:self->_searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
             UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-            [self->_noteEditorTextView.textStorage applyColorAttribute:tintColor forRanges:self->searchResultRanges];
+            [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
             
-            NSInteger count = self->searchResultRanges.count;
+            NSInteger count = self.searchResultRanges.count;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
             self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
@@ -284,6 +300,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
+    [self stopListeningToKeyboardNotifications];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -375,7 +392,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // setup Navigation Bar
     self.navigationItem.hidesBackButton = YES;
-    
+
+    // Load Assets
+    UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRight];
+    UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeft];
+
     // container view
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -393,11 +414,11 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     // back button
     backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [backButton setImage:[[UIImage imageNamed:@"back_chevron"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                forState:UIControlStateNormal];
+    [backButton setImage:chevronLeftImage forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    backButton.titleEdgeInsets = UIEdgeInsetsMake(2, -4, 0, 0);
-    backButton.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
+    backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
+    backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
     [backButton addTarget:self
                    action:@selector(backButtonAction:)
@@ -407,23 +428,23 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_action"]
+    actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
     actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
-    checklistButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_checklist"]
+    checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklist]
                                       target:self
                                     selector:@selector(insertChecklistAction:)];
     
-    newButton = [UIButton buttonWithImage:[UIImage imageNamed:@"icon_new_note"]
+    newButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
                                    target:self
                                  selector:@selector(newButtonAction:)];
     newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     newButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
-    keyboardButton = [UIButton buttonWithImage:[UIImage imageNamed:@"button_keyboard"]
+    keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
                                         target:self
                                       selector:@selector(keyboardButtonAction:)];
     keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
@@ -455,13 +476,13 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     UIBarButtonItem *flexibleSpaceTwo = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-    UIImage *chevronImage = [UIImage imageNamed:@"back_chevron"];
-    nextSearchButton = [UIBarButtonItem barButtonWithImage:[chevronImage imageRotatedByDegrees:180.0]
+
+    nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightNextSearchResult:)];
         nextSearchButton.width = 34.0;
-    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronImage
+    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
                                             imageAlignment:UIBarButtonImageAlignmentRight
                                                     target:self
                                                   selector:@selector(highlightPrevSearchResult:)];
@@ -761,14 +782,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     if (string.length > 0) {
         bSearching = YES;
         _searchString = string;
-        searchResultRanges = nil;
+        self.searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
     }
 }
 
 - (void)highlightNextSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, searchResultRanges.count);
+    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, self.searchResultRanges.count);
     [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
 }
 
@@ -780,14 +801,14 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
     
-    NSInteger searchResultCount = searchResultRanges.count;
+    NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
         prevSearchButton.enabled = index > 0;
         nextSearchButton.enabled = index < searchResultCount - 1;
         
-        [_noteEditorTextView highlightRange:[(NSValue *)searchResultRanges[index] rangeValue]
+        [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
                            animated:YES
                           withBlock:^(CGRect highlightFrame) {
 
@@ -812,7 +833,7 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
     [_noteEditorTextView processChecklists];
     
     _searchString = nil;
-    searchResultRanges = nil;
+    self.searchResultRanges = nil;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
@@ -1383,10 +1404,10 @@ CGFloat const SPMultitaskingCompactOneThirdWidth = 320.0f;
                       NSLocalizedString(@"History...", @"Action - view the version history of a note"),
                       NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
                       NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageNamed:@"button_share_note"],
-                     [UIImage imageNamed:@"icon_history"],
-                     [UIImage imageNamed:@"button_collaborate"],
-                     [UIImage imageNamed:@"icon_trash_large"]];
+    actionImages = @[[UIImage imageWithName:UIImageNameShare],
+                     [UIImage imageWithName:UIImageNameHistory],
+                     [UIImage imageWithName:UIImageNameCollaborate],
+                     [UIImage imageWithName:UIImageNameTrash]];
     toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
                     NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
     toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),

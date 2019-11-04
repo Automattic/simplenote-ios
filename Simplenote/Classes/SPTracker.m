@@ -156,6 +156,11 @@
     [self trackAutomatticEventWithName:@"list_tag_viewed" properties:nil];
 }
 
++ (void)trackListUntaggedViewed
+{
+    [self trackAutomatticEventWithName:@"list_untagged_viewed" properties:nil];
+}
+
 + (void)trackTrashViewed
 {
     [self trackAutomatticEventWithName:@"list_trash_viewed" properties:nil];

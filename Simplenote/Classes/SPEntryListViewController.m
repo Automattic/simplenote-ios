@@ -64,10 +64,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     [entryFieldBackground addSubview:entryTextField];
     
     entryFieldPlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *pickerImage = [[UIImage imageNamed:@"button_new_small"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *pickerImage = [UIImage imageWithName:UIImageNameAdd];
     [entryFieldPlusButton setImage:pickerImage forState:UIControlStateNormal];
-    [entryFieldPlusButton setImage:[[UIImage imageNamed:@"button_new_small_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                          forState:UIControlStateHighlighted];
     entryFieldPlusButton.frame = CGRectMake(0, 0, pickerImage.size.width, pickerImage.size.height);
     [entryFieldPlusButton addTarget:self
                              action:@selector(entryFieldPlusButtonTapped:)

@@ -1,31 +1,27 @@
 #import <UIKit/UIKit.h>
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
 @class SPEmptyListView;
-@class SPTitleView;
-@class SPSearchController;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
 	SPTagFilterTypeDeleted = 1,
 	SPTagFilterTypeShared = 2,
     SPTagFilterTypePinned = 3,
-    SPTagFilterTypeUnread = 4
-} SPTagFilterType;
+    SPTagFilterTypeUnread = 4,
+    SPTagFilterTypeUntagged = 5
+};
 
-@interface SPNoteListViewController : SPSidebarContainerViewController {
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
     NSTimer *searchTimer;
 
     // Bools
     BOOL bSearching;
-    BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
-    BOOL bShouldShowSidePanel;
 
     SPTagFilterType tagFilterType;
 }
@@ -36,7 +32,7 @@ typedef enum {
 
 @property (nonatomic, strong, readonly) UISearchBar                 *searchBar;
 @property (nonatomic, strong) SPEmptyListView                       *emptyListView;
-@property (nonatomic, strong) SPBorderedTableView                   *tableView;
+@property (nonatomic, strong) UITableView                           *tableView;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

@@ -13,20 +13,20 @@ extension SPNoteListViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         searchBar.translatesAutoresizingMaskIntoConstraints = false
 
-        rootView.addSubview(tableView)
-        rootView.addSubview(searchBar)
+        view.addSubview(tableView)
+        view.addSubview(searchBar)
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: rootView.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: rootView.layoutMarginsGuide.trailingAnchor)
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
         ])
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: rootView.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 
@@ -72,8 +72,10 @@ extension SPNoteListViewController {
         let selectedTag = SPAppDelegate.shared().selectedTag ?? NSLocalizedString("All Notes", comment: "Title: No filters applied")
 
         switch selectedTag {
-        case kSimplenoteTagTrashKey:
+        case kSimplenoteTrashKey:
             title = NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
+        case kSimplenoteUntaggedKey:
+            title = NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
         default:
             title = selectedTag
         }
@@ -86,12 +88,12 @@ extension SPNoteListViewController {
 extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location) else {
+        guard tableView.isUserInteractionEnabled, let indexPath = tableView.indexPathForRow(at: location) else {
             return nil
         }
 
         /// Prevent any Pan gesture from passing thru
-        panGestureRecognizer.fail()
+        SPAppDelegate.shared().sidebarViewController.requirePanningToFail()
 
         /// Mark the source of the interaction
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
@@ -114,4 +116,20 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         editorViewController.isPreviewing = false
         navigationController?.pushViewController(editorViewController, animated: true)
     }
+}
+
+
+// MARK: - Constants
+//
+private enum Constants {
+
+    /// Where do these insets come from?
+    /// `For other subviews in your view hierarchy, the default layout margins are normally 8 points on each side`
+    ///
+    /// We're replicating the (old) view herarchy's behavior, in which the SearchBar would actually be contained within a view with 8pt margins on each side.
+    /// This won't be required anymore *soon*, and it's just a temporary workaround.
+    ///
+    /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
+    ///
+    static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
 }

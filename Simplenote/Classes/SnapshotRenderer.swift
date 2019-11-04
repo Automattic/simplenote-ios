@@ -112,8 +112,8 @@ private extension SnapshotRenderer {
     func configure(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
         tableViewCell.titleText = note.titlePreview
         tableViewCell.bodyText = note.bodyPreview
-        tableViewCell.accessoryLeftImage = note.published ? .image(name: .sharedImage) : nil
-        tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pinImage) : nil
+        tableViewCell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
+        tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
         tableViewCell.accessoryLeftTintColor = bodyColor
         tableViewCell.accessoryRightTintColor = bodyColor
         tableViewCell.rendersInCondensedMode = Options.shared.condensedNotesList

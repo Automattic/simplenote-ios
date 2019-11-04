@@ -1,4 +1,2 @@
-- Ahora, la barra de búsqueda tiene un diseño ideal.
-- Hemos actualizado la lista de notas para mostrar el estado Anclado en la parte derecha.
-- Ahora, iOS 11 es la versión de sistema operativo mínima requerida.
-- Hemos corregido un error por el que el editor de colores no se iniciaba correctamente.
+- Ahora, Simplenote tiene iconos completamente nuevos
+- La experiencia de usuario de la barra lateral se ha actualizado por completo.

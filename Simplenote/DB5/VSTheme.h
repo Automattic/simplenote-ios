@@ -19,7 +19,6 @@
 - (BOOL)boolForKey:(NSString *)key;
 - (NSInteger)integerForKey:(NSString *)key;
 - (CGFloat)floatForKey:(NSString *)key;
-- (UIImage *)imageForKey:(NSString *)key; /*Via UIImage imageNamed:*/
 - (UIColor *)colorForKey:(NSString *)key; /*123ABC or #123ABC: 6 digits, leading # allowed but not required*/
 - (UIEdgeInsets)edgeInsetsForKey:(NSString *)key; /*xTop, xLeft, xRight, xBottom keys*/
 

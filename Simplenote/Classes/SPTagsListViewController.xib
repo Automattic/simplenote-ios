@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPTagsListViewController">
+            <connections>
+                <outlet property="rightBorderView" destination="zpC-BW-MFx" id="UMy-UH-y2v"/>
+                <outlet property="rightBorderWidthConstraint" destination="3Io-dC-Xdn" id="N2N-Iq-nRg"/>
+                <outlet property="tableView" destination="dMw-N6-gUa" id="8zx-jy-5ra"/>
+                <outlet property="view" destination="iN0-l3-epB" id="uos-QJ-298"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" style="grouped" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="46" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="34" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dMw-N6-gUa">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Mtn-TB-Xai"/>
+                        <outlet property="delegate" destination="-1" id="Bhn-yP-w3a"/>
+                    </connections>
+                </tableView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-BW-MFx" userLabel="Border View">
+                    <rect key="frame" x="413" y="0.0" width="1" height="896"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="3Io-dC-Xdn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="zpC-BW-MFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Utf-Gw-xnT"/>
+                <constraint firstAttribute="trailing" secondItem="dMw-N6-gUa" secondAttribute="trailing" id="WwN-pP-oJT"/>
+                <constraint firstAttribute="bottom" secondItem="zpC-BW-MFx" secondAttribute="bottom" id="ZZY-IF-D93"/>
+                <constraint firstAttribute="bottom" secondItem="dMw-N6-gUa" secondAttribute="bottom" id="h4I-wd-bbB"/>
+                <constraint firstItem="dMw-N6-gUa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pfu-gA-vNg"/>
+                <constraint firstAttribute="trailing" secondItem="zpC-BW-MFx" secondAttribute="trailing" id="v6n-hw-aVx"/>
+                <constraint firstItem="dMw-N6-gUa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="z1r-bb-Try"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="139" y="153"/>
+        </view>
+    </objects>
+</document>

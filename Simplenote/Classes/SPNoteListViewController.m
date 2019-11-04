@@ -4,7 +4,6 @@
 #import "SPNoteEditorViewController.h"
 
 #import "SPAppDelegate.h"
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
 #import "SPEmptyListView.h"
@@ -37,7 +36,6 @@
                                         UITableViewDataSource,
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
-                                        UIGestureRecognizerDelegate,
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
@@ -53,9 +51,6 @@
 @property (nonatomic, strong) SPTransitionController    *transitionController;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
-@property (nonatomic, strong) UIImage                   *panImageDelete;
-@property (nonatomic, strong) UIImage                   *panImageRestore;
-
 @property (nonatomic, assign) BOOL                      bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                      bResetTitleView;
 
@@ -63,9 +58,9 @@
 
 @implementation SPNoteListViewController
 
-- (instancetype)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController {
+- (instancetype)init {
     
-    self = [super initWithSidebarViewController:sidebarViewController];
+    self = [super init];
     if (self) {
         [self configureNavigationButtons];
         [self configureTableView];
@@ -74,9 +69,6 @@
 
         [self updateRowHeight];
         [self startListeningToNotifications];
-
-        _panImageDelete = [[UIImage imageNamed:@"icon_cell_pan_trash"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _panImageRestore = [[UIImage imageNamed:@"icon_cell_pan_restore"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         // add empty list view
         _emptyListView = [[SPEmptyListView alloc] initWithImage:[UIImage imageNamed:@"logo_login"]
@@ -87,6 +79,7 @@
         _emptyListView.userInteractionEnabled = false;
 
         [self registerForPeekAndPop];
+        [self refreshStyle];
         [self update];
     }
     
@@ -209,11 +202,15 @@
 }
 
 - (void)themeDidChange {
+    [self refreshStyle];
+}
+
+- (void)refreshStyle {
     // Refresh the containerView's backgroundColor
     self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
 
     // Refresh the Table's UI
-    [self.tableView applyTheme];
+    [self.tableView applyDefaultGroupedStyling];
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI
@@ -240,7 +237,7 @@
 
     /// Button: New Note
     ///
-    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageNamed:@"icon_new_note"]
+    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageWithName:UIImageNameNewNote]
                                           imageAlignment:UIBarButtonImageAlignmentRight
                                                   target:self
                                                 selector:@selector(addButtonAction:)];
@@ -250,7 +247,7 @@
 
     /// Button: Display Tags
     ///
-    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageNamed:@"icon_tags"]
+    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageWithName:UIImageNameMenu]
                                                                   imageAlignment:UIBarButtonImageAlignmentLeft
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
@@ -273,8 +270,7 @@
 - (void)configureTableView {
     NSAssert(_tableView == nil, @"_tableView is already initialized!");
 
-    self.tableView = [[SPBorderedTableView alloc] init];
-    self.tableView.frame = self.rootView.bounds;
+    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -309,8 +305,9 @@
 - (void)sidebarButtonAction:(id)sender {
     
     [self.tableView setEditing:NO];
-    bShouldShowSidePanel = YES;
-    [self toggleSidePanel:nil];
+
+    [SPTracker trackSidebarButtonPresed];
+    [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidebar];
 }
 
 
@@ -318,7 +315,7 @@
 
 - (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
     
-    if (bDisableUserInteraction || bListViewIsEmpty) {
+    if (bListViewIsEmpty) {
         return NO;
     }
 
@@ -378,7 +375,6 @@
     bSearching = NO;
 
     self.searchText = nil;
-    [self.searchController dismiss];
 
     [self update];
 }
@@ -436,8 +432,8 @@
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 
-    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameSharedImage] : nil;
-    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePinImage] : nil;
+    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
+    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
     cell.accessoryLeftTintColor = previewColor;
     cell.accessoryRightTintColor = previewColor;
 
@@ -453,7 +449,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return !bDisableUserInteraction;
+    return YES;
     
 }
 
@@ -565,12 +561,7 @@
 }
 
 
-#pragma mark - Gestures
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
-    return YES;
-}
+#pragma mark - Public API
 
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
 
@@ -701,7 +692,7 @@
         _emptyListViewRect.size.height -= _emptyListViewRect.origin.y + _keyboardHeight;
         _emptyListView.frame = _emptyListViewRect;
         
-        [self.rootView addSubview:_emptyListView];
+        [self.view addSubview:_emptyListView];
         
         
     } else {
@@ -715,11 +706,9 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.emptyTrashButton setEnabled: [self numNotes] > 0];
-    }
-    
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
+    BOOL isTrashOnScreen = tagFilterType == SPTagFilterTypeDeleted;
+    self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
+    self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self updateViewIfEmpty];
     [self updateNavigationBar];
@@ -728,73 +717,67 @@
 
 - (void)updateFetchPredicate
 {
-    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (appDelegate.selectedTag != nil && [appDelegate.selectedTag isEqualToString:kSimplenoteTagTrashKey]) {
-        
+    NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
+    if ([selectedTag isEqualToString:kSimplenoteTrashKey]) {
         tagFilterType = SPTagFilterTypeDeleted;
-    }
-    else {
-        
+    } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
+        tagFilterType = SPTagFilterTypeUntagged;
+    } else {
         tagFilterType = SPTagFilterTypeUserTag;
     }
-    
-    NSPredicate *predicate = [self fetchPredicate];
+
     [NSFetchedResultsController deleteCacheWithName:@"Root"];
-    [[self.fetchedResultsController fetchRequest] setPredicate: predicate];
-    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
-    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[self sortDescriptors]];
+
+    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
+    fetchRequest.predicate = [self fetchPredicate];
+    fetchRequest.fetchBatchSize = 20;
+    fetchRequest.sortDescriptors = [self sortDescriptors];
     
     
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        // Handle error here
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Error while trying to perform fetch: %@", error);
     }
     
     [self.tableView reloadData];
 }
 
 - (NSPredicate *)fetchPredicate {
-    
+
+    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
 
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"deleted == %@", [NSNumber numberWithBool:tagFilterType == SPTagFilterTypeDeleted]]];
-    
-    if (tagFilterType == SPTagFilterTypeShared)
-        [predicateList addObject: [NSPredicate predicateWithFormat: @"systemTags CONTAINS[c] %@", @"shared"]];
-    
-    if (tagFilterType == SPTagFilterTypePinned)
-        [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"pinned"]];
-    
-    if (tagFilterType == SPTagFilterTypeUnread)
-        [predicateList addObject: [NSPredicate predicateWithFormat:@"systemTags CONTAINS[c] %@", @"unread"]];
-    
-	SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    if (tagFilterType == SPTagFilterTypeUserTag && appDelegate.selectedTag.length > 0) {
-        
-        // Match against "tagName" (JSON formatted)
-        NSString *tagName = appDelegate.selectedTag;
-        
-        tagName = [tagName stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-        tagName = [tagName stringByReplacingOccurrencesOfString:@"/" withString:@"\\/"];
-        
-        // individual tags are surrounded by quotes, thus adding quotes to the selected tag
-        // ensures only the correct notes are shown
-        NSString *match = [[NSString alloc] initWithFormat:@"\"%@\"", tagName];
-        [predicateList addObject: [NSPredicate predicateWithFormat: @"tags CONTAINS[c] %@",match]];
+    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(tagFilterType == SPTagFilterTypeDeleted)]];
+
+    switch (tagFilterType) {
+        case SPTagFilterTypeShared:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
+            break;
+        case SPTagFilterTypePinned:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned]];
+            break;
+        case SPTagFilterTypeUnread:
+            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread]];
+            break;
+        case SPTagFilterTypeUntagged:
+            [predicateList addObject:[NSPredicate predicateForUntaggedNotes]];
+            break;
+        case SPTagFilterTypeUserTag:
+            if (appDelegate.selectedTag.length == 0) {
+                break;
+            }
+
+            [predicateList addObject:[NSPredicate predicateForTagWith:appDelegate.selectedTag]];
+            break;
+        default:
+            break;
     }
-    
+
     if (self.searchText.length > 0) {
-        NSArray *searchStrings = [self.searchText componentsSeparatedByString:@" "];
-        for (NSString *word in searchStrings) {
-            if (word.length == 0)
-                continue;
-            [predicateList addObject: [NSPredicate predicateWithFormat:@"content CONTAINS[c] %@", word]];
-        }
+        [predicateList addObject:[NSPredicate predicateForSearchText:self.searchText]];
     }
     
-    NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
-    
-    return compound;
+    return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
 }
 
 
@@ -928,60 +911,40 @@
 }
 
 
-#pragma mark - SPRootViewContainerDelegate
+#pragma mark - SPSidebarContainerDelegate
 
-- (BOOL)shouldShowSidebar {
- 
-    BOOL showSidePanelOveride = bShouldShowSidePanel;
-    bShouldShowSidePanel = NO;
-
+- (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
     // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
-    return !(self.tableView.dragging || self.tableView.isEditing || bSearching) || showSidePanelOveride;
+    return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
 }
 
-- (void)resetNavigationBar {
-    
-    [self updateNavigationBar];
-}
-
-- (void)sidebarWillShow {
-    
+- (void)sidebarContainerWillDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = NO;
-    self.tableView.allowsSelection = NO;
-    [self.tableView setBorderVisibile:YES];
-    
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-    self.addButton.enabled = NO;
-    self.emptyTrashButton.enabled = NO;
-    
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaMid;
-    }];
-    
-    bDisableUserInteraction = YES;
-    
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
+    self.tableView.userInteractionEnabled = NO;
+    self.searchBar.userInteractionEnabled = NO;
+
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 
-- (void)sidebarWillHide {
-
-    [UIView animateWithDuration:UIKitConstants.animationQuickDuration animations:^{
-        self.searchBar.alpha = UIKitConstants.alphaFull;
-    }];
+- (void)sidebarContainerDidDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
+    // NO-OP
 }
 
-- (void)sidebarDidHide {
-    
+- (void)sidebarContainerWillHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
+    // NO-OP: The navigationBar's top right button is refreshed via the regular `Update` sequence.
+}
+
+- (void)sidebarContainerDidHideSidebar:(SPSidebarContainerViewController *)sidebarContainer
+{
     self.tableView.scrollEnabled = YES;
-    self.tableView.allowsSelection = !(tagFilterType == SPTagFilterTypeDeleted);
-    [self.tableView setBorderVisibile:NO];
-    
-    self.addButton.customView.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
-    self.addButton.enabled = YES;
-    self.emptyTrashButton.enabled = (tagFilterType == SPTagFilterTypeDeleted && [self numNotes] > 0) || tagFilterType != SPTagFilterTypeDeleted;
-    
-    bDisableUserInteraction = NO;
-    [(SPNavigationController *)self.navigationController setDisableRotation:NO];
+    self.tableView.userInteractionEnabled = YES;
+    self.searchBar.userInteractionEnabled = YES;
+
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 
 

@@ -48,7 +48,6 @@
     SPHorizontalPickerView *versionPickerView;
     
     BOOL bSearching;
-    NSArray *searchResultRanges;
     NSInteger highlightedSearchResultIndex;
     
     UILabel *searchDetailLabel;

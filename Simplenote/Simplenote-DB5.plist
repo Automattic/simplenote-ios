@@ -64,8 +64,6 @@
 		<string>4895d9</string>
 		<key>barTintColor</key>
 		<string>@backgroundColor</string>
-		<key>backImage</key>
-		<string>back_chevron</string>
 		<key>backgroundColor</key>
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
@@ -114,10 +112,6 @@
 		<integer>360</integer>
 		<key>actionSheetButtonHeight</key>
 		<integer>55</integer>
-		<key>pinImage</key>
-		<string>icon_pin</string>
-		<key>sharedImage</key>
-		<string>icon_shared</string>
 		<key>tagViewHeight</key>
 		<integer>44</integer>
 		<key>tagViewPlaceholderColor</key>
@@ -136,8 +130,6 @@
 		<string>444444</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>cbdff3</string>
-		<key>tagViewDeletionImage</key>
-		<string>button_delete_small</string>
 		<key>searchBarImageColor</key>
 		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
@@ -148,28 +140,6 @@
 		<string>f9f9f9</string>
 		<key>searhHighlightCornerRadius</key>
 		<integer>3</integer>
-		<key>containerViewSidePanelWidth</key>
-		<integer>200</integer>
-		<key>containerViewSidePanelWidthExpanded</key>
-		<string>300</string>
-		<key>containerViewPanThreshold</key>
-		<integer>0</integer>
-		<key>containerViewSpringAnimationDamping</key>
-		<real>1.5</real>
-		<key>containerViewSpringAnimationDuration</key>
-		<real>0.4</real>
-		<key>containerViewSpringAnimationInitialVelocity</key>
-		<real>6</real>
-		<key>tagListImageViewSide</key>
-		<integer>15</integer>
-		<key>tagListLeftPadding</key>
-		<integer>15</integer>
-		<key>tagListItemPadding</key>
-		<integer>10</integer>
-		<key>tagListFontTopPadding</key>
-		<integer>1</integer>
-		<key>tagListFontKerning</key>
-		<real>0</real>
 		<key>tableViewBackgroundColor</key>
 		<string>@backgroundColor</string>
 		<key>tableViewDetailTextLabelColor</key>
@@ -192,24 +162,10 @@
 		<integer>10</integer>
 		<key>horizontalPickerBorderColor</key>
 		<string>d9d9d9</string>
-		<key>navigationBarBackgroundImage</key>
-		<string>navigation_bar_background</string>
-		<key>navigationBarBackgroundPromptImage</key>
-		<string>navigation_bar_background_prompt</string>
-		<key>navigationBarBackgroundLandscapePhone</key>
-		<string>navigation_bar_background_landscape</string>
-		<key>navigationBarBackgroundLandscapePhonePrompt</key>
-		<string>navigation_bar_background_landscape_prompt</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
 		<key>lockBackgroundColor</key>
 		<string>448AC9</string>
-		<key>onePasswordImage</key>
-		<string>button_onepassword</string>
-		<key>visibilityOnImage</key>
-		<string>button_visibility_on</string>
-		<key>visibilityOffImage</key>
-		<string>button_visibility_off</string>
 		<key>simplenoteAlmostBlack</key>
 		<string>12171a</string>
 		<key>simplenoteLightNavy</key>
@@ -226,6 +182,8 @@
 		<string>525760</string>
 		<key>simplenoteGray10</key>
 		<string>C3C4C7</string>
+		<key>simplenoteGray50</key>
+		<string>646970</string>
 		<key>simplenoteDeepSeaBlue</key>
 		<string>006088</string>
 		<key>simplenoteLipstick</key>
@@ -279,8 +237,6 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>tagViewDeletionImage</key>
-		<string>button_delete_small_dark</string>
 		<key>searchHighlightFontColor</key>
 		<string>f9f9f9</string>
 		<key>searchBarImageColor</key>
@@ -297,14 +253,6 @@
 		<string>@secondaryTextColor</string>
 		<key>horizontalPickerBorderColor</key>
 		<string>@dividerColor</string>
-		<key>navigationBarBackgroundImage</key>
-		<string>navigation_bar_background_dark</string>
-		<key>navigationBarBackgroundPromptImage</key>
-		<string>navigation_bar_background_prompt_dark</string>
-		<key>navigationBarBackgroundLandscapePhone</key>
-		<string>navigation_bar_background_landscape_dark</string>
-		<key>navigationBarBackgroundLandscapePhonePrompt</key>
-		<string>navigation_bar_background_landscape_prompt_dark</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 		<key>lockBackgroundColor</key>
