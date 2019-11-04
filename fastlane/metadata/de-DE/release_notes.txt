@@ -1,4 +1,2 @@
-- Die Suchleiste hat noch nie so toll ausgesehen!
-- Notizenliste aktualisiert, um den Status „Angeheftet“ auf der rechten Seite anzuzeigen
-- OS-Versionen werden jetzt ab iOS 11 unterstützt
-- Fehler behoben, aufgrund dessen die Farben im Editor möglicherweise nicht richtig initialisiert wurden
+- Simplenote hat jetzt brandneue Icons!
+- Die Benutzererfahrung der Seitenleiste wurde komplett überarbeitet.

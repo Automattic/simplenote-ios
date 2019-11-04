@@ -91,10 +91,14 @@ private extension SPSearchController {
         statusBarBackground.backgroundColor = searchBar.backgroundColor
         statusBarBackground.alpha = hidden ? UIKitConstants.alphaMid : UIKitConstants.alphaFull
 
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration) { [weak self] in
+        navigationController.setNavigationBarHidden(hidden, animated: true)
+
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
+        let topView = navigationController.topViewController?.view
+
+        UIView.animate(withDuration: duration) { [weak self] in
             self?.statusBarBackground.alpha = hidden ? UIKitConstants.alphaFull : UIKitConstants.alphaZero
-            navigationController.setNavigationBarHidden(hidden, animated: true)
-            navigationController.view.layoutIfNeeded()
+            topView?.layoutIfNeeded()
         }
     }
 
@@ -151,7 +155,7 @@ extension SPSearchController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        updateStatus(active: false)
+        dismiss()
         delegate?.searchControllerDidEndSearch(self)
     }
 }
