@@ -80,7 +80,11 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     }
 
     // TopViewController conforms to SPInteractivePushViewControllerContent: Support Swipe Back
-    return [topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)];
+    if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)] && !isLeftTranslation) {
+        return location.x <= SPStandardInteractivePopGestureWidth;
+    }
+
+    return NO;
 }
 
 
