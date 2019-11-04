@@ -1,3 +1,7 @@
+4.14
+====
+-   Fixes a bug that caused Markdown Preview to be pushed when extending Text Selection
+
 4.13
 ====
 -   Fixed a bug that caused the StatusBar to be hidden when Simplenote's Settings were displayed
