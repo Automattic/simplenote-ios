@@ -1,4 +1,2 @@
-- A barra de pesquisa está melhor do que nunca!
-- Agora a lista de anotações exibe o estado Fixo à direita.
-- Agora o iOS 11 é o SO mínimo aceito.
-- Bug ao inicializar as cores do Editor corrigido.
+- Simplenote acaba de ganhar novos ícones!
+- A experiência da barra lateral foi inteiramente redesenhada.
