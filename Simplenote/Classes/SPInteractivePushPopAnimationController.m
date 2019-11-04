@@ -79,8 +79,8 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
         return (location.x >= SPStandardInteractivePopGestureWidth);
     }
 
-    // TopViewController conforms to SPInteractivePushViewControllerContent: Support Swipe Back
-    return [topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)];
+    // Swipe Back: Let's leave UINavigationController.interactivePopGestureRecognizer deal with all the things
+    return NO;
 }
 
 
@@ -225,12 +225,16 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     
     void (^completion)(BOOL) = ^void(BOOL finished) {
         BOOL completed = ![transitionContext transitionWasCancelled];
-        
+
         if (!completed) {
             fromView.frame = fromViewInitialFrame;
-            fromView.alpha = 1.0f;
             [toView removeFromSuperview];
         }
+
+        // Restore FromView's alpha.
+        // Why: otherwise `UINavigationController.interactivePopGestureRecognizer`, when handling a back gesture,
+        // will pop to an empty view (clear!)
+        fromView.alpha = 1.0f;
         
         [transitionContext completeTransition:completed];
     };
