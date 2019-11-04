@@ -11,8 +11,7 @@
 #import "UIDevice+Extensions.h"
 #import "Simplenote-Swift.h"
 
-CGFloat const SPStandardInteractivePopGestureWidth = 30.0f;
-CGFloat const SPStandardInteractivePushGestureWidth = 20.0f;
+CGFloat const SPStandardInteractivePopGestureWidth = 20.0f;
 CGFloat const SPGestureTargetSwipeVelocity = 100.0f;
 CGFloat const SPGestureTargetPercentageComplete = 0.5f;
 CGFloat const SPPushAnimationDurationRegular = 0.5f;
@@ -77,7 +76,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
 
         // `StandardInteractivePopGestureWidth` is an estimate of how wide the standard navigation
         // controller interactive pop gesture recognizer's detection area is.
-        return (location.x >= SPStandardInteractivePushGestureWidth);
+        return (location.x >= SPStandardInteractivePopGestureWidth);
     }
 
     // Pop Gesture: Let's leave `UINavigationController.interactivePopGestureRecognizer` deal with it.
