@@ -54,7 +54,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 #pragma mark - Private Properties
 
-@interface SPTransitionController ()
+@interface SPTransitionController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) SnapshotRenderer                          *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
@@ -85,6 +85,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             
             [navigationController.interactivePopGestureRecognizer addTarget:self
                                                                      action:@selector(handlePan:)];
+
+            // Note:
+            // This is required since NoteEditorViewController has a custom TitleView, which causes the
+            // interactivePopGestureRecognizer to stop working on its own!
+            navigationController.interactivePopGestureRecognizer.delegate = self;
         }
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
@@ -759,6 +764,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SPTransitionControllerPopGestureTriggeredNotificationName
                                                         object:self];
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer != self.navigationController.interactivePopGestureRecognizer) {
+        return YES;
+    }
+
+    return self.navigationController.viewControllers.count > 1;
 }
 
 @end
