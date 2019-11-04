@@ -1,3 +1,6 @@
+4.14
+-----
+ 
 4.13
 ====
 -   Fixed a bug that caused the StatusBar to be hidden when Simplenote's Settings were displayed
