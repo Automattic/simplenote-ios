@@ -80,11 +80,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
         return (location.x >= SPStandardInteractivePushGestureWidth);
     }
 
-    // TopViewController conforms to SPInteractivePushViewControllerContent: Support Swipe Back
-    if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerContent)] && !isLeftTranslation) {
-        return location.x <= SPStandardInteractivePopGestureWidth;
-    }
-
+    // Pop Gesture: Let's leave `UINavigationController.interactivePopGestureRecognizer` deal with it.
     return NO;
 }
 
@@ -219,24 +215,26 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     
     fromView.frame = fromViewInitialFrame;
     toView.frame = toViewInitialFrame;
-    toView.alpha = 0;
+    toView.alpha = UIKitConstants.alphaZero;
     
     void (^transition)() = ^void() {
         fromView.frame = fromViewFinalFrame;
         toView.frame = toViewFinalFrame;
-        fromView.alpha = 0.0f;
-        toView.alpha = 1.0f;
+        fromView.alpha = UIKitConstants.alphaZero;
+        toView.alpha = UIKitConstants.alphaFull;
     };
     
     void (^completion)(BOOL) = ^void(BOOL finished) {
         BOOL completed = ![transitionContext transitionWasCancelled];
-        
         if (!completed) {
             fromView.frame = fromViewInitialFrame;
-            fromView.alpha = 1.0f;
             [toView removeFromSuperview];
         }
-        
+
+        // We must restore fromView's alpha value. Otherwise `UINavigationController.interactivePopGestureRecognizer`
+        // will end up displaying a blank UI.
+        fromView.alpha = UIKitConstants.alphaFull;
+
         [transitionContext completeTransition:completed];
     };
     
