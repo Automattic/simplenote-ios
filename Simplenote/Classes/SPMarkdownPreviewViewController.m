@@ -40,6 +40,8 @@
     config.preferences = prefs;
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
+    webView.allowsLinkPreview = YES;
+    webView.navigationDelegate = self;
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.view addSubview:webView];
@@ -53,12 +55,7 @@
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
-    if ([webView respondsToSelector:@selector(allowsLinkPreview)]) {
-        webView.allowsLinkPreview = YES;
-    }
-    
-    webView.navigationDelegate = self;
-    
+
     self.webView = webView;
 }
 
@@ -111,12 +108,8 @@
         return;
     }
 
-    if ([SFSafariViewController class]) {
-        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
-        [self presentViewController:sfvc animated:YES completion:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:targetURL options:@{} completionHandler:nil];
-    }
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
+    [self presentViewController:sfvc animated:YES completion:nil];
 
     decisionHandler(WKNavigationActionPolicyCancel);
 }
