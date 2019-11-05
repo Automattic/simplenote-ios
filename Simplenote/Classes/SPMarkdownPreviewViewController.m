@@ -15,8 +15,9 @@
 @import WebKit;
 @import SafariServices;
 
-@interface SPMarkdownPreviewViewController ()<WKNavigationDelegate>
-@property (nonatomic, strong) WKWebView *webView;
+@interface SPMarkdownPreviewViewController () <WKNavigationDelegate>
+@property (nonatomic, strong) SPVisualEffectView    *navigationBarBackground;
+@property (nonatomic, strong) WKWebView             *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
@@ -27,19 +28,31 @@
     
     self.title = NSLocalizedString(@"Preview", @"Title of Markdown preview screen");
     
+    [self configureNavigationBarBackground];
     [self configureWebView];
+    [self configureLayout];
     [self applyStyle];
     [self displayMarkdown];
 }
 
+- (void)configureNavigationBarBackground
+{
+    NSAssert(self.navigationBarBackground == nil, @"WebView was already initialized!");
+    self.navigationBarBackground = [SPVisualEffectView new];
+}
+
 - (void)configureWebView
 {
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    WKPreferences *prefs = [[WKPreferences alloc] init];
+    NSAssert(self.webView == nil, @"WebView was already initialized!");
+
+    WKPreferences *prefs = [WKPreferences new];
     prefs.javaScriptEnabled = NO;
+
+    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
     config.preferences = prefs;
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
+    webView.opaque = NO;
     webView.allowsLinkPreview = YES;
     webView.navigationDelegate = self;
     webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -55,8 +68,33 @@
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
-
     self.webView = webView;
+}
+
+- (void)configureLayout
+{
+    NSAssert(self.webView != nil, @"WebView wasn't properly initialized!");
+    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
+
+    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.view addSubview:self.webView];
+    [self.view addSubview:self.navigationBarBackground];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.webView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.webView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+        [self.webView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+    ]];
 }
 
 - (void)applyStyle
@@ -65,7 +103,6 @@
     
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;
-    self.webView.opaque = NO;
 
     UIBarButtonItem *backButton = [UIBarButtonItem backBarButtonWithTitle:NSLocalizedString(@"Back", @"Title of Back button for Markdown preview")
                                                                     target:self
@@ -96,7 +133,8 @@
 
 #pragma mark - WKNavigationDelegate
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
     NSURL* targetURL = navigationAction.request.URL;
     NSURL* bundleURL = NSBundle.mainBundle.bundleURL;
     BOOL isAnchorURL = targetURL != nil && [targetURL.absoluteString containsString:bundleURL.absoluteString];
