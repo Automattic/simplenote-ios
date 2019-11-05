@@ -62,6 +62,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+@property (nonatomic, strong) SPVisualEffectView        *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -187,6 +188,8 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
+    [self configureNavigationBarBackground];
+    [self configureLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -210,6 +213,27 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)configureNavigationBarBackground
+{
+    NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
+    self.navigationBarBackground = [SPVisualEffectView new];
+}
+
+- (void)configureLayout
+{
+    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
+    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.view addSubview:self.navigationBarBackground];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
 }
 
 - (void)setupNavigationController {
@@ -983,6 +1007,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
         self->checklistButton.alpha = 1.0;
         self->keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
+        self.navigationBarBackground.transform = CGAffineTransformIdentity;
         
         self->backButton.alpha = 1.0;
     };
@@ -1084,8 +1109,9 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-    
-    
+
+    self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
+                                                                    CGAffineTransformMakeTranslation(0, yTransform));
 }
 
 #pragma mark UITextViewDelegate methods
@@ -1790,7 +1816,9 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
     vc.collaboratorDelegate = self;
     [vc setupWithCollaborators:_currentNote.emailTagsArray];
+
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:vc];
+    navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.navigationController presentViewController:navController

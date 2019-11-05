@@ -49,9 +49,9 @@
     if (self = [super init])
     {
         UIColor *textColor = [UIColor simplenoteLockTextColor];
-        
+
         self.navigationBar.translucent = NO;
-        
+
         mode = initMode;
         
         baseViewController = [[DTTwoPageViewController alloc] init];
@@ -107,9 +107,14 @@
         
         // default
         numberOfDigits = 4;
-        
-        // get snapshot of presenting view
+
+        // NOTE: This entire ViewController will be rebuilt soon. Please forgive the untidy-mess!
+        UIColor *barBackgroundColor = [UIColor simplenoteBackgroundColor];
+        self.navigationBar.backgroundColor = barBackgroundColor;
+        self.navigationBar.barTintColor = barBackgroundColor;
+
         self.view.backgroundColor = [UIColor simplenoteLockBackgroundColor];
+
         baseViewController.view.backgroundColor = [UIColor clearColor];
         
         if (mode == PinLockControllerModeUnlockAllowTouchID) {

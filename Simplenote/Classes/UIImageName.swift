@@ -18,8 +18,6 @@ enum UIImageName: Int, CaseIterable {
     case history
     case info
     case menu
-    case navigationBarBackground
-    case navigationBarBackgroundPrompt
     case newNote
     case onePassword
     case pin
@@ -67,10 +65,6 @@ extension UIImageName {
             return "icon_info"
         case .menu:
             return "icon_menu"
-        case .navigationBarBackground:
-            return "navigation_bar_background"
-        case .navigationBarBackgroundPrompt:
-            return "navigation_bar_background_prompt"
         case .newNote:
             return "icon_new_note"
         case .onePassword:
@@ -102,10 +96,6 @@ extension UIImageName {
     ///
     var darkAssetFilename: String? {
         switch self {
-        case .navigationBarBackground:
-            return "navigation_bar_background_dark"
-        case .navigationBarBackgroundPrompt:
-            return "navigation_bar_background_prompt_dark"
         case .tagViewDeletion:
             return "button_delete_small_dark"
         default:

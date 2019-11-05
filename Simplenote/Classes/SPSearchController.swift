@@ -112,29 +112,6 @@ private extension SPSearchController {
 }
 
 
-// MARK: - StatusBar Background
-//
-extension SPSearchController {
-
-    func ensureSearchBarBackgroundIsAttached() {
-        guard let superview = searchBar.superview, statusBarBackground.superview != superview else {
-            return
-        }
-
-        superview.addSubview(statusBarBackground)
-
-        NSLayoutConstraint.activate([
-            statusBarBackground.topAnchor.constraint(equalTo: superview.topAnchor),
-            statusBarBackground.bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor),
-            statusBarBackground.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            statusBarBackground.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
-        ])
-
-        superview.layoutIfNeeded()
-    }
-}
-
-
 // MARK: - UISearchBar Delegate Methods
 //
 extension SPSearchController: UISearchBarDelegate {
@@ -144,7 +121,6 @@ extension SPSearchController: UISearchBarDelegate {
             return false
         }
 
-        ensureSearchBarBackgroundIsAttached()
         updateStatus(active: shouldBeginEditing)
 
         return shouldBeginEditing
