@@ -1,4 +1,2 @@
-- Bilah Pencarian kini terlihat lebih baik dari sebelumnya!
-- Daftar Catatan disegarkan untuk menampilkan status Disematkan di sisi kanan.
-- iOS 11 adalah minimum OS yang didukung saat ini.
-- Memperbaiki bug tidak dimulainya Warna Penyunting dengan tepat.
+- Ikon baru untuk Simplenote!
+- UX bilah sisi diperbarui sepenuhnya.
