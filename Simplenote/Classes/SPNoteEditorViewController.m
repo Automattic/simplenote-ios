@@ -153,7 +153,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
