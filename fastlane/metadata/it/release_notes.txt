@@ -1,4 +1,2 @@
-- La barra di ricerca è più bella che mai.
-- Elenco delle note aggiornato per mostrare lo stato Agganciata sul lato destro.
-- iOS 11 ora è la versione minima supportata di OS.
-- Corretto un bug che causava l'errata inizializzazione dei colori dell'editor.
+- Simplenote ha delle icone tutte nuove!
+- La UX della barra laterale è stata completamente rinnovata.

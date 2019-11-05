@@ -85,7 +85,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             
             [navigationController.interactivePopGestureRecognizer addTarget:self
                                                                      action:@selector(handlePan:)];
-            navigationController.interactivePopGestureRecognizer.delegate = self;
         }
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
