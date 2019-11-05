@@ -780,8 +780,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tagView endEditing:YES];
-        [self.noteEditorTextView endEditing:YES];
-        
+
         [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
             self->bDisableShrinkingNavigationBar = YES;
         }];
