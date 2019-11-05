@@ -55,19 +55,6 @@
     webView.opaque = NO;
     webView.allowsLinkPreview = YES;
     webView.navigationDelegate = self;
-    webView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.view addSubview:webView];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(webView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[webView]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
     self.webView = webView;
 }
 
