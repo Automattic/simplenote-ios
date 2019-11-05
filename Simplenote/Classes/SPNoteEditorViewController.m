@@ -756,7 +756,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     return previewViewController;
 }
 
-- (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller
+- (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
     BOOL isTextUnselected = self.noteEditorTextView.selectedRange.length == 0;
     return self.currentNote.markdown && isTextUnselected;
