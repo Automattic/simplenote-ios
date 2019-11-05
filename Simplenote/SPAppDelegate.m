@@ -35,8 +35,9 @@
 
 @class KeychainMigrator;
 
-#if USE_HOCKEY
-#import <HockeySDK/HockeySDK.h>
+#if USE_APPCENTER
+@import AppCenter;
+@import AppCenterDistribute;
 #endif
 
 
@@ -45,11 +46,6 @@
 #pragma mark ================================================================================
 
 @interface SPAppDelegate () <UINavigationControllerDelegate,
-#if USE_HOCKEY
-                                BITHockeyManagerDelegate,
-                                BITCrashManagerDelegate,
-                                BITUpdateManagerDelegate,
-#endif
                                 SimperiumDelegate,
                                 SPBucketDelegate,
                                 PinLockDelegate>
@@ -179,18 +175,14 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)setupBitHockey
+- (void)setupAppCenter
 {
-#if USE_HOCKEY
-    NSLog(@"Initializing HockeyApp...");
+#if USE_APPCENTER
+    NSLog(@"Initializing AppCenter...");
     
-    BITHockeyManager *hockeyManager = [BITHockeyManager sharedHockeyManager];
-    NSString *identifier = [SPCredentials bitHockeyIdentifier];
-    [hockeyManager configureWithIdentifier:identifier delegate:self];
-    [hockeyManager startManager];
-
-    BITAuthenticator *authenticator = hockeyManager.authenticator;
-    [authenticator authenticateInstallation];
+    NSString *identifier = [SPCredentials appCenterIdentifier];
+    [MSAppCenter start:identifier withServices:@[[MSDistribute class]]];
+    [MSDistribute setEnabled:true];
 #endif
 }
 
@@ -222,7 +214,7 @@
 	// Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
-	[self setupBitHockey];
+	[self setupAppCenter];
     [self setupCrashLogging];
     [self setupDefaultWindow];
 
