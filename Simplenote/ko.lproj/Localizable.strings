@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "태그 추가";
 
+/* Title of option to display all notes */
+"All Notes" = "모든 메모";
+
 /* No comment provided by engineer. */
 "Cancel" = "취소";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "이 메모를 다른 사람과 공유하려면 이메일 주소를 추가하세요. 그러면 두 사람 모두 메모를 수정할 수 있습니다.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "메모 요약 목록";
 
 /* No comment provided by engineer. */
 "Create a new note" = "새 메모 만들기";
@@ -81,16 +87,22 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "메모 옵션 표시";
 
+/* No comment provided by engineer. */
+"New note" = "새 메모";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "메모 없음";
 
 /* Message shown when no notes match a search string */
 "No Results" = "결과 없음";
 
+/* No comment provided by engineer. */
+"Note not published" = "메모 게시 안 됨";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "메모 게시됨";
 
-/* No comment provided by engineer. */
+/* Title of option to display all notes */
 "Notes" = "메모";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
@@ -167,6 +179,9 @@
 
 /* No comment provided by engineer. */
 "Settings" = "설정";
+
+/* No comment provided by engineer. */
+"Share note" = "메모 공유";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "현재 메모 내용 공유";
@@ -358,6 +373,9 @@ Mac, Android 장치나 웹 브라우저(http://simplenote.com)에서 Simplenote�
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "가입하려면 서비스 약관에 동의해야 합니다. »";
+
+/* Forgot Password */
+"Forgot password? »" = "비밀번호를 잊으셨나요? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";

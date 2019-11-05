@@ -41,10 +41,10 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 - (void)setupViews {
     
     // setup views
-    CGFloat yOrigin = [self.topLayoutGuide length];
+    CGFloat yOrigin = self.view.safeAreaInsets.top;
     
     entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                    [self.topLayoutGuide length],
+                                                                    yOrigin,
                                                                     self.view.frame.size.width,
                                                                     [self.theme floatForKey:@"collaboratorCellHeight"])];
     entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -64,10 +64,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     [entryFieldBackground addSubview:entryTextField];
     
     entryFieldPlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *pickerImage = [[UIImage imageNamed:@"button_new_small"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *pickerImage = [UIImage imageWithName:UIImageNameAdd];
     [entryFieldPlusButton setImage:pickerImage forState:UIControlStateNormal];
-    [entryFieldPlusButton setImage:[[UIImage imageNamed:@"button_new_small_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-                          forState:UIControlStateHighlighted];
     entryFieldPlusButton.frame = CGRectMake(0, 0, pickerImage.size.width, pickerImage.size.height);
     [entryFieldPlusButton addTarget:self
                              action:@selector(entryFieldPlusButtonTapped:)
@@ -124,7 +122,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
     UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
     UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    UIColor *tableSeparatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    UIColor *tableSeparatorColor = [UIColor simplenoteDividerColor];
 
     // self
     self.view.backgroundColor = tableBackgroundColor;

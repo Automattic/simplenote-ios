@@ -1,0 +1,2 @@
+- Ahora, Simplenote tiene iconos completamente nuevos
+- La experiencia de usuario de la barra lateral se ha actualizado por completo.

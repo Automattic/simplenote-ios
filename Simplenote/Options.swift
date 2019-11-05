@@ -33,6 +33,19 @@ class Options: NSObject {
 //
 extension Options {
 
+    /// Indicates if the Notes List should be condensed (or not)
+    ///
+    @objc
+    var condensedNotesList: Bool {
+        get {
+            return defaults.bool(forKey: .condensedNotes)
+        }
+        set {
+            defaults.set(newValue, forKey: .condensedNotes)
+            NotificationCenter.default.post(name: .SPCondensedNoteListPreferenceChanged, object: nil)
+        }
+    }
+
     /// Returns the target Sort Mode for the Notes List
     ///
     @objc
@@ -85,6 +98,21 @@ extension Options {
     var themeDescription: String {
         return theme.description
     }
+
+    /// Nukes all of the Options. Useful for *logout* scenarios
+    ///
+    @objc
+    func reset() {
+        defaults.removeObject(forKey: .theme)
+        defaults.removeObject(forKey: .listSortMode)
+    }
+    
+    /// Returns the number of Preview Lines we should use, per note
+    ///
+    @objc
+    var numberOfPreviewLines: Int {
+        return condensedNotesList ? Settings.numberOfPreviewLinesCondensed : Settings.numberOfPreviewLinesRegular
+    }
 }
 
 
@@ -112,4 +140,12 @@ private extension Options {
         let newTheme: Theme = defaults.bool(forKey: .themeLegacy) ? .dark : .light
         defaults.set(newTheme.rawValue, forKey: .theme)
     }
+}
+
+
+// MARK: - Constants!
+//
+private enum Settings {
+    static let numberOfPreviewLinesRegular = 3
+    static let numberOfPreviewLinesCondensed = 1
 }

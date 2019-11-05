@@ -12,6 +12,29 @@ extension UIView {
     func isHorizontallyCompact() -> Bool {
         return traitCollection.horizontalSizeClass == .compact
     }
+
+    /// Returns all of the subviews of a given type
+    ///
+    func subviewsOfType<T: UIView>(_ type: T.Type) -> [T] {
+        var output = [T]()
+
+        for subview in subviews {
+            output += subview.subviewsOfType(type)
+
+            if let subview = subview as? T {
+                output.append(subview)
+            }
+        }
+
+        return output
+    }
+
+    /// Returns the first subview in the receiver's hierarchy, downcasted as a UITableView. Returns nil, of course, if it's not a TableView!
+    ///
+    @objc
+    func firstSubviewAsTableView() -> UITableView? {
+        return subviews.first as? UITableView
+    }
 }
 
 
@@ -21,6 +44,7 @@ extension UIView {
 
     /// Returns the Nib associated with the received: It's filename is expected to match the Class Name
     ///
+    @objc
     class func loadNib() -> UINib {
         return UINib(nibName: classNameWithoutNamespaces, bundle: nil)
     }
@@ -30,5 +54,13 @@ extension UIView {
     ///
     class func instantiateFromNib<T>() -> T {
         return loadNib().instantiate(withOwner: nil, options: nil).first as! T
+    }
+
+    /// ObjC Convenience wrapper: Returns the first object contained within the receiver's nib.
+    /// It's exactly the same as `instantiateFromNib`... but naming it differently to avoid collisions!
+    ///
+    @objc
+    class func loadFromNib() -> Any? {
+        return loadNib().instantiate(withOwner: nil, options: nil).first
     }
 }

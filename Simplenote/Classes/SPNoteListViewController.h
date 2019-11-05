@@ -1,61 +1,41 @@
-//
-//  SPNoteListViewController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-#import "SPBorderedTableView.h"
 #import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
-@class Note, SPEmptyListView;
+@class SPEmptyListView;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
 	SPTagFilterTypeDeleted = 1,
 	SPTagFilterTypeShared = 2,
     SPTagFilterTypePinned = 3,
-    SPTagFilterTypeUnread = 4
-} SPTagFilterType;
+    SPTagFilterTypeUnread = 4,
+    SPTagFilterTypeUntagged = 5
+};
 
-@interface SPNoteListViewController : SPSidebarContainerViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate, UITextFieldDelegate, SPTransitionControllerDelegate> {
-     
-    // Navigation Bar
-    UIBarButtonItem *addButton;
-    UIBarButtonItem *sidebarButton;
-    UIBarButtonItem *iPadCancelButton;
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
-    UISearchBar *searchBar;
-    UIBarButtonItem *emptyTrashButton;
-        
-    UIActivityIndicatorView *activityIndicator;
-    
     NSTimer *searchTimer;
-    
+
     // Bools
     BOOL bSearching;
-    BOOL bDisableUserInteraction;
     BOOL bListViewIsEmpty;
-    BOOL bTitleViewAnimating;
-    BOOL bResetTitleView;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
 
-    NSString *cellIdentifier;
-        
     SPTagFilterType tagFilterType;
 }
 
-@property (nonatomic, strong) NSFetchedResultsController<Note *> *fetchedResultsController;
-@property (nonatomic, strong) NSString *searchText;
-@property (nonatomic) BOOL firstLaunch;
+@property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
+@property (nonatomic, strong) NSString                                      *searchText;
+@property (nonatomic) BOOL                                                  firstLaunch;
 
-@property (nonatomic, strong) SPEmptyListView *emptyListView;
-@property (nonatomic, strong) SPBorderedTableView *tableView;
+@property (nonatomic, strong, readonly) UIVisualEffectView                  *navigationBarBackground;
+@property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
+@property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
+@property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
+@property (nonatomic, strong, readonly) UITableView                         *tableView;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

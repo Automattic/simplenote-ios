@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -27,6 +27,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Schlagwort hinzufügen";
 
+/* Title of option to display all notes */
+"All Notes" = "Alle Notizen";
+
 /* No comment provided by engineer. */
 "Cancel" = "Abbrechen";
 
@@ -41,6 +44,9 @@
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Füge eine E-Mail-Adresse hinzu, um diese Notiz mit jemandem zu teilen. Dann könnt ihr beide Änderungen daran vornehmen.";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Notizenliste Kurzfassung";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Neue Notiz erstellen";
@@ -81,16 +87,22 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "Optionen für Notiz anzeigen";
 
+/* No comment provided by engineer. */
+"New note" = "Neue Notiz";
+
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Keine Notizen";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Keine Ergebnisse";
 
+/* No comment provided by engineer. */
+"Note not published" = "Notiz nicht veröffentlicht";
+
 /* Confirmation shown when a note is published */
 "Note Published" = "Notiz veröffentlicht";
 
-/* Description of Simplenote shown in first launch view */
+/* Title of option to display all notes */
 "Notes" = "Notizen";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
@@ -167,6 +179,9 @@
 
 /* No comment provided by engineer. */
 "Settings" = "Einstellungen";
+
+/* No comment provided by engineer. */
+"Share note" = "Notiz teilen";
 
 /* Accessibility hint on button to share note */
 "share-accessibility-hint" = "Inhalt der aktuellen Notiz teilen";
@@ -358,6 +373,9 @@ Verwende Simplenote auf deinem Mac, Android-Gerät oder in deinem Webbrowser unt
 
 /* TOS */
 "By signing up, you agree to our Terms of Service »" = "Indem du dich registrierst, stimmst du unseren Geschäftsbedingungen zu »";
+
+/* Forgot Password */
+"Forgot password? »" = "Passwort vergessen? »";
 
 /* Ratings View */
 "What do you think about Simplenote?" = "Was hältst du von Simplenote?";

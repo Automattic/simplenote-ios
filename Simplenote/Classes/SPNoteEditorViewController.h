@@ -1,11 +1,3 @@
-//
-//  SPNoteEditorViewController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/9/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "SPActionSheet.h"
 #import "SPActivityView.h"
@@ -18,7 +10,7 @@
 @class SPEditorTextView;
 @class SPOutsideTouchView;
 
-@interface SPNoteEditorViewController : UIViewController  <UITextViewDelegate, SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
     
     // Other Objects
     NSTimer *saveTimer;
@@ -56,7 +48,6 @@
     SPHorizontalPickerView *versionPickerView;
     
     BOOL bSearching;
-    NSArray *searchResultRanges;
     NSInteger highlightedSearchResultIndex;
     
     UILabel *searchDetailLabel;

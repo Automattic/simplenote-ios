@@ -25,7 +25,7 @@ class SPAuthViewController: UIViewController {
             emailInputView.rightView = onePasswordButton
             emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
-            emailInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            emailInputView.textColor = .simplenoteGray80Color
             emailInputView.delegate = self
         }
     }
@@ -36,7 +36,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            emailWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            emailWarningLabel.textColor = .simplenoteRed60Color
             emailWarningLabel.isHidden = true
         }
     }
@@ -51,7 +51,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
-            passwordInputView.textColor = .color(name: .simplenoteAlmostBlack)
+            passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
         }
     }
@@ -60,9 +60,8 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var passwordWarningLabel: SPLabel! {
         didSet {
-            passwordWarningLabel.text = AuthenticationStrings.passwordInvalid
             passwordWarningLabel.textInsets = AuthenticationConstants.warningInsets
-            passwordWarningLabel.textColor = UIColor.color(name: .simplenoteLipstick)
+            passwordWarningLabel.textColor = .simplenoteRed60Color
             passwordWarningLabel.isHidden = true
         }
     }
@@ -91,7 +90,7 @@ class SPAuthViewController: UIViewController {
         didSet {
             if let title = mode.secondaryActionText {
                 secondaryActionButton.setTitle(title, for: .normal)
-                secondaryActionButton.setTitleColor(.color(name: .simplenoteLightNavy), for: .normal)
+                secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
             }
 
             if let attributedTitle = mode.secondaryActionAttributedText {
@@ -108,8 +107,8 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var onePasswordButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.tintColor = .color(name: .simplenoteSlateGrey)
-        button.setImage(.image(name: .onePasswordImage), for: .normal)
+        button.tintColor = .simplenoteGray50Color
+        button.setImage(.image(name: .onePassword), for: .normal)
         button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
         button.sizeToFit()
         return button
@@ -118,11 +117,11 @@ class SPAuthViewController: UIViewController {
     /// # Reveal Password Button
     ///
     private lazy var revealPasswordButton: UIButton = {
-        let selected = UIImage.image(name: .visibilityOnImage)
+        let selected = UIImage.image(name: .visibilityOn)
         let button = UIButton(type: .custom)
-        button.tintColor = .color(name: .simplenoteSlateGrey)
+        button.tintColor = .simplenoteGray50Color
         button.addTarget(self, action: #selector(revealPasswordWasPressed), for: [.touchDown])
-        button.setImage(.image(name: .visibilityOffImage), for: .normal)
+        button.setImage(.image(name: .visibilityOff), for: .normal)
         button.setImage(selected, for: .highlighted)
         button.setImage(selected, for: .selected)
         button.sizeToFit()
@@ -136,7 +135,11 @@ class SPAuthViewController: UIViewController {
 
     /// # Simperium's Validator
     ///
-    private let validator = SPAuthenticationValidator()
+    private lazy var validator: SPAuthenticationValidator = {
+        let output = SPAuthenticationValidator()
+        output.minimumPasswordLength = mode.passwordMinimumLength
+        return output
+    }()
 
     /// # Indicates if we've got a valid Username. Doesn't display any validation warnings onscreen
     ///
@@ -190,12 +193,6 @@ class SPAuthViewController: UIViewController {
     }
 
 
-    /// Deinitializer!
-    ///
-    deinit {
-        stopListeningToNotifications()
-    }
-
     /// Designated Initializer
     ///
     init(controller: SPAuthHandler, mode: AuthenticationMode = .login) {
@@ -210,7 +207,6 @@ class SPAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
-        setupAutolayoutConstraints()
         startListeningToNotifications()
     }
 
@@ -243,24 +239,7 @@ private extension SPAuthViewController {
 
     func setupNavigationController() {
         title = mode.title
-        navigationController?.navigationBar.applySimplenoteLightStyle()
-    }
-
-    func setupAutolayoutConstraints() {
-        if #available(iOS 11, *) {
-            return
-        }
-
-        /// Nuke the current constraint: it's set against safeLayoutGuide, non existant in iOS 10
-        stackViewTopConstraint.isActive = false
-        stackView.removeConstraint(stackViewTopConstraint)
-
-        /// Establish a new top constraint, against the topLayoutGuide.
-        stackViewTopConstraint = stackView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor,
-                                                                constant: stackViewTopConstraint.constant)
-
-        /// And, please, forgive me for pushing this awful method.
-        stackViewTopConstraint.isActive = true
+        navigationController?.navigationBar.applyLightStyle()
     }
 
     func startListeningToNotifications() {
@@ -268,17 +247,12 @@ private extension SPAuthViewController {
         nc.addObserver(self, selector: #selector(refreshOnePasswordAvailability), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
-    func stopListeningToNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func ensureNavigationBarIsVisible() {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func ensureStylesMatchValidationState() {
-        let name: UIColorName = isInputValid ? .simplenoteLightNavy : .simplenotePalePurple
-        primaryActionButton.backgroundColor = .color(name: name)
+        primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
     @objc func refreshOnePasswordAvailability() {
@@ -465,6 +439,7 @@ private extension SPAuthViewController {
     }
 
     func refreshPasswordWarning(isHidden: Bool) {
+        passwordWarningLabel.text = mode.passwordInvalidText
         passwordWarningLabel.animateVisibility(isHidden: isHidden)
         passwordInputView.inErrorState = !isHidden
     }
@@ -540,6 +515,8 @@ struct AuthenticationMode {
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
+    let passwordInvalidText: String
+    let passwordMinimumLength: UInt
 }
 
 
@@ -556,7 +533,9 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil)
+                     secondaryActionAttributedText: nil,
+                     passwordInvalidText:           AuthenticationStrings.passwordInvalidLogin,
+                     passwordMinimumLength:         AuthenticationConstants.loginPasswordLength)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -568,7 +547,9 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
+                     passwordInvalidText:           AuthenticationStrings.passwordInvalidSignup,
+                     passwordMinimumLength:         AuthenticationConstants.signupPasswordLength)
     }
 }
 
@@ -589,7 +570,8 @@ private enum AuthenticationStrings {
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalid              = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid")
+    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 6 characters", comment: "Message displayed when password is invalid (Signup)")
+    static let passwordInvalidLogin         = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid (Login)")
 }
 
 
@@ -604,9 +586,9 @@ private extension AuthenticationStrings {
             .font: UIFont.preferredFont(forTextStyle: .subheadline)
         ])
 
-        output.append(string: signupSecondaryActionPrefix, foregroundColor: .color(name: .simplenoteGunmetal))
+        output.append(string: signupSecondaryActionPrefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
-        output.append(string: signupSecondaryActionSuffix, foregroundColor: .color(name: .simplenoteLightNavy))
+        output.append(string: signupSecondaryActionSuffix, foregroundColor: .simplenoteBlue60Color)
 
         return output
     }
@@ -618,4 +600,6 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+    static let loginPasswordLength  = UInt(4)
+    static let signupPasswordLength = UInt(6)
 }

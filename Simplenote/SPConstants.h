@@ -14,13 +14,6 @@
 #pragma mark Constants
 #pragma mark ================================================================================
 
-#define IS_XCODE_11 (SDK_VERSION_MAJOR >= SDK_VERSION_IOS13)
-
-
-#pragma mark ================================================================================
-#pragma mark Constants
-#pragma mark ================================================================================
-
 extern NSString *const kSimperiumBaseURL;
 extern NSString *const kSimperiumForgotPasswordURL;
 extern NSString *const kSimperiumTermsOfServiceURL;
@@ -42,6 +35,11 @@ extern NSInteger const kOnePasswordGeneratedMaxLength;
 extern NSString *const kFirstLaunchKey;
 extern NSString *const kSelectedTagKey;
 extern NSString *const kSelectedNoteKey;
+extern NSString *const kSimplenoteTrashKey;
+extern NSString *const kSimplenoteUntaggedKey;
+extern NSString *const kSimplenoteSystemTagPinned;
+extern NSString *const kSimplenoteSystemTagShared;
+extern NSString *const kSimplenoteSystemTagUnread;
 extern NSString *const kSimplenotePinKey;
 extern NSString *const kSimplenotePinLegacyKey;
 extern NSString *const kSimplenoteUseBiometryKey;
@@ -53,3 +51,6 @@ extern NSString *const kSimplenoteDarkThemeName;
 extern NSString *const kSimplenoteDefaultThemeName;
 
 extern NSString *const kPinTimeoutPreferencesKey;
+
+extern NSString *const kWordPressAuthURL;
+

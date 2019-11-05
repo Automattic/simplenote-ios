@@ -10,7 +10,6 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "UIView+ImageRepresentation.h"
 #import "UITableView+Styling.h"
 #import "VSThemeManager.h"
 #import "StatusChecker.h"
@@ -21,7 +20,6 @@
 #import "Simplenote-Swift.h"
 #import "Simperium+Simplenote.h"
 
-NSString *const SPCondensedNoteListPref                             = @"SPCondensedNoteListPref";
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";
 
@@ -198,11 +196,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             self.biometryIsAvailable = YES;
 
             BOOL faceIDAvailable = NO;
-            
-            if (@available(iOS 11.0, *)) {
-                if (context.biometryType == LABiometryTypeFaceID) {
-                    faceIDAvailable = YES;
-                }
+            if (context.biometryType == LABiometryTypeFaceID) {
+                faceIDAvailable = YES;
             }
 
             self.biometryTitle = (faceIDAvailable) ?
@@ -326,9 +321,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 }
                 case SPOptionsPreferencesRowCondensed: {
                     cell.textLabel.text = NSLocalizedString(@"Condensed Note List", @"Option to make the note list show only 1 line of text. The default is 3.");
-                    
-                    [self.condensedNoteListSwitch setOn:[self condesedNoteListPref]];
-                    
+
+                    self.condensedNoteListSwitch.on = [[Options shared] condensedNotesList];
+
                     cell.accessoryView = self.condensedNoteListSwitch;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.tag = kTagCondensedNoteList;
@@ -442,7 +437,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsAccountRowLogout: {
-                    cell.textLabel.text = NSLocalizedString(@"Sign Out", @"Sign out of the active account in the app");
+                    cell.textLabel.text = NSLocalizedString(@"Log Out", @"Log out of the active account in the app");
                     break;
                 }
                 default:
@@ -681,7 +676,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                 preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* signOutAction = [UIAlertAction
-                                    actionWithTitle:NSLocalizedString(@"Delete Notes", @"Verb: Delete notes and sign out of the app")
+                                    actionWithTitle:NSLocalizedString(@"Delete Notes", @"Verb: Delete notes and log out of the app")
                                     style:UIAlertActionStyleDestructive
                                     handler:^(UIAlertAction * action) {
                                         [SPTracker trackUserSignedOut];
@@ -712,14 +707,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)condensedSwitchDidChangeValue:(UISwitch *)sender
 {
     BOOL isOn = [(UISwitch *)sender isOn];
-    NSNumber *notificationObject = [NSNumber numberWithBool:isOn];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:SPCondensedNoteListPref];
 
+    [[Options shared] setCondensedNotesList:isOn];
     [SPTracker trackSettingsListCondensedEnabled:isOn];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SPCondensedNoteListPreferenceChangedNotification
-                                                        object:notificationObject];
 }
 
 - (void)tagSortSwitchDidChangeValue:(UISwitch *)sender
@@ -759,8 +749,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch, _biometrySwitch ];
     
     for (UISwitch *theSwitch in switches) {
-        theSwitch.onTintColor   = [UIColor colorWithName:UIColorNameSwitchOnTintColor];
-        theSwitch.tintColor     = [UIColor colorWithName:UIColorNameSwitchTintColor];
+        theSwitch.onTintColor   = [UIColor simplenoteSwitchOnTintColor];
+        theSwitch.tintColor     = [UIColor simplenoteSwitchTintColor];
     }
 
     UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
@@ -794,11 +784,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (BOOL)alphabeticalTagSortPref
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SPAlphabeticalTagSortPref];
-}
-
-- (BOOL)condesedNoteListPref
-{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SPCondensedNoteListPref];
 }
 
 

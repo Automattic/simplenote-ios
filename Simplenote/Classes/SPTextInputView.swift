@@ -57,7 +57,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Enabled State
     ///
-    @IBInspectable var borderColorEnabled: UIColor? = .color(name: .simplenotePalePurple) {
+    @IBInspectable var borderColorEnabled: UIColor? = .simplenoteGray20Color {
         didSet {
             refreshBorderStyle()
         }
@@ -65,7 +65,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Disabled State
     ///
-    @IBInspectable var borderColorDisabled: UIColor? = .color(name: .simplenoteLightPink) {
+    @IBInspectable var borderColorDisabled: UIColor? = .simplenoteGray5Color {
         didSet {
             refreshBorderStyle()
         }
@@ -73,7 +73,7 @@ class SPTextInputView: UIView {
 
     /// Outer Border Color: Disabled State
     ///
-    @IBInspectable var borderColorError: UIColor? = .color(name: .simplenoteLipstick) {
+    @IBInspectable var borderColorError: UIColor? = .simplenoteRed50Color {
         didSet {
             refreshBorderStyle()
         }
@@ -253,7 +253,7 @@ private extension SPTextInputView {
         textField.delegate = self
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.placeholdTextColor = .color(name: .simplenoteSlateGrey)
+        textField.placeholdTextColor = .simplenoteGray50Color
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         addSubview(textField)
     }

@@ -300,7 +300,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
             dividerRect.size.width += 2 * motionEffectDistance;
 
             UIView *divider = [[UIView alloc] initWithFrame:dividerRect];
-            divider.backgroundColor = [UIColor colorWithName:UIColorNameDividerColor];
+            divider.backgroundColor = [UIColor simplenoteDividerColor];
             [container addSubview:divider];
         }
         
@@ -415,10 +415,10 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
                                      boxFrame.origin.y + padding,
                                      contentWidth + 2 * moveDistance,
                                      contentHeight + moveDistance);
-    if (@available(iOS 11.0, *)) {
-        contentFrame.origin.y -= view.safeAreaInsets.bottom;
-        contentFrame.size.height += view.safeAreaInsets.bottom;
-    }
+
+    contentFrame.origin.y -= view.safeAreaInsets.bottom;
+    contentFrame.size.height += view.safeAreaInsets.bottom;
+
     contentView.frame = contentFrame;
     contentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     

@@ -43,11 +43,6 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         return false
     }
 
-    /// Deinitializer
-    ///
-    deinit {
-        stopListeningToNotifications()
-    }
 
     // MARK: - Overridden Methods
 
@@ -82,43 +77,35 @@ private extension SPOnboardingViewController {
     }
 
     func setupNavigationController() {
-        navigationController?.navigationBar.applySimplenoteLightStyle()
+        navigationController?.navigationBar.applyLightStyle()
 
         // All of the Authentication Flows are meant to be rendered in Light Mode
-#if IS_XCODE_11
         if #available(iOS 13.0, *) {
             navigationController?.overrideUserInterfaceStyle = .light
         }
-#endif
     }
 
     func setupActionButtons() {
-        let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
-
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
-        loginButton.setTitleColor(simplenoteLightNavy, for: .normal)
+        loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
     }
 
     func setupLabels() {
-        let simplenoteAlmostBlack = UIColor.color(name: .simplenoteAlmostBlack)
+        let textColor = UIColor.simplenoteGray80Color
 
         simplenoteLabel.text = OnboardingStrings.brandText
-        simplenoteLabel.textColor = simplenoteAlmostBlack
+        simplenoteLabel.textColor = textColor
+        simplenoteLabel.adjustsFontSizeToFitWidth = true
+        simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
 
         headerLabel.text = OnboardingStrings.headerText
-        headerLabel.textColor = simplenoteAlmostBlack
-
-        if #available(iOS 11, *) {
-            simplenoteLabel.adjustsFontSizeToFitWidth = true
-            simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
-
-            headerLabel.adjustsFontSizeToFitWidth = true
-            headerLabel.font = .preferredFont(forTextStyle: .title3)
-        }
+        headerLabel.textColor = textColor
+        headerLabel.adjustsFontSizeToFitWidth = true
+        headerLabel.font = .preferredFont(forTextStyle: .title3)
     }
 
     func setupAppleAuthentication() {
@@ -169,12 +156,12 @@ private extension SPOnboardingViewController {
     func presentLoginSheet() {
         let emailButton = SPSquaredButton(type: .custom)
         emailButton.setTitle(OnboardingStrings.loginWithEmailText, for: .normal)
-        emailButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        emailButton.backgroundColor = .simplenoteBlue50Color
         emailButton.addTarget(self, action: #selector(emailLoginWasPressed), for: .touchUpInside)
 
         let dotcomButton = SPSquaredButton(type: .custom)
         dotcomButton.setTitle(OnboardingStrings.loginWithDotcomText, for: .normal)
-        dotcomButton.backgroundColor = .color(name: .simplenoteDeepSeaBlue)
+        dotcomButton.backgroundColor = .simplenoteWPBlue50Color
         dotcomButton.addTarget(self, action: #selector(dotcomLoginWasPressed), for: .touchUpInside)
 
         let sheetController = SPSheetController()
@@ -259,10 +246,6 @@ private extension SPOnboardingViewController {
         let name = NSNotification.Name(rawValue: kSignInErrorNotificationName)
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
-    }
-
-    func stopListeningToNotifications() {
-        NotificationCenter.default.removeObserver(self)
     }
 
     @objc func handleSignInError(note: Notification) {

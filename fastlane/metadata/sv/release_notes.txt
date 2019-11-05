@@ -1,6 +1,2 @@
-– Simplenote fungerar nu med Siri-genvägar så att du kan öppna appen, öppna befintliga anteckningar och skapa nya anteckningar direkt från Siri.
-– Nya svepgester finns tillgängliga i Anteckningarlistan: Fäst och dela!
-– Anteckningarlistan visar nu en ikon med anteckningar som har publicerats.
-– När du delar till WordPress-appen kommer inte längre anteckningar som blockcitat.
-– Gränssnittet för iOS-delningstillägget har uppdaterats.
-– Åtgärdade en bugg som fick Anteckningarlistan att beskäras när svepgester användes.
+- Simplenote fick just helt nya ikoner!
+- Sidofältets UX har uppdaterats helt.

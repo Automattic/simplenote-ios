@@ -34,7 +34,7 @@
     
     CGRect borderRect = CGRectMake(xOrigin, 0, borderWidth, rect.size.height);
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRect:borderRect];
-    [[UIColor colorWithName:UIColorNameHorizontalPickerBorderColor] setFill];
+    [[UIColor simplenoteDividerColor] setFill];
     [borderPath fill];
 
     if (!gradientLayer) {
@@ -69,7 +69,6 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
-#if IS_XCODE_11
     if (@available(iOS 13.0, *)) {
         if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
             return;
@@ -77,7 +76,6 @@
 
         [self refreshStyle];
     }
-#endif
 }
 
 @end

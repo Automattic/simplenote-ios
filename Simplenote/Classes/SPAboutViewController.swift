@@ -36,17 +36,17 @@ private extension SPAboutViewController {
 
     func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: UIControl.State.normal)
-        doneButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        doneButton.setTitleColor(lightBlue, for: UIControl.State.highlighted)
-        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: UIControl.Event.touchUpInside)
-        doneButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
+        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: .normal)
+        doneButton.setTitleColor(UIColor.white, for: .normal)
+        doneButton.setTitleColor(lightBlue, for: .highlighted)
+        doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
+        doneButton.contentHorizontalAlignment = .right
 
         view.addSubview(doneButton)
 
         NSLayoutConstraint.activate([
-            doneButton.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15.0)
+            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            doneButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
             ])
     }
 
@@ -57,11 +57,7 @@ private extension SPAboutViewController {
         containerView.spacing = 10.0
         view.insertSubview(containerView, belowSubview: doneButton)
 
-        var bottomAnchor = bottomLayoutGuide.topAnchor
-        if #available(iOS 11.0, *) {
-            bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
-        }
-
+        let bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -231,6 +227,7 @@ extension SPAboutViewController: UITableViewDataSource {
         cell.selectedBackgroundView = bgColorView
         
         let arrowAccessoryView = UIImageView(image: UIImage(named: "icon_arrow_top_right"))
+        arrowAccessoryView.tintColor = .white
         arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         cell.accessoryView = arrowAccessoryView
         

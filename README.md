@@ -60,10 +60,10 @@ Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium
 After you've created your own Simperium application, copy the sample config. For example:
 
 ```
-cp Simplenote/config-demo.plist Simplenote/config.plist
+mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
 ```
 
-Then edit the new config.plist file and change the SPSimperiumAppID and SPSimperiumApiKey fields to the correct values for your new app.
+Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values for your new app.
 
 This will allow you to compile and run the app on a device or a simulator.
 

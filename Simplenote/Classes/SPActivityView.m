@@ -63,7 +63,7 @@
 
     // draw borders
     CGFloat borderThickness = 1.0 / [[UIScreen mainScreen] scale];
-    [[UIColor colorWithName:UIColorNameDividerColor] setFill];
+    [[UIColor simplenoteDividerColor] setFill];
 
     CGRect borderRect = CGRectMake(0, 0, self.frame.size.width, borderThickness);
 
@@ -416,7 +416,6 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
-#if IS_XCODE_11
     if (@available(iOS 13.0, *)) {
         if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
             return;
@@ -424,7 +423,6 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
         [self refreshButtonImages];
     }
-#endif
 }
 
 

@@ -74,7 +74,7 @@ private extension SharePresentationController {
         appearance.barStyle = .default
         appearance.tintColor = UIColor.color(name: .tintColor)
         appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.color(name: .navigationBarTitleFontColor)!
+            .foregroundColor: UIColor.simplenoteNavigationBarTitleColor
         ]
         appearance.isTranslucent = false
     }

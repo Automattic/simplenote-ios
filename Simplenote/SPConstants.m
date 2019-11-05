@@ -42,6 +42,11 @@ NSInteger const kOnePasswordGeneratedMaxLength      = 50;
 NSString *const kFirstLaunchKey                     = @"SPFirstLaunch";
 NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
+NSString *const kSimplenoteTrashKey                 = @"__##__trash__##__";
+NSString *const kSimplenoteUntaggedKey              = @"__##__untagged__##__";
+NSString *const kSimplenoteSystemTagPinned          = @"pinned";
+NSString *const kSimplenoteSystemTagShared          = @"shared";
+NSString *const kSimplenoteSystemTagUnread          = @"unread";
 NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
@@ -56,3 +61,5 @@ NSString *const kSimplenoteDarkThemeName            = @"dark";
 NSString *const kSimplenoteDefaultThemeName         = @"default";
 
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
+
+NSString *const kWordPressAuthURL                   = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";

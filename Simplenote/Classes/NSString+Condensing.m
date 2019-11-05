@@ -27,7 +27,7 @@
 	return condensed;
 }
 
-- (void)generatePreviewStrings:(void (^)(NSString *titlePreview, NSString *contentPreview))block {
+- (void)generatePreviewStrings:(void (^)(NSString *titlePreview, NSString *bodyPreview, NSString *contentPreview))block {
     
     NSString *aString = [NSString stringWithString:self];
     NSString *titlePreview;
@@ -61,13 +61,15 @@
     }
     
 
-    if (contentPreview)
+    if (contentPreview) {
         
-        block(titlePreview, [NSString stringWithFormat:@"%@\n%@", titlePreview, contentPreview]);
+        block(titlePreview, contentPreview, [NSString stringWithFormat:@"%@\n%@", titlePreview, contentPreview]);
     
-    else
+    } else {
         
-        block(titlePreview, titlePreview);
+        block(titlePreview, nil, titlePreview);
+
+    }
 }
 
 @end

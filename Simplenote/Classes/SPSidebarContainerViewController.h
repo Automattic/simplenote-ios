@@ -1,61 +1,33 @@
-//
-//  SPSidebarContainerViewController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 10/14/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-@class SPSidebarContainerViewController, SPSidebarViewController;
 
-@protocol SPContainerSidePanelViewDelegate <NSObject>
 
+@class SPSidebarContainerViewController;
+
+
+@protocol SPSidebarContainerDelegate <NSObject>
 @required
-
-- (BOOL)containerViewControllerShouldShowSidePanel:(SPSidebarContainerViewController *)container;
-
-@optional
-- (void)containerViewControllerWillSlide:(SPSidebarContainerViewController *)container;
-- (void)containerViewControllerDidSlide:(SPSidebarContainerViewController *)container;
-- (void)containerViewControllerWillShowSidePanel:(SPSidebarContainerViewController *)container;
-- (void)containerViewControllerDidShowSidePanel:(SPSidebarContainerViewController *)container;
-- (void)containerViewControllerDidHideSidePanel:(SPSidebarContainerViewController *)container;
-- (void)containerViewController:(SPSidebarContainerViewController *)container didChangeContentInset:(UIEdgeInsets)contentInset;
+- (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerWillDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerDidDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerWillHideSidebar:(SPSidebarContainerViewController *)sidebarContainer;
+- (void)sidebarContainerDidHideSidebar:(SPSidebarContainerViewController *)sidebarContainer;
 @end
 
 
-@interface SPSidebarContainerViewController : UIViewController <UIGestureRecognizerDelegate> {
-    
-    id<SPContainerSidePanelViewDelegate> sidePanelViewDelegate;
-    
-    UITapGestureRecognizer *rootViewTapGesture;
-    
-    BOOL bRootViewIsPanning;
-    BOOL bSetupForPanning;
-    BOOL bShowingTemporaryBarButtonItem;
-}
+@interface SPSidebarContainerViewController : UIViewController
 
-@property (nonatomic, assign) id<SPContainerSidePanelViewDelegate> sidePanelViewDelegate;
-@property (nonatomic, strong) UIView *rootView;
-@property (nonatomic, strong) SPSidebarViewController *sidePanelViewController;
+@property (nonatomic, strong, readonly) UIViewController        *sidebarViewController;
+@property (nonatomic, strong, readonly) UIViewController        *mainViewController;
+@property (nonatomic, assign, readonly) BOOL                    isSidebarVisible;
+@property (nonatomic, assign) BOOL                              automaticallyMatchSidebarInsetsWithMainInsets;
+@property (nonatomic, weak) id<SPSidebarContainerDelegate>      delegate;
 
-@property (nonatomic) BOOL bSidePanelVisible;
+- (instancetype)initWithMainViewController:(UIViewController *)mainViewController
+                     sidebarViewController:(UIViewController *)sidebarViewController;
 
-- (id)initWithSidebarViewController:(SPSidebarViewController *)sidebarViewController;
-
-- (void)toggleSidePanel:(void (^)())completion;;
-- (void)showSidePanel:(void (^)())completion;
-- (void)showFullSidePanelWithTemporaryBarButton:(UIBarButtonItem *)item
-                                     completion:(void (^)())completion;
-- (void)hideSidePanelAnimated:(BOOL)animated completion:(void (^)())completion;
-
-// Methods that should be implemented by subclasses
-- (BOOL)shouldShowSidebar;
-- (void)sidebarWillShow;
-- (void)sidebarDidShow;
-- (void)sidebarDidHide;
-- (void)sidebarDidSlideToPercentVisible:(CGFloat)percentVisible;
-- (void)resetNavigationBar;
+- (void)toggleSidebar;
+- (void)showSidebar;
+- (void)hideSidebarWithAnimation:(BOOL)animated;
+- (void)requirePanningToFail;
 
 @end

@@ -22,6 +22,7 @@
 #import "SPTextField.h"
 #import "SPTableViewController.h"
 #import "SPNoteListViewController.h"
+#import "SPTagsListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPTracker.h"
 #import "WPAuthHandler.h"
@@ -30,14 +31,9 @@
 #pragma mark - Extensions
 
 #import "UIImage+Colorization.h"
-#import "NSAttributedString+Styling.h"
-#import "NSAttributedString+Styling.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
-#import "UIView+ImageRepresentation.h"
-#import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "UITableView+Styling.h"
-
 #import "SPNavigationController.h"

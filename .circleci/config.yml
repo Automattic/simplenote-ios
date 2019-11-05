@@ -2,23 +2,33 @@ version: 2.1
 
 orbs:
   # This uses the Orbs located at https://github.com/wordpress-mobile/circleci-orbs
-  ios: wordpress-mobile/ios@0.0.26
+  ios: wordpress-mobile/ios@0.0.31
+
+commands:
+  load-chruby:
+    steps:
+      - run:
+          name: Load chruby
+          command: |
+            # Force chruby to load to work around CircleCI Xcode 11 image issue
+            echo 'source /usr/local/opt/chruby/share/chruby/chruby.sh && chruby 2.5.5' >> $BASH_ENV
 
 jobs:
   Test:
     executor:
       name: ios/default
-      xcode-version: "10.2.0"
+      xcode-version: "11.0.0"
     steps:
       - checkout
+      - load-chruby
       - run:
-          name: Copy demo config.plist
-          command: cp Simplenote/config-demo.plist Simplenote/config.plist
+          name: Copy demo SPCredentials
+          command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
       - ios/test:
-          xcode-version: "10.2.0"
+          xcode-version: "11.0.0"
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
-          device: iPhone XS
+          device: iPhone 11
 
 workflows:
   simplenote_ios:
