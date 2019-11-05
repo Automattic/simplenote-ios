@@ -51,7 +51,7 @@ CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
 CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
 CGFloat const SPBackButtonImagePadding              = -18;
 CGFloat const SPBackButtonTitlePadding              = -15;
-
+CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
@@ -758,8 +758,20 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 
 - (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
-    BOOL isTextUnselected = self.noteEditorTextView.selectedRange.length == 0;
-    return self.currentNote.markdown && isTextUnselected;
+    if (!self.currentNote.markdown) {
+        return NO;
+    }
+
+    if (!self.noteEditorTextView.isTextSelected) {
+        return YES;
+    }
+
+    // We'll check if the Push Gesture intersects with the Selected Text's bounds. If so, we'll deny the
+    // Push Interaction.
+    CGRect selectedSquare = CGRectInset(self.noteEditorTextView.selectedBounds, -SPSelectedAreaPadding, -SPSelectedAreaPadding);
+    CGPoint convertedPoint = [self.view convertPoint:touchPoint toView:self.noteEditorTextView];
+
+    return !CGRectContainsPoint(selectedSquare, convertedPoint);
 }
 
 - (void)interactivePushPopAnimationControllerWillBeginPush:(SPInteractivePushPopAnimationController *)controller
