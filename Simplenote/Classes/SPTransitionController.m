@@ -76,21 +76,18 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         self.useCount = 0;
         
         if ([UIDevice isPad]) {
-            
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(handlePinch:)];
             [navigationController.view addGestureRecognizer:pinchGesture];
-            
-        } else {
-            
-            [navigationController.interactivePopGestureRecognizer addTarget:self
-                                                                     action:@selector(handlePan:)];
 
-            // Note:
-            // This is required since NoteEditorViewController has a custom TitleView, which causes the
-            // interactivePopGestureRecognizer to stop working on its own!
-            navigationController.interactivePopGestureRecognizer.delegate = self;
         }
+
+        // Note:
+        // This is required since NoteEditorViewController has a custom TitleView, which causes the
+        // interactivePopGestureRecognizer to stop working on its own!
+        UIGestureRecognizer *interactivePopGestureRecognizer = navigationController.interactivePopGestureRecognizer;
+        [interactivePopGestureRecognizer addTarget:self action:@selector(handlePan:)];
+        interactivePopGestureRecognizer.delegate = self;
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
         self.navigationController = navigationController;
