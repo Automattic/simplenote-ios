@@ -255,7 +255,7 @@ DEPENDENCIES
   cocoapods-repo-update (~> 0.0.3)!
   dotenv!
   fastlane (= 2.133.0)!
-  fastlane-plugin-appcenter
+  fastlane-plugin-appcenter (= 1.6.0)
   fastlane-plugin-sentry
   fastlane-plugin-wpmreleasetoolkit!
   octokit (~> 4.0)!
