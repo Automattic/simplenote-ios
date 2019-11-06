@@ -1,3 +1,6 @@
+4.14
+-----
+ 
 4.13
 ====
 -   Every Navigation Bar in Simplenote now has a super cool blur effect!
