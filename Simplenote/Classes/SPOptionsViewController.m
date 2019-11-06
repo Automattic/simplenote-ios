@@ -10,7 +10,6 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "UITableView+Styling.h"
 #import "VSThemeManager.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
@@ -586,9 +585,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)refreshTableViewCellStyle:(UITableViewCell *)cell
 {
-    cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
-    cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    cell.backgroundColor = [UIColor simplenoteBackgroundColor];
+    cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
+    cell.textLabel.textColor = [UIColor simplenoteTextColor];
     cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
 }
 
@@ -753,15 +752,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         theSwitch.tintColor     = [UIColor simplenoteSwitchTintColor];
     }
 
-    UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *tintColor = [UIColor simplenoteTintColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
 
     [self.pinTimeoutPickerView setBackgroundColor:backgroundColor];
     [self.doneToolbar setTintColor:tintColor];
     [self.doneToolbar setBarTintColor:backgroundColor];
     
     // Refresh the Table
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenoteGroupedStyle];
 }
 
 - (void)reloadAppearance
@@ -810,7 +809,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSDictionary *attributes = @{
-        NSForegroundColorAttributeName: [UIColor colorWithName:UIColorNameTextColor]
+        NSForegroundColorAttributeName: [UIColor simplenoteTextColor]
     };
 
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:timeoutPickerOptions[row] attributes:attributes];

@@ -35,5 +35,4 @@
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
-#import "UITableView+Styling.h"
 #import "SPNavigationController.h"

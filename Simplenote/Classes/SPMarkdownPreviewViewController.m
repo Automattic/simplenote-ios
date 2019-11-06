@@ -86,7 +86,7 @@
 
 - (void)applyStyle
 {
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;

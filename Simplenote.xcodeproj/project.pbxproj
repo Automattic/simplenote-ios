@@ -96,7 +96,6 @@
 		46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF91794F55000A17ED2 /* SPActionSheet.m */; };
 		46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E8117B49F4600F13AD9 /* DTPinLockController.m */; };
 		46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */; };
-		46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EEAE0B17C7BBB4002BEDA2 /* UITableView+Styling.m */; };
 		46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DBD917CDA6BD00070550 /* UIImage+Extensions.m */; };
 		46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */; };
 		46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D444041799F1DD0060FDE2 /* SPTextView.m */; };
@@ -695,8 +694,6 @@
 		E2D444041799F1DD0060FDE2 /* SPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTextView.m; path = Classes/SPTextView.m; sourceTree = "<group>"; };
 		E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPEntryListViewController.h; path = Classes/SPEntryListViewController.h; sourceTree = "<group>"; };
 		E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPEntryListViewController.m; path = Classes/SPEntryListViewController.m; sourceTree = "<group>"; };
-		E2EEAE0A17C7BBB4002BEDA2 /* UITableView+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Styling.h"; path = "Classes/UITableView+Styling.h"; sourceTree = "<group>"; };
-		E2EEAE0B17C7BBB4002BEDA2 /* UITableView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Styling.m"; path = "Classes/UITableView+Styling.m"; sourceTree = "<group>"; };
 		E2F0C33D1797077300CF9413 /* SPTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagView.h; path = Classes/SPTagView.h; sourceTree = "<group>"; };
 		E2F0C33E1797077300CF9413 /* SPTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagView.m; path = Classes/SPTagView.m; sourceTree = "<group>"; };
 		E2F149421799F4BD00DC9690 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -860,8 +857,6 @@
 				E2465A1C17AD69320097B19B /* UIImage+Colorization.m */,
 				E265DBD817CDA6BD00070550 /* UIImage+Extensions.h */,
 				E265DBD917CDA6BD00070550 /* UIImage+Extensions.m */,
-				E2EEAE0A17C7BBB4002BEDA2 /* UITableView+Styling.h */,
-				E2EEAE0B17C7BBB4002BEDA2 /* UITableView+Styling.m */,
 				B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */,
 				B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */,
 				B52B8A201BAAF80B002CC55D /* UIViewController+Extensions.h */,
@@ -1045,12 +1040,12 @@
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				B52646A922D3E04C00EBF299 /* UIViewController+Simplenote.swift */,
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
-				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */,
 				B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */,
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
-				B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2037,7 +2032,6 @@
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
 				B570D2D92360F16F006E1C85 /* UIBlurEffect+Simplenote.swift in Sources */,
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
-				46A3C9AA17DFA81A002865AE /* UITableView+Styling.m in Sources */,
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				46A3C9AB17DFA81A002865AE /* UIImage+Extensions.m in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,

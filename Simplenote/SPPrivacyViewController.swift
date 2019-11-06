@@ -130,7 +130,7 @@ private extension SPPrivacyViewController {
     /// Setup: TableView
     ///
     func setupTableView() {
-        tableView.applyDefaultGroupedStyling()
+        tableView.applySimplenoteGroupedStyle()
     }
 
     /// Setup: Switch
@@ -170,7 +170,7 @@ private extension SPPrivacyViewController {
 
         // And the actual text!
         cell.textLabel?.text = NSLocalizedString("Learn more", comment: "Learn More Action")
-        cell.textLabel?.textColor = UIColor.color(name: .tintColor)
+        cell.textLabel?.textColor = .simplenoteTintColor
     }
 
     /// Setup: Crash

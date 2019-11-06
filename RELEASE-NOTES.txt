@@ -2,6 +2,8 @@
 ====
 -   Fixed a bug that caused the Markdown Preview UI to get dismissed accidentally
 
+-----
+ 
 4.13
 ====
 -   Every Navigation Bar in Simplenote now has a super cool blur effect!

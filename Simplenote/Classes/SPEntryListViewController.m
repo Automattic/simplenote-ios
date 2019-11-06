@@ -120,8 +120,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 
 - (void)applyDefaultStyle {
 
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIColor *tableBackgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
+    UIColor *tableBackgroundColor = [UIColor simplenoteTableViewBackgroundColor];
     UIColor *tableSeparatorColor = [UIColor simplenoteDividerColor];
 
     // self
@@ -131,8 +131,8 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryFieldBackground.backgroundColor = backgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    entryTextField.textColor = [UIColor colorWithName:UIColorNameTextColor];
-    entryTextField.placeholdTextColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
+    entryTextField.textColor = [UIColor simplenoteTextColor];
+    entryTextField.placeholdTextColor = [UIColor simplenoteTitleColor];
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,
