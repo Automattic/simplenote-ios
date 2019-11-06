@@ -43,18 +43,18 @@
 }
 
 - (void)refreshCellStyle {
-    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.backgroundColor = [UIColor simplenoteBackgroundColor];
 }
 
 - (void)refreshSelectionStyle {
     UIView *selectedView = [UIView new];
-    selectedView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+    selectedView.backgroundColor = [UIColor simplenoteLightBlueColor];
     self.selectedBackgroundView = selectedView;
 }
 
 - (void)refreshComponentsStyle {
-    self.iconImageView.tintColor = [UIColor simplenoteBlue50Color];
-    self.textField.textColor = [UIColor colorWithName:UIColorNameTextColor];
+    self.iconImageView.tintColor = [UIColor simplenoteTintColor];
+    self.textField.textColor = [UIColor simplenoteTextColor];
 }
 
 - (UIImage *)iconImage {

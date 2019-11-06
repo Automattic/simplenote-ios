@@ -78,7 +78,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
                                       [self.theme floatForKey:@"horizontalPickerTitleHeight"]);
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        titleLabel.textColor = [UIColor simplenoteHorizontalPickerTitleColor];
+        titleLabel.textColor = [UIColor simplenoteTitleColor];
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         [self addSubview:titleLabel];
         
@@ -112,7 +112,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
         itemCollectionView.showsHorizontalScrollIndicator = NO;
         itemCollectionView.backgroundColor = [UIColor clearColor];
         
-        self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        self.backgroundColor = [UIColor simplenoteBackgroundColor];
 
         // add gradients
         leftGradientView = [[SPHorizontalPickerGradientView alloc] initWithGradientViewDirection:SPHorizontalPickerGradientViewDirectionLeft];
