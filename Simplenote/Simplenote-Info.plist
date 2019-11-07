@@ -30,6 +30,12 @@
 				<string>simplenote</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-e0b5a7f7-67b8-c548-07d1-c35d3be73eaf</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${VERSION_LONG}</string>

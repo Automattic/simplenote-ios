@@ -1,5 +1,13 @@
 PODS:
   - 1PasswordExtension (1.8.5)
+  - AppCenter (2.3.0):
+    - AppCenter/Analytics (= 2.3.0)
+    - AppCenter/Crashes (= 2.3.0)
+  - AppCenter/Analytics (2.3.0):
+    - AppCenter/Core
+  - AppCenter/Core (2.3.0)
+  - AppCenter/Crashes (2.3.0):
+    - AppCenter/Core
   - Automattic-Tracks-iOS (0.4.1):
     - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
@@ -9,9 +17,6 @@ PODS:
     - CocoaLumberjack/Core (= 3.5.3)
   - CocoaLumberjack/Core (3.5.3)
   - Gridicons (0.18)
-  - HockeySDK (5.1.4):
-    - HockeySDK/DefaultLib (= 5.1.4)
-  - HockeySDK/DefaultLib (5.1.4)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
   - Sentry (4.4.0):
@@ -36,9 +41,9 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
+  - AppCenter (~> 2.3.0)
   - Automattic-Tracks-iOS (~> 0.4)
   - Gridicons (~> 0.18)
-  - HockeySDK (= 5.1.4)
   - SAMKeychain (= 1.5.2)
   - Simperium (~> 0.8.23)
   - SVProgressHUD (= 2.2.5)
@@ -49,10 +54,10 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
+    - AppCenter
     - Automattic-Tracks-iOS
     - CocoaLumberjack
     - Gridicons
-    - HockeySDK
     - Reachability
     - SAMKeychain
     - Sentry
@@ -74,10 +79,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+  AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
   Automattic-Tracks-iOS: a176848be4c95aa208184fe96d0322594ce230eb
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
-  HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
@@ -88,6 +93,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
 
-PODFILE CHECKSUM: ac1230dcc0ef3ec22b03ea22ca29b6005ad547a1
+PODFILE CHECKSUM: 57ad14a30e6c2db4b27d28dda3fc87114016f80c
 
 COCOAPODS: 1.7.5

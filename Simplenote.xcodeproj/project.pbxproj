@@ -1515,7 +1515,6 @@
 				46A3C9C117DFA81A002865AE /* Resources */,
 				B5EB1EFC1C204EBE0080A1B3 /* Embed App Extensions */,
 				730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */,
-				00DEF5ADDA7A81D9BDBAA952 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1706,24 +1705,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00DEF5ADDA7A81D9BDBAA952 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2195,10 +2176,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOAPODS=1",
-					"BITHOCKEY_VERSION=\"@\\\"3.6.4\\\"\"",
-					"BITHOCKEY_C_VERSION=\"\\\"3.6.4\\\"\"",
-					"BITHOCKEY_BUILD=\"@\\\"38\\\"\"",
-					"BITHOCKEY_C_BUILD=\"\\\"38\\\"\"",
 					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
 				);
@@ -2456,7 +2433,7 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
-					"USE_HOCKEY=1",
+					"USE_APPCENTER=1",
 					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
 				);

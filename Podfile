@@ -22,7 +22,7 @@ abstract_target 'Automattic' do
 		#
 		pod '1PasswordExtension', '1.8.5'
 		pod 'Gridicons', '~> 0.18'
-		pod 'HockeySDK', '5.1.4'
+		pod 'AppCenter', '~> 2.3.0' 
 		pod 'SVProgressHUD', '2.2.5'
 
 		# Automattic

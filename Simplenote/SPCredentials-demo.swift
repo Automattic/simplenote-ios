@@ -7,9 +7,9 @@ class SPCredentials: NSObject {
     ///
     static let appbotKey = "not-required"
 
-    /// BitHockey
+    /// AppCenter
     ///
-    static let bitHockeyIdentifier = "not-required"
+    static let appCenterIdentifier = "not-required"
 
     /// Google Analytics
     ///
