@@ -1,5 +1,6 @@
 4.14
 ====
+-   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp)
 -   Fixed a bug that caused the Markdown Preview UI to get dismissed accidentally
  
 4.13

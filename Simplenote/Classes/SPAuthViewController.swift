@@ -212,11 +212,19 @@ class SPAuthViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailInputView.becomeFirstResponder()
         refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
         ensureNavigationBarIsVisible()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Note: running becomeFirstResponder in `viewWillAppear` has the weird side effect of breaking caret
+        // repositioning in the Text Field. Seriously.
+        // Ref. https://github.com/Automattic/simplenote-ios/issues/453
+        self.emailInputView.becomeFirstResponder()
     }
 }
 
