@@ -94,7 +94,7 @@ private extension SPSortOrderViewController {
     }
 
     func setupTableView() {
-        tableView.applyDefaultGroupedStyling()
+        tableView.applySimplenoteGroupedStyle()
     }
 
     func setupCell(_ cell: UITableViewCell, with mode: SortMode) {

@@ -150,9 +150,10 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     [_tagView applyStyle];
 
     _noteEditorTextView.font = bodyFont;
+    _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
@@ -300,7 +301,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+            UIColor *tintColor = [UIColor simplenoteTintColor];
             [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
             
             NSInteger count = self.searchResultRanges.count;
@@ -1513,7 +1514,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];

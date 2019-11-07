@@ -155,7 +155,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 {
     NSParameterAssert(self.panGestureRecognizer);
 
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
     [self.view addGestureRecognizer:self.panGestureRecognizer];
 }
 
@@ -216,7 +216,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (void)refreshStyle
 {
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
 }
 
 
