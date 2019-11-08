@@ -81,7 +81,7 @@ private extension SPBlurEffectView {
 //
 extension SPBlurEffectView {
 
-    ///
+    /// Adjust the receiver's alpha, to match a given ScrollView's ContentOffset
     ///
     @objc
     func adjustAlphaMatchingContentOffset(of scrollView: UIScrollView) {
