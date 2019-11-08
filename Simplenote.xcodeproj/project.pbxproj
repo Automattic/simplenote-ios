@@ -163,6 +163,7 @@
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
+		B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */; };
 		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
@@ -442,6 +443,7 @@
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
 		B52F35D222F356F500724793 /* UserDefaults+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Tests.swift"; sourceTree = "<group>"; };
+		B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextView+Simplenote.swift"; path = "Classes/UITextView+Simplenote.swift"; sourceTree = "<group>"; };
 		B53971A01AB8DCDC00B1A582 /* SPTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SPTracker.h; path = Classes/SPTracker.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPNoteListViewController+Extensions.swift"; path = "Classes/SPNoteListViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -1046,6 +1048,7 @@
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
 				B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */,
+				B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2037,6 +2040,7 @@
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */,
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,
+				B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */,
 				46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */,
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
