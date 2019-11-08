@@ -6,9 +6,9 @@
 
 static const CGFloat SPSidebarWidth                         = 300;
 static const CGFloat SPSidebarAnimationThreshold            = 0.15;
-static const CGFloat SPSidebarAnimationDuration             = 0.4;
-static const CGFloat SPSidebarAnimationDamping              = 1.5;
-static const CGVector SPSidebarAnimationInitialVelocity     = {6, 0};
+static const CGFloat SPSidebarAnimationDuration             = 0.35;
+static const CGFloat SPSidebarAnimationDamping              = 10;
+static const CGVector SPSidebarAnimationInitialVelocity     = {-10, 0};
 static const CGFloat SPSidebarAnimationCompletionMin        = 0.001;
 static const CGFloat SPSidebarAnimationCompletionMax        = 0.999;
 static const CGFloat SPSidebarAnimationCompletionFactorFull = 1.0;
@@ -55,6 +55,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [self configureView];
     [self attachMainView];
     [self attachSidebarView];
+    [self startListeningToNotifications];
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
@@ -203,6 +204,22 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 }
 
 
+#pragma mark - Notifications
+
+- (void)startListeningToNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshStyle)
+                                                 name:VSThemeManagerThemeDidChangeNotification
+                                               object:nil];
+}
+
+- (void)refreshStyle
+{
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
+}
+
+
 #pragma mark - Gestures
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recognizer
@@ -240,6 +257,11 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
     // Scenario F: Sidebar is visible and is being edited
     if (self.isSidebarVisible && self.sidebarViewController.isEditing) {
+        return NO;
+    }
+
+    // Scenario G: We're still tracking something?
+    if (self.isPanningActive) {
         return NO;
     }
 
@@ -296,17 +318,10 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (UIViewPropertyAnimator *)animatorForSidebarVisibility:(BOOL)visible
 {
-    CGRect mainFrame = self.mainView.frame;
-    CGRect sideFrame = self.sidebarView.frame;
+    CGAffineTransform transform = visible ? CGAffineTransformMakeTranslation(SPSidebarWidth, 0) : CGAffineTransformIdentity;
 
-    if (self.isSidebarVisible) {
-        mainFrame.origin.x = 0;
-        sideFrame.origin.x = -sideFrame.size.width;
-    } else {
-        mainFrame.origin.x = SPSidebarWidth;
-        sideFrame.origin.x = 0;
-    }
-
+    CGFloat alphaSidebar = visible ? UIKitConstants.alphaFull : UIKitConstants.alphaZero;
+    CGFloat alphaMain = visible ? UIKitConstants.alphaMid : UIKitConstants.alphaFull;
     UISpringTimingParameters *parameters = [[UISpringTimingParameters alloc] initWithDampingRatio:SPSidebarAnimationDamping
                                                                                   initialVelocity:SPSidebarAnimationInitialVelocity];
 
@@ -314,8 +329,10 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
                                                                        timingParameters:parameters];
 
     [animator addAnimations:^{
-        self.mainView.frame = mainFrame;
-        self.sidebarView.frame = sideFrame;
+        self.mainView.transform = transform;
+        self.mainView.alpha = alphaMain;
+        self.sidebarView.transform = transform;
+        self.sidebarView.alpha = alphaSidebar;
     }];
 
     return animator;
@@ -349,12 +366,14 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
         BOOL didBecomeVisible = self.isSidebarVisible;
 
         [self.animator addCompletion:^(UIViewAnimatingPosition finalPosition) {
-            [weakSelf endSidebarTransition:didBecomeVisible];
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+
+            strongSelf.isPanningActive = NO;
+            [strongSelf endSidebarTransition:didBecomeVisible];
             [UIViewController attemptRotationToDeviceOrientation];
         }];
 
         [self.animator continueAnimationWithTimingParameters:nil durationFactor:SPSidebarAnimationCompletionFactorFull];
-        self.isPanningActive = NO;
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];

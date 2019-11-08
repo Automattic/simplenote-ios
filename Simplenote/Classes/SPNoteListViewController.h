@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     BOOL bListViewIsEmpty;
     BOOL bIndexingNotes;
     BOOL bShouldShowSidePanel;
+
+    SPTagFilterType tagFilterType;
 }
 
 @property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;

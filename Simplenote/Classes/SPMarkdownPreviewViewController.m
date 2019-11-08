@@ -58,10 +58,10 @@
     config.preferences = prefs;
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
+    webView.opaque = NO;
     webView.allowsLinkPreview = YES;
     webView.scrollView.delegate = self;
     webView.navigationDelegate = self;
-    webView.opaque = NO;
     self.webView = webView;
 }
 
@@ -150,12 +150,8 @@
         return;
     }
 
-    if ([SFSafariViewController class]) {
-        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
-        [self presentViewController:sfvc animated:YES completion:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:targetURL options:@{} completionHandler:nil];
-    }
+    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
+    [self presentViewController:sfvc animated:YES completion:nil];
 
     decisionHandler(WKNavigationActionPolicyCancel);
 }

@@ -1,4 +1,2 @@
-- La barre de recherche est plus belle que jamais !
-- Actualisation de la liste de notes pour afficher l'état « Épinglé » à droite.
-- iOS 11 est désormais le système d'exploitation minimal compatible.
-- Résolution d'un problème dans le cadre duquel les couleurs de l'éditeur ne s'initialisaient pas correctement.
+- Simplenote vient d'adopter de nouvelles icônes !
+- L'expérience utilisateur de la colonne latérale a été intégralement actualisée.
