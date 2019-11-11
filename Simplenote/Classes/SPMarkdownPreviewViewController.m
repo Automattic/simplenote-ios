@@ -15,9 +15,9 @@
 @import WebKit;
 @import SafariServices;
 
-@interface SPMarkdownPreviewViewController () <WKNavigationDelegate>
-@property (nonatomic, strong) SPVisualEffectView    *navigationBarBackground;
-@property (nonatomic, strong) WKWebView             *webView;
+@interface SPMarkdownPreviewViewController () <WKNavigationDelegate, UIScrollViewDelegate>
+@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
+@property (nonatomic, strong) WKWebView         *webView;
 @end
 
 @implementation SPMarkdownPreviewViewController
@@ -37,8 +37,8 @@
 
 - (void)configureNavigationBarBackground
 {
-    NSAssert(self.navigationBarBackground == nil, @"WebView was already initialized!");
-    self.navigationBarBackground = [SPVisualEffectView new];
+    NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
 - (void)configureWebView
@@ -54,6 +54,7 @@
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
     webView.opaque = NO;
     webView.allowsLinkPreview = YES;
+    webView.scrollView.delegate = self;
     webView.navigationDelegate = self;
     self.webView = webView;
 }
@@ -117,6 +118,16 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+}
+
 
 #pragma mark - WKNavigationDelegate
 

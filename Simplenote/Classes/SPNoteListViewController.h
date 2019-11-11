@@ -4,6 +4,7 @@
 #import "Note.h"
 
 @class SPEmptyListView;
+@class SPBlurEffectView;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
@@ -31,7 +32,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
-@property (nonatomic, strong, readonly) UIVisualEffectView                  *navigationBarBackground;
+@property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
