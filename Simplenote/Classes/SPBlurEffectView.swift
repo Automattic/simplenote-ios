@@ -30,14 +30,16 @@ class SPBlurEffectView: UIVisualEffectView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    init() {
-        super.init(effect: UIBlurEffect.simplenoteBlurEffect)
-        setupTintView()
-        startListeningToNotifications()
+    convenience init() {
+        self.init(effect: .simplenoteBlurEffect)
     }
 
-    required init?(coder: NSCoder) {
-        super.init(effect: UIBlurEffect.simplenoteBlurEffect)
+    convenience required init?(coder: NSCoder) {
+        self.init(effect: .simplenoteBlurEffect)
+    }
+
+    init(effect: UIBlurEffect) {
+        super.init(effect: effect)
         setupTintView()
         startListeningToNotifications()
     }
