@@ -22,12 +22,6 @@
 
 @implementation SPMarkdownPreviewViewController
 
-- (void)dealloc
-{
-    self.webView.scrollView.delegate = nil;
-    self.webView.navigationDelegate = nil;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
