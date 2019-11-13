@@ -70,7 +70,8 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     // TopViewController conforms to SPInteractivePushViewControllerProvider AND We're Swiping Right to Left: Support Push!
     if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerProvider)] && isLeftTranslation) {
         UIViewController <SPInteractivePushViewControllerProvider> *pushProviderController = (UIViewController <SPInteractivePushViewControllerProvider> *)topViewController;
-        if (![pushProviderController interactivePushPopAnimationControllerShouldBeginPush:self]) {
+        CGPoint locationInView = [panGestureRecognizer locationInView:pushProviderController.view];
+        if (![pushProviderController interactivePushPopAnimationControllerShouldBeginPush:self touchPoint:locationInView]) {
             return NO;
         }
 

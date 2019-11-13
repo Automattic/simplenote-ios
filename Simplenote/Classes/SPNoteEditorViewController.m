@@ -51,7 +51,7 @@ CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
 CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
 CGFloat const SPBackButtonImagePadding              = -18;
 CGFloat const SPBackButtonTitlePadding              = -15;
-
+CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
@@ -781,9 +781,22 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     return previewViewController;
 }
 
-- (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller
+- (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
-    return self.currentNote.markdown;
+    if (!self.currentNote.markdown) {
+        return NO;
+    }
+
+    if (!self.noteEditorTextView.isTextSelected) {
+        return YES;
+    }
+
+    // We'll check if the Push Gesture intersects with the Selected Text's bounds. If so, we'll deny the
+    // Push Interaction.
+    CGRect selectedSquare = CGRectInset(self.noteEditorTextView.selectedBounds, -SPSelectedAreaPadding, -SPSelectedAreaPadding);
+    CGPoint convertedPoint = [self.view convertPoint:touchPoint toView:self.noteEditorTextView];
+
+    return !CGRectContainsPoint(selectedSquare, convertedPoint);
 }
 
 - (void)interactivePushPopAnimationControllerWillBeginPush:(SPInteractivePushPopAnimationController *)controller
@@ -792,8 +805,7 @@ CGFloat const SPBackButtonTitlePadding              = -15;
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tagView endEditing:YES];
-        [self.noteEditorTextView endEditing:YES];
-        
+
         [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
             self->bDisableShrinkingNavigationBar = YES;
         }];
