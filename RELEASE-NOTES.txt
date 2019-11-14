@@ -2,7 +2,8 @@
 ====
 -   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp)
 -   Fixed a bug that caused the Markdown Preview UI to get dismissed accidentally
- 
+-   Fixed an issue that might crash the app with a specific emojis combination
+
 4.13
 ====
 -   Every Navigation Bar in Simplenote now has a super cool blur effect!
