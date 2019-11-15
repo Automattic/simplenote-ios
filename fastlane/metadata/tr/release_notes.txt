@@ -1,2 +1,3 @@
-- Simplenote'ta yepyeni Simgeler var!
-- Kenar çubuğunun UX'i tamamen yenilendi.
+- Simplenote’un Ayarları görüntülenirken StatusBar çubuğunun gizlenmesine yol açan bir hata düzeltildi
+- Düzenleyici’de Kapatmak için Kaydırma hareketinin düzgün çalışmamasına yol açan bir hata düzeltildi
+- Peek and Pop özelliğinin Çöp Kutusu’ndaki notları açmasına izin veren bir hata düzeltildi.
