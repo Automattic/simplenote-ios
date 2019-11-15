@@ -41,6 +41,7 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
+@property (nonatomic, strong) SPSearchResultsViewController         *searchResultsViewController;
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
@@ -328,8 +329,8 @@
 
 #pragma mark - SearchController Delegate methods
 
-- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
-    
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller
+{
     if (bListViewIsEmpty) {
         return NO;
     }
@@ -340,8 +341,8 @@
     return bSearching;
 }
 
-- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword {
- 
+- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword
+{
     self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
@@ -357,16 +358,23 @@
     
 }
 
-- (void)searchControllerDidEndSearch:(SPSearchController *)controller {
+- (void)searchControllerWillBeginSearch:(SPSearchController *)controller
+{
+    [self attachSearchResultsController];
+}
+
+- (void)searchControllerDidEndSearch:(SPSearchController *)controller
+{
     [self endSearching];
 }
 
-- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller {
+- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller
+{
     return self.navigationController;
 }
 
-- (void)performSearch {
-
+- (void)performSearch
+{
     if (!self.searchText) {
         return;
     }
@@ -385,13 +393,39 @@
     searchTimer = nil;
 }
 
-- (void)endSearching {
-
+- (void)endSearching
+{
     bSearching = NO;
-
     self.searchText = nil;
+    [self detachSearchResultsController];
 
     [self update];
+}
+
+
+#pragma mark - SearchResultsViewController
+
+- (void)attachSearchResultsController
+{
+    SPSearchResultsViewController *resultsViewController = [SPSearchResultsViewController new];
+    [self addChildViewController:resultsViewController];
+    self.searchResultsViewController = resultsViewController;
+
+    UIView *resultsView = resultsViewController.view;
+    [self.view insertSubview:resultsView belowSubview:self.navigationBarBackground];
+    [resultsView fadeIn];
+}
+
+- (void)detachSearchResultsController
+{
+    __weak typeof(self) weakSelf = self;
+
+    UIView *resultsView = self.searchResultsViewController.view;
+    [resultsView fadeOutWithCompletion:^{
+        [resultsView removeFromSuperview];
+        [weakSelf.searchResultsViewController removeFromParentViewController];
+        weakSelf.searchResultsViewController = nil;
+    }];
 }
 
 
