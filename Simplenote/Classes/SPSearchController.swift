@@ -8,6 +8,7 @@ import UIKit
 protocol SPSearchControllerDelegate: NSObjectProtocol {
     func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
     func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
+    func searchControllerWillBeginSearch(_ controller: SPSearchController)
     func searchControllerDidEndSearch(_ controller: SPSearchController)
 }
 
@@ -119,6 +120,10 @@ extension SPSearchController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let shouldBeginEditing = delegate?.searchControllerShouldBeginSearch(self) else {
             return false
+        }
+
+        if shouldBeginEditing {
+            delegate?.searchControllerWillBeginSearch(self)
         }
 
         updateStatus(active: shouldBeginEditing)
