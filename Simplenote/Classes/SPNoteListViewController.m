@@ -41,7 +41,6 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
-@property (nonatomic, strong) SPSearchResultsViewController         *searchResultsViewController;
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
@@ -360,7 +359,7 @@
 
 - (void)searchControllerWillBeginSearch:(SPSearchController *)controller
 {
-    [self attachSearchResultsController];
+    [self displaySearchResultsController];
 }
 
 - (void)searchControllerDidEndSearch:(SPSearchController *)controller
@@ -397,35 +396,9 @@
 {
     bSearching = NO;
     self.searchText = nil;
-    [self detachSearchResultsController];
+    [self dismissSearchResultsController];
 
     [self update];
-}
-
-
-#pragma mark - SearchResultsViewController
-
-- (void)attachSearchResultsController
-{
-    SPSearchResultsViewController *resultsViewController = [SPSearchResultsViewController new];
-    [self addChildViewController:resultsViewController];
-    self.searchResultsViewController = resultsViewController;
-
-    UIView *resultsView = resultsViewController.view;
-    [self.view insertSubview:resultsView belowSubview:self.navigationBarBackground];
-    [resultsView fadeIn];
-}
-
-- (void)detachSearchResultsController
-{
-    __weak typeof(self) weakSelf = self;
-
-    UIView *resultsView = self.searchResultsViewController.view;
-    [resultsView fadeOutWithCompletion:^{
-        [resultsView removeFromSuperview];
-        [weakSelf.searchResultsViewController removeFromParentViewController];
-        weakSelf.searchResultsViewController = nil;
-    }];
 }
 
 

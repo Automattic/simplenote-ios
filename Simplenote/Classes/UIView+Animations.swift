@@ -21,7 +21,6 @@ extension UIView {
 
     /// Fades In the receiver
     ///
-    @objc
     func fadeIn() {
         self.alpha = UIKitConstants.alphaZero
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
@@ -31,12 +30,11 @@ extension UIView {
 
     /// Fades Out the receiver
     ///
-    @objc
-    func fadeOut(completion: @escaping () -> Void) {
+    func fadeOut(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
             self.alpha = UIKitConstants.alphaZero
         }, completion: { _ in
-            completion()
+            completion?()
         })
     }
 }

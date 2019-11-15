@@ -5,6 +5,7 @@
 
 @class SPEmptyListView;
 @class SPBlurEffectView;
+@class SPSearchResultsViewController;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
@@ -27,6 +28,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 }
 
 @property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
+@property (nonatomic, strong) SPSearchResultsViewController                 *searchResultsViewController;
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 

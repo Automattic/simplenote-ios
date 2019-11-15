@@ -39,6 +39,20 @@ extension SPNoteListViewController {
         ])
     }
 
+    /// Attaches the specified SearchResultsView to the receiver's main view
+    ///
+    private func attachSearchResultsView(_ resultsView: UIView) {
+        resultsView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(resultsView, belowSubview: navigationBarBackground)
+
+        NSLayoutConstraint.activate([
+            resultsView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            resultsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            resultsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            resultsView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+    }
+
     /// Adjust the TableView's Insets, so that the content falls below the searchBar
     ///
     @objc
@@ -59,6 +73,41 @@ extension SPNoteListViewController {
         }
 
         tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
+    }
+}
+
+
+// MARK: - SearchResultsViewController
+//
+extension SPNoteListViewController {
+
+    /// Attaches a new SearchResultsController instance to the receiver
+    ///
+    @objc
+    func displaySearchResultsController() {
+        let resultsViewController = SPSearchResultsViewController()
+        addChild(resultsViewController)
+
+        attachSearchResultsView(resultsViewController.view)
+        resultsViewController.view.fadeIn()
+
+        self.searchResultsViewController = resultsViewController
+
+    }
+
+    /// Detaches the active SearchResultsController instance, if any
+    ///
+    @objc
+    func dismissSearchResultsController() {
+        guard let resultsController = searchResultsViewController else {
+            return
+        }
+
+        resultsController.view.fadeOut {
+            resultsController.view.removeFromSuperview()
+            resultsController.removeFromParent()
+            self.searchResultsViewController = nil
+        }
     }
 }
 
