@@ -1,2 +1,3 @@
-- Simplenote just got brand new Icons!
-- Sidebar's UX has been entirely refreshed.
+-   Fixed a bug that caused the StatusBar to be hidden when Simplenote's Settings were displayed
+-   Fixed a bug that caused Swipe to Dismiss gesture not to properly work in the Editor
+-   Fixed a bug that allowed Peek and Pop to open notes in the Trash.

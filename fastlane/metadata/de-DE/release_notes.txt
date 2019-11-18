@@ -1,2 +1,3 @@
-- Simplenote hat jetzt brandneue Icons!
-- Die Benutzererfahrung der Seitenleiste wurde komplett überarbeitet.
+- Es wurde ein Fehler behoben, bei dem die Statusleiste ausgeblendet wurde, wenn die Einstellungen von Simplenote eingeblendet wurden.
+- Es wurde ein Fehler behoben, bei dem die Wischbewegung zum Schließen im Editor nicht richtig funktioniert hat.
+- Es wurde ein Fehler behoben, beim dem „Peek and Pop“ zum Öffnen von Notizen im Papierkorb verwendet werden konnte.

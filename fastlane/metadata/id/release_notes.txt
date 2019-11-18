@@ -1,2 +1,3 @@
-- Ikon baru untuk Simplenote!
-- UX bilah sisi diperbarui sepenuhnya.
+- Memperbaiki bug penyebab StatusBar tersembunyi saat Pengaturan Simplenote ditampilkan
+- Memperbaiki bug penyebab gestur Geser untuk Menutup tidak berfungsi dengan benar di Penyunting
+- Memperbaiki bug yang memungkinkan Peek and Pop membuka catatan di Tempat Sampah.

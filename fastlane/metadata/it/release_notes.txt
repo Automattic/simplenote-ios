@@ -1,2 +1,3 @@
-- Simplenote ha delle icone tutte nuove!
-- La UX della barra laterale è stata completamente rinnovata.
+- Corretto un bug a causa del quale la barra di stato veniva nascosta durante la visualizzazione delle impostazioni di Simplenote
+- Corretto un bug a causa del quale il gesto di scorrimento per chiudere non funzionava correttamente nell'editor
+- Corretto un bug che consentiva alle funzioni Peek e Pop di aprire note nel Cestino.
