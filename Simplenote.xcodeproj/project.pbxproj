@@ -1519,6 +1519,7 @@
 				46A3C9C117DFA81A002865AE /* Resources */,
 				B5EB1EFC1C204EBE0080A1B3 /* Embed App Extensions */,
 				730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */,
+				1FED62BA1BD3808429C8CEE9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1709,6 +1710,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1FED62BA1BD3808429C8CEE9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/AppCenter/AppCenterDistributeResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AppCenterDistributeResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
