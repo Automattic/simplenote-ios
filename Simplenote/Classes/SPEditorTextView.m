@@ -399,7 +399,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
 
-    UIColor *checklistColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIColor *checklistColor = [UIColor simplenoteNoteBodyPreviewColor];
     [self.textStorage addChecklistAttachmentsForColor:checklistColor];
 }
 

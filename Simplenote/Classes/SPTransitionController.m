@@ -1,11 +1,5 @@
-
-//
-//  SPTransitionController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
+#import <CoreGraphics/CoreGraphics.h>
+#import "Simplenote-Swift.h"
 
 #import "SPTransitionController.h"
 #import "SPAppDelegate.h"
@@ -27,29 +21,48 @@
 #import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
-#import "Simplenote-Swift.h"
+
 
 #define kEditorTransitionOffset 8
 
+
+#pragma mark - Constants
+
+static const CGFloat SPAnimationPushTableViewRowSelectionDuration = 0.55;
+static const CGFloat SPAnimationPushTableViewRowSelectionDelay = 0.025;
+static const CGFloat SPAnimationPushTableViewRowSelectionDamping = 1.0;
+
+static const CGFloat SPAnimationPushTableViewRowDuration = 0.5;
+static const CGFloat SPAnimationPushTableViewRowDamping = 0.6;
+static const CGFloat SPAnimationPushTableViewRowVelocity = 8.0;
+
+static const CGFloat SPAnimationPopTableViewRowSelectionDuration = 0.45;
+static const CGFloat SPAnimationPopTableViewRowSelectionDamping = 1.0;
+static const CGFloat SPAnimationPopTableViewRowSelectionVelocity = 7.0;
+
+static const CGFloat SPAnimationPopTableViewRowDuration = 0.45;
+static const CGFloat SPAnimationPopTableViewRowDamping = 1.0;
+static const CGFloat SPAnimationPopTableViewRowVelocity = 0.6;
+
+static const CGFloat SPAnimationEmptyStatePushDuration = 0.15;
+static const CGFloat SPAnimationEmptyStatePopDuration = 0.4;
+static const CGFloat SPAnimationDelayZero = 0.0;
+
+
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
-@interface SPTransitionController () {
-    
-    int useCount;
-    CGFloat percentComplete;
-}
 
-@property (nonatomic, strong) SnapshotRenderer *renderer;
-@property (nonatomic) id <UIViewControllerContextTransitioning> context;
-@property (nonatomic) CGFloat initialPinchDistance;
-@property (nonatomic) CGPoint initialPinchPoint;
+#pragma mark - Private Properties
 
-@property (nonatomic, strong) NSMutableArray *temporaryTransitionViews;
-@property (nonatomic, strong) UIImage *pinIcon;
-@property (nonatomic, strong) UIImage *searchPinIcon;
+@interface SPTransitionController ()
 
-@property (nonatomic, weak) UINavigationController *navigationController;
-@property (nonatomic, strong) SPInteractivePushPopAnimationController *pushPopAnimationController;
+@property (nonatomic, strong) SnapshotRenderer                          *renderer;
+@property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
+@property (nonatomic, weak) UINavigationController                      *navigationController;
+@property (nonatomic, strong) NSMutableArray                            *temporaryTransitionViews;
+@property (nonatomic) id<UIViewControllerContextTransitioning>          context;
+@property (nonatomic) CGFloat                                           percentComplete;
+@property (nonatomic) NSInteger                                         useCount;
 
 @end
 
@@ -60,7 +73,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     if (self) {
         self.tableView = tableView;
         self.renderer = [SnapshotRenderer new];
-        useCount = 0;
+        self.useCount = 0;
         
         if ([UIDevice isPad]) {
             
@@ -205,33 +218,14 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     // perform initial setup for animations
     _context = transitionContext;
-    percentComplete = 0.0;
+    self.percentComplete = 0.0;
     _transitioning = YES;
     [self clearTransitionSnapshots];
     _temporaryTransitionViews = [NSMutableArray arrayWithCapacity:10];
 
-    UIViewController *toViewController =[_context viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIViewController *fromViewController =[_context viewControllerForKey:UITransitionContextFromViewControllerKey];
-    
-    CGRect navigationBarFrame = toViewController.navigationController.navigationBar.frame;
-    UIView *navigationBarSnapshot = [toViewController.navigationController.view resizableSnapshotViewFromRect:navigationBarFrame afterScreenUpdates:NO withCapInsets:UIEdgeInsetsMake(navigationBarFrame.origin.y, 0, 0, 0)];
-    
-    NSDictionary *navigationBarAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                               SPAnimationFinalValueName: @0.0
-                                                                               },
-                                                  SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:navigationBarFrame],
-                                                                                SPAnimationFinalValueName : [NSValue valueWithCGRect:navigationBarFrame]}
-                                                  };
-    NSDictionary *navigationBarAnimationProperties = @{SPAnimationDurationName: @0.4,
-                                                       SPAnimationDelayName: @0.0,
-                                                       SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                       };
-    
-    SPTransitionSnapshot *navigationBarTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:navigationBarSnapshot animatedValues:navigationBarAnimatedValues animationProperties:navigationBarAnimationProperties superView:toViewController.navigationController.view];
-    navigationBarTransitionSnapshot.springAnimation = NO;
-    [self storeTransitionSnapshot:navigationBarTransitionSnapshot];
-    
-    
+    UIViewController *toViewController = [_context viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIViewController *fromViewController = [_context viewControllerForKey:UITransitionContextFromViewControllerKey];
+
     // WORKAROUND:
     // Rotation while the editor is onScreen causes the "To View Controller" to have a different frame size, and thus,
     // breaks awfully this animation
@@ -264,18 +258,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                           fromView:listController.emptyListView.superview];
             
             UIView *emptyListViewSnapshot = [listController.emptyListView snapshotViewAfterScreenUpdates:NO];
-            
-            NSDictionary *emptyListViewAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                                       SPAnimationFinalValueName: @0.0
-                                                                                       },
-                                                          SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:emptyListViewFrame],
-                                                                                        SPAnimationFinalValueName : [NSValue valueWithCGRect:emptyListViewFrame]}
-                                                          };
-            NSDictionary *emptyListViewAnimationProperties = @{SPAnimationDurationName: @0.15,
-                                                               SPAnimationDelayName: @0.0,
-                                                               SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                               };
-            
+
+            NSDictionary *emptyListViewAnimatedValues = [self animationValuesWithStartingFrame:emptyListViewFrame
+                                                                                    finalFrame:emptyListViewFrame
+                                                                                 startingAlpha:UIKitConstants.alphaFull
+                                                                                    finalAlpha:UIKitConstants.alphaZero];
+
+            NSDictionary *emptyListViewAnimationProperties = [self animationPropertiesWithDuration:SPAnimationEmptyStatePushDuration
+                                                                                             delay:SPAnimationDelayZero
+                                                                                           options:UIViewAnimationOptionCurveEaseInOut];
+
             SPTransitionSnapshot *emptyListViewTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:emptyListViewSnapshot animatedValues:emptyListViewAnimatedValues animationProperties:emptyListViewAnimationProperties superView:containerView];
             emptyListViewTransitionSnapshot.springAnimation = NO;
             [self storeTransitionSnapshot:emptyListViewTransitionSnapshot];
@@ -329,33 +321,29 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     // calculate initial spring velocity based on location
                     // of cell in listController
                     CGFloat initialVelocity = MIN(9.0, 3.0 + (startingFrame.origin.y - finalEditorPosition.origin.y) / finalEditorPosition.size.height * 6.0);
-                    
-                    NSDictionary *animationProperties = @{SPAnimationDurationName: @0.55,
-                                                         SPAnimationDelayName: @0.025,
-                                                         SPAnimationSpringDampingName: @1.0,
-                                                         SPAnimationInitialVeloctyName: [NSNumber numberWithFloat:initialVelocity],
-                                                          SPAnimationOptionsName : [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseOut]
-                                                         };
-                    
-                    NSDictionary *cleanSnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @1.0,
-                                                                              SPAnimationFinalValueName: @0.0},
-                                                                  SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                               SPAnimationFinalValueName : [NSValue valueWithCGRect:finalEditorPosition]
-                                                                               }
-                                                                   };
+
+                    NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPushTableViewRowSelectionDuration
+                                                                                        delay:SPAnimationPushTableViewRowSelectionDelay
+                                                                                springDamping:SPAnimationPushTableViewRowSelectionDamping
+                                                                                     velocity:initialVelocity
+                                                                                      options:UIViewAnimationOptionCurveEaseOut];
+
+                    NSDictionary *cleanSnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                            finalFrame:finalEditorPosition
+                                                                                         startingAlpha:UIKitConstants.alphaFull
+                                                                                            finalAlpha:UIKitConstants.alphaZero];
 
                     SPTransitionSnapshot *cleanTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:cleanSnapshot
                                                                                                     animatedValues:cleanSnapshotAnimatedValues
                                                                                                animationProperties:animationProperties
                                                                                                          superView:containerView];
                     [self storeTransitionSnapshot:cleanTransitionSnapshot];
-                    
-                    NSDictionary *dirtySnapshotAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @0.0,
-                                                                                               SPAnimationFinalValueName: @1.0},
-                                                                SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                                              SPAnimationFinalValueName : [NSValue valueWithCGRect:finalEditorPosition]
-                                                                                }
-                                                                   };
+
+                    NSDictionary *dirtySnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                            finalFrame:finalEditorPosition
+                                                                                         startingAlpha:UIKitConstants.alphaZero
+                                                                                            finalAlpha:UIKitConstants.alphaFull];
+
                     SPTransitionSnapshot *dirtyTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:dirtySnapshot
                                                                                                     animatedValues:dirtySnapshotAnimatedValues
                                                                                                animationProperties:animationProperties
@@ -382,18 +370,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                         
                         // add delay based on position to selected cell
                         CGFloat delay = MAX(0, 0.05 - ABS(_selectedPath.row - path.row) * 0.0125);
-                        
-                        NSDictionary *animationProperties = @{SPAnimationDurationName: @0.5,
-                                                              SPAnimationDelayName: [NSNumber numberWithFloat:delay],
-                                                              SPAnimationSpringDampingName: @0.6,
-                                                              SPAnimationInitialVeloctyName: @8.0,
-                                                              SPAnimationOptionsName : [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                              };
-                        
-                        NSDictionary *animatedValues = @{SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                      SPAnimationFinalValueName : [NSValue valueWithCGRect:endingFrame]
-                                                                      }
-                                                         };
+
+                        NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPushTableViewRowDuration
+                                                                                            delay:delay
+                                                                                    springDamping:SPAnimationPushTableViewRowDamping
+                                                                                         velocity:SPAnimationPushTableViewRowVelocity
+                                                                                          options:UIViewAnimationOptionCurveEaseInOut];
+
+                        NSDictionary *animatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                                   finalFrame:endingFrame];
+
                         SPTransitionSnapshot *transitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:snapshot
                                                                                                    animatedValues:animatedValues
                                                                                               animationProperties:animationProperties
@@ -422,17 +408,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
             
             UIView *emptyListViewSnapshot = [listController.emptyListView snapshotViewAfterScreenUpdates:YES];
             
-            NSDictionary *emptyListViewAnimatedValues = @{SPAnimationAlphaValueName: @{SPAnimationInitialValueName: @0.0,
-                                                                                       SPAnimationFinalValueName: @1.0
-                                                                                       },
-                                                          SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:emptyListViewFrame],
-                                                                SPAnimationFinalValueName : [NSValue valueWithCGRect:emptyListViewFrame]}
-                                                          };
-            NSDictionary *emptyListViewAnimationProperties = @{SPAnimationDurationName: @0.4,
-                                                               SPAnimationDelayName: @0.0,
-                                                               SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                               };
-            
+            NSDictionary *emptyListViewAnimatedValues = [self animationValuesWithStartingFrame:emptyListViewFrame
+                                                                                    finalFrame:emptyListViewFrame
+                                                                                 startingAlpha:UIKitConstants.alphaZero
+                                                                                    finalAlpha:UIKitConstants.alphaFull];
+
+            NSDictionary *emptyListViewAnimationProperties = [self animationPropertiesWithDuration:SPAnimationEmptyStatePopDuration
+                                                                                             delay:SPAnimationDelayZero
+                                                                                           options:UIViewAnimationOptionCurveEaseInOut];
+
             SPTransitionSnapshot *emptyListViewTransitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:emptyListViewSnapshot animatedValues:emptyListViewAnimatedValues animationProperties:emptyListViewAnimationProperties superView:containerView];
             emptyListViewTransitionSnapshot.springAnimation = NO;
             [self storeTransitionSnapshot:emptyListViewTransitionSnapshot];
@@ -499,10 +483,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 dirtySnapshot.contentMode = UIViewContentModeTop;
                 dirtySnapshot.clipsToBounds = YES;
                 
-                NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
-                                                                                    delay:0.0
-                                                                            springDamping:1.0
-                                                                                 velocity:7.0
+                NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPopTableViewRowSelectionDuration
+                                                                                    delay:SPAnimationDelayZero
+                                                                            springDamping:SPAnimationPopTableViewRowSelectionDamping
+                                                                                 velocity:SPAnimationPopTableViewRowSelectionVelocity
                                                                                   options:UIViewAnimationOptionCurveEaseInOut];
 
                 NSDictionary *cleanSnapshotAnimatedValues = [self animationValuesWithStartingFrame:startingFrame
@@ -545,17 +529,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     
                     CGFloat delay = MIN(ABS(_selectedPath.row - path.row) * 0.02 * (isPad ? 0.4 : 0.5), 0.15);
 
-                    NSDictionary *animationProperties = @{SPAnimationDurationName: @0.45,
-                                                          SPAnimationDelayName: [NSNumber numberWithFloat:delay],
-                                                          SPAnimationSpringDampingName: @1.0,
-                                                          SPAnimationInitialVeloctyName: @0.6,
-                                                          SPAnimationOptionsName: [NSNumber numberWithInt:UIViewAnimationOptionCurveEaseInOut]
-                                                          };
-                    
-                    NSDictionary *animatedValues = @{SPAnimationFrameValueName : @{SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
-                                                                  SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
-                                                                  }
-                                                     };
+                    NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPopTableViewRowDuration
+                                                                                        delay:delay
+                                                                                springDamping:SPAnimationPopTableViewRowDamping
+                                                                                     velocity:SPAnimationPopTableViewRowVelocity
+                                                                                      options:UIViewAnimationOptionCurveEaseInOut];
+
+                    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:startingFrame
+                                                                               finalFrame:finalFrame];
+
                     SPTransitionSnapshot *transitionSnapshot = [[SPTransitionSnapshot alloc] initWithSnapshot:snapshot
                                                                                                animatedValues:animatedValues
                                                                                           animationProperties:animationProperties
@@ -616,20 +598,20 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     fromViewController.view.alpha = 1.0;
     toViewController.view.alpha = 1.0;
     
-    percentComplete = 1.0;
+    self.percentComplete = 1.0;
     _transitioning = NO;
     [_context completeTransition:YES];
 }
 
 - (void)incrementUseCount {
     
-    useCount++;
+    self.useCount++;
 }
 
 - (void)decrementUseCount {
     
-    useCount--;
-    if (useCount == 0) {
+    self.useCount--;
+    if (self.useCount == 0) {
         [self completeTransition];
     }
 }
@@ -652,14 +634,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 - (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
     UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
     CGRect targetFrame = listController.searchBar.frame;
+
     NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
                                                                finalFrame:targetFrame
                                                             startingAlpha:UIKitConstants.alphaZero
                                                                finalAlpha:UIKitConstants.alphaFull];
-    NSDictionary *animationProperties = [self animationPropertiesWithDuration:0.45
-                                                                        delay:0.0
-                                                                springDamping:1.0
-                                                                     velocity:7.0
+
+    NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPopTableViewRowSelectionDuration
+                                                                        delay:SPAnimationDelayZero
+                                                                springDamping:SPAnimationPopTableViewRowSelectionDamping
+                                                                     velocity:SPAnimationPopTableViewRowSelectionVelocity
                                                                       options:UIViewAnimationOptionCurveEaseInOut];
 
     return [[SPTransitionSnapshot alloc] initWithSnapshot:searchBarImage
@@ -667,6 +651,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                       animationProperties:animationProperties
                                                 superView:containerView];
 }
+
+
+#pragma mark - Animation Properties Helpers
 
 - (NSDictionary *)animationValuesWithStartingFrame:(CGRect)startingFrame
                                         finalFrame:(CGRect)finalFrame
@@ -677,6 +664,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                 SPAnimationInitialValueName: @(startingAlpha),
                 SPAnimationFinalValueName: @(finalAlpha)
         },
+        SPAnimationFrameValueName: @{
+            SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
+            SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
+        }
+    };
+}
+
+- (NSDictionary *)animationValuesWithStartingFrame:(CGRect)startingFrame
+                                        finalFrame:(CGRect)finalFrame {
+    return @{
         SPAnimationFrameValueName: @{
             SPAnimationInitialValueName: [NSValue valueWithCGRect:startingFrame],
             SPAnimationFinalValueName : [NSValue valueWithCGRect:finalFrame]
@@ -698,6 +695,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     };
 }
 
+- (NSDictionary *)animationPropertiesWithDuration:(CGFloat)duration
+                                            delay:(CGFloat)delay
+                                          options:(UIViewAnimationOptions)options {
+    return @{
+        SPAnimationDurationName: @(duration),
+        SPAnimationDelayName: @(delay),
+        SPAnimationOptionsName: @(options)
+    };
+}
+
 #pragma mark - Interactive Transition
 
 - (void)endInteractionWithSuccess:(BOOL)success {
@@ -709,7 +716,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         return;
     }
     
-    if ((percentComplete > 0.5) && success) {
+    if ((self.percentComplete > 0.5) && success) {
         
         [self animateTransitionSnapshotsToCompletion];
         [_context finishInteractiveTransition];

@@ -8,12 +8,8 @@ extension UIImage {
 
     /// Returns the SearchBar Background Image
     ///
-    class var searchBarBackgroundImage: UIImage? {
-        guard let color = UIColor.color(name: .simplenoteGray10) else {
-            return nil
-        }
-
-        let tintColor = color.withAlphaComponent(SearchBackgroundMetrics.alpha)
+    class var searchBarBackgroundImage: UIImage {
+        let tintColor = UIColor.simplenoteGray10Color.withAlphaComponent(SearchBackgroundMetrics.alpha)
         let path = UIBezierPath(roundedRect: SearchBackgroundMetrics.rect, cornerRadius: SearchBackgroundMetrics.radius)
         return path.imageRepresentation(color: tintColor)
     }

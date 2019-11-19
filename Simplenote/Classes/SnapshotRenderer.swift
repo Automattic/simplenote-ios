@@ -114,8 +114,8 @@ private extension SnapshotRenderer {
         tableViewCell.bodyText = note.bodyPreview
         tableViewCell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
         tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
-        tableViewCell.accessoryLeftTintColor = bodyColor
-        tableViewCell.accessoryRightTintColor = bodyColor
+        tableViewCell.accessoryLeftTintColor = accessoryColor
+        tableViewCell.accessoryRightTintColor = accessoryColor
         tableViewCell.rendersInCondensedMode = Options.shared.condensedNotesList
 
         if let searchQuery = searchQuery, let tintColor = UIColor.color(name: .tintColor) {
@@ -146,10 +146,16 @@ private extension SnapshotRenderer {
 //
 private extension SnapshotRenderer {
 
+    /// Returns the Note's Status Image Color
+    ///
+    var accessoryColor: UIColor {
+        return .simplenoteNoteStatusImageColor
+    }
+
     /// Returns the (current) Body Color
     ///
     var bodyColor: UIColor {
-        return .color(name: .noteBodyFontPreviewColor)!
+        return .simplenoteNoteBodyPreviewColor
     }
 
     /// Returns the Body Font
@@ -161,7 +167,7 @@ private extension SnapshotRenderer {
     /// Returns the (current) Headline Color
     ///
     var headlineColor: UIColor {
-        return .color(name: .noteHeadlineFontColor)!
+        return .simplenoteNoteHeadlineColor
     }
 
     /// Returns the Headline Font

@@ -6,7 +6,7 @@
 
 - (void)applyDefaultGroupedStyling {
     self.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
-    self.separatorColor = [UIColor colorWithName:UIColorNameDividerColor];
+    self.separatorColor = [UIColor simplenoteDividerColor];
 }
 
 @end

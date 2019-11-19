@@ -191,13 +191,15 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
 
     sh("mv ../build/Simplenote.ipa \"../build/Simplenote Internal.ipa\"")
 
-    hockey(
-        api_token: ENV["HOCKEY_API_TOKEN"],        
-        public_identifier: ENV["HOCKEY_PUBLIC_ID"],
-        notify: "0",
-        status: "1",
-        ipa: "./build/Simplenote Internal.ipa",
-        dsym: "./build/Simplenote.app.dSYM.zip",
+    # NOTE: "ipa" parameter is deprecated in appcenter_upload 1.6.0, but there's a bug in the action that
+    # makes the default gym output override the "file" parameter. 
+    appcenter_upload(
+      api_token: ENV["APPCENTER_API_TOKEN"],
+      owner_name: "Hogwarts-Organization",
+      owner_type: "organization", 
+      app_name: "Simplenote",
+      ipa: "./build/Simplenote Internal.ipa",
+      notify_testers: false 
     )
 
     sentry_upload_dsym(

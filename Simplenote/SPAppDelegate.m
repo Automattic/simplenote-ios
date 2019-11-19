@@ -509,6 +509,7 @@
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
     navController.disableRotation = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalPresentationCapturesStatusBarAppearance = YES;
     
     [self.sidebarViewController presentViewController:navController animated:YES completion:nil];
 }

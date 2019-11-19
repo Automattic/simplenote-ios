@@ -12,24 +12,10 @@
 		<string>000000</string>
 		<key>lightBlueColor</key>
 		<string>eef3f8</string>
-		<key>dividerColor</key>
-		<string>dedede</string>
-		<key>destructiveActionColor</key>
-		<string>CA2622</string>
-		<key>secondaryActionColor</key>
-		<string>4895D9</string>
-		<key>tertiaryActionColor</key>
-		<string>899199</string>
-		<key>lockTextColor</key>
-		<string>ffffff</string>
-		<key>noteHeadlineFontColor</key>
-		<string>111111</string>
 		<key>noteBodyLineHeightPercentage</key>
 		<string>0.20</string>
 		<key>noteBodyLineHeightPercentage~ipad</key>
 		<string>0.40</string>
-		<key>noteBodyFontPreviewColor</key>
-		<string>808080</string>
 		<key>noteSidePadding</key>
 		<integer>15</integer>
 		<key>noteSidePadding~regular</key>
@@ -50,8 +36,6 @@
 		<string>60</string>
 		<key>switchOnTintColor</key>
 		<string>@tintColor</string>
-		<key>switchTintColor</key>
-		<string>@dividerColor</string>
 		<key>editorViewVerticalNoteSpacing</key>
 		<integer>10</integer>
 		<key>editorViewPreviewNoteAlpha</key>
@@ -130,14 +114,10 @@
 		<string>444444</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>cbdff3</string>
-		<key>searchBarImageColor</key>
-		<string>b3b3b3</string>
 		<key>searchHighlightHorizontalPadding</key>
 		<integer>3</integer>
 		<key>searchHighlightVerticalPadding</key>
 		<integer>0</integer>
-		<key>searchHighlightFontColor</key>
-		<string>f9f9f9</string>
 		<key>searhHighlightCornerRadius</key>
 		<integer>3</integer>
 		<key>tableViewBackgroundColor</key>
@@ -150,44 +130,14 @@
 		<string>999999</string>
 		<key>collaboratorCellSidePadding</key>
 		<integer>15</integer>
-		<key>navigationBarTitleFontColor</key>
-		<string>333333</string>
-		<key>horizontalPickerTitleFontColor</key>
-		<string>999999</string>
 		<key>horizontalPickerTitleHeight</key>
 		<real>16</real>
 		<key>horizontalPickerVerticalPadding</key>
 		<integer>5</integer>
 		<key>horizontalPickerHorizontalPadding</key>
 		<integer>10</integer>
-		<key>horizontalPickerBorderColor</key>
-		<string>d9d9d9</string>
 		<key>emptyListViewFontColor</key>
 		<string>d9d9d9</string>
-		<key>lockBackgroundColor</key>
-		<string>448AC9</string>
-		<key>simplenoteAlmostBlack</key>
-		<string>12171a</string>
-		<key>simplenoteLightNavy</key>
-		<string>135d95</string>
-		<key>simplenoteLightPink</key>
-		<string>e3e0e2</string>
-		<key>simplenoteMidBlue</key>
-		<string>2170b0</string>
-		<key>simplenotePalePurple</key>
-		<string>b6b2b8</string>
-		<key>simplenoteSlateGrey</key>
-		<string>686b75</string>
-		<key>simplenoteGunmetal</key>
-		<string>525760</string>
-		<key>simplenoteGray10</key>
-		<string>C3C4C7</string>
-		<key>simplenoteGray50</key>
-		<string>646970</string>
-		<key>simplenoteDeepSeaBlue</key>
-		<string>006088</string>
-		<key>simplenoteLipstick</key>
-		<string>C42628</string>
 	</dict>
 	<key>Dark</key>
 	<dict>
@@ -201,16 +151,6 @@
 		<string>FFFFFF</string>
 		<key>secondaryTextColor</key>
 		<string>999999</string>
-		<key>dividerColor</key>
-		<string>343434</string>
-		<key>tertiaryActionColor</key>
-		<string>6F7780</string>
-		<key>noteHeadlineFontColor</key>
-		<string>DDDDDD</string>
-		<key>noteBodyFontPreviewColor</key>
-		<string>@secondaryTextColor</string>
-		<key>switchTintColor</key>
-		<string>@dividerColor</string>
 		<key>switchOnTintColor</key>
 		<string>@textColor</string>
 		<key>barTintColor</key>
@@ -237,26 +177,14 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>searchHighlightFontColor</key>
-		<string>f9f9f9</string>
-		<key>searchBarImageColor</key>
-		<string>@textColor</string>
 		<key>tableViewBackgroundColor</key>
 		<string>1e1e1e</string>
 		<key>tableViewDetailTextLabelColor</key>
 		<string>@secondaryTextColor</string>
 		<key>collaboratorTextColor</key>
 		<string>@secondaryTextColor</string>
-		<key>navigationBarTitleFontColor</key>
-		<string>@textColor</string>
-		<key>horizontalPickerTitleFontColor</key>
-		<string>@secondaryTextColor</string>
-		<key>horizontalPickerBorderColor</key>
-		<string>@dividerColor</string>
 		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
-		<key>lockBackgroundColor</key>
-		<string>@tableViewBackgroundColor</string>
 	</dict>
 </dict>
 </plist>

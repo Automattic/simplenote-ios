@@ -41,18 +41,23 @@
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate>
 
-@property (nonatomic, strong) UIBarButtonItem           *addButton;
-@property (nonatomic, strong) UIBarButtonItem           *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem           *emptyTrashButton;
+@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
-@property (nonatomic, strong) SPSearchController        *searchController;
-@property (nonatomic, strong) UIActivityIndicatorView   *activityIndicator;
+@property (nonatomic, strong) UIBarButtonItem                       *addButton;
+@property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
+@property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
-@property (nonatomic, strong) SPTransitionController    *transitionController;
-@property (nonatomic, assign) CGFloat                   keyboardHeight;
+@property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, assign) BOOL                      bTitleViewAnimating;
-@property (nonatomic, assign) BOOL                      bResetTitleView;
+@property (nonatomic, strong) SPSearchController                    *searchController;
+@property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
+
+@property (nonatomic, strong) SPTransitionController                *transitionController;
+@property (nonatomic, assign) CGFloat                               keyboardHeight;
+
+@property (nonatomic, assign) SPTagFilterType                       tagFilterType;
+@property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
+@property (nonatomic, assign) BOOL                                  bResetTitleView;
 
 @end
 
@@ -218,13 +223,10 @@
 }
 
 - (void)updateNavigationBar {
-    if (tagFilterType == SPTagFilterTypeDeleted) {
-        [self.navigationItem setRightBarButtonItem:_emptyTrashButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
-    } else {
-        [self.navigationItem setRightBarButtonItem:_addButton animated:YES];
-        [self.navigationItem setLeftBarButtonItem:_sidebarButton animated:YES];
-    }
+    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? self.emptyTrashButton : self.addButton;
+
+    [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
+    [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
 }
 
 
@@ -427,15 +429,15 @@
         [note createPreview];
     }
 
-    UIColor *previewColor = [UIColor colorWithName:UIColorNameNoteBodyFontPreviewColor];
+    UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
 
     cell.accessibilityLabel = note.titlePreview;
     cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
 
     cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
     cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
-    cell.accessoryLeftTintColor = previewColor;
-    cell.accessoryRightTintColor = previewColor;
+    cell.accessoryLeftTintColor = accessoryColor;
+    cell.accessoryRightTintColor = accessoryColor;
 
     cell.rendersInCondensedMode = Options.shared.condensedNotesList;
     cell.titleText = note.titlePreview;
@@ -461,7 +463,7 @@
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (tagFilterType == SPTagFilterTypeDeleted) {
+    if (self.tagFilterType == SPTagFilterTypeDeleted) {
         return [self rowActionsForDeletedNote:note];
     }
 
@@ -513,7 +515,7 @@
                                                                        [[SPObjectManager sharedManager] trashNote:note];
                                                                        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:note];
                                                                    }];
-    trash.backgroundColor = [UIColor colorWithName:UIColorNameDestructiveActionColor];
+    trash.backgroundColor = [UIColor simplenoteDestructiveActionColor];
 
     NSString *pinText = note.pinned
                             ? NSLocalizedString(@"Unpin", @"Unpin (verb) - the action of Unpinning a note")
@@ -524,14 +526,14 @@
                                                                  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                      [self togglePinnedNote:note];
                                                                  }];
-    togglePin.backgroundColor = [UIColor colorWithName:UIColorNameSecondaryActionColor];
+    togglePin.backgroundColor = [UIColor simplenoteSecondaryActionColor];
 
     UITableViewRowAction *share = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                      title:NSLocalizedString(@"Share", @"Share (verb) - the action of Sharing a note")
                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                        [self shareNote:note sourceIndexPath:indexPath];
                                                                    }];
-    share.backgroundColor = [UIColor colorWithName:UIColorNameTertiaryActionColor];
+    share.backgroundColor = [UIColor simplenoteTertiaryActionColor];
 
     return @[trash, togglePin, share];
 }
@@ -706,7 +708,7 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    BOOL isTrashOnScreen = tagFilterType == SPTagFilterTypeDeleted;
+    BOOL isTrashOnScreen = self.tagFilterType == SPTagFilterTypeDeleted;
     self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
     self.tableView.allowsSelection = !isTrashOnScreen;
     
@@ -719,11 +721,11 @@
 {
     NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
     if ([selectedTag isEqualToString:kSimplenoteTrashKey]) {
-        tagFilterType = SPTagFilterTypeDeleted;
+        self.tagFilterType = SPTagFilterTypeDeleted;
     } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
-        tagFilterType = SPTagFilterTypeUntagged;
+        self.tagFilterType = SPTagFilterTypeUntagged;
     } else {
-        tagFilterType = SPTagFilterTypeUserTag;
+        self.tagFilterType = SPTagFilterTypeUserTag;
     }
 
     [NSFetchedResultsController deleteCacheWithName:@"Root"];
@@ -747,9 +749,9 @@
     SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
     NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
 
-    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(tagFilterType == SPTagFilterTypeDeleted)]];
+    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(self.tagFilterType == SPTagFilterTypeDeleted)]];
 
-    switch (tagFilterType) {
+    switch (self.tagFilterType) {
         case SPTagFilterTypeShared:
             [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
             break;
@@ -953,7 +955,7 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (tagFilterType == SPTagFilterTypeDeleted && waiting) {
+    if (self.tagFilterType == SPTagFilterTypeDeleted && waiting) {
         return;
     }
 

@@ -32,6 +32,6 @@ class SPTagHeaderView: UIView {
     ///
     func refreshStyle() {
         titleLabel.textColor = .color(name: .textColor)
-        actionButton.setTitleColor(.color(name: .simplenoteMidBlue), for: .normal)
+        actionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
     }
 }

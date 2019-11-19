@@ -1,2 +1,3 @@
-- Simplenote acaba de ganhar novos ícones!
-- A experiência da barra lateral foi inteiramente redesenhada.
+- Correção do bug que ocultava a Barra de status quando as configurações do Simplenote eram exibidas
+- Correção do bug que impedia o gesto “Deslizar para dispensar” de funcionar corretamente no Editor
+- Correção do bug que permitia que a função “Peek and Pop” abrisse anotações na Lixeira

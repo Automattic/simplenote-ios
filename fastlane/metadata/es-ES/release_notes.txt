@@ -1,2 +1,3 @@
-- Ahora, Simplenote tiene iconos completamente nuevos
-- La experiencia de usuario de la barra lateral se ha actualizado por completo.
+- Se ha corregido un error que hacía que la barra de estado estuviera oculta cuando se mostraba la configuración de Simplenote.
+- Se ha corregido un error que provocaba que el gesto de deslizar para cerrar no funcionara correctamente en el Editor.
+- Se ha corregido un error que permitía que Peek y Pop abriera notas en la Papelera.

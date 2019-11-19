@@ -1,18 +1,10 @@
-//
-//  SPTransitionController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/3/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
+
 
 extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName;
 
-
 @protocol SPTransitionControllerDelegate <NSObject>
--(void)interactionBegan;
+- (void)interactionBegan;
 @end
 
 @interface SPTransitionController : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
@@ -25,6 +17,7 @@ extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName
 
 @property (nonatomic) NSIndexPath *selectedPath;
 
--(instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController;
+- (instancetype)initWithTableView:(UITableView *)tableView
+             navigationController:(UINavigationController *)navigationController;
 
 @end

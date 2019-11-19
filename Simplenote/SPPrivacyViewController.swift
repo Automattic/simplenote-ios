@@ -136,8 +136,8 @@ private extension SPPrivacyViewController {
     /// Setup: Switch
     ///
     func setupSwitch() {
-        analyticsSwitch.onTintColor = UIColor.color(name: .switchOnTintColor)
-        analyticsSwitch.tintColor = UIColor.color(name: .switchTintColor)
+        analyticsSwitch.onTintColor = .simplenoteSwitchOnTintColor
+        analyticsSwitch.tintColor = .simplenoteSwitchTintColor
         analyticsSwitch.addTarget(self, action: #selector(switchDidChange(sender:)), for: .valueChanged)
         analyticsSwitch.isOn = isAnalyticsEnabled
     }

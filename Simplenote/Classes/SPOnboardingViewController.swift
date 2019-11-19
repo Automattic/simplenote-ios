@@ -75,26 +75,24 @@ private extension SPOnboardingViewController {
     }
 
     func setupActionButtons() {
-        let simplenoteLightNavy = UIColor.color(name: .simplenoteLightNavy)
-
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.backgroundColor = .color(name: .simplenoteMidBlue)
+        signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
-        loginButton.setTitleColor(simplenoteLightNavy, for: .normal)
+        loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
     }
 
     func setupLabels() {
-        let simplenoteAlmostBlack = UIColor.color(name: .simplenoteAlmostBlack)
+        let textColor = UIColor.simplenoteGray80Color
 
         simplenoteLabel.text = OnboardingStrings.brandText
-        simplenoteLabel.textColor = simplenoteAlmostBlack
+        simplenoteLabel.textColor = textColor
         simplenoteLabel.adjustsFontSizeToFitWidth = true
         simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
 
         headerLabel.text = OnboardingStrings.headerText
-        headerLabel.textColor = simplenoteAlmostBlack
+        headerLabel.textColor = textColor
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.font = .preferredFont(forTextStyle: .title3)
     }
@@ -174,7 +172,7 @@ private extension SPOnboardingViewController {
 //
 private struct OnboardingStrings {
     static let brandText = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
-    static let signupText = NSLocalizedString("Create an account", comment: "Signup Action")
+    static let signupText = NSLocalizedString("Sign Up", comment: "Signup Action")
     static let loginText = NSLocalizedString("Log In", comment: "Login Action")
     static let headerText = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
     static let loginWithEmailText = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
