@@ -327,12 +327,12 @@
     [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
 }
 
-+ (void)trackUserSignInFailed:(NSInteger)responseCode
++ (void)trackUserSignInFailedWithResponseCode:(NSInteger)responseCode
 {
     [self trackAutomatticEventWithName:@"user_signin_failed" properties:@{ @"responseCode" : @(responseCode) }];
 }
 
-+ (void)trackUserSignUpFailed:(NSInteger)responseCode
++ (void)trackUserSignUpFailedWithResponseCode:(NSInteger)responseCode
 {
     [self trackAutomatticEventWithName:@"user_signup_failed" properties:@{ @"responseCode" : @(responseCode) }];
 }
