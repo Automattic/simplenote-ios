@@ -47,7 +47,7 @@ extension SPAuthError {
 
     /// Returns the Error Title, for Alert purposes
     ///
-    var title: String? {
+    var title: String {
         switch self {
         case .signupUserAlreadyExists:
             return NSLocalizedString("Email in use", comment: "Email Taken Alert Title")
@@ -58,7 +58,7 @@ extension SPAuthError {
 
     /// Returns the Error Message, for Alert purposes
     ///
-    var message: String? {
+    var message: String {
         switch self {
         case .loginBadCredentials:
             return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
@@ -68,8 +68,6 @@ extension SPAuthError {
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
-        default:
-            return nil
         }
     }
 
