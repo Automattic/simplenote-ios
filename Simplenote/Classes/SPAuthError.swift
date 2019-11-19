@@ -63,7 +63,7 @@ extension SPAuthError {
         case .loginBadCredentials:
             return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
         case .signupBadCredentials:
-            return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
+            return NSLocalizedString("Could not sign up with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .unknown:
@@ -75,12 +75,12 @@ extension SPAuthError {
     ///
     var responseCode: Int {
         switch self {
-            case .loginBadCredentials, .signupBadCredentials:
-                return Constants.badCredentials
-            case .signupUserAlreadyExists:
-                return Constants.userAlreadyExists
-            case .unknown(let responseCode):
-                return responseCode
+        case .loginBadCredentials, .signupBadCredentials:
+            return Constants.badCredentials
+        case .signupUserAlreadyExists:
+            return Constants.userAlreadyExists
+        case .unknown(let responseCode):
+            return responseCode
         }
     }
 }
