@@ -3,7 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 workspace 'Simplenote.xcworkspace'
 
 plugin 'cocoapods-repo-update'
@@ -23,6 +23,7 @@ abstract_target 'Automattic' do
 		pod '1PasswordExtension', '1.8.5'
 		pod 'Gridicons', '~> 0.18'
 		pod 'AppCenter', '~> 2.3.0' 
+		pod 'AppCenter/Distribute', '~> 2.3.0'
 		pod 'SVProgressHUD', '2.2.5'
 
 		# Automattic
