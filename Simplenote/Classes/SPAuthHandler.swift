@@ -42,12 +42,12 @@ class SPAuthHandler {
     ///     - sender: The sender which triggers the share sheet to show.
     ///     - onCompletion: Closure to be executed on completion.
     ///
-    func findOnePasswordLogin(presenter: UIViewController, sender: Any, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
+    func findOnePasswordLogin(presenter: UIViewController, sender: Any, onCompletion: @escaping (String?, String?, SPOnePasswordError?) -> Void) {
         onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: sender) { (dictionary, error) in
             guard let username = dictionary?[AppExtensionUsernameKey] as? String,
                 let password = dictionary?[AppExtensionPasswordKey] as? String
                 else {
-                    let wrappedError = SPAuthError(onePasswordError: error)
+                    let wrappedError = SPOnePasswordError(onePasswordError: error)
                     onCompletion(nil, nil, wrappedError)
                     return
             }
@@ -68,7 +68,7 @@ class SPAuthHandler {
     ///     - password: Simperium Password
     ///     - onCompletion: Closure to be executed on completion.
     ///
-    func saveLoginToOnePassword(presenter: UIViewController, sender: Any, username: String, password: String, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
+    func saveLoginToOnePassword(presenter: UIViewController, sender: Any, username: String, password: String, onCompletion: @escaping (String?, String?, SPOnePasswordError?) -> Void) {
         let details = [
             AppExtensionTitleKey: kOnePasswordSimplenoteTitle,
             AppExtensionUsernameKey: username,
@@ -84,7 +84,7 @@ class SPAuthHandler {
             guard let username = dictionary?[AppExtensionUsernameKey] as? String,
                 let password = dictionary?[AppExtensionPasswordKey] as? String
                 else {
-                    let wrappedError = SPAuthError(onePasswordError: error)
+                    let wrappedError = SPOnePasswordError(onePasswordError: error)
                     onCompletion(nil, nil, wrappedError)
                     return
             }
