@@ -80,11 +80,11 @@
 + (void)trackOnePasswordSignupSuccess;
 
 #pragma mark - User
-+ (void)trackUserAccountCreated;
-+ (void)trackUserSignInFailedWithResponseCode:(NSInteger)responseCode;
-+ (void)trackUserSignUpFailedWithResponseCode:(NSInteger)responseCode;
++ (void)trackUserSignedUp;
 + (void)trackUserSignedIn;
 + (void)trackUserSignedOut;
++ (void)trackUserSignInFailedWithResponseCode:(NSInteger)responseCode;
++ (void)trackUserSignUpFailedWithResponseCode:(NSInteger)responseCode;
 
 #pragma mark - Keychain Migration
 + (void)trackKeychainMigrationSucceeded;

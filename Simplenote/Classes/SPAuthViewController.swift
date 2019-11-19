@@ -305,7 +305,8 @@ private extension SPAuthViewController {
 
         controller.loginWithCredentials(username: email, password: password) { error in
             if let error = error {
-                self.handleError(error: error)
+                self.handleAuthError(error: error)
+                SPTracker.trackUserSignInFailed(withResponseCode: error.responseCode)
             } else {
                 SPTracker.trackUserSignedIn()
             }
@@ -323,9 +324,10 @@ private extension SPAuthViewController {
 
         controller.signupWithCredentials(username: email, password: password) { error in
             if let error = error {
-                self.handleError(error: error)
+                self.handleAuthError(error: error)
+                SPTracker.trackUserSignUpFailed(withResponseCode: error.responseCode)
             } else {
-                SPTracker.trackUserAccountCreated()
+                SPTracker.trackUserSignedUp()
             }
 
             self.unlockInterface()
@@ -388,11 +390,7 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func handleError(error: SPAuthError) {
-        guard error.shouldBePresentedOnscreen else {
-            return
-        }
-
+    func handleAuthError(error: SPAuthError) {
         switch error {
         case .signupUserAlreadyExists:
             presentUserAlreadyExistsError(error: error)

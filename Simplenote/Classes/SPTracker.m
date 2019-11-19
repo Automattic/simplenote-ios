@@ -312,9 +312,19 @@
 
 #pragma mark - User
 
-+ (void)trackUserAccountCreated
++ (void)trackUserSignedUp
 {
     [self trackAutomatticEventWithName:@"user_account_created" properties:nil];
+}
+
++ (void)trackUserSignedIn
+{
+    [self trackAutomatticEventWithName:@"user_signed_in" properties:nil];
+}
+
++ (void)trackUserSignedOut
+{
+    [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
 }
 
 + (void)trackUserSignInFailed:(NSInteger)responseCode
@@ -327,15 +337,6 @@
     [self trackAutomatticEventWithName:@"user_signup_failed" properties:@{ @"responseCode" : @(responseCode) }];
 }
 
-+ (void)trackUserSignedIn
-{
-    [self trackAutomatticEventWithName:@"user_signed_in" properties:nil];
-}
-
-+ (void)trackUserSignedOut
-{
-    [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
-}
 
 #pragma mark - Keychain Migration
 
