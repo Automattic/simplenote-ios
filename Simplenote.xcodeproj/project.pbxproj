@@ -133,6 +133,7 @@
 		B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */; };
 		B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */; };
 		B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */; };
+		B511FCCE238453A600FB2AC8 /* SPOnePasswordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511FCCD238453A600FB2AC8 /* SPOnePasswordError.swift */; };
 		B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B512AF971C20B14200FE76D8 /* SPAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = B512AF961C20B14200FE76D8 /* SPAnimations.m */; };
 		B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */; };
@@ -416,6 +417,7 @@
 		B50F47A21D1D78EA00822748 /* SPRatingsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsHelper.h; path = Classes/SPRatingsHelper.h; sourceTree = "<group>"; };
 		B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsHelper.m; path = Classes/SPRatingsHelper.m; sourceTree = "<group>"; };
 		B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Extensions.swift"; path = "Classes/NSURL+Extensions.swift"; sourceTree = "<group>"; };
+		B511FCCD238453A600FB2AC8 /* SPOnePasswordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPOnePasswordError.swift; path = Classes/SPOnePasswordError.swift; sourceTree = "<group>"; };
 		B512AF8E1C209DD900FE76D8 /* Simplenote-Share-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Share-Bridging-Header.h"; sourceTree = "<group>"; };
 		B512AF951C20B14200FE76D8 /* SPAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAnimations.h; sourceTree = "<group>"; };
 		B512AF961C20B14200FE76D8 /* SPAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAnimations.m; sourceTree = "<group>"; };
@@ -1063,6 +1065,7 @@
 				B56A695C22F9D53300B90398 /* SPAuthHandler.swift */,
 				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
+				B511FCCD238453A600FB2AC8 /* SPOnePasswordError.swift */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 			);
@@ -1882,6 +1885,7 @@
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
+				B511FCCE238453A600FB2AC8 /* SPOnePasswordError.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				B55738211AB8950A006043E4 /* NSDate+Helper.m in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
