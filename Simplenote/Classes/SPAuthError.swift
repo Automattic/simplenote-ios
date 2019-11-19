@@ -1,12 +1,9 @@
 import Foundation
-import OnePasswordExtension
 
 
 // MARK: - SPAuthError
 //
 enum SPAuthError: Error {
-    case onePasswordCancelled
-    case onePasswordError
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
@@ -17,16 +14,6 @@ enum SPAuthError: Error {
 // MARK: - SPAuthError Convenience Initializers
 //
 extension SPAuthError {
-
-    /// Returns the SPAuthError matching a given OnePasswordError (If possible!)
-    ///
-    init?(onePasswordError: Error?) {
-        guard let error = onePasswordError as NSError? else {
-            return nil
-        }
-
-        self = error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
-    }
 
     /// Returns the SPAuthError matching a given Simperium Login Error Code
     ///
