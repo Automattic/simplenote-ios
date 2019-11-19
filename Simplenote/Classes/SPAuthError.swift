@@ -7,7 +7,7 @@ enum SPAuthError: Error {
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
-    case unknown
+    case unknown(responseCode: Int)
 }
 
 
@@ -19,10 +19,10 @@ extension SPAuthError {
     ///
     init(simperiumLoginErrorCode: Int) {
         switch simperiumLoginErrorCode {
-        case 401:
+        case Constants.badCredentials:
             self = .loginBadCredentials
         default:
-            self = .unknown
+            self = .unknown(responseCode: simperiumLoginErrorCode)
         }
     }
 
@@ -30,12 +30,12 @@ extension SPAuthError {
     ///
     init(simperiumSignupErrorCode: Int) {
         switch simperiumSignupErrorCode {
-        case 401:
+        case Constants.badCredentials:
             self = .signupBadCredentials
-        case 409:
+        case Constants.userAlreadyExists:
             self = .signupUserAlreadyExists
         default:
-            self = .unknown
+            self = .unknown(responseCode: simperiumSignupErrorCode)
         }
     }
 }
@@ -71,9 +71,42 @@ extension SPAuthError {
         }
     }
 
-    /// Indicates if the Error is User Facing, or should be kept internally
+    /// Returns the Raw responseCode
     ///
-    var shouldBePresentedOnscreen: Bool {
-        return message != nil
+    var responseCode: Int {
+        switch self {
+            case .loginBadCredentials, .signupBadCredentials:
+                return Constants.badCredentials
+            case .signupUserAlreadyExists:
+                return Constants.userAlreadyExists
+            case .unknown(let responseCode):
+                return responseCode
+        }
+    }
+}
+
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let badCredentials = 401
+    static let userAlreadyExists = 409
+}
+
+
+// MARK: - Equatable Conformance
+//
+func ==(lhs: SPAuthError, rhs: SPAuthError) -> Bool {
+    switch (lhs, rhs) {
+    case (.loginBadCredentials, .loginBadCredentials):
+        return true
+    case (.signupBadCredentials, .signupBadCredentials):
+        return true
+    case (.signupUserAlreadyExists, .signupUserAlreadyExists):
+        return true
+    case (.unknown(let lhsCode), .unknown(let rhsCode)):
+        return lhsCode == rhsCode
+    default:
+        return false
     }
 }
