@@ -81,6 +81,8 @@
 
 #pragma mark - User
 + (void)trackUserAccountCreated;
++ (void)trackUserSignInFailedWithResponseCode:(NSInteger)responseCode;
++ (void)trackUserSignUpFailedWithResponseCode:(NSInteger)responseCode;
 + (void)trackUserSignedIn;
 + (void)trackUserSignedOut;
 

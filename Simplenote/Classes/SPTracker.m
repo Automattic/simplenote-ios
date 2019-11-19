@@ -317,6 +317,16 @@
     [self trackAutomatticEventWithName:@"user_account_created" properties:nil];
 }
 
++ (void)trackUserSignInFailed:(NSInteger)responseCode
+{
+    [self trackAutomatticEventWithName:@"user_signin_failed" properties:@{ @"responseCode" : @(responseCode) }];
+}
+
++ (void)trackUserSignUpFailed:(NSInteger)responseCode
+{
+    [self trackAutomatticEventWithName:@"user_signup_failed" properties:@{ @"responseCode" : @(responseCode) }];
+}
+
 + (void)trackUserSignedIn
 {
     [self trackAutomatticEventWithName:@"user_signed_in" properties:nil];
