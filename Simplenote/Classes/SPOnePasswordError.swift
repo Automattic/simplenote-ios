@@ -14,7 +14,7 @@ enum SPOnePasswordError: Error {
 //
 extension SPOnePasswordError {
 
-    /// Returns the SPAuthError matching a given OnePasswordError (If possible!)
+    /// Returns the SPOnePasswordError matching a given OnePasswordError (If possible!)
     ///
     init?(onePasswordError: Error?) {
         guard let error = onePasswordError as NSError? else {

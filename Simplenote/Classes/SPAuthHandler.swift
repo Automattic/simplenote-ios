@@ -35,7 +35,7 @@ class SPAuthHandler {
 
     /// Presents the OnePassword Extension for Login.
     ///
-    /// - Note: Errors are mapped into SPAuthError.
+    /// - Note: Errors are mapped into SPOnePasswordError.
     ///
     /// - Parameters:
     ///     - presenter: Source UIViewController from which the extension should be presented.
@@ -59,7 +59,7 @@ class SPAuthHandler {
 
     /// Presents the OnePassword Extension for Signup purposes: The user will be allowed to store a given set of credentials.
     ///
-    /// - Note: Errors are mapped into SPAuthError.
+    /// - Note: Errors are mapped into SPOnePasswordError.
     ///
     /// - Parameters:
     ///     - presenter: Source UIViewController from which the extension should be presented.
