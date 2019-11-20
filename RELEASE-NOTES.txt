@@ -1,6 +1,7 @@
 4.15
 -----
- 
+-   Fixed a bug that affects tap detections over links.
+
 4.14
 ====
 -   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp)
