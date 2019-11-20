@@ -52,9 +52,6 @@ extension SPNoteListViewController {
             resultsView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
 
-        // Forward the SearchBar's height
-        resultsView.layoutMargins.top = searchBar.frame.height
-
         // Layout right away: Avoid the Results' View Layout to get caught in the SearchController's animation.
         view.layoutIfNeeded()
     }
@@ -92,6 +89,7 @@ extension SPNoteListViewController {
     @objc
     func displaySearchResultsController() {
         let resultsViewController = SPSearchResultsViewController()
+        resultsViewController.additionalSafeAreaInsets.top = searchBar.frame.size.height
         addChild(resultsViewController)
 
         displaySearchResultsView(resultsViewController.view)
