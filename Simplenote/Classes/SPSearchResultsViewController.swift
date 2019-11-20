@@ -70,7 +70,6 @@ extension SPSearchResultsViewController: UITableViewDataSource {
 
         cell.titleText = "Some Title"
         cell.bodyText = "Body Here!"
-        cell.backgroundColor = .white
 
         return cell
     }
