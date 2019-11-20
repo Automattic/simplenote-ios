@@ -8,7 +8,6 @@ extension UIView {
 
     /// Animates a visibility switch, when applicable
     ///
-    @objc
     func animateVisibility(isHidden: Bool, duration: TimeInterval = 0.3) {
         guard self.isHidden != isHidden else {
             return
