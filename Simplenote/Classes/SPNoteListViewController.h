@@ -5,7 +5,6 @@
 
 @class SPEmptyListView;
 @class SPBlurEffectView;
-@class SPSearchResultsViewController;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
