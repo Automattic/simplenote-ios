@@ -26,16 +26,6 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 @objcMembers
 class SPSearchController: NSObject {
 
-    /// When the navigationBar is hidden, there'll be a gap between the top of the screen and the searchBar. We intend to compensate for that with a helper BG View!
-    ///
-    private lazy var statusBarBackground: UIView = {
-        let backgroundView = UIView()
-        backgroundView.alpha = UIKitConstants.alphaZero
-        backgroundView.isUserInteractionEnabled = false
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundView
-    }()
-
     /// Internal SearchBar Instance
     ///
     let searchBar = UISearchBar()
@@ -89,17 +79,10 @@ private extension SPSearchController {
                 return
         }
 
-        statusBarBackground.backgroundColor = searchBar.backgroundColor
-        statusBarBackground.alpha = hidden ? UIKitConstants.alphaMid : UIKitConstants.alphaFull
-
         navigationController.setNavigationBarHidden(hidden, animated: true)
 
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-        let topView = navigationController.topViewController?.view
-
-        UIView.animate(withDuration: duration) { [weak self] in
-            self?.statusBarBackground.alpha = hidden ? UIKitConstants.alphaFull : UIKitConstants.alphaZero
-            topView?.layoutIfNeeded()
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
+            navigationController.topViewController?.view?.layoutIfNeeded()
         }
     }
 
