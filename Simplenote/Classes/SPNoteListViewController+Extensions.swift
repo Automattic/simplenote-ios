@@ -39,7 +39,7 @@ extension SPNoteListViewController {
         ])
     }
 
-    /// Attaches the specified SearchResultsView to the receiver's main view
+    /// Attaches the specified SearchResultsView to the receiver's main view below the SearchBar + NavigationBarBackground views
     ///
     private func attachSearchResultsView(_ resultsView: UIView) {
         resultsView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +81,7 @@ extension SPNoteListViewController {
 //
 extension SPNoteListViewController {
 
-    /// Attaches a new SearchResultsController instance to the receiver
+    /// Displays the SearchResultsController onScreen
     ///
     @objc
     func displaySearchResultsController() {
@@ -94,17 +94,13 @@ extension SPNoteListViewController {
         searchResultsViewController.view.fadeIn()
     }
 
-    /// Detaches the active SearchResultsController instance, if any
+    /// Dismisses the active SearchResultsController
     ///
     @objc
     func dismissSearchResultsController() {
-        guard let resultsController = searchResultsViewController else {
-            return
-        }
-
-        resultsController.view.fadeOut {
-            resultsController.view.removeFromSuperview()
-            resultsController.removeFromParent()
+        searchResultsViewController.view.fadeOut {
+            self.searchResultsViewController.view.removeFromSuperview()
+            self.searchResultsViewController.removeFromParent()
         }
     }
 }
