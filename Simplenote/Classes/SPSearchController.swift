@@ -26,6 +26,10 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 @objcMembers
 class SPSearchController: NSObject {
 
+    /// ResultsController in which Search Results would be rendered
+    ///
+    let resultsController: UIViewController
+
     /// Internal SearchBar Instance
     ///
     let searchBar = UISearchBar()
@@ -41,7 +45,8 @@ class SPSearchController: NSObject {
 
     /// Designated Initializer
     ///
-    override init() {
+    init(resultsController: UIViewController) {
+        self.resultsController = resultsController
         super.init()
         setupSearchBar()
     }
