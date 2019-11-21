@@ -302,7 +302,7 @@
     // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
     self.resultsViewController = [SPSearchResultsViewController new];
 
-    self.searchController = [[SPSearchController alloc] initWithResultsController:self.resultsViewController];
+    self.searchController = [[SPSearchController alloc] initWithResultsViewController:self.resultsViewController];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
@@ -362,19 +362,19 @@
     
 }
 
-- (void)searchControllerWillBeginSearch:(SPSearchController *)controller
-{
-    [self displaySearchResultsController];
-}
-
 - (void)searchControllerDidEndSearch:(SPSearchController *)controller
 {
     [self endSearching];
 }
 
-- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller
+- (UINavigationController *)navigationControllerForSearchController:(SPSearchController *)controller
 {
     return self.navigationController;
+}
+
+- (UIViewController *)resultsParentControllerForSearchController:(SPSearchController *)controller
+{
+    return self;
 }
 
 - (void)performSearch
@@ -401,7 +401,6 @@
 {
     bSearching = NO;
     self.searchText = nil;
-    [self dismissSearchResultsController];
 
     [self update];
 }

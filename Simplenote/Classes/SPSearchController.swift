@@ -8,7 +8,6 @@ import UIKit
 protocol SPSearchControllerDelegate: NSObjectProtocol {
     func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
     func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
-    func searchControllerWillBeginSearch(_ controller: SPSearchController)
     func searchControllerDidEndSearch(_ controller: SPSearchController)
 }
 
@@ -18,6 +17,7 @@ protocol SPSearchControllerDelegate: NSObjectProtocol {
 @objc
 protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
     func navigationControllerForSearchController(_ controller: SPSearchController) -> UINavigationController
+    func resultsParentControllerForSearchController(_ controller: SPSearchController) -> UIViewController
 }
 
 
@@ -28,7 +28,7 @@ class SPSearchController: NSObject {
 
     /// ResultsController in which Search Results would be rendered
     ///
-    let resultsController: UIViewController
+    let resultsViewController: UIViewController
 
     /// Internal SearchBar Instance
     ///
@@ -45,8 +45,8 @@ class SPSearchController: NSObject {
 
     /// Designated Initializer
     ///
-    init(resultsController: UIViewController) {
-        self.resultsController = resultsController
+    init(resultsViewController: UIViewController) {
+        self.resultsViewController = resultsViewController
         super.init()
         setupSearchBar()
     }
@@ -74,6 +74,7 @@ private extension SPSearchController {
 
     func updateStatus(active: Bool) {
         updateSearchBar(showsCancelButton: active)
+        updateResultsView(visible: active)
         updateNavigationBar(hidden: active)
     }
 
@@ -98,6 +99,67 @@ private extension SPSearchController {
 
         searchBar.setShowsCancelButton(showsCancelButton, animated: true)
     }
+
+    func updateResultsView(visible: Bool) {
+        guard visible else {
+            dismissResultsViewController()
+            return
+        }
+
+        displayResultsViewController()
+    }
+}
+
+
+// MARK: - SPSearchController
+//
+private extension SPSearchController {
+
+    /// Displays the SearchResultsController onScreen
+    ///
+    func displayResultsViewController() {
+        guard resultsViewController.parent == nil,
+            let parentViewController = presenter?.resultsParentControllerForSearchController(self) else {
+                return
+        }
+
+        resultsViewController.additionalSafeAreaInsets.top = searchBar.frame.size.height
+        parentViewController.addChild(resultsViewController)
+
+        attach(resultsView: resultsViewController.view, into: parentViewController.view)
+        parentViewController.view.layoutIfNeeded()
+
+        resultsViewController.view.fadeIn()
+    }
+
+    /// Dismisses the active ResultsViewController
+    ///
+    func dismissResultsViewController() {
+        guard let _ = resultsViewController.parent else {
+            return
+        }
+
+        resultsViewController.view.fadeOut {
+            self.resultsViewController.view.removeFromSuperview()
+            self.resultsViewController.removeFromParent()
+        }
+    }
+
+    /// Attaches a given UIView instance into a containerView, and pints it to the four edges
+    ///
+    func attach(resultsView: UIView, into containerView: UIView) {
+        resultsView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.insertSubview(resultsView, belowSubview: searchBar)
+//        containerView.insertSubview(resultsView, belowSubview: navigationBarBackground)
+
+        NSLayoutConstraint.activate([
+            resultsView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            resultsView.rightAnchor.constraint(equalTo: containerView.rightAnchor),
+            resultsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            resultsView.topAnchor.constraint(equalTo: containerView.topAnchor)
+        ])
+    }
+
 }
 
 
@@ -108,10 +170,6 @@ extension SPSearchController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let shouldBeginEditing = delegate?.searchControllerShouldBeginSearch(self) else {
             return false
-        }
-
-        if shouldBeginEditing {
-            delegate?.searchControllerWillBeginSearch(self)
         }
 
         updateStatus(active: shouldBeginEditing)
