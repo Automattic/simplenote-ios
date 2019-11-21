@@ -364,8 +364,6 @@
 
 - (void)searchControllerWillBeginSearch:(SPSearchController *)controller
 {
-    NSAssert(controller.resultsViewController.view.superview != nil, @"Results's View is not yet attached!");
-
     // Ensure our custom NavigationBar + SearchBar are always on top (!)
     [self.view bringSubviewToFront:self.navigationBarBackground];
     [self.view bringSubviewToFront:self.searchBar];

@@ -102,6 +102,10 @@ private extension SPSearchController {
     }
 
     func updateResultsView(visible: Bool) {
+        guard FeatureManager.advancedSearchEnabled else {
+            return
+        }
+
         guard visible else {
             dismissResultsViewController()
             return
