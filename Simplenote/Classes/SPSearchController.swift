@@ -8,6 +8,7 @@ import UIKit
 protocol SPSearchControllerDelegate: NSObjectProtocol {
     func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
     func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
+    func searchControllerWillBeginSearch(_ controller: SPSearchController)
     func searchControllerDidEndSearch(_ controller: SPSearchController)
 }
 
@@ -111,7 +112,7 @@ private extension SPSearchController {
 }
 
 
-// MARK: - SPSearchController
+// MARK: - ResultsViewController Methods
 //
 private extension SPSearchController {
 
@@ -150,7 +151,6 @@ private extension SPSearchController {
     func attach(resultsView: UIView, into containerView: UIView) {
         resultsView.translatesAutoresizingMaskIntoConstraints = false
         containerView.insertSubview(resultsView, belowSubview: searchBar)
-//        containerView.insertSubview(resultsView, belowSubview: navigationBarBackground)
 
         NSLayoutConstraint.activate([
             resultsView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
@@ -173,6 +173,9 @@ extension SPSearchController: UISearchBarDelegate {
         }
 
         updateStatus(active: shouldBeginEditing)
+        if shouldBeginEditing {
+            delegate?.searchControllerWillBeginSearch(self)
+        }
 
         return shouldBeginEditing
     }
