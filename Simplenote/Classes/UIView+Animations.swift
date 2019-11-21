@@ -20,17 +20,17 @@ extension UIView {
 
     /// Fades In the receiver
     ///
-    func fadeIn(completion: (() -> Void)? = nil) {
+    @objc
+    func fadeIn() {
         self.alpha = UIKitConstants.alphaZero
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
             self.alpha = UIKitConstants.alphaFull
-        }, completion: { _ in
-            completion?()
-        })
+        }
     }
 
     /// Fades Out the receiver
     ///
+    @objc
     func fadeOut(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
             self.alpha = UIKitConstants.alphaZero

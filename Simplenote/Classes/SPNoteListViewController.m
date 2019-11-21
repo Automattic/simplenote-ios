@@ -369,6 +369,9 @@
     // Ensure our custom NavigationBar + SearchBar are always on top (!)
     [self.view bringSubviewToFront:self.navigationBarBackground];
     [self.view bringSubviewToFront:self.searchBar];
+
+    // We want the results UI to always have the Blur Background active
+    [self.navigationBarBackground fadeIn];
 }
 
 - (void)searchControllerDidEndSearch:(SPSearchController *)controller
