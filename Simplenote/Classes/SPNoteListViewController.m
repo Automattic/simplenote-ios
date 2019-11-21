@@ -42,6 +42,7 @@
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+@property (nonatomic, strong) SPSearchResultsViewController         *searchResultsViewController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
@@ -72,8 +73,8 @@
         [self configureNavigationBarBackground];
         [self configureTableView];
         [self configureSearchController];
+        [self configureResultsController];
         [self configureRootView];
-
         [self updateRowHeight];
         [self startListeningToNotifications];
         
@@ -302,6 +303,14 @@
     self.searchController.delegate = self;
     self.searchController.presenter = self;
     [self.searchBar applySimplenoteStyle];
+}
+
+- (void)configureResultsController
+{
+    NSAssert(_searchResultsViewController == nil, @"_resultsController is already initialized!");
+
+    // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
+    self.searchResultsViewController = [SPSearchResultsViewController new];
 }
 
 

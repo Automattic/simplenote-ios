@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 }
 
 @property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
-@property (nonatomic, strong) SPSearchResultsViewController                 *searchResultsViewController;
+@property (nonatomic, strong, readonly) SPSearchResultsViewController       *searchResultsViewController;
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
