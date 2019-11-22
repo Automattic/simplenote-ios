@@ -42,6 +42,7 @@
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+@property (nonatomic, strong) SPSearchResultsViewController         *resultsViewController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
@@ -73,7 +74,6 @@
         [self configureTableView];
         [self configureSearchController];
         [self configureRootView];
-
         [self updateRowHeight];
         [self startListeningToNotifications];
         
@@ -297,10 +297,15 @@
 
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
+    NSAssert(_resultsViewController == nil, @"_resultsController is already initialized!");
 
-    self.searchController = [SPSearchController new];
+    // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
+    self.resultsViewController = [SPSearchResultsViewController new];
+
+    self.searchController = [[SPSearchController alloc] initWithResultsViewController:self.resultsViewController];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
+
     [self.searchBar applySimplenoteStyle];
 }
 
@@ -328,8 +333,8 @@
 
 #pragma mark - SearchController Delegate methods
 
-- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
-    
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller
+{
     if (bListViewIsEmpty) {
         return NO;
     }
@@ -340,8 +345,8 @@
     return bSearching;
 }
 
-- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword {
- 
+- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword
+{
     self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
@@ -357,16 +362,33 @@
     
 }
 
-- (void)searchControllerDidEndSearch:(SPSearchController *)controller {
+- (void)searchControllerWillBeginSearch:(SPSearchController *)controller
+{
+    // Ensure our custom NavigationBar + SearchBar are always on top (!)
+    [self.view bringSubviewToFront:self.navigationBarBackground];
+    [self.view bringSubviewToFront:self.searchBar];
+
+    // We want the results UI to always have the Blur Background active
+    [self.navigationBarBackground fadeIn];
+}
+
+- (void)searchControllerDidEndSearch:(SPSearchController *)controller
+{
     [self endSearching];
 }
 
-- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller {
+- (UINavigationController *)navigationControllerForSearchController:(SPSearchController *)controller
+{
     return self.navigationController;
 }
 
-- (void)performSearch {
+- (UIViewController *)resultsParentControllerForSearchController:(SPSearchController *)controller
+{
+    return self;
+}
 
+- (void)performSearch
+{
     if (!self.searchText) {
         return;
     }
@@ -385,10 +407,9 @@
     searchTimer = nil;
 }
 
-- (void)endSearching {
-
+- (void)endSearching
+{
     bSearching = NO;
-
     self.searchText = nil;
 
     [self update];

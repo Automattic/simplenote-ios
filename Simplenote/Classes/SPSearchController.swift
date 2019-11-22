@@ -8,6 +8,7 @@ import UIKit
 protocol SPSearchControllerDelegate: NSObjectProtocol {
     func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
     func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
+    func searchControllerWillBeginSearch(_ controller: SPSearchController)
     func searchControllerDidEndSearch(_ controller: SPSearchController)
 }
 
@@ -17,6 +18,7 @@ protocol SPSearchControllerDelegate: NSObjectProtocol {
 @objc
 protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
     func navigationControllerForSearchController(_ controller: SPSearchController) -> UINavigationController
+    func resultsParentControllerForSearchController(_ controller: SPSearchController) -> UIViewController
 }
 
 
@@ -25,15 +27,9 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 @objcMembers
 class SPSearchController: NSObject {
 
-    /// When the navigationBar is hidden, there'll be a gap between the top of the screen and the searchBar. We intend to compensate for that with a helper BG View!
+    /// ResultsController in which Search Results would be rendered
     ///
-    private lazy var statusBarBackground: UIView = {
-        let backgroundView = UIView()
-        backgroundView.alpha = UIKitConstants.alphaZero
-        backgroundView.isUserInteractionEnabled = false
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundView
-    }()
+    let resultsViewController: UIViewController
 
     /// Internal SearchBar Instance
     ///
@@ -50,7 +46,8 @@ class SPSearchController: NSObject {
 
     /// Designated Initializer
     ///
-    override init() {
+    init(resultsViewController: UIViewController) {
+        self.resultsViewController = resultsViewController
         super.init()
         setupSearchBar()
     }
@@ -78,6 +75,7 @@ private extension SPSearchController {
 
     func updateStatus(active: Bool) {
         updateSearchBar(showsCancelButton: active)
+        updateResultsView(visible: active)
         updateNavigationBar(hidden: active)
     }
 
@@ -88,17 +86,10 @@ private extension SPSearchController {
                 return
         }
 
-        statusBarBackground.backgroundColor = searchBar.backgroundColor
-        statusBarBackground.alpha = hidden ? UIKitConstants.alphaMid : UIKitConstants.alphaFull
-
         navigationController.setNavigationBarHidden(hidden, animated: true)
 
-        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
-        let topView = navigationController.topViewController?.view
-
-        UIView.animate(withDuration: duration) { [weak self] in
-            self?.statusBarBackground.alpha = hidden ? UIKitConstants.alphaFull : UIKitConstants.alphaZero
-            topView?.layoutIfNeeded()
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
+            navigationController.topViewController?.view?.layoutIfNeeded()
         }
     }
 
@@ -109,6 +100,70 @@ private extension SPSearchController {
 
         searchBar.setShowsCancelButton(showsCancelButton, animated: true)
     }
+
+    func updateResultsView(visible: Bool) {
+        guard FeatureManager.advancedSearchEnabled else {
+            return
+        }
+
+        guard visible else {
+            dismissResultsViewController()
+            return
+        }
+
+        displayResultsViewController()
+    }
+}
+
+
+// MARK: - ResultsViewController Methods
+//
+private extension SPSearchController {
+
+    /// Displays the SearchResultsController onScreen
+    ///
+    func displayResultsViewController() {
+        guard resultsViewController.parent == nil,
+            let parentViewController = presenter?.resultsParentControllerForSearchController(self) else {
+                return
+        }
+
+        resultsViewController.additionalSafeAreaInsets.top = searchBar.frame.size.height
+        parentViewController.addChild(resultsViewController)
+
+        attach(resultsView: resultsViewController.view, into: parentViewController.view)
+        parentViewController.view.layoutIfNeeded()
+
+        resultsViewController.view.fadeIn()
+    }
+
+    /// Dismisses the active ResultsViewController
+    ///
+    func dismissResultsViewController() {
+        guard let _ = resultsViewController.parent else {
+            return
+        }
+
+        resultsViewController.view.fadeOut {
+            self.resultsViewController.view.removeFromSuperview()
+            self.resultsViewController.removeFromParent()
+        }
+    }
+
+    /// Attaches a given UIView instance into a containerView, and pints it to the four edges
+    ///
+    func attach(resultsView: UIView, into containerView: UIView) {
+        resultsView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.insertSubview(resultsView, belowSubview: searchBar)
+
+        NSLayoutConstraint.activate([
+            resultsView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            resultsView.rightAnchor.constraint(equalTo: containerView.rightAnchor),
+            resultsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            resultsView.topAnchor.constraint(equalTo: containerView.topAnchor)
+        ])
+    }
+
 }
 
 
@@ -122,6 +177,9 @@ extension SPSearchController: UISearchBarDelegate {
         }
 
         updateStatus(active: shouldBeginEditing)
+        if shouldBeginEditing {
+            delegate?.searchControllerWillBeginSearch(self)
+        }
 
         return shouldBeginEditing
     }
