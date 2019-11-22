@@ -331,7 +331,7 @@
 }
 
 
-#pragma mark - SearchController Delegate methods
+#pragma mark - SPSearchControllerDelegate methods
 
 - (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller
 {
@@ -340,13 +340,23 @@
     }
 
     bSearching = YES;
-    [self.tableView reloadData];
+
+    // TODO: Nuke the following as soon as we can!
+    if (!FeatureManager.advancedSearchEnabled) {
+        [self.tableView reloadData];
+    }
     
     return bSearching;
 }
 
 - (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword
 {
+    if (FeatureManager.advancedSearchEnabled) {
+        [self.resultsViewController updateSearchResultsWithKeyword:keyword];
+        return;
+    }
+
+    // TODO: Nuke the following as soon as we can!
     self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
@@ -359,7 +369,6 @@
                                                  selector:@selector(performSearch)
                                                  userInfo:nil
                                                   repeats:NO];
-    
 }
 
 - (void)searchControllerWillBeginSearch:(SPSearchController *)controller
@@ -377,6 +386,9 @@
     [self endSearching];
 }
 
+
+#pragma mark - SPSearchControllerPresenter methods
+
 - (UINavigationController *)navigationControllerForSearchController:(SPSearchController *)controller
 {
     return self.navigationController;
@@ -387,8 +399,16 @@
     return self;
 }
 
+
+#pragma mark - Search Helpers
+
 - (void)performSearch
 {
+    // TODO: Nuke the following as soon as we can!
+    if (FeatureManager.advancedSearchEnabled) {
+        return;
+    }
+
     if (!self.searchText) {
         return;
     }
@@ -410,8 +430,13 @@
 - (void)endSearching
 {
     bSearching = NO;
-    self.searchText = nil;
 
+    // TODO: Nuke the following as soon as we can!
+    if (FeatureManager.advancedSearchEnabled) {
+        return;
+    }
+
+    self.searchText = nil;
     [self update];
 }
 

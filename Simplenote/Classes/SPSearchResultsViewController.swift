@@ -27,6 +27,19 @@ class SPSearchResultsViewController: UIViewController {
 
 // MARK: - Interface Initialization
 //
+extension SPSearchResultsViewController {
+
+    /// Updates the Search Results to match a given keyword
+    ///
+    @objc
+    func updateSearchResults(keyword: String) {
+    // TODO: Wire Me!
+    }
+}
+
+
+// MARK: - Interface Initialization
+//
 private extension SPSearchResultsViewController {
 
     /// Sets up the TableView
