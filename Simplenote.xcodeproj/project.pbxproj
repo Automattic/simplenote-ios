@@ -463,6 +463,7 @@
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
 		B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Simplenote.swift"; path = "Classes/NSUserActivity+Simplenote.swift"; sourceTree = "<group>"; };
 		B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Shortcuts.swift"; path = "Classes/NSUserActivity+Shortcuts.swift"; sourceTree = "<group>"; };
+		B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 5.xcdatamodel"; sourceTree = "<group>"; };
 		B5536B861B8E46AC00FF190A /* cy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cy; path = cy.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5536B871B8E47B400FF190A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5536B881B8E490200FF190A /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -3148,12 +3149,13 @@
 		467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */,
 				B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */,
 				B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */,
 				467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */,
 				467D9C5E1788A4FB00785EF3 /* Simplenote.xcdatamodel */,
 			);
-			currentVersion = B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */;
+			currentVersion = B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */;
 			name = Simplenote.xcdatamodeld;
 			path = ../Simplenote.xcdatamodeld;
 			sourceTree = "<group>";
