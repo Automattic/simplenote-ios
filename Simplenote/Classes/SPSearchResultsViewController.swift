@@ -10,10 +10,14 @@ class SPSearchResultsViewController: UIViewController {
     ///
     @IBOutlet private weak var tableView: UITableView!
 
+    private var mainContext: NSManagedObjectContext {
+        SPAppDelegate.shared().managedObjectContext
+    }
+
     /// Results DataSource
     ///
-    private let resultsDataSource: SPSearchResultsDataSource = {
-        SPSearchResultsDataSource(mainContext: SPAppDelegate.shared().managedObjectContext)
+    private lazy var resultsController: SPSearchResultsController = {
+        SPSearchResultsController(mainContext: mainContext)
     }()
 
 
@@ -28,6 +32,7 @@ class SPSearchResultsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshStyle()
+        reset()
     }
 }
 
@@ -40,9 +45,7 @@ extension SPSearchResultsViewController {
     ///
     @objc
     func updateSearchResults(keyword: String) {
-        resultsDataSource.keyword = keyword
-
-// TODO: FRC Sync
+        resultsController.keyword = keyword
         tableView.reloadData()
     }
 }
@@ -53,8 +56,17 @@ extension SPSearchResultsViewController {
 private extension SPSearchResultsViewController {
 
     func configureResultsController() {
-        try? resultsDataSource.performFetch()
+        try? resultsController.performFetch()
         tableView.reloadData()
+    }
+
+    func reset() {
+        guard resultsController.keyword.count > 0 else {
+            return
+        }
+
+        updateSearchResults(keyword: String())
+        tableView.scrollToTop(animated: false)
     }
 }
 
@@ -88,11 +100,11 @@ private extension SPSearchResultsViewController {
 extension SPSearchResultsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        resultsDataSource.sections.count
+        resultsController.sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        resultsDataSource.sections[section].numberOfObjects
+        resultsController.sections[section].numberOfObjects
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,7 +112,7 @@ extension SPSearchResultsViewController: UITableViewDataSource {
             fatalError()
         }
 
-        let note = resultsDataSource.object(at: indexPath)
+        let note = resultsController.object(at: indexPath)
         if note.preview == nil {
             note.createPreview()
         }
