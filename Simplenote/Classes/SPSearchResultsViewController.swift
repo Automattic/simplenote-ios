@@ -16,11 +16,13 @@ class SPSearchResultsViewController: UIViewController {
         SPSearchResultsDataSource(mainContext: SPAppDelegate.shared().managedObjectContext)
     }()
 
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureResultsController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +41,20 @@ extension SPSearchResultsViewController {
     @objc
     func updateSearchResults(keyword: String) {
         resultsDataSource.keyword = keyword
+
+// TODO: FRC Sync
+        tableView.reloadData()
+    }
+}
+
+
+// MARK: - Private Helpers
+//
+private extension SPSearchResultsViewController {
+
+    func configureResultsController() {
+        try? resultsDataSource.performFetch()
+        tableView.reloadData()
     }
 }
 
@@ -71,14 +87,12 @@ private extension SPSearchResultsViewController {
 //
 extension SPSearchResultsViewController: UITableViewDataSource {
 
-    // TODO: Demo code. Replace with the actual CoreData fetch!
-
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        resultsDataSource.sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        resultsDataSource.sections[section].numberOfObjects
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,8 +100,13 @@ extension SPSearchResultsViewController: UITableViewDataSource {
             fatalError()
         }
 
-        cell.titleText = "Some Title"
-        cell.bodyText = "Body Here!"
+        let note = resultsDataSource.object(at: indexPath)
+        if note.preview == nil {
+            note.createPreview()
+        }
+
+        cell.titleText = note.titlePreview
+        cell.bodyText = note.bodyPreview
 
         return cell
     }
