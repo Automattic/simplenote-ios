@@ -10,6 +10,11 @@ class SPSearchResultsViewController: UIViewController {
     ///
     @IBOutlet private weak var tableView: UITableView!
 
+    /// Results DataSource
+    ///
+    private let resultsDataSource: SPSearchResultsDataSource = {
+        SPSearchResultsDataSource(mainContext: SPAppDelegate.shared().managedObjectContext)
+    }()
 
     // MARK: - View Lifecycle
 
@@ -33,7 +38,7 @@ extension SPSearchResultsViewController {
     ///
     @objc
     func updateSearchResults(keyword: String) {
-    // TODO: Wire Me!
+        resultsDataSource.keyword = keyword
     }
 }
 
