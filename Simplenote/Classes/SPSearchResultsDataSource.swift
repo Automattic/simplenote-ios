@@ -10,14 +10,20 @@ class SPSearchResultsDataSource {
     ///
     private let resultsBatchSize = 20
 
-    /// Results Controller: Note Entity
+    /// Fetch Request: Note
     ///
-    private lazy var resultsController: NSFetchedResultsController<Note> = {
+    private lazy var request: NSFetchRequest<Note> = {
         let request = NSFetchRequest<Note>()
         request.entity = NSEntityDescription.entity(forEntityName: Note.classNameWithoutNamespaces, in: mainContext)
         request.fetchBatchSize = resultsBatchSize
         request.sortDescriptors = sortDescriptors()
-        return NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        return request
+    }()
+
+    /// Results Controller: Note Entity
+    ///
+    private lazy var resultsController: NSFetchedResultsController<Note> = {
+        NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
 
     /// Main MOC
@@ -42,6 +48,40 @@ class SPSearchResultsDataSource {
 }
 
 
+// MARK: - Public Methods
+//
+extension SPSearchResultsDataSource {
+
+    /// Executes the fetch request on the store to get objects.
+    ///
+    func performFetch() throws {
+        try resultsController.performFetch()
+    }
+
+    /// Returns the number of fetched objects.
+    ///
+    var numberOfObjects: Int {
+        return resultsController.fetchedObjects?.count ?? 0
+    }
+
+    /// Returns an array of all of the (ReadOnly) Fetched Objects.
+    ///
+    var fetchedObjects: [Note] {
+        return resultsController.fetchedObjects ?? []
+    }
+
+    /// Returns an array of SectionInfo Entitites.
+    ///
+    var sections: [NSFetchedResultsSectionInfo] {
+        return resultsController.sections ?? []
+    }
+
+    func object(at indexPath: IndexPath) -> Note {
+        return resultsController.object(at: indexPath)
+    }
+}
+
+
 // MARK: - Private Methods
 //
 private extension SPSearchResultsDataSource {
@@ -50,6 +90,7 @@ private extension SPSearchResultsDataSource {
     ///
     func refreshPredicate(keyword: String?) {
         resultsController.fetchRequest.predicate = predicate(keyword: keyword)
+        try? resultsController.performFetch()
     }
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
