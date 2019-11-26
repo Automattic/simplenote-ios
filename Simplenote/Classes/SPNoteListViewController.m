@@ -132,14 +132,7 @@
 }
 
 - (void)updateRowHeight {
-    CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
-    CGFloat topTextViewPadding = verticalPadding;
-
-    CGFloat numberLines = [[Options shared] numberOfPreviewLines];
-    CGFloat lineHeight = [[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline] lineHeight];
-
-    self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
-    
+    self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
 

@@ -86,6 +86,8 @@ private extension SPSearchResultsViewController {
     ///
     func refreshStyle() {
         view.backgroundColor = .simplenoteBackgroundColor
+
+        tableView.rowHeight = SPNoteTableViewCell.cellHeight
         tableView.applySimplenotePlainStyle()
     }
 }
@@ -108,8 +110,7 @@ extension SPSearchResultsViewController: UITableViewDataSource {
             fatalError()
         }
 
-        let note = resultsController.object(at: indexPath)
-        configure(cell: cell, note: note)
+        configure(cell: cell, at: indexPath)
 
         return cell
     }
@@ -122,7 +123,9 @@ private extension SPSearchResultsViewController {
 
     /// Sets up a given NoteTableViewCell to display the specified Note
     ///
-    func configure(cell: SPNoteTableViewCell, note: Note) {
+    func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
+        let note = resultsController.object(at: indexPath)
+
         if note.preview == nil {
             note.createPreview()
         }
