@@ -10,6 +10,8 @@ class SPSearchResultsViewController: UIViewController {
     ///
     @IBOutlet private weak var tableView: UITableView!
 
+    /// Main CoreData Context
+    ///
     private var mainContext: NSManagedObjectContext {
         SPAppDelegate.shared().managedObjectContext
     }
