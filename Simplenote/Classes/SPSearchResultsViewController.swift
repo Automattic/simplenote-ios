@@ -45,8 +45,11 @@ extension SPSearchResultsViewController {
     ///
     @objc
     func updateSearchResults(keyword: String) {
-        resultsController.keyword = keyword
-        tableView.reloadData()
+        // Note: Async, otherwise the UI won't feel snappy!
+        DispatchQueue.main.async {
+            self.resultsController.keyword = keyword
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -117,8 +120,22 @@ extension SPSearchResultsViewController: UITableViewDataSource {
             note.createPreview()
         }
 
+        cell.accessibilityLabel = note.titlePreview
+        cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
+
+        cell.accessoryLeftImage = note.published ? UIImage.image(name: .shared) : nil
+        cell.accessoryRightImage = note.pinned ? UIImage.image(name: .pin) : nil;
+        cell.accessoryLeftTintColor = .simplenoteNoteStatusImageColor
+        cell.accessoryRightTintColor = .simplenoteNoteStatusImageColor
+
+        cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
+
+        let keyword = resultsController.keyword
+        if keyword.count > 0 {
+            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
+        }
 
         return cell
     }
