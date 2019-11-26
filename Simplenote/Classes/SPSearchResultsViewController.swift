@@ -116,6 +116,20 @@ extension SPSearchResultsViewController: UITableViewDataSource {
         }
 
         let note = resultsController.object(at: indexPath)
+        configure(cell: cell, note: note)
+
+        return cell
+    }
+}
+
+
+// MARK: - Private Methods
+//
+private extension SPSearchResultsViewController {
+
+    /// Sets up a given NoteTableViewCell to display the specified Note
+    ///
+    func configure(cell: SPNoteTableViewCell, note: Note) {
         if note.preview == nil {
             note.createPreview()
         }
@@ -123,8 +137,8 @@ extension SPSearchResultsViewController: UITableViewDataSource {
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
 
-        cell.accessoryLeftImage = note.published ? UIImage.image(name: .shared) : nil
-        cell.accessoryRightImage = note.pinned ? UIImage.image(name: .pin) : nil;
+        cell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
+        cell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
         cell.accessoryLeftTintColor = .simplenoteNoteStatusImageColor
         cell.accessoryRightTintColor = .simplenoteNoteStatusImageColor
 
@@ -132,11 +146,10 @@ extension SPSearchResultsViewController: UITableViewDataSource {
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        let keyword = resultsController.keyword
-        if keyword.count > 0 {
-            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
+        guard resultsController.keyword.count > 0 else {
+            return
         }
 
-        return cell
+        cell.highlightSubstrings(matching: resultsController.keyword, color: .simplenoteTintColor)
     }
 }
