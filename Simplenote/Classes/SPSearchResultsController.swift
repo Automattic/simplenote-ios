@@ -34,6 +34,10 @@ class SPSearchResultsController {
     ///
     var keyword = String() {
         didSet {
+            guard oldValue != keyword else {
+                return
+            }
+
             refreshPredicate(keyword: keyword)
         }
     }
