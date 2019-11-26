@@ -119,6 +119,19 @@ extension SPSearchResultsViewController: UITableViewDataSource {
 }
 
 
+// MARK: - UITableViewDelegate Methods
+//
+extension SPSearchResultsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presentEditor(note: note(at: indexPath), keyword: resultsController.keyword)
+
+        SPTracker.trackListNoteOpened()
+    }
+}
+
+
 // MARK: - Private Methods
 //
 private extension SPSearchResultsViewController {
@@ -126,7 +139,7 @@ private extension SPSearchResultsViewController {
     /// Sets up a given NoteTableViewCell to display the specified Note
     ///
     func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
-        let note = resultsController.object(at: indexPath)
+        let note = self.note(at: indexPath)
 
         note.ensurePreviewStringsAreAvailable()
 
@@ -147,5 +160,21 @@ private extension SPSearchResultsViewController {
         }
 
         cell.highlightSubstrings(matching: resultsController.keyword, color: .simplenoteTintColor)
+    }
+
+    /// Returns the Note at a given IndexPath
+    ///
+    func note(at indexPath: IndexPath) -> Note {
+        resultsController.object(at: indexPath)
+    }
+
+    func presentEditor(note: Note, keyword: String) {
+        let editorViewController = SPNoteEditorViewController()
+        editorViewController.update(note)
+        editorViewController.searchString = keyword
+
+        /// We're sharing the navigationController with our container VC (expected to be NoteListViewController). Let's disable any custom anymations!
+        navigationController?.delegate = nil
+        navigationController?.pushViewController(editorViewController, animated: true)
     }
 }
