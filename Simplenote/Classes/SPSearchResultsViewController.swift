@@ -32,6 +32,7 @@ class SPSearchResultsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshStyle()
+        refreshRowHeight()
         reset()
     }
 }
@@ -64,9 +65,7 @@ private extension SPSearchResultsViewController {
     }
 
     func reset() {
-        if resultsController.keyword.count > 0 {
-            updateSearchResults(keyword: String())
-        }
+        updateSearchResults(keyword: String())
     }
 }
 
@@ -86,9 +85,13 @@ private extension SPSearchResultsViewController {
     ///
     func refreshStyle() {
         view.backgroundColor = .simplenoteBackgroundColor
-
-        tableView.rowHeight = SPNoteTableViewCell.cellHeight
         tableView.applySimplenotePlainStyle()
+    }
+
+    /// Recalculates the TableView's Row Height
+    ///
+    func refreshRowHeight() {
+        tableView.rowHeight = SPNoteTableViewCell.cellHeight
     }
 }
 
