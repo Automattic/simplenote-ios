@@ -64,12 +64,9 @@ private extension SPSearchResultsViewController {
     }
 
     func reset() {
-        guard resultsController.keyword.count > 0 else {
-            return
+        if resultsController.keyword.count > 0 {
+            updateSearchResults(keyword: String())
         }
-
-        updateSearchResults(keyword: String())
-        tableView.scrollToTop(animated: false)
     }
 }
 
@@ -88,12 +85,8 @@ private extension SPSearchResultsViewController {
     /// Refreshes the UI Style (iOS <13 DarkMode Support)
     ///
     func refreshStyle() {
-        // Refresh the Container's UI
         view.backgroundColor = .simplenoteBackgroundColor
-
-        // Refresh the Table's UI
         tableView.applySimplenotePlainStyle()
-        tableView.reloadData()
     }
 }
 
