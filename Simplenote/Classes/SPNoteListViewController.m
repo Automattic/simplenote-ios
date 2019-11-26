@@ -486,10 +486,8 @@
 - (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if (!note.preview) {
-        [note createPreview];
-    }
+
+    [note ensurePreviewStringsAreAvailable];
 
     UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
 

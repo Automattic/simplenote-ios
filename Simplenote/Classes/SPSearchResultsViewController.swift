@@ -128,9 +128,7 @@ private extension SPSearchResultsViewController {
     func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
         let note = resultsController.object(at: indexPath)
 
-        if note.preview == nil {
-            note.createPreview()
-        }
+        note.ensurePreviewStringsAreAvailable()
 
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
