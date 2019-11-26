@@ -426,6 +426,7 @@
 
     // TODO: Nuke the following as soon as we can!
     if (FeatureManager.advancedSearchEnabled) {
+        [self.resultsViewController reset];
         return;
     }
 

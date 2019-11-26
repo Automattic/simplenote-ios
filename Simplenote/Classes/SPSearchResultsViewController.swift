@@ -33,7 +33,6 @@ class SPSearchResultsViewController: UIViewController {
         super.viewWillAppear(animated)
         refreshStyle()
         refreshRowHeight()
-        reset()
     }
 }
 
@@ -41,6 +40,16 @@ class SPSearchResultsViewController: UIViewController {
 // MARK: - Interface Initialization
 //
 extension SPSearchResultsViewController {
+
+    /// Resets the internal state for reuse:
+    ///     - Search Keyword will be neutralized
+    ///     - TableView's Scroll position will be moved to the top
+    ///
+    @objc
+    func reset() {
+        tableView.scrollToTop(animated: false)
+        updateSearchResults(keyword: String())
+    }
 
     /// Updates the Search Results to match a given keyword
     ///
@@ -55,7 +64,7 @@ extension SPSearchResultsViewController {
 }
 
 
-// MARK: - Private Helpers
+// MARK: - Initialization Helpers
 //
 private extension SPSearchResultsViewController {
 
@@ -63,16 +72,6 @@ private extension SPSearchResultsViewController {
         try? resultsController.performFetch()
         tableView.reloadData()
     }
-
-    func reset() {
-        updateSearchResults(keyword: String())
-    }
-}
-
-
-// MARK: - Interface Initialization
-//
-private extension SPSearchResultsViewController {
 
     /// Sets up the TableView
     ///
