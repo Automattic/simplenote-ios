@@ -10,6 +10,14 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     ///
     @IBOutlet private weak var tableView: UITableView!
 
+    /// Bottom Bar: Sort By Title
+    ///
+    @IBOutlet private weak var sortByTitleLabel: UILabel!
+
+    /// Bottom Bar: Sort By Description
+    ///
+    @IBOutlet private weak var sortByDescriptionLabel: UILabel!
+
     /// Main CoreData Context
     ///
     private var mainContext: NSManagedObjectContext {
@@ -35,6 +43,7 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureBottomBar()
         configureResultsController()
         addKeyboardObservers()
     }
@@ -90,10 +99,21 @@ private extension SPSearchResultsViewController {
         tableView.tableFooterView = UIView()
     }
 
+    /// Sets up the Bottom Sort Order Bar
+    ///
+    func configureBottomBar() {
+        sortByTitleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By component title")
+        sortByDescriptionLabel.text = NSLocalizedString("Alphabetically", comment: "")
+    }
+
     /// Refreshes the UI Style (iOS <13 DarkMode Support)
     ///
     func refreshStyle() {
         view.backgroundColor = .simplenoteBackgroundColor
+
+        sortByTitleLabel.textColor = .simplenoteNoteHeadlineColor
+        sortByDescriptionLabel.textColor = .simplenoteBlue50Color
+
         tableView.applySimplenotePlainStyle()
     }
 

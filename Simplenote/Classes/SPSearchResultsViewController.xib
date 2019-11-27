@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSearchResultsViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="sortByDescriptionLabel" destination="l2V-Gb-6X0" id="dqy-RX-ffP"/>
+                <outlet property="sortByTitleLabel" destination="jHz-GJ-N9C" id="KWm-2z-g2d"/>
                 <outlet property="tableView" destination="d4Q-ou-XCC" id="JjX-l7-InZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="2q0-I1-cGm"/>
             </connections>
@@ -20,23 +22,55 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d4Q-ou-XCC">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="9xf-Qv-hmj"/>
                         <outlet property="delegate" destination="-1" id="tYM-z6-H0o"/>
                     </connections>
                 </tableView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sys-3t-5EO" customClass="SPBlurEffectView" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="801" width="414" height="51"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MVi-qy-bJo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHz-GJ-N9C">
+                                <rect key="frame" x="194" y="10" width="26.5" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2V-Gb-6X0">
+                                <rect key="frame" x="174.5" y="28" width="65" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="jHz-GJ-N9C" firstAttribute="centerX" secondItem="MVi-qy-bJo" secondAttribute="centerX" id="N1e-xO-Szt"/>
+                            <constraint firstItem="jHz-GJ-N9C" firstAttribute="top" secondItem="MVi-qy-bJo" secondAttribute="top" constant="10" id="Z7R-Hj-Qgh"/>
+                            <constraint firstItem="l2V-Gb-6X0" firstAttribute="centerX" secondItem="MVi-qy-bJo" secondAttribute="centerX" id="emP-Pf-1sQ"/>
+                            <constraint firstItem="l2V-Gb-6X0" firstAttribute="top" secondItem="jHz-GJ-N9C" secondAttribute="bottom" constant="2" id="kAf-SY-S4F"/>
+                            <constraint firstAttribute="bottom" secondItem="l2V-Gb-6X0" secondAttribute="bottom" constant="9" id="s45-LK-MXc"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="regular"/>
+                </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="d4Q-ou-XCC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7b7-sl-OHD"/>
                 <constraint firstItem="d4Q-ou-XCC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Biz-tg-6rW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sys-3t-5EO" secondAttribute="trailing" id="D9O-tI-Ex8"/>
                 <constraint firstItem="d4Q-ou-XCC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Uo6-DB-WW0"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="d4Q-ou-XCC" secondAttribute="bottom" id="cLa-em-y1z"/>
+                <constraint firstItem="sys-3t-5EO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Vlx-G4-20b"/>
+                <constraint firstItem="d4Q-ou-XCC" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="cLa-em-y1z"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="sys-3t-5EO" secondAttribute="bottom" constant="10" id="qSt-vj-kxF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="153"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
 </document>
