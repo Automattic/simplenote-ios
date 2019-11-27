@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - SPSearchResultsViewController
 //
-class SPSearchResultsViewController: UIViewController {
+class SPSearchResultsViewController: UIViewController, SPSearchControllerResults {
 
     /// Results TableView
     ///
@@ -22,6 +22,9 @@ class SPSearchResultsViewController: UIViewController {
         SPSearchResultsController(mainContext: mainContext)
     }()
 
+    /// SearchController: Expected to be set externally
+    ///
+    weak var searchController: SPSearchController?
 
     // MARK: - View Lifecycle
 

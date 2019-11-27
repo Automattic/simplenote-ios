@@ -22,10 +22,21 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 }
 
 
+// MARK: - SPSearchControllerResults: To be (optionally) implemented by specialized ResultsViewController(s)
+//
+protocol SPSearchControllerResults: NSObjectProtocol {
+    var searchController: SPSearchController? { get set }
+}
+
+
 // MARK: - Simplenote's Search Controller: Because UIKit's Search Controller is simply unusable
 //
 @objcMembers
 class SPSearchController: NSObject {
+
+    /// Indicates if the SearchController is active (or not!)
+    ///
+    private var active = false
 
     /// ResultsController in which Search Results would be rendered
     ///
@@ -50,6 +61,7 @@ class SPSearchController: NSObject {
         self.resultsViewController = resultsViewController
         super.init()
         setupSearchBar()
+        setupResultsViewController()
     }
 
     /// Dismissess the SearchBar
@@ -66,6 +78,12 @@ class SPSearchController: NSObject {
 //
 private extension SPSearchController {
 
+    func setupResultsViewController() {
+        // Analog to the old school `self.searchDisplayController` UIViewController property, we'll set our own
+        let resultsController = (resultsViewController as? SPSearchControllerResults)
+        resultsController?.searchController = self
+    }
+
     func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
@@ -74,9 +92,16 @@ private extension SPSearchController {
     }
 
     func updateStatus(active: Bool) {
+        guard active != self.active else {
+            return
+        }
+
+        self.active = active
+
         updateSearchBar(showsCancelButton: active)
         updateResultsView(visible: active)
         updateNavigationBar(hidden: active)
+        notifyStatusChanged(active: active)
     }
 
     func updateNavigationBar(hidden: Bool) {
@@ -112,6 +137,18 @@ private extension SPSearchController {
         }
 
         displayResultsViewController()
+    }
+
+    func notifyStatusChanged(active: Bool) {
+        guard let delegate = delegate else {
+            return
+        }
+
+        if active {
+            delegate.searchControllerWillBeginSearch(self)
+        } else {
+            delegate.searchControllerDidEndSearch(self)
+        }
     }
 }
 
@@ -163,7 +200,6 @@ private extension SPSearchController {
             resultsView.topAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
-
 }
 
 
@@ -177,9 +213,6 @@ extension SPSearchController: UISearchBarDelegate {
         }
 
         updateStatus(active: shouldBeginEditing)
-        if shouldBeginEditing {
-            delegate?.searchControllerWillBeginSearch(self)
-        }
 
         return shouldBeginEditing
     }
@@ -190,6 +223,5 @@ extension SPSearchController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss()
-        delegate?.searchControllerDidEndSearch(self)
     }
 }
