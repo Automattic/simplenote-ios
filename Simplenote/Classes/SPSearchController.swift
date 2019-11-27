@@ -44,7 +44,7 @@ class SPSearchController: NSObject {
 
     /// Internal SearchBar Instance
     ///
-    let searchBar = UISearchBar()
+    let searchBar = SPSearchBar()
 
     /// SearchController's Delegate
     ///
@@ -223,5 +223,28 @@ extension SPSearchController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss()
+    }
+}
+
+
+// MARK: - SPSearchBar
+//
+class SPSearchBar: UISearchBar {
+
+    /// **Custom** Behavior:
+    /// Normally resigning FirstResponder status implies all of the button subviews (ie. cancel button) to become disabled. This implies that
+    /// hiding the keyboard makes it impossible to simply tap `Cancel` to exit **Search Mode**.
+    ///
+    /// With this (relatively safe) workaround, we're keeping any UIButton subview(s)  enabled, so that you can just exit Search Mode anytime.
+    ///
+    @discardableResult
+    override func resignFirstResponder() -> Bool {
+        let output = super.resignFirstResponder()
+
+        for button in subviewsOfType(UIButton.self) {
+            button.isEnabled = true
+        }
+
+        return output
     }
 }
