@@ -142,6 +142,25 @@ extension SPSearchResultsViewController: UITableViewDelegate {
 }
 
 
+// MARK: - UIScrollViewDelegate Methods
+//
+extension SPSearchResultsViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let normalizedOffset = scrollView.adjustedContentInset.top + scrollView.contentOffset.y
+        guard normalizedOffset > Constants.minimumScrollThreshold else {
+            return
+        }
+
+        guard let searchBar = searchController?.searchBar, searchBar.isFirstResponder else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
+    }
+}
+
+
 // MARK: - Private Methods
 //
 private extension SPSearchResultsViewController {
@@ -215,4 +234,14 @@ extension SPSearchResultsViewController: KeyboardObservable {
         tableView.contentInset.bottom -= keyboardHeight
         tableView.scrollIndicatorInsets.bottom -= keyboardHeight
     }
+}
+
+
+// MARK: - Constants!
+//
+private struct Constants {
+
+    /// Minimum number of scroll points before we resign the SearchBar as First Responder
+    ///
+    static let minimumScrollThreshold = CGFloat(5)
 }
