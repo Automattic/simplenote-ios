@@ -34,8 +34,11 @@ class SPBlurEffectView: UIVisualEffectView {
         self.init(effect: .simplenoteBlurEffect)
     }
 
-    convenience required init?(coder: NSCoder) {
-        self.init(effect: .simplenoteBlurEffect)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        effect = UIBlurEffect.simplenoteBlurEffect
+        setupTintView()
+        startListeningToNotifications()
     }
 
     init(effect: UIBlurEffect) {
