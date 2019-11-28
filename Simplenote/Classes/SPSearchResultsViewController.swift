@@ -26,6 +26,10 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     ///
     @IBOutlet private weak var sortOrderButton: UIButton!
 
+    /// Haptics!
+    ///
+    private let feedbackGenerator = UIImpactFeedbackGenerator()
+
     /// Active Sorting Mode
     ///
     private var sortMode: SortMode = .alphabeticallyAscending {
@@ -74,6 +78,7 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         super.viewWillAppear(animated)
         refreshStyle()
         refreshRowHeight()
+        feedbackGenerator.prepare()
     }
 
     override func viewDidLayoutSubviews() {
@@ -268,6 +273,7 @@ extension SPSearchResultsViewController {
 
     @IBAction
     func sortOrderWasPressed() {
+        feedbackGenerator.impactOccurred()
         sortMode = sortMode.inverse
     }
 
@@ -284,6 +290,7 @@ extension SPSearchResultsViewController {
         let cancelText = NSLocalizedString("Cancel", comment: "")
         alertController.addCancelActionWithTitle(cancelText)
 
+        feedbackGenerator.impactOccurred()
         present(alertController, animated: true, completion: nil)
     }
 }
