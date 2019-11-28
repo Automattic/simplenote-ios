@@ -10,6 +10,10 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     ///
     @IBOutlet private weak var tableView: UITableView!
 
+    /// Bottom Bar: Background
+    ///
+    @IBOutlet private weak var sortByBackgroundView: SPBlurEffectView!
+
     /// Bottom Bar: Sort By Title
     ///
     @IBOutlet private weak var sortByTitleLabel: UILabel!
@@ -30,9 +34,14 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         SPSearchResultsController(mainContext: mainContext)
     }()
 
+    /// Additional bottom Inset: Meant to keep the keyboard's height!
+    ///
+    private var additionalBottomInset = CGFloat.zero
+
     /// SearchController: Expected to be set externally
     ///
     weak var searchController: SPSearchController?
+
 
     // MARK: - View Lifecycle
 
@@ -52,6 +61,11 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         super.viewWillAppear(animated)
         refreshStyle()
         refreshRowHeight()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        refreshBottomInsets()
     }
 }
 
@@ -238,21 +252,20 @@ extension SPSearchResultsViewController: KeyboardObservable {
             return
         }
 
-        let keyboardHeight = min(endFrame.height, endFrame.width)
-
-        tableView.contentInset.bottom += keyboardHeight
-        tableView.scrollIndicatorInsets.bottom += keyboardHeight
+        additionalBottomInset = min(endFrame.height, endFrame.width)
+        refreshBottomInsets()
     }
 
     func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let beginFrame = beginFrame else {
-            return
-        }
+        additionalBottomInset = CGFloat.zero
+        refreshBottomInsets()
+    }
 
-        let keyboardHeight = min(beginFrame.height, beginFrame.width)
+    func refreshBottomInsets() {
+        let bottomPaddingY = view.frame.height - sortByBackgroundView.frame.origin.y - view.safeAreaInsets.bottom + additionalBottomInset
 
-        tableView.contentInset.bottom -= keyboardHeight
-        tableView.scrollIndicatorInsets.bottom -= keyboardHeight
+        tableView.contentInset.bottom = bottomPaddingY
+        tableView.scrollIndicatorInsets.bottom = bottomPaddingY
     }
 }
 

@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSearchResultsViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="sortByBackgroundView" destination="sys-3t-5EO" id="Ijt-5l-3Gf"/>
                 <outlet property="sortByDescriptionLabel" destination="l2V-Gb-6X0" id="dqy-RX-ffP"/>
                 <outlet property="sortByTitleLabel" destination="jHz-GJ-N9C" id="KWm-2z-g2d"/>
                 <outlet property="tableView" destination="d4Q-ou-XCC" id="JjX-l7-InZ"/>
@@ -47,6 +48,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4YC-NO-k79">
+                                <rect key="frame" x="34" y="11" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="jHz-GJ-N9C" firstAttribute="centerX" secondItem="MVi-qy-bJo" secondAttribute="centerX" id="N1e-xO-Szt"/>
