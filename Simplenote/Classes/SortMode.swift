@@ -45,7 +45,20 @@ enum SortMode: Int, CaseIterable {
         case .modifiedNewest:
             return NSLocalizedString("Modified: Newest", comment: "Sort Mode: Modified Date, descending")
         case .modifiedOldest:
-            return NSLocalizedString("Modified: Oldest", comment: "Sort Mode: Creation Date, ascending")
+            return NSLocalizedString("Modified: Oldest", comment: "Sort Mode: Modified Date, ascending")
+        }
+    }
+
+    /// Returns a description describing the Mode (Family) Kind
+    ///
+    var kind: String {
+        switch self {
+        case .alphabeticallyAscending, .alphabeticallyDescending:
+            return NSLocalizedString("Alphabetically", comment: "Sort Mode: Alphabetically")
+        case .createdNewest, .createdOldest:
+            return NSLocalizedString("Created", comment: "Sort Mode: Creation Date")
+        case .modifiedNewest, .modifiedOldest:
+            return NSLocalizedString("Modified", comment: "Sort Mode: Modified Date")
         }
     }
 }

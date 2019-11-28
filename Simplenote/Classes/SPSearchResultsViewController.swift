@@ -26,6 +26,14 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     ///
     @IBOutlet private weak var sortOrderButton: UIButton!
 
+    /// Active Sorting Mode
+    ///
+    private var sortMode: SortMode = .alphabeticallyAscending {
+        didSet {
+            refreshSortDescriptionLabel()
+        }
+    }
+
     /// Main CoreData Context
     ///
     private var mainContext: NSManagedObjectContext {
@@ -58,6 +66,7 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         configureTableView()
         configureBottomBar()
         configureResultsController()
+        refreshSortDescriptionLabel()
         addKeyboardObservers()
     }
 
@@ -121,7 +130,6 @@ private extension SPSearchResultsViewController {
     ///
     func configureBottomBar() {
         sortByTitleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By component title")
-        sortByDescriptionLabel.text = NSLocalizedString("Alphabetically", comment: "")
     }
 
     /// Refreshes the UI Style (iOS <13 DarkMode Support)
@@ -140,6 +148,12 @@ private extension SPSearchResultsViewController {
     ///
     func refreshRowHeight() {
         tableView.rowHeight = SPNoteTableViewCell.cellHeight
+    }
+
+    /// Updates the Sort Description Label
+    ///
+    func refreshSortDescriptionLabel() {
+        sortByDescriptionLabel.text = sortMode.description
     }
 }
 
@@ -254,10 +268,23 @@ extension SPSearchResultsViewController {
 
     @IBAction
     func sortOrderWasPressed() {
+        NSLog("### Sort Order Pressed")
     }
 
     @IBAction
     func sortModeWasPressed() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
+            alertController.addDefaultActionWithTitle(mode.kind) { _ in
+                self.sortMode = mode
+            }
+        }
+
+        let cancelText = NSLocalizedString("Cancel", comment: "")
+        alertController.addCancelActionWithTitle(cancelText)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -276,7 +303,7 @@ extension SPSearchResultsViewController: KeyboardObservable {
     }
 
     func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        additionalBottomInset = CGFloat.zero
+        additionalBottomInset = .zero
         refreshBottomInsets()
     }
 
