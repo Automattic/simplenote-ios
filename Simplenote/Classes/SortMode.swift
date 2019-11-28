@@ -49,6 +49,25 @@ enum SortMode: Int, CaseIterable {
         }
     }
 
+    /// Returns the receiver's inverse order: Ascending > Descending, Newest > Oldest
+    ///
+    var inverse: SortMode {
+        switch self {
+            case .alphabeticallyAscending:
+                return .alphabeticallyDescending
+            case .alphabeticallyDescending:
+                return .alphabeticallyAscending
+            case .createdNewest:
+                return .createdOldest
+            case .createdOldest:
+                return .createdNewest
+            case .modifiedNewest:
+                return .modifiedOldest
+            case .modifiedOldest:
+                return .modifiedNewest
+        }
+    }
+
     /// Returns a description describing the Mode (Family) Kind
     ///
     var kind: String {

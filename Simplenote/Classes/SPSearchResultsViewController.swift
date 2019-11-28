@@ -268,7 +268,7 @@ extension SPSearchResultsViewController {
 
     @IBAction
     func sortOrderWasPressed() {
-        NSLog("### Sort Order Pressed")
+        sortMode = sortMode.inverse
     }
 
     @IBAction
