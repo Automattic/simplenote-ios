@@ -22,6 +22,10 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     ///
     @IBOutlet private weak var sortByDescriptionLabel: UILabel!
 
+    /// Bottom Bar: Sort Order Button
+    ///
+    @IBOutlet private weak var sortOrderButton: UIButton!
+
     /// Main CoreData Context
     ///
     private var mainContext: NSManagedObjectContext {
@@ -125,6 +129,7 @@ private extension SPSearchResultsViewController {
     func refreshStyle() {
         view.backgroundColor = .simplenoteBackgroundColor
 
+        sortOrderButton.tintColor = .simplenoteBlue50Color
         sortByTitleLabel.textColor = .simplenoteNoteHeadlineColor
         sortByDescriptionLabel.textColor = .simplenoteBlue50Color
 
@@ -239,6 +244,20 @@ private extension SPSearchResultsViewController {
         /// We're sharing the navigationController with our container VC (expected to be NoteListViewController). Let's disable any custom anymations!
         navigationController?.delegate = nil
         navigationController?.pushViewController(editorViewController, animated: true)
+    }
+}
+
+
+// MARK: - Action Handlers
+//
+extension SPSearchResultsViewController {
+
+    @IBAction
+    func sortOrderWasPressed() {
+    }
+
+    @IBAction
+    func sortModeWasPressed() {
     }
 }
 

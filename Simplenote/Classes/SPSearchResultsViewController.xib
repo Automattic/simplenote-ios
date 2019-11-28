@@ -13,6 +13,7 @@
                 <outlet property="sortByBackgroundView" destination="sys-3t-5EO" id="Ijt-5l-3Gf"/>
                 <outlet property="sortByDescriptionLabel" destination="l2V-Gb-6X0" id="dqy-RX-ffP"/>
                 <outlet property="sortByTitleLabel" destination="jHz-GJ-N9C" id="KWm-2z-g2d"/>
+                <outlet property="sortOrderButton" destination="4YC-NO-k79" id="kto-Fd-uya"/>
                 <outlet property="tableView" destination="d4Q-ou-XCC" id="JjX-l7-InZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="2q0-I1-cGm"/>
             </connections>
@@ -31,9 +32,9 @@
                     </connections>
                 </tableView>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sys-3t-5EO" customClass="SPBlurEffectView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="801" width="414" height="51"/>
+                    <rect key="frame" x="0.0" y="800.5" width="414" height="51.5"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MVi-qy-bJo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHz-GJ-N9C">
@@ -48,21 +49,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4YC-NO-k79">
-                                <rect key="frame" x="34" y="11" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4YC-NO-k79">
+                                <rect key="frame" x="0.0" y="0.0" width="56" height="51.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="nJA-aB-aAQ"/>
+                                </constraints>
+                                <state key="normal" image="icon_sort_order"/>
+                                <connections>
+                                    <action selector="sortOrderWasPressed" destination="-1" eventType="touchUpInside" id="exS-9a-3jR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="4YC-NO-k79" firstAttribute="top" secondItem="MVi-qy-bJo" secondAttribute="top" id="2za-9L-owJ"/>
                             <constraint firstItem="jHz-GJ-N9C" firstAttribute="centerX" secondItem="MVi-qy-bJo" secondAttribute="centerX" id="N1e-xO-Szt"/>
+                            <constraint firstAttribute="bottom" secondItem="4YC-NO-k79" secondAttribute="bottom" id="Vwk-ac-lk9"/>
                             <constraint firstItem="jHz-GJ-N9C" firstAttribute="top" secondItem="MVi-qy-bJo" secondAttribute="top" constant="10" id="Z7R-Hj-Qgh"/>
                             <constraint firstItem="l2V-Gb-6X0" firstAttribute="centerX" secondItem="MVi-qy-bJo" secondAttribute="centerX" id="emP-Pf-1sQ"/>
                             <constraint firstItem="l2V-Gb-6X0" firstAttribute="top" secondItem="jHz-GJ-N9C" secondAttribute="bottom" constant="2" id="kAf-SY-S4F"/>
                             <constraint firstAttribute="bottom" secondItem="l2V-Gb-6X0" secondAttribute="bottom" constant="9" id="s45-LK-MXc"/>
+                            <constraint firstItem="4YC-NO-k79" firstAttribute="leading" secondItem="MVi-qy-bJo" secondAttribute="leading" id="y2k-CQ-H1n"/>
                         </constraints>
                     </view>
+                    <gestureRecognizers/>
                     <blurEffect style="regular"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="TmA-fd-spW" appends="YES" id="k12-fp-7ew"/>
+                    </connections>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,5 +91,13 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
+        <tapGestureRecognizer id="TmA-fd-spW">
+            <connections>
+                <action selector="sortModeWasPressed" destination="-1" id="nmh-d2-R2D"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="icon_sort_order" width="24" height="24"/>
+    </resources>
 </document>
