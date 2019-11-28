@@ -34,7 +34,7 @@
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sys-3t-5EO" customClass="SPBlurEffectView" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="800.5" width="414" height="51.5"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MVi-qy-bJo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="51.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHz-GJ-N9C">

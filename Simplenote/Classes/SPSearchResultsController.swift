@@ -4,7 +4,7 @@ import CoreData
 
 // MARK: - SearchResultsController
 //
-class SPSearchResultsController {
+class SPSearchResultsController: NSObject {
 
     /// Batch Size for the FRC's Request
     ///
@@ -16,7 +16,7 @@ class SPSearchResultsController {
         let request = NSFetchRequest<Note>()
         request.entity = NSEntityDescription.entity(forEntityName: Note.classNameWithoutNamespaces, in: mainContext)
         request.fetchBatchSize = resultsBatchSize
-        request.sortDescriptors = sortDescriptors()
+        request.sortDescriptors = sortDescriptors(sortMode: sortMode)
         return request
     }()
 
@@ -42,12 +42,30 @@ class SPSearchResultsController {
         }
     }
 
+    /// Sorting Mode
+    ///
+    var sortMode: SortMode = .alphabeticallyAscending {
+        didSet {
+            guard oldValue != sortMode else {
+                return
+            }
+
+            refreshSortDescriptors(sortMode: sortMode)
+        }
+    }
+
+    /// Closure to be executed whenever the Fetched Objects are updated
+    ///
+    var onDidChange: (() -> Void)?
+
+
     /// Designated Initializer
     ///
     ///  - mainContext: Main Thread's MOC
     ///
     init(mainContext: NSManagedObjectContext) {
         self.mainContext = mainContext
+        super.init()
     }
 }
 
@@ -58,8 +76,9 @@ extension SPSearchResultsController {
 
     /// Executes the fetch request on the store to get objects.
     ///
-    func performFetch() throws {
-        try resultsController.performFetch()
+    func performFetch() {
+        try? resultsController.performFetch()
+        onDidChange?()
     }
 
     func object(at indexPath: IndexPath) -> Note {
@@ -94,7 +113,14 @@ private extension SPSearchResultsController {
     ///
     func refreshPredicate(keyword: String) {
         resultsController.fetchRequest.predicate = predicate(keyword: keyword)
-        try? resultsController.performFetch()
+        performFetch()
+    }
+
+    /// Refreshes the ResultsController's Sort Descriptors
+    ///
+    func refreshSortDescriptors(sortMode: SortMode) {
+        resultsController.fetchRequest.sortDescriptors = sortDescriptors(sortMode: sortMode)
+        performFetch()
     }
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
@@ -113,13 +139,13 @@ private extension SPSearchResultsController {
 
     /// Returns the Active SortDescriptors
     ///
-    func sortDescriptors() -> [NSSortDescriptor] {
+    func sortDescriptors(sortMode: SortMode) -> [NSSortDescriptor] {
         let pinnedKeySelector = #selector(getter: Note.pinned)
         let sortKeySelector: Selector
         var sortSelector: Selector?
         var ascending = false
 
-        switch Options.shared.listSortMode {
+        switch sortMode {
         case .alphabeticallyAscending:
             sortKeySelector = #selector(getter: Note.content)
             sortSelector    = #selector(NSString.caseInsensitiveCompare)

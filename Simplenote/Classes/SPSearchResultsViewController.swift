@@ -32,8 +32,12 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
 
     /// Active Sorting Mode
     ///
-    private var sortMode: SortMode = .alphabeticallyAscending {
-        didSet {
+    private var sortMode: SortMode {
+        get {
+            return resultsController.sortMode
+        }
+        set {
+            resultsController.sortMode = newValue
             refreshSortDescriptionLabel()
         }
     }
@@ -78,7 +82,7 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         super.viewWillAppear(animated)
         refreshStyle()
         refreshRowHeight()
-        feedbackGenerator.prepare()
+        configureFeedbackGenerator()
     }
 
     override func viewDidLayoutSubviews() {
@@ -109,7 +113,6 @@ extension SPSearchResultsViewController {
         // Note: Async, otherwise the UI won't feel snappy!
         DispatchQueue.main.async {
             self.resultsController.keyword = keyword
-            self.tableView.reloadData()
         }
     }
 }
@@ -119,9 +122,14 @@ extension SPSearchResultsViewController {
 //
 private extension SPSearchResultsViewController {
 
+    /// Sets up the FRC
+    ///
     func configureResultsController() {
-        try? resultsController.performFetch()
-        tableView.reloadData()
+        resultsController.onDidChange = { [weak self] in
+            self?.tableView.reloadData()
+        }
+
+        resultsController.performFetch()
     }
 
     /// Sets up the TableView
@@ -135,6 +143,12 @@ private extension SPSearchResultsViewController {
     ///
     func configureBottomBar() {
         sortByTitleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By component title")
+    }
+
+    /// Sets up the Feedback Generator
+    ///
+    func configureFeedbackGenerator() {
+        feedbackGenerator.prepare()
     }
 
     /// Refreshes the UI Style (iOS <13 DarkMode Support)
