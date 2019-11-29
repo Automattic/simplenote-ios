@@ -3,11 +3,11 @@
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
 
-/* Number of found search results */
-"%d Result" = "%d Sonuç";
+/* Number of Characters in a note */
+"%@ Character" = "%@ Karakter";
 
-/* Number of found search results */
-"%d Results" = "%d Sonuç";
+/* Number of Characters in a note */
+"%@ Characters" = "%@ Karakter";
 
 /* Number of words in a note */
 "%@ Word" = "%@ Sözcük";
@@ -15,409 +15,11 @@
 /* Number of words in a note */
 "%@ Words" = "%@ Sözcük";
 
-   Label of accept button on alert dialog */
-"Accept" = "Kabul";
-
-/* No comment provided by engineer. */
-"Account" = "Hesap";
-
-/* Noun - collaborators are other Simplenote users who you chose to share a note with */
-"Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
-
-/* Label on button to add a new tag to a note */
-"Add tag" = "Etiket ekle";
-
-/* Title: No filters applied */
-"All Notes" = "Tüm Notlar";
-
-   Verb, cancel an alert dialog */
-"Cancel" = "İptal";
-
-/* Verb - work with others on a note */
-"Collaborate" = "İşbirliği Yap";
-
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Diğer kişilerin iş birliği kurmasını sağlayın";
-
-/* Noun - collaborators are other Simplenote users who you chose to share a note with */
-"Collaborators" = "Çalışma Arkadaşları";
-
-/* No comment provided by engineer. */
-"collaborators-description" = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
-
-/* Option to make the note list show only 1 line of text. The default is 3. */
-"Condensed Note List" = "Sıkıştırılmış Not Listesi";
-
-/* No comment provided by engineer. */
-"Create a new note" = "Yeni not oluştur";
-
-/* No comment provided by engineer. */
-"Current Collaborators" = "Şu Anki Çalışma Arkadaşları";
-
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Bu not bir başka aygıtta silindi.";
-
-/* No comment provided by engineer. */
-"Dismiss keyboard" = "Klavyeyi kapat";
-
-   Verb: Close current view */
-"Done" = "Bitti";
-
-/* Verb - empty causes all notes to be removed permenently from the trash */
-"Empty" = "Boş";
-
-/* Remove all notes from the trash */
-"Empty trash" = "Çöpü boşalt";
-
-/* Noun - the version history of a note */
-"History" = "Geçmiş";
-
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Notu önceki sürüme geri yükle";
-
-/* Action - view the version history of a note */
-"History..." = "Geçmiş…";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
-"Menu" = "Menü";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Not seçeneklerini göster";
-
-/* No comment provided by engineer. */
-"New note" = "Yeni not";
-
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "Not Yok";
-
-/* Message shown when no notes match a search string */
-"No Results" = "Sonuç Yok";
-
-/* No comment provided by engineer. */
-"Note not published" = "Not yayınlanmadı";
-
-/* Title: No filters applied */
-"Notes" = "Notlar";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Geçerli notu kapat";
-
-/* Instant passcode lock timeout */
-"Off" = "Kapalı";
-
-/* Dismisses an AlertController */
-"OK" = "Tamam";
-
-/* Theme: Light */
-"On" = "Açık";
-
-/* Select a note to view in the note editor */
-"Open note" = "Notu aç";
-
-/* A 4-digit code to lock the app when it is closed */
-"Passcode" = "Geçiş kodu";
-
-/* Action to mark a note as pinned */
-"Pin note" = "Notu iğnele";
-
-/* Denotes when note is pinned to the top of the note list */
-"Pin to Top" = "Üste İğnele";
-
-"Pin toggle" = "İğneyi aç/kapat";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "İğnelendi";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
-"Publish" = "Yayınla";
-
-/* Action which published a note to a web page */
-"Publish note" = "Notu yayınla";
-
-"Publish toggle" = "Yayınlamayı aç/kapat";
-
-/* No comment provided by engineer. */
-"Published" = "Yayınlandı";
-
-/* Message shown when a note is in the processes of being published */
-"Publishing..." = "Yayınlanıyor…";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
-
-/* Rename a tag */
-"Rename" = "Yeniden Adlandır";
-
-/* Restore a note from the trash, markking it as undeleted */
-"Restore" = "Geri Yükle";
-
-/* Restore a note to a previous version */
-"Restore Note" = "Notu Geri Yükle";
-
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Gönder";
-
-/* Privacy Settings */
-"Settings" = "Ayarlar";
-
-/* No comment provided by engineer. */
-"Share note" = "Notu paylaş";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Geçerli notun içeriğini paylaş";
-
-/* UI region to the left of the note list which shows all of a users tags */
-"Sidebar" = "Kenar çubuğu";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Geçerli nota etiket ekle";
-
-/* No comment provided by engineer. */
-"tag-delete-accessibility-hint" = "Geçerli nottan etiket kaldır";
-
-/* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "Bugün";
-
-"Toggle tag sidebar" = "Etiket kenar çubuğunu aç/kapat";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Geçerli notu çöp kutusuna taşı";
-
-/* Title: Trash Tag is selected */
-"Trash-noun" = "Çöpe At";
-
-/* Title: Trash Tag is selected */
-"Trash-verb" = "Çöpe At";
-
-/* Action to mark a note as unpinned */
-"Unpin note" = "Notu kaldır";
-
-/* Action which unpublishes a note */
-"Unpublish note" = "Notu yayından kaldır";
-
-/* Message shown when a note is in the processes of being unpublished */
-"Unpublishing..." = "Yayından kaldırılıyor...";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Sürüm";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Bu sürümü değiştir";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Sürüm alınıyor";
-
-/* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "Dün";
-
-"welcomeNote-iOS" = "iOS için Simplenote’a hoş geldiniz!
-
-Yeni bir not eklemek için artı düğmesine dokunun.
-
-Notlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.
-
-Not listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.
-
-Sol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.
-
-Gerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.
-
-Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
-
-/* Error for bad email or password */
-"Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
-
-/* Password Reset Action */
-"Password" = "Parola";
-
-/* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Parola en az 6 karakter olmalıdır.";
-
-   SignUp Interface Title */
-"Sign Up" = "Kaydol";
-
-/* Message displayed when email address is invalid */
-"Your email address is not valid" = "E-posta adresiniz geçerli değil.";
-
-/* User Authenticated */
-"Authenticated" = "Kimliği Doğrulandı";
-
-   Display internal debug status */
-"Debug" = "Hata ayıklama";
-
-/* Number of objects enqueued for processing */
-"Enqueued" = "Sıraya Alındı";
-
-/* Last Message timestamp */
-"LastSeen" = "Son Görülen";
-
-/* Month and day date formatter */
-"MMM d" = "AAA g";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "g, AAA, sa:dkdk sn";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "g, AAA, yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "AAA yyyy";
-
-/* Number of changes pending to be sent */
-"Pendings" = "Bekleyenler";
-
-/* Reachs Internet */
-"Reachability" = "Erişilebilirlik";
-
-
-"Touch ID" = "Touch ID";
-
-
-"WebSocket" = "WebSocket";
-
-/* No comment provided by engineer. */
-"Security" = "Güvenlik";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "Beğendim";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "Daha İyi Olabilir";
-
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "Görüşünüzü Paylaşın";
-
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "Hayır, teşekkürler";
-
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
-"Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
-
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "Geri Bildirim Gönder";
-
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "İletişim";
-
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "E-posta adresiniz:";
-
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "Nasıl yardımcı olabiliriz?";
-
-/* Sign in error message */
-"An error was encountered while signing in." = "Oturum açılırken bir hata oluştu.";
-
-/* Empty Trash Warning */
-"Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
-
-/* Title of Back button for Markdown preview */
-"Back" = "Geri";
-
-/* No comment provided by engineer. */
-"Collaboration has moved" = "İşbirliği taşındı";
-
-/* Alert dialog title displayed on sign in error */
-"Couldn't Sign In" = "Oturum Açılamadı";
-
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Sil";
-
-/* Verb: Delete notes and log out of the app */
-"Delete Notes" = "Notları Sil";
-
-/* No comment provided by engineer. */
-"Disable Markdown formatting" = "Markdown biçimlendirmesini devre dışı bırak";
-
-/* Edit Tags Action: Visible in the Tags List */
-"Edit" = "Düzenle";
-
-/* No comment provided by engineer. */
-"Enable Markdown formatting" = "Markdown biçimlendirmesini etkinleştir";
-
-/* Offer to enable Face ID support if available and passcode is on. */
-"Face ID" = "Yüz Kimliği";
-
-
-"Markdown" = "Markdown";
-
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown düğmesi";
-
-   Cancels Empty Trash Action */
-"No" = "Hayır";
-
-/* Error message displayed when user has not verified their WordPress.com account */
-"Please activate your WordPress.com account via email and try again." = "Lütfen WordPress.com hesabınızı e-posta aracılığıyla etkinleştirin ve tekrar deneyin.";
-
-/* Title of Markdown preview screen */
-"Preview" = "Önizleme";
-
-   Using Search instead of Back if user is searching */
-"Search" = "Ara";
-
-/* No comment provided by engineer. */
-"Sharing notes is now accessed through the action menu from the toolbar." = "Notların paylaşılmasına şimdi araç çubuğundaki işlem menüsünden erişilebilir.";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
-
-/* No comment provided by engineer. */
-"Tags" = "Etiketler";
-
-/* Alert title displayed in settings when an account has unsynced notes */
-"Unsynced Notes Detected" = "Senkronize Edilmemiş Notlar Tespit Edildi";
-
-/* Visit app.simplenote.com in the browser */
-"Visit Web App" = "Web Uygulamasını Ziyaret Et";
-
-   Proceeds with the Empty Trash OP */
-"Yes" = "Evet";
-
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Etiketle…";
-
-/* This is one of the buttons we display when prompting the user for a review */
-"Share" = "Paylaş";
-
-/* Allows selecting notes with no tags */
-"Untagged Notes" = "Etiketsiz Notlar";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Sort Order" = "Sıralama";
-
-/* Option to disable Analytics. */
-"Share Analytics" = "Analizleri paylaş";
-
-/* Message for alert when user tries to send feedback without an email address */
-"Email" = "E-posta";
-
-/* Option to enable the dark app theme. */
-"Theme" = "Tema";
-
-/* The Simplenote blog */
-"Blog" = "Blog";
-
-   Display internal debug status */
-"Error" = "Hata";
-
-/* No comment provided by engineer. */
-"Appearance" = "Görünüm";
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ Karakter";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ Karakter";
+/* Number of found search results */
+"%d Result" = "%d Sonuç";
+
+/* Number of found search results */
+"%d Results" = "%d Sonuç";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 Dakika";
@@ -443,11 +45,36 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Display app about screen */
 "About" = "Hakkında";
 
+/* Accept Action
+   Label of accept button on alert dialog */
+"Accept" = "Kabul";
+
+/* No comment provided by engineer. */
+"Account" = "Hesap";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Etiketle…";
+
+/* Label on button to add a new tag to a note */
+"Add tag" = "Etiket ekle";
+
+/* Title: No filters applied */
+"All Notes" = "Tüm Notlar";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Alfabetik: A-Z";
 
 /* Sort Mode: Alphabetically, descending */
 "Alphabetically: Z-A" = "Alfabetik: Z'den A'ya";
+
+/* Sign in error message */
+"An error was encountered while signing in." = "Oturum açılırken bir hata oluştu.";
+
+/* No comment provided by engineer. */
+"Appearance" = "Görünüm";
 
 /* Other Simplenote apps */
 "Apps" = "Uygulamalar";
@@ -455,14 +82,23 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Automattic hiring description */
 "Are you a developer? Automattic is hiring." = "Bir geliştirici misiniz? Automattic yeni çalışanlarını arıyor.";
 
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
+
 /* Message for alert when user tries to send feedback without an email address */
 "Are you sure you want to send without your email? We won't be able reply to you." = "E-posta adresiniz olmadan göndermek istediğinizden emin misiniz? Sizi yanıtlayamayız.";
 
 /* Title for prompt when user tries to close the feedback view */
 "Are you sure?" = "Emin misiniz?";
 
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "dosya ekle";
+/* User Authenticated */
+"Authenticated" = "Kimliği Doğrulandı";
+
+/* Title of Back button for Markdown preview */
+"Back" = "Geri";
+
+/* The Simplenote blog */
+"Blog" = "Blog";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
@@ -470,17 +106,54 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* No comment provided by engineer. */
 "Can't Access." = "Erişilemiyor.";
 
+/* Cancel Action
+   Verb, cancel an alert dialog */
+"Cancel" = "İptal";
+
 /* No comment provided by engineer. */
 "Choose Photo" = "Fotoğraf Seç";
 
 /* No comment provided by engineer. */
 "Close" = "Kapat";
 
+/* Verb - work with others on a note */
+"Collaborate" = "İşbirliği Yap";
+
+/* No comment provided by engineer. */
+"Collaboration has moved" = "İşbirliği taşındı";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Collaborators" = "Çalışma Arkadaşları";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Sıkıştırılmış Not Listesi";
+
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"Contact" = "İletişim";
+
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Katılımda Bulunun";
 
+/* This is one of the buttons we display inside of the prompt to review the app */
+"Could Be Better" = "Daha İyi Olabilir";
+
+/* Error for bad email or password */
+"Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+"Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "Oturum Açılamadı";
+
 /* Siri Suggestion to create a New Note */
 "Create a New Note" = "Yeni Not Oluştur";
+
+/* No comment provided by engineer. */
+"Create a new note" = "Yeni not oluştur";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Oluşturma Tarihi: En yeni";
@@ -488,8 +161,37 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Sort Mode: Creation Date, ascending */
 "Created: Oldest" = "Oluşturma Tarihi: Eski";
 
+/* No comment provided by engineer. */
+"Current Collaborators" = "Şu Anki Çalışma Arkadaşları";
+
 /* Theme: Dark */
 "Dark" = "Koyu";
+
+/* Debug Screen Title
+   Display internal debug status */
+"Debug" = "Hata ayıklama";
+
+/* Trash (verb) - the action of deleting a note */
+"Delete" = "Sil";
+
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "Notları Sil";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "Markdown biçimlendirmesini devre dışı bırak";
+
+/* No comment provided by engineer. */
+"Dismiss keyboard" = "Klavyeyi kapat";
+
+/* Done toolbar button
+   Verb: Close current view */
+"Done" = "Bitti";
+
+/* Edit Tags Action: Visible in the Tags List */
+"Edit" = "Düzenle";
+
+/* Email TextField Placeholder */
+"Email" = "E-posta";
 
 /* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
 "Email Address" = "E-posta Adresi";
@@ -497,20 +199,59 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Email Taken Alert Title */
 "Email in use" = "E-posta kullanılıyor";
 
+/* Verb - empty causes all notes to be removed permenently from the trash */
+"Empty" = "Boş";
+
+/* Remove all notes from the trash */
+"Empty trash" = "Çöpü boşalt";
+
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "Markdown biçimlendirmesini etkinleştir";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "Sıraya Alındı";
+
+/* No comment provided by engineer. */
+"Error" = "Hata";
+
 /* No comment provided by engineer. */
 "Error uploading." = "Yükleme hatası.";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "Yüz Kimliği";
 
 /* Password Reset Action */
 "Forgotten password?" = "Parolayı mı unuttunuz?";
 
+/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
+"Great! Could you leave us a nice review?\nIt really helps." = "Great! Could you leave us a nice review?\nIt really helps.";
+
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Analiz aracımızla kullanım verilerini paylaşarak Simplenote'u iyileştirmemize yardımcı olun.";
+
+/* Noun - the version history of a note */
+"History" = "Geçmiş";
+
+/* Action - view the version history of a note */
+"History..." = "Geçmiş…";
+
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"How can we help?" = "Nasıl yardımcı olabiliriz?";
+
+/* This is one of the buttons we display inside of the prompt to review the app */
+"I Like It" = "Beğendim";
 
 /* Title for alert that a user has entered an invalid email address */
 "Invalid Email Address." = "Geçersiz E-posta Adresi";
 
+/* Last Message timestamp */
+"LastSeen" = "Son Görülen";
+
 /* Learn More Action */
 "Learn more" = "Daha fazlasını öğrenin";
+
+/* This is one of the buttons we display when prompting the user for a review */
+"Leave a Review" = "Görüşünüzü Paylaşın";
 
 /* Theme: Light */
 "Light" = "Açık";
@@ -518,17 +259,41 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Kilitlenme Zaman Aşımı";
 
+/* Log In Action
+   Login Action
+   LogIn Action
    LogIn Interface Title */
 "Log In" = "Giriş yap";
 
-/* Presents the regular Email signin flow */
-"Log in with email" = "E-postayla oturum aç";
+/* Log out of the active account in the app */
+"Log Out" = "Çıkış yap";
 
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "WordPress.com ile oturum aç";
 
-/* Log out of the active account in the app */
-"Log Out" = "Çıkış yap";
+/* Presents the regular Email signin flow */
+"Log in with email" = "E-postayla oturum aç";
+
+/* Month and day date formatter */
+"MMM d" = "AAA g";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "g, AAA, sa:dkdk sn";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "g, AAA, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "AAA yyyy";
+
+/* Special formatting that can be turned on for notes */
+"Markdown" = "Markdown";
+
+/* Switch which marks a note as using Markdown formatting or not */
+"Markdown toggle" = "Markdown düğmesi";
+
+/* Terminoligy used for sidebar UI element where tags are displayed */
+"Menu" = "Menü";
 
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Değiştirme Tarihi: En yeni";
@@ -536,8 +301,15 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Sort Mode: Creation Date, ascending */
 "Modified: Oldest" = "Değiştirme Tarihi: Eski";
 
+/* Label to create a new note */
+"New note" = "Yeni not";
+
 /* Empty Note Placeholder */
 "New note..." = "Yeni not...";
+
+/* Alert's Cancel Action
+   Cancels Empty Trash Action */
+"No" = "Hayır";
 
 /* Title for alert when user tires to send feedback without an email address */
 "No Email." = "E-posta Yok.";
@@ -548,16 +320,74 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Title for message when user tries to send feedback without any text */
 "No Message." = "Mesaj Yok.";
 
-"Open "(preview)"" = ""(önizleme)" Öğesini Aç";
+/* Message shown in note list when no notes are in the current view */
+"No Notes" = "Not Yok";
+
+/* Message shown when no notes match a search string */
+"No Results" = "Sonuç Yok";
+
+/* This is one of the buttons we display when prompting the user for a review */
+"No Thanks" = "Hayır, teşekkürler";
+
+/* No comment provided by engineer. */
+"Note not published" = "Not yayınlanmadı";
+
+/* Plural form of notes */
+"Notes" = "Notlar";
+
+/* Dismisses an AlertController */
+"OK" = "Tamam";
+
+/* Instant passcode lock timeout */
+"Off" = "Kapalı";
+
+/* No comment provided by engineer. */
+"On" = "Açık";
+
+/* Siri Suggestion to open a specific Note */
+"Open \"(preview)\"" = "\"(önizleme)\" Öğesini Aç";
 
 /* Siri Suggestion to open our app */
 "Open Simplenote" = "Simplenote'u Aç";
 
+/* Select a note to view in the note editor */
+"Open note" = "Notu aç";
+
 /* AlertController's Payload for the broken Sort Options Fix */
 "Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Güncellememiz, notlarınızın görünme sırasını değiştirmiş olabilir. Sıralama ayarlarını gözden geçirmek ister misiniz?";
 
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "Geçiş kodu";
+
+/* Password TextField Placeholder */
+"Password" = "Parola";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "Parola en az 4 karakter içermelidir.";
+
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "Parola en az 6 karakter olmalıdır.";
+
+/* Number of changes pending to be sent */
+"Pendings" = "Bekleyenler";
+
 /* Pin (verb) - the action of Pinning a note */
 "Pin" = "Sabitle";
+
+/* Action to mark a note as pinned */
+"Pin note" = "Notu iğnele";
+
+/* Denotes when note is pinned to the top of the note list */
+"Pin to Top" = "Üste İğnele";
+
+/* Switch which marks a note as pinned or unpinned */
+"Pin toggle" = "İğneyi aç\/kapat";
+
+/* Pinned notes are stuck to the note of the note list */
+"Pinned" = "İğnelendi";
+
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "Lütfen WordPress.com hesabınızı e-posta aracılığıyla etkinleştirin ve tekrar deneyin.";
 
 /* Message for alert that user has entered an invalid email address */
 "Please check your email address, it appears to be invalid." = "E-posta adresiniz geçersiz gibi görünüyor. Lütfen e-posta adresinizi kontrol edin.";
@@ -565,11 +395,57 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Message for alert when user tires to send feedback without any text */
 "Please enter a message." = "Lütfen bir mesaj girin.";
 
+/* Title of Markdown preview screen */
+"Preview" = "Önizleme";
+
 /* Simplenote privacy policy */
 "Privacy Policy" = "Gizlilik Politikası";
 
 /* Privacy Settings */
 "Privacy Settings" = "Gizlilik Ayarları";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+"Publish" = "Yayınla";
+
+/* Action which published a note to a web page */
+"Publish note" = "Notu yayınla";
+
+/* Switch which marks a note as published or unpublished */
+"Publish toggle" = "Yayınlamayı aç\/kapat";
+
+/* No comment provided by engineer. */
+"Published" = "Yayınlandı";
+
+/* Message shown when a note is in the processes of being published */
+"Publishing..." = "Yayınlanıyor…";
+
+/* Reachs Internet */
+"Reachability" = "Erişilebilirlik";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
+
+/* Rename a tag */
+"Rename" = "Yeniden Adlandır";
+
+/* Restore a note from the trash, markking it as undeleted */
+"Restore" = "Geri Yükle";
+
+/* Restore a note to a previous version */
+"Restore Note" = "Notu Geri Yükle";
+
+/* Search Placeholder
+   Using Search instead of Back if user is searching */
+"Search" = "Ara";
+
+/* No comment provided by engineer. */
+"Security" = "Güvenlik";
+
+/* Verb - send the content of the note by email, message, etc */
+"Send" = "Gönder";
+
+/* This is one of the buttons we display when prompting the user for a review */
+"Send Feedback" = "Geri Bildirim Gönder";
 
 /* For debugging use */
 "Send a Test Crash" = "Yanıt Vermeyen Test İletisi Gönder";
@@ -577,7 +453,33 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Label that is shown when feedback from the user is sending */
 "Sending..." = "Gönderiliyor...";
 
+/* Title of options screen */
+"Settings" = "Ayarlar";
 
+/* Share (verb) - the action of Sharing a note */
+"Share" = "Paylaş";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "Analizleri paylaş";
+
+/* No comment provided by engineer. */
+"Share note" = "Notu paylaş";
+
+/* No comment provided by engineer. */
+"Sharing notes is now accessed through the action menu from the toolbar." = "Notların paylaşılmasına şimdi araç çubuğundaki işlem menüsünden erişilebilir.";
+
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Kenar çubuğu";
+
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
+"Sign Up" = "Kaydol";
+
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
+
+/* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
 /* Authentication Error Alert Title */
@@ -586,8 +488,15 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Option to sort tags alphabetically. The default is by manual ordering. */
 "Sort Alphabetically" = "Alfabetik Olarak Sırala";
 
+/* Option to sort notes in the note list alphabetically. The default is by modification date
+   Sort Order for the Notes List */
+"Sort Order" = "Sıralama";
+
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistem Varsayılanı";
+
+/* No comment provided by engineer. */
+"Tags" = "Etiketler";
 
 /* No comment provided by engineer. */
 "Take Photo" = "Fotoğraf Çek";
@@ -607,17 +516,50 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "Not tutmanın en basit yolu.";
 
+/* Option to enable the dark app theme. */
+"Theme" = "Tema";
+
 /* Simplenote Themes */
 "Themes" = "Temalar";
 
 /* No comment provided by engineer. */
 "There was an error sending your feedback, please try again." = "Geri bildiriminiz gönderilirken bir hata oluştu, lütfen tekrar deneyin.";
 
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Bugün";
+
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Etiket kenar çubuğunu aç\/kapat";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Touch ID";
+
+/* Title: Trash Tag is selected */
+"Trash" = "Çöpe At";
+
+/* Trash (verb) - the action of deleting a note */
+"Trash" = "Çöpe At";
+
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Sabitlemeyi kaldır";
 
+/* Action to mark a note as unpinned */
+"Unpin note" = "Notu kaldır";
+
+/* Action which unpublishes a note */
+"Unpublish note" = "Notu yayından kaldır";
+
+/* Message shown when a note is in the processes of being unpublished */
+"Unpublishing..." = "Yayından kaldırılıyor...";
+
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Senkronize Edilmemiş Notlar Tespit Edildi";
+
 /* Title: Untagged Notes are onscreen */
 "Untagged" = "Etiketlenmemiş";
+
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "Etiketsiz Notlar";
 
 /* No comment provided by engineer. */
 "Use Latest Photo" = "En Son Fotoğrafı Kullan";
@@ -625,8 +567,14 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* A user's Simplenote account */
 "Username" = "Kullanıcı adı";
 
+/* Represents a snapshot in time for a note */
+"Version" = "Sürüm";
+
 /* App version number */
 "Version %@" = "Sürüm %@";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Web Uygulamasını Ziyaret Et";
 
 /* No comment provided by engineer. */
 "We can't access your photos, please ensure this application has access in Settings." = "Fotoğraflarınıza erişemiyoruz. Lütfen Ayarlar'da bu uygulamanın erişimi olduğundan emin olun.";
@@ -640,15 +588,76 @@ Simplenote’u Mac’inizde, Android aygıtınızda veya http://simplenote.com a
 /* Generic error */
 "We're having problems. Please try again soon." = "Sorun yaşanıyor. Lütfen kısa bir süre sonra tekrar deneyin.";
 
+/* WebSocket Status */
+"WebSocket" = "WebSocket";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
+
 /* This is the string we display when prompting the user to review the app */
 "What do you think about WordPress?" = "WordPress hakkında ne düşünüyorsunuz?";
 
 /* Work at Automattic */
 "Work With Us" = "Bizimle Çalışın";
 
+/* Alert's Accept Action
+   Proceeds with the Empty Trash OP */
+"Yes" = "Evet";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Dün";
+
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Your Email:" = "E-posta adresiniz:";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid" = "E-posta adresiniz geçerli değil.";
+
 /* Message for prompt when user tries to close feedback view after having entered text */
 "Your message will be lost." = "Mesajınız kaybolacak.";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Parola en az 4 karakter içermelidir.";
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "dosya ekle";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"Enable others to collaborate" = "Diğer kişilerin iş birliği kurmasını sağlayın";
+
+/* No comment provided by engineer. */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
+
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device." = "Bu not bir başka aygıtta silindi.";
+
+/* Accessibility hint on button which shows the history of a note */
+"Restore note to previous version" = "Notu önceki sürüme geri yükle";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"Show options for note" = "Not seçeneklerini göster";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"Close current note" = "Geçerli notu kapat";
+
+/* Accessibility hint on share button */
+"Share the content of the current note" = "Geçerli notun içeriğini paylaş";
+
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Geçerli nota etiket ekle";
+
+/* No comment provided by engineer. */
+"Remove tag from the current note" = "Geçerli nottan etiket kaldır";
+
+/* Accessibility hint on button which moves a note to the trash */
+"Move the current note to trash" = "Geçerli notu çöp kutusuna taşı";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"Connect to the Internet to Access Previous Versions" = "Önceki Sürümlere Erişmek için İnternet'e bağlanın";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"Switch to this version" = "Bu sürümü değiştir";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching version" = "Sürüm alınıyor";
+
+/* A welcome note for new iOS users */
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "iOS için Simplenote’a hoş geldiniz!\n\nYeni bir not eklemek için artı düğmesine dokunun.\n\nNotlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.\n\nNot listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.\n\nSol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.\n\nGerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.\n\nSimplenote’u Mac’inizde, Android aygıtınızda veya http:\/\/simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
 
