@@ -48,10 +48,10 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         SPAppDelegate.shared().managedObjectContext
     }
 
-    /// Results DataSource
+    /// Results Controller
     ///
-    private lazy var resultsController: SPSearchResultsController = {
-        SPSearchResultsController(mainContext: mainContext)
+    private lazy var resultsController: SPResultsController = {
+        SPResultsController(mainContext: mainContext)
     }()
 
     /// Additional bottom Inset: Meant to keep the keyboard's height!
