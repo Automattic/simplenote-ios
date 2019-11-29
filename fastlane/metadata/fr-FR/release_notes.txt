@@ -1,3 +1,3 @@
-- Résolution d'un bug qui masquait la barre d'état lorsque les paramètres de Simplenote étaient affichés
-- Résolution d'un bug induisant un dysfonctionnement de la fonction Ignorer par glissement du doigt dans l'éditeur
-- Résolution d'un bug qui permettait à Aperçu et Accéder d'ouvrir des notes dans la Corbeille.
+- Résolution d'un bug qui empêchait les utilisateurs de repositionner le point d'insertion dans le champ Adresse e-mail (connexion / inscription).
+- Résolution d'un bug qui provoquait la fermeture involontaire de l'interface utilisateur de prévisualisation Markdown.
+- Résolution d'un problème qui risquait d'entraîner l'arrêt de l'application suite à une combinaison spécifique d'émojis.
