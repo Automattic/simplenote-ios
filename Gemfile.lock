@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: c8007b8c11c282ea3e9f97f722d1971271959770
-  tag: 0.8.0
+  revision: 63806fe4d1c870c16c7ab7114959dd420152e4b0
+  tag: 0.8.1
   specs:
-    fastlane-plugin-wpmreleasetoolkit (0.8.0)
+    fastlane-plugin-wpmreleasetoolkit (0.8.1)
       activesupport (~> 4)
       chroma (= 0.2.0)
       diffy (~> 3.3)
@@ -182,7 +182,7 @@ GEM
     nap (1.1.0)
     naturally (2.2.0)
     netrc (0.11.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     octokit (4.14.0)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -190,7 +190,7 @@ GEM
     optimist (3.0.0)
     options (2.3.2)
     os (1.0.1)
-    parallel (1.18.0)
+    parallel (1.19.1)
     plist (3.5.0)
     progress_bar (1.3.0)
       highline (>= 1.6, < 3)
