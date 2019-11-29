@@ -104,6 +104,7 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     [super didMoveToParentViewController:parent];
     [self ensureFirstRowIsVisible];
+    [self ensureTransitionControllerIsInitialized];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -131,7 +132,22 @@
     }
 }
 
-- (void)updateRowHeight {
+
+- (void)ensureTransitionControllerIsInitialized
+{
+    if (_transitionController != nil) {
+        return;
+    }
+
+    NSAssert(self.tableView != nil, @"tableView should be initialized before this method runs");
+    NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
+
+    self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
+    self.transitionController.delegate = self;
+}
+
+- (void)updateRowHeight
+{
     self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
@@ -630,11 +646,7 @@
     [SPTracker trackListNoteOpened];
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    if (!_transitionController) {
-        self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
-        self.transitionController.delegate = self;
-    }
-        
+
     BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
     self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
     editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
