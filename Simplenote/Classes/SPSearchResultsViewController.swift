@@ -16,10 +16,10 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
         SPAppDelegate.shared().managedObjectContext
     }
 
-    /// Results DataSource
+    /// Results Controller
     ///
-    private lazy var resultsController: SPSearchResultsController = {
-        SPSearchResultsController(mainContext: mainContext)
+    private lazy var resultsController: SPResultsController = {
+        SPResultsController(mainContext: mainContext)
     }()
 
     /// SearchController: Expected to be set externally
