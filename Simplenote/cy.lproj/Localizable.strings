@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-11-22 16:19:52+0000 */
 /* Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: cy_GB */
@@ -10,15 +10,15 @@
 "%d Results" = "%d Canlyniad ";
 
 /* Number of words in a note */
-"%d Word" = "%d Gair";
+"%@ Word" = "%@ Gair";
 
 /* Number of words in a note */
-"%d Words" = "%d Gair";
+"%@ Words" = "%@ Gair";
 
-/* Label of accept button on alert dialog */
+   Label of accept button on alert dialog */
 "Accept" = "Derbyn";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "Cyfrif";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -27,10 +27,10 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ychwanegu tag";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "Pob Nodyn";
 
-/* No comment provided by engineer. */
+   Verb, cancel an alert dialog */
 "Cancel" = "Canslo";
 
 /* Verb - work with others on a note */
@@ -60,11 +60,8 @@
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Cau'r bysellfwrdd";
 
-/* No comment provided by engineer. */
+   Verb: Close current view */
 "Done" = "Gorffen";
-
-/* Re-order or delete tags */
-"Edit Tags" = "Golygu Tagiau";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Gwagio";
@@ -99,19 +96,16 @@
 /* No comment provided by engineer. */
 "Note not published" = "Nodyn heb ei gyhoeddi";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "Cyhoeddwyd y nodyn";
-
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Notes" = "Nodiadau";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
 "notes-accessibility-hint" = "Cau'r nodyn cyfredol";
 
-/* No comment provided by engineer. */
+/* Instant passcode lock timeout */
 "Off" = "I ffwrdd";
 
-/* No comment provided by engineer. */
+/* Dismisses an AlertController */
 "OK" = "IAWN";
 
 /* No comment provided by engineer. */
@@ -135,14 +129,8 @@
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "Piniwyd";
 
-/* No comment provided by engineer. */
-"Preferences" = "Dewisiadau";
-
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Cyhoeddi";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "Wedi methu cyhoeddi";
 
 /* Action which published a note to a web page */
 "Publish note" = "Cyhoeddi nodyn";
@@ -150,7 +138,7 @@
 /* Switch which marks a note as published or unpublished */
 "Publish toggle" = "Cyhoeddi togl";
 
-/* Confirmation shown when a note is published */
+/* No comment provided by engineer. */
 "Published" = "Cyhoeddwyd";
 
 /* Message shown when a note is in the processes of being published */
@@ -158,12 +146,6 @@
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Cael gwared â'r holl nodiadau o'r sbwriel";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "Tynnu'r tag";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "Tynnu'r tag?";
 
 /* Rename a tag */
 "Rename" = "Ailenwi";
@@ -183,23 +165,17 @@
 /* No comment provided by engineer. */
 "Share note" = "Rhannu nodyn";
 
-/* Accessibility hint on button to share note */
+/* Accessibility hint on share button */
 "share-accessibility-hint" = "Rhannu cynnwys y nodyn cyfredol";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Bar ochr";
 
-/* Sign out of the active account in the app */
-"Sign Out" = "Allgofnodi";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Ychwanegu tag i'r nodyn cyfredol";
 
-/* Accessibility hint on button to remove a tag from a current note */
+/* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tynnu'r tag o'r nodyn cyfredol";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "Tag: %@";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Heddiw";
@@ -210,10 +186,10 @@
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Symud y nodyn cyfredol i'r sbwriel";
 
-/* Trash (noun) - the location where deleted notes are stored */
+/* Title: Trash Tag is selected */
 "Trash-noun" = "Sbwriel";
 
-/* Trash (noun) - the location where deleted notes are stored */
+/* Title: Trash Tag is selected */
 "Trash-verb" = "Sbwriel";
 
 /* Action to mark a note as unpinned */
@@ -222,7 +198,7 @@
 /* Action which unpublishes a note */
 "Unpublish note" = "Dad-gyhoeddi'r nodyn";
 
-/* Message shown when unpublishing a note */
+/* Message shown when a note is in the processes of being unpublished */
 "Unpublishing..." = "Wrthi'n dad-gyhoeddi...";
 
 /* Represents a snapshot in time for a note */
@@ -240,33 +216,6 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Ddoe";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Rhowch god cyfrin";
-
-/* Pin Lock */
-"Enter your passcode" = "Rhowch eich cod cyfrin";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Nid oedd y codau cyfrin yn cyfateb. Rhowch gynnig arall arni.";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Nodwch eich cod cyfrin eto";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Gosodwch god cyfrin";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Diffodd y cod cyfrin";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Datgloi %@";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
-
 "welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!
 
 I ychwanegu nodyn, tapiwch y botwm adio.
@@ -281,76 +230,25 @@ Mae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai er
 
 Defnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http://simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
 
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Trefnu Nodiadau yn Nhrefn yr Wyddor";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Eisoes â chyfrif?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Cadarnhau";
-
-/* An error message */
+/* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Nid oedd modd creu cyfrif gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd.";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Nid oedd modd mewngofnodi gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd. ";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Heb greu cyfrif?";
-
-/* Hint displayed in the password field */
+/* Password TextField Placeholder */
 "Password" = "Cyfrinair";
 
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Rhaid i'r cyfrinair gynnwys o leiaf 4 nod.";
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "Rhaid i'r cyfrinair gynnwys o leiaf 6 nod.";
 
-/* Title of button for logging in (must be short) */
-"Sign in" = "Mewngofnodi";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "Mewngofnodi";
-
-/* Title of button to create a new account (must be short) */
-"Sign up" = "Cofrestru";
-
-/* Title of button to create a new account (must be short) */
+   SignUp Interface Title */
 "Sign Up" = "Cofrestru";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Mae problem gyda'r cysylltiad. Rhowch gynnig arall arni nes ymlaen.";
-
 /* Message displayed when email address is invalid */
-"Your email address is not valid." = "Nid yw eich cyfeiriad e-bost yn ddilys.";
+"Your email address is not valid" = "Nid yw eich cyfeiriad e-bost yn ddilys.";
 
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Dewch o hyd i nodiadau'n gyflym gyda'r gallu i chwilio ar unwaith a thagiau syml.";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Cychwyn Arni";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Rhannwch restr, postiwch rai cyfarwyddiadau, neu cyhoeddwch eich meddyliau.";
-
-/* Message shown in first launch view */
-"Stay organized" = "Cadw trefn ar bethau";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Defnyddio'r ap ym mhob man";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Croeso i Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "Gweithio gyda'ch gilydd";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "Mae'ch nodiadau yn cael eu diweddaru ar draws pob un o'ch dyfeisiau. Dim botymau i'w gwthio. Mae jyst yn gweithio.";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Thema Tywyll";
-
-/* Debug Screen Title Display internal debug status */
+   Display internal debug status */
 "Debug" = "Dadfygio";
 
 /* Month and day date formatter */
@@ -368,22 +266,16 @@ Defnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar htt
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Enw Cyffwrdd";
 
-/* Title displayed in the Option's Security section. */
+/* No comment provided by engineer. */
 "Security" = "Diogelwch";
 
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Drwy ymuno, rydych yn cytuno i'n Amodau Gwasanaeth »";
-
-/* Forgot Password */
-"Forgot password? »" = "Wedi anghofio eich cyfrinair? »";
-
-/* Ratings View */
+/* This is the string we display when prompting the user to review the app */
 "What do you think about Simplenote?" = "Beth ydych chi'n ei feddwl Simplenote?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "I Like It" = "Rydw i'n ei Hoffi";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "Could Be Better" = "Gallai Fod yn Well";
 
 "Great! Could you leave us a nice review?
@@ -392,34 +284,34 @@ It really helps." = "Gwych! Hoffech chi adael adolygiad da?
 
 Mae wir yn helpu.";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Leave a Review" = "Gadael Adolygiad";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "No Thanks" = "Dim Diolch";
 
-/* Ratings View: Don't Like */
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
 "Could you tell us how we could improve?" = "Dwedwch wrthym sut y gallwn ni ei wella?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Send Feedback" = "Anfon Adborth";
 
-/* Ratings View: Contact */
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "Contact" = "Cysylltu";
 
-/* No comment provided by engineer. */
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
 "Your Email:" = "Eich Cyfeiriad E-bost:";
 
-/* No comment provided by engineer. */
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "How can we help?" = "Sut gallwn ni helpu?";
 
-/* No comment provided by engineer. */
+/* Title of Back button for Markdown preview */
 "Back" = "Nôl";
 
-/* Permanent Delete */
+/* Trash (verb) - the action of deleting a note */
 "Delete" = "Dileu";
 
-/* Markdown Preview */
+/* Title of Markdown preview screen */
 "Preview" = "Rhagolwg";
 
 /* Alert message displayed when an account has unsynced notes */
@@ -431,6 +323,21 @@ Mae wir yn helpu.";
 /* Placeholder test in textfield when adding a new tag to a note */
 "Add a tag..." = "Tag...";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Ydych chi wedi colli cysylltiad â Simplenote? Gallwch adennill mynediad drwy ailosod y rhaglen a mewngofnodi i'ch cyfrif.";
+/* Share (verb) - the action of Sharing a note */
+"Share" = "Rhannu";
+
+   Sort Order for the Notes List */
+"Sort Order" = "Trefn didoli";
+
+/* Email TextField Placeholder */
+"Email" = "E-bost";
+
+/* Option to enable the dark app theme. */
+"Theme" = "Thema";
+
+/* The Simplenote blog */
+"Blog" = "Blog";
+
+/* No comment provided by engineer. */
+"Error" = "Gwall";
 

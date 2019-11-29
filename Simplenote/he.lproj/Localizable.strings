@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
+/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -10,15 +10,15 @@
 "%d Results" = "%d תוצאות";
 
 /* Number of words in a note */
-"%d Word" = "מילה %d";
+"%@ Word" = "מילה %@";
 
 /* Number of words in a note */
-"%d Words" = "%d מילים";
+"%@ Words" = "%@ מילים";
 
-/* Label of accept button on alert dialog */
+   Label of accept button on alert dialog */
 "Accept" = "קבלה";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "חשבון";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -27,10 +27,10 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "הוספת תגית";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "כל הפתקים";
 
-/* No comment provided by engineer. */
+   Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
 
 /* Verb - work with others on a note */
@@ -60,16 +60,13 @@
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "ביטול מקלדת";
 
-/* No comment provided by engineer. */
+/* User Authenticated */
 "Done" = "בוצע";
-
-/* Re-order or delete tags */
-"Edit Tags" = "עריכת תגיות";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "ריק";
 
-/* Remove all notes from the trash */
+/* Empty Trash Warning */
 "Empty trash" = "לרוקן את הפח";
 
 /* Noun - the version history of a note */
@@ -87,7 +84,7 @@
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
 "menu-accessibility-hint" = "הצגת אפשרויות לפתק";
 
-/* No comment provided by engineer. */
+/* Siri Suggestion to create a New Note */
 "New note" = "פתק חדש";
 
 /* Message shown in note list when no notes are in the current view */
@@ -99,19 +96,16 @@
 /* No comment provided by engineer. */
 "Note not published" = "הפתק לא פורסם";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "הפתק פורסם";
-
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "Notes" = "פתקים";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
 "notes-accessibility-hint" = "סגירת פתק נוכחי";
 
-/* No comment provided by engineer. */
+/* Instant passcode lock timeout */
 "Off" = "כבוי";
 
-/* No comment provided by engineer. */
+/* Dismisses an AlertController */
 "OK" = "אישור";
 
 /* No comment provided by engineer. */
@@ -120,7 +114,7 @@
 /* Select a note to view in the note editor */
 "Open note" = "פתיחת פתק";
 
-/* Number of failed entries entering in passcode */
+/* A 4-digit code to lock the app when it is closed */
 "Passcode" = "קוד סיסמה";
 
 /* Action to mark a note as pinned */
@@ -135,14 +129,8 @@
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "הוצמד";
 
-/* No comment provided by engineer. */
-"Preferences" = "העדפות";
-
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "לפרסם";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "הפרסום נכשל";
 
 /* Action which published a note to a web page */
 "Publish note" = "פרסום פתק";
@@ -150,7 +138,7 @@
 /* Switch which marks a note as published or unpublished */
 "Publish toggle" = "החלפת מצב תרגום";
 
-/* Confirmation shown when a note is published */
+/* No comment provided by engineer. */
 "Published" = "פורסם";
 
 /* Message shown when a note is in the processes of being published */
@@ -158,12 +146,6 @@
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "הסרת כל הפתקים מהפח";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "הסרת תגית";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "להסיר תגית?";
 
 /* Rename a tag */
 "Rename" = "שינוי שם";
@@ -177,29 +159,23 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "שליחה";
 
-/* Title of options screen */
+/* AlertController's Payload for the broken Sort Options Fix */
 "Settings" = "הגדרות";
 
 /* No comment provided by engineer. */
 "Share note" = "שיתוף פתק";
 
-/* Accessibility hint on button to share note */
+/* Accessibility hint on share button */
 "share-accessibility-hint" = "שיתוף תוכן הפתק הנוכחי";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "סרגל צדדי";
 
-/* Sign out of the active account in the app */
-"Sign Out" = "לצאת מהמערכת";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "הוספת תגית לפתק הנוכחי";
 
-/* Accessibility hint on button to remove a tag from a current note */
+/* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "הסרת תגית מהפתק הנוכחי";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "תגית: ‎%@";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "היום";
@@ -210,10 +186,10 @@
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "העבר את הפתק הנוכחי לפח";
 
-/* Trash (noun) - the location where deleted notes are stored */
+/* Title: Trash Tag is selected */
 "Trash-noun" = "העברה לפח";
 
-/* Trash (noun) - the location where deleted notes are stored */
+/* Title: Trash Tag is selected */
 "Trash-verb" = "העברה לפח";
 
 /* Action to mark a note as unpinned */
@@ -222,7 +198,7 @@
 /* Action which unpublishes a note */
 "Unpublish note" = "ביטול פרסום פתק";
 
-/* Message shown when unpublishing a note */
+/* Message shown when a note is in the processes of being unpublished */
 "Unpublishing..." = "ביטול פרסום...";
 
 /* Represents a snapshot in time for a note */
@@ -240,33 +216,6 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i ניסיון קוד סיסמה שנכשל";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "הזנת קוד סיסמה";
-
-/* Message shown on passcode lock screen */
-"Enter your passcode" = "הזנת קוד סיסמה";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "קודי הסיסמה לא התאימו. יש לנסות שוב.";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "הזנה מחדש של קוד הסיסמה";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "הגדרת קוד סיסמה";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "השבתת קוד סיסמה";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "ביטול נעילה %@";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i ניסיונות קוד סיסמה שנכשלו";
-
 "welcomeNote-iOS" = "ברוכים הבאים אל Simplenote עבור iOS!
 
 כדי להוסיף פתק, יש להקיש על לחצן הפלוס.
@@ -281,77 +230,35 @@
 
 ניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http://simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
 
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "מיון פתקים בסדר אלפביתי";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "יש לך כבר חשבון?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "פעם נוספת";
-
-/* An error message */
+/* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "לא ניתן ליצור חשבון באמצעות כתובת האימייל והסיסמה שסופקו.";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "לא ניתן להיכנס באמצעות כתובת האימייל והסיסמה שסופקו.";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "אין לך חשבון עדיין?";
-
-/* Number of failed entries entering in passcode */
+/* Error for bad email or password */
 "Password" = "סיסמה";
 
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "הסיסמה חייבת להכיל לפחות ארבעה תווים.";
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "הסיסמה חייבת להכיל לפחות ארבעה תווים.";
 
-/* A short link to access the account login screen */
-"Sign in" = "כניסה למערכת";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "התחברות";
-
-/* Title of button to create a new account (must be short) */
-"Sign up" = "הרשמה";
-
-/* Title of button to create a new account (must be short) */
+   SignUp Interface Title */
 "Sign Up" = "הרשמה";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "יש בעיה בחיבור.  יש לנסות שוב מאוחר יותר.";
-
 /* Message displayed when email address is invalid */
-"Your email address is not valid." = "כתובת האימייל שלך אינה חוקית.";
+"Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";
 
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "איתור פתקים במהירות באמצעות חיפוש מהיר ותגיות פשוטות.";
+/* User Authenticated */
+"Authenticated" = "האימות בוצע";
 
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "התחלה";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "שיתוף רשימה, פרסום הנחיות או פרסום מחשבות.";
-
-/* Message shown in first launch view */
-"Stay organized" = "שמירה על ארגון";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "להשתמש בו בכל מקום";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "ברוכים הבאים אל Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "עבודה שיתופית";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "הפתקים שלך תמיד מעודכנים, בכל המכשירים שלך. בלי לחיצות מיותרות. זה פשוט עובד.";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "ערכת עיצוב כהה";
-
-/* Debug Screen Title Display internal debug status */
+   Display internal debug status */
 "Debug" = "איתור באגים";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "צורף לתור";
+
+/* Last Message timestamp */
+"LastSeen" = "LastSeen";
 
 /* Month and day date formatter */
 "MMM d" = "d ‏MMM";
@@ -365,25 +272,28 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM ‏yyyy";
 
+/* Number of changes pending to be sent */
+"Pendings" = "בהמתנה";
+
+/* Reachs Internet */
+"Reachability" = "נגישות";
+
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "מזהה מגע";
 
-/* Title displayed in the Option's Security section. */
+
+"WebSocket" = "WebSocket";
+
+/* No comment provided by engineer. */
 "Security" = "אבטחה";
 
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "הרשמתך מהווה הסכמה לתנאי השימוש שלנו »";
-
-/* Forgot Password */
-"Forgot password? »" = "שכחת סיסמה? »";
-
-/* Ratings View */
+/* This is the string we display when prompting the user to review the app */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "I Like It" = "אהבתי את זה";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "Could Be Better" = "יכול להיות יותר טוב";
 
 "Great! Could you leave us a nice review?
@@ -392,45 +302,362 @@ It really helps." = "נהדר! תוכל/י אולי לדרג אותנו?
 
 זה ממש יעזור.";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Leave a Review" = "השארת חוות דעת";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "No Thanks" = "לא תודה";
 
-/* Ratings View: Don't Like */
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
 "Could you tell us how we could improve?" = "באפשרותך לומר לנו כיצד נוכל להשתפר?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Send Feedback" = "שליחת משוב";
 
-/* Ratings View: Contact */
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "Contact" = "איש קשר";
 
-/* No comment provided by engineer. */
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
 "Your Email:" = "כתובת האימייל שלך:";
 
-/* No comment provided by engineer. */
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "How can we help?" = "כיצד נוכל לעזור?";
 
-/* No comment provided by engineer. */
+/* Sign in error message */
+"An error was encountered while signing in." = "נתקלנו בשגיאה בתהליך ההתחברות.";
+
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "האם ברצונך לרוקן את הפח? לא ניתן לבטל את הפעולה.";
+
+/* Title of Back button for Markdown preview */
 "Back" = "חזרה";
 
-/* Permanent Delete */
+/* No comment provided by engineer. */
+"Collaboration has moved" = "שיתוף הפעולה עבר למקום אחר";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "לא הייתה אפשרות להתחבר";
+
+/* Trash (verb) - the action of deleting a note */
 "Delete" = "מחיקה";
 
-/* Markdown Preview */
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "למחוק את הפתקים";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "להשבית את העיצוב של Markdown";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Edit" = "עריכה";
+
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "להפעיל את העיצוב של Markdown";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "זיהוי פנים";
+
+
+"Markdown" = "Markdown";
+
+/* Switch which marks a note as using Markdown formatting or not */
+"Markdown toggle" = "שינוי Markdown";
+
+/* Empty Trash Warning */
+"No" = "לא";
+
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "יש להפעיל את החשבון שלך ב-WordPress.com באמצעות האימייל ולנסות שוב.";
+
+/* Siri Suggestion to open a specific Note */
 "Preview" = "תצוגה מקדימה";
+
+   Using Search instead of Back if user is searching */
+"Search" = "חיפוש";
+
+/* No comment provided by engineer. */
+"Sharing notes is now accessed through the action menu from the toolbar." = "ניתן כעת לגשת לשיתוף הפתקים דרך תפריט הפעולות מסרגל הכלים.";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "לאחר ההתנתקות, כל הפתקים שלא סוכרנו יימחקו. אפשר לאמת אילו פתקים סונכרנו באמצעות התחברות לאפליקציית הרשת.";
 
+/* No comment provided by engineer. */
+"Tags" = "תגיות";
+
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "אותרו הערות שלא סונכרנו";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "מעבר לאפליקציית הרשת";
+
+/* Sort Mode: Modified Date, descending */
+"Yes" = "כן";
 
 /* Placeholder test in textfield when adding a new tag to a note */
 "Add a tag..." = "תגית...";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "האם אבדה לך הגישה ל-Simplenote? אפשר להשיב את הגישה באמצעות התקנה חוזרת של האפליקציה וכניסה לחשבון שלך.";
+/* Verb - work with others on a note */
+"Share" = "שיתוף";
+
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "הסרת התגיות מהערות";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Order" = "מיון לפי";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "שיתוף הניתוח";
+
+/* Email TextField Placeholder */
+"Email" = "לשלוח מייל";
+
+/* No comment provided by engineer. */
+"Theme" = "עיצוב";
+
+/* The Simplenote blog */
+"Blog" = "בלוג";
+
+/* Sign in error message */
+"Error" = "שגיאה";
+
+/* No comment provided by engineer. */
+"Appearance" = "מראה";
+
+/* Number of Characters in a note */
+"%@ Character" = "תו %@";
+
+/* Number of Characters in a note */
+"%@ Characters" = "%@ תווים";
+
+/* 1 minute passcode lock timeout */
+"1 Minute" = "דקה אחת";
+
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15 שניות";
+
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "שתי דקות";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "שלוש דקות";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30 שניות";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "ארבע דקות";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "חמש דקות";
+
+/* Display app about screen */
+"About" = "אודות";
+
+/* Sort Mode: Alphabetically, ascending */
+"Alphabetically: A-Z" = "סדר אלפביתי: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Alphabetically: Z-A" = "סדר אלפביתי: Z-A";
+
+/* Other Simplenote apps */
+"Apps" = "אפליקציות";
+
+/* Automattic hiring description */
+"Are you a developer? Automattic is hiring." = "האם יש לך ניסיון בפיתוח? חברת Automattic מחפשת עובדים.";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Are you sure you want to send without your email? We won't be able reply to you." = "ביקשת לשלוח ללא כתובת אימייל - ההחלטה סופית? לא נוכל לענות לך.";
+
+/* Title for prompt when user tries to close the feedback view */
+"Are you sure?" = "האם ההחלטה סופית?";
+
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "צירוף קובץ";
+
+/* Terms of Service Legend *PREFIX*: printed in dark color */
+"By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
+
+/* No comment provided by engineer. */
+"Can't Access." = "אין גישה.";
+
+/* No comment provided by engineer. */
+"Choose Photo" = "בחירת תמונה";
+
+/* No comment provided by engineer. */
+"Close" = "סגור";
+
+/* Verb - work with others on a note */
+"Contribute" = "שיתוף";
+
+/* Siri Suggestion to create a New Note */
+"Create a New Note" = "ליצור פתק חדש";
+
+/* Sort Mode: Creation Date, descending */
+"Created: Newest" = "נוצר: החדש ביותר";
+
+/* Sort Mode: Creation Date, ascending */
+"Created: Oldest" = "נוצר: הישן ביותר";
+
+/* Theme: Dark */
+"Dark" = "צבעים כהים";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Email Address" = "כתובת אימייל";
+
+/* Email Taken Alert Title */
+"Email in use" = "כתובת האימייל בשימוש";
+
+/* No comment provided by engineer. */
+"Error uploading." = "שגיאה בהעלאה.";
+
+/* Password Reset Action */
+"Forgotten password?" = "שכחת את הסיסמה?";
+
+/* Privacy Details */
+"Help us improve Simplenote by sharing usage data with our analytics tool." = "שיתוף נתוני השימוש שלך בכלי הניתוח שלנו יעזור לנו לשפר את Simplenote.";
+
+/* Title for alert that a user has entered an invalid email address */
+"Invalid Email Address." = "כתובת הדואר האלקטרוני לא תקפה.";
+
+/* Learn More Action */
+"Learn more" = "מידע נוסף";
+
+/* Theme: Light */
+"Light" = "צבעים בהירים";
+
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "זמן קצוב לנעילה";
+
+/* Sign in error message */
+"Log In" = "התחבר";
+
+/* Presents the regular Email signin flow */
+"Log in with email" = "התחברות באמצעות אימייל";
+
+/* Allows the user to SignIn using their WPCOM Account */
+"Log in with WordPress.com" = "התחברו באמצעות WordPress.com";
+
+/* Log out of the active account in the app */
+"Log Out" = "התנתקות";
+
+/* Sort Mode: Modified Date, descending */
+"Modified: Newest" = "עודכן: החדש ביותר";
+
+/* Sort Mode: Creation Date, ascending */
+"Modified: Oldest" = "עודכן: הישן ביותר";
+
+/* Empty Note Placeholder */
+"New note..." = "פתק חדש...";
+
+/* Title for alert when user tires to send feedback without an email address */
+"No Email." = "אין אימייל.";
+
+/* Text that appears in an alert to the user when there is no internet */
+"No Internet" = "אין אינטרנט";
+
+/* Title for message when user tries to send feedback without any text */
+"No Message." = "אין הודעה.";
+
+"Open "(preview)"" = "פתיחה "(תצוגה מקדימה)"";
+
+/* Siri Suggestion to open our app */
+"Open Simplenote" = "לפתוח את Simplenote";
+
+/* AlertController's Payload for the broken Sort Options Fix */
+"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "בעקבות העדכון שלנו, סדר התצוגה של הפתקים שלך אולי השתנה. האם ברצונך לבדוק את הגדרות המיון?";
+
+/* Pin (verb) - the action of Pinning a note */
+"Pin" = "לנעוץ";
+
+/* Message for alert that user has entered an invalid email address */
+"Please check your email address, it appears to be invalid." = "כדאי לך לבדוק את כתובת הדואר האלקטרוני שלך, נראה שהיא אינה תקפה.";
+
+/* Message for alert when user tires to send feedback without any text */
+"Please enter a message." = "יש להזין הודעה.";
+
+/* Simplenote privacy policy */
+"Privacy Policy" = "מדיניות פרטיות";
+
+/* Privacy Settings */
+"Privacy Settings" = "הגדרות פרטיות";
+
+/* For debugging use */
+"Send a Test Crash" = "לשלוח קריסה של בדיקה";
+
+/* Label that is shown when feedback from the user is sending */
+"Sending..." = "שולח...";
+
+
+"Simplenote" = "Simplenote";
+
+/* Authentication Error Alert Title */
+"Sorry!" = "מצטערים!";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "מיון לפי סדר אלפביתי";
+
+/* Theme: Matches iOS Settings */
+"System Default" = "ברירת המחדל לפי המערכת";
+
+/* No comment provided by engineer. */
+"Take Photo" = "צילום תמונה";
+
+/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"Terms and Conditions" = "תנאים והתניות";
+
+/* Simplenote terms of service */
+"Terms of Service" = "תנאי השירות";
+
+/* This is one of the buttons we display when prompting the user for a review */
+"Thanks" = "תודה";
+
+/* Error when address is in use */
+"The email you've entered is already associated with a Simplenote account." = "כתובת האימייל שהזנת כבר משויכת לחשבון Simplenote.";
+
+/* Onboarding Header Text */
+"The simplest way to keep notes." = "הדרך הפשוטה ביותר לרשום פתקים.";
+
+/* Simplenote Themes */
+"Themes" = "ערכות עיצוב";
+
+/* No comment provided by engineer. */
+"There was an error sending your feedback, please try again." = "אירעה שגיאה בשליחת המשוב שלך, יש לנסות שוב.";
+
+/* Unpin (verb) - the action of Unpinning a note */
+"Unpin" = "להסיר את הנעץ";
+
+/* Title: Untagged Notes are onscreen */
+"Untagged" = "התיוג הוסר";
+
+/* No comment provided by engineer. */
+"Use Latest Photo" = "שימוש בתמונה האחרונה";
+
+/* A user's Simplenote account */
+"Username" = "שם משתמש";
+
+/* App version number */
+"Version %@" = "גרסה %@";
+
+/* No comment provided by engineer. */
+"We can't access your photos, please ensure this application has access in Settings." = "לא יכולנו לגשת אל התמונות שלך, יש לוודא שליישום זה מוענקת גישה ב'הגדרות'.";
+
+/* No comment provided by engineer. */
+"We couldn't upload the photo, please try again." = "לא יכולנו להעלות את התמונה, יש לנסות שוב.";
+
+/* No comment provided by engineer. */
+"We have received your feedback and will be in contact soon." = "קיבלנו את המשוב שלך, וניצור קשר בקרוב.";
+
+/* Generic error */
+"We're having problems. Please try again soon." = "נתקלנו בבעיות. יש לנסות שוב בקרוב.";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about WordPress?" = "מה דעתך על WordPress?";
+
+/* Work at Automattic */
+"Work With Us" = "הצטרפות לכוח העבודה שלנו";
+
+/* Message for prompt when user tries to close feedback view after having entered text */
+"Your message will be lost." = "ההודעה שלך תלך לאיבוד.";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "הסיסמה חייבת להכיל לפחות 4 תווים";
 

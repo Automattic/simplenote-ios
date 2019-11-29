@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
+/* Translation-Revision-Date: 2019-11-28 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -10,15 +10,15 @@
 "%d Results" = "%d resultaten";
 
 /* Number of words in a note */
-"%d Word" = "%d woord";
+"%@ Word" = "%@ woord";
 
 /* Number of words in a note */
-"%d Words" = "%d woorden";
+"%@ Words" = "%@ woorden";
 
-/* Label of accept button on alert dialog */
+   Label of accept button on alert dialog */
 "Accept" = "Accepteren";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "Account";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -27,10 +27,10 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tag toevoegen";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "Alle notities";
 
-/* No comment provided by engineer. */
+   Verb, cancel an alert dialog */
 "Cancel" = "Annuleren";
 
 /* Verb - work with others on a note */
@@ -48,7 +48,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Beknopte notitielijst";
 
-/* No comment provided by engineer. */
+/* Siri Suggestion to create a New Note */
 "Create a new note" = "Een nieuwe notitie maken";
 
 /* No comment provided by engineer. */
@@ -60,11 +60,8 @@
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Toetsenbord sluiten";
 
-/* No comment provided by engineer. */
+   Verb: Close current view */
 "Done" = "Klaar";
-
-/* Re-order or delete tags */
-"Edit Tags" = "Tags bewerken";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Leegmaken";
@@ -99,22 +96,19 @@
 /* No comment provided by engineer. */
 "Note not published" = "Notitie niet gepubliceerd";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "Notitie gepubliceerd";
-
-/* Plural form of notes */
+/* Verb: Delete notes and log out of the app */
 "Notes" = "Notities";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
 "notes-accessibility-hint" = "Huidige notitie sluiten";
 
-/* No comment provided by engineer. */
+/* Log out of the active account in the app */
 "Off" = "Uit";
 
-/* No comment provided by engineer. */
+/* Dismisses an AlertController */
 "OK" = "OK";
 
-/* Button label shown on first launch screen to start the log in process */
+/* Alert dialog title displayed on sign in error */
 "On" = "Aan";
 
 /* Select a note to view in the note editor */
@@ -135,14 +129,8 @@
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "Vastgemaakt";
 
-/* No comment provided by engineer. */
-"Preferences" = "Voorkeuren";
-
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Publiceren";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "Publiceren mislukt";
 
 /* Action which published a note to a web page */
 "Publish note" = "Notitie publiceren";
@@ -158,12 +146,6 @@
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Alle notities verwijderen uit prullenbak";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "Tag verwijderen";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "Tag verwijderen?";
 
 /* Rename a tag */
 "Rename" = "Hernoemen";
@@ -183,23 +165,17 @@
 /* No comment provided by engineer. */
 "Share note" = "Notitie delen";
 
-/* Accessibility hint on button to share note */
+/* Accessibility hint on share button */
 "share-accessibility-hint" = "De inhoud van de huidige notitie delen";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Sidebar";
 
-/* Sign out of the active account in the app */
-"Sign Out" = "Afmelden";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Een tag toevoegen aan de huidige notitie";
 
-/* Accessibility hint on button to remove a tag from a current note */
+/* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tag verwijderen uit de huidige notitie";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "Tag: %@";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Vandaag";
@@ -221,7 +197,7 @@
 /* Action which unpublishes a note */
 "Unpublish note" = "Notitie verwijderen";
 
-/* Message shown when unpublishing a note */
+/* Message shown when a note is in the processes of being unpublished */
 "Unpublishing..." = "Verwijderen ...";
 
 /* Represents a snapshot in time for a note */
@@ -239,33 +215,6 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Gisteren";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i mislukte wachtwoordcodepoging";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Voer een wachtwoordcode in";
-
-/* Pin Lock */
-"Enter your passcode" = "Voer je wachtwoordcode in";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Wachtwoordcodes komen niet overeen. Probeer het opnieuw.";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Voer een wachtwoordpasscode opnieuw in";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Wachtwoordcode instellen";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Wachtwoordcode uitschakelen";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ ontgrendelen";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
-
 "welcomeNote-iOS" = "Welkom bij Simplenote voor iOS!
 
 Om een notitie toe te voegen, tik je op de plusknop.
@@ -280,77 +229,35 @@ Desgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een no
 
 Gebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http://simplenote.com. Je notities worden overal automatisch bijgewerkt.";
 
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Notities alfabetisch sorteren";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Heb je al een account?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Bevestigen";
-
-/* An error message */
+/* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Kan geen account maken met het opgegeven e-mailadres en wachtwoord.";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kan niet inloggen met het opgegeven e-mailadres en wachtwoord.";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Heb je nog geen account?";
-
-/* Forgot Password */
+/* Password Reset Action */
 "Password" = "Wachtwoord";
 
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Wachtwoord moet ten minste 4 tekens bevatten.";
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "Wachtwoord moet ten minste 6 tekens bevatten.";
 
-/* Title of button for logging in (must be short) */
-"Sign in" = "Aanmelden";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "Aanmelden";
-
-/* Title of button to create a new account (must be short) */
-"Sign up" = "Registreren";
-
-/* Title of button to create a new account (must be short) */
+   SignUp Interface Title */
 "Sign Up" = "Registreren";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Er is een probleem met de verbinding.  Probeer het later opnieuw.";
-
 /* Message displayed when email address is invalid */
-"Your email address is not valid." = "Je e-mailadres is niet geldig.";
+"Your email address is not valid" = "Je e-mailadres is niet geldig.";
 
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Vind notities snel terug met instant search en simple tags.";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Aan de slag";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Deel een lijst, plaats instructies of publiceer je gedachten.";
-
-/* Message shown in first launch view */
-"Stay organized" = "Houd het overzicht";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Gebruik het overal";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Welkom bij Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "Werk samen";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "Je notities blijven bijgewerkt op al je apparaten. Je hoeft geen knoppen in te drukken. Het gaat allemaal vanzelf.";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Donker thema";
+/* User Authenticated */
+"Authenticated" = "Geverifieerd";
 
 
 "Debug" = "Debug";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "Aantal in wachtrij";
+
+/* Last Message timestamp */
+"LastSeen" = "Laatst bekeken om";
 
 /* Month and day date formatter */
 "MMM d" = "d MMM";
@@ -364,66 +271,386 @@ Gebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http://sim
 /* Month, day, and year date formatter */
 "MMM yyyy" = "MMM jjjj";
 
+/* Number of changes pending to be sent */
+"Pendings" = "Aantal in behandeling";
+
+/* Reachs Internet */
+"Reachability" = "Bereikbaarheid";
+
 
 "Touch ID" = "Touch ID";
 
-/* Title displayed in the Option's Security section. */
+
+"WebSocket" = "WebSocket";
+
+/* No comment provided by engineer. */
 "Security" = "Beveiliging";
 
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Als je je registreert, ga je akkoord met onze Terms of Service »";
-
-/* Forgot Password */
-"Forgot password? »" = "Wachtwoord vergeten? »";
-
-/* Ratings View */
+/* This is the string we display when prompting the user to review the app */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "I Like It" = "Ik vind het leuk";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display inside of the prompt to review the app */
 "Could Be Better" = "Kan beter";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Leave a Review" = "Laat een beoordeling achter";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "No Thanks" = "Nee, liever niet";
 
-/* Ratings View: Don't Like */
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
 "Could you tell us how we could improve?" = "Kun je ons vertellen wat we kunnen verbeteren?";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
 "Send Feedback" = "Stuur feedback";
 
-
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "Contact" = "Contact";
 
-/* No comment provided by engineer. */
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
 "Your Email:" = "Je e-mailadres:";
 
-/* No comment provided by engineer. */
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
 "How can we help?" = "Hoe kunnen we helpen?";
 
-/* No comment provided by engineer. */
+/* Sign in error message */
+"An error was encountered while signing in." = "Er is een aanmeldfout opgetreden.";
+
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "Weet je zeker dat je de prullenbak wilt leegmaken? Deze actie kan niet ongedaan worden gemaakt.";
+
+/* Title of Back button for Markdown preview */
 "Back" = "Terug";
 
-/* Permanent Delete */
+/* No comment provided by engineer. */
+"Collaboration has moved" = "Samenwerking is verplaatst";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "Aanmelden mislukt";
+
+/* Trash (verb) - the action of deleting a note */
 "Delete" = "Verwijderen";
 
-/* Markdown Preview */
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "Notities verwijderen";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
+
+/* Edit Tags Action: Visible in the Tags List */
+"Edit" = "Bewerken";
+
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "Markdown-opmaak inschakelen";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "Gezichts-ID";
+
+/* Special formatting that can be turned on for notes */
+"Markdown" = "Snelle stijl";
+
+"Markdown toggle" = "Markdown in-/uitschakelen";
+
+   Cancels Empty Trash Action */
+"No" = "Nee";
+
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "Activeer je WordPress.com-account via e-mail en probeer het nogmaals.";
+
+/* Title of Markdown preview screen */
 "Preview" = "Voorbeeld bekijken";
+
+   Using Search instead of Back if user is searching */
+"Search" = "Zoeken";
+
+/* No comment provided by engineer. */
+"Sharing notes is now accessed through the action menu from the toolbar." = "Je kunt vanaf nu notities delen via het actiemenu vanuit de werkbalk.";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Door je af te melden worden gesynchroniseerde notities verwijderd. Je kunt je gesynchroniseerde notities verifiëren door je aan te melden via de web-app.";
 
+
+"Tags" = "Tags";
+
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Ongesynchroniseerde notities gedetecteerd";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Web-app bezoeken";
+
+   Proceeds with the Empty Trash OP */
+"Yes" = "Ja";
 
 /* Placeholder test in textfield when adding a new tag to a note */
 "Add a tag..." = "Tag...";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Heb je geen toegang meer tot Simplenote? Je kunt weer toegang krijgen door de app opnieuw te installeren en in te loggen op je account.";
+/* Share (verb) - the action of Sharing a note */
+"Share" = "Delen";
+
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "Niet-getagde notities";
+
+   Sort Order for the Notes List */
+"Sort Order" = "Sorteervolgorde";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "Analyses delen";
+
+/* Email TextField Placeholder */
+"Email" = "E-mailen";
+
+/* Option to enable the dark app theme. */
+"Theme" = "Thema";
+
+/* The Simplenote blog */
+"Blog" = "Blog";
+
+/* No comment provided by engineer. */
+"Error" = "Fout";
+
+/* No comment provided by engineer. */
+"Appearance" = "Weergave";
+
+/* Number of Characters in a note */
+"%@ Character" = "%@ teken";
+
+/* Number of Characters in a note */
+"%@ Characters" = "%@ tekens";
+
+/* 1 minute passcode lock timeout */
+"1 Minute" = "1 minuut";
+
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15 seconden";
+
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "2 minuten";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "3 minuten";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30 seconden";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "4 minuten";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "5 minuten";
+
+/* Display app about screen */
+"About" = "Over";
+
+/* Sort Mode: Alphabetically, ascending */
+"Alphabetically: A-Z" = "Alfabetisch: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Alphabetically: Z-A" = "Alfabetisch: Z-A";
+
+/* Other Simplenote apps */
+"Apps" = "Apps";
+
+/* Automattic hiring description */
+"Are you a developer? Automattic is hiring." = "Ben je ontwikkelaar? Automattic is op zoek naar nieuwe collega's.";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Are you sure you want to send without your email? We won't be able reply to you." = "Weet je zeker dat je wilt versturen zonder je e-mailadres? We kunnen je dan geen antwoord sturen.";
+
+/* Title for prompt when user tries to close the feedback view */
+"Are you sure?" = "Weet je het zeker?";
+
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "voeg een bestand bij";
+
+/* Terms of Service Legend *PREFIX*: printed in dark color */
+"By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
+
+/* No comment provided by engineer. */
+"Can't Access." = "Geen toegang.";
+
+/* No comment provided by engineer. */
+"Choose Photo" = "Kies een foto";
+
+/* No comment provided by engineer. */
+"Close" = "Sluiten";
+
+/* Contribute to the Simplenote apps on github */
+"Contribute" = "Bijdragen";
+
+/* Siri Suggestion to create a New Note */
+"Create a New Note" = "Een nieuwe notitie maken";
+
+/* Sort Mode: Creation Date, descending */
+"Created: Newest" = "Aangemaakt op: Nieuwste";
+
+/* Sort Mode: Creation Date, ascending */
+"Created: Oldest" = "Aangemaakt op: Oudste";
+
+/* Theme: Dark */
+"Dark" = "Donker";
+
+/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Email Address" = "E-mailadres";
+
+/* Email Taken Alert Title */
+"Email in use" = "E-mail in gebruik";
+
+/* No comment provided by engineer. */
+"Error uploading." = "Uploadfout.";
+
+/* Password Reset Action */
+"Forgotten password?" = "Wachtwoord vergeten?";
+
+/* Privacy Details */
+"Help us improve Simplenote by sharing usage data with our analytics tool." = "Help ons Simplenote te verbeteren door gebruiksgegevens te delen met onze analysetool.";
+
+/* Title for alert that a user has entered an invalid email address */
+"Invalid Email Address." = "Ongeldig e-mailadres";
+
+/* Learn More Action */
+"Learn more" = "Meer informatie";
+
+/* Theme: Light */
+"Light" = "Licht";
+
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "Time-out voor vergrendeling";
+
+   LogIn Interface Title */
+"Log In" = "Inloggen";
+
+/* Presents the regular Email signin flow */
+"Log in with email" = "Inloggen met e-mail";
+
+/* Allows the user to SignIn using their WPCOM Account */
+"Log in with WordPress.com" = "Inloggen met WordPress.com";
+
+/* Log out of the active account in the app */
+"Log Out" = "Uitloggen";
+
+/* Sort Mode: Modified Date, descending */
+"Modified: Newest" = "Aangepast op: Nieuwste";
+
+/* Sort Mode: Creation Date, ascending */
+"Modified: Oldest" = "Aangepast op: Oudste";
+
+/* Empty Note Placeholder */
+"New note..." = "Nieuwe notitie …";
+
+/* Title for alert when user tires to send feedback without an email address */
+"No Email." = "Geen e-mail.";
+
+/* Text that appears in an alert to the user when there is no internet */
+"No Internet" = "Geen internet";
+
+/* Title for message when user tries to send feedback without any text */
+"No Message." = "Geen bericht.";
+
+/* Siri Suggestion to open a specific Note */
+"Open "(preview)"" = "Open '(voorbeeldweergave)'";
+
+/* Siri Suggestion to open our app */
+"Open Simplenote" = "Open Simplenote";
+
+/* AlertController's Payload for the broken Sort Options Fix */
+"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "De volgorde waarin je notities worden weergegeven, kan na onze update gewijzigd zijn. Wil je de sorteerinstellingen controleren?";
+
+/* Pin (verb) - the action of Pinning a note */
+"Pin" = "Vastmaken";
+
+/* Message for alert that user has entered an invalid email address */
+"Please check your email address, it appears to be invalid." = "Controleer je e-mailadres, het lijkt ongeldig te zijn.";
+
+/* Message for alert when user tires to send feedback without any text */
+"Please enter a message." = "Voer een bericht in.";
+
+/* Simplenote privacy policy */
+"Privacy Policy" = "Privacybeleid";
+
+/* Privacy Settings */
+"Privacy Settings" = "Privacy instellingen";
+
+/* For debugging use */
+"Send a Test Crash" = "Een testcrash verzenden";
+
+/* Label that is shown when feedback from the user is sending */
+"Sending..." = "Versturen...";
+
+
+"Simplenote" = "Simplenote";
+
+/* Authentication Error Alert Title */
+"Sorry!" = "Sorry!";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "Alfabetische volgorde";
+
+/* Theme: Matches iOS Settings */
+"System Default" = "Systeemstandaard";
+
+/* No comment provided by engineer. */
+"Take Photo" = "Neem een foto";
+
+/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"Terms and Conditions" = "Algemene voorwaarden";
+
+/* Simplenote terms of service */
+"Terms of Service" = "Servicevoorwaarden";
+
+/* No comment provided by engineer. */
+"Thanks" = "Bedankt";
+
+/* Error when address is in use */
+"The email you've entered is already associated with a Simplenote account." = "Het e-mailadres dat je hebt ingevoerd, is al gekoppeld aan een Simplenote-account.";
+
+/* Onboarding Header Text */
+"The simplest way to keep notes." = "De eenvoudigste manier om notities bij te houden.";
+
+/* Simplenote Themes */
+"Themes" = "Thema's";
+
+/* No comment provided by engineer. */
+"There was an error sending your feedback, please try again." = "Er is een fout opgetreden bij het versturen van je feedback, probeer het nog een keer.";
+
+/* Unpin (verb) - the action of Unpinning a note */
+"Unpin" = "Losgemaakt";
+
+/* Title: Untagged Notes are onscreen */
+"Untagged" = "Tag verwijderd";
+
+/* No comment provided by engineer. */
+"Use Latest Photo" = "Gebruik de nieuwste foto";
+
+/* A user's Simplenote account */
+"Username" = "Gebruikersnaam";
+
+/* App version number */
+"Version %@" = "Versie %@";
+
+/* No comment provided by engineer. */
+"We can't access your photos, please ensure this application has access in Settings." = "We hebben geen toegang tot je foto’s. Controleer in de instellingen of deze applicatie toegang heeft.";
+
+/* No comment provided by engineer. */
+"We couldn't upload the photo, please try again." = "We kunnen de foto niet uploaden, probeer het nog een keer.";
+
+/* No comment provided by engineer. */
+"We have received your feedback and will be in contact soon." = "We hebben je feedback ontvangen en zullen snel contact opnemen.";
+
+/* Generic error */
+"We're having problems. Please try again soon." = "We ondervinden wat problemen. Probeer het later opnieuw.";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about WordPress?" = "Wat vind je van WordPress?";
+
+/* Work at Automattic */
+"Work With Us" = "Met ons samenwerken";
+
+/* Message for prompt when user tries to close feedback view after having entered text */
+"Your message will be lost." = "Je bericht gaat verloren.";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "Wachtwoord moet minstens 4 tekens bevatten";
 

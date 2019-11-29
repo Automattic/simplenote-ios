@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-11-22 16:18:55+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: el_GR */
@@ -10,15 +10,15 @@
 "%d Results" = "%d αποτελέσματα";
 
 /* Number of words in a note */
-"%d Word" = "%d λέξη";
+"%@ Word" = "%@ λέξη";
 
 /* Number of words in a note */
-"%d Words" = "%d λέξεις";
+"%@ Words" = "%@ λέξεις";
 
-/* Label of accept button on alert dialog */
+   Label of accept button on alert dialog */
 "Accept" = "Αποδοχή";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "Λογαριασμός";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -27,7 +27,7 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Προσθήκη ετικέτας";
 
-/* No comment provided by engineer. */
+   Verb, cancel an alert dialog */
 "Cancel" = "Ακύρωση";
 
 /* Verb - work with others on a note */
@@ -54,11 +54,8 @@
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Απόκρυψη";
 
-/* No comment provided by engineer. */
+   Verb: Close current view */
 "Done" = "OK";
-
-/* Re-order or delete tags */
-"Edit Tags" = "Επεξεργασία ετικετών";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Διαγραφή";
@@ -87,19 +84,16 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Δεν βρέθηκε";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "Δημοσιευμένη σημείωση";
-
 /* Plural form of notes */
 "Notes" = "Σημειώσεις";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
 "notes-accessibility-hint" = "Κλείσιμο";
 
-/* No comment provided by engineer. */
+/* Instant passcode lock timeout */
 "Off" = "Απενεργοποίηση";
 
-/* No comment provided by engineer. */
+   Verb: Close current view */
 "OK" = "OK";
 
 /* No comment provided by engineer. */
@@ -120,14 +114,8 @@
 
 "Pinned" = "Επ/θηκε";
 
-/* No comment provided by engineer. */
-"Preferences" = "Επιλογες";
-
 /* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "Αποστολή";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "Σφάλμα κατά την δημοσίευση";
 
 /* Action which published a note to a web page */
 "Publish note" = "Δημοσίευση";
@@ -144,12 +132,6 @@
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Διαγραφή όλων των σημειώσεων";
 
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "Διαγραφή ετικέτας";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "Διαγραφή ετικέτας;";
-
 /* Rename a tag */
 "Rename" = "Μετονομασία";
 
@@ -165,23 +147,17 @@
 /* Title of options screen */
 "Settings" = "Ρυθμίσεις";
 
-/* Accessibility hint on button to share note */
+/* Accessibility hint on share button */
 "share-accessibility-hint" = "Κοινοποίηση σημείωσης";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Στήλη";
 
-/* Sign out of the active account in the app */
-"Sign Out" = "Αποσύνδεση";
-
 /* Label on button to add a new tag to a note */
 "tag-add-accessibility-hint" = "Προσθήκη ετικέτας";
 
-/* Delete a tag and remove it from all associated notes */
+/* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Διαγραφή ετικέτας";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "Ετικέτα: %@";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Σήμερα";
@@ -192,19 +168,19 @@
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Διαγραφή σημείωσης";
 
-/* Trash (noun) - the location where deleted notes are stored */
+/* Title: Trash Tag is selected */
 "Trash-noun" = "Διαγεγραμμένα";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Trash-verb" = "Διαγραφή";
 
-/* No comment provided by engineer. */
+   Verb, cancel an alert dialog */
 "Unpin note" = "Ακύρωση";
 
 /* Action which unpublishes a note */
 "Unpublish note" = "Δημοσίευση σημείωσης";
 
-/* Message shown when unpublishing a note */
+/* Message shown when a note is in the processes of being unpublished */
 "Unpublishing..." = "Ακύρωση δημοσίευσης...";
 
 /* Represents a snapshot in time for a note */
@@ -222,33 +198,6 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Εχθές";
 
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i αποτυχημένη απόπειρα συνθηματικού";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Δημιουργία συνθηματικού";
-
-/* Pin Lock */
-"Enter your passcode" = "Εισάγετε το συνθηματικό σας";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Τα συνθηματικά δεν συμφωνούν. Δοκιμάστε ξανά.";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Εισάγετε ξανά το συνθηματικό σας";
-
-/* Message shown on passcode lock screen */
-"Set Passcode" = "Δημιουργία συνθηματικού";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Απενεργοποίηση συνθηματικού";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Ξεκλείδωμα %@";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i αποτυχημένες απόπειρες συνθηματικού";
-
 "welcomeNote-iOS" = "Καλώς ήρθατε στο Simplenote!
 
 Για νέα σημείωση πατήστε στο κουμπί συν.
@@ -263,74 +212,23 @@
 
 Χρησιμοποιήστε το Simplenote σε Mac και Android ή στο http://simplenote.com. Όλες οι σημειώσεις συγχρονίζονται αυτόματα παντού.";
 
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Προβολή αλφαβητικά";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Έχετε ήδη λογαριασμό;";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Επιβεβαίωση";
-
-/* An error message */
+/* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Δεν ήταν δυνατή η δημιουργία λογαριασμού με αυτό το email και κωδικό.";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Δεν ήταν δυνατή η σύνδεση με αυτό το email και κωδικό.";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Δεν έχετε λογαριασμό;";
-
-/* Hint displayed in the password field */
+/* Password TextField Placeholder */
 "Password" = "Κωδικός";
 
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Ο κωδικός πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες.";
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "Ο κωδικός πρέπει να περιέχει τουλάχιστον 6 χαρακτήρες.";
 
-/* Title of button for logging in (must be short) */
-"Sign in" = "Σύνδεση";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "Σύνδεση";
-
-/* Title of button to create a new account (must be short) */
-"Sign up" = "Εγγραφή";
-
-/* Title of button to create a new account (must be short) */
+   SignUp Interface Title */
 "Sign Up" = "Εγγραφή";
 
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Πρόβλημα με τη σύνδεση. Δοκιμάστε ξανά.";
-
 /* Message displayed when email address is invalid */
-"Your email address is not valid." = "Μη έγκυρη διεύθυνση email.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Βρείτε σημειώσεις εύκολα και γρήγορα.";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Ξεκινήστε";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Κοινοποιήστε λίστες, οδηγίες ή απλά τις σκέψεις σας.";
-
-/* Message shown in first launch view */
-"Stay organized" = "Οργανωθείτε";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Χρησιμοποιήστε το παντού";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Καλώς ήρθατε στο Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "Συνεργαστείτε";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "Οι σημειώσεις αποθηκεύονται και ενημερώνονται αυτόματα σε όλες τις συσκευές σας.";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Νυχτερινό θέμα";
+"Your email address is not valid" = "Μη έγκυρη διεύθυνση email.";
 
 
 "Touch ID" = "Touch ID";
