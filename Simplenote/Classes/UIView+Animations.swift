@@ -22,7 +22,11 @@ extension UIView {
     ///
     @objc
     func fadeIn() {
-        self.alpha = UIKitConstants.alphaZero
+        guard alpha != UIKitConstants.alphaFull else {
+            return
+        }
+
+        alpha = UIKitConstants.alphaZero
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
             self.alpha = UIKitConstants.alphaFull
         }
@@ -32,6 +36,10 @@ extension UIView {
     ///
     @objc
     func fadeOut(completion: (() -> Void)? = nil) {
+        guard alpha != UIKitConstants.alphaZero else {
+            return
+        }
+
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
             self.alpha = UIKitConstants.alphaZero
         }, completion: { _ in
