@@ -67,7 +67,7 @@ typedef enum { PinLockControllerModeSetPin = 0, PinLockControllerModeRemovePin =
 
 @property (nonatomic, assign) NSUInteger numberOfDigits;
 
-- (id)initWithMode:(PinLockControllerMode)initMode;
+- (instancetype)initWithMode:(PinLockControllerMode)initMode;
 - (void)fixLayout;
 
 @end

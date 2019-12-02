@@ -53,7 +53,7 @@ static CGFloat const imageSide = 34.0;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 
-    UIColor *titleColorNormal = [UIColor colorWithName:UIColorNameTintColor];
+    UIColor *titleColorNormal = [UIColor simplenoteTintColor];
     UIColor *actionDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
 
     [self setTitleColor:titleColorNormal forState:UIControlStateNormal];

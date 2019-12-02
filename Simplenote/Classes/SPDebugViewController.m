@@ -7,9 +7,9 @@
 //
 
 #import "SPDebugViewController.h"
-#import "UITableView+Styling.h"
 #import "SPAppDelegate.h"
 #import "Note.h"
+#import "Simplenote-Swift.h"
 
 #import <Simperium/Simperium.h>
 #import <Simperium/SPBucket.h>
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, SPDebugRow) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenoteGroupedStyle];
     self.title = NSLocalizedString(@"Debug", @"Debug Screen Title");
     
     Simperium *simperium        = [[SPAppDelegate sharedDelegate] simperium];

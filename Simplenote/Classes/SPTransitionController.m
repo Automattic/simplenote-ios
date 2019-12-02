@@ -54,7 +54,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 #pragma mark - Private Properties
 
-@interface SPTransitionController ()
+@interface SPTransitionController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) SnapshotRenderer                          *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
@@ -76,16 +76,18 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         self.useCount = 0;
         
         if ([UIDevice isPad]) {
-            
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(handlePinch:)];
             [navigationController.view addGestureRecognizer:pinchGesture];
-            
-        } else {
-            
-            [navigationController.interactivePopGestureRecognizer addTarget:self
-                                                                     action:@selector(handlePan:)];
+
         }
+
+        // Note:
+        // This is required since NoteEditorViewController has a custom TitleView, which causes the
+        // interactivePopGestureRecognizer to stop working on its own!
+        UIGestureRecognizer *interactivePopGestureRecognizer = navigationController.interactivePopGestureRecognizer;
+        [interactivePopGestureRecognizer addTarget:self action:@selector(handlePan:)];
+        interactivePopGestureRecognizer.delegate = self;
 
         self.pushPopAnimationController = [[SPInteractivePushPopAnimationController alloc] initWithNavigationController:navigationController];
         self.navigationController = navigationController;
@@ -545,10 +547,12 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                     [self storeTransitionSnapshot:transitionSnapshot];
                 }
             }
-
         }
 
-        // Snapshot: SearchBar
+        // Snapshot(s): Blur + SearchBar
+        SPTransitionSnapshot *blurSnapshot = [self blurSnapshotForListController:listController containerView:containerView];
+        [self storeTransitionSnapshot:blurSnapshot];
+
         SPTransitionSnapshot *searchBarSnapshot = [self backSearchBarSnapshotForListController:listController containerView:containerView];
         [self storeTransitionSnapshot:searchBarSnapshot];
     }
@@ -630,6 +634,29 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 
 #pragma mark - Snapshots Generation
+
+- (SPTransitionSnapshot *)blurSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
+    UIVisualEffectView *liveBlurView = listController.navigationBarBackground;
+    UIVisualEffectView *snapshotBlurView = [[UIVisualEffectView alloc] initWithEffect:liveBlurView.effect];
+    CGRect targetFrame = liveBlurView.frame;
+
+    NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
+                                                               finalFrame:targetFrame
+                                                            startingAlpha:UIKitConstants.alphaZero
+                                                               finalAlpha:UIKitConstants.alphaFull];
+
+    NSDictionary *animationProperties = [self animationPropertiesWithDuration:SPAnimationPopTableViewRowSelectionDuration
+                                                                        delay:SPAnimationDelayZero
+                                                                springDamping:SPAnimationPopTableViewRowSelectionDamping
+                                                                     velocity:SPAnimationPopTableViewRowSelectionVelocity
+                                                                      options:UIViewAnimationOptionCurveEaseInOut];
+
+    return [[SPTransitionSnapshot alloc] initWithSnapshot:snapshotBlurView
+                                           animatedValues:animatedValues
+                                      animationProperties:animationProperties
+                                                superView:containerView];
+}
+
 
 - (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
     UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
@@ -759,6 +786,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SPTransitionControllerPopGestureTriggeredNotificationName
                                                         object:self];
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer != self.navigationController.interactivePopGestureRecognizer) {
+        return YES;
+    }
+
+    return self.navigationController.viewControllers.count > 1;
 }
 
 @end

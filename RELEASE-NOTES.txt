@@ -1,8 +1,15 @@
-4.14
+4.15
 -----
  
+4.14
+====
+-   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp)
+-   Fixed a bug that caused the Markdown Preview UI to get dismissed accidentally
+-   Fixed an issue that might crash the app with a specific emojis combination
+
 4.13
 ====
+-   Every Navigation Bar in Simplenote now has a super cool blur effect!
 -   Fixed a bug that caused the StatusBar to be hidden when Simplenote's Settings were displayed
 -   Fixed a bug that caused Swipe to Dismiss gesture not to properly work in the Editor
 -   Fixed a bug that allowed Peek and Pop to open notes in the Trash.

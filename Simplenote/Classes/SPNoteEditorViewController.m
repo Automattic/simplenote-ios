@@ -62,6 +62,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+@property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 
@@ -149,9 +150,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [_tagView applyStyle];
 
     _noteEditorTextView.font = bodyFont;
+    _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
-    UIColor *backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
@@ -187,6 +189,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     [self setupBarItems];
     [self swapTagViewPositionForVoiceover];
+    [self configureNavigationBarBackground];
+    [self configureLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -210,6 +214,27 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)configureNavigationBarBackground
+{
+    NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
+}
+
+- (void)configureLayout
+{
+    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
+    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.view addSubview:self.navigationBarBackground];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
 }
 
 - (void)setupNavigationController {
@@ -276,7 +301,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+            UIColor *tintColor = [UIColor simplenoteTintColor];
             [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
             
             NSInteger count = self.searchResultRanges.count;
@@ -939,6 +964,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     scrollPosition = scrollView.contentOffset.y;
+
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -995,6 +1023,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self->checklistButton.alpha = 1.0;
         self->keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
+        self.navigationBarBackground.transform = CGAffineTransformIdentity;
         
         self->backButton.alpha = 1.0;
     };
@@ -1096,8 +1125,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-    
-    
+
+    self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
+                                                                    CGAffineTransformMakeTranslation(0, yTransform));
 }
 
 #pragma mark UITextViewDelegate methods
@@ -1499,7 +1529,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[UIColor colorWithName:UIColorNameBackgroundColor] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];
@@ -1802,7 +1832,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
     vc.collaboratorDelegate = self;
     [vc setupWithCollaborators:_currentNote.emailTagsArray];
+
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:vc];
+    navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self.navigationController presentViewController:navController

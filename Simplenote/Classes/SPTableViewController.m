@@ -20,7 +20,7 @@
 
 - (void)applyStyle {
     
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor simplenoteDividerColor];
 }
@@ -45,13 +45,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier:@"UITableViewCell"];
         
-        cell.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        cell.backgroundColor = [UIColor simplenoteBackgroundColor];
         
         UIView *selectionView = [[UIView alloc] initWithFrame:cell.bounds];
-        selectionView.backgroundColor = [UIColor colorWithName:UIColorNameLightBlueColor];
+        selectionView.backgroundColor = [UIColor simplenoteLightBlueColor];
         cell.selectedBackgroundView = selectionView;
         
-        cell.textLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+        cell.textLabel.textColor = [UIColor simplenoteTextColor];
         cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
         
     }

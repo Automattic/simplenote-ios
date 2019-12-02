@@ -43,6 +43,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 
+@property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
@@ -68,6 +69,7 @@
     self = [super init];
     if (self) {
         [self configureNavigationButtons];
+        [self configureNavigationBarBackground];
         [self configureTableView];
         [self configureSearchController];
         [self configureRootView];
@@ -212,10 +214,10 @@
 
 - (void)refreshStyle {
     // Refresh the containerView's backgroundColor
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
 
     // Refresh the Table's UI
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenotePlainStyle];
     [self.tableView reloadData];
 
     // Refresh the SearchBar's UI
@@ -267,6 +269,17 @@
     self.emptyTrashButton.isAccessibilityElement = YES;
     self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+}
+
+- (void)configureNavigationBarBackground {
+    NSAssert(_navigationBarBackground == nil, @"_navigationBarBackground is already initialized!");
+
+    // What's going on:
+    //  -   SPNavigationController.displaysBlurEffect makes sense when every VC in the hierarchy displays blur.
+    //  -   Since our UISearchBar lives in our View Hierarchy, the blur cannot be dealt with by the NavigationBar.
+    //  -   Therefore we must inject the blur on a VC per VC basis.
+    //
+    self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
 - (void)configureTableView {
@@ -382,6 +395,15 @@
 }
 
 
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Slowly Fade-In the NavigationBar's Blur
+    [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+}
+
+
 #pragma mark - UITableView Data Source
 
 - (NSInteger)numNotes {
@@ -444,7 +466,7 @@
     cell.bodyText = note.bodyPreview;
 
     if (bSearching) {
-        UIColor *tintColor = [UIColor colorWithName:UIColorNameTintColor];
+        UIColor *tintColor = [UIColor simplenoteTintColor];
         [cell highlightSubstringsMatching:_searchText color:tintColor];
     }
 }

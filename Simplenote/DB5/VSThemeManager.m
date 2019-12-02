@@ -116,24 +116,8 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
 
     /// Style: NavigationBar
     ///
-    UIColor *barTintColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    UIImage *navbarShadowImage = [UIImage new];
-    UIImage *navbarBackgroundImage = [UIImage imageWithName:UIImageNameNavigationBarBackground];
-    UIImage *navbarPromptImage = [UIImage imageWithName:UIImageNameNavigationBarBackgroundPrompt];
-
-    if (@available(iOS 13, *)) {
-        // WHY we're disabling the `resizableImage:` for iOS +13:
-        //
-        //  1.  It neutralizes iOS 13's "effective asset" resolution capabilities. The UI ends up stuck with the incorrect image.
-        //  2.  Tested in an array of devices. iOS *is* stretching the image automatically, anyways
-        //  3.  The asset itself is a line of 1x44pt. No curved areas, it's okay to stretch without considering insets.
-        //
-        //  *Plus:* Yes, we'd much rather having @available == false. BUT that triggers an Xcode warning!
-        //
-    } else {
-        navbarBackgroundImage = [navbarBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(44, 0, 0, 0)];
-        navbarPromptImage = [navbarPromptImage resizableImageWithCapInsets:UIEdgeInsetsMake(64, 0, 0, 0)];
-    }
+    UIColor *barTintColor = [UIColor clearColor];
+    UIImage *barBackgroundImage = [UIImage new];
 
     NSDictionary *barTitleAttributes = @{
         NSFontAttributeName: [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold],
@@ -142,9 +126,9 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
 
     id barAppearance = [UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]];
     [barAppearance setBarTintColor:barTintColor];
-    [barAppearance setBackgroundImage:navbarBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    [barAppearance setBackgroundImage:navbarPromptImage forBarMetrics:UIBarMetricsDefaultPrompt];
-    [barAppearance setShadowImage:navbarShadowImage];
+    [barAppearance setBackgroundImage:barBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    [barAppearance setBackgroundImage:barBackgroundImage forBarMetrics:UIBarMetricsDefaultPrompt];
+    [barAppearance setShadowImage:barBackgroundImage];
     [barAppearance setTitleTextAttributes:barTitleAttributes];
 }
 

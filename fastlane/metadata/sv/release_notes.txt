@@ -1,3 +1,3 @@
-– Åtgärdade en bugg som gjorde att StatusBar var dold när Simplenotes inställningar visades
-– Åtgärdade en bugg som gjorde att Swipe to Dismiss-gesten inte fungerade korrekt i redigeringsprogrammet
-– Åtgärdade en bugg som lät Peek and Pop öppna anteckningar i papperskorgen.
+- En bugg som förhindrade användare från att flytta markören i fältet E-postadress (inloggning/registrering) har korrigerats.
+- En bugg som gjorde att Markdown Preview-användargränssnittet avfärdades av misstag har korrigerats.
+- Ett problem som gjorde att appen kunde krascha vid specifika kombinationer av emojis har åtgärdats.

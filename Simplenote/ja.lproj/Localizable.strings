@@ -1,7 +1,19 @@
-/* Translation-Revision-Date: 2019-09-25 00:54:04+0000 */
+/* Translation-Revision-Date: 2019-11-28 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
+
+/* Number of Characters in a note */
+"%@ Character" = "%@ 文字";
+
+/* Number of Characters in a note */
+"%@ Characters" = "%@ 文字";
+
+/* Number of words in a note */
+"%@ Word" = "%@語";
+
+/* Number of words in a note */
+"%@ Words" = "%@単語";
 
 /* Number of found search results */
 "%d Result" = "%d件の検索結果";
@@ -9,62 +21,183 @@
 /* Number of found search results */
 "%d Results" = "%d件の検索結果";
 
-/* Number of words in a note */
-"%d Word" = "%d語";
+/* 1 minute passcode lock timeout */
+"1 Minute" = "1分";
 
-/* Number of words in a note */
-"%d Words" = "%d単語";
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15秒";
 
-/* Label of accept button on alert dialog */
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "2分";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "3分";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30秒";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "4分";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "5分";
+
+/* Display app about screen */
+"About" = "このサイトについて";
+
+/* Accept Action
+   Label of accept button on alert dialog */
 "Accept" = "承認";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "アカウント";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "共同編集者を追加";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "タグ ...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "タグを追加";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "すべてのノート";
 
+/* Sort Mode: Alphabetically, ascending */
+"Alphabetically: A-Z" = "アルファベット順 :A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Alphabetically: Z-A" = "アルファベット順 :Z-A";
+
+/* Sign in error message */
+"An error was encountered while signing in." = "ログイン時にエラーが発生しました。";
+
 /* No comment provided by engineer. */
+"Appearance" = "外観";
+
+/* Other Simplenote apps */
+"Apps" = "アプリ";
+
+/* Automattic hiring description */
+"Are you a developer? Automattic is hiring." = "開発者の方ですか ?Automattic では人材を募集しています。";
+
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "ゴミ箱を空にしてもよいですか ?この操作は元に戻すことができません。";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Are you sure you want to send without your email? We won't be able reply to you." = "メールアドレスなしで送信してもよろしいですか ?返信は送信されないことになります。";
+
+/* Title for prompt when user tries to close the feedback view */
+"Are you sure?" = "本当に実行しますか ?";
+
+/* User Authenticated */
+"Authenticated" = "認証済み";
+
+/* Title of Back button for Markdown preview */
+"Back" = "戻る";
+
+/* The Simplenote blog */
+"Blog" = "ブログ";
+
+/* Terms of Service Legend *PREFIX*: printed in dark color */
+"By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
+
+/* No comment provided by engineer. */
+"Can't Access." = "アクセスできません。";
+
+/* Cancel Action
+   Verb, cancel an alert dialog */
 "Cancel" = "キャンセル";
 
-/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+/* No comment provided by engineer. */
+"Choose Photo" = "写真を選択";
+
+/* No comment provided by engineer. */
+"Close" = "閉じる";
+
+/* Verb - work with others on a note */
 "Collaborate" = "共同編集";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "ノートの共同編集を有効化";
+/* No comment provided by engineer. */
+"Collaboration has moved" = "コラボレーションは移動しました";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "共同編集者";
 
-/* No comment provided by engineer. */
-"collaborators-description" = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
-
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
+
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"Contact" = "連絡";
+
+/* Contribute to the Simplenote apps on github */
+"Contribute" = "参加";
+
+/* This is one of the buttons we display inside of the prompt to review the app */
+"Could Be Better" = "不満がある";
+
+/* Error for bad email or password */
+"Could not create an account with the provided email address and password." = "入力されたメールアドレスとパスワードではアカウントを作成できませんでした。";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "入力されたメールアドレスとパスワードではログインできませんでした。";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+"Could you tell us how we could improve?" = "改善方法についてご意見いただけますか ?";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "ログインできません";
+
+/* Siri Suggestion to create a New Note */
+"Create a New Note" = "新規ノートを作成";
 
 /* No comment provided by engineer. */
 "Create a new note" = "新規ノートを作成";
 
+/* Sort Mode: Creation Date, descending */
+"Created: Newest" = "作成日 :最新";
+
+/* Sort Mode: Creation Date, ascending */
+"Created: Oldest" = "作成日 :最も古い";
+
 /* No comment provided by engineer. */
 "Current Collaborators" = "現在の共同編集者";
 
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "このノートは他のデバイスから削除されました。";
+/* Theme: Dark */
+"Dark" = "ダーク";
+
+/* Debug Screen Title
+   Display internal debug status */
+"Debug" = "デバッグ";
+
+/* Trash (verb) - the action of deleting a note */
+"Delete" = "削除";
+
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "ノートを削除";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "Markdown フォーマットを無効化";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "キーボードを閉じる";
 
-/* No comment provided by engineer. */
+/* Done toolbar button
+   Verb: Close current view */
 "Done" = "完了";
 
-/* Re-order or delete tags */
-"Edit Tags" = "タグを編集";
+/* Edit Tags Action: Visible in the Tags List */
+"Edit" = "編集";
+
+/* Email TextField Placeholder */
+"Email" = "メールアドレス";
+
+/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Email Address" = "メールアドレス";
+
+/* Email Taken Alert Title */
+"Email in use" = "使用中のメールアドレス";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "空にする";
@@ -72,23 +205,120 @@
 /* Remove all notes from the trash */
 "Empty trash" = "ゴミ箱を空にする";
 
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "Markdown フォーマットを有効化";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "待機状態";
+
+/* No comment provided by engineer. */
+"Error" = "エラー";
+
+/* No comment provided by engineer. */
+"Error uploading." = "アップロードの際にエラーが発生しました。";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "Face ID";
+
+/* Password Reset Action */
+"Forgotten password?" = "パスワードを忘れましたか ?";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
+"Great! Could you leave us a nice review?\nIt really helps." = "ありがとうございます。レビューを書いてもらえると、とても助かります。";
+
+/* Privacy Details */
+"Help us improve Simplenote by sharing usage data with our analytics tool." = "弊社の分析ツールに使用データを提供し、Simplenote の品質向上にご協力ください。";
+
 /* Noun - the version history of a note */
 "History" = "履歴";
-
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "以前のバージョンにノートを復元";
 
 /* Action - view the version history of a note */
 "History..." = "履歴…";
 
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"How can we help?" = "どのようなサポートをお求めですか ?";
+
+/* This is one of the buttons we display inside of the prompt to review the app */
+"I Like It" = "満足している";
+
+/* Title for alert that a user has entered an invalid email address */
+"Invalid Email Address." = "無効なメールアドレス。";
+
+/* Last Message timestamp */
+"LastSeen" = "LastSeen";
+
+/* Learn More Action */
+"Learn more" = "さらに詳しく";
+
+/* This is one of the buttons we display when prompting the user for a review */
+"Leave a Review" = "レビューを書く";
+
+/* Theme: Light */
+"Light" = "ライト";
+
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "タイムアウトをロック";
+
+/* Log In Action
+   Login Action
+   LogIn Action
+   LogIn Interface Title */
+"Log In" = "ログイン";
+
+/* Log out of the active account in the app */
+"Log Out" = "ログアウト";
+
+/* Allows the user to SignIn using their WPCOM Account */
+"Log in with WordPress.com" = "WordPress.com アカウントでログイン";
+
+/* Presents the regular Email signin flow */
+"Log in with email" = "メールアドレスでログイン";
+
+/* Month and day date formatter */
+"MMM d" = "M月d日";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "M月d日 h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "yyyy年M月d日";
+
+/* Month and year date formatter */
+"MMM yyyy" = "yyyy年M月";
+
+/* Special formatting that can be turned on for notes */
+"Markdown" = "Markdown";
+
+/* Switch which marks a note as using Markdown formatting or not */
+"Markdown toggle" = "Markdown 切り替え";
+
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "メニュー";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "ノートのオプションを表示";
+/* Sort Mode: Modified Date, descending */
+"Modified: Newest" = "更新日 :最新";
 
-/* No comment provided by engineer. */
+/* Sort Mode: Creation Date, ascending */
+"Modified: Oldest" = "更新日 :最も古い";
+
+/* Label to create a new note */
 "New note" = "新規ノート";
+
+/* Empty Note Placeholder */
+"New note..." = "新規ノート…";
+
+/* Alert's Cancel Action
+   Cancels Empty Trash Action */
+"No" = "いいえ";
+
+/* Title for alert when user tires to send feedback without an email address */
+"No Email." = "メールアドレスがありません。";
+
+/* Text that appears in an alert to the user when there is no internet */
+"No Internet" = "インターネットに接続されていません";
+
+/* Title for message when user tries to send feedback without any text */
+"No Message." = "メッセージがありません。";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "ノートがありません";
@@ -96,32 +326,53 @@
 /* Message shown when no notes match a search string */
 "No Results" = "一致する結果がありません";
 
+/* This is one of the buttons we display when prompting the user for a review */
+"No Thanks" = "いいえ";
+
 /* No comment provided by engineer. */
 "Note not published" = "非公開ノート";
-
-/* Confirmation shown when a note is published */
-"Note Published" = "ノートを公開しました";
 
 /* Plural form of notes */
 "Notes" = "メモ";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "現在のノートを閉じる";
-
-/* No comment provided by engineer. */
-"Off" = "オフ";
-
-/* No comment provided by engineer. */
+/* Dismisses an AlertController */
 "OK" = "OK";
+
+/* Instant passcode lock timeout */
+"Off" = "オフ";
 
 /* No comment provided by engineer. */
 "On" = "オン";
 
+/* Siri Suggestion to open a specific Note */
+"Open \"(preview)\"" = "「(プレビュー)」を開く";
+
+/* Siri Suggestion to open our app */
+"Open Simplenote" = "Simplenote を開く";
+
 /* Select a note to view in the note editor */
 "Open note" = "ノートを開く";
 
-/* Number of failed entries entering in passcode */
+/* AlertController's Payload for the broken Sort Options Fix */
+"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "更新によってノートの表示順が変更された可能性があります。並べ替えの設定を確認しますか ?";
+
+/* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
+
+/* Password TextField Placeholder */
+"Password" = "パスワード";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "パスワードは4文字以上にしてください";
+
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "パスワードは6文字以上にしてください。";
+
+/* Number of changes pending to be sent */
+"Pendings" = "保留中";
+
+/* Pin (verb) - the action of Pinning a note */
+"Pin" = "ピン";
 
 /* Action to mark a note as pinned */
 "Pin note" = "ノートを上部固定";
@@ -135,16 +386,28 @@
 /* Pinned notes are stuck to the note of the note list */
 "Pinned" = "上部固定中";
 
-/* No comment provided by engineer. */
-"Preferences" = "設定";
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "メールから WordPress.com アカウントを有効にして、もう一度試してください。";
 
-/* Confirmation shown when a note is published */
+/* Message for alert that user has entered an invalid email address */
+"Please check your email address, it appears to be invalid." = "メールアドレスが無効のようです。ご確認ください。";
+
+/* Message for alert when user tires to send feedback without any text */
+"Please enter a message." = "メッセージを入力してください。";
+
+/* Title of Markdown preview screen */
+"Preview" = "プレビュー";
+
+/* Simplenote privacy policy */
+"Privacy Policy" = "個人情報保護方針";
+
+/* Privacy Settings */
+"Privacy Settings" = "プライバシー設定";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
 "Publish" = "公開";
 
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "公開に失敗しました";
-
-/* Confirmation shown when a note is published */
+/* Action which published a note to a web page */
 "Publish note" = "ノートを公開";
 
 /* Switch which marks a note as published or unpublished */
@@ -156,14 +419,11 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "公開中";
 
+/* Reachs Internet */
+"Reachability" = "到達の可能性";
+
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "ゴミ箱からノートを完全消去";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "タグを削除";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "タグを削除しますか ?";
 
 /* Rename a tag */
 "Rename" = "タイトル変更";
@@ -174,32 +434,96 @@
 /* Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
 
+/* Search Placeholder
+   Using Search instead of Back if user is searching */
+"Search" = "検索";
+
+/* No comment provided by engineer. */
+"Security" = "セキュリティ";
+
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "送信";
 
-/* No comment provided by engineer. */
+/* This is one of the buttons we display when prompting the user for a review */
+"Send Feedback" = "意見を送る";
+
+/* For debugging use */
+"Send a Test Crash" = "テストクラッシュを送信";
+
+/* Label that is shown when feedback from the user is sending */
+"Sending..." = "送信中...";
+
+/* Title of options screen */
 "Settings" = "設定";
+
+/* Share (verb) - the action of Sharing a note */
+"Share" = "共有";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "分析を共有";
 
 /* No comment provided by engineer. */
 "Share note" = "ノートを共有";
 
-/* Accessibility hint on button to share note */
-"share-accessibility-hint" = "現在のノートのコンテンツを共有";
+/* No comment provided by engineer. */
+"Sharing notes is now accessed through the action menu from the toolbar." = "ノートの共有はツールバーのアクションメニューからアクセスできます。";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "サイドバー";
 
-/* Sign out of the active account in the app */
-"Sign Out" = "ログアウト";
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
+"Sign Up" = "登録";
 
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "現在のノートにタグを追加";
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "ログアウトすると、同期されていないメモはすべて削除されます。同期したメモを確認するには、Web アプリにログインします。";
 
-/* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "現在のノートからタグを削除";
+/* Our mighty brand! */
+"Simplenote" = "Simplenote";
 
-/* Text used to display the name of a tag */
-"Tag: %@" = "タグ: %@";
+/* Authentication Error Alert Title */
+"Sorry!" = "申し訳ございません。";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "アルファベット順に並べ替え";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date
+   Sort Order for the Notes List */
+"Sort Order" = "ソート順";
+
+/* Theme: Matches iOS Settings */
+"System Default" = "システムの初期設定";
+
+/* No comment provided by engineer. */
+"Tags" = "タグ";
+
+/* No comment provided by engineer. */
+"Take Photo" = "写真を撮影";
+
+/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"Terms and Conditions" = "利用規約";
+
+/* Simplenote terms of service */
+"Terms of Service" = "利用規約";
+
+/* No comment provided by engineer. */
+"Thanks" = "ありがとうございます。";
+
+/* Error when address is in use */
+"The email you've entered is already associated with a Simplenote account." = "このメールアドレスは、すでに他の Simplenote アカウントで使用されています。";
+
+/* Onboarding Header Text */
+"The simplest way to keep notes." = "最も手軽にメモを残せる方法です。";
+
+/* Option to enable the dark app theme. */
+"Theme" = "テーマ";
+
+/* Simplenote Themes */
+"Themes" = "テーマ";
+
+/* No comment provided by engineer. */
+"There was an error sending your feedback, please try again." = "フィードバックを送信する際にエラーが発生しました。もう一度お試しください。";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今日";
@@ -207,14 +531,17 @@
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "タグサイドバーを切り替え";
 
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "現在のノートをゴミ箱へ移動";
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Touch ID";
 
-/* Remove all notes from the trash */
-"Trash-noun" = "ゴミ箱";
+/* Title: Trash Tag is selected */
+"Trash" = "ゴミ箱";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "ゴミ箱に移動";
+"Trash" = "ゴミ箱に移動";
+
+/* Unpin (verb) - the action of Unpinning a note */
+"Unpin" = "ピンを外す";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "固定表示を解除";
@@ -222,213 +549,115 @@
 /* Action which unpublishes a note */
 "Unpublish note" = "ノートを非公開";
 
-/* Message shown when unpublishing a note */
+/* Message shown when a note is in the processes of being unpublished */
 "Unpublishing..." = "非公開設定中…";
-
-/* Represents a snapshot in time for a note */
-"Version" = "バージョン";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "このバージョンにスイッチ";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "バージョンを取得中";
-
-/* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "昨日";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "パスコード試行に%i回失敗";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "パスコードを入力";
-
-/* Pin Lock */
-"Enter your passcode" = "パスコードを入力してください";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "パスコードが一致しませんでした。もう一度お試しください。";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "パスコードを再入力";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "パスコードを設定";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "パスコードを無効化";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ のブロックを解除";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "パスコードを%i回誤入力しました";
-
-"welcomeNote-iOS" = "Simplenote for iOS へようこそ !
-
-ノートを新規作成するには、「＋」ボタンをタップしてください。
-
-一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。
-
-ノートを検索するには、ノート一覧の上に検索キーワードを入力してください。
-
-左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。
-
-ノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。
-
-http://simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "ABC 順にノートを並べる";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "すでにアカウントを持ちですか ?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "確認";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "入力されたメールアドレスとパスワードではアカウントを作成できませんでした。";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "入力されたメールアドレスとパスワードではログインできませんでした。";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "アカウントが無い場合";
-
-/* An error message */
-"Password" = "パスワード";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "パスワードは4文字以上にしてください。";
-
-/* Message displayed when login fails */
-"Sign in" = "ログイン";
-
-/* Message displayed when login fails */
-"Sign In" = "ログイン";
-
-/* TOS */
-"Sign up" = "登録";
-
-/* TOS */
-"Sign Up" = "登録";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "接続の際に問題が発生しました。もう一度お試しください。";
-
-/* Message displayed when email address is invalid */
-"Your email address is not valid." = "無効なメールアドレスです。";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "インスタントサーチとシンプルなタグで、ノートをすばやく見つけることができます。";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "スタート";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "リストを共有したり、指示を投稿したり、考えを公開したりしましょう。";
-
-/* Message shown in first launch view */
-"Stay organized" = "ノートを整理";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "どこでも利用可能";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Simplenote へようこそ";
-
-/* Message shown in first launch view */
-"Work together" = "複数デバイス対応";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "各種デバイスで常にノートが同期されます。ボタンをクリックする必要もなく、同期は自動的に完了します。";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "ダークテーマ";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "デバッグ";
-
-/* Month and day date formatter */
-"MMM d" = "M月d日";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "M月d日 h:mm a";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "yyyy年M月d日";
-
-/* Month, day, and year date formatter */
-"MMM yyyy" = "yyyy年M月";
-
-
-"Touch ID" = "Touch ID";
-
-/* Title displayed in the Option's Security section. */
-"Security" = "セキュリティ";
-
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "登録すると、利用規約に合意したものとみなされます。»";
-
-/* Forgot Password */
-"Forgot password? »" = "パスワードをお忘れですか ?»";
-
-/* Ratings View */
-"What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
-
-/* No comment provided by engineer. */
-"I Like It" = "満足している";
-
-/* No comment provided by engineer. */
-"Could Be Better" = "不満がある";
-
-/* Ratings View: Like */
-"Great! Could you leave us a nice review?
-It really helps." = "ありがとうございます。レビューを書いてもらえると、とても助かります。";
-
-/* No comment provided by engineer. */
-"Leave a Review" = "レビューを書く";
-
-/* No comment provided by engineer. */
-"No Thanks" = "いいえ";
-
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "改善方法についてご意見いただけますか ?";
-
-/* No comment provided by engineer. */
-"Send Feedback" = "意見を送る";
-
-/* Ratings View: Contact */
-"Contact" = "連絡";
-
-/* No comment provided by engineer. */
-"Your Email:" = "メールアドレス:";
-
-/* No comment provided by engineer. */
-"How can we help?" = "どのようなサポートをお求めですか ?";
-
-/* No comment provided by engineer. */
-"Back" = "戻る";
-
-/* Permanent Delete */
-"Delete" = "削除";
-
-/* Markdown Preview */
-"Preview" = "プレビュー";
-
-/* Alert message displayed when an account has unsynced notes */
-"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "ログアウトすると、同期されていないメモはすべて削除されます。同期したメモを確認するには、Web アプリにログインします。";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "同期されていないメモが検出されました";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "タグ ...";
+/* Title: Untagged Notes are onscreen */
+"Untagged" = "タグなし";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Simplenote にアクセスできなくなりましたか ?再びアクセスできるようにするには、アプリを再インストールしてアカウントにログインします。";
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "タグがつけられていないメモ";
+
+/* No comment provided by engineer. */
+"Use Latest Photo" = "最新の写真を使う";
+
+/* A user's Simplenote account */
+"Username" = "ユーザー名";
+
+/* Represents a snapshot in time for a note */
+"Version" = "バージョン";
+
+/* App version number */
+"Version %@" = "バージョン %@";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Web アプリにアクセス";
+
+/* No comment provided by engineer. */
+"We can't access your photos, please ensure this application has access in Settings." = "写真にアクセスできませんでした。「設定」でこのアプリケーションにアクセス権が与えられていることをご確認ください。";
+
+/* No comment provided by engineer. */
+"We couldn't upload the photo, please try again." = "写真をアップロードできませんでした。もう一度お試しください。";
+
+/* No comment provided by engineer. */
+"We have received your feedback and will be in contact soon." = "フィードバックをいただきました。近々ご連絡いたします。";
+
+/* Generic error */
+"We're having problems. Please try again soon." = "問題が発生しました。すぐにもう一度実行してください。";
+
+/* WebSocket Status */
+"WebSocket" = "WebSocket";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about WordPress?" = "WordPress についてのご意見をお聞かせください。";
+
+/* Work at Automattic */
+"Work With Us" = "求人情報";
+
+/* Alert's Accept Action
+   Proceeds with the Empty Trash OP */
+"Yes" = "はい";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "昨日";
+
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Your Email:" = "メールアドレス:";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid" = "無効なメールアドレスです。";
+
+/* Message for prompt when user tries to close feedback view after having entered text */
+"Your message will be lost." = "メッセージは失われます。";
+
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "ファイルの添付";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"Enable others to collaborate" = "ノートの共同編集を有効化";
+
+/* No comment provided by engineer. */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
+
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device." = "このノートは他のデバイスから削除されました。";
+
+/* Accessibility hint on button which shows the history of a note */
+"Restore note to previous version" = "以前のバージョンにノートを復元";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"Show options for note" = "ノートのオプションを表示";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"Close current note" = "現在のノートを閉じる";
+
+/* Accessibility hint on share button */
+"Share the content of the current note" = "現在のノートのコンテンツを共有";
+
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "現在のノートにタグを追加";
+
+/* No comment provided by engineer. */
+"Remove tag from the current note" = "現在のノートからタグを削除";
+
+/* Accessibility hint on button which moves a note to the trash */
+"Move the current note to trash" = "現在のノートをゴミ箱へ移動";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"Connect to the Internet to Access Previous Versions" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"Switch to this version" = "このバージョンにスイッチ";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching version" = "バージョンを取得中";
+
+/* A welcome note for new iOS users */
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
 

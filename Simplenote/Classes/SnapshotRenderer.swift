@@ -97,13 +97,13 @@ private extension SnapshotRenderer {
     /// Configures a given SPTextView instance in order to properly render a given Note, with the specified Search Query.
     ///
     func configure(editorTextView: SPTextView, note: Note, searchQuery: String?) {
-        editorTextView.backgroundColor = .color(name: .backgroundColor)
+        editorTextView.backgroundColor = .simplenoteBackgroundColor
         editorTextView.interactiveTextStorage.tokens = storageAttributes
         editorTextView.attributedText = attributedText(from: note.content)
         editorTextView.contentOffset = .zero
 
-        if let searchQuery = searchQuery, let tintColor = UIColor.color(name: .tintColor) {
-            editorTextView.highlightSubstrings(matching: searchQuery, color: tintColor)
+        if let searchQuery = searchQuery {
+            editorTextView.highlightSubstrings(matching: searchQuery, color: .simplenoteTintColor)
         }
     }
 
@@ -118,8 +118,8 @@ private extension SnapshotRenderer {
         tableViewCell.accessoryRightTintColor = accessoryColor
         tableViewCell.rendersInCondensedMode = Options.shared.condensedNotesList
 
-        if let searchQuery = searchQuery, let tintColor = UIColor.color(name: .tintColor) {
-            tableViewCell.highlightSubstrings(matching: searchQuery, color: tintColor)
+        if let searchQuery = searchQuery {
+            tableViewCell.highlightSubstrings(matching: searchQuery, color: .simplenoteTintColor)
         }
     }
 

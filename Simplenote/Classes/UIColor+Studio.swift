@@ -149,15 +149,54 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteBackgroundColor: UIColor {
+        UIColor(lightColor: .spWhite, darkColor: .darkGray1)
+    }
+
+    @objc
+    static var simplenoteNavigationBarBackgroundColor: UIColor {
+        UIColor(lightColor: .spWhite, darkColor: .darkGray8).withAlphaComponent(UIKitConstants.alphaQuarter)
+    }
+
+    @objc
+    static var simplenoteTableViewBackgroundColor: UIColor {
+        UIColor(lightColor: .gray0, darkColor: .darkGray0)
+    }
+
+    @objc
+    static var simplenoteWindowBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .black)
+    }
+
+    @objc
     static var simplenoteDividerColor: UIColor {
         UIColor(lightColor: .gray10, darkColor: .gray70)
     }
 
     @objc
-    static var simplenoteHorizontalPickerTitleColor: UIColor {
+    static var simplenoteTitleColor: UIColor {
         UIColor(lightColor: .gray60, darkColor: .gray20)
     }
 
+    @objc
+    static var simplenoteTextColor: UIColor {
+        UIColor(lightColor: .gray80, darkColor: .white)
+    }
+
+    @objc
+    static var simplenoteTintColor: UIColor {
+        UIColor(lightColor: .blue50, darkColor: .blue30)
+    }
+
+    @objc
+    static var simplenoteLightBlueColor: UIColor {
+        UIColor(lightColor: .blue5, darkColor: .darkGray8)
+    }
+
+    @objc
+    static var simplenoteInteractiveTextColor: UIColor {
+        UIColor(lightColor: .blue60, darkColor: .blue20)
+    }
 
 
 ///    #### PENDINGS
@@ -183,32 +222,8 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .gray100)
-    }
-
-    @objc
-    static var simplenoteCollaboratorTextColor: UIColor {
-        UIColor(studioColor: .gray0)
-    }
-
-    @objc
     static var simplenoteEmptyListViewTextColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteLightBlueColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-
-
-
-
-    @objc
-    static var simplenoteTableViewBackgroundColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray100)
     }
 
     @objc
@@ -245,15 +260,4 @@ extension UIColor {
     static var simplenoteTagViewPlaceholderColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
-
-    @objc
-    static var simplenoteTextColor: UIColor {
-        UIColor(lightColor: .gray60, darkColor: .gray20)
-    }
-
-    @objc
-    static var simplenoteTintColor: UIColor {
-        UIColor(studioColor: .blue30)
-    }
-
 }

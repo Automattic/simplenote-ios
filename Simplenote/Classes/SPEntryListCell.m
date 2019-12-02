@@ -19,18 +19,18 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 
-        self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+        self.backgroundColor = [UIColor simplenoteBackgroundColor];
         
         primaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         primaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         primaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        primaryLabel.textColor = [UIColor colorWithName:UIColorNameTextColor];
+        primaryLabel.textColor = [UIColor simplenoteTextColor];
         [self.contentView addSubview:primaryLabel];
         
         secondaryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         secondaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secondaryLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        secondaryLabel.textColor = [UIColor colorWithName:UIColorNameCollaboratorTextColor];
+        secondaryLabel.textColor = [UIColor simplenoteTitleColor];
         [self.contentView addSubview:secondaryLabel];
         
         UIImage *checkedImage = [UIImage imageWithName:UIImageNameCheckmarkChecked];

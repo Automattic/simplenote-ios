@@ -63,7 +63,7 @@
 }
 
 - (void)applyStyle {
-    self.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.backgroundColor = [UIColor simplenoteBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 

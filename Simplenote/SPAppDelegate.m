@@ -35,8 +35,9 @@
 
 @class KeychainMigrator;
 
-#if USE_HOCKEY
-#import <HockeySDK/HockeySDK.h>
+#if USE_APPCENTER
+@import AppCenter;
+@import AppCenterDistribute;
 #endif
 
 
@@ -45,11 +46,6 @@
 #pragma mark ================================================================================
 
 @interface SPAppDelegate () <UINavigationControllerDelegate,
-#if USE_HOCKEY
-                                BITHockeyManagerDelegate,
-                                BITCrashManagerDelegate,
-                                BITUpdateManagerDelegate,
-#endif
                                 SimperiumDelegate,
                                 SPBucketDelegate,
                                 PinLockDelegate>
@@ -153,8 +149,8 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     }
     
-    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    self.window.backgroundColor = [UIColor simplenoteWindowBackgroundColor];
+    self.window.tintColor = [UIColor simplenoteTintColor];
 
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
@@ -167,7 +163,6 @@
     self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
-    self.navigationController.navigationBar.translucent = YES;
     self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
@@ -179,18 +174,14 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)setupBitHockey
+- (void)setupAppCenter
 {
-#if USE_HOCKEY
-    NSLog(@"Initializing HockeyApp...");
+#if USE_APPCENTER
+    NSLog(@"Initializing AppCenter...");
     
-    BITHockeyManager *hockeyManager = [BITHockeyManager sharedHockeyManager];
-    NSString *identifier = [SPCredentials bitHockeyIdentifier];
-    [hockeyManager configureWithIdentifier:identifier delegate:self];
-    [hockeyManager startManager];
-
-    BITAuthenticator *authenticator = hockeyManager.authenticator;
-    [authenticator authenticateInstallation];
+    NSString *identifier = [SPCredentials appCenterIdentifier];
+    [MSAppCenter start:identifier withServices:@[[MSDistribute class]]];
+    [MSDistribute setEnabled:true];
 #endif
 }
 
@@ -222,7 +213,7 @@
 	// Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
-	[self setupBitHockey];
+	[self setupAppCenter];
     [self setupCrashLogging];
     [self setupDefaultWindow];
 
@@ -425,8 +416,8 @@
 
 - (void)themeDidChange
 {
-    self.window.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
-    self.window.tintColor = [UIColor colorWithName:UIColorNameTintColor];
+    self.window.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
+    self.window.tintColor = [UIColor simplenoteTintColor];
 }
 
 
@@ -508,6 +499,7 @@
 	
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
     navController.disableRotation = YES;
+    navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     navController.modalPresentationCapturesStatusBarAppearance = YES;
     

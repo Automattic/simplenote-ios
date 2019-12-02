@@ -6,6 +6,7 @@ import Foundation
 @objcMembers
 class UIKitConstants: NSObject {
     static let alphaZero = CGFloat(0)
+    static let alphaQuarter = CGFloat(0.25)
     static let alphaMid = CGFloat(0.5)
     static let alphaFull = CGFloat(1)
     static let animationDelayZero = TimeInterval(0)

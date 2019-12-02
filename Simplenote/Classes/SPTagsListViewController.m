@@ -111,7 +111,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 #pragma mark - Interface Initialization
 
 - (void)configureView {
-    self.view.backgroundColor = [UIColor colorWithName:UIColorNameBackgroundColor];
+    self.view.backgroundColor = [UIColor simplenoteBackgroundColor];
 }
 
 - (void)configureTableView {
@@ -188,7 +188,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)refreshStyle {
     self.rightBorderView.backgroundColor = [UIColor simplenoteDividerColor];
     [self.tagsHeaderView refreshStyle];
-    [self.tableView applyDefaultGroupedStyling];
+    [self.tableView applySimplenoteGroupedStyle];
     [self.tableView reloadData];
 }
 
