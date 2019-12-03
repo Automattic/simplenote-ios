@@ -24,6 +24,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="9xf-Qv-hmj"/>
+                        <outlet property="delegate" destination="-1" id="tYM-z6-H0o"/>
                     </connections>
                 </tableView>
             </subviews>
