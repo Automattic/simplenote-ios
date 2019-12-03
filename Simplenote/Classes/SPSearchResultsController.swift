@@ -38,7 +38,7 @@ class SPSearchResultsController {
                 return
             }
 
-            refreshPredicate(keyword: keyword)
+            updatePredicateAndFetch(keyword: keyword)
         }
     }
 
@@ -92,7 +92,7 @@ private extension SPSearchResultsController {
 
     /// Refreshes the ResultsController's Predicate
     ///
-    func refreshPredicate(keyword: String) {
+    func updatePredicateAndFetch(keyword: String) {
         resultsController.fetchRequest.predicate = predicate(keyword: keyword)
         try? resultsController.performFetch()
     }
