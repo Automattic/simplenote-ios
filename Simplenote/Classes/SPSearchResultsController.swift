@@ -2,9 +2,9 @@ import Foundation
 import CoreData
 
 
-// MARK: - SPResultsController
+// MARK: - SPSearchResultsController
 //
-class SPResultsController {
+class SPSearchResultsController {
 
     /// Batch Size for the FRC's Request
     ///
@@ -54,7 +54,7 @@ class SPResultsController {
 
 // MARK: - Public Methods
 //
-extension SPResultsController {
+extension SPSearchResultsController {
 
     /// Executes the fetch request on the store to get objects.
     ///
@@ -88,7 +88,7 @@ extension SPResultsController {
 
 // MARK: - Private Methods
 //
-private extension SPResultsController {
+private extension SPSearchResultsController {
 
     /// Refreshes the ResultsController's Predicate
     ///
