@@ -13,6 +13,15 @@ ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
 ENV["PROJECT_ROOT_FOLDER"]="./"
 
+# Use this instead of getting values from ENV directly
+# It will throw an error if the requested value is missing
+def get_required_env(key)
+  unless ENV.key?(key)
+    UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
+  end
+  ENV[key]
+end
+
 ########################################################################
 # Release Lanes
 ########################################################################
@@ -230,7 +239,7 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
     ios_build_preflight() unless (options[:skip_prechecks])
 
     appstore_code_signing
-    
+
     gym(scheme: "Simplenote", workspace: "Simplenote.xcworkspace",
       clean: true,
       export_options: {
