@@ -1,3 +1,3 @@
-- Er is een bug verwijderd die ervoor zorgde dat de statusbalk werd verborgen wanneer de instellingen van Simplenote werden weergegeven.
-- Er is een bug verwijderd die ervoor zorgde dat het gebaar 'Slepen om te negeren' niet goed werkte in de Editor.
-- Er is een bug verwijderd die toestond dat Gluren en openen notities in de Prullenbak opende.
+- Er is een bug verwijderd die voorkwam dat gebruikers de caret in het e-mailveld konden verplaatsen (inloggen/aanmelden).
+- Er is een bug verwijderd die ervoor zorgde dat de UI van de Markdown-voorbeeldweergave per ongeluk werd afgewezen.
+- Er is een probleem verholpen dat ervoor zorgde dat de app crashte bij specifieke emoji-combinaties.

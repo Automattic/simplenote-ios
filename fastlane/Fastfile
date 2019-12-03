@@ -196,7 +196,7 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
     # makes the default gym output override the "file" parameter. 
     appcenter_upload(
       api_token: ENV["APPCENTER_API_TOKEN"],
-      owner_name: "Hogwarts-Organization",
+      owner_name: "automattic",
       owner_type: "organization", 
       app_name: "Simplenote",
       ipa: "./build/Simplenote Internal.ipa",

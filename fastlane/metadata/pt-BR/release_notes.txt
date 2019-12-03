@@ -1,3 +1,3 @@
-- Correção do bug que ocultava a Barra de status quando as configurações do Simplenote eram exibidas
-- Correção do bug que impedia o gesto “Deslizar para dispensar” de funcionar corretamente no Editor
-- Correção do bug que permitia que a função “Peek and Pop” abrisse anotações na Lixeira
+- Correção do bug que impedia que os usuários reposicionassem o cursor no campo e-mail (Login/Cadastre-se).
+- Correção do bug que fazia com que a interface do usuário do Markdown Preview fosse descartada acidentalmente.
+- Correção do problema que poderia travar o aplicativo com uma combinação específica de emojis.
