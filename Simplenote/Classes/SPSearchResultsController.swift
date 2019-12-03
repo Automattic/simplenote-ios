@@ -46,7 +46,8 @@ class SPSearchResultsController {
     ///
     ///  - mainContext: Main Thread's MOC
     ///
-    init(mainContext: NSManagedObjectContext) {
+    init(mainContext: NSManagedObjectContext = SPAppDelegate.shared().managedObjectContext) {
+        assert(mainContext.concurrencyType == .mainQueueConcurrencyType)
         self.mainContext = mainContext
     }
 }
