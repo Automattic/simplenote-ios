@@ -28,12 +28,8 @@
 #import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
-@import WordPress_AppbotX;
 
-
-@interface SPNoteListViewController () <ABXPromptViewDelegate,
-                                        ABXFeedbackViewControllerDelegate,
-                                        UITableViewDataSource,
+@interface SPNoteListViewController () <UITableViewDataSource,
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
