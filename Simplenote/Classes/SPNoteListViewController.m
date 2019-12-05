@@ -11,7 +11,6 @@
 #import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPRatingsHelper.h"
-#import "SPRatingsPromptView.h"
 
 #import "SPConstants.h"
 #import "Note.h"
@@ -1171,10 +1170,9 @@
 
 - (UIView *)newAppRatingView
 {
-    SPRatingsPromptView *appRatingView = [[SPRatingsPromptView alloc] initWithWidth:CGRectGetWidth(self.view.bounds)];
-    appRatingView.label.text = NSLocalizedString(@"What do you think about Simplenote?", @"This is the string we display when prompting the user to review the app");
-    appRatingView.delegate = self;
-    appRatingView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    SPRatingsPromptView *appRatingView = [SPRatingsPromptView loadFromNib];
+//    appRatingView.label.text = NSLocalizedString(@"What do you think about Simplenote?", @"This is the string we display when prompting the user to review the app");
+//    appRatingView.delegate = self;
     
     return appRatingView;
 }
@@ -1193,7 +1191,7 @@
 - (void)appbotPromptForFeedback
 {
     [SPTracker trackRatingsFeedbackScreenOpened];
-    [ABXFeedbackViewController showFromController:self placeholder:nil delegate:self];
+//    [ABXFeedbackViewController showFromController:self placeholder:nil delegate:self];
     [[SPRatingsHelper sharedInstance] gaveFeedbackForCurrentVersion];
     [self hideRatingViewIfNeeded];
 }

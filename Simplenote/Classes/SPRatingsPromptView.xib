@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W6P-aV-mc2" customClass="SPRatingsPromptView" customModule="Simplenote" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yH3-Od-JpX">
+                    <rect key="frame" x="135" y="10" width="145" height="88"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-6K-K4h">
+                            <rect key="frame" x="56.5" y="0.0" width="32.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
+                            <rect key="frame" x="0.0" y="61" width="145" height="27"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
+                                    <rect key="frame" x="0.0" y="0.0" width="66" height="27"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                                    <state key="normal" title="Left">
+                                        <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
+                                    <rect key="frame" x="71" y="0.0" width="74" height="27"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                                    <state key="normal" title="Right">
+                                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W6P-aV-mc2" secondAttribute="leading" id="8vt-vb-kcr"/>
+                <constraint firstAttribute="bottom" secondItem="yH3-Od-JpX" secondAttribute="bottom" constant="10" id="B3f-bT-1ri"/>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="top" secondItem="W6P-aV-mc2" secondAttribute="top" constant="10" id="FXs-bE-tay"/>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="centerY" secondItem="W6P-aV-mc2" secondAttribute="centerY" id="TCa-1F-Ckz"/>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="centerX" secondItem="W6P-aV-mc2" secondAttribute="centerX" id="lsu-8g-gJE"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yH3-Od-JpX" secondAttribute="trailing" id="waN-HM-kSf"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="leftButton" destination="RbR-YT-ap7" id="Tgh-4z-VQG"/>
+                <outlet property="messageLabel" destination="EFk-6K-K4h" id="mk7-oi-H9W"/>
+                <outlet property="rightButton" destination="bb6-E4-QxE" id="pwF-10-0Sn"/>
+            </connections>
+            <point key="canvasLocation" x="173.91304347826087" y="-325.44642857142856"/>
+        </view>
+    </objects>
+</document>
