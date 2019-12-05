@@ -13,7 +13,6 @@
 #import "SPRatingsHelper.h"
 #import "SPRatingsPromptView.h"
 
-#import "SPAnimations.h"
 #import "SPConstants.h"
 #import "Note.h"
 
@@ -1145,14 +1144,14 @@
     // Let's fade in the Ratings Reminder once the transition is ready
     //
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newAppRatingView];
-    ratingsView.alpha = kSimplenoteAnimationInvisibleAlpha;
+    ratingsView.alpha = UIKitConstants.alphaZero;
 
-    [UIView animateWithDuration:kSimplenoteAnimationDuration
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                                     // Animate both, Alpha + Rows Sliding
-                                    ratingsView.alpha = kSimplenoteAnimationVisibleAlpha;
+                                    ratingsView.alpha = UIKitConstants.alphaFull;
                                     self.tableView.tableHeaderView = ratingsView;
                                 }
                      completion:nil];
@@ -1164,7 +1163,7 @@
         return;
     }
     
-    [UIView animateWithDuration:kSimplenoteAnimationDuration delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.tableView.tableHeaderView = nil;
     } completion:^(BOOL success) {
     }];
