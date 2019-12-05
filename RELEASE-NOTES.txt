@@ -1,6 +1,10 @@
 4.15
 -----
- 
+
+4.14.1
+======
+-   Fixed a bug that made rendered the Add Collaborators button not visible.
+
 4.14
 ====
 -   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp)
