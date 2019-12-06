@@ -3,8 +3,8 @@
   "pinned_hash": "eed3c3f412a87e2804f4c0291dde7523e24877fa",
   "files_to_copy": [
     {
-      "file": "iOS/simplenote/config.plist",
-      "destination": "Simplenote/config.plist"
+      "file": "iOS/simplenote/SPCredentials.swift",
+      "destination": "Simplenote/Credentials/SPCredentials.swift"
     }
   ],
   "file_dependencies": [
