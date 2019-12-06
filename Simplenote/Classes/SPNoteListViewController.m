@@ -23,6 +23,7 @@
 #import "UIImage+Colorization.h"
 #import "VSThemeManager.h"
 
+#import <StoreKit/StoreKit.h>
 #import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
@@ -33,7 +34,8 @@
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
-                                        SPTransitionControllerDelegate>
+                                        SPTransitionControllerDelegate,
+                                        SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 @property (nonatomic, strong) SPSearchResultsViewController         *resultsViewController;
@@ -1129,10 +1131,10 @@
 
 #pragma mark - Ratings View Helpers
 
-- (void)showRatingViewIfNeeded {
-
+- (void)showRatingViewIfNeeded
+{
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
-        return;
+//        return;
     }
     
     [SPTracker trackRatingsPromptSeen];
@@ -1142,7 +1144,7 @@
     // and moves them to their final positions.
     // Let's fade in the Ratings Reminder once the transition is ready
     //
-    UIView *ratingsView = self.tableView.tableHeaderView ?: [self newAppRatingView];
+    UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
     ratingsView.alpha = UIKitConstants.alphaZero;
 
     [UIView animateWithDuration:UIKitConstants.animationShortDuration
@@ -1156,8 +1158,8 @@
                      completion:nil];
 }
 
-- (void)hideRatingViewIfNeeded {
-
+- (void)hideRatingViewIfNeeded
+{
     if (self.tableView.tableHeaderView == nil || [[SPRatingsHelper sharedInstance] shouldPromptForAppReview] == YES) {
         return;
     }
@@ -1168,61 +1170,50 @@
     }];
 }
 
-- (UIView *)newAppRatingView
+- (UIView *)newRatingsView
 {
-    SPRatingsPromptView *appRatingView = [SPRatingsPromptView loadFromNib];
-//    appRatingView.label.text = NSLocalizedString(@"What do you think about Simplenote?", @"This is the string we display when prompting the user to review the app");
-//    appRatingView.delegate = self;
-    
-    return appRatingView;
+    SPRatingsPromptView *ratingView = [SPRatingsPromptView loadFromNib];
+    ratingView.delegate = self;
+    return ratingView;
 }
 
 
-#pragma mark - ABXPromptViewDelegate
+#pragma mark - SPRatingsPromptDelegate
 
-- (void)appbotPromptForReview
+- (void)displayReviewInterface
 {
     [SPTracker trackRatingsAppRated];
-    [[UIApplication sharedApplication] openURL:SPCredentials.iTunesReviewURL options:@{} completionHandler:nil];
+    [SKStoreReviewController requestReview];
     [[SPRatingsHelper sharedInstance] ratedCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptForFeedback
+- (void)displayFeedbackInterface
 {
     [SPTracker trackRatingsFeedbackScreenOpened];
+    [[UIApplication sharedApplication] openURL:SPCredentials.iTunesReviewURL options:@{} completionHandler:nil];
 //    [ABXFeedbackViewController showFromController:self placeholder:nil delegate:self];
     [[SPRatingsHelper sharedInstance] gaveFeedbackForCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptClose
+- (void)dismissRatingsView
 {
     [SPTracker trackRatingsDeclinedToRate];
     [[SPRatingsHelper sharedInstance] declinedToRateCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptLiked
+- (void)simplenoteWasLiked
 {
     [SPTracker trackRatingsAppLiked];
     [[SPRatingsHelper sharedInstance] likedCurrentVersion];
 }
 
-- (void)appbotPromptDidntLike
+- (void)simplenoteWasDisliked
 {
     [SPTracker trackRatingsAppDisliked];
     [[SPRatingsHelper sharedInstance] dislikedCurrentVersion];
-}
-
-- (void)abxFeedbackDidSendFeedback
-{
-    [SPTracker trackRatingsFeedbackSent];
-}
-
-- (void)abxFeedbackDidntSendFeedback
-{
-    [SPTracker trackRatingsFeedbackDeclined];
 }
 
 @end
