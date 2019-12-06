@@ -23,6 +23,7 @@
 #import "UIImage+Colorization.h"
 #import "VSThemeManager.h"
 
+#import <SafariServices/SafariServices.h>
 #import <StoreKit/StoreKit.h>
 #import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
@@ -1190,9 +1191,11 @@
 
 - (void)displayFeedbackInterface
 {
+    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:SPCredentials.simplenoteFeedbackURL];
+    safariViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:safariViewController animated:true completion:nil];
+
     [SPTracker trackRatingsFeedbackScreenOpened];
-    [[UIApplication sharedApplication] openURL:SPCredentials.iTunesReviewURL options:@{} completionHandler:nil];
-//    [ABXFeedbackViewController showFromController:self placeholder:nil delegate:self];
     [[SPRatingsHelper sharedInstance] gaveFeedbackForCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
