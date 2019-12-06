@@ -186,20 +186,20 @@ private extension State {
     var leftTitle: String {
         switch self {
         case .initial:
-            return NSLocalizedString("I Like It", comment: "")
+            return NSLocalizedString("I like it", comment: "")
         case .liked:
-            return NSLocalizedString("Leave a Review", comment: "")
+            return NSLocalizedString("Leave a review", comment: "")
         case .disliked:
-            return NSLocalizedString("Send Feedback", comment: "")
+            return NSLocalizedString("Send feedback", comment: "")
         }
     }
 
     var rightTitle: String {
         switch self {
         case .initial:
-            return NSLocalizedString("Could Be Better", comment: "")
+            return NSLocalizedString("Could be better", comment: "")
         case .liked, .disliked:
-            return NSLocalizedString("No Thanks", comment: "")
+            return NSLocalizedString("No thanks", comment: "")
         }
     }
 }
