@@ -1142,9 +1142,7 @@
 
     // Note:
     // We use a custom Transition between Note List and Note Editor, that takes snapshots of the notes,
-    // and moves them to their final positions.
-    // Let's fade in the Ratings Reminder once the transition is ready
-    //
+    // and moves them to their final positions. Let's fade in the Ratings Reminder once the transition is ready
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
     ratingsView.alpha = UIKitConstants.alphaZero;
 
@@ -1152,13 +1150,10 @@
     self.tableView.tableHeaderView = ratingsView;
     [ratingsView layoutIfNeeded];
 
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                                    ratingsView.alpha = UIKitConstants.alphaFull;
-                                    [self.tableView layoutIfNeeded];
-                                }
-                     completion:nil];
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
+        ratingsView.alpha = UIKitConstants.alphaFull;
+        [self.tableView layoutIfNeeded];
+    } completion:nil];
 }
 
 - (void)hideRatingViewIfNeeded
@@ -1167,10 +1162,9 @@
         return;
     }
     
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.tableView.tableHeaderView = nil;
-    } completion:^(BOOL success) {
-    }];
+    } completion:nil];
 }
 
 - (UIView *)newRatingsView
