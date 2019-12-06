@@ -1151,20 +1151,21 @@
     
     [SPTracker trackRatingsPromptSeen];
 
-    // Note:
-    // We use a custom Transition between Note List and Note Editor, that takes snapshots of the notes,
-    // and moves them to their final positions. Let's fade in the Ratings Reminder once the transition is ready
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
-    ratingsView.alpha = UIKitConstants.alphaZero;
 
+    // Calculate the minimum required dimension
     [ratingsView adjustSizeForCompressedLayout];
 
-    // Prevent Ratings UI flickers
+    // UITableView will adjust the HeaderView's width. Right afterwards, we'll perform a layout cycle, to avoid glitches
     self.tableView.tableHeaderView = ratingsView;
     [ratingsView layoutIfNeeded];
 
+    // And finally ... FadeIn!
+    ratingsView.alpha = UIKitConstants.alphaZero;
+
     [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
         ratingsView.alpha = UIKitConstants.alphaFull;
+        [self.tableView layoutIfNeeded];
     } completion:nil];
 }
 
@@ -1176,6 +1177,7 @@
     
     [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.tableView.tableHeaderView = nil;
+        [self.tableView layoutIfNeeded];
     } completion:nil];
 }
 

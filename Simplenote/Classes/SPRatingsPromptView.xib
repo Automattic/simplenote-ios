@@ -14,21 +14,21 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yH3-Od-JpX">
-                    <rect key="frame" x="130.5" y="29" width="153" height="62.5"/>
+                    <rect key="frame" x="136" y="28" width="142" height="64.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-6K-K4h">
-                            <rect key="frame" x="60.5" y="0.0" width="32.5" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="1000" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-6K-K4h">
+                            <rect key="frame" x="55" y="0.0" width="32.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
-                            <rect key="frame" x="0.0" y="35.5" width="153" height="27"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
+                            <rect key="frame" x="0.0" y="35.5" width="142" height="29"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
-                                    <rect key="frame" x="0.0" y="0.0" width="74" height="27"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
+                                    <rect key="frame" x="0.0" y="0.0" width="66" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                                    <inset key="contentEdgeInsets" minX="16" minY="6" maxX="16" maxY="6"/>
                                     <state key="normal" title="Left">
                                         <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
@@ -36,10 +36,10 @@
                                         <action selector="leftActionWasPressed" destination="W6P-aV-mc2" eventType="touchUpInside" id="Y8y-bs-mCD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
-                                    <rect key="frame" x="79" y="0.0" width="74" height="27"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
+                                    <rect key="frame" x="76" y="0.0" width="66" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
+                                    <inset key="contentEdgeInsets" minX="16" minY="6" maxX="16" maxY="6"/>
                                     <state key="normal" title="Right">
                                         <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
@@ -58,8 +58,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W6P-aV-mc2" secondAttribute="leading" constant="10" id="8vt-vb-kcr"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yH3-Od-JpX" secondAttribute="bottom" constant="15" id="B3f-bT-1ri"/>
-                <constraint firstItem="yH3-Od-JpX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W6P-aV-mc2" secondAttribute="top" constant="15" id="FXs-bE-tay"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yH3-Od-JpX" secondAttribute="bottom" priority="999" constant="20" id="B3f-bT-1ri"/>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W6P-aV-mc2" secondAttribute="top" priority="999" constant="20" id="FXs-bE-tay"/>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="centerY" secondItem="W6P-aV-mc2" secondAttribute="centerY" id="TCa-1F-Ckz"/>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="centerX" secondItem="W6P-aV-mc2" secondAttribute="centerX" id="lsu-8g-gJE"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yH3-Od-JpX" secondAttribute="trailing" constant="10" id="waN-HM-kSf"/>
