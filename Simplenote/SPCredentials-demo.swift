@@ -43,6 +43,14 @@ class SPCredentials: NSObject {
     ///
     static let simperiumSettingsObjectKey = "not-required"
 
+    /// Simplenote's Send Feedback URL
+    ///
+    static let simplenoteFeedbackURL = URL(string: "https://not.required")!
+
+    /// Simplenote's Send Feedback Mail
+    ///
+    static let simplenoteFeedbackMail = "not.required@not.required.com"
+
     /// WordPressSSO: Client ID
     ///
     static let wpcomClientID = "not-required"
