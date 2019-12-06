@@ -96,6 +96,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self refreshTableViewInsets];
+    [self updatetableHeaderSize];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -216,7 +217,6 @@
 }
 
 - (void)contentSizeWasUpdated:(id)sender {
-    [self updatetableHeaderSize];
     [self updateRowHeight];
 }
 
