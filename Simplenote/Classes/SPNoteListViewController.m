@@ -1148,13 +1148,15 @@
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
     ratingsView.alpha = UIKitConstants.alphaZero;
 
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration
-                          delay:0.0
+    // Prevent Ratings UI flickers
+    self.tableView.tableHeaderView = ratingsView;
+    [ratingsView layoutIfNeeded];
+
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                                    // Animate both, Alpha + Rows Sliding
                                     ratingsView.alpha = UIKitConstants.alphaFull;
-                                    self.tableView.tableHeaderView = ratingsView;
+                                    [self.tableView layoutIfNeeded];
                                 }
                      completion:nil];
 }
@@ -1173,9 +1175,9 @@
 
 - (UIView *)newRatingsView
 {
-    SPRatingsPromptView *ratingView = [SPRatingsPromptView loadFromNib];
-    ratingView.delegate = self;
-    return ratingView;
+    SPRatingsPromptView *ratingsView = [SPRatingsPromptView loadFromNib];
+    ratingsView.delegate = self;
+    return ratingsView;
 }
 
 

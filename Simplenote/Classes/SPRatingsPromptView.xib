@@ -9,20 +9,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6P-aV-mc2" customClass="SPRatingsPromptView" customModule="Simplenote" customModuleProvider="target">
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W6P-aV-mc2" customClass="SPRatingsPromptView" customModule="Simplenote" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+            <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yH3-Od-JpX">
-                    <rect key="frame" x="134.5" y="10" width="145" height="88"/>
+                    <rect key="frame" x="134.5" y="15" width="145" height="78"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-6K-K4h">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-6K-K4h">
                             <rect key="frame" x="56.5" y="0.0" width="32.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
-                            <rect key="frame" x="0.0" y="61" width="145" height="27"/>
+                            <rect key="frame" x="0.0" y="51" width="145" height="27"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
                                     <rect key="frame" x="0.0" y="0.0" width="66" height="27"/>
@@ -54,8 +55,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W6P-aV-mc2" secondAttribute="leading" id="8vt-vb-kcr"/>
-                <constraint firstAttribute="bottom" secondItem="yH3-Od-JpX" secondAttribute="bottom" constant="10" id="B3f-bT-1ri"/>
-                <constraint firstItem="yH3-Od-JpX" firstAttribute="top" secondItem="W6P-aV-mc2" secondAttribute="top" constant="10" id="FXs-bE-tay"/>
+                <constraint firstAttribute="bottom" secondItem="yH3-Od-JpX" secondAttribute="bottom" constant="15" id="B3f-bT-1ri"/>
+                <constraint firstItem="yH3-Od-JpX" firstAttribute="top" secondItem="W6P-aV-mc2" secondAttribute="top" constant="15" id="FXs-bE-tay"/>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="centerY" secondItem="W6P-aV-mc2" secondAttribute="centerY" id="TCa-1F-Ckz"/>
                 <constraint firstItem="yH3-Od-JpX" firstAttribute="centerX" secondItem="W6P-aV-mc2" secondAttribute="centerX" id="lsu-8g-gJE"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yH3-Od-JpX" secondAttribute="trailing" id="waN-HM-kSf"/>

@@ -1,14 +1,6 @@
 import Foundation
 import UIKit
 
-// TODO: Remove
-//static CGFloat SPRatingPromptViewWidthPhone             = 320.0f;
-//static CGFloat SPRatingPromptViewWidthPad               = 400.0f;
-//static CGFloat SPRatingPromptViewHeight                 = 105.0f;
-//
-//static CGFloat SPRatingPromptLabelPaddingY              = 5.0;
-//static CGFloat SPRatingPromptButtonPaddingX             = 5.0f;
-
 
 // MARK: - SPRatingsPromptDelegate
 //
