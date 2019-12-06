@@ -13,10 +13,10 @@ extension UIView {
         return traitCollection.horizontalSizeClass == .compact
     }
 
-    /// Adjusts the receiver's size to Compressed
+    /// Adjusts the receiver's size for a  compressed layout
     ///
     @objc
-    func adjustSizeToCompressed() {
+    func adjustSizeForCompressedLayout() {
         frame.size = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 

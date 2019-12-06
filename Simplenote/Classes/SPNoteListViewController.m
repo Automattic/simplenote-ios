@@ -149,6 +149,17 @@
     [self.tableView reloadData];
 }
 
+- (void)updatetableHeaderSize {
+    UIView *headerView = self.tableView.tableHeaderView;
+    if (!headerView) {
+        return;
+    }
+
+    // Old school workaround. tableHeaderView isn't really Autolayout friendly.
+    [headerView adjustSizeForCompressedLayout];
+    self.tableView.tableHeaderView = headerView;
+}
+
 
 #pragma mark - Overridden Properties
 
@@ -205,7 +216,7 @@
 }
 
 - (void)contentSizeWasUpdated:(id)sender {
-
+    [self updatetableHeaderSize];
     [self updateRowHeight];
 }
 
@@ -1146,13 +1157,14 @@
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
     ratingsView.alpha = UIKitConstants.alphaZero;
 
+    [ratingsView adjustSizeForCompressedLayout];
+
     // Prevent Ratings UI flickers
     self.tableView.tableHeaderView = ratingsView;
     [ratingsView layoutIfNeeded];
 
     [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
         ratingsView.alpha = UIKitConstants.alphaFull;
-        [self.tableView layoutIfNeeded];
     } completion:nil];
 }
 

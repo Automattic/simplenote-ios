@@ -25,7 +25,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
                             <rect key="frame" x="0.0" y="35.5" width="153" height="27"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
                                     <rect key="frame" x="0.0" y="0.0" width="74" height="27"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
@@ -36,7 +36,7 @@
                                         <action selector="leftActionWasPressed" destination="W6P-aV-mc2" eventType="touchUpInside" id="Y8y-bs-mCD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
                                     <rect key="frame" x="79" y="0.0" width="74" height="27"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
@@ -51,7 +51,7 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="xWf-5o-MDx"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="jaJ-cV-Zka"/>
                     </constraints>
                 </stackView>
             </subviews>
