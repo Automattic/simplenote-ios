@@ -115,10 +115,14 @@ private extension SPRatingsPromptView {
             return
         }
 
+        buttonsStackView.axis = .horizontal
+
         let newButtonsWidth = buttonsStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
         let newFullWidth = leadingLayoutConstraint.constant + newButtonsWidth + trailingLayoutConstraint.constant
 
-        buttonsStackView.axis = newFullWidth < superviewWidth ? .horizontal : .vertical
+        if newFullWidth > superviewWidth {
+            buttonsStackView.axis = .vertical
+        }
     }
 }
 
