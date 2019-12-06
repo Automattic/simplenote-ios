@@ -22,10 +22,10 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
+                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="999" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mei-tD-hvF">
                             <rect key="frame" x="0.0" y="35.5" width="142" height="29"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-YT-ap7">
                                     <rect key="frame" x="0.0" y="0.0" width="66" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="16" minY="6" maxX="16" maxY="6"/>
@@ -36,7 +36,7 @@
                                         <action selector="leftActionWasPressed" destination="W6P-aV-mc2" eventType="touchUpInside" id="Y8y-bs-mCD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-E4-QxE">
                                     <rect key="frame" x="76" y="0.0" width="66" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="16" minY="6" maxX="16" maxY="6"/>
@@ -68,9 +68,12 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="buttonsStackView" destination="Mei-tD-hvF" id="aQ2-3y-NXc"/>
+                <outlet property="leadingLayoutConstraint" destination="8vt-vb-kcr" id="gTy-74-Gmj"/>
                 <outlet property="leftButton" destination="RbR-YT-ap7" id="Tgh-4z-VQG"/>
                 <outlet property="messageLabel" destination="EFk-6K-K4h" id="mk7-oi-H9W"/>
                 <outlet property="rightButton" destination="bb6-E4-QxE" id="pwF-10-0Sn"/>
+                <outlet property="trailingLayoutConstraint" destination="waN-HM-kSf" id="FsT-UY-nAN"/>
             </connections>
             <point key="canvasLocation" x="173.4375" y="-317.39130434782612"/>
         </view>

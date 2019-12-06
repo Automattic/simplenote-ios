@@ -22,6 +22,18 @@ class SPRatingsPromptView: UIView {
     ///
     @IBOutlet private var messageLabel: UILabel!
 
+    /// Buttons Container
+    ///
+    @IBOutlet private var buttonsStackView: UIStackView!
+
+    /// Leading Padding
+    ///
+    @IBOutlet private var leadingLayoutConstraint: NSLayoutConstraint!
+
+    /// Trailing Padding
+    ///
+    @IBOutlet private var trailingLayoutConstraint: NSLayoutConstraint!
+
     /// Button: Left Action
     ///
     @IBOutlet private var leftButton: UIButton!
@@ -55,6 +67,10 @@ class SPRatingsPromptView: UIView {
         startListeningToNotifications()
         refreshStyle()
         refreshStrigs()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        refreshButtonsStackViewAxis()
     }
 }
 
@@ -92,6 +108,17 @@ private extension SPRatingsPromptView {
         messageLabel.text = state.title
         leftButton.setTitle(state.leftTitle, for: .normal)
         rightButton.setTitle(state.rightTitle, for: .normal)
+    }
+
+    func refreshButtonsStackViewAxis() {
+        guard let superviewWidth = superview?.frame.width else {
+            return
+        }
+
+        let newButtonsWidth = buttonsStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+        let newFullWidth = leadingLayoutConstraint.constant + newButtonsWidth + trailingLayoutConstraint.constant
+
+        buttonsStackView.axis = newFullWidth < superviewWidth ? .horizontal : .vertical
     }
 }
 
