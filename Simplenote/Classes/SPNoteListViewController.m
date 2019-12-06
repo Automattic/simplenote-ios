@@ -42,6 +42,7 @@
                                         SPTransitionControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+@property (nonatomic, strong) SPSearchResultsViewController         *resultsViewController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
@@ -73,7 +74,6 @@
         [self configureTableView];
         [self configureSearchController];
         [self configureRootView];
-
         [self updateRowHeight];
         [self startListeningToNotifications];
         
@@ -104,6 +104,7 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     [super didMoveToParentViewController:parent];
     [self ensureFirstRowIsVisible];
+    [self ensureTransitionControllerIsInitialized];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -131,15 +132,23 @@
     }
 }
 
-- (void)updateRowHeight {
-    CGFloat verticalPadding = [[[VSThemeManager sharedManager] theme] floatForKey:@"noteVerticalPadding"];
-    CGFloat topTextViewPadding = verticalPadding;
 
-    CGFloat numberLines = [[Options shared] numberOfPreviewLines];
-    CGFloat lineHeight = [[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline] lineHeight];
+- (void)ensureTransitionControllerIsInitialized
+{
+    if (_transitionController != nil) {
+        return;
+    }
 
-    self.tableView.rowHeight = ceilf(2.5 * verticalPadding + 2 * topTextViewPadding + lineHeight * numberLines);
-    
+    NSAssert(self.tableView != nil, @"tableView should be initialized before this method runs");
+    NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
+
+    self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
+    self.transitionController.delegate = self;
+}
+
+- (void)updateRowHeight
+{
+    self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
 
@@ -297,10 +306,15 @@
 
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
+    NSAssert(_resultsViewController == nil, @"_resultsController is already initialized!");
 
-    self.searchController = [SPSearchController new];
+    // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
+    self.resultsViewController = [SPSearchResultsViewController new];
+
+    self.searchController = [[SPSearchController alloc] initWithResultsViewController:self.resultsViewController];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
+
     [self.searchBar applySimplenoteStyle];
 }
 
@@ -326,22 +340,32 @@
 }
 
 
-#pragma mark - SearchController Delegate methods
+#pragma mark - SPSearchControllerDelegate methods
 
-- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller {
-    
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller
+{
     if (bListViewIsEmpty) {
         return NO;
     }
 
     bSearching = YES;
-    [self.tableView reloadData];
+
+    // TODO: Nuke the following as soon as we can!
+    if (!FeatureManager.advancedSearchEnabled) {
+        [self.tableView reloadData];
+    }
     
     return bSearching;
 }
 
-- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword {
- 
+- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword
+{
+    if (FeatureManager.advancedSearchEnabled) {
+        [self.resultsViewController updateSearchResultsWithKeyword:keyword];
+        return;
+    }
+
+    // TODO: Nuke the following as soon as we can!
     self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
@@ -354,18 +378,45 @@
                                                  selector:@selector(performSearch)
                                                  userInfo:nil
                                                   repeats:NO];
-    
 }
 
-- (void)searchControllerDidEndSearch:(SPSearchController *)controller {
+- (void)searchControllerWillBeginSearch:(SPSearchController *)controller
+{
+    // Ensure our custom NavigationBar + SearchBar are always on top (!)
+    [self.view bringSubviewToFront:self.navigationBarBackground];
+    [self.view bringSubviewToFront:self.searchBar];
+
+    // We want the results UI to always have the Blur Background active
+    [self.navigationBarBackground fadeIn];
+}
+
+- (void)searchControllerDidEndSearch:(SPSearchController *)controller
+{
     [self endSearching];
 }
 
-- (UINavigationController *)navigationControllerForSearchController:(UISearchController *)controller {
+
+#pragma mark - SPSearchControllerPresenter methods
+
+- (UINavigationController *)navigationControllerForSearchController:(SPSearchController *)controller
+{
     return self.navigationController;
 }
 
-- (void)performSearch {
+- (UIViewController *)resultsParentControllerForSearchController:(SPSearchController *)controller
+{
+    return self;
+}
+
+
+#pragma mark - Search Helpers
+
+- (void)performSearch
+{
+    // TODO: Nuke the following as soon as we can!
+    if (FeatureManager.advancedSearchEnabled) {
+        return;
+    }
 
     if (!self.searchText) {
         return;
@@ -385,12 +436,17 @@
     searchTimer = nil;
 }
 
-- (void)endSearching {
-
+- (void)endSearching
+{
     bSearching = NO;
 
-    self.searchText = nil;
+    // TODO: Nuke the following as soon as we can!
+    if (FeatureManager.advancedSearchEnabled) {
+        [self.resultsViewController reset];
+        return;
+    }
 
+    self.searchText = nil;
     [self update];
 }
 
@@ -446,10 +502,8 @@
 - (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if (!note.preview) {
-        [note createPreview];
-    }
+
+    [note ensurePreviewStringsAreAvailable];
 
     UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
 
@@ -592,11 +646,7 @@
     [SPTracker trackListNoteOpened];
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    if (!_transitionController) {
-        self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
-        self.transitionController.delegate = self;
-    }
-        
+
     BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
     self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
     editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;

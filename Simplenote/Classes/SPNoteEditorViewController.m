@@ -1205,10 +1205,27 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    return ![URL containsHttpScheme];
+    BOOL containsHttpScheme = [URL containsHttpScheme];
+
+    // When `performsAggressiveLinkWorkaround` is true we'll get link interactions via `receivedInteractionWithURL:`
+    if (containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
+        [self presentSafariViewControllerAtURL:URL];
+    }
+
+    return !containsHttpScheme;
 }
 
-- (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url {
+- (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url
+{
+    /// This API is expected to only be called in iOS (13.0.x, 13.1.x)
+    [self presentSafariViewControllerAtURL:url];
+}
+
+
+#pragma mark - SafariViewController Methods
+
+- (void)presentSafariViewControllerAtURL:(NSURL *)url
+{
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:url];
     [self presentViewController:sfvc animated:YES completion:nil];
 }

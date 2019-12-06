@@ -279,6 +279,28 @@ private extension SPNoteTableViewCell {
 }
 
 
+// MARK: - SPNoteTableViewCell
+//
+extension SPNoteTableViewCell {
+
+    /// Returns the Height that the receiver would require to be rendered, given the current User Settings (number of preview lines).
+    ///
+    /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
+    ///
+    static var cellHeight: CGFloat {
+        let verticalPadding: CGFloat = 6
+        let topTextViewPadding: CGFloat = 5
+
+        let numberLines = Options.shared.numberOfPreviewLines
+        let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
+
+        let result = 2.0 * verticalPadding + 2.0 * topTextViewPadding + CGFloat(numberLines) * lineHeight
+
+        return result.rounded(.up)
+    }
+}
+
+
 // MARK: - Cell Styles
 //
 private enum Style {

@@ -221,6 +221,14 @@ SEL notifySelector;
     [self didChangeValueForKey:@"systemTags"];    
 }
 
+- (void)ensurePreviewStringsAreAvailable {
+    if (self.preview != nil) {
+        return;
+    }
+
+    [self createPreview];
+}
+
 - (void)createPreview {
     
     // trim content for preview
