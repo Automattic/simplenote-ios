@@ -40,7 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     [self setupNavigationItem];
     [self setupTextFields];
 
