@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - SPSearchResultsViewController
 //
-class SPSearchResultsViewController: UIViewController {
+class SPSearchResultsViewController: UIViewController, SPSearchControllerResults {
 
     /// Results TableView
     ///
@@ -22,6 +22,9 @@ class SPSearchResultsViewController: UIViewController {
         SPSearchResultsController(mainContext: mainContext)
     }()
 
+    /// SearchController: Expected to be set externally
+    ///
+    weak var searchController: SPSearchController?
 
     // MARK: - View Lifecycle
 
@@ -135,6 +138,20 @@ extension SPSearchResultsViewController: UITableViewDelegate {
         presentEditor(note: note(at: indexPath), keyword: resultsController.keyword)
 
         SPTracker.trackListNoteOpened()
+    }
+}
+
+
+// MARK: - UIScrollViewDelegate Methods
+//
+extension SPSearchResultsViewController: UIScrollViewDelegate {
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let searchBar = searchController?.searchBar, searchBar.isFirstResponder else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
     }
 }
 
