@@ -1,7 +1,19 @@
-/* Translation-Revision-Date: 2019-09-24 00:54:31+0000 */
+/* Translation-Revision-Date: 2019-11-22 16:19:59+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
+
+/* Number of Characters in a note */
+"%@ Character" = "%@ Character";
+
+/* Number of Characters in a note */
+"%@ Characters" = "%@ Characters";
+
+/* Number of words in a note */
+"%@ Word" = "%@ Parola";
+
+/* Number of words in a note */
+"%@ Words" = "%@ Parole";
 
 /* Number of found search results */
 "%d Result" = "%d Resultato";
@@ -9,62 +21,183 @@
 /* Number of found search results */
 "%d Results" = "%d Resultati";
 
-/* Number of words in a note */
-"%d Word" = "%d Parola";
+/* 1 minute passcode lock timeout */
+"1 Minute" = "1 Minute";
 
-/* Number of words in a note */
-"%d Words" = "%d Parole";
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15 Seconds";
 
-/* Label of accept button on alert dialog */
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "2 Minutes";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "3 Minutes";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30 Seconds";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "4 Minutes";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "5 Minutes";
+
+/* Display app about screen */
+"About" = "Informazioni";
+
+/* Accept Action
+   Label of accept button on alert dialog */
 "Accept" = "Ok";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "Account";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Aggiungi un nuovo collaboratore...";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Aggiungi tag";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "Tutte le note";
 
+/* Sort Mode: Alphabetically, ascending */
+"Alphabetically: A-Z" = "Alphabetically: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Alphabetically: Z-A" = "Alphabetically: Z-A";
+
+/* Sign in error message */
+"An error was encountered while signing in." = "An error was encountered while signing in.";
+
 /* No comment provided by engineer. */
+"Appearance" = "Appearance";
+
+/* Other Simplenote apps */
+"Apps" = "Apps";
+
+/* Automattic hiring description */
+"Are you a developer? Automattic is hiring." = "Are you a developer? Automattic is hiring.";
+
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "Are you sure you want to empty the trash? This cannot be undone.";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Are you sure you want to send without your email? We won't be able reply to you." = "Are you sure you want to send without your email? We won't be able reply to you.";
+
+/* Title for prompt when user tries to close the feedback view */
+"Are you sure?" = "Are you sure?";
+
+/* User Authenticated */
+"Authenticated" = "Authenticated";
+
+/* Title of Back button for Markdown preview */
+"Back" = "Indietro";
+
+/* The Simplenote blog */
+"Blog" = "Blog";
+
+/* Terms of Service Legend *PREFIX*: printed in dark color */
+"By creating an account you agree to our" = "By creating an account you agree to our";
+
+/* No comment provided by engineer. */
+"Can't Access." = "Can't Access.";
+
+/* Cancel Action
+   Verb, cancel an alert dialog */
 "Cancel" = "Annulla";
+
+/* No comment provided by engineer. */
+"Choose Photo" = "Choose Photo";
+
+/* No comment provided by engineer. */
+"Close" = "Close";
 
 /* Verb - work with others on a note */
 "Collaborate" = "Collabora";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Aggiungi collaboratori";
+/* No comment provided by engineer. */
+"Collaboration has moved" = "Collaboration has moved";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Collaboratori";
 
-/* No comment provided by engineer. */
-"collaborators-description" = "Aggiungi un indirizzo email con cui condividere questa nota. Dopo la condivisione entrambi gli utenti potranno modificare la nota.";
-
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Elenco note ristretto";
+
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"Contact" = "Contatto";
+
+/* Contribute to the Simplenote apps on github */
+"Contribute" = "Contribute";
+
+/* This is one of the buttons we display inside of the prompt to review the app */
+"Could Be Better" = "Potrebbe essere meglio";
+
+/* Error for bad email or password */
+"Could not create an account with the provided email address and password." = "Non è possibile creare un account con l'indirizzo email e la password forniti.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Nome utente o password errata.";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+"Could you tell us how we could improve?" = "Puoi dirci come possiamo migliorare?";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "Couldn't Sign In";
+
+/* Siri Suggestion to create a New Note */
+"Create a New Note" = "Create a New Note";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Crea una nuova nota";
 
+/* Sort Mode: Creation Date, descending */
+"Created: Newest" = "Created: Newest";
+
+/* Sort Mode: Creation Date, ascending */
+"Created: Oldest" = "Created: Oldest";
+
 /* No comment provided by engineer. */
 "Current Collaborators" = "Collaboratori attuali";
 
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Questa nota è stata cancellata da un altro dispositivo.";
+/* Theme: Dark */
+"Dark" = "Dark";
+
+/* Debug Screen Title
+   Display internal debug status */
+"Debug" = "Debug";
+
+/* Trash (verb) - the action of deleting a note */
+"Delete" = "Elimina";
+
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "Delete Notes";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "Disable Markdown formatting";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Nascondi la tastiera";
 
-/* No comment provided by engineer. */
+/* Done toolbar button
+   Verb: Close current view */
 "Done" = "Fatto";
 
-/* Re-order or delete tags */
-"Edit Tags" = "Modifica i tags";
+/* Edit Tags Action: Visible in the Tags List */
+"Edit" = "Edit";
+
+/* Email TextField Placeholder */
+"Email" = "Email";
+
+/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Email Address" = "Email Address";
+
+/* Email Taken Alert Title */
+"Email in use" = "Email in use";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Svuota";
@@ -72,286 +205,74 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Svuota cestino";
 
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "Enable Markdown formatting";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "Enqueued";
+
+/* No comment provided by engineer. */
+"Error" = "Errore";
+
+/* No comment provided by engineer. */
+"Error uploading." = "Error uploading.";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "Face ID";
+
+/* Password Reset Action */
+"Forgotten password?" = "Forgotten password?";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
+"Great! Could you leave us a nice review?\nIt really helps." = "Grande! Potresti lasciarci una recensione?\\n\\n\\nAiuterebbe molto.";
+
+/* Privacy Details */
+"Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
+
 /* Noun - the version history of a note */
 "History" = "Storia";
-
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Ripristina da una versione precedente";
 
 /* Action - view the version history of a note */
 "History..." = "Storia...";
 
-/* Terminoligy used for sidebar UI element where tags are displayed */
-"Menu" = "Menu";
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"How can we help?" = "Come possiamo aiutarti?";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Mostra opzioni nota";
+/* This is one of the buttons we display inside of the prompt to review the app */
+"I Like It" = "Mi piace";
 
-/* Label to create a new note */
-"New note" = "Nuova nota";
+/* Title for alert that a user has entered an invalid email address */
+"Invalid Email Address." = "Invalid Email Address.";
 
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "Nessuna nota presente";
+/* Last Message timestamp */
+"LastSeen" = "LastSeen";
 
-/* Message shown when no notes match a search string */
-"No Results" = "Nessun risultato";
+/* Learn More Action */
+"Learn more" = "Per saperne di più";
 
-/* No comment provided by engineer. */
-"Note not published" = "Nota non pubblicata";
+/* This is one of the buttons we display when prompting the user for a review */
+"Leave a Review" = "Lascia una recensione";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "Nota pubblicata";
+/* Theme: Light */
+"Light" = "Light";
 
-/* Title of option to display all notes */
-"Notes" = "Note";
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "Lock Timeout";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Chiudi la nota";
+/* Log In Action
+   Login Action
+   LogIn Action
+   LogIn Interface Title */
+"Log In" = "Accedi";
 
-/* No comment provided by engineer. */
-"Off" = "Off";
+/* Log out of the active account in the app */
+"Log Out" = "Esci";
 
-/* No comment provided by engineer. */
-"OK" = "OK";
+/* Allows the user to SignIn using their WPCOM Account */
+"Log in with WordPress.com" = "Log in with WordPress.com";
 
-/* No comment provided by engineer. */
-"On" = "On";
-
-/* Select a note to view in the note editor */
-"Open note" = "Apri nota";
-
-/* Message shown on passcode lock screen */
-"Passcode" = "PIN";
-
-/* Action to mark a note as pinned */
-"Pin note" = "Aggancia";
-
-/* Action to mark a note as pinned */
-"Pin to Top" = "Aggancia";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Nota agganciata";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Agganciata";
-
-/* No comment provided by engineer. */
-"Preferences" = "Preferenze";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
-"Publish" = "Pubblica";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "Pubblicazione fallita";
-
-/* Action which published a note to a web page */
-"Publish note" = "Pubblica nota";
-
-/* Confirmation shown when a note is published */
-"Publish toggle" = "Nota pubblicata";
-
-/* No comment provided by engineer. */
-"Published" = "Pubblicata";
-
-/* Message shown when a note is in the processes of being published */
-"Publishing..." = "Pubblicazione in corso...";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Elimina tutte le note dal cestino";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "Rimuovi Tag";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "Vuoi rimuovere il tag?";
-
-/* Rename a tag */
-"Rename" = "Rinomina";
-
-/* Restore a note from the trash, markking it as undeleted */
-"Restore" = "Ripristina";
-
-/* Restore a note to a previous version */
-"Restore Note" = "Ripristina la nota";
-
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Invia";
-
-/* Title of options screen */
-"Settings" = "Impostazioni";
-
-/* No comment provided by engineer. */
-"Share note" = "Condividi nota";
-
-/* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Condividi il contenuto della nota";
-
-/* UI region to the left of the note list which shows all of a users tags */
-"Sidebar" = "Barra laterale";
-
-/* Sign out of the active account in the app */
-"Sign Out" = "Esci";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Aggiungi un tag alla nota";
-
-/* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Rimuovi il tag dalla nota";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "Tag: %@";
-
-/* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "Oggi";
-
-/* Accessibility hint used to show or hide the sidebar */
-"Toggle tag sidebar" = "Mostra barra laterale";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Sposta la nota nel cestino";
-
-/* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Cestino";
-
-/* Permanent Delete */
-"Trash-verb" = "Elimina";
-
-/* Action to mark a note as unpinned */
-"Unpin note" = "Sgancia";
-
-/* Action which unpublishes a note */
-"Unpublish note" = "Non pubblicare la nota";
-
-/* Message shown when unpublishing a note */
-"Unpublishing..." = "Rimuovendo dalla pubblicazione";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Versione";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Collegati ad internet per accedere alle versioni precedenti";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Usa questa versione";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Caricamento versioni";
-
-/* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "Ieri";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i tentativo di accesso fallito";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Inserisci il PIN";
-
-/* Pin Lock */
-"Enter your passcode" = "Inserisci il tuo PIN";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "PIN non coincidono. Prova ancora.";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Inserisci nuovamente il PIN";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Imposta il PIN";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Disabilita il PIN";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Sblocca %@";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "%i tentativi di accesso falliti";
-
-"welcomeNote-iOS" = "Benvenuto in Simplenote per iOS!
-
-Per creare una nuova nota, clicca sul bottone con il segno +.
-
-Scorri la lista per vedere tutte le tue note. Tocca il titolo della nota per aprire il dettaglio, e tocca il contenuto per modificarlo.
-
-Per effettuare una ricerca, scrivi nella barra di ricerca presente in alto nella schermata delle note.
-
-Clicca il pulsante in alto a sinistra della nota, oppure effettua uno swiping su di essa, per accedere ai tags. E' possibile aggiungere nuovi tags alla nota usando l'apposito campo presente in basso nella schermata di editing. Usa la barra laterale per accedere alle note filtrare per tag.
-
-Ci sono anche altre opzioni se le desideri. E' per esempio possibile aggiungere collaboratori ad una nota, oppure pubblicare una nota su una pagina web.
-
-Usa Simplenote per Mac, per Android, oppure visita http://simplenote.com per accedere alle tue note da qualunque posto e da qualunque dispositivo.";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Ordina le note alfabeticamente";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Hai già un account?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Conferma";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "Non è possibile creare un account con l'indirizzo email e la password forniti.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Nome utente o password errata.";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Non hai un account?";
-
-
-"Password" = "Password";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "La password deve contenere almeno 4 caratteri.";
-
-/* Title of button for logging in (must be short) */
-"Sign in" = "Accedi";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "Accedi";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Registrati";
-
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "Crea account";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "C'è un problema con la connessione alla rete. Si prega di riprovare più tardi.";
-
-/* Message displayed when email address is invalid */
-"Your email address is not valid." = "Il tuo indirizzo email non è valido.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Trova le note facilmente con la ricerca in tempo reale e tramite i tag.";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Inizia";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Condividere una lista di to-do, gli appunti, o pubblicarli sul web, è facile con Simplenote.";
-
-/* Message shown in first launch view */
-"Stay organized" = "Rimani organizzato";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Usa l'app su qualunque dispositivo";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Benvenuto in Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "Condividi le note con altre persone";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "Le tue note sono disponibili ed aggiornate in tempo reale su tutti i tuoi dispositivi, senza bisogno di alcuna configurazione. ";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Tema scuro";
-
-
-"Debug" = "Debug";
+/* Presents the regular Email signin flow */
+"Log in with email" = "Log in with email";
 
 /* Month and day date formatter */
 "MMM d" = "d MMM";
@@ -362,72 +283,381 @@ Usa Simplenote per Mac, per Android, oppure visita http://simplenote.com per acc
 /* Month, day, and year date formatter */
 "MMM d, yyyy" = "d MMM yyyy";
 
-/* Month, day, and year date formatter */
+/* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
+/* Special formatting that can be turned on for notes */
+"Markdown" = "Markdown";
 
-"Touch ID" = "Touch ID";
+/* Switch which marks a note as using Markdown formatting or not */
+"Markdown toggle" = "Markdown toggle";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "Sicurezza";
+/* Terminoligy used for sidebar UI element where tags are displayed */
+"Menu" = "Menu";
 
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Iscrivendoti, accetti i nostri Termini di servizio »";
+/* Sort Mode: Modified Date, descending */
+"Modified: Newest" = "Modified: Newest";
 
-/* Forgot Password */
-"Forgot password? »" = "Password dimenticata? »";
+/* Sort Mode: Creation Date, ascending */
+"Modified: Oldest" = "Modified: Oldest";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "Che cosa pensi di Simplenote?";
+/* Label to create a new note */
+"New note" = "Nuova nota";
 
-/* No comment provided by engineer. */
-"I Like It" = "Mi piace";
+/* Empty Note Placeholder */
+"New note..." = "New note...";
 
-/* No comment provided by engineer. */
-"Could Be Better" = "Potrebbe essere meglio";
+/* Alert's Cancel Action
+   Cancels Empty Trash Action */
+"No" = "No";
 
-"Great! Could you leave us a nice review?
-It really helps." = "Grande! Potresti lasciarci una recensione?\n\n\nAiuterebbe molto.";
+/* Title for alert when user tires to send feedback without an email address */
+"No Email." = "No Email.";
 
-/* No comment provided by engineer. */
-"Leave a Review" = "Lascia una recensione";
+/* Text that appears in an alert to the user when there is no internet */
+"No Internet" = "No Internet";
 
-/* No comment provided by engineer. */
+/* Title for message when user tries to send feedback without any text */
+"No Message." = "No Message.";
+
+/* Message shown in note list when no notes are in the current view */
+"No Notes" = "Nessuna nota presente";
+
+/* Message shown when no notes match a search string */
+"No Results" = "Nessun risultato";
+
+/* This is one of the buttons we display when prompting the user for a review */
 "No Thanks" = "No grazie";
 
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Puoi dirci come possiamo migliorare?";
+/* No comment provided by engineer. */
+"Note not published" = "Nota non pubblicata";
+
+/* Plural form of notes */
+"Notes" = "Note";
+
+/* Dismisses an AlertController */
+"OK" = "OK";
+
+/* Instant passcode lock timeout */
+"Off" = "Off";
 
 /* No comment provided by engineer. */
+"On" = "On";
+
+/* Siri Suggestion to open a specific Note */
+"Open \"(preview)\"" = "Open \"(preview)\"";
+
+/* Siri Suggestion to open our app */
+"Open Simplenote" = "Open Simplenote";
+
+/* Select a note to view in the note editor */
+"Open note" = "Apri nota";
+
+/* AlertController's Payload for the broken Sort Options Fix */
+"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Our update may have changed the order in which your notes appear. Would you like to review sort settings?";
+
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "PIN";
+
+/* Password TextField Placeholder */
+"Password" = "Password";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "Password must contain at least 4 characters";
+
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "La password deve contenere almeno 6 caratteri.";
+
+/* Number of changes pending to be sent */
+"Pendings" = "Pendings";
+
+/* Pin (verb) - the action of Pinning a note */
+"Pin" = "Pin";
+
+/* Action to mark a note as pinned */
+"Pin note" = "Aggancia";
+
+/* Denotes when note is pinned to the top of the note list */
+"Pin to Top" = "Aggancia";
+
+/* Switch which marks a note as pinned or unpinned */
+"Pin toggle" = "Nota agganciata";
+
+/* Pinned notes are stuck to the note of the note list */
+"Pinned" = "Agganciata";
+
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
+
+/* Message for alert that user has entered an invalid email address */
+"Please check your email address, it appears to be invalid." = "Please check your email address, it appears to be invalid.";
+
+/* Message for alert when user tires to send feedback without any text */
+"Please enter a message." = "Please enter a message.";
+
+/* Title of Markdown preview screen */
+"Preview" = "Visualizzare in anteprima";
+
+/* Simplenote privacy policy */
+"Privacy Policy" = "Politica sulla privacy";
+
+/* Privacy Settings */
+"Privacy Settings" = "Impostazioni privacy";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+"Publish" = "Pubblica";
+
+/* Action which published a note to a web page */
+"Publish note" = "Pubblica nota";
+
+/* Switch which marks a note as published or unpublished */
+"Publish toggle" = "Nota pubblicata";
+
+/* No comment provided by engineer. */
+"Published" = "Pubblicata";
+
+/* Message shown when a note is in the processes of being published */
+"Publishing..." = "Pubblicazione in corso...";
+
+/* Reachs Internet */
+"Reachability" = "Reachability";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Elimina tutte le note dal cestino";
+
+/* Rename a tag */
+"Rename" = "Rinomina";
+
+/* Restore a note from the trash, markking it as undeleted */
+"Restore" = "Ripristina";
+
+/* Restore a note to a previous version */
+"Restore Note" = "Ripristina la nota";
+
+/* Search Placeholder
+   Using Search instead of Back if user is searching */
+"Search" = "Search";
+
+/* No comment provided by engineer. */
+"Security" = "Sicurezza";
+
+/* Verb - send the content of the note by email, message, etc */
+"Send" = "Invia";
+
+/* This is one of the buttons we display when prompting the user for a review */
 "Send Feedback" = "Invia un feedback";
 
-/* Ratings View: Contact */
-"Contact" = "Contatto";
+/* For debugging use */
+"Send a Test Crash" = "Send a Test Crash";
+
+/* Label that is shown when feedback from the user is sending */
+"Sending..." = "Sending...";
+
+/* Title of options screen */
+"Settings" = "Impostazioni";
+
+/* Share (verb) - the action of Sharing a note */
+"Share" = "Condividi";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "Condividi analisi";
 
 /* No comment provided by engineer. */
-"Your Email:" = "La tua Email:";
+"Share note" = "Condividi nota";
 
 /* No comment provided by engineer. */
-"How can we help?" = "Come possiamo aiutarti?";
+"Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
 
-/* No comment provided by engineer. */
-"Back" = "Indietro";
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Barra laterale";
 
-/* Permanent Delete */
-"Delete" = "Elimina";
-
-/* Markdown Preview */
-"Preview" = "Visualizzare in anteprima";
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
+"Sign Up" = "Crea account";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "La disconnessione causerà l’eliminazione di tutte le note non sincronizzate. È possibile verificare le note sincronizzate accedendo all’app web.";
 
+/* Our mighty brand! */
+"Simplenote" = "Simplenote";
+
+/* Authentication Error Alert Title */
+"Sorry!" = "Sorry!";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "Sort Alphabetically";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date
+   Sort Order for the Notes List */
+"Sort Order" = "Ordina per";
+
+/* Theme: Matches iOS Settings */
+"System Default" = "System Default";
+
+/* No comment provided by engineer. */
+"Tags" = "Tags";
+
+/* No comment provided by engineer. */
+"Take Photo" = "Take Photo";
+
+/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"Terms and Conditions" = "Terms and Conditions";
+
+/* Simplenote terms of service */
+"Terms of Service" = "Termini di Servizio";
+
+/* No comment provided by engineer. */
+"Thanks" = "Thanks";
+
+/* Error when address is in use */
+"The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
+
+/* Onboarding Header Text */
+"The simplest way to keep notes." = "The simplest way to keep notes.";
+
+/* Option to enable the dark app theme. */
+"Theme" = "Tema";
+
+/* Simplenote Themes */
+"Themes" = "Themes";
+
+/* No comment provided by engineer. */
+"There was an error sending your feedback, please try again." = "There was an error sending your feedback, please try again.";
+
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Oggi";
+
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Mostra barra laterale";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Touch ID";
+
+/* Title: Trash Tag is selected */
+"Trash" = "Cestino";
+
+/* Trash (verb) - the action of deleting a note */
+"Trash" = "Elimina";
+
+/* Unpin (verb) - the action of Unpinning a note */
+"Unpin" = "Unpin";
+
+/* Action to mark a note as unpinned */
+"Unpin note" = "Sgancia";
+
+/* Action which unpublishes a note */
+"Unpublish note" = "Non pubblicare la nota";
+
+/* Message shown when a note is in the processes of being unpublished */
+"Unpublishing..." = "Rimuovendo dalla pubblicazione";
+
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Note non sincronizzate rilevate";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Tag...";
+/* Title: Untagged Notes are onscreen */
+"Untagged" = "Untagged";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Hai perso l’accesso a Simplenote? Puoi ottenerlo nuovamente reinstallando l’app e accedendo al tuo account.";
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "Note rimosse";
+
+/* No comment provided by engineer. */
+"Use Latest Photo" = "Use Latest Photo";
+
+/* A user's Simplenote account */
+"Username" = "Nome utente";
+
+/* Represents a snapshot in time for a note */
+"Version" = "Versione";
+
+/* App version number */
+"Version %@" = "Versione %@";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Visit Web App";
+
+/* No comment provided by engineer. */
+"We can't access your photos, please ensure this application has access in Settings." = "We can't access your photos, please ensure this application has access in Settings.";
+
+/* No comment provided by engineer. */
+"We couldn't upload the photo, please try again." = "We couldn't upload the photo, please try again.";
+
+/* No comment provided by engineer. */
+"We have received your feedback and will be in contact soon." = "We have received your feedback and will be in contact soon.";
+
+/* Generic error */
+"We're having problems. Please try again soon." = "We're having problems. Please try again soon.";
+
+/* WebSocket Status */
+"WebSocket" = "WebSocket";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about Simplenote?" = "Che cosa pensi di Simplenote?";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about WordPress?" = "What do you think about WordPress?";
+
+/* Work at Automattic */
+"Work With Us" = "Work With Us";
+
+/* Alert's Accept Action
+   Proceeds with the Empty Trash OP */
+"Yes" = "Si";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Ieri";
+
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Your Email:" = "La tua Email:";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid" = "Il tuo indirizzo email non è valido.";
+
+/* Message for prompt when user tries to close feedback view after having entered text */
+"Your message will be lost." = "Your message will be lost.";
+
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "attach a file";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"Enable others to collaborate" = "Aggiungi collaboratori";
+
+/* No comment provided by engineer. */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Aggiungi un indirizzo email con cui condividere questa nota. Dopo la condivisione entrambi gli utenti potranno modificare la nota.";
+
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device." = "Questa nota è stata cancellata da un altro dispositivo.";
+
+/* Accessibility hint on button which shows the history of a note */
+"Restore note to previous version" = "Ripristina da una versione precedente";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"Show options for note" = "Mostra opzioni nota";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"Close current note" = "Chiudi la nota";
+
+/* Accessibility hint on share button */
+"Share the content of the current note" = "Condividi il contenuto della nota";
+
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Aggiungi un tag alla nota";
+
+/* No comment provided by engineer. */
+"Remove tag from the current note" = "Rimuovi il tag dalla nota";
+
+/* Accessibility hint on button which moves a note to the trash */
+"Move the current note to trash" = "Sposta la nota nel cestino";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"Connect to the Internet to Access Previous Versions" = "Collegati ad internet per accedere alle versioni precedenti";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"Switch to this version" = "Usa questa versione";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching version" = "Caricamento versioni";
+
+/* A welcome note for new iOS users */
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Benvenuto in Simplenote per iOS!\n\nPer creare una nuova nota, clicca sul bottone con il segno +.\n\nScorri la lista per vedere tutte le tue note. Tocca il titolo della nota per aprire il dettaglio, e tocca il contenuto per modificarlo.\n\nPer effettuare una ricerca, scrivi nella barra di ricerca presente in alto nella schermata delle note.\n\nClicca il pulsante in alto a sinistra della nota, oppure effettua uno swiping su di essa, per accedere ai tags. E' possibile aggiungere nuovi tags alla nota usando l'apposito campo presente in basso nella schermata di editing. Usa la barra laterale per accedere alle note filtrare per tag.\n\nCi sono anche altre opzioni se le desideri. E' per esempio possibile aggiungere collaboratori ad una nota, oppure pubblicare una nota su una pagina web.\n\nUsa Simplenote per Mac, per Android, oppure visita http:\/\/simplenote.com per accedere alle tue note da qualunque posto e da qualunque dispositivo.";
 

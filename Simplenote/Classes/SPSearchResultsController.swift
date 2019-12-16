@@ -2,9 +2,9 @@ import Foundation
 import CoreData
 
 
-// MARK: - SPResultsController
+// MARK: - SPSearchResultsController
 //
-class SPResultsController: NSObject {
+class SPSearchResultsController: NSObject {
 
     /// Batch Size for the FRC's Request
     ///
@@ -38,7 +38,7 @@ class SPResultsController: NSObject {
                 return
             }
 
-            refreshPredicate(keyword: keyword)
+            updatePredicateAndFetch(keyword: keyword)
         }
     }
 
@@ -63,7 +63,8 @@ class SPResultsController: NSObject {
     ///
     ///  - mainContext: Main Thread's MOC
     ///
-    init(mainContext: NSManagedObjectContext) {
+    init(mainContext: NSManagedObjectContext = SPAppDelegate.shared().managedObjectContext) {
+        assert(mainContext.concurrencyType == .mainQueueConcurrencyType)
         self.mainContext = mainContext
         super.init()
     }
@@ -72,7 +73,7 @@ class SPResultsController: NSObject {
 
 // MARK: - Public Methods
 //
-extension SPResultsController {
+extension SPSearchResultsController {
 
     /// Executes the fetch request on the store to get objects.
     ///
@@ -107,11 +108,11 @@ extension SPResultsController {
 
 // MARK: - Private Methods
 //
-private extension SPResultsController {
+private extension SPSearchResultsController {
 
     /// Refreshes the ResultsController's Predicate
     ///
-    func refreshPredicate(keyword: String) {
+    func updatePredicateAndFetch(keyword: String) {
         resultsController.fetchRequest.predicate = predicate(keyword: keyword)
         performFetch()
     }
