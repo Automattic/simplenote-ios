@@ -140,14 +140,10 @@ private extension SPSearchController {
     }
 
     func notifyStatusChanged(active: Bool) {
-        guard let delegate = delegate else {
-            return
-        }
-
         if active {
-            delegate.searchControllerWillBeginSearch(self)
+            delegate?.searchControllerWillBeginSearch(self)
         } else {
-            delegate.searchControllerDidEndSearch(self)
+            delegate?.searchControllerDidEndSearch(self)
         }
     }
 }
