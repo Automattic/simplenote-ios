@@ -9,6 +9,7 @@
 @dynamic ghostData;
 @dynamic simperiumKey;
 
+@dynamic recent_searches;
 @dynamic analytics_enabled;
 
 - (void) didChangeValueForKey:(NSString *)key
