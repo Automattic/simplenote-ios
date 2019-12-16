@@ -18,8 +18,8 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
 
     /// Results Controller
     ///
-    private lazy var resultsController: SPResultsController = {
-        SPResultsController(mainContext: mainContext)
+    private lazy var resultsController: SPSearchResultsController = {
+        SPSearchResultsController(mainContext: mainContext)
     }()
 
     /// SearchController: Expected to be set externally

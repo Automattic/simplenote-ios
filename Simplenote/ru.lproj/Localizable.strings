@@ -1,7 +1,19 @@
-/* Translation-Revision-Date: 2019-06-20 10:19:58+0000 */
+/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
+
+/* Number of Characters in a note */
+"%@ Character" = "%@ знак";
+
+/* Number of Characters in a note */
+"%@ Characters" = "Знаков: %@";
+
+/* Number of words in a note */
+"%@ Word" = "%@ слово";
+
+/* Number of words in a note */
+"%@ Words" = "%@ слов";
 
 /* Number of found search results */
 "%d Result" = "%d Найдено";
@@ -9,62 +21,183 @@
 /* Number of found search results */
 "%d Results" = "%d результатов";
 
-/* Number of words in a note */
-"%d Word" = "%d слово";
+/* 1 minute passcode lock timeout */
+"1 Minute" = "1 минута";
 
-/* Number of words in a note */
-"%d Words" = "%d слов";
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15 секунд";
 
-/* Label of accept button on alert dialog */
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "2 минуты";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "3 минуты";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30 секунд";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "4 минуты";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "5 минут";
+
+/* Display app about screen */
+"About" = "О нас";
+
+/* Accept Action
+   Label of accept button on alert dialog */
 "Accept" = "Согласен";
 
-/* A user's Simplenote account */
+/* No comment provided by engineer. */
 "Account" = "Учетная запись";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Добавить нового партнера";
 
+/* Placeholder test in textfield when adding a new tag to a note */
+"Tag..." = "Метка...";
+
 /* Label on button to add a new tag to a note */
 "Add tag" = "Добавить тег";
 
-/* Title of option to display all notes */
+/* Title: No filters applied */
 "All Notes" = "Все заметки";
 
+/* Sort Mode: Alphabetically, ascending */
+"Alphabetically: A-Z" = "По алфавиту: А–Я";
+
+/* Sort Mode: Alphabetically, descending */
+"Alphabetically: Z-A" = "По алфавиту: Я–А";
+
+/* Sign in error message */
+"An error was encountered while signing in." = "Во время входа произошла ошибка.";
+
 /* No comment provided by engineer. */
+"Appearance" = "Внешний вид";
+
+/* Other Simplenote apps */
+"Apps" = "Приложения";
+
+/* Automattic hiring description */
+"Are you a developer? Automattic is hiring." = "Вы разработчик? Automattic расширяет штат.";
+
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "Очистить корзину? Это действие нельзя отменить.";
+
+/* Message for alert when user tries to send feedback without an email address */
+"Are you sure you want to send without your email? We won't be able reply to you." = "Отправить без вашего адреса эл. почты? В этом случае мы не сможем вам ответить.";
+
+/* Title for prompt when user tries to close the feedback view */
+"Are you sure?" = "Продолжить?";
+
+/* User Authenticated */
+"Authenticated" = "Прошедший проверку";
+
+/* Title of Back button for Markdown preview */
+"Back" = "Назад";
+
+/* The Simplenote blog */
+"Blog" = "Блог";
+
+/* Terms of Service Legend *PREFIX*: printed in dark color */
+"By creating an account you agree to our" = "Создавая учетную запись, вы принимаете наши";
+
+/* No comment provided by engineer. */
+"Can't Access." = "Нет доступа.";
+
+/* Cancel Action
+   Verb, cancel an alert dialog */
 "Cancel" = "Отмена";
+
+/* No comment provided by engineer. */
+"Choose Photo" = "Выбрать фото";
+
+/* No comment provided by engineer. */
+"Close" = "Закрыть";
 
 /* Verb - work with others on a note */
 "Collaborate" = "Партнер";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Разрешить другим сотрудничать";
+/* No comment provided by engineer. */
+"Collaboration has moved" = "Раздел совместной работы перенесен";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Партнеры";
 
-"collaborators-description" = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.
-Позже вы сможете изменить его. ";
-
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Сократить список заметок";
+
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"Contact" = "Обратная связь";
+
+/* Contribute to the Simplenote apps on github */
+"Contribute" = "Принять участие";
+
+/* This is one of the buttons we display inside of the prompt to review the app */
+"Could Be Better" = "Нужно доработать";
+
+/* Error for bad email or password */
+"Could not create an account with the provided email address and password." = "Невозможно создать учетную запись с указанными адресом email и паролем.";
+
+/* Message displayed when login fails */
+"Could not login with the provided email address and password." = "Невозможно авторизоваться с указанными адресом email и паролем.";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+"Could you tell us how we could improve?" = "Посоветуйте, как нам стать лучше.";
+
+/* Alert dialog title displayed on sign in error */
+"Couldn't Sign In" = "Не удалось войти";
+
+/* Siri Suggestion to create a New Note */
+"Create a New Note" = "Создай новую заметку";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Создать новую заметку";
 
+/* Sort Mode: Creation Date, descending */
+"Created: Newest" = "Дата создания: сначала новые";
+
+/* Sort Mode: Creation Date, ascending */
+"Created: Oldest" = "Дата создания: сначала старые";
+
 /* No comment provided by engineer. */
 "Current Collaborators" = "Текущие партнеры";
 
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Эта заметка была удалена на другом устройстве";
+/* Theme: Dark */
+"Dark" = "Тёмная";
+
+/* Debug Screen Title
+   Display internal debug status */
+"Debug" = "Отладка";
+
+/* Trash (verb) - the action of deleting a note */
+"Delete" = "Удалить";
+
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "Удалить заметки";
+
+/* No comment provided by engineer. */
+"Disable Markdown formatting" = "Выключить форматирование Markdown";
 
 /* No comment provided by engineer. */
 "Dismiss keyboard" = "Скрыть клавиатуру";
 
-/* No comment provided by engineer. */
+/* Done toolbar button
+   Verb: Close current view */
 "Done" = "Готово";
 
-/* Re-order or delete tags */
-"Edit Tags" = "Изменить теги";
+/* Edit Tags Action: Visible in the Tags List */
+"Edit" = "Редактирование";
+
+/* Email TextField Placeholder */
+"Email" = "Отправить email";
+
+/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Email Address" = "Адрес эл. почты";
+
+/* Email Taken Alert Title */
+"Email in use" = "Используемый адрес эл. почты";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Очистить";
@@ -72,286 +205,74 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Очистить корзину";
 
+/* No comment provided by engineer. */
+"Enable Markdown formatting" = "Включить форматирование Markdown";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "Требуется";
+
+/* No comment provided by engineer. */
+"Error" = "Ошибка";
+
+/* No comment provided by engineer. */
+"Error uploading." = "Ошибка загрузки";
+
+/* Offer to enable Face ID support if available and passcode is on. */
+"Face ID" = "Face ID";
+
+/* Password Reset Action */
+"Forgotten password?" = "Забыли пароль?";
+
+/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
+"Great! Could you leave us a nice review?\nIt really helps." = "Замечательно! Не могли бы вы оставить нам хороший отзыв?\n\nЗаранее благодарим.";
+
+/* Privacy Details */
+"Help us improve Simplenote by sharing usage data with our analytics tool." = "Помогите нам улучшить Simplenote — предоставьте данные об использовании нашему средству аналитики.";
+
 /* Noun - the version history of a note */
 "History" = "История";
-
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Восстановить предыдущую версию заметки";
 
 /* Action - view the version history of a note */
 "History..." = "История…";
 
-/* Terminoligy used for sidebar UI element where tags are displayed */
-"Menu" = "Меню";
+/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
+"How can we help?" = "Чем вам помочь?";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Показать опции заметки";
+/* This is one of the buttons we display inside of the prompt to review the app */
+"I Like It" = "Мне нравится";
 
-/* Label to create a new note */
-"New note" = "Новая заметка";
+/* Title for alert that a user has entered an invalid email address */
+"Invalid Email Address." = "Неверный адрес эл. почты";
 
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "Нет заметок";
+/* Last Message timestamp */
+"LastSeen" = "Последнее прочитанное";
 
-/* Message shown when no notes match a search string */
-"No Results" = "Нет результатов";
+/* Learn More Action */
+"Learn more" = "Подробнее";
 
-/* No comment provided by engineer. */
-"Note not published" = "Заметка не опубликована";
+/* This is one of the buttons we display when prompting the user for a review */
+"Leave a Review" = "Оставить отзыв";
 
-/* Confirmation shown when a note is published */
-"Note Published" = "Заметка опубликована ";
+/* Theme: Light */
+"Light" = "Светлая";
 
-/* Plural form of notes */
-"Notes" = "Заметки";
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "Время до блокировки";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Закрыть текущую заметку";
+/* Log In Action
+   Login Action
+   LogIn Action
+   LogIn Interface Title */
+"Log In" = "Войти";
 
-/* No comment provided by engineer. */
-"Off" = "Выключить";
+/* Log out of the active account in the app */
+"Log Out" = "Выйти";
 
-/* No comment provided by engineer. */
-"OK" = "Хорошо";
+/* Allows the user to SignIn using their WPCOM Account */
+"Log in with WordPress.com" = "Войти через WordPress.com";
 
-/* No comment provided by engineer. */
-"On" = "Включить";
-
-/* Select a note to view in the note editor */
-"Open note" = "Открыть заметку";
-
-/* A 4-digit code to lock the app when it is closed */
-"Passcode" = "Пароль";
-
-/* Action to mark a note as pinned */
-"Pin note" = "Закрепить заметку";
-
-/* Denotes when note is pinned to the top of the note list */
-"Pin to Top" = "В топ";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Переключатель закрепления";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Закреплено";
-
-/* No comment provided by engineer. */
-"Preferences" = "Параметры";
-
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
-"Publish" = "Публикация";
-
-/* Failure message after attempting to publish a note */
-"Publish Failed" = "Публикация не удалась";
-
-/* Action which published a note to a web page */
-"Publish note" = "Публикация заметки";
-
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Переключатель публикации";
-
-/* No comment provided by engineer. */
-"Published" = "Опубликовать";
-
-/* Message shown when a note is in the processes of being published */
-"Publishing..." = "Публикация…";
-
-/* No comment provided by engineer. */
-"Remove all notes from trash" = "Удалить все заметки из корзины";
-
-/* Delete a tag and remove it from all associated notes */
-"Remove Tag" = "Удалить тег";
-
-/* Prompt asking user to confirm the removal of a tag from a note */
-"Remove tag?" = "Удалить тег?";
-
-/* Rename a tag */
-"Rename" = "Переименовать";
-
-/* Restore a note from the trash, markking it as undeleted */
-"Restore" = "Восстановить";
-
-/* Restore a note to a previous version */
-"Restore Note" = "Восстановить заметку";
-
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Отправить";
-
-/* Title of options screen */
-"Settings" = "Настройки";
-
-/* No comment provided by engineer. */
-"Share note" = "Поделиться заметкой";
-
-/* Accessibility hint on button to share note */
-"share-accessibility-hint" = "Поделится содержанием данной заметки";
-
-/* UI region to the left of the note list which shows all of a users tags */
-"Sidebar" = "Боковая панель";
-
-/* Sign out of the active account in the app */
-"Sign Out" = "Выйти";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Добавить тег к текущей заметке";
-
-/* Accessibility hint on button to remove a tag from a current note */
-"tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
-
-/* Text used to display the name of a tag */
-"Tag: %@" = "Тег: %@";
-
-/* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "Сегодня";
-
-/* Accessibility hint used to show or hide the sidebar */
-"Toggle tag sidebar" = "Боковая панель переключения меток";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Отправить текущую заметку в корзину";
-
-/* Trash (noun) - the location where deleted notes are stored */
-"Trash-noun" = "Корзина";
-
-/* Permanent Delete */
-"Trash-verb" = "Удалить";
-
-/* Action to mark a note as unpinned */
-"Unpin note" = "Открепить заметку";
-
-/* Action which unpublishes a note */
-"Unpublish note" = "Не публиковать заметку";
-
-/* Message shown when unpublishing a note */
-"Unpublishing..." = "Отмена публикации…";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Версия";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Оставить этот вариант";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Извлечение версии";
-
-/* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "Вчера";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempt" = "%i неудачная попытка ввода кода доступа";
-
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Ввести пароль";
-
-/* Pin Lock */
-"Enter your passcode" = "Введите ваш пароль";
-
-/* Pin Lock */
-"Passcodes did not match. Try again." = "Пароль не подходит. Попробуйте снова. ";
-
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Повторно ввести пароль";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Набрать пароль";
-
-/* Prompt when disabling passcode */
-"Turn off Passcode" = "Отключить пароль";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Разблокировать %@";
-
-/* Number of failed entries entering in passcode */
-"%i Failed Passcode Attempts" = "Неудачные попытки ввода кода доступа: %i";
-
-"welcomeNote-iOS" = "Добро пожаловать в Simplenote для iOS!
-
-Добавьте заметку, тапнув на кнопку с плюсом. 
-
-Пролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.
-
-Вы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. 
-
-Нажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. 
-
-Но у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. 
-
-Пользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http://simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
-
-/* Option to sort notes in the note list alphabetically. The default is by modification date */
-"Sort Notes Alphabetically" = "Сортировать заметки по алфавиту";
-
-/* A short description to access the account login screen */
-"Already have an account?" = "Уже есть учетная запись?";
-
-/* Hint displayed in the password confirmation field */
-"Confirm" = "Подтвердить";
-
-/* An error message */
-"Could not create an account with the provided email address and password." = "Невозможно создать учетную запись с указанными адресом email и паролем.";
-
-/* Message displayed when login fails */
-"Could not login with the provided email address and password." = "Невозможно авторизоваться с указанными адресом email и паролем.";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Нет учетной записи?";
-
-/* A 4-digit code to lock the app when it is closed */
-"Password" = "Пароль";
-
-/* Message displayed when password is invalid */
-"Password must contain at least 4 characters." = "Пароль должен содержать не менее 4 символов.";
-
-/* Title of button for logging in (must be short) */
-"Sign in" = "Войти";
-
-/* Title of button for logging in (must be short) */
-"Sign In" = "Войти";
-
-/* Title of button to create a new account (must be short) */
-"Sign up" = "Зарегистрироваться";
-
-/* Title of button to create a new account (must be short) */
-"Sign Up" = "Зарегистрироваться";
-
-/* Details for a dialog that is displayed when there's a connection problem */
-"There's a problem with the connection.  Please try again later." = "Возникли проблемы с подключением. Попробуйте позже. ";
-
-/* Message displayed when email address is invalid */
-"Your email address is not valid." = "Ваш адрес электронной почты не действителен.";
-
-/* Description of Simplenote shown in first launch view */
-"Find notes quickly with instant searching and simple tags." = "Быстро найти заметки через мгновенный поиск и теги. ";
-
-/* Button label shown on first launch screen to start the log in process */
-"Get Started" = "Начало работы";
-
-/* Description of Simplenote shown in first launch view */
-"Share a list, post some instructions, or publish your thoughts." = "Делитесь списком, отправляйте разные инструкции, или публикуйте ваши мысли. ";
-
-/* Message shown in first launch view */
-"Stay organized" = "Оставайтесь организованным";
-
-/* Message shown in first launch view */
-"Use it everywhere" = "Пользуйтесь им везде";
-
-/* Message shown in first launch view */
-"Welcome to Simplenote" = "Добро пожаловать в Simplenote";
-
-/* Message shown in first launch view */
-"Work together" = "Работайте вместе";
-
-/* Description of Simplenote shown in first launch view */
-"Your notes stay updated across all your devices. No buttons to press. It just works." = "Ваши заметки обновляются на всех ваших устройствах. Ничего нажимать не нужно. Это просто работает. ";
-
-/* Option to enable the dark app theme. */
-"Dark Theme" = "Темная тема";
-
-/* Debug Screen Title Display internal debug status */
-"Debug" = "Отладка";
+/* Presents the regular Email signin flow */
+"Log in with email" = "Войти с помощью эл. почты";
 
 /* Month and day date formatter */
 "MMM d" = "Д ммм";
@@ -365,71 +286,378 @@
 /* Month and year date formatter */
 "MMM yyyy" = "МММ гггг";
 
-/* Offer to enable Touch ID support if available and passcode is on. */
-"Touch ID" = "Идентификатор прикосновения";
+/* Special formatting that can be turned on for notes */
+"Markdown" = "Markdown";
 
-/* Title displayed in the Option's Security section. */
-"Security" = "Безопасность";
+/* Switch which marks a note as using Markdown formatting or not */
+"Markdown toggle" = "Переключатель Markdown";
 
-/* TOS */
-"By signing up, you agree to our Terms of Service »" = "Регистрируясь, вы подтверждаете свое согласие с нашими Условиями предоставления услуг »";
+/* Terminoligy used for sidebar UI element where tags are displayed */
+"Menu" = "Меню";
 
-/* Forgot Password */
-"Forgot password? »" = "Забыли пароль? »";
+/* Sort Mode: Modified Date, descending */
+"Modified: Newest" = "Дата изменения: сначала новые";
 
-/* Ratings View */
-"What do you think about Simplenote?" = "Каково ваше мнение о Simplenote?";
+/* Sort Mode: Creation Date, ascending */
+"Modified: Oldest" = "Дата изменения: сначала старые";
 
-/* No comment provided by engineer. */
-"I Like It" = "Мне нравится";
+/* Label to create a new note */
+"New note" = "Новая заметка";
 
-/* No comment provided by engineer. */
-"Could Be Better" = "Нужно доработать";
+/* Empty Note Placeholder */
+"New note..." = "Новая заметка...";
 
-"Great! Could you leave us a nice review?
-It really helps." = "Замечательно! Не могли бы вы оставить нам хороший отзыв?
+/* Alert's Cancel Action
+   Cancels Empty Trash Action */
+"No" = "Нет";
 
-Заранее благодарим.";
+/* Title for alert when user tires to send feedback without an email address */
+"No Email." = "Не указан эл. адрес.";
 
-/* No comment provided by engineer. */
-"Leave a Review" = "Оставить отзыв";
+/* Text that appears in an alert to the user when there is no internet */
+"No Internet" = "Отсутствует подключение к Интернету";
 
-/* No comment provided by engineer. */
+/* Title for message when user tries to send feedback without any text */
+"No Message." = "Нет сообщения.";
+
+/* Message shown in note list when no notes are in the current view */
+"No Notes" = "Нет заметок";
+
+/* Message shown when no notes match a search string */
+"No Results" = "Нет результатов";
+
+/* This is one of the buttons we display when prompting the user for a review */
 "No Thanks" = "Нет, спасибо";
 
-/* Ratings View: Don't Like */
-"Could you tell us how we could improve?" = "Посоветуйте, как нам стать лучше.";
+/* No comment provided by engineer. */
+"Note not published" = "Заметка не опубликована";
+
+/* Plural form of notes */
+"Notes" = "Заметки";
+
+/* Dismisses an AlertController */
+"OK" = "Хорошо";
+
+/* Instant passcode lock timeout */
+"Off" = "Выключить";
 
 /* No comment provided by engineer. */
+"On" = "Включить";
+
+/* Siri Suggestion to open a specific Note */
+"Open \"(preview)\"" = "Открой «(предварительный просмотр)»";
+
+/* Siri Suggestion to open our app */
+"Open Simplenote" = "Открой Simplenote";
+
+/* Select a note to view in the note editor */
+"Open note" = "Открыть заметку";
+
+/* AlertController's Payload for the broken Sort Options Fix */
+"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Из-за обновления мог измениться порядок заметок. Изменить настройки сортировки?";
+
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "Пароль";
+
+/* Password TextField Placeholder */
+"Password" = "Пароль";
+
+/* Message displayed when password is invalid (Login) */
+"Password must contain at least 4 characters" = "Пароль должен содержать не меньше 4 знаков";
+
+/* Message displayed when password is invalid (Signup) */
+"Password must contain at least 6 characters" = "Пароль должен содержать не менее 6 символов.";
+
+/* Number of changes pending to be sent */
+"Pendings" = "На утверждении";
+
+/* Pin (verb) - the action of Pinning a note */
+"Pin" = "Закрепить";
+
+/* Action to mark a note as pinned */
+"Pin note" = "Закрепить заметку";
+
+/* Denotes when note is pinned to the top of the note list */
+"Pin to Top" = "В топ";
+
+/* Switch which marks a note as pinned or unpinned */
+"Pin toggle" = "Переключатель закрепления";
+
+/* Pinned notes are stuck to the note of the note list */
+"Pinned" = "Закреплено";
+
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "Активируйте учетную запись WordPress.com через эл. почту или повторите попытку.";
+
+/* Message for alert that user has entered an invalid email address */
+"Please check your email address, it appears to be invalid." = "Проверьте адрес эл. почты, возможно, он неверный.";
+
+/* Message for alert when user tires to send feedback without any text */
+"Please enter a message." = "Введите сообщение.";
+
+/* Title of Markdown preview screen */
+"Preview" = "Предварительный просмотр";
+
+/* Simplenote privacy policy */
+"Privacy Policy" = "Политика конфиденциальности";
+
+/* Privacy Settings */
+"Privacy Settings" = "Настройки конфиденциальности";
+
+/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+"Publish" = "Публикация";
+
+/* Action which published a note to a web page */
+"Publish note" = "Публикация заметки";
+
+/* Switch which marks a note as published or unpublished */
+"Publish toggle" = "Переключатель публикации";
+
+/* No comment provided by engineer. */
+"Published" = "Опубликовать";
+
+/* Message shown when a note is in the processes of being published */
+"Publishing..." = "Публикация…";
+
+/* Reachs Internet */
+"Reachability" = "Удобный доступ";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Удалить все заметки из корзины";
+
+/* Rename a tag */
+"Rename" = "Переименовать";
+
+/* Restore a note from the trash, markking it as undeleted */
+"Restore" = "Восстановить";
+
+/* Restore a note to a previous version */
+"Restore Note" = "Восстановить заметку";
+
+/* Search Placeholder
+   Using Search instead of Back if user is searching */
+"Search" = "Поиск";
+
+/* No comment provided by engineer. */
+"Security" = "Безопасность";
+
+/* Verb - send the content of the note by email, message, etc */
+"Send" = "Отправить";
+
+/* This is one of the buttons we display when prompting the user for a review */
 "Send Feedback" = "Отправить отзыв";
 
-/* Ratings View: Contact */
-"Contact" = "Обратная связь";
+/* For debugging use */
+"Send a Test Crash" = "Отправить данные о сбое";
+
+/* Label that is shown when feedback from the user is sending */
+"Sending..." = "Отправка…";
+
+/* Title of options screen */
+"Settings" = "Настройки";
+
+/* Share (verb) - the action of Sharing a note */
+"Share" = "Поделиться";
+
+/* Option to disable Analytics. */
+"Share Analytics" = "Поделиться аналитическими данными";
 
 /* No comment provided by engineer. */
-"Your Email:" = "Ваш электронный адрес:";
+"Share note" = "Поделиться заметкой";
 
 /* No comment provided by engineer. */
-"How can we help?" = "Чем вам помочь?";
+"Sharing notes is now accessed through the action menu from the toolbar." = "Функция отправки заметок теперь находится в меню действий на панели инструментов.";
 
-/* No comment provided by engineer. */
-"Back" = "Назад";
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Боковая панель";
 
-/* Permanent Delete */
-"Delete" = "Удалить";
-
-/* Markdown Preview */
-"Preview" = "Предварительный просмотр";
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
+"Sign Up" = "Зарегистрироваться";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "При выходе из учётной записи все несинхронизированные заметки будут удалены. Чтобы убедиться, что заметки синхронизированы, войдите в веб-приложение.";
 
+/* Our mighty brand! */
+"Simplenote" = "Simplenote";
+
+/* Authentication Error Alert Title */
+"Sorry!" = "Извините!";
+
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "Сортировать по алфавиту";
+
+/* Option to sort notes in the note list alphabetically. The default is by modification date
+   Sort Order for the Notes List */
+"Sort Order" = "Порядок сортировки";
+
+/* Theme: Matches iOS Settings */
+"System Default" = "Настройки системы по умолчанию";
+
+/* No comment provided by engineer. */
+"Tags" = "Метки";
+
+/* No comment provided by engineer. */
+"Take Photo" = "Сделать фотографию";
+
+/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"Terms and Conditions" = "Правила и условия";
+
+/* Simplenote terms of service */
+"Terms of Service" = "Условия предоставления услуг";
+
+/* No comment provided by engineer. */
+"Thanks" = "Спасибо!";
+
+/* Error when address is in use */
+"The email you've entered is already associated with a Simplenote account." = "Указанный адрес эл. почты уже связан с учетной записью Simplenote.";
+
+/* Onboarding Header Text */
+"The simplest way to keep notes." = "Простой способ хранить заметки.";
+
+/* Option to enable the dark app theme. */
+"Theme" = "Тема оформления";
+
+/* Simplenote Themes */
+"Themes" = "Темы";
+
+/* No comment provided by engineer. */
+"There was an error sending your feedback, please try again." = "При отправке вашего отзыва произошла ошибка, попробуйте еще раз.";
+
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Сегодня";
+
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Боковая панель переключения меток";
+
+/* Offer to enable Touch ID support if available and passcode is on. */
+"Touch ID" = "Идентификатор прикосновения";
+
+/* Title: Trash Tag is selected */
+"Trash" = "Корзина";
+
+/* Trash (verb) - the action of deleting a note */
+"Trash" = "Удалить";
+
+/* Unpin (verb) - the action of Unpinning a note */
+"Unpin" = "Открепить";
+
+/* Action to mark a note as unpinned */
+"Unpin note" = "Открепить заметку";
+
+/* Action which unpublishes a note */
+"Unpublish note" = "Не публиковать заметку";
+
+/* Message shown when a note is in the processes of being unpublished */
+"Unpublishing..." = "Отмена публикации…";
+
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Обнаружены несинхронизированные заметки";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Метка...";
+/* Title: Untagged Notes are onscreen */
+"Untagged" = "Без меток";
 
-/* Passcode Failed Attempts */
-"FailedAttempts" = "Потеряли доступ к Simplenote? Чтобы восстановить доступ, переустановите приложение и войдите в учётную запись.";
+/* Allows selecting notes with no tags */
+"Untagged Notes" = "Заметки без меток";
+
+/* No comment provided by engineer. */
+"Use Latest Photo" = "Использовать самую новую фотографию";
+
+/* A user's Simplenote account */
+"Username" = "Имя пользователя";
+
+/* Represents a snapshot in time for a note */
+"Version" = "Версия";
+
+/* App version number */
+"Version %@" = "Версия %@";
+
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Перейти в веб-приложение";
+
+/* No comment provided by engineer. */
+"We can't access your photos, please ensure this application has access in Settings." = "Не удалось получить доступ к вашим фотографиям. Убедитесь, что этому приложению разрешен доступ к фотографиям в разделе «Настройки».";
+
+/* No comment provided by engineer. */
+"We couldn't upload the photo, please try again." = "Не удалось загрузить фотографию, попробуйте еще раз.";
+
+/* No comment provided by engineer. */
+"We have received your feedback and will be in contact soon." = "Мы получили ваш отзыв и в ближайшее время свяжемся с вами.";
+
+/* Generic error */
+"We're having problems. Please try again soon." = "Произошла ошибка. Повторите попытку позже.";
+
+/* WebSocket Status */
+"WebSocket" = "WebSocket";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about Simplenote?" = "Каково ваше мнение о Simplenote?";
+
+/* This is the string we display when prompting the user to review the app */
+"What do you think about WordPress?" = "Что вы думаете о WordPress?";
+
+/* Work at Automattic */
+"Work With Us" = "Сотрудничество";
+
+/* Alert's Accept Action
+   Proceeds with the Empty Trash OP */
+"Yes" = "Да";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Вчера";
+
+/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
+"Your Email:" = "Ваш электронный адрес:";
+
+/* Message displayed when email address is invalid */
+"Your email address is not valid" = "Ваш адрес электронной почты не действителен.";
+
+/* Message for prompt when user tries to close feedback view after having entered text */
+"Your message will be lost." = "Это приведет к удалению сообщения.";
+
+/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
+"attach a file" = "Добавить файл";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"Enable others to collaborate" = "Разрешить другим сотрудничать";
+
+/* No comment provided by engineer. */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
+
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device." = "Эта заметка была удалена на другом устройстве";
+
+/* Accessibility hint on button which shows the history of a note */
+"Restore note to previous version" = "Восстановить предыдущую версию заметки";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"Show options for note" = "Показать опции заметки";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"Close current note" = "Закрыть текущую заметку";
+
+/* Accessibility hint on share button */
+"Share the content of the current note" = "Поделится содержанием данной заметки";
+
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Добавить тег к текущей заметке";
+
+/* No comment provided by engineer. */
+"Remove tag from the current note" = "Удалить тег в текущей заметке";
+
+/* Accessibility hint on button which moves a note to the trash */
+"Move the current note to trash" = "Отправить текущую заметку в корзину";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"Connect to the Internet to Access Previous Versions" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"Switch to this version" = "Оставить этот вариант";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching version" = "Извлечение версии";
+
+/* A welcome note for new iOS users */
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
 
