@@ -24,7 +24,6 @@ abstract_target 'Automattic' do
 		pod 'Gridicons', '~> 0.18'
 		pod 'AppCenter', '~> 2.3.0' 
 		pod 'AppCenter/Distribute', '~> 2.3.0'
-		pod 'SVProgressHUD', '2.2.5'
 
 		# Automattic
 		#
