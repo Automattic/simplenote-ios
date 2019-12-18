@@ -15,7 +15,7 @@ class SPFeedbackManager: NSObject {
             return SFSafariViewController(url: SPCredentials.simplenoteFeedbackURL)
         }
 
-        let subjectText = NSLocalizedString("Simplenote iOS Feedback", comment: "Simplenote's Feedback Email")
+        let subjectText = NSLocalizedString("Simplenote iOS Feedback", comment: "Simplenote's Feedback Email Title")
 
         let mailViewController = MFMailComposeViewController()
         mailViewController.setSubject(subjectText)

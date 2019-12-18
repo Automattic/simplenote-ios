@@ -95,7 +95,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self refreshTableViewInsets];
-    [self updatetableHeaderSize];
+    [self updateTableHeaderSize];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -149,7 +149,7 @@
     [self.tableView reloadData];
 }
 
-- (void)updatetableHeaderSize {
+- (void)updateTableHeaderSize {
     UIView *headerView = self.tableView.tableHeaderView;
     if (!headerView) {
         return;
@@ -1190,7 +1190,7 @@
 
 #pragma mark - SPRatingsPromptDelegate
 
-- (void)displayReviewInterface
+- (void)displayReviewUI
 {
     [SKStoreReviewController requestReview];
 
@@ -1199,7 +1199,7 @@
     [self hideRatingViewIfNeeded];
 }
 
-- (void)displayFeedbackInterface
+- (void)displayFeedbackUI
 {
     UIViewController *feedbackViewController = [SPFeedbackManager feedbackViewController];
     feedbackViewController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -1210,7 +1210,7 @@
     [self hideRatingViewIfNeeded];
 }
 
-- (void)dismissRatingsView
+- (void)dismissRatingsUI
 {
     [SPTracker trackRatingsDeclinedToRate];
     [[SPRatingsHelper sharedInstance] declinedToRateCurrentVersion];

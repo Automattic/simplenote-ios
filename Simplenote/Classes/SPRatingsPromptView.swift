@@ -8,9 +8,9 @@ import UIKit
 protocol SPRatingsPromptDelegate: class {
     func simplenoteWasLiked()
     func simplenoteWasDisliked()
-    func displayReviewInterface()
-    func displayFeedbackInterface()
-    func dismissRatingsView()
+    func displayReviewUI()
+    func displayFeedbackUI()
+    func dismissRatingsUI()
 }
 
 
@@ -157,9 +157,9 @@ private extension SPRatingsPromptView {
             delegate?.simplenoteWasLiked()
             state = .liked
         case .liked:
-            delegate?.displayReviewInterface()
+            delegate?.displayReviewUI()
         case .disliked:
-            delegate?.displayFeedbackInterface()
+            delegate?.displayFeedbackUI()
         }
     }
 
@@ -170,7 +170,7 @@ private extension SPRatingsPromptView {
             delegate?.simplenoteWasDisliked()
             state = .disliked
         case .liked, .disliked:
-            delegate?.dismissRatingsView()
+            delegate?.dismissRatingsUI()
         }
     }
 }
