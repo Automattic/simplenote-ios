@@ -1053,11 +1053,11 @@
 				74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */,
 				B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */,
 				B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */,
+				B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */,
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
-				B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
