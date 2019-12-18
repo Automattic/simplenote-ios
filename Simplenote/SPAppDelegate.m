@@ -242,9 +242,6 @@
 //    // Initialize Background Fetch:
 //    // UIApplicationBackgroundFetchIntervalMinimum enables the device to check as frequently as it sees fit
 //	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-	
-    // Integrity Check: Fallback to GhostData, if needed
-    [SPIntegrityHelper reloadInconsistentNotesIfNeeded:self.simperium];
 
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
