@@ -1145,7 +1145,7 @@
 - (void)showRatingViewIfNeeded
 {
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
-        return;
+//        return;
     }
     
     [SPTracker trackRatingsPromptSeen];
