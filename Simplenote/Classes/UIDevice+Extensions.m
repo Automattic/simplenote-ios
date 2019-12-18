@@ -15,26 +15,4 @@
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
 
-+ (BOOL)isPhone
-{
-    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
-}
-
-+ (BOOL)isPhoneX
-{
-    CGFloat maxScreenWidth = MAX([[UIScreen mainScreen] bounds].size.width,
-                              [[UIScreen mainScreen] bounds].size.height);
-    return self.isPhone && maxScreenWidth == 812.0;
-}
-
-+ (BOOL)isLandscape
-{
-    return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
-}
-
-+ (BOOL)isPhoneLandscape
-{
-    return self.isPhone && self.isLandscape;
-}
-
 @end
