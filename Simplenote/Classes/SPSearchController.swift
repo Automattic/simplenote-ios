@@ -22,10 +22,21 @@ protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
 }
 
 
+// MARK: - SPSearchControllerResults: To be (optionally) implemented by specialized ResultsViewController(s)
+//
+protocol SPSearchControllerResults: NSObjectProtocol {
+    var searchController: SPSearchController? { get set }
+}
+
+
 // MARK: - Simplenote's Search Controller: Because UIKit's Search Controller is simply unusable
 //
 @objcMembers
 class SPSearchController: NSObject {
+
+    /// Indicates if the SearchController is active (or not!)
+    ///
+    private var active = false
 
     /// ResultsController in which Search Results would be rendered
     ///
@@ -33,7 +44,7 @@ class SPSearchController: NSObject {
 
     /// Internal SearchBar Instance
     ///
-    let searchBar = UISearchBar()
+    let searchBar = SPSearchBar()
 
     /// SearchController's Delegate
     ///
@@ -50,6 +61,7 @@ class SPSearchController: NSObject {
         self.resultsViewController = resultsViewController
         super.init()
         setupSearchBar()
+        setupResultsViewController()
     }
 
     /// Dismissess the SearchBar
@@ -66,6 +78,12 @@ class SPSearchController: NSObject {
 //
 private extension SPSearchController {
 
+    func setupResultsViewController() {
+        // Analog to the old school `self.searchDisplayController` UIViewController property, we'll set our own
+        let resultsController = (resultsViewController as? SPSearchControllerResults)
+        resultsController?.searchController = self
+    }
+
     func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
@@ -74,9 +92,16 @@ private extension SPSearchController {
     }
 
     func updateStatus(active: Bool) {
+        guard active != self.active else {
+            return
+        }
+
+        self.active = active
+
         updateSearchBar(showsCancelButton: active)
         updateResultsView(visible: active)
         updateNavigationBar(hidden: active)
+        notifyStatusChanged(active: active)
     }
 
     func updateNavigationBar(hidden: Bool) {
@@ -112,6 +137,14 @@ private extension SPSearchController {
         }
 
         displayResultsViewController()
+    }
+
+    func notifyStatusChanged(active: Bool) {
+        if active {
+            delegate?.searchControllerWillBeginSearch(self)
+        } else {
+            delegate?.searchControllerDidEndSearch(self)
+        }
     }
 }
 
@@ -163,7 +196,6 @@ private extension SPSearchController {
             resultsView.topAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
-
 }
 
 
@@ -177,9 +209,6 @@ extension SPSearchController: UISearchBarDelegate {
         }
 
         updateStatus(active: shouldBeginEditing)
-        if shouldBeginEditing {
-            delegate?.searchControllerWillBeginSearch(self)
-        }
 
         return shouldBeginEditing
     }
@@ -190,6 +219,28 @@ extension SPSearchController: UISearchBarDelegate {
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss()
-        delegate?.searchControllerDidEndSearch(self)
+    }
+}
+
+
+// MARK: - SPSearchBar
+//
+class SPSearchBar: UISearchBar {
+
+    /// **Custom** Behavior:
+    /// Normally resigning FirstResponder status implies all of the button subviews (ie. cancel button) to become disabled. This implies that
+    /// hiding the keyboard makes it impossible to simply tap `Cancel` to exit **Search Mode**.
+    ///
+    /// With this (relatively safe) workaround, we're keeping any UIButton subview(s)  enabled, so that you can just exit Search Mode anytime.
+    ///
+    @discardableResult
+    override func resignFirstResponder() -> Bool {
+        let output = super.resignFirstResponder()
+
+        for button in subviewsOfType(UIButton.self) {
+            button.isEnabled = true
+        }
+
+        return output
     }
 }

@@ -48,7 +48,27 @@
 @property (nonatomic,   copy) NSString          *preview;
 @property (nonatomic,   copy) NSString          *titlePreview;
 @property (nonatomic,   copy) NSString          *bodyPreview;
+
+// What's going on:
+//
+//  -   Since Simplenote's inception, logic deletion flag was a simple boolean called `deleted`
+//  -   Collision with NSManagedObject's `deleted` flag wasn't picked up
+//  -   Eventually CLANG enhanced checks allowed us to notice there's a collision
+//
+//  Proper fix involves a heavy modification in Simperium, which would allow us to keep the `deleted` "internal"
+//  property name, while exposing a different property setter / getter, and thus, avoiding the collision.
+//
+// In This thermonuclear massive super workaround, we're simply silencing the warning.
+//
+// Proper course of action should be taken as soon as the next steps for Simperium are outlined.
+//
+// TODO: JLP Dec.3.2019.
+//
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 @property BOOL deleted;
+#pragma clang diagnostic pop
+
 @property (nonatomic, assign) int               lastPosition;
 @property (nonatomic, assign) BOOL              pinned;
 @property (nonatomic, assign) BOOL              markdown;

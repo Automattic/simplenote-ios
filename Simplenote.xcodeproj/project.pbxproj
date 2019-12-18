@@ -125,7 +125,6 @@
 		74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */; };
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
-		8C573B0E22CD1AD6005BC6F5 /* Version.Public.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
 		B50789FF1C1F5592009F097A /* markdown-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 1748382E1BC1CC2D00E834AF /* markdown-default.css */; };
 		B5078A001C1F5595009F097A /* markdown-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 17BC3D461BC46BA800535DF3 /* markdown-dark.css */; };
@@ -1600,7 +1599,7 @@
 			attributes = {
 				CLASSPREFIX = SP;
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
 					46A3C96017DFA81A002865AE = {
@@ -1704,7 +1703,6 @@
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */,
 				B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */,
-				8C573B0E22CD1AD6005BC6F5 /* Version.Public.xcconfig in Resources */,
 				B56C8CA2234CEAF100FE55F4 /* SPTagsListViewController.xib in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
 			);
@@ -2497,7 +2495,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Internal;
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Internal";
+				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_INTERNAL $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -2930,7 +2928,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Internal.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Internal Share";
+				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal.Share";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

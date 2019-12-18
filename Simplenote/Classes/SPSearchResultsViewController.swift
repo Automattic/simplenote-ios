@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - SPSearchResultsViewController
 //
-class SPSearchResultsViewController: UIViewController {
+class SPSearchResultsViewController: UIViewController, SPSearchControllerResults {
 
     /// Results TableView
     ///
@@ -22,13 +22,21 @@ class SPSearchResultsViewController: UIViewController {
         SPSearchResultsController(mainContext: mainContext)
     }()
 
+    /// SearchController: Expected to be set externally
+    ///
+    weak var searchController: SPSearchController?
 
     // MARK: - View Lifecycle
+
+    deinit {
+        removeKeyboardObservers()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         configureResultsController()
+        addKeyboardObservers()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -134,6 +142,20 @@ extension SPSearchResultsViewController: UITableViewDelegate {
 }
 
 
+// MARK: - UIScrollViewDelegate Methods
+//
+extension SPSearchResultsViewController: UIScrollViewDelegate {
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let searchBar = searchController?.searchBar, searchBar.isFirstResponder else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
+    }
+}
+
+
 // MARK: - Private Methods
 //
 private extension SPSearchResultsViewController {
@@ -178,5 +200,33 @@ private extension SPSearchResultsViewController {
         /// We're sharing the navigationController with our container VC (expected to be NoteListViewController). Let's disable any custom anymations!
         navigationController?.delegate = nil
         navigationController?.pushViewController(editorViewController, animated: true)
+    }
+}
+
+
+// MARK: - KeyboardObservable Conformance
+//
+extension SPSearchResultsViewController: KeyboardObservable {
+
+    func keyboardWillShow(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let endFrame = endFrame else {
+            return
+        }
+
+        let keyboardHeight = min(endFrame.height, endFrame.width)
+
+        tableView.contentInset.bottom += keyboardHeight
+        tableView.scrollIndicatorInsets.bottom += keyboardHeight
+    }
+
+    func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let beginFrame = beginFrame else {
+            return
+        }
+
+        let keyboardHeight = min(beginFrame.height, beginFrame.width)
+
+        tableView.contentInset.bottom -= keyboardHeight
+        tableView.scrollIndicatorInsets.bottom -= keyboardHeight
     }
 }
