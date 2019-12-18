@@ -19,7 +19,6 @@
 #import "Note.h"
 #import "Tag.h"
 #import "Settings.h"
-#import "SPIntegrityHelper.h"
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
