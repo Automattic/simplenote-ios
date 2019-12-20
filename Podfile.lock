@@ -24,17 +24,17 @@ PODS:
   - Sentry (4.4.0):
     - Sentry/Core (= 4.4.0)
   - Sentry/Core (4.4.0)
-  - Simperium (0.8.24):
-    - Simperium/DiffMatchPach (= 0.8.24)
-    - Simperium/JRSwizzle (= 0.8.24)
-    - Simperium/SocketTrust (= 0.8.24)
-    - Simperium/SPReachability (= 0.8.24)
-    - Simperium/SSKeychain (= 0.8.24)
-  - Simperium/DiffMatchPach (0.8.24)
-  - Simperium/JRSwizzle (0.8.24)
-  - Simperium/SocketTrust (0.8.24)
-  - Simperium/SPReachability (0.8.24)
-  - Simperium/SSKeychain (0.8.24)
+  - Simperium (0.8.26):
+    - Simperium/DiffMatchPach (= 0.8.26)
+    - Simperium/JRSwizzle (= 0.8.26)
+    - Simperium/SocketTrust (= 0.8.26)
+    - Simperium/SPReachability (= 0.8.26)
+    - Simperium/SSKeychain (= 0.8.26)
+  - Simperium/DiffMatchPach (0.8.26)
+  - Simperium/JRSwizzle (0.8.26)
+  - Simperium/SocketTrust (0.8.26)
+  - Simperium/SPReachability (0.8.26)
+  - Simperium/SSKeychain (0.8.26)
   - SVProgressHUD (2.2.5)
   - UIDeviceIdentifier (1.1.4)
   - WordPress-AppbotX (1.0.7)
@@ -48,7 +48,7 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (~> 0.4)
   - Gridicons (~> 0.18)
   - SAMKeychain (= 1.5.2)
-  - Simperium (~> 0.8.24)
+  - Simperium (~> 0.8.26)
   - SVProgressHUD (= 2.2.5)
   - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, tag `1.0.7`)
   - WordPress-Ratings-iOS (= 0.0.2)
@@ -89,13 +89,13 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
-  Simperium: aeaf03461d8f75fd90d0cb199a5c8a1e9095ef15
+  Simperium: a3afa88e53e30b1d4aa3f7c0131cd9abfb8dc6d5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
   WordPress-AppbotX: 624387ac980fc0663cbb9425e22bf514329be96f
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
 
-PODFILE CHECKSUM: 1dff08b8f6b531e2143e06a34d2499cf2a248d3c
+PODFILE CHECKSUM: 5e7cdf39a3afcee0e3bc7fa2e07f3098c1205e64
 
 COCOAPODS: 1.7.5
