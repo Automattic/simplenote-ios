@@ -1,6 +1,10 @@
 4.15
 -----
 
+4.14.2
+======
+-   Fixed a bug that caused notes with specific emoji sequences to crash the app.
+
 4.14.1
 ======
 -   Fixed a bug that made rendered the Add Collaborators button not visible.
