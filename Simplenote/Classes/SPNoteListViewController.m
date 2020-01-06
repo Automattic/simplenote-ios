@@ -11,9 +11,7 @@
 #import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPRatingsHelper.h"
-#import "SPRatingsPromptView.h"
 
-#import "SPAnimations.h"
 #import "SPConstants.h"
 #import "Note.h"
 
@@ -25,21 +23,19 @@
 #import "UIImage+Colorization.h"
 #import "VSThemeManager.h"
 
+#import <StoreKit/StoreKit.h>
 #import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
-@import WordPress_AppbotX;
 
-
-@interface SPNoteListViewController () <ABXPromptViewDelegate,
-                                        ABXFeedbackViewControllerDelegate,
-                                        UITableViewDataSource,
+@interface SPNoteListViewController () <UITableViewDataSource,
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
                                         SPSearchControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
-                                        SPTransitionControllerDelegate>
+                                        SPTransitionControllerDelegate,
+                                        SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
 @property (nonatomic, strong) SPSearchResultsViewController         *resultsViewController;
@@ -99,6 +95,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self refreshTableViewInsets];
+    [self updateTableHeaderSize];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -150,6 +147,17 @@
 {
     self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
+}
+
+- (void)updateTableHeaderSize {
+    UIView *headerView = self.tableView.tableHeaderView;
+    if (!headerView) {
+        return;
+    }
+
+    // Old school workaround. tableHeaderView isn't really Autolayout friendly.
+    [headerView adjustSizeForCompressedLayout];
+    self.tableView.tableHeaderView = headerView;
 }
 
 
@@ -208,7 +216,6 @@
 }
 
 - (void)contentSizeWasUpdated:(id)sender {
-
     [self updateRowHeight];
 }
 
@@ -1135,101 +1142,91 @@
 
 #pragma mark - Ratings View Helpers
 
-- (void)showRatingViewIfNeeded {
-
+- (void)showRatingViewIfNeeded
+{
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
         return;
     }
     
     [SPTracker trackRatingsPromptSeen];
 
-    // Note:
-    // We use a custom Transition between Note List and Note Editor, that takes snapshots of the notes,
-    // and moves them to their final positions.
-    // Let's fade in the Ratings Reminder once the transition is ready
-    //
-    UIView *ratingsView = self.tableView.tableHeaderView ?: [self newAppRatingView];
-    ratingsView.alpha = kSimplenoteAnimationInvisibleAlpha;
+    UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
 
-    [UIView animateWithDuration:kSimplenoteAnimationDuration
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                                    // Animate both, Alpha + Rows Sliding
-                                    ratingsView.alpha = kSimplenoteAnimationVisibleAlpha;
-                                    self.tableView.tableHeaderView = ratingsView;
-                                }
-                     completion:nil];
+    // Calculate the minimum required dimension
+    [ratingsView adjustSizeForCompressedLayout];
+
+    // UITableView will adjust the HeaderView's width. Right afterwards, we'll perform a layout cycle, to avoid glitches
+    self.tableView.tableHeaderView = ratingsView;
+    [ratingsView layoutIfNeeded];
+
+    // And finally ... FadeIn!
+    ratingsView.alpha = UIKitConstants.alphaZero;
+
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
+        ratingsView.alpha = UIKitConstants.alphaFull;
+        [self.tableView layoutIfNeeded];
+    } completion:nil];
 }
 
-- (void)hideRatingViewIfNeeded {
-
+- (void)hideRatingViewIfNeeded
+{
     if (self.tableView.tableHeaderView == nil || [[SPRatingsHelper sharedInstance] shouldPromptForAppReview] == YES) {
         return;
     }
     
-    [UIView animateWithDuration:kSimplenoteAnimationDuration delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.tableView.tableHeaderView = nil;
-    } completion:^(BOOL success) {
-    }];
+        [self.tableView layoutIfNeeded];
+    } completion:nil];
 }
 
-- (UIView *)newAppRatingView
+- (UIView *)newRatingsView
 {
-    SPRatingsPromptView *appRatingView = [[SPRatingsPromptView alloc] initWithWidth:CGRectGetWidth(self.view.bounds)];
-    appRatingView.label.text = NSLocalizedString(@"What do you think about Simplenote?", @"This is the string we display when prompting the user to review the app");
-    appRatingView.delegate = self;
-    appRatingView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    
-    return appRatingView;
+    SPRatingsPromptView *ratingsView = [SPRatingsPromptView loadFromNib];
+    ratingsView.delegate = self;
+    return ratingsView;
 }
 
 
-#pragma mark - ABXPromptViewDelegate
+#pragma mark - SPRatingsPromptDelegate
 
-- (void)appbotPromptForReview
+- (void)displayReviewUI
 {
+    [SKStoreReviewController requestReview];
+
     [SPTracker trackRatingsAppRated];
-    [[UIApplication sharedApplication] openURL:SPCredentials.iTunesReviewURL options:@{} completionHandler:nil];
     [[SPRatingsHelper sharedInstance] ratedCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptForFeedback
+- (void)displayFeedbackUI
 {
+    UIViewController *feedbackViewController = [SPFeedbackManager feedbackViewController];
+    feedbackViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:feedbackViewController animated:YES completion:nil];
+
     [SPTracker trackRatingsFeedbackScreenOpened];
-    [ABXFeedbackViewController showFromController:self placeholder:nil delegate:self];
     [[SPRatingsHelper sharedInstance] gaveFeedbackForCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptClose
+- (void)dismissRatingsUI
 {
     [SPTracker trackRatingsDeclinedToRate];
     [[SPRatingsHelper sharedInstance] declinedToRateCurrentVersion];
     [self hideRatingViewIfNeeded];
 }
 
-- (void)appbotPromptLiked
+- (void)simplenoteWasLiked
 {
     [SPTracker trackRatingsAppLiked];
     [[SPRatingsHelper sharedInstance] likedCurrentVersion];
 }
 
-- (void)appbotPromptDidntLike
+- (void)simplenoteWasDisliked
 {
     [SPTracker trackRatingsAppDisliked];
     [[SPRatingsHelper sharedInstance] dislikedCurrentVersion];
-}
-
-- (void)abxFeedbackDidSendFeedback
-{
-    [SPTracker trackRatingsFeedbackSent];
-}
-
-- (void)abxFeedbackDidntSendFeedback
-{
-    [SPTracker trackRatingsFeedbackDeclined];
 }
 
 @end

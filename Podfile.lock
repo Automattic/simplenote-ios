@@ -10,20 +10,20 @@ PODS:
     - AppCenter/Core
   - AppCenter/Distribute (2.3.0):
     - AppCenter/Core
-  - Automattic-Tracks-iOS (0.4.1):
+  - Automattic-Tracks-iOS (0.4.3):
     - CocoaLumberjack (~> 3.5.2)
     - Reachability (~> 3.1)
     - Sentry (~> 4)
-    - UIDeviceIdentifier (~> 1.1.4)
+    - UIDeviceIdentifier (~> 1)
   - CocoaLumberjack (3.5.3):
     - CocoaLumberjack/Core (= 3.5.3)
   - CocoaLumberjack/Core (3.5.3)
-  - Gridicons (0.18)
+  - Gridicons (0.19)
   - Reachability (3.2)
   - SAMKeychain (1.5.2)
-  - Sentry (4.4.0):
-    - Sentry/Core (= 4.4.0)
-  - Sentry/Core (4.4.0)
+  - Sentry (4.4.3):
+    - Sentry/Core (= 4.4.3)
+  - Sentry/Core (4.4.3)
   - Simperium (0.8.26):
     - Simperium/DiffMatchPach (= 0.8.26)
     - Simperium/JRSwizzle (= 0.8.26)
@@ -36,10 +36,9 @@ PODS:
   - Simperium/SPReachability (0.8.26)
   - Simperium/SSKeychain (0.8.26)
   - SVProgressHUD (2.2.5)
-  - UIDeviceIdentifier (1.1.4)
-  - WordPress-AppbotX (1.0.7)
+  - UIDeviceIdentifier (1.4.0)
   - WordPress-Ratings-iOS (0.0.2)
-  - ZIPFoundation (0.9.9)
+  - ZIPFoundation (0.9.10)
 
 DEPENDENCIES:
   - 1PasswordExtension (= 1.8.5)
@@ -50,7 +49,6 @@ DEPENDENCIES:
   - SAMKeychain (= 1.5.2)
   - Simperium (~> 0.8.26)
   - SVProgressHUD (= 2.2.5)
-  - WordPress-AppbotX (from `https://github.com/wordpress-mobile/appbotx.git`, tag `1.0.7`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -70,32 +68,21 @@ SPEC REPOS:
     - WordPress-Ratings-iOS
     - ZIPFoundation
 
-EXTERNAL SOURCES:
-  WordPress-AppbotX:
-    :git: https://github.com/wordpress-mobile/appbotx.git
-    :tag: 1.0.7
-
-CHECKOUT OPTIONS:
-  WordPress-AppbotX:
-    :git: https://github.com/wordpress-mobile/appbotx.git
-    :tag: 1.0.7
-
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
-  Automattic-Tracks-iOS: a176848be4c95aa208184fe96d0322594ce230eb
+  Automattic-Tracks-iOS: 5515b3e6a5e55183a244ca6cb013df26810fa994
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
-  Gridicons: 04261236382e9c62c62c9a104f2f532c1bdf6a78
+  Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
-  Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
+  Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   Simperium: a3afa88e53e30b1d4aa3f7c0131cd9abfb8dc6d5
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
-  WordPress-AppbotX: 624387ac980fc0663cbb9425e22bf514329be96f
+  UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
-  ZIPFoundation: 89df685c971926b0323087952320bdfee9f0b6ef
+  ZIPFoundation: 249fa8890597086cd536bb2df5c9804d84e122b0
 
-PODFILE CHECKSUM: 5e7cdf39a3afcee0e3bc7fa2e07f3098c1205e64
+PODFILE CHECKSUM: b903c14c3b5314cfbe324b95c7aa507cfadd48ff
 
 COCOAPODS: 1.7.5
