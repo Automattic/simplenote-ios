@@ -2,31 +2,6 @@
 
 @implementation NSString (Condensing)
 
-- (NSString *)stringByCondensingSet:(NSCharacterSet *)set
-{
-	NSString *piece;
-	NSMutableString *condensed = [NSMutableString stringWithCapacity:[self length]];
-	NSScanner *scanner = [NSScanner scannerWithString:self];
-	[scanner setCharactersToBeSkipped:set];
-	
-	BOOL needWhitespace = NO;
-	
-	while (![scanner isAtEnd])
-	{
-		piece = nil;
-		[scanner scanUpToCharactersFromSet:set intoString:&piece];
-		
-		if (piece)
-		{
-			if (needWhitespace) [condensed appendString:@" "];
-			[condensed appendString:piece];
-			needWhitespace = YES;
-		}
-	}
-	
-	return condensed;
-}
-
 - (void)generatePreviewStrings:(void (^)(NSString *titlePreview, NSString *bodyPreview, NSString *contentPreview))block {
     
     NSString *aString = [NSString stringWithString:self];
