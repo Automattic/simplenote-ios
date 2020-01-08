@@ -35,7 +35,6 @@ PODS:
   - Simperium/SocketTrust (0.8.26)
   - Simperium/SPReachability (0.8.26)
   - Simperium/SSKeychain (0.8.26)
-  - SVProgressHUD (2.2.5)
   - UIDeviceIdentifier (1.4.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.10)
@@ -48,7 +47,6 @@ DEPENDENCIES:
   - Gridicons (~> 0.18)
   - SAMKeychain (= 1.5.2)
   - Simperium (~> 0.8.26)
-  - SVProgressHUD (= 2.2.5)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -63,7 +61,6 @@ SPEC REPOS:
     - SAMKeychain
     - Sentry
     - Simperium
-    - SVProgressHUD
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
@@ -78,11 +75,10 @@ SPEC CHECKSUMS:
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sentry: 14bdd673870e8cf64932b149fad5bbbf39a9b390
   Simperium: a3afa88e53e30b1d4aa3f7c0131cd9abfb8dc6d5
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 249fa8890597086cd536bb2df5c9804d84e122b0
 
-PODFILE CHECKSUM: b903c14c3b5314cfbe324b95c7aa507cfadd48ff
+PODFILE CHECKSUM: e44915f45fd5696fab6827b99181d323bddf4449
 
 COCOAPODS: 1.7.5

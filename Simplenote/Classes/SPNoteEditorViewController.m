@@ -22,7 +22,6 @@
 #import "SPTracker.h"
 #import "NSString+Bullets.h"
 #import "SPTransitionController.h"
-#import "UIImage+Extensions.h"
 #import "NSString+Search.h"
 #import "SPTextView.h"
 #import "NSString+Attributed.h"
