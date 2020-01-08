@@ -8,12 +8,19 @@ import UIKit
 enum UIImageName: Int, CaseIterable {
     case add
     case allNotes
+    case archive
     case checklist
     case checkmarkChecked
     case checkmarkUnchecked
     case chevronLeft
     case chevronRight
     case collaborate
+    case cross
+    case crossOutlined
+    case crossBig
+    case crossBigOutlined
+    case editor
+    case ellipsis
     case hideKeyboard
     case history
     case info
@@ -21,11 +28,15 @@ enum UIImageName: Int, CaseIterable {
     case newNote
     case onePassword
     case pin
+    case restore
     case settings
     case share
     case shared
     case tag
     case tagViewDeletion
+    case tags
+    case tagsClosed
+    case tagsOpen
     case trash
     case untagged
     case visibilityOn
@@ -45,6 +56,8 @@ extension UIImageName {
             return "icon_add"
         case .allNotes:
             return "icon_allnotes"
+        case .archive:
+            return "icon_archive"
         case .checklist:
             return "icon_checklist"
         case .checkmarkChecked:
@@ -57,6 +70,18 @@ extension UIImageName {
             return "icon_chevron_right"
         case .collaborate:
             return "icon_collaborate"
+        case .cross:
+            return "icon_cross"
+        case .crossOutlined:
+            return "icon_cross_outlined"
+        case .crossBig:
+            return "icon_cross_big"
+        case .crossBigOutlined:
+            return "icon_cross_big_outlined"
+        case .editor:
+            return "icon_editor"
+        case .ellipsis:
+            return "icon_ellipsis"
         case .hideKeyboard:
             return "icon_hide_keyboard"
         case .history:
@@ -71,6 +96,8 @@ extension UIImageName {
             return "icon_onepassword"
         case .pin:
             return "icon_pin"
+        case .restore:
+            return "icon_restore"
         case .settings:
             return "icon_settings"
         case .share:
@@ -79,12 +106,18 @@ extension UIImageName {
             return "icon_shared"
         case .tag:
             return "icon_tag"
+        case .tagViewDeletion:
+            return "button_delete_small"
+        case .tags:
+            return "icon_tags"
+        case .tagsClosed:
+            return "icon_tags_close"
+        case .tagsOpen:
+            return "icon_tags_open"
         case .trash:
             return "icon_trash"
         case .untagged:
             return "icon_untagged"
-        case .tagViewDeletion:
-            return "button_delete_small"
         case .visibilityOn:
             return "icon_visibility_on"
         case .visibilityOff:
