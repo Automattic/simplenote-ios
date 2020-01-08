@@ -27,6 +27,9 @@ enum UIImageName: Int, CaseIterable {
     case shared
     case tag
     case tagViewDeletion
+    case tags
+    case tagsClosed
+    case tagsOpen
     case trash
     case untagged
     case visibilityOn
@@ -82,6 +85,12 @@ extension UIImageName {
             return "icon_shared"
         case .tag:
             return "icon_tag"
+        case .tags:
+            return "icon_tags"
+        case .tagsClosed:
+            return "icon_tags_close"
+        case .tagsOpen:
+            return "icon_tags_open"
         case .trash:
             return "icon_trash"
         case .untagged:
