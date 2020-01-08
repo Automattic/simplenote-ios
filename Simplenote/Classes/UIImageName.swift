@@ -15,6 +15,10 @@ enum UIImageName: Int, CaseIterable {
     case chevronLeft
     case chevronRight
     case collaborate
+    case cross
+    case crossOutlined
+    case crossBig
+    case crossBigOutlined
     case editor
     case ellipsis
     case hideKeyboard
@@ -66,6 +70,14 @@ extension UIImageName {
             return "icon_chevron_right"
         case .collaborate:
             return "icon_collaborate"
+        case .cross:
+            return "icon_cross"
+        case .crossOutlined:
+            return "icon_cross_outlined"
+        case .crossBig:
+            return "icon_cross_big"
+        case .crossBigOutlined:
+            return "icon_cross_big_outlined"
         case .editor:
             return "icon_editor"
         case .ellipsis:
@@ -94,6 +106,8 @@ extension UIImageName {
             return "icon_shared"
         case .tag:
             return "icon_tag"
+        case .tagViewDeletion:
+            return "button_delete_small"
         case .tags:
             return "icon_tags"
         case .tagsClosed:
@@ -104,8 +118,6 @@ extension UIImageName {
             return "icon_trash"
         case .untagged:
             return "icon_untagged"
-        case .tagViewDeletion:
-            return "button_delete_small"
         case .visibilityOn:
             return "icon_visibility_on"
         case .visibilityOff:
