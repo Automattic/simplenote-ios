@@ -30,7 +30,6 @@
 @import Contacts;
 @import SAMKeychain;
 @import Simperium;
-@import WordPress_AppbotX;
 
 @class KeychainMigrator;
 
@@ -943,11 +942,7 @@
     if ([NSProcessInfo isRunningTests]) {
         return;
     }
-    
-    // Initialize AppbotX
-    [[ABXApiClient instance] setApiKey:[SPCredentials appbotKey]];
-    
-    // Initialize AppRatings Helper
+
     NSString *version = [[NSBundle mainBundle] shortVersionString];
     
     [[SPRatingsHelper sharedInstance] initializeForVersion:version];
