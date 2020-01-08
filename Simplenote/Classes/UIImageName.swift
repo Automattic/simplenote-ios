@@ -16,6 +16,7 @@ enum UIImageName: Int, CaseIterable {
     case chevronRight
     case collaborate
     case editor
+    case ellipsis
     case hideKeyboard
     case history
     case info
@@ -67,6 +68,8 @@ extension UIImageName {
             return "icon_collaborate"
         case .editor:
             return "icon_editor"
+        case .ellipsis:
+            return "icon_ellipsis"
         case .hideKeyboard:
             return "icon_hide_keyboard"
         case .history:
