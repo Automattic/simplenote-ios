@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 
-// MARK: - UISearchController Delegate Methods
+// MARK: - SPSearchDisplayController Delegate Methods
 //
 @objc
 protocol SPSearchDisplayControllerDelegate: NSObjectProtocol {
