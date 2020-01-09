@@ -5,11 +5,11 @@ import UIKit
 // MARK: - UISearchController Delegate Methods
 //
 @objc
-protocol SPSearchControllerDelegate: NSObjectProtocol {
-    func searchControllerShouldBeginSearch(_ controller: SPSearchDisplayController) -> Bool
-    func searchController(_ controller: SPSearchDisplayController, updateSearchResults keyword: String)
-    func searchControllerWillBeginSearch(_ controller: SPSearchDisplayController)
-    func searchControllerDidEndSearch(_ controller: SPSearchDisplayController)
+protocol SPSearchDisplayControllerDelegate: NSObjectProtocol {
+    func searchDisplayControllerShouldBeginSearch(_ controller: SPSearchDisplayController) -> Bool
+    func searchDisplayController(_ controller: SPSearchDisplayController, updateSearchResults keyword: String)
+    func searchDisplayControllerWillBeginSearch(_ controller: SPSearchDisplayController)
+    func searchDisplayControllerDidEndSearch(_ controller: SPSearchDisplayController)
 }
 
 
@@ -17,8 +17,8 @@ protocol SPSearchControllerDelegate: NSObjectProtocol {
 //
 @objc
 protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
-    func navigationControllerForSearchController(_ controller: SPSearchDisplayController) -> UINavigationController
-    func resultsParentControllerForSearchController(_ controller: SPSearchDisplayController) -> UIViewController
+    func navigationControllerForSearchDisplayController(_ controller: SPSearchDisplayController) -> UINavigationController
+    func resultsParentControllerForSearchDisplayController(_ controller: SPSearchDisplayController) -> UIViewController
 }
 
 
@@ -48,7 +48,7 @@ class SPSearchDisplayController: NSObject {
 
     /// SearchController's Delegate
     ///
-    weak var delegate: SPSearchControllerDelegate?
+    weak var delegate: SPSearchDisplayControllerDelegate?
 
     /// SearchController's Presentation Context Provider
     ///
@@ -105,7 +105,7 @@ private extension SPSearchDisplayController {
     }
 
     func updateNavigationBar(hidden: Bool) {
-        guard let navigationController = presenter?.navigationControllerForSearchController(self),
+        guard let navigationController = presenter?.navigationControllerForSearchDisplayController(self),
             navigationController.isNavigationBarHidden != hidden
             else {
                 return
@@ -141,9 +141,9 @@ private extension SPSearchDisplayController {
 
     func notifyStatusChanged(active: Bool) {
         if active {
-            delegate?.searchControllerWillBeginSearch(self)
+            delegate?.searchDisplayControllerWillBeginSearch(self)
         } else {
-            delegate?.searchControllerDidEndSearch(self)
+            delegate?.searchDisplayControllerDidEndSearch(self)
         }
     }
 }
@@ -157,7 +157,7 @@ private extension SPSearchDisplayController {
     ///
     func displayResultsViewController() {
         guard resultsViewController.parent == nil,
-            let parentViewController = presenter?.resultsParentControllerForSearchController(self) else {
+            let parentViewController = presenter?.resultsParentControllerForSearchDisplayController(self) else {
                 return
         }
 
@@ -204,7 +204,7 @@ private extension SPSearchDisplayController {
 extension SPSearchDisplayController: UISearchBarDelegate {
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        guard let shouldBeginEditing = delegate?.searchControllerShouldBeginSearch(self) else {
+        guard let shouldBeginEditing = delegate?.searchDisplayControllerShouldBeginSearch(self) else {
             return false
         }
 
@@ -214,7 +214,7 @@ extension SPSearchDisplayController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        delegate?.searchController(self, updateSearchResults: searchText)
+        delegate?.searchDisplayController(self, updateSearchResults: searchText)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

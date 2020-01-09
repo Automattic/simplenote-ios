@@ -32,7 +32,7 @@
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
-                                        SPSearchControllerDelegate,
+                                        SPSearchDisplayControllerDelegate,
                                         SPSearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
@@ -349,7 +349,7 @@
 
 #pragma mark - SPSearchControllerDelegate methods
 
-- (BOOL)searchControllerShouldBeginSearch:(SPSearchDisplayController *)controller
+- (BOOL)searchDisplayControllerShouldBeginSearch:(SPSearchDisplayController *)controller
 {
     if (bListViewIsEmpty) {
         return NO;
@@ -365,7 +365,7 @@
     return bSearching;
 }
 
-- (void)searchController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
+- (void)searchDisplayController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     if (FeatureManager.advancedSearchEnabled) {
         [self.resultsViewController updateSearchResultsWithKeyword:keyword];
@@ -387,7 +387,7 @@
                                                   repeats:NO];
 }
 
-- (void)searchControllerWillBeginSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerWillBeginSearch:(SPSearchDisplayController *)controller
 {
     // Ensure our custom NavigationBar + SearchBar are always on top (!)
     [self.view bringSubviewToFront:self.navigationBarBackground];
@@ -397,7 +397,7 @@
     [self.navigationBarBackground fadeIn];
 }
 
-- (void)searchControllerDidEndSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerDidEndSearch:(SPSearchDisplayController *)controller
 {
     [self endSearching];
 }
@@ -405,12 +405,12 @@
 
 #pragma mark - SPSearchControllerPresenter methods
 
-- (UINavigationController *)navigationControllerForSearchController:(SPSearchDisplayController *)controller
+- (UINavigationController *)navigationControllerForSearchDisplayController:(SPSearchDisplayController *)controller
 {
     return self.navigationController;
 }
 
-- (UIViewController *)resultsParentControllerForSearchController:(SPSearchDisplayController *)controller
+- (UIViewController *)resultsParentControllerForSearchDisplayController:(SPSearchDisplayController *)controller
 {
     return self;
 }
