@@ -17,33 +17,4 @@ extension UIView {
             self.isHidden = isHidden
         }
     }
-
-    /// Fades In the receiver
-    ///
-    @objc
-    func fadeIn() {
-        guard alpha != UIKitConstants.alphaFull else {
-            return
-        }
-
-        alpha = UIKitConstants.alphaZero
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
-            self.alpha = UIKitConstants.alphaFull
-        }
-    }
-
-    /// Fades Out the receiver
-    ///
-    @objc
-    func fadeOut(completion: (() -> Void)? = nil) {
-        guard alpha != UIKitConstants.alphaZero else {
-            return
-        }
-
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
-            self.alpha = UIKitConstants.alphaZero
-        }, completion: { _ in
-            completion?()
-        })
-    }
 }

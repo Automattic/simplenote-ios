@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - SPSearchResultsViewController
 //
-class SPSearchResultsViewController: UIViewController, SPSearchControllerResults {
+class SPSearchResultsViewController: UIViewController {
 
     /// Results TableView
     ///
@@ -21,10 +21,6 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
     private lazy var resultsController: SPSearchResultsController = {
         SPSearchResultsController(mainContext: mainContext)
     }()
-
-    /// SearchController: Expected to be set externally
-    ///
-    weak var searchController: SPSearchDisplayController?
 
     // MARK: - View Lifecycle
 
@@ -147,11 +143,11 @@ extension SPSearchResultsViewController: UITableViewDelegate {
 extension SPSearchResultsViewController: UIScrollViewDelegate {
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        guard let searchBar = searchController?.searchBar, searchBar.isFirstResponder else {
-            return
-        }
-
-        searchBar.resignFirstResponder()
+//        guard let searchBar = searchController?.searchBar, searchBar.isFirstResponder else {
+//            return
+//        }
+//
+//        searchBar.resignFirstResponder()
     }
 }
 

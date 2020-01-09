@@ -18,14 +18,6 @@ protocol SPSearchDisplayControllerDelegate: NSObjectProtocol {
 @objc
 protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
     func navigationControllerForSearchDisplayController(_ controller: SPSearchDisplayController) -> UINavigationController
-    func resultsParentControllerForSearchDisplayController(_ controller: SPSearchDisplayController) -> UIViewController
-}
-
-
-// MARK: - SPSearchControllerResults: To be (optionally) implemented by specialized ResultsViewController(s)
-//
-protocol SPSearchControllerResults: NSObjectProtocol {
-    var searchController: SPSearchDisplayController? { get set }
 }
 
 
@@ -37,10 +29,6 @@ class SPSearchDisplayController: NSObject {
     /// Indicates if the SearchController is active (or not!)
     ///
     private var active = false
-
-    /// ResultsController in which Search Results would be rendered
-    ///
-    let resultsViewController: UIViewController
 
     /// Internal SearchBar Instance
     ///
@@ -57,11 +45,9 @@ class SPSearchDisplayController: NSObject {
 
     /// Designated Initializer
     ///
-    init(resultsViewController: UIViewController) {
-        self.resultsViewController = resultsViewController
+    override init() {
         super.init()
         setupSearchBar()
-        setupResultsViewController()
     }
 
     /// Dismissess the SearchBar
@@ -78,12 +64,6 @@ class SPSearchDisplayController: NSObject {
 //
 private extension SPSearchDisplayController {
 
-    func setupResultsViewController() {
-        // Analog to the old school `self.searchDisplayController` UIViewController property, we'll set our own
-        let resultsController = (resultsViewController as? SPSearchControllerResults)
-        resultsController?.searchController = self
-    }
-
     func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
@@ -99,7 +79,6 @@ private extension SPSearchDisplayController {
         self.active = active
 
         updateSearchBar(showsCancelButton: active)
-        updateResultsView(visible: active)
         updateNavigationBar(hidden: active)
         notifyStatusChanged(active: active)
     }
@@ -126,75 +105,12 @@ private extension SPSearchDisplayController {
         searchBar.setShowsCancelButton(showsCancelButton, animated: true)
     }
 
-    func updateResultsView(visible: Bool) {
-        guard FeatureManager.advancedSearchEnabled else {
-            return
-        }
-
-        guard visible else {
-            dismissResultsViewController()
-            return
-        }
-
-        displayResultsViewController()
-    }
-
     func notifyStatusChanged(active: Bool) {
         if active {
             delegate?.searchDisplayControllerWillBeginSearch(self)
         } else {
             delegate?.searchDisplayControllerDidEndSearch(self)
         }
-    }
-}
-
-
-// MARK: - ResultsViewController Methods
-//
-private extension SPSearchDisplayController {
-
-    /// Displays the SearchResultsController onScreen
-    ///
-    func displayResultsViewController() {
-        guard resultsViewController.parent == nil,
-            let parentViewController = presenter?.resultsParentControllerForSearchDisplayController(self) else {
-                return
-        }
-
-        resultsViewController.additionalSafeAreaInsets.top = searchBar.frame.size.height
-        parentViewController.addChild(resultsViewController)
-
-        attach(resultsView: resultsViewController.view, into: parentViewController.view)
-        parentViewController.view.layoutIfNeeded()
-
-        resultsViewController.view.fadeIn()
-    }
-
-    /// Dismisses the active ResultsViewController
-    ///
-    func dismissResultsViewController() {
-        guard let _ = resultsViewController.parent else {
-            return
-        }
-
-        resultsViewController.view.fadeOut {
-            self.resultsViewController.view.removeFromSuperview()
-            self.resultsViewController.removeFromParent()
-        }
-    }
-
-    /// Attaches a given UIView instance into a containerView, and pints it to the four edges
-    ///
-    func attach(resultsView: UIView, into containerView: UIView) {
-        resultsView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.insertSubview(resultsView, belowSubview: searchBar)
-
-        NSLayoutConstraint.activate([
-            resultsView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
-            resultsView.rightAnchor.constraint(equalTo: containerView.rightAnchor),
-            resultsView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            resultsView.topAnchor.constraint(equalTo: containerView.topAnchor)
-        ])
     }
 }
 

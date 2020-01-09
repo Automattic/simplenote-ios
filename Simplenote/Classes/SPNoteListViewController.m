@@ -38,7 +38,6 @@
                                         SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
-@property (nonatomic, strong) SPSearchResultsViewController         *resultsViewController;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
@@ -313,12 +312,8 @@
 
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
-    NSAssert(_resultsViewController == nil, @"_resultsController is already initialized!");
 
-    // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
-    self.resultsViewController = [SPSearchResultsViewController new];
-
-    self.searchController = [[SPSearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
+    self.searchController = [SPSearchDisplayController new];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
@@ -356,23 +351,13 @@
     }
 
     bSearching = YES;
+    [self.tableView reloadData];
 
-    // TODO: Nuke the following as soon as we can!
-    if (!FeatureManager.advancedSearchEnabled) {
-        [self.tableView reloadData];
-    }
-    
     return bSearching;
 }
 
 - (void)searchDisplayController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
-    if (FeatureManager.advancedSearchEnabled) {
-        [self.resultsViewController updateSearchResultsWithKeyword:keyword];
-        return;
-    }
-
-    // TODO: Nuke the following as soon as we can!
     self.searchText = keyword;
     
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
@@ -389,12 +374,7 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(SPSearchDisplayController *)controller
 {
-    // Ensure our custom NavigationBar + SearchBar are always on top (!)
-    [self.view bringSubviewToFront:self.navigationBarBackground];
-    [self.view bringSubviewToFront:self.searchBar];
-
-    // We want the results UI to always have the Blur Background active
-    [self.navigationBarBackground fadeIn];
+    // NO-OP
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SPSearchDisplayController *)controller
@@ -410,21 +390,11 @@
     return self.navigationController;
 }
 
-- (UIViewController *)resultsParentControllerForSearchDisplayController:(SPSearchDisplayController *)controller
-{
-    return self;
-}
-
 
 #pragma mark - Search Helpers
 
 - (void)performSearch
 {
-    // TODO: Nuke the following as soon as we can!
-    if (FeatureManager.advancedSearchEnabled) {
-        return;
-    }
-
     if (!self.searchText) {
         return;
     }
@@ -446,13 +416,6 @@
 - (void)endSearching
 {
     bSearching = NO;
-
-    // TODO: Nuke the following as soon as we can!
-    if (FeatureManager.advancedSearchEnabled) {
-        [self.resultsViewController reset];
-        return;
-    }
-
     self.searchText = nil;
     [self update];
 }
