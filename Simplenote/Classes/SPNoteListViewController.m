@@ -47,7 +47,7 @@
 
 @property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, strong) SPSearchDisplayController             *searchDisplayController;
+@property (nonatomic, strong) SPSearchDisplayController             *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
@@ -68,7 +68,7 @@
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureTableView];
-        [self configureSearchDisplayController];
+        [self configureSearchController];
         [self configureRootView];
         [self updateRowHeight];
         [self startListeningToNotifications];
@@ -173,7 +173,7 @@
 #pragma mark - Dynamic Properties
 
 - (UISearchBar *)searchBar {
-    return _searchDisplayController.searchBar;
+    return _searchController.searchBar;
 }
 
 - (UIActivityIndicatorView *)activityIndicator {
@@ -311,16 +311,16 @@
     [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
 }
 
-- (void)configureSearchDisplayController {
-    NSAssert(_searchDisplayController == nil, @"_searchDisplayController is already initialized!");
+- (void)configureSearchController {
+    NSAssert(_searchController == nil, @"_searchController is already initialized!");
     NSAssert(_resultsViewController == nil, @"_resultsController is already initialized!");
 
     // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
     self.resultsViewController = [SPSearchResultsViewController new];
 
-    self.searchDisplayController = [[SPSearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
-    self.searchDisplayController.delegate = self;
-    self.searchDisplayController.presenter = self;
+    self.searchController = [[SPSearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
+    self.searchController.delegate = self;
+    self.searchController.presenter = self;
 
     [self.searchBar applySimplenoteStyle];
 }
