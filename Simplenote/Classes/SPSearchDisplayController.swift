@@ -6,10 +6,10 @@ import UIKit
 //
 @objc
 protocol SPSearchControllerDelegate: NSObjectProtocol {
-    func searchControllerShouldBeginSearch(_ controller: SPSearchController) -> Bool
-    func searchController(_ controller: SPSearchController, updateSearchResults keyword: String)
-    func searchControllerWillBeginSearch(_ controller: SPSearchController)
-    func searchControllerDidEndSearch(_ controller: SPSearchController)
+    func searchControllerShouldBeginSearch(_ controller: SPSearchDisplayController) -> Bool
+    func searchController(_ controller: SPSearchDisplayController, updateSearchResults keyword: String)
+    func searchControllerWillBeginSearch(_ controller: SPSearchDisplayController)
+    func searchControllerDidEndSearch(_ controller: SPSearchDisplayController)
 }
 
 
@@ -17,22 +17,22 @@ protocol SPSearchControllerDelegate: NSObjectProtocol {
 //
 @objc
 protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
-    func navigationControllerForSearchController(_ controller: SPSearchController) -> UINavigationController
-    func resultsParentControllerForSearchController(_ controller: SPSearchController) -> UIViewController
+    func navigationControllerForSearchController(_ controller: SPSearchDisplayController) -> UINavigationController
+    func resultsParentControllerForSearchController(_ controller: SPSearchDisplayController) -> UIViewController
 }
 
 
 // MARK: - SPSearchControllerResults: To be (optionally) implemented by specialized ResultsViewController(s)
 //
 protocol SPSearchControllerResults: NSObjectProtocol {
-    var searchController: SPSearchController? { get set }
+    var searchController: SPSearchDisplayController? { get set }
 }
 
 
 // MARK: - Simplenote's Search Controller: Because UIKit's Search Controller is simply unusable
 //
 @objcMembers
-class SPSearchController: NSObject {
+class SPSearchDisplayController: NSObject {
 
     /// Indicates if the SearchController is active (or not!)
     ///
@@ -76,7 +76,7 @@ class SPSearchController: NSObject {
 
 // MARK: - Private Methods
 //
-private extension SPSearchController {
+private extension SPSearchDisplayController {
 
     func setupResultsViewController() {
         // Analog to the old school `self.searchDisplayController` UIViewController property, we'll set our own
@@ -151,7 +151,7 @@ private extension SPSearchController {
 
 // MARK: - ResultsViewController Methods
 //
-private extension SPSearchController {
+private extension SPSearchDisplayController {
 
     /// Displays the SearchResultsController onScreen
     ///
@@ -201,7 +201,7 @@ private extension SPSearchController {
 
 // MARK: - UISearchBar Delegate Methods
 //
-extension SPSearchController: UISearchBarDelegate {
+extension SPSearchDisplayController: UISearchBarDelegate {
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let shouldBeginEditing = delegate?.searchControllerShouldBeginSearch(self) else {

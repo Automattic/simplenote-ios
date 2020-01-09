@@ -47,7 +47,7 @@
 
 @property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, strong) SPSearchController                    *searchController;
+@property (nonatomic, strong) SPSearchDisplayController             *searchDisplayController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
@@ -68,7 +68,7 @@
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureTableView];
-        [self configureSearchController];
+        [self configureSearchDisplayController];
         [self configureRootView];
         [self updateRowHeight];
         [self startListeningToNotifications];
@@ -173,7 +173,7 @@
 #pragma mark - Dynamic Properties
 
 - (UISearchBar *)searchBar {
-    return _searchController.searchBar;
+    return _searchDisplayController.searchBar;
 }
 
 - (UIActivityIndicatorView *)activityIndicator {
@@ -311,16 +311,16 @@
     [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
 }
 
-- (void)configureSearchController {
-    NSAssert(_searchController == nil, @"_searchController is already initialized!");
+- (void)configureSearchDisplayController {
+    NSAssert(_searchDisplayController == nil, @"_searchDisplayController is already initialized!");
     NSAssert(_resultsViewController == nil, @"_resultsController is already initialized!");
 
     // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
     self.resultsViewController = [SPSearchResultsViewController new];
 
-    self.searchController = [[SPSearchController alloc] initWithResultsViewController:self.resultsViewController];
-    self.searchController.delegate = self;
-    self.searchController.presenter = self;
+    self.searchDisplayController = [[SPSearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
+    self.searchDisplayController.delegate = self;
+    self.searchDisplayController.presenter = self;
 
     [self.searchBar applySimplenoteStyle];
 }
@@ -349,7 +349,7 @@
 
 #pragma mark - SPSearchControllerDelegate methods
 
-- (BOOL)searchControllerShouldBeginSearch:(SPSearchController *)controller
+- (BOOL)searchControllerShouldBeginSearch:(SPSearchDisplayController *)controller
 {
     if (bListViewIsEmpty) {
         return NO;
@@ -365,7 +365,7 @@
     return bSearching;
 }
 
-- (void)searchController:(SPSearchController *)controller updateSearchResults:(NSString *)keyword
+- (void)searchController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     if (FeatureManager.advancedSearchEnabled) {
         [self.resultsViewController updateSearchResultsWithKeyword:keyword];
@@ -387,7 +387,7 @@
                                                   repeats:NO];
 }
 
-- (void)searchControllerWillBeginSearch:(SPSearchController *)controller
+- (void)searchControllerWillBeginSearch:(SPSearchDisplayController *)controller
 {
     // Ensure our custom NavigationBar + SearchBar are always on top (!)
     [self.view bringSubviewToFront:self.navigationBarBackground];
@@ -397,7 +397,7 @@
     [self.navigationBarBackground fadeIn];
 }
 
-- (void)searchControllerDidEndSearch:(SPSearchController *)controller
+- (void)searchControllerDidEndSearch:(SPSearchDisplayController *)controller
 {
     [self endSearching];
 }
@@ -405,12 +405,12 @@
 
 #pragma mark - SPSearchControllerPresenter methods
 
-- (UINavigationController *)navigationControllerForSearchController:(SPSearchController *)controller
+- (UINavigationController *)navigationControllerForSearchController:(SPSearchDisplayController *)controller
 {
     return self.navigationController;
 }
 
-- (UIViewController *)resultsParentControllerForSearchController:(SPSearchController *)controller
+- (UIViewController *)resultsParentControllerForSearchController:(SPSearchDisplayController *)controller
 {
     return self;
 }

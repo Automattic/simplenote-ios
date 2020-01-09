@@ -24,7 +24,7 @@ class SPSearchResultsViewController: UIViewController, SPSearchControllerResults
 
     /// SearchController: Expected to be set externally
     ///
-    weak var searchController: SPSearchController?
+    weak var searchController: SPSearchDisplayController?
 
     // MARK: - View Lifecycle
 
