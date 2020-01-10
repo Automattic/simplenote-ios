@@ -17,10 +17,23 @@ extension SPNoteListViewController {
         }
 
         resultsController = ResultsController(viewContext: viewContext)
+
+        resultsController.onWillChangeContent = { [weak self] in
+            self?.tableView.beginUpdates()
+        }
+
         resultsController.onDidChangeContent = { [weak self] in
+            self?.tableView.endUpdates()
             self?.updateViewIfEmpty()
         }
-        resultsController.startForwardingEvents(to: tableView)
+
+        resultsController.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
+            self?.tableView.resultsController(didUpdateObject: object, indexPath: indexPath, type: type, newIndexPath: newIndexPath)
+        }
+
+        resultsController.onDidChangeSection = { [weak self] (sectionInfo, sectionIndex, type) in
+            self?.tableView.resultsController(didChangeSectionInfo: sectionInfo, sectionIndex: sectionIndex, type: type)
+        }
 
         try? resultsController.performFetch()
     }
