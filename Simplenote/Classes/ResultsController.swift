@@ -131,11 +131,15 @@ extension ResultsController {
         try resultsController.performFetch()
     }
 
+    /// Returns the Object at the specified IndexPath
+    ///
     @objc(objectAtIndexPath:)
     func object(at indexPath: IndexPath) -> Note {
         resultsController.object(at: indexPath)
     }
 
+    /// Returns the IndexPath for a given Object
+    ///
     func indexPath(forObject object: Note) -> IndexPath? {
         resultsController.indexPath(forObject: object)
     }
