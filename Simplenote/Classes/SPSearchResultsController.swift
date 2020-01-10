@@ -4,31 +4,32 @@ import CoreData
 
 // MARK: - SPSearchResultsController
 //
-class SPSearchResultsController {
+@objcMembers
+class SPSearchResultsController: NSObject {
 
     /// Batch Size for the FRC's Request
     ///
     private let resultsBatchSize = 20
 
-    /// Fetch Request: Note
+    /// Fetch Request
     ///
     private lazy var request: NSFetchRequest<Note> = {
         let request = NSFetchRequest<Note>()
-        request.entity = NSEntityDescription.entity(forEntityName: Note.classNameWithoutNamespaces, in: mainContext)
+        request.entity = NSEntityDescription.entity(forEntityName: Note.classNameWithoutNamespaces, in: viewContext)
         request.fetchBatchSize = resultsBatchSize
         request.sortDescriptors = sortDescriptors(sortMode: sortMode)
         return request
     }()
 
-    /// Results Controller: Note Entity
+    /// Results Controller
     ///
     private lazy var resultsController: NSFetchedResultsController<Note> = {
-        NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
 
-    /// Main MOC
+    /// View Context MOC: Main Thread!
     ///
-    private let mainContext: NSManagedObjectContext
+    private let viewContext: NSManagedObjectContext
 
     /// Keyword we should be filtering by
     ///
@@ -55,12 +56,11 @@ class SPSearchResultsController {
      }
 
     /// Designated Initializer
-    ///
     ///  - mainContext: Main Thread's MOC
     ///
-    init(mainContext: NSManagedObjectContext = SPAppDelegate.shared().managedObjectContext) {
-        assert(mainContext.concurrencyType == .mainQueueConcurrencyType)
-        self.mainContext = mainContext
+    init(viewContext: NSManagedObjectContext) {
+        assert(viewContext.concurrencyType == .mainQueueConcurrencyType)
+        self.viewContext = viewContext
     }
 }
 
