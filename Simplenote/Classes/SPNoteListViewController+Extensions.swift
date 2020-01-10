@@ -2,6 +2,23 @@ import Foundation
 import UIKit
 
 
+// MARK: - Components Initialization
+//
+extension SPNoteListViewController {
+
+    /// Sets up the Results Controller
+    ///
+    @objc
+    func configureResultsController() {
+        assert(resultsController == nil, "resultsController is already initialized!")
+
+        let viewContext = SPAppDelegate.shared().simperium.managedObjectContext()!
+        resultsController = SPSearchResultsController(viewContext: viewContext)
+        try? resultsController.performFetch()
+    }
+}
+
+
 // MARK: - Interface Initialization
 //
 extension SPNoteListViewController {
@@ -89,6 +106,30 @@ extension SPNoteListViewController {
             title = selectedTag
         }
     }
+
+    /// Refreshes the ResultsController Filters
+    ///
+    @objc
+    func refreshResultsController() {
+        var selectedTag: String?
+        switch SPAppDelegate.shared().selectedTag {
+        case kSimplenoteTrashKey:
+            tagFilterType = .deleted
+        case kSimplenoteUntaggedKey:
+            tagFilterType = .untagged
+        case let tag:
+            tagFilterType = .userTag
+            selectedTag = tag
+        }
+
+        resultsController.filter = tagFilterType
+        resultsController.selectedTag = selectedTag
+        resultsController.keyword = searchText
+        resultsController.sortMode = Options.shared.listSortMode
+        try? resultsController.performFetch()
+
+        tableView.reloadData()
+    }
 }
 
 
@@ -111,7 +152,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let note = fetchedResultsController.object(at: indexPath)
+        let note = resultsController.object(at: indexPath)
         let editorViewController = SPAppDelegate.shared().noteEditorViewController
         editorViewController.update(note)
         editorViewController.isPreviewing = true

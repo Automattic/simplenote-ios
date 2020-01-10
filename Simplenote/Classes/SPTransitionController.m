@@ -426,7 +426,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         
         
         // get selected path
-        _selectedPath = [listController.fetchedResultsController indexPathForObject:editorController.currentNote];
+        _selectedPath = [listController.resultsController indexPathForObject:editorController.currentNote];
         
         
         // get snapshots of the final editor text

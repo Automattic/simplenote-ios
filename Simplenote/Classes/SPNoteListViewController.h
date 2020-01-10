@@ -5,6 +5,7 @@
 
 @class SPEmptyListView;
 @class SPBlurEffectView;
+@class SPSearchResultsController;
 
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
@@ -23,13 +24,13 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
     BOOL bShouldShowSidePanel;
 }
 
-@property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
+@property (nonatomic, strong) SPSearchResultsController                     *resultsController;
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
-@property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
+@property (nonatomic, assign) SPTagFilterType                               tagFilterType;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
 

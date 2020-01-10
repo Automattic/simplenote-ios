@@ -37,8 +37,6 @@
                                         SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
-
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
@@ -52,7 +50,6 @@
 @property (nonatomic, strong) SPTransitionController                *transitionController;
 @property (nonatomic, assign) CGFloat                               keyboardHeight;
 
-@property (nonatomic, assign) SPTagFilterType                       tagFilterType;
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
 
@@ -64,6 +61,7 @@
     
     self = [super init];
     if (self) {
+        [self configureResultsController];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureTableView];
@@ -247,7 +245,7 @@
 }
 
 
-#pragma mark - Interface Initialization
+#pragma mark - Initialization
 
 - (void)configureNavigationButtons {
     NSAssert(_addButton == nil, @"_addButton is already initialized!");
@@ -401,7 +399,7 @@
   
     [SPTracker trackListNotesSearched];
     
-    [self updateFetchPredicate];
+    [self refreshResultsController];
     [self updateViewIfEmpty];
     if ([self.tableView numberOfRowsInSection:0]) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
@@ -434,12 +432,12 @@
 
 - (NSInteger)numNotes {
     
-    return self.fetchedResultsController.fetchedObjects.count;
+    return self.resultsController.numberOfObjects;
 }
 
 - (Note *)noteForKey:(NSString *)key {
     
-    for (Note *n in self.fetchedResultsController.fetchedObjects) {
+    for (Note *n in self.resultsController.fetchedObjects) {
         
         if ([n.simperiumKey isEqualToString:key])
             return n;
@@ -450,7 +448,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.resultsController.sections objectAtIndex:0];
     return [sectionInfo numberOfObjects];
 }
 
@@ -470,8 +468,8 @@
 }
 
 - (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    Note *note = [self.resultsController objectAtIndexPath:indexPath];
 
     [note ensurePreviewStringsAreAvailable];
 
@@ -508,7 +506,7 @@
 
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Note *note = [self.resultsController objectAtIndexPath:indexPath];
     if (self.tagFilterType == SPTagFilterTypeDeleted) {
         return [self rowActionsForDeletedNote:note];
     }
@@ -520,13 +518,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row >= self.fetchedResultsController.fetchedObjects.count) {
+    if (indexPath.row >= self.resultsController.fetchedObjects.count) {
         return;
     }
     
     [[SPRatingsHelper sharedInstance] incrementSignificantEvent];
     
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Note *note = [self.resultsController objectAtIndexPath:indexPath];
     [self openNote:note fromIndexPath:indexPath animated:YES];
 }
 
@@ -671,53 +669,9 @@
 
 #pragma mark - NSFetchedResultsController
 
-- (NSArray *)sortDescriptors
-{
-    NSString *sortKey = nil;
-    BOOL ascending = NO;
-    SEL sortSelector = nil;
-
-    SortMode mode = [[Options shared] listSortMode];
-
-    switch (mode) {
-        case SortModeAlphabeticallyAscending:
-            sortKey = @"content";
-            ascending = YES;
-            sortSelector = @selector(caseInsensitiveCompare:);
-            break;
-        case SortModeAlphabeticallyDescending:
-            sortKey = @"content";
-            ascending = NO;
-            sortSelector = @selector(caseInsensitiveCompare:);
-            break;
-        case SortModeCreatedNewest:
-            sortKey = @"creationDate";
-            ascending = NO;
-            break;
-        case SortModeCreatedOldest:
-            sortKey = @"creationDate";
-            ascending = YES;
-            break;
-        case SortModeModifiedNewest:
-            sortKey = @"modificationDate";
-            ascending = NO;
-            break;
-        case SortModeModifiedOldest:
-            sortKey = @"modificationDate";
-            ascending = YES;
-            break;
-    }
-
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:sortSelector];
-    NSSortDescriptor *pinnedSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pinned" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:pinnedSortDescriptor, sortDescriptor, nil];
-    
-    return sortDescriptors;
-}
-
 - (void)updateViewIfEmpty {
     
-    bListViewIsEmpty = !(self.fetchedResultsController.fetchedObjects.count > 0);
+    bListViewIsEmpty = !(self.resultsController.fetchedObjects.count > 0);
     
     _emptyListView.hidden = !bListViewIsEmpty;    
     [_emptyListView hideImageView:bSearching];
@@ -747,7 +701,7 @@
 
 - (void)update {
     
-    [self updateFetchPredicate];
+    [self refreshResultsController];
     [self refreshTitle];
 
     BOOL isTrashOnScreen = self.tagFilterType == SPTagFilterTypeDeleted;
@@ -759,122 +713,13 @@
     [self hideRatingViewIfNeeded];
 }
 
-- (void)updateFetchPredicate
-{
-    NSString *selectedTag = [[SPAppDelegate sharedDelegate] selectedTag];
-    if ([selectedTag isEqualToString:kSimplenoteTrashKey]) {
-        self.tagFilterType = SPTagFilterTypeDeleted;
-    } else if ([selectedTag isEqualToString:kSimplenoteUntaggedKey]) {
-        self.tagFilterType = SPTagFilterTypeUntagged;
-    } else {
-        self.tagFilterType = SPTagFilterTypeUserTag;
-    }
-
-    [NSFetchedResultsController deleteCacheWithName:@"Root"];
-
-    NSFetchRequest *fetchRequest = self.fetchedResultsController.fetchRequest;
-    fetchRequest.predicate = [self fetchPredicate];
-    fetchRequest.fetchBatchSize = 20;
-    fetchRequest.sortDescriptors = [self sortDescriptors];
-    
-    
-    NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Error while trying to perform fetch: %@", error);
-    }
-    
-    [self.tableView reloadData];
-}
-
-- (NSPredicate *)fetchPredicate {
-
-    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
-
-    [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(self.tagFilterType == SPTagFilterTypeDeleted)]];
-
-    switch (self.tagFilterType) {
-        case SPTagFilterTypeUntagged:
-            [predicateList addObject:[NSPredicate predicateForUntaggedNotes]];
-            break;
-        case SPTagFilterTypeUserTag:
-            if (appDelegate.selectedTag.length == 0) {
-                break;
-            }
-
-            [predicateList addObject:[NSPredicate predicateForTagWith:appDelegate.selectedTag]];
-            break;
-        default:
-            break;
-    }
-
-    if (self.searchText.length > 0) {
-        [predicateList addObject:[NSPredicate predicateForSearchText:self.searchText]];
-    }
-    
-    return [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
-}
-
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController != nil)
-    {
-        return _fetchedResultsController;
-    }
-    
-    // Set appDelegate here because this might get called before it gets an opportunity to be set previously
-    SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
-    
-    // Create the fetch request for the entity.
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:appDelegate.simperium.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Don't fetch deleted notes.
-    NSPredicate *predicate = [self fetchPredicate];
-    [fetchRequest setPredicate: predicate];
-    
-    // Edit the sort key as appropriate.
-    NSArray *sortDescriptors = [self sortDescriptors];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:appDelegate.simperium.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error])
-    {
-	    /*
-	     Replace this implementation with code to handle the error appropriately.
-         
-	     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-	     */
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}
-
-
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     
-    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
     [self.tableView beginUpdates];
 }
 
-
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    
+
     UITableView *tableView = self.tableView;
     
     switch(type) {
@@ -891,7 +736,7 @@
             if (newIndexPath == nil || [indexPath isEqual:newIndexPath])
             {
                 // remove current preview
-                Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                Note *note = [self.resultsController objectAtIndexPath:indexPath];
                 note.preview = nil;
                 [self configureCell:(SPNoteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             }
@@ -932,14 +777,13 @@
     }
 }
 
-
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
     
     // update the empty list view
-    NSInteger fetchedObjectsCount = self.fetchedResultsController.fetchedObjects.count;
+    NSInteger fetchedObjectsCount = self.resultsController.fetchedObjects.count;
     if ((fetchedObjectsCount > 0 && bListViewIsEmpty) ||
         (!(fetchedObjectsCount > 0) && !bListViewIsEmpty))
         [self updateViewIfEmpty];
@@ -992,7 +836,7 @@
         return;
     }
 
-    if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+    if (waiting && self.navigationItem.titleView == nil && (self.resultsController.fetchedObjects.count == 0 || _firstLaunch)){
         [self.activityIndicator startAnimating];
         self.bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:self.activityIndicator completion:nil];

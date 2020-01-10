@@ -23,7 +23,7 @@ class SPSearchResultsController: NSObject {
 
     /// Results Controller
     ///
-    private lazy var resultsController: NSFetchedResultsController<Note> = {
+    private(set) lazy var resultsController: NSFetchedResultsController<Note> = {
         NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
 
@@ -35,7 +35,7 @@ class SPSearchResultsController: NSObject {
     ///
     var filter: SPTagFilterType = .userTag {
         didSet {
-            guard oldValue == filter else {
+            guard oldValue != filter else {
                 return
             }
 
@@ -57,7 +57,15 @@ class SPSearchResultsController: NSObject {
 
     /// Selected Tag
     ///
-    var selectedTag: String?
+    var selectedTag: String? {
+        didSet {
+            guard oldValue != selectedTag else {
+                return
+            }
+
+            refreshFetchRequest()
+        }
+    }
 
     /// Sorting Mode
     ///
