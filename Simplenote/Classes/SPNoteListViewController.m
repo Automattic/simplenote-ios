@@ -60,11 +60,11 @@
     
     self = [super init];
     if (self) {
-        [self configureResultsController];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureTableView];
         [self configureSearchController];
+        [self configureResultsController];
         [self configureRootView];
         [self updateRowHeight];
         [self startListeningToNotifications];
