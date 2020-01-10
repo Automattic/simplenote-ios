@@ -13,7 +13,7 @@ class SimplenoteSimpleTextPrintFormatter: UISimpleTextPrintFormatter {
         super.init(text: text)
         
         if #available(iOS 12.0, *) {
-            if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
+            if SPUserInterface.isDark {
                 self.color = UIColor.black
             }
         }
