@@ -29,7 +29,19 @@ class SPSearchResultsController: NSObject {
 
     /// View Context MOC: Main Thread!
     ///
-    private let viewContext: NSManagedObjectContext
+    let viewContext: NSManagedObjectContext
+
+    /// Active Filter
+    ///
+    var filter: SPTagFilterType = .userTag {
+        didSet {
+            guard oldValue == filter else {
+                return
+            }
+
+            refreshFetchRequest()
+        }
+    }
 
     /// Keyword we should be filtering by
     ///
@@ -43,13 +55,17 @@ class SPSearchResultsController: NSObject {
         }
     }
 
+    /// Selected Tag
+    ///
+    var selectedTag: String?
+
     /// Sorting Mode
     ///
     var sortMode: SortMode = .alphabeticallyAscending {
          didSet {
-             guard oldValue != sortMode else {
-                 return
-             }
+            guard oldValue != sortMode else {
+                return
+            }
 
             refreshFetchRequest()
          }
@@ -113,16 +129,27 @@ private extension SPSearchResultsController {
     ///
     func refreshFetchRequest() {
         let request = resultsController.fetchRequest
-        request.predicate = predicate(keyword: keyword)
+        request.predicate = predicate(keyword: keyword, filter: filter)
         request.sortDescriptors = sortDescriptors(sortMode: sortMode)
     }
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
     ///
-    func predicate(keyword: String?) -> NSPredicate {
+    func predicate(keyword: String?, filter: SPTagFilterType) -> NSPredicate {
         var predicates = [
-            NSPredicate.predicateForNotesWithStatus(deleted: false)
+            NSPredicate.predicateForNotesWithStatus(deleted: filter == .deleted)
         ]
+
+        switch filter {
+        case .userTag:
+            if let selectedTag = selectedTag {
+                predicates.append( NSPredicate.predicateForTag(with: selectedTag) )
+            }
+        case .untagged:
+            predicates.append( NSPredicate.predicateForUntaggedNotes() )
+        default:
+            break
+        }
 
         if let keyword = keyword, keyword.count > 0 {
             predicates.append( NSPredicate.predicateForSearchText(searchText: keyword) )
