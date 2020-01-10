@@ -124,6 +124,8 @@
 		74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */; };
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
+		B5059B2023C8EF3E00814B98 /* ResultsController+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5059B1F23C8EF3E00814B98 /* ResultsController+UIKit.swift */; };
+		B5059B2223C8EF9400814B98 /* FetchedResultsControllerDelegateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5059B2123C8EF9300814B98 /* FetchedResultsControllerDelegateWrapper.swift */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
 		B50789FF1C1F5592009F097A /* markdown-default.css in Resources */ = {isa = PBXBuildFile; fileRef = 1748382E1BC1CC2D00E834AF /* markdown-default.css */; };
 		B5078A001C1F5595009F097A /* markdown-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = 17BC3D461BC46BA800535DF3 /* markdown-dark.css */; };
@@ -167,7 +169,7 @@
 		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
 		B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */; };
 		B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */; };
-		B547631A238C4320000AFE0F /* SPSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476319238C4320000AFE0F /* SPSearchResultsController.swift */; };
+		B547631A238C4320000AFE0F /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476319238C4320000AFE0F /* ResultsController.swift */; };
 		B54CDD62237F437100234520 /* SPSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */; };
 		B54CDD64237F43AD00234520 /* SPSearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -411,6 +413,8 @@
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
+		B5059B1F23C8EF3E00814B98 /* ResultsController+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ResultsController+UIKit.swift"; path = "Classes/ResultsController+UIKit.swift"; sourceTree = "<group>"; };
+		B5059B2123C8EF9300814B98 /* FetchedResultsControllerDelegateWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsControllerDelegateWrapper.swift; path = Classes/FetchedResultsControllerDelegateWrapper.swift; sourceTree = "<group>"; };
 		B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UISearchBar+Simplenote.swift"; path = "Classes/UISearchBar+Simplenote.swift"; sourceTree = "<group>"; };
 		B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Helpers.swift"; path = "Classes/UIAlertController+Helpers.swift"; sourceTree = "<group>"; };
 		B50F47A21D1D78EA00822748 /* SPRatingsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsHelper.h; path = Classes/SPRatingsHelper.h; sourceTree = "<group>"; };
@@ -452,7 +456,7 @@
 		B546BE96234E64F200A126DA /* SPTagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagListViewCell.xib; path = Classes/SPTagListViewCell.xib; sourceTree = "<group>"; };
 		B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagHeaderView.swift; path = Classes/SPTagHeaderView.swift; sourceTree = "<group>"; };
 		B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagHeaderView.xib; path = Classes/SPTagHeaderView.xib; sourceTree = "<group>"; };
-		B5476319238C4320000AFE0F /* SPSearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSearchResultsController.swift; path = Classes/SPSearchResultsController.swift; sourceTree = "<group>"; };
+		B5476319238C4320000AFE0F /* ResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultsController.swift; path = Classes/ResultsController.swift; sourceTree = "<group>"; };
 		B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSearchResultsViewController.swift; path = Classes/SPSearchResultsViewController.swift; sourceTree = "<group>"; };
 		B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSearchResultsViewController.xib; path = Classes/SPSearchResultsViewController.xib; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -986,7 +990,9 @@
 			children = (
 				B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */,
 				B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */,
-				B5476319238C4320000AFE0F /* SPSearchResultsController.swift */,
+				B5476319238C4320000AFE0F /* ResultsController.swift */,
+				B5059B1F23C8EF3E00814B98 /* ResultsController+UIKit.swift */,
+				B5059B2123C8EF9300814B98 /* FetchedResultsControllerDelegateWrapper.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -1968,6 +1974,7 @@
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
 				B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */,
+				B5059B2223C8EF9400814B98 /* FetchedResultsControllerDelegateWrapper.swift in Sources */,
 				B5C57A4122E78F4D009166EA /* UIColorName.swift in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
@@ -2010,7 +2017,7 @@
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
-				B547631A238C4320000AFE0F /* SPSearchResultsController.swift in Sources */,
+				B547631A238C4320000AFE0F /* ResultsController.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
@@ -2044,6 +2051,7 @@
 				B54CDD62237F437100234520 /* SPSearchResultsViewController.swift in Sources */,
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
+				B5059B2023C8EF3E00814B98 /* ResultsController+UIKit.swift in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
