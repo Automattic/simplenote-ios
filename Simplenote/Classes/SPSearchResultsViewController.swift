@@ -19,7 +19,7 @@ class SPSearchResultsViewController: UIViewController {
     /// Results Controller
     ///
     private lazy var resultsController: SPSearchResultsController = {
-        SPSearchResultsController(mainContext: mainContext)
+        SPSearchResultsController(viewContext: mainContext)
     }()
 
     // MARK: - View Lifecycle
@@ -175,11 +175,11 @@ private extension SPSearchResultsViewController {
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        guard resultsController.keyword.count > 0 else {
+        guard let keyword = resultsController.keyword else {
             return
         }
 
-        cell.highlightSubstrings(matching: resultsController.keyword, color: .simplenoteTintColor)
+        cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
     }
 
     /// Returns the Note at a given IndexPath
@@ -188,7 +188,7 @@ private extension SPSearchResultsViewController {
         resultsController.object(at: indexPath)
     }
 
-    func presentEditor(note: Note, keyword: String) {
+    func presentEditor(note: Note, keyword: String?) {
         let editorViewController = SPNoteEditorViewController()
         editorViewController.update(note)
         editorViewController.searchString = keyword
