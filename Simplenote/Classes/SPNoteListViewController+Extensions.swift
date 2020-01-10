@@ -16,8 +16,8 @@ extension SPNoteListViewController {
             fatalError("MainMOC should be already available")
         }
 
-        // TODO: Link between FRC <> TableView (FRC Delegate Methods)
-        resultsController = SPSearchResultsController(viewContext: viewContext)
+        resultsController = ResultsController(viewContext: viewContext)
+        resultsController.startForwardingEvents(to: tableView)
         try? resultsController.performFetch()
     }
 }

@@ -18,8 +18,8 @@ class SPSearchResultsViewController: UIViewController {
 
     /// Results Controller
     ///
-    private lazy var resultsController: SPSearchResultsController = {
-        SPSearchResultsController(viewContext: mainContext)
+    private lazy var resultsController: ResultsController = {
+        ResultsController(viewContext: mainContext)
     }()
 
     // MARK: - View Lifecycle

@@ -5,7 +5,7 @@
 
 @class SPEmptyListView;
 @class SPBlurEffectView;
-@class SPSearchResultsController;
+@class ResultsController;
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
@@ -18,7 +18,7 @@
     BOOL bShouldShowSidePanel;
 }
 
-@property (nonatomic, strong) SPSearchResultsController                     *resultsController;
+@property (nonatomic, strong) ResultsController                             *resultsController;
 @property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
