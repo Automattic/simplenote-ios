@@ -12,7 +12,10 @@ extension SPNoteListViewController {
     func configureResultsController() {
         assert(resultsController == nil, "resultsController is already initialized!")
 
-        let viewContext = SPAppDelegate.shared().simperium.managedObjectContext()!
+        guard let viewContext = SPAppDelegate.shared().simperium.managedObjectContext() else {
+            fatalError("MainMOC should be already available")
+        }
+
         resultsController = SPSearchResultsController(viewContext: viewContext)
         try? resultsController.performFetch()
     }
