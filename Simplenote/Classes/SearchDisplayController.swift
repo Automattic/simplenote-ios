@@ -2,29 +2,29 @@ import Foundation
 import UIKit
 
 
-// MARK: - SPSearchDisplayController Delegate Methods
+// MARK: - SearchDisplayController Delegate Methods
 //
 @objc
-protocol SPSearchDisplayControllerDelegate: NSObjectProtocol {
-    func searchDisplayControllerShouldBeginSearch(_ controller: SPSearchDisplayController) -> Bool
-    func searchDisplayController(_ controller: SPSearchDisplayController, updateSearchResults keyword: String)
-    func searchDisplayControllerWillBeginSearch(_ controller: SPSearchDisplayController)
-    func searchDisplayControllerDidEndSearch(_ controller: SPSearchDisplayController)
+protocol SearchDisplayControllerDelegate: NSObjectProtocol {
+    func searchDisplayControllerShouldBeginSearch(_ controller: SearchDisplayController) -> Bool
+    func searchDisplayController(_ controller: SearchDisplayController, updateSearchResults keyword: String)
+    func searchDisplayControllerWillBeginSearch(_ controller: SearchDisplayController)
+    func searchDisplayControllerDidEndSearch(_ controller: SearchDisplayController)
 }
 
 
-// MARK: - SPSearchControllerPresenter Delegate Methods
+// MARK: - SearchControllerPresentationContextProvider Methods
 //
 @objc
-protocol SPSearchControllerPresentationContextProvider: NSObjectProtocol {
-    func navigationControllerForSearchDisplayController(_ controller: SPSearchDisplayController) -> UINavigationController
+protocol SearchControllerPresentationContextProvider: NSObjectProtocol {
+    func navigationControllerForSearchDisplayController(_ controller: SearchDisplayController) -> UINavigationController
 }
 
 
 // MARK: - Simplenote's Search Controller: Because UIKit's Search Controller is simply unusable
 //
 @objcMembers
-class SPSearchDisplayController: NSObject {
+class SearchDisplayController: NSObject {
 
     /// Indicates if the SearchController is active (or not!)
     ///
@@ -36,11 +36,11 @@ class SPSearchDisplayController: NSObject {
 
     /// SearchController's Delegate
     ///
-    weak var delegate: SPSearchDisplayControllerDelegate?
+    weak var delegate: SearchDisplayControllerDelegate?
 
     /// SearchController's Presentation Context Provider
     ///
-    weak var presenter: SPSearchControllerPresentationContextProvider?
+    weak var presenter: SearchControllerPresentationContextProvider?
 
 
     /// Designated Initializer
@@ -62,7 +62,7 @@ class SPSearchDisplayController: NSObject {
 
 // MARK: - Private Methods
 //
-private extension SPSearchDisplayController {
+private extension SearchDisplayController {
 
     func setupSearchBar() {
         searchBar.delegate = self
@@ -117,7 +117,7 @@ private extension SPSearchDisplayController {
 
 // MARK: - UISearchBar Delegate Methods
 //
-extension SPSearchDisplayController: UISearchBarDelegate {
+extension SearchDisplayController: UISearchBarDelegate {
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let shouldBeginEditing = delegate?.searchDisplayControllerShouldBeginSearch(self) else {
