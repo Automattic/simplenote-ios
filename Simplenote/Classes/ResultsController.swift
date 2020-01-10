@@ -27,7 +27,7 @@ class ResultsController: NSObject {
 
     /// Results Controller
     ///
-    private(set) lazy var resultsController: NSFetchedResultsController<Note> = {
+    private lazy var resultsController: NSFetchedResultsController<Note> = {
         NSFetchedResultsController<Note>(fetchRequest: request, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
     }()
 
@@ -252,6 +252,15 @@ extension ResultsController {
     //
     typealias ChangeType = NSFetchedResultsChangeType
 
+    // MARK: - ResultsController.Filter
+    //
+    enum Filter {
+        case all
+        case deleted
+        case tag(name: String)
+        case untagged
+    }
+
     // MARK: - ResultsController.SectionInfo
     //
     class SectionInfo {
@@ -277,15 +286,6 @@ extension ResultsController {
             name = section.name
             objects = section.objects ?? []
         }
-    }
-
-    // MARK: - ResultsController.Filter
-    //
-    enum Filter {
-        case all
-        case deleted
-        case tag(name: String)
-        case untagged
     }
 }
 

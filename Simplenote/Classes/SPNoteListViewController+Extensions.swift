@@ -17,7 +17,11 @@ extension SPNoteListViewController {
         }
 
         resultsController = ResultsController(viewContext: viewContext)
+        resultsController.onDidChangeContent = { [weak self] in
+            self?.updateViewIfEmpty()
+        }
         resultsController.startForwardingEvents(to: tableView)
+
         try? resultsController.performFetch()
     }
 }
@@ -115,7 +119,7 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshResultsController() {
-        let filter: ResultsFilter
+        let filter: ResultsController.Filter
 
         switch SPAppDelegate.shared().selectedTag {
         case kSimplenoteTrashKey:

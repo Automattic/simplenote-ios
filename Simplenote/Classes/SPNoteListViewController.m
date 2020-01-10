@@ -712,14 +712,6 @@
     [self hideRatingViewIfNeeded];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-
-    NSInteger fetchedObjectsCount = self.resultsController.fetchedObjects.count;
-    if ((fetchedObjectsCount > 0 && bListViewIsEmpty) ||
-        (!(fetchedObjectsCount > 0) && !bListViewIsEmpty))
-        [self updateViewIfEmpty];
-}
-
 
 #pragma mark - SPSidebarContainerDelegate
 
