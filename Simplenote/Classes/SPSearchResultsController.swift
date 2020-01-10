@@ -2,6 +2,27 @@ import Foundation
 import CoreData
 
 
+// MARK: - ResultsFilter
+//
+enum ResultsFilter {
+    case all
+    case deleted
+    case tag(name: String)
+    case untagged
+}
+
+func ==(lhs: ResultsFilter, rhs: ResultsFilter) -> Bool {
+    switch (lhs, rhs) {
+    case (.all, .all), (.deleted, .deleted), (.untagged, .untagged):
+        return true
+    case let (.tag(lName), .tag(rName)):
+        return lName == rName
+    default:
+        return false
+    }
+}
+
+
 // MARK: - SPSearchResultsController
 //
 @objcMembers
@@ -33,9 +54,9 @@ class SPSearchResultsController: NSObject {
 
     /// Active Filter
     ///
-    var filter: SPTagFilterType = .userTag {
+    var filter: ResultsFilter = .all {
         didSet {
-            guard oldValue != filter else {
+            if oldValue == filter {
                 return
             }
 
@@ -48,18 +69,6 @@ class SPSearchResultsController: NSObject {
     var keyword: String? {
         didSet {
             guard oldValue != keyword else {
-                return
-            }
-
-            refreshFetchRequest()
-        }
-    }
-
-    /// Selected Tag
-    ///
-    var selectedTag: String? {
-        didSet {
-            guard oldValue != selectedTag else {
                 return
             }
 
@@ -143,20 +152,18 @@ private extension SPSearchResultsController {
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
     ///
-    func predicate(keyword: String?, filter: SPTagFilterType) -> NSPredicate {
+    func predicate(keyword: String?, filter: ResultsFilter) -> NSPredicate {
         var predicates = [
             NSPredicate.predicateForNotesWithStatus(deleted: filter == .deleted)
         ]
 
         switch filter {
-        case .userTag:
-            if let selectedTag = selectedTag {
-                predicates.append( NSPredicate.predicateForTag(with: selectedTag) )
-            }
+        case .all, .deleted:
+            break
+        case .tag(let name):
+            predicates.append( NSPredicate.predicateForTag(with: name) )
         case .untagged:
             predicates.append( NSPredicate.predicateForUntaggedNotes() )
-        default:
-            break
         }
 
         if let keyword = keyword, keyword.count > 0 {

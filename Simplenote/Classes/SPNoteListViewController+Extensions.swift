@@ -116,19 +116,26 @@ extension SPNoteListViewController {
     @objc
     func refreshResultsController() {
         // TODO: Consolidate this into a single property!!
-        var selectedTag: String?
+
+        let filter: ResultsFilter
+
         switch SPAppDelegate.shared().selectedTag {
         case kSimplenoteTrashKey:
+            filter = .deleted
             tagFilterType = .deleted
         case kSimplenoteUntaggedKey:
+            filter = .untagged
             tagFilterType = .untagged
         case let tag:
+            if let tag = tag {
+                filter = .tag(name: tag)
+            } else {
+                filter = .all
+            }
             tagFilterType = .userTag
-            selectedTag = tag
         }
 
-        resultsController.filter = tagFilterType
-        resultsController.selectedTag = selectedTag
+        resultsController.filter = filter
         resultsController.keyword = searchText
         resultsController.sortMode = Options.shared.listSortMode
         try? resultsController.performFetch()
