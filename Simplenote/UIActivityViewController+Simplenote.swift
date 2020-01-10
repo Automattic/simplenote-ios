@@ -14,7 +14,7 @@ extension UIActivityViewController {
             return nil
         }
 
-        let print = UISimpleTextPrintFormatter(text: content)
+        let print = SimplenoteSimpleTextPrintFormatter(text: content)
         let source = SimplenoteActivityItemSource(note: note)
 
         self.init(activityItems: [print, source], applicationActivities: nil)
