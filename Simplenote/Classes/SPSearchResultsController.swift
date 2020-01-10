@@ -16,7 +16,7 @@ class SPSearchResultsController {
         let request = NSFetchRequest<Note>()
         request.entity = NSEntityDescription.entity(forEntityName: Note.classNameWithoutNamespaces, in: mainContext)
         request.fetchBatchSize = resultsBatchSize
-        request.sortDescriptors = sortDescriptors()
+        request.sortDescriptors = sortDescriptors(sortMode: sortMode)
         return request
     }()
 
@@ -41,6 +41,18 @@ class SPSearchResultsController {
             updatePredicateAndFetch(keyword: keyword)
         }
     }
+
+    /// Sorting Mode
+     ///
+     var sortMode: SortMode = .alphabeticallyAscending {
+         didSet {
+             guard oldValue != sortMode else {
+                 return
+             }
+
+             refreshSortDescriptors(sortMode: sortMode)
+         }
+     }
 
     /// Designated Initializer
     ///
@@ -98,6 +110,13 @@ private extension SPSearchResultsController {
         try? resultsController.performFetch()
     }
 
+    /// Refreshes the ResultsController's Sort Descriptors
+    ///
+    func refreshSortDescriptors(sortMode: SortMode) {
+        resultsController.fetchRequest.sortDescriptors = sortDescriptors(sortMode: sortMode)
+        try? resultsController.performFetch()
+    }
+
     /// Returns a NSPredicate which will filter notes by a given keyword.
     ///
     func predicate(keyword: String) -> NSPredicate {
@@ -114,13 +133,13 @@ private extension SPSearchResultsController {
 
     /// Returns the Active SortDescriptors
     ///
-    func sortDescriptors() -> [NSSortDescriptor] {
+    func sortDescriptors(sortMode: SortMode) -> [NSSortDescriptor] {
         let pinnedKeySelector = #selector(getter: Note.pinned)
         let sortKeySelector: Selector
         var sortSelector: Selector?
         var ascending = false
 
-        switch Options.shared.listSortMode {
+        switch sortMode {
         case .alphabeticallyAscending:
             sortKeySelector = #selector(getter: Note.content)
             sortSelector    = #selector(NSString.caseInsensitiveCompare)
