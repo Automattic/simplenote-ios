@@ -26,11 +26,15 @@ func ==(lhs: ResultsFilter, rhs: ResultsFilter) -> Bool {
 // MARK: - ResultsController
 //
 @objcMembers
-class SPSearchResultsController: NSObject {
+class ResultsController: NSObject {
 
     /// Batch Size for the FRC's Request
     ///
     private let resultsBatchSize = 20
+
+    /// FetchedResultsController Delegate Wrapper.
+    ///
+    private let internalDelegate = FetchedResultsControllerDelegateWrapper()
 
     /// Fetch Request
     ///
@@ -51,6 +55,22 @@ class SPSearchResultsController: NSObject {
     /// View Context MOC: Main Thread!
     ///
     let viewContext: NSManagedObjectContext
+
+    /// Closure to be executed before the results are changed.
+    ///
+    var onWillChangeContent: (() -> Void)?
+
+    /// Closure to be executed after the results are changed.
+    ///
+    var onDidChangeContent: (() -> Void)?
+
+    /// Closure to be executed whenever an Object is updated.
+    ///
+    var onDidChangeObject: ((_ object: Any, _ indexPath: IndexPath?, _ type: ChangeType, _ newIndexPath: IndexPath?) -> Void)?
+
+    /// Closure to be executed whenever an entire Section is updated.
+    ///
+    var onDidChangeSection: ((_ sectionInfo: SectionInfo, _ sectionIndex: Int, _ type: ChangeType) -> Void)?
 
     /// Active Filter
     ///
@@ -88,7 +108,6 @@ class SPSearchResultsController: NSObject {
          }
     }
 
-
     /// Designated Initializer
     ///  - mainContext: Main Thread's MOC
     ///
@@ -96,13 +115,15 @@ class SPSearchResultsController: NSObject {
         assert(viewContext.concurrencyType == .mainQueueConcurrencyType)
         self.viewContext = viewContext
         super.init()
+        setupResultsController()
+        setupEventsForwarding()
     }
 }
 
 
 // MARK: - Public Methods
 //
-extension SPSearchResultsController {
+extension ResultsController {
 
     /// Executes the fetch request on the store to get objects.
     ///
@@ -116,32 +137,67 @@ extension SPSearchResultsController {
     }
 
     func indexPath(forObject object: Note) -> IndexPath? {
-        return resultsController.indexPath(forObject: object)
+        resultsController.indexPath(forObject: object)
     }
 
     /// Returns the number of fetched objects.
     ///
     var numberOfObjects: Int {
-        return resultsController.fetchedObjects?.count ?? 0
+        resultsController.fetchedObjects?.count ?? 0
     }
 
     /// Returns an array of all of the (ReadOnly) Fetched Objects.
     ///
     var fetchedObjects: [Note] {
-        return resultsController.fetchedObjects ?? []
+        resultsController.fetchedObjects ?? []
     }
 
     /// Returns an array of SectionInfo Entitites.
     ///
     var sections: [NSFetchedResultsSectionInfo] {
-        return resultsController.sections ?? []
+        resultsController.sections ?? []
     }
 }
 
 
 // MARK: - Private Methods
 //
-private extension SPSearchResultsController {
+private extension ResultsController {
+
+    /// Initializes the FetchedResultsController
+    ///
+    func setupResultsController() {
+        resultsController.delegate = internalDelegate
+    }
+
+    /// Initializes FRC's Event Forwarding.
+    ///
+    func setupEventsForwarding() {
+        internalDelegate.onWillChangeContent = { [weak self] in
+            self?.onWillChangeContent?()
+        }
+
+        internalDelegate.onDidChangeContent = { [weak self] in
+            self?.onDidChangeContent?()
+        }
+
+        internalDelegate.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
+            guard let `self` = self else {
+                return
+            }
+
+            self.onDidChangeObject?(object, indexPath, type, newIndexPath)
+        }
+
+        internalDelegate.onDidChangeSection = { [weak self] (section, sectionIndex, type) in
+            guard let `self` = self else {
+                return
+            }
+
+            let wrappedSection = SectionInfo(section: section)
+            self.onDidChangeSection?(wrappedSection, sectionIndex, type)
+        }
+    }
 
     /// Refreshes the ResultsController's Fetch Request
     ///
@@ -209,5 +265,42 @@ private extension SPSearchResultsController {
             NSSortDescriptor(key: NSStringFromSelector(pinnedKeySelector), ascending: false),
             NSSortDescriptor(key: NSStringFromSelector(sortKeySelector), ascending: ascending, selector: sortSelector)
         ]
+    }
+}
+
+
+// MARK: - Nested Types
+//
+extension ResultsController {
+
+    // MARK: - ResultsController.ChangeType
+    //
+    typealias ChangeType = NSFetchedResultsChangeType
+
+    // MARK: - ResultsController.SectionInfo
+    //
+    class SectionInfo {
+
+        /// Name of the section
+        ///
+        let name: String
+
+        /// Number of objects in the current section
+        ///
+        var numberOfObjects: Int {
+            objects.count
+        }
+
+        /// Returns the array of (ReadOnly) objects in the section.
+        ///
+        let objects: [Any]
+
+
+        /// Designated Initializer
+        ///
+        init(section: NSFetchedResultsSectionInfo) {
+            name = section.name
+            objects = section.objects ?? []
+        }
     }
 }
