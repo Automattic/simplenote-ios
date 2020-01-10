@@ -39,21 +39,22 @@ class SPSearchResultsController: NSObject {
                 return
             }
 
-            updatePredicateAndFetch(keyword: keyword)
+            refreshFetchRequest()
         }
     }
 
     /// Sorting Mode
-     ///
-     var sortMode: SortMode = .alphabeticallyAscending {
+    ///
+    var sortMode: SortMode = .alphabeticallyAscending {
          didSet {
              guard oldValue != sortMode else {
                  return
              }
 
-             refreshSortDescriptors(sortMode: sortMode)
+            refreshFetchRequest()
          }
-     }
+    }
+
 
     /// Designated Initializer
     ///  - mainContext: Main Thread's MOC
@@ -108,18 +109,12 @@ extension SPSearchResultsController {
 //
 private extension SPSearchResultsController {
 
-    /// Refreshes the ResultsController's Predicate
+    /// Refreshes the ResultsController's Fetch Request
     ///
-    func updatePredicateAndFetch(keyword: String?) {
-        resultsController.fetchRequest.predicate = predicate(keyword: keyword)
-        try? resultsController.performFetch()
-    }
-
-    /// Refreshes the ResultsController's Sort Descriptors
-    ///
-    func refreshSortDescriptors(sortMode: SortMode) {
-        resultsController.fetchRequest.sortDescriptors = sortDescriptors(sortMode: sortMode)
-        try? resultsController.performFetch()
+    func refreshFetchRequest() {
+        let request = resultsController.fetchRequest
+        request.predicate = predicate(keyword: keyword)
+        request.sortDescriptors = sortDescriptors(sortMode: sortMode)
     }
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
