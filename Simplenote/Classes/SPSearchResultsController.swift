@@ -33,7 +33,7 @@ class SPSearchResultsController: NSObject {
 
     /// Keyword we should be filtering by
     ///
-    var keyword = String() {
+    var keyword: String? {
         didSet {
             guard oldValue != keyword else {
                 return
@@ -75,8 +75,13 @@ extension SPSearchResultsController {
         try resultsController.performFetch()
     }
 
+    @objc(objectAtIndexPath:)
     func object(at indexPath: IndexPath) -> Note {
         return resultsController.object(at: indexPath)
+    }
+
+    func indexPath(forObject object: Note) -> IndexPath? {
+        return resultsController.indexPath(forObject: object)
     }
 
     /// Returns the number of fetched objects.
@@ -105,7 +110,7 @@ private extension SPSearchResultsController {
 
     /// Refreshes the ResultsController's Predicate
     ///
-    func updatePredicateAndFetch(keyword: String) {
+    func updatePredicateAndFetch(keyword: String?) {
         resultsController.fetchRequest.predicate = predicate(keyword: keyword)
         try? resultsController.performFetch()
     }
@@ -119,12 +124,12 @@ private extension SPSearchResultsController {
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
     ///
-    func predicate(keyword: String) -> NSPredicate {
+    func predicate(keyword: String?) -> NSPredicate {
         var predicates = [
             NSPredicate.predicateForNotesWithStatus(deleted: false)
         ]
 
-        if keyword.count > 0 {
+        if let keyword = keyword, keyword.count > 0 {
             predicates.append( NSPredicate.predicateForSearchText(searchText: keyword) )
         }
 
