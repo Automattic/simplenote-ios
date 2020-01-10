@@ -32,8 +32,8 @@
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
-                                        SPSearchDisplayControllerDelegate,
-                                        SPSearchControllerPresentationContextProvider,
+                                        SearchDisplayControllerDelegate,
+                                        SearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
 
@@ -47,7 +47,7 @@
 
 @property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, strong) SPSearchDisplayController             *searchController;
+@property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
@@ -318,7 +318,7 @@
     // Note: For performance reasons, we'll keep the Results always prebuilt. Same mechanism seen in UISearchController
     self.resultsViewController = [SPSearchResultsViewController new];
 
-    self.searchController = [[SPSearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
+    self.searchController = [[SearchDisplayController alloc] initWithResultsViewController:self.resultsViewController];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
@@ -349,7 +349,7 @@
 
 #pragma mark - SPSearchControllerDelegate methods
 
-- (BOOL)searchDisplayControllerShouldBeginSearch:(SPSearchDisplayController *)controller
+- (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
     if (bListViewIsEmpty) {
         return NO;
@@ -365,7 +365,7 @@
     return bSearching;
 }
 
-- (void)searchDisplayController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
+- (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     if (FeatureManager.advancedSearchEnabled) {
         [self.resultsViewController updateSearchResultsWithKeyword:keyword];
@@ -387,7 +387,7 @@
                                                   repeats:NO];
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
     // Ensure our custom NavigationBar + SearchBar are always on top (!)
     [self.view bringSubviewToFront:self.navigationBarBackground];
@@ -397,7 +397,7 @@
     [self.navigationBarBackground fadeIn];
 }
 
-- (void)searchDisplayControllerDidEndSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
     [self endSearching];
 }
@@ -405,12 +405,12 @@
 
 #pragma mark - SPSearchControllerPresenter methods
 
-- (UINavigationController *)navigationControllerForSearchDisplayController:(SPSearchDisplayController *)controller
+- (UINavigationController *)navigationControllerForSearchDisplayController:(SearchDisplayController *)controller
 {
     return self.navigationController;
 }
 
-- (UIViewController *)resultsParentControllerForSearchDisplayController:(SPSearchDisplayController *)controller
+- (UIViewController *)resultsParentControllerForSearchDisplayController:(SearchDisplayController *)controller
 {
     return self;
 }
