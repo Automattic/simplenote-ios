@@ -7,12 +7,6 @@
 @class SPBlurEffectView;
 @class SPSearchResultsController;
 
-typedef NS_ENUM(NSInteger, SPTagFilterType) {
-	SPTagFilterTypeUserTag = 0,
-	SPTagFilterTypeDeleted = 1,
-    SPTagFilterTypeUntagged = 2
-};
-
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
     NSTimer *searchTimer;
@@ -30,7 +24,6 @@ typedef NS_ENUM(NSInteger, SPTagFilterType) {
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
-@property (nonatomic, assign) SPTagFilterType                               tagFilterType;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
 

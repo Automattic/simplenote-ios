@@ -115,24 +115,17 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshResultsController() {
-        // TODO: Consolidate this into a single property!!
-
         let filter: ResultsFilter
 
         switch SPAppDelegate.shared().selectedTag {
         case kSimplenoteTrashKey:
             filter = .deleted
-            tagFilterType = .deleted
         case kSimplenoteUntaggedKey:
             filter = .untagged
-            tagFilterType = .untagged
-        case let tag:
-            if let tag = tag {
-                filter = .tag(name: tag)
-            } else {
-                filter = .all
-            }
-            tagFilterType = .userTag
+        case .some(let tag) where tag.count > 0:
+            filter = .tag(name: tag)
+        default:
+            filter = .all
         }
 
         resultsController.filter = filter
@@ -141,6 +134,13 @@ extension SPNoteListViewController {
         try? resultsController.performFetch()
 
         tableView.reloadData()
+    }
+
+    /// Indicates if the Deleted Notes are onScreen
+    ///
+    @objc
+    var isDeletedFilterActive: Bool {
+        return resultsController.filter == .deleted
     }
 }
 
@@ -151,7 +151,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard tableView.isUserInteractionEnabled,
-            tagFilterType != .deleted,
+            isDeletedFilterActive == false,
             let indexPath = tableView.indexPathForRow(at: location)
             else {
                 return nil

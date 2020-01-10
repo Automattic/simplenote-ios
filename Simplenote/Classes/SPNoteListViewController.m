@@ -238,7 +238,7 @@
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? self.emptyTrashButton : self.addButton;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : self.addButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -507,7 +507,7 @@
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     Note *note = [self.resultsController objectAtIndexPath:indexPath];
-    if (self.tagFilterType == SPTagFilterTypeDeleted) {
+    if (self.isDeletedFilterActive) {
         return [self rowActionsForDeletedNote:note];
     }
 
@@ -704,7 +704,7 @@
     [self refreshResultsController];
     [self refreshTitle];
 
-    BOOL isTrashOnScreen = self.tagFilterType == SPTagFilterTypeDeleted;
+    BOOL isTrashOnScreen = self.isDeletedFilterActive;
     self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
     self.tableView.allowsSelection = !isTrashOnScreen;
     
@@ -832,7 +832,7 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (self.tagFilterType == SPTagFilterTypeDeleted && waiting) {
+    if (self.isDeletedFilterActive && waiting) {
         return;
     }
 
