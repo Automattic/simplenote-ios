@@ -23,7 +23,7 @@ func ==(lhs: ResultsFilter, rhs: ResultsFilter) -> Bool {
 }
 
 
-// MARK: - SPSearchResultsController
+// MARK: - ResultsController
 //
 @objcMembers
 class SPSearchResultsController: NSObject {
@@ -95,6 +95,7 @@ class SPSearchResultsController: NSObject {
     init(viewContext: NSManagedObjectContext) {
         assert(viewContext.concurrencyType == .mainQueueConcurrencyType)
         self.viewContext = viewContext
+        super.init()
     }
 }
 
@@ -111,7 +112,7 @@ extension SPSearchResultsController {
 
     @objc(objectAtIndexPath:)
     func object(at indexPath: IndexPath) -> Note {
-        return resultsController.object(at: indexPath)
+        resultsController.object(at: indexPath)
     }
 
     func indexPath(forObject object: Note) -> IndexPath? {
