@@ -2,27 +2,6 @@ import Foundation
 import CoreData
 
 
-// MARK: - ResultsFilter
-//
-enum ResultsFilter {
-    case all
-    case deleted
-    case tag(name: String)
-    case untagged
-}
-
-func ==(lhs: ResultsFilter, rhs: ResultsFilter) -> Bool {
-    switch (lhs, rhs) {
-    case (.all, .all), (.deleted, .deleted), (.untagged, .untagged):
-        return true
-    case let (.tag(lName), .tag(rName)):
-        return lName == rName
-    default:
-        return false
-    }
-}
-
-
 // MARK: - ResultsController
 //
 @objcMembers
@@ -74,7 +53,7 @@ class ResultsController: NSObject {
 
     /// Active Filter
     ///
-    var filter: ResultsFilter = .all {
+    var filter: Filter = .all {
         didSet {
             if oldValue == filter {
                 return
@@ -205,7 +184,7 @@ private extension ResultsController {
 
     /// Returns a NSPredicate which will filter notes by a given keyword.
     ///
-    func predicate(keyword: String?, filter: ResultsFilter) -> NSPredicate {
+    func predicate(keyword: String?, filter: Filter) -> NSPredicate {
         var predicates = [
             NSPredicate.predicateForNotesWithStatus(deleted: filter == .deleted)
         ]
@@ -298,5 +277,28 @@ extension ResultsController {
             name = section.name
             objects = section.objects ?? []
         }
+    }
+
+    // MARK: - ResultsController.Filter
+    //
+    enum Filter {
+        case all
+        case deleted
+        case tag(name: String)
+        case untagged
+    }
+}
+
+
+// MARK: ResultsController.Filter Equatable
+//
+func ==(lhs: ResultsController.Filter, rhs: ResultsController.Filter) -> Bool {
+    switch (lhs, rhs) {
+    case (.all, .all), (.deleted, .deleted), (.untagged, .untagged):
+        return true
+    case let (.tag(lName), .tag(rName)):
+        return lName == rName
+    default:
+        return false
     }
 }
