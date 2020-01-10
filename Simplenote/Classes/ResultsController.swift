@@ -186,20 +186,12 @@ private extension ResultsController {
         }
 
         internalDelegate.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
-            guard let `self` = self else {
-                return
-            }
-
-            self.onDidChangeObject?(object, indexPath, type, newIndexPath)
+            self?.onDidChangeObject?(object, indexPath, type, newIndexPath)
         }
 
         internalDelegate.onDidChangeSection = { [weak self] (section, sectionIndex, type) in
-            guard let `self` = self else {
-                return
-            }
-
             let wrappedSection = SectionInfo(section: section)
-            self.onDidChangeSection?(wrappedSection, sectionIndex, type)
+            self?.onDidChangeSection?(wrappedSection, sectionIndex, type)
         }
     }
 
