@@ -32,8 +32,8 @@
                                         UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
-                                        SPSearchDisplayControllerDelegate,
-                                        SPSearchControllerPresentationContextProvider,
+                                        SearchDisplayControllerDelegate,
+                                        SearchControllerPresentationContextProvider,
                                         SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
 
@@ -46,7 +46,7 @@
 
 @property (nonatomic, strong) UITableView                           *tableView;
 
-@property (nonatomic, strong) SPSearchDisplayController             *searchController;
+@property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
@@ -313,7 +313,7 @@
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
 
-    self.searchController = [SPSearchDisplayController new];
+    self.searchController = [SearchDisplayController new];
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
@@ -344,7 +344,7 @@
 
 #pragma mark - SPSearchControllerDelegate methods
 
-- (BOOL)searchDisplayControllerShouldBeginSearch:(SPSearchDisplayController *)controller
+- (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
     if (bListViewIsEmpty) {
         return NO;
@@ -356,7 +356,7 @@
     return bSearching;
 }
 
-- (void)searchDisplayController:(SPSearchDisplayController *)controller updateSearchResults:(NSString *)keyword
+- (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     self.searchText = keyword;
     
@@ -372,12 +372,12 @@
                                                   repeats:NO];
 }
 
-- (void)searchDisplayControllerWillBeginSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
     // NO-OP
 }
 
-- (void)searchDisplayControllerDidEndSearch:(SPSearchDisplayController *)controller
+- (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
     [self endSearching];
 }
@@ -385,7 +385,7 @@
 
 #pragma mark - SPSearchControllerPresenter methods
 
-- (UINavigationController *)navigationControllerForSearchDisplayController:(SPSearchDisplayController *)controller
+- (UINavigationController *)navigationControllerForSearchDisplayController:(SearchDisplayController *)controller
 {
     return self.navigationController;
 }
