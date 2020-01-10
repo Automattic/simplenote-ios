@@ -16,6 +16,7 @@ extension SPNoteListViewController {
             fatalError("MainMOC should be already available")
         }
 
+        // TODO: Link between FRC <> TableView (FRC Delegate Methods)
         resultsController = SPSearchResultsController(viewContext: viewContext)
         try? resultsController.performFetch()
     }
@@ -114,6 +115,7 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshResultsController() {
+        // TODO: Consolidate this into a single property!!
         var selectedTag: String?
         switch SPAppDelegate.shared().selectedTag {
         case kSimplenoteTrashKey:
