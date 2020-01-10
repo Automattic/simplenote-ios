@@ -910,6 +910,14 @@
 			path = config;
 			sourceTree = "<group>";
 		};
+		B5059B2723C91C6600814B98 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				B5059B2123C8EF9300814B98 /* FetchedResultsControllerDelegateWrapper.swift */,
+			);
+			name = Internal;
+			sourceTree = "<group>";
+		};
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -990,9 +998,6 @@
 			children = (
 				B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */,
 				B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */,
-				B5476319238C4320000AFE0F /* ResultsController.swift */,
-				B5059B1F23C8EF3E00814B98 /* UITableView+ResultsController.swift */,
-				B5059B2123C8EF9300814B98 /* FetchedResultsControllerDelegateWrapper.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -1143,6 +1148,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B5059B2723C91C6600814B98 /* Internal */,
 				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
 				B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */,
@@ -1158,6 +1164,8 @@
 				F920265A2294661C0061B1DE /* BuildConfiguration.swift */,
 				74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */,
 				B5185CFA23427F2F0060145A /* SPSearchDisplayController.swift */,
+				B5476319238C4320000AFE0F /* ResultsController.swift */,
+				B5059B1F23C8EF3E00814B98 /* UITableView+ResultsController.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";

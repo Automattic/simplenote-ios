@@ -24,7 +24,6 @@ class FetchedResultsControllerDelegateWrapper: NSObject {
 }
 
 
-
 // MARK: - NSFetchedResultsControllerDelegate Conformance
 //
 extension FetchedResultsControllerDelegateWrapper: NSFetchedResultsControllerDelegate {
