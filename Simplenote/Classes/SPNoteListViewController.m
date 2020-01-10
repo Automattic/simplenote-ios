@@ -794,15 +794,6 @@
     [predicateList addObject: [NSPredicate predicateForNotesWithDeletedStatus:(self.tagFilterType == SPTagFilterTypeDeleted)]];
 
     switch (self.tagFilterType) {
-        case SPTagFilterTypeShared:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
-            break;
-        case SPTagFilterTypePinned:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned]];
-            break;
-        case SPTagFilterTypeUnread:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread]];
-            break;
         case SPTagFilterTypeUntagged:
             [predicateList addObject:[NSPredicate predicateForUntaggedNotes]];
             break;

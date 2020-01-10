@@ -9,10 +9,7 @@
 typedef NS_ENUM(NSInteger, SPTagFilterType) {
 	SPTagFilterTypeUserTag = 0,
 	SPTagFilterTypeDeleted = 1,
-	SPTagFilterTypeShared = 2,
-    SPTagFilterTypePinned = 3,
-    SPTagFilterTypeUnread = 4,
-    SPTagFilterTypeUntagged = 5
+    SPTagFilterTypeUntagged = 2
 };
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
