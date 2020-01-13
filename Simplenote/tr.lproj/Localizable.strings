@@ -172,7 +172,7 @@
 "Debug" = "Hata ayıklama";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Sil";
+"Trash-verb" = "Sil";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notları Sil";

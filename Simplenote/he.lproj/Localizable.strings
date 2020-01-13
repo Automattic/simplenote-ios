@@ -172,7 +172,7 @@
 "Debug" = "איתור באגים";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "מחיקה";
+"Trash-verb" = "מחיקה";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";

@@ -172,7 +172,7 @@
 "Debug" = "디버그";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "삭제";
+"Trash-verb" = "삭제";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";

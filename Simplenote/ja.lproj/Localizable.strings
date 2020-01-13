@@ -172,7 +172,7 @@
 "Debug" = "デバッグ";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "削除";
+"Trash-verb" = "削除";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "ノートを削除";

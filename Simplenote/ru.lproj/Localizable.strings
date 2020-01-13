@@ -172,7 +172,7 @@
 "Debug" = "Отладка";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Удалить";
+"Trash-verb" = "Удалить";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Удалить заметки";

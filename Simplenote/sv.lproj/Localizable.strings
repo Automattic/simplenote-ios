@@ -172,7 +172,7 @@
 "Debug" = "Felsök";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Ta bort";
+"Trash-verb" = "Ta bort";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Radera anteckningar";

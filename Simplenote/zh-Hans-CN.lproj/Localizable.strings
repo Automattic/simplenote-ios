@@ -172,7 +172,7 @@
 "Debug" = "调试";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Delete";
+"Trash-verb" = "Delete";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";

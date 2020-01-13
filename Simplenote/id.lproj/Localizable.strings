@@ -172,7 +172,7 @@
 "Debug" = "Debug";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Hapus";
+"Trash-verb" = "Hapus";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Hapus Catatan";
