@@ -1,3 +1,6 @@
+4.16
+-----
+ 
 4.15
 -----
 -   Simplenote just got brand new App Icons!
