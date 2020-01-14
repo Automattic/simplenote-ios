@@ -6,7 +6,7 @@ source 'https://rubygems.org' do
   gem 'octokit', "~> 4.0"
   gem 'dotenv'
   gem 'rubyzip', "~> 1.3"
-  gem 'fastlane', "2.133.0"
+  gem 'fastlane', '~> 2'
 end
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
