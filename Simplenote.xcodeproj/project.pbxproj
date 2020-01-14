@@ -1170,6 +1170,16 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
+		B5BE06F523CCFE2700597F50 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E29ADD791784905800E55842 /* SPNoteListViewController.h */,
+				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
+				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
 		B5C57A3F22E78EDF009166EA /* Themes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1444,7 @@
 			isa = PBXGroup;
 			children = (
 				B56A695122F9CCF400B90398 /* Onboarding */,
+				B5BE06F523CCFE2700597F50 /* List */,
 				B5476318238C430E000AFE0F /* Search */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
@@ -1444,9 +1455,6 @@
 				E215C791180B115C00AD36B5 /* SPNavigationController.m */,
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
-				E29ADD791784905800E55842 /* SPNoteListViewController.h */,
-				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
-				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
