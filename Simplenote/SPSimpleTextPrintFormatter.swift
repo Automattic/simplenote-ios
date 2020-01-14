@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SimplenoteSimpleTextPrintFormatter: UISimpleTextPrintFormatter {
+class SPSimpleTextPrintFormatter: UISimpleTextPrintFormatter {
     override init(text: String) {
         super.init(text: text)
         
