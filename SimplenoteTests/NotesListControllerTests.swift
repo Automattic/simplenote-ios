@@ -20,6 +20,7 @@ class NotesListControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         noteListController = NotesListController(viewContext: storage.viewContext)
+        noteListController.performFetch()
     }
 
     override func tearDown() {
