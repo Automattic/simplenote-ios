@@ -70,7 +70,7 @@ extension UITableView {
         }
     }
 
-    func resultsController<T: NSManagedObject>(didChangeSectionInfo sectionInfo: ResultsSectionInfo<T>, sectionIndex: Int, type: ResultsChangeType, animations: ResultsTableAnimations = .standard) {
+    func resultsController(didChangeSectionInfo sectionInfo: ResultsSectionInfo, sectionIndex: Int, type: ResultsChangeType, animations: ResultsTableAnimations = .standard) {
         let sectionIndexSet = IndexSet(integer: sectionIndex)
 
         switch type {
