@@ -8,7 +8,7 @@ extension NSPredicate {
     /// Returns a collection of NSPredicates that will match, as a compound, a given Search Text
     ///
     @objc(predicateForSearchText:)
-    static func predicateForSearchText(searchText: String) -> NSPredicate {
+    static func predicateForNotes(searchText: String) -> NSPredicate {
         let words = searchText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespaces)
         let output = words.map { NSPredicate(format: "content CONTAINS[c] %@", $0) }
 
@@ -18,7 +18,7 @@ extension NSPredicate {
     /// Returns a NSPredicate that will match Notes with the specified `deleted` flag
     ///
     @objc(predicateForNotesWithDeletedStatus:)
-    static func predicateForNotesWithStatus(deleted: Bool) -> NSPredicate {
+    static func predicateForNotes(deleted: Bool) -> NSPredicate {
         let status = NSNumber(booleanLiteral: deleted)
         return NSPredicate(format: "deleted == %@", status)
     }
@@ -26,15 +26,15 @@ extension NSPredicate {
     /// Returns a NSPredicate that will match a given Tag
     ///
     @objc
-    static func predicateForSystemTag(with name: String) -> NSPredicate {
-        return NSPredicate(format: "systemTags CONTAINS[c] %@", name)
+    static func predicateForNotes(systemTag: String) -> NSPredicate {
+        return NSPredicate(format: "systemTags CONTAINS[c] %@", systemTag)
     }
 
     /// Returns a NSPredicate that will match a given Tag
     ///
     @objc
-    static func predicateForTag(with name: String) -> NSPredicate {
-        let filtered = name.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "/", with: "\\/")
+    static func predicateForNotes(tag: String) -> NSPredicate {
+        let filtered = tag.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "/", with: "\\/")
 
         // Individual tags are surrounded by quotes, thus adding quotes to the selected tag ensures only the
         // correct notes are shown

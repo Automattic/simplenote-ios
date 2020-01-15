@@ -102,11 +102,11 @@ private extension SPSearchResultsController {
     ///
     func predicate(keyword: String) -> NSPredicate {
         var predicates = [
-            NSPredicate.predicateForNotesWithStatus(deleted: false)
+            NSPredicate.predicateForNotes(deleted: false)
         ]
 
         if keyword.count > 0 {
-            predicates.append( NSPredicate.predicateForSearchText(searchText: keyword) )
+            predicates.append( NSPredicate.predicateForNotes(searchText: keyword) )
         }
 
         return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
