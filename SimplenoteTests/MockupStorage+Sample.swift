@@ -6,7 +6,7 @@ import Foundation
 //
 extension MockupStorageManager {
 
-    /// Inserts a new (Sample) Note into the specified context.
+    /// Inserts a new (Sample) Note into the receiver's Main MOC
     ///
     @discardableResult
     func insertSampleNote() -> Note {
@@ -18,5 +18,16 @@ extension MockupStorageManager {
         note.creationDate = Date()
 
         return note
+    }
+
+    /// Inserts a new (Sample) Tag into the receiver's Main MOC
+    ///
+    @discardableResult
+    func insertSampleTag() -> Tag {
+        guard let tag = NSEntityDescription.insertNewObject(forEntityName: Tag.entityName, into: viewContext) as? Tag else {
+            fatalError()
+        }
+
+        return tag
     }
 }
