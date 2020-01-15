@@ -54,4 +54,12 @@ extension NSPredicate {
         let regex = "^()|(null)|(\\s*\\[\\s*]\\s*)$"
         return NSPredicate(format: "tags MATCHES[n] %@", regex)
     }
+
+    /// Returns a NSPredicate that will match Tags with a given name
+    ///
+    @objc
+    static func predicateForTag(name: String) -> NSPredicate {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return NSPredicate(format: "name CONTAINS[c] %@", trimmed)
+    }
 }
