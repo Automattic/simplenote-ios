@@ -4,8 +4,22 @@ import CoreData
 
 // MARK: - Aliases
 //
-typealias ResultsChangeType = NSFetchedResultsChangeType
 typealias ResultsSectionInfo = NSFetchedResultsSectionInfo
+
+
+// MARK: - Result Changes: Encapsulate Change Events Metadata
+//
+enum ResultsObjectChange {
+    case delete(indexPath: IndexPath)
+    case insert(indexPath: IndexPath)
+    case move(oldIndexPath: IndexPath, newIndexPath: IndexPath)
+    case update(indexPath: IndexPath)
+}
+
+enum ResultsSectionChange {
+    case delete(sectionIndex: Int)
+    case insert(sectionIndex: Int)
+}
 
 
 // MARK: - ResultsController
@@ -58,11 +72,11 @@ class ResultsController<T: NSManagedObject> {
 
     /// Closure to be executed whenever an Object is updated.
     ///
-    var onDidChangeObject: ((_ object: Any, _ indexPath: IndexPath?, _ type: ResultsChangeType, _ newIndexPath: IndexPath?) -> Void)?
+    var onDidChangeObject: ((_ change: ResultsObjectChange) -> Void)?
 
     /// Closure to be executed whenever an entire Section is updated.
     ///
-    var onDidChangeSection: ((_ sectionInfo: ResultsSectionInfo, _ sectionIndex: Int, _ type: ResultsChangeType) -> Void)?
+    var onDidChangeSection: ((_ change: ResultsSectionChange) -> Void)?
 
 
     /// Designated Initializer
@@ -159,12 +173,52 @@ private extension ResultsController {
             self?.onDidChangeContent?()
         }
 
-        internalDelegate.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
-            self?.onDidChangeObject?(object, indexPath, type, newIndexPath)
+        internalDelegate.onDidChangeObject = { [weak self] (_, type, indexPath, newIndexPath) in
+            let change: ResultsObjectChange
+
+            // Seriously, Apple?
+            // https://developer.apple.com/library/archive/releasenotes/iPhone/NSFetchedResultsChangeMoveReportedAsNSFetchedResultsChangeUpdate/index.html
+            let fixedType: NSFetchedResultsChangeType = {
+                guard type == .update && newIndexPath != nil && newIndexPath != indexPath else {
+                    return type
+                }
+                return .move
+            }()
+
+            switch (fixedType, indexPath, newIndexPath) {
+            case (.delete, .some(let indexPath), _):
+                change = .delete(indexPath: indexPath)
+
+            case (.insert, _, .some(let newIndexPath)):
+                change = .insert(indexPath: newIndexPath)
+
+            case (.move, .some(let oldIndexPath), .some(let newIndexPath)):
+                change = .move(oldIndexPath: oldIndexPath, newIndexPath: newIndexPath)
+
+            case (.update, .some(let indexPath), _):
+                change = .update(indexPath: indexPath)
+
+            default:
+                NSLog("☠️ [ResultsController] Unrecognized Row Change!")
+                return
+            }
+
+            self?.onDidChangeObject?(change)
         }
 
         internalDelegate.onDidChangeSection = { [weak self] (section, sectionIndex, type) in
-            self?.onDidChangeSection?(section, sectionIndex, type)
+            let change: ResultsSectionChange
+            switch type {
+            case .delete:
+                change = .delete(sectionIndex: sectionIndex)
+            case .insert:
+                change = .insert(sectionIndex: sectionIndex)
+            default:
+                NSLog("☠️ [ResultsController] Unrecognized Section Change!")
+                return
+            }
+
+            self?.onDidChangeSection?(change)
         }
     }
 }

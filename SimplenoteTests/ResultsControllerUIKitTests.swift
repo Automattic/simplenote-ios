@@ -40,12 +40,12 @@ class ResultsControllerUIKitTests: XCTestCase {
             self?.tableView.endUpdates()
         }
 
-        resultsController.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
-            self?.tableView.resultsControllerDidUpdateRow(at: indexPath, type: type, newIndexPath: newIndexPath)
+        resultsController.onDidChangeObject = { [weak self] change in
+            self?.tableView.resultsController(didChangeObject: change)
         }
 
-        resultsController.onDidChangeSection = { [weak self] (sectionInfo, sectionIndex, type) in
-            self?.tableView.resultsControllerDidUpdateSection(at: sectionIndex, type: type)
+        resultsController.onDidChangeSection = { [weak self] change in
+            self?.tableView.resultsController(didChangeSection: change)
         }
 
         try? resultsController.performFetch()
