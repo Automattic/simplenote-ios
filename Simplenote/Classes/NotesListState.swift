@@ -17,11 +17,7 @@ extension NotesListState {
     /// Indicates if the NotesList should display Note Entities for the current state
     ///
     var displaysNotes: Bool {
-        guard case .searching = self else {
-            return true
-        }
-
-        return false
+        return true
     }
 
     /// Indicates if the NotesList should display Tag Entities for the current state
