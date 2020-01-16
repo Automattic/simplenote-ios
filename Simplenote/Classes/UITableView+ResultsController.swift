@@ -32,7 +32,7 @@ struct ResultsTableAnimations {
 //
 extension UITableView {
 
-    func resultsController(didUpdateObject object: Any, indexPath: IndexPath?, type: ResultsChangeType, newIndexPath: IndexPath?, animations: ResultsTableAnimations = .standard) {
+    func resultsControllerDidUpdateRow(at indexPath: IndexPath?, type: ResultsChangeType, newIndexPath: IndexPath?, animations: ResultsTableAnimations = .standard) {
         // Seriously, Apple?
         // https://developer.apple.com/library/archive/releasenotes/iPhone/NSFetchedResultsChangeMoveReportedAsNSFetchedResultsChangeUpdate/index.html
         //
@@ -70,7 +70,7 @@ extension UITableView {
         }
     }
 
-    func resultsController(didChangeSectionInfo sectionInfo: ResultsSectionInfo, sectionIndex: Int, type: ResultsChangeType, animations: ResultsTableAnimations = .standard) {
+    func resultsControllerDidUpdateSection(at sectionIndex: Int, type: ResultsChangeType, animations: ResultsTableAnimations = .standard) {
         let sectionIndexSet = IndexSet(integer: sectionIndex)
 
         switch type {
