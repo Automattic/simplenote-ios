@@ -32,54 +32,43 @@ struct ResultsTableAnimations {
 //
 extension UITableView {
 
-    func resultsControllerDidChangeRow(at indexPath: IndexPath?, type: ResultsChangeType, newIndexPath: IndexPath?, animations: ResultsTableAnimations = .standard) {
-        // Seriously, Apple?
-        // https://developer.apple.com/library/archive/releasenotes/iPhone/NSFetchedResultsChangeMoveReportedAsNSFetchedResultsChangeUpdate/index.html
-        //
-        let fixedType: ResultsChangeType = {
-            guard type == .update && newIndexPath != nil && newIndexPath != indexPath else {
-                return type
+    func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: @escaping (Bool) -> Void) {
+        performBatchUpdates({
+            for change in objectChanges {
+                self.resultsController(didChangeObject: change)
             }
 
-            return .move
-        }()
-
-        switch fixedType {
-        case .delete:
-            if let indexPath = indexPath {
-                deleteRows(at: [indexPath], with: animations.delete)
-            }
-        case .insert:
-            if let newIndexPath = newIndexPath {
-                insertRows(at: [newIndexPath], with: animations.insert)
-            }
-        case .move:
-            if let oldIndexPath = indexPath {
-                deleteRows(at: [oldIndexPath], with: animations.move)
+            for change in sectionChanges {
+                self.resultsController(didChangeSection: change)
             }
 
-            if let newIndexPath = newIndexPath {
-                insertRows(at: [newIndexPath], with: animations.move)
-            }
-        case .update:
-            if let indexPath = indexPath {
-                reloadRows(at: [indexPath], with: animations.update)
-            }
-        @unknown default:
-            fatalError()
+        }, completion: onCompletion)
+    }
+
+    func resultsController(didChangeObject rowChange: ResultsObjectChange, animations: ResultsTableAnimations = .standard) {
+        switch rowChange {
+        case .delete(let indexPath):
+            deleteRows(at: [indexPath], with: animations.delete)
+
+        case .insert(let newIndexPath):
+            insertRows(at: [newIndexPath], with: animations.insert)
+
+        case .move(let oldIndexPath, let newIndexPath):
+            deleteRows(at: [oldIndexPath], with: animations.move)
+            insertRows(at: [newIndexPath], with: animations.move)
+
+        case .update(let indexPath):
+            reloadRows(at: [indexPath], with: animations.update)
         }
     }
 
-    func resultsControllerDidChangeSection(at sectionIndex: Int, type: ResultsChangeType, animations: ResultsTableAnimations = .standard) {
-        let sectionIndexSet = IndexSet(integer: sectionIndex)
+    func resultsController(didChangeSection sectionChange: ResultsSectionChange, animations: ResultsTableAnimations = .standard) {
+        switch sectionChange {
+        case .delete(let sectionIndex):
+            deleteSections(IndexSet(integer: sectionIndex), with: animations.delete)
 
-        switch type {
-        case .delete:
-            deleteSections(sectionIndexSet, with: animations.delete)
-        case .insert:
-            insertSections(sectionIndexSet, with: animations.insert)
-        default:
-            NSLog("## ResultsController: Unsupported Section Event: \(type)")
+        case .insert(let sectionIndex):
+            insertSections(IndexSet(integer: sectionIndex), with: animations.insert)
         }
     }
 }
