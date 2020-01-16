@@ -44,7 +44,7 @@ class ResultsControllerTests: XCTestCase {
 
         try? resultsController.performFetch()
         XCTAssertEqual(resultsController.sections.count, 1)
-        XCTAssertEqual(resultsController.sections.first?.objects.count, 0)
+        XCTAssertEqual(resultsController.sections.first?.objects?.count, 0)
     }
 
 
@@ -58,7 +58,7 @@ class ResultsControllerTests: XCTestCase {
         try? resultsController.performFetch()
 
         XCTAssertEqual(resultsController.sections.count, 1)
-        XCTAssertEqual(resultsController.sections.first?.objects.count, 1)
+        XCTAssertEqual(resultsController.sections.first?.objects?.count, 1)
     }
 
 
@@ -72,7 +72,7 @@ class ResultsControllerTests: XCTestCase {
         try? viewContext.save()
 
         XCTAssertEqual(resultsController.sections.count, 1)
-        XCTAssertEqual(resultsController.sections.first?.objects.count, 1)
+        XCTAssertEqual(resultsController.sections.first?.objects?.count, 1)
     }
 
 
