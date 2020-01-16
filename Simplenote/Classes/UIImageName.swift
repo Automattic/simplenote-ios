@@ -32,6 +32,7 @@ enum UIImageName: Int, CaseIterable {
     case settings
     case share
     case shared
+    case sortOrder
     case tag
     case tagViewDeletion
     case tags
@@ -104,6 +105,8 @@ extension UIImageName {
             return "icon_share"
         case .shared:
             return "icon_shared"
+        case .sortOrder:
+            return "icon_sort_order"
         case .tag:
             return "icon_tag"
         case .tagViewDeletion:
