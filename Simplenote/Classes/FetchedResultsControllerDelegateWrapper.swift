@@ -16,7 +16,7 @@ class FetchedResultsControllerDelegateWrapper: NSObject {
 
     /// Relays FRC's Delegate: `didChange anObject`
     ///
-    var onDidChangeObject: ((_ object: Any, _ indexPath: IndexPath?, _ type: NSFetchedResultsChangeType, _ newIndexPath: IndexPath?) -> Void)?
+    var onDidChangeObject: ((_ object: Any, _ type: NSFetchedResultsChangeType, _ indexPath: IndexPath?, _ newIndexPath: IndexPath?) -> Void)?
 
     /// Relays FRC's Delegate: `didChange sectionInfo`
     ///
@@ -41,7 +41,7 @@ extension FetchedResultsControllerDelegateWrapper: NSFetchedResultsControllerDel
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        onDidChangeObject?(anObject, indexPath, type, newIndexPath)
+        onDidChangeObject?(anObject, type, indexPath, newIndexPath)
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
