@@ -11,15 +11,15 @@ class NotesListController: NSObject {
 
     /// Notes Controller
     ///
-    private lazy var notesController: ResultsController<Note> = {
-        ResultsController<Note>(viewContext: viewContext, matching: state.predicateForNotes(filter: filter), sortedBy: sortMode.descriptorsForNotes)
-    }()
+    private lazy var notesController = ResultsController<Note>(viewContext: viewContext,
+                                                               matching: state.predicateForNotes(filter: filter),
+                                                               sortedBy: sortMode.descriptorsForNotes)
 
     /// Tags Controller
     ///
-    private lazy var tagsController: ResultsController<Tag> = {
-        ResultsController<Tag>(viewContext: viewContext, matching: state.predicateForTags(), sortedBy: sortMode.descriptorsForTags)
-    }()
+    private lazy var tagsController = ResultsController<Tag>(viewContext: viewContext,
+                                                             matching: state.predicateForTags(),
+                                                             sortedBy: sortMode.descriptorsForTags)
 
     /// FSM Current State
     ///
