@@ -177,9 +177,6 @@
 		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
 		B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */; };
 		B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */; };
-		B547631A238C4320000AFE0F /* SPSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476319238C4320000AFE0F /* SPSearchResultsController.swift */; };
-		B54CDD62237F437100234520 /* SPSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */; };
-		B54CDD64237F43AD00234520 /* SPSearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
@@ -472,9 +469,6 @@
 		B546BE96234E64F200A126DA /* SPTagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagListViewCell.xib; path = Classes/SPTagListViewCell.xib; sourceTree = "<group>"; };
 		B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagHeaderView.swift; path = Classes/SPTagHeaderView.swift; sourceTree = "<group>"; };
 		B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagHeaderView.xib; path = Classes/SPTagHeaderView.xib; sourceTree = "<group>"; };
-		B5476319238C4320000AFE0F /* SPSearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSearchResultsController.swift; path = Classes/SPSearchResultsController.swift; sourceTree = "<group>"; };
-		B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSearchResultsViewController.swift; path = Classes/SPSearchResultsViewController.swift; sourceTree = "<group>"; };
-		B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSearchResultsViewController.xib; path = Classes/SPSearchResultsViewController.xib; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -1001,16 +995,6 @@
 			name = TableViewCells;
 			sourceTree = "<group>";
 		};
-		B5476318238C430E000AFE0F /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				B54CDD61237F437100234520 /* SPSearchResultsViewController.swift */,
-				B54CDD63237F43AD00234520 /* SPSearchResultsViewController.xib */,
-				B5476319238C4320000AFE0F /* SPSearchResultsController.swift */,
-			);
-			name = Search;
-			sourceTree = "<group>";
-		};
 		B550F92F22BA643800091939 /* Siri */ = {
 			isa = PBXGroup;
 			children = (
@@ -1450,7 +1434,6 @@
 			isa = PBXGroup;
 			children = (
 				B56A695122F9CCF400B90398 /* Onboarding */,
-				B5476318238C430E000AFE0F /* Search */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
@@ -1701,7 +1684,6 @@
 			files = (
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
-				B54CDD64237F43AD00234520 /* SPSearchResultsViewController.xib in Resources */,
 				B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */,
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
@@ -2044,7 +2026,6 @@
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
-				B547631A238C4320000AFE0F /* SPSearchResultsController.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
@@ -2075,7 +2056,6 @@
 				B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */,
 				46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */,
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
-				B54CDD62237F437100234520 /* SPSearchResultsViewController.swift in Sources */,
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
