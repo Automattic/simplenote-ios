@@ -41,11 +41,11 @@ class ResultsControllerUIKitTests: XCTestCase {
         }
 
         resultsController.onDidChangeObject = { [weak self] (object, indexPath, type, newIndexPath) in
-            self?.tableView.resultsControllerDidUpdateRow(at: indexPath, type: type, newIndexPath: newIndexPath)
+            self?.tableView.resultsControllerDidChangeRow(at: indexPath, type: type, newIndexPath: newIndexPath)
         }
 
         resultsController.onDidChangeSection = { [weak self] (sectionInfo, sectionIndex, type) in
-            self?.tableView.resultsControllerDidUpdateSection(at: sectionIndex, type: type)
+            self?.tableView.resultsControllerDidChangeSection(at: sectionIndex, type: type)
         }
 
         try? resultsController.performFetch()
