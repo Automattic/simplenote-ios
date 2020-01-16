@@ -2,6 +2,12 @@ import Foundation
 import CoreData
 
 
+// MARK: - Aliases
+//
+typealias ResultsChangeType = NSFetchedResultsChangeType
+typealias ResultsSectionInfo = NSFetchedResultsSectionInfo
+
+
 // MARK: - ResultsController
 //
 class ResultsController<T: NSManagedObject> {
@@ -56,7 +62,7 @@ class ResultsController<T: NSManagedObject> {
 
     /// Closure to be executed whenever an entire Section is updated.
     ///
-    var onDidChangeSection: ((_ sectionInfo: ResultsSectionInfo<T>, _ sectionIndex: Int, _ type: ResultsChangeType) -> Void)?
+    var onDidChangeSection: ((_ sectionInfo: ResultsSectionInfo, _ sectionIndex: Int, _ type: ResultsChangeType) -> Void)?
 
 
     /// Designated Initializer
@@ -126,14 +132,8 @@ extension ResultsController {
 
     /// Returns an array of SectionInfo Entitites.
     ///
-    var sections: [ResultsSectionInfo<T>] {
-        guard let rawSections = resultsController.sections else {
-            return []
-        }
-
-        return rawSections.map {
-            ResultsSectionInfo<T>(section: $0)
-        }
+    var sections: [ResultsSectionInfo] {
+        resultsController.sections ?? []
     }
 }
 
@@ -164,41 +164,7 @@ private extension ResultsController {
         }
 
         internalDelegate.onDidChangeSection = { [weak self] (section, sectionIndex, type) in
-            let wrappedSection = ResultsSectionInfo<T>(section: section)
-            self?.onDidChangeSection?(wrappedSection, sectionIndex, type)
+            self?.onDidChangeSection?(section, sectionIndex, type)
         }
-    }
-}
-
-
-// MARK: - ResultsChangeType
-//
-typealias ResultsChangeType = NSFetchedResultsChangeType
-
-
-// MARK: - ResultsSectionInfo
-//
-class ResultsSectionInfo<T: NSManagedObject> {
-
-    /// Name of the section
-    ///
-    let name: String
-
-    /// Number of objects in the current section
-    ///
-    var numberOfObjects: Int {
-        objects.count
-    }
-
-    /// Returns the array of (ReadOnly) objects in the section.
-    ///
-    let objects: [T]
-
-
-    /// Designated Initializer
-    ///
-    init(section: NSFetchedResultsSectionInfo) {
-        name = section.name
-        objects = section.objects as? [T] ?? []
     }
 }
