@@ -28,6 +28,9 @@ class NotesListControllerTests: XCTestCase {
         storage.reset()
     }
 
+
+    // MARK: - Tests: Filters
+
     /// Verifies that the Filter property properly filters out non matching entities
     ///
     func testListControllerProperlyAppliesFiltersToNotesWhenInResultsMode() {
@@ -46,6 +49,9 @@ class NotesListControllerTests: XCTestCase {
         noteListController.performFetch()
         XCTAssertEqual(noteListController.numberOfObjects, 1)
     }
+
+
+    // MARK: - Tests: Sorting
 
     /// Verifies that the SortMode property properly applies the specified order mode to the retrieved entities
     ///
@@ -66,6 +72,9 @@ class NotesListControllerTests: XCTestCase {
         }
     }
 
+
+    // MARK: - Tests: Sections
+
     /// Verifies that the Tag Entities aren't fetched when in Results Mode
     ///
     func testListControllerIgnoresTagsEntitiesWhenInResultsMode() {
@@ -82,9 +91,12 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.sections[0].numberOfObjects, notes.count)
     }
 
+
+    // MARK: - Tests: Search
+
     /// Verifies that the Tag Entities are fetched when in search mode
     ///
-    func testListControllerRetrievesTagEntitiesWhenInSearchMode() {
+    func testSearchModeYieldsTwoSectionsWithMatchingEntities() {
         storage.insertSampleTag(name: "12345")
         storage.insertSampleNote(contents: "12345")
 
@@ -98,6 +110,17 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.sections[0].numberOfObjects, 1)
         XCTAssertEqual(noteListController.sections[1].numberOfObjects, 1)
     }
+
+    /// Verifies that there are always *two* sections when in search mode, even when there are no objects
+    ///
+    func testSearchModeYieldsTwoSections() {
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Something")
+
+        XCTAssertEqual(noteListController.numberOfObjects, 0)
+        XCTAssertEqual(noteListController.sections.count, 2)
+    }
+
 
     /// Verifies that the `endSearch` switches the NotesList back to a single section
     ///
@@ -115,6 +138,9 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.numberOfObjects, notes.count)
 
     }
+
+
+    // MARK: - Tests: `object(at:)`
 
     /// Verifies that `object(at: IndexPath)` returns the proper Note when in results mode
     ///
@@ -165,6 +191,9 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(note.content, "055")
     }
 
+
+    // MARK: - Tests: `indexPath(forObject:)`
+
     /// Verifies that `indexPath(forObject:)` returns the proper Note when in Results Mode
     ///
     func testIndexPathForObjectReturnsTheProperPathWhenInResultsMode() {
@@ -196,6 +225,203 @@ class NotesListControllerTests: XCTestCase {
             XCTAssertEqual(noteListController.indexPath(forObject: note), IndexPath(row: row, section: 1))
         }
     }
+
+
+    // MARK: - Tests: onBatchChanges
+
+    /// Verifies that `onBatchChanges` is never called for **Tags** in the following scenarios:
+    ///
+    ///     - Mode: Results
+    ///     - OP: Insert / Update / Delete
+    ///
+    func testOnBatchChangesDoesntRunForInsertUpdateNorDeleteOpsOverTagsWhenInResultsMode() {
+        noteListController.onBatchChanges = { (_, _) in
+            XCTFail()
+        }
+
+        let tag = storage.insertSampleTag()
+        storage.save()
+
+        tag.name = "Updated"
+        storage.save()
+
+        storage.delete(tag)
+        storage.save()
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Notes** in the following scenarios
+    ///
+    ///     - Mode: Results
+    ///     - OP: Insert
+    ///
+    func testOnBatchChangesDoesRunForNoteInsertionsWhenInResultsMode() {
+        expectBatchChanges(objectChanges: [
+            .insert(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        storage.insertSampleNote()
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Notes** in the following scenarios
+    ///
+    ///     - Mode: Results
+    ///     - OP: Deletion
+    ///
+    func testOnBatchChangesDoesRunForNoteDeletionsWhenInResultsMode() {
+        let note = storage.insertSampleNote()
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .delete(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        storage.delete(note)
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Notes** in the following scenarios
+    ///
+    ///     - Mode: Results
+    ///     - OP: Update
+    ///
+    func testOnBatchChangesDoesRunForNoteUpdatesWhenInResultsMode() {
+        let note = storage.insertSampleNote()
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .update(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        note.content = "Updated"
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Tag** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Insert
+    ///
+    func testOnBatchChangesDoesRunForTagInsertionsWhenInSearchMode() {
+        expectBatchChanges(objectChanges: [
+            .insert(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        storage.insertSampleTag(name: "Test")
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Tag** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Update
+    ///
+    func testOnBatchChangesDoesRunForTagUpdatesWhenInSearchMode() {
+        let tag = storage.insertSampleTag(name: "Test")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .update(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        tag.name = "Test Updated"
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Tag** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Delete
+    ///
+    func testOnBatchChangesDoesRunForTagDeletionWhenInSearchMode() {
+        let tag = storage.insertSampleTag(name: "Test")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .delete(indexPath: IndexPath(row: 0, section: 0))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        storage.delete(tag)
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Note** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Insert
+    ///
+    func testOnBatchChangesDoesRunForNoteInsertionsWhenInSearchModeAndTheSectionIndexIsProperlyCorrected() {
+        expectBatchChanges(objectChanges: [
+            .insert(indexPath: IndexPath(row: 0, section: 1))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        storage.insertSampleNote(contents: "Test")
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Note** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Update
+    ///
+    func testOnBatchChangesDoesRunForNoteUpdatesWhenInSearchModeAndTheSectionIndexIsProperlyCorrected() {
+        let note = storage.insertSampleNote(contents: "Test")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .update(indexPath: IndexPath(row: 0, section: 1))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        note.content = "Test Updated"
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` runs for **Note** in the following scenarios
+    ///
+    ///     - Mode: Search
+    ///     - OP: Delete
+    ///
+    func testOnBatchChangesDoesRunForNoteDeletionWhenInSearchModeAndTheSectionIndexIsProperlyCorrected() {
+        let note = storage.insertSampleNote(contents: "Test")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .delete(indexPath: IndexPath(row: 0, section: 1))
+        ])
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Test")
+        storage.delete(note)
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
 }
 
 
@@ -220,5 +446,28 @@ private extension NotesListControllerTests {
         }
 
         return (notes, tags, expected)
+    }
+
+    /// Expects the specified Object and Section changes to be relayed via `onBatchChanges`
+    ///
+    @discardableResult
+    func expectBatchChanges(objectChanges: [ResultsObjectChange] = [], sectionChanges: [ResultsSectionChange] = []) -> XCTestExpectation {
+        let expectation = self.expectation(description: "Waiting...")
+
+        noteListController.onBatchChanges = { (receivedObjectChanges, receivedSectionChanges) in
+            for (index, change) in objectChanges.enumerated() {
+                XCTAssertEqual(change, receivedObjectChanges[index])
+            }
+
+            for (index, change) in sectionChanges.enumerated() {
+                XCTAssertEqual(change, receivedSectionChanges[index])
+            }
+
+            XCTAssertEqual(objectChanges.count, receivedObjectChanges.count)
+            XCTAssertEqual(sectionChanges.count, receivedSectionChanges.count)
+            expectation.fulfill()
+        }
+
+        return expectation
     }
 }
