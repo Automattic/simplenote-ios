@@ -136,7 +136,24 @@ class NotesListControllerTests: XCTestCase {
 
         noteListController.endSearch()
         XCTAssertEqual(noteListController.numberOfObjects, notes.count)
+    }
 
+    /// Verifies that the SearchMode disregards active Filters
+    ///
+    func testSearchModeYieldsGlobalResultsDisregardingActiveFilter() {
+        let note = storage.insertSampleNote(contents: "Something Here")
+        storage.save()
+
+        noteListController.filter = .deleted
+        noteListController.performFetch()
+
+        XCTAssertEqual(noteListController.numberOfObjects, 0)
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "Here")
+
+        let retrievedNote = noteListController.object(at: IndexPath(row: 0, section: 1)) as! Note
+        XCTAssertEqual(retrievedNote, note)
     }
 
 
@@ -421,6 +438,23 @@ class NotesListControllerTests: XCTestCase {
         storage.save()
 
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+    /// Verifies that `onBatchChanges` does not relay duplicated Changesets
+    ///
+    func testOnBatchChangesDoesNotRelayDuplicatedEvents() {
+        storage.insertSampleNote(contents: "A")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .insert(indexPath: IndexPath(row: 1, section: 0))
+        ])
+
+        storage.insertSampleNote(contents: "B")
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+
     }
 }
 
