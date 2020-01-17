@@ -30,6 +30,33 @@ extension NotesListState {
         return true
     }
 
+    /// Returns the SectionIndex for Notes, in the current state
+    ///
+    var sectionIndexForNotes: Int {
+        switch self {
+        case .searching:
+            return 1
+        default:
+            return .zero
+        }
+    }
+
+    /// Returns the SectionIndex for Tags, in the current state
+    ///
+    var sectionIndexForTags: Int {
+        return .zero
+    }
+
+    /// Indicates if we should adjust SectionIndexes for ResultsController Changes entities
+    ///
+    var requiresNoteSectionIndexAdjustments: Bool {
+        guard case .searching = self else {
+            return false
+        }
+
+        return true
+    }
+
     /// Returns a NSPredicate to filter out Notes in the current state, with the specified Filter
     ///
     func predicateForNotes(filter: NotesListFilter) -> NSPredicate? {
