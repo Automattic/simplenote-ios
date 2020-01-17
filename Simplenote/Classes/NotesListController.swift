@@ -148,15 +148,6 @@ extension NotesListController {
         }
     }
 
-    /// Returns the Fetched Note with the specified SimperiumKey (if any)
-    ///
-    @objc
-    func note(forSimperiumKey key: String) -> Note? {
-        return notesController.fetchedObjects.first { note in
-            note.simperiumKey == key
-        }
-    }
-
     /// Reloads all of the FetchedObjects, as needed
     ///
     @objc
@@ -198,6 +189,21 @@ extension NotesListController {
     @objc
     func endSearch() {
         state = .results
+    }
+}
+
+
+// MARK: - Convenience APIs
+//
+extension NotesListController {
+
+    /// Returns the Fetched Note with the specified SimperiumKey (if any)
+    ///
+    @objc
+    func note(forSimperiumKey key: String) -> Note? {
+        return notesController.fetchedObjects.first { note in
+            note.simperiumKey == key
+        }
     }
 }
 
