@@ -21,6 +21,16 @@ class NotesListController: NSObject {
         ResultsController<Tag>(viewContext: viewContext, matching: state.predicateForTags(), sortedBy: sortMode.descriptorsForTags)
     }()
 
+    /// Notes Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
+    ///
+    private var noteObjectChanges = [ResultsObjectChange]()
+    private var noteSectionChanges = [ResultsSectionChange]()
+
+    /// Tags Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
+    ///
+    private var tagObjectChanges = [ResultsObjectChange]()
+    private var tagSectionChanges = [ResultsSectionChange]()
+
     /// FSM Current State
     ///
     private(set) var state: NotesListState = .results {
@@ -57,12 +67,19 @@ class NotesListController: NSObject {
         }
     }
 
+    /// Callback to be executed whenever the NotesController or TagsController were updated
+    /// - NOTE: This only happens as long as the current state must render such entities!
+    ///
+    var onBatchChanges: ((_ rowChanges: [ResultsObjectChange], _ sectionChanges: [ResultsSectionChange]) -> Void)?
+
 
     /// Designated Initializer
     ///
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
         super.init()
+        startListeningToNoteEvents()
+        startListeningToTagEvents()
     }
 }
 
@@ -102,9 +119,9 @@ extension NotesListController {
         switch state {
         case .results:
             return notesController.object(at: indexPath)
-        case .searching where SearchSections(rawValue: indexPath.section) == .tags:
+        case .searching where state.sectionIndexForTags == indexPath.section:
             return tagsController.fetchedObjects[indexPath.row]
-        case .searching where SearchSections(rawValue: indexPath.section) == .notes:
+        case .searching where state.sectionIndexForNotes == indexPath.section:
             return notesController.fetchedObjects[indexPath.row];
         default:
             return nil
@@ -120,11 +137,11 @@ extension NotesListController {
             return notesController.indexPath(forObject: note)
         case (.searching, let tag as Tag):
             return tagsController.fetchedObjects.firstIndex(of: tag).map { row in
-                IndexPath(row: row, section: SearchSections.tags.rawValue)
+                IndexPath(row: row, section: state.sectionIndexForTags)
             }
         case (.searching, let note as Note):
             return notesController.fetchedObjects.firstIndex(of: note).map { row in
-                IndexPath(row: row, section: SearchSections.notes.rawValue)
+                IndexPath(row: row, section: state.sectionIndexForNotes)
             }
         default:
             return nil
@@ -144,6 +161,10 @@ extension NotesListController {
     ///
     @objc
     func performFetch() {
+// TODO: Does refetching cause changes?
+        removePendingTagChanges()
+        removePendingNoteChanges()
+
         if state.displaysNotes {
             try? notesController.performFetch()
         }
@@ -163,7 +184,7 @@ extension NotesListController {
     ///
     @objc
     func beginSearch() {
-        // TODO: we should actually switch to `state = .history`
+// TODO: we should actually switch to `state = .history`
     }
 
     /// Refreshes the FetchedObjects so that they match a given Keyword
@@ -186,7 +207,7 @@ extension NotesListController {
 }
 
 
-// MARK: - Private API
+// MARK: - Private API: ResultsController Refreshing
 //
 private extension NotesListController {
 
@@ -208,9 +229,76 @@ private extension NotesListController {
 }
 
 
-// MARK: - SearchSections Constants
+// MARK: - Private API: Realtime Refreshing
 //
-private enum SearchSections: Int {
-    case tags = 0
-    case notes = 1
+private extension NotesListController {
+
+    func startListeningToNoteEvents() {
+        notesController.onDidChangeObject = { [weak self] change in
+            self?.noteObjectChanges.append( change )
+        }
+
+        notesController.onDidChangeSection = { [weak self] change in
+            self?.noteSectionChanges.append( change )
+        }
+
+        notesController.onDidChangeContent = { [weak self] in
+            self?.notesControllerDidChange()
+        }
+    }
+
+    func startListeningToTagEvents() {
+        tagsController.onDidChangeObject = { [weak self] change in
+            self?.tagObjectChanges.append( change )
+        }
+
+        tagsController.onDidChangeSection = { [weak self] change in
+            self?.tagSectionChanges.append( change )
+        }
+
+        tagsController.onDidChangeContent = { [weak self] in
+            self?.tagsControllerDidChange()
+        }
+    }
+
+    func notesControllerDidChange() {
+        if state.displaysNotes {
+            let (objectChanges, sectionChanges) = adjustedNoteChanges(forState: state)
+            onBatchChanges?(objectChanges, sectionChanges)
+        }
+
+        removePendingNoteChanges()
+    }
+
+    func tagsControllerDidChange() {
+        if state.displaysTags {
+            onBatchChanges?(tagObjectChanges, tagSectionChanges)
+        }
+
+        removePendingTagChanges()
+    }
+
+    func removePendingTagChanges() {
+        tagObjectChanges = []
+        tagSectionChanges = []
+    }
+
+    func removePendingNoteChanges() {
+        noteObjectChanges = []
+        noteSectionChanges = []
+    }
+
+    /// When in Search Mode, we'll need to mix Tags + Notes. There's one slight problem: NSFetchedResultsController Is completely unaware that the
+    /// actual SectionIndex for Notes is (1) rather than (0). In that case we'll need to re-map Object and Section changes.
+    ///
+    func adjustedNoteChanges(forState state: NotesListState) -> ([ResultsObjectChange], [ResultsSectionChange]) {
+        guard state.requiresNoteSectionIndexAdjustments else {
+            return (noteObjectChanges, noteSectionChanges)
+        }
+
+        let transposedObjectChanges = noteObjectChanges.map { $0.transpose(toSection: state.sectionIndexForNotes) }
+        let transposedSectionChanges = noteSectionChanges.map { $0.transpose(toSection: state.sectionIndexForNotes) }
+
+        return (transposedObjectChanges, transposedSectionChanges)
+    }
 }
