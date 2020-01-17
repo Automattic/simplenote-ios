@@ -3,7 +3,7 @@ import Foundation
 
 // MARK: - ResultsSectionChange
 //
-enum ResultsSectionChange {
+enum ResultsSectionChange: Equatable {
     case delete(sectionIndex: Int)
     case insert(sectionIndex: Int)
 }
@@ -22,5 +22,19 @@ extension ResultsSectionChange {
         case .insert:
             return .insert(sectionIndex: section)
         }
+    }
+}
+
+
+// MARK: - Equality
+//
+func ==(lhs: ResultsSectionChange, rhs: ResultsSectionChange) -> Bool {
+    switch (lhs, rhs) {
+    case (.delete(let lSection), .delete(let rSection)):
+        return lSection == rSection
+    case (.insert(let lSection), .insert(let rSection)):
+        return lSection == rSection
+    default:
+        return false
     }
 }

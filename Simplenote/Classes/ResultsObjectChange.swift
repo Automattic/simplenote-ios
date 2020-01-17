@@ -3,7 +3,7 @@ import Foundation
 
 // MARK: - ResultsObjectChange
 //
-enum ResultsObjectChange {
+enum ResultsObjectChange: Equatable {
     case delete(indexPath: IndexPath)
     case insert(indexPath: IndexPath)
     case move(oldIndexPath: IndexPath, newIndexPath: IndexPath)
@@ -32,5 +32,23 @@ extension ResultsObjectChange {
         case .update(let path):
             return .update(indexPath: path.transpose(toSection: section))
         }
+    }
+}
+
+
+// MARK: - Equality
+//
+func ==(lhs: ResultsObjectChange, rhs: ResultsObjectChange) -> Bool {
+    switch (lhs, rhs) {
+    case (.delete(let lPath), .delete(let rPath)):
+        return lPath == rPath
+    case (.insert(let lPath), .insert(let rPath)):
+        return lPath == rPath
+    case (.move(let lOldPath, let lNewPath), .move(let rOldPath, let rNewPath)):
+        return lOldPath == rOldPath && lNewPath == rNewPath
+    case (.update(let lPath), .update(let rPath)):
+        return lPath == rPath
+    default:
+        return false
     }
 }
