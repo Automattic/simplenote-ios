@@ -7,21 +7,6 @@ import CoreData
 typealias ResultsSectionInfo = NSFetchedResultsSectionInfo
 
 
-// MARK: - Result Changes: Encapsulate Change Events Metadata
-//
-enum ResultsObjectChange {
-    case delete(indexPath: IndexPath)
-    case insert(indexPath: IndexPath)
-    case move(oldIndexPath: IndexPath, newIndexPath: IndexPath)
-    case update(indexPath: IndexPath)
-}
-
-enum ResultsSectionChange {
-    case delete(sectionIndex: Int)
-    case insert(sectionIndex: Int)
-}
-
-
 // MARK: - ResultsController
 //
 class ResultsController<T: NSManagedObject> {
