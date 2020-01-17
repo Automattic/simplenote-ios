@@ -191,10 +191,6 @@ extension NotesListController {
     ///
     @objc
     func refreshSearchResults(keyword: String) {
-        guard !keyword.isEmpty else {
-            return
-        }
-
         state = .searching(keyword: keyword)
     }
 
