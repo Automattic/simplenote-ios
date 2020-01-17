@@ -320,6 +320,26 @@ class NotesListControllerTests: XCTestCase {
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
+    /// Verifies that `onBatchChanges` runs for **Notes** in the following scenarios
+    ///
+    ///     - Mode: Results
+    ///     - OP: Update
+    ///
+    func testOnBatchChangesDoesRunForNoteUpdateWhenInResultsModeAndRelaysMoveOperations() {
+        let firstNote = storage.insertSampleNote(contents: "A")
+        storage.insertSampleNote(contents: "B")
+        storage.save()
+
+        expectBatchChanges(objectChanges: [
+            .move(oldIndexPath: IndexPath(row: 0, section: 0), newIndexPath: IndexPath(row: 1, section: 0))
+        ])
+
+        firstNote.content = "C"
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
     /// Verifies that `onBatchChanges` runs for **Tag** in the following scenarios
     ///
     ///     - Mode: Search
@@ -454,7 +474,6 @@ class NotesListControllerTests: XCTestCase {
         storage.save()
 
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
-
     }
 }
 

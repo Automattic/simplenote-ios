@@ -161,7 +161,6 @@ extension NotesListController {
     ///
     @objc
     func performFetch() {
-// TODO: Does refetching cause changes?
         removePendingTagChanges()
         removePendingNoteChanges()
 
