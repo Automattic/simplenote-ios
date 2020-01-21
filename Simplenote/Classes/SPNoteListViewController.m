@@ -429,18 +429,6 @@
     
     return self.fetchedResultsController.fetchedObjects.count;
 }
-
-- (Note *)noteForKey:(NSString *)key {
-    
-    for (Note *n in self.fetchedResultsController.fetchedObjects) {
-        
-        if ([n.simperiumKey isEqualToString:key])
-            return n;
-    }
-    
-    return nil;
-}
-
 #pragma mark - UITableView Delegate
 
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{

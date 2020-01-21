@@ -24,7 +24,6 @@
 @property (nonatomic, strong) NotesListController                           *notesListController;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
-- (Note *)noteForKey:(NSString *)key;
 - (void)update;
 - (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
