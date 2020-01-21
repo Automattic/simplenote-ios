@@ -240,7 +240,7 @@
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.tagFilterType == SPTagFilterTypeDeleted) ? self.emptyTrashButton : self.addButton;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : self.addButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -421,10 +421,10 @@
 
 #pragma mark - UITableView Delegate
 
-- (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (self.tagFilterType == SPTagFilterTypeDeleted) {
+- (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    Note *note = [self.notesListController objectAtIndexPath:indexPath];
+    if (self.isDeletedFilterActive) {
         return [self rowActionsForDeletedNote:note];
     }
 
@@ -596,14 +596,14 @@
 
 #pragma mark - NoteListController
 
-- (void)updateViewIfEmpty {
+- (void)updateViewIfEmpty
+{    
+    BOOL isListEmpty = self.isListEmpty;
     
-    bListViewIsEmpty = !(self.fetchedResultsController.fetchedObjects.count > 0);
-    
-    _emptyListView.hidden = !bListViewIsEmpty;    
+    _emptyListView.hidden = !isListEmpty;    
     [_emptyListView hideImageView:self.isSearchActive];
     
-    if (bListViewIsEmpty) {
+    if (isListEmpty) {
         // set appropriate text
         if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
             [_emptyListView setText:nil];
@@ -631,8 +631,10 @@
     [self updateFetchPredicate];
     [self refreshTitle];
 
-    BOOL isTrashOnScreen = self.tagFilterType == SPTagFilterTypeDeleted;
-    self.emptyTrashButton.enabled = isTrashOnScreen && self.numNotes > 0;
+    BOOL isTrashOnScreen = self.isDeletedFilterActive;
+    BOOL isNotEmpty = !self.isListEmpty;
+
+    self.emptyTrashButton.enabled = isTrashOnScreen && isNotEmpty;
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self updateViewIfEmpty];
@@ -683,11 +685,11 @@
 - (void)setWaitingForIndex:(BOOL)waiting {
     
     // if the current tag is the deleted tag, do not show the activity spinner
-    if (self.tagFilterType == SPTagFilterTypeDeleted && waiting) {
+    if (self.isDeletedFilterActive && waiting) {
         return;
     }
 
-    if (waiting && self.navigationItem.titleView == nil && (self.fetchedResultsController.fetchedObjects.count == 0 || _firstLaunch)){
+    if (waiting && self.navigationItem.titleView == nil && (self.isListEmpty || _firstLaunch)){
         [self.activityIndicator startAnimating];
         self.bResetTitleView = NO;
         [self animateTitleViewSwapWithNewView:self.activityIndicator completion:nil];

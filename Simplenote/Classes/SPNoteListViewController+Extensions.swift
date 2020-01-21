@@ -117,6 +117,13 @@ extension SPNoteListViewController {
         return notesListController.filter == .deleted
     }
 
+    /// Indicates if the List is Empty 
+    ///
+    @objc
+    var isListEmpty: Bool {
+        return notesListController.numberOfObjects <= 0
+    }
+
     /// Indicates if we're in Search Mode
     ///
     @objc
