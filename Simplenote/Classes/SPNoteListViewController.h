@@ -7,14 +7,7 @@
 @class SPBlurEffectView;
 @class NotesListController;
 
-@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
-
-
-    // Bools
-    BOOL bListViewIsEmpty;
-    BOOL bShouldShowSidePanel;
-}
-
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate>
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
