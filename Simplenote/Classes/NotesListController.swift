@@ -115,7 +115,7 @@ extension NotesListController {
     /// Returns the Object at a given IndexPath (If any!)
     ///
     @objc(objectAtIndexPath:)
-    func object(at indexPath: IndexPath) -> Any? {
+    func object(at indexPath: IndexPath) -> Any {
         switch state {
         case .results:
             return notesController.object(at: indexPath)
@@ -124,7 +124,7 @@ extension NotesListController {
         case .searching where state.sectionIndexForNotes == indexPath.section:
             return notesController.fetchedObjects[indexPath.row];
         default:
-            return nil
+            fatalError()
         }
     }
 
