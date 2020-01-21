@@ -51,7 +51,6 @@
 @property (nonatomic, strong) SPTransitionController                *transitionController;
 @property (nonatomic, assign) CGFloat                               keyboardHeight;
 
-@property (nonatomic, assign) SPTagFilterType                       tagFilterType;
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
 
