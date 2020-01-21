@@ -19,6 +19,8 @@
 #import "SPEditorTextView.h"
 #import "SPInteractiveTextStorage.h"
 #import "SPNotifications.h"
+#import "SPObjectManager.h"
+#import "SPRatingsHelper.h"
 #import "SPTextView.h"
 #import "SPTextField.h"
 #import "SPTableViewController.h"
