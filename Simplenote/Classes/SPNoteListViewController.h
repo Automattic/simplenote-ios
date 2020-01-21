@@ -8,7 +8,6 @@
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
-    NSTimer *searchTimer;
 
     // Bools
     BOOL bSearching;

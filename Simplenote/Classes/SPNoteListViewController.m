@@ -37,6 +37,7 @@
                                         SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController<Note *>    *fetchedResultsController;
+@property (nonatomic, strong) NSTimer                               *searchTimer;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
@@ -357,15 +358,14 @@
 - (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
-    if (searchTimer) {
-        [searchTimer invalidate];
+    if (self.searchTimer) {
+        [self.searchTimer invalidate];
     }
-    
-    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.2
-                                                   target:self
-                                                 selector:@selector(performSearch)
-                                                 userInfo:nil
-                                                  repeats:NO];
+
+    NSTimeInterval const delay = 0.2;
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:delay repeats:NO block:^(NSTimer * _Nonnull timer) {
+        [self performSearchWithKeyword:keyword];
+    }];    
 }
 
 - (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
@@ -405,8 +405,8 @@
                                       animated:NO];
     }
     
-    [searchTimer invalidate];
-    searchTimer = nil;
+    [self.searchTimer invalidate];
+    self.searchTimer = nil;
 }
 
 - (void)endSearching
