@@ -204,7 +204,6 @@ extension SPNoteListViewController: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         switch notesListController.object(at: indexPath) {
         case let note as Note:
             return dequeueAndConfigureCell(for: note, in: tableView, at: indexPath)
@@ -258,7 +257,16 @@ private extension SPNoteListViewController {
     /// Returns a UITableViewCell configured to display the specified Tag
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+// TODO: Cells
+// TODO: Section Headers
+// TODO: Tags + Row Heights
+// TODO: Tags + didPress
+// TODO: Tags + 3D Touch
+// TODO: Tags + Swipeable Actions
+
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "tag:" + tag.name
+        return cell
     }
 }
 

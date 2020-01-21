@@ -144,6 +144,7 @@
 
 - (void)updateRowHeight
 {
+// TODO
     self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
@@ -441,7 +442,7 @@
     }
     
     [[SPRatingsHelper sharedInstance] incrementSignificantEvent];
-    
+// TODO
     Note *note = [self.notesListController objectAtIndexPath:indexPath];
     [self openNote:note fromIndexPath:indexPath animated:YES];
 }
