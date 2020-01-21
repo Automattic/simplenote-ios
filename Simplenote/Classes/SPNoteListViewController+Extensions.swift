@@ -150,8 +150,9 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard tableView.isUserInteractionEnabled,
-            tagFilterType != .deleted,
-            let indexPath = tableView.indexPathForRow(at: location)
+            isDeletedFilterActive == false,
+            let indexPath = tableView.indexPathForRow(at: location),
+            let note = notesListController.object(at: indexPath) as? Note
             else {
                 return nil
         }
@@ -163,7 +164,6 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let note = fetchedResultsController.object(at: indexPath)
         let editorViewController = SPAppDelegate.shared().noteEditorViewController
         editorViewController.update(note)
         editorViewController.isPreviewing = true
@@ -188,11 +188,11 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 extension SPNoteListViewController: UITableViewDataSource {
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? .zero
+        return notesListController.sections.count
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? .zero
+        return notesListController.sections[section].numberOfObjects
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
