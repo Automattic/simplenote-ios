@@ -419,10 +419,6 @@
 }
 
 
-- (NSInteger)numNotes {
-    
-    return self.fetchedResultsController.fetchedObjects.count;
-}
 #pragma mark - UITableView Delegate
 
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
