@@ -442,7 +442,7 @@
     
     [[SPRatingsHelper sharedInstance] incrementSignificantEvent];
     
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Note *note = [self.notesListController objectAtIndexPath:indexPath];
     [self openNote:note fromIndexPath:indexPath animated:YES];
 }
 
