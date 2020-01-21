@@ -117,7 +117,7 @@ extension SPNoteListViewController {
         return notesListController.filter == .deleted
     }
 
-    /// Indicates if the List is Empty 
+    /// Indicates if the List is Empty
     ///
     @objc
     var isListEmpty: Bool {
@@ -196,13 +196,15 @@ extension SPNoteListViewController: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SPNoteTableViewCell.reuseIdentifier, for: indexPath) as? SPNoteTableViewCell else {
+
+        switch notesListController.object(at: indexPath) {
+        case let note as Note:
+            return dequeueAndConfigureCell(for: note, in: tableView, at: indexPath)
+        case let tag as Tag:
+            return dequeueAndConfigureCell(for: tag, in: tableView, at: indexPath)
+        default:
             fatalError()
         }
-
-        configure(cell: cell, at: indexPath)
-
-        return cell
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -217,13 +219,12 @@ extension SPNoteListViewController: UITableViewDataSource {
 
 // MARK: - TableViewCell(s) Initialization
 //
-extension SPNoteListViewController {
+private extension SPNoteListViewController {
 
-    /// Sets up a given NoteTableViewCell to display the specified Note
+    /// Returns a UITableViewCell configured to display the specified Note
     ///
-    @objc(configureCell:atIndexPath:)
-    func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
-        let note = fetchedResultsController.object(at: indexPath)
+    func dequeueAndConfigureCell(for note: Note, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: SPNoteTableViewCell.self, for: indexPath)
 
         note.ensurePreviewStringsAreAvailable()
 
@@ -239,11 +240,17 @@ extension SPNoteListViewController {
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        guard let keyword = searchText, keyword.count > 0 else {
-            return
+        if let keyword = searchText, keyword.count > 0 {
+            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
         }
 
-        cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
+        return cell
+    }
+
+    /// Returns a UITableViewCell configured to display the specified Tag
+    ///
+    func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
 }
 
