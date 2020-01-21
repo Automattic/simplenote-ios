@@ -356,8 +356,6 @@
 
 - (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
-    self.searchText = keyword;
-    
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
     if (searchTimer) {
         [searchTimer invalidate];
@@ -414,7 +412,6 @@
 - (void)endSearching
 {
     bSearching = NO;
-    self.searchText = nil;
     [self update];
 }
 

@@ -18,7 +18,6 @@
 }
 
 @property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
-@property (nonatomic, strong) NSString                                      *searchText;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
