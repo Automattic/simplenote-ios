@@ -110,7 +110,29 @@ extension SPNoteListViewController {
             title = NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
         default:
             title = selectedTag
+    /// Indicates if the Deleted Notes are onScreen
+    ///
+    @objc
+    var isDeletedFilterActive: Bool {
+        return notesListController.filter == .deleted
+    }
+
+    /// Indicates if we're in Search Mode
+    ///
+    @objc
+    var isSearchActive: Bool {
+        return searchText != nil
+    }
+
+    /// Returns the SearchText
+    ///
+    @objc
+    var searchText: String? {
+        guard case let .searching(keyword) = notesListController.state else {
+            return nil
         }
+
+        return keyword
     }
 }
 
