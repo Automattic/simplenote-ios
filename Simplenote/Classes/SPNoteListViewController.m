@@ -345,6 +345,7 @@
 
 - (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
+    [self.notesListController beginSearch];
     [self.tableView reloadData];
 
     return YES;
@@ -384,11 +385,9 @@
 
 #pragma mark - Search Helpers
 
-- (void)performSearch
+- (void)performSearchWithKeyword:(NSString *)keyword
 {
-    if (!self.searchText) {
-        return;
-    }
+    [self.notesListController refreshSearchResultsWithKeyword:keyword];
   
     [SPTracker trackListNotesSearched];
     
@@ -406,6 +405,7 @@
 
 - (void)endSearching
 {
+    [self.notesListController endSearch];
     [self update];
 }
 
