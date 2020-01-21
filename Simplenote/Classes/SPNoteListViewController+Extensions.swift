@@ -246,11 +246,6 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let sections = notesListController.sections
-        guard indexPath.section < sections.count && indexPath.row < sections[indexPath.section].numberOfObjects else {
-            return
-        }
-
         switch notesListController.object(at: indexPath) {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
