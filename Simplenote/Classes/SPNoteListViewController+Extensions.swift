@@ -131,6 +131,71 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 }
 
 
+// MARK: - UITableViewDataSource
+//
+extension SPNoteListViewController: UITableViewDataSource {
+
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? .zero
+    }
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections?[section].numberOfObjects ?? .zero
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SPNoteTableViewCell.reuseIdentifier, for: indexPath) as? SPNoteTableViewCell else {
+            fatalError()
+        }
+
+        configure(cell: cell, at: indexPath)
+
+        return cell
+    }
+
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+}
+
+
+// MARK: - TableViewCell(s) Initialization
+//
+extension SPNoteListViewController {
+
+    /// Sets up a given NoteTableViewCell to display the specified Note
+    ///
+    @objc(configureCell:atIndexPath:)
+    func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
+        let note = fetchedResultsController.object(at: indexPath)
+
+        note.ensurePreviewStringsAreAvailable()
+
+        cell.accessibilityLabel = note.titlePreview
+        cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
+
+        cell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
+        cell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
+        cell.accessoryLeftTintColor = .simplenoteNoteStatusImageColor
+        cell.accessoryRightTintColor = .simplenoteNoteStatusImageColor
+
+        cell.rendersInCondensedMode = Options.shared.condensedNotesList
+        cell.titleText = note.titlePreview
+        cell.bodyText = note.bodyPreview
+
+        guard let keyword = searchText, keyword.count > 0 else {
+            return
+        }
+
+        cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
+    }
+}
+
+
 // MARK: - Constants
 //
 private enum Constants {
