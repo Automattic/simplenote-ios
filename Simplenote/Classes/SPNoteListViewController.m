@@ -52,6 +52,7 @@
 
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
+@property (nonatomic, assign) BOOL                                  bIndexingNotes;
 
 @end
 
@@ -626,7 +627,7 @@
     
     if (bListViewIsEmpty) {
         // set appropriate text
-        if (bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
+        if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
             [_emptyListView setText:nil];
         } else if (bSearching)
             [_emptyListView setText:NSLocalizedString(@"No Results", @"Message shown when no notes match a search string")];
@@ -720,7 +721,7 @@
         self.bResetTitleView = YES;
     }
     
-    bIndexingNotes = waiting;
+    self.bIndexingNotes = waiting;
 
     [self updateViewIfEmpty];
 }
