@@ -11,7 +11,6 @@
 
 
     // Bools
-    BOOL bSearching;
     BOOL bListViewIsEmpty;
     BOOL bShouldShowSidePanel;
 }

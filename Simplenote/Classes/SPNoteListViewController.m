@@ -345,8 +345,6 @@
 
 - (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
-
-    bSearching = YES;
     [self.tableView reloadData];
 
     return YES;
@@ -408,7 +406,6 @@
 
 - (void)endSearching
 {
-    bSearching = NO;
     [self update];
 }
 
@@ -555,8 +552,8 @@
 
     [editor updateNote:note];
 
-    if (bSearching) {
-        [editor setSearchString:_searchText];
+    if (self.isSearchActive) {
+        [editor setSearchString:self.searchText];
     }
     
     self.transitionController.selectedPath = indexPath;
@@ -608,13 +605,13 @@
     bListViewIsEmpty = !(self.fetchedResultsController.fetchedObjects.count > 0);
     
     _emptyListView.hidden = !bListViewIsEmpty;    
-    [_emptyListView hideImageView:bSearching];
+    [_emptyListView hideImageView:self.isSearchActive];
     
     if (bListViewIsEmpty) {
         // set appropriate text
         if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
             [_emptyListView setText:nil];
-        } else if (bSearching)
+        } else if (self.isSearchActive)
             [_emptyListView setText:NSLocalizedString(@"No Results", @"Message shown when no notes match a search string")];
         else
             [_emptyListView setText:NSLocalizedString(@"No Notes", @"Message shown in note list when no notes are in the current view")];
@@ -653,7 +650,7 @@
 - (BOOL)sidebarContainerShouldDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
 {
     // Checking for self.tableView.isEditing prevents showing the sidebar when you use swipe to cancel delete/restore.
-    return !(self.tableView.dragging || self.tableView.isEditing || bSearching);
+    return !(self.tableView.dragging || self.tableView.isEditing || self.isSearchActive);
 }
 
 - (void)sidebarContainerWillDisplaySidebar:(SPSidebarContainerViewController *)sidebarContainer
