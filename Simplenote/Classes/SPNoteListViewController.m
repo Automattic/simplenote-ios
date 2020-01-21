@@ -391,7 +391,7 @@
   
     [SPTracker trackListNotesSearched];
     
-    [self updateFetchPredicate];
+    [self refreshListController];
     [self updateViewIfEmpty];
     if ([self.tableView numberOfRowsInSection:0]) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
@@ -627,9 +627,9 @@
     
 }
 
-- (void)update {
-    
-    [self updateFetchPredicate];
+- (void)update
+{
+    [self refreshListController];
     [self refreshTitle];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;

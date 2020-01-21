@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 
-// MARK: - Interface Initialization
+// MARK: - Components Initialization
 //
 extension SPNoteListViewController {
 
@@ -97,19 +97,27 @@ extension SPNoteListViewController {
         registerForPreviewing(with: self, sourceView: tableView)
     }
 
-    /// Refreshes the ListViewController's Title
+    /// Refreshes the Notes ListController Filters + Sorting: We'll also update the UI (TableView + Title) to match the new parameters.
+    ///
+    @objc
+    func refreshListController() {
+        let selectedTag = SPAppDelegate.shared().selectedTag
+        let filter = NotesListFilter(selectedTag: selectedTag)
+
+        notesListController.filter = filter
+        notesListController.sortMode = Options.shared.listSortMode
+        notesListController.performFetch()
+
+        tableView.reloadData()
+    }
+
+    /// Refreshes the receiver's Title, to match the current filter
     ///
     @objc
     func refreshTitle() {
-        let selectedTag = SPAppDelegate.shared().selectedTag ?? NSLocalizedString("All Notes", comment: "Title: No filters applied")
+        title = notesListController.filter.title
+    }
 
-        switch selectedTag {
-        case kSimplenoteTrashKey:
-            title = NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
-        case kSimplenoteUntaggedKey:
-            title = NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
-        default:
-            title = selectedTag
     /// Indicates if the Deleted Notes are onScreen
     ///
     @objc
