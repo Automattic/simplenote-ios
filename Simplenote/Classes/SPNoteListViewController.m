@@ -431,11 +431,12 @@
     return [self rowActionsForNote:note];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row >= self.fetchedResultsController.fetchedObjects.count) {
+
+    NSArray<id <NSFetchedResultsSectionInfo>> *sections = self.notesListController.sections;
+    if (indexPath.section >= sections.count || indexPath.row >= sections[indexPath.section].numberOfObjects) {
         return;
     }
     
