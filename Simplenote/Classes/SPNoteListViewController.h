@@ -5,6 +5,7 @@
 
 @class SPEmptyListView;
 @class SPBlurEffectView;
+@class NotesListController;
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
 
@@ -15,13 +16,13 @@
     BOOL bShouldShowSidePanel;
 }
 
-@property (nonatomic) BOOL                                                  firstLaunch;
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
 @property (nonatomic, strong) NotesListController                           *notesListController;
+@property (nonatomic) BOOL                                                  firstLaunch;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;
