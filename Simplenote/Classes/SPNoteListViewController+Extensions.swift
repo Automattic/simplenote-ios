@@ -293,6 +293,15 @@ private extension SPNoteListViewController {
 
 // MARK: - Private Types
 //
+private enum ActionTitle {
+    static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
+    static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
+    static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
+    static let share = NSLocalizedString("Share", comment: "Share (verb) - the action of Sharing a note")
+    static let trash = NSLocalizedString("Trash-verb", comment: "Trash (verb) - the action of deleting a note")
+    static let unpin = NSLocalizedString("Unpin", comment: "Unpin (verb) - the action of Unpinning a note")
+}
+
 private enum Constants {
 
     /// Where do these insets come from?
@@ -304,14 +313,4 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
-}
-
-
-private enum ActionTitle {
-    static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
-    static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
-    static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
-    static let share = NSLocalizedString("Share", comment: "Share (verb) - the action of Sharing a note")
-    static let trash = NSLocalizedString("Trash-verb", comment: "Trash (verb) - the action of deleting a note")
-    static let unpin = NSLocalizedString("Unpin", comment: "Unpin (verb) - the action of Unpinning a note")
 }
