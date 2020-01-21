@@ -28,8 +28,7 @@
 #import "Simplenote-Swift.h"
 
 
-@interface SPNoteListViewController () <UITableViewDataSource,
-                                        UITableViewDelegate,
+@interface SPNoteListViewController () <UITableViewDelegate,
                                         NSFetchedResultsControllerDelegate,
                                         UITextFieldDelegate,
                                         SearchDisplayControllerDelegate,
@@ -430,8 +429,6 @@
 }
 
 
-#pragma mark - UITableView Data Source
-
 - (NSInteger)numNotes {
     
     return self.fetchedResultsController.fetchedObjects.count;
@@ -448,63 +445,7 @@
     return nil;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
-    return [sectionInfo numberOfObjects];
-}
-
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    SPNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SPNoteTableViewCell.reuseIdentifier forIndexPath:indexPath];
-
-    [self configureCell:cell atIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (void)configureCell:(SPNoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
-    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    [note ensurePreviewStringsAreAvailable];
-
-    UIColor *accessoryColor = [UIColor simplenoteNoteStatusImageColor];
-
-    cell.accessibilityLabel = note.titlePreview;
-    cell.accessibilityHint = NSLocalizedString(@"Open note", @"Select a note to view in the note editor");
-
-    cell.accessoryLeftImage = note.published ? [UIImage imageWithName:UIImageNameShared] : nil;
-    cell.accessoryRightImage = note.pinned ? [UIImage imageWithName:UIImageNamePin] : nil;
-    cell.accessoryLeftTintColor = accessoryColor;
-    cell.accessoryRightTintColor = accessoryColor;
-
-    cell.rendersInCondensedMode = Options.shared.condensedNotesList;
-    cell.titleText = note.titlePreview;
-    cell.bodyText = note.bodyPreview;
-
-    if (bSearching) {
-        UIColor *tintColor = [UIColor simplenoteTintColor];
-        [cell highlightSubstringsMatching:_searchText color:tintColor];
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return YES;
-    
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return NO;
-}
+#pragma mark - UITableView Delegate
 
 - (NSArray *)tableView:(UITableView*)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
