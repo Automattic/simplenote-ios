@@ -16,13 +16,13 @@
     BOOL bShouldShowSidePanel;
 }
 
-@property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
+@property (nonatomic, strong) NotesListController                           *notesListController;
 
 - (Note *)noteForKey:(NSString *)key;
 - (void)update;

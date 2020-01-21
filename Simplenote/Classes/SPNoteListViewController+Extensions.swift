@@ -6,6 +6,16 @@ import UIKit
 //
 extension SPNoteListViewController {
 
+    /// Sets up the Results Controller
+    ///
+    @objc
+    func configureResultsController() {
+        assert(notesListController == nil, "listController is already initialized!")
+
+        notesListController = NotesListController(viewContext: SPAppDelegate.shared().managedObjectContext)
+        notesListController.performFetch()
+    }
+
     /// Sets up the Root ViewController
     ///
     @objc
@@ -39,6 +49,25 @@ extension SPNoteListViewController {
         ])
     }
 
+    /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
+    ///
+    @objc
+    func startDisplayingEntities() {
+        tableView.dataSource = self
+
+        notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
+            self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
+                self?.updateViewIfEmpty()
+            }
+        }
+    }
+}
+
+
+// MARK: - Internal Methods
+//
+extension SPNoteListViewController {
+
     /// Adjust the TableView's Insets, so that the content falls below the searchBar
     ///
     @objc
@@ -60,12 +89,6 @@ extension SPNoteListViewController {
 
         tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
     }
-}
-
-
-// MARK: - Internal Methods
-//
-extension SPNoteListViewController {
 
     /// Registers the ListViewController for Peek and Pop events.
     ///
