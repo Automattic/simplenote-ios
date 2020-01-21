@@ -345,14 +345,11 @@
 
 - (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
-    if (bListViewIsEmpty) {
-        return NO;
-    }
 
     bSearching = YES;
     [self.tableView reloadData];
 
-    return bSearching;
+    return YES;
 }
 
 - (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
