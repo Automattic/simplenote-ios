@@ -1,4 +1,5 @@
 import Foundation
+import CoreSpotlight
 import UIKit
 
 
@@ -163,6 +164,36 @@ extension SPNoteListViewController: UITableViewDataSource {
 }
 
 
+// MARK: - UITableViewDelegate
+//
+extension SPNoteListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let note = fetchedResultsController.object(at: indexPath)
+
+        switch tagFilterType {
+        case .deleted:
+            return rowActionsForDeletedNote(note)
+        default:
+            return rowActionsForNote(note)
+        }
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard indexPath.row >= (fetchedResultsController.fetchedObjects?.count ?? .zero) else {
+            return
+        }
+
+        SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
+
+        let note = fetchedResultsController.object(at: indexPath)
+        open(note, from: indexPath, animated: true)
+    }
+}
+
+
 // MARK: - TableViewCell(s) Initialization
 //
 extension SPNoteListViewController {
@@ -196,7 +227,71 @@ extension SPNoteListViewController {
 }
 
 
-// MARK: - Constants
+// MARK: - Row Actions
+//
+private extension SPNoteListViewController {
+
+    func rowActionsForDeletedNote(_ note: Note) -> [UITableViewRowAction] {
+        return [
+            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .orange) { (_, _) in
+                SPObjectManager.shared().restoreNote(note)
+                CSSearchableIndex.default().indexSearchableNote(note)
+            },
+
+            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .red) { (_, _) in
+                SPTracker.trackListNoteDeleted()
+                SPObjectManager.shared().permenentlyDeleteNote(note)
+            }
+        ]
+    }
+
+    func rowActionsForNote(_ note: Note) -> [UITableViewRowAction] {
+        let pinTitle = note.pinned ? ActionTitle.unpin : ActionTitle.pin
+
+        return [
+            UITableViewRowAction(style: .destructive, title: ActionTitle.trash, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
+                SPTracker.trackListNoteDeleted()
+                SPObjectManager.shared().trashNote(note)
+                CSSearchableIndex.default().deleteSearchableNote(note)
+            },
+
+            UITableViewRowAction(style: .default, title: pinTitle, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _) in
+                self?.togglePin(note: note)
+            },
+
+            UITableViewRowAction(style: .default, title: ActionTitle.share, backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, indexPath) in
+                self?.share(note: note, from: indexPath)
+            }
+        ]
+    }
+
+    func togglePin(note: Note) {
+        note.pinned = !note.pinned
+        SPAppDelegate.shared().save()
+    }
+
+    func share(note: Note, from indexPath: IndexPath) {
+        guard let _ = note.content, let controller = UIActivityViewController(note: note) else {
+            return
+        }
+
+        SPTracker.trackEditorNoteContentShared()
+
+        if UIDevice.sp_isPad() {
+            controller.modalPresentationStyle = .popover
+
+            let presentationController = controller.popoverPresentationController
+            presentationController?.permittedArrowDirections = .any
+            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            presentationController?.sourceView = tableView
+        }
+
+        present(controller, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Private Types
 //
 private enum Constants {
 
@@ -209,4 +304,14 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+}
+
+
+private enum ActionTitle {
+    static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
+    static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
+    static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
+    static let share = NSLocalizedString("Share", comment: "Share (verb) - the action of Sharing a note")
+    static let trash = NSLocalizedString("Trash-verb", comment: "Trash (verb) - the action of deleting a note")
+    static let unpin = NSLocalizedString("Unpin", comment: "Unpin (verb) - the action of Unpinning a note")
 }
