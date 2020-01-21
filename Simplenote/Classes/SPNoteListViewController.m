@@ -548,8 +548,18 @@
 
 #pragma mark - Public API
 
-- (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
+- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated
+{
+    Note *note = [self.notesListController noteForSimperiumKey:simperiumKey];
+    if (!note) {
+        return;
+    }
 
+    [self openNote:note fromIndexPath:nil animated:animated];
+}
+
+- (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+{
     [SPTracker trackListNoteOpened];
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
