@@ -259,7 +259,7 @@ class ResultsControllerTests: XCTestCase {
 
         XCTAssertEqual(resultsController.numberOfObjects, 1)
 
-        resultsController.predicate = NSPredicate.predicateForNotesWithStatus(deleted: true)
+        resultsController.predicate = NSPredicate.predicateForNotes(deleted: true)
         try? resultsController.performFetch()
         XCTAssertEqual(resultsController.numberOfObjects, 0)
     }
