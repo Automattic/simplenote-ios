@@ -82,12 +82,6 @@ private enum Style {
         .simplenoteNoteHeadlineColor
     }
 
-    /// Headline Font: To be applied over the first preview line
-    ///
-    static var headlineFont: UIFont {
-        .preferredFont(forTextStyle: .headline)
-    }
-
     /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
