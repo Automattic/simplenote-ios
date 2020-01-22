@@ -19,7 +19,8 @@ class NotesListController: NSObject {
     ///
     private lazy var tagsController = ResultsController<Tag>(viewContext: viewContext,
                                                              matching: state.predicateForTags(),
-                                                             sortedBy: sortMode.descriptorsForTags)
+                                                             sortedBy: sortMode.descriptorsForTags,
+                                                             limit: Settings.limitForTagResults)
 
     /// Notes Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
     ///
@@ -308,4 +309,14 @@ private extension NotesListController {
 
         return (transposedObjectChanges, transposedSectionChanges)
     }
+}
+
+
+// MARK: - Settings
+//
+private struct Settings {
+
+    /// Indicates the maximum number of Tags to retrieve (when in search mode!)
+    ///
+    static let limitForTagResults = 5
 }
