@@ -229,6 +229,17 @@ extension SPNoteListViewController: UITableViewDataSource {
 //
 extension SPNoteListViewController: UITableViewDelegate {
 
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch notesListController.object(at: indexPath) {
+        case is Note:
+            return noteRowHeight
+        case is Tag:
+            return tagRowHeight
+        default:
+            return .zero
+        }
+    }
+
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Swipeable Actions: Only enabled for Notes
         guard let note = notesListController.object(at: indexPath) as? Note else {
@@ -292,9 +303,8 @@ private extension SPNoteListViewController {
     /// Returns a UITableViewCell configured to display the specified Tag
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
-        // TODO: Wire a proper UITableViewCell for Tags. To be followed up in another PR!
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "tag:" + tag.name
+        let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
+        cell.titleText = "tag:" + tag.name
         return cell
     }
 }

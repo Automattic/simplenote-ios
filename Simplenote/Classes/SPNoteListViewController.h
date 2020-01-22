@@ -14,6 +14,8 @@
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
 @property (nonatomic, strong) NotesListController                           *notesListController;
+@property (nonatomic) CGFloat                                               noteRowHeight;
+@property (nonatomic) CGFloat                                               tagRowHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 
 - (void)update;
