@@ -292,13 +292,7 @@ private extension SPNoteListViewController {
     /// Returns a UITableViewCell configured to display the specified Tag
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
-// TODO: Cells
-// TODO: Section Headers
-// TODO: Tags + Row Heights
-// TODO: Tags + didPress
-// TODO: Tags + 3D Touch
-// TODO: Tags + Swipeable Actions
-
+        // TODO: Wire a proper UITableViewCell for Tags. To be followed up in another PR!
         let cell = UITableViewCell()
         cell.textLabel?.text = "tag:" + tag.name
         return cell

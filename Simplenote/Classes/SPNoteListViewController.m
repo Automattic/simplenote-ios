@@ -144,7 +144,6 @@
 
 - (void)updateRowHeight
 {
-// TODO
     self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
