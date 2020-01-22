@@ -39,4 +39,14 @@ extension UITableView {
 
         return cell
     }
+
+    /// Returns a Header instance of the specified kind
+    ///
+    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(ofType type: T.Type) -> T {
+        guard let header = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T else {
+            fatalError()
+        }
+
+        return header
+    }
 }
