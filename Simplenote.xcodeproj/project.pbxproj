@@ -191,6 +191,7 @@
 		B5476BB923D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BB823D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift */; };
 		B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5476BBA23D89B66000E7723 /* SPSectionHeaderView.xib */; };
 		B5476BBD23D8A71D000E7723 /* UIFont+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */; };
+		B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBE23D8B686000E7723 /* NotesListSection.swift */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
@@ -499,6 +500,7 @@
 		B5476BB823D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewHeaderFooterView+Simplenote.swift"; path = "Classes/UITableViewHeaderFooterView+Simplenote.swift"; sourceTree = "<group>"; };
 		B5476BBA23D89B66000E7723 /* SPSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSectionHeaderView.xib; path = Classes/SPSectionHeaderView.xib; sourceTree = "<group>"; };
 		B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIFont+Simplenote.swift"; path = "Classes/UIFont+Simplenote.swift"; sourceTree = "<group>"; };
+		B5476BBE23D8B686000E7723 /* NotesListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListSection.swift; path = Classes/NotesListSection.swift; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -1195,8 +1197,9 @@
 				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
 				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
 				B5A6846C23CE84D400398BBC /* NotesListController.swift */,
-				B543C7E023CF76D900003A80 /* NotesListState.swift */,
 				B543C7E223CF76EA00003A80 /* NotesListFilter.swift */,
+				B5476BBE23D8B686000E7723 /* NotesListSection.swift */,
+				B543C7E023CF76D900003A80 /* NotesListState.swift */,
 				B543C7E423CF775C00003A80 /* SortMode+Descriptors.swift */,
 			);
 			name = "Notes List";
@@ -2020,6 +2023,7 @@
 				46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
 				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
+				B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */,
 				B5421F3623CE79E4004DDC19 /* NSManagedObject+Simplenote.swift in Sources */,
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
