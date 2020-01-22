@@ -65,7 +65,7 @@ class NotesListControllerTests: XCTestCase {
         noteListController.performFetch()
 
         let reversedNotes = Array(notes.reversed())
-        let retrievedNotes = noteListController.sections.first!.objects!.compactMap { $0 as? Note }
+        let retrievedNotes = noteListController.sections.first!.objects.compactMap { $0 as? Note }
 
         for (index, note) in retrievedNotes.enumerated() {
             XCTAssertEqual(note.content, reversedNotes[index].content)
