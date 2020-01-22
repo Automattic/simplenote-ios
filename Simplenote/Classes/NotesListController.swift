@@ -102,13 +102,17 @@ extension NotesListController {
 
     /// Returns the Receiver's Sections
     ///
-    @objc
-    var sections: [ResultsSectionInfo] {
+    var sections: [NotesListSection] {
         switch state {
         case .results:
-            return notesController.sections
+            return [
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+            ]
         case .searching:
-            return tagsController.sections + notesController.sections
+            return [
+                NotesListSection(title: state.sectionTitleForTags, objects: tagsController.fetchedObjects),
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+            ]
         }
     }
 

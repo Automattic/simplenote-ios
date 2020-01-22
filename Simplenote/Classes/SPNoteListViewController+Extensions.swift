@@ -215,6 +215,23 @@ extension SPNoteListViewController: UITableViewDataSource {
         }
     }
 
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = notesListController.sections[section]
+        guard section.displaysTitle else {
+            return nil
+        }
+
+        return section.title
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard notesListController.sections[section].displaysTitle else {
+            return nil
+        }
+
+        return tableView.dequeueReusableHeaderFooterView(ofType: SPSectionHeaderView.self)
+    }
+
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -238,6 +255,14 @@ extension SPNoteListViewController: UITableViewDelegate {
         default:
             return .zero
         }
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard notesListController.sections[section].displaysTitle else {
+            return .leastNormalMagnitude
+        }
+
+        return UITableView.automaticDimension
     }
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

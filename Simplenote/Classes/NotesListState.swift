@@ -47,6 +47,28 @@ extension NotesListState {
         return .zero
     }
 
+    /// Returns the SectionTitle for Notes, in the current state
+    ///
+    var sectionTitleForNotes: String? {
+        switch self {
+        case .searching:
+            return NSLocalizedString("Notes", comment: "Notes Header (Search Mode)")
+        default:
+            return nil
+        }
+    }
+
+    /// Returns the SectionTitle for Tags, in the current state
+    ///
+    var sectionTitleForTags: String? {
+        switch self {
+        case .searching:
+            return NSLocalizedString("Search by Tag", comment: "Tags Header (Search Mode)")
+        default:
+            return nil
+        }
+    }
+
     /// Indicates if we should adjust SectionIndexes for ResultsController Changes entities
     ///
     var requiresNoteSectionIndexAdjustments: Bool {
