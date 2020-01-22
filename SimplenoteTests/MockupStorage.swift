@@ -60,6 +60,12 @@ class MockupStorageManager {
             NSLog("💣 [MockupStorageManager] Stack Destroyed!")
         }
     }
+
+    /// "Persists" the changes
+    ///
+    func save() {
+        try? viewContext.save()
+    }
 }
 
 

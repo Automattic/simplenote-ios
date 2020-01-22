@@ -175,6 +175,10 @@
 		B5421F4223CE7A25004DDC19 /* ResultsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */; };
 		B5421F4423CE7DD6004DDC19 /* MockupTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4323CE7DD6004DDC19 /* MockupTableView.swift */; };
 		B5421F4623CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */; };
+		B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7DE23CF6AB400003A80 /* NotesListControllerTests.swift */; };
+		B543C7E123CF76D900003A80 /* NotesListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E023CF76D900003A80 /* NotesListState.swift */; };
+		B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E223CF76EA00003A80 /* NotesListFilter.swift */; };
+		B543C7E523CF775C00003A80 /* SortMode+Descriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E423CF775C00003A80 /* SortMode+Descriptors.swift */; };
 		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
 		B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */; };
 		B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */; };
@@ -218,6 +222,7 @@
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
+		B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6846C23CE84D400398BBC /* NotesListController.swift */; };
 		B5AA4B5222F46A0F0072BF5D /* UIColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A4022E78F4D009166EA /* UIColorName.swift */; };
 		B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2522EF6A7300B178AC /* VSTheme+Keys.swift */; };
 		B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
@@ -468,6 +473,10 @@
 		B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsControllerTests.swift; sourceTree = "<group>"; };
 		B5421F4323CE7DD6004DDC19 /* MockupTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupTableView.swift; sourceTree = "<group>"; };
 		B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsControllerUIKitTests.swift; sourceTree = "<group>"; };
+		B543C7DE23CF6AB400003A80 /* NotesListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListControllerTests.swift; sourceTree = "<group>"; };
+		B543C7E023CF76D900003A80 /* NotesListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListState.swift; path = Classes/NotesListState.swift; sourceTree = "<group>"; };
+		B543C7E223CF76EA00003A80 /* NotesListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListFilter.swift; path = Classes/NotesListFilter.swift; sourceTree = "<group>"; };
+		B543C7E423CF775C00003A80 /* SortMode+Descriptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SortMode+Descriptors.swift"; path = "Classes/SortMode+Descriptors.swift"; sourceTree = "<group>"; };
 		B546BE96234E64F200A126DA /* SPTagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagListViewCell.xib; path = Classes/SPTagListViewCell.xib; sourceTree = "<group>"; };
 		B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagHeaderView.swift; path = Classes/SPTagHeaderView.swift; sourceTree = "<group>"; };
 		B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagHeaderView.xib; path = Classes/SPTagHeaderView.xib; sourceTree = "<group>"; };
@@ -528,6 +537,7 @@
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Simplenote.swift"; path = "Classes/UIGestureRecognizer+Simplenote.swift"; sourceTree = "<group>"; };
+		B5A6846C23CE84D400398BBC /* NotesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesListController.swift; path = Classes/NotesListController.swift; sourceTree = "<group>"; };
 		B5AA4B5922F46B300072BF5D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Simplenote/Colors.xcassets; sourceTree = SOURCE_ROOT; };
 		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
 		B5AB169922FA128000B4EBA5 /* SPSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSheetController.xib; path = Classes/SPSheetController.xib; sourceTree = "<group>"; };
@@ -985,6 +995,14 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B543C7DD23CF6A8300003A80 /* Notes List */ = {
+			isa = PBXGroup;
+			children = (
+				B543C7DE23CF6AB400003A80 /* NotesListControllerTests.swift */,
+			);
+			name = "Notes List";
+			sourceTree = "<group>";
+		};
 		B546BE9A234E758E00A126DA /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,8 +1039,8 @@
 			children = (
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
-				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
+				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1108,10 +1126,25 @@
 				B5B9AB4122EA6FE1001CB0AD /* Themes */,
 				B55AC57822D27B7F00D8CEB2 /* Settings */,
 				B55AC57B22D27BA300D8CEB2 /* Tools */,
+				B543C7DD23CF6A8300003A80 /* Notes List */,
 				B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */,
 				B582189B1FCC45170094ECA1 /* Info.plist */,
 			);
 			path = SimplenoteTests;
+			sourceTree = "<group>";
+		};
+		B5A6846B23CE84B900398BBC /* Notes List */ = {
+			isa = PBXGroup;
+			children = (
+				E29ADD791784905800E55842 /* SPNoteListViewController.h */,
+				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
+				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
+				B5A6846C23CE84D400398BBC /* NotesListController.swift */,
+				B543C7E023CF76D900003A80 /* NotesListState.swift */,
+				B543C7E223CF76EA00003A80 /* NotesListFilter.swift */,
+				B543C7E423CF775C00003A80 /* SortMode+Descriptors.swift */,
+			);
+			name = "Notes List";
 			sourceTree = "<group>";
 		};
 		B5B85BA6235173D900AD5221 /* Helpers */ = {
@@ -1437,6 +1470,7 @@
 			isa = PBXGroup;
 			children = (
 				B56A695122F9CCF400B90398 /* Onboarding */,
+				B5A6846B23CE84B900398BBC /* Notes List */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
@@ -1446,9 +1480,6 @@
 				E215C791180B115C00AD36B5 /* SPNavigationController.m */,
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
-				E29ADD791784905800E55842 /* SPNoteListViewController.h */,
-				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
-				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
@@ -1897,6 +1928,7 @@
 				B52B8A231BAAF80B002CC55D /* UIViewController+Extensions.m in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
+				B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
 				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,
@@ -1905,6 +1937,7 @@
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
+				B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
@@ -1961,6 +1994,7 @@
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
 				B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */,
+				B543C7E523CF775C00003A80 /* SortMode+Descriptors.swift in Sources */,
 				B5421F3423CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift in Sources */,
 				375D24B521E01131007AB25A /* context_test.c in Sources */,
 				46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */,
@@ -1971,6 +2005,7 @@
 				B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
 				46A3C98117DFA81A002865AE /* VSTheme.m in Sources */,
+				B543C7E123CF76D900003A80 /* NotesListState.swift in Sources */,
 				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */,
 				B5B85BA32351730700AD5221 /* NSPredicate+Simplenote.swift in Sources */,
@@ -2079,6 +2114,7 @@
 				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
+				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */,
 				B5421F4423CE7DD6004DDC19 /* MockupTableView.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
