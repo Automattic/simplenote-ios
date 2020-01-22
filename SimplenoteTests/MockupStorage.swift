@@ -31,6 +31,11 @@ class MockupStorageManager {
         return container
     }()
 
+    /// Nukes the specified Object
+    ///
+    func delete(_ object: NSManagedObject) {
+        viewContext.delete(object)
+    }
 
     /// This method effectively destroys all of the stored data, and generates a blank Persistent Store from scratch.
     ///
