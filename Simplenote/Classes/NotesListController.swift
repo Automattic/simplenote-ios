@@ -34,6 +34,9 @@ class NotesListController: NSObject {
 
     /// Indicates the maximum number of Tag results we'll yield
     ///
+    ///     -  Known Issues: If new Tags are added in a second device, and sync'ed while we're in Search Mode,
+    ///        ResultsController won't respect the limit.
+    ///
     let limitForTagResults = 5
 
     /// FSM Current State
