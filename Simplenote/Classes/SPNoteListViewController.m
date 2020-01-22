@@ -437,9 +437,9 @@
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
 
-    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
+    BOOL disableCustomTransition = UIAccessibilityIsVoiceOverRunning() || self.isSearchActive;
+    self.navigationController.delegate = disableCustomTransition ? nil : self.transitionController;
+    editor.transitioningDelegate = disableCustomTransition ? nil : self.transitionController;
 
     [editor updateNote:note];
 
