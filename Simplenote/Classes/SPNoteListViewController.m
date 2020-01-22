@@ -632,13 +632,13 @@
 
     switch (self.tagFilterType) {
         case SPTagFilterTypeShared:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagShared]];
+            [predicateList addObject:[NSPredicate predicateForNotesWithSystemTag:kSimplenoteSystemTagShared]];
             break;
         case SPTagFilterTypePinned:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagPinned]];
+            [predicateList addObject:[NSPredicate predicateForNotesWithSystemTag:kSimplenoteSystemTagPinned]];
             break;
         case SPTagFilterTypeUnread:
-            [predicateList addObject:[NSPredicate predicateForSystemTagWith:kSimplenoteSystemTagUnread]];
+            [predicateList addObject:[NSPredicate predicateForNotesWithSystemTag:kSimplenoteSystemTagUnread]];
             break;
         case SPTagFilterTypeUntagged:
             [predicateList addObject:[NSPredicate predicateForUntaggedNotes]];
@@ -648,7 +648,7 @@
                 break;
             }
 
-            [predicateList addObject:[NSPredicate predicateForTagWith:appDelegate.selectedTag]];
+            [predicateList addObject:[NSPredicate predicateForNotesWithTag:appDelegate.selectedTag]];
             break;
         default:
             break;
