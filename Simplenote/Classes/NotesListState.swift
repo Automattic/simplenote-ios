@@ -113,7 +113,7 @@ extension NotesListState {
             return nil
         }
 
-        return NSPredicate.predicateForTag(name: keyword)
+        return NSPredicate.predicateForTag(keyword: keyword)
     }
 }
 

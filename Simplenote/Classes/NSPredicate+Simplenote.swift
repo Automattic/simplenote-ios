@@ -72,16 +72,29 @@ extension NSPredicate {
         return NSPredicate(format: "tags MATCHES[n] %@", regex)
     }
 
-    /// Returns a NSPredicate that will match Tags with a given name
-    /// We'll completely ignore the `tag:` Search Operator, since we're already matching tag names.
+    /// Returns a NSPredicate that will match Tags with a given Keyword
+    ///
+    /// -   We'll always analyze the last token in the string
+    ///     -   Whenever the last token contains `tag:`, we'll lookup Tags with names containing the payload, excluding exact matches
+    ///     -   Otherwise we'll match Tags **containing** the last token
+    ///     -   If the `tag:` operator has no actual payload, **every single tag** will be matched (Always True Predicate)
     ///
     @objc
-    static func predicateForTag(name: String) -> NSPredicate {
-        let trimmed = name
-                        .lowercased()
-                        .replacingOccurrences(of: String.searchOperatorForTags, with: " ")
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
+    static func predicateForTag(keyword: String) -> NSPredicate {
+        let keywords = keyword.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespaces)
+        let last = keywords.last?.lowercased() ?? String()
 
-        return NSPredicate(format: "name CONTAINS[c] %@", trimmed)
+        guard let tag = last.suffix(afterPrefix: .searchOperatorForTags) else {
+            return NSPredicate(format: "name CONTAINS[c] %@", last)
+        }
+
+        guard tag.isEmpty == false else {
+            return NSPredicate(value: true)
+        }
+
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "name CONTAINS[c] %@", tag),
+            NSPredicate(format: "name <>[c] %@", tag)
+        ])
     }
 }

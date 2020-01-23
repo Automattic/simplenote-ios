@@ -212,33 +212,61 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertFalse(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForTag(name:)` matches Tags with names containing the specified name (partially or fully)
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches Tags with names containing the specified name (Partially)
     ///
-    func testPredicateForTagWithNameMatchesEntitiesWithTheTargetName() {
+    func testPredicateForTagWithKeywordPerformsPartialMatches() {
         let entity = MockupTag()
         entity.name = "123456789"
-        XCTAssertTrue(NSPredicate.predicateForTag(name: entity.name!).evaluate(with: entity))
-        XCTAssertTrue(NSPredicate.predicateForTag(name: "45").evaluate(with: entity))
-        XCTAssertTrue(NSPredicate.predicateForTag(name: "tag:45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:45").evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForTag(name:)` will match Tags that contain a given string
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` will ignore exact matches
     ///
-    func testPredicateForTagWithNameCompletelyIgnoresSearchTagOperator() {
+    func testPredicateForTagWithKeywordCompletelyIgnoresExactTagMatches() {
         let entity = MockupTag()
         entity.name = "123456789"
-        XCTAssertTrue(NSPredicate.predicateForTag(name: "tag:123456789").evaluate(with: entity))
-        XCTAssertTrue(NSPredicate.predicateForTag(name: "TAG:123456789").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "tag:123456789").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "TAG:123456789").evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForTag(name:)` won't match Tags that don't contain a given string
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` won't match Tags that don't contain a given string
     ///
-    func testPredicateForTagWithNameWontMatcheEntitiesWithoutTheTargetName() {
+    func testPredicateForTagWithNameWontMatchEntitiesWithoutTheTargetName() {
         let entity = MockupTag()
         entity.name = "123456789"
-        XCTAssertFalse(NSPredicate.predicateForTag(name: "0").evaluate(with: entity))
-        XCTAssertFalse(NSPredicate.predicateForTag(name: "tag:0").evaluate(with: entity))
-        XCTAssertFalse(NSPredicate.predicateForTag(name: "TaG:0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "tag:0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "TaG:0").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` only performs lookup OPs over the last keyword
+    ///
+    func testPredicateForTagWithKeywordIsOnlyInterestedInTheLastKeyword() {
+        let entity = MockupTag()
+        entity.name = "123456789"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: entity.name!).evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "ignored alsoIgnored 45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "ignored alsoIgnored tag:45").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches Tags with names containing the full keyword (whenever there is no Tag Operator)
+    ///
+    func testPredicateForTagWithKeywordPerformsFullMatchesWhenThereIsNoTagOperator() {
+        let entity = MockupTag()
+        entity.name = "123456789"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "123456789").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches *everything* whenever the `tag:` operator has no payload
+    ///
+    func testPredicateForTagWithKeywordMatchesEverythingWheneverSearchTagOperatorHasNoPayload() {
+        let entity = MockupTag()
+        entity.name = nil
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:").evaluate(with: entity))
+
+        entity.name = "whatever"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:").evaluate(with: entity))
     }
 }
 
