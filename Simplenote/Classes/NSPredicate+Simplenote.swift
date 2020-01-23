@@ -5,10 +5,6 @@ import Foundation
 //
 extension NSPredicate {
 
-    /// `tag:123`: Tag Predicate should ignore this keyword
-    /// Tags should support partial matches
-    ///
-
     /// Returns a collection of NSPredicates that will match, as a compound, a given Search Text
     ///
     @objc(predicateForSearchText:)
