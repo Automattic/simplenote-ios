@@ -329,7 +329,7 @@ private extension SPNoteListViewController {
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
-        cell.titleText = "tag:" + tag.name
+        cell.titleText = String.searchOperatorForTags + tag.name
         return cell
     }
 }
