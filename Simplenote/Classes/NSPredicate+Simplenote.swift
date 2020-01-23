@@ -25,6 +25,10 @@ extension NSPredicate {
             output.append( NSPredicate(format: "tags CONTAINS[c] %@", tag) )
         }
 
+        guard !output.isEmpty else {
+            return NSPredicate(value: true)
+        }
+
         return NSCompoundPredicate(andPredicateWithSubpredicates: output)
     }
 
