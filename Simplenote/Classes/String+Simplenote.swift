@@ -13,7 +13,7 @@ extension String {
     /// Returns the Suffix string after a given `prefix` (if any!)
     ///
     func suffix(afterPrefix prefix: String) -> String? {
-        guard hasPrefix(prefix), count > prefix.count else {
+        guard hasPrefix(prefix), count >= prefix.count else {
             return nil
         }
 

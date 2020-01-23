@@ -17,7 +17,7 @@ class StringSimplenoteTests: XCTestCase {
     ///
     func testSuffixAfterPrefixReturnsNilWheneverTheTagSearchOperatorHasAnEmptyKeyword() {
         let sample = String.searchOperatorForTags
-        XCTAssertNil(sample.suffix(afterPrefix: .searchOperatorForTags))
+        XCTAssertEqual(sample.suffix(afterPrefix: .searchOperatorForTags), "")
     }
 
     /// Verifies that Suffix after Prefix returns the payload right after the first occurrence of such suffix
