@@ -147,6 +147,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 }
 
 
+/*
 #pragma mark CustomTransition
 
 - (UIView *)textViewSnapshotForNote:(Note *)note
@@ -753,6 +754,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         [_context finishInteractiveTransition];
     }
 }
+
+ */
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender {
 
