@@ -119,6 +119,15 @@ extension SPNoteListViewController {
         title = notesListController.filter.title
     }
 
+    /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
+    ///
+    func refreshSearchText(appendFilterFor tag: Tag) {
+        let keyword = String.searchOperatorForTags + tag.name
+        let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
+
+        searchController.updateSearchText(searchText: updated + .space)
+    }
+
     /// Indicates if the Deleted Notes are onScreen
     ///
     @objc
@@ -286,8 +295,8 @@ extension SPNoteListViewController: UITableViewDelegate {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
             open(note, from: indexPath, animated: true)
-        case _ as Tag:
-            break
+        case let tag as Tag:
+            refreshSearchText(appendFilterFor: tag)
         default:
             break
         }
