@@ -196,9 +196,6 @@
     [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
     [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
 
-    // Voiceover status is tracked because the custom animated transition is not used when enabled
-    [nc addObserver:self selector:@selector(didReceiveVoiceoverNotification:) name:UIAccessibilityVoiceOverStatusDidChangeNotification object:nil];
-
     // Register for keyboard notifications
     [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -436,11 +433,6 @@
     [SPTracker trackListNoteOpened];
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-
-    BOOL disableCustomTransition = UIAccessibilityIsVoiceOverRunning() || self.isSearchActive;
-    self.navigationController.delegate = disableCustomTransition ? nil : self.transitionController;
-    editor.transitioningDelegate = disableCustomTransition ? nil : self.transitionController;
-
     [editor updateNote:note];
 
     if (self.isSearchActive) {
@@ -631,19 +623,6 @@
         self.bResetTitleView = NO;
         [self.activityIndicator stopAnimating];
     }];
-}
-
-
-#pragma mark - VoiceOver
-
-- (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
-    
-    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-	
-	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
-    
 }
 
 
