@@ -10,31 +10,8 @@
 #import "SPInteractivePushPopAnimationController.h"
 
 
-#define kEditorTransitionOffset 8
-
 
 #pragma mark - Constants
-
-static const CGFloat SPAnimationPushTableViewRowSelectionDuration = 0.55;
-static const CGFloat SPAnimationPushTableViewRowSelectionDelay = 0.025;
-static const CGFloat SPAnimationPushTableViewRowSelectionDamping = 1.0;
-
-static const CGFloat SPAnimationPushTableViewRowDuration = 0.5;
-static const CGFloat SPAnimationPushTableViewRowDamping = 0.6;
-static const CGFloat SPAnimationPushTableViewRowVelocity = 8.0;
-
-static const CGFloat SPAnimationPopTableViewRowSelectionDuration = 0.45;
-static const CGFloat SPAnimationPopTableViewRowSelectionDamping = 1.0;
-static const CGFloat SPAnimationPopTableViewRowSelectionVelocity = 7.0;
-
-static const CGFloat SPAnimationPopTableViewRowDuration = 0.45;
-static const CGFloat SPAnimationPopTableViewRowDamping = 1.0;
-static const CGFloat SPAnimationPopTableViewRowVelocity = 0.6;
-
-static const CGFloat SPAnimationEmptyStatePushDuration = 0.15;
-static const CGFloat SPAnimationEmptyStatePopDuration = 0.4;
-static const CGFloat SPAnimationDelayZero = 0.0;
-
 
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
