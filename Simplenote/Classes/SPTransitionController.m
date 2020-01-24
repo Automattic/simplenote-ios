@@ -49,8 +49,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 }
 
 
-#pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
-
+#pragma mark - UINavigationControllerDelegate: Wiring PushPopAnimationController (Markdown Preview)
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
@@ -72,8 +71,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return self.pushPopAnimationController.interactiveTransition;
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)sender {
 
+#pragma mark - Gesture Recognizers
+
+- (void)handlePan:(UIPanGestureRecognizer *)sender
+{
     // By the time this method is called, the existing topViewController has been popped –
     // so topViewController contains the view we are transitioning *to*.
     // We only want to handle the Editor > List transition with a custom transition, so if
@@ -87,8 +89,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return;
 }
 
-- (void)handlePinch:(UIPinchGestureRecognizer*)sender {
-
+- (void)handlePinch:(UIPinchGestureRecognizer*)sender
+{
     if (sender.numberOfTouches >= 2 && // require two fingers
         sender.scale < 1.0 && // pinch in
         sender.state == UIGestureRecognizerStateBegan) {
@@ -99,11 +101,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return;
 }
 
-- (void)postPopGestureNotification {
-    
+#pragma mark - Notifications
+
+- (void)postPopGestureNotification
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:SPTransitionControllerPopGestureTriggeredNotificationName
                                                         object:self];
 }
+
+#pragma mark - GestureRecognizer Delegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
