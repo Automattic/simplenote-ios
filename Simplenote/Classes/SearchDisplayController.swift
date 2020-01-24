@@ -57,6 +57,13 @@ class SearchDisplayController: NSObject {
         searchBar.resignFirstResponder()
         updateStatus(active: false)
     }
+
+    /// Updates the SearchBar's Text, and notifies the Delegate
+    ///
+    func updateSearchText(searchText: String) {
+        searchBar.text = searchText
+        delegate?.searchDisplayController(self, updateSearchResults: searchText)
+    }
 }
 
 
