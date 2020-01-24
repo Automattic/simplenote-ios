@@ -28,4 +28,29 @@ class StringSimplenoteTests: XCTestCase {
 
         XCTAssertEqual(sample.suffix(afterPrefix: .searchOperatorForTags), expected)
     }
+
+    /// Verifies that `replaceLastWord(:)` returns the new word, whenever the receiver was empty
+    ///
+    func testReplaceLastWordReturnsJustTheNewWordWheneverTheReceiverWasEmpty() {
+        let expected = "something"
+        XCTAssertEqual("".replaceLastWord(with: expected), expected)
+    }
+
+    /// Verifies that `replaceLastWord(:)` effectively swaps the last word in the receiver
+    ///
+    func testReplaceLastWordEffectivelySwapsTheLastWordInTheReceiver() {
+        let text = "one two"
+        let word = "something"
+        let expected = "one something"
+        XCTAssertEqual(text.replaceLastWord(with: word), expected)
+    }
+
+    /// Verifies that `replaceLastWord(:)` appends the new word whenever the receiver ends up in a space
+    ///
+    func testReplaceLastWordAppendsNewKeywordWheneverTheReceiverEndsInSpace() {
+        let text = "one "
+        let word = "something"
+        let expected = "one something"
+        XCTAssertEqual(text.replaceLastWord(with: word), expected)
+    }
 }

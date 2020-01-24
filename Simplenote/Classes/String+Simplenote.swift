@@ -9,6 +9,10 @@ extension String {
     ///
     static let searchOperatorForTags = NSLocalizedString("tag:", comment: "Search Operator for tags. Please preserve the semicolons when translating!")
 
+    /// String containing a Space
+    ///
+    static let space = " "
+
 
     /// Returns the Suffix string after a given `prefix` (if any!)
     ///
@@ -18,5 +22,14 @@ extension String {
         }
 
         return String(dropFirst(prefix.count))
+    }
+
+    /// Replaces the last word in the receiver (tokens are separated by whitespaces)
+    ///
+    func replaceLastWord(with word: String) -> String {
+        var words = components(separatedBy: .whitespaces).dropLast()
+        words.append(word)
+
+        return words.joined(separator: .space)
     }
 }
