@@ -739,7 +739,10 @@
                 // remove current preview
                 Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
                 note.preview = nil;
-                [self configureCell:(SPNoteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                if ([cell isKindOfClass:[SPNoteTableViewCell class]]) {
+                    [self configureCell:(SPNoteTableViewCell *)cell atIndexPath:indexPath];
+                }
             }
             else
             {
