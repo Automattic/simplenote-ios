@@ -1,12 +1,8 @@
 #import "Simplenote-Swift.h"
 
 #import "SPTransitionController.h"
-#import "SPNoteEditorViewController.h"
-#import "Note.h"
-#import "SPNoteListViewController.h"
-#import "SPEmptyListView.h"
+#import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
-#import "VSTheme+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 
 
@@ -53,41 +49,21 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 }
 
 
-#pragma mark UIViewControllerTransitioningDelegate methods — Supporting Custom Transition Animations
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    
-    return self;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    
-    return self;
-}
-
-
 #pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
                                                fromViewController:(UIViewController *)fromVC
-                                                 toViewController:(UIViewController *)toVC {
-    
-    BOOL navigatingFromListToEditor = [fromVC isKindOfClass:[SPNoteListViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteEditorViewController class]];
-    BOOL navigatingFromEditorToList = [fromVC isKindOfClass:[SPNoteEditorViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteListViewController class]];
-
-    if (navigatingFromListToEditor || navigatingFromEditorToList) {
+                                                 toViewController:(UIViewController *)toVC
+{
+    BOOL navigatingToMarkdownPreview= [toVC isKindOfClass:[SPNoteEditorViewController class]];
+    if (!navigatingToMarkdownPreview) {
         return nil;
-    } else {
-        self.pushPopAnimationController.navigationOperation = operation;
-
-        return self.pushPopAnimationController;
     }
 
-    return nil;
+    self.pushPopAnimationController.navigationOperation = operation;
+    return self.pushPopAnimationController;
 }
 
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController

@@ -3,7 +3,7 @@
 
 extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName;
 
-@interface SPTransitionController : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
+@interface SPTransitionController : NSObject <UINavigationControllerDelegate>
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 
