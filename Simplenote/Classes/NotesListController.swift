@@ -120,9 +120,11 @@ extension NotesListController {
         case .results:
             return notesController.object(at: indexPath)
         case .searching where state.sectionIndexForTags == indexPath.section:
-            return tagsController.fetchedObjects[indexPath.row]
+            let tags = tagsController.fetchedObjects
+            return indexPath.row < tags.count ? tags[indexPath.row] : nil
         case .searching where state.sectionIndexForNotes == indexPath.section:
-            return notesController.fetchedObjects[indexPath.row];
+            let notes = notesController.fetchedObjects
+            return indexPath.row < notes.count ? notes[indexPath.row] : nil
         default:
             return nil
         }

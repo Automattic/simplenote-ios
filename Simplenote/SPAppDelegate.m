@@ -376,10 +376,7 @@
 {
     NSString *selectedNoteKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedNoteKey];
     if (selectedNoteKey) {
-        Note *selectedNote = [_noteListViewController noteForKey:selectedNoteKey];
-        if (selectedNote) {
-            [_noteListViewController openNote:selectedNote fromIndexPath:nil animated:NO];
-        }
+        [self.noteListViewController openNoteWithSimperiumKey:selectedNoteKey animated:NO];
     }
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSelectedNoteKey];

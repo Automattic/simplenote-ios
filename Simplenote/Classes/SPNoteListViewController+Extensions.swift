@@ -3,9 +3,19 @@ import CoreSpotlight
 import UIKit
 
 
-// MARK: - Interface Initialization
+// MARK: - Components Initialization
 //
 extension SPNoteListViewController {
+
+    /// Sets up the Results Controller
+    ///
+    @objc
+    func configureResultsController() {
+        assert(notesListController == nil, "listController is already initialized!")
+
+        notesListController = NotesListController(viewContext: SPAppDelegate.shared().managedObjectContext)
+        notesListController.performFetch()
+    }
 
     /// Sets up the Root ViewController
     ///
@@ -40,6 +50,25 @@ extension SPNoteListViewController {
         ])
     }
 
+    /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
+    ///
+    @objc
+    func startDisplayingEntities() {
+        tableView.dataSource = self
+
+        notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
+            self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
+                self?.updateViewIfEmpty()
+            }
+        }
+    }
+}
+
+
+// MARK: - Internal Methods
+//
+extension SPNoteListViewController {
+
     /// Adjust the TableView's Insets, so that the content falls below the searchBar
     ///
     @objc
@@ -61,12 +90,6 @@ extension SPNoteListViewController {
 
         tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
     }
-}
-
-
-// MARK: - Internal Methods
-//
-extension SPNoteListViewController {
 
     /// Registers the ListViewController for Peek and Pop events.
     ///
@@ -75,20 +98,57 @@ extension SPNoteListViewController {
         registerForPreviewing(with: self, sourceView: tableView)
     }
 
-    /// Refreshes the ListViewController's Title
+    /// Refreshes the Notes ListController Filters + Sorting: We'll also update the UI (TableView + Title) to match the new parameters.
+    ///
+    @objc
+    func refreshListController() {
+        let selectedTag = SPAppDelegate.shared().selectedTag
+        let filter = NotesListFilter(selectedTag: selectedTag)
+
+        notesListController.filter = filter
+        notesListController.sortMode = Options.shared.listSortMode
+        notesListController.performFetch()
+
+        tableView.reloadData()
+    }
+
+    /// Refreshes the receiver's Title, to match the current filter
     ///
     @objc
     func refreshTitle() {
-        let selectedTag = SPAppDelegate.shared().selectedTag ?? NSLocalizedString("All Notes", comment: "Title: No filters applied")
+        title = notesListController.filter.title
+    }
 
-        switch selectedTag {
-        case kSimplenoteTrashKey:
-            title = NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
-        case kSimplenoteUntaggedKey:
-            title = NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
-        default:
-            title = selectedTag
+    /// Indicates if the Deleted Notes are onScreen
+    ///
+    @objc
+    var isDeletedFilterActive: Bool {
+        return notesListController.filter == .deleted
+    }
+
+    /// Indicates if the List is Empty
+    ///
+    @objc
+    var isListEmpty: Bool {
+        return notesListController.numberOfObjects <= 0
+    }
+
+    /// Indicates if we're in Search Mode
+    ///
+    @objc
+    var isSearchActive: Bool {
+        return searchText != nil
+    }
+
+    /// Returns the SearchText
+    ///
+    @objc
+    var searchText: String? {
+        guard case let .searching(keyword) = notesListController.state else {
+            return nil
         }
+
+        return keyword
     }
 }
 
@@ -99,8 +159,9 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard tableView.isUserInteractionEnabled,
-            tagFilterType != .deleted,
-            let indexPath = tableView.indexPathForRow(at: location)
+            isDeletedFilterActive == false,
+            let indexPath = tableView.indexPathForRow(at: location),
+            let note = notesListController.object(at: indexPath) as? Note
             else {
                 return nil
         }
@@ -112,7 +173,6 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let note = fetchedResultsController.object(at: indexPath)
         let editorViewController = SPAppDelegate.shared().noteEditorViewController
         editorViewController.update(note)
         editorViewController.isPreviewing = true
@@ -137,21 +197,22 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 extension SPNoteListViewController: UITableViewDataSource {
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? .zero
+        return notesListController.sections.count
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? .zero
+        return notesListController.sections[section].numberOfObjects
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SPNoteTableViewCell.reuseIdentifier, for: indexPath) as? SPNoteTableViewCell else {
+        switch notesListController.object(at: indexPath) {
+        case let note as Note:
+            return dequeueAndConfigureCell(for: note, in: tableView, at: indexPath)
+        case let tag as Tag:
+            return dequeueAndConfigureCell(for: tag, in: tableView, at: indexPath)
+        default:
             fatalError()
         }
-
-        configure(cell: cell, at: indexPath)
-
-        return cell
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -169,9 +230,12 @@ extension SPNoteListViewController: UITableViewDataSource {
 extension SPNoteListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let note = fetchedResultsController.object(at: indexPath)
+        // Swipeable Actions: Only enabled for Notes
+        guard let note = notesListController.object(at: indexPath) as? Note else {
+            return []
+        }
 
-        switch tagFilterType {
+        switch notesListController.filter {
         case .deleted:
             return rowActionsForDeletedNote(note)
         default:
@@ -182,27 +246,27 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard indexPath.row < (fetchedResultsController.fetchedObjects?.count ?? .zero) else {
-            return
+        switch notesListController.object(at: indexPath) {
+        case let note as Note:
+            SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
+            open(note, from: indexPath, animated: true)
+        case _ as Tag:
+            break
+        default:
+            break
         }
-
-        SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-
-        let note = fetchedResultsController.object(at: indexPath)
-        open(note, from: indexPath, animated: true)
     }
 }
 
 
 // MARK: - TableViewCell(s) Initialization
 //
-extension SPNoteListViewController {
+private extension SPNoteListViewController {
 
-    /// Sets up a given NoteTableViewCell to display the specified Note
+    /// Returns a UITableViewCell configured to display the specified Note
     ///
-    @objc(configureCell:atIndexPath:)
-    func configure(cell: SPNoteTableViewCell, at indexPath: IndexPath) {
-        let note = fetchedResultsController.object(at: indexPath)
+    func dequeueAndConfigureCell(for note: Note, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: SPNoteTableViewCell.self, for: indexPath)
 
         note.ensurePreviewStringsAreAvailable()
 
@@ -218,11 +282,20 @@ extension SPNoteListViewController {
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        guard let keyword = searchText, keyword.count > 0 else {
-            return
+        if let keyword = searchText, keyword.count > 0 {
+            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
         }
 
-        cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
+        return cell
+    }
+
+    /// Returns a UITableViewCell configured to display the specified Tag
+    ///
+    func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        // TODO: Wire a proper UITableViewCell for Tags. To be followed up in another PR!
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "tag:" + tag.name
+        return cell
     }
 }
 

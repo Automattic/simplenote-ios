@@ -614,7 +614,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPNoteListViewController *listController = [[SPAppDelegate sharedDelegate] noteListViewController];
     if (_currentNote) {
         
-        NSIndexPath *notePath = [listController.fetchedResultsController indexPathForObject:_currentNote];
+        NSIndexPath *notePath = [listController.notesListController indexPathForObject:_currentNote];
         
         if (![[listController.tableView indexPathsForVisibleRows] containsObject:notePath])
             [listController.tableView scrollToRowAtIndexPath:notePath
