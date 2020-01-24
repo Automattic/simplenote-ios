@@ -182,7 +182,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard indexPath.row >= (fetchedResultsController.fetchedObjects?.count ?? .zero) else {
+        guard indexPath.row < (fetchedResultsController.fetchedObjects?.count ?? .zero) else {
             return
         }
 
