@@ -135,7 +135,6 @@
     }
 
     NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
-
     self.transitionController = [[SPTransitionController alloc] initWithNavigationController:self.navigationController];
 }
 
