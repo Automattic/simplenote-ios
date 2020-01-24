@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "SPTransitionController.h"
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
