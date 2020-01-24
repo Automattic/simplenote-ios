@@ -134,10 +134,9 @@
         return;
     }
 
-    NSAssert(self.tableView != nil, @"tableView should be initialized before this method runs");
     NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
 
-    self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
+    self.transitionController = [[SPTransitionController alloc] initWithNavigationController:self.navigationController];
 }
 
 - (void)updateRowHeight
