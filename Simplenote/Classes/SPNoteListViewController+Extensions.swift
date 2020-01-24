@@ -232,7 +232,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Swipeable Actions: Only enabled for Notes
         guard let note = notesListController.object(at: indexPath) as? Note else {
-            return nil
+            return []
         }
 
         switch notesListController.filter {
