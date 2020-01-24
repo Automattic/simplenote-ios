@@ -20,13 +20,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @interface SPTransitionController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) SnapshotRenderer                          *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
 @property (nonatomic, weak) UINavigationController                      *navigationController;
-@property (nonatomic, strong) NSMutableArray                            *temporaryTransitionViews;
-@property (nonatomic) id<UIViewControllerContextTransitioning>          context;
-@property (nonatomic) CGFloat                                           percentComplete;
-@property (nonatomic) NSInteger                                         useCount;
 
 @end
 
@@ -35,10 +30,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 - (instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController {
     self = [super init];
     if (self) {
-        self.tableView = tableView;
-        self.renderer = [SnapshotRenderer new];
-        self.useCount = 0;
-        
         if ([UIDevice isPad]) {
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(handlePinch:)];
@@ -88,9 +79,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                       [toVC isKindOfClass:[SPNoteListViewController class]];
 
     if (navigatingFromListToEditor || navigatingFromEditorToList) {
-        // return self since ViewController adopts UIViewControllerAnimatedTransitioningProtocal
-        self.navigationOperation = operation;
-        return self;
+        return nil;
     } else {
         self.pushPopAnimationController.navigationOperation = operation;
 
@@ -103,10 +92,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController
 {
-    if (self.hasActiveInteraction) {
-        return self;
-    }
-
     return self.pushPopAnimationController.interactiveTransition;
 }
 
@@ -729,7 +714,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     // there's anything other than the List view on the top of the stack, we'll let the OS handle it.
     BOOL isTransitioningToList = [self.navigationController.topViewController isKindOfClass:[SPNoteListViewController class]];
     
-    if (isTransitioningToList && !_transitioning && sender.state == UIGestureRecognizerStateBegan) {
+    if (isTransitioningToList && sender.state == UIGestureRecognizerStateBegan) {
         [self postPopGestureNotification];
     }
     
@@ -738,8 +723,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 - (void)handlePinch:(UIPinchGestureRecognizer*)sender {
 
-    if (!_transitioning &&
-        sender.numberOfTouches >= 2 && // require two fingers
+    if (sender.numberOfTouches >= 2 && // require two fingers
         sender.scale < 1.0 && // pinch in
         sender.state == UIGestureRecognizerStateBegan) {
 

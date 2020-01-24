@@ -138,7 +138,6 @@
     NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
 
     self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
-    self.transitionController.delegate = self;
 }
 
 - (void)updateRowHeight
@@ -448,9 +447,7 @@
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];
     }
-    
-    self.transitionController.selectedPath = indexPath;
-    
+
     // Failsafe:
     // We were getting (a whole lot!) of crash reports with the exception
     // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
