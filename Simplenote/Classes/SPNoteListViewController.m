@@ -32,7 +32,6 @@
                                         UITextFieldDelegate,
                                         SearchDisplayControllerDelegate,
                                         SearchControllerPresentationContextProvider,
-                                        SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSTimer                               *searchTimer;
@@ -651,12 +650,6 @@
     
 }
 
-#pragma mark - SPTransitionDelegate
-
-- (void)interactionBegan {
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - Keyboard
 
