@@ -1,3 +1,2 @@
-- Hemos solucionado un problema que provocaba que los usuarios no pudieran reposicionar el signo de intercalación en el campo Correo electrónico (Inicio de sesión / Registro).
-- Hemos solucionado un problema que provocaba que la interfaz de usuario de la vista previa de Markdown se cerrara por error.
-- Hemos solucionado un problema que provocaba que la aplicación se bloqueara con una combinación de emojis específica.
+- Ahora, Simplenote tiene iconos de aplicación completamente nuevos.
+- Se ha solucionado un error que afectaba las detecciones táctiles en los enlaces.

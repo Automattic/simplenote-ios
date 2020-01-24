@@ -1,3 +1,2 @@
-- Er is een bug verwijderd die voorkwam dat gebruikers de caret in het e-mailveld konden verplaatsen (inloggen/aanmelden).
-- Er is een bug verwijderd die ervoor zorgde dat de UI van de Markdown-voorbeeldweergave per ongeluk werd afgewezen.
-- Er is een probleem verholpen dat ervoor zorgde dat de app crashte bij specifieke emoji-combinaties.
+- Er zijn gloednieuwe app-pictogrammen voor Simplenote toegevoegd!
+- Er is een bug gerepareerd die invloed had op tikdetectie via koppelingen.

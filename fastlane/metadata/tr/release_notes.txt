@@ -1,3 +1,2 @@
-- Kullanıcıların e-posta alanında şapka karakterinin yerini değiştirmesini engelleyen bir hata düzeltildi (Giriş/Kayıt).
-- Markdown Önizleme Kullanıcı Arayüzünün yanlışlıkla kapatılmasına neden olan bir hata düzeltildi.
-- Belirli emojiler birlikte kullanıldığında uygulamanın kilitlenmesine neden olan bir sorun giderildi.
+- Simplenote'ta yepyeni uygulama simgeleri var!
+Bağlantılar üzerindeki dokunma algılama özelliğini etkileyen bir hata düzeltildi.
