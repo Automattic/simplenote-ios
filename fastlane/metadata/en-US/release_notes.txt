@@ -1,3 +1,2 @@
--   Fixed a bug that prevented users from repositioning the caret in the Email field (Login / SignUp).
--   Fixed a bug that caused the Markdown Preview UI to get dismissed accidentally.
--   Fixed an issue that might crash the app with a specific emojis combination.
+- Simplenote just got brand new App Icons!
+- Fixed a bug that affected tap detections over links.
