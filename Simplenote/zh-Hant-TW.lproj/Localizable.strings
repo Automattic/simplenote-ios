@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-01-23 00:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -85,12 +85,6 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "確定要清空垃圾桶？此動作無法復原。";
 
-/* Message for alert when user tries to send feedback without an email address */
-"Are you sure you want to send without your email? We won't be able reply to you." = "確定不留下電子郵件地址而傳送？我們將無法回覆你。";
-
-/* Title for prompt when user tries to close the feedback view */
-"Are you sure?" = "你確定嗎？";
-
 /* User Authenticated */
 "Authenticated" = "已驗證";
 
@@ -103,18 +97,9 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
 
-/* No comment provided by engineer. */
-"Can't Access." = "無法存取。";
-
 /* Cancel Action
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
-
-/* No comment provided by engineer. */
-"Choose Photo" = "選擇照片";
-
-/* No comment provided by engineer. */
-"Close" = "關閉";
 
 /* Verb - work with others on a note */
 "Collaborate" = "協作";
@@ -128,14 +113,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "精簡版筆記清單";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "聯絡";
-
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "參與";
 
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "可以再好一點";
+/* No comment provided by engineer. */
+"Could be better" = "可以再好一點";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "無法使用提供的電子郵件地址和密碼建立帳號。";
@@ -143,7 +125,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "無法使用提供的電子郵件地址和密碼登入。";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+/* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "你可以告訴我們哪裡該改進嗎？";
 
 /* Alert dialog title displayed on sign in error */
@@ -193,9 +175,6 @@
 /* Email TextField Placeholder */
 "Email" = "電子郵件";
 
-/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Email Address" = "電子郵件地址：";
-
 /* Email Taken Alert Title */
 "Email in use" = "電子郵件地址已有人使用";
 
@@ -211,20 +190,14 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "加入佇列";
 
-/* No comment provided by engineer. */
-"Error" = "錯誤";
-
-/* No comment provided by engineer. */
-"Error uploading." = "上傳時發生錯誤。";
-
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
 /* Password Reset Action */
 "Forgotten password?" = "忘記密碼了嗎？";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
-"Great! Could you leave us a nice review?\nIt really helps." = "太棒了！你可以給我們一些回饋嗎？\n\n\n您的回饋會使我們更好";
+/* No comment provided by engineer. */
+"Great! Mind leaving a review to tell us what you like?" = "太棒了！是否能留下評論，告訴我們你喜歡哪些部分？";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "請透過我們的分析工具分享使用情形資料，協助我們改善 Simplenote。";
@@ -235,14 +208,8 @@
 /* Action - view the version history of a note */
 "History..." = "歷史紀錄…";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "需要什麼協助？";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "我喜歡";
-
-/* Title for alert that a user has entered an invalid email address */
-"Invalid Email Address." = "無效的電子郵件地址。";
+/* No comment provided by engineer. */
+"I like it" = "我喜歡";
 
 /* Last Message timestamp */
 "LastSeen" = "上次上線";
@@ -250,8 +217,8 @@
 /* Learn More Action */
 "Learn more" = "瞭解更多";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "留下評語";
+/* No comment provided by engineer. */
+"Leave a review" = "留下評語";
 
 /* Theme: Light */
 "Light" = "淡色系";
@@ -311,23 +278,14 @@
    Cancels Empty Trash Action */
 "No" = "否";
 
-/* Title for alert when user tires to send feedback without an email address */
-"No Email." = "無電子郵件。";
-
-/* Text that appears in an alert to the user when there is no internet */
-"No Internet" = "無網際網路";
-
-/* Title for message when user tries to send feedback without any text */
-"No Message." = "無訊息。";
-
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "沒有筆記";
 
 /* Message shown when no notes match a search string */
 "No Results" = "沒有任何搜尋結果";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "不用了，謝謝";
+/* No comment provided by engineer. */
+"No thanks" = "不用了，謝謝";
 
 /* No comment provided by engineer. */
 "Note not published" = "筆記未發表";
@@ -389,12 +347,6 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "請透過電子郵件啟用你的 WordPress.com 帳號，並再試一次。";
 
-/* Message for alert that user has entered an invalid email address */
-"Please check your email address, it appears to be invalid." = "請檢查你的電子郵件地址，這似乎是無效的地址。";
-
-/* Message for alert when user tires to send feedback without any text */
-"Please enter a message." = "請輸入訊息。";
-
 /* Title of Markdown preview screen */
 "Preview" = "預覽";
 
@@ -444,14 +396,11 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "傳送";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "傳送回饋意見";
-
 /* For debugging use */
 "Send a Test Crash" = "傳送故障測試";
 
-/* Label that is shown when feedback from the user is sending */
-"Sending..." = "正在傳送...";
+/* No comment provided by engineer. */
+"Send feedback" = "傳送回饋意見";
 
 /* Title of options screen */
 "Settings" = "設定";
@@ -482,6 +431,9 @@
 /* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
+/* Simplenote's Feedback Email Title */
+"Simplenote iOS Feedback" = "iOS 版 Simplenote 意見回饋";
+
 /* Authentication Error Alert Title */
 "Sorry!" = "很抱歉！";
 
@@ -498,17 +450,11 @@
 /* No comment provided by engineer. */
 "Tags" = "標籤";
 
-/* No comment provided by engineer. */
-"Take Photo" = "拍攝照片";
-
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "條款與條件";
 
 /* Simplenote terms of service */
 "Terms of Service" = "服務條款";
-
-/* No comment provided by engineer. */
-"Thanks" = "謝謝";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "你輸入的電子郵件地址已與 Simplenote 帳號建立關聯。";
@@ -521,9 +467,6 @@
 
 /* Simplenote Themes */
 "Themes" = "佈景主題";
-
-/* No comment provided by engineer. */
-"There was an error sending your feedback, please try again." = "傳送你的回饋意見時發生錯誤，請再試一次。";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
@@ -561,9 +504,6 @@
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "取消標籤備註";
 
-/* No comment provided by engineer. */
-"Use Latest Photo" = "使用最新照片";
-
 /* A user's Simplenote account */
 "Username" = "使用者名稱";
 
@@ -576,26 +516,14 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "前往網頁應用程式";
 
-/* No comment provided by engineer. */
-"We can't access your photos, please ensure this application has access in Settings." = "我們無法存取你的照片，請確定此應用程式在「設定」中有存取權。";
-
-/* No comment provided by engineer. */
-"We couldn't upload the photo, please try again." = "我們無法上傳此照片，請再試一次。";
-
-/* No comment provided by engineer. */
-"We have received your feedback and will be in contact soon." = "我們已收到你的回饋意見並將於近期聯絡你。";
-
 /* Generic error */
 "We're having problems. Please try again soon." = "發生問題，請再試一次。";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* This is the string we display when prompting the user to review the app */
+/* No comment provided by engineer. */
 "What do you think about Simplenote?" = "你覺得 Simplenote 如何？";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about WordPress?" = "你覺得 WordPress 如何？";
 
 /* Work at Automattic */
 "Work With Us" = "與我們合作";
@@ -607,17 +535,8 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
 
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "你的電子郵件：";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "你的電子郵件地址無效。";
-
-/* Message for prompt when user tries to close feedback view after having entered text */
-"Your message will be lost." = "你的訊息將會遺失。";
-
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "附加檔案";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
 "Enable others to collaborate" = "將其他人加入協作";
