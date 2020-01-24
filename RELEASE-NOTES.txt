@@ -1,6 +1,7 @@
 4.16
 -----
- 
+-   Search results now display matching tags!
+
 4.15
 -----
 -   Simplenote just got brand new App Icons!
