@@ -1,6 +1,7 @@
 4.16
 -----
 -   Search results now display matching tags!
+-   We're now supporting the `tag:keyword` search operator. Simplenote will yield Notes whose tag names contain such *keyword*.
 
 4.15
 -----
