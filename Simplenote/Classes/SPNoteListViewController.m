@@ -442,8 +442,6 @@
         [editor setSearchString:self.searchText];
     }
     
-    self.transitionController.selectedPath = indexPath;
-    
     // Failsafe:
     // We were getting (a whole lot!) of crash reports with the exception
     // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
