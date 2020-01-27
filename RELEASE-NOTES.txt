@@ -1,6 +1,7 @@
 4.16
 -----
- 
+-   The SearchBar will no longer be displayed when the Trash Filter is active.
+
 4.15
 -----
 -   Simplenote just got brand new App Icons!
