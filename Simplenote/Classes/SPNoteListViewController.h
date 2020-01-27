@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
 @property (nonatomic, strong) NotesListController                           *notesListController;
 @property (nonatomic) BOOL                                                  firstLaunch;
+@property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 
 - (void)update;
 - (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;

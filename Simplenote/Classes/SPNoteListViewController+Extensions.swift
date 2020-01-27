@@ -86,6 +86,17 @@ extension SPNoteListViewController {
         tableView.contentInset.top = searchBarStackView.frame.height
         tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
     }
+
+    /// Scrolls to the First Row whenever the flag `mustScrollToFirstRow` was set to true
+    ///
+    @objc
+    func ensureFirstRowIsVisibleIfNeeded() {
+        guard mustScrollToFirstRow else {
+            return
+        }
+
+        ensureFirstRowIsVisible()
+        mustScrollToFirstRow = false
     }
 
     /// Workaround: Scroll to the very first row. Expected to be called *just* once, right after the view has been laid out, and has been moved
@@ -128,6 +139,21 @@ extension SPNoteListViewController {
     @objc
     func refreshTitle() {
         title = notesListController.filter.title
+    }
+
+    /// Toggles the SearchBar's Visibility, based on the active Filter.
+    ///
+    /// - Note: We're marking `mustScrollToFirstRow`, which will cause the layout pass to run `ensureFirstRowIsVisible`.
+    ///         Changing the SearchBar Visibility triggers a layout pass, which updates the Table's Insets, and scrolls up to the first row.
+    ///
+    @objc
+    func refreshSearchBar() {
+        guard searchBar.isHidden != isDeletedFilterActive else {
+            return
+        }
+
+        mustScrollToFirstRow = true
+        searchBar.isHidden = isDeletedFilterActive
     }
 
     /// Indicates if the Deleted Notes are onScreen

@@ -96,6 +96,7 @@
     [super viewDidLayoutSubviews];
     [self refreshTableViewInsets];
     [self updateTableHeaderSize];
+    [self ensureFirstRowIsVisibleIfNeeded];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -526,6 +527,7 @@
 {
     [self refreshListController];
     [self refreshTitle];
+    [self refreshSearchBar];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
     BOOL isNotEmpty = !self.isListEmpty;
