@@ -66,10 +66,10 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @implementation SPTransitionController
 
-- (instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController {
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController
+{
     self = [super init];
     if (self) {
-        self.tableView = tableView;
         self.useCount = 0;
         
         if ([UIDevice isPad]) {
