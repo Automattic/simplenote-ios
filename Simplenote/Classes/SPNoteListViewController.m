@@ -66,6 +66,7 @@
         [self configureNavigationBarBackground];
         [self configureTableView];
         [self configureSearchController];
+        [self configureSearchStackView];
         [self configureResultsController];
         [self configureRootView];
         [self updateRowHeight];
