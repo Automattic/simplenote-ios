@@ -6,9 +6,9 @@
 #import "SPInteractivePushPopAnimationController.h"
 
 
+/*
 #define kEditorTransitionOffset 8
 
-/*
 #pragma mark - Constants
 
 static const CGFloat SPAnimationPushTableViewRowSelectionDuration = 0.55;
@@ -39,7 +39,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @interface SPTransitionController () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
-@property (nonatomic, weak) UINavigationController                      *navigationController;
+@property (nonatomic,   weak) UINavigationController                    *navigationController;
 @end
 
 
@@ -48,12 +48,11 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController
 {
     self = [super init];
-    if (self) {        
+    if (self) {
         if ([UIDevice isPad]) {
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(handlePinch:)];
             [navigationController.view addGestureRecognizer:pinchGesture];
-
         }
 
         // Note:

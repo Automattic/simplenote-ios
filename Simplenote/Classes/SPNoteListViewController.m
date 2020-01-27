@@ -28,8 +28,7 @@
 #import "Simplenote-Swift.h"
 
 
-@interface SPNoteListViewController () <UITableViewDelegate,
-                                        UITextFieldDelegate,
+@interface SPNoteListViewController () <UITextFieldDelegate,
                                         SearchDisplayControllerDelegate,
                                         SearchControllerPresentationContextProvider,
                                         SPRatingsPromptDelegate>
@@ -441,7 +440,7 @@
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];
     }
-    
+
     // Failsafe:
     // We were getting (a whole lot!) of crash reports with the exception
     // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
