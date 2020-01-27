@@ -83,7 +83,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 }
 */
 
-#pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
+#pragma mark - UINavigationControllerDelegate
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
@@ -719,6 +719,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 }
 
  */
+
+
+#pragma mark - Gesture Recognizers
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender {
 
