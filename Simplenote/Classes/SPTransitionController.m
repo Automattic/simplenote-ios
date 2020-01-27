@@ -3,10 +3,9 @@
 
 #import "SPTransitionController.h"
 #import "SPAppDelegate.h"
-#import "SPNoteEditorViewController.h"
 #import "VSThemeManager.h"
 #import "Note.h"
-#import "SPNoteListViewController.h"
+#import "SPMarkdownPreviewViewController.h"
 #import "SPTextView.h"
 #import "SPEditorTextView.h"
 #import "NSMutableAttributedString+Styling.h"
@@ -118,29 +117,21 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                fromViewController:(UIViewController *)fromVC
                                                  toViewController:(UIViewController *)toVC {
     
-    BOOL navigatingFromListToEditor = [fromVC isKindOfClass:[SPNoteListViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteEditorViewController class]];
-    BOOL navigatingFromEditorToList = [fromVC isKindOfClass:[SPNoteEditorViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteListViewController class]];
+    BOOL navigatingToMarkdownPreview = [fromVC isKindOfClass:[SPMarkdownPreviewViewController class]];
 
-    if (navigatingFromListToEditor || navigatingFromEditorToList) {
-        // return self since ViewController adopts UIViewControllerAnimatedTransitioningProtocal
-        self.navigationOperation = operation;
-        return self;
-    } else {
-        self.pushPopAnimationController.navigationOperation = operation;
-
-        return self.pushPopAnimationController;
+    if (!navigatingToMarkdownPreview) {
+        return nil;
     }
 
-    return nil;
+    self.pushPopAnimationController.navigationOperation = operation;
+    return self.pushPopAnimationController;
 }
 
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController
 {
     if (self.hasActiveInteraction) {
-        return self;
+        return nil;
     }
 
     return self.pushPopAnimationController.interactiveTransition;
