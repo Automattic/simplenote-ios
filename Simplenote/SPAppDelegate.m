@@ -43,10 +43,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <UINavigationControllerDelegate,
-                                SimperiumDelegate,
-                                SPBucketDelegate,
-                                PinLockDelegate>
+@interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
 
 @property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
