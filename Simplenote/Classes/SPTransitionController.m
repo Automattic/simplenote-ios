@@ -25,7 +25,7 @@
 
 #define kEditorTransitionOffset 8
 
-
+/*
 #pragma mark - Constants
 
 static const CGFloat SPAnimationPushTableViewRowSelectionDuration = 0.55;
@@ -47,7 +47,7 @@ static const CGFloat SPAnimationPopTableViewRowVelocity = 0.6;
 static const CGFloat SPAnimationEmptyStatePushDuration = 0.15;
 static const CGFloat SPAnimationEmptyStatePopDuration = 0.4;
 static const CGFloat SPAnimationDelayZero = 0.0;
-
+*/
 
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
@@ -146,7 +146,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return self.pushPopAnimationController.interactiveTransition;
 }
 
-
+/*
 #pragma mark CustomTransition
 
 - (UIView *)textViewSnapshotForNote:(Note *)note
@@ -753,6 +753,8 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         [_context finishInteractiveTransition];
     }
 }
+
+ */
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender {
 
