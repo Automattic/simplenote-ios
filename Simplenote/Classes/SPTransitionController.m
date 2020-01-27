@@ -92,7 +92,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
                                                  toViewController:(UIViewController *)toVC {
     
     BOOL navigatingToMarkdownPreview = [fromVC isKindOfClass:[SPMarkdownPreviewViewController class]];
-
     if (!navigatingToMarkdownPreview) {
         return nil;
     }
