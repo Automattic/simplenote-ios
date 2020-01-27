@@ -13,7 +13,6 @@
 #import "NSProcessInfo+Util.h"
 #import "SPModalActivityIndicator.h"
 #import "SPEditorTextView.h"
-#import "SPTransitionController.h"
 
 #import "SPObjectManager.h"
 #import "Note.h"
