@@ -439,7 +439,6 @@
 
     BOOL disableCustomTransition = UIAccessibilityIsVoiceOverRunning() || self.isSearchActive;
     self.navigationController.delegate = disableCustomTransition ? nil : self.transitionController;
-    editor.transitioningDelegate = disableCustomTransition ? nil : self.transitionController;
 
     [editor updateNote:note];
 
@@ -641,11 +640,7 @@
 - (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
     
     BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-	
-	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
-    
+    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;    
 }
 
 #pragma mark - SPTransitionDelegate

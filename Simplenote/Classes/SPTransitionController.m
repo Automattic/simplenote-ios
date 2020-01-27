@@ -95,7 +95,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return self;
 }
 
-
+/*
 #pragma mark UIViewControllerTransitioningDelegate methods — Supporting Custom Transition Animations
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
@@ -107,7 +107,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     return self;
 }
-
+*/
 
 #pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
 

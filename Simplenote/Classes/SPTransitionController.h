@@ -7,7 +7,7 @@ extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName
 - (void)interactionBegan;
 @end
 
-@interface SPTransitionController : NSObject <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
+@interface SPTransitionController : NSObject <UINavigationControllerDelegate>
 
 @property (nonatomic) id <SPTransitionControllerDelegate> delegate;
 @property (nonatomic) BOOL transitioning;
