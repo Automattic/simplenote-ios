@@ -55,7 +55,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 @interface SPTransitionController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) SnapshotRenderer                          *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
 @property (nonatomic, weak) UINavigationController                      *navigationController;
 @property (nonatomic, strong) NSMutableArray                            *temporaryTransitionViews;
@@ -71,7 +70,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     self = [super init];
     if (self) {
         self.tableView = tableView;
-        self.renderer = [SnapshotRenderer new];
         self.useCount = 0;
         
         if ([UIDevice isPad]) {
