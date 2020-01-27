@@ -730,12 +730,9 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     // We only want to handle the Editor > List transition with a custom transition, so if
     // there's anything other than the List view on the top of the stack, we'll let the OS handle it.
     BOOL isTransitioningToList = [self.navigationController.topViewController isKindOfClass:[SPNoteListViewController class]];
-    
     if (isTransitioningToList && sender.state == UIGestureRecognizerStateBegan) {
         [self postPopGestureNotification];
     }
-    
-    return;
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer*)sender
@@ -746,8 +743,6 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
         [self postPopGestureNotification];
     }
-    
-    return;
 }
 
 - (void)postPopGestureNotification
