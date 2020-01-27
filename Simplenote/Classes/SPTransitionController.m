@@ -1,24 +1,8 @@
-#import <CoreGraphics/CoreGraphics.h>
 #import "Simplenote-Swift.h"
 
-#import "SPTransitionController.h"
-#import "SPAppDelegate.h"
-#import "VSThemeManager.h"
-#import "Note.h"
-#import "SPMarkdownPreviewViewController.h"
-#import "SPTextView.h"
-#import "SPEditorTextView.h"
-#import "NSMutableAttributedString+Styling.h"
-#import "SPTransitionSnapshot.h"
-#import "SPTextView.h"
-#import "SPInteractiveTextStorage.h"
-#import "NSString+Search.h"
-#import "NSTextStorage+Highlight.h"
-#import "NSString+Attributed.h"
-#import "UIImage+Colorization.h"
-#import "SPEmptyListView.h"
 #import "UIDevice+Extensions.h"
-#import "VSTheme+Extensions.h"
+#import "SPTransitionController.h"
+#import "SPMarkdownPreviewViewController.h"
 #import "SPInteractivePushPopAnimationController.h"
 
 
