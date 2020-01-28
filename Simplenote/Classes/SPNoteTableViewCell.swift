@@ -15,10 +15,6 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var bodyTextView: UITextView!
 
-    /// Accessory StackView's Top Constraint
-    ///
-    @IBOutlet private var accessoryStackView: UIStackView!
-
     /// Note's Left Accessory ImageView
     ///
     @IBOutlet private var accessoryLeftImageView: UIImageView!
@@ -151,7 +147,6 @@ class SPNoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTextViews()
-        setupStackViews()
         refreshStyle()
         refreshConstraints()
     }
@@ -193,12 +188,6 @@ private extension SPNoteTableViewCell {
         bodyTextContainer.maximumNumberOfLines = Style.maximumNumberOfBodyLines
         bodyTextContainer.lineFragmentPadding = .zero
         bodyTextContainer.lineBreakMode = .byWordWrapping
-    }
-
-    /// Setup: StackView
-    ///
-    func setupStackViews() {
-        accessoryStackView.isLayoutMarginsRelativeArrangement = true
     }
 }
 
@@ -245,9 +234,6 @@ private extension SPNoteTableViewCell {
         let lineHeight = Style.headlineFont.lineHeight
         let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
         let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
-        let accessoryPaddingTop = ceil((lineHeight - cappedDimension) * 0.5)
-
-        accessoryStackView.layoutMargins = UIEdgeInsets(top: accessoryPaddingTop, left: 0, bottom: 0, right: 0)
 
         accessoryLeftImageViewHeightConstraint.constant = cappedDimension
         accessoryRightImageViewHeightConstraint.constant = cappedDimension
@@ -256,12 +242,9 @@ private extension SPNoteTableViewCell {
     /// Refreshes Accessory ImageView(s) and StackView(s) visibility, as needed
     ///
     func refreshAccessoriesVisibility() {
-        let isLeftImageEmpty = accessoryLeftImageView.image == nil
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
-        accessoryLeftImageView.isHidden = isLeftImageEmpty
         accessoryRightImageView.isHidden = isRightImageEmpty
-        accessoryStackView.isHidden = isLeftImageEmpty && isRightImageEmpty
     }
 
     /// Returns a NSAttributedString instance representing a given String, with the specified Font and Color. We'll also process Checklists!
