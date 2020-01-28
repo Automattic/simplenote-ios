@@ -1,5 +1,10 @@
+4.16
+-----
+ 
 4.15
 -----
+-   Simplenote just got brand new App Icons!
+-   Fixed a bug that affects tap detections over links.
 
 4.14.2
 ======

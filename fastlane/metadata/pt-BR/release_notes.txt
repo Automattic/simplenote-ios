@@ -1,3 +1,2 @@
-- Correção do bug que impedia que os usuários reposicionassem o cursor no campo e-mail (Login/Cadastre-se).
-- Correção do bug que fazia com que a interface do usuário do Markdown Preview fosse descartada acidentalmente.
-- Correção do problema que poderia travar o aplicativo com uma combinação específica de emojis.
+- O Simplenote agora tem novos ícones de aplicativo!
+- Correção do bug que afetava a detecção de toque em links.

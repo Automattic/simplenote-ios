@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-28 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-01-23 03:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -85,12 +85,6 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "휴지통을 비우시겠습니까? 이 작업은 되돌릴 수 없습니다.";
 
-/* Message for alert when user tries to send feedback without an email address */
-"Are you sure you want to send without your email? We won't be able reply to you." = "이메일 없이 보내고 싶으십니까? 회원님께 회신할 수 없습니다.";
-
-/* Title for prompt when user tries to close the feedback view */
-"Are you sure?" = "계속할까요?";
-
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
@@ -103,18 +97,9 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
-/* No comment provided by engineer. */
-"Can't Access." = "액세스를 할 수 없습니다.";
-
 /* Cancel Action
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
-
-/* No comment provided by engineer. */
-"Choose Photo" = "사진 선택";
-
-/* No comment provided by engineer. */
-"Close" = "닫기";
 
 /* Verb - work with others on a note */
 "Collaborate" = "협업";
@@ -128,14 +113,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "메모 요약 목록";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "문의";
-
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "참여";
 
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "별로";
+/* No comment provided by engineer. */
+"Could be better" = "별로";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 계정을 만들지 못했습니다.";
@@ -143,7 +125,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 로그인하지 못했습니다.";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+/* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "개선 방안을 말해 주시겠어요?";
 
 /* Alert dialog title displayed on sign in error */
@@ -193,9 +175,6 @@
 /* Email TextField Placeholder */
 "Email" = "이메일";
 
-/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Email Address" = "이메일 주소";
-
 /* Email Taken Alert Title */
 "Email in use" = "사용 중인 이메일";
 
@@ -211,20 +190,14 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "활성화됨";
 
-/* No comment provided by engineer. */
-"Error" = "오류";
-
-/* No comment provided by engineer. */
-"Error uploading." = "업로드하는 중 오류가 발생했습니다.";
-
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
 /* Password Reset Action */
 "Forgotten password?" = "비밀번호를 잊으셨나요?";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
-"Great! Could you leave us a nice review?\nIt really helps." = "훌륭합니다! 좋은 리뷰를 남겨주시겠어요?\\n\\n\\n많은 도움이 될 겁니다.";
+/* No comment provided by engineer. */
+"Great! Mind leaving a review to tell us what you like?" = "좋습니다! 마음에 드는 리뷰를 남겨주시겠습니까?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "사용 데이터를 분석 도구와 공유하여 Simplenote를 개선하도록 도와주세요.";
@@ -235,23 +208,17 @@
 /* Action - view the version history of a note */
 "History..." = "내역...";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "어떻게 도와드릴까요?";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "좋아요";
-
-/* Title for alert that a user has entered an invalid email address */
-"Invalid Email Address." = "잘못된 이메일 주소입니다.";
+/* No comment provided by engineer. */
+"I like it" = "좋아요";
 
 /* Last Message timestamp */
-"LastSeen" = "LastSeen";
+"LastSeen" = "마지막으로 본 시간";
 
 /* Learn More Action */
 "Learn more" = "더 알아보기";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "리뷰를 남겨주세요.";
+/* No comment provided by engineer. */
+"Leave a review" = "리뷰를 남겨주세요.";
 
 /* Theme: Light */
 "Light" = "밝음";
@@ -311,23 +278,14 @@
    Cancels Empty Trash Action */
 "No" = "아니요";
 
-/* Title for alert when user tires to send feedback without an email address */
-"No Email." = "이메일이 없습니다.";
-
-/* Text that appears in an alert to the user when there is no internet */
-"No Internet" = "인터넷 없음";
-
-/* Title for message when user tries to send feedback without any text */
-"No Message." = "메시지 없음";
-
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "메모 없음";
 
 /* Message shown when no notes match a search string */
 "No Results" = "결과 없음";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "괜찮습니다.";
+/* No comment provided by engineer. */
+"No thanks" = "괜찮습니다.";
 
 /* No comment provided by engineer. */
 "Note not published" = "메모 게시 안 됨";
@@ -389,12 +347,6 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "이메일을 통해 워드프레스닷컴 계정을 활성화하고 다시 시도하세요.";
 
-/* Message for alert that user has entered an invalid email address */
-"Please check your email address, it appears to be invalid." = "이메일 주소를 확인하세요. 잘못된 주소인 것 같습니다.";
-
-/* Message for alert when user tires to send feedback without any text */
-"Please enter a message." = "메시지를 입력하세요.";
-
 /* Title of Markdown preview screen */
 "Preview" = "미리보기";
 
@@ -444,14 +396,11 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "보내기";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "의견 보내기";
-
 /* For debugging use */
 "Send a Test Crash" = "테스트 충돌 보내기";
 
-/* Label that is shown when feedback from the user is sending */
-"Sending..." = "전송 중...";
+/* No comment provided by engineer. */
+"Send feedback" = "의견 보내기";
 
 /* Title of options screen */
 "Settings" = "설정";
@@ -482,6 +431,9 @@
 /* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
+/* Simplenote's Feedback Email Title */
+"Simplenote iOS Feedback" = "Simplenote iOS 피드백";
+
 /* Authentication Error Alert Title */
 "Sorry!" = "죄송합니다!";
 
@@ -498,17 +450,11 @@
 /* No comment provided by engineer. */
 "Tags" = "태그";
 
-/* No comment provided by engineer. */
-"Take Photo" = "사진 촬영";
-
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "이용 약관";
 
 /* Simplenote terms of service */
 "Terms of Service" = "서비스 약관";
-
-/* No comment provided by engineer. */
-"Thanks" = "고맙습니다.";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "입력한 이메일이 이미 Simplenote 계정과 연결되어 있습니다.";
@@ -521,9 +467,6 @@
 
 /* Simplenote Themes */
 "Themes" = "테마";
-
-/* No comment provided by engineer. */
-"There was an error sending your feedback, please try again." = "피드백을 보내는 과정에서 오류가 발생했습니다. 다시 시도하세요.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "오늘";
@@ -561,9 +504,6 @@
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "태그 없는 메모";
 
-/* No comment provided by engineer. */
-"Use Latest Photo" = "최신 사진 사용";
-
 /* A user's Simplenote account */
 "Username" = "사용자명";
 
@@ -576,26 +516,14 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "웹 앱 방문";
 
-/* No comment provided by engineer. */
-"We can't access your photos, please ensure this application has access in Settings." = "회원님의 사진에 액세스할 수 없습니다. 이 앱을 설정에서 액세스할 수 있도록 하세요.";
-
-/* No comment provided by engineer. */
-"We couldn't upload the photo, please try again." = "사진을 업로드할 수 없습니다. 다시 시도하세요.";
-
-/* No comment provided by engineer. */
-"We have received your feedback and will be in contact soon." = "회원님의 피드백을 받았으며 곧 연락하겠습니다.";
-
 /* Generic error */
 "We're having problems. Please try again soon." = "문제가 있습니다. 나중에 다시 시도하세요.";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* This is the string we display when prompting the user to review the app */
+/* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about WordPress?" = "워드프레스를 어떻게 생각하시나요?";
 
 /* Work at Automattic */
 "Work With Us" = "채용 공고";
@@ -607,17 +535,8 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "어제";
 
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "귀하의 이메일:";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "이메일 주소가 올바르지 않습니다.";
-
-/* Message for prompt when user tries to close feedback view after having entered text */
-"Your message will be lost." = "메시지가 손실됩니다.";
-
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "파일 첨부";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
 "Enable others to collaborate" = "다른 사람과 협업할 수 있습니다.";

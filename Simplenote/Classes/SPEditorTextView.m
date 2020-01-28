@@ -577,6 +577,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex
 {
+    if (![self performsAggressiveLinkWorkaround]) {
+        return NO;
+    }
+
     NSURL *link = [self.attributedText attribute:NSLinkAttributeName atIndex:characterIndex effectiveRange:nil];
     if ([link isKindOfClass:[NSURL class]] == NO || [link containsHttpScheme] == NO) {
         return NO;
@@ -585,6 +589,19 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self.editorTextDelegate textView:self receivedInteractionWithURL:link];
 
     return YES;
+}
+
+- (BOOL)performsAggressiveLinkWorkaround
+{
+    if (@available(iOS 13.2, *)) {
+        return NO;
+    }
+
+    if (@available(iOS 13, *)) {
+        return YES;
+    }
+
+    return NO;
 }
 
 - (id<SPEditorTextViewDelegate>)editorTextDelegate

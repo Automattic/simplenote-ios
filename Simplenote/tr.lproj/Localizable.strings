@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-29 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-01-22 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -85,12 +85,6 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
 
-/* Message for alert when user tries to send feedback without an email address */
-"Are you sure you want to send without your email? We won't be able reply to you." = "E-posta adresiniz olmadan göndermek istediğinizden emin misiniz? Sizi yanıtlayamayız.";
-
-/* Title for prompt when user tries to close the feedback view */
-"Are you sure?" = "Emin misiniz?";
-
 /* User Authenticated */
 "Authenticated" = "Kimliği Doğrulandı";
 
@@ -103,18 +97,9 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
 
-/* No comment provided by engineer. */
-"Can't Access." = "Erişilemiyor.";
-
 /* Cancel Action
    Verb, cancel an alert dialog */
 "Cancel" = "İptal";
-
-/* No comment provided by engineer. */
-"Choose Photo" = "Fotoğraf Seç";
-
-/* No comment provided by engineer. */
-"Close" = "Kapat";
 
 /* Verb - work with others on a note */
 "Collaborate" = "İşbirliği Yap";
@@ -128,14 +113,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Sıkıştırılmış Not Listesi";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "İletişim";
-
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Katılımda Bulunun";
 
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "Daha İyi Olabilir";
+/* No comment provided by engineer. */
+"Could be better" = "Daha İyi Olabilir";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
@@ -143,7 +125,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+/* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
 
 /* Alert dialog title displayed on sign in error */
@@ -193,9 +175,6 @@
 /* Email TextField Placeholder */
 "Email" = "E-posta";
 
-/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Email Address" = "E-posta Adresi";
-
 /* Email Taken Alert Title */
 "Email in use" = "E-posta kullanılıyor";
 
@@ -211,20 +190,14 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Sıraya Alındı";
 
-/* No comment provided by engineer. */
-"Error" = "Hata";
-
-/* No comment provided by engineer. */
-"Error uploading." = "Yükleme hatası.";
-
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
 
 /* Password Reset Action */
 "Forgotten password?" = "Parolayı mı unuttunuz?";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
-"Great! Could you leave us a nice review?\nIt really helps." = "Great! Could you leave us a nice review?\nIt really helps.";
+/* No comment provided by engineer. */
+"Great! Mind leaving a review to tell us what you like?" = "Harika! Neleri beğendiğiniz hakkında değerlendirme yapmaya ne dersiniz?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Analiz aracımızla kullanım verilerini paylaşarak Simplenote'u iyileştirmemize yardımcı olun.";
@@ -235,14 +208,8 @@
 /* Action - view the version history of a note */
 "History..." = "Geçmiş…";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "Nasıl yardımcı olabiliriz?";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "Beğendim";
-
-/* Title for alert that a user has entered an invalid email address */
-"Invalid Email Address." = "Geçersiz E-posta Adresi";
+/* No comment provided by engineer. */
+"I like it" = "Beğendim";
 
 /* Last Message timestamp */
 "LastSeen" = "Son Görülen";
@@ -250,8 +217,8 @@
 /* Learn More Action */
 "Learn more" = "Daha fazlasını öğrenin";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "Görüşünüzü Paylaşın";
+/* No comment provided by engineer. */
+"Leave a review" = "Görüşünüzü Paylaşın";
 
 /* Theme: Light */
 "Light" = "Açık";
@@ -311,23 +278,14 @@
    Cancels Empty Trash Action */
 "No" = "Hayır";
 
-/* Title for alert when user tires to send feedback without an email address */
-"No Email." = "E-posta Yok.";
-
-/* Text that appears in an alert to the user when there is no internet */
-"No Internet" = "Internet Yok";
-
-/* Title for message when user tries to send feedback without any text */
-"No Message." = "Mesaj Yok.";
-
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Not Yok";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Sonuç Yok";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "Hayır, teşekkürler";
+/* No comment provided by engineer. */
+"No thanks" = "Hayır, teşekkürler";
 
 /* No comment provided by engineer. */
 "Note not published" = "Not yayınlanmadı";
@@ -389,12 +347,6 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Lütfen WordPress.com hesabınızı e-posta aracılığıyla etkinleştirin ve tekrar deneyin.";
 
-/* Message for alert that user has entered an invalid email address */
-"Please check your email address, it appears to be invalid." = "E-posta adresiniz geçersiz gibi görünüyor. Lütfen e-posta adresinizi kontrol edin.";
-
-/* Message for alert when user tires to send feedback without any text */
-"Please enter a message." = "Lütfen bir mesaj girin.";
-
 /* Title of Markdown preview screen */
 "Preview" = "Önizleme";
 
@@ -444,14 +396,11 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Gönder";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "Geri Bildirim Gönder";
-
 /* For debugging use */
 "Send a Test Crash" = "Yanıt Vermeyen Test İletisi Gönder";
 
-/* Label that is shown when feedback from the user is sending */
-"Sending..." = "Gönderiliyor...";
+/* No comment provided by engineer. */
+"Send feedback" = "Geri Bildirim Gönder";
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
@@ -482,6 +431,9 @@
 /* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
+/* Simplenote's Feedback Email Title */
+"Simplenote iOS Feedback" = "Simplenote iOS Geri Bildirimi";
+
 /* Authentication Error Alert Title */
 "Sorry!" = "Üzgünüz!";
 
@@ -498,17 +450,11 @@
 /* No comment provided by engineer. */
 "Tags" = "Etiketler";
 
-/* No comment provided by engineer. */
-"Take Photo" = "Fotoğraf Çek";
-
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Hüküm ve Koşullar";
 
 /* Simplenote terms of service */
 "Terms of Service" = "Hizmet Koşulları";
-
-/* No comment provided by engineer. */
-"Thanks" = "Teşekkürler";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Girdiğiniz e-posta adresi zaten bir Simplenote hesabıyla ilişkilendirilmiş.";
@@ -521,9 +467,6 @@
 
 /* Simplenote Themes */
 "Themes" = "Temalar";
-
-/* No comment provided by engineer. */
-"There was an error sending your feedback, please try again." = "Geri bildiriminiz gönderilirken bir hata oluştu, lütfen tekrar deneyin.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Bugün";
@@ -561,9 +504,6 @@
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "Etiketsiz Notlar";
 
-/* No comment provided by engineer. */
-"Use Latest Photo" = "En Son Fotoğrafı Kullan";
-
 /* A user's Simplenote account */
 "Username" = "Kullanıcı adı";
 
@@ -576,26 +516,14 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Web Uygulamasını Ziyaret Et";
 
-/* No comment provided by engineer. */
-"We can't access your photos, please ensure this application has access in Settings." = "Fotoğraflarınıza erişemiyoruz. Lütfen Ayarlar'da bu uygulamanın erişimi olduğundan emin olun.";
-
-/* No comment provided by engineer. */
-"We couldn't upload the photo, please try again." = "Fotoğrafı yükleyemedik, lütfen tekrar deneyin.";
-
-/* No comment provided by engineer. */
-"We have received your feedback and will be in contact soon." = "Geri bildiriminizi aldık ve yakında sizinle iletişim kuracağız.";
-
 /* Generic error */
 "We're having problems. Please try again soon." = "Sorun yaşanıyor. Lütfen kısa bir süre sonra tekrar deneyin.";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* This is the string we display when prompting the user to review the app */
+/* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about WordPress?" = "WordPress hakkında ne düşünüyorsunuz?";
 
 /* Work at Automattic */
 "Work With Us" = "Bizimle Çalışın";
@@ -607,17 +535,8 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Dün";
 
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "E-posta adresiniz:";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "E-posta adresiniz geçerli değil.";
-
-/* Message for prompt when user tries to close feedback view after having entered text */
-"Your message will be lost." = "Mesajınız kaybolacak.";
-
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "dosya ekle";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
 "Enable others to collaborate" = "Diğer kişilerin iş birliği kurmasını sağlayın";

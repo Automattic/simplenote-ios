@@ -1,3 +1,2 @@
-- Résolution d'un bug qui empêchait les utilisateurs de repositionner le point d'insertion dans le champ Adresse e-mail (connexion / inscription).
-- Résolution d'un bug qui provoquait la fermeture involontaire de l'interface utilisateur de prévisualisation Markdown.
-- Résolution d'un problème qui risquait d'entraîner l'arrêt de l'application suite à une combinaison spécifique d'émojis.
+- De nouvelles icônes d'application sont disponibles pour Simplenote !
+- Correction d'un bug qui affectait la détection des appuis sur les liens.

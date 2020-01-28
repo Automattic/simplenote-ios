@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
+/* Translation-Revision-Date: 2019-12-02 01:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -85,12 +85,6 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "האם ברצונך לרוקן את הפח? לא ניתן לבטל את הפעולה.";
 
-/* Message for alert when user tries to send feedback without an email address */
-"Are you sure you want to send without your email? We won't be able reply to you." = "ביקשת לשלוח ללא כתובת אימייל - ההחלטה סופית? לא נוכל לענות לך.";
-
-/* Title for prompt when user tries to close the feedback view */
-"Are you sure?" = "האם ההחלטה סופית?";
-
 /* User Authenticated */
 "Authenticated" = "האימות בוצע";
 
@@ -103,18 +97,9 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
 
-/* No comment provided by engineer. */
-"Can't Access." = "אין גישה.";
-
 /* Cancel Action
    Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
-
-/* No comment provided by engineer. */
-"Choose Photo" = "בחירת תמונה";
-
-/* No comment provided by engineer. */
-"Close" = "סגור";
 
 /* Verb - work with others on a note */
 "Collaborate" = "שיתוף פעולה בעריכה";
@@ -128,14 +113,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "איש קשר";
-
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "שיתוף";
 
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "יכול להיות יותר טוב";
+/* No comment provided by engineer. */
+"Could be better" = "יכול להיות יותר טוב";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "לא ניתן ליצור חשבון באמצעות כתובת האימייל והסיסמה שסופקו.";
@@ -143,7 +125,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "לא ניתן להיכנס באמצעות כתובת האימייל והסיסמה שסופקו.";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+/* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "באפשרותך לומר לנו כיצד נוכל להשתפר?";
 
 /* Alert dialog title displayed on sign in error */
@@ -193,9 +175,6 @@
 /* Email TextField Placeholder */
 "Email" = "לשלוח מייל";
 
-/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Email Address" = "כתובת אימייל";
-
 /* Email Taken Alert Title */
 "Email in use" = "כתובת האימייל בשימוש";
 
@@ -211,20 +190,14 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
 
-/* No comment provided by engineer. */
-"Error" = "שגיאה";
-
-/* No comment provided by engineer. */
-"Error uploading." = "שגיאה בהעלאה.";
-
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "זיהוי פנים";
 
 /* Password Reset Action */
 "Forgotten password?" = "שכחת את הסיסמה?";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
-"Great! Could you leave us a nice review?\nIt really helps." = "נהדר! תוכל\/י אולי לדרג אותנו?\n\n\nזה ממש יעזור.";
+/* No comment provided by engineer. */
+"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "שיתוף נתוני השימוש שלך בכלי הניתוח שלנו יעזור לנו לשפר את Simplenote.";
@@ -235,23 +208,17 @@
 /* Action - view the version history of a note */
 "History..." = "היסטוריה...";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "כיצד נוכל לעזור?";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "אהבתי את זה";
-
-/* Title for alert that a user has entered an invalid email address */
-"Invalid Email Address." = "כתובת הדואר האלקטרוני לא תקפה.";
+/* No comment provided by engineer. */
+"I like it" = "אהבתי את זה";
 
 /* Last Message timestamp */
-"LastSeen" = "LastSeen";
+"LastSeen" = "נראה לאחרונה";
 
 /* Learn More Action */
 "Learn more" = "מידע נוסף";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "השארת חוות דעת";
+/* No comment provided by engineer. */
+"Leave a review" = "השארת חוות דעת";
 
 /* Theme: Light */
 "Light" = "צבעים בהירים";
@@ -311,23 +278,14 @@
    Cancels Empty Trash Action */
 "No" = "לא";
 
-/* Title for alert when user tires to send feedback without an email address */
-"No Email." = "אין אימייל.";
-
-/* Text that appears in an alert to the user when there is no internet */
-"No Internet" = "אין אינטרנט";
-
-/* Title for message when user tries to send feedback without any text */
-"No Message." = "אין הודעה.";
-
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "אין פתקים";
 
 /* Message shown when no notes match a search string */
 "No Results" = "אין תוצאות";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "לא תודה";
+/* No comment provided by engineer. */
+"No thanks" = "לא תודה";
 
 /* No comment provided by engineer. */
 "Note not published" = "הפתק לא פורסם";
@@ -389,12 +347,6 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "יש להפעיל את החשבון שלך ב-WordPress.com באמצעות האימייל ולנסות שוב.";
 
-/* Message for alert that user has entered an invalid email address */
-"Please check your email address, it appears to be invalid." = "כדאי לך לבדוק את כתובת הדואר האלקטרוני שלך, נראה שהיא אינה תקפה.";
-
-/* Message for alert when user tires to send feedback without any text */
-"Please enter a message." = "יש להזין הודעה.";
-
 /* Title of Markdown preview screen */
 "Preview" = "תצוגה מקדימה";
 
@@ -444,14 +396,11 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "שליחה";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "שליחת משוב";
-
 /* For debugging use */
 "Send a Test Crash" = "לשלוח קריסה של בדיקה";
 
-/* Label that is shown when feedback from the user is sending */
-"Sending..." = "שולח...";
+/* No comment provided by engineer. */
+"Send feedback" = "שליחת משוב";
 
 /* Title of options screen */
 "Settings" = "הגדרות";
@@ -482,6 +431,9 @@
 /* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
+/* Simplenote's Feedback Email Title */
+"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+
 /* Authentication Error Alert Title */
 "Sorry!" = "מצטערים!";
 
@@ -498,17 +450,11 @@
 /* No comment provided by engineer. */
 "Tags" = "תגיות";
 
-/* No comment provided by engineer. */
-"Take Photo" = "צילום תמונה";
-
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "תנאים והתניות";
 
 /* Simplenote terms of service */
 "Terms of Service" = "תנאי השירות";
-
-/* No comment provided by engineer. */
-"Thanks" = "תודה";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "כתובת האימייל שהזנת כבר משויכת לחשבון Simplenote.";
@@ -521,9 +467,6 @@
 
 /* Simplenote Themes */
 "Themes" = "ערכות עיצוב";
-
-/* No comment provided by engineer. */
-"There was an error sending your feedback, please try again." = "אירעה שגיאה בשליחת המשוב שלך, יש לנסות שוב.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "היום";
@@ -561,9 +504,6 @@
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "הסרת התגיות מהערות";
 
-/* No comment provided by engineer. */
-"Use Latest Photo" = "שימוש בתמונה האחרונה";
-
 /* A user's Simplenote account */
 "Username" = "שם משתמש";
 
@@ -576,26 +516,14 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "מעבר לאפליקציית הרשת";
 
-/* No comment provided by engineer. */
-"We can't access your photos, please ensure this application has access in Settings." = "לא יכולנו לגשת אל התמונות שלך, יש לוודא שליישום זה מוענקת גישה ב'הגדרות'.";
-
-/* No comment provided by engineer. */
-"We couldn't upload the photo, please try again." = "לא יכולנו להעלות את התמונה, יש לנסות שוב.";
-
-/* No comment provided by engineer. */
-"We have received your feedback and will be in contact soon." = "קיבלנו את המשוב שלך, וניצור קשר בקרוב.";
-
 /* Generic error */
 "We're having problems. Please try again soon." = "נתקלנו בבעיות. יש לנסות שוב בקרוב.";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* This is the string we display when prompting the user to review the app */
+/* No comment provided by engineer. */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about WordPress?" = "מה דעתך על WordPress?";
 
 /* Work at Automattic */
 "Work With Us" = "הצטרפות לכוח העבודה שלנו";
@@ -607,17 +535,8 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
 
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "כתובת האימייל שלך:";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";
-
-/* Message for prompt when user tries to close feedback view after having entered text */
-"Your message will be lost." = "ההודעה שלך תלך לאיבוד.";
-
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "צירוף קובץ";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
 "Enable others to collaborate" = "מאפשר לאחרים לשתף פעולה";

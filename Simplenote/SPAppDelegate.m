@@ -19,7 +19,6 @@
 #import "Note.h"
 #import "Tag.h"
 #import "Settings.h"
-#import "SPIntegrityHelper.h"
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
@@ -31,7 +30,6 @@
 @import Contacts;
 @import SAMKeychain;
 @import Simperium;
-@import WordPress_AppbotX;
 
 @class KeychainMigrator;
 
@@ -242,9 +240,6 @@
 //    // Initialize Background Fetch:
 //    // UIApplicationBackgroundFetchIntervalMinimum enables the device to check as frequently as it sees fit
 //	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-	
-    // Integrity Check: Fallback to GhostData, if needed
-    [SPIntegrityHelper reloadInconsistentNotesIfNeeded:self.simperium];
 
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
@@ -947,11 +942,7 @@
     if ([NSProcessInfo isRunningTests]) {
         return;
     }
-    
-    // Initialize AppbotX
-    [[ABXApiClient instance] setApiKey:[SPCredentials appbotKey]];
-    
-    // Initialize AppRatings Helper
+
     NSString *version = [[NSBundle mainBundle] shortVersionString];
     
     [[SPRatingsHelper sharedInstance] initializeForVersion:version];

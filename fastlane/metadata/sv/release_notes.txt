@@ -1,3 +1,0 @@
-- En bugg som förhindrade användare från att flytta markören i fältet E-postadress (inloggning/registrering) har korrigerats.
-- En bugg som gjorde att Markdown Preview-användargränssnittet avfärdades av misstag har korrigerats.
-- Ett problem som gjorde att appen kunde krascha vid specifika kombinationer av emojis har åtgärdats.
