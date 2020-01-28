@@ -318,10 +318,10 @@ private extension SPNoteListViewController {
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
 
-        cell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
-        cell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
-        cell.accessoryLeftTintColor = .simplenoteNoteStatusImageColor
-        cell.accessoryRightTintColor = .simplenoteNoteStatusImageColor
+        cell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
+        cell.accessoryRightImage = note.published ? .image(name: .shared) : nil
+        cell.accessoryLeftTintColor = .simplenoteNotePinStatusImageColor
+        cell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
