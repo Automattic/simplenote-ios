@@ -99,7 +99,12 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteNoteStatusImageColor: UIColor {
+    static var simplenoteNotePinStatusImageColor: UIColor {
+        .simplenoteTintColor
+    }
+
+    @objc
+    static var simplenoteNoteShareStatusImageColor: UIColor {
         UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
