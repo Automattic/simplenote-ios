@@ -276,13 +276,13 @@ extension SPNoteTableViewCell {
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
     static var cellHeight: CGFloat {
-        let verticalPadding: CGFloat = 6
-        let topTextViewPadding: CGFloat = 5
-
         let numberLines = Options.shared.numberOfPreviewLines
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
 
-        let result = 2.0 * verticalPadding + 2.0 * topTextViewPadding + CGFloat(numberLines) * lineHeight
+        let paddingBetweenLabels = Options.shared.condensedNotesList ? .zero : Style.outerVerticalStackViewSpacing
+        let insets = Style.containerInsets
+
+        let result = insets.top + paddingBetweenLabels + CGFloat(numberLines) * lineHeight + insets.bottom
 
         return result.rounded(.up)
     }
@@ -312,6 +312,14 @@ private enum Style {
     /// Body's Maximum Lines
     ///
     static let maximumNumberOfBodyLines = 2
+
+    /// Represents the Insets applied to the container view
+    ///
+    static let containerInsets = UIEdgeInsets(top: 13, left: 0, bottom: 13, right: 0)
+
+    /// Outer Vertical StackView's Spacing
+    ///
+    static let outerVerticalStackViewSpacing = CGFloat(2)
 
     /// TextView's paragraphStyle
     ///
