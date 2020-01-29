@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -65,19 +65,49 @@ Body L2</string>
                             <constraint firstItem="hr4-XQ-BeJ" firstAttribute="leading" secondItem="TZs-9B-NXz" secondAttribute="trailing" constant="6" id="0tK-Xg-kjU"/>
                             <constraint firstItem="DcU-7T-Fcq" firstAttribute="centerY" secondItem="TZs-9B-NXz" secondAttribute="centerY" id="1DO-qS-dlY"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hr4-XQ-BeJ" secondAttribute="bottom" id="5Ty-3U-NG6"/>
+                            <constraint firstAttribute="width" priority="999" constant="640" id="SKQ-O4-NUA"/>
                             <constraint firstItem="TZs-9B-NXz" firstAttribute="leading" secondItem="1kl-z0-0K0" secondAttribute="leading" id="VNt-8A-Lx6"/>
                             <constraint firstItem="hr4-XQ-BeJ" firstAttribute="top" secondItem="1kl-z0-0K0" secondAttribute="top" id="i2g-uy-UlT"/>
                             <constraint firstAttribute="trailing" secondItem="hr4-XQ-BeJ" secondAttribute="trailing" id="xVp-8W-gqR"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SKQ-O4-NUA"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="SKQ-O4-NUA"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="1kl-z0-0K0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leading" id="8ai-Nb-yMT"/>
                     <constraint firstItem="1kl-z0-0K0" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="BLy-sw-4lE"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1kl-z0-0K0" secondAttribute="trailing" id="DVN-iO-uti"/>
                     <constraint firstAttribute="trailing" secondItem="1kl-z0-0K0" secondAttribute="trailing" constant="16" id="Ig2-uE-hva"/>
+                    <constraint firstItem="1kl-z0-0K0" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="S72-c6-I0t"/>
                     <constraint firstAttribute="bottom" secondItem="1kl-z0-0K0" secondAttribute="bottom" constant="13" id="VZK-oO-oh0"/>
                     <constraint firstItem="1kl-z0-0K0" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="6" id="k1X-7o-aAs"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8ai-Nb-yMT"/>
+                        <exclude reference="DVN-iO-uti"/>
+                        <exclude reference="S72-c6-I0t"/>
+                    </mask>
+                </variation>
+                <variation key="heightClass=regular-widthClass=regular">
+                    <mask key="constraints">
+                        <include reference="8ai-Nb-yMT"/>
+                        <include reference="DVN-iO-uti"/>
+                        <exclude reference="Ig2-uE-hva"/>
+                        <include reference="S72-c6-I0t"/>
+                        <exclude reference="k1X-7o-aAs"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="accessoryLeftImageView" destination="TZs-9B-NXz" id="3wj-z3-YdC"/>
