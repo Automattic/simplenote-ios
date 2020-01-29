@@ -9,11 +9,11 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// Master View
     ///
-    @IBOutlet private var titleTextView: UITextView!
+    @IBOutlet private var titleLabel: UILabel!
 
     /// Accessory StackView
     ///
-    @IBOutlet private var bodyTextView: UITextView!
+    @IBOutlet private var bodyLabel: UILabel!
 
     /// Note's Left Accessory ImageView
     ///
@@ -81,15 +81,15 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     var titleText: String? {
         get {
-            titleTextView.text
+            titleLabel.text
         }
         set {
             guard let title = newValue else {
-                titleTextView.text = nil
+                titleLabel.text = nil
                 return
             }
 
-            titleTextView.attributedText = attributedText(from: title, font: Style.headlineFont, color: Style.headlineColor)
+            titleLabel.attributedText = attributedText(from: title, font: Style.headlineFont, color: Style.headlineColor)
         }
     }
 
@@ -97,15 +97,15 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     var bodyText: String? {
         get {
-            bodyTextView.text
+            bodyLabel.text
         }
         set {
             guard let body = newValue else {
-                bodyTextView.text = nil
+                bodyLabel.text = nil
                 return
             }
 
-            bodyTextView.attributedText = attributedText(from: body, font: Style.previewFont, color: Style.previewColor)
+            bodyLabel.attributedText = attributedText(from: body, font: Style.previewFont, color: Style.previewColor)
         }
     }
 
@@ -113,17 +113,17 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     var rendersInCondensedMode: Bool {
         get {
-            bodyTextView.isHidden
+            bodyLabel.isHidden
         }
         set {
-            bodyTextView.isHidden = newValue
+            bodyLabel.isHidden = newValue
         }
     }
 
     /// Returns the Preview's Fragment Padding
     ///
     var bodyLineFragmentPadding: CGFloat {
-        return bodyTextView.textContainer.lineFragmentPadding
+        return .zero
     }
 
 
@@ -160,8 +160,8 @@ class SPNoteTableViewCell: UITableViewCell {
     /// Highlights the partial matches with the specified color.
     ///
     func highlightSubstrings(matching keywords: String, color: UIColor) {
-        titleTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
-        bodyTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+//        titleTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+//        bodyTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
     }
 }
 
@@ -173,21 +173,14 @@ private extension SPNoteTableViewCell {
     /// Setup: TextView
     ///
     func setupTextViews() {
-        titleTextView.isAccessibilityElement = false
-        titleTextView.textContainerInset = .zero
+        titleLabel.isAccessibilityElement = false
+        bodyLabel.isAccessibilityElement = false
 
-        bodyTextView.isAccessibilityElement = false
-        bodyTextView.textContainerInset = .zero
+        titleLabel.numberOfLines = Style.maximumNumberOfTitleLines
+        titleLabel.lineBreakMode = .byWordWrapping
 
-        let titleTextContainer = titleTextView.textContainer
-        titleTextContainer.maximumNumberOfLines = Style.maximumNumberOfTitleLines
-        titleTextContainer.lineFragmentPadding = .zero
-        titleTextContainer.lineBreakMode = .byWordWrapping
-
-        let bodyTextContainer = bodyTextView.textContainer
-        bodyTextContainer.maximumNumberOfLines = Style.maximumNumberOfBodyLines
-        bodyTextContainer.lineFragmentPadding = .zero
-        bodyTextContainer.lineBreakMode = .byWordWrapping
+        bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
+        bodyLabel.lineBreakMode = .byWordWrapping
     }
 }
 
@@ -222,6 +215,8 @@ private extension SPNoteTableViewCell {
     ///
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
+        titleLabel.backgroundColor = Style.backgroundColor
+        bodyLabel.backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
         selectedView.backgroundColor = Style.selectionColor
@@ -290,11 +285,11 @@ private enum Style {
 
     /// Accessory's Ratio (measured against Line Size)
     ///
-    static let accessoryImageSizeRatio = CGFloat(0.75)
+    static let accessoryImageSizeRatio = CGFloat(0.70)
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(16)
+    static let accessoryImageMinimumSize = CGFloat(15)
 
     /// Accessory's Maximum Size
     ///
