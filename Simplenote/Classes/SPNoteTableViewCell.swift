@@ -77,37 +77,25 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Note's Title
+    /// Highlighted Keywords
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var titleText: String? {
-        get {
-            titleLabel.text
-        }
-        set {
-            guard let title = newValue else {
-                titleLabel.text = nil
-                return
-            }
+    var keywords: String?
 
-            titleLabel.attributedText = attributedText(from: title, font: Style.headlineFont, color: Style.headlineColor)
-        }
-    }
+    /// Highlighted Keywords's Tint Color
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var keywordsTintColor: UIColor = .simplenoteTintColor
+
+    /// Note's Title
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var titleText: String?
 
     /// Note's Body
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var bodyText: String? {
-        get {
-            bodyLabel.text
-        }
-        set {
-            guard let body = newValue else {
-                bodyLabel.text = nil
-                return
-            }
-
-            bodyLabel.attributedText = attributedText(from: body, font: Style.previewFont, color: Style.previewColor)
-        }
-    }
+    var bodyText: String?
 
     /// In condensed mode we simply won't render the bodyTextView
     ///
@@ -123,7 +111,7 @@ class SPNoteTableViewCell: UITableViewCell {
     /// Returns the Preview's Fragment Padding
     ///
     var bodyLineFragmentPadding: CGFloat {
-        return .zero
+        .zero
     }
 
 
@@ -157,11 +145,25 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    /// Highlights the partial matches with the specified color.
+    /// Refreshed the Title and Body AttributedString(s), based on the Text, Font and Highlight properties
     ///
-    func highlightSubstrings(matching keywords: String, color: UIColor) {
-//        titleTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
-//        bodyTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+    func refreshAttributedStrings() {
+        titleLabel.attributedText = titleText.map {
+            attributedText(from: $0,
+                           highlighing: keywords,
+                           font: Style.headlineFont,
+                           textColor: Style.headlineColor,
+                           highlightColor: keywordsTintColor)
+
+        }
+
+        bodyLabel.attributedText = bodyText.map {
+            attributedText(from: $0,
+                           highlighing: keywords,
+                           font: Style.previewFont,
+                           textColor: Style.previewColor,
+                           highlightColor: keywordsTintColor)
+        }
     }
 }
 
@@ -215,8 +217,6 @@ private extension SPNoteTableViewCell {
     ///
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
-        titleLabel.backgroundColor = Style.backgroundColor
-        bodyLabel.backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
         selectedView.backgroundColor = Style.selectionColor
@@ -242,16 +242,26 @@ private extension SPNoteTableViewCell {
         accessoryRightImageView.isHidden = isRightImageEmpty
     }
 
-    /// Returns a NSAttributedString instance representing a given String, with the specified Font and Color. We'll also process Checklists!
+    /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
     ///
-    func attributedText(from string: String, font: UIFont, color: UIColor) -> NSAttributedString {
+    func attributedText(from string: String,
+                        highlighing keywords: String?,
+                        font: UIFont,
+                        textColor: UIColor,
+                        highlightColor: UIColor) -> NSAttributedString
+    {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
-            .foregroundColor: color,
+            .foregroundColor: textColor,
             .paragraphStyle: Style.paragraphStyle
         ])
 
-        output.addChecklistAttachments(for: color)
+        output.addChecklistAttachments(for: textColor)
+
+        if let keywords = keywords {
+            output.apply(color: highlightColor, toSubstringsMatching: keywords)
+        }
+
         return output
     }
 }

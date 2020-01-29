@@ -110,6 +110,8 @@ private extension SnapshotRenderer {
     /// Configures a given SPNoteTableViewCell instance in order to properly render a given Note, with the specified Search Query.
     ///
     func configure(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
+        tableViewCell.keywords = searchQuery
+        tableViewCell.keywordsTintColor = .simplenoteTintColor
         tableViewCell.titleText = note.titlePreview
         tableViewCell.bodyText = note.bodyPreview
         tableViewCell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
@@ -118,9 +120,7 @@ private extension SnapshotRenderer {
         tableViewCell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
         tableViewCell.rendersInCondensedMode = Options.shared.condensedNotesList
 
-        if let searchQuery = searchQuery {
-            tableViewCell.highlightSubstrings(matching: searchQuery, color: .simplenoteTintColor)
-        }
+        tableViewCell.refreshAttributedStrings()
     }
 
     /// Returns a NSMutableAttributedString instance representing a given note:

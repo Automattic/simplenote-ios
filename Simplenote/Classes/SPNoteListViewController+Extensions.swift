@@ -327,9 +327,10 @@ private extension SPNoteListViewController {
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        if let keyword = searchText, keyword.count > 0 {
-            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
-        }
+        cell.keywords = searchText
+        cell.keywordsTintColor = .simplenoteTintColor
+
+        cell.refreshAttributedStrings()
 
         return cell
     }
