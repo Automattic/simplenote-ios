@@ -7,14 +7,45 @@ import UIKit
 @objcMembers
 class SPTagTableViewCell: UITableViewCell {
 
+    /// Left UIImageView
+    ///
+    @IBOutlet private var leftImageView: UIImageView!
+
+    /// Tag Name's Label
+    ///
+    @IBOutlet private var nameLabel: UILabel!
+
+
+    /// Left Image
+    ///
+    var leftImage: UIImage? {
+        get {
+            leftImageView.image
+        }
+        set {
+            leftImageView.image = newValue
+        }
+    }
+
+    /// Left Image's Tint Color
+    ///
+    var leftImageTintColor: UIColor {
+        get {
+            leftImageView.tintColor
+        }
+        set {
+            leftImageView.tintColor = newValue
+        }
+    }
+
     /// Note's Title
     ///
     var titleText: String? {
         get {
-            textLabel?.text
+            nameLabel?.text
         }
         set {
-            textLabel?.text = newValue
+            nameLabel?.text = newValue
         }
     }
 
@@ -38,7 +69,7 @@ private extension SPTagTableViewCell {
     /// Refreshes the current Style current style
     ///
     func refreshStyle() {
-        textLabel?.textColor = Style.textColor
+        nameLabel.textColor = Style.textColor
         backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
