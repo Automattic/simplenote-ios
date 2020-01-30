@@ -19,6 +19,10 @@ class SPTagTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var nameLabel: UILabel!
 
+    /// Spacing Width Constraint: We're matching the Note Cell's Leading metrics
+    ///
+    @IBOutlet private var spacingViewWidthConstraint: NSLayoutConstraint!
+
     /// Left Image
     ///
     var leftImage: UIImage? {
@@ -101,10 +105,14 @@ private extension SPTagTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let accessoryDimension = Style.labelFont.inlineAssetHeight()
-        let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
+        let assetHeight = Style.labelFont.inlineAssetHeight()
 
-        leftImageHeightConstraint.constant = cappedDimension
+        // What's the spacing about?
+        // We're matching NoteTableViewCell's Left Spacing (which is where the Pinned Indicator goes).
+        // Our goal is to have the Left Image's PositionX to match the Note Cell's title label
+        //
+        spacingViewWidthConstraint.constant = max(min(assetHeight, Style.spacingMaximumSize), Style.spacingMinimumSize)
+        leftImageHeightConstraint.constant = max(min(assetHeight, Style.imageMaximumSize), Style.imageMinimumSize)
     }
 }
 
@@ -155,11 +163,19 @@ private enum Style {
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(24)
+    static let imageMinimumSize = CGFloat(24)
 
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
-    static let accessoryImageMaximumSize = CGFloat(36)
+    static let imageMaximumSize = CGFloat(36)
+
+    /// Accessory's Minimum Size
+    ///
+    static let spacingMinimumSize = CGFloat(15)
+
+    /// Accessory's Maximum Size (1.5 the asset's size)
+    ///
+    static let spacingMaximumSize = CGFloat(24)
 
     /// Returns the Cell's Background Color
     ///
