@@ -156,7 +156,7 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(retrievedNote, note)
     }
 
-    /// Verifis that the SEarchMode yields a limited number of Tags
+    /// Verifies that the SearchMode yields a limited number of Tags
     ///
     func testSearchModeReturnsLimitedNumberOfTags() {
         insertSampleEntities(count: 100)
