@@ -318,7 +318,7 @@ private enum Style {
 
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
-    static let accessoryImageMaximumSize = CGFloat(36)
+    static let accessoryImageMaximumSize = CGFloat(24)
 
     /// Title's Maximum Lines
     ///
