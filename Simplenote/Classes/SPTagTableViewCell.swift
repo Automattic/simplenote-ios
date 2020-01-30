@@ -11,10 +11,13 @@ class SPTagTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var leftImageView: UIImageView!
 
+    /// Left UIImageView's Height Constraint
+    ///
+    @IBOutlet private var leftImageHeightConstraint: NSLayoutConstraint!
+
     /// Tag Name's Label
     ///
     @IBOutlet private var nameLabel: UILabel!
-
 
     /// Left Image
     ///
@@ -50,20 +53,38 @@ class SPTagTableViewCell: UITableViewCell {
     }
 
 
+    /// Deinitializer
+    ///
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    /// Designated Initializer
+    ///
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        startListeningToNotifications()
+    }
+
+
     // MARK: - Overridden Methods
 
     override func awakeFromNib() {
         super.awakeFromNib()
         refreshStyle()
+        refreshConstraints()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         refreshStyle()
+        refreshConstraints()
     }
 }
 
 
+// MARK: - Private Methods
+//
 private extension SPTagTableViewCell {
 
     /// Refreshes the current Style current style
@@ -76,10 +97,42 @@ private extension SPTagTableViewCell {
         selectedView.backgroundColor = Style.selectionColor
         selectedBackgroundView = selectedView
     }
+
+    /// Accessory's StackView should be aligned against the PreviewTextView's first line center
+    ///
+    func refreshConstraints() {
+        let lineHeight = Style.labelFont.lineHeight
+        let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
+
+        leftImageHeightConstraint.constant = cappedDimension
+    }
 }
 
 
-// MARK: - SPTagTableViewCell
+// MARK: - Notifications
+//
+private extension SPTagTableViewCell {
+
+    /// Wires the (related) notifications to their handlers
+    ///
+    func startListeningToNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(contentSizeCatoryWasUpdated),
+                                               name: UIContentSizeCategory.didChangeNotification,
+                                               object: nil)
+    }
+
+    /// Handles the UIContentSizeCategory.didChange Notification
+    ///
+    @objc
+    func contentSizeCatoryWasUpdated() {
+        refreshConstraints()
+    }
+}
+
+
+// MARK: - Static!
 //
 extension SPTagTableViewCell {
 
@@ -101,10 +154,28 @@ extension SPTagTableViewCell {
 //
 private enum Style {
 
+    /// Accessory's Ratio (measured against Line Size)
+    ///
+    static let accessoryImageSizeRatio = CGFloat(0.70)
+
+    /// Accessory's Minimum Size
+    ///
+    static let accessoryImageMinimumSize = CGFloat(24)
+
+    /// Accessory's Maximum Size (1.5 the asset's size)
+    ///
+    static let accessoryImageMaximumSize = CGFloat(36)
+
     /// Returns the Cell's Background Color
     ///
     static var backgroundColor: UIColor {
         .simplenoteBackgroundColor
+    }
+
+    /// Headline Font: To be applied over the first preview line
+    ///
+    static var labelFont: UIFont {
+        .preferredFont(forTextStyle: .body)
     }
 
     /// Headline Color: To be applied over the first preview line

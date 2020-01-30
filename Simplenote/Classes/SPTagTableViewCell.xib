@@ -17,18 +17,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0V4-Hb-YK3" userLabel="Container View">
-                        <rect key="frame" x="6" y="0.0" width="392" height="44"/>
+                        <rect key="frame" x="28" y="0.0" width="370" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-gy-iyg">
                                 <rect key="frame" x="0.0" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OFN-gy-iyg" secondAttribute="height" multiplier="1:1" id="jwk-yp-e9A"/>
-                                    <constraint firstAttribute="width" constant="24" id="tCT-v0-ZVj"/>
                                     <constraint firstAttribute="height" constant="24" id="zmC-sn-KYO"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b67-ta-mBe">
-                                <rect key="frame" x="40" y="12" width="352" height="20.5"/>
+                                <rect key="frame" x="40" y="12" width="330" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,13 +44,14 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0V4-Hb-YK3" firstAttribute="leading" secondItem="Ktz-33-D4X" secondAttribute="leading" constant="6" id="6d2-7i-q1c"/>
+                    <constraint firstItem="0V4-Hb-YK3" firstAttribute="leading" secondItem="Ktz-33-D4X" secondAttribute="leading" constant="28" id="6d2-7i-q1c"/>
                     <constraint firstItem="0V4-Hb-YK3" firstAttribute="top" secondItem="Ktz-33-D4X" secondAttribute="top" id="HS5-S8-8vq"/>
                     <constraint firstAttribute="bottom" secondItem="0V4-Hb-YK3" secondAttribute="bottom" id="NFD-1b-Rjr"/>
                     <constraint firstAttribute="trailing" secondItem="0V4-Hb-YK3" secondAttribute="trailing" constant="16" id="Uhn-2i-i8a"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="leftImageHeightConstraint" destination="zmC-sn-KYO" id="6oN-uw-Mec"/>
                 <outlet property="leftImageView" destination="OFN-gy-iyg" id="b7u-rw-1pv"/>
                 <outlet property="nameLabel" destination="b67-ta-mBe" id="G7X-ZI-8eq"/>
             </connections>
