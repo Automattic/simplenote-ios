@@ -43,6 +43,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="width" priority="999" constant="640" id="0MT-Ez-Bnt"/>
                             <constraint firstItem="dQ7-wQ-K9h" firstAttribute="centerY" secondItem="0V4-Hb-YK3" secondAttribute="centerY" id="Jzf-sA-wkX"/>
                             <constraint firstAttribute="trailing" secondItem="b67-ta-mBe" secondAttribute="trailing" id="NTh-4E-sfP"/>
                             <constraint firstItem="dQ7-wQ-K9h" firstAttribute="leading" secondItem="0V4-Hb-YK3" secondAttribute="leading" id="Rvs-OP-uTC"/>
@@ -51,14 +52,43 @@
                             <constraint firstItem="OFN-gy-iyg" firstAttribute="centerY" secondItem="0V4-Hb-YK3" secondAttribute="centerY" id="qVb-do-IBA"/>
                             <constraint firstItem="OFN-gy-iyg" firstAttribute="leading" secondItem="dQ7-wQ-K9h" secondAttribute="trailing" constant="6" id="xG0-63-pZi"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0MT-Ez-Bnt"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="0MT-Ez-Bnt"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0V4-Hb-YK3" firstAttribute="leading" secondItem="Ktz-33-D4X" secondAttribute="leading" constant="6" id="6d2-7i-q1c"/>
+                    <constraint firstItem="0V4-Hb-YK3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ktz-33-D4X" secondAttribute="leading" id="8ld-PX-XcK"/>
+                    <constraint firstItem="0V4-Hb-YK3" firstAttribute="centerX" secondItem="Ktz-33-D4X" secondAttribute="centerX" id="FOC-CK-rWo"/>
                     <constraint firstItem="0V4-Hb-YK3" firstAttribute="top" secondItem="Ktz-33-D4X" secondAttribute="top" id="HS5-S8-8vq"/>
                     <constraint firstAttribute="bottom" secondItem="0V4-Hb-YK3" secondAttribute="bottom" id="NFD-1b-Rjr"/>
                     <constraint firstAttribute="trailing" secondItem="0V4-Hb-YK3" secondAttribute="trailing" constant="16" id="Uhn-2i-i8a"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0V4-Hb-YK3" secondAttribute="trailing" id="cW2-Na-eEG"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8ld-PX-XcK"/>
+                        <exclude reference="FOC-CK-rWo"/>
+                        <exclude reference="cW2-Na-eEG"/>
+                    </mask>
+                </variation>
+                <variation key="heightClass=regular-widthClass=regular">
+                    <mask key="constraints">
+                        <exclude reference="6d2-7i-q1c"/>
+                        <include reference="8ld-PX-XcK"/>
+                        <include reference="FOC-CK-rWo"/>
+                        <exclude reference="Uhn-2i-i8a"/>
+                        <include reference="cW2-Na-eEG"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="leftImageHeightConstraint" destination="zmC-sn-KYO" id="6oN-uw-Mec"/>
