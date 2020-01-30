@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -15,22 +15,54 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-rM-Ize">
-                    <rect key="frame" x="20" y="5" width="384" height="48"/>
+                    <rect key="frame" x="20" y="5" width="374" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="999" constant="640" id="HdL-d5-69M"/>
+                    </constraints>
                     <viewLayoutGuide key="safeArea" id="bFo-VK-FYN"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HdL-d5-69M"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="HdL-d5-69M"/>
+                        </mask>
+                    </variation>
                 </label>
             </subviews>
             <constraints>
                 <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="ry8-TP-QDs" secondAttribute="top" constant="5" id="6tI-C6-Qno"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mCY-rM-Ize" secondAttribute="trailing" id="E3D-Be-PIY"/>
                 <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" constant="5" id="KvD-Ra-taB"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="centerX" secondItem="ry8-TP-QDs" secondAttribute="centerX" id="Pvq-mt-9SH"/>
                 <constraint firstAttribute="trailing" secondItem="mCY-rM-Ize" secondAttribute="trailing" constant="10" id="hl7-nu-VIn"/>
                 <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" id="juv-av-n5d"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ry8-TP-QDs" secondAttribute="leading" constant="20" symbolic="YES" id="m2L-kQ-aE4"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="E3D-Be-PIY"/>
+                    <exclude reference="Pvq-mt-9SH"/>
+                    <exclude reference="m2L-kQ-aE4"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="E3D-Be-PIY"/>
+                    <include reference="Pvq-mt-9SH"/>
+                    <exclude reference="hl7-nu-VIn"/>
+                    <exclude reference="juv-av-n5d"/>
+                    <include reference="m2L-kQ-aE4"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="textLabel" destination="mCY-rM-Ize" id="CGd-cy-D8S"/>
             </connections>
