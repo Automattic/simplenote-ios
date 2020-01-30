@@ -22,7 +22,6 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="ry8-TP-QDs" secondAttribute="top" constant="5" id="6tI-C6-Qno"/>
                 <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" constant="5" id="KvD-Ra-taB"/>
