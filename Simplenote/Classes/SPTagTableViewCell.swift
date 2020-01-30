@@ -101,8 +101,7 @@ private extension SPTagTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let lineHeight = Style.labelFont.lineHeight
-        let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let accessoryDimension = Style.labelFont.inlineAssetHeight()
         let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
 
         leftImageHeightConstraint.constant = cappedDimension
@@ -153,10 +152,6 @@ extension SPTagTableViewCell {
 // MARK: - Cell Styles
 //
 private enum Style {
-
-    /// Accessory's Ratio (measured against Line Size)
-    ///
-    static let accessoryImageSizeRatio = CGFloat(0.70)
 
     /// Accessory's Minimum Size
     ///
