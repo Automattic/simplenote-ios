@@ -158,11 +158,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     _editing = editing;
     self.editable = editing;
-    
-    // HACK:
-    // God, forgive me. After enabling edit mode, "former" linkified substrings are rendered with a black color.
-    // This forces UITextView to render those substrings with the same color as the rest of the TextView.
-    self.textColor = self.textColor;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
