@@ -215,6 +215,23 @@ extension SPNoteListViewController: UITableViewDataSource {
         }
     }
 
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = notesListController.sections[section]
+        guard section.displaysTitle else {
+            return nil
+        }
+
+        return section.title
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard notesListController.sections[section].displaysTitle else {
+            return nil
+        }
+
+        return tableView.dequeueReusableHeaderFooterView(ofType: SPSectionHeaderView.self)
+    }
+
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -228,6 +245,25 @@ extension SPNoteListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 //
 extension SPNoteListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch notesListController.object(at: indexPath) {
+        case is Note:
+            return noteRowHeight
+        case is Tag:
+            return tagRowHeight
+        default:
+            return .zero
+        }
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard notesListController.sections[section].displaysTitle else {
+            return .leastNormalMagnitude
+        }
+
+        return UITableView.automaticDimension
+    }
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Swipeable Actions: Only enabled for Notes
@@ -292,9 +328,8 @@ private extension SPNoteListViewController {
     /// Returns a UITableViewCell configured to display the specified Tag
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
-        // TODO: Wire a proper UITableViewCell for Tags. To be followed up in another PR!
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "tag:" + tag.name
+        let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
+        cell.titleText = "tag:" + tag.name
         return cell
     }
 }

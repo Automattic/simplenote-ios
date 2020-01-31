@@ -144,7 +144,8 @@
 
 - (void)updateRowHeight
 {
-    self.tableView.rowHeight = SPNoteTableViewCell.cellHeight;
+    self.noteRowHeight = SPNoteTableViewCell.cellHeight;
+    self.tagRowHeight = SPTagTableViewCell.cellHeight;
     [self.tableView reloadData];
 }
 
@@ -307,6 +308,8 @@
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.tableView.alwaysBounceVertical = YES;
     [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
+    [self.tableView registerNib:[SPTagTableViewCell loadNib] forCellReuseIdentifier:[SPTagTableViewCell reuseIdentifier]];
+    [self.tableView registerNib:[SPSectionHeaderView loadNib] forHeaderFooterViewReuseIdentifier:[SPSectionHeaderView reuseIdentifier]];
 }
 
 - (void)configureSearchController {
