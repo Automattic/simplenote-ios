@@ -18,7 +18,6 @@ extern NSString *const CheckListRegExPattern;
 
 @interface SPEditorTextView : SPTextView
 
-@property (nonatomic) BOOL editing;
 @property (nonatomic) BOOL lockContentOffset;
 @property (nonatomic) BOOL overideLockContentOffset;
 

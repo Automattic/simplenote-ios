@@ -86,7 +86,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         tapGestureRecognizer.cancelsTouchesInView = NO;
         
         [self addGestureRecognizer:tapGestureRecognizer];
-        [self setEditing:NO];
+        [self setEditable:NO];
     }
     return self;
 }
@@ -154,12 +154,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setNeedsLayout];
 }
 
-- (void)setEditing:(BOOL)editing
-{
-    _editing = editing;
-    self.editable = editing;
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
@@ -168,7 +162,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)becomeFirstResponder
 {
-    [self setEditing:YES];
+    [self setEditable:YES];
     return [super becomeFirstResponder];
 }
 
@@ -200,7 +194,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)didEndEditing:(NSNotification *)notification
 {
-    [self setEditing:NO];
+    [self setEditable:NO];
 }
 
 // Fixes are modified versions of https://gist.github.com/agiletortoise/a24ccbf2d33aafb2abc1
