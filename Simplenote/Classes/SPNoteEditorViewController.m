@@ -54,6 +54,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
+                                        SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 {
     NSUInteger cursorLocationBeforeRemoteUpdate;
@@ -810,6 +811,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         }];
     });
 }
+
+
+#pragma mark - SPInteractiveDismissableViewController
+
+- (BOOL)requiresFirstResponderRestorationBypass
+{
+    // Whenever an Interactive Dismiss OP kicks off, we're requesting the "First Responder Restoration" mechanism
+    // to be overridden.
+    // Ref. https://github.com/Automattic/simplenote-ios/issues/600
+    return YES;
+}
+
 
 #pragma mark search
 
