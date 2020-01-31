@@ -86,8 +86,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
         tapGestureRecognizer.cancelsTouchesInView = NO;
         
         [self addGestureRecognizer:tapGestureRecognizer];
+
+        // Why: Data Detectors simply don't work if `isEditable = YES`
         [self setEditable:NO];
     }
+
     return self;
 }
 
