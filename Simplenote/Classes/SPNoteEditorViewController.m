@@ -209,10 +209,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self ensureEditorIsFirstResponder];
 }
 
 - (void)configureNavigationBarBackground
@@ -580,11 +585,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         keyboardButton.hidden = !editing;
         newButton.hidden = editing;
     }
-}
-
-- (void)setIsPreviewing:(BOOL)isPreviewing {
-    _isPreviewing = isPreviewing;
-    [self ensureEditorIsFirstResponder];
 }
 
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
