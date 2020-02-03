@@ -17,29 +17,39 @@ extension SPNoteListViewController {
         notesListController.performFetch()
     }
 
+    /// Sets up the Search StackView
+    ///
+    @objc
+    func configureSearchStackView() {
+        assert(searchBar != nil, "searchBar must be initialized first!")
+
+        searchBarStackView = UIStackView(arrangedSubviews: [searchBar])
+        searchBarStackView.axis = .vertical
+    }
+
     /// Sets up the Root ViewController
     ///
     @objc
     func configureRootView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
         view.addSubview(navigationBarBackground)
-        view.addSubview(searchBar)
+        view.addSubview(searchBarStackView)
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
+            searchBarStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBarStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
+            searchBarStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
         ])
 
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
             navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
             navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor),
-            navigationBarBackground.bottomAnchor.constraint(equalTo: searchBar.bottomAnchor)
+            navigationBarBackground.bottomAnchor.constraint(equalTo: searchBarStackView.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -73,8 +83,20 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshTableViewInsets() {
-        tableView.contentInset.top = searchBar.frame.height
-        tableView.scrollIndicatorInsets.top = searchBar.frame.height
+        tableView.contentInset.top = searchBarStackView.frame.height
+        tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
+    }
+
+    /// Scrolls to the First Row whenever the flag `mustScrollToFirstRow` was set to true
+    ///
+    @objc
+    func ensureFirstRowIsVisibleIfNeeded() {
+        guard mustScrollToFirstRow else {
+            return
+        }
+
+        ensureFirstRowIsVisible()
+        mustScrollToFirstRow = false
     }
 
     /// Workaround: Scroll to the very first row. Expected to be called *just* once, right after the view has been laid out, and has been moved
@@ -117,6 +139,30 @@ extension SPNoteListViewController {
     @objc
     func refreshTitle() {
         title = notesListController.filter.title
+    }
+
+    /// Toggles the SearchBar's Visibility, based on the active Filter.
+    ///
+    /// - Note: We're marking `mustScrollToFirstRow`, which will cause the layout pass to run `ensureFirstRowIsVisible`.
+    ///         Changing the SearchBar Visibility triggers a layout pass, which updates the Table's Insets, and scrolls up to the first row.
+    ///
+    @objc
+    func refreshSearchBar() {
+        guard searchBar.isHidden != isDeletedFilterActive else {
+            return
+        }
+
+        mustScrollToFirstRow = true
+        searchBar.isHidden = isDeletedFilterActive
+    }
+
+    /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
+    ///
+    func refreshSearchText(appendFilterFor tag: Tag) {
+        let keyword = String.searchOperatorForTags + tag.name
+        let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
+
+        searchController.updateSearchText(searchText: updated + .space)
     }
 
     /// Indicates if the Deleted Notes are onScreen
@@ -215,6 +261,23 @@ extension SPNoteListViewController: UITableViewDataSource {
         }
     }
 
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = notesListController.sections[section]
+        guard section.displaysTitle else {
+            return nil
+        }
+
+        return section.title
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard notesListController.sections[section].displaysTitle else {
+            return nil
+        }
+
+        return tableView.dequeueReusableHeaderFooterView(ofType: SPSectionHeaderView.self)
+    }
+
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -228,6 +291,25 @@ extension SPNoteListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 //
 extension SPNoteListViewController: UITableViewDelegate {
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch notesListController.object(at: indexPath) {
+        case is Note:
+            return noteRowHeight
+        case is Tag:
+            return tagRowHeight
+        default:
+            return .zero
+        }
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard notesListController.sections[section].displaysTitle else {
+            return .leastNormalMagnitude
+        }
+
+        return UITableView.automaticDimension
+    }
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Swipeable Actions: Only enabled for Notes
@@ -250,8 +332,8 @@ extension SPNoteListViewController: UITableViewDelegate {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
             open(note, from: indexPath, animated: true)
-        case _ as Tag:
-            break
+        case let tag as Tag:
+            refreshSearchText(appendFilterFor: tag)
         default:
             break
         }
@@ -273,18 +355,19 @@ private extension SPNoteListViewController {
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
 
-        cell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
-        cell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
-        cell.accessoryLeftTintColor = .simplenoteNoteStatusImageColor
-        cell.accessoryRightTintColor = .simplenoteNoteStatusImageColor
+        cell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
+        cell.accessoryRightImage = note.published ? .image(name: .shared) : nil
+        cell.accessoryLeftTintColor = .simplenoteNotePinStatusImageColor
+        cell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
         cell.bodyText = note.bodyPreview
 
-        if let keyword = searchText, keyword.count > 0 {
-            cell.highlightSubstrings(matching: keyword, color: .simplenoteTintColor)
-        }
+        cell.keywords = searchText
+        cell.keywordsTintColor = .simplenoteTintColor
+
+        cell.refreshAttributedStrings()
 
         return cell
     }
@@ -292,9 +375,8 @@ private extension SPNoteListViewController {
     /// Returns a UITableViewCell configured to display the specified Tag
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
-        // TODO: Wire a proper UITableViewCell for Tags. To be followed up in another PR!
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "tag:" + tag.name
+        let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
+        cell.titleText = String.searchOperatorForTags + tag.name
         return cell
     }
 }
