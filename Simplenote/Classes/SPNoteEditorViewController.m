@@ -1427,19 +1427,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                          } completion:^(BOOL finished) {
                              
                              [snapshot removeFromSuperview];
-                             
+                             [self.noteEditorTextView becomeFirstResponder];
+
                          }];
-        
+
     } else {
-        
+
         [self updateNote:newNote];
         bBlankNote = YES;
     }
-    
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self->_noteEditorTextView becomeFirstResponder];
-    });
     
     bDisableShrinkingNavigationBar = NO;
 }
