@@ -9,15 +9,11 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// Master View
     ///
-    @IBOutlet private var titleTextView: UITextView!
+    @IBOutlet private var titleLabel: UILabel!
 
     /// Accessory StackView
     ///
-    @IBOutlet private var bodyTextView: UITextView!
-
-    /// Accessory StackView's Top Constraint
-    ///
-    @IBOutlet private var accessoryStackView: UIStackView!
+    @IBOutlet private var bodyLabel: UILabel!
 
     /// Note's Left Accessory ImageView
     ///
@@ -81,53 +77,41 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Note's Title
+    /// Highlighted Keywords
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var titleText: String? {
-        get {
-            titleTextView.text
-        }
-        set {
-            guard let title = newValue else {
-                titleTextView.text = nil
-                return
-            }
+    var keywords: String?
 
-            titleTextView.attributedText = attributedText(from: title, font: Style.headlineFont, color: Style.headlineColor)
-        }
-    }
+    /// Highlighted Keywords's Tint Color
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var keywordsTintColor: UIColor = .simplenoteTintColor
+
+    /// Note's Title
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var titleText: String?
 
     /// Note's Body
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var bodyText: String? {
-        get {
-            bodyTextView.text
-        }
-        set {
-            guard let body = newValue else {
-                bodyTextView.text = nil
-                return
-            }
-
-            bodyTextView.attributedText = attributedText(from: body, font: Style.previewFont, color: Style.previewColor)
-        }
-    }
+    var bodyText: String?
 
     /// In condensed mode we simply won't render the bodyTextView
     ///
     var rendersInCondensedMode: Bool {
         get {
-            bodyTextView.isHidden
+            bodyLabel.isHidden
         }
         set {
-            bodyTextView.isHidden = newValue
+            bodyLabel.isHidden = newValue
         }
     }
 
     /// Returns the Preview's Fragment Padding
     ///
     var bodyLineFragmentPadding: CGFloat {
-        return bodyTextView.textContainer.lineFragmentPadding
+        .zero
     }
 
 
@@ -151,7 +135,6 @@ class SPNoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTextViews()
-        setupStackViews()
         refreshStyle()
         refreshConstraints()
     }
@@ -162,11 +145,30 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    /// Highlights the partial matches with the specified color.
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        refreshLabelsBackground(highlighted: highlighted)
+    }
+
+    /// Refreshed the Title and Body AttributedString(s), based on the Text, Font and Highlight properties
     ///
-    func highlightSubstrings(matching keywords: String, color: UIColor) {
-        titleTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
-        bodyTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+    func refreshAttributedStrings() {
+        titleLabel.attributedText = titleText.map {
+            attributedText(from: $0,
+                           highlighing: keywords,
+                           font: Style.headlineFont,
+                           textColor: Style.headlineColor,
+                           highlightColor: keywordsTintColor)
+
+        }
+
+        bodyLabel.attributedText = bodyText.map {
+            attributedText(from: $0,
+                           highlighing: keywords,
+                           font: Style.previewFont,
+                           textColor: Style.previewColor,
+                           highlightColor: keywordsTintColor)
+        }
     }
 }
 
@@ -178,27 +180,14 @@ private extension SPNoteTableViewCell {
     /// Setup: TextView
     ///
     func setupTextViews() {
-        titleTextView.isAccessibilityElement = false
-        titleTextView.textContainerInset = .zero
+        titleLabel.isAccessibilityElement = false
+        bodyLabel.isAccessibilityElement = false
 
-        bodyTextView.isAccessibilityElement = false
-        bodyTextView.textContainerInset = .zero
+        titleLabel.numberOfLines = Style.maximumNumberOfTitleLines
+        titleLabel.lineBreakMode = .byWordWrapping
 
-        let titleTextContainer = titleTextView.textContainer
-        titleTextContainer.maximumNumberOfLines = Style.maximumNumberOfTitleLines
-        titleTextContainer.lineFragmentPadding = .zero
-        titleTextContainer.lineBreakMode = .byWordWrapping
-
-        let bodyTextContainer = bodyTextView.textContainer
-        bodyTextContainer.maximumNumberOfLines = Style.maximumNumberOfBodyLines
-        bodyTextContainer.lineFragmentPadding = .zero
-        bodyTextContainer.lineBreakMode = .byWordWrapping
-    }
-
-    /// Setup: StackView
-    ///
-    func setupStackViews() {
-        accessoryStackView.isLayoutMarginsRelativeArrangement = true
+        bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
+        bodyLabel.lineBreakMode = .byWordWrapping
     }
 }
 
@@ -233,6 +222,8 @@ private extension SPNoteTableViewCell {
     ///
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
+        titleLabel.backgroundColor = Style.backgroundColor
+        bodyLabel.backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
         selectedView.backgroundColor = Style.selectionColor
@@ -245,9 +236,6 @@ private extension SPNoteTableViewCell {
         let lineHeight = Style.headlineFont.lineHeight
         let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
         let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
-        let accessoryPaddingTop = ceil((lineHeight - cappedDimension) * 0.5)
-
-        accessoryStackView.layoutMargins = UIEdgeInsets(top: accessoryPaddingTop, left: 0, bottom: 0, right: 0)
 
         accessoryLeftImageViewHeightConstraint.constant = cappedDimension
         accessoryRightImageViewHeightConstraint.constant = cappedDimension
@@ -256,24 +244,39 @@ private extension SPNoteTableViewCell {
     /// Refreshes Accessory ImageView(s) and StackView(s) visibility, as needed
     ///
     func refreshAccessoriesVisibility() {
-        let isLeftImageEmpty = accessoryLeftImageView.image == nil
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
-        accessoryLeftImageView.isHidden = isLeftImageEmpty
         accessoryRightImageView.isHidden = isRightImageEmpty
-        accessoryStackView.isHidden = isLeftImageEmpty && isRightImageEmpty
     }
 
-    /// Returns a NSAttributedString instance representing a given String, with the specified Font and Color. We'll also process Checklists!
+    /// Refreshes the Label(s) BG Colors, to match the current highlight state (Re: Preventing alpha bending!)
     ///
-    func attributedText(from string: String, font: UIFont, color: UIColor) -> NSAttributedString {
+    func refreshLabelsBackground(highlighted: Bool) {
+        let newBackgroundColor = highlighted ? Style.selectionColor : Style.backgroundColor
+        titleLabel.backgroundColor = newBackgroundColor
+        bodyLabel.backgroundColor = newBackgroundColor
+    }
+
+    /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
+    ///
+    func attributedText(from string: String,
+                        highlighing keywords: String?,
+                        font: UIFont,
+                        textColor: UIColor,
+                        highlightColor: UIColor) -> NSAttributedString
+    {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
-            .foregroundColor: color,
+            .foregroundColor: textColor,
             .paragraphStyle: Style.paragraphStyle
         ])
 
-        output.addChecklistAttachments(for: color)
+        output.addChecklistAttachments(for: textColor)
+
+        if let keywords = keywords {
+            output.apply(color: highlightColor, toSubstringsMatching: keywords)
+        }
+
         return output
     }
 }
@@ -288,13 +291,13 @@ extension SPNoteTableViewCell {
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
     static var cellHeight: CGFloat {
-        let verticalPadding: CGFloat = 6
-        let topTextViewPadding: CGFloat = 5
-
         let numberLines = Options.shared.numberOfPreviewLines
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
 
-        let result = 2.0 * verticalPadding + 2.0 * topTextViewPadding + CGFloat(numberLines) * lineHeight
+        let paddingBetweenLabels = Options.shared.condensedNotesList ? .zero : Style.outerVerticalStackViewSpacing
+        let insets = Style.containerInsets
+
+        let result = insets.top + paddingBetweenLabels + CGFloat(numberLines) * lineHeight + insets.bottom
 
         return result.rounded(.up)
     }
@@ -307,11 +310,11 @@ private enum Style {
 
     /// Accessory's Ratio (measured against Line Size)
     ///
-    static let accessoryImageSizeRatio = CGFloat(0.75)
+    static let accessoryImageSizeRatio = CGFloat(0.70)
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(16)
+    static let accessoryImageMinimumSize = CGFloat(15)
 
     /// Accessory's Maximum Size
     ///
@@ -324,6 +327,14 @@ private enum Style {
     /// Body's Maximum Lines
     ///
     static let maximumNumberOfBodyLines = 2
+
+    /// Represents the Insets applied to the container view
+    ///
+    static let containerInsets = UIEdgeInsets(top: 13, left: 0, bottom: 13, right: 0)
+
+    /// Outer Vertical StackView's Spacing
+    ///
+    static let outerVerticalStackViewSpacing = CGFloat(2)
 
     /// TextView's paragraphStyle
     ///

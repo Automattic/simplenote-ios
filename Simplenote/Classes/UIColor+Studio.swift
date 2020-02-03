@@ -99,7 +99,12 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteNoteStatusImageColor: UIColor {
+    static var simplenoteNotePinStatusImageColor: UIColor {
+        .simplenoteTintColor
+    }
+
+    @objc
+    static var simplenoteNoteShareStatusImageColor: UIColor {
         UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
@@ -161,6 +166,11 @@ extension UIColor {
     @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .darkGray0)
+    }
+
+    @objc
+    static var simplenoteTableViewHeaderBackgroundColor: UIColor {
+        UIColor(lightColor: .gray0, darkColor: .darkGray6)
     }
 
     @objc

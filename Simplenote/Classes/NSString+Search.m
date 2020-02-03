@@ -53,8 +53,8 @@
     
 }
 
-- (NSArray *)rangesForTerms:(NSString *)terms {
-    
+- (NSArray<NSValue *> *)rangesForTerms:(NSString *)terms
+{
 	NSMutableArray *rangesFound = [NSMutableArray arrayWithCapacity:5];
     
 	NSArray *termsArray = [terms componentsSeparatedByString:@" "];
