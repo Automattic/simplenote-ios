@@ -3,6 +3,7 @@
 -   The SearchBar will no longer be displayed when the Trash Filter is active.
 -   Search results now display matching tags!
 -   We're now supporting the `tag:keyword` search operator. Simplenote will yield Notes whose tag names contain such *keyword*.
+-   Notes List's Interface is now looking more beautiful than ever.
 
 4.15
 -----

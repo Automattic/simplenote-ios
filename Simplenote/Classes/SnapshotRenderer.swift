@@ -110,17 +110,17 @@ private extension SnapshotRenderer {
     /// Configures a given SPNoteTableViewCell instance in order to properly render a given Note, with the specified Search Query.
     ///
     func configure(tableViewCell: SPNoteTableViewCell, note: Note, searchQuery: String?) {
+        tableViewCell.keywords = searchQuery
+        tableViewCell.keywordsTintColor = .simplenoteTintColor
         tableViewCell.titleText = note.titlePreview
         tableViewCell.bodyText = note.bodyPreview
-        tableViewCell.accessoryLeftImage = note.published ? .image(name: .shared) : nil
-        tableViewCell.accessoryRightImage = note.pinned ? .image(name: .pin) : nil
-        tableViewCell.accessoryLeftTintColor = accessoryColor
-        tableViewCell.accessoryRightTintColor = accessoryColor
+        tableViewCell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
+        tableViewCell.accessoryRightImage = note.published ? .image(name: .shared) : nil
+        tableViewCell.accessoryLeftTintColor = .simplenoteNotePinStatusImageColor
+        tableViewCell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
         tableViewCell.rendersInCondensedMode = Options.shared.condensedNotesList
 
-        if let searchQuery = searchQuery {
-            tableViewCell.highlightSubstrings(matching: searchQuery, color: .simplenoteTintColor)
-        }
+        tableViewCell.refreshAttributedStrings()
     }
 
     /// Returns a NSMutableAttributedString instance representing a given note:
@@ -145,12 +145,6 @@ private extension SnapshotRenderer {
 // MARK: - Private dynamic properties
 //
 private extension SnapshotRenderer {
-
-    /// Returns the Note's Status Image Color
-    ///
-    var accessoryColor: UIColor {
-        return .simplenoteNoteStatusImageColor
-    }
 
     /// Returns the (current) Body Color
     ///
