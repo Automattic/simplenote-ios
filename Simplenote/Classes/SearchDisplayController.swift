@@ -75,6 +75,7 @@ private extension SearchDisplayController {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search Placeholder")
         searchBar.searchBarStyle = .minimal
+        searchBar.autocapitalizationType = .none
         searchBar.sizeToFit()
     }
 

@@ -1,3 +1,0 @@
-- Es wurde ein Fehler behoben, bei dem Benutzer den Textcursor im E-Mail-Feld (Anmelden/Registrieren) nicht neu positionieren konnten.
-- Es wurde ein Fehler behoben, bei dem die Benutzeroberfläche der Markdown-Vorschau versehentlich geschlossen wurde.
-- Es wurde ein Problem behoben, das die App durch eine bestimmte Kombination von Emojis zum Absturz bringen konnte.

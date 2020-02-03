@@ -12,7 +12,7 @@ extension NSPredicate {
         let keywords = searchText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespaces)
         var output = [NSPredicate]()
 
-        for keyword in keywords {
+        for keyword in keywords where keyword.isEmpty == false {
             guard let tag = keyword.lowercased().suffix(afterPrefix: .searchOperatorForTags) else {
                 output.append( NSPredicate(format: "content CONTAINS[c] %@", keyword) )
                 continue

@@ -148,9 +148,9 @@ extension SPTagTableViewCell {
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
     static var cellHeight: CGFloat {
-        let verticalPadding: CGFloat = 12
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
-        let result = 2.0 * verticalPadding + lineHeight
+        let padding = Style.padding
+        let result = padding.top + lineHeight + padding.bottom
 
         return result.rounded(.up)
     }
@@ -176,6 +176,10 @@ private enum Style {
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
     static let spacingMaximumSize = CGFloat(24)
+
+    /// Tag(s) Cell Vertical Padding
+    ///
+    static let padding = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
 
     /// Returns the Cell's Background Color
     ///

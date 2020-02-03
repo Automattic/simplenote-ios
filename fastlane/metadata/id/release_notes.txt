@@ -1,3 +1,0 @@
-- Memperbaiki bug yang mencegah pengguna melakukan pemosisian ulang caret di kolom Email (Login/Daftar).
-- Memperbaiki bug yang menyebabkan UI Pratinjau Markdown tidak sengaja tertutup.
-- Memperbaiki masalah penyebab crash pada aplikasi dengan kombinasi emoji tertentu.

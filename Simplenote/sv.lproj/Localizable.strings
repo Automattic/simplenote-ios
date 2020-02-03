@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
+/* Translation-Revision-Date: 2019-12-02 01:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -85,12 +85,6 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Är du säker på att du vill tömma papperskorgen? Det här går inte att ångra.";
 
-/* Message for alert when user tries to send feedback without an email address */
-"Are you sure you want to send without your email? We won't be able reply to you." = "Vill du skicka meddelandet utan att ange din e-postadress? Om du gör det kan vi inte svara dig.";
-
-/* Title for prompt when user tries to close the feedback view */
-"Are you sure?" = "Är du säker?";
-
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
 
@@ -103,24 +97,15 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Genom att skapa ett konto godkänner du våra";
 
-/* No comment provided by engineer. */
-"Can't Access." = "Ingen åtkomst.";
-
 /* Cancel Action
    Verb, cancel an alert dialog */
 "Cancel" = "Avbryt";
-
-/* No comment provided by engineer. */
-"Choose Photo" = "Välj bild";
-
-/* No comment provided by engineer. */
-"Close" = "Stäng";
 
 /* Verb - work with others on a note */
 "Collaborate" = "Samarbeta";
 
 /* No comment provided by engineer. */
-"Collaboration has moved" = "Samarbetet har flyttats";
+"Collaboration has moved" = "Samarbete har flyttats";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Redigerare";
@@ -128,14 +113,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Komprimerad anteckningslista";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"Contact" = "Kontakt";
-
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bidra";
 
-/* This is one of the buttons we display inside of the prompt to review the app */
-"Could Be Better" = "Kunde vara bättre";
+/* No comment provided by engineer. */
+"Could be better" = "Kunde vara bättre";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Kunde inte skapa ett konto med den e-postadressen och det lösenordet.";
@@ -143,7 +125,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kunde inte logga in med den e-postadressen och det lösenordet.";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they don't like the app */
+/* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Kan du berätta för oss vad vi kan förbättra?";
 
 /* Alert dialog title displayed on sign in error */
@@ -193,9 +175,6 @@
 /* Email TextField Placeholder */
 "Email" = "E-post";
 
-/* Placeholder text we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Email Address" = "E-postadress";
-
 /* Email Taken Alert Title */
 "Email in use" = "E-postadressen används redan";
 
@@ -211,20 +190,14 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "I kö";
 
-/* No comment provided by engineer. */
-"Error" = "Fel";
-
-/* No comment provided by engineer. */
-"Error uploading." = "Fel vid uppladdning.";
-
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Ansiktsidentifiering";
 
 /* Password Reset Action */
 "Forgotten password?" = "Har du glömt lösenordet?";
 
-/* This is the text we display to the user when we ask them for a review and they've indicated they like the app */
-"Great! Could you leave us a nice review?\nIt really helps." = "Vad kul! Kan du tänka dig att ge oss en bra recension?\\n\\nDet skulle verkligen uppskattas.";
+/* No comment provided by engineer. */
+"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Hjälp oss att förbättra Simplenote genom att dela användningsdata med vårt analysverktyg.";
@@ -235,23 +208,17 @@
 /* Action - view the version history of a note */
 "History..." = "Historik...";
 
-/* This is text that appears in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback */
-"How can we help?" = "Hur kan vi hjälpa till?";
-
-/* This is one of the buttons we display inside of the prompt to review the app */
-"I Like It" = "Jag gillar den";
-
-/* Title for alert that a user has entered an invalid email address */
-"Invalid Email Address." = "Ogiltig e-postadress.";
+/* No comment provided by engineer. */
+"I like it" = "Jag gillar den";
 
 /* Last Message timestamp */
-"LastSeen" = "LastSeen";
+"LastSeen" = "Sågs senast";
 
 /* Learn More Action */
 "Learn more" = "Läs mer";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Leave a Review" = "Skriv en recension";
+/* No comment provided by engineer. */
+"Leave a review" = "Skriv en recension";
 
 /* Theme: Light */
 "Light" = "Ljust";
@@ -311,23 +278,14 @@
    Cancels Empty Trash Action */
 "No" = "Nej";
 
-/* Title for alert when user tires to send feedback without an email address */
-"No Email." = "Ingen e-postadress.";
-
-/* Text that appears in an alert to the user when there is no internet */
-"No Internet" = "Inget Internet";
-
-/* Title for message when user tries to send feedback without any text */
-"No Message." = "Ingen text.";
-
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "Inga anteckningar";
 
 /* Message shown when no notes match a search string */
 "No Results" = "Inga sökresultat";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"No Thanks" = "Nej, tack";
+/* No comment provided by engineer. */
+"No thanks" = "Nej, tack";
 
 /* No comment provided by engineer. */
 "Note not published" = "Anteckning inte publicerad";
@@ -389,12 +347,6 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Aktivera ditt WordPress.com-konto via e-post och försök igen.";
 
-/* Message for alert that user has entered an invalid email address */
-"Please check your email address, it appears to be invalid." = "Kontrollera e-postadressen. Den verkar inte vara giltig.";
-
-/* Message for alert when user tires to send feedback without any text */
-"Please enter a message." = "Du måste skriva något.";
-
 /* Title of Markdown preview screen */
 "Preview" = "Förhandsgranska";
 
@@ -444,14 +396,11 @@
 /* Verb - send the content of the note by email, message, etc */
 "Send" = "Skicka";
 
-/* This is one of the buttons we display when prompting the user for a review */
-"Send Feedback" = "Skicka feedback";
-
 /* For debugging use */
 "Send a Test Crash" = "Skicka en testkrasch";
 
-/* Label that is shown when feedback from the user is sending */
-"Sending..." = "Skickar ...";
+/* No comment provided by engineer. */
+"Send feedback" = "Skicka feedback";
 
 /* Title of options screen */
 "Settings" = "Inställningar";
@@ -482,6 +431,9 @@
 /* Our mighty brand! */
 "Simplenote" = "Simplenote";
 
+/* Simplenote's Feedback Email Title */
+"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+
 /* Authentication Error Alert Title */
 "Sorry!" = "Tyvärr!";
 
@@ -498,17 +450,11 @@
 /* No comment provided by engineer. */
 "Tags" = "Etiketter";
 
-/* No comment provided by engineer. */
-"Take Photo" = "Ta bild";
-
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Villkor";
 
 /* Simplenote terms of service */
 "Terms of Service" = "Användarvillkor";
-
-/* No comment provided by engineer. */
-"Thanks" = "Tack";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Den angivna e-postadressen är redan associerad med ett Simplenote-konto.";
@@ -521,9 +467,6 @@
 
 /* Simplenote Themes */
 "Themes" = "Teman";
-
-/* No comment provided by engineer. */
-"There was an error sending your feedback, please try again." = "Ett fel inträffade när din feedback skulle skickas. Försök igen.";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Idag";
@@ -561,9 +504,6 @@
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "Omärkta anteckningar";
 
-/* No comment provided by engineer. */
-"Use Latest Photo" = "Använd den senaste bilden";
-
 /* A user's Simplenote account */
 "Username" = "Användarnamn:";
 
@@ -576,26 +516,14 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Besök webbappen";
 
-/* No comment provided by engineer. */
-"We can't access your photos, please ensure this application has access in Settings." = "Vi kommer inte åt dina bilder. Kontrollera i inställningarna att du har ställt in åtkomst för den här appen.";
-
-/* No comment provided by engineer. */
-"We couldn't upload the photo, please try again." = "Bilden kunde inte laddas upp. Försök igen.";
-
-/* No comment provided by engineer. */
-"We have received your feedback and will be in contact soon." = "Vi har tagit emot din feedback och kommer snart att kontakta dig.";
-
 /* Generic error */
 "We're having problems. Please try again soon." = "Vi har problem. Försök igen om en stund.";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* This is the string we display when prompting the user to review the app */
+/* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
-
-/* This is the string we display when prompting the user to review the app */
-"What do you think about WordPress?" = "Vad tycker du om WordPress?";
 
 /* Work at Automattic */
 "Work With Us" = "Jobba med oss";
@@ -607,17 +535,8 @@
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Igår";
 
-/* The label we display in the feedback view that is brought up when the user doesn't like our app and they've indicated they want to give feedback */
-"Your Email:" = "Din e-post:";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig.";
-
-/* Message for prompt when user tries to close feedback view after having entered text */
-"Your message will be lost." = "Ditt meddelande kommer att försvinna.";
-
-/* This is text we display in the feedback view that we display when we prompt the user for an app review and they've indicated they don't like it and want to give us feedback. Tapping on this 'button' will pull up the photo browser so they can attach a photo */
-"attach a file" = "bifoga fil";
 
 /* Accessibility hint on button which shows the current collaborators on a note */
 "Enable others to collaborate" = "Gör så att andra kan hjälpa till och redigera";

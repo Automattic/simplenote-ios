@@ -17,6 +17,16 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` ignores spaces between keywords
+    ///
+    func testPredicateForNotesWithSearchTextIgnoresEmptySpacesInBetweenKeywords() {
+        let entity = MockupNote()
+        entity.content = "first second"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "    first       second")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` produces one subpredicate per word, and disregards newlines and spaces
     ///
     func testPredicateForNotesWithSearchTextProducesOnePredicatePerWordAndDisregardNewlinesAndSpaces() {
