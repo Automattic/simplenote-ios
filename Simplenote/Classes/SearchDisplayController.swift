@@ -64,6 +64,16 @@ class SearchDisplayController: NSObject {
         searchBar.text = searchText
         delegate?.searchDisplayController(self, updateSearchResults: searchText)
     }
+
+    /// This method will hide the NavigationBar whenever the SearchDisplayController is in active mode.
+    ///
+    /// We'll rely on this API to ensure transitions from List <> Editor are smooth: In Search Mode the list won't display the NavigationBar, but the
+    /// Editor is always expected to display a navbar. When going backwards, we'll always need to restore the navbar.
+    ///
+    @objc
+    func hideNavigationBarIfNecessary() {
+        updateNavigationBar(hidden: active)
+    }
 }
 
 
