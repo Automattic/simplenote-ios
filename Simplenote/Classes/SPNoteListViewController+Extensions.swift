@@ -17,29 +17,39 @@ extension SPNoteListViewController {
         notesListController.performFetch()
     }
 
+    /// Sets up the Search StackView
+    ///
+    @objc
+    func configureSearchStackView() {
+        assert(searchBar != nil, "searchBar must be initialized first!")
+
+        searchBarStackView = UIStackView(arrangedSubviews: [searchBar])
+        searchBarStackView.axis = .vertical
+    }
+
     /// Sets up the Root ViewController
     ///
     @objc
     func configureRootView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
         view.addSubview(navigationBarBackground)
-        view.addSubview(searchBar)
+        view.addSubview(searchBarStackView)
 
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
+            searchBarStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBarStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.searchBarInsets.left),
+            searchBarStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.searchBarInsets.right)
         ])
 
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
             navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
             navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor),
-            navigationBarBackground.bottomAnchor.constraint(equalTo: searchBar.bottomAnchor)
+            navigationBarBackground.bottomAnchor.constraint(equalTo: searchBarStackView.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -73,8 +83,20 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshTableViewInsets() {
-        tableView.contentInset.top = searchBar.frame.height
-        tableView.scrollIndicatorInsets.top = searchBar.frame.height
+        tableView.contentInset.top = searchBarStackView.frame.height
+        tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
+    }
+
+    /// Scrolls to the First Row whenever the flag `mustScrollToFirstRow` was set to true
+    ///
+    @objc
+    func ensureFirstRowIsVisibleIfNeeded() {
+        guard mustScrollToFirstRow else {
+            return
+        }
+
+        ensureFirstRowIsVisible()
+        mustScrollToFirstRow = false
     }
 
     /// Workaround: Scroll to the very first row. Expected to be called *just* once, right after the view has been laid out, and has been moved
@@ -117,6 +139,21 @@ extension SPNoteListViewController {
     @objc
     func refreshTitle() {
         title = notesListController.filter.title
+    }
+
+    /// Toggles the SearchBar's Visibility, based on the active Filter.
+    ///
+    /// - Note: We're marking `mustScrollToFirstRow`, which will cause the layout pass to run `ensureFirstRowIsVisible`.
+    ///         Changing the SearchBar Visibility triggers a layout pass, which updates the Table's Insets, and scrolls up to the first row.
+    ///
+    @objc
+    func refreshSearchBar() {
+        guard searchBar.isHidden != isDeletedFilterActive else {
+            return
+        }
+
+        mustScrollToFirstRow = true
+        searchBar.isHidden = isDeletedFilterActive
     }
 
     /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
