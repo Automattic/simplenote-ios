@@ -145,11 +145,6 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        refreshLabelsBackground(highlighted: highlighted)
-    }
-
     /// Refreshed the Title and Body AttributedString(s), based on the Text, Font and Highlight properties
     ///
     func refreshAttributedStrings() {
@@ -222,8 +217,6 @@ private extension SPNoteTableViewCell {
     ///
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
-        titleLabel.backgroundColor = Style.backgroundColor
-        bodyLabel.backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
         selectedView.backgroundColor = Style.selectionColor
@@ -246,14 +239,6 @@ private extension SPNoteTableViewCell {
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
         accessoryRightImageView.isHidden = isRightImageEmpty
-    }
-
-    /// Refreshes the Label(s) BG Colors, to match the current highlight state (Re: Preventing alpha bending!)
-    ///
-    func refreshLabelsBackground(highlighted: Bool) {
-        let newBackgroundColor = highlighted ? Style.selectionColor : Style.backgroundColor
-        titleLabel.backgroundColor = newBackgroundColor
-        bodyLabel.backgroundColor = newBackgroundColor
     }
 
     /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
