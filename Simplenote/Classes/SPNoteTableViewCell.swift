@@ -233,8 +233,7 @@ private extension SPNoteTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let lineHeight = Style.headlineFont.lineHeight
-        let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let accessoryDimension = Style.headlineFont.inlineAssetHeight()
         let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
 
         accessoryLeftImageViewHeightConstraint.constant = cappedDimension
@@ -308,15 +307,11 @@ extension SPNoteTableViewCell {
 //
 private enum Style {
 
-    /// Accessory's Ratio (measured against Line Size)
-    ///
-    static let accessoryImageSizeRatio = CGFloat(0.70)
-
     /// Accessory's Minimum Size
     ///
     static let accessoryImageMinimumSize = CGFloat(15)
 
-    /// Accessory's Maximum Size
+    /// Accessory's Maximum Size (1.5 the asset's size)
     ///
     static let accessoryImageMaximumSize = CGFloat(24)
 
