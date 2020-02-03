@@ -106,7 +106,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.searchController restoreNavigationBarStatus];
+    [self.searchController hideNavigationBarIfNecessary];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
