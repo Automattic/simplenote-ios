@@ -350,9 +350,6 @@
 
 - (BOOL)searchDisplayControllerShouldBeginSearch:(SearchDisplayController *)controller
 {
-    [self.notesListController beginSearch];
-    [self.tableView reloadData];
-
     return YES;
 }
 
@@ -371,7 +368,9 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
-    // NO-OP
+    // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
+    [self.notesListController beginSearch];
+    [self.tableView reloadData];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
