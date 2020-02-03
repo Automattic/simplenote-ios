@@ -9,7 +9,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` match entities that contain a single specified keyword
     ///
-    func testPredicatesForNotesWithSearchTextMatchesNotesContainingTheSpecifiedKeyword() {
+    func testPredicateForNotesWithSearchTextMatchesNotesContainingTheSpecifiedKeyword() {
         let entity = MockupNote()
         entity.content = "some content here and maybe a keyword"
 
@@ -17,9 +17,19 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` ignores spaces between keywords
+    ///
+    func testPredicateForNotesWithSearchTextIgnoresEmptySpacesInBetweenKeywords() {
+        let entity = MockupNote()
+        entity.content = "first second"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "    first       second")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` produces one subpredicate per word, and disregards newlines and spaces
     ///
-    func testPredicatesForNotesWithSearchTextProducesOnePredicatePerWordAndDisregardNewlinesAndSpaces() {
+    func testPredicateForNotesWithSearchTextProducesOnePredicatePerWordAndDisregardNewlinesAndSpaces() {
         let keyword = "     lots of empty spaces   \n   \n  "
         let numberOfWords = 4
         let predicate = NSPredicate.predicateForNotes(searchText: keyword) as! NSCompoundPredicate
@@ -29,7 +39,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` match entities that contain multiple specified keywords
     ///
-    func testPredicatesForNotesWithSearchTextMatchesNotesContainingMultipleSpecifiedKeywords() {
+    func testPredicateForNotesWithSearchTextMatchesNotesContainingMultipleSpecifiedKeywords() {
         let entity = MockupNote()
         entity.content = "some keyword1 here and maybe another keyword2 there"
 
@@ -39,12 +49,74 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` won't match entities that dont contain a given searchText
     ///
-    func testPredicatesForNotesWithSearchTextWontMatchNotesContainingTheSpecifiedKeywords() {
+    func testPredicateForNotesWithSearchTextWontMatchNotesContainingTheSpecifiedKeywords() {
         let entity = MockupNote()
         entity.content = "some content here and maybe a keyword"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "missing")
         XCTAssertFalse(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will not match entities that lack a given `tag:`
+    ///
+    func testPredicateForNotesWithSearchTextDoesntMatchNoteWithoutSpecifiedTag() {
+        let entity = MockupNote()
+        entity.content = "keyword"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword")
+        XCTAssertFalse(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will  match entities whenever the `tag:` operator has no actual payload
+    ///
+    func testPredicateForNotesWithSearchTextMatchesNoteWheneverTagPayloadIsEmpty() {
+        let entity = MockupNote()
+        entity.tags = "[ 'keyword' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will  match entities that contain a given `tag:`
+    ///
+    func testPredicateForNotesWithSearchTextMatchesNoteWithSpecifiedTag() {
+        let entity = MockupNote()
+        entity.tags = "[ 'keyword' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will  match entities that contain a partial match with the `tag:` operator
+    ///
+    func testPredicateForNotesWithSearchTextMatchesNoteWithSpecifiedPartialTag() {
+        let entity = MockupNote()
+        entity.tags = "[ 'keyword' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:word")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will not match entities that do contain a given `tag:`, but lack the target content
+    ///
+    func testPredicateForNotesWithSearchTextWillNotMatchEntityWithoutTargetContentEvenWhenTheSpecifiedTagIsThere() {
+        let entity = MockupNote()
+        entity.content = "unmatched"
+        entity.tags = "[ 'keyword' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword else")
+        XCTAssertFalse(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will match entities that do contain a given `tag:` and a given content
+    ///
+    func testPredicateForNotesWithSearchTextWillMatchEntityWithTargetContentAndTag() {
+        let entity = MockupNote()
+        entity.content = "something else"
+        entity.tags = "[ 'keyword' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword else something")
+        XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
     /// Verifies that `NSPredicate.predicateForNotes(deleted:)` matches notes with a Deleted status
@@ -150,21 +222,61 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertFalse(NSPredicate.predicateForUntaggedNotes().evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForTag(name:)` matches Tags with names containing the specified name (partially or fully)
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches Tags with names containing the specified name (Partially)
     ///
-    func testPredicateForTagWithNameMatchesEntitiesWithTheTargetName() {
+    func testPredicateForTagWithKeywordPerformsPartialMatches() {
         let entity = MockupTag()
         entity.name = "123456789"
-        XCTAssertTrue(NSPredicate.predicateForTag(name: entity.name!).evaluate(with: entity))
-        XCTAssertTrue(NSPredicate.predicateForTag(name: "45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:45").evaluate(with: entity))
     }
 
-    /// Verifies that `NSPredicate.predicateForTag(name:)` won't match Tags that don't contain a given string
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` will ignore exact matches
     ///
-    func testPredicateForTagWithNameWontMatcheEntitiesWithoutTheTargetName() {
+    func testPredicateForTagWithKeywordCompletelyIgnoresExactTagMatches() {
         let entity = MockupTag()
         entity.name = "123456789"
-        XCTAssertFalse(NSPredicate.predicateForTag(name: "0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "tag:123456789").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "TAG:123456789").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` won't match Tags that don't contain a given string
+    ///
+    func testPredicateForTagWithNameWontMatchEntitiesWithoutTheTargetName() {
+        let entity = MockupTag()
+        entity.name = "123456789"
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "tag:0").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "TaG:0").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` only performs lookup OPs over the last keyword
+    ///
+    func testPredicateForTagWithKeywordIsOnlyInterestedInTheLastKeyword() {
+        let entity = MockupTag()
+        entity.name = "123456789"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: entity.name!).evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "ignored alsoIgnored 45").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "ignored alsoIgnored tag:45").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches Tags with names containing the full keyword (whenever there is no Tag Operator)
+    ///
+    func testPredicateForTagWithKeywordPerformsFullMatchesWhenThereIsNoTagOperator() {
+        let entity = MockupTag()
+        entity.name = "123456789"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "123456789").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches *everything* whenever the `tag:` operator has no payload
+    ///
+    func testPredicateForTagWithKeywordMatchesEverythingWheneverSearchTagOperatorHasNoPayload() {
+        let entity = MockupTag()
+        entity.name = nil
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:").evaluate(with: entity))
+
+        entity.name = "whatever"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:").evaluate(with: entity))
     }
 }
 

@@ -25,6 +25,17 @@ class ResultsController<T: NSManagedObject> {
         resultsController.fetchRequest
     }
 
+    /// Limits the number of entries to retrieve
+    ///
+    var limit: Int? {
+        get {
+            fetchRequest.fetchLimit
+        }
+        set {
+            fetchRequest.fetchLimit = newValue ?? .zero
+        }
+    }
+
     /// Filtering Predicate to be applied to the Results.
     ///
     var predicate: NSPredicate? {
@@ -74,7 +85,8 @@ class ResultsController<T: NSManagedObject> {
     init(viewContext: NSManagedObjectContext,
          sectionNameKeyPath: String? = nil,
          matching predicate: NSPredicate? = nil,
-         sortedBy sortDescriptors: [NSSortDescriptor]) {
+         sortedBy sortDescriptors: [NSSortDescriptor],
+         limit: Int = .zero) {
 
         assert(viewContext.concurrencyType == .mainQueueConcurrencyType)
 
@@ -82,6 +94,7 @@ class ResultsController<T: NSManagedObject> {
             let request = NSFetchRequest<T>(entityName: T.entityName)
             request.predicate = predicate
             request.sortDescriptors = sortDescriptors
+            request.fetchLimit = limit
 
             return NSFetchedResultsController<T>(fetchRequest: request,
                                                  managedObjectContext: viewContext,

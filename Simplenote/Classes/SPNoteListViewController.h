@@ -6,6 +6,7 @@
 @class SPEmptyListView;
 @class SPBlurEffectView;
 @class NotesListController;
+@class SearchDisplayController;
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate>
 
@@ -14,7 +15,10 @@
 @property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
 @property (nonatomic, strong, readonly) UITableView                         *tableView;
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
+@property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
 @property (nonatomic, strong) NotesListController                           *notesListController;
+@property (nonatomic) CGFloat                                               noteRowHeight;
+@property (nonatomic) CGFloat                                               tagRowHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 

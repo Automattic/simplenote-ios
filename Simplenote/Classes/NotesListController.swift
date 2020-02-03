@@ -19,7 +19,8 @@ class NotesListController: NSObject {
     ///
     private lazy var tagsController = ResultsController<Tag>(viewContext: viewContext,
                                                              matching: state.predicateForTags(),
-                                                             sortedBy: sortMode.descriptorsForTags)
+                                                             sortedBy: sortMode.descriptorsForTags,
+                                                             limit: limitForTagResults)
 
     /// Notes Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
     ///
@@ -30,6 +31,13 @@ class NotesListController: NSObject {
     ///
     private var tagObjectChanges = [ResultsObjectChange]()
     private var tagSectionChanges = [ResultsSectionChange]()
+
+    /// Indicates the maximum number of Tag results we'll yield
+    ///
+    ///     -  Known Issues: If new Tags are added in a second device, and sync'ed while we're in Search Mode,
+    ///        ResultsController won't respect the limit.
+    ///
+    let limitForTagResults = 5
 
     /// FSM Current State
     ///
@@ -102,13 +110,17 @@ extension NotesListController {
 
     /// Returns the Receiver's Sections
     ///
-    @objc
-    var sections: [ResultsSectionInfo] {
+    var sections: [NotesListSection] {
         switch state {
         case .results:
-            return notesController.sections
+            return [
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+            ]
         case .searching:
-            return tagsController.sections + notesController.sections
+            return [
+                NotesListSection(title: state.sectionTitleForTags, objects: tagsController.fetchedObjects),
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+            ]
         }
     }
 
