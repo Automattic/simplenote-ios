@@ -65,7 +65,7 @@ class NotesListControllerTests: XCTestCase {
         noteListController.performFetch()
 
         let reversedNotes = Array(notes.reversed())
-        let retrievedNotes = noteListController.sections.first!.objects!.compactMap { $0 as? Note }
+        let retrievedNotes = noteListController.sections.first!.objects.compactMap { $0 as? Note }
 
         for (index, note) in retrievedNotes.enumerated() {
             XCTAssertEqual(note.content, reversedNotes[index].content)
@@ -125,14 +125,14 @@ class NotesListControllerTests: XCTestCase {
     /// Verifies that the `endSearch` switches the NotesList back to a single section
     ///
     func testEndSearchSwitchesBackToSingleSectionMode() {
-        let (notes, tags, _) = insertSampleEntities(count: 100)
+        let (notes, _, _) = insertSampleEntities(count: 100)
         storage.save()
 
         XCTAssertEqual(noteListController.numberOfObjects, notes.count)
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "0")
-        XCTAssertEqual(noteListController.numberOfObjects, notes.count + tags.count)
+        XCTAssertEqual(noteListController.numberOfObjects, notes.count + noteListController.limitForTagResults)
 
         noteListController.endSearch()
         XCTAssertEqual(noteListController.numberOfObjects, notes.count)
@@ -154,6 +154,18 @@ class NotesListControllerTests: XCTestCase {
 
         let retrievedNote = noteListController.object(at: IndexPath(row: 0, section: 1)) as! Note
         XCTAssertEqual(retrievedNote, note)
+    }
+
+    /// Verifies that the SearchMode yields a limited number of Tags
+    ///
+    func testSearchModeReturnsLimitedNumberOfTags() {
+        insertSampleEntities(count: 100)
+        storage.save()
+
+        noteListController.beginSearch()
+        noteListController.refreshSearchResults(keyword: "0")
+
+        XCTAssert(noteListController.sections[0].numberOfObjects <= noteListController.limitForTagResults)
     }
 
 
@@ -184,9 +196,13 @@ class NotesListControllerTests: XCTestCase {
         noteListController.refreshSearchResults(keyword: "0")
 
         for (index, payload) in expected.enumerated() {
-            let tag = noteListController.object(at: IndexPath(row: index, section: 0)) as! Tag
             let note = noteListController.object(at: IndexPath(row: index, section: 1)) as! Note
             XCTAssertEqual(note.content, payload)
+        }
+
+        // We're capping the number of Tags to 5!
+        for (index, payload) in expected.enumerated() where index < noteListController.limitForTagResults {
+            let tag = noteListController.object(at: IndexPath(row: index, section: 0)) as! Tag
             XCTAssertEqual(tag.name, payload)
         }
     }
@@ -234,7 +250,7 @@ class NotesListControllerTests: XCTestCase {
         // This is a specific keyword contained by eeeevery siiiiinnnnngle entity!
         noteListController.refreshSearchResults(keyword: "0")
 
-        for (row, tag) in tags.enumerated() {
+        for (row, tag) in tags.enumerated() where row < noteListController.limitForTagResults {
             XCTAssertEqual(noteListController.indexPath(forObject: tag), IndexPath(row: row, section: 0))
         }
 

@@ -624,7 +624,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 
 - (SPTransitionSnapshot *)backSearchBarSnapshotForListController:(SPNoteListViewController *)listController containerView:(UIView *)containerView {
     UIView *searchBarImage = [listController.searchBar imageRepresentationWithinImageView];
-    CGRect targetFrame = listController.searchBar.frame;
+    CGRect targetFrame = listController.searchBarStackView.frame;
 
     NSDictionary *animatedValues = [self animationValuesWithStartingFrame:targetFrame
                                                                finalFrame:targetFrame
