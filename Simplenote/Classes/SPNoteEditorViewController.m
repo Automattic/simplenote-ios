@@ -36,7 +36,6 @@
 
 @import SafariServices;
 
-NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
 CGFloat const SPCustomTitleViewHeight               = 44.0f;
 CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
@@ -1384,13 +1383,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kWillAddNewNote
-                                                        object:self];
-    
-    // Save current note first MAY NOT NEED THIS IF NOTE CANNOT BE VISIABLE AT SAME TIME
-    //    note.content = noteEditor.string;
-    //    [self save];
     
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
