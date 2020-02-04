@@ -13,7 +13,6 @@
 #import "NSProcessInfo+Util.h"
 #import "SPModalActivityIndicator.h"
 #import "SPEditorTextView.h"
-#import "SPTransitionController.h"
 
 #import "SPObjectManager.h"
 #import "Note.h"
@@ -43,10 +42,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <UINavigationControllerDelegate,
-                                SimperiumDelegate,
-                                SPBucketDelegate,
-                                PinLockDelegate>
+@interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
 
 @property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
@@ -161,7 +157,6 @@
     self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
-    self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
                                                                                 sidebarViewController:self.tagListViewController];

@@ -28,11 +28,9 @@
 #import "Simplenote-Swift.h"
 
 
-@interface SPNoteListViewController () <UITableViewDelegate,
-                                        UITextFieldDelegate,
+@interface SPNoteListViewController () <UITextFieldDelegate,
                                         SearchDisplayControllerDelegate,
                                         SearchControllerPresentationContextProvider,
-                                        SPTransitionControllerDelegate,
                                         SPRatingsPromptDelegate>
 
 @property (nonatomic, strong) NSTimer                               *searchTimer;
@@ -137,11 +135,9 @@
         return;
     }
 
-    NSAssert(self.tableView != nil, @"tableView should be initialized before this method runs");
     NSAssert(self.navigationController != nil, @"we should be already living within a navigationController before this method can be called");
-
-    self.transitionController = [[SPTransitionController alloc] initWithTableView:self.tableView navigationController:self.navigationController];
-    self.transitionController.delegate = self;
+    self.transitionController = [[SPTransitionController alloc] initWithNavigationController:self.navigationController];
+    self.navigationController.delegate = self.transitionController;
 }
 
 - (void)updateRowHeight
@@ -200,9 +196,6 @@
     // Condensed Notes
     [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
     [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
-
-    // Voiceover status is tracked because the custom animated transition is not used when enabled
-    [nc addObserver:self selector:@selector(didReceiveVoiceoverNotification:) name:UIAccessibilityVoiceOverStatusDidChangeNotification object:nil];
 
     // Register for keyboard notifications
     [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -442,18 +435,12 @@
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
 
-    BOOL disableCustomTransition = UIAccessibilityIsVoiceOverRunning() || self.isSearchActive;
-    self.navigationController.delegate = disableCustomTransition ? nil : self.transitionController;
-    editor.transitioningDelegate = disableCustomTransition ? nil : self.transitionController;
-
     [editor updateNote:note];
 
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];
     }
-    
-    self.transitionController.selectedPath = indexPath;
-    
+
     // Failsafe:
     // We were getting (a whole lot!) of crash reports with the exception
     // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
@@ -641,25 +628,6 @@
     }];
 }
 
-
-#pragma mark - VoiceOver
-
-- (void)didReceiveVoiceoverNotification:(NSNotification *)notification {
-    
-    BOOL isVoiceOverRunning = UIAccessibilityIsVoiceOverRunning();
-    self.navigationController.delegate = isVoiceOverRunning ? nil : self.transitionController;
-	
-	SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    editor.transitioningDelegate = isVoiceOverRunning ? nil : self.transitionController;
-    
-}
-
-#pragma mark - SPTransitionDelegate
-
-- (void)interactionBegan {
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - Keyboard
 

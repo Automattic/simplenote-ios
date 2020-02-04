@@ -1,30 +1,13 @@
-#import <CoreGraphics/CoreGraphics.h>
 #import "Simplenote-Swift.h"
 
-#import "SPTransitionController.h"
-#import "SPAppDelegate.h"
-#import "SPNoteEditorViewController.h"
-#import "VSThemeManager.h"
-#import "Note.h"
-#import "SPNoteListViewController.h"
-#import "SPTextView.h"
-#import "SPEditorTextView.h"
-#import "NSMutableAttributedString+Styling.h"
-#import "SPTransitionSnapshot.h"
-#import "SPTextView.h"
-#import "SPInteractiveTextStorage.h"
-#import "NSString+Search.h"
-#import "NSTextStorage+Highlight.h"
-#import "NSString+Attributed.h"
-#import "UIImage+Colorization.h"
-#import "SPEmptyListView.h"
 #import "UIDevice+Extensions.h"
-#import "VSTheme+Extensions.h"
+#import "SPTransitionController.h"
+#import "SPMarkdownPreviewViewController.h"
 #import "SPInteractivePushPopAnimationController.h"
 
 
+/*
 #define kEditorTransitionOffset 8
-
 
 #pragma mark - Constants
 
@@ -47,7 +30,7 @@ static const CGFloat SPAnimationPopTableViewRowVelocity = 0.6;
 static const CGFloat SPAnimationEmptyStatePushDuration = 0.15;
 static const CGFloat SPAnimationEmptyStatePopDuration = 0.4;
 static const CGFloat SPAnimationDelayZero = 0.0;
-
+*/
 
 NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SPTransitionControllerPopGestureTriggeredNotificationName";
 
@@ -55,31 +38,21 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
 #pragma mark - Private Properties
 
 @interface SPTransitionController () <UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) SnapshotRenderer                          *renderer;
 @property (nonatomic, strong) SPInteractivePushPopAnimationController   *pushPopAnimationController;
-@property (nonatomic, weak) UINavigationController                      *navigationController;
-@property (nonatomic, strong) NSMutableArray                            *temporaryTransitionViews;
-@property (nonatomic) id<UIViewControllerContextTransitioning>          context;
-@property (nonatomic) CGFloat                                           percentComplete;
-@property (nonatomic) NSInteger                                         useCount;
-
+@property (nonatomic,   weak) UINavigationController                    *navigationController;
 @end
+
 
 @implementation SPTransitionController
 
-- (instancetype)initWithTableView:(UITableView *)tableView navigationController:(UINavigationController *)navigationController {
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController
+{
     self = [super init];
     if (self) {
-        self.tableView = tableView;
-        self.renderer = [SnapshotRenderer new];
-        self.useCount = 0;
-        
         if ([UIDevice isPad]) {
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                                action:@selector(handlePinch:)];
             [navigationController.view addGestureRecognizer:pinchGesture];
-
         }
 
         // Note:
@@ -96,7 +69,7 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return self;
 }
 
-
+/*
 #pragma mark UIViewControllerTransitioningDelegate methods — Supporting Custom Transition Animations
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
@@ -108,45 +81,36 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     
     return self;
 }
+*/
 
-
-#pragma mark UINavigationControllerDelegate methods — Supporting Custom Transition Animations
+#pragma mark - UINavigationControllerDelegate
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
                                                fromViewController:(UIViewController *)fromVC
-                                                 toViewController:(UIViewController *)toVC {
-    
-    BOOL navigatingFromListToEditor = [fromVC isKindOfClass:[SPNoteListViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteEditorViewController class]];
-    BOOL navigatingFromEditorToList = [fromVC isKindOfClass:[SPNoteEditorViewController class]] &&
-                                      [toVC isKindOfClass:[SPNoteListViewController class]];
-
-    if (navigatingFromListToEditor || navigatingFromEditorToList) {
-        // return self since ViewController adopts UIViewControllerAnimatedTransitioningProtocal
-        self.navigationOperation = operation;
-        return self;
-    } else {
-        self.pushPopAnimationController.navigationOperation = operation;
-
-        return self.pushPopAnimationController;
+                                                 toViewController:(UIViewController *)toVC
+{    
+    BOOL navigatingToMarkdownPreview = [fromVC isKindOfClass:[SPMarkdownPreviewViewController class]];
+    if (!navigatingToMarkdownPreview) {
+        return nil;
     }
 
-    return nil;
+    self.pushPopAnimationController.navigationOperation = operation;
+    return self.pushPopAnimationController;
 }
 
-- (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController
 {
-    if (self.hasActiveInteraction) {
-        return self;
+    if (animationController != self.pushPopAnimationController) {
+        return nil;
     }
 
     return self.pushPopAnimationController.interactiveTransition;
 }
 
-
+/*
 #pragma mark CustomTransition
 
 - (UIView *)textViewSnapshotForNote:(Note *)note
@@ -754,36 +718,35 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     }
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)sender {
+ */
 
+
+#pragma mark - Gesture Recognizers
+
+- (void)handlePan:(UIPanGestureRecognizer *)sender
+{
     // By the time this method is called, the existing topViewController has been popped –
     // so topViewController contains the view we are transitioning *to*.
     // We only want to handle the Editor > List transition with a custom transition, so if
     // there's anything other than the List view on the top of the stack, we'll let the OS handle it.
     BOOL isTransitioningToList = [self.navigationController.topViewController isKindOfClass:[SPNoteListViewController class]];
-    
-    if (isTransitioningToList && !_transitioning && sender.state == UIGestureRecognizerStateBegan) {
+    if (isTransitioningToList && sender.state == UIGestureRecognizerStateBegan) {
         [self postPopGestureNotification];
     }
-    
-    return;
 }
 
-- (void)handlePinch:(UIPinchGestureRecognizer*)sender {
-
-    if (!_transitioning &&
-        sender.numberOfTouches >= 2 && // require two fingers
+- (void)handlePinch:(UIPinchGestureRecognizer*)sender
+{
+    if (sender.numberOfTouches >= 2 && // require two fingers
         sender.scale < 1.0 && // pinch in
         sender.state == UIGestureRecognizerStateBegan) {
 
         [self postPopGestureNotification];
     }
-    
-    return;
 }
 
-- (void)postPopGestureNotification {
-    
+- (void)postPopGestureNotification
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:SPTransitionControllerPopGestureTriggeredNotificationName
                                                         object:self];
 }

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-
+/*
 /// Tool that allows us to generate a snapshot (UIView) for animation purposes.
 ///
 @objc
@@ -214,3 +214,4 @@ private struct Constants {
         return UIDevice.sp_isPad() ? maximumLengthPad : maximumLengthPhone
     }
 }
+*/
