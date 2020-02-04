@@ -47,6 +47,16 @@ class NSPredicateSimplenoteTests: XCTestCase {
         XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` matches words with accents
+    ///
+    func testPredicateForNotesWithSearchTextMatchesKeywordsWithAccentCharacters() {
+        let entity = MockupNote()
+        entity.content = "jamás esdrújula"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "jamas esdrujula")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` won't match entities that dont contain a given searchText
     ///
     func testPredicateForNotesWithSearchTextWontMatchNotesContainingTheSpecifiedKeywords() {
@@ -74,6 +84,16 @@ class NSPredicateSimplenoteTests: XCTestCase {
         entity.tags = "[ 'keyword' ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:")
+        XCTAssertTrue(predicate.evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForNotes(searchText:)` matches notes with tags containing accents
+    ///
+    func testPredicateForNotesWithSearchTextMatchesTagsWithDiacriticInsensitiveRule() {
+        let entity = MockupNote()
+        entity.tags = "[ 'esdrújula' ]"
+
+        let predicate = NSPredicate.predicateForNotes(searchText: "tag:esdrujula")
         XCTAssertTrue(predicate.evaluate(with: entity))
     }
 
@@ -229,6 +249,16 @@ class NSPredicateSimplenoteTests: XCTestCase {
         entity.name = "123456789"
         XCTAssertTrue(NSPredicate.predicateForTag(keyword: "45").evaluate(with: entity))
         XCTAssertTrue(NSPredicate.predicateForTag(keyword: "tag:45").evaluate(with: entity))
+    }
+
+    /// Verifies that `NSPredicate.predicateForTag(keyword:)` matches Tags with diacritic rules
+    ///
+    func testPredicateForTagWithKeywordPerformsPartialDiacriticMatches() {
+        let entity = MockupTag()
+        entity.name = "esdrújula"
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "esdrujula").evaluate(with: entity))
+        XCTAssertTrue(NSPredicate.predicateForTag(keyword: "TAG:esdrujula").evaluate(with: entity))
+        XCTAssertFalse(NSPredicate.predicateForTag(keyword: "TAG:esdrújula").evaluate(with: entity))
     }
 
     /// Verifies that `NSPredicate.predicateForTag(keyword:)` will ignore exact matches
