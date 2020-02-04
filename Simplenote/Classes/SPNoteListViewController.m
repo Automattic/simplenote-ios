@@ -368,7 +368,8 @@
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
-    [self endSearching];
+    [self.notesListController endSearch];
+    [self update];
 }
 
 
@@ -402,8 +403,7 @@
 
 - (void)endSearching
 {
-    [self.notesListController endSearch];
-    [self update];
+    [self.searchController dismiss];
 }
 
 
