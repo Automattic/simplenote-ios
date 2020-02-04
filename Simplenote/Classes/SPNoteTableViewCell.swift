@@ -145,11 +145,6 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        refreshLabelsBackground(highlighted: highlighted)
-    }
-
     /// Refreshed the Title and Body AttributedString(s), based on the Text, Font and Highlight properties
     ///
     func refreshAttributedStrings() {
@@ -222,8 +217,6 @@ private extension SPNoteTableViewCell {
     ///
     func refreshStyle() {
         backgroundColor = Style.backgroundColor
-        titleLabel.backgroundColor = Style.backgroundColor
-        bodyLabel.backgroundColor = Style.backgroundColor
 
         let selectedView = UIView(frame: bounds)
         selectedView.backgroundColor = Style.selectionColor
@@ -233,8 +226,7 @@ private extension SPNoteTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let lineHeight = Style.headlineFont.lineHeight
-        let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
+        let accessoryDimension = Style.headlineFont.inlineAssetHeight()
         let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
 
         accessoryLeftImageViewHeightConstraint.constant = cappedDimension
@@ -247,14 +239,6 @@ private extension SPNoteTableViewCell {
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
         accessoryRightImageView.isHidden = isRightImageEmpty
-    }
-
-    /// Refreshes the Label(s) BG Colors, to match the current highlight state (Re: Preventing alpha bending!)
-    ///
-    func refreshLabelsBackground(highlighted: Bool) {
-        let newBackgroundColor = highlighted ? Style.selectionColor : Style.backgroundColor
-        titleLabel.backgroundColor = newBackgroundColor
-        bodyLabel.backgroundColor = newBackgroundColor
     }
 
     /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
@@ -308,15 +292,11 @@ extension SPNoteTableViewCell {
 //
 private enum Style {
 
-    /// Accessory's Ratio (measured against Line Size)
-    ///
-    static let accessoryImageSizeRatio = CGFloat(0.70)
-
     /// Accessory's Minimum Size
     ///
     static let accessoryImageMinimumSize = CGFloat(15)
 
-    /// Accessory's Maximum Size
+    /// Accessory's Maximum Size (1.5 the asset's size)
     ///
     static let accessoryImageMaximumSize = CGFloat(24)
 
