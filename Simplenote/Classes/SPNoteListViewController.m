@@ -314,6 +314,7 @@
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
+    self.searchBar.placeholder = NSLocalizedString(@"Search notes or tags", @"SearchBar's Placeholder Text");
     [self.searchBar applySimplenoteStyle];
 }
 
