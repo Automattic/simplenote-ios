@@ -14,24 +14,62 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-rM-Ize">
-                    <rect key="frame" x="20" y="5" width="384" height="48"/>
-                    <viewLayoutGuide key="safeArea" id="bFo-VK-FYN"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-b6-tS7">
+                    <rect key="frame" x="20" y="5" width="402" height="48"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-rM-Ize">
+                            <rect key="frame" x="0.0" y="0.0" width="402" height="48"/>
+                            <viewLayoutGuide key="safeArea" id="bFo-VK-FYN"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" id="aFU-YG-YlY"/>
+                        <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="dns-b6-tS7" secondAttribute="top" id="iCX-pu-Jhc"/>
+                        <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" secondItem="dns-b6-tS7" secondAttribute="leading" id="iuA-hv-Jma"/>
+                        <constraint firstAttribute="trailing" secondItem="mCY-rM-Ize" secondAttribute="trailing" id="tjV-ph-G0l"/>
+                        <constraint firstAttribute="width" priority="999" constant="640" id="z6e-jR-kLx"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="z6e-jR-kLx"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="z6e-jR-kLx"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="ry8-TP-QDs" secondAttribute="top" constant="5" id="6tI-C6-Qno"/>
-                <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" constant="5" id="KvD-Ra-taB"/>
-                <constraint firstAttribute="trailing" secondItem="mCY-rM-Ize" secondAttribute="trailing" constant="10" id="hl7-nu-VIn"/>
-                <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" id="juv-av-n5d"/>
+                <constraint firstItem="dns-b6-tS7" firstAttribute="top" secondItem="ry8-TP-QDs" secondAttribute="top" constant="5" id="2dp-8D-Ebq"/>
+                <constraint firstAttribute="trailing" secondItem="dns-b6-tS7" secondAttribute="trailingMargin" id="5hQ-2N-IEd"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dns-b6-tS7" secondAttribute="trailingMargin" id="8rI-63-x6f"/>
+                <constraint firstItem="dns-b6-tS7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" id="E7N-df-pyY"/>
+                <constraint firstAttribute="bottom" secondItem="dns-b6-tS7" secondAttribute="bottom" constant="5" id="aYO-mA-wKK"/>
+                <constraint firstItem="dns-b6-tS7" firstAttribute="leading" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" id="hzK-5H-CBj"/>
+                <constraint firstItem="dns-b6-tS7" firstAttribute="centerX" secondItem="ry8-TP-QDs" secondAttribute="centerX" id="ron-Op-BfQ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="E7N-df-pyY"/>
+                    <exclude reference="ron-Op-BfQ"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="5hQ-2N-IEd"/>
+                    <include reference="E7N-df-pyY"/>
+                    <exclude reference="hzK-5H-CBj"/>
+                    <include reference="ron-Op-BfQ"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="textLabel" destination="mCY-rM-Ize" id="CGd-cy-D8S"/>
             </connections>
