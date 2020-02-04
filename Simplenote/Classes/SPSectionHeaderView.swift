@@ -42,7 +42,11 @@ private extension SPSectionHeaderView {
     /// Refreshes the current Style current style
     ///
     func refreshStyle() {
-        contentView.backgroundColor = .simplenoteTableViewHeaderBackgroundColor
+        // Setting contentView.backgroundColor would be easier, but oh well, that triggers a console warning.
+        let bgView = UIView()
+        bgView.backgroundColor = .simplenoteTableViewHeaderBackgroundColor
+        backgroundView = bgView
+
         textLabel?.textColor = .simplenoteTextColor
         textLabel?.font = UIFont.preferredFont(for: .body, weight: .semibold)
     }

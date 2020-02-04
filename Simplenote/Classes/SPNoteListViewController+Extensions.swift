@@ -390,6 +390,8 @@ private extension SPNoteListViewController {
     ///
     func dequeueAndConfigureCell(for tag: Tag, in tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
+        cell.leftImage = .image(name: .tag)
+        cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
         cell.titleText = String.searchOperatorForTags + tag.name
         return cell
     }
