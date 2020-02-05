@@ -36,7 +36,6 @@
 
 @import SafariServices;
 
-NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
 CGFloat const SPCustomTitleViewHeight               = 44.0f;
 CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
@@ -54,6 +53,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
+                                        SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 {
     NSUInteger cursorLocationBeforeRemoteUpdate;
@@ -209,10 +209,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self ensureEditorIsFirstResponder];
 }
 
 - (void)configureNavigationBarBackground
@@ -582,11 +587,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)setIsPreviewing:(BOOL)isPreviewing {
-    _isPreviewing = isPreviewing;
-    [self ensureEditorIsFirstResponder];
-}
-
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
     NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
     [backButton setTitle:backButtonTitle
@@ -810,6 +810,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         }];
     });
 }
+
+
+#pragma mark - SPInteractiveDismissableViewController
+
+- (BOOL)requiresFirstResponderRestorationBypass
+{
+    // Whenever an Interactive Dismiss OP kicks off, we're requesting the "First Responder Restoration" mechanism
+    // to be overridden.
+    // Ref. https://github.com/Automattic/simplenote-ios/issues/600
+    return YES;
+}
+
 
 #pragma mark search
 
@@ -1372,13 +1384,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kWillAddNewNote
-                                                        object:self];
-    
-    // Save current note first MAY NOT NEED THIS IF NOTE CANNOT BE VISIABLE AT SAME TIME
-    //    note.content = noteEditor.string;
-    //    [self save];
-    
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
     newNote.modificationDate = [NSDate date];
@@ -1422,19 +1427,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                          } completion:^(BOOL finished) {
                              
                              [snapshot removeFromSuperview];
-                             
+                             [self.noteEditorTextView becomeFirstResponder];
+
                          }];
-        
+
     } else {
-        
+
         [self updateNote:newNote];
         bBlankNote = YES;
     }
-    
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self->_noteEditorTextView becomeFirstResponder];
-    });
     
     bDisableShrinkingNavigationBar = NO;
 }

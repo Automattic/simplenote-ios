@@ -108,7 +108,27 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         return YES;
     }
 
-    return self.navigationController.viewControllers.count > 1;
+
+    BOOL recognizerShouldBegin = self.navigationController.viewControllers.count > 1;
+    if (recognizerShouldBegin) {
+        [self bypassFirstResponderRestorationIfNeeded];
+    }
+
+    return recognizerShouldBegin;
+}
+
+- (void)bypassFirstResponderRestorationIfNeeded
+{
+    UIViewController<SPInteractiveDismissableViewController> *dismissableViewController = (UIViewController<SPInteractiveDismissableViewController> *)self.navigationController.topViewController;
+    if (![dismissableViewController conformsToProtocol:@protocol(SPInteractiveDismissableViewController)]) {
+        return;
+    }
+
+    if (!dismissableViewController.requiresFirstResponderRestorationBypass) {
+        return;
+    }
+
+    [dismissableViewController.view endEditing:YES];
 }
 
 @end
