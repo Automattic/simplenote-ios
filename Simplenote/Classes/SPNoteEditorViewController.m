@@ -84,17 +84,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if (self) {
 
         // Editor
-        _noteEditorTextView = [[SPEditorTextView alloc] init];
-        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
-
-        // Note:
-        // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
-        if (@available(iOS 11.0, *)) {
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
-                _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-                _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-            }
-        }
+        [self configureTextView];
 
         // TagView
         _tagView = _noteEditorTextView.tagView;
@@ -131,6 +121,22 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return self;
 }
 
+- (void)configureTextView
+{
+    _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
+    _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+
+    // Note:
+    // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
+    if (@available(iOS 11.0, *)) {
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
+            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
+            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
+        }
+    }
+}
+
 - (VSTheme *)theme {
     
     return [[VSThemeManager sharedManager] theme];
@@ -148,7 +154,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
-    _noteEditorTextView.font = bodyFont;
     _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
     _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
@@ -342,6 +347,27 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     [self refreshNavBarSizeWithCoordinator:coordinator];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+    if (@available(iOS 13.0, *)) {
+        if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
+            return;
+        }
+
+        // Okay. Let's talk.
+        // Whenever `applyStyle` gets called whenever this VC is not really onScreen, it might have issues with SPUserInteface.isDark
+        // (since the active traits might not really match the UIWindow's traits).
+        //
+        // For the above reason, we _must_ listen to Trait Change events, and refresh the style appropriately.
+        //
+        // Ref. https://github.com/Automattic/simplenote-ios/issues/599
+        //
+        [self applyStyle];
+    }
 }
 
 - (void)refreshNavBarSizeWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
