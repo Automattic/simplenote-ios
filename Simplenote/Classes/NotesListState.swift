@@ -5,7 +5,6 @@ import Foundation
 //
 enum NotesListState {
     case results
-//  TODO: case history
     case searching(keyword: String)
 }
 
