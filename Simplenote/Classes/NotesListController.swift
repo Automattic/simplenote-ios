@@ -193,8 +193,15 @@ extension NotesListController {
 
     /// Refreshes the FetchedObjects so that they match a given Keyword
     ///
+    /// -   Note: Whenever the Keyword is actually empty, we'll fallback to regular results. Capisci?
+    ///
     @objc
     func refreshSearchResults(keyword: String) {
+        guard !keyword.isEmpty else {
+            state = .results
+            return
+        }
+
         state = .searching(keyword: keyword)
     }
 
