@@ -375,7 +375,8 @@
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
-    [self endSearching];
+    [self.notesListController endSearch];
+    [self update];
 }
 
 
@@ -406,8 +407,7 @@
 
 - (void)endSearching
 {
-    [self.notesListController endSearch];
-    [self update];
+    [self.searchController dismiss];
 }
 
 
@@ -436,8 +436,11 @@
 {
     [SPTracker trackListNoteOpened];
 
-    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
+    // SearchBar: Always resign FirstResponder status
+    // Why: https://github.com/Automattic/simplenote-ios/issues/616
+    [self.searchBar resignFirstResponder];
 
+    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
     [editor updateNote:note];
 
     if (self.isSearchActive) {
