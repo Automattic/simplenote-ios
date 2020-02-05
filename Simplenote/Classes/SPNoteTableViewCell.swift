@@ -277,10 +277,26 @@ private extension SPNoteTableViewCell {
 //
 extension SPNoteTableViewCell {
 
+    /// TableView's Separator Insets: Expected to align **exactly** with the label(s) Leading.
+    /// In order to get the TableView to fully respect this the following must be fulfilled:
+    ///
+    ///     1.  tableViewCell(s).layoutMargins = .zero
+    ///     2.  tableView.layoutMargins = .zero
+    ///     2.  tableView.separatorInsetReference = `.fromAutomaticInsets
+    ///
+    /// Then, and only then, this will work ferpectly 🔥
+    ///
+    @objc
+    static var separatorInsets: UIEdgeInsets {
+        let left = Style.containerInsets.left + Style.accessoryImageDimension + Style.accessoryImagePaddingRight
+        return UIEdgeInsets(top: .zero, left: left, bottom: .zero, right: .zero)
+    }
+
     /// Returns the Height that the receiver would require to be rendered, given the current User Settings (number of preview lines).
     ///
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
+    @objc
     static var cellHeight: CGFloat {
         let numberLines = Options.shared.numberOfPreviewLines
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
@@ -313,6 +329,10 @@ private enum Style {
     ///
     static let accessoryImageMaximumSize = CGFloat(24)
 
+    /// Accessory's Right Padding
+    ///
+    static let accessoryImagePaddingRight = CGFloat(6)
+
     /// Title's Maximum Lines
     ///
     static let maximumNumberOfTitleLines = 1
@@ -323,7 +343,7 @@ private enum Style {
 
     /// Represents the Insets applied to the container view
     ///
-    static let containerInsets = UIEdgeInsets(top: 13, left: 0, bottom: 13, right: 0)
+    static let containerInsets = UIEdgeInsets(top: 13, left: 6, bottom: 13, right: 0)
 
     /// Outer Vertical StackView's Spacing
     ///
