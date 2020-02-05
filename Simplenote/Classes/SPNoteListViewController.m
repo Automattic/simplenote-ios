@@ -291,20 +291,6 @@
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)configureTableView {
-    NSAssert(_tableView == nil, @"_tableView is already initialized!");
-
-    self.tableView = [UITableView new];
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.tableView.alwaysBounceVertical = YES;
-    [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPTagTableViewCell loadNib] forCellReuseIdentifier:[SPTagTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPSectionHeaderView loadNib] forHeaderFooterViewReuseIdentifier:[SPSectionHeaderView reuseIdentifier]];
-}
-
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
 
