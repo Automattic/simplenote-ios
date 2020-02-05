@@ -103,6 +103,12 @@
     [self ensureTransitionControllerIsInitialized];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.searchController hideNavigationBarIfNecessary];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
@@ -314,6 +320,7 @@
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
+    self.searchBar.placeholder = NSLocalizedString(@"Search notes or tags", @"SearchBar's Placeholder Text");
     [self.searchBar applySimplenoteStyle];
 }
 
@@ -640,11 +647,11 @@
     _keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
     
     UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom += _keyboardHeight;
+    tableviewInsets.bottom = _keyboardHeight;
     self.tableView.contentInset = tableviewInsets;
     
     UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom += _keyboardHeight;
+    scrollInsets.bottom = _keyboardHeight;
     self.tableView.scrollIndicatorInsets = tableviewInsets;
 }
 
