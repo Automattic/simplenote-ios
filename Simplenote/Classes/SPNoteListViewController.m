@@ -385,12 +385,12 @@
 
 - (void)performSearchWithKeyword:(NSString *)keyword
 {
-    [self.notesListController refreshSearchResultsWithKeyword:keyword];
-  
     [SPTracker trackListNotesSearched];
-    
-    [self refreshListController];
+
+    [self.notesListController refreshSearchResultsWithKeyword:keyword];
+    [self.tableView reloadData];
     [self updateViewIfEmpty];
+
     if ([self.tableView numberOfRowsInSection:0]) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                               atScrollPosition:UITableViewScrollPositionTop
