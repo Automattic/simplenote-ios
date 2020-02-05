@@ -53,7 +53,6 @@ jobs:
           command: bundle exec fastlane run configure_apply
       - run:
           name: Build
-          working_directory: Scripts
           command: "bundle exec fastlane build_and_upload_installable_build build_number:$CIRCLE_BUILD_NUM"
       - run:
           name: Prepare Artifacts

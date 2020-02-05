@@ -47,4 +47,8 @@ fastlane/README.md
 fastlane/test_output/
 Preview.html
 build/
-.configure-files
+
+# All secrets should be stored under .configure-files
+# Everything without a .enc extension is ignored
+.configure-files/*
+!.configure-files/*.enc
