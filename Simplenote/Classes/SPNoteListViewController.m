@@ -65,7 +65,7 @@
         [self configureSearchStackView];
         [self configureResultsController];
         [self configureRootView];
-        [self updateRowHeight];
+        [self updateTableViewMetrics];
         [self startListeningToNotifications];
         [self startDisplayingEntities];
         
@@ -138,7 +138,7 @@
     self.navigationController.delegate = self.transitionController;
 }
 
-- (void)updateRowHeight
+- (void)updateTableViewMetrics
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
@@ -203,13 +203,14 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)condensedPreferenceWasUpdated:(id)sender {
-
-    [self updateRowHeight];
+- (void)condensedPreferenceWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
-- (void)contentSizeWasUpdated:(id)sender {
-    [self updateRowHeight];
+- (void)contentSizeWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
 - (void)sortOrderPreferenceWasUpdated:(id)sender {
