@@ -17,8 +17,12 @@ extension SPNoteListViewController {
         tableView.delegate = self
 
         tableView.alwaysBounceVertical = true
-
         tableView.tableFooterView = UIView()
+
+        tableView.layoutMargins = .zero
+        tableView.separatorInset = .zero
+        tableView.separatorInsetReference = .fromAutomaticInsets
+        tableView.separatorStyle = UIDevice.sp_isPad() ? .none : .singleLine
 
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
