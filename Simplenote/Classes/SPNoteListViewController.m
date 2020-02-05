@@ -62,10 +62,10 @@
     if (self) {
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
+        [self configureResultsController];
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
-        [self configureResultsController];
         [self configureRootView];
         [self updateRowHeight];
         [self startListeningToNotifications];
