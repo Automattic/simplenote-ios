@@ -188,7 +188,7 @@ extension NotesListController {
     ///
     @objc
     func beginSearch() {
-// TODO: we should actually switch to `state = .history`
+        // NO-OP: Initially meant for History, keeping it around for both consistency and future purposes.
     }
 
     /// Refreshes the FetchedObjects so that they match a given Keyword
