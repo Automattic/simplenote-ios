@@ -2,7 +2,8 @@ version: 2.1
 
 orbs:
   # This uses the Orbs located at https://github.com/wordpress-mobile/circleci-orbs
-  ios: wordpress-mobile/ios@0.0.31
+  ios: wordpress-mobile/ios@1.0
+  git: wordpress-mobile/git@1.0
 
 commands:
   load-chruby:
