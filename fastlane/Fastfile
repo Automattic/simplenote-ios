@@ -291,6 +291,15 @@ end
 ########################################################################
 # Fastlane match code signing
 ########################################################################  
+  private_lane :alpha_code_signing do |options|
+    match(
+      type: "enterprise",
+      team_id: get_required_env("INT_EXPORT_TEAM_ID"),
+      readonly: options[:readonly] || is_ci,
+      app_identifier: ["com.codality.NotationalFlow.Alpha",
+                      "com.codality.NotationalFlow.Alpha.Share"])
+  end
+
   private_lane :internal_code_signing do |options|
     match(
       type: "enterprise",
