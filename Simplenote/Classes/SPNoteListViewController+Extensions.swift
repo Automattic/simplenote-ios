@@ -238,6 +238,20 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 }
 
 
+// MARK: - UIScrollViewDelegate
+//
+extension SPNoteListViewController: UIScrollViewDelegate {
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard searchBar.isFirstResponder else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
+    }
+}
+
+
 // MARK: - UITableViewDataSource
 //
 extension SPNoteListViewController: UITableViewDataSource {
