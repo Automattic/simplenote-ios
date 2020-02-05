@@ -30,7 +30,45 @@ jobs:
           scheme: Simplenote
           device: iPhone 11
 
+  Installable Build:
+    executor:
+      name: ios/default
+      xcode-version: "11.0.0"
+    steps:
+      - git/shallow-checkout
+      - ios/install-dependencies:
+            bundle-install: true
+            pod-install: true
+      - run:
+          name: Copy Secrets
+          command: bundle exec fastlane run configure_apply
+      - run:
+          name: Build
+          working_directory: Scripts
+          command: "bundle exec fastlane build_and_upload_installable_build build_number:$CIRCLE_BUILD_NUM"
+      - run:
+          name: Prepare Artifacts
+          command: |
+            mkdir -p Artifacts
+            mv "fastlane/comment.json" "Artifacts/comment.json"
+      - store_artifacts:
+          path: Artifacts
+          destination: Artifacts
+
 workflows:
   simplenote_ios:
     jobs:
       - Test
+  Installable Build:
+    jobs:
+      - Hold:
+          type: approval
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/
+      - Installable Build:
+          requires: [Hold]  
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/
+
