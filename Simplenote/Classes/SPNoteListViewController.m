@@ -103,6 +103,12 @@
     [self ensureTransitionControllerIsInitialized];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.searchController hideNavigationBarIfNecessary];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showRatingViewIfNeeded];
