@@ -292,6 +292,15 @@ extension SPNoteListViewController: UITableViewDataSource {
 //
 extension SPNoteListViewController: UITableViewDelegate {
 
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Notes:
+        //  1.  No need to estimate. We precalculate the Height elsewhere, and we can return the *Actual* value
+        //  2.  We always scroll to the first row whenever Search Results are updated. If we don't implement this method,
+        //      UITableView ends up jumping off elsewhere!
+        //
+        return self.tableView(tableView, heightForRowAt: indexPath)
+    }
+
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch notesListController.object(at: indexPath) {
         case is Note:
@@ -301,6 +310,14 @@ extension SPNoteListViewController: UITableViewDelegate {
         default:
             return .zero
         }
+    }
+
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        guard notesListController.sections[section].displaysTitle else {
+            return .leastNormalMagnitude
+        }
+
+        return Constants.estimatedHeightForHeaderInSection
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -460,6 +477,10 @@ private enum ActionTitle {
 }
 
 private enum Constants {
+
+    /// Section Header's Estimated Height
+    ///
+    static let estimatedHeightForHeaderInSection = CGFloat(30)
 
     /// Where do these insets come from?
     /// `For other subviews in your view hierarchy, the default layout margins are normally 8 points on each side`
