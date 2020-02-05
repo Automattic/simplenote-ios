@@ -134,6 +134,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupMargins()
         setupTextViews()
         refreshStyle()
         refreshConstraints()
@@ -171,6 +172,13 @@ class SPNoteTableViewCell: UITableViewCell {
 // MARK: - Private Methods: Initialization
 //
 private extension SPNoteTableViewCell {
+
+    /// Setup: Layout Margins
+    ///
+    func setupMargins() {
+        // Note: This one affects the TableView's separatorInsets
+        layoutMargins = .zero
+    }
 
     /// Setup: TextView
     ///
