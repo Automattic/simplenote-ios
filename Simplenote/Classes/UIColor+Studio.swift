@@ -154,6 +154,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteRestoreActionColor: UIColor {
+        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
+    }
+
+    @objc
     static var simplenoteBackgroundColor: UIColor {
         UIColor(lightColor: .spWhite, darkColor: .darkGray1)
     }

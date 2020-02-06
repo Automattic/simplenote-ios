@@ -426,12 +426,12 @@ private extension SPNoteListViewController {
 
     func rowActionsForDeletedNote(_ note: Note) -> [UITableViewRowAction] {
         return [
-            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .orange) { (_, _) in
+            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .simplenoteRestoreActionColor) { (_, _) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
             },
 
-            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .red) { (_, _) in
+            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
             }
