@@ -7,6 +7,28 @@ import UIKit
 //
 extension SPNoteListViewController {
 
+    /// Sets up the main TableView
+    ///
+    @objc
+    func configureTableView() {
+        assert(tableView == nil, "tableView is already initialized!")
+
+        tableView = UITableView()
+        tableView.delegate = self
+
+        tableView.alwaysBounceVertical = true
+        tableView.tableFooterView = UIView()
+
+        tableView.layoutMargins = .zero
+        tableView.separatorInset = .zero
+        tableView.separatorInsetReference = .fromAutomaticInsets
+        tableView.separatorStyle = UIDevice.sp_isPad() ? .none : .singleLine
+
+        tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
+        tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
+        tableView.register(SPSectionHeaderView.loadNib(), forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
+    }
+
     /// Sets up the Results Controller
     ///
     @objc
@@ -238,6 +260,20 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 }
 
 
+// MARK: - UIScrollViewDelegate
+//
+extension SPNoteListViewController: UIScrollViewDelegate {
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard searchBar.isFirstResponder else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
+    }
+}
+
+
 // MARK: - UITableViewDataSource
 //
 extension SPNoteListViewController: UITableViewDataSource {
@@ -390,12 +426,12 @@ private extension SPNoteListViewController {
 
     func rowActionsForDeletedNote(_ note: Note) -> [UITableViewRowAction] {
         return [
-            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .orange) { (_, _) in
+            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .simplenoteRestoreActionColor) { (_, _) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
             },
 
-            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .red) { (_, _) in
+            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
             }

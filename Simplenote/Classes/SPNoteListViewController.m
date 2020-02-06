@@ -40,8 +40,6 @@
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
-@property (nonatomic, strong) UITableView                           *tableView;
-
 @property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
@@ -67,7 +65,7 @@
         [self configureSearchStackView];
         [self configureResultsController];
         [self configureRootView];
-        [self updateRowHeight];
+        [self updateTableViewMetrics];
         [self startListeningToNotifications];
         [self startDisplayingEntities];
         
@@ -101,6 +99,12 @@
     [super didMoveToParentViewController:parent];
     [self ensureFirstRowIsVisible];
     [self ensureTransitionControllerIsInitialized];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.searchController hideNavigationBarIfNecessary];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -140,10 +144,11 @@
     self.navigationController.delegate = self.transitionController;
 }
 
-- (void)updateRowHeight
+- (void)updateTableViewMetrics
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
+    self.tableView.separatorInset = SPNoteTableViewCell.separatorInsets;
     [self.tableView reloadData];
 }
 
@@ -205,13 +210,14 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)condensedPreferenceWasUpdated:(id)sender {
-
-    [self updateRowHeight];
+- (void)condensedPreferenceWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
-- (void)contentSizeWasUpdated:(id)sender {
-    [self updateRowHeight];
+- (void)contentSizeWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
 - (void)sortOrderPreferenceWasUpdated:(id)sender {
@@ -293,20 +299,6 @@
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)configureTableView {
-    NSAssert(_tableView == nil, @"_tableView is already initialized!");
-
-    self.tableView = [UITableView new];
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.tableView.alwaysBounceVertical = YES;
-    [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPTagTableViewCell loadNib] forCellReuseIdentifier:[SPTagTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPSectionHeaderView loadNib] forHeaderFooterViewReuseIdentifier:[SPSectionHeaderView reuseIdentifier]];
-}
-
 - (void)configureSearchController {
     NSAssert(_searchController == nil, @"_searchController is already initialized!");
 
@@ -314,6 +306,7 @@
     self.searchController.delegate = self;
     self.searchController.presenter = self;
 
+    self.searchBar.placeholder = NSLocalizedString(@"Search notes or tags", @"SearchBar's Placeholder Text");
     [self.searchBar applySimplenoteStyle];
 }
 
@@ -368,7 +361,8 @@
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
-    [self endSearching];
+    [self.notesListController endSearch];
+    [self update];
 }
 
 
@@ -402,8 +396,7 @@
 
 - (void)endSearching
 {
-    [self.notesListController endSearch];
-    [self update];
+    [self.searchController dismiss];
 }
 
 
@@ -432,8 +425,11 @@
 {
     [SPTracker trackListNoteOpened];
 
-    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
+    // SearchBar: Always resign FirstResponder status
+    // Why: https://github.com/Automattic/simplenote-ios/issues/616
+    [self.searchBar resignFirstResponder];
 
+    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
     [editor updateNote:note];
 
     if (self.isSearchActive) {
@@ -637,11 +633,11 @@
     _keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
     
     UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom += _keyboardHeight;
+    tableviewInsets.bottom = _keyboardHeight;
     self.tableView.contentInset = tableviewInsets;
     
     UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom += _keyboardHeight;
+    scrollInsets.bottom = _keyboardHeight;
     self.tableView.scrollIndicatorInsets = tableviewInsets;
 }
 

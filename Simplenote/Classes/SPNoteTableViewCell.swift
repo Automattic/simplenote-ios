@@ -134,6 +134,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupMargins()
         setupTextViews()
         refreshStyle()
         refreshConstraints()
@@ -171,6 +172,13 @@ class SPNoteTableViewCell: UITableViewCell {
 // MARK: - Private Methods: Initialization
 //
 private extension SPNoteTableViewCell {
+
+    /// Setup: Layout Margins
+    ///
+    func setupMargins() {
+        // Note: This one affects the TableView's separatorInsets
+        layoutMargins = .zero
+    }
 
     /// Setup: TextView
     ///
@@ -226,11 +234,10 @@ private extension SPNoteTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let accessoryDimension = Style.headlineFont.inlineAssetHeight()
-        let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
+        let dimension = Style.accessoryImageDimension
 
-        accessoryLeftImageViewHeightConstraint.constant = cappedDimension
-        accessoryRightImageViewHeightConstraint.constant = cappedDimension
+        accessoryLeftImageViewHeightConstraint.constant = dimension
+        accessoryRightImageViewHeightConstraint.constant = dimension
     }
 
     /// Refreshes Accessory ImageView(s) and StackView(s) visibility, as needed
@@ -270,10 +277,26 @@ private extension SPNoteTableViewCell {
 //
 extension SPNoteTableViewCell {
 
+    /// TableView's Separator Insets: Expected to align **exactly** with the label(s) Leading.
+    /// In order to get the TableView to fully respect this the following must be fulfilled:
+    ///
+    ///     1.  tableViewCell(s).layoutMargins = .zero
+    ///     2.  tableView.layoutMargins = .zero
+    ///     2.  tableView.separatorInsetReference = `.fromAutomaticInsets
+    ///
+    /// Then, and only then, this will work ferpectly 🔥
+    ///
+    @objc
+    static var separatorInsets: UIEdgeInsets {
+        let left = Style.containerInsets.left + Style.accessoryImageDimension + Style.accessoryImagePaddingRight
+        return UIEdgeInsets(top: .zero, left: left, bottom: .zero, right: .zero)
+    }
+
     /// Returns the Height that the receiver would require to be rendered, given the current User Settings (number of preview lines).
     ///
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
+    @objc
     static var cellHeight: CGFloat {
         let numberLines = Options.shared.numberOfPreviewLines
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
@@ -292,6 +315,12 @@ extension SPNoteTableViewCell {
 //
 private enum Style {
 
+    /// Accessory's Dimension, based on the (current) Headline Font Size
+    ///
+    static var accessoryImageDimension: CGFloat {
+        max(min(headlineFont.inlineAssetHeight(), accessoryImageMaximumSize), accessoryImageMinimumSize)
+    }
+
     /// Accessory's Minimum Size
     ///
     static let accessoryImageMinimumSize = CGFloat(15)
@@ -299,6 +328,10 @@ private enum Style {
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
     static let accessoryImageMaximumSize = CGFloat(24)
+
+    /// Accessory's Right Padding
+    ///
+    static let accessoryImagePaddingRight = CGFloat(6)
 
     /// Title's Maximum Lines
     ///
@@ -310,7 +343,7 @@ private enum Style {
 
     /// Represents the Insets applied to the container view
     ///
-    static let containerInsets = UIEdgeInsets(top: 13, left: 0, bottom: 13, right: 0)
+    static let containerInsets = UIEdgeInsets(top: 13, left: 6, bottom: 13, right: 0)
 
     /// Outer Vertical StackView's Spacing
     ///

@@ -140,7 +140,7 @@ extension UIColor {
 
     @objc
     static var simplenoteSecondaryActionColor: UIColor {
-        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
+        UIColor(lightColor: .blue50, darkColor: .blue30)
     }
 
     @objc
@@ -151,6 +151,11 @@ extension UIColor {
     @objc
     static var simplenoteDestructiveActionColor: UIColor {
         UIColor(lightColor: .red50, darkColor: .red40)
+    }
+
+    @objc
+    static var simplenoteRestoreActionColor: UIColor {
+        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
     }
 
     @objc
