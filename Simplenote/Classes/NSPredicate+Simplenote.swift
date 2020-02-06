@@ -14,7 +14,7 @@ extension NSPredicate {
 
         for keyword in keywords where keyword.isEmpty == false {
             guard let tag = keyword.lowercased().suffix(afterPrefix: .searchOperatorForTags) else {
-                output.append( NSPredicate(format: "content CONTAINS[c] %@", keyword) )
+                output.append( NSPredicate(format: "content CONTAINS[cd] %@", keyword) )
                 continue
             }
 
@@ -22,7 +22,7 @@ extension NSPredicate {
                 continue
             }
 
-            output.append( NSPredicate(format: "tags CONTAINS[c] %@", tag) )
+            output.append( NSPredicate(format: "tags CONTAINS[cd] %@", tag) )
         }
 
         guard !output.isEmpty else {
@@ -85,7 +85,7 @@ extension NSPredicate {
         let last = keywords.last?.lowercased() ?? String()
 
         guard let tag = last.suffix(afterPrefix: .searchOperatorForTags) else {
-            return NSPredicate(format: "name CONTAINS[c] %@", last)
+            return NSPredicate(format: "name CONTAINS[cd] %@", last)
         }
 
         guard tag.isEmpty == false else {
@@ -93,7 +93,7 @@ extension NSPredicate {
         }
 
         return NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "name CONTAINS[c] %@", tag),
+            NSPredicate(format: "name CONTAINS[cd] %@", tag),
             NSPredicate(format: "name <>[c] %@", tag)
         ])
     }
