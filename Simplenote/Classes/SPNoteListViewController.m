@@ -40,8 +40,6 @@
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
-@property (nonatomic, strong) UITableView                           *tableView;
-
 @property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
@@ -67,7 +65,7 @@
         [self configureSearchStackView];
         [self configureResultsController];
         [self configureRootView];
-        [self updateRowHeight];
+        [self updateTableViewMetrics];
         [self startListeningToNotifications];
         [self startDisplayingEntities];
         
@@ -146,10 +144,11 @@
     self.navigationController.delegate = self.transitionController;
 }
 
-- (void)updateRowHeight
+- (void)updateTableViewMetrics
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
+    self.tableView.separatorInset = SPNoteTableViewCell.separatorInsets;
     [self.tableView reloadData];
 }
 
@@ -211,13 +210,14 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)condensedPreferenceWasUpdated:(id)sender {
-
-    [self updateRowHeight];
+- (void)condensedPreferenceWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
-- (void)contentSizeWasUpdated:(id)sender {
-    [self updateRowHeight];
+- (void)contentSizeWasUpdated:(id)sender
+{
+    [self updateTableViewMetrics];
 }
 
 - (void)sortOrderPreferenceWasUpdated:(id)sender {
@@ -297,20 +297,6 @@
     //  -   Therefore we must inject the blur on a VC per VC basis.
     //
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
-}
-
-- (void)configureTableView {
-    NSAssert(_tableView == nil, @"_tableView is already initialized!");
-
-    self.tableView = [UITableView new];
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.tableView.alwaysBounceVertical = YES;
-    [self.tableView registerNib:[SPNoteTableViewCell loadNib] forCellReuseIdentifier:[SPNoteTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPTagTableViewCell loadNib] forCellReuseIdentifier:[SPTagTableViewCell reuseIdentifier]];
-    [self.tableView registerNib:[SPSectionHeaderView loadNib] forHeaderFooterViewReuseIdentifier:[SPSectionHeaderView reuseIdentifier]];
 }
 
 - (void)configureSearchController {

@@ -75,6 +75,7 @@ class SPTagTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupMargins()
         refreshStyle()
         refreshConstraints()
     }
@@ -90,6 +91,13 @@ class SPTagTableViewCell: UITableViewCell {
 // MARK: - Private Methods
 //
 private extension SPTagTableViewCell {
+
+    /// Setup: Layout Margins
+    ///
+    func setupMargins() {
+        // Note: This one affects the TableView's separatorInsets
+        layoutMargins = .zero
+    }
 
     /// Refreshes the current Style current style
     ///
