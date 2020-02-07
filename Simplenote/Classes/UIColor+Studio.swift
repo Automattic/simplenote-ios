@@ -130,7 +130,7 @@ extension UIColor {
 
     @objc
     static var simplenoteSearchBarBackgroundColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .gray30)
+        UIColor(lightColor: .gray10, darkColor: .gray50)
     }
 
     @objc
