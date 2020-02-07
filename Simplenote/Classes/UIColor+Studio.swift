@@ -59,6 +59,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteGray30Color: UIColor {
+        UIColor(studioColor: .gray30)
+    }
+
+    @objc
     static var simplenoteGray50Color: UIColor {
         UIColor(studioColor: .gray50)
     }
@@ -124,6 +129,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteSearchBarBackgroundColor: UIColor {
+        UIColor(lightColor: .gray10, darkColor: .gray30)
+    }
+
+    @objc
     static var simplenoteSearchHighlightTextColor: UIColor {
         UIColor(studioColor: .white)
     }
@@ -165,7 +175,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .spWhite, darkColor: .darkGray8).withAlphaComponent(UIKitConstants.alphaQuarter)
+        UIColor(lightColor: .spWhite, darkColor: .darkGray12).withAlphaComponent(UIKitConstants.alphaQuarter)
     }
 
     @objc
