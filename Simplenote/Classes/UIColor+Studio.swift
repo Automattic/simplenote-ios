@@ -124,7 +124,7 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteSearchHighlightTextColor: UIColor {
+    static var simplenoteKeywordWithinEditorForegroundColor: UIColor {
         UIColor(studioColor: .white)
     }
 
