@@ -4,6 +4,7 @@
 -   Search results now display matching tags!
 -   We're now supporting the `tag:keyword` search operator. Simplenote will yield Notes whose tag names contain such *keyword*.
 -   Notes List's Interface is now looking more beautiful than ever.
+-   The way in which Notes are previewed has been upgraded to fit more content onScreen.
 -   Search is now diacritic insensitive: type search terms with or without accents to get matches!
 -   Fixed a bug in which the Search Mode wouldn't properly be dismissed from the Editor
 -   Fixed a bug that caused the Editor's Keyboard Appearance not to match the selected theme
