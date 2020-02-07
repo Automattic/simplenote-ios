@@ -188,13 +188,20 @@ extension NotesListController {
     ///
     @objc
     func beginSearch() {
-// TODO: we should actually switch to `state = .history`
+        // NO-OP: Initially meant for History, keeping it around for both consistency and future purposes.
     }
 
     /// Refreshes the FetchedObjects so that they match a given Keyword
     ///
+    /// -   Note: Whenever the Keyword is actually empty, we'll fallback to regular results. Capisci?
+    ///
     @objc
     func refreshSearchResults(keyword: String) {
+        guard !keyword.isEmpty else {
+            state = .results
+            return
+        }
+
         state = .searching(keyword: keyword)
     }
 
