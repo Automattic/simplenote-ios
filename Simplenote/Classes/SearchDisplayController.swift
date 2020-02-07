@@ -150,6 +150,10 @@ extension SearchDisplayController: UISearchBarDelegate {
         delegate?.searchDisplayController(self, updateSearchResults: searchText)
     }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss()
     }
