@@ -14,13 +14,9 @@ extension CSSearchableItemAttributeSet {
 
     convenience init(note: Note) {
         self.init(itemContentType: kUTTypeData as String)
-        if note.preview == nil {
-            note.createPreview()
-        }
+        note.ensurePreviewStringsAreAvailable()
         title = note.titlePreview
-
-        let index = note.preview.index(note.preview.startIndex, offsetBy: note.titlePreview.count)
-        contentDescription = String(note.preview[index...])
+        contentDescription = note.bodyPreview
     }
     
 }
