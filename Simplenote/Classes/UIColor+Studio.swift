@@ -129,6 +129,16 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteKeywordForegroundColor: UIColor {
+        .simplenoteTintColor
+    }
+
+    @objc
+    static var simplenoteKeywordBackgroundColor: UIColor {
+        UIColor(lightColor: .blue0, darkColor: .gray70)
+    }
+
+    @objc
     static var simplenoteSwitchTintColor: UIColor {
         UIColor(lightColor: .gray5, darkColor: .darkGray4)
     }
