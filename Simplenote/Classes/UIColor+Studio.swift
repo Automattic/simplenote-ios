@@ -110,7 +110,7 @@ extension UIColor {
 
     @objc
     static var simplenoteLockBackgroundColor: UIColor {
-        UIColor(lightColor: .blue50, darkColor: .darkGray0)
+        UIColor(lightColor: .blue50, darkColor: .darkGray0_5)
     }
 
     @objc
@@ -160,7 +160,7 @@ extension UIColor {
 
     @objc
     static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .spWhite, darkColor: .darkGray0)
+        UIColor(lightColor: .spWhite, darkColor: .darkGray0_5)
     }
 
     @objc
@@ -170,7 +170,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .black)
+        UIColor(lightColor: .gray0, darkColor: .darkGray0)
     }
 
     @objc
