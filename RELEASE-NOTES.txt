@@ -8,6 +8,7 @@
 -   Search is now diacritic insensitive: type search terms with or without accents to get matches!
 -   Fixed a bug in which the Search Mode wouldn't properly be dismissed from the Editor
 -   Fixed a bug that caused the Editor's Keyboard Appearance not to match the selected theme
+-   Dark Mode is now darker than just dark, for an improved dark side experience.
 
 4.15
 -----
