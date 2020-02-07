@@ -401,7 +401,8 @@ private extension SPNoteListViewController {
         cell.bodyText = note.bodyPreview
 
         cell.keywords = searchText
-        cell.keywordsTintColor = .simplenoteTintColor
+        cell.keywordsForegroundColor = .simplenoteKeywordForegroundColor
+        cell.keywordsBackgroundColor = .simplenoteKeywordBackgroundColor
 
         cell.refreshAttributedStrings()
 
