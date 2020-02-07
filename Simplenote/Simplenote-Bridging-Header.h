@@ -36,6 +36,7 @@
 #import "UIImage+Colorization.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
+#import "NSString+Condensing.h"
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "SPNavigationController.h"

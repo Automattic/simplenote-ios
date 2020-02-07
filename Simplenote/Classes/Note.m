@@ -20,7 +20,6 @@
 
 @synthesize creationDatePreview;
 @synthesize modificationDatePreview;
-@synthesize preview;
 @synthesize titlePreview;
 @synthesize bodyPreview;
 @synthesize tagsArray;
@@ -221,32 +220,30 @@ SEL notifySelector;
     [self didChangeValueForKey:@"systemTags"];    
 }
 
-- (void)ensurePreviewStringsAreAvailable {
-    if (self.preview != nil) {
+- (void)ensurePreviewStringsAreAvailable
+{
+    if (self.titlePreview != nil) {
         return;
     }
 
     [self createPreview];
 }
 
-- (void)createPreview {
-    
-    // trim content for preview
+- (void)createPreview
+{
     NSString *aString = self.content;
-    if (aString.length > 500)
+    if (aString.length > 500) {
         aString = [aString substringToIndex:500];
+    }
     
-    [aString generatePreviewStrings:^(NSString *title, NSString *body, NSString *content) {
+    [aString generatePreviewStrings:^(NSString *title, NSString *body) {
         self.titlePreview = title;
         self.bodyPreview = body;
-        self.preview = content;
     }];
 
-    if (self.preview.length == 0) {
-        NSString *placeholder = NSLocalizedString(@"New note...", @"Empty Note Placeholder");
-        self.titlePreview = placeholder;
+    if (self.titlePreview.length == 0) {
+        self.titlePreview = NSLocalizedString(@"New note...", @"Empty Note Placeholder");
         self.bodyPreview = nil;
-        self.preview = placeholder;
     }
     
     [self updateTagsArray];
