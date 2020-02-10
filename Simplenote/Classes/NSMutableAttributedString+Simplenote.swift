@@ -26,7 +26,7 @@ extension NSMutableAttributedString {
 
     /// Applies a given UIColor instance to substrings matching a given Keyword
     ///
-    func apply(fgColor: UIColor, bgColor: UIColor, to keywords: String) {
+    func apply(color: UIColor, toSubstringsMatching keywords: String) {
         let maxLength = foundationString.length
 
         for value in foundationString.ranges(forTerms: keywords) {
@@ -35,8 +35,7 @@ extension NSMutableAttributedString {
                 continue
             }
 
-            addAttribute(.foregroundColor, value: fgColor, range: range)
-            addAttribute(.backgroundColor, value: bgColor, range: range)
+            addAttribute(.foregroundColor, value: color, range: range)
         }
     }
 }
