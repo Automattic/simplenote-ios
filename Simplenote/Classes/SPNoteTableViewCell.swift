@@ -85,12 +85,7 @@ class SPNoteTableViewCell: UITableViewCell {
     /// Highlighted Keywords's Tint Color
     /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var keywordsForegroundColor: UIColor = .simplenoteKeywordForegroundColor
-
-    /// Highlighted Keywords's Tint Color
-    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
-    ///
-    var keywordsBackgroundColor: UIColor = .simplenoteKeywordBackgroundColor
+    var keywordsTintColor: UIColor = .simplenoteTintColor
 
     /// Note's Title
     /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
@@ -156,21 +151,19 @@ class SPNoteTableViewCell: UITableViewCell {
     func refreshAttributedStrings() {
         titleLabel.attributedText = titleText.map {
             attributedText(from: $0,
+                           highlighing: keywords,
                            font: Style.headlineFont,
                            textColor: Style.headlineColor,
-                           highlighting: keywords,
-                           keywordsForegroundColor: keywordsForegroundColor,
-                           keywordsBackgroundColor: keywordsBackgroundColor)
+                           highlightColor: keywordsTintColor)
 
         }
 
         bodyLabel.attributedText = bodyText.map {
             attributedText(from: $0,
+                           highlighing: keywords,
                            font: Style.previewFont,
                            textColor: Style.previewColor,
-                           highlighting: keywords,
-                           keywordsForegroundColor: keywordsForegroundColor,
-                           keywordsBackgroundColor: keywordsBackgroundColor)
+                           highlightColor: keywordsTintColor)
         }
     }
 }
@@ -258,11 +251,10 @@ private extension SPNoteTableViewCell {
     /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
     ///
     func attributedText(from string: String,
+                        highlighing keywords: String?,
                         font: UIFont,
                         textColor: UIColor,
-                        highlighting keywords: String?,
-                        keywordsForegroundColor: UIColor,
-                        keywordsBackgroundColor: UIColor) -> NSAttributedString
+                        highlightColor: UIColor) -> NSAttributedString
     {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
@@ -273,7 +265,7 @@ private extension SPNoteTableViewCell {
         output.addChecklistAttachments(for: textColor)
 
         if let keywords = keywords {
-            output.apply(fgColor: keywordsForegroundColor, bgColor: keywordsBackgroundColor, to: keywords)
+            output.apply(color: highlightColor, toSubstringsMatching: keywords)
         }
 
         return output
