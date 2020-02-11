@@ -132,8 +132,6 @@
 		<integer>5</integer>
 		<key>horizontalPickerHorizontalPadding</key>
 		<integer>10</integer>
-		<key>emptyListViewFontColor</key>
-		<string>d9d9d9</string>
 	</dict>
 	<key>Dark</key>
 	<dict>
@@ -157,10 +155,6 @@
 		<string>@secondaryTextColor</string>
 		<key>actionViewButtonDisabledColor</key>
 		<string>@secondaryTextColor</string>
-		<key>backgroundColor</key>
-		<string>1e1e1e</string>
-		<key>emptyListViewFontColor</key>
-		<string>@secondaryTextColor</string>
 		<key>tableViewBackgroundColor</key>
 		<string>1e1e1e</string>
 		<key>tableViewDetailTextLabelColor</key>
@@ -177,13 +171,7 @@
 		<string>@secondaryTextColor</string>
 		<key>tagViewDeletionBackgroundBorderColor</key>
 		<string>2d4259</string>
-		<key>tableViewBackgroundColor</key>
-		<string>1e1e1e</string>
-		<key>tableViewDetailTextLabelColor</key>
-		<string>@secondaryTextColor</string>
 		<key>collaboratorTextColor</key>
-		<string>@secondaryTextColor</string>
-		<key>emptyListViewFontColor</key>
 		<string>@secondaryTextColor</string>
 	</dict>
 </dict>
