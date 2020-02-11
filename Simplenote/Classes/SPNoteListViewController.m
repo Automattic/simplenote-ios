@@ -333,9 +333,7 @@
 - (void)searchDisplayController:(SearchDisplayController *)controller updateSearchResults:(NSString *)keyword
 {
     // Don't search immediately; search a tad later to improve performance of search-as-you-type
-    if (self.searchTimer) {
-        [self.searchTimer invalidate];
-    }
+    [self invalidateSearchTimer];
 
     NSTimeInterval const delay = 0.2;
     self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:delay repeats:NO block:^(NSTimer * _Nonnull timer) {
@@ -352,6 +350,7 @@
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
+    [self invalidateSearchTimer];
     [self.notesListController endSearch];
     [self update];
 }
@@ -377,14 +376,19 @@
     [self.tableView reloadData];
 
     [self displayPlaceholdersIfNeeded];
-    
-    [self.searchTimer invalidate];
-    self.searchTimer = nil;
+
+    [self invalidateSearchTimer];
 }
 
 - (void)endSearching
 {
     [self.searchController dismiss];
+}
+
+- (void)invalidateSearchTimer
+{
+    [self.searchTimer invalidate];
+    self.searchTimer = nil;
 }
 
 
