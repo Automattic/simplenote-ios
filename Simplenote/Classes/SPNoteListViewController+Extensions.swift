@@ -39,6 +39,18 @@ extension SPNoteListViewController {
         notesListController.performFetch()
     }
 
+    /// Sets up the Placeholder View
+    ///
+    @objc
+    func configurePlaceholderViews() {
+        placeholderView = SPPlaceholderView()
+        placeholderView.isUserInteractionEnabled = false
+
+        placeholderView.imageView.image = .image(name: .simplenoteLogo)
+        placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
+        placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
+    }
+
     /// Sets up the Search StackView
     ///
     @objc
@@ -56,8 +68,10 @@ extension SPNoteListViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
+        view.addSubview(placeholderView)
         view.addSubview(navigationBarBackground)
         view.addSubview(searchBarStackView)
 
@@ -79,6 +93,11 @@ extension SPNoteListViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+
+        NSLayoutConstraint.activate([
+            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 

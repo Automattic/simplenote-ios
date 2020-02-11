@@ -6,7 +6,6 @@
 #import "SPAppDelegate.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
-#import "SPEmptyListView.h"
 #import "SPActivityView.h"
 #import "SPObjectManager.h"
 #import "SPTracker.h"
@@ -20,7 +19,6 @@
 #import "NSTextStorage+Highlight.h"
 #import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
-#import "UIImage+Colorization.h"
 #import "VSThemeManager.h"
 
 #import <StoreKit/StoreKit.h>
@@ -61,6 +59,7 @@
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureResultsController];
+        [self configurePlaceholderViews];
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
@@ -68,14 +67,6 @@
         [self updateTableViewMetrics];
         [self startListeningToNotifications];
         [self startDisplayingEntities];
-        
-        // add empty list view
-        _emptyListView = [[SPEmptyListView alloc] initWithImage:[UIImage imageNamed:@"logo_login"]
-                                                       withText:nil];
-        
-        _emptyListView.frame = self.view.bounds;
-        _emptyListView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        _emptyListView.userInteractionEnabled = false;
 
         [self registerForPeekAndPop];
         [self refreshStyle];
@@ -478,31 +469,19 @@
 - (void)updateViewIfEmpty
 {    
     BOOL isListEmpty = self.isListEmpty;
-    
-    _emptyListView.hidden = !isListEmpty;    
-    [_emptyListView hideImageView:self.isSearchActive];
-    
-    if (isListEmpty) {
-        // set appropriate text
-        if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
-            [_emptyListView setText:nil];
-        } else if (self.isSearchActive)
-            [_emptyListView setText:NSLocalizedString(@"No Results", @"Message shown when no notes match a search string")];
-        else
-            [_emptyListView setText:NSLocalizedString(@"No Notes", @"Message shown in note list when no notes are in the current view")];
 
-        CGRect _emptyListViewRect = self.view.bounds;
-        _emptyListViewRect.origin.y += self.view.safeAreaInsets.top;
-        _emptyListViewRect.size.height -= _emptyListViewRect.origin.y + _keyboardHeight;
-        _emptyListView.frame = _emptyListViewRect;
-        
-        [self.view addSubview:_emptyListView];
-        
-        
-    } else {
-        [_emptyListView removeFromSuperview];
+    self.placeholderView.hidden = !isListEmpty;
+    self.placeholderView.imageView.hidden = self.isSearchActive;
+
+    if (isListEmpty) {
+        if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
+            self.placeholderView.textLabel.text = nil;
+        } else if (self.isSearchActive) {
+            self.placeholderView.textLabel.text = NSLocalizedString(@"No Results", @"Message shown when no notes match a search string");
+        } else {
+            self.placeholderView.textLabel.text = NSLocalizedString(@"No Notes", @"Message shown in note list when no notes are in the current view");
+        }
     }
-    
 }
 
 - (void)update
