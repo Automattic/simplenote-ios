@@ -124,6 +124,16 @@ extension UIColor {
     }
 
     @objc
+    static var simplenotePlaceholderImageColor: UIColor {
+        UIColor(studioColor: .gray5)
+    }
+
+    @objc
+    static var simplenotePlaceholderTextColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray20)
+    }
+
+    @objc
     static var simplenoteSearchBarBackgroundColor: UIColor {
         UIColor(lightColor: .gray10, darkColor: .gray50)
     }
