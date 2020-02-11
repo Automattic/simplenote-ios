@@ -42,12 +42,14 @@ extension SPNoteListViewController {
     /// Sets up the Placeholder View
     ///
     @objc
-    func configurePlaceholderViews() {
+    func configurePlaceholderView() {
         placeholderView = SPPlaceholderView()
         placeholderView.isUserInteractionEnabled = false
 
         placeholderView.imageView.image = .image(name: .simplenoteLogo)
         placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
+
+        placeholderView.textLabel.text = NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
         placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
     }
 
@@ -109,7 +111,7 @@ extension SPNoteListViewController {
 
         notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
             self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
-                self?.updateViewIfEmpty()
+                self?.displayPlaceholdersIfNeeded()
             }
         }
     }
@@ -204,6 +206,19 @@ extension SPNoteListViewController {
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
+    }
+
+    /// Displays the Emtpy State Placeholders, when / if needed
+    ///
+    @objc
+    func displayPlaceholdersIfNeeded() {
+        placeholderView.isHidden = !isListEmpty
+        placeholderView.imageView.isHidden = isSearchActive
+        placeholderView.textLabel.isHidden = isIndexingNotes || SPAppDelegate.shared().bSigningUserOut
+
+//        if isSearchActive {
+//            return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+//        }
     }
 
     /// Indicates if the Deleted Notes are onScreen

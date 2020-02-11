@@ -46,7 +46,7 @@
 
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
-@property (nonatomic, assign) BOOL                                  bIndexingNotes;
+@property (nonatomic, assign) BOOL                                  isIndexingNotes;
 
 @end
 
@@ -59,7 +59,7 @@
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureResultsController];
-        [self configurePlaceholderViews];
+        [self configurePlaceholderView];
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
@@ -376,7 +376,7 @@
     [self.tableView scrollToTopWithAnimation:NO];
     [self.tableView reloadData];
 
-    [self updateViewIfEmpty];
+    [self displayPlaceholdersIfNeeded];
     
     [self.searchTimer invalidate];
     self.searchTimer = nil;
@@ -460,29 +460,11 @@
     [SPTracker trackListTrashEmptied];
 	[[SPObjectManager sharedManager] emptyTrash];
 	[self.emptyTrashButton setEnabled:NO];
-    [self updateViewIfEmpty];
+    [self displayPlaceholdersIfNeeded];
 }
 
 
 #pragma mark - NoteListController
-
-- (void)updateViewIfEmpty
-{    
-    BOOL isListEmpty = self.isListEmpty;
-
-    self.placeholderView.hidden = !isListEmpty;
-    self.placeholderView.imageView.hidden = self.isSearchActive;
-
-    if (isListEmpty) {
-        if (self.bIndexingNotes || [SPAppDelegate sharedDelegate].bSigningUserOut) {
-            self.placeholderView.textLabel.text = nil;
-        } else if (self.isSearchActive) {
-            self.placeholderView.textLabel.text = NSLocalizedString(@"No Results", @"Message shown when no notes match a search string");
-        } else {
-            self.placeholderView.textLabel.text = NSLocalizedString(@"No Notes", @"Message shown in note list when no notes are in the current view");
-        }
-    }
-}
 
 - (void)update
 {
@@ -496,7 +478,7 @@
     self.emptyTrashButton.enabled = isTrashOnScreen && isNotEmpty;
     self.tableView.allowsSelection = !isTrashOnScreen;
     
-    [self updateViewIfEmpty];
+    [self displayPlaceholdersIfNeeded];
     [self updateNavigationBar];
     [self hideRatingViewIfNeeded];
 }
@@ -560,9 +542,9 @@
         self.bResetTitleView = YES;
     }
     
-    self.bIndexingNotes = waiting;
+    self.isIndexingNotes = waiting;
 
-    [self updateViewIfEmpty];
+    [self displayPlaceholdersIfNeeded];
 }
 
 - (void)animateTitleViewSwapWithNewView:(UIView *)newView completion:(void (^)())completion {
