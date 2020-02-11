@@ -7,7 +7,6 @@
 //
 
 #import "SPToggle.h"
-#import "UIImage+Colorization.h"
 
 
 @implementation SPToggle
