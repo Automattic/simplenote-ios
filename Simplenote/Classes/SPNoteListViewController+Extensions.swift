@@ -49,7 +49,6 @@ extension SPNoteListViewController {
         placeholderView.imageView.image = .image(name: .simplenoteLogo)
         placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
 
-        placeholderView.textLabel.text = NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
         placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
     }
 
@@ -212,13 +211,25 @@ extension SPNoteListViewController {
     ///
     @objc
     func displayPlaceholdersIfNeeded() {
-        placeholderView.isHidden = !isListEmpty
+        guard isListEmpty else {
+            placeholderView.isHidden = true
+            return
+        }
+
+        placeholderView.isHidden = false
         placeholderView.imageView.isHidden = isSearchActive
         placeholderView.textLabel.isHidden = isIndexingNotes || SPAppDelegate.shared().bSigningUserOut
+        placeholderView.textLabel.text = {
+            if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
+                return nil
+            }
 
-//        if isSearchActive {
-//            return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
-//        }
+            if isSearchActive {
+                return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+            }
+
+            return NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
+        }()
     }
 
     /// Indicates if the Deleted Notes are onScreen
