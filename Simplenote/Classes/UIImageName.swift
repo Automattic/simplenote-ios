@@ -30,6 +30,7 @@ enum UIImageName: Int, CaseIterable {
     case pin
     case restore
     case settings
+    case simplenoteLogo
     case share
     case shared
     case sortOrder
@@ -101,6 +102,8 @@ extension UIImageName {
             return "icon_restore"
         case .settings:
             return "icon_settings"
+        case .simplenoteLogo:
+            return "logo_login"
         case .share:
             return "icon_share"
         case .shared:
