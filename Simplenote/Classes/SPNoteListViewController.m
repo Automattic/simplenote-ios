@@ -63,6 +63,7 @@
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
+        [self configureSortBar];
         [self configureRootView];
         [self updateTableViewMetrics];
         [self startListeningToNotifications];
@@ -346,12 +347,14 @@
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
     [self.tableView reloadData];
+    [self displaySortBar];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
     [self invalidateSearchTimer];
     [self.notesListController endSearch];
+    [self dismissSortBar];
     [self update];
 }
 

@@ -53,6 +53,7 @@ extension SPNoteListViewController {
     }
 
     /// Sets up the Search StackView
+    /// - Note: We're embedding the SearchBar inside a StackView, to aid in the SearchBar-Hidden Mechanism
     ///
     @objc
     func configureSearchStackView() {
@@ -62,19 +63,39 @@ extension SPNoteListViewController {
         searchBarStackView.axis = .vertical
     }
 
+    /// Sets up the Sort Bar
+    ///
+    @objc
+    func configureSortBar() {
+        sortBar = SPSortBar.instantiateFromNib()
+
+        sortBar.isHidden = true
+        sortBar.onSortModePress = {
+// TODO: Wire Me
+            NSLog("# onSortModePress")
+        }
+
+        sortBar.onSortOrderPress = {
+// TODO: Wire Me
+            NSLog("# onSortOrderPress")
+        }
+    }
+
     /// Sets up the Root ViewController
     ///
     @objc
     func configureRootView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
-        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
+        sortBar.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
         view.addSubview(placeholderView)
         view.addSubview(navigationBarBackground)
         view.addSubview(searchBarStackView)
+        view.addSubview(sortBar)
 
         NSLayoutConstraint.activate([
             searchBarStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -99,6 +120,12 @@ extension SPNoteListViewController {
         NSLayoutConstraint.activate([
             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            sortBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sortBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sortBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 
@@ -544,6 +571,22 @@ private extension SPNoteListViewController {
         }
 
         present(controller, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Sort Bar
+//
+extension SPNoteListViewController {
+
+    @objc
+    func displaySortBar() {
+        sortBar.animateVisibility(isHidden: false)
+    }
+
+    @objc
+    func dismissSortBar() {
+        sortBar.animateVisibility(isHidden: true)
     }
 }
 
