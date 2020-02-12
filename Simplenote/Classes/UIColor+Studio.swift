@@ -170,7 +170,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .spWhite, darkColor: .darkGray0_5).withAlphaComponent(0.6) //UIKitConstants.alphaQuarter)
+        UIColor(lightColor: .spWhite, darkColor: .darkGray0_5).withAlphaComponent(UIKitConstants.alpha0_6)
     }
 
     @objc
