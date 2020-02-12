@@ -215,12 +215,12 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     
     fromView.frame = fromViewInitialFrame;
     toView.frame = toViewInitialFrame;
-    toView.alpha = UIKitConstants.alphaZero;
+    toView.alpha = UIKitConstants.alpha0_0;
     
     void (^transition)() = ^void() {
         fromView.frame = fromViewFinalFrame;
         toView.frame = toViewFinalFrame;
-        fromView.alpha = UIKitConstants.alphaZero;
+        fromView.alpha = UIKitConstants.alpha0_0;
         toView.alpha = UIKitConstants.alphaFull;
     };
     

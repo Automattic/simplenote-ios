@@ -710,7 +710,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     // hide the tags field
     if (!bVoiceoverEnabled) {
-        self.tagView.alpha = UIKitConstants.alphaZero;
+        self.tagView.alpha = UIKitConstants.alpha0_0;
     }
 }
 

@@ -5,7 +5,7 @@ import Foundation
 //
 @objcMembers
 class UIKitConstants: NSObject {
-    static let alphaZero = CGFloat(0)
+    static let alpha0_0 = CGFloat(0)
     static let alpha0_5 = CGFloat(0.5)
     static let alpha0_6 = CGFloat(0.6)
     static let alphaFull = CGFloat(1)
