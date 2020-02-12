@@ -590,13 +590,13 @@
 
     self.bTitleViewAnimating = YES;
     [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        self.navigationItem.titleView.alpha = UIKitConstants.alphaZero;
+        self.navigationItem.titleView.alpha = UIKitConstants.alpha0_0;
 
     } completion:^(BOOL finished) {
         self.navigationItem.titleView = newView;
 
         [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-            self.navigationItem.titleView.alpha = UIKitConstants.alphaFull;
+            self.navigationItem.titleView.alpha = UIKitConstants.alpha1_0;
 
         } completion:^(BOOL finished) {
             if (completion) {
@@ -672,10 +672,10 @@
     [ratingsView layoutIfNeeded];
 
     // And finally ... FadeIn!
-    ratingsView.alpha = UIKitConstants.alphaZero;
+    ratingsView.alpha = UIKitConstants.alpha0_0;
 
     [UIView animateWithDuration:UIKitConstants.animationShortDuration delay:UIKitConstants.animationDelayZero options:UIViewAnimationOptionCurveEaseIn animations:^{
-        ratingsView.alpha = UIKitConstants.alphaFull;
+        ratingsView.alpha = UIKitConstants.alpha1_0;
         [self.tableView layoutIfNeeded];
     } completion:nil];
 }

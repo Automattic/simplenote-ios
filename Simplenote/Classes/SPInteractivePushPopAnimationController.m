@@ -215,13 +215,13 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     
     fromView.frame = fromViewInitialFrame;
     toView.frame = toViewInitialFrame;
-    toView.alpha = UIKitConstants.alphaZero;
+    toView.alpha = UIKitConstants.alpha0_0;
     
     void (^transition)() = ^void() {
         fromView.frame = fromViewFinalFrame;
         toView.frame = toViewFinalFrame;
-        fromView.alpha = UIKitConstants.alphaZero;
-        toView.alpha = UIKitConstants.alphaFull;
+        fromView.alpha = UIKitConstants.alpha0_0;
+        toView.alpha = UIKitConstants.alpha1_0;
     };
     
     void (^completion)(BOOL) = ^void(BOOL finished) {
@@ -233,7 +233,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
 
         // We must restore fromView's alpha value. Otherwise `UINavigationController.interactivePopGestureRecognizer`
         // will end up displaying a blank UI.
-        fromView.alpha = UIKitConstants.alphaFull;
+        fromView.alpha = UIKitConstants.alpha1_0;
 
         [transitionContext completeTransition:completed];
     };
