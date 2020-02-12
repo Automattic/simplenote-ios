@@ -1145,9 +1145,9 @@
 - (void)showRatingViewIfNeeded
 {
     if (![[SPRatingsHelper sharedInstance] shouldPromptForAppReview]) {
-//        return;
+        return;
     }
-
+    
     [SPTracker trackRatingsPromptSeen];
 
     UIView *ratingsView = self.tableView.tableHeaderView ?: [self newRatingsView];
