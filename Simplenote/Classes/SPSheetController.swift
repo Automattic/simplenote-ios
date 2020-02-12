@@ -161,7 +161,7 @@ private extension SPSheetController {
     }
 
     func showSubviews() {
-        backgroundView.alpha = UIKitConstants.alphaFull
+        backgroundView.alpha = UIKitConstants.alpha1_0
         actionsBottomConstraint.constant = .zero
         view.layoutIfNeeded()
     }
