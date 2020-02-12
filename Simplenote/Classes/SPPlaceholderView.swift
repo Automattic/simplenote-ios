@@ -7,6 +7,23 @@ import UIKit
 @objcMembers
 class SPPlaceholderView: UIView {
 
+    /// DisplayMode: Defines the way in which the Placeholder behaves
+    ///
+    enum DisplayMode {
+        case picture
+        case pictureAndText
+        case text
+    }
+
+    /// Placeholder's Display Mode
+    ///
+    var displayMode: DisplayMode = .pictureAndText {
+        didSet {
+            displayModeWasChanged()
+        }
+    }
+
+
     /// Placeholder Image
     ///
     private(set) lazy var imageView: UIImageView = {
@@ -69,6 +86,12 @@ private extension SPPlaceholderView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
+
+    func displayModeWasChanged() {
+        imageView.isHidden = !displayMode.displaysPicture
+        textLabel.isHidden = !displayMode.displaysText
+        textLabel.font = displayMode.textFont
+    }
 }
 
 
@@ -78,4 +101,34 @@ private enum Constants {
     static let imageViewAlpha = CGFloat(0.5)
     static let numberOfLines = 0
     static let stackViewSpacing = CGFloat(25)
+}
+
+
+// MARK: - SPPlaceholderView.DisplayMode Properties
+//
+extension SPPlaceholderView.DisplayMode {
+
+    var displaysPicture: Bool {
+        guard self == .text else {
+            return true
+        }
+
+        return false
+    }
+
+    var displaysText: Bool {
+        guard self == .picture else {
+            return true
+        }
+
+        return false
+    }
+
+    var textFont: UIFont {
+        guard self == .text else {
+            return .preferredFont(forTextStyle: .body)
+        }
+
+        return .preferredFont(forTextStyle: .title3)
+    }
 }
