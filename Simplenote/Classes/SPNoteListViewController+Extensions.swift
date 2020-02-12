@@ -217,13 +217,15 @@ extension SPNoteListViewController {
         }
 
         placeholderView.isHidden = false
-        placeholderView.imageView.isHidden = isSearchActive
-        placeholderView.textLabel.isHidden = isIndexingNotes || SPAppDelegate.shared().bSigningUserOut
-        placeholderView.textLabel.text = {
+        placeholderView.displayMode = {
             if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
-                return nil
+                return .picture
             }
 
+            return isSearchActive ? .text : .pictureAndText
+        }()
+
+        placeholderView.textLabel.text = {
             if isSearchActive {
                 return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
             }
