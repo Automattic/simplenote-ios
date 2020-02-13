@@ -55,6 +55,7 @@
     
     self = [super init];
     if (self) {
+        [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureResultsController];

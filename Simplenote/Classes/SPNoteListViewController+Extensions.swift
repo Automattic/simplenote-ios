@@ -7,6 +7,14 @@ import UIKit
 //
 extension SPNoteListViewController {
 
+    /// Sets up the Feedback Generator!
+    ///
+    @objc
+    func configureImpactGenerator() {
+        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator.prepare()
+    }
+
     /// Sets up the main TableView
     ///
     @objc

@@ -14,6 +14,7 @@
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, assign, readonly) BOOL                                isIndexingNotes;
+@property (nonatomic, strong) UIImpactFeedbackGenerator                     *feedbackGenerator;
 @property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
 @property (nonatomic, strong) SPSortBar                                     *sortBar;
 @property (nonatomic, strong) UITableView                                   *tableView;
