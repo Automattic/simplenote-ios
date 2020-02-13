@@ -636,7 +636,7 @@ extension SPNoteListViewController {
 }
 
 
-// MARK: - Action Handlers
+// MARK: - Search Action Handlers
 //
 extension SPNoteListViewController {
 
