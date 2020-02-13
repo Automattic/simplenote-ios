@@ -29,6 +29,24 @@ extension SPNoteListViewController {
         tableView.register(SPSectionHeaderView.loadNib(), forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
     }
 
+    /// Sets up the Sort Bar
+    ///
+    @objc
+    func configureSortBar() {
+        sortBar = SPSortBar.instantiateFromNib()
+
+        sortBar.isHidden = true
+        sortBar.onSortModePress = {
+// TODO: Wire Me
+            NSLog("# onSortModePress")
+        }
+
+        sortBar.onSortOrderPress = {
+// TODO: Wire Me
+            NSLog("# onSortOrderPress")
+        }
+    }
+
     /// Sets up the Results Controller
     ///
     @objc
@@ -61,24 +79,6 @@ extension SPNoteListViewController {
 
         searchBarStackView = UIStackView(arrangedSubviews: [searchBar])
         searchBarStackView.axis = .vertical
-    }
-
-    /// Sets up the Sort Bar
-    ///
-    @objc
-    func configureSortBar() {
-        sortBar = SPSortBar.instantiateFromNib()
-
-        sortBar.isHidden = true
-        sortBar.onSortModePress = {
-// TODO: Wire Me
-            NSLog("# onSortModePress")
-        }
-
-        sortBar.onSortOrderPress = {
-// TODO: Wire Me
-            NSLog("# onSortOrderPress")
-        }
     }
 
     /// Sets up the Root ViewController
