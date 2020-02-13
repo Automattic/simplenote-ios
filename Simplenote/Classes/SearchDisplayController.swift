@@ -53,9 +53,14 @@ class SearchDisplayController: NSObject {
     /// Dismissess the SearchBar
     ///
     func dismiss() {
+        // Set the inactive status first, and THEN resign the responder.
+        //
+        // Why: Because of the `keyboardWillChangeFrame` Notification. We could really, really use
+        // the actual status to be available when such note is posted. Capisci?
+        //
+        updateStatus(active: false)
         searchBar.text = nil
         searchBar.resignFirstResponder()
-        updateStatus(active: false)
     }
 
     /// Updates the SearchBar's Text, and notifies the Delegate
