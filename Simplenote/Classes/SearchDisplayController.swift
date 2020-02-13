@@ -28,7 +28,7 @@ class SearchDisplayController: NSObject {
 
     /// Indicates if the SearchController is active (or not!)
     ///
-    private var active = false
+    private(set) var active = false
 
     /// Internal SearchBar Instance
     ///
