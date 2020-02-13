@@ -624,8 +624,8 @@ extension SPNoteListViewController {
             return isSearchActive ? sortBar.frame.height : .zero
         }
 
-        // Keyboard onScreen: Consider the Sort Bar
-        return keyboardHeight - sortBar.frame.height
+        // Keyboard onScreen: the SortBar falls below the keyboard
+        return keyboardHeight
     }
 }
 
