@@ -587,6 +587,43 @@ extension SPNoteListViewController {
     @objc
     func dismissSortBar() {
         sortBar.animateVisibility(isHidden: true)
+        refreshTableViewBottomInsets()
+    }
+}
+
+
+// MARK: -
+//
+extension SPNoteListViewController {
+
+    @objc(keyboardWillChangeFrame:)
+    func keyboardWillChangeFrame(note: Notification) {
+        guard let keyboardFrame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        keyboardHeight = keyboardFrame.intersection(view.frame).height
+        refreshTableViewBottomInsets()
+    }
+
+    func refreshTableViewBottomInsets() {
+        let bottomInsets = bottomInsetsForTableView
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+            self.tableView.contentInset.bottom = bottomInsets
+            self.tableView.scrollIndicatorInsets.bottom = bottomInsets
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    var bottomInsetsForTableView: CGFloat {
+        // Keyboard offScreen + Search Active: Seriously, consider the Search Bar
+        guard keyboardHeight > .zero else {
+            return isSearchActive ? sortBar.frame.height : .zero
+        }
+
+        // Keyboard onScreen: Consider the Sort Bar
+        return keyboardHeight - sortBar.frame.height
     }
 }
 

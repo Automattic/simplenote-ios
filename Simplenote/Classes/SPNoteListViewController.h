@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NotesListController                           *notesListController;
 @property (nonatomic) CGFloat                                               noteRowHeight;
 @property (nonatomic) CGFloat                                               tagRowHeight;
+@property (nonatomic) CGFloat                                               keyboardHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 
