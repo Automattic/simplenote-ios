@@ -155,13 +155,13 @@ private extension SPSheetController {
     }
 
     func hideSubviews() {
-        backgroundView.alpha = UIKitConstants.alphaZero
+        backgroundView.alpha = UIKitConstants.alpha0_0
         actionsBottomConstraint.constant = actionsView.frame.height + view.safeAreaInsets.bottom
         view.layoutIfNeeded()
     }
 
     func showSubviews() {
-        backgroundView.alpha = UIKitConstants.alphaFull
+        backgroundView.alpha = UIKitConstants.alpha1_0
         actionsBottomConstraint.constant = .zero
         view.layoutIfNeeded()
     }

@@ -11,6 +11,10 @@
 -   Fixed a bug that caused the Editor's Keyboard Appearance not to match the selected theme
 -   Dark Mode is now darker than just dark, for an improved dark side experience.
 
+4.15.1
+------
+-   We've fixed a bug that prevented the Feedback UI from being dismissed
+
 4.15
 -----
 -   Simplenote just got brand new App Icons!

@@ -5,10 +5,10 @@ import Foundation
 //
 @objcMembers
 class UIKitConstants: NSObject {
-    static let alphaZero = CGFloat(0)
-    static let alphaQuarter = CGFloat(0.25)
-    static let alphaMid = CGFloat(0.5)
-    static let alphaFull = CGFloat(1)
+    static let alpha0_0 = CGFloat(0)
+    static let alpha0_5 = CGFloat(0.5)
+    static let alpha0_6 = CGFloat(0.6)
+    static let alpha1_0 = CGFloat(1)
     static let animationDelayZero = TimeInterval(0)
     static let animationQuickDuration = TimeInterval(0.1)
     static let animationShortDuration = TimeInterval(0.25)
