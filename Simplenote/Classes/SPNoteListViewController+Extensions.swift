@@ -279,7 +279,7 @@ extension SPNoteListViewController {
     ///
     @objc
     var isSearchActive: Bool {
-        return searchText != nil
+        return searchController.active
     }
 
     /// Returns the SearchText
