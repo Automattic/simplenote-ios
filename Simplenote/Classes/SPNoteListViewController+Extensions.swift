@@ -240,6 +240,13 @@ extension SPNoteListViewController {
         searchController.updateSearchText(searchText: updated + .space)
     }
 
+    /// Refreshes the SortBar's Description Text
+    ///
+    @objc
+    func refreshSortBarText() {
+        sortBar.descriptionText = Options.shared.searchSortMode.description
+    }
+
     /// Displays the Emtpy State Placeholders, when / if needed
     ///
     @objc

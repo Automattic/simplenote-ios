@@ -26,6 +26,17 @@ class SPSortBar: UIView {
     ///
     @IBOutlet private var descriptionLabel: UILabel!
 
+    /// Wraps up the Description Label Text
+    ///
+    var descriptionText: String? {
+        get {
+            descriptionLabel.text
+        }
+        set {
+            descriptionLabel.text = newValue
+        }
+    }
+
     /// Closure to be executed whenever the Sort Mode Button is pressed
     ///
     var onSortModePress: (() -> Void)?

@@ -478,6 +478,7 @@
     [self refreshListController];
     [self refreshTitle];
     [self refreshSearchBar];
+    [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
     BOOL isNotEmpty = !self.isListEmpty;
