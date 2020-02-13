@@ -204,6 +204,7 @@ extension SPNoteListViewController {
 
         notesListController.filter = filter
         notesListController.sortMode = Options.shared.listSortMode
+        notesListController.searchSortMode = Options.shared.searchSortMode
         notesListController.performFetch()
 
         tableView.reloadData()
@@ -650,7 +651,7 @@ extension SPNoteListViewController {
     @IBAction
     func sortOrderWasPressed() {
         feedbackGenerator.impactOccurred()
-//        sortMode = sortMode.inverse
+        Options.shared.searchSortMode = notesListController.searchSortMode.inverse
     }
 
     @IBAction
@@ -659,7 +660,7 @@ extension SPNoteListViewController {
 
         for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
             alertController.addDefaultActionWithTitle(mode.kind) { _ in
-//                self.sortMode = mode
+                Options.shared.searchSortMode = mode
             }
         }
 
