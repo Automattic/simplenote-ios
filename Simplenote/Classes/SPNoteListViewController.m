@@ -42,7 +42,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
-@property (nonatomic, assign) CGFloat                               keyboardHeight;
 
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
@@ -195,8 +194,7 @@
     [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
 
     // Register for keyboard notifications
-    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     // Themes
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
@@ -591,32 +589,21 @@
 
 #pragma mark - Keyboard
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-    
-    CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    _keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
-    
-    UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom = _keyboardHeight;
-    self.tableView.contentInset = tableviewInsets;
-    
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom = _keyboardHeight;
-    self.tableView.scrollIndicatorInsets = tableviewInsets;
-}
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardFrameOnScreen = CGRectIntersection(keyboardFrame, self.view.frame);
 
-- (void)keyboardWillHide:(NSNotification *)notification {
-    
-    _keyboardHeight = 0;
+    [UIView animateWithDuration:duration animations:^{
+        UIEdgeInsets tableviewInsets = self.tableView.contentInset;
+        tableviewInsets.bottom = keyboardFrameOnScreen.size.height;
+        self.tableView.contentInset = tableviewInsets;
 
-    UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom = self.view.safeAreaInsets.bottom;
-    self.tableView.contentInset = tableviewInsets;
-    
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom = self.view.safeAreaInsets.bottom;
-    self.tableView.scrollIndicatorInsets = tableviewInsets;
+        UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
+        scrollInsets.bottom = keyboardFrameOnScreen.size.height;
+        self.tableView.scrollIndicatorInsets = tableviewInsets;
+    }];
 }
 
 
