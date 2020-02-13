@@ -581,11 +581,13 @@ extension SPNoteListViewController {
 
     @objc
     func displaySortBar() {
+        // No need to refresh the Table's Bottom Insets. The keyboard will always show!
         sortBar.animateVisibility(isHidden: false)
     }
 
     @objc
     func dismissSortBar() {
+        // We'll need to refresh the bottom insets. The keyboard may have been dismissed already!
         sortBar.animateVisibility(isHidden: true)
         refreshTableViewBottomInsets()
     }
