@@ -656,8 +656,7 @@ extension SPNoteListViewController {
             }
         }
 
-        let cancelText = NSLocalizedString("Cancel", comment: "")
-        alertController.addCancelActionWithTitle(cancelText)
+        alertController.addCancelActionWithTitle(ActionTitle.cancel)
 
         feedbackGenerator.impactOccurred()
         present(alertController, animated: true, completion: nil)
@@ -668,6 +667,7 @@ extension SPNoteListViewController {
 // MARK: - Private Types
 //
 private enum ActionTitle {
+    static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
     static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
     static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
     static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
