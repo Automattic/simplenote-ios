@@ -713,7 +713,7 @@
 
 - (void)displayFeedbackUI
 {
-    UIViewController *feedbackViewController = [SPFeedbackManager feedbackViewController];
+    UIViewController *feedbackViewController = [[SPFeedbackManager shared] feedbackViewController];
     feedbackViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:feedbackViewController animated:YES completion:nil];
 
