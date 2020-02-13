@@ -608,7 +608,7 @@ extension SPNoteListViewController {
 }
 
 
-// MARK: -
+// MARK: - Keyboard Handling
 //
 extension SPNoteListViewController {
 
