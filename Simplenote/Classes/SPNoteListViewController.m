@@ -81,7 +81,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self refreshTableViewInsets];
+    [self refreshTableViewTopInsets];
     [self updateTableHeaderSize];
     [self ensureFirstRowIsVisibleIfNeeded];
 }
