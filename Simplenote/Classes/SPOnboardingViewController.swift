@@ -7,6 +7,10 @@ import SafariServices
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
+    /// Top Image
+    ///
+    @IBOutlet var simplenoteImageView: UIImageView!
+
     /// Top Label
     ///
     @IBOutlet var simplenoteLabel: UILabel!
@@ -45,6 +49,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         super.viewDidLoad()
         setupNavigationItem()
         setupNavigationController()
+        setupImageView()
         setupLabels()
         setupActionButtons()
         startListeningToNotifications()
@@ -81,6 +86,10 @@ private extension SPOnboardingViewController {
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
         loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
+    }
+
+    func setupImageView() {
+        simplenoteImageView.tintColor = .simplenoteBlue30Color
     }
 
     func setupLabels() {

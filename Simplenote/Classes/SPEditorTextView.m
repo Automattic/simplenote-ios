@@ -12,7 +12,6 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"
-#import "UIImage+Colorization.h"
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 

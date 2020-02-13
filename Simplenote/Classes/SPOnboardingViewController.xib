@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +14,7 @@
                 <outlet property="headerLabel" destination="1Du-WL-hgy" id="i8O-yw-uML"/>
                 <outlet property="loginButton" destination="5ac-gG-0lC" id="i4o-gX-Efh"/>
                 <outlet property="signUpButton" destination="PYz-ya-QmI" id="k3n-gv-9SM"/>
+                <outlet property="simplenoteImageView" destination="FSo-hZ-mnC" id="hdq-EI-Xcs"/>
                 <outlet property="simplenoteLabel" destination="WbO-Sw-z3Q" id="S5B-4W-vJA"/>
                 <outlet property="view" destination="iN0-l3-epB" id="LVT-Hk-3M0"/>
             </connections>
@@ -27,6 +29,7 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_login" translatesAutoresizingMaskIntoConstraints="NO" id="FSo-hZ-mnC" userLabel="Simplenote Logo">
                             <rect key="frame" x="132" y="241" width="96" height="96"/>
+                            <color key="tintColor" name="tagViewFontColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="96" id="BGy-86-GTp"/>
                                 <constraint firstAttribute="width" constant="96" id="eqR-UF-NfL"/>
@@ -107,5 +110,8 @@
     </objects>
     <resources>
         <image name="logo_login" width="110" height="110"/>
+        <namedColor name="tagViewFontColor">
+            <color red="0.28200000524520874" green="0.58399999141693115" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

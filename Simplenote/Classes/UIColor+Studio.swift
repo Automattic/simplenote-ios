@@ -34,6 +34,11 @@ extension UIColor {
 extension UIColor {
 
     @objc
+    static var simplenoteBlue30Color: UIColor {
+        UIColor(studioColor: .blue30)
+    }
+
+    @objc
     static var simplenoteBlue50Color: UIColor {
         UIColor(studioColor: .blue50)
     }
@@ -121,6 +126,16 @@ extension UIColor {
     @objc
     static var simplenoteNavigationBarTitleColor: UIColor {
         UIColor(lightColor: .gray80, darkColor: .white)
+    }
+
+    @objc
+    static var simplenotePlaceholderImageColor: UIColor {
+        UIColor(studioColor: .gray5)
+    }
+
+    @objc
+    static var simplenotePlaceholderTextColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray20)
     }
 
     @objc
@@ -238,11 +253,6 @@ extension UIColor {
 
     @objc
     static var simplenoteActionViewStatusTextColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteEmptyListViewTextColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
 

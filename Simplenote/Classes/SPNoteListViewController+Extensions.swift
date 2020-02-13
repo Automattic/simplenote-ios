@@ -39,6 +39,19 @@ extension SPNoteListViewController {
         notesListController.performFetch()
     }
 
+    /// Sets up the Placeholder View
+    ///
+    @objc
+    func configurePlaceholderView() {
+        placeholderView = SPPlaceholderView()
+        placeholderView.isUserInteractionEnabled = false
+
+        placeholderView.imageView.image = .image(name: .simplenoteLogo)
+        placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
+
+        placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
+    }
+
     /// Sets up the Search StackView
     ///
     @objc
@@ -56,8 +69,10 @@ extension SPNoteListViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
+        view.addSubview(placeholderView)
         view.addSubview(navigationBarBackground)
         view.addSubview(searchBarStackView)
 
@@ -80,6 +95,11 @@ extension SPNoteListViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+
+        NSLayoutConstraint.activate([
+            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
 
     /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
@@ -90,7 +110,7 @@ extension SPNoteListViewController {
 
         notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
             self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
-                self?.updateViewIfEmpty()
+                self?.displayPlaceholdersIfNeeded()
             }
         }
     }
@@ -185,6 +205,33 @@ extension SPNoteListViewController {
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
+    }
+
+    /// Displays the Emtpy State Placeholders, when / if needed
+    ///
+    @objc
+    func displayPlaceholdersIfNeeded() {
+        guard isListEmpty else {
+            placeholderView.isHidden = true
+            return
+        }
+
+        placeholderView.isHidden = false
+        placeholderView.displayMode = {
+            if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
+                return .picture
+            }
+
+            return isSearchActive ? .text : .pictureAndText
+        }()
+
+        placeholderView.textLabel.text = {
+            if isSearchActive {
+                return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+            }
+
+            return NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
+        }()
     }
 
     /// Indicates if the Deleted Notes are onScreen

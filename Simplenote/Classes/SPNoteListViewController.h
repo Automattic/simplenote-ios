@@ -3,8 +3,8 @@
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
-@class SPEmptyListView;
 @class SPBlurEffectView;
+@class SPPlaceholderView;
 @class NotesListController;
 @class SearchDisplayController;
 
@@ -12,7 +12,8 @@
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
-@property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
+@property (nonatomic, assign, readonly) BOOL                                isIndexingNotes;
+@property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
 @property (nonatomic, strong) UITableView                                   *tableView;
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
 @property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
@@ -27,6 +28,5 @@
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
 - (void)endSearching;
-- (void)updateViewIfEmpty;
 
 @end
