@@ -44,14 +44,12 @@ extension SPNoteListViewController {
         sortBar = SPSortBar.instantiateFromNib()
 
         sortBar.isHidden = true
-        sortBar.onSortModePress = {
-// TODO: Wire Me
-            NSLog("# onSortModePress")
+        sortBar.onSortModePress = { [weak self] in
+            self?.sortModeWasPressed()
         }
 
-        sortBar.onSortOrderPress = {
-// TODO: Wire Me
-            NSLog("# onSortOrderPress")
+        sortBar.onSortOrderPress = { [weak self] in
+            self?.sortOrderWasPressed()
         }
     }
 
@@ -634,6 +632,35 @@ extension SPNoteListViewController {
 
         // Keyboard onScreen: Consider the Sort Bar
         return keyboardHeight - sortBar.frame.height
+    }
+}
+
+
+// MARK: - Action Handlers
+//
+extension SPNoteListViewController {
+
+    @IBAction
+    func sortOrderWasPressed() {
+        feedbackGenerator.impactOccurred()
+//        sortMode = sortMode.inverse
+    }
+
+    @IBAction
+    func sortModeWasPressed() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
+            alertController.addDefaultActionWithTitle(mode.kind) { _ in
+//                self.sortMode = mode
+            }
+        }
+
+        let cancelText = NSLocalizedString("Cancel", comment: "")
+        alertController.addCancelActionWithTitle(cancelText)
+
+        feedbackGenerator.impactOccurred()
+        present(alertController, animated: true, completion: nil)
     }
 }
 
