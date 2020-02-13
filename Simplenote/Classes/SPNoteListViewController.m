@@ -589,20 +589,31 @@
 
 #pragma mark - Keyboard
 
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
+- (void)keyboardWillChangeFrame:(NSNotification *)note
 {
-    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrameOnScreen = CGRectIntersection(keyboardFrame, self.view.frame);
+    NSTimeInterval duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGRect keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = CGRectGetHeight(CGRectIntersection(keyboardFrame, self.view.frame));
+    CGFloat bottomInsets = 0;
+
+    // Keyboard onScreen: Consider the Sort Bar
+    if (keyboardHeight > 0) {
+        bottomInsets = keyboardHeight - CGRectGetHeight(self.sortBar.frame);
+    // Keyboard offScreen + Search: Seriously, consider the Search Bar
+    } else if (self.isSearchActive) {
+        bottomInsets = CGRectGetHeight(self.sortBar.frame);
+    }
 
     [UIView animateWithDuration:duration animations:^{
         UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-        tableviewInsets.bottom = keyboardFrameOnScreen.size.height;
+        tableviewInsets.bottom = bottomInsets;
         self.tableView.contentInset = tableviewInsets;
 
         UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-        scrollInsets.bottom = keyboardFrameOnScreen.size.height;
+        scrollInsets.bottom = bottomInsets;
         self.tableView.scrollIndicatorInsets = tableviewInsets;
+
+        [self.view layoutIfNeeded];
     }];
 }
 
