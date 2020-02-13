@@ -75,7 +75,7 @@ extension Options {
         }
         set {
             defaults.set(newValue.rawValue, forKey: .searchSortMode)
-                SPTracker.trackSettingsSearchSortMode(newValue.description)
+            SPTracker.trackSettingsSearchSortMode(newValue.description)
             NotificationCenter.default.post(name: .SPSearchSortModeChanged, object: nil)
         }
     }
