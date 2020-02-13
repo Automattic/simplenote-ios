@@ -15,8 +15,8 @@ extension UIView {
             return
         }
 
-        let animationAlpha = isHidden ? UIKitConstants.alphaZero : UIKitConstants.alphaFull
-        let completionAlpha = UIKitConstants.alphaFull
+        let animationAlpha = isHidden ? UIKitConstants.alpha0_0 : UIKitConstants.alpha1_0
+        let completionAlpha = UIKitConstants.alpha1_0
 
         UIView.animate(withDuration: duration, animations: {
             self.alpha = animationAlpha
