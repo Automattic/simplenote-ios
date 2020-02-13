@@ -35,15 +35,24 @@ class SPSortBar: UIView {
     var onSortOrderPress: (() -> Void)?
 
 
-    // MARK: - Initializers
+    // MARK: - Lifecycle
+
+    deinit {
+        stopListeningToNotifications()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        startListeningToNotifications()
+
         setupBackgroundView()
         setupBlurEffect()
         setupTextLabels()
         setupOrderButton()
         setupSubviews()
+
+        refreshStyle()
     }
 }
 
@@ -65,15 +74,11 @@ private extension SPSortBar {
     func setupTextLabels() {
         titleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By Title")
         titleLabel.font = .preferredFont(for: .caption1, weight: .regular)
-        titleLabel.textColor = .simplenoteTextColor
-
         descriptionLabel.font = .preferredFont(for: .caption1, weight: .medium)
-        descriptionLabel.textColor = .simplenoteInteractiveTextColor
     }
 
     func setupOrderButton() {
         sortOrderButton.imageView?.contentMode = .center
-        sortOrderButton.imageView?.tintColor = .simplenoteTintColor
     }
 
     func setupSubviews() {
@@ -86,6 +91,31 @@ private extension SPSortBar {
             blurView.topAnchor.constraint(equalTo: topAnchor),
             blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+
+    func refreshStyle() {
+        sortOrderButton.imageView?.tintColor = .simplenoteTintColor
+        titleLabel.textColor = .simplenoteTextColor
+        descriptionLabel.textColor = .simplenoteInteractiveTextColor
+    }
+}
+
+
+// MARK: - Notifications
+//
+private extension SPSortBar {
+
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
     }
 }
 
