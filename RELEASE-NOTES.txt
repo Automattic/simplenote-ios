@@ -1,6 +1,10 @@
 4.16
 -----
- 
+
+4.15.1
+------
+-   We've fixed a bug that prevented the Feedback UI from being dismissed
+
 4.15
 -----
 -   Simplenote just got brand new App Icons!
