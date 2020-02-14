@@ -67,7 +67,7 @@ private extension SPSortBar {
 
     func setupBlurEffect() {
         blurView.tintColorClosure = {
-            .simplenoteNavigationBarBackgroundColor
+            .simplenoteSortBarBackgroundColor
         }
     }
 

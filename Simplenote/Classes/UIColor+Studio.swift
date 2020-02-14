@@ -189,6 +189,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteSortBarBackgroundColor: UIColor {
+        UIColor(lightColor: .spWhite, darkColor: .darkGray8).withAlphaComponent(UIKitConstants.alpha0_6)
+    }
+
+    @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .darkGray0)
     }
