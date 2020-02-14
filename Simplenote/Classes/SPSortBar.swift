@@ -71,7 +71,6 @@ class SPSortBar: UIView {
 private extension SPSortBar {
 
     func setupDividerView() {
-        dividerView.backgroundColor = .simplenoteDividerColor
         dividerHeightConstraint.constant = UIScreen.main.pointToPixelRatio
     }
 
@@ -108,6 +107,7 @@ private extension SPSortBar {
     }
 
     func refreshStyle() {
+        dividerView.backgroundColor = .simplenoteDividerColor
         sortOrderButton.imageView?.tintColor = .simplenoteTintColor
         titleLabel.textColor = .simplenoteTextColor
         descriptionLabel.textColor = .simplenoteInteractiveTextColor
