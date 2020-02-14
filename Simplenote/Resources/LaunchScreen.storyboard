@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,16 +18,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simplenote-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bmg-w9-erw">
-                                <rect key="frame" x="152" y="393" width="110" height="110"/>
+                                <rect key="frame" x="171" y="412" width="72" height="72"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="NQr-Rx-p4M"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="hMJ-RB-umE"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="110" id="wbb-4b-mOr"/>
-                                    <constraint firstAttribute="width" constant="110" id="zt9-RH-5UK"/>
+                                    <constraint firstAttribute="height" constant="72" id="NQr-Rx-p4M"/>
+                                    <constraint firstAttribute="width" constant="72" id="zt9-RH-5UK"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="simplenoteLaunchBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="bmg-w9-erw" secondAttribute="centerX" id="JCi-70-NwG"/>
                             <constraint firstAttribute="centerY" secondItem="bmg-w9-erw" secondAttribute="centerY" id="ose-LU-DXV"/>
@@ -41,5 +41,8 @@
     </scenes>
     <resources>
         <image name="simplenote-logo" width="220" height="220"/>
+        <namedColor name="simplenoteLaunchBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
