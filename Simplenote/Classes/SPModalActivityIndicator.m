@@ -1,12 +1,6 @@
-//
-//  SPModalActivityIndicator.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 8/30/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPModalActivityIndicator.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPModalActivityIndicator
 
@@ -14,7 +8,7 @@
     
     SPModalActivityIndicator *alertView = [[SPModalActivityIndicator alloc] initWithFrame:CGRectZero];
 
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [activityIndicator startAnimating];
     
     [alertView showWithContentView:activityIndicator];
@@ -51,7 +45,7 @@
 
 - (void)applyStyling {
     
-    self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+    self.backgroundColor = [UIColor simplenoteModalOverlayColor];
 }
 
 -(void)setupLayout {
