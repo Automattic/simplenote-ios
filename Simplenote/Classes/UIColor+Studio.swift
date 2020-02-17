@@ -195,7 +195,8 @@ extension UIColor {
 
     @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .darkGray0)
+        UIColor(lightColor: .gray0, darkColor: .darkGray1)
+    }
     }
 
     @objc
