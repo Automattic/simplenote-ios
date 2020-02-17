@@ -200,7 +200,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTableViewHeaderBackgroundColor: UIColor {
-        UIColor(lightColor: .spGray, darkColor: .darkGray2)
+        UIColor(lightColor: .spGray, darkColor: .darkGray1)
     }
 
     @objc
