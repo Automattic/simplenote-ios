@@ -180,7 +180,7 @@ extension UIColor {
 
     @objc
     static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray1)
+        UIColor(lightColor: .white, darkColor: .black)
     }
 
     @objc
