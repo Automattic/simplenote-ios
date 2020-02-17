@@ -525,7 +525,6 @@ private extension SPNoteListViewController {
         return cell
     }
 
-
     /// Returns the Prefix for a given note: We'll prepend the (Creation / Modification) Date, whenever we're in Search, and the Sort Option is relevant
     ///
     func prefixText(for note: Note) -> String? {
