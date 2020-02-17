@@ -12,6 +12,7 @@ extension UIFont {
 
     /// Returns the System Font for a given Style and Weight
     ///
+    @objc
     static func preferredFont(for style: TextStyle, weight: Weight) -> UIFont {
         if let cachedFont = FontCache.cachedFont(for: style, weight: weight) {
             return cachedFont
