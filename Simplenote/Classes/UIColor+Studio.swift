@@ -160,17 +160,17 @@ extension UIColor {
 
     @objc
     static var simplenoteSecondaryActionColor: UIColor {
-        UIColor(lightColor: .blue50, darkColor: .blue30)
+        UIColor(studioColor: .blue50)
     }
 
     @objc
     static var simplenoteTertiaryActionColor: UIColor {
-        UIColor(lightColor: .gray30, darkColor: .gray50)
+        UIColor(studioColor: .gray30)
     }
 
     @objc
     static var simplenoteDestructiveActionColor: UIColor {
-        UIColor(lightColor: .red50, darkColor: .red40)
+        UIColor(studioColor: .red50)
     }
 
     @objc
@@ -215,7 +215,7 @@ extension UIColor {
 
     @objc
     static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .darkGray3)
+        UIColor(lightColor: .gray30, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_5)
     }
 
     @objc
