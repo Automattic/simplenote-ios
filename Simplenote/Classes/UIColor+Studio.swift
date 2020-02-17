@@ -100,7 +100,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNoteBodyPreviewColor: UIColor {
-        UIColor(lightColor: .gray60, darkColor: .gray20)
+        UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
     @objc
@@ -135,7 +135,7 @@ extension UIColor {
 
     @objc
     static var simplenotePlaceholderTextColor: UIColor {
-        UIColor(lightColor: .gray50, darkColor: .gray20)
+        UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
     @objc
@@ -215,12 +215,12 @@ extension UIColor {
 
     @objc
     static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray30, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_5)
+        UIColor(lightColor: .gray40, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_5)
     }
 
     @objc
     static var simplenoteTitleColor: UIColor {
-        UIColor(lightColor: .gray60, darkColor: .gray20)
+        UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
     @objc
