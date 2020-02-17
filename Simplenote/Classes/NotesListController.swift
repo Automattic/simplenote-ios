@@ -63,11 +63,27 @@ class NotesListController: NSObject {
         }
     }
 
-    /// SortMode to be applied
+    /// SortMode to be applied to **regular** results
     ///
     var sortMode: SortMode = .alphabeticallyAscending {
         didSet {
             guard oldValue != sortMode else {
+                return
+            }
+
+            refreshSortDescriptors()
+        }
+    }
+
+    /// SortMode to be applied to Search Results
+    ///
+    var searchSortMode: SortMode = .alphabeticallyAscending {
+        didSet {
+            guard case .searching = state else {
+                return
+            }
+
+            guard oldValue != searchSortMode else {
                 return
             }
 
@@ -239,6 +255,7 @@ private extension NotesListController {
     }
 
     func refreshSortDescriptors() {
+        let sortMode = sortModeForActiveState
         notesController.sortDescriptors = sortMode.descriptorsForNotes
         tagsController.sortDescriptors = sortMode.descriptorsForTags
     }
@@ -322,5 +339,14 @@ private extension NotesListController {
         let transposedSectionChanges = noteSectionChanges.map { $0.transpose(toSection: state.sectionIndexForNotes) }
 
         return (transposedObjectChanges, transposedSectionChanges)
+    }
+
+    var sortModeForActiveState: SortMode {
+        switch state {
+        case .searching(_):
+            return searchSortMode
+        case .results:
+            return sortMode
+        }
     }
 }
