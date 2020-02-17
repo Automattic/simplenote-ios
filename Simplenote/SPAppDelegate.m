@@ -403,7 +403,7 @@
 
 - (void)themeDidChange
 {
-    self.window.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
+    self.window.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 }
 
