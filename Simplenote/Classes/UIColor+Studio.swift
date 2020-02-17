@@ -115,7 +115,7 @@ extension UIColor {
 
     @objc
     static var simplenoteLockBackgroundColor: UIColor {
-        UIColor(lightColor: .blue50, darkColor: .darkGray0_5)
+        UIColor(lightColor: .blue50, darkColor: .darkGray1)
     }
 
     @objc
@@ -140,7 +140,7 @@ extension UIColor {
 
     @objc
     static var simplenoteSearchBarBackgroundColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .gray50)
+        UIColor(lightColor: .gray10, darkColor: .darkGray4)
     }
 
     @objc
@@ -150,7 +150,7 @@ extension UIColor {
 
     @objc
     static var simplenoteSwitchTintColor: UIColor {
-        UIColor(lightColor: .gray5, darkColor: .darkGray4)
+        UIColor(lightColor: .gray5, darkColor: .darkGray3)
     }
 
     @objc
@@ -180,12 +180,12 @@ extension UIColor {
 
     @objc
     static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray0_5)
+        UIColor(lightColor: .white, darkColor: .darkGray1)
     }
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray0_5).withAlphaComponent(UIKitConstants.alpha0_6)
+        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_6)
     }
 
     @objc
@@ -195,7 +195,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTableViewHeaderBackgroundColor: UIColor {
-        UIColor(lightColor: .spGray, darkColor: .darkGray4)
+        UIColor(lightColor: .spGray, darkColor: .darkGray2)
     }
 
     @objc
@@ -205,7 +205,7 @@ extension UIColor {
 
     @objc
     static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .gray70)
+        UIColor(lightColor: .gray10, darkColor: .darkGray3)
     }
 
     @objc
@@ -225,12 +225,12 @@ extension UIColor {
 
     @objc
     static var simplenoteLightBlueColor: UIColor {
-        UIColor(lightColor: .blue5, darkColor: .darkGray8)
+        UIColor(lightColor: .blue5, darkColor: .darkGray3)
     }
 
     @objc
     static var simplenoteInteractiveTextColor: UIColor {
-        UIColor(lightColor: .blue60, darkColor: .blue20)
+        UIColor(lightColor: .blue50, darkColor: .blue30)
     }
 
 
