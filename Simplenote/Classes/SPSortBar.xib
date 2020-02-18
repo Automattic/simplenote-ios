@@ -14,6 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WTw-zs-k6p" userLabel="Divider View">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="t6Z-h5-vb8"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dB-bC-kqa" userLabel="Container View">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                     <subviews>
@@ -74,8 +81,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="7DS-pC-6KX" firstAttribute="trailing" secondItem="9dB-bC-kqa" secondAttribute="trailing" id="939-QB-dKo"/>
+                <constraint firstItem="WTw-zs-k6p" firstAttribute="top" secondItem="vX3-hf-sh0" secondAttribute="top" id="PSr-Eb-okX"/>
+                <constraint firstAttribute="trailing" secondItem="WTw-zs-k6p" secondAttribute="trailing" id="Sbp-Hs-tNv"/>
                 <constraint firstItem="9dB-bC-kqa" firstAttribute="leading" secondItem="7DS-pC-6KX" secondAttribute="leading" id="nPf-ej-yu0"/>
                 <constraint firstItem="9dB-bC-kqa" firstAttribute="top" secondItem="vX3-hf-sh0" secondAttribute="top" id="wEg-RO-7kb"/>
+                <constraint firstItem="WTw-zs-k6p" firstAttribute="leading" secondItem="vX3-hf-sh0" secondAttribute="leading" id="wm1-Xj-Dq4"/>
                 <constraint firstItem="7DS-pC-6KX" firstAttribute="bottom" secondItem="9dB-bC-kqa" secondAttribute="bottom" id="ys5-QL-kAq"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -85,6 +95,8 @@
             <connections>
                 <outlet property="containerView" destination="9dB-bC-kqa" id="wa5-l2-EdV"/>
                 <outlet property="descriptionLabel" destination="DuL-w7-cVY" id="EoN-zv-tCW"/>
+                <outlet property="dividerHeightConstraint" destination="t6Z-h5-vb8" id="09N-b7-MYm"/>
+                <outlet property="dividerView" destination="WTw-zs-k6p" id="BYa-Gb-Xum"/>
                 <outlet property="sortOrderButton" destination="Rez-M1-JhX" id="SJS-cF-HBg"/>
                 <outlet property="titleLabel" destination="XhY-d9-S1B" id="0By-75-pVa"/>
             </connections>

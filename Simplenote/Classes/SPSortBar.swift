@@ -10,6 +10,14 @@ class SPSortBar: UIView {
     ///
     private let blurView = SPBlurEffectView.navigationBarBlurView()
 
+    /// Divider: Top separator
+    ///
+    @IBOutlet private var dividerView: UIView!
+
+    /// Divider: We're aiming at a 1px divider, regardless of the screen scale
+    ///
+    @IBOutlet private var dividerHeightConstraint: NSLayoutConstraint!
+
     /// Container: Encapsulates every control!
     ///
     @IBOutlet private var containerView: UIView!
@@ -57,6 +65,7 @@ class SPSortBar: UIView {
 
         startListeningToNotifications()
 
+        setupDividerView()
         setupBackgroundView()
         setupBlurEffect()
         setupTextLabels()
@@ -72,13 +81,17 @@ class SPSortBar: UIView {
 //
 private extension SPSortBar {
 
+    func setupDividerView() {
+        dividerHeightConstraint.constant = UIScreen.main.pointToPixelRatio
+    }
+
     func setupBackgroundView() {
         containerView.backgroundColor = .clear
     }
 
     func setupBlurEffect() {
         blurView.tintColorClosure = {
-            .simplenoteNavigationBarBackgroundColor
+            .simplenoteSortBarBackgroundColor
         }
     }
 
@@ -105,6 +118,7 @@ private extension SPSortBar {
     }
 
     func refreshStyle() {
+        dividerView.backgroundColor = .simplenoteDividerColor
         sortOrderButton.imageView?.tintColor = .simplenoteTintColor
         titleLabel.textColor = .simplenoteTextColor
         descriptionLabel.textColor = .simplenoteInteractiveTextColor
