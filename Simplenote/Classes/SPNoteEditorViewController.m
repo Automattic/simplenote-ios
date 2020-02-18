@@ -154,11 +154,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
-    _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
-
-    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
+    UIColor *backgroundColor = [UIColor simplenoteEditorBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
+    self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
     self.view.backgroundColor = backgroundColor;
 
     _noteEditorTextView.interactiveTextStorage.tokens = @{
@@ -1572,7 +1570,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         popoverVC.popoverPresentationController.delegate = self;
 
-        UIColor *actionSheetColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
+        UIColor *actionSheetColor = [[UIColor simplenoteEditorBackgroundColor] colorWithAlphaComponent:0.97];
         popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
 
         [self presentViewController:popoverVC animated:YES completion:nil];

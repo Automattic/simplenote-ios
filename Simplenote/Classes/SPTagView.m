@@ -63,7 +63,7 @@
 }
 
 - (void)applyStyle {
-    self.backgroundColor = [UIColor simplenoteBackgroundColor];
+    self.backgroundColor = [UIColor simplenoteEditorBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 
