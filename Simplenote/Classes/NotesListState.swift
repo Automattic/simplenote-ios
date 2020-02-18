@@ -114,6 +114,32 @@ extension NotesListState {
 
         return NSPredicate.predicateForTag(keyword: keyword)
     }
+
+    /// Returns a collection of NSSortDescriptors that, once applied to a Notes collection, the specified SortMode will be reflected
+    ///
+    func descriptorsForNotes(sortMode: SortMode) -> [NSSortDescriptor] {
+        var descriptors = [NSSortDescriptor]()
+
+        switch self {
+        case .results:
+            descriptors.append(NSSortDescriptor.descriptorForPinnedNotes())
+        default:
+            // Search shouldn't be affected by pinned notes
+            break
+        }
+
+        descriptors.append(NSSortDescriptor.descriptorForNotes(sortMode: sortMode))
+
+        return descriptors
+    }
+
+    /// Returns a collection of NSSortDescriptors that, once applied to a Tags collection, the specified SortMode will be reflected
+    ///
+    func descriptorsForTags(sortMode: SortMode) -> [NSSortDescriptor] {
+        return [
+            NSSortDescriptor.descriptorForTags(sortMode: sortMode)
+        ]
+    }
 }
 
 

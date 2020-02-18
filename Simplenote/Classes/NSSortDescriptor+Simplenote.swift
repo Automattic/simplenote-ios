@@ -3,16 +3,16 @@ import Foundation
 
 // MARK: - SortMode List Methods
 //
-extension SortMode {
+extension NSSortDescriptor {
 
-    /// Returns a collection of SortDescriptors, to be applied over Note Entities, matching the Receiver's Case
+    /// Returns a NSSortDescriptor, to be applied over Note collections, so that the resulting collection relects the specified `SortMode`
     ///
-    var descriptorsForNotes: [NSSortDescriptor] {
+    static func descriptorForNotes(sortMode: SortMode) -> NSSortDescriptor {
         let sortKeySelector: Selector
         var sortSelector: Selector?
         var ascending = true
 
-        switch self {
+        switch sortMode {
         case .alphabeticallyAscending:
             sortKeySelector = #selector(getter: Note.content)
             sortSelector    = #selector(NSString.caseInsensitiveCompare)
@@ -32,17 +32,18 @@ extension SortMode {
             sortKeySelector = #selector(getter: Note.modificationDate)
         }
 
-        return [
-            NSSortDescriptor(keyPath: \Note.pinned, ascending: false),
-            NSSortDescriptor(key: NSStringFromSelector(sortKeySelector), ascending: ascending, selector: sortSelector)
-        ]
+        return NSSortDescriptor(key: NSStringFromSelector(sortKeySelector), ascending: ascending, selector: sortSelector)
     }
 
-    /// Returns a collection of SortDescriptors, to be applied over Tag Entities, matching the Receiver's Case
+    /// Returns a NSSortDescriptor that, when applied over a Tags collection, results in the Pinned Notes to be on top
     ///
-    var descriptorsForTags: [NSSortDescriptor] {
-        return [
-            NSSortDescriptor(keyPath: \Tag.name, ascending: self != .alphabeticallyDescending)
-        ]
+    static func descriptorForPinnedNotes() -> NSSortDescriptor {
+        return NSSortDescriptor(keyPath: \Note.pinned, ascending: false)
+    }
+
+    /// Returns a NSSortDescriptor, to be applied over Tag collections, so that the resulting collection relects the specified `SortMode`
+    ///
+    static func descriptorForTags(sortMode: SortMode) -> NSSortDescriptor {
+        return NSSortDescriptor(keyPath: \Tag.name, ascending: sortMode != .alphabeticallyDescending)
     }
 }
