@@ -671,6 +671,7 @@ extension SPNoteListViewController {
     @IBAction
     func sortModeWasPressed() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.sourceView = sortBar
 
         for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
             alertController.addDefaultActionWithTitle(mode.kind) { _ in
