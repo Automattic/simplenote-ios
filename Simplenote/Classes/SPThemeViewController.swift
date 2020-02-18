@@ -104,7 +104,7 @@ private extension SPThemeViewController {
         cell.textLabel?.text = mode.description
         cell.textLabel?.textColor = .simplenoteTextColor
         cell.accessoryType = selected ? .checkmark : .none
-        cell.backgroundColor = .simplenoteBackgroundColor
+        cell.backgroundColor = .simplenoteTableViewCellBackgroundColor
     }
 
     func refreshInterfaceStyle() {
