@@ -55,6 +55,7 @@
     
     self = [super init];
     if (self) {
+        [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureResultsController];
@@ -191,7 +192,8 @@
 
     // Condensed Notes
     [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
-    [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPSearchSortModeChangedNotification object:nil];
 
     // Register for keyboard notifications
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -210,8 +212,8 @@
     [self updateTableViewMetrics];
 }
 
-- (void)sortOrderPreferenceWasUpdated:(id)sender {
-
+- (void)sortModePreferenceWasUpdated:(id)sender
+{
     [self update];
 }
 
@@ -476,6 +478,7 @@
     [self refreshListController];
     [self refreshTitle];
     [self refreshSearchBar];
+    [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
     BOOL isNotEmpty = !self.isListEmpty;

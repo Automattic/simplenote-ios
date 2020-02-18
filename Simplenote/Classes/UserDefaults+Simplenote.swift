@@ -10,6 +10,7 @@ extension UserDefaults {
         case lastKnownVersionByRatingsFramework = "WPRatingsCurrentVersion"
         case listSortMode
         case listSortModeLegacy = "SPAlphabeticalSortPref"
+        case searchSortMode
         case theme
         case themeLegacy = "SPThemePref"
         case wordPressSessionKey = "SPAuthSessionKey"

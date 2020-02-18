@@ -7,6 +7,14 @@ import UIKit
 //
 extension SPNoteListViewController {
 
+    /// Sets up the Feedback Generator!
+    ///
+    @objc
+    func configureImpactGenerator() {
+        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator.prepare()
+    }
+
     /// Sets up the main TableView
     ///
     @objc
@@ -36,14 +44,12 @@ extension SPNoteListViewController {
         sortBar = SPSortBar.instantiateFromNib()
 
         sortBar.isHidden = true
-        sortBar.onSortModePress = {
-// TODO: Wire Me
-            NSLog("# onSortModePress")
+        sortBar.onSortModePress = { [weak self] in
+            self?.sortModeWasPressed()
         }
 
-        sortBar.onSortOrderPress = {
-// TODO: Wire Me
-            NSLog("# onSortOrderPress")
+        sortBar.onSortOrderPress = { [weak self] in
+            self?.sortOrderWasPressed()
         }
     }
 
@@ -198,6 +204,7 @@ extension SPNoteListViewController {
 
         notesListController.filter = filter
         notesListController.sortMode = Options.shared.listSortMode
+        notesListController.searchSortMode = Options.shared.searchSortMode
         notesListController.performFetch()
 
         tableView.reloadData()
@@ -232,6 +239,13 @@ extension SPNoteListViewController {
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
+    }
+
+    /// Refreshes the SortBar's Description Text
+    ///
+    @objc
+    func refreshSortBarText() {
+        sortBar.descriptionText = Options.shared.searchSortMode.description
     }
 
     /// Displays the Emtpy State Placeholders, when / if needed
@@ -630,9 +644,39 @@ extension SPNoteListViewController {
 }
 
 
+// MARK: - Search Action Handlers
+//
+extension SPNoteListViewController {
+
+    @IBAction
+    func sortOrderWasPressed() {
+        feedbackGenerator.impactOccurred()
+        Options.shared.searchSortMode = notesListController.searchSortMode.inverse
+    }
+
+    @IBAction
+    func sortModeWasPressed() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.sourceView = sortBar
+
+        for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
+            alertController.addDefaultActionWithTitle(mode.kind) { _ in
+                Options.shared.searchSortMode = mode
+            }
+        }
+
+        alertController.addCancelActionWithTitle(ActionTitle.cancel)
+
+        feedbackGenerator.impactOccurred()
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+
 // MARK: - Private Types
 //
 private enum ActionTitle {
+    static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
     static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
     static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
     static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
