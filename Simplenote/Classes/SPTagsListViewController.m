@@ -116,7 +116,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)configureTableView {
     [self.tableView registerNib:[SPTagListViewCell loadNib] forCellReuseIdentifier:[SPTagListViewCell reuseIdentifier]];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     if (@available(iOS 13.0, *)) {
         self.tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
