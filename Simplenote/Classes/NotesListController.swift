@@ -19,7 +19,7 @@ class NotesListController: NSObject {
     ///
     private lazy var tagsController = ResultsController<Tag>(viewContext: viewContext,
                                                              matching: state.predicateForTags(),
-                                                             sortedBy: state.descriptorsForTags(sortMode: sortMode),
+                                                             sortedBy: state.descriptorsForTags(),
                                                              limit: limitForTagResults)
 
     /// Notes Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
@@ -255,11 +255,8 @@ private extension NotesListController {
     }
 
     func refreshSortDescriptors() {
-        // Sort Mode might differ in Results / Search
-        let sortMode = sortModeForActiveState
-
-        notesController.sortDescriptors = state.descriptorsForNotes(sortMode: sortMode)
-        tagsController.sortDescriptors = state.descriptorsForTags(sortMode: sortMode)
+        notesController.sortDescriptors = state.descriptorsForNotes(sortMode: sortModeForActiveState)
+        tagsController.sortDescriptors = state.descriptorsForTags()
     }
 
     func refreshEverything() {
@@ -343,6 +340,8 @@ private extension NotesListController {
         return (transposedObjectChanges, transposedSectionChanges)
     }
 
+    /// Sort Mode might differ in Results / Search!
+    ///
     var sortModeForActiveState: SortMode {
         switch state {
         case .searching(_):

@@ -135,9 +135,9 @@ extension NotesListState {
 
     /// Returns a collection of NSSortDescriptors that, once applied to a Tags collection, the specified SortMode will be reflected
     ///
-    func descriptorsForTags(sortMode: SortMode) -> [NSSortDescriptor] {
+    func descriptorsForTags() -> [NSSortDescriptor] {
         return [
-            NSSortDescriptor.descriptorForTags(sortMode: sortMode)
+            NSSortDescriptor.descriptorForTags()
         ]
     }
 }
