@@ -182,7 +182,8 @@ class SPNoteTableViewCell: UITableViewCell {
             let prefixString = NSAttributedString(string: prefixText + String.space + String.space, attributes: [
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
-                .paragraphStyle: Style.paragraphStyle
+                .paragraphStyle: Style.paragraphStyle,
+                .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
             ])
 
             bodyString.append(prefixString)
@@ -429,7 +430,8 @@ private extension NSAttributedString {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
             .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
+            .paragraphStyle: paragraphStyle,
+            .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
         ])
 
         output.addChecklistAttachments(for: textColor)
