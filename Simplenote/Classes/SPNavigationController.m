@@ -33,6 +33,12 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 }
 
+- (void)setModalPresentationStyle:(UIModalPresentationStyle)modalPresentationStyle
+{
+    [super setModalPresentationStyle:modalPresentationStyle];
+    [self refreshBlurTintColor];
+}
+
 - (SPBlurEffectView *)navigationBarBackground
 {
     if (_navigationBarBackground) {
@@ -58,6 +64,17 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 
     [self attachNavigationBarBackground:self.navigationBarBackground toNavigationBar:self.navigationBar];
+}
+
+- (void)refreshBlurTintColor
+{
+    // We'll use different Bar Tint Colors, based on the presentation style
+    BOOL isModal = self.modalPresentationStyle == UIModalPresentationFormSheet;
+    UIColor *targetColor = isModal ? [UIColor simplenoteNavigationBarModalBackgroundColor] : [UIColor simplenoteNavigationBarBackgroundColor];
+
+    self.navigationBarBackground.tintColorClosure = ^{
+        return targetColor;
+    };
 }
 
 - (void)detachNavigationBarBackground

@@ -189,6 +189,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteNavigationBarModalBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_6)
+    }
+
+    @objc
     static var simplenoteSortBarBackgroundColor: UIColor {
         UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_6)
     }
