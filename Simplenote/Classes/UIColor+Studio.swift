@@ -204,11 +204,6 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteModalOverlayColor: UIColor {
-        UIColor(studioColor: .black).withAlphaComponent(UIKitConstants.alpha0_4)
-    }
-
-    @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .darkGray1)
     }
