@@ -189,7 +189,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)refreshStyle {
     self.rightBorderView.backgroundColor = [UIColor simplenoteDividerColor];
     [self.tagsHeaderView refreshStyle];
-    [self.tableView applySimplenoteGroupedStyle];
+    [self.tableView applySimplenotePlainStyle];
     [self.tableView reloadData];
 }
 
