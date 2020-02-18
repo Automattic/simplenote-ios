@@ -10,6 +10,7 @@
 -   Fixed a bug in which the Search Mode wouldn't properly be dismissed from the Editor
 -   Fixed a bug that caused the Editor's Keyboard Appearance not to match the selected theme
 -   Dark Mode is now darker than just dark, for an improved dark side experience.
+-   Simplenote now supports Password Autofill support. Logging in has never been faster!
 
 4.15.1
 ------

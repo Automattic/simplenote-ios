@@ -205,6 +205,17 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// ContentType: Autofill Support!
+    ///
+    var textContentType: UITextContentType {
+        get {
+            textField.textContentType
+        }
+        set {
+            textField.textContentType = newValue
+        }
+    }
+
     /// When toggled, the border color will be updated to borderColorError
     ///
     var inErrorState: Bool = false {
