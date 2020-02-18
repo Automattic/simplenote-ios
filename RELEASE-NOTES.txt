@@ -12,7 +12,6 @@
 -   Dark Mode is now darker than just dark, for an improved dark side experience.
 -   Simplenote now supports Password Autofill support. Logging in has never been faster!
 -   Simplenote's Launch Screen will now match iOS's Appearance Settings
--   Simplenote's Launch Screen will now match iOS's Appearance Settings
 -   Simplenote now supports Password Autofill support. Logging in has never been faster!
 
 4.15.1
