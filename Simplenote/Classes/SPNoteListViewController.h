@@ -5,6 +5,7 @@
 
 @class SPBlurEffectView;
 @class SPPlaceholderView;
+@class SPSortBar;
 @class NotesListController;
 @class SearchDisplayController;
 
@@ -14,12 +15,14 @@
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
 @property (nonatomic, assign, readonly) BOOL                                isIndexingNotes;
 @property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
+@property (nonatomic, strong) SPSortBar                                     *sortBar;
 @property (nonatomic, strong) UITableView                                   *tableView;
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
 @property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
 @property (nonatomic, strong) NotesListController                           *notesListController;
 @property (nonatomic) CGFloat                                               noteRowHeight;
 @property (nonatomic) CGFloat                                               tagRowHeight;
+@property (nonatomic) CGFloat                                               keyboardHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 

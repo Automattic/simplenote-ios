@@ -1,0 +1,148 @@
+import Foundation
+import UIKit
+
+
+// MARK: - SPSortBar
+//
+class SPSortBar: UIView {
+
+    /// Background Blur
+    ///
+    private let blurView = SPBlurEffectView.navigationBarBlurView()
+
+    /// Divider: Top separator
+    ///
+    @IBOutlet private var dividerView: UIView!
+
+    /// Divider: We're aiming at a 1px divider, regardless of the screen scale
+    ///
+    @IBOutlet private var dividerHeightConstraint: NSLayoutConstraint!
+
+    /// Container: Encapsulates every control!
+    ///
+    @IBOutlet private var containerView: UIView!
+
+    /// Sort Order Button!
+    ///
+    @IBOutlet private var sortOrderButton: UIButton!
+
+    /// Title: Sort By
+    ///
+    @IBOutlet private var titleLabel: UILabel!
+
+    /// Description: Active Sort Mode
+    ///
+    @IBOutlet private var descriptionLabel: UILabel!
+
+    /// Closure to be executed whenever the Sort Mode Button is pressed
+    ///
+    var onSortModePress: (() -> Void)?
+
+    /// Closure to be executed whenever the Sort Order [View] (center of the Sort Bar) is pressed
+    ///
+    var onSortOrderPress: (() -> Void)?
+
+
+    // MARK: - Lifecycle
+
+    deinit {
+        stopListeningToNotifications()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        startListeningToNotifications()
+
+        setupDividerView()
+        setupBackgroundView()
+        setupBlurEffect()
+        setupTextLabels()
+        setupOrderButton()
+        setupSubviews()
+
+        refreshStyle()
+    }
+}
+
+
+// MARK: - Private Methods
+//
+private extension SPSortBar {
+
+    func setupDividerView() {
+        dividerHeightConstraint.constant = UIScreen.main.pointToPixelRatio
+    }
+
+    func setupBackgroundView() {
+        containerView.backgroundColor = .clear
+    }
+
+    func setupBlurEffect() {
+        blurView.tintColorClosure = {
+            .simplenoteSortBarBackgroundColor
+        }
+    }
+
+    func setupTextLabels() {
+        titleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By Title")
+        titleLabel.font = .preferredFont(for: .caption1, weight: .regular)
+        descriptionLabel.font = .preferredFont(for: .caption1, weight: .medium)
+    }
+
+    func setupOrderButton() {
+        sortOrderButton.imageView?.contentMode = .center
+    }
+
+    func setupSubviews() {
+        insertSubview(blurView, at: .zero)
+
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+
+    func refreshStyle() {
+        dividerView.backgroundColor = .simplenoteDividerColor
+        sortOrderButton.imageView?.tintColor = .simplenoteTintColor
+        titleLabel.textColor = .simplenoteTextColor
+        descriptionLabel.textColor = .simplenoteInteractiveTextColor
+    }
+}
+
+
+// MARK: - Notifications
+//
+private extension SPSortBar {
+
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
+    }
+}
+
+
+// MARK: - Action Handlers
+//
+private extension SPSortBar {
+
+    @IBAction func sortOrderWasPressed() {
+        onSortOrderPress?()
+    }
+
+    @IBAction func sortModeWasPressed() {
+        onSortModePress?()
+    }
+}

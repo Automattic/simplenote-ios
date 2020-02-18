@@ -29,6 +29,24 @@ extension SPNoteListViewController {
         tableView.register(SPSectionHeaderView.loadNib(), forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
     }
 
+    /// Sets up the Sort Bar
+    ///
+    @objc
+    func configureSortBar() {
+        sortBar = SPSortBar.instantiateFromNib()
+
+        sortBar.isHidden = true
+        sortBar.onSortModePress = {
+// TODO: Wire Me
+            NSLog("# onSortModePress")
+        }
+
+        sortBar.onSortOrderPress = {
+// TODO: Wire Me
+            NSLog("# onSortOrderPress")
+        }
+    }
+
     /// Sets up the Results Controller
     ///
     @objc
@@ -53,6 +71,7 @@ extension SPNoteListViewController {
     }
 
     /// Sets up the Search StackView
+    /// - Note: We're embedding the SearchBar inside a StackView, to aid in the SearchBar-Hidden Mechanism
     ///
     @objc
     func configureSearchStackView() {
@@ -66,15 +85,17 @@ extension SPNoteListViewController {
     ///
     @objc
     func configureRootView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
-        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
+        sortBar.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
         view.addSubview(placeholderView)
         view.addSubview(navigationBarBackground)
         view.addSubview(searchBarStackView)
+        view.addSubview(sortBar)
 
         NSLayoutConstraint.activate([
             searchBarStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -100,6 +121,12 @@ extension SPNoteListViewController {
             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+
+        NSLayoutConstraint.activate([
+            sortBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sortBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sortBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 
     /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
@@ -124,7 +151,7 @@ extension SPNoteListViewController {
     /// Adjust the TableView's Insets, so that the content falls below the searchBar
     ///
     @objc
-    func refreshTableViewInsets() {
+    func refreshTableViewTopInsets() {
         tableView.contentInset.top = searchBarStackView.frame.height
         tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
     }
@@ -252,7 +279,7 @@ extension SPNoteListViewController {
     ///
     @objc
     var isSearchActive: Bool {
-        return searchText != nil
+        return searchController.active
     }
 
     /// Returns the SearchText
@@ -312,7 +339,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
 extension SPNoteListViewController: UIScrollViewDelegate {
 
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        guard searchBar.isFirstResponder else {
+        guard searchBar.isFirstResponder, searchBar.text?.isEmpty == false else {
             return
         }
 
@@ -544,6 +571,61 @@ private extension SPNoteListViewController {
         }
 
         present(controller, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Sort Bar
+//
+extension SPNoteListViewController {
+
+    @objc
+    func displaySortBar() {
+        // No need to refresh the Table's Bottom Insets. The keyboard will always show!
+        sortBar.animateVisibility(isHidden: false)
+    }
+
+    @objc
+    func dismissSortBar() {
+        // We'll need to refresh the bottom insets. The keyboard may have been dismissed already!
+        sortBar.animateVisibility(isHidden: true)
+        refreshTableViewBottomInsets()
+    }
+}
+
+
+// MARK: - Keyboard Handling
+//
+extension SPNoteListViewController {
+
+    @objc(keyboardWillChangeFrame:)
+    func keyboardWillChangeFrame(note: Notification) {
+        guard let keyboardFrame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        keyboardHeight = keyboardFrame.intersection(view.frame).height
+        refreshTableViewBottomInsets()
+    }
+
+    func refreshTableViewBottomInsets() {
+        let bottomInsets = bottomInsetsForTableView
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+            self.tableView.contentInset.bottom = bottomInsets
+            self.tableView.scrollIndicatorInsets.bottom = bottomInsets
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    var bottomInsetsForTableView: CGFloat {
+        // Keyboard offScreen + Search Active: Seriously, consider the Search Bar
+        guard keyboardHeight > .zero else {
+            return isSearchActive ? sortBar.frame.height : .zero
+        }
+
+        // Keyboard onScreen: the SortBar falls below the keyboard
+        return keyboardHeight
     }
 }
 
