@@ -11,6 +11,7 @@
 -   Fixed a bug that caused the Editor's Keyboard Appearance not to match the selected theme
 -   Dark Mode is now darker than just dark, for an improved dark side experience.
 -   Simplenote's Launch Screen will now match iOS's Appearance Settings
+-   Simplenote now supports Password Autofill support. Logging in has never been faster!
 
 4.15.1
 ------
