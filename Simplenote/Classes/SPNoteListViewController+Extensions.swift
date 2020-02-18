@@ -508,6 +508,8 @@ private extension SPNoteListViewController {
         cell.keywords = searchText
         cell.keywordsTintColor = .simplenoteTintColor
 
+        cell.prefixText = prefixText(for: note)
+
         cell.refreshAttributedStrings()
 
         return cell
@@ -521,6 +523,18 @@ private extension SPNoteListViewController {
         cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
         cell.titleText = String.searchOperatorForTags + tag.name
         return cell
+    }
+
+    /// Returns the Prefix for a given note: We'll prepend the (Creation / Modification) Date, whenever we're in Search, and the Sort Option is relevant
+    ///
+    func prefixText(for note: Note) -> String? {
+        guard case .searching = notesListController.state,
+            let date = note.date(for: notesListController.searchSortMode)
+            else {
+                return nil
+        }
+
+        return DateFormatter.Simplenote.listDateFormatter.string(from: date)
     }
 }
 
