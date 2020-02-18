@@ -42,7 +42,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
 
 @property (nonatomic, strong) SPTransitionController                *transitionController;
-@property (nonatomic, assign) CGFloat                               keyboardHeight;
 
 @property (nonatomic, assign) BOOL                                  bTitleViewAnimating;
 @property (nonatomic, assign) BOOL                                  bResetTitleView;
@@ -56,6 +55,7 @@
     
     self = [super init];
     if (self) {
+        [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
         [self configureResultsController];
@@ -63,6 +63,7 @@
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
+        [self configureSortBar];
         [self configureRootView];
         [self updateTableViewMetrics];
         [self startListeningToNotifications];
@@ -81,7 +82,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self refreshTableViewInsets];
+    [self refreshTableViewTopInsets];
     [self updateTableHeaderSize];
     [self ensureFirstRowIsVisibleIfNeeded];
 }
@@ -191,11 +192,11 @@
 
     // Condensed Notes
     [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
-    [nc addObserver:self selector:@selector(sortOrderPreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
+    [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPSearchSortModeChangedNotification object:nil];
 
     // Register for keyboard notifications
-    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     // Themes
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
@@ -211,8 +212,8 @@
     [self updateTableViewMetrics];
 }
 
-- (void)sortOrderPreferenceWasUpdated:(id)sender {
-
+- (void)sortModePreferenceWasUpdated:(id)sender
+{
     [self update];
 }
 
@@ -346,12 +347,14 @@
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
     [self.tableView reloadData];
+    [self displaySortBar];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
     [self invalidateSearchTimer];
     [self.notesListController endSearch];
+    [self dismissSortBar];
     [self update];
 }
 
@@ -475,6 +478,7 @@
     [self refreshListController];
     [self refreshTitle];
     [self refreshSearchBar];
+    [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
     BOOL isNotEmpty = !self.isListEmpty;
@@ -583,37 +587,6 @@
         self.bResetTitleView = NO;
         [self.activityIndicator stopAnimating];
     }];
-}
-
-
-#pragma mark - Keyboard
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    
-    CGRect keyboardFrame = [(NSValue *)[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    _keyboardHeight = MIN(keyboardFrame.size.height, keyboardFrame.size.width);
-    
-    UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom = _keyboardHeight;
-    self.tableView.contentInset = tableviewInsets;
-    
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom = _keyboardHeight;
-    self.tableView.scrollIndicatorInsets = tableviewInsets;
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    
-    _keyboardHeight = 0;
-
-    UIEdgeInsets tableviewInsets = self.tableView.contentInset;
-    tableviewInsets.bottom = self.view.safeAreaInsets.bottom;
-    self.tableView.contentInset = tableviewInsets;
-    
-    UIEdgeInsets scrollInsets = self.tableView.scrollIndicatorInsets;
-    scrollInsets.bottom = self.view.safeAreaInsets.bottom;
-    self.tableView.scrollIndicatorInsets = tableviewInsets;
 }
 
 

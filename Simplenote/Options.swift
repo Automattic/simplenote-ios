@@ -61,6 +61,25 @@ extension Options {
         }
     }
 
+    /// Returns the Search's Sort Mode. When it's undefined we'll fallback to the List's Sort Mode
+    ///
+    @objc
+    var searchSortMode: SortMode {
+        get {
+            guard defaults.containsObject(forKey: .searchSortMode) else {
+                return listSortMode
+            }
+
+            let payload = defaults.integer(forKey: .searchSortMode)
+            return SortMode(rawValue: payload) ?? .alphabeticallyAscending
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: .searchSortMode)
+            SPTracker.trackSettingsSearchSortMode(newValue.description)
+            NotificationCenter.default.post(name: .SPSearchSortModeChanged, object: nil)
+        }
+    }
+
     /// Returns the selected Theme
     ///
     @objc
@@ -105,6 +124,7 @@ extension Options {
     func reset() {
         defaults.removeObject(forKey: .theme)
         defaults.removeObject(forKey: .listSortMode)
+        defaults.removeObject(forKey: .searchSortMode)
     }
     
     /// Returns the number of Preview Lines we should use, per note

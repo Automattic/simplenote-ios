@@ -92,6 +92,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     var titleText: String?
 
+    /// Body's Prefix: Designed to display Dates (with a slightly different style) when appropriate.
+    ///
+    var prefixText: String?
+
     /// Note's Body
     /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
@@ -146,25 +150,56 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    /// Refreshed the Title and Body AttributedString(s), based on the Text, Font and Highlight properties
+    /// Refreshed the Label(s) Attributed Strings: Keywords, Bullets and the Body Prefix will be taken into consideration
     ///
     func refreshAttributedStrings() {
+        refreshTitleAttributedString()
+        refreshBodyAttributedString()
+    }
+
+    /// Refreshes the Title AttributedString: We'll consider Keyword Highlight and Text Attachments (bullets)
+    ///
+    private func refreshTitleAttributedString() {
         titleLabel.attributedText = titleText.map {
-            attributedText(from: $0,
-                           highlighing: keywords,
-                           font: Style.headlineFont,
-                           textColor: Style.headlineColor,
-                           highlightColor: keywordsTintColor)
+            NSAttributedString.previewString(from: $0,
+                                             font: Style.headlineFont,
+                                             textColor: Style.headlineColor,
+                                             highlighing: keywords,
+                                             highlightColor: keywordsTintColor,
+                                             paragraphStyle: Style.paragraphStyle)
 
         }
 
-        bodyLabel.attributedText = bodyText.map {
-            attributedText(from: $0,
-                           highlighing: keywords,
-                           font: Style.previewFont,
-                           textColor: Style.previewColor,
-                           highlightColor: keywordsTintColor)
+    }
+
+    /// Refreshes the Body AttributedString: We'll consider Keyword Highlight and Text Attachments (bullets)
+    ///
+    /// - Note: The `prefixText`, if any, will be prepended to the BodyText
+    ///
+    private func refreshBodyAttributedString() {
+        let bodyString = NSMutableAttributedString()
+        if let prefixText = prefixText {
+            let prefixString = NSAttributedString(string: prefixText + String.space + String.space, attributes: [
+                .font: Style.prefixFont,
+                .foregroundColor: Style.headlineColor,
+                .paragraphStyle: Style.paragraphStyle,
+                .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
+            ])
+
+            bodyString.append(prefixString)
         }
+
+        if let suffixText = bodyText {
+            let suffixString = NSAttributedString.previewString(from: suffixText,
+                                                                font: Style.previewFont,
+                                                                textColor: Style.previewColor,
+                                                                highlighing: keywords,
+                                                                highlightColor: keywordsTintColor,
+                                                                paragraphStyle: Style.paragraphStyle)
+            bodyString.append(suffixString)
+        }
+
+        bodyLabel.attributedText = bodyString
     }
 }
 
@@ -246,29 +281,6 @@ private extension SPNoteTableViewCell {
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
         accessoryRightImageView.isHidden = isRightImageEmpty
-    }
-
-    /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
-    ///
-    func attributedText(from string: String,
-                        highlighing keywords: String?,
-                        font: UIFont,
-                        textColor: UIColor,
-                        highlightColor: UIColor) -> NSAttributedString
-    {
-        let output = NSMutableAttributedString(string: string, attributes: [
-            .font: font,
-            .foregroundColor: textColor,
-            .paragraphStyle: Style.paragraphStyle
-        ])
-
-        output.addChecklistAttachments(for: textColor)
-
-        if let keywords = keywords {
-            output.apply(color: highlightColor, toSubstringsMatching: keywords)
-        }
-
-        return output
     }
 }
 
@@ -387,9 +399,47 @@ private enum Style {
         .preferredFont(forTextStyle: .subheadline)
     }
 
+    /// Prefix Font: To be applied over the Body's Prefix (if any)
+    ///
+    static var prefixFont: UIFont {
+        .preferredFont(for: .subheadline, weight: .medium)
+    }
+
     /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
         .simplenoteLightBlueColor
+    }
+}
+
+
+
+// MARK: - NSAttributedString Private Methods
+//
+private extension NSAttributedString {
+
+    /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
+    ///
+    static func previewString(from string: String,
+                              font: UIFont,
+                              textColor: UIColor,
+                              highlighing keywords: String?,
+                              highlightColor: UIColor,
+                              paragraphStyle: NSParagraphStyle) -> NSAttributedString
+    {
+        let output = NSMutableAttributedString(string: string, attributes: [
+            .font: font,
+            .foregroundColor: textColor,
+            .paragraphStyle: paragraphStyle,
+            .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
+        ])
+
+        output.addChecklistAttachments(for: textColor)
+
+        if let keywords = keywords {
+            output.apply(color: highlightColor, toSubstringsMatching: keywords)
+        }
+
+        return output
     }
 }
