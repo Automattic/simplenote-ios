@@ -12,7 +12,7 @@ class SPSortBar: UIView {
 
     /// Divider: Top separator
     ///
-    @IBOutlet private var dividerView: UIView!
+    @IBOutlet private(set) var dividerView: UIView!
 
     /// Divider: We're aiming at a 1px divider, regardless of the screen scale
     ///

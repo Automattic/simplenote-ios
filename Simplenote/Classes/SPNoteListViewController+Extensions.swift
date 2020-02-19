@@ -671,7 +671,6 @@ extension SPNoteListViewController {
     @IBAction
     func sortModeWasPressed() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.popoverPresentationController?.sourceView = sortBar
 
         for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
             alertController.addDefaultActionWithTitle(mode.kind) { _ in
@@ -680,6 +679,11 @@ extension SPNoteListViewController {
         }
 
         alertController.addCancelActionWithTitle(ActionTitle.cancel)
+
+        let popoverPresentationController = alertController.popoverPresentationController
+        popoverPresentationController?.sourceRect = sortBar.dividerView.frame
+        popoverPresentationController?.sourceView = sortBar.dividerView
+        popoverPresentationController?.permittedArrowDirections = .any
 
         feedbackGenerator.impactOccurred()
         present(alertController, animated: true, completion: nil)
