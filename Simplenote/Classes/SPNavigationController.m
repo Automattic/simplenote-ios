@@ -70,10 +70,9 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 {
     // We'll use different Bar Tint Colors, based on the presentation style
     BOOL isModal = self.modalPresentationStyle == UIModalPresentationFormSheet;
-    UIColor *targetColor = isModal ? [UIColor simplenoteNavigationBarModalBackgroundColor] : [UIColor simplenoteNavigationBarBackgroundColor];
 
     self.navigationBarBackground.tintColorClosure = ^{
-        return targetColor;
+        return isModal ? [UIColor simplenoteNavigationBarModalBackgroundColor] : [UIColor simplenoteNavigationBarBackgroundColor];
     };
 }
 
