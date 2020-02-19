@@ -5,7 +5,7 @@ import Foundation
 //
 extension NSSortDescriptor {
 
-    /// Returns a NSSortDescriptor, to be applied over Note collections, so that the resulting collection relects the specified `SortMode`
+    /// Returns a NSSortDescriptor, to be applied over Note collections, so that the resulting collection reflects the specified `SortMode`
     ///
     static func descriptorForNotes(sortMode: SortMode) -> NSSortDescriptor {
         let sortKeySelector: Selector
