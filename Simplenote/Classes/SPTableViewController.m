@@ -45,7 +45,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier:@"UITableViewCell"];
         
-        cell.backgroundColor = [UIColor simplenoteBackgroundColor];
+        cell.backgroundColor = [UIColor simplenoteTableViewCellBackgroundColor];
         
         UIView *selectionView = [[UIView alloc] initWithFrame:cell.bounds];
         selectionView.backgroundColor = [UIColor simplenoteLightBlueColor];
