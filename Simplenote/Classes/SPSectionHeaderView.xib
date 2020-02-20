@@ -8,72 +8,61 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSectionHeaderView" customModule="Simplenote" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSectionHeaderView" customModule="Simplenote" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="dns-b6-tS7" id="TEm-CO-fyw"/>
+                <outlet property="textLabel" destination="mCY-rM-Ize" id="23l-dz-w94"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ry8-TP-QDs" customClass="SPSectionHeaderView" customModule="Simplenote" customModuleProvider="target">
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-b6-tS7">
             <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
-            <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-b6-tS7">
-                    <rect key="frame" x="28" y="5" width="394" height="48"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-rM-Ize">
-                            <rect key="frame" x="0.0" y="0.0" width="394" height="48"/>
-                            <viewLayoutGuide key="safeArea" id="bFo-VK-FYN"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by Tag" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCY-rM-Ize">
+                    <rect key="frame" x="28" y="5" width="108.5" height="48"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" id="aFU-YG-YlY"/>
-                        <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="dns-b6-tS7" secondAttribute="top" id="iCX-pu-Jhc"/>
-                        <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" secondItem="dns-b6-tS7" secondAttribute="leading" id="iuA-hv-Jma"/>
-                        <constraint firstAttribute="trailing" secondItem="mCY-rM-Ize" secondAttribute="trailing" id="tjV-ph-G0l"/>
-                        <constraint firstAttribute="width" priority="999" constant="640" id="z6e-jR-kLx"/>
+                        <constraint firstAttribute="width" priority="999" constant="640" id="w9m-re-U9d"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="bFo-VK-FYN"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="z6e-jR-kLx"/>
+                            <exclude reference="w9m-re-U9d"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular">
                         <mask key="constraints">
-                            <include reference="z6e-jR-kLx"/>
+                            <include reference="w9m-re-U9d"/>
                         </mask>
                     </variation>
-                </view>
+                </label>
             </subviews>
             <constraints>
-                <constraint firstItem="dns-b6-tS7" firstAttribute="top" secondItem="ry8-TP-QDs" secondAttribute="top" constant="5" id="2dp-8D-Ebq"/>
-                <constraint firstAttribute="trailing" secondItem="dns-b6-tS7" secondAttribute="trailingMargin" id="5hQ-2N-IEd"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dns-b6-tS7" secondAttribute="trailingMargin" id="8rI-63-x6f"/>
-                <constraint firstItem="dns-b6-tS7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" id="E7N-df-pyY"/>
-                <constraint firstAttribute="bottom" secondItem="dns-b6-tS7" secondAttribute="bottom" constant="5" id="aYO-mA-wKK"/>
-                <constraint firstItem="dns-b6-tS7" firstAttribute="leading" secondItem="ry8-TP-QDs" secondAttribute="leadingMargin" constant="8" id="hzK-5H-CBj"/>
-                <constraint firstItem="dns-b6-tS7" firstAttribute="centerX" secondItem="ry8-TP-QDs" secondAttribute="centerX" id="ron-Op-BfQ"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="centerX" secondItem="dns-b6-tS7" secondAttribute="centerX" id="B7x-lH-NRO"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dns-b6-tS7" secondAttribute="leading" id="WXN-gC-kTK"/>
+                <constraint firstAttribute="bottom" secondItem="mCY-rM-Ize" secondAttribute="bottom" constant="5" id="aFU-YG-YlY"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="top" secondItem="dns-b6-tS7" secondAttribute="top" constant="5" id="iCX-pu-Jhc"/>
+                <constraint firstItem="mCY-rM-Ize" firstAttribute="leading" secondItem="dns-b6-tS7" secondAttribute="leadingMargin" constant="8" id="iuA-hv-Jma"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mCY-rM-Ize" secondAttribute="trailing" id="tjV-ph-G0l"/>
             </constraints>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="ZE4-Fj-DpS"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="E7N-df-pyY"/>
-                    <exclude reference="ron-Op-BfQ"/>
+                    <exclude reference="B7x-lH-NRO"/>
+                    <exclude reference="WXN-gC-kTK"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
-                    <exclude reference="5hQ-2N-IEd"/>
-                    <include reference="E7N-df-pyY"/>
-                    <exclude reference="hzK-5H-CBj"/>
-                    <include reference="ron-Op-BfQ"/>
+                    <include reference="B7x-lH-NRO"/>
+                    <include reference="WXN-gC-kTK"/>
+                    <exclude reference="iuA-hv-Jma"/>
                 </mask>
             </variation>
-            <connections>
-                <outlet property="textLabel" destination="mCY-rM-Ize" id="CGd-cy-D8S"/>
-            </connections>
-            <point key="canvasLocation" x="302.89855072463769" y="-127.90178571428571"/>
+            <point key="canvasLocation" x="697" y="238"/>
         </view>
     </objects>
 </document>
