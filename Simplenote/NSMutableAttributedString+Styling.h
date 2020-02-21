@@ -3,7 +3,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableAttributedString (Checklists)
-- (void)processChecklistAttachmentsWithColor:(UIColor *)color;
+- (void)processChecklistsWithColor:(UIColor *)color;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -5,15 +5,18 @@
 
 @implementation NSMutableAttributedString (Checklists)
 
-- (void)processChecklistAttachmentsWithColor:(UIColor *)color
+- (void)processChecklistsWithColor:(UIColor *)color
 {
     CGFloat dimension = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
     UIOffset offset = UIOffsetMake(0.0, -4.5);
 
-    [self processChecklistAttachmentsWithColor:color dimension:dimension offset:offset];
+    [self processChecklistsWithColor:color dimension:dimension offset:offset allowsMultiplePerLine:YES];
 }
 
-- (void)processChecklistAttachmentsWithColor:(UIColor *)color dimension:(CGFloat)dimension offset:(UIOffset)offset
+- (void)processChecklistsWithColor:(UIColor *)color
+                         dimension:(CGFloat)dimension
+                            offset:(UIOffset)offset
+             allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
 {
     if (self.length == 0) {
         return;
