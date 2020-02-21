@@ -225,7 +225,7 @@ extension UIColor {
 
     @objc
     static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray40, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_6)
+        UIColor(lightColor: .gray30, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_6)
     }
 
     @objc
