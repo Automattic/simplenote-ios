@@ -3,6 +3,24 @@ import CoreSpotlight
 import UIKit
 
 
+// MARK: - View Lifecycle
+//
+extension SPNoteListViewController {
+
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            guard let popoverController = self?.popoverController, let sortBar = self?.sortBar else {
+                return
+            }
+
+            popoverController.sourceRect = sortBar.dividerView.frame
+        }, completion: nil)
+    }
+}
+
+
 // MARK: - Components Initialization
 //
 extension SPNoteListViewController {
@@ -671,7 +689,6 @@ extension SPNoteListViewController {
     @IBAction
     func sortModeWasPressed() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.popoverPresentationController?.sourceView = sortBar
 
         for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
             alertController.addDefaultActionWithTitle(mode.kind) { _ in
@@ -680,6 +697,12 @@ extension SPNoteListViewController {
         }
 
         alertController.addCancelActionWithTitle(ActionTitle.cancel)
+
+        let popoverPresentationController = alertController.popoverPresentationController
+        popoverPresentationController?.sourceRect = sortBar.dividerView.frame
+        popoverPresentationController?.sourceView = sortBar.dividerView
+        popoverPresentationController?.permittedArrowDirections = .any
+        self.popoverController = popoverPresentationController
 
         feedbackGenerator.impactOccurred()
         present(alertController, animated: true, completion: nil)

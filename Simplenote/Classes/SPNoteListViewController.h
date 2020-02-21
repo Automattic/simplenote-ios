@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
 @property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
 @property (nonatomic, strong) NotesListController                           *notesListController;
+@property (nonatomic, weak) UIPopoverPresentationController                 *popoverController;
 @property (nonatomic) CGFloat                                               noteRowHeight;
 @property (nonatomic) CGFloat                                               tagRowHeight;
 @property (nonatomic) CGFloat                                               keyboardHeight;
