@@ -45,4 +45,15 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
 
         XCTAssertTrue(matches.isEmpty)
     }
+
+    /// Verifies that `NSRegularExpression.regexForChecklistsEmbeddedAnywhere` matches multiple checklists in the same line
+    ///
+    func testRegexForChecklistsEmbeddedAnywhereProperlyMatchesMultipleChecklistsInTheSingleLine() {
+        let string = "           - [ ] Buy avocados - [ ] - [ ]- [ ] - [x]- [X]"
+        let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
+        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+
+        XCTAssertEqual(matches.count, 6)
+    }
+
 }
