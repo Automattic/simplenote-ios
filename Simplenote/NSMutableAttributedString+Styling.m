@@ -1,16 +1,17 @@
 #import "NSMutableAttributedString+Styling.h"
+#import "NSString+Bullets.h"
 #import "Simplenote-Swift.h"
 
 
 
 @implementation NSMutableAttributedString (Checklists)
 
-- (void)processChecklistsWithColor:(UIColor *)color
+- (void)processChecklistsWithColor:(UIColor *)color allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
 {
     CGFloat dimension = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
     UIOffset offset = UIOffsetMake(0.0, -4.5);
 
-    [self processChecklistsWithColor:color dimension:dimension offset:offset allowsMultiplePerLine:YES];
+    [self processChecklistsWithColor:color dimension:dimension offset:offset allowsMultiplePerLine:allowsMultiplePerLine];
 }
 
 - (void)processChecklistsWithColor:(UIColor *)color
@@ -23,14 +24,10 @@
     }
 
     NSString *plainString = self.string.copy;
-    NSRegularExpression *regex = NSRegularExpression.regexForChecklists;
+    NSRegularExpression *regex = allowsMultiplePerLine ? NSRegularExpression.regexForChecklistsEmbeddedAnywhere : NSRegularExpression.regexForChecklists;
     NSArray *matches = [regex matchesInString:plainString options:0 range:plainString.rangeOfEntireString];
-
-    if (matches.count == 0) {
-        return;
-    }
-
     NSInteger positionAdjustment = 0;
+    BOOL shouldPrependSpace = NO;
 
     for (NSTextCheckingResult *match in matches) {
         NSRange matchedRange = match.range;
@@ -51,11 +48,30 @@
         textAttachment.tintColor = color;
         textAttachment.bounds = CGRectMake(offset.horizontal, offset.vertical, dimension, dimension);
 
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        NSMutableAttributedString *attachmentString = [NSMutableAttributedString new];
+        if (shouldPrependSpace) {
+            [attachmentString appendString:NSString.spaceString];
+        }
+
+        [attachmentString appendAttachment:textAttachment];
+
         [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
 
         positionAdjustment += matchedRange.length - attachmentString.length;
+        shouldPrependSpace = allowsMultiplePerLine;
     }
+}
+
+- (void)appendAttachment:(NSTextAttachment *)attachment
+{
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attachment];
+    [self appendAttributedString:string];
+}
+
+- (void)appendString:(NSString *)aString
+{
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:aString];
+    [self appendAttributedString:string];
 }
 
 @end
