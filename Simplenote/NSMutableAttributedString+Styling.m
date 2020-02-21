@@ -21,7 +21,7 @@
 
     NSString *plainString = self.string.copy;
     NSRegularExpression *regex = NSRegularExpression.regexForChecklists;
-    NSArray *matches = [regex matchesInString:plainString options:0 range:self.rangeOfEntireString];
+    NSArray *matches = [regex matchesInString:plainString options:0 range:plainString.rangeOfEntireString];
 
     if (matches.count == 0) {
         return;
@@ -53,11 +53,6 @@
 
         positionAdjustment += matchedRange.length - attachmentString.length;
     }
-}
-
-- (NSRange)rangeOfEntireString
-{
-    return NSMakeRange(0, self.length);
 }
 
 @end
