@@ -24,7 +24,7 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
-		374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */; };
+		374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */; };
 		375D24B121E01131007AB25A /* html5_blocks.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249D21E0112B007AB25A /* html5_blocks.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B221E01131007AB25A /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249F21E0112C007AB25A /* buffer.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B321E01131007AB25A /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D24A021E0112C007AB25A /* autolink.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -366,7 +366,7 @@
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
 		373AD30621C4739300A4EA89 /* NSMutableAttributedString+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Styling.h"; sourceTree = "<group>"; };
 		373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Styling.m"; sourceTree = "<group>"; };
-		374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPChecklistTest.swift; sourceTree = "<group>"; };
+		374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringStylingTests.swift; sourceTree = "<group>"; };
 		375D249C21E0112B007AB25A /* html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html.h; sourceTree = "<group>"; };
 		375D249D21E0112B007AB25A /* html5_blocks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = html5_blocks.c; sourceTree = "<group>"; };
 		375D249E21E0112C007AB25A /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
@@ -1050,6 +1050,7 @@
 		B52F35D422F3573300724793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */,
 				B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */,
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
 				B51D7C7823D9CFA4005D4B77 /* StringSimplenoteTests.swift */,
@@ -1113,7 +1114,6 @@
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
-				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2213,7 +2213,7 @@
 			files = (
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
-				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
+				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
