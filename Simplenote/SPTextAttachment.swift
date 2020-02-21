@@ -1,28 +1,34 @@
-//
-//  SPTextAttachment.swift
-//  Simplenote
-//  Used in the note editor to distinguish if a checklist item is ticked or not.
-//
-
 import UIKit
 
-@objcMembers class SPTextAttachment: NSTextAttachment {
-    var checked = false
-    var attachmentColor: UIColor?
-    
-    @objc public convenience init(color: UIColor) {
-        self.init()
-        
-        attachmentColor = color
+
+// MARK: - SPTextAttachment
+//
+@objcMembers
+class SPTextAttachment: NSTextAttachment {
+
+    /// Indicates if we're in the Checked or Unchecked state
+    ///
+    var isChecked = false {
+        didSet {
+            refreshImage()
+        }
     }
-    
-    var isChecked: Bool {
-        get {
-            return checked
+
+    /// Updates the Attachment's Tint Color
+    ///
+    var tintColor: UIColor? {
+        didSet {
+            refreshImage()
         }
-        set(isChecked) {
-            checked = isChecked
-            image = UIImage(named: checked ? "icon_task_checked" : "icon_task_unchecked")?.withOverlayColor(attachmentColor)
+    }
+
+    /// Updates the Internal Image
+    ///
+    private func refreshImage() {
+        guard let tintColor = tintColor else {
+            return
         }
+
+        image = UIImage(named: isChecked ? "icon_task_checked" : "icon_task_unchecked")?.withOverlayColor(tintColor)
     }
 }
