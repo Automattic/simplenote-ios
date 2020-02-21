@@ -185,17 +185,17 @@ extension UIColor {
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_6)
+        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
     static var simplenoteNavigationBarModalBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_6)
+        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
     static var simplenoteSortBarBackgroundColor: UIColor {
-        UIColor(lightColor: .spGray1, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_6)
+        UIColor(lightColor: .spGray1, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
