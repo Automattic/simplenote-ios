@@ -29,6 +29,7 @@ class SPTextAttachment: NSTextAttachment {
             return
         }
 
-        image = UIImage(named: isChecked ? "icon_task_checked" : "icon_task_unchecked")?.withOverlayColor(tintColor)
+        let name: UIImageName = isChecked ? .taskChecked : .taskUnchecked
+        image = UIImage.image(name: name)?.withOverlayColor(tintColor)
     }
 }
