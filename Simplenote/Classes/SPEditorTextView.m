@@ -15,7 +15,6 @@
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
-NSString *const CheckListRegExPattern = @"^(\\s+)?(-[ \t]+\\[[xX\\s]\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment

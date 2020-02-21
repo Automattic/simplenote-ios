@@ -9,7 +9,6 @@
 #import "SPTextView.h"
 @class SPTagView;
 
-extern NSString *const CheckListRegExPattern;
 
 @protocol SPEditorTextViewDelegate <UITextViewDelegate>
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url;
