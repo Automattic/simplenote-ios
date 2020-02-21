@@ -230,6 +230,7 @@
 		B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584DA35236722D400B2844A /* SPBlurEffectView.swift */; };
 		B58BF1FB23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */; };
 		B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */; };
+		B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */; };
 		B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
@@ -565,6 +566,7 @@
 		B584DA35236722D400B2844A /* SPBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPBlurEffectView.swift; path = Classes/SPBlurEffectView.swift; sourceTree = "<group>"; };
 		B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewRowAction+Simplenote.swift"; path = "Classes/UITableViewRowAction+Simplenote.swift"; sourceTree = "<group>"; };
 		B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPPlaceholderView.swift; path = Classes/SPPlaceholderView.swift; sourceTree = "<group>"; };
+		B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSRegularExpression+Simplenote.swift"; path = "Classes/NSRegularExpression+Simplenote.swift"; sourceTree = "<group>"; };
 		B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSString+Simplenote.swift"; path = "Classes/NSString+Simplenote.swift"; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
@@ -1131,6 +1133,7 @@
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */,
+				B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */,
 				B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
 				B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */,
@@ -2084,6 +2087,7 @@
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
 				E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
+				B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */,
 				B5421F3823CE79F6004DDC19 /* ResultsController.swift in Sources */,
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
