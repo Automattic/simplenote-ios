@@ -1,10 +1,6 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "Simplenote-Swift.h"
 
-NSString* const NSAttributedStringRegexForChecklists        = @"^\\s*(-[ \t]+\\[[xX\\s]\\])";
-NSInteger const NSAttributedStringRegexExpectedMatchGroups  = 3;
-NSInteger const NSAttributedStringRegexGroupIndexPrefix     = 1;
-NSInteger const NSAttributedStringRegexGroupIndexContent    = 2;
 
 
 @implementation NSMutableAttributedString (Checklists)
@@ -24,7 +20,7 @@ NSInteger const NSAttributedStringRegexGroupIndexContent    = 2;
     }
 
     NSString *plainString = self.string.copy;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:NSAttributedStringRegexForChecklists options:NSRegularExpressionAnchorsMatchLines error:nil];
+    NSRegularExpression *regex = NSRegularExpression.regexForChecklists;
     NSArray *matches = [regex matchesInString:plainString options:0 range:self.rangeOfEntireString];
 
     if (matches.count == 0) {
