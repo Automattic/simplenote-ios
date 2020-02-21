@@ -1,62 +1,67 @@
-//
-//  NSMutableAttributedString+TruncateToWidth.m
-//  Simplenote
-//
-//  Created by Rainieri Ventura on 4/5/12.
-//  Copyright (c) 2012 Simperium. All rights reserved.
-//
-
 #import "NSMutableAttributedString+Styling.h"
 #import "Simplenote-Swift.h"
-#import "SPTextView.h"
 
-@implementation NSMutableAttributedString (Styling)
+NSString* const NSAttributedStringRegexForChecklists        = @"^\\s*(-[ \t]+\\[[xX\\s]\\])";
+NSInteger const NSAttributedStringRegexExpectedMatchGroups  = 3;
+NSInteger const NSAttributedStringRegexGroupIndexPrefix     = 1;
+NSInteger const NSAttributedStringRegexGroupIndexContent    = 2;
 
-const int RegexExpectedMatchGroups  = 3;
-const int RegexGroupIndexPrefix     = 1;
-const int RegexGroupIndexContent    = 2;
 
-// Replaces checklist markdown syntax with SPTextAttachment images in an attributed string
-- (void)addChecklistAttachmentsForColor: (UIColor *)color  {
+@implementation NSMutableAttributedString (Checklists)
 
+- (void)processChecklistAttachmentsWithColor:(UIColor *)color
+{
+    CGFloat dimension = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
+    UIOffset offset = UIOffsetMake(0.0, -4.5);
+
+    [self processChecklistAttachmentsWithColor:color dimension:dimension offset:offset];
+}
+
+- (void)processChecklistAttachmentsWithColor:(UIColor *)color dimension:(CGFloat)dimension offset:(UIOffset)offset
+{
     if (self.length == 0) {
         return;
     }
-    
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:CheckListRegExPattern options:NSRegularExpressionAnchorsMatchLines error:&error];
-    
-    // Work with a copy of the NSString value so we can calculate the correct indices
-    NSString *noteString = self.string.copy;
-    NSArray *matches = [regex matchesInString:noteString options:0 range:[noteString rangeOfString:noteString]];
-    
+
+    NSString *plainString = self.string.copy;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:NSAttributedStringRegexForChecklists options:NSRegularExpressionAnchorsMatchLines error:nil];
+    NSArray *matches = [regex matchesInString:plainString options:0 range:self.rangeOfEntireString];
+
     if (matches.count == 0) {
         return;
     }
-    
-    int positionAdjustment = 0;
-    CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
+
+    NSInteger positionAdjustment = 0;
+
     for (NSTextCheckingResult *match in matches) {
-        if ([match numberOfRanges] < RegexExpectedMatchGroups) {
+        NSRange matchedRange = match.range;
+        if (matchedRange.location == NSNotFound) {
             continue;
         }
-        NSRange prefixRange = [match rangeAtIndex:RegexGroupIndexPrefix];
-        NSRange checkboxRange = [match rangeAtIndex:RegexGroupIndexContent];
-        
-        NSString *markdownTag = [noteString substringWithRange:match.range];
-        BOOL isChecked = [markdownTag localizedCaseInsensitiveContainsString:@"x"];
-        
-        SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor:color];
-        [attachment setIsChecked: isChecked];
-        
-        attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
-        
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
-        NSRange adjustedRange = NSMakeRange(checkboxRange.location - positionAdjustment, checkboxRange.length);
+
+        NSRange adjustedRange = NSMakeRange(matchedRange.location - positionAdjustment, matchedRange.length);
+        if (NSMaxRange(adjustedRange) > self.length) {
+            continue;
+        }
+
+        NSString *prefix = [plainString substringWithRange:matchedRange];
+        BOOL isChecked = [prefix localizedCaseInsensitiveContainsString:@"x"];
+
+        SPTextAttachment *textAttachment = [SPTextAttachment new];
+        textAttachment.isChecked = isChecked;
+        textAttachment.tintColor = color;
+        textAttachment.bounds = CGRectMake(offset.horizontal, offset.vertical, dimension, dimension);
+
+        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
         [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
-        
-        positionAdjustment += markdownTag.length - 1 - prefixRange.length;
+
+        positionAdjustment += matchedRange.length - attachmentString.length;
     }
+}
+
+- (NSRange)rangeOfEntireString
+{
+    return NSMakeRange(0, self.length);
 }
 
 @end

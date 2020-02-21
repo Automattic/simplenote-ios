@@ -1,12 +1,12 @@
-//
-//  NSMutableAttributedString+TruncateToWidth.h
-//  Simplenote
-//
-
 #import <Foundation/Foundation.h>
 
-@interface NSMutableAttributedString (Styling)
 
-- (void)addChecklistAttachmentsForColor: (UIColor *)color;
+NS_ASSUME_NONNULL_BEGIN
+extern NSString* const NSAttributedStringRegexForChecklists;
+
+@interface NSMutableAttributedString (Checklists)
+
+- (void)processChecklistAttachmentsWithColor:(UIColor *)color;
 
 @end
+NS_ASSUME_NONNULL_END
