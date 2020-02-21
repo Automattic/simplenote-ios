@@ -8,6 +8,7 @@
 
 - (void)processChecklistsWithColor:(UIColor *)color allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
 {
+    // TODO: This is definitely wrong. Fix before merging please!
     CGFloat dimension = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
     UIOffset offset = UIOffsetMake(0.0, -4.5);
 
