@@ -230,6 +230,7 @@
 		B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584DA35236722D400B2844A /* SPBlurEffectView.swift */; };
 		B58BF1FB23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */; };
 		B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */; };
+		B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
@@ -564,6 +565,7 @@
 		B584DA35236722D400B2844A /* SPBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPBlurEffectView.swift; path = Classes/SPBlurEffectView.swift; sourceTree = "<group>"; };
 		B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewRowAction+Simplenote.swift"; path = "Classes/UITableViewRowAction+Simplenote.swift"; sourceTree = "<group>"; };
 		B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPPlaceholderView.swift; path = Classes/SPPlaceholderView.swift; sourceTree = "<group>"; };
+		B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSString+Simplenote.swift"; path = "Classes/NSString+Simplenote.swift"; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -1131,6 +1133,7 @@
 				B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */,
 				B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
+				B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B5FFC9CF23FC3D7A00BECF7D /* NSWritingDirection+Simplenote.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
@@ -2073,6 +2076,7 @@
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
+				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
 				46A3C97917DFA81A002865AE /* UIBarButtonItem+Images.m in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
 				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
