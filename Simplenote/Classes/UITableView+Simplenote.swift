@@ -9,8 +9,8 @@ extension UITableView {
     ///
     @objc
     func applySimplenoteGroupedStyle() {
-        self.backgroundColor = .simplenoteTableViewBackgroundColor
-        self.separatorColor = .simplenoteDividerColor
+        backgroundColor = .simplenoteTableViewBackgroundColor
+        separatorColor = .simplenoteDividerColor
     }
 
     /// Applies Simplenote's Style for Plain TableVIews

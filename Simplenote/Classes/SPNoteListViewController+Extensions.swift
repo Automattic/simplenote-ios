@@ -34,7 +34,7 @@ extension SPNoteListViewController {
 
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
-        tableView.register(SPSectionHeaderView.loadNib(), forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
+        tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
     }
 
     /// Sets up the Sort Bar

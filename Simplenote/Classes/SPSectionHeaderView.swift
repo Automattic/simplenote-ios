@@ -7,6 +7,10 @@ import UIKit
 @objcMembers
 class SPSectionHeaderView: UITableViewHeaderFooterView {
 
+    /// View Containing all of the subviews
+    ///
+    @IBOutlet private var containerView: UIView!
+
     /// Override `textLabel` to add `@IBOutlet` annotation
     ///
     @IBOutlet override var textLabel: UILabel? {
@@ -20,11 +24,23 @@ class SPSectionHeaderView: UITableViewHeaderFooterView {
 
     private var _textLabel: UILabel?
 
+    /// We're simply unable to build a TableVIewHeaderFooter, in IB, without triggering warnings about the contentView.
+    /// SO: We're just loading a nib with the hieararchy we want, and manually attaching the top level container
+    ///
+    private lazy var nib = UINib(nibName: type(of: self).classNameWithoutNamespaces, bundle: nil)
+
 
     // MARK: - Overridden Methods
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        configureSubviews()
+        refreshStyle()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureSubviews()
         refreshStyle()
     }
 
@@ -35,9 +51,24 @@ class SPSectionHeaderView: UITableViewHeaderFooterView {
 }
 
 
-// MARK: - Private Methods: Skinning
+// MARK: - Private Methods
 //
 private extension SPSectionHeaderView {
+
+    /// Sets up the Subviews / Layout
+    ///
+    func configureSubviews() {
+        nib.instantiate(withOwner: self, options: nil)
+        contentView.addSubview(containerView)
+
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
 
     /// Refreshes the current Style current style
     ///
