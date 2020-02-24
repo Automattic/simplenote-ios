@@ -155,6 +155,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
+    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
     self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
