@@ -389,8 +389,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
 
-    UIColor *checklistColor = [UIColor simplenoteNoteBodyPreviewColor];
-    [self.textStorage processChecklistsWithColor:checklistColor allowsMultiplePerLine:NO];
+    [self.textStorage processChecklistsWithColor:self.checklistsTintColor
+                                      sizingFont:self.checklistsFont
+                           allowsMultiplePerLine:NO];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain

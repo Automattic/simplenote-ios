@@ -21,6 +21,8 @@
 @property (nonatomic) BOOL overideLockContentOffset;
 
 @property (nonatomic, strong) SPTagView *tagView;
+@property (nonatomic, strong) UIFont *checklistsFont;
+@property (nonatomic, strong) UIColor *checklistsTintColor;
 
 - (void)scrollToBottom;
 - (void)scrollToTop;

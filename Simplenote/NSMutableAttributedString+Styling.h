@@ -3,7 +3,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableAttributedString (Checklists)
-- (void)processChecklistsWithColor:(UIColor *)color allowsMultiplePerLine:(BOOL)allowsMultiplePerLine;
+- (void)processChecklistsWithColor:(UIColor *)color
+                        sizingFont:(UIFont *)sizingFont
+             allowsMultiplePerLine:(BOOL)allowsMultiplePerLine;
 @end
 
 NS_ASSUME_NONNULL_END

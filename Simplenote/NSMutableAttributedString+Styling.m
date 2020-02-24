@@ -6,18 +6,8 @@
 
 @implementation NSMutableAttributedString (Checklists)
 
-- (void)processChecklistsWithColor:(UIColor *)color allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
-{
-    // TODO: This is definitely wrong. Fix before merging please!
-    CGFloat dimension = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
-    UIOffset offset = UIOffsetMake(0.0, -4.5);
-
-    [self processChecklistsWithColor:color dimension:dimension offset:offset allowsMultiplePerLine:allowsMultiplePerLine];
-}
-
 - (void)processChecklistsWithColor:(UIColor *)color
-                         dimension:(CGFloat)dimension
-                            offset:(UIOffset)offset
+                        sizingFont:(UIFont *)sizingFont
              allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
 {
     if (self.length == 0) {
@@ -28,7 +18,6 @@
     NSRegularExpression *regex = allowsMultiplePerLine ? NSRegularExpression.regexForChecklistsEmbeddedAnywhere : NSRegularExpression.regexForChecklists;
     NSArray *matches = [regex matchesInString:plainString options:0 range:plainString.rangeOfEntireString];
     NSInteger positionAdjustment = 0;
-    BOOL shouldPrependSpace = NO;
 
     for (NSTextCheckingResult *match in matches) {
         NSRange matchedRange = match.range;
@@ -41,16 +30,16 @@
             continue;
         }
 
-        NSString *prefix = [plainString substringWithRange:matchedRange];
-        BOOL isChecked = [prefix localizedCaseInsensitiveContainsString:@"x"];
+        NSString *matchedString = [plainString substringWithRange:matchedRange];
+        BOOL isChecked = [matchedString localizedCaseInsensitiveContainsString:@"x"];
 
         SPTextAttachment *textAttachment = [SPTextAttachment new];
         textAttachment.isChecked = isChecked;
         textAttachment.tintColor = color;
-        textAttachment.bounds = CGRectMake(offset.horizontal, offset.vertical, dimension, dimension);
+        textAttachment.sizingFont = sizingFont;
 
         NSMutableAttributedString *attachmentString = [NSMutableAttributedString new];
-        if (shouldPrependSpace) {
+        if (allowsMultiplePerLine && adjustedRange.location != 0) {
             [attachmentString appendString:NSString.spaceString];
         }
 
@@ -59,7 +48,6 @@
         [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
 
         positionAdjustment += matchedRange.length - attachmentString.length;
-        shouldPrependSpace = allowsMultiplePerLine;
     }
 }
 

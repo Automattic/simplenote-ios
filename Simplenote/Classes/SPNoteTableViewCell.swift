@@ -434,7 +434,7 @@ private extension NSAttributedString {
             .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
         ])
 
-        output.processChecklists(with: textColor, allowsMultiplePerLine: true)
+        output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)
 
         if let keywords = keywords {
             output.apply(color: highlightColor, toSubstringsMatching: keywords)
