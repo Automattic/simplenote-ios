@@ -268,8 +268,8 @@ end
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"], 
         provisioningProfiles: { 
-          "com.codality.NotationalFlow" => "Simplenote AppStore",
-          "com.codality.NotationalFlow.Share" => "Simplenote AppStore Share"
+          "com.codality.NotationalFlow" => "match AppStore com.codality.NotationalFlow",
+          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share"
         }
       }
     )
