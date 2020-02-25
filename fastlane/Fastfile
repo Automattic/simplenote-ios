@@ -262,7 +262,7 @@ end
 
     gym(scheme: "Simplenote", 
       workspace: "Simplenote.xcworkspace",
-      configuration: "Distribution App Store",
+      configuration: "Distribution AppStore",
       clean: true,
       export_options: {
         method: "app-store",
