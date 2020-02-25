@@ -260,7 +260,9 @@ end
 
     appstore_code_signing 
 
-    gym(scheme: "Simplenote", workspace: "Simplenote.xcworkspace",
+    gym(scheme: "Simplenote", 
+      workspace: "Simplenote.xcworkspace",
+      configuration: "Distribution App Store",
       clean: true,
       export_options: {
         method: "app-store",
