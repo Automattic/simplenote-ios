@@ -405,7 +405,9 @@ end
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
       app_identifier: ["com.codality.NotationalFlow",
-                       "com.codality.NotationalFlow.Share"])
+                       "com.codality.NotationalFlow.Share"],
+      template_name: "NotationalFlow Keychain Access",
+    )
   end
 
 ########################################################################
