@@ -22,7 +22,7 @@ extension NSPredicate {
                 continue
             }
 
-            output.append( NSPredicate(format: "tags CONTAINS[cd] %@", tag) )
+            output.append( NSPredicate(format: "tags CONTAINS[cd] %@", formattedTag(for: tag)) )
         }
 
         guard !output.isEmpty else {
@@ -51,12 +51,7 @@ extension NSPredicate {
     ///
     @objc
     static func predicateForNotes(tag: String) -> NSPredicate {
-        let filtered = tag.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "/", with: "\\/")
-
-        // Individual tags are surrounded by quotes, thus adding quotes to the selected tag ensures only the
-        // correct notes are shown
-        let format = String(format: "\"%@\"", filtered)
-        return NSPredicate(format: "tags CONTAINS[c] %@", format)
+        return NSPredicate(format: "tags CONTAINS[c] %@", formattedTag(for: tag))
     }
 
     /// Returns a NSPredicate that will match:
@@ -96,5 +91,18 @@ extension NSPredicate {
             NSPredicate(format: "name CONTAINS[cd] %@", tag),
             NSPredicate(format: "name <>[c] %@", tag)
         ])
+    }
+}
+
+
+// MARK: - Private Methods
+//
+private extension NSPredicate {
+
+    /// Returns the received tag, escaped and surrounded by quotes: ensures only the *exact* tag matches are hit
+    ///
+    static func formattedTag(for tag: String) -> String {
+        let filtered = tag.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "/", with: "\\/")
+        return String(format: "\"%@\"", filtered)
     }
 }
