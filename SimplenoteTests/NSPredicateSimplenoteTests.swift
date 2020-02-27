@@ -81,7 +81,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
     ///
     func testPredicateForNotesWithSearchTextMatchesNoteWheneverTagPayloadIsEmpty() {
         let entity = MockupNote()
-        entity.tags = "[ 'keyword' ]"
+        entity.tags = "[ \"keyword\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:")
         XCTAssertTrue(predicate.evaluate(with: entity))
@@ -91,7 +91,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
     ///
     func testPredicateForNotesWithSearchTextMatchesTagsWithDiacriticInsensitiveRule() {
         let entity = MockupNote()
-        entity.tags = "[ 'esdrújula' ]"
+        entity.tags = "[ \"esdrújula\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:esdrujula")
         XCTAssertTrue(predicate.evaluate(with: entity))
@@ -101,7 +101,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
     ///
     func testPredicateForNotesWithSearchTextMatchesNoteWithSpecifiedTag() {
         let entity = MockupNote()
-        entity.tags = "[ 'keyword' ]"
+        entity.tags = "[ \"keyword\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword")
         XCTAssertTrue(predicate.evaluate(with: entity))
@@ -109,12 +109,12 @@ class NSPredicateSimplenoteTests: XCTestCase {
 
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will  match entities that contain a partial match with the `tag:` operator
     ///
-    func testPredicateForNotesWithSearchTextMatchesNoteWithSpecifiedPartialTag() {
+    func testPredicateForNotesWithSearchTextDoesNotMatchNoteWithSpecifiedPartialTag() {
         let entity = MockupNote()
-        entity.tags = "[ 'keyword' ]"
+        entity.tags = "[ \"keyword\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:word")
-        XCTAssertTrue(predicate.evaluate(with: entity))
+        XCTAssertFalse(predicate.evaluate(with: entity))
     }
 
     /// Verifies that `NSPredicate.predicateForNotes(searchText:)` will not match entities that do contain a given `tag:`, but lack the target content
@@ -122,7 +122,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
     func testPredicateForNotesWithSearchTextWillNotMatchEntityWithoutTargetContentEvenWhenTheSpecifiedTagIsThere() {
         let entity = MockupNote()
         entity.content = "unmatched"
-        entity.tags = "[ 'keyword' ]"
+        entity.tags = "[ \"keyword\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword else")
         XCTAssertFalse(predicate.evaluate(with: entity))
@@ -133,7 +133,7 @@ class NSPredicateSimplenoteTests: XCTestCase {
     func testPredicateForNotesWithSearchTextWillMatchEntityWithTargetContentAndTag() {
         let entity = MockupNote()
         entity.content = "something else"
-        entity.tags = "[ 'keyword' ]"
+        entity.tags = "[ \"keyword\" ]"
 
         let predicate = NSPredicate.predicateForNotes(searchText: "tag:keyword else something")
         XCTAssertTrue(predicate.evaluate(with: entity))
