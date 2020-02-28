@@ -11,7 +11,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsWillNotMatchChecklistsLocatedAtTheMiddleOfTheString() {
         let string = "This is a badly formed todo - [ ] Buy avocados - []"
         let regex = NSRegularExpression.regexForChecklists
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
         
         XCTAssertTrue(matches.isEmpty)
     }
@@ -21,7 +21,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsEmbeddedAnywhereWillMatchChecklistsLocatedAtTheMiddleOfTheString() {
         let string = "The second regex should consider this as a valid checklist - [ ] Buy avocados - []"
         let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 2)
     }
@@ -31,7 +31,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsProperlyMatchesMultipleWhitespacePrefixes() {
         let string = "           - [ ] Buy avocados - [ ]"
         let regex = NSRegularExpression.regexForChecklists
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
     }
@@ -41,7 +41,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsEverywhereProperlyMatchesMultipleWhitespacePrefixes() {
         let string = "           - [ ] Buy avocados - [ ]"
         let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 2)
     }
@@ -51,7 +51,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsMatchProperlyFormattedChecklists() {
         let string = "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct."
         let regex = NSRegularExpression.regexForChecklists
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
         
         XCTAssertEqual(matches.count, 3)
     }
@@ -61,7 +61,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsWillNotMatchMalformedChecklists() {
         let string = "- [x ] Malformed!"
         let regex = NSRegularExpression.regexForChecklists
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertTrue(matches.isEmpty)
     }
@@ -71,7 +71,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsEverywhereWillNotMatchMalformedChecklists() {
         let string = "- [x ] Malformed!"
         let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertTrue(matches.isEmpty)
     }
@@ -81,7 +81,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsWillMatchChecklistsWithNoInternalSpaces() {
         let string = "- [] Item"
         let regex = NSRegularExpression.regexForChecklists
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
     }
@@ -91,7 +91,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
     func testRegexForChecklistsEverywhereWillMatchChecklistsWithNoInternalSpaces() {
         let string = "- [] Item"
         let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
-        let matches = regex.matches(in: string, options: [], range: string.rangeOfEntireString)
+        let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
     }

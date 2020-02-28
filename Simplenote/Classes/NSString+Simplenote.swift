@@ -8,7 +8,7 @@ extension NSString {
     /// Returns the full range of the receiver
     ///
     @objc
-    var rangeOfEntireString: NSRange {
+    var fullRange: NSRange {
         NSRange(location: 0, length: length)
     }
 }
