@@ -16,17 +16,13 @@
 
     NSString *plainString = [self.string copy];
     NSRegularExpression *regex = allowsMultiplePerLine ? NSRegularExpression.regexForChecklistsEmbeddedAnywhere : NSRegularExpression.regexForChecklists;
-    NSArray *matches = [regex matchesInString:plainString options:0 range:plainString.fullRange];
-    NSInteger positionAdjustment = 0;
+    NSArray *matches = [[[regex matchesInString:plainString
+                                        options:0
+                                          range:plainString.fullRange] reverseObjectEnumerator] allObjects];
 
     for (NSTextCheckingResult *match in matches) {
         NSRange matchedRange = match.range;
-        if (matchedRange.location == NSNotFound) {
-            continue;
-        }
-
-        NSRange adjustedRange = NSMakeRange(matchedRange.location - positionAdjustment, matchedRange.length);
-        if (NSMaxRange(adjustedRange) > self.length) {
+        if (matchedRange.location == NSNotFound || NSMaxRange(matchedRange) > self.length) {
             continue;
         }
 
@@ -39,15 +35,13 @@
         textAttachment.sizingFont = sizingFont;
 
         NSMutableAttributedString *attachmentString = [NSMutableAttributedString new];
-        if (allowsMultiplePerLine && adjustedRange.location != 0) {
+        if (allowsMultiplePerLine && matchedRange.location != 0) {
             [attachmentString appendString:NSString.spaceString];
         }
 
         [attachmentString appendAttachment:textAttachment];
 
-        [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
-
-        positionAdjustment += matchedRange.length - attachmentString.length;
+        [self replaceCharactersInRange:matchedRange withAttributedString:attachmentString];
     }
 }
 
