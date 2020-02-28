@@ -10,6 +10,12 @@ extension UIFont {
     ///
     static let defaultInlineAssetSizeMultiplier = CGFloat(0.7)
 
+    /// Returns the (Expected) InlineAsset Height: We consider the lineHeight, and apply a (default) multiplier, to account for ascending and descending metrics.
+    ///
+    func inlineAssetHeight(multiplier: CGFloat = defaultInlineAssetSizeMultiplier) -> CGFloat {
+        return ceil(lineHeight * multiplier)
+    }
+
     /// Returns the System Font for a given Style and Weight
     ///
     @objc
@@ -18,19 +24,26 @@ extension UIFont {
             return cachedFont
         }
 
-        let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style)
-        let unstyledFont = UIFont.systemFont(ofSize: descriptor.pointSize, weight: weight)
-        let preferredFont = UIFontMetrics(forTextStyle: style).scaledFont(for: unstyledFont)
-
+        let preferredFont = uncachedPreferredFont(for: style, weight: weight)
         FontCache.shared.storeFont(preferredFont, style: style, weight: weight)
 
         return preferredFont
     }
 
-    /// Returns the (Expected) InlineAsset Height: We consider the lineHeight, and apply a (default) multiplier, to account for ascending and descending metrics.
     ///
-    func inlineAssetHeight(multiplier: CGFloat = defaultInlineAssetSizeMultiplier) -> CGFloat {
-        return ceil(lineHeight * multiplier)
+    ///
+    private static func uncachedPreferredFont(for style: TextStyle, weight: Weight) -> UIFont {
+        let descriptor = UIFontDescriptor
+                            .preferredFontDescriptor(withTextStyle: style)
+                            .addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
+
+        // In iOS 11 we must resort to a non Dynamic Type mechanism, since the proper API simply does
+        // not respond well.
+        guard #available(iOS 12.0, *) else {
+            return UIFont.systemFont(ofSize: descriptor.pointSize, weight: weight)
+        }
+
+        return UIFont(descriptor: descriptor, size: .zero)
     }
 }
 
