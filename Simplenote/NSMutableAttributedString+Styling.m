@@ -14,7 +14,7 @@
         return;
     }
 
-    NSString *plainString = self.string.copy;
+    NSString *plainString = [self.string copy];
     NSRegularExpression *regex = allowsMultiplePerLine ? NSRegularExpression.regexForChecklistsEmbeddedAnywhere : NSRegularExpression.regexForChecklists;
     NSArray *matches = [regex matchesInString:plainString options:0 range:plainString.fullRange];
     NSInteger positionAdjustment = 0;
