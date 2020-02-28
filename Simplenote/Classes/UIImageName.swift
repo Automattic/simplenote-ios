@@ -39,6 +39,8 @@ enum UIImageName: Int, CaseIterable {
     case tags
     case tagsClosed
     case tagsOpen
+    case taskChecked
+    case taskUnchecked
     case trash
     case untagged
     case visibilityOn
@@ -120,6 +122,10 @@ extension UIImageName {
             return "icon_tags_close"
         case .tagsOpen:
             return "icon_tags_open"
+        case .taskChecked:
+            return "icon_task_checked"
+        case .taskUnchecked:
+            return "icon_task_unchecked"
         case .trash:
             return "icon_trash"
         case .untagged:
