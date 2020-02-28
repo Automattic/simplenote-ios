@@ -14,7 +14,7 @@ extension UIFont {
     ///
     @objc
     static func preferredFont(for style: TextStyle, weight: Weight) -> UIFont {
-        if let cachedFont = FontCache.cachedFont(for: style, weight: weight) {
+        if let cachedFont = FontCache.shared.cachedFont(for: style, weight: weight) {
             return cachedFont
         }
 
@@ -22,7 +22,7 @@ extension UIFont {
         let unstyledFont = UIFont.systemFont(ofSize: descriptor.pointSize, weight: weight)
         let preferredFont = UIFontMetrics(forTextStyle: style).scaledFont(for: unstyledFont)
 
-        FontCache.storeFont(preferredFont, style: style, weight: weight)
+        FontCache.shared.storeFont(preferredFont, style: style, weight: weight)
 
         return preferredFont
     }
@@ -37,16 +37,27 @@ extension UIFont {
 
 // MARK: - FontCache: Performance Helper!
 //
-private enum FontCache {
+private class FontCache {
 
     /// Internal Cache
     ///
-    private static var cache = [UIFont.TextStyle: [UIFont.Weight: UIFont]]()
+    private var cache = [UIFont.TextStyle: [UIFont.Weight: UIFont]]()
+
+    /// Yes. Another Singleton!
+    ///
+    static let shared = FontCache()
+
+
+    /// (Private) Initializer
+    ///
+    private init() {
+        startListeningToNotifications()
+    }
 
     /// Returns the stored entry for the specified Style + Weight combination (If Any!)
     /// - Note: This method is, definitely, non threadsafe!
     ///
-    static func cachedFont(for style: UIFont.TextStyle, weight: UIFont.Weight) -> UIFont? {
+    func cachedFont(for style: UIFont.TextStyle, weight: UIFont.Weight) -> UIFont? {
         assert(Thread.isMainThread)
 
         return cache[style]?[weight]
@@ -55,11 +66,29 @@ private enum FontCache {
     /// Stores a given UIFont instance, under the specified Style and Weight keys
     /// - Note: This method is, definitely, non threadsafe!
     ///
-    static func storeFont(_ font: UIFont, style: UIFont.TextStyle, weight: UIFont.Weight) {
+    func storeFont(_ font: UIFont, style: UIFont.TextStyle, weight: UIFont.Weight) {
         assert(Thread.isMainThread)
 
         var updatedStyleMap = cache[style] ?? [:]
         updatedStyleMap[weight] = font
         cache[style] = updatedStyleMap
+    }
+}
+
+
+// MARK: - Private Methods
+//
+private extension FontCache {
+
+    func startListeningToNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(contentSizeCategoryDidChange),
+                                               name: UIContentSizeCategory.didChangeNotification,
+                                               object: nil)
+    }
+
+    @objc
+    func contentSizeCategoryDidChange() {
+        cache.removeAll()
     }
 }
