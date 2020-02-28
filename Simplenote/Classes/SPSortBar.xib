@@ -38,13 +38,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RW-3j-JYk" userLabel="CenterView">
                             <rect key="frame" x="174.5" y="0.0" width="65" height="49"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhY-d9-S1B">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhY-d9-S1B">
                                     <rect key="frame" x="0.0" y="10" width="65" height="14.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuL-w7-cVY">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuL-w7-cVY">
                                     <rect key="frame" x="0.0" y="26.5" width="65" height="13.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <nil key="textColor"/>
@@ -70,8 +70,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="6RW-3j-JYk" secondAttribute="bottom" id="7Dt-tp-zci"/>
+                        <constraint firstItem="6RW-3j-JYk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rez-M1-JhX" secondAttribute="trailing" constant="10" id="9HO-KL-zbL"/>
                         <constraint firstItem="Rez-M1-JhX" firstAttribute="top" secondItem="9dB-bC-kqa" secondAttribute="top" id="Voy-uO-ijI"/>
-                        <constraint firstAttribute="bottom" secondItem="Rez-M1-JhX" secondAttribute="bottom" id="hfn-7M-FDt"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Rez-M1-JhX" secondAttribute="bottom" id="hfn-7M-FDt"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="top" secondItem="9dB-bC-kqa" secondAttribute="top" id="rbn-un-kPb"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="centerX" secondItem="9dB-bC-kqa" secondAttribute="centerX" id="u3W-Ew-9as"/>
                         <constraint firstItem="Rez-M1-JhX" firstAttribute="leading" secondItem="9dB-bC-kqa" secondAttribute="leading" id="wXN-SS-kcl"/>
