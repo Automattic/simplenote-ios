@@ -1418,9 +1418,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // Set the note's markdown tag according to the global preference (defaults NO for new accounts)
     newNote.markdown = [[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey];
 
-    NSString *currentTag = [[SPAppDelegate sharedDelegate] selectedTag];
-    if ([currentTag length] > 0) {
-        [newNote addTag:currentTag];
+    NSString *filteredTagName = [[SPAppDelegate sharedDelegate] filteredTagName];
+    if (filteredTagName.length > 0) {
+        [newNote addTag:filteredTagName];
     }
     
     // animate current note off the screen and begin editing new note
