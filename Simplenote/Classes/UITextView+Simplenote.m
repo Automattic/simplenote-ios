@@ -32,7 +32,7 @@ const int ChecklistItemLength = 3;
     NSString *lineString                = [rawString substringWithRange:lineRange];
     NSString *cleanLineString           = [lineString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *textAttachmentCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
-    NSArray *const bullets              = @[@"*", @"+", @"-", textAttachmentCode];
+    NSArray *const bullets              = @[@"*", @"+", @"-", @"•", textAttachmentCode];
     NSString *stringToAppendToNewLine   = nil;
     
     for (NSString *bullet in bullets) {
