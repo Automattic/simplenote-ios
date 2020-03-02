@@ -335,7 +335,7 @@ private enum Style {
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(15)
+    static let accessoryImageMinimumSize = CGFloat(16)
 
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
