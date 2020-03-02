@@ -235,7 +235,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTextColor: UIColor {
-        UIColor(lightColor: .gray80, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .white)
     }
 
     @objc
