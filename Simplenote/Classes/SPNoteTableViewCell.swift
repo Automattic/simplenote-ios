@@ -179,7 +179,7 @@ class SPNoteTableViewCell: UITableViewCell {
     private func refreshBodyAttributedString() {
         let bodyString = NSMutableAttributedString()
         if let prefixText = prefixText {
-            let prefixString = NSAttributedString(string: prefixText + String.space + String.space, attributes: [
+            let prefixString = NSAttributedString(string: prefixText + String.space, attributes: [
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
                 .paragraphStyle: Style.paragraphStyle,
@@ -335,7 +335,7 @@ private enum Style {
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(15)
+    static let accessoryImageMinimumSize = CGFloat(16)
 
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
