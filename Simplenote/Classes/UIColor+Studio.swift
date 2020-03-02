@@ -220,7 +220,7 @@ extension UIColor {
 
     @objc
     static var simplenoteWindowBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .black)
+        UIColor(studioColor: .black)
     }
 
     @objc
