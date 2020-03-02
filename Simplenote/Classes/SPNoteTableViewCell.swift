@@ -359,7 +359,7 @@ private enum Style {
 
     /// Outer Vertical StackView's Spacing
     ///
-    static let outerVerticalStackViewSpacing = CGFloat(2)
+    static let outerVerticalStackViewSpacing = CGFloat(4)
 
     /// TextView's paragraphStyle
     ///
