@@ -179,7 +179,7 @@ class SPNoteTableViewCell: UITableViewCell {
     private func refreshBodyAttributedString() {
         let bodyString = NSMutableAttributedString()
         if let prefixText = prefixText {
-            let prefixString = NSAttributedString(string: prefixText + String.space + String.space, attributes: [
+            let prefixString = NSAttributedString(string: prefixText + String.space, attributes: [
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
                 .paragraphStyle: Style.paragraphStyle,
