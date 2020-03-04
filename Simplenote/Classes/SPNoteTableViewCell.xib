@@ -34,7 +34,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="370" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEk-9d-8ay" userLabel="Title Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="348" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="346" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
