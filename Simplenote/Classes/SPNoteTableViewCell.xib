@@ -88,11 +88,11 @@ Body L2</string>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="1kl-z0-0K0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D1J-20-bJ0" secondAttribute="leading" id="8ai-Nb-yMT"/>
-                    <constraint firstItem="1kl-z0-0K0" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="13" id="BLy-sw-4lE"/>
+                    <constraint firstItem="1kl-z0-0K0" firstAttribute="top" secondItem="D1J-20-bJ0" secondAttribute="top" constant="12" id="BLy-sw-4lE"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1kl-z0-0K0" secondAttribute="trailing" id="DVN-iO-uti"/>
                     <constraint firstAttribute="trailing" secondItem="1kl-z0-0K0" secondAttribute="trailing" constant="16" id="Ig2-uE-hva"/>
                     <constraint firstItem="1kl-z0-0K0" firstAttribute="centerX" secondItem="D1J-20-bJ0" secondAttribute="centerX" id="S72-c6-I0t"/>
-                    <constraint firstAttribute="bottom" secondItem="1kl-z0-0K0" secondAttribute="bottom" constant="13" id="VZK-oO-oh0"/>
+                    <constraint firstAttribute="bottom" secondItem="1kl-z0-0K0" secondAttribute="bottom" constant="12" id="VZK-oO-oh0"/>
                     <constraint firstItem="1kl-z0-0K0" firstAttribute="leading" secondItem="D1J-20-bJ0" secondAttribute="leading" constant="6" id="k1X-7o-aAs"/>
                 </constraints>
                 <variation key="default">
