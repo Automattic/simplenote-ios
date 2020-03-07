@@ -1,1 +1,1 @@
-Simplenote,anteckning,göra,gör,anteckningar,synkronisera,dela,enkelt,markdown,etikett,att göra,lista,lås,moln,skriva
+Simplenote,anteckning,göra,gör,anteckningar,synkronisera,dela,enkelt,markdown,etikett,att göra

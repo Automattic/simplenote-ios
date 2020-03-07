@@ -1,1 +1,1 @@
-simplenote,nota,tomar,toma,notas,sincronización,compartir,simple,marcado,etiqueta,tarea,lista,bloqueo,nube,escribir
+simplenote,nota,tomar,toma,notas,sincronización,compartir,simple,marcado,etiqueta,tarea,lista

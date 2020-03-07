@@ -1,1 +1,1 @@
-Simplenote,note,prendre des notes,prise de notes,synchronisation,partage,simple,markdown,étiquette,liste de choses à faire,verrouillage,cloud,écriture
+Simplenote,note,prendre des notes,synchronisation,partage,simple,markdown,étiquette,cloud,écriture
