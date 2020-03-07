@@ -1,1 +1,1 @@
-notes,note,sync,simplenote,simple,todo,list
+simplenote, 笔记, 记录, 记录者, 笔记, 同步, 共享, 简单, markdown, 标签, 任务, 清单, 锁, 云, 撰写

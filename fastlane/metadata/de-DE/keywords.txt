@@ -1,1 +1,1 @@
-notizen,notiz,synchronisieren,simplenote,simple note,todo-liste,liste
+Simplenote,Notiz,erstellen,Ersteller,Notizen,synchronisieren,teilen,einfach,Markdown,Schlagwort,Aufgabeliste, Sperre,Cloud,schreiben
