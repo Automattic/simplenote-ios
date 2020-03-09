@@ -89,7 +89,7 @@ private extension SPOnboardingViewController {
     }
 
     func setupImageView() {
-        simplenoteImageView.tintColor = .simplenoteBlue30Color
+        simplenoteImageView.tintColor = .simplenoteBlue50Color
     }
 
     func setupLabels() {
