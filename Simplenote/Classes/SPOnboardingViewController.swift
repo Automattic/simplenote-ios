@@ -85,7 +85,7 @@ private extension SPOnboardingViewController {
         signUpButton.backgroundColor = .simplenoteBlue50Color
 
         loginButton.setTitle(OnboardingStrings.loginText, for: .normal)
-        loginButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
+        loginButton.setTitleColor(.simplenoteBlue50Color, for: .normal)
     }
 
     func setupImageView() {
