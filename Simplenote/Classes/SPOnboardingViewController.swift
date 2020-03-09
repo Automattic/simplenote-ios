@@ -98,7 +98,7 @@ private extension SPOnboardingViewController {
         simplenoteLabel.text = OnboardingStrings.brandText
         simplenoteLabel.textColor = textColor
         simplenoteLabel.adjustsFontSizeToFitWidth = true
-        simplenoteLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        simplenoteLabel.font = .preferredFont(for: .largeTitle, weight: .semibold)
 
         headerLabel.text = OnboardingStrings.headerText
         headerLabel.textColor = textColor
