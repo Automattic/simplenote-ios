@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-22 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Alle notities";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "Alfabetisch";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Alfabetisch: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Annuleren";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Een nieuwe notitie maken";
+
+/* Sort Mode: Creation Date */
+"Created" = "Aangemaakt";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Aangemaakt op: Nieuwste";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Aangepast";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Aangepast op: Nieuwste";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Aangepast op: Oudste";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Notitie niet gepubliceerd";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Notities";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Hernoemen";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Herstellen";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Zoeken";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Zoeken op tag";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Notities of tags zoeken";
 
 /* No comment provided by engineer. */
 "Security" = "Beveiliging";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Sorteervolgorde";
+
+/* Sort By Title */
+"Sort by:" = "Sorteren op:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Systeemstandaard";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Tag verwijderen uit de huidige notitie";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "De huidige notitie verplaatsen naar de prullenbak";

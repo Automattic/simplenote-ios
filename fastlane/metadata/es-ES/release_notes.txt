@@ -1,2 +1,7 @@
-- Ahora, Simplenote tiene iconos de aplicación completamente nuevos.
-- Se ha solucionado un error que afectaba las detecciones táctiles en los enlaces.
+La mejora en la integración con iOS hace que la aplicación sea más fácil usar: la pantalla de inicio de Simplenote coincide con la configuración de la apariencia de tu iOS. Además, es compatible con el autorrelleno de contraseñas, así que iniciar sesión nunca había sido más rápido.
+
+Tomar notas es solo la mitad de la batalla. Encontrar la nota que necesitas cuando la necesitas es la otra mitad. Hemos introducido un montón de mejoras de búsqueda que te ayudarán a ello: Los resultados de búsqueda ahora muestran etiquetas de coincidencia; la búsqueda admite los parámetros de búsqueda tag:palabra clave para ayudarte a encontrar las notas cuyas etiquetas contienen determinadas palabras clave; y la búsqueda ya no distingue los signos diacríticos, de modo que puedes introducir términos con o sin acentos y obtener los mismos resultados. Además, puedes alterar el orden de los resultados de búsqueda desde la lista de notas. ¡Impresionante!
+
+Cambios continuos en la apariencia para mejorar la usabilidad cada vez más: la barra de búsqueda ya no se muestra cuando el filtro de la papelera está activo, y se han cambiado las vistas previas para que puedan incluir más contenido en la pantalla.
+
+Y, como siempre, unas cuantas correcciones de errores: se ha solucionado un error que provocaba que el modo de búsqueda no se descartara adecuadamente y otro que provocaba que la apariencia del teclado no coincidiera con el tema elegido.

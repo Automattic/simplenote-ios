@@ -1,7 +1,36 @@
-Simplenote adalah cara mudah untuk menyimpan catatan, daftar, ide, dan masih banyak lagi. Catatan Anda akan disinkronkan dengan semua perangkat secara gratis.
+Simplenote adalah cara yang mudah untuk menulis catatan, membuat daftar hal yang harus dilakukan, mengembangkan ide, dan banyak lagi. Buka, catat beberapa ide, dan selesai. Seiring dengan berkembangnya koleksi Anda, tetap rapi dengan tag dan fitur sematkan, serta temukan hal yang Anda butuhkan dengan pencarian instan. Karena Simplenote akan tersinkron dengan seluruh perangkat secara gratis, catatan akan terus bersama Anda kapan saja.
 
-Pengalaman Simplenote adalah tentang kecepatan dan efisiensi. Buka, tulis ide, dan selesai. Seiring dengan bertambahnya catatan Anda, Anda dapat mencarinya seketika dan menjaganya tetap tertata dengan label dan sematan. Anda juga dapat berbagi catatan dan menerbitkannya untuk orang lain.
+- Pengalaman mencatat yang simpel
+- Sinkronkan semua catatan di seluruh perangkat
+- Lakukan kolaborasi dan bagikan
+- Tetap rapi dengan tag
+- Login dengan email atau akun WordPress.com Anda
 
-Cara terbaik untuk mempelajari tentang Simplenote adalah dengan mencobanya. Anda akan diminta untuk membuat sebuah akun. Ini memungkinkan catatan Anda dicadangkan secara online dan disinkronkan secara otomatis.
+SINKRONKAN DENGAN PERCAYA DIRI
+- Sinkronkan dengan mulus secara otomatis di seluruh komputer, ponsel, atau tablet.
+- Cadangkan dan sinkronkan segala hal selagi Anda mencatat, sehingga Anda tidak akan kehilangan isi catatan.
 
-Setelah mendaftar, cobalah membuat beberapa catatan! Kemudian buka simplenote.com untuk mengunduh Simplenote bagi perangkat Anda yang lain.
+LAKUKAN KOLABORASI DAN BAGIKAN
+- Lakukan kolaborasi dan bekerja bersama -- bagikan ide dengan rekan kerja, atau tulis daftar belanja dengan rekan sekamar Anda.
+- Pilih untuk memublikasikan konten Anda ke web, dan bagikan tautan ke siapa pun yang Anda mau.
+- Publikasikan secara langsung ke situs WordPress dengan menyambungkan akun WordPress.com Anda.
+- Bagikan dengan aplikasi pihak ketiga secara mudah dan cepat.
+
+RAPIKAN DAN CARI
+- Tetap rapi dengan tag, dan gunakan untuk pencarian dan penyortiran cepat.
+- Temukan apa yang Anda cari secara instan dengan penyorotan kata kunci.
+- Gunakan markdown untuk menambahkan pemformatan.
+- Buat daftar hal yang harus dilakukan.
+- Pilih urutan penyortiran catatan dan tag.
+- Sematkan catatan yang paling sering Anda gunakan.
+- Sunting tag secara langsung dengan menamai dan mengurutkan ulang.
+- Lindungi isi catatan Anda dengan kunci kode.
+
+--
+
+Kebijakan Privasi: https://automattic.com/privacy/
+Ketentuan Layanan: https://simplenote.com/terms/
+
+--
+
+Kunjungi simplenote.com guna mengunduh Simplenote untuk perangkat Anda yang lain.

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-12-02 01:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Semua Catatan";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "Menurut Abjad";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Menurut Abjad: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "Dengan membuat akun, Anda menyetujui";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Buat catatan baru";
+
+/* Sort Mode: Creation Date */
+"Created" = "Dibuat";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Dibuat: Paling baru";
@@ -197,7 +204,7 @@
 "Forgotten password?" = "Lupa kata sandi?";
 
 /* No comment provided by engineer. */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+"Great! Mind leaving a review to tell us what you like?" = "Bagus! Ingin memberikan ulasan tentang apa yang Anda suka?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Bantu kami menyempurnakan Simplenote dengan berbagi data penggunaan dengan alat analitik kami.";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Dimodifikasi";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Diubah: Paling baru";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Diubah: Paling lama";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Catatan tidak diterbitkan";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Catatan";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Ubah Nama";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Pulihkan";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Cari";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Cari berdasarkan Tag";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Cari catatan atau tag";
 
 /* No comment provided by engineer. */
 "Security" = "Keamanan";
@@ -432,7 +449,7 @@
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+"Simplenote iOS Feedback" = "Umpan Balik Simplenote iOS";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "Maaf!";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Urutkan";
+
+/* Sort By Title */
+"Sort by:" = "Urutkan berdasarkan:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Pengaturan Asal Sistem";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Buang label dari catatan saat ini";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "Pindahkan catatan saat ini ke sampah";

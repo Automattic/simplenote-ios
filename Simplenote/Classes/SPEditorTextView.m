@@ -15,7 +15,6 @@
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
-NSString *const CheckListRegExPattern = @"^(\\s+)?(-[ \t]+\\[[xX\\s]\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
@@ -390,8 +389,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
 
-    UIColor *checklistColor = [UIColor simplenoteNoteBodyPreviewColor];
-    [self.textStorage addChecklistAttachmentsForColor:checklistColor];
+    [self.textStorage processChecklistsWithColor:self.checklistsTintColor
+                                      sizingFont:self.checklistsFont
+                           allowsMultiplePerLine:NO];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain

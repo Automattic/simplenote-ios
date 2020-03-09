@@ -1,0 +1,7 @@
+La migliore integrazione con iOS consente di accedere facilmente all'app: la schermata di avvio di Simplenote ora corrisponde alle impostazioni dell'aspetto di iOS. E supporta il completamento automatico della password, per cui l'accesso non è mai stato più veloce.
+
+Prendere appunti è solo metà della fatica: trovare la nota che ti serve quando ne hai bisogno è l'altra metà e un sacco di miglioramenti nella ricerca ti aiuteranno a farlo: i risultati della ricerca ora mostrano i tag corrispondenti; la ricerca supporta i parametri di ricerca tag:parola chiave per aiutarti a trovare le note i cui tag contengono parole chiave specifiche; inoltre la ricerca ora non rileva la presenza di segni diacritici, quindi puoi inserire termini di ricerca con o senza accenti e ottenere comunque le corrispondenze. Puoi anche modificare l'ordine dei risultati della ricerca direttamente dall'elenco delle note. Fantastico, no?
+
+Gli aggiornamenti visivi continui rendono sempre più agevole l'uso: la barra di ricerca non viene più visualizzata quando il filtro del cestino è attivo e le anteprime sono state aggiornate per adattarsi a più contenuti sullo schermo.
+
+E, come sempre, alcune correzioni di bug: sono stati eliminati i bug che impedivano la corretta disattivazione della modalità di ricerca e un altro per cui l'aspetto della tastiera non corrispondeva al tema selezionato.

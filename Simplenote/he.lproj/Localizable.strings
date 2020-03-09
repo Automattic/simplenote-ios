@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-12-02 01:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "כל הפתקים";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "סדר אלפביתי";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "סדר אלפביתי: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "יצירת פתק חדש";
+
+/* Sort Mode: Creation Date */
+"Created" = "נוצר";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "נוצר: החדש ביותר";
@@ -197,7 +204,7 @@
 "Forgotten password?" = "שכחת את הסיסמה?";
 
 /* No comment provided by engineer. */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+"Great! Mind leaving a review to tell us what you like?" = "נהדר! רוצה לשלוח לנו חוות דעת ולספר לנו מה אהבת?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "שיתוף נתוני השימוש שלך בכלי הניתוח שלנו יעזור לנו לשפר את Simplenote.";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "תפריט";
 
+/* Sort Mode: Modified Date */
+"Modified" = "הותאם";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "עודכן: החדש ביותר";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "עודכן: הישן ביותר";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "הפתק לא פורסם";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "פתקים";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "שינוי שם";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "שחזור";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "חיפוש";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "לחפש לפי תגית";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "לחפש פתקים או תגיות";
 
 /* No comment provided by engineer. */
 "Security" = "אבטחה";
@@ -432,7 +449,7 @@
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+"Simplenote iOS Feedback" = "משוב על Simplenote iOS";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "מצטערים!";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "מיון לפי";
+
+/* Sort By Title */
+"Sort by:" = "למיין לפי:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "ברירת המחדל לפי המערכת";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "הסרת תגית מהפתק הנוכחי";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "תגית:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "העבר את הפתק הנוכחי לפח";
