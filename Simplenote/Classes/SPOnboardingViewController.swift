@@ -94,7 +94,7 @@ private extension SPOnboardingViewController {
 
     func setupLabels() {
         simplenoteLabel.text = OnboardingStrings.brandText
-        simplenoteLabel.textColor = UIColor.simplenoteGray80Color
+        simplenoteLabel.textColor = UIColor.simplenoteGray100Color
         simplenoteLabel.adjustsFontSizeToFitWidth = true
         simplenoteLabel.font = .preferredFont(for: .largeTitle, weight: .semibold)
 
