@@ -124,7 +124,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 - (void)configureTableHeaderView {
     self.tagsHeaderView = (SPTagHeaderView *)[SPTagHeaderView loadFromNib];
-    self.tagsHeaderView.titleLabel.text = [NSLocalizedString(@"Tags", nil) uppercaseString];
+    self.tagsHeaderView.titleLabel.text = NSLocalizedString(@"Tags", nil);
+    self.tagsHeaderView.titleLabel.font = [UIFont preferredFontFor:UIFontTextStyleTitle2 weight:UIFontWeightBold];
 
     UIButton *actionButton = self.tagsHeaderView.actionButton;
     [actionButton setTitle:NSLocalizedString(@"Edit", @"Edit Tags Action: Visible in the Tags List") forState:UIControlStateNormal];
@@ -188,7 +189,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 - (void)refreshStyle {
     self.rightBorderView.backgroundColor = [UIColor simplenoteDividerColor];
     [self.tagsHeaderView refreshStyle];
-    [self.tableView applySimplenoteGroupedStyle];
+    [self.tableView applySimplenotePlainStyle];
     [self.tableView reloadData];
 }
 

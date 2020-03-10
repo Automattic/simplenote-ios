@@ -45,7 +45,7 @@
 @property (nonatomic,   copy) NSString          *systemTags;
 @property (nonatomic,   copy) NSString          *modificationDatePreview;
 @property (nonatomic,   copy) NSString          *creationDatePreview;
-@property (nonatomic,   copy) NSString          *preview;
+
 @property (nonatomic,   copy) NSString          *titlePreview;
 @property (nonatomic,   copy) NSString          *bodyPreview;
 

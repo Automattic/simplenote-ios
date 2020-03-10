@@ -12,12 +12,15 @@
 #pragma mark - Simplenote-Y
 
 #import "Note.h"
+#import "Tag.h"
 #import "PersonTag.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "SPEditorTextView.h"
 #import "SPInteractiveTextStorage.h"
 #import "SPNotifications.h"
+#import "SPObjectManager.h"
+#import "SPRatingsHelper.h"
 #import "SPTextView.h"
 #import "SPTextField.h"
 #import "SPTableViewController.h"
@@ -33,6 +36,7 @@
 #import "UIImage+Colorization.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
+#import "NSString+Condensing.h"
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "SPNavigationController.h"

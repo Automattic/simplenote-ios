@@ -36,7 +36,6 @@
 
 @import SafariServices;
 
-NSString * const kWillAddNewNote = @"SPWillAddNewNote";
 
 CGFloat const SPCustomTitleViewHeight               = 44.0f;
 CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
@@ -54,6 +53,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
+                                        SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 {
     NSUInteger cursorLocationBeforeRemoteUpdate;
@@ -84,17 +84,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if (self) {
 
         // Editor
-        _noteEditorTextView = [[SPEditorTextView alloc] init];
-        _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
-
-        // Note:
-        // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
-        if (@available(iOS 11.0, *)) {
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
-                _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-                _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-            }
-        }
+        [self configureTextView];
 
         // TagView
         _tagView = _noteEditorTextView.tagView;
@@ -131,13 +121,30 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return self;
 }
 
+- (void)configureTextView
+{
+    _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
+    _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+
+    // Note:
+    // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
+    if (@available(iOS 11.0, *)) {
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
+            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
+            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
+        }
+    }
+}
+
 - (VSTheme *)theme {
     
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (void)applyStyle {
-    
+- (void)applyStyle
+{    
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
@@ -148,9 +155,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
-    _noteEditorTextView.font = bodyFont;
-    _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
+    self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
+    self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
     UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
@@ -209,10 +217,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureEditorIsFirstResponder];
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self ensureEditorIsFirstResponder];
 }
 
 - (void)configureNavigationBarBackground
@@ -251,12 +264,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)ensureTagViewIsVisible
 {
-    if (_tagView.alpha >= UIKitConstants.alphaFull) {
+    if (_tagView.alpha >= UIKitConstants.alpha1_0) {
         return;
     }
 
     [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        self.tagView.alpha = UIKitConstants.alphaFull;
+        self.tagView.alpha = UIKitConstants.alpha1_0;
      }];
 }
 
@@ -337,6 +350,27 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     [self refreshNavBarSizeWithCoordinator:coordinator];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+
+    if (@available(iOS 13.0, *)) {
+        if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
+            return;
+        }
+
+        // Okay. Let's talk.
+        // Whenever `applyStyle` gets called whenever this VC is not really onScreen, it might have issues with SPUserInteface.isDark
+        // (since the active traits might not really match the UIWindow's traits).
+        //
+        // For the above reason, we _must_ listen to Trait Change events, and refresh the style appropriately.
+        //
+        // Ref. https://github.com/Automattic/simplenote-ios/issues/599
+        //
+        [self applyStyle];
+    }
 }
 
 - (void)refreshNavBarSizeWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -582,11 +616,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)setIsPreviewing:(BOOL)isPreviewing {
-    _isPreviewing = isPreviewing;
-    [self ensureEditorIsFirstResponder];
-}
-
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
     NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
     [backButton setTitle:backButtonTitle
@@ -614,7 +643,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPNoteListViewController *listController = [[SPAppDelegate sharedDelegate] noteListViewController];
     if (_currentNote) {
         
-        NSIndexPath *notePath = [listController.fetchedResultsController indexPathForObject:_currentNote];
+        NSIndexPath *notePath = [listController.notesListController indexPathForObject:_currentNote];
         
         if (![[listController.tableView indexPathsForVisibleRows] containsObject:notePath])
             [listController.tableView scrollToRowAtIndexPath:notePath
@@ -684,7 +713,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     // hide the tags field
     if (!bVoiceoverEnabled) {
-        self.tagView.alpha = UIKitConstants.alphaZero;
+        self.tagView.alpha = UIKitConstants.alpha0_0;
     }
 }
 
@@ -810,6 +839,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         }];
     });
 }
+
+
+#pragma mark - SPInteractiveDismissableViewController
+
+- (BOOL)requiresFirstResponderRestorationBypass
+{
+    // Whenever an Interactive Dismiss OP kicks off, we're requesting the "First Responder Restoration" mechanism
+    // to be overridden.
+    // Ref. https://github.com/Automattic/simplenote-ios/issues/600
+    return YES;
+}
+
 
 #pragma mark search
 
@@ -1372,13 +1413,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kWillAddNewNote
-                                                        object:self];
-    
-    // Save current note first MAY NOT NEED THIS IF NOTE CANNOT BE VISIABLE AT SAME TIME
-    //    note.content = noteEditor.string;
-    //    [self save];
-    
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
     newNote.modificationDate = [NSDate date];
@@ -1387,9 +1421,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // Set the note's markdown tag according to the global preference (defaults NO for new accounts)
     newNote.markdown = [[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey];
 
-    NSString *currentTag = [[SPAppDelegate sharedDelegate] selectedTag];
-    if ([currentTag length] > 0) {
-        [newNote addTag:currentTag];
+    NSString *filteredTagName = [[SPAppDelegate sharedDelegate] filteredTagName];
+    if (filteredTagName.length > 0) {
+        [newNote addTag:filteredTagName];
     }
     
     // animate current note off the screen and begin editing new note
@@ -1422,19 +1456,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                          } completion:^(BOOL finished) {
                              
                              [snapshot removeFromSuperview];
-                             
+                             [self.noteEditorTextView becomeFirstResponder];
+
                          }];
-        
+
     } else {
-        
+
         [self updateNote:newNote];
         bBlankNote = YES;
     }
-    
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self->_noteEditorTextView becomeFirstResponder];
-    });
     
     bDisableShrinkingNavigationBar = NO;
 }

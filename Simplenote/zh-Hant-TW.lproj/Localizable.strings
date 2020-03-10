@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-23 00:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "所有筆記";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "依字母順序";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "依英文字母排序：A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "建立新筆記";
+
+/* Sort Mode: Creation Date */
+"Created" = "建立時間";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "建立時間：最新";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "選單";
 
+/* Sort Mode: Modified Date */
+"Modified" = "修改時間";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "修改時間：最新";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改時間：最舊";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "筆記未發表";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "筆記";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "重新命名";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "還原";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "搜尋";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "依標籤搜尋";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "搜尋筆記或標籤";
 
 /* No comment provided by engineer. */
 "Security" = "安全性";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "排序";
+
+/* Sort By Title */
+"Sort by:" = "排序依據：";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "系統預設";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "移除目前筆記的標籤";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "標籤：";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "將目前筆記移至垃圾桶";

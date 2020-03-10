@@ -16,7 +16,7 @@ extension UISearchBar {
 
         // Apply font to search field by traversing subviews
         for textField in subviewsOfType(UITextField.self) {
-            textField.font = .preferredFont(forTextStyle: .body)
+            textField.font = .systemFont(ofSize: 17.0)
             textField.textColor = .simplenoteTextColor
             textField.keyboardAppearance = SPUserInterface.isDark ? .dark : .default
         }

@@ -8,7 +8,6 @@ enum ThemeColorKey: String {
     case actionSheetButtonBackgroundHighlightColor
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
-    case emptyListViewFontColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor
     case tagViewFontColor

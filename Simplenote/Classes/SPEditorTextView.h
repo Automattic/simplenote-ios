@@ -9,7 +9,6 @@
 #import "SPTextView.h"
 @class SPTagView;
 
-extern NSString *const CheckListRegExPattern;
 
 @protocol SPEditorTextViewDelegate <UITextViewDelegate>
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url;
@@ -18,11 +17,12 @@ extern NSString *const CheckListRegExPattern;
 
 @interface SPEditorTextView : SPTextView
 
-@property (nonatomic) BOOL editing;
 @property (nonatomic) BOOL lockContentOffset;
 @property (nonatomic) BOOL overideLockContentOffset;
 
 @property (nonatomic, strong) SPTagView *tagView;
+@property (nonatomic, strong) UIFont *checklistsFont;
+@property (nonatomic, strong) UIColor *checklistsTintColor;
 
 - (void)scrollToBottom;
 - (void)scrollToTop;

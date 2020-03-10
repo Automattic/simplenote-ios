@@ -13,7 +13,6 @@
 #import "NSProcessInfo+Util.h"
 #import "SPModalActivityIndicator.h"
 #import "SPEditorTextView.h"
-#import "SPTransitionController.h"
 
 #import "SPObjectManager.h"
 #import "Note.h"
@@ -43,10 +42,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <UINavigationControllerDelegate,
-                                SimperiumDelegate,
-                                SPBucketDelegate,
-                                PinLockDelegate>
+@interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
 
 @property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
@@ -161,7 +157,6 @@
     self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
-    self.navigationController.delegate = self;
 
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
                                                                                 sidebarViewController:self.tagListViewController];
@@ -376,10 +371,7 @@
 {
     NSString *selectedNoteKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedNoteKey];
     if (selectedNoteKey) {
-        Note *selectedNote = [_noteListViewController noteForKey:selectedNoteKey];
-        if (selectedNote) {
-            [_noteListViewController openNote:selectedNote fromIndexPath:nil animated:NO];
-        }
+        [self.noteListViewController openNoteWithSimperiumKey:selectedNoteKey animated:NO];
     }
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSelectedNoteKey];
@@ -411,7 +403,7 @@
 
 - (void)themeDidChange
 {
-    self.window.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
+    self.window.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 }
 

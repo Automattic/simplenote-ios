@@ -34,6 +34,11 @@ extension UIColor {
 extension UIColor {
 
     @objc
+    static var simplenoteBlue30Color: UIColor {
+        UIColor(studioColor: .blue30)
+    }
+
+    @objc
     static var simplenoteBlue50Color: UIColor {
         UIColor(studioColor: .blue50)
     }
@@ -95,11 +100,16 @@ extension UIColor {
 
     @objc
     static var simplenoteNoteBodyPreviewColor: UIColor {
-        UIColor(lightColor: .gray60, darkColor: .gray20)
+        UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
     @objc
-    static var simplenoteNoteStatusImageColor: UIColor {
+    static var simplenoteNotePinStatusImageColor: UIColor {
+        .simplenoteTintColor
+    }
+
+    @objc
+    static var simplenoteNoteShareStatusImageColor: UIColor {
         UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
@@ -119,13 +129,28 @@ extension UIColor {
     }
 
     @objc
+    static var simplenotePlaceholderImageColor: UIColor {
+        UIColor(studioColor: .gray5)
+    }
+
+    @objc
+    static var simplenotePlaceholderTextColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray30)
+    }
+
+    @objc
+    static var simplenoteSearchBarBackgroundColor: UIColor {
+        UIColor(lightColor: .gray10, darkColor: .darkGray4)
+    }
+
+    @objc
     static var simplenoteSearchHighlightTextColor: UIColor {
         UIColor(studioColor: .white)
     }
 
     @objc
     static var simplenoteSwitchTintColor: UIColor {
-        UIColor(lightColor: .gray5, darkColor: .darkGray4)
+        UIColor(lightColor: .gray5, darkColor: .darkGray3)
     }
 
     @objc
@@ -135,32 +160,62 @@ extension UIColor {
 
     @objc
     static var simplenoteSecondaryActionColor: UIColor {
-        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
+        UIColor(studioColor: .blue50)
     }
 
     @objc
     static var simplenoteTertiaryActionColor: UIColor {
-        UIColor(lightColor: .gray30, darkColor: .gray50)
+        UIColor(studioColor: .gray40)
     }
 
     @objc
     static var simplenoteDestructiveActionColor: UIColor {
-        UIColor(lightColor: .red50, darkColor: .red40)
+        UIColor(studioColor: .red50)
+    }
+
+    @objc
+    static var simplenoteRestoreActionColor: UIColor {
+        UIColor(lightColor: .spYellow0, darkColor: .spYellow10)
     }
 
     @objc
     static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .spWhite, darkColor: .darkGray1)
+        UIColor(lightColor: .white, darkColor: .darkGray1)
     }
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .spWhite, darkColor: .darkGray8).withAlphaComponent(UIKitConstants.alphaQuarter)
+        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
+    }
+
+    @objc
+    static var simplenoteNavigationBarModalBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_8)
+    }
+
+    @objc
+    static var simplenoteSortBarBackgroundColor: UIColor {
+        UIColor(lightColor: .spGray1, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_8)
+    }
+
+    @objc
+    static var simplenoteModalOverlayColor: UIColor {
+        UIColor(studioColor: .black).withAlphaComponent(UIKitConstants.alpha0_4)
     }
 
     @objc
     static var simplenoteTableViewBackgroundColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .darkGray0)
+        UIColor(lightColor: .gray0, darkColor: .darkGray1)
+    }
+
+    @objc
+    static var simplenoteTableViewCellBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray2)
+    }
+
+    @objc
+    static var simplenoteTableViewHeaderBackgroundColor: UIColor {
+        UIColor(lightColor: .spGray2, darkColor: .darkGray2)
     }
 
     @objc
@@ -170,12 +225,12 @@ extension UIColor {
 
     @objc
     static var simplenoteDividerColor: UIColor {
-        UIColor(lightColor: .gray10, darkColor: .gray70)
+        UIColor(lightColor: .gray30, darkColor: .darkGray4).withAlphaComponent(UIKitConstants.alpha0_6)
     }
 
     @objc
     static var simplenoteTitleColor: UIColor {
-        UIColor(lightColor: .gray60, darkColor: .gray20)
+        UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
     @objc
@@ -190,12 +245,12 @@ extension UIColor {
 
     @objc
     static var simplenoteLightBlueColor: UIColor {
-        UIColor(lightColor: .blue5, darkColor: .darkGray8)
+        UIColor(lightColor: .blue5, darkColor: .darkGray3)
     }
 
     @objc
     static var simplenoteInteractiveTextColor: UIColor {
-        UIColor(lightColor: .blue60, darkColor: .blue20)
+        UIColor(lightColor: .blue50, darkColor: .blue30)
     }
 
 
@@ -218,11 +273,6 @@ extension UIColor {
 
     @objc
     static var simplenoteActionViewStatusTextColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteEmptyListViewTextColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
 

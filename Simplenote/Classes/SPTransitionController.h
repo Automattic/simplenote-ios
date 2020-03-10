@@ -3,21 +3,12 @@
 
 extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName;
 
-@protocol SPTransitionControllerDelegate <NSObject>
-- (void)interactionBegan;
+
+@protocol SPInteractiveDismissableViewController
+@property (readonly) BOOL requiresFirstResponderRestorationBypass;
 @end
 
-@interface SPTransitionController : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic) id <SPTransitionControllerDelegate> delegate;
-@property (nonatomic) BOOL transitioning;
-@property (nonatomic) BOOL hasActiveInteraction;
-@property (nonatomic) UINavigationControllerOperation navigationOperation;
-@property (nonatomic) UITableView *tableView;
-
-@property (nonatomic) NSIndexPath *selectedPath;
-
-- (instancetype)initWithTableView:(UITableView *)tableView
-             navigationController:(UINavigationController *)navigationController;
-
+@interface SPTransitionController : NSObject <UINavigationControllerDelegate>
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 @end

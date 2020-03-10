@@ -10,6 +10,8 @@
 @class Note;
 @class Tag;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SPObjectManager : NSObject
 
 + (SPObjectManager *)sharedManager;
@@ -32,3 +34,5 @@
 - (void)emptyTrash;
 
 @end
+
+NS_ASSUME_NONNULL_END

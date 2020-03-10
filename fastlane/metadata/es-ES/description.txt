@@ -1,8 +1,36 @@
-Simplenote es un modo simple para almacenar notas, listas, ideas y mas. Sus notas se mantendran sincronizadas en todos sus dispositivos, de manera gratuita.
+Simplenote es una forma fácil de tomar notas, crear listas de tareas, capturar ideas y mucho más. Abre la aplicación, escribe algunas líneas y listo. A medida que tu colección crezca, mantén el orden con etiquetas y chinchetas, y encuentra lo que necesites con la búsqueda instantánea. Como Simplenote se sincronizará gratuitamente con tus dispositivos, tus notas estarán contigo en todo momento.
 
-La experiencia Simplenote se trata de velocidad y eficiencia. Abra una nota, escriba sus ideas y lo que ha hecho. A medida que su coleccion de notas crece, usted puede buscar en las mismas de manera instantanea, y mantenerse organizado con etiquetas y notas fijadas. Usted tambien puede compartir o publicar sus notas.
+- Una experiencia sencilla de toma de notas
+- Sincroniza tus datos en todos tus dispositivos
+- Colabora y comparte contenido
+- Mantén el orden con etiquetas
+- Accede con tu correo electrónico o con tu cuenta de WordPress.com
 
-La mejor forma de aprender sobre Simplenote es probandolo. Se le pedira que cree una cuenta. Esto permite respaldar sus notas en la nube, y sincronizarlas automaticamente.
+SINCRONIZAR CON CONFIANZA
+- Tus datos se sincronizan automáticamente sin problemas en cualquier computadora, teléfono o tableta.
+- Haz una copia de seguridad y sincronízalo todo mientras tomas notas, para que nunca pierdas tu contenido.
 
-Luego de registrarse, intente crear notas! Luego dirijase a simplenote.com para descargar Simplenote en sus otros dispositivos.
+COLABORAR Y COMPARTIR
+- Colabora y trabaja en equipo: comparte ideas con un compañero de trabajo o crea una lista de la compra con tu compañero de piso.
+- Decide si quieres publicar tu contenido en la Web y comparte un enlace con quien tú quieras.
+- Publica contenido directamente en un sitio de WordPress conectando tu cuenta de WordPress.com.
+- Comparte contenido rápida y fácilmente con aplicaciones de terceros.
 
+ORGANIZAR Y BUSCAR
+- Mantén el orden aplicando etiquetas y úsalas para buscar y clasificar información rápidamente.
+- Encuentra de inmediato lo que buscas con el resaltado de palabras clave.
+- Utiliza el marcado para añadir formato.
+- Crea listas de tareas pendientes.
+- Elige el orden de clasificación de tus notas y etiquetas.
+- Fija las notas que más usas.
+- Edita las etiquetas directamente renombrándolas y reordenándolas.
+- Protege tu contenido con una contraseña.
+
+--
+
+Política de privacidad: https://automattic.com/privacy/
+Condiciones del servicio: https://simplenote.com/terms/
+
+--
+
+Ve a simplenote.com y descarga Simplenote en el resto de tus dispositivos.

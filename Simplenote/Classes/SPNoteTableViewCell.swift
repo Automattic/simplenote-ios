@@ -9,15 +9,11 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// Master View
     ///
-    @IBOutlet private var titleTextView: UITextView!
+    @IBOutlet private var titleLabel: UILabel!
 
     /// Accessory StackView
     ///
-    @IBOutlet private var bodyTextView: UITextView!
-
-    /// Accessory StackView's Top Constraint
-    ///
-    @IBOutlet private var accessoryStackView: UIStackView!
+    @IBOutlet private var bodyLabel: UILabel!
 
     /// Note's Left Accessory ImageView
     ///
@@ -81,53 +77,45 @@ class SPNoteTableViewCell: UITableViewCell {
         }
     }
 
-    /// Note's Title
+    /// Highlighted Keywords
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var titleText: String? {
-        get {
-            titleTextView.text
-        }
-        set {
-            guard let title = newValue else {
-                titleTextView.text = nil
-                return
-            }
+    var keywords: String?
 
-            titleTextView.attributedText = attributedText(from: title, font: Style.headlineFont, color: Style.headlineColor)
-        }
-    }
+    /// Highlighted Keywords's Tint Color
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var keywordsTintColor: UIColor = .simplenoteTintColor
+
+    /// Note's Title
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
+    ///
+    var titleText: String?
+
+    /// Body's Prefix: Designed to display Dates (with a slightly different style) when appropriate.
+    ///
+    var prefixText: String?
 
     /// Note's Body
+    /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var bodyText: String? {
-        get {
-            bodyTextView.text
-        }
-        set {
-            guard let body = newValue else {
-                bodyTextView.text = nil
-                return
-            }
-
-            bodyTextView.attributedText = attributedText(from: body, font: Style.previewFont, color: Style.previewColor)
-        }
-    }
+    var bodyText: String?
 
     /// In condensed mode we simply won't render the bodyTextView
     ///
     var rendersInCondensedMode: Bool {
         get {
-            bodyTextView.isHidden
+            bodyLabel.isHidden
         }
         set {
-            bodyTextView.isHidden = newValue
+            bodyLabel.isHidden = newValue
         }
     }
 
     /// Returns the Preview's Fragment Padding
     ///
     var bodyLineFragmentPadding: CGFloat {
-        return bodyTextView.textContainer.lineFragmentPadding
+        .zero
     }
 
 
@@ -150,8 +138,8 @@ class SPNoteTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupMargins()
         setupTextViews()
-        setupStackViews()
         refreshStyle()
         refreshConstraints()
     }
@@ -162,11 +150,56 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    /// Highlights the partial matches with the specified color.
+    /// Refreshed the Label(s) Attributed Strings: Keywords, Bullets and the Body Prefix will be taken into consideration
     ///
-    func highlightSubstrings(matching keywords: String, color: UIColor) {
-        titleTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
-        bodyTextView.textStorage.apply(color, toSubstringMatchingKeywords: keywords)
+    func refreshAttributedStrings() {
+        refreshTitleAttributedString()
+        refreshBodyAttributedString()
+    }
+
+    /// Refreshes the Title AttributedString: We'll consider Keyword Highlight and Text Attachments (bullets)
+    ///
+    private func refreshTitleAttributedString() {
+        titleLabel.attributedText = titleText.map {
+            NSAttributedString.previewString(from: $0,
+                                             font: Style.headlineFont,
+                                             textColor: Style.headlineColor,
+                                             highlighing: keywords,
+                                             highlightColor: keywordsTintColor,
+                                             paragraphStyle: Style.paragraphStyle)
+
+        }
+
+    }
+
+    /// Refreshes the Body AttributedString: We'll consider Keyword Highlight and Text Attachments (bullets)
+    ///
+    /// - Note: The `prefixText`, if any, will be prepended to the BodyText
+    ///
+    private func refreshBodyAttributedString() {
+        let bodyString = NSMutableAttributedString()
+        if let prefixText = prefixText {
+            let prefixString = NSAttributedString(string: prefixText + String.space, attributes: [
+                .font: Style.prefixFont,
+                .foregroundColor: Style.headlineColor,
+                .paragraphStyle: Style.paragraphStyle,
+                .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
+            ])
+
+            bodyString.append(prefixString)
+        }
+
+        if let suffixText = bodyText {
+            let suffixString = NSAttributedString.previewString(from: suffixText,
+                                                                font: Style.previewFont,
+                                                                textColor: Style.previewColor,
+                                                                highlighing: keywords,
+                                                                highlightColor: keywordsTintColor,
+                                                                paragraphStyle: Style.paragraphStyle)
+            bodyString.append(suffixString)
+        }
+
+        bodyLabel.attributedText = bodyString
     }
 }
 
@@ -175,30 +208,24 @@ class SPNoteTableViewCell: UITableViewCell {
 //
 private extension SPNoteTableViewCell {
 
+    /// Setup: Layout Margins
+    ///
+    func setupMargins() {
+        // Note: This one affects the TableView's separatorInsets
+        layoutMargins = .zero
+    }
+
     /// Setup: TextView
     ///
     func setupTextViews() {
-        titleTextView.isAccessibilityElement = false
-        titleTextView.textContainerInset = .zero
+        titleLabel.isAccessibilityElement = false
+        bodyLabel.isAccessibilityElement = false
 
-        bodyTextView.isAccessibilityElement = false
-        bodyTextView.textContainerInset = .zero
+        titleLabel.numberOfLines = Style.maximumNumberOfTitleLines
+        titleLabel.lineBreakMode = .byWordWrapping
 
-        let titleTextContainer = titleTextView.textContainer
-        titleTextContainer.maximumNumberOfLines = Style.maximumNumberOfTitleLines
-        titleTextContainer.lineFragmentPadding = .zero
-        titleTextContainer.lineBreakMode = .byWordWrapping
-
-        let bodyTextContainer = bodyTextView.textContainer
-        bodyTextContainer.maximumNumberOfLines = Style.maximumNumberOfBodyLines
-        bodyTextContainer.lineFragmentPadding = .zero
-        bodyTextContainer.lineBreakMode = .byWordWrapping
-    }
-
-    /// Setup: StackView
-    ///
-    func setupStackViews() {
-        accessoryStackView.isLayoutMarginsRelativeArrangement = true
+        bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
+        bodyLabel.lineBreakMode = .byWordWrapping
     }
 }
 
@@ -242,39 +269,18 @@ private extension SPNoteTableViewCell {
     /// Accessory's StackView should be aligned against the PreviewTextView's first line center
     ///
     func refreshConstraints() {
-        let lineHeight = Style.headlineFont.lineHeight
-        let accessoryDimension = ceil(lineHeight * Style.accessoryImageSizeRatio)
-        let cappedDimension = max(min(accessoryDimension, Style.accessoryImageMaximumSize), Style.accessoryImageMinimumSize)
-        let accessoryPaddingTop = ceil((lineHeight - cappedDimension) * 0.5)
+        let dimension = Style.accessoryImageDimension
 
-        accessoryStackView.layoutMargins = UIEdgeInsets(top: accessoryPaddingTop, left: 0, bottom: 0, right: 0)
-
-        accessoryLeftImageViewHeightConstraint.constant = cappedDimension
-        accessoryRightImageViewHeightConstraint.constant = cappedDimension
+        accessoryLeftImageViewHeightConstraint.constant = dimension
+        accessoryRightImageViewHeightConstraint.constant = dimension
     }
 
     /// Refreshes Accessory ImageView(s) and StackView(s) visibility, as needed
     ///
     func refreshAccessoriesVisibility() {
-        let isLeftImageEmpty = accessoryLeftImageView.image == nil
         let isRightImageEmpty = accessoryRightImageView.image == nil
 
-        accessoryLeftImageView.isHidden = isLeftImageEmpty
         accessoryRightImageView.isHidden = isRightImageEmpty
-        accessoryStackView.isHidden = isLeftImageEmpty && isRightImageEmpty
-    }
-
-    /// Returns a NSAttributedString instance representing a given String, with the specified Font and Color. We'll also process Checklists!
-    ///
-    func attributedText(from string: String, font: UIFont, color: UIColor) -> NSAttributedString {
-        let output = NSMutableAttributedString(string: string, attributes: [
-            .font: font,
-            .foregroundColor: color,
-            .paragraphStyle: Style.paragraphStyle
-        ])
-
-        output.addChecklistAttachments(for: color)
-        return output
     }
 }
 
@@ -283,18 +289,34 @@ private extension SPNoteTableViewCell {
 //
 extension SPNoteTableViewCell {
 
+    /// TableView's Separator Insets: Expected to align **exactly** with the label(s) Leading.
+    /// In order to get the TableView to fully respect this the following must be fulfilled:
+    ///
+    ///     1.  tableViewCell(s).layoutMargins = .zero
+    ///     2.  tableView.layoutMargins = .zero
+    ///     2.  tableView.separatorInsetReference = `.fromAutomaticInsets
+    ///
+    /// Then, and only then, this will work ferpectly 🔥
+    ///
+    @objc
+    static var separatorInsets: UIEdgeInsets {
+        let left = Style.containerInsets.left + Style.accessoryImageDimension + Style.accessoryImagePaddingRight
+        return UIEdgeInsets(top: .zero, left: left, bottom: .zero, right: .zero)
+    }
+
     /// Returns the Height that the receiver would require to be rendered, given the current User Settings (number of preview lines).
     ///
     /// Note: Why these calculations? why not Autosizing cells?. Well... Performance.
     ///
+    @objc
     static var cellHeight: CGFloat {
-        let verticalPadding: CGFloat = 6
-        let topTextViewPadding: CGFloat = 5
-
         let numberLines = Options.shared.numberOfPreviewLines
         let lineHeight = UIFont.preferredFont(forTextStyle: .headline).lineHeight
 
-        let result = 2.0 * verticalPadding + 2.0 * topTextViewPadding + CGFloat(numberLines) * lineHeight
+        let paddingBetweenLabels = Options.shared.condensedNotesList ? .zero : Style.outerVerticalStackViewSpacing
+        let insets = Style.containerInsets
+
+        let result = insets.top + paddingBetweenLabels + CGFloat(numberLines) * lineHeight + insets.bottom
 
         return result.rounded(.up)
     }
@@ -305,17 +327,23 @@ extension SPNoteTableViewCell {
 //
 private enum Style {
 
-    /// Accessory's Ratio (measured against Line Size)
+    /// Accessory's Dimension, based on the (current) Headline Font Size
     ///
-    static let accessoryImageSizeRatio = CGFloat(0.75)
+    static var accessoryImageDimension: CGFloat {
+        max(min(headlineFont.inlineAssetHeight(), accessoryImageMaximumSize), accessoryImageMinimumSize)
+    }
 
     /// Accessory's Minimum Size
     ///
     static let accessoryImageMinimumSize = CGFloat(16)
 
-    /// Accessory's Maximum Size
+    /// Accessory's Maximum Size (1.5 the asset's size)
     ///
     static let accessoryImageMaximumSize = CGFloat(24)
+
+    /// Accessory's Right Padding
+    ///
+    static let accessoryImagePaddingRight = CGFloat(6)
 
     /// Title's Maximum Lines
     ///
@@ -324,6 +352,14 @@ private enum Style {
     /// Body's Maximum Lines
     ///
     static let maximumNumberOfBodyLines = 2
+
+    /// Represents the Insets applied to the container view
+    ///
+    static let containerInsets = UIEdgeInsets(top: 13, left: 6, bottom: 13, right: 0)
+
+    /// Outer Vertical StackView's Spacing
+    ///
+    static let outerVerticalStackViewSpacing = CGFloat(2)
 
     /// TextView's paragraphStyle
     ///
@@ -363,9 +399,47 @@ private enum Style {
         .preferredFont(forTextStyle: .subheadline)
     }
 
+    /// Prefix Font: To be applied over the Body's Prefix (if any)
+    ///
+    static var prefixFont: UIFont {
+        .preferredFont(for: .subheadline, weight: .medium)
+    }
+
     /// Color to be applied over the cell upon selection
     ///
     static var selectionColor: UIColor {
         .simplenoteLightBlueColor
+    }
+}
+
+
+
+// MARK: - NSAttributedString Private Methods
+//
+private extension NSAttributedString {
+
+    /// Returns a NSAttributedString instance, stylizing the receiver with the current Highlighted Keywords + Font + Colors
+    ///
+    static func previewString(from string: String,
+                              font: UIFont,
+                              textColor: UIColor,
+                              highlighing keywords: String?,
+                              highlightColor: UIColor,
+                              paragraphStyle: NSParagraphStyle) -> NSAttributedString
+    {
+        let output = NSMutableAttributedString(string: string, attributes: [
+            .font: font,
+            .foregroundColor: textColor,
+            .paragraphStyle: paragraphStyle,
+            .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
+        ])
+
+        output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)
+
+        if let keywords = keywords {
+            output.apply(color: highlightColor, toSubstringsMatching: keywords)
+        }
+
+        return output
     }
 }

@@ -11,13 +11,13 @@ screenshots_path "./screenshots/"
 app_identifier "com.codality.NotationalFlow"
 
 # Make sure to update these keys for a new version
-app_version "4.15.1"
+app_version "4.16"
 
 privacy_url({
   'default' => 'https://simplenote.com/privacy/',
 })
 
-copyright('2019 Automattic')
+copyright('2020 Automattic')
 
 skip_binary_upload true
 overwrite_screenshots true

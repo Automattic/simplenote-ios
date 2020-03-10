@@ -3,41 +3,33 @@
 #import "SPSidebarContainerViewController.h"
 #import "Note.h"
 
-@class SPEmptyListView;
 @class SPBlurEffectView;
+@class SPPlaceholderView;
+@class SPSortBar;
+@class NotesListController;
+@class SearchDisplayController;
 
-typedef NS_ENUM(NSInteger, SPTagFilterType) {
-	SPTagFilterTypeUserTag = 0,
-	SPTagFilterTypeDeleted = 1,
-	SPTagFilterTypeShared = 2,
-    SPTagFilterTypePinned = 3,
-    SPTagFilterTypeUnread = 4,
-    SPTagFilterTypeUntagged = 5
-};
-
-@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate> {
-
-    NSTimer *searchTimer;
-
-    // Bools
-    BOOL bSearching;
-    BOOL bListViewIsEmpty;
-    BOOL bIndexingNotes;
-    BOOL bShouldShowSidePanel;
-}
-
-@property (nonatomic, strong, readonly) NSFetchedResultsController<Note *>  *fetchedResultsController;
-@property (nonatomic, strong) NSString                                      *searchText;
-@property (nonatomic) BOOL                                                  firstLaunch;
+@interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate>
 
 @property (nonatomic, strong, readonly) SPBlurEffectView                    *navigationBarBackground;
 @property (nonatomic, strong, readonly) UISearchBar                         *searchBar;
-@property (nonatomic, assign, readonly) SPTagFilterType                     tagFilterType;
-@property (nonatomic, strong, readonly) SPEmptyListView                     *emptyListView;
-@property (nonatomic, strong, readonly) UITableView                         *tableView;
+@property (nonatomic, assign, readonly) BOOL                                isIndexingNotes;
+@property (nonatomic, strong) UIImpactFeedbackGenerator                     *feedbackGenerator;
+@property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
+@property (nonatomic, strong) SPSortBar                                     *sortBar;
+@property (nonatomic, strong) UITableView                                   *tableView;
+@property (nonatomic, strong) UIStackView                                   *searchBarStackView;
+@property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
+@property (nonatomic, strong) NotesListController                           *notesListController;
+@property (nonatomic, weak) UIPopoverPresentationController                 *popoverController;
+@property (nonatomic) CGFloat                                               noteRowHeight;
+@property (nonatomic) CGFloat                                               tagRowHeight;
+@property (nonatomic) CGFloat                                               keyboardHeight;
+@property (nonatomic) BOOL                                                  firstLaunch;
+@property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 
-- (Note *)noteForKey:(NSString *)key;
 - (void)update;
+- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;
 - (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
 - (void)endSearching;

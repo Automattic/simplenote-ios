@@ -17,6 +17,7 @@ class SPBlurEffectView: UIVisualEffectView {
 
     /// Closure that's expected to return the TintColor we want. Runs on `iOS <13` everytime the active Theme is updated.
     ///
+    @objc
     var tintColorClosure: (() -> UIColor)? {
         didSet {
             refreshTintColor()

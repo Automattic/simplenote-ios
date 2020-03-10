@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-21 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-03-04 00:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Все заметки";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "По алфавиту";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "По алфавиту: А–Я";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "Создавая учетную запись, вы принимаете наши";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Отмена";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Создать новую заметку";
+
+/* Sort Mode: Creation Date */
+"Created" = "Создано";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Дата создания: сначала новые";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Меню";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Изменено";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Дата изменения: сначала новые";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Дата изменения: сначала старые";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Заметка не опубликована";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Заметки";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Переименовать";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Восстановить";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Поиск";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Поиск по меткам";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Поиск заметок или меток";
 
 /* No comment provided by engineer. */
 "Security" = "Безопасность";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Порядок сортировки";
+
+/* Sort By Title */
+"Sort by:" = "Сортировать по:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Настройки системы по умолчанию";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Удалить тег в текущей заметке";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "метка:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "Отправить текущую заметку в корзину";

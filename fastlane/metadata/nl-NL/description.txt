@@ -1,7 +1,36 @@
-Simplenote is een eenvoudige manier om notities, lijstjes, ideeën en andere zaken bij te houden. Je notities blijven gratis gesynchroniseerd op al je apparaten.
+Simplenote is een eenvoudige manier om aantekeningen te maken, takenlijsten op te stellen, ideeën vast te leggen en meer. Open Simplenote, schrijf je gedachten op en je bent klaar. Naarmate je verzameling groeit, kun je je opmerkingen geordend houden met tags en pins en zoeken naar wat je nodig hebt. Simplenote synchroniseert gratis met al je toestellen, waardoor je je opmerkingen altijd bij je hebt.
 
-De Simplenote-ervaring draait om snelheid en efficiency. Open Simplenote, schrijf je gedachten op en je bent klaar. Naarmate je collectie met notities groeit, kun je er snel in zoeken en ze geordend houden met tags en pins. Je kunt ook notities delen en ze publiceren voor anderen.
+- Een eenvoudige manier om aantekeningen te maken
+- Synchroniseer alles op al je toestellen
+- Werk samen en deel
+- Houd het overzicht met tags
+- Log in met je e-mail of WordPress.com account
 
-De beste manier om Simplenote te leren kennen, is het te proberen. Je wordt gevraagd een account aan te maken. Hierdoor kunnen back-ups worden gemaakt van je notities en kunnen ze automatisch worden gesynchroniseerd.
+VOL VERTROUWEN SYNCHRONISEREN
+- Synchroniseer automatisch naadloos op computer, telefoon of tablet.
+- Maak back-ups en synchroniseer terwijl je opmerkingen maakt, zodat je je inhoud nooit kwijtraakt.
 
-Als je je geregistreerd hebt, kun je een paar notities maken! Ga vervolgens naar simplenote.com om Simplenote te downloaden voor je andere apparaten.
+SAMENWERKEN EN DELEN
+- Werk samen; deel ideeën met collega's of maak een boodschappenlijstje met je huisgenoot.
+- Kies of je je inhoud wilt publiceren op het internet en deel een link met wie je maar wilt.
+- Koppel je WordPress.com account om direct op een WordPress site te publiceren.
+- Deel snel en eenvoudig met apps van derden.
+
+ORGANISEREN EN ZOEKEN
+- Houd het overzicht met tags en gebruik ze om snel te zoeken en te sorteren.
+- Vind meteen wat je zoekt met trefwoordmarkering.
+- Gebruik Markdown om opmaak in te voegen.
+- Stel takenlijsten op.
+- Kies de sorteervolgorde voor je aantekeningen en tags.
+- Pin de aantekeningen die je het meest gebruikt.
+- Bewerk tags direct door ze een nieuwe naam te geven en de volgorde te wijzigen.
+- Bescherm je inhoud met een pincodevergrendeling.
+
+--
+
+Privacybeleid: https://automattic.com/privacy/
+Servicevoorwaarden: https://simplenote.com/terms/
+
+--
+
+Ga naar simplenote.com om Simplenote te downloaden voor je andere apparaten.

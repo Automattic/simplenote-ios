@@ -6,44 +6,23 @@ import UIKit
 //
 extension UIView {
 
-    /// Animates a visibility switch, when applicable
+    /// Animates a visibility switch, when applicable.
+    /// - Note: We're animating the Alpha property, and effectively switching the `isHidden` property onCompletion.
+    ///         Whenever the animation is thru, we'll also restore Alpha to full (1.0).
     ///
-    func animateVisibility(isHidden: Bool, duration: TimeInterval = 0.3) {
+    func animateVisibility(isHidden: Bool, duration: TimeInterval = UIKitConstants.animationQuickDuration) {
         guard self.isHidden != isHidden else {
             return
         }
 
-        UIView.animate(withDuration: duration) {
-            self.isHidden = isHidden
-        }
-    }
+        let animationAlpha = isHidden ? UIKitConstants.alpha0_0 : UIKitConstants.alpha1_0
+        let completionAlpha = UIKitConstants.alpha1_0
 
-    /// Fades In the receiver
-    ///
-    @objc
-    func fadeIn() {
-        guard alpha != UIKitConstants.alphaFull else {
-            return
-        }
-
-        alpha = UIKitConstants.alphaZero
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
-            self.alpha = UIKitConstants.alphaFull
-        }
-    }
-
-    /// Fades Out the receiver
-    ///
-    @objc
-    func fadeOut(completion: (() -> Void)? = nil) {
-        guard alpha != UIKitConstants.alphaZero else {
-            return
-        }
-
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
-            self.alpha = UIKitConstants.alphaZero
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = animationAlpha
         }, completion: { _ in
-            completion?()
+            self.isHidden = isHidden
+            self.alpha = completionAlpha
         })
     }
 }

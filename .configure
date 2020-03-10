@@ -1,19 +1,22 @@
 {
-  "project-name": "Simplenote-iOS",
+  "project_name": "simplenote-ios",
   "branch": "master",
-  "pinned_hash": "c72379c4bfae75b1a36f6e2e22ae1c6a767d1dee",
+  "pinned_hash": "10c6ba49771ae477c2e9a7689d6fa808abab2fc6",
   "files_to_copy": [
     {
       "file": "iOS/simplenote/SPCredentials.swift",
-      "destination": "Simplenote/Credentials/SPCredentials.swift"
+      "destination": "Simplenote/Credentials/SPCredentials.swift",
+      "encrypt": true
     },
     {
       "file": "shared/google_cloud_keys.json",
-      "destination": ".configure-files/google_cloud_keys.json"
+      "destination": ".configure-files/google_cloud_keys.json",
+      "encrypt": true
     },
     {
       "file": "iOS/simplenote/project.env",
-      "destination": ".configure-files/project.env"
+      "destination": ".configure-files/project.env",
+      "encrypt": true
     }
   ],
   "file_dependencies": [

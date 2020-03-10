@@ -12,11 +12,9 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Attributed.h"
 #import "UIDevice+Extensions.h"
-#import "UIImage+Colorization.h"
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
-NSString *const CheckListRegExPattern = @"^(\\s+)?(-[ \t]+\\[[xX\\s]\\])";
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
@@ -86,8 +84,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
         tapGestureRecognizer.cancelsTouchesInView = NO;
         
         [self addGestureRecognizer:tapGestureRecognizer];
-        [self setEditing:NO];
+
+        // Why: Data Detectors simply don't work if `isEditable = YES`
+        [self setEditable:NO];
     }
+
     return self;
 }
 
@@ -154,17 +155,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setNeedsLayout];
 }
 
-- (void)setEditing:(BOOL)editing
-{
-    _editing = editing;
-    self.editable = editing;
-    
-    // HACK:
-    // God, forgive me. After enabling edit mode, "former" linkified substrings are rendered with a black color.
-    // This forces UITextView to render those substrings with the same color as the rest of the TextView.
-    self.textColor = self.textColor;
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
@@ -173,7 +163,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)becomeFirstResponder
 {
-    [self setEditing:YES];
+    [self setEditable:YES];
     return [super becomeFirstResponder];
 }
 
@@ -205,7 +195,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)didEndEditing:(NSNotification *)notification
 {
-    [self setEditing:NO];
+    [self setEditable:NO];
 }
 
 // Fixes are modified versions of https://gist.github.com/agiletortoise/a24ccbf2d33aafb2abc1
@@ -399,8 +389,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
 
-    UIColor *checklistColor = [UIColor simplenoteNoteBodyPreviewColor];
-    [self.textStorage addChecklistAttachmentsForColor:checklistColor];
+    [self.textStorage processChecklistsWithColor:self.checklistsTintColor
+                                      sizingFont:self.checklistsFont
+                           allowsMultiplePerLine:NO];
 }
 
 // Processes content of note editor, and replaces special string attachments with their plain

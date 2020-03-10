@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-23 03:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "모든 메모";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "알파벳순";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "알파벳순: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "새 메모 만들기";
+
+/* Sort Mode: Creation Date */
+"Created" = "생성됨";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "생성됨: 최신순";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "메뉴";
 
+/* Sort Mode: Modified Date */
+"Modified" = "수정됨";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "수정됨: 최신순";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "수정됨: 오래된 항목";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "메모 게시 안 됨";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "메모";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "이름 변경";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "복구";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "검색";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "태그로 검색";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "메모 또는 태그 검색";
 
 /* No comment provided by engineer. */
 "Security" = "보안";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "정렬 순서";
+
+/* Sort By Title */
+"Sort by:" = "정렬 기준:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "시스템 기본값";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "현재 메모에서 태그 제거";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "태그:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "휴지통으로 현재 메모 이동";

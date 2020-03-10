@@ -20,10 +20,11 @@
 + (SPObjectManager *)sharedManager
 {
     static SPObjectManager *sharedManager = nil;
-    if (!sharedManager) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         sharedManager = [[SPObjectManager alloc] init];
-    }
-    
+    });
+
     return sharedManager;
 }
 

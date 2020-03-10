@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Pob Nodyn";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "Alphabetically";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Alphabetically: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Canslo";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Creu nodyn newydd";
+
+/* Sort Mode: Creation Date */
+"Created" = "Created";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Created: Newest";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Dewislen";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Modified";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Modified: Newest";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Nodyn heb ei gyhoeddi";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Nodiadau";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Ailenwi";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Adfer";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Search";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Search by Tag";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Search notes or tags";
 
 /* No comment provided by engineer. */
 "Security" = "Diogelwch";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Trefn didoli";
+
+/* Sort By Title */
+"Sort by:" = "Sort by:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Tynnu'r tag o'r nodyn cyfredol";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "Symud y nodyn cyfredol i'r sbwriel";

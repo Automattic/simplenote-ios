@@ -30,13 +30,17 @@ enum UIImageName: Int, CaseIterable {
     case pin
     case restore
     case settings
+    case simplenoteLogo
     case share
     case shared
+    case sortOrder
     case tag
     case tagViewDeletion
     case tags
     case tagsClosed
     case tagsOpen
+    case taskChecked
+    case taskUnchecked
     case trash
     case untagged
     case visibilityOn
@@ -100,10 +104,14 @@ extension UIImageName {
             return "icon_restore"
         case .settings:
             return "icon_settings"
+        case .simplenoteLogo:
+            return "logo_login"
         case .share:
             return "icon_share"
         case .shared:
             return "icon_shared"
+        case .sortOrder:
+            return "icon_sort_order"
         case .tag:
             return "icon_tag"
         case .tagViewDeletion:
@@ -114,6 +122,10 @@ extension UIImageName {
             return "icon_tags_close"
         case .tagsOpen:
             return "icon_tags_open"
+        case .taskChecked:
+            return "icon_task_checked"
+        case .taskUnchecked:
+            return "icon_task_unchecked"
         case .trash:
             return "icon_trash"
         case .untagged:

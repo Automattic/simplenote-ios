@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-23 00:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "すべてのノート";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "アルファベット順";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "アルファベット順 :A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "キャンセル";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "新規ノートを作成";
+
+/* Sort Mode: Creation Date */
+"Created" = "作成日";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "作成日 :最新";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "メニュー";
 
+/* Sort Mode: Modified Date */
+"Modified" = "更新日";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "更新日 :最新";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "更新日 :最も古い";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "非公開ノート";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "メモ";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "タイトル変更";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "復元";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "検索";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "タグで検索";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "メモまたはタグを検索";
 
 /* No comment provided by engineer. */
 "Security" = "セキュリティ";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "ソート順";
+
+/* Sort By Title */
+"Sort by:" = "並び順 :";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "システムの初期設定";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "現在のノートからタグを削除";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "タグ :";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "現在のノートをゴミ箱へ移動";
