@@ -261,7 +261,6 @@ DEPENDENCIES
   fastlane-plugin-sentry
   fastlane-plugin-wpmreleasetoolkit!
   octokit (~> 4.0)!
-  rake!
   rubyzip (~> 1.3)!
   xcpretty-travis-formatter!
 
