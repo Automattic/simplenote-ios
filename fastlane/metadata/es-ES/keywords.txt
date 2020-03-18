@@ -1,1 +1,1 @@
-notas,nota,sincronizar,nota simple,simple,tareas pendientes,lista
+simplenote,nota,tomar,toma,notas,sincronización,compartir,simple,marcado,etiqueta,tarea,lista

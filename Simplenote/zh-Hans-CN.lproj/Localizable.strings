@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-27 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-03-04 03:54:07+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "全部笔记";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "按字母顺序";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "按字母顺序：A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "创建帐户即表示，您同意我们的";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "创建新笔记";
+
+/* Sort Mode: Creation Date */
+"Created" = "创建日期";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "创建时间：最新";
@@ -197,7 +204,7 @@
 "Forgotten password?" = "忘记密码？";
 
 /* No comment provided by engineer. */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+"Great! Mind leaving a review to tell us what you like?" = "太棒了！能否写下评论，告知我们您具体喜欢哪些方面？";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "与分析工具分享使用数据，帮助我们改善 Simplenote。";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "菜单";
 
+/* Sort Mode: Modified Date */
+"Modified" = "修改日期";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "修改时间：最新";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改时间：最旧";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "笔记尚未发布";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "笔记";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "重命名";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "恢复";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "搜索";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "按标签搜索";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "搜索笔记或标签";
 
 /* No comment provided by engineer. */
 "Security" = "安全";
@@ -432,7 +449,7 @@
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+"Simplenote iOS Feedback" = "Simplenote iOS 反馈";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "抱歉！";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "排序";
+
+/* Sort By Title */
+"Sort by:" = "排序方式：";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "系统默认";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "将标签从当前笔记中删除";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "标签：";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "将当前笔记移至回收站";

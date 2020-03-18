@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-22 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-03-04 00:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Todas as anotações";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "Ordem alfabética";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Ordem alfabética: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Cancelar";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Criar uma nova anotação";
+
+/* Sort Mode: Creation Date */
+"Created" = "Criação";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Criado: mais recente";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Modificação";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Modificado: mais recente";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modificado: mais antiga";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Anotação não publicada";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Anotações";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Renomear";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restaurar";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Pesquisar";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Pesquisar por Tag";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Pesquisar anotações ou tags";
 
 /* No comment provided by engineer. */
 "Security" = "Segurança";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Organizar";
+
+/* Sort By Title */
+"Sort by:" = "Ordenar por:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistema padrão";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Remover tag da anotação atual";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "Mover a anotação atual para a lixeira";

@@ -1,1 +1,1 @@
-notas,nota,sincronizar,simplenote,simple,a fazer,lista
+simplenote,anotação,fazer,escrever,anotações,sincronizar,compartilhar,simple,markdown,tag,tarefas

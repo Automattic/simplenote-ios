@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-12-03 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "Tutte le note";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "In ordine alfabetico";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "In ordine alfabetico: A-Z";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "Se crei un account, accetti i nostri";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Annulla";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Crea una nuova nota";
+
+/* Sort Mode: Creation Date */
+"Created" = "Data creazione";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "Data di creazione: più recente";
@@ -197,7 +204,7 @@
 "Forgotten password?" = "Password dimenticata?";
 
 /* No comment provided by engineer. */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+"Great! Mind leaving a review to tell us what you like?" = "Fantastico! Potresti lasciare una recensione per dirci cosa ti piace?";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Aiutaci a migliorare Simplenote condividendo i dato di utilizzo con il nostro strumento di analisi.";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
+/* Sort Mode: Modified Date */
+"Modified" = "Data modifica";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Data di modifica: più recente";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Data di modifica: meno recente";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "Nota non pubblicata";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "Note";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "Rinomina";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Ripristina";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "Ricerca";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "Cerca per tag";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Cerca note o tag";
 
 /* No comment provided by engineer. */
 "Security" = "Sicurezza";
@@ -432,7 +449,7 @@
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+"Simplenote iOS Feedback" = "Feedback di Simplenote iOS";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "Siamo spiacenti.";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Ordina per";
+
+/* Sort By Title */
+"Sort by:" = "Ordina per:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistema predefinito";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "Rimuovi il tag dalla nota";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "- Tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "Sposta la nota nel cestino";

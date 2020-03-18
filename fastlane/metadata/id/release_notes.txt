@@ -1,0 +1,7 @@
+Peningkatan integrasi di iOS menjadikan pengalaman Anda menggunakan aplikasi berjalan lancar: Layar peluncuran Simplenote kini sesuai dengan Pengaturan Tampilan iOS. Serta mendukung Isi Otomatis Kata Sandi, sehingga aktivitas login jadi lebih cepat dari sebelumnya.
+
+Menulis catatan hanyalah sebagian dari perjuangan. Sisanya adalah menemukan catatan saat Anda membutuhkannya, dan serangkaian peningkatan fitur pencarian akan membantu Anda melakukannya: Hasil pencarian kini menampilkan tag yang cocok; pencarian mendukung tag: parameter pencarian kata kunci untuk membantu Anda menemukan catatan dengan tag berisi kata kunci tertentu; dan pencarian kini tidak terpengaruh dengan diakritik, sehingga Anda dapat memasukkan istilah pencarian dengan atau tanpa aksen dan hasilnya tetap sesuai. Anda juga dapat mengubah urutan hasil pencarian langsung dari Daftar Catatan. Keren!
+
+Upgrade visual berkelanjutan membuat kemampuan penggunaan menjadi lebih baik dan lebih baik lagi: bilah pencarian tidak lagi ditampilkan saat Penyaring Tempat Sampah aktif, dan pratinjau telah diupgrade agar bisa memuat lebih banyak konten di layar.
+
+Dan, seperti biasanya, perbaikan beberapa bug: bug yang membuat Mode Pencarian tidak tertutup dengan benar, dan bug lain yang menyebabkan tampilan keyboard tidak sesuai dengan tema yang dipilih kini tak ada lagi.

@@ -1,0 +1,7 @@
+Dank der verbesserten Integration in iOS kannst du die App einfach öffnen: Der Startbildschirm von Simplenote entspricht jetzt deinen iOS-Designeinstellungen. Darüber hinaus wird die automatische Eingabe des Passworts unterstützt. So geht die Anmeldung schneller als je zuvor.
+
+Sich Notizen zu machen ist eine Sache – die Notizen dann zu finden, wenn du sie brauchst, ist die andere Sache. Eine Reihe von Verbesserungen bei der Suche kann dir dabei helfen: Die Suchergebnisse zeigen jetzt passende Schlagwörter an. Die Suche unterstützt Suchparameter vom Typ „tag:stichwort“, damit du Notizen finden kannst, dessen Schlagwörter bestimmte Stichwörter enthalten. Die Suche kann jetzt unabhängig von diakritischen Zeichen, d. h., du kannst jetzt Suchbegriffe mit oder ohne Akzente eingeben und erhältst trotzdem passende Ergebnisse. Du kannst auch die Reihenfolge der Suchergebnisse direkt in deiner Notizenliste ändern. Super, oder?
+
+Durch kontinuierliche visuelle Upgrades steigt die Benutzerfreundlichkeit: Die Suchleiste zeigt nicht länger an, wenn der Papierkorbfilter aktiv ist, und die Vorschaufunktion wurde so aktualisiert, dass mehr Inhalte auf den Bildschirm passen.
+
+Und wie immer wurden auch einige Fehler behoben: Es wurde ein Fehler, bei dem der Suchmodus nicht ordentlich beendet wurde, und ein weiterer Fehler behoben, bei dem das Tastaturdesign nicht dem ausgewählten Theme entsprach.

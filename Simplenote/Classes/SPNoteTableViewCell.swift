@@ -179,7 +179,7 @@ class SPNoteTableViewCell: UITableViewCell {
     private func refreshBodyAttributedString() {
         let bodyString = NSMutableAttributedString()
         if let prefixText = prefixText {
-            let prefixString = NSAttributedString(string: prefixText + String.space + String.space, attributes: [
+            let prefixString = NSAttributedString(string: prefixText + String.space, attributes: [
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
                 .paragraphStyle: Style.paragraphStyle,
@@ -335,7 +335,7 @@ private enum Style {
 
     /// Accessory's Minimum Size
     ///
-    static let accessoryImageMinimumSize = CGFloat(15)
+    static let accessoryImageMinimumSize = CGFloat(16)
 
     /// Accessory's Maximum Size (1.5 the asset's size)
     ///
@@ -355,7 +355,7 @@ private enum Style {
 
     /// Represents the Insets applied to the container view
     ///
-    static let containerInsets = UIEdgeInsets(top: 13, left: 6, bottom: 13, right: 0)
+    static let containerInsets = UIEdgeInsets(top: 12, left: 6, bottom: 12, right: 0)
 
     /// Outer Vertical StackView's Spacing
     ///
@@ -434,7 +434,7 @@ private extension NSAttributedString {
             .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
         ])
 
-        output.addChecklistAttachments(for: textColor)
+        output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)
 
         if let keywords = keywords {
             output.apply(color: highlightColor, toSubstringsMatching: keywords)

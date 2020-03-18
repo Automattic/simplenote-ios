@@ -1,2 +1,7 @@
-- O Simplenote agora tem novos ícones de aplicativo!
-- Correção do bug que afetava a detecção de toque em links.
+A integração aprimorada para iOS melhora o uso do aplicativo: A tela de início do Simplenote agora corresponde aos seus ajustes de aparência do iOS. Além disso, ele agora aceita Preenchimento Automático de senha. Assim, você pode fazer o login com mais agilidade.
+
+Fazer anotações é só metade do caminho. A outra metade consiste em encontrar as anotações de que você precisa nos momentos certos. Os aprimoramentos de busca vão ajudar você com essa parte: Os resultados de buscas agora exibem tags correspondentes; a busca aceita os parâmetros tag:palavra-chave para encontrar buscas que tenham palavras-chaves específicas nas tags; e as correspondências vão aparecer mesmo se você não digitar os acentos das palavras na busca. Além disso, você ainda pode alterar a ordem dos resultados da busca pela Lista de Anotações. Legal!
+
+Os upgrades visuais contínuos melhoram cada vez mais o uso: A barra de pesquisa não indica mais quando o Filtro da Lixeira está ativo, e as visualizações foram atualizadas para comportar mais conteúdo na tela.
+
+Como sempre, algumas correções de bugs: os bugs que impediam que o Modo de busca fosse dispensado corretamente, além de outro que fazia com que o teclado não correspondesse ao tema selecionado, foram resolvidos.

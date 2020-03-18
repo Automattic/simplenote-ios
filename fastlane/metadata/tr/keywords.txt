@@ -1,1 +1,1 @@
-notlar,not,sync,simplenote,basit,yapacaklar,liste
+simplenote,not,tutma,tutucu,notlar,eşitleme,paylaşma,basit,markdown,etiket,yapılacaklar,liste,kilit

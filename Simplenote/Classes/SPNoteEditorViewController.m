@@ -126,6 +126,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _noteEditorTextView = [[SPEditorTextView alloc] init];
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 
     // Note:
     // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
@@ -142,8 +143,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (void)applyStyle {
-    
+- (void)applyStyle
+{    
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle2 weight:UIFontWeightBold];
     UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
@@ -154,8 +155,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
-    _noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    _noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
+    self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
+    self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
     UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
