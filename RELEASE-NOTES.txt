@@ -15,6 +15,7 @@
 -   Dark Mode is now darker than just dark, for an improved dark side experience.
 -   Simplenote's Launch Screen will now match iOS's Appearance Settings
 -   Simplenote now supports Password Autofill support. Logging in has never been faster!
+-   Now the Sidebar will show up on the right hand side, whenever Right to Left is enabled on your phone.
 
 4.15.1
 ------

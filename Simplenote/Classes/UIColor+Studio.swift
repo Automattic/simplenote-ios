@@ -77,6 +77,11 @@ extension UIColor {
     static var simplenoteGray80Color: UIColor {
         UIColor(studioColor: .gray80)
     }
+    
+    @objc
+    static var simplenoteGray100Color: UIColor {
+        UIColor(studioColor: .gray100)
+    }
 
     @objc
     static var simplenoteRed50Color: UIColor {
@@ -95,7 +100,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNoteHeadlineColor: UIColor {
-        UIColor(lightColor: .gray80, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .white)
     }
 
     @objc
@@ -125,7 +130,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNavigationBarTitleColor: UIColor {
-        UIColor(lightColor: .gray80, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .white)
     }
 
     @objc
@@ -220,7 +225,7 @@ extension UIColor {
 
     @objc
     static var simplenoteWindowBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .black)
+        UIColor(studioColor: .black)
     }
 
     @objc
@@ -235,7 +240,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTextColor: UIColor {
-        UIColor(lightColor: .gray80, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .white)
     }
 
     @objc

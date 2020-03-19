@@ -97,8 +97,8 @@ private extension SPSortBar {
 
     func setupTextLabels() {
         titleLabel.text = NSLocalizedString("Sort by:", comment: "Sort By Title")
-        titleLabel.font = .preferredFont(for: .caption1, weight: .regular)
-        descriptionLabel.font = .preferredFont(for: .caption1, weight: .medium)
+        titleLabel.font = .systemFont(ofSize: 12.0)
+        descriptionLabel.font = .systemFont(ofSize: 12.0)
     }
 
     func setupOrderButton() {

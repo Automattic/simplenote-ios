@@ -24,7 +24,7 @@
 		051E7EA368E0DBAE2EE92CB9 /* Pods_SimplenoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
-		374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */; };
+		374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */; };
 		375D24B121E01131007AB25A /* html5_blocks.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249D21E0112B007AB25A /* html5_blocks.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B221E01131007AB25A /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D249F21E0112C007AB25A /* buffer.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		375D24B321E01131007AB25A /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 375D24A021E0112C007AB25A /* autolink.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -192,6 +192,7 @@
 		B5476BBD23D8A71D000E7723 /* UIFont+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */; };
 		B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBE23D8B686000E7723 /* NotesListSection.swift */; };
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
+		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
@@ -230,6 +231,8 @@
 		B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584DA35236722D400B2844A /* SPBlurEffectView.swift */; };
 		B58BF1FB23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */; };
 		B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */; };
+		B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */; };
+		B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
@@ -366,7 +369,7 @@
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
 		373AD30621C4739300A4EA89 /* NSMutableAttributedString+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Styling.h"; sourceTree = "<group>"; };
 		373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Styling.m"; sourceTree = "<group>"; };
-		374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPChecklistTest.swift; sourceTree = "<group>"; };
+		374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringStylingTests.swift; sourceTree = "<group>"; };
 		375D249C21E0112B007AB25A /* html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html.h; sourceTree = "<group>"; };
 		375D249D21E0112B007AB25A /* html5_blocks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = html5_blocks.c; sourceTree = "<group>"; };
 		375D249E21E0112C007AB25A /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
@@ -512,6 +515,7 @@
 		B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIFont+Simplenote.swift"; path = "Classes/UIFont+Simplenote.swift"; sourceTree = "<group>"; };
 		B5476BBE23D8B686000E7723 /* NotesListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListSection.swift; path = Classes/NotesListSection.swift; sourceTree = "<group>"; };
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
+		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -564,6 +568,8 @@
 		B584DA35236722D400B2844A /* SPBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPBlurEffectView.swift; path = Classes/SPBlurEffectView.swift; sourceTree = "<group>"; };
 		B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewRowAction+Simplenote.swift"; path = "Classes/UITableViewRowAction+Simplenote.swift"; sourceTree = "<group>"; };
 		B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPPlaceholderView.swift; path = Classes/SPPlaceholderView.swift; sourceTree = "<group>"; };
+		B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSRegularExpression+Simplenote.swift"; path = "Classes/NSRegularExpression+Simplenote.swift"; sourceTree = "<group>"; };
+		B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSString+Simplenote.swift"; path = "Classes/NSString+Simplenote.swift"; sourceTree = "<group>"; };
 		B59314D51A486B3800B651ED /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		B59314D61A486B3800B651ED /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -1050,6 +1056,7 @@
 		B52F35D422F3573300724793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */,
 				B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */,
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
 				B51D7C7823D9CFA4005D4B77 /* StringSimplenoteTests.swift */,
@@ -1113,7 +1120,6 @@
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
-				374F5EF421BF057E00B57E8B /* SPChecklistTest.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1129,8 +1135,10 @@
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */,
+				B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */,
 				B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */,
 				DE7E545A214E34C8008D9928 /* NSString+Count.swift */,
+				B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */,
 				B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */,
 				B5FFC9CF23FC3D7A00BECF7D /* NSWritingDirection+Simplenote.swift */,
 				B5CDE61D2150834C00C3FED4 /* Simperium+Simplenote.h */,
@@ -1523,6 +1531,7 @@
 				B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */,
 				E29ADD4A17848E8500E55842 /* SPAppDelegate.h */,
 				E29ADD4B17848E8500E55842 /* SPAppDelegate.m */,
+				B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */,
 			);
 			path = Simplenote;
 			sourceTree = "<group>";
@@ -2073,6 +2082,7 @@
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
+				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
 				46A3C97917DFA81A002865AE /* UIBarButtonItem+Images.m in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
 				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
@@ -2080,6 +2090,7 @@
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
 				E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
+				B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */,
 				B5421F3823CE79F6004DDC19 /* ResultsController.swift in Sources */,
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
@@ -2181,6 +2192,7 @@
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
+				B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */,
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
 				B56A696522F9D54600B90398 /* SPLabel.swift in Sources */,
@@ -2213,7 +2225,7 @@
 			files = (
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
-				374F5EF521BF057E00B57E8B /* SPChecklistTest.swift in Sources */,
+				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
@@ -2353,7 +2365,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2402,7 +2414,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2507,7 +2519,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2686,7 +2698,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2789,7 +2801,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -3055,7 +3067,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

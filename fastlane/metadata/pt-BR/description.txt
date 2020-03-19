@@ -1,7 +1,36 @@
-O Simplenote é uma maneira fácil de guardar anotações, listas, ideias e muito mais. Suas anotações ficam em sincronia com todos os seus dispositivos gratuitamente.
+O Simplenote é uma maneira fácil de fazer anotações, criar listas de tarefas, captar ideias e muito mais. Abra-o, escreva o que quiser e pronto. Conforme a sua coleção aumenta, organize-se em tags e pins, encontrando o que precisa com a pesquisa instantânea. Como o Simplenote será sincronizado com todos os seus dispositivos gratuitamente, suas anotações o acompanharão o tempo todo.
 
-A experiência do Simplenote se resume à velocidade e eficiência. Abra-o, escreva o que desejar e pronto. Conforme o conjunto de suas anotações aumentar, você poderá pesquisá-las instantaneamente e mantê-las organizadas com tags e pins. Você também pode compartilhar anotações e publicá-las para outras pessoas.
+- Uma experiência simples de fazer anotações
+- Sincronize tudo em todos os seus dispositivos
+- Colabore e compartilhe
+- Organize-se com as tags
+Faça login com seu e-mail ou conta do WordPress.com
 
-A melhor forma de conhecer o Simplenote é experimentando. Você será solicitado a criar uma conta. Isso permite que o backup online e a sincronização de suas anotações sejam feitos imediatamente.
+SINCRONIZE COM CONFIANÇA
+- Sincronize de forma ininterrupta e automática em computadores, celulares e tablets.
+- Faça backup e sincronize tudo enquanto faz suas anotações, para não perder nenhum conteúdo.
 
-Após o registro, tente criar algumas anotações! Em seguida, acesse simplenote.com para baixar o Simplenote em outros dispositivos.
+COLABORE E COMPARTILHE
+- Colabore e trabalhe em conjunto: compartilhe suas ideias com um colega, ou escreva uma lista de compras junto com seu colega de quarto.
+- Selecione publicar o seu conteúdo na Web e compartilhe um link com quem desejar.
+- Publique diretamente em um site do WordPress, ao conectar-se a sua conta do WordPress.com.
+- Compartilhe de forma rápida e simples com aplicativos de terceiros.
+
+ORGANIZE-SE E PESQUISE
+- Organize-se com as tags e use-as para pesquisas e classificações rápidas.
+- Encontre o que está procurando, de forma instantânea, com o destaque de palavras-chave.
+- Use o markdown para adicionar formatação.
+- Crie listas de tarefas.
+- Selecione a ordem de classificação de suas anotações e tags.
+- Marque as anotações que mais usa.
+- Edite as tags diretamente, renomeando-as e reorganizando-as.
+- Proteja o seu conteúdo com um bloqueio por senha.
+
+--
+
+Política de Privacidade: https://automattic.com/privacy/
+Termos de Serviço: https://simplenote.com/terms/
+
+--
+
+Acesse simplenote.com para baixar o Simplenote em outros dispositivos.

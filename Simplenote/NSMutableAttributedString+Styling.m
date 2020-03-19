@@ -1,62 +1,60 @@
-//
-//  NSMutableAttributedString+TruncateToWidth.m
-//  Simplenote
-//
-//  Created by Rainieri Ventura on 4/5/12.
-//  Copyright (c) 2012 Simperium. All rights reserved.
-//
-
 #import "NSMutableAttributedString+Styling.h"
+#import "NSString+Bullets.h"
 #import "Simplenote-Swift.h"
-#import "SPTextView.h"
 
-@implementation NSMutableAttributedString (Styling)
 
-const int RegexExpectedMatchGroups  = 3;
-const int RegexGroupIndexPrefix     = 1;
-const int RegexGroupIndexContent    = 2;
 
-// Replaces checklist markdown syntax with SPTextAttachment images in an attributed string
-- (void)addChecklistAttachmentsForColor: (UIColor *)color  {
+@implementation NSMutableAttributedString (Checklists)
 
+- (void)processChecklistsWithColor:(UIColor *)color
+                        sizingFont:(UIFont *)sizingFont
+             allowsMultiplePerLine:(BOOL)allowsMultiplePerLine
+{
     if (self.length == 0) {
         return;
     }
-    
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:CheckListRegExPattern options:NSRegularExpressionAnchorsMatchLines error:&error];
-    
-    // Work with a copy of the NSString value so we can calculate the correct indices
-    NSString *noteString = self.string.copy;
-    NSArray *matches = [regex matchesInString:noteString options:0 range:[noteString rangeOfString:noteString]];
-    
-    if (matches.count == 0) {
-        return;
-    }
-    
-    int positionAdjustment = 0;
-    CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize + 4;
+
+    NSString *plainString = [self.string copy];
+    NSRegularExpression *regex = allowsMultiplePerLine ? NSRegularExpression.regexForChecklistsEmbeddedAnywhere : NSRegularExpression.regexForChecklists;
+    NSArray *matches = [[[regex matchesInString:plainString
+                                        options:0
+                                          range:plainString.fullRange] reverseObjectEnumerator] allObjects];
+
     for (NSTextCheckingResult *match in matches) {
-        if ([match numberOfRanges] < RegexExpectedMatchGroups) {
+        NSRange matchedRange = match.range;
+        if (matchedRange.location == NSNotFound || NSMaxRange(matchedRange) > self.length) {
             continue;
         }
-        NSRange prefixRange = [match rangeAtIndex:RegexGroupIndexPrefix];
-        NSRange checkboxRange = [match rangeAtIndex:RegexGroupIndexContent];
-        
-        NSString *markdownTag = [noteString substringWithRange:match.range];
-        BOOL isChecked = [markdownTag localizedCaseInsensitiveContainsString:@"x"];
-        
-        SPTextAttachment *attachment = [[SPTextAttachment alloc] initWithColor:color];
-        [attachment setIsChecked: isChecked];
-        
-        attachment.bounds = CGRectMake(0, -4.5, fontSize, fontSize);
-        
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
-        NSRange adjustedRange = NSMakeRange(checkboxRange.location - positionAdjustment, checkboxRange.length);
-        [self replaceCharactersInRange:adjustedRange withAttributedString:attachmentString];
-        
-        positionAdjustment += markdownTag.length - 1 - prefixRange.length;
+
+        NSString *matchedString = [plainString substringWithRange:matchedRange];
+        BOOL isChecked = [matchedString localizedCaseInsensitiveContainsString:@"x"];
+
+        SPTextAttachment *textAttachment = [SPTextAttachment new];
+        textAttachment.isChecked = isChecked;
+        textAttachment.tintColor = color;
+        textAttachment.sizingFont = sizingFont;
+
+        NSMutableAttributedString *attachmentString = [NSMutableAttributedString new];
+        if (allowsMultiplePerLine && matchedRange.location != 0) {
+            [attachmentString appendString:NSString.spaceString];
+        }
+
+        [attachmentString appendAttachment:textAttachment];
+
+        [self replaceCharactersInRange:matchedRange withAttributedString:attachmentString];
     }
+}
+
+- (void)appendAttachment:(NSTextAttachment *)attachment
+{
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attachment];
+    [self appendAttributedString:string];
+}
+
+- (void)appendString:(NSString *)aString
+{
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:aString];
+    [self appendAttributedString:string];
 }
 
 @end

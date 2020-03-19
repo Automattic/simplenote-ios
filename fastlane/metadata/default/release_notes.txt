@@ -1,2 +1,7 @@
-- Simplenote just got brand new App Icons!
-- Fixed a bug that affected tap detections over links.
+Improved integration with iOS gets you into the app smoothly: Simplenote’s launch screen now matches your iOS Appearance Settings. And it supports Password Autofill, so logging in has never been faster.
+
+Taking notes is only half the battle — finding the note you need when you need it is the other half, and a bunch of search improvements will help you do that: Search results now display matching tags; search supports tag:keyword search parameters to help you find notes whose tags contain specific keywords; and search is now diacritic insensitive, so you can enter search terms with or without accents and still get matches. You can also alter the order of search results right from your Notes List. Fancy!
+
+Continued visual upgrades make usability better and better: the search bar no longer displays when the Trash Filter is active, and previews have been upgraded to fit more content on the screen.
+
+And, as always, a few bug fixes: bugs stopping Search Mode from dismissing properly, and another that caused the keyboard’s appearance not to match the selected theme are no more.

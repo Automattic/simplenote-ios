@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-01-24 00:54:03+0000 */
+/* Translation-Revision-Date: 2020-03-07 00:54:58+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -64,6 +64,9 @@
 /* Title: No filters applied */
 "All Notes" = "كل الملاحظات";
 
+/* Sort Mode: Alphabetically */
+"Alphabetically" = "أبجديًا";
+
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "أبجديًا: أ-ي";
 
@@ -98,6 +101,7 @@
 "By creating an account you agree to our" = "بموجب إنشائك لحساب فأنت توافق على";
 
 /* Cancel Action
+   Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "إلغاء";
 
@@ -136,6 +140,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "إنشاء ملاحظة جديدة";
+
+/* Sort Mode: Creation Date */
+"Created" = "تاريخ الإنشاء";
 
 /* Sort Mode: Creation Date, descending */
 "Created: Newest" = "تاريخ الإنشاء: الأحدث";
@@ -262,10 +269,13 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "القائمة";
 
+/* Sort Mode: Modified Date */
+"Modified" = "معدَّل";
+
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "تاريخ التعديل: الأحدث";
 
-/* Sort Mode: Creation Date, ascending */
+/* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "تاريخ التعديل: الأقدم";
 
 /* Label to create a new note */
@@ -290,7 +300,8 @@
 /* No comment provided by engineer. */
 "Note not published" = "لم يتم نشر الملاحظة";
 
-/* Plural form of notes */
+/* Notes Header (Search Mode)
+   Plural form of notes */
 "Notes" = "ملاحظات";
 
 /* Dismisses an AlertController */
@@ -380,7 +391,7 @@
 /* Rename a tag */
 "Rename" = "إعادة التسمية";
 
-/* Restore a note from the trash, markking it as undeleted */
+/* Restore a note from the trash, marking it as undeleted */
 "Restore" = "استعادة";
 
 /* Restore a note to a previous version */
@@ -389,6 +400,12 @@
 /* Search Placeholder
    Using Search instead of Back if user is searching */
 "Search" = "بحث";
+
+/* Tags Header (Search Mode) */
+"Search by Tag" = "البحث حسب الوسم";
+
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "البحث عن الملحوظات أو الوسوم";
 
 /* No comment provided by engineer. */
 "Security" = "الأمان";
@@ -443,6 +460,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "ترتيب الفرز";
+
+/* Sort By Title */
+"Sort by:" = "فرز حسب:";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "الإعداد الافتراضي للنظام";
@@ -564,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Remove tag from the current note" = "إزالة وسم من الملاحظة الحالية";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "وسم:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "Move the current note to trash" = "نقل الملاحظة الحالية إلى سلة المهملات";

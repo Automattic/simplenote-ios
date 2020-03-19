@@ -1,7 +1,36 @@
-Simplenote è un modo semplice per tenere note, liste, idee e tanto altro ancora. Le tue note saranno sincronizzate su tutti i tuoi dispositivi senza alcun costo aggiuntivo.
+Con Simplenote puoi in modo semplice prendere appunti, creare elenchi di cose da fare, acquisire idee e molto altro. Aprilo, annota alcune idee e il gioco è fatto. Mentre la tua raccolta cresce, organizzala con tag e spilli e cerca quello di cui hai bisogno con la funzione di ricerca istantanea. I tuoi appunti saranno sempre con te poiché Simplenote si sincronizzerà gratuitamente su tutti i tuoi dispositivi.
 
-Simplenote è tutta questione di velocità ed efficienza. Apri l'app per scrivere brevi appunti, memo, ed il gioco è fatto. E quando la vostra raccolta di note cresce, è possibile organizzarle con l'uso dei tag, ed usare la ricerca in tempo reale per accedere alle note nel più breve tempo possibile.
+- Vivi un'esperienza semplice per prendere appunti
+- Sincronizza ogni cosa su tutti i tuoi dispositivi
+- Collabora e condividi
+- Rimani organizzato con i tag
+- Accedi con la tua e-mail o con il tuo account WordPress.com
 
-Il modo migliore per conoscere Simplenote è provarlo. Ti sarà chiesto di creare un account, questo ci consentirà di creare copie di sicurezza delle tue note e di sincronizzarle automaticamente online.
+ESEGUI LA SINCRONIZZAZIONE CON FIDUCIA
+- Esegui una perfetta sincronizzazione automatica tra qualsiasi computer, telefono o tablet.
+- Esegui backup e sincronizza tutto mentre prendi appunti in modo da non perdere i contenuti.
 
-Una volta installata l'app, visita simplenote.com per leggere le note dal web, scaricare l'app anche su altri dispositivi ed iniziare ad accedere alle vostre note senza alcun limite.
+COLLABORA E CONDIVI
+- Collabora e lavora allo stesso tempo: condivi idee con un collega o scrivi l'elenco della spesa con il tuo coinquilino.
+- Scegli se pubblicare i contenuti sul web e condividere un link con chiunque tu desideri.
+- Pubblica direttamente su un sito WordPress.com connettendo il tuo account WordPress.com.
+- Condividi in modo facile e veloce attraverso app di terze parti.
+
+ORGANIZZA E CERCA
+- Rimani organizzato con i tag e usali per effettuare la ricerca e ordinare rapidamente.
+- Trova subito quello che stai cercando con l'evidenziazione delle parole chiave.
+- Usa il markdown per aggiungere la formattazione.
+- Crea gli elenchi delle cose da fare.
+- Scegli l'ordine degli appunti e dei tag.
+- Metti uno spillo agli appunti che usi di più.
+- Modifica i tag in modo diretto rinominandoli e riordinandoli.
+- Proteggi i tuoi contenuti con un codice di blocco.
+
+--
+
+Politica sulla privacy: https://automattic.com/privacy/
+Termini di servizio: https://simplenote.com/terms/
+
+--
+
+Visita simplenote.com e scarica Simplenote sugli altri dispositivi.
