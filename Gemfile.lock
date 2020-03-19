@@ -198,7 +198,7 @@ GEM
       highline (>= 1.6, < 3)
       options (~> 2.3.0)
     public_suffix (2.0.5)
-    rake (12.3.2)
+    rake (12.3.3)
     rake-compiler (1.0.8)
       rake
     representable (3.0.4)
