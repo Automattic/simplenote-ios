@@ -146,7 +146,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)applyStyle
 {    
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    UIFont *headlineFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle2 weight:UIFontWeightBold];
     UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
 
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
