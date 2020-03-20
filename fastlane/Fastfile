@@ -265,14 +265,18 @@ end
     ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless (options[:skip_prechecks])
     ios_build_preflight() unless (options[:skip_prechecks])
 
-    gym(scheme: "Simplenote", workspace: "Simplenote.xcworkspace",
+    appstore_code_signing 
+
+    gym(scheme: "Simplenote", 
+      workspace: "Simplenote.xcworkspace",
+      configuration: "Distribution AppStore",
       clean: true,
       export_options: {
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"], 
         provisioningProfiles: { 
-          "com.codality.NotationalFlow" => "Simplenote AppStore",
-          "com.codality.NotationalFlow.Share" => "Simplenote AppStore Share"
+          "com.codality.NotationalFlow" => "match AppStore com.codality.NotationalFlow",
+          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share"
         }
       }
     )
@@ -418,7 +422,9 @@ end
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
       app_identifier: ["com.codality.NotationalFlow",
-                       "com.codality.NotationalFlow.Share"])
+                       "com.codality.NotationalFlow.Share"],
+      template_name: "NotationalFlow Keychain Access",
+    )
   end
 
 ########################################################################

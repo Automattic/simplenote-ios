@@ -2717,7 +2717,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_APP_STORE $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -3291,7 +3291,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AppStore Share";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Share";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
