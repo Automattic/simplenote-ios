@@ -183,7 +183,6 @@ class SPNoteTableViewCell: UITableViewCell {
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
                 .paragraphStyle: Style.paragraphStyle,
-                .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
             ])
 
             bodyString.append(prefixString)
@@ -431,7 +430,6 @@ private extension NSAttributedString {
             .font: font,
             .foregroundColor: textColor,
             .paragraphStyle: paragraphStyle,
-            .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
         ])
 
         output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)

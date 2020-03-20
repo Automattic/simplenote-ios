@@ -1,6 +1,7 @@
 4.17
 -----
- 
+-   Fixed an issue that caused the Notes List to show up incorrectly, in Right to Left languages.
+
 4.16
 -----
 -   The SearchBar will no longer be displayed when the Trash Filter is active.
