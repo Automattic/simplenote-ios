@@ -248,6 +248,7 @@ static const NSTimeInterval SPTagListRefreshDelay       = 0.5;
     switch (section) {
         case SPTagsListSectionTags:
             self.tagsHeaderView.messageLabel.hidden = self.numberOfTags > 0;
+            self.tagsHeaderView.actionButton.hidden = self.numberOfTags == 0;
             return self.tagsHeaderView;
         default:
             return nil;
