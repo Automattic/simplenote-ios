@@ -34,7 +34,6 @@ typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
 
 static const NSInteger SPTagListRequestBatchSize        = 20;
 static const NSTimeInterval SPTagListRefreshDelay       = 0.5;
-static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 
 
@@ -246,7 +245,13 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return section == SPTagsListSectionTags ? self.tagsHeaderView : nil;
+    switch (section) {
+        case SPTagsListSectionTags:
+            self.tagsHeaderView.messageLabel.hidden = self.numberOfTags > 0;
+            return self.tagsHeaderView;
+        default:
+            return nil;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -257,7 +262,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (self.numberOfTags == 0) ? SPTagListEmptyStateSectionCount : SPTagsListSectionCount;
+    return SPTagsListSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
