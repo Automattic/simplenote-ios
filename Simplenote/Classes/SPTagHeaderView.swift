@@ -19,6 +19,16 @@ class SPTagHeaderView: UIView {
         }
     }
 
+    /// Message label
+    @IBOutlet private(set) var messageLabel: UILabel! {
+        didSet {
+            messageLabel.text = NSLocalizedString(
+                "Once you add tags to your notes, your tags will appear here.",
+                comment: "Message displayed when no tags exist"
+            )
+        }
+    }
+
 
     // MARK: - Overriden Methods
 
@@ -33,5 +43,6 @@ class SPTagHeaderView: UIView {
     func refreshStyle() {
         titleLabel.textColor = .simplenoteTextColor
         actionButton.setTitleColor(.simplenoteInteractiveTextColor, for: .normal)
+        messageLabel.textColor = .simplenoteTextColor
     }
 }

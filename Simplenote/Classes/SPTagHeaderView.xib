@@ -11,23 +11,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="TlW-1D-95E" customClass="SPTagHeaderView" customModule="Simplenote" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KKE-HE-i0d">
-                    <rect key="frame" x="16" y="0.0" width="382" height="34"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="KKE-HE-i0d">
+                    <rect key="frame" x="16" y="0.0" width="382" height="96"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2U-RY-Ulw" userLabel="Title and Action">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHp-el-CsD">
-                                    <rect key="frame" x="0.0" y="5" width="37.5" height="24"/>
+                                    <rect key="frame" x="0.0" y="5" width="37.5" height="40"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwE-o8-Mhf">
-                                    <rect key="frame" x="331" y="5" width="51" height="24"/>
+                                    <rect key="frame" x="331" y="5" width="51" height="40"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <state key="normal" title="Button"/>
                                 </button>
@@ -43,6 +43,12 @@
                                 <constraint firstItem="FwE-o8-Mhf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aHp-el-CsD" secondAttribute="trailing" constant="10" id="nZZ-mB-RMj"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0R-WH-7EF">
+                            <rect key="frame" x="0.0" y="65" width="382" height="31"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                 </stackView>
             </subviews>
@@ -57,6 +63,7 @@
             <viewLayoutGuide key="safeArea" id="6gW-qM-IbX"/>
             <connections>
                 <outlet property="actionButton" destination="FwE-o8-Mhf" id="iTh-lH-9tJ"/>
+                <outlet property="messageLabel" destination="c0R-WH-7EF" id="aQK-7A-JnM"/>
                 <outlet property="titleLabel" destination="aHp-el-CsD" id="41q-nv-fKl"/>
             </connections>
             <point key="canvasLocation" x="-297" y="-893"/>

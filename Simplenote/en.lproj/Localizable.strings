@@ -598,3 +598,5 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Your email address is not valid";
 
+/* Message displayed when no tags exist */
+"Once you add tags to your notes, your tags will appear here." = "Once you add tags to your notes, your tags will appear here.";
