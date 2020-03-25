@@ -1,3 +1,6 @@
+4.18
+-----
+ 
 4.17
 -----
 -   Fixed an issue that caused the Notes List to show up incorrectly, in Right to Left languages.
