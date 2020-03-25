@@ -6,11 +6,6 @@ import XCTest
 //
 class NSMutableAttributedStringStylingTests: XCTestCase {
 
-    /// Every Match is expected to have two ranges: one containing the leading spaces, and a second one containing *just* the checklist marker
-    ///
-    private let numberOfExpectedRangesPerMatch = 2
-
-
     /// Verifies that `NSRegularExpression.regexForChecklists` will not match checklists that are in the middle of a string
     ///
     func testRegexForChecklistsWillNotMatchChecklistsLocatedAtTheMiddleOfTheString() {
@@ -29,7 +24,6 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 2)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
 
     /// Verifies that `NSRegularExpression.regexForChecklists` matches multiple spacing prefixes
@@ -40,7 +34,6 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
 
     /// Verifies that `NSRegularExpression.regexForChecklistsEmbeddedAnywhere` matches multiple spacing prefixes
@@ -51,7 +44,6 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 2)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
 
     /// Verifies that `NSRegularExpression.regexForChecklists` only matches corretly formed strings
@@ -62,7 +54,6 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
         
         XCTAssertEqual(matches.count, 3)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
 
     /// Verifies that `NSRegularExpression.regexForChecklists` will not match malformed strings
@@ -93,7 +84,6 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
 
     /// Verifies that `NSRegularExpression.regexForChecklistsEmbeddedAnywhere` will match checklists with no spaces between brackets
@@ -104,22 +94,46 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
 
         XCTAssertEqual(matches.count, 1)
-        XCTAssertTrue(verifyEveryMatch(in: matches, contains: numberOfExpectedRangesPerMatch))
     }
-}
 
-
-// MARK: - Internal Helpers
-//
-private extension NSMutableAttributedStringStylingTests {
-
-    /// Verifies that all of the TextCheckingResults contain the specified number of ranges
+    /// Verifies that `NSRegularExpression.regexForChecklists` always produces the expected number of ranges
     ///
-    func verifyEveryMatch(in matches: [NSTextCheckingResult], contains numberOfRanges: Int) -> Bool {
-        for match in matches where match.numberOfRanges != numberOfRanges {
-            return false
-        }
+    func testRegexForChecklistsAlwaysProduceTwoRanges() {
+        let samples = [
+            (text: "           - [ ] Buy avocados - [ ]", expected: 1),
+            (text: "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct.", expected: 3),
+            (text: "- [] Item", expected: 1)
+        ]
 
-        return true
+        let regex = NSRegularExpression.regexForChecklists
+        for (sample, expected) in samples {
+            let matches = regex.matches(in: sample, options: [], range: sample.fullRange)
+            XCTAssertEqual(matches.count, expected)
+
+            for match in matches where match.numberOfRanges != NSRegularExpression.regexForChecklistsExpectedNumberOfRanges {
+                XCTFail()
+            }
+        }
+    }
+
+    /// Verifies that `NSRegularExpression.regexForChecklistsEmbeddedAnywhere` always produces the expected number of ranges
+    ///
+    func testRegexForChecklistsEverywhereAlwaysProduceTwoRanges() {
+        let samples = [
+            (text: "           - [ ] Buy avocados - [ ]", expected: 2),
+            (text: "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct.", expected: 3),
+            (text: "- [] Item", expected: 1),
+            (text: "The second regex should consider this as a valid checklist - [ ] Buy avocados - []", expected: 2)
+        ]
+
+        let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
+        for (sample, expected) in samples {
+            let matches = regex.matches(in: sample, options: [], range: sample.fullRange)
+            XCTAssertEqual(matches.count, expected)
+
+            for match in matches where match.numberOfRanges != NSRegularExpression.regexForChecklistsExpectedNumberOfRanges {
+                XCTFail()
+            }
+        }
     }
 }
