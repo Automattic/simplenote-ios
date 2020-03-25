@@ -3,10 +3,6 @@
 #import "Simplenote-Swift.h"
 
 
-// Note: Capture Group Mark I: We're only interested in replacing the `- [ ]` marker, not the leading spaces
-//
-static NSUInteger const ListRangeIndex = 1;
-
 
 @implementation NSMutableAttributedString (Checklists)
 
@@ -25,11 +21,11 @@ static NSUInteger const ListRangeIndex = 1;
                                           range:plainString.fullRange] reverseObjectEnumerator] allObjects];
 
     for (NSTextCheckingResult *match in matches) {
-        if (ListRangeIndex >= match.numberOfRanges) {
+        if (NSRegularExpression.regexForChecklistsExpectedNumberOfRanges != match.numberOfRanges) {
             continue;
         }
 
-        NSRange matchedRange = [match rangeAtIndex:ListRangeIndex];
+        NSRange matchedRange = [match rangeAtIndex:NSRegularExpression.regexForChecklistsMarkerRangeIndex];
         if (matchedRange.location == NSNotFound || NSMaxRange(matchedRange) > self.length) {
             continue;
         }
