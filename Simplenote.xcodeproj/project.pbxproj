@@ -54,6 +54,7 @@
 		37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */; };
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
+		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
 		46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */; };
@@ -431,6 +432,7 @@
 		3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		3D0CDFF82DFBC35A68B2C1C7 /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
+		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		3F6CECDC2FEA90B9E5C920F5 /* Pods-SimplenoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteScreenshots.swift; sourceTree = "<group>"; };
@@ -909,8 +911,9 @@
 			isa = PBXGroup;
 			children = (
 				3F1BB49E242DB81E006D1A04 /* Credentials */,
-				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
 				3FA6013D242C5AAE0068FC52 /* Info.plist */,
+				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
+				3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */,
 			);
 			path = SimplenoteScreenshots;
 			sourceTree = "<group>";
@@ -2131,6 +2134,7 @@
 			files = (
 				3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */,
 				3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */,
+				3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
