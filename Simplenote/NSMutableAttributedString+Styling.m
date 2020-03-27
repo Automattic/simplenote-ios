@@ -21,7 +21,11 @@
                                           range:plainString.fullRange] reverseObjectEnumerator] allObjects];
 
     for (NSTextCheckingResult *match in matches) {
-        NSRange matchedRange = match.range;
+        if (NSRegularExpression.regexForChecklistsExpectedNumberOfRanges != match.numberOfRanges) {
+            continue;
+        }
+
+        NSRange matchedRange = [match rangeAtIndex:NSRegularExpression.regexForChecklistsMarkerRangeIndex];
         if (matchedRange.location == NSNotFound || NSMaxRange(matchedRange) > self.length) {
             continue;
         }
