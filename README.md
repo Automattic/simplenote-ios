@@ -69,6 +69,13 @@ This will allow you to compile and run the app on a device or a simulator.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
+### Optional
+
+If you want to try the screenshots generation locally, also create your own testing credentials for that target:
+
+```
+mkdir -p SimplenoteScreenshots/Credentials && cp SimplenoteScreenshots/ScreenshotsCredentials-demo.swift SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift
+```
 
 ## Contributing
 

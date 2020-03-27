@@ -1,11 +1,16 @@
 {
   "project_name": "simplenote-ios",
-  "branch": "master",
-  "pinned_hash": "10c6ba49771ae477c2e9a7689d6fa808abab2fc6",
+  "branch": "simplenote-screenshot-user-test",
+  "pinned_hash": "72f07559c4624918965acf9eacde9b843c9edd26",
   "files_to_copy": [
     {
       "file": "iOS/simplenote/SPCredentials.swift",
       "destination": "Simplenote/Credentials/SPCredentials.swift",
+      "encrypt": true
+    },
+    {
+      "file": "iOS/simplenote/ScreenshotsCredentials.swift",
+      "destination": "SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift",
       "encrypt": true
     },
     {
