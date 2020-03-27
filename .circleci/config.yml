@@ -86,6 +86,7 @@ jobs:
       - run:
           name: Build
           command: "bundle exec fastlane build_and_upload_release skip_confirm:true"
+          no_output_timeout: 60m
 
 workflows:
   simplenote_ios:
