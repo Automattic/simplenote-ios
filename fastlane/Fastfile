@@ -442,6 +442,19 @@ end
       dark_mode: options[:mode].to_s.downcase == "dark"
     )
   end
+
+  lane :create_promo_screenshots do |options|
+    unless Fastlane::Helper::GitHelper.has_git_lfs then
+      UI.user_error!("Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.")
+    end
+
+    promo_screenshots(
+      orig_folder: screenshots_directory,
+      metadata_folder: File.join(Dir.pwd, "metadata"),
+      output_folder: File.join(Dir.pwd, "/promo_screenshots"),
+      force: options[:force]
+    )
+  end
 end
 
 ########################################################################

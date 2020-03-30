@@ -1,0 +1,30 @@
+{
+	"version": 0.1,
+	"shadow_offset": 0,
+	"stylesheet": "appstoreres/assets/styles/style.css",
+	"devices": [
+		{
+			"name": "iPhone 8 Plus",
+			"canvas_size": [1242,2208],
+			"text_size": [994, 310],
+			"text_offset": [120, 120],
+			"font_size": "105px",
+			"screenshot_size": [826, 1468],
+			"screenshot_offset": [208, 740],
+			"device_frame": "appstoreres/assets/iphone_8_plus.png",
+			"device_frame_size": [1242, 2208],
+			"device_frame_offset": [0, 0]
+		}
+	],
+	"entries": [
+		// iPhone 8 Plus
+		// A simple, note taking experience
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-1-note.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		}
+	]
+}
