@@ -45,10 +45,10 @@ Carthage/Build
 fastlane/Preview.html
 fastlane/report.xml
 fastlane/README.md
+fastlane/screenshots/
 fastlane/test_output/
 Preview.html
 build/
-screenshots/
 
 # All secrets should be stored under .configure-files
 # Everything without a .enc extension is ignored
