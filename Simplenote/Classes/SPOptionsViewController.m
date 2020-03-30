@@ -385,6 +385,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.tag = kTagPasscode;
+
+                    cell.accessibilityIdentifier = @"passcode-cell";
                     
                     break;
                 }
