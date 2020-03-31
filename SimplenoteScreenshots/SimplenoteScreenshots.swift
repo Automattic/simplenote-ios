@@ -39,7 +39,7 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(newLogin.waitForExistence(timeout: 10))
         newLogin.tap()
 
-        let firstNote = app.cells["Welcome to Simplenote!"]
+        let firstNote = app.cells["Mac ‘n’ Cheese with Bacon Recipe"]
         XCTAssertTrue(firstNote.waitForExistence(timeout: 10))
         firstNote.tap()
 
