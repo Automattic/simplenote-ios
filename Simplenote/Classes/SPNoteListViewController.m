@@ -265,6 +265,7 @@
                                                                           target:self
                                                                         selector:@selector(sidebarButtonAction:)];
     self.sidebarButton.isAccessibilityElement = YES;
+    self.sidebarButton.accessibilityIdentifier = @"menu";
     self.sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
     self.sidebarButton.accessibilityHint = NSLocalizedString(@"Toggle tag sidebar", @"Accessibility hint used to show or hide the sidebar");
 
