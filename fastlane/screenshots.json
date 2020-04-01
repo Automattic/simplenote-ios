@@ -14,6 +14,18 @@
 			"device_frame": "appstoreres/assets/iphone_8_plus.png",
 			"device_frame_size": [1242, 2208],
 			"device_frame_offset": [0, 0]
+		},
+		{
+			"name": "iPhone Xs Max",
+			"canvas_size": [1242, 2688],
+			"text_size": [994, 310],
+			"text_offset": [120, 120],
+			"font_size": "105px",
+			"screenshot_size": [890, 1927],
+			"screenshot_offset": [176, 580],
+			"device_frame": "appstoreres/assets/iphone_Xs_max.png",
+			"device_frame_size": [1242, 2668],
+			"device_frame_offset": [0, 0]
 		}
 	],
 	"entries": [
@@ -57,6 +69,49 @@
 			"filename": "iPhone 8 Plus-06.png",
 			"background": "#FFFFFF",
 			"screenshot": "iPhone 8 Plus-6-passcode.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-1-note.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-2-all-notes.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-3-collaborators.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-4-menu.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-5-search.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-6-passcode.png",
 			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		}
 	]

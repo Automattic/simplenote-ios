@@ -413,8 +413,9 @@ end
 
   desc "Runs through the app taking screenshots"
   lane :take_screenshots do |options|
-    devices = [
-      "iPhone 8 Plus"
+    devices = options[:devices] || [
+      "iPhone 8 Plus",
+      "iPhone Xs Max"
     ]
 
     languages = [
