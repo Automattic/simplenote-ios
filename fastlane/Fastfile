@@ -415,7 +415,8 @@ end
   lane :take_screenshots do |options|
     devices = options[:devices] || [
       "iPhone 8 Plus",
-      "iPhone Xs Max"
+      "iPhone Xs Max",
+      "iPad Pro (12.9-inch) (2nd generation)"
     ]
 
     languages = [
