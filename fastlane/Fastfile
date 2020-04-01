@@ -452,7 +452,7 @@ end
       orig_folder: screenshots_directory,
       metadata_folder: File.join(Dir.pwd, "metadata"),
       output_folder: File.join(Dir.pwd, "/promo_screenshots"),
-      force: options[:force]
+      force: options[:force] || true
     )
   end
 end
