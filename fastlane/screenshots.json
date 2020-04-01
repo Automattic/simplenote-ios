@@ -39,6 +39,18 @@
 			"device_frame": "appstoreres/assets/ipad_2nd_gen.png",
 			"device_frame_size": [2048, 2732],
 			"device_frame_offset": [0, 0]
+		},
+		{
+			"name": "iPad Pro (12.9-inch) (3rd generation)",
+			"canvas_size": [2048, 2732],
+			"text_size": [1024, 310],
+			"text_offset": [512, 120],
+			"font_size": "105px",
+			"screenshot_size": [1408, 1878],
+			"screenshot_offset": [320, 612],
+			"device_frame": "appstoreres/assets/ipad_3rd_gen.png",
+			"device_frame_size": [2048, 2732],
+			"device_frame_offset": [0, 0]
 		}
 	],
 	"entries": [
@@ -168,6 +180,49 @@
 			"filename": "iPad Pro (12.9-inch) (2nd generation)-06.png",
 			"background": "#FFFFFF",
 			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-6-passcode.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
+		},
+
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-1-note.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-2-all-notes.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-3-collaborators.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-4-menu.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-5-search.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-6-passcode.png",
 			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		}
 	]
