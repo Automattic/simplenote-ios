@@ -52,10 +52,10 @@ class SimplenoteScreenshots: XCTestCase {
 
         actionButton.tap()
 
-        let collaborateView = app.staticTexts["Collaborate"]
-        XCTAssertTrue(collaborateView.waitForExistence(timeout: 3))
+        let collaborateButton = app.buttons["Collaborate"]
+        XCTAssertTrue(collaborateButton.waitForExistence(timeout: 3))
 
-        collaborateView.tap()
+        collaborateButton.tap()
 
         let doneButton = app.buttons["Done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: 3))
