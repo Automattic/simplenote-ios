@@ -7,5 +7,5 @@ gem 'fastlane-plugin-sentry'
 gem 'fastlane-plugin-appcenter', "1.8.0"
 
 group :screenshots, optional: true do
-  gem 'rmagick', '~> 4.0'
+  gem 'rmagick', '~> 3.2.0'
 end

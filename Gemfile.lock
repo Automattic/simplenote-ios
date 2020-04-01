@@ -208,7 +208,7 @@ GEM
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.2)
-    rmagick (4.1.1)
+    rmagick (3.2.0)
     rouge (2.0.7)
     ruby-macho (1.4.0)
     rubyzip (1.3.0)
@@ -264,7 +264,7 @@ DEPENDENCIES
   fastlane-plugin-sentry
   fastlane-plugin-wpmreleasetoolkit!
   octokit (~> 4.0)!
-  rmagick (~> 4.0)
+  rmagick (~> 3.2.0)
   rubyzip (~> 1.3)!
   xcpretty-travis-formatter!
 
