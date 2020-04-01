@@ -17,14 +17,47 @@
 		}
 	],
 	"entries": [
-		// iPhone 8 Plus
-		// A simple, note taking experience
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-01.png",
 			"background": "#FFFFFF",
 			"screenshot": "iPhone 8 Plus-1-note.png",
 			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-2-all-notes.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-3-collaborators.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-4-menu.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-5-search.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPhone 8 Plus",
+			"filename": "iPhone 8 Plus-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone 8 Plus-6-passcode.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		}
 	]
 }
