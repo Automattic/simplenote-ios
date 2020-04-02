@@ -413,16 +413,19 @@ end
 
   desc "Runs through the app taking screenshots"
   lane :take_screenshots do |options|
-    devices = options[:devices] || [
-      "iPhone 8 Plus",
-      "iPhone Xs Max",
-      "iPad Pro (12.9-inch) (2nd generation)",
-      "iPad Pro (12.9-inch) (3rd generation)"
-    ]
+    devices = options[:devices] || screenshot_devices
 
     languages = [
       "en-US"
     ]
+
+    # Erase the Simulators between runs in order to get everything back to a
+    # default state. This should also compensate for default CI installations
+    # not having the Simulators need, by building them.
+    rebuild_screenshot_devices(
+      devices: devices,
+      simulator_version: simulator_version
+    )
 
     capture_ios_screenshots(
       scheme: "SimplenoteScreenshots",
@@ -434,6 +437,10 @@ end
 
       output_directory: screenshots_directory,
       clear_previous_screenshots: true,
+
+      # Explicitly set the iOS version to ensure we match the Simulators we
+      # recreated above
+      ios_version: simulator_version,
 
       # Retry a few times if something is a little flaky
       number_of_retries: 3,
@@ -457,6 +464,27 @@ end
       output_folder: File.join(Dir.pwd, "/promo_screenshots"),
       force: options[:force] || true
     )
+  end
+
+  desc "Rebuild Screenshot Devices"
+  lane :rebuild_screenshot_devices do |options|
+    require 'simctl'
+
+    device_names = options[:devices].split(',') || screenshot_devices
+    sim_version = options[:simulator_version] || simulator_version
+
+    SimCtl.list_devices.each { |device|
+      next unless device_names.include? device.name
+      puts "Deleting #{device.name} because it already exists."
+      device.delete
+    }
+
+    device_names.each { | device |
+      runtime = SimCtl.runtime(name: "iOS #{sim_version}")
+      devicetype = SimCtl.devicetype(name: device)
+
+      device = SimCtl.create_device device, devicetype, runtime
+    }
   end
 end
 
@@ -527,4 +555,17 @@ end
 
 def screenshots_directory()
   File.join(fastlane_directory, "screenshots")
+end
+
+def screenshot_devices()
+  [
+    "iPhone Xs Max",
+    "iPhone 8 Plus",
+    "iPad Pro (12.9-inch) (2nd generation)",
+    "iPad Pro (12.9-inch) (3rd generation)",
+  ]
+end
+
+def simulator_version
+  '13.3'
 end
