@@ -411,9 +411,39 @@ end
   # Screenshot lanes
   #####################################################################################
 
-  desc "Runs through the app taking screenshots"
+  # This is ideal when running locally. On CI, it's better to run each lane in
+  # isolation, to leverage parallelism if necessary.
+  #
+  # On the other hand, right now Simplenote only needs one locale, so we might
+  # as well keep using this on CI too. We still benefit from not having to
+  # rebuild the app just to take the screenshots in light vs dark mode.
+  desc "Walk through the app taking screenshots."
   lane :take_screenshots do |options|
-    devices = options[:devices] || screenshot_devices
+    build_app_for_screenshots(options)
+
+    # In order to preserve both light and dark screenshots, we won't be erasing
+    # the screenshots folder in between captures but only on the first one.
+    take_screenshots_from_app(
+      options.merge({ mode: 'light', clear_previous_screenshots: true })
+    )
+    take_screenshots_from_app(
+      options.merge({ mode: 'dark', clear_previous_screenshots: false })
+    )
+  end
+
+  desc "Build the binaries to run to take the screenshots"
+  lane :build_app_for_screenshots do
+    scan(
+      workspace: workspace_path,
+      scheme: screenshots_scheme,
+      build_for_testing: true,
+      derived_data_path: derived_data_directory,
+    )
+  end
+
+  desc "Runs through the app taking screenshots, using a prebuilt binary"
+  lane :take_screenshots_from_app do |options|
+    devices = options[:devices].split(',') || screenshot_devices
 
     languages = [
       "en-US"
@@ -428,15 +458,21 @@ end
     )
 
     capture_ios_screenshots(
-      scheme: "SimplenoteScreenshots",
+      scheme: screenshots_scheme,
 
       localize_simulator: true,
       languages: languages,
 
       devices: devices,
 
+      # Don't rebuild the app, use the binaries from the given DerivedData
+      # folder. This is so that we can parallelize test runs with multiple
+      # device and locale combinations.
+      test_without_building: true,
+      derived_data_path: derived_data_directory,
+
       output_directory: screenshots_directory,
-      clear_previous_screenshots: true,
+      clear_previous_screenshots: options[:clear_previous_screenshots] || true,
 
       # Explicitly set the iOS version to ensure we match the Simulators we
       # recreated above
@@ -551,6 +587,22 @@ end
 
 def fastlane_directory()
   File.expand_path File.dirname(__FILE__)
+end
+
+def derived_data_directory
+  File.join(fastlane_directory, "DerivedData")
+end
+
+def workspace_name
+  "Simplenote.xcworkspace"
+end
+
+def screenshots_scheme
+  "SimplenoteScreenshots"
+end
+
+def workspace_path
+  File.join(fastlane_directory, "../#{workspace_name}")
 end
 
 def screenshots_directory()
