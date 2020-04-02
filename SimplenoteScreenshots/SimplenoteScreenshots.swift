@@ -52,13 +52,33 @@ class SimplenoteScreenshots: XCTestCase {
 
         actionButton.tap()
 
+        // The collaborators screen will ask to access our contacts. Before loading the screen,
+        // let's setup an handler to dismiss the alert, so it doesn't come in the screenshots.
+        // Fastlane's snapshot _should_ do this for us, but it seems to happen unreliably.
+        //
+        // This logic is super rough, but for the context of this test script where we know we'll
+        // only get one alert, it'll do us. Obviously, when the time comes to refine the script by
+        // adopting the `BaseScreen` pattern from the WooCommerce iOS repo, this should logic should
+        // be improved as well.
+        addUIInterruptionMonitor(withDescription: "Any system dialog") { alert in
+            alert.buttons.firstMatch.tap()
+            return true
+        }
+
         let collaborateButton = app.buttons["Collaborate"]
         XCTAssertTrue(collaborateButton.waitForExistence(timeout: 3))
 
         collaborateButton.tap()
 
+        // Let's wait for the screen to be presented
         let doneButton = app.buttons["Done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: 3))
+
+        // Now that we know the collaborators picker screen is presented, we also know that a system
+        // dialog to grant access to the contacts might have been shown. If it has, interacting with
+        // the app will trigger the UI interruption monitor. If it hasn't, this interaction won't
+        // result in any UI change (with how the UI is laid out at the time of writing this).
+        app.tap()
 
         // The index 3 is _intentional_ as that's the desired position of the screenshot in the App
         // Store
