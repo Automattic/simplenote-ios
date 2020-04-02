@@ -1,0 +1,55 @@
+# All this work is based off
+# https://github.com/woocommerce/woocommerce-ios/blob/ed0d71d7dd4a40802a0d38d82cf2eb0e8cc45cd4/.github/workflows/screenshots.yml
+name: Screenshots
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+env:
+  CONFIGURE_ENCRYPTION_KEY: ${{ secrets.CONFIGURE_ENCRYPTION_KEY }}
+
+jobs:
+  build:
+    name: Build Application
+    if: contains(github.event.pull_request.labels.*.name, 'Needs Screenshots')
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.5.x' # Same as project's .ruby-version
+
+    - name: Install Bundler
+      run: gem install bundler
+
+    - name: Restore Ruby Dependency Cache
+      id: restore-ruby-dependency-cache
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+    - name: Install Ruby Dependencies
+      run: |
+        bundle install
+
+    - name: Restore CocoaPods Dependency Cache
+      id: restore-cocoapods-dependency-cache
+      uses: actions/cache@v1
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+
+    - name: Install App Dependencies
+      run: bundle exec rake dependencies
+
+    - name: Take all screenshots
+      run: bundle exec fastlane take_screenshots
+
+    - uses: actions/upload-artifact@v1
+      name: Upload all screenshots as artifacts
+      with:
+        name: screenshots
+        path: fastlane/screenshots
