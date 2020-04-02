@@ -402,7 +402,10 @@ end
       number_of_retries: 3,
 
       # But fail completely after those 3 retries
-      stop_after_first_error: true
+      stop_after_first_error: true,
+
+      # Allow the caller to invoke dark mode
+      dark_mode: options[:mode].to_s.downcase == "dark"
     )
   end
 end

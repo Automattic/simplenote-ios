@@ -377,6 +377,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         case SPTagsListSystemRowAllNotes:
             cell.textField.text = NSLocalizedString(@"All Notes", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameAllNotes];
+            cell.accessibilityIdentifier = @"all-notes";
             break;
 
         case SPTagsListSystemRowTrash:
@@ -387,6 +388,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         case SPTagsListSystemRowSettings:
             cell.textField.text = NSLocalizedString(@"Settings", nil);
             cell.iconImage = [UIImage imageWithName:UIImageNameSettings];
+            cell.accessibilityIdentifier = @"settings";
             break;
     }
 }
