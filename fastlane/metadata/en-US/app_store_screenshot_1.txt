@@ -1,2 +1,2 @@
-A simple,
+A simple
 note taking experience
