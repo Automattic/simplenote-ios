@@ -39,6 +39,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${VERSION_LONG}</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

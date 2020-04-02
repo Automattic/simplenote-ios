@@ -30,6 +30,7 @@ Simplenote/DerivedSources/
 # Settings
 Simplenote/config.plist
 Simplenote/Credentials/
+SimplenoteScreenshots/Credentials/
 
 # Bundler
 /vendor/
@@ -44,6 +45,7 @@ Carthage/Build
 fastlane/Preview.html
 fastlane/report.xml
 fastlane/README.md
+fastlane/screenshots/
 fastlane/test_output/
 Preview.html
 build/

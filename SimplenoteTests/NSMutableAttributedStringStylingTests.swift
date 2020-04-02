@@ -95,4 +95,45 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
 
         XCTAssertEqual(matches.count, 1)
     }
+
+    /// Verifies that `NSRegularExpression.regexForChecklists` always produces the expected number of ranges
+    ///
+    func testRegexForChecklistsAlwaysProduceTwoRanges() {
+        let samples = [
+            (text: "           - [ ] Buy avocados - [ ]", expected: 1),
+            (text: "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct.", expected: 3),
+            (text: "- [] Item", expected: 1)
+        ]
+
+        let regex = NSRegularExpression.regexForChecklists
+        for (sample, expected) in samples {
+            let matches = regex.matches(in: sample, options: [], range: sample.fullRange)
+            XCTAssertEqual(matches.count, expected)
+
+            for match in matches where match.numberOfRanges != NSRegularExpression.regexForChecklistsExpectedNumberOfRanges {
+                XCTFail()
+            }
+        }
+    }
+
+    /// Verifies that `NSRegularExpression.regexForChecklistsEmbeddedAnywhere` always produces the expected number of ranges
+    ///
+    func testRegexForChecklistsEverywhereAlwaysProduceTwoRanges() {
+        let samples = [
+            (text: "           - [ ] Buy avocados - [ ]", expected: 2),
+            (text: "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct.", expected: 3),
+            (text: "- [] Item", expected: 1),
+            (text: "The second regex should consider this as a valid checklist - [ ] Buy avocados - []", expected: 2)
+        ]
+
+        let regex = NSRegularExpression.regexForChecklistsEmbeddedAnywhere
+        for (sample, expected) in samples {
+            let matches = regex.matches(in: sample, options: [], range: sample.fullRange)
+            XCTAssertEqual(matches.count, expected)
+
+            for match in matches where match.numberOfRanges != NSRegularExpression.regexForChecklistsExpectedNumberOfRanges {
+                XCTFail()
+            }
+        }
+    }
 }
