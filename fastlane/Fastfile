@@ -443,7 +443,7 @@ end
 
   desc "Runs through the app taking screenshots, using a prebuilt binary"
   lane :take_screenshots_from_app do |options|
-    devices = options[:devices].split(',') || screenshot_devices
+    devices = (options[:devices] || screenshot_devices).split(',').flatten()
 
     languages = [
       "en-US"
@@ -506,20 +506,23 @@ end
   lane :rebuild_screenshot_devices do |options|
     require 'simctl'
 
-    device_names = options[:devices].split(',') || screenshot_devices
+    # Using flatten here because we may be getting a comma separated string if
+    # called from the command line via "fastlane run" or an array if called by
+    # another action that has already preformatted the value into an array.
+    device_names = (options[:devices] || screenshot_devices).split(',').flatten
     sim_version = options[:simulator_version] || simulator_version
 
     SimCtl.list_devices.each { |device|
       next unless device_names.include? device.name
-      puts "Deleting #{device.name} because it already exists."
+      UI.message("Deleting #{device.name} because it already exists.")
       device.delete
     }
 
-    device_names.each { | device |
+    device_names.each { |device|
       runtime = SimCtl.runtime(name: "iOS #{sim_version}")
       devicetype = SimCtl.devicetype(name: device)
 
-      device = SimCtl.create_device device, devicetype, runtime
+      SimCtl.create_device device, devicetype, runtime
     }
   end
 end
