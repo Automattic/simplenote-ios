@@ -21,10 +21,11 @@
 			"text_size": [994, 310],
 			"text_offset": [120, 120],
 			"font_size": "105px",
-			"screenshot_size": [890, 1927],
+			"screenshot_size": [890, 1926],
 			"screenshot_offset": [176, 580],
+			"screenshot_mask": "appstoreres/assets/iphone_Xs_mask_no_notch.png",
 			"device_frame": "appstoreres/assets/iphone_Xs_max.png",
-			"device_frame_size": [1242, 2668],
+			"device_frame_size": [1242, 2681],
 			"device_frame_offset": [0, 0]
 		}
 	],
