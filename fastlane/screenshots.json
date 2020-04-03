@@ -48,6 +48,7 @@
 			"font_size": "105px",
 			"screenshot_size": [1408, 1878],
 			"screenshot_offset": [320, 612],
+			"screenshot_mask": "appstoreres/assets/ipad_12_9_3rd_gen_mask.png",
 			"device_frame": "appstoreres/assets/ipad_3rd_gen.png",
 			"device_frame_size": [2048, 2732],
 			"device_frame_offset": [0, 0]
