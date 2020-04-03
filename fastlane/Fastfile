@@ -449,6 +449,12 @@ end
       "en-US"
     ]
 
+    if options[:clear_previous_screenshots].nil? then
+      clear_previous_screenshots = true
+    else
+      clear_previous_screenshots = options[:clear_previous_screenshots]
+    end
+
     # Erase the Simulators between runs in order to get everything back to a
     # default state. This should also compensate for default CI installations
     # not having the Simulators need, by building them.
@@ -472,7 +478,7 @@ end
       derived_data_path: derived_data_directory,
 
       output_directory: screenshots_directory,
-      clear_previous_screenshots: options[:clear_previous_screenshots] || true,
+      clear_previous_screenshots: clear_previous_screenshots,
 
       # Explicitly set the iOS version to ensure we match the Simulators we
       # recreated above
