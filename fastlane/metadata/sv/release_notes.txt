@@ -1,7 +1,1 @@
-Förbättrad integrering med iOS så att du kan ta dig in i appen smidigt: Simplenotes startskärm matchar nu dina inställningar för iOS utseende. Och den stöder automatisk ifyllning av lösenord, vilket gör att det går snabbare än någonsin att logga in.
-
-Att skriva ner anteckningarna är bara halva arbetet – att hitta den anteckning du behöver när du behöver den är den andra halvan. Vi har infört ett flertal sökförbättringar som hjälper dig med det: Sökresultaten visar nu matchande taggar eller sökstödstaggar: sökparametrar för nyckelord som hjälper dig att hitta anteckningar vars taggar innehåller specifika nyckelord. Sökningen är nu också diakritiskt okänslig så du kan ange sökord med eller utan accenter och ändå få matchningar. Du kan också ändra ordningen på sökresultaten direkt från anteckningslistan. Tjusigt!
-
-Fortsatta visuella uppgraderingar gör användbarheten allt bättre: sökfältet visas inte längre när skräpfiltret är aktivt och förhandsgranskningar har uppgraderats för få plats med mer innehåll på skärmen.
-
-Och som alltid har några buggar åtgärdats: buggar som stoppade sökläget från att försvinna på rätt sätt och en annan som medförde att tangentbordets utseende inte matchade det valda temat.
+Ett problem som gjorde att anteckningslistan visades felaktigt för höger-till-vänster-språk har åtgärdats.
