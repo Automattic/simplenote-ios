@@ -495,7 +495,7 @@ end
     end
 
     promo_screenshots(
-      orig_folder: screenshots_directory,
+      orig_folder: options[:source] || screenshots_directory,
       metadata_folder: File.join(Dir.pwd, "metadata"),
       output_folder: File.join(Dir.pwd, "/promo_screenshots"),
       force: options[:force] || true
