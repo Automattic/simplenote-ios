@@ -1,7 +1,1 @@
-İyileştirilmiş iOS entegrasyonu sorunsuz bir şekilde uygulamaya girmenizi sağlar: Simplenote'un başlatma ekranı artık iOS Görünüm Ayarlarınızla eşleşiyor. Ayrıca bu ekran, Otomatik Parola Doldurmayı destekliyor. Giriş yapmak artık her zamankinden daha hızlı.
-
-Not almak işin yarısı demek, ihtiyaç duyduğunuz notu ihtiyaç duyduğunuz zamanda bulmak ise işin diğer yarısı. Bunu yapmanıza yardımcı olacak bir dizi arama iyileştirmesi getirildi: Arama sonuçlarında artık eşleşen etiketler görüntüleniyor; etiketlerinde belirli anahtar sözcükler içeren notları bulmanıza yardımcı olacak etiket:anahtar sözcük arama parametresi artık aramada destekleniyor ve arama artık aksan işaretlerine karşı hassas değil, bu sayede artık arama terimlerini aksan işaretleriyle veya bunlar olmadan girdiğinizde de eşleşmeler alırsınız. Ayrıca doğrudan Notlar Listenizden arama sonuçlarının sıralamasını değiştirebilirsiniz. Harika!
-
-Devam eden görsel yükseltmeler sayesinde kullanılabilirlik giderek artar: Artık Çöp Filtresi etkin olduğunda arama çubuğu görüntülenmez, önizlemeler artık ekrana daha fazla içerik sığacak şekilde yükseltilmiştir.
-
-Her zaman olduğu gibi birkaç hata düzeltmesi sunulmuştur: Arama Modunun düzgün kapatılmasını engelleyen hatalar ve klavye görünümünün seçilen tema ile eşleşmesini engelleyen başka bir hata düzeltildi.
+Sağdan Sola dillerde Notlar Listesinin hatalı şekilde görünmesine neden olan bir sorun düzeltildi.

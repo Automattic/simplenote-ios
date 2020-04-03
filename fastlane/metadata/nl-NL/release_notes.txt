@@ -1,7 +1,1 @@
-Dankzij de verbeterde integratie in iOS kun je de app gemakkelijker gebruiken: het startscherm van Simplenote komt nu overeen met je weergave-instellingen van iOS. Bovendien kan het wachtwoord nu automatisch worden ingevuld, zodat je razendsnel kunt inloggen.
-
-Het opstellen van notities is slechts de ene kant van het verhaal; de notitie die je zoekt terugvinden wanneer je deze nodig hebt, is de andere kant van het verhaal. Dankzij een paar verbeteringen van de zoekfunctie wordt dat nu eenvoudiger: zoekresultaten geven nu overeenkomstige tags weer; de zoekfunctie ondersteunt nu tag:trefwoord-zoekparameters zodat je de notities kunt vinden waarvan de tags specifieke trefwoorden bevatten; en de zoekfunctie is nu niet meer gevoelig voor diakritische tekens, dus kun je trefwoorden met of zonder accenten invoeren en nog altijd zoekresultaten krijgen. Je kunt de volgorde van zoekopdrachten nu ook aanpassen vanuit je notitielijst. Mooi!
-
-Continue visuele upgrades verbeteren de gebruiksvriendelijkheid onophoudelijk: de zoekbalk wordt niet meer weergegeven wanneer het prullenbakfilter actief is, en voorbeeldweergaven zijn geüpgraded zodat er meer content op het scherm past.
-
-En, zoals altijd, een paar bugfixes: bugs die ervoor zorgden dat de zoekmodus niet goed werd gesloten en een andere bug die zorgde dat de weergave van het toetsenbord niet overeenkwam met het geselecteerde thema zijn nu verwijderd.
+Een probleem verholpen dat zorgde dat de notitielijst onjuist werd weergegeven in talen die van rechts naar links worden gelezen.
