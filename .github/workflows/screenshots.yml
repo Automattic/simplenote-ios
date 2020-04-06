@@ -54,3 +54,15 @@ jobs:
       with:
         name: screenshots
         path: fastlane/screenshots
+
+    - name: Compose
+      run: |
+        brew install pkg-config imagemagick@6
+        BUNDLE_WITH=screenshots bundle install
+        bundle exec fastlane create_promo_screenshots
+
+    - uses: actions/upload-artifact@v1
+      name: Upload all promo screenshots as artifacts
+      with:
+        name: promo_screenshots
+        path: fastlane/promo_screenshots
