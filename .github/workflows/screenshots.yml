@@ -57,6 +57,7 @@ jobs:
 
     - name: Compose
       run: |
+        git lfs fetch && git lfs checkout
         brew install pkg-config imagemagick@6
         BUNDLE_WITH=screenshots bundle install
         bundle exec fastlane create_promo_screenshots
