@@ -3,7 +3,8 @@
 #import "Simplenote-Swift.h"
 #import <UIKit/UIKit.h>
 
-
+static const CGFloat SPDirectionalIdentity                  = 1;
+static const CGFloat SPDirectionalInverted                  = -1;
 static const CGFloat SPSidebarWidth                         = 300;
 static const CGFloat SPSidebarAnimationThreshold            = 0.15;
 static const CGFloat SPSidebarAnimationDuration             = 0.35;
@@ -193,7 +194,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     NSParameterAssert(self.sidebarView);
 
     CGRect sidePanelFrame = self.view.bounds;
-    sidePanelFrame.origin.x -= SPSidebarWidth;
+    sidePanelFrame.origin.x = self.isRightToLeft ? sidePanelFrame.size.width : -SPSidebarWidth;
     sidePanelFrame.size.width = SPSidebarWidth;
 
     UIView *sidebarView = self.sidebarView;
@@ -236,7 +237,8 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     }
 
     // Scenario B: Sidebar is NOT visible, and we got a Left Swipe (OR) Sidebar is Visible and we got a Right Swipe
-    if ((!self.isSidebarVisible && translation.x < 0) || (self.isSidebarVisible && translation.x > 0)) {
+    CGFloat normalizedTranslation = translation.x * self.directionalMultiplier;
+    if ((!self.isSidebarVisible && normalizedTranslation < 0) || (self.isSidebarVisible && normalizedTranslation > 0)) {
         return NO;
     }
 
@@ -318,7 +320,9 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (UIViewPropertyAnimator *)animatorForSidebarVisibility:(BOOL)visible
 {
-    CGAffineTransform transform = visible ? CGAffineTransformMakeTranslation(SPSidebarWidth, 0) : CGAffineTransformIdentity;
+    CGAffineTransform transform = visible ?
+                                    CGAffineTransformMakeTranslation(SPSidebarWidth * self.directionalMultiplier, 0) :
+                                    CGAffineTransformIdentity;
 
     CGFloat alphaSidebar = visible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0;
     CGFloat alphaMain = visible ? UIKitConstants.alpha0_5 : UIKitConstants.alpha1_0;
@@ -377,8 +381,8 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
     } else {
         CGPoint translation = [gesture translationInView:self.mainView];
-        CGFloat multiplier = self.isSidebarVisible ? -1 : 1;
-        CGFloat progress = translation.x / SPSidebarWidth * multiplier;
+        CGFloat translationMultiplier = self.isSidebarVisible ? -1 : 1;
+        CGFloat progress = translation.x / SPSidebarWidth * translationMultiplier * self.directionalMultiplier;
 
         self.animator.fractionComplete = MAX(SPSidebarAnimationCompletionMin, MIN(SPSidebarAnimationCompletionMax, progress));
     }
@@ -419,6 +423,27 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     }
 
     [self.sidebarViewController endAppearanceTransition];
+}
+
+
+#pragma mark - RTL Support
+
+- (BOOL)isRightToLeft
+{
+    return UIApplication.sharedApplication.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
+}
+
+/// The purpose of this method is to normalize calculations, regardless of the writing direction, so that we do not need to duplicate checks.
+///
+/// Rather than checking:
+///     `isRTL == false && translation.x < 0` OR `isRTL == true ^^ translation.x > 0`,
+///
+/// We can simply check for:
+///     `translation.x * directionalMultiplier < 0`.
+///
+- (CGFloat)directionalMultiplier
+{
+    return self.isRightToLeft ? SPDirectionalInverted : SPDirectionalIdentity;
 }
 
 

@@ -163,6 +163,13 @@ end
     ios_update_metadata(options) unless ios_current_branch_is_hotfix
     ios_bump_version_beta() unless ios_current_branch_is_hotfix
     ios_final_tag(options)
+
+    # Wrap up
+    version = ios_get_app_version()
+    removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
+    setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
+    create_new_milestone(repository:GHHELPER_REPO)
+    close_milestone(repository:GHHELPER_REPO, milestone: version)
   end
   
   #####################################################################################
@@ -171,7 +178,7 @@ end
   # This lane builds the app and upload it for both internal and external distribution 
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>]
+  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>] [create_gh_release:<create release on GH>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_release 
@@ -179,13 +186,17 @@ end
   #####################################################################################
   desc "Builds and updates for distribution"
   lane :build_and_upload_release do | options |
+    final_tag = (is_ci() == true) ? ios_validate_ci_build() : false
+    create_release = (final_tag && is_ci()) || options[:create_gh_release]
+
     ios_build_prechecks(skip_confirm: options[:skip_confirm], 
       internal: false,
-      internal_on_single_version: true, 
+      internal_on_single_version: !final_tag, 
       external: true)
+
     ios_build_preflight()
-    build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm])
-    build_and_upload_itc(skip_prechecks: true, skip_confirm: options[:skip_confirm])
+    build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) unless final_tag
+    build_and_upload_itc(skip_prechecks: true, skip_confirm: options[:skip_confirm], create_release: create_release)
   end
 
   #####################################################################################
@@ -247,25 +258,29 @@ end
   # This lane builds the app and upload it for external distribution  
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_itc [skip_confirm:<skip confirm>]
+  # bundle exec fastlane build_and_upload_itc [skip_confirm:<skip confirm>] [create_release:<Create release on GH> ]
   #
   # Example:
   # bundle exec fastlane build_and_upload_itc 
   # bundle exec fastlane build_and_upload_itc skip_confirm:true 
   #####################################################################################
-  desc "Builds and updates for distribution"
+  desc "Builds and uploads for distribution"
   lane :build_and_upload_itc do | options |
     ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless (options[:skip_prechecks])
     ios_build_preflight() unless (options[:skip_prechecks])
 
-    gym(scheme: "Simplenote", workspace: "Simplenote.xcworkspace",
+    appstore_code_signing 
+
+    gym(scheme: "Simplenote", 
+      workspace: "Simplenote.xcworkspace",
+      configuration: "Distribution AppStore",
       clean: true,
       export_options: {
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"], 
         provisioningProfiles: { 
-          "com.codality.NotationalFlow" => "Simplenote AppStore",
-          "com.codality.NotationalFlow.Share" => "Simplenote AppStore Share"
+          "com.codality.NotationalFlow" => "match AppStore com.codality.NotationalFlow",
+          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share"
         }
       }
     )
@@ -283,6 +298,20 @@ end
     )
 
     sh("rm #{dSYM_PATH}")
+
+    if (options[:create_release])
+      archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
+      zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
+
+      version = ios_get_app_version()
+      create_release(repository:GHHELPER_REPO, 
+        version: version, 
+        release_notes_file_path:'./Simplenote/Resources/release_notes.txt',
+        release_assets:"#{archive_zip_path}"
+      )
+
+      sh("rm #{archive_zip_path}") 
+    end
   end
 
   #####################################################################################
@@ -343,6 +372,16 @@ end
       notify_testers: false 
     )
 
+    # Install SentryCLI prior to trying to upload dSYMs
+    sh("curl -sL https://sentry.io/get-cli/ | bash")
+
+    sentry_upload_dsym(
+      auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
+      org_slug: 'a8c',
+      project_slug: 'simplenote-ios',
+      dsym_path: "./build/Simplenote.app.dSYM.zip",
+    )
+
     download_url = Actions.lane_context[SharedValues::APPCENTER_DOWNLOAD_LINK]
     UI.message("Successfully built and uploaded installable build here: #{download_url}")
     install_url = "https://install.appcenter.ms/orgs/automattic/apps/Simplenote-Installable-Builds/"
@@ -401,7 +440,9 @@ end
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
       app_identifier: ["com.codality.NotationalFlow",
-                       "com.codality.NotationalFlow.Share"])
+                       "com.codality.NotationalFlow.Share"],
+      template_name: "NotationalFlow Keychain Access",
+    )
   end
 
 ########################################################################

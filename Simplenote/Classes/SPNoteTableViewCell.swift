@@ -183,7 +183,6 @@ class SPNoteTableViewCell: UITableViewCell {
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
                 .paragraphStyle: Style.paragraphStyle,
-                .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
             ])
 
             bodyString.append(prefixString)
@@ -355,7 +354,7 @@ private enum Style {
 
     /// Represents the Insets applied to the container view
     ///
-    static let containerInsets = UIEdgeInsets(top: 13, left: 6, bottom: 13, right: 0)
+    static let containerInsets = UIEdgeInsets(top: 12, left: 6, bottom: 12, right: 0)
 
     /// Outer Vertical StackView's Spacing
     ///
@@ -431,7 +430,6 @@ private extension NSAttributedString {
             .font: font,
             .foregroundColor: textColor,
             .paragraphStyle: paragraphStyle,
-            .writingDirection: [NSWritingDirection.current.rawValue | NSWritingDirectionFormatType.override.rawValue]
         ])
 
         output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)

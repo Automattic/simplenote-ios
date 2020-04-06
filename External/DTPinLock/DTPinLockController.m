@@ -230,6 +230,7 @@
     
     secondPagePinGroup = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, 74, neededWidth, 53)];
     secondPagePinGroup.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    secondPagePinGroup.center = CGPointMake(baseViewController.secondPageView.frame.size.width / 2.0, secondPagePinGroup.center.y);
     [baseViewController.secondPageView addSubview:secondPagePinGroup];
     
     
