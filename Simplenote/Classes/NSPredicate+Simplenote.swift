@@ -13,7 +13,7 @@ extension NSPredicate {
         var output = [NSPredicate]()
 
         for keyword in keywords where keyword.isEmpty == false {
-            guard let tag = keyword.lowercased().suffix(afterPrefix: .searchOperatorForTags) else {
+            guard let tag = keyword.lowercased().suffix(afterPrefix: lowercasedSearchOperatorForTags) else {
                 output.append( NSPredicate(format: "content CONTAINS[cd] %@", keyword) )
                 continue
             }
@@ -79,7 +79,7 @@ extension NSPredicate {
         let keywords = keyword.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespaces)
         let last = keywords.last?.lowercased() ?? String()
 
-        guard let tag = last.suffix(afterPrefix: .searchOperatorForTags) else {
+        guard let tag = last.suffix(afterPrefix: lowercasedSearchOperatorForTags) else {
             return NSPredicate(format: "name CONTAINS[cd] %@", last)
         }
 
@@ -104,5 +104,11 @@ private extension NSPredicate {
     static func formattedTag(for tag: String) -> String {
         let filtered = tag.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "/", with: "\\/")
         return String(format: "\"%@\"", filtered)
+    }
+
+    /// Search Operator for Tags: Case Insensitive
+    ///
+    static var lowercasedSearchOperatorForTags: String {
+        String.searchOperatorForTags.lowercased()
     }
 }
