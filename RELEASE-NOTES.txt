@@ -2,6 +2,7 @@
 -----
 -   Fixed a bug that prevented the Tag Search Operator not to properly filter in non english languages.
 
+ 
 4.18
 -----
  
