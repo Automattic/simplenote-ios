@@ -1,0 +1,57 @@
+## Testing
+
+- [ ] Logout
+- [ ] Login with wrong password fails
+- [ ] Login with correct password
+- [ ] Create new note appears in other device
+- [ ] Changes to new note sync to other device
+- [ ] Changes to new note sync from other device (after debounce delay)
+- [ ] New tag immediately syncs to other device
+- [ ] New tag immediately syncs from other device
+- [ ] Removed tag immediately syncs to other device
+- [ ] Removed tag immediately syncs from other device
+- [ ] Note publishes with link
+- [ ] Note unpublishes
+- [ ] Note publish change syncs from other device (visible with dialog open)
+- [ ] Markdown setting syncs from other device
+- [ ] Preview mode disappears/reappears when receiving remote changes to markdown setting
+- [ ] Note pinning syncs immediately from either direction
+- [ ] Note pinning works regardless if selecting in list view or from note info
+- [ ] Viewing history on one device leaves note unchanged on other device
+- [ ] Restoring history immediately syncs note from both directions
+- [ ] Can view trashed notes by selecting Trash
+- [ ] Can delete note forever from trash screen
+- [ ] Can restore note from trash screen
+- [ ] Can trash note
+- [ ] Can preview markdown by swiping
+- [ ] Can flip to edit mode by swiping
+- [ ] Markdown syntax unrendered in note list when markdown disabled
+- [ ] Can filter by tag when clicking on tag in tag drawer
+- [ ] Can add tag to note and have it appear in filtered tag view when previously not in filter
+- [ ] Searching in the search field highlights matches in note list
+- [ ] Searching in the search field highlights matches in the note editor
+- [ ] Clearing the search field immediately updates filtered notes
+- [ ] Clicking on different tags or All Notes or Trash immediately updates filtered notes
+- [ ] Can search by keyword, filtering debounced
+- [ ] Tag auto-completes appear when typing in search field
+- [ ] Typing tag: and something else, like tag:te results in autocomplete results starting with that something else, e.g. test
+- [ ] Tag suggestions suggest tags regardless of case
+- [ ] Search field updates with results of tag:test format search string
+- [ ] Can toggle sidebar
+- [ ] Syncs when introducing sequential surrogate pairs sharing the same high surrogate, e.g. 🅰🅱 to 🅰🅰🅱
+- [ ] After disabling network connectivity and making changes, selecting Log Out triggers an "Unsynced Notes Detected" alert
+- [ ] When going back online, changes sync
+- [ ] Can change analytics sharing setting
+- [ ] Changing Condensed Note List mode immediately updates and reflects in note list
+- [ ] For each sort type the pinned notes appear first in the note list
+- [ ] Changing Theme immediately updates app for desired color scheme
+- [ ] Using the Insert checklist item from the format menu inserts a checklist
+- [ ] "Undo" undoes the last edit
+- [ ] Typing - [x] creates a checked checklist item
+- [ ] Typing - [ ] created an unchecked checklist item
+- [ ] Typing - creates a list
+- [ ] Changing - to + changes the list item bullet, also for * and • (u2022)
+- [ ] All list bullet types render to markdown lists center dot doesn't render as list
+- [ ] Added URL is linkified
+- [ ] When long-tapping on link it opens in new window (regular tap in preview)
+- [ ] Can print note in plaintext view
