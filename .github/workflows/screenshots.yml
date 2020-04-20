@@ -8,6 +8,7 @@ on:
 
 env:
   CONFIGURE_ENCRYPTION_KEY: ${{ secrets.CONFIGURE_ENCRYPTION_KEY }}
+  BUNDLE_PATH: vendor/bundle
 
 jobs:
   build:
