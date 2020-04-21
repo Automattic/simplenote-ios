@@ -65,8 +65,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.17-whats-new"
+msgctxt "v4.18-whats-new"
 msgid ""
-"Fixed an issue that caused the Notes List to show up incorrectly, in Right to Left languages.\n"
+"Adding support for Persian Language.\n"
 msgstr ""
 
