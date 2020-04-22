@@ -1,8 +1,13 @@
-/* Number of Characters in a note */
-"%@ Character" = "%@ Character";
+/* Translation-Revision-Date: 2020-04-10 11:40:33+0000 */
+/* Plural-Forms: nplurals=1; plural=0; */
+/* Generator: GlotPress/2.4.0-alpha */
+/* Language: fa */
 
 /* Number of Characters in a note */
-"%@ Characters" = "%@ Characters";
+"%@ Character" = "%@ نویسه";
+
+/* Number of Characters in a note */
+"%@ Characters" = "%@ نویسه";
 
 /* Number of words in a note */
 "%@ Word" = "%@ Word";
@@ -17,28 +22,28 @@
 "%d Results" = "%d Results";
 
 /* 1 minute passcode lock timeout */
-"1 Minute" = "1 Minute";
+"1 Minute" = "۱ دقیقه";
 
 /* 15 seconds passcode lock timeout */
-"15 Seconds" = "15 Seconds";
+"15 Seconds" = "۱۵ ثانیه";
 
 /* 2 minutes passcode lock timeout */
-"2 Minutes" = "2 Minutes";
+"2 Minutes" = "۲ دقیقه";
 
 /* 3 minutes passcode lock timeout */
-"3 Minutes" = "3 Minutes";
+"3 Minutes" = "۳ دقیقه";
 
 /* 30 seconds passcode lock timeout */
-"30 Seconds" = "30 Seconds";
+"30 Seconds" = "۳۰ ثانیه";
 
 /* 4 minutes passcode lock timeout */
-"4 Minutes" = "4 Minutes";
+"4 Minutes" = "۴ دقیقه";
 
 /* 5 minutes passcode lock timeout */
-"5 Minutes" = "5 Minutes";
+"5 Minutes" = "۵ دقیقه";
 
 /* Display app about screen */
-"About" = "About";
+"About" = "درباره";
 
 /* Accept Action
    Label of accept button on alert dialog */
@@ -51,7 +56,7 @@
 "Add a new collaborator..." = "Add a new collaborator...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Tag...";
+"Tag..." = "برچسب...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Add tag";
@@ -60,7 +65,7 @@
 "All Notes" = "All Notes";
 
 /* Sort Mode: Alphabetically */
-"Alphabetically" = "Alphabetically";
+"Alphabetically" = "الفبایی";
 
 /* Sort Mode: Alphabetically, ascending */
 "Alphabetically: A-Z" = "Alphabetically: A-Z";
@@ -72,7 +77,7 @@
 "An error was encountered while signing in." = "An error was encountered while signing in.";
 
 /* No comment provided by engineer. */
-"Appearance" = "Appearance";
+"Appearance" = "نما";
 
 /* Other Simplenote apps */
 "Apps" = "Apps";
@@ -87,10 +92,10 @@
 "Authenticated" = "Authenticated";
 
 /* Title of Back button for Markdown preview */
-"Back" = "Back";
+"Back" = "بازگشت";
 
 /* The Simplenote blog */
-"Blog" = "Blog";
+"Blog" = "وب‌نوشت";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "By creating an account you agree to our";
@@ -103,17 +108,11 @@
 /* Verb - work with others on a note */
 "Collaborate" = "Collaborate";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Enable others to collaborate";
-
 /* No comment provided by engineer. */
 "Collaboration has moved" = "Collaboration has moved";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Collaborators";
-
-/* No comment provided by engineer. */
-"collaborators-description" = "Add an email address to share this note with someone. Then you can both make changes to it.";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
@@ -137,25 +136,25 @@
 "Couldn't Sign In" = "Couldn't Sign In";
 
 /* Siri Suggestion to create a New Note */
-"Create a New Note" = "Create a New Note";
+"Create a New Note" = "ایجادِ یک یادداشتِ تازه";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Create a new note";
 
 /* Sort Mode: Creation Date */
-"Created" = "Created";
+"Created" = "ساخت‌شده";
 
 /* Sort Mode: Creation Date, descending */
-"Created: Newest" = "Created: Newest";
+"Created: Newest" = "ایجادشده: جدیدترین";
 
 /* Sort Mode: Creation Date, ascending */
-"Created: Oldest" = "Created: Oldest";
+"Created: Oldest" = "ایجادشده : قدیمی‌ترین";
 
 /* No comment provided by engineer. */
 "Current Collaborators" = "Current Collaborators";
 
 /* Theme: Dark */
-"Dark" = "Dark";
+"Dark" = "تاریک";
 
 /* Debug Screen Title
    Display internal debug status */
@@ -166,9 +165,6 @@
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
-
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "This note was deleted on another device.";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Disable Markdown formatting";
@@ -181,10 +177,10 @@
 "Done" = "Done";
 
 /* Edit Tags Action: Visible in the Tags List */
-"Edit" = "Edit";
+"Edit" = "ویرایش";
 
 /* Email TextField Placeholder */
-"Email" = "Email";
+"Email" = "ایمیل";
 
 /* Email Taken Alert Title */
 "Email in use" = "Email in use";
@@ -205,19 +201,16 @@
 "Face ID" = "Face ID";
 
 /* Password Reset Action */
-"Forgotten password?" = "Forgotten password?";
+"Forgotten password?" = "گذرواژه فراموش شده؟";
 
 /* No comment provided by engineer. */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+"Great! Mind leaving a review to tell us what you like?" = "عالی! اگر مشکلی نیست لطفاً با نوشتنِ یک بررسی به ما بگویید چه چیزی دوست دارید؟";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
 
 /* Noun - the version history of a note */
 "History" = "History";
-
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Restore note to previous version";
 
 /* Action - view the version history of a note */
 "History..." = "History...";
@@ -226,16 +219,16 @@
 "I like it" = "I like it";
 
 /* Last Message timestamp */
-"LastSeen" = "LastSeen";
+"LastSeen" = "آخرین بازدید";
 
 /* Learn More Action */
-"Learn more" = "Learn more";
+"Learn more" = "بیشتر بدانید";
 
 /* No comment provided by engineer. */
 "Leave a review" = "Leave a review";
 
 /* Theme: Light */
-"Light" = "Light";
+"Light" = "روشن";
 
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Lock Timeout";
@@ -244,16 +237,28 @@
    Login Action
    LogIn Action
    LogIn Interface Title */
-"Log In" = "Log In";
+"Log In" = "ثبتِ ورود";
 
-/* Presents the regular Email signin flow */
-"Log in with email" = "Log in with email";
+/* Log out of the active account in the app */
+"Log Out" = "Log Out";
 
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "Log in with WordPress.com";
 
-/* Log out of the active account in the app */
-"Log Out" = "Log Out";
+/* Presents the regular Email signin flow */
+"Log in with email" = "Log in with email";
+
+/* Month and day date formatter */
+"MMM d" = "d MMM";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "d MMM، h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "d MMM yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
 
 /* Special formatting that can be turned on for notes */
 "Markdown" = "Markdown";
@@ -264,23 +269,8 @@
 /* Terminoligy used for sidebar UI element where tags are displayed */
 "Menu" = "Menu";
 
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Show options for note";
-
-/* Month and day date formatter */
-"MMM d" = "MMM d";
-
-/* Month, day, and time date formatter */
-"MMM d, h:mm a" = "MMM d, h:mm a";
-
-/* Month, day, and year date formatter */
-"MMM d, yyyy" = "MMM d, yyyy";
-
-/* Month and year date formatter */
-"MMM yyyy" = "MMM yyyy";
-
 /* Sort Mode: Modified Date */
-"Modified" = "Modified";
+"Modified" = "تغییریافته";
 
 /* Sort Mode: Modified Date, descending */
 "Modified: Newest" = "Modified: Newest";
@@ -292,11 +282,11 @@
 "New note" = "New note";
 
 /* Empty Note Placeholder */
-"New note..." = "New note...";
+"New note..." = "یادداشت تازه...";
 
 /* Alert's Cancel Action
    Cancels Empty Trash Action */
-"No" = "No";
+"No" = "خیر";
 
 /* Message shown in note list when no notes are in the current view */
 "No Notes" = "No Notes";
@@ -305,7 +295,7 @@
 "No Results" = "No Results";
 
 /* No comment provided by engineer. */
-"No thanks" = "No thanks";
+"No thanks" = "نه ممنون";
 
 /* No comment provided by engineer. */
 "Note not published" = "Note not published";
@@ -314,26 +304,23 @@
    Plural form of notes */
 "Notes" = "Notes";
 
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Close current note";
+/* Dismisses an AlertController */
+"OK" = "OK";
 
 /* Instant passcode lock timeout */
 "Off" = "Off";
-
-/* Dismisses an AlertController */
-"OK" = "OK";
 
 /* No comment provided by engineer. */
 "On" = "On";
 
 /* Siri Suggestion to open a specific Note */
-"Open \"\(preview)\"" = "Open \"\(preview)\"";
-
-/* Select a note to view in the note editor */
-"Open note" = "Open note";
+"Open \"(preview)\"" = "Open \"(preview)\"";
 
 /* Siri Suggestion to open our app */
 "Open Simplenote" = "Open Simplenote";
+
+/* Select a note to view in the note editor */
+"Open note" = "Open note";
 
 /* AlertController's Payload for the broken Sort Options Fix */
 "Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Our update may have changed the order in which your notes appear. Would you like to review sort settings?";
@@ -342,37 +329,37 @@
 "Passcode" = "Passcode";
 
 /* Password TextField Placeholder */
-"Password" = "Password";
+"Password" = "گذرواژه";
 
 /* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Password must contain at least 4 characters";
+"Password must contain at least 4 characters" = "گذرواژه باید دست‌ِکم شاملِ ۴ نویسه باشد";
 
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Password must contain at least 6 characters";
+"Password must contain at least 6 characters" = "گذرواژه دست‌ِکم باید حاویِ ۶ نویسه باشد";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
 
 /* Pin (verb) - the action of Pinning a note */
-"Pin" = "Pin";
+"Pin" = "سنجاق کردن";
 
 /* Action to mark a note as pinned */
 "Pin note" = "Pin note";
 
 /* Denotes when note is pinned to the top of the note list */
-"Pin to Top" = "Pin to Top";
+"Pin to Top" = "سنجاق به بالا";
 
 /* Switch which marks a note as pinned or unpinned */
 "Pin toggle" = "Pin toggle";
 
 /* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Pinned";
+"Pinned" = "سنجاق‌شده";
 
 /* Error message displayed when user has not verified their WordPress.com account */
-"Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
+"Please activate your WordPress.com account via email and try again." = "لطفاً حسابِ WordPress.com ِخود را از راهِ ایمیل فعال کنید و سپس دوباره تلاش کنید.";
 
 /* Title of Markdown preview screen */
-"Preview" = "Preview";
+"Preview" = "پیش‌نمایش";
 
 /* Simplenote privacy policy */
 "Privacy Policy" = "Privacy Policy";
@@ -390,10 +377,10 @@
 "Publish toggle" = "Publish toggle";
 
 /* No comment provided by engineer. */
-"Published" = "Published";
+"Published" = "منتشرشده";
 
 /* Message shown when a note is in the processes of being published */
-"Publishing..." = "Publishing...";
+"Publishing..." = "در حالِ انتشار...";
 
 /* Reachs Internet */
 "Reachability" = "Reachability";
@@ -402,7 +389,7 @@
 "Remove all notes from trash" = "Remove all notes from trash";
 
 /* Rename a tag */
-"Rename" = "Rename";
+"Rename" = "تغییرِ نام";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restore";
@@ -412,19 +399,19 @@
 
 /* Search Placeholder
    Using Search instead of Back if user is searching */
-"Search" = "Search";
+"Search" = "جست‌و‌جو";
 
 /* Tags Header (Search Mode) */
-"Search by Tag" = "Search by Tag";
+"Search by Tag" = "جستجو برپایهٔ برچسب";
 
 /* SearchBar's Placeholder Text */
-"Search notes or tags" = "Search notes or tags";
+"Search notes or tags" = "جست‌وجویِ یادداشت‌ها یا برچسب‌ها";
 
 /* No comment provided by engineer. */
-"Security" = "Security";
+"Security" = "امنیت";
 
 /* Verb - send the content of the note by email, message, etc */
-"Send" = "Send";
+"Send" = "ارسال";
 
 /* For debugging use */
 "Send a Test Crash" = "Send a Test Crash";
@@ -433,10 +420,10 @@
 "Send feedback" = "Send feedback";
 
 /* Title of options screen */
-"Settings" = "Settings";
+"Settings" = "تنظیمات";
 
 /* Share (verb) - the action of Sharing a note */
-"Share" = "Share";
+"Share" = "اشتراک‌گذاری";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -444,19 +431,16 @@
 /* No comment provided by engineer. */
 "Share note" = "Share note";
 
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Share the content of the current note";
-
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
 
 /* UI region to the left of the note list which shows all of a users tags */
-"Sidebar" = "Sidebar";
+"Sidebar" = "نوارِ کناری";
 
 /* Signup Action
    SignUp Action
    SignUp Interface Title */
-"Sign Up" = "Sign Up";
+"Sign Up" = "نام‌نویسی";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App.";
@@ -465,35 +449,26 @@
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
+"Simplenote iOS Feedback" = "بازخوردِ Simplenote iOS";
 
 /* Authentication Error Alert Title */
-"Sorry!" = "Sorry!";
+"Sorry!" = "پوزش!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
-"Sort Alphabetically" = "Sort Alphabetically";
-
-/* Sort By Title */
-"Sort by:" = "Sort by:";
+"Sort Alphabetically" = "مرتب‌سازیِ الفبایی";
 
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Sort Order";
 
+/* Sort By Title */
+"Sort by:" = "چینش بر پایهٔ:";
+
 /* Theme: Matches iOS Settings */
-"System Default" = "System Default";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Add a tag to the current note";
+"System Default" = "پیش‌فرضِ سامانه";
 
 /* No comment provided by engineer. */
-"tag-delete-accessibility-hint" = "Remove tag from the current note";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "tag:";
-
-/* No comment provided by engineer. */
-"Tags" = "Tags";
+"Tags" = "برچسب‌ها";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Terms and Conditions";
@@ -505,16 +480,16 @@
 "The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
 
 /* Onboarding Header Text */
-"The simplest way to keep notes." = "The simplest way to keep notes.";
+"The simplest way to keep notes." = "ساده‌ترین روش برای حفظِ یادداشت‌ها.";
 
 /* Option to enable the dark app theme. */
-"Theme" = "Theme";
+"Theme" = "پوسته";
 
 /* Simplenote Themes */
-"Themes" = "Themes";
+"Themes" = "پوسته‌ها";
 
 /* Displayed as a date in the case where a note was modified today, for example */
-"Today" = "Today";
+"Today" = "امروز";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Toggle tag sidebar";
@@ -522,17 +497,14 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Move the current note to trash";
-
 /* Title: Trash Tag is selected */
-"Trash-noun" = "Trash";
+"Trash" = "زباله‌دان";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Trash";
+"Trash" = "دور انداختن";
 
 /* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Unpin";
+"Unpin" = "برداشتنِ سنجاق";
 
 /* Action to mark a note as unpinned */
 "Unpin note" = "Unpin note";
@@ -547,54 +519,87 @@
 "Unsynced Notes Detected" = "Unsynced Notes Detected";
 
 /* Title: Untagged Notes are onscreen */
-"Untagged" = "Untagged";
+"Untagged" = "برچسب‌نخورده";
 
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "Untagged Notes";
 
 /* A user's Simplenote account */
-"Username" = "Username";
+"Username" = "نامِ کاربری";
 
 /* Represents a snapshot in time for a note */
 "Version" = "Version";
 
 /* App version number */
-"Version %@" = "Version %@";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Connect to the Internet to Access Previous Versions";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Switch to this version";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Fetching version";
+"Version %@" = "نسخهٔ %@";
 
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Visit Web App";
 
 /* Generic error */
-"We're having problems. Please try again soon." = "We're having problems. Please try again soon.";
+"We're having problems. Please try again soon." = "در حالِ حاضر با مشکلاتی مواجه هستیم. لطفاً به‌زودی دوباره امتحان کنید.";
 
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
-
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "What do you think about Simplenote?";
 
 /* Work at Automattic */
-"Work With Us" = "Work With Us";
+"Work With Us" = "با ما همکاری کنید";
 
 /* Alert's Accept Action
    Proceeds with the Empty Trash OP */
-"Yes" = "Yes";
+"Yes" = "بله";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
-"Yesterday" = "Yesterday";
+"Yesterday" = "دیروز";
 
 /* Message displayed when email address is invalid */
-"Your email address is not valid" = "Your email address is not valid";
+"Your email address is not valid" = "نشانیِ ایمیل شما معتبر نیست";
+
+/* Accessibility hint on button which shows the current collaborators on a note */
+"Enable others to collaborate" = "Enable others to collaborate";
+
+/* No comment provided by engineer. */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
+
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device." = "This note was deleted on another device.";
+
+/* Accessibility hint on button which shows the history of a note */
+"Restore note to previous version" = "Restore note to previous version";
+
+/* VoiceOver accessibiliity hint on button which shows or hides the menu */
+"Show options for note" = "Show options for note";
+
+/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
+"Close current note" = "Close current note";
+
+/* Accessibility hint on share button */
+"Share the content of the current note" = "اشتراک‌گذاریِ محتوایِ یادداشتِ کنونی";
+
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Add a tag to the current note";
+
+/* No comment provided by engineer. */
+"Remove tag from the current note" = "Remove tag from the current note";
+
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "برچسب:";
+
+/* Accessibility hint on button which moves a note to the trash */
+"Move the current note to trash" = "انتقالِ یادداشتِ کنونی به زباله‌دان";
+
+/* Error alert message shown when trying to view history of a note without an internet connection */
+"Connect to the Internet to Access Previous Versions" = "Connect to the Internet to Access Previous Versions";
+
+/* Accessiblity hint describing how to reset the current note to a previous version */
+"Switch to this version" = "Switch to this version";
+
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching version" = "Fetching version";
+
+/* A welcome note for new iOS users */
+"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
 
