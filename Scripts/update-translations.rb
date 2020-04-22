@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 # Supported languages:
-# ar,cy,zh-Hans,zh-Hant,nl,fr,de,el,he,id,ko,pt,ru,es,sv,tr,ja,it 
+# ar,cy,zh-Hans,zh-Hant,nl,fa,fr,de,el,he,id,ko,pt,ru,es,sv,tr,ja,it 
 # * Arabic
 # * Welsh
 # * Chinese (China) [zh-Hans]
@@ -21,6 +21,7 @@
 # * Turkish
 # * Japanese
 # * Italian
+# * Farsi
 require 'json'
 
 if Dir.pwd =~ /Scripts/
@@ -34,6 +35,7 @@ ALL_LANGS={
   'de' => 'de',         # German
   'el' => 'el',         # Greek
   'es' => 'es',         # Spanish
+  'fa' => 'fa',         # Farsi
   'fr' => 'fr',         # French
   'he' => 'he',         # Hebrew
   'id' => 'id',         # Indonesian
