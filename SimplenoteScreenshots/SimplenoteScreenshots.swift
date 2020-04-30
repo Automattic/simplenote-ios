@@ -40,8 +40,9 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(newLogin.waitForExistence(timeout: 10))
         newLogin.tap()
 
-        let firstNote = app.cells["Lemon Cake with Blueberry"]
+        let firstNote = app.cells["Lemon Cake & Blueberry"]
         // Super long timeout in case the test user has many notes and the connection is a bit slow
+
         XCTAssertTrue(firstNote.waitForExistence(timeout: 20))
 
         firstNote.tap()
