@@ -622,5 +622,5 @@ def screenshot_devices()
 end
 
 def simulator_version
-  '13.3'
+  '13.4'
 end
