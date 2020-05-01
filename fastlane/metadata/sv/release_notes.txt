@@ -1,1 +1,1 @@
-Ett problem som gjorde att anteckningslistan visades felaktigt för höger-till-vänster-språk har åtgärdats.
+Stöd för persiska läggs till.

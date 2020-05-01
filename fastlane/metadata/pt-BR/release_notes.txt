@@ -1,1 +1,1 @@
-Corrigimos um problema de exibição da Lista de anotações em idiomas escritos da direita para a esquerda.
+Como adicionar suporte para a língua persa.
