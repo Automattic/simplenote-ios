@@ -128,10 +128,6 @@ class SimplenoteScreenshots: XCTestCase {
         let searchCancelButton = app.buttons["Cancel"]
         XCTAssertTrue(searchCancelButton.waitForExistence(timeout: 3))
 
-        // Dismiss the keyboard before taking the screenshot
-        app.swipeUp()
-        app.swipeDown()
-
         takeScreenshot("5-search")
 
         searchCancelButton.tap()
