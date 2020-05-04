@@ -35,7 +35,6 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var emailWarningLabel: SPLabel! {
         didSet {
-            emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
             emailWarningLabel.textColor = .simplenoteRed60Color
             emailWarningLabel.isHidden = true
@@ -449,7 +448,6 @@ private extension SPAuthViewController {
     }
 
     func refreshPasswordWarning(isHidden: Bool) {
-        passwordWarningLabel.text = mode.passwordInvalidText
         passwordWarningLabel.animateVisibility(isHidden: isHidden)
         passwordInputView.inErrorState = !isHidden
     }
@@ -526,7 +524,6 @@ struct AuthenticationMode {
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
-    let passwordInvalidText: String
     let passwordMinimumLength: UInt
 }
 
@@ -546,7 +543,6 @@ extension AuthenticationMode {
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     passwordInvalidText:           AuthenticationStrings.passwordInvalidLogin,
                      passwordMinimumLength:         AuthenticationConstants.loginPasswordLength)
     }
 
@@ -561,7 +557,6 @@ extension AuthenticationMode {
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     passwordInvalidText:           AuthenticationStrings.passwordInvalidSignup,
                      passwordMinimumLength:         AuthenticationConstants.signupPasswordLength)
     }
 }
@@ -582,9 +577,6 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
-    static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 8 characters", comment: "Message displayed when password is invalid (Signup)")
-    static let passwordInvalidLogin         = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid (Login)")
 }
 
 
