@@ -18,7 +18,7 @@ class NSPredicateEmailTests: XCTestCase {
     ///
     func testPredicateForEmailValidationEvaluatesFalseOnStringsWithoutAtCharacter() {
         let predicate = NSPredicate.predicateForEmailValidation()
-        XCTAssertFalse(predicate.evaluate(with: "something.com"))
+        XCTAssertFalse(predicate.evaluate(with: "simplenote.com"))
     }
 
     /// Verifies that `predicateForEmailValidation` evaluates false whenever the input string is a malformed address
@@ -34,7 +34,7 @@ class NSPredicateEmailTests: XCTestCase {
     func testPredicateForEmailValidationEvaluatesTrueOnValidEmailAddresses() {
         let predicate = NSPredicate.predicateForEmailValidation()
         XCTAssertTrue(predicate.evaluate(with: "j@j.com"))
-        XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalid.blog"))
-        XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalid.blog.ar"))
+        XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalidsimplenote.blog"))
+        XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalidsimplenote.blog.ar"))
     }
 }
