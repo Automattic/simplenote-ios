@@ -23,7 +23,7 @@ struct AuthenticationValidator {
 
     /// Returns the Validation Result for a given Password (with its associated Username)
     ///
-    func performPasswordValidation(password: String, username: String) -> Result {
+    func performPasswordValidation(username: String, password: String) -> Result {
         guard password.count >= minimumPasswordLength else {
             return .passwordTooShort(length: minimumPasswordLength)
         }
@@ -98,6 +98,7 @@ func ==(lhs: AuthenticationValidator.Result, rhs: AuthenticationValidator.Result
         return true
 
     case (.passwordTooShort, .passwordTooShort):
+        // Disregard password length: For comparison purposes, we don't really care
         return true
 
     case (.passwordContainsInvalidCharacter, .passwordContainsInvalidCharacter):
