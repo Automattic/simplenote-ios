@@ -136,28 +136,15 @@ class SPAuthViewController: UIViewController {
 
     /// # Simperium's Validator
     ///
-    private lazy var validator: SPAuthenticationValidator = {
-        let output = SPAuthenticationValidator()
-        output.minimumPasswordLength = mode.passwordMinimumLength
-        return output
+    private lazy var validator: AuthenticationValidator = {
+        AuthenticationValidator(hardenedValidation: mode.hardenedValidation,
+                                minimumPasswordLength: mode.passwordMinimumLength)
     }()
-
-    /// # Indicates if we've got a valid Username. Doesn't display any validation warnings onscreen
-    ///
-    private var isUsernameValid: Bool {
-        return validator.validateUsername(email)
-    }
-
-    /// # Indicates if we've got a valid Password. Doesn't display any validation warnings onscreen
-    ///
-    private var isPasswordValid: Bool {
-        return validator.validatePasswordSecurity(password)
-    }
 
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
-        return isUsernameValid && isPasswordValid
+        return performUsernameValidation() == .success && performPasswordValidation() == .success
     }
 
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
@@ -438,42 +425,74 @@ private extension SPAuthViewController {
 }
 
 
+// MARK: - Warning Labels
+//
+private extension SPAuthViewController {
+
+    func displayEmailValidationWarning(_ string: String) {
+        emailWarningLabel.text = string
+        refreshEmailInput(inErrorState: true)
+    }
+
+    func displayPasswordValidationWarning(_ string: String) {
+        passwordWarningLabel.text = string
+        refreshPasswordInput(inErrorState: true)
+    }
+
+    func dismissEmailValidationWarning() {
+        refreshEmailInput(inErrorState: false)
+    }
+
+    func dismissPasswordValidationWarning() {
+        refreshPasswordInput(inErrorState: false)
+    }
+
+    func refreshEmailInput(inErrorState: Bool) {
+        emailWarningLabel.animateVisibility(isHidden: !inErrorState)
+        emailInputView.inErrorState = inErrorState
+    }
+
+    func refreshPasswordInput(inErrorState: Bool) {
+        passwordWarningLabel.animateVisibility(isHidden: !inErrorState)
+        passwordInputView.inErrorState = inErrorState
+    }
+}
+
+
 // MARK: - Validation
 //
 private extension SPAuthViewController {
 
-    func refreshEmailWarning(isHidden: Bool) {
-        emailWarningLabel.animateVisibility(isHidden: isHidden)
-        emailInputView.inErrorState = !isHidden
+    func performUsernameValidation() -> AuthenticationValidator.Result {
+        validator.performUsernameValidation(username: email)
     }
 
-    func refreshPasswordWarning(isHidden: Bool) {
-        passwordWarningLabel.animateVisibility(isHidden: isHidden)
-        passwordInputView.inErrorState = !isHidden
+    func performPasswordValidation() -> AuthenticationValidator.Result {
+        validator.performPasswordValidation(username: email, password: password)
     }
 
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
-        let isUsernameOkay = isUsernameValid
-        let isPasswordOkay = isPasswordValid
+        let usernameValidationResult = performUsernameValidation()
+        let passwordValidationResult = performPasswordValidation()
 
-        if !isUsernameOkay {
-            refreshEmailWarning(isHidden: false)
+        if usernameValidationResult != .success {
+            displayEmailValidationWarning(usernameValidationResult.description)
         }
 
-        if !isPasswordOkay {
-            refreshPasswordWarning(isHidden: false)
+        if passwordValidationResult != .success {
+            displayPasswordValidationWarning(passwordValidationResult.description)
         }
 
-        return isUsernameOkay && isPasswordOkay
+        return usernameValidationResult == .success && passwordValidationResult == .success
     }
 
     func ensureWarningsAreDismissedWhenNeeded() {
-        if isUsernameValid {
-            refreshEmailWarning(isHidden: true)
+        if performUsernameValidation() == .success {
+            dismissEmailValidationWarning()
         }
 
-        if isPasswordValid {
-            refreshPasswordWarning(isHidden: true)
+        if performPasswordValidation() == .success {
+            dismissPasswordValidationWarning()
         }
     }
 }
@@ -491,17 +510,21 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
         switch textInput {
         case emailInputView:
-            if isUsernameValid {
+            switch performUsernameValidation() {
+            case .success:
                 passwordInputView.becomeFirstResponder()
-            } else {
-                refreshEmailWarning(isHidden: false)
+
+            case let error:
+                displayEmailValidationWarning(error.description)
             }
 
         case passwordInputView:
-            if isPasswordValid {
+            switch performPasswordValidation() {
+            case .success:
                 performPrimaryActionIfPossible()
-            } else {
-                refreshPasswordWarning(isHidden: false)
+
+            case let error:
+                displayPasswordValidationWarning(error.description)
             }
 
         default:
