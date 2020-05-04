@@ -20,7 +20,7 @@ abstract_target 'Automattic' do
 	target 'Simplenote' do
 		# Third Party
 		#
-		pod '1PasswordExtension', '1.8.5'
+		pod '1PasswordExtension', '1.8.6'
 		pod 'Gridicons', '~> 0.18'
 		pod 'AppCenter', '~> 2.3.0' 
 		pod 'AppCenter/Distribute', '~> 2.3.0'

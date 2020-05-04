@@ -25,7 +25,7 @@ extension SPAuthError {
             return nil
         }
 
-        self = error.code == AppExtensionErrorCodeCancelledByUser ? .onePasswordError : .onePasswordCancelled
+        self = error.code == AppExtensionErrorCode.cancelledByUser.rawValue ? .onePasswordError : .onePasswordCancelled
     }
 
     /// Returns the SPAuthError matching a given Simperium Login Error Code
