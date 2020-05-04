@@ -1,1 +1,1 @@
-Résolution d'un problème d'affichage incorrect de la liste des notes pour les langues s'écrivant de droite à gauche.
+Ajout de la prise en charge de la langue perse.

@@ -1,1 +1,1 @@
-Een probleem verholpen dat zorgde dat de notitielijst onjuist werd weergegeven in talen die van rechts naar links worden gelezen.
+Ondersteuning toegevoegd voor Perzisch.

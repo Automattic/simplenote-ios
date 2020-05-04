@@ -141,6 +141,22 @@ end
   lane :new_hotfix_release do | options |
     prev_ver = ios_hotfix_prechecks(options)
     ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
+  end
+
+  #####################################################################################
+  # finalize_hotfix_release
+  # -----------------------------------------------------------------------------------
+  # This lane finalizes the hotfix branch. 
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane finalize_hotfix_release [skip_confirm:<skip confirm>]
+  #
+  # Example:
+  # bundle exec fastlane finalize_hotfix_release skip_confirm:true  
+  #####################################################################################
+  desc "Creates a new hotfix branch from the given tag"
+  lane :finalize_hotfix_release do | options |
+    ios_finalize_prechecks(options)
     ios_tag_build()
   end
   
@@ -390,6 +406,55 @@ end
     comment_body = "You can test the changes on this Pull Request by downloading it from AppCenter [here](#{install_url}) with build number: #{build_number}. IPA is available [here](#{download_url}). If you need access to this, you can ask a maintainer to add you."
     File.write("comment.json", { body: comment_body }.to_json)
   end
+
+  #####################################################################################
+  # Screenshot lanes
+  #####################################################################################
+
+  desc "Runs through the app taking screenshots"
+  lane :take_screenshots do |options|
+    devices = [
+      "iPhone 8 Plus"
+    ]
+
+    languages = [
+      "en-US"
+    ]
+
+    capture_ios_screenshots(
+      scheme: "SimplenoteScreenshots",
+
+      localize_simulator: true,
+      languages: languages,
+
+      devices: devices,
+
+      output_directory: screenshots_directory,
+      clear_previous_screenshots: true,
+
+      # Retry a few times if something is a little flaky
+      number_of_retries: 3,
+
+      # But fail completely after those 3 retries
+      stop_after_first_error: true,
+
+      # Allow the caller to invoke dark mode
+      dark_mode: options[:mode].to_s.downcase == "dark"
+    )
+  end
+
+  lane :create_promo_screenshots do |options|
+    unless Fastlane::Helper::GitHelper.has_git_lfs then
+      UI.user_error!("Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.")
+    end
+
+    promo_screenshots(
+      orig_folder: screenshots_directory,
+      metadata_folder: File.join(Dir.pwd, "metadata"),
+      output_folder: File.join(Dir.pwd, "/promo_screenshots"),
+      force: options[:force] || true
+    )
+  end
 end
 
 ########################################################################
@@ -452,3 +517,11 @@ desc "Get a list of pull request from `start_tag` to the current state"
 lane :get_pullrequests_list do | options |
   get_prs_list(repository:GHHELPER_REPO, start_tag:"#{options[:start_tag]}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list.txt")
 end 
+
+def fastlane_directory()
+  File.expand_path File.dirname(__FILE__)
+end
+
+def screenshots_directory()
+  File.join(fastlane_directory, "screenshots")
+end

@@ -1,1 +1,1 @@
-Se ha solucionado un problema que hacía que la lista de notas apareciera incorrectamente para los idiomas de derecha a izquierda.
+Ahora tenemos soporte para persa.

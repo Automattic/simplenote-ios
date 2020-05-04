@@ -1,1 +1,1 @@
-Corretto un problema a causa del quale l'Elenco delle note non veniva mostrato in modo corretto, per lingue da destra a sinistra.
+Aggiunta del supporto per la lingua persiana.

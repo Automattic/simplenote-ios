@@ -1,1 +1,1 @@
-Sağdan Sola dillerde Notlar Listesinin hatalı şekilde görünmesine neden olan bir sorun düzeltildi.
+Farsça için destek ekleme.
