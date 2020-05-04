@@ -519,6 +519,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 //
 struct AuthenticationMode {
     let title: String
+    let hardenedValidation: Bool
     let onePasswordSelector: Selector
     let primaryActionSelector: Selector
     let primaryActionText: String
@@ -538,6 +539,7 @@ extension AuthenticationMode {
     ///
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
+                     hardenedValidation:            false,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
@@ -552,6 +554,7 @@ extension AuthenticationMode {
     ///
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
+                     hardenedValidation:            true,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
