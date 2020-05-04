@@ -157,6 +157,10 @@
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
 		B51D7C7923D9CFA4005D4B77 /* StringSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D7C7823D9CFA4005D4B77 /* StringSimplenoteTests.swift */; };
+		B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD02460C3EE0074DDD9 /* AuthenticationValidator.swift */; };
+		B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */; };
+		B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */; };
+		B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD62460D7C20074DDD9 /* NSPredicateEmailTests.swift */; };
 		B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */; };
 		B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */; };
 		B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */; };
@@ -498,6 +502,10 @@
 		B518899F1E0D5F2200E71B83 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		B51889A31E0DB01E00E71B83 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		B51D7C7823D9CFA4005D4B77 /* StringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSimplenoteTests.swift; sourceTree = "<group>"; };
+		B51F6DD02460C3EE0074DDD9 /* AuthenticationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationValidator.swift; sourceTree = "<group>"; };
+		B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationValidatorTests.swift; sourceTree = "<group>"; };
+		B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Email.swift"; sourceTree = "<group>"; };
+		B51F6DD62460D7C20074DDD9 /* NSPredicateEmailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicateEmailTests.swift; sourceTree = "<group>"; };
 		B521A1931BC8446900E1CF2A /* SPAutomatticTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAutomatticTracker.h; path = Classes/SPAutomatticTracker.h; sourceTree = "<group>"; };
 		B521A1941BC8446900E1CF2A /* SPAutomatticTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAutomatticTracker.m; path = Classes/SPAutomatticTracker.m; sourceTree = "<group>"; };
 		B524AE0E2352BE9200EA11D4 /* UITableView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView+Simplenote.swift"; path = "Classes/UITableView+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1082,6 +1090,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		B51F6DCF2460C3D80074DDD9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B51F6DD02460C3EE0074DDD9 /* AuthenticationValidator.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		B521A19B1BC8452800E1CF2A /* Trackers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1115,6 +1131,7 @@
 			isa = PBXGroup;
 			children = (
 				374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */,
+				B51F6DD62460D7C20074DDD9 /* NSPredicateEmailTests.swift */,
 				B5B85BA4235173BF00AD5221 /* NSPredicateSimplenoteTests.swift */,
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
 				B51D7C7823D9CFA4005D4B77 /* StringSimplenoteTests.swift */,
@@ -1175,6 +1192,7 @@
 		B55AC57B22D27BA300D8CEB2 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */,
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
@@ -1192,6 +1210,7 @@
 				B5421F3523CE79E4004DDC19 /* NSManagedObject+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
+				B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */,
 				B5B85BA22351730700AD5221 /* NSPredicate+Simplenote.swift */,
 				B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */,
 				B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */,
@@ -1329,6 +1348,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B51F6DCF2460C3D80074DDD9 /* Onboarding */,
 				B504D4DB23D1FBB400AEED27 /* ResultsController */,
 				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
@@ -2194,6 +2214,7 @@
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				46A3C96F17DFA81A002865AE /* SPButton.m in Sources */,
+				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				46A3C97117DFA81A002865AE /* UIButton+Images.m in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
@@ -2305,6 +2326,7 @@
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
+				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
@@ -2357,8 +2379,10 @@
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
 				B5421F4223CE7A25004DDC19 /* ResultsControllerTests.swift in Sources */,
 				B5B85BA5235173BF00AD5221 /* NSPredicateSimplenoteTests.swift in Sources */,
+				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
 				B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */,
 				B51D7C7923D9CFA4005D4B77 /* StringSimplenoteTests.swift in Sources */,
+				B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */,
 				B5421F4623CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift in Sources */,
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,
 				B5421F3F23CE7A1C004DDC19 /* MockupStorage.swift in Sources */,
