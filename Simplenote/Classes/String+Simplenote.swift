@@ -9,9 +9,17 @@ extension String {
     ///
     static let searchOperatorForTags = NSLocalizedString("tag:", comment: "Search Operator for tags. Please preserve the semicolons when translating!")
 
+    /// Newline
+    ///
+    static let newline = "\n"
+
     /// String containing a Space
     ///
     static let space = " "
+
+    /// Tabs
+    ///
+    static let tab = "\t"
 
 
     /// Returns the Suffix string after a given `prefix` (if any!)
