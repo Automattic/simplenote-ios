@@ -46,7 +46,7 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (~> 0.4)
   - Gridicons (~> 0.18)
   - SAMKeychain (= 1.5.2)
-  - Simperium (~> 0.8.26)
+  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, commit `cf56e16`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -60,10 +60,19 @@ SPEC REPOS:
     - Reachability
     - SAMKeychain
     - Sentry
-    - Simperium
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
+
+EXTERNAL SOURCES:
+  Simperium:
+    :commit: cf56e16
+    :git: https://github.com/Simperium/simperium-ios.git
+
+CHECKOUT OPTIONS:
+  Simperium:
+    :commit: cf56e16
+    :git: https://github.com/Simperium/simperium-ios.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: f97cc80ae58053c331b2b6dc8843ba7103b33794
@@ -79,6 +88,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 249fa8890597086cd536bb2df5c9804d84e122b0
 
-PODFILE CHECKSUM: cebe2592ab71a159b79bf0c1ac923184b34fc3c8
+PODFILE CHECKSUM: a6f2fb19bc52b94af11d850cacb2b1a93bfe167a
 
 COCOAPODS: 1.7.5
