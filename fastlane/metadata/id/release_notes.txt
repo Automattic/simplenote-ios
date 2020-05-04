@@ -1,1 +1,1 @@
-Memperbaiki masalah penyebab Daftar Catatan tidak ditampilkan dengan benar, untuk bahasa dengan penulisan Kanan ke Kiri.
+Menambahkan dukungan untuk bahasa Persia.

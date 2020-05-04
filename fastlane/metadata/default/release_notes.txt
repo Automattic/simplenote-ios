@@ -1,1 +1,1 @@
-Fixed an issue that caused the Notes List to show up incorrectly, in Right to Left languages.
+Adding support for Persian Language.

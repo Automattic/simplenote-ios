@@ -1,1 +1,1 @@
-Fehler behoben, der dazu führte, dass die Notizenliste in Rechts-nach-Links-Sprachen falsch angezeigt wurde.
+Support für Persisch.
