@@ -611,5 +611,5 @@ private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     static let loginPasswordLength  = UInt(4)
-    static let signupPasswordLength = UInt(6)
+    static let signupPasswordLength = UInt(8)
 }
