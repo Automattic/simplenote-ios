@@ -580,7 +580,7 @@ private enum AuthenticationStrings {
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 6 characters", comment: "Message displayed when password is invalid (Signup)")
+    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 8 characters", comment: "Message displayed when password is invalid (Signup)")
     static let passwordInvalidLogin         = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid (Login)")
 }
 
