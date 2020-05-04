@@ -1,5 +1,5 @@
 PODS:
-  - 1PasswordExtension (1.8.5)
+  - 1PasswordExtension (1.8.6)
   - AppCenter (2.3.0):
     - AppCenter/Analytics (= 2.3.0)
     - AppCenter/Crashes (= 2.3.0)
@@ -40,7 +40,7 @@ PODS:
   - ZIPFoundation (0.9.10)
 
 DEPENDENCIES:
-  - 1PasswordExtension (= 1.8.5)
+  - 1PasswordExtension (= 1.8.6)
   - AppCenter (~> 2.3.0)
   - AppCenter/Distribute (~> 2.3.0)
   - Automattic-Tracks-iOS (~> 0.4)
@@ -66,7 +66,7 @@ SPEC REPOS:
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+  1PasswordExtension: f97cc80ae58053c331b2b6dc8843ba7103b33794
   AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
   Automattic-Tracks-iOS: 5515b3e6a5e55183a244ca6cb013df26810fa994
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
@@ -79,6 +79,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 249fa8890597086cd536bb2df5c9804d84e122b0
 
-PODFILE CHECKSUM: e44915f45fd5696fab6827b99181d323bddf4449
+PODFILE CHECKSUM: cebe2592ab71a159b79bf0c1ac923184b34fc3c8
 
 COCOAPODS: 1.7.5
