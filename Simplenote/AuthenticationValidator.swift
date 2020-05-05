@@ -9,11 +9,11 @@ struct AuthenticationValidator {
     ///
     let style: Style
 
-    /// Minimum Password Lengths: Login
+    /// Minimum Password Length: Login
     ///
     private let loginPasswordLength  = UInt(4)
 
-    /// Minimum Password Lengths: SignUp
+    /// Minimum Password Length: SignUp
     ///
     private let signupPasswordLength = UInt(8)
 
