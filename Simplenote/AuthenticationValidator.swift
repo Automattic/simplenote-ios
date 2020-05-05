@@ -64,6 +64,7 @@ extension AuthenticationValidator.Result: CustomStringConvertible {
     var description: String {
         switch self {
         case .success:
+            // Not really needed. But for convenience reasons, it's super if this property isn't optional.
             return String()
 
         case .emailInvalid:
