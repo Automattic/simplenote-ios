@@ -137,8 +137,7 @@ class SPAuthViewController: UIViewController {
     /// # Simperium's Validator
     ///
     private lazy var validator: AuthenticationValidator = {
-        AuthenticationValidator(hardenedValidation: mode.hardenedValidation,
-                                minimumPasswordLength: mode.passwordMinimumLength)
+        AuthenticationValidator(style: mode.validationStyle)
     }()
 
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
@@ -540,14 +539,13 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 //
 struct AuthenticationMode {
     let title: String
-    let hardenedValidation: Bool
+    let validationStyle: AuthenticationValidator.Style
     let onePasswordSelector: Selector
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
-    let passwordMinimumLength: UInt
 }
 
 
@@ -559,28 +557,26 @@ extension AuthenticationMode {
     ///
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
-                     hardenedValidation:            false,
+                     validationStyle:               .login,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil,
-                     passwordMinimumLength:         AuthenticationConstants.loginPasswordLength)
+                     secondaryActionAttributedText: nil)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
-                     hardenedValidation:            true,
+                     validationStyle:               .signup,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     passwordMinimumLength:         AuthenticationConstants.signupPasswordLength)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
     }
 }
 
@@ -628,6 +624,4 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-    static let loginPasswordLength  = UInt(4)
-    static let signupPasswordLength = UInt(8)
 }

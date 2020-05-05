@@ -9,7 +9,7 @@ class AuthenticationValidatorTests: XCTestCase {
 
     /// Testing Validator
     ///
-    let validator = AuthenticationValidator(hardenedValidation: true, minimumPasswordLength: 8)
+    let validator = AuthenticationValidator(style: .signup)
 
 
     /// Verifies that `performUsernameValidation` returns `true` when the input string is valid
@@ -30,8 +30,12 @@ class AuthenticationValidatorTests: XCTestCase {
     /// Verifies that `performPasswordValidation` returns `passwordTooShort` whenever the password doesn't meet the length requirement.
     ///
     func testPerformPasswordValidationReturnsErrorWheneverInputStringIsShorterThanExpected() {
-        let result = validator.performPasswordValidation(username: "", password: "")
-        XCTAssert(result == .passwordTooShort(length: validator.minimumPasswordLength))
+        guard case .passwordTooShort = validator.performPasswordValidation(username: "", password: "") else {
+            XCTFail()
+            return
+        }
+
+        // We can't really perform a straightforward comparison, because of the associated value!
     }
 
     /// Verifies that `performPasswordValidation` returns `passwordMatchesUsername` whenever the password matches the username.

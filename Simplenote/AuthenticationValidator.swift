@@ -5,13 +5,23 @@ import Foundation
 //
 struct AuthenticationValidator {
 
-    /// Indicates if we should perform an enhanced validation (Nü Hardened Rules), or just check password length
+    /// We're enhancing password strength requirements. But legacy accounts must be allowed in. That's why we have two sets of rules!
     ///
-    let hardenedValidation: Bool
+    let style: Style
+
+    /// Minimum Password Lengths: Login
+    ///
+    private let loginPasswordLength  = UInt(4)
+
+    /// Minimum Password Lengths: SignUp
+    ///
+    private let signupPasswordLength = UInt(8)
 
     /// Defines the minimum allowed password length
     ///
-    let minimumPasswordLength: UInt
+    private var minimumPasswordLength: UInt {
+        return (style == .login) ? loginPasswordLength : signupPasswordLength
+    }
 
 
     /// Returns the Validation Result for a given Username
@@ -28,7 +38,7 @@ struct AuthenticationValidator {
             return .passwordTooShort(length: minimumPasswordLength)
         }
 
-        guard hardenedValidation else {
+        guard style == .signup else {
             return .success
         }
 
@@ -45,9 +55,15 @@ struct AuthenticationValidator {
 }
 
 
-// MARK: - Validation Results
+// MARK: - Nested Types
 //
 extension AuthenticationValidator {
+
+    enum Style {
+        case login
+        case signup
+    }
+
     enum Result {
         case success
         case emailInvalid
@@ -61,6 +77,7 @@ extension AuthenticationValidator {
 // MARK: - Validation Results: String Conversion
 //
 extension AuthenticationValidator.Result: CustomStringConvertible {
+
     var description: String {
         switch self {
         case .success:
