@@ -9,7 +9,7 @@ class AuthenticationValidatorTests: XCTestCase {
 
     /// Testing Validator
     ///
-    let validator = AuthenticationValidator(style: .signup)
+    let validator = AuthenticationValidator()
 
 
     /// Verifies that `performUsernameValidation` returns `true` when the input string is valid

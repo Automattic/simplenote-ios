@@ -136,9 +136,7 @@ class SPAuthViewController: UIViewController {
 
     /// # Simperium's Validator
     ///
-    private lazy var validator: AuthenticationValidator = {
-        AuthenticationValidator(style: mode.validationStyle)
-    }()
+    private lazy var validator = AuthenticationValidator()
 
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
@@ -288,17 +286,12 @@ private extension SPAuthViewController {
             return
         }
 
-        lockdownInterface()
-
-        controller.loginWithCredentials(username: email, password: password) { error in
-            if let error = error {
-                self.handleError(error: error)
-            } else {
-                SPTracker.trackUserSignedIn()
-            }
-
-            self.unlockInterface()
+        if mustUpgradePasswordStrength() {
+            performCredentialsValidation()
+            return
         }
+
+        performSimperiumAuthentication()
     }
 
     @IBAction func performSignUp() {
@@ -367,6 +360,41 @@ private extension SPAuthViewController {
         let safariViewController = SFSafariViewController(url: targetURL)
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Simperium Services
+//
+private extension SPAuthViewController {
+
+    func performCredentialsValidation() {
+        lockdownInterface()
+
+        controller.validateWithCredentials(username: email, password: password) { error in
+            if let error = error {
+                self.handleError(error: error)
+            } else {
+// TODO: Present Password Reset UI
+NSLog("Password Reset")
+            }
+
+            self.unlockInterface()
+        }
+    }
+
+    func performSimperiumAuthentication() {
+        lockdownInterface()
+
+        controller.loginWithCredentials(username: email, password: password) { error in
+            if let error = error {
+                self.handleError(error: error)
+            } else {
+                SPTracker.trackUserSignedIn()
+            }
+
+            self.unlockInterface()
+        }
     }
 }
 
@@ -466,8 +494,18 @@ private extension SPAuthViewController {
         validator.performUsernameValidation(username: email)
     }
 
+    /// When we're in `.login` mode, password requirements are relaxed (since we must allow users with old passwords to sign in).
+    /// That's where the `validationStyle` comes in.
+    ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        validator.performPasswordValidation(username: email, password: password)
+        validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+    }
+
+    /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
+    /// user to reset the password associated to his/her account.
+    ///
+    func mustUpgradePasswordStrength() -> Bool {
+        validator.performPasswordValidation(username: email, password: password, style: .strong) != .success
     }
 
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
@@ -557,7 +595,7 @@ extension AuthenticationMode {
     ///
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
-                     validationStyle:               .login,
+                     validationStyle:               .legacy,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
@@ -570,7 +608,7 @@ extension AuthenticationMode {
     ///
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
-                     validationStyle:               .signup,
+                     validationStyle:               .strong,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,

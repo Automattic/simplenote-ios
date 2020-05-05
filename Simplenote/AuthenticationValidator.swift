@@ -5,23 +5,13 @@ import Foundation
 //
 struct AuthenticationValidator {
 
-    /// We're enhancing password strength requirements. But legacy accounts must be allowed in. That's why we have two sets of rules!
-    ///
-    let style: Style
-
     /// Minimum Password Length: Login
     ///
-    private let loginPasswordLength  = UInt(4)
+    private let legacyPasswordLength  = UInt(4)
 
     /// Minimum Password Length: SignUp
     ///
-    private let signupPasswordLength = UInt(8)
-
-    /// Defines the minimum allowed password length
-    ///
-    private var minimumPasswordLength: UInt {
-        return (style == .login) ? loginPasswordLength : signupPasswordLength
-    }
+    private let strongPasswordLength = UInt(8)
 
 
     /// Returns the Validation Result for a given Username
@@ -33,12 +23,14 @@ struct AuthenticationValidator {
 
     /// Returns the Validation Result for a given Password (with its associated Username)
     ///
-    func performPasswordValidation(username: String, password: String) -> Result {
-        guard password.count >= minimumPasswordLength else {
-            return .passwordTooShort(length: minimumPasswordLength)
+    func performPasswordValidation(username: String, password: String, style: Style = .strong) -> Result {
+        let requiredPasswordLength = minimumPasswordLength(for: style)
+
+        guard password.count >= requiredPasswordLength else {
+            return .passwordTooShort(length: requiredPasswordLength)
         }
 
-        guard style == .signup else {
+        guard style == .strong else {
             return .success
         }
 
@@ -52,6 +44,12 @@ struct AuthenticationValidator {
 
         return .success
     }
+
+    /// Defines the minimum allowed password length
+    ///
+    private func minimumPasswordLength(for style: Style) -> UInt {
+        return (style == .legacy) ? legacyPasswordLength : strongPasswordLength
+    }
 }
 
 
@@ -60,8 +58,8 @@ struct AuthenticationValidator {
 extension AuthenticationValidator {
 
     enum Style {
-        case login
-        case signup
+        case legacy
+        case strong
     }
 
     enum Result {
