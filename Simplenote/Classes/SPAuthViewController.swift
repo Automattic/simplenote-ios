@@ -375,7 +375,7 @@ private extension SPAuthViewController {
             if let error = error {
                 self.handleError(error: error)
             } else {
-                self.presentPasswordResetRequiredAlert()
+                self.presentPasswordResetRequiredAlert(email: self.email)
             }
 
             self.unlockInterface()
@@ -402,11 +402,15 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func presentPasswordResetRequiredAlert() {
+    func presentPasswordResetRequiredAlert(email: String) {
+        guard let resetURL = URL(string: SimplenoteConstants.resetPasswordURL + email) else {
+            fatalError()
+        }
+
         let alertController = UIAlertController(title: PasswordInsecureString.title, message: PasswordInsecureString.message, preferredStyle: .alert)
         alertController.addCancelActionWithTitle(PasswordInsecureString.cancel)
         alertController.addDefaultActionWithTitle(PasswordInsecureString.reset) { _ in
-// TODO: Reset Web
+            UIApplication.shared.open(resetURL, options: [:], completionHandler: nil)
         }
 
         present(alertController, animated: true, completion: nil)
