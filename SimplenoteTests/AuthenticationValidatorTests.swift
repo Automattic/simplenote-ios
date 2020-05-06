@@ -23,7 +23,7 @@ class AuthenticationValidatorTests: XCTestCase {
         ]
 
         for result in results {
-            XCTAssert(result == .success)
+            XCTAssertEqual(result, .success)
         }
     }
 
@@ -42,7 +42,7 @@ class AuthenticationValidatorTests: XCTestCase {
     ///
     func testPerformPasswordValidationReturnsErrorWheneverPasswordMatchesUsername() {
         let result = validator.performPasswordValidation(username: "somethinghere", password: "somethinghere")
-        XCTAssert(result == .passwordMatchesUsername)
+        XCTAssertEqual(result, .passwordMatchesUsername)
     }
 
     /// Verifies that `performPasswordValidation` returns `passwordContainsInvalidCharacter` whenever the password contains
@@ -57,7 +57,7 @@ class AuthenticationValidatorTests: XCTestCase {
         ]
 
         for result in results {
-            XCTAssert(result == .passwordContainsInvalidCharacter)
+            XCTAssertEqual(result, .passwordContainsInvalidCharacter)
         }
     }
 }
