@@ -9,7 +9,7 @@ class AuthenticationValidatorTests: XCTestCase {
 
     /// Testing Validator
     ///
-    let validator = AuthenticationValidator(style: .signup)
+    let validator = AuthenticationValidator(style: .strong)
 
 
     /// Verifies that `performUsernameValidation` returns `true` when the input string is valid
@@ -23,7 +23,7 @@ class AuthenticationValidatorTests: XCTestCase {
         ]
 
         for result in results {
-            XCTAssert(result == .success)
+            XCTAssertEqual(result, .success)
         }
     }
 
@@ -57,7 +57,7 @@ class AuthenticationValidatorTests: XCTestCase {
         ]
 
         for result in results {
-            XCTAssert(result == .passwordContainsInvalidCharacter)
+            XCTAssertEqual(result, .passwordContainsInvalidCharacter)
         }
     }
 }

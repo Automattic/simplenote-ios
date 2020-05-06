@@ -557,7 +557,7 @@ extension AuthenticationMode {
     ///
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
-                     validationStyle:               .login,
+                     validationStyle:               .legacy,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
@@ -570,7 +570,7 @@ extension AuthenticationMode {
     ///
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
-                     validationStyle:               .signup,
+                     validationStyle:               .strong,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,

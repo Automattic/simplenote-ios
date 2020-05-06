@@ -20,7 +20,7 @@ struct AuthenticationValidator {
     /// Defines the minimum allowed password length
     ///
     private var minimumPasswordLength: UInt {
-        return (style == .login) ? loginPasswordLength : signupPasswordLength
+        return (style == .legacy) ? loginPasswordLength : signupPasswordLength
     }
 
 
@@ -38,7 +38,7 @@ struct AuthenticationValidator {
             return .passwordTooShort(length: minimumPasswordLength)
         }
 
-        guard style == .signup else {
+        guard style == .strong else {
             return .success
         }
 
@@ -60,8 +60,8 @@ struct AuthenticationValidator {
 extension AuthenticationValidator {
 
     enum Style {
-        case login
-        case signup
+        case legacy
+        case strong
     }
 
     enum Result: Equatable {
