@@ -64,7 +64,7 @@ extension AuthenticationValidator {
         case signup
     }
 
-    enum Result {
+    enum Result: Equatable {
         case success
         case emailInvalid
         case passwordMatchesUsername
@@ -99,34 +99,4 @@ extension AuthenticationValidator.Result: CustomStringConvertible {
 
         }
     }
-}
-
-
-// MARK: - Validation Results: Equality
-//
-func ==(lhs: AuthenticationValidator.Result, rhs: AuthenticationValidator.Result) -> Bool {
-    switch (lhs, rhs) {
-    case (.success, .success):
-        return true
-
-    case (.emailInvalid, .emailInvalid):
-        return true
-
-    case (.passwordMatchesUsername, .passwordMatchesUsername):
-        return true
-
-    case (.passwordTooShort, .passwordTooShort):
-        // Disregard password length: For comparison purposes, we don't really care
-        return true
-
-    case (.passwordContainsInvalidCharacter, .passwordContainsInvalidCharacter):
-        return true
-
-    default:
-        return false
-    }
-}
-
-func !=(lhs: AuthenticationValidator.Result, rhs: AuthenticationValidator.Result) -> Bool {
-    return !(lhs == rhs)
 }
