@@ -15,6 +15,9 @@
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
+NSNotificationName const SPEditorTextViewDidBecomeFirstResponder = @"SPEditorTextViewDidBecomeFirstResponder";
+NSNotificationName const SPEditorTextViewDidResignFirstResponder = @"SPEditorTextViewDidResignFirstResponder";
+
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
@@ -161,17 +164,39 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return [touch.view isKindOfClass:[SPTextView class]];
 }
 
-- (BOOL)becomeFirstResponder
-{
-    [self setEditable:YES];
-    return [super becomeFirstResponder];
+- (BOOL)becomeFirstResponder {
+    
+    // Restore editable status and post a notification when responder status changes.
+    // Editable status is true by default but we fiddle with it during setup.
+    
+    self.editable = YES;
+    
+    // This can fail so we capture and act only when successful.
+    // Notification currently used to handle show/hide of checklist button.
+    BOOL result = [super becomeFirstResponder];
+    if (result == YES) {
+        NSLog(@"%s - Note became first responder", __PRETTY_FUNCTION__);
+        [[NSNotificationCenter defaultCenter] postNotificationName:SPEditorTextViewDidBecomeFirstResponder object:self];
+    }
+    
+    return result;
 }
 
-- (BOOL)resignFirstResponder
-{
-    BOOL response = [super resignFirstResponder];
-    [self setNeedsLayout];
-    return response;
+- (BOOL)resignFirstResponder {
+
+    // Post a notification if responder status changes.
+    // Invalidate view layout.
+
+    // This can fail so we capture and act only when successful.
+    // Notification currently used to handle show/hide of checklist button.
+    BOOL result = [super resignFirstResponder];
+    if (result == YES) {
+        NSLog(@"%s - Note resigned first responder status", __PRETTY_FUNCTION__);
+        [[NSNotificationCenter defaultCenter] postNotificationName:SPEditorTextViewDidResignFirstResponder object:self];
+        [self setNeedsLayout];
+    }
+
+    return result;
 }
 
 - (void)scrollToBottom
