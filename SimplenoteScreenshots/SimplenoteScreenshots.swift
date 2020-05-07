@@ -40,8 +40,9 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(newLogin.waitForExistence(timeout: 10))
         newLogin.tap()
 
-        let firstNote = app.cells["Lemon Cake with Blueberry"]
+        let firstNote = app.cells["Lemon Cake & Blueberry"]
         // Super long timeout in case the test user has many notes and the connection is a bit slow
+
         XCTAssertTrue(firstNote.waitForExistence(timeout: 20))
 
         firstNote.tap()
@@ -49,7 +50,7 @@ class SimplenoteScreenshots: XCTestCase {
         let actionButton = app.buttons.matching(identifier: "note-menu").firstMatch
         XCTAssertTrue(actionButton.waitForExistence(timeout: 10))
 
-        snapshot("1-note")
+        takeScreenshot("1-note")
 
         actionButton.tap()
 
@@ -83,7 +84,7 @@ class SimplenoteScreenshots: XCTestCase {
 
         // The index 3 is _intentional_ as that's the desired position of the screenshot in the App
         // Store
-        snapshot("3-collaborators")
+        takeScreenshot("3-collaborators")
 
         // Tapping done in the collaborate view dismisses the collaborate screen _and_ the action
         // menu.
@@ -107,14 +108,14 @@ class SimplenoteScreenshots: XCTestCase {
             XCTAssertFalse(dismissReviewButton.waitForExistence(timeout: 3))
         }
 
-        snapshot("2-all-notes")
+        takeScreenshot("2-all-notes")
 
         openMenu(using: app)
 
         let allNotesMenuInput = app.cells.matching(identifier: "all-notes").firstMatch
         XCTAssertTrue(allNotesMenuInput.waitForExistence(timeout: 3))
 
-        snapshot("4-menu")
+        takeScreenshot("4-menu")
 
         allNotesMenuInput.tap()
 
@@ -127,11 +128,7 @@ class SimplenoteScreenshots: XCTestCase {
         let searchCancelButton = app.buttons["Cancel"]
         XCTAssertTrue(searchCancelButton.waitForExistence(timeout: 3))
 
-        // Dismiss the keyboard before taking the screenshot
-        app.swipeUp()
-        app.swipeDown()
-
-        snapshot("5-search")
+        takeScreenshot("5-search")
 
         searchCancelButton.tap()
 
@@ -153,7 +150,7 @@ class SimplenoteScreenshots: XCTestCase {
         // The screenshot for the passcode should have only 3 characters inserted
         type("123", onFirstKeyboardOf: app)
 
-        snapshot("6-passcode")
+        takeScreenshot("6-passcode")
 
         type("4", onFirstKeyboardOf: app)
 
@@ -199,6 +196,13 @@ class SimplenoteScreenshots: XCTestCase {
 
     func type(_ text: String, onFirstKeyboardOf app: XCUIApplication) {
         text.forEach { app.keyboards.firstMatch.keys[String($0)].tap() }
+    }
+
+    // See https://github.com/woocommerce/woocommerce-ios/blob/mokagio-gems-update-test/WooCommerce/WooCommerceScreenshots/WooCommerceScreenshots.swift#L66-L79
+    func takeScreenshot(_ title: String) {
+        let mode = isDarkMode ? "dark" : "light"
+
+        snapshot("\(title)-\(mode)")
     }
 }
 

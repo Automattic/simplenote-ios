@@ -14,6 +14,44 @@
 			"device_frame": "appstoreres/assets/iphone_8_plus.png",
 			"device_frame_size": [1242, 2208],
 			"device_frame_offset": [0, 0]
+		},
+		{
+			"name": "iPhone Xs Max",
+			"canvas_size": [1242, 2688],
+			"text_size": [994, 310],
+			"text_offset": [120, 120],
+			"font_size": "105px",
+			"screenshot_size": [890, 1926],
+			"screenshot_offset": [176, 580],
+			"screenshot_mask": "appstoreres/assets/iphone_Xs_mask_no_notch.png",
+			"device_frame": "appstoreres/assets/iphone_Xs_max.png",
+			"device_frame_size": [1242, 2681],
+			"device_frame_offset": [0, 0]
+		},
+		{
+			"name": "iPad Pro (12.9-inch) (2nd generation)",
+			"canvas_size": [2048, 2732],
+			"text_size": [1024, 310],
+			"text_offset": [512, 120],
+			"font_size": "105px",
+			"screenshot_size": [1266, 1689],
+			"screenshot_offset": [391, 708],
+			"device_frame": "appstoreres/assets/ipad_2nd_gen.png",
+			"device_frame_size": [2048, 2732],
+			"device_frame_offset": [0, 0]
+		},
+		{
+			"name": "iPad Pro (12.9-inch) (3rd generation)",
+			"canvas_size": [2048, 2732],
+			"text_size": [1024, 310],
+			"text_offset": [512, 120],
+			"font_size": "105px",
+			"screenshot_size": [1408, 1878],
+			"screenshot_offset": [320, 612],
+			"screenshot_mask": "appstoreres/assets/ipad_12_9_3rd_gen_mask.png",
+			"device_frame": "appstoreres/assets/ipad_3rd_gen.png",
+			"device_frame_size": [2048, 2732],
+			"device_frame_offset": [0, 0]
 		}
 	],
 	"entries": [
@@ -21,42 +59,171 @@
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-01.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-1-note.png",
+			"screenshot": "iPhone 8 Plus-1-note-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_1.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-02.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-2-all-notes.png",
+			"screenshot": "iPhone 8 Plus-2-all-notes-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_2.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-03.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-3-collaborators.png",
+			"screenshot": "iPhone 8 Plus-3-collaborators-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-04.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-4-menu.png",
+			"screenshot": "iPhone 8 Plus-4-menu-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_4.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-05.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-5-search.png",
+			"screenshot": "iPhone 8 Plus-5-search-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_5.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-06.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone 8 Plus-6-passcode.png",
+			"screenshot": "iPhone 8 Plus-6-passcode-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
+		},
+
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-1-note-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-2-all-notes-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-3-collaborators-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-4-menu-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-5-search-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPhone Xs Max",
+			"filename": "iPhone Xs Max-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPhone Xs Max-6-passcode-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
+		},
+
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-1-note-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-2-all-notes-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-3-collaborators-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-4-menu-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-5-search-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (2nd generation)",
+			"filename": "iPad Pro (12.9-inch) (2nd generation)-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-6-passcode-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_6.txt"
+		},
+
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-01.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-1-note-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_1.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-02.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-2-all-notes-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_2.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-03.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-3-collaborators-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_3.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-04.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-4-menu-dark.png",
+			"text": "metadata/{locale}/app_store_screenshot_4.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-05.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-5-search-light.png",
+			"text": "metadata/{locale}/app_store_screenshot_5.txt"
+		},
+		{
+			"device": "iPad Pro (12.9-inch) (3rd generation)",
+			"filename": "iPad Pro (12.9-inch) (3rd generation)-06.png",
+			"background": "#FFFFFF",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-6-passcode-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		}
 	]
