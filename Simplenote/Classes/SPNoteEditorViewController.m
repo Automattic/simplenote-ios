@@ -284,26 +284,22 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)handleNoteEditorDidBecomeFirstResponderNotification:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     checklistButton.hidden = NO;
 }
 
 - (void)handleNoteEditorDidResignFirstResponderNotification:(NSNotification *)notification {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     checklistButton.hidden = YES;
 }
 
 - (void)startListeningForNoteEditorResponderNotifications {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNoteEditorDidBecomeFirstResponderNotification:) name:SPEditorTextViewDidBecomeFirstResponder object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNoteEditorDidResignFirstResponderNotification:) name:SPEditorTextViewDidResignFirstResponder object:nil];
 }
 
 - (void)stopListeningForNoteEditorResponderNotifications {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SPEditorTextViewDidBecomeFirstResponder object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SPEditorTextViewDidResignFirstResponder object:nil];

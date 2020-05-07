@@ -175,7 +175,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     // Notification currently used to handle show/hide of checklist button.
     BOOL result = [super becomeFirstResponder];
     if (result == YES) {
-        NSLog(@"%s - Note became first responder", __PRETTY_FUNCTION__);
         [[NSNotificationCenter defaultCenter] postNotificationName:SPEditorTextViewDidBecomeFirstResponder object:self];
     }
     
@@ -191,7 +190,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     // Notification currently used to handle show/hide of checklist button.
     BOOL result = [super resignFirstResponder];
     if (result == YES) {
-        NSLog(@"%s - Note resigned first responder status", __PRETTY_FUNCTION__);
         [[NSNotificationCenter defaultCenter] postNotificationName:SPEditorTextViewDidResignFirstResponder object:self];
         [self setNeedsLayout];
     }
