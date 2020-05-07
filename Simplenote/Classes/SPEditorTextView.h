@@ -9,6 +9,8 @@
 #import "SPTextView.h"
 @class SPTagView;
 
+extern NSNotificationName const SPEditorTextViewDidBecomeFirstResponder;
+extern NSNotificationName const SPEditorTextViewDidResignFirstResponder;
 
 @protocol SPEditorTextViewDelegate <UITextViewDelegate>
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url;
