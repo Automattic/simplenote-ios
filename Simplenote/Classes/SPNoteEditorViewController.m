@@ -413,35 +413,35 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         }
     }
     
-    backButton.frame = CGRectMake(leadingPadding,
+    self.backButton.frame = CGRectMake(leadingPadding,
                                   SPBarButtonYOriginAdjustment,
-                                  backButton.frame.size.width,
+                                  self.backButton.frame.size.width,
                                   navigationButtonContainer.frame.size.height);
     
     CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
     
-    keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+    self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                       SPBarButtonYOriginAdjustment,
                                       buttonWidth,
                                       buttonHeight);
         
-    newButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+    self.createNoteButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                  SPBarButtonYOriginAdjustment,
                                  buttonWidth,
                                  buttonHeight);
     
-    previousXOrigin = newButton.frame.origin.x;
+    previousXOrigin = self.createNoteButton.frame.origin.x;
     
-    actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+    self.actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                     SPBarButtonYOriginAdjustment,
                                     buttonWidth,
                                     buttonHeight);
     
-    previousXOrigin = actionButton.frame.origin.x;
+    previousXOrigin = self.actionButton.frame.origin.x;
     
-    checklistButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+    self.checklistButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                     SPBarButtonYOriginAdjustment,
                                     buttonWidth,
                                     buttonHeight);
@@ -473,53 +473,53 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [navigationButtonContainer addGestureRecognizer:tapGesture];
     
     // back button
-    backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [backButton setImage:chevronLeftImage forState:UIControlStateNormal];
-    backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
-    backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
-    backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
-    [backButton addTarget:self
-                   action:@selector(backButtonAction:)
-         forControlEvents:UIControlEventTouchUpInside];
+    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.backButton setImage:chevronLeftImage forState:UIControlStateNormal];
+    self.backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
+    self.backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
+    self.backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
+    [self.backButton addTarget:self
+                        action:@selector(backButtonAction:)
+              forControlEvents:UIControlEventTouchUpInside];
     
-    [navigationButtonContainer addSubview:backButton];
+    [navigationButtonContainer addSubview:self.backButton];
     
     
     // setup right buttons
-    actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
+    self.actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
-    actionButton.accessibilityIdentifier = @"note-menu";
-    actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
-    actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
+    self.actionButton.accessibilityIdentifier = @"note-menu";
+    self.actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
+    self.actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
     
-    checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklist]
-                                      target:self
-                                    selector:@selector(insertChecklistAction:)];
+    self.checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklist]
+                                              target:self
+                                            selector:@selector(insertChecklistAction:)];
     
-    newButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                   target:self
-                                 selector:@selector(newButtonAction:)];
-    newButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
-    newButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
+    self.createNoteButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
+                                       target:self
+                                     selector:@selector(newButtonAction:)];
+    self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
+    self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
-    keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
-                                        target:self
-                                      selector:@selector(keyboardButtonAction:)];
-    keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
+    self.keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
+                                            target:self
+                                          selector:@selector(keyboardButtonAction:)];
+    self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
 
     
-    keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    newButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    self.keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    self.createNoteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+    self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     
-    [navigationButtonContainer addSubview:keyboardButton];
-    [navigationButtonContainer addSubview:newButton];
-    [navigationButtonContainer addSubview:actionButton];
-    [navigationButtonContainer addSubview:checklistButton];
+    [navigationButtonContainer addSubview:self.keyboardButton];
+    [navigationButtonContainer addSubview:self.createNoteButton];
+    [navigationButtonContainer addSubview:self.actionButton];
+    [navigationButtonContainer addSubview:self.checklistButton];
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
@@ -611,20 +611,20 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)setVisibleRightBarButtonsForEditingMode:(BOOL)editing {
     
     if ([UIDevice isPad]) {
-        keyboardButton.hidden = YES;
-        newButton.hidden = NO;
+        self.keyboardButton.hidden = YES;
+        self.createNoteButton.hidden = NO;
     } else {
-        keyboardButton.hidden = !editing;
-        newButton.hidden = editing;
+        self.keyboardButton.hidden = !editing;
+        self.createNoteButton.hidden = editing;
     }
 }
 
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
     NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
-    [backButton setTitle:backButtonTitle
-                forState:UIControlStateNormal];
-    backButton.accessibilityLabel = backButtonTitle;
-    [backButton sizeToFit];
+    [self.backButton setTitle:backButtonTitle
+                     forState:UIControlStateNormal];
+    self.backButton.accessibilityLabel = backButtonTitle;
+    [self.backButton sizeToFit];
 }
 
 - (void)prepareToPopView {
@@ -789,9 +789,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // Even better: -(void)refreshNavButtons();
     // Ideally we'd pull all the navigation buttons in here.
-    // That would include the keyboardButton and the newButton.
+    // That would include the keyboardButton and the createNoteButton.
     
-    checklistButton.hidden = !self.isEditing;
+    self.checklistButton.hidden = !self.isEditing;
 }
 
 #pragma mark - Property Accessors
@@ -1074,19 +1074,19 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     animationBlock = ^() {
         
-        self->backButton.transform = CGAffineTransformIdentity;
-        self->keyboardButton.transform = CGAffineTransformIdentity;
-        self->newButton.transform = CGAffineTransformIdentity;
-        self->newButton.alpha = 1.0;
-        self->actionButton.transform = CGAffineTransformIdentity;
-        self->actionButton.alpha = 1.0;
-        self->checklistButton.transform = CGAffineTransformIdentity;
-        self->checklistButton.alpha = 1.0;
-        self->keyboardButton.alpha = 1.0;
+        self.backButton.transform = CGAffineTransformIdentity;
+        self.keyboardButton.transform = CGAffineTransformIdentity;
+        self.createNoteButton.transform = CGAffineTransformIdentity;
+        self.createNoteButton.alpha = 1.0;
+        self.actionButton.transform = CGAffineTransformIdentity;
+        self.actionButton.alpha = 1.0;
+        self.checklistButton.transform = CGAffineTransformIdentity;
+        self.checklistButton.alpha = 1.0;
+        self.keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
         self.navigationBarBackground.transform = CGAffineTransformIdentity;
         
-        self->backButton.alpha = 1.0;
+        self.backButton.alpha = 1.0;
     };
     
     void (^completionBlock)();
@@ -1166,23 +1166,23 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     alphaAmount = MIN(1, MAX(alphaAmount, 0.0));
     
 
-    backButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+    self.backButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                        CGAffineTransformMakeTranslation(yTransform / 4.0, -yTransform / 2.0));
-    backButton.alpha = isPortrait ? 1.0 : alphaAmount;
-    keyboardButton.transform =CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+    self.backButton.alpha = isPortrait ? 1.0 : alphaAmount;
+    self.keyboardButton.transform =CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                       CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    keyboardButton.alpha = isPortrait ? 1.0 : alphaAmount;
-    newButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+    self.keyboardButton.alpha = isPortrait ? 1.0 : alphaAmount;
+    self.createNoteButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                   CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    newButton.alpha = alphaAmount;
+    self.createNoteButton.alpha = alphaAmount;
     
-    actionButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+    self.actionButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                   CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    actionButton.alpha = alphaAmount;
+    self.actionButton.alpha = alphaAmount;
     
-    checklistButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+    self.checklistButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                      CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    checklistButton.alpha = alphaAmount;
+    self.checklistButton.alpha = alphaAmount;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
@@ -1435,7 +1435,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         return;
     }
     
-    if ([sender isEqual:newButton]) {
+    if ([sender isEqual:self.createNoteButton]) {
         [SPTracker trackEditorNoteCreated];
     }
     
@@ -1800,8 +1800,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (CGRect)presentationRectForActionButton {
     
-    return [self.view convertRect:actionButton.frame
-                         fromView:actionButton.superview];
+    return [self.view convertRect:self.actionButton.frame
+                         fromView:self.actionButton.superview];
     
 }
 
