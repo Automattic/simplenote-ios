@@ -259,7 +259,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !bActionSheetVisible && !_isPreviewing) {
+    if ((_currentNote.content.length == 0) && !bActionSheetVisible && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -712,8 +712,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     bBlankNote = NO;
     bModified = NO;
-    _isPreviewing = false;
-
+    self.previewing = NO;
+    
     // hide the tags field
     if (!bVoiceoverEnabled) {
         self.tagView.alpha = UIKitConstants.alpha0_0;
