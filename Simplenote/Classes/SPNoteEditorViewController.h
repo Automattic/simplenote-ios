@@ -62,6 +62,7 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, assign) BOOL isPreviewing;
+@property (nonatomic, getter=isEditing) BOOL editing;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;

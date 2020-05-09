@@ -223,6 +223,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // Checklist button depends on status notifications from the Note Editor.
     [self startListeningForNoteEditorResponderNotifications];
+    
+    [self refreshChecklistButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -285,12 +287,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)handleNoteEditorDidBecomeFirstResponderNotification:(NSNotification *)notification {
     
-    checklistButton.hidden = NO;
+//    checklistButton.hidden = NO;
 }
 
 - (void)handleNoteEditorDidResignFirstResponderNotification:(NSNotification *)notification {
     
-    checklistButton.hidden = YES;
+//    checklistButton.hidden = YES;
 }
 
 - (void)startListeningForNoteEditorResponderNotifications {
@@ -548,7 +550,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // The checklistButton starts hidden.
     // We set this independently as the keyboard is not a good proxy for editor focus.
     // -setVisibleRightBarButtonsForEditingMode: is triggered when the keyboard frame changes.
-    checklistButton.hidden = YES;
+//    checklistButton.hidden = YES;
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
@@ -812,6 +814,24 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             }];
         }];
     }];
+}
+
+- (void)refreshChecklistButton {
+    
+    // Even better: -(void)refreshNavButtons();
+    // Ideally we'd pull all the navigation buttons in here.
+    // That would include the keyboardButton and the newButton.
+    
+    checklistButton.hidden = !self.isEditing;
+}
+
+#pragma mark - Property Accessors
+
+- (void)setEditing:(BOOL)editing {
+    
+    _editing = editing;
+    
+    [self refreshChecklistButton];
 }
 
 #pragma mark - UIPopoverPresentationControllerDelegate
@@ -1270,7 +1290,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    self.editing = YES;
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    self.editing = NO;
     
     [self cancelSaveTimers];
     [self save];
