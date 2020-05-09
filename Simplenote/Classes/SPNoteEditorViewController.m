@@ -221,9 +221,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
     
-    // Checklist button depends on status notifications from the Note Editor.
-    [self startListeningForNoteEditorResponderNotifications];
-    
     [self refreshChecklistButton];
 }
 
@@ -285,28 +282,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _noteEditorTextView.frame = viewFrame;
 }
 
-- (void)handleNoteEditorDidBecomeFirstResponderNotification:(NSNotification *)notification {
-    
-//    checklistButton.hidden = NO;
-}
-
-- (void)handleNoteEditorDidResignFirstResponderNotification:(NSNotification *)notification {
-    
-//    checklistButton.hidden = YES;
-}
-
-- (void)startListeningForNoteEditorResponderNotifications {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNoteEditorDidBecomeFirstResponderNotification:) name:SPEditorTextViewDidBecomeFirstResponder object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNoteEditorDidResignFirstResponderNotification:) name:SPEditorTextViewDidResignFirstResponder object:nil];
-}
-
-- (void)stopListeningForNoteEditorResponderNotifications {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPEditorTextViewDidBecomeFirstResponder object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPEditorTextViewDidResignFirstResponder object:nil];
-}
-
 - (void)startListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -365,7 +340,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self stopListeningToKeyboardNotifications];
-    [self stopListeningForNoteEditorResponderNotifications];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -546,11 +520,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [navigationButtonContainer addSubview:newButton];
     [navigationButtonContainer addSubview:actionButton];
     [navigationButtonContainer addSubview:checklistButton];
-    
-    // The checklistButton starts hidden.
-    // We set this independently as the keyboard is not a good proxy for editor focus.
-    // -setVisibleRightBarButtonsForEditingMode: is triggered when the keyboard frame changes.
-//    checklistButton.hidden = YES;
     
     [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
