@@ -583,7 +583,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [_tagView removeFromSuperview];
             CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
             _tagView.frame = CGRectMake(0,
-                                        viewFrame.size.height - tagViewHeight - _keyboardHeight,
+                                        viewFrame.size.height - tagViewHeight - self.keyboardHeight,
                                         viewFrame.size.width,
                                         tagViewHeight);
             _noteEditorTextView.tagView = nil;
@@ -601,7 +601,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             _noteEditorTextView.frame = CGRectMake(0,
                                                    0,
                                                    viewFrame.size.width,
-                                                   viewFrame.size.height -_keyboardHeight);;
+                                                   viewFrame.size.height - self.keyboardHeight);
             [_noteEditorTextView setNeedsLayout];
         }
     }
@@ -989,7 +989,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [UIView animateWithDuration:duration animations:animations];
     }
     
-    _keyboardHeight = newKeyboardHeight;
+    self.keyboardHeight = newKeyboardHeight;
     self.keyboardVisible = newKeyboardHeight > 0;
 }
 
