@@ -221,7 +221,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
     
-    [self refreshChecklistButton];
+    [self refreshNavigationBarButtons];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -521,7 +521,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [navigationButtonContainer addSubview:self.actionButton];
     [navigationButtonContainer addSubview:self.checklistButton];
     
-    [self setVisibleRightBarButtonsForEditingMode:NO];
     [self sizeNavigationContainer];
 
     self.navigationItem.titleView = titleView;
@@ -605,17 +604,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                    viewFrame.size.height -_keyboardHeight);;
             [_noteEditorTextView setNeedsLayout];
         }
-    }
-}
-
-- (void)setVisibleRightBarButtonsForEditingMode:(BOOL)editing {
-    
-    if ([UIDevice isPad]) {
-        self.keyboardButton.hidden = YES;
-        self.createNoteButton.hidden = NO;
-    } else {
-        self.keyboardButton.hidden = !editing;
-        self.createNoteButton.hidden = editing;
     }
 }
 
@@ -785,13 +773,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }];
 }
 
-- (void)refreshChecklistButton {
-    
-    // Even better: -(void)refreshNavButtons();
-    // Ideally we'd pull all the navigation buttons in here.
-    // That would include the keyboardButton and the createNoteButton.
+- (void)refreshNavigationBarButtons {
     
     self.checklistButton.hidden = !self.isEditing;
+    
+    if ([UIDevice isPad]) {
+        self.keyboardButton.hidden = YES;
+        self.createNoteButton.hidden = NO;
+    } else {
+        self.keyboardButton.hidden = !self.isKeyboardVisible;
+        self.createNoteButton.hidden = self.isKeyboardVisible;
+    }
 }
 
 #pragma mark - Property Accessors
@@ -800,7 +792,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     _editing = editing;
     
-    [self refreshChecklistButton];
+    [self refreshNavigationBarButtons];
+}
+
+- (void)setKeyboardVisible:(BOOL)keyboardVisible {
+    
+    _keyboardVisible = keyboardVisible;
+    
+    [self refreshNavigationBarButtons];
 }
 
 #pragma mark - UIPopoverPresentationControllerDelegate
@@ -954,17 +953,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 #pragma mark Keyboard Notifications
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notification {
+    
     NSDictionary *userInfo  = notification.userInfo;
     NSTimeInterval duration = [((NSNumber *)userInfo[UIKeyboardAnimationDurationUserInfoKey]) floatValue];
     CGRect keyboardFrame    = [((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]) CGRectValue];
     CGSize viewBounds       = self.view.bounds.size;
 
-    CGFloat visibleHeight   = MAX(viewBounds.height - CGRectGetMinY(keyboardFrame), 0);
-    BOOL isEditing          = visibleHeight > 0;
+    CGFloat newKeyboardHeight = MAX(viewBounds.height - CGRectGetMinY(keyboardFrame), 0);
+    BOOL isEditing = newKeyboardHeight > 0;
     
     void (^animations)() = ^void() {
         CGRect newFrame            = self->_noteEditorTextView.frame;
-        newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - visibleHeight;
+        newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - newKeyboardHeight;
         if (!isEditing) {
             newFrame.size.height -= self.view.safeAreaInsets.bottom;
         }
@@ -972,7 +972,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         
         if (self->bVoiceoverEnabled) {
             CGRect newFrame        = self->_tagView.frame;
-            newFrame.origin.y      = self.view.frame.size.height - self->_tagView.frame.size.height - visibleHeight;
+            newFrame.origin.y      = self.view.frame.size.height - self->_tagView.frame.size.height - newKeyboardHeight;
             self->_tagView.frame         = newFrame;
         }
     };
@@ -989,8 +989,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [UIView animateWithDuration:duration animations:animations];
     }
     
-    [self setVisibleRightBarButtonsForEditingMode:isEditing];
-    _keyboardHeight = visibleHeight;
+    _keyboardHeight = newKeyboardHeight;
+    self.keyboardVisible = newKeyboardHeight > 0;
 }
 
 
