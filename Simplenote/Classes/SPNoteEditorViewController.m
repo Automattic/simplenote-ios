@@ -1443,7 +1443,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)noteOptionsButtonAction:(id)sender {
     
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIStoryboard *newStoryBoard = [UIStoryboard storyboardWithName:@"NoteOptions" bundle:nil];
+    UIViewController *newViewController = [newStoryBoard instantiateInitialViewController];
+    NSLog(@"%@", newViewController);
+    
+    [self presentViewController:newViewController animated:YES completion:^{
+        NSLog(@"Storyboard is on screen.");
+    }];
 }
 
 - (void)keyboardButtonAction:(id)sender {
