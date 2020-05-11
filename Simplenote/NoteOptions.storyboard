@@ -10,7 +10,7 @@
         <!--Options-->
         <scene sceneID="aBY-WO-8vh">
             <objects>
-                <tableViewController id="bdo-KU-fZd" sceneMemberID="viewController">
+                <tableViewController id="bdo-KU-fZd" customClass="NoteOptionsViewController" customModule="Simplenote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="QCc-Pe-MiZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Options" id="Ey5-UV-aw6">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ZkN-lB-kCF" style="IBUITableViewCellStyleDefault" id="ZXx-kM-fZV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="ZkN-lB-kCF" style="IBUITableViewCellStyleDefault" id="ZXx-kM-fZV">
                                         <rect key="frame" x="20" y="248" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZXx-kM-fZV" id="5M0-GU-pON">
@@ -137,7 +137,7 @@
                                             <outlet property="accessoryView" destination="CxL-9S-x9h" id="oO5-bS-art"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="QZm-9X-N1G" style="IBUITableViewCellStyleDefault" id="ux3-Un-5as">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="QZm-9X-N1G" style="IBUITableViewCellStyleDefault" id="ux3-Un-5as">
                                         <rect key="frame" x="20" y="291.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ux3-Un-5as" id="uwu-3w-IsN">
@@ -195,7 +195,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Public Link" id="o6J-l3-d2x">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="iVh-G2-I7N" style="IBUITableViewCellStyleDefault" id="DVc-aA-1D8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="iVh-G2-I7N" style="IBUITableViewCellStyleDefault" id="DVc-aA-1D8">
                                         <rect key="frame" x="20" y="478" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DVc-aA-1D8" id="GRI-g9-cWy">
@@ -268,7 +268,13 @@
                             <outlet property="delegate" destination="bdo-KU-fZd" id="hlO-PO-CAd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Options" id="pjK-da-gqI"/>
+                    <navigationItem key="navigationItem" title="Options" id="pjK-da-gqI">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="tu8-yP-gCv">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="bdo-KU-fZd" id="gOn-Nb-phN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4e0-RA-LoB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="CxL-9S-x9h" userLabel="Pin to Top Switch">

@@ -127,6 +127,7 @@
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
 		4A7E38E52467FEDF007246E0 /* NoteOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E38E42467FEDF007246E0 /* NoteOptions.storyboard */; };
+		4A7E38E724691ED2007246E0 /* NoteOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E38E624691ED2007246E0 /* NoteOptionsViewController.swift */; };
 		74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
 		74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */; };
 		74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
@@ -464,6 +465,7 @@
 		46A3C9D717DFA81A002865AE /* Simplenote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simplenote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simplenote-Info.plist"; sourceTree = "<group>"; };
 		4A7E38E42467FEDF007246E0 /* NoteOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoteOptions.storyboard; sourceTree = "<group>"; };
+		4A7E38E624691ED2007246E0 /* NoteOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteOptionsViewController.swift; sourceTree = "<group>"; };
 		593EA1C08A9F76E3833C3E80 /* Pods-SimplenoteTests.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		697B9622931545E466B5E186 /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		6AE4CF60906DA6D08F64E5B3 /* Pods-Automattic-Simplenote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.release.xcconfig"; sourceTree = "<group>"; };
@@ -1007,6 +1009,7 @@
 			isa = PBXGroup;
 			children = (
 				4A7E38E42467FEDF007246E0 /* NoteOptions.storyboard */,
+				4A7E38E624691ED2007246E0 /* NoteOptionsViewController.swift */,
 			);
 			name = "Note Options";
 			sourceTree = "<group>";
@@ -2331,6 +2334,7 @@
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
+				4A7E38E724691ED2007246E0 /* NoteOptionsViewController.swift in Sources */,
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
