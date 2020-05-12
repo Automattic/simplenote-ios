@@ -161,24 +161,24 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return [touch.view isKindOfClass:[SPTextView class]];
 }
 
-- (BOOL)becomeFirstResponder {
-    
+- (BOOL)becomeFirstResponder
+{
     // Editable status is true by default but we fiddle with it during setup.
     
     self.editable = YES;
     return [super becomeFirstResponder];
 }
 
-- (BOOL)resignFirstResponder {
-
+- (BOOL)resignFirstResponder
+{
     // Invalidate view layout.
     // This can fail so we capture and act only when successful.
-    BOOL result = [super resignFirstResponder];
-    if (result == YES) {
+    BOOL didResign = [super resignFirstResponder];
+    if (didResign) {
         [self setNeedsLayout];
     }
 
-    return result;
+    return didResign;
 }
 
 - (void)scrollToBottom

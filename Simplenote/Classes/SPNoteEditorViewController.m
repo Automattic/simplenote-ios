@@ -500,8 +500,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                             selector:@selector(insertChecklistAction:)];
     
     self.createNoteButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                       target:self
-                                     selector:@selector(newButtonAction:)];
+                                               target:self
+                                             selector:@selector(newButtonAction:)];
     self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
     
@@ -509,7 +509,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                             target:self
                                           selector:@selector(keyboardButtonAction:)];
     self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
-
     
     self.keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.createNoteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
@@ -773,7 +772,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }];
 }
 
-- (void)refreshNavigationBarButtons {
+- (void)refreshNavigationBarButtons
+{
+    // Note: The keyboard and createNote button states are always inverse.
     
     self.checklistButton.hidden = !self.isEditing;
     self.keyboardButton.hidden = [self shouldHideKeyboardButton];
@@ -791,15 +792,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark - Property Accessors
 
-- (void)setEditing:(BOOL)editing {
-    
+- (void)setEditing:(BOOL)editing
+{
     _editing = editing;
     
     [self refreshNavigationBarButtons];
 }
 
-- (void)setKeyboardVisible:(BOOL)keyboardVisible {
-    
+- (void)setKeyboardVisible:(BOOL)keyboardVisible
+{
     _keyboardVisible = keyboardVisible;
     
     [self refreshNavigationBarButtons];
@@ -1262,13 +1263,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
     self.editing = YES;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
     self.editing = NO;
     
     [self cancelSaveTimers];
