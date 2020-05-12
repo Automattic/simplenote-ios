@@ -298,7 +298,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTagViewDeletionBackgroundBorderColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
+        UIColor(lightColor: .spBlue5, darkColor: .darkGray3)
     }
 
     @objc

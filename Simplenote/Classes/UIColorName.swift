@@ -15,7 +15,6 @@ enum UIColorName: Int, CaseIterable {
     case tagViewFontColorSelected
     case tagViewFontHighlightedColor
     case tagViewPlaceholderColor
-    case tagViewDeletionBackgroundBorderColor
 }
 
 
@@ -45,8 +44,6 @@ extension UIColorName {
             return .tagViewFontHighlightedColor
         case .tagViewPlaceholderColor:
             return .tagViewPlaceholderColor
-        case .tagViewDeletionBackgroundBorderColor:
-            return .tagViewDeletionBackgroundBorderColor
         }
     }
 }

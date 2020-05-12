@@ -94,7 +94,7 @@
         _deletionOverlayView.backgroundColor = [UIColor simplenoteLightBlueColor];
         _deletionOverlayView.layer.cornerRadius = 4.0;
         _deletionOverlayView.clipsToBounds = YES;
-        _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;
+        _deletionOverlayView.layer.borderColor = [UIColor simplenoteTagViewDeletionBackgroundBorderColor].CGColor;
         _deletionOverlayView.layer.borderWidth = 1.0 / [[UIScreen mainScreen] scale];
 
         UIImage *image = [UIImage imageWithName:UIImageNameTagViewDeletion];
