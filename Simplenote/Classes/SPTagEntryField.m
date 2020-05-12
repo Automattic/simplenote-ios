@@ -18,7 +18,7 @@
     newTagText.backgroundColor = [UIColor clearColor];
     newTagText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     newTagText.textColor = [UIColor simplenoteTagViewTextColor];
-    newTagText.placeholdTextColor = [UIColor colorWithName:UIColorNameTagViewPlaceholderColor];
+    newTagText.placeholdTextColor = [UIColor simplenoteTagViewPlaceholderColor];
     newTagText.tagDelegate = tagDelegate;
     newTagText.textAlignment = NSTextAlignmentLeft;
     newTagText.placeholder = NSLocalizedString(@"Add a tag...", nil);

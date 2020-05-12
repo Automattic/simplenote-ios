@@ -12,5 +12,4 @@ enum ThemeColorKey: String {
     case tagViewFontColor
     case tagViewFontColorSelected
     case tagViewFontHighlightedColor
-    case tagViewPlaceholderColor
 }
