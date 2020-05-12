@@ -28,8 +28,7 @@
         
         [self setTitle:tagStub.tag forState:UIControlStateNormal];
         [self setTitleColor:[self color] forState:UIControlStateNormal];
-        [self setTitleColor:[self highlightedColor] forState:UIControlStateHighlighted];
-        
+
         self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         
         [self addTarget:t
@@ -66,12 +65,6 @@
     
     return [UIColor simplenoteTagViewTextColor];
 }
-
-- (UIColor *)highlightedColor {
-    
-    return [UIColor colorWithName:UIColorNameTagViewFontColorSelected];
-}
-
 
 - (NSString *)accessibilityHint {
     

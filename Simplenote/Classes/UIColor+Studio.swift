@@ -313,9 +313,4 @@ extension UIColor {
     static var simplenoteTableViewDetailTextColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
-
-    @objc
-    static var simplenoteTagViewTextSelectedColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
 }

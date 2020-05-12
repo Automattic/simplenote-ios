@@ -9,6 +9,4 @@ enum ThemeColorKey: String {
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
     case tableViewDetailTextLabelColor
-    case tagViewFontColor
-    case tagViewFontColorSelected
 }
