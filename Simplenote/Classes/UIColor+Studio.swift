@@ -264,8 +264,19 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteTagViewPlaceholderColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray30)
+    }
+
+    @objc
     static var simplenoteTagViewCompleteColor: UIColor {
         UIColor(lightColor: .gray50, darkColor: .gray30)
+    }
+
+
+    @objc
+    static var simplenoteTagViewCompleteHighlightedColor: UIColor {
+        UIColor(lightColor: .gray30, darkColor: .gray50)
     }
 
     @objc
@@ -273,10 +284,7 @@ extension UIColor {
         UIColor(lightColor: .spBlue5, darkColor: .darkGray3)
     }
 
-    @objc
-    static var simplenoteTagViewPlaceholderColor: UIColor {
-        UIColor(lightColor: .gray50, darkColor: .gray30)
-    }
+
 
 
 ///    #### PENDINGS
@@ -308,11 +316,6 @@ extension UIColor {
 
     @objc
     static var simplenoteTagViewTextSelectedColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteTagViewHighlightedColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
     }
 }

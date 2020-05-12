@@ -11,5 +11,4 @@ enum ThemeColorKey: String {
     case tableViewDetailTextLabelColor
     case tagViewFontColor
     case tagViewFontColorSelected
-    case tagViewFontHighlightedColor
 }

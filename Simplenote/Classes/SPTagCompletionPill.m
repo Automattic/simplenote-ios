@@ -24,7 +24,7 @@
 
 - (UIColor *)highlightedColor {
     
-    return [UIColor colorWithName:UIColorNameTagViewFontHighlightedColor];
+    return [UIColor simplenoteTagViewCompleteHighlightedColor];
 }
 
 
