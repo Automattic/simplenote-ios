@@ -66,7 +66,7 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, getter=isEditing) BOOL editing;
+@property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 

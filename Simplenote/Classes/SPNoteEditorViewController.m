@@ -776,7 +776,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     // Note: The keyboard and createNote button states are always inverse.
     
-    self.checklistButton.hidden = !self.isEditing;
+    self.checklistButton.hidden = !self.isEditingNote;
     self.keyboardButton.hidden = [self shouldHideKeyboardButton];
     self.createNoteButton.hidden = !self.keyboardButton.hidden;
 }
@@ -792,9 +792,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark - Property Accessors
 
-- (void)setEditing:(BOOL)editing
+- (void)setEditingNote:(BOOL)editingNote
 {
-    _editing = editing;
+    _editingNote = editingNote;
     
     [self refreshNavigationBarButtons];
 }
@@ -1265,12 +1265,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    self.editing = YES;
+    self.editingNote = YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.editing = NO;
+    self.editingNote = NO;
     
     [self cancelSaveTimers];
     [self save];
