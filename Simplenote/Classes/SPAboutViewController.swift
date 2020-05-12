@@ -7,10 +7,8 @@ class SPAboutViewController: UIViewController {
     private let footerView = UIView()
     private let tableView = UITableView()
     private let containerView = UIStackView()
-    private let doneButton = UIButton(type: UIButton.ButtonType.custom)
-    
-    private let simpleBlue = UIColor(red: 74/255, green: 149/255, blue: 213/255, alpha: 1.0)
-    private let lightBlue = UIColor(red: 118/255, green: 175/255, blue: 223/255, alpha: 1.0)
+    private let doneButton = UIButton(type: .custom)
+
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -19,7 +17,7 @@ class SPAboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = simpleBlue
+        view.backgroundColor = .simplenoteBlue50Color
 
         setupDoneButton()
         setupContainerView()
@@ -37,8 +35,7 @@ private extension SPAboutViewController {
     func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: .normal)
-        doneButton.setTitleColor(UIColor.white, for: .normal)
-        doneButton.setTitleColor(lightBlue, for: .highlighted)
+        doneButton.setTitleColor(.white, for: .normal)
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
         doneButton.contentHorizontalAlignment = .right
 
@@ -68,7 +65,6 @@ private extension SPAboutViewController {
 
     func setupHeaderView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.backgroundColor = simpleBlue
 
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -190,7 +186,7 @@ private extension SPAboutViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
-        tableView.separatorColor = lightBlue
+        tableView.separatorColor = .simplenoteBlue30Color
         tableView.backgroundColor = UIColor.clear
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.indicatorStyle = .white
@@ -223,7 +219,7 @@ extension SPAboutViewController: UITableViewDataSource {
         cell.backgroundColor = UIColor.clear
         
         let bgColorView = UIView()
-        bgColorView.backgroundColor = lightBlue
+        bgColorView.backgroundColor = .simplenoteBlue30Color
         cell.selectedBackgroundView = bgColorView
         
         let arrowAccessoryView = UIImageView(image: UIImage(named: "icon_arrow_top_right"))

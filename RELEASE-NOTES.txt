@@ -1,6 +1,7 @@
 4.19
 -----
--	Updated Password Strength requirements.
+-   Updated Password Strength requirements.
+-   Implemented a new color palette!
 
 4.18
 -----

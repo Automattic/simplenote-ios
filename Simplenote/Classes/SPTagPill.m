@@ -28,8 +28,7 @@
         
         [self setTitle:tagStub.tag forState:UIControlStateNormal];
         [self setTitleColor:[self color] forState:UIControlStateNormal];
-        [self setTitleColor:[self highlightedColor] forState:UIControlStateHighlighted];
-        
+
         self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         
         [self addTarget:t
@@ -64,14 +63,8 @@
 
 - (UIColor *)color {
     
-    return [UIColor colorWithName:UIColorNameTagViewFontColor];
+    return [UIColor simplenoteTagViewTextColor];
 }
-
-- (UIColor *)highlightedColor {
-    
-    return [UIColor colorWithName:UIColorNameTagViewFontColorSelected];
-}
-
 
 - (NSString *)accessibilityHint {
     
@@ -91,11 +84,9 @@
                                                                         self.frame.size.width - horizontalSpacing,
                                                                         self.frame.size.height - verticalSpacing)];
         
-        _deletionOverlayView.backgroundColor = [UIColor simplenoteLightBlueColor];
+        _deletionOverlayView.backgroundColor = [UIColor simplenoteTagViewDeletionBackgroundColor];
         _deletionOverlayView.layer.cornerRadius = 4.0;
         _deletionOverlayView.clipsToBounds = YES;
-        _deletionOverlayView.layer.borderColor = [UIColor colorWithName:UIColorNameTagViewDeletionBackgroundBorderColor].CGColor;
-        _deletionOverlayView.layer.borderWidth = 1.0 / [[UIScreen mainScreen] scale];
 
         UIImage *image = [UIImage imageWithName:UIImageNameTagViewDeletion];
         _deletionButtonImageView = [[UIImageView alloc] initWithImage:image];
