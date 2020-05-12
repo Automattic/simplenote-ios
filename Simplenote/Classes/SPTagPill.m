@@ -64,7 +64,7 @@
 
 - (UIColor *)color {
     
-    return [UIColor colorWithName:UIColorNameTagViewFontColor];
+    return [UIColor simplenoteTagViewTextColor];
 }
 
 - (UIColor *)highlightedColor {

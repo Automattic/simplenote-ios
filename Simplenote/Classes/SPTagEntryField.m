@@ -17,7 +17,7 @@
     SPTagEntryField *newTagText = [SPTagEntryField new];
     newTagText.backgroundColor = [UIColor clearColor];
     newTagText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    newTagText.textColor = [UIColor colorWithName:UIColorNameTagViewFontColor];
+    newTagText.textColor = [UIColor simplenoteTagViewTextColor];
     newTagText.placeholdTextColor = [UIColor colorWithName:UIColorNameTagViewPlaceholderColor];
     newTagText.tagDelegate = tagDelegate;
     newTagText.textAlignment = NSTextAlignmentLeft;

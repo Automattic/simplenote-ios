@@ -12,7 +12,6 @@ enum UIColorName: Int, CaseIterable {
     case actionViewStatusFontColor
     case tableViewDetailTextLabelColor
     case tagViewAutoCompleteFontColor
-    case tagViewFontColor
     case tagViewFontColorSelected
     case tagViewFontHighlightedColor
     case tagViewPlaceholderColor
@@ -40,8 +39,6 @@ extension UIColorName {
             return .tableViewDetailTextLabelColor
         case .tagViewAutoCompleteFontColor:
             return .tagViewAutoCompleteFontColor
-        case .tagViewFontColor:
-            return .tagViewFontColor
         case .tagViewFontColorSelected:
             return .tagViewFontColorSelected
         case .tagViewFontHighlightedColor:

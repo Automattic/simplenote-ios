@@ -258,6 +258,11 @@ extension UIColor {
         UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
     }
 
+    @objc
+    static var simplenoteTagViewTextColor: UIColor {
+        UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+    }
+
 
 ///    #### PENDINGS
 
@@ -294,11 +299,6 @@ extension UIColor {
     @objc
     static var simplenoteTagViewDeletionBackgroundBorderColor: UIColor {
         UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteTagViewTextColor: UIColor {
-        UIColor(studioColor: .gray0)
     }
 
     @objc
