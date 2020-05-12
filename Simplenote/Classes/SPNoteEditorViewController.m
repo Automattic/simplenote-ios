@@ -776,14 +776,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)refreshNavigationBarButtons {
     
     self.checklistButton.hidden = !self.isEditing;
-    
+    self.keyboardButton.hidden = [self shouldHideKeyboardButton];
+    self.createNoteButton.hidden = !self.keyboardButton.hidden;
+}
+
+- (BOOL)shouldHideKeyboardButton
+{
     if ([UIDevice isPad]) {
-        self.keyboardButton.hidden = YES;
-        self.createNoteButton.hidden = NO;
-    } else {
-        self.keyboardButton.hidden = !self.isKeyboardVisible;
-        self.createNoteButton.hidden = self.isKeyboardVisible;
+        return YES;
     }
+    
+    return !self.isKeyboardVisible;
 }
 
 #pragma mark - Property Accessors
