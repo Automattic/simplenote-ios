@@ -1,6 +1,6 @@
 4.19
 -----
--	Updated Password Strength requirements.
+-   Updated Password Strength requirements.
 -   Simplenote will request to upgrade insecure passwords whenever you login.
 -   Updated Password Strength requirements.
 -   Implemented a new color palette!
