@@ -776,9 +776,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     // Note: The keyboard and createNote button states are always inverse.
     
+    BOOL shouldHideKeyboardButton = [self shouldHideKeyboardButton];
+    
     self.checklistButton.hidden = !self.isEditingNote;
-    self.keyboardButton.hidden = [self shouldHideKeyboardButton];
-    self.createNoteButton.hidden = !self.keyboardButton.hidden;
+    self.keyboardButton.hidden = shouldHideKeyboardButton;
+    self.createNoteButton.hidden = !shouldHideKeyboardButton;
 }
 
 - (BOOL)shouldHideKeyboardButton
