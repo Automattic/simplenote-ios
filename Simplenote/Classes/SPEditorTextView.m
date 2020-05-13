@@ -171,14 +171,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)resignFirstResponder
 {
-    // Invalidate view layout.
-    // This can fail so we capture and act only when successful.
-    BOOL didResign = [super resignFirstResponder];
-    if (didResign) {
-        [self setNeedsLayout];
-    }
-
-    return didResign;
+    // TODO: Only invalidate when resigning.
+    // This can be called multiple times while updating the responder chain.
+    // Ideally, we'd only invalidate the layout when the call to super is successful.
+    
+    BOOL response = [super resignFirstResponder];
+    [self setNeedsLayout];
+    return response;
 }
 
 - (void)scrollToBottom
