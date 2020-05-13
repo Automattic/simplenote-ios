@@ -684,13 +684,13 @@ private enum AuthenticationStrings {
 private enum PasswordInsecureString {
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let reset = NSLocalizedString("Reset", comment: "Reset Action")
-    static let title = NSLocalizedString("Error", comment: "Error Title")
+    static let title = NSLocalizedString("Reset Required", comment: "Password Reset Required Alert Title")
     static let message = [
         NSLocalizedString("Your password is insecure and must be reset. The password requirements are:", comment: "Password Requirements: Title"),
         String.newline,
         NSLocalizedString("- Password cannot match email", comment: "Password Requirement: Email Match"),
         NSLocalizedString("- Minimum of 8 characters", comment: "Password Requirement: Length"),
-        NSLocalizedString("- No tabs nor newlines allowed", comment: "Password Requirement: Special Characters")
+        NSLocalizedString("- Neither tabs nor newlines are allowed", comment: "Password Requirement: Special Characters")
     ].joined(separator: .newline)
 }
 
