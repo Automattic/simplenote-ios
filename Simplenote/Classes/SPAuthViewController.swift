@@ -166,9 +166,14 @@ class SPAuthViewController: UIViewController {
         }
     }
 
+    /// Indicates if we must nuke the Password Field's contents whenever the App becomes active
+    ///
+    private var mustResetPasswordField = false
+
     /// # Authentication Mode: Signup or Login
     ///
     let mode: AuthenticationMode
+
 
 
     /// NSCodable Required Initializer
@@ -236,8 +241,10 @@ private extension SPAuthViewController {
     }
 
     func startListeningToNotifications() {
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(refreshOnePasswordAvailability), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
     }
 
     func ensureNavigationBarIsVisible() {
@@ -248,8 +255,23 @@ private extension SPAuthViewController {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
-    @objc func refreshOnePasswordAvailability() {
+    @objc
+    func applicationDidBecomeActive() {
+        refreshOnePasswordAvailability()
+        ensurePasswordFieldIsReset()
+    }
+
+    func refreshOnePasswordAvailability() {
         emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
+    }
+
+    func ensurePasswordFieldIsReset() {
+        guard mustResetPasswordField else {
+            return
+        }
+
+        passwordInputView.text = nil
+        passwordInputView.becomeFirstResponder()
     }
 
     private func lockdownInterface() {
@@ -409,7 +431,8 @@ private extension SPAuthViewController {
 
         let alertController = UIAlertController(title: PasswordInsecureString.title, message: PasswordInsecureString.message, preferredStyle: .alert)
         alertController.addCancelActionWithTitle(PasswordInsecureString.cancel)
-        alertController.addDefaultActionWithTitle(PasswordInsecureString.reset) { _ in
+        alertController.addDefaultActionWithTitle(PasswordInsecureString.reset) { [weak self] _ in
+            self?.mustResetPasswordField = true
             UIApplication.shared.open(resetURL, options: [:], completionHandler: nil)
         }
 
