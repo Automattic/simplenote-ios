@@ -964,12 +964,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     CGSize viewBounds       = self.view.bounds.size;
 
     CGFloat newKeyboardHeight = MAX(viewBounds.height - CGRectGetMinY(keyboardFrame), 0);
-    BOOL isEditing = newKeyboardHeight > 0;
+    BOOL isKeyboardVisible = newKeyboardHeight > 0;
     
     void (^animations)() = ^void() {
         CGRect newFrame            = self->_noteEditorTextView.frame;
         newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - newKeyboardHeight;
-        if (!isEditing) {
+        if (!isKeyboardVisible) {
             newFrame.size.height -= self.view.safeAreaInsets.bottom;
         }
         self->_noteEditorTextView.frame  = newFrame;
@@ -981,6 +981,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         }
     };
     
+    // TODO: Drop isInteractive code path.
+    // Should only be necessary on pre-iOS 9 devices.
     // On iOS 9 the keyboard's animation doesn't happen interactively. If an interactive transition is
     // taking place, the editor text view's frame must be changed instantaneously, otherwise on
     // dismissal you can see the bottom of the text being clipped once the keyboard has dismissed.
@@ -994,7 +996,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     self.keyboardHeight = newKeyboardHeight;
-    self.keyboardVisible = newKeyboardHeight > 0;
+    self.keyboardVisible = isKeyboardVisible;
 }
 
 
