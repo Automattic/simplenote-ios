@@ -113,6 +113,25 @@ class SPAuthHandler {
     }
 
 
+    /// Validates a set of credentials against the Simperium Backend.
+    ///
+    /// - Note: This API is meant to be used to verify an unsecured set of credentials, before presenting the Reset Password UI.
+    ///
+    /// - Parameters:
+    ///     - username: Simperium Username
+    ///     - password: Simperium Password
+    ///     - onCompletion: Closure to be executed on completion
+    ///
+    func validateWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+        simperiumService.validate(withUsername: username, password: password, success: {
+            onCompletion(nil)
+        }, failure: { (responseCode, _) in
+            let wrappedError = SPAuthError(simperiumLoginErrorCode: Int(responseCode))
+            onCompletion(wrappedError)
+        })
+    }
+
+
     /// Registers a new user in the Simperium Backend.
     ///
     /// - Note: Errors are mapped into SPAuthError Instances
