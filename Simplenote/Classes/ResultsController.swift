@@ -130,16 +130,34 @@ extension ResultsController {
         resultsController.indexPath(forObject: object)
     }
 
-    /// Returns the number of fetched objects.
+    /// Returns the Number of Objects in all sections
+    ///
+    /// - Note:
+    ///     `resultsController.fetchedObjects` may not properly be updated // in sync whenever the underlying database is updated.
+    ///     We're suspecting usage of such API is a potential trigger for a crash. For that reason, we're deferring to `sections` instead.
+    ///     Ref.:  https://github.com/Automattic/simplenote-ios/issues/730
     ///
     var numberOfObjects: Int {
-        resultsController.fetchedObjects?.count ?? 0
+        sections.reduce(.zero) { (sum, section)  in
+            sum + section.numberOfObjects
+        }
     }
 
-    /// Returns an array of all of the Fetched Objects.
+    /// Returns the (total) entities retrieved in every section
     ///
-    var fetchedObjects: [T] {
-        resultsController.fetchedObjects ?? []
+    /// - Note:
+    ///     `resultsController.fetchedObjects` may not properly be updated // in sync whenever the underlying database is updated.
+    ///     We're suspecting usage of such API is a potential trigger for a crash. For that reason, we're deferring to `sections` instead.
+    ///     Ref.:  https://github.com/Automattic/simplenote-ios/issues/730
+    ///
+    var retrievedObjects: [T] {
+        sections.reduce([]) { (sum, section) in
+            guard let objects = section.objects else {
+                return sum
+            }
+
+            return sum + objects.compactMap { $0 as? T }
+        }
     }
 
     /// Returns an array of SectionInfo Entitites.

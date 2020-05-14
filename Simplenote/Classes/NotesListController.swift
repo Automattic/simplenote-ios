@@ -130,12 +130,12 @@ extension NotesListController {
         switch state {
         case .results:
             return [
-                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.retrievedObjects)
             ]
         case .searching:
             return [
-                NotesListSection(title: state.sectionTitleForTags, objects: tagsController.fetchedObjects),
-                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.fetchedObjects)
+                NotesListSection(title: state.sectionTitleForTags, objects: tagsController.retrievedObjects),
+                NotesListSection(title: state.sectionTitleForNotes, objects: notesController.retrievedObjects)
             ]
         }
     }
@@ -147,12 +147,15 @@ extension NotesListController {
         switch state {
         case .results:
             return notesController.object(at: indexPath)
+
         case .searching where state.sectionIndexForTags == indexPath.section:
-            let tags = tagsController.fetchedObjects
+            let tags = tagsController.retrievedObjects
             return indexPath.row < tags.count ? tags[indexPath.row] : nil
+
         case .searching where state.sectionIndexForNotes == indexPath.section:
-            let notes = notesController.fetchedObjects
+            let notes = notesController.retrievedObjects
             return indexPath.row < notes.count ? notes[indexPath.row] : nil
+
         default:
             return nil
         }
@@ -165,14 +168,17 @@ extension NotesListController {
         switch (state, object) {
         case (.results, let note as Note):
             return notesController.indexPath(forObject: note)
+
         case (.searching, let tag as Tag):
-            return tagsController.fetchedObjects.firstIndex(of: tag).map { row in
-                IndexPath(row: row, section: state.sectionIndexForTags)
+            return tagsController.indexPath(forObject: tag).map { rawIndexPath in
+                IndexPath(row: rawIndexPath.row, section: state.sectionIndexForTags)
             }
+
         case (.searching, let note as Note):
-            return notesController.fetchedObjects.firstIndex(of: note).map { row in
-                IndexPath(row: row, section: state.sectionIndexForNotes)
+            return notesController.indexPath(forObject: note).map { rawIndexPath in
+                IndexPath(row: rawIndexPath.row, section: state.sectionIndexForNotes)
             }
+
         default:
             return nil
         }
@@ -238,7 +244,7 @@ extension NotesListController {
     ///
     @objc
     func note(forSimperiumKey key: String) -> Note? {
-        return notesController.fetchedObjects.first { note in
+        return notesController.retrievedObjects.first { note in
             note.simperiumKey == key
         }
     }

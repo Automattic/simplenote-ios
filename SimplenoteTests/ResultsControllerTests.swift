@@ -216,9 +216,9 @@ class ResultsControllerTests: XCTestCase {
     }
 
 
-    /// Verifies that `fetchedObjects` effectively  returns all of the objects that are expected to be available.
+    /// Verifies that `retrievedObjects` effectively  returns all of the objects that are expected to be available.
     ///
-    func testFetchedObjectsEffectivelyReturnsAvailableEntities() {
+    func testRetrievedObjectsEffectivelyReturnsAvailableEntities() {
         let resultsController = ResultsController<Note>(viewContext: viewContext, sortedBy: [sampleSortDescriptor])
         try? resultsController.performFetch()
 
@@ -232,7 +232,7 @@ class ResultsControllerTests: XCTestCase {
 
         try? viewContext.save()
 
-        for retrieved in resultsController.fetchedObjects {
+        for retrieved in resultsController.retrievedObjects {
             XCTAssertEqual(retrieved, expected[retrieved.content])
         }
     }
@@ -280,7 +280,7 @@ class ResultsControllerTests: XCTestCase {
 
         XCTAssertEqual(resultsController.numberOfObjects, ascendingSampleContent.count)
 
-        for (index, note) in resultsController.fetchedObjects.enumerated() {
+        for (index, note) in resultsController.retrievedObjects.enumerated() {
             XCTAssertEqual(note.content, ascendingSampleContent[index])
         }
 
@@ -289,7 +289,7 @@ class ResultsControllerTests: XCTestCase {
         resultsController.sortDescriptors = [ reversedSortDescriptor ]
         try? resultsController.performFetch()
 
-        for (index, note) in resultsController.fetchedObjects.reversed().enumerated() {
+        for (index, note) in resultsController.retrievedObjects.reversed().enumerated() {
             XCTAssertEqual(note.content, ascendingSampleContent[index])
         }
     }
