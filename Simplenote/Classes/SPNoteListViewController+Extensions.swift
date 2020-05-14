@@ -647,7 +647,7 @@ extension SPNoteListViewController {
     @objc(keyboardWillChangeFrame:)
     func keyboardWillChangeFrame(note: Notification) {
         
-        guard self.view.window != nil else {
+        guard let _ = view.window else {
             // No window means we aren't in the view hierarchy.
             // Asking UITableView to refresh layout when not in the view hierarcy results in console warnings.
             return

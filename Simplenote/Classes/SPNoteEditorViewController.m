@@ -414,37 +414,37 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     self.backButton.frame = CGRectMake(leadingPadding,
-                                  SPBarButtonYOriginAdjustment,
-                                  self.backButton.frame.size.width,
-                                  navigationButtonContainer.frame.size.height);
+                                       SPBarButtonYOriginAdjustment,
+                                       self.backButton.frame.size.width,
+                                       navigationButtonContainer.frame.size.height);
     
     CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
     
     self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                      SPBarButtonYOriginAdjustment,
-                                      buttonWidth,
-                                      buttonHeight);
+                                           SPBarButtonYOriginAdjustment,
+                                           buttonWidth,
+                                           buttonHeight);
         
     self.createNoteButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                 SPBarButtonYOriginAdjustment,
-                                 buttonWidth,
-                                 buttonHeight);
+                                             SPBarButtonYOriginAdjustment,
+                                             buttonWidth,
+                                             buttonHeight);
     
     previousXOrigin = self.createNoteButton.frame.origin.x;
     
     self.actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                    SPBarButtonYOriginAdjustment,
-                                    buttonWidth,
-                                    buttonHeight);
+                                         SPBarButtonYOriginAdjustment,
+                                         buttonWidth,
+                                         buttonHeight);
     
     previousXOrigin = self.actionButton.frame.origin.x;
     
     self.checklistButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                    SPBarButtonYOriginAdjustment,
-                                    buttonWidth,
-                                    buttonHeight);
+                                            SPBarButtonYOriginAdjustment,
+                                            buttonWidth,
+                                            buttonHeight);
 }
 
 
@@ -774,8 +774,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)refreshNavigationBarButtons
 {
-    // Note: The keyboard and createNote button states are always inverse.
-    
     BOOL shouldHideKeyboardButton = [self shouldHideKeyboardButton];
     
     self.checklistButton.hidden = !self.isEditingNote;
