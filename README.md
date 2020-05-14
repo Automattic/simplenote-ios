@@ -77,6 +77,13 @@ If you want to try the screenshots generation locally, also create your own test
 mkdir -p SimplenoteScreenshots/Credentials && cp SimplenoteScreenshots/ScreenshotsCredentials-demo.swift SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift
 ```
 
+## Style Guidelines
+
+We follow the WordPress iOS Style Guidelines, and we're constantly improving / adopting latest techniques.
+
+- [Swift Standard](https://github.com/wordpress-mobile/swift-style-guide)
+- [ObjC Standard](https://github.com/wordpress-mobile/objective-c-style-guide)
+
 ## Contributing
 
 Read our [Contributing Guide](CONTRIBUTING.md) to learn about reporting issues, contributing code, and more ways to contribute.
