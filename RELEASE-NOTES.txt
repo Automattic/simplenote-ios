@@ -4,6 +4,9 @@
 -   Simplenote will request to upgrade insecure passwords whenever you login.
 -   Implemented a new color palette!
 -   The checklist button is hidden unless actively editing a note.
+-   Modernized Note Options view.
+-   New Note Info and Version History views.
+-   Option to restore a deleted note directly from main Note Listing.
 
 4.18
 -----
