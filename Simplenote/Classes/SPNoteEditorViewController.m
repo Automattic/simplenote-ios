@@ -61,6 +61,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
+// Sheet and controller for Note Info bottom sheet.
+@property (nonatomic, strong) SPActionSheet *infoActionSheet;
+@property (nonatomic, strong) NoteInfoViewController *noteInfoViewController;
+
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
@@ -1731,7 +1735,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self viewVersionAction:activityView];
             break;
         } case 2: {
-            [self addCollaboratorsAction:activityView];
+            // TODO: Revert this before merge
+            // [self addCollaboratorsAction:activityView];
+            [self viewInfoAction];
             break;
         } case 3: {
             [SPTracker trackEditorNoteDeleted];
@@ -1775,7 +1781,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         // Unload versions and re-enable editor
         [_noteEditorTextView setEditable:YES];
         noteVersionData = nil;
-        [(SPNavigationController *)self.navigationController setDisableRotation:NO];
+        
+        [self.navigationController setDisableRotation:NO];
     }
     
     [actionSheet dismiss];
@@ -1789,6 +1796,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
     
     bActionSheetVisible = NO;
+    
+    if (actionSheet == self.infoActionSheet) {
+        self.noteInfoViewController = nil;
+        self.infoActionSheet = nil;
+        return;
+    }
     
     if ([actionSheet isEqual:noteActionSheet])
         noteActionSheet = nil;
@@ -1982,8 +1995,53 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                      delegate:self];
     versionActionSheet.tapToDismiss = NO;
     versionActionSheet.cancelButtonIndex = 0;
+    
+    [self.navigationController setDisableRotation:YES];
+}
 
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
+- (void)viewInfoAction
+{
+    // Prevent the view from being triggerd multiple times.
+    // As seen in the simulator when testing UIKeyCommands (buggy in sim?).
+    if (self.noteInfoViewController) {
+        return;
+    }
+    
+    // TODO: Tracks? Disable editing?
+    // self.noteEditorTextView.editable = NO;
+    
+    // Configure view controller for sheet.
+    NoteInfoViewController *infoViewController = [NoteInfoViewController new];
+    infoViewController.note = self.currentNote;
+    infoViewController.dismissAction = ^{
+        [self.infoActionSheet dismiss];
+    };
+    
+    // Configure SPActionSheet for display.
+    NSArray *views = @[infoViewController.view];
+    SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
+    newActionSheet.swipeToDismiss = YES;
+    newActionSheet.contentView.layer.cornerRadius = 15;
+    
+    // Post setup frame tweaking.
+    // The SPActionSheet sets up a 12 pixel boarder.
+    // We don't want that so remove it here.
+    CGRect newFrame = newActionSheet.contentView.frame;
+    newFrame = CGRectInset(newFrame, 12, 0);
+    newActionSheet.contentView.frame = newFrame;
+    
+    // TODO: Work on iPad sizing
+    // Our iPad sizing logic needs more work.
+    BOOL isPad = [UIDevice isPad];
+    if (isPad) {
+        newFrame = CGRectInset(newFrame, 225, 0);
+        newActionSheet.contentView.frame = newFrame;
+    }
+    
+    [self.navigationController setDisableRotation:YES];
+    
+    self.infoActionSheet = newActionSheet;
+    self.noteInfoViewController = infoViewController;
 }
 
 - (long)minimumNoteVersion {

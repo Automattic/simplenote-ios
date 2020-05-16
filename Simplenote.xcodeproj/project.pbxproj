@@ -126,6 +126,8 @@
 		46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4417848E8500E55842 /* InfoPlist.strings */; };
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
+		4A56F168246E6AD700B6A9AB /* NoteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56F166246E6AD700B6A9AB /* NoteInfoViewController.swift */; };
+		4A56F169246E6AD700B6A9AB /* NoteInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A56F167246E6AD700B6A9AB /* NoteInfoViewController.xib */; };
 		74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
 		74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */; };
 		74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
@@ -463,6 +465,8 @@
 		467D9C7F1788D47500785EF3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		46A3C9D717DFA81A002865AE /* Simplenote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simplenote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simplenote-Info.plist"; sourceTree = "<group>"; };
+		4A56F166246E6AD700B6A9AB /* NoteInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoteInfoViewController.swift; path = Classes/NoteInfoViewController.swift; sourceTree = "<group>"; };
+		4A56F167246E6AD700B6A9AB /* NoteInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NoteInfoViewController.xib; path = Classes/NoteInfoViewController.xib; sourceTree = "<group>"; };
 		593EA1C08A9F76E3833C3E80 /* Pods-SimplenoteTests.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		697B9622931545E466B5E186 /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		6AE4CF60906DA6D08F64E5B3 /* Pods-Automattic-Simplenote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.release.xcconfig"; sourceTree = "<group>"; };
@@ -1661,6 +1665,8 @@
 				E215C791180B115C00AD36B5 /* SPNavigationController.m */,
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
+				4A56F166246E6AD700B6A9AB /* NoteInfoViewController.swift */,
+				4A56F167246E6AD700B6A9AB /* NoteInfoViewController.xib */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
@@ -1939,6 +1945,7 @@
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */,
 				B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */,
+				4A56F169246E6AD700B6A9AB /* NoteInfoViewController.xib in Resources */,
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
 				B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */,
 				46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */,
@@ -2370,6 +2377,7 @@
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
+				4A56F168246E6AD700B6A9AB /* NoteInfoViewController.swift in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,7 +4,9 @@
 #import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "SPHorizontalPickerView.h"
+#import "SPNavigationController.h"
 #import <Simperium/Simperium.h>
+
 @class Note;
 @class SPTextView;
 @class SPEditorTextView;
@@ -49,8 +51,10 @@
     
     NSInteger currentVersion;
     NSMutableDictionary *noteVersionData;
-    
 }
+
+// Redeclare navigationController property with downcast.
+@property(nonatomic, readonly, strong) SPNavigationController *navigationController;
 
 // Navigation Back Button
 @property (nonatomic, strong) UIButton *backButton;
