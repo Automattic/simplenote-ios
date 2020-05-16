@@ -422,9 +422,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                        self.backButton.frame.size.width,
                                        navigationButtonContainer.frame.size.height);
     
+    // Set up the right-side navigation buttons.
+    
     CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
+    
+    self.noteOptionsButton.frame = CGRectMake(previousXOrigin - buttonWidth,
+                                              SPBarButtonYOriginAdjustment,
+                                              buttonWidth,
+                                              buttonHeight);
+    
+    previousXOrigin = self.noteOptionsButton.frame.origin.x;
     
     self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                            SPBarButtonYOriginAdjustment,
@@ -491,7 +500,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [navigationButtonContainer addSubview:self.backButton];
     
     
-    // setup right buttons
+    // Set up right-side navigation buttons.
+    
+    self.noteOptionsButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameEllipsis]
+                                                target:self
+                                              selector:@selector(noteOptionsButtonAction:)];
+    
+    // TODO: Accessibility Labels
+    // Currently only the actionButton has the necessary values in place.
+    
     self.actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
                                       target:self
                                     selector:@selector(actionButtonAction:)];
@@ -514,11 +531,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                           selector:@selector(keyboardButtonAction:)];
     self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
     
+    self.noteOptionsButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.createNoteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     
+    [navigationButtonContainer addSubview:self.noteOptionsButton];
     [navigationButtonContainer addSubview:self.keyboardButton];
     [navigationButtonContainer addSubview:self.createNoteButton];
     [navigationButtonContainer addSubview:self.actionButton];
@@ -1432,8 +1451,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark barButton action methods
 
-- (void)keyboardButtonAction:(id)sender {
+- (void)noteOptionsButtonAction:(id)sender
+{
+    // TODO: Implement new Note Options UI
+    // For now, we show the new Note Info bottom sheet.
     
+    [self viewInfoAction];
+}
+
+- (void)keyboardButtonAction:(id)sender
+{
     [self endEditing:sender];
     [_tagView endEditing:YES];
 }
@@ -1735,9 +1762,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self viewVersionAction:activityView];
             break;
         } case 2: {
-            // TODO: Revert this before merge
-            // [self addCollaboratorsAction:activityView];
-            [self viewInfoAction];
+            [self addCollaboratorsAction:activityView];
             break;
         } case 3: {
             [SPTracker trackEditorNoteDeleted];

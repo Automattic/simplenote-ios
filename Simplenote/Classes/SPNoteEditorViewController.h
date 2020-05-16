@@ -64,6 +64,7 @@
 @property (nonatomic, strong) UIButton *checklistButton;
 @property (nonatomic, strong) UIButton *keyboardButton;
 @property (nonatomic, strong) UIButton *createNoteButton;
+@property (nonatomic, strong) UIButton *noteOptionsButton;
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
