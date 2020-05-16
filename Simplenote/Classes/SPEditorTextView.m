@@ -163,12 +163,18 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)becomeFirstResponder
 {
-    [self setEditable:YES];
+    // Editable status is true by default but we fiddle with it during setup.
+    
+    self.editable = YES;
     return [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
+    // TODO: Only invalidate when resigning.
+    // This can be called multiple times while updating the responder chain.
+    // Ideally, we'd only invalidate the layout when the call to super is successful.
+    
     BOOL response = [super resignFirstResponder];
     [self setNeedsLayout];
     return response;
