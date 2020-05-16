@@ -1007,6 +1007,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		4A3076E1246FE4A200D7CAD1 /* Note Options */ = {
+			isa = PBXGroup;
+			children = (
+				4A56F167246E6AD700B6A9AB /* NoteInfoViewController.xib */,
+				4A56F166246E6AD700B6A9AB /* NoteInfoViewController.swift */,
+			);
+			name = "Note Options";
+			sourceTree = "<group>";
+		};
 		564CAA42AA330D16FDBDD081 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1656,6 +1665,7 @@
 			children = (
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
+				4A3076E1246FE4A200D7CAD1 /* Note Options */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
@@ -1665,8 +1675,6 @@
 				E215C791180B115C00AD36B5 /* SPNavigationController.m */,
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
-				4A56F166246E6AD700B6A9AB /* NoteInfoViewController.swift */,
-				4A56F167246E6AD700B6A9AB /* NoteInfoViewController.xib */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
