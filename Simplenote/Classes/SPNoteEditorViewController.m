@@ -829,6 +829,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self refreshNavigationBarButtons];
 }
 
+#pragma mark - View Utilities
+
+- (void)enableRotation
+{
+    [(SPNavigationController *)self.navigationController setDisableRotation:NO];
+}
+
+- (void)disableRotation
+{
+    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
+}
+
 #pragma mark - UIPopoverPresentationControllerDelegate
 
 - (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
@@ -1807,7 +1819,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [_noteEditorTextView setEditable:YES];
         noteVersionData = nil;
         
-        [self.navigationController setDisableRotation:NO];
+        [self enableRotation];
     }
     
     [actionSheet dismiss];
@@ -2021,7 +2033,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     versionActionSheet.tapToDismiss = NO;
     versionActionSheet.cancelButtonIndex = 0;
     
-    [self.navigationController setDisableRotation:YES];
+    [self disableRotation];
 }
 
 - (void)viewInfoAction
@@ -2063,7 +2075,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         newActionSheet.contentView.frame = newFrame;
     }
     
-    [self.navigationController setDisableRotation:YES];
+    [self disableRotation];
     
     self.infoActionSheet = newActionSheet;
     self.noteInfoViewController = infoViewController;
