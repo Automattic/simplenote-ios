@@ -65,8 +65,11 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.18-whats-new"
+msgctxt "v4.19-whats-new"
 msgid ""
-"Adding support for Persian Language.\n"
+"Updated Password Strength requirements.\n"
+"Simplenote will request to upgrade insecure passwords whenever you login.\n"
+"Implemented a new color palette!\n"
+"The checklist button is hidden unless actively editing a note.\n"
 msgstr ""
 
