@@ -1,6 +1,9 @@
 4.20
 -----
  
+4.20
+-----
+ 
 4.19
 -----
 -   Updated Password Strength requirements.
