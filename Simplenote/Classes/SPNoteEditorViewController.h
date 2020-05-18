@@ -30,11 +30,6 @@
     CGFloat scrollPosition;
     
     SPOutsideTouchView *navigationButtonContainer;
-    UIButton *backButton;
-    UIButton *actionButton;
-    UIButton *newButton;
-    UIButton *keyboardButton;
-    UIButton *checklistButton;
     
     UIBarButtonItem *nextSearchButton;
     UIBarButtonItem *prevSearchButton;
@@ -57,11 +52,23 @@
     
 }
 
+// Navigation Back Button
+@property (nonatomic, strong) UIButton *backButton;
+
+// Navigation Buttons
+@property (nonatomic, strong) UIButton *actionButton;
+@property (nonatomic, strong) UIButton *checklistButton;
+@property (nonatomic, strong) UIButton *keyboardButton;
+@property (nonatomic, strong) UIButton *createNoteButton;
+
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
-@property (nonatomic, assign) BOOL isPreviewing;
+
+@property (nonatomic, getter=isEditingNote) BOOL editingNote;
+@property (nonatomic, getter=isPreviewing) BOOL previewing;
+@property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
