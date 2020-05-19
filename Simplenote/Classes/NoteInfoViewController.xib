@@ -22,7 +22,7 @@
             <subviews>
                 <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syt-EH-qNc">
                     <rect key="frame" x="0.0" y="65" width="431" height="221"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tN-Qh-m5L" customClass="UIStackView">
                     <rect key="frame" x="0.0" y="0.0" width="431" height="65"/>
@@ -57,7 +57,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="3tN-Qh-m5L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ExP-N7-Yr5"/>
                 <constraint firstItem="3tN-Qh-m5L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MJZ-E9-Je1"/>
