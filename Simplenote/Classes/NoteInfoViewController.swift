@@ -8,6 +8,7 @@ import UIKit
 class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var tablewView: UITableView!
     
     @objc var dismissAction: (() -> Void)? = nil
@@ -23,6 +24,10 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         
         setUpTitleLabel()
         setUpTableCells()
+        
+        if dismissAction == nil {
+            dismissButton.isHidden = true
+        }
         
         tablewView.dataSource = self
         tablewView.tableFooterView = UIView()

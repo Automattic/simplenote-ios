@@ -2050,14 +2050,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // Configure view controller for sheet.
     NoteInfoViewController *infoViewController = [NoteInfoViewController new];
     infoViewController.note = self.currentNote;
-    infoViewController.hasSafeAreas = (self.view.safeAreaInsets.bottom != 0);
-    infoViewController.dismissAction = ^{
-        [self.infoActionSheet dismiss];
-    };
     
-    // Configure SPActionSheet for display.
+    // Configure for display.
     if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
         
+        // UIModalPresentationPopover.
         infoViewController.modalPresentationStyle = UIModalPresentationPopover;
         [infoViewController.popoverPresentationController setSourceView:self.noteOptionsButton];
         
@@ -2071,6 +2068,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         
     } else {
         
+        infoViewController.hasSafeAreas = (self.view.safeAreaInsets.bottom != 0);
+        infoViewController.dismissAction = ^{
+            [self.infoActionSheet dismiss];
+        };
+
+        // Configure SPActionSheet for display.
         NSArray *views = @[infoViewController.view];
         SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
         newActionSheet.swipeToDismiss = YES;

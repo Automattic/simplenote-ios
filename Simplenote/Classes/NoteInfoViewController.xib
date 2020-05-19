@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteInfoViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="dismissButton" destination="SeM-AW-1nd" id="U3S-84-KnM"/>
                 <outlet property="tablewView" destination="syt-EH-qNc" id="BW4-BP-8ZP"/>
                 <outlet property="titleLabel" destination="dvm-Tz-ZMd" id="YvD-WB-fe5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
