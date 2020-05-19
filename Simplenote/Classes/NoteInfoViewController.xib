@@ -28,8 +28,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="431" height="65"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvm-Tz-ZMd">
-                            <rect key="frame" x="12" y="10" width="116" height="45"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                            <rect key="frame" x="12" y="10" width="92.5" height="45"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
