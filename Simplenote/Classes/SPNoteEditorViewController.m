@@ -2056,29 +2056,38 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     };
     
     // Configure SPActionSheet for display.
-    NSArray *views = @[infoViewController.view];
-    SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
-    newActionSheet.swipeToDismiss = YES;
-    newActionSheet.contentView.layer.cornerRadius = 15;
-    
-    // Post setup frame tweaking.
-    // The SPActionSheet sets up a 12 pixel boarder.
-    // We don't want that so remove it here.
-    CGRect newFrame = newActionSheet.contentView.frame;
-    newFrame = CGRectInset(newFrame, 12, 0);
-    newActionSheet.contentView.frame = newFrame;
-    
-    // TODO: Work on iPad sizing
-    // Our iPad sizing logic needs more work.
-    BOOL isPad = [UIDevice isPad];
-    if (isPad) {
-        newFrame = CGRectInset(newFrame, 225, 0);
+    if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
+        
+        infoViewController.modalPresentationStyle = UIModalPresentationPopover;
+        [infoViewController.popoverPresentationController setSourceView:self.noteOptionsButton];
+        
+        CGFloat preferredHeight = infoViewController.view.frame.size.height - 36;
+        CGRect newFrame = CGRectMake(0, 0, 0, preferredHeight);
+        infoViewController.preferredContentSize = newFrame.size;
+        
+        [self presentViewController:infoViewController animated:YES completion:^{
+            self.noteInfoViewController = nil;
+        }];
+        
+    } else {
+        
+        NSArray *views = @[infoViewController.view];
+        SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
+        newActionSheet.swipeToDismiss = YES;
+        newActionSheet.contentView.layer.cornerRadius = 15;
+        
+        // Post setup frame tweaking.
+        // The SPActionSheet sets up a 12 pixel boarder.
+        // We don't want that so remove it here.
+        CGRect newFrame = newActionSheet.contentView.frame;
+        newFrame = CGRectInset(newFrame, 12, 0);
         newActionSheet.contentView.frame = newFrame;
+        
+        [self disableRotation];
+        
+        self.infoActionSheet = newActionSheet;
     }
     
-    [self disableRotation];
-    
-    self.infoActionSheet = newActionSheet;
     self.noteInfoViewController = infoViewController;
 }
 
