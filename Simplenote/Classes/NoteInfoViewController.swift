@@ -12,6 +12,7 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     @objc var dismissAction: (() -> Void)? = nil
     @objc var note: Note?
+    @objc var hasSafeAreas = false
     
     var cells = [UITableViewCell]()
     
@@ -24,6 +25,11 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         setUpTableCells()
         
         tablewView.dataSource = self
+        tablewView.tableFooterView = UIView()
+        
+        if hasSafeAreas {
+            self.view.frame.size.height -= 36
+        }
     }
     
     // MARK: - Set Up
@@ -36,6 +42,10 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     func setUpTableCells() {
         
         cells.removeAll()
+        
+        // Default cell height will be 44 points.
+        // Use custom text colors here?
+        // newCell.textLabel?.textColor = .simplenoteGray50Color
         
         if let info = localizedNoteInfo() {
             for (label, detail) in info {

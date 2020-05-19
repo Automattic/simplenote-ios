@@ -17,15 +17,15 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="431" height="286"/>
+            <rect key="frame" x="0.0" y="0.0" width="525" height="277"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="syt-EH-qNc">
-                    <rect key="frame" x="0.0" y="65" width="431" height="221"/>
+                    <rect key="frame" x="0.0" y="65" width="525" height="212"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tN-Qh-m5L" customClass="UIStackView">
-                    <rect key="frame" x="0.0" y="0.0" width="431" height="65"/>
+                    <rect key="frame" x="0.0" y="0.0" width="525" height="65"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvm-Tz-ZMd">
                             <rect key="frame" x="12" y="10" width="92.5" height="45"/>
@@ -34,7 +34,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeM-AW-1nd">
-                            <rect key="frame" x="383" y="16.5" width="32" height="32"/>
+                            <rect key="frame" x="477" y="16.5" width="32" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="CY4-1v-h5d"/>
                                 <constraint firstAttribute="width" constant="32" id="lpu-rQ-eCl"/>
@@ -59,17 +59,17 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="syt-EH-qNc" secondAttribute="bottom" id="C7l-mo-yLs"/>
                 <constraint firstItem="3tN-Qh-m5L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ExP-N7-Yr5"/>
                 <constraint firstItem="3tN-Qh-m5L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MJZ-E9-Je1"/>
-                <constraint firstAttribute="bottom" secondItem="syt-EH-qNc" secondAttribute="bottom" id="Swi-Ve-pcD"/>
+                <constraint firstItem="syt-EH-qNc" firstAttribute="top" secondItem="3tN-Qh-m5L" secondAttribute="bottom" id="Oc8-Wb-FYi"/>
                 <constraint firstItem="3tN-Qh-m5L" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ty1-iN-qtM"/>
-                <constraint firstItem="syt-EH-qNc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iDU-K4-Emp"/>
-                <constraint firstItem="syt-EH-qNc" firstAttribute="top" secondItem="3tN-Qh-m5L" secondAttribute="bottom" id="nv6-GD-c1c"/>
-                <constraint firstItem="syt-EH-qNc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="y1m-E2-AaN"/>
+                <constraint firstItem="syt-EH-qNc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dN3-82-7R7"/>
+                <constraint firstAttribute="trailing" secondItem="syt-EH-qNc" secondAttribute="trailing" id="neD-8o-fYb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="150" y="150.33482142857142"/>
+            <point key="canvasLocation" x="218.11594202898553" y="217.29910714285714"/>
         </view>
     </objects>
     <resources>

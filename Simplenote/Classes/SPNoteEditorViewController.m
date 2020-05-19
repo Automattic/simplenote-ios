@@ -2050,6 +2050,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // Configure view controller for sheet.
     NoteInfoViewController *infoViewController = [NoteInfoViewController new];
     infoViewController.note = self.currentNote;
+    infoViewController.hasSafeAreas = (self.view.safeAreaInsets.bottom != 0);
     infoViewController.dismissAction = ^{
         [self.infoActionSheet dismiss];
     };
