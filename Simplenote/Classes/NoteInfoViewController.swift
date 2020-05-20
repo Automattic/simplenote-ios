@@ -57,6 +57,9 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
                 let newCell = UITableViewCell.init(style: .value1, reuseIdentifier: nil)
                 newCell.textLabel?.text = label
                 newCell.detailTextLabel?.text = detail
+                
+                newCell.textLabel?.textColor = .simplenoteTextColor
+                newCell.detailTextLabel?.textColor = .simplenoteTextColor
                 newCell.backgroundColor = .clear
                 cells.append(newCell)
             }
