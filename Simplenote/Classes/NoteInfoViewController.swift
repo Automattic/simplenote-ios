@@ -44,7 +44,7 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     func setUpTitleLabel() {
         
-        titleLabel.text = NSLocalizedString("Information", comment: "Information Sheet label");
+        titleLabel.text = Labels.header
     }
     
     func setUpTableCells() {
@@ -85,26 +85,12 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         let wordCount = String(s.wordCount)
         let charCount = String(s.charCount)
         
-        let lables = localizedLabels()
-        
         var array = [(label: String, detail: String)]()
         
-        array.append((label: lables[0], detail: modifictionDate))
-        array.append((label: lables[1], detail: creationDate))
-        array.append((label: lables[2], detail: wordCount))
-        array.append((label: lables[3], detail: charCount))
-        
-        return array
-    }
-    
-    func localizedLabels() -> [String] {
-        
-        var array = [String]()
-        
-        array.append(NSLocalizedString("Modified", comment: "Date Modified label"))
-        array.append(NSLocalizedString("Created", comment: "Date Created label"))
-        array.append(NSLocalizedString("Words", comment: "Word Countlabel"))
-        array.append(NSLocalizedString("Characters", comment: "Character Count label"))
+        array.append((label: Labels.modified, detail: modifictionDate))
+        array.append((label: Labels.created, detail: creationDate))
+        array.append((label: Labels.words, detail: wordCount))
+        array.append((label: Labels.characters, detail: charCount))
         
         return array
     }
@@ -151,4 +137,17 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         
         return cells[indexPath.row]
     }
+}
+
+// MARK: - UITableView Label Strings
+//
+private enum Labels {
+    
+    static let header = NSLocalizedString("Information", comment: "Note Info header label");
+    
+    static let created = NSLocalizedString("Created", comment: "Date Created label")
+    static let modified = NSLocalizedString("Modified", comment: "Date Modified label")
+    
+    static let characters = NSLocalizedString("Characters", comment: "Character Count label")
+    static let words = NSLocalizedString("Words", comment: "Word Count label")
 }
