@@ -51,6 +51,9 @@ CGFloat const SPBackButtonImagePadding              = -18;
 CGFloat const SPBackButtonTitlePadding              = -15;
 CGFloat const SPSelectedAreaPadding                 = 20;
 
+CGFloat const SPActionSheetCornerRadius             = 15;
+CGFloat const SPActionSheetContentPadding           = 12;
+
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
@@ -2060,9 +2063,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     viewController.modalPresentationStyle = UIModalPresentationPopover;
     [viewController.popoverPresentationController setSourceView:self.noteOptionsButton];
     
-    // Need to manually tweak the view size here.
-    // TODO: Magic number to constant
-    CGFloat preferredHeight = viewController.view.frame.size.height - 36;
+    // Set preferredContentSize to respect hieght from the XIB.
+    CGFloat preferredHeight = viewController.view.frame.size.height;
     CGRect newFrame = CGRectMake(0, 0, 0, preferredHeight);
     viewController.preferredContentSize = newFrame.size;
     
@@ -2086,15 +2088,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     NSArray *views = @[viewController.view];
     SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
     newActionSheet.swipeToDismiss = YES;
-    newActionSheet.contentView.layer.cornerRadius = 15;
-    // TODO: Magic number to constant
-    // Above: 15, below: 12.
+    newActionSheet.contentView.layer.cornerRadius = SPActionSheetCornerRadius;
 
     // Post setup frame tweaking.
-    // The SPActionSheet sets up a 12 pixel boarder.
+    // The SPActionSheet sets up 12 pixels of padding around the view.
     // We don't want that so remove it here.
     CGRect newFrame = newActionSheet.contentView.frame;
-    newFrame = CGRectInset(newFrame, 12, 0);
+    newFrame = CGRectInset(newFrame, SPActionSheetContentPadding, 0);
     newActionSheet.contentView.frame = newFrame;
     
     self.infoActionSheet = newActionSheet;

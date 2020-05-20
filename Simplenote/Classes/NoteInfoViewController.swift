@@ -13,9 +13,13 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     @objc var dismissAction: (() -> Void)?
     @objc var note: Note!
-    @objc var hasSafeAreas = false
+    @objc var hasSafeAreas = true
     
     private var cells = [UITableViewCell]()
+    
+    // The design spec calls for an extra 36 points of space on devices that
+    // don't define any safe area insets. So any iPhone device with a home button.
+    private let SEBottomPadding: CGFloat = 36;
     
     // MARK: - View Lifecycle
     
@@ -31,13 +35,13 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         
         if dismissAction == nil {
             dismissButton.isHidden = true
+        } else if !hasSafeAreas {
+            // Add in some padding for older devices.
+            // ie: Not on iPad and no safe areas.
+            self.view.frame.size.height += SEBottomPadding
         }
         
         tablewView.tableFooterView = UIView()
-        
-        if hasSafeAreas {
-            self.view.frame.size.height -= 36
-        }
     }
     
     // MARK: - Set Up
