@@ -12,7 +12,7 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     @IBOutlet private weak var tablewView: UITableView!
     
     @objc var dismissAction: (() -> Void)?
-    @objc var note: Note?
+    @objc var note: Note!
     @objc var hasSafeAreas = false
     
     private var cells = [UITableViewCell]()
@@ -21,6 +21,10 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard note != nil else {
+            fatalError()
+        }
         
         setUpTitleLabel()
         setUpTableCells()
@@ -48,34 +52,26 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         cells.removeAll()
         
         // Default cell height will be 44 points.
-        // Use custom text colors here?
-        // newCell.textLabel?.textColor = .simplenoteGray50Color
         
-        if let info = localizedNoteInfo() {
-            for (label, detail) in info {
-                let newCell = UITableViewCell.init(style: .value1, reuseIdentifier: nil)
-                newCell.textLabel?.text = label
-                newCell.detailTextLabel?.text = detail
-                
-                newCell.textLabel?.textColor = .simplenoteTextColor
-                newCell.detailTextLabel?.textColor = .simplenoteTextColor
-                newCell.backgroundColor = .clear
-                
-                newCell.selectionStyle = .none
-                
-                cells.append(newCell)
-            }
+        let info = localizedNoteInfo()
+        for (label, detail) in info {
+            let newCell = UITableViewCell.init(style: .value1, reuseIdentifier: nil)
+            newCell.textLabel?.text = label
+            newCell.detailTextLabel?.text = detail
+            
+            newCell.textLabel?.textColor = .simplenoteTextColor
+            newCell.detailTextLabel?.textColor = .simplenoteTextColor
+            newCell.backgroundColor = .clear
+            
+            newCell.selectionStyle = .none
+            
+            cells.append(newCell)
         }
     }
     
     // MARK: - Helpers
     
-    func localizedNoteInfo() -> [(label: String, detail: String)]? {
-        
-        guard let note = note else {
-            print("No note set for sheet.")
-            return nil
-        }
+    func localizedNoteInfo() -> [(label: String, detail: String)] {
         
         // Date Formatter
         let dateFormatter = localizedDateFormatter()
