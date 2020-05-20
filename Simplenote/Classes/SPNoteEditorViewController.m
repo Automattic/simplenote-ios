@@ -2051,6 +2051,60 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self disableRotation];
 }
 
+- (void)presentNoteInfoInPopover
+{
+    NoteInfoViewController *viewController = self.noteInfoViewController;
+    NSParameterAssert(viewController);
+    
+    // Prep for presentation using the UIModalPresentationPopover style.
+    viewController.modalPresentationStyle = UIModalPresentationPopover;
+    [viewController.popoverPresentationController setSourceView:self.noteOptionsButton];
+    
+    // Need to manually tweak the view size here.
+    // TODO: Magic number to constant
+    CGFloat preferredHeight = viewController.view.frame.size.height - 36;
+    CGRect newFrame = CGRectMake(0, 0, 0, preferredHeight);
+    viewController.preferredContentSize = newFrame.size;
+    
+    [self presentViewController:viewController animated:YES completion:^{
+        self.noteInfoViewController = nil;
+    }];
+}
+
+- (void)presentNoteInfoInActionSheet
+{
+    NoteInfoViewController *viewController = self.noteInfoViewController;
+    NSParameterAssert(viewController);
+    
+    // Presents the current noteInfoViewController in an SPActionSheet.
+    viewController.hasSafeAreas = (self.view.safeAreaInsets.bottom != 0);
+    viewController.dismissAction = ^{
+        [self.infoActionSheet dismiss];
+    };
+    
+    // Configure SPActionSheet for display.
+    NSArray *views = @[viewController.view];
+    SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
+    newActionSheet.swipeToDismiss = YES;
+    newActionSheet.contentView.layer.cornerRadius = 15;
+    // TODO: Magic number to constant
+    // Above: 15, below: 12.
+
+    // Post setup frame tweaking.
+    // The SPActionSheet sets up a 12 pixel boarder.
+    // We don't want that so remove it here.
+    CGRect newFrame = newActionSheet.contentView.frame;
+    newFrame = CGRectInset(newFrame, 12, 0);
+    newActionSheet.contentView.frame = newFrame;
+    
+    self.infoActionSheet = newActionSheet;
+}
+
+- (BOOL)shouldUsePopoverForPresentation
+{
+    return ([UIDevice isPad] && !self.isViewHorizontallyCompact);
+}
+
 - (void)viewInfoAction
 {
     // Prevent the view from being triggerd multiple times.
@@ -2063,48 +2117,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // self.noteEditorTextView.editable = NO;
     
     // Configure view controller for sheet.
-    NoteInfoViewController *infoViewController = [NoteInfoViewController new];
-    infoViewController.note = self.currentNote;
+    self.noteInfoViewController = [NoteInfoViewController new];
+    self.noteInfoViewController.note = self.currentNote;
     
     // Configure for display.
-    if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
-        
-        // UIModalPresentationPopover.
-        infoViewController.modalPresentationStyle = UIModalPresentationPopover;
-        [infoViewController.popoverPresentationController setSourceView:self.noteOptionsButton];
-        
-        CGFloat preferredHeight = infoViewController.view.frame.size.height - 36;
-        CGRect newFrame = CGRectMake(0, 0, 0, preferredHeight);
-        infoViewController.preferredContentSize = newFrame.size;
-        
-        [self presentViewController:infoViewController animated:YES completion:^{
-            self.noteInfoViewController = nil;
-        }];
-        
+    if ([self shouldUsePopoverForPresentation]) {
+        [self presentNoteInfoInPopover];
     } else {
-        
-        infoViewController.hasSafeAreas = (self.view.safeAreaInsets.bottom != 0);
-        infoViewController.dismissAction = ^{
-            [self.infoActionSheet dismiss];
-        };
-
-        // Configure SPActionSheet for display.
-        NSArray *views = @[infoViewController.view];
-        SPActionSheet *newActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view withMessage:nil withContentViewArray:views withButtonTitleArray:nil delegate:self];
-        newActionSheet.swipeToDismiss = YES;
-        newActionSheet.contentView.layer.cornerRadius = 15;
-        
-        // Post setup frame tweaking.
-        // The SPActionSheet sets up a 12 pixel boarder.
-        // We don't want that so remove it here.
-        CGRect newFrame = newActionSheet.contentView.frame;
-        newFrame = CGRectInset(newFrame, 12, 0);
-        newActionSheet.contentView.frame = newFrame;
-        
-        self.infoActionSheet = newActionSheet;
+        [self presentNoteInfoInActionSheet];
     }
-    
-    self.noteInfoViewController = infoViewController;
 }
 
 - (long)minimumNoteVersion {
