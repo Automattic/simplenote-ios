@@ -29,7 +29,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="525" height="65"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvm-Tz-ZMd">
-                            <rect key="frame" x="15" y="10" width="450" height="45"/>
+                            <rect key="frame" x="20" y="10" width="445" height="45"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                         <constraint firstItem="SeM-AW-1nd" firstAttribute="centerY" secondItem="3tN-Qh-m5L" secondAttribute="centerY" id="GyV-69-QHt"/>
                         <constraint firstAttribute="bottom" secondItem="dvm-Tz-ZMd" secondAttribute="bottom" constant="10" id="Ur5-pJ-jFa"/>
                         <constraint firstAttribute="trailing" secondItem="SeM-AW-1nd" secondAttribute="trailing" constant="16" id="hdU-jv-uoA"/>
-                        <constraint firstItem="dvm-Tz-ZMd" firstAttribute="leading" secondItem="3tN-Qh-m5L" secondAttribute="leading" constant="15" id="sX2-ma-f3R"/>
+                        <constraint firstItem="dvm-Tz-ZMd" firstAttribute="leading" secondItem="3tN-Qh-m5L" secondAttribute="leading" constant="20" id="sX2-ma-f3R"/>
                         <constraint firstAttribute="trailing" secondItem="dvm-Tz-ZMd" secondAttribute="trailing" constant="60" id="yVU-Pt-f3Y"/>
                     </constraints>
                 </view>
