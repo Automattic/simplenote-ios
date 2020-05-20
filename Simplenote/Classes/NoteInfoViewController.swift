@@ -61,6 +61,9 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
                 newCell.textLabel?.textColor = .simplenoteTextColor
                 newCell.detailTextLabel?.textColor = .simplenoteTextColor
                 newCell.backgroundColor = .clear
+                
+                newCell.selectionStyle = .none
+                
                 cells.append(newCell)
             }
         }
