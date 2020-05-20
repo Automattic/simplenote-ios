@@ -77,12 +77,9 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
     func localizedNoteInfo() -> [(label: String, detail: String)] {
         
-        // Date Formatter
-        let dateFormatter = localizedDateFormatter()
-        
         // Created & modified dates
-        let creationDate = dateFormatter.string(from: note.creationDate)
-        let modifictionDate = dateFormatter.string(from: note.modificationDate)
+        let creationDate = NoteInfoViewController.dateFormatter.string(from: note.creationDate)
+        let modifictionDate = NoteInfoViewController.dateFormatter.string(from: note.modificationDate)
         
         // Char & word counts
         let s = note.content as NSString
@@ -97,20 +94,6 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         array.append((label: Labels.characters, detail: charCount))
         
         return array
-    }
-    
-    func localizedDateFormatter() -> DateFormatter {
-        
-        // Localized format string respecting device settings.
-        // Could make relative date formatting a Defaults option.
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .short
-        dateFormatter.dateStyle = .medium
-        dateFormatter.locale = Locale.current
-        dateFormatter.doesRelativeDateFormatting = true
-        
-        return dateFormatter
     }
     
     // MARK: - Actions
@@ -143,15 +126,37 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
     }
 }
 
+// MARK: - Static Date Formatter
+//
+private extension NoteInfoViewController {
+    
+    /// Static DateFormatter to avoid initializing this multiple times.
+    ///
+    static var dateFormatter: DateFormatter = {
+      let newFormatter = DateFormatter()
+      newFormatter.timeStyle = .short
+      newFormatter.dateStyle = .medium
+      newFormatter.locale = Locale.current
+      newFormatter.doesRelativeDateFormatting = true
+      return newFormatter
+    }()
+}
+
 // MARK: - UITableView Label Strings
 //
 private enum Labels {
     
+    /// The localized view title/header.
+    ///
     static let header = NSLocalizedString("Information", comment: "Note Info header label");
     
+    /// Localized created/modified labels.
+    ///
     static let created = NSLocalizedString("Created", comment: "Date Created label")
     static let modified = NSLocalizedString("Modified", comment: "Date Modified label")
     
+    /// Localalized character/word count labels.
+    ///
     static let characters = NSLocalizedString("Characters", comment: "Character Count label")
     static let words = NSLocalizedString("Words", comment: "Word Count label")
 }
