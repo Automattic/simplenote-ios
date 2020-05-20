@@ -149,6 +149,12 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    @objc func refresh() {
+        
+        setUpTableCells()
+        tablewView.reloadData()
+    }
+    
     // MARK: - UITableViewDataSource methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
