@@ -7,15 +7,15 @@ import UIKit
 
 class NoteInfoViewController: UIViewController, UITableViewDataSource {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var tablewView: UITableView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var dismissButton: UIButton!
+    @IBOutlet private weak var tablewView: UITableView!
     
-    @objc var dismissAction: (() -> Void)? = nil
+    @objc var dismissAction: (() -> Void)?
     @objc var note: Note?
     @objc var hasSafeAreas = false
     
-    var cells = [UITableViewCell]()
+    private var cells = [UITableViewCell]()
     
     // MARK: - View Lifecycle
     
@@ -29,7 +29,6 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
             dismissButton.isHidden = true
         }
         
-        tablewView.dataSource = self
         tablewView.tableFooterView = UIView()
         
         if hasSafeAreas {
@@ -128,25 +127,15 @@ class NoteInfoViewController: UIViewController, UITableViewDataSource {
         return dateFormatter
     }
     
-    func specDateFormatter() -> DateFormatter {
-        
-        // Hard-coded format string to match design spec.
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy, HH:mm"
-        
-        return dateFormatter
-    }
-    
     // MARK: - Actions
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         
-        if dismissAction != nil {
-            dismissAction!()
-        } else {
-            print("No action defined for dismiss button.")
+        guard let action = dismissAction else {
+            return
         }
+        
+        action()
     }
     
     @objc func refresh() {

@@ -831,6 +831,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark - View Utilities
 
+// TODO: Remove rotation blocking
+// Once we have a new Versions UI in place, that is!
+
 - (void)enableRotation
 {
     [(SPNavigationController *)self.navigationController setDisableRotation:NO];
@@ -1435,17 +1438,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self updateNoteInfoController];
 }
 
-- (void)updateNoteInfoController
-{
-    if (self.noteInfoViewController == nil) {
-        return;
-    }
-    
-    // Update the Note Info if onscreen.
-    
-    [self.noteInfoViewController refresh];
-}
-
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
     
     if (bViewingVersions) {
@@ -1471,6 +1463,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }];
 
     [alertController presentFromRootViewController];
+}
+
+- (void)updateNoteInfoController
+{
+    if (self.noteInfoViewController == nil) {
+        return;
+    }
+    
+    // Update the Note Info if onscreen.
+    
+    [self.noteInfoViewController refresh];
 }
 
 #pragma mark barButton action methods
@@ -2097,8 +2100,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         CGRect newFrame = newActionSheet.contentView.frame;
         newFrame = CGRectInset(newFrame, 12, 0);
         newActionSheet.contentView.frame = newFrame;
-        
-        [self disableRotation];
         
         self.infoActionSheet = newActionSheet;
     }
