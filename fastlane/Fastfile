@@ -497,7 +497,7 @@ end
     promo_screenshots(
       orig_folder: options[:source] || screenshots_directory,
       metadata_folder: File.join(Dir.pwd, "metadata"),
-      output_folder: File.join(Dir.pwd, "/promo_screenshots"),
+      output_folder: promo_screenshots_directory,
       force: options[:force] || true
     )
   end
@@ -610,6 +610,10 @@ end
 
 def screenshots_directory()
   File.join(fastlane_directory, "screenshots")
+end
+
+def promo_screenshots_directory
+  File.join(fastlane_directory, "promo_screenshots")
 end
 
 def screenshot_devices()
