@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-28 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d件の検索結果";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- 8文字以上入力してください";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- タブも改行も許可されていません";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- パスワードがメールと一致しません";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1分";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "共同編集者を追加";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "タグ ...";
+"Add a tag..." = "タグ ...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "タグを追加";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "パスワード";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "パスワードは4文字以上にしてください";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "パスワードは6文字以上にしてください。";
+"Password cannot match email" = "パスワードがメールと一致しません";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "パスワードは%d文字以上にしてください";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "パスワードにタブや改行を含めることはできません";
 
 /* Number of changes pending to be sent */
 "Pendings" = "保留中";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "タイトル変更";
+
+/* Reset Action */
+"Reset" = "リセット";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "リセットが必要";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "復元";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "ゴミ箱";
+"Trash-noun" = "ゴミ箱";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "ゴミ箱に移動";
+"Trash-verb" = "ゴミ箱に移動";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "ピンを外す";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "無効なメールアドレスです。";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "パスワードが安全でないため、リセットする必要があります。パスワードの要件は次のとおりです。";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "ノートの共同編集を有効化";
+"collaborate-accessibility-hint" = "ノートの共同編集を有効化";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
+"collaborators-description" = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "このノートは他のデバイスから削除されました。";
+"deleted-note-warning" = "このノートは他のデバイスから削除されました。";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "以前のバージョンにノートを復元";
+"history-accessibility-hint" = "以前のバージョンにノートを復元";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "ノートのオプションを表示";
+"menu-accessibility-hint" = "ノートのオプションを表示";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "現在のノートを閉じる";
+"notes-accessibility-hint" = "現在のノートを閉じる";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "現在のノートのコンテンツを共有";
+"share-accessibility-hint" = "現在のノートのコンテンツを共有";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "現在のノートにタグを追加";
+"tag-add-accessibility-hint" = "現在のノートにタグを追加";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "現在のノートからタグを削除";
+"tag-delete-accessibility-hint" = "現在のノートからタグを削除";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "タグ :";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "現在のノートをゴミ箱へ移動";
+"trash-accessibility-hint" = "現在のノートをゴミ箱へ移動";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
+"version-alert-message" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "このバージョンにスイッチ";
+"version-cell-accessibility-hint" = "このバージョンにスイッチ";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "バージョンを取得中";
+"version-cell-fetching-accessibility-hint" = "バージョンを取得中";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
+"welcomeNote-iOS" = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
 

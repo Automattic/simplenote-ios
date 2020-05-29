@@ -21,6 +21,15 @@
 /* Number of found search results */
 "%d Results" = "%d Canlyniad ";
 
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Minimum of 8 characters";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Neither tabs nor newlines are allowed";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Password cannot match email";
+
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 Minute";
 
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Ychwanegu cydweithredwr newydd...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
+"Add a tag..." = "Tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ychwanegu tag";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Cyfrinair";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Password must contain at least 4 characters";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Rhaid i'r cyfrinair gynnwys o leiaf 6 nod.";
+"Password cannot match email" = "Password cannot match email";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Password must contain at least %d characters";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Password must not contain tabs nor newlines";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Ailenwi";
+
+/* Reset Action */
+"Reset" = "Reset";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Reset Required";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Adfer";
@@ -498,10 +516,10 @@
 "Touch ID" = "Enw Cyffwrdd";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Sbwriel";
+"Trash-noun" = "Sbwriel";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Sbwriel";
+"Trash-verb" = "Sbwriel";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Unpin";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Nid yw eich cyfeiriad e-bost yn ddilys.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Your password is insecure and must be reset. The password requirements are:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Galluogi i eraill gydweithredu";
+"collaborate-accessibility-hint" = "Galluogi i eraill gydweithredu";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Ychwanegwch gyfeiriad e-bost i rannu'r nodyn hwn gyda rhywun. Yna byddwch chi'n dau yn gallu gwneud newidiadau iddo.";
+"collaborators-description" = "Ychwanegwch gyfeiriad e-bost i rannu'r nodyn hwn gyda rhywun. Yna byddwch chi'n dau yn gallu gwneud newidiadau iddo.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Dilëwyd y nodyn hwn ar ddyfais arall.";
+"deleted-note-warning" = "Dilëwyd y nodyn hwn ar ddyfais arall.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Adfer y nodyn i'r fersiwn blaenorol";
+"history-accessibility-hint" = "Adfer y nodyn i'r fersiwn blaenorol";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Dangos y dewisiadau ar gyfer y nodyn";
+"menu-accessibility-hint" = "Dangos y dewisiadau ar gyfer y nodyn";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Cau'r nodyn cyfredol";
+"notes-accessibility-hint" = "Cau'r nodyn cyfredol";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Rhannu cynnwys y nodyn cyfredol";
+"share-accessibility-hint" = "Rhannu cynnwys y nodyn cyfredol";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Ychwanegu tag i'r nodyn cyfredol";
+"tag-add-accessibility-hint" = "Ychwanegu tag i'r nodyn cyfredol";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Tynnu'r tag o'r nodyn cyfredol";
+"tag-delete-accessibility-hint" = "Tynnu'r tag o'r nodyn cyfredol";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Symud y nodyn cyfredol i'r sbwriel";
+"trash-accessibility-hint" = "Symud y nodyn cyfredol i'r sbwriel";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Cysylltwch â'r rhyngrwyd i gael mynediad at fersiynau blaenorol";
+"version-alert-message" = "Cysylltwch â'r rhyngrwyd i gael mynediad at fersiynau blaenorol";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Newid i'r fersiwn hwn";
+"version-cell-accessibility-hint" = "Newid i'r fersiwn hwn";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Wrthi'n ôl y fersiwn";
+"version-cell-fetching-accessibility-hint" = "Wrthi'n ôl y fersiwn";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
+"welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
 

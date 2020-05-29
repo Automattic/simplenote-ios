@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-27 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultaten";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Minimaal 8 tekens";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Tabs en nieuwe regels niet toegestaan";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Wachtwoord mag niet hetzelfde zijn als e-mailadres";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 minuut";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Een nieuwe samenwerker toevoegen...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
+"Add a tag..." = "Tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tag toevoegen";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Wachtwoord";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Wachtwoord moet minstens 4 tekens bevatten";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Wachtwoord moet ten minste 6 tekens bevatten.";
+"Password cannot match email" = "Wachtwoord mag niet hetzelfde zijn als e-mailadres";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Wachtwoord moet minstens %d tekens bevatten";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Wachtwoord mag geen tabs of nieuwe regels bevatten";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Aantal in behandeling";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Hernoemen";
+
+/* Reset Action */
+"Reset" = "Resetten";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Reset vereist";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Herstellen";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Prullenbak";
+"Trash-noun" = "Prullenbak";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Naar prullenbak";
+"Trash-verb" = "Naar prullenbak";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Losgemaakt";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Je e-mailadres is niet geldig.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Je wachtwoord is onveilig en moet opnieuw worden ingesteld. De wachtwoordvereisten zijn:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Samenwerking met anderen inschakelen";
+"collaborate-accessibility-hint" = "Samenwerking met anderen inschakelen";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";
+"collaborators-description" = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Deze notitie is verwijderd op een ander apparaat.";
+"deleted-note-warning" = "Deze notitie is verwijderd op een ander apparaat.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Notitie herstellen naar eerdere versie";
+"history-accessibility-hint" = "Notitie herstellen naar eerdere versie";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Opties tonen voor notitie";
+"menu-accessibility-hint" = "Opties tonen voor notitie";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Huidige notitie sluiten";
+"notes-accessibility-hint" = "Huidige notitie sluiten";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "De inhoud van de huidige notitie delen";
+"share-accessibility-hint" = "De inhoud van de huidige notitie delen";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Een tag toevoegen aan de huidige notitie";
+"tag-add-accessibility-hint" = "Een tag toevoegen aan de huidige notitie";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Tag verwijderen uit de huidige notitie";
+"tag-delete-accessibility-hint" = "Tag verwijderen uit de huidige notitie";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "De huidige notitie verplaatsen naar de prullenbak";
+"trash-accessibility-hint" = "De huidige notitie verplaatsen naar de prullenbak";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Maak verbinding met internet voor toegang tot eerdere versies";
+"version-alert-message" = "Maak verbinding met internet voor toegang tot eerdere versies";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Overschakelen naar deze versie";
+"version-cell-accessibility-hint" = "Overschakelen naar deze versie";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Versie ophalen";
+"version-cell-fetching-accessibility-hint" = "Versie ophalen";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
+"welcomeNote-iOS" = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
 
