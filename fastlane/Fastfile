@@ -626,7 +626,7 @@ def screenshots_directory()
   File.join(fastlane_directory, "screenshots")
 end
 
-def promo_screenshots_directory()
+def promo_screenshots_directory
   File.join(fastlane_directory, "promo_screenshots")
 end
 
