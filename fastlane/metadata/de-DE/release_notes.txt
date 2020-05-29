@@ -1,1 +1,4 @@
-Support für Persisch.
+Aktualisierte Anforderungen zur Passwortsicherheit.
+Simplenote bittet bei der Anmeldung um die Aktualisierung unsicherer Passwörter.
+Eine neue Farbpalette wurde implementiert!
+Der Button für die Checkliste ist verborgen, es sei denn, du bearbeitest aktiv eine Notiz.

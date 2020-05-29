@@ -1,1 +1,4 @@
-Ondersteuning toegevoegd voor Perzisch.
+Bijgewerkte vereisten voor wachtwoordsterkte.
+Simplenote vraagt je om onveilige wachtwoorden te upgraden wanneer je inlogt.
+Nieuw kleurenpalet toegevoegd!
+De checklist-knop is verborgen tenzij je actief een notitie bewerkt.
