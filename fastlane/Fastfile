@@ -548,6 +548,35 @@ end
     appstore_code_signing
   end
 
+  lane :upload_screenshots do |options|
+    # This uses the following env vars from the user env:
+    # DELIVER_USER
+    # DELIVER_APP_IDENTIFIER
+    # FASTLANE_PASSWORD
+    #
+    # and from the project env:
+    # FASTLANE_ITC_TEAM_ID
+    upload_to_app_store(
+      edit_live: false,
+      use_live_version: false,
+      screenshots_path: promo_screenshots_directory,
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_app_version_update: true,
+
+      # Prechecks
+      run_precheck_before_submit: false,
+      precheck_include_in_app_purchases: false,
+
+      # Set this to true to delete all the previous screenshots on ASC
+      overwrite_screenshots: false,
+      # Set this to true to skip the interactive confirmation of the
+      # screenshots that will be uploaded
+      force: false,
+      submit_for_review: false
+    )
+  end
+
 ########################################################################
 # Fastlane match code signing
 ########################################################################
