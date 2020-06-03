@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-26 10:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d תוצאות";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- לפחות שמונה תווים";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- אסור להוסיף סמני Tab או שורות חדשות";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- הסיסמה לא יכולה להיות כתובת האימייל";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "דקה אחת";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "הוספת שותף עריכה חדש...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "תגית...";
+"Add a tag..." = "תגית...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "הוספת תגית";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "סיסמה";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "הסיסמה חייבת להכיל לפחות 4 תווים";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "הסיסמה חייבת להכיל לפחות ארבעה תווים.";
+"Password cannot match email" = "הסיסמה לא יכולה להיות כתובת האימייל";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "הסיסמה חייבת להכיל לפחות %d תווים";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "הסיסמה לא יכולה להכיל סימני Tab או שורות חדשות";
 
 /* Number of changes pending to be sent */
 "Pendings" = "בהמתנה";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "שינוי שם";
+
+/* Reset Action */
+"Reset" = "איפוס";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "נדרש איפוס";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "שחזור";
@@ -498,10 +516,10 @@
 "Touch ID" = "מזהה מגע";
 
 /* Title: Trash Tag is selected */
-"Trash" = "העברה לפח";
+"Trash-noun" = "העברה לפח";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "העברה לפח";
+"Trash-verb" = "העברה לפח";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "להסיר את הנעץ";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "הסיסמה שלך לא מאובטחת ועליך לאפס אותה. הדרישות לסיסמה הן:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "מאפשר לאחרים לשתף פעולה";
+"collaborate-accessibility-hint" = "מאפשר לאחרים לשתף פעולה";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "יש להוסיף כתובת אימייל כדי לשתף פתק זה עם מישהו. לאחר מכן תוכלו שניכם לערוך בו שינויים.";
+"collaborators-description" = "יש להוסיף כתובת אימייל כדי לשתף פתק זה עם מישהו. לאחר מכן תוכלו שניכם לערוך בו שינויים.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "הפתק נמחק במכשיר אחר.";
+"deleted-note-warning" = "הפתק נמחק במכשיר אחר.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "החזרת פתק לגרסה הקודמת";
+"history-accessibility-hint" = "החזרת פתק לגרסה הקודמת";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "הצגת אפשרויות לפתק";
+"menu-accessibility-hint" = "הצגת אפשרויות לפתק";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "סגירת פתק נוכחי";
+"notes-accessibility-hint" = "סגירת פתק נוכחי";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "שיתוף תוכן הפתק הנוכחי";
+"share-accessibility-hint" = "שיתוף תוכן הפתק הנוכחי";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "הוספת תגית לפתק הנוכחי";
+"tag-add-accessibility-hint" = "הוספת תגית לפתק הנוכחי";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "הסרת תגית מהפתק הנוכחי";
+"tag-delete-accessibility-hint" = "הסרת תגית מהפתק הנוכחי";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "תגית:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "העבר את הפתק הנוכחי לפח";
+"trash-accessibility-hint" = "העבר את הפתק הנוכחי לפח";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "התחברות לאינטרנט לצורך גישה לגרסאות קודמות";
+"version-alert-message" = "התחברות לאינטרנט לצורך גישה לגרסאות קודמות";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "מעבר לגרסה זו";
+"version-cell-accessibility-hint" = "מעבר לגרסה זו";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "הורדת גרסה";
+"version-cell-fetching-accessibility-hint" = "הורדת גרסה";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
+"welcomeNote-iOS" = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
 

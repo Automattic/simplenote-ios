@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-04-10 11:40:33+0000 */
+/* Translation-Revision-Date: 2020-05-26 04:07:15+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fa */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d Results";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- دست‌ِکم ۸ نویسه";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- جهش (tab) و سرخط مجاز نیست";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- گذرواژه نمی‌تواند مطابقِ ایمیل باشد";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "۱ دقیقه";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Add a new collaborator...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "برچسب...";
+"Add a tag..." = "برچسب...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Add tag";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "گذرواژه";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "گذرواژه باید دست‌ِکم شاملِ ۴ نویسه باشد";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "گذرواژه دست‌ِکم باید حاویِ ۶ نویسه باشد";
+"Password cannot match email" = "گذرواژه نمی‌تواند مطابقِ ایمیل باشد";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "گذرواژه دست‌ِکم باید حاویِ %d نویسه باشد";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "گذرواژه نمی‌باید حاوی جهش (tab) و سرخط باشد";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "تغییرِ نام";
+
+/* Reset Action */
+"Reset" = "بازنشانی";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "بازنشانی لازم است";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restore";
@@ -474,10 +492,10 @@
 "Terms and Conditions" = "Terms and Conditions";
 
 /* Simplenote terms of service */
-"Terms of Service" = "Terms of Service";
+"Terms of Service" = "شرایطِ خدمات";
 
 /* Error when address is in use */
-"The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
+"The email you've entered is already associated with a Simplenote account." = "ایمیلی که فراهم کرده‌اید از پیش با یک حسابِ Simplenote مرتبط است.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "ساده‌ترین روش برای حفظِ یادداشت‌ها.";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "زباله‌دان";
+"Trash-noun" = "زباله‌دان";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "دور انداختن";
+"Trash-verb" = "دور انداختن";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "برداشتنِ سنجاق";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "نشانیِ ایمیل شما معتبر نیست";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "گذرواژهٔ شما ایمن نیست و باید بازنشانی شود. ملزوماتِ گذرواژه از این قرارند:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Enable others to collaborate";
+"collaborate-accessibility-hint" = "collaborate-accessibility-hint";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
+"collaborators-description" = "collaborators-description";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "This note was deleted on another device.";
+"deleted-note-warning" = "deleted-note-warning";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Restore note to previous version";
+"history-accessibility-hint" = "history-accessibility-hint";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Show options for note";
+"menu-accessibility-hint" = "menu-accessibility-hint";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Close current note";
+"notes-accessibility-hint" = "notes-accessibility-hint";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "اشتراک‌گذاریِ محتوایِ یادداشتِ کنونی";
+"share-accessibility-hint" = "اشتراک‌گذاریِ محتوایِ یادداشتِ کنونی";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Add a tag to the current note";
+"tag-add-accessibility-hint" = "tag-add-accessibility-hint";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Remove tag from the current note";
+"tag-delete-accessibility-hint" = "tag-delete-accessibility-hint";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "برچسب:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "انتقالِ یادداشتِ کنونی به زباله‌دان";
+"trash-accessibility-hint" = "انتقالِ یادداشتِ کنونی به زباله‌دان";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Connect to the Internet to Access Previous Versions";
+"version-alert-message" = "version-alert-message";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Switch to this version";
+"version-cell-accessibility-hint" = "version-cell-accessibility-hint";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Fetching version";
+"version-cell-fetching-accessibility-hint" = "version-cell-fetching-accessibility-hint";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
+"welcomeNote-iOS" = "welcomeNote-iOS";
 

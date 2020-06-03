@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-04 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-26 12:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d результатов";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "— Не менее 8 символов";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "— Использование знаков табуляции и перехода на новую строку запрещено";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "— Пароль не должен совпадать с адресом эл. почты";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 минута";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Добавить нового партнера";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Метка...";
+"Add a tag..." = "Метка...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Добавить тег";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Пароль";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Пароль должен содержать не меньше 4 знаков";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Пароль должен содержать не менее 6 символов.";
+"Password cannot match email" = "Пароль не должен совпадать с адресом эл. почты";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Пароль должен содержать не менее %d символов.";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Пароль не должен содержать знаки табуляции и перехода на новую строку";
 
 /* Number of changes pending to be sent */
 "Pendings" = "На утверждении";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Переименовать";
+
+/* Reset Action */
+"Reset" = "Сброс";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Требуется сброс";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Восстановить";
@@ -498,10 +516,10 @@
 "Touch ID" = "Идентификатор прикосновения";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Корзина";
+"Trash-noun" = "Корзина";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Удалить";
+"Trash-verb" = "Удалить";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Открепить";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Ваш адрес электронной почты не действителен.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Ваш пароль ненадежен, его необходимо сменить. Требования к паролю:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Разрешить другим сотрудничать";
+"collaborate-accessibility-hint" = "Разрешить другим сотрудничать";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
+"collaborators-description" = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Эта заметка была удалена на другом устройстве";
+"deleted-note-warning" = "Эта заметка была удалена на другом устройстве";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Восстановить предыдущую версию заметки";
+"history-accessibility-hint" = "Восстановить предыдущую версию заметки";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Показать опции заметки";
+"menu-accessibility-hint" = "Показать опции заметки";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Закрыть текущую заметку";
+"notes-accessibility-hint" = "Закрыть текущую заметку";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Поделится содержанием данной заметки";
+"share-accessibility-hint" = "Поделится содержанием данной заметки";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Добавить тег к текущей заметке";
+"tag-add-accessibility-hint" = "Добавить тег к текущей заметке";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Удалить тег в текущей заметке";
+"tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "метка:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Отправить текущую заметку в корзину";
+"trash-accessibility-hint" = "Отправить текущую заметку в корзину";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
+"version-alert-message" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Оставить этот вариант";
+"version-cell-accessibility-hint" = "Оставить этот вариант";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Извлечение версии";
+"version-cell-fetching-accessibility-hint" = "Извлечение версии";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
+"welcomeNote-iOS" = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
 

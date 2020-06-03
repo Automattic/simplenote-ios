@@ -1,1 +1,4 @@
-Farsça için destek ekleme.
+Parola Gücü Gereksinimleri güncellendi.
+Simplenote, her oturum açtığınızda güvenli olmayan parolaları yükseltmenizi isteyecek.
+Yeni bir renk paleti uygulandı!
+Etkin bir şekilde not düzenlenmediği zamanlarda kontrol listesi düğmesi gizlendi.

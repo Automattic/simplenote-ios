@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-26 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d Hasil";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Minimum 8 karakter";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Tidak boleh ada tab maupun baris baru";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Kata sandi tidak boleh sama dengan email";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 Menit";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Tambahkan kolaborator baru...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
+"Add a tag..." = "Tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tambahkan label";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Kata sandi";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Kata sandi harus berisi setidaknya 4 karakter";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Kata sandi harus berisi sedikitnya 6 karakter.";
+"Password cannot match email" = "Kata sandi tidak boleh sama dengan email";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Kata sandi harus berisi setidaknya %d karakter";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Kata sandi tidak boleh berisi tab atau baris baru";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Tertunda";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Ubah Nama";
+
+/* Reset Action */
+"Reset" = "Atur Ulang";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Diperlukan Pengaturan Ulang";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Pulihkan";
@@ -498,10 +516,10 @@
 "Touch ID" = "ID Sentuhan";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Sampah";
+"Trash-noun" = "Sampah";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Sampah";
+"Trash-verb" = "Sampah";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Lapas sematan";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Alamat email Anda tidak valid.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Kata sandi Anda tidak aman dan harus diatur ulang. Persyaratan kata sandi adalah:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Aktifkan yang lain untuk berkolaborasi";
+"collaborate-accessibility-hint" = "Aktifkan yang lain untuk berkolaborasi";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
+"collaborators-description" = "Tambahkan alamat email untuk berbagi catatan ini dengan seseorang. Kemudian Anda dan orang yang Anda bagi catatan tersebut dapat melakukan perubahan.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Catatan ini dihapus pada perangkat lain.";
+"deleted-note-warning" = "Catatan ini dihapus pada perangkat lain.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Pulihkan catatan ke versi sebelumnya";
+"history-accessibility-hint" = "Pulihkan catatan ke versi sebelumnya";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Tampilkan opsi untuk catatan";
+"menu-accessibility-hint" = "Tampilkan opsi untuk catatan";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Tutup catatan saat ini";
+"notes-accessibility-hint" = "Tutup catatan saat ini";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Bagikan konten dari catatan saat ini";
+"share-accessibility-hint" = "Bagikan konten dari catatan saat ini";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Tambahkan label pada catatan saat ini";
+"tag-add-accessibility-hint" = "Tambahkan label pada catatan saat ini";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Buang label dari catatan saat ini";
+"tag-delete-accessibility-hint" = "Buang label dari catatan saat ini";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Pindahkan catatan saat ini ke sampah";
+"trash-accessibility-hint" = "Pindahkan catatan saat ini ke sampah";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
+"version-alert-message" = "Hubungkan ke Internet untuk Mengakses Versi Sebelumnya";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Beralih ke versi ini";
+"version-cell-accessibility-hint" = "Beralih ke versi ini";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Mengambil versi";
+"version-cell-fetching-accessibility-hint" = "Mengambil versi";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
+"welcomeNote-iOS" = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
 
