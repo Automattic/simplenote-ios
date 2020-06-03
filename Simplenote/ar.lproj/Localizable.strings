@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-07 00:54:58+0000 */
+/* Translation-Revision-Date: 2020-05-27 14:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d من النتائج";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- 8 أحرف بحد أقصى";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- لا يسمح بوجود علامات جدولة أو خطوط جديدة";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- يتعذر تطابق كلمة المرور مع البريد الإلكتروني";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "دقيقة واحدة";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "إضافة مشارك جديد...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "العلامة...";
+"Add a tag..." = "العلامة...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "إضافة وسم";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "كلمة المرور";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "يجب أن تحتوي كلمة المرور على 4 أحرف على الأقل";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل.";
+"Password cannot match email" = "يتعذر تطابق كلمة المرور مع البريد الإلكتروني";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "يجب أن تحتوي كلمة المرور على %d من الأحرف على الأقل";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "يجب ألا تحتوي كلمة المرور على علامات جدولة أو خطوط جديدة";
 
 /* Number of changes pending to be sent */
 "Pendings" = "معلّق";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "إعادة التسمية";
+
+/* Reset Action */
+"Reset" = "إعادة تعيين";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "إعادة التعيين مطلوبة";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "استعادة";
@@ -498,10 +516,10 @@
 "Touch ID" = "معرف اللمس";
 
 /* Title: Trash Tag is selected */
-"Trash" = "سلة المهملات";
+"Trash-noun" = "سلة المهملات";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "سلة المهملات";
+"Trash-verb" = "سلة المهملات";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "إلغاء التثبيت";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "عنوان البريد الإلكتروني الخاص بك غير صالح.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "كلمة مرورك غير آمنة وتجب إعادة تعيينها. فيما يأتي متطلبات كلمة المرور:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "تمكين الآخرين للتعاون";
+"collaborate-accessibility-hint" = "تمكين الآخرين للتعاون";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
+"collaborators-description" = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "تم حذف هذه الملاحظة من جهاز آخر.";
+"deleted-note-warning" = "تم حذف هذه الملاحظة من جهاز آخر.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "استعادة ملاحظة إلى إصدار سابق";
+"history-accessibility-hint" = "استعادة ملاحظة إلى إصدار سابق";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "عرض خيارات للملاحظة";
+"menu-accessibility-hint" = "عرض خيارات للملاحظة";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "إغلاق الملاحظة الحالية";
+"notes-accessibility-hint" = "إغلاق الملاحظة الحالية";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "مشاركة محتوى الملاحظة الحالية";
+"share-accessibility-hint" = "مشاركة محتوى الملاحظة الحالية";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "إضافة وسم إلى الملاحظة الحالية";
+"tag-add-accessibility-hint" = "إضافة وسم إلى الملاحظة الحالية";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "إزالة وسم من الملاحظة الحالية";
+"tag-delete-accessibility-hint" = "إزالة وسم من الملاحظة الحالية";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "وسم:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "نقل الملاحظة الحالية إلى سلة المهملات";
+"trash-accessibility-hint" = "نقل الملاحظة الحالية إلى سلة المهملات";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "الاتصال بالإنترنت للوصول إلى الإصدارات السابقة";
+"version-alert-message" = "الاتصال بالإنترنت للوصول إلى الإصدارات السابقة";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "التحول إلى هذا الإصدار";
+"version-cell-accessibility-hint" = "التحول إلى هذا الإصدار";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "جلب الإصدار";
+"version-cell-fetching-accessibility-hint" = "جلب الإصدار";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "أهلاً بك في Simplenote لنظام التشغيل iOS!\n\nلإضافة ملاحظة، انقر فوق زر علامة الزائد.\n\nانقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.\n\nيمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.\n\nانقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.\n\nهناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.\n\nاستخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http:\/\/simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
+"welcomeNote-iOS" = "أهلاً بك في Simplenote لنظام التشغيل iOS!\n\nلإضافة ملاحظة، انقر فوق زر علامة الزائد.\n\nانقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.\n\nيمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.\n\nانقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.\n\nهناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.\n\nاستخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http:\/\/simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
 

@@ -1,6 +1,13 @@
-4.19
+4.20
 -----
  
+4.19
+-----
+-   Updated Password Strength requirements.
+-   Simplenote will request to upgrade insecure passwords whenever you login.
+-   Implemented a new color palette!
+-   The checklist button is hidden unless actively editing a note.
+
 4.18
 -----
 -   Fixed a bug that prevented the Tag Search Operator not to properly filter in non english languages.

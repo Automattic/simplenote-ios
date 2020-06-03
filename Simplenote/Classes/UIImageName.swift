@@ -105,7 +105,7 @@ extension UIImageName {
         case .settings:
             return "icon_settings"
         case .simplenoteLogo:
-            return "logo_login"
+            return "simplenote-logo"
         case .share:
             return "icon_share"
         case .shared:

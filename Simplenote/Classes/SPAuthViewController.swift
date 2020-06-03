@@ -35,7 +35,6 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var emailWarningLabel: SPLabel! {
         didSet {
-            emailWarningLabel.text = AuthenticationStrings.usernameInvalid
             emailWarningLabel.textInsets = AuthenticationConstants.warningInsets
             emailWarningLabel.textColor = .simplenoteRed60Color
             emailWarningLabel.isHidden = true
@@ -137,28 +136,12 @@ class SPAuthViewController: UIViewController {
 
     /// # Simperium's Validator
     ///
-    private lazy var validator: SPAuthenticationValidator = {
-        let output = SPAuthenticationValidator()
-        output.minimumPasswordLength = mode.passwordMinimumLength
-        return output
-    }()
-
-    /// # Indicates if we've got a valid Username. Doesn't display any validation warnings onscreen
-    ///
-    private var isUsernameValid: Bool {
-        return validator.validateUsername(email)
-    }
-
-    /// # Indicates if we've got a valid Password. Doesn't display any validation warnings onscreen
-    ///
-    private var isPasswordValid: Bool {
-        return validator.validatePasswordSecurity(password)
-    }
+    private lazy var validator = AuthenticationValidator()
 
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
-        return isUsernameValid && isPasswordValid
+        return performUsernameValidation() == .success && performPasswordValidation() == .success
     }
 
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
@@ -183,9 +166,14 @@ class SPAuthViewController: UIViewController {
         }
     }
 
+    /// Indicates if we must nuke the Password Field's contents whenever the App becomes active
+    ///
+    private var mustResetPasswordField = false
+
     /// # Authentication Mode: Signup or Login
     ///
     let mode: AuthenticationMode
+
 
 
     /// NSCodable Required Initializer
@@ -253,8 +241,10 @@ private extension SPAuthViewController {
     }
 
     func startListeningToNotifications() {
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(refreshOnePasswordAvailability), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
     }
 
     func ensureNavigationBarIsVisible() {
@@ -265,8 +255,23 @@ private extension SPAuthViewController {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
-    @objc func refreshOnePasswordAvailability() {
+    @objc
+    func applicationDidBecomeActive() {
+        refreshOnePasswordAvailability()
+        ensurePasswordFieldIsReset()
+    }
+
+    func refreshOnePasswordAvailability() {
         emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
+    }
+
+    func ensurePasswordFieldIsReset() {
+        guard mustResetPasswordField else {
+            return
+        }
+
+        passwordInputView.text = nil
+        passwordInputView.becomeFirstResponder()
     }
 
     private func lockdownInterface() {
@@ -303,17 +308,12 @@ private extension SPAuthViewController {
             return
         }
 
-        lockdownInterface()
-
-        controller.loginWithCredentials(username: email, password: password) { error in
-            if let error = error {
-                self.handleError(error: error)
-            } else {
-                SPTracker.trackUserSignedIn()
-            }
-
-            self.unlockInterface()
+        if mustUpgradePasswordStrength() {
+            performCredentialsValidation()
+            return
         }
+
+        performSimperiumAuthentication()
     }
 
     @IBAction func performSignUp() {
@@ -386,6 +386,61 @@ private extension SPAuthViewController {
 }
 
 
+// MARK: - Simperium Services
+//
+private extension SPAuthViewController {
+
+    func performCredentialsValidation() {
+        lockdownInterface()
+
+        controller.validateWithCredentials(username: email, password: password) { error in
+            if let error = error {
+                self.handleError(error: error)
+            } else {
+                self.presentPasswordResetRequiredAlert(email: self.email)
+            }
+
+            self.unlockInterface()
+        }
+    }
+
+    func performSimperiumAuthentication() {
+        lockdownInterface()
+
+        controller.loginWithCredentials(username: email, password: password) { error in
+            if let error = error {
+                self.handleError(error: error)
+            } else {
+                SPTracker.trackUserSignedIn()
+            }
+
+            self.unlockInterface()
+        }
+    }
+}
+
+
+// MARK: - Password Reset Flow
+//
+private extension SPAuthViewController {
+
+    func presentPasswordResetRequiredAlert(email: String) {
+        guard let resetURL = URL(string: SimplenoteConstants.resetPasswordURL + email) else {
+            fatalError()
+        }
+
+        let alertController = UIAlertController(title: PasswordInsecureString.title, message: PasswordInsecureString.message, preferredStyle: .alert)
+        alertController.addCancelActionWithTitle(PasswordInsecureString.cancel)
+        alertController.addDefaultActionWithTitle(PasswordInsecureString.reset) { [weak self] _ in
+            self?.mustResetPasswordField = true
+            UIApplication.shared.open(resetURL, options: [:], completionHandler: nil)
+        }
+
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+
 // MARK: - Error Handling
 //
 private extension SPAuthViewController {
@@ -439,43 +494,84 @@ private extension SPAuthViewController {
 }
 
 
+// MARK: - Warning Labels
+//
+private extension SPAuthViewController {
+
+    func displayEmailValidationWarning(_ string: String) {
+        emailWarningLabel.text = string
+        refreshEmailInput(inErrorState: true)
+    }
+
+    func displayPasswordValidationWarning(_ string: String) {
+        passwordWarningLabel.text = string
+        refreshPasswordInput(inErrorState: true)
+    }
+
+    func dismissEmailValidationWarning() {
+        refreshEmailInput(inErrorState: false)
+    }
+
+    func dismissPasswordValidationWarning() {
+        refreshPasswordInput(inErrorState: false)
+    }
+
+    func refreshEmailInput(inErrorState: Bool) {
+        emailWarningLabel.animateVisibility(isHidden: !inErrorState)
+        emailInputView.inErrorState = inErrorState
+    }
+
+    func refreshPasswordInput(inErrorState: Bool) {
+        passwordWarningLabel.animateVisibility(isHidden: !inErrorState)
+        passwordInputView.inErrorState = inErrorState
+    }
+}
+
+
 // MARK: - Validation
 //
 private extension SPAuthViewController {
 
-    func refreshEmailWarning(isHidden: Bool) {
-        emailWarningLabel.animateVisibility(isHidden: isHidden)
-        emailInputView.inErrorState = !isHidden
+    func performUsernameValidation() -> AuthenticationValidator.Result {
+        validator.performUsernameValidation(username: email)
     }
 
-    func refreshPasswordWarning(isHidden: Bool) {
-        passwordWarningLabel.text = mode.passwordInvalidText
-        passwordWarningLabel.animateVisibility(isHidden: isHidden)
-        passwordInputView.inErrorState = !isHidden
+    /// When we're in `.login` mode, password requirements are relaxed (since we must allow users with old passwords to sign in).
+    /// That's where the `validationStyle` comes in.
+    ///
+    func performPasswordValidation() -> AuthenticationValidator.Result {
+        validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+    }
+
+    /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
+    /// user to reset the password associated to his/her account.
+    ///
+    func mustUpgradePasswordStrength() -> Bool {
+        validator.performPasswordValidation(username: email, password: password, style: .strong) != .success
     }
 
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
-        let isUsernameOkay = isUsernameValid
-        let isPasswordOkay = isPasswordValid
+        let usernameValidationResult = performUsernameValidation()
+        let passwordValidationResult = performPasswordValidation()
 
-        if !isUsernameOkay {
-            refreshEmailWarning(isHidden: false)
+        if usernameValidationResult != .success {
+            displayEmailValidationWarning(usernameValidationResult.description)
         }
 
-        if !isPasswordOkay {
-            refreshPasswordWarning(isHidden: false)
+        if passwordValidationResult != .success {
+            displayPasswordValidationWarning(passwordValidationResult.description)
         }
 
-        return isUsernameOkay && isPasswordOkay
+        return usernameValidationResult == .success && passwordValidationResult == .success
     }
 
     func ensureWarningsAreDismissedWhenNeeded() {
-        if isUsernameValid {
-            refreshEmailWarning(isHidden: true)
+        if performUsernameValidation() == .success {
+            dismissEmailValidationWarning()
         }
 
-        if isPasswordValid {
-            refreshPasswordWarning(isHidden: true)
+        if performPasswordValidation() == .success {
+            dismissPasswordValidationWarning()
         }
     }
 }
@@ -493,17 +589,21 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
         switch textInput {
         case emailInputView:
-            if isUsernameValid {
+            switch performUsernameValidation() {
+            case .success:
                 passwordInputView.becomeFirstResponder()
-            } else {
-                refreshEmailWarning(isHidden: false)
+
+            case let error:
+                displayEmailValidationWarning(error.description)
             }
 
         case passwordInputView:
-            if isPasswordValid {
+            switch performPasswordValidation() {
+            case .success:
                 performPrimaryActionIfPossible()
-            } else {
-                refreshPasswordWarning(isHidden: false)
+
+            case let error:
+                displayPasswordValidationWarning(error.description)
             }
 
         default:
@@ -519,14 +619,13 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 //
 struct AuthenticationMode {
     let title: String
+    let validationStyle: AuthenticationValidator.Style
     let onePasswordSelector: Selector
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
-    let passwordInvalidText: String
-    let passwordMinimumLength: UInt
 }
 
 
@@ -538,28 +637,26 @@ extension AuthenticationMode {
     ///
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
+                     validationStyle:               .legacy,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil,
-                     passwordInvalidText:           AuthenticationStrings.passwordInvalidLogin,
-                     passwordMinimumLength:         AuthenticationConstants.loginPasswordLength)
+                     secondaryActionAttributedText: nil)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
+                     validationStyle:               .strong,
                      onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     passwordInvalidText:           AuthenticationStrings.passwordInvalidSignup,
-                     passwordMinimumLength:         AuthenticationConstants.signupPasswordLength)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
     }
 }
 
@@ -579,9 +676,22 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
-    static let usernameInvalid              = NSLocalizedString("Your email address is not valid", comment: "Message displayed when email address is invalid")
-    static let passwordInvalidSignup        = NSLocalizedString("Password must contain at least 6 characters", comment: "Message displayed when password is invalid (Signup)")
-    static let passwordInvalidLogin         = NSLocalizedString("Password must contain at least 4 characters", comment: "Message displayed when password is invalid (Login)")
+}
+
+
+// MARK: - PasswordInsecure Alert Strings
+//
+private enum PasswordInsecureString {
+    static let cancel = NSLocalizedString("Cancel", comment: "Cancel Action")
+    static let reset = NSLocalizedString("Reset", comment: "Reset Action")
+    static let title = NSLocalizedString("Reset Required", comment: "Password Reset Required Alert Title")
+    static let message = [
+        NSLocalizedString("Your password is insecure and must be reset. The password requirements are:", comment: "Password Requirements: Title"),
+        String.newline,
+        NSLocalizedString("- Password cannot match email", comment: "Password Requirement: Email Match"),
+        NSLocalizedString("- Minimum of 8 characters", comment: "Password Requirement: Length"),
+        NSLocalizedString("- Neither tabs nor newlines are allowed", comment: "Password Requirement: Special Characters")
+    ].joined(separator: .newline)
 }
 
 
@@ -610,6 +720,4 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-    static let loginPasswordLength  = UInt(4)
-    static let signupPasswordLength = UInt(6)
 }

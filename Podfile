@@ -20,7 +20,7 @@ abstract_target 'Automattic' do
 	target 'Simplenote' do
 		# Third Party
 		#
-		pod '1PasswordExtension', '1.8.5'
+		pod '1PasswordExtension', '1.8.6'
 		pod 'Gridicons', '~> 0.18'
 		pod 'AppCenter', '~> 2.3.0' 
 		pod 'AppCenter/Distribute', '~> 2.3.0'
@@ -29,7 +29,7 @@ abstract_target 'Automattic' do
 		#
 		pod 'Automattic-Tracks-iOS', '~> 0.4'
 #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
-		pod 'Simperium', '~> 0.8.26'
+		pod 'Simperium', '~> 0.8.27'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
 
 		# Testing Target

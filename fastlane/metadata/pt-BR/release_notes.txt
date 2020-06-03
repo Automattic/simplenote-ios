@@ -1,1 +1,4 @@
-Como adicionar suporte para a língua persa.
+Requisitos de força da senha atualizada.
+O Simplenote solicitará o upgrade de senhas vulneráveis sempre que você fizer login.
+Uma nova paleta de cores foi implementada!
+O botão de lista de verificação ficará oculto a menos que você esteja ativamente editando uma anotação.

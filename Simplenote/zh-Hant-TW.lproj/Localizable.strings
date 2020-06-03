@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-26 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d 個搜尋結果";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- 長度至少為 8 個字元";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- 不得包含定位字元或換行";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- 密碼不能和電子郵件地址相同";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 分鐘";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "新增協作者…";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "標籤…";
+"Add a tag..." = "標籤…";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "新增標籤";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "密碼";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "密碼必須包含至少 4 個字元";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "密碼必須包含至少 6 個字元。";
+"Password cannot match email" = "密碼不能和電子郵件地址相同";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "密碼必須包含至少 %d 個字元";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "密碼不得包含定位字元或換行";
 
 /* Number of changes pending to be sent */
 "Pendings" = "待確認";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "重新命名";
+
+/* Reset Action */
+"Reset" = "重設";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "需要重設";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "還原";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "垃圾桶";
+"Trash-noun" = "垃圾桶";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "移至垃圾桶";
+"Trash-verb" = "移至垃圾桶";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "取消釘選";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "你的電子郵件地址無效。";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "你的密碼不安全，必須重設。密碼設定要求如下：";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "將其他人加入協作";
+"collaborate-accessibility-hint" = "將其他人加入協作";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "新增電子郵件地址，將此筆記與他人分享。這樣雙方都能變更筆記內容。";
+"collaborators-description" = "新增電子郵件地址，將此筆記與他人分享。這樣雙方都能變更筆記內容。";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "此筆記已在另一部裝置上刪除。";
+"deleted-note-warning" = "此筆記已在另一部裝置上刪除。";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "將筆記還原至先前版本";
+"history-accessibility-hint" = "將筆記還原至先前版本";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "顯示筆記選項";
+"menu-accessibility-hint" = "顯示筆記選項";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "關閉目前筆記";
+"notes-accessibility-hint" = "關閉目前筆記";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "分享目前筆記的內容";
+"share-accessibility-hint" = "分享目前筆記的內容";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "將標籤新增至目前筆記";
+"tag-add-accessibility-hint" = "將標籤新增至目前筆記";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "移除目前筆記的標籤";
+"tag-delete-accessibility-hint" = "移除目前筆記的標籤";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "標籤：";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "將目前筆記移至垃圾桶";
+"trash-accessibility-hint" = "將目前筆記移至垃圾桶";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "連線至網際網路以存取先前版本";
+"version-alert-message" = "連線至網際網路以存取先前版本";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "切換至此版本";
+"version-cell-accessibility-hint" = "切換至此版本";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "正在擷取此版本";
+"version-cell-fetching-accessibility-hint" = "正在擷取此版本";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "歡迎使用 Simplenote iOS 版！\n\n若要新增筆記，請點選加號按鈕。\n\n撥動清單即可瀏覽你的筆記。點選標題可瀏覽筆記，然後點選內容則可進行變更。\n\n你可以在筆記清單頂端的搜尋欄位內輸入關鍵字搜尋你全部的筆記。\n\n點選左上方的箭號按鈕或撥動筆記清單可檢視標籤。在筆記編輯器底部可將標籤新增至筆記，然後使用側選單可協助你妥善整理筆記。\n\n若有需要，還有更多筆記選項可供使用。你可以將其他人新增為筆記的協作者，或是將筆記發表至網頁。\n\n前往 http:\/\/simplenote.com 將 Simplenote 下載至你的 Mac、Android 裝置或在網頁瀏覽器中使用。你的筆記將會隨時隨地保持更新。";
+"welcomeNote-iOS" = "歡迎使用 Simplenote iOS 版！\n\n若要新增筆記，請點選加號按鈕。\n\n撥動清單即可瀏覽你的筆記。點選標題可瀏覽筆記，然後點選內容則可進行變更。\n\n你可以在筆記清單頂端的搜尋欄位內輸入關鍵字搜尋你全部的筆記。\n\n點選左上方的箭號按鈕或撥動筆記清單可檢視標籤。在筆記編輯器底部可將標籤新增至筆記，然後使用側選單可協助你妥善整理筆記。\n\n若有需要，還有更多筆記選項可供使用。你可以將其他人新增為筆記的協作者，或是將筆記發表至網頁。\n\n前往 http:\/\/simplenote.com 將 Simplenote 下載至你的 Mac、Android 裝置或在網頁瀏覽器中使用。你的筆記將會隨時隨地保持更新。";
 

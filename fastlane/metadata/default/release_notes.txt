@@ -1,1 +1,4 @@
-Adding support for Persian Language.
+Updated Password Strength requirements.
+Simplenote will request to upgrade insecure passwords whenever you login.
+Implemented a new color palette!
+The checklist button is hidden unless actively editing a note.

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-04 03:54:07+0000 */
+/* Translation-Revision-Date: 2020-05-27 13:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d 个结果";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- 至少需要有 8 个字符";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- 不允许使用制表符和换行符";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- 密码不能与电子邮件相同";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 分钟";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "添加新协作者...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
+"Add a tag..." = "Add a tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "添加标签";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "密码";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "密码必须包含至少 4 个字符";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "密码中必须至少包含 6 个字符。";
+"Password cannot match email" = "密码不能与电子邮件相同";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "密码中必须至少包含 %d个字符";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "密码不得包含制表符或换行符";
 
 /* Number of changes pending to be sent */
 "Pendings" = "待处理数";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "重命名";
+
+/* Reset Action */
+"Reset" = "重置";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "需要重置";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "恢复";
@@ -498,10 +516,10 @@
 "Touch ID" = "触摸 ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "移到回收站";
+"Trash-noun" = "移到回收站";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "移到回收站";
+"Trash-verb" = "移到回收站";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "取消钉选";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "您输入的电子邮件地址无效。";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "您的密码不安全，需要重置。密码要求：";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "同意他人进行协作";
+"collaborate-accessibility-hint" = "同意他人进行协作";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";
+"collaborators-description" = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "此笔记已从其他设备上删除。";
+"deleted-note-warning" = "此笔记已从其他设备上删除。";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "将笔记恢复至之前版本";
+"history-accessibility-hint" = "将笔记恢复至之前版本";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "显示笔记选项";
+"menu-accessibility-hint" = "显示笔记选项";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "关闭当前笔记";
+"notes-accessibility-hint" = "关闭当前笔记";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "分享当前笔记的内容";
+"share-accessibility-hint" = "分享当前笔记的内容";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "向当前笔记中添加标签";
+"tag-add-accessibility-hint" = "向当前笔记中添加标签";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "将标签从当前笔记中删除";
+"tag-delete-accessibility-hint" = "将标签从当前笔记中删除";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "标签：";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "将当前笔记移至回收站";
+"trash-accessibility-hint" = "将当前笔记移至回收站";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "连接至互联网，访问之前版本";
+"version-alert-message" = "连接至互联网，访问之前版本";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "切换至此版本";
+"version-cell-accessibility-hint" = "切换至此版本";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "正在获取版本";
+"version-cell-fetching-accessibility-hint" = "正在获取版本";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "欢迎使用 iOS 版 Simplenote！\n\n要添加笔记，请轻点“加号”按钮。\n\n弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。\n\n您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。\n\n要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。\n\n您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。\n\n您可以通过 Mac、Android 设备或网络浏览器 (http:\/\/simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
+"welcomeNote-iOS" = "欢迎使用 iOS 版 Simplenote！\n\n要添加笔记，请轻点“加号”按钮。\n\n弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。\n\n您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。\n\n要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。\n\n您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。\n\n您可以通过 Mac、Android 设备或网络浏览器 (http:\/\/simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
 

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-05 00:54:04+0000 */
+/* Translation-Revision-Date: 2020-05-27 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d résultats";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- 8 caractères minimum";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Vous ne pouvez utiliser ni tabulations ni retours à la ligne";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Le mot de passe et l'adresse e-mail ne doivent pas être identiques";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 minute";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Ajouter un nouveau collaborateur...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Étiquette...";
+"Add a tag..." = "Étiquette...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ajouter un tag";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Mot de passe";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Le mot de passe doit contenir au moins 4 caractères.";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Le mot de passe doit contenir au moins 6 caractères.";
+"Password cannot match email" = "Le mot de passe et l'adresse e-mail ne doivent pas être identiques";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Le mot de passe doit contenir au moins %d caractères.";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Le mot de passe ne doit contenir ni tabulation ni retours à la ligne";
 
 /* Number of changes pending to be sent */
 "Pendings" = "En attente";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Renommer";
+
+/* Reset Action */
+"Reset" = "Réinitialiser";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Réinitialisation requise";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restaurer";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Corbeille";
+"Trash-noun" = "Corbeille";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Supprimer";
+"Trash-verb" = "Supprimer";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Désépingler";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Votre adresse e-mail n'est pas valide.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Votre mot de passe n'est pas sûr et doit être réinitialisé. Les exigences en matière de mots de passe sont les suivantes :";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Permettre aux autres de collaborer";
+"collaborate-accessibility-hint" = "Permettre aux autres de collaborer";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Ajouter une adresse e-mail pour partager cette note avec quelqu'un. Vous pourrez ensuite  la modifier tous les deux.";
+"collaborators-description" = "Ajouter une adresse e-mail pour partager cette note avec quelqu'un. Vous pourrez ensuite  la modifier tous les deux.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Cette note à été supprimée sur un autre appareil.";
+"deleted-note-warning" = "Cette note à été supprimée sur un autre appareil.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Restaurer une version précédente de la note";
+"history-accessibility-hint" = "Restaurer une version précédente de la note";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Affiche toutes les options de la note";
+"menu-accessibility-hint" = "Affiche toutes les options de la note";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Fermer cette note";
+"notes-accessibility-hint" = "Fermer cette note";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Partager le contenu de cette note";
+"share-accessibility-hint" = "Partager le contenu de cette note";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Ajouter un tag à cette note";
+"tag-add-accessibility-hint" = "Ajouter un tag à cette note";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Retirer un tag de cette note";
+"tag-delete-accessibility-hint" = "Retirer un tag de cette note";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "étiquette :";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Déplacer cette note dans la corbeille";
+"trash-accessibility-hint" = "Déplacer cette note dans la corbeille";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Connectez-vous pour accéder aux versions précédentes";
+"version-alert-message" = "Connectez-vous pour accéder aux versions précédentes";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Passer à cette version";
+"version-cell-accessibility-hint" = "Passer à cette version";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Récupération de version";
+"version-cell-fetching-accessibility-hint" = "Récupération de version";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Bienvenue sur la version iOS de Simplenote !\n\nPour créer une nouvelle note, touchez le bouton plus.\n\nNaviguez dans la liste de notes. Touchez un titre pour voir la totalité de la note et touchez ensuite le contenu de la note pour effectuer des changements.\n\nCherchez parmi vos notes en touchant le champ de recherche en haut de la liste de notes.\n\nTouchez la flèche en haut ou faites glisser votre liste de notes pour voir vos tags. Vous pouvez ajouter des tags à une note en bas de l'éditeur, et ensuite utiliser le menu pour rester organisé.\n\nVous avez une note vraiment importante ? Touchez le bouton favoris pendant la lecture d'une note pour la garder en tête de liste.\n\nD'autres options de notes existent si vous en avez besoin. Vous pouvez ajouter d'autres collaborateurs à une note, ou même publier une note comme une page web.\n\nVous pouvez accéder à toutes vos notes sur le web ou sur vos autres appareils. Rendez-vous sur http:\/\/simplenote.com pour démarrer. Vos notes resteront à jour partout automatiquement.";
+"welcomeNote-iOS" = "Bienvenue sur la version iOS de Simplenote !\n\nPour créer une nouvelle note, touchez le bouton plus.\n\nNaviguez dans la liste de notes. Touchez un titre pour voir la totalité de la note et touchez ensuite le contenu de la note pour effectuer des changements.\n\nCherchez parmi vos notes en touchant le champ de recherche en haut de la liste de notes.\n\nTouchez la flèche en haut ou faites glisser votre liste de notes pour voir vos tags. Vous pouvez ajouter des tags à une note en bas de l'éditeur, et ensuite utiliser le menu pour rester organisé.\n\nVous avez une note vraiment importante ? Touchez le bouton favoris pendant la lecture d'une note pour la garder en tête de liste.\n\nD'autres options de notes existent si vous en avez besoin. Vous pouvez ajouter d'autres collaborateurs à une note, ou même publier une note comme une page web.\n\nVous pouvez accéder à toutes vos notes sur le web ou sur vos autres appareils. Rendez-vous sur http:\/\/simplenote.com pour démarrer. Vos notes resteront à jour partout automatiquement.";
 

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-02-24 21:25:08+0000 */
+/* Translation-Revision-Date: 2020-05-27 18:54:06+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultat";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Minst 8 tecken";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "– Varken tabbstopp eller nya rader är tillåtna";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Lösenord kan inte matcha e-post";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 minut";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Lägg till ny redigerare...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "Etikett…";
+"Add a tag..." = "Etikett…";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Lägg till etikett";
@@ -222,7 +231,7 @@
 "LastSeen" = "Sågs senast";
 
 /* Learn More Action */
-"Learn more" = "Läs mer";
+"Learn more" = "Lär dig mer";
 
 /* No comment provided by engineer. */
 "Leave a review" = "Lämna en recension";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Lösenord";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Lösenord måste innehålla minst 4 tecken";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Lösenord måste innehålla minst 6 tecken.";
+"Password cannot match email" = "Lösenord kan inte matcha e-post";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Lösenord måste innehålla minst %d tecken";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Lösenordet får inte innehålla tabbstopp eller nya rader";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Väntande";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Ändra namn";
+
+/* Reset Action */
+"Reset" = "Återställ";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Återställning krävs";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Återställ";
@@ -498,10 +516,10 @@
 "Touch ID" = "Touch ID";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Papperskorgen";
+"Trash-noun" = "Papperskorgen";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Kasta bort";
+"Trash-verb" = "Kasta bort";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Lossa";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Ditt lösenord är osäkert och måste återställas. Lösenordskraven är:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Gör så att andra kan hjälpa till och redigera";
+"collaborate-accessibility-hint" = "Gör så att andra kan hjälpa till och redigera";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
+"collaborators-description" = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Denna anteckning har blivit borttagen på en annan enhet.";
+"deleted-note-warning" = "Denna anteckning har blivit borttagen på en annan enhet.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Återställ anteckning till tidigare version";
+"history-accessibility-hint" = "Återställ anteckning till tidigare version";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Visa alternativ för anteckning";
+"menu-accessibility-hint" = "Visa alternativ för anteckning";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Stäng nuvarande anteckning";
+"notes-accessibility-hint" = "Stäng nuvarande anteckning";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Dela innehåll i nuvarande anteckning";
+"share-accessibility-hint" = "Dela innehåll i nuvarande anteckning";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Lägg till en etikett för anteckningen";
+"tag-add-accessibility-hint" = "Lägg till en etikett för anteckningen";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Ta bort etikett från den nuvarande anteckningen";
+"tag-delete-accessibility-hint" = "Ta bort etikett från den nuvarande anteckningen";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etikett:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Kasta anteckningen i papperskorgen";
+"trash-accessibility-hint" = "Kasta anteckningen i papperskorgen";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Anslut till ett nätverk för att se tidigare versioner";
+"version-alert-message" = "Anslut till ett nätverk för att se tidigare versioner";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Välj denna version";
+"version-cell-accessibility-hint" = "Välj denna version";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Hämtar version";
+"version-cell-fetching-accessibility-hint" = "Hämtar version";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
+"welcomeNote-iOS" = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
 

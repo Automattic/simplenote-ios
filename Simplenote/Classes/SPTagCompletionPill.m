@@ -19,12 +19,12 @@
 
 - (UIColor *)color {
     
-    return [UIColor colorWithName:UIColorNameTagViewAutoCompleteFontColor];
+    return [UIColor simplenoteTagViewCompleteColor];
 }
 
 - (UIColor *)highlightedColor {
     
-    return [UIColor colorWithName:UIColorNameTagViewFontHighlightedColor];
+    return [UIColor simplenoteTagViewCompleteHighlightedColor];
 }
 
 

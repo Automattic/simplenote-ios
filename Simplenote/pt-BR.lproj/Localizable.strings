@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-03-04 00:54:03+0000 */
+/* Translation-Revision-Date: 2020-05-25 19:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -20,6 +20,15 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultados";
+
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Mínimo de oito caracteres";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Tabulações e novas linhas não são permitidas";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- A senha não pode corresponder ao e-mail";
 
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 minuto";
@@ -56,7 +65,7 @@
 "Add a new collaborator..." = "Adicionar novo colaborador";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Tag..." = "tag...";
+"Add a tag..." = "tag...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Adicionar tag";
@@ -331,11 +340,14 @@
 /* Password TextField Placeholder */
 "Password" = "Senha";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "A senha deve ter no mínimo 4 caracteres";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "A senha deve ter 6 caracteres no mínimo.";
+"Password cannot match email" = "A senha não pode corresponder ao e-mail";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "A senha deve ter no mínimo %d caracteres";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "A senha não pode conter tabulações nem novas linhas";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendentes";
@@ -390,6 +402,12 @@
 
 /* Rename a tag */
 "Rename" = "Renomear";
+
+/* Reset Action */
+"Reset" = "Redefinir";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Redefinição necessária";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restaurar";
@@ -498,10 +516,10 @@
 "Touch ID" = "Identificação por toque";
 
 /* Title: Trash Tag is selected */
-"Trash" = "Lixeira";
+"Trash-noun" = "Lixeira";
 
 /* Trash (verb) - the action of deleting a note */
-"Trash" = "Lixeira";
+"Trash-verb" = "Lixeira";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Desmarcar";
@@ -558,48 +576,51 @@
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Seu endereço de email é inválido.";
 
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Sua senha é vulnerável e deve ser redefinida. Os requisitos para a senha são:";
+
 /* Accessibility hint on button which shows the current collaborators on a note */
-"Enable others to collaborate" = "Habilitar outros a colaborar";
+"collaborate-accessibility-hint" = "Habilitar outros a colaborar";
 
 /* No comment provided by engineer. */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Adicione um endereço de email para compartilhar esta anotação com alguém. Em seguida, ambos poderão fazer alterações.";
+"collaborators-description" = "Adicione um endereço de email para compartilhar esta anotação com alguém. Em seguida, ambos poderão fazer alterações.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device." = "Esta anotação foi excluída em outro dispositivo.";
+"deleted-note-warning" = "Esta anotação foi excluída em outro dispositivo.";
 
 /* Accessibility hint on button which shows the history of a note */
-"Restore note to previous version" = "Restaurar anotação para versão anterior";
+"history-accessibility-hint" = "Restaurar anotação para versão anterior";
 
 /* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"Show options for note" = "Mostrar opções para anotação";
+"menu-accessibility-hint" = "Mostrar opções para anotação";
 
 /* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"Close current note" = "Fechar anotação atual";
+"notes-accessibility-hint" = "Fechar anotação atual";
 
 /* Accessibility hint on share button */
-"Share the content of the current note" = "Compartilhar o conteúdo da anotação atual";
+"share-accessibility-hint" = "Compartilhar o conteúdo da anotação atual";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Adicionar uma tag à anotação atual";
+"tag-add-accessibility-hint" = "Adicionar uma tag à anotação atual";
 
 /* No comment provided by engineer. */
-"Remove tag from the current note" = "Remover tag da anotação atual";
+"tag-delete-accessibility-hint" = "Remover tag da anotação atual";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
-"Move the current note to trash" = "Mover a anotação atual para a lixeira";
+"trash-accessibility-hint" = "Mover a anotação atual para a lixeira";
 
 /* Error alert message shown when trying to view history of a note without an internet connection */
-"Connect to the Internet to Access Previous Versions" = "Conecte-se à Internet para acessar as versões anteriores";
+"version-alert-message" = "Conecte-se à Internet para acessar as versões anteriores";
 
 /* Accessiblity hint describing how to reset the current note to a previous version */
-"Switch to this version" = "Alternar para essa versão";
+"version-cell-accessibility-hint" = "Alternar para essa versão";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching version" = "Obtendo a versão";
+"version-cell-fetching-accessibility-hint" = "Obtendo a versão";
 
 /* A welcome note for new iOS users */
-"Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically." = "Bem-vindo ao Simplenote para iOS!\n\nPara adicionar uma anotação, toque no botão de adição.\n\nMexa na lista para procurar suas anotações. Toque em um título para visualizar uma anotação e no conteúdo para alterá-lo.\n\nVocê pode pesquisar todas as suas anotações tocando no campo de pesquisa no topo da lista de anotações.\n\nToque no botão de seta na parte superior à esquerda ou deslize os dedos pela lista de anotações para visualizar suas tags. Você pode adicionar tags a uma anotação na parte inferior do editor de anotações e usar a barra lateral para ajudá-lo com a organização.\n\nHá mais opções de anotação, se necessário. Você pode adicionar outras pessoas como colaboradores a uma anotação ou publicá-la como uma página na web.\n\nUse o Simplenote no seu dispositivo Mac, Android ou no navegador em http:\/\/simplenote.com. Suas anotações serão atualizadas automaticamente em qualquer lugar.";
+"welcomeNote-iOS" = "Bem-vindo ao Simplenote para iOS!\n\nPara adicionar uma anotação, toque no botão de adição.\n\nMexa na lista para procurar suas anotações. Toque em um título para visualizar uma anotação e no conteúdo para alterá-lo.\n\nVocê pode pesquisar todas as suas anotações tocando no campo de pesquisa no topo da lista de anotações.\n\nToque no botão de seta na parte superior à esquerda ou deslize os dedos pela lista de anotações para visualizar suas tags. Você pode adicionar tags a uma anotação na parte inferior do editor de anotações e usar a barra lateral para ajudá-lo com a organização.\n\nHá mais opções de anotação, se necessário. Você pode adicionar outras pessoas como colaboradores a uma anotação ou publicá-la como uma página na web.\n\nUse o Simplenote no seu dispositivo Mac, Android ou no navegador em http:\/\/simplenote.com. Suas anotações serão atualizadas automaticamente em qualquer lugar.";
 

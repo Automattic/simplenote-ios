@@ -16,6 +16,15 @@
 /* Number of found search results */
 "%d Results" = "%d Results";
 
+/* Password Requirement: Length */
+"- Minimum of 8 characters" = "- Minimum of 8 characters";
+
+/* Password Requirement: Special Characters */
+"- Neither tabs nor newlines are allowed" = "- Neither tabs nor newlines are allowed";
+
+/* Password Requirement: Email Match */
+"- Password cannot match email" = "- Password cannot match email";
+
 /* 1 minute passcode lock timeout */
 "1 Minute" = "1 Minute";
 
@@ -344,11 +353,14 @@
 /* Password TextField Placeholder */
 "Password" = "Password";
 
-/* Message displayed when password is invalid (Login) */
-"Password must contain at least 4 characters" = "Password must contain at least 4 characters";
-
 /* Message displayed when password is invalid (Signup) */
-"Password must contain at least 6 characters" = "Password must contain at least 6 characters";
+"Password cannot match email" = "Password cannot match email";
+
+/* Message displayed when password is too short. Please preserve the Percent D! */
+"Password must contain at least %d characters" = "Password must contain at least %d characters";
+
+/* Message displayed when a password contains a disallowed character */
+"Password must not contain tabs nor newlines" = "Password must not contain tabs nor newlines";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
@@ -403,6 +415,12 @@
 
 /* Rename a tag */
 "Rename" = "Rename";
+
+/* Reset Action */
+"Reset" = "Reset";
+
+/* Password Reset Required Alert Title */
+"Reset Required" = "Reset Required";
 
 /* Restore a note from the trash, marking it as undeleted */
 "Restore" = "Restore";
@@ -597,4 +615,7 @@
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Your email address is not valid";
+
+/* Password Requirements: Title */
+"Your password is insecure and must be reset. The password requirements are:" = "Your password is insecure and must be reset. The password requirements are:";
 
