@@ -88,7 +88,7 @@ extension SPBlurEffectView {
     ///
     @objc
     func adjustAlphaMatchingContentOffset(of scrollView: UIScrollView) {
-        let maximumAlphaGradientOffset = CGFloat(30)
+        let maximumAlphaGradientOffset = CGFloat(22)
         let normalizedOffset = scrollView.adjustedContentInset.top + scrollView.contentOffset.y
         let newAlpha = min(max(normalizedOffset / maximumAlphaGradientOffset, 0), 1)
 
