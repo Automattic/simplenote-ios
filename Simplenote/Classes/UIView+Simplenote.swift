@@ -42,6 +42,13 @@ extension UIView {
     func firstSubviewAsTableView() -> UITableView? {
         return subviews.first as? UITableView
     }
+
+    /// Returns the Receiver's User Interface Direction
+    ///
+    @objc
+    var interfaceLayoutDirection: UIUserInterfaceLayoutDirection {
+        UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
+    }
 }
 
 
