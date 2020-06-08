@@ -7,54 +7,69 @@
 //
 
 #import "SPTextField.h"
+#import "Simplenote-Swift.h"
 
 @implementation SPTextField
 
 - (void)drawPlaceholderInRect:(CGRect)rect
 {    
-    if (_placeholdTextColor && self.placeholder.length > 0) {
-        
-        [_placeholdTextColor setFill];
-        
-        // get size of placeholder
-        CGSize placeholderSize = [self.placeholder sizeWithAttributes:@{NSFontAttributeName: self.font}];
-        
-        CGFloat xOrigin;
-        if (self.textAlignment == NSTextAlignmentRight)
-            xOrigin = rect.size.width - placeholderSize.width;
-        else if (self.textAlignment == NSTextAlignmentCenter)
-            xOrigin = (rect.size.width - placeholderSize.width) / 2.0;
-        else
-            xOrigin = rect.origin.x;
-        
-        [[self placeholder] drawInRect:CGRectMake(xOrigin,
-                                                  (rect.size.height - placeholderSize.height) / 2.0,
-                                                  rect.size.width,
-                                                  placeholderSize.height)
-                        withAttributes:@{NSFontAttributeName: self.font,
-                                         NSForegroundColorAttributeName: _placeholdTextColor}];
-    } else
+    if (self.placeholdTextColor == nil || self.placeholder.length == 0) {
         [super drawPlaceholderInRect:rect];
+        return;
+    }
+
+    [self.placeholder drawInRect:rect withAttributes:@{
+        NSFontAttributeName: self.font,
+        NSForegroundColorAttributeName: self.placeholdTextColor
+    }];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds
+{
+    CGRect output = [super textRectForBounds:bounds];
+    if (self.interfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
+        output.size.width -= self.rightViewInsets.leading;
+    } else {
+        output.origin.x += self.rightViewInsets.trailing;
+        output.size.width -= self.rightViewInsets.trailing;
+    }
+
+    return output;
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds
+{
+    CGRect output = [super editingRectForBounds:bounds];
+    if (self.interfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
+        output.size.width -= self.rightViewInsets.leading;
+    } else {
+        output.origin.x += self.rightViewInsets.trailing;
+        output.size.width -= self.rightViewInsets.trailing;
+    }
+
+    return output;
 }
 
 - (CGRect)rightViewRectForBounds:(CGRect)bounds
 {
-    CGRect textRect = [super rightViewRectForBounds:bounds];
-    if (CGRectGetWidth(textRect) > 0) {
-        textRect.origin.x -= _rightViewInsets.trailing;
+    // Invoked by the SDK only in Left to Right Mode
+    CGRect output = [super rightViewRectForBounds:bounds];
+    if (CGRectGetWidth(output) > 0) {
+        output.origin.x -= self.rightViewInsets.trailing;
     }
 
-    return textRect;
+    return output;
 }
 
 - (CGRect)leftViewRectForBounds:(CGRect)bounds
 {
-    CGRect textRect = [super leftViewRectForBounds:bounds];
-    if (CGRectGetWidth(textRect) > 0) {
-        textRect.origin.x += _rightViewInsets.trailing;
+    // Invoked by the SDK only in Right to Left Mode
+    CGRect output = [super leftViewRectForBounds:bounds];
+    if (CGRectGetWidth(output) > 0) {
+        output.origin.x += self.rightViewInsets.leading;
     }
 
-    return textRect;
+    return output;
 }
 
 @end
