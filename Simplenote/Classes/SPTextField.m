@@ -41,7 +41,17 @@
 {
     CGRect textRect = [super rightViewRectForBounds:bounds];
     if (CGRectGetWidth(textRect) > 0) {
-        textRect.origin.x -= _rightViewInsets.right;
+        textRect.origin.x -= _rightViewInsets.trailing;
+    }
+
+    return textRect;
+}
+
+- (CGRect)leftViewRectForBounds:(CGRect)bounds
+{
+    CGRect textRect = [super leftViewRectForBounds:bounds];
+    if (CGRectGetWidth(textRect) > 0) {
+        textRect.origin.x += _rightViewInsets.trailing;
     }
 
     return textRect;

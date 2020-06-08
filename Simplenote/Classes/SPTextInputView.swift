@@ -152,7 +152,7 @@ class SPTextInputView: UIView {
 
     /// TextField's Right View Insets
     ///
-    @IBInspectable var rightViewInsets: UIEdgeInsets {
+    @IBInspectable var rightViewInsets: NSDirectionalEdgeInsets {
         get {
             return textField.rightViewInsets
         }
