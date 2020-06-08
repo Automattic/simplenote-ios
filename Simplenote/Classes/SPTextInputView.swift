@@ -234,6 +234,7 @@ class SPTextInputView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
+        setupWritingDirection()
         setupLayout()
         refreshBorderStyle()
     }
@@ -241,6 +242,7 @@ class SPTextInputView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
+        setupWritingDirection()
         setupLayout()
         refreshBorderStyle()
     }
@@ -267,6 +269,16 @@ private extension SPTextInputView {
         textField.placeholdTextColor = .simplenoteGray50Color
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         addSubview(textField)
+    }
+
+    func setupWritingDirection() {
+        // This should be `.natural`:
+        //  iOS < 13.5:
+        //      *unless* you use a RTL-Required-Keyboard, textAlignment will be .left
+        //  iOS = 13.5:
+        //      This isn't really required
+        //
+        textField.textAlignment = interfaceLayoutDirection == .rightToLeft ? .right : .left
     }
 
     func setupLayout() {
