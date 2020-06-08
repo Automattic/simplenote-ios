@@ -272,11 +272,11 @@ private extension SPTextInputView {
     }
 
     func setupWritingDirection() {
-        // This should be `.natural`:
+        // This should be `.natural`. However, the SDK isn't always a happy place:
         //  iOS < 13.5:
-        //      *unless* you use a RTL-Required-Keyboard, textAlignment will be .left
+        //      *unless* you use a RTL-Keyboard, textAlignment will be .left
         //  iOS = 13.5:
-        //      This isn't really required
+        //      Works as expected
         //
         textField.textAlignment = interfaceLayoutDirection == .rightToLeft ? .right : .left
     }
