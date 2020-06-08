@@ -278,7 +278,7 @@ private extension SPTextInputView {
         //  iOS = 13.5:
         //      Works as expected
         //
-        textField.textAlignment = interfaceLayoutDirection == .rightToLeft ? .right : .left
+        textField.textAlignment = userInterfaceLayoutDirection == .rightToLeft ? .right : .left
     }
 
     func setupLayout() {

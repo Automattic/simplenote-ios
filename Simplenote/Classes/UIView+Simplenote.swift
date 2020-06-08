@@ -46,7 +46,7 @@ extension UIView {
     /// Returns the Receiver's User Interface Direction
     ///
     @objc
-    var interfaceLayoutDirection: UIUserInterfaceLayoutDirection {
+    var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
         UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
     }
 }

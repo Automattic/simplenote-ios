@@ -27,7 +27,7 @@
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
     CGRect output = [super textRectForBounds:bounds];
-    if (self.interfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
+    if (self.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
         output.size.width -= self.rightViewInsets.leading;
     } else {
         output.origin.x += self.rightViewInsets.trailing;
@@ -40,7 +40,7 @@
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     CGRect output = [super editingRectForBounds:bounds];
-    if (self.interfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
+    if (self.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
         output.size.width -= self.rightViewInsets.leading;
     } else {
         output.origin.x += self.rightViewInsets.trailing;
