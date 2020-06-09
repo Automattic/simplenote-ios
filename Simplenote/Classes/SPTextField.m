@@ -27,32 +27,18 @@
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
     CGRect output = [super textRectForBounds:bounds];
-    if (self.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
-        output.size.width -= self.rightViewInsets.leading;
-    } else {
-        output.origin.x += self.rightViewInsets.trailing;
-        output.size.width -= self.rightViewInsets.trailing;
-    }
-
-    return output;
+    return [self applyAccessoryInsetsToTextBounds:output];
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     CGRect output = [super editingRectForBounds:bounds];
-    if (self.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
-        output.size.width -= self.rightViewInsets.leading;
-    } else {
-        output.origin.x += self.rightViewInsets.trailing;
-        output.size.width -= self.rightViewInsets.trailing;
-    }
-
-    return output;
+    return [self applyAccessoryInsetsToTextBounds:output];
 }
 
 - (CGRect)rightViewRectForBounds:(CGRect)bounds
 {
-    // Invoked by the SDK only in Left to Right Mode
+    // Invoked in LTR Mode. Let's not adjust the width, since it'd skew the Right Image
     CGRect output = [super rightViewRectForBounds:bounds];
     if (CGRectGetWidth(output) > 0) {
         output.origin.x -= self.rightViewInsets.trailing;
@@ -63,13 +49,26 @@
 
 - (CGRect)leftViewRectForBounds:(CGRect)bounds
 {
-    // Invoked by the SDK only in Right to Left Mode
+    // Invoked in RTL Mode. Let's not adjust the width, since it'd skew the Right Image
     CGRect output = [super leftViewRectForBounds:bounds];
     if (CGRectGetWidth(output) > 0) {
         output.origin.x += self.rightViewInsets.leading;
     }
 
     return output;
+}
+
+- (CGRect)applyAccessoryInsetsToTextBounds:(CGRect)frame
+{
+    if (self.userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionLeftToRight) {
+        frame.size.width -= self.rightViewInsets.trailing;
+        return frame;
+    }
+
+    frame.origin.x += self.rightViewInsets.leading;
+    frame.size.width -= self.rightViewInsets.leading;
+
+    return frame;
 }
 
 @end
