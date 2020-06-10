@@ -1,6 +1,7 @@
 4.20
 -----
- 
+-   Fixed RTL support in the Authentication Screens.
+
 4.19
 -----
 -   Updated Password Strength requirements.
