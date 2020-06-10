@@ -75,7 +75,6 @@ class ShareViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAppearance()
         setupNavigationBar()
         textView.textContainerInset = Constants.textViewInsets
         loadContent()
@@ -173,25 +172,6 @@ private extension ShareViewController {
 // MARK: - Configuration
 //
 private extension ShareViewController {
-
-    /// Sets up NavigationBar Button(s) Appearance
-    ///
-    /// - Note: Only required in iOS  <13. The host app appears to be overriding our NavigationBar's tintColor.
-    ///         In this method we're preventing such override.
-    ///
-    func setupAppearance() {
-        if #available(iOS 13.0, *) {
-            return
-        }
-
-        let attributes: [NSAttributedString.Key : Any] = [
-            .foregroundColor: UIColor.simplenoteTintColor
-        ]
-
-        for button in [cancelButton, nextButton] {
-            button.setTitleTextAttributes(attributes, for: .normal)
-        }
-    }
 
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = cancelButton

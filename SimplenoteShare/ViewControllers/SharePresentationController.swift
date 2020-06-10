@@ -59,7 +59,12 @@ private extension SharePresentationController {
         ]
         navbarAppearance.isTranslucent = false
 
+        let barButtonTitleAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor: UIColor.simplenoteTintColor
+        ]
+
         let barButtonAppearance = UIBarButtonItem.appearance()
         barButtonAppearance.tintColor = .simplenoteTintColor
+        barButtonAppearance.setTitleTextAttributes(barButtonTitleAttributes, for: .normal)
     }
 }
