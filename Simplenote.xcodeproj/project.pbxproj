@@ -282,7 +282,6 @@
 		B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE054C1AB75902002417BF /* NSProcessInfo+Util.m */; };
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
-		B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */; };
 		B5C57A4122E78F4D009166EA /* UIColorName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C57A4022E78F4D009166EA /* UIColorName.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
@@ -649,7 +648,6 @@
 		B5BE05511AB75C3B002417BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Classes/Settings.h; sourceTree = "<group>"; };
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
 		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
-		B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Simplenote.swift"; sourceTree = "<group>"; };
 		B5C57A4022E78F4D009166EA /* UIColorName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorName.swift; path = Classes/UIColorName.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
@@ -1271,7 +1269,6 @@
 		B56A9FF722AEBF33003F85CB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B5C57A3C22E77ABD009166EA /* UIColor+Simplenote.swift */,
 				B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */,
 				B56A9FF822AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift */,
 			);
@@ -2426,7 +2423,6 @@
 				B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
 				B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */,
-				B5C57A3E22E77ABD009166EA /* UIColor+Simplenote.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
 				74388F4822CFFABD001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */,
