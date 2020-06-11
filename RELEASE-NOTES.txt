@@ -1,5 +1,6 @@
 4.20
 -----
+-   Fixed a bug that affected the Share Extension's Appearance.
 -   Fixed RTL support in the Authentication Screens.
 
 4.19
