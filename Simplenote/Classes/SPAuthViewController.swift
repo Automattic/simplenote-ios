@@ -718,6 +718,6 @@ private extension AuthenticationStrings {
 // MARK: - Authentication Constants
 //
 private enum AuthenticationConstants {
-    static let onePasswordInsets    = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+    static let onePasswordInsets    = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }
