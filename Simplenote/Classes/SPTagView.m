@@ -27,13 +27,10 @@
 
 @implementation SPTagView
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        // setup self
-        
         tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         tagScrollView.scrollsToTop = NO;
         tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
