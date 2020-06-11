@@ -1,6 +1,7 @@
 4.20
 -----
 -   Fixed RTL support in the Authentication Screens.
+-   Fixed RTL support in the Tags Editor.
 
 4.19
 -----
