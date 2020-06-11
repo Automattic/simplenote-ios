@@ -53,19 +53,21 @@
         
         tagPills = [NSMutableArray array];
 
+        [self ensureRightToLeftSupportIsInitialized];
         [self applyStyle];
     }
     
     return self;
 }
 
-- (void)applyStyle {
+- (void)applyStyle
+{
     self.backgroundColor = [UIColor simplenoteBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 
-- (void)layoutSubviews {
-    
+- (void)layoutSubviews
+{
     CGFloat xOrigin = 0.0;
     CGFloat spacing = [self.theme floatForKey:@"tagViewItemSideSpacing"];
     
@@ -176,7 +178,7 @@
                                                   target:self
                                                   action:@selector(tagPillTapped:)
                                           deletionAction:@selector(removeTagAction:)];
-    
+    pill.transform = [self transformForScrollViewContent];
     [tagPills addObject:pill];
     [tagScrollView addSubview:pill];
     
@@ -210,6 +212,7 @@
                                                                                action:@selector(tagCompletionPillTapped:)
                                                                        deletionAction:nil];
 
+                matchButton.transform = [self transformForScrollViewContent];
                 [autoCompleteScrollView addSubview:matchButton];
                 [fields addObject:matchButton];
                 
@@ -476,7 +479,7 @@
             location.y < view.frame.size.height);
 }
 
-#pragma mark UIScrollViewDelegate methods
+#pragma mark - UIScrollViewDelegate methods
 
 // allow touches outside view
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -489,5 +492,38 @@
     return [super hitTest:point withEvent:event];
 }
 
+
+#pragma mark - RTL Support
+
+- (void)ensureRightToLeftSupportIsInitialized
+{
+    if (self.userInterfaceLayoutDirection != UIUserInterfaceLayoutDirectionRightToLeft) {
+        return;
+    }
+
+    /// Note:
+    /// In order to support RTL, we need our tags to be anchored to the right hand side of the screen (our origin of coordinates).
+    ///
+    /// In our current approach, we'll vertically flip the container TagView, and flip again all of its subviews: [Tag Pills, Autocompletion and New Tag Editor]
+    /// This will rendered a right-anchored Tags Editor, in just a few lines.
+    ///
+    self.transform = [self verticalFlipTransform];
+    addTagField.transform = [self verticalFlipTransform];
+    addTagField.textAlignment = NSTextAlignmentRight;
+}
+
+- (CGAffineTransform)verticalFlipTransform
+{
+    return CGAffineTransformScale(CGAffineTransformIdentity, -1, 1);
+}
+
+- (CGAffineTransform)transformForScrollViewContent
+{
+    if (self.userInterfaceLayoutDirection != UIUserInterfaceLayoutDirectionRightToLeft) {
+        return CGAffineTransformIdentity;
+    }
+
+    return self.verticalFlipTransform;
+}
 
 @end
