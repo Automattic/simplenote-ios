@@ -16,6 +16,12 @@
 /* Number of found search results */
 "%d Results" = "%d Results";
 
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Failed Passcode Attempt";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
+
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum of 8 characters";
 
@@ -210,8 +216,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enqueued";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Enter a passcode";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Enter passcode";
+
+/* Pin Lock */
+"Enter your passcode" = "Enter your passcode";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
@@ -350,6 +368,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Passcode";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Passcodes did not match. Try again.";
+
 /* Password TextField Placeholder */
 "Password" = "Password";
 
@@ -407,6 +428,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Publishing...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Re-enter a passcode";
+
 /* Reachs Internet */
 "Reachability" = "Reachability";
 
@@ -449,6 +473,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Send feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Set Passcode";
 
 /* Title of options screen */
 "Settings" = "Settings";
@@ -531,6 +558,9 @@
 /* Simplenote Themes */
 "Themes" = "Themes";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "To unlock the application";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Today";
 
@@ -548,6 +578,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Trash";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Turn off Passcode";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Unlock %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Unpin";
