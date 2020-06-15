@@ -1,3 +1,6 @@
+4.21
+-----
+ 
 4.20
 -----
 -   Fixed a bug that affected the Share Extension's Appearance.

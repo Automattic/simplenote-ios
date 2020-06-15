@@ -1,4 +1,3 @@
-Updated Password Strength requirements.
-Simplenote will request to upgrade insecure passwords whenever you login.
-Implemented a new color palette!
-The checklist button is hidden unless actively editing a note.
+Fixed a bug that affected the Share Extension's Appearance.
+Fixed RTL support in the Authentication Screens.
+Fixed RTL support in the Tags Editor.
