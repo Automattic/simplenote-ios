@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 18:54:06+0000 */
+/* Translation-Revision-Date: 2020-06-25 14:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d Sonuç";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i Başarısız Parola Denemesi";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i Başarısız Parola Denemesi";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "En az 8 karakter";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Sıraya Alındı";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Parola girin";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Parola girin";
+
+/* Pin Lock */
+"Enter your passcode" = "Parolanızı girin";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "Başarısız Denemeler";
 
 /* Password Reset Action */
 "Forgotten password?" = "Parolayı mı unuttunuz?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Geçiş kodu";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Parolalar eşleşmiyor. Tekrar deneyin.";
+
 /* Password TextField Placeholder */
 "Password" = "Parola";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Yayınlanıyor…";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Yeniden bir parola girin";
+
 /* Reachs Internet */
 "Reachability" = "Erişilebilirlik";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Geri Bildirim Gönder";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Parolayı Ayarla";
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Temalar";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "Uygulamanın kilidini açmak için";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Bugün";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Çöpe At";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Parolayı Kapat";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "%@ öğesinin kilidini aç";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Sabitlemeyi kaldır";
