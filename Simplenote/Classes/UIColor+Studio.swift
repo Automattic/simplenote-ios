@@ -100,7 +100,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNoteHeadlineColor: UIColor {
-        UIColor(lightColor: .gray100, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .gray5)
     }
 
     @objc
