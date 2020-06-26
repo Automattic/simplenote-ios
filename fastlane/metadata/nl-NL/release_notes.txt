@@ -1,4 +1,3 @@
-Bijgewerkte vereisten voor wachtwoordsterkte.
-Simplenote vraagt je om onveilige wachtwoorden te upgraden wanneer je inlogt.
-Nieuw kleurenpalet toegevoegd!
-De checklist-knop is verborgen tenzij je actief een notitie bewerkt.
+Een bug verwijderd die invloed had op de weergave van de deel-extensie.
+RTL-ondersteuning in de authenticatie-schermen gerepareerd.
+RTL-ondersteuning in de tags-editor gerepareerd.
