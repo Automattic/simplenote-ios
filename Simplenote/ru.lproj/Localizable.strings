@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-26 12:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-15 15:27:25+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d результатов";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i неудачная попытка ввода кода доступа";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "Неудачные попытки ввода кода доступа: %i";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "— Не менее 8 символов";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Требуется";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Enter a passcode";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Ввести пароль";
+
+/* Pin Lock */
+"Enter your passcode" = "Введите ваш пароль";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Забыли пароль?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Пароль";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Пароль не подходит. Попробуйте снова. ";
+
 /* Password TextField Placeholder */
 "Password" = "Пароль";
 
@@ -344,7 +365,7 @@
 "Password cannot match email" = "Пароль не должен совпадать с адресом эл. почты";
 
 /* Message displayed when password is too short. Please preserve the Percent D! */
-"Password must contain at least %d characters" = "Пароль должен содержать не менее %d символов.";
+"Password must contain at least %d characters" = "Пароль должен содержать не менее %d симв.";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Пароль не должен содержать знаки табуляции и перехода на новую строку";
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Публикация…";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Повторно ввести пароль";
+
 /* Reachs Internet */
 "Reachability" = "Удобный доступ";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Отправить отзыв";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Набрать пароль";
 
 /* Title of options screen */
 "Settings" = "Настройки";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Темы";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "To unlock the application";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Сегодня";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Удалить";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Отключить пароль";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Разблокировать %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Открепить";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 14:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-25 14:54:03+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d من النتائج";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i محاولات فاشلة لإدخال رمز المرور";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i محاولات فاشلة لإدخال رمز المرور";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 أحرف بحد أقصى";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "بقائمة الانتظار";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "إدخال رمز مرور";
+
+/* Touch ID fallback title */
+"Enter passcode" = "إدخال رمز مرور";
+
+/* Pin Lock */
+"Enter your passcode" = "إدخال رمز المرور الخاص بك";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "معرّف الوجه";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "هل نسيت كلمة المرور؟";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "رمز المرور";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "رموز المرور غير متطابقة. حاول مرة أخرى.";
+
 /* Password TextField Placeholder */
 "Password" = "كلمة المرور";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "جار النشر...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "إعادة إدخال رمز المرور";
+
 /* Reachs Internet */
 "Reachability" = "إمكانية الوصول";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "إرسال الملاحظات";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "تعيين رمز المرور";
 
 /* Title of options screen */
 "Settings" = "إعدادات";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "القوالب";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "لإلغاء تأمين التطبيق";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "اليوم";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "سلة المهملات";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "إيقاف رمز المرور";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "إلغاء تأمين %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "إلغاء التثبيت";

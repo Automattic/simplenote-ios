@@ -1,4 +1,0 @@
-Exigences concernant la sûreté des mots de passe mises à jour.
-Simplenote vous demandera de mettre à niveau les mots de passe peu sûrs lorsque vous vous connecterez.
-Nouvelle palette de couleurs implémentée !
-Le bouton de la liste de contrôle est masqué lorsque vous ne modifiez pas de note.

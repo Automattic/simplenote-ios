@@ -121,7 +121,7 @@ def localize(path):
     old = original + '.old'
     new = original + '.new'
 
-    genstrings_cmd = 'genstrings -q -o "%s" `find ./Simplenote ./Pods/WordPress-AppbotX -name "*.m" -o -name "*.swift"`'
+    genstrings_cmd = 'genstrings -q -o "%s" `find ./Simplenote ./External/DTPinLock -name "*.m" -o -name "*.swift"`'
 
     if os.path.isfile(original):
         os.rename(original, old)

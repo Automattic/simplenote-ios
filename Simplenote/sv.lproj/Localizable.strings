@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 18:54:06+0000 */
+/* Translation-Revision-Date: 2020-06-25 16:08:32+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultat";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i felaktig inmatning";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i felaktiga inmatningar";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minst 8 tecken";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "I kö";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Ange en lösenkod";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Ange en lösenkod";
+
+/* Pin Lock */
+"Enter your passcode" = "Ange lösenkod";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Ansiktsidentifiering";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Har du glömt lösenordet?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Lösenkod";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Lösenkoderna matchar inte varandra. Försök igen.";
+
 /* Password TextField Placeholder */
 "Password" = "Lösenord";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Publicerar...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Ange lösenkoden en gång till";
+
 /* Reachs Internet */
 "Reachability" = "Nåbarhet";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Skicka feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Ställ in lösenkod";
 
 /* Title of options screen */
 "Settings" = "Inställningar";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Teman";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "För att låsa upp applikationen";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Idag";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Kasta bort";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Stäng av lösenkod";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Lås upp %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Lossa";

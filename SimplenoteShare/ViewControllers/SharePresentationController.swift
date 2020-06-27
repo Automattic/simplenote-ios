@@ -50,32 +50,21 @@ private extension SharePresentationController {
 private extension SharePresentationController {
 
     func setupAppearance() {
-        guard #available(iOS 13, *) else {
-            setupAppearanceIOS10()
-            return
-        }
-
-        setupAppearanceIOS12()
-    }
-
-    func setupAppearanceIOS10() {
-        let appearance = UINavigationBar.appearance()
-        appearance.barTintColor = .white
-        appearance.barStyle = .default
-        appearance.tintColor = UIColor.simplenoteBlue()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        appearance.isTranslucent = false
-    }
-
-    @available (iOS 12, *)
-    func setupAppearanceIOS12() {
-        let appearance = UINavigationBar.appearance()
-        appearance.barTintColor = .simplenoteBackgroundColor
-        appearance.barStyle = .default
-        appearance.tintColor = .simplenoteTintColor
-        appearance.titleTextAttributes = [
+        let navbarAppearance = UINavigationBar.appearance()
+        navbarAppearance.barTintColor = .simplenoteBackgroundColor
+        navbarAppearance.barStyle = .default
+        navbarAppearance.tintColor = .simplenoteTintColor
+        navbarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.simplenoteNavigationBarTitleColor
         ]
-        appearance.isTranslucent = false
+        navbarAppearance.isTranslucent = false
+
+        let barButtonTitleAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor: UIColor.simplenoteTintColor
+        ]
+
+        let barButtonAppearance = UIBarButtonItem.appearance()
+        barButtonAppearance.tintColor = .simplenoteTintColor
+        barButtonAppearance.setTitleTextAttributes(barButtonTitleAttributes, for: .normal)
     }
 }

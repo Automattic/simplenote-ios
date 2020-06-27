@@ -1,4 +1,3 @@
-Parola Gücü Gereksinimleri güncellendi.
-Simplenote, her oturum açtığınızda güvenli olmayan parolaları yükseltmenizi isteyecek.
-Yeni bir renk paleti uygulandı!
-Etkin bir şekilde not düzenlenmediği zamanlarda kontrol listesi düğmesi gizlendi.
+Paylaşım Uzantısının Görünümünü etkileyen bir hata düzeltildi.
+Kimlik Doğrulama Ekranlarındaki RTL desteği düzeltildi.
+Etiket Düzenleyicisi'ndeki RTL desteği düzeltildi.

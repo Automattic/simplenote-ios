@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-26 09:54:03+0000 */
+/* Translation-Revision-Date: 2020-06-25 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d 個搜尋結果";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "嘗試輸入密碼失敗 %i 次";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "嘗試輸入密碼失敗 %i 次";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 長度至少為 8 個字元";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "加入佇列";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "輸入密碼";
+
+/* Touch ID fallback title */
+"Enter passcode" = "輸入密碼";
+
+/* Pin Lock */
+"Enter your passcode" = "輸入你的密碼";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "忘記密碼了嗎？";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密碼";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "密碼不相符。請再試一次。";
+
 /* Password TextField Placeholder */
 "Password" = "密碼";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "正在發表…";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "重新輸入密碼";
+
 /* Reachs Internet */
 "Reachability" = "可達性";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "傳送回饋意見";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "設定密碼";
 
 /* Title of options screen */
 "Settings" = "設定";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "佈景主題";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "若要解鎖應用程式";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "移至垃圾桶";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "關閉密碼";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "解除鎖定 %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "取消釘選";
