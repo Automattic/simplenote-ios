@@ -1,4 +1,3 @@
-Uppdaterade krav för lösenordsstyrka.
-Simplenote kommer att begära uppgradering av osäkra lösenord när du loggar in.
-Implementerade en ny färgpalett!
-Checklisteknappen är dold förutom vid aktiv redigering av en anteckning.
+Åtgärdade en bugg som påverkade resurstilläggets utseende.
+Åtgärdade RTL-stöd på autentiseringsskärmarna.
+Åtgärdade RTL-stöd i taggredigeraren.

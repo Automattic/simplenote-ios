@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-26 15:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-25 14:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d Resultati";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i tentativo di accesso fallito";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i tentativi di accesso falliti";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimo 8 caratteri";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "In coda";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Inserisci un PIN";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Inserisci il PIN";
+
+/* Pin Lock */
+"Enter your passcode" = "Inserisci il tuo PIN";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "Tentativi non riusciti";
 
 /* Password Reset Action */
 "Forgotten password?" = "Password dimenticata?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "PIN";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "PIN non coincidono. Prova ancora.";
+
 /* Password TextField Placeholder */
 "Password" = "Password";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Pubblicazione in corso...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Inserisci nuovamente il PIN";
+
 /* Reachs Internet */
 "Reachability" = "Raggiungibilità";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Invia un feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Imposta il PIN";
 
 /* Title of options screen */
 "Settings" = "Impostazioni";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Temi";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "Come sbloccare l'applicazione";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Oggi";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Elimina";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Disabilita il PIN";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Sblocca %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Sgancia";

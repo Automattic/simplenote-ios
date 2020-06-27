@@ -1,4 +1,3 @@
-Se han actualizado los requisitos de seguridad de la contraseña.
-Simplenote solicitará la actualización de contraseñas que no sean seguras cuando inicies sesión.
-¡Se ha implementado una paleta de colores nueva!
-El botón de la lista de comprobación permanece oculto a menos que se esté editando una nota.
+Se ha solucionado un error que afectaba a la apariencia de la extensión de uso compartido.
+Compatibilidad RTL solucionada en las pantallas de autenticación.
+Compatibilidad RTL solucionada en el editor de etiquetas.

@@ -1,4 +1,0 @@
-Persyaratan Kekuatan Kata Sandi yang Diperbarui.
-Simplenote akan meminta untuk meng-upgrade kata sandi yang tidak kuat setiap kali Anda login.
-Mengimplementasi palet warna yang baru!
-Tombol daftar centang tersembunyi, kecuali Anda sedang aktif menyunting catatan.

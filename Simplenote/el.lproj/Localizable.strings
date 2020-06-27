@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2019-11-22 16:18:55+0000 */
+/* Translation-Revision-Date: 2020-06-15 15:27:25+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: el_GR */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d αποτελέσματα";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i αποτυχημένη απόπειρα συνθηματικού";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i αποτυχημένες απόπειρες συνθηματικού";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum of 8 characters";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enqueued";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Enter a passcode";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Δημιουργία συνθηματικού";
+
+/* Pin Lock */
+"Enter your passcode" = "Εισάγετε το συνθηματικό σας";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Συνθηματικό";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Τα συνθηματικά δεν συμφωνούν. Δοκιμάστε ξανά.";
+
 /* Password TextField Placeholder */
 "Password" = "Κωδικός";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Δημοσίευση...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Εισάγετε ξανά το συνθηματικό σας";
+
 /* Reachs Internet */
 "Reachability" = "Reachability";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Send feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Δημιουργία συνθηματικού";
 
 /* Title of options screen */
 "Settings" = "Ρυθμίσεις";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Themes";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "To unlock the application";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Σήμερα";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Διαγραφή";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Απενεργοποίηση συνθηματικού";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Ξεκλείδωμα %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Unpin";

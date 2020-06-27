@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 10:54:03+0000 */
+/* Translation-Revision-Date: 2020-06-24 09:54:31+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d Ergebnisse";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i fehlgeschlagener Passcode-Versuch";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i fehlgeschlagene Passcode-Versuche";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "– Es muss mindestens 8 Zeichen lang sein.";
@@ -65,7 +71,7 @@
 "Add a new collaborator..." = "Neuen Mitarbeiter hinzufügen…";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Add a tag...";
+"Add a tag..." = "Schlagwort …";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Schlagwort hinzufügen";
@@ -170,7 +176,7 @@
 "Debug" = "Debuggen";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Delete";
+"Delete" = "Löschen";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notizen löschen";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "In der Warteschlange";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Gib einen Passcode ein";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Gib einen Passcode ein";
+
+/* Pin Lock */
+"Enter your passcode" = "Gib deinen Passcode ein";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Passwort vergessen?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Passcode";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Die Passcodes stimmten nicht überein. Versuch's nochmal.";
+
 /* Password TextField Placeholder */
 "Password" = "Passwort";
 
@@ -371,7 +392,7 @@
 "Please activate your WordPress.com account via email and try again." = "Aktiviere dein WordPress.com-Konto per E-Mail und versuche es erneut.";
 
 /* Title of Markdown preview screen */
-"Preview" = "Preview";
+"Preview" = "Vorschau";
 
 /* Simplenote privacy policy */
 "Privacy Policy" = "Datenschutzerklärung";
@@ -393,6 +414,9 @@
 
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Veröffentlichung läuft…";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Passcode erneut eingeben";
 
 /* Reachs Internet */
 "Reachability" = "Erreichbarkeit";
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Feedback senden";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Passcode festlegen";
 
 /* Title of options screen */
 "Settings" = "Einstellungen";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Themes";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "Zum Entsperren der Anwendung";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Heute";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Papierkorb";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Passcode deaktivieren";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "%@ entsperren";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Lösen";

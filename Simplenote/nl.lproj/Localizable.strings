@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 15:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-25 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultaten";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i mislukte wachtwoordcodepoging";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimaal 8 tekens";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Voer een wachtwoordcode in";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Voer een wachtwoordcode in";
+
+/* Pin Lock */
+"Enter your passcode" = "Voer je wachtwoordcode in";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Gezichts-ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "Mislukte pogingen";
 
 /* Password Reset Action */
 "Forgotten password?" = "Wachtwoord vergeten?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Wachtwoordcode";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "Wachtwoordcodes komen niet overeen. Probeer het opnieuw.";
+
 /* Password TextField Placeholder */
 "Password" = "Wachtwoord";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Publiceren...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Voer een wachtwoordpasscode opnieuw in";
+
 /* Reachs Internet */
 "Reachability" = "Bereikbaarheid";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Stuur feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Wachtwoordcode instellen";
 
 /* Title of options screen */
 "Settings" = "Instellingen";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Thema's";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "Om de toepassing te ontgrendelen";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Vandaag";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Naar prullenbak";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Wachtwoordcode uitschakelen";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "%@ ontgrendelen";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Losgemaakt";

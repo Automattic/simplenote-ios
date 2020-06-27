@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 08:54:05+0000 */
+/* Translation-Revision-Date: 2020-06-25 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "결과 %d개";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "실패한 패스코드 시도 %i번";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "실패한 패스코드 시도 %i번";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 최소 8자";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "활성화됨";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "패스코드 입력";
+
+/* Touch ID fallback title */
+"Enter passcode" = "패스코드 입력";
+
+/* Pin Lock */
+"Enter your passcode" = "패스코드 입력";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "비밀번호를 잊으셨나요?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "패스코드";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "패스코드가 일치하지 않습니다. 다시 시도해 주세요.";
+
 /* Password TextField Placeholder */
 "Password" = "비밀번호";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "게시 중...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "패스코드 다시 입력";
+
 /* Reachs Internet */
 "Reachability" = "연결";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "의견 보내기";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "패스코드 설정";
 
 /* Title of options screen */
 "Settings" = "설정";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "테마";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "애플리케이션 잠금 방법";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "오늘";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "휴지통";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "패스코드 사용 끄기";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "%@ 잠금해제";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "고정 해제";
