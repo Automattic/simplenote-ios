@@ -141,23 +141,29 @@ private extension SPAboutViewController {
         serviceTextView.textAlignment = NSTextAlignment.center
         serviceTextView.textColor = UIColor.white
         serviceTextView.isEditable = false
-
-        // UITextViews have padding, so height of 26 is needed to accommodate the extra space
-        serviceTextView.heightAnchor.constraint(equalToConstant: 26.0).isActive = true
+        serviceTextView.isScrollEnabled = false
 
         // Set up attributed string with clickable links for privacy and terms
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        let serviceString = NSMutableAttributedString(string: String(format: "%@ \u{2022} %@", Constants.privacyString, Constants.termsString),
-                                                      attributes: [
-                                                        NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                        NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)
+
+        let serviceString = String(format: "%@ \u{2022} %@ \n %@", Constants.privacyString, Constants.termsString, Constants.californiaString)
+        let serviceAttrString = NSMutableAttributedString(string: serviceString, attributes: [
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont.systemFont(ofSize: 14)
         ])
-        
-        serviceString.addAttribute(NSAttributedString.Key.link, value: Constants.privacyURLString, range: NSMakeRange(0, Constants.privacyString.count))
-        serviceString.addAttribute(NSAttributedString.Key.link, value: Constants.termsURLString, range: NSMakeRange(Constants.privacyString.count + 3, Constants.termsString.count))
-        serviceTextView.attributedText = serviceString
+
+        let foundationString = serviceAttrString.foundationString
+        let rangeOfPrivacy = foundationString.range(of: Constants.privacyString)
+        let rangeOfTerms = foundationString.range(of: Constants.termsString)
+        let rangeOfNotice = foundationString.range(of: Constants.californiaString)
+
+        serviceAttrString.addAttribute(.link, value: Constants.privacyURLString, range: rangeOfPrivacy)
+        serviceAttrString.addAttribute(.link, value: Constants.termsURLString, range: rangeOfTerms)
+        serviceAttrString.addAttribute(.link, value: Constants.californiaURLString, range: rangeOfNotice)
+
+        serviceTextView.attributedText = serviceAttrString
         
         let linkAttributes: [String : Any] = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.white]
         serviceTextView.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(linkAttributes)
@@ -277,6 +283,8 @@ private enum Constants {
     static let privacyURLString = "https://simplenote.com/privacy/"
     static let termsString      = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
     static let termsURLString   = "https://simplenote.com/terms/"
+    static let californiaString = NSLocalizedString("California Users Privacy Notice", comment: "Simplenote terms of service")
+    static let californiaURLString = "https://automattic.com/privacy/#california-consumer-privacy-act-ccpa"
 
     static let titles: [String] = [
         NSLocalizedString("Blog", comment: "The Simplenote blog"),
