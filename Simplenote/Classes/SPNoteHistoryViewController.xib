@@ -43,7 +43,7 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-am-H0U">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-am-H0U" customClass="SPSnappingSlider" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="-2" y="46" width="386" height="31"/>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQJ-NT-WS8" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
