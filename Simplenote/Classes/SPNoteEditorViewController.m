@@ -1938,7 +1938,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewVersionAction:(id)sender {
-    
+    [self showHistory];
+    return;
+
     // check reachability status
     if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
 
