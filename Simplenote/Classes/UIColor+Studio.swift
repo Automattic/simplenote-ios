@@ -284,7 +284,10 @@ extension UIColor {
         UIColor(lightColor: .spBlue5, darkColor: .darkGray3)
     }
 
-
+    @objc
+    static var simplenoteDisabledButtonBackgroundColor: UIColor {
+        UIColor(lightColor: .gray20, darkColor: .gray70)
+    }
 
 
 ///    #### PENDINGS

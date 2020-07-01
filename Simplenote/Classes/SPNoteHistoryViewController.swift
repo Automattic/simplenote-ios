@@ -24,24 +24,37 @@ class SPNoteHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        styleDateLabel()
+        styleSlider()
+        styleRestoreButton()
+
         [dateLabel, slider, restoreButton].forEach {
             $0?.alpha = 0.0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.activityIndicator.stopAnimating()
+            [self.dateLabel, self.slider, self.restoreButton].forEach {
+                $0?.alpha = 1.0
+            }
         }
     }
 }
 
 private extension SPNoteHistoryViewController {
-    func customizeDateLabel() {
+    func styleDateLabel() {
         dateLabel.font = .preferredFont(forTextStyle: .headline)
         dateLabel.textColor = .simplenoteNoteHeadlineColor
     }
 
-    func customizeSlider() {
-        slider.minimumTrackTintColor = slider.maximumTrackTintColor
+    func styleSlider() {
+        let color = UIColor.simplenoteGray50Color.withAlphaComponent(0.2)
+        slider.minimumTrackTintColor = color
+        slider.maximumTrackTintColor = color
     }
 
-    func customizeRestoreButton() {
-
+    func styleRestoreButton() {
+        restoreButton.backgroundColor = .simplenoteBlue50Color // for disabled state .simplenoteDisabledButtonBackgroundColor
     }
 }
 
