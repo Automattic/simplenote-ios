@@ -1,18 +1,17 @@
 import UIKit
 
 class SPNoteHistoryViewController: UIViewController {
-    enum Event {
-        case close
-    }
-
     @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var slider: UISlider!
+    @IBOutlet private weak var errorMessageLabel: UILabel!
+    @IBOutlet private weak var slider: SPSnappingSlider!
     @IBOutlet private weak var restoreButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
-    var eventHandler: ((Event) -> Void)?
+    private let controller: SPNoteHistoryController
+    private var items: [SPNoteHistoryController.Presentable] = []
 
-    init() {
+    init(controller: SPNoteHistoryController) {
+        self.controller = controller
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -25,26 +24,28 @@ class SPNoteHistoryViewController: UIViewController {
         super.viewDidLoad()
 
         styleDateLabel()
+        styleErrorMessageLabel()
         styleSlider()
         styleRestoreButton()
 
-        [dateLabel, slider, restoreButton].forEach {
-            $0?.alpha = 0.0
-        }
+        listenForSliderValueChanges()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.activityIndicator.stopAnimating()
-            [self.dateLabel, self.slider, self.restoreButton].forEach {
-                $0?.alpha = 1.0
-            }
+        controller.observer = { [weak self] state in
+            self?.update(with: state)
         }
+        controller.onViewLoad()
+
+        trackScreen()
     }
 }
 
 private extension SPNoteHistoryViewController {
     func styleDateLabel() {
-        dateLabel.font = .preferredFont(forTextStyle: .headline)
         dateLabel.textColor = .simplenoteNoteHeadlineColor
+    }
+
+    func styleErrorMessageLabel() {
+        errorMessageLabel.textColor = .simplenoteTextColor
     }
 
     func styleSlider() {
@@ -54,12 +55,99 @@ private extension SPNoteHistoryViewController {
     }
 
     func styleRestoreButton() {
-        restoreButton.backgroundColor = .simplenoteBlue50Color // for disabled state .simplenoteDisabledButtonBackgroundColor
+        restoreButton.backgroundColor = restoreButton.isEnabled ? .simplenoteBlue50Color : .simplenoteDisabledButtonBackgroundColor
+        restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
+    }
+
+    func update(with state: SPNoteHistoryController.State) {
+        switch state {
+        case .loading:
+            setMainContentVisible(false)
+            setActivityIndicatorVisible(true)
+            setErrorMessageVisible(false)
+
+        case .results(let items):
+            setMainContentVisible(true)
+            setActivityIndicatorVisible(false)
+            setErrorMessageVisible(false)
+
+            self.items = items
+
+            configureSlider()
+
+        case .error(let text):
+            setMainContentVisible(false)
+            setActivityIndicatorVisible(false)
+            setErrorMessageVisible(true)
+
+            errorMessageLabel.text = text
+        }
+    }
+
+    func update(withSliderValue value: Float) {
+        let index = Int(value)
+        let item = items[index]
+
+        dateLabel.text = item.date
+        restoreButton.isEnabled = item.isRestorable
+        styleRestoreButton()
+
+        controller.selectVersion(atIndex: index)
     }
 }
 
 private extension SPNoteHistoryViewController {
-    @IBAction private func handleTapOnCloseButton() {
-        eventHandler?(.close)
+    func listenForSliderValueChanges() {
+        slider.onValueChange = { [weak self] value in
+            self?.update(withSliderValue: value)
+        }
+    }
+
+    func configureSlider() {
+        slider.minimumValue = 0.0
+        slider.maximumValue = Float(max(items.count - 1, 0))
+        slider.value = slider.maximumValue
+        update(withSliderValue: slider.value)
+    }
+}
+
+private extension SPNoteHistoryViewController {
+    func setMainContentVisible(_ isVisible: Bool) {
+        [dateLabel, slider, restoreButton].forEach {
+            $0?.alpha = isVisible ? 1.0 : 0.0
+        }
+    }
+
+    func setActivityIndicatorVisible(_ isVisible: Bool) {
+        if isVisible {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
+    func setErrorMessageVisible(_ isVisible: Bool) {
+        errorMessageLabel.alpha = isVisible ? 1.0 : 0.0
+    }
+}
+
+private extension SPNoteHistoryViewController {
+    @IBAction func handleTapOnCloseButton() {
+        controller.handleTapOnCloseButton()
+    }
+
+    @IBAction func handleTapOnRestoreButton() {
+        trackRestore()
+        controller.handleTapOnRestoreButton()
+    }
+}
+
+private extension SPNoteHistoryViewController {
+    func trackScreen() {
+        SPTracker.trackEditorVersionsAccessed()
+    }
+
+    func trackRestore() {
+        SPTracker.trackEditorNoteRestored()
     }
 }

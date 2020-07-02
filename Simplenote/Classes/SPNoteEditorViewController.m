@@ -12,8 +12,6 @@
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "JSONKit+Simplenote.h"
-#import "SPHorizontalPickerView.h"
-#import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
 #import "SPOutsideTouchView.h"
 #import "UITextView+Simplenote.h"
@@ -96,7 +94,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         
         bDisableShrinkingNavigationBar = NO;
         _keyboardHeight = 0;
-        
+
+        _collaborators = [[SPNoteEditorViewControllerCollaborators alloc] init];
+
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(backButtonAction:)
@@ -647,7 +647,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)backButtonAction:(id)sender {
     
     // this is to disable the swipe gesture while restoring to a previous version
-    if (bViewingVersions) {
+    if ([self isShowingHistory]) {
         return;
     }
     
@@ -1203,7 +1203,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // safe to alter text attributes here
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    
+    if ([self isShowingHistory]) {
+        return NO;
+    }
+
     if (bSearching)
         [self endSearching:textView];
     
@@ -1347,7 +1350,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)save {
     
-	if (_currentNote == nil || bViewingVersions || [self isDictatingText])
+	if (_currentNote == nil || [self isShowingHistory] || [self isDictatingText])
 		return;    
     
 	if (bModified || _currentNote.deleted == YES)
@@ -1400,16 +1403,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
-    
-    if (bViewingVersions) {
-        if (noteVersionData == nil) {
-            noteVersionData = [NSMutableDictionary dictionaryWithCapacity:10];
-        }
-        NSInteger versionInt = [version integerValue];
-        [noteVersionData setObject:data forKey:[NSNumber numberWithInteger:versionInt]];
-        
-        [versionPickerView reloadData];
-    }
+    [self handleVersion:[version integerValue] data:data];
 }
 
 - (void)didDeleteCurrentNote {
@@ -1570,7 +1564,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     UIButton *historyButton = [noteActivityView actionButtonAtIndex:1];
     historyButton.accessibilityLabel = NSLocalizedString(@"History", @"Noun - the version history of a note");
     historyButton.accessibilityHint = NSLocalizedString(@"history-accessibility-hint", @"Accessibility hint on button which shows the history of a note");
-    historyButton.enabled = _currentNote.version.integerValue - [self minimumNoteVersion] > 1;
+    historyButton.enabled = _currentNote.version.integerValue > 1;
     
     UIButton *collaborateButton = [noteActivityView actionButtonAtIndex:2];
     collaborateButton.accessibilityHint = NSLocalizedString(@"collaborate-accessibility-hint", @"Accessibility hint on button which shows the current collaborators on a note");
@@ -1754,30 +1748,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
-
-    if ([actionSheet isEqual:versionActionSheet]) {
-        
-        bViewingVersions = NO;
-        
-        if (index == 0) {
-            
-            // revert back to current version
-            _noteEditorTextView.attributedText = [_currentNote.content attributedString];
-        } else {
-            
-            [SPTracker trackEditorNoteRestored];
-            
-            bModified = YES;
-            [self save];
-        }
-        
-        [_noteEditorTextView processChecklists];
-        // Unload versions and re-enable editor
-        [_noteEditorTextView setEditable:YES];
-        noteVersionData = nil;
-        [(SPNavigationController *)self.navigationController setDisableRotation:NO];
-    }
-    
     [actionSheet dismiss];
 }
 
@@ -1792,9 +1762,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     if ([actionSheet isEqual:noteActionSheet])
         noteActionSheet = nil;
-    
-    if ([actionSheet isEqual:versionActionSheet])
-        versionActionSheet = nil;
 
     if (bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
@@ -1938,65 +1905,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewVersionAction:(id)sender {
-    [self showHistory];
-    return;
-
-    // check reachability status
-    if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
-
-        NSString *title = NSLocalizedString(@"version-alert-message", @"Error alert message shown when trying to view history of a note without an internet connection");
-        NSString *cancelTitle = NSLocalizedString(@"OK", nil);
-
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                 message:nil
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addCancelActionWithTitle:cancelTitle handler:nil];
-        [alertController presentFromRootViewController];
-        return;
-    }
-    
-    [SPTracker trackEditorVersionsAccessed];
-    
     [self save];
-    
-    // get the note version data
-    bViewingVersions = YES;
-    currentVersion = 0; // reset the version number
-    
-    [_noteEditorTextView setEditable:NO];
-    
-    // Request the version data from Simperium
-    [[[SPAppDelegate sharedDelegate].simperium bucketForName:@"Note"] requestVersions:30 key:_currentNote.simperiumKey];
-    
-    
-    versionPickerView = [[SPHorizontalPickerView alloc] initWithFrame:CGRectMake(0,
-                                                                                 0,
-                                                                                 self.view.frame.size.width,
-                                                                                 200) itemClass:[SPVersionPickerViewCell class]
-                                                             delegate:self];
-    
-    [versionPickerView setSelectedIndex:[NSNumber numberWithInteger:(_currentNote.version.integerValue - [self minimumNoteVersion] - 1)].integerValue];
-    
-    versionActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                  withMessage:nil
-                                         withContentViewArray:@[versionPickerView]
-                                         withButtonTitleArray:@[NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Restore Note", @"Restore a note to a previous version")]
-                                                     delegate:self];
-    versionActionSheet.tapToDismiss = NO;
-    versionActionSheet.cancelButtonIndex = 0;
-
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
-}
-
-- (long)minimumNoteVersion {
-
-    NSInteger version = [[_currentNote version] integerValue];
-    int numVersions = 30;
-    NSInteger minVersion = version - numVersions;
-    if (minVersion < 1)
-        minVersion = 1;
-    
-    return minVersion;
+    [self showHistory];
 }
 
 - (void)trashNoteAction:(id)sender {
@@ -2024,103 +1934,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                          
                      }];
 }
-
-#pragma mark SPHorizontalPickerView delegate methods
-
-- (NSInteger)numberOfItemsInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    NSLog(@"there are %ld versions", _currentNote.version.integerValue - [self minimumNoteVersion]);
-    
-    return _currentNote.version.integerValue - [self minimumNoteVersion];
-}
-
-- (SPHorizontalPickerViewCell *)pickerView:(SPHorizontalPickerView *)pickerView viewForIndex:(NSInteger)index {
-    
-    SPVersionPickerViewCell *cell = (SPVersionPickerViewCell *)[pickerView dequeueReusableCellforIndex:index];
-    
-    NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    NSDictionary *versionData = [noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
-    
-    if (versionData != nil) {
-        NSDate *versionDate = [NSDate dateWithTimeIntervalSince1970:[(NSString *)[versionData objectForKey:@"modificationDate"] doubleValue]];
-        
-        NSString *dateText = [_currentNote dateString:versionDate brief:NO];
-        
-        NSArray *dateComponents = [dateText componentsSeparatedByString:@","];
-        
-        if (dateComponents.count >= 2) {
-            
-            [cell setDateText:[(NSString *)dateComponents[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
-                     timeText:[(NSString *)dateComponents[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            
-        } else {
-            
-            [cell setDateText:dateText timeText:nil];
-            
-        }
-
-        [cell setActivityIndicatorVisible:NO animated:YES];
-        
-        cell.accessibilityLabel = dateText;
-        cell.accessibilityHint = NSLocalizedString(@"version-cell-accessibility-hint", @"Accessiblity hint describing how to reset the current note to a previous version");
-        
-    } else {
-        
-        [cell setActivityIndicatorVisible:YES animated:NO];
-        cell.accessibilityLabel = NSLocalizedString(@"version-cell-fetching-accessibility-hint", @"Accessibility hint used when previous versions of a note are being fetched");
-    }
-    
-    
-    return cell;
-    
-}
-
-- (NSString *)titleForPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return NSLocalizedString(@"Version", @"Represents a snapshot in time for a note");
-}
-
-- (CGFloat)heightForItemInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return 66.0;
-}
-
-- (CGFloat)widthForItemInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return 132.0;
-}
-
-- (void)pickerView:(SPHorizontalPickerView *)pickerView didSelectItemAtIndex:(NSInteger)index {
-    
-    NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    if (versionInt == currentVersion)
-        return;
-    
-    currentVersion = versionInt;
-	NSDictionary *versionData = [noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
-    NSLog(@"Loading version %ld: %@", (long)versionInt, versionData);
-    
-	if (versionData != nil) {
-        
-        UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-        snapshot.frame = _noteEditorTextView.frame;
-        [self.view insertSubview:snapshot aboveSubview:_noteEditorTextView];
-        
-        _noteEditorTextView.attributedText = [(NSString *)[versionData objectForKey:@"content"] attributedString];
-        [_noteEditorTextView processChecklists];
-        
-        [UIView animateWithDuration:0.25
-                         animations:^{
-                             
-                             snapshot.alpha = 0.0;
-                             
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-	}
-    
-}
-
 
 #pragma mark SPCollaboratorDelegate methods 
 

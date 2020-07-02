@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="yP9-LW-2C9" id="izn-o3-tAN"/>
                 <outlet property="dateLabel" destination="0Zh-yW-YrO" id="hp9-x6-fqO"/>
+                <outlet property="errorMessageLabel" destination="iEj-sR-6XD" id="XGR-QD-bu9"/>
                 <outlet property="restoreButton" destination="TQJ-NT-WS8" id="v59-2G-mU4"/>
                 <outlet property="slider" destination="DfP-am-H0U" id="FT0-gY-qCq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,7 +31,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-yW-YrO">
                                     <rect key="frame" x="0.0" y="0.0" width="352" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -43,8 +44,13 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-am-H0U" customClass="SPSnappingSlider" customModule="Simplenote" customModuleProvider="target">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-am-H0U" customClass="SPSnappingSlider" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="-2" y="46" width="386" height="31"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQJ-NT-WS8" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="100" width="382" height="44"/>
@@ -58,20 +64,33 @@
                                     <real key="value" value="10"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="handleTapOnRestoreButton" destination="-1" eventType="touchUpInside" id="8XQ-4y-n3G"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="yP9-LW-2C9">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="yP9-LW-2C9">
                     <rect key="frame" x="197" y="122" width="20" height="20"/>
                 </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEj-sR-6XD">
+                    <rect key="frame" x="16" y="60" width="382" height="144"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" constant="16" id="Giu-Fh-dxk"/>
+                <constraint firstItem="iEj-sR-6XD" firstAttribute="leading" secondItem="I1k-RA-YFb" secondAttribute="leading" id="Gvm-xL-2Ur"/>
+                <constraint firstItem="iEj-sR-6XD" firstAttribute="bottom" secondItem="I1k-RA-YFb" secondAttribute="bottom" id="c71-xs-FPA"/>
                 <constraint firstItem="yP9-LW-2C9" firstAttribute="centerX" secondItem="I1k-RA-YFb" secondAttribute="centerX" id="cBg-u1-v5m"/>
                 <constraint firstItem="yP9-LW-2C9" firstAttribute="centerY" secondItem="I1k-RA-YFb" secondAttribute="centerY" id="jvT-E6-fzF"/>
                 <constraint firstItem="I1k-RA-YFb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="nOO-ZW-9Xm"/>
                 <constraint firstItem="I1k-RA-YFb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pJo-tb-7tB"/>
+                <constraint firstItem="iEj-sR-6XD" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" id="sAh-Sa-bcd"/>
+                <constraint firstItem="iEj-sR-6XD" firstAttribute="top" secondItem="I1k-RA-YFb" secondAttribute="top" id="xsH-7u-CU8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="I1k-RA-YFb" secondAttribute="bottom" id="zy6-Oq-QqG"/>
             </constraints>
             <nil key="simulatedBottomBarMetrics"/>

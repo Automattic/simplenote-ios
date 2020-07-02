@@ -2,9 +2,20 @@ import UIKit
 
 extension SPNoteEditorViewController {
 
-    @objc func showHistory() {
-        let historyViewController = SPNoteHistoryViewController()
+    @objc
+    var isShowingHistory: Bool {
+        return collaborators.historyCardViewController != nil
+    }
+
+    @objc
+    func showHistory() {
+        let loader = SPHistoryLoader(note: currentNote)
+        let controller = SPNoteHistoryController(note: currentNote, loader: loader)
+        let historyViewController = SPNoteHistoryViewController(controller: controller)
         let viewController = SPCardViewController(viewController: historyViewController)
+
+        collaborators.historyLoader = loader
+        collaborators.historyCardViewController = viewController
 
         addChild(viewController)
         view.addSubview(viewController.view)
@@ -20,14 +31,37 @@ extension SPNoteEditorViewController {
 
         viewController.didMove(toParent: self)
 
-        historyViewController.eventHandler = { [weak viewController] event in
+        controller.delegate = { [weak self] event in
             switch event {
-            case .close:
-                viewController?.willMove(toParent: nil)
-                viewController?.view.removeFromSuperview()
-                viewController?.removeFromParent()
+            case .dismiss:
+                self?.dismissHistory()
+//                _noteEditorTextView.attributedText = [_currentNote.content attributedString]
+//                [_noteEditorTextView processChecklists];
+            case .preview:
+                break
+            case .restore:
+                self?.dismissHistory()
+//                bModified = YES;
+//                [self save];
+//                [_noteEditorTextView processChecklists];
             }
         }
     }
 
+    @objc(handleVersion:data:)
+    func handle(version: Int, data: [String: Any]) {
+        collaborators.historyLoader?.process(data: data, forVersion: version)
+    }
+}
+
+private extension SPNoteEditorViewController {
+    func dismissHistory() {
+        guard let viewController = collaborators.historyCardViewController else {
+            return
+        }
+
+        viewController.willMove(toParent: nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParent()
+    }
 }

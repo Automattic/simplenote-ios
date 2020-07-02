@@ -60,7 +60,6 @@
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
 		46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
-		46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */; };
 		46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF61794F53600A17ED2 /* SPActivityView.m */; };
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
 		46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */; };
@@ -82,7 +81,6 @@
 		46A3C98117DFA81A002865AE /* VSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA5F6178911FC00FC229D /* VSTheme.m */; };
 		46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CBF76917D4FC5C005CB405 /* NSString+Attributed.m */; };
 		46A3C98317DFA81A002865AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD4717848E8500E55842 /* main.m */; };
-		46A3C98417DFA81A002865AE /* SPHorizontalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E29B7C1417A7354F00A996F5 /* SPHorizontalPickerView.m */; };
 		46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */; };
 		46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
 		46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD4B17848E8500E55842 /* SPAppDelegate.m */; };
@@ -93,7 +91,6 @@
 		46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E21F57B817C1244E001F02D3 /* SPEditorTextView.m */; };
 		46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E201864717A4892300217E0B /* SPActionButton.m */; };
 		46A3C99417DFA81A002865AE /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C621788A54900785EF3 /* Note.m */; };
-		46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D43B817A8322C006811F2 /* SPHorizontalPickerGradientView.m */; };
 		46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */; };
 		46A3C99817DFA81A002865AE /* SPEntryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39D217A41FCC00B2591A /* SPEntryListCell.m */; };
 		46A3C99917DFA81A002865AE /* SPTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD831784B12400E55842 /* SPTransitionController.m */; };
@@ -144,6 +141,9 @@
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589724AD375A006BC572 /* SPNoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589624AD375A006BC572 /* SPNoteEditorViewController.swift */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
+		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
+		A6C0589D24AE95AD006BC572 /* SPHistoryLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */; };
+		A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */; };
 		B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */; };
 		B504D4E023D2018800AEED27 /* ResultsObjectChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */; };
 		B504D4E223D201C300AEED27 /* ResultsSectionChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4E123D201C300AEED27 /* ResultsSectionChange.swift */; };
@@ -496,6 +496,9 @@
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589624AD375A006BC572 /* SPNoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteEditorViewController.swift; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
+		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
+		A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryLoader.swift; sourceTree = "<group>"; };
+		A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteEditorViewControllerCollaborators.swift; sourceTree = "<group>"; };
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -739,8 +742,6 @@
 		E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPModalActivityIndicator.m; path = Classes/SPModalActivityIndicator.m; sourceTree = "<group>"; };
 		E239600F17B6A22800504FFB /* SPOutsideTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPOutsideTouchView.h; path = Classes/SPOutsideTouchView.h; sourceTree = "<group>"; };
 		E239601017B6A22800504FFB /* SPOutsideTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPOutsideTouchView.m; path = Classes/SPOutsideTouchView.m; sourceTree = "<group>"; };
-		E23D43B717A8322C006811F2 /* SPHorizontalPickerGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPHorizontalPickerGradientView.h; path = Classes/SPHorizontalPickerGradientView.h; sourceTree = "<group>"; };
-		E23D43B817A8322C006811F2 /* SPHorizontalPickerGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPHorizontalPickerGradientView.m; path = Classes/SPHorizontalPickerGradientView.m; sourceTree = "<group>"; };
 		E245094F179466F5008C5922 /* UIButton+Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+Images.h"; path = "Classes/UIButton+Images.h"; sourceTree = "<group>"; };
 		E2450950179466F5008C5922 /* UIButton+Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+Images.m"; path = "Classes/UIButton+Images.m"; sourceTree = "<group>"; };
 		E2465A1B17AD69320097B19B /* UIImage+Colorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Colorization.h"; path = "Classes/UIImage+Colorization.h"; sourceTree = "<group>"; };
@@ -798,12 +799,8 @@
 		E29ADD7A1784905800E55842 /* SPNoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPNoteListViewController.m; path = Classes/SPNoteListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E29ADD821784B12400E55842 /* SPTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTransitionController.h; path = Classes/SPTransitionController.h; sourceTree = "<group>"; };
 		E29ADD831784B12400E55842 /* SPTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTransitionController.m; path = Classes/SPTransitionController.m; sourceTree = "<group>"; };
-		E29B7C1317A7354F00A996F5 /* SPHorizontalPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPHorizontalPickerView.h; path = Classes/SPHorizontalPickerView.h; sourceTree = "<group>"; };
-		E29B7C1417A7354F00A996F5 /* SPHorizontalPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPHorizontalPickerView.m; path = Classes/SPHorizontalPickerView.m; sourceTree = "<group>"; };
 		E2ACA87E17A7692E00EF801C /* SPHorizontalPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPHorizontalPickerViewCell.h; path = Classes/SPHorizontalPickerViewCell.h; sourceTree = "<group>"; };
 		E2ACA87F17A7692E00EF801C /* SPHorizontalPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPHorizontalPickerViewCell.m; path = Classes/SPHorizontalPickerViewCell.m; sourceTree = "<group>"; };
-		E2ACA88117A7728E00EF801C /* SPVersionPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPVersionPickerViewCell.h; path = Classes/SPVersionPickerViewCell.h; sourceTree = "<group>"; };
-		E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPVersionPickerViewCell.m; path = Classes/SPVersionPickerViewCell.m; sourceTree = "<group>"; };
 		E2B0862C1806FFB3001ED52D /* SPTagCompletionPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagCompletionPill.h; path = Classes/SPTagCompletionPill.h; sourceTree = "<group>"; };
 		E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagCompletionPill.m; path = Classes/SPTagCompletionPill.m; sourceTree = "<group>"; };
 		E2B0863318070045001ED52D /* SPTagPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagPill.h; path = Classes/SPTagPill.h; sourceTree = "<group>"; };
@@ -1061,13 +1058,15 @@
 			path = config;
 			sourceTree = "<group>";
 		};
-		A6C0589124AD2B00006BC572 /* Note version picker */ = {
+		A6C0589124AD2B00006BC572 /* Note History */ = {
 			isa = PBXGroup;
 			children = (
 				A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */,
 				A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */,
+				A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */,
+				A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */,
 			);
-			name = "Note version picker";
+			name = "Note History";
 			sourceTree = "<group>";
 		};
 		B504D4DB23D1FBB400AEED27 /* ResultsController */ = {
@@ -1479,7 +1478,6 @@
 			isa = PBXGroup;
 			children = (
 				B5476BB523D89AE2000E7723 /* Headers */,
-				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
@@ -1673,7 +1671,7 @@
 		E29ADD751784902700E55842 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6C0589124AD2B00006BC572 /* Note version picker */,
+				A6C0589124AD2B00006BC572 /* Note History */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
@@ -1686,6 +1684,7 @@
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
 				A6C0589624AD375A006BC572 /* SPNoteEditorViewController.swift */,
+				A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
@@ -1700,19 +1699,6 @@
 				A68ABCA124ABCFFA00715EBD /* SPCardViewController.swift */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		E2ACA87A17A768D900EF801C /* HorizontalPickerView */ = {
-			isa = PBXGroup;
-			children = (
-				E29B7C1317A7354F00A996F5 /* SPHorizontalPickerView.h */,
-				E29B7C1417A7354F00A996F5 /* SPHorizontalPickerView.m */,
-				E2ACA88117A7728E00EF801C /* SPVersionPickerViewCell.h */,
-				E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */,
-				E23D43B717A8322C006811F2 /* SPHorizontalPickerGradientView.h */,
-				E23D43B817A8322C006811F2 /* SPHorizontalPickerGradientView.m */,
-			);
-			name = HorizontalPickerView;
 			sourceTree = "<group>";
 		};
 		E2F1497F179D8E1A00DC9690 /* Settings */ = {
@@ -2213,7 +2199,6 @@
 				B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
-				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
@@ -2230,6 +2215,7 @@
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
+				A6C0589D24AE95AD006BC572 /* SPHistoryLoader.swift in Sources */,
 				B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				B5476BB223D88F49000E7723 /* SPTagTableViewCell.swift in Sources */,
@@ -2307,7 +2293,6 @@
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
-				46A3C98417DFA81A002865AE /* SPHorizontalPickerView.m in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
@@ -2342,7 +2327,6 @@
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
-				46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */,
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
@@ -2375,6 +2359,7 @@
 				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
+				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
@@ -2402,6 +2387,7 @@
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
+				A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);

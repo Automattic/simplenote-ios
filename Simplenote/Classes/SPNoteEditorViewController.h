@@ -3,14 +3,14 @@
 #import "SPActivityView.h"
 #import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
-#import "SPHorizontalPickerView.h"
 #import <Simperium/Simperium.h>
 @class Note;
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
+@class SPNoteEditorViewControllerCollaborators;
 
-@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPBucketDelegate> {
     
     // Other Objects
     NSTimer *saveTimer;
@@ -21,7 +21,6 @@
     BOOL bModified;
     BOOL bDisableShrinkingNavigationBar;
     BOOL bShouldDelete;
-    BOOL bViewingVersions;
     BOOL beditingTags;
     BOOL bActionSheetVisible;
     BOOL bVoiceoverEnabled;
@@ -38,18 +37,11 @@
     // sheets
     SPActivityView *noteActivityView;
     SPActionSheet *noteActionSheet;
-    SPActionSheet *versionActionSheet;
-    
-    SPHorizontalPickerView *versionPickerView;
     
     BOOL bSearching;
     NSInteger highlightedSearchResultIndex;
     
     UILabel *searchDetailLabel;
-    
-    NSInteger currentVersion;
-    NSMutableDictionary *noteVersionData;
-    
 }
 
 // Navigation Back Button
@@ -65,6 +57,8 @@
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
+
+@property (nonatomic, strong) SPNoteEditorViewControllerCollaborators *collaborators;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
