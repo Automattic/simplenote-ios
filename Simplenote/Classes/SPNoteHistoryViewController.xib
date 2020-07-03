@@ -80,7 +80,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" constant="16" id="Giu-Fh-dxk"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="leading" secondItem="I1k-RA-YFb" secondAttribute="leading" id="Gvm-xL-2Ur"/>
@@ -91,7 +91,7 @@
                 <constraint firstItem="I1k-RA-YFb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pJo-tb-7tB"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" id="sAh-Sa-bcd"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="top" secondItem="I1k-RA-YFb" secondAttribute="top" id="xsH-7u-CU8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="I1k-RA-YFb" secondAttribute="bottom" id="zy6-Oq-QqG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="I1k-RA-YFb" secondAttribute="bottom" constant="16" id="zy6-Oq-QqG"/>
             </constraints>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
