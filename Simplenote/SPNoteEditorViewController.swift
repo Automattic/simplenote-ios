@@ -23,22 +23,10 @@ extension SPNoteEditorViewController {
     @objc
     func showHistory() {
         let viewController = newHistoryViewController()
-
-        addChild(viewController)
-        view.addSubview(viewController.view)
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-        ])
-        viewController.view.setContentHuggingPriority(.required, for: .vertical)
-
-        viewController.didMove(toParent: self)
+        viewController.present(from: self)
     }
 
-    private func newHistoryViewController() -> UIViewController {
+    private func newHistoryViewController() -> SPCardViewController {
         let loader = SPHistoryLoader(note: currentNote)
         let controller = SPNoteHistoryController(note: currentNote, loader: loader)
         let historyViewController = SPNoteHistoryViewController(controller: controller)
@@ -78,9 +66,7 @@ extension SPNoteEditorViewController {
         swiftCollaborators.historyCardViewController = nil
         swiftCollaborators.historyLoader = nil
 
-        viewController.willMove(toParent: nil)
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParent()
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
 
