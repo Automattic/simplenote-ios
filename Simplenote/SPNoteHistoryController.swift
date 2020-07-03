@@ -14,7 +14,7 @@ final class SPNoteHistoryController {
 
     enum Event {
         case dismiss
-        case preview
+        case preview(String)
         case restore
     }
 
@@ -56,7 +56,9 @@ extension SPNoteHistoryController {
     }
 
     func selectVersion(atIndex index: Int) {
-        delegate?(.preview)
+        let item = historyItems[index]
+        let content = item.data["content"] as? String
+        delegate?(.preview(content ?? ""))
     }
 
     func onViewLoad() {

@@ -63,6 +63,7 @@
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
+@property (nonatomic, getter=isModified) BOOL modified;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;

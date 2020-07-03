@@ -72,6 +72,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @implementation SPNoteEditorViewController
 
+@synthesize modified = bModified;
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
