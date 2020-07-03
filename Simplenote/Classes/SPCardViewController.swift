@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - SPCardViewController
+// MARK: - SPCardViewController wraps passed viewController in a view with rounded corners and a shadow
 //
 final class SPCardViewController: UIViewController {
     private let viewController: UIViewController
