@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - SPCardViewController
+// MARK: - SPCardViewController wraps passed viewController in a view with rounded corners and a shadow
 //
 final class SPCardViewController: UIViewController {
     private let viewController: UIViewController
@@ -16,6 +16,10 @@ final class SPCardViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        stopListeningToNotifications()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,10 @@ final class SPCardViewController: UIViewController {
         addShadowView()
         setupContainerView()
         addChildViewController()
+
+        refreshStyle()
+
+        startListeningToNotifications()
     }
 }
 
@@ -39,7 +47,6 @@ private extension SPCardViewController {
     func setupContainerView() {
         view.addFillingSubview(containerView)
 
-        containerView.backgroundColor = UIColor.simplenoteBackgroundColor.withAlphaComponent(0.97)
         containerView.layer.cornerRadius = Constants.cornerRadius
         containerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         containerView.layer.masksToBounds = true
@@ -50,6 +57,27 @@ private extension SPCardViewController {
         containerView.addFillingSubview(viewController.view)
         viewController.didMove(toParent: self)
     }
+
+    func refreshStyle() {
+        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor.withAlphaComponent(Constants.backgroundAlpha)
+    }
+}
+
+// MARK: - Notifications
+//
+private extension SPCardViewController {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
+    }
 }
 
 // MARK: - Constants
@@ -57,5 +85,6 @@ private extension SPCardViewController {
 private extension SPCardViewController {
     struct Constants {
         static let cornerRadius: CGFloat = 10.0
+        static let backgroundAlpha: CGFloat = 0.97
     }
 }

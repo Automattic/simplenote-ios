@@ -8,8 +8,6 @@ extension UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(view)
-        view.frame = bounds.inset(by: edgeInsets)
-
         let constraints = [
             view.leadingAnchor.constraint(equalTo: useSafeArea ? safeAreaLayoutGuide.leadingAnchor : leadingAnchor, constant: edgeInsets.left),
             view.trailingAnchor.constraint(equalTo: useSafeArea ? safeAreaLayoutGuide.trailingAnchor : trailingAnchor, constant: -edgeInsets.right),
