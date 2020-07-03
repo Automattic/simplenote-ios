@@ -16,6 +16,10 @@ final class SPCardViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        stopListeningToNotifications()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,10 @@ final class SPCardViewController: UIViewController {
         addShadowView()
         setupContainerView()
         addChildViewController()
+
+        refreshStyle()
+
+        startListeningToNotifications()
     }
 }
 
@@ -39,7 +47,6 @@ private extension SPCardViewController {
     func setupContainerView() {
         view.addFillingSubview(containerView)
 
-        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor.withAlphaComponent(Constants.backgroundAlpha)
         containerView.layer.cornerRadius = Constants.cornerRadius
         containerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         containerView.layer.masksToBounds = true
@@ -49,6 +56,27 @@ private extension SPCardViewController {
         addChild(viewController)
         containerView.addFillingSubview(viewController.view)
         viewController.didMove(toParent: self)
+    }
+
+    func refreshStyle() {
+        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor.withAlphaComponent(Constants.backgroundAlpha)
+    }
+}
+
+// MARK: - Notifications
+//
+private extension SPCardViewController {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
     }
 }
 
