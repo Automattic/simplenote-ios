@@ -14,13 +14,13 @@ final class SPSnappingSlider: UISlider {
     private(set) var snappedValue: Float = 0.0 {
         didSet {
             if oldValue != snappedValue {
-                feedbackGenerator?.impactOccurred()
+                feedbackGenerator?.selectionChanged()
                 onValueChange?(snappedValue)
             }
         }
     }
 
-    private var feedbackGenerator: UIImpactFeedbackGenerator?
+    private var feedbackGenerator: UISelectionFeedbackGenerator?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +42,7 @@ private extension SPSnappingSlider {
     }
 
     func configureImpactGenerator() {
-        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator = UISelectionFeedbackGenerator()
         feedbackGenerator?.prepare()
     }
 
