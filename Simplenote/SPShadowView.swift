@@ -9,6 +9,14 @@ final class SPShadowView: UIView {
     private let roundedCorners: UIRectCorner
     private let maskLayer: CAShapeLayer = CAShapeLayer()
 
+    /// Shadow color
+    ///
+    var shadowColor = UIColor.black {
+        didSet {
+            configureShadow()
+        }
+    }
+
     override var bounds: CGRect {
         didSet {
             updatePath()
@@ -17,8 +25,9 @@ final class SPShadowView: UIView {
 
     /// Designated Initializer
     ///
-    ///  - cornerRadius: The radius of each corner oval
-    ///  - roundedCorners: A bitmask value that identifies the corners that you want rounded
+    ///  - Parameters:
+    ///     - cornerRadius: The radius of each corner oval
+    ///     - roundedCorners: A bitmask value that identifies the corners that you want rounded
     ///
     init(cornerRadius: CGFloat, roundedCorners: UIRectCorner) {
         self.cornerRadius = cornerRadius
@@ -52,7 +61,7 @@ private extension SPShadowView {
     /// Configuration of the shadow
     ///
     func configureShadow() {
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = shadowColor.cgColor
         layer.shadowOffset = Constants.shadowOffset
         layer.shadowOpacity = Constants.shadowOpacity
         layer.shadowRadius = Constants.shadowRadius
