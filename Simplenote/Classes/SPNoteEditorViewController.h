@@ -8,7 +8,7 @@
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
-@class SPNoteEditorViewControllerCollaborators;
+@class SPNoteEditorViewControllerSwiftCollaborators;
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPBucketDelegate> {
     
@@ -58,7 +58,7 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, strong) SPNoteEditorViewControllerCollaborators *collaborators;
+@property (nonatomic, strong) SPNoteEditorViewControllerSwiftCollaborators *swiftCollaborators;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;

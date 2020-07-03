@@ -143,7 +143,7 @@
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
 		A6C0589D24AE95AD006BC572 /* SPHistoryLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */; };
-		A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */; };
+		A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerSwiftCollaborators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerSwiftCollaborators.swift */; };
 		B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */; };
 		B504D4E023D2018800AEED27 /* ResultsObjectChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */; };
 		B504D4E223D201C300AEED27 /* ResultsSectionChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4E123D201C300AEED27 /* ResultsSectionChange.swift */; };
@@ -498,7 +498,7 @@
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
 		A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryLoader.swift; sourceTree = "<group>"; };
-		A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteEditorViewControllerCollaborators.swift; sourceTree = "<group>"; };
+		A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerSwiftCollaborators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteEditorViewControllerSwiftCollaborators.swift; sourceTree = "<group>"; };
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1684,7 +1684,7 @@
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
 				A6C0589624AD375A006BC572 /* SPNoteEditorViewController.swift */,
-				A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift */,
+				A6C0589E24AE9B12006BC572 /* SPNoteEditorViewControllerSwiftCollaborators.swift */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
@@ -2387,7 +2387,7 @@
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
-				A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerCollaborators.swift in Sources */,
+				A6C0589F24AE9B12006BC572 /* SPNoteEditorViewControllerSwiftCollaborators.swift in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);

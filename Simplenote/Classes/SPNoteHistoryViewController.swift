@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - SPNoteHistoryViewController: Shows history for a note
+//
 class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var errorMessageLabel: UILabel!
@@ -10,6 +12,11 @@ class SPNoteHistoryViewController: UIViewController {
     private let controller: SPNoteHistoryController
     private var items: [SPNoteHistoryController.Presentable] = []
 
+    /// Designated initialize
+    ///
+    /// - Parameters:
+    ///     - controller: business logic controller
+    ///
     init(controller: SPNoteHistoryController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
@@ -40,6 +47,8 @@ class SPNoteHistoryViewController: UIViewController {
     }
 }
 
+// MARK: - Private Methods
+//
 private extension SPNoteHistoryViewController {
     func styleDateLabel() {
         dateLabel.textColor = .simplenoteNoteHeadlineColor
@@ -105,6 +114,8 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Slider
+//
 private extension SPNoteHistoryViewController {
     func listenForSliderValueChanges() {
         slider.onValueChange = { [weak self] value in
@@ -120,6 +131,8 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Updating content visibility
+//
 private extension SPNoteHistoryViewController {
     func setMainContentVisible(_ isVisible: Bool) {
         [dateLabel, slider, restoreButton].forEach {
@@ -140,6 +153,8 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Handling button events
+//
 private extension SPNoteHistoryViewController {
     @IBAction func handleTapOnCloseButton() {
         controller.handleTapOnCloseButton()
@@ -151,6 +166,8 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Tracking
+//
 private extension SPNoteHistoryViewController {
     func trackScreen() {
         SPTracker.trackEditorVersionsAccessed()

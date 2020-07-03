@@ -1,17 +1,25 @@
 import UIKit
 
+// MARK: - SPNoteEditorViewController: Extension for swift code
+//
 extension SPNoteEditorViewController {
 
+    /// Indicates if note history is shown on screen
+    ///
     @objc
     var isShowingHistory: Bool {
-        return collaborators.historyCardViewController != nil
+        return swiftCollaborators.historyCardViewController != nil
     }
 
+    /// Receives a note version. This is called from objc counterpart, which has delegate methods from Simperium
+    ///
     @objc(handleVersion:data:)
     func handle(version: Int, data: [String: Any]) {
-        collaborators.historyLoader?.process(data: data, forVersion: version)
+        swiftCollaborators.historyLoader?.process(data: data, forVersion: version)
     }
 
+    /// Shows note history
+    ///
     @objc
     func showHistory() {
         let viewController = newHistoryViewController()
@@ -56,19 +64,19 @@ extension SPNoteEditorViewController {
             }
         }
 
-        collaborators.historyLoader = loader
-        collaborators.historyCardViewController = cardViewController
+        swiftCollaborators.historyLoader = loader
+        swiftCollaborators.historyCardViewController = cardViewController
 
         return cardViewController
     }
 
     private func dismissHistory() {
-        guard let viewController = collaborators.historyCardViewController else {
+        guard let viewController = swiftCollaborators.historyCardViewController else {
             return
         }
 
-        collaborators.historyCardViewController = nil
-        collaborators.historyLoader = nil
+        swiftCollaborators.historyCardViewController = nil
+        swiftCollaborators.historyLoader = nil
 
         viewController.willMove(toParent: nil)
         viewController.view.removeFromSuperview()

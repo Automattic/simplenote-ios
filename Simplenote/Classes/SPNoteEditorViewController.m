@@ -97,7 +97,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         bDisableShrinkingNavigationBar = NO;
         _keyboardHeight = 0;
 
-        _collaborators = [[SPNoteEditorViewControllerCollaborators alloc] init];
+        _swiftCollaborators = [[SPNoteEditorViewControllerSwiftCollaborators alloc] init];
 
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
