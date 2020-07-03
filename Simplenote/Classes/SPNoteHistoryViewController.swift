@@ -27,6 +27,7 @@ class SPNoteHistoryViewController: UIViewController {
         styleErrorMessageLabel()
         styleSlider()
         styleRestoreButton()
+        styleActivityIndicator()
 
         listenForSliderValueChanges()
 
@@ -57,6 +58,14 @@ private extension SPNoteHistoryViewController {
     func styleRestoreButton() {
         restoreButton.backgroundColor = restoreButton.isEnabled ? .simplenoteBlue50Color : .simplenoteDisabledButtonBackgroundColor
         restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
+    }
+
+    func styleActivityIndicator() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .medium
+        } else {
+            activityIndicator.style = .gray
+        }
     }
 
     func update(with state: SPNoteHistoryController.State) {
