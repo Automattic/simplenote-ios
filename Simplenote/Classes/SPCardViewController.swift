@@ -39,7 +39,7 @@ private extension SPCardViewController {
     func setupContainerView() {
         view.addFillingSubview(containerView)
 
-        containerView.backgroundColor = UIColor.simplenoteBackgroundColor.withAlphaComponent(0.97)
+        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor.withAlphaComponent(0.97)
         containerView.layer.cornerRadius = Constants.cornerRadius
         containerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         containerView.layer.masksToBounds = true
