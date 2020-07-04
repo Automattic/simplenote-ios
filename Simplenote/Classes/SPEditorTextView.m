@@ -97,7 +97,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (CGFloat)defaultBottomInset {
+- (CGFloat)defaultBottomInset
+{
     return [self.theme floatForKey:@"tagViewHeight"] * 2;
 }
 
@@ -168,8 +169,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (BOOL)becomeFirstResponder
 {
     // Editable status is true by default but we fiddle with it during setup.
-    
-    self.editable = YES;
+    if (!self.readOnly) {
+        self.editable = YES;
+    }
     return [super becomeFirstResponder];
 }
 
@@ -554,6 +556,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
 {
+    if (self.readOnly) {
+        return NO;
+    }
+
     NSRange range;
     SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
     if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {

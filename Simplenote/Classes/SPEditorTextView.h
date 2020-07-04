@@ -19,6 +19,9 @@
 @property (nonatomic) BOOL lockContentOffset;
 @property (nonatomic) BOOL overideLockContentOffset;
 
+/// Disables interaction with checklists and keeps text view in non-editable mode.
+@property (nonatomic, getter=isReadOnly) BOOL readOnly;
+
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;

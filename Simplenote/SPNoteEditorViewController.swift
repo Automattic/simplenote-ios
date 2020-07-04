@@ -24,7 +24,9 @@ extension SPNoteEditorViewController {
     func showHistory() {
         let viewController = newHistoryViewController()
         viewController.present(from: self)
+
         adjustBottomContentInset(forHistoryView: viewController.view)
+        noteEditorTextView.isReadOnly = true
     }
 
     private func newHistoryViewController() -> SPCardViewController {
@@ -63,12 +65,12 @@ extension SPNoteEditorViewController {
         guard let viewController = swiftCollaborators.historyCardViewController else {
             return
         }
-
         swiftCollaborators.historyCardViewController = nil
         swiftCollaborators.historyLoader = nil
 
         viewController.dismiss(animated: true, completion: nil)
 
+        noteEditorTextView.isReadOnly = false
         UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
             self.restoreDefaultBottomContentInset()
         }
