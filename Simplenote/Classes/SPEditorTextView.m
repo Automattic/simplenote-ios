@@ -58,7 +58,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         [self addSubview:_tagView];
         
         UIEdgeInsets contentInset = self.contentInset;
-        contentInset.bottom += 2 * tagViewHeight;
+        contentInset.bottom += [self defaultBottomInset];
         contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
         
@@ -95,6 +95,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (VSTheme *)theme
 {
     return [[VSThemeManager sharedManager] theme];
+}
+
+- (CGFloat)defaultBottomInset {
+    return [self.theme floatForKey:@"tagViewHeight"] * 2;
 }
 
 - (NSDictionary *)typingAttributes

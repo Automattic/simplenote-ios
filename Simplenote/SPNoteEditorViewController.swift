@@ -24,6 +24,7 @@ extension SPNoteEditorViewController {
     func showHistory() {
         let viewController = newHistoryViewController()
         viewController.present(from: self)
+        adjustBottomContentInset(forHistoryView: viewController.view)
     }
 
     private func newHistoryViewController() -> SPCardViewController {
@@ -67,9 +68,35 @@ extension SPNoteEditorViewController {
         swiftCollaborators.historyLoader = nil
 
         viewController.dismiss(animated: true, completion: nil)
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+            self.restoreDefaultBottomContentInset()
+        }
     }
 }
 
+// MARK: - Editor insets adjustments
+//
+private extension SPNoteEditorViewController {
+    func adjustBottomContentInset(forHistoryView historyView: UIView) {
+        guard let noteEditorSuperview = noteEditorTextView.superview else {
+            return
+        }
+        let historyFrame = noteEditorSuperview.convert(historyView.bounds, from: historyView)
+        let bottomInset = noteEditorTextView.frame.maxY - historyFrame.origin.y
+
+        noteEditorTextView.contentInset.bottom = bottomInset
+        noteEditorTextView.scrollIndicatorInsets.bottom = bottomInset
+    }
+
+    func restoreDefaultBottomContentInset() {
+        noteEditorTextView.contentInset.bottom = noteEditorTextView.defaultBottomInset
+        noteEditorTextView.scrollIndicatorInsets.bottom = 0
+    }
+}
+
+// MARK: - Editor content
+//
 private extension SPNoteEditorViewController {
     func updateEditor(with content: String, animated: Bool = false) {
         var snapshot: UIView?

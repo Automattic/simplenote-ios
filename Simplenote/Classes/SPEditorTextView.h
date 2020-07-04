@@ -23,6 +23,8 @@
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 
+@property (nonatomic, readonly) CGFloat defaultBottomInset;
+
 - (void)scrollToBottom;
 - (void)scrollToTop;
 - (void)processChecklists;
