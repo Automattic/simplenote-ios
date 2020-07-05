@@ -16,6 +16,21 @@ extension UIColor {
 
         return theme.color(forKey: name.legacyColorKey.rawValue)
     }
+
+    /// Initializes a new UIColor instance with a given Dark / Light colors.
+    ///
+    static func color(lightColor: @autoclosure @escaping () -> UIColor,
+                      darkColor: @autoclosure @escaping () -> UIColor) -> UIColor {
+        guard #available(iOS 13.0, *) else {
+            let targetColor = SPUserInterface.isDark ? darkColor : lightColor
+            return targetColor()
+        }
+
+        return UIColor(dynamicProvider: { traits in
+            let targetColor = traits.userInterfaceStyle == .dark ? darkColor : lightColor
+            return targetColor()
+        })
+    }
 }
 
 // MARK: - Private

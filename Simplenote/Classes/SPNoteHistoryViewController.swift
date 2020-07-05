@@ -28,18 +28,18 @@ class SPNoteHistoryViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        stopListeningToNotifications()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        styleDateLabel()
-        styleErrorMessageLabel()
-        styleSlider()
-        styleRestoreButton()
-        styleActivityIndicator()
-
+        refreshStyle()
         configureAccessibility()
-
         listenForSliderValueChanges()
+
+        startListeningToNotifications()
 
         controller.observer = { [weak self] state in
             self?.update(with: state)
@@ -53,6 +53,14 @@ class SPNoteHistoryViewController: UIViewController {
 // MARK: - Private Methods
 //
 private extension SPNoteHistoryViewController {
+    func refreshStyle() {
+        styleDateLabel()
+        styleErrorMessageLabel()
+        styleSlider()
+        styleRestoreButton()
+        styleActivityIndicator()
+    }
+
     func styleDateLabel() {
         dateLabel.textColor = .simplenoteNoteHeadlineColor
     }
@@ -62,14 +70,15 @@ private extension SPNoteHistoryViewController {
     }
 
     func styleSlider() {
-        let color = UIColor.simplenoteGray50Color.withAlphaComponent(0.2)
+        let color = UIColor.color(lightColor: UIColor.simplenoteGray50Color.withAlphaComponent(Constants.sliderBackgroundAlphaLight),
+                                  darkColor: UIColor.simplenoteGray50Color.withAlphaComponent(Constants.sliderBackgroundAlphaDark))
         slider.minimumTrackTintColor = color
         slider.maximumTrackTintColor = color
     }
 
     func styleRestoreButton() {
         restoreButton.layer.masksToBounds = true
-        
+
         restoreButton.setBackgroundImage(UIColor.simplenoteBlue50Color.dynamicImageRepresentation(), for: .normal)
         restoreButton.setBackgroundImage(UIColor.simplenoteDisabledButtonBackgroundColor.dynamicImageRepresentation(), for: .disabled)
         restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
@@ -81,7 +90,7 @@ private extension SPNoteHistoryViewController {
         if #available(iOS 13.0, *) {
             activityIndicator.style = .medium
         } else {
-            activityIndicator.style = .gray
+            activityIndicator.style = SPUserInterface.isDark ? .white : .gray
         }
     }
 
@@ -181,6 +190,23 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Notifications
+//
+private extension SPNoteHistoryViewController {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
+    }
+}
+
 // MARK: - Tracking
 //
 private extension SPNoteHistoryViewController {
@@ -212,5 +238,14 @@ extension SPNoteHistoryViewController {
 
     private func updateSliderAccessibilityValue(with item: SPNoteHistoryController.Presentable) {
         slider.accessibilityValue = item.date
+    }
+}
+
+// MARK: - Constants
+//
+private extension SPNoteHistoryViewController {
+    struct Constants {
+        static let sliderBackgroundAlphaLight: CGFloat = 0.2
+        static let sliderBackgroundAlphaDark: CGFloat = 0.36
     }
 }
