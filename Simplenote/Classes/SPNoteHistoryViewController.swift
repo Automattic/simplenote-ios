@@ -68,7 +68,12 @@ private extension SPNoteHistoryViewController {
     }
 
     func styleRestoreButton() {
-        restoreButton.backgroundColor = restoreButton.isEnabled ? .simplenoteBlue50Color : .simplenoteDisabledButtonBackgroundColor
+        restoreButton.layer.masksToBounds = true
+        
+        restoreButton.setBackgroundImage(UIColor.simplenoteBlue50Color.dynamicImageRepresentation(), for: .normal)
+        restoreButton.setBackgroundImage(UIColor.simplenoteDisabledButtonBackgroundColor.dynamicImageRepresentation(), for: .disabled)
+        restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
+
         restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
     }
 
@@ -117,7 +122,6 @@ private extension SPNoteHistoryViewController {
 
         dateLabel.text = item.date
         restoreButton.isEnabled = item.isRestorable
-        styleRestoreButton()
 
         updateSliderAccessibilityValue(with: item)
 
