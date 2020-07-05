@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="yP9-LW-2C9" id="izn-o3-tAN"/>
                 <outlet property="dateLabel" destination="0Zh-yW-YrO" id="hp9-x6-fqO"/>
+                <outlet property="dismissButton" destination="obJ-JD-gy5" id="GcT-cW-Qng"/>
                 <outlet property="errorMessageLabel" destination="iEj-sR-6XD" id="XGR-QD-bu9"/>
                 <outlet property="restoreButton" destination="TQJ-NT-WS8" id="v59-2G-mU4"/>
                 <outlet property="slider" destination="DfP-am-H0U" id="FT0-gY-qCq"/>
@@ -29,13 +30,13 @@
                         <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7f5-fi-pTi">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="22"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-yW-YrO">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-yW-YrO">
                                     <rect key="frame" x="0.0" y="0.0" width="352" height="20.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obJ-JD-gy5">
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obJ-JD-gy5">
                                     <rect key="frame" x="360" y="0.0" width="22" height="22"/>
                                     <state key="normal" image="button_delete_small"/>
                                     <connections>

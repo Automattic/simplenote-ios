@@ -74,6 +74,8 @@ extension SPNoteEditorViewController {
         UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
             self.restoreDefaultBottomContentInset()
         }
+
+        resetAccessibilityFocus()
     }
 }
 
@@ -126,5 +128,12 @@ private extension SPNoteEditorViewController {
                            animations: animations,
                            completion: completion)
         }
+    }
+}
+
+// MARK: - Accessibility
+private extension SPNoteEditorViewController {
+    func resetAccessibilityFocus() {
+        UIAccessibility.post(notification: .layoutChanged, argument: nil)
     }
 }

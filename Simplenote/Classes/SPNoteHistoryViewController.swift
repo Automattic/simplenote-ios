@@ -8,6 +8,7 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var slider: SPSnappingSlider!
     @IBOutlet private weak var restoreButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var dismissButton: UIButton!
 
     private let controller: SPNoteHistoryController
     private var items: [SPNoteHistoryController.Presentable] = []
@@ -35,6 +36,8 @@ class SPNoteHistoryViewController: UIViewController {
         styleSlider()
         styleRestoreButton()
         styleActivityIndicator()
+
+        configureAccessibility()
 
         listenForSliderValueChanges()
 
@@ -84,6 +87,8 @@ private extension SPNoteHistoryViewController {
             setActivityIndicatorVisible(true)
             setErrorMessageVisible(false)
 
+            setAccessibilityFocus(activityIndicator)
+
         case .results(let items):
             setMainContentVisible(true)
             setActivityIndicatorVisible(false)
@@ -93,12 +98,16 @@ private extension SPNoteHistoryViewController {
 
             configureSlider()
 
+            setAccessibilityFocus(slider)
+
         case .error(let text):
             setMainContentVisible(false)
             setActivityIndicatorVisible(false)
             setErrorMessageVisible(true)
 
             errorMessageLabel.text = text
+
+            setAccessibilityFocus(errorMessageLabel)
         }
     }
 
@@ -109,6 +118,8 @@ private extension SPNoteHistoryViewController {
         dateLabel.text = item.date
         restoreButton.isEnabled = item.isRestorable
         styleRestoreButton()
+
+        updateSliderAccessibilityValue(with: item)
 
         controller.selectVersion(atIndex: index)
     }
@@ -175,5 +186,27 @@ private extension SPNoteHistoryViewController {
 
     func trackRestore() {
         SPTracker.trackEditorNoteRestored()
+    }
+}
+
+// MARK: - Accessibility
+//
+extension SPNoteHistoryViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        controller.handleTapOnCloseButton()
+        return true
+    }
+
+    private func setAccessibilityFocus(_ element: UIView) {
+        UIAccessibility.post(notification: .layoutChanged, argument: element)
+    }
+
+    private func configureAccessibility() {
+        dismissButton.accessibilityLabel = NSLocalizedString("note-history-dismiss-button-accessibility-label", comment: "Accessiblity label describing a button used to dismiss a history view of the note")
+        slider.accessibilityLabel = NSLocalizedString("note-history-slider-accessibility-label", comment: "Accessiblity label describing a slider used to reset the current note to a previous version")
+    }
+
+    private func updateSliderAccessibilityValue(with item: SPNoteHistoryController.Presentable) {
+        slider.accessibilityValue = item.date
     }
 }
