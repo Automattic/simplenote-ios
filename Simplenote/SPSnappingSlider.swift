@@ -1,25 +1,25 @@
 import UIKit
 
+// MARK: - SPSnappingSlider - Slider that snaps to certain values
+//
 @IBDesignable
 final class SPSnappingSlider: UISlider {
 
+    /// Step for snapping
+    ///
     @IBInspectable
     var step: Float = 1.0 {
         didSet {
-            handleValueChange()
+            setValue(value, animated: false)
         }
     }
 
-    var onValueChange: ((Float) -> Void)?
-    private(set) var snappedValue: Float = 0.0 {
-        didSet {
-            if oldValue != snappedValue {
-                feedbackGenerator?.selectionChanged()
-                onValueChange?(snappedValue)
-            }
-        }
-    }
+    /// Callback to be executed when snapped value is updated
+    ///
+    var onSnappedValueChange: ((Float) -> Void)?
 
+    /// Feedback generator is used to notify the user about changes in selection
+    ///
     private var feedbackGenerator: UISelectionFeedbackGenerator?
 
     override init(frame: CGRect) {
@@ -31,25 +31,34 @@ final class SPSnappingSlider: UISlider {
         super.init(coder: coder)
         configure()
     }
+
+    /// Set and snap a value according to the step
+    ///
+    override func setValue(_ value: Float, animated: Bool) {
+        let oldValue = self.value
+
+        var value = max(value, minimumValue)
+        value = min(value, maximumValue)
+        value = round(value / step) * step
+
+        super.setValue(value, animated: animated)
+
+        if oldValue != value {
+            feedbackGenerator?.selectionChanged()
+            onSnappedValueChange?(value)
+        }
+    }
 }
 
+// MARK: - Private Methods
+//
 private extension SPSnappingSlider {
     func configure() {
-        addTarget(self, action: #selector(handleValueChange), for: .valueChanged)
-        handleValueChange()
-
-        configureImpactGenerator()
+        configureFeedbackGenerator()
     }
 
-    func configureImpactGenerator() {
+    func configureFeedbackGenerator() {
         feedbackGenerator = UISelectionFeedbackGenerator()
         feedbackGenerator?.prepare()
-    }
-
-    @objc
-    func handleValueChange() {
-        let value = round(self.value / step) * step
-        setValue(value, animated: false)
-        snappedValue = value
     }
 }

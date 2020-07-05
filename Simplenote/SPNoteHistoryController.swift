@@ -43,7 +43,7 @@ final class SPNoteHistoryController {
         case restore
     }
 
-    /// Observer sends changes in the state (to history view controller)
+    /// Observer sends changes of the state (to history view controller)
     /// When assigned, it sends current state
     ///
     var observer: ((State) -> Void)? {

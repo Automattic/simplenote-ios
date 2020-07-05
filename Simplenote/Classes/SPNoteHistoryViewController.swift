@@ -118,7 +118,7 @@ private extension SPNoteHistoryViewController {
 //
 private extension SPNoteHistoryViewController {
     func listenForSliderValueChanges() {
-        slider.onValueChange = { [weak self] value in
+        slider.onSnappedValueChange = { [weak self] value in
             self?.update(withSliderValue: value)
         }
     }
