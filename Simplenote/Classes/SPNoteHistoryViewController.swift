@@ -59,6 +59,7 @@ private extension SPNoteHistoryViewController {
         styleSlider()
         styleRestoreButton()
         styleActivityIndicator()
+        styleDismissButton()
     }
 
     func styleDateLabel() {
@@ -70,10 +71,8 @@ private extension SPNoteHistoryViewController {
     }
 
     func styleSlider() {
-        let color = UIColor.color(lightColor: UIColor.simplenoteGray50Color.withAlphaComponent(Constants.sliderBackgroundAlphaLight),
-                                  darkColor: UIColor.simplenoteGray50Color.withAlphaComponent(Constants.sliderBackgroundAlphaDark))
-        slider.minimumTrackTintColor = color
-        slider.maximumTrackTintColor = color
+        slider.minimumTrackTintColor = .simplenoteSliderTrackColor
+        slider.maximumTrackTintColor = .simplenoteSliderTrackColor
     }
 
     func styleRestoreButton() {
@@ -84,6 +83,17 @@ private extension SPNoteHistoryViewController {
         restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
 
         restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
+    }
+
+    func styleDismissButton() {
+        dismissButton.layer.masksToBounds = true
+
+        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
+
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
+
+        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 
     func styleActivityIndicator() {
@@ -238,14 +248,5 @@ extension SPNoteHistoryViewController {
 
     private func updateSliderAccessibilityValue(with item: SPNoteHistoryController.Presentable) {
         slider.accessibilityValue = item.date
-    }
-}
-
-// MARK: - Constants
-//
-private extension SPNoteHistoryViewController {
-    struct Constants {
-        static let sliderBackgroundAlphaLight: CGFloat = 0.2
-        static let sliderBackgroundAlphaDark: CGFloat = 0.36
     }
 }

@@ -5,6 +5,21 @@ import Foundation
 //
 extension UIColor {
 
+    /// Initializes a new UIColor instance with a given Dark / Light colors.
+    ///
+    static func color(lightColor: @autoclosure @escaping () -> UIColor,
+                      darkColor: @autoclosure @escaping () -> UIColor) -> UIColor {
+        guard #available(iOS 13.0, *) else {
+            let targetColor = SPUserInterface.isDark ? darkColor : lightColor
+            return targetColor()
+        }
+
+        return UIColor(dynamicProvider: { traits in
+            let targetColor = traits.userInterfaceStyle == .dark ? darkColor : lightColor
+            return targetColor()
+        })
+    }
+
     /// Initializes a new UIColor instance with a given ColorStudio value
     ///
     convenience init(studioColor: ColorStudio) {
@@ -194,6 +209,21 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteCardDismissButtonBackgroundColor: UIColor {
+        UIColor(lightColor: .gray5, darkColor: .gray70)
+    }
+
+    @objc
+    static var simplenoteCardDismissButtonHighlightedBackgroundColor: UIColor {
+        UIColor(lightColor: .gray10, darkColor: .gray80)
+    }
+
+    @objc
+    static var simplenoteCardDismissButtonTintColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray20)
+    }
+
+    @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
         UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
     }
@@ -294,6 +324,11 @@ extension UIColor {
         UIColor(lightColor: .gray20, darkColor: .gray70)
     }
 
+    @objc
+    static var simplenoteSliderTrackColor: UIColor {
+        UIColor.color(lightColor: UIColor.simplenoteGray50Color.withAlphaComponent(UIKitConstants.alpha0_2),
+                      darkColor: UIColor.simplenoteGray50Color.withAlphaComponent(UIKitConstants.alpha0_4))
+    }
 
 ///    #### PENDINGS
 
