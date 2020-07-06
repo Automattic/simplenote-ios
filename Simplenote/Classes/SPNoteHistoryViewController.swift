@@ -136,7 +136,7 @@ private extension SPNoteHistoryViewController {
 private extension SPNoteHistoryViewController {
     func setMainContentVisible(_ isVisible: Bool) {
         [dateLabel, slider, restoreButton].forEach {
-            $0?.alpha = isVisible ? 1.0 : 0.0
+            $0?.alpha = isVisible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
         }
     }
 
@@ -149,7 +149,7 @@ private extension SPNoteHistoryViewController {
     }
 
     func setErrorMessageVisible(_ isVisible: Bool) {
-        errorMessageLabel.alpha = isVisible ? 1.0 : 0.0
+        errorMessageLabel.alpha = isVisible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
     }
 }
 
