@@ -1908,6 +1908,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewVersionAction:(id)sender {
+    if (bSearching) {
+        [self endSearching:_noteEditorTextView];
+    }
+    
     [self save];
     [self showHistory];
 }
