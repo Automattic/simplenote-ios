@@ -242,8 +242,9 @@ extension SPNoteHistoryViewController {
     }
 
     private func configureAccessibility() {
-        dismissButton.accessibilityLabel = NSLocalizedString("note-history-dismiss-button-accessibility-label", comment: "Accessiblity label describing a button used to dismiss a history view of the note")
-        slider.accessibilityLabel = NSLocalizedString("note-history-slider-accessibility-label", comment: "Accessiblity label describing a slider used to reset the current note to a previous version")
+        dismissButton.accessibilityLabel = NSLocalizedString("Dismiss History", comment: "Accessibility label describing a button used to dismiss a history view of the note")
+        slider.accessibilityLabel = NSLocalizedString("Select a Version", comment: "Accessibility label describing a slider used to reset the current note to a previous version")
+        activityIndicator.accessibilityLabel = NSLocalizedString("Loading Versions", comment: "Accessibility label describing activity indicator loading note versions")
     }
 
     private func updateSliderAccessibilityValue(with item: SPNoteHistoryController.Presentable) {
