@@ -780,7 +780,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self.checklistButton.hidden = !self.isEditingNote;
     self.keyboardButton.hidden = shouldHideKeyboardButton;
-    self.createNoteButton.hidden = !shouldHideKeyboardButton;
+    self.createNoteButton.hidden = !shouldHideKeyboardButton || [self isShowingHistory];
+    self.actionButton.hidden = [self isShowingHistory];
 }
 
 - (BOOL)shouldHideKeyboardButton

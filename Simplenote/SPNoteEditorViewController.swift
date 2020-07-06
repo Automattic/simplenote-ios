@@ -27,6 +27,8 @@ extension SPNoteEditorViewController {
 
         adjustBottomContentInset(forHistoryView: viewController.view)
         noteEditorTextView.isReadOnly = true
+
+        refreshNavigationBarButtons()
     }
 
     private func newHistoryViewController() -> SPCardViewController {
@@ -75,6 +77,7 @@ extension SPNoteEditorViewController {
             self.restoreDefaultBottomContentInset()
         }
 
+        refreshNavigationBarButtons()
         resetAccessibilityFocus()
     }
 }
