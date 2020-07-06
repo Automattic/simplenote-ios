@@ -18,8 +18,7 @@ final class SPHistoryLoader {
     private var completion: (([Item]) -> Void)?
     private var data: [Int: [String: Any]] = [:]
     private var sortedItems: [Item] {
-        self.data
-            .map({ Item(version: $0, data: $1) })
+        data.map({ Item(version: $0, data: $1) })
             .sorted(by: { $0.version < $1.version })
     }
 
@@ -33,7 +32,7 @@ final class SPHistoryLoader {
     init(bucket: SPBucket, simperiumKey: String, currentVersion: Int) {
         self.bucket = bucket
         self.simperiumKey = simperiumKey
-        self.amountOfVersionsToLoad = min(currentVersion, Constants.maxNumberOfVersions)
+        amountOfVersionsToLoad = min(currentVersion, Constants.maxNumberOfVersions)
     }
 
     /// Load verions
