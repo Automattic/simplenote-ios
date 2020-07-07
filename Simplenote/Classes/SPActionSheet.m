@@ -135,7 +135,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         textButton.titleLabel.textColor = [UIColor simplenoteTextColor];
         [textButton setTitle:string forState:UIControlStateNormal];
         
-        [textButton setTitleColor:[UIColor colorWithName:UIColorNameActionSheetButtonFontColor]
+        [textButton setTitleColor:[UIColor simplenoteTintColor]
                          forState:UIControlStateNormal];
 
         [textButton addTarget:self
