@@ -27,22 +27,6 @@ final class SPNoteHistoryController {
         case error(String)
     }
 
-    // MARK: - Event which is sent to a delegate
-    //
-    enum Event {
-        /// Request to be dismissed
-        ///
-        case dismiss
-
-        /// Preview version content
-        ///
-        case preview(String)
-
-        /// Restore content to selected version
-        ///
-        case restore
-    }
-
     /// Observer sends changes of the state (to history view controller)
     /// When assigned, it sends current state
     ///
@@ -54,7 +38,7 @@ final class SPNoteHistoryController {
 
     /// Delegate
     ///
-    var delegate: ((Event) -> Void)?
+    weak var delegate: SPNoteHistoryControllerDelegate?
 
     private let note: Note
     private let loader: SPHistoryLoader
@@ -90,13 +74,13 @@ extension SPNoteHistoryController {
     /// User tapped on close button
     ///
     func handleTapOnCloseButton() {
-        delegate?(.dismiss)
+        delegate?.noteHistoryControllerDidCancel()
     }
 
     /// User tapped on restore button
     ///
     func handleTapOnRestoreButton() {
-        delegate?(.restore)
+        delegate?.noteHistoryControllerDidFinish()
     }
 
     /// User selected a version
@@ -104,7 +88,7 @@ extension SPNoteHistoryController {
     func selectVersion(atIndex index: Int) {
         let item = historyItems[index]
         let content = item.data["content"] as? String
-        delegate?(.preview(content ?? ""))
+        delegate?.noteHistoryControllerDidSelectVersion(with: content ?? "")
     }
 
     /// Invoked when view is loaded
