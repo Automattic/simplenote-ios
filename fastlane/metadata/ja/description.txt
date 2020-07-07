@@ -30,6 +30,7 @@ Simplenote では、メモ書き、ToDo リストの作成、アイデアのメ�
 
 プライバシーポリシー :https://automattic.com/privacy/
 利用規約 :https://simplenote.com/terms/
+California users privacy notice: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
 
 --
 
