@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - SPNoteEditorViewController: Extension for swift code
+// MARK: - History
 //
 extension SPNoteEditorViewController {
 
@@ -70,6 +70,8 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Editor
+//
 private extension SPNoteEditorViewController {
     func updateEditor(with content: String, animated: Bool = false) {
         var snapshot: UIView?
