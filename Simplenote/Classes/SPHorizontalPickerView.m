@@ -112,7 +112,7 @@ static NSString *itemIdentifier = @"horizontalPickerItem";
         itemCollectionView.showsHorizontalScrollIndicator = NO;
         itemCollectionView.backgroundColor = [UIColor clearColor];
         
-        self.backgroundColor = [UIColor simplenoteBackgroundColor];
+        self.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
 
         // add gradients
         leftGradientView = [[SPHorizontalPickerGradientView alloc] initWithGradientViewDirection:SPHorizontalPickerGradientViewDirectionLeft];
