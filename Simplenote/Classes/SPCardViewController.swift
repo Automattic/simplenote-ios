@@ -48,7 +48,9 @@ extension SPCardViewController {
         viewController.addChild(self)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        let containerView = viewController.view!
+        guard let containerView = viewController.view else {
+            fatalError("Can't load view")
+        }
         containerView.addSubview(view)
 
         setupConstraints(withContainerView: containerView)
