@@ -101,15 +101,15 @@ extension SPCardViewController {
     }
 
     private func setupConstraints(withContainerView containerView: UIView) {
-        let bottomToBottomConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
-        let topToBottomConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
+        let bottomToBottomConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        let topToBottomConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor)
 
         self.bottomToBottomConstraint = bottomToBottomConstraint
         self.topToBottomConstraint = topToBottomConstraint
 
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
-            view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0),
+            view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             topToBottomConstraint
         ])
     }
