@@ -55,7 +55,7 @@ extension SPCardViewController {
 
         containerView.layoutIfNeeded()
 
-        let animations = { () -> Void in
+        let animations = {
             self.topToBottomConstraint?.isActive = false
             self.bottomToBottomConstraint?.isActive = true
             containerView.layoutIfNeeded()
@@ -79,7 +79,7 @@ extension SPCardViewController {
 
         willMove(toParent: nil)
 
-        let animations = { () -> Void in
+        let animations = {
             self.bottomToBottomConstraint?.isActive = false
             self.topToBottomConstraint?.isActive = true
             self.view.superview?.layoutIfNeeded()
