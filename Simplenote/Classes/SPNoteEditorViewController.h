@@ -18,7 +18,6 @@
     
     // BOOLS
     BOOL bBlankNote;
-    BOOL bModified;
     BOOL bDisableShrinkingNavigationBar;
     BOOL bShouldDelete;
     BOOL beditingTags;
