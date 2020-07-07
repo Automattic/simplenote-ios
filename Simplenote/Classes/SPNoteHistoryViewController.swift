@@ -149,7 +149,7 @@ private extension SPNoteHistoryViewController {
     }
 
     func setErrorMessageVisible(_ isVisible: Bool) {
-        errorMessageLabel.alpha = isVisible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
+        errorMessageLabel.isHidden = !isVisible
     }
 }
 
