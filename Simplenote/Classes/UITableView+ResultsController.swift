@@ -42,7 +42,25 @@ extension UITableView {
         }, completion: onCompletion)
     }
 
+    /// This API applies Section and Object Changesets over the receiver.
+    /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
+    ///
     func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset) {
+        /// Approach Based on WWDC 2020 @ Labs Recommendations
+        ///
+        /// **Step 1:**  Apply Structural Changes: inserts and deletes
+        ///
+        performRowChanges(objectsChangeset.deleted)
+        performSectionChanges(sectionsChangeset.deleted)
+
+        performSectionChanges(sectionsChangeset.inserted)
+        performRowChanges(objectsChangeset.inserted)
+
+        /// **Step 2:** Apply Content Changes: moves and updates
+        ///
+        performRowChanges(objectsChangeset.moved)
+        performRowChanges(objectsChangeset.updated)
+    }
 
     func performRowChanges(_ rowChanges: [ResultsObjectChange], animations: ResultsTableAnimations = .standard) {
         for change in rowChanges {
