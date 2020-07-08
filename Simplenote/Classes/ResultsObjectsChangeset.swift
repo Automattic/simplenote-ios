@@ -4,10 +4,9 @@ import Foundation
 // MARK: - Changeset: Objects
 //
 struct ResultsObjectsChangeset {
-    let deleted:    [ResultsObjectChange]
-    let inserted:   [ResultsObjectChange]
-    let moved:      [ResultsObjectChange]
-    let updated:    [ResultsObjectChange]
+    let deleted:    [IndexPath]
+    let inserted:   [IndexPath]
+    let updated:    [IndexPath]
 }
 
 
@@ -16,24 +15,30 @@ struct ResultsObjectsChangeset {
 extension ResultsObjectsChangeset {
 
     init(objectChanges: [ResultsObjectChange]) {
-        var deleted     = [ResultsObjectChange]()
-        var inserted    = [ResultsObjectChange]()
-        var moved       = [ResultsObjectChange]()
-        var updated     = [ResultsObjectChange]()
+        var deleted     = [IndexPath]()
+        var inserted    = [IndexPath]()
+        var updated     = [IndexPath]()
 
         for change in objectChanges {
             switch change {
-            case .delete:
-                deleted.append(change)
-            case .insert:
-                inserted.append(change)
-            case .move:
-                moved.append(change)
-            case .update:
-                updated.append(change)
+            case .delete(let indexPath):
+                deleted.append(indexPath)
+
+            case .insert(let indexPath):
+                inserted.append(indexPath)
+
+            case .move(let oldIndexPath, let newIndexPath):
+                deleted.append(oldIndexPath)
+                inserted.append(newIndexPath)
+
+                // WWDC 2020 @ Labs Recommendation
+                updated.append(newIndexPath)
+
+            case .update(let indexPath):
+                updated.append(indexPath)
             }
         }
 
-        self.init(deleted: deleted, inserted: inserted, moved: moved, updated: updated)
+        self.init(deleted: deleted, inserted: inserted, updated: updated)
     }
 }
