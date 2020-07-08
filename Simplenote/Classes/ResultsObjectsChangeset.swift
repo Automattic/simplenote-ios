@@ -39,6 +39,13 @@ extension ResultsObjectsChangeset {
             }
         }
 
+        // Sorting:
+        //  - Insertions: Ascending
+        //  - Deletions: Descending
+        //
+        deleted.sort(by: >)
+        inserted.sort(by: <)
+
         self.init(deleted: deleted, inserted: inserted, updated: updated)
     }
 }

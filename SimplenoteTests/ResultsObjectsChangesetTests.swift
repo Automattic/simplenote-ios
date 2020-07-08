@@ -48,6 +48,32 @@ class ResultsObjectsChangesetTests: XCTestCase {
 
         XCTAssertEqual(changeset.updated.count, updates.count)
     }
+
+    /// Verifies that `ResultsObjectsChangeset` sorts `delete` changes in a DESC order
+    ///
+    func testDeleteChangesAreSortedDescending() {
+        let changes = newSampleObjectsChanges()
+        let changeset = ResultsObjectsChangeset(objectChanges: changes)
+        let deleted = changeset.deleted
+
+        for (index, current) in deleted.enumerated() where index < deleted.count - 1 {
+            let next = deleted[index + 1]
+            XCTAssert(current >= next)
+        }
+    }
+
+    /// Verifies that `ResultsObjectsChangeset` sorts `inserted` changes in an ASC order
+    ///
+    func testInsertChangesAreSortedDescending() {
+        let changes = newSampleObjectsChanges()
+        let changeset = ResultsObjectsChangeset(objectChanges: changes)
+        let inserted = changeset.inserted
+
+        for (index, current) in inserted.enumerated() where index < inserted.count - 1 {
+            let next = inserted[index + 1]
+            XCTAssert(current <= next)
+        }
+    }
 }
 
 
