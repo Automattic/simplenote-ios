@@ -6,25 +6,47 @@ import XCTest
 //
 class ResultsObjectsChangesetTests: XCTestCase {
 
-    /// Verifies that `ResultsObjectsChangeset` properly groups `delete` changes`
+    /// Verifies that `ResultsObjectsChangeset` properly groups `delete` changes.
     ///
     func testDeleteChangesAreProperlyGrouped() {
         let sampleChanges = newSampleObjectsChanges()
         let changeset = ResultsObjectsChangeset(objectChanges: sampleChanges)
+        var deleteChanges = [IndexPath]()
 
         for change in sampleChanges {
             switch change {
-            case .insert(let indexPath):
-                XCTAssert(changeset.inserted.contains(indexPath))
             case .delete(let indexPath):
-                XCTAssert(changeset.deleted.contains(indexPath))
-            case .move(let oldIndexPath, let newIndexPath):
-                XCTAssert(changeset.deleted.contains(oldIndexPath))
-                XCTAssert(changeset.inserted.contains(newIndexPath))
-            case .update(let indexPath):
-                XCTAssert(changeset.updated.contains(indexPath))
+                deleteChanges.append(indexPath)
+
+            case .move(let oldIndexPath, _):
+                deleteChanges.append(oldIndexPath)
+
+            default:
+                break
             }
         }
+
+        XCTAssertEqual(changeset.deleted.count, deleteChanges.count)
+    }
+
+    /// Verifies that `ResultsObjectsChangeset` properly groups `insert` changes.
+    ///
+    func testInsertChangesAreProperlyGrouped() {
+        let changes = newSampleObjectsChanges()
+        let changeset = ResultsObjectsChangeset(objectChanges: changes)
+        let insertions = extractInsertedPaths(from: changes)
+
+        XCTAssertEqual(changeset.inserted.count, insertions.count)
+    }
+
+    /// Verifies that `ResultsObjectsChangeset` properly groups `update` changes.
+    ///
+    func testUpdateChangesAreProperlyGrouped() {
+        let changes = newSampleObjectsChanges()
+        let changeset = ResultsObjectsChangeset(objectChanges: changes)
+        let updates = extractUpdatedPaths(from: changes)
+
+        XCTAssertEqual(changeset.updated.count, updates.count)
     }
 }
 
@@ -52,5 +74,50 @@ private extension ResultsObjectsChangesetTests {
         }
 
         return changes
+    }
+
+    func extractDeletedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
+        return changes.compactMap { change in
+            switch change {
+            case .delete(let indexPath):
+                return indexPath
+
+            case .move(let oldIndexPath, _):
+                return oldIndexPath
+
+            default:
+                return nil
+            }
+        }
+    }
+
+    func extractInsertedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
+        return changes.compactMap { change in
+            switch change {
+            case .insert(let indexPath):
+                return indexPath
+
+            case .move(_, let newIndexPath):
+                return newIndexPath
+
+            default:
+                return nil
+            }
+        }
+    }
+
+    func extractUpdatedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
+        return changes.compactMap { change in
+            switch change {
+            case .move(_, let newIndexPath):
+                return newIndexPath
+
+            case .update(let indexPath):
+                return indexPath
+
+            default:
+                return nil
+            }
+        }
     }
 }
