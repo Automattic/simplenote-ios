@@ -33,7 +33,7 @@ enum ColorStudio: String {
     case darkGray1      = "1C1C1E"
     case darkGray2      = "2C2C2E"
     case darkGray3      = "3A3A3C"
-    case darkGray4      = "636366"
+    case darkGray4      = "545458"
     case gray0          = "f6f7f7"
     case gray5          = "dcdcde"
     case gray10         = "c3c4c7"
