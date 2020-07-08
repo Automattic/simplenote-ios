@@ -32,75 +32,47 @@ struct ResultsTableAnimations {
 //
 extension UITableView {
 
-    func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: @escaping (Bool) -> Void) {
+    func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: ((Bool) -> Void)? = nil) {
         let objectsChangeset = ResultsObjectsChangeset(objectChanges: objectChanges)
         let sectionsChangeset = ResultsSectionsChangeset(sectionChanges: sectionChanges)
 
         performBatchUpdates({
             self.performChanges(objectsChangeset: objectsChangeset, sectionsChangeset: sectionsChangeset)
 
-        }, completion: onCompletion)
+        }, completion: { success in
+            onCompletion?(success)
+        })
     }
 
     /// This API applies Section and Object Changesets over the receiver.
     /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
     ///
-    func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset) {
+    func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset, animations: ResultsTableAnimations = .standard) {
         /// Approach Based on WWDC 2020 @ Labs Recommendations
         ///
-        /// **Step 1:**  Apply Structural Changes: inserts and deletes
+        /// **Step 1:**  Structural Changes: Delete OP(s)
         ///
-        performRowChanges(objectsChangeset.deleted)
-        performSectionChanges(sectionsChangeset.deleted)
+        if !objectsChangeset.deleted.isEmpty {
+            deleteRows(at: objectsChangeset.deleted, with: animations.delete)
+        }
 
-        performSectionChanges(sectionsChangeset.inserted)
-        performRowChanges(objectsChangeset.inserted)
+        if !sectionsChangeset.deleted.isEmpty {
+            deleteSections(sectionsChangeset.deleted, with: animations.delete)
+        }
 
-        /// **Step 2:** Apply Content Changes: moves and updates
+        /// **Step 2:**  Structural Changes: Insert OP(s)
+        if !sectionsChangeset.inserted.isEmpty {
+            insertSections(sectionsChangeset.inserted, with: animations.insert)
+        }
+
+        if !objectsChangeset.inserted.isEmpty {
+            insertRows(at: objectsChangeset.inserted, with: animations.insert)
+        }
+
+        /// **Step 3:** Content Changes: Update OP(s)
         ///
-        performRowChanges(objectsChangeset.moved)
-        performRowChanges(objectsChangeset.updated)
-    }
-
-    func performRowChanges(_ rowChanges: [ResultsObjectChange], animations: ResultsTableAnimations = .standard) {
-        for change in rowChanges {
-            performRowChange(change, animations: animations)
-        }
-    }
-
-    func performSectionChanges(_ sectionChanges: [ResultsSectionChange], animations: ResultsTableAnimations = .standard) {
-        for change in sectionChanges {
-            performSectionChange(change, animations: animations)
-        }
-    }
-
-    func performRowChange(_ rowChange: ResultsObjectChange, animations: ResultsTableAnimations = .standard) {
-        switch rowChange {
-        case .delete(let indexPath):
-            deleteRows(at: [indexPath], with: animations.delete)
-
-        case .insert(let newIndexPath):
-            insertRows(at: [newIndexPath], with: animations.insert)
-
-        case .move(let oldIndexPath, let newIndexPath):
-            deleteRows(at: [oldIndexPath], with: animations.move)
-            insertRows(at: [newIndexPath], with: animations.move)
-
-            // WWDC 2020 @ Labs Recommendation
-            reloadRows(at: [newIndexPath], with: animations.move)
-
-        case .update(let indexPath):
-            reloadRows(at: [indexPath], with: animations.update)
-        }
-    }
-
-    func performSectionChange(_ sectionChange: ResultsSectionChange, animations: ResultsTableAnimations = .standard) {
-        switch sectionChange {
-        case .delete(let sectionIndex):
-            deleteSections(IndexSet(integer: sectionIndex), with: animations.delete)
-
-        case .insert(let sectionIndex):
-            insertSections(IndexSet(integer: sectionIndex), with: animations.insert)
+        if !objectsChangeset.updated.isEmpty {
+            reloadRows(at: objectsChangeset.updated, with: animations.update)
         }
     }
 }
