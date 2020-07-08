@@ -176,6 +176,8 @@ private extension ResultsController {
 
             // Seriously, Apple?
             // https://developer.apple.com/library/archive/releasenotes/iPhone/NSFetchedResultsChangeMoveReportedAsNSFetchedResultsChangeUpdate/index.html
+            // Update: Not needed on iOS +13. Drop when possible!
+            //
             let fixedType: NSFetchedResultsChangeType = {
                 guard type == .update && newIndexPath != nil && newIndexPath != indexPath else {
                     return type
