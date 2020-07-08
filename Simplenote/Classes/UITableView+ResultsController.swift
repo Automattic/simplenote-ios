@@ -33,19 +33,30 @@ struct ResultsTableAnimations {
 extension UITableView {
 
     func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: @escaping (Bool) -> Void) {
-        performBatchUpdates({
-            for change in objectChanges {
-                self.resultsController(didChangeObject: change)
-            }
+        let objectsChangeset = ResultsObjectsChangeset(objectChanges: objectChanges)
+        let sectionsChangeset = ResultsSectionsChangeset(sectionChanges: sectionChanges)
 
-            for change in sectionChanges {
-                self.resultsController(didChangeSection: change)
-            }
+        performBatchUpdates({
+            self.performChanges(objectsChangeset: objectsChangeset, sectionsChangeset: sectionsChangeset)
 
         }, completion: onCompletion)
     }
 
-    func resultsController(didChangeObject rowChange: ResultsObjectChange, animations: ResultsTableAnimations = .standard) {
+    func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset) {
+
+    func performRowChanges(_ rowChanges: [ResultsObjectChange], animations: ResultsTableAnimations = .standard) {
+        for change in rowChanges {
+            performRowChange(change, animations: animations)
+        }
+    }
+
+    func performSectionChanges(_ sectionChanges: [ResultsSectionChange], animations: ResultsTableAnimations = .standard) {
+        for change in sectionChanges {
+            performSectionChange(change, animations: animations)
+        }
+    }
+
+    func performRowChange(_ rowChange: ResultsObjectChange, animations: ResultsTableAnimations = .standard) {
         switch rowChange {
         case .delete(let indexPath):
             deleteRows(at: [indexPath], with: animations.delete)
@@ -62,7 +73,7 @@ extension UITableView {
         }
     }
 
-    func resultsController(didChangeSection sectionChange: ResultsSectionChange, animations: ResultsTableAnimations = .standard) {
+    func performSectionChange(_ sectionChange: ResultsSectionChange, animations: ResultsTableAnimations = .standard) {
         switch sectionChange {
         case .delete(let sectionIndex):
             deleteSections(IndexSet(integer: sectionIndex), with: animations.delete)
