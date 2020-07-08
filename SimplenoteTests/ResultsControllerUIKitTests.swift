@@ -18,6 +18,14 @@ class ResultsControllerUIKitTests: XCTestCase {
     ///
     private var resultsController: ResultsController<Note>!
 
+    /// Section Changes
+    ///
+    private var sectionChanges = [ResultsSectionChange]()
+
+    /// Object Changes
+    ///
+    private var objectChanges = [ResultsObjectChange]()
+
 
     // MARK: - Overridden Methods
     override func setUp() {
@@ -33,46 +41,27 @@ class ResultsControllerUIKitTests: XCTestCase {
         }()
 
         resultsController.onWillChangeContent = { [weak self] in
-            self?.tableView.beginUpdates()
+            self?.sectionChanges.removeAll()
+            self?.objectChanges.removeAll()
         }
 
         resultsController.onDidChangeContent = { [weak self] in
-            self?.tableView.endUpdates()
+            guard let `self` = self else {
+                return
+            }
+
+            self.tableView.performBatchChanges(objectChanges: self.objectChanges, sectionChanges: self.sectionChanges)
         }
 
         resultsController.onDidChangeObject = { [weak self] change in
-            self?.tableView.performRowChange(change)
+            self?.objectChanges.append(change)
         }
 
         resultsController.onDidChangeSection = { [weak self] change in
-            self?.tableView.performSectionChange(change)
+            self?.sectionChanges.append(change)
         }
 
         try? resultsController.performFetch()
-    }
-
-
-    /// Verifies that `beginUpdates` + `endUpdates` are called in sequence.
-    ///
-    func testBeginAndEndUpdatesAreProperlyExecutedBeforeAndAfterPerformingUpdates() {
-        let expectation = self.expectation(description: "BeginUpdates Goes First")
-        expectation.expectedFulfillmentCount = 2
-        expectation.assertForOverFulfill = true
-
-        var beginUpdatesWasExecuted = false
-
-        tableView.onBeginUpdates = {
-            beginUpdatesWasExecuted = true
-            expectation.fulfill()
-        }
-
-        tableView.onEndUpdates = {
-            XCTAssertTrue(beginUpdatesWasExecuted)
-            expectation.fulfill()
-        }
-
-        storageManager.insertSampleNote()
-        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
     /// Verifies that inserted entities result in `tableView.insertRows`
