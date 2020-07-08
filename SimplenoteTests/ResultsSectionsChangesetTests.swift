@@ -39,7 +39,6 @@ class ResultsSectionsChangesetTests: XCTestCase {
         let uniquelInserts = IndexSet(insertions)
         XCTAssertEqual(changeset.inserted.count, uniquelInserts.count)
     }
-
 }
 
 
