@@ -14,10 +14,6 @@ struct ResultsTableAnimations {
     ///
     let insert: UITableView.RowAnimation = .fade
 
-    /// TableViewRowAnimation to be applied during Move OP's.
-    ///
-    let move: UITableView.RowAnimation = .fade
-
     /// TableViewRowAnimation to be applied during Update OP's.
     ///
     let update: UITableView.RowAnimation = .fade
@@ -42,14 +38,11 @@ extension UITableView {
         }, completion: onCompletion)
     }
 
-    /// This API applies Section and Object Changesets over the receiver.
+    /// This API applies Section and Object Changesets over the receiver. Based on WWDC 2020 @ Labs Recommendations
     /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
     ///
     func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset, animations: ResultsTableAnimations = .standard) {
-        /// Approach Based on WWDC 2020 @ Labs Recommendations
-        ///
-        /// **Step 1:**  Structural Changes: Delete OP(s)
-        ///
+        // Step 1: Structural Changes: Delete OP(s)
         if !objectsChangeset.deleted.isEmpty {
             deleteRows(at: objectsChangeset.deleted, with: animations.delete)
         }
@@ -58,7 +51,7 @@ extension UITableView {
             deleteSections(sectionsChangeset.deleted, with: animations.delete)
         }
 
-        /// **Step 2:**  Structural Changes: Insert OP(s)
+        // Step 2: Structural Changes: Insert OP(s)
         if !sectionsChangeset.inserted.isEmpty {
             insertSections(sectionsChangeset.inserted, with: animations.insert)
         }
@@ -67,8 +60,7 @@ extension UITableView {
             insertRows(at: objectsChangeset.inserted, with: animations.insert)
         }
 
-        /// **Step 3:** Content Changes: Update OP(s)
-        ///
+        // Step 3: Content Changes: Update OP(s)
         if !objectsChangeset.updated.isEmpty {
             reloadRows(at: objectsChangeset.updated, with: animations.update)
         }
