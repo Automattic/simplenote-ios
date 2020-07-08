@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - SPNoteEditorViewController: Extension for swift code
+// MARK: - History
 //
 extension SPNoteEditorViewController {
 
@@ -37,25 +37,7 @@ extension SPNoteEditorViewController {
         let historyViewController = SPNoteHistoryViewController(controller: controller)
         let cardViewController = SPCardViewController(viewController: historyViewController)
 
-        controller.delegate = { [weak self] event in
-            guard let self = self else {
-                return
-            }
-
-            switch event {
-            case .dismiss:
-                self.dismissHistory()
-                self.updateEditor(with: self.currentNote.content)
-
-            case .preview(let content):
-                self.updateEditor(with: content, animated: true)
-
-            case .restore:
-                self.dismissHistory()
-                self.isModified = true
-                self.save()
-            }
-        }
+        controller.delegate = self
 
         swiftCollaborators.historyLoader = loader
         swiftCollaborators.historyCardViewController = cardViewController
@@ -102,7 +84,26 @@ private extension SPNoteEditorViewController {
     }
 }
 
-// MARK: - Editor content
+// MARK: - History Delegate
+//
+extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
+    func noteHistoryControllerDidCancel() {
+        dismissHistory()
+        updateEditor(with: currentNote.content)
+    }
+
+    func noteHistoryControllerDidFinish() {
+        dismissHistory()
+        isModified = true
+        save()
+    }
+
+    func noteHistoryControllerDidSelectVersion(with content: String) {
+        updateEditor(with: content, animated: true)
+    }
+}
+
+// MARK: - Editor
 //
 private extension SPNoteEditorViewController {
     func updateEditor(with content: String, animated: Bool = false) {
@@ -135,6 +136,7 @@ private extension SPNoteEditorViewController {
 }
 
 // MARK: - Accessibility
+//
 private extension SPNoteEditorViewController {
     func resetAccessibilityFocus() {
         UIAccessibility.post(notification: .layoutChanged, argument: nil)

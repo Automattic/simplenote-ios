@@ -27,22 +27,6 @@ final class SPNoteHistoryController {
         case error(String)
     }
 
-    // MARK: - Event which is sent to a delegate
-    //
-    enum Event {
-        /// Request to be dismissed
-        ///
-        case dismiss
-
-        /// Preview version content
-        ///
-        case preview(String)
-
-        /// Restore content to selected version
-        ///
-        case restore
-    }
-
     /// Observer sends changes of the state (to history view controller)
     /// When assigned, it sends current state
     ///
@@ -54,7 +38,7 @@ final class SPNoteHistoryController {
 
     /// Delegate
     ///
-    var delegate: ((Event) -> Void)?
+    weak var delegate: SPNoteHistoryControllerDelegate?
 
     private let note: Note
     private let loader: SPHistoryLoader
@@ -90,21 +74,20 @@ extension SPNoteHistoryController {
     /// User tapped on close button
     ///
     func handleTapOnCloseButton() {
-        delegate?(.dismiss)
+        delegate?.noteHistoryControllerDidCancel()
     }
 
     /// User tapped on restore button
     ///
     func handleTapOnRestoreButton() {
-        delegate?(.restore)
+        delegate?.noteHistoryControllerDidFinish()
     }
 
     /// User selected a version
     ///
     func selectVersion(atIndex index: Int) {
         let item = historyItems[index]
-        let content = item.data["content"] as? String
-        delegate?(.preview(content ?? ""))
+        delegate?.noteHistoryControllerDidSelectVersion(with: item.content)
     }
 
     /// Invoked when view is loaded
@@ -130,11 +113,8 @@ private extension SPNoteHistoryController {
     }
 
     func presentable(from historyItem: SPHistoryLoader.Item) -> Presentable {
-        let timeInterval = historyItem.data["modificationDate"] as? TimeInterval
-        let date = Date(timeIntervalSince1970: timeInterval ?? 0)
         let noteVersion = Int(note.version() ?? "1") ?? 1
-
-        return Presentable(date: note.dateString(date, brief: false),
+        return Presentable(date: note.dateString(historyItem.modificationDate, brief: false),
                            isRestorable: noteVersion != historyItem.version)
     }
 }

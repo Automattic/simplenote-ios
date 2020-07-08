@@ -48,14 +48,16 @@ extension SPCardViewController {
         viewController.addChild(self)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        let containerView = viewController.view!
+        guard let containerView = viewController.view else {
+            fatalError("Can't load view")
+        }
         containerView.addSubview(view)
 
         setupConstraints(withContainerView: containerView)
 
         containerView.layoutIfNeeded()
 
-        let animations = { () -> Void in
+        let animations = {
             self.topToBottomConstraint?.isActive = false
             self.bottomToBottomConstraint?.isActive = true
             containerView.layoutIfNeeded()
@@ -79,7 +81,7 @@ extension SPCardViewController {
 
         willMove(toParent: nil)
 
-        let animations = { () -> Void in
+        let animations = {
             self.bottomToBottomConstraint?.isActive = false
             self.topToBottomConstraint?.isActive = true
             self.view.superview?.layoutIfNeeded()
@@ -101,15 +103,15 @@ extension SPCardViewController {
     }
 
     private func setupConstraints(withContainerView containerView: UIView) {
-        let bottomToBottomConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
-        let topToBottomConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
+        let bottomToBottomConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        let topToBottomConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor)
 
         self.bottomToBottomConstraint = bottomToBottomConstraint
         self.topToBottomConstraint = topToBottomConstraint
 
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
-            view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0),
+            view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             topToBottomConstraint
         ])
     }

@@ -8,7 +8,8 @@ final class SPHistoryLoader {
     //
     struct Item {
         let version: Int
-        let data: [String: Any]
+        let modificationDate: Date
+        let content: String
     }
 
     private let bucket: SPBucket
@@ -16,12 +17,7 @@ final class SPHistoryLoader {
     private let amountOfVersionsToLoad: Int
 
     private var completion: (([Item]) -> Void)?
-    private var data: [Int: [String: Any]] = [:]
-    private var sortedItems: [Item] {
-        self.data
-            .map({ Item(version: $0, data: $1) })
-            .sorted(by: { $0.version < $1.version })
-    }
+    private var items: Set<Item> = []
 
     /// Designated Initializer
     ///
@@ -33,7 +29,7 @@ final class SPHistoryLoader {
     init(bucket: SPBucket, simperiumKey: String, currentVersion: Int) {
         self.bucket = bucket
         self.simperiumKey = simperiumKey
-        self.amountOfVersionsToLoad = min(currentVersion, Constants.maxNumberOfVersions)
+        amountOfVersionsToLoad = min(currentVersion, Constants.maxNumberOfVersions)
     }
 
     /// Load verions
@@ -46,7 +42,7 @@ final class SPHistoryLoader {
             return
         }
 
-        data = [:]
+        items = []
         self.completion = completion
 
         bucket.requestVersions(Int32(amountOfVersionsToLoad), key: simperiumKey)
@@ -66,12 +62,13 @@ extension SPHistoryLoader {
     ///     - version: version of an object
     ///
     func process(data: [String: Any], forVersion version: Int) {
-        self.data[version] = data
+        let item = Item(version: version, data: data)
+        items.insert(item)
         checkIfFinished()
     }
 
     private func checkIfFinished() {
-        guard data.count == amountOfVersionsToLoad else {
+        guard items.count == amountOfVersionsToLoad else {
             return
         }
 
@@ -79,7 +76,7 @@ extension SPHistoryLoader {
             return
         }
         self.completion = nil
-        completion(sortedItems)
+        completion(items.sorted(by: { $0.version < $1.version }))
     }
 }
 
@@ -92,7 +89,7 @@ extension SPHistoryLoader {
     ///     - note: a note
     ///
     convenience init(note: Note) {
-        let bucket = SPAppDelegate.shared().simperium.bucket(forName: "Note")!
+        let bucket = SPAppDelegate.shared().simperium.bucket(forName: Note.classNameWithoutNamespaces)!
         let version = Int(note.version() ?? "1") ?? 1
 
         self.init(bucket: bucket,
@@ -106,5 +103,25 @@ extension SPHistoryLoader {
 private extension SPHistoryLoader {
     struct Constants {
         static let maxNumberOfVersions = 30
+    }
+}
+
+// MARK: - SPHistoryLoader.Item Constructor
+//
+private extension SPHistoryLoader.Item {
+    init(version: Int, data: [String: Any]) {
+        self.version = version
+
+        let timeInterval = data["modificationDate"] as? TimeInterval
+        modificationDate = Date(timeIntervalSince1970: timeInterval ?? 0)
+        content = (data["content"] as? String) ?? ""
+    }
+}
+
+// MARK: - SPHistoryLoader.Item Hashable
+//
+extension SPHistoryLoader.Item: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(version)
     }
 }

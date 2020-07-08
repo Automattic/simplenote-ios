@@ -72,8 +72,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @implementation SPNoteEditorViewController
 
-@synthesize modified = bModified;
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -700,7 +698,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     bBlankNote = NO;
-    bModified = NO;
+    self.modified = NO;
     self.previewing = NO;
     
     // hide the tags field
@@ -1232,7 +1230,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)textViewDidChange:(UITextView *)textView {
     
     bBlankNote = NO;
-    bModified = YES;
+    self.modified = YES;
     
     [saveTimer invalidate];
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
@@ -1356,7 +1354,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 	if (_currentNote == nil || [self isShowingHistory] || [self isDictatingText])
 		return;    
     
-	if (bModified || _currentNote.deleted == YES)
+    if (self.isModified || _currentNote.deleted == YES)
 	{
         // Update note
         _currentNote.content = [_noteEditorTextView getPlainTextContent];
@@ -1371,7 +1369,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [SPTracker trackEditorNoteEdited];
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:_currentNote];
         
-        bModified = NO;
+        self.modified = NO;
 	}
 }
 
@@ -1632,7 +1630,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
     
-    bModified = YES;
+    self.modified = YES;
 
     switch (index) {
         case 0: // Publish Note
@@ -1896,7 +1894,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 -(void)togglePinStatusAction:(id)sender
 {
 	_currentNote.pinned = !_currentNote.pinned;
-	bModified = YES;
+    self.modified = YES;
     
     if (_currentNote.pinned) {
         [SPTracker trackEditorNotePinned];
@@ -1956,7 +1954,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     [_currentNote addTag:collaboratorName];
     bBlankNote = NO;
-    bModified = YES;
+    self.modified = YES;
     [self save];
     
     [SPTracker trackEditorEmailTagAdded];
@@ -1967,7 +1965,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [_currentNote stripTag:collaboratorName];
     bBlankNote = NO;
-    bModified = YES;
+    self.modified = YES;
     [self save];
 
     [SPTracker trackEditorEmailTagRemoved];
@@ -2012,7 +2010,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [_currentNote addTag:tagName];
     bBlankNote = NO;
-    bModified = YES;
+    self.modified = YES;
     [self save];
     
     [SPTracker trackEditorTagAdded];
@@ -2027,7 +2025,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [_currentNote stripTag:tagName];
     bBlankNote = NO;
-    bModified = YES;
+    self.modified = YES;
     
     NSString *deletedTagBuffer = _deletedTagBuffer;
     if (deletedTagBuffer && [deletedTagBuffer isEqualToString:tagName]) {
