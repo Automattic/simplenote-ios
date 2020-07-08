@@ -24,17 +24,3 @@ extension ResultsSectionChange {
         }
     }
 }
-
-
-// MARK: - Equality
-//
-func ==(lhs: ResultsSectionChange, rhs: ResultsSectionChange) -> Bool {
-    switch (lhs, rhs) {
-    case (.delete(let lSection), .delete(let rSection)):
-        return lSection == rSection
-    case (.insert(let lSection), .insert(let rSection)):
-        return lSection == rSection
-    default:
-        return false
-    }
-}
