@@ -4,8 +4,8 @@ import Foundation
 // MARK: - Changeset: Sections
 //
 struct ResultsSectionsChangeset {
-    let deleted:    [ResultsSectionChange]
-    let inserted:   [ResultsSectionChange]
+    let deleted:    IndexSet
+    let inserted:   IndexSet
 }
 
 
@@ -14,15 +14,15 @@ struct ResultsSectionsChangeset {
 extension ResultsSectionsChangeset {
 
     init(sectionChanges: [ResultsSectionChange]) {
-        var deleted     = [ResultsSectionChange]()
-        var inserted    = [ResultsSectionChange]()
+        var deleted  = IndexSet()
+        var inserted = IndexSet()
 
         for change in sectionChanges {
             switch change {
-            case .delete:
-                deleted.append(change)
-            case .insert:
-                inserted.append(change)
+            case .delete(let sectionIndex):
+                deleted.insert(sectionIndex)
+            case .insert(let sectionIndex):
+                inserted.insert(sectionIndex)
             }
         }
 
