@@ -39,9 +39,7 @@ extension UITableView {
         performBatchUpdates({
             self.performChanges(objectsChangeset: objectsChangeset, sectionsChangeset: sectionsChangeset)
 
-        }, completion: { success in
-            onCompletion?(success)
-        })
+        }, completion: onCompletion)
     }
 
     /// This API applies Section and Object Changesets over the receiver.
