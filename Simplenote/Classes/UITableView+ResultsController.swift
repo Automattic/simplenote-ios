@@ -68,6 +68,9 @@ extension UITableView {
             deleteRows(at: [oldIndexPath], with: animations.move)
             insertRows(at: [newIndexPath], with: animations.move)
 
+            // WWDC 2020 @ Labs Recommendation
+            reloadRows(at: [newIndexPath], with: animations.move)
+
         case .update(let indexPath):
             reloadRows(at: [indexPath], with: animations.update)
         }
