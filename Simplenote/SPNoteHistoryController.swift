@@ -87,8 +87,7 @@ extension SPNoteHistoryController {
     ///
     func selectVersion(atIndex index: Int) {
         let item = historyItems[index]
-        let content = item.data["content"] as? String
-        delegate?.noteHistoryControllerDidSelectVersion(with: content ?? "")
+        delegate?.noteHistoryControllerDidSelectVersion(with: item.content)
     }
 
     /// Invoked when view is loaded
@@ -114,11 +113,8 @@ private extension SPNoteHistoryController {
     }
 
     func presentable(from historyItem: SPHistoryLoader.Item) -> Presentable {
-        let timeInterval = historyItem.data["modificationDate"] as? TimeInterval
-        let date = Date(timeIntervalSince1970: timeInterval ?? 0)
         let noteVersion = Int(note.version() ?? "1") ?? 1
-
-        return Presentable(date: note.dateString(date, brief: false),
+        return Presentable(date: note.dateString(historyItem.modificationDate, brief: false),
                            isRestorable: noteVersion != historyItem.version)
     }
 }
