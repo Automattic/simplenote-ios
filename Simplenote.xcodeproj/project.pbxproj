@@ -187,6 +187,10 @@
 		B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53929482398642800ACEE00 /* SPRatingsPromptView.xib */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */; };
+		B53D221B24B61315003DDE37 /* ResultsObjectsChangeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D221A24B61315003DDE37 /* ResultsObjectsChangeset.swift */; };
+		B53D221D24B6136A003DDE37 /* ResultsSectionsChangeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D221C24B6136A003DDE37 /* ResultsSectionsChangeset.swift */; };
+		B53D221F24B6185F003DDE37 /* ResultsObjectsChangesetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D221E24B6185F003DDE37 /* ResultsObjectsChangesetTests.swift */; };
+		B53D222124B62117003DDE37 /* ResultsSectionsChangesetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D222024B62117003DDE37 /* ResultsSectionsChangesetTests.swift */; };
 		B5421F3423CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F3323CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift */; };
 		B5421F3623CE79E4004DDC19 /* NSManagedObject+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F3523CE79E4004DDC19 /* NSManagedObject+Simplenote.swift */; };
 		B5421F3823CE79F6004DDC19 /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F3723CE79F6004DDC19 /* ResultsController.swift */; };
@@ -533,6 +537,10 @@
 		B53971A01AB8DCDC00B1A582 /* SPTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SPTracker.h; path = Classes/SPTracker.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPNoteListViewController+Extensions.swift"; path = "Classes/SPNoteListViewController+Extensions.swift"; sourceTree = "<group>"; };
+		B53D221A24B61315003DDE37 /* ResultsObjectsChangeset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultsObjectsChangeset.swift; path = Classes/ResultsObjectsChangeset.swift; sourceTree = "<group>"; };
+		B53D221C24B6136A003DDE37 /* ResultsSectionsChangeset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsSectionsChangeset.swift; sourceTree = "<group>"; };
+		B53D221E24B6185F003DDE37 /* ResultsObjectsChangesetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsObjectsChangesetTests.swift; sourceTree = "<group>"; };
+		B53D222024B62117003DDE37 /* ResultsSectionsChangesetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsSectionsChangesetTests.swift; sourceTree = "<group>"; };
 		B5421F3323CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsControllerDelegateWrapper.swift; path = Classes/FetchedResultsControllerDelegateWrapper.swift; sourceTree = "<group>"; };
 		B5421F3523CE79E4004DDC19 /* NSManagedObject+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSManagedObject+Simplenote.swift"; path = "Classes/NSManagedObject+Simplenote.swift"; sourceTree = "<group>"; };
 		B5421F3723CE79F6004DDC19 /* ResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsController.swift; path = Classes/ResultsController.swift; sourceTree = "<group>"; };
@@ -1054,6 +1062,8 @@
 				B5421F3723CE79F6004DDC19 /* ResultsController.swift */,
 				B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */,
 				B504D4E123D201C300AEED27 /* ResultsSectionChange.swift */,
+				B53D221A24B61315003DDE37 /* ResultsObjectsChangeset.swift */,
+				B53D221C24B6136A003DDE37 /* ResultsSectionsChangeset.swift */,
 				B5421F3923CE7A02004DDC19 /* UITableView+ResultsController.swift */,
 			);
 			name = ResultsController;
@@ -1198,6 +1208,8 @@
 			children = (
 				B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */,
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
+				B53D221E24B6185F003DDE37 /* ResultsObjectsChangesetTests.swift */,
+				B53D222024B62117003DDE37 /* ResultsSectionsChangesetTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
 			);
@@ -2247,6 +2259,7 @@
 				46A3C97C17DFA81A002865AE /* DTPinErrorView.m in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				46A3C97D17DFA81A002865AE /* NSTextStorage+Highlight.m in Sources */,
+				B53D221D24B6136A003DDE37 /* ResultsSectionsChangeset.swift in Sources */,
 				B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
@@ -2258,6 +2271,7 @@
 				E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */,
 				46A3C97F17DFA81A002865AE /* SPSideBySideView.m in Sources */,
 				B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */,
+				B53D221B24B61315003DDE37 /* ResultsObjectsChangeset.swift in Sources */,
 				46A3C98017DFA81A002865AE /* UIImage+Colorization.m in Sources */,
 				B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
@@ -2384,11 +2398,13 @@
 				B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */,
 				B5421F4423CE7DD6004DDC19 /* MockupTableView.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
+				B53D222124B62117003DDE37 /* ResultsSectionsChangesetTests.swift in Sources */,
 				B5421F4223CE7A25004DDC19 /* ResultsControllerTests.swift in Sources */,
 				B5B85BA5235173BF00AD5221 /* NSPredicateSimplenoteTests.swift in Sources */,
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
 				B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */,
 				B51D7C7923D9CFA4005D4B77 /* StringSimplenoteTests.swift in Sources */,
+				B53D221F24B6185F003DDE37 /* ResultsObjectsChangesetTests.swift in Sources */,
 				B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */,
 				B5421F4623CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift in Sources */,
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,
