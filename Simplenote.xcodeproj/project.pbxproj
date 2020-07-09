@@ -249,6 +249,7 @@
 		B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584DA35236722D400B2844A /* SPBlurEffectView.swift */; };
+		B586E84B24B6C9FB00F26701 /* ResultsSectionsChangesetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586E84A24B6C9FB00F26701 /* ResultsSectionsChangesetTests.swift */; };
 		B58BF1FB23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */; };
 		B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */; };
 		B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */; };
@@ -610,6 +611,7 @@
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMigratorTests.swift; sourceTree = "<group>"; };
 		B584DA35236722D400B2844A /* SPBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPBlurEffectView.swift; path = Classes/SPBlurEffectView.swift; sourceTree = "<group>"; };
+		B586E84A24B6C9FB00F26701 /* ResultsSectionsChangesetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsSectionsChangesetTests.swift; sourceTree = "<group>"; };
 		B58BF1FA23D78ADF00515B50 /* UITableViewRowAction+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewRowAction+Simplenote.swift"; path = "Classes/UITableViewRowAction+Simplenote.swift"; sourceTree = "<group>"; };
 		B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPPlaceholderView.swift; path = Classes/SPPlaceholderView.swift; sourceTree = "<group>"; };
 		B59188BF240059950069EF96 /* NSRegularExpression+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSRegularExpression+Simplenote.swift"; path = "Classes/NSRegularExpression+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1200,6 +1202,7 @@
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				B5421F4123CE7A25004DDC19 /* ResultsControllerTests.swift */,
 				B5421F4523CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift */,
+				B586E84A24B6C9FB00F26701 /* ResultsSectionsChangesetTests.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2393,6 +2396,7 @@
 				B5421F4623CE7DEB004DDC19 /* ResultsControllerUIKitTests.swift in Sources */,
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,
 				B5421F3F23CE7A1C004DDC19 /* MockupStorage.swift in Sources */,
+				B586E84B24B6C9FB00F26701 /* ResultsSectionsChangesetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
