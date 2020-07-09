@@ -42,7 +42,7 @@ extension UITableView {
     /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
     ///
     func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset, animations: ResultsTableAnimations = .standard) {
-        // Step 1: Structural Changes: Delete OP(s)
+        // [Step 1] Structural Changes: Delete OP(s)
         if !objectsChangeset.deleted.isEmpty {
             deleteRows(at: objectsChangeset.deleted, with: animations.delete)
         }
@@ -51,7 +51,7 @@ extension UITableView {
             deleteSections(sectionsChangeset.deleted, with: animations.delete)
         }
 
-        // Step 2: Structural Changes: Insert OP(s)
+        // [Step 2] Structural Changes: Insert OP(s)
         if !sectionsChangeset.inserted.isEmpty {
             insertSections(sectionsChangeset.inserted, with: animations.insert)
         }
@@ -60,7 +60,13 @@ extension UITableView {
             insertRows(at: objectsChangeset.inserted, with: animations.insert)
         }
 
-        // Step 3: Content Changes: Update OP(s)
+        // [Step 3] Content Changes: Move OP(s)
+        for (from, to) in objectsChangeset.moved {
+            deleteRows(at: [from], with: animations.delete)
+            insertRows(at: [to], with: animations.insert)
+        }
+
+        // [Step 4] Content Changes: Update OP(s)
         if !objectsChangeset.updated.isEmpty {
             reloadRows(at: objectsChangeset.updated, with: animations.update)
         }

@@ -6,7 +6,18 @@ import Foundation
 struct ResultsObjectsChangeset {
     let deleted:    [IndexPath]
     let inserted:   [IndexPath]
+    let moved:      [(from: IndexPath, to: IndexPath)]
     let updated:    [IndexPath]
+
+    /// Designed Initializer.
+    /// - Note: Ensures that Insertions are ASC and deletions are DESC
+    ///
+    init(deleted: [IndexPath], inserted: [IndexPath], moved: [(from: IndexPath, to: IndexPath)], updated: [IndexPath]) {
+        self.deleted = deleted.sorted(by: >)
+        self.inserted = inserted.sorted(by: <)
+        self.moved = moved
+        self.updated = updated
+    }
 }
 
 
@@ -17,6 +28,7 @@ extension ResultsObjectsChangeset {
     init(objectChanges: [ResultsObjectChange]) {
         var deleted     = [IndexPath]()
         var inserted    = [IndexPath]()
+        var moved       = [(from: IndexPath, to: IndexPath)]()
         var updated     = [IndexPath]()
 
         for change in objectChanges {
@@ -28,8 +40,7 @@ extension ResultsObjectsChangeset {
                 inserted.append(indexPath)
 
             case .move(let oldIndexPath, let newIndexPath):
-                deleted.append(oldIndexPath)
-                inserted.append(newIndexPath)
+                moved.append((from: oldIndexPath, to: newIndexPath))
 
                 // WWDC 2020 @ Labs Recommendation
                 updated.append(newIndexPath)
@@ -39,13 +50,6 @@ extension ResultsObjectsChangeset {
             }
         }
 
-        // Sorting:
-        //  - Insertions: Ascending
-        //  - Deletions: Descending
-        //
-        deleted.sort(by: >)
-        inserted.sort(by: <)
-
-        self.init(deleted: deleted, inserted: inserted, updated: updated)
+        self.init(deleted: deleted, inserted: inserted, moved: moved, updated: updated)
     }
 }
