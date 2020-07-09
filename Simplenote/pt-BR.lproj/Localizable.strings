@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-25 19:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-25 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d resultados";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i tentativa de senha com falha";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i tentativas de senha com falha";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Mínimo de oito caracteres";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enfileirado";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "Insira uma senha";
+
+/* Touch ID fallback title */
+"Enter passcode" = "Insira uma senha";
+
+/* Pin Lock */
+"Enter your passcode" = "Insira sua senha";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "ID do rosto";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
 "Forgotten password?" = "Esqueceu a senha?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Senha";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "As senhas não corresponderam. Tente novamente.";
+
 /* Password TextField Placeholder */
 "Password" = "Senha";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "Publicando...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "Insira novamente uma senha";
+
 /* Reachs Internet */
 "Reachability" = "Acessibilidade";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Enviar feedback";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "Definir senha";
 
 /* Title of options screen */
 "Settings" = "Configurações";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "Temas";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "Para desbloquear o aplicativo";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Hoje";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "Lixeira";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "Desativar senha";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "Desbloquear %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "Desmarcar";

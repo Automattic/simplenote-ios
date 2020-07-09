@@ -65,10 +65,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.20-whats-new"
+msgctxt "v4.20.1-whats-new"
 msgid ""
-"Fixed a bug that affected the Share Extension's Appearance.\n"
-"Fixed RTL support in the Authentication Screens.\n"
-"Fixed RTL support in the Tags Editor.\n"
+"New Privacy Notice for California Users\n"
 msgstr ""
 

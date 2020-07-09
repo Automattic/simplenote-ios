@@ -1,4 +1,3 @@
-Aktualisierte Anforderungen zur Passwortsicherheit.
-Simplenote bittet bei der Anmeldung um die Aktualisierung unsicherer Passwörter.
-Eine neue Farbpalette wurde implementiert!
-Der Button für die Checkliste ist verborgen, es sei denn, du bearbeitest aktiv eine Notiz.
+Fehler korrigiert, der Auswirkungen auf das Design der Teilen-Erweiterung hatte
+RTL-Unterstützung in den Authentifizierungsbildschirmen korrigiert
+RTL-Unterstützung im Tags-Editor korrigiert

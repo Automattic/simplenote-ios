@@ -2,6 +2,10 @@
 -----
 -   New darker dark mode
  
+4.20.1
+------
+-   New Privacy Notice for California Users
+
 4.20
 -----
 -   Fixed a bug that affected the Share Extension's Appearance.

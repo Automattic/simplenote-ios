@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-27 13:54:03+0000 */
+/* Translation-Revision-Date: 2020-06-25 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d 个结果";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "密码尝试失败 %i 次";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "密码尝试失败 %i 次";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 至少需要有 8 个字符";
@@ -65,7 +71,7 @@
 "Add a new collaborator..." = "添加新协作者...";
 
 /* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Add a tag...";
+"Add a tag..." = "标签...";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "添加标签";
@@ -170,7 +176,7 @@
 "Debug" = "调试";
 
 /* Trash (verb) - the action of deleting a note */
-"Delete" = "Delete";
+"Delete" = "删除";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "已排入队列数";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "输入密码";
+
+/* Touch ID fallback title */
+"Enter passcode" = "输入密码";
+
+/* Pin Lock */
+"Enter your passcode" = "输入您的密码";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "面容 ID";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "失败尝试次数";
 
 /* Password Reset Action */
 "Forgotten password?" = "忘记密码？";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密码";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "密码不匹配。重试。";
+
 /* Password TextField Placeholder */
 "Password" = "密码";
 
@@ -371,7 +392,7 @@
 "Please activate your WordPress.com account via email and try again." = "请通过电子邮件激活您的 WordPress.com 帐户，然后重试。";
 
 /* Title of Markdown preview screen */
-"Preview" = "Preview";
+"Preview" = "预览";
 
 /* Simplenote privacy policy */
 "Privacy Policy" = "隐私政策";
@@ -393,6 +414,9 @@
 
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "正在发布...";
+
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "再次输入密码";
 
 /* Reachs Internet */
 "Reachability" = "可访问性";
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "发送反馈";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "设置密码";
 
 /* Title of options screen */
 "Settings" = "设置";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "主题";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "解锁应用程序";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "移到回收站";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "关闭密码";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "解锁 %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "取消钉选";

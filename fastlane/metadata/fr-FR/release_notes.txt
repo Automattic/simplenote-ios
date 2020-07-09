@@ -1,4 +1,3 @@
-Exigences concernant la sûreté des mots de passe mises à jour.
-Simplenote vous demandera de mettre à niveau les mots de passe peu sûrs lorsque vous vous connecterez.
-Nouvelle palette de couleurs implémentée !
-Le bouton de la liste de contrôle est masqué lorsque vous ne modifiez pas de note.
+Résolution d’un bogue qui affectait l’apparence de l’extension Partage.
+Résolution de la prise en charge RTL sur les écrans d’authentification.
+Résolution de la prise en charge RTL dans l’éditeur d’étiquettes.

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-26 10:54:04+0000 */
+/* Translation-Revision-Date: 2020-06-25 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -20,6 +20,12 @@
 
 /* Number of found search results */
 "%d Results" = "%d תוצאות";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempt" = "%i ניסיון קוד סיסמה שנכשל";
+
+/* Number of failed entries entering in passcode */
+"%i Failed Passcode Attempts" = "%i ניסיונות קוד סיסמה שנכשלו";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- לפחות שמונה תווים";
@@ -206,8 +212,20 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
 
+/* Message shown on passcode lock screen */
+"Enter a passcode" = "להזין קוד סיסמה";
+
+/* Touch ID fallback title */
+"Enter passcode" = "הזנת קוד סיסמה";
+
+/* Pin Lock */
+"Enter your passcode" = "הזנת קוד סיסמה";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "זיהוי פנים";
+
+/* Show a message when user enter 3 wrong passcodes */
+"FailedAttempts" = "ניסיונות שנכשלו";
 
 /* Password Reset Action */
 "Forgotten password?" = "שכחת את הסיסמה?";
@@ -337,6 +355,9 @@
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "קוד סיסמה";
 
+/* Pin Lock */
+"Passcodes did not match. Try again." = "קודי הסיסמה לא התאימו. יש לנסות שוב.";
+
 /* Password TextField Placeholder */
 "Password" = "סיסמה";
 
@@ -394,6 +415,9 @@
 /* Message shown when a note is in the processes of being published */
 "Publishing..." = "מפרסם...";
 
+/* Prompt when setting up a passcode */
+"Re-enter a passcode" = "הזנה מחדש של קוד הסיסמה";
+
 /* Reachs Internet */
 "Reachability" = "נגישות";
 
@@ -436,6 +460,9 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "שליחת משוב";
+
+/* Prompt when setting up a passcode */
+"Set Passcode" = "הגדרת קוד סיסמה";
 
 /* Title of options screen */
 "Settings" = "הגדרות";
@@ -506,6 +533,9 @@
 /* Simplenote Themes */
 "Themes" = "ערכות עיצוב";
 
+/* Touch ID reason/explanation */
+"To unlock the application" = "כדי לבטל את נעילת האפליקציה";
+
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "היום";
 
@@ -520,6 +550,12 @@
 
 /* Trash (verb) - the action of deleting a note */
 "Trash-verb" = "העברה לפח";
+
+/* Prompt when disabling passcode */
+"Turn off Passcode" = "השבתת קוד סיסמה";
+
+/* Message shown when gaining entry to app via a passcode */
+"Unlock %@" = "ביטול נעילה %@";
 
 /* Unpin (verb) - the action of Unpinning a note */
 "Unpin" = "להסיר את הנעץ";
