@@ -218,7 +218,7 @@ private extension ResultsController {
         }
     }
 
-    private func resetPendingChangesets() {
+    func resetPendingChangesets() {
         sectionsChangeset = ResultsSectionsChangeset()
         objectsChangeset = ResultsObjectsChangeset()
     }

@@ -50,20 +50,11 @@ extension ResultsObjectsChangeset {
     /// Why? Because displaying data coming from multiple ResultsController onScreen... just requires us to adjust sectionIndexes
     ///
     func transposed(toSection section: Int) -> ResultsObjectsChangeset {
-        let newDeleted = deleted.map { path in
-            path.transpose(toSection: section)
-        }
-
-        let newInserted = inserted.map { path in
-            path.transpose(toSection: section)
-        }
-
-        let newMoved = moved.map { (oldPath, newPath) in
-            (oldPath.transpose(toSection: section), newPath.transpose(toSection: section))
-        }
-
-        let newUpdated = updated.map { path in
-            path.transpose(toSection: section)
+        let newDeleted  = deleted.map { $0.transpose(toSection: section) }
+        let newInserted = inserted.map { $0.transpose(toSection: section) }
+        let newUpdated  = updated.map { $0.transpose(toSection: section) }
+        let newMoved    = moved.map { (from, to) in
+            (from.transpose(toSection: section), to.transpose(toSection: section))
         }
 
         return ResultsObjectsChangeset(deleted: newDeleted, inserted: newInserted, moved: newMoved, updated: newUpdated)
