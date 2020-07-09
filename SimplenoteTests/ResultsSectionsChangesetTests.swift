@@ -6,38 +6,16 @@ import XCTest
 //
 class ResultsSectionsChangesetTests: XCTestCase {
 
-    /// Verifies that `ResultsSectionsChangeset` properly groups `delete` changes.
+    /// Verifies that `ResultsSectionsChangeset` properly groups `ResultsSectionChange` entities into the right collections.
     ///
-    func testDeleteChangesAreProperlyGrouped() {
-        let sampleChanges = newSampleSectionChanges()
-        let changeset = ResultsSectionsChangeset(sectionChanges: sampleChanges)
-        let deletions: [Int] = sampleChanges.compactMap { change in
-            guard case .delete(let sectionIndex) = change else {
-                return nil
-            }
+    func testSectionChangesetsAreProperlyGroupedIntoTheRightCollections() {
+        let changes = newSampleSectionChanges()
+        let changeset = ResultsSectionsChangeset(sectionChanges: changes)
+        let deleted = extractDeletedSections(from: changes)
+        let inserted = extractInsertedSections(from: changes)
 
-            return sectionIndex
-        }
-
-        let uniquelDeletions = IndexSet(deletions)
-        XCTAssertEqual(changeset.deleted.count, uniquelDeletions.count)
-    }
-
-    /// Verifies that `ResultsSectionsChangeset` properly groups `insert` changes.
-    ///
-    func testInsertChangesAreProperlyGrouped() {
-        let sampleChanges = newSampleSectionChanges()
-        let changeset = ResultsSectionsChangeset(sectionChanges: sampleChanges)
-        let insertions: [Int] = sampleChanges.compactMap { change in
-            guard case .insert(let sectionIndex) = change else {
-                return nil
-            }
-
-            return sectionIndex
-        }
-
-        let uniquelInserts = IndexSet(insertions)
-        XCTAssertEqual(changeset.inserted.count, uniquelInserts.count)
+        XCTAssertEqual(changeset.inserted, IndexSet(inserted))
+        XCTAssertEqual(changeset.deleted, IndexSet(deleted))
     }
 }
 
@@ -55,5 +33,25 @@ private extension ResultsSectionsChangesetTests {
         }
 
         return changes
+    }
+
+    func extractDeletedSections(from changes: [ResultsSectionChange]) -> [Int] {
+        return changes.compactMap { change -> Int? in
+            guard case let .delete(sectionIndex) = change else {
+                return nil
+            }
+
+            return sectionIndex
+        }
+    }
+
+    func extractInsertedSections(from changes: [ResultsSectionChange]) -> [Int] {
+        return changes.compactMap { change -> Int? in
+            guard case let .insert(sectionIndex) = change else {
+                return nil
+            }
+
+            return sectionIndex
+        }
     }
 }

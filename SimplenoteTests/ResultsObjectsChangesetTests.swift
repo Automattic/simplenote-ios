@@ -6,61 +6,21 @@ import XCTest
 //
 class ResultsObjectsChangesetTests: XCTestCase {
 
-    /// Verifies that `ResultsObjectsChangeset` properly groups `delete` changes.
+    /// Verifies that `ResultsObjectsChangeset` properly groups `ResultsObjectsChange` entities into the right collections.
     ///
-    func testDeleteChangesAreProperlyGrouped() {
+    func testObjectsChangesetsAreProperlyGroupedIntoTheRightCollections() {
         let changes = newSampleObjectsChanges()
         let changeset = ResultsObjectsChangeset(objectChanges: changes)
-        let deletions = extractDeletedPaths(from: changes)
 
-        XCTAssertEqual(changeset.deleted.count, deletions.count)
-    }
-
-    /// Verifies that `ResultsObjectsChangeset` properly groups `insert` changes.
-    ///
-    func testInsertChangesAreProperlyGrouped() {
-        let changes = newSampleObjectsChanges()
-        let changeset = ResultsObjectsChangeset(objectChanges: changes)
-        let insertions = extractInsertedPaths(from: changes)
-
-        XCTAssertEqual(changeset.inserted.count, insertions.count)
-    }
-
-    /// Verifies that `ResultsObjectsChangeset` properly groups `update` changes.
-    ///
-    func testUpdateChangesAreProperlyGrouped() {
-        let changes = newSampleObjectsChanges()
-        let changeset = ResultsObjectsChangeset(objectChanges: changes)
-        let updates = extractUpdatedPaths(from: changes)
+        let deleted = extractDeletedPaths(from: changes)
+        let inserted = extractInsertedPaths(from: changes)
         let moved = extractMovedPaths(from: changes)
+        let updated = extractUpdatedPaths(from: changes)
 
-        XCTAssertEqual(changeset.updated.count, updates.count + moved.count)
-    }
-
-    /// Verifies that `ResultsObjectsChangeset` sorts `delete` changes in a DESC order
-    ///
-    func testDeleteChangesAreSortedDescending() {
-        let changes = newSampleObjectsChanges()
-        let changeset = ResultsObjectsChangeset(objectChanges: changes)
-        let deleted = changeset.deleted
-
-        for (index, current) in deleted.enumerated() where index < deleted.count - 1 {
-            let next = deleted[index + 1]
-            XCTAssert(current >= next)
-        }
-    }
-
-    /// Verifies that `ResultsObjectsChangeset` sorts `inserted` changes in an ASC order
-    ///
-    func testInsertChangesAreSortedDescending() {
-        let changes = newSampleObjectsChanges()
-        let changeset = ResultsObjectsChangeset(objectChanges: changes)
-        let inserted = changeset.inserted
-
-        for (index, current) in inserted.enumerated() where index < inserted.count - 1 {
-            let next = inserted[index + 1]
-            XCTAssert(current <= next)
-        }
+        XCTAssertEqual(changeset.deleted.count, deleted.count)
+        XCTAssertEqual(changeset.inserted.count, inserted.count)
+        XCTAssertEqual(changeset.moved.count, moved.count)
+        XCTAssertEqual(changeset.updated.count, updated.count + moved.count)
     }
 }
 

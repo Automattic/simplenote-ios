@@ -8,16 +8,6 @@ struct ResultsObjectsChangeset {
     let inserted:   [IndexPath]
     let moved:      [(from: IndexPath, to: IndexPath)]
     let updated:    [IndexPath]
-
-    /// Designed Initializer.
-    /// - Note: Ensures that Insertions are ASC and deletions are DESC
-    ///
-    init(deleted: [IndexPath], inserted: [IndexPath], moved: [(IndexPath, IndexPath)], updated: [IndexPath]) {
-        self.deleted = deleted.sorted(by: >)
-        self.inserted = inserted.sorted(by: <)
-        self.moved = moved
-        self.updated = updated
-    }
 }
 
 
