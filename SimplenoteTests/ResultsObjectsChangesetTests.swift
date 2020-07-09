@@ -9,24 +9,11 @@ class ResultsObjectsChangesetTests: XCTestCase {
     /// Verifies that `ResultsObjectsChangeset` properly groups `delete` changes.
     ///
     func testDeleteChangesAreProperlyGrouped() {
-        let sampleChanges = newSampleObjectsChanges()
-        let changeset = ResultsObjectsChangeset(objectChanges: sampleChanges)
-        var deleteChanges = [IndexPath]()
+        let changes = newSampleObjectsChanges()
+        let changeset = ResultsObjectsChangeset(objectChanges: changes)
+        let deletions = extractDeletedPaths(from: changes)
 
-        for change in sampleChanges {
-            switch change {
-            case .delete(let indexPath):
-                deleteChanges.append(indexPath)
-
-            case .move(let oldIndexPath, _):
-                deleteChanges.append(oldIndexPath)
-
-            default:
-                break
-            }
-        }
-
-        XCTAssertEqual(changeset.deleted.count, deleteChanges.count)
+        XCTAssertEqual(changeset.deleted.count, deletions.count)
     }
 
     /// Verifies that `ResultsObjectsChangeset` properly groups `insert` changes.
@@ -45,8 +32,9 @@ class ResultsObjectsChangesetTests: XCTestCase {
         let changes = newSampleObjectsChanges()
         let changeset = ResultsObjectsChangeset(objectChanges: changes)
         let updates = extractUpdatedPaths(from: changes)
+        let moved = extractMovedPaths(from: changes)
 
-        XCTAssertEqual(changeset.updated.count, updates.count)
+        XCTAssertEqual(changeset.updated.count, updates.count + moved.count)
     }
 
     /// Verifies that `ResultsObjectsChangeset` sorts `delete` changes in a DESC order
@@ -103,47 +91,42 @@ private extension ResultsObjectsChangesetTests {
     }
 
     func extractDeletedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
-        return changes.compactMap { change in
-            switch change {
-            case .delete(let indexPath):
-                return indexPath
-
-            case .move(let oldIndexPath, _):
-                return oldIndexPath
-
-            default:
+        return changes.compactMap { change -> IndexPath? in
+            guard case let .delete(indexPath) = change else {
                 return nil
             }
+
+            return indexPath
         }
     }
 
     func extractInsertedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
-        return changes.compactMap { change in
-            switch change {
-            case .insert(let indexPath):
-                return indexPath
-
-            case .move(_, let newIndexPath):
-                return newIndexPath
-
-            default:
+        return changes.compactMap { change -> IndexPath? in
+            guard case let .insert(indexPath) = change else {
                 return nil
             }
+
+            return indexPath
         }
     }
 
     func extractUpdatedPaths(from changes: [ResultsObjectChange]) -> [IndexPath] {
-        return changes.compactMap { change in
-            switch change {
-            case .move(_, let newIndexPath):
-                return newIndexPath
-
-            case .update(let indexPath):
-                return indexPath
-
-            default:
+        return changes.compactMap { change -> IndexPath? in
+            guard case let .update(indexPath) = change else {
                 return nil
             }
+
+            return indexPath
+        }
+    }
+
+    func extractMovedPaths(from changes: [ResultsObjectChange]) -> [(from: IndexPath, to: IndexPath)] {
+        return changes.compactMap { change -> (IndexPath, IndexPath)? in
+            guard case let .move(from, to) = change else {
+                return nil
+            }
+
+            return (from, to)
         }
     }
 }
