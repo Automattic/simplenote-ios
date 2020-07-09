@@ -10,7 +10,7 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     private let controller: SPNoteHistoryController
-    private var items: [SPNoteHistoryController.Presentable] = []
+    private var versions: [SPHistoryVersion] = []
 
     /// Designated initialize
     ///
@@ -84,12 +84,12 @@ private extension SPNoteHistoryViewController {
             setActivityIndicatorVisible(true)
             setErrorMessageVisible(false)
 
-        case .results(let items):
+        case .results(let versions):
             setMainContentVisible(true)
             setActivityIndicatorVisible(false)
             setErrorMessageVisible(false)
 
-            self.items = items
+            self.versions = versions
 
             configureSlider()
 
@@ -104,13 +104,13 @@ private extension SPNoteHistoryViewController {
 
     func update(withSliderValue value: Float) {
         let index = Int(value)
-        let item = items[index]
+        let version = versions[index]
 
-        dateLabel.text = item.date
-        restoreButton.isEnabled = item.isRestorable
+        dateLabel.text = controller.note.dateString(version.modificationDate, brief: false)
+        restoreButton.isEnabled = version.version != controller.note.versionInt
         styleRestoreButton()
 
-        controller.selectVersion(atIndex: index)
+        controller.select(version: version)
     }
 }
 
@@ -125,7 +125,7 @@ private extension SPNoteHistoryViewController {
 
     func configureSlider() {
         slider.minimumValue = 0.0
-        slider.maximumValue = Float(max(items.count - 1, 0))
+        slider.maximumValue = Float(max(versions.count - 1, 0))
         slider.value = slider.maximumValue
         update(withSliderValue: slider.value)
     }

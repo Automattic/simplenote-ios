@@ -1558,7 +1558,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     UIButton *historyButton = [noteActivityView actionButtonAtIndex:1];
     historyButton.accessibilityLabel = NSLocalizedString(@"History", @"Noun - the version history of a note");
     historyButton.accessibilityHint = NSLocalizedString(@"history-accessibility-hint", @"Accessibility hint on button which shows the history of a note");
-    historyButton.enabled = _currentNote.version.integerValue > 1;
+    historyButton.enabled = _currentNote.versionInt > 1;
     
     UIButton *collaborateButton = [noteActivityView actionButtonAtIndex:2];
     collaborateButton.accessibilityHint = NSLocalizedString(@"collaborate-accessibility-hint", @"Accessibility hint on button which shows the current collaborators on a note");

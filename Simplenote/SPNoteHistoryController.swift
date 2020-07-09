@@ -4,13 +4,6 @@ import Foundation
 //
 final class SPNoteHistoryController {
 
-    // MARK: - Presentable: history item representation for a view
-    //
-    struct Presentable {
-        let date: String
-        let isRestorable: Bool
-    }
-
     // MARK: - State of the screen
     //
     enum State {
@@ -20,7 +13,7 @@ final class SPNoteHistoryController {
 
         /// Ready to show results
         ///
-        case results([Presentable])
+        case results([SPHistoryVersion])
 
         /// Error
         ///
@@ -40,15 +33,11 @@ final class SPNoteHistoryController {
     ///
     weak var delegate: SPNoteHistoryControllerDelegate?
 
-    private let note: Note
-    private let loader: SPHistoryLoader
-    private var historyItems: [SPHistoryLoader.Item] = [] {
-        didSet {
-            let presentables = historyItems.map { presentable(from: $0) }
-            state = .results(presentables)
-        }
-    }
+    /// Note
+    ///
+    let note: Note
 
+    private let loader: SPHistoryLoader
     private var state: State = .loading {
         didSet {
             observer?(state)
@@ -85,9 +74,8 @@ extension SPNoteHistoryController {
 
     /// User selected a version
     ///
-    func selectVersion(atIndex index: Int) {
-        let item = historyItems[index]
-        delegate?.noteHistoryControllerDidSelectVersion(with: item.content)
+    func select(version: SPHistoryVersion) {
+        delegate?.noteHistoryControllerDidSelectVersion(with: version.content)
     }
 
     /// Invoked when view is loaded
@@ -107,14 +95,8 @@ extension SPNoteHistoryController {
 private extension SPNoteHistoryController {
     func loadData() {
         state = .loading
-        loader.load { [weak self] (items) in
-            self?.historyItems = items
+        loader.load { [weak self] (versions) in
+            self?.state = .results(versions)
         }
-    }
-
-    func presentable(from historyItem: SPHistoryLoader.Item) -> Presentable {
-        let noteVersion = Int(note.version() ?? "1") ?? 1
-        return Presentable(date: note.dateString(historyItem.modificationDate, brief: false),
-                           isRestorable: noteVersion != historyItem.version)
     }
 }
