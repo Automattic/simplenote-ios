@@ -129,13 +129,13 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         CGSize textSize = [string sizeWithAttributes:@{NSFontAttributeName : font}];
         SPButton *textButton = [[SPButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width + labelPadding, [self.theme floatForKey:@"actionSheetButtonHeight"])];
 
-        textButton.backgroundHighlightColor = [UIColor colorWithName:UIColorNameActionSheetButtonBackgroundHighlightColor];
+        textButton.backgroundHighlightColor = [UIColor simplenoteDividerColor];
         textButton.titleLabel.font = font;
         textButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         textButton.titleLabel.textColor = [UIColor simplenoteTextColor];
         [textButton setTitle:string forState:UIControlStateNormal];
         
-        [textButton setTitleColor:[UIColor colorWithName:UIColorNameActionSheetButtonFontColor]
+        [textButton setTitleColor:[UIColor simplenoteTintColor]
                          forState:UIControlStateNormal];
 
         [textButton addTarget:self
@@ -320,7 +320,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     container.frame = CGRectMake(0, 0, totalWidth, totalHeight);
     
-    container.backgroundColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
+    container.backgroundColor = [UIColor simplenoteTableViewBackgroundColor];
     
     self.subviewsArray = viewArray;
     

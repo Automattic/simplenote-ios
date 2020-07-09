@@ -377,7 +377,7 @@ private enum Style {
     /// Headline Color: To be applied over the first preview line
     ///
     static var headlineColor: UIColor {
-        .simplenoteNoteHeadlineColor
+        .simplenoteTextColor
     }
 
     /// Headline Font: To be applied over the first preview line
