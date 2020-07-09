@@ -196,8 +196,9 @@ private extension ResultsController {
             case (.move, .some(let oldIndexPath), .some(let newIndexPath)):
                 self.objectsChangeset.movedIndexPath(from: oldIndexPath, to: newIndexPath)
 
-            case (.update, .some(let indexPath), _):
-                self.objectsChangeset.updatedIndexPath(indexPath)
+            // WWDC 2020 @ Labs: Switch `indexPath` > `newIndexPath` for reload OP(s)
+            case (.update, _, .some(let newIndexPath)):
+                self.objectsChangeset.updatedIndexPath(newIndexPath)
 
             default:
                 NSLog("☠️ [ResultsController] Unrecognized Row Change!")
