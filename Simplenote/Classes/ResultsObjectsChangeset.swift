@@ -4,42 +4,72 @@ import Foundation
 // MARK: - Changeset: Objects
 //
 struct ResultsObjectsChangeset {
-    let deleted:    [IndexPath]
-    let inserted:   [IndexPath]
-    let moved:      [(from: IndexPath, to: IndexPath)]
-    let updated:    [IndexPath]
+    private(set) var deleted    : [IndexPath]
+    private(set) var inserted   : [IndexPath]
+    private(set) var moved      : [(from: IndexPath, to: IndexPath)]
+    private(set) var updated    : [IndexPath]
+
+    init(deleted:   [IndexPath] = [],
+         inserted:  [IndexPath] = [],
+         moved:     [(from: IndexPath, to: IndexPath)] = [],
+         updated:   [IndexPath] = []) {
+
+        self.deleted = deleted
+        self.inserted = inserted
+        self.moved = moved
+        self.updated = updated
+    }
 }
 
 
-// MARK: - Convenience Initializers
+// MARK: - Public API(s)
 //
 extension ResultsObjectsChangeset {
 
-    init(objectChanges: [ResultsObjectChange]) {
-        var deleted     = [IndexPath]()
-        var inserted    = [IndexPath]()
-        var moved       = [(IndexPath, IndexPath)]()
-        var updated     = [IndexPath]()
+    mutating func deletedIndexPath(_ indexPath: IndexPath) {
+        deleted.append(indexPath)
+    }
 
-        for change in objectChanges {
-            switch change {
-            case .delete(let indexPath):
-                deleted.append(indexPath)
+    mutating func insertedIndexPath(_ indexPath: IndexPath) {
+        inserted.append(indexPath)
+    }
 
-            case .insert(let indexPath):
-                inserted.append(indexPath)
+    mutating func movedIndexPath(from oldIndexPath: IndexPath, to newIndexPath: IndexPath) {
+        moved.append((oldIndexPath, newIndexPath))
 
-            case .move(let oldIndexPath, let newIndexPath):
-                moved.append((oldIndexPath, newIndexPath))
+        // WWDC 2020 @ Labs Recommendation
+        updated.append(newIndexPath)
+    }
 
-                // WWDC 2020 @ Labs Recommendation
-                updated.append(newIndexPath)
+    mutating func updatedIndexPath(_ indexPath: IndexPath) {
+        updated.append(indexPath)
+    }
+}
 
-            case .update(let indexPath):
-                updated.append(indexPath)
-            }
+
+// MARK: - Transposing
+//
+extension ResultsObjectsChangeset {
+
+    /// Why? Because displaying data coming from multiple ResultsController onScreen... just requires us to adjust sectionIndexes
+    ///
+    func transposed(toSection section: Int) -> ResultsObjectsChangeset {
+        let newDeleted = deleted.map { path in
+            path.transpose(toSection: section)
         }
 
-        self.init(deleted: deleted, inserted: inserted, moved: moved, updated: updated)
+        let newInserted = inserted.map { path in
+            path.transpose(toSection: section)
+        }
+
+        let newMoved = moved.map { (oldPath, newPath) in
+            (oldPath.transpose(toSection: section), newPath.transpose(toSection: section))
+        }
+
+        let newUpdated = updated.map { path in
+            path.transpose(toSection: section)
+        }
+
+        return ResultsObjectsChangeset(deleted: newDeleted, inserted: newInserted, moved: newMoved, updated: newUpdated)
     }
 }

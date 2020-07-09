@@ -312,9 +312,9 @@ class NotesListControllerTests: XCTestCase {
     ///     - OP: Insert
     ///
     func testOnBatchChangesDoesRunForNoteInsertionsWhenInResultsMode() {
-        expectBatchChanges(objectChanges: [
-            .insert(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(inserted: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         storage.insertSampleNote()
         storage.save()
@@ -331,9 +331,9 @@ class NotesListControllerTests: XCTestCase {
         let note = storage.insertSampleNote()
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .delete(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(deleted: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         storage.delete(note)
         storage.save()
@@ -350,9 +350,9 @@ class NotesListControllerTests: XCTestCase {
         let note = storage.insertSampleNote()
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .update(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(updated: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         note.content = "Updated"
         storage.save()
@@ -370,9 +370,11 @@ class NotesListControllerTests: XCTestCase {
         storage.insertSampleNote(contents: "B")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .move(oldIndexPath: IndexPath(row: 0, section: 0), newIndexPath: IndexPath(row: 1, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(moved: [
+            (from: IndexPath(row: 0, section: 0), to: IndexPath(row: 1, section: 0))
+        ], updated: [
+            IndexPath(row: 1, section: 0)
+        ]))
 
         firstNote.content = "C"
         storage.save()
@@ -386,9 +388,9 @@ class NotesListControllerTests: XCTestCase {
     ///     - OP: Insert
     ///
     func testOnBatchChangesDoesRunForTagInsertionsWhenInSearchMode() {
-        expectBatchChanges(objectChanges: [
-            .insert(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(inserted: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -407,9 +409,9 @@ class NotesListControllerTests: XCTestCase {
         let tag = storage.insertSampleTag(name: "Test")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .update(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(updated: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -428,9 +430,9 @@ class NotesListControllerTests: XCTestCase {
         let tag = storage.insertSampleTag(name: "Test")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .delete(indexPath: IndexPath(row: 0, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(deleted: [
+            IndexPath(row: 0, section: 0)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -446,9 +448,9 @@ class NotesListControllerTests: XCTestCase {
     ///     - OP: Insert
     ///
     func testOnBatchChangesDoesRunForNoteInsertionsWhenInSearchModeAndTheSectionIndexIsProperlyCorrected() {
-        expectBatchChanges(objectChanges: [
-            .insert(indexPath: IndexPath(row: 0, section: 1))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(inserted: [
+            IndexPath(row: 0, section: 1)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -467,9 +469,9 @@ class NotesListControllerTests: XCTestCase {
         let note = storage.insertSampleNote(contents: "Test")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .update(indexPath: IndexPath(row: 0, section: 1))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(updated: [
+            IndexPath(row: 0, section: 1)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -488,9 +490,9 @@ class NotesListControllerTests: XCTestCase {
         let note = storage.insertSampleNote(contents: "Test")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .delete(indexPath: IndexPath(row: 0, section: 1))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(deleted: [
+            IndexPath(row: 0, section: 1)
+        ]))
 
         noteListController.beginSearch()
         noteListController.refreshSearchResults(keyword: "Test")
@@ -506,9 +508,9 @@ class NotesListControllerTests: XCTestCase {
         storage.insertSampleNote(contents: "A")
         storage.save()
 
-        expectBatchChanges(objectChanges: [
-            .insert(indexPath: IndexPath(row: 1, section: 0))
-        ])
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(inserted: [
+            IndexPath(row: 1, section: 0)
+        ]))
 
         storage.insertSampleNote(contents: "B")
         storage.save()
@@ -544,20 +546,31 @@ private extension NotesListControllerTests {
     /// Expects the specified Object and Section changes to be relayed via `onBatchChanges`
     ///
     @discardableResult
-    func expectBatchChanges(objectChanges: [ResultsObjectChange] = [], sectionChanges: [ResultsSectionChange] = []) -> XCTestExpectation {
+    func expectBatchChanges(objectsChangeset: ResultsObjectsChangeset) -> XCTestExpectation {
         let expectation = self.expectation(description: "Waiting...")
 
-        noteListController.onBatchChanges = { (receivedObjectChanges, receivedSectionChanges) in
-            for (index, change) in objectChanges.enumerated() {
-                XCTAssertEqual(change, receivedObjectChanges[index])
+        noteListController.onBatchChanges = { (receivedSectionChanges, receivedObjectChanges) in
+            for (index, change) in objectsChangeset.deleted.enumerated() {
+                XCTAssertEqual(change, objectsChangeset.deleted[index])
             }
 
-            for (index, change) in sectionChanges.enumerated() {
-                XCTAssertEqual(change, receivedSectionChanges[index])
+            for (index, change) in objectsChangeset.inserted.enumerated() {
+                XCTAssertEqual(change, objectsChangeset.inserted[index])
             }
 
-            XCTAssertEqual(objectChanges.count, receivedObjectChanges.count)
-            XCTAssertEqual(sectionChanges.count, receivedSectionChanges.count)
+            for (index, change) in objectsChangeset.moved.enumerated() {
+                XCTAssertEqual(change.from, objectsChangeset.moved[index].from)
+                XCTAssertEqual(change.to, objectsChangeset.moved[index].to)
+            }
+
+            for (index, change) in objectsChangeset.updated.enumerated() {
+                XCTAssertEqual(change, objectsChangeset.updated[index])
+            }
+
+            XCTAssertEqual(objectsChangeset.deleted.count, receivedObjectChanges.deleted.count)
+            XCTAssertEqual(objectsChangeset.inserted.count, receivedObjectChanges.inserted.count)
+            XCTAssertEqual(objectsChangeset.moved.count, receivedObjectChanges.moved.count)
+            XCTAssertEqual(objectsChangeset.updated.count, receivedObjectChanges.updated.count)
             expectation.fulfill()
         }
 

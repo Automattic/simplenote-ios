@@ -18,16 +18,9 @@ class ResultsControllerUIKitTests: XCTestCase {
     ///
     private var resultsController: ResultsController<Note>!
 
-    /// Section Changes
-    ///
-    private var sectionChanges = [ResultsSectionChange]()
-
-    /// Object Changes
-    ///
-    private var objectChanges = [ResultsObjectChange]()
-
 
     // MARK: - Overridden Methods
+
     override func setUp() {
         storageManager = MockupStorageManager()
         tableView = MockupTableView()
@@ -40,25 +33,8 @@ class ResultsControllerUIKitTests: XCTestCase {
             return ResultsController<Note>(viewContext: viewContext, sectionNameKeyPath: sectionNameKeyPath, sortedBy: [descriptor])
         }()
 
-        resultsController.onWillChangeContent = { [weak self] in
-            self?.sectionChanges.removeAll()
-            self?.objectChanges.removeAll()
-        }
-
-        resultsController.onDidChangeContent = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-
-            self.tableView.performBatchChanges(objectChanges: self.objectChanges, sectionChanges: self.sectionChanges)
-        }
-
-        resultsController.onDidChangeObject = { [weak self] change in
-            self?.objectChanges.append(change)
-        }
-
-        resultsController.onDidChangeSection = { [weak self] change in
-            self?.sectionChanges.append(change)
+        resultsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+            self?.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
 
         try? resultsController.performFetch()

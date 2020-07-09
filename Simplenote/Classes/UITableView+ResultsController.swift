@@ -32,21 +32,17 @@ struct ResultsTableAnimations {
 //
 extension UITableView {
 
-    func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: ((Bool) -> Void)? = nil) {
-        let objectsChangeset = ResultsObjectsChangeset(objectChanges: objectChanges)
-        let sectionsChangeset = ResultsSectionsChangeset(sectionChanges: sectionChanges)
+    func performBatchChanges(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset, onCompletion: ((Bool) -> Void)? = nil) {
 
-        let updates = {
-            self.performChanges(objectsChangeset: objectsChangeset, sectionsChangeset: sectionsChangeset)
-        }
-
-        performBatchUpdates(updates, completion: onCompletion)
+        performBatchUpdates({
+            self.performChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
+        }, completion: onCompletion)
     }
 
     /// This API applies Section and Object Changesets over the receiver. Based on WWDC 2020 @ Labs Recommendations
     /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
     ///
-    func performChanges(objectsChangeset: ResultsObjectsChangeset, sectionsChangeset: ResultsSectionsChangeset, animations: ResultsTableAnimations = .standard) {
+    func performChanges(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset, animations: ResultsTableAnimations = .standard) {
         // [Step 1] Structural Changes: Delete OP(s)
         if !objectsChangeset.deleted.isEmpty {
             deleteRows(at: objectsChangeset.deleted, with: animations.delete)

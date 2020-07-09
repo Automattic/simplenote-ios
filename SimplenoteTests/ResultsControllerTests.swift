@@ -119,29 +119,6 @@ class ResultsControllerTests: XCTestCase {
     }
 
 
-    /// Verifies that `onWillChangeContent` is called *before* anything is updated.
-    ///
-    func testOnWillChangeContentIsEffectivelyCalledBeforeChanges() {
-        let resultsController = ResultsController<Note>(viewContext: viewContext, sortedBy: [sampleSortDescriptor])
-        try? resultsController.performFetch()
-
-        let expectation = self.expectation(description: "onWillChange")
-        var didChangeObjectWasCalled = false
-
-        resultsController.onWillChangeContent = {
-            XCTAssertFalse(didChangeObjectWasCalled)
-            expectation.fulfill()
-        }
-        resultsController.onDidChangeObject = { _ in
-            didChangeObjectWasCalled = true
-        }
-
-        storage.insertSampleNote()
-        try? viewContext.save()
-
-        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
-    }
-
     /// Verifies that `onDidChangeContent` is effectively called *after* the results are altered.
     ///
     func testOnDidChangeContentIsEffectivelyCalledAfterChangesArePerformed() {
@@ -149,13 +126,7 @@ class ResultsControllerTests: XCTestCase {
         try? resultsController.performFetch()
 
         let expectation = self.expectation(description: "onDidChange")
-        var didChangeObjectWasCalled = false
-
-        resultsController.onDidChangeObject = { _ in
-            didChangeObjectWasCalled = true
-        }
-        resultsController.onDidChangeContent = {
-            XCTAssertTrue(didChangeObjectWasCalled)
+        resultsController.onDidChangeContent = { (_, _) in
             expectation.fulfill()
         }
 
@@ -173,14 +144,10 @@ class ResultsControllerTests: XCTestCase {
         try? resultsController.performFetch()
 
         let expectation = self.expectation(description: "onDidChange")
-        resultsController.onDidChangeObject = { change in
-            guard case .insert(let newIndexPath) = change else {
-                XCTFail()
-                return
-            }
-
+        resultsController.onDidChangeContent = { (sectionsChangeset, objectsChangeset) in
             let expectedIndexPath = IndexPath(row: 0, section: 0)
-            XCTAssertEqual(newIndexPath, expectedIndexPath)
+            XCTAssertTrue(objectsChangeset.inserted.contains(expectedIndexPath))
+
             expectation.fulfill()
         }
 
@@ -200,12 +167,8 @@ class ResultsControllerTests: XCTestCase {
         try? resultsController.performFetch()
 
         let expectation = self.expectation(description: "onDidChange")
-        resultsController.onDidChangeSection = { change in
-            guard case .insert(_) = change else {
-                XCTFail()
-                return
-            }
-
+        resultsController.onDidChangeContent = { (sectionsChangeset, objectsChangeset) in
+            XCTAssertEqual(sectionsChangeset.inserted.count, 1)
             expectation.fulfill()
         }
 
