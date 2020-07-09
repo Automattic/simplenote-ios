@@ -32,9 +32,6 @@ extension ResultsObjectsChangeset {
 
     mutating func movedIndexPath(from oldIndexPath: IndexPath, to newIndexPath: IndexPath) {
         moved.append((oldIndexPath, newIndexPath))
-
-        // WWDC 2020 @ Labs Recommendation
-        updated.append(newIndexPath)
     }
 
     mutating func updatedIndexPath(_ indexPath: IndexPath) {
