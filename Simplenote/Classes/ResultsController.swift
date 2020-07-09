@@ -171,7 +171,6 @@ private extension ResultsController {
         }
 
         internalDelegate.onDidChangeObject = { [weak self] (_, type, indexPath, newIndexPath) in
-
             guard let `self` = self else {
                 return
             }
