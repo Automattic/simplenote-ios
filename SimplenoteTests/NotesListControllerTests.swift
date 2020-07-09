@@ -502,6 +502,7 @@ class NotesListControllerTests: XCTestCase {
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
+
     /// Verifies that `onBatchChanges` does not relay duplicated Changesets
     ///
     func testOnBatchChangesDoesNotRelayDuplicatedEvents() {
@@ -513,6 +514,28 @@ class NotesListControllerTests: XCTestCase {
         ]))
 
         storage.insertSampleNote(contents: "B")
+        storage.save()
+
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
+    }
+
+
+    /// Verifies that `onBatchChanges` relays move events
+    ///
+    func testOnBatchChangesRelaysMoveEvents() {
+        storage.insertSampleNote(contents: "A")
+        storage.insertSampleNote(contents: "B")
+        let note = storage.insertSampleNote(contents: "C")
+
+        storage.save()
+
+        expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(moved: [
+            (from: IndexPath(row: 2, section: .zero), to: IndexPath(row: .zero, section: .zero))
+        ], updated: [
+            IndexPath(row: .zero, section: .zero)
+        ]))
+
+        note.pinned = true
         storage.save()
 
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
