@@ -372,8 +372,6 @@ class NotesListControllerTests: XCTestCase {
 
         expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(moved: [
             (from: IndexPath(row: 0, section: 0), to: IndexPath(row: 1, section: 0))
-        ], updated: [
-            IndexPath(row: 1, section: 0)
         ]))
 
         firstNote.content = "C"
@@ -531,8 +529,6 @@ class NotesListControllerTests: XCTestCase {
 
         expectBatchChanges(objectsChangeset: ResultsObjectsChangeset(moved: [
             (from: IndexPath(row: 2, section: .zero), to: IndexPath(row: .zero, section: .zero))
-        ], updated: [
-            IndexPath(row: .zero, section: .zero)
         ]))
 
         note.pinned = true
