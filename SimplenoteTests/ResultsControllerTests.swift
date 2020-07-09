@@ -137,7 +137,7 @@ class ResultsControllerTests: XCTestCase {
     }
 
 
-    /// Verifies that `onDidChangeObject` is called whenever a new object is inserted.
+    /// Verifies that `onDidChangeContent` is called  with the inserted objects changesets
     ///
     func testOnDidChangeObjectIsEffectivelyCalledOnceNewObjectsAreInserted() {
         let resultsController = ResultsController<Note>(viewContext: viewContext, sortedBy: [sampleSortDescriptor])
@@ -147,6 +147,9 @@ class ResultsControllerTests: XCTestCase {
         resultsController.onDidChangeContent = { (sectionsChangeset, objectsChangeset) in
             let expectedIndexPath = IndexPath(row: 0, section: 0)
             XCTAssertTrue(objectsChangeset.inserted.contains(expectedIndexPath))
+            XCTAssertEqual(objectsChangeset.updated.count, .zero)
+            XCTAssertEqual(objectsChangeset.deleted.count, .zero)
+            XCTAssertEqual(objectsChangeset.moved.count, .zero)
 
             expectation.fulfill()
         }
@@ -158,7 +161,7 @@ class ResultsControllerTests: XCTestCase {
     }
 
 
-    /// Verifies that `onDidChangeSection` is called whenever new sections are added.
+    /// Verifies that `onDidChangeContent` is called whenever new sections are added.
     ///
     func testOnDidChangeSectionIsCalledWheneverNewSectionsAreAdded() {
         let resultsController = ResultsController<Note>(viewContext: viewContext,
@@ -169,6 +172,7 @@ class ResultsControllerTests: XCTestCase {
         let expectation = self.expectation(description: "onDidChange")
         resultsController.onDidChangeContent = { (sectionsChangeset, objectsChangeset) in
             XCTAssertEqual(sectionsChangeset.inserted.count, 1)
+            XCTAssertEqual(sectionsChangeset.deleted.count, .zero)
             expectation.fulfill()
         }
 
