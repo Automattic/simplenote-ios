@@ -231,6 +231,7 @@ class ResultsControllerTests: XCTestCase {
         XCTAssertEqual(resultsController.numberOfObjects, 0)
     }
 
+
     /// Verifies that the ResultsController.sortDescriptors is effectively applied to the internal FRC
     ///
     func testSortDescriptorsPropertyIsAppliedToInternalFRC() {
