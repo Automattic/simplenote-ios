@@ -653,7 +653,7 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-            [_noteEditorViewController didReceiveVersion:version data:data];
+            [_noteEditorViewController.historyLoader processData:data forVersion:[version integerValue]];
 		}
     }
 }

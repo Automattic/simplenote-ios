@@ -2,7 +2,8 @@ import Foundation
 
 // MARK: - SPHistoryLoader: Request and aggregate versions of Simperium object
 //
-final class SPHistoryLoader {
+@objc
+final class SPHistoryLoader: NSObject {
 
     // MARK: - Item: Represents a version object
     //
@@ -55,12 +56,13 @@ extension SPHistoryLoader {
     /// Process and store a version
     ///
     /// As Simperium supports only one delegate and AppDelegate is set as a delegate, so some other
-    /// class will pass data to SPHistoryLoader. (In case of note version, it's note editor)
+    /// class will pass data to SPHistoryLoader.
     ///
     /// - Parameters:
     ///     - data: data of this version
     ///     - version: version of an object
     ///
+    @objc(processData:forVersion:)
     func process(data: [String: Any], forVersion version: Int) {
         let item = Item(version: version, data: data)
         items.insert(item)

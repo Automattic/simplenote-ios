@@ -95,8 +95,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         bDisableShrinkingNavigationBar = NO;
         _keyboardHeight = 0;
 
-        _swiftCollaborators = [[SPNoteEditorViewControllerSwiftCollaborators alloc] init];
-
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(backButtonAction:)
@@ -1400,10 +1398,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 		[_tagView setupWithTagNames:tags];
     }
     [self updatePublishUI];
-}
-
-- (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
-    [self handleVersion:[version integerValue] data:data];
 }
 
 - (void)didDeleteCurrentNote {
