@@ -14,6 +14,10 @@ struct ResultsTableAnimations {
     ///
     let insert: UITableView.RowAnimation = .fade
 
+    /// TableViewRowAnimation to be applied during Move OP's.
+    ///
+    let move: UITableView.RowAnimation = .fade
+
     /// TableViewRowAnimation to be applied during Update OP's.
     ///
     let update: UITableView.RowAnimation = .fade
@@ -63,8 +67,8 @@ extension UITableView {
 
         // [Step 3] Content Changes: Move OP(s)
         for (from, to) in objectsChangeset.moved {
-            deleteRows(at: [from], with: animations.delete)
-            insertRows(at: [to], with: animations.insert)
+            deleteRows(at: [from], with: animations.move)
+            insertRows(at: [to], with: animations.move)
         }
 
         // [Step 4] Content Changes: Update OP(s)

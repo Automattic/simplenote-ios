@@ -12,7 +12,7 @@ struct ResultsObjectsChangeset {
     /// Designed Initializer.
     /// - Note: Ensures that Insertions are ASC and deletions are DESC
     ///
-    init(deleted: [IndexPath], inserted: [IndexPath], moved: [(from: IndexPath, to: IndexPath)], updated: [IndexPath]) {
+    init(deleted: [IndexPath], inserted: [IndexPath], moved: [(IndexPath, IndexPath)], updated: [IndexPath]) {
         self.deleted = deleted.sorted(by: >)
         self.inserted = inserted.sorted(by: <)
         self.moved = moved
@@ -28,7 +28,7 @@ extension ResultsObjectsChangeset {
     init(objectChanges: [ResultsObjectChange]) {
         var deleted     = [IndexPath]()
         var inserted    = [IndexPath]()
-        var moved       = [(from: IndexPath, to: IndexPath)]()
+        var moved       = [(IndexPath, IndexPath)]()
         var updated     = [IndexPath]()
 
         for change in objectChanges {
@@ -40,7 +40,7 @@ extension ResultsObjectsChangeset {
                 inserted.append(indexPath)
 
             case .move(let oldIndexPath, let newIndexPath):
-                moved.append((from: oldIndexPath, to: newIndexPath))
+                moved.append((oldIndexPath, newIndexPath))
 
                 // WWDC 2020 @ Labs Recommendation
                 updated.append(newIndexPath)
