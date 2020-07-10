@@ -123,6 +123,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)configureTextView
 {
     _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView.delegate = self;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -179,17 +180,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-    _tagView.frame = CGRectMake(0,
-                                self.view.frame.size.height - tagViewHeight,
-                                self.view.frame.size.width,
-                                tagViewHeight);
-
-    [self.view addSubview:_noteEditorTextView];
-    _noteEditorTextView.frame = self.view.bounds;
-    _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _noteEditorTextView.delegate = self;
 
     self.navigationItem.title = nil;
 
