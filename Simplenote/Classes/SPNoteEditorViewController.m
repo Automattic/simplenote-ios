@@ -207,7 +207,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
-    [self adjustFrameForSafeInsets];
 
     if (!_currentNote) {
         [self newButtonAction:nil];
@@ -274,12 +273,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
      }];
 }
 
-- (void)adjustFrameForSafeInsets
-{
-    CGRect viewFrame = _noteEditorTextView.frame;
-    viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
-    _noteEditorTextView.frame = viewFrame;
-}
 - (void)startListeningToThemeNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
