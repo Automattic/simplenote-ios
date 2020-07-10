@@ -1010,7 +1010,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         self.backButton.alpha = 1.0;
 
-        self.navigationBarTopConstraint.constant = 0.0;
+        self.navigationBackgroundBottomConstraint.constant = 0.0;
         [self.view layoutIfNeeded];
     };
     
@@ -1111,7 +1111,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-    self.navigationBarTopConstraint.constant = yTransform;
+    self.navigationBackgroundBottomConstraint.constant = yTransform;
 }
 
 #pragma mark UITextViewDelegate methods
