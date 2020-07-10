@@ -234,21 +234,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)configureLayout
-{
-    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
-    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
-
-    [self.view addSubview:self.navigationBarBackground];
-
-    [NSLayoutConstraint activateConstraints:@[
-        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
-        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    ]];
-}
-
 - (void)setupNavigationController {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];

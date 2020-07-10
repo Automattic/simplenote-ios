@@ -1,6 +1,37 @@
 import Foundation
 
 
+// MARK: - Interface Initialization
+//
+extension SPNoteEditorViewController {
+
+    /// Sets up the Root ViewController
+    ///
+    @objc
+    func configureRootView() {
+        navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
+        noteEditorTextView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(navigationBarBackground)
+        view.addSubview(noteEditorTextView)
+
+        NSLayoutConstraint.activate([
+            navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationBarBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            noteEditorTextView.topAnchor.constraint(equalTo: navigationBarBackground.bottomAnchor),
+            noteEditorTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+    }
+}
+
+
 // MARK: - Keyboard Handling
 //
 extension SPNoteEditorViewController: KeyboardObservable {
