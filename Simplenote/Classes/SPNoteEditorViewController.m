@@ -63,6 +63,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
+@property (nonatomic, assign) BOOL                      voiceoverEnabled;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -106,7 +107,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         // voiceover status is tracked because the tag view is anchored
         // to the bottom of the screen when voiceover is enabled to allow
         // easier access
-        bVoiceoverEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusDidChangeNotification
@@ -186,7 +186,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
-    [self swapTagViewPositionForVoiceover];
+    [self ensureVoiceoverIsEnabled];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -518,48 +518,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)didReceiveVoiceOverNotification:(NSNotification *)notification {
-    
-    [self swapTagViewPositionForVoiceover];
-    bVoiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
-    
-    if (bVoiceoverEnabled) {
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    }
+- (void)didReceiveVoiceOverNotification:(NSNotification *)notification
+{
+    [self ensureVoiceoverIsEnabled];
 }
 
-- (void)swapTagViewPositionForVoiceover {
-    
-    if (bVoiceoverEnabled != UIAccessibilityIsVoiceOverRunning()) {
-        
-        CGRect viewFrame = self.view.bounds;
+- (void)ensureVoiceoverIsEnabled
+{
+    self.voiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
+    self.noteEditorTextView.lockTagEditorPosition = self.voiceoverEnabled;
 
-        if (UIAccessibilityIsVoiceOverRunning()) {
-            
-            [_tagView removeFromSuperview];
-            CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-            _tagView.frame = CGRectMake(0,
-                                        viewFrame.size.height - tagViewHeight - self.keyboardHeight,
-                                        viewFrame.size.width,
-                                        tagViewHeight);
-            _noteEditorTextView.tagView = nil;
-            _noteEditorTextView.frame = CGRectMake(0,
-                                                   0,
-                                                   viewFrame.size.width,
-                                                   _tagView.frame.origin.y);
-            
-            [self.view addSubview:_tagView];
-            
-        } else {
-            
-            _noteEditorTextView.tagView = _tagView;
-            [_noteEditorTextView addSubview:_tagView];
-            _noteEditorTextView.frame = CGRectMake(0,
-                                                   0,
-                                                   viewFrame.size.width,
-                                                   viewFrame.size.height - self.keyboardHeight);
-            [_noteEditorTextView setNeedsLayout];
-        }
+    if (self.voiceoverEnabled) {
+        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     }
 }
 
@@ -659,7 +629,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.previewing = NO;
     
     // hide the tags field
-    if (!bVoiceoverEnabled) {
+    if (!self.voiceoverEnabled) {
         self.tagView.alpha = UIKitConstants.alpha0_0;
     }
 }
@@ -1056,7 +1026,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)applyNavigationBarTranslationTransformX:(float)x Y:(float)y {
     
-    if ([UIDevice isPad] || bVoiceoverEnabled) {
+    if ([UIDevice isPad] || self.voiceoverEnabled) {
         return;
     }
     

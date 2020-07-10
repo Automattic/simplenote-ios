@@ -27,7 +27,6 @@
     BOOL bViewingVersions;
     BOOL beditingTags;
     BOOL bActionSheetVisible;
-    BOOL bVoiceoverEnabled;
     
     CGAffineTransform navigationBarTransform;
     CGFloat scrollPosition;
