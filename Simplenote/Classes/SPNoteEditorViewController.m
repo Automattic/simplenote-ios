@@ -1007,9 +1007,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.checklistButton.alpha = 1.0;
         self.keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
-        self.navigationBarBackground.transform = CGAffineTransformIdentity;
-        
+
         self.backButton.alpha = 1.0;
+
+        self.navigationBarTopConstraint.constant = 0.0;
+        [self.view layoutIfNeeded];
     };
     
     void (^completionBlock)();
@@ -1109,9 +1111,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-
-    self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
-                                                                     CGAffineTransformMakeTranslation(0, yTransform));
+    self.navigationBarTopConstraint.constant = yTransform;
 }
 
 #pragma mark UITextViewDelegate methods

@@ -15,15 +15,17 @@ extension SPNoteEditorViewController {
         view.addSubview(navigationBarBackground)
         view.addSubview(noteEditorTextView)
 
+        navigationBarTopConstraint = navigationBarBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
-            navigationBarBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBarTopConstraint,
             navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
             navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            noteEditorTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            noteEditorTextView.topAnchor.constraint(equalTo: navigationBarBackground.bottomAnchor),
             noteEditorTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
             noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
