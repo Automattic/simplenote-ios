@@ -19,7 +19,7 @@ extension UIImage {
 // MARK: - Constants
 //
 private enum SearchBackgroundMetrics {
-    static let alpha = CGFloat(0.25)
+    static let alpha = CGFloat(0.3)
     static let radius = CGFloat(10)
     static let rect = CGRect(x: 0, y: 0, width: 16, height: 36)
 }

@@ -1,3 +1,1 @@
-Fixed a bug that affected the Share Extension's Appearance.
-Fixed RTL support in the Authentication Screens.
-Fixed RTL support in the Tags Editor.
+New Privacy Notice for California Users
