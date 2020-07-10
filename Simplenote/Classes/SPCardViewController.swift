@@ -141,7 +141,7 @@ private extension SPCardViewController {
     }
 
     func refreshStyle() {
-        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor.withAlphaComponent(Constants.backgroundAlpha)
+        containerView.backgroundColor = UIColor.simplenoteCardBackgroundColor
     }
 }
 
@@ -167,6 +167,5 @@ private extension SPCardViewController {
 private extension SPCardViewController {
     struct Constants {
         static let cornerRadius: CGFloat = 10.0
-        static let backgroundAlpha: CGFloat = 0.97
     }
 }

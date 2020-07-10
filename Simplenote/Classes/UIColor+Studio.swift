@@ -205,7 +205,7 @@ extension UIColor {
 
     @objc
     static var simplenoteCardBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray2)
+        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_97)
     }
 
     @objc
