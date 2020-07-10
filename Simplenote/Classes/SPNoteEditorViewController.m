@@ -63,7 +63,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
-@property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -281,17 +280,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
     _noteEditorTextView.frame = viewFrame;
 }
-
-- (void)startListeningToKeyboardNotifications {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (void)stopListeningToKeyboardNotifications {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
 - (void)startListeningToThemeNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
@@ -951,52 +939,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
                      }];
     
-}
-
-
-#pragma mark Keyboard Notifications
-
-- (void)keyboardWillChangeFrame:(NSNotification *)notification {
-    
-    NSDictionary *userInfo  = notification.userInfo;
-    NSTimeInterval duration = [((NSNumber *)userInfo[UIKeyboardAnimationDurationUserInfoKey]) floatValue];
-    CGRect keyboardFrame    = [((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]) CGRectValue];
-    CGSize viewBounds       = self.view.bounds.size;
-
-    CGFloat newKeyboardHeight = MAX(viewBounds.height - CGRectGetMinY(keyboardFrame), 0);
-    BOOL isKeyboardVisible = newKeyboardHeight > 0;
-    
-    void (^animations)() = ^void() {
-        CGRect newFrame            = self->_noteEditorTextView.frame;
-        newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - newKeyboardHeight;
-        if (!isKeyboardVisible) {
-            newFrame.size.height -= self.view.safeAreaInsets.bottom;
-        }
-        self->_noteEditorTextView.frame  = newFrame;
-        
-        if (self->bVoiceoverEnabled) {
-            CGRect newFrame        = self->_tagView.frame;
-            newFrame.origin.y      = self.view.frame.size.height - self->_tagView.frame.size.height - newKeyboardHeight;
-            self->_tagView.frame         = newFrame;
-        }
-    };
-    
-    // TODO: Drop isInteractive code path.
-    // Should only be necessary on pre-iOS 9 devices.
-    // On iOS 9 the keyboard's animation doesn't happen interactively. If an interactive transition is
-    // taking place, the editor text view's frame must be changed instantaneously, otherwise on
-    // dismissal you can see the bottom of the text being clipped once the keyboard has dismissed.
-    if (self.transitionCoordinator.isInteractive) {
-        [UIView performWithoutAnimation:^{
-           animations();
-        }];
-    } else {
-        // Animate Editor Resize / Tag Reposition
-        [UIView animateWithDuration:duration animations:animations];
-    }
-    
-    self.keyboardHeight = newKeyboardHeight;
-    self.keyboardVisible = isKeyboardVisible;
 }
 
 

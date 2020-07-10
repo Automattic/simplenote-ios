@@ -72,9 +72,11 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
+// Keyboard!
+@property (nonatomic, assign) CGFloat keyboardHeight;
+
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
-@property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
