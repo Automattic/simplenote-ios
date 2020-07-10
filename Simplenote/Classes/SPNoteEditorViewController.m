@@ -787,12 +787,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self refreshNavigationBarButtons];
 }
 
-- (void)setKeyboardVisible:(BOOL)keyboardVisible
+- (void)setKeyboardHeight:(CGFloat)keyboardHeight
 {
-    _keyboardVisible = keyboardVisible;
-    
+    _keyboardHeight = keyboardHeight;
+
     [self refreshNavigationBarButtons];
 }
+
+- (BOOL)isKeyboardVisible
+{
+    return self.keyboardHeight > 0;
+}
+
 
 #pragma mark - UIPopoverPresentationControllerDelegate
 
