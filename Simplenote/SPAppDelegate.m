@@ -242,7 +242,19 @@
     return YES;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [self ensurePinlockIsDismissed];
+    [SPTracker trackApplicationOpened];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [SPTracker trackApplicationClosed];
+}
+
+- (void)ensurePinlockIsDismissed
+{
     // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
     if (self.pinLockWindow != nil
         && [self.pinLockWindow isKeyWindow]
