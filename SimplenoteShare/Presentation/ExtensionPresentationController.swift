@@ -102,13 +102,7 @@ final class ExtensionPresentationController: UIPresentationController {
 //
 extension ExtensionPresentationController: KeyboardObservable {
 
-    func keyboardWillShow(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        let keyboardFrame = endFrame ?? .zero
-        let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
-    }
-
-    func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         let keyboardFrame = endFrame ?? .zero
         let duration = animationDuration ?? Constants.defaultAnimationDuration
         animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
