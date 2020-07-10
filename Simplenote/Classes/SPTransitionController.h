@@ -6,6 +6,7 @@ extern NSString *const SPTransitionControllerPopGestureTriggeredNotificationName
 
 @protocol SPInteractiveDismissableViewController
 @property (readonly) BOOL requiresFirstResponderRestorationBypass;
+- (BOOL)interactiveDismissShouldBegin;
 @end
 
 

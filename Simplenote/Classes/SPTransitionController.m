@@ -108,19 +108,24 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
         return YES;
     }
 
-
-    BOOL recognizerShouldBegin = self.navigationController.viewControllers.count > 1;
-    if (recognizerShouldBegin) {
-        [self bypassFirstResponderRestorationIfNeeded];
+    // Nothing to dismiss
+    if (self.navigationController.viewControllers.count < 2) {
+        return NO;
     }
 
-    return recognizerShouldBegin;
+    UIViewController<SPInteractiveDismissableViewController> *dismissableViewController = [self currentDismissableViewController];
+    if (dismissableViewController && ![dismissableViewController interactiveDismissShouldBegin]) {
+        return NO;
+    }
+
+    [self bypassFirstResponderRestorationIfNeeded];
+    return YES;
 }
 
 - (void)bypassFirstResponderRestorationIfNeeded
 {
-    UIViewController<SPInteractiveDismissableViewController> *dismissableViewController = (UIViewController<SPInteractiveDismissableViewController> *)self.navigationController.topViewController;
-    if (![dismissableViewController conformsToProtocol:@protocol(SPInteractiveDismissableViewController)]) {
+    UIViewController<SPInteractiveDismissableViewController> *dismissableViewController = [self currentDismissableViewController];
+    if (!dismissableViewController) {
         return;
     }
 
@@ -129,6 +134,16 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     }
 
     [dismissableViewController.view endEditing:YES];
+}
+
+- (UIViewController<SPInteractiveDismissableViewController> *)currentDismissableViewController
+{
+    UIViewController<SPInteractiveDismissableViewController> *dismissableViewController = (UIViewController<SPInteractiveDismissableViewController> *)self.navigationController.topViewController;
+    if (![dismissableViewController conformsToProtocol:@protocol(SPInteractiveDismissableViewController)]) {
+        return nil;
+    }
+
+    return dismissableViewController;
 }
 
 @end

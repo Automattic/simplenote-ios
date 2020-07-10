@@ -879,6 +879,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return YES;
 }
 
+- (BOOL)interactiveDismissShouldBegin {
+    return ![self isShowingHistory];
+}
 
 #pragma mark search
 
