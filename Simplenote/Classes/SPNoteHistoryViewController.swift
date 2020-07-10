@@ -11,7 +11,7 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var dismissButton: UIButton!
 
     private let controller: SPNoteHistoryController
-    private var items: [SPNoteHistoryController.Presentable] = []
+    private var versions: [SPHistoryVersion] = []
 
     /// Designated initialize
     ///
@@ -113,12 +113,12 @@ private extension SPNoteHistoryViewController {
 
             setAccessibilityFocus(activityIndicator)
 
-        case .results(let items):
+        case .results(let versions):
             setMainContentVisible(true)
             setActivityIndicatorVisible(false)
             setErrorMessageVisible(false)
 
-            self.items = items
+            self.versions = versions
 
             configureSlider()
 
@@ -137,14 +137,17 @@ private extension SPNoteHistoryViewController {
 
     func update(withSliderValue value: Float) {
         let index = Int(value)
-        let item = items[index]
+        let version = versions[index]
 
-        dateLabel.text = item.date
-        restoreButton.isEnabled = item.isRestorable
+        let dateString = controller.note.dateString(version.modificationDate, brief: false)
 
-        updateSliderAccessibilityValue(with: item)
+        dateLabel.text = dateString
+        restoreButton.isEnabled = version.version != controller.note.versionInt
+        styleRestoreButton()
 
-        controller.selectVersion(atIndex: index)
+        updateSliderAccessibilityValue(dateString)
+
+        controller.select(version: version)
     }
 }
 
@@ -159,7 +162,7 @@ private extension SPNoteHistoryViewController {
 
     func configureSlider() {
         slider.minimumValue = 0.0
-        slider.maximumValue = Float(max(items.count - 1, 0))
+        slider.maximumValue = Float(max(versions.count - 1, 0))
         slider.value = slider.maximumValue
         update(withSliderValue: slider.value)
     }
@@ -247,7 +250,7 @@ extension SPNoteHistoryViewController {
         activityIndicator.accessibilityLabel = NSLocalizedString("Loading Versions", comment: "Accessibility label describing activity indicator loading note versions")
     }
 
-    private func updateSliderAccessibilityValue(with item: SPNoteHistoryController.Presentable) {
-        slider.accessibilityValue = item.date
+    private func updateSliderAccessibilityValue(_ value: String?) {
+        slider.accessibilityValue = value
     }
 }

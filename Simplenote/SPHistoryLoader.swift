@@ -2,22 +2,14 @@ import Foundation
 
 // MARK: - SPHistoryLoader: Request and aggregate versions of Simperium object
 //
-final class SPHistoryLoader {
-
-    // MARK: - Item: Represents a version object
-    //
-    struct Item {
-        let version: Int
-        let modificationDate: Date
-        let content: String
-    }
-
+@objc
+final class SPHistoryLoader: NSObject {
     private let bucket: SPBucket
     private let simperiumKey: String
     private let amountOfVersionsToLoad: Int
 
-    private var completion: (([Item]) -> Void)?
-    private var items: Set<Item> = []
+    private var completion: (([SPHistoryVersion]) -> Void)?
+    private var versions: Set<SPHistoryVersion> = []
 
     /// Designated Initializer
     ///
@@ -37,12 +29,12 @@ final class SPHistoryLoader {
     /// - Parameters:
     ///     - completion: Invoked after all requested versions have arrived
     ///
-    func load(completion: @escaping ([Item]) -> Void) {
+    func load(completion: @escaping ([SPHistoryVersion]) -> Void) {
         if self.completion != nil {
             return
         }
 
-        items = []
+        versions = []
         self.completion = completion
 
         bucket.requestVersions(Int32(amountOfVersionsToLoad), key: simperiumKey)
@@ -55,20 +47,21 @@ extension SPHistoryLoader {
     /// Process and store a version
     ///
     /// As Simperium supports only one delegate and AppDelegate is set as a delegate, so some other
-    /// class will pass data to SPHistoryLoader. (In case of note version, it's note editor)
+    /// class will pass data to SPHistoryLoader.
     ///
     /// - Parameters:
     ///     - data: data of this version
     ///     - version: version of an object
     ///
+    @objc(processData:forVersion:)
     func process(data: [String: Any], forVersion version: Int) {
-        let item = Item(version: version, data: data)
-        items.insert(item)
+        let item = SPHistoryVersion(version: version, data: data)
+        versions.insert(item)
         checkIfFinished()
     }
 
     private func checkIfFinished() {
-        guard items.count == amountOfVersionsToLoad else {
+        guard versions.count == amountOfVersionsToLoad else {
             return
         }
 
@@ -76,7 +69,7 @@ extension SPHistoryLoader {
             return
         }
         self.completion = nil
-        completion(items.sorted(by: { $0.version < $1.version }))
+        completion(versions.sorted(by: { $0.version < $1.version }))
     }
 }
 
@@ -90,11 +83,10 @@ extension SPHistoryLoader {
     ///
     convenience init(note: Note) {
         let bucket = SPAppDelegate.shared().simperium.bucket(forName: Note.classNameWithoutNamespaces)!
-        let version = Int(note.version() ?? "1") ?? 1
 
         self.init(bucket: bucket,
                   simperiumKey: note.simperiumKey,
-                  currentVersion: version)
+                  currentVersion: note.versionInt)
     }
 }
 
@@ -106,22 +98,14 @@ private extension SPHistoryLoader {
     }
 }
 
-// MARK: - SPHistoryLoader.Item Constructor
+// MARK: - SPHistoryVersion: init with raw data
 //
-private extension SPHistoryLoader.Item {
+private extension SPHistoryVersion {
     init(version: Int, data: [String: Any]) {
         self.version = version
 
         let timeInterval = data["modificationDate"] as? TimeInterval
         modificationDate = Date(timeIntervalSince1970: timeInterval ?? 0)
         content = (data["content"] as? String) ?? ""
-    }
-}
-
-// MARK: - SPHistoryLoader.Item Hashable
-//
-extension SPHistoryLoader.Item: Hashable {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(version)
     }
 }

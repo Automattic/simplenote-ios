@@ -8,14 +8,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     var isShowingHistory: Bool {
-        return swiftCollaborators.historyCardViewController != nil
-    }
-
-    /// Receives a note version. This is called from objc counterpart, which has delegate methods from Simperium
-    ///
-    @objc(handleVersion:data:)
-    func handle(version: Int, data: [String: Any]) {
-        swiftCollaborators.historyLoader?.process(data: data, forVersion: version)
+        return historyCardViewController != nil
     }
 
     /// Shows note history
@@ -39,18 +32,19 @@ extension SPNoteEditorViewController {
 
         controller.delegate = self
 
-        swiftCollaborators.historyLoader = loader
-        swiftCollaborators.historyCardViewController = cardViewController
+        historyLoader = loader
+        historyCardViewController = cardViewController
 
         return cardViewController
     }
 
     private func dismissHistory() {
-        guard let viewController = swiftCollaborators.historyCardViewController else {
+        guard let viewController = historyCardViewController else {
             return
         }
-        swiftCollaborators.historyCardViewController = nil
-        swiftCollaborators.historyLoader = nil
+
+        historyCardViewController = nil
+        historyLoader = nil
 
         viewController.dismiss(animated: true, completion: nil)
 
@@ -107,31 +101,32 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 //
 private extension SPNoteEditorViewController {
     func updateEditor(with content: String, animated: Bool = false) {
-        var snapshot: UIView?
-        if animated {
-            snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false)
-            if let snapshot = snapshot {
-                snapshot.frame = noteEditorTextView.frame
-                view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
-            }
+        let contentUpdateBlock = {
+            self.noteEditorTextView.attributedText = NSAttributedString(string: content)
+            self.noteEditorTextView.processChecklists()
         }
 
-        noteEditorTextView.attributedText = NSAttributedString(string: content)
-        noteEditorTextView.processChecklists()
-
-        if animated {
-            let animations = { () -> Void in
-                snapshot?.alpha = 0.0
-            }
-
-            let completion: (Bool) -> Void = { _ in
-                snapshot?.removeFromSuperview()
-            }
-
-            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                           animations: animations,
-                           completion: completion)
+        guard animated, let snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false) else {
+            contentUpdateBlock()
+            return
         }
+
+        snapshot.frame = noteEditorTextView.frame
+        view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
+
+        contentUpdateBlock()
+
+        let animations = { () -> Void in
+            snapshot.alpha = 0.0
+        }
+
+        let completion: (Bool) -> Void = { _ in
+            snapshot.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration,
+                       animations: animations,
+                       completion: completion)
     }
 }
 

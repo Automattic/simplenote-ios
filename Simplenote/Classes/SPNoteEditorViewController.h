@@ -8,9 +8,9 @@
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
-@class SPNoteEditorViewControllerSwiftCollaborators;
+@class SPHistoryLoader;
 
-@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPBucketDelegate> {
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate> {
     
     // Other Objects
     NSTimer *saveTimer;
@@ -57,7 +57,8 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, strong) SPNoteEditorViewControllerSwiftCollaborators *swiftCollaborators;
+@property (nonatomic, weak) UIViewController *historyCardViewController;
+@property (nonatomic, weak) SPHistoryLoader *historyLoader;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
@@ -73,7 +74,6 @@
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
-- (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
 
 - (void)save;

@@ -115,7 +115,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNoteHeadlineColor: UIColor {
-        UIColor(lightColor: .gray100, darkColor: .white)
+        UIColor(lightColor: .gray100, darkColor: .gray5)
     }
 
     @objc
@@ -200,7 +200,7 @@ extension UIColor {
 
     @objc
     static var simplenoteBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray1)
+        UIColor(lightColor: .white, darkColor: .black)
     }
 
     @objc
@@ -225,7 +225,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
+        UIColor(lightColor: .white, darkColor: .black).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
@@ -235,7 +235,7 @@ extension UIColor {
 
     @objc
     static var simplenoteSortBarBackgroundColor: UIColor {
-        UIColor(lightColor: .spGray1, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_8)
+        UIColor(lightColor: .spGray1, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
