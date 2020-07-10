@@ -17,7 +17,7 @@
 @interface SPEditorTextView : SPTextView
 
 @property (nonatomic) BOOL lockContentOffset;
-@property (nonatomic) BOOL overideLockContentOffset;
+@property (nonatomic) BOOL lockTagEditorPosition;
 
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) UIFont *checklistsFont;
