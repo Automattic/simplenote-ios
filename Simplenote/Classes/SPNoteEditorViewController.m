@@ -1111,7 +1111,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.navigationController.navigationBar.transform = navigationBarTransform;
 
     self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
-                                                                    CGAffineTransformMakeTranslation(0, yTransform));
+                                                                     CGAffineTransformMakeTranslation(0, yTransform));
 }
 
 #pragma mark UITextViewDelegate methods
