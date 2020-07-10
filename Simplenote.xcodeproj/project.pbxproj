@@ -218,6 +218,7 @@
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
 		B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */; };
 		B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */; };
+		B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552AB8624B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift */; };
 		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
@@ -566,6 +567,7 @@
 		B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Simplenote.swift"; path = "Classes/NSUserActivity+Simplenote.swift"; sourceTree = "<group>"; };
 		B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSUserActivity+Shortcuts.swift"; path = "Classes/NSUserActivity+Shortcuts.swift"; sourceTree = "<group>"; };
 		B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 5.xcdatamodel"; sourceTree = "<group>"; };
+		B552AB8624B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPNoteEditorViewController+Extensions.swift"; path = "Classes/SPNoteEditorViewController+Extensions.swift"; sourceTree = "<group>"; };
 		B5536B861B8E46AC00FF190A /* cy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cy; path = cy.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5536B871B8E47B400FF190A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5536B881B8E490200FF190A /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1661,6 +1663,7 @@
 				E215C791180B115C00AD36B5 /* SPNavigationController.m */,
 				E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */,
 				E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */,
+				B552AB8624B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift */,
 				E20DED0217AE07340086AB5F /* SPPopoverContainerViewController.h */,
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
@@ -2187,6 +2190,7 @@
 				46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */,
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
+				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B5095DC924632E3300812711 /* SimplenoteConstants.swift in Sources */,
