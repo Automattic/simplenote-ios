@@ -15,11 +15,6 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func showHistory() {
-        let viewController = newHistoryViewController()
-        viewController.present(from: self)
-    }
-
-    private func newHistoryViewController() -> SPCardViewController {
         let loader = SPHistoryLoader(note: currentNote)
         let controller = SPNoteHistoryController(note: currentNote, loader: loader)
         let historyViewController = SPNoteHistoryViewController(controller: controller)
@@ -27,10 +22,10 @@ extension SPNoteEditorViewController {
 
         controller.delegate = self
 
-        historyLoader = loader
         historyCardViewController = cardViewController
+        historyLoader = loader
 
-        return cardViewController
+        cardViewController.present(from: self)
     }
 
     private func dismissHistory() {
