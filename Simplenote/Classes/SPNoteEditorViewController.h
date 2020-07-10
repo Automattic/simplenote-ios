@@ -5,7 +5,10 @@
 #import "SPAddCollaboratorsViewController.h"
 #import "SPHorizontalPickerView.h"
 #import <Simperium/Simperium.h>
+
+
 @class Note;
+@class SPBlurEffectView;
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
@@ -51,6 +54,9 @@
     NSMutableDictionary *noteVersionData;
     
 }
+
+// Navigation Bar Style
+@property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
 
 // Navigation Back Button
 @property (nonatomic, strong) UIButton *backButton;
