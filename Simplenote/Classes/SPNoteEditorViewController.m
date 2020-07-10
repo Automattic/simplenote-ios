@@ -834,6 +834,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
+    if ([self isShowingHistory]) {
+        return NO;
+    }
+
     if (!self.currentNote.markdown) {
         return NO;
     }
