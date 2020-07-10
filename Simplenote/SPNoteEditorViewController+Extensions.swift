@@ -68,30 +68,31 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 //
 private extension SPNoteEditorViewController {
     func updateEditor(with content: String, animated: Bool = false) {
-        var snapshot: UIView?
-        if animated {
-            snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false)
-            if let snapshot = snapshot {
-                snapshot.frame = noteEditorTextView.frame
-                view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
-            }
+        let contentUpdateBlock = {
+            self.noteEditorTextView.attributedText = NSAttributedString(string: content)
+            self.noteEditorTextView.processChecklists()
         }
 
-        noteEditorTextView.attributedText = NSAttributedString(string: content)
-        noteEditorTextView.processChecklists()
-
-        if animated {
-            let animations = { () -> Void in
-                snapshot?.alpha = 0.0
-            }
-
-            let completion: (Bool) -> Void = { _ in
-                snapshot?.removeFromSuperview()
-            }
-
-            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                           animations: animations,
-                           completion: completion)
+        guard animated, let snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false) else {
+            contentUpdateBlock()
+            return
         }
+
+        snapshot.frame = noteEditorTextView.frame
+        view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
+
+        contentUpdateBlock()
+
+        let animations = { () -> Void in
+            snapshot.alpha = 0.0
+        }
+
+        let completion: (Bool) -> Void = { _ in
+            snapshot.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration,
+                       animations: animations,
+                       completion: completion)
     }
 }
