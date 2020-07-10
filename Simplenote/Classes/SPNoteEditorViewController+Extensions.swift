@@ -23,8 +23,8 @@ extension SPNoteEditorViewController {
         ])
 
         NSLayoutConstraint.activate([
-            noteEditorTextView.topAnchor.constraint(equalTo: navigationBarBackground.bottomAnchor),
-            noteEditorTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            noteEditorTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            noteEditorTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
             noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])

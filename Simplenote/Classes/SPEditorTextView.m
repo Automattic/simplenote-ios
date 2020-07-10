@@ -39,6 +39,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (UIEdgeInsets)adjustedContentInset
+{
+    UIEdgeInsets contentInsets = super.adjustedContentInset;
+    contentInsets.bottom += 2 * CGRectGetHeight(self.tagView.bounds);
+    return contentInsets;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -58,7 +65,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
         [self addSubview:_tagView];
         
         UIEdgeInsets contentInset = self.contentInset;
-        contentInset.bottom += 2 * tagViewHeight;
         contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
         
@@ -70,7 +76,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
                forKeyPath:@"contentOffset"
                   options:NSKeyValueObservingOptionNew
                   context:NULL];
-        
+        [self addObserver:self
+               forKeyPath:@"contentInset"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didEndEditing:)
                                                      name:UITextViewTextDidEndEditingNotification
@@ -104,8 +114,16 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == self && ([keyPath isEqualToString:@"contentOffset"] || [keyPath isEqualToString:@"contentSize"]))
-        [self positionTagView];
+    if (object != self) {
+        return;
+    }
+
+    NSArray *observedKeyPaths = @[ @"contentOffset", @"contentSize", @"contentInset" ];
+    if (![observedKeyPaths containsObject:keyPath]) {
+        return;
+    }
+
+    [self positionTagView];
 }
 
 
@@ -132,16 +150,16 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)positionTagView
 {
-    CGFloat height = _tagView.frame.size.height;
-    CGFloat yOrigin = self.contentSize.height - height + self.contentInset.top;
-    yOrigin = MAX(yOrigin, self.contentOffset.y + self.bounds.size.height - height);
-    
-    CGFloat tagPadding = self.safeAreaInsets.left;    
-    CGRect footerViewFrame = CGRectMake(tagPadding,
-                                        yOrigin,
-                                        self.bounds.size.width - 2 * tagPadding,
-                                        height);
-    _tagView.frame = footerViewFrame;
+    CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
+    CGFloat height      = CGRectGetHeight(self.tagView.frame);
+
+    CGFloat bottomInset = MAX(self.contentInset.bottom, self.safeAreaInsets.bottom);
+    CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - bottomInset;
+    CGFloat contentMinY = self.contentSize.height - height + self.contentInset.top;
+    CGFloat yOrigin     = MAX(boundsMinY, contentMinY);
+    CGFloat xOrigin     = self.safeAreaInsets.left;
+
+    _tagView.frame      = CGRectMake(xOrigin, yOrigin, width, height);
 }
 
 - (void)setTagView:(SPTagView *)tagView
