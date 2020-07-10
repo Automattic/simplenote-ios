@@ -82,9 +82,7 @@ extension SPHistoryLoader {
     ///     - note: a note
     ///
     convenience init(note: Note) {
-        let bucket = SPAppDelegate.shared().simperium.bucket(forName: Note.classNameWithoutNamespaces)!
-
-        self.init(bucket: bucket,
+        self.init(bucket: note.bucket,
                   simperiumKey: note.simperiumKey,
                   currentVersion: note.versionInt)
     }
