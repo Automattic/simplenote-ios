@@ -20,6 +20,7 @@ class ResultsControllerUIKitTests: XCTestCase {
 
 
     // MARK: - Overridden Methods
+
     override func setUp() {
         storageManager = MockupStorageManager()
         tableView = MockupTableView()
@@ -32,47 +33,11 @@ class ResultsControllerUIKitTests: XCTestCase {
             return ResultsController<Note>(viewContext: viewContext, sectionNameKeyPath: sectionNameKeyPath, sortedBy: [descriptor])
         }()
 
-        resultsController.onWillChangeContent = { [weak self] in
-            self?.tableView.beginUpdates()
-        }
-
-        resultsController.onDidChangeContent = { [weak self] in
-            self?.tableView.endUpdates()
-        }
-
-        resultsController.onDidChangeObject = { [weak self] change in
-            self?.tableView.resultsController(didChangeObject: change)
-        }
-
-        resultsController.onDidChangeSection = { [weak self] change in
-            self?.tableView.resultsController(didChangeSection: change)
+        resultsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+            self?.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
 
         try? resultsController.performFetch()
-    }
-
-
-    /// Verifies that `beginUpdates` + `endUpdates` are called in sequence.
-    ///
-    func testBeginAndEndUpdatesAreProperlyExecutedBeforeAndAfterPerformingUpdates() {
-        let expectation = self.expectation(description: "BeginUpdates Goes First")
-        expectation.expectedFulfillmentCount = 2
-        expectation.assertForOverFulfill = true
-
-        var beginUpdatesWasExecuted = false
-
-        tableView.onBeginUpdates = {
-            beginUpdatesWasExecuted = true
-            expectation.fulfill()
-        }
-
-        tableView.onEndUpdates = {
-            XCTAssertTrue(beginUpdatesWasExecuted)
-            expectation.fulfill()
-        }
-
-        storageManager.insertSampleNote()
-        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
     /// Verifies that inserted entities result in `tableView.insertRows`

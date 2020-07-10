@@ -19,6 +19,11 @@ class ResultsController<T: NSManagedObject> {
     ///
     private let resultsController: NSFetchedResultsController<T>
 
+    /// Pending Changesets
+    ///
+    private var sectionsChangeset = ResultsSectionsChangeset()
+    private var objectsChangeset = ResultsObjectsChangeset()
+
     /// ResultsController's Fetch Request
     ///
     private var fetchRequest: NSFetchRequest<T> {
@@ -58,21 +63,9 @@ class ResultsController<T: NSManagedObject> {
         }
     }
 
-    /// Closure to be executed before the results are changed.
-    ///
-    var onWillChangeContent: (() -> Void)?
-
     /// Closure to be executed after the results are changed.
     ///
-    var onDidChangeContent: (() -> Void)?
-
-    /// Closure to be executed whenever an Object is updated.
-    ///
-    var onDidChangeObject: ((_ change: ResultsObjectChange) -> Void)?
-
-    /// Closure to be executed whenever an entire Section is updated.
-    ///
-    var onDidChangeSection: ((_ change: ResultsSectionChange) -> Void)?
+    var onDidChangeContent: ((_ sections: ResultsSectionsChangeset, _ objects: ResultsObjectsChangeset) -> Void)?
 
 
     /// Designated Initializer
@@ -115,6 +108,7 @@ extension ResultsController {
     /// Executes the fetch request on the store to get objects.
     ///
     func performFetch() throws {
+        resetPendingChangesets()
         try resultsController.performFetch()
     }
 
@@ -164,18 +158,27 @@ private extension ResultsController {
     ///
     func setupDelegateWrapper() {
         internalDelegate.onWillChangeContent = { [weak self] in
-            self?.onWillChangeContent?()
+            self?.resetPendingChangesets()
         }
 
         internalDelegate.onDidChangeContent = { [weak self] in
-            self?.onDidChangeContent?()
+            guard let `self` = self else {
+                return
+            }
+
+            self.onDidChangeContent?(self.sectionsChangeset, self.objectsChangeset)
+            self.resetPendingChangesets()
         }
 
         internalDelegate.onDidChangeObject = { [weak self] (_, type, indexPath, newIndexPath) in
-            let change: ResultsObjectChange
+            guard let `self` = self else {
+                return
+            }
 
             // Seriously, Apple?
             // https://developer.apple.com/library/archive/releasenotes/iPhone/NSFetchedResultsChangeMoveReportedAsNSFetchedResultsChangeUpdate/index.html
+            // Update: Not needed on iOS +13. Drop when possible!
+            //
             let fixedType: NSFetchedResultsChangeType = {
                 guard type == .update && newIndexPath != nil && newIndexPath != indexPath else {
                     return type
@@ -185,38 +188,39 @@ private extension ResultsController {
 
             switch (fixedType, indexPath, newIndexPath) {
             case (.delete, .some(let indexPath), _):
-                change = .delete(indexPath: indexPath)
+                self.objectsChangeset.deletedIndexPath(indexPath)
 
             case (.insert, _, .some(let newIndexPath)):
-                change = .insert(indexPath: newIndexPath)
+                self.objectsChangeset.insertedIndexPath(newIndexPath)
 
             case (.move, .some(let oldIndexPath), .some(let newIndexPath)):
-                change = .move(oldIndexPath: oldIndexPath, newIndexPath: newIndexPath)
+                self.objectsChangeset.movedIndexPath(from: oldIndexPath, to: newIndexPath)
 
-            case (.update, .some(let indexPath), _):
-                change = .update(indexPath: indexPath)
+            // WWDC 2020 @ Labs: Switch `indexPath` > `newIndexPath` for reload OP(s)
+            case (.update, _, .some(let newIndexPath)):
+                self.objectsChangeset.updatedIndexPath(newIndexPath)
 
             default:
                 NSLog("☠️ [ResultsController] Unrecognized Row Change!")
-                return
             }
-
-            self?.onDidChangeObject?(change)
         }
 
         internalDelegate.onDidChangeSection = { [weak self] (section, sectionIndex, type) in
-            let change: ResultsSectionChange
             switch type {
             case .delete:
-                change = .delete(sectionIndex: sectionIndex)
+                self?.sectionsChangeset.deletedSection(at: sectionIndex)
+
             case .insert:
-                change = .insert(sectionIndex: sectionIndex)
+                self?.sectionsChangeset.insertedSection(at: sectionIndex)
+
             default:
                 NSLog("☠️ [ResultsController] Unrecognized Section Change!")
-                return
             }
-
-            self?.onDidChangeSection?(change)
         }
+    }
+
+    func resetPendingChangesets() {
+        sectionsChangeset = ResultsSectionsChangeset()
+        objectsChangeset = ResultsObjectsChangeset()
     }
 }

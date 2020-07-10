@@ -32,43 +32,44 @@ struct ResultsTableAnimations {
 //
 extension UITableView {
 
-    func performBatchChanges(objectChanges: [ResultsObjectChange], sectionChanges: [ResultsSectionChange], onCompletion: @escaping (Bool) -> Void) {
+    func performBatchChanges(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset, onCompletion: ((Bool) -> Void)? = nil) {
+
         performBatchUpdates({
-            for change in objectChanges {
-                self.resultsController(didChangeObject: change)
-            }
-
-            for change in sectionChanges {
-                self.resultsController(didChangeSection: change)
-            }
-
+            self.performChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }, completion: onCompletion)
     }
 
-    func resultsController(didChangeObject rowChange: ResultsObjectChange, animations: ResultsTableAnimations = .standard) {
-        switch rowChange {
-        case .delete(let indexPath):
-            deleteRows(at: [indexPath], with: animations.delete)
-
-        case .insert(let newIndexPath):
-            insertRows(at: [newIndexPath], with: animations.insert)
-
-        case .move(let oldIndexPath, let newIndexPath):
-            deleteRows(at: [oldIndexPath], with: animations.move)
-            insertRows(at: [newIndexPath], with: animations.move)
-
-        case .update(let indexPath):
-            reloadRows(at: [indexPath], with: animations.update)
+    /// This API applies Section and Object Changesets over the receiver. Based on WWDC 2020 @ Labs Recommendations
+    /// - Note: This should be done during onDidChangeContent so that we're never in the middle of a NSManagedObjectContext.save()
+    ///
+    func performChanges(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset, animations: ResultsTableAnimations = .standard) {
+        // [Step 1] Structural Changes: Delete OP(s)
+        if !objectsChangeset.deleted.isEmpty {
+            deleteRows(at: objectsChangeset.deleted, with: animations.delete)
         }
-    }
 
-    func resultsController(didChangeSection sectionChange: ResultsSectionChange, animations: ResultsTableAnimations = .standard) {
-        switch sectionChange {
-        case .delete(let sectionIndex):
-            deleteSections(IndexSet(integer: sectionIndex), with: animations.delete)
+        if !sectionsChangeset.deleted.isEmpty {
+            deleteSections(sectionsChangeset.deleted, with: animations.delete)
+        }
 
-        case .insert(let sectionIndex):
-            insertSections(IndexSet(integer: sectionIndex), with: animations.insert)
+        // [Step 2] Structural Changes: Insert OP(s)
+        if !sectionsChangeset.inserted.isEmpty {
+            insertSections(sectionsChangeset.inserted, with: animations.insert)
+        }
+
+        if !objectsChangeset.inserted.isEmpty {
+            insertRows(at: objectsChangeset.inserted, with: animations.insert)
+        }
+
+        // [Step 3] Content Changes: Move OP(s)
+        for (from, to) in objectsChangeset.moved {
+            deleteRows(at: [from], with: animations.move)
+            insertRows(at: [to], with: animations.move)
+        }
+
+        // [Step 4] Content Changes: Update OP(s)
+        if !objectsChangeset.updated.isEmpty {
+            reloadRows(at: objectsChangeset.updated, with: animations.update)
         }
     }
 }
