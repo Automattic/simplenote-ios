@@ -38,7 +38,10 @@ extension SPNoteEditorViewController {
         return cardViewController
     }
 
-    private func dismissHistory() {
+    /// Dismiss note history
+    ///
+    @objc(dismissHistoryAnimated:)
+    func dismissHistory(animated: Bool) {
         guard let viewController = historyCardViewController else {
             return
         }
@@ -82,12 +85,12 @@ private extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     func noteHistoryControllerDidCancel() {
-        dismissHistory()
+        dismissHistory(animated: true)
         updateEditor(with: currentNote.content)
     }
 
     func noteHistoryControllerDidFinish() {
-        dismissHistory()
+        dismissHistory(animated: true)
         isModified = true
         save()
     }

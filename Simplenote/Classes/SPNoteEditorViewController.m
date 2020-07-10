@@ -683,6 +683,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     });
     
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
+    [self dismissHistoryAnimated:NO];
     
     // mark note as read
     note.unread = NO;
