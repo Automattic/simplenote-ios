@@ -193,10 +193,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     self.navigationItem.title = nil;
 
-    [self setupBarItems];
-    [self swapTagViewPositionForVoiceover];
+    [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
-    [self configureLayout];
+    [self configureRootView];
+    [self swapTagViewPositionForVoiceover];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -301,8 +301,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     });
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self stopListeningToKeyboardNotifications];
@@ -414,8 +414,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)setupBarItems {
-    
+- (void)configureNavigationBarItems
+{
     // setup Navigation Bar
     self.navigationItem.hidesBackButton = YES;
 
@@ -533,8 +533,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self swapTagViewPositionForVoiceover];
     bVoiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
     
-    if (bVoiceoverEnabled)
+    if (bVoiceoverEnabled) {
         [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
+    }
 }
 
 - (void)swapTagViewPositionForVoiceover {
