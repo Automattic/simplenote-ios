@@ -18,7 +18,7 @@ extension SPNoteEditorViewController {
         let viewController = newHistoryViewController()
         viewController.present(from: self)
 
-        adjustBottomContentInset(forHistoryView: viewController.view)
+        adjustEditorBottomContentInset(accommodating: viewController.view)
         noteEditorTextView.isReadOnly = true
 
         refreshNavigationBarButtons()
@@ -52,32 +52,39 @@ extension SPNoteEditorViewController {
         viewController.dismiss(animated: true, completion: nil)
 
         noteEditorTextView.isReadOnly = false
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
-            self.restoreDefaultBottomContentInset()
-        }
+        restoreDefaultEditorBottomContentInset(animated: true)
 
         refreshNavigationBarButtons()
         resetAccessibilityFocus()
     }
 }
 
-// MARK: - Editor insets adjustments
+// MARK: - Editor bottom insets adjustments
 //
 private extension SPNoteEditorViewController {
-    func adjustBottomContentInset(forHistoryView historyView: UIView) {
+    func adjustEditorBottomContentInset(accommodating bottomView: UIView) {
         guard let noteEditorSuperview = noteEditorTextView.superview else {
             return
         }
-        let historyFrame = noteEditorSuperview.convert(historyView.bounds, from: historyView)
-        let bottomInset = noteEditorTextView.frame.maxY - historyFrame.origin.y
+        let bottomViewFrame = noteEditorSuperview.convert(bottomView.bounds, from: bottomView)
+        let bottomInset = noteEditorTextView.frame.maxY - bottomViewFrame.origin.y
 
         noteEditorTextView.contentInset.bottom = bottomInset
         noteEditorTextView.scrollIndicatorInsets.bottom = bottomInset
     }
 
-    func restoreDefaultBottomContentInset() {
-        noteEditorTextView.contentInset.bottom = noteEditorTextView.defaultBottomInset
-        noteEditorTextView.scrollIndicatorInsets.bottom = 0
+    func restoreDefaultEditorBottomContentInset(animated: Bool) {
+        let animationBlock = {
+            self.noteEditorTextView.contentInset.bottom = self.noteEditorTextView.defaultBottomInset
+            self.noteEditorTextView.scrollIndicatorInsets.bottom = 0
+        }
+
+        if animated {
+            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
+                           animations: animationBlock)
+        } else {
+            animationBlock()
+        }
     }
 }
 
