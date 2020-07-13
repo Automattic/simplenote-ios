@@ -370,6 +370,9 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
             [self configureBottomCell:cell atIndexPath:indexPath];
             break;
     }
+
+    cell.accessibilityLabel = cell.textField.text;
+    cell.textField.isAccessibilityElement = NO;
 }
 
 - (void)configureSystemCell:(SPTagListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -399,7 +402,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     cell.textField.text = tagName;
     cell.textField.delegate = self;
     cell.iconImage = nil;
-    cell.accessibilityLabel = tagName;
     cell.delegate = self;
 }
 
