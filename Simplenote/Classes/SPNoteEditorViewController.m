@@ -777,8 +777,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self.checklistButton.hidden = !self.isEditingNote;
     self.keyboardButton.hidden = shouldHideKeyboardButton;
-    self.createNoteButton.hidden = !shouldHideKeyboardButton || [self isShowingHistory];
-    self.actionButton.hidden = [self isShowingHistory];
+    self.createNoteButton.hidden = !shouldHideKeyboardButton;
 }
 
 - (BOOL)shouldHideKeyboardButton
@@ -835,10 +834,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
-    if ([self isShowingHistory]) {
-        return NO;
-    }
-
     if (!self.currentNote.markdown) {
         return NO;
     }
@@ -879,9 +874,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return YES;
 }
 
-- (BOOL)interactiveDismissShouldBegin {
-    return ![self isShowingHistory];
-}
 
 #pragma mark search
 
@@ -1210,10 +1202,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // safe to alter text attributes here
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    if ([self isShowingHistory]) {
-        return NO;
-    }
-
+    
     if (bSearching)
         [self endSearching:textView];
     

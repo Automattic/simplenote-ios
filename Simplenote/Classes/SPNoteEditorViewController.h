@@ -65,8 +65,6 @@
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 @property (nonatomic, getter=isModified) BOOL modified;
 
-- (void)refreshNavigationBarButtons;
-
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;

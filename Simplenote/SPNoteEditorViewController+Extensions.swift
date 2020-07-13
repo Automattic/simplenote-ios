@@ -22,11 +22,6 @@ extension SPNoteEditorViewController {
         historyLoader = loader
 
         cardViewController.present(from: self)
-
-        adjustEditorBottomContentInset(accommodating: cardViewController.view)
-        noteEditorTextView.isReadOnly = true
-
-        refreshNavigationBarButtons()
     }
 
     private func newHistoryViewController(with loader: SPHistoryLoader, delegate: SPNoteHistoryControllerDelegate) -> SPCardViewController {
@@ -52,40 +47,7 @@ extension SPNoteEditorViewController {
 
         viewController.dismiss(animated: true, completion: nil)
 
-        noteEditorTextView.isReadOnly = false
-        restoreDefaultEditorBottomContentInset(animated: true)
-
-        refreshNavigationBarButtons()
         resetAccessibilityFocus()
-    }
-}
-
-// MARK: - Editor bottom insets adjustments
-//
-private extension SPNoteEditorViewController {
-    func adjustEditorBottomContentInset(accommodating bottomView: UIView) {
-        guard let noteEditorSuperview = noteEditorTextView.superview else {
-            return
-        }
-        let bottomViewFrame = noteEditorSuperview.convert(bottomView.bounds, from: bottomView)
-        let bottomInset = noteEditorTextView.frame.maxY - bottomViewFrame.origin.y
-
-        noteEditorTextView.contentInset.bottom = bottomInset
-        noteEditorTextView.scrollIndicatorInsets.bottom = bottomInset
-    }
-
-    func restoreDefaultEditorBottomContentInset(animated: Bool) {
-        let animationBlock = {
-            self.noteEditorTextView.contentInset.bottom = self.noteEditorTextView.defaultBottomInset
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = 0
-        }
-
-        if animated {
-            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                           animations: animationBlock)
-        } else {
-            animationBlock()
-        }
     }
 }
 
