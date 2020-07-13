@@ -3,14 +3,14 @@
 #import "SPActivityView.h"
 #import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
-#import "SPHorizontalPickerView.h"
 #import <Simperium/Simperium.h>
 @class Note;
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
+@class SPHistoryLoader;
 
-@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate> {
     
     // Other Objects
     NSTimer *saveTimer;
@@ -18,10 +18,8 @@
     
     // BOOLS
     BOOL bBlankNote;
-    BOOL bModified;
     BOOL bDisableShrinkingNavigationBar;
     BOOL bShouldDelete;
-    BOOL bViewingVersions;
     BOOL beditingTags;
     BOOL bActionSheetVisible;
     BOOL bVoiceoverEnabled;
@@ -38,18 +36,11 @@
     // sheets
     SPActivityView *noteActivityView;
     SPActionSheet *noteActionSheet;
-    SPActionSheet *versionActionSheet;
-    
-    SPHorizontalPickerView *versionPickerView;
     
     BOOL bSearching;
     NSInteger highlightedSearchResultIndex;
     
     UILabel *searchDetailLabel;
-    
-    NSInteger currentVersion;
-    NSMutableDictionary *noteVersionData;
-    
 }
 
 // Navigation Back Button
@@ -66,9 +57,13 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
+@property (nonatomic, weak) UIViewController *historyCardViewController;
+@property (nonatomic, weak) SPHistoryLoader *historyLoader;
+
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
+@property (nonatomic, getter=isModified) BOOL modified;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
@@ -77,7 +72,6 @@
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
-- (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
 
 - (void)save;
