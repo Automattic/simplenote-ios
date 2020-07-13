@@ -15,25 +15,26 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func showHistory() {
-        let viewController = newHistoryViewController()
-        viewController.present(from: self)
+        let loader = SPHistoryLoader(note: currentNote)
+        let cardViewController = newHistoryViewController(with: loader, delegate: self)
 
-        adjustEditorBottomContentInset(accommodating: viewController.view)
+        historyCardViewController = cardViewController
+        historyLoader = loader
+
+        cardViewController.present(from: self)
+
+        adjustEditorBottomContentInset(accommodating: cardViewController.view)
         noteEditorTextView.isReadOnly = true
 
         refreshNavigationBarButtons()
     }
 
-    private func newHistoryViewController() -> SPCardViewController {
-        let loader = SPHistoryLoader(note: currentNote)
+    private func newHistoryViewController(with loader: SPHistoryLoader, delegate: SPNoteHistoryControllerDelegate) -> SPCardViewController {
         let controller = SPNoteHistoryController(note: currentNote, loader: loader)
         let historyViewController = SPNoteHistoryViewController(controller: controller)
         let cardViewController = SPCardViewController(viewController: historyViewController)
 
-        controller.delegate = self
-
-        historyLoader = loader
-        historyCardViewController = cardViewController
+        controller.delegate = delegate
 
         return cardViewController
     }

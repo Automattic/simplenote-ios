@@ -82,9 +82,7 @@ extension SPHistoryLoader {
     ///     - note: a note
     ///
     convenience init(note: Note) {
-        let bucket = SPAppDelegate.shared().simperium.bucket(forName: Note.classNameWithoutNamespaces)!
-
-        self.init(bucket: bucket,
+        self.init(bucket: note.bucket,
                   simperiumKey: note.simperiumKey,
                   currentVersion: note.versionInt)
     }
@@ -95,17 +93,5 @@ extension SPHistoryLoader {
 private extension SPHistoryLoader {
     struct Constants {
         static let maxNumberOfVersions = 30
-    }
-}
-
-// MARK: - SPHistoryVersion: init with raw data
-//
-private extension SPHistoryVersion {
-    init(version: Int, data: [String: Any]) {
-        self.version = version
-
-        let timeInterval = data["modificationDate"] as? TimeInterval
-        modificationDate = Date(timeIntervalSince1970: timeInterval ?? 0)
-        content = (data["content"] as? String) ?? ""
     }
 }
