@@ -56,7 +56,6 @@
 
 // Navigation Bar
 @property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
-@property (nonatomic, strong) NSLayoutConstraint *navigationBackgroundBottomConstraint;
 
 // Navigation Back Button
 @property (nonatomic, strong) UIButton *backButton;
