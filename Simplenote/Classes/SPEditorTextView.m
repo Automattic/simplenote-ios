@@ -153,13 +153,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
     CGFloat height      = CGRectGetHeight(self.tagView.frame);
 
-    CGFloat bottomInset = MAX(self.contentInset.bottom, self.safeAreaInsets.bottom);
-    CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - bottomInset;
+    CGFloat paddingY    = MAX(self.contentInset.bottom, self.safeAreaInsets.bottom);
+    CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
     CGFloat contentMinY = self.contentSize.height - height + self.contentInset.top;
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
-    _tagView.frame      = CGRectMake(xOrigin, yOrigin, width, height);
+    self.tagView.frame  = CGRectMake(xOrigin, yOrigin, width, height);
 }
 
 - (void)setLockTagEditorPosition:(BOOL)lockTagEditorPosition

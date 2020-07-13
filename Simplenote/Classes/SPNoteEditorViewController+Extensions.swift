@@ -53,13 +53,13 @@ extension SPNoteEditorViewController: KeyboardObservable {
             return
         }
 
-        let newKeyboardHeight = keyboardFrame.intersection(view.frame).height
+        let newKeyboardHeight = keyboardFrame.intersection(noteEditorTextView.frame).height
 
         UIView.animate(withDuration: duration) {
             self.noteEditorTextView.scrollIndicatorInsets.bottom = newKeyboardHeight
             self.noteEditorTextView.contentInset.bottom = newKeyboardHeight
         }
 
-        keyboardHeight = newKeyboardHeight
+        isKeyboardVisible = newKeyboardHeight != .zero
     }
 }

@@ -95,7 +95,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         navigationBarTransform = CGAffineTransformIdentity;
         
         bDisableShrinkingNavigationBar = NO;
-        _keyboardHeight = 0;
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -726,16 +725,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self refreshNavigationBarButtons];
 }
 
-- (void)setKeyboardHeight:(CGFloat)keyboardHeight
+- (void)setIsKeyboardVisible:(BOOL)isKeyboardVisible
 {
-    _keyboardHeight = keyboardHeight;
+    _isKeyboardVisible = isKeyboardVisible;
 
     [self refreshNavigationBarButtons];
-}
-
-- (BOOL)isKeyboardVisible
-{
-    return self.keyboardHeight > 0;
 }
 
 

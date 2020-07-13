@@ -73,7 +73,7 @@
 @property (nonatomic, strong) NSString *searchString;
 
 // Keyboard!
-@property (nonatomic, assign) CGFloat keyboardHeight;
+@property (nonatomic, assign) BOOL isKeyboardVisible;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
