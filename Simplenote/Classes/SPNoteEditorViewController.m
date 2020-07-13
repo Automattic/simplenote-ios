@@ -957,9 +957,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     navigationBarTransform = CGAffineTransformIdentity;
     
-    void (^animationBlock)();
-    
-    animationBlock = ^() {
+    void (^animationBlock)() = ^() {
         
         self.backButton.transform = CGAffineTransformIdentity;
         self.keyboardButton.transform = CGAffineTransformIdentity;
@@ -976,9 +974,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.backButton.alpha = 1.0;
     };
     
-    void (^completionBlock)();
-    
-    completionBlock = ^() {
+    void (^completionBlock)() = ^() {
         
         if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
             self->bDisableShrinkingNavigationBar = NO;
