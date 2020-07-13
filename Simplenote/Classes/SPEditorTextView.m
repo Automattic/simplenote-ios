@@ -39,13 +39,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (UIEdgeInsets)adjustedContentInset
-{
-    UIEdgeInsets contentInsets = super.adjustedContentInset;
-    contentInsets.bottom += 2 * CGRectGetHeight(self.tagView.bounds);
-    return contentInsets;
-}
-
 - (instancetype)init
 {
     self = [super init];
@@ -166,6 +159,18 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     _lockTagEditorPosition = lockTagEditorPosition;
     [self positionTagView];
+}
+
+- (CGFloat)tagsViewPadding
+{
+    return 2 * CGRectGetHeight(self.tagView.bounds);
+}
+
+- (UIEdgeInsets)adjustedContentInset
+{
+    UIEdgeInsets contentInsets = super.adjustedContentInset;
+    contentInsets.bottom += self.tagsViewPadding;
+    return contentInsets;
 }
 
 - (void)setTagView:(SPTagView *)tagView
