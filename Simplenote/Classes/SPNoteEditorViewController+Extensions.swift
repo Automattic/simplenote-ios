@@ -12,20 +12,18 @@ extension SPNoteEditorViewController {
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         noteEditorTextView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(navigationBarBackground)
         view.addSubview(noteEditorTextView)
-
-        navigationBackgroundBottomConstraint = navigationBarBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        view.addSubview(navigationBarBackground)
 
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
-            navigationBackgroundBottomConstraint,
+            navigationBarBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             navigationBarBackground.leftAnchor.constraint(equalTo: view.leftAnchor),
             navigationBarBackground.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            noteEditorTextView.topAnchor.constraint(equalTo: navigationBarBackground.bottomAnchor),
+            noteEditorTextView.topAnchor.constraint(equalTo: view.topAnchor),
             noteEditorTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
             noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -54,7 +52,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
         }
 
         let newKeyboardHeight = keyboardFrame.intersection(noteEditorTextView.frame).height
-
+        
         UIView.animate(withDuration: duration) {
             self.noteEditorTextView.scrollIndicatorInsets.bottom = newKeyboardHeight
             self.noteEditorTextView.contentInset.bottom = newKeyboardHeight
