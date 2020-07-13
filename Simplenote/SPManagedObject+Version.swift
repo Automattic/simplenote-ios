@@ -9,6 +9,10 @@ extension SPManagedObject {
     ///
     @objc
     var versionInt: Int {
-        return Int(version() ?? "1") ?? 1
+        guard let versionStr = version(), let version = Int(versionStr) else {
+            return 1
+        }
+
+        return version
     }
 }
