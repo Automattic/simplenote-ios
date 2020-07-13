@@ -102,7 +102,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
         save()
     }
 
-    func noteHistoryControllerDidSelectVersion(with content: String) {
+    func noteHistoryControllerDidSelectVersion(withContent content: String) {
         updateEditor(with: content, animated: true)
     }
 }

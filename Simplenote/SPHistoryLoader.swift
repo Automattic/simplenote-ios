@@ -6,10 +6,12 @@ import Foundation
 final class SPHistoryLoader: NSObject {
     private let bucket: SPBucket
     private let simperiumKey: String
-    private let amountOfVersionsToLoad: Int
-
-    private var completion: (([SPHistoryVersion]) -> Void)?
-    private var versions: Set<SPHistoryVersion> = []
+    private var callback: ((SPHistoryVersion) -> Void)?
+    
+    /// Range of versions available to load
+    /// Contains at least the current version of an object
+    ///
+    let versionRange: ClosedRange<Int>
 
     /// Designated Initializer
     ///
@@ -21,23 +23,20 @@ final class SPHistoryLoader: NSObject {
     init(bucket: SPBucket, simperiumKey: String, currentVersion: Int) {
         self.bucket = bucket
         self.simperiumKey = simperiumKey
-        amountOfVersionsToLoad = min(currentVersion, Constants.maxNumberOfVersions)
+
+        let upperBound = max(currentVersion, Constants.minVersion)
+        let lowerBound = max(upperBound - Constants.maxNumberOfVersions + 1, Constants.minVersion)
+        versionRange = lowerBound...upperBound
     }
 
     /// Load verions
     ///
     /// - Parameters:
-    ///     - completion: Invoked after all requested versions have arrived
+    ///     - callback: Invoked for every received version
     ///
-    func load(completion: @escaping ([SPHistoryVersion]) -> Void) {
-        if self.completion != nil {
-            return
-        }
-
-        versions = []
-        self.completion = completion
-
-        bucket.requestVersions(Int32(amountOfVersionsToLoad), key: simperiumKey)
+    func load(callback: @escaping (SPHistoryVersion) -> Void) {
+        self.callback = callback
+        bucket.requestVersions(Int32(versionRange.count), key: simperiumKey)
     }
 }
 
@@ -56,20 +55,7 @@ extension SPHistoryLoader {
     @objc(processData:forVersion:)
     func process(data: [String: Any], forVersion version: Int) {
         let item = SPHistoryVersion(version: version, data: data)
-        versions.insert(item)
-        checkIfFinished()
-    }
-
-    private func checkIfFinished() {
-        guard versions.count == amountOfVersionsToLoad else {
-            return
-        }
-
-        guard let completion = self.completion else {
-            return
-        }
-        self.completion = nil
-        completion(versions.sorted(by: { $0.version < $1.version }))
+        callback?(item)
     }
 }
 
@@ -94,6 +80,7 @@ extension SPHistoryLoader {
 //
 private extension SPHistoryLoader {
     struct Constants {
+        static let minVersion = 1
         static let maxNumberOfVersions = 30
     }
 }

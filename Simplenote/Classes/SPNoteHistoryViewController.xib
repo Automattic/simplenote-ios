@@ -81,7 +81,7 @@
                     </subviews>
                 </stackView>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yP9-LW-2C9">
-                    <rect key="frame" x="197" y="126" width="20" height="20"/>
+                    <rect key="frame" x="16" y="65" width="20" height="20"/>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEj-sR-6XD">
                     <rect key="frame" x="16" y="60" width="382" height="152"/>
@@ -92,11 +92,11 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="yP9-LW-2C9" firstAttribute="leading" secondItem="0Zh-yW-YrO" secondAttribute="leading" id="4Ey-om-Agv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" constant="16" id="Giu-Fh-dxk"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="leading" secondItem="I1k-RA-YFb" secondAttribute="leading" id="Gvm-xL-2Ur"/>
+                <constraint firstItem="yP9-LW-2C9" firstAttribute="centerY" secondItem="0Zh-yW-YrO" secondAttribute="centerY" id="ToZ-bG-bCo"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="bottom" secondItem="I1k-RA-YFb" secondAttribute="bottom" id="c71-xs-FPA"/>
-                <constraint firstItem="yP9-LW-2C9" firstAttribute="centerX" secondItem="I1k-RA-YFb" secondAttribute="centerX" id="cBg-u1-v5m"/>
-                <constraint firstItem="yP9-LW-2C9" firstAttribute="centerY" secondItem="I1k-RA-YFb" secondAttribute="centerY" id="jvT-E6-fzF"/>
                 <constraint firstItem="I1k-RA-YFb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="nOO-ZW-9Xm"/>
                 <constraint firstItem="I1k-RA-YFb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pJo-tb-7tB"/>
                 <constraint firstItem="iEj-sR-6XD" firstAttribute="trailing" secondItem="I1k-RA-YFb" secondAttribute="trailing" id="sAh-Sa-bcd"/>

@@ -14,5 +14,5 @@ protocol SPNoteHistoryControllerDelegate: class {
 
     /// Preview version content
     ///
-    func noteHistoryControllerDidSelectVersion(with content: String)
+    func noteHistoryControllerDidSelectVersion(withContent content: String)
 }

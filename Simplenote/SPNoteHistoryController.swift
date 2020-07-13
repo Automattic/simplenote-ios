@@ -7,13 +7,19 @@ final class SPNoteHistoryController {
     // MARK: - State of the screen
     //
     enum State {
-        /// Loading data
+        /// Version (is fully loaded)
+        /// - Parameters
+        ///     - versionNumber: version number
+        ///     - date: formatted date of the version
+        ///     - isRestorable: possibility to restore to this version
         ///
-        case loading
+        case version(versionNumber: Int, date: String, isRestorable: Bool)
 
-        /// Ready to show results
+        /// Version (is being loaded)
+        /// - Parameters
+        ///     - versionNumber: version number
         ///
-        case results([SPHistoryVersion])
+        case loadingVersion(versionNumber: Int)
 
         /// Error
         ///
@@ -29,20 +35,24 @@ final class SPNoteHistoryController {
         }
     }
 
+    /// Range of versions available to load
+    /// Contains at least the current version of an object
+    ///
+    let versionRange: ClosedRange<Int>
+
     /// Delegate
     ///
     weak var delegate: SPNoteHistoryControllerDelegate?
 
-    /// Note
-    ///
-    let note: Note
 
+    private let note: Note
     private let loader: SPHistoryLoader
-    private var state: State = .loading {
+    private var state: State {
         didSet {
             observer?(state)
         }
     }
+    private var versions: [Int: SPHistoryVersion] = [:]
 
     /// Designated initializer
     ///
@@ -53,10 +63,13 @@ final class SPNoteHistoryController {
     init(note: Note, loader: SPHistoryLoader) {
         self.note = note
         self.loader = loader
+
+        versionRange = loader.versionRange
+        state = .loadingVersion(versionNumber: versionRange.upperBound)
     }
 }
 
-// MARK: - Input from UI
+// MARK: - Communications from UI
 //
 extension SPNoteHistoryController {
 
@@ -74,15 +87,15 @@ extension SPNoteHistoryController {
 
     /// User selected a version
     ///
-    func select(version: SPHistoryVersion) {
-        delegate?.noteHistoryControllerDidSelectVersion(with: version.content)
+    func select(versionNumber: Int) {
+        switchToVersion(versionNumber)
     }
 
     /// Invoked when view is loaded
     ///
     func onViewLoad() {
         guard SPAppDelegate.shared().simperium.authenticator.connected else {
-            state = .error(NSLocalizedString("version-alert-message", comment: "Error alert message shown when trying to view history of a note without an internet connection"))
+            state = .error(Localization.networkError)
             return
         }
 
@@ -94,9 +107,48 @@ extension SPNoteHistoryController {
 //
 private extension SPNoteHistoryController {
     func loadData() {
-        state = .loading
-        loader.load { [weak self] (versions) in
-            self?.state = .results(versions)
+        loader.load { [weak self] (version) in
+            self?.process(noteVersion: version)
         }
     }
+
+    func process(noteVersion: SPHistoryVersion) {
+        versions[noteVersion.version] = noteVersion
+
+        // We received a note version with the same version as currently showing
+        // Update state using new information
+        if state.versionNumber == noteVersion.version {
+            switchToVersion(noteVersion.version)
+        }
+    }
+
+    func switchToVersion(_ versionNumber: Int) {
+        if let noteVersion = versions[versionNumber] {
+            state = .version(versionNumber: versionNumber,
+                             date: note.dateString(noteVersion.modificationDate, brief: false),
+                             isRestorable: noteVersion.version != note.versionInt)
+            delegate?.noteHistoryControllerDidSelectVersion(withContent: noteVersion.content)
+        } else {
+            state = .loadingVersion(versionNumber: versionNumber)
+        }
+    }
+}
+
+// MARK: - State extension
+//
+private extension SPNoteHistoryController.State {
+    var versionNumber: Int? {
+        switch self {
+        case .version(let versionNumber, _, _), .loadingVersion(let versionNumber):
+            return versionNumber
+        case .error:
+            return nil
+        }
+    }
+}
+
+// MARK: - Localization
+//
+private struct Localization {
+    static let networkError = NSLocalizedString("version-alert-message", comment: "Error alert message shown when trying to view history of a note without an internet connection")
 }
