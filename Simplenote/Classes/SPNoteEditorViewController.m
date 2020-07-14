@@ -185,7 +185,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
-    [self ensureVoiceoverIsEnabled];
+    [self refreshVoiceoverSupport];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -519,10 +519,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)didReceiveVoiceOverNotification:(NSNotification *)notification
 {
-    [self ensureVoiceoverIsEnabled];
+    [self refreshVoiceoverSupport];
 }
 
-- (void)ensureVoiceoverIsEnabled
+- (void)refreshVoiceoverSupport
 {
     self.voiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
     self.noteEditorTextView.lockTagEditorPosition = self.voiceoverEnabled;
