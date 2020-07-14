@@ -51,11 +51,25 @@ extension SPNoteEditorViewController: KeyboardObservable {
             return
         }
 
+        applyBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
+    }
+
+    public func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let _ = view.window, let keyboardFrame = endFrame, let duration = animationDuration else {
+            return
+        }
+
+        applyBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
+    }
+
+    func applyBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
+        let isKeyboardFloating = keyboardFrame.maxY < view.bounds.height
         let newKeyboardHeight = keyboardFrame.intersection(noteEditorTextView.frame).height
-        
+        let bottomInsets = isKeyboardFloating ? .zero : newKeyboardHeight
+
         UIView.animate(withDuration: duration) {
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = newKeyboardHeight
-            self.noteEditorTextView.contentInset.bottom = newKeyboardHeight
+            self.noteEditorTextView.scrollIndicatorInsets.bottom = bottomInsets
+            self.noteEditorTextView.contentInset.bottom = bottomInsets
         }
 
         isKeyboardVisible = newKeyboardHeight != .zero

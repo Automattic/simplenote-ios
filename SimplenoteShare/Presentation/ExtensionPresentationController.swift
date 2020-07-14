@@ -108,6 +108,12 @@ extension ExtensionPresentationController: KeyboardObservable {
         animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
     }
 
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        let keyboardFrame = endFrame ?? .zero
+        let duration = animationDuration ?? Constants.defaultAnimationDuration
+        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
+    }
+
     private func animate(with keyboardFrame: CGRect, duration: TimeInterval, animationCurve: UInt?) {
         let presentedFrame = frameOfPresentedViewInContainerView
         let translatedFrame = getTranslationFrame(keyboardFrame: keyboardFrame, presentedFrame: presentedFrame)

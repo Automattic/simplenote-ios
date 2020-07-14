@@ -5,7 +5,7 @@ import Foundation
 ///
 public protocol KeyboardObservable: class {
 
-    /// Called during an interactive Keyboard Repositioning Notification.
+    /// Called during a Keyboard Repositioning Notification.
     ///
     /// - Parameters:
     ///   - beginFrame: starting frame of the keyboard
@@ -14,6 +14,16 @@ public protocol KeyboardObservable: class {
     ///   - animationCurve: animation curve for the keyboard animation
     ///
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?)
+
+    /// Called during an Keyboard Repositioning Notification.
+    ///
+    /// - Parameters:
+    ///   - beginFrame: starting frame of the keyboard
+    ///   - endFrame: ending frame of the keyboard
+    ///   - animationDuration: total duration of the keyboard animation
+    ///   - animationCurve: animation curve for the keyboard animation
+    ///
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?)
 }
 
 /// Interactive Keyboard Observers
@@ -36,6 +46,17 @@ extension KeyboardObservable {
                                               animationDuration: notification.keyboardAnimationDuration(),
                                               animationCurve: notification.keyboardAnimationCurve())
         })
+
+        notificationCenter.addObserver(
+            forName: UIResponder.keyboardDidChangeFrameNotification,
+            object: nil,
+            queue: nil,
+            using: { [weak self] notification in
+                self?.keyboardDidChangeFrame(beginFrame: notification.keyboardBeginFrame(),
+                                              endFrame: notification.keyboardEndFrame(),
+                                              animationDuration: notification.keyboardAnimationDuration(),
+                                              animationCurve: notification.keyboardAnimationCurve())
+        })
     }
 
     /// Remove the keyboard observers for the provided `NotificationCenter`.
@@ -44,10 +65,13 @@ extension KeyboardObservable {
     ///   from (or `.default` if none is specified).
     ///
     public func removeKeyboardObservers(from notificationCenter: NotificationCenter = .default) {
-        notificationCenter.removeObserver(
-            self,
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil)
+        let notificationNames = [
+            UIResponder.keyboardWillChangeFrameNotification, UIResponder.keyboardDidChangeFrameNotification
+        ]
+
+        for name in notificationNames {
+            notificationCenter.removeObserver(self, name: name, object: nil)
+        }
     }
 }
 
