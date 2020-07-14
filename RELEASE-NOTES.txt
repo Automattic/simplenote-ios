@@ -1,6 +1,7 @@
 4.21
 -----
--   New darker dark mode
+-   New darker dark mode.
+-   Updated editor typography.
  
 4.20.1
 ------
