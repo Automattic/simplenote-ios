@@ -146,6 +146,10 @@
 		A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */; };
 		A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */; };
 		A6E1E79A24B7DB96008A44BC /* SPManagedObject+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */; };
+		A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79D24BDE401008A44BC /* SPCardTransitioningManager.swift */; };
+		A6E1E7A024BDE440008A44BC /* SPCardDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */; };
+		A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */; };
+		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
 		B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */; };
 		B504D4E023D2018800AEED27 /* ResultsObjectChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */; };
 		B504D4E223D201C300AEED27 /* ResultsSectionChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4E123D201C300AEED27 /* ResultsSectionChange.swift */; };
@@ -503,6 +507,10 @@
 		A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryControllerDelegate.swift; sourceTree = "<group>"; };
 		A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryVersion.swift; sourceTree = "<group>"; };
 		A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Version.swift"; sourceTree = "<group>"; };
+		A6E1E79D24BDE401008A44BC /* SPCardTransitioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardTransitioningManager.swift; sourceTree = "<group>"; };
+		A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardDismissalAnimator.swift; sourceTree = "<group>"; };
+		A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationAnimator.swift; sourceTree = "<group>"; };
+		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1073,6 +1081,25 @@
 				A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */,
 			);
 			name = "Note History";
+			sourceTree = "<group>";
+		};
+		A6E1E79B24BD077E008A44BC /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				A68ABCA124ABCFFA00715EBD /* SPCardViewController.swift */,
+			);
+			name = Card;
+			sourceTree = "<group>";
+		};
+		A6E1E79C24BDDF30008A44BC /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1E79D24BDE401008A44BC /* SPCardTransitioningManager.swift */,
+				A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */,
+				A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */,
+				A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */,
+			);
+			name = Card;
 			sourceTree = "<group>";
 		};
 		B504D4DB23D1FBB400AEED27 /* ResultsController */ = {
@@ -1667,6 +1694,7 @@
 		E29ADD7117848F9700E55842 /* Transitions */ = {
 			isa = PBXGroup;
 			children = (
+				A6E1E79C24BDDF30008A44BC /* Card */,
 				E29ADD821784B12400E55842 /* SPTransitionController.h */,
 				E29ADD831784B12400E55842 /* SPTransitionController.m */,
 				17C421CD1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.h */,
@@ -1678,6 +1706,7 @@
 		E29ADD751784902700E55842 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A6E1E79B24BD077E008A44BC /* Card */,
 				A6C0589124AD2B00006BC572 /* Note History */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
@@ -1702,7 +1731,6 @@
 				B56C8CA1234CEAF100FE55F4 /* SPTagsListViewController.xib */,
 				17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */,
 				17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */,
-				A68ABCA124ABCFFA00715EBD /* SPCardViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2258,6 +2286,7 @@
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
 				375D24B921E01131007AB25A /* version.c in Sources */,
+				A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
 				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
@@ -2300,6 +2329,7 @@
 				375D24BA21E01131007AB25A /* document.c in Sources */,
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
+				A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */,
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
@@ -2368,6 +2398,7 @@
 				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
+				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
 				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,
 				46A3C9A417DFA81A002865AE /* SPToggle.m in Sources */,
 				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
@@ -2376,6 +2407,7 @@
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,
 				A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */,
 				46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */,
+				A6E1E7A024BDE440008A44BC /* SPCardDismissalAnimator.swift in Sources */,
 				B56A696522F9D54600B90398 /* SPLabel.swift in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
