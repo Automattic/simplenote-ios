@@ -6,12 +6,14 @@ final class SPCardViewController: UIViewController {
     private let viewController: UIViewController
     private let containerView = UIView()
 
-    private var bottomToBottomConstraint: NSLayoutConstraint?
-    private var topToBottomConstraint: NSLayoutConstraint?
+    private let transitioningManager = SPCardTransitioningManager()
 
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
+
+        transitioningDelegate = transitioningManager
+        modalPresentationStyle = .custom
     }
 
     @available(*, unavailable)
@@ -35,85 +37,6 @@ final class SPCardViewController: UIViewController {
         refreshStyle()
 
         startListeningToNotifications()
-    }
-}
-
-// MARK: - Presentation
-//
-extension SPCardViewController {
-
-    /// Presents card from another view controller animated
-    ///
-    func present(from viewController: UIViewController) {
-        viewController.addChild(self)
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        guard let containerView = viewController.view else {
-            fatalError("Can't load view")
-        }
-        containerView.addSubview(view)
-
-        setupConstraints(withContainerView: containerView)
-
-        containerView.layoutIfNeeded()
-
-        let animations = {
-            self.topToBottomConstraint?.isActive = false
-            self.bottomToBottomConstraint?.isActive = true
-            containerView.layoutIfNeeded()
-        }
-
-        let completion: (Bool) -> Void = { _ in
-            self.didMove(toParent: viewController)
-        }
-
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                       animations: animations,
-                       completion: completion)
-    }
-
-    /// Dismisses card
-    ///
-    override func dismiss(animated: Bool, completion: (() -> Void)? = nil) {
-        guard parent != nil else {
-            return
-        }
-
-        willMove(toParent: nil)
-
-        let animations = {
-            self.bottomToBottomConstraint?.isActive = false
-            self.topToBottomConstraint?.isActive = true
-            self.view.superview?.layoutIfNeeded()
-        }
-
-        let animationCompletion: (Bool) -> Void = { _ in
-            self.view.removeFromSuperview()
-            self.removeFromParent()
-            completion?()
-        }
-
-        if animated {
-            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                           animations: animations,
-                           completion: animationCompletion)
-        } else {
-            animationCompletion(true)
-        }
-    }
-
-    private func setupConstraints(withContainerView containerView: UIView) {
-        let bottomToBottomConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-        let topToBottomConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor)
-
-        self.bottomToBottomConstraint = bottomToBottomConstraint
-        self.topToBottomConstraint = topToBottomConstraint
-
-        NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            topToBottomConstraint
-        ])
     }
 }
 
