@@ -13,7 +13,8 @@ extension SPNoteEditorViewController {
         noteEditorTextView.dataDetectorTypes = .all
         noteEditorTextView.font = .preferredFont(forTextStyle: .body)
         noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
-        noteEditorTextView.textContainerInset.top += Metrics.editorInsetTop
+        noteEditorTextView.textContainerInset.left += Metrics.editorInsets.left
+        noteEditorTextView.textContainerInset.right += Metrics.editorInsets.right
     }
 }
 
@@ -21,5 +22,5 @@ extension SPNoteEditorViewController {
 // MARK: - Editor Metrics
 //
 private enum Metrics {
-    static let editorInsetTop = CGFloat(0.0)
+    static let editorInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 }
