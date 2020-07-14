@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 final class SPCardDismissalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private var animator: UIViewImplicitlyAnimating?

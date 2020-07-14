@@ -1,47 +1,51 @@
-import Foundation
+import UIKit
 
+// MARK: - SPCardPresentationController
+//
 final class SPCardPresentationController: UIPresentationController {
-    let interactor = UIPercentDrivenInteractiveTransition()
-    var isInteractive: Bool {
-        return panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed
-    }
+    private let interactor = UIPercentDrivenInteractiveTransition()
 
+    private lazy var cardView = SPCardView()
+    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
+                                                                   action: #selector(handlePan(_:)))
     private lazy var dimmingView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        view.backgroundColor = UIColor.simplenoteDimmingColor
         return view
     }()
 
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+    var activeInteractor: UIViewControllerInteractiveTransitioning? {
+        let panGestureIsActive: Bool = {
+            switch panGestureRecognizer.state {
+            case .began, .changed:
+                return true
+            default:
+                return false
+            }
+        }()
+
+        return panGestureIsActive ? interactor : nil
+    }
+
+    weak var observer: SPCardTransitionObserver?
+
+    override var presentedView: UIView? {
+        return cardView
+    }
 
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
 
-        guard let containerView = containerView,
-            let presentedView = presentedViewController.view else {
+        setupGestureRecognizers()
 
-            return
-        }
+        addDimmingView()
+        addCardView()
 
-        containerView.addGestureRecognizer(panGestureRecognizer)
+        cardView.addContentView(presentedViewController.view)
 
-        containerView.addFillingSubview(dimmingView)
-        containerView.addSubview(presentedView)
-
-        presentedView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: presentedView.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: presentedView.trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: presentedView.bottomAnchor)
-        ])
-        let fittingHeight = presentedView.heightAnchor.constraint(equalToConstant: 0)
-        fittingHeight.priority = .fittingSizeLevel
-        fittingHeight.isActive = true
-
-        dimmingView.alpha = 0.0
+        dimmingView.alpha = UIKitConstants.alpha0_0
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 1.0
+            self.dimmingView.alpha = UIKitConstants.alpha1_0
         }, completion: nil)
     }
 
@@ -50,7 +54,7 @@ final class SPCardPresentationController: UIPresentationController {
 
         if !completed {
             removeViews()
-            removeGestureRecognizer()
+            removeGestureRecognizers()
         }
     }
 
@@ -58,9 +62,8 @@ final class SPCardPresentationController: UIPresentationController {
         super.dismissalTransitionWillBegin()
 
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 0.0
+            self.dimmingView.alpha = UIKitConstants.alpha0_0
         }, completion: nil)
-
     }
 
     override func dismissalTransitionDidEnd(_ completed: Bool) {
@@ -68,42 +71,118 @@ final class SPCardPresentationController: UIPresentationController {
 
         if completed {
             removeViews()
-            removeGestureRecognizer()
+            removeGestureRecognizers()
         }
     }
+}
 
-    private func removeViews() {
-        dimmingView.removeFromSuperview()
-        presentedViewController.view.removeFromSuperview()
+// MARK: - Views
+//
+private extension SPCardPresentationController {
+    func addDimmingView() {
+        containerView?.addFillingSubview(dimmingView)
     }
 
-    private func removeGestureRecognizer() {
-        containerView?.removeGestureRecognizer(panGestureRecognizer)
-    }
-
-    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        guard let gestureView = gesture.view, gesture.translation(in: gestureView).y >= 0 else {
+    func addCardView() {
+        guard let containerView = containerView else {
             return
         }
 
-        let percent = min(gesture.translation(in: gestureView).y / presentedViewController.view.bounds.height, 1.0)
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(cardView)
+
+        let heightConstraint = cardView.heightAnchor.constraint(equalToConstant: 0)
+        heightConstraint.priority = .fittingSizeLevel
+
+        NSLayoutConstraint.activate([
+            cardView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            cardView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor),
+            heightConstraint
+        ])
+    }
+
+    func removeViews() {
+        dimmingView.removeFromSuperview()
+        cardView.removeFromSuperview()
+    }
+
+    func setupGestureRecognizers() {
+        containerView?.addGestureRecognizer(panGestureRecognizer)
+    }
+
+    func removeGestureRecognizers() {
+        containerView?.removeGestureRecognizer(panGestureRecognizer)
+    }
+}
+
+// MARK: - Swipe to dismiss
+//
+private extension SPCardPresentationController {
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let gestureView = gesture.view else {
+            return
+        }
+
+        let verticalTranslation = gesture.translation(in: gestureView).y
+        guard verticalTranslation >= 0 else {
+            return
+        }
+
+        let percentComplete = min(verticalTranslation / cardView.bounds.height, 1.0)
 
         switch gesture.state {
         case .began:
-            presentedViewController.dismiss(animated: true, completion: nil)
+            beginSwipeToDismiss(percentComplete)
         case .changed:
-            interactor.update(percent)
+            updateSwipeToDismiss(percentComplete)
         case .cancelled:
-            interactor.cancel()
+            cancelSwipeToDismiss()
         case .ended:
             let velocity = gesture.velocity(in: gestureView).y
-            if velocity >= 0 && (percent > 0.5 || velocity > 1600) {
-                interactor.finish()
-            } else {
-                interactor.cancel()
-            }
+            finishOrCancelSwipeToDismiss(percentComplete, velocity: velocity)
         default:
             break
         }
     }
+
+    func beginSwipeToDismiss(_ percentComplete: CGFloat) {
+        presentedViewController.dismiss(animated: true, completion: nil)
+        updateSwipeToDismiss(percentComplete)
+    }
+
+    func updateSwipeToDismiss(_ percentComplete: CGFloat) {
+        if percentComplete >= 1.0 {
+            finishSwipeToDismiss()
+        } else {
+            interactor.update(percentComplete)
+        }
+    }
+
+    func finishOrCancelSwipeToDismiss(_ percentComplete: CGFloat, velocity: CGFloat) {
+        if velocity >= 0 &&
+            (percentComplete > Constants.dismissalPercentThreshold || velocity > Constants.dismissalVelocityThreshold) {
+
+            finishSwipeToDismiss()
+        } else {
+            cancelSwipeToDismiss()
+        }
+    }
+
+    func finishSwipeToDismiss() {
+        interactor.finish()
+        observer?.cardWasSwipedToDismiss(presentedViewController)
+    }
+
+    func cancelSwipeToDismiss() {
+        interactor.cancel()
+    }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let dismissalPercentThreshold = CGFloat(0.3)
+    static let dismissalVelocityThreshold = CGFloat(1600)
 }

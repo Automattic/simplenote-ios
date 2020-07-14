@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 final class SPCardPresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
