@@ -84,7 +84,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if (self) {
 
         // Editor
-        [self configureTextView];
+        [self setupTextView];
 
         // TagView
         _tagView = _noteEditorTextView.tagView;
@@ -119,23 +119,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     return self;
-}
-
-- (void)configureTextView
-{
-    _noteEditorTextView = [[SPEditorTextView alloc] init];
-    _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
-    _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-
-    // Note:
-    // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
-    if (@available(iOS 11.0, *)) {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
-            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-        }
-    }
 }
 
 - (VSTheme *)theme {
