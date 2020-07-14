@@ -65,8 +65,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.20.1-whats-new"
+msgctxt "v4.21.0-whats-new"
 msgid ""
-"New Privacy Notice for California Users\n"
+"New darker dark mode\n"
 msgstr ""
 
