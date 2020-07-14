@@ -15,7 +15,7 @@
 		<key>noteBodyLineHeightPercentage~ipad</key>
 		<string>0.40</string>
 		<key>noteSidePadding</key>
-		<integer>15</integer>
+		<integer>20</integer>
 		<key>noteSidePadding~regular</key>
 		<integer>64</integer>
 		<key>noteTopPadding</key>
