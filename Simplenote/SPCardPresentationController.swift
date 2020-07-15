@@ -10,6 +10,9 @@ final class SPCardPresentationController: UIPresentationController {
         return view
     }()
 
+    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                   action: #selector(handleTap(_:)))
+
     private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
                                                                    action: #selector(handlePan(_:)))
 
@@ -101,10 +104,12 @@ private extension SPCardPresentationController {
     }
 
     func setupGestureRecognizers() {
+        containerView?.addGestureRecognizer(tapGestureRecognizer)
         containerView?.addGestureRecognizer(panGestureRecognizer)
     }
 
     func removeGestureRecognizers() {
+        containerView?.removeGestureRecognizer(tapGestureRecognizer)
         containerView?.removeGestureRecognizer(panGestureRecognizer)
     }
 
@@ -125,23 +130,23 @@ private extension SPCardPresentationController {
 // MARK: - Swipe to dismiss
 //
 private extension SPCardPresentationController {
-    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        guard let gestureView = gesture.view else {
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard let gestureView = gestureRecognizer.view else {
             return
         }
 
-        let verticalTranslation = gesture.translation(in: gestureView).y
+        let verticalTranslation = gestureRecognizer.translation(in: gestureView).y
         let cardViewHeight = cardView.bounds.height
 
         let percentComplete = max(min(verticalTranslation / cardViewHeight, 1.0), 0.0)
 
-        switch gesture.state {
+        switch gestureRecognizer.state {
         case .began:
             beginSwipeToDismiss(percentComplete)
         case .changed:
             updateSwipeToDismiss(percentComplete)
         case .ended:
-            let velocity = gesture.velocity(in: gestureView).y
+            let velocity = gestureRecognizer.velocity(in: gestureView).y
             finishOrCancelSwipeToDismiss(percentComplete, velocity: velocity)
         default:
             cancelSwipeToDismiss()
@@ -177,7 +182,7 @@ private extension SPCardPresentationController {
         transitionInteractor?.finish()
         cleanupTransitionInteractor()
         
-        observer?.cardWasSwipedToDismiss(presentedViewController)
+        observer?.cardDidDismiss(presentedViewController, reason: .swipe)
     }
 
     func cancelSwipeToDismiss() {
@@ -187,6 +192,21 @@ private extension SPCardPresentationController {
 
     func cleanupTransitionInteractor() {
         transitionInteractor = nil
+    }
+}
+
+// MARK: - Tap to dismiss
+//
+private extension SPCardPresentationController {
+    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let locationInCardView = gestureRecognizer.location(in: cardView)
+        // Ignore taps inside card view
+        if cardView.bounds.contains(locationInCardView) {
+            return
+        }
+
+        presentedViewController.dismiss(animated: true, completion: nil)
+        observer?.cardDidDismiss(presentedViewController, reason: .outsideTap)
     }
 }
 
