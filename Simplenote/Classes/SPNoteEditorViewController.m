@@ -63,7 +63,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
-@property (nonatomic, assign) BOOL                      voiceoverEnabled;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -85,6 +84,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         // Editor
         [self configureTextView];
+        [self configureBottomView];
 
         // TagView
         _tagView = _noteEditorTextView.tagView;
@@ -154,6 +154,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
+    self.bottomView.backgroundColor = [UIColor simplenoteBackgroundColor];
+
     self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
     self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
@@ -185,6 +187,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
+    [self configureLayout];
     [self refreshVoiceoverSupport];
 }
 
@@ -520,16 +523,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)didReceiveVoiceOverNotification:(NSNotification *)notification
 {
     [self refreshVoiceoverSupport];
-}
-
-- (void)refreshVoiceoverSupport
-{
-    self.voiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
-    self.noteEditorTextView.lockTagEditorPosition = self.voiceoverEnabled;
-
-    if (self.voiceoverEnabled) {
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    }
 }
 
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{

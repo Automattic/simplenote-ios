@@ -71,6 +71,9 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
+// Voiceover
+@property (nonatomic, strong) UIView *bottomView;
+
 // Keyboard!
 @property (nonatomic, assign) BOOL isKeyboardVisible;
 
@@ -86,6 +89,8 @@
 - (void)didReceiveNewContent;
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
+
+- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
 - (void)save;
 
