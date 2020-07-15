@@ -1,9 +1,27 @@
-import Foundation
+import UIKit
 
+// MARK: - SPCardTransitioningManager: Manages card-like presentation of a view controller
+//
 final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningDelegate {
     private weak var presentationController: SPCardPresentationController?
 
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    /// Observer for transition related events
+    ///
+    weak var observer: SPCardTransitionObserver?
+
+    func presentationController(forPresented presented: UIViewController,
+                                presenting: UIViewController?,
+                                source: UIViewController) -> UIPresentationController? {
+        let presentationController = SPCardPresentationController(presentedViewController: presented,
+                                                                  presenting: presenting)
+        presentationController.observer = observer
+        self.presentationController = presentationController
+        return presentationController
+    }
+
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SPCardPresentationAnimator()
     }
 
@@ -12,16 +30,6 @@ final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningD
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard let presentationController = presentationController else {
-            return nil
-        }
-
-        return presentationController.isInteractive ? presentationController.interactor : nil
-    }
-
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        let presentationController = SPCardPresentationController(presentedViewController: presented, presenting: presenting)
-        self.presentationController = presentationController
-        return presentationController
+        return presentationController?.transitionInteractor
     }
 }

@@ -328,6 +328,11 @@ extension UIColor {
                 darkColorAlpha: UIKitConstants.alpha0_4)
     }
 
+    @objc
+    static var simplenoteDimmingColor: UIColor {
+        UIColor.black.withAlphaComponent(UIKitConstants.alpha0_1)
+    }
+
 ///    #### PENDINGS
 
     @objc

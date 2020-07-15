@@ -8,7 +8,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     var isShowingHistory: Bool {
-        return historyCardViewController != nil
+        return historyViewController != nil
     }
 
     /// Shows note history
@@ -16,38 +16,46 @@ extension SPNoteEditorViewController {
     @objc
     func showHistory() {
         let loader = SPHistoryLoader(note: currentNote)
-        let cardViewController = newHistoryViewController(with: loader, delegate: self)
+        let viewController = newHistoryViewController(with: loader, delegate: self)
 
-        historyCardViewController = cardViewController
+        historyViewController = viewController
         historyLoader = loader
 
-        present(cardViewController, animated: true, completion: nil)
+        let transitioningManager = SPCardTransitioningManager()
+        transitioningManager.observer = self
+        historyTransitioningManager = transitioningManager
+
+        present(viewController, with: transitioningManager)
     }
 
-    private func newHistoryViewController(with loader: SPHistoryLoader, delegate: SPNoteHistoryControllerDelegate) -> UIViewController {
+    private func newHistoryViewController(with loader: SPHistoryLoader,
+                                          delegate: SPNoteHistoryControllerDelegate) -> UIViewController {
         let controller = SPNoteHistoryController(note: currentNote, loader: loader)
         let historyViewController = SPNoteHistoryViewController(controller: controller)
-        let cardViewController = SPCardViewController(viewController: historyViewController)
 
         controller.delegate = delegate
 
-        return cardViewController
+        return historyViewController
     }
 
     /// Dismiss note history
     ///
     @objc(dismissHistoryAnimated:)
     func dismissHistory(animated: Bool) {
-        guard let viewController = historyCardViewController else {
+        guard let viewController = historyViewController else {
             return
         }
 
-        historyCardViewController = nil
-        historyLoader = nil
-
-        viewController.dismiss(animated: true, completion: nil)
+        cleanUpAfterHistoryDismissal()
+        viewController.dismiss(animated: animated, completion: nil)
 
         resetAccessibilityFocus()
+    }
+
+    private func cleanUpAfterHistoryDismissal() {
+        historyViewController = nil
+        historyLoader = nil
+        historyTransitioningManager = nil
     }
 }
 
@@ -56,7 +64,7 @@ extension SPNoteEditorViewController {
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     func noteHistoryControllerDidCancel() {
         dismissHistory(animated: true)
-        updateEditor(with: currentNote.content)
+        restoreOriginalNoteContent()
     }
 
     func noteHistoryControllerDidFinish() {
@@ -67,6 +75,27 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 
     func noteHistoryControllerDidSelectVersion(with content: String) {
         updateEditor(with: content, animated: true)
+    }
+}
+
+// MARK: - History Card transition observer
+//
+extension SPNoteEditorViewController: SPCardTransitionObserver {
+    func cardWasSwipedToDismiss(_ viewController: UIViewController) {
+        cleanUpAfterHistoryDismissal()
+        restoreOriginalNoteContent()
+    }
+}
+
+// MARK: - Transitioning
+//
+private extension SPNoteEditorViewController {
+    func present(_ viewController: UIViewController,
+                 with transitioningManager: UIViewControllerTransitioningDelegate) {
+        viewController.transitioningDelegate = transitioningManager
+        viewController.modalPresentationStyle = .custom
+
+        present(viewController, animated: true, completion: nil)
     }
 }
 
@@ -100,6 +129,10 @@ private extension SPNoteEditorViewController {
         UIView.animate(withDuration: UIKitConstants.animationShortDuration,
                        animations: animations,
                        completion: completion)
+    }
+
+    func restoreOriginalNoteContent() {
+        updateEditor(with: currentNote.content, animated: true)
     }
 }
 
