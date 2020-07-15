@@ -8,7 +8,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     var isShowingHistory: Bool {
-        return historyCardViewController != nil
+        return historyViewController != nil
     }
 
     /// Shows note history
@@ -16,76 +16,46 @@ extension SPNoteEditorViewController {
     @objc
     func showHistory() {
         let loader = SPHistoryLoader(note: currentNote)
-        let cardViewController = newHistoryViewController(with: loader, delegate: self)
+        let viewController = newHistoryViewController(with: loader, delegate: self)
 
-        historyCardViewController = cardViewController
+        historyViewController = viewController
         historyLoader = loader
 
-        cardViewController.present(from: self)
+        let transitioningManager = SPCardTransitioningManager()
+        transitioningManager.presentationDelegate = self
+        historyTransitioningManager = transitioningManager
 
-        adjustEditorBottomContentInset(accommodating: cardViewController.view)
-        noteEditorTextView.isReadOnly = true
-
-        refreshNavigationBarButtons()
+        present(viewController, with: transitioningManager)
     }
 
-    private func newHistoryViewController(with loader: SPHistoryLoader, delegate: SPNoteHistoryControllerDelegate) -> SPCardViewController {
+    private func newHistoryViewController(with loader: SPHistoryLoader,
+                                          delegate: SPNoteHistoryControllerDelegate) -> UIViewController {
         let controller = SPNoteHistoryController(note: currentNote, loader: loader)
         let historyViewController = SPNoteHistoryViewController(controller: controller)
-        let cardViewController = SPCardViewController(viewController: historyViewController)
 
         controller.delegate = delegate
 
-        return cardViewController
+        return historyViewController
     }
 
     /// Dismiss note history
     ///
     @objc(dismissHistoryAnimated:)
     func dismissHistory(animated: Bool) {
-        guard let viewController = historyCardViewController else {
+        guard let viewController = historyViewController else {
             return
         }
 
-        historyCardViewController = nil
-        historyLoader = nil
+        cleanUpAfterHistoryDismissal()
+        viewController.dismiss(animated: animated, completion: nil)
 
-        viewController.dismiss(animated: true, completion: nil)
-
-        noteEditorTextView.isReadOnly = false
-        restoreDefaultEditorBottomContentInset(animated: true)
-
-        refreshNavigationBarButtons()
         resetAccessibilityFocus()
     }
-}
 
-// MARK: - Editor bottom insets adjustments
-//
-private extension SPNoteEditorViewController {
-    func adjustEditorBottomContentInset(accommodating bottomView: UIView) {
-        guard let noteEditorSuperview = noteEditorTextView.superview else {
-            return
-        }
-        let bottomViewFrame = noteEditorSuperview.convert(bottomView.bounds, from: bottomView)
-        let bottomInset = noteEditorTextView.frame.maxY - bottomViewFrame.origin.y
-
-        noteEditorTextView.contentInset.bottom = bottomInset
-        noteEditorTextView.scrollIndicatorInsets.bottom = bottomInset
-    }
-
-    func restoreDefaultEditorBottomContentInset(animated: Bool) {
-        let animationBlock = {
-            self.noteEditorTextView.contentInset.bottom = self.noteEditorTextView.defaultBottomInset
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = 0
-        }
-
-        if animated {
-            UIView.animate(withDuration: UIKitConstants.animationShortDuration,
-                           animations: animationBlock)
-        } else {
-            animationBlock()
-        }
+    private func cleanUpAfterHistoryDismissal() {
+        historyViewController = nil
+        historyLoader = nil
+        historyTransitioningManager = nil
     }
 }
 
@@ -94,7 +64,7 @@ private extension SPNoteEditorViewController {
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     func noteHistoryControllerDidCancel() {
         dismissHistory(animated: true)
-        updateEditor(with: currentNote.content)
+        restoreOriginalNoteContent()
     }
 
     func noteHistoryControllerDidFinish() {
@@ -105,6 +75,26 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 
     func noteHistoryControllerDidSelectVersion(withContent content: String) {
         updateEditor(with: content, animated: true)
+    }
+}
+
+// MARK: - History Card transition delegate
+//
+extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
+        cleanUpAfterHistoryDismissal()
+        restoreOriginalNoteContent()
+    }
+}
+
+// MARK: - Transitioning
+//
+private extension SPNoteEditorViewController {
+    func present(_ viewController: UIViewController, with transitioningManager: UIViewControllerTransitioningDelegate) {
+        viewController.transitioningDelegate = transitioningManager
+        viewController.modalPresentationStyle = .custom
+
+        present(viewController, animated: true, completion: nil)
     }
 }
 
@@ -138,6 +128,10 @@ private extension SPNoteEditorViewController {
         UIView.animate(withDuration: UIKitConstants.animationShortDuration,
                        animations: animations,
                        completion: completion)
+    }
+
+    func restoreOriginalNoteContent() {
+        updateEditor(with: currentNote.content, animated: true)
     }
 }
 

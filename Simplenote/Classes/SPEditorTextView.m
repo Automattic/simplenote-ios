@@ -58,7 +58,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         [self addSubview:_tagView];
         
         UIEdgeInsets contentInset = self.contentInset;
-        contentInset.bottom += [self defaultBottomInset];
+        contentInset.bottom += 2 * tagViewHeight;
         contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
         
@@ -95,11 +95,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (VSTheme *)theme
 {
     return [[VSThemeManager sharedManager] theme];
-}
-
-- (CGFloat)defaultBottomInset
-{
-    return [self.theme floatForKey:@"tagViewHeight"] * 2;
 }
 
 - (NSDictionary *)typingAttributes
@@ -169,9 +164,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (BOOL)becomeFirstResponder
 {
     // Editable status is true by default but we fiddle with it during setup.
-    if (!self.readOnly) {
-        self.editable = YES;
-    }
+    
+    self.editable = YES;
     return [super becomeFirstResponder];
 }
 
@@ -556,10 +550,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
 {
-    if (self.readOnly) {
-        return NO;
-    }
-
     NSRange range;
     SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
     if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {

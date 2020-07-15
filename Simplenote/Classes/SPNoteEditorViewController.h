@@ -57,15 +57,14 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, weak) UIViewController *historyCardViewController;
+@property (nonatomic, weak) UIViewController *historyViewController;
 @property (nonatomic, weak) SPHistoryLoader *historyLoader;
+@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> historyTransitioningManager;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 @property (nonatomic, getter=isModified) BOOL modified;
-
-- (void)refreshNavigationBarButtons;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;

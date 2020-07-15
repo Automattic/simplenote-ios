@@ -201,7 +201,7 @@ extension UIColor {
 
     @objc
     static var simplenoteCardBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray2).withAlphaComponent(UIKitConstants.alpha0_97)
+        UIColor(lightColor: .white, darkColor: .darkGray1)
     }
 
     @objc
@@ -326,6 +326,11 @@ extension UIColor {
                 darkColor: .gray50,
                 lightColorAlpha: UIKitConstants.alpha0_2,
                 darkColorAlpha: UIKitConstants.alpha0_4)
+    }
+
+    @objc
+    static var simplenoteDimmingColor: UIColor {
+        UIColor.black.withAlphaComponent(UIKitConstants.alpha0_1)
     }
 
 ///    #### PENDINGS
