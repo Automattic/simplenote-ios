@@ -1202,7 +1202,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // safe to alter text attributes here
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    
+    if ([self isShowingHistory]) {
+        return NO;
+    }
+
     if (bSearching)
         [self endSearching:textView];
     

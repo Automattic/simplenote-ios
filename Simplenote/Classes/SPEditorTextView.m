@@ -164,7 +164,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (BOOL)becomeFirstResponder
 {
     // Editable status is true by default but we fiddle with it during setup.
-
+    
     self.editable = YES;
     return [super becomeFirstResponder];
 }

@@ -1699,7 +1699,6 @@
 		E29ADD751784902700E55842 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6E1E79B24BD077E008A44BC /* Card */,
 				A6C0589124AD2B00006BC572 /* Note History */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
