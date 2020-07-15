@@ -57,8 +57,9 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, weak) UIViewController *historyCardViewController;
+@property (nonatomic, weak) UIViewController *historyViewController;
 @property (nonatomic, weak) SPHistoryLoader *historyLoader;
+@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> historyTransitioningManager;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
