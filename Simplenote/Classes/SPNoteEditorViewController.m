@@ -280,11 +280,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
             self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
-            
+            self->searchDetailLabel.alpha = UIKitConstants.alpha0_0;
+
             [UIView animateWithDuration:0.3
                              animations:^{
                                  
-                                 self->searchDetailLabel.alpha = 1.0;
+                                 self->searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
             
             self->highlightedSearchResultIndex = 0;
@@ -859,18 +860,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
     bSearching = NO;
-    
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.navigationController.toolbar.transform = CGAffineTransformMakeTranslation(0, self.navigationController.toolbar.frame.size.height);
-                     } completion:^(BOOL finished) {
-                         [self.navigationController setToolbarHidden:YES animated:NO];
-                         self.navigationController.toolbar.transform = CGAffineTransformIdentity;
-                         self->searchDetailLabel.alpha = 0.0;
-                         self->searchDetailLabel.text = nil;
 
-                     }];
-    
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    searchDetailLabel.text = nil;
 }
 
 
