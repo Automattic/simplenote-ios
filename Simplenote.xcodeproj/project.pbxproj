@@ -142,7 +142,6 @@
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
 		A6C0589D24AE95AD006BC572 /* SPHistoryLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */; };
-		A6C8241224BF4E69009B27CF /* SPCardDismissalReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C8241124BF4E69009B27CF /* SPCardDismissalReason.swift */; };
 		A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */; };
 		A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */; };
 		A6E1E79A24B7DB96008A44BC /* SPManagedObject+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */; };
@@ -150,7 +149,6 @@
 		A6E1E7A024BDE440008A44BC /* SPCardDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */; };
 		A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */; };
 		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
-		A6E1E7A624BE651C008A44BC /* SPCardTransitionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A524BE651C008A44BC /* SPCardTransitionObserver.swift */; };
 		A6E1E7A824BE656D008A44BC /* SPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A724BE656D008A44BC /* SPCardView.swift */; };
 		B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */; };
 		B504D4E023D2018800AEED27 /* ResultsObjectChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */; };
@@ -505,7 +503,6 @@
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
 		A6C0589C24AE95AD006BC572 /* SPHistoryLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryLoader.swift; sourceTree = "<group>"; };
-		A6C8241124BF4E69009B27CF /* SPCardDismissalReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardDismissalReason.swift; sourceTree = "<group>"; };
 		A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryControllerDelegate.swift; sourceTree = "<group>"; };
 		A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryVersion.swift; sourceTree = "<group>"; };
 		A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Version.swift"; sourceTree = "<group>"; };
@@ -513,7 +510,6 @@
 		A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardDismissalAnimator.swift; sourceTree = "<group>"; };
 		A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationAnimator.swift; sourceTree = "<group>"; };
 		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
-		A6E1E7A524BE651C008A44BC /* SPCardTransitionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardTransitionObserver.swift; sourceTree = "<group>"; };
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1094,8 +1090,6 @@
 				A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */,
 				A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */,
 				A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */,
-				A6E1E7A524BE651C008A44BC /* SPCardTransitionObserver.swift */,
-				A6C8241124BF4E69009B27CF /* SPCardDismissalReason.swift */,
 			);
 			name = Card;
 			sourceTree = "<group>";
@@ -2232,7 +2226,6 @@
 				B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
-				A6E1E7A624BE651C008A44BC /* SPCardTransitionObserver.swift in Sources */,
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
@@ -2310,7 +2303,6 @@
 				B543C7E523CF775C00003A80 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				B5421F3423CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift in Sources */,
 				375D24B521E01131007AB25A /* context_test.c in Sources */,
-				A6C8241224BF4E69009B27CF /* SPCardDismissalReason.swift in Sources */,
 				46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */,
 				E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */,
 				46A3C97F17DFA81A002865AE /* SPSideBySideView.m in Sources */,

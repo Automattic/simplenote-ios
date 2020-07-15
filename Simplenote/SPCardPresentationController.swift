@@ -1,5 +1,25 @@
 import UIKit
 
+// MARK: - SPCardDismissalReason: reason why card view controller was dismissed
+//
+enum SPCardDismissalReason {
+    /// Swipe down
+    ///
+    case swipe
+
+    /// Tap outside of the card
+    ///
+    case outsideTap
+}
+
+
+// MARK: - SPCardPresentationControllerDelegate
+//
+protocol SPCardPresentationControllerDelegate: class {
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason)
+}
+
+
 // MARK: - SPCardPresentationController: Manages presentation and swipe to dismiss
 //
 final class SPCardPresentationController: UIPresentationController {
@@ -20,9 +40,9 @@ final class SPCardPresentationController: UIPresentationController {
     ///
     private(set) var transitionInteractor: UIPercentDrivenInteractiveTransition?
 
-    /// Observer for transition related events
+    /// Delegate for presentation (and dismissal) related events
     ///
-    weak var observer: SPCardTransitionObserver?
+    weak var presentationDelegate: SPCardPresentationControllerDelegate?
 
     /// Returns our own card wrapper view instead of default view controller view
     ///
@@ -181,8 +201,8 @@ private extension SPCardPresentationController {
     func finishSwipeToDismiss() {
         transitionInteractor?.finish()
         cleanupTransitionInteractor()
-        
-        observer?.cardDidDismiss(presentedViewController, reason: .swipe)
+
+        presentationDelegate?.cardDidDismiss(presentedViewController, reason: .swipe)
     }
 
     func cancelSwipeToDismiss() {
@@ -206,7 +226,7 @@ private extension SPCardPresentationController {
         }
 
         presentedViewController.dismiss(animated: true, completion: nil)
-        observer?.cardDidDismiss(presentedViewController, reason: .outsideTap)
+        presentationDelegate?.cardDidDismiss(presentedViewController, reason: .outsideTap)
     }
 }
 
