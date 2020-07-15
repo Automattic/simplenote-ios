@@ -30,6 +30,6 @@ final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningD
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return presentationController?.activeTransitionInteractor
+        return presentationController?.transitionInteractor
     }
 }

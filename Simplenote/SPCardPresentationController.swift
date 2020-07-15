@@ -3,8 +3,6 @@ import UIKit
 // MARK: - SPCardPresentationController: Manages presentation and swipe to dismiss
 //
 final class SPCardPresentationController: UIPresentationController {
-    private let transitionInteractor = UIPercentDrivenInteractiveTransition()
-
     private lazy var cardView = SPCardView()
     private lazy var dimmingView: UIView = {
         let view = UIView()
@@ -15,20 +13,9 @@ final class SPCardPresentationController: UIPresentationController {
     private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
                                                                    action: #selector(handlePan(_:)))
 
-    /// Returns a transition interactor only if swipe to dismiss is currently in progress
+    /// Transition interactor is set only during swipe to dismiss
     ///
-    var activeTransitionInteractor: UIViewControllerInteractiveTransitioning? {
-        let swipeToDismissIsActive: Bool = {
-            switch panGestureRecognizer.state {
-            case .began, .changed:
-                return true
-            default:
-                return false
-            }
-        }()
-
-        return swipeToDismissIsActive ? transitionInteractor : nil
-    }
+    private(set) var transitionInteractor: UIPercentDrivenInteractiveTransition?
 
     /// Observer for transition related events
     ///
@@ -144,29 +131,25 @@ private extension SPCardPresentationController {
         }
 
         let verticalTranslation = gesture.translation(in: gestureView).y
-        // Handle only movements towards the bottom of the screen
-        guard verticalTranslation >= 0 else {
-            return
-        }
+        let cardViewHeight = cardView.bounds.height
 
-        let percentComplete = min(verticalTranslation / cardView.bounds.height, 1.0)
+        let percentComplete = max(min(verticalTranslation / cardViewHeight, 1.0), 0.0)
 
         switch gesture.state {
         case .began:
             beginSwipeToDismiss(percentComplete)
         case .changed:
             updateSwipeToDismiss(percentComplete)
-        case .cancelled:
-            cancelSwipeToDismiss()
         case .ended:
             let velocity = gesture.velocity(in: gestureView).y
             finishOrCancelSwipeToDismiss(percentComplete, velocity: velocity)
         default:
-            break
+            cancelSwipeToDismiss()
         }
     }
 
     func beginSwipeToDismiss(_ percentComplete: CGFloat) {
+        transitionInteractor = UIPercentDrivenInteractiveTransition()
         presentedViewController.dismiss(animated: true, completion: nil)
         updateSwipeToDismiss(percentComplete)
     }
@@ -175,7 +158,7 @@ private extension SPCardPresentationController {
         if percentComplete >= 1.0 {
             finishSwipeToDismiss()
         } else {
-            transitionInteractor.update(percentComplete)
+            transitionInteractor?.update(percentComplete)
         }
     }
 
@@ -191,12 +174,19 @@ private extension SPCardPresentationController {
     }
 
     func finishSwipeToDismiss() {
-        transitionInteractor.finish()
+        transitionInteractor?.finish()
+        cleanupTransitionInteractor()
+        
         observer?.cardWasSwipedToDismiss(presentedViewController)
     }
 
     func cancelSwipeToDismiss() {
-        transitionInteractor.cancel()
+        transitionInteractor?.cancel()
+        cleanupTransitionInteractor()
+    }
+
+    func cleanupTransitionInteractor() {
+        transitionInteractor = nil
     }
 }
 
