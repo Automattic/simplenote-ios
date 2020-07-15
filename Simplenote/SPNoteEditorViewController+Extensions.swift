@@ -81,7 +81,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 // MARK: - History Card transition delegate
 //
 extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
-    func cardWasSwipedToDismiss(_ viewController: UIViewController) {
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
         cleanUpAfterHistoryDismissal()
         restoreOriginalNoteContent()
     }
