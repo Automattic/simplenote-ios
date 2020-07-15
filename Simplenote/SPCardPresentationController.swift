@@ -1,21 +1,24 @@
 import UIKit
 
-// MARK: - SPCardPresentationController
+// MARK: - SPCardPresentationController: Manages presentation and swipe to dismiss
 //
 final class SPCardPresentationController: UIPresentationController {
-    private let interactor = UIPercentDrivenInteractiveTransition()
+    private let transitionInteractor = UIPercentDrivenInteractiveTransition()
 
     private lazy var cardView = SPCardView()
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
-                                                                   action: #selector(handlePan(_:)))
     private lazy var dimmingView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.simplenoteDimmingColor
         return view
     }()
 
-    var activeInteractor: UIViewControllerInteractiveTransitioning? {
-        let panGestureIsActive: Bool = {
+    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
+                                                                   action: #selector(handlePan(_:)))
+
+    /// Returns a transition interactor only if swipe to dismiss is currently in progress
+    ///
+    var activeTransitionInteractor: UIViewControllerInteractiveTransitioning? {
+        let swipeToDismissIsActive: Bool = {
             switch panGestureRecognizer.state {
             case .began, .changed:
                 return true
@@ -24,14 +27,20 @@ final class SPCardPresentationController: UIPresentationController {
             }
         }()
 
-        return panGestureIsActive ? interactor : nil
+        return swipeToDismissIsActive ? transitionInteractor : nil
     }
 
+    /// Observer for transition related events
+    ///
     weak var observer: SPCardTransitionObserver?
 
+    /// Returns our own card wrapper view instead of default view controller view
+    ///
     override var presentedView: UIView? {
         return cardView
     }
+
+    // MARK: - Presentation
 
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
@@ -43,10 +52,7 @@ final class SPCardPresentationController: UIPresentationController {
 
         cardView.addContentView(presentedViewController.view)
 
-        dimmingView.alpha = UIKitConstants.alpha0_0
-        presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = UIKitConstants.alpha1_0
-        }, completion: nil)
+        fadeInDimmingView()
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -58,12 +64,11 @@ final class SPCardPresentationController: UIPresentationController {
         }
     }
 
+    // MARK: - Dismissal
+
     override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
-
-        presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = UIKitConstants.alpha0_0
-        }, completion: nil)
+        fadeOutDimmingView()
     }
 
     override func dismissalTransitionDidEnd(_ completed: Bool) {
@@ -115,6 +120,19 @@ private extension SPCardPresentationController {
     func removeGestureRecognizers() {
         containerView?.removeGestureRecognizer(panGestureRecognizer)
     }
+
+    func fadeInDimmingView() {
+        dimmingView.alpha = UIKitConstants.alpha0_0
+        presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
+            self.dimmingView.alpha = UIKitConstants.alpha1_0
+        }, completion: nil)
+    }
+
+    func fadeOutDimmingView() {
+        presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
+            self.dimmingView.alpha = UIKitConstants.alpha0_0
+        }, completion: nil)
+    }
 }
 
 // MARK: - Swipe to dismiss
@@ -126,6 +144,7 @@ private extension SPCardPresentationController {
         }
 
         let verticalTranslation = gesture.translation(in: gestureView).y
+        // Handle only movements towards the bottom of the screen
         guard verticalTranslation >= 0 else {
             return
         }
@@ -156,12 +175,13 @@ private extension SPCardPresentationController {
         if percentComplete >= 1.0 {
             finishSwipeToDismiss()
         } else {
-            interactor.update(percentComplete)
+            transitionInteractor.update(percentComplete)
         }
     }
 
     func finishOrCancelSwipeToDismiss(_ percentComplete: CGFloat, velocity: CGFloat) {
-        if velocity >= 0 &&
+        let isMovingDown = velocity >= 0
+        if isMovingDown &&
             (percentComplete > Constants.dismissalPercentThreshold || velocity > Constants.dismissalVelocityThreshold) {
 
             finishSwipeToDismiss()
@@ -171,12 +191,12 @@ private extension SPCardPresentationController {
     }
 
     func finishSwipeToDismiss() {
-        interactor.finish()
+        transitionInteractor.finish()
         observer?.cardWasSwipedToDismiss(presentedViewController)
     }
 
     func cancelSwipeToDismiss() {
-        interactor.cancel()
+        transitionInteractor.cancel()
     }
 }
 

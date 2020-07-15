@@ -1,7 +1,12 @@
 import UIKit
 
+// MARK: - SPCardTransitioningManager: Manages card-like presentation of a view controller
+//
 final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningDelegate {
     private weak var presentationController: SPCardPresentationController?
+
+    /// Observer for transition related events
+    ///
     weak var observer: SPCardTransitionObserver?
 
     func presentationController(forPresented presented: UIViewController,
@@ -25,6 +30,6 @@ final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningD
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return presentationController?.activeInteractor
+        return presentationController?.activeTransitionInteractor
     }
 }

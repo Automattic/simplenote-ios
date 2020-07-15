@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - Card dismissal animator
+//
 final class SPCardDismissalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private var animator: UIViewImplicitlyAnimating?
 
@@ -13,12 +15,13 @@ final class SPCardDismissalAnimator: NSObject, UIViewControllerAnimatedTransitio
     }
 
     func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+        // According to docs we must return the same animator object during transition
         if let animator = animator {
             return animator
         }
 
         guard let view = transitionContext.view(forKey: .from) else {
-            fatalError()
+            fatalError("Transition view doesn't exist")
         }
 
         let animationBlock: () -> Void = {

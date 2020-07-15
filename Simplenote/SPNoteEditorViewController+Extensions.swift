@@ -73,7 +73,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     }
 }
 
-// MARK: - History card transition observer
+// MARK: - History Card transition observer
 //
 extension SPNoteEditorViewController: SPCardTransitionObserver {
     func cardWasSwipedToDismiss(_ viewController: UIViewController) {

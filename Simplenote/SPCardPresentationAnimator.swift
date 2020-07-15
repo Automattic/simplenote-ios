@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - Card presentation animator
+//
 final class SPCardPresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return UIKitConstants.animationShortDuration
@@ -10,6 +12,7 @@ final class SPCardPresentationAnimator: NSObject, UIViewControllerAnimatedTransi
             return
         }
 
+        // layout to get correct view size
         view.superview?.setNeedsLayout()
         view.superview?.layoutIfNeeded()
 

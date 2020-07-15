@@ -19,6 +19,10 @@ final class SPCardView: UIView {
         stopListeningToNotifications()
     }
 
+    /// Add content view
+    /// - Parameters:
+    ///     - view: content view (will be decorated with rounded corners and a shadow)
+    ///
     func addContentView(_ view: UIView) {
         containerView.addFillingSubview(view)
     }
