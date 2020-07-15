@@ -1,5 +1,11 @@
 import UIKit
 
+// MARK: - SPCardPresentationControllerDelegate
+//
+protocol SPCardPresentationControllerDelegate: class {
+    func cardWasSwipedToDismiss(_ viewController: UIViewController)
+}
+
 // MARK: - SPCardPresentationController: Manages presentation and swipe to dismiss
 //
 final class SPCardPresentationController: UIPresentationController {
@@ -17,9 +23,9 @@ final class SPCardPresentationController: UIPresentationController {
     ///
     private(set) var transitionInteractor: UIPercentDrivenInteractiveTransition?
 
-    /// Observer for transition related events
+    /// Delegate for presentation (and dismissal) related events
     ///
-    weak var observer: SPCardTransitionObserver?
+    weak var presentationDelegate: SPCardPresentationControllerDelegate?
 
     /// Returns our own card wrapper view instead of default view controller view
     ///
@@ -177,7 +183,7 @@ private extension SPCardPresentationController {
         transitionInteractor?.finish()
         cleanupTransitionInteractor()
         
-        observer?.cardWasSwipedToDismiss(presentedViewController)
+        presentationDelegate?.cardWasSwipedToDismiss(presentedViewController)
     }
 
     func cancelSwipeToDismiss() {

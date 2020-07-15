@@ -5,16 +5,16 @@ import UIKit
 final class SPCardTransitioningManager: NSObject, UIViewControllerTransitioningDelegate {
     private weak var presentationController: SPCardPresentationController?
 
-    /// Observer for transition related events
+    /// Delegate for presentation (and dismissal) related events
     ///
-    weak var observer: SPCardTransitionObserver?
+    weak var presentationDelegate: SPCardPresentationControllerDelegate?
 
     func presentationController(forPresented presented: UIViewController,
                                 presenting: UIViewController?,
                                 source: UIViewController) -> UIPresentationController? {
         let presentationController = SPCardPresentationController(presentedViewController: presented,
                                                                   presenting: presenting)
-        presentationController.observer = observer
+        presentationController.presentationDelegate = presentationDelegate
         self.presentationController = presentationController
         return presentationController
     }

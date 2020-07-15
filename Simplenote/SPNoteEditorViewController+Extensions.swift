@@ -22,7 +22,7 @@ extension SPNoteEditorViewController {
         historyLoader = loader
 
         let transitioningManager = SPCardTransitioningManager()
-        transitioningManager.observer = self
+        transitioningManager.presentationDelegate = self
         historyTransitioningManager = transitioningManager
 
         present(viewController, with: transitioningManager)
@@ -78,9 +78,9 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     }
 }
 
-// MARK: - History Card transition observer
+// MARK: - History Card transition delegate
 //
-extension SPNoteEditorViewController: SPCardTransitionObserver {
+extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
     func cardWasSwipedToDismiss(_ viewController: UIViewController) {
         cleanUpAfterHistoryDismissal()
         restoreOriginalNoteContent()
@@ -90,8 +90,7 @@ extension SPNoteEditorViewController: SPCardTransitionObserver {
 // MARK: - Transitioning
 //
 private extension SPNoteEditorViewController {
-    func present(_ viewController: UIViewController,
-                 with transitioningManager: UIViewControllerTransitioningDelegate) {
+    func present(_ viewController: UIViewController, with transitioningManager: UIViewControllerTransitioningDelegate) {
         viewController.transitioningDelegate = transitioningManager
         viewController.modalPresentationStyle = .custom
 
