@@ -109,9 +109,8 @@ extension ExtensionPresentationController: KeyboardObservable {
     }
 
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        let keyboardFrame = endFrame ?? .zero
-        let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
+        // TODO:
+        // We should really animate (again) here, but not doing so. The layout mechanism is broken when called twice.
     }
 
     private func animate(with keyboardFrame: CGRect, duration: TimeInterval, animationCurve: UInt?) {
