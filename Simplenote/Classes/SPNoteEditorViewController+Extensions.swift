@@ -85,9 +85,11 @@ extension SPNoteEditorViewController: KeyboardObservable {
         applyBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
     }
 
-    func applyBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
+    private func applyBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
         let isKeyboardFloating = keyboardFrame.maxY < view.bounds.height
         let newKeyboardHeight = keyboardFrame.intersection(noteEditorTextView.frame).height
+
+        // Note: Whenever the keyboard is floating, we don't really wanna actually apply insets
         let bottomInsets = isKeyboardFloating ? .zero : newKeyboardHeight
 
         UIView.animate(withDuration: duration) {
