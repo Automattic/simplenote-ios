@@ -47,8 +47,9 @@
         autoCompleteScrollView.hidden = YES;
         [self addSubview:autoCompleteScrollView];
     
-        addTagField = [SPTagEntryField tagEntryFieldWithdelegate:self];
+        addTagField = [SPTagEntryField tagEntryField];
         addTagField.delegate = self;
+        addTagField.tagDelegate = self;
         [tagScrollView addSubview:addTagField];
         
         tagPills = [NSMutableArray array];
