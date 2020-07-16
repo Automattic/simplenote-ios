@@ -39,7 +39,7 @@ class SPNoteHistoryViewController: UIViewController {
         configureAccessibility()
 
         startListeningToNotifications()
-        startListeningToControllerChanges()
+        startListeningForControllerChanges()
         startListeningForSliderValueChanges()
 
         controller.onViewLoad()
@@ -216,7 +216,7 @@ private extension SPNoteHistoryViewController {
 // MARK: - Controller
 //
 private extension SPNoteHistoryViewController {
-    func startListeningToControllerChanges() {
+    func startListeningForControllerChanges() {
         controller.observer = { [weak self] state in
             self?.update(with: state)
         }
