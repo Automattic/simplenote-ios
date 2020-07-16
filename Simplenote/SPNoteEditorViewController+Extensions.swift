@@ -38,13 +38,18 @@ extension SPNoteEditorViewController {
         return historyViewController
     }
 
-    private func dismissHistory() {
+    /// Dismiss note history
+    ///
+    @objc(dismissHistoryAnimated:)
+    func dismissHistory(animated: Bool) {
         guard let viewController = historyViewController else {
             return
         }
 
         cleanUpAfterHistoryDismissal()
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: animated, completion: nil)
+
+        resetAccessibilityFocus()
     }
 
     private func cleanUpAfterHistoryDismissal() {
@@ -58,12 +63,12 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     func noteHistoryControllerDidCancel() {
-        dismissHistory()
+        dismissHistory(animated: true)
         restoreOriginalNoteContent()
     }
 
     func noteHistoryControllerDidFinish() {
-        dismissHistory()
+        dismissHistory(animated: true)
         isModified = true
         save()
     }
@@ -127,5 +132,13 @@ private extension SPNoteEditorViewController {
 
     func restoreOriginalNoteContent() {
         updateEditor(with: currentNote.content, animated: true)
+    }
+}
+
+// MARK: - Accessibility
+//
+private extension SPNoteEditorViewController {
+    func resetAccessibilityFocus() {
+        UIAccessibility.post(notification: .layoutChanged, argument: nil)
     }
 }

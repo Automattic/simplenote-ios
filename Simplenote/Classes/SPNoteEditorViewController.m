@@ -683,6 +683,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     });
     
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
+    [self dismissHistoryAnimated:NO];
     
     // mark note as read
     note.unread = NO;
@@ -951,6 +952,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
+- (void)ensureSearchIsDismissed {
+    if (bSearching) {
+        [self endSearching:_noteEditorTextView];
+    }
+}
+
 
 #pragma mark Keyboard Notifications
 
@@ -1205,8 +1212,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         return NO;
     }
 
-    if (bSearching)
-        [self endSearching:textView];
+    [self ensureSearchIsDismissed];
     
     return YES;
 }
@@ -1899,6 +1905,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewVersionAction:(id)sender {
+    [self ensureSearchIsDismissed];
     [self save];
     [self showHistory];
 }

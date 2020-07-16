@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="yP9-LW-2C9" id="izn-o3-tAN"/>
                 <outlet property="dateLabel" destination="0Zh-yW-YrO" id="hp9-x6-fqO"/>
+                <outlet property="dismissButton" destination="obJ-JD-gy5" id="GcT-cW-Qng"/>
                 <outlet property="errorMessageLabel" destination="iEj-sR-6XD" id="XGR-QD-bu9"/>
                 <outlet property="restoreButton" destination="TQJ-NT-WS8" id="v59-2G-mU4"/>
                 <outlet property="slider" destination="DfP-am-H0U" id="FT0-gY-qCq"/>
@@ -24,20 +25,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="I1k-RA-YFb">
-                    <rect key="frame" x="16" y="60" width="382" height="144"/>
+                    <rect key="frame" x="16" y="60" width="382" height="152"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7f5-fi-pTi">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="22"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7f5-fi-pTi">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-yW-YrO">
-                                    <rect key="frame" x="0.0" y="0.0" width="352" height="20.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-yW-YrO">
+                                    <rect key="frame" x="0.0" y="5" width="344" height="20.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obJ-JD-gy5">
-                                    <rect key="frame" x="360" y="0.0" width="22" height="22"/>
-                                    <state key="normal" image="button_delete_small"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obJ-JD-gy5" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="352" y="0.0" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="TvR-W1-HGY"/>
+                                        <constraint firstAttribute="height" constant="30" id="hGX-5A-5an"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_cross"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="handleTapOnCloseButton" destination="-1" eventType="touchUpInside" id="4QM-t5-7yX"/>
                                     </connections>
@@ -45,7 +55,7 @@
                             </subviews>
                         </stackView>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="DfP-am-H0U" customClass="SPSnappingSlider" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="-2" y="46" width="386" height="31"/>
+                            <rect key="frame" x="-2" y="54" width="386" height="31"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="step">
                                     <real key="value" value="1"/>
@@ -53,7 +63,7 @@
                             </userDefinedRuntimeAttributes>
                         </slider>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQJ-NT-WS8" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="100" width="382" height="44"/>
+                            <rect key="frame" x="0.0" y="108" width="382" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="8YY-gK-ZRz"/>
                             </constraints>
@@ -61,7 +71,7 @@
                             <state key="normal" title="Button"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="10"/>
+                                    <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -71,10 +81,10 @@
                     </subviews>
                 </stackView>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yP9-LW-2C9">
-                    <rect key="frame" x="197" y="122" width="20" height="20"/>
+                    <rect key="frame" x="197" y="126" width="20" height="20"/>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEj-sR-6XD">
-                    <rect key="frame" x="16" y="60" width="382" height="144"/>
+                    <rect key="frame" x="16" y="60" width="382" height="152"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -100,6 +110,6 @@
         </view>
     </objects>
     <resources>
-        <image name="button_delete_small" width="22" height="22"/>
+        <image name="icon_cross" width="16" height="16"/>
     </resources>
 </document>

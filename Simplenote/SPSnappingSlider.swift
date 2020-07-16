@@ -62,3 +62,14 @@ private extension SPSnappingSlider {
         feedbackGenerator?.prepare()
     }
 }
+
+// MARK: - Accessibility
+extension SPSnappingSlider {
+    override func accessibilityIncrement() {
+        setValue(value + step, animated: true)
+    }
+
+    override func accessibilityDecrement() {
+        setValue(value - step, animated: true)
+    }
+}

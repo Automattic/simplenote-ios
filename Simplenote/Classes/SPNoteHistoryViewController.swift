@@ -8,6 +8,7 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var slider: SPSnappingSlider!
     @IBOutlet private weak var restoreButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var dismissButton: UIButton!
 
     private let controller: SPNoteHistoryController
     private var versions: [SPHistoryVersion] = []
@@ -27,16 +28,18 @@ class SPNoteHistoryViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        stopListeningToNotifications()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        styleDateLabel()
-        styleErrorMessageLabel()
-        styleSlider()
-        styleRestoreButton()
-        styleActivityIndicator()
-
+        refreshStyle()
+        configureAccessibility()
         listenForSliderValueChanges()
+
+        startListeningToNotifications()
 
         controller.observer = { [weak self] state in
             self?.update(with: state)
@@ -50,6 +53,15 @@ class SPNoteHistoryViewController: UIViewController {
 // MARK: - Private Methods
 //
 private extension SPNoteHistoryViewController {
+    func refreshStyle() {
+        styleDateLabel()
+        styleErrorMessageLabel()
+        styleSlider()
+        styleRestoreButton()
+        styleActivityIndicator()
+        styleDismissButton()
+    }
+
     func styleDateLabel() {
         dateLabel.textColor = .simplenoteNoteHeadlineColor
     }
@@ -59,21 +71,36 @@ private extension SPNoteHistoryViewController {
     }
 
     func styleSlider() {
-        let color = UIColor.simplenoteGray50Color.withAlphaComponent(0.2)
-        slider.minimumTrackTintColor = color
-        slider.maximumTrackTintColor = color
+        slider.minimumTrackTintColor = .simplenoteSliderTrackColor
+        slider.maximumTrackTintColor = .simplenoteSliderTrackColor
     }
 
     func styleRestoreButton() {
-        restoreButton.backgroundColor = restoreButton.isEnabled ? .simplenoteBlue50Color : .simplenoteDisabledButtonBackgroundColor
+        restoreButton.layer.masksToBounds = true
+
+        restoreButton.setBackgroundImage(UIColor.simplenoteBlue50Color.dynamicImageRepresentation(), for: .normal)
+        restoreButton.setBackgroundImage(UIColor.simplenoteDisabledButtonBackgroundColor.dynamicImageRepresentation(), for: .disabled)
+        restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
+
         restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
+    }
+
+    func styleDismissButton() {
+        dismissButton.layer.masksToBounds = true
+
+        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
+
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
+
+        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 
     func styleActivityIndicator() {
         if #available(iOS 13.0, *) {
             activityIndicator.style = .medium
         } else {
-            activityIndicator.style = .gray
+            activityIndicator.style = SPUserInterface.isDark ? .white : .gray
         }
     }
 
@@ -84,6 +111,8 @@ private extension SPNoteHistoryViewController {
             setActivityIndicatorVisible(true)
             setErrorMessageVisible(false)
 
+            setAccessibilityFocus(activityIndicator)
+
         case .results(let versions):
             setMainContentVisible(true)
             setActivityIndicatorVisible(false)
@@ -93,12 +122,16 @@ private extension SPNoteHistoryViewController {
 
             configureSlider()
 
+            setAccessibilityFocus(slider)
+
         case .error(let text):
             setMainContentVisible(false)
             setActivityIndicatorVisible(false)
             setErrorMessageVisible(true)
 
             errorMessageLabel.text = text
+
+            setAccessibilityFocus(errorMessageLabel)
         }
     }
 
@@ -106,9 +139,13 @@ private extension SPNoteHistoryViewController {
         let index = Int(value)
         let version = versions[index]
 
-        dateLabel.text = controller.note.dateString(version.modificationDate, brief: false)
+        let dateString = controller.note.dateString(version.modificationDate, brief: false)
+
+        dateLabel.text = dateString
         restoreButton.isEnabled = version.version != controller.note.versionInt
         styleRestoreButton()
+
+        updateSliderAccessibilityValue(dateString)
 
         controller.select(version: version)
     }
@@ -166,6 +203,23 @@ private extension SPNoteHistoryViewController {
     }
 }
 
+// MARK: - Notifications
+//
+private extension SPNoteHistoryViewController {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func themeDidChange() {
+        refreshStyle()
+    }
+}
+
 // MARK: - Tracking
 //
 private extension SPNoteHistoryViewController {
@@ -175,5 +229,28 @@ private extension SPNoteHistoryViewController {
 
     func trackRestore() {
         SPTracker.trackEditorNoteRestored()
+    }
+}
+
+// MARK: - Accessibility
+//
+extension SPNoteHistoryViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        controller.handleTapOnCloseButton()
+        return true
+    }
+
+    private func setAccessibilityFocus(_ element: UIView) {
+        UIAccessibility.post(notification: .layoutChanged, argument: element)
+    }
+
+    private func configureAccessibility() {
+        dismissButton.accessibilityLabel = NSLocalizedString("Dismiss History", comment: "Accessibility label describing a button used to dismiss a history view of the note")
+        slider.accessibilityLabel = NSLocalizedString("Select a Version", comment: "Accessibility label describing a slider used to reset the current note to a previous version")
+        activityIndicator.accessibilityLabel = NSLocalizedString("Loading Versions", comment: "Accessibility label describing activity indicator loading note versions")
+    }
+
+    private func updateSliderAccessibilityValue(_ value: String?) {
+        slider.accessibilityValue = value
     }
 }
