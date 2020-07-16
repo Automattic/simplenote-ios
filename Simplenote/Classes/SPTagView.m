@@ -67,6 +67,11 @@
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 
+- (BOOL)isFirstResponder
+{
+    return addTagField.isFirstResponder;
+}
+
 - (void)layoutSubviews
 {
     CGFloat xOrigin = 0.0;
