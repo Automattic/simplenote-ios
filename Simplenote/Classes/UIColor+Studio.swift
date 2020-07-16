@@ -21,9 +21,8 @@ extension UIColor {
         let colorProvider: (_ isDark: Bool) -> (value: ColorStudio, alpha: CGFloat) = { isDark in
             if isDark {
                 return (darkColor, darkColorAlpha)
-            } else {
-                return (lightColor, lightColorAlpha)
             }
+            return (lightColor, lightColorAlpha)
         }
 
         guard #available(iOS 13.0, *) else {
