@@ -2015,30 +2015,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark SPAddTagDelegate methods
 
-- (void)tagViewWillBeginEditing:(SPTagView *)tagView {
-
-    self.noteEditorTextView.lockContentOffset = YES;
+- (void)tagViewDidChange:(SPTagView *)tagView
+{
 }
 
-- (void)tagViewDidBeginEditing:(SPTagView *)tagView {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.noteEditorTextView scrollToBottom];
-    });
-}
-
-- (void)tagViewDidChange:(SPTagView *)tagView {
-    [self.noteEditorTextView scrollToBottom];
-}
-
-- (void)tagViewDidEndEditing:(SPTagView *)tagView {
-
-    self.noteEditorTextView.lockContentOffset = NO;
-    [self.noteEditorTextView resignFirstResponder]; // seems to fix some jumping of the text view
-}
-
-- (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName {
-    
+- (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName
+{
     if (![[SPObjectManager sharedManager] tagExists:tagName]) {
         [[SPObjectManager sharedManager] createTagFromString:tagName];
         

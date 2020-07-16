@@ -16,7 +16,6 @@
 
 @interface SPEditorTextView : SPTextView
 
-@property (nonatomic) BOOL lockContentOffset;
 @property (nonatomic) BOOL lockTagEditorPosition;
 
 @property (nonatomic, strong) SPTagView *tagView;
