@@ -36,6 +36,9 @@ final class SPCardPresentationController: UIPresentationController {
     private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
                                                                    action: #selector(handlePan(_:)))
 
+    private var compactLayoutConstraints: [NSLayoutConstraint] = []
+    private var regularLayoutConstraints: [NSLayoutConstraint] = []
+
     /// Transition interactor is set only during swipe to dismiss
     ///
     private(set) var transitionInteractor: UIPercentDrivenInteractiveTransition?
@@ -91,6 +94,24 @@ final class SPCardPresentationController: UIPresentationController {
     }
 }
 
+// MARK: - Handle changes in trait collection
+//
+extension SPCardPresentationController {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.updateConstraints(for: newCollection)
+        }, completion: nil)
+    }
+
+    private func updateConstraints(for collection: UITraitCollection) {
+        NSLayoutConstraint.deactivate(compactLayoutConstraints + regularLayoutConstraints)
+
+        let newConstraints = collection.horizontalSizeClass == .regular ? regularLayoutConstraints : compactLayoutConstraints
+        NSLayoutConstraint.activate(newConstraints)
+    }
+}
+
 // MARK: - Views
 //
 private extension SPCardPresentationController {
@@ -106,16 +127,26 @@ private extension SPCardPresentationController {
         cardView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(cardView)
 
+        compactLayoutConstraints = [
+            cardView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor),
+        ]
+
+        regularLayoutConstraints = [
+            cardView.leadingAnchor.constraint(equalTo: containerView.readableContentGuide.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: containerView.readableContentGuide.trailingAnchor),
+        ]
+
         let heightConstraint = cardView.heightAnchor.constraint(equalToConstant: 0)
         heightConstraint.priority = .fittingSizeLevel
 
         NSLayoutConstraint.activate([
-            cardView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            cardView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             cardView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor),
             heightConstraint
         ])
+
+        updateConstraints(for: presentedViewController.traitCollection)
     }
 
     func removeViews() {
