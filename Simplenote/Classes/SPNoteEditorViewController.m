@@ -2017,23 +2017,24 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)tagViewWillBeginEditing:(SPTagView *)tagView {
 
-    _noteEditorTextView.lockContentOffset = YES;
+    self.noteEditorTextView.lockContentOffset = YES;
 }
+
 - (void)tagViewDidBeginEditing:(SPTagView *)tagView {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self->_noteEditorTextView scrollToBottom];
+        [self.noteEditorTextView scrollToBottom];
     });
 }
 
 - (void)tagViewDidChange:(SPTagView *)tagView {
-    [_noteEditorTextView scrollToBottom];
+    [self.noteEditorTextView scrollToBottom];
 }
 
 - (void)tagViewDidEndEditing:(SPTagView *)tagView {
 
-    _noteEditorTextView.lockContentOffset = NO;
-    [_noteEditorTextView resignFirstResponder]; // seems to fix some jumping of the text view
+    self.noteEditorTextView.lockContentOffset = NO;
+    [self.noteEditorTextView resignFirstResponder]; // seems to fix some jumping of the text view
 }
 
 - (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName {
