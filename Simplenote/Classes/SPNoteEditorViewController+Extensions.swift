@@ -87,8 +87,8 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
     /// Updates the Editor's Bottom Insets
     ///
-    /// - Note: Whenever the keyboard is floating, we'll apply `contentInset.bottom = .zero`
-    /// - Note: Does not animate the Bottom Insets when Keyboard Visibility isn't affected (IE going from<>to Tags Editor)
+    /// - Note: Floating Keyboard results in `contentInset.bottom = .zero`
+    /// - Note: No animation when the Keyboard Visibility isn't affected (when switching from<>to TagsEditor)
     /// - Note: Performs `scrollToBottom` alongside, whenever TagsView is the firstResponder
     ///
     private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
