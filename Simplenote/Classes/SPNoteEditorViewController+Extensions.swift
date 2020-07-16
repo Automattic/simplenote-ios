@@ -74,7 +74,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
             return
         }
 
-        applyBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
+        updateBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
     }
 
     public func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
@@ -82,22 +82,39 @@ extension SPNoteEditorViewController: KeyboardObservable {
             return
         }
 
-        applyBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
+        updateBottomInsets(keyboardFrame: keyboardFrame, duration: duration)
     }
 
-    private func applyBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
-        let isKeyboardFloating = keyboardFrame.maxY < view.bounds.height
-        let newKeyboardHeight = keyboardFrame.intersection(noteEditorTextView.frame).height
+    /// Updates the Editor's Bottom Insets
+    ///
+    /// - Note: Whenever the keyboard is floating, we'll apply `contentInset.bottom = .zero`
+    /// - Note: Does not animate the Bottom Insets when Keyboard Visibility isn't affected (IE going from<>to Tags Editor)
+    /// - Note: Performs `scrollToBottom` alongside, whenever TagsView is the firstResponder
+    ///
+    private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
+        let newKeyboardHeight   = keyboardFrame.intersection(noteEditorTextView.frame).height
+        let isKeyboardFloating  = keyboardFrame.maxY < view.bounds.height
+        let wasKeyboardVisible  = isKeyboardVisible
+        let newBottomInsets     = isKeyboardFloating ? .zero : newKeyboardHeight
+        let mustScrollToBottom  = tagView.isFirstResponder
 
-        // Note: Whenever the keyboard is floating, we don't really wanna actually apply insets
-        let bottomInsets = isKeyboardFloating ? .zero : newKeyboardHeight
+        isKeyboardVisible       = newKeyboardHeight != .zero
 
-        UIView.animate(withDuration: duration) {
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = bottomInsets
-            self.noteEditorTextView.contentInset.bottom = bottomInsets
+        let closure = {
+            self.noteEditorTextView.scrollIndicatorInsets.bottom = newBottomInsets
+            self.noteEditorTextView.contentInset.bottom = newBottomInsets
+
+            if mustScrollToBottom {
+                self.noteEditorTextView.scrollToBottom()
+            }
         }
 
-        isKeyboardVisible = newKeyboardHeight != .zero
+        guard isKeyboardVisible != wasKeyboardVisible else {
+            closure()
+            return
+        }
+
+        UIView.animate(withDuration: duration, animations: closure)
     }
 }
 
