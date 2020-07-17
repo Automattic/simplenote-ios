@@ -88,7 +88,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
     /// Updates the Editor's Bottom Insets
     ///
     /// - Note: Floating Keyboard results in `contentInset.bottom = .zero`
-    /// - Note: Performs `scrollToBottom` alongside the Keyboard Animation, whenever TagsView is the firstResponder
+    /// - Note: Performs `scrollToBottom` whenever TagsView is the firstResponder (and VoiceOver is off)
     ///
     private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
         let newKeyboardHeight       = keyboardFrame.intersection(noteEditorTextView.frame).height
@@ -97,7 +97,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
-        let mustScrollToBottom      = tagView.isFirstResponder
+        let mustScrollToBottom      = tagView.isFirstResponder && !voiceoverEnabled
 
         defer {
             isKeyboardVisible = newKeyboardVisible
