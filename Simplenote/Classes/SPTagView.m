@@ -64,6 +64,7 @@
 - (void)applyStyle
 {
     self.backgroundColor = [UIColor simplenoteBackgroundColor];
+    autoCompleteScrollView.backgroundColor = [UIColor simplenoteBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 }
 
