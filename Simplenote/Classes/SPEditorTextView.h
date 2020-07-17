@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 
-- (void)scrollToBottom;
+- (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;
 - (NSString *)getPlainTextContent;

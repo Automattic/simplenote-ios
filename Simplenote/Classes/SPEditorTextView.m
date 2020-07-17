@@ -209,7 +209,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return response;
 }
 
-- (void)scrollToBottom
+- (void)scrollToBottomWithAnimation:(BOOL)animated
 {
     /// Notes:
     /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
@@ -221,7 +221,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
     CGPoint scrollOffset = CGPointMake(0, yOffset);
 
-    [self setContentOffset:scrollOffset animated:NO];
+    if (self.contentOffset.y == scrollOffset.y) {
+        return;
+    }
+
+    [self setContentOffset:scrollOffset animated:animated];
 }
 
 - (void)scrollToTop

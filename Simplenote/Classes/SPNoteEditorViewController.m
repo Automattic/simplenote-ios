@@ -2029,7 +2029,22 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)tagViewDidChange:(SPTagView *)tagView
 {
-    [self.noteEditorTextView scrollToBottom];
+    // Note: When Voiceover is enabled, the Tags Editor is docked!
+    if (self.voiceoverEnabled) {
+        return;
+    }
+
+    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
+}
+
+- (void)tagViewDidBeginEditing:(SPTagView *)tagView
+{
+    // Note: When Voiceover is enabled, the Tags Editor is docked!
+    if (self.voiceoverEnabled) {
+        return;
+    }
+
+    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
 }
 
 - (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName
