@@ -395,13 +395,11 @@
     [self setNeedsLayout];
 }
 
-
-- (void)scrollEntryFieldToVisible:(BOOL)animated {
-    
-    // make sure end of text field is visible in the scrollview
-    
-    if (_activeDeletionPill)
+- (void)scrollEntryFieldToVisible:(BOOL)animated
+{
+    if (_activeDeletionPill) {
         return;
+    }
     
     CGFloat spacing = [self.theme floatForKey:@"tagViewItemSpacing"];
     
@@ -412,7 +410,7 @@
                                          addTagField.frame.origin.x + addTagField.frame.size.width + 2 * spacing - tagScrollView.bounds.size.width),
                                      0);
         
-        [tagScrollView setContentOffset:offset animated:YES];
+        [tagScrollView setContentOffset:offset animated:animated];
     }
 }
 

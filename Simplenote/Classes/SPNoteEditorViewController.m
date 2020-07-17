@@ -305,6 +305,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshNavBarSizeWithCoordinator:coordinator];
+    [self refreshTagEditorOffsetWithCoordinator:coordinator];
 }
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
@@ -344,6 +345,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self->bDisableShrinkingNavigationBar = NO;
     }];
+}
+
+- (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    if (!self.tagView.isFirstResponder) {
+        return;
+    }
+
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.tagView scrollEntryFieldToVisible:NO];
+    } completion:nil];
 }
 
 - (void)sizeNavigationContainer {
@@ -2017,6 +2029,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)tagViewDidChange:(SPTagView *)tagView
 {
+    [self.noteEditorTextView scrollToBottom];
 }
 
 - (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName
