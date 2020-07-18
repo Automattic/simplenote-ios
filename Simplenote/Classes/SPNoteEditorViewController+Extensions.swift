@@ -75,30 +75,31 @@ extension SPNoteEditorViewController: KeyboardObservable {
     }
 
     public func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration else {
+        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration, let curve = animationCurve else {
             return
         }
 
-        updateBottomInsets(keyboardFrame: endFrame, duration: duration)
+        updateBottomInsets(keyboardFrame: endFrame, duration: duration, curve: curve)
     }
 
     public func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration else {
+        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration, let curve = animationCurve else {
             return
         }
 
-        updateBottomInsets(keyboardFrame: endFrame, duration: duration)
+        updateBottomInsets(keyboardFrame: endFrame, duration: duration, curve: curve)
     }
 
     /// Updates the Editor's Bottom Insets
     ///
     /// - Note: Floating Keyboard results in `contentInset.bottom = .zero`
     ///
-    private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval) {
+    private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval, curve: UInt) {
         let newKeyboardHeight       = keyboardFrame.intersection(noteEditorTextView.frame).height
         let newKeyboardFloats       = keyboardFrame.maxY < view.frame.height
         let newKeyboardVisible      = newKeyboardHeight != .zero
 
+        let animationOptions        = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
 
@@ -106,10 +107,10 @@ extension SPNoteEditorViewController: KeyboardObservable {
             isKeyboardVisible = newKeyboardVisible
         }
 
-        UIView.animate(withDuration: duration) {
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
-        }
+            self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
+        }, completion: nil)
     }
 }
 
