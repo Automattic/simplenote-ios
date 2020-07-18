@@ -31,12 +31,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        /// Note:
+        /// `scrollEnabled = NO` causes layout issues when `UITextField` becomes the first responder, in
+        /// certain documents. We're simply always allowing scroll, and fixing a glitch!
+        ///
         tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         tagScrollView.scrollsToTop = NO;
         tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         tagScrollView.alwaysBounceHorizontal = YES;
         tagScrollView.showsHorizontalScrollIndicator = NO;
         tagScrollView.delegate = self;
+        tagScrollView.scrollEnabled = YES;
         [self addSubview:tagScrollView];
         
         autoCompleteScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -88,9 +93,7 @@
         xOrigin += view.frame.size.width;
         
     }
-    
-    tagScrollView.scrollEnabled = tagPills.count > 0;
-    
+
     // position button
     addTagField.frame = CGRectMake(xOrigin + spacing,
                                     0,
