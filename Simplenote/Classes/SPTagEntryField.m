@@ -85,4 +85,20 @@
     });
 }
 
+/// Stop this madness, in the name of your king!
+///
+/// As you may know, the TagsEditor is contained within a UITextView instance. Meaning that resigning firstResponder status
+/// causes the nextResponder to *actually* become the firstResponder.
+///
+/// In this simple, yet powerful workaround, we're skipping the "Enclosing Text View" from the receiver's responder chain.
+///
+/// Why:
+///     - Dismissing the Tags Editor causes, otherwise, multiple keyboard events
+///     - And as you may have guessed, that yields bad layout issues
+///
+- (UIResponder *)nextResponder
+{
+    return self.enclosingTextView.superview;
+}
+
 @end

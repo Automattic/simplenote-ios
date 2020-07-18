@@ -651,11 +651,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)endEditing:(id)sender {
-    
+- (void)endEditing:(id)sender
+{
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    [_tagView endEditing:YES];
-    [_noteEditorTextView endEditing:YES];
+    [self.view endEditing:YES];
 }
 
 // Bounces a snapshot of the text view to hint to the user how to access
