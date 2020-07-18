@@ -35,28 +35,24 @@ extension KeyboardObservable {
     /// - Parameter notificationCenter: `NotificationCenter` to register the keyboard interactive observer
     ///   with (or `.default` if none is specified).
     ///
-    public func addKeyboardObservers(to notificationCenter: NotificationCenter = .default) {
-        notificationCenter.addObserver(
-            forName: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil,
-            queue: nil,
-            using: { [weak self] notification in
-                self?.keyboardWillChangeFrame(beginFrame: notification.keyboardBeginFrame(),
-                                              endFrame: notification.keyboardEndFrame(),
-                                              animationDuration: notification.keyboardAnimationDuration(),
-                                              animationCurve: notification.keyboardAnimationCurve())
+    /// - Returns: An array of opaque objects, strongly retained by the NotificationCenter. Must be passed back to `removeKeyboardObservers`
+    ///
+    public func addKeyboardObservers(to notificationCenter: NotificationCenter = .default) -> [Any] {
+        let tokenWillBegin = notificationCenter.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: nil, using: { [weak self] notification in
+            self?.keyboardWillChangeFrame(beginFrame: notification.keyboardBeginFrame(),
+                                          endFrame: notification.keyboardEndFrame(),
+                                          animationDuration: notification.keyboardAnimationDuration(),
+                                          animationCurve: notification.keyboardAnimationCurve())
         })
 
-        notificationCenter.addObserver(
-            forName: UIResponder.keyboardDidChangeFrameNotification,
-            object: nil,
-            queue: nil,
-            using: { [weak self] notification in
-                self?.keyboardDidChangeFrame(beginFrame: notification.keyboardBeginFrame(),
-                                              endFrame: notification.keyboardEndFrame(),
-                                              animationDuration: notification.keyboardAnimationDuration(),
-                                              animationCurve: notification.keyboardAnimationCurve())
+        let tokenDidBegin = notificationCenter.addObserver(forName: UIResponder.keyboardDidChangeFrameNotification, object: nil, queue: nil, using: { [weak self] notification in
+            self?.keyboardDidChangeFrame(beginFrame: notification.keyboardBeginFrame(),
+                                         endFrame: notification.keyboardEndFrame(),
+                                         animationDuration: notification.keyboardAnimationDuration(),
+                                         animationCurve: notification.keyboardAnimationCurve())
         })
+
+        return [tokenWillBegin, tokenDidBegin]
     }
 
     /// Remove the keyboard observers for the provided `NotificationCenter`.
@@ -64,13 +60,9 @@ extension KeyboardObservable {
     /// - Parameter notificationCenter: `NotificationCenter` to remove the keyboard interactive observer
     ///   from (or `.default` if none is specified).
     ///
-    public func removeKeyboardObservers(from notificationCenter: NotificationCenter = .default) {
-        let notificationNames = [
-            UIResponder.keyboardWillChangeFrameNotification, UIResponder.keyboardDidChangeFrameNotification
-        ]
-
-        for name in notificationNames {
-            notificationCenter.removeObserver(self, name: name, object: nil)
+    public func removeKeyboardObservers(with tokens: [Any], from notificationCenter: NotificationCenter = .default) {
+        for token in tokens {
+            notificationCenter.removeObserver(token)
         }
     }
 }

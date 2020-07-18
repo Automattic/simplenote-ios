@@ -61,12 +61,17 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
     @objc
     func startListeningToKeyboardNotifications() {
-        addKeyboardObservers()
+        keyboardNotificationTokens = addKeyboardObservers()
     }
 
     @objc
     func stopListeningToKeyboardNotifications() {
-        removeKeyboardObservers()
+        guard let tokens = keyboardNotificationTokens else {
+            return
+        }
+
+        removeKeyboardObservers(with: tokens)
+        keyboardNotificationTokens = nil
     }
 
     public func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {

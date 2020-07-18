@@ -75,6 +75,7 @@
 @property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
+@property (nonatomic, strong) NSArray *keyboardNotificationTokens;
 @property (nonatomic) BOOL isKeyboardVisible;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;

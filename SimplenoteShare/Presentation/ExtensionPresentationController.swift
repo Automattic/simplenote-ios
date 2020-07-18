@@ -16,6 +16,7 @@ final class ExtensionPresentationController: UIPresentationController {
     private var presentDirection: Direction
     private var dismissDirection: Direction
 
+    private var keyboardNotificationTokens: [Any]?
     private let dimmingView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,12 +35,17 @@ final class ExtensionPresentationController: UIPresentationController {
         self.presentDirection = presentDirection
         self.dismissDirection = dismissDirection
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        self.addKeyboardObservers()
+        self.keyboardNotificationTokens = self.addKeyboardObservers()
     }
 
     deinit {
-        removeKeyboardObservers()
+        guard let tokens = keyboardNotificationTokens else {
+            return
+        }
+
+        removeKeyboardObservers(with: tokens)
     }
+
 
     // MARK: Presentation Controller Overrides
 
