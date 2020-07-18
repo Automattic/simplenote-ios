@@ -75,7 +75,7 @@
 @property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
-@property (nonatomic, assign) BOOL isKeyboardVisible;
+@property (nonatomic) BOOL isKeyboardVisible;
 
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
