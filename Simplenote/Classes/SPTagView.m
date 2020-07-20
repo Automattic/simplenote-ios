@@ -31,12 +31,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        /// Note:
+        /// `scrollEnabled = NO` causes layout issues when `UITextField` becomes the first responder, in
+        /// certain documents. We're simply always allowing scroll, and fixing a glitch!
+        ///
         tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         tagScrollView.scrollsToTop = NO;
         tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         tagScrollView.alwaysBounceHorizontal = YES;
         tagScrollView.showsHorizontalScrollIndicator = NO;
         tagScrollView.delegate = self;
+        tagScrollView.scrollEnabled = YES;
         [self addSubview:tagScrollView];
         
         autoCompleteScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -47,8 +52,9 @@
         autoCompleteScrollView.hidden = YES;
         [self addSubview:autoCompleteScrollView];
     
-        addTagField = [SPTagEntryField tagEntryFieldWithdelegate:self];
+        addTagField = [SPTagEntryField tagEntryField];
         addTagField.delegate = self;
+        addTagField.tagDelegate = self;
         [tagScrollView addSubview:addTagField];
         
         tagPills = [NSMutableArray array];
@@ -63,7 +69,13 @@
 - (void)applyStyle
 {
     self.backgroundColor = [UIColor simplenoteBackgroundColor];
+    autoCompleteScrollView.backgroundColor = [UIColor simplenoteBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+}
+
+- (BOOL)isFirstResponder
+{
+    return addTagField.isFirstResponder;
 }
 
 - (void)layoutSubviews
@@ -81,9 +93,7 @@
         xOrigin += view.frame.size.width;
         
     }
-    
-    tagScrollView.scrollEnabled = tagPills.count > 0;
-    
+
     // position button
     addTagField.frame = CGRectMake(xOrigin + spacing,
                                     0,
@@ -389,13 +399,11 @@
     [self setNeedsLayout];
 }
 
-
-- (void)scrollEntryFieldToVisible:(BOOL)animated {
-    
-    // make sure end of text field is visible in the scrollview
-    
-    if (_activeDeletionPill)
+- (void)scrollEntryFieldToVisible:(BOOL)animated
+{
+    if (_activeDeletionPill) {
         return;
+    }
     
     CGFloat spacing = [self.theme floatForKey:@"tagViewItemSpacing"];
     
@@ -406,7 +414,7 @@
                                          addTagField.frame.origin.x + addTagField.frame.size.width + 2 * spacing - tagScrollView.bounds.size.width),
                                      0);
         
-        [tagScrollView setContentOffset:offset animated:YES];
+        [tagScrollView setContentOffset:offset animated:animated];
     }
 }
 
