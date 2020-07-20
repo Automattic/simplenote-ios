@@ -60,19 +60,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
         UIEdgeInsets contentInset = self.contentInset;
         contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
-        
-        [self addObserver:self
-               forKeyPath:@"contentSize"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"contentOffset"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"contentInset"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
+
+        [self startObservingProperties];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didEndEditing:)
@@ -95,6 +84,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return self;
 }
 
+- (void)startObservingProperties
+{
+    for (NSString *keyPath in self.observedKeyPaths) {
+        [self addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (NSArray<NSString *> *)observedKeyPaths
+{
+    return @[
+        NSStringFromSelector(@selector(contentSize)),
+        NSStringFromSelector(@selector(contentOffset)),
+        NSStringFromSelector(@selector(contentInset))
+    ];
+}
+
 - (VSTheme *)theme
 {
     return [[VSThemeManager sharedManager] theme];
@@ -111,8 +116,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         return;
     }
 
-    NSArray *observedKeyPaths = @[ @"contentOffset", @"contentSize", @"contentInset" ];
-    if (![observedKeyPaths containsObject:keyPath]) {
+    if (![self.observedKeyPaths containsObject:keyPath]) {
         return;
     }
 
