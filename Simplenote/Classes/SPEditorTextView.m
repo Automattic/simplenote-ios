@@ -191,7 +191,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
-    return [touch.view isKindOfClass:[SPTextView class]];
+    return ![touch.view isDescendantOfView:self.tagView];
 }
 
 - (BOOL)becomeFirstResponder
