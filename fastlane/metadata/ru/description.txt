@@ -30,7 +30,6 @@ Simplenote — это простой способ делать заметки, 
 
 Политика конфиденциальности: https://automattic.com/privacy/
 Условия предоставления услуг: https://simplenote.com/terms/
-California users privacy notice: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
 
 --
 

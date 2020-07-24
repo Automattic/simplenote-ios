@@ -1,3 +1,0 @@
-Een bug verwijderd die invloed had op de weergave van de deel-extensie.
-RTL-ondersteuning in de authenticatie-schermen gerepareerd.
-RTL-ondersteuning in de tags-editor gerepareerd.
