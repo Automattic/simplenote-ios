@@ -245,7 +245,7 @@
     
 }
 
--(void)emptyTrash
+- (void)emptyTrash
 {
 
     NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];

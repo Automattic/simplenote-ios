@@ -716,8 +716,8 @@
 		E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagListViewCell.m; path = Classes/SPTagListViewCell.m; sourceTree = "<group>"; };
 		E22A17CE17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+CoreDataExtensions.h"; path = "Classes/NSManagedObjectContext+CoreDataExtensions.h"; sourceTree = "<group>"; };
 		E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+CoreDataExtensions.m"; path = "Classes/NSManagedObjectContext+CoreDataExtensions.m"; sourceTree = "<group>"; };
-		E22A17D117A2E2A000383575 /* SPObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPObjectManager.h; path = Simplenote/Classes/SPObjectManager.h; sourceTree = SOURCE_ROOT; };
-		E22A17D217A2E2A000383575 /* SPObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPObjectManager.m; path = Simplenote/Classes/SPObjectManager.m; sourceTree = SOURCE_ROOT; };
+		E22A17D117A2E2A000383575 /* SPObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPObjectManager.h; path = Simplenote/SPObjectManager.h; sourceTree = SOURCE_ROOT; };
+		E22A17D217A2E2A000383575 /* SPObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPObjectManager.m; path = Simplenote/SPObjectManager.m; sourceTree = SOURCE_ROOT; };
 		E22BCDF51794F53600A17ED2 /* SPActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActivityView.h; path = Classes/SPActivityView.h; sourceTree = "<group>"; };
 		E22BCDF61794F53600A17ED2 /* SPActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPActivityView.m; path = Classes/SPActivityView.m; sourceTree = "<group>"; };
 		E22BCDF81794F55000A17ED2 /* SPActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActionSheet.h; path = Classes/SPActionSheet.h; sourceTree = "<group>"; };
@@ -1365,6 +1365,8 @@
 				B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */,
 				174838271BBDCAA400E834AF /* SPMarkdownParser.h */,
 				174838281BBDCAA400E834AF /* SPMarkdownParser.m */,
+				E22A17D117A2E2A000383575 /* SPObjectManager.h */,
+				E22A17D217A2E2A000383575 /* SPObjectManager.m */,
 				B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */,
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
@@ -1716,8 +1718,6 @@
 				E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */,
 				E2FCA6141789146D00FC229D /* VSThemeManager.h */,
 				E2FCA6151789146D00FC229D /* VSThemeManager.m */,
-				E22A17D117A2E2A000383575 /* SPObjectManager.h */,
-				E22A17D217A2E2A000383575 /* SPObjectManager.m */,
 			);
 			name = DB5;
 			path = ../Simplenote/DB5;
