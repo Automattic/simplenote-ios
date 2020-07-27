@@ -18,6 +18,9 @@
 #import "SPTagCompletionPill.h"
 #import "Simplenote-Swift.h"
 
+
+const NSUInteger SPMaximumTagLength = 256;
+
 @interface SPTagView ()
 
 @property (nonatomic, strong) SPTagPill *activeDeletionPill;
@@ -311,20 +314,28 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    if ([string hasPrefix:@" "]) {
-        string = nil;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSRange rangeOfSpace = [string rangeOfString:@" "];
+
+    // Scenario: Space was pressed
+    if (rangeOfSpace.location == 0) {
         [self processTextInFieldToTag];
         return NO;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
-        textField.text = [textField.text stringByReplacingCharactersInRange:range
-                                                                 withString:string];
+    }
+
+    // Scenario: Maximum Length
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length > SPMaximumTagLength) {
         return NO;
     }
-    
+
+    // Scenario: Pasted String contains Spaces
+    if (rangeOfSpace.location != NSNotFound) {
+        textField.text = [string substringToIndex:rangeOfSpace.location];
+        return NO;
+    }
+
     return YES;
 }
 
@@ -336,9 +347,9 @@
         [self scrollEntryFieldToVisible:YES];
     });
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)])
+    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)]) {
         [tagDelegate tagViewDidChange:self];
-    
+    }
     
     [self updateAutoCompletionsForString:tagTextField.text];
 
