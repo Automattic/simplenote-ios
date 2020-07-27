@@ -597,15 +597,15 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     }
 
     // Scenario #B: New String was either typed or pasted
-    NSString *filteredString    = [string substringUpToFirstSpace];
-    NSString *updatedString     = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
-    BOOL editionContainsSpaces  = filteredString.length < string.length;
+    NSString *filteredString = [string substringUpToFirstSpace];
+    NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
+    BOOL editContainsSpaces = filteredString.length < string.length;
 
-    if (updatedString.length < SimplenoteConstants.maximumTagLength) {
+    if (updatedString.length <= SimplenoteConstants.maximumTagLength) {
         textField.text = updatedString;
     }
 
-    if (editionContainsSpaces) {
+    if (editContainsSpaces) {
         [textField endEditing:YES];
     }
 
