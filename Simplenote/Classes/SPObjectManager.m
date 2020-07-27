@@ -148,7 +148,7 @@
     NSString *newTagName = [[tagName componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
 
     // Check for duplicate
-    if ([self tagExists:newTagName] == false) {
+    if ([self tagExists:newTagName]) {
         return nil;
     }
 
