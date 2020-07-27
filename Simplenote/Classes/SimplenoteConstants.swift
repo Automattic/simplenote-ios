@@ -12,5 +12,5 @@ class SimplenoteConstants: NSObject {
 
     /// Tag(s) Max Length
     ///
-    static let maximumTagLength = 256
+    static let maximumTagLength = 5
 }
