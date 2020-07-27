@@ -11,4 +11,11 @@ extension NSString {
     var fullRange: NSRange {
         NSRange(location: 0, length: length)
     }
+
+    /// Returns the receiver's substring "up to the first space"
+    ///
+    @objc
+    var substringUpToFirstSpace: String {
+        components(separatedBy: .space).first ?? String(self)
+    }
 }

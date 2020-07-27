@@ -19,7 +19,6 @@
 #import "Simplenote-Swift.h"
 
 
-const NSUInteger SPMaximumTagLength = 256;
 
 @interface SPTagView ()
 
@@ -316,27 +315,21 @@ const NSUInteger SPMaximumTagLength = 256;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSRange rangeOfSpace = [string rangeOfString:@" "];
-
-    // Scenario: Space was pressed
-    if (rangeOfSpace.location == 0) {
+    // Scenario #A: Space was pressed
+    if ([string hasPrefix:@" "]) {
         [self processTextInFieldToTag];
         return NO;
     }
 
-    // Scenario: Maximum Length
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (newString.length > SPMaximumTagLength) {
-        return NO;
+    // Scenario #B: New String was either typed or pasted
+    NSString *filteredString    = [string substringUpToFirstSpace];
+    NSString *updatedString     = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
+
+    if (updatedString.length < SimplenoteConstants.maximumTagLength) {
+        textField.text = updatedString;
     }
 
-    // Scenario: Pasted String contains Spaces
-    if (rangeOfSpace.location != NSNotFound) {
-        textField.text = [string substringToIndex:rangeOfSpace.location];
-        return NO;
-    }
-
-    return YES;
+    return NO;
 }
 
 - (void)tagEntryFieldDidChange:(SPTagEntryField *)tagTextField {
