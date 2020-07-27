@@ -49,28 +49,23 @@
     return [allTags sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
-- (BOOL)tagExists:(NSString *)tagName {
-    
-    for (Tag *tag in self.tags) {
-        if ([tag.name compare:tagName options:NSCaseInsensitiveSearch] == NSOrderedSame)
-            return YES;
-    }
-    
-    return NO;
+- (BOOL)tagExists:(NSString *)tagName
+{
+    return [self tagForName:tagName] != nil;
 }
 
-- (Tag *)tagForName:(NSString *)tagName {
-    
+- (Tag *)tagForName:(NSString *)tagName
+{
     for (Tag *tag in self.tags) {
-        if ([tag.name compare:tagName options:NSCaseInsensitiveSearch] == NSOrderedSame)
+        if ([tag.name compare:tagName options:NSCaseInsensitiveSearch] == NSOrderedSame) {
             return tag;
+        }
     }
     
     return nil;
 }
 
-
--(void)editTag:(Tag *)tag title:(NSString *)newTitle
+- (void)editTag:(Tag *)tag title:(NSString *)newTitle
 {
     [self createTagFromString:newTitle atIndex:[self indexOfTag:tag]];
     
@@ -91,12 +86,12 @@
     [self save];
 }
 
-- (BOOL)removeTagName:(NSString *)tagName {
-    
+- (BOOL)removeTagName:(NSString *)tagName
+{
     return [self removeTag:[self tagForName:tagName]];
 }
 
--(BOOL)removeTag:(Tag *)tag
+- (BOOL)removeTag:(Tag *)tag
 {
     NSArray *tagList = [self tags];
     BOOL tagRemoved = NO;
@@ -131,53 +126,51 @@
     return tagRemoved;
 }
 
-- (Tag *)createTagFromString:(NSString *)tagName {
-    
-    if (!tagName)
-        return nil;
-    
-    // add tag at end
-    return [self createTagFromString:tagName atIndex:[self.tags count]];
+- (Tag *)createTagFromString:(NSString *)tagName
+{
+    // Add tag at end
+    return [self createTagFromString:tagName atIndex:self.tags.count];
 }
 
-- (Tag *)createTagFromString:(NSString *)tagName atIndex:(NSInteger)index {
-    
+- (Tag *)createTagFromString:(NSString *)tagName atIndex:(NSInteger)index
+{
     if (tagName == nil || tagName.length == 0 || [tagName isEqualToString:@" "]) {
         NSLog(@"Attempted to create empty tag");
         return nil;
     }
     
     // Make sure email addresses don't get added as proper tags
-    if ([tagName containsEmailAddress])
+    if ([tagName containsEmailAddress]) {
         return nil;
-    
-    // Check for duplicate
-    SPBucket *tagBucket = [[SPAppDelegate sharedDelegate].simperium bucketForName:@"Tag"];
-    if ([tagBucket objectForKey:[tagName lowercaseString]])
-        return nil;
-    
-    // make sure tag has no whitespace
-    tagName = [[tagName componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
-    
-    NSArray *tagList = [self tags];
-    
-    // Update indexes depending on where the tag will be inserted
-    if (index < [tagList count]) {
-        NSInteger i = index;
-        for (;i<[tagList count]; i++) {
-            Tag *updatedTag = [tagList objectAtIndex:i];
-            updatedTag.index = @(i+1);
-            NSLog(@"changed tag index at %ld to %d", (long)i, [updatedTag.index intValue]);
-        }
     }
-    
-	NSManagedObjectContext *context = [SPAppDelegate sharedDelegate].managedObjectContext;
-    Tag *newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag"
-                                                inManagedObjectContext:context];
-    newTag.simperiumKey = [[tagName lowercaseString] urlEncodeString];
+
+    // Ensure the new tag has no spaces
+    NSString *newTagName = [[tagName componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
+
+    // Check for duplicate
+    if ([self tagExists:newTagName] == false) {
+        return nil;
+    }
+
+    // Update indexes depending on where the tag will be inserted
+    NSInteger tagIndex = index;
+    NSArray *tagList = [self tags];
+
+    while (tagIndex < tagList.count) {
+        Tag *updatedTag = [tagList objectAtIndex:tagIndex];
+        updatedTag.index = @(tagIndex+1);
+        NSLog(@"Changed tag index at %ld to %d", (long)tagIndex, [updatedTag.index intValue]);
+        tagIndex++;
+    }
+
+    // Finally Insert the new Tag
+    SPBucket *tagBucket = [[SPAppDelegate sharedDelegate].simperium bucketForName:@"Tag"];
+    NSString *objectKey = [[newTagName lowercaseString] urlEncodeString];
+    Tag *newTag = [tagBucket insertNewObjectForKey:objectKey];
     newTag.index = @(index);
-    newTag.name = tagName;
-    NSLog(@"added new tag with index %d", [newTag.index intValue]);
+    newTag.name = newTagName;
+
+    NSLog(@"Added new tag with index %d", [newTag.index intValue]);
     
     return newTag;
 }
