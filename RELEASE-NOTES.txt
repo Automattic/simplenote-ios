@@ -1,3 +1,6 @@
+4.23
+-----
+ 
 4.22
 -----
 -   Fixed several layout issues that affected the Editor
