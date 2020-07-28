@@ -13,6 +13,7 @@
 #import "Note.h"
 #import "Tag.h"
 #import "NSString+Metadata.h"
+#import "Simplenote-Swift.h"
 
 
 @implementation SPObjectManager
@@ -165,7 +166,7 @@
 
     // Finally Insert the new Tag
     SPBucket *tagBucket = [[SPAppDelegate sharedDelegate].simperium bucketForName:@"Tag"];
-    NSString *objectKey = [[newTagName lowercaseString] urlEncodeString];
+    NSString *objectKey = newTagName.lowercaseString.byEncodingNonAlphanumerics;
     Tag *newTag = [tagBucket insertNewObjectForKey:objectKey];
     newTag.index = @(index);
     newTag.name = newTagName;

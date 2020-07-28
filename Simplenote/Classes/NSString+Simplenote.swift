@@ -18,4 +18,11 @@ extension NSString {
     var substringUpToFirstSpace: String {
         components(separatedBy: .space).first ?? String(self)
     }
+
+    /// Percent Encodes all of the non alphanumeric characters in the receiver
+    ///
+    @objc
+    var byEncodingNonAlphanumerics: String? {
+        addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+    }
 }

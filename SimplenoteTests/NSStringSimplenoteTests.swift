@@ -20,4 +20,15 @@ class NSStringSimplenoteTests: XCTestCase {
         let sample = textBeforeSpace + .space + "1234" + .space + "67890"
         XCTAssertEqual(sample.substringUpToFirstSpace, textBeforeSpace)
     }
+
+    /// Verifies that `byEncodingNonAlphanumerics` effectively escapes all of the non alphanumeric characters
+    ///
+    func testByEncodingNonAlphanumericsPercentEncodesAllOfTheNonAlphanumericCharactersInTheReceiver() {
+        let sample = "1234567890!@#$%^&*()-_+[]';./,qwertyuiopasdfghjkl;'zxcvbnm,./🔥😂😃🤪👍🦆🏴‍☠️☝️😯"
+        let escaped = sample.byEncodingNonAlphanumerics ?? ""
+        let escapedSet = CharacterSet(charactersIn: escaped)
+        let expectedSet = CharacterSet(charactersIn: "%").union(.alphanumerics)
+
+        XCTAssertTrue(expectedSet.isSuperset(of: escapedSet))
+    }
 }
