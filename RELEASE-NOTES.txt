@@ -2,6 +2,7 @@
 -----
 -   Fixed several layout issues that affected the Editor
 -   Now it's possible to interactively drag the Scroll Bar within the Editor
+-   Updated Tags limit to up to 256 characters
  
 4.21
 -----
