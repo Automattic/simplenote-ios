@@ -30,7 +30,6 @@ Simplenote 讓你輕鬆做筆記、建立待辦事項清單、記下想法等等
 
 隱私權政策：https://automattic.com/privacy/
 服務條款：https://simplenote.com/terms/
-California users privacy notice: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
 
 --
 

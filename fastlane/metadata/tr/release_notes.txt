@@ -1,3 +1,0 @@
-Paylaşım Uzantısının Görünümünü etkileyen bir hata düzeltildi.
-Kimlik Doğrulama Ekranlarındaki RTL desteği düzeltildi.
-Etiket Düzenleyicisi'ndeki RTL desteği düzeltildi.
