@@ -166,7 +166,7 @@
 
     // Finally Insert the new Tag
     SPBucket *tagBucket = [[SPAppDelegate sharedDelegate].simperium bucketForName:@"Tag"];
-    NSString *objectKey = newTagName.lowercaseString.byEncodingNonAlphanumerics;
+    NSString *objectKey = newTagName.precomposedStringWithCanonicalMapping.lowercaseString.byEncodingNonAlphanumerics;
     Tag *newTag = [tagBucket insertNewObjectForKey:objectKey];
     newTag.index = @(index);
     newTag.name = newTagName;
