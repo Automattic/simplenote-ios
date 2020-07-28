@@ -1,3 +1,0 @@
-Åtgärdade en bugg som påverkade resurstilläggets utseende.
-Åtgärdade RTL-stöd på autentiseringsskärmarna.
-Åtgärdade RTL-stöd i taggredigeraren.

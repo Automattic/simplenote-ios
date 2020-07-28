@@ -20,6 +20,19 @@
 }
 
 
+#pragma mark - Application State
+
++ (void)trackApplicationOpened
+{
+    [self trackAutomatticEventWithName:@"application_opened" properties:nil];
+}
+
++ (void)trackApplicationClosed
+{
+    [self trackAutomatticEventWithName:@"application_closed" properties:nil];
+}
+
+
 #pragma mark - Note Editor
 
 + (void)trackEditorNoteCreated

@@ -159,8 +159,8 @@ extension SPNoteListViewController {
     func startDisplayingEntities() {
         tableView.dataSource = self
 
-        notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
-            self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
+        notesListController.onBatchChanges = { [weak self] (sectionsChangeset, objectsChangeset) in
+            self?.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
                 self?.displayPlaceholdersIfNeeded()
             }
         }

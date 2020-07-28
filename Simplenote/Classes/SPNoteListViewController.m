@@ -356,9 +356,19 @@
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
 {
     [self invalidateSearchTimer];
+
+    /// Note:
+    ///  - `endSearch` switches the List Controller to `.results`, and drops immediately the Tags section (if any)
+    ///  - `dismissSortBar` may (under unknown scenarios) trigger a UITableView refresh sequence
+    ///
+    /// Because of the reasons above, we must always ensure `endSearch` is followed by `update` (which reloads the table!)
+    ///
+    /// Ref. https://github.com/Automattic/simplenote-ios/issues/777
+    ///
     [self.notesListController endSearch];
-    [self dismissSortBar];
     [self update];
+
+    [self dismissSortBar];
 }
 
 

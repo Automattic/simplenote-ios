@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-06-15 15:27:25+0000 */
+/* Translation-Revision-Date: 2020-06-26 08:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -115,6 +115,9 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Dengan membuat akun, Anda menyetujui";
 
+/* Simplenote terms of service */
+"California Users Privacy Notice" = "California Users Privacy Notice";
+
 /* Cancel Action
    Dismissing an interface
    Verb, cancel an alert dialog */
@@ -213,7 +216,7 @@
 "Enqueued" = "Dalam antrean";
 
 /* Message shown on passcode lock screen */
-"Enter a passcode" = "Enter a passcode";
+"Enter a passcode" = "Masukkan kode sandi";
 
 /* Touch ID fallback title */
 "Enter passcode" = "Masukkan kode sandi";
@@ -225,7 +228,7 @@
 "Face ID" = "Face ID";
 
 /* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
+"FailedAttempts" = "PercobaanGagal";
 
 /* Password Reset Action */
 "Forgotten password?" = "Lupa kata sandi?";
@@ -534,7 +537,7 @@
 "Themes" = "Tema";
 
 /* Touch ID reason/explanation */
-"To unlock the application" = "To unlock the application";
+"To unlock the application" = "Untuk membuka aplikasi";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Hari ini";

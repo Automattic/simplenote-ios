@@ -51,7 +51,7 @@
 
 - (NSArray *)gradientColors
 {
-    UIColor *actionSheetBackgroundColor = [UIColor simplenoteBackgroundColor];
+    UIColor *actionSheetBackgroundColor = [UIColor simplenoteTableViewBackgroundColor];
     NSArray *gradientColors = @[
         (id)[actionSheetBackgroundColor colorWithAlphaComponent:0.0].CGColor,
         (id)actionSheetBackgroundColor.CGColor

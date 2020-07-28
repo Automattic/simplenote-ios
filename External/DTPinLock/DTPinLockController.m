@@ -109,7 +109,7 @@
         numberOfDigits = 4;
 
         // NOTE: This entire ViewController will be rebuilt soon. Please forgive the untidy-mess!
-        UIColor *barBackgroundColor = [UIColor simplenoteNavigationBarBackgroundColor];
+        UIColor *barBackgroundColor = [UIColor simplenoteNavigationBarModalBackgroundColor];
         self.navigationBar.backgroundColor = barBackgroundColor;
         self.navigationBar.barTintColor = barBackgroundColor;
 

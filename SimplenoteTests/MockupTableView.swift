@@ -6,14 +6,6 @@ import UIKit
 //
 class MockupTableView: UITableView {
 
-    /// Closure to be executed whenever `beginUpdates` is called.
-    ///
-    var onBeginUpdates: (() -> Void)?
-
-    /// Closure to be executed whenever `endUpdates` is called.
-    ///
-    var onEndUpdates: (() -> Void)?
-
     /// Closure to be executed whenever `insertRows` is called.
     ///
     var onInsertedRows: (([IndexPath]) -> Void)?
@@ -37,13 +29,6 @@ class MockupTableView: UITableView {
 
 
     // MARK: - Overridden Methods
-    override func beginUpdates() {
-        onBeginUpdates?()
-    }
-
-    override func endUpdates() {
-        onEndUpdates?()
-    }
 
     override func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         onInsertedRows?(indexPaths)

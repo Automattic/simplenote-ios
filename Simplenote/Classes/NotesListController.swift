@@ -22,16 +22,6 @@ class NotesListController: NSObject {
                                                              sortedBy: state.descriptorsForTags(),
                                                              limit: limitForTagResults)
 
-    /// Notes Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
-    ///
-    private var noteObjectChanges = [ResultsObjectChange]()
-    private var noteSectionChanges = [ResultsSectionChange]()
-
-    /// Tags Changes: We group all of the Sections + Object changes, and notify our listeners in batch.
-    ///
-    private var tagObjectChanges = [ResultsObjectChange]()
-    private var tagSectionChanges = [ResultsSectionChange]()
-
     /// Indicates the maximum number of Tag results we'll yield
     ///
     ///     -  Known Issues: If new Tags are added in a second device, and sync'ed while we're in Search Mode,
@@ -94,7 +84,7 @@ class NotesListController: NSObject {
     /// Callback to be executed whenever the NotesController or TagsController were updated
     /// - NOTE: This only happens as long as the current state must render such entities!
     ///
-    var onBatchChanges: ((_ rowChanges: [ResultsObjectChange], _ sectionChanges: [ResultsSectionChange]) -> Void)?
+    var onBatchChanges: ((_ sectionsChangeset: ResultsSectionsChangeset, _ rowsChangeset: ResultsObjectsChangeset) -> Void)?
 
 
     /// Designated Initializer
@@ -182,9 +172,6 @@ extension NotesListController {
     ///
     @objc
     func performFetch() {
-        removePendingTagChanges()
-        removePendingNoteChanges()
-
         if state.displaysNotes {
             try? notesController.performFetch()
         }
@@ -272,72 +259,42 @@ private extension NotesListController {
 private extension NotesListController {
 
     func startListeningToNoteEvents() {
-        notesController.onDidChangeObject = { [weak self] change in
-            self?.noteObjectChanges.append( change )
-        }
-
-        notesController.onDidChangeSection = { [weak self] change in
-            self?.noteSectionChanges.append( change )
-        }
-
-        notesController.onDidChangeContent = { [weak self] in
-            self?.notesControllerDidChange()
+        notesController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+            self?.notifyNotesDidChange(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
     }
 
     func startListeningToTagEvents() {
-        tagsController.onDidChangeObject = { [weak self] change in
-            self?.tagObjectChanges.append( change )
+        tagsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+            self?.notifyTagsDidChange(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
-
-        tagsController.onDidChangeSection = { [weak self] change in
-            self?.tagSectionChanges.append( change )
-        }
-
-        tagsController.onDidChangeContent = { [weak self] in
-            self?.tagsControllerDidChange()
-        }
-    }
-
-    func notesControllerDidChange() {
-        if state.displaysNotes {
-            let (objectChanges, sectionChanges) = adjustedNoteChanges(forState: state)
-            onBatchChanges?(objectChanges, sectionChanges)
-        }
-
-        removePendingNoteChanges()
-    }
-
-    func tagsControllerDidChange() {
-        if state.displaysTags {
-            onBatchChanges?(tagObjectChanges, tagSectionChanges)
-        }
-
-        removePendingTagChanges()
-    }
-
-    func removePendingTagChanges() {
-        tagObjectChanges = []
-        tagSectionChanges = []
-    }
-
-    func removePendingNoteChanges() {
-        noteObjectChanges = []
-        noteSectionChanges = []
     }
 
     /// When in Search Mode, we'll need to mix Tags + Notes. There's one slight problem: NSFetchedResultsController Is completely unaware that the
     /// actual SectionIndex for Notes is (1) rather than (0). In that case we'll need to re-map Object and Section changes.
     ///
-    func adjustedNoteChanges(forState state: NotesListState) -> ([ResultsObjectChange], [ResultsSectionChange]) {
-        guard state.requiresNoteSectionIndexAdjustments else {
-            return (noteObjectChanges, noteSectionChanges)
+    func notifyNotesDidChange(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
+        guard state.displaysNotes else {
+            return
         }
 
-        let transposedObjectChanges = noteObjectChanges.map { $0.transpose(toSection: state.sectionIndexForNotes) }
-        let transposedSectionChanges = noteSectionChanges.map { $0.transpose(toSection: state.sectionIndexForNotes) }
+        guard state.requiresNoteSectionIndexAdjustments else {
+            onBatchChanges?(sectionsChangeset, objectsChangeset)
+            return
+        }
 
-        return (transposedObjectChanges, transposedSectionChanges)
+        let transposedSectionsChangeset = sectionsChangeset.transposed(toSection: state.sectionIndexForNotes)
+        let transposedObjectsChangeset = objectsChangeset.transposed(toSection: state.sectionIndexForNotes)
+
+        onBatchChanges?(transposedSectionsChangeset, transposedObjectsChangeset)
+    }
+
+    func notifyTagsDidChange(sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
+        guard state.displaysTags else {
+            return
+        }
+
+        onBatchChanges?(sectionsChangeset, objectsChangeset)
     }
 
     /// Sort Mode might differ in Results / Search!
