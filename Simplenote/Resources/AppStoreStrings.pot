@@ -68,6 +68,7 @@ msgstr ""
 
 msgctxt "v4.22.0-whats-new"
 msgid ""
-"New darker dark mode\n"
+"- Fixed several layout issues that affected the Editor\n"
+"- Now it's possible to interactively drag the Scroll Bar within the Editor\n"
 msgstr ""
 
