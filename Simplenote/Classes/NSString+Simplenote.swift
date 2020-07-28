@@ -9,7 +9,7 @@ extension NSString {
     ///
     @objc
     var fullRange: NSRange {
-        NSRange(location: 0, length: length)
+        NSRange(location: .zero, length: length)
     }
 
     /// Returns the receiver's substring "up to the first space"
