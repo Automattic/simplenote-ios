@@ -27,4 +27,12 @@ extension NSString {
             .lowercased()
             .addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? self as String
     }
+
+    /// Indicates if the receiver is a valid Tag Name
+    /// - Important: `Tag.name` is used as the entity's `simperiumKey`, and the backend imposes a length.
+    ///              For that reason we must check on the `encoded` lenght (and not the actual raw string length)
+    @objc
+    var isValidTagName: Bool {
+        byEncodingAsTagHash.count < SimplenoteConstants.maximumTagLength
+    }
 }
