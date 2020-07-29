@@ -1,3 +1,0 @@
-Correção do bug que afetava a aparência da extensão de compartilhamento.
-Correção do suporte a idiomas com leitura da direita para a esquerda nas telas de autenticação.
-Correção do suporte a idiomas com leitura da direita para a esquerda, no editor de tags.

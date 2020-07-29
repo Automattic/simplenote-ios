@@ -1,3 +1,0 @@
-Corretto un bug che interessava l'aspetto delle estensioni per la condivisione.
-Risolto il problema con il supporto RTL nelle schermate di autenticazione.
-Risolto il problema con il supporto RTL nell'editor dei tag.
