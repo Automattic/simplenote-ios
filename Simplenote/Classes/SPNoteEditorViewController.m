@@ -200,13 +200,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
 
-    if (!_currentNote) {
-        [self newButtonAction:nil];
-    } else {
-        [_noteEditorTextView processChecklists];
-        self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
-    }
-
     [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
@@ -217,7 +210,40 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    if (!_currentNote) {
+        [self newButtonAction:nil];
+    } else {
+        [_noteEditorTextView processChecklists];
+        self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
+    }
+
+
     [self ensureEditorIsFirstResponder];
+}
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+    [coder encodeObject:self.currentNote.localID forKey:@"currentNoteKey"];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    NSString *key = [coder decodeObjectForKey:@"currentNoteKey"];
+
+    NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
+
+    NSURL *url = [NSURL URLWithString:key];
+    NSManagedObjectID *objectID = [context.persistentStoreCoordinator managedObjectIDForURIRepresentation:url];
+
+    Note *note = [context existingObjectWithID:objectID error:nil];
+
+    if (note) {
+        [self updateNote:note];
+    } else {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 - (void)configureNavigationBarBackground

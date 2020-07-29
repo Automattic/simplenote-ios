@@ -44,7 +44,6 @@
 
 @interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
 
-@property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
@@ -194,8 +193,7 @@
 #pragma mark ================================================================================
 #pragma mark AppDelegate Methods
 #pragma mark ================================================================================
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     // Migrate keychain items
     KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
@@ -203,13 +201,19 @@
 //    [keychainMigrator testMigration];
     [keychainMigrator migrateIfNecessary];
 
-	// Setup Frameworks
+    // Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
-	[self setupAppCenter];
+    [self setupAppCenter];
     [self setupCrashLogging];
     [self setupDefaultWindow];
+    [self configureStateRestoration];
 
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 	// Once the UI is wired, Auth Simperium
 	[self authenticateSimperium];
 
@@ -306,6 +310,15 @@
     [self.noteEditorViewController save];
 }
 
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
 
 #pragma mark Background Fetch
 

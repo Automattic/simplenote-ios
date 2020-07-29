@@ -6,6 +6,7 @@
 @class SPTagsListViewController;
 @class SPNoteListViewController;
 @class SPNoteEditorViewController;
+@class SPNavigationController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SPTagsListViewController                  *tagListViewController;
 @property (strong, nonatomic) SPNoteListViewController                  *noteListViewController;
 @property (strong, nonatomic) SPNoteEditorViewController                *noteEditorViewController;
+@property (strong, nonatomic) SPNavigationController                    *navigationController;
 
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
