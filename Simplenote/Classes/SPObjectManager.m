@@ -57,12 +57,13 @@
 
 - (Tag *)tagForName:(NSString *)tagName
 {
+    NSString *targetTagHash = tagName.byEncodingAsTagHash;
     for (Tag *tag in self.tags) {
-        if ([tag.name compare:tagName options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        if ([tag.name.byEncodingAsTagHash isEqualToString:targetTagHash]) {
             return tag;
         }
     }
-    
+
     return nil;
 }
 
