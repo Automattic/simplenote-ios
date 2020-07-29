@@ -18,6 +18,8 @@
 #import "SPTagCompletionPill.h"
 #import "Simplenote-Swift.h"
 
+
+
 @interface SPTagView ()
 
 @property (nonatomic, strong) SPTagPill *activeDeletionPill;
@@ -311,21 +313,23 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // Scenario #A: Space was pressed
     if ([string hasPrefix:@" "]) {
-        string = nil;
         [self processTextInFieldToTag];
         return NO;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
-        textField.text = [textField.text stringByReplacingCharactersInRange:range
-                                                                 withString:string];
-        return NO;
     }
-    
-    return YES;
+
+    // Scenario #B: New String was either typed or pasted
+    NSString *filteredString = [string substringUpToFirstSpace];
+    NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
+
+    if (updatedString.length <= SimplenoteConstants.maximumTagLength) {
+        textField.text = updatedString;
+    }
+
+    return NO;
 }
 
 - (void)tagEntryFieldDidChange:(SPTagEntryField *)tagTextField {
@@ -336,9 +340,9 @@
         [self scrollEntryFieldToVisible:YES];
     });
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)])
+    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)]) {
         [tagDelegate tagViewDidChange:self];
-    
+    }
     
     [self updateAutoCompletionsForString:tagTextField.text];
 

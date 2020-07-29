@@ -24,9 +24,4 @@
     return [predicate evaluateWithObject:self];
 }
 
-- (NSString *)urlEncodeString
-{
-    return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-}
-
 @end

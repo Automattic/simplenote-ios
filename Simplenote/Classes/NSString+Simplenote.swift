@@ -9,6 +9,20 @@ extension NSString {
     ///
     @objc
     var fullRange: NSRange {
-        NSRange(location: 0, length: length)
+        NSRange(location: .zero, length: length)
+    }
+
+    /// Returns the receiver's substring "up to the first space"
+    ///
+    @objc
+    var substringUpToFirstSpace: String {
+        components(separatedBy: .space).first ?? String(self)
+    }
+
+    /// Percent Encodes all of the non alphanumeric characters in the receiver
+    ///
+    @objc
+    var byEncodingNonAlphanumerics: String? {
+        addingPercentEncoding(withAllowedCharacters: .alphanumerics)
     }
 }
