@@ -19,10 +19,12 @@ extension NSString {
         components(separatedBy: .space).first ?? String(self)
     }
 
-    /// Percent Encodes all of the non alphanumeric characters in the receiver
+    /// Encodes the receiver as a `Tag Hash`
     ///
     @objc
-    var byEncodingNonAlphanumerics: String? {
-        addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+    var byEncodingAsTagHash: String {
+        precomposedStringWithCanonicalMapping
+            .lowercased()
+            .addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? self as String
     }
 }
