@@ -187,6 +187,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     NSParameterAssert(self.mainView);
 
     [self.view addSubview:self.mainView];
+    [self.mainViewController didMoveToParentViewController:self];
 }
 
 - (void)attachSidebarView
@@ -202,6 +203,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     sidebarView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 
     [self.view insertSubview:sidebarView atIndex:0];
+    [self.sidebarViewController didMoveToParentViewController:self];
 }
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
