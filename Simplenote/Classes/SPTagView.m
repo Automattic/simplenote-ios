@@ -325,7 +325,10 @@
     NSString *filteredString = [string substringUpToFirstSpace];
     NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
 
-    if (updatedString.length <= SimplenoteConstants.maximumTagLength) {
+    // Important:
+    // `Tag.name` is used as the entity's `simperiumKey`, and the backend imposes a length.
+    // For that reason we must check on the `encoded` lenght (and not the actual raw string length)
+    if (updatedString.byEncodingAsTagHash.length <= SimplenoteConstants.maximumTagLength) {
         textField.text = updatedString;
     }
 
