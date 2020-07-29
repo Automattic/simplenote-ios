@@ -55,6 +55,11 @@
     return [self tagForName:tagName] != nil;
 }
 
+// This API performs `Tag` comparison by checking the `encoded tag hash`, in order to
+// normalize / isolate ourselves from potential Unicode-Y issues.
+//
+// Ref. https://github.com/Automattic/simplenote-macos/pull/617
+//
 - (Tag *)tagForName:(NSString *)tagName
 {
     NSString *targetTagHash = tagName.byEncodingAsTagHash;
