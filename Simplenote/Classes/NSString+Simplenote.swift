@@ -33,6 +33,6 @@ extension NSString {
     ///              For that reason we must check on the `encoded` lenght (and not the actual raw string length)
     @objc
     var isValidTagName: Bool {
-        byEncodingAsTagHash.count < SimplenoteConstants.maximumTagLength
+        byEncodingAsTagHash.count <= SimplenoteConstants.maximumTagLength
     }
 }
