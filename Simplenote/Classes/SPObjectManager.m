@@ -55,14 +55,20 @@
     return [self tagForName:tagName] != nil;
 }
 
+// This API performs `Tag` comparison by checking the `encoded tag hash`, in order to
+// normalize / isolate ourselves from potential Unicode-Y issues.
+//
+// Ref. https://github.com/Automattic/simplenote-macos/pull/617
+//
 - (Tag *)tagForName:(NSString *)tagName
 {
+    NSString *targetTagHash = tagName.byEncodingAsTagHash;
     for (Tag *tag in self.tags) {
-        if ([tag.name compare:tagName options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        if ([tag.name.byEncodingAsTagHash isEqualToString:targetTagHash]) {
             return tag;
         }
     }
-    
+
     return nil;
 }
 
@@ -166,8 +172,7 @@
 
     // Finally Insert the new Tag
     SPBucket *tagBucket = [[SPAppDelegate sharedDelegate].simperium bucketForName:@"Tag"];
-    NSString *objectKey = newTagName.precomposedStringWithCanonicalMapping.lowercaseString.byEncodingNonAlphanumerics;
-    Tag *newTag = [tagBucket insertNewObjectForKey:objectKey];
+    Tag *newTag = [tagBucket insertNewObjectForKey:newTagName.byEncodingAsTagHash];
     newTag.index = @(index);
     newTag.name = newTagName;
 

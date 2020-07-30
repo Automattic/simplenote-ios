@@ -325,7 +325,7 @@
     NSString *filteredString = [string substringUpToFirstSpace];
     NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
 
-    if (updatedString.length <= SimplenoteConstants.maximumTagLength) {
+    if (updatedString.isValidTagName) {
         textField.text = updatedString;
     }
 

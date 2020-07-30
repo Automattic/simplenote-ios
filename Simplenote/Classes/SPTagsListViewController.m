@@ -601,7 +601,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
     BOOL editContainsSpaces = filteredString.length < string.length;
 
-    if (updatedString.length <= SimplenoteConstants.maximumTagLength) {
+    if (updatedString.isValidTagName) {
         textField.text = updatedString;
     }
 
