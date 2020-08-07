@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-06-25 13:54:03+0000 */
+/* Translation-Revision-Date: 2020-07-24 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -116,7 +116,7 @@
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
 
 /* Simplenote terms of service */
-"California Users Privacy Notice" = "California Users Privacy Notice";
+"California Users Privacy Notice" = "カリフォルニア州ユーザー向けプライバシー通知";
 
 /* Cancel Action
    Dismissing an interface
