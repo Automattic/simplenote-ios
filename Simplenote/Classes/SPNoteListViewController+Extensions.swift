@@ -160,8 +160,24 @@ extension SPNoteListViewController {
         tableView.dataSource = self
 
         notesListController.onBatchChanges = { [weak self] (sectionsChangeset, objectsChangeset) in
-            self?.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
-                self?.displayPlaceholdersIfNeeded()
+            guard let `self` = self else {
+                return
+            }
+
+            /// Note:
+            ///  1. State Restoration might cause this ViewController not to be onScreen
+            ///  2. When that happens, any remote change might cause a Batch Update
+            ///  3. And the above yields a crash
+            ///
+            /// In this snipept we're preventing a beautiful `_Bug_Detected_In_Client_Of_UITableView_Invalid_Number_Of_Rows_In_Section` exception
+            ///
+            guard let _ = self.view.window else {
+                self.tableView.reloadData()
+                return
+            }
+
+            self.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
+                self.displayPlaceholdersIfNeeded()
             }
         }
     }

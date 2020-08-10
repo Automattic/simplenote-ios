@@ -208,6 +208,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [super viewDidAppear:animated];
 
+    /// Note:
+    /// This must happen in viewDidAppear (and not before) because of State Restoration.
+    /// Decode happens right after `viewWillAppear`, and this way we get to avoid spurious empty notes.
+    ///
     if (!_currentNote) {
         [self newButtonAction:nil];
     } else {
