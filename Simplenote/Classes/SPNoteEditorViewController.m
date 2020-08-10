@@ -192,14 +192,26 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
+    [self highlightSearchResultsIfNeeded];
+    [self startListeningToKeyboardNotifications];
 
+    [self refreshNavigationBarButtons];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    /// Note:
+    /// This must happen in viewDidAppear (and not before) because of State Restoration.
+    /// Decode happens right after `viewWillAppear`, and this way we get to avoid spurious empty notes.
+    ///
     if (!_currentNote) {
         [self newButtonAction:nil];
     } else {
@@ -207,16 +219,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureTagViewIsVisible];
-    [self highlightSearchResultsIfNeeded];
-    [self startListeningToKeyboardNotifications];
-    
-    [self refreshNavigationBarButtons];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     [self ensureEditorIsFirstResponder];
 }
 
@@ -237,17 +239,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if ((_currentNote.content.length == 0) && !bActionSheetVisible && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
-}
-
-- (void)ensureTagViewIsVisible
-{
-    if (_tagView.alpha >= UIKitConstants.alpha1_0) {
-        return;
-    }
-
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        self.tagView.alpha = UIKitConstants.alpha1_0;
-     }];
 }
 
 - (void)startListeningToThemeNotifications {
@@ -632,11 +623,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     bBlankNote = NO;
     bModified = NO;
     self.previewing = NO;
-    
-    // hide the tags field
-    if (!self.voiceoverEnabled) {
-        self.tagView.alpha = UIKitConstants.alpha0_0;
-    }
 }
 
 - (void)clearNote {
@@ -1357,7 +1343,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                              newFrame.origin.y += newFrame.size.height;
                              
                              snapshot.frame = newFrame;
-                             self.tagView.alpha = 1.0;
 
                          } completion:^(BOOL finished) {
                              

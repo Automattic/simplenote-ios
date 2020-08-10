@@ -72,6 +72,7 @@
         [self registerForPeekAndPop];
         [self refreshStyle];
         [self update];
+        self.mustScrollToFirstRow = YES;
     }
     
     return self;
@@ -87,8 +88,8 @@
     [self ensureFirstRowIsVisibleIfNeeded];
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent {
-    [super didMoveToParentViewController:parent];
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
     [self ensureFirstRowIsVisible];
     [self ensureTransitionControllerIsInitialized];
 }

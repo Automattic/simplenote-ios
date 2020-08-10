@@ -144,3 +144,46 @@ extension SPNoteEditorViewController {
         noteEditorTextView.lockTagEditorPosition = locked
     }
 }
+
+
+// MARK: - State Restoration
+//
+extension SPNoteEditorViewController {
+
+    var simperium: Simperium {
+        SPAppDelegate.shared().simperium
+    }
+
+    open override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+
+        guard let note = currentNote else {
+            return
+        }
+
+        // Always make sure the object is persisted before proceeding
+        if note.objectID.isTemporaryID {
+            simperium.save()
+        }
+
+        coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
+    }
+
+    open override func decodeRestorableState(with coder: NSCoder) {
+        guard let simperiumKey = coder.decodeObject(forKey: CodingKeys.currentNoteKey.rawValue) as? String,
+            let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
+            else {
+                navigationController?.popViewController(animated: false)
+                return
+        }
+
+        update(note)
+    }
+}
+
+
+// MARK: - NSCoder Keys
+//
+private enum CodingKeys: String {
+    case currentNoteKey
+}
