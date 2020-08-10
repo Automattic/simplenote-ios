@@ -1,0 +1,2 @@
+- Correção de diversos problemas de layout que afetaram o editor
+- Agora é possível arrastar a barra de rolagem de maneira interativa no editor

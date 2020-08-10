@@ -1,0 +1,2 @@
+- Löste flera layoutproblem som har påverkat redigeraren
+- Nu går det att dra bläddringslisten interaktivt i redigeraren
