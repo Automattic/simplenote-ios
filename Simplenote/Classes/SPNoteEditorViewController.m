@@ -192,18 +192,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
-
-    [self ensureTagViewIsVisible];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
-    
+
     [self refreshNavigationBarButtons];
 }
 
@@ -218,7 +215,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-
+    [self ensureTagViewIsVisible];
     [self ensureEditorIsFirstResponder];
 }
 
@@ -658,7 +655,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     bBlankNote = NO;
     bModified = NO;
     self.previewing = NO;
-    
+
     // hide the tags field
     if (!self.voiceoverEnabled) {
         self.tagView.alpha = UIKitConstants.alpha0_0;
