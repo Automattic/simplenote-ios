@@ -262,17 +262,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)ensureTagViewIsVisible
-{
-    if (_tagView.alpha >= UIKitConstants.alpha1_0) {
-        return;
-    }
-
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        self.tagView.alpha = UIKitConstants.alpha1_0;
-     }];
-}
-
 - (void)startListeningToThemeNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
@@ -1375,7 +1364,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                              newFrame.origin.y += newFrame.size.height;
                              
                              snapshot.frame = newFrame;
-                             self.tagView.alpha = 1.0;
 
                          } completion:^(BOOL finished) {
                              
