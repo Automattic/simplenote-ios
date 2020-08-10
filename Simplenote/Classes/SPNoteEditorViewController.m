@@ -215,7 +215,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureTagViewIsVisible];
     [self ensureEditorIsFirstResponder];
 }
 
