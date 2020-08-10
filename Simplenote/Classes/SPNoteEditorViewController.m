@@ -655,11 +655,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     bBlankNote = NO;
     bModified = NO;
     self.previewing = NO;
-
-    // hide the tags field
-    if (!self.voiceoverEnabled) {
-        self.tagView.alpha = UIKitConstants.alpha0_0;
-    }
 }
 
 - (void)clearNote {
