@@ -218,30 +218,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self ensureEditorIsFirstResponder];
 }
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-    [coder encodeObject:self.currentNote.localID forKey:@"currentNoteKey"];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    NSString *key = [coder decodeObjectForKey:@"currentNoteKey"];
-
-    NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
-
-    NSURL *url = [NSURL URLWithString:key];
-    NSManagedObjectID *objectID = [context.persistentStoreCoordinator managedObjectIDForURIRepresentation:url];
-
-    Note *note = [context existingObjectWithID:objectID error:nil];
-
-    if (note) {
-        [self updateNote:note];
-    } else {
-        [self.navigationController popViewControllerAnimated:NO];
-    }
-}
-
 - (void)configureNavigationBarBackground
 {
     NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
