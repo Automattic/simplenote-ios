@@ -1,0 +1,2 @@
+- Mehrere Layout-Probleme beim Editor behoben
+- Die Scroll-Leiste im Editor kann jetzt interaktiv gezogen werden

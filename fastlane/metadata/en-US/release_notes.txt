@@ -1,0 +1,2 @@
+- Fixed several layout issues that affected the Editor
+- Now it's possible to interactively drag the Scroll Bar within the Editor
