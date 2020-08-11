@@ -18,14 +18,10 @@
 @end
 
 
-@interface SPTagEntryField : SPTextField {
-    id<SPTagEntryFieldDelegate> tagDelegate;
-}
+@interface SPTagEntryField : SPTextField
 
-+ (SPTagEntryField *)tagEntryFieldWithdelegate:(id<SPTagEntryFieldDelegate>)tagDelegate;
+@property (nonatomic, weak) id<SPTagEntryFieldDelegate> tagDelegate;
 
-
-@property (nonatomic, assign) id<SPTagEntryFieldDelegate> tagDelegate;
-
++ (SPTagEntryField *)tagEntryField;
 
 @end

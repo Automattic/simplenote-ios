@@ -5,7 +5,10 @@
 #import "SPAddCollaboratorsViewController.h"
 #import "SPHorizontalPickerView.h"
 #import <Simperium/Simperium.h>
+
+
 @class Note;
+@class SPBlurEffectView;
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
@@ -24,7 +27,6 @@
     BOOL bViewingVersions;
     BOOL beditingTags;
     BOOL bActionSheetVisible;
-    BOOL bVoiceoverEnabled;
     
     CGAffineTransform navigationBarTransform;
     CGFloat scrollPosition;
@@ -52,6 +54,9 @@
     
 }
 
+// Navigation Bar
+@property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
+
 // Navigation Back Button
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -66,9 +71,15 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
+// Voiceover
+@property (nonatomic, strong) UIView *bottomView;
+
+// Keyboard!
+@property (nonatomic, strong) NSArray *keyboardNotificationTokens;
+@property (nonatomic) BOOL isKeyboardVisible;
+
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
-@property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
@@ -79,6 +90,8 @@
 - (void)didReceiveNewContent;
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
+
+- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
 - (void)save;
 

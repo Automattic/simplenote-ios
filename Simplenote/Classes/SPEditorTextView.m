@@ -58,19 +58,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
         [self addSubview:_tagView];
         
         UIEdgeInsets contentInset = self.contentInset;
-        contentInset.bottom += 2 * tagViewHeight;
         contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
         self.contentInset = contentInset;
-        
-        [self addObserver:self
-               forKeyPath:@"contentSize"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-        [self addObserver:self
-               forKeyPath:@"contentOffset"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-        
+
+        [self startObservingProperties];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didEndEditing:)
                                                      name:UITextViewTextDidEndEditingNotification
@@ -92,6 +84,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return self;
 }
 
+- (void)startObservingProperties
+{
+    for (NSString *keyPath in self.observedKeyPaths) {
+        [self addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (NSArray<NSString *> *)observedKeyPaths
+{
+    return @[
+        NSStringFromSelector(@selector(contentSize)),
+        NSStringFromSelector(@selector(contentOffset)),
+        NSStringFromSelector(@selector(contentInset))
+    ];
+}
+
 - (VSTheme *)theme
 {
     return [[VSThemeManager sharedManager] theme];
@@ -104,8 +112,15 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == self && ([keyPath isEqualToString:@"contentOffset"] || [keyPath isEqualToString:@"contentSize"]))
-        [self positionTagView];
+    if (object != self) {
+        return;
+    }
+
+    if (![self.observedKeyPaths containsObject:keyPath]) {
+        return;
+    }
+
+    [self positionTagView];
 }
 
 
@@ -132,16 +147,34 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)positionTagView
 {
-    CGFloat height = _tagView.frame.size.height;
-    CGFloat yOrigin = self.contentSize.height - height + self.contentInset.top;
-    yOrigin = MAX(yOrigin, self.contentOffset.y + self.bounds.size.height - height);
-    
-    CGFloat tagPadding = self.safeAreaInsets.left;    
-    CGRect footerViewFrame = CGRectMake(tagPadding,
-                                        yOrigin,
-                                        self.bounds.size.width - 2 * tagPadding,
-                                        height);
-    _tagView.frame = footerViewFrame;
+    CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
+    CGFloat height      = CGRectGetHeight(self.tagView.frame);
+
+    CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
+    CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
+    CGFloat contentMinY = self.contentSize.height - height + self.contentInset.top;
+    CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
+    CGFloat xOrigin     = self.safeAreaInsets.left;
+
+    self.tagView.frame  = CGRectMake(xOrigin, yOrigin, width, height);
+}
+
+- (void)setLockTagEditorPosition:(BOOL)lockTagEditorPosition
+{
+    _lockTagEditorPosition = lockTagEditorPosition;
+    [self positionTagView];
+}
+
+- (CGFloat)tagsViewPadding
+{
+    return 2 * CGRectGetHeight(self.tagView.bounds);
+}
+
+- (UIEdgeInsets)adjustedContentInset
+{
+    UIEdgeInsets contentInsets = super.adjustedContentInset;
+    contentInsets.bottom += self.tagsViewPadding;
+    return contentInsets;
 }
 
 - (void)setTagView:(SPTagView *)tagView
@@ -158,7 +191,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
-    return [touch.view isKindOfClass:[SPTextView class]];
+    return ![touch.view isDescendantOfView:self.tagView];
 }
 
 - (BOOL)becomeFirstResponder
@@ -180,14 +213,23 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return response;
 }
 
-- (void)scrollToBottom
+- (void)scrollToBottomWithAnimation:(BOOL)animated
 {
-    if (self.contentSize.height > self.bounds.size.height - self.contentInset.top - self.contentInset.bottom) {
-        
-        CGPoint scrollOffset = CGPointMake(0,
-                                           self.contentSize.height + self.contentInset.bottom - self.bounds.size.height);
-        [self setContentOffset:scrollOffset animated:NO];
+    /// Notes:
+    /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
+    /// -   And we don't consider `adjusted top insets` since that deals with navbar overlaps, and doesn't affect our calculations.
+    if (self.contentSize.height <= self.bounds.size.height - self.contentInset.top - self.adjustedContentInset.bottom) {
+        return;
     }
+
+    CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
+
+    if (self.contentOffset.y == scrollOffset.y) {
+        return;
+    }
+
+    [self setContentOffset:scrollOffset animated:animated];
 }
 
 - (void)scrollToTop

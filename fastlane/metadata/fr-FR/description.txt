@@ -1,36 +1,37 @@
-Simplenote est une façon simple de prendre des notes, de créer des listes de choses à faire, de saisir ses idées, et plus encore. Ouvrez l'application, écrivez ce qui vous passe par la tête, et le tour est joué. À mesure que votre collection s'agrandit, organisez-vous grâce aux étiquettes et aux épingles, et trouvez ce dont vous avez besoin grâce à la recherche instantanée. Étant donné que Simplenote se synchronise gratuitement sur tous vos appareils, vos notes vous accompagnent à tout moment.
+Simplenote est un outil facile pour prendre des notes, créer des listes de choses à faire, capturer des idées, etc. Il vous suffit de l’ouvrir, d’entrer vos réflexions, et le tour est joué. Au fur et à mesure que votre ensemble de notes augmente, vous pouvez les organiser à l’aide d’étiquettes et d’épingles, et trouver ce dont vous avez besoin par le biais de recherches instantanées. Simplenote assurant gratuitement la synchronisation sur tous vos appareils, vous disposez de vos notes à tout moment.
 
 - Une expérience de prise de note simple
-- Synchronisez toutes vos notes sur tous vos appareils
-- Collaborez et partagez
-- Organisez vos notes grâce aux étiquettes
-- Connectez-vous avec votre adresse e-mail ou votre compte WordPress.com
+- Une synchronisation complète sur tous vos appareils
+- Collaboration et partage
+- Organisation à l’aide d’étiquettes
+- Connexion par adresse e-mail ou compte WordPress.com
 
-SYNCHRONISEZ EN TOUTE CONFIANCE
-- Synchronisation automatique et transparente sur n'importe quel ordinateur, téléphone ou tablette.
-- Sauvegardez et synchronisez votre contenu à mesure que vous prenez des notes, afin de ne jamais le perdre.
+SYNCHRONISATION EN TOUTE CONFIANCE
+- Synchronisation automatique transparente sur n’importe quel ordinateur, téléphone ou tablette.
+- Sauvegardez et synchronisez tout lors de votre prise de notes, afin de ne perdre aucun contenu.
 
-COLLABOREZ ET PARTAGEZ
-- Collaborez et travaillez avec d'autres personnes : partagez des idées avec un collègue ou rédigez une liste de courses avec votre colocataire.
-- Choisissez de publier ou non votre contenu sur le Web, et partagez un lien avec qui vous voulez.
-- Publiez directement sur un site WordPress en vous connectant à votre compte WordPress.com.
-- Partage rapide et facile avec des applications tierces.
+COLLABORATION ET PARTAGE
+- Collaborez, que ce soit pour partager vos idées avec un collègue ou rédiger la liste des courses avec votre colocataire.
+- Décidez si vous souhaitez publier votre contenu sur le Web et partagez un lien avec les personnes de votre choix.
+- Publiez votre contenu directement sur un site WordPress en vous connectant à votre compte WordPress.com.
+- Partagez facilement et rapidement avec des applications tierces.
 
-ORGANISEZ-VOUS ET EFFECTUEZ DES RECHERCHES
-- Organisez-vous grâce aux étiquettes et utilisez-les pour effectuer une recherche ou un tri rapides.
-- Trouvez instantanément ce que vous cherchez grâce à la mise en évidence des mots-clés.
-- Activez le formatage Markdown.
+ORGANISATION ET RECHERCHE
+- Organisez-vous à l’aide d’étiquettes et utilisez-les pour trier et rechercher rapidement ce dont vous avez besoin.
+- Trouvez instantanément ce que vous recherchez grâce à la mise en surbrillance de mots clés.
+- Utilisez Markdown pour ajouter une mise en forme.
 - Créez des listes de choses à faire.
-- Choisissez l'ordre de tri de vos notes et étiquettes.
-- Épinglez les notes dont vous vous servez le plus.
-- Modifiez les étiquettes directement en les renommant et en les réorganisant.
-- Protégez votre contenu à l'aide d'un verrouillage par mot de passe.
+- Choisissez l’ordre de tri de vos notes et étiquettes.
+- Épinglez les notes que vous utilisez le plus.
+- Modifiez directement les étiquettes en les renommant et les réorganisant.
+- Protégez votre contenu à l’aide d’un verrou avec code d’authentification.
 
 --
 
 Politique de confidentialité : https://automattic.com/privacy/
-Conditions d'utilisation : https://simplenote.com/terms/
+Conditions d’utilisation : https://simplenote.com/terms/
+Avis de confidentialité pour les utilisateurs californiens : https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
 
 --
 
-Visitez simplenote.com afin de télécharger Simplenote sur vos autres appareils.
+Visitez simplenote.com afin de télécharger Simplenote pour vos autres appareils.

@@ -1,0 +1,2 @@
+- Correction de plusieurs problèmes de mise en page affectant l’éditeur
+- Il est désormais possible de faire glisser de façon interactive la barre de défilement dans l’éditeur

@@ -16,6 +16,7 @@ final class ExtensionPresentationController: UIPresentationController {
     private var presentDirection: Direction
     private var dismissDirection: Direction
 
+    private var keyboardNotificationTokens: [Any]?
     private let dimmingView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,12 +35,17 @@ final class ExtensionPresentationController: UIPresentationController {
         self.presentDirection = presentDirection
         self.dismissDirection = dismissDirection
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        self.addKeyboardObservers()
+        self.keyboardNotificationTokens = self.addKeyboardObservers()
     }
 
     deinit {
-        removeKeyboardObservers()
+        guard let tokens = keyboardNotificationTokens else {
+            return
+        }
+
+        removeKeyboardObservers(with: tokens)
     }
+
 
     // MARK: Presentation Controller Overrides
 
@@ -102,16 +108,15 @@ final class ExtensionPresentationController: UIPresentationController {
 //
 extension ExtensionPresentationController: KeyboardObservable {
 
-    func keyboardWillShow(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         let keyboardFrame = endFrame ?? .zero
         let duration = animationDuration ?? Constants.defaultAnimationDuration
         animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
     }
 
-    func keyboardWillHide(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        let keyboardFrame = endFrame ?? .zero
-        let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        // TODO:
+        // We should really animate (again) here, but not doing so. The layout mechanism is broken when called twice.
     }
 
     private func animate(with keyboardFrame: CGRect, duration: TimeInterval, animationCurve: UInt?) {

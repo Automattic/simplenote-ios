@@ -399,7 +399,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     cell.textField.text = tagName;
     cell.textField.delegate = self;
     cell.iconImage = nil;
-    cell.accessibilityLabel = tagName;
     cell.delegate = self;
 }
 

@@ -43,6 +43,7 @@
 
 @property (nonatomic, weak) id<SPTagViewDelegate> tagDelegate;
 
+- (void)scrollEntryFieldToVisible:(BOOL)animated;
 - (void)clearAllTags;
 - (BOOL)setupWithTagNames:(NSArray *)tagNames;
 - (void)applyStyle;

@@ -9,7 +9,6 @@
 
 #import "SPTextView.h"
 #import <CoreFoundation/CFStringTokenizer.h>
-#import <CoreFoundation/CFLocale.h>
 #import "VSThemeManager.h"
 #import "NSString+Search.h"
 #import "SPInteractiveTextStorage.h"
@@ -197,6 +196,24 @@
         return;
     }
     [super scrollRectToVisible:rect animated:animated];
+}
+
+- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
+{
+    if (!animated) {
+        [self setContentOffset:contentOffset];
+        return;
+    }
+
+    /// Secret Technique™
+    /// In order to _extremely_ match "Scroll to Selected Range" with any Keyboard animation, we'll introduce a custom animation.
+    /// This yields a smooth experience, whenever the keyboard is revealed (and the TextView decides to scroll along)
+    const UIViewAnimationOptions options = UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionLayoutSubviews;
+    const NSTimeInterval duration = 0.25;
+
+    [UIViewPropertyAnimator runningPropertyAnimatorWithDuration:duration delay:UIKitConstants.animationDelayZero options:options animations:^{
+        [self setContentOffset:contentOffset];
+    } completion:nil];
 }
 
 @end

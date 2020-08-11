@@ -1,0 +1,2 @@
+- Düzenleyiciyi etkileyen birkaç düzen sorunu düzeltildi
+- Artık Kaydırma Çubuğu Düzenleyici içinde etkileşimli olarak sürüklenebilir

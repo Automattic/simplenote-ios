@@ -1,0 +1,2 @@
+- Beberapa masalah tata letak yang memengaruhi Editor telah diperbaiki
+- Kini Anda dapat menyeret Bilah Gulir dalam Editor secara interaktif
