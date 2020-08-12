@@ -1,17 +1,20 @@
+4.24
+-----
+
 4.23
 -----
- 
+-   Updated Tags limit to up to 256 characters
+
 4.22
 -----
 -   Fixed several layout issues that affected the Editor
 -   Now it's possible to interactively drag the Scroll Bar within the Editor
--   Updated Tags limit to up to 256 characters
- 
+
 4.21
 -----
 -   New darker dark mode.
 -   Updated editor typography.
- 
+
 4.20.1
 ------
 -   New Privacy Notice for California Users
@@ -32,7 +35,7 @@
 4.18
 -----
 -   Fixed a bug that prevented the Tag Search Operator not to properly filter in non english languages.
- 
+
 4.17
 -----
 -   Fixed an issue that caused the Notes List to show up incorrectly, in Right to Left languages.
