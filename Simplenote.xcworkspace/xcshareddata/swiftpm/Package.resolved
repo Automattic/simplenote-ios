@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SimplenoteFoundation",
+        "repositoryURL": "git@github.com:Automattic/SimplenoteFoundation-Swift.git",
+        "state": {
+          "branch": "issue/visibility-modifiers",
+          "revision": "1813a163ea43e06c866080765634e3e5f1fe887c",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
