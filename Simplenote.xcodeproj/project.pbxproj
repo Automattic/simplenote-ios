@@ -269,7 +269,7 @@
 		B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
-		B5BAF9ED24E4D0D2000917C0 /* SimplenoteFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = B5BAF9EC24E4D0D2000917C0 /* SimplenoteFoundation */; };
+		B5BAF9ED24E4D0D2000917C0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = B5BAF9EC24E4D0D2000917C0 /* SwiftPackageProductDependency */; };
 		B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */; };
 		B5BDD8771BEA6C19006EB940 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B566A1DD189AA74600DC3F2D /* AdSupport.framework */; };
 		B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */; };
@@ -828,7 +828,7 @@
 				B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */,
 				46A3C9B317DFA81A002865AE /* libz.dylib in Frameworks */,
 				46A3C9B417DFA81A002865AE /* libicucore.dylib in Frameworks */,
-				B5BAF9ED24E4D0D2000917C0 /* SimplenoteFoundation in Frameworks */,
+				B5BAF9ED24E4D0D2000917C0 /* BuildFile in Frameworks */,
 				46A3C9B517DFA81A002865AE /* CoreFoundation.framework in Frameworks */,
 				46A3C9B617DFA81A002865AE /* SystemConfiguration.framework in Frameworks */,
 				46A3C9B717DFA81A002865AE /* CoreData.framework in Frameworks */,
@@ -1739,7 +1739,7 @@
 			);
 			name = Simplenote;
 			packageProductDependencies = (
-				B5BAF9EC24E4D0D2000917C0 /* SimplenoteFoundation */,
+				B5BAF9EC24E4D0D2000917C0 /* SwiftPackageProductDependency */,
 			);
 			productName = Simplenote;
 			productReference = 46A3C9D717DFA81A002865AE /* Simplenote.app */;
@@ -1875,7 +1875,7 @@
 			);
 			mainGroup = E29ADD2F17848E8500E55842;
 			packageReferences = (
-				B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */,
+				B5BAF9EB24E4D0D2000917C0 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = E29ADD3917848E8500E55842 /* Products */;
 			projectDirPath = "";
@@ -1953,13 +1953,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/AppCenter/AppCenterDistributeResources.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AppCenterDistributeResources.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1988,35 +1987,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS/AutomatticTracks.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Gridicons/Gridicons.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
-				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
-				"${BUILT_PRODUCTS_DIR}/Simperium/Simperium.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
-				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
-				"${BUILT_PRODUCTS_DIR}/WordPress-Ratings-iOS/WordPress_Ratings_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutomatticTracks.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gridicons.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Simperium.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WordPress_Ratings_iOS.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZIPFoundation.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3950,7 +3926,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */ = {
+		B5BAF9EB24E4D0D2000917C0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Automattic/SimplenoteFoundation-Swift.git";
 			requirement = {
@@ -3961,9 +3937,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B5BAF9EC24E4D0D2000917C0 /* SimplenoteFoundation */ = {
+		B5BAF9EC24E4D0D2000917C0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */;
+			package = B5BAF9EB24E4D0D2000917C0 /* RemoteSwiftPackageReference */;
 			productName = SimplenoteFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
