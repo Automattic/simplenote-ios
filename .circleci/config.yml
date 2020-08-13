@@ -34,6 +34,11 @@ jobs:
       - run:
           name: Copy demo SPCredentials
           command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
+      # Start: Swift Package Manager Workaround
+      # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+      - run: rm ~/.ssh/id_rsa
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+      # END: Swift Package Manager Workaround
       - ios/test:
           xcode-version: "11.6.0"
           workspace: Simplenote.xcworkspace
@@ -52,6 +57,11 @@ jobs:
       - run:
           name: Copy Secrets
           command: bundle exec fastlane run configure_apply
+      # Start: Swift Package Manager Workaround
+      # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+      - run: rm ~/.ssh/id_rsa
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+      # END: Swift Package Manager Workaround
       - run:
           name: Build
           command: "bundle exec fastlane build_and_upload_installable_build build_number:$CIRCLE_BUILD_NUM"
@@ -77,6 +87,11 @@ jobs:
       - run: 
           name: Copy Secrets
           command: bundle exec fastlane run configure_apply
+      # Start: Swift Package Manager Workaround
+      # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+      - run: rm ~/.ssh/id_rsa
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+      # END: Swift Package Manager Workaround
       - run: 
           name: Install other tools
           command: |
