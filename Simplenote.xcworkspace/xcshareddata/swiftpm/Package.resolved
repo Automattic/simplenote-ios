@@ -5,9 +5,9 @@
         "package": "SimplenoteFoundation",
         "repositoryURL": "git@github.com:Automattic/SimplenoteFoundation-Swift.git",
         "state": {
-          "branch": "issue/visibility-modifiers",
-          "revision": "98cbadd3455d8ab1460c9d4b600eb95aa2f7048b",
-          "version": null
+          "branch": null,
+          "revision": "c5938f97ba6c041ae4c0f4030493f628f2263a41",
+          "version": "1.0.0"
         }
       }
     ]
