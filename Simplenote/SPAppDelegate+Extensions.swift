@@ -78,5 +78,4 @@ extension SPAppDelegate: UIViewControllerRestoration {
 
         return nil
     }
-
 }
