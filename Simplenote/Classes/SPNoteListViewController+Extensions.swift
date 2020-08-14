@@ -1,6 +1,7 @@
 import Foundation
 import CoreSpotlight
 import UIKit
+import SimplenoteSearch
 
 
 // MARK: - View Lifecycle
