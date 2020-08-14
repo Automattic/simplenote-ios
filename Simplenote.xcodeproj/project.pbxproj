@@ -3922,8 +3922,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Automattic/SimplenoteSearch-Swift.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */ = {
