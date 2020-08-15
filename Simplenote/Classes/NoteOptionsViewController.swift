@@ -52,6 +52,11 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     // MARK: - Table view delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        row.handler?()
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     // MARK: - Table Sections
     /// Configures a section to display our main options in
@@ -92,15 +97,17 @@ class NoteOptionsViewController: UITableViewController {
     fileprivate struct Row {
         /// Determines what cell is used to render this row
         let style: Style
-        /// Called when this row is tapped. Optional.
-        let handler: (() -> Void)?
+
         /// Called to set up this cell. You should do any view configuration here and assign tagets to elements such as switches.
         let configuration: ((UITableViewCell, Row) -> Void)?
 
-        internal init(style: Style = .Value1, handler: (() -> Void)? = nil, configuration: ((UITableViewCell, Row) -> Void)? = nil) {
+        /// Called when this row is tapped. Optional.
+        let handler: (() -> Void)?
+
+        internal init(style: Style = .Value1, configuration: ((UITableViewCell, Row) -> Void)? = nil, handler: (() -> Void)? = nil) {
             self.style = style
-            self.handler = handler
             self.configuration = configuration
+            self.handler = handler
         }
 
         /// Defines a cell identifier that will be used to initialise a cell class
