@@ -14,7 +14,7 @@ class NoteOptionsViewController: UITableViewController {
     /// Array of `Section`s to display in the view.
     /// Each `Section` has `Rows` that are used for display
     fileprivate var sections: [Section] {
-        return [optionsSection]
+        return [optionsSection, linkSection, collaborationSection, trashSection]
     }
 
     override func viewDidLoad() {
@@ -72,12 +72,95 @@ class NoteOptionsViewController: UITableViewController {
         let rows = [
             Row(style: .Switch,
                 configuration: { [weak self] (cell: UITableViewCell, row: Row) in
-                    guard let cell = cell as? SwitchTableViewCell else {
-                        return
-                    }
+                    let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Pin to Top", comment: "Note Options: Pin to Top")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePinToTop(sender:)), for: .primaryActionTriggered)
-                })
+                }
+            ),
+            Row(style: .Switch,
+                configuration: { [weak self] (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! SwitchTableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Markdown", comment: "Note Options: Toggle Markdown")
+                    cell.cellSwitch.addTarget(self, action: #selector(self?.handleMarkdown(sender:)), for: .primaryActionTriggered)
+                }
+            ),
+            Row(style: .Value1,
+                configuration: { (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! Value1TableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Share", comment: "Note Options: Show Share Options")
+                },
+                handler: { [weak self] in
+                    self?.handleShare()
+                }
+            ),
+            Row(style: .Value1,
+                configuration: { (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! Value1TableViewCell
+                    cell.textLabel?.text = NSLocalizedString("History", comment: "Note Options: Show History")
+                },
+                handler: { [weak self] in
+                    self?.handleHistory()
+                }
+            )
+        ]
+        return Section(rows: rows)
+    }
+
+    /// Configures a section to display our link options in
+    fileprivate var linkSection: Section {
+        let rows = [
+            Row(style: .Switch,
+                configuration: { [weak self] (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! SwitchTableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Publish", comment: "Note Options: Publish")
+                    cell.cellSwitch.addTarget(self, action: #selector(self?.handlePublish(sender:)), for: .primaryActionTriggered)
+                }
+            ),
+            Row(style: .Value1,
+                configuration: { (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! Value1TableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Copy Link", comment: "Note Options: Copy Link")
+                    cell.textLabel?.textColor = .simplenoteGray20Color
+                },
+                handler: { [weak self] in
+                    self?.handleCopyLink()
+                }
+            )
+        ]
+        return Section(headerText: NSLocalizedString("Public Link", comment: "Note Options Header: Public Link"),
+                       footerText: NSLocalizedString("Publish your note to the web and generate a shareable URL", comment: "Note Options Footer: Publish your note to generate a URL"),
+                       rows: rows)
+    }
+
+    /// Configures a section to display our collaboration details
+    fileprivate var collaborationSection: Section {
+        let rows = [
+            Row(style: .Value1,
+                configuration: { (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! Value1TableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
+                },
+                handler: { [weak self] in
+                    self?.handleCollaborate()
+                }
+            )
+        ]
+        return Section(rows: rows)
+    }
+
+    /// Configures a section to display our trash options
+    fileprivate var trashSection: Section {
+        let rows = [
+            Row(style: .Value1,
+                configuration: { (cell: UITableViewCell, row: Row) in
+                    let cell = cell as! Value1TableViewCell
+                    cell.textLabel?.text = NSLocalizedString("Move to Trash", comment: "Note Options: Move to Trash")
+                    cell.textLabel?.textColor = .simplenoteDestructiveActionColor
+            },
+                handler: { [weak self] in
+                    self?.handleMoveToTrash()
+                }
+            )
         ]
         return Section(rows: rows)
     }
@@ -106,7 +189,7 @@ class NoteOptionsViewController: UITableViewController {
         /// Determines what cell is used to render this row
         let style: Style
 
-        /// Called to set up this cell. You should do any view configuration here and assign tagets to elements such as switches.
+        /// Called to set up this cell. You should do any view configuration here and assign targets to elements such as switches.
         let configuration: ((UITableViewCell, Row) -> Void)?
 
         /// Called when this row is tapped. Optional.
@@ -135,7 +218,38 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     // MARK: - Row Action Handling
-    @objc func handlePinToTop(sender: UISwitch) {
+    @objc
+    func handlePinToTop(sender: UISwitch) {
         ///Handle pinning logic here
+    }
+
+    @objc
+    func handleMarkdown(sender: UISwitch) {
+        ///Handle markdown logic here
+    }
+
+    func handleShare() {
+        ///Handle share logic here
+    }
+
+    func handleHistory() {
+        ///Handle history logic here
+    }
+
+    @objc
+    func handlePublish(sender: UISwitch) {
+        ///Handle publish logic here
+    }
+
+    func handleCopyLink() {
+        ///Handle copy link logic here
+    }
+
+    func handleCollaborate() {
+        ///Handle collaboration logic here
+    }
+
+    func handleMoveToTrash() {
+        ///Handle move to tash logic here
     }
 }
