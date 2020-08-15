@@ -14,10 +14,16 @@ class SwitchTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        accessoryView = cellSwitch
+        setupSwitch()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    func setupSwitch() {
+        accessoryView = cellSwitch
+        cellSwitch.onTintColor = .simplenoteSwitchOnTintColor
+        cellSwitch.tintColor = .simplenoteSwitchTintColor
     }
 }

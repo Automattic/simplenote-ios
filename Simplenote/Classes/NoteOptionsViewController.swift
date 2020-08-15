@@ -19,7 +19,25 @@ class NoteOptionsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = NSLocalizedString("Options", comment: "Note Options: Title")
+        setupDoneButton()
+        setupViewStyles()
         registerTableCells()
+    }
+
+    //MARKL - View Setup
+    /// Configures a dismiss 
+    func setupDoneButton() {
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Note options: Done"),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(handleDone(button:)))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+
+    func setupViewStyles() {
+        tableView.backgroundColor = .simplenoteTableViewBackgroundColor
+        tableView.separatorColor = .simplenoteDividerColor
     }
 
     // MARK: - Table helpers
@@ -251,5 +269,11 @@ class NoteOptionsViewController: UITableViewController {
 
     func handleMoveToTrash() {
         ///Handle move to tash logic here
+    }
+
+    // MARK: - Navigation button handling
+    @objc
+    func handleDone(button: UIBarButtonItem) {
+        dismiss(animated: true)
     }
 }
