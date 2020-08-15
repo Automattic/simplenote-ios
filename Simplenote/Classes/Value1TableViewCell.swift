@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A standard `UITableViewCell` set to `value1` style
 class Value1TableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
