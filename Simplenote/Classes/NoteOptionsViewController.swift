@@ -126,7 +126,7 @@ class NoteOptionsViewController: UITableViewController {
             var cellType: UITableViewCell.Type {
                 switch self {
                 case .Value1:
-                    return UITableViewCell.self
+                    return Value1TableViewCell.self
                 case .Switch:
                     return SwitchTableViewCell.self
                 }
