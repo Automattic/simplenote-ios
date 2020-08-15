@@ -156,6 +156,9 @@ extension SPNoteEditorViewController {
         let noteView = NoteOptionsViewController(style: .grouped)
         let noteNavigation = SPNavigationController(rootViewController: noteView)
         noteNavigation.displaysBlurEffect = true
+        noteNavigation.modalPresentationStyle = .popover
+        noteNavigation.popoverPresentationController?.sourceRect = view.convert(noteOptionsbutton.frame, from: noteOptionsbutton.superview)
+        noteNavigation.popoverPresentationController?.sourceView = view
         present(noteNavigation, animated: true, completion: nil)
     }
 }
