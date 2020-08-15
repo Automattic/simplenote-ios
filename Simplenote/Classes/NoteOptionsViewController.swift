@@ -26,7 +26,7 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     //MARKL - View Setup
-    /// Configures a dismiss 
+    /// Configures a dismiss button for the navigation bar
     func setupDoneButton() {
         let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Note options: Done"),
                                          style: .done,
@@ -35,6 +35,7 @@ class NoteOptionsViewController: UITableViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 
+    /// Applies Simplenote styling to the view controller
     func setupViewStyles() {
         tableView.backgroundColor = .simplenoteTableViewBackgroundColor
         tableView.separatorColor = .simplenoteDividerColor
