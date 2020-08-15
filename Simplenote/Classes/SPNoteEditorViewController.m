@@ -486,6 +486,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.noteOptionsbutton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameEllipsis]
                                                 target:self
                                               selector:@selector(handleNoteOptions:)];
+    self.noteOptionsbutton.accessibilityLabel = NSLocalizedString(@"Options", @"Accessibility label on button that opens note options");
+    self.noteOptionsbutton.accessibilityHint = NSLocalizedString(@"Tap to open note options", @"Accessibility hint on button that opens note options");
     
     self.keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
                                             target:self
