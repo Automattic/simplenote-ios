@@ -25,7 +25,7 @@ class NoteOptionsViewController: UITableViewController {
         registerTableCells()
     }
 
-    //MARKL - View Setup
+    // MARK: - View Setup
     /// Configures a dismiss button for the navigation bar
     func setupDoneButton() {
         let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Note options: Done"),
