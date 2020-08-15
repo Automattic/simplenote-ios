@@ -184,7 +184,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Move to Trash", comment: "Note Options: Move to Trash")
                     cell.textLabel?.textColor = .simplenoteDestructiveActionColor
                     cell.accessibilityHint = NSLocalizedString("Tap to move this note to trash", comment: "Accessibility hint on cell that moves a note to trash")
-            },
+                },
                 handler: { [weak self] in
                     self?.handleMoveToTrash()
                 }
