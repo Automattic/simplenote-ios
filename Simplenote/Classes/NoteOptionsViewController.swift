@@ -51,6 +51,14 @@ class NoteOptionsViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].headerText
+    }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return sections[section].footerText
+    }
+
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = sections[indexPath.section].rows[indexPath.row]
@@ -71,7 +79,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePinToTop(sender:)), for: .primaryActionTriggered)
                 })
         ]
-        return Section(headerText: "hi", footerText: "hi", rows: rows)
+        return Section(rows: rows)
     }
 
     // MARK: - Private Nested Classes
@@ -86,7 +94,7 @@ class NoteOptionsViewController: UITableViewController {
         /// Any rows to be displayed inside this `UITableView` section
         let rows: [Row]
 
-        internal init(headerText: String?, footerText: String?, rows: [Row]) {
+        internal init(headerText: String? = nil, footerText: String? = nil, rows: [Row]) {
             self.headerText = headerText
             self.footerText = footerText
             self.rows = rows
