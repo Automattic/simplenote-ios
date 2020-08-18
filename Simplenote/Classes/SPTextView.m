@@ -200,8 +200,8 @@
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
-    if (!animated) {
-        [self setContentOffset:contentOffset];
+    if (!self.enableScrollSmoothening || !animated) {
+        [super setContentOffset:contentOffset animated:animated];
         return;
     }
 
