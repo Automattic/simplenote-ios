@@ -1,11 +1,3 @@
-//
-//  Value1TableViewCell.swift
-//  Simplenote
-//
-//  Created by Matthew Cheetham on 15/08/2020.
-//  Copyright © 2020 Automattic. All rights reserved.
-//
-
 import UIKit
 
 /// A standard `UITableViewCell` set to `value1` style

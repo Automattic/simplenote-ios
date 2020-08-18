@@ -1,11 +1,3 @@
-//
-//  SwitchTableViewCell.swift
-//  Simplenote
-//
-//  Created by Matthew Cheetham on 13/08/2020.
-//  Copyright © 2020 Automattic. All rights reserved.
-//
-
 import UIKit
 
 /// A UITableViewCell with it's `accessoryView` set to a `UISwitch`

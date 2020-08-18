@@ -1,11 +1,3 @@
-//
-//  NoteOptionsViewController.swift
-//  Simplenote
-//
-//  Created by Matthew Cheetham on 11/08/2020.
-//  Copyright © 2020 Automattic. All rights reserved.
-//
-
 import UIKit
 
 /// A class used to display options for the note that is currently being edited
