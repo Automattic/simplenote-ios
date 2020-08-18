@@ -29,5 +29,6 @@ class SwitchTableViewCell: UITableViewCell {
         backgroundColor = .simplenoteTableViewCellBackgroundColor
         selectedBackgroundView?.backgroundColor = .simplenoteLightBlueColor
         textLabel?.textColor = .simplenoteTextColor
+        selectionStyle = .none
     }
 }

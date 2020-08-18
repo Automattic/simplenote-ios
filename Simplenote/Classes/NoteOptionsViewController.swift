@@ -139,6 +139,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Copy Link", comment: "Note Options: Copy Link")
                     cell.textLabel?.textColor = .simplenoteGray20Color
                     cell.accessibilityHint = NSLocalizedString("Tap to copy link", comment: "Accessibility hint on cell that copies public URL of note")
+                    cell.isUserInteractionEnabled = false
                 },
                 handler: { [weak self] in
                     self?.handleCopyLink()
