@@ -10,6 +10,7 @@ class SwitchTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupSwitch()
+        applyStyles()
     }
 
     required init?(coder: NSCoder) {
@@ -21,5 +22,12 @@ class SwitchTableViewCell: UITableViewCell {
         accessoryView = cellSwitch
         cellSwitch.onTintColor = .simplenoteSwitchOnTintColor
         cellSwitch.tintColor = .simplenoteSwitchTintColor
+    }
+
+    /// Applies custom theming to the cell
+    func applyStyles() {
+        backgroundColor = .simplenoteTableViewCellBackgroundColor
+        selectedBackgroundView?.backgroundColor = .simplenoteLightBlueColor
+        textLabel?.textColor = .simplenoteTextColor
     }
 }
