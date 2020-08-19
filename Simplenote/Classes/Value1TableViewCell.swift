@@ -15,7 +15,9 @@ class Value1TableViewCell: UITableViewCell {
     /// Applies custom theming to the cell
     func applyStyles() {
         backgroundColor = .simplenoteTableViewCellBackgroundColor
-        selectedBackgroundView?.backgroundColor = .simplenoteLightBlueColor
+        let selectedView = UIView(frame: bounds)
+        selectedView.backgroundColor = .simplenoteLightBlueColor
+        selectedBackgroundView = selectedView
         textLabel?.textColor = .simplenoteTextColor
         detailTextLabel?.textColor = UIColor.color(name: .tableViewDetailTextLabelColor)
     }
