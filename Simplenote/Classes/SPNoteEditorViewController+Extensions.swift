@@ -159,6 +159,7 @@ extension SPNoteEditorViewController {
         noteNavigation.modalPresentationStyle = .popover
         noteNavigation.popoverPresentationController?.sourceRect = view.convert(noteOptionsbutton.frame, from: noteOptionsbutton.superview)
         noteNavigation.popoverPresentationController?.sourceView = view
+        noteNavigation.popoverPresentationController?.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
         present(noteNavigation, animated: true, completion: nil)
     }
 }
