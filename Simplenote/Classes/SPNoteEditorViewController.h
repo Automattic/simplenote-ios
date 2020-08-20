@@ -102,5 +102,6 @@
 
 - (void)viewVersionAction:(id)sender;
 - (void)addCollaboratorsAction:(id)sender;
+- (void)trashNoteAction:(id)sender;
 
 @end

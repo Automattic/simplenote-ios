@@ -310,7 +310,7 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     func handleMoveToTrash() {
-        ///Handle move to tash logic here
+        delegate?.didTapMoveToTrash(sender: self)
     }
 
     // MARK: - Navigation button handling
@@ -336,4 +336,5 @@ protocol NoteOptionsViewControllerDelegate: class {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
     func didTapHistory(sender: NoteOptionsViewController)
     func didTapCollaborators(sender: NoteOptionsViewController)
+    func didTapMoveToTrash(sender: NoteOptionsViewController)
 }
