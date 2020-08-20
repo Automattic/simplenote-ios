@@ -101,5 +101,6 @@
 - (void)save;
 
 - (void)viewVersionAction:(id)sender;
+- (void)addCollaboratorsAction:(id)sender;
 
 @end

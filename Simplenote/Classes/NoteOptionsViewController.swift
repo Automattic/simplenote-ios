@@ -17,6 +17,9 @@ class NoteOptionsViewController: UITableViewController {
     /// chaanges made here
     weak var delegate: NoteOptionsViewControllerDelegate?
 
+    /// Formats number of collaborators to respect locales
+    private var collaboratorNumberFormatter = NumberFormatter()
+
     init(with note: Note) {
         self.note = note
         super.init(style: .grouped)
@@ -174,9 +177,10 @@ class NoteOptionsViewController: UITableViewController {
     fileprivate var collaborationSection: Section {
         let rows = [
             Row(style: .Value1,
-                configuration: { (cell: UITableViewCell, row: Row) in
+                configuration: { [note, collaboratorNumberFormatter] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
+                    cell.detailTextLabel?.text = collaboratorNumberFormatter.string(from: NSNumber(value: note.emailTagsArray.count))
                     cell.accessibilityLabel = NSLocalizedString("Tap to open collaboration menu", comment: "Accessibility hint on cell that opens collaboration menu")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
@@ -302,7 +306,7 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     func handleCollaborate() {
-        ///Handle collaboration logic here
+        delegate?.didTapCollaborators(sender: self)
     }
 
     func handleMoveToTrash() {
@@ -331,4 +335,5 @@ class NoteOptionsViewController: UITableViewController {
 protocol NoteOptionsViewControllerDelegate: class {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
     func didTapHistory(sender: NoteOptionsViewController)
+    func didTapCollaborators(sender: NoteOptionsViewController)
 }
