@@ -193,4 +193,9 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController) {
         bounceMarkdownPreviewOnActivityViewDismiss = toggle.isOn
     }
+
+    func didTapHistory(sender: NoteOptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+        viewVersionAction(sender)
+    }
 }

@@ -289,7 +289,7 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     func handleHistory() {
-        ///Handle history logic here
+        delegate?.didTapHistory(sender: self)
     }
 
     @objc
@@ -330,4 +330,5 @@ class NoteOptionsViewController: UITableViewController {
 //
 protocol NoteOptionsViewControllerDelegate: class {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
+    func didTapHistory(sender: NoteOptionsViewController)
 }
