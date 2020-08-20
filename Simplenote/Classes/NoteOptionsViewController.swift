@@ -1,4 +1,5 @@
 import UIKit
+import CoreSpotlight
 
 /// A class used to display options for the note that is currently being edited
 class NoteOptionsViewController: UITableViewController {
@@ -95,19 +96,21 @@ class NoteOptionsViewController: UITableViewController {
     fileprivate var optionsSection: Section {
         let rows = [
             Row(style: .Switch,
-                configuration: { [weak self] (cell: UITableViewCell, row: Row) in
+                configuration: { [weak self, note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Pin to Top", comment: "Note Options: Pin to Top")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePinToTop(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle pin to top", comment: "Accessibility hint for toggling pin to top")
+                    cell.cellSwitch.isOn = note.pinned
                 }
             ),
             Row(style: .Switch,
-                configuration: { [weak self] (cell: UITableViewCell, row: Row) in
+                configuration: { [weak self, note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Markdown", comment: "Note Options: Toggle Markdown")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handleMarkdown(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle markdown mode", comment: "Accessibility hint for toggling markdown mode")
+                    cell.cellSwitch.isOn = note.markdown
                 }
             ),
             Row(style: .Value1,
@@ -253,12 +256,14 @@ class NoteOptionsViewController: UITableViewController {
     // MARK: - Row Action Handling
     @objc
     func handlePinToTop(sender: UISwitch) {
-        ///Handle pinning logic here
+        note.pinned = sender.isOn
+        save()
     }
 
     @objc
     func handleMarkdown(sender: UISwitch) {
-        ///Handle markdown logic here
+        note.markdown = sender.isOn
+        save()
     }
 
     func handleShare(from indexPath: IndexPath) {
@@ -303,5 +308,15 @@ class NoteOptionsViewController: UITableViewController {
     @objc
     func handleDone(button: UIBarButtonItem) {
         dismiss(animated: true)
+    }
+
+    // MARK: - Note saving
+    func save() {
+        note.modificationDate = Date()
+        note.createPreview()
+
+        SPAppDelegate.shared().save()
+        SPTracker.trackEditorNoteEdited()
+        CSSearchableIndex.default().indexSearchableNote(note)
     }
 }
