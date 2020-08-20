@@ -154,12 +154,43 @@ extension SPNoteEditorViewController {
     @objc
     func handleNoteOptions(_ button: UIButton) {
         let noteView = NoteOptionsViewController(with: currentNote)
+        noteView.delegate = self
         let noteNavigation = SPNavigationController(rootViewController: noteView)
         noteNavigation.displaysBlurEffect = true
         noteNavigation.modalPresentationStyle = .popover
         noteNavigation.popoverPresentationController?.sourceRect = button.bounds
         noteNavigation.popoverPresentationController?.sourceView = button
         noteNavigation.popoverPresentationController?.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
+        noteNavigation.popoverPresentationController?.delegate = self
         present(noteNavigation, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Popover presentation delegate
+//
+extension SPNoteEditorViewController: UIPopoverPresentationControllerDelegate {
+
+    public func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        if bounceMarkdownPreviewOnActivityViewDismiss {
+            self.bounceMarkdownPreview()
+        }
+    }
+
+    // The `SPActivityView` and `SPPopoverContainerViewController` breaks when transitioning from a popover to a modal-style
+    // presentation, so we'll tell it not to change its presentation if the
+    // view's size class changes.
+    public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        if controller.presentedViewController is SPPopoverContainerViewController {
+            return .none
+        }
+        return .popover
+    }
+}
+
+// MARK: - Note options delegate
+//
+extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
+    func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController) {
+        bounceMarkdownPreviewOnActivityViewDismiss = toggle.isOn
     }
 }

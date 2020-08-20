@@ -58,7 +58,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     NSUInteger cursorLocationBeforeRemoteUpdate;
     NSString *noteContentBeforeRemoteUpdate;
-    BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
@@ -712,7 +711,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
 
-                    self->bounceMarkdownPreviewOnActivityViewDismiss = NO;
+                    self->_bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -751,24 +750,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _isKeyboardVisible = isKeyboardVisible;
 
     [self refreshNavigationBarButtons];
-}
-
-
-#pragma mark - UIPopoverPresentationControllerDelegate
-
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
-{
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
-        [self bounceMarkdownPreview];
-    }
-}
-
-// The activity sheet breaks when transitioning from a popover to a modal-style
-// presentation, so we'll tell it not to change its presentation if the
-// view's size class changes.
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
-{
-    return UIModalPresentationNone;
 }
 
 #pragma mark - SPInteractivePushViewControllerProvider (Markdown Preview)
@@ -1564,7 +1545,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self save];
 
             // If Markdown is being enabled and it was previously disabled
-            bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
+            _bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
 
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
@@ -1690,7 +1671,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if ([actionSheet isEqual:versionActionSheet])
         versionActionSheet = nil;
 
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
+    if (_bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }

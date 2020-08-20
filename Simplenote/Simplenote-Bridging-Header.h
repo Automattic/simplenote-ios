@@ -40,3 +40,4 @@
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "SPNavigationController.h"
+#import "SPPopoverContainerViewController.h"

@@ -82,6 +82,8 @@
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 
+@property (nonatomic) BOOL bounceMarkdownPreviewOnActivityViewDismiss;
+
 - (void)prepareToPopView;
 - (void)updateNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
@@ -91,6 +93,8 @@
 - (void)didReceiveNewContent;
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
+
+- (void)bounceMarkdownPreview;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 

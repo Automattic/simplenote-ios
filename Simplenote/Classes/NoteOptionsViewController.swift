@@ -13,6 +13,10 @@ class NoteOptionsViewController: UITableViewController {
     /// The note from the editor that we will change settings for
     fileprivate var note: Note
 
+    /// The delegate to notify about
+    /// chaanges made here
+    weak var delegate: NoteOptionsViewControllerDelegate?
+
     init(with note: Note) {
         self.note = note
         super.init(style: .grouped)
@@ -264,6 +268,7 @@ class NoteOptionsViewController: UITableViewController {
     func handleMarkdown(sender: UISwitch) {
         note.markdown = sender.isOn
         save()
+        delegate?.didToggleMarkdown(toggle: sender, sender: self)
     }
 
     func handleShare(from indexPath: IndexPath) {
@@ -319,4 +324,10 @@ class NoteOptionsViewController: UITableViewController {
         SPTracker.trackEditorNoteEdited()
         CSSearchableIndex.default().indexSearchableNote(note)
     }
+}
+
+// MARK: - Action protocol
+//
+protocol NoteOptionsViewControllerDelegate: class {
+    func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
 }
