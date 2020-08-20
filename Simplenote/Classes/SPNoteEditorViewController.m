@@ -392,6 +392,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
+
+    self.noteOptionsbutton.frame = CGRectMake(previousXOrigin - buttonWidth,
+                                              SPBarButtonYOriginAdjustment,
+                                              buttonWidth,
+                                              buttonHeight);
+
+    previousXOrigin = self.noteOptionsbutton.frame.origin.x;
     
     self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                            SPBarButtonYOriginAdjustment,
@@ -405,12 +412,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     previousXOrigin = self.createNoteButton.frame.origin.x;
 
-    self.noteOptionsbutton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                              SPBarButtonYOriginAdjustment,
-                                              buttonWidth,
-                                              buttonHeight);
-
-    previousXOrigin = self.noteOptionsbutton.frame.origin.x;
     
     self.actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                          SPBarButtonYOriginAdjustment,
