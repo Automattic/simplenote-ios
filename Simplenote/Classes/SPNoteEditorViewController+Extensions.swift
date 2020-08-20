@@ -144,3 +144,22 @@ extension SPNoteEditorViewController {
         noteEditorTextView.lockTagEditorPosition = locked
     }
 }
+
+// MARK: - Navigation button handling
+//
+extension SPNoteEditorViewController {
+
+    /// Presents the note options view
+    /// - Parameter button: The button that triggered the action
+    @objc
+    func handleNoteOptions(_ button: UIButton) {
+        let noteView = NoteOptionsViewController(style: .grouped)
+        let noteNavigation = SPNavigationController(rootViewController: noteView)
+        noteNavigation.displaysBlurEffect = true
+        noteNavigation.modalPresentationStyle = .popover
+        noteNavigation.popoverPresentationController?.sourceRect = button.bounds
+        noteNavigation.popoverPresentationController?.sourceView = button
+        noteNavigation.popoverPresentationController?.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
+        present(noteNavigation, animated: true, completion: nil)
+    }
+}

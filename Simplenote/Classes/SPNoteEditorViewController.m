@@ -392,6 +392,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
+
+    self.noteOptionsbutton.frame = CGRectMake(previousXOrigin - buttonWidth,
+                                              SPBarButtonYOriginAdjustment,
+                                              buttonWidth,
+                                              buttonHeight);
+
+    previousXOrigin = self.noteOptionsbutton.frame.origin.x;
     
     self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                            SPBarButtonYOriginAdjustment,
@@ -404,6 +411,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                              buttonHeight);
     
     previousXOrigin = self.createNoteButton.frame.origin.x;
+
     
     self.actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
                                          SPBarButtonYOriginAdjustment,
@@ -475,6 +483,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                              selector:@selector(newButtonAction:)];
     self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
+
+    self.noteOptionsbutton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameEllipsis]
+                                                target:self
+                                              selector:@selector(handleNoteOptions:)];
+    self.noteOptionsbutton.accessibilityLabel = NSLocalizedString(@"Options", @"Accessibility label on button that opens note options");
+    self.noteOptionsbutton.accessibilityHint = NSLocalizedString(@"Tap to open note options", @"Accessibility hint on button that opens note options");
     
     self.keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
                                             target:self
@@ -485,9 +499,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.createNoteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    
+    self.noteOptionsbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+
     [navigationButtonContainer addSubview:self.keyboardButton];
     [navigationButtonContainer addSubview:self.createNoteButton];
+    [navigationButtonContainer addSubview:self.noteOptionsbutton];
     [navigationButtonContainer addSubview:self.actionButton];
     [navigationButtonContainer addSubview:self.checklistButton];
     
@@ -963,6 +979,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.actionButton.alpha = 1.0;
         self.checklistButton.transform = CGAffineTransformIdentity;
         self.checklistButton.alpha = 1.0;
+        self.noteOptionsbutton.transform = CGAffineTransformIdentity;
+        self.noteOptionsbutton.alpha = 1.0;
         self.keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
         self.navigationBarBackground.transform = CGAffineTransformIdentity;
@@ -1062,6 +1080,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.checklistButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
                                                      CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
     self.checklistButton.alpha = alphaAmount;
+
+    self.noteOptionsbutton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
+                                                             CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
+    self.noteOptionsbutton.alpha = alphaAmount;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
