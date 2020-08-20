@@ -86,7 +86,7 @@ class NoteOptionsViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = sections[indexPath.section].rows[indexPath.row]
-        row.handler?()
+        row.handler?(indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -116,8 +116,8 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Share", comment: "Note Options: Show Share Options")
                     cell.accessibilityHint = NSLocalizedString("Tap to open share options", comment: "Accessibility hint on cell that activates share sheet")
                 },
-                handler: { [weak self] in
-                    self?.handleShare()
+                handler: { [weak self] (indexPath: IndexPath) in
+                    self?.handleShare(from: indexPath)
                 }
             ),
             Row(style: .Value1,
@@ -126,7 +126,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("History", comment: "Note Options: Show History")
                     cell.accessibilityHint = NSLocalizedString("Tap to open history", comment: "Accessibility hint on cell that opens note history view")
                 },
-                handler: { [weak self] in
+                handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleHistory()
                 }
             )
@@ -153,7 +153,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.accessibilityHint = NSLocalizedString("Tap to copy link", comment: "Accessibility hint on cell that copies public URL of note")
                     cell.isUserInteractionEnabled = false
                 },
-                handler: { [weak self] in
+                handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleCopyLink()
                 }
             )
@@ -172,7 +172,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
                     cell.accessibilityLabel = NSLocalizedString("Tap to open collaboration menu", comment: "Accessibility hint on cell that opens collaboration menu")
                 },
-                handler: { [weak self] in
+                handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleCollaborate()
                 }
             )
@@ -190,7 +190,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.textColor = .simplenoteDestructiveActionColor
                     cell.accessibilityHint = NSLocalizedString("Tap to move this note to trash", comment: "Accessibility hint on cell that moves a note to trash")
                 },
-                handler: { [weak self] in
+                handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleMoveToTrash()
                 }
             )
@@ -226,9 +226,9 @@ class NoteOptionsViewController: UITableViewController {
         let configuration: ((UITableViewCell, Row) -> Void)?
 
         /// Called when this row is tapped. Optional.
-        let handler: (() -> Void)?
+        let handler: ((IndexPath) -> Void)?
 
-        internal init(style: Style = .Value1, configuration: ((UITableViewCell, Row) -> Void)? = nil, handler: (() -> Void)? = nil) {
+        internal init(style: Style = .Value1, configuration: ((UITableViewCell, Row) -> Void)? = nil, handler: ((IndexPath) -> Void)? = nil) {
             self.style = style
             self.configuration = configuration
             self.handler = handler
@@ -261,8 +261,21 @@ class NoteOptionsViewController: UITableViewController {
         ///Handle markdown logic here
     }
 
-    func handleShare() {
-        ///Handle share logic here
+    func handleShare(from indexPath: IndexPath) {
+        guard let activityVC = UIActivityViewController(note: note) else {
+            return
+        }
+        SPTracker.trackEditorNoteContentShared()
+
+        if UIDevice.sp_isPad() {
+            activityVC.modalPresentationStyle = .popover
+
+            let presentationController = activityVC.popoverPresentationController
+            presentationController?.permittedArrowDirections = .any
+            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            presentationController?.sourceView = tableView
+        }
+        present(activityVC, animated: true, completion: nil)
     }
 
     func handleHistory() {
