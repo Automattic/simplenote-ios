@@ -9,6 +9,18 @@ class NoteOptionsViewController: UITableViewController {
         return [optionsSection, linkSection, collaborationSection, trashSection]
     }
 
+    /// The note from the editor that we will change settings for
+    fileprivate var note: Note
+
+    init(with note: Note) {
+        self.note = note
+        super.init(style: .grouped)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("This view cannot be initialised through Storyboards")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Options", comment: "Note Options: Title")

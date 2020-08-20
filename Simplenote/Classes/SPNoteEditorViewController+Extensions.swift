@@ -153,7 +153,7 @@ extension SPNoteEditorViewController {
     /// - Parameter button: The button that triggered the action
     @objc
     func handleNoteOptions(_ button: UIButton) {
-        let noteView = NoteOptionsViewController(style: .grouped)
+        let noteView = NoteOptionsViewController(with: currentNote)
         let noteNavigation = SPNavigationController(rootViewController: noteView)
         noteNavigation.displaysBlurEffect = true
         noteNavigation.modalPresentationStyle = .popover
