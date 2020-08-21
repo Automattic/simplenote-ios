@@ -1,2 +1,1 @@
-- Löste flera layoutproblem som har påverkat redigeraren
-- Nu går det att dra bläddringslisten interaktivt i redigeraren
+- Teckengränsen för etiketter uppdaterades till 256 tecken

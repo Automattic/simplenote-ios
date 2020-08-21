@@ -1,2 +1,1 @@
-- Verschillende opmaakproblemen met de editor opgelost
-- Het is nu mogelijk om de scrollbalk interactief te verslepen in de editor
+- De tekenlimiet voor tags is verhoogd naar 256 tekens
