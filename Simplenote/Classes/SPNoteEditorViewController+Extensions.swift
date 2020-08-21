@@ -94,12 +94,12 @@ extension SPNoteEditorViewController: KeyboardObservable {
     ///
     /// - Note: Floating Keyboard results in `contentInset.bottom = .zero`
     /// - Note: When the keyboard is visible, we'll substract the `safeAreaInsets.bottom`, since the TextView already considers that gap.
+    /// - Note: We're explicitly turning on / off `enableScrollSmoothening`, since it's proven to be a nightmare when UIAutoscroll is involved.
     ///
     private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval, curve: UInt) {
         let newKeyboardHeight       = keyboardFrame.intersection(noteEditorTextView.frame).height
         let newKeyboardFloats       = keyboardFrame.maxY < view.frame.height
         let newKeyboardIsVisible    = newKeyboardHeight != .zero
-
         let animationOptions        = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
@@ -108,10 +108,14 @@ extension SPNoteEditorViewController: KeyboardObservable {
             isKeyboardVisible = newKeyboardIsVisible
         }
 
+        self.noteEditorTextView.enableScrollSmoothening = true
+
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
             self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
-        }, completion: nil)
+        }, completion: { _ in
+            self.noteEditorTextView.enableScrollSmoothening = false
+        })
     }
 }
 
