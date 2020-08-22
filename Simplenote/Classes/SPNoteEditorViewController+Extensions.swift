@@ -193,7 +193,7 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController) {
 
         // If Markdown is being enabled and it was previously disabled
-        bounceMarkdownPreviewOnActivityViewDismiss = toggle.isOn && UserDefaults.standard.bool(forKey: kSimplenoteMarkdownDefaultKey)
+        bounceMarkdownPreviewOnActivityViewDismiss = toggle.isOn && !UserDefaults.standard.bool(forKey: kSimplenoteMarkdownDefaultKey)
 
         // Update the global preference to use when creating new notes
         UserDefaults.standard.set(toggle.isOn, forKey: kSimplenoteMarkdownDefaultKey)
