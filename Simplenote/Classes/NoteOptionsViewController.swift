@@ -169,7 +169,8 @@ class NoteOptionsViewController: UITableViewController {
                     cell.accessibilityHint = NSLocalizedString("Tap to copy link", comment: "Accessibility hint on cell that copies public URL of note")
                     cell.isUserInteractionEnabled = !note.publishURL.isEmpty
 
-                    if note.published && note.publishURL.isEmpty {
+                    if (note.published && note.publishURL.isEmpty ||
+                        !note.published && !note.publishURL.isEmpty) {
                         let activityIndicator = UIActivityIndicatorView(style: .gray)
                         activityIndicator.startAnimating()
                         cell.accessoryView = activityIndicator
