@@ -21,4 +21,12 @@ class Value1TableViewCell: UITableViewCell {
         textLabel?.textColor = .simplenoteTextColor
         detailTextLabel?.textColor = UIColor.color(name: .tableViewDetailTextLabelColor)
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        applyStyles()
+        textLabel?.text = nil
+        detailTextLabel?.text = nil
+        accessoryView = nil
+    }
 }
