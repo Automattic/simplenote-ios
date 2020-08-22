@@ -112,7 +112,10 @@ class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Pin to Top", comment: "Note Options: Pin to Top")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePinToTop(sender:)), for: .primaryActionTriggered)
-                    cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle pin to top", comment: "Accessibility hint for toggling pin to top")
+                    cell.cellSwitch.accessibilityLabel = NSLocalizedString("Pin toggle", comment: "Switch which marks a note as pinned or unpinned")
+                    cell.cellSwitch.accessibilityHint = note.pinned ?
+                        NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned") :
+                        NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
                     cell.cellSwitch.isOn = note.pinned
                 }
             ),
@@ -121,7 +124,10 @@ class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Markdown", comment: "Note Options: Toggle Markdown")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handleMarkdown(sender:)), for: .primaryActionTriggered)
-                    cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle markdown mode", comment: "Accessibility hint for toggling markdown mode")
+                    cell.cellSwitch.accessibilityLabel = NSLocalizedString("Markdown toggle", comment: "Switch which marks a note as using Markdown formatting or not")
+                    cell.cellSwitch.accessibilityHint = note.markdown ?
+                        NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
+                        NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
                     cell.cellSwitch.isOn = note.markdown
                 }
             ),
@@ -129,7 +135,7 @@ class NoteOptionsViewController: UITableViewController {
                 configuration: { (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Share", comment: "Note Options: Show Share Options")
-                    cell.accessibilityHint = NSLocalizedString("Tap to open share options", comment: "Accessibility hint on cell that activates share sheet")
+                    cell.accessibilityHint = NSLocalizedString("share-accessibility-hint", comment: "Accessibility hint on share button")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleShare(from: indexPath)
@@ -139,7 +145,7 @@ class NoteOptionsViewController: UITableViewController {
                 configuration: { (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("History", comment: "Note Options: Show History")
-                    cell.accessibilityHint = NSLocalizedString("Tap to open history", comment: "Accessibility hint on cell that opens note history view")
+                    cell.accessibilityHint = NSLocalizedString("history-accessibility-hint", comment: "Accessibility hint on button which shows the history of a notew")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleHistory()
@@ -157,7 +163,10 @@ class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Publish", comment: "Note Options: Publish")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePublish(sender:)), for: .primaryActionTriggered)
-                    cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle publish state", comment: "Accessibility hint on switch that toggles publish state")
+                    cell.cellSwitch.accessibilityLabel = NSLocalizedString("Publish toggle", comment: "Switch which marks a note as published or unpublished")
+                    cell.cellSwitch.accessibilityHint = note.published ?
+                        NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note") :
+                        NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
                     cell.cellSwitch.isOn = note.published
                 }
             ),
@@ -194,7 +203,7 @@ class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
                     cell.detailTextLabel?.text = collaboratorNumberFormatter.string(from: NSNumber(value: note.emailTagsArray.count))
-                    cell.accessibilityLabel = NSLocalizedString("Tap to open collaboration menu", comment: "Accessibility hint on cell that opens collaboration menu")
+                    cell.accessibilityHint = NSLocalizedString("collaborate-accessibility-hint", comment: "Accessibility hint on button which shows the current collaborators on a note")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleCollaborate()
@@ -212,7 +221,7 @@ class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Move to Trash", comment: "Note Options: Move to Trash")
                     cell.textLabel?.textColor = .simplenoteDestructiveActionColor
-                    cell.accessibilityHint = NSLocalizedString("Tap to move this note to trash", comment: "Accessibility hint on cell that moves a note to trash")
+                    cell.accessibilityHint = NSLocalizedString("trash-accessibility-hint", comment: "Accessibility hint on button which moves a note to the trash")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleMoveToTrash()
@@ -279,6 +288,10 @@ class NoteOptionsViewController: UITableViewController {
     func handlePinToTop(sender: UISwitch) {
         note.pinned = sender.isOn
         save()
+
+        sender.accessibilityHint = note.pinned ?
+            NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned") :
+            NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
     }
 
     @objc
@@ -286,6 +299,10 @@ class NoteOptionsViewController: UITableViewController {
         note.markdown = sender.isOn
         save()
         delegate?.didToggleMarkdown(toggle: sender, sender: self)
+
+        sender.accessibilityHint = note.markdown ?
+            NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
+            NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
     }
 
     func handleShare(from indexPath: IndexPath) {
@@ -323,6 +340,10 @@ class NoteOptionsViewController: UITableViewController {
         // To prevent the publish switch snapping on/off we manually
         // reload the link row to show the indicator
         tableView.reloadRows(at: [IndexPath(item: 1, section: 1)], with: .automatic)
+
+        sender.accessibilityHint = note.published ?
+            NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note") :
+            NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
     }
 
     func handleCopyLink(from indexPath: IndexPath) {
