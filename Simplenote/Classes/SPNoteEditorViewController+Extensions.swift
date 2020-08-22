@@ -195,8 +195,9 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
     }
 
     func didTapHistory(sender: NoteOptionsViewController) {
-        sender.dismiss(animated: true, completion: nil)
-        viewVersionAction(sender)
+        sender.dismiss(animated: true) { [weak self] in
+            self?.viewVersionAction(sender)
+        }
     }
 
     func didTapCollaborators(sender: NoteOptionsViewController) {
