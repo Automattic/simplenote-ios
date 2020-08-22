@@ -20,6 +20,9 @@ class NoteOptionsViewController: UITableViewController {
     /// Formats number of collaborators to respect locales
     private var collaboratorNumberFormatter = NumberFormatter()
 
+    /// Activity indicator that displays when note is publishing or unpublishing
+    private var publishActivityIndicator = UIActivityIndicatorView(style: SPUserInterface.isDark ? .white : .gray)
+
     init(with note: Note) {
         self.note = note
         super.init(style: .grouped)
@@ -171,18 +174,17 @@ class NoteOptionsViewController: UITableViewController {
                 }
             ),
             Row(style: .Value1,
-                configuration: { [note] (cell: UITableViewCell, row: Row) in
+                configuration: { [publishActivityIndicator, note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Copy Link", comment: "Note Options: Copy Link")
                     cell.textLabel?.textColor = !note.publishURL.isEmpty ? .simplenoteTextColor : .simplenoteGray20Color
                     cell.accessibilityHint = NSLocalizedString("Tap to copy link", comment: "Accessibility hint on cell that copies public URL of note")
                     cell.isUserInteractionEnabled = !note.publishURL.isEmpty
+                    cell.accessoryView = publishActivityIndicator
 
                     if (note.published && note.publishURL.isEmpty ||
                         !note.published && !note.publishURL.isEmpty) {
-                        let activityIndicator = UIActivityIndicatorView(style: .gray)
-                        activityIndicator.startAnimating()
-                        cell.accessoryView = activityIndicator
+                        publishActivityIndicator.startAnimating()
                     }
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
@@ -335,11 +337,15 @@ class NoteOptionsViewController: UITableViewController {
         }
 
         note.published = sender.isOn
-        save()
 
-        // To prevent the publish switch snapping on/off we manually
-        // reload the link row to show the indicator
-        tableView.reloadRows(at: [IndexPath(item: 1, section: 1)], with: .automatic)
+        if (note.published && note.publishURL.isEmpty ||
+            !note.published && !note.publishURL.isEmpty) {
+            publishActivityIndicator.startAnimating()
+        } else {
+            publishActivityIndicator.stopAnimating()
+        }
+        
+        save()
 
         sender.accessibilityHint = note.published ?
             NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note") :
