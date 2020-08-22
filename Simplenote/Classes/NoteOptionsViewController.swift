@@ -62,6 +62,11 @@ class NoteOptionsViewController: UITableViewController {
         }
     }
 
+    @objc
+    public func didReceiveNoteUpdate() {
+        tableView.reloadData()
+    }
+
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -148,20 +153,27 @@ class NoteOptionsViewController: UITableViewController {
     fileprivate var linkSection: Section {
         let rows = [
             Row(style: .Switch,
-                configuration: { [weak self] (cell: UITableViewCell, row: Row) in
+                configuration: { [weak self, note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! SwitchTableViewCell
                     cell.textLabel?.text = NSLocalizedString("Publish", comment: "Note Options: Publish")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePublish(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityHint = NSLocalizedString("Tap to toggle publish state", comment: "Accessibility hint on switch that toggles publish state")
+                    cell.cellSwitch.isOn = note.published
                 }
             ),
             Row(style: .Value1,
-                configuration: { (cell: UITableViewCell, row: Row) in
+                configuration: { [note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Copy Link", comment: "Note Options: Copy Link")
-                    cell.textLabel?.textColor = .simplenoteGray20Color
+                    cell.textLabel?.textColor = !note.publishURL.isEmpty ? .simplenoteTextColor : .simplenoteGray20Color
                     cell.accessibilityHint = NSLocalizedString("Tap to copy link", comment: "Accessibility hint on cell that copies public URL of note")
-                    cell.isUserInteractionEnabled = false
+                    cell.isUserInteractionEnabled = !note.publishURL.isEmpty
+
+                    if note.published && note.publishURL.isEmpty {
+                        let activityIndicator = UIActivityIndicatorView(style: .gray)
+                        activityIndicator.startAnimating()
+                        cell.accessoryView = activityIndicator
+                    }
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleCopyLink()
@@ -298,7 +310,18 @@ class NoteOptionsViewController: UITableViewController {
 
     @objc
     func handlePublish(sender: UISwitch) {
-        ///Handle publish logic here
+        if sender.isOn {
+            SPTracker.trackEditorNotePublished()
+        } else {
+            SPTracker.trackEditorNoteUnpublished()
+        }
+
+        note.published = sender.isOn
+        save()
+
+        // To prevent the publish switch snapping on/off we manually
+        // reload the link row to show the indicator
+        tableView.reloadRows(at: [IndexPath(item: 1, section: 1)], with: .automatic)
     }
 
     func handleCopyLink() {

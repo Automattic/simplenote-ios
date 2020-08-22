@@ -209,3 +209,11 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
         trashNoteAction(self)
     }
 }
+
+// MARK: - Note options state handling
+//
+extension SPNoteEditorViewController {
+    @objc var presentedNoteOptionsViewcontroller: NoteOptionsViewController? {
+        return (presentedViewController as? SPNavigationController)?.topViewController as? NoteOptionsViewController
+    }
+}

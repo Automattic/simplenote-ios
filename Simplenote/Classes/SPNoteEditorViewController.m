@@ -1272,6 +1272,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 		[_tagView setupWithTagNames:tags];
     }
     [self updatePublishUI];
+    [self.presentedNoteOptionsViewcontroller didReceiveNoteUpdate];
 }
 
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
