@@ -6,9 +6,9 @@
 //
 //
 
-#import "SPAcitivitySafari.h"
+#import "SPActivitySafari.h"
 
-@implementation SPAcitivitySafari
+@implementation SPActivitySafari
 
 - (NSString *)activityType
 {

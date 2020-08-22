@@ -176,7 +176,7 @@ class NoteOptionsViewController: UITableViewController {
                     }
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
-                    self?.handleCopyLink()
+                    self?.handleCopyLink(from: indexPath)
                 }
             )
         ]
@@ -324,8 +324,24 @@ class NoteOptionsViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(item: 1, section: 1)], with: .automatic)
     }
 
-    func handleCopyLink() {
-        ///Handle copy link logic here
+    func handleCopyLink(from indexPath: IndexPath) {
+        guard !note.publishURL.isEmpty, let publishURL = URL(string: kSimplenotePublishURL + note.publishURL) else {
+            return
+        }
+
+        SPTracker.trackEditorPublishedUrlPressed()
+
+        let activityViewController = UIActivityViewController(activityItems: [publishURL],
+                                                              applicationActivities: [SPActivitySafari()])
+        if UIDevice.sp_isPad() {
+            activityViewController.modalPresentationStyle = .popover
+
+            let presentationController = activityViewController.popoverPresentationController
+            presentationController?.permittedArrowDirections = .any
+            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            presentationController?.sourceView = tableView
+        }
+        present(activityViewController, animated: true, completion: nil)
     }
 
     func handleCollaborate() {

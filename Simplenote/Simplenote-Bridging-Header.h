@@ -29,7 +29,9 @@
 #import "SPNoteEditorViewController.h"
 #import "SPTracker.h"
 #import "WPAuthHandler.h"
-
+#import "SPNavigationController.h"
+#import "SPPopoverContainerViewController.h"
+#import "SPActivitySafari.h"
 
 #pragma mark - Extensions
 
@@ -39,5 +41,3 @@
 #import "NSString+Condensing.h"
 #import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
-#import "SPNavigationController.h"
-#import "SPPopoverContainerViewController.h"

@@ -25,7 +25,7 @@
 #import "NSString+Search.h"
 #import "SPTextView.h"
 #import "NSString+Attributed.h"
-#import "SPAcitivitySafari.h"
+#import "SPActivitySafari.h"
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
@@ -1746,7 +1746,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     NSURL *publishURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]];
     
-    SPAcitivitySafari *safariActivity = [[SPAcitivitySafari alloc] init];
+    SPActivitySafari *safariActivity = [[SPActivitySafari alloc] init];
     
     UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
                                                                       applicationActivities:@[safariActivity]];

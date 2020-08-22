@@ -62,7 +62,7 @@
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96417DFA81A002865AE /* SPVersionPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ACA88217A7728E00EF801C /* SPVersionPickerViewCell.m */; };
 		46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF61794F53600A17ED2 /* SPActivityView.m */; };
-		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
+		46A3C96617DFA81A002865AE /* SPActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPActivitySafari.m */; };
 		46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */; };
 		46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5FA179F714C0095CD24 /* SPTagStub.m */; };
 		46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */; };
@@ -768,8 +768,8 @@
 		E277B5FF17A063020095CD24 /* SPTagEntryField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagEntryField.h; path = Classes/SPTagEntryField.h; sourceTree = "<group>"; };
 		E277B60017A063020095CD24 /* SPTagEntryField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagEntryField.m; path = Classes/SPTagEntryField.m; sourceTree = "<group>"; };
 		E280453D180DAE0200670073 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E283709817D7B46300AB562D /* SPAcitivitySafari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAcitivitySafari.h; path = Classes/SPAcitivitySafari.h; sourceTree = "<group>"; };
-		E283709917D7B46300AB562D /* SPAcitivitySafari.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAcitivitySafari.m; path = Classes/SPAcitivitySafari.m; sourceTree = "<group>"; };
+		E283709817D7B46300AB562D /* SPActivitySafari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActivitySafari.h; path = Classes/SPActivitySafari.h; sourceTree = "<group>"; };
+		E283709917D7B46300AB562D /* SPActivitySafari.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPActivitySafari.m; path = Classes/SPActivitySafari.m; sourceTree = "<group>"; };
 		E28A760D178CBE6D008659DE /* SPNoteEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPNoteEditorViewController.h; path = Classes/SPNoteEditorViewController.h; sourceTree = "<group>"; };
 		E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPNoteEditorViewController.m; path = Classes/SPNoteEditorViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E2911E7C17B49F4600F13AD9 /* DTPinDigitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTPinDigitView.h; path = DTPinLock/DTPinDigitView.h; sourceTree = "<group>"; };
@@ -954,8 +954,8 @@
 				B5AEC38523FAE70600D24221 /* Note+List.swift */,
 				E25C39D417A42C4900B2591A /* PersonTag.h */,
 				E25C39D517A42C4900B2591A /* PersonTag.m */,
-				E283709817D7B46300AB562D /* SPAcitivitySafari.h */,
-				E283709917D7B46300AB562D /* SPAcitivitySafari.m */,
+				E283709817D7B46300AB562D /* SPActivitySafari.h */,
+				E283709917D7B46300AB562D /* SPActivitySafari.m */,
 				E277B5F9179F714C0095CD24 /* SPTagStub.h */,
 				E277B5FA179F714C0095CD24 /* SPTagStub.m */,
 				467D9C631788A54900785EF3 /* Tag.h */,
@@ -2203,7 +2203,7 @@
 				46A3C96517DFA81A002865AE /* SPActivityView.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
-				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
+				46A3C96617DFA81A002865AE /* SPActivitySafari.m in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B5095DC924632E3300812711 /* SimplenoteConstants.swift in Sources */,
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
