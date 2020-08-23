@@ -178,8 +178,12 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     NSParameterAssert(self.mainViewController);
     NSParameterAssert(self.sidebarViewController);
 
+    [self.mainViewController willMoveToParentViewController:self];
+    [self.sidebarViewController willMoveToParentViewController:self];
     [self addChildViewController:self.mainViewController];
     [self addChildViewController:self.sidebarViewController];
+    [self.mainViewController didMoveToParentViewController:self];
+    [self.sidebarViewController didMoveToParentViewController:self];
 }
 
 - (void)attachMainView
@@ -204,6 +208,12 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [self.view insertSubview:sidebarView atIndex:0];
 }
 
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+    [coder encodeObject:self.mainViewController forKey:@"MainControllerEncodeKey"];
+    [coder encodeObject:self.sidebarViewController forKey:@"SideControllerEncodeKey"];
+}
 
 #pragma mark - Notifications
 

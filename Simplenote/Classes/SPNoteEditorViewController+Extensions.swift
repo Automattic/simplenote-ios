@@ -94,12 +94,12 @@ extension SPNoteEditorViewController: KeyboardObservable {
     ///
     /// - Note: Floating Keyboard results in `contentInset.bottom = .zero`
     /// - Note: When the keyboard is visible, we'll substract the `safeAreaInsets.bottom`, since the TextView already considers that gap.
+    /// - Note: We're explicitly turning on / off `enableScrollSmoothening`, since it's proven to be a nightmare when UIAutoscroll is involved.
     ///
     private func updateBottomInsets(keyboardFrame: CGRect, duration: TimeInterval, curve: UInt) {
         let newKeyboardHeight       = keyboardFrame.intersection(noteEditorTextView.frame).height
         let newKeyboardFloats       = keyboardFrame.maxY < view.frame.height
         let newKeyboardIsVisible    = newKeyboardHeight != .zero
-
         let animationOptions        = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
@@ -108,10 +108,14 @@ extension SPNoteEditorViewController: KeyboardObservable {
             isKeyboardVisible = newKeyboardIsVisible
         }
 
+        self.noteEditorTextView.enableScrollSmoothening = true
+
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
             self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
-        }, completion: nil)
+        }, completion: { _ in
+            self.noteEditorTextView.enableScrollSmoothening = false
+        })
     }
 }
 
@@ -143,4 +147,47 @@ extension SPNoteEditorViewController {
         bottomView.isHidden = !locked
         noteEditorTextView.lockTagEditorPosition = locked
     }
+}
+
+
+// MARK: - State Restoration
+//
+extension SPNoteEditorViewController {
+
+    var simperium: Simperium {
+        SPAppDelegate.shared().simperium
+    }
+
+    open override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+
+        guard let note = currentNote else {
+            return
+        }
+
+        // Always make sure the object is persisted before proceeding
+        if note.objectID.isTemporaryID {
+            simperium.save()
+        }
+
+        coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
+    }
+
+    open override func decodeRestorableState(with coder: NSCoder) {
+        guard let simperiumKey = coder.decodeObject(forKey: CodingKeys.currentNoteKey.rawValue) as? String,
+            let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
+            else {
+                navigationController?.popViewController(animated: false)
+                return
+        }
+
+        update(note)
+    }
+}
+
+
+// MARK: - NSCoder Keys
+//
+private enum CodingKeys: String {
+    case currentNoteKey
 }

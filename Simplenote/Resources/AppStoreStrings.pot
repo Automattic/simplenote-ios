@@ -66,9 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.22.0-whats-new"
+msgctxt "v4.23-whats-new"
 msgid ""
-"- Fixed several layout issues that affected the Editor\n"
-"- Now it's possible to interactively drag the Scroll Bar within the Editor\n"
+"- Updated Tags limit to up to 256 characters\n"
 msgstr ""
 

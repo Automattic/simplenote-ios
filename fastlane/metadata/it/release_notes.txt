@@ -1,2 +1,1 @@
-- Corretti vari errori di layout che interessavano l'editor
-- Ora è possibile trascinare in modo interattivo la barra di scorrimento nell'editor
+- Limite dei tag aggiornato a 256 caratteri
