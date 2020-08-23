@@ -1,2 +1,1 @@
-- Hemos corregido diversos problemas de diseño que afectaban al Editor 
-- Ahora es posible arrastrar la barra de desplazamiento en el Editor 
+- Límite de etiquetas actualizado hasta 256 caracteres

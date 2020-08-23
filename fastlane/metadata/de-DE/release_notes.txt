@@ -1,2 +1,1 @@
-- Mehrere Layout-Probleme beim Editor behoben
-- Die Scroll-Leiste im Editor kann jetzt interaktiv gezogen werden
+- Schlagwort-Limit auf bis zu 256 Zeichen aktualisiert

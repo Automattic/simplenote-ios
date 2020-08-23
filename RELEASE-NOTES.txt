@@ -5,6 +5,10 @@
 -----
 -   Updated Tags limit to up to 256 characters
 
+4.22.1
+------
+-   Fixed a bug that caused text selection to unexpectedly scroll to the top (or bottom) of the document
+
 4.22
 -----
 -   Fixed several layout issues that affected the Editor
