@@ -2,7 +2,7 @@ import UIKit
 import CoreSpotlight
 
 /// A class used to display options for the note that is currently being edited
-class NoteOptionsViewController: UITableViewController {
+final class NoteOptionsViewController: UITableViewController {
 
     /// Array of `Section`s to display in the view.
     /// Each `Section` has `Rows` that are used for display
@@ -11,7 +11,7 @@ class NoteOptionsViewController: UITableViewController {
     }
 
     /// The note from the editor that we will change settings for
-    fileprivate var note: Note
+    private var note: Note
 
     /// The delegate to notify about
     /// chaanges made here
