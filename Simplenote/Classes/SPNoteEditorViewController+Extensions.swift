@@ -153,6 +153,13 @@ extension SPNoteEditorViewController {
     /// - Parameter button: The button that triggered the action
     @objc
     func handleNoteOptions(_ button: UIButton) {
+
+        save()
+        endEditing(button)
+        tagView.endEditing(true)
+
+        SPTracker.trackEditorActivitiesAccessed()
+
         let noteView = NoteOptionsViewController(with: currentNote)
         noteView.delegate = self
         let noteNavigation = SPNavigationController(rootViewController: noteView)

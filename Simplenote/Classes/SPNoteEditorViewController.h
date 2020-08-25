@@ -99,6 +99,7 @@
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
 - (void)save;
+- (void)endEditing:(id)sender;
 
 - (void)viewVersionAction:(id)sender;
 - (void)addCollaboratorsAction:(id)sender;
