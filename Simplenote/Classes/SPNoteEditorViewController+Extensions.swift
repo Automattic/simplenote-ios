@@ -169,7 +169,6 @@ extension SPNoteEditorViewController {
 // MARK: - Popover presentation delegate
 //
 extension SPNoteEditorViewController: UIPopoverPresentationControllerDelegate {
-
     public func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         if bounceMarkdownPreviewOnActivityViewDismiss {
             self.bounceMarkdownPreview()
@@ -214,6 +213,8 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
 // MARK: - Note options state handling
 //
 extension SPNoteEditorViewController {
+    /// A convenience variable for accessing the currently presented note options view
+    /// This is used to pass on note updates from Simperium
     @objc var presentedNoteOptionsViewcontroller: NoteOptionsViewController? {
         return (presentedViewController as? SPNavigationController)?.topViewController as? NoteOptionsViewController
     }
