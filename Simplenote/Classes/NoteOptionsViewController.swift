@@ -23,6 +23,8 @@ class NoteOptionsViewController: UITableViewController {
     /// Activity indicator that displays when note is publishing or unpublishing
     private var publishActivityIndicator = UIActivityIndicatorView(style: SPUserInterface.isDark ? .white : .gray)
 
+    /// Initialises the options view for a specific note
+    /// - Parameter note: The note to configure options for
     init(with note: Note) {
         self.note = note
         super.init(style: .grouped)
@@ -65,6 +67,8 @@ class NoteOptionsViewController: UITableViewController {
         }
     }
 
+    /// Called by the presenting view when Simperium
+    /// has delivered updates for the `note`
     @objc
     public func didReceiveNoteUpdate() {
         tableView.reloadData()
@@ -344,7 +348,7 @@ class NoteOptionsViewController: UITableViewController {
         } else {
             publishActivityIndicator.stopAnimating()
         }
-        
+
         save()
 
         sender.accessibilityHint = note.published ?
@@ -399,6 +403,7 @@ class NoteOptionsViewController: UITableViewController {
 
 // MARK: - Action protocol
 //
+/// A protocol to pass row actions to the parent view controller for handling
 protocol NoteOptionsViewControllerDelegate: class {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
     func didTapHistory(sender: NoteOptionsViewController)
