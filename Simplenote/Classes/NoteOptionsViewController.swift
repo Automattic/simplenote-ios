@@ -430,7 +430,6 @@ class NoteOptionsViewController: UITableViewController {
 protocol NoteOptionsViewControllerDelegate: class {
     func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
     func didTapHistory(sender: NoteOptionsViewController)
-    func didTapCollaborators(sender: NoteOptionsViewController)
     func didTapMoveToTrash(sender: NoteOptionsViewController)
 }
 

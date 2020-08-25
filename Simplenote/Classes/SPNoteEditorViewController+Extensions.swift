@@ -205,11 +205,6 @@ extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
         }
     }
 
-    func didTapCollaborators(sender: NoteOptionsViewController) {
-        sender.dismiss(animated: true, completion: nil)
-        addCollaboratorsAction(sender)
-    }
-
     func didTapMoveToTrash(sender: NoteOptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
         trashNoteAction(self)
