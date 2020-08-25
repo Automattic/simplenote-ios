@@ -28,6 +28,6 @@
 
 @property (nonatomic, weak) id<SPCollaboratorDelegate> collaboratorDelegate;
 
-- (void)setupWithCollaborators:(NSArray *)collaborators;
+- (void)setupWithCollaborators:(NSArray<NSString *> *)collaborators;
 
 @end

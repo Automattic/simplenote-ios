@@ -212,7 +212,7 @@ class NoteOptionsViewController: UITableViewController {
                     cell.accessibilityHint = NSLocalizedString("collaborate-accessibility-hint", comment: "Accessibility hint on button which shows the current collaborators on a note")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
-                    self?.handleCollaborate()
+                    self?.handleCollaborate(from: indexPath)
                 }
             )
         ]
@@ -325,7 +325,9 @@ class NoteOptionsViewController: UITableViewController {
             presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
             presentationController?.sourceView = tableView
         }
-        present(activityVC, animated: true, completion: nil)
+        present(activityVC,
+                animated: true,
+                completion: nil)
     }
 
     func handleHistory() {
@@ -373,11 +375,32 @@ class NoteOptionsViewController: UITableViewController {
             presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
             presentationController?.sourceView = tableView
         }
-        present(activityViewController, animated: true, completion: nil)
+        present(activityViewController,
+                animated: true,
+                completion: nil)
     }
 
-    func handleCollaborate() {
-        delegate?.didTapCollaborators(sender: self)
+    func handleCollaborate(from indexPath: IndexPath) {
+        SPTracker.trackEditorCollaboratorsAccessed()
+
+        let collaboratorView = SPAddCollaboratorsViewController()
+        collaboratorView.collaboratorDelegate = self
+        collaboratorView.setup(withCollaborators: note.emailTagsArray as? [String])
+
+        let navController = SPNavigationController(rootViewController: collaboratorView)
+        navController.displaysBlurEffect = true
+
+        if UIDevice.sp_isPad() {
+            navController.modalPresentationStyle = .popover
+
+            let presentationController = navController.popoverPresentationController
+            presentationController?.permittedArrowDirections = .any
+            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            presentationController?.sourceView = tableView
+        }
+        present(navController,
+                animated: true,
+                completion: nil)
     }
 
     func handleMoveToTrash() {
@@ -409,4 +432,25 @@ protocol NoteOptionsViewControllerDelegate: class {
     func didTapHistory(sender: NoteOptionsViewController)
     func didTapCollaborators(sender: NoteOptionsViewController)
     func didTapMoveToTrash(sender: NoteOptionsViewController)
+}
+
+// MARK: - Collaboration handling
+extension NoteOptionsViewController: SPCollaboratorDelegate {
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController!, shouldAddCollaborator collaboratorEmail: String!) -> Bool {
+        return !note.hasTag(collaboratorEmail)
+    }
+
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController!, didAddCollaborator collaboratorEmail: String!) {
+        note.addTag(collaboratorEmail)
+        save()
+        SPTracker.trackEditorEmailTagAdded()
+        tableView.reloadData()
+    }
+
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController!, didRemoveCollaborator collaboratorEmail: String!) {
+        note.stripTag(collaboratorEmail)
+        save()
+        SPTracker.trackEditorEmailTagRemoved()
+        tableView.reloadData()
+    }
 }

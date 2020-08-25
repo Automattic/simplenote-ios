@@ -104,7 +104,7 @@
     entryTextField.placeholder = NSLocalizedString(@"Add a new collaborator...", @"Noun - collaborators are other Simplenote users who you chose to share a note with");
 }
 
-- (void)setupWithCollaborators:(NSArray *)collaborators
+- (void)setupWithCollaborators:(NSArray<NSString *> *)collaborators
 {
     NSMutableSet *merged = [NSMutableSet set];
 
