@@ -298,6 +298,12 @@ final class NoteOptionsViewController: UITableViewController {
         sender.accessibilityHint = note.pinned ?
             NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned") :
             NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
+
+        if sender.isOn {
+            SPTracker.trackEditorNotePinned()
+        } else {
+            SPTracker.trackEditorNoteUnpinned()
+        }
     }
 
     @objc
@@ -309,6 +315,12 @@ final class NoteOptionsViewController: UITableViewController {
         sender.accessibilityHint = note.markdown ?
             NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
             NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
+
+        if sender.isOn {
+            SPTracker.trackEditorNoteMarkdownEnabled()
+        } else {
+            SPTracker.trackEditorNoteMarkdownDisabled()
+        }
     }
 
     func handleShare(from indexPath: IndexPath) {
@@ -404,6 +416,7 @@ final class NoteOptionsViewController: UITableViewController {
     }
 
     func handleMoveToTrash() {
+        SPTracker.trackEditorNoteDeleted()
         delegate?.didTapMoveToTrash(sender: self)
     }
 
