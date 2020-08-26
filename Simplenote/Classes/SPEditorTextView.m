@@ -584,27 +584,21 @@ NSInteger const ChecklistCursorAdjustment = 2;
     if (self.lastCursorPosition != startOffset) {
         [menuController dismissIfNeeded];
         self.lastCursorPosition = startOffset;
-NSLog(@"Dismiss: Different Location");
         return;
     }
 
     if (menuController.isMenuVisible) {
         [menuController setMenuVisible:NO animated:YES];
-NSLog(@"Dismiss: Already Visible");
         return;
     }
 
     // Failsafe: Sometimes `caretRectForPosition` might return a seriously incorrect frame
     // Ref. https://github.com/Automattic/simplenote-ios/issues/858
     CGRect caretFrame = [self caretRectForPosition:position];
-caretFrame.origin.y = INFINITY;
 
     if (!CGRectIntersectsRect(self.bounds, caretFrame)) {
-NSLog(@"Infinity Failsafe!");
         return;
     }
-
-NSLog(@"Displaying!");
     [menuController displayFromTargetRect:caretFrame inView:self];
 }
 
