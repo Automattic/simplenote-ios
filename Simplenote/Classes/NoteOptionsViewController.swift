@@ -402,7 +402,9 @@ final class NoteOptionsViewController: UITableViewController {
     // MARK: - Navigation button handling
     @objc
     func handleDone(button: UIBarButtonItem) {
-        dismiss(animated: true)
+        dismiss(animated: true) { [popoverPresentationController] in
+            popoverPresentationController?.delegate?.popoverPresentationControllerDidDismissPopover?(popoverPresentationController!)
+        }
     }
 
     // MARK: - Note saving
