@@ -338,9 +338,7 @@ final class NoteOptionsViewController: UITableViewController {
             presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
             presentationController?.sourceView = tableView
         }
-        present(activityVC,
-                animated: true,
-                completion: nil)
+        present(activityVC, animated: true, completion: nil)
     }
 
     func handleHistory() {
@@ -388,9 +386,7 @@ final class NoteOptionsViewController: UITableViewController {
             presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
             presentationController?.sourceView = tableView
         }
-        present(activityViewController,
-                animated: true,
-                completion: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 
     func handleCollaborate(from indexPath: IndexPath) {
@@ -411,9 +407,7 @@ final class NoteOptionsViewController: UITableViewController {
             presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
             presentationController?.sourceView = tableView
         }
-        present(navController,
-                animated: true,
-                completion: nil)
+        present(navController, animated: true, completion: nil)
     }
 
     func handleMoveToTrash() {
