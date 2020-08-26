@@ -711,7 +711,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
 
-                    self->_bounceMarkdownPreviewOnActivityViewDismiss = NO;
+                    self.bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -1546,7 +1546,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self save];
 
             // If Markdown is being enabled and it was previously disabled
-            _bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
+            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
 
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
@@ -1672,7 +1672,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if ([actionSheet isEqual:versionActionSheet])
         versionActionSheet = nil;
 
-    if (_bounceMarkdownPreviewOnActivityViewDismiss) {
+    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }
