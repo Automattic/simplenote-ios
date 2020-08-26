@@ -176,6 +176,7 @@
 		B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */; };
 		B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */; };
 		B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */; };
+		B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */; };
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
@@ -512,6 +513,7 @@
 		B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+Simplenote.swift"; path = "Classes/FileManager+Simplenote.swift"; sourceTree = "<group>"; };
 		B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteActivityItemSource.swift; path = Classes/SimplenoteActivityItemSource.swift; sourceTree = "<group>"; };
 		B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIActivity+Simplenote.swift"; path = "Classes/UIActivity+Simplenote.swift"; sourceTree = "<group>"; };
+		B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIMenuController+Simplenote.swift"; path = "Classes/UIMenuController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
 		B52F35D222F356F500724793 /* UserDefaults+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Tests.swift"; sourceTree = "<group>"; };
@@ -1206,6 +1208,7 @@
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
+				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2301,6 +2304,7 @@
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
+				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
