@@ -11,17 +11,17 @@ final class NoteOptionsViewController: UITableViewController {
     }
 
     /// The note from the editor that we will change settings for
-    private var note: Note
+    private let note: Note
 
     /// The delegate to notify about
     /// chaanges made here
     weak var delegate: NoteOptionsViewControllerDelegate?
 
     /// Formats number of collaborators to respect locales
-    private var collaboratorNumberFormatter = NumberFormatter()
+    private let collaboratorNumberFormatter = NumberFormatter()
 
     /// Activity indicator that displays when note is publishing or unpublishing
-    private var publishActivityIndicator = UIActivityIndicatorView(style: SPUserInterface.isDark ? .white : .gray)
+    private let publishActivityIndicator = UIActivityIndicatorView(style: SPUserInterface.isDark ? .white : .gray)
 
     /// Initialises the options view for a specific note
     /// - Parameter note: The note to configure options for
