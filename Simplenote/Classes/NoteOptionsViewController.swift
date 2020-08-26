@@ -305,14 +305,12 @@ final class NoteOptionsViewController: UITableViewController {
         note.pinned = sender.isOn
         save()
 
-        sender.accessibilityHint = note.pinned ?
-            NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned") :
-            NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
-
         if sender.isOn {
             SPTracker.trackEditorNotePinned()
+            sender.accessibilityHint = NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned")
         } else {
             SPTracker.trackEditorNoteUnpinned()
+            sender.accessibilityHint = NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
         }
     }
 
@@ -322,14 +320,12 @@ final class NoteOptionsViewController: UITableViewController {
         save()
         delegate?.didToggleMarkdown()
 
-        sender.accessibilityHint = note.markdown ?
-            NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
-            NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
-
         if sender.isOn {
             SPTracker.trackEditorNoteMarkdownEnabled()
+            sender.accessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode")
         } else {
             SPTracker.trackEditorNoteMarkdownDisabled()
+            sender.accessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
         }
     }
 
@@ -350,8 +346,10 @@ final class NoteOptionsViewController: UITableViewController {
     func handlePublish(sender: UISwitch) {
         if sender.isOn {
             SPTracker.trackEditorNotePublished()
+            sender.accessibilityHint = NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note")
         } else {
             SPTracker.trackEditorNoteUnpublished()
+            sender.accessibilityHint = NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
         }
 
         note.published = sender.isOn
@@ -363,10 +361,6 @@ final class NoteOptionsViewController: UITableViewController {
         }
 
         save()
-
-        sender.accessibilityHint = note.published ?
-            NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note") :
-            NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
     }
 
     func handleCopyLink(from indexPath: IndexPath) {
