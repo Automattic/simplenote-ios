@@ -21,7 +21,7 @@ final class NoteOptionsViewController: UITableViewController {
     private let collaboratorNumberFormatter = NumberFormatter()
 
     /// Activity indicator that displays when note is publishing or unpublishing
-    private let publishActivityIndicator = UIActivityIndicatorView(style: SPUserInterface.isDark ? .white : .gray)
+    private let publishActivityIndicator = UIActivityIndicatorView(style: .white)
 
     /// Initialises the options view for a specific note
     /// - Parameter note: The note to configure options for
@@ -57,6 +57,7 @@ final class NoteOptionsViewController: UITableViewController {
     func setupViewStyles() {
         tableView.backgroundColor = .simplenoteTableViewBackgroundColor
         tableView.separatorColor = .simplenoteDividerColor
+        publishActivityIndicator.color = UIColor.color(name: .tableViewDetailTextLabelColor)
     }
 
     // MARK: - Table helpers
