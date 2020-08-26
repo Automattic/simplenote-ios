@@ -320,7 +320,7 @@ final class NoteOptionsViewController: UITableViewController {
     func handleMarkdown(sender: UISwitch) {
         note.markdown = sender.isOn
         save()
-        delegate?.didToggleMarkdown(toggle: sender, sender: self)
+        delegate?.didToggleMarkdown()
 
         sender.accessibilityHint = note.markdown ?
             NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
@@ -438,7 +438,7 @@ final class NoteOptionsViewController: UITableViewController {
 //
 /// A protocol to pass row actions to the parent view controller for handling
 protocol NoteOptionsViewControllerDelegate: class {
-    func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController)
+    func didToggleMarkdown()
     func didTapHistory(sender: NoteOptionsViewController)
     func didTapMoveToTrash(sender: NoteOptionsViewController)
 }

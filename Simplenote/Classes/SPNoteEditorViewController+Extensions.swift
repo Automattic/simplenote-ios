@@ -196,13 +196,13 @@ extension SPNoteEditorViewController: UIPopoverPresentationControllerDelegate {
 // MARK: - Note options delegate
 //
 extension SPNoteEditorViewController: NoteOptionsViewControllerDelegate {
-    func didToggleMarkdown(toggle: UISwitch, sender: NoteOptionsViewController) {
+    func didToggleMarkdown() {
 
         // If Markdown is being enabled and it was previously disabled
-        bounceMarkdownPreviewOnActivityViewDismiss = toggle.isOn && !UserDefaults.standard.bool(forKey: kSimplenoteMarkdownDefaultKey)
+        bounceMarkdownPreviewOnActivityViewDismiss = currentNote.markdown && !UserDefaults.standard.bool(forKey: kSimplenoteMarkdownDefaultKey)
 
         // Update the global preference to use when creating new notes
-        UserDefaults.standard.set(toggle.isOn, forKey: kSimplenoteMarkdownDefaultKey)
+        UserDefaults.standard.set(currentNote.markdown, forKey: kSimplenoteMarkdownDefaultKey)
     }
 
     func didTapHistory(sender: NoteOptionsViewController) {
