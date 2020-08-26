@@ -159,7 +159,13 @@ extension SPNoteEditorViewController {
         tagView.endEditing(true)
 
         SPTracker.trackEditorActivitiesAccessed()
+        presentNoteOptions(from: button)
+    }
 
+    /// Presents a new note options view from a given `UIButton`
+    /// This is presented as a popover on iPad
+    /// - Parameter button: The button to anchor the popover to
+    func presentNoteOptions(from button: UIButton) {
         let noteView = NoteOptionsViewController(with: currentNote)
         noteView.delegate = self
         let noteNavigation = SPNavigationController(rootViewController: noteView)
