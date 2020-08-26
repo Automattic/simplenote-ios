@@ -143,7 +143,7 @@ final class NoteOptionsViewController: UITableViewController {
                 configuration: { (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Share", comment: "Note Options: Show Share Options")
-                    cell.accessibilityHint = NSLocalizedString("share-accessibility-hint", comment: "Accessibility hint on share button")
+                    cell.accessibilityHint = NSLocalizedString("Tap to open share options", comment: "Accessibility hint on cell that activates share sheet")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleShare(from: indexPath)
@@ -153,7 +153,7 @@ final class NoteOptionsViewController: UITableViewController {
                 configuration: { (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("History", comment: "Note Options: Show History")
-                    cell.accessibilityHint = NSLocalizedString("history-accessibility-hint", comment: "Accessibility hint on button which shows the history of a notew")
+                    cell.accessibilityHint = NSLocalizedString("Tap to open history", comment: "Accessibility hint on cell that opens note history view")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleHistory()
@@ -210,7 +210,7 @@ final class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
                     cell.detailTextLabel?.text = collaboratorNumberFormatter.string(from: NSNumber(value: note.emailTagsArray.count))
-                    cell.accessibilityHint = NSLocalizedString("collaborate-accessibility-hint", comment: "Accessibility hint on button which shows the current collaborators on a note")
+                    cell.accessibilityHint = NSLocalizedString("Tap to open collaboration menu", comment: "Accessibility hint on cell that opens collaboration menu")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleCollaborate(from: indexPath)
@@ -228,7 +228,7 @@ final class NoteOptionsViewController: UITableViewController {
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Move to Trash", comment: "Note Options: Move to Trash")
                     cell.textLabel?.textColor = .simplenoteDestructiveActionColor
-                    cell.accessibilityHint = NSLocalizedString("trash-accessibility-hint", comment: "Accessibility hint on button which moves a note to the trash")
+                    cell.accessibilityHint = NSLocalizedString("Tap to move this note to trash", comment: "Accessibility hint on cell that moves a note to trash")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
                     self?.handleMoveToTrash()
