@@ -13,6 +13,16 @@ final class NoteOptionsViewController: UITableViewController {
     /// The note from the editor that we will change settings for
     private let note: Note
 
+    /// Determines if a note is currently awaiting publishing
+    /// changes to synchronise
+    private var noteIsChangingPublishState: Bool {
+        if (note.published && note.publishURL.isEmpty ||
+            !note.published && !note.publishURL.isEmpty) {
+            return true
+        }
+        return false
+    }
+
     /// The delegate to notify about
     /// chaanges made here
     weak var delegate: NoteOptionsViewControllerDelegate?
@@ -179,7 +189,7 @@ final class NoteOptionsViewController: UITableViewController {
                 }
             ),
             Row(style: .Value1,
-                configuration: { [publishActivityIndicator, note] (cell: UITableViewCell, row: Row) in
+                configuration: { [noteIsChangingPublishState, publishActivityIndicator, note] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Copy Link", comment: "Note Options: Copy Link")
                     cell.textLabel?.textColor = !note.publishURL.isEmpty ? .simplenoteTextColor : .simplenoteGray20Color
@@ -187,8 +197,7 @@ final class NoteOptionsViewController: UITableViewController {
                     cell.isUserInteractionEnabled = !note.publishURL.isEmpty
                     cell.accessoryView = publishActivityIndicator
 
-                    if (note.published && note.publishURL.isEmpty ||
-                        !note.published && !note.publishURL.isEmpty) {
+                    if (noteIsChangingPublishState) {
                         publishActivityIndicator.startAnimating()
                     }
                 },
@@ -355,8 +364,7 @@ final class NoteOptionsViewController: UITableViewController {
 
         note.published = sender.isOn
 
-        if (note.published && note.publishURL.isEmpty ||
-            !note.published && !note.publishURL.isEmpty) {
+        if (noteIsChangingPublishState) {
             publishActivityIndicator.startAnimating()
         } else {
             publishActivityIndicator.stopAnimating()
