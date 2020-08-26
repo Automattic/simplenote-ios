@@ -339,15 +339,7 @@ final class NoteOptionsViewController: UITableViewController {
         }
         SPTracker.trackEditorNoteContentShared()
 
-        if UIDevice.sp_isPad() {
-            activityVC.modalPresentationStyle = .popover
-
-            let presentationController = activityVC.popoverPresentationController
-            presentationController?.permittedArrowDirections = .any
-            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
-            presentationController?.sourceView = tableView
-        }
-        present(activityVC, animated: true, completion: nil)
+        presentPopover(viewController: activityVC, from: indexPath)
     }
 
     func handleHistory() {
@@ -386,15 +378,7 @@ final class NoteOptionsViewController: UITableViewController {
 
         let activityViewController = UIActivityViewController(activityItems: [publishURL],
                                                               applicationActivities: [SPActivitySafari()])
-        if UIDevice.sp_isPad() {
-            activityViewController.modalPresentationStyle = .popover
-
-            let presentationController = activityViewController.popoverPresentationController
-            presentationController?.permittedArrowDirections = .any
-            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
-            presentationController?.sourceView = tableView
-        }
-        present(activityViewController, animated: true, completion: nil)
+        presentPopover(viewController: activityViewController, from: indexPath)
     }
 
     func handleCollaborate(from indexPath: IndexPath) {
@@ -407,15 +391,7 @@ final class NoteOptionsViewController: UITableViewController {
         let navController = SPNavigationController(rootViewController: collaboratorView)
         navController.displaysBlurEffect = true
 
-        if UIDevice.sp_isPad() {
-            navController.modalPresentationStyle = .popover
-
-            let presentationController = navController.popoverPresentationController
-            presentationController?.permittedArrowDirections = .any
-            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
-            presentationController?.sourceView = tableView
-        }
-        present(navController, animated: true, completion: nil)
+        presentPopover(viewController: navController, from: indexPath)
     }
 
     func handleMoveToTrash() {
@@ -437,6 +413,24 @@ final class NoteOptionsViewController: UITableViewController {
         SPAppDelegate.shared().save()
         SPTracker.trackEditorNoteEdited()
         CSSearchableIndex.default().indexSearchableNote(note)
+    }
+
+    // MARK: - Navigation helpers
+    /// Presents a view controller as a popover from the provided index path on iPad
+    /// on iOS this will be presented modally
+    /// - Parameters:
+    ///   - viewController: The view controller to present
+    ///   - indexPath: The index path to present from
+    func presentPopover(viewController: UIViewController, from indexPath: IndexPath) {
+        if UIDevice.sp_isPad() {
+            viewController.modalPresentationStyle = .popover
+
+            let presentationController = viewController.popoverPresentationController
+            presentationController?.permittedArrowDirections = .any
+            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+            presentationController?.sourceView = tableView
+        }
+        present(viewController, animated: true, completion: nil)
     }
 }
 
