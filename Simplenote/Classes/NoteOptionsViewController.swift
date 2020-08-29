@@ -221,7 +221,7 @@ final class NoteOptionsViewController: UITableViewController {
                 configuration: { [note, collaboratorNumberFormatter] (cell: UITableViewCell, row: Row) in
                     let cell = cell as! Value1TableViewCell
                     cell.textLabel?.text = NSLocalizedString("Collaborate", comment: "Note Options: Collaborate")
-                    cell.detailTextLabel?.text = collaboratorNumberFormatter.string(from: NSNumber(value: note.emailTagsArray.count))
+                    cell.detailTextLabel?.text = note.emailTagsArray.count > 0 ? collaboratorNumberFormatter.string(from: NSNumber(value: note.emailTagsArray.count)) : nil
                     cell.accessibilityHint = NSLocalizedString("Tap to open collaboration menu", comment: "Accessibility hint on cell that opens collaboration menu")
                 },
                 handler: { [weak self] (indexPath: IndexPath) in
