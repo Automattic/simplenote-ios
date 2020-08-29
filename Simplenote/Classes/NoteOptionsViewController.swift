@@ -140,10 +140,9 @@ final class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Pin to Top", comment: "Note Options: Pin to Top")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePinToTop(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityLabel = NSLocalizedString("Pin toggle", comment: "Switch which marks a note as pinned or unpinned")
-                    cell.cellSwitch.accessibilityHint = note.pinned ?
-                        NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned") :
-                        NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
+                    cell.cellSwitch.accessibilityIdentifier = "note-options-pin-switch"
                     cell.cellSwitch.isOn = note.pinned
+                    self?.updateAccessibilityHint(for: cell.cellSwitch)
                 }
             ),
             Row(style: .Switch,
@@ -152,10 +151,9 @@ final class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Markdown", comment: "Note Options: Toggle Markdown")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handleMarkdown(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityLabel = NSLocalizedString("Markdown toggle", comment: "Switch which marks a note as using Markdown formatting or not")
-                    cell.cellSwitch.accessibilityHint = note.markdown ?
-                        NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode") :
-                        NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
+                    cell.cellSwitch.accessibilityIdentifier = "note-options-markdown-switch"
                     cell.cellSwitch.isOn = note.markdown
+                    self?.updateAccessibilityHint(for: cell.cellSwitch)
                 }
             ),
             Row(style: .Value1,
@@ -191,10 +189,9 @@ final class NoteOptionsViewController: UITableViewController {
                     cell.textLabel?.text = NSLocalizedString("Publish", comment: "Note Options: Publish")
                     cell.cellSwitch.addTarget(self, action: #selector(self?.handlePublish(sender:)), for: .primaryActionTriggered)
                     cell.cellSwitch.accessibilityLabel = NSLocalizedString("Publish toggle", comment: "Switch which marks a note as published or unpublished")
-                    cell.cellSwitch.accessibilityHint = note.published ?
-                        NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note") :
-                        NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
+                    cell.cellSwitch.accessibilityIdentifier = "note-options-publish-switch"
                     cell.cellSwitch.isOn = note.published
+                    self?.updateAccessibilityHint(for: cell.cellSwitch)
                 }
             ),
             Row(style: .Value1,
@@ -316,11 +313,10 @@ final class NoteOptionsViewController: UITableViewController {
 
         if sender.isOn {
             SPTracker.trackEditorNotePinned()
-            sender.accessibilityHint = NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned")
         } else {
             SPTracker.trackEditorNoteUnpinned()
-            sender.accessibilityHint = NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
         }
+        updateAccessibilityHint(for: sender)
     }
 
     @objc
@@ -331,11 +327,10 @@ final class NoteOptionsViewController: UITableViewController {
 
         if sender.isOn {
             SPTracker.trackEditorNoteMarkdownEnabled()
-            sender.accessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode")
         } else {
             SPTracker.trackEditorNoteMarkdownDisabled()
-            sender.accessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
         }
+        updateAccessibilityHint(for: sender)
     }
 
     func handleShare(from indexPath: IndexPath) {
@@ -355,11 +350,10 @@ final class NoteOptionsViewController: UITableViewController {
     func handlePublish(sender: UISwitch) {
         if sender.isOn {
             SPTracker.trackEditorNotePublished()
-            sender.accessibilityHint = NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note")
         } else {
             SPTracker.trackEditorNoteUnpublished()
-            sender.accessibilityHint = NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
         }
+        updateAccessibilityHint(for: sender)
 
         note.published = sender.isOn
 
@@ -400,6 +394,36 @@ final class NoteOptionsViewController: UITableViewController {
     func handleMoveToTrash() {
         SPTracker.trackEditorNoteDeleted()
         delegate?.didTapMoveToTrash(sender: self)
+    }
+
+    // MARK: - Row updates
+
+    /// Updates the accessibility hint based on switch state
+    /// - Parameter rowSwitch: The switch that has changed state
+    func updateAccessibilityHint(for rowSwitch: UISwitch) {
+
+        switch rowSwitch.accessibilityIdentifier {
+        case "note-options-pin-switch":
+            if rowSwitch.isOn {
+                rowSwitch.accessibilityHint = NSLocalizedString("Unpin note", comment: "Action to mark a note as unpinned")
+            } else {
+                rowSwitch.accessibilityHint = NSLocalizedString("Pin note", comment: "Action to mark a note as pinned")
+            }
+        case "note-options-markdown-switch":
+            if rowSwitch.isOn {
+                rowSwitch.accessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Accessibility hint for disabling markdown mode")
+            } else {
+                rowSwitch.accessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Accessibility hint for enabling markdown mode")
+            }
+        case "note-options-publish-switch":
+            if rowSwitch.isOn {
+                rowSwitch.accessibilityHint = NSLocalizedString("Unpublish note", comment: "Action which unpublishes a note")
+            } else {
+                rowSwitch.accessibilityHint = NSLocalizedString("Publish note", comment: "Action which published a note to a web page")
+            }
+        default:
+            return
+        }
     }
 
     // MARK: - Navigation button handling
