@@ -5,7 +5,7 @@ import CoreSpotlight
 //
 /// A protocol to pass row actions to the parent view controller for handling
 protocol NoteOptionsViewControllerDelegate: class {
-    func didToggleMarkdown()
+    func didToggleMarkdown(state: Bool)
     func didTapHistory(sender: NoteOptionsViewController)
     func didTapMoveToTrash(sender: NoteOptionsViewController)
 }
@@ -320,7 +320,7 @@ final class NoteOptionsViewController: UITableViewController {
     func handleMarkdown(sender: UISwitch) {
         note.markdown = sender.isOn
         save()
-        delegate?.didToggleMarkdown()
+        delegate?.didToggleMarkdown(state: sender.isOn)
 
         if sender.isOn {
             SPTracker.trackEditorNoteMarkdownEnabled()
