@@ -25,11 +25,8 @@ final class NoteOptionsViewController: UITableViewController {
     /// Determines if a note is currently awaiting publishing
     /// changes to synchronise
     private var noteIsChangingPublishState: Bool {
-        if (note.published && note.publishURL.isEmpty ||
-            !note.published && !note.publishURL.isEmpty) {
-            return true
-        }
-        return false
+        (note.published && note.publishURL.isEmpty ||
+        !note.published && !note.publishURL.isEmpty)
     }
 
     /// The delegate to notify about
@@ -357,7 +354,7 @@ final class NoteOptionsViewController: UITableViewController {
 
         note.published = sender.isOn
 
-        if (noteIsChangingPublishState) {
+        if noteIsChangingPublishState {
             publishActivityIndicator.startAnimating()
         } else {
             publishActivityIndicator.stopAnimating()
