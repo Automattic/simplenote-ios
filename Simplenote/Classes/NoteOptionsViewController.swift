@@ -1,6 +1,15 @@
 import UIKit
 import CoreSpotlight
 
+// MARK: - Action protocol
+//
+/// A protocol to pass row actions to the parent view controller for handling
+protocol NoteOptionsViewControllerDelegate: class {
+    func didToggleMarkdown()
+    func didTapHistory(sender: NoteOptionsViewController)
+    func didTapMoveToTrash(sender: NoteOptionsViewController)
+}
+
 /// A class used to display options for the note that is currently being edited
 final class NoteOptionsViewController: UITableViewController {
 
@@ -428,15 +437,6 @@ final class NoteOptionsViewController: UITableViewController {
         }
         present(viewController, animated: true, completion: nil)
     }
-}
-
-// MARK: - Action protocol
-//
-/// A protocol to pass row actions to the parent view controller for handling
-protocol NoteOptionsViewControllerDelegate: class {
-    func didToggleMarkdown()
-    func didTapHistory(sender: NoteOptionsViewController)
-    func didTapMoveToTrash(sender: NoteOptionsViewController)
 }
 
 // MARK: - Collaboration handling
