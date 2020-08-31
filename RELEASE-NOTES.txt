@@ -1,5 +1,6 @@
 4.24
 -----
+-   Fixed a stability issue in the Notes Editor
 
 4.23
 -----
