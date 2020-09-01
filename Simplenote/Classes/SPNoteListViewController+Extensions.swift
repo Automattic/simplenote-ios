@@ -613,7 +613,7 @@ private extension SPNoteListViewController {
             },
 
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
-                self?.copyInternalLink(of: note)
+                self?.copyInterlink(to: note)
                 completion(true)
             },
 
@@ -631,9 +631,9 @@ private extension SPNoteListViewController {
     }
 
 
-    func copyInternalLink(of note: Note) {
+    func copyInterlink(to note: Note) {
         SPTracker.trackListCopiedInternalLink()
-        InterlinkManager().copyInternalLink(for: note)
+        UIPasteboard.general.copyInterlink(to: note)
     }
 
     func togglePinnedState(note: Note) {

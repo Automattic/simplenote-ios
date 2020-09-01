@@ -296,7 +296,9 @@
 		B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
 		B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */; };
-		B5E951E124FEDAD4004B10B8 /* InterlinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E024FEDAD4004B10B8 /* InterlinkManager.swift */; };
+		B5E951E124FEDAD4004B10B8 /* UIPasteboard+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */; };
+		B5E951E424FEE26E004B10B8 /* URL+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */; };
+		B5E951E624FEE2A8004B10B8 /* Note+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */; };
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
 		B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */; };
 		B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */; };
@@ -663,7 +665,9 @@
 		B5E196BA230F522D00F5658A /* SPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = "<group>"; };
 		B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorStudio.swift; path = Classes/ColorStudio.swift; sourceTree = "<group>"; };
 		B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Studio.swift"; path = "Classes/UIColor+Studio.swift"; sourceTree = "<group>"; };
-		B5E951E024FEDAD4004B10B8 /* InterlinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterlinkManager.swift; path = Classes/InterlinkManager.swift; sourceTree = "<group>"; };
+		B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIPasteboard+Interlink.swift"; path = "Classes/UIPasteboard+Interlink.swift"; sourceTree = "<group>"; };
+		B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URL+Interlink.swift"; path = "Classes/URL+Interlink.swift"; sourceTree = "<group>"; };
+		B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Interlink.swift"; sourceTree = "<group>"; };
 		B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		B5EB1EF11C204EBD0080A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -1172,6 +1176,7 @@
 		B569DBFE1C03411500EC1FE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5E951E224FEE25A004B10B8 /* Interlink */,
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
@@ -1315,7 +1320,6 @@
 			isa = PBXGroup;
 			children = (
 				B51F6DCF2460C3D80074DDD9 /* Onboarding */,
-				B5E951E024FEDAD4004B10B8 /* InterlinkManager.swift */,
 				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
 				B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */,
@@ -1387,6 +1391,16 @@
 				74388F4922CFFB8B001C5EC0 /* ShareViewController.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B5E951E224FEE25A004B10B8 /* Interlink */ = {
+			isa = PBXGroup;
+			children = (
+				B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */,
+				B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */,
+				B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */,
+			);
+			name = Interlink;
 			sourceTree = "<group>";
 		};
 		B5EB1EED1C204EBD0080A1B3 /* SimplenoteShare */ = {
@@ -2134,6 +2148,7 @@
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
+				B5E951E424FEE26E004B10B8 /* URL+Interlink.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B5095DC924632E3300812711 /* SimplenoteConstants.swift in Sources */,
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
@@ -2229,6 +2244,7 @@
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
 				B5185CFB23427F2F0060145A /* SearchDisplayController.swift in Sources */,
 				B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */,
+				B5E951E624FEE2A8004B10B8 /* Note+Interlink.swift in Sources */,
 				B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */,
 				B5476BBD23D8A71D000E7723 /* UIFont+Simplenote.swift in Sources */,
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
@@ -2256,7 +2272,7 @@
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
 				46A3C99817DFA81A002865AE /* SPEntryListCell.m in Sources */,
-				B5E951E124FEDAD4004B10B8 /* InterlinkManager.swift in Sources */,
+				B5E951E124FEDAD4004B10B8 /* UIPasteboard+Interlink.swift in Sources */,
 				46A3C99917DFA81A002865AE /* SPTransitionController.m in Sources */,
 				46A3C99A17DFA81A002865AE /* DTTwoPageViewController.m in Sources */,
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
