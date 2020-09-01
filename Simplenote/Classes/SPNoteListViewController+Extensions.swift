@@ -638,9 +638,8 @@ private extension SPNoteListViewController {
     }
 
     func togglePinnedState(note: Note) {
-        note.pinned = !note.pinned
-        SPAppDelegate.shared().save()
         SPTracker.trackListPinToggled()
+        SPObjectManager.shared().togglePinnedState(of: note)
     }
 
     func share(note: Note) {
