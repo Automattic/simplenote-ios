@@ -633,11 +633,14 @@ private extension SPNoteListViewController {
 
     func copyInternalLink(of note: Note) {
 #warning ("TODO: Copy Link")
+        SPTracker.trackListCopiedInternalLink()
+        
     }
 
     func togglePinnedState(note: Note) {
         note.pinned = !note.pinned
         SPAppDelegate.shared().save()
+        SPTracker.trackListPinToggled()
     }
 
     func share(note: Note) {
