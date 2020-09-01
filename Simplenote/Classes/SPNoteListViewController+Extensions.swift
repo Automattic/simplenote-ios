@@ -487,18 +487,13 @@ extension SPNoteListViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Swipeable Actions: Only enabled for Notes
         guard let note = notesListController.object(at: indexPath) as? Note else {
-            return []
+            return nil
         }
 
-        switch notesListController.filter {
-        case .deleted:
-            return rowActionsForDeletedNote(note)
-        default:
-            return rowActionsForNote(note)
-        }
+        return UISwipeActionsConfiguration(actions: contextActions(for: note))
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -578,36 +573,45 @@ private extension SPNoteListViewController {
 //
 private extension SPNoteListViewController {
 
-    func rowActionsForDeletedNote(_ note: Note) -> [UITableViewRowAction] {
-        return [
-            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .simplenoteRestoreActionColor) { (_, _) in
+    func contextActions(for note: Note) -> [UIContextualAction] {
+        if note.deleted {
+            return deletedContextActions(for: note)
+        }
+
+        return regularContextActions(for: note)
+    }
+
+    func deletedContextActions(for note: Note) -> [UIContextualAction] {
+        [
+            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { _,_,_ in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
             },
-
-            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { _,_,_ in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
             }
         ]
     }
 
-    func rowActionsForNote(_ note: Note) -> [UITableViewRowAction] {
-        let pinTitle = note.pinned ? ActionTitle.unpin : ActionTitle.pin
+    func regularContextActions(for note: Note) -> [UIContextualAction] {
+        let pinImage = note.pinned ? UIImage.image(name: .pin) : UIImage.image(name: .pin)
+#warning ("ActionTitle.unpin")
 
         return [
-            UITableViewRowAction(style: .destructive, title: ActionTitle.trash, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, _) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().trashNote(note)
                 CSSearchableIndex.default().deleteSearchableNote(note)
             },
 
-            UITableViewRowAction(style: .default, title: pinTitle, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _) in
+            UIContextualAction(style: .normal, image: pinImage, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, _) in
                 self?.togglePin(note: note)
             },
 
-            UITableViewRowAction(style: .default, title: ActionTitle.share, backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, indexPath) in
-                self?.share(note: note, from: indexPath)
+            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, sourceView, _) in
+#warning ("FIX")
+//                self?.share(note: note, from: indexPath)
             }
         ]
     }
@@ -738,12 +742,6 @@ extension SPNoteListViewController {
 //
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
-    static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
-    static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
-    static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
-    static let share = NSLocalizedString("Share", comment: "Share (verb) - the action of Sharing a note")
-    static let trash = NSLocalizedString("Trash-verb", comment: "Trash (verb) - the action of deleting a note")
-    static let unpin = NSLocalizedString("Unpin", comment: "Unpin (verb) - the action of Unpinning a note")
 }
 
 private enum Constants {
