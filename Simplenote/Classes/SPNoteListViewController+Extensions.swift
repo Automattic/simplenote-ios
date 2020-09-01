@@ -583,13 +583,15 @@ private extension SPNoteListViewController {
 
     func deletedContextActions(for note: Note) -> [UIContextualAction] {
         [
-            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { _,_,_ in
+            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
+                completion(true)
             },
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { _,_,_ in
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
+                completion(true)
             }
         ]
     }
@@ -597,21 +599,23 @@ private extension SPNoteListViewController {
     func regularContextActions(for note: Note) -> [UIContextualAction] {
         let pinImage = note.pinned ? UIImage.image(name: .pin) : UIImage.image(name: .pin)
 #warning ("ActionTitle.unpin")
-
+#warning ("Colors")
         return [
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, _) in
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().trashNote(note)
                 CSSearchableIndex.default().deleteSearchableNote(note)
+                completion(true)
             },
 
-            UIContextualAction(style: .normal, image: pinImage, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, _) in
+            UIContextualAction(style: .normal, image: pinImage, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
                 self?.togglePin(note: note)
+                completion(true)
             },
 
-            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, sourceView, _) in
-#warning ("FIX")
-//                self?.share(note: note, from: indexPath)
+            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+                self?.share(note: note)
+                completion(true)
             }
         ]
     }
@@ -621,23 +625,26 @@ private extension SPNoteListViewController {
         SPAppDelegate.shared().save()
     }
 
-    func share(note: Note, from indexPath: IndexPath) {
-        guard let _ = note.content, let controller = UIActivityViewController(note: note) else {
+    func share(note: Note) {
+        guard let _ = note.content, let activityController = UIActivityViewController(note: note) else {
             return
         }
 
         SPTracker.trackEditorNoteContentShared()
 
-        if UIDevice.sp_isPad() {
-            controller.modalPresentationStyle = .popover
-
-            let presentationController = controller.popoverPresentationController
-            presentationController?.permittedArrowDirections = .any
-            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
-            presentationController?.sourceView = tableView
+        guard UIDevice.sp_isPad(), let indexPath = notesListController.indexPath(forObject: note) else {
+            present(activityController, animated: true, completion: nil)
+            return
         }
 
-        present(controller, animated: true, completion: nil)
+        activityController.modalPresentationStyle = .popover
+
+        let presentationController = activityController.popoverPresentationController
+        presentationController?.permittedArrowDirections = .any
+        presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+        presentationController?.sourceView = tableView
+
+        present(activityController, animated: true, completion: nil)
     }
 }
 
