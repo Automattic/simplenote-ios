@@ -24,10 +24,12 @@ enum UIImageName: Int, CaseIterable {
     case hideKeyboard
     case history
     case info
+    case link
     case menu
     case newNote
     case onePassword
     case pin
+    case pinBig
     case restore
     case settings
     case simplenoteLogo
@@ -92,6 +94,8 @@ extension UIImageName {
             return "icon_history"
         case .info:
             return "icon_info"
+        case .link:
+            return "icon_link"
         case .menu:
             return "icon_menu"
         case .newNote:
@@ -100,6 +104,8 @@ extension UIImageName {
             return "icon_onepassword"
         case .pin:
             return "icon_pin"
+        case .pinBig:
+            return "icon_pin_big"
         case .restore:
             return "icon_restore"
         case .settings:
