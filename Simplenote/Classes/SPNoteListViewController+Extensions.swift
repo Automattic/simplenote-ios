@@ -630,7 +630,6 @@ private extension SPNoteListViewController {
         CSSearchableIndex.default().deleteSearchableNote(note)
     }
 
-
     func copyInterlink(to note: Note) {
         SPTracker.trackListCopiedInternalLink()
         UIPasteboard.general.copyInterlink(to: note)

@@ -1396,9 +1396,9 @@
 		B5E951E224FEE25A004B10B8 /* Interlink */ = {
 			isa = PBXGroup;
 			children = (
+				B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */,
 				B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */,
 				B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */,
-				B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */,
 			);
 			name = Interlink;
 			sourceTree = "<group>";
