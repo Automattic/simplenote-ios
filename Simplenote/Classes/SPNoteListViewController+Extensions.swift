@@ -632,9 +632,8 @@ private extension SPNoteListViewController {
 
 
     func copyInternalLink(of note: Note) {
-#warning ("TODO: Copy Link")
         SPTracker.trackListCopiedInternalLink()
-        
+        InterlinkManager().copyInternalLink(for: note)
     }
 
     func togglePinnedState(note: Note) {
