@@ -588,6 +588,7 @@ private extension SPNoteListViewController {
                 CSSearchableIndex.default().indexSearchableNote(note)
                 completion(true)
             },
+
             UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
@@ -597,30 +598,44 @@ private extension SPNoteListViewController {
     }
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
-        let pinImage = note.pinned ? UIImage.image(name: .pin) : UIImage.image(name: .pin)
-#warning ("ActionTitle.unpin")
-#warning ("Colors")
+        let pinImageName: UIImageName = note.pinned ? .pinBig : .pinBig
+#warning ("TODO: Unpin Image")
+
         return [
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
-                SPTracker.trackListNoteDeleted()
-                SPObjectManager.shared().trashNote(note)
-                CSSearchableIndex.default().deleteSearchableNote(note)
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+                self?.delete(note: note)
                 completion(true)
             },
 
-            UIContextualAction(style: .normal, image: pinImage, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
-                self?.togglePin(note: note)
+            UIContextualAction(style: .normal, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+                self?.togglePinnedState(note: note)
                 completion(true)
             },
 
-            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+            UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+                self?.copyInternalLink(of: note)
+                completion(true)
+            },
+
+            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
             }
         ]
     }
 
-    func togglePin(note: Note) {
+    func delete(note: Note) {
+        SPTracker.trackListNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+
+
+    func copyInternalLink(of note: Note) {
+#warning ("TODO: Copy Link")
+    }
+
+    func togglePinnedState(note: Note) {
         note.pinned = !note.pinned
         SPAppDelegate.shared().save()
     }
