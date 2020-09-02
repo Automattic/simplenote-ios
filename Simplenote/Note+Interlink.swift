@@ -12,6 +12,10 @@ extension Note {
             return nil
         }
 
-        return "[" + title + "](" + SimplenoteConstants.interlinkBaseURL + key + ")"
+        let shortened = title
+            .prefix(SimplenoteConstants.interlinkMaximumLength)
+            .trimmingCharacters(in: .whitespaces)
+
+        return "[" + shortened + "](" + SimplenoteConstants.interlinkBaseURL + key + ")"
     }
 }

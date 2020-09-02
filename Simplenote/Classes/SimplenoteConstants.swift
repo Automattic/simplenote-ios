@@ -6,9 +6,13 @@ import Foundation
 @objcMembers
 class SimplenoteConstants: NSObject {
 
-    /// Base URL used to interlink Notes
+    /// Interlink: Base URL
     ///
     static let interlinkBaseURL = "simplenote://note/"
+
+    /// Interlink: Maximum Title Length
+    ///
+    static let interlinkMaximumLength = 150
 
     /// Password Reset URL
     ///
