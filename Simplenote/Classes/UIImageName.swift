@@ -44,6 +44,7 @@ enum UIImageName: Int, CaseIterable {
     case taskChecked
     case taskUnchecked
     case trash
+    case unpin
     case untagged
     case visibilityOn
     case visibilityOff
@@ -134,6 +135,8 @@ extension UIImageName {
             return "icon_task_unchecked"
         case .trash:
             return "icon_trash"
+        case .unpin:
+            return "icon_unpin"
         case .untagged:
             return "icon_untagged"
         case .visibilityOn:

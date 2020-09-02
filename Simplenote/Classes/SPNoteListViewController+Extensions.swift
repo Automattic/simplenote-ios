@@ -598,8 +598,7 @@ private extension SPNoteListViewController {
     }
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
-        let pinImageName: UIImageName = note.pinned ? .pinBig : .pinBig
-#warning ("TODO: Unpin Image")
+        let pinImageName: UIImageName = note.pinned ? .unpin : .pinBig
 
         return [
             UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
