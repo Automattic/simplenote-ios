@@ -144,7 +144,7 @@
         return;
     }
 
-    if (targetURL.isInterlinkURL) {
+    if (targetURL.isSimplenoteURL) {
         NSLog(@"TODO: Implement Interlinking navigation Support!");
         decisionHandler(WKNavigationActionPolicyCancel);
         return;

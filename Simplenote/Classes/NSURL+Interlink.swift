@@ -5,11 +5,17 @@ import Foundation
 //
 extension NSURL {
 
-    /// Indicates if the receiver is a reference to an internal Note
+    /// Indicates if the receiver' has the Simplenote Scheme
     ///
     @objc
+    var isSimplenoteURL: Bool {
+        scheme?.lowercased() == SimplenoteConstants.simplenoteScheme
+    }
+
+    /// Indicates if the receiver is a reference to a Note
+    ///
     var isInterlinkURL: Bool {
-        scheme == SimplenoteConstants.interlinkScheme
+        isSimplenoteURL && host?.lowercased() == SimplenoteConstants.simplenoteInterlinkHost
     }
 
     /// Extracts the Internal Note's SimperiumKey, whenever the receiver is an Interlink URL
@@ -20,6 +26,6 @@ extension NSURL {
             return nil
         }
 
-        return absoluteString?.replacingOccurrences(of: SimplenoteConstants.interlinkBaseURL, with: "")
+        return absoluteString?.replacingOccurrences(of: "/", with: "")
     }
 }

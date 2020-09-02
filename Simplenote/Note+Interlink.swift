@@ -13,9 +13,10 @@ extension Note {
         }
 
         let shortened = title
-            .prefix(SimplenoteConstants.interlinkMaximumLength)
+            .prefix(SimplenoteConstants.simplenoteInterlinkMaxTitleLength)
             .trimmingCharacters(in: .whitespaces)
 
-        return "[" + shortened + "](" + SimplenoteConstants.interlinkBaseURL + key + ")"
+        let url = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + key
+        return "[" + shortened + "](" + url + ")"
     }
 }
