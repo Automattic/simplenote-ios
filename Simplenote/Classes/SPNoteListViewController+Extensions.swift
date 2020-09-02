@@ -526,7 +526,7 @@ private extension SPNoteListViewController {
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
 
-        cell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
+        cell.accessoryLeftImage = note.pinned ? .image(name: .pinSmall) : nil
         cell.accessoryRightImage = note.published ? .image(name: .shared) : nil
         cell.accessoryLeftTintColor = .simplenoteNotePinStatusImageColor
         cell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
@@ -598,7 +598,7 @@ private extension SPNoteListViewController {
     }
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
-        let pinImageName: UIImageName = note.pinned ? .unpin : .pinBig
+        let pinImageName: UIImageName = note.pinned ? .unpin : .pin
 
         return [
             UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
