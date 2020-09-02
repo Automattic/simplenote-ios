@@ -1,23 +1,25 @@
 import Foundation
 
 
-// MARK: - URL + Interlink
+// MARK: - NSURL + Interlink
 //
-extension URL {
+extension NSURL {
 
     /// Indicates if the receiver is a reference to an internal Note
     ///
+    @objc
     var isInterlinkURL: Bool {
-        absoluteString.hasPrefix(SimplenoteConstants.interlinkBaseURL)
+        scheme == SimplenoteConstants.interlinkScheme
     }
 
     /// Extracts the Internal Note's SimperiumKey, whenever the receiver is an Interlink URL
     ///
+    @objc
     var interlinkSimperiumKey: String? {
         guard isInterlinkURL else {
             return nil
         }
 
-        return absoluteString.replacingOccurrences(of: SimplenoteConstants.interlinkBaseURL, with: "")
+        return absoluteString?.replacingOccurrences(of: SimplenoteConstants.interlinkBaseURL, with: "")
     }
 }

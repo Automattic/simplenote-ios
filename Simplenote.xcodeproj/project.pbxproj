@@ -297,7 +297,7 @@
 		B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
 		B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */; };
 		B5E951E124FEDAD4004B10B8 /* UIPasteboard+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */; };
-		B5E951E424FEE26E004B10B8 /* URL+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */; };
+		B5E951E424FEE26E004B10B8 /* NSURL+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E324FEE26E004B10B8 /* NSURL+Interlink.swift */; };
 		B5E951E624FEE2A8004B10B8 /* Note+Interlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */; };
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
 		B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */; };
@@ -666,7 +666,7 @@
 		B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorStudio.swift; path = Classes/ColorStudio.swift; sourceTree = "<group>"; };
 		B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Studio.swift"; path = "Classes/UIColor+Studio.swift"; sourceTree = "<group>"; };
 		B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIPasteboard+Interlink.swift"; path = "Classes/UIPasteboard+Interlink.swift"; sourceTree = "<group>"; };
-		B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URL+Interlink.swift"; path = "Classes/URL+Interlink.swift"; sourceTree = "<group>"; };
+		B5E951E324FEE26E004B10B8 /* NSURL+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSURL+Interlink.swift"; path = "Classes/NSURL+Interlink.swift"; sourceTree = "<group>"; };
 		B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Interlink.swift"; sourceTree = "<group>"; };
 		B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -1398,7 +1398,7 @@
 			children = (
 				B5E951E524FEE2A8004B10B8 /* Note+Interlink.swift */,
 				B5E951E024FEDAD4004B10B8 /* UIPasteboard+Interlink.swift */,
-				B5E951E324FEE26E004B10B8 /* URL+Interlink.swift */,
+				B5E951E324FEE26E004B10B8 /* NSURL+Interlink.swift */,
 			);
 			name = Interlink;
 			sourceTree = "<group>";
@@ -2148,7 +2148,7 @@
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
-				B5E951E424FEE26E004B10B8 /* URL+Interlink.swift in Sources */,
+				B5E951E424FEE26E004B10B8 /* NSURL+Interlink.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B5095DC924632E3300812711 /* SimplenoteConstants.swift in Sources */,
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,

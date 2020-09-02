@@ -10,6 +10,10 @@ class SimplenoteConstants: NSObject {
     ///
     static let interlinkBaseURL = "simplenote://note/"
 
+    /// Interlink: Scheme
+    ///
+    static let interlinkScheme = "simplenote"
+
     /// Interlink: Maximum Title Length
     ///
     static let interlinkMaximumLength = 150
