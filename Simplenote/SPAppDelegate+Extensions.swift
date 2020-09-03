@@ -20,6 +20,30 @@ extension SPAppDelegate {
     }
 }
 
+
+// MARK: - URL Handlers
+//
+extension SPAppDelegate {
+
+    /// Opens the Note associated with a given URL instance, when possible
+    ///
+    @objc
+    func handleOpenNote(url: NSURL) -> Bool {
+        guard let simperiumKey = url.interlinkSimperiumKey, let note = simperium.notesBucket.object(forKey: simperiumKey) as? Note else {
+            return false
+        }
+
+        let editor = SPNoteEditorViewController()
+        editor.update(note)
+        navigationController.setViewControllers([noteListViewController, editor], animated: true)
+
+        return true
+    }
+}
+
+
+// MARK: - UIViewControllerRestoration
+//
 @objc
 extension SPAppDelegate: UIViewControllerRestoration {
     static let tagsListIdentifier = SPTagsListViewController.classNameWithoutNamespaces

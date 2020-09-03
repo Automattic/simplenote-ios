@@ -1136,15 +1136,20 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    BOOL containsHttpScheme = [URL containsHttpScheme];
-
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
+{
     // When `performsAggressiveLinkWorkaround` is true we'll get link interactions via `receivedInteractionWithURL:`
-    if (containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
+    if (URL.containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
         [self presentSafariViewControllerAtURL:URL];
+        return NO;
     }
 
-    return !containsHttpScheme;
+    if (URL.isSimplenoteURL) {
+        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
+        return NO;
+    }
+
+    return YES;
 }
 
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url
