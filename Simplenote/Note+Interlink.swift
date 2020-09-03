@@ -12,10 +12,7 @@ extension Note {
             return nil
         }
 
-        let shortened = title
-            .prefix(SimplenoteConstants.simplenoteInterlinkMaxTitleLength)
-            .trimmingCharacters(in: .whitespaces)
-
+        let shortened = title.truncateWords(upTo: SimplenoteConstants.simplenoteInterlinkMaxTitleLength)
         let url = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + key
         return "[" + shortened + "](" + url + ")"
     }
