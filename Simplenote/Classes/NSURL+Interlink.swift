@@ -26,6 +26,6 @@ extension NSURL {
             return nil
         }
 
-        return absoluteString?.replacingOccurrences(of: "/", with: "")
+        return path?.replacingOccurrences(of: "/", with: "")
     }
 }
