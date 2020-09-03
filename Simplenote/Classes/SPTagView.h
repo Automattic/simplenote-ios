@@ -34,9 +34,7 @@
     UIScrollView *autoCompleteScrollView;
     
     SPTagEntryField *addTagField;
-    
-    id<SPTagViewDelegate> tagDelegate;
-    
+        
     NSMutableArray *tagPills;
     NSArray *tagCompletionPills;
 }
