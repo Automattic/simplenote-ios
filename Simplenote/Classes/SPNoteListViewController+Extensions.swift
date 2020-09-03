@@ -582,7 +582,7 @@ private extension SPNoteListViewController {
     }
 
     func deletedContextActions(for note: Note) -> [UIContextualAction] {
-        [
+        return [
             UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
