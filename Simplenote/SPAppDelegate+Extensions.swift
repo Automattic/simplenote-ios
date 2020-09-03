@@ -29,12 +29,12 @@ extension SPAppDelegate {
     ///
     @objc
     func handleOpenNote(url: NSURL) -> Bool {
-        guard let simperiumKey = url.interlinkSimperiumKey, let note = simperium.notesBucket.object(forKey: simperiumKey) as? Note else {
+        guard let note = simperium.loadNote(for: url) else {
             return false
         }
 
         let editor = SPNoteEditorViewController()
-        editor.update(note)
+        editor.display(note)
         navigationController.setViewControllers([noteListViewController, editor], animated: true)
 
         return true

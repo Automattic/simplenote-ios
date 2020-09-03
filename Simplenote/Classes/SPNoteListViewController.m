@@ -439,7 +439,7 @@
     [self.searchBar resignFirstResponder];
 
     SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    [editor updateNote:note];
+    [editor displayNote:note];
 
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];

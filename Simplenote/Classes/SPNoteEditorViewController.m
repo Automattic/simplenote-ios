@@ -589,8 +589,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
      ];
 }
 
-- (void)updateNote:(Note *)note {
-    
+- (void)displayNote:(Note *)note
+{
     if (!note) {
         _noteEditorTextView.text = nil;
         return;
@@ -1338,7 +1338,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
 
         [UIView animateWithDuration:0.2
@@ -1358,7 +1358,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     } else {
 
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
     }
     
