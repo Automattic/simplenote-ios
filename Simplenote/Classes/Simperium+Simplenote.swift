@@ -32,6 +32,13 @@ extension Simperium {
             return nil
         }
 
+        return loadNote(simperiumKey: simperiumKey)
+    }
+
+    /// Returns the Note with the specified SimperiumKey
+    ///
+    @objc(loadNoteWithSimperiumKey:)
+    func loadNote(simperiumKey: String) -> Note? {
         return notesBucket.object(forKey: simperiumKey) as? Note
     }
 }
