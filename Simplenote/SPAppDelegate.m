@@ -826,11 +826,6 @@
     // If root tag list is currently being viewed, push All Notes instead
     [self.sidebarViewController hideSidebarWithAnimation:NO];
     
-    // On iPhone, make sure a note isn't currently being edited
-    if (self.navigationController.visibleViewController == _noteEditorViewController) {
-        [self.navigationController popViewControllerAnimated:NO];
-    }
-    
     // Little trick to postpone until next run loop to ensure controllers have a chance to pop
     double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
