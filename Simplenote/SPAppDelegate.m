@@ -805,10 +805,7 @@
 
 - (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
 {
-    NSString *bucketName = NSStringFromClass([Note class]);
-    SPBucket *noteBucket = [_simperium bucketForName:bucketName];
-    Note *note = [noteBucket objectForKey:uuid];
-
+    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid]
     if (note == nil) {
         return;
     }
