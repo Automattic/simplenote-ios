@@ -40,11 +40,15 @@ extension SPAppDelegate {
             return false
         }
 
-        let editor = SPNoteEditorViewController()
-        editor.display(note)
-        navigationController.setViewControllers([noteListViewController, editor], animated: true)
+        let editorViewController = SPNoteEditorViewController()
+        editorViewController.display(note)
+        replaceNoteEditor(editorViewController)
 
         return true
+    }
+
+    func replaceNoteEditor(_ editorViewController: SPNoteEditorViewController) {
+        navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
     }
 }
 
