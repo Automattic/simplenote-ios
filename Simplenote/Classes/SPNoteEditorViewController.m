@@ -82,6 +82,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self = [super init];
     if (self) {
 
+        // State Restoration
+        [self configureStateRestoration];
+
         // Editor
         [self configureTextView];
         [self configureBottomView];

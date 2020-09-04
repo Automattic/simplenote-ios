@@ -5,6 +5,14 @@ import Foundation
 //
 extension SPNoteEditorViewController {
 
+    /// Sets up the State Restoration
+    ///
+    @objc
+    func configureStateRestoration() {
+        restorationIdentifier = Self.defaultRestorationIdentifier
+        restorationClass = SPAppDelegate.self
+    }
+
     /// Sets up the Bottom View:
     /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
     ///
