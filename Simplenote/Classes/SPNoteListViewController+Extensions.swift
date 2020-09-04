@@ -502,7 +502,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         switch notesListController.object(at: indexPath) {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-            open(note, from: indexPath, animated: true)
+            open(note, animated: true)
         case let tag as Tag:
             refreshSearchText(appendFilterFor: tag)
         default:

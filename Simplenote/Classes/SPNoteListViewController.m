@@ -316,7 +316,7 @@
     // the editor view will create a note. Passing no note ensures that an emty note isn't added
     // to the FRC before the animation occurs
     [self.tableView setEditing:NO];   
-    [self openNote:nil fromIndexPath:nil animated:YES];
+    [self openNote:nil animated:YES];
 }
 
 - (void)sidebarButtonAction:(id)sender {
@@ -427,10 +427,10 @@
         return;
     }
 
-    [self openNote:note fromIndexPath:nil animated:animated];
+    [self openNote:note animated:animated];
 }
 
-- (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+- (void)openNote:(Note *)note animated:(BOOL)animated
 {
     [SPTracker trackListNoteOpened];
 
