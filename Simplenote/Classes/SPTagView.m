@@ -134,15 +134,6 @@
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (id<SPTagViewDelegate>)tagDelegate {
-    
-    return tagDelegate;
-}
-- (void)setTagDelegate:(id<SPTagViewDelegate>)newDelegate {
-    
-    tagDelegate = newDelegate;
-}
-
 - (BOOL)setupWithTagNames:(NSArray *)tagNames {
 
     if (addTagField.isFirstResponder) {
@@ -178,8 +169,9 @@
     [tagPills removeObject:pill];
     [pill removeFromSuperview];
     
-    if ([tagDelegate respondsToSelector:@selector(tagView:didRemoveTagName:)])
-        [tagDelegate tagView:self didRemoveTagName:pill.tagStub.tag];
+    if ([self.tagDelegate respondsToSelector:@selector(tagView:didRemoveTagName:)]) {
+        [self.tagDelegate tagView:self didRemoveTagName:pill.tagStub.tag];
+    }
     
     [self setNeedsLayout];
 }
@@ -295,8 +287,8 @@
     
     [self hideActiveDeletionPill];
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewWillBeginEditing:)]) {
-        [tagDelegate tagViewWillBeginEditing:self];
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewWillBeginEditing:)]) {
+        [self.tagDelegate tagViewWillBeginEditing:self];
     }
     
     [self updateAutoCompletionsForString:textField.text];
@@ -304,8 +296,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if ([self->tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
-            [self->tagDelegate tagViewDidBeginEditing:self];
+        if ([self.tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
+            [self.tagDelegate tagViewDidBeginEditing:self];
         
         [self scrollEntryFieldToVisible:YES];
     });
@@ -340,8 +332,8 @@
         [self scrollEntryFieldToVisible:YES];
     });
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)]) {
-        [tagDelegate tagViewDidChange:self];
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewDidChange:)]) {
+        [self.tagDelegate tagViewDidChange:self];
     }
     
     [self updateAutoCompletionsForString:tagTextField.text];
@@ -363,8 +355,9 @@
     [self hideActiveDeletionPill];
     
     [self processTextInFieldToTag];
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidEndEditing:)])
-        [tagDelegate tagViewDidEndEditing:self];
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewDidEndEditing:)]) {
+        [self.tagDelegate tagViewDidEndEditing:self];
+    }
 }
 
 - (void)processTextInFieldToTag {
@@ -374,10 +367,10 @@
     BOOL containsEmailAddress = [name containsEmailAddress];
     
 
-    if (name.length > 0 && [tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {
+    if (name.length > 0 && [self.tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {
         
         [self newTagPillWithString:name];
-        [tagDelegate tagView:self didCreateTagName:name];
+        [self.tagDelegate tagView:self didCreateTagName:name];
         
     } else {
         
