@@ -46,27 +46,19 @@ extension SPAppDelegate {
 //
 @objc
 extension SPAppDelegate: UIViewControllerRestoration {
-    static let tagsListIdentifier = SPTagsListViewController.classNameWithoutNamespaces
-    static let noteListIdentifier = SPNoteListViewController.classNameWithoutNamespaces
-    static let noteEditorIdentifier = SPNoteEditorViewController.classNameWithoutNamespaces
-    static let sidebarIdentifier = SPSidebarContainerViewController.classNameWithoutNamespaces
-    static let navControllerIdentifier = SPNavigationController.classNameWithoutNamespaces
 
     @objc
     func configureStateRestoration() {
-        tagListViewController.restorationIdentifier = SPAppDelegate.tagsListIdentifier
+        tagListViewController.restorationIdentifier = SPTagsListViewController.defaultRestorationIdentifier
         tagListViewController.restorationClass = SPAppDelegate.self
 
-        noteListViewController.restorationIdentifier = SPAppDelegate.noteListIdentifier
+        noteListViewController.restorationIdentifier = SPNoteListViewController.defaultRestorationIdentifier
         noteListViewController.restorationClass = SPAppDelegate.self
 
-        noteEditorViewController.restorationIdentifier = SPAppDelegate.noteEditorIdentifier
-        noteEditorViewController.restorationClass = SPAppDelegate.self
-
-        navigationController.restorationIdentifier = SPAppDelegate.navControllerIdentifier
+        navigationController.restorationIdentifier = SPNavigationController.defaultRestorationIdentifier
         navigationController.restorationClass = SPAppDelegate.self
 
-        sidebarViewController.restorationIdentifier = SPAppDelegate.sidebarIdentifier
+        sidebarViewController.restorationIdentifier = SPSidebarContainerViewController.defaultRestorationIdentifier
         sidebarViewController.restorationClass = SPAppDelegate.self
     }
 
@@ -80,26 +72,25 @@ extension SPAppDelegate: UIViewControllerRestoration {
             return nil
         }
 
-        if component == tagsListIdentifier {
+        switch component {
+        case SPTagsListViewController.defaultRestorationIdentifier:
             return appDelegate.tagListViewController
-        }
 
-        if component == noteListIdentifier {
+        case SPNoteListViewController.defaultRestorationIdentifier:
             return appDelegate.noteListViewController
-        }
 
-        if component == noteEditorIdentifier {
-            return appDelegate.noteEditorViewController
-        }
+        case SPNoteEditorViewController.defaultRestorationIdentifier:
+            // Yea! always a new instance (we're not keeping a reference to the active editor anymore)
+            return SPNoteEditorViewController()
 
-        if component == navControllerIdentifier {
+        case SPNavigationController.defaultRestorationIdentifier:
             return appDelegate.navigationController
-        }
 
-        if component == sidebarIdentifier {
+        case SPSidebarContainerViewController.defaultRestorationIdentifier:
             return appDelegate.sidebarViewController
-        }
 
-        return nil
+        default:
+            return nil
+        }
     }
 }
