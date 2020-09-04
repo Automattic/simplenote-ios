@@ -186,7 +186,6 @@
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
 }
 
 
@@ -425,18 +424,7 @@
 }
 
 
-#pragma mark ================================================================================
-#pragma mark Theme's
-#pragma mark ================================================================================
-
-- (void)themeWillChange
-{
-    // Save current note if editing
-    if (_noteEditorViewController.currentNote) {
-        [_noteEditorViewController save];
-        [_noteEditorViewController.noteEditorTextView endEditing:YES];
-    }
-}
+#pragma mark - Theme's
 
 - (void)themeDidChange
 {

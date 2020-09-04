@@ -241,12 +241,25 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)startListeningToThemeNotifications {
+- (void)startListeningToThemeNotifications
+{
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)themeDidChange {
+- (void)themeWillChange
+{
+    if (self.currentNote == nil) {
+        return;
+    }
+
+    [self save];
+    [self.noteEditorTextView endEditing:YES];
+}
+
+- (void)themeDidChange
+{
     [self applyStyle];
 }
 
