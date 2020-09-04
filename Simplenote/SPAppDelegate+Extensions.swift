@@ -18,6 +18,13 @@ extension SPAppDelegate {
 
         return name
     }
+
+    /// Returns the visible EditorViewController (when applicable!)
+    ///
+    @objc
+    var noteEditorViewController: SPNoteEditorViewController? {
+        navigationController.firstChild(ofType: SPNoteEditorViewController.self)
+    }
 }
 
 

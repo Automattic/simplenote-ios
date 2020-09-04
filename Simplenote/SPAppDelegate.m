@@ -153,7 +153,6 @@
 
     self.tagListViewController = [SPTagsListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
-    self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
 
@@ -534,11 +533,11 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 
-        [self->_simperium signOutAndRemoveLocalData:YES completion:^{
-			        
-            [self->_noteEditorViewController clearNote];
-            self->_selectedTag = nil;
-            [self->_noteListViewController update];
+        [self.simperium signOutAndRemoveLocalData:YES completion:^{
+
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            self.selectedTag = nil;
+            [self.noteListViewController update];
 			
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
@@ -559,8 +558,8 @@
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
-                [self->_simperium authenticateIfNecessary];
-                self->_bSigningUserOut = NO;
+                [self.simperium authenticateIfNecessary];
+                self.bSigningUserOut = NO;
 			}];
 		}];
     });
@@ -619,8 +618,8 @@
         switch (change) {
             case SPBucketChangeTypeUpdate:
             {
-                if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-                    [_noteEditorViewController didReceiveNewContent];
+                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                    [self.noteEditorViewController didReceiveNewContent];
                 }
                 Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
@@ -634,8 +633,8 @@
                 break;
 			case SPBucketChangeTypeDelete:
             {
-                if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-					[_noteEditorViewController didDeleteCurrentNote];
+                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+					[self.noteEditorViewController didDeleteCurrentNote];
 				}
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }
@@ -667,8 +666,8 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         for (NSString *key in keys) {
-            if ([key isEqualToString: _noteEditorViewController.currentNote.simperiumKey]) {
-                [_noteEditorViewController willReceiveNewContent];
+            if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                [self.noteEditorViewController willReceiveNewContent];
 			}
         }
     }
@@ -677,8 +676,8 @@
 - (void)bucket:(SPBucket *)bucket didReceiveObjectForKey:(NSString *)key version:(NSString *)version data:(NSDictionary *)data
 {
     if ([bucket.name isEqualToString:@"Note"]) {
-        if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-            [_noteEditorViewController didReceiveVersion:version data:data];
+        if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+            [self.noteEditorViewController didReceiveVersion:version data:data];
 		}
     }
 }
@@ -805,7 +804,7 @@
 
 - (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
 {
-    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid]
+    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid];
     if (note == nil) {
         return;
     }
