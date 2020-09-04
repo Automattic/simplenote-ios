@@ -73,35 +73,38 @@ extension SPAppDelegate: UIViewControllerRestoration {
         sidebarViewController.restorationClass = SPAppDelegate.self
     }
 
-    @objc
-    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+    func viewController(restorationIdentifier: String) -> UIViewController? {
+        switch restorationIdentifier {
+        case tagListViewController.restorationIdentifier:
+            return tagListViewController
 
-        guard
-            let appDelegate = UIApplication.shared.delegate as? SPAppDelegate,
-            let component = identifierComponents.last
-        else {
-            return nil
-        }
-
-        switch component {
-        case SPTagsListViewController.defaultRestorationIdentifier:
-            return appDelegate.tagListViewController
-
-        case SPNoteListViewController.defaultRestorationIdentifier:
-            return appDelegate.noteListViewController
+        case noteListViewController.restorationIdentifier:
+            return noteListViewController
 
         case SPNoteEditorViewController.defaultRestorationIdentifier:
             // Yea! always a new instance (we're not keeping a reference to the active editor anymore)
             return SPNoteEditorViewController()
 
-        case SPNavigationController.defaultRestorationIdentifier:
-            return appDelegate.navigationController
+        case navigationController.restorationIdentifier:
+            return navigationController
 
-        case SPSidebarContainerViewController.defaultRestorationIdentifier:
-            return appDelegate.sidebarViewController
+        case sidebarViewController.restorationIdentifier:
+            return sidebarViewController
 
         default:
             return nil
         }
+    }
+
+    @objc
+    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        guard
+            let appDelegate = UIApplication.shared.delegate as? SPAppDelegate,
+            let restorationIdentifier = identifierComponents.last
+        else {
+            return nil
+        }
+
+        return appDelegate.viewController(restorationIdentifier: restorationIdentifier)
     }
 }
