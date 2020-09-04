@@ -24,17 +24,6 @@ extension Simperium {
 //
 extension Simperium {
 
-    /// Returns the Note associated with the specified URL
-    ///
-    @objc
-    func loadNote(for url: NSURL) -> Note? {
-        guard let simperiumKey = url.interlinkSimperiumKey else {
-            return nil
-        }
-
-        return loadNote(simperiumKey: simperiumKey)
-    }
-
     /// Returns the Note with the specified SimperiumKey
     ///
     @objc(loadNoteWithSimperiumKey:)

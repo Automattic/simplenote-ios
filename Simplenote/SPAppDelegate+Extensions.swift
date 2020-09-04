@@ -36,7 +36,7 @@ extension SPAppDelegate {
     ///
     @objc
     func handleOpenNote(url: NSURL) -> Bool {
-        guard let note = simperium.loadNote(for: url) else {
+        guard let simperiumKey = url.interlinkSimperiumKey, let note = simperium.loadNote(simperiumKey: simperiumKey) else {
             return false
         }
 
