@@ -634,8 +634,8 @@
 			case SPBucketChangeTypeDelete:
             {
                 if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
-					[self.noteEditorViewController didDeleteCurrentNote];
-				}
+                    [self.noteEditorViewController didDeleteCurrentNote];
+                }
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }
 				break;
@@ -668,7 +668,7 @@
         for (NSString *key in keys) {
             if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
                 [self.noteEditorViewController willReceiveNewContent];
-			}
+            }
         }
     }
 }
@@ -678,7 +678,7 @@
     if ([bucket.name isEqualToString:@"Note"]) {
         if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
             [self.noteEditorViewController didReceiveVersion:version data:data];
-		}
+        }
     }
 }
 
