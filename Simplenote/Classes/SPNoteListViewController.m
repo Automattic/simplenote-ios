@@ -438,20 +438,20 @@
     // Why: https://github.com/Automattic/simplenote-ios/issues/616
     [self.searchBar resignFirstResponder];
 
-    // Failsafe:
-    // We were getting (a whole lot!) of crash reports with the exception
-    // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
-    // as a safety net. Ref. Issue #345
-    if (self.navigationController.visibleViewController != self) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    }
-
     // Always a new Editor!
     SPNoteEditorViewController *editor = [SPNoteEditorViewController new];
     [editor displayNote:note];
 
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];
+    }
+
+    // Failsafe:
+    // We were getting (a whole lot!) of crash reports with the exception
+    // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
+    // as a safety net. Ref. Issue #345
+    if (self.navigationController.visibleViewController != self) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
 
     [self.navigationController pushViewController:editor animated:animated];
