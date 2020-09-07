@@ -45,6 +45,8 @@
 + (void)trackListNoteOpened;
 + (void)trackListTrashEmptied;
 + (void)trackListNotesSearched;
++ (void)trackListPinToggled;
++ (void)trackListCopiedInternalLink;
 + (void)trackListTagViewed;
 + (void)trackListUntaggedViewed;
 + (void)trackTrashViewed;

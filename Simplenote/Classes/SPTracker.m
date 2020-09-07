@@ -164,6 +164,16 @@
     [self trackAutomatticEventWithName:@"list_notes_searched" properties:nil];
 }
 
++ (void)trackListPinToggled
+{
+    [self trackAutomatticEventWithName:@"list_note_toggled_pin" properties:nil];
+}
+
++ (void)trackListCopiedInternalLink
+{
+    [self trackAutomatticEventWithName:@"list_copied_internal_link" properties:nil];
+}
+
 + (void)trackListTagViewed
 {
     [self trackAutomatticEventWithName:@"list_tag_viewed" properties:nil];

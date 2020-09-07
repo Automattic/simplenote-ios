@@ -144,6 +144,12 @@
         return;
     }
 
+    if (targetURL.isSimplenoteURL) {
+        NSLog(@"TODO: Implement Interlinking navigation Support!");
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
     [self presentViewController:sfvc animated:YES completion:nil];
 

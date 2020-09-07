@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)notes;
 - (NSArray *)tags;
 
+
+#pragma mark - Tags
+
 - (NSArray *)notesWithTag:(Tag *)tag;
 - (void)editTag:(Tag *)tag title:(NSString *)newTitle;
 - (BOOL)removeTagName:(NSString *)tagName;
@@ -28,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (Tag *)tagForName:(NSString *)tagName;
 - (void)moveTagFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 
+
+#pragma mark - Notes
+
+- (void)togglePinnedStateOfNote:(Note *)note;
 - (void)trashNote:(Note *)note;
 - (void)restoreNote:(Note *)note;
 - (void)permenentlyDeleteNote:(Note *)note;

@@ -1,6 +1,7 @@
 4.24
 -----
 -   Fixed a stability issue in the Notes Editor
+-   Swiping a Note in the List now reveals the Copy Internal Link Action
 
 4.23
 -----
