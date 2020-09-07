@@ -8,13 +8,11 @@
 #import <Foundation/Foundation.h>
 
 
-@interface SPTagStub : NSObject {
-}
-
+@interface SPTagStub : NSObject
 
 #pragma mark - Constructor
-- (id)initWithTag:(NSString *)aTag;
-- (id)initWithTag:(NSString *)aTag displayText:(NSString *)aDisplayText;
+- (instancetype)initWithTag:(NSString *)aTag;
+- (instancetype)initWithTag:(NSString *)aTag displayText:(NSString *)aDisplayText;
 
 
 #pragma mark - Properties

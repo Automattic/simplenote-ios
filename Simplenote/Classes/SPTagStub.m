@@ -7,28 +7,29 @@
 
 #import "SPTagStub.h"
 #import "NSString+Metadata.h"
+#import "Simplenote-Swift.h"
+
 
 @implementation SPTagStub
 
-
 #pragma mark - Constructor
 
-- (id)initWithTag:(NSString *)aTag {
+- (instancetype)initWithTag:(NSString *)aTag {
     self = [super init];
     if (self) {
         self.tag = aTag;
         self.displayText = nil;
-        self.isEmailTag = [aTag containsEmailAddress];
+        self.isEmailTag = [aTag isValidEmailAddress];
     }
     return self;
 }
 
-- (id)initWithTag:(NSString *)aTag displayText:(NSString *)aDisplayText {
+- (instancetype)initWithTag:(NSString *)aTag displayText:(NSString *)aDisplayText {
     self = [super init];
     if (self) {
         self.tag = aTag;
         self.displayText = aDisplayText;
-        self.isEmailTag = [aTag containsEmailAddress];
+        self.isEmailTag = [aTag isValidEmailAddress];
     }
     return self;
 }
