@@ -1,3 +1,7 @@
+4.25
+-----
+-   Fixed a bug that prevented adding collaborators with email addresses that contain new TLDs
+
 4.24
 -----
 -   Fixed a stability issue in the Notes Editor
