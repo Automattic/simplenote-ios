@@ -439,7 +439,7 @@
     [self.searchBar resignFirstResponder];
 
     // Always a new Editor!
-    SPNoteEditorViewController *editor = [SPNoteEditorViewController new];
+    SPNoteEditorViewController *editor = [[EditorFactory shared] build];
     [editor displayNote:note];
 
     if (self.isSearchActive) {

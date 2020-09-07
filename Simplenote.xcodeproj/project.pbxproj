@@ -240,6 +240,7 @@
 		B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575736B232D454300443C2E /* UIColor+Helpers.swift */; };
 		B576076824CFA2250097D295 /* NSStringSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */; };
 		B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */; };
+		B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5796548250684EC00DFD6F7 /* EditorFactory.swift */; };
 		B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57DE27725013C6600B4D435 /* Simperium+Simplenote.swift */; };
 		B57DE27A2501806B00B4D435 /* StringSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */; };
 		B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */; };
@@ -596,6 +597,7 @@
 		B575736B232D454300443C2E /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Helpers.swift"; path = "Classes/UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5796548250684EC00DFD6F7 /* EditorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditorFactory.swift; path = Classes/EditorFactory.swift; sourceTree = "<group>"; };
 		B57DE27725013C6600B4D435 /* Simperium+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Simperium+Simplenote.swift"; path = "Classes/Simperium+Simplenote.swift"; sourceTree = "<group>"; };
 		B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSimplenoteTests.swift; sourceTree = "<group>"; };
 		B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+ImageRepresentation.swift"; path = "Classes/UIView+ImageRepresentation.swift"; sourceTree = "<group>"; };
@@ -1658,6 +1660,7 @@
 				B56C8CA1234CEAF100FE55F4 /* SPTagsListViewController.xib */,
 				17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */,
 				17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */,
+				B5796548250684EC00DFD6F7 /* EditorFactory.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2172,6 +2175,7 @@
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B513FB2622EF6A7400B178AC /* VSTheme+Keys.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
+				B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */,
 				B5476BB223D88F49000E7723 /* SPTagTableViewCell.swift in Sources */,
 				B52AC186233587F8007B2E75 /* UITraitCollection+Simplenote.swift in Sources */,
 				B56A696922F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift in Sources */,

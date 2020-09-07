@@ -364,7 +364,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let editorViewController = SPNoteEditorViewController()
+        let editorViewController = EditorFactory.shared.build()
         editorViewController.display(note)
         editorViewController.isPreviewing = true
         editorViewController.searchString = searchText

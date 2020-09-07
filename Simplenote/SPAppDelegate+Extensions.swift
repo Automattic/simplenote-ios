@@ -53,7 +53,7 @@ extension SPAppDelegate {
             return false
         }
 
-        let editorViewController = SPNoteEditorViewController()
+        let editorViewController = EditorFactory.shared.build()
         editorViewController.display(note)
         replaceNoteEditor(editorViewController)
 
@@ -69,6 +69,8 @@ extension SPAppDelegate: UIViewControllerRestoration {
 
     @objc
     func configureStateRestoration() {
+        EditorFactory.shared.restorationClass = SPAppDelegate.self
+
         tagListViewController.restorationIdentifier = SPTagsListViewController.defaultRestorationIdentifier
         tagListViewController.restorationClass = SPAppDelegate.self
 
@@ -92,7 +94,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
 
         case SPNoteEditorViewController.defaultRestorationIdentifier:
             // Yea! always a new instance (we're not keeping a reference to the active editor anymore)
-            return SPNoteEditorViewController()
+            return EditorFactory.shared.build()
 
         case navigationController.restorationIdentifier:
             return navigationController
