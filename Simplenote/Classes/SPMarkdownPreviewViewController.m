@@ -145,8 +145,8 @@
     }
 
     if (targetURL.isSimplenoteURL) {
-        NSLog(@"TODO: Implement Interlinking navigation Support!");
         decisionHandler(WKNavigationActionPolicyCancel);
+        [[UIApplication sharedApplication] openURL:targetURL options:@{} completionHandler:nil];
         return;
     }
 
