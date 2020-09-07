@@ -147,7 +147,7 @@
     }
     
     // Make sure email addresses don't get added as proper tags
-    if ([tagName containsEmailAddress]) {
+    if ([tagName isValidEmailAddress]) {
         return nil;
     }
 
