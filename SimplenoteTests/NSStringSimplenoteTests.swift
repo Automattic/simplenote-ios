@@ -56,4 +56,22 @@ class NSStringSimplenoteTests: XCTestCase {
         XCTAssertEqual(hashA, hashC)
         XCTAssertEqual(hashB, hashC)
     }
+
+    /// Verifies that `isValidEmailAddress` returns  *true* when the receiver contains an email address with a non-standard TLD
+    ///
+    func testIsValidEmailAddressReturnsTrueWhenStringContainsNewTLDs() {
+        XCTAssertTrue("test@test.coffee".isValidEmailAddress)
+        XCTAssertTrue("test@test.email".isValidEmailAddress)
+        XCTAssertTrue("test@test.education".isValidEmailAddress)
+    }
+
+    /// Verifies that `isValidEmailAddress` returns  **false** whenever the receiver does not contain a valid email address
+    ///
+    func testIsValidEmailAddressReturnsFalseForMalformedEmails() {
+        XCTAssertFalse("@test".isValidEmailAddress)
+        XCTAssertFalse("@test.com".isValidEmailAddress)
+        XCTAssertFalse("test.com".isValidEmailAddress)
+        XCTAssertFalse("test.test.coffee".isValidEmailAddress)
+    }
+
 }

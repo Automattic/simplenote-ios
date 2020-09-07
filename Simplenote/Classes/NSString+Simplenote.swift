@@ -35,4 +35,12 @@ extension NSString {
     var isValidTagName: Bool {
         byEncodingAsTagHash.count <= SimplenoteConstants.maximumTagLength
     }
+
+    /// Indicates if the receiver contains a valid email address
+    ///
+    @objc
+    var isValidEmailAddress: Bool {
+        let predicate = NSPredicate.predicateForEmailValidation()
+        return predicate.evaluate(with: self)
+    }
 }
