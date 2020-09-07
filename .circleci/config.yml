@@ -26,6 +26,12 @@ jobs:
       name: ios/default
       xcode-version: "11.6.0"
     steps:
+      - run:
+          name: Install other tools
+          command: |
+            brew install imagemagick
+            brew install ghostscript
+            curl -sL https://sentry.io/get-cli/ | bash
       - git/shallow-checkout
       - fix-path
       - ios/install-dependencies:
