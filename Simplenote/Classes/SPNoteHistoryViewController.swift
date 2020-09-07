@@ -11,7 +11,6 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var dismissButton: UIButton!
 
     private let controller: SPNoteHistoryController
-    private var versions: [SPHistoryVersion] = []
 
     /// Designated initialize
     ///
@@ -36,21 +35,20 @@ class SPNoteHistoryViewController: UIViewController {
         super.viewDidLoad()
 
         refreshStyle()
+        configureSlider()
         configureAccessibility()
-        listenForSliderValueChanges()
 
         startListeningToNotifications()
+        startListeningForControllerChanges()
+        startListeningForSliderValueChanges()
 
-        controller.observer = { [weak self] state in
-            self?.update(with: state)
-        }
         controller.onViewLoad()
 
         trackScreen()
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Styling
 //
 private extension SPNoteHistoryViewController {
     func refreshStyle() {
@@ -82,7 +80,7 @@ private extension SPNoteHistoryViewController {
         restoreButton.setBackgroundImage(UIColor.simplenoteDisabledButtonBackgroundColor.dynamicImageRepresentation(), for: .disabled)
         restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
 
-        restoreButton.setTitle(NSLocalizedString("Restore Note", comment: "Restore a note to a previous version"), for: .normal)
+        restoreButton.setTitle(Localization.restoreButtonTitle, for: .normal)
     }
 
     func styleDismissButton() {
@@ -103,31 +101,32 @@ private extension SPNoteHistoryViewController {
             activityIndicator.style = SPUserInterface.isDark ? .white : .gray
         }
     }
+}
 
+// MARK: - Updating UI
+//
+private extension SPNoteHistoryViewController {
     func update(with state: SPNoteHistoryController.State) {
         switch state {
-        case .loading:
-            setMainContentVisible(false)
-            setActivityIndicatorVisible(true)
-            setErrorMessageVisible(false)
+        case .version(let versionNumber, let date, let isRestorable):
+            switchToMainContent(isLoading: false)
 
-            setAccessibilityFocus(activityIndicator)
+            dateLabel.text = date
+            restoreButton.isEnabled = isRestorable
 
-        case .results(let versions):
-            setMainContentVisible(true)
-            setActivityIndicatorVisible(false)
-            setErrorMessageVisible(false)
+            updateSlider(withVersionNumber: versionNumber,
+                         accessibilityValue: date)
 
-            self.versions = versions
+        case .loadingVersion(let versionNumber):
+            switchToMainContent(isLoading: true)
 
-            configureSlider()
+            restoreButton.isEnabled = false
 
-            setAccessibilityFocus(slider)
+            updateSlider(withVersionNumber: versionNumber,
+                         accessibilityValue: Localization.activityIndicatorAccessibilityLabel)
 
         case .error(let text):
-            setMainContentVisible(false)
-            setActivityIndicatorVisible(false)
-            setErrorMessageVisible(true)
+            switchToErrorMessage()
 
             errorMessageLabel.text = text
 
@@ -135,44 +134,55 @@ private extension SPNoteHistoryViewController {
         }
     }
 
-    func update(withSliderValue value: Float) {
-        let index = Int(value)
-        let version = versions[index]
-
-        let dateString = controller.note.dateString(version.modificationDate, brief: false)
-
-        dateLabel.text = dateString
-        restoreButton.isEnabled = version.version != controller.note.versionInt
-        styleRestoreButton()
-
-        updateSliderAccessibilityValue(dateString)
-
-        controller.select(version: version)
+    func updateSlider(withVersionNumber versionNumber: Int, accessibilityValue: String?) {
+        slider.value = Float(versionNumber)
+        updateSliderAccessibilityValue(accessibilityValue)
+        setAccessibilityFocus(slider)
     }
 }
 
 // MARK: - Slider
 //
 private extension SPNoteHistoryViewController {
-    func listenForSliderValueChanges() {
+    func startListeningForSliderValueChanges() {
         slider.onSnappedValueChange = { [weak self] value in
-            self?.update(withSliderValue: value)
+            self?.controller.select(versionNumber: Int(value))
         }
     }
 
     func configureSlider() {
-        slider.minimumValue = 0.0
-        slider.maximumValue = Float(max(versions.count - 1, 0))
-        slider.value = slider.maximumValue
-        update(withSliderValue: slider.value)
+        let range = controller.versionRange
+        slider.minimumValue = Float(range.lowerBound)
+        slider.maximumValue = Float(range.upperBound)
     }
 }
 
 // MARK: - Updating content visibility
 //
 private extension SPNoteHistoryViewController {
-    func setMainContentVisible(_ isVisible: Bool) {
-        [dateLabel, slider, restoreButton].forEach {
+    func switchToMainContent(isLoading: Bool) {
+        setSliderAndActionButtonVisible(true)
+        setDateVisible(!isLoading)
+        setActivityIndicatorVisible(isLoading)
+
+        setErrorMessageVisible(false)
+    }
+
+    func switchToErrorMessage() {
+        setDateVisible(false)
+        setSliderAndActionButtonVisible(false)
+        setActivityIndicatorVisible(false)
+
+        setErrorMessageVisible(true)
+    }
+
+    func setDateVisible(_ isVisible: Bool) {
+        // We manipulate alpha to prevent content jumping because of re-layouting
+        dateLabel.alpha = isVisible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
+    }
+
+    func setSliderAndActionButtonVisible(_ isVisible: Bool) {
+        [slider, restoreButton].forEach {
             $0?.alpha = isVisible ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
         }
     }
@@ -203,7 +213,17 @@ private extension SPNoteHistoryViewController {
     }
 }
 
-// MARK: - Notifications
+// MARK: - Controller
+//
+private extension SPNoteHistoryViewController {
+    func startListeningForControllerChanges() {
+        controller.observer = { [weak self] state in
+            self?.update(with: state)
+        }
+    }
+}
+
+// MARK: - Theme Notifications
 //
 private extension SPNoteHistoryViewController {
     func startListeningToNotifications() {
@@ -241,16 +261,26 @@ extension SPNoteHistoryViewController {
     }
 
     private func setAccessibilityFocus(_ element: UIView) {
+        guard !element.accessibilityElementIsFocused() else {
+            return
+        }
         UIAccessibility.post(notification: .layoutChanged, argument: element)
     }
 
     private func configureAccessibility() {
-        dismissButton.accessibilityLabel = NSLocalizedString("Dismiss History", comment: "Accessibility label describing a button used to dismiss a history view of the note")
-        slider.accessibilityLabel = NSLocalizedString("Select a Version", comment: "Accessibility label describing a slider used to reset the current note to a previous version")
-        activityIndicator.accessibilityLabel = NSLocalizedString("Loading Versions", comment: "Accessibility label describing activity indicator loading note versions")
+        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+        slider.accessibilityLabel = Localization.sliderAccessibilityLabel
+        activityIndicator.accessibilityLabel = Localization.activityIndicatorAccessibilityLabel
     }
 
     private func updateSliderAccessibilityValue(_ value: String?) {
         slider.accessibilityValue = value
     }
+}
+
+private struct Localization {
+    static let restoreButtonTitle = NSLocalizedString("Restore Note", comment: "Restore a note to a previous version")
+    static let dismissAccessibilityLabel = NSLocalizedString("Dismiss History", comment: "Accessibility label describing a button used to dismiss a history view of the note")
+    static let sliderAccessibilityLabel = NSLocalizedString("Select a Version", comment: "Accessibility label describing a slider used to reset the current note to a previous version")
+    static let activityIndicatorAccessibilityLabel = NSLocalizedString("version-cell-fetching-accessibility-hint", comment: "Accessibility hint used when previous versions of a note are being fetched")
 }
