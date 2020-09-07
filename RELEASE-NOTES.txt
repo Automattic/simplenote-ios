@@ -1,3 +1,6 @@
+4.25
+-----
+ 
 4.24
 -----
 -   Fixed a stability issue in the Notes Editor
