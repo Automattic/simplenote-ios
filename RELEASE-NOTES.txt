@@ -6,6 +6,7 @@
 -   Fixed a stability issue in the Notes Editor
 -   Swiping a Note in the List now reveals the Copy Internal Link Action
 -   Long Pressing over an Internal Link now pushes the target Note
+-   Fixed a bug that affected Tag Edition with non ASCII keyboards
 
 4.23
 -----
