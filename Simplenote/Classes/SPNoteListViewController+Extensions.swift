@@ -610,12 +610,12 @@ private extension SPNoteListViewController {
                 self?.togglePinnedState(note: note)
                 completion(true)
             },
-
+/*
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInterlink(to: note)
                 completion(true)
             },
-
+*/
             UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
