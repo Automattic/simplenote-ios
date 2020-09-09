@@ -364,8 +364,8 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let editorViewController = SPAppDelegate.shared().noteEditorViewController
-        editorViewController.update(note)
+        let editorViewController = EditorFactory.shared.build()
+        editorViewController.display(note)
         editorViewController.isPreviewing = true
         editorViewController.searchString = searchText
 
@@ -502,7 +502,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         switch notesListController.object(at: indexPath) {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-            open(note, from: indexPath, animated: true)
+            open(note, animated: true)
         case let tag as Tag:
             refreshSearchText(appendFilterFor: tag)
         default:
@@ -610,12 +610,12 @@ private extension SPNoteListViewController {
                 self?.togglePinnedState(note: note)
                 completion(true)
             },
-
+/*
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInterlink(to: note)
                 completion(true)
             },
-
+*/
             UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
