@@ -74,7 +74,7 @@ jobs:
           path: Artifacts
           destination: Artifacts
   Release Build:
-    executor: 
+    executor:
       name: ios/default
       xcode-version: "11.6.0"
     environment:
@@ -84,7 +84,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run: 
+      - run:
           name: Copy Secrets
           command: bundle exec fastlane run configure_apply
       # Start: Swift Package Manager Workaround
@@ -92,16 +92,15 @@ jobs:
       - run: rm ~/.ssh/id_rsa
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       # END: Swift Package Manager Workaround
-      - run: 
+      - run:
           name: Install other tools
           command: |
-            brew unlink python@2
             brew install imagemagick
             brew install ghostscript
             curl -sL https://sentry.io/get-cli/ | bash
       - run:
           name: Build
-          command: | 
+          command: |
             APP_VERSION=$(cat ./config/Version.Public.xcconfig | grep "^VERSION_LONG" | cut -d "=" -f2)
             echo "export SLACK_FAILURE_MESSAGE=':red_circle: Build for Simplenote $APP_VERSION failed!'" >> $BASH_ENV
             echo "export SLACK_SUCCESS_MESSAGE=':tada: Simplenote $APP_VERSION has been deployed!'" >> $BASH_ENV
@@ -126,16 +125,16 @@ workflows:
             branches:
               ignore: /pull\/[0-9]+/
       - Installable Build:
-          requires: [Hold]  
+          requires: [Hold]
           filters:
             branches:
               ignore: /pull\/[0-9]+/
   Release Build:
     jobs:
-      - Release Build: 
+      - Release Build:
           filters:
             branches:
               ignore: /.*/
             tags:
-              only: /^\d+(\.\d+)*$/ 
+              only: /^\d+(\.\d+)*$/
 

@@ -181,7 +181,7 @@ extension SPNoteEditorViewController {
                 return
         }
 
-        update(note)
+        display(note)
     }
 }
 
