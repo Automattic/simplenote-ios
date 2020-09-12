@@ -1092,26 +1092,6 @@
 			name = Card;
 			sourceTree = "<group>";
 		};
-		B504D4DB23D1FBB400AEED27 /* ResultsController */ = {
-			isa = PBXGroup;
-			children = (
-				B504D4DC23D1FBD200AEED27 /* Internal */,
-				B5421F3723CE79F6004DDC19 /* ResultsController.swift */,
-				B504D4DF23D2018800AEED27 /* ResultsObjectChange.swift */,
-				B504D4E123D201C300AEED27 /* ResultsSectionChange.swift */,
-				B5421F3923CE7A02004DDC19 /* UITableView+ResultsController.swift */,
-			);
-			name = ResultsController;
-			sourceTree = "<group>";
-		};
-		B504D4DC23D1FBD200AEED27 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				B5421F3323CE79D7004DDC19 /* FetchedResultsControllerDelegateWrapper.swift */,
-			);
-			name = Internal;
-			sourceTree = "<group>";
-		};
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
