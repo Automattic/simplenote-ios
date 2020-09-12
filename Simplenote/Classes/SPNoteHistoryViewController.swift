@@ -282,5 +282,5 @@ private struct Localization {
     static let restoreButtonTitle = NSLocalizedString("Restore Note", comment: "Restore a note to a previous version")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss History", comment: "Accessibility label describing a button used to dismiss a history view of the note")
     static let sliderAccessibilityLabel = NSLocalizedString("Select a Version", comment: "Accessibility label describing a slider used to reset the current note to a previous version")
-    static let activityIndicatorAccessibilityLabel = NSLocalizedString("version-cell-fetching-accessibility-hint", comment: "Accessibility hint used when previous versions of a note are being fetched")
+    static let activityIndicatorAccessibilityLabel = NSLocalizedString("Fetching Version", comment: "Accessibility hint used when previous versions of a note are being fetched")
 }
