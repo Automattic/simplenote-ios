@@ -1,3 +1,1 @@
-Åtgärdade en bugg som påverkade resurstilläggets utseende.
-Åtgärdade RTL-stöd på autentiseringsskärmarna.
-Åtgärdade RTL-stöd i taggredigeraren.
+- Teckengränsen för etiketter uppdaterades till 256 tecken

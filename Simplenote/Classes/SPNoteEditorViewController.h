@@ -4,7 +4,10 @@
 #import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
 #import <Simperium/Simperium.h>
+
+
 @class Note;
+@class SPBlurEffectView;
 @class SPTextView;
 @class SPEditorTextView;
 @class SPOutsideTouchView;
@@ -22,7 +25,6 @@
     BOOL bShouldDelete;
     BOOL beditingTags;
     BOOL bActionSheetVisible;
-    BOOL bVoiceoverEnabled;
     
     CGAffineTransform navigationBarTransform;
     CGFloat scrollPosition;
@@ -43,6 +45,9 @@
     UILabel *searchDetailLabel;
 }
 
+// Navigation Bar
+@property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
+
 // Navigation Back Button
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -57,23 +62,32 @@
 @property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
+// History
 @property (nonatomic, weak) UIViewController *historyViewController;
 @property (nonatomic, weak) SPHistoryLoader *historyLoader;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> historyTransitioningManager;
 
+// Voiceover
+@property (nonatomic, strong) UIView *bottomView;
+
+// Keyboard!
+@property (nonatomic, strong) NSArray *keyboardNotificationTokens;
+@property (nonatomic) BOOL isKeyboardVisible;
+
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
-@property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 @property (nonatomic, getter=isModified) BOOL modified;
 
 - (void)prepareToPopView;
-- (void)updateNote:(Note *)note;
+- (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
 - (void)clearNote;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
 - (void)didDeleteCurrentNote;
+
+- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
 - (void)save;
 

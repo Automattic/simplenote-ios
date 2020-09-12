@@ -13,6 +13,10 @@
 + (void)refreshMetadataWithEmail:(NSString *)email;
 + (void)refreshMetadataForAnonymousUser;
 
+#pragma mark - Application State
++ (void)trackApplicationOpened;
++ (void)trackApplicationClosed;
+
 #pragma mark - Note Editor
 + (void)trackEditorChecklistInserted;
 + (void)trackEditorNoteCreated;
@@ -41,6 +45,8 @@
 + (void)trackListNoteOpened;
 + (void)trackListTrashEmptied;
 + (void)trackListNotesSearched;
++ (void)trackListPinToggled;
++ (void)trackListCopiedInternalLink;
 + (void)trackListTagViewed;
 + (void)trackListUntaggedViewed;
 + (void)trackTrashViewed;

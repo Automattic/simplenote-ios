@@ -1,3 +1,1 @@
-Memperbaiki bug yang memengaruhi Tampilan Ekstensi Berbagi.
-Memperbaiki dukungan RTL di Layar Otentikasi.
-Memperbaiki dukungan RTL di Penyunting Tag.
+- Batas Tag diperbarui hingga 256 karakter

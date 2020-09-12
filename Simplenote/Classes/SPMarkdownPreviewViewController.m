@@ -144,6 +144,12 @@
         return;
     }
 
+    if (targetURL.isSimplenoteURL) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+        [[UIApplication sharedApplication] openURL:targetURL options:@{} completionHandler:nil];
+        return;
+    }
+
     SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
     [self presentViewController:sfvc animated:YES completion:nil];
 

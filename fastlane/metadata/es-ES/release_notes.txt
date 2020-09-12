@@ -1,3 +1,1 @@
-Se ha solucionado un error que afectaba a la apariencia de la extensión de uso compartido.
-Compatibilidad RTL solucionada en las pantallas de autenticación.
-Compatibilidad RTL solucionada en el editor de etiquetas.
+- Límite de etiquetas actualizado hasta 256 caracteres

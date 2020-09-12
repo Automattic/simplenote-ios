@@ -180,7 +180,12 @@ extension UIColor {
 
     @objc
     static var simplenoteTertiaryActionColor: UIColor {
-        UIColor(studioColor: .gray40)
+        UIColor(studioColor: .purple50)
+    }
+
+    @objc
+    static var simplenoteQuaternaryActionColor: UIColor {
+        UIColor(studioColor: .gray50)
     }
 
     @objc

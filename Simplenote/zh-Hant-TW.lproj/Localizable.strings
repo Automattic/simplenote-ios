@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-06-25 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-07-23 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -114,6 +114,9 @@
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
+
+/* Simplenote terms of service */
+"California Users Privacy Notice" = "加州使用者隱私權聲明";
 
 /* Cancel Action
    Dismissing an interface

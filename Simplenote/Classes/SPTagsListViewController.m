@@ -399,7 +399,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     cell.textField.text = tagName;
     cell.textField.delegate = self;
     cell.iconImage = nil;
-    cell.accessibilityLabel = tagName;
     cell.delegate = self;
 }
 
@@ -589,27 +588,27 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 #pragma mark - UITextFieldDelegate methods
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    BOOL endEditing = NO;
-    NSString *replacementString = string;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // Scenario #A: Space was pressed
+    if ([string hasPrefix:@" "]) {
+        [textField endEditing:YES];
+        return NO;
+    }
 
-    if ([replacementString hasPrefix:@" "]) {
-        replacementString = nil;
-        endEditing = YES;
-    } else if ([replacementString rangeOfString:@" "].location != NSNotFound) {
-        replacementString = [replacementString substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
-        endEditing = YES;
+    // Scenario #B: New String was either typed or pasted
+    NSString *filteredString = [string substringUpToFirstSpace];
+    NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
+    BOOL editContainsSpaces = filteredString.length < string.length;
+
+    if (updatedString.isValidTagName) {
+        textField.text = updatedString;
     }
-    
-    if (replacementString) {
-        [textField setText:[textField.text stringByReplacingCharactersInRange:range
-                                                                   withString:replacementString]];
-    }
-    
-    if (endEditing) {
+
+    if (editContainsSpaces) {
         [textField endEditing:YES];
     }
-    
+
     return NO;
 }
 

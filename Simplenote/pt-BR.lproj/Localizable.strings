@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-06-25 09:54:03+0000 */
+/* Translation-Revision-Date: 2020-07-16 18:34:20+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -114,6 +114,9 @@
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
+
+/* Simplenote terms of service */
+"California Users Privacy Notice" = "Aviso de privacidade para usuários da California";
 
 /* Cancel Action
    Dismissing an interface

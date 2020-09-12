@@ -1,6 +1,7 @@
 import Foundation
 import CoreSpotlight
 import UIKit
+import SimplenoteSearch
 
 
 // MARK: - View Lifecycle
@@ -159,9 +160,25 @@ extension SPNoteListViewController {
     func startDisplayingEntities() {
         tableView.dataSource = self
 
-        notesListController.onBatchChanges = { [weak self] (objectChanges, sectionChanges) in
-            self?.tableView.performBatchChanges(objectChanges: objectChanges, sectionChanges: sectionChanges) { _ in
-                self?.displayPlaceholdersIfNeeded()
+        notesListController.onBatchChanges = { [weak self] (sectionsChangeset, objectsChangeset) in
+            guard let `self` = self else {
+                return
+            }
+
+            /// Note:
+            ///  1. State Restoration might cause this ViewController not to be onScreen
+            ///  2. When that happens, any remote change might cause a Batch Update
+            ///  3. And the above yields a crash
+            ///
+            /// In this snipept we're preventing a beautiful `_Bug_Detected_In_Client_Of_UITableView_Invalid_Number_Of_Rows_In_Section` exception
+            ///
+            guard let _ = self.view.window else {
+                self.tableView.reloadData()
+                return
+            }
+
+            self.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
+                self.displayPlaceholdersIfNeeded()
             }
         }
     }
@@ -347,8 +364,8 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let editorViewController = SPAppDelegate.shared().noteEditorViewController
-        editorViewController.update(note)
+        let editorViewController = EditorFactory.shared.build()
+        editorViewController.display(note)
         editorViewController.isPreviewing = true
         editorViewController.searchString = searchText
 
@@ -470,18 +487,13 @@ extension SPNoteListViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
 
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Swipeable Actions: Only enabled for Notes
         guard let note = notesListController.object(at: indexPath) as? Note else {
-            return []
+            return nil
         }
 
-        switch notesListController.filter {
-        case .deleted:
-            return rowActionsForDeletedNote(note)
-        default:
-            return rowActionsForNote(note)
-        }
+        return UISwipeActionsConfiguration(actions: contextActions(for: note))
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -490,7 +502,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         switch notesListController.object(at: indexPath) {
         case let note as Note:
             SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-            open(note, from: indexPath, animated: true)
+            open(note, animated: true)
         case let tag as Tag:
             refreshSearchText(appendFilterFor: tag)
         default:
@@ -514,7 +526,7 @@ private extension SPNoteListViewController {
         cell.accessibilityLabel = note.titlePreview
         cell.accessibilityHint = NSLocalizedString("Open note", comment: "Select a note to view in the note editor")
 
-        cell.accessoryLeftImage = note.pinned ? .image(name: .pin) : nil
+        cell.accessoryLeftImage = note.pinned ? .image(name: .pinSmall) : nil
         cell.accessoryRightImage = note.published ? .image(name: .shared) : nil
         cell.accessoryLeftTintColor = .simplenoteNotePinStatusImageColor
         cell.accessoryRightTintColor = .simplenoteNoteShareStatusImageColor
@@ -561,62 +573,92 @@ private extension SPNoteListViewController {
 //
 private extension SPNoteListViewController {
 
-    func rowActionsForDeletedNote(_ note: Note) -> [UITableViewRowAction] {
+    func contextActions(for note: Note) -> [UIContextualAction] {
+        if note.deleted {
+            return deletedContextActions(for: note)
+        }
+
+        return regularContextActions(for: note)
+    }
+
+    func deletedContextActions(for note: Note) -> [UIContextualAction] {
         return [
-            UITableViewRowAction(style: .default, title: ActionTitle.restore, backgroundColor: .simplenoteRestoreActionColor) { (_, _) in
+            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
+                completion(true)
             },
 
-            UITableViewRowAction(style: .destructive, title: ActionTitle.delete, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
+                completion(true)
             }
         ]
     }
 
-    func rowActionsForNote(_ note: Note) -> [UITableViewRowAction] {
-        let pinTitle = note.pinned ? ActionTitle.unpin : ActionTitle.pin
+    func regularContextActions(for note: Note) -> [UIContextualAction] {
+        let pinImageName: UIImageName = note.pinned ? .unpin : .pin
 
         return [
-            UITableViewRowAction(style: .destructive, title: ActionTitle.trash, backgroundColor: .simplenoteDestructiveActionColor) { (_, _) in
-                SPTracker.trackListNoteDeleted()
-                SPObjectManager.shared().trashNote(note)
-                CSSearchableIndex.default().deleteSearchableNote(note)
+            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+                self?.delete(note: note)
+                completion(true)
             },
 
-            UITableViewRowAction(style: .default, title: pinTitle, backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _) in
-                self?.togglePin(note: note)
+            UIContextualAction(style: .normal, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+                self?.togglePinnedState(note: note)
+                completion(true)
             },
 
-            UITableViewRowAction(style: .default, title: ActionTitle.share, backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, indexPath) in
-                self?.share(note: note, from: indexPath)
+            UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+                self?.copyInterlink(to: note)
+                completion(true)
+            },
+
+            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
+                self?.share(note: note)
+                completion(true)
             }
         ]
     }
 
-    func togglePin(note: Note) {
-        note.pinned = !note.pinned
-        SPAppDelegate.shared().save()
+    func delete(note: Note) {
+        SPTracker.trackListNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
     }
 
-    func share(note: Note, from indexPath: IndexPath) {
-        guard let _ = note.content, let controller = UIActivityViewController(note: note) else {
+    func copyInterlink(to note: Note) {
+        SPTracker.trackListCopiedInternalLink()
+        UIPasteboard.general.copyInterlink(to: note)
+    }
+
+    func togglePinnedState(note: Note) {
+        SPTracker.trackListPinToggled()
+        SPObjectManager.shared().togglePinnedState(of: note)
+    }
+
+    func share(note: Note) {
+        guard let _ = note.content, let activityController = UIActivityViewController(note: note) else {
             return
         }
 
         SPTracker.trackEditorNoteContentShared()
 
-        if UIDevice.sp_isPad() {
-            controller.modalPresentationStyle = .popover
-
-            let presentationController = controller.popoverPresentationController
-            presentationController?.permittedArrowDirections = .any
-            presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
-            presentationController?.sourceView = tableView
+        guard UIDevice.sp_isPad(), let indexPath = notesListController.indexPath(forObject: note) else {
+            present(activityController, animated: true, completion: nil)
+            return
         }
 
-        present(controller, animated: true, completion: nil)
+        activityController.modalPresentationStyle = .popover
+
+        let presentationController = activityController.popoverPresentationController
+        presentationController?.permittedArrowDirections = .any
+        presentationController?.sourceRect = tableView.rectForRow(at: indexPath)
+        presentationController?.sourceView = tableView
+
+        present(activityController, animated: true, completion: nil)
     }
 }
 
@@ -721,12 +763,6 @@ extension SPNoteListViewController {
 //
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
-    static let delete = NSLocalizedString("Delete", comment: "Trash (verb) - the action of deleting a note")
-    static let pin = NSLocalizedString("Pin", comment: "Pin (verb) - the action of Pinning a note")
-    static let restore = NSLocalizedString("Restore", comment: "Restore a note from the trash, marking it as undeleted")
-    static let share = NSLocalizedString("Share", comment: "Share (verb) - the action of Sharing a note")
-    static let trash = NSLocalizedString("Trash-verb", comment: "Trash (verb) - the action of deleting a note")
-    static let unpin = NSLocalizedString("Unpin", comment: "Unpin (verb) - the action of Unpinning a note")
 }
 
 private enum Constants {

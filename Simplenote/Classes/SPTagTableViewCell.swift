@@ -204,7 +204,7 @@ private enum Style {
     /// Headline Color: To be applied over the first preview line
     ///
     static var textColor: UIColor {
-        .simplenoteNoteHeadlineColor
+        .simplenoteTextColor
     }
 
     /// Color to be applied over the cell upon selection

@@ -27,6 +27,10 @@ class NSPredicateEmailTests: XCTestCase {
         let predicate = NSPredicate.predicateForEmailValidation()
         XCTAssertFalse(predicate.evaluate(with: "j@j..com"))
         XCTAssertFalse(predicate.evaluate(with: "j@j.com...ar"))
+        XCTAssertFalse(predicate.evaluate(with: "@test"))
+        XCTAssertFalse(predicate.evaluate(with: "@test.com"))
+        XCTAssertFalse(predicate.evaluate(with: "test.com"))
+        XCTAssertFalse(predicate.evaluate(with: "test.test.coffee"))
     }
 
     /// Verifies that `predicateForEmailValidation` evaluates true when the email is well formed
@@ -36,5 +40,14 @@ class NSPredicateEmailTests: XCTestCase {
         XCTAssertTrue(predicate.evaluate(with: "j@j.com"))
         XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalidsimplenote.blog"))
         XCTAssertTrue(predicate.evaluate(with: "something@seriouslynotrealbutvalidsimplenote.blog.ar"))
+    }
+
+    /// Verifies that `predicateForEmailValidation` returns  *true* when the email contains a New / Non Standard TLD
+    ///
+    func testPredicateForEmailValidationEvaluatesTrueWhenStringContainsNewTLDs() {
+        let predicate = NSPredicate.predicateForEmailValidation()
+        XCTAssertTrue(predicate.evaluate(with: "test@test.coffee"))
+        XCTAssertTrue(predicate.evaluate(with: "test@test.email"))
+        XCTAssertTrue(predicate.evaluate(with: "test@test.education"))
     }
 }

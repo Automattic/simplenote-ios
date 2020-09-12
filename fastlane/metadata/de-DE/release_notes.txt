@@ -1,3 +1,1 @@
-Fehler korrigiert, der Auswirkungen auf das Design der Teilen-Erweiterung hatte
-RTL-Unterstützung in den Authentifizierungsbildschirmen korrigiert
-RTL-Unterstützung im Tags-Editor korrigiert
+- Schlagwort-Limit auf bis zu 256 Zeichen aktualisiert

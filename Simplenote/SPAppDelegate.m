@@ -44,7 +44,6 @@
 
 @interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
 
-@property (strong, nonatomic) SPNavigationController        *navigationController;
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
@@ -154,7 +153,6 @@
 
     self.tagListViewController = [SPTagsListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
-    self.noteEditorViewController = [SPNoteEditorViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
 
@@ -187,15 +185,13 @@
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
 }
 
 
 #pragma mark ================================================================================
 #pragma mark AppDelegate Methods
 #pragma mark ================================================================================
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     // Migrate keychain items
     KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
@@ -203,13 +199,19 @@
 //    [keychainMigrator testMigration];
     [keychainMigrator migrateIfNecessary];
 
-	// Setup Frameworks
+    // Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
-	[self setupAppCenter];
+    [self setupAppCenter];
     [self setupCrashLogging];
     [self setupDefaultWindow];
+    [self configureStateRestoration];
 
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 	// Once the UI is wired, Auth Simperium
 	[self authenticateSimperium];
 
@@ -242,7 +244,19 @@
     return YES;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [self ensurePinlockIsDismissed];
+    [SPTracker trackApplicationOpened];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [SPTracker trackApplicationClosed];
+}
+
+- (void)ensurePinlockIsDismissed
+{
     // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
     if (self.pinLockWindow != nil
         && [self.pinLockWindow isKeyWindow]
@@ -294,6 +308,27 @@
     [self.noteEditorViewController save];
 }
 
+// Deprecated in iOS 13.2. Per the docs, this method will not be called in favor of the new secure version when both are defined.
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+// Deprecated in iOS 13.2. Per the docs, this method will not be called in favor of the new secure version when both are defined.
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldRestoreSecureApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
 
 #pragma mark Background Fetch
 
@@ -388,18 +423,7 @@
 }
 
 
-#pragma mark ================================================================================
-#pragma mark Theme's
-#pragma mark ================================================================================
-
-- (void)themeWillChange
-{
-    // Save current note if editing
-    if (_noteEditorViewController.currentNote) {
-        [_noteEditorViewController save];
-        [_noteEditorViewController.noteEditorTextView endEditing:YES];
-    }
-}
+#pragma mark - Theme's
 
 - (void)themeDidChange
 {
@@ -509,11 +533,11 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 
-        [self->_simperium signOutAndRemoveLocalData:YES completion:^{
-			        
-            [self->_noteEditorViewController clearNote];
-            self->_selectedTag = nil;
-            [self->_noteListViewController update];
+        [self.simperium signOutAndRemoveLocalData:YES completion:^{
+
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            self.selectedTag = nil;
+            [self.noteListViewController update];
 			
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
@@ -534,8 +558,8 @@
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
-                [self->_simperium authenticateIfNecessary];
-                self->_bSigningUserOut = NO;
+                [self.simperium authenticateIfNecessary];
+                self.bSigningUserOut = NO;
 			}];
 		}];
     });
@@ -594,8 +618,8 @@
         switch (change) {
             case SPBucketChangeTypeUpdate:
             {
-                if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-                    [_noteEditorViewController didReceiveNewContent];
+                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                    [self.noteEditorViewController didReceiveNewContent];
                 }
                 Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
@@ -609,9 +633,9 @@
                 break;
 			case SPBucketChangeTypeDelete:
             {
-                if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-					[_noteEditorViewController didDeleteCurrentNote];
-				}
+                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                    [self.noteEditorViewController didDeleteCurrentNote];
+                }
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }
 				break;
@@ -642,9 +666,9 @@
 {
     if ([bucket.name isEqualToString:@"Note"]) {
         for (NSString *key in keys) {
-            if ([key isEqualToString: _noteEditorViewController.currentNote.simperiumKey]) {
-                [_noteEditorViewController willReceiveNewContent];
-			}
+            if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                [self.noteEditorViewController willReceiveNewContent];
+            }
         }
     }
 }
@@ -652,9 +676,9 @@
 - (void)bucket:(SPBucket *)bucket didReceiveObjectForKey:(NSString *)key version:(NSString *)version data:(NSDictionary *)data
 {
     if ([bucket.name isEqualToString:@"Note"]) {
-        if ([key isEqualToString:_noteEditorViewController.currentNote.simperiumKey]) {
-            [_noteEditorViewController.historyLoader processData:data forVersion:[version integerValue]];
-		}
+        if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+            [self.noteEditorViewController.historyLoader processData:data forVersion:[version integerValue]];
+        }
     }
 }
 
@@ -718,7 +742,12 @@
 #pragma mark ================================================================================
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{    
+{
+    // URL: Open a Note!
+    if ([self handleOpenNoteWithUrl:url]) {
+        return YES;
+    }
+
     // Support opening Simplenote and optionally creating a new note
     if ([[url host] isEqualToString:@"new"]) {
         
@@ -775,10 +804,7 @@
 
 - (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
 {
-    NSString *bucketName = NSStringFromClass([Note class]);
-    SPBucket *noteBucket = [_simperium bucketForName:bucketName];
-    Note *note = [noteBucket objectForKey:uuid];
-
+    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid];
     if (note == nil) {
         return;
     }
@@ -799,16 +825,11 @@
     // If root tag list is currently being viewed, push All Notes instead
     [self.sidebarViewController hideSidebarWithAnimation:NO];
     
-    // On iPhone, make sure a note isn't currently being edited
-    if (self.navigationController.visibleViewController == _noteEditorViewController) {
-        [self.navigationController popViewControllerAnimated:NO];
-    }
-    
     // Little trick to postpone until next run loop to ensure controllers have a chance to pop
     double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self->_noteListViewController openNote:note fromIndexPath:nil animated:NO];
+        [self.noteListViewController openNote:note animated:NO];
         [self showPasscodeLockIfNecessary];
     });
 }

@@ -24,10 +24,12 @@ enum UIImageName: Int, CaseIterable {
     case hideKeyboard
     case history
     case info
+    case link
     case menu
     case newNote
     case onePassword
     case pin
+    case pinSmall
     case restore
     case settings
     case simplenoteLogo
@@ -42,6 +44,7 @@ enum UIImageName: Int, CaseIterable {
     case taskChecked
     case taskUnchecked
     case trash
+    case unpin
     case untagged
     case visibilityOn
     case visibilityOff
@@ -92,6 +95,8 @@ extension UIImageName {
             return "icon_history"
         case .info:
             return "icon_info"
+        case .link:
+            return "icon_link"
         case .menu:
             return "icon_menu"
         case .newNote:
@@ -100,6 +105,8 @@ extension UIImageName {
             return "icon_onepassword"
         case .pin:
             return "icon_pin"
+        case .pinSmall:
+            return "icon_pin_small"
         case .restore:
             return "icon_restore"
         case .settings:
@@ -128,6 +135,8 @@ extension UIImageName {
             return "icon_task_unchecked"
         case .trash:
             return "icon_trash"
+        case .unpin:
+            return "icon_unpin"
         case .untagged:
             return "icon_untagged"
         case .visibilityOn:

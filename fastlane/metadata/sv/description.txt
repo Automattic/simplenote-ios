@@ -1,17 +1,17 @@
 Simplenote är ett enkelt sätt att göra anteckningar, skapa att-göra-listor, skriva ner idéer med mera. Öppna appen, skriv ner några tankar och du är klar. Allteftersom din samling växer kan du hålla dig organiserad med hjälp av etiketter och stift samt hitta vad du behöver med omedelbara sökningar. Eftersom Simplenote synkroniseras kostnadsfritt på alla dina enheter kan du alltd komma åt dina anteckningar.
 
 - En enkel anteckningsupplevelse
-- Synkronisera allt på alla dina enheter
+- Synkronisera allt över dina enheter
 - Samarbeta och dela
-- Håll dig organiserad med etiketter
-- Logga in med din e-postadress eller ditt WordPress.com-konto
+- Var organiserad med etiketter
+- Logga in på din e-post eller ditt WordPress.com-konto
 
-SYNKRONISERA MED SJÄLVFÖRTROENDE
-- Synkronisera automatiskt och sömlöst på dator, telefon eller surfplatta.
+SYNKRONISERA TRYGGT
+- Synkronisera automatiskt och sömlöst mellan alla datorer, telefoner och surfplattor.
 - Säkerhetskopiera och synkronisera allt när du gör anteckningar, så att du aldrig förlorar ditt innehåll
 
 SAMARBETA OCH DELA
-- Samarbeta och arbeta tillsammans -- dela idéer med en kollega eller skriv en handlingslista tillsammans med din rumskamrat.
+Samarbeta och arbeta tillsammans – dela idéer med en kollega eller skriv en inköpslista med din rumskamrat.
 - Välj om du vill publicera ditt innehåll på webben och dela länkar med vem du vill.
 - Publicera direkt till en WordPress-webbplats genom att ansluta ditt WordPress.com-konto.
 - Dela snabbt och enkelt med tredjepartsappar.
@@ -24,14 +24,14 @@ ORGANISERA OCH SÖK
 - Välj sorteringsordningen för dina anteckningar och etiketter.
 - Fäst de anteckningar som du använder mest.
 - Redigera etiketter direkt genom att byta namn eller ändra ordning på dem.
-- Skydda ditt innehåll med ett lösenordslås.
+Skydda ditt innehåll med ett lösenordslås.
 
---
+–
 
-Integritetspolicy: https://automattic.com/privacy/
+Sekretesspolicy: https://automattic.com/privacy/
 Användarvillkor: https://simplenote.com/terms/
-California users privacy notice: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Sekretessmeddelande för användare i Kalifornien: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
 
---
+–
 
 Besök simplenote.com för att ladda ner Simplenote till dina andra enheter.

@@ -61,7 +61,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
-@property (nonatomic, assign) CGFloat                   keyboardHeight;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -80,9 +79,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self = [super init];
     if (self) {
-
         // Editor
         [self configureTextView];
+        [self configureBottomView];
 
         // TagView
         _tagView = _noteEditorTextView.tagView;
@@ -93,7 +92,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         navigationBarTransform = CGAffineTransformIdentity;
         
         bDisableShrinkingNavigationBar = NO;
-        _keyboardHeight = 0;
 
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -105,7 +103,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         // voiceover status is tracked because the tag view is anchored
         // to the bottom of the screen when voiceover is enabled to allow
         // easier access
-        bVoiceoverEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusDidChangeNotification
@@ -122,6 +119,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)configureTextView
 {
     _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView.delegate = self;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -144,7 +142,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)applyStyle
 {    
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle2 weight:UIFontWeightBold];
+    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle1 weight:UIFontWeightBold];
     UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
 
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -152,6 +150,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
+
+    self.bottomView.backgroundColor = [UIColor simplenoteBackgroundColor];
 
     self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
@@ -178,36 +178,37 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-    _tagView.frame = CGRectMake(0,
-                                self.view.frame.size.height - tagViewHeight,
-                                self.view.frame.size.width,
-                                tagViewHeight);
-
-    [self.view addSubview:_noteEditorTextView];
-    _noteEditorTextView.frame = self.view.bounds;
-    _noteEditorTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _noteEditorTextView.delegate = self;
 
     self.navigationItem.title = nil;
 
-    [self setupBarItems];
-    [self swapTagViewPositionForVoiceover];
+    [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
+    [self configureRootView];
     [self configureLayout];
+    [self refreshVoiceoverSupport];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: bSearching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
-    [self adjustFrameForSafeInsets];
+    [self highlightSearchResultsIfNeeded];
+    [self startListeningToKeyboardNotifications];
 
+    [self refreshNavigationBarButtons];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    /// Note:
+    /// This must happen in viewDidAppear (and not before) because of State Restoration.
+    /// Decode happens right after `viewWillAppear`, and this way we get to avoid spurious empty notes.
+    ///
     if (!_currentNote) {
         [self newButtonAction:nil];
     } else {
@@ -215,16 +216,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
     }
 
-    [self ensureTagViewIsVisible];
-    [self highlightSearchResultsIfNeeded];
-    [self startListeningToKeyboardNotifications];
-    
-    [self refreshNavigationBarButtons];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     [self ensureEditorIsFirstResponder];
 }
 
@@ -232,21 +223,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     NSAssert(self.navigationBarBackground == nil, @"NavigationBarBackground was already initialized!");
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
-}
-
-- (void)configureLayout
-{
-    NSAssert(self.navigationBarBackground != nil, @"NavigationBarBackground wasn't properly initialized!");
-    self.navigationBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
-
-    [self.view addSubview:self.navigationBarBackground];
-
-    [NSLayoutConstraint activateConstraints:@[
-        [self.navigationBarBackground.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-        [self.navigationBarBackground.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
-        [self.navigationBarBackground.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-        [self.navigationBarBackground.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    ]];
 }
 
 - (void)setupNavigationController {
@@ -262,40 +238,25 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)ensureTagViewIsVisible
+- (void)startListeningToThemeNotifications
 {
-    if (_tagView.alpha >= UIKitConstants.alpha1_0) {
-        return;
-    }
-
-    [UIView animateWithDuration:UIKitConstants.animationShortDuration animations:^{
-        self.tagView.alpha = UIKitConstants.alpha1_0;
-     }];
-}
-
-- (void)adjustFrameForSafeInsets
-{
-    CGRect viewFrame = _noteEditorTextView.frame;
-    viewFrame.size.height = self.view.bounds.size.height - self.view.safeAreaInsets.bottom;
-    _noteEditorTextView.frame = viewFrame;
-}
-
-- (void)startListeningToKeyboardNotifications {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (void)stopListeningToKeyboardNotifications {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (void)startListeningToThemeNotifications {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)themeDidChange {
+- (void)themeWillChange
+{
+    if (self.currentNote == nil) {
+        return;
+    }
+
+    [self save];
+    [self.noteEditorTextView endEditing:YES];
+}
+
+- (void)themeDidChange
+{
     [self applyStyle];
 }
 
@@ -320,11 +281,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
             self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
-            
+            self->searchDetailLabel.alpha = UIKitConstants.alpha0_0;
+
             [UIView animateWithDuration:0.3
                              animations:^{
                                  
-                                 self->searchDetailLabel.alpha = 1.0;
+                                 self->searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
             
             self->highlightedSearchResultIndex = 0;
@@ -333,8 +295,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     });
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self stopListeningToKeyboardNotifications];
@@ -344,6 +306,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshNavBarSizeWithCoordinator:coordinator];
+    [self refreshTagEditorOffsetWithCoordinator:coordinator];
 }
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
@@ -383,6 +346,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         self->bDisableShrinkingNavigationBar = NO;
     }];
+}
+
+- (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    if (!self.tagView.isFirstResponder) {
+        return;
+    }
+
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.tagView scrollEntryFieldToVisible:NO];
+    } completion:nil];
 }
 
 - (void)sizeNavigationContainer {
@@ -446,8 +420,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)setupBarItems {
-    
+- (void)configureNavigationBarItems
+{
     // setup Navigation Bar
     self.navigationItem.hidesBackButton = YES;
 
@@ -560,48 +534,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)didReceiveVoiceOverNotification:(NSNotification *)notification {
-    
-    [self swapTagViewPositionForVoiceover];
-    bVoiceoverEnabled = UIAccessibilityIsVoiceOverRunning();
-    
-    if (bVoiceoverEnabled)
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-}
-
-- (void)swapTagViewPositionForVoiceover {
-    
-    if (bVoiceoverEnabled != UIAccessibilityIsVoiceOverRunning()) {
-        
-        CGRect viewFrame = self.view.bounds;
-
-        if (UIAccessibilityIsVoiceOverRunning()) {
-            
-            [_tagView removeFromSuperview];
-            CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-            _tagView.frame = CGRectMake(0,
-                                        viewFrame.size.height - tagViewHeight - self.keyboardHeight,
-                                        viewFrame.size.width,
-                                        tagViewHeight);
-            _noteEditorTextView.tagView = nil;
-            _noteEditorTextView.frame = CGRectMake(0,
-                                                   0,
-                                                   viewFrame.size.width,
-                                                   _tagView.frame.origin.y);
-            
-            [self.view addSubview:_tagView];
-            
-        } else {
-            
-            _noteEditorTextView.tagView = _tagView;
-            [_noteEditorTextView addSubview:_tagView];
-            _noteEditorTextView.frame = CGRectMake(0,
-                                                   0,
-                                                   viewFrame.size.width,
-                                                   viewFrame.size.height - self.keyboardHeight);
-            [_noteEditorTextView setNeedsLayout];
-        }
-    }
+- (void)didReceiveVoiceOverNotification:(NSNotification *)notification
+{
+    [self refreshVoiceoverSupport];
 }
 
 - (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
@@ -664,8 +599,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
      ];
 }
 
-- (void)updateNote:(Note *)note {
-    
+- (void)displayNote:(Note *)note
+{
     if (!note) {
         _noteEditorTextView.text = nil;
         return;
@@ -699,11 +634,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     bBlankNote = NO;
     self.modified = NO;
     self.previewing = NO;
-    
-    // hide the tags field
-    if (!bVoiceoverEnabled) {
-        self.tagView.alpha = UIKitConstants.alpha0_0;
-    }
 }
 
 - (void)clearNote {
@@ -718,11 +648,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)endEditing:(id)sender {
-    
+- (void)endEditing:(id)sender
+{
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    [_tagView endEditing:YES];
-    [_noteEditorTextView endEditing:YES];
+    [self.view endEditing:YES];
 }
 
 // Bounces a snapshot of the text view to hint to the user how to access
@@ -798,12 +727,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self refreshNavigationBarButtons];
 }
 
-- (void)setKeyboardVisible:(BOOL)keyboardVisible
+- (void)setIsKeyboardVisible:(BOOL)isKeyboardVisible
 {
-    _keyboardVisible = keyboardVisible;
-    
+    _isKeyboardVisible = isKeyboardVisible;
+
     [self refreshNavigationBarButtons];
 }
+
 
 #pragma mark - UIPopoverPresentationControllerDelegate
 
@@ -938,70 +868,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
     bSearching = NO;
-    
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.navigationController.toolbar.transform = CGAffineTransformMakeTranslation(0, self.navigationController.toolbar.frame.size.height);
-                     } completion:^(BOOL finished) {
-                         [self.navigationController setToolbarHidden:YES animated:NO];
-                         self.navigationController.toolbar.transform = CGAffineTransformIdentity;
-                         self->searchDetailLabel.alpha = 0.0;
-                         self->searchDetailLabel.text = nil;
 
-                     }];
-    
+    [self.navigationController setToolbarHidden:YES animated:YES];
+    searchDetailLabel.text = nil;
 }
 
-- (void)ensureSearchIsDismissed {
+- (void)ensureSearchIsDismissed
+{
     if (bSearching) {
         [self endSearching:_noteEditorTextView];
     }
-}
-
-
-#pragma mark Keyboard Notifications
-
-- (void)keyboardWillChangeFrame:(NSNotification *)notification {
-    
-    NSDictionary *userInfo  = notification.userInfo;
-    NSTimeInterval duration = [((NSNumber *)userInfo[UIKeyboardAnimationDurationUserInfoKey]) floatValue];
-    CGRect keyboardFrame    = [((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]) CGRectValue];
-    CGSize viewBounds       = self.view.bounds.size;
-
-    CGFloat newKeyboardHeight = MAX(viewBounds.height - CGRectGetMinY(keyboardFrame), 0);
-    BOOL isKeyboardVisible = newKeyboardHeight > 0;
-    
-    void (^animations)() = ^void() {
-        CGRect newFrame            = self->_noteEditorTextView.frame;
-        newFrame.size.height       = self.view.frame.size.height - (self->bVoiceoverEnabled ? self->_tagView.frame.size.height : 0) - newKeyboardHeight;
-        if (!isKeyboardVisible) {
-            newFrame.size.height -= self.view.safeAreaInsets.bottom;
-        }
-        self->_noteEditorTextView.frame  = newFrame;
-        
-        if (self->bVoiceoverEnabled) {
-            CGRect newFrame        = self->_tagView.frame;
-            newFrame.origin.y      = self.view.frame.size.height - self->_tagView.frame.size.height - newKeyboardHeight;
-            self->_tagView.frame         = newFrame;
-        }
-    };
-    
-    // TODO: Drop isInteractive code path.
-    // Should only be necessary on pre-iOS 9 devices.
-    // On iOS 9 the keyboard's animation doesn't happen interactively. If an interactive transition is
-    // taking place, the editor text view's frame must be changed instantaneously, otherwise on
-    // dismissal you can see the bottom of the text being clipped once the keyboard has dismissed.
-    if (self.transitionCoordinator.isInteractive) {
-        [UIView performWithoutAnimation:^{
-           animations();
-        }];
-    } else {
-        // Animate Editor Resize / Tag Reposition
-        [UIView animateWithDuration:duration animations:animations];
-    }
-    
-    self.keyboardHeight = newKeyboardHeight;
-    self.keyboardVisible = isKeyboardVisible;
 }
 
 
@@ -1081,9 +957,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     navigationBarTransform = CGAffineTransformIdentity;
     
-    void (^animationBlock)();
-    
-    animationBlock = ^() {
+    void (^animationBlock)() = ^() {
         
         self.backButton.transform = CGAffineTransformIdentity;
         self.keyboardButton.transform = CGAffineTransformIdentity;
@@ -1096,13 +970,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.keyboardButton.alpha = 1.0;
         self.navigationController.navigationBar.transform = self->navigationBarTransform;
         self.navigationBarBackground.transform = CGAffineTransformIdentity;
-        
+
         self.backButton.alpha = 1.0;
     };
     
-    void (^completionBlock)();
-    
-    completionBlock = ^() {
+    void (^completionBlock)() = ^() {
         
         if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
             self->bDisableShrinkingNavigationBar = NO;
@@ -1142,7 +1014,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)applyNavigationBarTranslationTransformX:(float)x Y:(float)y {
     
-    if ([UIDevice isPad] || bVoiceoverEnabled) {
+    if ([UIDevice isPad] || self.voiceoverEnabled) {
         return;
     }
     
@@ -1197,7 +1069,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     
     self.navigationController.navigationBar.transform = navigationBarTransform;
-
     self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
                                                                     CGAffineTransformMakeTranslation(0, yTransform));
 }
@@ -1285,15 +1156,20 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    BOOL containsHttpScheme = [URL containsHttpScheme];
-
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
+{
     // When `performsAggressiveLinkWorkaround` is true we'll get link interactions via `receivedInteractionWithURL:`
-    if (containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
+    if (URL.containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
         [self presentSafariViewControllerAtURL:URL];
+        return NO;
     }
 
-    return !containsHttpScheme;
+    if (URL.isSimplenoteURL) {
+        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
+        return NO;
+    }
+
+    return YES;
 }
 
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url
@@ -1469,7 +1345,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
 
         [UIView animateWithDuration:0.2
@@ -1479,7 +1355,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                              newFrame.origin.y += newFrame.size.height;
                              
                              snapshot.frame = newFrame;
-                             self.tagView.alpha = 1.0;
 
                          } completion:^(BOOL finished) {
                              
@@ -1490,7 +1365,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     } else {
 
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
     }
     
@@ -1970,29 +1845,28 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark SPAddTagDelegate methods
 
-- (void)tagViewWillBeginEditing:(SPTagView *)tagView {
+- (void)tagViewDidChange:(SPTagView *)tagView
+{
+    // Note: When Voiceover is enabled, the Tags Editor is docked!
+    if (self.voiceoverEnabled) {
+        return;
+    }
 
-    _noteEditorTextView.lockContentOffset = YES;
-}
-- (void)tagViewDidBeginEditing:(SPTagView *)tagView {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self->_noteEditorTextView scrollToBottom];
-    });
-}
-
-- (void)tagViewDidChange:(SPTagView *)tagView {
-    [_noteEditorTextView scrollToBottom];
+    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
 }
 
-- (void)tagViewDidEndEditing:(SPTagView *)tagView {
+- (void)tagViewDidBeginEditing:(SPTagView *)tagView
+{
+    // Note: When Voiceover is enabled, the Tags Editor is docked!
+    if (self.voiceoverEnabled) {
+        return;
+    }
 
-    _noteEditorTextView.lockContentOffset = NO;
-    [_noteEditorTextView resignFirstResponder]; // seems to fix some jumping of the text view
+    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
 }
 
-- (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName {
-    
+- (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName
+{
     if (![[SPObjectManager sharedManager] tagExists:tagName]) {
         [[SPObjectManager sharedManager] createTagFromString:tagName];
         

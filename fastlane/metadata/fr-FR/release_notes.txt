@@ -1,3 +1,1 @@
-Résolution d’un bogue qui affectait l’apparence de l’extension Partage.
-Résolution de la prise en charge RTL sur les écrans d’authentification.
-Résolution de la prise en charge RTL dans l’éditeur d’étiquettes.
+- Mise à jour de la limite d’étiquette jusqu’à 256 caractères

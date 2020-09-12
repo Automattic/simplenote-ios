@@ -18,6 +18,8 @@
 #import "SPTagCompletionPill.h"
 #import "Simplenote-Swift.h"
 
+
+
 @interface SPTagView ()
 
 @property (nonatomic, strong) SPTagPill *activeDeletionPill;
@@ -31,12 +33,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        /// Note:
+        /// `scrollEnabled = NO` causes layout issues when `UITextField` becomes the first responder, in
+        /// certain documents. We're simply always allowing scroll, and fixing a glitch!
+        ///
         tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         tagScrollView.scrollsToTop = NO;
         tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         tagScrollView.alwaysBounceHorizontal = YES;
         tagScrollView.showsHorizontalScrollIndicator = NO;
         tagScrollView.delegate = self;
+        tagScrollView.scrollEnabled = YES;
         [self addSubview:tagScrollView];
         
         autoCompleteScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -47,8 +54,9 @@
         autoCompleteScrollView.hidden = YES;
         [self addSubview:autoCompleteScrollView];
     
-        addTagField = [SPTagEntryField tagEntryFieldWithdelegate:self];
+        addTagField = [SPTagEntryField tagEntryField];
         addTagField.delegate = self;
+        addTagField.tagDelegate = self;
         [tagScrollView addSubview:addTagField];
         
         tagPills = [NSMutableArray array];
@@ -63,7 +71,13 @@
 - (void)applyStyle
 {
     self.backgroundColor = [UIColor simplenoteBackgroundColor];
+    autoCompleteScrollView.backgroundColor = [UIColor simplenoteBackgroundColor];
     addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+}
+
+- (BOOL)isFirstResponder
+{
+    return addTagField.isFirstResponder;
 }
 
 - (void)layoutSubviews
@@ -81,9 +95,7 @@
         xOrigin += view.frame.size.width;
         
     }
-    
-    tagScrollView.scrollEnabled = tagPills.count > 0;
-    
+
     // position button
     addTagField.frame = CGRectMake(xOrigin + spacing,
                                     0,
@@ -122,15 +134,6 @@
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (id<SPTagViewDelegate>)tagDelegate {
-    
-    return tagDelegate;
-}
-- (void)setTagDelegate:(id<SPTagViewDelegate>)newDelegate {
-    
-    tagDelegate = newDelegate;
-}
-
 - (BOOL)setupWithTagNames:(NSArray *)tagNames {
 
     if (addTagField.isFirstResponder) {
@@ -141,7 +144,7 @@
     
     for (NSString *tag in tagNames) {
         
-        if (![tag containsEmailAddress])
+        if (![tag isValidEmailAddress])
             [self newTagPillWithString:tag];
     }
     
@@ -166,8 +169,9 @@
     [tagPills removeObject:pill];
     [pill removeFromSuperview];
     
-    if ([tagDelegate respondsToSelector:@selector(tagView:didRemoveTagName:)])
-        [tagDelegate tagView:self didRemoveTagName:pill.tagStub.tag];
+    if ([self.tagDelegate respondsToSelector:@selector(tagView:didRemoveTagName:)]) {
+        [self.tagDelegate tagView:self didRemoveTagName:pill.tagStub.tag];
+    }
     
     [self setNeedsLayout];
 }
@@ -283,8 +287,8 @@
     
     [self hideActiveDeletionPill];
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewWillBeginEditing:)]) {
-        [tagDelegate tagViewWillBeginEditing:self];
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewWillBeginEditing:)]) {
+        [self.tagDelegate tagViewWillBeginEditing:self];
     }
     
     [self updateAutoCompletionsForString:textField.text];
@@ -292,8 +296,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if ([self->tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
-            [self->tagDelegate tagViewDidBeginEditing:self];
+        if ([self.tagDelegate respondsToSelector:@selector(tagViewDidBeginEditing:)])
+            [self.tagDelegate tagViewDidBeginEditing:self];
         
         [self scrollEntryFieldToVisible:YES];
     });
@@ -301,21 +305,23 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // Scenario #A: Space was pressed
     if ([string hasPrefix:@" "]) {
-        string = nil;
         [self processTextInFieldToTag];
         return NO;
-    } else if ([string rangeOfString:@" "].location != NSNotFound) {
-        
-        string = [string substringWithRange:NSMakeRange(0, [string rangeOfString:@" "].location)];
-        textField.text = [textField.text stringByReplacingCharactersInRange:range
-                                                                 withString:string];
-        return NO;
     }
-    
-    return YES;
+
+    // Scenario #B: New String was either typed or pasted
+    NSString *filteredString = [string substringUpToFirstSpace];
+    NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
+
+    if (updatedString.isValidTagName) {
+        textField.text = updatedString;
+    }
+
+    return NO;
 }
 
 - (void)tagEntryFieldDidChange:(SPTagEntryField *)tagTextField {
@@ -326,9 +332,9 @@
         [self scrollEntryFieldToVisible:YES];
     });
     
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidChange:)])
-        [tagDelegate tagViewDidChange:self];
-    
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewDidChange:)]) {
+        [self.tagDelegate tagViewDidChange:self];
+    }
     
     [self updateAutoCompletionsForString:tagTextField.text];
 
@@ -349,21 +355,22 @@
     [self hideActiveDeletionPill];
     
     [self processTextInFieldToTag];
-    if ([tagDelegate respondsToSelector:@selector(tagViewDidEndEditing:)])
-        [tagDelegate tagViewDidEndEditing:self];
+    if ([self.tagDelegate respondsToSelector:@selector(tagViewDidEndEditing:)]) {
+        [self.tagDelegate tagViewDidEndEditing:self];
+    }
 }
 
 - (void)processTextInFieldToTag {
     
     // there may be multiple tags
     NSString *name = addTagField.text;
-    BOOL containsEmailAddress = [name containsEmailAddress];
+    BOOL containsEmailAddress = [name isValidEmailAddress];
     
 
-    if (name.length > 0 && [tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {
+    if (name.length > 0 && [self.tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {
         
         [self newTagPillWithString:name];
-        [tagDelegate tagView:self didCreateTagName:name];
+        [self.tagDelegate tagView:self didCreateTagName:name];
         
     } else {
         
@@ -389,13 +396,11 @@
     [self setNeedsLayout];
 }
 
-
-- (void)scrollEntryFieldToVisible:(BOOL)animated {
-    
-    // make sure end of text field is visible in the scrollview
-    
-    if (_activeDeletionPill)
+- (void)scrollEntryFieldToVisible:(BOOL)animated
+{
+    if (_activeDeletionPill) {
         return;
+    }
     
     CGFloat spacing = [self.theme floatForKey:@"tagViewItemSpacing"];
     
@@ -406,7 +411,7 @@
                                          addTagField.frame.origin.x + addTagField.frame.size.width + 2 * spacing - tagScrollView.bounds.size.width),
                                      0);
         
-        [tagScrollView setContentOffset:offset animated:YES];
+        [tagScrollView setContentOffset:offset animated:animated];
     }
 }
 

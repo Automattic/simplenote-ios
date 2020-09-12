@@ -20,6 +20,19 @@
 }
 
 
+#pragma mark - Application State
+
++ (void)trackApplicationOpened
+{
+    [self trackAutomatticEventWithName:@"application_opened" properties:nil];
+}
+
++ (void)trackApplicationClosed
+{
+    [self trackAutomatticEventWithName:@"application_closed" properties:nil];
+}
+
+
 #pragma mark - Note Editor
 
 + (void)trackEditorNoteCreated
@@ -149,6 +162,16 @@
 + (void)trackListNotesSearched
 {
     [self trackAutomatticEventWithName:@"list_notes_searched" properties:nil];
+}
+
++ (void)trackListPinToggled
+{
+    [self trackAutomatticEventWithName:@"list_note_toggled_pin" properties:nil];
+}
+
++ (void)trackListCopiedInternalLink
+{
+    [self trackAutomatticEventWithName:@"list_copied_internal_link" properties:nil];
 }
 
 + (void)trackListTagViewed

@@ -12,6 +12,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self refreshStyle];
+    // Don't use textField as an accessibility element.
+    // Instead use textField value as a cell accessibility label.
+    self.textField.isAccessibilityElement = NO;
+}
+
+- (NSString *)accessibilityLabel {
+    return self.textField.text;
 }
 
 - (void)prepareForReuse {
