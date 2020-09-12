@@ -249,6 +249,7 @@ extension SPNoteEditorViewController {
 // MARK: - History Delegate
 //
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
+
     func noteHistoryControllerDidCancel() {
         dismissHistory(animated: true)
         restoreOriginalNoteContent()
@@ -261,7 +262,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
     }
 
     func noteHistoryControllerDidSelectVersion(withContent content: String) {
-        updateEditor(with: content, animated: true)
+        updateEditor(with: content)
     }
 }
 
@@ -269,6 +270,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 // MARK: - History Card transition delegate
 //
 extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
+
     func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
         cleanUpAfterHistoryDismissal()
         restoreOriginalNoteContent()
@@ -279,6 +281,7 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 // MARK: - Transitioning
 //
 private extension SPNoteEditorViewController {
+
     func present(_ viewController: UIViewController, with transitioningManager: UIViewControllerTransitioningDelegate) {
         viewController.transitioningDelegate = transitioningManager
         viewController.modalPresentationStyle = .custom
@@ -291,7 +294,8 @@ private extension SPNoteEditorViewController {
 // MARK: - Editor
 //
 private extension SPNoteEditorViewController {
-    func updateEditor(with content: String, animated: Bool = false) {
+
+    func updateEditor(with content: String, animated: Bool = true) {
         let contentUpdateBlock = {
             self.noteEditorTextView.attributedText = NSAttributedString(string: content)
             self.noteEditorTextView.processChecklists()
@@ -307,8 +311,8 @@ private extension SPNoteEditorViewController {
 
         contentUpdateBlock()
 
-        let animations = { () -> Void in
-            snapshot.alpha = 0.0
+        let animations = {
+            snapshot.alpha = .zero
         }
 
         let completion: (Bool) -> Void = { _ in
@@ -321,7 +325,7 @@ private extension SPNoteEditorViewController {
     }
 
     func restoreOriginalNoteContent() {
-        updateEditor(with: currentNote.content, animated: true)
+        updateEditor(with: currentNote.content)
     }
 }
 
@@ -329,6 +333,7 @@ private extension SPNoteEditorViewController {
 // MARK: - Accessibility
 //
 private extension SPNoteEditorViewController {
+
     func resetAccessibilityFocus() {
         UIAccessibility.post(notification: .layoutChanged, argument: nil)
     }
