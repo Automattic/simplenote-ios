@@ -107,7 +107,7 @@ class SPAuthHandler {
         simperiumService.authenticate(withUsername: username, password: password, success: {
             onCompletion(nil)
         }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumLoginErrorCode: Int(responseCode))
+            let wrappedError = SPAuthError(simperiumLoginErrorCode: responseCode)
             onCompletion(wrappedError)
         })
     }
@@ -126,7 +126,7 @@ class SPAuthHandler {
         simperiumService.validate(withUsername: username, password: password, success: {
             onCompletion(nil)
         }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumLoginErrorCode: Int(responseCode))
+            let wrappedError = SPAuthError(simperiumLoginErrorCode: responseCode)
             onCompletion(wrappedError)
         })
     }
@@ -145,7 +145,7 @@ class SPAuthHandler {
         simperiumService.signup(withUsername: username, password: password, success: {
             onCompletion(nil)
         }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumSignupErrorCode: Int(responseCode))
+            let wrappedError = SPAuthError(simperiumSignupErrorCode: responseCode)
             onCompletion(wrappedError)
         })
     }
