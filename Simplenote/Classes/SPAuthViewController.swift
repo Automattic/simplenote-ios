@@ -174,6 +174,10 @@ class SPAuthViewController: UIViewController {
     ///
     let mode: AuthenticationMode
 
+    /// Indicates if the Extended Debug Mode is enabled
+    ///
+    var debugEnabled = false
+
 
 
     /// NSCodable Required Initializer
