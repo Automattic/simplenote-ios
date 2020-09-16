@@ -46,6 +46,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.isSecureTextEntry = true
             passwordInputView.placeholder = AuthenticationStrings.passwordPlaceholder
             passwordInputView.rightViewInsets = AuthenticationConstants.accessoryViewInsets
+            passwordInputView.passwordRules = UITextInputPasswordRules(descriptor: SimplenoteConstants.passwordRules)
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
