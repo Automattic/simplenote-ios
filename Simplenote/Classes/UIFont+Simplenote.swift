@@ -37,12 +37,6 @@ extension UIFont {
                             .preferredFontDescriptor(withTextStyle: style)
                             .addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
 
-        // In iOS 11 we must resort to a non Dynamic Type mechanism, since the proper API simply does
-        // not respond well.
-        guard #available(iOS 12.0, *) else {
-            return UIFont.systemFont(ofSize: descriptor.pointSize, weight: weight)
-        }
-
         return UIFont(descriptor: descriptor, size: .zero)
     }
 }
