@@ -52,7 +52,7 @@ class SPAuthViewController: UIViewController {
             passwordInputView.rightViewMode = .always
             passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
-            passwordInputView.textContentType = mode.passwordContentType
+            passwordInputView.textContentType = .password
         }
     }
 
@@ -566,7 +566,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 struct AuthenticationMode {
     let title: String
     let validationStyle: AuthenticationValidator.Style
-    let passwordContentType: UITextContentType
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
@@ -584,7 +583,6 @@ extension AuthenticationMode {
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
                      validationStyle:               .legacy,
-                     passwordContentType:           .password,
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
@@ -597,7 +595,6 @@ extension AuthenticationMode {
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
                      validationStyle:               .strong,
-                     passwordContentType:           .newPassword,
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
