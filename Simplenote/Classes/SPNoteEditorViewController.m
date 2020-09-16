@@ -125,15 +125,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-
-    // Note:
-    // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
-    if (@available(iOS 11.0, *)) {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
-            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-        }
-    }
 }
 
 - (VSTheme *)theme {

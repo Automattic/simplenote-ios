@@ -22,8 +22,6 @@ class SPAuthViewController: UIViewController {
             emailInputView.keyboardType = .emailAddress
             emailInputView.placeholder = AuthenticationStrings.emailPlaceholder
             emailInputView.returnKeyType = .next
-            emailInputView.rightView = onePasswordButton
-            emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
             emailInputView.textColor = .simplenoteGray80Color
             emailInputView.delegate = self
@@ -47,13 +45,14 @@ class SPAuthViewController: UIViewController {
         didSet {
             passwordInputView.isSecureTextEntry = true
             passwordInputView.placeholder = AuthenticationStrings.passwordPlaceholder
+            passwordInputView.rightViewInsets = AuthenticationConstants.accessoryViewInsets
+            passwordInputView.passwordRules = UITextInputPasswordRules(descriptor: SimplenoteConstants.passwordRules)
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
-            passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
-            passwordInputView.textContentType = .password
+            passwordInputView.textContentType = mode.passwordContentType
         }
     }
 
@@ -103,17 +102,6 @@ class SPAuthViewController: UIViewController {
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
         }
     }
-
-    /// # 1Password Button
-    ///
-    private lazy var onePasswordButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.tintColor = .simplenoteGray50Color
-        button.setImage(.image(name: .onePassword), for: .normal)
-        button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
-        button.sizeToFit()
-        return button
-    }()
 
     /// # Reveal Password Button
     ///
@@ -206,7 +194,6 @@ class SPAuthViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
         ensureNavigationBarIsVisible()
@@ -261,12 +248,7 @@ private extension SPAuthViewController {
 
     @objc
     func applicationDidBecomeActive() {
-        refreshOnePasswordAvailability()
         ensurePasswordFieldIsReset()
-    }
-
-    func refreshOnePasswordAvailability() {
-        emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
     }
 
     func ensurePasswordFieldIsReset() {
@@ -335,42 +317,6 @@ private extension SPAuthViewController {
             }
 
             self.unlockInterface()
-        }
-    }
-
-    @IBAction func performOnePasswordLogIn(sender: Any) {
-        controller.findOnePasswordLogin(presenter: self, sender: sender) { (username, password, error) in
-            guard let username = username, let password = password else {
-                if case .onePasswordError = error {
-                    SPTracker.trackOnePasswordLoginFailure()
-                }
-
-                return
-            }
-
-            self.email = username
-            self.password = password
-
-            self.performLogIn()
-            SPTracker.trackOnePasswordLoginSuccess()
-        }
-    }
-
-    @IBAction func performOnePasswordSignUp(sender: Any) {
-        controller.saveLoginToOnePassword(presenter: self, sender: sender, username: email, password: password) { (username, password, error) in
-            guard let username = username, let password = password else {
-                if case .onePasswordError = error {
-                    SPTracker.trackOnePasswordSignupFailure()
-                }
-
-                return
-            }
-
-            self.email = username
-            self.password = password
-
-            self.performSignUp()
-            SPTracker.trackOnePasswordSignupSuccess()
         }
     }
 
@@ -624,7 +570,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 struct AuthenticationMode {
     let title: String
     let validationStyle: AuthenticationValidator.Style
-    let onePasswordSelector: Selector
+    let passwordContentType: UITextContentType
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
@@ -642,7 +588,7 @@ extension AuthenticationMode {
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
                      validationStyle:               .legacy,
-                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
+                     passwordContentType:           .password,
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
@@ -655,7 +601,7 @@ extension AuthenticationMode {
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
                      validationStyle:               .strong,
-                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
+                     passwordContentType:           .newPassword,
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
@@ -722,6 +668,6 @@ private extension AuthenticationStrings {
 // MARK: - Authentication Constants
 //
 private enum AuthenticationConstants {
-    static let onePasswordInsets    = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
+    static let accessoryViewInsets  = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }

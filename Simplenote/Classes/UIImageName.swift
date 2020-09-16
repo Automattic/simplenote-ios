@@ -27,7 +27,6 @@ enum UIImageName: Int, CaseIterable {
     case link
     case menu
     case newNote
-    case onePassword
     case pin
     case pinSmall
     case restore
@@ -101,8 +100,6 @@ extension UIImageName {
             return "icon_menu"
         case .newNote:
             return "icon_new_note"
-        case .onePassword:
-            return "icon_onepassword"
         case .pin:
             return "icon_pin"
         case .pinSmall:

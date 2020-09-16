@@ -313,31 +313,6 @@
 }
 
 
-
-#pragma mark - One Password
-
-+ (void)trackOnePasswordLoginSuccess
-{
-    [self trackAutomatticEventWithName:@"one_password_login_succeeded" properties:nil];
-}
-
-+ (void)trackOnePasswordLoginFailure
-{
-    [self trackAutomatticEventWithName:@"one_password_login_failed" properties:nil];
-}
-
-+ (void)trackOnePasswordSignupSuccess
-{
-    [self trackAutomatticEventWithName:@"one_password_signup_succeeded" properties:nil];
-}
-
-+ (void)trackOnePasswordSignupFailure
-{
-    [self trackAutomatticEventWithName:@"one_password_signup_failed" properties:nil];
-}
-
-
-
 #pragma mark - User
 
 + (void)trackUserAccountCreated
