@@ -22,8 +22,6 @@ class SPAuthViewController: UIViewController {
             emailInputView.keyboardType = .emailAddress
             emailInputView.placeholder = AuthenticationStrings.emailPlaceholder
             emailInputView.returnKeyType = .next
-            emailInputView.rightView = onePasswordButton
-            emailInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             emailInputView.rightViewMode = .always
             emailInputView.textColor = .simplenoteGray80Color
             emailInputView.delegate = self
@@ -50,7 +48,6 @@ class SPAuthViewController: UIViewController {
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
-            passwordInputView.rightViewInsets = AuthenticationConstants.onePasswordInsets
             passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
             passwordInputView.textContentType = .password
@@ -103,17 +100,6 @@ class SPAuthViewController: UIViewController {
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
         }
     }
-
-    /// # 1Password Button
-    ///
-    private lazy var onePasswordButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.tintColor = .simplenoteGray50Color
-        button.setImage(.image(name: .onePassword), for: .normal)
-        button.addTarget(self, action: mode.onePasswordSelector, for: .touchUpInside)
-        button.sizeToFit()
-        return button
-    }()
 
     /// # Reveal Password Button
     ///
@@ -202,7 +188,6 @@ class SPAuthViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshOnePasswordAvailability()
         ensureStylesMatchValidationState()
         performPrimaryActionIfPossible()
         ensureNavigationBarIsVisible()
@@ -257,12 +242,7 @@ private extension SPAuthViewController {
 
     @objc
     func applicationDidBecomeActive() {
-        refreshOnePasswordAvailability()
         ensurePasswordFieldIsReset()
-    }
-
-    func refreshOnePasswordAvailability() {
-        emailInputView.rightViewMode = controller.isOnePasswordAvailable ? .always : .never
     }
 
     func ensurePasswordFieldIsReset() {
@@ -331,42 +311,6 @@ private extension SPAuthViewController {
             }
 
             self.unlockInterface()
-        }
-    }
-
-    @IBAction func performOnePasswordLogIn(sender: Any) {
-        controller.findOnePasswordLogin(presenter: self, sender: sender) { (username, password, error) in
-            guard let username = username, let password = password else {
-                if error == .onePasswordError {
-                    SPTracker.trackOnePasswordLoginFailure()
-                }
-
-                return
-            }
-
-            self.email = username
-            self.password = password
-
-            self.performLogIn()
-            SPTracker.trackOnePasswordLoginSuccess()
-        }
-    }
-
-    @IBAction func performOnePasswordSignUp(sender: Any) {
-        controller.saveLoginToOnePassword(presenter: self, sender: sender, username: email, password: password) { (username, password, error) in
-            guard let username = username, let password = password else {
-                if error == .onePasswordError {
-                    SPTracker.trackOnePasswordSignupFailure()
-                }
-
-                return
-            }
-
-            self.email = username
-            self.password = password
-
-            self.performSignUp()
-            SPTracker.trackOnePasswordSignupSuccess()
         }
     }
 
