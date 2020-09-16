@@ -118,7 +118,6 @@
 		46A3C9B617DFA81A002865AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C7F1788D47500785EF3 /* SystemConfiguration.framework */; };
 		46A3C9B717DFA81A002865AE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C7D1788D46900785EF3 /* CoreData.framework */; };
 		46A3C9B817DFA81A002865AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C7B1788D45000785EF3 /* CFNetwork.framework */; };
-		46A3C9BA17DFA81A002865AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C6B1788A58C00785EF3 /* MobileCoreServices.framework */; };
 		46A3C9BB17DFA81A002865AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467D9C671788A57900785EF3 /* Security.framework */; };
 		46A3C9BD17DFA81A002865AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3D17848E8500E55842 /* CoreGraphics.framework */; };
 		46A3C9BE17DFA81A002865AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3F17848E8500E55842 /* UIKit.framework */; };
@@ -291,6 +290,7 @@
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
 		B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982CF22F8643200C37C29 /* SPTextInputView.swift */; };
 		B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D122F8644000C37C29 /* SPSquaredButton.swift */; };
+		B5DC146F25125FE400817536 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5CFFFE322AA9B1900B968CD /* CoreServices.framework */; };
 		B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */; };
 		B5DF734222A565DA00602CE7 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734122A565DA00602CE7 /* Options.swift */; };
 		B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
@@ -835,6 +835,7 @@
 				B50D2FB624E6DFAC00163FC3 /* SimplenoteSearch in Frameworks */,
 				B5BDD8771BEA6C19006EB940 /* AdSupport.framework in Frameworks */,
 				B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */,
+				B5DC146F25125FE400817536 /* CoreServices.framework in Frameworks */,
 				B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */,
 				B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */,
 				B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */,
@@ -845,7 +846,6 @@
 				46A3C9B617DFA81A002865AE /* SystemConfiguration.framework in Frameworks */,
 				46A3C9B717DFA81A002865AE /* CoreData.framework in Frameworks */,
 				46A3C9B817DFA81A002865AE /* CFNetwork.framework in Frameworks */,
-				46A3C9BA17DFA81A002865AE /* MobileCoreServices.framework in Frameworks */,
 				46A3C9BB17DFA81A002865AE /* Security.framework in Frameworks */,
 				46A3C9BD17DFA81A002865AE /* CoreGraphics.framework in Frameworks */,
 				46A3C9BE17DFA81A002865AE /* UIKit.framework in Frameworks */,
