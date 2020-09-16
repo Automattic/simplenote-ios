@@ -129,9 +129,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [super layoutSubviews];
     
     CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
-    if (@available(iOS 11.0, *)) {
-        padding += self.safeAreaInsets.left;
-    }
+    padding += self.safeAreaInsets.left;
+
     CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
     CGFloat width = self.bounds.size.width;
     
