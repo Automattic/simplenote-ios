@@ -396,10 +396,6 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func handleError(error: SPAuthError) {
-        guard error.shouldBePresentedOnscreen else {
-            return
-        }
-
         switch error {
         case .signupUserAlreadyExists:
             presentUserAlreadyExistsError(error: error)
