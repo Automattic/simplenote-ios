@@ -45,12 +45,13 @@ class SPAuthViewController: UIViewController {
         didSet {
             passwordInputView.isSecureTextEntry = true
             passwordInputView.placeholder = AuthenticationStrings.passwordPlaceholder
+            passwordInputView.rightViewInsets = AuthenticationConstants.accessoryViewInsets
             passwordInputView.returnKeyType = .done
             passwordInputView.rightView = revealPasswordButton
             passwordInputView.rightViewMode = .always
             passwordInputView.textColor = .simplenoteGray80Color
             passwordInputView.delegate = self
-            passwordInputView.textContentType = .password
+            passwordInputView.textContentType = mode.passwordContentType
         }
     }
 
@@ -564,7 +565,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 struct AuthenticationMode {
     let title: String
     let validationStyle: AuthenticationValidator.Style
-    let onePasswordSelector: Selector
+    let passwordContentType: UITextContentType
     let primaryActionSelector: Selector
     let primaryActionText: String
     let secondaryActionSelector: Selector
@@ -582,7 +583,7 @@ extension AuthenticationMode {
     static var login: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.loginTitle,
                      validationStyle:               .legacy,
-                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordLogIn),
+                     passwordContentType:           .password,
                      primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
@@ -595,7 +596,7 @@ extension AuthenticationMode {
     static var signup: AuthenticationMode {
         return .init(title:                         AuthenticationStrings.signupTitle,
                      validationStyle:               .strong,
-                     onePasswordSelector:           #selector(SPAuthViewController.performOnePasswordSignUp),
+                     passwordContentType:           .newPassword,
                      primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
@@ -662,6 +663,6 @@ private extension AuthenticationStrings {
 // MARK: - Authentication Constants
 //
 private enum AuthenticationConstants {
-    static let onePasswordInsets    = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
+    static let accessoryViewInsets  = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 }
