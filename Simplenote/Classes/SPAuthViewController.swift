@@ -341,7 +341,7 @@ private extension SPAuthViewController {
     @IBAction func performOnePasswordLogIn(sender: Any) {
         controller.findOnePasswordLogin(presenter: self, sender: sender) { (username, password, error) in
             guard let username = username, let password = password else {
-                if error == .onePasswordError {
+                if case .onePasswordError = error {
                     SPTracker.trackOnePasswordLoginFailure()
                 }
 
@@ -359,7 +359,7 @@ private extension SPAuthViewController {
     @IBAction func performOnePasswordSignUp(sender: Any) {
         controller.saveLoginToOnePassword(presenter: self, sender: sender, username: email, password: password) { (username, password, error) in
             guard let username = username, let password = password else {
-                if error == .onePasswordError {
+                if case .onePasswordError = error {
                     SPTracker.trackOnePasswordSignupFailure()
                 }
 

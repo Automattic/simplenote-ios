@@ -10,7 +10,7 @@ enum SPAuthError: Error {
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
-    case unknown
+    case unknown(statusCode: Int, response: String?, requestError: Error?)
 }
 
 
@@ -30,25 +30,25 @@ extension SPAuthError {
 
     /// Returns the SPAuthError matching a given Simperium Login Error Code
     ///
-    init(simperiumLoginErrorCode: Int) {
-        switch simperiumLoginErrorCode {
+    init(loginErrorCode: Int, response: String?, error: Error?) {
+        switch loginErrorCode {
         case 401:
             self = .loginBadCredentials
         default:
-            self = .unknown
+            self = .unknown(statusCode: loginErrorCode, response: response, requestError: error)
         }
     }
 
     /// Returns the SPAuthError matching a given Simperium Signup Error Code
     ///
-    init(simperiumSignupErrorCode: Int) {
-        switch simperiumSignupErrorCode {
+    init(signupErrorCode: Int, response: String?, error: Error?) {
+        switch signupErrorCode {
         case 401:
             self = .signupBadCredentials
         case 409:
             self = .signupUserAlreadyExists
         default:
-            self = .unknown
+            self = .unknown(statusCode: signupErrorCode, response: response, requestError: error)
         }
     }
 }
