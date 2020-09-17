@@ -590,7 +590,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     cell.backgroundColor = [UIColor simplenoteTableViewCellBackgroundColor];
     cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
     cell.textLabel.textColor = [UIColor simplenoteTextColor];
-    cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
+    cell.detailTextLabel.textColor = [UIColor simplenoteSecondaryTextColor];
 }
 
 

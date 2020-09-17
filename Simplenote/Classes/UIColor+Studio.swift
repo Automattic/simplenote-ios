@@ -249,6 +249,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteSecondaryTextColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray30)
+    }
+
+    @objc
     static var simplenoteTintColor: UIColor {
         UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
     }

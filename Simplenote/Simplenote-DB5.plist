@@ -116,8 +116,6 @@
 		<integer>3</integer>
 		<key>tableViewBackgroundColor</key>
 		<string>@backgroundColor</string>
-		<key>tableViewDetailTextLabelColor</key>
-		<string>666666</string>
 		<key>collaboratorCellHeight</key>
 		<integer>44</integer>
 		<key>collaboratorCellSidePadding</key>
@@ -151,8 +149,6 @@
 		<string>@secondaryTextColor</string>
 		<key>tableViewBackgroundColor</key>
 		<string>1e1e1e</string>
-		<key>tableViewDetailTextLabelColor</key>
-		<string>@secondaryTextColor</string>
 		<key>tagViewPlaceholderColor</key>
 		<string>@secondaryTextColor</string>
 		<key>tagViewFontColor</key>

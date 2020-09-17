@@ -8,7 +8,6 @@ import UIKit
 enum UIColorName: Int, CaseIterable {
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
-    case tableViewDetailTextLabelColor
 }
 
 
@@ -24,8 +23,6 @@ extension UIColorName {
             return .actionViewButtonDisabledColor
         case .actionViewStatusFontColor:
             return .actionViewStatusFontColor
-        case .tableViewDetailTextLabelColor:
-            return .tableViewDetailTextLabelColor
         }
     }
 }
