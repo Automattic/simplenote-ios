@@ -4,6 +4,7 @@
 -   Swiping a Note in the List now reveals the Copy Internal Link Action #864
 -   Long Pressing over an Internal Link now pushes the target Note #868
 -   iOS 12 is now the minimum supported OS #881
+-   Password AutoFill is now the preferred way to manage your credentials #882
 
 4.24
 -----

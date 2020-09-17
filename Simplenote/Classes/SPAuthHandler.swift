@@ -1,5 +1,4 @@
 import Foundation
-import OnePasswordExtension
 import SafariServices
 
 
@@ -11,18 +10,6 @@ class SPAuthHandler {
     ///
     private let simperiumService: SPAuthenticator
 
-    /// OnePassword Extension convenience property
-    ///
-    private var onePasswordService: OnePasswordExtension {
-        return OnePasswordExtension.shared()
-    }
-
-    /// Indicates if OnePassword is available.
-    ///
-    var isOnePasswordAvailable: Bool {
-        return OnePasswordExtension.shared().isAppExtensionAvailable()
-    }
-
 
     /// Designated Initializer.
     ///
@@ -32,66 +19,6 @@ class SPAuthHandler {
         self.simperiumService = simperiumService
     }
 
-
-    /// Presents the OnePassword Extension for Login.
-    ///
-    /// - Note: Errors are mapped into SPAuthError.
-    ///
-    /// - Parameters:
-    ///     - presenter: Source UIViewController from which the extension should be presented.
-    ///     - sender: The sender which triggers the share sheet to show.
-    ///     - onCompletion: Closure to be executed on completion.
-    ///
-    func findOnePasswordLogin(presenter: UIViewController, sender: Any, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
-        onePasswordService.findLogin(forURLString: kOnePasswordSimplenoteURL, for: presenter, sender: sender) { (dictionary, error) in
-            guard let username = dictionary?[AppExtensionUsernameKey] as? String,
-                let password = dictionary?[AppExtensionPasswordKey] as? String
-                else {
-                    let wrappedError = SPAuthError(onePasswordError: error)
-                    onCompletion(nil, nil, wrappedError)
-                    return
-            }
-
-            onCompletion(username, password, nil)
-        }
-    }
-
-
-    /// Presents the OnePassword Extension for Signup purposes: The user will be allowed to store a given set of credentials.
-    ///
-    /// - Note: Errors are mapped into SPAuthError.
-    ///
-    /// - Parameters:
-    ///     - presenter: Source UIViewController from which the extension should be presented.
-    ///     - sender: The sender which triggers the share sheet to show.
-    ///     - username: Simperium Username
-    ///     - password: Simperium Password
-    ///     - onCompletion: Closure to be executed on completion.
-    ///
-    func saveLoginToOnePassword(presenter: UIViewController, sender: Any, username: String, password: String, onCompletion: @escaping (String?, String?, SPAuthError?) -> Void) {
-        let details = [
-            AppExtensionTitleKey: kOnePasswordSimplenoteTitle,
-            AppExtensionUsernameKey: username,
-            AppExtensionPasswordKey: password
-        ]
-
-        let options = [
-            AppExtensionGeneratedPasswordMinLengthKey: kOnePasswordGeneratedMinLength,
-            AppExtensionGeneratedPasswordMaxLengthKey: kOnePasswordGeneratedMaxLength
-        ]
-
-        onePasswordService.storeLogin(forURLString: kOnePasswordSimplenoteURL, loginDetails: details, passwordGenerationOptions: options, for: presenter, sender: sender) { (dictionary, error) in
-            guard let username = dictionary?[AppExtensionUsernameKey] as? String,
-                let password = dictionary?[AppExtensionPasswordKey] as? String
-                else {
-                    let wrappedError = SPAuthError(onePasswordError: error)
-                    onCompletion(nil, nil, wrappedError)
-                    return
-            }
-
-            onCompletion(username, password, nil)
-        }
-    }
 
 
     /// Authenticates against the Simperium Backend.

@@ -216,6 +216,17 @@ class SPTextInputView: UIView {
         }
     }
 
+    /// Password Rules
+    ///
+    var passwordRules: UITextInputPasswordRules? {
+        get {
+            textField.passwordRules
+        }
+        set {
+            textField.passwordRules = newValue
+        }
+    }
+
     /// When toggled, the border color will be updated to borderColorError
     ///
     var inErrorState: Bool = false {
