@@ -66,42 +66,11 @@
 
 
 #pragma mark ================================================================================
-#pragma mark Legacy
-#pragma mark ================================================================================
-
-- (void)importLegacyAuthenticationData
-{
-    // First check for a legacy token and bring that over if possible (to avoid a sign in prompt)
-    NSString *legacyAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"spAuthToken"];
-    NSString *username = (__bridge_transfer NSString *)CFPreferencesCopyAppValue(CFSTR("email"), kCFPreferencesCurrentApplication);
-    
-    if (legacyAuthToken && [username length] > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"SPUsername"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [SAMKeychain setPassword:legacyAuthToken forService:[SPCredentials simperiumAppID] account:username];
-    }
-    
-    // Clear legacy data
-    if (legacyAuthToken) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"spAuthToken"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
-    if (username) {
-        CFPreferencesSetAppValue(CFSTR("email"), NULL, kCFPreferencesCurrentApplication);
-        CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
-    }
-}
-
-
-#pragma mark ================================================================================
 #pragma mark Frameworks Setup
 #pragma mark ================================================================================
 
 - (void)setupSimperium
 {
-    [self importLegacyAuthenticationData];
-    
 	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel
 											  context:self.managedObjectContext
 										  coordinator:self.persistentStoreCoordinator];
