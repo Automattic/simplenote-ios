@@ -60,8 +60,6 @@
 		<integer>200</integer>
 		<key>actionSheetBoxPadding</key>
 		<integer>20</integer>
-		<key>actionSheetButtonBackgroundHighlightColor</key>
-		<string>f1f1f1</string>
 		<key>actionSheetPresentationTime</key>
 		<real>0.5</real>
 		<key>actionSheetDismissalTime</key>
