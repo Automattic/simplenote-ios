@@ -202,11 +202,6 @@
         [self showPasscodeLockIfNecessary];
     }
 
-    
-//    // Initialize Background Fetch:
-//    // UIApplicationBackgroundFetchIntervalMinimum enables the device to check as frequently as it sees fit
-//	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
 
@@ -294,24 +289,6 @@
 {
     return YES;
 }
-
-#pragma mark Background Fetch
-
-//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-//{
-//    NSLog(@">> Simplenote performing Background Fetch");
-//    
-//    [self.simperium backgroundFetchWithCompletion:^(UIBackgroundFetchResult result) {
-//        
-//        if (result == UIBackgroundFetchResultNewData) {
-//            NSLog(@"<< Background Fetch: New Data Received");
-//        } else if (result == UIBackgroundFetchResultNoData) {
-//            NSLog(@"<< Background Fetch: No Data Received");
-//        }
-//
-//        completionHandler(result);
-//    }];
-//}
 
 
 #pragma mark First Launch
