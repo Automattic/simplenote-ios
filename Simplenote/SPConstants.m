@@ -34,7 +34,6 @@ NSString *const kShareExtensionGroupName            = @"group.com.codality.Notat
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Development";
 #endif
 
-NSString *const kFirstLaunchKey                     = @"SPFirstLaunch";
 NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
 NSString *const kSimplenoteTrashKey                 = @"__##__trash__##__";

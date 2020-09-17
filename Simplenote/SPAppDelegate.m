@@ -295,10 +295,7 @@
 
 - (BOOL)isFirstLaunch
 {
-    NSNumber *firstLaunchKey = [[NSUserDefaults standardUserDefaults] objectForKey:kFirstLaunchKey];
-    BOOL firstLaunch = firstLaunchKey == nil;
-    
-    return firstLaunch;
+    return [[Options shared] firstLaunch];
 }
 
 - (void)createWelcomeNoteAfterDelay
@@ -327,9 +324,7 @@
 
 - (void)markFirstLaunch
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@(1) forKey:kFirstLaunchKey];
-    [userDefaults synchronize];
+    [[Options shared] setFirstLaunch:YES];
 }
 
 

@@ -46,6 +46,18 @@ extension Options {
         }
     }
 
+    /// Indicates if it's the first time the app is launched
+    ///
+    @objc
+    var firstLaunch: Bool {
+        get {
+            defaults.bool(forKey: .firstLaunch)
+        }
+        set {
+            defaults.set(newValue, forKey: .firstLaunch)
+        }
+    }
+
     /// Returns the target Sort Mode for the Notes List
     ///
     @objc

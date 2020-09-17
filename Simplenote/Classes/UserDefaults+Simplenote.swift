@@ -6,6 +6,7 @@ import Foundation
 extension UserDefaults {
     enum Key: String {
         case condensedNotes = "SPCondensedNoteListPref"
+        case firstLaunch = "SPFirstLaunch"
         case lastKnownVersion
         case listSortMode
         case listSortModeLegacy = "SPAlphabeticalSortPref"
