@@ -293,7 +293,12 @@
 
 - (BOOL)isFirstLaunch
 {
-    return [[Options shared] firstLaunch];
+    return [[Options shared] firstLaunch] == NO;
+}
+
+- (void)markFirstLaunch
+{
+    [[Options shared] setFirstLaunch:YES];
 }
 
 - (void)createWelcomeNoteAfterDelay
@@ -318,11 +323,6 @@
     [self save];
     
     _noteListViewController.firstLaunch = YES;
-}
-
-- (void)markFirstLaunch
-{
-    [[Options shared] setFirstLaunch:YES];
 }
 
 

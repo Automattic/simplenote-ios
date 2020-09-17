@@ -46,7 +46,7 @@ extension Options {
         }
     }
 
-    /// Indicates if it's the first time the app is launched
+    /// Indicates if it's the First Launch event was already handled
     ///
     @objc
     var firstLaunch: Bool {
