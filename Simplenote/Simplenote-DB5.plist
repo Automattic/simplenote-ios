@@ -72,8 +72,6 @@
 		<integer>100</integer>
 		<key>actionButtonWidth</key>
 		<string>76</string>
-		<key>actionViewStatusFontColor</key>
-		<string>aaaaaa</string>
 		<key>actionViewToggleHeight</key>
 		<integer>30</integer>
 		<key>actionViewToggleWidth</key>
@@ -143,8 +141,6 @@
 		<string>@backgroundColor</string>
 		<key>backgroundColor</key>
 		<string>1e1e1e</string>
-		<key>actionViewStatusFontColor</key>
-		<string>@secondaryTextColor</string>
 		<key>actionViewButtonDisabledColor</key>
 		<string>@secondaryTextColor</string>
 		<key>tableViewBackgroundColor</key>

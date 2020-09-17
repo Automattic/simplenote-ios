@@ -5,5 +5,4 @@ import Foundation
 //
 enum ThemeColorKey: String {
     case actionViewButtonDisabledColor
-    case actionViewStatusFontColor
 }

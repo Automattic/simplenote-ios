@@ -228,7 +228,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
         statusLabel = [[UILabel alloc] init];
         statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        statusLabel.textColor = [UIColor colorWithName:UIColorNameActionViewStatusFontColor];
+        statusLabel.textColor = [UIColor simplenoteSecondaryTextColor];
         statusLabel.adjustsFontSizeToFitWidth = YES;
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         statusLabel.textAlignment = NSTextAlignmentCenter;

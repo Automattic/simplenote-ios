@@ -7,7 +7,6 @@ import UIKit
 @objc
 enum UIColorName: Int, CaseIterable {
     case actionViewButtonDisabledColor
-    case actionViewStatusFontColor
 }
 
 
@@ -21,8 +20,6 @@ extension UIColorName {
         switch self {
         case .actionViewButtonDisabledColor:
             return .actionViewButtonDisabledColor
-        case .actionViewStatusFontColor:
-            return .actionViewStatusFontColor
         }
     }
 }
