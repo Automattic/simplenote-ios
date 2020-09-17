@@ -3,7 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 use_frameworks!
 
-platform :ios, '11.0'
+platform :ios, '12.0'
 workspace 'Simplenote.xcworkspace'
 
 plugin 'cocoapods-repo-update'
@@ -28,7 +28,7 @@ abstract_target 'Automattic' do
 		#
 		pod 'Automattic-Tracks-iOS', '~> 0.5'
 #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
-		pod 'Simperium', :git => 'https://github.com/Simperium/simperium-ios.git', :commit => '748f145'
+		pod 'Simperium', '~> 1.0'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
 
 		# Testing Target

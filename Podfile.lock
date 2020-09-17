@@ -24,17 +24,17 @@ PODS:
   - Sentry (4.5.0):
     - Sentry/Core (= 4.5.0)
   - Sentry/Core (4.5.0)
-  - Simperium (0.8.30):
-    - Simperium/DiffMatchPach (= 0.8.30)
-    - Simperium/JRSwizzle (= 0.8.30)
-    - Simperium/SocketTrust (= 0.8.30)
-    - Simperium/SPReachability (= 0.8.30)
-    - Simperium/SSKeychain (= 0.8.30)
-  - Simperium/DiffMatchPach (0.8.30)
-  - Simperium/JRSwizzle (0.8.30)
-  - Simperium/SocketTrust (0.8.30)
-  - Simperium/SPReachability (0.8.30)
-  - Simperium/SSKeychain (0.8.30)
+  - Simperium (1.0.0):
+    - Simperium/DiffMatchPach (= 1.0.0)
+    - Simperium/JRSwizzle (= 1.0.0)
+    - Simperium/SocketTrust (= 1.0.0)
+    - Simperium/SPReachability (= 1.0.0)
+    - Simperium/SSKeychain (= 1.0.0)
+  - Simperium/DiffMatchPach (1.0.0)
+  - Simperium/JRSwizzle (1.0.0)
+  - Simperium/SocketTrust (1.0.0)
+  - Simperium/SPReachability (1.0.0)
+  - Simperium/SSKeychain (1.0.0)
   - Sodium (0.8.0)
   - UIDeviceIdentifier (1.5.0)
   - WordPress-Ratings-iOS (0.0.2)
@@ -46,7 +46,7 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (~> 0.5)
   - Gridicons (~> 0.18)
   - SAMKeychain (= 1.5.2)
-  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, commit `748f145`)
+  - Simperium (~> 1.0)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -59,20 +59,11 @@ SPEC REPOS:
     - Reachability
     - SAMKeychain
     - Sentry
+    - Simperium
     - Sodium
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
-
-EXTERNAL SOURCES:
-  Simperium:
-    :commit: 748f145
-    :git: https://github.com/Simperium/simperium-ios.git
-
-CHECKOUT OPTIONS:
-  Simperium:
-    :commit: 748f145
-    :git: https://github.com/Simperium/simperium-ios.git
 
 SPEC CHECKSUMS:
   AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
@@ -82,12 +73,12 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
-  Simperium: 0ed2ab41abdd8459d85fca153a9b5c93b24aba65
+  Simperium: fa0feb6e86de4e93d0d07704b59a0a7aebd7d5a7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
   UIDeviceIdentifier: a79ccdfc940373835a7d8e9fc7541e6bf61b6319
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 1b70394b15ac189541f0798fc16fd9f9ecb2f43a
+PODFILE CHECKSUM: 00efd783ab7a5ba086f8fad523da692ce9f9b502
 
 COCOAPODS: 1.7.5
