@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPDiagnosticsViewController" customModule="Simplenote" customModuleProvider="target">
+            <connections>
+                <outlet property="detailsTextView" destination="ixr-Hy-Nmm" id="gI1-RE-Avj"/>
+                <outlet property="titleLabel" destination="JVy-4X-V1z" id="Gnb-2p-47X"/>
+                <outlet property="view" destination="O1R-9i-luY" id="B2G-QT-MLJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="O1R-9i-luY">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVy-4X-V1z">
+                    <rect key="frame" x="20" y="64" width="188" height="41"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ixr-Hy-Nmm">
+                    <rect key="frame" x="20" y="135" width="374" height="707"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="cb1-Yh-IQP"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ixr-Hy-Nmm" firstAttribute="leading" secondItem="cb1-Yh-IQP" secondAttribute="leading" constant="20" id="5kI-iv-tJU"/>
+                <constraint firstItem="ixr-Hy-Nmm" firstAttribute="top" secondItem="JVy-4X-V1z" secondAttribute="bottom" constant="30" id="KLa-W3-z2a"/>
+                <constraint firstItem="cb1-Yh-IQP" firstAttribute="trailing" secondItem="ixr-Hy-Nmm" secondAttribute="trailing" constant="20" id="ZDb-ga-Ixm"/>
+                <constraint firstItem="JVy-4X-V1z" firstAttribute="leading" secondItem="cb1-Yh-IQP" secondAttribute="leading" constant="20" id="h65-S0-pSo"/>
+                <constraint firstItem="JVy-4X-V1z" firstAttribute="top" secondItem="cb1-Yh-IQP" secondAttribute="top" constant="20" id="oF1-co-1Ta"/>
+                <constraint firstItem="cb1-Yh-IQP" firstAttribute="bottom" secondItem="ixr-Hy-Nmm" secondAttribute="bottom" constant="20" id="qPQ-E0-LLg"/>
+            </constraints>
+            <point key="canvasLocation" x="100" y="138"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
