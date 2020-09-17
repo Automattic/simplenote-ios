@@ -71,9 +71,7 @@
 
 - (void)setupSimperium
 {
-	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel
-											  context:self.managedObjectContext
-										  coordinator:self.persistentStoreCoordinator];
+	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel context:self.managedObjectContext coordinator:self.persistentStoreCoordinator];
 		  
 #if USE_VERBOSE_LOGGING
     [_simperium setVerboseLoggingEnabled:YES];
