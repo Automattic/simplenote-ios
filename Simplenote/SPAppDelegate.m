@@ -186,7 +186,6 @@
 	[self authenticateSimperium];
 
     // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
-    // TODO: Cleanup after 4.8.1 has been released!
     [[MigrationsHandler new] ensureUpdateIsHandled];
     [self setupAppRatings];
     
@@ -888,7 +887,7 @@
     return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
 }
 
--(BOOL)isRequestingContactsPermission
+- (BOOL)isRequestingContactsPermission
 {
     NSArray *topChildren = self.topMostController.childViewControllers;
     BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];
