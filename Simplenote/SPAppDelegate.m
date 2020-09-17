@@ -297,15 +297,6 @@
 {
     NSNumber *firstLaunchKey = [[NSUserDefaults standardUserDefaults] objectForKey:kFirstLaunchKey];
     BOOL firstLaunch = firstLaunchKey == nil;
-    if (firstLaunch) {
-        NSNumber *legacyFirstLaunch = (__bridge_transfer NSNumber *)CFPreferencesCopyAppValue(CFSTR("first-startup"),
-                                                                                              kCFPreferencesCurrentApplication);
-        
-        if (legacyFirstLaunch && legacyFirstLaunch.boolValue == false) {
-            [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:kFirstLaunchKey];
-            firstLaunch = NO;
-        }
-    }
     
     return firstLaunch;
 }
