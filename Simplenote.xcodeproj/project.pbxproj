@@ -263,7 +263,6 @@
 		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
 		B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */; };
 		B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */; };
-		B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
 		B5BAF9ED24E4D0D2000917C0 /* SimplenoteFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = B5BAF9EC24E4D0D2000917C0 /* SimplenoteFoundation */; };
@@ -622,7 +621,6 @@
 		B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPFeedbackManager.swift; path = Classes/SPFeedbackManager.swift; sourceTree = "<group>"; };
 		B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
 		B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+Extensions.m"; path = "Classes/UIDevice+Extensions.m"; sourceTree = "<group>"; };
-		B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageName.swift; path = Classes/UIImageName.swift; sourceTree = "<group>"; };
 		B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1310,7 +1308,6 @@
 		B5B9AB4122EA6FE1001CB0AD /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				B5B9AB4222EA6FFB001CB0AD /* UIColorSimplenoteTests.swift */,
 				B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */,
 			);
 			name = Themes;
@@ -2336,7 +2333,6 @@
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
-				B5B9AB4322EA6FFB001CB0AD /* UIColorSimplenoteTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
 				B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */,
