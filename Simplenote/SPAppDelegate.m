@@ -859,7 +859,7 @@
     BOOL useBiometry = self.allowBiometryInsteadOfPin;
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
-	controller.pin = [self getPin:YES];
+	controller.pin = [self getPin];
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
@@ -870,7 +870,7 @@
 }
 
 - (BOOL)passcodeLockIsEnabled {
-    NSString *pin = [self getPin:YES];
+    NSString *pin = [self getPin];
     
     return pin != nil && pin.length != 0;
 }
@@ -886,22 +886,9 @@
                      }];
 }
 
-- (NSString *)getPin:(BOOL)checkLegacy
+- (NSString *)getPin
 {
-    NSString *pin   = [SAMKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
-    
-    if (checkLegacy && (!pin || pin.length == 0)) {
-        
-        pin =  [[NSUserDefaults standardUserDefaults] objectForKey:kSimplenotePinLegacyKey];
-        
-        if (pin.length > 0) {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSimplenotePinLegacyKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self setPin:pin];
-        }
-    }
-    
-    return pin;
+    return [SAMKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
 }
 
 - (void)setPin:(NSString *)newPin

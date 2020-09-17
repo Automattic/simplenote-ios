@@ -36,7 +36,6 @@ extern NSString *const kSimplenoteSystemTagPinned;
 extern NSString *const kSimplenoteSystemTagShared;
 extern NSString *const kSimplenoteSystemTagUnread;
 extern NSString *const kSimplenotePinKey;
-extern NSString *const kSimplenotePinLegacyKey;
 extern NSString *const kSimplenoteUseBiometryKey;
 extern NSString *const kSimplenoteMarkdownDefaultKey;
 extern NSString *const kSignInErrorNotificationName;

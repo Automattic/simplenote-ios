@@ -43,7 +43,6 @@ NSString *const kSimplenoteSystemTagPinned          = @"pinned";
 NSString *const kSimplenoteSystemTagShared          = @"shared";
 NSString *const kSimplenoteSystemTagUnread          = @"unread";
 NSString *const kSimplenotePinKey                   = @"SimplenotePin";
-NSString *const kSimplenotePinLegacyKey             = @"PIN";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
 NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
