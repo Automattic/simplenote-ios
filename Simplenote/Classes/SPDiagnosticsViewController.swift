@@ -40,9 +40,15 @@ private extension SPDiagnosticsViewController {
     func setupTextView() {
         assert(attributedText != nil, "Missing Diagnostics Text")
         detailsTextView.attributedText = attributedText
+        detailsTextView.backgroundColor = .white
     }
 
     func setupNavigationItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Share", comment: "Share Action"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(shareWasPressed))
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
                                                             action: #selector(dismissWasPressed))
@@ -53,6 +59,22 @@ private extension SPDiagnosticsViewController {
 // MARK: - Actions
 //
 private extension SPDiagnosticsViewController {
+
+    @IBAction
+    func shareWasPressed() {
+        guard let attributedText = attributedText else {
+            fatalError()
+        }
+
+        let items = [attributedText.string]
+        let excludedActivities: [UIActivity.ActivityType] = [.print, .message, .postToFacebook, .postToTwitter, .assignToContact, .airDrop]
+
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = excludedActivities
+
+        present(activityViewController, animated: true)
+
+    }
 
     @IBAction
     func dismissWasPressed() {
