@@ -253,8 +253,6 @@
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
 		B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6846C23CE84D400398BBC /* NotesListController.swift */; };
-		B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
-		B5AA4B5B22F46B820072BF5D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AA4B5922F46B300072BF5D /* Colors.xcassets */; };
 		B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */; };
 		B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB169922FA128000B4EBA5 /* SPSheetController.xib */; };
 		B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
@@ -612,7 +610,6 @@
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Simplenote.swift"; path = "Classes/UIGestureRecognizer+Simplenote.swift"; sourceTree = "<group>"; };
 		B5A6846C23CE84D400398BBC /* NotesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesListController.swift; path = Classes/NotesListController.swift; sourceTree = "<group>"; };
-		B5AA4B5922F46B300072BF5D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Simplenote/Colors.xcassets; sourceTree = SOURCE_ROOT; };
 		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
 		B5AB169922FA128000B4EBA5 /* SPSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSheetController.xib; path = Classes/SPSheetController.xib; sourceTree = "<group>"; };
 		B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIKitConstants.swift; path = Classes/UIKitConstants.swift; sourceTree = "<group>"; };
@@ -1700,7 +1697,6 @@
 			isa = PBXGroup;
 			children = (
 				1748382D1BC1CAAB00E834AF /* CSS */,
-				B5AA4B5922F46B300072BF5D /* Colors.xcassets */,
 				E29ADD4D17848E8500E55842 /* Images.xcassets */,
 				B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */,
 				B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */,
@@ -1921,7 +1917,6 @@
 			files = (
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
-				B5AA4B5A22F46B300072BF5D /* Colors.xcassets in Resources */,
 				B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */,
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
 				B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */,
@@ -1955,7 +1950,6 @@
 			files = (
 				74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */,
 				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
-				B5AA4B5B22F46B820072BF5D /* Colors.xcassets in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
 			);
