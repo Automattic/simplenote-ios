@@ -7,7 +7,7 @@ enum SPAuthError: Error {
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
-    case unknown(statusCode: Int, response: String?, requestError: Error?)
+    case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
 
@@ -22,7 +22,7 @@ extension SPAuthError {
         case 401:
             self = .loginBadCredentials
         default:
-            self = .unknown(statusCode: loginErrorCode, response: response, requestError: error)
+            self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
     }
 
@@ -35,7 +35,7 @@ extension SPAuthError {
         case 409:
             self = .signupUserAlreadyExists
         default:
-            self = .unknown(statusCode: signupErrorCode, response: response, requestError: error)
+            self = .unknown(statusCode: signupErrorCode, response: response, error: error)
         }
     }
 }
