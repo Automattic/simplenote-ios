@@ -289,7 +289,7 @@
 }
 
 
-#pragma mark First Launch
+#pragma mark - First Launch
 
 - (BOOL)isFirstLaunch
 {
