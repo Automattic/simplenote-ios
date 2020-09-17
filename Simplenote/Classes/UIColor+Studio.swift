@@ -283,7 +283,6 @@ extension UIColor {
         UIColor(lightColor: .gray50, darkColor: .gray30)
     }
 
-
     @objc
     static var simplenoteTagViewCompleteHighlightedColor: UIColor {
         UIColor(lightColor: .gray30, darkColor: .gray50)
@@ -292,35 +291,5 @@ extension UIColor {
     @objc
     static var simplenoteTagViewDeletionBackgroundColor: UIColor {
         UIColor(lightColor: .spBlue5, darkColor: .darkGray3)
-    }
-
-
-
-
-///    #### PENDINGS
-
-    @objc
-    static var simplenoteActionSheetButtonTitleColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteActionSheetButtonBackgroundHighlightColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteActionViewButtonDisabledColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteActionViewStatusTextColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
-    }
-
-    @objc
-    static var simplenoteTableViewDetailTextColor: UIColor {
-        UIColor(lightColor: .gray0, darkColor: .gray5)
     }
 }
