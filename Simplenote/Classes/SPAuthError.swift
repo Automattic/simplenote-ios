@@ -1,12 +1,9 @@
 import Foundation
-import OnePasswordExtension
 
 
 // MARK: - SPAuthError
 //
 enum SPAuthError: Error {
-    case onePasswordCancelled
-    case onePasswordError
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
@@ -17,16 +14,6 @@ enum SPAuthError: Error {
 // MARK: - SPAuthError Convenience Initializers
 //
 extension SPAuthError {
-
-    /// Returns the SPAuthError matching a given OnePasswordError (If possible!)
-    ///
-    init?(onePasswordError: Error?) {
-        guard let error = onePasswordError as NSError? else {
-            return nil
-        }
-
-        self = error.code == AppExtensionErrorCode.cancelledByUser.rawValue ? .onePasswordError : .onePasswordCancelled
-    }
 
     /// Returns the SPAuthError matching a given Simperium Login Error Code
     ///
@@ -81,8 +68,6 @@ extension SPAuthError {
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
-        default:
-            return nil
         }
     }
 

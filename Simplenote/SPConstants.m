@@ -34,11 +34,6 @@ NSString *const kShareExtensionGroupName            = @"group.com.codality.Notat
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow.Development";
 #endif
 
-NSString *const kOnePasswordSimplenoteTitle         = @"Simplenote";
-NSString *const kOnePasswordSimplenoteURL           = @"simplenote.com";
-NSInteger const kOnePasswordGeneratedMinLength      = 4;
-NSInteger const kOnePasswordGeneratedMaxLength      = 50;
-
 NSString *const kFirstLaunchKey                     = @"SPFirstLaunch";
 NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
