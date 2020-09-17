@@ -50,8 +50,6 @@
 		<string>ffffff</string>
 		<key>barButtonWidth</key>
 		<string>44</string>
-		<key>actionSheetShowViewSeparators</key>
-		<true/>
 		<key>actionSheetLabelPadding</key>
 		<integer>10</integer>
 		<key>actionSheetMaxTitleWidth</key>
