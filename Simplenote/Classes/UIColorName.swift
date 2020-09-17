@@ -6,7 +6,6 @@ import UIKit
 //
 @objc
 enum UIColorName: Int, CaseIterable {
-    case actionSheetButtonFontColor
     case actionSheetButtonBackgroundHighlightColor
     case actionViewButtonDisabledColor
     case actionViewStatusFontColor
@@ -22,8 +21,6 @@ extension UIColorName {
     ///
     var legacyColorKey: ThemeColorKey {
         switch self {
-        case .actionSheetButtonFontColor:
-            return .actionSheetButtonFontColor
         case .actionSheetButtonBackgroundHighlightColor:
             return .actionSheetButtonBackgroundHighlightColor
         case .actionViewButtonDisabledColor:
