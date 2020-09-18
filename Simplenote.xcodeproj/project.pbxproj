@@ -210,6 +210,7 @@
 		B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */; };
 		B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */; };
 		B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552AB8624B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift */; };
+		B552FA692515395700185B9D /* KeychainPasswordItem+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */; };
 		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B56259CE2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */; };
@@ -2399,6 +2400,7 @@
 				B52893B32360B86500DF2571 /* UIColor+Helpers.swift in Sources */,
 				B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */,
 				B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */,
+				B552FA692515395700185B9D /* KeychainPasswordItem+Simplenote.swift in Sources */,
 				B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */,
 				B5CFFFE222AA9AD100B968CD /* TextBundleWrapper.m in Sources */,
 				B5CFFFE722AA9DB100B968CD /* Uploader.swift in Sources */,
