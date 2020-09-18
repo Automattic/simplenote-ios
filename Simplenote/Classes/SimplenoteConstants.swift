@@ -45,9 +45,4 @@ struct SimplenoteKeychain {
     ///
     static let timestampAccount = "Main"
     static let timestampService = "simplenote-passcode"
-
-    /// Share Extension
-    ///
-    static let shareAccount = "Main"
-    static let shareService = "SimplenoteShare"
 }
