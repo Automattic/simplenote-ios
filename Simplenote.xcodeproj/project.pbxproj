@@ -251,6 +251,7 @@
 		B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594C3ED2501E24C006D3A78 /* UINavigationController+Simplenote.swift */; };
+		B599839A2514EC790037B129 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
 		B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6846C23CE84D400398BBC /* NotesListController.swift */; };
@@ -1281,6 +1282,15 @@
 			path = SimplenoteTests;
 			sourceTree = "<group>";
 		};
+		B59983932514EC650037B129 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */,
+				37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */,
+			);
+			name = Keychain;
+			sourceTree = "<group>";
+		};
 		B5A6846B23CE84B900398BBC /* Notes List */ = {
 			isa = PBXGroup;
 			children = (
@@ -1588,6 +1598,7 @@
 				B5C7BF92230C592B000DEC91 /* Credentials */,
 				B569DBFE1C03411500EC1FE8 /* Extensions */,
 				B52BB74C22CFD14C0042C162 /* Exporter */,
+				B59983932514EC650037B129 /* Keychain */,
 				467D9C601788A53700785EF3 /* Models */,
 				B5B8AE7B1AB9ECF80082775D /* Ratings */,
 				B512AF981C20B1A200FE76D8 /* Settings */,
@@ -1611,8 +1622,6 @@
 		E29ADD4217848E8500E55842 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */,
-				37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */,
 				46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */,
 				B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */,
 				B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */,
@@ -2375,6 +2384,7 @@
 				B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */,
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
 				B52893B42360B86F00DF2571 /* UITraitCollection+Simplenote.swift in Sources */,
+				B599839A2514EC790037B129 /* KeychainPasswordItem.swift in Sources */,
 				B52893BB2360B91200DF2571 /* SPUserInterface.swift in Sources */,
 				74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */,
 				B52893B22360B7F500DF2571 /* ColorStudio.swift in Sources */,
