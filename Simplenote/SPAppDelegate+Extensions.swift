@@ -126,7 +126,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
 extension SPAppDelegate {
 
     private var pinlockKeychainItem: KeychainPasswordItem {
-        KeychainPasswordItem(service: SimplenoteConstants.pinlockKeychainService, account: SimplenoteConstants.pinlockKeychainAccount)
+        KeychainPasswordItem(service: SimplenoteKeychain.pinlockService, account: SimplenoteKeychain.pinlockAccount)
     }
 
     @objc
