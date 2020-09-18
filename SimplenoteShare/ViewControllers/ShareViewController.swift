@@ -1,6 +1,5 @@
 import UIKit
 import Social
-import SAMKeychain
 
 
 typealias CompletionBlock = () -> Void
@@ -21,7 +20,8 @@ class ShareViewController: UIViewController {
     /// Returns the Main App's SimperiumToken
     ///
     private var simperiumToken: String? {
-        return SAMKeychain.password(forService: kShareExtensionServiceName, account: kShareExtensionAccountName)
+        let item = KeychainPasswordItem(service: SimplenoteConstants.shareExtensionService, account: SimplenoteConstants.shareExtensionAccount)
+        return try? item.readPassword()
     }
 
     /// Indicates if the Markdown flag should be enabled

@@ -252,6 +252,7 @@
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594C3ED2501E24C006D3A78 /* UINavigationController+Simplenote.swift */; };
 		B599839A2514EC790037B129 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
+		B59983A12514F6A80037B129 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
 		B5A6166F2150855300CBE47B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = B594E61321508247001577EE /* Preferences.m */; };
 		B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6846C23CE84D400398BBC /* NotesListController.swift */; };
@@ -2383,6 +2384,7 @@
 			files = (
 				B5AA4B5322F46A200072BF5D /* VSTheme+Keys.swift in Sources */,
 				B56A9FF922AEBF4F003F85CB /* NSExtensionContext+Simplenote.swift in Sources */,
+				B59983A12514F6A80037B129 /* SimplenoteConstants.swift in Sources */,
 				B52893B42360B86F00DF2571 /* UITraitCollection+Simplenote.swift in Sources */,
 				B599839A2514EC790037B129 /* KeychainPasswordItem.swift in Sources */,
 				B52893BB2360B91200DF2571 /* SPUserInterface.swift in Sources */,

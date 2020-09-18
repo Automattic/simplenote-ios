@@ -145,3 +145,43 @@ extension SPAppDelegate {
         allowBiometryInsteadOfPin = false
     }
 }
+
+
+// MARK: - SimperiumDelegate
+//
+extension SPAppDelegate: SimperiumDelegate {
+
+    private var shareKeychainItem: KeychainPasswordItem {
+        KeychainPasswordItem(service: SimplenoteConstants.shareExtensionService, account: SimplenoteConstants.shareExtensionAccount)
+    }
+
+    public func simperiumDidLogin(_ simperium: Simperium!) {
+        // Store the Token: Required by the Share Extension!
+        if let token = simperium.user.authToken {
+            try? shareKeychainItem.savePassword(token)
+        }
+
+        // Tracker!
+        SPTracker.refreshMetadata(withEmail: simperium.user.email)
+
+        // Shortcuts!
+        ShortcutsHandler.shared.registerSimplenoteActivities()
+
+        // Now that the user info is present, cache it for use by the crash logging system.
+        let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
+        CrashLoggingShim.cacheUser(simperium.user)
+        CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
+    }
+
+    public func simperiumDidLogout(_ simperium: Simperium!) {
+        // Nuke Extension Token
+        try? shareKeychainItem.deleteItem()
+
+        // Tracker!
+        SPTracker.refreshMetadataForAnonymousUser()
+    }
+
+    public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
+        SPTracker.refreshMetadataForAnonymousUser()
+    }
+}

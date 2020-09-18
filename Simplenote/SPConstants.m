@@ -21,9 +21,6 @@ NSString *const kSimperiumPreferencesObjectKey      = @"preferences-key";
 
 NSString *const kAutomatticAnalyticLearnMoreURL     = @"https://automattic.com/cookies";
 
-NSString *const kShareExtensionAccountName          = @"Main";
-NSString *const kShareExtensionServiceName          = @"SimplenoteShare";
-
 #ifdef APPSTORE_DISTRIBUTION
 NSString *const kShareExtensionGroupName            = @"group.com.codality.NotationalFlow";
 #elif INTERNAL_DISTRIBUTION
