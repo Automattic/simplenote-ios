@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "إصلاح الخطأ";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "حذف";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "حذف الملاحظات";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "معلّق";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "تثبيت";
-
 /* Action to mark a note as pinned */
 "Pin note" = "تثبيت الملاحظة";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "إعادة التعيين مطلوبة";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "استعادة";
-
 /* Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "إعدادات";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "مشاركة";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "مشاركة التحليلات";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "إلغاء تأمين %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "إلغاء التثبيت";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "إلغاء تثبيت الملاحظة";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "إزالة وسم من الملاحظة الحالية";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "وسم:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "نقل الملاحظة الحالية إلى سلة المهملات";

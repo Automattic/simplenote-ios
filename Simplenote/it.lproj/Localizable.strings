@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debug";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Elimina";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Cancella note";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "In attesa";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Aggancia";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Aggancia";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Ripristino richiesto";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Ripristina";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Ripristina la nota";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Impostazioni";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Condividi";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Condividi analisi";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Sblocca %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Sgancia";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Sgancia";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Rimuovi il tag dalla nota";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "- Tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Sposta la nota nel cestino";
