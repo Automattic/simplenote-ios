@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Débogage";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Supprimer";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Supprimer les notes";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "En attente";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Épingler";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Épingler la note";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Réinitialisation requise";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Restaurer";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Restaurer la note";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Paramètres";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Partager";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Partager des analyses";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Débloquer %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Désépingler";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Désépingler la note";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Retirer un tag de cette note";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "étiquette :";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Déplacer cette note dans la corbeille";

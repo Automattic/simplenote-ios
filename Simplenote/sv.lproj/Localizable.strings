@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Felsök";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Ta bort";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Radera anteckningar";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Väntande";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Fäst";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Nåla fast anteckning";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Återställning krävs";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Återställ";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Inställningar";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Dela";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Dela analys";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Lås upp %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Lossa";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Ta bort nål";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Ta bort etikett från den nuvarande anteckningen";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "etikett:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Kasta anteckningen i papperskorgen";
