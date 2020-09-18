@@ -9,12 +9,11 @@ import Foundation
 
 class SPPinLockManager: NSObject {
     @objc static func shouldBypassPinLock() -> Bool {
-        let lastUsedString = SPKeychain.password(forService: SimplenoteKeychain.timestampService, account: SimplenoteKeychain.timestampAccount)
-        if lastUsedString == nil {
+        guard let lastUsedString = try? KeychainPasswordItem.timestamp.readPassword() else {
             return false
         }
         
-        let lastUsedSeconds = Int(lastUsedString!);
+        let lastUsedSeconds = Int(lastUsedString);
         if lastUsedSeconds == 0 {
             return false
         }
@@ -50,9 +49,10 @@ class SPPinLockManager: NSObject {
     }
     
     @objc static func storeLastUsedTime() {
-        var ts = timespec.init()
+        var ts = timespec()
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
+
         let nowTime = String(format: "%ld", ts.tv_sec)
-        SPKeychain.setPassword(nowTime, forService: SimplenoteKeychain.timestampService, account: SimplenoteKeychain.timestampAccount)
+        try? KeychainPasswordItem.timestamp.savePassword(nowTime)
     }
 }

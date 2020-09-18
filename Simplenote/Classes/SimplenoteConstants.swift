@@ -30,19 +30,3 @@ class SimplenoteConstants: NSObject {
     ///
     static let maximumTagLength = 256
 }
-
-
-// MARK: - Keychain Constants
-//
-enum SimplenoteKeychain {
-
-    /// Pinlock
-    ///
-    static let pinlockAccount = "SimplenotePin"
-    static let pinlockService = pinlockAccount
-
-    /// Timestamp
-    ///
-    static let timestampAccount = "Main"
-    static let timestampService = "simplenote-passcode"
-}

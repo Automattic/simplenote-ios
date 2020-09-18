@@ -212,6 +212,7 @@
 		B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552AB8624B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift */; };
 		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
+		B56259CE2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
@@ -570,6 +571,7 @@
 		B5536B8F1B8E4B8A00FF190A /* zh-Hans-CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTests.swift; sourceTree = "<group>"; };
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
+		B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "KeychainPasswordItem+Simplenote.swift"; path = "Classes/KeychainPasswordItem+Simplenote.swift"; sourceTree = "<group>"; };
 		B5651239243BC063001EFE77 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
@@ -1287,6 +1289,7 @@
 			children = (
 				37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */,
 				37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */,
+				B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */,
 			);
 			name = Keychain;
 			sourceTree = "<group>";
@@ -2346,6 +2349,7 @@
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
+				B56259CE2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,

@@ -125,23 +125,19 @@ extension SPAppDelegate: UIViewControllerRestoration {
 //
 extension SPAppDelegate {
 
-    private var pinlockKeychainItem: KeychainPasswordItem {
-        KeychainPasswordItem(service: SimplenoteKeychain.pinlockService, account: SimplenoteKeychain.pinlockAccount)
-    }
-
     @objc
     func getPin() -> String? {
-        return try? pinlockKeychainItem.readPassword()
+        try? KeychainPasswordItem.pinlock.readPassword()
     }
 
     @objc
     func setPin(_ pin: String) {
-        try? pinlockKeychainItem.savePassword(pin)
+        try? KeychainPasswordItem.pinlock.savePassword(pin)
     }
 
     @objc
     func removePin() {
-        try? pinlockKeychainItem.deleteItem()
+        try? KeychainPasswordItem.pinlock.deleteItem()
         allowBiometryInsteadOfPin = false
     }
 }
