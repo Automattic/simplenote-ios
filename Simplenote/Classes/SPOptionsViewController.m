@@ -170,7 +170,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     // Listen to Theme Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(themeDidChange)
-                                                 name:VSThemeManagerThemeDidChangeNotification
+                                                 name:SPSimplenoteThemeChangedNotification
                                                object:nil];
 
     [self refreshThemeStyles];

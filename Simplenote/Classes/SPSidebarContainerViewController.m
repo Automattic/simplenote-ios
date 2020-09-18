@@ -221,7 +221,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshStyle)
-                                                 name:VSThemeManagerThemeDidChangeNotification
+                                                 name:SPSimplenoteThemeChangedNotification
                                                object:nil];
 }
 
