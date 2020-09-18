@@ -20,6 +20,11 @@ class SimplenoteConstants: NSObject {
     ///
     static let resetPasswordURL = "https://app.simplenote.com/reset/?redirect=simplenote://launch&email="
 
+    /// Share Extension Keychain Constants
+    ///
+    static let shareExtensionAccount = "Main"
+    static let shareExtensionService = "SimplenoteShare"
+
     /// Simplenote: Scheme
     ///
     static let simplenoteScheme = "simplenote"
