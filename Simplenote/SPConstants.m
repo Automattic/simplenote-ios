@@ -38,7 +38,6 @@ NSString *const kSelectedTagKey                     = @"SPSelectedTag";
 NSString *const kSelectedNoteKey                    = @"SPSelectedNote";
 NSString *const kSimplenoteTrashKey                 = @"__##__trash__##__";
 NSString *const kSimplenoteUntaggedKey              = @"__##__untagged__##__";
-NSString *const kSimplenotePinKey                   = @"SimplenotePin";
 NSString *const kSimplenoteUseBiometryKey           = @"SimplenoteUseTouchID";
 NSString *const kSimplenoteMarkdownDefaultKey       = @"MarkdownDefault";
 NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
