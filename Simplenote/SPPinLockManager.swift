@@ -53,11 +53,6 @@ class SPPinLockManager: NSObject {
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
 
         let nowTime = String(format: "%ld", ts.tv_sec)
-
-        do {
-            try KeychainPasswordItem.timestamp.savePassword(nowTime)
-        } catch {
-            NSLog("[Keychain] Error Storing Timestamp: \(error)")
-        }
+        try? KeychainPasswordItem.timestamp.savePassword(nowTime)
     }
 }
