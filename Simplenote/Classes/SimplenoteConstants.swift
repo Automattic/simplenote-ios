@@ -34,7 +34,7 @@ class SimplenoteConstants: NSObject {
 
 // MARK: - Keychain Constants
 //
-struct SimplenoteKeychain {
+enum SimplenoteKeychain {
 
     /// Pinlock
     ///
