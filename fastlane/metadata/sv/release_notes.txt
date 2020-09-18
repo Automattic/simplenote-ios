@@ -1,1 +1,2 @@
-- Teckengränsen för etiketter uppdaterades till 256 tecken
+- Åtgärdade ett stabilitetsproblem i anteckningsredigeraren
+- Att svepa en anteckning i listan visar nu åtgärden Kopiera intern länk

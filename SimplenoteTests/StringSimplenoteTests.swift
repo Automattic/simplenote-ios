@@ -2,55 +2,25 @@ import XCTest
 @testable import Simplenote
 
 
-// MARK: - String Simplenote Unit Tests
+// MARK: - NSString Simplenote Tests
 //
 class StringSimplenoteTests: XCTestCase {
 
-    /// Verifies that Suffix after Prefix returns nil, whenever such prefix isn't to be found
+    /// Verifies that `truncateWords(upTo:) ` returns the N first characters of the receiver, whenever there are no words in the specified range.
     ///
-    func testSuffixAfterPrefixReturnsNilWheneverTheInputStringLacksSuchPrefix() {
-        let sample = "This is a sample of some random string without the tag operator"
-        XCTAssertNil(sample.suffix(afterPrefix: .searchOperatorForTags))
+    func testTruncateWordsReturnsTruncatedStringWheneverThereAreNoWords() {
+        let sample = "1234567890"
+        let expected = "12345"
+
+        XCTAssertEqual(sample.truncateWords(upTo: 5), expected)
     }
 
-    /// Verifies that Suffix after Prefix returns an empty string, whenever there is no actual Payload
+    /// Verifies that `truncateWords(upTo:) ` truncates the receiver's full words, up to a maximum length.
     ///
-    func testSuffixAfterPrefixReturnsNilWheneverTheTagSearchOperatorHasAnEmptyKeyword() {
-        let sample = String.searchOperatorForTags
-        XCTAssertEqual(sample.suffix(afterPrefix: .searchOperatorForTags), "")
-    }
+    func testTruncateWordsReturnsWordsInSpecifiedRangeUpToMaximumLength() {
+        let sample = "uno dos tres catorce!"
+        let expected = "uno dos"
 
-    /// Verifies that Suffix after Prefix returns the payload right after the first occurrence of such suffix
-    ///
-    func testSuffixAfterPrefixReturnsTheRightHandSideStringAfterTheTagSearchOperator() {
-        let expected = "somenameforatag"
-        let sample = String.searchOperatorForTags + expected
-
-        XCTAssertEqual(sample.suffix(afterPrefix: .searchOperatorForTags), expected)
-    }
-
-    /// Verifies that `replaceLastWord(:)` returns the new word, whenever the receiver was empty
-    ///
-    func testReplaceLastWordReturnsJustTheNewWordWheneverTheReceiverWasEmpty() {
-        let expected = "something"
-        XCTAssertEqual("".replaceLastWord(with: expected), expected)
-    }
-
-    /// Verifies that `replaceLastWord(:)` effectively swaps the last word in the receiver
-    ///
-    func testReplaceLastWordEffectivelySwapsTheLastWordInTheReceiver() {
-        let text = "one two"
-        let word = "something"
-        let expected = "one something"
-        XCTAssertEqual(text.replaceLastWord(with: word), expected)
-    }
-
-    /// Verifies that `replaceLastWord(:)` appends the new word whenever the receiver ends up in a space
-    ///
-    func testReplaceLastWordAppendsNewKeywordWheneverTheReceiverEndsInSpace() {
-        let text = "one "
-        let word = "something"
-        let expected = "one something"
-        XCTAssertEqual(text.replaceLastWord(with: word), expected)
+        XCTAssertEqual(sample.truncateWords(upTo: 10), expected)
     }
 }

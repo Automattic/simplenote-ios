@@ -1,4 +1,5 @@
 import XCTest
+import SimplenoteFoundation
 @testable import Simplenote
 
 

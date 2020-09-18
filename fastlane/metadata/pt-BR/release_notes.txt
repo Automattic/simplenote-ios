@@ -1,1 +1,2 @@
-- Limite de tags atualizado para até 256 caracteres
+- Correção de um erro de estabilidade no editor de notas
+- Deslizar uma nota na lista agora mostra a ação Copiar link interno

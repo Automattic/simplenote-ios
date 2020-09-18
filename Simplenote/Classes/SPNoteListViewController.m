@@ -316,7 +316,7 @@
     // the editor view will create a note. Passing no note ensures that an emty note isn't added
     // to the FRC before the animation occurs
     [self.tableView setEditing:NO];   
-    [self openNote:nil fromIndexPath:nil animated:YES];
+    [self openNote:nil animated:YES];
 }
 
 - (void)sidebarButtonAction:(id)sender {
@@ -427,10 +427,10 @@
         return;
     }
 
-    [self openNote:note fromIndexPath:nil animated:animated];
+    [self openNote:note animated:animated];
 }
 
-- (void)openNote:(Note *)note fromIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+- (void)openNote:(Note *)note animated:(BOOL)animated
 {
     [SPTracker trackListNoteOpened];
 
@@ -438,8 +438,9 @@
     // Why: https://github.com/Automattic/simplenote-ios/issues/616
     [self.searchBar resignFirstResponder];
 
-    SPNoteEditorViewController *editor = [[SPAppDelegate sharedDelegate] noteEditorViewController];
-    [editor updateNote:note];
+    // Always a new Editor!
+    SPNoteEditorViewController *editor = [[EditorFactory shared] build];
+    [editor displayNote:note];
 
     if (self.isSearchActive) {
         [editor setSearchString:self.searchText];
@@ -449,10 +450,10 @@
     // We were getting (a whole lot!) of crash reports with the exception
     // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
     // as a safety net. Ref. Issue #345
-    if ([self.navigationController.viewControllers containsObject:editor]) {
-        return;
+    if (self.navigationController.visibleViewController != self) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
-    
+
     [self.navigationController pushViewController:editor animated:animated];
 }
 

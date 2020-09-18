@@ -227,33 +227,36 @@
     
 }
 
-- (void)trashNote:(Note *)note {
-    
+- (void)togglePinnedStateOfNote:(Note *)note
+{
+    note.pinned = !note.pinned;
+    [self save];
+}
+
+- (void)trashNote:(Note *)note
+{
     note.deleted = YES;
     note.modificationDate = [NSDate date];
     
     [self save];
 }
 
-- (void)restoreNote:(Note *)note {
-    
+- (void)restoreNote:(Note *)note
+{
     note.deleted = NO;
     note.modificationDate = [NSDate date];
     
     [self save];
-    
 }
 
-- (void)permenentlyDeleteNote:(Note *)note {
-
+- (void)permenentlyDeleteNote:(Note *)note
+{
     [[[SPAppDelegate sharedDelegate] managedObjectContext] deleteObject:note];
     [self save];
-    
 }
 
 - (void)emptyTrash
 {
-
     NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == YES"];
     NSArray *notesToDelete = [context fetchObjectsForEntityName:@"Note" withPredicate:predicate];
@@ -263,7 +266,6 @@
     }
     
     [self save];
-    
 }
 
 @end

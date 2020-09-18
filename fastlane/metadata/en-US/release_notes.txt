@@ -1,1 +1,2 @@
-- Updated Tags limit to up to 256 characters
+- Fixed a stability issue in the Notes Editor
+- Swiping a Note in the List now reveals the Copy Internal Link Action

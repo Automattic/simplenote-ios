@@ -81,7 +81,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self = [super init];
     if (self) {
-
         // Editor
         [self configureTextView];
         [self configureBottomView];
@@ -241,12 +240,25 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)startListeningToThemeNotifications {
+- (void)startListeningToThemeNotifications
+{
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
     [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
 }
 
-- (void)themeDidChange {
+- (void)themeWillChange
+{
+    if (self.currentNote == nil) {
+        return;
+    }
+
+    [self save];
+    [self.noteEditorTextView endEditing:YES];
+}
+
+- (void)themeDidChange
+{
     [self applyStyle];
 }
 
@@ -589,8 +601,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
      ];
 }
 
-- (void)updateNote:(Note *)note {
-    
+- (void)displayNote:(Note *)note
+{
     if (!note) {
         _noteEditorTextView.text = nil;
         return;
@@ -1136,15 +1148,20 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self save];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    BOOL containsHttpScheme = [URL containsHttpScheme];
-
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
+{
     // When `performsAggressiveLinkWorkaround` is true we'll get link interactions via `receivedInteractionWithURL:`
-    if (containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
+    if (URL.containsHttpScheme && !_noteEditorTextView.performsAggressiveLinkWorkaround) {
         [self presentSafariViewControllerAtURL:URL];
+        return NO;
     }
 
-    return !containsHttpScheme;
+    if (URL.isSimplenoteURL) {
+        [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
+        return NO;
+    }
+
+    return YES;
 }
 
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url
@@ -1333,7 +1350,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
 
         [UIView animateWithDuration:0.2
@@ -1353,7 +1370,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     } else {
 
-        [self updateNote:newNote];
+        [self displayNote:newNote];
         bBlankNote = YES;
     }
     
