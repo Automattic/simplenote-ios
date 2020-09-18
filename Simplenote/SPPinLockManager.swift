@@ -57,7 +57,7 @@ class SPPinLockManager: NSObject {
         do {
             try KeychainPasswordItem.timestamp.savePassword(nowTime)
         } catch {
-            NSLog("Keychain Error: \(error)")
+            NSLog("[Keychain] Error Storing Timestamp: \(error)")
         }
     }
 }
