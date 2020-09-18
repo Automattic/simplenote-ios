@@ -12,8 +12,6 @@
 #import "SPTracker.h"
 #import "Simplenote-Swift.h"
 
-NSString *const VSThemeManagerThemeWillChangeNotification = @"VSThemeManagerThemeWillChangeNotification";
-NSString *const VSThemeManagerThemeDidChangeNotification = @"VSThemeManagerThemeDidChangeNotification";
 NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
 
 @interface VSThemeManager ()
@@ -52,7 +50,6 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
                                                  selector:@selector(contentSizeCategoryDidChange:)
                                                      name:UIContentSizeCategoryDidChangeNotification
                                                    object:nil];
-        
     }
     
     return sharedManager;
@@ -83,23 +80,10 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
     VSTheme *theme = [self.themeLoader themeNamed:themeName];
     
     if (theme) {
-        
-        BOOL newTheme = ![theme.name.lowercaseString isEqualToString:self.theme.name];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:VSThemeManagerThemeWillChangeNotification
-                                                            object:nil];
-        
         [[NSUserDefaults standardUserDefaults] setObject:themeName
                                                   forKey:VSThemeManagerThemePrefKey];
         
         _theme = theme;
-        [self applyAppearanceStyling];
-        [[NSNotificationCenter defaultCenter] postNotificationName:VSThemeManagerThemeDidChangeNotification
-                                                            object:nil];
-        
-        if (newTheme) {
-            [SPTracker trackSettingsThemeUpdated:themeName];	
-        }
     }
 }
 
