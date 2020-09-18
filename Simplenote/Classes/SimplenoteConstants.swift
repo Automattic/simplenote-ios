@@ -39,7 +39,7 @@ struct SimplenoteKeychain {
     /// Pinlock
     ///
     static let pinlockAccount = "SimplenotePin"
-    static let pinlockService = "SimplenotePin"
+    static let pinlockService = pinlockAccount
 
     /// Timestamp
     ///
