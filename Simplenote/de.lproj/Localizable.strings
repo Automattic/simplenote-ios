@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debuggen";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Löschen";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notizen löschen";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Ausstehend";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Anheften";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Notiz anheften";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Passwort muss zurückgesetzt werden";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Wiederherstellen";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Notiz wiederherstellen";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Einstellungen";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Teilen";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analysen teilen";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ entsperren";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Lösen";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Notiz lösen";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tag aus aktueller Notiz entfernen";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "Schlagwort:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Aktuelle Notiz in den Papierkorb verschieben";

@@ -46,6 +46,18 @@ extension Options {
         }
     }
 
+    /// Indicates if it's the First Launch event was already handled
+    ///
+    @objc
+    var firstLaunch: Bool {
+        get {
+            defaults.bool(forKey: .firstLaunch)
+        }
+        set {
+            defaults.set(newValue, forKey: .firstLaunch)
+        }
+    }
+
     /// Returns the target Sort Mode for the Notes List
     ///
     @objc

@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "איתור באגים";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "מחיקה";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "בהמתנה";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "לנעוץ";
-
 /* Action to mark a note as pinned */
 "Pin note" = "הצמדת פתק";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "נדרש איפוס";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "שחזור";
-
 /* Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "הגדרות";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "שיתוף";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "שיתוף הניתוח";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "ביטול נעילה %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "להסיר את הנעץ";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "ביטול הצמדת פתק";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "הסרת תגית מהפתק הנוכחי";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "תגית:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "העבר את הפתק הנוכחי לפח";

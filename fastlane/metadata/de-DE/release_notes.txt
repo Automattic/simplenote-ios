@@ -1,1 +1,0 @@
-- Schlagwort-Limit auf bis zu 256 Zeichen aktualisiert
