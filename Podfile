@@ -11,9 +11,6 @@ plugin 'cocoapods-repo-update'
 # Main
 #
 abstract_target 'Automattic' do
-	# Shared Dependencies
-	#
-	pod 'SAMKeychain', '1.5.2'
 
 	# Main Target
 	#
