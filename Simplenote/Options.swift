@@ -94,6 +94,7 @@ extension Options {
         }
         set {
             defaults.set(newValue.rawValue, forKey: .theme)
+            SPTracker.trackSettingsThemeUpdated(newValue.description)
             NotificationCenter.default.post(name: .SPSimplenoteThemeChanged, object: nil)
         }
     }
