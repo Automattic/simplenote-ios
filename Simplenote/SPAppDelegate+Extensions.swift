@@ -127,17 +127,31 @@ extension SPAppDelegate {
 
     @objc
     func getPin() -> String? {
-        try? KeychainPasswordItem.pinlock.readPassword()
+        do {
+            return try KeychainPasswordItem.pinlock.readPassword()
+        } catch {
+            NSLog("[Keychain] Error Loading PIN: \(error)")
+            return nil
+        }
     }
 
     @objc
     func setPin(_ pin: String) {
-        try? KeychainPasswordItem.pinlock.savePassword(pin)
+        do {
+            try KeychainPasswordItem.pinlock.savePassword(pin)
+        } catch {
+            NSLog("[Keychain] Error Storing PIN: \(error)")
+        }
     }
 
     @objc
     func removePin() {
-        try? KeychainPasswordItem.pinlock.deleteItem()
+        do {
+            try KeychainPasswordItem.pinlock.deleteItem()
+        } catch {
+            NSLog("[Keychain] Error Nuking PIN: \(error)")
+        }
+
         allowBiometryInsteadOfPin = false
     }
 }
