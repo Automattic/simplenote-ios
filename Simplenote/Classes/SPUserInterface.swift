@@ -40,12 +40,11 @@ class SPUserInterface: NSObject {
     ///
     @objc
     func refreshUserInterfaceStyle() {
-        guard #available(iOS 13.0, *) else {
-            refreshUserInterfaceStyleIOS12()
-            return
-        }
+        refreshUIKitAppearance()
 
-        refreshUserInterfaceStyleIOS13()
+        if #available(iOS 13.0, *) {
+            refreshUserInterfaceStyleIOS13()
+        }
     }
 }
 
@@ -63,11 +62,11 @@ private extension SPUserInterface {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func refreshUserInterfaceStyleIOS12() {
-        let legacyThemeName = Options.shared.theme == .dark ? kSimplenoteDarkThemeName : kSimplenoteDefaultThemeName
-        VSThemeManager.shared().swapTheme(legacyThemeName)
+    func refreshUIKitAppearance() {
+        UIBarButtonItem.refreshAppearance()
+        UINavigationBar.refreshAppearance()
     }
-    
+
     @available (iOS 13, *)
     func refreshUserInterfaceStyleIOS13() {
         let window = SPAppDelegate.shared().window

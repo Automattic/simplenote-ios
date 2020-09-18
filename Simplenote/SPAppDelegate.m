@@ -415,11 +415,7 @@
 
 - (void)loadSelectedTheme
 {
-    // We seriously need to setup the proper traits override, prior to applying the appearance selectors
     [[SPUserInterface shared] refreshUserInterfaceStyle];
-
-    // TODO: Eventually nuke VSThemeManager. Please
-    [[VSThemeManager sharedManager] applyAppearanceStyling];
 }
 
 

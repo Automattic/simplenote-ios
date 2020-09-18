@@ -44,7 +44,7 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
         
         if (!sharedManager.theme)
             sharedManager.theme = sharedManager.themeLoader.defaultTheme;
-        
+
         // register for font size change notifications
         [[NSNotificationCenter defaultCenter] addObserver:sharedManager
                                                  selector:@selector(contentSizeCategoryDidChange:)
@@ -85,35 +85,6 @@ NSString *const VSThemeManagerThemePrefKey = @"VSThemeManagerThemePrefKey";
         
         _theme = theme;
     }
-}
-
-
-- (void)applyAppearanceStyling {
-
-    /// Style: BarButtonItem
-    ///
-    NSDictionary *barButtonTitleAttributes = @{
-        NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]
-    };
-
-    [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonTitleAttributes forState:UIControlStateNormal];
-
-    /// Style: NavigationBar
-    ///
-    UIColor *barTintColor = [UIColor clearColor];
-    UIImage *barBackgroundImage = [UIImage new];
-
-    NSDictionary *barTitleAttributes = @{
-        NSFontAttributeName: [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold],
-        NSForegroundColorAttributeName: [UIColor simplenoteNavigationBarTitleColor]
-    };
-
-    id barAppearance = [UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[SPNavigationController class]]];
-    [barAppearance setBarTintColor:barTintColor];
-    [barAppearance setBackgroundImage:barBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    [barAppearance setBackgroundImage:barBackgroundImage forBarMetrics:UIBarMetricsDefaultPrompt];
-    [barAppearance setShadowImage:barBackgroundImage];
-    [barAppearance setTitleTextAttributes:barTitleAttributes];
 }
 
 @end
