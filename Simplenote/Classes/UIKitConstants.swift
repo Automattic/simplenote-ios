@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 
 // MARK: - UIKit Constants, so that we don't repeat ourselves forever!
