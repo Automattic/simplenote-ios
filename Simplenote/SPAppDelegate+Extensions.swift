@@ -123,6 +123,8 @@ extension SPAppDelegate: UIViewControllerRestoration {
 
 // MARK: - Pin Lock
 //
+// TODO: Let's move these API(s) over to PinLockManager!
+//
 extension SPAppDelegate {
 
     @objc
