@@ -147,14 +147,10 @@ extension SPAppDelegate {
 //
 extension SPAppDelegate: SimperiumDelegate {
 
-    private var shareKeychainItem: KeychainPasswordItem {
-        KeychainPasswordItem(service: SimplenoteConstants.shareExtensionService, account: SimplenoteConstants.shareExtensionAccount)
-    }
-
     public func simperiumDidLogin(_ simperium: Simperium!) {
         // Store the Token: Required by the Share Extension!
         if let token = simperium.user.authToken {
-            try? shareKeychainItem.savePassword(token)
+            try? KeychainPasswordItem.shareExtension.savePassword(token)
         }
 
         // Tracker!
@@ -171,7 +167,7 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperiumDidLogout(_ simperium: Simperium!) {
         // Nuke Extension Token
-        try? shareKeychainItem.deleteItem()
+        try? KeychainPasswordItem.shareExtension.deleteItem()
 
         // Tracker!
         SPTracker.refreshMetadataForAnonymousUser()

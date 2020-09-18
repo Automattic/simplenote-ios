@@ -16,6 +16,10 @@ extension KeychainPasswordItem {
     static var timestamp: KeychainPasswordItem {
         KeychainPasswordItem(service: SimplenoteKeychain.timestampService, account: SimplenoteKeychain.timestampAccount)
     }
+
+    static var shareExtension: KeychainPasswordItem {
+        KeychainPasswordItem(service: SimplenoteKeychain.shareExtensionService, account: SimplenoteKeychain.shareExtensionAccount)
+    }
 }
 
 
@@ -32,4 +36,9 @@ enum SimplenoteKeychain {
     ///
     static let timestampAccount = "Main"
     static let timestampService = "simplenote-passcode"
+
+    /// Share Extension
+    ///
+    static let shareExtensionAccount = "Main"
+    static let shareExtensionService = "SimplenoteShare"
 }

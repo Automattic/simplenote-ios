@@ -20,8 +20,7 @@ class ShareViewController: UIViewController {
     /// Returns the Main App's SimperiumToken
     ///
     private var simperiumToken: String? {
-        let item = KeychainPasswordItem(service: SimplenoteConstants.shareExtensionService, account: SimplenoteConstants.shareExtensionAccount)
-        return try? item.readPassword()
+        try? KeychainPasswordItem.shareExtension.readPassword()
     }
 
     /// Indicates if the Markdown flag should be enabled
