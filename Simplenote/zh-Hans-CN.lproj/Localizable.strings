@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "调试";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "删除";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "待处理数";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "钉选";
-
 /* Action to mark a note as pinned */
 "Pin note" = "固定笔记";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "需要重置";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "恢复";
-
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "设置";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "共享";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "共享分析数据";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "解锁 %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "取消钉选";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "取消固定笔记";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "将标签从当前笔记中删除";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "标签：";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "将当前笔记移至回收站";

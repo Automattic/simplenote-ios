@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debug";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Verwijderen";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notities verwijderen";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Aantal in behandeling";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Vastmaken";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Notitie vastmaken";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset vereist";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Herstellen";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Instellingen";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Delen";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analyses delen";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ ontgrendelen";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Losgemaakt";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Notitie losmaken";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tag verwijderen uit de huidige notitie";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "De huidige notitie verplaatsen naar de prullenbak";
