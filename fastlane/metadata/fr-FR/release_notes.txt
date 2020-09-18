@@ -1,1 +1,2 @@
-- Mise à jour de la limite d’étiquette jusqu’à 256 caractères
+- Résolution d'un problème de stabilité dans l'éditeur de notes
+- Faire glisser une note dans la liste affiche désormais l'action Copier le lien interne
