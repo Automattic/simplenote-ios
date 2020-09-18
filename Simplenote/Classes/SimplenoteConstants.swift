@@ -10,13 +10,11 @@ class SimplenoteConstants: NSObject {
     ///
     static let passwordRules = "minlength: 8; maxlength: 50;"
 
-    /// Pin Keychain Service Name
-    ///
-    static let pinKeychainService = "SimplenotePin"
-
-    /// Pin Keychain Account Name
+    /// Pinlock Keychain Constants
     ///
     static let pinKeychainAccount = "SimplenotePin"
+    static let pinKeychainService = "SimplenotePin"
+    static let pinTimestampKeychainService = "simplenote-passcode"
 
     /// Password Reset URL
     ///
