@@ -20,7 +20,7 @@ class SPUserInterface: NSObject {
             return UITraitCollection.current.userInterfaceStyle == .dark
         }
 
-        return VSThemeManager.shared().theme().bool(forKey: kSimplenoteDarkThemeName)
+        return Options.shared.theme == .dark
     }
 
     /// Deinitializer

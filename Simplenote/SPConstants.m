@@ -52,8 +52,6 @@ NSString *const kSimplenotePasscodeServiceName      = @"simplenote-passcode";
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 
 NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
-NSString *const kSimplenoteDarkThemeName            = @"dark";
-NSString *const kSimplenoteDefaultThemeName         = @"default";
 
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
 
