@@ -12,9 +12,9 @@ class SimplenoteConstants: NSObject {
 
     /// Pinlock Keychain Constants
     ///
-    static let pinKeychainAccount = "SimplenotePin"
-    static let pinKeychainService = "SimplenotePin"
-    static let pinTimestampKeychainService = "simplenote-passcode"
+    static let pinlockKeychainAccount = "SimplenotePin"
+    static let pinlockKeychainService = "SimplenotePin"
+    static let timestampKeychainService = "simplenote-passcode"
 
     /// Password Reset URL
     ///
