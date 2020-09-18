@@ -10,20 +10,9 @@ class SimplenoteConstants: NSObject {
     ///
     static let passwordRules = "minlength: 8; maxlength: 50;"
 
-    /// Pinlock Keychain Constants
-    ///
-    static let pinlockKeychainAccount = "SimplenotePin"
-    static let pinlockKeychainService = "SimplenotePin"
-    static let timestampKeychainService = "simplenote-passcode"
-
     /// Password Reset URL
     ///
     static let resetPasswordURL = "https://app.simplenote.com/reset/?redirect=simplenote://launch&email="
-
-    /// Share Extension Keychain Constants
-    ///
-    static let shareExtensionAccount = "Main"
-    static let shareExtensionService = "SimplenoteShare"
 
     /// Simplenote: Scheme
     ///
