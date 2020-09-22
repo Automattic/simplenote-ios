@@ -213,7 +213,6 @@
 		B552FA692515395700185B9D /* KeychainPasswordItem+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */; };
 		B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
-		B56259CE2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
@@ -253,6 +252,7 @@
 		B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		B59314D81A486B3800B651ED /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B594C3ED2501E24C006D3A78 /* UINavigationController+Simplenote.swift */; };
+		B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59560DF251A46D500A06788 /* KeychainManager.swift */; };
 		B599839A2514EC790037B129 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		B59983A12514F6A80037B129 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
 		B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */; };
@@ -573,7 +573,6 @@
 		B5536B8F1B8E4B8A00FF190A /* zh-Hans-CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B55AC57922D27B9100D8CEB2 /* OptionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTests.swift; sourceTree = "<group>"; };
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
-		B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "KeychainPasswordItem+Simplenote.swift"; path = "Classes/KeychainPasswordItem+Simplenote.swift"; sourceTree = "<group>"; };
 		B5651239243BC063001EFE77 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
@@ -621,6 +620,7 @@
 		B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 4.xcdatamodel"; sourceTree = "<group>"; };
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		B59560DF251A46D500A06788 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManager.swift; path = Classes/KeychainManager.swift; sourceTree = "<group>"; };
 		B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Simplenote.swift"; path = "Classes/UIGestureRecognizer+Simplenote.swift"; sourceTree = "<group>"; };
 		B5A6846C23CE84D400398BBC /* NotesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesListController.swift; path = Classes/NotesListController.swift; sourceTree = "<group>"; };
 		B5AA4B5922F46B300072BF5D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Simplenote/Colors.xcassets; sourceTree = SOURCE_ROOT; };
@@ -1290,8 +1290,8 @@
 			isa = PBXGroup;
 			children = (
 				37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */,
+				B59560DF251A46D500A06788 /* KeychainManager.swift */,
 				37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */,
-				B56259CD2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift */,
 			);
 			name = Keychain;
 			sourceTree = "<group>";
@@ -2351,9 +2351,9 @@
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
-				B56259CE2515378500BB7299 /* KeychainPasswordItem+Simplenote.swift in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
+				B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */,
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,

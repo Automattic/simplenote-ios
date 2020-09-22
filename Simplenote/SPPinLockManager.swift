@@ -9,7 +9,7 @@ import Foundation
 
 class SPPinLockManager: NSObject {
     @objc static func shouldBypassPinLock() -> Bool {
-        guard let lastUsedString = try? KeychainPasswordItem.timestamp.readPassword() else {
+        guard let lastUsedString = KeychainManager.timestamp else {
             return false
         }
         
@@ -53,11 +53,6 @@ class SPPinLockManager: NSObject {
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
 
         let nowTime = String(format: "%ld", ts.tv_sec)
-
-        do {
-            try KeychainPasswordItem.timestamp.savePassword(nowTime)
-        } catch {
-            NSLog("[Keychain] Error Storing Timestamp: \(error)")
-        }
+        KeychainManager.timestamp = nowTime
     }
 }
