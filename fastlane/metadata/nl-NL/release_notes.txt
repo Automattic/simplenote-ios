@@ -1,1 +1,0 @@
-- De tekenlimiet voor tags is verhoogd naar 256 tekens

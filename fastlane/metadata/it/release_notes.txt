@@ -1,1 +1,2 @@
-- Limite dei tag aggiornato a 256 caratteri
+- Corretto un problema di stabilità nell'editor delle note
+- Lo scorrimento di una nota nell'elenco ora mostra l'azione del link interno per la copia

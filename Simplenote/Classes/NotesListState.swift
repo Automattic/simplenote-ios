@@ -3,7 +3,7 @@ import Foundation
 
 // MARK: - NotesListState
 //
-enum NotesListState {
+enum NotesListState: Equatable {
     case results
     case searching(keyword: String)
 }
@@ -140,22 +140,4 @@ extension NotesListState {
             NSSortDescriptor.descriptorForTags()
         ]
     }
-}
-
-
-// MARK: - Equality
-//
-func ==(lhs: NotesListState, rhs: NotesListState) -> Bool {
-    switch (lhs, rhs) {
-    case (.results, .results):
-        return true
-    case let (.searching(lKeyword), .searching(rKeyword)):
-        return lKeyword == rKeyword
-    default:
-        return false
-    }
-}
-
-func !=(lhs: NotesListState, rhs: NotesListState) -> Bool {
-    return !(lhs == rhs)
 }

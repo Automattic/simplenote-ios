@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "디버그";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "삭제";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "대기 중";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "고정";
-
 /* Action to mark a note as pinned */
 "Pin note" = "메모 고정";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "재설정 필요";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "복구";
-
 /* Restore a note to a previous version */
 "Restore Note" = "메모 복구";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "설정";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "공유";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "분석 공유";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ 잠금해제";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "고정 해제";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "메모 고정 취소";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "현재 메모에서 태그 제거";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "태그:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "휴지통으로 현재 메모 이동";

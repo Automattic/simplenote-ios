@@ -23,10 +23,7 @@ extension NSUserActivity {
         self.title = title
         isEligibleForSearch = true
         isEligibleForHandoff = false
-
-        if #available(iOS 12.0, *) {
-            isEligibleForPrediction = true
-            self.suggestedInvocationPhrase = suggestedInvocationPhrase ?? title
-        }
+        isEligibleForPrediction = true
+        self.suggestedInvocationPhrase = suggestedInvocationPhrase ?? title
     }
 }

@@ -52,7 +52,7 @@
         cell.selectedBackgroundView = selectionView;
         
         cell.textLabel.textColor = [UIColor simplenoteTextColor];
-        cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
+        cell.detailTextLabel.textColor = [UIColor simplenoteSecondaryTextColor];
         
     }
     

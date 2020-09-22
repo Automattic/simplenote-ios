@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Hata ayıklama";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Sil";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notları Sil";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Bekleyenler";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Sabitle";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Notu iğnele";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Sıfırlama Gerekli";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Geri Yükle";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Notu Geri Yükle";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Paylaş";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analizleri paylaş";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ öğesinin kilidini aç";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Sabitlemeyi kaldır";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Notu kaldır";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Geçerli nottan etiket kaldır";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "etiket:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Geçerli notu çöp kutusuna taşı";

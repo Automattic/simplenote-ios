@@ -480,7 +480,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 }
 
 - (BOOL)pinLockIsEnabled {
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
+    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
     
     return pin != nil && pin.length > 0;
 }
@@ -590,13 +590,13 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     cell.backgroundColor = [UIColor simplenoteTableViewCellBackgroundColor];
     cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
     cell.textLabel.textColor = [UIColor simplenoteTextColor];
-    cell.detailTextLabel.textColor = [UIColor colorWithName:UIColorNameTableViewDetailTextLabelColor];
+    cell.detailTextLabel.textColor = [UIColor simplenoteSecondaryTextColor];
 }
 
 
 - (void)showPinLockViewController
 {
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
+    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
     PinLockControllerMode mode = pin.length ? PinLockControllerModeRemovePin : PinLockControllerModeSetPin;
     
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:mode];
@@ -641,7 +641,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)pinLockControllerDidCancel
 {
     // Make sure the UI is consistent
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:false];
+    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
     if (pin.length == 0) {
         [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
     }
@@ -728,7 +728,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:sender.on];
     
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin:NO];
+    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
     if (pin.length == 0) {
         [self showPinLockViewController];
     }
