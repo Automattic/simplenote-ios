@@ -8,7 +8,7 @@ enum KeychainManager {
 
     /// Simplenote's Share Extension Token
     ///
-    @KeychainItemWrapper(service: SimplenoteKeychain.shareExtensionService, account: SimplenoteKeychain.shareExtensionAccount)
+    @KeychainItemWrapper(service: SimplenoteKeychain.extensionService, account: SimplenoteKeychain.extensionAccount)
     static var extensionToken: String?
 
     /// Simplenote's PIN Lock Keychain Item
@@ -65,6 +65,11 @@ struct KeychainItemWrapper {
 //
 enum SimplenoteKeychain {
 
+    /// Extension Token
+    ///
+    static let extensionAccount = "Main"
+    static let extensionService = "SimplenoteShare"
+
     /// Pinlock
     ///
     static let pinlockAccount = "SimplenotePin"
@@ -74,9 +79,4 @@ enum SimplenoteKeychain {
     ///
     static let timestampAccount = "Main"
     static let timestampService = "simplenote-passcode"
-
-    /// Share Extension
-    ///
-    static let shareExtensionAccount = "Main"
-    static let shareExtensionService = "SimplenoteShare"
 }
