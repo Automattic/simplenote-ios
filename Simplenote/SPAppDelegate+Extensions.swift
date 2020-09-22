@@ -129,17 +129,17 @@ extension SPAppDelegate {
 
     @objc
     func getPin() -> String? {
-        try? KeychainPasswordItem.pinlock.readPassword()
+        KeychainManager.pinlock
     }
 
     @objc
     func setPin(_ pin: String) {
-        try? KeychainPasswordItem.pinlock.savePassword(pin)
+        KeychainManager.pinlock = pin
     }
 
     @objc
     func removePin() {
-        try? KeychainPasswordItem.pinlock.deleteItem()
+        KeychainManager.pinlock = nil
         allowBiometryInsteadOfPin = false
     }
 }
