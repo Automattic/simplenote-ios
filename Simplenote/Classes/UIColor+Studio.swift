@@ -1,7 +1,8 @@
 import Foundation
+import UIKit
 
 
-// MARK: -
+// MARK: - UIColor + Studio API(s)
 //
 extension UIColor {
 

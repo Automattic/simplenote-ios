@@ -119,3 +119,27 @@ extension SPAppDelegate: UIViewControllerRestoration {
         return appDelegate.viewController(restorationIdentifier: restorationIdentifier)
     }
 }
+
+
+// MARK: - Pin Lock
+//
+// TODO: Let's move these API(s) over to PinLockManager!
+//
+extension SPAppDelegate {
+
+    @objc
+    func getPin() -> String? {
+        KeychainManager.pinlock
+    }
+
+    @objc
+    func setPin(_ pin: String) {
+        KeychainManager.pinlock = pin
+    }
+
+    @objc
+    func removePin() {
+        KeychainManager.pinlock = nil
+        allowBiometryInsteadOfPin = false
+    }
+}
