@@ -152,7 +152,7 @@ extension SPAppDelegate: SimperiumDelegate {
     public func simperiumDidLogin(_ simperium: Simperium!) {
         // Store the Token: Required by the Share Extension!
         if let token = simperium.user.authToken {
-            try? KeychainPasswordItem.shareExtension.savePassword(token)
+            KeychainManager.extensionToken = token
         }
 
         // Tracker!
@@ -169,7 +169,7 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperiumDidLogout(_ simperium: Simperium!) {
         // Nuke Extension Token
-        try? KeychainPasswordItem.shareExtension.deleteItem()
+        KeychainManager.extensionToken = nil
 
         // Tracker!
         SPTracker.refreshMetadataForAnonymousUser()

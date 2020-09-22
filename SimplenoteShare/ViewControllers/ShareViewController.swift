@@ -20,7 +20,7 @@ class ShareViewController: UIViewController {
     /// Returns the Main App's SimperiumToken
     ///
     private var simperiumToken: String? {
-        try? KeychainPasswordItem.shareExtension.readPassword()
+        KeychainManager.extensionToken
     }
 
     /// Indicates if the Markdown flag should be enabled
