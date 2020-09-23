@@ -289,6 +289,7 @@ private enum Constants {
     static let titles: [String] = [
         NSLocalizedString("Blog", comment: "The Simplenote blog"),
         "Twitter",
+        NSLocalizedString("Get Help", comment: "FAQ or contact us"),
         NSLocalizedString("Apps", comment: "Other Simplenote apps"),
         NSLocalizedString("Contribute", comment: "Contribute to the Simplenote apps on github"),
         NSLocalizedString("Work With Us", comment: "Work at Automattic")
@@ -297,6 +298,7 @@ private enum Constants {
     static let descriptions: [String] = [
         "simplenote.com/blog",
         "@simplenoteapp",
+        "FAQ or contact us",
         "simplenote.com",
         "GitHub.com",
         NSLocalizedString("Are you a developer? Automattic is hiring.", comment: "Automattic hiring description")
@@ -305,6 +307,7 @@ private enum Constants {
     static let urls: [URL] = [
         URL(string: "https://simplenote.com/blog")!,
         URL(string: "https://twitter.com/simplenoteapp")!,
+        URL(string: "https://simplenote.com/help")!,
         URL(string: "https://simplenote.com")!,
         URL(string: "https://github.com/automattic/simplenote-ios")!,
         URL(string: "https://automattic.com/work-with-us")!
