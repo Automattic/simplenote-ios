@@ -7,6 +7,14 @@ import SafariServices
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
 
+    /// Message: Container View
+    ///
+    @IBOutlet var messageView: UIView!
+
+    /// Message: Text Label
+    ///
+    @IBOutlet var messageLabel: UILabel!
+
     /// Top Image
     ///
     @IBOutlet var simplenoteImageView: UIImageView!
@@ -26,6 +34,10 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     /// Login Button
     ///
     @IBOutlet var loginButton: UIButton!
+
+    /// Indicates if Extended Debugging has been enabled
+    ///
+    private var debugEnabled = false
 
     /// Simperium's Authenticator Instance
     ///
@@ -49,6 +61,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         super.viewDidLoad()
         setupNavigationItem()
         setupNavigationController()
+        setupMessageView()
         setupImageView()
         setupLabels()
         setupActionButtons()
@@ -79,6 +92,11 @@ private extension SPOnboardingViewController {
         }
     }
 
+    func setupMessageView() {
+        messageView.backgroundColor = .simplenoteRed50Color
+        messageView.layer.cornerRadius = signUpButton.cornerRadius
+    }
+
     func setupActionButtons() {
         signUpButton.setTitle(OnboardingStrings.signupText, for: .normal)
         signUpButton.setTitleColor(.white, for: .normal)
@@ -103,6 +121,28 @@ private extension SPOnboardingViewController {
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.font = .preferredFont(forTextStyle: .title3)
     }
+
+    func displayDebugMessage(enabled: Bool) {
+        let text = enabled ? OnboardingStrings.debugEnabled : OnboardingStrings.debugDisabled
+        let backgroundColor = enabled ? UIColor.simplenoteRed50Color : .simplenoteGray50Color
+
+        display(message: text, backgroundColor: backgroundColor)
+    }
+
+    func display(message: String, backgroundColor: UIColor) {
+        messageLabel.text = message
+        messageView.isHidden = false
+        messageView.alpha = UIKitConstants.alpha0_0
+        messageView.backgroundColor = backgroundColor
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+            self.messageView.alpha = UIKitConstants.alpha1_0
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: UIKitConstants.animationDelayLong, options: [], animations: {
+            self.messageView.alpha = UIKitConstants.alpha0_0
+        }, completion: nil)
+    }
 }
 
 
@@ -110,11 +150,13 @@ private extension SPOnboardingViewController {
 //
 private extension SPOnboardingViewController {
 
-    @IBAction func signupWasPressed() {
+    @IBAction
+    func signupWasPressed() {
         presentAuthenticationInterface(mode: .signup)
     }
 
-    @IBAction func loginWasPressed() {
+    @IBAction
+    func loginWasPressed() {
         let sheetController = SPSheetController()
 
         sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
@@ -131,6 +173,12 @@ private extension SPOnboardingViewController {
         sheetController.present(from: self)
     }
 
+    @IBAction
+    func unlockDebugMode() {
+        debugEnabled.toggle()
+        displayDebugMessage(enabled: debugEnabled)
+    }
+
     func ensureNavigationBarIsHidden() {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -142,6 +190,7 @@ private extension SPOnboardingViewController {
 
         let controller = SPAuthHandler(simperiumService: simperiumAuthenticator)
         let viewController = SPAuthViewController(controller: controller, mode: mode)
+        viewController.debugEnabled = debugEnabled
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -178,6 +227,8 @@ private extension SPOnboardingViewController {
 // MARK: - Private Types
 //
 private struct OnboardingStrings {
+    static let debugDisabled = NSLocalizedString("Debug Disabled", comment: "Indicates that Extended Debugging has been disabled")
+    static let debugEnabled = NSLocalizedString("🐞 Debug Enabled 🐞", comment: "Indicates that Extended Debugging has been enabled")
     static let brandText = NSLocalizedString("Simplenote", comment: "Our mighty brand!")
     static let signupText = NSLocalizedString("Sign Up", comment: "Signup Action")
     static let loginText = NSLocalizedString("Log In", comment: "Login Action")

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +13,8 @@
             <connections>
                 <outlet property="headerLabel" destination="1Du-WL-hgy" id="i8O-yw-uML"/>
                 <outlet property="loginButton" destination="5ac-gG-0lC" id="i4o-gX-Efh"/>
+                <outlet property="messageLabel" destination="qM9-bQ-8XK" id="mY9-Ud-5ii"/>
+                <outlet property="messageView" destination="913-32-yoG" id="Cbh-rO-GWb"/>
                 <outlet property="signUpButton" destination="PYz-ya-QmI" id="k3n-gv-9SM"/>
                 <outlet property="simplenoteImageView" destination="FSo-hZ-mnC" id="hdq-EI-Xcs"/>
                 <outlet property="simplenoteLabel" destination="WbO-Sw-z3Q" id="S5B-4W-vJA"/>
@@ -26,13 +29,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7f-B9-HYb" userLabel="ContainerView">
                     <rect key="frame" x="27" y="44" width="360" height="818"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simplenote-logo" translatesAutoresizingMaskIntoConstraints="NO" id="FSo-hZ-mnC" userLabel="Simplenote Logo">
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simplenote-logo" translatesAutoresizingMaskIntoConstraints="NO" id="FSo-hZ-mnC" userLabel="Simplenote Logo">
                             <rect key="frame" x="132" y="241" width="96" height="96"/>
-                            <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="96" id="BGy-86-GTp"/>
                                 <constraint firstAttribute="width" constant="96" id="eqR-UF-NfL"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="nBk-o8-p9n" appends="YES" id="OLj-ga-7od"/>
+                            </connections>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simplenote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbO-Sw-z3Q">
                             <rect key="frame" x="0.0" y="365" width="360" height="40"/>
@@ -60,7 +67,7 @@
                                 <action selector="signupWasPressed" destination="-1" eventType="touchUpInside" id="7In-jZ-br6"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ac-gG-0lC">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ac-gG-0lC">
                             <rect key="frame" x="0.0" y="754" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Gzi-8S-0W2"/>
@@ -73,10 +80,29 @@
                                 <action selector="loginWasPressed" destination="-1" eventType="touchUpInside" id="2vd-5L-2Sl"/>
                             </connections>
                         </button>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="913-32-yoG" userLabel="Debug">
+                            <rect key="frame" x="138" y="60" width="84.5" height="41"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM9-bQ-8XK" userLabel="#Text#">
+                                    <rect key="frame" x="20" y="10" width="44.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="qM9-bQ-8XK" secondAttribute="bottom" constant="10" id="Kk4-kW-UNg"/>
+                                <constraint firstItem="qM9-bQ-8XK" firstAttribute="leading" secondItem="913-32-yoG" secondAttribute="leading" constant="20" id="Rr6-V5-i2p"/>
+                                <constraint firstAttribute="trailing" secondItem="qM9-bQ-8XK" secondAttribute="trailing" constant="20" id="gYX-83-t8D"/>
+                                <constraint firstItem="qM9-bQ-8XK" firstAttribute="top" secondItem="913-32-yoG" secondAttribute="top" constant="10" id="iBn-bU-cwx"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="WbO-Sw-z3Q" secondAttribute="trailing" id="2HD-fB-Skt"/>
+                        <constraint firstItem="913-32-yoG" firstAttribute="centerX" secondItem="c7f-B9-HYb" secondAttribute="centerX" id="6ai-iY-qPC"/>
                         <constraint firstItem="FSo-hZ-mnC" firstAttribute="centerX" secondItem="c7f-B9-HYb" secondAttribute="centerX" id="6cE-Xq-CPG"/>
                         <constraint firstAttribute="trailing" secondItem="PYz-ya-QmI" secondAttribute="trailing" id="8Um-ko-D1X"/>
                         <constraint firstItem="1Du-WL-hgy" firstAttribute="leading" secondItem="c7f-B9-HYb" secondAttribute="leading" id="Kbb-UQ-FqH"/>
@@ -86,6 +112,7 @@
                         <constraint firstAttribute="trailing" secondItem="5ac-gG-0lC" secondAttribute="trailing" id="XOj-Fn-MDS"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="cVx-NG-Ru2"/>
                         <constraint firstAttribute="trailing" secondItem="1Du-WL-hgy" secondAttribute="trailing" id="iMy-vi-2If"/>
+                        <constraint firstItem="913-32-yoG" firstAttribute="top" secondItem="c7f-B9-HYb" secondAttribute="top" constant="60" id="mov-GX-HHC"/>
                         <constraint firstItem="5ac-gG-0lC" firstAttribute="leading" secondItem="c7f-B9-HYb" secondAttribute="leading" id="oGG-w7-n2U"/>
                         <constraint firstItem="WbO-Sw-z3Q" firstAttribute="leading" secondItem="c7f-B9-HYb" secondAttribute="leading" id="rLP-sU-qeS"/>
                         <constraint firstAttribute="bottom" secondItem="5ac-gG-0lC" secondAttribute="bottom" constant="20" id="s5c-Kp-dkM"/>
@@ -94,6 +121,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -103,11 +131,23 @@
                 <constraint firstItem="c7f-B9-HYb" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ncT-5f-WxI"/>
                 <constraint firstItem="c7f-B9-HYb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yt5-0z-Tys"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
+        <tapGestureRecognizer numberOfTapsRequired="3" id="nBk-o8-p9n">
+            <connections>
+                <action selector="unlockDebugMode" destination="-1" id="n8J-4H-JGF"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
+    <designables>
+        <designable name="PYz-ya-QmI">
+            <size key="intrinsicContentSize" width="80" height="33"/>
+        </designable>
+    </designables>
     <resources>
         <image name="simplenote-logo" width="64" height="64"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
