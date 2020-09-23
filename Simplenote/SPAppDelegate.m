@@ -27,7 +27,6 @@
 #import "SPTracker.h"
 
 @import Contacts;
-@import SAMKeychain;
 @import Simperium;
 
 @class KeychainMigrator;
@@ -42,7 +41,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
+@interface SPAppDelegate () <SPBucketDelegate, PinLockDelegate>
 
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
@@ -492,42 +491,6 @@
     [self.simperium save];
 }
 
-
-#pragma mark ================================================================================
-#pragma mark Simperium delegate
-#pragma mark ================================================================================
-
-- (void)simperiumDidLogin:(Simperium *)simperium
-{
-    // Store the Token: Required by the Share Extension!
-    NSString *token = simperium.user.authToken;
-    [SAMKeychain setPassword:token forService:kShareExtensionServiceName account:kShareExtensionAccountName];
-    
-    // Tracker!
-    [SPTracker refreshMetadataWithEmail:simperium.user.email];
-
-    // Shortcuts!
-    [[ShortcutsHandler shared] registerSimplenoteActivities];
-
-    // Now that the user info is present, cache it for use by the crash logging system.
-    // See the docs there for details on why this is necessary.
-    [CrashLogging cacheUser:simperium.user];
-    [CrashLogging cacheOptOutSetting:!simperium.preferencesObject.analytics_enabled.boolValue];
-}
-
-- (void)simperiumDidLogout:(Simperium *)simperium
-{
-    // Nuke Extension Token
-    [SAMKeychain deletePasswordForService:kShareExtensionServiceName account:kShareExtensionAccountName];
-    
-    // Tracker!
-    [SPTracker refreshMetadataForAnonymousUser];
-}
-
-- (void)simperium:(Simperium *)simperium didFailWithError:(NSError *)error
-{
-    [SPTracker refreshMetadataForAnonymousUser];
-}
 
 #pragma mark ================================================================================
 #pragma mark SPBucket delegate
