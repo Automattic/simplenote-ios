@@ -54,7 +54,7 @@ static CGFloat const imageSide = 34.0;
     self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 
     UIColor *titleColorNormal = [UIColor simplenoteTintColor];
-    UIColor *actionDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+    UIColor *actionDisabledColor = [UIColor simplenoteSecondaryTextColor];
 
     [self setTitleColor:titleColorNormal forState:UIControlStateNormal];
     [self setTitleColor:actionDisabledColor forState:UIControlStateDisabled];

@@ -1,1 +1,2 @@
-- Límite de etiquetas actualizado hasta 256 caracteres
+- Hemos corregido un problema de accesibilidad en el editor de notas
+- Ahora, al deslizar una nota en la lista, se muestra la acción Copiar enlace interno

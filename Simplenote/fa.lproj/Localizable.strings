@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debug";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Delete";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
 
@@ -376,9 +373,6 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
 
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "سنجاق کردن";
-
 /* Action to mark a note as pinned */
 "Pin note" = "Pin note";
 
@@ -436,9 +430,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "بازنشانی لازم است";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Restore";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Restore Note";
 
@@ -469,9 +460,6 @@
 
 /* Title of options screen */
 "Settings" = "تنظیمات";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "اشتراک‌گذاری";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -560,9 +548,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Unlock %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "برداشتنِ سنجاق";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Unpin note";
 
@@ -644,9 +629,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "tag-delete-accessibility-hint";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "برچسب:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "انتقالِ یادداشتِ کنونی به زباله‌دان";
