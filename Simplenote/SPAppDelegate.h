@@ -35,10 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)save;
 - (void)logoutAndReset:(id)sender;
 
-- (nullable NSString *)getPin;
-- (void)setPin:(NSString *)newPin;
-- (void)removePin;
-
 - (void)presentNewNoteEditor;
 - (void)presentNoteWithUniqueIdentifier:(nullable NSString *)uuid;
 
