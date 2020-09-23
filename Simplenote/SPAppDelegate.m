@@ -808,22 +808,6 @@
                      }];
 }
 
-- (NSString *)getPin
-{
-    return [SAMKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
-}
-
-- (void)setPin:(NSString *)newPin
-{
-    [SAMKeychain setPassword:newPin forService:kSimplenotePinKey account:kSimplenotePinKey];
-}
-
-- (void)removePin
-{
-    [SAMKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
-    [self setAllowBiometryInsteadOfPin:NO];
-}
-
 - (BOOL)allowBiometryInsteadOfPin
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
