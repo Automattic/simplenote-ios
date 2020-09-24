@@ -298,7 +298,7 @@ private enum Constants {
     static let descriptions: [String] = [
         "simplenote.com/blog",
         "@simplenoteapp",
-        NSLocalizedString("FAQ or contact us", "Get Help Description Label"),
+        NSLocalizedString("FAQ or contact us", comment: "Get Help Description Label"),```
         "simplenote.com",
         "GitHub.com",
         NSLocalizedString("Are you a developer? Automattic is hiring.", comment: "Automattic hiring description")
