@@ -80,8 +80,6 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         
         self.titleView = nil;
         self.contentView = nil;
-        
-        showDividerRects = [self.theme boolForKey:@"actionSheetShowViewSeparators"];
 
     }
     return self;
@@ -260,9 +258,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
     
     
     //If dividers are enabled, then we allocate the divider rect array.  This will hold NSValues
-    if ([self.theme boolForKey:@"actionSheetShowViewSeparators"]) {
-        dividerRects = [[NSMutableArray alloc] initWithCapacity:viewArray.count-1];
-    }
+    dividerRects = [[NSMutableArray alloc] initWithCapacity:viewArray.count-1];
     
     i = 0;
     
@@ -284,7 +280,7 @@ static CGFloat SPActionSheetCancelButtonIndexNone = -1;
         CGFloat motionEffectDistance = [self.theme floatForKey:@"actionSheetMotionEffectMoveDistance"];
 
         //and if dividers are enabled, we record their position for the drawing methods
-        if ([self.theme boolForKey:@"actionSheetShowViewSeparators"] && i != viewArray.count-1) {
+        if (i != viewArray.count-1) {
             
             // the rect is hacked to work in both orientations of the device, which is why
             // the width is set to the max dimension as it does not resize

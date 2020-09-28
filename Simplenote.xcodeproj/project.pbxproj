@@ -262,6 +262,8 @@
 		B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */; };
 		B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB169922FA128000B4EBA5 /* SPSheetController.xib */; };
 		B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
+		B5AD0349251445CA00255D5C /* UINavigationBar+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD0348251445CA00255D5C /* UINavigationBar+Appearance.swift */; };
+		B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */; };
 		B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */; };
@@ -622,6 +624,8 @@
 		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
 		B5AB169922FA128000B4EBA5 /* SPSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSheetController.xib; path = Classes/SPSheetController.xib; sourceTree = "<group>"; };
 		B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIKitConstants.swift; path = Classes/UIKitConstants.swift; sourceTree = "<group>"; };
+		B5AD0348251445CA00255D5C /* UINavigationBar+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Appearance.swift"; path = "Classes/UINavigationBar+Appearance.swift"; sourceTree = "<group>"; };
+		B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIBarButtonItem+Appearance.swift"; path = "Classes/UIBarButtonItem+Appearance.swift"; sourceTree = "<group>"; };
 		B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		B5ADF2221BAB14DD00F864DB /* VSTheme+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VSTheme+Extensions.h"; path = "Classes/VSTheme+Extensions.h"; sourceTree = "<group>"; };
 		B5ADF2231BAB14DD00F864DB /* VSTheme+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VSTheme+Extensions.m"; path = "Classes/VSTheme+Extensions.m"; sourceTree = "<group>"; };
@@ -1376,6 +1380,8 @@
 				B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */,
 				B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */,
 				B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */,
+				B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */,
+				B5AD0348251445CA00255D5C /* UINavigationBar+Appearance.swift */,
 				B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */,
 			);
 			name = Themes;
@@ -2280,6 +2286,7 @@
 				46A3C98B17DFA81A002865AE /* SPHorizontalPickerViewCell.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
 				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
+				B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */,
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
@@ -2342,6 +2349,7 @@
 				B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */,
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,
 				B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */,
+				B5AD0349251445CA00255D5C /* UINavigationBar+Appearance.swift in Sources */,
 				46A3C9AE17DFA81A002865AE /* SPTextView.m in Sources */,
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,

@@ -150,7 +150,7 @@
 - (void)setupThemeNotifications
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
 
@@ -340,11 +340,7 @@
 
 - (void)loadSelectedTheme
 {
-    // We seriously need to setup the proper traits override, prior to applying the appearance selectors
     [[SPUserInterface shared] refreshUserInterfaceStyle];
-
-    // TODO: Eventually nuke VSThemeManager. Please
-    [[VSThemeManager sharedManager] applyAppearanceStyling];
 }
 
 

@@ -42,8 +42,6 @@ NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 
 NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
-NSString *const kSimplenoteDarkThemeName            = @"dark";
-NSString *const kSimplenoteDefaultThemeName         = @"default";
 
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
 
