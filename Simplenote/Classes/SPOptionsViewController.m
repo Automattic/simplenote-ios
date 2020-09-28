@@ -52,8 +52,9 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsSecurity       = 3,
     SPOptionsViewSectionsAccount        = 4,
     SPOptionsViewSectionsAbout          = 5,
-    SPOptionsViewSectionsDebug          = 6,
-    SPOptionsViewSectionsCount          = 7
+    SPOptionsViewSectionsHelp           = 6,
+    SPOptionsViewSectionsDebug          = 7,
+    SPOptionsViewSectionsCount          = 8
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -89,6 +90,11 @@ typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
 typedef NS_ENUM(NSInteger, SPOptionsAboutRow) {
     SPOptionsAboutRowTitle              = 0,
     SPOptionsAboutRowCount              = 1
+};
+
+typedef NS_ENUM(NSInteger, SPOptionsHelpRow) {
+    SPOptionsHelpRowTitle              = 0,
+    SPOptionsHelpRowCount              = 1
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
@@ -247,9 +253,13 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsAccount: {
             return SPOptionsAccountRowCount;
         }
-
+            
         case SPOptionsViewSectionsAbout: {
             return SPOptionsAboutRowCount;
+        }
+            
+        case SPOptionsViewSectionsHelp: {
+            return SPOptionsHelpRowCount;
         }
             
         case SPOptionsViewSectionsDebug: {
@@ -457,6 +467,16 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+        } case SPOptionsViewSectionsHelp: {
+            
+            switch (indexPath.row) {
+                case SPOptionsHelpRowTitle: {
+                    cell.textLabel.text = NSLocalizedString(@"Help", @"Display help web page");
+                    break;
+                }
+            }
+            
+            break;
         } case SPOptionsViewSectionsDebug: {
 
             switch (indexPath.row) {
@@ -560,6 +580,20 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     SPAboutViewController *aboutController = [[SPAboutViewController alloc] init];
                     aboutController.modalPresentationStyle = UIModalPresentationFormSheet;
                     [[self navigationController] presentViewController:aboutController animated:YES completion:nil];
+                    break;
+                }
+            }
+            
+            break;
+        } case SPOptionsViewSectionsHelp: {
+            switch (indexPath.row) {
+                case SPOptionsHelpRowTitle: {
+                    NSURL *url = [NSURL URLWithString:@"https://simplenote.com/help"];
+
+                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                       [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+                    }
+
                     break;
                 }
             }
