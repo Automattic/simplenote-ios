@@ -1,2 +1,5 @@
-- Hemos corregido un problema de accesibilidad en el editor de notas
-- Ahora, al deslizar una nota en la lista, se muestra la acción Copiar enlace interno
+- Se ha corregido un error que impedía añadir colaboradores con direcciones de correo electrónico que contienen nuevos TLD
+- Ahora, al deslizar una nota en la lista, aparece la acción Copiar enlace interno
+- Ahora, al mantener pulsado un enlace interno, aparece la Nota objetivo
+- Ahora, iOS 12 es la versión mínima admitida
+- Ahora, el autorrelleno de contraseñas es la forma principal de gestionar tus credenciales

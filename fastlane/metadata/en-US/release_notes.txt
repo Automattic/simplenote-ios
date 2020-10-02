@@ -1,2 +1,5 @@
-- Fixed a stability issue in the Notes Editor
+- Fixed a bug that prevented adding collaborators with email addresses that contain new TLDs
 - Swiping a Note in the List now reveals the Copy Internal Link Action
+- Long Pressing over an Internal Link now pushes the target Note
+- iOS 12 is now the minimum supported OS
+- Password AutoFill is now the preferred way to manage your credentials
