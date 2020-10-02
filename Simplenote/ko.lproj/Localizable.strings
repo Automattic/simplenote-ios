@@ -311,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "새 메모...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "아니요";
 
 /* Message shown in note list when no notes are in the current view */
@@ -348,9 +347,6 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "메모 열기";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "업데이트로 메모가 표시되는 순서가 변경되었을 수 있습니다. 정렬 설정을 검토하시겠어요?";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "패스코드";
@@ -590,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "채용 공고";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "예";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */

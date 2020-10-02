@@ -311,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "New note...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "No";
 
 /* Message shown in note list when no notes are in the current view */
@@ -348,9 +347,6 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Άνοιγμα σημείωσης";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Our update may have changed the order in which your notes appear. Would you like to review sort settings?";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Συνθηματικό";
@@ -590,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "Work With Us";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Yes";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
