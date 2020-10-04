@@ -311,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "Nuova nota...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "No";
 
 /* Message shown in note list when no notes are in the current view */
@@ -348,9 +347,6 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Apri nota";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Il nostro aggiornamento potrebbe aver cambiato l'ordine di visualizzazione delle tue note. Desideri rivedere le impostazioni di ordinamento?";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "PIN";
@@ -590,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "Lavora con noi";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Si";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */

@@ -1,2 +1,5 @@
-- Correção de um erro de estabilidade no editor de notas
-- Deslizar uma nota na lista agora mostra a ação Copiar link interno
+- Corrigido bug que impedia adicionar colaboradores que continham novos TLDs nos endereços de e-mail
+- Agora, deslizar uma anotação na lista exibe a ação Copiar link interno
+- Agora, manter um link interno pressionado envia a anotação desejada
+- O SO mínimo compatível passou a ser o iOS 12
+- Agora, o preenchimento automático de senha é a forma preferível de gerenciar suas credenciais

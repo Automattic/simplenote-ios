@@ -311,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "新建笔记...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "否";
 
 /* Message shown in note list when no notes are in the current view */
@@ -348,9 +347,6 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "打开笔记";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "我们的更新可能改变了您笔记的显示顺序。您想要查看排序设置吗？";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密码";
@@ -590,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "与我们合作";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "是";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
