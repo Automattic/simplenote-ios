@@ -511,12 +511,12 @@ extension SPNoteListViewController: UITableViewDelegate {
             return nil
         }
 
-        return UIContextMenuConfiguration(identifier: nil) {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: {
             return self.previewingViewController(for: note)
 
-        } actionProvider: { suggestedActions in
+        }, actionProvider: { suggestedActions in
             return self.contextMenu(for: note)
-        }
+        })
     }
 
     @available(iOS 13.0, *)
