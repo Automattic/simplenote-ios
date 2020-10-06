@@ -23,9 +23,7 @@
     BOOL bBlankNote;
     BOOL bModified;
     BOOL bDisableShrinkingNavigationBar;
-    BOOL bShouldDelete;
     BOOL bViewingVersions;
-    BOOL beditingTags;
     BOOL bActionSheetVisible;
     
     CGAffineTransform navigationBarTransform;
