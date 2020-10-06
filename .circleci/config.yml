@@ -24,7 +24,7 @@ jobs:
   Test:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      xcode-version: "11.6.0"
     steps:
       - git/shallow-checkout
       - fix-path
@@ -40,7 +40,7 @@ jobs:
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       # END: Swift Package Manager Workaround
       - ios/test:
-          xcode-version: "12.0"
+          xcode-version: "11.6.0"
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone 11
@@ -48,7 +48,7 @@ jobs:
   Installable Build:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      xcode-version: "11.6.0"
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
@@ -76,7 +76,7 @@ jobs:
   Release Build:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      xcode-version: "11.6.0"
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
