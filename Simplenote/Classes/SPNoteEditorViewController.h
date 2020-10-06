@@ -14,13 +14,6 @@
 @class SPOutsideTouchView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
-
-    // BOOLS
-    BOOL bBlankNote;
-    BOOL bModified;
-    BOOL bDisableShrinkingNavigationBar;
-    BOOL bViewingVersions;
-    BOOL bActionSheetVisible;
     
     CGAffineTransform navigationBarTransform;
     CGFloat scrollPosition;

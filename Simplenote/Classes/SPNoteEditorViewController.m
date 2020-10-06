@@ -56,10 +56,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 
-// State
+// Remote Updates
 @property (nonatomic, assign) NSUInteger        cursorLocationBeforeRemoteUpdate;
 @property (nonatomic, strong) NSString          *noteContentBeforeRemoteUpdate;
+
+// State
 @property (nonatomic, assign) BOOL              bounceMarkdownPreviewOnActivityViewDismiss;
+@property (nonatomic, assign) BOOL              blankNote;
+@property (nonatomic, assign) BOOL              modified;
+@property (nonatomic, assign) BOOL              disableShrinkingNavigationBar;
+@property (nonatomic, assign) BOOL              viewingVersions;
+@property (nonatomic, assign) BOOL              actionSheetVisible;
 
 // Timers
 @property (nonatomic, strong) NSTimer           *saveTimer;
@@ -97,7 +104,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         scrollPosition = _noteEditorTextView.contentOffset.y;
         navigationBarTransform = CGAffineTransformIdentity;
         
-        bDisableShrinkingNavigationBar = NO;
+        self.disableShrinkingNavigationBar = NO;
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -230,7 +237,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !bActionSheetVisible && !self.isPreviewing) {
+    if ((_currentNote.content.length == 0) && !self.actionSheetVisible && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -332,10 +339,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self->bDisableShrinkingNavigationBar = YES;
+        self.disableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-        self->bDisableShrinkingNavigationBar = NO;
+        self.disableShrinkingNavigationBar = NO;
     }];
 }
 
@@ -544,7 +551,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self endEditing:nil];
     
-    if (bBlankNote) {
+    if (self.blankNote) {
         
         // delete note
         [[SPObjectManager sharedManager] permenentlyDeleteNote:_currentNote];
@@ -571,7 +578,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)backButtonAction:(id)sender {
     
     // this is to disable the swipe gesture while restoring to a previous version
-    if (bViewingVersions) {
+    if (self.viewingVersions) {
         return;
     }
     
@@ -621,14 +628,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [_tagView clearAllTags];
     }
     
-    bBlankNote = NO;
-    bModified = NO;
+    self.blankNote = NO;
+    self.modified = NO;
     self.previewing = NO;
 }
 
 - (void)clearNote {
     
-    bBlankNote = NO;
+    self.blankNote = NO;
     _currentNote = nil;
     _noteEditorTextView.text = @"";
     
@@ -778,7 +785,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [self.tagView endEditing:YES];
 
         [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
-            self->bDisableShrinkingNavigationBar = YES;
+            self.disableShrinkingNavigationBar = YES;
         }];
     });
 }
@@ -881,7 +888,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // a whole mess of conditionals that affect the behavior
     if (disableFromTopBounce || disableFromBottomBounce || disableShrinkingingWhileScrollingUp ||
-        bDisableShrinkingNavigationBar || disableFromSmallContentSize) {
+        self.disableShrinkingNavigationBar || disableFromSmallContentSize) {
         applyTransform = NO;
     }
     
@@ -902,7 +909,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
-    bDisableShrinkingNavigationBar = NO;
+    self.disableShrinkingNavigationBar = NO;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
@@ -936,7 +943,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion {
     
-    bDisableShrinkingNavigationBar = YES;
+    self.disableShrinkingNavigationBar = YES;
     
     navigationBarTransform = CGAffineTransformIdentity;
     
@@ -960,7 +967,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     void (^completionBlock)() = ^() {
         
         if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
-            self->bDisableShrinkingNavigationBar = NO;
+            self.disableShrinkingNavigationBar = NO;
         }
         
         if (completion)
@@ -1084,8 +1091,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)textViewDidChange:(UITextView *)textView {
     
-    bBlankNote = NO;
-    bModified = YES;
+    self.blankNote = NO;
+    self.modified = YES;
     
     [self.saveTimer invalidate];
     self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
@@ -1211,10 +1218,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)save {
     
-	if (_currentNote == nil || bViewingVersions || [self isDictatingText])
+	if (_currentNote == nil || self.viewingVersions || [self isDictatingText])
 		return;    
     
-	if (bModified || _currentNote.deleted == YES)
+	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
         _currentNote.content = [_noteEditorTextView getPlainTextContent];
@@ -1229,7 +1236,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [SPTracker trackEditorNoteEdited];
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:_currentNote];
         
-        bModified = NO;
+        self.modified = NO;
 	}
 }
 
@@ -1265,7 +1272,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
     
-    if (bViewingVersions) {
+    if (self.viewingVersions) {
         if (noteVersionData == nil) {
             noteVersionData = [NSMutableDictionary dictionaryWithCapacity:10];
         }
@@ -1300,7 +1307,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)newButtonAction:(id)sender {
 
-    if (_currentNote && bBlankNote) {
+    if (_currentNote && self.blankNote) {
         [_noteEditorTextView becomeFirstResponder];
         return;
     }
@@ -1309,7 +1316,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [SPTracker trackEditorNoteCreated];
     }
     
-    bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
+    self.disableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
     
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
@@ -1340,7 +1347,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
         [self displayNote:newNote];
-        bBlankNote = YES;
+        self.blankNote = YES;
 
         [UIView animateWithDuration:0.2
                          animations:^{
@@ -1360,10 +1367,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } else {
 
         [self displayNote:newNote];
-        bBlankNote = YES;
+        self.blankNote = YES;
     }
     
-    bDisableShrinkingNavigationBar = NO;
+    self.disableShrinkingNavigationBar = NO;
 }
 
 - (void)insertChecklistAction:(id)sender {
@@ -1498,7 +1505,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
     
-    bModified = YES;
+    self.modified = YES;
 
     switch (index) {
         case 0: // Publish Note
@@ -1620,7 +1627,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     if ([actionSheet isEqual:versionActionSheet]) {
         
-        bViewingVersions = NO;
+        self.viewingVersions = NO;
         
         if (index == 0) {
             
@@ -1630,7 +1637,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             
             [SPTracker trackEditorNoteRestored];
             
-            bModified = YES;
+            self.modified = YES;
             [self save];
         }
         
@@ -1646,12 +1653,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)actionSheetDidShow:(SPActionSheet *)actionSheet {
     
-    bActionSheetVisible = YES;
+    self.actionSheetVisible = YES;
 }
 
 - (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
     
-    bActionSheetVisible = NO;
+    self.actionSheetVisible = NO;
     
     if ([actionSheet isEqual:noteActionSheet])
         noteActionSheet = nil;
@@ -1789,7 +1796,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 -(void)togglePinStatusAction:(id)sender
 {
 	_currentNote.pinned = !_currentNote.pinned;
-	bModified = YES;
+	self.modified = YES;
     
     if (_currentNote.pinned) {
         [SPTracker trackEditorNotePinned];
@@ -1821,7 +1828,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self save];
     
     // get the note version data
-    bViewingVersions = YES;
+    self.viewingVersions = YES;
     currentVersion = 0; // reset the version number
     
     [_noteEditorTextView setEditable:NO];
@@ -1996,8 +2003,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 didAddCollaborator:(NSString *)collaboratorName {
 
     [_currentNote addTag:collaboratorName];
-    bBlankNote = NO;
-    bModified = YES;
+    self.blankNote = NO;
+    self.modified = YES;
     [self save];
     
     [SPTracker trackEditorEmailTagAdded];
@@ -2007,8 +2014,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
              didRemoveCollaborator:(NSString *)collaboratorName {
     
     [_currentNote stripTag:collaboratorName];
-    bBlankNote = NO;
-    bModified = YES;
+    self.blankNote = NO;
+    self.modified = YES;
     [self save];
 
     [SPTracker trackEditorEmailTagRemoved];
@@ -2051,8 +2058,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     [_currentNote addTag:tagName];
-    bBlankNote = NO;
-    bModified = YES;
+    self.blankNote = NO;
+    self.modified = YES;
     [self save];
     
     [SPTracker trackEditorTagAdded];
@@ -2066,8 +2073,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName {
     
     [_currentNote stripTag:tagName];
-    bBlankNote = NO;
-    bModified = YES;
+    self.blankNote = NO;
+    self.modified = YES;
     
     NSString *deletedTagBuffer = _deletedTagBuffer;
     if (deletedTagBuffer && [deletedTagBuffer isEqualToString:tagName]) {
