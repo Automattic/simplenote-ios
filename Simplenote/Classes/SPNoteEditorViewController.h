@@ -11,11 +11,7 @@
 @class SPBlurEffectView;
 @class SPEditorTextView;
 
-@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
-    UIBarButtonItem *nextSearchButton;
-    UIBarButtonItem *prevSearchButton;
-    UIBarButtonItem *doneSearchButton;
-    
+@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {    
     // sheets
     SPActivityView *noteActivityView;
     SPActionSheet *noteActionSheet;

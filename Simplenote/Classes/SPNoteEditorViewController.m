@@ -59,6 +59,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 @property (nonatomic, strong) SPOutsideTouchView    *navigationButtonContainer;
 @property (nonatomic, strong) SPBlurEffectView      *navigationBarBackground;
 @property (nonatomic, strong) UILabel               *searchDetailLabel;
+@property (nonatomic, strong) UIBarButtonItem       *nextSearchButton;
+@property (nonatomic, strong) UIBarButtonItem       *prevSearchButton;
+@property (nonatomic, strong) UIBarButtonItem       *doneSearchButton;
 
 // Timers
 @property (nonatomic, strong) NSTimer               *saveTimer;
@@ -509,10 +512,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.navigationItem.titleView = titleView;
     
     // setup search toolbar
-    doneSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                     target:self
-                                                                     action:@selector(endSearching:)];
-    doneSearchButton.width += 10.0;
+    self.doneSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                          target:self
+                                                                          action:@selector(endSearching:)];
+    self.doneSearchButton.width += 10.0;
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
@@ -520,16 +523,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                                                    target:nil
                                                                                    action:nil];
 
-    nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
-                                            imageAlignment:UIBarButtonImageAlignmentRight
-                                                    target:self
-                                                  selector:@selector(highlightNextSearchResult:)];
-        nextSearchButton.width = 34.0;
-    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
-                                            imageAlignment:UIBarButtonImageAlignmentRight
-                                                    target:self
-                                                  selector:@selector(highlightPrevSearchResult:)];
-    prevSearchButton.width = 34.0;
+    self.nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
+                                                 imageAlignment:UIBarButtonImageAlignmentRight
+                                                         target:self
+                                                       selector:@selector(highlightNextSearchResult:)];
+    self.nextSearchButton.width = 34.0;
+    self.prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
+                                                 imageAlignment:UIBarButtonImageAlignmentRight
+                                                         target:self
+                                                       selector:@selector(highlightPrevSearchResult:)];
+    self.prevSearchButton.width = 34.0;
     
     
     self.searchDetailLabel = [[UILabel alloc] init];
@@ -540,10 +543,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.searchDetailLabel.alpha = 0.0;
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchDetailLabel];
     
-    
-    
-    [self setToolbarItems:@[doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, prevSearchButton, nextSearchButton] animated:NO];
-    
+
+    [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
 - (void)didReceiveVoiceOverNotification:(NSNotification *)notification
@@ -846,8 +847,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
-        prevSearchButton.enabled = index > 0;
-        nextSearchButton.enabled = index < searchResultCount - 1;
+        self.prevSearchButton.enabled = index > 0;
+        self.nextSearchButton.enabled = index < searchResultCount - 1;
         
         [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
                            animated:YES
@@ -867,7 +868,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)endSearching:(id)sender {
     
-    if ([sender isEqual:doneSearchButton])
+    if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
     _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
