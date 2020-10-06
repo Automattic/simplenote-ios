@@ -9,14 +9,9 @@
 
 @class Note;
 @class SPBlurEffectView;
-@class SPTextView;
 @class SPEditorTextView;
-@class SPOutsideTouchView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
-
-    SPOutsideTouchView *navigationButtonContainer;
-    
     UIBarButtonItem *nextSearchButton;
     UIBarButtonItem *prevSearchButton;
     UIBarButtonItem *doneSearchButton;

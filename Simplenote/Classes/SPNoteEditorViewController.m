@@ -56,6 +56,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
+@property (nonatomic, strong) SPOutsideTouchView    *navigationButtonContainer;
 @property (nonatomic, strong) SPBlurEffectView      *navigationBarBackground;
 @property (nonatomic, strong) UILabel               *searchDetailLabel;
 
@@ -373,7 +374,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)sizeNavigationContainer {
     
     self.navigationItem.titleView.frame = CGRectMake(0, 0, MAX(self.view.frame.size.width, self.view.frame.size.height), SPCustomTitleViewHeight);
-    navigationButtonContainer.frame = self.navigationItem.titleView.bounds;
+    self.navigationButtonContainer.frame = self.navigationItem.titleView.bounds;
 
     BOOL isPad = [UIDevice isPad];
 
@@ -399,9 +400,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.backButton.frame = CGRectMake(leadingPadding,
                                        SPBarButtonYOriginAdjustment,
                                        self.backButton.frame.size.width,
-                                       navigationButtonContainer.frame.size.height);
+                                       self.navigationButtonContainer.frame.size.height);
     
-    CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
+    CGFloat previousXOrigin = self.navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
     
@@ -444,16 +445,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    navigationButtonContainer = [[SPOutsideTouchView alloc] init];
-    navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [titleView addSubview:navigationButtonContainer];
+    self.navigationButtonContainer = [[SPOutsideTouchView alloc] init];
+    self.navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [titleView addSubview:self.navigationButtonContainer];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(navigationBarContainerTapped:)];
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.numberOfTouchesRequired = 1;
     
-    [navigationButtonContainer addGestureRecognizer:tapGesture];
+    [self.navigationButtonContainer addGestureRecognizer:tapGesture];
     
     // back button
     self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -467,7 +468,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                         action:@selector(backButtonAction:)
               forControlEvents:UIControlEventTouchUpInside];
     
-    [navigationButtonContainer addSubview:self.backButton];
+    [self.navigationButtonContainer addSubview:self.backButton];
     
     
     // setup right buttons
@@ -498,10 +499,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     
-    [navigationButtonContainer addSubview:self.keyboardButton];
-    [navigationButtonContainer addSubview:self.createNoteButton];
-    [navigationButtonContainer addSubview:self.actionButton];
-    [navigationButtonContainer addSubview:self.checklistButton];
+    [self.navigationButtonContainer addSubview:self.keyboardButton];
+    [self.navigationButtonContainer addSubview:self.createNoteButton];
+    [self.navigationButtonContainer addSubview:self.actionButton];
+    [self.navigationButtonContainer addSubview:self.checklistButton];
     
     [self sizeNavigationContainer];
 
@@ -1021,7 +1022,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     CGFloat navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
     
-    CGRect containerViewFrame = navigationButtonContainer.bounds;
+    CGRect containerViewFrame = self.navigationButtonContainer.bounds;
     containerViewFrame.size.height = navigationBarHeight;
     
     BOOL isPortrait = self.isViewHorizontallyCompact && !self.isViewVerticallyCompact;
@@ -1036,7 +1037,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     
     // apply transform to button container
-    CGFloat normalHeight = navigationButtonContainer.frame.size.height;
+    CGFloat normalHeight = self.navigationButtonContainer.frame.size.height;
     CGFloat desiredHeight = normalHeight - 24;
 
     CGFloat percentTransform = ABS(yTransform) / 24;
