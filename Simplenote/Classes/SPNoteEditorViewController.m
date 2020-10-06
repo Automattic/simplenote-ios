@@ -56,37 +56,42 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
-@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
-@property (nonatomic, strong) UILabel           *searchDetailLabel;
+@property (nonatomic, strong) SPBlurEffectView      *navigationBarBackground;
+@property (nonatomic, strong) UILabel               *searchDetailLabel;
 
 // Timers
-@property (nonatomic, strong) NSTimer           *saveTimer;
-@property (nonatomic, strong) NSTimer           *guarenteedSaveTimer;
+@property (nonatomic, strong) NSTimer               *saveTimer;
+@property (nonatomic, strong) NSTimer               *guarenteedSaveTimer;
 
 // State
-@property (nonatomic, assign) BOOL              bounceMarkdownPreviewOnActivityViewDismiss;
-@property (nonatomic, assign) BOOL              blankNote;
-@property (nonatomic, assign) BOOL              modified;
-@property (nonatomic, assign) BOOL              disableShrinkingNavigationBar;
-@property (nonatomic, assign) BOOL              viewingVersions;
-@property (nonatomic, assign) BOOL              actionSheetVisible;
-@property (nonatomic, assign) BOOL              searching;
+@property (nonatomic, assign) BOOL                  bounceMarkdownPreviewOnActivityViewDismiss;
+@property (nonatomic, assign) BOOL                  blankNote;
+@property (nonatomic, assign) BOOL                  modified;
+@property (nonatomic, assign) BOOL                  disableShrinkingNavigationBar;
+@property (nonatomic, assign) BOOL                  viewingVersions;
+@property (nonatomic, assign) BOOL                  actionSheetVisible;
+@property (nonatomic, assign) BOOL                  searching;
 
 // Remote Updates
-@property (nonatomic, assign) NSUInteger        cursorLocationBeforeRemoteUpdate;
-@property (nonatomic, strong) NSString          *noteContentBeforeRemoteUpdate;
+@property (nonatomic, assign) NSUInteger            cursorLocationBeforeRemoteUpdate;
+@property (nonatomic, strong) NSString              *noteContentBeforeRemoteUpdate;
+
+// Versions
+@property (nonatomic, assign) NSInteger             currentVersion;
+@property (nonatomic, strong) NSMutableDictionary   *noteVersionData;
 
 // Search
-@property (nonatomic, assign) NSInteger         highlightedSearchResultIndex;
-@property (nonatomic, strong) NSArray           *searchResultRanges;
+@property (nonatomic, assign) NSInteger             highlightedSearchResultIndex;
+@property (nonatomic, strong) NSArray               *searchResultRanges;
 
 // Navigation Bar
-@property (nonatomic, assign) CGAffineTransform navigationBarTransform;
+@property (nonatomic, assign) CGAffineTransform     navigationBarTransform;
+@property (nonatomic, assign) CGFloat               scrollPosition;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
 // current note. This helps prevent against tag spam by mistyping
-@property (nonatomic, strong) NSString          *deletedTagBuffer;
+@property (nonatomic, strong) NSString              *deletedTagBuffer;
 
 @end
 
@@ -109,7 +114,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         _noteEditorTextView.tagView.tagDelegate = self;
         
         // Helpers
-        scrollPosition = _noteEditorTextView.contentOffset.y;
+        self.scrollPosition = _noteEditorTextView.contentOffset.y;
         self.navigationBarTransform = CGAffineTransformIdentity;
         
         self.disableShrinkingNavigationBar = NO;
@@ -885,7 +890,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // don't apply wrong transform in overscroll regions
     
-    CGFloat transformAmount = scrollPosition - scrollView.contentOffset.y;
+    CGFloat transformAmount = self.scrollPosition - scrollView.contentOffset.y;
     
     BOOL disableFromTopBounce = (scrollView.contentOffset.y < -scrollView.contentInset.top && transformAmount < 0);
     BOOL disableFromBottomBounce = (scrollView.contentOffset.y > scrollView.contentInset.top + scrollView.contentSize.height && transformAmount < 0);
@@ -909,7 +914,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     }
     
-    scrollPosition = scrollView.contentOffset.y;
+    self.scrollPosition = scrollView.contentOffset.y;
 
     // Slowly Fade-In the NavigationBar's Blur
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
@@ -1279,11 +1284,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
     
     if (self.viewingVersions) {
-        if (noteVersionData == nil) {
-            noteVersionData = [NSMutableDictionary dictionaryWithCapacity:10];
+        if (self.noteVersionData == nil) {
+            self.noteVersionData = [NSMutableDictionary dictionaryWithCapacity:10];
         }
         NSInteger versionInt = [version integerValue];
-        [noteVersionData setObject:data forKey:[NSNumber numberWithInteger:versionInt]];
+        [self.noteVersionData setObject:data forKey:[NSNumber numberWithInteger:versionInt]];
         
         [versionPickerView reloadData];
     }
@@ -1650,7 +1655,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [_noteEditorTextView processChecklists];
         // Unload versions and re-enable editor
         [_noteEditorTextView setEditable:YES];
-        noteVersionData = nil;
+        self.noteVersionData = nil;
         [(SPNavigationController *)self.navigationController setDisableRotation:NO];
     }
     
@@ -1835,7 +1840,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // get the note version data
     self.viewingVersions = YES;
-    currentVersion = 0; // reset the version number
+    self.currentVersion = 0; // reset the version number
     
     [_noteEditorTextView setEditable:NO];
     
@@ -1913,7 +1918,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPVersionPickerViewCell *cell = (SPVersionPickerViewCell *)[pickerView dequeueReusableCellforIndex:index];
     
     NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    NSDictionary *versionData = [noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
+    NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
     
     if (versionData != nil) {
         NSDate *versionDate = [NSDate dateWithTimeIntervalSince1970:[(NSString *)[versionData objectForKey:@"modificationDate"] doubleValue]];
@@ -1967,11 +1972,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)pickerView:(SPHorizontalPickerView *)pickerView didSelectItemAtIndex:(NSInteger)index {
     
     NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    if (versionInt == currentVersion)
+    if (versionInt == self.currentVersion) {
         return;
+    }
     
-    currentVersion = versionInt;
-	NSDictionary *versionData = [noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
+    self.currentVersion = versionInt;
+	NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
     NSLog(@"Loading version %ld: %@", (long)versionInt, versionData);
     
 	if (versionData != nil) {

@@ -15,8 +15,6 @@
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
 
-    CGFloat scrollPosition;
-    
     SPOutsideTouchView *navigationButtonContainer;
     
     UIBarButtonItem *nextSearchButton;
@@ -29,9 +27,6 @@
     SPActionSheet *versionActionSheet;
     
     SPHorizontalPickerView *versionPickerView;
-    
-    NSInteger currentVersion;
-    NSMutableDictionary *noteVersionData;
 }
 
 // Navigation Bar
