@@ -61,13 +61,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     BOOL bounceMarkdownPreviewOnActivityViewDismiss;
 }
 
-@property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
-@property (nonatomic, strong) NSArray                   *searchResultRanges;
+// Timers
+@property (nonatomic, strong) NSTimer           *saveTimer;
+@property (nonatomic, strong) NSTimer           *guarenteedSaveTimer;
+
+@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
+@property (nonatomic, strong) NSArray           *searchResultRanges;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
 // current note. This helps prevent against tag spam by mistyping
-@property (nonatomic, strong) NSString                  *deletedTagBuffer;
+@property (nonatomic, strong) NSString          *deletedTagBuffer;
 
 @end
 
@@ -1083,21 +1087,21 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     bBlankNote = NO;
     bModified = YES;
     
-    [saveTimer invalidate];
-    saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                                 target:self
-                                               selector:@selector(saveAndSync:)
-                                               userInfo:nil
-                                                repeats:NO];
-    saveTimer.tolerance = 0.1;
+    [self.saveTimer invalidate];
+    self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                      target:self
+                                                    selector:@selector(saveAndSync:)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.saveTimer.tolerance = 0.1;
     
-    if (!guarenteedSaveTimer) {
-        guarenteedSaveTimer = [NSTimer scheduledTimerWithTimeInterval:21.0
-                                                               target:self
-                                                             selector:@selector(saveAndSync:)
-                                                             userInfo:nil
-                                                              repeats:NO];
-        guarenteedSaveTimer.tolerance = 1.0;
+    if (!self.guarenteedSaveTimer) {
+        self.guarenteedSaveTimer = [NSTimer scheduledTimerWithTimeInterval:21.0
+                                                                    target:self
+                                                                  selector:@selector(saveAndSync:)
+                                                                  userInfo:nil
+                                                                   repeats:NO];
+        self.guarenteedSaveTimer.tolerance = 1.0;
     }
     
     if([textView.text hasSuffix:@"\n"] && _noteEditorTextView.selectedRange.location == _noteEditorTextView.text.length) {
@@ -1191,11 +1195,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)cancelSaveTimers {
     
-    [saveTimer invalidate];
-	saveTimer = nil;
+    [self.saveTimer invalidate];
+    self.saveTimer = nil;
     
-    [guarenteedSaveTimer invalidate];
-    guarenteedSaveTimer = nil;
+    [self.guarenteedSaveTimer invalidate];
+    self.guarenteedSaveTimer = nil;
 }
 
 -(void)saveAndSync:(NSTimer *)timer

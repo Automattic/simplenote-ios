@@ -14,11 +14,7 @@
 @class SPOutsideTouchView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
-    
-    // Other Objects
-    NSTimer *saveTimer;
-    NSTimer *guarenteedSaveTimer;
-    
+
     // BOOLS
     BOOL bBlankNote;
     BOOL bModified;
