@@ -654,15 +654,15 @@ private extension SPNoteListViewController {
     /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
     ///
     func contextMenu(for note: Note) -> UIMenu {
-        let copy = UIAction(title: ActionTitle.copyLink, image: UIImage(sfSymbol: .link)) { [weak self] _ in
+        let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInterlink(to: note)
         }
 
-        let share = UIAction(title: ActionTitle.share, image: UIImage(sfSymbol: .squareAndArrowUp)) { [weak self] _ in
+        let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
             self?.share(note: note)
         }
 
-        let delete = UIAction(title: ActionTitle.delete, image: UIImage(sfSymbol: .trash), attributes: .destructive) { [weak self] _ in
+        let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
             self?.delete(note: note)
         }
 
