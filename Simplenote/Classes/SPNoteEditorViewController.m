@@ -55,11 +55,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
-{
-    NSUInteger cursorLocationBeforeRemoteUpdate;
-    NSString *noteContentBeforeRemoteUpdate;
-    BOOL bounceMarkdownPreviewOnActivityViewDismiss;
-}
+
+// State
+@property (nonatomic, assign) NSUInteger        cursorLocationBeforeRemoteUpdate;
+@property (nonatomic, strong) NSString          *noteContentBeforeRemoteUpdate;
+@property (nonatomic, assign) BOOL              bounceMarkdownPreviewOnActivityViewDismiss;
 
 // Timers
 @property (nonatomic, strong) NSTimer           *saveTimer;
@@ -683,7 +683,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
 
-                    self->bounceMarkdownPreviewOnActivityViewDismiss = NO;
+                    self.bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -729,7 +729,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
+    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }
@@ -1235,8 +1235,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)willReceiveNewContent {
     
-    cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
+    self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
+    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
         _currentNote.content = [_noteEditorTextView getPlainTextContent];
@@ -1247,8 +1247,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)didReceiveNewContent {
     
 	NSUInteger newLocation = [self newCursorLocation:_currentNote.content
-											 oldText:noteContentBeforeRemoteUpdate
-									 currentLocation:cursorLocationBeforeRemoteUpdate];
+											 oldText:self.noteContentBeforeRemoteUpdate
+									 currentLocation:self.cursorLocationBeforeRemoteUpdate];
 	
 	_noteEditorTextView.attributedText = [_currentNote.content attributedString];
     [_noteEditorTextView processChecklists];
@@ -1533,7 +1533,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self save];
 
             // If Markdown is being enabled and it was previously disabled
-            bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
+            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
 
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
@@ -1659,7 +1659,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if ([actionSheet isEqual:versionActionSheet])
         versionActionSheet = nil;
 
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
+    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }
