@@ -55,10 +55,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
                                         UIPopoverPresentationControllerDelegate>
+// UIKit Components
+@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
+@property (nonatomic, strong) UILabel           *searchDetailLabel;
 
-// Remote Updates
-@property (nonatomic, assign) NSUInteger        cursorLocationBeforeRemoteUpdate;
-@property (nonatomic, strong) NSString          *noteContentBeforeRemoteUpdate;
+// Timers
+@property (nonatomic, strong) NSTimer           *saveTimer;
+@property (nonatomic, strong) NSTimer           *guarenteedSaveTimer;
 
 // State
 @property (nonatomic, assign) BOOL              bounceMarkdownPreviewOnActivityViewDismiss;
@@ -67,13 +70,18 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 @property (nonatomic, assign) BOOL              disableShrinkingNavigationBar;
 @property (nonatomic, assign) BOOL              viewingVersions;
 @property (nonatomic, assign) BOOL              actionSheetVisible;
+@property (nonatomic, assign) BOOL              searching;
 
-// Timers
-@property (nonatomic, strong) NSTimer           *saveTimer;
-@property (nonatomic, strong) NSTimer           *guarenteedSaveTimer;
+// Remote Updates
+@property (nonatomic, assign) NSUInteger        cursorLocationBeforeRemoteUpdate;
+@property (nonatomic, strong) NSString          *noteContentBeforeRemoteUpdate;
 
-@property (nonatomic, strong) SPBlurEffectView  *navigationBarBackground;
+// Search
+@property (nonatomic, assign) NSInteger         highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray           *searchResultRanges;
+
+// Navigation Bar
+@property (nonatomic, assign) CGAffineTransform navigationBarTransform;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -102,7 +110,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         
         // Helpers
         scrollPosition = _noteEditorTextView.contentOffset.y;
-        navigationBarTransform = CGAffineTransformIdentity;
+        self.navigationBarTransform = CGAffineTransformIdentity;
         
         self.disableShrinkingNavigationBar = NO;
         
@@ -196,7 +204,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
-    [self setBackButtonTitleForSearchingMode: bSearching];
+    [self setBackButtonTitleForSearchingMode: self.searching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
     [self highlightSearchResultsIfNeeded];
@@ -232,7 +240,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)setupNavigationController {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:!bSearching animated:YES];
+    [self.navigationController setToolbarHidden:!self.searching animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder
@@ -260,7 +268,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!bSearching || _searchString.length == 0 || self.searchResultRanges) {
+    if (!self.searching || _searchString.length == 0 || self.searchResultRanges) {
         return;
     }
     
@@ -268,7 +276,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        self.searchResultRanges = [searchText rangesForTerms:self->_searchString];
+        self.searchResultRanges = [searchText rangesForTerms:self.searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -278,17 +286,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             NSInteger count = self.searchResultRanges.count;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
-            self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
-            self->searchDetailLabel.alpha = UIKitConstants.alpha0_0;
+            self.searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
+            self.searchDetailLabel.alpha = UIKitConstants.alpha0_0;
 
             [UIView animateWithDuration:0.3
                              animations:^{
                                  
-                                 self->searchDetailLabel.alpha = UIKitConstants.alpha1_0;
+                                 self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
             
-            self->highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:self->highlightedSearchResultIndex];
+            self.highlightedSearchResultIndex = 0;
+            [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
         });
     });
 }
@@ -518,13 +526,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     prevSearchButton.width = 34.0;
     
     
-    searchDetailLabel = [[UILabel alloc] init];
-    searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    searchDetailLabel.frame = CGRectMake(0, 0, 180, searchDetailLabel.font.lineHeight);
-    searchDetailLabel.textColor = [UIColor simplenoteNoteHeadlineColor];
-    searchDetailLabel.textAlignment = NSTextAlignmentCenter;
-    searchDetailLabel.alpha = 0.0;
-    UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:searchDetailLabel];
+    self.searchDetailLabel = [[UILabel alloc] init];
+    self.searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.searchDetailLabel.frame = CGRectMake(0, 0, 180, self.searchDetailLabel.font.lineHeight);
+    self.searchDetailLabel.textColor = [UIColor simplenoteNoteHeadlineColor];
+    self.searchDetailLabel.textAlignment = NSTextAlignmentCenter;
+    self.searchDetailLabel.alpha = 0.0;
+    UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchDetailLabel];
     
     
     
@@ -807,7 +815,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)setSearchString:(NSString *)string {
     
     if (string.length > 0) {
-        bSearching = YES;
+        self.searching = YES;
         _searchString = string;
         self.searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
@@ -816,14 +824,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)highlightNextSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, self.searchResultRanges.count);
-    [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
+    self.highlightedSearchResultIndex = MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count);
+    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
 - (void)highlightPrevSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MAX(0, highlightedSearchResultIndex - 1);
-    [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
+    self.highlightedSearchResultIndex = MAX(0, self.highlightedSearchResultIndex - 1);
+    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
@@ -841,7 +849,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
                               // scroll to block
                               highlightFrame.origin.y += highlightFrame.size.height;
-                              [self->_noteEditorTextView scrollRectToVisible:highlightFrame
+                              [self.noteEditorTextView scrollRectToVisible:highlightFrame
                                                       animated:YES];
                               
                               
@@ -864,10 +872,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
-    bSearching = NO;
+    self.searching = NO;
 
     [self.navigationController setToolbarHidden:YES animated:YES];
-    searchDetailLabel.text = nil;
+    self.searchDetailLabel.text = nil;
 }
 
 
@@ -897,7 +905,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                     Y:transformAmount];
     }
         
-    if (disableFromSmallContentSize && !CGAffineTransformIsIdentity(navigationBarTransform)) {
+    if (disableFromSmallContentSize && !CGAffineTransformIsIdentity(self.navigationBarTransform)) {
         [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     }
     
@@ -921,14 +929,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
     
-    if (CGAffineTransformIsIdentity(navigationBarTransform))
+    if (CGAffineTransformIsIdentity(self.navigationBarTransform)) {
         return YES;
-    else {
-        
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-        return NO;
     }
         
+    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
+    return NO;
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
@@ -945,7 +951,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self.disableShrinkingNavigationBar = YES;
     
-    navigationBarTransform = CGAffineTransformIdentity;
+    self.navigationBarTransform = CGAffineTransformIdentity;
     
     void (^animationBlock)() = ^() {
         
@@ -958,7 +964,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.checklistButton.transform = CGAffineTransformIdentity;
         self.checklistButton.alpha = 1.0;
         self.keyboardButton.alpha = 1.0;
-        self.navigationController.navigationBar.transform = self->navigationBarTransform;
+        self.navigationController.navigationBar.transform = self.navigationBarTransform;
         self.navigationBarBackground.transform = CGAffineTransformIdentity;
 
         self.backButton.alpha = 1.0;
@@ -966,7 +972,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     void (^completionBlock)() = ^() {
         
-        if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
+        if (!self.noteEditorTextView.dragging && !self.noteEditorTextView.decelerating) {
             self.disableShrinkingNavigationBar = NO;
         }
         
@@ -1018,10 +1024,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         navigationBarHeight -= 20;
     }
     
-    CGFloat yTransform = MAX(MIN(0, navigationBarTransform.ty + y), -navigationBarHeight);
+    CGFloat yTransform = MAX(MIN(0, self.navigationBarTransform.ty + y), -navigationBarHeight);
     
-    navigationBarTransform = CGAffineTransformMakeTranslation(navigationBarTransform.tx + x,
-                                                              yTransform);
+    self.navigationBarTransform = CGAffineTransformMakeTranslation(self.navigationBarTransform.tx + x,
+                                                                   yTransform);
     
     
     // apply transform to button container
@@ -1058,7 +1064,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.checklistButton.alpha = alphaAmount;
     
     
-    self.navigationController.navigationBar.transform = navigationBarTransform;
+    self.navigationController.navigationBar.transform = self.navigationBarTransform;
     self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
                                                                     CGAffineTransformMakeTranslation(0, yTransform));
 }
@@ -1070,7 +1076,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     
-    if (bSearching)
+    if (self.searching)
         [self endSearching:textView];
     
     return YES;
@@ -1115,9 +1121,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            CGPoint bottomOffset = CGPointMake(0, self->_noteEditorTextView.contentSize.height - self->_noteEditorTextView.bounds.size.height);
-            if (self->_noteEditorTextView.contentOffset.y < bottomOffset.y)
-                [self->_noteEditorTextView setContentOffset:bottomOffset animated:YES];
+            CGPoint bottomOffset = CGPointMake(0, self.noteEditorTextView.contentSize.height - self.noteEditorTextView.bounds.size.height);
+            if (self.noteEditorTextView.contentOffset.y < bottomOffset.y)
+                [self.noteEditorTextView setContentOffset:bottomOffset animated:YES];
         });
     }
     

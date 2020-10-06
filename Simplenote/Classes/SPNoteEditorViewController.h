@@ -14,8 +14,7 @@
 @class SPOutsideTouchView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {
-    
-    CGAffineTransform navigationBarTransform;
+
     CGFloat scrollPosition;
     
     SPOutsideTouchView *navigationButtonContainer;
@@ -31,14 +30,8 @@
     
     SPHorizontalPickerView *versionPickerView;
     
-    BOOL bSearching;
-    NSInteger highlightedSearchResultIndex;
-    
-    UILabel *searchDetailLabel;
-    
     NSInteger currentVersion;
     NSMutableDictionary *noteVersionData;
-    
 }
 
 // Navigation Bar
