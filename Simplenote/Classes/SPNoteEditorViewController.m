@@ -31,6 +31,8 @@
 #import "UIDevice+Extensions.h"
 #import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
+#import "SPActionSheet.h"
+#import "SPActivityView.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
@@ -51,51 +53,64 @@ CGFloat const SPBackButtonImagePadding              = -18;
 CGFloat const SPBackButtonTitlePadding              = -15;
 CGFloat const SPSelectedAreaPadding                 = 20;
 
-@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
+@interface SPNoteEditorViewController ()<SPActionSheetDelegate,
+                                        SPActivityViewDelegate,
+                                        SPCollaboratorDelegate,
+                                        SPEditorTextViewDelegate,
+                                        SPHorizontalPickerViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
+                                        SPTagViewDelegate,
+                                        UIActionSheetDelegate,
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
-@property (nonatomic, strong) SPOutsideTouchView    *navigationButtonContainer;
-@property (nonatomic, strong) SPBlurEffectView      *navigationBarBackground;
-@property (nonatomic, strong) UILabel               *searchDetailLabel;
-@property (nonatomic, strong) UIBarButtonItem       *nextSearchButton;
-@property (nonatomic, strong) UIBarButtonItem       *prevSearchButton;
-@property (nonatomic, strong) UIBarButtonItem       *doneSearchButton;
+@property (nonatomic, strong) SPOutsideTouchView        *navigationButtonContainer;
+@property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
+@property (nonatomic, strong) UILabel                   *searchDetailLabel;
+@property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
+@property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
+@property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
+@property (nonatomic, strong) SPTagView                 *tagView;
+
+// Sheets
+@property (nonatomic, strong) SPActivityView            *noteActivityView;
+@property (nonatomic, strong) SPActionSheet             *noteActionSheet;
+@property (nonatomic, strong) SPActionSheet             *versionActionSheet;
+@property (nonatomic, strong) SPHorizontalPickerView    *versionPickerView;
 
 // Timers
-@property (nonatomic, strong) NSTimer               *saveTimer;
-@property (nonatomic, strong) NSTimer               *guarenteedSaveTimer;
+@property (nonatomic, strong) NSTimer                   *saveTimer;
+@property (nonatomic, strong) NSTimer                   *guarenteedSaveTimer;
 
 // State
-@property (nonatomic, assign) BOOL                  bounceMarkdownPreviewOnActivityViewDismiss;
-@property (nonatomic, assign) BOOL                  blankNote;
-@property (nonatomic, assign) BOOL                  modified;
-@property (nonatomic, assign) BOOL                  disableShrinkingNavigationBar;
-@property (nonatomic, assign) BOOL                  viewingVersions;
-@property (nonatomic, assign) BOOL                  actionSheetVisible;
-@property (nonatomic, assign) BOOL                  searching;
+@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
+@property (nonatomic, assign) BOOL                      blankNote;
+@property (nonatomic, assign) BOOL                      modified;
+@property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
+@property (nonatomic, assign) BOOL                      viewingVersions;
+@property (nonatomic, assign) BOOL                      actionSheetVisible;
+@property (nonatomic, assign) BOOL                      searching;
 
 // Remote Updates
-@property (nonatomic, assign) NSUInteger            cursorLocationBeforeRemoteUpdate;
-@property (nonatomic, strong) NSString              *noteContentBeforeRemoteUpdate;
+@property (nonatomic, assign) NSUInteger                cursorLocationBeforeRemoteUpdate;
+@property (nonatomic, strong) NSString                  *noteContentBeforeRemoteUpdate;
 
 // Versions
-@property (nonatomic, assign) NSInteger             currentVersion;
-@property (nonatomic, strong) NSMutableDictionary   *noteVersionData;
+@property (nonatomic, assign) NSInteger                 currentVersion;
+@property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
 
 // Search
-@property (nonatomic, assign) NSInteger             highlightedSearchResultIndex;
-@property (nonatomic, strong) NSArray               *searchResultRanges;
+@property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
+@property (nonatomic, strong) NSArray                   *searchResultRanges;
 
 // Navigation Bar
-@property (nonatomic, assign) CGAffineTransform     navigationBarTransform;
-@property (nonatomic, assign) CGFloat               scrollPosition;
+@property (nonatomic, assign) CGAffineTransform         navigationBarTransform;
+@property (nonatomic, assign) CGFloat                   scrollPosition;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
 // current note. This helps prevent against tag spam by mistyping
-@property (nonatomic, strong) NSString              *deletedTagBuffer;
+@property (nonatomic, strong) NSString                  *deletedTagBuffer;
 
 @end
 
@@ -1292,7 +1307,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         NSInteger versionInt = [version integerValue];
         [self.noteVersionData setObject:data forKey:[NSNumber numberWithInteger:versionInt]];
         
-        [versionPickerView reloadData];
+        [self.versionPickerView reloadData];
     }
 }
 
@@ -1432,60 +1447,60 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     NSString *status = [[[NSString stringWithFormat:wordFormat, words] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, characters]];
     
     
-    noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
-                                               toggleSelectedTitles:toggleSelectedTitles
-                                                 actionButtonImages:actionImages
-                                                 actionButtonTitles:actionStrings
-                                                       buttonTitles:buttonStrings
-                                                             status:status
-                                                           delegate:self];
+    self.noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
+                                                    toggleSelectedTitles:toggleSelectedTitles
+                                                      actionButtonImages:actionImages
+                                                      actionButtonTitles:actionStrings
+                                                            buttonTitles:buttonStrings
+                                                                  status:status
+                                                                delegate:self];
     
-    [noteActivityView setToggleState:_currentNote.published atIndex:0];
-    [noteActivityView setToggleState:_currentNote.pinned atIndex:1];
-    [noteActivityView setToggleState:_currentNote.markdown atIndex:2];
+    [self.noteActivityView setToggleState:_currentNote.published atIndex:0];
+    [self.noteActivityView setToggleState:_currentNote.pinned atIndex:1];
+    [self.noteActivityView setToggleState:_currentNote.markdown atIndex:2];
     
     // apply accessibility messages
     
-    UIButton *shareButton = [noteActivityView actionButtonAtIndex:0];
+    UIButton *shareButton = [self.noteActivityView actionButtonAtIndex:0];
     shareButton.accessibilityLabel = NSLocalizedString(@"Share note", nil);
     shareButton.accessibilityHint = NSLocalizedString(@"share-accessibility-hint", @"Accessibility hint on share button");
     
-    UIButton *historyButton = [noteActivityView actionButtonAtIndex:1];
+    UIButton *historyButton = [self.noteActivityView actionButtonAtIndex:1];
     historyButton.accessibilityLabel = NSLocalizedString(@"History", @"Noun - the version history of a note");
     historyButton.accessibilityHint = NSLocalizedString(@"history-accessibility-hint", @"Accessibility hint on button which shows the history of a note");
     historyButton.enabled = _currentNote.version.integerValue - [self minimumNoteVersion] > 1;
     
-    UIButton *collaborateButton = [noteActivityView actionButtonAtIndex:2];
+    UIButton *collaborateButton = [self.noteActivityView actionButtonAtIndex:2];
     collaborateButton.accessibilityHint = NSLocalizedString(@"collaborate-accessibility-hint", @"Accessibility hint on button which shows the current collaborators on a note");
     
-    UIButton *deleteButton = [noteActivityView actionButtonAtIndex:3];
+    UIButton *deleteButton = [self.noteActivityView actionButtonAtIndex:3];
     deleteButton.accessibilityLabel = NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note");
     deleteButton.accessibilityHint = NSLocalizedString(@"trash-accessibility-hint", @"Accessibility hint on button which moves a note to the trash");
 
-    UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
+    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
     publishToggle.accessibilityLabel = NSLocalizedString(@"Publish toggle", @"Switch which marks a note as published or unpublished");
     publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", @"Action which unpublishes a note") : NSLocalizedString(@"Publish note", @"Action which published a note to a web page");
 
-    UIButton *pinToggle = [noteActivityView toggleAtIndex:1];
+    UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
     pinToggle.accessibilityLabel = NSLocalizedString(@"Pin toggle", @"Switch which marks a note as pinned or unpinned");
     pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", @"Action to mark a note as unpinned") : NSLocalizedString(@"Pin note", @"Action to mark a note as pinned");
 
-    UIButton *markdownToggle = [noteActivityView toggleAtIndex:2];
+    UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
     markdownToggle.accessibilityLabel = NSLocalizedString(@"Markdown toggle", @"Switch which marks a note as using Markdown formatting or not");
     markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
 
-    UIButton *publishURLButton = [noteActivityView buttonAtIndex:0];
+    UIButton *publishURLButton = [self.noteActivityView buttonAtIndex:0];
     [publishURLButton setTitle:buttonStrings[0] forState:UIControlStateDisabled];
     [self updatePublishUI];
 
     
     if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
         // widen noteActivityView to show all content in the popover
-        CGRect activityViewFrame = noteActivityView.frame;
+        CGRect activityViewFrame = self.noteActivityView.frame;
         activityViewFrame.size.width = [self.theme floatForKey:@"actionViewWidth"];
-        noteActivityView.frame = activityViewFrame;
+        self.noteActivityView.frame = activityViewFrame;
 
-        SPPopoverContainerViewController *popoverVC = [[SPPopoverContainerViewController alloc] initWithCustomView:noteActivityView];
+        SPPopoverContainerViewController *popoverVC = [[SPPopoverContainerViewController alloc] initWithCustomView:self.noteActivityView];
         popoverVC.modalPresentationStyle = UIModalPresentationPopover;
         popoverVC.popoverPresentationController.sourceView = sender;
         popoverVC.popoverPresentationController.sourceRect = ((UIView *)sender).bounds;
@@ -1497,12 +1512,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         [self presentViewController:popoverVC animated:YES completion:nil];
     } else {
-        noteActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                   withMessage:nil
-                                          withContentViewArray:@[noteActivityView]
-                                          withButtonTitleArray:@[NSLocalizedString(@"Done", nil)]
-                                                      delegate:self ];
-        noteActionSheet.swipeToDismiss = YES;
+        self.noteActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
+                                                        withMessage:nil
+                                               withContentViewArray:@[self.noteActivityView]
+                                               withButtonTitleArray:@[NSLocalizedString(@"Done", nil)]
+                                                           delegate:self ];
+        self.noteActionSheet.swipeToDismiss = YES;
     }
 }
 
@@ -1512,8 +1527,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 
     // ActionSheet Scenario
-    [noteActionSheet dismiss];
-    noteActionSheet = nil;
+    [self.noteActionSheet dismiss];
+    self.noteActionSheet = nil;
 }
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
@@ -1532,7 +1547,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 [self unpublishNote:nil];
             }
 
-            UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
+            UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
             publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", nil) : NSLocalizedString(@"Publish note", nil);
             break;
         }
@@ -1542,7 +1557,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
             [self save];
 
-            UIButton *pinToggle = [noteActivityView toggleAtIndex:1];
+            UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
             pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", nil) : NSLocalizedString(@"Pin note", nil);
             break;
         }
@@ -1565,7 +1580,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 [SPTracker trackEditorNoteMarkdownDisabled];
             }
 
-            UIButton *markdownToggle = [noteActivityView toggleAtIndex:2];
+            UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
             markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
             break;
         }
@@ -1574,26 +1589,26 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)updatePublishUI {
-    UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
-    UIButton *urlButton = [noteActivityView buttonAtIndex:0];
+    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
+    UIButton *urlButton = [self.noteActivityView buttonAtIndex:0];
     if (_currentNote.published && _currentNote.publishURL.length == 0) {
-        [noteActivityView showActivityIndicator];
+        [self.noteActivityView showActivityIndicator];
         [urlButton setTitle:NSLocalizedString(@"Publishing...", @"Message shown when a note is in the processes of being published")
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
         publishToggle.enabled = NO;
     } else if (_currentNote.published && _currentNote.publishURL.length > 0) {
-        [noteActivityView hideActivityIndicator];
+        [self.noteActivityView hideActivityIndicator];
         [urlButton setTitle:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
         publishToggle.enabled = YES;
     } else if (!_currentNote.published && _currentNote.publishURL.length == 0) {
-        [noteActivityView hideActivityIndicator];
+        [self.noteActivityView hideActivityIndicator];
         urlButton.enabled = NO;
         publishToggle.enabled = YES;
     } else if (!_currentNote.published && _currentNote.publishURL.length > 0) {
-        [noteActivityView showActivityIndicator];
+        [self.noteActivityView showActivityIndicator];
         [urlButton setTitle:NSLocalizedString(@"Unpublishing...", @"Message shown when a note is in the processes of being unpublished")
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
@@ -1638,7 +1653,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
 
-    if ([actionSheet isEqual:versionActionSheet]) {
+    if ([actionSheet isEqual:self.versionActionSheet]) {
         
         self.viewingVersions = NO;
         
@@ -1673,11 +1688,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     self.actionSheetVisible = NO;
     
-    if ([actionSheet isEqual:noteActionSheet])
-        noteActionSheet = nil;
+    if ([actionSheet isEqual:self.noteActionSheet]) {
+        self.noteActionSheet = nil;
+    }
     
-    if ([actionSheet isEqual:versionActionSheet])
-        versionActionSheet = nil;
+    if ([actionSheet isEqual:self.versionActionSheet]) {
+        self.versionActionSheet = nil;
+    }
 
     if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
@@ -1850,21 +1867,21 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [[[SPAppDelegate sharedDelegate].simperium bucketForName:@"Note"] requestVersions:30 key:_currentNote.simperiumKey];
     
     
-    versionPickerView = [[SPHorizontalPickerView alloc] initWithFrame:CGRectMake(0,
-                                                                                 0,
-                                                                                 self.view.frame.size.width,
-                                                                                 200) itemClass:[SPVersionPickerViewCell class]
-                                                             delegate:self];
+    self.versionPickerView = [[SPHorizontalPickerView alloc] initWithFrame:CGRectMake(0,
+                                                                                      0,
+                                                                                      self.view.frame.size.width,
+                                                                                      200) itemClass:[SPVersionPickerViewCell class]
+                                                                  delegate:self];
     
-    [versionPickerView setSelectedIndex:[NSNumber numberWithInteger:(_currentNote.version.integerValue - [self minimumNoteVersion] - 1)].integerValue];
+    [self.versionPickerView setSelectedIndex:[NSNumber numberWithInteger:(_currentNote.version.integerValue - [self minimumNoteVersion] - 1)].integerValue];
     
-    versionActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                  withMessage:nil
-                                         withContentViewArray:@[versionPickerView]
-                                         withButtonTitleArray:@[NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Restore Note", @"Restore a note to a previous version")]
-                                                     delegate:self];
-    versionActionSheet.tapToDismiss = NO;
-    versionActionSheet.cancelButtonIndex = 0;
+    self.versionActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
+                                                       withMessage:nil
+                                              withContentViewArray:@[self.versionPickerView]
+                                              withButtonTitleArray:@[NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Restore Note", @"Restore a note to a previous version")]
+                                                          delegate:self];
+    self.versionActionSheet.tapToDismiss = NO;
+    self.versionActionSheet.cancelButtonIndex = 0;
 
     [(SPNavigationController *)self.navigationController setDisableRotation:YES];
 }

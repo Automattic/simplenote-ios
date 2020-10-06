@@ -1,9 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "SPActionSheet.h"
-#import "SPActivityView.h"
-#import "SPTagView.h"
-#import "SPAddCollaboratorsViewController.h"
-#import "SPHorizontalPickerView.h"
 #import <Simperium/Simperium.h>
 
 
@@ -11,22 +6,13 @@
 @class SPBlurEffectView;
 @class SPEditorTextView;
 
-@interface SPNoteEditorViewController : UIViewController  <SPActionSheetDelegate, SPActivityViewDelegate, UIActionSheetDelegate, SPTagViewDelegate, SPCollaboratorDelegate, SPHorizontalPickerViewDelegate, SPBucketDelegate> {    
-    // sheets
-    SPActivityView *noteActivityView;
-    SPActionSheet *noteActionSheet;
-    SPActionSheet *versionActionSheet;
-    
-    SPHorizontalPickerView *versionPickerView;
-}
+@interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
 // Navigation Bar
 @property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
 
-// Navigation Back Button
-@property (nonatomic, strong) UIButton *backButton;
-
 // Navigation Buttons
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *actionButton;
 @property (nonatomic, strong) UIButton *checklistButton;
 @property (nonatomic, strong) UIButton *keyboardButton;
@@ -34,7 +20,6 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
-@property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
 // Voiceover
@@ -44,8 +29,10 @@
 @property (nonatomic, strong) NSArray *keyboardNotificationTokens;
 @property (nonatomic) BOOL isKeyboardVisible;
 
+// State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
+
 
 - (void)prepareToPopView;
 - (void)displayNote:(Note *)note;
