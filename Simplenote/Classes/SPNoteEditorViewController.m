@@ -487,12 +487,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
               forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationButtonContainer addSubview:self.backButton];
-    
-    
+
     // setup right buttons
     self.actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
-                                      target:self
-                                    selector:@selector(actionButtonAction:)];
+                                           target:self
+                                         selector:@selector(noteOptionsWasPressed:)];
     self.actionButton.accessibilityIdentifier = @"note-menu";
     self.actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     self.actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
@@ -1401,6 +1400,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [SPTracker trackEditorChecklistInserted];
 }
 
+/*
 - (void)actionButtonAction:(id)sender {
     
     [self save];
@@ -1410,7 +1410,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // show actions
     
 	[SPTracker trackEditorActivitiesAccessed];
-	
 
     NSArray *actionStrings,  *actionImages, *toggleTitles, *toggleSelectedTitles, *buttonStrings;
 
@@ -1514,6 +1513,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.noteActionSheet.swipeToDismiss = YES;
     }
 }
+ */
 
 - (void)dismissActivityView {
     if (self.presentedViewController) {

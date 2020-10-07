@@ -186,6 +186,51 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Private API(s)
+//
+private extension SPNoteEditorViewController {
+
+    func dismissKeyboardAndSave() {
+        endEditing()
+        save()
+    }
+
+    func presentNoteOptions(for note: Note, from sourceView: UIView) {
+        let optionsViewController = OptionsViewController(note: note)
+
+        let navigationController = SPNavigationController(rootViewController: optionsViewController)
+        navigationController.displaysBlurEffect = true
+        navigationController.modalPresentationStyle = .popover
+
+        let presentationController = navigationController.popoverPresentationController
+        presentationController?.sourceRect = sourceView.bounds
+        presentationController?.sourceView = sourceView
+        presentationController?.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
+
+        dismissKeyboardAndSave()
+        present(navigationController, animated: true, completion: nil)
+
+        SPTracker.trackEditorActivitiesAccessed()
+    }
+}
+
+
+// MARK: - Actions
+//
+extension SPNoteEditorViewController {
+
+    @IBAction
+    func noteOptionsWasPressed(_ sender: UIButton) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        presentNoteOptions(for: note, from: sender)
+    }
+}
+
+
 // MARK: - NSCoder Keys
 //
 private enum CodingKeys: String {
