@@ -91,13 +91,13 @@ private extension OptionsViewController {
     }
 
     @IBAction
-    func pinnedWasPressed(_ newState: Bool) {
-        NSLog("Pin! \(newState)")
+    func pinnedWasPressed(_ sender: UISwitch) {
+        NSLog("Pin! \(sender.isOn)")
     }
 
     @IBAction
-    func markdownWasPressed() {
-        NSLog("Markdown!")
+    func markdownWasPressed(_ sender: UISwitch) {
+        NSLog("Markdown! \(sender.isOn)")
     }
 
     @IBAction
@@ -111,8 +111,8 @@ private extension OptionsViewController {
     }
 
     @IBAction
-    func publishWasPressed() {
-        NSLog("Publish!")
+    func publishWasPressed(_ sender: UISwitch) {
+        NSLog("Publish! \(sender.isOn)")
     }
 
     @IBAction
@@ -192,12 +192,13 @@ private extension OptionsViewController {
         guard case let .switch(selected) = row.kind else {
             fatalError()
         }
-
-        switchCell.textLabel?.text = row.title
-        switchCell.switchControl.isOn = selected
-        switchCell.onChange = { [weak self] in
-            self?.perform(row.handler)
+        
+        switchCell.onChange = { [weak self] switchControl in
+            self?.perform(row.handler, with: switchControl)
         }
+
+        switchCell.switchControl.isOn = selected
+        switchCell.textLabel?.text = row.title
     }
 
     func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {

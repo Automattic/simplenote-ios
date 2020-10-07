@@ -12,7 +12,7 @@ class SwitchTableViewCell: UITableViewCell {
 
     /// Listener: Receives the new State
     ///
-    var onChange: (() -> Void)?
+    var onChange: ((UISwitch) -> Void)?
 
 
     // MARK: - Initializers
@@ -75,6 +75,6 @@ extension SwitchTableViewCell {
     }
 
     private func notifyStateDidChange() {
-        onChange?()
+        onChange?(switchControl)
     }
 }
