@@ -1,12 +1,4 @@
-//
-//  SPOptionsViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/22/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
@@ -22,7 +14,7 @@
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";
 
-@interface SPOptionsViewController ()
+@interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
@@ -33,7 +25,7 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @property (nonatomic, strong) UIToolbar     *doneToolbar;
 @end
 
-@implementation SPOptionsViewController {
+@implementation SPSettingsViewController {
     NSArray *timeoutPickerOptions;
 }
 

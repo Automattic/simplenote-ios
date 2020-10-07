@@ -6,7 +6,7 @@
 #import "SPNavigationController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPTagsListViewController.h"
 #import "SPAddCollaboratorsViewController.h"
 
@@ -428,7 +428,7 @@
 
 - (void)showOptions
 {
-    SPOptionsViewController *optionsViewController = [[SPOptionsViewController alloc] init];
+    SPSettingsViewController *optionsViewController = [[SPSettingsViewController alloc] init];
 	
     SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
     navController.disableRotation = YES;

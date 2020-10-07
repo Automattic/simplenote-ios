@@ -1,6 +1,6 @@
 #import "SPTagsListViewController.h"
 #import "SPAppDelegate.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPTagListViewCell.h"
