@@ -14,6 +14,10 @@ class OptionsViewController: UIViewController {
     ///
     private let note: Note
 
+    /// Sections onScreen
+    ///
+    private var sections = [Section]()
+
     /// Designated Initializer
     ///
     init(note: Note) {
@@ -31,7 +35,9 @@ class OptionsViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationTitle()
         setupNavigationItem()
+        setupTableView()
         refreshStyle()
+        reloadData()
     }
 }
 
@@ -51,6 +57,11 @@ private extension OptionsViewController {
                                                             target: self,
                                                             action: #selector(doneWasPressed))
     }
+
+    func setupTableView() {
+        tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseIdentifier)
+        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+    }
 }
 
 
@@ -69,9 +80,49 @@ private extension OptionsViewController {
 //
 private extension OptionsViewController {
 
-    @objc
+    @IBAction
     func doneWasPressed() {
-        super.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction
+    func trashWasPressed() {
+        NSLog("Trash!")
+    }
+
+    @IBAction
+    func pinnedWasPressed(_ newState: Bool) {
+        NSLog("Pin! \(newState)")
+    }
+
+    @IBAction
+    func markdownWasPressed() {
+        NSLog("Markdown!")
+    }
+
+    @IBAction
+    func shareWasPressed() {
+        NSLog("Share!")
+    }
+
+    @IBAction
+    func historyWasPressed() {
+        NSLog("History!")
+    }
+
+    @IBAction
+    func publishWasPressed() {
+        NSLog("Publish!")
+    }
+
+    @IBAction
+    func copyLinkWasPressed() {
+        NSLog("Copy!")
+    }
+
+    @IBAction
+    func collaborateWasPressed() {
+        NSLog("Collab!")
     }
 }
 
@@ -80,6 +131,14 @@ private extension OptionsViewController {
 //
 extension OptionsViewController: UITableViewDelegate {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        perform(rowAtIndexPath(indexPath).handler)
+    }
 }
 
 
@@ -88,11 +147,160 @@ extension OptionsViewController: UITableViewDelegate {
 extension OptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        .zero
+        sections[section].rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let row = rowAtIndexPath(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseIdentifier, for: indexPath)
+
+        configureCell(cell, with: row)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        sections[section].header
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        sections[section].footer
     }
 }
 
+
+// MARK: - Helper API(s)
+//
+private extension OptionsViewController {
+
+    func rowAtIndexPath(_ indexPath: IndexPath) -> Row {
+        sections[indexPath.section].rows[indexPath.row]
+    }
+
+    func configureCell(_ cell: UITableViewCell, with row: Row) {
+        switch cell {
+        case let cell as SwitchTableViewCell:
+            configureSwitchCell(cell, for: row)
+        case let cell as Value1TableViewCell:
+            configureValue1Cell(cell, for: row)
+        default:
+            fatalError()
+        }
+    }
+
+    func configureSwitchCell(_ switchCell: SwitchTableViewCell, for row: Row) {
+        guard case let .switch(selected) = row.kind else {
+            fatalError()
+        }
+
+        switchCell.textLabel?.text = row.title
+        switchCell.switchControl.isOn = selected
+        switchCell.onChange = { [weak self] in
+            self?.perform(row.handler)
+        }
+    }
+
+    func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
+        valueCell.textLabel?.text = row.title
+    }
+}
+
+
+// MARK: - Intermediate Representations
+//
+private extension OptionsViewController {
+
+    func reloadData() {
+        sections = self.sections(for: note)
+        tableView.reloadData()
+    }
+
+    func sections(for note: Note) -> [Section] {
+        return [
+            Section(rows: [
+                        Row(kind: .switch(selected: note.pinned),
+                            title: NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State"),
+                            handler: #selector(pinnedWasPressed)),
+
+                        Row(kind: .switch(selected: note.markdown),
+                            title: NSLocalizedString("Markdown", comment: "Toggles the Markdown State"),
+                            handler: #selector(markdownWasPressed)),
+
+                        Row(kind: .value1,
+                            title: NSLocalizedString("Share", comment: "Opens the Share Sheet"),
+                            handler: #selector(shareWasPressed)),
+
+                        Row(kind: .value1,
+                            title: NSLocalizedString("History", comment: "Opens the Note's History"),
+                            handler: #selector(historyWasPressed))
+                    ]),
+            Section(header: NSLocalizedString("Public Link",
+                                              comment: "Publish to Web Section Header"),
+                    footer: NSLocalizedString("Publish your note to the web and generate a sharable URL.",
+                                              comment: "Publish to Web Section Footer"),
+                    rows: [
+                        Row(kind: .switch(selected: note.published),
+                            title: NSLocalizedString("Publish", comment: "Publishes a Note to the Web"),
+                            handler: #selector(publishWasPressed)),
+
+                        Row(kind: .value1,
+                            title: NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink"),
+                            handler: #selector(copyLinkWasPressed))
+                    ]),
+            Section(rows: [
+                        Row(kind: .value1,
+                            title: NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI"),
+                            handler: #selector(collaborateWasPressed))
+
+                    ]),
+            Section(rows: [
+                        Row(kind: .value1,
+                            title: NSLocalizedString("Move to Trash", comment: "Delete Action"),
+                            handler: #selector(trashWasPressed))
+                    ]),
+        ]
+    }
+}
+
+
+// MARK: - Section: Defines a TableView Section
+//
+private struct Section {
+    let header: String?
+    let footer: String?
+    let rows: [Row]
+
+    init(header: String? = nil, footer: String? = nil, rows: [Row]) {
+        self.header = header
+        self.footer = footer
+        self.rows = rows
+    }
+}
+
+
+// MARK: - Supported TableView Rows
+//
+private struct Row {
+    let kind: RowKind
+    let title: String
+    let handler: Selector
+}
+
+private enum RowKind {
+    case value1
+    case `switch`(selected: Bool)
+}
+
+// MARK: - Row API(s)
+//
+private extension Row {
+
+    var reuseIdentifier: String {
+        switch kind {
+        case .value1:
+            return Value1TableViewCell.reuseIdentifier
+        case .switch:
+            return SwitchTableViewCell.reuseIdentifier
+        }
+    }
+}
