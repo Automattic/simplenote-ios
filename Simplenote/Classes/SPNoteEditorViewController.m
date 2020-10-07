@@ -871,14 +871,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
                               // scroll to block
                               highlightFrame.origin.y += highlightFrame.size.height;
-                              [self.noteEditorTextView scrollRectToVisible:highlightFrame
-                                                      animated:YES];
-                              
-                              
+                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
                           }];
     }
-    
-    
 }
 
 - (void)endSearching:(id)sender {
@@ -1281,9 +1276,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)didReceiveNewContent {
     
-	NSUInteger newLocation = [self newCursorLocation:_currentNote.content
-											 oldText:self.noteContentBeforeRemoteUpdate
-									 currentLocation:self.cursorLocationBeforeRemoteUpdate];
+    NSUInteger newLocation = [self newCursorLocation:_currentNote.content
+                                             oldText:self.noteContentBeforeRemoteUpdate
+                                     currentLocation:self.cursorLocationBeforeRemoteUpdate];
 	
 	_noteEditorTextView.attributedText = [_currentNote.content attributedString];
     [_noteEditorTextView processChecklists];
@@ -1996,7 +1991,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     self.currentVersion = versionInt;
-	NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
+    NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
     NSLog(@"Loading version %ld: %@", (long)versionInt, versionData);
     
 	if (versionData != nil) {
