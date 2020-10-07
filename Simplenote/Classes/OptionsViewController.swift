@@ -37,7 +37,8 @@ class OptionsViewController: UIViewController {
         setupNavigationItem()
         setupTableView()
         refreshStyle()
-        reloadData()
+        refreshSections()
+        refreshPreferredSize()
     }
 }
 
@@ -61,6 +62,10 @@ private extension OptionsViewController {
     func setupTableView() {
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseIdentifier)
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+    }
+
+    func refreshPreferredSize() {
+        preferredContentSize = tableView.contentSize
     }
 }
 
@@ -212,7 +217,7 @@ private extension OptionsViewController {
 //
 private extension OptionsViewController {
 
-    func reloadData() {
+    func refreshSections() {
         sections = self.sections(for: note)
         tableView.reloadData()
     }
