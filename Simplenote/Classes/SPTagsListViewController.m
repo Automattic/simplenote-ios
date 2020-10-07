@@ -479,7 +479,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)settingsWasPressed {
-    [[SPAppDelegate sharedDelegate] showOptions];
+    [[SPAppDelegate sharedDelegate] presentSettingsViewController];
 }
 
 

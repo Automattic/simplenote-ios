@@ -426,11 +426,11 @@
     
 }
 
-- (void)showOptions
+- (void)presentSettingsViewController
 {
-    SPSettingsViewController *optionsViewController = [[SPSettingsViewController alloc] init];
+    SPSettingsViewController *settingsViewController = [SPSettingsViewController new];
 	
-    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
+    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:settingsViewController];
     navController.disableRotation = YES;
     navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
