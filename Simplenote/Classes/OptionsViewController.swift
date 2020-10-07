@@ -106,6 +106,11 @@ private extension OptionsViewController {
     }
 
     @IBAction
+    func copyInterlinkWasPressed() {
+        NSLog("Copy Interlink!")
+    }
+
+    @IBAction
     func shareWasPressed() {
         NSLog("Share!")
     }
@@ -208,7 +213,7 @@ private extension OptionsViewController {
 
     func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
         valueCell.textLabel?.text = row.title
-        valueCell.textLabel?.textColor = row.destructive ? .simplenoteDestructiveActionColor : .simplenoteTextColor
+        valueCell.textLabel?.textColor = row.destructive ? .simplenoteDestructiveActionColor : .simplenoteTintColor
     }
 }
 
@@ -232,6 +237,10 @@ private extension OptionsViewController {
                         Row(kind: .switch(selected: note.markdown),
                             title: NSLocalizedString("Markdown", comment: "Toggles the Markdown State"),
                             handler: #selector(markdownWasPressed)),
+
+                        Row(kind: .value1,
+                            title: NSLocalizedString("Copy Internal Link", comment: "Copies the Note's Internal LInk"),
+                            handler: #selector(copyInterlinkWasPressed)),
 
                         Row(kind: .value1,
                             title: NSLocalizedString("Share", comment: "Opens the Share Sheet"),
