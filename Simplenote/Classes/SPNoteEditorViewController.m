@@ -64,13 +64,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         UIActionSheetDelegate,
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
-@property (nonatomic, strong) SPOutsideTouchView        *navigationButtonContainer;
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
+@property (nonatomic, strong) SPOutsideTouchView        *navigationButtonContainer;
 @property (nonatomic, strong) UILabel                   *searchDetailLabel;
+@property (nonatomic, strong) SPTagView                 *tagView;
 @property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
-@property (nonatomic, strong) SPTagView                 *tagView;
 
 // Sheets
 @property (nonatomic, strong) SPActivityView            *noteActivityView;
@@ -83,13 +83,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 @property (nonatomic, strong) NSTimer                   *guarenteedSaveTimer;
 
 // State
-@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
-@property (nonatomic, assign) BOOL                      blankNote;
-@property (nonatomic, assign) BOOL                      modified;
-@property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
-@property (nonatomic, assign) BOOL                      viewingVersions;
 @property (nonatomic, assign) BOOL                      actionSheetVisible;
+@property (nonatomic, assign) BOOL                      blankNote;
+@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
+@property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
+@property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
+@property (nonatomic, assign) BOOL                      viewingVersions;
 
 // Remote Updates
 @property (nonatomic, assign) NSUInteger                cursorLocationBeforeRemoteUpdate;
