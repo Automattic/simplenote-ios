@@ -579,7 +579,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     
-    [self endEditing:nil];
+    [self endEditing];
     
     if (self.blankNote) {
         
@@ -663,8 +663,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.previewing = NO;
 }
 
-- (void)clearNote {
-    
+- (void)clearNote
+{
     self.blankNote = NO;
     _currentNote = nil;
     _noteEditorTextView.text = @"";
@@ -674,8 +674,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [_tagView clearAllTags];
 }
 
-
-- (void)endEditing:(id)sender
+- (void)endEditing
 {
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     [self.view endEditing:YES];
@@ -1232,15 +1231,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.guarenteedSaveTimer = nil;
 }
 
--(void)saveAndSync:(NSTimer *)timer
+- (void)saveAndSync:(NSTimer *)timer
 {
 	[self save];
     [self cancelSaveTimers];
 }
 
 
-- (void)save {
-    
+- (void)save
+{
 	if (_currentNote == nil || self.viewingVersions || [self isDictatingText])
 		return;    
     
@@ -1324,7 +1323,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)keyboardButtonAction:(id)sender {
     
-    [self endEditing:sender];
+    [self endEditing];
     [_tagView endEditing:YES];
 }
 
