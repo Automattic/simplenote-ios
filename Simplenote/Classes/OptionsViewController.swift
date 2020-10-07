@@ -203,6 +203,7 @@ private extension OptionsViewController {
 
     func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
         valueCell.textLabel?.text = row.title
+        valueCell.textLabel?.textColor = row.destructive ? .simplenoteDestructiveActionColor : .simplenoteTextColor
     }
 }
 
@@ -257,6 +258,7 @@ private extension OptionsViewController {
             Section(rows: [
                         Row(kind: .value1,
                             title: NSLocalizedString("Move to Trash", comment: "Delete Action"),
+                            destructive: true,
                             handler: #selector(trashWasPressed))
                     ]),
         ]
@@ -284,7 +286,15 @@ private struct Section {
 private struct Row {
     let kind: RowKind
     let title: String
+    let destructive: Bool
     let handler: Selector
+
+    init(kind: RowKind, title: String, destructive: Bool = false, handler: Selector) {
+        self.kind = kind
+        self.title = title
+        self.destructive = destructive
+        self.handler = handler
+    }
 }
 
 private enum RowKind {
