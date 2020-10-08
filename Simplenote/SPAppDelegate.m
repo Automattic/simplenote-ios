@@ -8,6 +8,7 @@
 #import "SPNoteEditorViewController.h"
 #import "SPOptionsViewController.h"
 #import "SPTagsListViewController.h"
+#import "SPAddCollaboratorsViewController.h"
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
 #import "NSProcessInfo+Util.h"
