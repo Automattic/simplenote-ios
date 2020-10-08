@@ -228,7 +228,8 @@ private extension OptionsViewController {
 
     func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
         valueCell.textLabel?.text = row.title
-        valueCell.textLabel?.textColor = row.destructive ? .simplenoteDestructiveActionColor : .simplenoteTintColor
+        valueCell.destructive = row.destructive
+        valueCell.selectable = row.selectable
     }
 }
 
@@ -243,6 +244,7 @@ private extension OptionsViewController {
     }
 
     func sections(for note: Note) -> [Section] {
+        let canCopyLink = note.published && note.publishURL.count > .zero
         return [
             Section(rows: [
                         Row(kind: .switch(selected: note.pinned),
@@ -275,7 +277,8 @@ private extension OptionsViewController {
                             handler: #selector(publishWasPressed)),
 
                         Row(kind: .value1,
-                            title: NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink"),
+                            title: NSLocalizedString("Copy Link", comment: "Copies a Note's Public URL"),
+                            selectable: canCopyLink,
                             handler: #selector(copyLinkWasPressed))
                     ]),
             Section(rows: [
@@ -316,12 +319,14 @@ private struct Row {
     let kind: RowKind
     let title: String
     let destructive: Bool
+    let selectable: Bool
     let handler: Selector
 
-    init(kind: RowKind, title: String, destructive: Bool = false, handler: Selector) {
+    init(kind: RowKind, title: String, destructive: Bool = false, selectable: Bool = true, handler: Selector) {
         self.kind = kind
         self.title = title
         self.destructive = destructive
+        self.selectable = selectable
         self.handler = handler
     }
 }
