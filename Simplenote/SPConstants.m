@@ -40,8 +40,6 @@ NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
 
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 
-NSString *const kSimplenotePublishURL               = @"http://simp.ly/publish/";
-
 NSString *const kPinTimeoutPreferencesKey           = @"kPinTimeoutPreferencesKey";
 
 NSString *const kWordPressAuthURL                   = @"https://public-api.wordpress.com/oauth2/authorize?response_type=code&scope=global&client_id=%@&redirect_uri=%@&state=%@";

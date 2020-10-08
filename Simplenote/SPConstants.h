@@ -31,8 +31,6 @@ extern NSString *const kSimplenoteUntaggedKey;
 extern NSString *const kSimplenoteUseBiometryKey;
 extern NSString *const kSignInErrorNotificationName;
 
-extern NSString *const kSimplenotePublishURL;
-
 extern NSString *const kPinTimeoutPreferencesKey;
 
 extern NSString *const kWordPressAuthURL;

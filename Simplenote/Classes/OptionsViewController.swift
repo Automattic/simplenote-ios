@@ -242,7 +242,7 @@ private extension OptionsViewController {
 
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
-        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Interlink")
+        cell.title = copyLinkText(for: note)
         cell.selectable = canCopyLink(to: note)
         return cell
     }
@@ -259,10 +259,29 @@ private extension OptionsViewController {
         cell.destructive = true
         return cell
     }
+}
+
+
+// MARK: - Publishing
+//
+extension OptionsViewController {
 
     func canCopyLink(to note: Note) -> Bool {
         note.published && note.publishURL.count > .zero
     }
+
+    func copyLinkText(for note: Note) -> String {
+        if note.published {
+            return note.publishURL.isEmpty ?
+                NSLocalizedString("Publishing...", comment: "") :
+                NSLocalizedString("Copy Link", comment: "")
+        }
+
+        return note.publishURL.isEmpty ?
+            NSLocalizedString("Copy Link", comment: "") :
+            NSLocalizedString("Unpublishing...", comment: "")
+    }
+
 }
 
 
@@ -305,7 +324,7 @@ private extension OptionsViewController {
 
     @IBAction
     func copyInterlinkWasPressed() {
-        UIPasteboard.general.copyInterlink(to: note)
+        UIPasteboard.general.copyInternalLink(to: note)
         SPTracker.trackEditorCopiedInternalLink()
     }
 
@@ -327,7 +346,7 @@ private extension OptionsViewController {
 
     @IBAction
     func copyLinkWasPressed() {
-        NSLog("Copy!")
+        UIPasteboard.general.copyPublicLink(to: note)
     }
 
     @IBAction

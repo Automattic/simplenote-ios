@@ -1666,17 +1666,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self presentViewController:acv animated:YES completion:nil];
 }
 
-- (void)shareNoteURLAction:(id)sender {
-    
-    
+- (void)shareNoteURLAction:(id)sender
+{
     if (!_currentNote.published) {
         return;
 	}
     
 	[SPTracker trackEditorPublishedUrlPressed];
-    
-    NSURL *publishURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]];
-    
+
+    NSURL *publishURL = [NSURL URLWithString:_currentNote.publicLink];
     SPAcitivitySafari *safariActivity = [[SPAcitivitySafari alloc] init];
     
     UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
@@ -1693,15 +1691,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-
-- (void)showNoteActivityViewController {
-    
+- (void)showNoteActivityViewController
+{    
     if (!_currentNote.published || !(_currentNote.publishURL.length > 0))
         return;
     
-    NSURL *publishURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]];
+    NSURL *publishURL = [NSURL URLWithString:_currentNote.publicLink];
 
-    
     UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
                                                                       applicationActivities:nil];
     
