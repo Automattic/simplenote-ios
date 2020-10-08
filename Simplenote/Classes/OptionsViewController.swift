@@ -109,12 +109,14 @@ private extension OptionsViewController {
     func pinnedWasPressed(_ sender: UISwitch) {
         NSLog("Pin! \(sender.isOn)")
         SPObjectManager.shared().updatePinnedState(note, pinned: sender.isOn)
+        SPTracker.trackEditorNotePinEnabled(sender.isOn)
     }
 
     @IBAction
     func markdownWasPressed(_ sender: UISwitch) {
         NSLog("Markdown! \(sender.isOn)")
         SPObjectManager.shared().updateMarkdownState(note, markdown: sender.isOn)
+        SPTracker.trackEditorNoteMarkdownEnabled(sender.isOn)
     }
 
     @IBAction
@@ -136,6 +138,7 @@ private extension OptionsViewController {
     func publishWasPressed(_ sender: UISwitch) {
         NSLog("Publish! \(sender.isOn)")
         SPObjectManager.shared().updatePublishedState(note, published: sender.isOn)
+        SPTracker.trackEditorNotePublishEnabled(sender.isOn)
     }
 
     @IBAction

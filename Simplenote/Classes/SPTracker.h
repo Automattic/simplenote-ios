@@ -22,8 +22,7 @@
 + (void)trackEditorNoteCreated;
 + (void)trackEditorNoteDeleted;
 + (void)trackEditorNoteRestored;
-+ (void)trackEditorNotePublished;
-+ (void)trackEditorNoteUnpublished;
++ (void)trackEditorNotePublishEnabled:(BOOL)isOn;
 + (void)trackEditorPublishedUrlPressed;
 + (void)trackEditorNoteContentShared;
 + (void)trackEditorNoteEdited;
@@ -31,10 +30,8 @@
 + (void)trackEditorEmailTagRemoved;
 + (void)trackEditorTagAdded;
 + (void)trackEditorTagRemoved;
-+ (void)trackEditorNotePinned;
-+ (void)trackEditorNoteUnpinned;
-+ (void)trackEditorNoteMarkdownEnabled;
-+ (void)trackEditorNoteMarkdownDisabled;
++ (void)trackEditorNotePinEnabled:(BOOL)isOn;
++ (void)trackEditorNoteMarkdownEnabled:(BOOL)isOn;
 + (void)trackEditorActivitiesAccessed;
 + (void)trackEditorVersionsAccessed;
 + (void)trackEditorCollaboratorsAccessed;

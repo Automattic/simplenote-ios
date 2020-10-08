@@ -1567,12 +1567,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
 
-            // Track analytics
-            if (enabled) {
-                [SPTracker trackEditorNoteMarkdownEnabled];
-            } else {
-                [SPTracker trackEditorNoteMarkdownDisabled];
-            }
+//            // Track analytics
+//            if (enabled) {
+//                [SPTracker trackEditorNoteMarkdownEnabled];
+//            } else {
+//                [SPTracker trackEditorNoteMarkdownDisabled];
+//            }
 
             UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
             markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
@@ -1720,7 +1720,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)unpublishNote:(void(^)(BOOL success))completion {
 
-    [SPTracker trackEditorNoteUnpublished];
+//    [SPTracker trackEditorNoteUnpublished];
 
     _currentNote.published = NO;
     [self save];
