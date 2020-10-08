@@ -1286,7 +1286,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 	if (tags.count > 0) {
 		[_tagView setupWithTagNames:tags];
     }
-    [self updatePublishUI];
 }
 
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
