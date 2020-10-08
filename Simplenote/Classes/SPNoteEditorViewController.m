@@ -1631,31 +1631,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self presentViewController:acv animated:YES completion:nil];
 }
 
-- (void)shareNoteURLAction:(id)sender
-{
-    if (!_currentNote.published) {
-        return;
-	}
-    
-	[SPTracker trackEditorPublishedUrlPressed];
-
-    NSURL *publishURL = [NSURL URLWithString:_currentNote.publicLink];
-    SPAcitivitySafari *safariActivity = [[SPAcitivitySafari alloc] init];
-    
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
-                                                                      applicationActivities:@[safariActivity]];
-
-    if ([UIDevice isPad]) {
-        acv.modalPresentationStyle = UIModalPresentationPopover;
-        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
-        acv.popoverPresentationController.sourceView = self.view;
-        [self presentViewController:acv animated:YES completion:nil];
-    } else {
-        [self.navigationController presentViewController:acv animated:YES completion:nil];
-    }
-}
-
 - (void)addCollaboratorsAction:(id)sender
 {    
     [SPTracker trackEditorCollaboratorsAccessed];
