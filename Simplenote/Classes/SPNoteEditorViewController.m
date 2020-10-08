@@ -1532,50 +1532,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     switch (index) {
         case 0: // Publish Note
         {
-            if (enabled) {
-                [self publishNote:^(BOOL success) {
-                    [activityView setToggleState:success atIndex:index];
-                }];
-
-            } else  {
-                [self unpublishNote:nil];
-            }
-
-            UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
-            publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", nil) : NSLocalizedString(@"Publish note", nil);
-            break;
-        }
-        case 1: // Pin Note
-        {
-            _currentNote.pinned = enabled;
-
-            [self save];
-
-            UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
-            pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", nil) : NSLocalizedString(@"Pin note", nil);
+            [self updatePublishUI];
             break;
         }
         case 2: // Toggle Markdown
         {
-            _currentNote.markdown = enabled;
-
-            [self save];
-
             // If Markdown is being enabled and it was previously disabled
             self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
 
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
-
-//            // Track analytics
-//            if (enabled) {
-//                [SPTracker trackEditorNoteMarkdownEnabled];
-//            } else {
-//                [SPTracker trackEditorNoteMarkdownDisabled];
-//            }
-
-            UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
-            markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
             break;
         }
         default: break;
@@ -1703,32 +1669,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return [self.view convertRect:self.actionButton.frame
                          fromView:self.actionButton.superview];
     
-}
-
-- (void)publishNote:(void(^)(BOOL success))completion {
-    
-//    [SPTracker trackEditorNotePublished];
-
-    _currentNote.published = YES;
-    [self save];
-    [self updatePublishUI];
-
-    if (completion) {
-        completion(YES);
-    }
-}
-
-- (void)unpublishNote:(void(^)(BOOL success))completion {
-
-//    [SPTracker trackEditorNoteUnpublished];
-
-    _currentNote.published = NO;
-    [self save];
-    [self updatePublishUI];
-
-    if (completion) {
-        completion(YES);
-    }
 }
 
 - (void)shareNoteContentAction:(id)sender {
