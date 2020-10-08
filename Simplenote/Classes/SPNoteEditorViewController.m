@@ -73,8 +73,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
 
 // Sheets
-@property (nonatomic, strong) SPActivityView            *noteActivityView;
-@property (nonatomic, strong) SPActionSheet             *noteActionSheet;
 @property (nonatomic, strong) SPActionSheet             *versionActionSheet;
 @property (nonatomic, strong) SPHorizontalPickerView    *versionPickerView;
 
@@ -1513,7 +1511,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.noteActionSheet.swipeToDismiss = YES;
     }
 }
- */
+
 
 - (void)dismissActivityView {
     if (self.presentedViewController) {
@@ -1524,6 +1522,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self.noteActionSheet dismiss];
     self.noteActionSheet = nil;
 }
+
+ */
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
     
@@ -1575,7 +1575,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
     
-    [self dismissActivityView];
+//    [self dismissActivityView];
 
     switch (index) {
         case 0: {
@@ -1600,6 +1600,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
+/*
 - (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index {
     
     [self dismissActivityView];
@@ -1607,6 +1608,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         if (index == 0)
             [self shareNoteURLAction:nil];
 }
+ */
 
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
 
@@ -1644,11 +1646,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
     
     self.actionSheetVisible = NO;
-    
-    if ([actionSheet isEqual:self.noteActionSheet]) {
-        self.noteActionSheet = nil;
-    }
-    
+
     if ([actionSheet isEqual:self.versionActionSheet]) {
         self.versionActionSheet = nil;
     }
