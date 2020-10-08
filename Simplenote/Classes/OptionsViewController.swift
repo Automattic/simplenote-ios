@@ -16,7 +16,14 @@ class OptionsViewController: UIViewController {
 
     /// Sections onScreen
     ///
-    private var sections = [Section]()
+    private let sections: [Section] = [
+        Section(rows: [.pinToTop, .markdown, .copyInternalURL, .share, .history]),
+        Section(header: NSLocalizedString("Public Link", comment: "Publish to Web Section Header"),
+                footer: NSLocalizedString("Publish your note to the web and generate a sharable URL.", comment: "Publish to Web Section Footer"),
+                rows: [.publish, .copyPublicURL]),
+        Section(rows: [.collaborate]),
+        Section(rows: [.trash])
+    ]
 
     /// Designated Initializer
     ///
@@ -37,7 +44,7 @@ class OptionsViewController: UIViewController {
         setupNavigationItem()
         setupTableView()
         refreshStyle()
-        refreshSections()
+        refreshInterface()
         refreshPreferredSize()
     }
 }
@@ -81,57 +88,6 @@ private extension OptionsViewController {
 }
 
 
-// MARK: - Action Handlers
-//
-private extension OptionsViewController {
-
-    @IBAction
-    func doneWasPressed() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction
-    func trashWasPressed() {
-        NSLog("Trash!")
-    }
-
-    @IBAction
-    func pinnedWasPressed(_ sender: UISwitch) {
-        NSLog("Pin! \(sender.isOn)")
-    }
-
-    @IBAction
-    func markdownWasPressed(_ sender: UISwitch) {
-        NSLog("Markdown! \(sender.isOn)")
-    }
-
-    @IBAction
-    func shareWasPressed() {
-        NSLog("Share!")
-    }
-
-    @IBAction
-    func historyWasPressed() {
-        NSLog("History!")
-    }
-
-    @IBAction
-    func publishWasPressed(_ sender: UISwitch) {
-        NSLog("Publish! \(sender.isOn)")
-    }
-
-    @IBAction
-    func copyLinkWasPressed() {
-        NSLog("Copy!")
-    }
-
-    @IBAction
-    func collaborateWasPressed() {
-        NSLog("Collab!")
-    }
-}
-
-
 // MARK: - UITableViewDelegate
 //
 extension OptionsViewController: UITableViewDelegate {
@@ -142,7 +98,7 @@ extension OptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        perform(rowAtIndexPath(indexPath).handler)
+        // TODO: Implement Me!
     }
 }
 
@@ -157,11 +113,7 @@ extension OptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = rowAtIndexPath(indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: row.reuseIdentifier, for: indexPath)
-
-        configureCell(cell, with: row)
-
-        return cell
+        return dequeueAndConfigureCell(for: row, at: indexPath, in: tableView)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -178,95 +130,113 @@ extension OptionsViewController: UITableViewDataSource {
 //
 private extension OptionsViewController {
 
+    func refreshInterface() {
+        tableView.reloadData()
+    }
+
     func rowAtIndexPath(_ indexPath: IndexPath) -> Row {
         sections[indexPath.section].rows[indexPath.row]
-    }
-
-    func configureCell(_ cell: UITableViewCell, with row: Row) {
-        switch cell {
-        case let cell as SwitchTableViewCell:
-            configureSwitchCell(cell, for: row)
-        case let cell as Value1TableViewCell:
-            configureValue1Cell(cell, for: row)
-        default:
-            fatalError()
-        }
-    }
-
-    func configureSwitchCell(_ switchCell: SwitchTableViewCell, for row: Row) {
-        guard case let .switch(selected) = row.kind else {
-            fatalError()
-        }
-        
-        switchCell.onChange = { [weak self] switchControl in
-            self?.perform(row.handler, with: switchControl)
-        }
-
-        switchCell.switchControl.isOn = selected
-        switchCell.textLabel?.text = row.title
-    }
-
-    func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
-        valueCell.textLabel?.text = row.title
-        valueCell.textLabel?.textColor = row.destructive ? .simplenoteDestructiveActionColor : .simplenoteTextColor
     }
 }
 
 
-// MARK: - Intermediate Representations
+// MARK: - Building Cells
 //
 private extension OptionsViewController {
 
-    func refreshSections() {
-        sections = self.sections(for: note)
-        tableView.reloadData()
+    func dequeueAndConfigureCell(for row: Row, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+
+        switch row {
+        case .pinToTop:
+            return dequeuePinToTopCell(from: tableView, at: indexPath)
+        case .markdown:
+            return dequeueMarkdownCell(from: tableView, at: indexPath)
+        case .copyInternalURL:
+            return dequeueCopyInterlinkCell(from: tableView, at: indexPath)
+        case .share:
+            return dequeueShareCell(from: tableView, at: indexPath)
+        case .history:
+            return dequeueHistoryCell(from: tableView, at: indexPath)
+        case .publish:
+            return dequeuePublishCell(from: tableView, at: indexPath)
+        case .copyPublicURL:
+            return dequeueCopyPublicURLCell(from: tableView, at: indexPath)
+        case .collaborate:
+            return dequeueCollaborateCell(from: tableView, for: indexPath)
+        case .trash:
+            return dequeueTrashCell(from: tableView, for: indexPath)
+        }
     }
 
-    func sections(for note: Note) -> [Section] {
-        return [
-            Section(rows: [
-                        Row(kind: .switch(selected: note.pinned),
-                            title: NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State"),
-                            handler: #selector(pinnedWasPressed)),
+    func dequeuePinToTopCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State")
+        cell.isOn = note.pinned
+        return cell
+    }
 
-                        Row(kind: .switch(selected: note.markdown),
-                            title: NSLocalizedString("Markdown", comment: "Toggles the Markdown State"),
-                            handler: #selector(markdownWasPressed)),
+    func dequeueMarkdownCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Markdown", comment: "Toggles the Markdown State")
+        cell.isOn = note.markdown
+        return cell
+    }
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Share", comment: "Opens the Share Sheet"),
-                            handler: #selector(shareWasPressed)),
+    func dequeueCopyInterlinkCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Copy Internal Link", comment: "Copies the Note's Interlink")
+        cell.selectable = true
+        return cell
+    }
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("History", comment: "Opens the Note's History"),
-                            handler: #selector(historyWasPressed))
-                    ]),
-            Section(header: NSLocalizedString("Public Link",
-                                              comment: "Publish to Web Section Header"),
-                    footer: NSLocalizedString("Publish your note to the web and generate a sharable URL.",
-                                              comment: "Publish to Web Section Footer"),
-                    rows: [
-                        Row(kind: .switch(selected: note.published),
-                            title: NSLocalizedString("Publish", comment: "Publishes a Note to the Web"),
-                            handler: #selector(publishWasPressed)),
+    func dequeueShareCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Share", comment: "Opens the Share Sheet")
+        return cell
+    }
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink"),
-                            handler: #selector(copyLinkWasPressed))
-                    ]),
-            Section(rows: [
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI"),
-                            handler: #selector(collaborateWasPressed))
+    func dequeueHistoryCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("History", comment: "Opens the Note's History")
+        return cell
+    }
 
-                    ]),
-            Section(rows: [
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Move to Trash", comment: "Delete Action"),
-                            destructive: true,
-                            handler: #selector(trashWasPressed))
-                    ]),
-        ]
+    func dequeuePublishCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.isOn = note.published
+        cell.title = NSLocalizedString("Publish", comment: "Publishes a Note to the Web")
+        return cell
+    }
+
+    func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
+        cell.selectable = false
+        return cell
+    }
+
+    func dequeueCollaborateCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI")
+        return cell
+    }
+
+    func dequeueTrashCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
+        let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.title = NSLocalizedString("Move to Trash", comment: "Delete Action")
+        cell.destructive = true
+        return cell
+    }
+}
+
+
+// MARK: - Action Handlers
+//
+private extension OptionsViewController {
+
+    @IBAction
+    func doneWasPressed() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -286,37 +256,16 @@ private struct Section {
 }
 
 
-// MARK: - Supported TableView Rows
+// MARK: - TableView Rows
 //
-private struct Row {
-    let kind: RowKind
-    let title: String
-    let destructive: Bool
-    let handler: Selector
-
-    init(kind: RowKind, title: String, destructive: Bool = false, handler: Selector) {
-        self.kind = kind
-        self.title = title
-        self.destructive = destructive
-        self.handler = handler
-    }
-}
-
-private enum RowKind {
-    case value1
-    case `switch`(selected: Bool)
-}
-
-// MARK: - Row API(s)
-//
-private extension Row {
-
-    var reuseIdentifier: String {
-        switch kind {
-        case .value1:
-            return Value1TableViewCell.reuseIdentifier
-        case .switch:
-            return SwitchTableViewCell.reuseIdentifier
-        }
-    }
+private enum Row {
+    case pinToTop
+    case markdown
+    case copyInternalURL
+    case share
+    case history
+    case publish
+    case copyPublicURL
+    case collaborate
+    case trash
 }

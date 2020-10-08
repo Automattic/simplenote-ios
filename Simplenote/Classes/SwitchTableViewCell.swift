@@ -10,9 +10,40 @@ class SwitchTableViewCell: UITableViewCell {
     ///
     private(set) lazy var switchControl = UISwitch()
 
+    /// Accessibility Hint to be applied over the control, whenever it's On
+    ///
+    var enabledAccessibilityHint: String?
+
+    /// Accessibility Hint to be applied over the control, whenever it's Off
+    ///
+    var disabledAccessibilityHint: String?
+
+    /// Wraps the TextLabel's Text Property
+    ///
+    var title: String? {
+        get {
+            textLabel?.text
+        }
+        set {
+            textLabel?.text = newValue
+        }
+    }
+
+    /// Indicates if the switch is On / Off
+    ///
+    var isOn: Bool {
+       get {
+           switchControl.isOn
+       }
+       set {
+           switchControl.isOn = newValue
+           switchControl.accessibilityHint = newValue ? enabledAccessibilityHint : disabledAccessibilityHint
+       }
+    }
+
     /// Listener: Receives the new State
     ///
-    var onChange: ((UISwitch) -> Void)?
+    var onChange: ((Bool) -> Void)?
 
 
     // MARK: - Initializers
@@ -20,6 +51,7 @@ class SwitchTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupGestureRecognizer()
+        setupSwitchControl()
         setupTableViewCell()
         refreshStyles()
     }
@@ -40,7 +72,7 @@ private extension SwitchTableViewCell {
     }
 
     func setupSwitchControl() {
-        switchControl.addTarget(self, action: #selector(switchDidChange), for: .primaryActionTriggered)
+        switchControl.addTarget(self, action: #selector(switchDidChange), for: .valueChanged)
     }
 
     func setupTableViewCell() {
@@ -75,6 +107,6 @@ extension SwitchTableViewCell {
     }
 
     private func notifyStateDidChange() {
-        onChange?(switchControl)
+        onChange?(switchControl.isOn)
     }
 }
