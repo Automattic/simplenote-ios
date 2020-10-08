@@ -227,9 +227,27 @@
     
 }
 
-- (void)togglePinnedStateOfNote:(Note *)note
+- (void)updateMarkdownState:(Note *)note markdown:(BOOL)markdown
 {
-    note.pinned = !note.pinned;
+    note.markdown = markdown;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePublishedState:(Note *)note published:(BOOL)published
+{
+    note.published = published;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePinnedState:(Note *)note pinned:(BOOL)pinned
+{
+    note.pinned = pinned;
+    note.modificationDate = [NSDate date];
+
     [self save];
 }
 

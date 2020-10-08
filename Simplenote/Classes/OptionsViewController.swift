@@ -106,18 +106,15 @@ private extension OptionsViewController {
     }
 
     @IBAction
-    func trashWasPressed() {
-        NSLog("Trash!")
-    }
-
-    @IBAction
     func pinnedWasPressed(_ sender: UISwitch) {
         NSLog("Pin! \(sender.isOn)")
+        SPObjectManager.shared().updatePinnedState(note, pinned: sender.isOn)
     }
 
     @IBAction
     func markdownWasPressed(_ sender: UISwitch) {
         NSLog("Markdown! \(sender.isOn)")
+        SPObjectManager.shared().updateMarkdownState(note, markdown: sender.isOn)
     }
 
     @IBAction
@@ -138,6 +135,7 @@ private extension OptionsViewController {
     @IBAction
     func publishWasPressed(_ sender: UISwitch) {
         NSLog("Publish! \(sender.isOn)")
+        SPObjectManager.shared().updatePublishedState(note, published: sender.isOn)
     }
 
     @IBAction
@@ -148,6 +146,11 @@ private extension OptionsViewController {
     @IBAction
     func collaborateWasPressed() {
         NSLog("Collab!")
+    }
+
+    @IBAction
+    func trashWasPressed() {
+        NSLog("Trash!")
     }
 }
 

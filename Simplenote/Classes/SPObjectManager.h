@@ -34,7 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Notes
 
-- (void)togglePinnedStateOfNote:(Note *)note;
+- (void)updateMarkdownState:(Note *)note markdown:(BOOL)markdown;
+- (void)updatePublishedState:(Note *)note published:(BOOL)published;
+- (void)updatePinnedState:(Note *)note pinned:(BOOL)pinned;
+
 - (void)trashNote:(Note *)note;
 - (void)restoreNote:(Note *)note;
 - (void)permenentlyDeleteNote:(Note *)note;
