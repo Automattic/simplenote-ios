@@ -160,7 +160,6 @@ private extension OptionsViewController {
 private extension OptionsViewController {
 
     func dequeueAndConfigureCell(for row: Row, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-
         switch row {
         case .pinToTop:
             return dequeuePinToTopCell(from: tableView, at: indexPath)
@@ -189,6 +188,10 @@ private extension OptionsViewController {
         cell.enabledAccessibilityHint = NSLocalizedString("Unpin note", comment: "Pin State Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Pin note", comment: "Pin State Accessibility Hint")
         cell.isOn = note.pinned
+        cell.onChange = { [weak self] newState in
+            self?.pinnedWasPressed(newState)
+        }
+
         return cell
     }
 
@@ -198,6 +201,10 @@ private extension OptionsViewController {
         cell.enabledAccessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.isOn = note.markdown
+        cell.onChange = { [weak self] newState in
+            self?.markdownWasPressed(newState)
+        }
+
         return cell
     }
 
@@ -226,14 +233,17 @@ private extension OptionsViewController {
         cell.title = NSLocalizedString("Publish", comment: "Publishes a Note to the Web")
         cell.enabledAccessibilityHint = NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Publish note", comment: "Publish Accessibility Hint")
+        cell.onChange = { [weak self] newState in
+            self?.publishWasPressed(newState)
+        }
+
         return cell
     }
 
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
-        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
-        cell.selectable = false
-        let canCopyLink = note.published && note.publishURL.count > .zero
+        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Interlink")
+        cell.selectable = canCopyLink(to: note)
         return cell
     }
 
@@ -248,6 +258,10 @@ private extension OptionsViewController {
         cell.title = NSLocalizedString("Move to Trash", comment: "Delete Action")
         cell.destructive = true
         return cell
+    }
+
+    func canCopyLink(to note: Note) -> Bool {
+        note.published && note.publishURL.count > .zero
     }
 }
 
@@ -277,21 +291,16 @@ private extension OptionsViewController {
     }
 
     @IBAction
-    func doneWasPressed() {
-        dismiss(animated: true, completion: nil)
+    func pinnedWasPressed(_ newState: Bool) {
+        SPObjectManager.shared().updatePinnedState(note, pinned: newState)
+        SPTracker.trackEditorNotePinEnabled(newState)
     }
 
     @IBAction
-    func pinnedWasPressed(_ sender: UISwitch) {
-        SPObjectManager.shared().updatePinnedState(note, pinned: sender.isOn)
-        SPTracker.trackEditorNotePinEnabled(sender.isOn)
-    }
-
-    @IBAction
-    func markdownWasPressed(_ sender: UISwitch) {
-        Options.shared.markdown = sender.isOn
-        SPObjectManager.shared().updateMarkdownState(note, markdown: sender.isOn)
-        SPTracker.trackEditorNoteMarkdownEnabled(sender.isOn)
+    func markdownWasPressed(_ newState: Bool) {
+        Options.shared.markdown = newState
+        SPObjectManager.shared().updateMarkdownState(note, markdown: newState)
+        SPTracker.trackEditorNoteMarkdownEnabled(newState)
     }
 
     @IBAction
@@ -311,9 +320,9 @@ private extension OptionsViewController {
     }
 
     @IBAction
-    func publishWasPressed(_ sender: UISwitch) {
-        SPObjectManager.shared().updatePublishedState(note, published: sender.isOn)
-        SPTracker.trackEditorNotePublishEnabled(sender.isOn)
+    func publishWasPressed(_ newState: Bool) {
+        SPObjectManager.shared().updatePublishedState(note, published: newState)
+        SPTracker.trackEditorNotePublishEnabled(newState)
     }
 
     @IBAction
@@ -329,6 +338,11 @@ private extension OptionsViewController {
     @IBAction
     func trashWasPressed() {
         NSLog("Trash!")
+    }
+
+    @IBAction
+    func doneWasPressed() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
