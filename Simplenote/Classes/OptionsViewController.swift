@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SimplenoteFoundation
 
 
 // MARK: - OptionsViewController
@@ -14,9 +15,16 @@ class OptionsViewController: UIViewController {
     ///
     private let note: Note
 
+    /// EntityObserver: Allows us to listen to changes applied to the associated entity
+    ///
+    private lazy var entityObserver: EntityObserver = {
+        EntityObserver(context: SPAppDelegate.shared().managedObjectContext, object: note)
+    }()
+
     /// Sections onScreen
     ///
     private var sections = [Section]()
+
 
     /// Designated Initializer
     ///
@@ -36,6 +44,7 @@ class OptionsViewController: UIViewController {
         setupNavigationTitle()
         setupNavigationItem()
         setupTableView()
+        setupEntityObserver()
         refreshStyle()
         refreshSections()
         refreshPreferredSize()
@@ -64,19 +73,27 @@ private extension OptionsViewController {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
     }
 
+    func setupEntityObserver() {
+        entityObserver.delegate = self
+    }
+
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
-}
-
-
-// MARK: - Interface
-//
-private extension OptionsViewController {
 
     func refreshStyle() {
         view.backgroundColor = .simplenoteTableViewBackgroundColor
         tableView.applySimplenoteGroupedStyle()
+    }
+}
+
+
+// MARK: - EntityObserverDelegate
+//
+extension OptionsViewController: EntityObserverDelegate {
+
+    func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
+        refreshSections()
     }
 }
 
