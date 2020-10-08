@@ -1656,25 +1656,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)showNoteActivityViewController
-{
-    if (!_currentNote.published || !(_currentNote.publishURL.length > 0))
-        return;
-    
-    NSURL *publishURL = [NSURL URLWithString:_currentNote.publicLink];
-
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
-                                                                      applicationActivities:nil];
-    
-    [self.navigationController presentViewController:acv
-                                            animated:YES
-                                          completion:nil];
-    
-}
-
-
-- (void)addCollaboratorsAction:(id)sender {
-    
+- (void)addCollaboratorsAction:(id)sender
+{    
     [SPTracker trackEditorCollaboratorsAccessed];
 	   
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
