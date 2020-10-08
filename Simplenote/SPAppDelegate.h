@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
 
-- (void)showOptions;
+- (void)presentSettingsViewController;
 
 - (void)save;
 - (void)logoutAndReset:(id)sender;

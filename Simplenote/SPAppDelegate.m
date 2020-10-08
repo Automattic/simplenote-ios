@@ -6,7 +6,7 @@
 #import "SPNavigationController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPTagsListViewController.h"
 #import "SPAddCollaboratorsViewController.h"
 
@@ -426,11 +426,11 @@
     
 }
 
-- (void)showOptions
+- (void)presentSettingsViewController
 {
-    SPOptionsViewController *optionsViewController = [[SPOptionsViewController alloc] init];
+    SPSettingsViewController *settingsViewController = [SPSettingsViewController new];
 	
-    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
+    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:settingsViewController];
     navController.disableRotation = YES;
     navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;

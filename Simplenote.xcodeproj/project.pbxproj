@@ -65,7 +65,7 @@
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
 		46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */; };
 		46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5FA179F714C0095CD24 /* SPTagStub.m */; };
-		46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */; };
+		46A3C96C17DFA81A002865AE /* SPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */; };
 		46A3C96D17DFA81A002865AE /* SPOutsideTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E239601017B6A22800504FFB /* SPOutsideTouchView.m */; };
 		46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */; };
 		46A3C96F17DFA81A002865AE /* SPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCE0117960CBC00A17ED2 /* SPButton.m */; };
@@ -746,8 +746,8 @@
 		E265DBF817CE99D200070550 /* NSString+Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Search.m"; path = "Classes/NSString+Search.m"; sourceTree = "<group>"; };
 		E265DBFE17CE9C4600070550 /* NSTextStorage+Highlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTextStorage+Highlight.h"; path = "Classes/NSTextStorage+Highlight.h"; sourceTree = "<group>"; };
 		E265DBFF17CE9C4600070550 /* NSTextStorage+Highlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTextStorage+Highlight.m"; path = "Classes/NSTextStorage+Highlight.m"; sourceTree = "<group>"; };
-		E26AC90E179DA25F00C4BFB6 /* SPOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPOptionsViewController.h; path = Classes/SPOptionsViewController.h; sourceTree = "<group>"; };
-		E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPOptionsViewController.m; path = Classes/SPOptionsViewController.m; sourceTree = "<group>"; };
+		E26AC90E179DA25F00C4BFB6 /* SPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSettingsViewController.h; path = Classes/SPSettingsViewController.h; sourceTree = "<group>"; };
+		E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPSettingsViewController.m; path = Classes/SPSettingsViewController.m; sourceTree = "<group>"; };
 		E277B5E7179EDAFB0095CD24 /* SPTagsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagsListViewController.h; path = Classes/SPTagsListViewController.h; sourceTree = "<group>"; };
 		E277B5E8179EDAFB0095CD24 /* SPTagsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagsListViewController.m; path = Classes/SPTagsListViewController.m; sourceTree = "<group>"; };
 		E277B5F9179F714C0095CD24 /* SPTagStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagStub.h; path = Classes/SPTagStub.h; sourceTree = "<group>"; };
@@ -1700,8 +1700,8 @@
 		E2F1497F179D8E1A00DC9690 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				E26AC90E179DA25F00C4BFB6 /* SPOptionsViewController.h */,
-				E26AC90F179DA25F00C4BFB6 /* SPOptionsViewController.m */,
+				E26AC90E179DA25F00C4BFB6 /* SPSettingsViewController.h */,
+				E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */,
 				3762530520F54FFB00C1F239 /* SPAboutViewController.swift */,
 				B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */,
 				B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */,
@@ -2197,7 +2197,7 @@
 				B56A696922F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift in Sources */,
 				B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */,
 				B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */,
-				46A3C96C17DFA81A002865AE /* SPOptionsViewController.m in Sources */,
+				46A3C96C17DFA81A002865AE /* SPSettingsViewController.m in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */,

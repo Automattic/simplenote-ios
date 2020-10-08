@@ -1,5 +1,5 @@
 #import "SPNoteListViewController.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPNavigationController.h"
 #import "SPNoteEditorViewController.h"
 
