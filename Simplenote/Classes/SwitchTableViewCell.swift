@@ -20,6 +20,7 @@ class SwitchTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupGestureRecognizer()
+        setupSwitchControl()
         setupTableViewCell()
         refreshStyles()
     }
@@ -40,7 +41,7 @@ private extension SwitchTableViewCell {
     }
 
     func setupSwitchControl() {
-        switchControl.addTarget(self, action: #selector(switchDidChange), for: .primaryActionTriggered)
+        switchControl.addTarget(self, action: #selector(switchDidChange), for: .valueChanged)
     }
 
     func setupTableViewCell() {
