@@ -1707,7 +1707,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)publishNote:(void(^)(BOOL success))completion {
     
-    [SPTracker trackEditorNotePublished];
+//    [SPTracker trackEditorNotePublished];
 
     _currentNote.published = YES;
     [self save];
@@ -1815,20 +1815,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                             animated:YES
                                           completion:nil];
     
-}
-
--(void)togglePinStatusAction:(id)sender
-{
-	_currentNote.pinned = !_currentNote.pinned;
-	self.modified = YES;
-    
-    if (_currentNote.pinned) {
-        [SPTracker trackEditorNotePinned];
-    } else {
-        [SPTracker trackEditorNoteUnpinned];
-    }
-    
-    [self save];
 }
 
 - (void)viewVersionAction:(id)sender {
