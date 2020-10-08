@@ -119,7 +119,8 @@ private extension OptionsViewController {
 
     @IBAction
     func copyInterlinkWasPressed() {
-        NSLog("Copy Interlink!")
+        UIPasteboard.general.copyInterlink(to: note)
+        SPTracker.trackEditorCopiedInternalLink()
     }
 
     @IBAction

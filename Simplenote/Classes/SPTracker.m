@@ -123,6 +123,10 @@
     [self trackAutomatticEventWithName:@"editor_versions_accessed" properties:nil];
 }
 
++ (void)trackEditorCopiedInternalLink
+{
+    [self trackAutomatticEventWithName:@"editor_copied_internal_link" properties:nil];
+}
 
 
 #pragma mark - Note List

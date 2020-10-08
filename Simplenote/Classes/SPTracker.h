@@ -35,6 +35,7 @@
 + (void)trackEditorActivitiesAccessed;
 + (void)trackEditorVersionsAccessed;
 + (void)trackEditorCollaboratorsAccessed;
++ (void)trackEditorCopiedInternalLink;
 
 #pragma mark - Note List
 + (void)trackListNoteCreated;
