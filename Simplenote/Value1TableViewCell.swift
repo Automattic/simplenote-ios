@@ -22,15 +22,36 @@ class Value1TableViewCell: UITableViewCell {
         }
     }
 
+    /// Wraps the TextLabel's Text Property
+    ///
+    var title: String? {
+        get {
+            textLabel?.text
+        }
+        set {
+            textLabel?.text = newValue
+        }
+    }
+
+
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         reloadBackgroundStyles()
+        reloadTextStyles()
     }
 
     required init?(coder: NSCoder) {
         fatalError("Unsupported Initializer")
+    }
+
+    // MARK: - Overriden
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        destructive = false
+        selectable = true
     }
 }
 

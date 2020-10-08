@@ -18,21 +18,32 @@ class SwitchTableViewCell: UITableViewCell {
     ///
     var disabledAccessibilityHint: String?
 
+    /// Wraps the TextLabel's Text Property
+    ///
+    var title: String? {
+        get {
+            textLabel?.text
+        }
+        set {
+            textLabel?.text = newValue
+        }
+    }
+
     /// Indicates if the switch is On / Off
     ///
     var isOn: Bool {
-        get {
-            switchControl.isOn
-        }
-        set {
-            switchControl.isOn = newValue
-            switchControl.accessibilityHint = newValue ? enabledAccessibilityHint : disabledAccessibilityHint
-        }
+       get {
+           switchControl.isOn
+       }
+       set {
+           switchControl.isOn = newValue
+           switchControl.accessibilityHint = newValue ? enabledAccessibilityHint : disabledAccessibilityHint
+       }
     }
 
     /// Listener: Receives the new State
     ///
-    var onChange: ((UISwitch) -> Void)?
+    var onChange: ((Bool) -> Void)?
 
 
     // MARK: - Initializers
@@ -96,6 +107,6 @@ extension SwitchTableViewCell {
     }
 
     private func notifyStateDidChange() {
-        onChange?(switchControl)
+        onChange?(switchControl.isOn)
     }
 }
