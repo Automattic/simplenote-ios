@@ -1512,17 +1512,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-
-- (void)dismissActivityView {
-    if (self.presentedViewController) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-
-    // ActionSheet Scenario
-    [self.noteActionSheet dismiss];
-    self.noteActionSheet = nil;
-}
-
  */
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
@@ -1532,7 +1521,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     switch (index) {
         case 0: // Publish Note
         {
-            [self updatePublishUI];
+//            [self updatePublishUI];
             break;
         }
         case 2: // Toggle Markdown
@@ -1545,6 +1534,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
+/*
 - (void)updatePublishUI {
     UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
     UIButton *urlButton = [self.noteActivityView buttonAtIndex:0];
@@ -1573,9 +1563,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
+ */
 - (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
-    
-//    [self dismissActivityView];
 
     switch (index) {
         case 0: {
@@ -1599,16 +1588,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
 }
-
-/*
-- (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index {
-    
-    [self dismissActivityView];
-
-        if (index == 0)
-            [self shareNoteURLAction:nil];
-}
- */
 
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
 
