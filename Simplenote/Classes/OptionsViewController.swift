@@ -226,8 +226,10 @@ private extension OptionsViewController {
             self?.perform(row.handler, with: switchControl)
         }
 
-        switchCell.switchControl.isOn = selected
         switchCell.textLabel?.text = row.title
+        switchCell.enabledAccessibilityHint = row.enabledHint
+        switchCell.disabledAccessibilityHint = row.disabledHint
+        switchCell.switchControl.isOn = selected
     }
 
     func configureValue1Cell(_ valueCell: Value1TableViewCell, for row: Row) {
@@ -251,51 +253,55 @@ private extension OptionsViewController {
         let canCopyLink = note.published && note.publishURL.count > .zero
         return [
             Section(rows: [
-                        Row(kind: .switch(selected: note.pinned),
-                            title: NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State"),
-                            handler: #selector(pinnedWasPressed)),
+                        Row(kind:           .switch(selected: note.pinned),
+                            title:          NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State"),
+                            enabledHint:    NSLocalizedString("Unpin note", comment: "Pin State Accessibility Hint"),
+                            disabledHint:   NSLocalizedString("Pin note", comment: "Pin State Accessibility Hint"),
+                            handler:        #selector(pinnedWasPressed)),
 
-                        Row(kind: .switch(selected: note.markdown),
-                            title: NSLocalizedString("Markdown", comment: "Toggles the Markdown State"),
-                            handler: #selector(markdownWasPressed)),
+                        Row(kind:           .switch(selected: note.markdown),
+                            title:          NSLocalizedString("Markdown", comment: "Toggles the Markdown State"),
+                            enabledHint:    NSLocalizedString("Disable Markdown formatting", comment: "Markdown Accessibility Hint"),
+                            disabledHint:   NSLocalizedString("Enable Markdown formatting", comment: "Markdown Accessibility Hint"),
+                            handler:        #selector(markdownWasPressed)),
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Copy Internal Link", comment: "Copies the Note's Internal LInk"),
-                            handler: #selector(copyInterlinkWasPressed)),
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("Copy Internal Link", comment: "Copies the Note's Internal LInk"),
+                            handler:        #selector(copyInterlinkWasPressed)),
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Share", comment: "Opens the Share Sheet"),
-                            handler: #selector(shareWasPressed)),
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("Share", comment: "Opens the Share Sheet"),
+                            handler:        #selector(shareWasPressed)),
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("History", comment: "Opens the Note's History"),
-                            handler: #selector(historyWasPressed))
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("History", comment: "Opens the Note's History"),
+                            handler:        #selector(historyWasPressed))
                     ]),
-            Section(header: NSLocalizedString("Public Link",
-                                              comment: "Publish to Web Section Header"),
-                    footer: NSLocalizedString("Publish your note to the web and generate a sharable URL.",
-                                              comment: "Publish to Web Section Footer"),
+            Section(header:                 NSLocalizedString("Public Link", comment: "Publish to Web Section Header"),
+                    footer:                 NSLocalizedString("Publish your note to the web and generate a sharable URL.", comment: "Publish to Web Section Footer"),
                     rows: [
-                        Row(kind: .switch(selected: note.published),
-                            title: NSLocalizedString("Publish", comment: "Publishes a Note to the Web"),
-                            handler: #selector(publishWasPressed)),
+                        Row(kind:           .switch(selected: note.published),
+                            title:          NSLocalizedString("Publish", comment: "Publishes a Note to the Web"),
+                            enabledHint:    NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint"),
+                            disabledHint:   NSLocalizedString("Publish note", comment: "Publish Accessibility Hint"),
+                            handler:        #selector(publishWasPressed)),
 
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Copy Link", comment: "Copies a Note's Public URL"),
-                            selectable: canCopyLink,
-                            handler: #selector(copyLinkWasPressed))
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("Copy Link", comment: "Copies a Note's Public URL"),
+                            selectable:     canCopyLink,
+                            handler:        #selector(copyLinkWasPressed))
                     ]),
             Section(rows: [
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI"),
-                            handler: #selector(collaborateWasPressed))
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI"),
+                            handler:        #selector(collaborateWasPressed))
 
                     ]),
             Section(rows: [
-                        Row(kind: .value1,
-                            title: NSLocalizedString("Move to Trash", comment: "Delete Action"),
-                            destructive: true,
-                            handler: #selector(trashWasPressed))
+                        Row(kind:           .value1,
+                            title:          NSLocalizedString("Move to Trash", comment: "Delete Action"),
+                            destructive:    true,
+                            handler:        #selector(trashWasPressed))
                     ]),
         ]
     }
@@ -322,13 +328,17 @@ private struct Section {
 private struct Row {
     let kind: RowKind
     let title: String
+    let enabledHint: String
+    let disabledHint: String?
     let destructive: Bool
     let selectable: Bool
     let handler: Selector
 
-    init(kind: RowKind, title: String, destructive: Bool = false, selectable: Bool = true, handler: Selector) {
+    init(kind: RowKind, title: String, enabledHint: String? = nil, disabledHint: String? = nil, destructive: Bool = false, selectable: Bool = true, handler: Selector) {
         self.kind = kind
         self.title = title
+        self.enabledHint = enabledHint ?? title
+        self.disabledHint = disabledHint
         self.destructive = destructive
         self.selectable = selectable
         self.handler = handler

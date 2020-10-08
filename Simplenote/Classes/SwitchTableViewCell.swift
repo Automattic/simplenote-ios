@@ -10,6 +10,26 @@ class SwitchTableViewCell: UITableViewCell {
     ///
     private(set) lazy var switchControl = UISwitch()
 
+    /// Accessibility Hint to be applied over the control, whenever it's On
+    ///
+    var enabledAccessibilityHint: String?
+
+    /// Accessibility Hint to be applied over the control, whenever it's Off
+    ///
+    var disabledAccessibilityHint: String?
+
+    /// Indicates if the switch is On / Off
+    ///
+    var isOn: Bool {
+        get {
+            switchControl.isOn
+        }
+        set {
+            switchControl.isOn = newValue
+            switchControl.accessibilityHint = newValue ? enabledAccessibilityHint : disabledAccessibilityHint
+        }
+    }
+
     /// Listener: Receives the new State
     ///
     var onChange: ((UISwitch) -> Void)?
