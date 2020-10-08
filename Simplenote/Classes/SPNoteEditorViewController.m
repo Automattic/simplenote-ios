@@ -1345,7 +1345,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     newNote.creationDate = [NSDate date];
 
     // Set the note's markdown tag according to the global preference (defaults NO for new accounts)
-    newNote.markdown = [[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey];
+    newNote.markdown = [[Options shared] markdown];
 
     NSString *filteredTagName = [[SPAppDelegate sharedDelegate] filteredTagName];
     if (filteredTagName.length > 0) {
@@ -1538,10 +1538,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         case 2: // Toggle Markdown
         {
             // If Markdown is being enabled and it was previously disabled
-            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
-
-            // Update the global preference to use when creating new notes
-            [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
+            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![Options shared].markdown);
             break;
         }
         default: break;

@@ -113,6 +113,7 @@ private extension OptionsViewController {
 
     @IBAction
     func markdownWasPressed(_ sender: UISwitch) {
+        Options.shared.markdown = sender.isOn
         SPObjectManager.shared().updateMarkdownState(note, markdown: sender.isOn)
         SPTracker.trackEditorNoteMarkdownEnabled(sender.isOn)
     }
