@@ -1518,11 +1518,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.modified = YES;
 
     switch (index) {
-        case 0: // Publish Note
-        {
-//            [self updatePublishUI];
-            break;
-        }
         case 2: // Toggle Markdown
         {
             // If Markdown is being enabled and it was previously disabled
@@ -1533,36 +1528,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-/*
-- (void)updatePublishUI {
-    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
-    UIButton *urlButton = [self.noteActivityView buttonAtIndex:0];
-    if (_currentNote.published && _currentNote.publishURL.length == 0) {
-        [self.noteActivityView showActivityIndicator];
-        [urlButton setTitle:NSLocalizedString(@"Publishing...", @"Message shown when a note is in the processes of being published")
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = NO;
-    } else if (_currentNote.published && _currentNote.publishURL.length > 0) {
-        [self.noteActivityView hideActivityIndicator];
-        [urlButton setTitle:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = YES;
-    } else if (!_currentNote.published && _currentNote.publishURL.length == 0) {
-        [self.noteActivityView hideActivityIndicator];
-        urlButton.enabled = NO;
-        publishToggle.enabled = YES;
-    } else if (!_currentNote.published && _currentNote.publishURL.length > 0) {
-        [self.noteActivityView showActivityIndicator];
-        [urlButton setTitle:NSLocalizedString(@"Unpublishing...", @"Message shown when a note is in the processes of being unpublished")
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = NO;
-    }
-}
-
- */
 - (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
 
     switch (index) {
@@ -1692,7 +1657,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)showNoteActivityViewController
-{    
+{
     if (!_currentNote.published || !(_currentNote.publishURL.length > 0))
         return;
     
