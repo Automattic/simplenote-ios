@@ -1416,7 +1416,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (void)presentCollaboratorsController
+- (void)addCollaboratorsAction:(id)sender
 {    
     [SPTracker trackEditorCollaboratorsAccessed];
 	   

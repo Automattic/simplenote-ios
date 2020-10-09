@@ -6,7 +6,6 @@ import SimplenoteFoundation
 // MARK: - OptionsControllerDelegate
 //
 protocol OptionsControllerDelegate: class {
-    func optionsControllerDidPressCollaborate(_ sender: OptionsViewController)
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
@@ -374,7 +373,7 @@ private extension OptionsViewController {
 
     @IBAction
     func collaborateWasPressed() {
-        delegate?.optionsControllerDidPressCollaborate(self)
+
     }
 
     @IBAction

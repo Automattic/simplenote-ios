@@ -227,14 +227,6 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         }
     }
 
-    func optionsControllerDidPressCollaborate(_ sender: OptionsViewController) {
-        sender.dismiss(animated: true, completion: nil)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.presentCollaboratorsController()
-        }
-    }
-
     func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
