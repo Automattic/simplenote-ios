@@ -1775,9 +1775,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                           completion:nil];
     
 }
- */
-- (void)addCollaboratorsAction:(id)sender
-{    
+
+
+ - (void)addCollaboratorsAction:(id)sender {
+
     [SPTracker trackEditorCollaboratorsAccessed];
 	   
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
@@ -1793,13 +1794,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                           completion:nil];
     
 }
-/*
+
 -(void)togglePinStatusAction:(id)sender
 {
 	_currentNote.pinned = !_currentNote.pinned;
 	self.modified = YES;
     if (_currentNote.pinned) {
-    
         [SPTracker trackEditorNotePinned];
     } else {
         [SPTracker trackEditorNoteUnpinned];
