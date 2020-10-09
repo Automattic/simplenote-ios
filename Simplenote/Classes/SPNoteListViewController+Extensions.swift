@@ -364,12 +364,7 @@ extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
         previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
 
         /// Setup the Editor
-        let editorViewController = EditorFactory.shared.build()
-        editorViewController.display(note)
-        editorViewController.isPreviewing = true
-        editorViewController.searchString = searchText
-
-        return editorViewController
+        return previewingViewController(for: note)
     }
 
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
@@ -509,6 +504,32 @@ extension SPNoteListViewController: UITableViewDelegate {
             break
         }
     }
+
+    @available(iOS 13.0, *)
+    public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard isDeletedFilterActive == false, let note = notesListController.object(at: indexPath) as? Note else {
+            return nil
+        }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: {
+            return self.previewingViewController(for: note)
+
+        }, actionProvider: { suggestedActions in
+            return self.contextMenu(for: note)
+        })
+    }
+
+    @available(iOS 13.0, *)
+    public func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let editorViewController = animator.previewViewController as? SPNoteEditorViewController else {
+            return
+        }
+
+        animator.addCompletion {
+            editorViewController.isPreviewing = false
+            self.show(editorViewController, sender: self)
+        }
+    }
 }
 
 
@@ -622,6 +643,47 @@ private extension SPNoteListViewController {
             }
         ]
     }
+}
+
+
+// MARK: - UIMenu
+//
+@available(iOS 13.0, *)
+private extension SPNoteListViewController {
+
+    /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
+    ///
+    func contextMenu(for note: Note) -> UIMenu {
+        let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
+            self?.copyInterlink(to: note)
+        }
+
+        let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
+            self?.share(note: note)
+        }
+
+        /// NOTE:
+        /// iOS 13 exhibits a broken animation when performing a Delete OP from a ContextMenu.
+        /// Since this appears to be fixed in iOS 14, quick workaround is: remove Delete from the Contextual Actions for iOS 13.
+        ///
+        /// Ref.: https://github.com/Automattic/simplenote-ios/pull/902/files
+        ///
+        guard #available(iOS 14.0, *) else {
+            return UIMenu(title: "", children: [copy, share])
+        }
+
+        let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
+            self?.delete(note: note)
+        }
+
+        return UIMenu(title: "", children: [copy, share, delete])
+    }
+}
+
+
+// MARK: - Services
+//
+private extension SPNoteListViewController {
 
     func delete(note: Note) {
         SPTracker.trackListNoteDeleted()
@@ -659,6 +721,15 @@ private extension SPNoteListViewController {
         presentationController?.sourceView = tableView
 
         present(activityController, animated: true, completion: nil)
+    }
+
+    func previewingViewController(for note: Note) -> SPNoteEditorViewController {
+        let editorViewController = EditorFactory.shared.build()
+        editorViewController.display(note)
+        editorViewController.isPreviewing = true
+        editorViewController.searchString = searchText
+
+        return editorViewController
     }
 }
 
@@ -763,6 +834,9 @@ extension SPNoteListViewController {
 //
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
+    static let copyLink = NSLocalizedString("Copy Link", comment: "Copies Link to a Note")
+    static let delete = NSLocalizedString("Delete", comment: "Deletes a note")
+    static let share = NSLocalizedString("Share...", comment: "Shares a note")
 }
 
 private enum Constants {
