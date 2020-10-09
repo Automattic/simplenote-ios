@@ -1510,15 +1510,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     [UIView animateWithDuration:0.25
                      animations:^{
-
                          snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
-                         snapshot.alpha = 0.0;
-
+                         snapshot.alpha = UIKitConstants.alpha0_0;
                      } completion:^(BOOL finished) {
-
                          [snapshot removeFromSuperview];
                          [self backButtonAction:nil];
-
                      }];
 }
 

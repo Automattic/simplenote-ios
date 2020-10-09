@@ -373,7 +373,7 @@ private extension OptionsViewController {
 
     @IBAction
     func collaborateWasPressed() {
-
+        NSLog("Collab!")
     }
 
     @IBAction
