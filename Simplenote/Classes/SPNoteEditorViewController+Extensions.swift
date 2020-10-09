@@ -223,7 +223,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.shareNoteContentAction()
+            self.presentShareController()
         }
     }
 
@@ -231,7 +231,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.addCollaboratorsAction()
+            self.presentCollaboratorsController()
         }
     }
 
@@ -239,7 +239,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.viewVersionAction()
+            self.presentHistoryController()
         }
     }
 
@@ -275,6 +275,22 @@ extension SPNoteEditorViewController {
         }
 
         presentNoteOptions(for: note, from: sender)
+    }
+
+    @IBAction
+    func presentShareController() {
+        guard let note = currentNote, let activityController = UIActivityViewController(note: note) else {
+            return
+        }
+
+        activityController.modalPresentationStyle = .popover
+
+        let presentationController = activityController.popoverPresentationController
+        presentationController?.sourceRect = actionButton.bounds
+        presentationController?.sourceView = actionButton
+
+        present(activityController, animated: true, completion: nil)
+        SPTracker.trackEditorNoteContentShared()
     }
 }
 

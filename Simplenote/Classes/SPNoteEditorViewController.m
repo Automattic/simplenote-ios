@@ -1416,14 +1416,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (CGRect)presentationRectForActionButton {
-    
-    return [self.view convertRect:self.actionButton.frame
-                         fromView:self.actionButton.superview];
-    
-}
-
-- (void)addCollaboratorsAction
+- (void)presentCollaboratorsController
 {    
     [SPTracker trackEditorCollaboratorsAccessed];
 	   
@@ -1441,7 +1434,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)viewVersionAction
+- (void)presentHistoryController
 {
     // check reachability status
     if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
@@ -1505,31 +1498,28 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [SPTracker trackEditorNoteDeleted];
 
+    // create a snapshot before the animation
+    UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
+    snapshot.frame = _noteEditorTextView.frame;
+    [self.view addSubview:snapshot];
+
     [[SPObjectManager sharedManager] trashNote:_currentNote];
     [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
-    [self backButtonAction:nil];
-}
 
-- (void)shareNoteContentAction
-{
-    if (_currentNote.content == nil) {
-        return;
-    }
+    [self clearNote];
 
-    [self save];
+    [UIView animateWithDuration:0.25
+                     animations:^{
 
-    [SPTracker trackEditorNoteContentShared];
+                         snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
+                         snapshot.alpha = 0.0;
 
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:_currentNote];
+                     } completion:^(BOOL finished) {
 
-    if ([UIDevice isPad]) {
-        acv.modalPresentationStyle = UIModalPresentationPopover;
-        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
-        acv.popoverPresentationController.sourceView = self.view;
-    }
+                         [snapshot removeFromSuperview];
+                         [self backButtonAction:nil];
 
-    [self presentViewController:acv animated:YES completion:nil];
+                     }];
 }
 
 

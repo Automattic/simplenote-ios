@@ -46,10 +46,9 @@
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
 
-- (void)addCollaboratorsAction;
-- (void)viewVersionAction;
+- (void)presentCollaboratorsController;
+- (void)presentHistoryController;
 - (void)trashNoteAction;
-- (void)shareNoteContentAction;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
