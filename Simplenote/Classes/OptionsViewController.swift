@@ -135,7 +135,6 @@ private extension OptionsViewController {
 private extension OptionsViewController {
 
     func dequeueAndConfigureCell(for row: Row, at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-
         switch row {
         case .pinToTop:
             return dequeuePinToTopCell(from: tableView, at: indexPath)
