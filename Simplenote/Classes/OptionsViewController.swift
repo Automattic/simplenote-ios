@@ -3,6 +3,13 @@ import UIKit
 import SimplenoteFoundation
 
 
+// MARK: - OptionsControllerDelegate
+//
+protocol OptionsControllerDelegate: class {
+    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
+}
+
+
 // MARK: - OptionsViewController
 //
 class OptionsViewController: UIViewController {
@@ -32,10 +39,9 @@ class OptionsViewController: UIViewController {
     ///
     private var markdownWasEnabled = false
 
-    /// Closure to be executed on dismissal.
-    /// - Note: We'll pass over a Boolean indicating if Markdown flaghas been enabled
+    /// OptionsController's Delegate
     ///
-    var onDismiss: ((Bool) -> Void)?
+    weak var delegate: OptionsControllerDelegate?
 
 
     /// Designated Initializer
@@ -64,7 +70,7 @@ class OptionsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        onDismiss?(markdownWasEnabled)
+        delegate?.optionsControllerDidDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 
