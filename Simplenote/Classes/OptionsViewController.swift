@@ -6,10 +6,10 @@ import SimplenoteFoundation
 // MARK: - OptionsControllerDelegate
 //
 protocol OptionsControllerDelegate: class {
-    func optionsControllerDidPressCollaborate(_ sender: OptionsViewController)
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
+    func optionsController(_ sender: OptionsViewController, modified note: Note)
     func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
 }
 
@@ -374,7 +374,10 @@ private extension OptionsViewController {
 
     @IBAction
     func collaborateWasPressed() {
-        delegate?.optionsControllerDidPressCollaborate(self)
+        let collaborateViewController = SPAddCollaboratorsViewController()
+        collaborateViewController.collaboratorDelegate = self
+        collaborateViewController.setup(withCollaborators: note.emailTags)
+        navigationController?.pushViewController(collaborateViewController, animated: true)
     }
 
     @IBAction
@@ -385,6 +388,25 @@ private extension OptionsViewController {
     @IBAction
     func doneWasPressed() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - SPCollaboratorDelegate
+//
+extension OptionsViewController: SPCollaboratorDelegate {
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController, shouldAddCollaborator collaboratorEmail: String) -> Bool {
+        note.hasTag(collaboratorEmail) == false
+    }
+
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController, didAddCollaborator collaboratorEmail: String) {
+        SPObjectManager.shared().insertTagNamed(collaboratorEmail, note: note)
+        SPTracker.trackEditorEmailTagAdded()
+    }
+
+    func collaboratorViewController(_ viewController: SPAddCollaboratorsViewController, didRemoveCollaborator collaboratorEmail: String) {
+        SPObjectManager.shared().removeTagNamed(collaboratorEmail, note: note)
+        SPTracker.trackEditorEmailTagRemoved()
     }
 }
 
