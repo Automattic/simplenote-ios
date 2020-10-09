@@ -3,6 +3,17 @@ import UIKit
 import SimplenoteFoundation
 
 
+// MARK: - OptionsControllerDelegate
+//
+protocol OptionsControllerDelegate: class {
+    func optionsControllerDidPressCollaborate(_ sender: OptionsViewController)
+    func optionsControllerDidPressHistory(_ sender: OptionsViewController)
+    func optionsControllerDidPressShare(_ sender: OptionsViewController)
+    func optionsControllerDidPressTrash(_ sender: OptionsViewController)
+    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
+}
+
+
 // MARK: - OptionsViewController
 //
 class OptionsViewController: UIViewController {
@@ -32,10 +43,9 @@ class OptionsViewController: UIViewController {
     ///
     private var markdownWasEnabled = false
 
-    /// Closure to be executed on dismissal.
-    /// - Note: We'll pass over a Boolean indicating if Markdown flaghas been enabled
+    /// OptionsController's Delegate
     ///
-    var onDismiss: ((Bool) -> Void)?
+    weak var delegate: OptionsControllerDelegate?
 
 
     /// Designated Initializer
@@ -64,7 +74,7 @@ class OptionsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        onDismiss?(markdownWasEnabled)
+        delegate?.optionsControllerDidDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 
@@ -343,12 +353,12 @@ private extension OptionsViewController {
 
     @IBAction
     func shareWasPressed() {
-        NSLog("Share!")
+        delegate?.optionsControllerDidPressShare(self)
     }
 
     @IBAction
     func historyWasPressed() {
-        NSLog("History!")
+        delegate?.optionsControllerDidPressHistory(self)
     }
 
     @IBAction
@@ -364,12 +374,12 @@ private extension OptionsViewController {
 
     @IBAction
     func collaborateWasPressed() {
-        NSLog("Collab!")
+        delegate?.optionsControllerDidPressCollaborate(self)
     }
 
     @IBAction
     func trashWasPressed() {
-        NSLog("Trash!")
+        delegate?.optionsControllerDidPressTrash(self)
     }
 
     @IBAction

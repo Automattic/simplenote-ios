@@ -1428,7 +1428,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)addCollaboratorsAction:(id)sender
+- (void)addCollaboratorsAction
 {    
     [SPTracker trackEditorCollaboratorsAccessed];
 	   
@@ -1446,8 +1446,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)viewVersionAction:(id)sender {
-    
+- (void)viewVersionAction
+{
     // check reachability status
     if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
 
@@ -1506,33 +1506,37 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return minVersion;
 }
 
-- (void)trashNoteAction:(id)sender {
-
+- (void)trashNoteAction
+{
     [SPTracker trackEditorNoteDeleted];
 
-    // create a snapshot before the animation
-    UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = _noteEditorTextView.frame;
-    [self.view addSubview:snapshot];
-    
     [[SPObjectManager sharedManager] trashNote:_currentNote];
     [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
-    
-    [self clearNote];
-    
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         
-                         snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
-                         snapshot.alpha = 0.0;
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         [snapshot removeFromSuperview];
-                         [self backButtonAction:nil];
-                         
-                     }];
+    [self backButtonAction:nil];
 }
+
+- (void)shareNoteContentAction
+{
+    if (_currentNote.content == nil) {
+        return;
+    }
+
+    [self save];
+
+    [SPTracker trackEditorNoteContentShared];
+
+    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:_currentNote];
+
+    if ([UIDevice isPad]) {
+        acv.modalPresentationStyle = UIModalPresentationPopover;
+        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
+        acv.popoverPresentationController.sourceView = self.view;
+    }
+
+    [self presentViewController:acv animated:YES completion:nil];
+}
+
 
 #pragma mark SPHorizontalPickerView delegate methods
 

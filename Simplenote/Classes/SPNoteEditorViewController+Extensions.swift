@@ -197,13 +197,7 @@ private extension SPNoteEditorViewController {
 
     func presentNoteOptions(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
-        optionsViewController.onDismiss = { [weak self] markdownWasEnabled in
-            guard markdownWasEnabled else {
-                return
-            }
-
-            self?.bounceMarkdownPreviewAfterDelay()
-        }
+        optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
         navigationController.displaysBlurEffect = true
@@ -218,6 +212,51 @@ private extension SPNoteEditorViewController {
         present(navigationController, animated: true, completion: nil)
 
         SPTracker.trackEditorActivitiesAccessed()
+    }
+}
+
+
+// MARK: - OptionsControllerDelegate
+//
+extension SPNoteEditorViewController: OptionsControllerDelegate {
+    func optionsControllerDidPressShare(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.shareNoteContentAction()
+        }
+    }
+
+    func optionsControllerDidPressCollaborate(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.addCollaboratorsAction()
+        }
+    }
+
+    func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.viewVersionAction()
+        }
+    }
+
+    func optionsControllerDidPressTrash(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.trashNoteAction()
+        }
+    }
+
+    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
+        guard markdownWasEnabled else {
+            return
+        }
+
+        bounceMarkdownPreviewAfterDelay()
     }
 }
 
