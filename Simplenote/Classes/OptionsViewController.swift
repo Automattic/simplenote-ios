@@ -23,9 +23,7 @@ class OptionsViewController: UIViewController {
     ///
     private let sections: [Section] = [
         Section(rows: [.pinToTop, .markdown, .copyInternalURL, .share, .history]),
-        Section(header: NSLocalizedString("Public Link", comment: "Publish to Web Section Header"),
-                footer: NSLocalizedString("Publish your note to the web and generate a sharable URL.", comment: "Publish to Web Section Footer"),
-                rows: [.publish, .copyPublicURL]),
+        Section(rows: [.publish, .copyPublicURL]),
         Section(rows: [.collaborate]),
         Section(rows: [.trash])
     ]
@@ -144,14 +142,6 @@ extension OptionsViewController: UITableViewDataSource {
         let row = rowAtIndexPath(indexPath)
         return dequeueAndConfigureCell(for: row, at: indexPath, in: tableView)
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        sections[section].header
-    }
-
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        sections[section].footer
-    }
 }
 
 
@@ -198,6 +188,7 @@ private extension OptionsViewController {
 
     func dequeuePinToTopCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .pin)
         cell.title = NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State")
         cell.enabledAccessibilityHint = NSLocalizedString("Unpin note", comment: "Pin State Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Pin note", comment: "Pin State Accessibility Hint")
@@ -211,6 +202,7 @@ private extension OptionsViewController {
 
     func dequeueMarkdownCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .note)
         cell.title = NSLocalizedString("Markdown", comment: "Toggles the Markdown State")
         cell.enabledAccessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Markdown Accessibility Hint")
@@ -224,6 +216,7 @@ private extension OptionsViewController {
 
     func dequeueCopyInterlinkCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .link)
         cell.title = NSLocalizedString("Copy Internal Link", comment: "Copies the Note's Interlink")
         cell.selectable = true
         return cell
@@ -231,18 +224,21 @@ private extension OptionsViewController {
 
     func dequeueShareCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .share)
         cell.title = NSLocalizedString("Share", comment: "Opens the Share Sheet")
         return cell
     }
 
     func dequeueHistoryCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .history)
         cell.title = NSLocalizedString("History", comment: "Opens the Note's History")
         return cell
     }
 
     func dequeuePublishCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .published)
         cell.isOn = note.published
         cell.title = NSLocalizedString("Publish", comment: "Publishes a Note to the Web")
         cell.enabledAccessibilityHint = NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint")
@@ -256,13 +252,15 @@ private extension OptionsViewController {
 
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
-        cell.title = copyLinkText(for: note)
+        cell.imageView?.image = .image(name: .copy)
+        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
         cell.selectable = canCopyLink(to: note)
         return cell
     }
 
     func dequeueCollaborateCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.imageView?.image = .image(name: .collaborate)
         cell.title = NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI")
         return cell
     }
@@ -270,7 +268,7 @@ private extension OptionsViewController {
     func dequeueTrashCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
         cell.title = NSLocalizedString("Move to Trash", comment: "Delete Action")
-        cell.destructive = true
+        cell.imageView?.image = .image(name: .trash)
         return cell
     }
 }
@@ -384,15 +382,7 @@ private extension OptionsViewController {
 // MARK: - Section: Defines a TableView Section
 //
 private struct Section {
-    let header: String?
-    let footer: String?
     let rows: [Row]
-
-    init(header: String? = nil, footer: String? = nil, rows: [Row]) {
-        self.header = header
-        self.footer = footer
-        self.rows = rows
-    }
 }
 
 

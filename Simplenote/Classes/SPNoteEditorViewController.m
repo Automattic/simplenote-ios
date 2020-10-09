@@ -1428,28 +1428,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)shareNoteContentAction:(id)sender
-{
-    if (_currentNote.content == nil) {
-        return;
-    }
-    
-    [self save];
-    
-    [SPTracker trackEditorNoteContentShared];
-
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:_currentNote];
-
-    if ([UIDevice isPad]) {
-        acv.modalPresentationStyle = UIModalPresentationPopover;
-        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
-        acv.popoverPresentationController.sourceView = self.view;
-    }
-
-    [self presentViewController:acv animated:YES completion:nil];
-}
-
 - (void)addCollaboratorsAction:(id)sender
 {    
     [SPTracker trackEditorCollaboratorsAccessed];
