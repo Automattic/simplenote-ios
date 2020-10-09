@@ -83,7 +83,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // State
 @property (nonatomic, assign) BOOL                      actionSheetVisible;
 @property (nonatomic, assign) BOOL                      blankNote;
-@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
 @property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
 @property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
@@ -677,6 +676,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self.view endEditing:YES];
 }
 
+- (void)bounceMarkdownPreviewAfterDelay
+{
+    [self performSelector:@selector(bounceMarkdownPreview) withObject:nil afterDelay:UIKitConstants.animationDelayShort];
+}
+
 // Bounces a snapshot of the text view to hint to the user how to access
 // the Markdown preview.
 - (void)bounceMarkdownPreview
@@ -715,8 +719,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 } completion:^(BOOL finished) {
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
-
-                    self.bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -759,13 +761,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 
 #pragma mark - UIPopoverPresentationControllerDelegate
-
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
-{
-    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
-        [self bounceMarkdownPreview];
-    }
-}
 
 // The activity sheet breaks when transitioning from a popover to a modal-style
 // presentation, so we'll tell it not to change its presentation if the
@@ -1513,21 +1508,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
  */
 
-- (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
-    
-    self.modified = YES;
-
-    switch (index) {
-        case 2: // Toggle Markdown
-        {
-            // If Markdown is being enabled and it was previously disabled
-            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![Options shared].markdown);
-            break;
-        }
-        default: break;
-    }
-}
-
 - (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
 
     switch (index) {
@@ -1592,10 +1572,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     if ([actionSheet isEqual:self.versionActionSheet]) {
         self.versionActionSheet = nil;
-    }
-
-    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
-        [self bounceMarkdownPreview];
     }
 }
 

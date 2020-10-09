@@ -197,6 +197,13 @@ private extension SPNoteEditorViewController {
 
     func presentNoteOptions(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
+        optionsViewController.onDismiss = { [weak self] markdownWasEnabled in
+            guard markdownWasEnabled else {
+                return
+            }
+
+            self?.bounceMarkdownPreviewAfterDelay()
+        }
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
         navigationController.displaysBlurEffect = true

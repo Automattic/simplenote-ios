@@ -30,6 +30,15 @@ class OptionsViewController: UIViewController {
         Section(rows: [.trash])
     ]
 
+    /// Indicates if the Markdown flag was Enabled
+    ///
+    private var markdownWasEnabled = false
+
+    /// Closure to be executed on dismissal.
+    /// - Note: We'll pass over a Boolean indicating if Markdown flaghas been enabled
+    ///
+    var onDismiss: ((Bool) -> Void)?
+
 
     /// Designated Initializer
     ///
@@ -53,6 +62,11 @@ class OptionsViewController: UIViewController {
         refreshStyle()
         refreshInterface()
         refreshPreferredSize()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        onDismiss?(markdownWasEnabled)
     }
 }
 
@@ -320,6 +334,7 @@ private extension OptionsViewController {
         Options.shared.markdown = newState
         SPObjectManager.shared().updateMarkdownState(note, markdown: newState)
         SPTracker.trackEditorNoteMarkdownEnabled(newState)
+        markdownWasEnabled = newState
     }
 
     @IBAction
