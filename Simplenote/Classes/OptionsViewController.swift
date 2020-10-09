@@ -72,12 +72,6 @@ private extension OptionsViewController {
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
-}
-
-
-// MARK: - Interface
-//
-private extension OptionsViewController {
 
     func refreshStyle() {
         view.backgroundColor = .simplenoteTableViewBackgroundColor
