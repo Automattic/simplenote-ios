@@ -256,7 +256,9 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
             return
         }
 
-        bounceMarkdownPreviewAfterDelay()
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.bounceMarkdownPreview()
+        }
     }
 }
 
