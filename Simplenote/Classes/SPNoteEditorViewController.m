@@ -1416,13 +1416,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (CGRect)presentationRectForActionButton {
-    
-    return [self.view convertRect:self.actionButton.frame
-                         fromView:self.actionButton.superview];
-    
-}
-
 - (void)viewVersionAction:(id)sender {
     
     // check reachability status
