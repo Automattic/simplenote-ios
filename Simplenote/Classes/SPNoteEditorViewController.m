@@ -1414,27 +1414,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (void)presentCollaboratorsController
-{    
-    [SPTracker trackEditorCollaboratorsAccessed];
-	   
-    SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
-    vc.collaboratorDelegate = self;
-    [vc setupWithCollaborators:_currentNote.emailTagsArray];
-
-    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:vc];
-    navController.displaysBlurEffect = YES;
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:navController
-                                            animated:YES
-                                          completion:nil];
-    
-}
-
 - (void)presentHistoryController
 {
-    // check reachability status
     if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
 
         NSString *title = NSLocalizedString(@"version-alert-message", @"Error alert message shown when trying to view history of a note without an internet connection");

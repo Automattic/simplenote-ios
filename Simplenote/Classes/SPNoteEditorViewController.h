@@ -47,7 +47,6 @@
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
 
-- (void)presentCollaboratorsController;
 - (void)presentHistoryController;
 - (void)trashNoteAction;
 
