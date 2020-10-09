@@ -673,11 +673,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self.view endEditing:YES];
 }
 
-- (void)bounceMarkdownPreviewAfterDelay
-{
-    [self performSelector:@selector(bounceMarkdownPreview) withObject:nil afterDelay:UIKitConstants.animationDelayShort];
-}
-
 // Bounces a snapshot of the text view to hint to the user how to access
 // the Markdown preview.
 - (void)bounceMarkdownPreview

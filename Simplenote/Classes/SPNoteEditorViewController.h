@@ -39,7 +39,7 @@
 - (void)setSearchString:(NSString *)string;
 - (void)clearNote;
 - (void)endEditing;
-- (void)bounceMarkdownPreviewAfterDelay;
+- (void)bounceMarkdownPreview;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
