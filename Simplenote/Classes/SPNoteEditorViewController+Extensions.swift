@@ -219,11 +219,12 @@ private extension SPNoteEditorViewController {
 // MARK: - OptionsControllerDelegate
 //
 extension SPNoteEditorViewController: OptionsControllerDelegate {
-    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
+    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
         guard markdownWasEnabled else {
             return
         }
 
+        // Let's wait a bit until the Dismiss Animation concludes
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.bounceMarkdownPreview()
         }

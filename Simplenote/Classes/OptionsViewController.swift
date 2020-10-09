@@ -6,7 +6,7 @@ import SimplenoteFoundation
 // MARK: - OptionsControllerDelegate
 //
 protocol OptionsControllerDelegate: class {
-    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
+    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
 }
 
 
@@ -70,7 +70,7 @@ class OptionsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.optionsControllerDidDismiss(self, markdownWasEnabled: markdownWasEnabled)
+        delegate?.optionsControllerWillDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 
