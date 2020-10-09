@@ -655,7 +655,7 @@ private extension SPNoteListViewController {
     ///
     func contextMenu(for note: Note) -> UIMenu {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
-            self?.copyInterlink(to: note)
+            self?.copyInternalLink(to: note)
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
