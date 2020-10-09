@@ -1600,38 +1600,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-#pragma mark SPCollaboratorDelegate methods 
-
-- (BOOL)collaboratorViewController:(SPAddCollaboratorsViewController *)viewController
-             shouldAddCollaborator:(NSString *)collaboratorName {
-    
-    return ![_currentNote hasTag:collaboratorName];
-    
-}
-
-- (void)collaboratorViewController:(SPAddCollaboratorsViewController *)viewController
-                didAddCollaborator:(NSString *)collaboratorName {
-
-    [_currentNote addTag:collaboratorName];
-    self.blankNote = NO;
-    self.modified = YES;
-    [self save];
-    
-    [SPTracker trackEditorEmailTagAdded];
-}
-
-- (void)collaboratorViewController:(SPAddCollaboratorsViewController *)viewController
-             didRemoveCollaborator:(NSString *)collaboratorName {
-    
-    [_currentNote stripTag:collaboratorName];
-    self.blankNote = NO;
-    self.modified = YES;
-    [self save];
-
-    [SPTracker trackEditorEmailTagRemoved];
-}
-
-
 #pragma mark SPAddTagDelegate methods
 
 - (void)tagViewDidChange:(SPTagView *)tagView
