@@ -43,6 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)permenentlyDeleteNote:(Note *)note;
 - (void)emptyTrash;
 
+#pragma mark - Sharing
+
+- (void)insertTagNamed:(NSString *)tagName note:(Note *)note;
+- (void)removeTagNamed:(NSString *)tagName note:(Note *)note;
+
 @end
 
 NS_ASSUME_NONNULL_END
