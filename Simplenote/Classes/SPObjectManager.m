@@ -227,42 +227,6 @@
     
 }
 
-- (void)updateMarkdownState:(Note *)note markdown:(BOOL)markdown
-{
-    if (note.markdown == markdown) {
-        return;
-    }
-
-    note.markdown = markdown;
-    note.modificationDate = [NSDate date];
-
-    [self save];
-}
-
-- (void)updatePublishedState:(Note *)note published:(BOOL)published
-{
-    if (note.published == published) {
-        return;
-    }
-
-    note.published = published;
-    note.modificationDate = [NSDate date];
-
-    [self save];
-}
-
-- (void)updatePinnedState:(Note *)note pinned:(BOOL)pinned
-{
-    if (note.pinned == pinned) {
-        return;
-    }
-
-    note.pinned = pinned;
-    note.modificationDate = [NSDate date];
-
-    [self save];
-}
-
 - (void)trashNote:(Note *)note
 {
     note.deleted = YES;
@@ -295,6 +259,45 @@
         [self permenentlyDeleteNote:note];
     }
     
+    [self save];
+}
+
+
+#pragma mark - Updating Notes
+
+- (void)updateMarkdownState:(BOOL)markdown note:(Note *)note
+{
+    if (note.markdown == markdown) {
+        return;
+    }
+
+    note.markdown = markdown;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePublishedState:(BOOL)published note:(Note *)note
+{
+    if (note.published == published) {
+        return;
+    }
+
+    note.published = published;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePinnedState:(BOOL)pinned note:(Note *)note
+{
+    if (note.pinned == pinned) {
+        return;
+    }
+
+    note.pinned = pinned;
+    note.modificationDate = [NSDate date];
+
     [self save];
 }
 
