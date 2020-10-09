@@ -6,14 +6,6 @@ import UIKit
 //
 class Value1TableViewCell: UITableViewCell {
 
-    /// Indicates if the cell displays a destructive action
-    ///
-    var destructive: Bool = false {
-        didSet {
-            reloadTextStyles()
-        }
-    }
-
     /// Indicates if the row is Selectable
     ///
     var selectable: Bool = true {
@@ -50,7 +42,6 @@ class Value1TableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        destructive = false
         selectable = true
     }
 }
@@ -69,21 +60,9 @@ private extension Value1TableViewCell {
     }
 
     func reloadTextStyles() {
-        let textColor = foregroundColor
-        selectionStyle = selectable ? .default : .none
+        let textColor: UIColor = selectable ? .simplenoteTextColor : .simplenotePlaceholderTextColor
         textLabel?.textColor = textColor
-        detailTextLabel?.textColor = textColor
-    }
-
-    var foregroundColor: UIColor {
-        guard selectable else {
-            return .simplenotePlaceholderTextColor
-        }
-
-        guard destructive else {
-            return .simplenoteTintColor
-        }
-
-        return .simplenoteDestructiveActionColor
+        imageView?.tintColor = textColor
+        selectionStyle = selectable ? .default : .none
     }
 }
