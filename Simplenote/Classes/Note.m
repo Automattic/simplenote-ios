@@ -24,7 +24,6 @@
 @synthesize titlePreview;
 @synthesize bodyPreview;
 @synthesize tagsArray;
-@synthesize emailTagsArray;
 @dynamic content;
 @dynamic creationDate;
 @dynamic deleted;
@@ -52,7 +51,6 @@ SEL notifySelector;
     [super awakeFromFetch];
     [self createPreview];
     [self updateTagsArray];
-    [self updateEmailTagsArray];
     [self updateSystemTagsArray];
     [self updateSystemTagFlags];
 }
@@ -69,7 +67,6 @@ SEL notifySelector;
     self.systemTags = @"[]";
     [self updateSystemTagsArray];
     [self updateTagsArray];
-    [self updateEmailTagsArray];
 
 }
 
@@ -197,7 +194,6 @@ SEL notifySelector;
     NSString *newString = [newTags copy];
     [self setPrimitiveValue:newString forKey:@"tags"]; 
     [self updateTagsArray];
-    [self updateEmailTagsArray];
     [self didChangeValueForKey:@"tags"];
 }
 
@@ -248,7 +244,6 @@ SEL notifySelector;
     }
     
     [self updateTagsArray];
-    [self updateEmailTagsArray];
 }
 
 - (BOOL)pinned {
@@ -409,15 +404,6 @@ SEL notifySelector;
 
 - (void)updateTagsArray {
     tagsArray = tags.length > 0 ? [[tags objectFromJSONString] mutableCopy] : [NSMutableArray arrayWithCapacity:2];
-}
-
-- (void)updateEmailTagsArray {
-
-    emailTagsArray = [NSMutableArray arrayWithCapacity:2];
-    for (NSString *tag in tagsArray) {
-        if ([tag isValidEmailAddress])
-            [emailTagsArray addObject:tag];
-    }
 }
 
 - (BOOL)hasTags {
