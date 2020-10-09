@@ -46,6 +46,18 @@ extension Options {
         }
     }
 
+    /// Indicates if it's the First Launch event was already handled
+    ///
+    @objc
+    var firstLaunch: Bool {
+        get {
+            defaults.bool(forKey: .firstLaunch)
+        }
+        set {
+            defaults.set(newValue, forKey: .firstLaunch)
+        }
+    }
+
     /// Returns the target Sort Mode for the Notes List
     ///
     @objc
@@ -94,6 +106,7 @@ extension Options {
         }
         set {
             defaults.set(newValue.rawValue, forKey: .theme)
+            SPTracker.trackSettingsThemeUpdated(newValue.description)
             NotificationCenter.default.post(name: .SPSimplenoteThemeChanged, object: nil)
         }
     }

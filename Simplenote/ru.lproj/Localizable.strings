@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Отладка";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Удалить";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Удалить заметки";
 
@@ -314,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "Новая заметка...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "Нет";
 
 /* Message shown in note list when no notes are in the current view */
@@ -352,9 +348,6 @@
 /* Select a note to view in the note editor */
 "Open note" = "Открыть заметку";
 
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Из-за обновления мог измениться порядок заметок. Изменить настройки сортировки?";
-
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Пароль";
 
@@ -375,9 +368,6 @@
 
 /* Number of changes pending to be sent */
 "Pendings" = "На утверждении";
-
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Закрепить";
 
 /* Action to mark a note as pinned */
 "Pin note" = "Закрепить заметку";
@@ -436,9 +426,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Требуется сброс";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Восстановить";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Восстановить заметку";
 
@@ -469,9 +456,6 @@
 
 /* Title of options screen */
 "Settings" = "Настройки";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Поделиться";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Поделиться аналитическими данными";
@@ -560,9 +544,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Разблокировать %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Открепить";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Открепить заметку";
 
@@ -605,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "Сотрудничество";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Да";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -644,9 +624,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "метка:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Отправить текущую заметку в корзину";

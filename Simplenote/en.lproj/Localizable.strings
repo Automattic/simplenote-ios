@@ -179,11 +179,17 @@
    Display internal debug status */
 "Debug" = "Debug";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug Disabled";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "This note was deleted on another device.";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostics";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Disable Markdown formatting";
@@ -225,17 +231,29 @@
 /* Pin Lock */
 "Enter your passcode" = "Enter your passcode";
 
+/* Error Title */
+"Error" = "Error";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ or contact us";
+
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
 
+/* FAQ or contact us */
+"Get Help" = "Get Help";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+
+/* Display help web page */
+"Help" = "Help";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
@@ -321,8 +339,7 @@
 /* Empty Note Placeholder */
 "New note..." = "New note...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "No";
 
 /* Message shown in note list when no notes are in the current view */
@@ -361,9 +378,6 @@
 
 /* Siri Suggestion to open our app */
 "Open Simplenote" = "Open Simplenote";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Our update may have changed the order in which your notes appear. Would you like to review sort settings?";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Passcode";
@@ -443,6 +457,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset Required";
 
+/* Response Title */
+"Response" = "Response";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Restore Note";
 
@@ -473,6 +490,9 @@
 
 /* Title of options screen */
 "Settings" = "Settings";
+
+/* Share Action */
+"Share" = "Share";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -515,6 +535,9 @@
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Sort Order";
+
+/* Title for the response's Status Code */
+"Status Code" = "Status Code";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -627,8 +650,7 @@
 /* Work at Automattic */
 "Work With Us" = "Work With Us";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Yes";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -639,4 +661,7 @@
 
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Your password is insecure and must be reset. The password requirements are:";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Debug Enabled 🐞";
 

@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debug";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Delete";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
 
@@ -314,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "New note...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "No";
 
 /* Message shown in note list when no notes are in the current view */
@@ -352,9 +348,6 @@
 /* Select a note to view in the note editor */
 "Open note" = "Άνοιγμα σημείωσης";
 
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Our update may have changed the order in which your notes appear. Would you like to review sort settings?";
-
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Συνθηματικό";
 
@@ -375,9 +368,6 @@
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
-
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Pin";
 
 /* Action to mark a note as pinned */
 "Pin note" = "Επισ\/νση";
@@ -436,9 +426,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset Required";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Ανάκτηση";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Ανάκτηση σημείωσης";
 
@@ -469,9 +456,6 @@
 
 /* Title of options screen */
 "Settings" = "Ρυθμίσεις";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Share";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -560,9 +544,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Ξεκλείδωμα %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Unpin";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Ακύρωση";
 
@@ -605,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "Work With Us";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Yes";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -644,9 +624,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Διαγραφή ετικέτας";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Διαγραφή σημείωσης";

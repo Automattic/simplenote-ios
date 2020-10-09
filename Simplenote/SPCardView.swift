@@ -62,7 +62,7 @@ private extension SPCardView {
 private extension SPCardView {
     func startListeningToNotifications() {
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(themeDidChange), name: .VSThemeManagerThemeDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .SPSimplenoteThemeChanged, object: nil)
     }
 
     func stopListeningToNotifications() {

@@ -1,1 +1,5 @@
-- Limite de tags atualizado para até 256 caracteres
+- Corrigido bug que impedia adicionar colaboradores que continham novos TLDs nos endereços de e-mail
+- Agora, deslizar uma anotação na lista exibe a ação Copiar link interno
+- Agora, manter um link interno pressionado envia a anotação desejada
+- O SO mínimo compatível passou a ser o iOS 12
+- Agora, o preenchimento automático de senha é a forma preferível de gerenciar suas credenciais

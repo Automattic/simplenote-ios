@@ -1,5 +1,5 @@
 #import "SPNoteListViewController.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPNavigationController.h"
 #import "SPNoteEditorViewController.h"
 
@@ -200,7 +200,7 @@
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     // Themes
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
 - (void)condensedPreferenceWasUpdated:(id)sender

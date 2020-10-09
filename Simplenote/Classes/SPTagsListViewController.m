@@ -1,6 +1,6 @@
 #import "SPTagsListViewController.h"
 #import "SPAppDelegate.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPTagListViewCell.h"
@@ -152,7 +152,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidHideMenuNotification object:nil];
     [nc addObserver:self selector:@selector(menuDidChangeVisibility:) name:UIMenuControllerDidShowMenuNotification object:nil];
     [nc addObserver:self selector:@selector(tagsSortOrderWasUpdated:) name:SPAlphabeticalTagSortPreferenceChangedNotification object:nil];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
     [nc addObserver:self selector:@selector(stopListeningToKeyboardNotifications) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
@@ -479,7 +479,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 - (void)settingsWasPressed {
-    [[SPAppDelegate sharedDelegate] showOptions];
+    [[SPAppDelegate sharedDelegate] presentSettingsViewController];
 }
 
 

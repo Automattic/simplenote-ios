@@ -30,14 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
 
-- (void)showOptions;
+- (void)presentSettingsViewController;
 
 - (void)save;
 - (void)logoutAndReset:(id)sender;
-
-- (NSString *)getPin:(BOOL)checkLegacy;
-- (void)setPin:(NSString *)newPin;
-- (void)removePin;
 
 - (void)presentNewNoteEditor;
 - (void)presentNoteWithUniqueIdentifier:(nullable NSString *)uuid;

@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "Debug";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "Hapus";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Hapus Catatan";
 
@@ -314,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "Catatan baru...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "Tidak";
 
 /* Message shown in note list when no notes are in the current view */
@@ -352,9 +348,6 @@
 /* Select a note to view in the note editor */
 "Open note" = "Buka catatan";
 
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "Pembaruan kami dapat mengubah susunan tampilan catatan Anda. Apakah Anda ingin meninjau pengaturan penyusunan?";
-
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Kode sandi";
 
@@ -375,9 +368,6 @@
 
 /* Number of changes pending to be sent */
 "Pendings" = "Tertunda";
-
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "Sematkan";
 
 /* Action to mark a note as pinned */
 "Pin note" = "Sematkan catatan";
@@ -436,9 +426,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Diperlukan Pengaturan Ulang";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "Pulihkan";
-
 /* Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
 
@@ -469,9 +456,6 @@
 
 /* Title of options screen */
 "Settings" = "Settings";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "Bagikan";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Berbagi analitik";
@@ -560,9 +544,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Buka kunci %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "Lapas sematan";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "Lepas sematan catatan";
 
@@ -605,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "Bekerja Bersama Kami";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "Ya";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -644,9 +624,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Buang label dari catatan saat ini";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "tag:";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "Pindahkan catatan saat ini ke sampah";

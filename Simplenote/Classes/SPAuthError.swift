@@ -1,16 +1,13 @@
 import Foundation
-import OnePasswordExtension
 
 
 // MARK: - SPAuthError
 //
 enum SPAuthError: Error {
-    case onePasswordCancelled
-    case onePasswordError
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
-    case unknown
+    case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
 
@@ -18,37 +15,27 @@ enum SPAuthError: Error {
 //
 extension SPAuthError {
 
-    /// Returns the SPAuthError matching a given OnePasswordError (If possible!)
-    ///
-    init?(onePasswordError: Error?) {
-        guard let error = onePasswordError as NSError? else {
-            return nil
-        }
-
-        self = error.code == AppExtensionErrorCode.cancelledByUser.rawValue ? .onePasswordError : .onePasswordCancelled
-    }
-
     /// Returns the SPAuthError matching a given Simperium Login Error Code
     ///
-    init(simperiumLoginErrorCode: Int) {
-        switch simperiumLoginErrorCode {
+    init(loginErrorCode: Int, response: String?, error: Error?) {
+        switch loginErrorCode {
         case 401:
             self = .loginBadCredentials
         default:
-            self = .unknown
+            self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
     }
 
     /// Returns the SPAuthError matching a given Simperium Signup Error Code
     ///
-    init(simperiumSignupErrorCode: Int) {
-        switch simperiumSignupErrorCode {
+    init(signupErrorCode: Int, response: String?, error: Error?) {
+        switch signupErrorCode {
         case 401:
             self = .signupBadCredentials
         case 409:
             self = .signupUserAlreadyExists
         default:
-            self = .unknown
+            self = .unknown(statusCode: signupErrorCode, response: response, error: error)
         }
     }
 }
@@ -60,7 +47,7 @@ extension SPAuthError {
 
     /// Returns the Error Title, for Alert purposes
     ///
-    var title: String? {
+    var title: String {
         switch self {
         case .signupUserAlreadyExists:
             return NSLocalizedString("Email in use", comment: "Email Taken Alert Title")
@@ -71,7 +58,7 @@ extension SPAuthError {
 
     /// Returns the Error Message, for Alert purposes
     ///
-    var message: String? {
+    var message: String {
         switch self {
         case .loginBadCredentials:
             return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
@@ -81,14 +68,6 @@ extension SPAuthError {
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
-        default:
-            return nil
         }
-    }
-
-    /// Indicates if the Error is User Facing, or should be kept internally
-    ///
-    var shouldBePresentedOnscreen: Bool {
-        return message != nil
     }
 }

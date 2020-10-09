@@ -6,6 +6,10 @@ import Foundation
 @objcMembers
 class SimplenoteConstants: NSObject {
 
+    /// Password Validation Rules
+    ///
+    static let passwordRules = "minlength: 8; maxlength: 50;"
+
     /// Password Reset URL
     ///
     static let resetPasswordURL = "https://app.simplenote.com/reset/?redirect=simplenote://launch&email="

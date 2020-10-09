@@ -66,9 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.24-whats-new"
+msgctxt "v4.26-whats-new"
 msgid ""
-"- Fixed a stability issue in the Notes Editor\n"
-"- Swiping a Note in the List now reveals the Copy Internal Link Action\n"
+"- Added a link to help in Settings and About\n"
 msgstr ""
 

@@ -6,8 +6,9 @@
 #import "SPNavigationController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
-#import "SPOptionsViewController.h"
+#import "SPSettingsViewController.h"
 #import "SPTagsListViewController.h"
+#import "SPAddCollaboratorsViewController.h"
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
 #import "NSProcessInfo+Util.h"
@@ -27,7 +28,6 @@
 #import "SPTracker.h"
 
 @import Contacts;
-@import SAMKeychain;
 @import Simperium;
 
 @class KeychainMigrator;
@@ -42,7 +42,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SimperiumDelegate, SPBucketDelegate, PinLockDelegate>
+@interface SPAppDelegate () <SPBucketDelegate, PinLockDelegate>
 
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
@@ -66,45 +66,12 @@
 
 
 #pragma mark ================================================================================
-#pragma mark Legacy
-#pragma mark ================================================================================
-
-- (void)importLegacyAuthenticationData
-{
-    // First check for a legacy token and bring that over if possible (to avoid a sign in prompt)
-    NSString *legacyAuthToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"spAuthToken"];
-    NSString *username = (__bridge_transfer NSString *)CFPreferencesCopyAppValue(CFSTR("email"), kCFPreferencesCurrentApplication);
-    
-    if (legacyAuthToken && [username length] > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"SPUsername"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [SAMKeychain setPassword:legacyAuthToken forService:[SPCredentials simperiumAppID] account:username];
-    }
-    
-    // Clear legacy data
-    if (legacyAuthToken) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"spAuthToken"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
-    if (username) {
-        CFPreferencesSetAppValue(CFSTR("email"), NULL, kCFPreferencesCurrentApplication);
-        CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication);
-    }
-}
-
-
-#pragma mark ================================================================================
 #pragma mark Frameworks Setup
 #pragma mark ================================================================================
 
 - (void)setupSimperium
 {
-    [self importLegacyAuthenticationData];
-    
-	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel
-											  context:self.managedObjectContext
-										  coordinator:self.persistentStoreCoordinator];
+	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel context:self.managedObjectContext coordinator:self.persistentStoreCoordinator];
 		  
 #if USE_VERBOSE_LOGGING
     [_simperium setVerboseLoggingEnabled:YES];
@@ -184,13 +151,14 @@
 - (void)setupThemeNotifications
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
 
 #pragma mark ================================================================================
 #pragma mark AppDelegate Methods
 #pragma mark ================================================================================
+
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     // Migrate keychain items
@@ -216,7 +184,6 @@
 	[self authenticateSimperium];
 
     // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
-    // TODO: Cleanup after 4.8.1 has been released!
     [[MigrationsHandler new] ensureUpdateIsHandled];
     [self setupAppRatings];
     
@@ -232,11 +199,6 @@
     } else {
         [self showPasscodeLockIfNecessary];
     }
-
-    
-//    // Initialize Background Fetch:
-//    // UIApplicationBackgroundFetchIntervalMinimum enables the device to check as frequently as it sees fit
-//	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
@@ -268,12 +230,8 @@
     }
 }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 120000
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
-#else
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-#endif
-
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+{
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
@@ -330,42 +288,17 @@
     return YES;
 }
 
-#pragma mark Background Fetch
 
-//-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-//{
-//    NSLog(@">> Simplenote performing Background Fetch");
-//    
-//    [self.simperium backgroundFetchWithCompletion:^(UIBackgroundFetchResult result) {
-//        
-//        if (result == UIBackgroundFetchResultNewData) {
-//            NSLog(@"<< Background Fetch: New Data Received");
-//        } else if (result == UIBackgroundFetchResultNoData) {
-//            NSLog(@"<< Background Fetch: No Data Received");
-//        }
-//
-//        completionHandler(result);
-//    }];
-//}
-
-
-#pragma mark First Launch
+#pragma mark - First Launch
 
 - (BOOL)isFirstLaunch
 {
-    NSNumber *firstLaunchKey = [[NSUserDefaults standardUserDefaults] objectForKey:kFirstLaunchKey];
-    BOOL firstLaunch = firstLaunchKey == nil;
-    if (firstLaunch) {
-        NSNumber *legacyFirstLaunch = (__bridge_transfer NSNumber *)CFPreferencesCopyAppValue(CFSTR("first-startup"),
-                                                                                              kCFPreferencesCurrentApplication);
-        
-        if (legacyFirstLaunch && legacyFirstLaunch.boolValue == false) {
-            [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:kFirstLaunchKey];
-            firstLaunch = NO;
-        }
-    }
-    
-    return firstLaunch;
+    return [[Options shared] firstLaunch] == NO;
+}
+
+- (void)markFirstLaunch
+{
+    [[Options shared] setFirstLaunch:YES];
 }
 
 - (void)createWelcomeNoteAfterDelay
@@ -392,13 +325,6 @@
     _noteListViewController.firstLaunch = YES;
 }
 
-- (void)markFirstLaunch
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@(1) forKey:kFirstLaunchKey];
-    [userDefaults synchronize];
-}
-
 
 #pragma mark - Launch Helpers
 
@@ -415,11 +341,7 @@
 
 - (void)loadSelectedTheme
 {
-    // We seriously need to setup the proper traits override, prior to applying the appearance selectors
     [[SPUserInterface shared] refreshUserInterfaceStyle];
-
-    // TODO: Eventually nuke VSThemeManager. Please
-    [[VSThemeManager sharedManager] applyAppearanceStyling];
 }
 
 
@@ -504,11 +426,11 @@
     
 }
 
-- (void)showOptions
+- (void)presentSettingsViewController
 {
-    SPOptionsViewController *optionsViewController = [[SPOptionsViewController alloc] init];
+    SPSettingsViewController *settingsViewController = [SPSettingsViewController new];
 	
-    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:optionsViewController];
+    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:settingsViewController];
     navController.disableRotation = YES;
     navController.displaysBlurEffect = YES;
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -570,42 +492,6 @@
     [self.simperium save];
 }
 
-
-#pragma mark ================================================================================
-#pragma mark Simperium delegate
-#pragma mark ================================================================================
-
-- (void)simperiumDidLogin:(Simperium *)simperium
-{
-    // Store the Token: Required by the Share Extension!
-    NSString *token = simperium.user.authToken;
-    [SAMKeychain setPassword:token forService:kShareExtensionServiceName account:kShareExtensionAccountName];
-    
-    // Tracker!
-    [SPTracker refreshMetadataWithEmail:simperium.user.email];
-
-    // Shortcuts!
-    [[ShortcutsHandler shared] registerSimplenoteActivities];
-
-    // Now that the user info is present, cache it for use by the crash logging system.
-    // See the docs there for details on why this is necessary.
-    [CrashLogging cacheUser:simperium.user];
-    [CrashLogging cacheOptOutSetting:!simperium.preferencesObject.analytics_enabled.boolValue];
-}
-
-- (void)simperiumDidLogout:(Simperium *)simperium
-{
-    // Nuke Extension Token
-    [SAMKeychain deletePasswordForService:kShareExtensionServiceName account:kShareExtensionAccountName];
-    
-    // Tracker!
-    [SPTracker refreshMetadataForAnonymousUser];
-}
-
-- (void)simperium:(Simperium *)simperium didFailWithError:(NSError *)error
-{
-    [SPTracker refreshMetadataForAnonymousUser];
-}
 
 #pragma mark ================================================================================
 #pragma mark SPBucket delegate
@@ -859,7 +745,7 @@
     BOOL useBiometry = self.allowBiometryInsteadOfPin;
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
-	controller.pin = [self getPin:YES];
+	controller.pin = [self getPin];
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
@@ -870,7 +756,7 @@
 }
 
 - (BOOL)passcodeLockIsEnabled {
-    NSString *pin = [self getPin:YES];
+    NSString *pin = [self getPin];
     
     return pin != nil && pin.length != 0;
 }
@@ -884,35 +770,6 @@
                          [self.pinLockWindow removeFromSuperview];
                          self.pinLockWindow = nil;
                      }];
-}
-
-- (NSString *)getPin:(BOOL)checkLegacy
-{
-    NSString *pin   = [SAMKeychain passwordForService:kSimplenotePinKey account:kSimplenotePinKey];
-    
-    if (checkLegacy && (!pin || pin.length == 0)) {
-        
-        pin =  [[NSUserDefaults standardUserDefaults] objectForKey:kSimplenotePinLegacyKey];
-        
-        if (pin.length > 0) {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSimplenotePinLegacyKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self setPin:pin];
-        }
-    }
-    
-    return pin;
-}
-
-- (void)setPin:(NSString *)newPin
-{
-    [SAMKeychain setPassword:newPin forService:kSimplenotePinKey account:kSimplenotePinKey];
-}
-
-- (void)removePin
-{
-    [SAMKeychain deletePasswordForService:kSimplenotePinKey account:kSimplenotePinKey];
-    [self setAllowBiometryInsteadOfPin:NO];
 }
 
 - (BOOL)allowBiometryInsteadOfPin
@@ -935,7 +792,7 @@
     return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
 }
 
--(BOOL)isRequestingContactsPermission
+- (BOOL)isRequestingContactsPermission
 {
     NSArray *topChildren = self.topMostController.childViewControllers;
     BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];

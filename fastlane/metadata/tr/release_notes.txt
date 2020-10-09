@@ -1,1 +1,0 @@
-- Etiket sınırı 256 karaktere kadar olacak şekilde güncellendi

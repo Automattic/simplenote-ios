@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "デバッグ";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "削除";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "ノートを削除";
 
@@ -314,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "新規ノート…";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "いいえ";
 
 /* Message shown in note list when no notes are in the current view */
@@ -352,9 +348,6 @@
 /* Select a note to view in the note editor */
 "Open note" = "ノートを開く";
 
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "更新によってノートの表示順が変更された可能性があります。並べ替えの設定を確認しますか ?";
-
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
 
@@ -375,9 +368,6 @@
 
 /* Number of changes pending to be sent */
 "Pendings" = "保留中";
-
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "ピン";
 
 /* Action to mark a note as pinned */
 "Pin note" = "ノートを上部固定";
@@ -436,9 +426,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "リセットが必要";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "復元";
-
 /* Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
 
@@ -469,9 +456,6 @@
 
 /* Title of options screen */
 "Settings" = "設定";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "共有";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "分析を共有";
@@ -560,9 +544,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ のブロックを解除";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "ピンを外す";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "固定表示を解除";
 
@@ -605,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "求人情報";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "はい";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -644,9 +624,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "現在のノートからタグを削除";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "タグ :";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "現在のノートをゴミ箱へ移動";

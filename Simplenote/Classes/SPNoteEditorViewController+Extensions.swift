@@ -257,7 +257,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 
     func noteHistoryControllerDidFinish() {
         dismissHistory(animated: true)
-        isModified = true
+        modified = true
         save()
     }
 

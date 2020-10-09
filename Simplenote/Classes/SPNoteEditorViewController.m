@@ -29,6 +29,8 @@
 #import "UIDevice+Extensions.h"
 #import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
+#import "SPActionSheet.h"
+#import "SPActivityView.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
@@ -49,18 +51,56 @@ CGFloat const SPBackButtonImagePadding              = -18;
 CGFloat const SPBackButtonTitlePadding              = -15;
 CGFloat const SPSelectedAreaPadding                 = 20;
 
-@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
+@interface SPNoteEditorViewController ()<SPActionSheetDelegate,
+                                        SPActivityViewDelegate,
+                                        SPCollaboratorDelegate,
+                                        SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
+                                        SPTagViewDelegate,
+                                        UIActionSheetDelegate,
                                         UIPopoverPresentationControllerDelegate>
-{
-    NSUInteger cursorLocationBeforeRemoteUpdate;
-    NSString *noteContentBeforeRemoteUpdate;
-    BOOL bounceMarkdownPreviewOnActivityViewDismiss;
-}
-
+// UIKit Components
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
+@property (nonatomic, strong) SPOutsideTouchView        *navigationButtonContainer;
+@property (nonatomic, strong) UILabel                   *searchDetailLabel;
+@property (nonatomic, strong) SPTagView                 *tagView;
+@property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
+@property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
+@property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
+
+// Sheets
+@property (nonatomic, strong) SPActivityView            *noteActivityView;
+@property (nonatomic, strong) SPActionSheet             *noteActionSheet;
+@property (nonatomic, strong) SPActionSheet             *versionActionSheet;
+
+// Timers
+@property (nonatomic, strong) NSTimer                   *saveTimer;
+@property (nonatomic, strong) NSTimer                   *guarenteedSaveTimer;
+
+// State
+@property (nonatomic, assign) BOOL                      actionSheetVisible;
+@property (nonatomic, assign) BOOL                      blankNote;
+@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
+@property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
+@property (nonatomic, assign) BOOL                      searching;
+@property (nonatomic, assign) BOOL                      viewingVersions;
+
+// Remote Updates
+@property (nonatomic, assign) NSUInteger                cursorLocationBeforeRemoteUpdate;
+@property (nonatomic, strong) NSString                  *noteContentBeforeRemoteUpdate;
+
+// Versions
+@property (nonatomic, assign) NSInteger                 currentVersion;
+@property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
+
+// Search
+@property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
+
+// Navigation Bar
+@property (nonatomic, assign) CGAffineTransform         navigationBarTransform;
+@property (nonatomic, assign) CGFloat                   scrollPosition;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -88,10 +128,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         _noteEditorTextView.tagView.tagDelegate = self;
         
         // Helpers
-        scrollPosition = _noteEditorTextView.contentOffset.y;
-        navigationBarTransform = CGAffineTransformIdentity;
-        
-        bDisableShrinkingNavigationBar = NO;
+        self.scrollPosition = _noteEditorTextView.contentOffset.y;
+        self.navigationBarTransform = CGAffineTransformIdentity;
+        self.disableShrinkingNavigationBar = NO;
 
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -123,15 +162,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-
-    // Note:
-    // Disable SmartDashes / Quotes in iOS 11.0, due to a glitch that broke sync. (Fixed in iOS 11.1).
-    if (@available(iOS 11.0, *)) {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 11.1) {
-            _noteEditorTextView.smartDashesType = UITextSmartDashesTypeNo;
-            _noteEditorTextView.smartQuotesType = UITextSmartQuotesTypeNo;
-        }
-    }
 }
 
 - (VSTheme *)theme {
@@ -192,7 +222,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
-    [self setBackButtonTitleForSearchingMode: bSearching];
+    [self setBackButtonTitleForSearchingMode: self.searching];
     [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
     [self highlightSearchResultsIfNeeded];
@@ -228,12 +258,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)setupNavigationController {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:!bSearching animated:YES];
+    [self.navigationController setToolbarHidden:!self.searching animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !bActionSheetVisible && !self.isPreviewing) {
+    if ((_currentNote.content.length == 0) && !self.actionSheetVisible && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -241,28 +271,22 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)startListeningToThemeNotifications
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-}
-
-- (void)themeWillChange
-{
-    if (self.currentNote == nil) {
-        return;
-    }
-
-    [self save];
-    [self.noteEditorTextView endEditing:YES];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
 - (void)themeDidChange
 {
+    if (self.currentNote != nil) {
+        [self save];
+        [self.noteEditorTextView endEditing:YES];
+    }
+
     [self applyStyle];
 }
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!bSearching || _searchString.length == 0 || self.searchResultRanges) {
+    if (!self.searching || _searchString.length == 0 || self.searchResultRanges) {
         return;
     }
     
@@ -270,7 +294,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        self.searchResultRanges = [searchText rangesForTerms:self->_searchString];
+        self.searchResultRanges = [searchText rangesForTerms:self.searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -280,17 +304,17 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             NSInteger count = self.searchResultRanges.count;
             
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
-            self->searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
-            self->searchDetailLabel.alpha = UIKitConstants.alpha0_0;
+            self.searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
+            self.searchDetailLabel.alpha = UIKitConstants.alpha0_0;
 
             [UIView animateWithDuration:0.3
                              animations:^{
                                  
-                                 self->searchDetailLabel.alpha = UIKitConstants.alpha1_0;
+                                 self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
             
-            self->highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:self->highlightedSearchResultIndex];
+            self.highlightedSearchResultIndex = 0;
+            [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
         });
     });
 }
@@ -341,10 +365,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self->bDisableShrinkingNavigationBar = YES;
+        self.disableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-        self->bDisableShrinkingNavigationBar = NO;
+        self.disableShrinkingNavigationBar = NO;
     }];
 }
 
@@ -362,7 +386,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)sizeNavigationContainer {
     
     self.navigationItem.titleView.frame = CGRectMake(0, 0, MAX(self.view.frame.size.width, self.view.frame.size.height), SPCustomTitleViewHeight);
-    navigationButtonContainer.frame = self.navigationItem.titleView.bounds;
+    self.navigationButtonContainer.frame = self.navigationItem.titleView.bounds;
 
     BOOL isPad = [UIDevice isPad];
 
@@ -388,9 +412,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.backButton.frame = CGRectMake(leadingPadding,
                                        SPBarButtonYOriginAdjustment,
                                        self.backButton.frame.size.width,
-                                       navigationButtonContainer.frame.size.height);
+                                       self.navigationButtonContainer.frame.size.height);
     
-    CGFloat previousXOrigin = navigationButtonContainer.frame.size.width + trailingPadding;
+    CGFloat previousXOrigin = self.navigationButtonContainer.frame.size.width + trailingPadding;
     CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
     CGFloat buttonHeight = buttonWidth;
     
@@ -433,16 +457,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
     titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    navigationButtonContainer = [[SPOutsideTouchView alloc] init];
-    navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [titleView addSubview:navigationButtonContainer];
+    self.navigationButtonContainer = [[SPOutsideTouchView alloc] init];
+    self.navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [titleView addSubview:self.navigationButtonContainer];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(navigationBarContainerTapped:)];
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.numberOfTouchesRequired = 1;
     
-    [navigationButtonContainer addGestureRecognizer:tapGesture];
+    [self.navigationButtonContainer addGestureRecognizer:tapGesture];
     
     // back button
     self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -456,7 +480,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                         action:@selector(backButtonAction:)
               forControlEvents:UIControlEventTouchUpInside];
     
-    [navigationButtonContainer addSubview:self.backButton];
+    [self.navigationButtonContainer addSubview:self.backButton];
     
     
     // setup right buttons
@@ -487,20 +511,20 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     
-    [navigationButtonContainer addSubview:self.keyboardButton];
-    [navigationButtonContainer addSubview:self.createNoteButton];
-    [navigationButtonContainer addSubview:self.actionButton];
-    [navigationButtonContainer addSubview:self.checklistButton];
+    [self.navigationButtonContainer addSubview:self.keyboardButton];
+    [self.navigationButtonContainer addSubview:self.createNoteButton];
+    [self.navigationButtonContainer addSubview:self.actionButton];
+    [self.navigationButtonContainer addSubview:self.checklistButton];
     
     [self sizeNavigationContainer];
 
     self.navigationItem.titleView = titleView;
     
     // setup search toolbar
-    doneSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                     target:self
-                                                                     action:@selector(endSearching:)];
-    doneSearchButton.width += 10.0;
+    self.doneSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                          target:self
+                                                                          action:@selector(endSearching:)];
+    self.doneSearchButton.width += 10.0;
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
@@ -508,30 +532,28 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                                                    target:nil
                                                                                    action:nil];
 
-    nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
-                                            imageAlignment:UIBarButtonImageAlignmentRight
-                                                    target:self
-                                                  selector:@selector(highlightNextSearchResult:)];
-        nextSearchButton.width = 34.0;
-    prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
-                                            imageAlignment:UIBarButtonImageAlignmentRight
-                                                    target:self
-                                                  selector:@selector(highlightPrevSearchResult:)];
-    prevSearchButton.width = 34.0;
+    self.nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
+                                                 imageAlignment:UIBarButtonImageAlignmentRight
+                                                         target:self
+                                                       selector:@selector(highlightNextSearchResult:)];
+    self.nextSearchButton.width = 34.0;
+    self.prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
+                                                 imageAlignment:UIBarButtonImageAlignmentRight
+                                                         target:self
+                                                       selector:@selector(highlightPrevSearchResult:)];
+    self.prevSearchButton.width = 34.0;
     
     
-    searchDetailLabel = [[UILabel alloc] init];
-    searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    searchDetailLabel.frame = CGRectMake(0, 0, 180, searchDetailLabel.font.lineHeight);
-    searchDetailLabel.textColor = [UIColor simplenoteNoteHeadlineColor];
-    searchDetailLabel.textAlignment = NSTextAlignmentCenter;
-    searchDetailLabel.alpha = 0.0;
-    UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:searchDetailLabel];
+    self.searchDetailLabel = [[UILabel alloc] init];
+    self.searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.searchDetailLabel.frame = CGRectMake(0, 0, 180, self.searchDetailLabel.font.lineHeight);
+    self.searchDetailLabel.textColor = [UIColor simplenoteNoteHeadlineColor];
+    self.searchDetailLabel.textAlignment = NSTextAlignmentCenter;
+    self.searchDetailLabel.alpha = 0.0;
+    UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchDetailLabel];
     
-    
-    
-    [self setToolbarItems:@[doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, prevSearchButton, nextSearchButton] animated:NO];
-    
+
+    [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
 - (void)didReceiveVoiceOverNotification:(NSNotification *)notification
@@ -553,7 +575,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self endEditing:nil];
     
-    if (bBlankNote) {
+    if (self.blankNote) {
         
         // delete note
         [[SPObjectManager sharedManager] permenentlyDeleteNote:_currentNote];
@@ -630,15 +652,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } else {
         [_tagView clearAllTags];
     }
-    
-    bBlankNote = NO;
+
+    self.blankNote = NO;
     self.modified = NO;
     self.previewing = NO;
 }
 
 - (void)clearNote {
     
-    bBlankNote = NO;
+    self.blankNote = NO;
     _currentNote = nil;
     _noteEditorTextView.text = @"";
     
@@ -693,7 +715,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
 
-                    self->bounceMarkdownPreviewOnActivityViewDismiss = NO;
+                    self.bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -739,7 +761,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
+    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }
@@ -788,7 +810,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [self.tagView endEditing:YES];
 
         [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
-            self->bDisableShrinkingNavigationBar = YES;
+            self.disableShrinkingNavigationBar = YES;
         }];
     });
 }
@@ -810,7 +832,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)setSearchString:(NSString *)string {
     
     if (string.length > 0) {
-        bSearching = YES;
+        self.searching = YES;
         _searchString = string;
         self.searchResultRanges = nil;
         [self.navigationController setToolbarHidden:NO animated:YES];
@@ -819,14 +841,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)highlightNextSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MIN(highlightedSearchResultIndex + 1, self.searchResultRanges.count);
-    [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
+    self.highlightedSearchResultIndex = MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count);
+    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
 - (void)highlightPrevSearchResult:(id)sender {
     
-    highlightedSearchResultIndex = MAX(0, highlightedSearchResultIndex - 1);
-    [self highlightSearchResultAtIndex:highlightedSearchResultIndex];
+    self.highlightedSearchResultIndex = MAX(0, self.highlightedSearchResultIndex - 1);
+    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index {
@@ -835,8 +857,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
-        prevSearchButton.enabled = index > 0;
-        nextSearchButton.enabled = index < searchResultCount - 1;
+        self.prevSearchButton.enabled = index > 0;
+        self.nextSearchButton.enabled = index < searchResultCount - 1;
         
         [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
                            animated:YES
@@ -844,19 +866,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
                               // scroll to block
                               highlightFrame.origin.y += highlightFrame.size.height;
-                              [self->_noteEditorTextView scrollRectToVisible:highlightFrame
-                                                      animated:YES];
-                              
-                              
+                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
                           }];
     }
-    
-    
 }
 
 - (void)endSearching:(id)sender {
     
-    if ([sender isEqual:doneSearchButton])
+    if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
     _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
@@ -867,15 +884,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
-    bSearching = NO;
+    self.searching = NO;
 
     [self.navigationController setToolbarHidden:YES animated:YES];
-    searchDetailLabel.text = nil;
+    self.searchDetailLabel.text = nil;
 }
 
 - (void)ensureSearchIsDismissed
 {
-    if (bSearching) {
+    if (self.searching) {
         [self endSearching:_noteEditorTextView];
     }
 }
@@ -887,7 +904,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // don't apply wrong transform in overscroll regions
     
-    CGFloat transformAmount = scrollPosition - scrollView.contentOffset.y;
+    CGFloat transformAmount = self.scrollPosition - scrollView.contentOffset.y;
     
     BOOL disableFromTopBounce = (scrollView.contentOffset.y < -scrollView.contentInset.top && transformAmount < 0);
     BOOL disableFromBottomBounce = (scrollView.contentOffset.y > scrollView.contentInset.top + scrollView.contentSize.height && transformAmount < 0);
@@ -898,7 +915,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     // a whole mess of conditionals that affect the behavior
     if (disableFromTopBounce || disableFromBottomBounce || disableShrinkingingWhileScrollingUp ||
-        bDisableShrinkingNavigationBar || disableFromSmallContentSize) {
+        self.disableShrinkingNavigationBar || disableFromSmallContentSize) {
         applyTransform = NO;
     }
     
@@ -907,11 +924,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                     Y:transformAmount];
     }
         
-    if (disableFromSmallContentSize && !CGAffineTransformIsIdentity(navigationBarTransform)) {
+    if (disableFromSmallContentSize && !CGAffineTransformIsIdentity(self.navigationBarTransform)) {
         [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     }
     
-    scrollPosition = scrollView.contentOffset.y;
+    self.scrollPosition = scrollView.contentOffset.y;
 
     // Slowly Fade-In the NavigationBar's Blur
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
@@ -919,7 +936,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
-    bDisableShrinkingNavigationBar = NO;
+    self.disableShrinkingNavigationBar = NO;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
@@ -931,14 +948,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
     
-    if (CGAffineTransformIsIdentity(navigationBarTransform))
+    if (CGAffineTransformIsIdentity(self.navigationBarTransform)) {
         return YES;
-    else {
-        
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-        return NO;
     }
         
+    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
+    return NO;
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
@@ -953,9 +968,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion {
     
-    bDisableShrinkingNavigationBar = YES;
+    self.disableShrinkingNavigationBar = YES;
     
-    navigationBarTransform = CGAffineTransformIdentity;
+    self.navigationBarTransform = CGAffineTransformIdentity;
     
     void (^animationBlock)() = ^() {
         
@@ -968,7 +983,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.checklistButton.transform = CGAffineTransformIdentity;
         self.checklistButton.alpha = 1.0;
         self.keyboardButton.alpha = 1.0;
-        self.navigationController.navigationBar.transform = self->navigationBarTransform;
+        self.navigationController.navigationBar.transform = self.navigationBarTransform;
         self.navigationBarBackground.transform = CGAffineTransformIdentity;
 
         self.backButton.alpha = 1.0;
@@ -976,8 +991,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     void (^completionBlock)() = ^() {
         
-        if (!self->_noteEditorTextView.dragging && !self->_noteEditorTextView.decelerating) {
-            self->bDisableShrinkingNavigationBar = NO;
+        if (!self.noteEditorTextView.dragging && !self.noteEditorTextView.decelerating) {
+            self.disableShrinkingNavigationBar = NO;
         }
         
         if (completion)
@@ -1020,7 +1035,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     CGFloat navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
     
-    CGRect containerViewFrame = navigationButtonContainer.bounds;
+    CGRect containerViewFrame = self.navigationButtonContainer.bounds;
     containerViewFrame.size.height = navigationBarHeight;
     
     BOOL isPortrait = self.isViewHorizontallyCompact && !self.isViewVerticallyCompact;
@@ -1028,14 +1043,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         navigationBarHeight -= 20;
     }
     
-    CGFloat yTransform = MAX(MIN(0, navigationBarTransform.ty + y), -navigationBarHeight);
+    CGFloat yTransform = MAX(MIN(0, self.navigationBarTransform.ty + y), -navigationBarHeight);
     
-    navigationBarTransform = CGAffineTransformMakeTranslation(navigationBarTransform.tx + x,
-                                                              yTransform);
+    self.navigationBarTransform = CGAffineTransformMakeTranslation(self.navigationBarTransform.tx + x,
+                                                                   yTransform);
     
     
     // apply transform to button container
-    CGFloat normalHeight = navigationButtonContainer.frame.size.height;
+    CGFloat normalHeight = self.navigationButtonContainer.frame.size.height;
     CGFloat desiredHeight = normalHeight - 24;
 
     CGFloat percentTransform = ABS(yTransform) / 24;
@@ -1068,7 +1083,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.checklistButton.alpha = alphaAmount;
     
     
-    self.navigationController.navigationBar.transform = navigationBarTransform;
+    self.navigationController.navigationBar.transform = self.navigationBarTransform;
     self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
                                                                     CGAffineTransformMakeTranslation(0, yTransform));
 }
@@ -1078,13 +1093,14 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // only called for user changes
 // safe to alter text attributes here
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
     if ([self isShowingHistory]) {
         return NO;
     }
 
     [self ensureSearchIsDismissed];
-    
+
     return YES;
 }
 
@@ -1103,33 +1119,33 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)textViewDidChange:(UITextView *)textView {
     
-    bBlankNote = NO;
+    self.blankNote = NO;
     self.modified = YES;
     
-    [saveTimer invalidate];
-    saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                                 target:self
-                                               selector:@selector(saveAndSync:)
-                                               userInfo:nil
-                                                repeats:NO];
-    saveTimer.tolerance = 0.1;
+    [self.saveTimer invalidate];
+    self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                      target:self
+                                                    selector:@selector(saveAndSync:)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.saveTimer.tolerance = 0.1;
     
-    if (!guarenteedSaveTimer) {
-        guarenteedSaveTimer = [NSTimer scheduledTimerWithTimeInterval:21.0
-                                                               target:self
-                                                             selector:@selector(saveAndSync:)
-                                                             userInfo:nil
-                                                              repeats:NO];
-        guarenteedSaveTimer.tolerance = 1.0;
+    if (!self.guarenteedSaveTimer) {
+        self.guarenteedSaveTimer = [NSTimer scheduledTimerWithTimeInterval:21.0
+                                                                    target:self
+                                                                  selector:@selector(saveAndSync:)
+                                                                  userInfo:nil
+                                                                   repeats:NO];
+        self.guarenteedSaveTimer.tolerance = 1.0;
     }
     
     if([textView.text hasSuffix:@"\n"] && _noteEditorTextView.selectedRange.location == _noteEditorTextView.text.length) {
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            CGPoint bottomOffset = CGPointMake(0, self->_noteEditorTextView.contentSize.height - self->_noteEditorTextView.bounds.size.height);
-            if (self->_noteEditorTextView.contentOffset.y < bottomOffset.y)
-                [self->_noteEditorTextView setContentOffset:bottomOffset animated:YES];
+            CGPoint bottomOffset = CGPointMake(0, self.noteEditorTextView.contentSize.height - self.noteEditorTextView.bounds.size.height);
+            if (self.noteEditorTextView.contentOffset.y < bottomOffset.y)
+                [self.noteEditorTextView setContentOffset:bottomOffset animated:YES];
         });
     }
     
@@ -1214,11 +1230,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)cancelSaveTimers {
     
-    [saveTimer invalidate];
-	saveTimer = nil;
+    [self.saveTimer invalidate];
+    self.saveTimer = nil;
     
-    [guarenteedSaveTimer invalidate];
-    guarenteedSaveTimer = nil;
+    [self.guarenteedSaveTimer invalidate];
+    self.guarenteedSaveTimer = nil;
 }
 
 -(void)saveAndSync:(NSTimer *)timer
@@ -1228,12 +1244,13 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)save {
+- (void)save
+{
+    if (_currentNote == nil || self.isShowingHistory || [self isDictatingText]) {
+		return;
+    }
     
-	if (_currentNote == nil || [self isShowingHistory] || [self isDictatingText])
-		return;    
-    
-    if (self.isModified || _currentNote.deleted == YES)
+	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
         _currentNote.content = [_noteEditorTextView getPlainTextContent];
@@ -1254,8 +1271,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)willReceiveNewContent {
     
-    cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
+    self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
+    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
         _currentNote.content = [_noteEditorTextView getPlainTextContent];
@@ -1265,9 +1282,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)didReceiveNewContent {
     
-	NSUInteger newLocation = [self newCursorLocation:_currentNote.content
-											 oldText:noteContentBeforeRemoteUpdate
-									 currentLocation:cursorLocationBeforeRemoteUpdate];
+    NSUInteger newLocation = [self newCursorLocation:_currentNote.content
+                                             oldText:self.noteContentBeforeRemoteUpdate
+                                     currentLocation:self.cursorLocationBeforeRemoteUpdate];
 	
 	_noteEditorTextView.attributedText = [_currentNote.content attributedString];
     [_noteEditorTextView processChecklists];
@@ -1306,7 +1323,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)newButtonAction:(id)sender {
 
-    if (_currentNote && bBlankNote) {
+    if (_currentNote && self.blankNote) {
         [_noteEditorTextView becomeFirstResponder];
         return;
     }
@@ -1315,7 +1332,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [SPTracker trackEditorNoteCreated];
     }
     
-    bDisableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
+    self.disableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
     
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
@@ -1346,7 +1363,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
         [self displayNote:newNote];
-        bBlankNote = YES;
+        self.blankNote = YES;
 
         [UIView animateWithDuration:0.2
                          animations:^{
@@ -1366,10 +1383,10 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } else {
 
         [self displayNote:newNote];
-        bBlankNote = YES;
+        self.blankNote = YES;
     }
     
-    bDisableShrinkingNavigationBar = NO;
+    self.disableShrinkingNavigationBar = NO;
 }
 
 - (void)insertChecklistAction:(id)sender {
@@ -1418,60 +1435,60 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     NSString *status = [[[NSString stringWithFormat:wordFormat, words] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, characters]];
     
     
-    noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
-                                               toggleSelectedTitles:toggleSelectedTitles
-                                                 actionButtonImages:actionImages
-                                                 actionButtonTitles:actionStrings
-                                                       buttonTitles:buttonStrings
-                                                             status:status
-                                                           delegate:self];
+    self.noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
+                                                    toggleSelectedTitles:toggleSelectedTitles
+                                                      actionButtonImages:actionImages
+                                                      actionButtonTitles:actionStrings
+                                                            buttonTitles:buttonStrings
+                                                                  status:status
+                                                                delegate:self];
     
-    [noteActivityView setToggleState:_currentNote.published atIndex:0];
-    [noteActivityView setToggleState:_currentNote.pinned atIndex:1];
-    [noteActivityView setToggleState:_currentNote.markdown atIndex:2];
+    [self.noteActivityView setToggleState:_currentNote.published atIndex:0];
+    [self.noteActivityView setToggleState:_currentNote.pinned atIndex:1];
+    [self.noteActivityView setToggleState:_currentNote.markdown atIndex:2];
     
     // apply accessibility messages
     
-    UIButton *shareButton = [noteActivityView actionButtonAtIndex:0];
+    UIButton *shareButton = [self.noteActivityView actionButtonAtIndex:0];
     shareButton.accessibilityLabel = NSLocalizedString(@"Share note", nil);
     shareButton.accessibilityHint = NSLocalizedString(@"share-accessibility-hint", @"Accessibility hint on share button");
     
-    UIButton *historyButton = [noteActivityView actionButtonAtIndex:1];
+    UIButton *historyButton = [self.noteActivityView actionButtonAtIndex:1];
     historyButton.accessibilityLabel = NSLocalizedString(@"History", @"Noun - the version history of a note");
     historyButton.accessibilityHint = NSLocalizedString(@"history-accessibility-hint", @"Accessibility hint on button which shows the history of a note");
     historyButton.enabled = _currentNote.versionInt > 1;
     
-    UIButton *collaborateButton = [noteActivityView actionButtonAtIndex:2];
+    UIButton *collaborateButton = [self.noteActivityView actionButtonAtIndex:2];
     collaborateButton.accessibilityHint = NSLocalizedString(@"collaborate-accessibility-hint", @"Accessibility hint on button which shows the current collaborators on a note");
     
-    UIButton *deleteButton = [noteActivityView actionButtonAtIndex:3];
+    UIButton *deleteButton = [self.noteActivityView actionButtonAtIndex:3];
     deleteButton.accessibilityLabel = NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note");
     deleteButton.accessibilityHint = NSLocalizedString(@"trash-accessibility-hint", @"Accessibility hint on button which moves a note to the trash");
 
-    UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
+    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
     publishToggle.accessibilityLabel = NSLocalizedString(@"Publish toggle", @"Switch which marks a note as published or unpublished");
     publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", @"Action which unpublishes a note") : NSLocalizedString(@"Publish note", @"Action which published a note to a web page");
 
-    UIButton *pinToggle = [noteActivityView toggleAtIndex:1];
+    UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
     pinToggle.accessibilityLabel = NSLocalizedString(@"Pin toggle", @"Switch which marks a note as pinned or unpinned");
     pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", @"Action to mark a note as unpinned") : NSLocalizedString(@"Pin note", @"Action to mark a note as pinned");
 
-    UIButton *markdownToggle = [noteActivityView toggleAtIndex:2];
+    UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
     markdownToggle.accessibilityLabel = NSLocalizedString(@"Markdown toggle", @"Switch which marks a note as using Markdown formatting or not");
     markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
 
-    UIButton *publishURLButton = [noteActivityView buttonAtIndex:0];
+    UIButton *publishURLButton = [self.noteActivityView buttonAtIndex:0];
     [publishURLButton setTitle:buttonStrings[0] forState:UIControlStateDisabled];
     [self updatePublishUI];
 
     
     if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
         // widen noteActivityView to show all content in the popover
-        CGRect activityViewFrame = noteActivityView.frame;
+        CGRect activityViewFrame = self.noteActivityView.frame;
         activityViewFrame.size.width = [self.theme floatForKey:@"actionViewWidth"];
-        noteActivityView.frame = activityViewFrame;
+        self.noteActivityView.frame = activityViewFrame;
 
-        SPPopoverContainerViewController *popoverVC = [[SPPopoverContainerViewController alloc] initWithCustomView:noteActivityView];
+        SPPopoverContainerViewController *popoverVC = [[SPPopoverContainerViewController alloc] initWithCustomView:self.noteActivityView];
         popoverVC.modalPresentationStyle = UIModalPresentationPopover;
         popoverVC.popoverPresentationController.sourceView = sender;
         popoverVC.popoverPresentationController.sourceRect = ((UIView *)sender).bounds;
@@ -1483,12 +1500,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         [self presentViewController:popoverVC animated:YES completion:nil];
     } else {
-        noteActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                   withMessage:nil
-                                          withContentViewArray:@[noteActivityView]
-                                          withButtonTitleArray:@[NSLocalizedString(@"Done", nil)]
-                                                      delegate:self ];
-        noteActionSheet.swipeToDismiss = YES;
+        self.noteActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
+                                                        withMessage:nil
+                                               withContentViewArray:@[self.noteActivityView]
+                                               withButtonTitleArray:@[NSLocalizedString(@"Done", nil)]
+                                                           delegate:self ];
+        self.noteActionSheet.swipeToDismiss = YES;
     }
 }
 
@@ -1498,8 +1515,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 
     // ActionSheet Scenario
-    [noteActionSheet dismiss];
-    noteActionSheet = nil;
+    [self.noteActionSheet dismiss];
+    self.noteActionSheet = nil;
 }
 
 - (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
@@ -1518,7 +1535,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 [self unpublishNote:nil];
             }
 
-            UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
+            UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
             publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", nil) : NSLocalizedString(@"Publish note", nil);
             break;
         }
@@ -1528,7 +1545,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
             [self save];
 
-            UIButton *pinToggle = [noteActivityView toggleAtIndex:1];
+            UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
             pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", nil) : NSLocalizedString(@"Pin note", nil);
             break;
         }
@@ -1539,7 +1556,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             [self save];
 
             // If Markdown is being enabled and it was previously disabled
-            bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
+            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
 
             // Update the global preference to use when creating new notes
             [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
@@ -1551,7 +1568,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 [SPTracker trackEditorNoteMarkdownDisabled];
             }
 
-            UIButton *markdownToggle = [noteActivityView toggleAtIndex:2];
+            UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
             markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
             break;
         }
@@ -1560,26 +1577,26 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)updatePublishUI {
-    UIButton *publishToggle = [noteActivityView toggleAtIndex:0];
-    UIButton *urlButton = [noteActivityView buttonAtIndex:0];
+    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
+    UIButton *urlButton = [self.noteActivityView buttonAtIndex:0];
     if (_currentNote.published && _currentNote.publishURL.length == 0) {
-        [noteActivityView showActivityIndicator];
+        [self.noteActivityView showActivityIndicator];
         [urlButton setTitle:NSLocalizedString(@"Publishing...", @"Message shown when a note is in the processes of being published")
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
         publishToggle.enabled = NO;
     } else if (_currentNote.published && _currentNote.publishURL.length > 0) {
-        [noteActivityView hideActivityIndicator];
+        [self.noteActivityView hideActivityIndicator];
         [urlButton setTitle:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
         publishToggle.enabled = YES;
     } else if (!_currentNote.published && _currentNote.publishURL.length == 0) {
-        [noteActivityView hideActivityIndicator];
+        [self.noteActivityView hideActivityIndicator];
         urlButton.enabled = NO;
         publishToggle.enabled = YES;
     } else if (!_currentNote.published && _currentNote.publishURL.length > 0) {
-        [noteActivityView showActivityIndicator];
+        [self.noteActivityView showActivityIndicator];
         [urlButton setTitle:NSLocalizedString(@"Unpublishing...", @"Message shown when a note is in the processes of being unpublished")
                    forState:UIControlStateNormal];
         urlButton.enabled = YES;
@@ -1614,31 +1631,33 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
 }
 
-- (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index {
-    
+- (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index
+{
     [self dismissActivityView];
 
         if (index == 0)
             [self shareNoteURLAction:nil];
 }
 
-- (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
+- (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index
+{
     [actionSheet dismiss];
 }
 
 - (void)actionSheetDidShow:(SPActionSheet *)actionSheet {
     
-    bActionSheetVisible = YES;
+    self.actionSheetVisible = YES;
 }
 
 - (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
     
-    bActionSheetVisible = NO;
-    
-    if ([actionSheet isEqual:noteActionSheet])
-        noteActionSheet = nil;
+    self.actionSheetVisible = NO;
 
-    if (bounceMarkdownPreviewOnActivityViewDismiss) {
+    if ([actionSheet isEqual:self.noteActionSheet]) {
+        self.noteActionSheet = nil;
+    }
+
+    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
         [self bounceMarkdownPreview];
     }
 }
@@ -1779,7 +1798,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self save];
 }
 
-- (void)viewVersionAction:(id)sender {
+- (void)viewVersionAction:(id)sender
+{
     [self ensureSearchIsDismissed];
     [self save];
     [self showHistory];
@@ -1811,6 +1831,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                      }];
 }
 
+
 #pragma mark SPCollaboratorDelegate methods 
 
 - (BOOL)collaboratorViewController:(SPAddCollaboratorsViewController *)viewController
@@ -1824,7 +1845,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 didAddCollaborator:(NSString *)collaboratorName {
 
     [_currentNote addTag:collaboratorName];
-    bBlankNote = NO;
+
+    self.blankNote = NO;
     self.modified = YES;
     [self save];
     
@@ -1835,7 +1857,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
              didRemoveCollaborator:(NSString *)collaboratorName {
     
     [_currentNote stripTag:collaboratorName];
-    bBlankNote = NO;
+
+    self.blankNote = NO;
     self.modified = YES;
     [self save];
 
@@ -1879,7 +1902,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     [_currentNote addTag:tagName];
-    bBlankNote = NO;
+
+    self.blankNote = NO;
     self.modified = YES;
     [self save];
     
@@ -1894,7 +1918,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName {
     
     [_currentNote stripTag:tagName];
-    bBlankNote = NO;
+
+    self.blankNote = NO;
     self.modified = YES;
     
     NSString *deletedTagBuffer = _deletedTagBuffer;

@@ -178,9 +178,6 @@
    Display internal debug status */
 "Debug" = "调试";
 
-/* Trash (verb) - the action of deleting a note */
-"Delete" = "删除";
-
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
 
@@ -314,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "新建笔记...";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "否";
 
 /* Message shown in note list when no notes are in the current view */
@@ -352,9 +348,6 @@
 /* Select a note to view in the note editor */
 "Open note" = "打开笔记";
 
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "我们的更新可能改变了您笔记的显示顺序。您想要查看排序设置吗？";
-
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密码";
 
@@ -375,9 +368,6 @@
 
 /* Number of changes pending to be sent */
 "Pendings" = "待处理数";
-
-/* Pin (verb) - the action of Pinning a note */
-"Pin" = "钉选";
 
 /* Action to mark a note as pinned */
 "Pin note" = "固定笔记";
@@ -436,9 +426,6 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "需要重置";
 
-/* Restore a note from the trash, marking it as undeleted */
-"Restore" = "恢复";
-
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
 
@@ -469,9 +456,6 @@
 
 /* Title of options screen */
 "Settings" = "设置";
-
-/* Share (verb) - the action of Sharing a note */
-"Share" = "共享";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "共享分析数据";
@@ -560,9 +544,6 @@
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "解锁 %@";
 
-/* Unpin (verb) - the action of Unpinning a note */
-"Unpin" = "取消钉选";
-
 /* Action to mark a note as unpinned */
 "Unpin note" = "取消固定笔记";
 
@@ -605,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "与我们合作";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "是";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
@@ -644,9 +624,6 @@
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "将标签从当前笔记中删除";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "标签：";
 
 /* Accessibility hint on button which moves a note to the trash */
 "trash-accessibility-hint" = "将当前笔记移至回收站";
