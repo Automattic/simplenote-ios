@@ -86,6 +86,7 @@ private extension SwitchTableViewCell {
         switchControl.onTintColor = .simplenoteSwitchOnTintColor
         switchControl.tintColor = .simplenoteSwitchTintColor
         textLabel?.textColor = .simplenoteTextColor
+        imageView?.tintColor = .simplenoteTextColor
     }
 }
 
