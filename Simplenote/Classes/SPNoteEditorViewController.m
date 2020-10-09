@@ -1777,8 +1777,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
- - (void)addCollaboratorsAction:(id)sender {
-
+- (void)addCollaboratorsAction:(id)sender {
+    
     [SPTracker trackEditorCollaboratorsAccessed];
 	   
     SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
