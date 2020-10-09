@@ -259,7 +259,7 @@ private extension OptionsViewController {
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .copy)
-        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
+        cell.title = copyLinkText(for: note)
         cell.selectable = canCopyLink(to: note)
         return cell
     }
