@@ -161,6 +161,8 @@ private extension OptionsViewController {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .pin)
         cell.title = NSLocalizedString("Pin to Top", comment: "Toggles the Pinned State")
+        cell.enabledAccessibilityHint = NSLocalizedString("Unpin note", comment: "Pin State Accessibility Hint")
+        cell.disabledAccessibilityHint = NSLocalizedString("Pin note", comment: "Pin State Accessibility Hint")
         cell.isOn = note.pinned
         return cell
     }
@@ -169,6 +171,8 @@ private extension OptionsViewController {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .note)
         cell.title = NSLocalizedString("Markdown", comment: "Toggles the Markdown State")
+        cell.enabledAccessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Markdown Accessibility Hint")
+        cell.disabledAccessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.isOn = note.markdown
         return cell
     }
@@ -198,8 +202,10 @@ private extension OptionsViewController {
     func dequeuePublishCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .published)
-        cell.isOn = note.published
         cell.title = NSLocalizedString("Publish", comment: "Publishes a Note to the Web")
+        cell.enabledAccessibilityHint = NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint")
+        cell.disabledAccessibilityHint = NSLocalizedString("Publish note", comment: "Publish Accessibility Hint")
+        cell.isOn = note.published
         return cell
     }
 
