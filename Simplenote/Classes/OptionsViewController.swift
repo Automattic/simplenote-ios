@@ -285,13 +285,13 @@ extension OptionsViewController {
     func copyLinkText(for note: Note) -> String {
         if note.published {
             return note.publishURL.isEmpty ?
-                NSLocalizedString("Publishing...", comment: "") :
-                NSLocalizedString("Copy Link", comment: "")
+                NSLocalizedString("Publishing...", comment: "Indicates the Note is being published") :
+                NSLocalizedString("Copy Link", comment: "Copies the Note's Public Link")
         }
 
         return note.publishURL.isEmpty ?
-            NSLocalizedString("Copy Link", comment: "") :
-            NSLocalizedString("Unpublishing...", comment: "")
+            NSLocalizedString("Copy Link", comment: "Copies the Note's Public Link") :
+            NSLocalizedString("Unpublishing...", comment: "Indicates the Note is being unpublished")
     }
 
 }
