@@ -239,10 +239,10 @@ private extension OptionsViewController {
     func dequeuePublishCell(from tableView: UITableView, at indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: SwitchTableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .published)
-        cell.isOn = note.published
         cell.title = NSLocalizedString("Publish", comment: "Publishes a Note to the Web")
         cell.enabledAccessibilityHint = NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Publish note", comment: "Publish Accessibility Hint")
+        cell.isOn = note.published
         cell.onChange = { [weak self] newState in
             self?.publishWasPressed(newState)
         }
@@ -323,14 +323,14 @@ private extension OptionsViewController {
 
     @IBAction
     func pinnedWasPressed(_ newState: Bool) {
-        SPObjectManager.shared().updatePinnedState(note, pinned: newState)
+        SPObjectManager.shared().updatePinnedState(newState, note: note)
         SPTracker.trackEditorNotePinEnabled(newState)
     }
 
     @IBAction
     func markdownWasPressed(_ newState: Bool) {
         Options.shared.markdown = newState
-        SPObjectManager.shared().updateMarkdownState(note, markdown: newState)
+        SPObjectManager.shared().updateMarkdownState(newState, note: note)
         SPTracker.trackEditorNoteMarkdownEnabled(newState)
         markdownWasEnabled = newState
     }
@@ -353,7 +353,7 @@ private extension OptionsViewController {
 
     @IBAction
     func publishWasPressed(_ newState: Bool) {
-        SPObjectManager.shared().updatePublishedState(note, published: newState)
+        SPObjectManager.shared().updatePublishedState(newState, note: note)
         SPTracker.trackEditorNotePublishEnabled(newState)
     }
 
