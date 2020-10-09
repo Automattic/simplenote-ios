@@ -251,6 +251,10 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         }
     }
 
+    func optionsController(_ sender: OptionsViewController, modified note: Note) {
+        blankNote = false
+    }
+
     func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
         guard markdownWasEnabled else {
             return

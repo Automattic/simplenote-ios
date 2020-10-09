@@ -32,6 +32,7 @@
 // State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
+@property (nonatomic, assign) BOOL blankNote;
 
 
 - (void)prepareToPopView;

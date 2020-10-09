@@ -52,7 +52,6 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPActionSheetDelegate,
-                                        SPCollaboratorDelegate,
                                         SPEditorTextViewDelegate,
                                         SPHorizontalPickerViewDelegate,
                                         SPInteractivePushViewControllerProvider,
@@ -79,7 +78,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 // State
 @property (nonatomic, assign) BOOL                      actionSheetVisible;
-@property (nonatomic, assign) BOOL                      blankNote;
 @property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
 @property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
