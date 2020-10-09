@@ -9,7 +9,7 @@ protocol OptionsControllerDelegate: class {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
-    func optionsControllerDidDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
+    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
 }
 
 
@@ -73,7 +73,7 @@ class OptionsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.optionsControllerDidDismiss(self, markdownWasEnabled: markdownWasEnabled)
+        delegate?.optionsControllerWillDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 
@@ -262,7 +262,7 @@ private extension OptionsViewController {
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .copy)
-        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
+        cell.title = copyLinkText(for: note)
         cell.selectable = canCopyLink(to: note)
         return cell
     }
