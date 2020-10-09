@@ -6,7 +6,6 @@
 #import "SPAppDelegate.h"
 #import "SPTransitionController.h"
 #import "SPTextView.h"
-#import "SPActivityView.h"
 #import "SPObjectManager.h"
 #import "SPTracker.h"
 #import "SPRatingsHelper.h"
