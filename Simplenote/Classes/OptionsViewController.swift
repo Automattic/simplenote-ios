@@ -21,10 +21,6 @@ class OptionsViewController: UIViewController {
     ///
     @IBOutlet private var tableView: UITableView!
 
-    /// Note for which we'll render the current Options
-    ///
-    private let note: Note
-
     /// EntityObserver: Allows us to listen to changes applied to the associated entity
     ///
     private lazy var entityObserver = EntityObserver(context: SPAppDelegate.shared().managedObjectContext, object: note)
@@ -41,6 +37,10 @@ class OptionsViewController: UIViewController {
     /// Indicates if the Markdown flag was Enabled
     ///
     private var markdownWasEnabled = false
+
+    /// Note for which we'll render the current Options
+    ///
+    let note: Note
 
     /// OptionsController's Delegate
     ///

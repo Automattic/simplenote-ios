@@ -213,6 +213,21 @@ private extension SPNoteEditorViewController {
 
         SPTracker.trackEditorActivitiesAccessed()
     }
+
+    func presentShareController(for note: Note) {
+        guard let activityController = UIActivityViewController(note: note) else {
+            return
+        }
+
+        activityController.modalPresentationStyle = .popover
+
+        let presentationController = activityController.popoverPresentationController
+        presentationController?.sourceRect = actionButton.bounds
+        presentationController?.sourceView = actionButton
+
+        present(activityController, animated: true, completion: nil)
+        SPTracker.trackEditorNoteContentShared()
+    }
 }
 
 
@@ -224,7 +239,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.presentShareController()
+            self.presentShareController(for: sender.note)
         }
     }
 
@@ -269,22 +284,6 @@ extension SPNoteEditorViewController {
         }
 
         presentNoteOptions(for: note, from: sender)
-    }
-
-    @IBAction
-    func presentShareController() {
-        guard let note = currentNote, let activityController = UIActivityViewController(note: note) else {
-            return
-        }
-
-        activityController.modalPresentationStyle = .popover
-
-        let presentationController = activityController.popoverPresentationController
-        presentationController?.sourceRect = actionButton.bounds
-        presentationController?.sourceView = actionButton
-
-        present(activityController, animated: true, completion: nil)
-        SPTracker.trackEditorNoteContentShared()
     }
 }
 
