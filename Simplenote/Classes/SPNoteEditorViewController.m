@@ -572,7 +572,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self endEditing];
     
-    if (self.blankNote) {
+    if (self.currentNote.isBlank) {
         
         // delete note
         [[SPObjectManager sharedManager] permenentlyDeleteNote:_currentNote];
@@ -649,14 +649,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         [_tagView clearAllTags];
     }
     
-    self.blankNote = NO;
     self.modified = NO;
     self.previewing = NO;
 }
 
 - (void)clearNote
 {
-    self.blankNote = NO;
     _currentNote = nil;
     _noteEditorTextView.text = @"";
     
@@ -1093,9 +1091,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return interaction != UITextItemInteractionPresentActions;
 }
 
-- (void)textViewDidChange:(UITextView *)textView {
-    
-    self.blankNote = NO;
+- (void)textViewDidChange:(UITextView *)textView
+{
     self.modified = YES;
     
     [self.saveTimer invalidate];
@@ -1297,7 +1294,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)newButtonAction:(id)sender {
 
-    if (_currentNote && self.blankNote) {
+    if (self.currentNote.isBlank) {
         [_noteEditorTextView becomeFirstResponder];
         return;
     }
@@ -1337,7 +1334,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         snapshot.frame = snapshotRect;
         [self.view addSubview:snapshot];
         [self displayNote:newNote];
-        self.blankNote = YES;
 
         [UIView animateWithDuration:0.2
                          animations:^{
@@ -1357,7 +1353,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } else {
 
         [self displayNote:newNote];
-        self.blankNote = YES;
     }
     
     self.disableShrinkingNavigationBar = NO;
@@ -1636,7 +1631,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
     
     [_currentNote addTag:tagName];
-    self.blankNote = NO;
     self.modified = YES;
     [self save];
     
@@ -1651,7 +1645,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName {
     
     [_currentNote stripTag:tagName];
-    self.blankNote = NO;
     self.modified = YES;
     
     NSString *deletedTagBuffer = _deletedTagBuffer;

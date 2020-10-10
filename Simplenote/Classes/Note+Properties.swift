@@ -5,6 +5,13 @@ import Foundation
 //
 extension Note {
 
+    /// Indicates if the receiver is a blank document
+    ///
+    @objc
+    var isBlank: Bool {
+        objectID.isTemporaryID && content?.count == .zero && tagsArray?.count == .zero
+    }
+
     /// Returns the Creation / Modification date for a given SortMode
     ///
     func date(for sortMode: SortMode) -> Date? {

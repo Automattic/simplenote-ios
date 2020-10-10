@@ -9,7 +9,6 @@ protocol OptionsControllerDelegate: class {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
-    func optionsController(_ sender: OptionsViewController, modified note: Note)
     func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
 }
 
