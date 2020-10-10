@@ -195,7 +195,7 @@ private extension SPNoteEditorViewController {
         save()
     }
 
-    func presentNoteOptions(for note: Note, from sourceView: UIView) {
+    func presentOptionsController(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
@@ -226,7 +226,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        presentNoteOptions(for: note, from: sender)
+        presentOptionsController(for: note, from: sender)
     }
 }
 
