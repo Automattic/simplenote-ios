@@ -214,7 +214,7 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorActivitiesAccessed()
     }
 
-    func presentShareController(for note: Note) {
+    func presentShareController(for note: Note, from sourceView: UIView) {
         guard let activityController = UIActivityViewController(note: note) else {
             return
         }
@@ -222,8 +222,8 @@ private extension SPNoteEditorViewController {
         activityController.modalPresentationStyle = .popover
 
         let presentationController = activityController.popoverPresentationController
-        presentationController?.sourceRect = actionButton.bounds
-        presentationController?.sourceView = actionButton
+        presentationController?.sourceRect = sourceView.bounds
+        presentationController?.sourceView = sourceView
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
@@ -239,7 +239,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.presentShareController(for: sender.note)
+            self.presentShareController(for: sender.note, from: self.actionButton)
         }
     }
 
