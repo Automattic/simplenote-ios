@@ -124,11 +124,15 @@ extension SPNoteEditorViewController: KeyboardObservable {
 //
 extension SPNoteEditorViewController {
 
+    /// Indicates if VoiceOver is running
+    ///
     @objc
     var voiceoverEnabled: Bool {
         UIAccessibility.isVoiceOverRunning
     }
 
+    /// Whenver VoiceOver is enabled, this API will lock the Tags List in position
+    ///
     @objc
     func refreshVoiceoverSupport() {
         let enabled = voiceoverEnabled
@@ -244,9 +248,6 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         }
     }
 
-    func optionsController(_ sender: OptionsViewController, modified note: Note) {
-        blankNote = false
-    }
 
     func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
         guard markdownWasEnabled else {
