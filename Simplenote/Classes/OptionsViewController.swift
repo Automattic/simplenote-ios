@@ -10,10 +10,6 @@ class OptionsViewController: UIViewController {
     ///
     @IBOutlet private var tableView: UITableView!
 
-    /// Note for which we'll render the current Options
-    ///
-    private let note: Note
-
     /// Sections onScreen
     ///
     private let sections: [Section] = [
@@ -22,6 +18,11 @@ class OptionsViewController: UIViewController {
         Section(rows: [.collaborate]),
         Section(rows: [.trash])
     ]
+
+    /// Note for which we'll render the current Options
+    ///
+    let note: Note
+
 
     /// Designated Initializer
     ///
