@@ -277,13 +277,13 @@
 
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
-    [self createPeronTagFromProperty:contactProperty];
+    [self createPersonTagFromProperty:contactProperty];
 }
 
 
 #pragma mark - Helpers
 
-- (void)createPeronTagFromProperty:(CNContactProperty *)property
+- (void)createPersonTagFromProperty:(CNContactProperty *)property
 {
     NSString *name = [CNContactFormatter stringFromContact:property.contact style:CNContactFormatterStyleFullName];
     NSString *email = property.value;
