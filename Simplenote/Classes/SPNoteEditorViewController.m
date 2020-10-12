@@ -598,7 +598,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)backButtonAction:(id)sender {
+- (void)backButtonAction:(id)sender
+{
     
     // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
@@ -1473,17 +1474,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         minVersion = 1;
     
     return minVersion;
-}
-
-- (void)trashNoteAction
-{
-    [SPTracker trackEditorNoteDeleted];
-
-    [[SPObjectManager sharedManager] trashNote:_currentNote];
-    [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
-
-    [self clearNote];
-    [self backButtonAction:nil];
 }
 
 

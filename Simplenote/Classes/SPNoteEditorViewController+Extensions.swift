@@ -1,4 +1,5 @@
 import Foundation
+import CoreSpotlight
 
 
 // MARK: - Interface Initialization
@@ -231,6 +232,18 @@ private extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Services
+//
+extension SPNoteEditorViewController {
+
+    func delete(note: Note) {
+        SPTracker.trackEditorNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+}
+
+
 // MARK: - OptionsControllerDelegate
 //
 extension SPNoteEditorViewController: OptionsControllerDelegate {
@@ -255,7 +268,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         sender.dismiss(animated: true, completion: nil)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.trashNoteAction()
+            self.trashWasPressed(self)
         }
     }
 
@@ -284,6 +297,16 @@ extension SPNoteEditorViewController {
         }
 
         presentOptionsController(for: note, from: sender)
+    }
+
+    @IBAction
+    func trashWasPressed(_ sender: Any) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        delete(note: note)
     }
 }
 
