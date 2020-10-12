@@ -9,7 +9,6 @@ protocol OptionsControllerDelegate: class {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
-    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
 }
 
 
@@ -42,7 +41,7 @@ class OptionsViewController: UIViewController {
     ///
     let note: Note
 
-    /// OptionsController's Delegate
+    /// Options Delegate
     ///
     weak var delegate: OptionsControllerDelegate?
 
@@ -69,11 +68,6 @@ class OptionsViewController: UIViewController {
         refreshStyle()
         refreshInterface()
         refreshPreferredSize()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        delegate?.optionsControllerWillDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 

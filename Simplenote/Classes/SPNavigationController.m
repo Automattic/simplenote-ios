@@ -20,6 +20,15 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     [self refreshBlurEffect];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    if (self.onWillDismiss) {
+        self.onWillDismiss();
+    }
+}
+
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
 {
     if (_displaysBlurEffect == displaysBlurEffect) {
