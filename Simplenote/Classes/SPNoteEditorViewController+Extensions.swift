@@ -283,7 +283,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
 
         // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.trashWasPressed(self)
+            self.delete(note: sender.note)
         }
     }
 }
@@ -301,16 +301,6 @@ extension SPNoteEditorViewController {
         }
 
         presentOptionsController(for: note, from: sender)
-    }
-
-    @IBAction
-    func trashWasPressed(_ sender: Any) {
-        guard let note = currentNote else {
-            assertionFailure()
-            return
-        }
-
-        delete(note: note)
     }
 }
 
