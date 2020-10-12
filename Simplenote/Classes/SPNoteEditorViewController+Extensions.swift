@@ -251,6 +251,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressShare(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.presentShareController(for: sender.note, from: self.actionButton)
         }
@@ -259,6 +260,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.presentHistoryController()
         }
@@ -267,6 +269,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressTrash(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.trashWasPressed(self)
         }
@@ -277,7 +280,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
             return
         }
 
-        // Let's wait a bit until the Dismiss Animation concludes
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.bounceMarkdownPreview()
         }
