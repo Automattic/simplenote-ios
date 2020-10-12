@@ -23,8 +23,8 @@ extension UIViewController {
     func configureAsPopover(sourceView: UIView) {
         modalPresentationStyle = .popover
 
+        // This will only work in iPad devices!
         guard let presentationController = popoverPresentationController else {
-            assertionFailure()
             return
         }
 
