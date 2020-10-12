@@ -231,11 +231,7 @@ private extension SPNoteEditorViewController {
             return
         }
 
-        activityController.modalPresentationStyle = .popover
-
-        let presentationController = activityController.popoverPresentationController
-        presentationController?.sourceRect = sourceView.bounds
-        presentationController?.sourceView = sourceView
+        activityController.configureAsPopover(sourceView: sourceView)
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
