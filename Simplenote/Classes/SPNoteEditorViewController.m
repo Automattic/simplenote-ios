@@ -1479,28 +1479,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
     [SPTracker trackEditorNoteDeleted];
 
-    // create a snapshot before the animation
-    UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = _noteEditorTextView.frame;
-    [self.view addSubview:snapshot];
-
     [[SPObjectManager sharedManager] trashNote:_currentNote];
     [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
 
     [self clearNote];
-
-    [UIView animateWithDuration:0.25
-                     animations:^{
-
-                         snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
-                         snapshot.alpha = 0.0;
-
-                     } completion:^(BOOL finished) {
-
-                         [snapshot removeFromSuperview];
-                         [self backButtonAction:nil];
-
-                     }];
+    [self backButtonAction:nil];
 }
 
 
