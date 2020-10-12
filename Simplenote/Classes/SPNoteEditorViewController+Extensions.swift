@@ -1,4 +1,5 @@
 import Foundation
+import CoreSpotlight
 
 
 // MARK: - Interface Initialization
@@ -199,18 +200,30 @@ private extension SPNoteEditorViewController {
         save()
     }
 
+    func mustBounceMarkdownPreview(note: Note, oldMarkdownState: Bool) -> Bool {
+        note.markdown && oldMarkdownState != note.markdown
+    }
+
+    func bounceMarkdownPreviewIfNeeded(note: Note, oldMarkdownState: Bool) {
+        guard mustBounceMarkdownPreview(note: note, oldMarkdownState: oldMarkdownState) else {
+            return
+        }
+
+        bounceMarkdownPreview()
+    }
+
     func presentOptionsController(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
         optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
+        navigationController.configureAsPopover(sourceView: sourceView)
         navigationController.displaysBlurEffect = true
-        navigationController.modalPresentationStyle = .popover
 
-        let presentationController = navigationController.popoverPresentationController
-        presentationController?.sourceRect = sourceView.bounds
-        presentationController?.sourceView = sourceView
-        presentationController?.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
+        let oldMarkdownState = note.markdown
+        navigationController.onWillDismiss = { [weak self] in
+            self?.bounceMarkdownPreviewIfNeeded(note: note, oldMarkdownState: oldMarkdownState)
+        }
 
         dismissKeyboardAndSave()
         present(navigationController, animated: true, completion: nil)
@@ -223,14 +236,22 @@ private extension SPNoteEditorViewController {
             return
         }
 
-        activityController.modalPresentationStyle = .popover
-
-        let presentationController = activityController.popoverPresentationController
-        presentationController?.sourceRect = sourceView.bounds
-        presentationController?.sourceView = sourceView
+        activityController.configureAsPopover(sourceView: sourceView)
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
+    }
+}
+
+
+// MARK: - Services
+//
+extension SPNoteEditorViewController {
+
+    func delete(note: Note) {
+        SPTracker.trackEditorNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
     }
 }
 
@@ -242,6 +263,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressShare(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.presentShareController(for: sender.note, from: self.actionButton)
         }
@@ -250,6 +272,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.presentHistoryController()
         }
@@ -258,19 +281,9 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     func optionsControllerDidPressTrash(_ sender: OptionsViewController) {
         sender.dismiss(animated: true, completion: nil)
 
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.trashNoteAction()
-        }
-    }
-
-    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool) {
-        guard markdownWasEnabled else {
-            return
-        }
-
-        // Let's wait a bit until the Dismiss Animation concludes
-        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
-            self.bounceMarkdownPreview()
+            self.trashWasPressed(self)
         }
     }
 }
@@ -288,6 +301,16 @@ extension SPNoteEditorViewController {
         }
 
         presentOptionsController(for: note, from: sender)
+    }
+
+    @IBAction
+    func trashWasPressed(_ sender: Any) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        delete(note: note)
     }
 }
 

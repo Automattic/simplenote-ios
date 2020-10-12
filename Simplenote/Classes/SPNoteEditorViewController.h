@@ -35,6 +35,8 @@
 
 
 - (void)prepareToPopView;
+- (void)backButtonAction:(id)sender;
+
 - (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
 - (void)clearNote;
@@ -47,7 +49,6 @@
 - (void)didDeleteCurrentNote;
 
 - (void)presentHistoryController;
-- (void)trashNoteAction;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
