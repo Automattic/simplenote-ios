@@ -3,12 +3,6 @@ import UIKit
 import SimplenoteFoundation
 
 
-// MARK: - OptionsControllerDelegate
-//
-protocol OptionsControllerDelegate: class {
-    func optionsControllerWillDismiss(_ sender: OptionsViewController, markdownWasEnabled: Bool)
-}
-
 
 // MARK: - OptionsViewController
 //
@@ -39,10 +33,6 @@ class OptionsViewController: UIViewController {
     ///
     let note: Note
 
-    /// OptionsController's Delegate
-    ///
-    weak var delegate: OptionsControllerDelegate?
-
 
     /// Designated Initializer
     ///
@@ -66,11 +56,6 @@ class OptionsViewController: UIViewController {
         refreshStyle()
         refreshInterface()
         refreshPreferredSize()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        delegate?.optionsControllerWillDismiss(self, markdownWasEnabled: markdownWasEnabled)
     }
 }
 
