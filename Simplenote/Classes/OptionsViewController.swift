@@ -25,10 +25,6 @@ class OptionsViewController: UIViewController {
         Section(rows: [.trash])
     ]
 
-    /// Indicates if the Markdown flag was Enabled
-    ///
-    private var markdownWasEnabled = false
-
     /// Note for which we'll render the current Options
     ///
     let note: Note
@@ -323,7 +319,6 @@ private extension OptionsViewController {
         Options.shared.markdown = newState
         SPObjectManager.shared().updateMarkdownState(newState, note: note)
         SPTracker.trackEditorNoteMarkdownEnabled(newState)
-        markdownWasEnabled = newState
     }
 
     @IBAction
