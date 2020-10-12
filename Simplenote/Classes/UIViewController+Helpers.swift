@@ -17,4 +17,19 @@ extension UIViewController {
     class var nibName: String {
         return classNameWithoutNamespaces
     }
+
+    /// Configures the receiver to be presented as a popover from the specified Source View
+    ///
+    func configureAsPopover(sourceView: UIView) {
+        modalPresentationStyle = .popover
+
+        guard let presentationController = popoverPresentationController else {
+            assertionFailure()
+            return
+        }
+
+        presentationController.sourceRect = sourceView.bounds
+        presentationController.sourceView = sourceView
+        presentationController.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
+    }
 }
