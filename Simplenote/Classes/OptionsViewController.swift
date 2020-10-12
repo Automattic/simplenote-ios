@@ -33,9 +33,16 @@ class OptionsViewController: UIViewController {
         Section(rows: [.trash])
     ]
 
-    /// Indicates if the Markdown flag was Enabled
+    /// Indicates if we're waiting for an update. If so, we'll skip the next "Reload Interface" call that might come across
     ///
-    private var markdownWasEnabled = false
+    /// - Important:
+    ///     Updating any of the Note Flags (Pinned, Markdown, Published) involves updating the local database.
+    ///     Since there is no way to match an Update Request with an actual CoreData refresh event, we'll rely on this simple flag to
+    ///     attempt to debounce multiple Switch Toggle events that might happen.
+    ///
+    ///     Our goal is to prevent a race condition between the user's flip action, and the remote ACK.
+    ///
+    private var pendingUpdate = true
 
     /// Note for which we'll render the current Options
     ///
@@ -113,6 +120,11 @@ private extension OptionsViewController {
 extension OptionsViewController: EntityObserverDelegate {
 
     func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
+        if pendingUpdate {
+            pendingUpdate = false
+            return
+        }
+
         refreshInterface()
     }
 }
@@ -307,7 +319,7 @@ private extension OptionsViewController {
     func rowWasPressed(_ indexPath: IndexPath) {
         switch rowAtIndexPath(indexPath) {
         case .copyInternalURL:
-            break
+            copyInterlinkWasPressed()
         case .share:
             shareWasPressed()
         case .history:
@@ -328,6 +340,7 @@ private extension OptionsViewController {
     func pinnedWasPressed(_ newState: Bool) {
         SPObjectManager.shared().updatePinnedState(newState, note: note)
         SPTracker.trackEditorNotePinEnabled(newState)
+        pendingUpdate = true
     }
 
     @IBAction
@@ -335,7 +348,7 @@ private extension OptionsViewController {
         Options.shared.markdown = newState
         SPObjectManager.shared().updateMarkdownState(newState, note: note)
         SPTracker.trackEditorNoteMarkdownEnabled(newState)
-        markdownWasEnabled = newState
+        pendingUpdate = true
     }
 
     @IBAction
@@ -358,6 +371,8 @@ private extension OptionsViewController {
     func publishWasPressed(_ newState: Bool) {
         SPObjectManager.shared().updatePublishedState(newState, note: note)
         SPTracker.trackEditorNotePublishEnabled(newState)
+        pendingUpdate = true
+        note.updateWaiting = true
     }
 
     @IBAction
