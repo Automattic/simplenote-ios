@@ -291,7 +291,7 @@ private extension OptionsViewController {
     func rowWasPressed(_ indexPath: IndexPath) {
         switch rowAtIndexPath(indexPath) {
         case .copyInternalURL:
-            break
+            copyInterlinkWasPressed()
         case .share:
             shareWasPressed()
         case .history:
