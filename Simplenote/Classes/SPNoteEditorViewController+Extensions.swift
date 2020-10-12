@@ -210,6 +210,7 @@ private extension SPNoteEditorViewController {
 
     func presentOptionsController(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
+        optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
         navigationController.configureAsPopover(sourceView: sourceView)
