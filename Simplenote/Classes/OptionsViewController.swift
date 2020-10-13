@@ -360,7 +360,6 @@ private extension OptionsViewController {
         SPObjectManager.shared().updatePublishedState(newState, note: note)
         SPTracker.trackEditorNotePublishEnabled(newState)
         pendingUpdate = true
-        note.updateWaiting = true
     }
 
     @IBAction
