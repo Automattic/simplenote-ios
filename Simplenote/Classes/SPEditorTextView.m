@@ -557,7 +557,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     if (characterIndex < self.textStorage.length) {
         if ([self handlePressedAttachmentAtIndex:characterIndex] ||
             [self handlePressedLinkAtIndex:characterIndex]) {
-
             recognizer.cancelsTouchesInView = YES;
             return;
         }
@@ -599,10 +598,16 @@ NSInteger const ChecklistCursorAdjustment = 2;
     BOOL wasChecked = attachment.isChecked;
     attachment.isChecked = !wasChecked;
 
+    // If the current selection is the end of the note, the keyboard has never shown,
+    // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
     if (self.selectedRange.location == self.text.length) {
-        // If the current selection is the end of the note, the keyboard has never shown,
-        // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
         self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+
+    // Ensure the Attachment is onscreen:
+    // This prevents iOS 14 from bouncing back to the selected cursor location
+    } else if (@available(iOS 14, *)) {
+        NSRange newRange = NSMakeRange(range.location + range.length, 0);
+        [self scrollRangeToVisible:newRange];
     }
 
     [self.delegate textViewDidChange:self];
