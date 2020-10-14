@@ -1,5 +1,9 @@
 4.26
 -----
+
+4.25.1
+-----
+-   Fixed a bug that affected scrolling in iOS 14 #916
  
 4.25
 -----
