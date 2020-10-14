@@ -29,7 +29,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
-@property (nonatomic) NSInteger lastCursorPosition;
 
 @end
 
@@ -570,31 +569,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     UITextPosition *position = [self closestPositionToPoint:point];
     UITextRange *range = [self textRangeFromPosition:position toPosition:position];
     [self setSelectedTextRange:range];
-
-    // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
-    // on the same cursor location twice, so we're controlling the menu manually.
-    NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
-    UIMenuController *menuController = [UIMenuController sharedMenuController];
-
-    if (self.lastCursorPosition != startOffset) {
-        [menuController dismissIfNeeded];
-        self.lastCursorPosition = startOffset;
-        return;
-    }
-
-    if (menuController.isMenuVisible) {
-        [menuController setMenuVisible:NO animated:YES];
-        return;
-    }
-
-    // Failsafe: Sometimes `caretRectForPosition` might return a seriously incorrect frame
-    // Ref. https://github.com/Automattic/simplenote-ios/issues/858
-    CGRect caretFrame = [self caretRectForPosition:position];
-
-    if (!CGRectIntersectsRect(self.bounds, caretFrame)) {
-        return;
-    }
-    [menuController displayFromTargetRect:caretFrame inView:self];
 }
 
 - (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
