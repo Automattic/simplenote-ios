@@ -11,15 +11,14 @@ import UIKit
 //
 class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
 
-    ///
+    /// TextView in which we're listening to changes
     ///
     @objc
     weak var parentTextView: UITextView?
 
 
-    /// Linkification happens when the TextView is not editable.
-    /// Ever since iOS 7, we've relied on a custom GestureRecognizer to handle tap events, and reposition the cursor.
-    /// As per iOS 14, since our custom tap handling is causing weird side effects, we're only proceeding when the TextView is not the First Responder.
+    /// TextView only performs linkification when the `editable` flag is disabled.
+    /// We're allowing Edition by means of a TapGestureRecognizer, which also allows us to deal with Tap events performed over TextAttachments
     ///
     /// Ref. https://github.com/Automattic/simplenote-ios/pull/916
     ///

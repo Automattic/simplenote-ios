@@ -599,21 +599,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return YES;
 }
 
-- (void)selectEndOfLineForRange:(NSRange)range
-{
-    NSRange lineRange = [self.text lineRangeForRange:range];
-    if (lineRange.location == NSNotFound) {
-        return;
-    }
-
-    NSInteger endOfLine = NSMaxRange(lineRange) - 1;
-    if (endOfLine < 0 || endOfLine > self.textStorage.length) {
-        return;
-    }
-
-    self.selectedRange = NSMakeRange(endOfLine, 0);
-}
-
 - (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex
 {
     if (![self performsAggressiveLinkWorkaround]) {
@@ -628,6 +613,21 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self.editorTextDelegate textView:self receivedInteractionWithURL:link];
 
     return YES;
+}
+
+- (void)selectEndOfLineForRange:(NSRange)range
+{
+    NSRange lineRange = [self.text lineRangeForRange:range];
+    if (lineRange.location == NSNotFound) {
+        return;
+    }
+
+    NSInteger endOfLine = NSMaxRange(lineRange) - 1;
+    if (endOfLine < 0 || endOfLine > self.textStorage.length) {
+        return;
+    }
+
+    self.selectedRange = NSMakeRange(endOfLine, 0);
 }
 
 - (BOOL)performsAggressiveLinkWorkaround
