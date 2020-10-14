@@ -69,14 +69,17 @@ NSInteger const ChecklistCursorAdjustment = 2;
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
 
-        self.internalRecognizerDelegate = [SPEditorTapRecognizerDelegate new];
+
+        SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
+        recognizerDelegate.parentTextView = self;
+        self.internalRecognizerDelegate = recognizerDelegate;
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self
                                                         action:@selector(onTextTapped:)];
         tapGestureRecognizer.cancelsTouchesInView = NO;
-        
-        tapGestureRecognizer.delegate = self.internalRecognizerDelegate;
+        tapGestureRecognizer.delegate = recognizerDelegate;
+
         [self addGestureRecognizer:tapGestureRecognizer];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
@@ -569,19 +572,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)handlePressedLocation:(CGPoint)point
 {
-    // Linkification happens when the TextView is not editable.
-    // Ever since iOS 7, we've relied on a custom GestureRecognizer to handle tap events, and reposition the cursor.
-    // As per iOS 14, since our custom tap handling is causing weird side effects, we're only proceeding when the TextView
-    // is not the First Responder.
-    //
-    // Ref. https://github.com/Automattic/simplenote-ios/pull/916
-    //
-    if (@available(iOS 14, *)) {
-        if (self.isFirstResponder) {
-            return;
-        }
-    }
-
     [self becomeFirstResponder];
 
     // Move the cursor to the tapped position
