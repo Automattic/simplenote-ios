@@ -1,2 +1,5 @@
-- Corretto un problema di stabilità nell'editor delle note
-- Lo scorrimento di una nota nell'elenco ora mostra l'azione del link interno per la copia
+- Corretto un bug che impediva l'aggiunta di collaboratori con indirizzi email che contengono nuovi TLD
+- Lo scorrimento di una nota nell'elenco ora rivela l'azione Copia collegamento interno
+- Premendo a lungo su un link interno ora viene fatta pressione sulla nota di destinazione
+- iOS 12 è ora il minimo sistema operativo supportato
+- Il completamento automatico della password è ora il modo migliore per gestire le tue credenziali

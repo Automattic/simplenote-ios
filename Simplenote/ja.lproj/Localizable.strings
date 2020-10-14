@@ -311,8 +311,7 @@
 /* Empty Note Placeholder */
 "New note..." = "新規ノート…";
 
-/* Alert's Cancel Action
-   Cancels Empty Trash Action */
+/* Cancels Empty Trash Action */
 "No" = "いいえ";
 
 /* Message shown in note list when no notes are in the current view */
@@ -348,9 +347,6 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "ノートを開く";
-
-/* AlertController's Payload for the broken Sort Options Fix */
-"Our update may have changed the order in which your notes appear. Would you like to review sort settings?" = "更新によってノートの表示順が変更された可能性があります。並べ替えの設定を確認しますか ?";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
@@ -590,8 +586,7 @@
 /* Work at Automattic */
 "Work With Us" = "求人情報";
 
-/* Alert's Accept Action
-   Proceeds with the Empty Trash OP */
+/* Proceeds with the Empty Trash OP */
 "Yes" = "はい";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */

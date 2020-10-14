@@ -80,12 +80,6 @@
 + (void)trackRatingsFeedbackSent;
 + (void)trackRatingsFeedbackDeclined;
 
-#pragma mark - One Password
-+ (void)trackOnePasswordLoginFailure;
-+ (void)trackOnePasswordLoginSuccess;
-+ (void)trackOnePasswordSignupFailure;
-+ (void)trackOnePasswordSignupSuccess;
-
 #pragma mark - User
 + (void)trackUserAccountCreated;
 + (void)trackUserSignedIn;

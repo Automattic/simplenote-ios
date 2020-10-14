@@ -219,7 +219,7 @@
 {
     // make sure email address is actually an email address
     person.email = [person.email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (![person.email containsEmailAddress]) {
+    if (![person.email isValidEmailAddress]) {
         return;
     }
     
@@ -241,7 +241,7 @@
 - (void)processTextInField
 {
     NSString *email = entryTextField.text;
-    if (email.containsEmailAddress == false) {
+    if (email.isValidEmailAddress == false) {
         return;
     }
 

@@ -9,6 +9,7 @@
 #import "NSString+Condensing.h"
 #import "NSString+Metadata.h"
 #import "JSONKit+Simplenote.h"
+#import "Simplenote-Swift.h"
 
 
 @interface Note (PrimitiveAccessors)
@@ -414,7 +415,7 @@ SEL notifySelector;
 
     emailTagsArray = [NSMutableArray arrayWithCapacity:2];
     for (NSString *tag in tagsArray) {
-        if ([tag containsEmailAddress])
+        if ([tag isValidEmailAddress])
             [emailTagsArray addObject:tag];
     }
 }

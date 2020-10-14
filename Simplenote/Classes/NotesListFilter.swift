@@ -3,7 +3,7 @@ import Foundation
 
 // MARK: - NotesListFilter
 //
-enum NotesListFilter {
+enum NotesListFilter: Equatable {
     case everything
     case deleted
     case untagged
@@ -51,22 +51,4 @@ extension NotesListFilter {
             return name
         }
     }
-}
-
-
-// MARK: - Equality
-//
-func ==(lhs: NotesListFilter, rhs: NotesListFilter) -> Bool {
-    switch (lhs, rhs) {
-    case (.everything, .everything), (.deleted, .deleted), (.untagged, .untagged):
-        return true
-    case let (.tag(lName), .tag(rName)):
-        return lName == rName
-    default:
-        return false
-    }
-}
-
-func !=(lhs: NotesListFilter, rhs: NotesListFilter) -> Bool {
-    return !(lhs == rhs)
 }

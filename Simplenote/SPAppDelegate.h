@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)save;
 - (void)logoutAndReset:(id)sender;
 
-- (NSString *)getPin:(BOOL)checkLegacy;
+- (nullable NSString *)getPin;
 - (void)setPin:(NSString *)newPin;
 - (void)removePin;
 

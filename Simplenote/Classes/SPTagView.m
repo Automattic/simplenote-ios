@@ -144,7 +144,7 @@
     
     for (NSString *tag in tagNames) {
         
-        if (![tag containsEmailAddress])
+        if (![tag isValidEmailAddress])
             [self newTagPillWithString:tag];
     }
     
@@ -364,7 +364,7 @@
     
     // there may be multiple tags
     NSString *name = addTagField.text;
-    BOOL containsEmailAddress = [name containsEmailAddress];
+    BOOL containsEmailAddress = [name isValidEmailAddress];
     
 
     if (name.length > 0 && [self.tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {

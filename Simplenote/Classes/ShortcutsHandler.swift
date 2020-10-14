@@ -40,10 +40,8 @@ class ShortcutsHandler: NSObject {
     ///
     @objc
     func unregisterSimplenoteActivities() {
-        if #available(iOS 12.0, *) {
-            NSUserActivity.deleteAllSavedUserActivities {
-                // No-Op: The SDK's API... doesn't take a nil callback. Neat!
-            }
+        NSUserActivity.deleteAllSavedUserActivities {
+            // No-Op: The SDK's API... doesn't take a nil callback. Neat!
         }
     }
 
