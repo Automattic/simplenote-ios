@@ -24,6 +24,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 @interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) SPEditorTapRecognizerDelegate *internalRecognizerDelegate;
 @property (strong, nonatomic) NSArray *textCommands;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
@@ -66,14 +67,15 @@ NSInteger const ChecklistCursorAdjustment = 2;
                                                  selector:@selector(didEndEditing:)
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
-        
+
+        self.internalRecognizerDelegate = [SPEditorTapRecognizerDelegate new];
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self
                                                         action:@selector(onTextTapped:)];
-        tapGestureRecognizer.delegate = self;
         tapGestureRecognizer.cancelsTouchesInView = NO;
         
+        tapGestureRecognizer.delegate = self.internalRecognizerDelegate;
         [self addGestureRecognizer:tapGestureRecognizer];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
