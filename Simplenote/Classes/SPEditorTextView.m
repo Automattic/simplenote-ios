@@ -582,9 +582,10 @@ NSInteger const ChecklistCursorAdjustment = 2;
     BOOL wasChecked = attachment.isChecked;
     attachment.isChecked = !wasChecked;
 
-    // If the current selection is the end of the note, the keyboard has never shown,
-    // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
-    self.selectedRange = NSMakeRange(NSMaxRange(attachmentRange), 0);
+    // iOS 13 Bugfix:
+    // Move the TextView Selection to the end of the TextAttachment's line
+    // This prevents the UIMenuController from showing up after toggling multiple TextAttachments in a row.
+    [self selectEndOfLineForRange:attachmentRange];
 
     // iOS 14 Bugfix:
     // Ensure the Attachment is onscreen. This prevents iOS 14 from bouncing back to the selected location
@@ -598,6 +599,20 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return YES;
 }
 
+- (void)selectEndOfLineForRange:(NSRange)range
+{
+    NSRange lineRange = [self.text lineRangeForRange:range];
+    if (lineRange.location == NSNotFound) {
+        return;
+    }
+
+    NSInteger endOfLine = NSMaxRange(lineRange) - 1;
+    if (endOfLine < 0 || endOfLine > self.textStorage.length) {
+        return;
+    }
+
+    self.selectedRange = NSMakeRange(endOfLine, 0);
+}
 
 - (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex
 {
