@@ -20,7 +20,6 @@ PODS:
   - CocoaLumberjack/Core (3.6.2)
   - Gridicons (0.19)
   - Reachability (3.2)
-  - SAMKeychain (1.5.2)
   - Sentry (4.5.0):
     - Sentry/Core (= 4.5.0)
   - Sentry/Core (4.5.0)
@@ -45,7 +44,6 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 2.3.0)
   - Automattic-Tracks-iOS (~> 0.5)
   - Gridicons (~> 0.18)
-  - SAMKeychain (= 1.5.2)
   - Simperium (~> 1.0)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
@@ -57,7 +55,6 @@ SPEC REPOS:
     - CocoaLumberjack
     - Gridicons
     - Reachability
-    - SAMKeychain
     - Sentry
     - Simperium
     - Sodium
@@ -71,7 +68,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
   Simperium: fa0feb6e86de4e93d0d07704b59a0a7aebd7d5a7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
@@ -79,6 +75,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 35fb455027555c22acf6872c99b7ac8c8acf64ee
+PODFILE CHECKSUM: 95e97b56dcfc5dd8ee75870e9b1be11b1a5cbe47
 
 COCOAPODS: 1.7.5
