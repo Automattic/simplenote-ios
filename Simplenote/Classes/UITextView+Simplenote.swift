@@ -23,4 +23,10 @@ extension UITextView {
 
         return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
     }
+
+    ///
+    ///
+    func attachment<T: NSTextAttachment>(ofType: T.Type, at index: Int) -> T? {
+        return attributedText.attribute(.attachment, at: index, effectiveRange: nil) as? T
+    }
 }

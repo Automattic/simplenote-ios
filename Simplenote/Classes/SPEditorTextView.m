@@ -74,9 +74,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
         recognizerDelegate.parentTextView = self;
         self.internalRecognizerDelegate = recognizerDelegate;
 
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                                        initWithTarget:self
-                                                        action:@selector(onTextTapped:)];
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                               action:@selector(onTextTapped:)];
         tapGestureRecognizer.cancelsTouchesInView = NO;
         tapGestureRecognizer.delegate = recognizerDelegate;
 
@@ -548,15 +547,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    CGPoint locationInView = [recognizer locationInView:self];
-
-    CGPoint locationInContainer = locationInView;
-    locationInContainer.x -= self.textContainerInset.left;
-    locationInContainer.y -= self.textContainerInset.top;
-
-    NSUInteger characterIndex = [self.layoutManager characterIndexForPoint:locationInContainer
-                                                           inTextContainer:self.textContainer
-                                  fractionOfDistanceBetweenInsertionPoints:NULL];
+    NSUInteger characterIndex = [recognizer characterIndexInTextView:self];
 
     if (characterIndex < self.textStorage.length) {
         if ([self handlePressedAttachmentAtIndex:characterIndex] ||
@@ -566,6 +557,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         }
     }
 
+    CGPoint locationInView = [recognizer locationInView:self];
     [self handlePressedLocation:locationInView];
     recognizer.cancelsTouchesInView = NO;
 }

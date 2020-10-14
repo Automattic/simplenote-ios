@@ -24,11 +24,16 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     /// Ref. https://github.com/Automattic/simplenote-ios/pull/916
     ///
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard #available(iOS 14.0, *) else {
+        guard #available(iOS 14.0, *), let textView = parentTextView else {
             return true
         }
 
-        return parentTextView?.isFirstResponder == false
+        let characterIndex = gestureRecognizer.characterIndex(in: textView)
+        if textView.attachment(ofType: SPTextAttachment.self, at: characterIndex) != nil {
+            return true
+        }
+
+        return textView.isFirstResponder == false
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
