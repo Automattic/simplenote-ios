@@ -570,6 +570,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (void)handlePressedLocation:(CGPoint)point
 {
     // Let's allow iOS to handle this, under regular circumstances
+    // As per iOS 14, otherwise, we'd be "fighting" against the default handling, and "tap to scroll" becomes unusable
     if (self.isFirstResponder) {
         return;
     }
