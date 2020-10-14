@@ -589,7 +589,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     UITextRange *range = [self textRangeFromPosition:position toPosition:position];
     [self setSelectedTextRange:range];
 
-
     // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
     // on the same cursor location twice, so we're controlling the menu manually.
     NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
