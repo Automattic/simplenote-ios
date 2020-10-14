@@ -569,6 +569,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)handlePressedLocation:(CGPoint)point
 {
+    // Let's allow iOS to handle this, under regular circumstances
+    if (self.isFirstResponder) {
+        return;
+    }
+
     [self becomeFirstResponder];
 
     // Move the cursor to the tapped position
