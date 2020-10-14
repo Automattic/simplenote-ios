@@ -569,8 +569,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)handlePressedLocation:(CGPoint)point
 {
-    // Let's allow iOS to handle this, under regular circumstances
-    // As per iOS 14, otherwise, we'd be "fighting" against the default handling, and "tap to scroll" becomes unusable
+    // Linkification happens when the TextView is not editable.
+    // Ever since iOS 7, we've relied on a custom GestureRecognizer to handle tap events, and reposition the cursor.
+    // As per iOS 14, since our custom tap handling is causing weird side effects, we're only proceeding when the TextView
+    // is not the First Responder.
+    //
+    // Ref. https://github.com/Automattic/simplenote-ios/pull/916
+    //
     if (self.isFirstResponder) {
         return;
     }
