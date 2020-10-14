@@ -573,8 +573,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
 {
-    NSRange range;
-    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+    NSRange attachmentRange;
+    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&attachmentRange];
     if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {
         return NO;
     }
@@ -584,18 +584,16 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
     // If the current selection is the end of the note, the keyboard has never shown,
     // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
-    if (self.selectedRange.location == self.text.length) {
-        self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+    self.selectedRange = NSMakeRange(NSMaxRange(attachmentRange), 0);
 
-    // Ensure the Attachment is onscreen:
-    // This prevents iOS 14 from bouncing back to the selected cursor location
-    } else if (@available(iOS 14, *)) {
-        NSRange newRange = NSMakeRange(range.location + range.length, 0);
-        [self scrollRangeToVisible:newRange];
+    // iOS 14 Bugfix:
+    // Ensure the Attachment is onscreen. This prevents iOS 14 from bouncing back to the selected location
+    if (@available(iOS 14.0, *)) {
+        [self scrollRangeToVisible:self.selectedRange];
     }
 
     [self.delegate textViewDidChange:self];
-    [self.layoutManager invalidateDisplayForCharacterRange:range];
+    [self.layoutManager invalidateDisplayForCharacterRange:attachmentRange];
 
     return YES;
 }
