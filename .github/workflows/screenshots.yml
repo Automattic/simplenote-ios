@@ -23,7 +23,7 @@ jobs:
         # Try to keep this in sync with the content of the .ruby-version file,
         # but note that GitHub action only allows you to set major and minor
         # version, not the patch (i.e. 2.6, not 2.6.4)
-        ruby-version: '2.6'
+        ruby-version: '2.7'
 
     - name: Install Bundler
       run: gem install bundler
