@@ -336,11 +336,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)configureNavigationBarItems
 {
-// TODO: FIXME
-    UIBarButtonItem *backButton = self.navigationItem.backBarButtonItem;
-    backButton.target = self;
-    backButton.action = @selector(backButtonAction:);
-
     self.actionButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameInfo]
                                                          style:UIBarButtonItemStylePlain
                                                         target:self
