@@ -445,16 +445,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self prepareToPopView];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    [[self.navigationController transitionCoordinator]
-         animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {}
-         completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-            // clear the current note after pop animation completes if it wasn't cancelled
-            if (!context.isCancelled) {
-                [self clearNote];
-            }
-         }
-     ];
 }
 
 - (void)displayNote:(Note *)note
