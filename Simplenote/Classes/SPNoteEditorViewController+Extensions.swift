@@ -280,6 +280,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.delete(note: sender.note)
+            self.backButtonAction(sender)
         }
     }
 }
