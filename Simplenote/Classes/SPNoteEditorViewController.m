@@ -1109,7 +1109,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
     
     // Don't allow "3d press" on our checkbox images
-    return interaction != UITextItemInteractionPresentActions;
+    return NO;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
