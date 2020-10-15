@@ -50,8 +50,6 @@
 
 - (void)presentHistoryController;
 
-- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
-
 - (void)save;
 
 @end
