@@ -208,12 +208,12 @@ private extension SPNoteEditorViewController {
         bounceMarkdownPreview()
     }
 
-    func presentOptionsController(for note: Note, from sourceView: UIView) {
+    func presentOptionsController(for note: Note, from barButtonItem: UIBarButtonItem) {
         let optionsViewController = OptionsViewController(note: note)
         optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
-        navigationController.configureAsPopover(sourceView: sourceView)
+        navigationController.configureAsPopover(barButtonItem: barButtonItem)
         navigationController.displaysBlurEffect = true
 
         let oldMarkdownState = note.markdown
@@ -227,12 +227,12 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorActivitiesAccessed()
     }
 
-    func presentShareController(for note: Note, from sourceView: UIView) {
+    func presentShareController(for note: Note, from barButtonItem: UIBarButtonItem) {
         guard let activityController = UIActivityViewController(note: note) else {
             return
         }
 
-        activityController.configureAsPopover(sourceView: sourceView)
+        activityController.configureAsPopover(barButtonItem: barButtonItem)
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
@@ -290,7 +290,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
 extension SPNoteEditorViewController {
 
     @IBAction
-    func noteOptionsWasPressed(_ sender: UIButton) {
+    func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
         guard let note = currentNote else {
             assertionFailure()
             return
