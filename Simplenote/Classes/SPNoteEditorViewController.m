@@ -573,7 +573,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)backButtonAction:(id)sender
 {
-    
     // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
         return;
