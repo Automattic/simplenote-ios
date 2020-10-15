@@ -359,7 +359,6 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(newButtonAction:)];
-
     self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
     self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
 
@@ -367,7 +366,6 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                            style:UIBarButtonItemStylePlain
                                                           target:self
                                                           action:@selector(keyboardButtonAction:)];
-
     self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
 }
 
