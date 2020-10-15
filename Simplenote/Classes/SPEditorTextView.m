@@ -126,7 +126,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -248,30 +247,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setEditable:NO];
 }
 
-// TODO: Drop this snippet. Causing issues while dragging in iOS +12
-//
-// Ref. https://github.com/Automattic/simplenote-ios/pull/916/files
-//
-//// Fixes are modified versions of https://gist.github.com/agiletortoise/a24ccbf2d33aafb2abc1
-//
-//#pragma mark fixes for UITextView bugs in iOS 7
-//
-//- (UITextPosition *)closestPositionToPoint:(CGPoint)point
-//{
-//    point.y -= self.textContainerInset.top;
-//    point.x -= self.textContainerInset.left;
-//    
-//    NSUInteger glyphIndex = [self.layoutManager glyphIndexForPoint:point inTextContainer:self.textContainer];
-//    NSUInteger characterIndex = [self.layoutManager characterIndexForGlyphAtIndex:glyphIndex];
-//    
-//    if (characterIndex >= self.text.length - 1 && ![self.text hasSuffix:@"\n"])
-//        characterIndex ++;
-//    
-//    UITextPosition *pos = [self positionFromPosition:self.beginningOfDocument offset:characterIndex];
-//    
-//    return pos;
-//}
-
 - (void)scrollRangeToVisible:(NSRange)range
 {
     [super scrollRangeToVisible:range];
@@ -283,45 +258,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 }
 
-// TODO: Drop this snippet. Causing issues while dragging in iOS +12
-//
-// Ref. https://github.com/Automattic/simplenote-ios/pull/916/files
-//
-//- (NSUInteger)characterIndexForPoint:(CGPoint)point
-//{
-//    if (self.text.length == 0) {
-//        return 0;
-//    }
-//
-//    CGRect r1;
-//    if ([[self.text substringFromIndex:self.text.length-1] isEqualToString:@"\n"]) {
-//        r1 = [super caretRectForPosition:[super positionFromPosition:self.endOfDocument offset:-1]];
-//        CGRect sr = [super caretRectForPosition:[super positionFromPosition:self.beginningOfDocument offset:0]];
-//        r1.origin.x = sr.origin.x;
-//        r1.origin.y += self.font.lineHeight;
-//    } else {
-//        r1 = [super caretRectForPosition:[super positionFromPosition:self.endOfDocument offset:0]];
-//    }
-//
-//    if ((point.x > r1.origin.x && point.y >= r1.origin.y) || point.y >= r1.origin.y+r1.size.height) {
-//        return [super offsetFromPosition:self.beginningOfDocument toPosition:self.endOfDocument];
-//    }
-//
-//    CGFloat fraction;
-//    NSUInteger index = [self.textStorage.layoutManagers[0] characterIndexForPoint:point inTextContainer:self.textContainer fractionOfDistanceBetweenInsertionPoints:&fraction];
-//
-//    return index;
-//}
-//
-//- (CGRect)firstRectForRange:(UITextRange *)range
-//{
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-//        CGRect r1= [self caretRectForPosition:[self positionWithinRange:range farthestInDirection:UITextLayoutDirectionRight]];
-//        CGRect r2= [self caretRectForPosition:[self positionWithinRange:range farthestInDirection:UITextLayoutDirectionLeft]];
-//        return CGRectUnion(r1,r2);
-//    }
-//    return [super firstRectForRange:range];
-//}
 
 // From https://gist.github.com/rcabaco/6765778
 #pragma mark Keyboard Commands
