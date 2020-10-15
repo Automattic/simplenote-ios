@@ -409,20 +409,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self refreshVoiceoverSupport];
 }
 
-- (void)prepareToPopView
+- (void)ensureNoteIsVisibleInList
 {
-    [self endEditing];
-    
-    if (self.currentNote.isBlank) {
-        
-        // delete note
-        [[SPObjectManager sharedManager] permenentlyDeleteNote:_currentNote];
-        _currentNote = nil;
-        
-    } else {
-        [self save];
-    }
-    
+    // TODO: This should definitely be handled by the Note List itself. Please!
     SPNoteListViewController *listController = [[SPAppDelegate sharedDelegate] noteListViewController];
     if (_currentNote) {
         
@@ -437,12 +426,13 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)backButtonAction:(id)sender
 {
-    // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
         return;
     }
-    
-    [self prepareToPopView];
+
+    [self endEditing];
+    [self ensureEmptyNoteIsDeleted];
+    [self ensureNoteIsVisibleInList];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

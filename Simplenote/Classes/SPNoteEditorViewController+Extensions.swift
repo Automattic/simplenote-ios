@@ -2,6 +2,24 @@ import Foundation
 import CoreSpotlight
 
 
+// MARK: - Overridden Methods
+//
+extension SPNoteEditorViewController {
+
+    /// Whenever this instance is removed from its NavigationController, let's cleanup
+    ///
+    override public func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+
+        guard parent == nil, self.parent != nil else {
+            return
+        }
+
+        ensureEmptyNoteIsDeleted()
+    }
+}
+
+
 // MARK: - Interface Initialization
 //
 extension SPNoteEditorViewController {
@@ -248,6 +266,21 @@ extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+
+    @objc
+    func ensureEmptyNoteIsDeleted() {
+        guard let note = currentNote else {
+            return
+        }
+
+        guard note.isBlank else {
+            save()
+            return
+        }
+
+        SPObjectManager.shared().trashNote(note)
+        currentNote = nil
     }
 }
 

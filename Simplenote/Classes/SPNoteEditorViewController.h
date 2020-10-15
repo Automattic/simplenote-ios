@@ -33,7 +33,6 @@
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 
 
-- (void)prepareToPopView;
 - (void)backButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
