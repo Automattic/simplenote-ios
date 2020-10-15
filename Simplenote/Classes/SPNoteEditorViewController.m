@@ -1,7 +1,6 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
-#import "UIBarButtonItem+Images.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "UIButton+Images.h"
@@ -14,7 +13,6 @@
 #import "SPHorizontalPickerView.h"
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
-#import "SPOutsideTouchView.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
 #import "SPInteractiveTextStorage.h"
@@ -391,15 +389,16 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                                                    target:nil
                                                                                    action:nil];
 
-    self.nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
-                                                 imageAlignment:UIBarButtonImageAlignmentRight
-                                                         target:self
-                                                       selector:@selector(highlightNextSearchResult:)];
+    self.nextSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronRightImage
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(highlightNextSearchResult:)];
     self.nextSearchButton.width = 34.0;
-    self.prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
-                                                 imageAlignment:UIBarButtonImageAlignmentRight
-                                                         target:self
-                                                       selector:@selector(highlightPrevSearchResult:)];
+
+    self.prevSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronLeftImage
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(highlightPrevSearchResult:)];
     self.prevSearchButton.width = 34.0;
     
     
