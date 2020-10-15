@@ -3,7 +3,6 @@
 #import "VSThemeManager.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
-#import "UIButton+Images.h"
 #import "SPTagView.h"
 #import "NSTextStorage+Highlight.h"
 #import "SPEditorTextView.h"
@@ -26,7 +25,6 @@
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
-#import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "SPActionSheet.h"
 #import "Simplenote-Swift.h"
@@ -355,6 +353,7 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                             style:UIBarButtonItemStylePlain
                                                            target:self
                                                            action:@selector(insertChecklistAction:)];
+    self.checklistButton.accessibilityLabel = NSLocalizedString(@"Inserts a new Checklist Item", @"Label to Insert a Checklist Item");
 
     self.createNoteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameNewNote]
                                                              style:UIBarButtonItemStylePlain
