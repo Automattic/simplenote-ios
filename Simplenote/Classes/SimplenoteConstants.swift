@@ -26,6 +26,10 @@ class SimplenoteConstants: NSObject {
     ///
     static let simplenoteInterlinkMaxTitleLength = 150
 
+    /// Simplenote: Published Notes base URL
+    ///
+    static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
+
     /// Tag(s) Max Length
     ///
     static let maximumTagLength = 256

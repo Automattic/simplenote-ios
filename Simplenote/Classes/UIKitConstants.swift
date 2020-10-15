@@ -15,6 +15,7 @@ class UIKitConstants: NSObject {
     static let alpha0_8 = CGFloat(0.8)
     static let alpha1_0 = CGFloat(1)
     static let animationDelayZero = TimeInterval(0)
+    static let animationDelayShort = TimeInterval(0.25)
     static let animationDelayLong = TimeInterval(0.5)
     static let animationQuickDuration = TimeInterval(0.1)
     static let animationShortDuration = TimeInterval(0.25)

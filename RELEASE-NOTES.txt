@@ -1,6 +1,7 @@
 4.27
 -----
- 
+-   New Note Options interface #763
+
 4.26
 -----
 -   Added a link to help in Settings and About #894

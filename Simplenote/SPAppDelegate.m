@@ -464,7 +464,6 @@
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
 			[defaults removeObjectForKey:kSelectedTagKey];
-            [defaults removeObjectForKey:kSimplenoteMarkdownDefaultKey];
 			[defaults synchronize];
 			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];

@@ -41,13 +41,19 @@
 @property (nonatomic, assign) BOOL modified;
 
 - (void)prepareToPopView;
+- (void)backButtonAction:(id)sender;
+
 - (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
 - (void)clearNote;
+- (void)endEditing;
+- (void)bounceMarkdownPreview;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
 - (void)didDeleteCurrentNote;
+
+- (void)presentHistoryController;
 
 - (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
