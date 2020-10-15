@@ -12,11 +12,10 @@
 @property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
 
 // Navigation Buttons
-@property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) UIButton *checklistButton;
-@property (nonatomic, strong) UIButton *keyboardButton;
-@property (nonatomic, strong) UIButton *createNoteButton;
+@property (nonatomic, strong) UIBarButtonItem *actionButton;
+@property (nonatomic, strong) UIBarButtonItem *checklistButton;
+@property (nonatomic, strong) UIBarButtonItem *keyboardButton;
+@property (nonatomic, strong) UIBarButtonItem *createNoteButton;
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
