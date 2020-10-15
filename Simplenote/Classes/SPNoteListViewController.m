@@ -350,6 +350,7 @@
     [self.notesListController beginSearch];
     [self.tableView reloadData];
     [self displaySortBar];
+    [self refreshTitle];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller

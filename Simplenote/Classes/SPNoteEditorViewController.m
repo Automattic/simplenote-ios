@@ -196,7 +196,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
-    [self setBackButtonTitleForSearchingMode: self.searching];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
 
@@ -416,14 +415,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)didReceiveVoiceOverNotification:(NSNotification *)notification
 {
     [self refreshVoiceoverSupport];
-}
-
-- (void)setBackButtonTitleForSearchingMode:(BOOL)searching
-{
-// TODO: FIXME
-//    NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
-//    self.backButton.title = backButtonTitle;
-//    self.backButton.accessibilityLabel = backButtonTitle;
 }
 
 - (void)prepareToPopView
