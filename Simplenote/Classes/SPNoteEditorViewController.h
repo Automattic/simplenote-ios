@@ -13,11 +13,10 @@
 @property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
 
 // Navigation Buttons
-@property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) UIButton *checklistButton;
-@property (nonatomic, strong) UIButton *keyboardButton;
-@property (nonatomic, strong) UIButton *createNoteButton;
+@property (nonatomic, strong) UIBarButtonItem *actionButton;
+@property (nonatomic, strong) UIBarButtonItem *checklistButton;
+@property (nonatomic, strong) UIBarButtonItem *keyboardButton;
+@property (nonatomic, strong) UIBarButtonItem *createNoteButton;
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
@@ -40,8 +39,10 @@
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
 
-- (void)prepareToPopView;
 - (void)backButtonAction:(id)sender;
+- (void)insertChecklistAction:(id)sender;
+- (void)keyboardButtonAction:(id)sender;
+- (void)newButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
@@ -54,8 +55,6 @@
 - (void)didDeleteCurrentNote;
 
 - (void)presentHistoryController;
-
-- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion;
 
 - (void)save;
 

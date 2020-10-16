@@ -20,7 +20,7 @@ extension UIViewController {
 
     /// Configures the receiver to be presented as a popover from the specified Source View
     ///
-    func configureAsPopover(sourceView: UIView) {
+    func configureAsPopover(barButtonItem: UIBarButtonItem) {
         modalPresentationStyle = .popover
 
         // This will only work in iPad devices!
@@ -28,8 +28,7 @@ extension UIViewController {
             return
         }
 
-        presentationController.sourceRect = sourceView.bounds
-        presentationController.sourceView = sourceView
+        presentationController.barButtonItem = barButtonItem
         presentationController.backgroundColor = .simplenoteNavigationBarModalBackgroundColor
     }
 }

@@ -275,6 +275,7 @@ private extension OptionsViewController {
 
     func dequeueCollaborateCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.accessoryType = .disclosureIndicator
         cell.imageView?.image = .image(name: .collaborate)
         cell.title = NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI")
         return cell
@@ -338,23 +339,24 @@ private extension OptionsViewController {
 
     @IBAction
     func pinnedWasPressed(_ newState: Bool) {
-        SPObjectManager.shared().updatePinnedState(newState, note: note)
         SPTracker.trackEditorNotePinEnabled(newState)
+        SPObjectManager.shared().updatePinnedState(newState, note: note)
         pendingUpdate = true
     }
 
     @IBAction
     func markdownWasPressed(_ newState: Bool) {
+        SPTracker.trackEditorNoteMarkdownEnabled(newState)
         Options.shared.markdown = newState
         SPObjectManager.shared().updateMarkdownState(newState, note: note)
-        SPTracker.trackEditorNoteMarkdownEnabled(newState)
         pendingUpdate = true
     }
 
     @IBAction
     func copyInterlinkWasPressed() {
-        UIPasteboard.general.copyInternalLink(to: note)
         SPTracker.trackEditorCopiedInternalLink()
+        UIPasteboard.general.copyInternalLink(to: note)
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction
@@ -369,19 +371,27 @@ private extension OptionsViewController {
 
     @IBAction
     func publishWasPressed(_ newState: Bool) {
-        SPObjectManager.shared().updatePublishedState(newState, note: note)
         SPTracker.trackEditorNotePublishEnabled(newState)
+        SPObjectManager.shared().updatePublishedState(newState, note: note)
         pendingUpdate = true
         note.updateWaiting = true
     }
 
     @IBAction
     func copyLinkWasPressed() {
+        guard canCopyLink(to: note) else {
+            return
+        }
+
+        SPTracker.trackEditorCopiedPublicLink()
         UIPasteboard.general.copyPublicLink(to: note)
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction
     func collaborateWasPressed() {
+        SPTracker.trackEditorCollaboratorsAccessed()
+
         let collaborateViewController = SPAddCollaboratorsViewController()
         collaborateViewController.collaboratorDelegate = self
         collaborateViewController.setup(withCollaborators: note.emailTags)

@@ -1,6 +1,7 @@
 4.27
 -----
 -   New Note Options interface #763
+-   Updated Navigation Bar's behavior #918
 
 4.26
 -----
