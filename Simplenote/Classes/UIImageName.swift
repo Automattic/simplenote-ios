@@ -22,6 +22,7 @@ enum UIImageName: Int, CaseIterable {
     case crossBigOutlined
     case editor
     case ellipsis
+    case ellipsisOutlined
     case hideKeyboard
     case history
     case info
@@ -93,6 +94,8 @@ extension UIImageName {
             return "icon_editor"
         case .ellipsis:
             return "icon_ellipsis"
+        case .ellipsisOutlined:
+            return "icon_ellipsis_outline"
         case .hideKeyboard:
             return "icon_hide_keyboard"
         case .history:

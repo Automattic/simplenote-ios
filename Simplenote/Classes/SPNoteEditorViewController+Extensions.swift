@@ -28,7 +28,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureNavigationBarItems() {
-        actionButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteOptionsWasPressed(_:)))
+        actionButton = UIBarButtonItem(image: .image(name: .ellipsisOutlined), style: .plain, target: self, action: #selector(noteOptionsWasPressed(_:)))
         actionButton.accessibilityIdentifier = "note-menu"
         actionButton.accessibilityLabel = NSLocalizedString("Menu", comment: "Note Options Button")
 
