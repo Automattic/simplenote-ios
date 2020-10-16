@@ -184,6 +184,10 @@
 		B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */; };
 		B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */; };
 		B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */; };
+		B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537730E252E14C600BC78C5 /* OptionsViewController.swift */; };
+		B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B537732A252E176C00BC78C5 /* OptionsViewController.xib */; };
+		B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537733A252E29D300BC78C5 /* SwitchTableViewCell.swift */; };
+		B5377349252E2A4200BC78C5 /* Value1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5377348252E2A4200BC78C5 /* Value1TableViewCell.swift */; };
 		B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53929482398642800ACEE00 /* SPRatingsPromptView.xib */; };
 		B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = B53971A11AB8DCDC00B1A582 /* SPTracker.m */; };
 		B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */; };
@@ -530,6 +534,10 @@
 		B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSimpleTextPrintFormatter.swift; path = Classes/SPSimpleTextPrintFormatter.swift; sourceTree = "<group>"; };
 		B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextView+Simplenote.swift"; path = "Classes/UITextView+Simplenote.swift"; sourceTree = "<group>"; };
 		B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPRatingsPromptView.swift; path = Classes/SPRatingsPromptView.swift; sourceTree = "<group>"; };
+		B537730E252E14C600BC78C5 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionsViewController.swift; path = Classes/OptionsViewController.swift; sourceTree = "<group>"; };
+		B537732A252E176C00BC78C5 /* OptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OptionsViewController.xib; path = Classes/OptionsViewController.xib; sourceTree = "<group>"; };
+		B537733A252E29D300BC78C5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwitchTableViewCell.swift; path = Classes/SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		B5377348252E2A4200BC78C5 /* Value1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value1TableViewCell.swift; sourceTree = "<group>"; };
 		B53929482398642800ACEE00 /* SPRatingsPromptView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPRatingsPromptView.xib; path = Classes/SPRatingsPromptView.xib; sourceTree = "<group>"; };
 		B53971A01AB8DCDC00B1A582 /* SPTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SPTracker.h; path = Classes/SPTracker.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B53971A11AB8DCDC00B1A582 /* SPTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPTracker.m; path = Classes/SPTracker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1138,6 +1146,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B537730D252E14AE00BC78C5 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				B537730E252E14C600BC78C5 /* OptionsViewController.swift */,
+				B537732A252E176C00BC78C5 /* OptionsViewController.xib */,
+			);
+			name = Options;
+			sourceTree = "<group>";
+		};
 		B543C7DD23CF6A8300003A80 /* Notes List */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,6 +1173,8 @@
 				B5476BB323D89035000E7723 /* SPTagTableViewCell.xib */,
 				B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */,
 				B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */,
+				B537733A252E29D300BC78C5 /* SwitchTableViewCell.swift */,
+				B5377348252E2A4200BC78C5 /* Value1TableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -1669,6 +1688,7 @@
 				B59035FB251294D400034BAF /* Diagnostics */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
+				B537730D252E14AE00BC78C5 /* Options */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
@@ -1968,6 +1988,7 @@
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */,
+				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
@@ -2199,6 +2220,7 @@
 				46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */,
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
+				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
@@ -2265,6 +2287,7 @@
 				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */,
 				B5476BB723D89AF7000E7723 /* SPSectionHeaderView.swift in Sources */,
+				B5377349252E2A4200BC78C5 /* Value1TableViewCell.swift in Sources */,
 				B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */,
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
 				46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */,
@@ -2307,6 +2330,7 @@
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				46A3C99317DFA81A002865AE /* SPActionButton.m in Sources */,
+				B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */,
 				B5ADF2251BAB14DD00F864DB /* VSTheme+Extensions.m in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
 				46A3C99517DFA81A002865AE /* SPHorizontalPickerGradientView.m in Sources */,

@@ -38,6 +38,7 @@
 - (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;
 - (void)clearNote;
+- (void)endEditing;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;

@@ -487,12 +487,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
               forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationButtonContainer addSubview:self.backButton];
-    
-    
+
     // setup right buttons
     self.actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
-                                      target:self
-                                    selector:@selector(actionButtonAction:)];
+                                           target:self
+                                         selector:@selector(noteOptionsWasPressed:)];
     self.actionButton.accessibilityIdentifier = @"note-menu";
     self.actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
     self.actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
@@ -579,7 +578,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     
-    [self endEditing:nil];
+    [self endEditing];
     
     if (self.blankNote) {
         
@@ -663,8 +662,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.previewing = NO;
 }
 
-- (void)clearNote {
-    
+- (void)clearNote
+{
     self.blankNote = NO;
     _currentNote = nil;
     _noteEditorTextView.text = @"";
@@ -674,8 +673,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [_tagView clearAllTags];
 }
 
-
-- (void)endEditing:(id)sender
+- (void)endEditing
 {
     [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     [self.view endEditing:YES];
@@ -1232,15 +1230,15 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.guarenteedSaveTimer = nil;
 }
 
--(void)saveAndSync:(NSTimer *)timer
+- (void)saveAndSync:(NSTimer *)timer
 {
 	[self save];
     [self cancelSaveTimers];
 }
 
 
-- (void)save {
-    
+- (void)save
+{
 	if (_currentNote == nil || self.viewingVersions || [self isDictatingText])
 		return;    
     
@@ -1324,7 +1322,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)keyboardButtonAction:(id)sender {
     
-    [self endEditing:sender];
+    [self endEditing];
     [_tagView endEditing:YES];
 }
 
@@ -1402,6 +1400,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [SPTracker trackEditorChecklistInserted];
 }
 
+/*
 - (void)actionButtonAction:(id)sender {
     
     [self save];
@@ -1411,7 +1410,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // show actions
     
 	[SPTracker trackEditorActivitiesAccessed];
-	
 
     NSArray *actionStrings,  *actionImages, *toggleTitles, *toggleSelectedTitles, *buttonStrings;
 
@@ -1515,6 +1513,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.noteActionSheet.swipeToDismiss = YES;
     }
 }
+ */
 
 - (void)dismissActivityView {
     if (self.presentedViewController) {
