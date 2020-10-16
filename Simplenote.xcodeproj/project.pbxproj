@@ -176,6 +176,7 @@
 		B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */; };
 		B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */; };
 		B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */; };
+		B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */; };
 		B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */; };
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
@@ -525,6 +526,7 @@
 		B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+Simplenote.swift"; path = "Classes/FileManager+Simplenote.swift"; sourceTree = "<group>"; };
 		B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteActivityItemSource.swift; path = Classes/SimplenoteActivityItemSource.swift; sourceTree = "<group>"; };
 		B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIActivity+Simplenote.swift"; path = "Classes/UIActivity+Simplenote.swift"; sourceTree = "<group>"; };
+		B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPEditorTapRecognizerDelegate.swift; path = Classes/SPEditorTapRecognizerDelegate.swift; sourceTree = "<group>"; };
 		B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIMenuController+Simplenote.swift"; path = "Classes/UIMenuController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
@@ -1120,6 +1122,18 @@
 			name = Exporter;
 			sourceTree = "<group>";
 		};
+		B52E2B13253747F20074509A /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				E21F57B717C1244E001F02D3 /* SPEditorTextView.h */,
+				E21F57B817C1244E001F02D3 /* SPEditorTextView.m */,
+				E2D444031799F1DD0060FDE2 /* SPTextView.h */,
+				E2D444041799F1DD0060FDE2 /* SPTextView.m */,
+				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
+			);
+			name = Editor;
+			sourceTree = "<group>";
+		};
 		B52F35D422F3573300724793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1482,6 +1496,7 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B52E2B13253747F20074509A /* Editor */,
 				B5476BB523D89AE2000E7723 /* Headers */,
 				E2ACA87A17A768D900EF801C /* HorizontalPickerView */,
 				B5F3000023F446FC007A7C59 /* SortBar */,
@@ -1496,8 +1511,6 @@
 				E22BCE0017960CBC00A17ED2 /* SPButton.h */,
 				E22BCE0117960CBC00A17ED2 /* SPButton.m */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
-				E21F57B717C1244E001F02D3 /* SPEditorTextView.h */,
-				E21F57B817C1244E001F02D3 /* SPEditorTextView.m */,
 				E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */,
 				E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */,
 				E25C39D117A41FCC00B2591A /* SPEntryListCell.h */,
@@ -1517,8 +1530,6 @@
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
 				E215C79C180B228800AD36B5 /* SPTextField.m */,
 				B5D982CF22F8643200C37C29 /* SPTextInputView.swift */,
-				E2D444031799F1DD0060FDE2 /* SPTextView.h */,
-				E2D444041799F1DD0060FDE2 /* SPTextView.m */,
 				E2465A2117AD70810097B19B /* SPToggle.h */,
 				E2465A2217AD70810097B19B /* SPToggle.m */,
 				B584DA35236722D400B2844A /* SPBlurEffectView.swift */,
@@ -2246,6 +2257,7 @@
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
+				B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */,
 				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
 				46A3C97917DFA81A002865AE /* UIBarButtonItem+Images.m in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
