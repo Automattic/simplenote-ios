@@ -1,6 +1,7 @@
 4.27
 -----
- 
+-   New Note Options interface #763
+
 4.26
 -----
 -   Fixed a bug that affected scrolling in iOS 14 #916

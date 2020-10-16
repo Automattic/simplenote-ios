@@ -1,14 +1,8 @@
-//
-//  SPAddCollaboratorsViewController.h
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/27/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "SPEntryListViewController.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class SPAddCollaboratorsViewController;
 @protocol SPCollaboratorDelegate <NSObject>
@@ -26,8 +20,10 @@
 
 @interface SPAddCollaboratorsViewController : SPEntryListViewController
 
-@property (nonatomic, weak) id<SPCollaboratorDelegate> collaboratorDelegate;
+@property (nonatomic, nullable, weak) id<SPCollaboratorDelegate> collaboratorDelegate;
 
-- (void)setupWithCollaborators:(NSArray *)collaborators;
+- (void)setupWithCollaborators:(NSArray<NSString *> *)collaborators;
 
 @end
+
+NS_ASSUME_NONNULL_END

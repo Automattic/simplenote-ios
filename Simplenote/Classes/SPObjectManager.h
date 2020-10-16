@@ -39,11 +39,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)permenentlyDeleteNote:(Note *)note;
 - (void)emptyTrash;
 
+
 #pragma mark - Updating Notes
 
 - (void)updateMarkdownState:(BOOL)markdown note:(Note *)note;
 - (void)updatePublishedState:(BOOL)published note:(Note *)note;
 - (void)updatePinnedState:(BOOL)pinned note:(Note *)note;
+
+
+#pragma mark - Sharing
+
+- (void)insertTagNamed:(NSString *)tagName note:(Note *)note;
+- (void)removeTagNamed:(NSString *)tagName note:(Note *)note;
 
 @end
 

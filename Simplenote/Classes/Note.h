@@ -21,7 +21,6 @@
     NSString        *tags;
     NSString        *systemTags;
     NSMutableArray  *tagsArray;
-    NSMutableArray  *emailTagsArray;
     NSMutableArray  *systemTagsArray;
     NSString        *remoteId;
     int             lastPosition;
@@ -34,20 +33,19 @@
     NSDictionary    *versions;
 }
 
-@property (nonatomic,   copy) NSString          *content;
-@property (nonatomic,   copy) NSString          *publishURL;
-@property (nonatomic,   copy) NSDate            *modificationDate;
-@property (nonatomic,   copy) NSString          *tags;
-@property (nonatomic, strong) NSMutableArray    *tagsArray;
-@property (nonatomic, strong) NSMutableArray    *emailTagsArray;
-@property (nonatomic,   copy) NSString          *shareURL;
-@property (nonatomic,   copy) NSDate            *creationDate;
-@property (nonatomic,   copy) NSString          *systemTags;
-@property (nonatomic,   copy) NSString          *modificationDatePreview;
-@property (nonatomic,   copy) NSString          *creationDatePreview;
+@property (nonatomic,   copy) NSString                  *content;
+@property (nonatomic,   copy) NSString                  *publishURL;
+@property (nonatomic,   copy) NSDate                    *modificationDate;
+@property (nonatomic,   copy) NSString                  *tags;
+@property (nonatomic, strong) NSMutableArray<NSString*> *tagsArray;
+@property (nonatomic,   copy) NSString                  *shareURL;
+@property (nonatomic,   copy) NSDate                    *creationDate;
+@property (nonatomic,   copy) NSString                  *systemTags;
+@property (nonatomic,   copy) NSString                  *modificationDatePreview;
+@property (nonatomic,   copy) NSString                  *creationDatePreview;
 
-@property (nonatomic,   copy) NSString          *titlePreview;
-@property (nonatomic,   copy) NSString          *bodyPreview;
+@property (nonatomic,   copy) NSString                  *titlePreview;
+@property (nonatomic,   copy) NSString                  *bodyPreview;
 
 // What's going on:
 //

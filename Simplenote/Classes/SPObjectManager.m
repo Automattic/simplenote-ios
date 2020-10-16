@@ -263,6 +263,25 @@
 }
 
 
+#pragma mark - Sharing
+
+- (void)insertTagNamed:(NSString *)tagName note:(Note *)note
+{
+    [note addTag:tagName];
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)removeTagNamed:(NSString *)tagName note:(Note *)note
+{
+    [note stripTag:tagName];
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+
 #pragma mark - Updating Notes
 
 - (void)updateMarkdownState:(BOOL)markdown note:(Note *)note
