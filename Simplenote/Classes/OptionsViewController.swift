@@ -275,6 +275,7 @@ private extension OptionsViewController {
 
     func dequeueCollaborateCell(from tableView: UITableView, for indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+        cell.accessoryType = .disclosureIndicator
         cell.imageView?.image = .image(name: .collaborate)
         cell.title = NSLocalizedString("Collaborate", comment: "Opens the Collaborate UI")
         return cell
