@@ -249,7 +249,7 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshTitle() {
-        title = searchController.active ? NSLocalizedString("Search", comment: "") : notesListController.filter.title
+        title = searchController.active ? NSLocalizedString("Search", comment: "Search Title") : notesListController.filter.title
     }
 
     /// Toggles the SearchBar's Visibility, based on the active Filter.

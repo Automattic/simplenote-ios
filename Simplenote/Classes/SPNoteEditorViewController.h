@@ -34,6 +34,9 @@
 
 
 - (void)backButtonAction:(id)sender;
+- (void)insertChecklistAction:(id)sender;
+- (void)keyboardButtonAction:(id)sender;
+- (void)newButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
 - (void)setSearchString:(NSString *)string;

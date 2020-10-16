@@ -24,6 +24,24 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
+    /// Sets up the NavigationBar Items
+    ///
+    @objc
+    func configureNavigationBarItems() {
+        actionButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteOptionsWasPressed(_:)))
+        actionButton.accessibilityIdentifier = "note-menu"
+        actionButton.accessibilityLabel = NSLocalizedString("Menu", comment: "Note Options Button")
+
+        checklistButton = UIBarButtonItem(image: .image(name: .checklist), style: .plain, target: self, action: #selector(insertChecklistAction(_:)))
+        checklistButton.accessibilityLabel = NSLocalizedString("Inserts a new Checklist Item", comment: "Insert Checklist Button")
+
+        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
+        createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
+
+        keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
+        keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
+    }
+
     /// Sets up the Bottom View:
     /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
     ///

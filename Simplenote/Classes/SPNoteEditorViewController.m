@@ -334,36 +334,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     } completion:nil];
 }
 
-- (void)configureNavigationBarItems
-{
-    self.actionButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameInfo]
-                                                         style:UIBarButtonItemStylePlain
-                                                        target:self
-                                                        action:@selector(noteOptionsWasPressed:)];
-    self.actionButton.accessibilityIdentifier = @"note-menu";
-    self.actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
-    self.actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
-
-    self.checklistButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameChecklist]
-                                                            style:UIBarButtonItemStylePlain
-                                                           target:self
-                                                           action:@selector(insertChecklistAction:)];
-    self.checklistButton.accessibilityLabel = NSLocalizedString(@"Inserts a new Checklist Item", @"Label to Insert a Checklist Item");
-
-    self.createNoteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(newButtonAction:)];
-    self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
-    self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
-
-    self.keyboardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
-                                                           style:UIBarButtonItemStylePlain
-                                                          target:self
-                                                          action:@selector(keyboardButtonAction:)];
-    self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
-}
-
 - (void)configureSearchToolbar
 {
     UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRight];
