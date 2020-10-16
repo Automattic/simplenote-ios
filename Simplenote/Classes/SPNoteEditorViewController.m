@@ -542,6 +542,12 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self refreshNavigationBarButtons];
 }
 
+- (void)setPreviewing:(BOOL)previewing
+{
+    _previewing = previewing;
+    [self refreshStyle];
+}
+
 
 #pragma mark - UIPopoverPresentationControllerDelegate
 
