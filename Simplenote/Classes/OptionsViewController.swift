@@ -3,6 +3,14 @@ import UIKit
 import SimplenoteFoundation
 
 
+// MARK: - OptionsControllerDelegate
+//
+protocol OptionsControllerDelegate: class {
+    func optionsControllerDidPressHistory(_ sender: OptionsViewController)
+    func optionsControllerDidPressShare(_ sender: OptionsViewController)
+    func optionsControllerDidPressTrash(_ sender: OptionsViewController)
+}
+
 
 // MARK: - OptionsViewController
 //
@@ -39,6 +47,10 @@ class OptionsViewController: UIViewController {
     /// Note for which we'll render the current Options
     ///
     let note: Note
+
+    /// Options Delegate
+    ///
+    weak var delegate: OptionsControllerDelegate?
 
 
     /// Designated Initializer
@@ -347,12 +359,12 @@ private extension OptionsViewController {
 
     @IBAction
     func shareWasPressed() {
-        NSLog("Share!")
+        delegate?.optionsControllerDidPressShare(self)
     }
 
     @IBAction
     func historyWasPressed() {
-        NSLog("History!")
+        delegate?.optionsControllerDidPressHistory(self)
     }
 
     @IBAction
@@ -374,7 +386,7 @@ private extension OptionsViewController {
 
     @IBAction
     func trashWasPressed() {
-        NSLog("Trash!")
+        delegate?.optionsControllerDidPressTrash(self)
     }
 
     @IBAction

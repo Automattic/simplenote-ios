@@ -1,4 +1,5 @@
 import Foundation
+import CoreSpotlight
 
 
 // MARK: - Interface Initialization
@@ -213,6 +214,7 @@ private extension SPNoteEditorViewController {
 
     func presentOptionsController(for note: Note, from sourceView: UIView) {
         let optionsViewController = OptionsViewController(note: note)
+        optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
         navigationController.configureAsPopover(sourceView: sourceView)
@@ -227,6 +229,63 @@ private extension SPNoteEditorViewController {
         present(navigationController, animated: true, completion: nil)
 
         SPTracker.trackEditorActivitiesAccessed()
+    }
+
+    func presentShareController(for note: Note, from sourceView: UIView) {
+        guard let activityController = UIActivityViewController(note: note) else {
+            return
+        }
+
+        activityController.configureAsPopover(sourceView: sourceView)
+
+        present(activityController, animated: true, completion: nil)
+        SPTracker.trackEditorNoteContentShared()
+    }
+}
+
+
+// MARK: - Services
+//
+extension SPNoteEditorViewController {
+
+    func delete(note: Note) {
+        SPTracker.trackEditorNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+}
+
+
+// MARK: - OptionsControllerDelegate
+//
+extension SPNoteEditorViewController: OptionsControllerDelegate {
+
+    func optionsControllerDidPressShare(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.presentShareController(for: sender.note, from: self.actionButton)
+        }
+    }
+
+    func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.presentHistoryController()
+        }
+    }
+
+    func optionsControllerDidPressTrash(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.delete(note: sender.note)
+            self.backButtonAction(sender)
+        }
     }
 }
 

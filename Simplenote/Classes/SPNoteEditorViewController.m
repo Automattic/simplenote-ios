@@ -598,7 +598,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 
-- (void)backButtonAction:(id)sender {
+- (void)backButtonAction:(id)sender
+{
     
     // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
@@ -1416,9 +1417,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (void)viewVersionAction:(id)sender {
-    
-    // check reachability status
+- (void)presentHistoryController
+{
     if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
 
         NSString *title = NSLocalizedString(@"version-alert-message", @"Error alert message shown when trying to view history of a note without an internet connection");
@@ -1476,33 +1476,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return minVersion;
 }
 
-- (void)trashNoteAction:(id)sender {
-
-    [SPTracker trackEditorNoteDeleted];
-
-    // create a snapshot before the animation
-    UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-    snapshot.frame = _noteEditorTextView.frame;
-    [self.view addSubview:snapshot];
-    
-    [[SPObjectManager sharedManager] trashNote:_currentNote];
-    [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNote:_currentNote];
-    
-    [self clearNote];
-    
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         
-                         snapshot.transform = CGAffineTransformMakeTranslation(0, -snapshot.frame.size.height);
-                         snapshot.alpha = 0.0;
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         [snapshot removeFromSuperview];
-                         [self backButtonAction:nil];
-                         
-                     }];
-}
 
 #pragma mark SPHorizontalPickerView delegate methods
 
