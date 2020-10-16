@@ -34,7 +34,7 @@ class OptionsViewController: UIViewController {
     ///
     ///     Our goal is to prevent a race condition between the user's flip action, and the remote ACK.
     ///
-    private var pendingUpdate = true
+    private var pendingUpdate = false
 
     /// Note for which we'll render the current Options
     ///
@@ -360,7 +360,6 @@ private extension OptionsViewController {
         SPObjectManager.shared().updatePublishedState(newState, note: note)
         SPTracker.trackEditorNotePublishEnabled(newState)
         pendingUpdate = true
-        note.updateWaiting = true
     }
 
     @IBAction

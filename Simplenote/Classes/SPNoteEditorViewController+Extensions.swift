@@ -104,6 +104,10 @@ extension SPNoteEditorViewController: KeyboardObservable {
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
 
+        guard noteEditorTextView.contentInset.bottom != adjustedBottomInsets else {
+            return
+        }
+
         defer {
             isKeyboardVisible = newKeyboardIsVisible
         }
