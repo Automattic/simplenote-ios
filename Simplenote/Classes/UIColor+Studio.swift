@@ -210,6 +210,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteBackgroundPreviewColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray1)
+    }
+
+    @objc
     static var simplenoteModalOverlayColor: UIColor {
         UIColor(studioColor: .black).withAlphaComponent(UIKitConstants.alpha0_4)
     }
