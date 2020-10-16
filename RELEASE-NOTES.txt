@@ -2,6 +2,7 @@
 -----
 -   New Note Options interface #763
 -   Updated Navigation Bar's behavior #918
+-   Adjusted Notes List Metrics 
 
 4.26
 -----
