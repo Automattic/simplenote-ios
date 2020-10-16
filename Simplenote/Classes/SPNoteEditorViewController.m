@@ -73,8 +73,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
 
 // Sheets
-@property (nonatomic, strong) SPActivityView            *noteActivityView;
-@property (nonatomic, strong) SPActionSheet             *noteActionSheet;
 @property (nonatomic, strong) SPActionSheet             *versionActionSheet;
 @property (nonatomic, strong) SPHorizontalPickerView    *versionPickerView;
 
@@ -85,7 +83,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // State
 @property (nonatomic, assign) BOOL                      actionSheetVisible;
 @property (nonatomic, assign) BOOL                      blankNote;
-@property (nonatomic, assign) BOOL                      bounceMarkdownPreviewOnActivityViewDismiss;
 @property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
 @property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
@@ -717,8 +714,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                 } completion:^(BOOL finished) {
                     self.noteEditorTextView.hidden = NO;
                     [snapshot removeFromSuperview];
-
-                    self.bounceMarkdownPreviewOnActivityViewDismiss = NO;
                 }];
             }];
         }];
@@ -761,13 +756,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 
 #pragma mark - UIPopoverPresentationControllerDelegate
-
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
-{
-    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
-        [self bounceMarkdownPreview];
-    }
-}
 
 // The activity sheet breaks when transitioning from a popover to a modal-style
 // presentation, so we'll tell it not to change its presentation if the
@@ -1288,7 +1276,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 	if (tags.count > 0) {
 		[_tagView setupWithTagNames:tags];
     }
-    [self updatePublishUI];
 }
 
 - (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
@@ -1345,7 +1332,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     newNote.creationDate = [NSDate date];
 
     // Set the note's markdown tag according to the global preference (defaults NO for new accounts)
-    newNote.markdown = [[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey];
+    newNote.markdown = [[Options shared] markdown];
 
     NSString *filteredTagName = [[SPAppDelegate sharedDelegate] filteredTagName];
     if (filteredTagName.length > 0) {
@@ -1513,7 +1500,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         self.noteActionSheet.swipeToDismiss = YES;
     }
 }
- */
+
 
 - (void)dismissActivityView {
     if (self.presentedViewController) {
@@ -1611,7 +1598,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
-    
+
     [self dismissActivityView];
 
     switch (index) {
@@ -1635,7 +1622,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
             break;
     }
     
-}
+    }
 
 - (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index {
     
@@ -1644,7 +1631,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         if (index == 0)
             [self shareNoteURLAction:nil];
 }
-
+ */
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
 
     if ([actionSheet isEqual:self.versionActionSheet]) {
@@ -1681,17 +1668,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
     
     self.actionSheetVisible = NO;
-    
-    if ([actionSheet isEqual:self.noteActionSheet]) {
-        self.noteActionSheet = nil;
-    }
-    
+
     if ([actionSheet isEqual:self.versionActionSheet]) {
         self.versionActionSheet = nil;
-    }
-
-    if (self.bounceMarkdownPreviewOnActivityViewDismiss) {
-        [self bounceMarkdownPreview];
     }
 }
 
@@ -1704,7 +1683,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                          fromView:self.actionButton.superview];
     
 }
-
+/*
 - (void)publishNote:(void(^)(BOOL success))completion {
     
     [SPTracker trackEditorNotePublished];
@@ -1725,10 +1704,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     _currentNote.published = NO;
     [self save];
     [self updatePublishUI];
-
+    
     if (completion) {
         completion(YES);
-    }
 }
 
 - (void)shareNoteContentAction:(id)sender {
@@ -1758,7 +1736,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     if (!_currentNote.published) {
         return;
-	}
+    }
     
 	[SPTracker trackEditorPublishedUrlPressed];
     
@@ -1774,7 +1752,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
         acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
         acv.popoverPresentationController.sourceView = self.view;
-        [self presentViewController:acv animated:YES completion:nil];
+    [self presentViewController:acv animated:YES completion:nil];
     } else {
         [self.navigationController presentViewController:acv animated:YES completion:nil];
     }
@@ -1821,7 +1799,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 {
 	_currentNote.pinned = !_currentNote.pinned;
 	self.modified = YES;
-    
     if (_currentNote.pinned) {
         [SPTracker trackEditorNotePinned];
     } else {
@@ -1830,7 +1807,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     [self save];
 }
-
+*/
 - (void)viewVersionAction:(id)sender {
     
     // check reachability status

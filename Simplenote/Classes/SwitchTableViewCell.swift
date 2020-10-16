@@ -99,15 +99,21 @@ extension SwitchTableViewCell {
     func contentWasPressed() {
         let nextState = !switchControl.isOn
         switchControl.setOn(nextState, animated: true)
-        notifyStateDidChange()
+        notifyStateDidChangeAfterDelay()
     }
 
     @IBAction
     func switchDidChange() {
-        notifyStateDidChange()
+        notifyStateDidChangeAfterDelay()
     }
 
-    private func notifyStateDidChange() {
-        onChange?(switchControl.isOn)
+    /// Note: Why after a delay?
+    /// Because this callback is expected to trigger a DB update, which might fire back into a `reloadData` call.
+    /// This sequence is known to break animations. So we're deferring things up a bit!
+    ///
+    private func notifyStateDidChangeAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationQuickDuration) { [onChange, switchControl] in
+            onChange?(switchControl.isOn)
+        }
     }
 }

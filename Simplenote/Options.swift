@@ -73,6 +73,18 @@ extension Options {
         }
     }
 
+    /// Indicates if Markdown should be enabled by default in new documents
+    ///
+    @objc
+    var markdown: Bool {
+        get {
+            defaults.bool(forKey: .markdown)
+        }
+        set {
+            defaults.set(newValue, forKey: .markdown)
+        }
+    }
+
     /// Returns the Search's Sort Mode. When it's undefined we'll fallback to the List's Sort Mode
     ///
     @objc
@@ -137,6 +149,7 @@ extension Options {
     func reset() {
         defaults.removeObject(forKey: .theme)
         defaults.removeObject(forKey: .listSortMode)
+        defaults.removeObject(forKey: .markdown)
         defaults.removeObject(forKey: .searchSortMode)
     }
     

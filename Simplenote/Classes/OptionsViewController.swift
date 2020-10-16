@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import SimplenoteFoundation
+
 
 
 // MARK: - OptionsViewController
@@ -10,6 +12,10 @@ class OptionsViewController: UIViewController {
     ///
     @IBOutlet private var tableView: UITableView!
 
+    /// EntityObserver: Allows us to listen to changes applied to the associated entity
+    ///
+    private lazy var entityObserver = EntityObserver(context: SPAppDelegate.shared().managedObjectContext, object: note)
+
     /// Sections onScreen
     ///
     private let sections: [Section] = [
@@ -18,6 +24,17 @@ class OptionsViewController: UIViewController {
         Section(rows: [.collaborate]),
         Section(rows: [.trash])
     ]
+
+    /// Indicates if we're waiting for an update. If so, we'll skip the next "Reload Interface" call that might come across
+    ///
+    /// - Important:
+    ///     Updating any of the Note Flags (Pinned, Markdown, Published) involves updating the local database.
+    ///     Since there is no way to match an Update Request with an actual CoreData refresh event, we'll rely on this simple flag to
+    ///     attempt to debounce multiple Switch Toggle events that might happen.
+    ///
+    ///     Our goal is to prevent a race condition between the user's flip action, and the remote ACK.
+    ///
+    private var pendingUpdate = false
 
     /// Note for which we'll render the current Options
     ///
@@ -42,6 +59,7 @@ class OptionsViewController: UIViewController {
         setupNavigationTitle()
         setupNavigationItem()
         setupTableView()
+        setupEntityObserver()
         refreshStyle()
         refreshInterface()
         refreshPreferredSize()
@@ -70,6 +88,10 @@ private extension OptionsViewController {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
     }
 
+    func setupEntityObserver() {
+        entityObserver.delegate = self
+    }
+
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
@@ -77,6 +99,21 @@ private extension OptionsViewController {
     func refreshStyle() {
         view.backgroundColor = .simplenoteTableViewBackgroundColor
         tableView.applySimplenoteGroupedStyle()
+    }
+}
+
+
+// MARK: - EntityObserverDelegate
+//
+extension OptionsViewController: EntityObserverDelegate {
+
+    func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
+        if pendingUpdate {
+            pendingUpdate = false
+            return
+        }
+
+        refreshInterface()
     }
 }
 
@@ -91,7 +128,7 @@ extension OptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: Implement Me!
+        rowWasPressed(indexPath)
     }
 }
 
@@ -159,6 +196,10 @@ private extension OptionsViewController {
         cell.enabledAccessibilityHint = NSLocalizedString("Unpin note", comment: "Pin State Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Pin note", comment: "Pin State Accessibility Hint")
         cell.isOn = note.pinned
+        cell.onChange = { [weak self] newState in
+            self?.pinnedWasPressed(newState)
+        }
+
         return cell
     }
 
@@ -169,6 +210,10 @@ private extension OptionsViewController {
         cell.enabledAccessibilityHint = NSLocalizedString("Disable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Enable Markdown formatting", comment: "Markdown Accessibility Hint")
         cell.isOn = note.markdown
+        cell.onChange = { [weak self] newState in
+            self?.markdownWasPressed(newState)
+        }
+
         return cell
     }
 
@@ -201,14 +246,18 @@ private extension OptionsViewController {
         cell.enabledAccessibilityHint = NSLocalizedString("Unpublish note", comment: "Publish Accessibility Hint")
         cell.disabledAccessibilityHint = NSLocalizedString("Publish note", comment: "Publish Accessibility Hint")
         cell.isOn = note.published
+        cell.onChange = { [weak self] newState in
+            self?.publishWasPressed(newState)
+        }
+
         return cell
     }
 
     func dequeueCopyPublicURLCell(from tableView: UITableView, at indexPath: IndexPath) -> Value1TableViewCell {
         let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
         cell.imageView?.image = .image(name: .copy)
-        cell.title = NSLocalizedString("Copy Link", comment: "Copies a Note's Intelrink")
-        cell.selectable = false
+        cell.title = copyLinkText(for: note)
+        cell.selectable = canCopyLink(to: note)
         return cell
     }
 
@@ -228,9 +277,105 @@ private extension OptionsViewController {
 }
 
 
+// MARK: - Publishing
+//
+extension OptionsViewController {
+
+    func canCopyLink(to note: Note) -> Bool {
+        note.published && note.publishURL.count > .zero
+    }
+
+    func copyLinkText(for note: Note) -> String {
+        if note.published {
+            return note.publishURL.isEmpty ?
+                NSLocalizedString("Publishing...", comment: "Indicates the Note is being published") :
+                NSLocalizedString("Copy Link", comment: "Copies the Note's Public Link")
+        }
+
+        return note.publishURL.isEmpty ?
+            NSLocalizedString("Copy Link", comment: "Copies the Note's Public Link") :
+            NSLocalizedString("Unpublishing...", comment: "Indicates the Note is being unpublished")
+    }
+
+}
+
+
 // MARK: - Action Handlers
 //
 private extension OptionsViewController {
+
+    func rowWasPressed(_ indexPath: IndexPath) {
+        switch rowAtIndexPath(indexPath) {
+        case .copyInternalURL:
+            copyInterlinkWasPressed()
+        case .share:
+            shareWasPressed()
+        case .history:
+            historyWasPressed()
+        case .copyPublicURL:
+            copyLinkWasPressed()
+        case .collaborate:
+            collaborateWasPressed()
+        case .trash:
+            trashWasPressed()
+        default:
+            // NO-OP: Switches are handled via closures!
+            break
+        }
+    }
+
+    @IBAction
+    func pinnedWasPressed(_ newState: Bool) {
+        SPObjectManager.shared().updatePinnedState(newState, note: note)
+        SPTracker.trackEditorNotePinEnabled(newState)
+        pendingUpdate = true
+    }
+
+    @IBAction
+    func markdownWasPressed(_ newState: Bool) {
+        Options.shared.markdown = newState
+        SPObjectManager.shared().updateMarkdownState(newState, note: note)
+        SPTracker.trackEditorNoteMarkdownEnabled(newState)
+        pendingUpdate = true
+    }
+
+    @IBAction
+    func copyInterlinkWasPressed() {
+        UIPasteboard.general.copyInternalLink(to: note)
+        SPTracker.trackEditorCopiedInternalLink()
+    }
+
+    @IBAction
+    func shareWasPressed() {
+        NSLog("Share!")
+    }
+
+    @IBAction
+    func historyWasPressed() {
+        NSLog("History!")
+    }
+
+    @IBAction
+    func publishWasPressed(_ newState: Bool) {
+        SPObjectManager.shared().updatePublishedState(newState, note: note)
+        SPTracker.trackEditorNotePublishEnabled(newState)
+        pendingUpdate = true
+    }
+
+    @IBAction
+    func copyLinkWasPressed() {
+        UIPasteboard.general.copyPublicLink(to: note)
+    }
+
+    @IBAction
+    func collaborateWasPressed() {
+        NSLog("Collab!")
+    }
+
+    @IBAction
+    func trashWasPressed() {
+        NSLog("Trash!")
+    }
 
     @IBAction
     func doneWasPressed() {
