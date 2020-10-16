@@ -151,18 +151,22 @@ CGFloat const SPSelectedAreaPadding = 20;
     _tagView = _noteEditorTextView.tagView;
     [_tagView applyStyle];
 
-    self.bottomView.backgroundColor = [UIColor simplenoteBackgroundColor];
 
     self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
-    self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
-    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
+    UIKeyboardAppearance keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+    self.noteEditorTextView.keyboardAppearance = keyboardAppearance;
+    self.tagView.keyboardAppearance = keyboardAppearance;
+
+    UIColor *backgroundColor = self.previewing ? [UIColor simplenoteBackgroundPreviewColor] : [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
+    self.tagView.backgroundColor = backgroundColor;
+    self.bottomView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
     _noteEditorTextView.interactiveTextStorage.tokens = @{
+    self.noteEditorTextView.interactiveTextStorage.tokens = @{
         SPDefaultTokenName : @{
                 NSFontAttributeName : bodyFont,
                 NSForegroundColorAttributeName : fontColor,
