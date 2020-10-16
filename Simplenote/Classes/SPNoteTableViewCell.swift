@@ -354,7 +354,7 @@ private enum Style {
 
     /// Represents the Insets applied to the container view
     ///
-    static let containerInsets = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 0)
+    static let containerInsets = UIEdgeInsets(top: 9, left: 6, bottom: 9, right: 0)
 
     /// Outer Vertical StackView's Spacing
     ///
