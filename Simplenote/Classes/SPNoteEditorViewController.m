@@ -5,7 +5,6 @@
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "UIButton+Images.h"
-#import "SPActivityView.h"
 #import "SPTagView.h"
 #import "NSTextStorage+Highlight.h"
 #import "SPEditorTextView.h"
@@ -32,7 +31,6 @@
 #import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "SPActionSheet.h"
-#import "SPActivityView.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
@@ -54,7 +52,6 @@ CGFloat const SPBackButtonTitlePadding              = -15;
 CGFloat const SPSelectedAreaPadding                 = 20;
 
 @interface SPNoteEditorViewController ()<SPActionSheetDelegate,
-                                        SPActivityViewDelegate,
                                         SPCollaboratorDelegate,
                                         SPEditorTextViewDelegate,
                                         SPHorizontalPickerViewDelegate,
@@ -1193,19 +1190,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     return NO;
 }
 
-#pragma mark Note information
-
-- (NSInteger)wordCount {
-    if (_noteEditorTextView.text == nil || [_noteEditorTextView.text length] == 0)
-        return 0;
-    return _noteEditorTextView.text.wordCount;
-}
-
-- (NSInteger)charCount {
-    if (_noteEditorTextView.text == nil)
-        return 0;
-    return _noteEditorTextView.text.charCount;
-}
 
 #pragma mark Simperium
 
@@ -1387,251 +1371,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [SPTracker trackEditorChecklistInserted];
 }
 
-/*
-- (void)actionButtonAction:(id)sender {
-    
-    [self save];
-    
-    [self endEditing:sender];
-    [_tagView endEditing:YES];
-    // show actions
-    
-	[SPTracker trackEditorActivitiesAccessed];
-
-    NSArray *actionStrings,  *actionImages, *toggleTitles, *toggleSelectedTitles, *buttonStrings;
-
-    actionStrings = @[NSLocalizedString(@"Send", @"Verb - send the content of the note by email, message, etc"),
-                      NSLocalizedString(@"History...", @"Action - view the version history of a note"),
-                      NSLocalizedString(@"Collaborate", @"Verb - work with others on a note"),
-                      NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note")];
-    actionImages = @[[UIImage imageWithName:UIImageNameShare],
-                     [UIImage imageWithName:UIImageNameHistory],
-                     [UIImage imageWithName:UIImageNameCollaborate],
-                     [UIImage imageWithName:UIImageNameTrash]];
-    toggleTitles = @[NSLocalizedString(@"Publish", @"Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others"),
-                    NSLocalizedString(@"Pin to Top", @"Denotes when note is pinned to the top of the note list"), NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
-    toggleSelectedTitles = @[NSLocalizedString(@"Published", nil),
-                             NSLocalizedString(@"Pinned", @"Pinned notes are stuck to the note of the note list"),
-                             NSLocalizedString(@"Markdown", @"Special formatting that can be turned on for notes")];
-    
-    buttonStrings = @[NSLocalizedString(@"Note not published", nil)];
-    
-    NSInteger wordCount = [self wordCount];
-    NSInteger charCount = [self charCount];
-    
-    NSString *words = [NSNumberFormatter localizedStringFromNumber:@(wordCount) numberStyle:NSNumberFormatterDecimalStyle];
-    NSString *characters = [NSNumberFormatter localizedStringFromNumber:@(charCount) numberStyle:NSNumberFormatterDecimalStyle];
-    
-    NSString *wordFormat = wordCount == 1 ? NSLocalizedString(@"%@ Word", @"Number of words in a note") : NSLocalizedString(@"%@ Words", @"Number of words in a note");
-    NSString *charFormat = charCount == 1 ? NSLocalizedString(@"%@ Character", @"Number of Characters in a note") : NSLocalizedString(@"%@ Characters", @"Number of Characters in a note");
-    NSString *status = [[[NSString stringWithFormat:wordFormat, words] stringByAppendingString:@", "] stringByAppendingString:[NSString stringWithFormat:charFormat, characters]];
-    
-    
-    self.noteActivityView = [SPActivityView activityViewWithToggleTitles:toggleTitles
-                                                    toggleSelectedTitles:toggleSelectedTitles
-                                                      actionButtonImages:actionImages
-                                                      actionButtonTitles:actionStrings
-                                                            buttonTitles:buttonStrings
-                                                                  status:status
-                                                                delegate:self];
-    
-    [self.noteActivityView setToggleState:_currentNote.published atIndex:0];
-    [self.noteActivityView setToggleState:_currentNote.pinned atIndex:1];
-    [self.noteActivityView setToggleState:_currentNote.markdown atIndex:2];
-    
-    // apply accessibility messages
-    
-    UIButton *shareButton = [self.noteActivityView actionButtonAtIndex:0];
-    shareButton.accessibilityLabel = NSLocalizedString(@"Share note", nil);
-    shareButton.accessibilityHint = NSLocalizedString(@"share-accessibility-hint", @"Accessibility hint on share button");
-    
-    UIButton *historyButton = [self.noteActivityView actionButtonAtIndex:1];
-    historyButton.accessibilityLabel = NSLocalizedString(@"History", @"Noun - the version history of a note");
-    historyButton.accessibilityHint = NSLocalizedString(@"history-accessibility-hint", @"Accessibility hint on button which shows the history of a note");
-    historyButton.enabled = _currentNote.version.integerValue - [self minimumNoteVersion] > 1;
-    
-    UIButton *collaborateButton = [self.noteActivityView actionButtonAtIndex:2];
-    collaborateButton.accessibilityHint = NSLocalizedString(@"collaborate-accessibility-hint", @"Accessibility hint on button which shows the current collaborators on a note");
-    
-    UIButton *deleteButton = [self.noteActivityView actionButtonAtIndex:3];
-    deleteButton.accessibilityLabel = NSLocalizedString(@"Trash-verb", @"Trash (verb) - the action of deleting a note");
-    deleteButton.accessibilityHint = NSLocalizedString(@"trash-accessibility-hint", @"Accessibility hint on button which moves a note to the trash");
-
-    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
-    publishToggle.accessibilityLabel = NSLocalizedString(@"Publish toggle", @"Switch which marks a note as published or unpublished");
-    publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", @"Action which unpublishes a note") : NSLocalizedString(@"Publish note", @"Action which published a note to a web page");
-
-    UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
-    pinToggle.accessibilityLabel = NSLocalizedString(@"Pin toggle", @"Switch which marks a note as pinned or unpinned");
-    pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", @"Action to mark a note as unpinned") : NSLocalizedString(@"Pin note", @"Action to mark a note as pinned");
-
-    UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
-    markdownToggle.accessibilityLabel = NSLocalizedString(@"Markdown toggle", @"Switch which marks a note as using Markdown formatting or not");
-    markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
-
-    UIButton *publishURLButton = [self.noteActivityView buttonAtIndex:0];
-    [publishURLButton setTitle:buttonStrings[0] forState:UIControlStateDisabled];
-    [self updatePublishUI];
-
-    
-    if ([UIDevice isPad] && !self.isViewHorizontallyCompact) {
-        // widen noteActivityView to show all content in the popover
-        CGRect activityViewFrame = self.noteActivityView.frame;
-        activityViewFrame.size.width = [self.theme floatForKey:@"actionViewWidth"];
-        self.noteActivityView.frame = activityViewFrame;
-
-        SPPopoverContainerViewController *popoverVC = [[SPPopoverContainerViewController alloc] initWithCustomView:self.noteActivityView];
-        popoverVC.modalPresentationStyle = UIModalPresentationPopover;
-        popoverVC.popoverPresentationController.sourceView = sender;
-        popoverVC.popoverPresentationController.sourceRect = ((UIView *)sender).bounds;
-        popoverVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        popoverVC.popoverPresentationController.delegate = self;
-
-        UIColor *actionSheetColor = [[UIColor simplenoteBackgroundColor] colorWithAlphaComponent:0.97];
-        popoverVC.popoverPresentationController.backgroundColor = actionSheetColor;
-
-        [self presentViewController:popoverVC animated:YES completion:nil];
-    } else {
-        self.noteActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                        withMessage:nil
-                                               withContentViewArray:@[self.noteActivityView]
-                                               withButtonTitleArray:@[NSLocalizedString(@"Done", nil)]
-                                                           delegate:self ];
-        self.noteActionSheet.swipeToDismiss = YES;
-    }
-}
-
-
-- (void)dismissActivityView {
-    if (self.presentedViewController) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-
-    // ActionSheet Scenario
-    [self.noteActionSheet dismiss];
-    self.noteActionSheet = nil;
-}
-
-- (void)activityView:(SPActivityView *)activityView didToggleIndex:(NSInteger)index enabled:(BOOL)enabled {
-    
-    self.modified = YES;
-
-    switch (index) {
-        case 0: // Publish Note
-        {
-            if (enabled) {
-                [self publishNote:^(BOOL success) {
-                    [activityView setToggleState:success atIndex:index];
-                }];
-
-            } else  {
-                [self unpublishNote:nil];
-            }
-
-            UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
-            publishToggle.accessibilityHint = _currentNote.published ? NSLocalizedString(@"Unpublish note", nil) : NSLocalizedString(@"Publish note", nil);
-            break;
-        }
-        case 1: // Pin Note
-        {
-            _currentNote.pinned = enabled;
-
-            [self save];
-
-            UIButton *pinToggle = [self.noteActivityView toggleAtIndex:1];
-            pinToggle.accessibilityHint = _currentNote.pinned ? NSLocalizedString(@"Unpin note", nil) : NSLocalizedString(@"Pin note", nil);
-            break;
-        }
-        case 2: // Toggle Markdown
-        {
-            _currentNote.markdown = enabled;
-
-            [self save];
-
-            // If Markdown is being enabled and it was previously disabled
-            self.bounceMarkdownPreviewOnActivityViewDismiss = (enabled && ![[NSUserDefaults standardUserDefaults] boolForKey:kSimplenoteMarkdownDefaultKey]);
-
-            // Update the global preference to use when creating new notes
-            [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kSimplenoteMarkdownDefaultKey];
-
-            // Track analytics
-            if (enabled) {
-                [SPTracker trackEditorNoteMarkdownEnabled];
-            } else {
-                [SPTracker trackEditorNoteMarkdownDisabled];
-            }
-
-            UIButton *markdownToggle = [self.noteActivityView toggleAtIndex:2];
-            markdownToggle.accessibilityHint = _currentNote.markdown ? NSLocalizedString(@"Disable Markdown formatting", nil) : NSLocalizedString(@"Enable Markdown formatting", nil);
-            break;
-        }
-        default: break;
-    }
-}
-
-- (void)updatePublishUI {
-    UIButton *publishToggle = [self.noteActivityView toggleAtIndex:0];
-    UIButton *urlButton = [self.noteActivityView buttonAtIndex:0];
-    if (_currentNote.published && _currentNote.publishURL.length == 0) {
-        [self.noteActivityView showActivityIndicator];
-        [urlButton setTitle:NSLocalizedString(@"Publishing...", @"Message shown when a note is in the processes of being published")
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = NO;
-    } else if (_currentNote.published && _currentNote.publishURL.length > 0) {
-        [self.noteActivityView hideActivityIndicator];
-        [urlButton setTitle:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = YES;
-    } else if (!_currentNote.published && _currentNote.publishURL.length == 0) {
-        [self.noteActivityView hideActivityIndicator];
-        urlButton.enabled = NO;
-        publishToggle.enabled = YES;
-    } else if (!_currentNote.published && _currentNote.publishURL.length > 0) {
-        [self.noteActivityView showActivityIndicator];
-        [urlButton setTitle:NSLocalizedString(@"Unpublishing...", @"Message shown when a note is in the processes of being unpublished")
-                   forState:UIControlStateNormal];
-        urlButton.enabled = YES;
-        publishToggle.enabled = NO;
-    }
-}
-
-- (void)activityView:(SPActivityView *)activityView didSelectActionAtIndex:(NSInteger)index {
-
-    [self dismissActivityView];
-
-    switch (index) {
-        case 0: {
-            [self shareNoteContentAction:activityView];
-            return;
-            break;
-        } case 1: {
-            [self viewVersionAction:activityView];
-            break;
-        } case 2: {
-            [self addCollaboratorsAction:activityView];
-            break;
-        } case 3: {
-            [SPTracker trackEditorNoteDeleted];
-            [self trashNoteAction:activityView];
-            break;
-        }
-            
-        default:
-            break;
-    }
-    
-    }
-
-- (void)activityView:(SPActivityView *)activityView didSelectButtonAtIndex:(NSInteger)index {
-    
-    [self dismissActivityView];
-
-        if (index == 0)
-            [self shareNoteURLAction:nil];
-}
- */
 - (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
 
     if ([actionSheet isEqual:self.versionActionSheet]) {
@@ -1677,137 +1416,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark Note Actions
 
-- (CGRect)presentationRectForActionButton {
-    
-    return [self.view convertRect:self.actionButton.frame
-                         fromView:self.actionButton.superview];
-    
-}
-/*
-- (void)publishNote:(void(^)(BOOL success))completion {
-    
-    [SPTracker trackEditorNotePublished];
-
-    _currentNote.published = YES;
-    [self save];
-    [self updatePublishUI];
-
-    if (completion) {
-        completion(YES);
-    }
-}
-
-- (void)unpublishNote:(void(^)(BOOL success))completion {
-
-    [SPTracker trackEditorNoteUnpublished];
-
-    _currentNote.published = NO;
-    [self save];
-    [self updatePublishUI];
-    
-    if (completion) {
-        completion(YES);
-}
-
-- (void)shareNoteContentAction:(id)sender {
-    
-    if (_currentNote.content == nil) {
-        return;
-    }
-    
-    [self save];
-    
-    [SPTracker trackEditorNoteContentShared];
-
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithNote:_currentNote];
-
-    if ([UIDevice isPad]) {
-        acv.modalPresentationStyle = UIModalPresentationPopover;
-        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
-        acv.popoverPresentationController.sourceView = self.view;
-    }
-
-    [self presentViewController:acv animated:YES completion:nil];
-}
-
-- (void)shareNoteURLAction:(id)sender {
-    
-    
-    if (!_currentNote.published) {
-        return;
-    }
-    
-	[SPTracker trackEditorPublishedUrlPressed];
-    
-    NSURL *publishURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]];
-    
-    SPAcitivitySafari *safariActivity = [[SPAcitivitySafari alloc] init];
-    
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
-                                                                      applicationActivities:@[safariActivity]];
-
-    if ([UIDevice isPad]) {
-        acv.modalPresentationStyle = UIModalPresentationPopover;
-        acv.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-        acv.popoverPresentationController.sourceRect = [self presentationRectForActionButton];
-        acv.popoverPresentationController.sourceView = self.view;
-    [self presentViewController:acv animated:YES completion:nil];
-    } else {
-        [self.navigationController presentViewController:acv animated:YES completion:nil];
-    }
-}
-
-
-- (void)showNoteActivityViewController {
-    
-    if (!_currentNote.published || !(_currentNote.publishURL.length > 0))
-        return;
-    
-    NSURL *publishURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kSimplenotePublishURL, _currentNote.publishURL]];
-
-    
-    UIActivityViewController *acv = [[UIActivityViewController alloc] initWithActivityItems:@[publishURL]
-                                                                      applicationActivities:nil];
-    
-    [self.navigationController presentViewController:acv
-                                            animated:YES
-                                          completion:nil];
-    
-}
-
-
-- (void)addCollaboratorsAction:(id)sender {
-    
-    [SPTracker trackEditorCollaboratorsAccessed];
-	   
-    SPAddCollaboratorsViewController *vc = [[SPAddCollaboratorsViewController alloc] init];
-    vc.collaboratorDelegate = self;
-    [vc setupWithCollaborators:_currentNote.emailTagsArray];
-
-    SPNavigationController *navController = [[SPNavigationController alloc] initWithRootViewController:vc];
-    navController.displaysBlurEffect = YES;
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:navController
-                                            animated:YES
-                                          completion:nil];
-    
-}
-
--(void)togglePinStatusAction:(id)sender
-{
-	_currentNote.pinned = !_currentNote.pinned;
-	self.modified = YES;
-    if (_currentNote.pinned) {
-        [SPTracker trackEditorNotePinned];
-    } else {
-        [SPTracker trackEditorNoteUnpinned];
-    }
-    
-    [self save];
-}
-*/
 - (void)viewVersionAction:(id)sender {
     
     // check reachability status
@@ -1869,6 +1477,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 }
 
 - (void)trashNoteAction:(id)sender {
+
+    [SPTracker trackEditorNoteDeleted];
 
     // create a snapshot before the animation
     UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
