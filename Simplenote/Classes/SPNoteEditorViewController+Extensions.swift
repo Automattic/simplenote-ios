@@ -142,10 +142,6 @@ extension SPNoteEditorViewController {
     func refreshVoiceoverSupport() {
         let enabled = voiceoverEnabled
         updateTagsEditor(locked: enabled)
-
-        if voiceoverEnabled {
-            resetNavigationBarToIdentity(withAnimation: true, completion: nil)
-        }
     }
 
     /// Whenever the Tags Editor must be locked:

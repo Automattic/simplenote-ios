@@ -78,7 +78,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 // State
 @property (nonatomic, assign) BOOL                      actionSheetVisible;
-@property (nonatomic, assign) BOOL                      disableShrinkingNavigationBar;
 @property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
 @property (nonatomic, assign) BOOL                      viewingVersions;
@@ -94,10 +93,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 // Search
 @property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
-
-// Navigation Bar
-@property (nonatomic, assign) CGAffineTransform         navigationBarTransform;
-@property (nonatomic, assign) CGFloat                   scrollPosition;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -123,13 +118,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
         // TagView
         _tagView = _noteEditorTextView.tagView;
         _noteEditorTextView.tagView.tagDelegate = self;
-        
-        // Helpers
-        self.scrollPosition = _noteEditorTextView.contentOffset.y;
-        self.navigationBarTransform = CGAffineTransformIdentity;
-        
-        self.disableShrinkingNavigationBar = NO;
-        
+
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(backButtonAction:)
@@ -221,7 +210,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
     [self setupNavigationController];
     [self setBackButtonTitleForSearchingMode: self.searching];
-    [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
     [self sizeNavigationContainer];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
@@ -253,7 +241,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)setupNavigationController {
+- (void)setupNavigationController
+{
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:!self.searching animated:YES];
@@ -360,14 +349,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)refreshNavBarSizeWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.disableShrinkingNavigationBar = YES;
         [self sizeNavigationContainer];
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-        self.disableShrinkingNavigationBar = NO;
-    }];
+    } completion:nil];
 }
 
 - (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -458,14 +442,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.navigationButtonContainer = [[SPOutsideTouchView alloc] init];
     self.navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [titleView addSubview:self.navigationButtonContainer];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(navigationBarContainerTapped:)];
-    tapGesture.numberOfTapsRequired = 1;
-    tapGesture.numberOfTouchesRequired = 1;
-    
-    [self.navigationButtonContainer addGestureRecognizer:tapGesture];
-    
+
     // back button
     self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.backButton setImage:chevronLeftImage forState:UIControlStateNormal];
@@ -566,10 +543,8 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self.backButton sizeToFit];
 }
 
-- (void)prepareToPopView {
-    
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    
+- (void)prepareToPopView
+{
     [self endEditing];
     
     if (self.currentNote.isBlank) {
@@ -598,7 +573,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)backButtonAction:(id)sender
 {
-    
     // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
         return;
@@ -636,9 +610,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.noteEditorTextView processChecklists];
     });
-    
-    [self resetNavigationBarToIdentityWithAnimation:NO completion:nil];
-    
+
     // mark note as read
     note.unread = NO;
     
@@ -666,7 +638,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)endEditing
 {
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
     [self.view endEditing:YES];
 }
 
@@ -793,10 +764,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tagView endEditing:YES];
-
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:^{
-            self.disableShrinkingNavigationBar = YES;
-        }];
     });
 }
 
@@ -878,193 +845,12 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 #pragma mark UIScrollViewDelegate methods
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    // don't apply wrong transform in overscroll regions
-    
-    CGFloat transformAmount = self.scrollPosition - scrollView.contentOffset.y;
-    
-    BOOL disableFromTopBounce = (scrollView.contentOffset.y < -scrollView.contentInset.top && transformAmount < 0);
-    BOOL disableFromBottomBounce = (scrollView.contentOffset.y > scrollView.contentInset.top + scrollView.contentSize.height && transformAmount < 0);
-    BOOL disableShrinkingingWhileScrollingUp = (transformAmount > 0 && scrollView.contentOffset.y > -44);
-    BOOL disableFromSmallContentSize = (scrollView.contentSize.height < (scrollView.frame.size.height - scrollView.contentInset.top - scrollView.contentInset.bottom));
-
-    BOOL applyTransform = YES;
-    
-    // a whole mess of conditionals that affect the behavior
-    if (disableFromTopBounce || disableFromBottomBounce || disableShrinkingingWhileScrollingUp ||
-        self.disableShrinkingNavigationBar || disableFromSmallContentSize) {
-        applyTransform = NO;
-    }
-    
-    if (applyTransform) {
-        [self applyNavigationBarTranslationTransformX:0
-                                                    Y:transformAmount];
-    }
-        
-    if (disableFromSmallContentSize && !CGAffineTransformIsIdentity(self.navigationBarTransform)) {
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    }
-    
-    self.scrollPosition = scrollView.contentOffset.y;
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     // Slowly Fade-In the NavigationBar's Blur
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    self.disableShrinkingNavigationBar = NO;
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    // exand navigation bar if velocity is high enought
-    if (velocity.y < -1.0) {
-        [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    }
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    
-    if (CGAffineTransformIsIdentity(self.navigationBarTransform)) {
-        return YES;
-    }
-        
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-    return NO;
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-}
-
-- (void)navigationBarContainerTapped:(UITapGestureRecognizer *)gesture {
-    
-    [self resetNavigationBarToIdentityWithAnimation:YES completion:nil];
-}
-
-- (void)resetNavigationBarToIdentityWithAnimation:(BOOL)animated completion:(void (^)())completion {
-    
-    self.disableShrinkingNavigationBar = YES;
-    
-    self.navigationBarTransform = CGAffineTransformIdentity;
-    
-    void (^animationBlock)() = ^() {
-        
-        self.backButton.transform = CGAffineTransformIdentity;
-        self.keyboardButton.transform = CGAffineTransformIdentity;
-        self.createNoteButton.transform = CGAffineTransformIdentity;
-        self.createNoteButton.alpha = 1.0;
-        self.actionButton.transform = CGAffineTransformIdentity;
-        self.actionButton.alpha = 1.0;
-        self.checklistButton.transform = CGAffineTransformIdentity;
-        self.checklistButton.alpha = 1.0;
-        self.keyboardButton.alpha = 1.0;
-        self.navigationController.navigationBar.transform = self.navigationBarTransform;
-        self.navigationBarBackground.transform = CGAffineTransformIdentity;
-
-        self.backButton.alpha = 1.0;
-    };
-    
-    void (^completionBlock)() = ^() {
-        
-        if (!self.noteEditorTextView.dragging && !self.noteEditorTextView.decelerating) {
-            self.disableShrinkingNavigationBar = NO;
-        }
-        
-        if (completion)
-            completion();
-    };
-    
-    if (animated) {
-        [UIView animateWithDuration:0.2
-                              delay:0.0
-             usingSpringWithDamping:1.0
-              initialSpringVelocity:8.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             
-                             animationBlock();
-                             
-                         } completion:^(BOOL finished) {
-                             
-                             completionBlock();
-                             
-                         }];
-    } else {
-        
-        [UIView performWithoutAnimation:^{
-            
-            animationBlock();
-            completionBlock();
-        }];
-        
-    }
-    
-}
-
-
-- (void)applyNavigationBarTranslationTransformX:(float)x Y:(float)y {
-    
-    if ([UIDevice isPad] || self.voiceoverEnabled) {
-        return;
-    }
-    
-    CGFloat navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
-    
-    CGRect containerViewFrame = self.navigationButtonContainer.bounds;
-    containerViewFrame.size.height = navigationBarHeight;
-    
-    BOOL isPortrait = self.isViewHorizontallyCompact && !self.isViewVerticallyCompact;
-    if (isPortrait) {
-        navigationBarHeight -= 20;
-    }
-    
-    CGFloat yTransform = MAX(MIN(0, self.navigationBarTransform.ty + y), -navigationBarHeight);
-    
-    self.navigationBarTransform = CGAffineTransformMakeTranslation(self.navigationBarTransform.tx + x,
-                                                                   yTransform);
-    
-    
-    // apply transform to button container
-    CGFloat normalHeight = self.navigationButtonContainer.frame.size.height;
-    CGFloat desiredHeight = normalHeight - 24;
-
-    CGFloat percentTransform = ABS(yTransform) / 24;
-
-    CGFloat scaleAmount = normalHeight - percentTransform * (normalHeight - desiredHeight);
-    scaleAmount = scaleAmount / normalHeight;
-    CGFloat alphaAmount = 1 - percentTransform;
-    
-    scaleAmount = MIN(1, MAX(scaleAmount, 0.8));
-    
-    alphaAmount = MIN(1, MAX(alphaAmount, 0.0));
-    
-
-    self.backButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
-                                                       CGAffineTransformMakeTranslation(yTransform / 4.0, -yTransform / 2.0));
-    self.backButton.alpha = isPortrait ? 1.0 : alphaAmount;
-    self.keyboardButton.transform =CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
-                                                      CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    self.keyboardButton.alpha = isPortrait ? 1.0 : alphaAmount;
-    self.createNoteButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
-                                                  CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    self.createNoteButton.alpha = alphaAmount;
-    
-    self.actionButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
-                                                  CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    self.actionButton.alpha = alphaAmount;
-    
-    self.checklistButton.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleAmount, scaleAmount),
-                                                     CGAffineTransformMakeTranslation(0, -yTransform / 2.0));
-    self.checklistButton.alpha = alphaAmount;
-    
-    
-    self.navigationController.navigationBar.transform = self.navigationBarTransform;
-    self.navigationBarBackground.transform = CGAffineTransformConcat(CGAffineTransformIdentity,
-                                                                    CGAffineTransformMakeTranslation(0, yTransform));
-}
 
 #pragma mark UITextViewDelegate methods
 
@@ -1303,9 +1089,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     if ([sender isEqual:self.createNoteButton]) {
         [SPTracker trackEditorNoteCreated];
     }
-    
-    self.disableShrinkingNavigationBar = YES; // disable the navigation bar shrinking to avoid weird animations
-    
+
 	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
     newNote.modificationDate = [NSDate date];
@@ -1355,8 +1139,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         [self displayNote:newNote];
     }
-    
-    self.disableShrinkingNavigationBar = NO;
 }
 
 - (void)insertChecklistAction:(id)sender {
