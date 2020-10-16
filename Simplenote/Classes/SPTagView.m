@@ -62,17 +62,16 @@
         tagPills = [NSMutableArray array];
 
         [self ensureRightToLeftSupportIsInitialized];
-        [self applyStyle];
     }
     
     return self;
 }
 
-- (void)applyStyle
+- (void)setBackgroundColor:(UIColor *)backgroundColor
 {
-    self.backgroundColor = [UIColor simplenoteBackgroundColor];
-    autoCompleteScrollView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    addTagField.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
+    [super setBackgroundColor:backgroundColor];
+    autoCompleteScrollView.backgroundColor = backgroundColor;
+}
 
 - (UIKeyboardAppearance)keyboardAppearance
 {

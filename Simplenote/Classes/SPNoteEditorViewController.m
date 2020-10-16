@@ -149,8 +149,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
 
     _tagView = _noteEditorTextView.tagView;
-    [_tagView applyStyle];
-
 
     self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
@@ -165,7 +163,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.bottomView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
-    _noteEditorTextView.interactiveTextStorage.tokens = @{
     self.noteEditorTextView.interactiveTextStorage.tokens = @{
         SPDefaultTokenName : @{
                 NSFontAttributeName : bodyFont,

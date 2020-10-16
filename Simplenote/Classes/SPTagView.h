@@ -45,6 +45,5 @@
 - (void)scrollEntryFieldToVisible:(BOOL)animated;
 - (void)clearAllTags;
 - (BOOL)setupWithTagNames:(NSArray *)tagNames;
-- (void)applyStyle;
 
 @end
