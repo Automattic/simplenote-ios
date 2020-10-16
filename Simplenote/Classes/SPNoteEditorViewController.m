@@ -134,8 +134,8 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 }
 
-- (VSTheme *)theme {
-    
+- (VSTheme *)theme
+{
     return [[VSThemeManager sharedManager] theme];
 }
 
@@ -533,14 +533,12 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)setEditingNote:(BOOL)editingNote
 {
     _editingNote = editingNote;
-    
     [self refreshNavigationBarButtons];
 }
 
 - (void)setIsKeyboardVisible:(BOOL)isKeyboardVisible
 {
     _isKeyboardVisible = isKeyboardVisible;
-
     [self refreshNavigationBarButtons];
 }
 
