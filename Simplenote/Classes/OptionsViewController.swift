@@ -379,6 +379,7 @@ private extension OptionsViewController {
     @IBAction
     func copyLinkWasPressed() {
         UIPasteboard.general.copyPublicLink(to: note)
+        SPTracker.trackEditorCopiedPublicLink()
     }
 
     @IBAction
@@ -387,6 +388,7 @@ private extension OptionsViewController {
         collaborateViewController.collaboratorDelegate = self
         collaborateViewController.setup(withCollaborators: note.emailTags)
         navigationController?.pushViewController(collaborateViewController, animated: true)
+        SPTracker.trackEditorCollaboratorsAccessed()
     }
 
     @IBAction

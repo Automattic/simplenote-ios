@@ -23,7 +23,6 @@
 + (void)trackEditorNoteDeleted;
 + (void)trackEditorNoteRestored;
 + (void)trackEditorNotePublishEnabled:(BOOL)isOn;
-+ (void)trackEditorPublishedUrlPressed;
 + (void)trackEditorNoteContentShared;
 + (void)trackEditorNoteEdited;
 + (void)trackEditorEmailTagAdded;
@@ -36,6 +35,7 @@
 + (void)trackEditorVersionsAccessed;
 + (void)trackEditorCollaboratorsAccessed;
 + (void)trackEditorCopiedInternalLink;
++ (void)trackEditorCopiedPublicLink;
 
 #pragma mark - Note List
 + (void)trackListNoteCreated;

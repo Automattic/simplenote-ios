@@ -56,11 +56,6 @@
     [self trackAutomatticEventWithName:name properties:nil];
 }
 
-+ (void)trackEditorPublishedUrlPressed
-{
-    [self trackAutomatticEventWithName:@"editor_note_published_url_pressed" properties:nil];
-}
-
 + (void)trackEditorNoteContentShared
 {
     [self trackAutomatticEventWithName:@"editor_note_content_shared" properties:nil];
@@ -128,6 +123,10 @@
     [self trackAutomatticEventWithName:@"editor_copied_internal_link" properties:nil];
 }
 
++ (void)trackEditorCopiedPublicLink
+{
+    [self trackAutomatticEventWithName:@"editor_copied_public_link" properties:nil];
+}
 
 #pragma mark - Note List
 
