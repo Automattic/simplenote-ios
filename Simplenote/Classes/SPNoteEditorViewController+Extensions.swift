@@ -417,6 +417,7 @@ extension SPNoteEditorViewController {
 //
 private extension SPNoteEditorViewController {
 
+    // TODO: Think if we can use it from 'newButtonAction' as well (the animation effect is different)
     func updateEditor(with content: String, animated: Bool = true) {
         let contentUpdateBlock = {
             self.noteEditorTextView.attributedText = NSAttributedString(string: content)
