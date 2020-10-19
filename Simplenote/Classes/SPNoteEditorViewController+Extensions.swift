@@ -241,7 +241,20 @@ extension SPNoteEditorViewController {
     /// Shows note history
     ///
     @objc
-    func showHistory() {
+    func presentHistoryController() {
+        guard SPAppDelegate.shared().simperium.authenticator.connected else {
+            let title = NSLocalizedString("version-alert-message", comment: "Error alert message shown when trying to view history of a note without an internet connection")
+            let cancelTitle = NSLocalizedString("OK", comment: "")
+            let alertController = UIAlertController(title: title,
+                                                    message: nil,
+                                                    preferredStyle: .alert)
+            alertController.addCancelActionWithTitle(cancelTitle)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+
+        save()
+
         let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
 
         historyViewController = viewController
@@ -251,12 +264,14 @@ extension SPNoteEditorViewController {
         historyTransitioningManager = transitioningManager
 
         present(viewController, with: transitioningManager)
+
+        SPTracker.trackEditorVersionsAccessed()
     }
 
     /// Dismiss note history
     ///
-    @objc(dismissHistoryAnimated:)
-    func dismissHistory(animated: Bool) {
+    @objc(dismissHistoryControllerAnimated:)
+    func dismissHistoryController(animated: Bool) {
         guard let viewController = historyViewController else {
             return
         }
@@ -279,12 +294,12 @@ extension SPNoteEditorViewController {
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 
     func noteHistoryControllerDidCancel() {
-        dismissHistory(animated: true)
+        dismissHistoryController(animated: true)
         restoreOriginalNoteContent()
     }
 
     func noteHistoryControllerDidFinish() {
-        dismissHistory(animated: true)
+        dismissHistoryController(animated: true)
         modified = true
         save()
     }

@@ -52,8 +52,6 @@
 - (void)didReceiveNewContent;
 - (void)didDeleteCurrentNote;
 
-- (void)presentHistoryController;
-
 - (void)save;
 
 @end

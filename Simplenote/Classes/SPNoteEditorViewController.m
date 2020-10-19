@@ -414,7 +414,7 @@ CGFloat const SPSelectedAreaPadding = 20;
         [self.noteEditorTextView processChecklists];
     });
 
-    [self dismissHistoryAnimated:NO];
+    [self dismissHistoryControllerAnimated:NO];
 
     // mark note as read
     note.unread = NO;
@@ -960,33 +960,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     [SPTracker trackEditorChecklistInserted];
 }
-
-
-
-#pragma mark Note Actions
-
-- (void)presentHistoryController
-{
-    if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
-
-        NSString *title = NSLocalizedString(@"version-alert-message", @"Error alert message shown when trying to view history of a note without an internet connection");
-        NSString *cancelTitle = NSLocalizedString(@"OK", nil);
-
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                 message:nil
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addCancelActionWithTitle:cancelTitle handler:nil];
-        [alertController presentFromRootViewController];
-        return;
-    }
-    
-    [SPTracker trackEditorVersionsAccessed];
-    
-    [self save];
-    [self showHistory];
-}
-
-
 
 #pragma mark SPAddTagDelegate methods
 
