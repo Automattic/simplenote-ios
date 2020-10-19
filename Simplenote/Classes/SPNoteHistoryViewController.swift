@@ -10,6 +10,8 @@ class SPNoteHistoryViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var dismissButton: UIButton!
 
+    private var transitioningManager: UIViewControllerTransitioningDelegate?
+
     private let controller: SPNoteHistoryController
 
     /// Designated initializer
@@ -288,6 +290,21 @@ extension SPNoteHistoryViewController {
 
     private func updateSliderAccessibilityValue(_ value: String?) {
         slider.accessibilityValue = value
+    }
+}
+
+// MARK: - Presentation
+extension SPNoteHistoryViewController {
+
+    /// Configure view controller to be presented as a card
+    ///
+    func configureToPresentAsCard(presentationDelegate: SPCardPresentationControllerDelegate) {
+        let transitioningManager = SPCardTransitioningManager()
+        transitioningManager.presentationDelegate = presentationDelegate
+        self.transitioningManager = transitioningManager
+
+        transitioningDelegate = transitioningManager
+        modalPresentationStyle = .custom
     }
 }
 

@@ -256,14 +256,10 @@ extension SPNoteEditorViewController {
         save()
 
         let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
-
+        viewController.configureToPresentAsCard(presentationDelegate: self)
         historyViewController = viewController
 
-        let transitioningManager = SPCardTransitioningManager()
-        transitioningManager.presentationDelegate = self
-        historyTransitioningManager = transitioningManager
-
-        present(viewController, with: transitioningManager)
+        present(viewController, animated: true)
 
         SPTracker.trackEditorVersionsAccessed()
     }
@@ -284,7 +280,6 @@ extension SPNoteEditorViewController {
 
     private func cleanUpAfterHistoryDismissal() {
         historyViewController = nil
-        historyTransitioningManager = nil
     }
 }
 
@@ -374,18 +369,6 @@ private extension SPNoteEditorViewController {
     }
 }
 
-
-// MARK: - Transitioning
-//
-private extension SPNoteEditorViewController {
-
-    func present(_ viewController: UIViewController, with transitioningManager: UIViewControllerTransitioningDelegate) {
-        viewController.transitioningDelegate = transitioningManager
-        viewController.modalPresentationStyle = .custom
-
-        present(viewController, animated: true, completion: nil)
-    }
-}
 
 
 // MARK: - Services

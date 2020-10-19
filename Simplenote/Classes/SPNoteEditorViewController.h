@@ -23,7 +23,6 @@
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
-@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> historyTransitioningManager;
 
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
