@@ -97,7 +97,6 @@
 		46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5E8179EDAFB0095CD24 /* SPTagsListViewController.m */; };
 		46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E7D17B49F4600F13AD9 /* DTPinDigitView.m */; };
 		46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B60017A063020095CD24 /* SPTagEntryField.m */; };
-		46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = E22BCDF91794F55000A17ED2 /* SPActionSheet.m */; };
 		46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E8117B49F4600F13AD9 /* DTPinLockController.m */; };
 		46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */; };
 		46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FCA5F8178911FC00FC229D /* VSThemeLoader.m */; };
@@ -741,8 +740,6 @@
 		E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+CoreDataExtensions.m"; path = "Classes/NSManagedObjectContext+CoreDataExtensions.m"; sourceTree = "<group>"; };
 		E22A17D117A2E2A000383575 /* SPObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPObjectManager.h; path = Simplenote/Classes/SPObjectManager.h; sourceTree = SOURCE_ROOT; };
 		E22A17D217A2E2A000383575 /* SPObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPObjectManager.m; path = Simplenote/Classes/SPObjectManager.m; sourceTree = SOURCE_ROOT; };
-		E22BCDF81794F55000A17ED2 /* SPActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPActionSheet.h; path = Classes/SPActionSheet.h; sourceTree = "<group>"; };
-		E22BCDF91794F55000A17ED2 /* SPActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPActionSheet.m; path = Classes/SPActionSheet.m; sourceTree = "<group>"; };
 		E22BCDFE1795F96800A17ED2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E22BCE0017960CBC00A17ED2 /* SPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPButton.h; path = Classes/SPButton.h; sourceTree = "<group>"; };
 		E22BCE0117960CBC00A17ED2 /* SPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPButton.m; path = Classes/SPButton.m; sourceTree = "<group>"; };
@@ -1521,8 +1518,6 @@
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
-				E22BCDF81794F55000A17ED2 /* SPActionSheet.h */,
-				E22BCDF91794F55000A17ED2 /* SPActionSheet.m */,
 				E22BCE0017960CBC00A17ED2 /* SPButton.h */,
 				E22BCE0117960CBC00A17ED2 /* SPButton.m */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
@@ -2375,7 +2370,6 @@
 				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
 				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,
 				B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */,
-				46A3C9A617DFA81A002865AE /* SPActionSheet.m in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */,
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,

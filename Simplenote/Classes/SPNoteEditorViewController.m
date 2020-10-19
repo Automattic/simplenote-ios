@@ -24,7 +24,6 @@
 #import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
-#import "SPActionSheet.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
@@ -33,8 +32,7 @@
 
 CGFloat const SPSelectedAreaPadding = 20;
 
-@interface SPNoteEditorViewController ()<SPActionSheetDelegate,
-                                        SPEditorTextViewDelegate,
+@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
                                         SPTagViewDelegate,
@@ -48,15 +46,11 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
 
-// Sheets
-@property (nonatomic, strong) SPActionSheet             *versionActionSheet;
-
 // Timers
 @property (nonatomic, strong) NSTimer                   *saveTimer;
 @property (nonatomic, strong) NSTimer                   *guarenteedSaveTimer;
 
 // State
-@property (nonatomic, assign) BOOL                      actionSheetVisible;
 @property (nonatomic, assign) BOOL                      searching;
 @property (nonatomic, assign) BOOL                      viewingVersions;
 
@@ -228,7 +222,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !self.actionSheetVisible && !self.isPreviewing) {
+    if ((_currentNote.content.length == 0) && !self.isShowingHistory && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -967,47 +961,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [SPTracker trackEditorChecklistInserted];
 }
 
-- (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
-
-    if ([actionSheet isEqual:self.versionActionSheet]) {
-        
-        self.viewingVersions = NO;
-        
-        if (index == 0) {
-            
-            // revert back to current version
-            _noteEditorTextView.attributedText = [_currentNote.content attributedString];
-        } else {
-            
-            [SPTracker trackEditorNoteRestored];
-            
-            self.modified = YES;
-            [self save];
-        }
-        
-        [_noteEditorTextView processChecklists];
-        // Unload versions and re-enable editor
-        [_noteEditorTextView setEditable:YES];
-        self.noteVersionData = nil;
-        [(SPNavigationController *)self.navigationController setDisableRotation:NO];
-    }
-    
-    [actionSheet dismiss];
-}
-
-- (void)actionSheetDidShow:(SPActionSheet *)actionSheet {
-    
-    self.actionSheetVisible = YES;
-}
-
-- (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
-    
-    self.actionSheetVisible = NO;
-
-    if ([actionSheet isEqual:self.versionActionSheet]) {
-        self.versionActionSheet = nil;
-    }
-}
 
 
 #pragma mark Note Actions
