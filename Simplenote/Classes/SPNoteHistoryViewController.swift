@@ -12,7 +12,7 @@ class SPNoteHistoryViewController: UIViewController {
 
     private let controller: SPNoteHistoryController
 
-    /// Designated initialize
+    /// Designated initializer
     ///
     /// - Parameters:
     ///     - controller: business logic controller
@@ -20,6 +20,19 @@ class SPNoteHistoryViewController: UIViewController {
     init(controller: SPNoteHistoryController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
+    }
+
+    /// Convenience initializer
+    ///
+    /// - Parameters:
+    ///     - note: Note
+    ///     - delegate: History delegate
+    ///
+    convenience init(note: Note, delegate: SPNoteHistoryControllerDelegate) {
+        let controller = SPNoteHistoryController(note: note)
+        controller.delegate = delegate
+
+        self.init(controller: controller)
     }
 
     @available(*, unavailable)

@@ -46,7 +46,8 @@ final class SPNoteHistoryController {
 
 
     private let note: Note
-    private let loader: SPHistoryLoader
+    private let versionsController: VersionsController
+    private var versionsToken: Any?
     private var state: State {
         didSet {
             observer?(state)
@@ -60,12 +61,16 @@ final class SPNoteHistoryController {
     ///     - note: Note
     ///     - loader: History loader for specified Note
     ///
-    init(note: Note, loader: SPHistoryLoader) {
+    init(note: Note, versionsController: VersionsController) {
         self.note = note
-        self.loader = loader
+        self.versionsController = versionsController
 
-        versionRange = loader.versionRange
+        versionRange = VersionsController.range(forCurrentVersion: note.versionInt)
         state = .loadingVersion(versionNumber: versionRange.upperBound)
+    }
+
+    convenience init(note: Note) {
+        self.init(note: note, versionsController: SPAppDelegate.shared().versionsController)
     }
 }
 
@@ -107,7 +112,7 @@ extension SPNoteHistoryController {
 //
 private extension SPNoteHistoryController {
     func loadData() {
-        loader.load { [weak self] (version) in
+        versionsToken = versionsController.requestVersions(for: note.simperiumKey, currentVersion: note.versionInt) { [weak self] (version) in
             self?.process(noteVersion: version)
         }
     }

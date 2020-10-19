@@ -5,7 +5,6 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
-@class SPHistoryLoader;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -24,7 +23,6 @@
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
-@property (nonatomic, weak) SPHistoryLoader *historyLoader;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> historyTransitioningManager;
 
 // Voiceover

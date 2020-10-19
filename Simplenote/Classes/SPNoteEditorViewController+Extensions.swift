@@ -242,27 +242,15 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func showHistory() {
-        let loader = SPHistoryLoader(note: currentNote)
-        let viewController = newHistoryViewController(with: loader, delegate: self)
+        let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
 
         historyViewController = viewController
-        historyLoader = loader
 
         let transitioningManager = SPCardTransitioningManager()
         transitioningManager.presentationDelegate = self
         historyTransitioningManager = transitioningManager
 
         present(viewController, with: transitioningManager)
-    }
-
-    private func newHistoryViewController(with loader: SPHistoryLoader,
-                                          delegate: SPNoteHistoryControllerDelegate) -> UIViewController {
-        let controller = SPNoteHistoryController(note: currentNote, loader: loader)
-        let historyViewController = SPNoteHistoryViewController(controller: controller)
-
-        controller.delegate = delegate
-
-        return historyViewController
     }
 
     /// Dismiss note history
@@ -281,7 +269,6 @@ extension SPNoteEditorViewController {
 
     private func cleanUpAfterHistoryDismissal() {
         historyViewController = nil
-        historyLoader = nil
         historyTransitioningManager = nil
     }
 }
