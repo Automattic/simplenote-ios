@@ -253,6 +253,7 @@ extension SPNoteEditorViewController {
             return
         }
 
+        ensureSearchIsDismissed()
         save()
 
         let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)

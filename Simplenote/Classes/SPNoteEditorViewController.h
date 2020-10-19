@@ -47,6 +47,8 @@
 - (void)endEditing;
 - (void)bounceMarkdownPreview;
 
+- (void)ensureSearchIsDismissed;
+
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
 - (void)didDeleteCurrentNote;
