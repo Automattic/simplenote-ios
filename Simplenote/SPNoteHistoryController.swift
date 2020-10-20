@@ -155,5 +155,5 @@ private extension SPNoteHistoryController.State {
 // MARK: - Localization
 //
 private struct Localization {
-    static let networkError = NSLocalizedString("Connect to the Internet to Access Previous Versions", comment: "Error alert message shown when trying to view history of a note without an internet connection")
+    static let networkError = NSLocalizedString("Couldn't Retrieve History", comment: "Error message shown when trying to view history of a note without an internet connection")
 }

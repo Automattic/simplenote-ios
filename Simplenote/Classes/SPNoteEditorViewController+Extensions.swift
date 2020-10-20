@@ -242,17 +242,6 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func presentHistoryController() {
-        guard SPAppDelegate.shared().simperium.authenticator.connected else {
-            let title = NSLocalizedString("version-alert-message", comment: "Error alert message shown when trying to view history of a note without an internet connection")
-            let cancelTitle = NSLocalizedString("OK", comment: "")
-            let alertController = UIAlertController(title: title,
-                                                    message: nil,
-                                                    preferredStyle: .alert)
-            alertController.addCancelActionWithTitle(cancelTitle)
-            present(alertController, animated: true, completion: nil)
-            return
-        }
-
         ensureSearchIsDismissed()
         save()
 
