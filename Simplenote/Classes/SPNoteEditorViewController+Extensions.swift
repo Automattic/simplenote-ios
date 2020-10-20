@@ -296,7 +296,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        guard note.isBlank else {
+        guard note.isBlank, noteEditorTextView.text.isEmpty else {
             save()
             return
         }
