@@ -128,6 +128,8 @@
 		A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */; };
 		A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA724ABFB5300715EBD /* SPShadowView.swift */; };
 		A6900346253D87060087D0D2 /* VersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6900345253D87060087D0D2 /* VersionsController.swift */; };
+		A69F850F253EC2B2005140F2 /* SPCardConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */; };
+		A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */; };
 		A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */; };
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
@@ -494,6 +496,8 @@
 		A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		A68ABCA724ABFB5300715EBD /* SPShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPShadowView.swift; sourceTree = "<group>"; };
 		A6900345253D87060087D0D2 /* VersionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsController.swift; sourceTree = "<group>"; };
+		A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardConfigurable.swift; sourceTree = "<group>"; };
+		A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+Simplenote.swift"; sourceTree = "<group>"; };
 		A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteHistoryViewController.swift; path = Classes/SPNoteHistoryViewController.swift; sourceTree = "<group>"; };
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
@@ -1076,6 +1080,7 @@
 				A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */,
 				A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */,
 				A6E1E79F24BDE440008A44BC /* SPCardDismissalAnimator.swift */,
+				A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */,
 			);
 			name = Card;
 			sourceTree = "<group>";
@@ -1285,6 +1290,7 @@
 				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */,
 				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
+				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2212,6 +2218,7 @@
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
+				A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5E951E424FEE26E004B10B8 /* NSURL+Links.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
@@ -2391,6 +2398,7 @@
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
+				A69F850F253EC2B2005140F2 /* SPCardConfigurable.swift in Sources */,
 				B5BE05541AB75C3B002417BF /* Settings.m in Sources */,
 				B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */,
 				46A3C9AD17DFA81A002865AE /* VSThemeLoader.m in Sources */,

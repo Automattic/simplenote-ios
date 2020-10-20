@@ -33,8 +33,12 @@ final class SPCardPresentationController: UIPresentationController {
     private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                    action: #selector(handleTap(_:)))
 
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self,
-                                                                   action: #selector(handlePan(_:)))
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gestureRecognizer = UIPanGestureRecognizer(target: self,
+                                                       action: #selector(handlePan(_:)))
+        gestureRecognizer.delegate = self
+        return gestureRecognizer
+    }()
 
     private var compactLayoutConstraints: [NSLayoutConstraint] = []
     private var regularLayoutConstraints: [NSLayoutConstraint] = []
@@ -175,6 +179,20 @@ private extension SPCardPresentationController {
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = UIKitConstants.alpha0_0
         }, completion: nil)
+    }
+}
+
+// MARK: - Gesture Recognizer Delegate
+//
+extension SPCardPresentationController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == panGestureRecognizer,
+              let viewController = presentedViewController as? SPCardConfigurable else {
+            return true
+        }
+
+        let location = gestureRecognizer.location(in: cardView)
+        return viewController.shouldBeginSwipeToDismiss(from: location)
     }
 }
 

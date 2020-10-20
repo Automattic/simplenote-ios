@@ -294,6 +294,7 @@ extension SPNoteHistoryViewController {
 }
 
 // MARK: - Presentation
+//
 extension SPNoteHistoryViewController {
 
     /// Configure view controller to be presented as a card
@@ -306,6 +307,24 @@ extension SPNoteHistoryViewController {
         transitioningDelegate = transitioningManager
         modalPresentationStyle = .custom
     }
+}
+
+// MARK: - SPCardConfigurable
+//
+extension SPNoteHistoryViewController: SPCardConfigurable {
+    func shouldBeginSwipeToDismiss(from location: CGPoint) -> Bool {
+        let locationInSlider = slider.convert(location, from: view)
+        // Add an extra padding to the thumb to prevent dismissing from the area around the thumb as well
+        let thumbRect = slider.thumbRect.insetBy(dx: -Constants.sliderThumbPadding,
+                                                 dy: -Constants.sliderThumbPadding)
+        return !thumbRect.contains(locationInSlider)
+    }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let sliderThumbPadding: CGFloat = 15.0
 }
 
 private struct Localization {
