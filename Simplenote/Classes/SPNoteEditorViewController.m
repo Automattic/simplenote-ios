@@ -104,7 +104,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(backButtonAction:)
+                                                 selector:@selector(dismissEditor:)
                                                      name:SPTransitionControllerPopGestureTriggeredNotificationName
                                                    object:nil];
         
@@ -394,7 +394,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
 }
 
-- (void)backButtonAction:(id)sender
+- (void)dismissEditor:(id)sender
 {
     if (self.viewingVersions) {
         return;
@@ -890,7 +890,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertController addCancelActionWithTitle:cancelTitle handler:^(UIAlertAction *action) {
         [self clearNote];
-        [self backButtonAction:nil];
+        [self dismissEditor:nil];
     }];
 
     [alertController presentFromRootViewController];
