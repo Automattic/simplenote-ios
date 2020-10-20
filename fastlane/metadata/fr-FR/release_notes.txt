@@ -1,5 +1,1 @@
-- Correction d’un bogue qui empêchait l’ajout de collaborateurs avec des adresses e-mail contenant de nouveaux TLD
-- Faire glisser une note dans la liste affiche désormais l’action Copier le lien interne
-- Un appui long sur un lien interne affiche désormais la note cible
-- iOS 12 est désormais le système d’exploitation minimal pris en charge
-- La saisie automatique du mot de passe est désormais le moyen préféré pour gérer vos identifiants de connexion
+- Ajout d’un lien d’aide dans Réglages et À propos
