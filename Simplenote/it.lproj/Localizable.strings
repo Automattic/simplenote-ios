@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-23 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-19 12:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Debug";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug disattivato";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Cancella note";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostica";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Disabilita formattazione Markdown";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Inserisci il tuo PIN";
 
+/* Error Title */
+"Error" = "Errore";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ o contattaci";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Password dimenticata?";
 
+/* FAQ or contact us */
+"Get Help" = "Richiedi supporto";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Fantastico! Potresti lasciare una recensione per dirci cosa ti piace?";
+
+/* Display help web page */
+"Help" = "Aiuto";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Aiutaci a migliorare Simplenote condividendo i dato di utilizzo con il nostro strumento di analisi.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Ripristino richiesto";
 
+/* Response Title */
+"Response" = "Risposta";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Ripristina la nota";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Impostazioni";
+
+/* Share Action */
+"Share" = "Condividi";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Condividi analisi";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Ordina per:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Codice stato";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistema predefinito";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Benvenuto in Simplenote per iOS!\n\nPer creare una nuova nota, clicca sul bottone con il segno +.\n\nScorri la lista per vedere tutte le tue note. Tocca il titolo della nota per aprire il dettaglio, e tocca il contenuto per modificarlo.\n\nPer effettuare una ricerca, scrivi nella barra di ricerca presente in alto nella schermata delle note.\n\nClicca il pulsante in alto a sinistra della nota, oppure effettua uno swiping su di essa, per accedere ai tags. E' possibile aggiungere nuovi tags alla nota usando l'apposito campo presente in basso nella schermata di editing. Usa la barra laterale per accedere alle note filtrare per tag.\n\nCi sono anche altre opzioni se le desideri. E' per esempio possibile aggiungere collaboratori ad una nota, oppure pubblicare una nota su una pagina web.\n\nUsa Simplenote per Mac, per Android, oppure visita http:\/\/simplenote.com per accedere alle tue note da qualunque posto e da qualunque dispositivo.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Debug attivato 🐞";
 

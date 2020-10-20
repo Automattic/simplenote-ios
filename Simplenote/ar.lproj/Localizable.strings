@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-23 13:54:04+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "إصلاح الخطأ";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "تم تعطيل تصحيح الأخطاء";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "حذف الملاحظات";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "التشخيصات";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "تعطيل تنسيق الضبط";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "إدخال رمز المرور الخاص بك";
 
+/* Error Title */
+"Error" = "خطأ";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "الأسئلة المتداولة أو اتصل بنا";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "معرّف الوجه";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "هل نسيت كلمة المرور؟";
 
+/* FAQ or contact us */
+"Get Help" = "إحصل على المساعدة";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "رائع! هل تمانع في ترك مراجعة لإخبارنا بما تحب؟";
+
+/* Display help web page */
+"Help" = "مساعدة";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "ساعدنا على تحسين Simplenote عن طريق مشاركة بيانات الاستخدام مع أداة التحليلات الخاصة بنا.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "إعادة التعيين مطلوبة";
 
+/* Response Title */
+"Response" = "الاستجابة";
+
 /* Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "إعدادات";
+
+/* Share Action */
+"Share" = "مشاركة";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "مشاركة التحليلات";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "فرز حسب:";
+
+/* Title for the response's Status Code */
+"Status Code" = "كود الحالة";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "الإعداد الافتراضي للنظام";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "أهلاً بك في Simplenote لنظام التشغيل iOS!\n\nلإضافة ملاحظة، انقر فوق زر علامة الزائد.\n\nانقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.\n\nيمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.\n\nانقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.\n\nهناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.\n\nاستخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http:\/\/simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 تم تمكين تصحيح الأخطاء 🐞";
 
