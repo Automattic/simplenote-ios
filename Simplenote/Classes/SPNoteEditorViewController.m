@@ -1,10 +1,8 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
 #import "VSThemeManager.h"
-#import "UIBarButtonItem+Images.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
-#import "UIButton+Images.h"
 #import "SPTagView.h"
 #import "NSTextStorage+Highlight.h"
 #import "SPEditorTextView.h"
@@ -14,7 +12,6 @@
 #import "SPHorizontalPickerView.h"
 #import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
-#import "SPOutsideTouchView.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
 #import "SPInteractiveTextStorage.h"
@@ -28,7 +25,6 @@
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
-#import "UIViewController+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "SPActionSheet.h"
 #import "Simplenote-Swift.h"
@@ -37,19 +33,7 @@
 @import SafariServices;
 
 
-CGFloat const SPCustomTitleViewHeight               = 44.0f;
-CGFloat const SPPaddingiPadCompactWidthPortrait     = 8.0f;
-CGFloat const SPPaddingiPadLeading                  = 4.0f;
-CGFloat const SPPaddingiPadTrailing                 = -2.0f;
-CGFloat const SPPaddingiPhoneLeadingLandscape       = 0.0f;
-CGFloat const SPPaddingiPhoneLeadingPortrait        = 8.0f;
-CGFloat const SPPaddingiPhoneTrailingLandscape      = 14.0f;
-CGFloat const SPPaddingiPhoneTrailingPortrait       = 6.0f;
-CGFloat const SPBarButtonYOriginAdjustment          = -1.0f;
-CGFloat const SPMultitaskingCompactOneThirdWidth    = 320.0f;
-CGFloat const SPBackButtonImagePadding              = -18;
-CGFloat const SPBackButtonTitlePadding              = -15;
-CGFloat const SPSelectedAreaPadding                 = 20;
+CGFloat const SPSelectedAreaPadding = 20;
 
 @interface SPNoteEditorViewController ()<SPActionSheetDelegate,
                                         SPEditorTextViewDelegate,
@@ -61,7 +45,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
-@property (nonatomic, strong) SPOutsideTouchView        *navigationButtonContainer;
 @property (nonatomic, strong) UILabel                   *searchDetailLabel;
 @property (nonatomic, strong) SPTagView                 *tagView;
 @property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
@@ -121,7 +104,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(backButtonAction:)
+                                                 selector:@selector(dismissEditor:)
                                                      name:SPTransitionControllerPopGestureTriggeredNotificationName
                                                    object:nil];
         
@@ -201,16 +184,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
+    [self configureSearchToolbar];
     [self configureLayout];
     [self refreshVoiceoverSupport];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
 
     [self setupNavigationController];
-    [self setBackButtonTitleForSearchingMode: self.searching];
-    [self sizeNavigationContainer];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
 
@@ -316,14 +299,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    [self refreshNavBarSizeWithCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
-}
-
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
-    [self refreshNavBarSizeWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -347,13 +323,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     }
 }
 
-- (void)refreshNavBarSizeWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self sizeNavigationContainer];
-    } completion:nil];
-}
-
 - (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     if (!self.tagView.isFirstResponder) {
@@ -365,136 +334,11 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     } completion:nil];
 }
 
-- (void)sizeNavigationContainer {
-    
-    self.navigationItem.titleView.frame = CGRectMake(0, 0, MAX(self.view.frame.size.width, self.view.frame.size.height), SPCustomTitleViewHeight);
-    self.navigationButtonContainer.frame = self.navigationItem.titleView.bounds;
-
-    BOOL isPad = [UIDevice isPad];
-
-    CGFloat leadingPadding = SPPaddingiPhoneLeadingPortrait;
-    CGFloat trailingPadding = SPPaddingiPhoneTrailingPortrait;
-    
-    if (isPad) {
-        leadingPadding  = SPPaddingiPadLeading;
-        trailingPadding = SPPaddingiPadTrailing;
-    } else if (self.isViewVerticallyCompact) {
-        leadingPadding  = SPPaddingiPhoneLeadingLandscape;
-        trailingPadding = SPPaddingiPhoneTrailingLandscape;
-    }
-    
-    // iPad in portrait split view or landscape 1/3 split requires some extra insets to match the list view
-    if (isPad && self.isViewHorizontallyCompact) {
-        if (CGRectGetWidth(self.navigationController.view.bounds) == SPMultitaskingCompactOneThirdWidth) {
-            leadingPadding += SPPaddingiPadCompactWidthPortrait;
-            trailingPadding -= SPPaddingiPadCompactWidthPortrait;
-        }
-    }
-    
-    self.backButton.frame = CGRectMake(leadingPadding,
-                                       SPBarButtonYOriginAdjustment,
-                                       self.backButton.frame.size.width,
-                                       self.navigationButtonContainer.frame.size.height);
-    
-    CGFloat previousXOrigin = self.navigationButtonContainer.frame.size.width + trailingPadding;
-    CGFloat buttonWidth = [self.theme floatForKey:@"barButtonWidth"];
-    CGFloat buttonHeight = buttonWidth;
-    
-    self.keyboardButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                           SPBarButtonYOriginAdjustment,
-                                           buttonWidth,
-                                           buttonHeight);
-        
-    self.createNoteButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                             SPBarButtonYOriginAdjustment,
-                                             buttonWidth,
-                                             buttonHeight);
-    
-    previousXOrigin = self.createNoteButton.frame.origin.x;
-    
-    self.actionButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                         SPBarButtonYOriginAdjustment,
-                                         buttonWidth,
-                                         buttonHeight);
-    
-    previousXOrigin = self.actionButton.frame.origin.x;
-    
-    self.checklistButton.frame = CGRectMake(previousXOrigin - buttonWidth,
-                                            SPBarButtonYOriginAdjustment,
-                                            buttonWidth,
-                                            buttonHeight);
-}
-
-
-- (void)configureNavigationBarItems
+- (void)configureSearchToolbar
 {
-    // setup Navigation Bar
-    self.navigationItem.hidesBackButton = YES;
-
-    // Load Assets
     UIImage *chevronRightImage = [UIImage imageWithName:UIImageNameChevronRight];
     UIImage *chevronLeftImage = [UIImage imageWithName:UIImageNameChevronLeft];
 
-    // container view
-    SPOutsideTouchView *titleView = [[SPOutsideTouchView alloc] init];
-    titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    self.navigationButtonContainer = [[SPOutsideTouchView alloc] init];
-    self.navigationButtonContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [titleView addSubview:self.navigationButtonContainer];
-
-    // back button
-    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.backButton setImage:chevronLeftImage forState:UIControlStateNormal];
-    self.backButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    self.backButton.imageEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonImagePadding, 0, 0);
-    self.backButton.titleEdgeInsets = UIEdgeInsetsMake(0, SPBackButtonTitlePadding, 0, 0);
-    self.backButton.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    self.backButton.accessibilityHint = NSLocalizedString(@"notes-accessibility-hint", @"VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list");
-    [self.backButton addTarget:self
-                        action:@selector(backButtonAction:)
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.navigationButtonContainer addSubview:self.backButton];
-
-    // setup right buttons
-    self.actionButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameInfo]
-                                           target:self
-                                         selector:@selector(noteOptionsWasPressed:)];
-    self.actionButton.accessibilityIdentifier = @"note-menu";
-    self.actionButton.accessibilityLabel = NSLocalizedString(@"Menu", @"Terminoligy used for sidebar UI element where tags are displayed");
-    self.actionButton.accessibilityHint = NSLocalizedString(@"menu-accessibility-hint", @"VoiceOver accessibiliity hint on button which shows or hides the menu");
-    
-    self.checklistButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameChecklist]
-                                              target:self
-                                            selector:@selector(insertChecklistAction:)];
-    
-    self.createNoteButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                               target:self
-                                             selector:@selector(newButtonAction:)];
-    self.createNoteButton.accessibilityLabel = NSLocalizedString(@"New note", @"Label to create a new note");
-    self.createNoteButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
-    
-    self.keyboardButton = [UIButton buttonWithImage:[UIImage imageWithName:UIImageNameHideKeyboard]
-                                            target:self
-                                          selector:@selector(keyboardButtonAction:)];
-    self.keyboardButton.accessibilityLabel = NSLocalizedString(@"Dismiss keyboard", nil);
-    
-    self.keyboardButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    self.createNoteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    self.checklistButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-    
-    [self.navigationButtonContainer addSubview:self.keyboardButton];
-    [self.navigationButtonContainer addSubview:self.createNoteButton];
-    [self.navigationButtonContainer addSubview:self.actionButton];
-    [self.navigationButtonContainer addSubview:self.checklistButton];
-    
-    [self sizeNavigationContainer];
-
-    self.navigationItem.titleView = titleView;
-    
-    // setup search toolbar
     self.doneSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                           target:self
                                                                           action:@selector(endSearching:)];
@@ -506,15 +350,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                                                                    target:nil
                                                                                    action:nil];
 
-    self.nextSearchButton = [UIBarButtonItem barButtonWithImage:chevronRightImage
-                                                 imageAlignment:UIBarButtonImageAlignmentRight
-                                                         target:self
-                                                       selector:@selector(highlightNextSearchResult:)];
+    self.nextSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronRightImage
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(highlightNextSearchResult:)];
     self.nextSearchButton.width = 34.0;
-    self.prevSearchButton = [UIBarButtonItem barButtonWithImage:chevronLeftImage
-                                                 imageAlignment:UIBarButtonImageAlignmentRight
-                                                         target:self
-                                                       selector:@selector(highlightPrevSearchResult:)];
+
+    self.prevSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronLeftImage
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(highlightPrevSearchResult:)];
     self.prevSearchButton.width = 34.0;
     
     
@@ -526,7 +371,6 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     self.searchDetailLabel.alpha = 0.0;
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchDetailLabel];
     
-
     [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
@@ -535,28 +379,9 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     [self refreshVoiceoverSupport];
 }
 
-- (void)setBackButtonTitleForSearchingMode:(BOOL)searching{
-    NSString *backButtonTitle = searching ? NSLocalizedString(@"Search", @"Using Search instead of Back if user is searching") : NSLocalizedString(@"Notes", @"Plural form of notes");
-    [self.backButton setTitle:backButtonTitle
-                     forState:UIControlStateNormal];
-    self.backButton.accessibilityLabel = backButtonTitle;
-    [self.backButton sizeToFit];
-}
-
-- (void)prepareToPopView
+- (void)ensureNoteIsVisibleInList
 {
-    [self endEditing];
-    
-    if (self.currentNote.isBlank) {
-        
-        // delete note
-        [[SPObjectManager sharedManager] permenentlyDeleteNote:_currentNote];
-        _currentNote = nil;
-        
-    } else {
-        [self save];
-    }
-    
+    // TODO: This should definitely be handled by the Note List itself. Please!
     SPNoteListViewController *listController = [[SPAppDelegate sharedDelegate] noteListViewController];
     if (_currentNote) {
         
@@ -567,30 +392,19 @@ CGFloat const SPSelectedAreaPadding                 = 20;
                                             atScrollPosition:UITableViewScrollPositionTop
                                                     animated:NO];
     }
-    
 }
 
-
-- (void)backButtonAction:(id)sender
+- (void)dismissEditor:(id)sender
 {
-    // this is to disable the swipe gesture while restoring to a previous version
     if (self.viewingVersions) {
         return;
     }
-    
-    [self prepareToPopView];
+
+    [self endEditing];
+    [self ensureEmptyNoteIsDeleted];
+    [self ensureNoteIsVisibleInList];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    [[self.navigationController transitionCoordinator]
-         animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {}
-         completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-            // clear the current note after pop animation completes if it wasn't cancelled
-            if (!context.isCancelled) {
-                [self clearNote];
-            }
-         }
-     ];
 }
 
 - (void)displayNote:(Note *)note
@@ -687,11 +501,21 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 
 - (void)refreshNavigationBarButtons
 {
-    BOOL shouldHideKeyboardButton = [self shouldHideKeyboardButton];
-    
-    self.checklistButton.hidden = !self.isEditingNote;
-    self.keyboardButton.hidden = shouldHideKeyboardButton;
-    self.createNoteButton.hidden = !shouldHideKeyboardButton;
+    NSMutableArray *buttons = [NSMutableArray array];
+
+    if (self.shouldHideKeyboardButton) {
+        [buttons addObject:self.createNoteButton];
+    } else {
+        [buttons addObject:self.keyboardButton];
+    }
+
+    [buttons addObject:self.actionButton];
+
+    if (self.isEditingNote) {
+        [buttons addObject:self.checklistButton];
+    }
+
+    self.navigationItem.rightBarButtonItems = buttons;
 }
 
 - (BOOL)shouldHideKeyboardButton
@@ -702,6 +526,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     
     return !self.isKeyboardVisible;
 }
+
 
 #pragma mark - Property Accessors
 
@@ -1065,7 +890,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertController addCancelActionWithTitle:cancelTitle handler:^(UIAlertAction *action) {
         [self clearNote];
-        [self backButtonAction:nil];
+        [self dismissEditor:nil];
     }];
 
     [alertController presentFromRootViewController];

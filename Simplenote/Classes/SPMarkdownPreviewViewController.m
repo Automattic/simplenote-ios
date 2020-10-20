@@ -8,7 +8,6 @@
 
 #import "SPMarkdownPreviewViewController.h"
 #import "SPMarkdownParser.h"
-#import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
 #import "Simplenote-Swift.h"
 
@@ -91,17 +90,6 @@
     
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;
-
-    UIBarButtonItem *backButton = [UIBarButtonItem backBarButtonWithTitle:NSLocalizedString(@"Back", @"Title of Back button for Markdown preview")
-                                                                    target:self
-                                                                    action:@selector(backButtonAction:)];
-
-    if ([UIDevice isPad]) {
-        // iPad needs extra padding on the left for the back button to align with previous screens
-        self.navigationItem.leftBarButtonItems = @[ [UIBarButtonItem barButtonFixedSpaceWithWidth:4], backButton ];
-    } else {
-        self.navigationItem.leftBarButtonItem = backButton;
-    }
 }
 
 - (void)displayMarkdown
@@ -110,13 +98,6 @@
 
     [self.webView loadHTMLString:html
                          baseURL:[[NSBundle mainBundle] bundleURL]];
-}
-
-#pragma mark - IBActions
-
-- (IBAction)backButtonAction:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

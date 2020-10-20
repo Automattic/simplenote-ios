@@ -2,9 +2,45 @@ import Foundation
 import CoreSpotlight
 
 
+// MARK: - Overridden Methods
+//
+extension SPNoteEditorViewController {
+
+    /// Whenever this instance is removed from its NavigationController, let's cleanup
+    ///
+    override public func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+
+        guard parent == nil, self.parent != nil else {
+            return
+        }
+
+        ensureEmptyNoteIsDeleted()
+    }
+}
+
+
 // MARK: - Interface Initialization
 //
 extension SPNoteEditorViewController {
+
+    /// Sets up the NavigationBar Items
+    ///
+    @objc
+    func configureNavigationBarItems() {
+        actionButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteOptionsWasPressed(_:)))
+        actionButton.accessibilityIdentifier = "note-menu"
+        actionButton.accessibilityLabel = NSLocalizedString("Menu", comment: "Note Options Button")
+
+        checklistButton = UIBarButtonItem(image: .image(name: .checklist), style: .plain, target: self, action: #selector(insertChecklistAction(_:)))
+        checklistButton.accessibilityLabel = NSLocalizedString("Inserts a new Checklist Item", comment: "Insert Checklist Button")
+
+        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
+        createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
+
+        keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
+        keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
+    }
 
     /// Sets up the Bottom View:
     /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
@@ -212,12 +248,12 @@ private extension SPNoteEditorViewController {
         bounceMarkdownPreview()
     }
 
-    func presentOptionsController(for note: Note, from sourceView: UIView) {
+    func presentOptionsController(for note: Note, from barButtonItem: UIBarButtonItem) {
         let optionsViewController = OptionsViewController(note: note)
         optionsViewController.delegate = self
 
         let navigationController = SPNavigationController(rootViewController: optionsViewController)
-        navigationController.configureAsPopover(sourceView: sourceView)
+        navigationController.configureAsPopover(barButtonItem: barButtonItem)
         navigationController.displaysBlurEffect = true
 
         let oldMarkdownState = note.markdown
@@ -231,12 +267,12 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorActivitiesAccessed()
     }
 
-    func presentShareController(for note: Note, from sourceView: UIView) {
+    func presentShareController(for note: Note, from barButtonItem: UIBarButtonItem) {
         guard let activityController = UIActivityViewController(note: note) else {
             return
         }
 
-        activityController.configureAsPopover(sourceView: sourceView)
+        activityController.configureAsPopover(barButtonItem: barButtonItem)
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
@@ -252,6 +288,21 @@ extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+
+    @objc
+    func ensureEmptyNoteIsDeleted() {
+        guard let note = currentNote else {
+            return
+        }
+
+        guard note.isBlank, noteEditorTextView.text.isEmpty else {
+            save()
+            return
+        }
+
+        SPObjectManager.shared().trashNote(note)
+        currentNote = nil
     }
 }
 
@@ -284,7 +335,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
         // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
         DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
             self.delete(note: sender.note)
-            self.backButtonAction(sender)
+            self.dismissEditor(sender)
         }
     }
 }
@@ -295,7 +346,7 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
 extension SPNoteEditorViewController {
 
     @IBAction
-    func noteOptionsWasPressed(_ sender: UIButton) {
+    func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
         guard let note = currentNote else {
             assertionFailure()
             return

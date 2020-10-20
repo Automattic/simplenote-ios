@@ -16,7 +16,6 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSTextStorage+Highlight.h"
-#import "UIBarButtonItem+Images.h"
 #import "UIDevice+Extensions.h"
 #import "VSThemeManager.h"
 
@@ -250,20 +249,20 @@
 
     /// Button: New Note
     ///
-    self.addButton = [UIBarButtonItem barButtonWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                          imageAlignment:UIBarButtonImageAlignmentRight
-                                                  target:self
-                                                selector:@selector(addButtonAction:)];
+    self.addButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameNewNote]
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(addButtonAction:)];
     self.addButton.isAccessibilityElement = YES;
     self.addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
     self.addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
 
     /// Button: Display Tags
     ///
-    self.sidebarButton = [UIBarButtonItem barButtonContainingCustomViewWithImage:[UIImage imageWithName:UIImageNameMenu]
-                                                                  imageAlignment:UIBarButtonImageAlignmentLeft
-                                                                          target:self
-                                                                        selector:@selector(sidebarButtonAction:)];
+    self.sidebarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameMenu]
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(sidebarButtonAction:)];
     self.sidebarButton.isAccessibilityElement = YES;
     self.sidebarButton.accessibilityIdentifier = @"menu";
     self.sidebarButton.accessibilityLabel = NSLocalizedString(@"Sidebar", @"UI region to the left of the note list which shows all of a users tags");
@@ -351,6 +350,7 @@
     [self.notesListController beginSearch];
     [self.tableView reloadData];
     [self displaySortBar];
+    [self refreshTitle];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
