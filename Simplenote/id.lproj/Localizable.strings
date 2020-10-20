@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-24 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Debug";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug Dinonaktifkan";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Hapus Catatan";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostik";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Nonaktifkan pemformatan Markdown";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Masukkan kode sandi Anda";
 
+/* Error Title */
+"Error" = "Kesalahan";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ atau hubungi kami";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Lupa kata sandi?";
 
+/* FAQ or contact us */
+"Get Help" = "Dapatkan Bantuan";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Bagus! Ingin memberikan ulasan tentang apa yang Anda suka?";
+
+/* Display help web page */
+"Help" = "Bantuan";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Bantu kami menyempurnakan Simplenote dengan berbagi data penggunaan dengan alat analitik kami.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Diperlukan Pengaturan Ulang";
 
+/* Response Title */
+"Response" = "Respons";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Settings";
+
+/* Share Action */
+"Share" = "Bagikan";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Berbagi analitik";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Urutkan berdasarkan:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Kode Status";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Pengaturan Asal Sistem";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Selamat Datang di Simplenote untuk iOS!\n\nUntuk menambahkan catatan, ketuk tombol plus.\n\nSentil daftar untuk menjelajahi catatan Anda. Ketuk judul untuk melihat catatan, kemudian ketuk isi untuk mengubahnya.\n\nAnda dapat mencari semua catatan Anda dengan mengetik di bidang pencarian pada bagian atas daftar catatan.\n\nKetuk tombol panah di bagian kiri atas atau sapukan jari pada daftar catatan untuk melihat label. Anda dapat menambahkan label pada catatan di bagian bawah penyunting catatan, lalu gunakan panel sisi untuk menjaga tetap teratur.\n\nAda opsi catatan lainnya jika Anda memerlukan. Anda dapat menambahkan lainnya sebagai kolaborator pada catatan, atau menerbitkan catatan sebagai sebuah halaman web.\n\nGunakan Simplenote di perangkat Mac, Android, atau di browser web Anda di http:\/\/simplenote.com. Catatan Anda akan tetap diperbarui di mana saja secara otomatis.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Debug Diaktifkan 🐞";
 

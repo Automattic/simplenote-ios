@@ -12,8 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const VSThemeManagerThemeWillChangeNotification;
-extern NSString *const VSThemeManagerThemeDidChangeNotification;
 extern NSString *const VSThemeManagerThemePrefKey;
 
 @interface VSThemeManager : NSObject
@@ -24,7 +22,6 @@ extern NSString *const VSThemeManagerThemePrefKey;
 - (VSThemeLoader *)themeLoader;
 
 - (void)swapTheme:(NSString *)theme;
-- (void)applyAppearanceStyling;
 
 @end
 

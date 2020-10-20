@@ -38,9 +38,6 @@
     UIActivityIndicatorView *activityIndicator;
     
     UIPanGestureRecognizer *panGesture;
-    
-    //Instance variable that can change at runtime
-    BOOL showDividerRects;
 }
 
 @property (nonatomic, retain) UIView *titleView;

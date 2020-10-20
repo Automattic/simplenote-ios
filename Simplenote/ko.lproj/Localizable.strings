@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-22 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-19 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "디버그";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "디버그 해제";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "진단";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "패스코드 입력";
 
+/* Error Title */
+"Error" = "오류";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ 또는 문의";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "비밀번호를 잊으셨나요?";
 
+/* FAQ or contact us */
+"Get Help" = "도움말";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "좋습니다! 마음에 드는 리뷰를 남겨주시겠습니까?";
+
+/* Display help web page */
+"Help" = "도움말";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "사용 데이터를 분석 도구와 공유하여 Simplenote를 개선하도록 도와주세요.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "재설정 필요";
 
+/* Response Title */
+"Response" = "응답";
+
 /* Restore a note to a previous version */
 "Restore Note" = "메모 복구";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "설정";
+
+/* Share Action */
+"Share" = "공유";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "분석 공유";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "정렬 기준:";
+
+/* Title for the response's Status Code */
+"Status Code" = "상태 코드";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "시스템 기본값";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "iOS용 Simplenote 시작하기\n\n메모를 추가하려면 더하기 버튼을 누르세요.\n\n메모를 탐색하려면 목록을 누르세요 메모를 보려면 제목을 누르고 메모를 수정하려면 메모 내용을 누르세요.\n\n메모 목록 상단의 검색 필드에 검색어를 입력해서 모든 메모를 검색할 수 있습니다.\n\n태그를 보려면 왼쪽 상단의 화살표 버튼을 누르거나 메모 목록을 옆으로 쓸어 넘기세요. 메모 에디터 하단에서 메모에 태그를 추가하고 사이드바를 사용해서 메모를 정리할 수 있습니다.\n\n필요한 경우 더욱 다양한 메모 옵션을 사용할 수 있습니다. 다른 사용자를 메모 공유자로 추가하거나 메모를 웹 페이지로 게시할 수 있습니다.\n\nMac, Android 장치나 웹 브라우저(http:\/\/simplenote.com)에서 Simplenote를 사용할 수 있습니다. 어디에 있든 메모 내용이 자동으로 업데이트됩니다.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 디버그 활성화 🐞";
 

@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Dadfygio";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug Disabled";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostics";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Disable Markdown formatting";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Rhowch eich cod cyfrin";
 
+/* Error Title */
+"Error" = "Gwall";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ or contact us";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
 
+/* FAQ or contact us */
+"Get Help" = "Get Help";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+
+/* Display help web page */
+"Help" = "Help";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset Required";
 
+/* Response Title */
+"Response" = "Response";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Adfer Nodyn";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Gosodiadau";
+
+/* Share Action */
+"Share" = "Rhannu";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Sort by:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Status Code";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "";
 

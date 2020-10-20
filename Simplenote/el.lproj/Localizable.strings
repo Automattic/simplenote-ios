@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Debug";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug Disabled";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostics";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Disable Markdown formatting";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Εισάγετε το συνθηματικό σας";
 
+/* Error Title */
+"Error" = "Error";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ or contact us";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
 
+/* FAQ or contact us */
+"Get Help" = "Get Help";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
+
+/* Display help web page */
+"Help" = "Help";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset Required";
 
+/* Response Title */
+"Response" = "Response";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Ανάκτηση σημείωσης";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Ρυθμίσεις";
+
+/* Share Action */
+"Share" = "Share";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Sort by:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Status Code";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Καλώς ήρθατε στο Simplenote!\n\nΓια νέα σημείωση πατήστε στο κουμπί συν.\n\nΠατήστε στον τίτλο της σημείωσης για άνοιγμα. Πατήστε στο περιεχόμενο για αλλαγές.\n\nΒρείτε σημειώσεις χρησιμοποιώντας το πεδίο αναζήτησης στο πάνω μέρος της οθόνης.\n\nΠατήστε στο κουμπί με το βέλος πάνω αριστερά ή σαρώστε προς τα δεξιά για να δείτε όλες τις ετικέτες. Προσθέστε ετικέτες σε κάθε σημειώση χρησιμοποιώντας το πεδίο Ετικέτες στο τέλος κάθε σημείωσης.\n\nΠατήστε στο κουμπί i για περισσότερες επιλογές. Προσθέστε συνεργάτες ή δημοσιεύστε την σημείωση ως ιστοσελίδα.\n\nΧρησιμοποιήστε το Simplenote σε Mac και Android ή στο http:\/\/simplenote.com. Όλες οι σημειώσεις συγχρονίζονται αυτόματα παντού.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "";
 
