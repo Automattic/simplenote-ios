@@ -33,7 +33,7 @@
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 
 
-- (void)backButtonAction:(id)sender;
+- (void)dismissEditor:(id)sender;
 - (void)insertChecklistAction:(id)sender;
 - (void)keyboardButtonAction:(id)sender;
 - (void)newButtonAction:(id)sender;
