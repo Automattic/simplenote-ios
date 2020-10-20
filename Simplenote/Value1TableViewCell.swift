@@ -43,6 +43,7 @@ class Value1TableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         selectable = true
+        accessoryType = .none
     }
 }
 
