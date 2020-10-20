@@ -9,8 +9,6 @@
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "JSONKit+Simplenote.h"
-#import "SPHorizontalPickerView.h"
-#import "SPVersionPickerViewCell.h"
 #import "SPPopoverContainerViewController.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
@@ -26,7 +24,6 @@
 #import "SPMarkdownPreviewViewController.h"
 #import "UIDevice+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
-#import "SPActionSheet.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
@@ -35,9 +32,7 @@
 
 CGFloat const SPSelectedAreaPadding = 20;
 
-@interface SPNoteEditorViewController ()<SPActionSheetDelegate,
-                                        SPEditorTextViewDelegate,
-                                        SPHorizontalPickerViewDelegate,
+@interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
                                         SPTagViewDelegate,
@@ -51,17 +46,11 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
 
-// Sheets
-@property (nonatomic, strong) SPActionSheet             *versionActionSheet;
-@property (nonatomic, strong) SPHorizontalPickerView    *versionPickerView;
-
 // Timers
 @property (nonatomic, strong) NSTimer                   *saveTimer;
 @property (nonatomic, strong) NSTimer                   *guarenteedSaveTimer;
 
 // State
-@property (nonatomic, assign) BOOL                      actionSheetVisible;
-@property (nonatomic, assign) BOOL                      modified;
 @property (nonatomic, assign) BOOL                      searching;
 @property (nonatomic, assign) BOOL                      viewingVersions;
 
@@ -233,7 +222,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !self.actionSheetVisible && !self.isPreviewing) {
+    if ((_currentNote.content.length == 0) && !self.isShowingHistory && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -396,7 +385,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)dismissEditor:(id)sender
 {
-    if (self.viewingVersions) {
+    if ([self isShowingHistory]) {
         return;
     }
 
@@ -425,6 +414,8 @@ CGFloat const SPSelectedAreaPadding = 20;
         [self.noteEditorTextView processChecklists];
     });
 
+    [self dismissHistoryControllerAnimated:NO];
+
     // mark note as read
     note.unread = NO;
     
@@ -435,7 +426,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     } else {
         [_tagView clearAllTags];
     }
-    
+
     self.modified = NO;
     self.previewing = NO;
 }
@@ -667,6 +658,13 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.searchDetailLabel.text = nil;
 }
 
+- (void)ensureSearchIsDismissed
+{
+    if (self.searching) {
+        [self endSearching:_noteEditorTextView];
+    }
+}
+
 
 #pragma mark UIScrollViewDelegate methods
 
@@ -682,11 +680,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 // only called for user changes
 // safe to alter text attributes here
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    
-    if (self.searching)
-        [self endSearching:textView];
-    
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if ([self isShowingHistory]) {
+        return NO;
+    }
+
+    [self ensureSearchIsDismissed];
+
     return YES;
 }
 
@@ -818,9 +819,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)save
 {
-	if (_currentNote == nil || self.viewingVersions || [self isDictatingText])
-		return;    
-    
+    if (_currentNote == nil || self.isShowingHistory || [self isDictatingText]) {
+		return;
+    }
+
 	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
@@ -866,19 +868,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 	NSArray *tags = _currentNote.tagsArray;
 	if (tags.count > 0) {
 		[_tagView setupWithTagNames:tags];
-    }
-}
-
-- (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data {
-    
-    if (self.viewingVersions) {
-        if (self.noteVersionData == nil) {
-            self.noteVersionData = [NSMutableDictionary dictionaryWithCapacity:10];
-        }
-        NSInteger versionInt = [version integerValue];
-        [self.noteVersionData setObject:data forKey:[NSNumber numberWithInteger:versionInt]];
-        
-        [self.versionPickerView reloadData];
     }
 }
 
@@ -972,209 +961,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [SPTracker trackEditorChecklistInserted];
 }
 
-- (void)actionSheet:(SPActionSheet *)actionSheet didSelectItemAtIndex:(NSInteger)index {
-
-    if ([actionSheet isEqual:self.versionActionSheet]) {
-        
-        self.viewingVersions = NO;
-        
-        if (index == 0) {
-            
-            // revert back to current version
-            _noteEditorTextView.attributedText = [_currentNote.content attributedString];
-        } else {
-            
-            [SPTracker trackEditorNoteRestored];
-            
-            self.modified = YES;
-            [self save];
-        }
-        
-        [_noteEditorTextView processChecklists];
-        // Unload versions and re-enable editor
-        [_noteEditorTextView setEditable:YES];
-        self.noteVersionData = nil;
-        [(SPNavigationController *)self.navigationController setDisableRotation:NO];
-    }
-    
-    [actionSheet dismiss];
-}
-
-- (void)actionSheetDidShow:(SPActionSheet *)actionSheet {
-    
-    self.actionSheetVisible = YES;
-}
-
-- (void)actionSheetDidDismiss:(SPActionSheet *)actionSheet {
-    
-    self.actionSheetVisible = NO;
-
-    if ([actionSheet isEqual:self.versionActionSheet]) {
-        self.versionActionSheet = nil;
-    }
-}
-
-
-#pragma mark Note Actions
-
-- (void)presentHistoryController
-{
-    if (![[SPAppDelegate sharedDelegate].simperium.authenticator connected]) {
-
-        NSString *title = NSLocalizedString(@"version-alert-message", @"Error alert message shown when trying to view history of a note without an internet connection");
-        NSString *cancelTitle = NSLocalizedString(@"OK", nil);
-
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                 message:nil
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addCancelActionWithTitle:cancelTitle handler:nil];
-        [alertController presentFromRootViewController];
-        return;
-    }
-    
-    [SPTracker trackEditorVersionsAccessed];
-    
-    [self save];
-    
-    // get the note version data
-    self.viewingVersions = YES;
-    self.currentVersion = 0; // reset the version number
-    
-    [_noteEditorTextView setEditable:NO];
-    
-    // Request the version data from Simperium
-    [[[SPAppDelegate sharedDelegate].simperium bucketForName:@"Note"] requestVersions:30 key:_currentNote.simperiumKey];
-    
-    
-    self.versionPickerView = [[SPHorizontalPickerView alloc] initWithFrame:CGRectMake(0,
-                                                                                      0,
-                                                                                      self.view.frame.size.width,
-                                                                                      200) itemClass:[SPVersionPickerViewCell class]
-                                                                  delegate:self];
-    
-    [self.versionPickerView setSelectedIndex:[NSNumber numberWithInteger:(_currentNote.version.integerValue - [self minimumNoteVersion] - 1)].integerValue];
-    
-    self.versionActionSheet = [SPActionSheet showActionSheetInView:self.navigationController.view
-                                                       withMessage:nil
-                                              withContentViewArray:@[self.versionPickerView]
-                                              withButtonTitleArray:@[NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Restore Note", @"Restore a note to a previous version")]
-                                                          delegate:self];
-    self.versionActionSheet.tapToDismiss = NO;
-    self.versionActionSheet.cancelButtonIndex = 0;
-
-    [(SPNavigationController *)self.navigationController setDisableRotation:YES];
-}
-
-- (long)minimumNoteVersion {
-
-    NSInteger version = [[_currentNote version] integerValue];
-    int numVersions = 30;
-    NSInteger minVersion = version - numVersions;
-    if (minVersion < 1)
-        minVersion = 1;
-    
-    return minVersion;
-}
-
-
-#pragma mark SPHorizontalPickerView delegate methods
-
-- (NSInteger)numberOfItemsInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    NSLog(@"there are %ld versions", _currentNote.version.integerValue - [self minimumNoteVersion]);
-    
-    return _currentNote.version.integerValue - [self minimumNoteVersion];
-}
-
-- (SPHorizontalPickerViewCell *)pickerView:(SPHorizontalPickerView *)pickerView viewForIndex:(NSInteger)index {
-    
-    SPVersionPickerViewCell *cell = (SPVersionPickerViewCell *)[pickerView dequeueReusableCellforIndex:index];
-    
-    NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
-    
-    if (versionData != nil) {
-        NSDate *versionDate = [NSDate dateWithTimeIntervalSince1970:[(NSString *)[versionData objectForKey:@"modificationDate"] doubleValue]];
-        
-        NSString *dateText = [_currentNote dateString:versionDate brief:NO];
-        
-        NSArray *dateComponents = [dateText componentsSeparatedByString:@","];
-        
-        if (dateComponents.count >= 2) {
-            
-            [cell setDateText:[(NSString *)dateComponents[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
-                     timeText:[(NSString *)dateComponents[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            
-        } else {
-            
-            [cell setDateText:dateText timeText:nil];
-            
-        }
-
-        [cell setActivityIndicatorVisible:NO animated:YES];
-        
-        cell.accessibilityLabel = dateText;
-        cell.accessibilityHint = NSLocalizedString(@"version-cell-accessibility-hint", @"Accessiblity hint describing how to reset the current note to a previous version");
-        
-    } else {
-        
-        [cell setActivityIndicatorVisible:YES animated:NO];
-        cell.accessibilityLabel = NSLocalizedString(@"version-cell-fetching-accessibility-hint", @"Accessibility hint used when previous versions of a note are being fetched");
-    }
-    
-    
-    return cell;
-    
-}
-
-- (NSString *)titleForPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return NSLocalizedString(@"Version", @"Represents a snapshot in time for a note");
-}
-
-- (CGFloat)heightForItemInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return 66.0;
-}
-
-- (CGFloat)widthForItemInPickerView:(SPHorizontalPickerView *)pickerView {
-    
-    return 132.0;
-}
-
-- (void)pickerView:(SPHorizontalPickerView *)pickerView didSelectItemAtIndex:(NSInteger)index {
-    
-    NSInteger versionInt = index + [self minimumNoteVersion] + 1;
-    if (versionInt == self.currentVersion) {
-        return;
-    }
-    
-    self.currentVersion = versionInt;
-    NSDictionary *versionData = [self.noteVersionData objectForKey:[NSNumber numberWithInteger:versionInt]];
-    NSLog(@"Loading version %ld: %@", (long)versionInt, versionData);
-    
-	if (versionData != nil) {
-        
-        UIView *snapshot = [_noteEditorTextView snapshotViewAfterScreenUpdates:NO];
-        snapshot.frame = _noteEditorTextView.frame;
-        [self.view insertSubview:snapshot aboveSubview:_noteEditorTextView];
-        
-        _noteEditorTextView.attributedText = [(NSString *)[versionData objectForKey:@"content"] attributedString];
-        [_noteEditorTextView processChecklists];
-        
-        [UIView animateWithDuration:0.25
-                         animations:^{
-                             
-                             snapshot.alpha = 0.0;
-                             
-                         } completion:^(BOOL finished) {
-                             [snapshot removeFromSuperview];
-                         }];
-	}
-    
-}
-
-
 #pragma mark SPAddTagDelegate methods
 
 - (void)tagViewDidChange:(SPTagView *)tagView
@@ -1211,6 +997,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
     
     [_currentNote addTag:tagName];
+
     self.modified = YES;
     [self save];
     

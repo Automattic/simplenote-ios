@@ -1,5 +1,6 @@
 4.27
 -----
+-   New Note History interface #762
 -   New Note Options interface #763
 -   Updated Navigation Bar's behavior #918
 -   Adjusted Notes List Metrics 

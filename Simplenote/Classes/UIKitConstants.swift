@@ -7,6 +7,8 @@ import UIKit
 @objcMembers
 class UIKitConstants: NSObject {
     static let alpha0_0 = CGFloat(0)
+    static let alpha0_1 = CGFloat(0.1)
+    static let alpha0_2 = CGFloat(0.2)
     static let alpha0_4 = CGFloat(0.4)
     static let alpha0_5 = CGFloat(0.5)
     static let alpha0_6 = CGFloat(0.6)

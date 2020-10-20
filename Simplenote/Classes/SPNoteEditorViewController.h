@@ -21,6 +21,9 @@
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 @property (nonatomic, strong) NSString *searchString;
 
+// History
+@property (nonatomic, weak) UIViewController *historyViewController;
+
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
 
@@ -31,7 +34,7 @@
 // State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
-
+@property (nonatomic, assign) BOOL modified;
 
 - (void)dismissEditor:(id)sender;
 - (void)insertChecklistAction:(id)sender;
@@ -44,12 +47,11 @@
 - (void)endEditing;
 - (void)bounceMarkdownPreview;
 
+- (void)ensureSearchIsDismissed;
+
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
-- (void)didReceiveVersion:(NSString *)version data:(NSDictionary *)data;
 - (void)didDeleteCurrentNote;
-
-- (void)presentHistoryController;
 
 - (void)save;
 

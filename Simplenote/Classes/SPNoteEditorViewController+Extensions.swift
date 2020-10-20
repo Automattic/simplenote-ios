@@ -227,6 +227,85 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - History
+//
+extension SPNoteEditorViewController {
+
+    /// Indicates if note history is shown on screen
+    ///
+    @objc
+    var isShowingHistory: Bool {
+        return historyViewController != nil
+    }
+
+    /// Shows note history
+    ///
+    @objc
+    func presentHistoryController() {
+        ensureSearchIsDismissed()
+        save()
+
+        let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
+        viewController.configureToPresentAsCard(presentationDelegate: self)
+        historyViewController = viewController
+
+        present(viewController, animated: true)
+
+        SPTracker.trackEditorVersionsAccessed()
+    }
+
+    /// Dismiss note history
+    ///
+    @objc(dismissHistoryControllerAnimated:)
+    func dismissHistoryController(animated: Bool) {
+        guard let viewController = historyViewController else {
+            return
+        }
+
+        cleanUpAfterHistoryDismissal()
+        viewController.dismiss(animated: animated, completion: nil)
+
+        resetAccessibilityFocus()
+    }
+
+    private func cleanUpAfterHistoryDismissal() {
+        historyViewController = nil
+    }
+}
+
+
+// MARK: - History Delegate
+//
+extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
+
+    func noteHistoryControllerDidCancel() {
+        dismissHistoryController(animated: true)
+        restoreOriginalNoteContent()
+    }
+
+    func noteHistoryControllerDidFinish() {
+        dismissHistoryController(animated: true)
+        modified = true
+        save()
+    }
+
+    func noteHistoryControllerDidSelectVersion(withContent content: String) {
+        updateEditor(with: content)
+    }
+}
+
+
+// MARK: - History Card transition delegate
+//
+extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
+
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
+        cleanUpAfterHistoryDismissal()
+        restoreOriginalNoteContent()
+    }
+}
+
+
 // MARK: - Private API(s)
 //
 private extension SPNoteEditorViewController {
@@ -276,8 +355,10 @@ private extension SPNoteEditorViewController {
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
+
     }
 }
+
 
 
 // MARK: - Services
@@ -303,6 +384,46 @@ extension SPNoteEditorViewController {
 
         SPObjectManager.shared().trashNote(note)
         currentNote = nil
+    }
+}
+
+
+// MARK: - Editor
+//
+private extension SPNoteEditorViewController {
+
+    // TODO: Think if we can use it from 'newButtonAction' as well (the animation effect is different)
+    func updateEditor(with content: String, animated: Bool = true) {
+        let contentUpdateBlock = {
+            self.noteEditorTextView.attributedText = NSAttributedString(string: content)
+            self.noteEditorTextView.processChecklists()
+        }
+
+        guard animated, let snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false) else {
+            contentUpdateBlock()
+            return
+        }
+
+        snapshot.frame = noteEditorTextView.frame
+        view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
+
+        contentUpdateBlock()
+
+        let animations = {
+            snapshot.alpha = .zero
+        }
+
+        let completion: (Bool) -> Void = { _ in
+            snapshot.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration,
+                       animations: animations,
+                       completion: completion)
+    }
+
+    func restoreOriginalNoteContent() {
+        updateEditor(with: currentNote.content)
     }
 }
 
@@ -337,6 +458,16 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
             self.delete(note: sender.note)
             self.dismissEditor(sender)
         }
+    }
+}
+
+
+// MARK: - Accessibility
+//
+private extension SPNoteEditorViewController {
+
+    func resetAccessibilityFocus() {
+        UIAccessibility.post(notification: .layoutChanged, argument: nil)
     }
 }
 

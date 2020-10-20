@@ -40,6 +40,15 @@ extension SPAppDelegate {
     }
 }
 
+// MARK: - Initialization
+//
+extension SPAppDelegate {
+
+    @objc
+    func configureVersionsController() {
+        versionsController = VersionsController(bucket: simperium.notesBucket)
+    }
+}
 
 // MARK: - URL Handlers
 //
