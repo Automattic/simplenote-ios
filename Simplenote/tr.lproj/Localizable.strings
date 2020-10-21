@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-23 14:54:46+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Hata ayıklama";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Hata Ayıklama Devre Dışı";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notları Sil";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Tanılamalar";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Markdown biçimlendirmesini devre dışı bırak";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Parolanızı girin";
 
+/* Error Title */
+"Error" = "Hata";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "SSS veya bize ulaşın";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Parolayı mı unuttunuz?";
 
+/* FAQ or contact us */
+"Get Help" = "Yardım Alın";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Harika! Neleri beğendiğiniz hakkında değerlendirme yapmaya ne dersiniz?";
+
+/* Display help web page */
+"Help" = "Yardım";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Analiz aracımızla kullanım verilerini paylaşarak Simplenote'u iyileştirmemize yardımcı olun.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Sıfırlama Gerekli";
 
+/* Response Title */
+"Response" = "Yanıt";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Notu Geri Yükle";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
+
+/* Share Action */
+"Share" = "Paylaş";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analizleri paylaş";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Sıralama ölçütü:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Durum Kodu";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistem Varsayılanı";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "iOS için Simplenote’a hoş geldiniz!\n\nYeni bir not eklemek için artı düğmesine dokunun.\n\nNotlarınıza göz atmak için listeye hafifçe vurun. Bir notu görmek için başlığa dokunun; ardından değiştirmek için notun içeriklerine dokunun.\n\nNot listesinin üst kısmında bulunan arama alanına yazarak tüm notlarınızda arama yapabilirsiniz.\n\nSol üst kısımdaki ok düğmesine dokunarak veya not listenizi kaydırarak etiketlerinizi görebilirsiniz. Not düzenleyicinin alt kısmında bir nota etiket ekleyebilir, ardından kenar çubuğunu kullanarak notları düzenli şekilde saklayabilirsiniz.\n\nGerek duyduğunuzda diğer not seçeneklerini de kullanabilirsiniz. Bir nota iş birliği kurduğunuz kişiler olarak başka insanlar ekleyebilir veya notu web sayfası olarak yayınlayabilirsiniz.\n\nSimplenote’u Mac’inizde, Android aygıtınızda veya http:\/\/simplenote.com adresini yazarak internet tarayıcınızda kullanabilirsiniz. Notlarınız her yerde otomatik olarak güncellenecek.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Hata Ayıklama Etkinleştirildi 🐞";
 

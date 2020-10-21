@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-23 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Debug";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Debug uitgeschakeld";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notities verwijderen";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnoses";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Voer je wachtwoordcode in";
 
+/* Error Title */
+"Error" = "Fout";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "Veelgestelde vragen of neem contact met ons op";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Gezichts-ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Wachtwoord vergeten?";
 
+/* FAQ or contact us */
+"Get Help" = "Ontvang hulp";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Geweldig! Denk je eraan een beoordeling achter te laten om ons te vertellen wat je zou willen?";
+
+/* Display help web page */
+"Help" = "Help";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help ons Simplenote te verbeteren door gebruiksgegevens te delen met onze analysetool.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Reset vereist";
 
+/* Response Title */
+"Response" = "Antwoord";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Instellingen";
+
+/* Share Action */
+"Share" = "Delen";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analyses delen";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Sorteren op:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Statuscode";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Systeemstandaard";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Debug ingeschakeld 🐞";
 

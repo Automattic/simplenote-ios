@@ -1,5 +1,1 @@
-- Åtgärdade ett fel som gjorde att det inte gick att lägga till kollaboratörer med e-postadresser innehållande nya TLD:er
-- Om man sveper över en anteckning i listan visas nu åtgärden Kopiera intern länk
-- Om man trycker länge på en intern länk öppnas nu målanteckningen
-- Minst iOS 12 krävs nu
-- Automatisk ifyllning av lösenord är nu det föredragna sättet att hantera dina autentiseringsuppgifter
+- Lagt till en länk för att hjälpa till i ”Inställningar” och ”Om”
