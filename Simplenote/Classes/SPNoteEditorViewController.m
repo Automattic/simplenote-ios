@@ -108,7 +108,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
         // Apply the current style right away!
         [self startListeningToThemeNotifications];
-        [self applyStyle];
+        [self refreshStyle];
     }
     
     return self;
@@ -123,12 +123,12 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 }
 
-- (VSTheme *)theme {
-    
+- (VSTheme *)theme
+{
     return [[VSThemeManager sharedManager] theme];
 }
 
-- (void)applyStyle
+- (void)refreshStyle
 {    
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle1 weight:UIFontWeightBold];
@@ -138,20 +138,21 @@ CGFloat const SPSelectedAreaPadding = 20;
     paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
 
     _tagView = _noteEditorTextView.tagView;
-    [_tagView applyStyle];
-
-    self.bottomView.backgroundColor = [UIColor simplenoteBackgroundColor];
 
     self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
-    self.noteEditorTextView.backgroundColor = [UIColor simplenoteBackgroundColor];
-    self.noteEditorTextView.keyboardAppearance = (SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault);
 
-    UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
+    UIKeyboardAppearance keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
+    self.noteEditorTextView.keyboardAppearance = keyboardAppearance;
+    self.tagView.keyboardAppearance = keyboardAppearance;
+
+    UIColor *backgroundColor = self.previewing ? [UIColor simplenoteBackgroundPreviewColor] : [UIColor simplenoteBackgroundColor];
     self.noteEditorTextView.backgroundColor = backgroundColor;
+    self.tagView.backgroundColor = backgroundColor;
+    self.bottomView.backgroundColor = backgroundColor;
     self.view.backgroundColor = backgroundColor;
 
-    _noteEditorTextView.interactiveTextStorage.tokens = @{
+    self.noteEditorTextView.interactiveTextStorage.tokens = @{
         SPDefaultTokenName : @{
                 NSFontAttributeName : bodyFont,
                 NSForegroundColorAttributeName : fontColor,
@@ -240,7 +241,7 @@ CGFloat const SPSelectedAreaPadding = 20;
         [self.noteEditorTextView endEditing:YES];
     }
 
-    [self applyStyle];
+    [self refreshStyle];
 }
 
 - (void)highlightSearchResultsIfNeeded
@@ -308,7 +309,7 @@ CGFloat const SPSelectedAreaPadding = 20;
         //
         // Ref. https://github.com/Automattic/simplenote-ios/issues/599
         //
-        [self applyStyle];
+        [self refreshStyle];
     }
 }
 
@@ -524,15 +525,19 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)setEditingNote:(BOOL)editingNote
 {
     _editingNote = editingNote;
-    
     [self refreshNavigationBarButtons];
 }
 
 - (void)setIsKeyboardVisible:(BOOL)isKeyboardVisible
 {
     _isKeyboardVisible = isKeyboardVisible;
-
     [self refreshNavigationBarButtons];
+}
+
+- (void)setPreviewing:(BOOL)previewing
+{
+    _previewing = previewing;
+    [self refreshStyle];
 }
 
 
