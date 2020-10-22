@@ -22,32 +22,82 @@ class NoteInformationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        stopListeningToNotifications()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+
+        configureViews()
+        configureAccessibility()
+
+        startListeningToNotifications()
+
         reloadData()
     }
 
-    private func setupTableView() {
+    private func configureViews() {
+        configureTableView()
+        screenTitleLabel.text = Localization.information
+
+        refreshStyle()
+    }
+
+    private func configureTableView() {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+        tableView.tableFooterView = UIView()
     }
 
     private func reloadData() {
-        let metrics = NoteMetrics(note: note)
+        rows = metricRows()
+        tableView.reloadData()
+    }
 
-        rows = [
-            .metric(title: NSLocalizedString("Modified", comment: "Note Modification Date"),
+    private func metricRows() -> [Row] {
+        let metrics = NoteMetrics(note: note)
+        return [
+            .metric(title: Localization.modified,
                     value: DateFormatter.dateTimeFormatter.string(from: metrics.modifiedDate)),
 
-            .metric(title: NSLocalizedString("Created", comment: "Note Creation Date"),
+            .metric(title: Localization.created,
                     value: DateFormatter.dateTimeFormatter.string(from: metrics.creationDate)),
 
-            .metric(title: NSLocalizedString("Words", comment: "Number of words in the note"),
+            .metric(title: Localization.words,
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfWords)),
 
-            .metric(title: NSLocalizedString("Characters", comment: "Number of characters in the note"),
+            .metric(title: Localization.characters,
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
+    }
+
+    private func configureAccessibility() {
+        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+
+    }
+}
+
+// MARK: - Styling
+//
+private extension NoteInformationViewController {
+    func refreshStyle() {
+        styleScreenTitleLabel()
+        styleDismissButton()
+    }
+
+    func styleScreenTitleLabel() {
+        screenTitleLabel.textColor = .simplenoteNoteHeadlineColor
+    }
+
+    func styleDismissButton() {
+        dismissButton.layer.masksToBounds = true
+
+        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
+
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
+        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
+
+        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 }
 
@@ -93,8 +143,27 @@ extension NoteInformationViewController: UITableViewDataSource {
     }
 
     private func configure(cell: Value1TableViewCell, withTitle title: String, value: String?) {
+        cell.hasClearBackground = true
         cell.title = title
         cell.detailTextLabel?.text = value
+    }
+}
+
+// MARK: - Notifications
+//
+private extension NoteInformationViewController {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .SPSimplenoteThemeChanged, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func themeDidChange() {
+        refreshStyle()
     }
 }
 
@@ -115,4 +184,14 @@ extension NoteInformationViewController {
 
 private enum Row {
     case metric(title: String, value: String?)
+}
+
+private struct Localization {
+    static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
+    static let modified = NSLocalizedString("Modified", comment: "Note Modification Date")
+    static let created = NSLocalizedString("Created", comment: "Note Creation Date")
+    static let words = NSLocalizedString("Words", comment: "Number of words in the note")
+    static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
+
+    static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
 }
