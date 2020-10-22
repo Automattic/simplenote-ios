@@ -1,13 +1,13 @@
 PODS:
-  - AppCenter (2.3.0):
-    - AppCenter/Analytics (= 2.3.0)
-    - AppCenter/Crashes (= 2.3.0)
-  - AppCenter/Analytics (2.3.0):
+  - AppCenter (2.5.3):
+    - AppCenter/Analytics (= 2.5.3)
+    - AppCenter/Crashes (= 2.5.3)
+  - AppCenter/Analytics (2.5.3):
     - AppCenter/Core
-  - AppCenter/Core (2.3.0)
-  - AppCenter/Crashes (2.3.0):
+  - AppCenter/Core (2.5.3)
+  - AppCenter/Crashes (2.5.3):
     - AppCenter/Core
-  - AppCenter/Distribute (2.3.0):
+  - AppCenter/Distribute (2.5.3):
     - AppCenter/Core
   - Automattic-Tracks-iOS (0.5.1):
     - CocoaLumberjack (~> 3)
@@ -40,9 +40,9 @@ PODS:
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
-  - AppCenter (~> 2.3.0)
-  - AppCenter/Distribute (~> 2.3.0)
-  - Automattic-Tracks-iOS (~> 0.5)
+  - AppCenter (~> 2.5.1)
+  - AppCenter/Distribute (~> 2.5.1)
+  - Automattic-Tracks-iOS (~> 0.5.1)
   - Gridicons (~> 0.18)
   - Simperium (~> 1.0)
   - WordPress-Ratings-iOS (= 0.0.2)
@@ -63,7 +63,7 @@ SPEC REPOS:
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
+  AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
   Automattic-Tracks-iOS: ac2cf9d8332fef72cf3e6de7b14012e7a0672676
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
@@ -75,6 +75,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 95e97b56dcfc5dd8ee75870e9b1be11b1a5cbe47
+PODFILE CHECKSUM: 9d5d9514beec4282249693de8e03e9902abf1948
 
 COCOAPODS: 1.7.5
