@@ -585,7 +585,7 @@ private extension SPNoteListViewController {
                 return nil
         }
 
-        return DateFormatter.Simplenote.listDateFormatter.string(from: date)
+        return DateFormatter.listDateFormatter.string(from: date)
     }
 }
 
