@@ -36,6 +36,12 @@ class NoteInformationViewController: UIViewController {
         let metrics = NoteMetrics(note: note)
 
         rows = [
+            .metric(title: NSLocalizedString("Modified", comment: "Note Modification Date"),
+                    value: DateFormatter.dateTimeFormatter.string(from: metrics.modifiedDate)),
+
+            .metric(title: NSLocalizedString("Created", comment: "Note Creation Date"),
+                    value: DateFormatter.dateTimeFormatter.string(from: metrics.creationDate)),
+
             .metric(title: NSLocalizedString("Words", comment: "Number of words in the note"),
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfWords)),
 
