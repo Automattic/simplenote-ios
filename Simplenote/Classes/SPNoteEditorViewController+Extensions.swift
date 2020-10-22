@@ -312,10 +312,10 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 //
 extension SPNoteEditorViewController {
 
-    private func presentInformationController() {
-        let metrics = NoteInformationViewController()
-        metrics.configureToPresentAsCard(presentationDelegate: self)
-        present(metrics, animated: true, completion: nil)
+    private func presentInformationController(for note: Note) {
+        let information = NoteInformationViewController(note: note)
+        information.configureToPresentAsCard()
+        present(information, animated: true, completion: nil)
     }
 }
 
@@ -501,7 +501,12 @@ extension SPNoteEditorViewController {
 
     @objc
     private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
-        presentInformationController()
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        presentInformationController(for: note)
     }
 }
 
