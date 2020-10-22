@@ -33,7 +33,15 @@ class NoteInformationViewController: UIViewController {
     }
 
     private func reloadData() {
+        let metrics = NoteMetrics(note: note)
 
+        rows = [
+            .metric(title: NSLocalizedString("Words", comment: "Number of words in the note"),
+                    value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfWords)),
+
+            .metric(title: NSLocalizedString("Characters", comment: "Number of characters in the note"),
+                    value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
+        ]
     }
 }
 
@@ -78,7 +86,7 @@ extension NoteInformationViewController: UITableViewDataSource {
         }
     }
 
-    private func configure(cell: Value1TableViewCell, withTitle title: String, value: String) {
+    private func configure(cell: Value1TableViewCell, withTitle title: String, value: String?) {
         cell.title = title
         cell.detailTextLabel?.text = value
     }
@@ -100,5 +108,5 @@ extension NoteInformationViewController {
 }
 
 private enum Row {
-    case metric(title: String, value: String)
+    case metric(title: String, value: String?)
 }
