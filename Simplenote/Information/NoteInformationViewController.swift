@@ -13,6 +13,11 @@ class NoteInformationViewController: UIViewController {
     private let note: Note
     private var rows: [Row] = []
 
+    /// Designated initializer
+    ///
+    /// - Parameters:
+    ///     - note: Note
+    ///
     init(note: Note) {
         self.note = note
         super.init(nibName: nil, bundle: nil)
@@ -36,25 +41,16 @@ class NoteInformationViewController: UIViewController {
 
         reloadData()
     }
+}
 
-    private func configureViews() {
-        configureTableView()
-        screenTitleLabel.text = Localization.information
-
-        refreshStyle()
-    }
-
-    private func configureTableView() {
-        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
-        tableView.tableFooterView = UIView()
-    }
-
-    private func reloadData() {
+// MARK: - Data
+private extension NoteInformationViewController {
+    func reloadData() {
         rows = metricRows()
         tableView.reloadData()
     }
 
-    private func metricRows() -> [Row] {
+    func metricRows() -> [Row] {
         let metrics = NoteMetrics(note: note)
         return [
             .metric(title: Localization.modified,
@@ -70,10 +66,25 @@ class NoteInformationViewController: UIViewController {
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
     }
+}
 
-    private func configureAccessibility() {
+// MARK: - Configuration
+//
+private extension NoteInformationViewController {
+    func configureViews() {
+        configureTableView()
+        screenTitleLabel.text = Localization.information
+
+        refreshStyle()
+    }
+
+    func configureTableView() {
+        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+        tableView.tableFooterView = UIView()
+    }
+
+    func configureAccessibility() {
         dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
-
     }
 }
 
@@ -112,7 +123,6 @@ private extension NoteInformationViewController {
 // MARK: - UITableViewDelegate
 //
 extension NoteInformationViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -122,7 +132,6 @@ extension NoteInformationViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 //
 extension NoteInformationViewController: UITableViewDataSource {
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

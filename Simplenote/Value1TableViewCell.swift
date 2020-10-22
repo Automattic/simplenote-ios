@@ -14,6 +14,8 @@ class Value1TableViewCell: UITableViewCell {
         }
     }
 
+    /// Indicates if the row has clear background
+    ///
     var hasClearBackground = false {
         didSet {
             if oldValue != hasClearBackground {
