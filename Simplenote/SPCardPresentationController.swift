@@ -147,6 +147,7 @@ private extension SPCardPresentationController {
         NSLayoutConstraint.activate([
             cardView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor),
+            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.centerYAnchor),
             heightConstraint
         ])
 
