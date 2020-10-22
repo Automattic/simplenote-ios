@@ -40,8 +40,9 @@ final class SPCardPresentationController: UIPresentationController {
         return gestureRecognizer
     }()
 
-    private var compactLayoutConstraints: [NSLayoutConstraint] = []
-    private var regularLayoutConstraints: [NSLayoutConstraint] = []
+    private var compactWidthLayoutConstraints: [NSLayoutConstraint] = []
+    private var regularWidthLayoutConstraints: [NSLayoutConstraint] = []
+    private var regularHeightLayoutConstraints: [NSLayoutConstraint] = []
 
     /// Transition interactor is set only during swipe to dismiss
     ///
@@ -109,10 +110,14 @@ extension SPCardPresentationController {
     }
 
     private func updateConstraints(for collection: UITraitCollection) {
-        NSLayoutConstraint.deactivate(compactLayoutConstraints + regularLayoutConstraints)
+        NSLayoutConstraint.deactivate(compactWidthLayoutConstraints + regularWidthLayoutConstraints + regularHeightLayoutConstraints)
 
-        let newConstraints = collection.horizontalSizeClass == .regular ? regularLayoutConstraints : compactLayoutConstraints
-        NSLayoutConstraint.activate(newConstraints)
+        let newWidthConstraints = collection.horizontalSizeClass == .regular ? regularWidthLayoutConstraints : compactWidthLayoutConstraints
+        NSLayoutConstraint.activate(newWidthConstraints)
+
+        if collection.verticalSizeClass == .regular {
+            NSLayoutConstraint.activate(regularHeightLayoutConstraints)
+        }
     }
 }
 
@@ -131,14 +136,18 @@ private extension SPCardPresentationController {
         cardView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(cardView)
 
-        compactLayoutConstraints = [
+        compactWidthLayoutConstraints = [
             cardView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor),
         ]
 
-        regularLayoutConstraints = [
+        regularWidthLayoutConstraints = [
             cardView.leadingAnchor.constraint(equalTo: containerView.readableContentGuide.leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: containerView.readableContentGuide.trailingAnchor),
+        ]
+
+        regularHeightLayoutConstraints = [
+            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.centerYAnchor),
         ]
 
         let heightConstraint = cardView.heightAnchor.constraint(equalToConstant: 0)
@@ -146,8 +155,7 @@ private extension SPCardPresentationController {
 
         NSLayoutConstraint.activate([
             cardView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor),
-            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.centerYAnchor),
+            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 10),
             heightConstraint
         ])
 
