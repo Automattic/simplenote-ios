@@ -35,6 +35,9 @@ extension SPNoteEditorViewController {
         checklistButton = UIBarButtonItem(image: .image(name: .checklist), style: .plain, target: self, action: #selector(insertChecklistAction(_:)))
         checklistButton.accessibilityLabel = NSLocalizedString("Inserts a new Checklist Item", comment: "Insert Checklist Button")
 
+        informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
+        informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
+
         createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
         createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
 
@@ -295,7 +298,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 }
 
 
-// MARK: - History Card transition delegate
+// MARK: - SPCardPresentationControllerDelegate
 //
 extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 
@@ -305,6 +308,16 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
     }
 }
 
+// MARK: - Information
+//
+extension SPNoteEditorViewController {
+
+    private func presentInformationController() {
+        let metrics = NoteInformationViewController()
+        metrics.configureToPresentAsCard(presentationDelegate: self)
+        present(metrics, animated: true, completion: nil)
+    }
+}
 
 // MARK: - Private API(s)
 //
@@ -484,6 +497,11 @@ extension SPNoteEditorViewController {
         }
 
         presentOptionsController(for: note, from: sender)
+    }
+
+    @objc
+    private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
+        presentInformationController()
     }
 }
 

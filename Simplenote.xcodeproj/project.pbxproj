@@ -127,6 +127,8 @@
 		A6900346253D87060087D0D2 /* VersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6900345253D87060087D0D2 /* VersionsController.swift */; };
 		A69F850F253EC2B2005140F2 /* SPCardConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */; };
 		A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */; };
+		A69F861C25408085005140F2 /* NoteInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F861A25408085005140F2 /* NoteInformationViewController.swift */; };
+		A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A69F861B25408085005140F2 /* NoteInformationViewController.xib */; };
 		A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */; };
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
@@ -495,6 +497,8 @@
 		A6900345253D87060087D0D2 /* VersionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsController.swift; sourceTree = "<group>"; };
 		A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardConfigurable.swift; sourceTree = "<group>"; };
 		A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+Simplenote.swift"; sourceTree = "<group>"; };
+		A69F861A25408085005140F2 /* NoteInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationViewController.swift; sourceTree = "<group>"; };
+		A69F861B25408085005140F2 /* NoteInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteInformationViewController.xib; sourceTree = "<group>"; };
 		A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteHistoryViewController.swift; path = Classes/SPNoteHistoryViewController.swift; sourceTree = "<group>"; };
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
@@ -1051,6 +1055,15 @@
 				A6900345253D87060087D0D2 /* VersionsController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A69F861925407F80005140F2 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				A69F861A25408085005140F2 /* NoteInformationViewController.swift */,
+				A69F861B25408085005140F2 /* NoteInformationViewController.xib */,
+			);
+			path = Information;
 			sourceTree = "<group>";
 		};
 		A6C0589124AD2B00006BC572 /* Note History */ = {
@@ -1699,6 +1712,7 @@
 				B5A6846B23CE84B900398BBC /* Notes List */,
 				A6C0589124AD2B00006BC572 /* Note History */,
 				B537730D252E14AE00BC78C5 /* Options */,
+				A69F861925407F80005140F2 /* Information */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
@@ -1989,6 +2003,7 @@
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
+				A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */,
@@ -2277,6 +2292,7 @@
 				B5B8AE7F1AB9F8BD0082775D /* UIDevice+Extensions.m in Sources */,
 				46A3C98017DFA81A002865AE /* UIImage+Colorization.m in Sources */,
 				B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */,
+				A69F861C25408085005140F2 /* NoteInformationViewController.swift in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
 				46A3C98117DFA81A002865AE /* VSTheme.m in Sources */,
 				A6900346253D87060087D0D2 /* VersionsController.swift in Sources */,

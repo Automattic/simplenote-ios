@@ -502,6 +502,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
 
     [buttons addObject:self.actionButton];
+    [buttons addObject:self.informationButton];
 
     if (self.isEditingNote) {
         [buttons addObject:self.checklistButton];
