@@ -120,3 +120,32 @@ extension UITextView {
         }
     }
 }
+
+
+// MARK: - Geometry
+//
+extension UITextView {
+
+    /// Returns the Bounding Rect for the specified `Range<String.Index>`
+    ///
+    func boundingRect(for range: Range<String.Index>) -> CGRect {
+        let nsRange = text.utf16NSRange(from: range)
+        return boundingRect(for: nsRange)
+    }
+
+    /// Returns the Bounding Rect for the specified NSRange
+    ///
+    func boundingRect(for range: NSRange) -> CGRect {
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+        let rect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+
+        return rect.offsetBy(dx: textContainerInset.left, dy: textContainerInset.top)
+    }
+
+    /// Returns the Window Location for the text at the specified range
+    ///
+    func locationInWindowForText(in range: Range<String.Index>) -> CGRect {
+        let rectInEditor = boundingRect(for: range)
+        return convert(rectInEditor, to: nil)
+    }
+}
