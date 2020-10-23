@@ -64,7 +64,7 @@ private extension NoteInformationController {
 //
 private extension NoteInformationController {
     func allRows() -> [Row] {
-        return self.metricRows()
+        return metricRows()
     }
 
     func metricRows() -> [Row] {
