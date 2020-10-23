@@ -575,6 +575,9 @@ private extension SPNoteEditorViewController {
     func displayInterlinkController(around range: Range<String.Index>) {
         let locationOnWindow = noteEditorTextView.locationInWindowForText(in: range)
         let interlinkViewController = reusableInterlinkViewController()
+
+//        interlinkWindowController.attach(to: view.window)
+//        interlinkWindowController.positionWindow(relativeTo: locationOnScreen)
     }
 
     /// DIsmisses the Interlink Window (if any!)
