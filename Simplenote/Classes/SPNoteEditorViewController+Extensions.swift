@@ -92,6 +92,24 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Internal State
+//
+extension SPNoteEditorViewController {
+
+    /// Indicates if there's an ongoing Undo Operation in the Text Editor
+    ///
+    var isUndoingEditOP: Bool {
+        noteEditorTextView.undoManager?.isUndoing == true
+    }
+
+    /// Indicates if the Selected Range's Length is non zero: at least one character is highlighted
+    ///
+    var isSelectingText: Bool {
+        noteEditorTextView.selectedRange.length != .zero
+    }
+}
+
+
 // MARK: - Keyboard Handling
 //
 extension SPNoteEditorViewController: KeyboardObservable {
