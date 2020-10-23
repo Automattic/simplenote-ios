@@ -312,10 +312,20 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 //
 extension SPNoteEditorViewController {
 
-    private func presentInformationController(for note: Note) {
+    private func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
         let information = NoteInformationViewController(note: note)
-        information.configureToPresentAsCard()
-        present(information, animated: true, completion: nil)
+
+        let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
+
+        if presentAsPopover {
+            let navigationController = SPNavigationController(rootViewController: information)
+            navigationController.configureAsPopover(barButtonItem: barButtonItem)
+            navigationController.displaysBlurEffect = true
+            present(navigationController, animated: true, completion: nil)
+        } else {
+            information.configureToPresentAsCard()
+            present(information, animated: true, completion: nil)
+        }
     }
 }
 
@@ -506,7 +516,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        presentInformationController(for: note)
+        presentInformationController(for: note, from: sender)
     }
 }
 

@@ -7,6 +7,7 @@ final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var dismissButton: UIButton!
+    @IBOutlet private weak var headerStackView: UIStackView!
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
@@ -45,13 +46,22 @@ final class NoteInformationViewController: UIViewController {
 
         configureViews()
         configureAccessibility()
+        configureNavigation()
+
+        refreshPreferredSize()
 
         startListeningToNotifications()
         startListeningForControllerChanges()
     }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configureHeaderLayoutMargins()
+    }
 }
 
 // MARK: - Controller
+//
 private extension NoteInformationViewController {
     func startListeningForControllerChanges() {
         controller.observer = { [weak self] rows in
@@ -62,15 +72,27 @@ private extension NoteInformationViewController {
     func update(with rows: [NoteInformationController.Row]) {
         self.rows = rows
         tableView.reloadData()
+
+        refreshPreferredSize()
     }
 }
 
 // MARK: - Configuration
 //
 private extension NoteInformationViewController {
+    func configureNavigation() {
+        title = Localization.information
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Localization.done,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(handleTapOnDismissButton))
+    }
+
     func configureViews() {
         configureTableView()
         screenTitleLabel.text = Localization.information
+
+        removeHeaderViewIfNeeded()
 
         refreshStyle()
     }
@@ -82,6 +104,25 @@ private extension NoteInformationViewController {
 
     func configureAccessibility() {
         dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+    }
+
+    func configureHeaderLayoutMargins() {
+        headerStackView.isLayoutMarginsRelativeArrangement = true
+
+        // Sync layout margins with table view so labels are aligned
+        headerStackView.layoutMargins = UIEdgeInsets(top: 16, left: tableView.layoutMargins.left, bottom: 0.0, right: tableView.layoutMargins.right)
+    }
+
+    func removeHeaderViewIfNeeded() {
+        guard navigationController != nil else {
+            return
+        }
+
+        headerStackView.isHidden = true
+    }
+
+    func refreshPreferredSize() {
+        preferredContentSize = tableView.intrinsicContentSize
     }
 }
 
@@ -196,5 +237,6 @@ extension NoteInformationViewController {
 
 private struct Localization {
     static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
+    static let done = NSLocalizedString("Done", comment: "Dismisses the Note Information UI")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
 }
