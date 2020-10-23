@@ -741,6 +741,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
     
     [_noteEditorTextView processChecklists];
+    [self processInterlinkLookup];
     
     // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
     // See UITextView+Simplenote

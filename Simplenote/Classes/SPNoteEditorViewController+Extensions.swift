@@ -506,6 +506,110 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Interlinking Autocomplete: Public API(s)
+//
+extension SPNoteEditorViewController {
+
+    /// Displays the Interlink Lookup Window at the cursor's location when all of the following are **true**:
+    ///
+    ///     1. We're not performing an Undo OP
+    ///     2. There is no Highlighted Text in the editor
+    ///     3. There is an interlink `[keyword` at the current location
+    ///     4. There are Notes with `keyword` in their title
+    ///
+    ///  Otherwise we'll simply dismiss the Autocomplete Window, if any.
+    ///
+    @objc
+    func processInterlinkLookup() {
+        guard mustProcessInterlinkLookup,
+              let (markdownRange, keywordRange, keywordText) = noteEditorTextView.interlinkKeywordAtSelectedLocation,
+              refreshInterlinks(for: keywordText, in: markdownRange, excluding: currentNote?.objectID)
+        else {
+            dismissInterlinkController()
+            return
+        }
+
+        displayInterlinkController(around: keywordRange)
+    }
+
+    /// Dismisses the Interlink Window when ANY of the following evaluates **true**:
+    ///
+    ///     1.  There is Highlighted Text in the editor (or)
+    ///     2.  There is no Interlink `[keyword` at the selected location
+    ///
+    @objc
+    func dismissInterlinkLookupIfNeeded() {
+        guard mustDismissInterlinkLookup else {
+            return
+        }
+
+        dismissInterlinkController()
+    }
+}
+
+
+// MARK: - Interlinking Autocomplete: Private API(s)
+//
+private extension SPNoteEditorViewController {
+
+    /// Indicates if we should process Interlink Lookup
+    ///
+    var mustProcessInterlinkLookup: Bool {
+        isUndoingEditOP == false && isSelectingText == false
+    }
+
+    /// Indicates if we should dismiss the Interlink Window
+    ///
+    var mustDismissInterlinkLookup: Bool {
+        isSelectingText || isInterlinkViewOnScreen && noteEditorTextView.interlinkKeywordAtSelectedLocation == nil
+    }
+
+    /// Indicates if the Interlink Window is visible
+    ///
+    var isInterlinkViewOnScreen: Bool {
+        interlinkViewController?.parent != nil
+    }
+
+    /// Presents the Interlink Window at a given Editor Range (Below / Above!)
+    ///
+    func displayInterlinkController(around range: Range<String.Index>) {
+        let locationOnWindow = noteEditorTextView.locationInWindowForText(in: range)
+        let interlinkViewController = reusableInterlinkViewController()
+    }
+
+    /// DIsmisses the Interlink Window (if any!)
+    ///
+    func dismissInterlinkController() {
+        interlinkViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    /// Refreshes the Interlinks for a given Keyword at the specified Replacement Range (including Markdown `[` opening character).
+    /// - Returns: `true` whenever there *are* interlinks to be presented
+    ///
+    func refreshInterlinks(for keywordText: String, in replacementRange: Range<String.Index>, excluding excludedID: NSManagedObjectID?) -> Bool {
+        let interlinkViewController = reusableInterlinkViewController()
+        interlinkViewController.onInsertInterlink = { [weak self] text in
+            self?.noteEditorTextView.insertText(text: text, in: replacementRange)
+            self?.dismissInterlinkController()
+        }
+
+        return interlinkViewController.refreshInterlinks(for: keywordText, excluding: excludedID)
+    }
+
+    /// Returns a reusable InterlinkViewController instance
+    ///
+    func reusableInterlinkViewController() -> InterlinkViewController {
+        if let interlinkViewController = interlinkViewController {
+            return interlinkViewController
+        }
+
+        let interlinkViewController = InterlinkViewController()
+        self.interlinkViewController = interlinkViewController
+        return interlinkViewController
+    }
+}
+
+
 // MARK: - NSCoder Keys
 //
 private enum CodingKeys: String {
