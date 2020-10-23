@@ -94,6 +94,7 @@ private extension NoteInformationViewController {
     func refreshStyle() {
         styleScreenTitleLabel()
         styleDismissButton()
+        styleTableView()
     }
 
     func styleScreenTitleLabel() {
@@ -109,6 +110,10 @@ private extension NoteInformationViewController {
         dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
 
         dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
+    }
+
+    func styleTableView() {
+        tableView.separatorColor = .simplenoteDividerColor
     }
 }
 
