@@ -5,6 +5,7 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
+@class InterlinkViewController;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -23,6 +24,9 @@
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
+
+// Interlinking
+@property (nonatomic, weak) InterlinkViewController *interlinkViewController;
 
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
