@@ -296,6 +296,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super traitCollectionDidChange:previousTraitCollection];
 
+    if (self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
+        [self updateInformationControllerPresentation];
+    }
+
     if (@available(iOS 13.0, *)) {
         if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
             return;
