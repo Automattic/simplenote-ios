@@ -9,6 +9,10 @@ final class NoteInformationController {
         /// Metric row
         ///
         case metric(title: String, value: String?)
+
+        /// Reference
+        ///
+        case reference(title: String, date: String)
     }
 
     /// Observer sends changes in rows

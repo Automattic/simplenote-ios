@@ -99,6 +99,7 @@ private extension NoteInformationViewController {
 
     func configureTableView() {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+        tableView.register(NoteReferenceTableViewCell.self, forCellReuseIdentifier: NoteReferenceTableViewCell.reuseIdentifier)
         tableView.tableFooterView = UIView()
     }
 
@@ -195,6 +196,10 @@ extension NoteInformationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, value: value)
             return cell
+        case .reference(let title, let date):
+            let cell = tableView.dequeueReusableCell(ofType: NoteReferenceTableViewCell.self, for: indexPath)
+            configure(cell: cell, withTitle: title, date: date)
+            return cell
         }
     }
 
@@ -203,6 +208,11 @@ extension NoteInformationViewController: UITableViewDataSource {
         cell.hasClearBackground = true
         cell.title = title
         cell.detailTextLabel?.text = value
+    }
+
+    private func configure(cell: NoteReferenceTableViewCell, withTitle title: String, date: String) {
+        cell.title = title
+        cell.value = date
     }
 }
 
