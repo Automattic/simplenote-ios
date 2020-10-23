@@ -144,8 +144,8 @@ extension UITextView {
 
     /// Returns the Window Location for the text at the specified range
     ///
-    func locationInWindowForText(in range: Range<String.Index>) -> CGRect {
+    func locationInSuperviewForText(in range: Range<String.Index>) -> CGRect {
         let rectInEditor = boundingRect(for: range)
-        return convert(rectInEditor, to: nil)
+        return superview?.convert(rectInEditor, from: self) ?? rectInEditor
     }
 }
