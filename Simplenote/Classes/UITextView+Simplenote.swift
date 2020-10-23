@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import SimplenoteInterlinks
 
 
 // MARK: - UITextView's Simplenote Methods
@@ -85,5 +86,23 @@ private extension UITextView {
 
     func notifyDidChangeText() {
         delegate?.textViewDidChange?(self)
+    }
+}
+
+
+// MARK: - Interlinks
+//
+extension UITextView {
+
+    /// Returns the Interlinking Keyword at the current Location (if any)
+    ///
+    var interlinkKeywordAtSelectedLocation: (Range<String.Index>, Range<String.Index>, String)? {
+        guard let text = text else {
+            return nil
+        }
+
+        return text.indexFromLocation(selectedRange.location).flatMap { index in
+            text.interlinkKeyword(at: index)
+        }
     }
 }
