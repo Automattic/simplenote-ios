@@ -144,6 +144,7 @@
 		A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */; };
 		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
 		A6E1E7A824BE656D008A44BC /* SPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A724BE656D008A44BC /* SPCardView.swift */; };
+		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
 		B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */; };
 		B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C421CE1BE0BAB100752B56 /* SPInteractivePushPopAnimationController.m */; };
@@ -518,6 +519,7 @@
 		A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationAnimator.swift; sourceTree = "<group>"; };
 		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
+		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1071,6 +1073,7 @@
 			children = (
 				A69F861A25408085005140F2 /* NoteInformationViewController.swift */,
 				A69F861B25408085005140F2 /* NoteInformationViewController.xib */,
+				A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -2337,6 +2340,7 @@
 				B5E3F3982539F1E900271AEA /* SPTextView.m in Sources */,
 				B5185CFB23427F2F0060145A /* SearchDisplayController.swift in Sources */,
 				B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */,
+				A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */,
 				B5E951E624FEE2A8004B10B8 /* Note+Links.swift in Sources */,
 				B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */,
 				B5476BBD23D8A71D000E7723 /* UIFont+Simplenote.swift in Sources */,
