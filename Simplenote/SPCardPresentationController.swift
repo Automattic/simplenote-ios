@@ -155,7 +155,7 @@ private extension SPCardPresentationController {
 
         NSLayoutConstraint.activate([
             cardView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 10),
+            cardView.topAnchor.constraint(greaterThanOrEqualTo: containerView.safeAreaLayoutGuide.topAnchor, constant: Constants.cardMinTopMargin),
             heightConstraint
         ])
 
@@ -293,4 +293,5 @@ private extension SPCardPresentationController {
 private struct Constants {
     static let dismissalPercentThreshold = CGFloat(0.3)
     static let dismissalVelocityThreshold = CGFloat(1600)
+    static let cardMinTopMargin = CGFloat(10.0)
 }
