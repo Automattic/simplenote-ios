@@ -34,7 +34,7 @@ final class NoteInformationController {
 
     /// Note changes observer
     ///
-    private var noteChangesObserver: EntityObserver?
+    private lazy var noteChangesObserver = EntityObserver(context: mainContext, object: note)
 
     private let note: Note
 
@@ -52,12 +52,11 @@ final class NoteInformationController {
 //
 private extension NoteInformationController {
     func startListeningForChanges() {
-        noteChangesObserver = EntityObserver(context: mainContext, object: note)
-        noteChangesObserver?.delegate = self
+        noteChangesObserver.delegate = self
     }
 
     func stopListeningForChanges() {
-        noteChangesObserver = nil
+        noteChangesObserver.delegate = nil
     }
 }
 
