@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIBarButtonItem *checklistButton;
 @property (nonatomic, strong) UIBarButtonItem *keyboardButton;
 @property (nonatomic, strong) UIBarButtonItem *createNoteButton;
+@property (nonatomic, strong) UIBarButtonItem *informationButton;
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
@@ -24,6 +25,9 @@
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
+
+// Information
+@property (nonatomic, weak) UIViewController *informationViewController;
 
 // Interlinking
 @property (nonatomic, weak) InterlinkViewController *interlinkViewController;

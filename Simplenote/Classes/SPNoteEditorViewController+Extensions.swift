@@ -35,6 +35,9 @@ extension SPNoteEditorViewController {
         checklistButton = UIBarButtonItem(image: .image(name: .checklist), style: .plain, target: self, action: #selector(insertChecklistAction(_:)))
         checklistButton.accessibilityLabel = NSLocalizedString("Inserts a new Checklist Item", comment: "Insert Checklist Button")
 
+        informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
+        informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
+
         createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
         createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
 
@@ -313,7 +316,7 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
 }
 
 
-// MARK: - History Card transition delegate
+// MARK: - SPCardPresentationControllerDelegate
 //
 extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 
@@ -323,6 +326,53 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
     }
 }
 
+// MARK: - Information
+//
+extension SPNoteEditorViewController {
+
+    /// Present information controller
+    /// - Parameters:
+    ///     - note: Note
+    ///     - barButtonItem: Bar button item to be used as a popover target
+    ///
+    @objc
+    func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
+        let informationViewController = NoteInformationViewController(note: note)
+
+        let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
+
+        if presentAsPopover {
+            let navigationController = SPNavigationController(rootViewController: informationViewController)
+            navigationController.configureAsPopover(barButtonItem: barButtonItem)
+            navigationController.displaysBlurEffect = true
+            self.informationViewController = navigationController
+            present(navigationController, animated: true, completion: nil)
+        } else {
+            informationViewController.configureToPresentAsCard()
+            self.informationViewController = informationViewController
+            present(informationViewController, animated: true, completion: nil)
+        }
+    }
+
+    /// Dismiss and present information controller.
+    /// Called when horizontal size class changes
+    ///
+    @objc
+    func updateInformationControllerPresentation() {
+        guard let informationViewController = self.informationViewController else {
+            return
+        }
+
+        informationViewController.dismiss(animated: false) { [weak self] in
+            guard let self = self,
+                  let note = self.currentNote,
+                  let informationButton = self.informationButton else {
+                return
+            }
+            self.presentInformationController(for: note, from: informationButton)
+        }
+    }
+}
 
 // MARK: - Private API(s)
 //
@@ -502,6 +552,16 @@ extension SPNoteEditorViewController {
         }
 
         presentOptionsController(for: note, from: sender)
+    }
+
+    @objc
+    private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        presentInformationController(for: note, from: sender)
     }
 }
 
