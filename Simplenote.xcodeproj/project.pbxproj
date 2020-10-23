@@ -255,6 +255,8 @@
 		B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */; };
 		B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */; };
 		B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584DA35236722D400B2844A /* SPBlurEffectView.swift */; };
+		B586709A2543683800449722 /* InterlinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58670992543683800449722 /* InterlinkViewController.swift */; };
+		B58670A925436F1700449722 /* NSAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58670A825436F1700449722 /* NSAttributedString+Simplenote.swift */; };
 		B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58BF1FA23D78ADF00515B50 /* UIContextualAction+Simplenote.swift */; };
 		B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */; };
 		B59035F4251294B400034BAF /* SPDiagnosticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59035F3251294B400034BAF /* SPDiagnosticsViewController.swift */; };
@@ -636,6 +638,8 @@
 		B58218A31FCC45320094ECA1 /* SimplenoteTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplenoteTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainMigratorTests.swift; sourceTree = "<group>"; };
 		B584DA35236722D400B2844A /* SPBlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPBlurEffectView.swift; path = Classes/SPBlurEffectView.swift; sourceTree = "<group>"; };
+		B58670992543683800449722 /* InterlinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterlinkViewController.swift; path = Classes/InterlinkViewController.swift; sourceTree = "<group>"; };
+		B58670A825436F1700449722 /* NSAttributedString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+Simplenote.swift"; path = "Classes/NSAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
 		B58BF1FA23D78ADF00515B50 /* UIContextualAction+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIContextualAction+Simplenote.swift"; path = "Classes/UIContextualAction+Simplenote.swift"; sourceTree = "<group>"; };
 		B58C9F5623F2FCEC008C3480 /* SPPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPPlaceholderView.swift; path = Classes/SPPlaceholderView.swift; sourceTree = "<group>"; };
 		B59035F3251294B400034BAF /* SPDiagnosticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPDiagnosticsViewController.swift; path = Classes/SPDiagnosticsViewController.swift; sourceTree = "<group>"; };
@@ -1242,8 +1246,10 @@
 				B5E951E224FEE25A004B10B8 /* Links */,
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
+				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */,
+				B58670A825436F1700449722 /* NSAttributedString+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
 				B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */,
@@ -1264,9 +1270,11 @@
 				B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */,
 				B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */,
 				B5757369232C567000443C2E /* UIImage+Dynamic.swift */,
+				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */,
 				B594C3ED2501E24C006D3A78 /* UINavigationController+Simplenote.swift */,
 				B524AE102352CC7900EA11D4 /* UIScreen+Simplenote.swift */,
+				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B56A696622F9D55F00B90398 /* UIView+Animations.swift */,
 				B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */,
 				A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */,
@@ -1279,11 +1287,8 @@
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
-				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
-				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */,
-				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
-				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1336,6 +1341,14 @@
 				B582189B1FCC45170094ECA1 /* Info.plist */,
 			);
 			path = SimplenoteTests;
+			sourceTree = "<group>";
+		};
+		B58670A12543683C00449722 /* Interlinks */ = {
+			isa = PBXGroup;
+			children = (
+				B58670992543683800449722 /* InterlinkViewController.swift */,
+			);
+			name = Interlinks;
 			sourceTree = "<group>";
 		};
 		B59035FB251294D400034BAF /* Diagnostics */ = {
@@ -1700,6 +1713,7 @@
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
 				A6C0589124AD2B00006BC572 /* Note History */,
+				B58670A12543683C00449722 /* Interlinks */,
 				B537730D252E14AE00BC78C5 /* Options */,
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
@@ -2346,9 +2360,11 @@
 				B56A696122F9D53400B90398 /* SPAuthError.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
+				B586709A2543683800449722 /* InterlinkViewController.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
+				B58670A925436F1700449722 /* NSAttributedString+Simplenote.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				46A3C99F17DFA81A002865AE /* VSThemeManager.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
