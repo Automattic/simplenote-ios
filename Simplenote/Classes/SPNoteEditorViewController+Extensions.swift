@@ -312,10 +312,47 @@ extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
 //
 extension SPNoteEditorViewController {
 
-    private func presentInformationController(for note: Note) {
-        let information = NoteInformationViewController(note: note)
-        information.configureToPresentAsCard()
-        present(information, animated: true, completion: nil)
+    /// Present information controller
+    /// - Parameters:
+    ///     - note: Note
+    ///     - barButtonItem: Bar button item to be used as a popover target
+    ///
+    @objc
+    func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
+        let informationViewController = NoteInformationViewController(note: note)
+
+        let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
+
+        if presentAsPopover {
+            let navigationController = SPNavigationController(rootViewController: informationViewController)
+            navigationController.configureAsPopover(barButtonItem: barButtonItem)
+            navigationController.displaysBlurEffect = true
+            self.informationViewController = navigationController
+            present(navigationController, animated: true, completion: nil)
+        } else {
+            informationViewController.configureToPresentAsCard()
+            self.informationViewController = informationViewController
+            present(informationViewController, animated: true, completion: nil)
+        }
+    }
+
+    /// Dismiss and present information controller.
+    /// Called when horizontal size class changes
+    ///
+    @objc
+    func updateInformationControllerPresentation() {
+        guard let informationViewController = self.informationViewController else {
+            return
+        }
+
+        informationViewController.dismiss(animated: false) { [weak self] in
+            guard let self = self,
+                  let note = self.currentNote,
+                  let informationButton = self.informationButton else {
+                return
+            }
+            self.presentInformationController(for: note, from: informationButton)
+        }
     }
 }
 
@@ -506,7 +543,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        presentInformationController(for: note)
+        presentInformationController(for: note, from: sender)
     }
 }
 

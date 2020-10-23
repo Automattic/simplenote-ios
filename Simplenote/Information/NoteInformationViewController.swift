@@ -3,24 +3,34 @@ import SimplenoteFoundation
 
 // MARK: - NoteInformationViewController
 //
-class NoteInformationViewController: UIViewController {
+final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var dismissButton: UIButton!
+    @IBOutlet private weak var headerStackView: UIStackView!
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
-    private let note: Note
-    private var rows: [Row] = []
+    private var rows: [NoteInformationController.Row] = []
+    private let controller: NoteInformationController
 
     /// Designated initializer
     ///
     /// - Parameters:
+    ///     - controller: NoteInformationController
+    ///
+    init(controller: NoteInformationController) {
+        self.controller = controller
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    /// Convenience initializer
+    ///
+    /// - Parameters:
     ///     - note: Note
     ///
-    init(note: Note) {
-        self.note = note
-        super.init(nibName: nil, bundle: nil)
+    convenience init(note: Note) {
+        self.init(controller: NoteInformationController(note: note))
     }
 
     required init?(coder: NSCoder) {
@@ -36,44 +46,53 @@ class NoteInformationViewController: UIViewController {
 
         configureViews()
         configureAccessibility()
+        configureNavigation()
+
+        refreshPreferredSize()
 
         startListeningToNotifications()
+        startListeningForControllerChanges()
+    }
 
-        reloadData()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configureHeaderLayoutMargins()
     }
 }
 
-// MARK: - Data
+// MARK: - Controller
+//
 private extension NoteInformationViewController {
-    func reloadData() {
-        rows = metricRows()
-        tableView.reloadData()
+    func startListeningForControllerChanges() {
+        controller.observer = { [weak self] rows in
+            self?.update(with: rows)
+        }
     }
 
-    func metricRows() -> [Row] {
-        let metrics = NoteMetrics(note: note)
-        return [
-            .metric(title: Localization.modified,
-                    value: DateFormatter.dateTimeFormatter.string(from: metrics.modifiedDate)),
+    func update(with rows: [NoteInformationController.Row]) {
+        self.rows = rows
+        tableView.reloadData()
 
-            .metric(title: Localization.created,
-                    value: DateFormatter.dateTimeFormatter.string(from: metrics.creationDate)),
-
-            .metric(title: Localization.words,
-                    value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfWords)),
-
-            .metric(title: Localization.characters,
-                    value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
-        ]
+        refreshPreferredSize()
     }
 }
 
 // MARK: - Configuration
 //
 private extension NoteInformationViewController {
+    func configureNavigation() {
+        title = Localization.information
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Localization.done,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(handleTapOnDismissButton))
+    }
+
     func configureViews() {
         configureTableView()
         screenTitleLabel.text = Localization.information
+
+        removeHeaderViewIfNeeded()
 
         refreshStyle()
     }
@@ -86,6 +105,29 @@ private extension NoteInformationViewController {
     func configureAccessibility() {
         dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
     }
+
+    func configureHeaderLayoutMargins() {
+        headerStackView.isLayoutMarginsRelativeArrangement = true
+
+        var layoutMargins = Consts.headerExtraLayoutMargins
+        layoutMargins.left += tableView.layoutMargins.left
+        layoutMargins.right += tableView.layoutMargins.right
+
+        // Sync layout margins with table view so labels are aligned
+        headerStackView.layoutMargins = layoutMargins
+    }
+
+    func removeHeaderViewIfNeeded() {
+        guard navigationController != nil else {
+            return
+        }
+
+        headerStackView.isHidden = true
+    }
+
+    func refreshPreferredSize() {
+        preferredContentSize = tableView.intrinsicContentSize
+    }
 }
 
 // MARK: - Styling
@@ -94,6 +136,7 @@ private extension NoteInformationViewController {
     func refreshStyle() {
         styleScreenTitleLabel()
         styleDismissButton()
+        styleTableView()
     }
 
     func styleScreenTitleLabel() {
@@ -109,6 +152,10 @@ private extension NoteInformationViewController {
         dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
 
         dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
+    }
+
+    func styleTableView() {
+        tableView.separatorColor = .simplenoteDividerColor
     }
 }
 
@@ -152,6 +199,7 @@ extension NoteInformationViewController: UITableViewDataSource {
     }
 
     private func configure(cell: Value1TableViewCell, withTitle title: String, value: String?) {
+        cell.selectionStyle = .none
         cell.hasClearBackground = true
         cell.title = title
         cell.detailTextLabel?.text = value
@@ -191,16 +239,12 @@ extension NoteInformationViewController {
     }
 }
 
-private enum Row {
-    case metric(title: String, value: String?)
-}
-
 private struct Localization {
     static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
-    static let modified = NSLocalizedString("Modified", comment: "Note Modification Date")
-    static let created = NSLocalizedString("Created", comment: "Note Creation Date")
-    static let words = NSLocalizedString("Words", comment: "Number of words in the note")
-    static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
-
+    static let done = NSLocalizedString("Done", comment: "Dismisses the Note Information UI")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
+}
+
+private struct Consts {
+    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 0.0, right: 0.0)
 }

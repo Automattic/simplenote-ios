@@ -25,6 +25,9 @@
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
 
+// Information
+@property (nonatomic, weak) UIViewController *informationViewController;
+
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
 
