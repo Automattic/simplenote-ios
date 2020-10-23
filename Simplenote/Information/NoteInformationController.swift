@@ -1,4 +1,5 @@
 import Foundation
+import SimplenoteFoundation
 
 final class NoteInformationController {
 
@@ -16,8 +17,24 @@ final class NoteInformationController {
     var observer: (([Row]) -> Void)? {
         didSet {
             observer?(allRows())
+
+            if observer == nil {
+                stopListeningForChanges()
+            } else {
+                startListeningForChanges()
+            }
         }
     }
+
+    /// Main Context
+    ///
+    private var mainContext: NSManagedObjectContext {
+        SPAppDelegate.shared().managedObjectContext
+    }
+
+    /// Note changes observer
+    ///
+    private var noteChangesObserver: EntityObserver?
 
     private let note: Note
 
@@ -29,12 +46,29 @@ final class NoteInformationController {
     init(note: Note) {
         self.note = note
     }
+}
 
-    private func allRows() -> [Row] {
+// MARK: - Listening for changes
+//
+private extension NoteInformationController {
+    func startListeningForChanges() {
+        noteChangesObserver = EntityObserver(context: mainContext, object: note)
+        noteChangesObserver?.delegate = self
+    }
+
+    func stopListeningForChanges() {
+        noteChangesObserver = nil
+    }
+}
+
+// MARK: - Data
+//
+private extension NoteInformationController {
+    func allRows() -> [Row] {
         return self.metricRows()
     }
 
-    private func metricRows() -> [Row] {
+    func metricRows() -> [Row] {
         let metrics = NoteMetrics(note: note)
         return [
             .metric(title: Localization.modified,
@@ -49,6 +83,14 @@ final class NoteInformationController {
             .metric(title: Localization.characters,
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
+    }
+}
+
+// MARK: - EntityObserverDelegate
+//
+extension NoteInformationController: EntityObserverDelegate {
+    func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
+        self.observer?(allRows())
     }
 }
 
