@@ -36,6 +36,20 @@ extension UITextView {
     }
 }
 
+// MARK: - Updating!
+//
+extension UITextView {
+
+    /// Inserts the specified Text at a given range
+    ///
+    func insertText(text: String, in range: Range<String.Index>) {
+        registerUndoCheckpointAndPerform { storage in
+            let range = text.utf16NSRange(from: range)
+            storage.replaceCharacters(in: range, with: text)
+        }
+    }
+}
+
 
 // MARK: - Private!
 //
