@@ -109,8 +109,12 @@ private extension NoteInformationViewController {
     func configureHeaderLayoutMargins() {
         headerStackView.isLayoutMarginsRelativeArrangement = true
 
+        var layoutMargins = Consts.headerExtraLayoutMargins
+        layoutMargins.left += tableView.layoutMargins.left
+        layoutMargins.right += tableView.layoutMargins.right
+
         // Sync layout margins with table view so labels are aligned
-        headerStackView.layoutMargins = UIEdgeInsets(top: 16, left: tableView.layoutMargins.left, bottom: 0.0, right: tableView.layoutMargins.right)
+        headerStackView.layoutMargins = layoutMargins
     }
 
     func removeHeaderViewIfNeeded() {
@@ -239,4 +243,8 @@ private struct Localization {
     static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
     static let done = NSLocalizedString("Done", comment: "Dismisses the Note Information UI")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
+}
+
+private struct Consts {
+    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 0.0, right: 0.0)
 }
