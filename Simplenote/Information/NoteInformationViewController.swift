@@ -152,6 +152,7 @@ extension NoteInformationViewController: UITableViewDataSource {
     }
 
     private func configure(cell: Value1TableViewCell, withTitle title: String, value: String?) {
+        cell.selectionStyle = .none
         cell.hasClearBackground = true
         cell.title = title
         cell.detailTextLabel?.text = value
