@@ -168,12 +168,12 @@ private extension SPCardPresentationController {
     }
 
     func setupGestureRecognizers() {
-        containerView?.addGestureRecognizer(tapGestureRecognizer)
+        dimmingView.addGestureRecognizer(tapGestureRecognizer)
         containerView?.addGestureRecognizer(panGestureRecognizer)
     }
 
     func removeGestureRecognizers() {
-        containerView?.removeGestureRecognizer(tapGestureRecognizer)
+        dimmingView.removeGestureRecognizer(tapGestureRecognizer)
         containerView?.removeGestureRecognizer(panGestureRecognizer)
     }
 

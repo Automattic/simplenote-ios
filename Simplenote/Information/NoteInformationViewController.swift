@@ -11,7 +11,7 @@ final class NoteInformationViewController: UIViewController {
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
-    private var rows: [NoteInformationController.Row] = []
+    private var sections: [NoteInformationController.Section] = []
     private let controller: NoteInformationController
 
     /// Designated initializer
@@ -64,13 +64,13 @@ final class NoteInformationViewController: UIViewController {
 //
 private extension NoteInformationViewController {
     func startListeningForControllerChanges() {
-        controller.observer = { [weak self] rows in
-            self?.update(with: rows)
+        controller.observer = { [weak self] sections in
+            self?.update(with: sections)
         }
     }
 
-    func update(with rows: [NoteInformationController.Row]) {
-        self.rows = rows
+    func update(with sections: [NoteInformationController.Section]) {
+        self.sections = sections
         tableView.reloadData()
 
         refreshPreferredSize()
@@ -99,6 +99,8 @@ private extension NoteInformationViewController {
 
     func configureTableView() {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier)
+        tableView.register(TableHeaderViewCell.self, forCellReuseIdentifier: TableHeaderViewCell.reuseIdentifier)
         tableView.tableFooterView = UIView()
     }
 
@@ -172,6 +174,16 @@ private extension NoteInformationViewController {
 extension NoteInformationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let row = sections[indexPath.section].rows[indexPath.row]
+        switch row {
+        case .reference(let interLink, _, _):
+            if let interLink = interLink, let url = URL(string: interLink) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        default:
+            break
+        }
     }
 }
 
@@ -180,20 +192,28 @@ extension NoteInformationViewController: UITableViewDelegate {
 //
 extension NoteInformationViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows.count
+        return sections[section].rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = rows[indexPath.row]
+        let row = sections[indexPath.section].rows[indexPath.row]
 
         switch row {
         case .metric(let title, let value):
             let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, value: value)
+            return cell
+        case .reference(_, let title, let date):
+            let cell = tableView.dequeueReusableCell(ofType: SubtitleTableViewCell.self, for: indexPath)
+            configure(cell: cell, withTitle: title, date: date)
+            return cell
+        case .header(let title):
+            let cell = tableView.dequeueReusableCell(ofType: TableHeaderViewCell.self, for: indexPath)
+            configure(cell: cell, withTitle: title)
             return cell
         }
     }
@@ -203,6 +223,27 @@ extension NoteInformationViewController: UITableViewDataSource {
         cell.hasClearBackground = true
         cell.title = title
         cell.detailTextLabel?.text = value
+    }
+
+    private func configure(cell: SubtitleTableViewCell, withTitle title: String, date: String) {
+        cell.title = title
+        cell.value = date
+    }
+
+    private func configure(cell: TableHeaderViewCell, withTitle title: String) {
+        cell.title = title
+    }
+
+    private func updateSeparator(for cell: UITableViewCell, at indexPath: IndexPath) {
+        if indexPath.row == sections[indexPath.section].rows.count - 1 {
+            cell.adjustSeparatorWidth(width: .full)
+        } else {
+            cell.adjustSeparatorWidth(width: .standard)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        updateSeparator(for: cell, at: indexPath)
     }
 }
 

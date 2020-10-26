@@ -36,6 +36,7 @@ extension SPAppDelegate {
     ///         For such reason, we're opting for simply pushing another VC.
     ///
     private func replaceNoteEditor(_ editorViewController: SPNoteEditorViewController) {
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
     }
 }

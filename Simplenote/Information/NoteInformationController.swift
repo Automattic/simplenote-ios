@@ -3,20 +3,34 @@ import SimplenoteFoundation
 
 final class NoteInformationController {
 
+    /// Section
+    ///
+    struct Section {
+        let rows: [Row]
+    }
+
     /// Row
     ///
     enum Row {
         /// Metric row
         ///
         case metric(title: String, value: String?)
+
+        /// Reference
+        ///
+        case reference(interLink: String?, title: String, date: String)
+
+        /// Header
+        ///
+        case header(title: String)
     }
 
-    /// Observer sends changes in rows
+    /// Observer sends changes in data
     /// When assigned, it sends current state
     ///
-    var observer: (([Row]) -> Void)? {
+    var observer: (([Section]) -> Void)? {
         didSet {
-            observer?(allRows())
+            observer?(allSections())
 
             if observer == nil {
                 stopListeningForChanges()
@@ -36,6 +50,10 @@ final class NoteInformationController {
     ///
     private lazy var noteChangesObserver = EntityObserver(context: mainContext, object: note)
 
+    /// ResultsController: In charge of CoreData Queries!
+    ///
+    private var referencesController: ResultsController<Note>?
+
     private let note: Note
 
     /// Designated initializer
@@ -45,6 +63,30 @@ final class NoteInformationController {
     ///
     init(note: Note) {
         self.note = note
+
+        configureReferencesController()
+    }
+}
+
+// MARK: - Private
+//
+private extension NoteInformationController {
+    func configureReferencesController() {
+        guard let noteLink = note.plainInternalLink else {
+            return
+        }
+
+        let predicate = NSPredicate.predicateForNotes(exactMatch: noteLink)
+        let sortDescriptors = [
+            NSSortDescriptor(keyPath: \Note.content, ascending: true)
+        ]
+        let controller = ResultsController<Note>(viewContext: mainContext,
+                                                 sectionNameKeyPath: nil,
+                                                 matching: predicate,
+                                                 sortedBy: sortDescriptors,
+                                                 limit: 0)
+        referencesController = controller
+        try? controller.performFetch()
     }
 }
 
@@ -53,23 +95,31 @@ final class NoteInformationController {
 private extension NoteInformationController {
     func startListeningForChanges() {
         noteChangesObserver.delegate = self
+
+        referencesController?.onDidChangeContent = { [weak self] _, _ in
+            self?.sendNewDataToObserver()
+        }
     }
 
     func stopListeningForChanges() {
         noteChangesObserver.delegate = nil
+        referencesController?.onDidChangeContent = nil
     }
 }
 
 // MARK: - Data
 //
 private extension NoteInformationController {
-    func allRows() -> [Row] {
-        return metricRows()
+    func allSections() -> [Section] {
+        var sections: [Section] = []
+        sections.append(metricSection())
+        sections.append(contentsOf: referenceSections())
+        return sections
     }
 
-    func metricRows() -> [Row] {
+    func metricSection() -> Section {
         let metrics = NoteMetrics(note: note)
-        return [
+        let rows: [Row] = [
             .metric(title: Localization.modified,
                     value: DateFormatter.dateTimeFormatter.string(from: metrics.modifiedDate)),
 
@@ -82,6 +132,32 @@ private extension NoteInformationController {
             .metric(title: Localization.characters,
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
+
+        return Section(rows: rows)
+    }
+
+    func referenceSections() -> [Section] {
+        guard let references = referencesController?.fetchedObjects, !references.isEmpty else {
+            return []
+        }
+
+        let referenceRows = references.map { (note) -> Row in
+            return .reference(interLink: note.plainInternalLink,
+                              title: note.titlePreview,
+                              date: DateFormatter.dateFormatter.string(from: note.modificationDate))
+        }
+
+        let header = Section(rows: [
+            Row.header(title: Localization.references.localizedUppercase)
+        ])
+        return [
+            header,
+            Section(rows: referenceRows)
+        ]
+    }
+
+    func sendNewDataToObserver() {
+        observer?(allSections())
     }
 }
 
@@ -89,7 +165,7 @@ private extension NoteInformationController {
 //
 extension NoteInformationController: EntityObserverDelegate {
     func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
-        self.observer?(allRows())
+        sendNewDataToObserver()
     }
 }
 
@@ -98,4 +174,5 @@ private struct Localization {
     static let created = NSLocalizedString("Created", comment: "Note Creation Date")
     static let words = NSLocalizedString("Words", comment: "Number of words in the note")
     static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
+    static let references = NSLocalizedString("References", comment: "References section header on Info Card")
 }
