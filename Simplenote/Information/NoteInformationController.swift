@@ -13,6 +13,10 @@ final class NoteInformationController {
         /// Reference
         ///
         case reference(title: String, date: String)
+
+        /// Header
+        ///
+        case header(title: String)
     }
 
     /// Observer sends changes in rows
@@ -122,14 +126,18 @@ private extension NoteInformationController {
     }
 
     func referenceRows() -> [Row] {
-        guard let references = referencesController?.fetchedObjects else {
+        guard let references = referencesController?.fetchedObjects, !references.isEmpty else {
             return []
         }
 
-        return references.map { (note) -> Row in
+        let referenceRows = references.map { (note) -> Row in
             return .reference(title: note.titlePreview,
                               date: DateFormatter.dateFormatter.string(from: note.modificationDate))
         }
+
+        let headerRow = Row.header(title: Localization.references.localizedUppercase)
+
+        return [headerRow] + referenceRows
     }
 
     func sendNewRowsToObserver() {
@@ -150,4 +158,5 @@ private struct Localization {
     static let created = NSLocalizedString("Created", comment: "Note Creation Date")
     static let words = NSLocalizedString("Words", comment: "Number of words in the note")
     static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
+    static let references = NSLocalizedString("References", comment: "References section header on Info Card")
 }
