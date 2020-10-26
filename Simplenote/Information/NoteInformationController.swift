@@ -40,6 +40,10 @@ final class NoteInformationController {
     ///
     private lazy var noteChangesObserver = EntityObserver(context: mainContext, object: note)
 
+    /// ResultsController: In charge of CoreData Queries!
+    ///
+    private var referencesController: ResultsController<Note>?
+
     private let note: Note
 
     /// Designated initializer
@@ -49,6 +53,30 @@ final class NoteInformationController {
     ///
     init(note: Note) {
         self.note = note
+
+        configureReferencesController()
+    }
+}
+
+// MARK: - Private
+//
+private extension NoteInformationController {
+    func configureReferencesController() {
+        guard let noteLink = note.plainInternalLink else {
+            return
+        }
+
+        let predicate = NSPredicate.predicateForNotes(exactMatch: noteLink)
+        let sortDescriptors = [
+            NSSortDescriptor(keyPath: \Note.content, ascending: true)
+        ]
+        let controller = ResultsController<Note>(viewContext: mainContext,
+                                                 sectionNameKeyPath: nil,
+                                                 matching: predicate,
+                                                 sortedBy: sortDescriptors,
+                                                 limit: 0)
+        referencesController = controller
+        try? controller.performFetch()
     }
 }
 
@@ -57,10 +85,15 @@ final class NoteInformationController {
 private extension NoteInformationController {
     func startListeningForChanges() {
         noteChangesObserver.delegate = self
+
+        referencesController?.onDidChangeContent = { [weak self] _, _ in
+            self?.sendNewRowsToObserver()
+        }
     }
 
     func stopListeningForChanges() {
         noteChangesObserver.delegate = nil
+        referencesController?.onDidChangeContent = nil
     }
 }
 
@@ -68,7 +101,7 @@ private extension NoteInformationController {
 //
 private extension NoteInformationController {
     func allRows() -> [Row] {
-        return metricRows()
+        return metricRows() + referenceRows()
     }
 
     func metricRows() -> [Row] {
@@ -87,13 +120,28 @@ private extension NoteInformationController {
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
     }
+
+    func referenceRows() -> [Row] {
+        guard let references = referencesController?.fetchedObjects else {
+            return []
+        }
+
+        return references.map { (note) -> Row in
+            return .reference(title: note.titlePreview,
+                              date: DateFormatter.dateFormatter.string(from: note.modificationDate))
+        }
+    }
+
+    func sendNewRowsToObserver() {
+        observer?(allRows())
+    }
 }
 
 // MARK: - EntityObserverDelegate
 //
 extension NoteInformationController: EntityObserverDelegate {
     func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
-        self.observer?(allRows())
+        sendNewRowsToObserver()
     }
 }
 

@@ -20,4 +20,11 @@ extension DateFormatter {
         formatter.timeStyle = .short
         return formatter
     }()
+
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
 }
