@@ -341,7 +341,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func updateInformationControllerPresentation() {
-        guard let informationViewController = self.informationViewController else {
+        guard let informationViewController = informationViewController else {
             return
         }
 

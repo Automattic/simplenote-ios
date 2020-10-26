@@ -5,16 +5,25 @@ import Foundation
 //
 extension Note {
 
+    /// Internal note link
+    ///
+    var plainInternalLink: String? {
+        guard let key = simperiumKey else {
+            return nil
+        }
+
+        return SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + key
+    }
+
     /// Returns the receiver's Markdown Internal Reference, when possible
     ///
     var internalLink: String? {
-        guard let title = titlePreview, let key = simperiumKey else {
+        guard let title = titlePreview, let plainInternalLink = plainInternalLink else {
             return nil
         }
 
         let shortened = title.truncateWords(upTo: SimplenoteConstants.simplenoteInterlinkMaxTitleLength)
-        let url = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + key
-        return "[" + shortened + "](" + url + ")"
+        return "[" + shortened + "](" + plainInternalLink + ")"
     }
 
     /// Returns the full Public Link to the current document
