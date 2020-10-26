@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-24 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "デバッグ";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "デバッグ無効";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "ノートを削除";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "診断";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "パスコードを入力してください";
 
+/* Error Title */
+"Error" = "エラー";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "FAQ またはお問い合わせ";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "パスワードを忘れましたか ?";
 
+/* FAQ or contact us */
+"Get Help" = "ヘルプ";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "ありがとうございます。レビューの投稿にご協力ください。";
+
+/* Display help web page */
+"Help" = "ヘルプ";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "弊社の分析ツールに使用データを提供し、Simplenote の品質向上にご協力ください。";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "リセットが必要";
 
+/* Response Title */
+"Response" = "返信";
+
 /* Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "設定";
+
+/* Share Action */
+"Share" = "共有";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "分析を共有";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "並び順 :";
+
+/* Title for the response's Status Code */
+"Status Code" = "ステータスコード";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "システムの初期設定";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 デバッグ有効 🐞";
 

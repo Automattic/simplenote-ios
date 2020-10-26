@@ -40,10 +40,10 @@
 }
 
 @property (nonatomic, weak) id<SPTagViewDelegate> tagDelegate;
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 
 - (void)scrollEntryFieldToVisible:(BOOL)animated;
 - (void)clearAllTags;
 - (BOOL)setupWithTagNames:(NSArray *)tagNames;
-- (void)applyStyle;
 
 @end

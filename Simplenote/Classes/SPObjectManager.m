@@ -227,12 +227,6 @@
     
 }
 
-- (void)togglePinnedStateOfNote:(Note *)note
-{
-    note.pinned = !note.pinned;
-    [self save];
-}
-
 - (void)trashNote:(Note *)note
 {
     note.deleted = YES;
@@ -265,6 +259,64 @@
         [self permenentlyDeleteNote:note];
     }
     
+    [self save];
+}
+
+
+#pragma mark - Sharing
+
+- (void)insertTagNamed:(NSString *)tagName note:(Note *)note
+{
+    [note addTag:tagName];
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)removeTagNamed:(NSString *)tagName note:(Note *)note
+{
+    [note stripTag:tagName];
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+
+#pragma mark - Updating Notes
+
+- (void)updateMarkdownState:(BOOL)markdown note:(Note *)note
+{
+    if (note.markdown == markdown) {
+        return;
+    }
+
+    note.markdown = markdown;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePublishedState:(BOOL)published note:(Note *)note
+{
+    if (note.published == published) {
+        return;
+    }
+
+    note.published = published;
+    note.modificationDate = [NSDate date];
+
+    [self save];
+}
+
+- (void)updatePinnedState:(BOOL)pinned note:(Note *)note
+{
+    if (note.pinned == pinned) {
+        return;
+    }
+
+    note.pinned = pinned;
+    note.modificationDate = [NSDate date];
+
     [self save];
 }
 

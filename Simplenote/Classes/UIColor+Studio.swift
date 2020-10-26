@@ -8,23 +8,33 @@ extension UIColor {
 
     /// Initializes a new UIColor instance with a given ColorStudio value
     ///
-    convenience init(studioColor: ColorStudio) {
-        self.init(hexString: studioColor.rawValue)
+    convenience init(studioColor: ColorStudio, alpha: CGFloat = UIKitConstants.alpha1_0) {
+        self.init(hexString: studioColor.rawValue, alpha: alpha)
     }
 
     /// Initializes a new UIColor instance with a given ColorStudio Dark / Light set.
     /// Note: in `iOS <13` this method will always return a UIColor matching the `Current` Interface mode
     ///
-    convenience init(lightColor: ColorStudio, darkColor: ColorStudio) {
+    convenience init(lightColor: ColorStudio,
+                     darkColor: ColorStudio,
+                     lightColorAlpha: CGFloat = UIKitConstants.alpha1_0,
+                     darkColorAlpha: CGFloat = UIKitConstants.alpha1_0) {
+        let colorProvider: (_ isDark: Bool) -> (value: ColorStudio, alpha: CGFloat) = { isDark in
+            if isDark {
+                return (darkColor, darkColorAlpha)
+            }
+            return (lightColor, lightColorAlpha)
+        }
+
         guard #available(iOS 13.0, *) else {
-            let targetColor = SPUserInterface.isDark ? darkColor : lightColor
-            self.init(studioColor: targetColor)
+            let targetColor = colorProvider(SPUserInterface.isDark)
+            self.init(studioColor: targetColor.value, alpha: targetColor.alpha)
             return
         }
 
         self.init(dynamicProvider: { traits in
-            let targetColor = traits.userInterfaceStyle == .dark ? darkColor : lightColor
-            return UIColor(studioColor: targetColor)
+            let targetColor = colorProvider(traits.userInterfaceStyle == .dark)
+            return UIColor(studioColor: targetColor.value, alpha: targetColor.alpha)
         })
     }
 }
@@ -195,6 +205,26 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteCardBackgroundColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray1)
+    }
+
+    @objc
+    static var simplenoteCardDismissButtonBackgroundColor: UIColor {
+        UIColor(lightColor: .gray5, darkColor: .gray70)
+    }
+
+    @objc
+    static var simplenoteCardDismissButtonHighlightedBackgroundColor: UIColor {
+        UIColor(lightColor: .gray10, darkColor: .gray80)
+    }
+
+    @objc
+    static var simplenoteCardDismissButtonTintColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray20)
+    }
+
+    @objc
     static var simplenoteNavigationBarBackgroundColor: UIColor {
         UIColor(lightColor: .white, darkColor: .black).withAlphaComponent(UIKitConstants.alpha0_8)
     }
@@ -207,6 +237,11 @@ extension UIColor {
     @objc
     static var simplenoteSortBarBackgroundColor: UIColor {
         UIColor(lightColor: .spGray1, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
+    }
+
+    @objc
+    static var simplenoteBackgroundPreviewColor: UIColor {
+        UIColor(lightColor: .white, darkColor: .darkGray1)
     }
 
     @objc
@@ -292,5 +327,23 @@ extension UIColor {
     @objc
     static var simplenoteTagViewDeletionBackgroundColor: UIColor {
         UIColor(lightColor: .spBlue5, darkColor: .darkGray3)
+    }
+
+    @objc
+    static var simplenoteDisabledButtonBackgroundColor: UIColor {
+        UIColor(lightColor: .gray20, darkColor: .gray70)
+    }
+
+    @objc
+    static var simplenoteSliderTrackColor: UIColor {
+        UIColor(lightColor: .gray50,
+                darkColor: .gray50,
+                lightColorAlpha: UIKitConstants.alpha0_2,
+                darkColorAlpha: UIKitConstants.alpha0_4)
+    }
+
+    @objc
+    static var simplenoteDimmingColor: UIColor {
+        UIColor.black.withAlphaComponent(UIKitConstants.alpha0_1)
     }
 }

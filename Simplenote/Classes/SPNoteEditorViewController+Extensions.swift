@@ -1,9 +1,49 @@
 import Foundation
+import CoreSpotlight
+
+
+// MARK: - Overridden Methods
+//
+extension SPNoteEditorViewController {
+
+    /// Whenever this instance is removed from its NavigationController, let's cleanup
+    ///
+    override public func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+
+        guard parent == nil, self.parent != nil else {
+            return
+        }
+
+        ensureEmptyNoteIsDeleted()
+    }
+}
 
 
 // MARK: - Interface Initialization
 //
 extension SPNoteEditorViewController {
+
+    /// Sets up the NavigationBar Items
+    ///
+    @objc
+    func configureNavigationBarItems() {
+        actionButton = UIBarButtonItem(image: .image(name: .ellipsisOutlined), style: .plain, target: self, action: #selector(noteOptionsWasPressed(_:)))
+        actionButton.accessibilityIdentifier = "note-menu"
+        actionButton.accessibilityLabel = NSLocalizedString("Menu", comment: "Note Options Button")
+
+        checklistButton = UIBarButtonItem(image: .image(name: .checklist), style: .plain, target: self, action: #selector(insertChecklistAction(_:)))
+        checklistButton.accessibilityLabel = NSLocalizedString("Inserts a new Checklist Item", comment: "Insert Checklist Button")
+
+        informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
+        informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
+
+        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
+        createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
+
+        keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
+        keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
+    }
 
     /// Sets up the Bottom View:
     /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
@@ -104,6 +144,10 @@ extension SPNoteEditorViewController: KeyboardObservable {
         let editorBottomInsets      = newKeyboardFloats ? .zero : newKeyboardHeight
         let adjustedBottomInsets    = max(editorBottomInsets - view.safeAreaInsets.bottom, .zero)
 
+        guard noteEditorTextView.contentInset.bottom != adjustedBottomInsets else {
+            return
+        }
+
         defer {
             isKeyboardVisible = newKeyboardIsVisible
         }
@@ -124,19 +168,19 @@ extension SPNoteEditorViewController: KeyboardObservable {
 //
 extension SPNoteEditorViewController {
 
+    /// Indicates if VoiceOver is running
+    ///
     @objc
     var voiceoverEnabled: Bool {
         UIAccessibility.isVoiceOverRunning
     }
 
+    /// Whenver VoiceOver is enabled, this API will lock the Tags List in position
+    ///
     @objc
     func refreshVoiceoverSupport() {
         let enabled = voiceoverEnabled
         updateTagsEditor(locked: enabled)
-
-        if voiceoverEnabled {
-            resetNavigationBarToIdentity(withAnimation: true, completion: nil)
-        }
     }
 
     /// Whenever the Tags Editor must be locked:
@@ -182,6 +226,324 @@ extension SPNoteEditorViewController {
         }
 
         display(note)
+    }
+}
+
+
+// MARK: - History
+//
+extension SPNoteEditorViewController {
+
+    /// Indicates if note history is shown on screen
+    ///
+    @objc
+    var isShowingHistory: Bool {
+        return historyViewController != nil
+    }
+
+    /// Shows note history
+    ///
+    @objc
+    func presentHistoryController() {
+        ensureSearchIsDismissed()
+        save()
+
+        let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
+        viewController.configureToPresentAsCard(presentationDelegate: self)
+        historyViewController = viewController
+
+        present(viewController, animated: true)
+
+        SPTracker.trackEditorVersionsAccessed()
+    }
+
+    /// Dismiss note history
+    ///
+    @objc(dismissHistoryControllerAnimated:)
+    func dismissHistoryController(animated: Bool) {
+        guard let viewController = historyViewController else {
+            return
+        }
+
+        cleanUpAfterHistoryDismissal()
+        viewController.dismiss(animated: animated, completion: nil)
+
+        resetAccessibilityFocus()
+    }
+
+    private func cleanUpAfterHistoryDismissal() {
+        historyViewController = nil
+    }
+}
+
+
+// MARK: - History Delegate
+//
+extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
+
+    func noteHistoryControllerDidCancel() {
+        dismissHistoryController(animated: true)
+        restoreOriginalNoteContent()
+    }
+
+    func noteHistoryControllerDidFinish() {
+        dismissHistoryController(animated: true)
+        modified = true
+        save()
+    }
+
+    func noteHistoryControllerDidSelectVersion(withContent content: String) {
+        updateEditor(with: content)
+    }
+}
+
+
+// MARK: - SPCardPresentationControllerDelegate
+//
+extension SPNoteEditorViewController: SPCardPresentationControllerDelegate {
+
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
+        cleanUpAfterHistoryDismissal()
+        restoreOriginalNoteContent()
+    }
+}
+
+// MARK: - Information
+//
+extension SPNoteEditorViewController {
+
+    /// Present information controller
+    /// - Parameters:
+    ///     - note: Note
+    ///     - barButtonItem: Bar button item to be used as a popover target
+    ///
+    @objc
+    func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
+        let informationViewController = NoteInformationViewController(note: note)
+
+        let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
+
+        if presentAsPopover {
+            let navigationController = SPNavigationController(rootViewController: informationViewController)
+            navigationController.configureAsPopover(barButtonItem: barButtonItem)
+            navigationController.displaysBlurEffect = true
+            self.informationViewController = navigationController
+            present(navigationController, animated: true, completion: nil)
+        } else {
+            informationViewController.configureToPresentAsCard()
+            self.informationViewController = informationViewController
+            present(informationViewController, animated: true, completion: nil)
+        }
+    }
+
+    /// Dismiss and present information controller.
+    /// Called when horizontal size class changes
+    ///
+    @objc
+    func updateInformationControllerPresentation() {
+        guard let informationViewController = informationViewController else {
+            return
+        }
+
+        informationViewController.dismiss(animated: false) { [weak self] in
+            guard let self = self,
+                  let note = self.currentNote,
+                  let informationButton = self.informationButton else {
+                return
+            }
+            self.presentInformationController(for: note, from: informationButton)
+        }
+    }
+}
+
+// MARK: - Private API(s)
+//
+private extension SPNoteEditorViewController {
+
+    func dismissKeyboardAndSave() {
+        endEditing()
+        save()
+    }
+
+    func mustBounceMarkdownPreview(note: Note, oldMarkdownState: Bool) -> Bool {
+        note.markdown && oldMarkdownState != note.markdown
+    }
+
+    func bounceMarkdownPreviewIfNeeded(note: Note, oldMarkdownState: Bool) {
+        guard mustBounceMarkdownPreview(note: note, oldMarkdownState: oldMarkdownState) else {
+            return
+        }
+
+        bounceMarkdownPreview()
+    }
+
+    func presentOptionsController(for note: Note, from barButtonItem: UIBarButtonItem) {
+        let optionsViewController = OptionsViewController(note: note)
+        optionsViewController.delegate = self
+
+        let navigationController = SPNavigationController(rootViewController: optionsViewController)
+        navigationController.configureAsPopover(barButtonItem: barButtonItem)
+        navigationController.displaysBlurEffect = true
+
+        let oldMarkdownState = note.markdown
+        navigationController.onWillDismiss = { [weak self] in
+            self?.bounceMarkdownPreviewIfNeeded(note: note, oldMarkdownState: oldMarkdownState)
+        }
+
+        dismissKeyboardAndSave()
+        present(navigationController, animated: true, completion: nil)
+
+        SPTracker.trackEditorActivitiesAccessed()
+    }
+
+    func presentShareController(for note: Note, from barButtonItem: UIBarButtonItem) {
+        guard let activityController = UIActivityViewController(note: note) else {
+            return
+        }
+
+        activityController.configureAsPopover(barButtonItem: barButtonItem)
+
+        present(activityController, animated: true, completion: nil)
+        SPTracker.trackEditorNoteContentShared()
+
+    }
+}
+
+
+
+// MARK: - Services
+//
+extension SPNoteEditorViewController {
+
+    func delete(note: Note) {
+        SPTracker.trackEditorNoteDeleted()
+        SPObjectManager.shared().trashNote(note)
+        CSSearchableIndex.default().deleteSearchableNote(note)
+    }
+
+    @objc
+    func ensureEmptyNoteIsDeleted() {
+        guard let note = currentNote else {
+            return
+        }
+
+        guard note.isBlank, noteEditorTextView.text.isEmpty else {
+            save()
+            return
+        }
+
+        SPObjectManager.shared().trashNote(note)
+        currentNote = nil
+    }
+}
+
+
+// MARK: - Editor
+//
+private extension SPNoteEditorViewController {
+
+    // TODO: Think if we can use it from 'newButtonAction' as well (the animation effect is different)
+    func updateEditor(with content: String, animated: Bool = true) {
+        let contentUpdateBlock = {
+            self.noteEditorTextView.attributedText = NSAttributedString(string: content)
+            self.noteEditorTextView.processChecklists()
+        }
+
+        guard animated, let snapshot = noteEditorTextView.snapshotView(afterScreenUpdates: false) else {
+            contentUpdateBlock()
+            return
+        }
+
+        snapshot.frame = noteEditorTextView.frame
+        view.insertSubview(snapshot, aboveSubview: noteEditorTextView)
+
+        contentUpdateBlock()
+
+        let animations = {
+            snapshot.alpha = .zero
+        }
+
+        let completion: (Bool) -> Void = { _ in
+            snapshot.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration,
+                       animations: animations,
+                       completion: completion)
+    }
+
+    func restoreOriginalNoteContent() {
+        updateEditor(with: currentNote.content)
+    }
+}
+
+
+// MARK: - OptionsControllerDelegate
+//
+extension SPNoteEditorViewController: OptionsControllerDelegate {
+
+    func optionsControllerDidPressShare(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.presentShareController(for: sender.note, from: self.actionButton)
+        }
+    }
+
+    func optionsControllerDidPressHistory(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.presentHistoryController()
+        }
+    }
+
+    func optionsControllerDidPressTrash(_ sender: OptionsViewController) {
+        sender.dismiss(animated: true, completion: nil)
+
+        // Wait a bit until the Dismiss Animation concludes. `dismiss(:completion)` takes too long!
+        DispatchQueue.main.asyncAfter(deadline: .now() + UIKitConstants.animationDelayShort) {
+            self.delete(note: sender.note)
+            self.dismissEditor(sender)
+        }
+    }
+}
+
+
+// MARK: - Accessibility
+//
+private extension SPNoteEditorViewController {
+
+    func resetAccessibilityFocus() {
+        UIAccessibility.post(notification: .layoutChanged, argument: nil)
+    }
+}
+
+
+// MARK: - Actions
+//
+extension SPNoteEditorViewController {
+
+    @IBAction
+    func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        presentOptionsController(for: note, from: sender)
+    }
+
+    @objc
+    private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
+        guard let note = currentNote else {
+            assertionFailure()
+            return
+        }
+
+        presentInformationController(for: note, from: sender)
     }
 }
 

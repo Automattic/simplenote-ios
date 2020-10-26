@@ -29,10 +29,7 @@ extern NSString *const kSelectedNoteKey;
 extern NSString *const kSimplenoteTrashKey;
 extern NSString *const kSimplenoteUntaggedKey;
 extern NSString *const kSimplenoteUseBiometryKey;
-extern NSString *const kSimplenoteMarkdownDefaultKey;
 extern NSString *const kSignInErrorNotificationName;
-
-extern NSString *const kSimplenotePublishURL;
 
 extern NSString *const kPinTimeoutPreferencesKey;
 

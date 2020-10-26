@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-16 18:34:20+0000 */
+/* Translation-Revision-Date: 2020-10-16 13:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "Depurar";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Depuração desativada";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Apagar notas";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnóstico";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Desativar formatação Markdown";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Insira sua senha";
 
+/* Error Title */
+"Error" = "Erro";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "Veja as perguntas frequentes ou fale conosco";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "ID do rosto";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "Esqueceu a senha?";
 
+/* FAQ or contact us */
+"Get Help" = "Obter ajuda";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Ótimo! Se importa de deixar um comentário e contar do que você gostou?";
+
+/* Display help web page */
+"Help" = "Ajuda";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Ajude-nos a aprimorar o Simplenote compartilhando o uso de dados com nossa ferramenta de dados analíticos.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Redefinição necessária";
 
+/* Response Title */
+"Response" = "Resposta";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Restaurar anotação";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Configurações";
+
+/* Share Action */
+"Share" = "Compartilhar";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Compartilhar dados analíticos";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Ordenar por:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Código do status";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistema padrão";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Bem-vindo ao Simplenote para iOS!\n\nPara adicionar uma anotação, toque no botão de adição.\n\nMexa na lista para procurar suas anotações. Toque em um título para visualizar uma anotação e no conteúdo para alterá-lo.\n\nVocê pode pesquisar todas as suas anotações tocando no campo de pesquisa no topo da lista de anotações.\n\nToque no botão de seta na parte superior à esquerda ou deslize os dedos pela lista de anotações para visualizar suas tags. Você pode adicionar tags a uma anotação na parte inferior do editor de anotações e usar a barra lateral para ajudá-lo com a organização.\n\nHá mais opções de anotação, se necessário. Você pode adicionar outras pessoas como colaboradores a uma anotação ou publicá-la como uma página na web.\n\nUse o Simplenote no seu dispositivo Mac, Android ou no navegador em http:\/\/simplenote.com. Suas anotações serão atualizadas automaticamente em qualquer lugar.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Depuração ativada 🐞";
 

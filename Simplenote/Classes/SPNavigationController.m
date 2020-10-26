@@ -20,6 +20,15 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     [self refreshBlurEffect];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    if (self.onWillDismiss) {
+        self.onWillDismiss();
+    }
+}
+
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
 {
     if (_displaysBlurEffect == displaysBlurEffect) {
@@ -69,7 +78,8 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 - (void)refreshBlurTintColor
 {
     // We'll use different Bar Tint Colors, based on the presentation style
-    BOOL isModal = self.modalPresentationStyle == UIModalPresentationFormSheet;
+    BOOL isModal = (self.modalPresentationStyle == UIModalPresentationFormSheet ||
+                    self.modalPresentationStyle == UIModalPresentationPopover);
 
     self.navigationBarBackground.tintColorClosure = ^{
         return isModal ? [UIColor simplenoteNavigationBarModalBackgroundColor] : [UIColor simplenoteNavigationBarBackgroundColor];

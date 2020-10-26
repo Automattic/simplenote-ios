@@ -1,11 +1,3 @@
-//
-//  SPAddCollaboratorsViewController.m
-//  Simplenote
-//
-//  Created by Tom Witkin on 7/27/13.
-//  Copyright (c) 2013 Automattic. All rights reserved.
-//
-
 #import "SPAddCollaboratorsViewController.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
@@ -285,13 +277,13 @@
 
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
-    [self createPeronTagFromProperty:contactProperty];
+    [self createPersonTagFromProperty:contactProperty];
 }
 
 
 #pragma mark - Helpers
 
-- (void)createPeronTagFromProperty:(CNContactProperty *)property
+- (void)createPersonTagFromProperty:(CNContactProperty *)property
 {
     NSString *name = [CNContactFormatter stringFromContact:property.contact style:CNContactFormatterStyleFullName];
     NSString *email = property.value;

@@ -172,6 +172,7 @@
     [self setupSimperium];
     [self setupAppCenter];
     [self setupCrashLogging];
+    [self configureVersionsController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
@@ -464,7 +465,6 @@
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults removeObjectForKey:kSelectedNoteKey];
 			[defaults removeObjectForKey:kSelectedTagKey];
-            [defaults removeObjectForKey:kSimplenoteMarkdownDefaultKey];
 			[defaults synchronize];
 			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
@@ -562,9 +562,7 @@
 - (void)bucket:(SPBucket *)bucket didReceiveObjectForKey:(NSString *)key version:(NSString *)version data:(NSDictionary *)data
 {
     if ([bucket.name isEqualToString:@"Note"]) {
-        if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
-            [self.noteEditorViewController didReceiveVersion:version data:data];
-        }
+        [self.versionsController didReceiveObjectForSimperiumKey:key version:[version integerValue] data:data];
     }
 }
 

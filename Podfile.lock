@@ -1,23 +1,23 @@
 PODS:
-  - AppCenter (2.3.0):
-    - AppCenter/Analytics (= 2.3.0)
-    - AppCenter/Crashes (= 2.3.0)
-  - AppCenter/Analytics (2.3.0):
+  - AppCenter (2.5.3):
+    - AppCenter/Analytics (= 2.5.3)
+    - AppCenter/Crashes (= 2.5.3)
+  - AppCenter/Analytics (2.5.3):
     - AppCenter/Core
-  - AppCenter/Core (2.3.0)
-  - AppCenter/Crashes (2.3.0):
+  - AppCenter/Core (2.5.3)
+  - AppCenter/Crashes (2.5.3):
     - AppCenter/Core
-  - AppCenter/Distribute (2.3.0):
+  - AppCenter/Distribute (2.5.3):
     - AppCenter/Core
-  - Automattic-Tracks-iOS (0.5.1):
+  - Automattic-Tracks-iOS (0.6.0):
     - CocoaLumberjack (~> 3)
     - Reachability (~> 3)
     - Sentry (~> 4)
-    - Sodium (~> 0.8.0)
+    - Sodium-Fork (= 0.8.2)
     - UIDeviceIdentifier (~> 1)
-  - CocoaLumberjack (3.6.2):
-    - CocoaLumberjack/Core (= 3.6.2)
-  - CocoaLumberjack/Core (3.6.2)
+  - CocoaLumberjack (3.7.0):
+    - CocoaLumberjack/Core (= 3.7.0)
+  - CocoaLumberjack/Core (3.7.0)
   - Gridicons (0.19)
   - Reachability (3.2)
   - Sentry (4.5.0):
@@ -34,15 +34,15 @@ PODS:
   - Simperium/SocketTrust (1.0.0)
   - Simperium/SPReachability (1.0.0)
   - Simperium/SSKeychain (1.0.0)
-  - Sodium (0.8.0)
+  - Sodium-Fork (0.8.2)
   - UIDeviceIdentifier (1.5.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
-  - AppCenter (~> 2.3.0)
-  - AppCenter/Distribute (~> 2.3.0)
-  - Automattic-Tracks-iOS (~> 0.5)
+  - AppCenter (~> 2.5.1)
+  - AppCenter/Distribute (~> 2.5.1)
+  - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
   - Simperium (~> 1.0)
   - WordPress-Ratings-iOS (= 0.0.2)
@@ -57,24 +57,24 @@ SPEC REPOS:
     - Reachability
     - Sentry
     - Simperium
-    - Sodium
+    - Sodium-Fork
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
-  Automattic-Tracks-iOS: ac2cf9d8332fef72cf3e6de7b14012e7a0672676
-  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
+  AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
+  Automattic-Tracks-iOS: c525679cbf91ac8bcbcbed01bdaa564867173182
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
   Simperium: fa0feb6e86de4e93d0d07704b59a0a7aebd7d5a7
-  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
+  Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
   UIDeviceIdentifier: a79ccdfc940373835a7d8e9fc7541e6bf61b6319
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 95fd69010be646bbc5f2c744cded441e368f0cb5
+PODFILE CHECKSUM: 3e084bc535ed1734dd27476428995e6ada03d7e4
 
 COCOAPODS: 1.7.5

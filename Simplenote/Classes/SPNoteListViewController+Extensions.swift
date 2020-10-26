@@ -249,7 +249,7 @@ extension SPNoteListViewController {
     ///
     @objc
     func refreshTitle() {
-        title = notesListController.filter.title
+        title = searchController.active ? NSLocalizedString("Search", comment: "Search Title") : notesListController.filter.title
     }
 
     /// Toggles the SearchBar's Visibility, based on the active Filter.
@@ -585,7 +585,7 @@ private extension SPNoteListViewController {
                 return nil
         }
 
-        return DateFormatter.Simplenote.listDateFormatter.string(from: date)
+        return DateFormatter.listDateFormatter.string(from: date)
     }
 }
 
@@ -633,7 +633,7 @@ private extension SPNoteListViewController {
             },
 
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
-                self?.copyInterlink(to: note)
+                self?.copyInternalLink(to: note)
                 completion(true)
             },
 
@@ -655,11 +655,16 @@ private extension SPNoteListViewController {
     ///
     func contextMenu(for note: Note) -> UIMenu {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
-            self?.copyInterlink(to: note)
+            self?.copyInternalLink(to: note)
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
             self?.share(note: note)
+        }
+
+        let pinTitle = note.pinned ? ActionTitle.unpin : ActionTitle.pin
+        let pin = UIAction(title: pinTitle, image: .image(name: .pin)) { [weak self] _ in
+            self?.togglePinnedState(note: note)
         }
 
         /// NOTE:
@@ -669,14 +674,14 @@ private extension SPNoteListViewController {
         /// Ref.: https://github.com/Automattic/simplenote-ios/pull/902/files
         ///
         guard #available(iOS 14.0, *) else {
-            return UIMenu(title: "", children: [copy, share])
+            return UIMenu(title: "", children: [share, copy, pin])
         }
 
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
             self?.delete(note: note)
         }
 
-        return UIMenu(title: "", children: [copy, share, delete])
+        return UIMenu(title: "", children: [share, copy, pin, delete])
     }
 }
 
@@ -691,14 +696,14 @@ private extension SPNoteListViewController {
         CSSearchableIndex.default().deleteSearchableNote(note)
     }
 
-    func copyInterlink(to note: Note) {
+    func copyInternalLink(to note: Note) {
         SPTracker.trackListCopiedInternalLink()
-        UIPasteboard.general.copyInterlink(to: note)
+        UIPasteboard.general.copyInternalLink(to: note)
     }
 
     func togglePinnedState(note: Note) {
         SPTracker.trackListPinToggled()
-        SPObjectManager.shared().togglePinnedState(of: note)
+        SPObjectManager.shared().updatePinnedState(!note.pinned, note: note)
     }
 
     func share(note: Note) {
@@ -835,8 +840,10 @@ extension SPNoteListViewController {
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
     static let copyLink = NSLocalizedString("Copy Link", comment: "Copies Link to a Note")
-    static let delete = NSLocalizedString("Delete", comment: "Deletes a note")
+    static let delete = NSLocalizedString("Move to Trash", comment: "Deletes a note")
+    static let pin = NSLocalizedString("Pin to Top", comment: "Pins a note")
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
+    static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
 }
 
 private enum Constants {
