@@ -113,13 +113,7 @@ private extension NoteInformationController {
     func allSections() -> [Section] {
         var sections: [Section] = []
         sections.append(metricSection())
-        if let referenceSection = referenceSection() {
-            let header = Section(rows: [
-                Row.header(title: Localization.references.localizedUppercase)
-            ])
-            sections.append(header)
-            sections.append(referenceSection)
-        }
+        sections.append(contentsOf: referenceSections())
         return sections
     }
 
@@ -142,9 +136,9 @@ private extension NoteInformationController {
         return Section(rows: rows)
     }
 
-    func referenceSection() -> Section? {
+    func referenceSections() -> [Section] {
         guard let references = referencesController?.fetchedObjects, !references.isEmpty else {
-            return nil
+            return []
         }
 
         let referenceRows = references.map { (note) -> Row in
@@ -153,7 +147,13 @@ private extension NoteInformationController {
                               date: DateFormatter.dateFormatter.string(from: note.modificationDate))
         }
 
-        return Section(rows: referenceRows)
+        let header = Section(rows: [
+            Row.header(title: Localization.references.localizedUppercase)
+        ])
+        return [
+            header,
+            Section(rows: referenceRows)
+        ]
     }
 
     func sendNewDataToObserver() {
