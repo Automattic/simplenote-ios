@@ -174,6 +174,16 @@ private extension NoteInformationViewController {
 extension NoteInformationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let row = rows[indexPath.row]
+        switch row {
+        case .reference(let interLink, _, _):
+            if let interLink = interLink, let url = URL(string: interLink) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        default:
+            break
+        }
     }
 }
 
@@ -197,7 +207,7 @@ extension NoteInformationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, value: value)
             return cell
-        case .reference(let title, let date):
+        case .reference(_, let title, let date):
             let cell = tableView.dequeueReusableCell(ofType: NoteReferenceTableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, date: date)
             return cell

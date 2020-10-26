@@ -12,7 +12,7 @@ final class NoteInformationController {
 
         /// Reference
         ///
-        case reference(title: String, date: String)
+        case reference(interLink: String?, title: String, date: String)
 
         /// Header
         ///
@@ -131,7 +131,8 @@ private extension NoteInformationController {
         }
 
         let referenceRows = references.map { (note) -> Row in
-            return .reference(title: note.titlePreview,
+            return .reference(interLink: note.plainInternalLink,
+                              title: note.titlePreview,
                               date: DateFormatter.dateFormatter.string(from: note.modificationDate))
         }
 
