@@ -99,8 +99,8 @@ private extension NoteInformationViewController {
 
     func configureTableView() {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
-        tableView.register(NoteReferenceTableViewCell.self, forCellReuseIdentifier: NoteReferenceTableViewCell.reuseIdentifier)
-        tableView.register(NoteReferenceTableHeaderViewCell.self, forCellReuseIdentifier: NoteReferenceTableHeaderViewCell.reuseIdentifier)
+        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier)
+        tableView.register(TableHeaderViewCell.self, forCellReuseIdentifier: TableHeaderViewCell.reuseIdentifier)
         tableView.tableFooterView = UIView()
     }
 
@@ -208,11 +208,11 @@ extension NoteInformationViewController: UITableViewDataSource {
             configure(cell: cell, withTitle: title, value: value)
             return cell
         case .reference(_, let title, let date):
-            let cell = tableView.dequeueReusableCell(ofType: NoteReferenceTableViewCell.self, for: indexPath)
+            let cell = tableView.dequeueReusableCell(ofType: SubtitleTableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, date: date)
             return cell
         case .header(let title):
-            let cell = tableView.dequeueReusableCell(ofType: NoteReferenceTableHeaderViewCell.self, for: indexPath)
+            let cell = tableView.dequeueReusableCell(ofType: TableHeaderViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title)
             return cell
         }
@@ -225,12 +225,12 @@ extension NoteInformationViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = value
     }
 
-    private func configure(cell: NoteReferenceTableViewCell, withTitle title: String, date: String) {
+    private func configure(cell: SubtitleTableViewCell, withTitle title: String, date: String) {
         cell.title = title
         cell.value = date
     }
 
-    private func configure(cell: NoteReferenceTableHeaderViewCell, withTitle title: String) {
+    private func configure(cell: TableHeaderViewCell, withTitle title: String) {
         cell.title = title
     }
 

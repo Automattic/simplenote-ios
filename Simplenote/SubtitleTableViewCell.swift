@@ -1,9 +1,9 @@
 import UIKit
 
 
-// MARK: - NoteReferenceTableViewCell
+// MARK: - SubtitleTableViewCell
 //
-final class NoteReferenceTableViewCell: UITableViewCell {
+final class SubtitleTableViewCell: UITableViewCell {
 
     /// Wraps the TextLabel's Text Property
     ///
@@ -51,7 +51,7 @@ final class NoteReferenceTableViewCell: UITableViewCell {
 
 // MARK: - Private API(s)
 //
-private extension NoteReferenceTableViewCell {
+private extension SubtitleTableViewCell {
 
     func reloadBackgroundStyles() {
         let selectedView = UIView(frame: bounds)

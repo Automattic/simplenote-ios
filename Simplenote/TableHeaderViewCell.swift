@@ -1,9 +1,9 @@
 import UIKit
 
 
-// MARK: - NoteReferenceTableHeaderViewCell
+// MARK: - TableHeaderViewCell
 //
-final class NoteReferenceTableHeaderViewCell: UITableViewCell {
+final class TableHeaderViewCell: UITableViewCell {
     private let titleLabel = UILabel()
 
     /// Wraps the TitleLabel's Text Property
@@ -32,7 +32,7 @@ final class NoteReferenceTableHeaderViewCell: UITableViewCell {
 
 // MARK: - Private API(s)
 //
-private extension NoteReferenceTableHeaderViewCell {
+private extension TableHeaderViewCell {
     func configure() {
         contentView.addFillingSubview(titleLabel,
                                       edgeInsets: Constants.titleLabelExtraInsets,
