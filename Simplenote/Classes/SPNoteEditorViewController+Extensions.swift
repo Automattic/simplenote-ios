@@ -589,7 +589,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        displayInterlinkController(around: keywordRange)
+        presentInterlinkController(around: keywordRange)
     }
 
     /// Dismisses the Interlink Window when ANY of the following evaluates **true**:
@@ -632,7 +632,7 @@ private extension SPNoteEditorViewController {
 
     /// Presents the Interlink Window at a given Editor Range (Below / Above!)
     ///
-    func displayInterlinkController(around range: Range<String.Index>) {
+    func presentInterlinkController(around range: Range<String.Index>) {
         let locationInView = noteEditorTextView.locationInSuperviewForText(in: range)
         let interlinkViewController = reusableInterlinkViewController()
 
