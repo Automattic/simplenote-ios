@@ -791,6 +791,11 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self presentSafariViewControllerAtURL:url];
 }
 
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    [self dismissInterlinkLookupIfNeeded];
+}
+
 
 #pragma mark - SafariViewController Methods
 
