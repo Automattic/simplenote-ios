@@ -3,6 +3,12 @@ import SimplenoteFoundation
 
 final class NoteInformationController {
 
+    /// Section
+    ///
+    struct Section {
+        let rows: [Row]
+    }
+
     /// Row
     ///
     enum Row {
@@ -19,12 +25,12 @@ final class NoteInformationController {
         case header(title: String)
     }
 
-    /// Observer sends changes in rows
+    /// Observer sends changes in data
     /// When assigned, it sends current state
     ///
-    var observer: (([Row]) -> Void)? {
+    var observer: (([Section]) -> Void)? {
         didSet {
-            observer?(allRows())
+            observer?(allSections())
 
             if observer == nil {
                 stopListeningForChanges()
@@ -91,7 +97,7 @@ private extension NoteInformationController {
         noteChangesObserver.delegate = self
 
         referencesController?.onDidChangeContent = { [weak self] _, _ in
-            self?.sendNewRowsToObserver()
+            self?.sendNewDataToObserver()
         }
     }
 
@@ -104,13 +110,22 @@ private extension NoteInformationController {
 // MARK: - Data
 //
 private extension NoteInformationController {
-    func allRows() -> [Row] {
-        return metricRows() + referenceRows()
+    func allSections() -> [Section] {
+        var sections: [Section] = []
+        sections.append(metricSection())
+        if let referenceSection = referenceSection() {
+            let header = Section(rows: [
+                Row.header(title: Localization.references.localizedUppercase)
+            ])
+            sections.append(header)
+            sections.append(referenceSection)
+        }
+        return sections
     }
 
-    func metricRows() -> [Row] {
+    func metricSection() -> Section {
         let metrics = NoteMetrics(note: note)
-        return [
+        let rows: [Row] = [
             .metric(title: Localization.modified,
                     value: DateFormatter.dateTimeFormatter.string(from: metrics.modifiedDate)),
 
@@ -123,11 +138,13 @@ private extension NoteInformationController {
             .metric(title: Localization.characters,
                     value: NumberFormatter.decimalFormatter.string(for: metrics.numberOfChars))
         ]
+
+        return Section(rows: rows)
     }
 
-    func referenceRows() -> [Row] {
+    func referenceSection() -> Section? {
         guard let references = referencesController?.fetchedObjects, !references.isEmpty else {
-            return []
+            return nil
         }
 
         let referenceRows = references.map { (note) -> Row in
@@ -136,13 +153,11 @@ private extension NoteInformationController {
                               date: DateFormatter.dateFormatter.string(from: note.modificationDate))
         }
 
-        let headerRow = Row.header(title: Localization.references.localizedUppercase)
-
-        return [headerRow] + referenceRows
+        return Section(rows: referenceRows)
     }
 
-    func sendNewRowsToObserver() {
-        observer?(allRows())
+    func sendNewDataToObserver() {
+        observer?(allSections())
     }
 }
 
@@ -150,7 +165,7 @@ private extension NoteInformationController {
 //
 extension NoteInformationController: EntityObserverDelegate {
     func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
-        sendNewRowsToObserver()
+        sendNewDataToObserver()
     }
 }
 
