@@ -290,6 +290,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
+    [self reprocessInterlinkLookupWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection

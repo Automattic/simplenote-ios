@@ -606,6 +606,17 @@ extension SPNoteEditorViewController {
 
         dismissInterlinkController()
     }
+
+    ///
+    ///
+    @objc(reprocessInterlinkLookupWithCoordinator:)
+    func reprocessInterlinkLookup(coordinator: UIViewControllerTransitionCoordinator) {
+        dismissInterlinkController()
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.processInterlinkLookup()
+        }
+    }
 }
 
 
@@ -631,14 +642,6 @@ private extension SPNoteEditorViewController {
         interlinkViewController?.parent != nil
     }
 
-    /// Presents the Interlink View
-    ///
-    func presentInterlinkController() {
-        let interlinkViewController = reusableInterlinkViewController()
-        attach(child: interlinkViewController)
-        interlinkViewController.view.fadeIn()
-    }
-
     /// Presents the Interlink Controller **if** it's not already onscreen
     ///
     func ensureInterlinkControllerIsOnScreen() {
@@ -649,10 +652,18 @@ private extension SPNoteEditorViewController {
         presentInterlinkController()
     }
 
+    /// Presents the Interlink View
+    ///
+    func presentInterlinkController() {
+        let interlinkViewController = reusableInterlinkViewController()
+        attach(child: interlinkViewController)
+        interlinkViewController.view.fadeIn()
+    }
+
     /// Adjusts the Interlink Controller's Position, as specified
     ///
     func positionInterlinkController(around range: Range<String.Index>) {
-        interlinkViewController.positionView(around: range, in: noteEditorTextView)
+        interlinkViewController.anchorView(around: range, in: noteEditorTextView)
     }
 
     /// DIsmisses the Interlink Window (if any!)
