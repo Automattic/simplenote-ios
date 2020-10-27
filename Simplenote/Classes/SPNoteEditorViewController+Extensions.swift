@@ -673,7 +673,13 @@ private extension SPNoteEditorViewController {
     /// - Returns: `true` whenever there *are* interlinks to be presented
     ///
     func refreshInterlinks(for keywordText: String, in replacementRange: Range<String.Index>, excluding excludedID: NSManagedObjectID?) -> Bool {
-        reusableInterlinkViewController().refreshInterlinks(for: keywordText, excluding: excludedID)
+        let interlinkViewController = reusableInterlinkViewController()
+        interlinkViewController.onInsertInterlink = { [weak self] text in
+            self?.noteEditorTextView.insertText(text: text, in: replacementRange)
+            self?.dismissInterlinkController()
+        }
+
+        return interlinkViewController.refreshInterlinks(for: keywordText, excluding: excludedID)
     }
 
     /// Returns a reusable InterlinkViewController instance
