@@ -1,5 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+unless ['BUNDLE_BIN_PATH', 'BUNDLE_GEMFILE'].any? { |k| ENV.key?(k) }
+	raise 'Please run CocoaPods via `bundle exec`'
+end
+
 inhibit_all_warnings!
 use_frameworks!
 
@@ -42,4 +46,17 @@ abstract_target 'Automattic' do
 		#
 	    pod 'ZIPFoundation', '~> 0.9.9'
 	end
+end
+
+
+# Post Install
+#
+post_install do |installer|
+  # Remove min deploy target to clean up build warnings.
+  # See: https://stackoverflow.com/a/64048124
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+    end
+  end
 end
