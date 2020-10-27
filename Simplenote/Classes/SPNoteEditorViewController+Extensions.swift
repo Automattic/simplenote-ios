@@ -649,7 +649,7 @@ private extension SPNoteEditorViewController {
             return false
         }
 
-        return isSelectingText || isDragging || isEditingInterlink
+        return isSelectingText || isDragging || !isEditingInterlink
 
     }
 
