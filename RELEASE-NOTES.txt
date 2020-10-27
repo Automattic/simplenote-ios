@@ -1,3 +1,7 @@
+4.28
+-----
+-   Update Sort Bar interface #955
+
 4.27
 -----
 -   New Note History interface #762
