@@ -44,6 +44,7 @@ private extension InterlinkViewController {
 
     func setupRootView() {
         view.translatesAutoresizingMaskIntoConstraints = false
+// TODO: Placeholder: Wire a proper bgColor
         view.backgroundColor = .red
     }
 
@@ -109,6 +110,7 @@ private extension InterlinkViewController {
     /// Returns the target Height
     ///
     func calculateHeight() -> CGFloat {
+// TODO: Depends on the actual results onscreen
         Metrics.defaultHeight
     }
 }
@@ -119,14 +121,3 @@ private extension InterlinkViewController {
 private enum Metrics {
     static let defaultHeight = CGFloat(80)
 }
-
-
-
-// TODO: Depends on the actual results onscreen
-//
-// TODO: Proper BG
-//
-// TODO: TableView Padding
-//        let paddingX        = textView.textContainer.lineFragmentPadding
-//        let width           = textView.frame.size.width //- paddingX * 2
-
