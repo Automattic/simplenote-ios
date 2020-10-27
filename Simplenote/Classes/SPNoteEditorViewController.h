@@ -30,7 +30,7 @@
 @property (nonatomic, weak) UIViewController *informationViewController;
 
 // Interlinking
-@property (nonatomic, weak) InterlinkViewController *interlinkViewController;
+@property (nonatomic, strong) InterlinkViewController *interlinkViewController;
 
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
