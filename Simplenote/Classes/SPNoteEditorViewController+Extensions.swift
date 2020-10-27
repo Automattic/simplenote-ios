@@ -589,7 +589,8 @@ extension SPNoteEditorViewController {
             return
         }
 
-        presentInterlinkController(around: keywordRange)
+        ensureInterlinkControllerIsOnScreen()
+        positionInterlinkController(around: keywordRange)
     }
 
     /// Dismisses the Interlink Window when ANY of the following evaluates **true**:
@@ -630,18 +631,28 @@ private extension SPNoteEditorViewController {
         interlinkViewController?.parent != nil
     }
 
-    /// Presents the Interlink Window at a given Editor Range (Below / Above!)
+    /// Presents the Interlink View
     ///
-    func presentInterlinkController(around range: Range<String.Index>) {
+    func presentInterlinkController() {
         let interlinkViewController = reusableInterlinkViewController()
-        interlinkViewController.positionView(around: range, in: noteEditorTextView)
+        attach(child: interlinkViewController)
+        interlinkViewController.view.fadeIn()
+    }
 
+    /// Presents the Interlink Controller **if** it's not already onscreen
+    ///
+    func ensureInterlinkControllerIsOnScreen() {
         if isInterlinkViewOnScreen {
             return
         }
 
-        attach(child: interlinkViewController)
-        interlinkViewController.view.fadeIn()
+        presentInterlinkController()
+    }
+
+    /// Adjusts the Interlink Controller's Position, as specified
+    ///
+    func positionInterlinkController(around range: Range<String.Index>) {
+        interlinkViewController.positionView(around: range, in: noteEditorTextView)
     }
 
     /// DIsmisses the Interlink Window (if any!)
