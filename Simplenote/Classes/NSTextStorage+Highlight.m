@@ -3,11 +3,6 @@
 
 @implementation NSTextStorage (Highlight)
 
-- (void)applyColor:(UIColor *)color toSubstringMatchingKeywords:(NSString *)keywords {
-    NSArray* ranges = [self.string rangesForTerms:keywords];
-    [self applyColor:color toRanges:ranges];
-}
-
 - (void)applyColor:(UIColor *)color toRanges:(NSArray *)wordRanges {
     
     if (!color) {
