@@ -4,7 +4,6 @@
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "SPTagView.h"
-#import "NSTextStorage+Highlight.h"
 #import "SPEditorTextView.h"
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
@@ -258,8 +257,8 @@ CGFloat const SPSelectedAreaPadding = 20;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIColor *tintColor = [UIColor simplenoteTintColor];
-            [self.noteEditorTextView.textStorage applyColor:tintColor toRanges:self.searchResultRanges];
+            UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
+            [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];
             
             NSInteger count = self.searchResultRanges.count;
             
