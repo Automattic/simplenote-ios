@@ -247,6 +247,7 @@
 		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00522B03CBB003F85CB /* Extractors.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
+		B56B4C0D25489A6D0083675D /* InterlinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56B4C0C25489A6D0083675D /* InterlinkViewController.xib */; };
 		B56C8CA2234CEAF100FE55F4 /* SPTagsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56C8CA1234CEAF100FE55F4 /* SPTagsListViewController.xib */; };
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
@@ -636,6 +637,7 @@
 		B56AA00522B03CBB003F85CB /* Extractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractors.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
+		B56B4C0C25489A6D0083675D /* InterlinkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = InterlinkViewController.xib; path = Classes/InterlinkViewController.xib; sourceTree = "<group>"; };
 		B56C8CA1234CEAF100FE55F4 /* SPTagsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagsListViewController.xib; path = Classes/SPTagsListViewController.xib; sourceTree = "<group>"; };
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1377,6 +1379,7 @@
 			isa = PBXGroup;
 			children = (
 				B58670992543683800449722 /* InterlinkViewController.swift */,
+				B56B4C0C25489A6D0083675D /* InterlinkViewController.xib */,
 			);
 			name = Interlinks;
 			sourceTree = "<group>";
@@ -2037,6 +2040,7 @@
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */,
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
+				B56B4C0D25489A6D0083675D /* InterlinkViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
 				A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */,
