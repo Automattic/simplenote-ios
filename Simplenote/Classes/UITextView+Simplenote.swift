@@ -44,7 +44,7 @@ extension UITextView {
     ///
     func insertText(text: String, in range: Range<String.Index>) {
         registerUndoCheckpointAndPerform { storage in
-            let range = text.utf16NSRange(from: range)
+            let range = self.text.utf16NSRange(from: range)
             storage.replaceCharacters(in: range, with: text)
         }
     }
