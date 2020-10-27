@@ -11,6 +11,26 @@ class InterlinkViewController: UIViewController {
     var onInsertInterlink: ((String) -> Void)?
 
 
+}
+
+
+// MARK: - Presenting
+//
+extension InterlinkViewController {
+
+    ///
+    ///
+    func positionView(around range: Range<String.Index>, in textView: UITextView) {
+        let locationInView = textView.locationInSuperviewForText(in: range)
+        view.frame.origin = locationInView.origin
+    }
+}
+
+
+// MARK: -
+//
+extension InterlinkViewController {
+
     func refreshInterlinks(for keyword: String, excluding excludedID: NSManagedObjectID?) -> Bool {
 // TODO: Implement Me!
         return true

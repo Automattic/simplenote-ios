@@ -26,4 +26,22 @@ extension UIViewController {
 
         leafViewController.present(self, animated: true, completion: nil)
     }
+
+    /// Attaches a children ViewController (if needed)
+    ///
+    func attach(child: UIViewController) {
+        child.willMove(toParent: self)
+        view.addSubview(child.view)
+        addChild(child)
+        child.didMove(toParent: self)
+    }
+
+    /// Detaches the receiver from its parent
+    ///
+    func detach() {
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+        didMove(toParent: nil)
+    }
 }

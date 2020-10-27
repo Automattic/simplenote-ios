@@ -633,17 +633,29 @@ private extension SPNoteEditorViewController {
     /// Presents the Interlink Window at a given Editor Range (Below / Above!)
     ///
     func presentInterlinkController(around range: Range<String.Index>) {
-        let locationInView = noteEditorTextView.locationInSuperviewForText(in: range)
         let interlinkViewController = reusableInterlinkViewController()
+        interlinkViewController.positionView(around: range, in: noteEditorTextView)
 
-//        interlinkWindowController.attach(to: view.window)
-//        interlinkWindowController.positionWindow(relativeTo: locationOnScreen)
+        if isInterlinkViewOnScreen {
+            return
+        }
+
+        attach(child: interlinkViewController)
+        interlinkViewController.view.fadeIn()
     }
 
     /// DIsmisses the Interlink Window (if any!)
     ///
     func dismissInterlinkController() {
-        interlinkViewController?.dismiss(animated: true, completion: nil)
+        guard let interlinkController = interlinkViewController else {
+            return
+        }
+
+        interlinkController.view.fadeOut { _ in
+            interlinkController.detach()
+        }
+
+        self.interlinkViewController = nil
     }
 
     /// Refreshes the Interlinks for a given Keyword at the specified Replacement Range (including Markdown `[` opening character).
