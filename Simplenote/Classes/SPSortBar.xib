@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +17,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WTw-zs-k6p" userLabel="Divider View">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="t6Z-h5-vb8"/>
                     </constraints>
@@ -25,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-M1-JhX">
-                            <rect key="frame" x="0.0" y="0.0" width="56" height="49"/>
+                            <rect key="frame" x="358" y="0.0" width="56" height="49"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="56" id="AqC-SO-xEW"/>
                                 <constraint firstAttribute="height" constant="49" id="gLt-hX-R1A"/>
@@ -74,10 +75,11 @@
                         <constraint firstAttribute="bottom" secondItem="Rez-M1-JhX" secondAttribute="bottom" id="hfn-7M-FDt"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="top" secondItem="9dB-bC-kqa" secondAttribute="top" id="rbn-un-kPb"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="centerX" secondItem="9dB-bC-kqa" secondAttribute="centerX" id="u3W-Ew-9as"/>
-                        <constraint firstItem="Rez-M1-JhX" firstAttribute="leading" secondItem="9dB-bC-kqa" secondAttribute="leading" id="wXN-SS-kcl"/>
+                        <constraint firstItem="Rez-M1-JhX" firstAttribute="trailing" secondItem="9dB-bC-kqa" secondAttribute="trailing" id="wXN-SS-kcl"/>
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="7DS-pC-6KX"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="7DS-pC-6KX" firstAttribute="trailing" secondItem="9dB-bC-kqa" secondAttribute="trailing" id="939-QB-dKo"/>
@@ -91,7 +93,6 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="7DS-pC-6KX"/>
             <connections>
                 <outlet property="containerView" destination="9dB-bC-kqa" id="wa5-l2-EdV"/>
                 <outlet property="descriptionLabel" destination="DuL-w7-cVY" id="EoN-zv-tCW"/>
@@ -110,5 +111,8 @@
     </objects>
     <resources>
         <image name="icon_sort_order" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
