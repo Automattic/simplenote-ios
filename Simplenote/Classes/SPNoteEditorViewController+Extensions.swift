@@ -110,6 +110,18 @@ extension SPNoteEditorViewController {
     var isSelectingText: Bool {
         noteEditorTextView.selectedRange.length != .zero
     }
+
+    /// Indicates if the TextView is being dragged
+    ///
+    var isDragging: Bool {
+        noteEditorTextView.isDragging
+    }
+
+    /// Indicates if the user is Editing an Interlink
+    ///
+    var isEditingInterlink: Bool {
+        noteEditorTextView.interlinkKeywordAtSelectedLocation != nil
+    }
 }
 
 
@@ -633,7 +645,12 @@ private extension SPNoteEditorViewController {
     /// Indicates if we should dismiss the Interlink Window
     ///
     var mustDismissInterlinkLookup: Bool {
-        isSelectingText || isInterlinkViewOnScreen && noteEditorTextView.interlinkKeywordAtSelectedLocation == nil
+        guard isInterlinkViewOnScreen else {
+            return false
+        }
+
+        return isSelectingText || isDragging || isEditingInterlink
+
     }
 
     /// Indicates if the Interlink Window is visible

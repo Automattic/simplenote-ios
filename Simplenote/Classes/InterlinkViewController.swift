@@ -93,30 +93,22 @@ private extension InterlinkViewController {
     /// Updates the layout constraints so that the receiver shows up **around** the specified Keyword in a given TextView
     ///
     func refreshConstraints(keywordRange: Range<String.Index>, in textView: UITextView) {
-        let textRect        = textView.locationInSuperviewForText(in: keywordRange)
-        let editingRect     = textView.editingRect()
-        let targetHeight    = calculateHeight()
-        let targetPositionY = calculateOrigin(for: targetHeight, around: textRect, containerFrame: editingRect)
+        let targetHeight = calculateHeight()
+        let targetLocation = calculateLocation(keywordRange: keywordRange, textView: textView)
 
-        topConstraint?.constant = targetPositionY
+        topConstraint?.constant = targetLocation
         heightConstraint?.constant = targetHeight
     }
 
-    /// Returns the expected Origin.Y position for an Autocomplete View with the specified Height, to be displayed around a given
-    /// anchor frame, within a given Container Frame.
+    /// Returns the target Origin.Y
     ///
-    func calculateOrigin(for height: CGFloat, around anchor: CGRect, containerFrame: CGRect) -> CGFloat {
-        if anchor.maxY + height < containerFrame.maxY {
-            return anchor.maxY
-        }
-
-        return anchor.minY - height
+    func calculateLocation(keywordRange: Range<String.Index>, textView: UITextView) -> CGFloat {
+        textView.locationInSuperviewForText(in: keywordRange).maxY
     }
 
-    /// Returns the required Height to fit the Autocomplete Suggestions
+    /// Returns the target Height
     ///
     func calculateHeight() -> CGFloat {
-// TODO: Depends on the actual results onscreen
         Metrics.defaultHeight
     }
 }
@@ -130,6 +122,8 @@ private enum Metrics {
 
 
 
+// TODO: Depends on the actual results onscreen
+//
 // TODO: Proper BG
 //
 // TODO: TableView Padding

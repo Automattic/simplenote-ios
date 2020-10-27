@@ -679,6 +679,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 #pragma mark UIScrollViewDelegate methods
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self dismissInterlinkLookupIfNeeded];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self processInterlinkLookup];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // Slowly Fade-In the NavigationBar's Blur
