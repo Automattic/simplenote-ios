@@ -126,6 +126,19 @@ extension UITextView {
 //
 extension UITextView {
 
+    /// Returns the "Editing Rect": We rely on this calculation to determine the "available area" in which Interlinks Autocomplete
+    /// can be presented.
+    ///
+    /// - Note: `contentInset.bottom` is expected to contain the bottom padding required by the keyboard. Capisce?
+    ///
+    func editingRect() -> CGRect {
+        let paddingTop = safeAreaInsets.top
+        let paddingBottom = safeAreaInsets.bottom + contentInset.bottom
+        let editingHeight = frame.height - paddingTop - paddingBottom
+
+        return CGRect(x: .zero, y: paddingTop, width: frame.width, height: editingHeight)
+    }
+
     /// Returns the Bounding Rect for the specified `Range<String.Index>`
     ///
     func boundingRect(for range: Range<String.Index>) -> CGRect {

@@ -110,6 +110,18 @@ extension SPNoteEditorViewController {
     var isSelectingText: Bool {
         noteEditorTextView.selectedRange.length != .zero
     }
+
+    /// Indicates if the TextView is being dragged
+    ///
+    var isDragging: Bool {
+        noteEditorTextView.isDragging
+    }
+
+    /// Indicates if the user is Editing an Interlink
+    ///
+    var isEditingInterlink: Bool {
+        noteEditorTextView.interlinkKeywordAtSelectedLocation != nil
+    }
 }
 
 
@@ -606,6 +618,17 @@ extension SPNoteEditorViewController {
 
         dismissInterlinkController()
     }
+
+    ///
+    ///
+    @objc(reprocessInterlinkLookupWithCoordinator:)
+    func reprocessInterlinkLookup(coordinator: UIViewControllerTransitionCoordinator) {
+        dismissInterlinkController()
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.processInterlinkLookup()
+        }
+    }
 }
 
 
@@ -622,21 +645,18 @@ private extension SPNoteEditorViewController {
     /// Indicates if we should dismiss the Interlink Window
     ///
     var mustDismissInterlinkLookup: Bool {
-        isSelectingText || isInterlinkViewOnScreen && noteEditorTextView.interlinkKeywordAtSelectedLocation == nil
+        guard isInterlinkViewOnScreen else {
+            return false
+        }
+
+        return isSelectingText || isDragging || !isEditingInterlink
+
     }
 
     /// Indicates if the Interlink Window is visible
     ///
     var isInterlinkViewOnScreen: Bool {
         interlinkViewController?.parent != nil
-    }
-
-    /// Presents the Interlink View
-    ///
-    func presentInterlinkController() {
-        let interlinkViewController = reusableInterlinkViewController()
-        attach(child: interlinkViewController)
-        interlinkViewController.view.fadeIn()
     }
 
     /// Presents the Interlink Controller **if** it's not already onscreen
@@ -649,10 +669,18 @@ private extension SPNoteEditorViewController {
         presentInterlinkController()
     }
 
+    /// Presents the Interlink View
+    ///
+    func presentInterlinkController() {
+        let interlinkViewController = reusableInterlinkViewController()
+        attach(child: interlinkViewController)
+        interlinkViewController.view.fadeIn()
+    }
+
     /// Adjusts the Interlink Controller's Position, as specified
     ///
     func positionInterlinkController(around range: Range<String.Index>) {
-        interlinkViewController.positionView(around: range, in: noteEditorTextView)
+        interlinkViewController.anchorView(around: range, in: noteEditorTextView)
     }
 
     /// DIsmisses the Interlink Window (if any!)

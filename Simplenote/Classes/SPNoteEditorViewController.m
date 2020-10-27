@@ -290,6 +290,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
+    [self reprocessInterlinkLookupWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -677,6 +678,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 
 #pragma mark UIScrollViewDelegate methods
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self dismissInterlinkLookupIfNeeded];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self processInterlinkLookup];
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
