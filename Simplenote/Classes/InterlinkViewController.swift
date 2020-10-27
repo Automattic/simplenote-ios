@@ -9,8 +9,6 @@ class InterlinkViewController: UIViewController {
     /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
     ///
     var onInsertInterlink: ((String) -> Void)?
-
-
 }
 
 
@@ -18,9 +16,8 @@ class InterlinkViewController: UIViewController {
 //
 extension InterlinkViewController {
 
-    ///
-    ///
     func positionView(around range: Range<String.Index>, in textView: UITextView) {
+// TODO: Properly Implement Me!
         let locationInView = textView.locationInSuperviewForText(in: range)
         view.frame.origin = locationInView.origin
     }
