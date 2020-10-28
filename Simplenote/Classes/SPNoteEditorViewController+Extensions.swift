@@ -639,7 +639,7 @@ private extension SPNoteEditorViewController {
     /// Indicates if we should process Interlink Lookup
     ///
     var mustProcessInterlinkLookup: Bool {
-        isUndoingEditOP == false && isSelectingText == false
+        isUndoingEditOP == false && isSelectingText == false && isEditingNote
     }
 
     /// Indicates if we should dismiss the Interlink Window
@@ -649,7 +649,7 @@ private extension SPNoteEditorViewController {
             return false
         }
 
-        return isSelectingText || isDragging || !isEditingInterlink
+        return isSelectingText || isDragging || !isEditingInterlink || !isEditingNote
     }
 
     /// Indicates if the Interlink Window is visible
