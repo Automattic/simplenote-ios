@@ -40,12 +40,14 @@ extension UITextView {
 //
 extension UITextView {
 
-    /// Inserts the specified Text at a given range
+    /// Inserts the specified Text at a given range.
+    /// - Note: Resulting selected range will end up at the right hand side of the newly inserted text.
     ///
     func insertText(text: String, in range: Range<String.Index>) {
         registerUndoCheckpointAndPerform { storage in
             let range = self.text.utf16NSRange(from: range)
             storage.replaceCharacters(in: range, with: text)
+            self.selectedRange = NSRange(location: range.location + text.count, length: .zero)
         }
     }
 }
