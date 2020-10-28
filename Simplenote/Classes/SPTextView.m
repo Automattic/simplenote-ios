@@ -51,11 +51,6 @@
 
 #pragma mark - Words
 
-- (void)highlightSubstringsMatching:(NSString *)keywords color:(UIColor *)color {
-
-    [self.textStorage applyColor:color toSubstringMatchingKeywords:keywords];
-}
-
 - (void)highlightRange:(NSRange)range animated:(BOOL)animated withBlock:(void (^)(CGRect))block {
     
     [self clearHighlights:animated];
@@ -127,14 +122,16 @@
     UILabel *highlightLabel = [[UILabel alloc] initWithFrame:frame];
     
     NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:attributedString];
-    [mutableAttributedString addAttribute:NSForegroundColorAttributeName
-                                    value:[UIColor simplenoteSearchHighlightTextColor]
-                                    range:NSMakeRange(0, mutableAttributedString.length)];
+    [mutableAttributedString addAttributes:@{
+        NSForegroundColorAttributeName: [UIColor simplenoteEditorSearchHighlightTextColor],
+        NSBackgroundColorAttributeName: [UIColor simplenoteEditorSearchHighlightSelectedColor]
+    }
+                                     range:NSMakeRange(0, mutableAttributedString.length)];
 
     highlightLabel.attributedText = mutableAttributedString;
     
     highlightLabel.textAlignment = NSTextAlignmentCenter;
-    highlightLabel.backgroundColor = self.window.tintColor;
+    highlightLabel.backgroundColor = [UIColor simplenoteEditorSearchHighlightSelectedColor];
     highlightLabel.layer.cornerRadius = [theme floatForKey:@"searhHighlightCornerRadius"];
     highlightLabel.clipsToBounds = YES;
     highlightLabel.layer.shouldRasterize = YES;
