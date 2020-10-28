@@ -55,8 +55,10 @@
 
     return [self wordRangesFilteredWithBlock:^BOOL(NSString *word) {
         for (NSString *term in termsArray) {
-            return ([word rangeOfString:term
-                                options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch].location != NSNotFound);
+            if ([word rangeOfString:term
+                            options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch].location != NSNotFound) {
+                return YES;
+            }
         }
         return NO;
     }];
