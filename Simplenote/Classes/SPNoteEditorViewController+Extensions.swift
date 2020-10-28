@@ -650,7 +650,6 @@ private extension SPNoteEditorViewController {
         }
 
         return isSelectingText || isDragging || !isEditingInterlink
-
     }
 
     /// Indicates if the Interlink Window is visible
