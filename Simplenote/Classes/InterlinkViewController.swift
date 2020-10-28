@@ -82,8 +82,7 @@ private extension InterlinkViewController {
 
     func setupRootView() {
         view.translatesAutoresizingMaskIntoConstraints = false
-// TODO: Placeholder: Wire a proper bgColor
-        view.backgroundColor = .red
+        view.backgroundColor = .simplenoteBackgroundColor
     }
 
     func setupConstrints(superview: UIView) {
@@ -237,8 +236,16 @@ extension InterlinkViewController: UITableViewDelegate {
     func anchorView(around keywordRange: Range<String.Index>, in textView: UITextView) {
         refreshConstraints(keywordRange: keywordRange, in: textView)
 
-        kvoOffsetToken = textView.observe(\UITextView.contentOffset) { [weak self] (textView, _) in
-            self?.anchorView(around: keywordRange, in: textView)
+        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
+            guard let topConstraint = self?.topConstraint,
+                  let oldOffsetY = value.oldValue?.y,
+                  let newOffsetY = value.newValue?.y,
+                  oldOffsetY != newOffsetY
+            else {
+                return
+            }
+
+            topConstraint.constant += oldOffsetY - newOffsetY
         }
     }
 }
@@ -252,7 +259,7 @@ private extension InterlinkViewController {
     ///
     func refreshConstraints(keywordRange: Range<String.Index>, in textView: UITextView) {
         let targetHeight = calculateHeight()
-        let targetLocation = calculateLocation(keywordRange: keywordRange, textView: textView)
+        let targetLocation = calculateLocation(for: targetHeight, around: keywordRange, in: textView)
 
         topConstraint?.constant = targetLocation
         heightConstraint?.constant = targetHeight
@@ -260,8 +267,12 @@ private extension InterlinkViewController {
 
     /// Returns the target Origin.Y
     ///
-    func calculateLocation(keywordRange: Range<String.Index>, textView: UITextView) -> CGFloat {
-        textView.locationInSuperviewForText(in: keywordRange).maxY
+    func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
+        let containerFrame = textView.editingRect()
+        let anchor = textView.locationInSuperviewForText(in: range)
+        let locationOnTop = anchor.minY - height
+
+        return locationOnTop > containerFrame.minY ? locationOnTop : anchor.maxY
     }
 
     /// Returns the target Height
@@ -276,7 +287,7 @@ private extension InterlinkViewController {
 // MARK: - Metrics
 //
 private enum Metrics {
-    static let defaultHeight = CGFloat(80)
+    static let defaultHeight = CGFloat(154)
 }
 
 
