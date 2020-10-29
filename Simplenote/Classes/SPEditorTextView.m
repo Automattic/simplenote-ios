@@ -71,6 +71,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
         SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
         recognizerDelegate.parentTextView = self;
+        recognizerDelegate.excludedView = self.tagView;
         self.internalRecognizerDelegate = recognizerDelegate;
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
