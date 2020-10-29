@@ -308,6 +308,7 @@
 		B5CFFFE922AA9DD700B968CD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE822AA9DD700B968CD /* Note.swift */; };
 		B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */; };
 		B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */; };
+		B5D6AFCA254B183B003E181E /* InterlinkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6AFC9254B183B003E181E /* InterlinkController.swift */; };
 		B5D982D022F8643300C37C29 /* SPTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982CF22F8643200C37C29 /* SPTextInputView.swift */; };
 		B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D982D122F8644000C37C29 /* SPSquaredButton.swift */; };
 		B5DC146F25125FE400817536 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5CFFFE322AA9B1900B968CD /* CoreServices.framework */; };
@@ -716,6 +717,7 @@
 		B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Simplenote.entitlements; sourceTree = "<group>"; };
 		B5D3FCCE201F96AC00A813B7 /* StatusChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusChecker.m; path = Classes/StatusChecker.m; sourceTree = "<group>"; };
 		B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusChecker.h; path = Classes/StatusChecker.h; sourceTree = "<group>"; };
+		B5D6AFC9254B183B003E181E /* InterlinkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterlinkController.swift; path = Classes/InterlinkController.swift; sourceTree = "<group>"; };
 		B5D982CF22F8643200C37C29 /* SPTextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPTextInputView.swift; path = Classes/SPTextInputView.swift; sourceTree = "<group>"; };
 		B5D982D122F8644000C37C29 /* SPSquaredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSquaredButton.swift; path = Classes/SPSquaredButton.swift; sourceTree = "<group>"; };
 		B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPDefaultTableViewCell.swift; path = Classes/SPDefaultTableViewCell.swift; sourceTree = "<group>"; };
@@ -1378,6 +1380,7 @@
 			children = (
 				B58670992543683800449722 /* InterlinkViewController.swift */,
 				B56B4C0C25489A6D0083675D /* InterlinkViewController.xib */,
+				B5D6AFC9254B183B003E181E /* InterlinkController.swift */,
 			);
 			name = Interlinks;
 			sourceTree = "<group>";
@@ -2396,6 +2399,7 @@
 				A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */,
 				46A3C99917DFA81A002865AE /* SPTransitionController.m in Sources */,
 				46A3C99A17DFA81A002865AE /* DTTwoPageViewController.m in Sources */,
+				B5D6AFCA254B183B003E181E /* InterlinkController.swift in Sources */,
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
 				B56A696122F9D53400B90398 /* SPAuthError.swift in Sources */,
