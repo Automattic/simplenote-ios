@@ -1,7 +1,7 @@
 import Foundation
 
 
-// MARK: - NSRegularExpression
+// MARK: - NSRegularExpression (Checklists)
 //
 extension NSRegularExpression {
 
@@ -31,4 +31,30 @@ extension NSRegularExpression {
     ///
     @objc
     static let regexForChecklistsMarkerRangeIndex = 1
+}
+
+// MARK: - NSRegularExpression (Search excerpts)
+//
+extension NSRegularExpression {
+
+    /// Matches one of the keywords and a short text surrounding it
+    ///
+    /// - Parameters:
+    ///     - keywords: a non-empty list of keywords
+    ///
+    static func regexForExcerpt(withKeywords keywords: [String]) -> NSRegularExpression {
+        guard !keywords.isEmpty else {
+            return try! NSRegularExpression(pattern: "^.*{\(Constants.excerptLeadingLength + Constants.excerptTrailingLength)}", options: [])
+        }
+
+        let escapedKeywords = keywords.map(NSRegularExpression.escapedPattern).joined(separator: "|")
+        let pattern = "(?:\\b\\w[\\w\\W]{0,\(Constants.excerptLeadingLength)})?\\b(?:\\w*(?:\(escapedKeywords))\\w*)\\b(?:[\\w\\W]{0,\(Constants.excerptTrailingLength)}\\w\\b)?"
+
+        return try! NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .useUnicodeWordBoundaries])
+    }
+}
+
+private struct Constants {
+    static let excerptLeadingLength = 30
+    static let excerptTrailingLength = 300
 }

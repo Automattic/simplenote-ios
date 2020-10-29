@@ -201,12 +201,13 @@ extension NotesListController {
     ///
     @objc
     func refreshSearchResults(keyword: String) {
-        guard !keyword.isEmpty else {
+        let query = SearchQuery(query: keyword)
+        guard !query.isEmpty else {
             state = .results
             return
         }
-
-        state = .searching(keyword: keyword)
+        let excerptMaker = ExcerptMaker(keywords: query.keywords)
+        state = .searching(query: query, excerptMaker: excerptMaker)
     }
 
     /// Sets the receiver in "Results Mode"
@@ -302,7 +303,7 @@ private extension NotesListController {
     ///
     var sortModeForActiveState: SortMode {
         switch state {
-        case .searching(_):
+        case .searching:
             return searchSortMode
         case .results:
             return sortMode

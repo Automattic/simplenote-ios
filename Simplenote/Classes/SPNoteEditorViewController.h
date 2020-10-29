@@ -5,6 +5,7 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
+@class SearchQuery;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -20,7 +21,7 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
-@property (nonatomic, strong) NSString *searchString;
+@property (nonatomic, strong) SearchQuery *searchQuery;
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
@@ -46,7 +47,6 @@
 - (void)newButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
-- (void)setSearchString:(NSString *)string;
 - (void)clearNote;
 - (void)endEditing;
 - (void)bounceMarkdownPreview;

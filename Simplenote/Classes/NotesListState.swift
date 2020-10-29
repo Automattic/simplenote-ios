@@ -5,7 +5,18 @@ import Foundation
 //
 enum NotesListState: Equatable {
     case results
-    case searching(keyword: String)
+    case searching(query: SearchQuery, excerptMaker: ExcerptMaker)
+
+    static func == (lhs: NotesListState, rhs: NotesListState) -> Bool {
+        switch (lhs, rhs) {
+        case (.results, .results):
+            return true
+        case (.searching(let lhsQuery, _), .searching(let rhsQuery, _)):
+            return lhsQuery == rhsQuery
+        default:
+            return false
+        }
+    }
 }
 
 
@@ -95,10 +106,10 @@ extension NotesListState {
             default:
                 break
             }
-        case .searching(let keyword):
+        case .searching(let query, _):
             subpredicates += [
                 NSPredicate.predicateForNotes(deleted: false),
-                NSPredicate.predicateForNotes(searchText: keyword)
+                NSPredicate.predicateForNotes(searchText: query.query)
             ]
         }
 
@@ -108,11 +119,11 @@ extension NotesListState {
     /// Returns a NSPredicate to filter out Tags in the current state
     ///
     func predicateForTags() -> NSPredicate? {
-        guard case let .searching(keyword) = self else {
+        guard case let .searching(query, _) = self else {
             return nil
         }
 
-        return NSPredicate.predicateForTag(keyword: keyword)
+        return NSPredicate.predicateForTag(keyword: query.query)
     }
 
     /// Returns a collection of NSSortDescriptors that, once applied to a Notes collection, the specified SortMode will be reflected

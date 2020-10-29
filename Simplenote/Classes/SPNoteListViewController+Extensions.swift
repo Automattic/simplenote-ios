@@ -334,12 +334,20 @@ extension SPNoteListViewController {
     /// Returns the SearchText
     ///
     @objc
-    var searchText: String? {
-        guard case let .searching(keyword) = notesListController.state else {
+    var searchQuery: SearchQuery? {
+        guard case let .searching(query, _) = notesListController.state else {
             return nil
         }
 
-        return keyword
+        return query
+    }
+
+    var excerptMaker: ExcerptMaker? {
+        guard case let .searching(_, excerptMaker) = notesListController.state else {
+            return nil
+        }
+
+        return excerptMaker
     }
 }
 
@@ -554,9 +562,13 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        cell.bodyText = note.bodyPreview
+        if let excerptMaker = excerptMaker {
+            cell.bodyText = excerptMaker.excerpt(from: note.content).filter({ !$0.isNewline })
+        } else {
+            cell.bodyText = note.bodyPreview
+        }
 
-        cell.keywords = searchText
+        cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor
 
         cell.prefixText = prefixText(for: note)
@@ -732,7 +744,7 @@ private extension SPNoteListViewController {
         let editorViewController = EditorFactory.shared.build()
         editorViewController.display(note)
         editorViewController.isPreviewing = true
-        editorViewController.searchString = searchText
+        editorViewController.searchQuery = searchQuery
 
         return editorViewController
     }

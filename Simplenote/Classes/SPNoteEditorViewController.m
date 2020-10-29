@@ -245,7 +245,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!self.searching || _searchString.length == 0 || self.searchResultRanges) {
+    if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges) {
         return;
     }
     
@@ -253,7 +253,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        self.searchResultRanges = [searchText rangesForTerms:self.searchString];
+        self.searchResultRanges = [searchText rangesForTerms:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -606,14 +606,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 #pragma mark search
 
-- (void)setSearchString:(NSString *)string {
-    
-    if (string.length > 0) {
-        self.searching = YES;
-        _searchString = string;
-        self.searchResultRanges = nil;
-        [self.navigationController setToolbarHidden:NO animated:YES];
+- (void)setSearchQuery:(SearchQuery *)searchQuery
+{
+    if (!searchQuery || searchQuery.isEmpty) {
+        return;
     }
+
+    self.searching = YES;
+    _searchQuery = searchQuery;
+    self.searchResultRanges = nil;
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 - (void)highlightNextSearchResult:(id)sender {
@@ -656,7 +658,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
     [_noteEditorTextView processChecklists];
     
-    _searchString = nil;
+    _searchQuery = nil;
     self.searchResultRanges = nil;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];

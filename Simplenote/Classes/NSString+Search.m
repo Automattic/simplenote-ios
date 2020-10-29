@@ -49,12 +49,10 @@
     return wordBoxes;
 }
 
-- (NSArray<NSValue *> *)rangesForTerms:(NSString *)terms
+- (NSArray<NSValue *> *)rangesForTerms:(NSArray<NSString *> *)terms
 {
-	NSArray *termsArray = [terms componentsSeparatedByString:@" "];
-
     return [self wordRangesFilteredWithBlock:^BOOL(NSString *word) {
-        for (NSString *term in termsArray) {
+        for (NSString *term in terms) {
             if ([word rangeOfString:term
                             options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch].location != NSNotFound) {
                 return YES;
