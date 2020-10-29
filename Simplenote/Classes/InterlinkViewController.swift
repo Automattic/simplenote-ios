@@ -106,18 +106,7 @@ extension InterlinkViewController {
     func anchorView(around keywordRange: Range<String.Index>, in textView: UITextView) {
         refreshConstraints(keywordRange: keywordRange, in: textView)
         refreshInnerPadding(for: textView)
-
-        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
-            guard let topConstraint = self?.topConstraint,
-                  let oldOffsetY = value.oldValue?.y,
-                  let newOffsetY = value.newValue?.y,
-                  oldOffsetY != newOffsetY
-            else {
-                return
-            }
-
-            topConstraint.constant += oldOffsetY - newOffsetY
-        }
+        startObservingContentOffset(in: textView)
     }
 
     /// Refreshes the Autocomplete Results. Returns `true` when there are visible rows.
@@ -212,6 +201,20 @@ private extension InterlinkViewController {
         tableTrailingConstraint.constant = padding
     }
 
+    func startObservingContentOffset(in textView: UITextView) {
+        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
+            guard let topConstraint = self?.topConstraint,
+                  let oldOffsetY = value.oldValue?.y,
+                  let newOffsetY = value.newValue?.y,
+                  oldOffsetY != newOffsetY
+            else {
+                return
+            }
+
+            topConstraint.constant += oldOffsetY - newOffsetY
+        }
+    }
+    
     /// Returns the target Origin.Y
     ///
     func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {

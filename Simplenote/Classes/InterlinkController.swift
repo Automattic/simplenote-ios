@@ -21,9 +21,11 @@ class InterlinkController {
     /// -   The above is awfully underperformant.
     /// -   Most efficient approach code wise / speed involves simply keeping a FRC instance, and filtering it as needed
     ///
-    private var filteredNotes = [Note]()
+    private var notes = [Note]()
 
 
+    /// Designated Initializer
+    ///
     init(viewContext: NSManagedObjectContext = SPAppDelegate.shared().managedObjectContext) {
         self.viewContext = viewContext
         setupResultsController()
@@ -31,27 +33,27 @@ class InterlinkController {
 }
 
 
-
 // MARK: - Public API
 //
 extension InterlinkController {
 
-    /// Refreshes the Autocomplete Results. Returns `true` when there are visible rows.
-    /// - Important:
-    ///     By design, whenever there are no results we won't be refreshing the TableView. Instead, we'll stick to the "old results".
-    ///     This way we get to avoid the awkward visual effect of "empty autocomplete view"
+    /// Refreshes the Autocomplete Results. Returns `true` when there are matches.
     ///
     func refreshInterlinks(for keyword: String, excluding excludedID: NSManagedObjectID?) -> Bool {
-        filteredNotes = filterNotes(resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
-        return filteredNotes.count > .zero
+        notes = filter(notes: resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
+        return notes.count > .zero
     }
 
+    /// Returns the number of notes
+    ///
     var numberOfNotes: Int {
-        filteredNotes.count
+        notes.count
     }
 
+    /// Returns the Note at the specified Index
+    ///
     func note(at index: Int) -> Note {
-        filteredNotes[index]
+        notes[index]
     }
 }
 
@@ -74,9 +76,9 @@ private extension InterlinkController {
     ///     - RegExes aren't diacritic + case insensitve friendly
     ///     - It's easier and anyone can follow along!
     ///
-    func filterNotes(_ notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?, limit: Int = Settings.maximumNumberOfResults) -> [Note] {
-        var output = [Note]()
+    func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?, limit: Int = Settings.maximumNumberOfResults) -> [Note] {
         let normalizedKeyword = keyword.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
+        var output = [Note]()
 
         for note in notes where note.objectID != excludedID {
             note.ensurePreviewStringsAreAvailable()
