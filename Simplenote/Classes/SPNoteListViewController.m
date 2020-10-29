@@ -15,7 +15,6 @@
 
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
-#import "NSTextStorage+Highlight.h"
 #import "UIDevice+Extensions.h"
 #import "VSThemeManager.h"
 

@@ -165,11 +165,6 @@ extension UIColor {
     }
 
     @objc
-    static var simplenoteSearchHighlightTextColor: UIColor {
-        UIColor(studioColor: .white)
-    }
-
-    @objc
     static var simplenoteSwitchTintColor: UIColor {
         UIColor(lightColor: .gray5, darkColor: .darkGray3)
     }
@@ -350,5 +345,24 @@ extension UIColor {
     @objc
     static var simplenoteDimmingColor: UIColor {
         UIColor.black.withAlphaComponent(UIKitConstants.alpha0_1)
+    }
+
+    @objc
+    static var simplenoteEditorSearchHighlightTextColor: UIColor {
+        UIColor(studioColor: .white)
+    }
+
+    @objc
+    static var simplenoteEditorSearchHighlightColor: UIColor {
+        UIColor(lightColor: .spBlue5,
+                darkColor: .spBlue50,
+                lightColorAlpha: UIKitConstants.alpha1_0,
+                darkColorAlpha: UIKitConstants.alpha0_5)
+    }
+
+    @objc
+    static var simplenoteEditorSearchHighlightSelectedColor: UIColor {
+        UIColor(lightColor: .spBlue50,
+                darkColor: .spBlue50)
     }
 }
