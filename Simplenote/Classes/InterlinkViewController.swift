@@ -25,7 +25,7 @@ class InterlinkViewController: UIViewController {
     ///
     private var kvoOffsetToken: NSKeyValueObservation?
 
-    ///
+    /// Controller
     ///
     private let controller = InterlinkController()
 
@@ -51,47 +51,6 @@ class InterlinkViewController: UIViewController {
         }
 
         setupConstraints(superview: superview)
-    }
-}
-
-
-// MARK: - Initialization
-//
-private extension InterlinkViewController {
-
-    func setupRootView() {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-    }
-
-    func setupConstraints(superview: UIView) {
-        let topConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor)
-        let heightConstraint = view.heightAnchor.constraint(equalToConstant: Metrics.defaultHeight)
-
-        NSLayoutConstraint.activate([
-            view.leftAnchor.constraint(equalTo: superview.leftAnchor),
-            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-            topConstraint,
-            heightConstraint
-        ])
-
-        self.topConstraint = topConstraint
-        self.heightConstraint = heightConstraint
-    }
-
-    func setupBackgroundView() {
-        backgroundView.layer.cornerRadius = Metrics.cornerRadius
-        backgroundView.backgroundColor = .simplenoteAutocompleteBackgroundColor
-    }
-
-    func setupTableView() {
-        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
-        tableView.layoutMargins = .zero
-        tableView.backgroundColor = .clear
-        tableView.separatorColor = .simplenoteDividerColor
-
-        //  Fix: Hide the cellSeparators, when the table is empty
-        tableView.tableFooterView = UIView()
     }
 }
 
@@ -125,24 +84,41 @@ extension InterlinkViewController {
 }
 
 
-// MARK: - Private API(s)
+// MARK: - Initialization
 //
 private extension InterlinkViewController {
 
-    func performInterlinkInsert(for note: Note) {
-        guard let markdownInterlink = note.markdownInternalLink else {
-            return
-        }
-
-        onInsertInterlink?(markdownInterlink)
+    func setupRootView() {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
     }
 
-    func refreshTableViewIfNeeded() {
-        guard isViewLoaded else {
-            return
-        }
+    func setupBackgroundView() {
+        backgroundView.layer.cornerRadius = Metrics.cornerRadius
+        backgroundView.backgroundColor = .simplenoteAutocompleteBackgroundColor
+    }
 
-        tableView.reloadData()
+    func setupTableView() {
+        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+        tableView.layoutMargins = .zero
+        tableView.backgroundColor = .clear
+        tableView.separatorColor = .simplenoteDividerColor
+        tableView.tableFooterView = UIView()
+    }
+
+    func setupConstraints(superview: UIView) {
+        let topConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor)
+        let heightConstraint = view.heightAnchor.constraint(equalToConstant: Metrics.defaultHeight)
+
+        NSLayoutConstraint.activate([
+            view.leftAnchor.constraint(equalTo: superview.leftAnchor),
+            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+            topConstraint,
+            heightConstraint
+        ])
+
+        self.topConstraint = topConstraint
+        self.heightConstraint = heightConstraint
     }
 }
 
@@ -197,10 +173,13 @@ private extension InterlinkViewController {
     ///
     func refreshInnerPadding(for textView: UITextView) {
         let padding = textView.textContainer.lineFragmentPadding
+
         tableLeadingConstraint.constant = padding
         tableTrailingConstraint.constant = padding
     }
 
+    /// Starts tracking ContentOffset changes in our sibling TextView
+    ///
     func startObservingContentOffset(in textView: UITextView) {
         kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
             guard let topConstraint = self?.topConstraint,
@@ -214,7 +193,7 @@ private extension InterlinkViewController {
             topConstraint.constant += oldOffsetY - newOffsetY
         }
     }
-    
+
     /// Returns the target Origin.Y
     ///
     func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
@@ -225,11 +204,33 @@ private extension InterlinkViewController {
         return locationOnTop > containerFrame.minY ? locationOnTop : anchor.maxY
     }
 
-    /// Returns the target Height
+    /// Returns the target Size.Height
     ///
     func calculateHeight() -> CGFloat {
 // TODO: Depends on the actual results onscreen
         Metrics.defaultHeight
+    }
+}
+
+
+// MARK: - Private API(s)
+//
+private extension InterlinkViewController {
+
+    func performInterlinkInsert(for note: Note) {
+        guard let markdownInterlink = note.markdownInternalLink else {
+            return
+        }
+
+        onInsertInterlink?(markdownInterlink)
+    }
+
+    func refreshTableViewIfNeeded() {
+        guard isViewLoaded else {
+            return
+        }
+
+        tableView.reloadData()
     }
 }
 
