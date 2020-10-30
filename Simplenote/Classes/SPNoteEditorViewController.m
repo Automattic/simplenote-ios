@@ -27,7 +27,7 @@
 #import "SPConstants.h"
 
 @import SafariServices;
-
+@import SimplenoteSearch;
 
 CGFloat const SPSelectedAreaPadding = 20;
 
@@ -64,6 +64,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 // Search
 @property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
+@property (nonatomic, strong) SearchQuery               *searchQuery;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -606,7 +607,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 #pragma mark search
 
-- (void)setSearchQuery:(SearchQuery *)searchQuery
+- (void)updateWithSearchQuery:(SearchQuery *)searchQuery
 {
     if (!searchQuery || searchQuery.isEmpty) {
         return;

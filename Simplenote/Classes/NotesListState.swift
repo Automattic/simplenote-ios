@@ -1,5 +1,5 @@
 import Foundation
-
+import SimplenoteSearch
 
 // MARK: - NotesListState
 //
@@ -109,7 +109,7 @@ extension NotesListState {
         case .searching(let query, _):
             subpredicates += [
                 NSPredicate.predicateForNotes(deleted: false),
-                NSPredicate.predicateForNotes(searchText: query.query)
+                NSPredicate.predicateForNotes(query: query)
             ]
         }
 
@@ -123,7 +123,7 @@ extension NotesListState {
             return nil
         }
 
-        return NSPredicate.predicateForTag(keyword: query.query)
+        return NSPredicate.predicateForTag(query: query)
     }
 
     /// Returns a collection of NSSortDescriptors that, once applied to a Notes collection, the specified SortMode will be reflected

@@ -441,7 +441,7 @@
     [editor displayNote:note];
 
     if (self.isSearchActive) {
-        [editor setSearchQuery:self.searchQuery];
+        [editor updateWithSearchQuery:self.searchQuery];
     }
 
     // Failsafe:

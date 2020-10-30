@@ -5,7 +5,6 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
-@class SearchQuery;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -21,7 +20,6 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
-@property (nonatomic, strong) SearchQuery *searchQuery;
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
@@ -58,5 +56,8 @@
 - (void)didDeleteCurrentNote;
 
 - (void)save;
+
+// We can't use `SearchQuery` as a type here because it doesn't work from swift code :-(
+- (void)updateWithSearchQuery:(id)query;
 
 @end

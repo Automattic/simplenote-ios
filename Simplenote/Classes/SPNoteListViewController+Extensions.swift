@@ -744,7 +744,7 @@ private extension SPNoteListViewController {
         let editorViewController = EditorFactory.shared.build()
         editorViewController.display(note)
         editorViewController.isPreviewing = true
-        editorViewController.searchQuery = searchQuery
+        editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
     }
