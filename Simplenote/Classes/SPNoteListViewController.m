@@ -52,6 +52,7 @@
     
     self = [super init];
     if (self) {
+        [self configureExcerptMaker];
         [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
@@ -365,6 +366,7 @@
     /// Ref. https://github.com/Automattic/simplenote-ios/issues/777
     ///
     [self.notesListController endSearch];
+    [self updateExcerptMaker];
     [self update];
 
     [self dismissSortBar];
@@ -386,6 +388,7 @@
     [SPTracker trackListNotesSearched];
 
     [self.notesListController refreshSearchResultsWithKeyword:keyword];
+    [self updateExcerptMaker];
 
     [self.tableView scrollToTopWithAnimation:NO];
     [self.tableView reloadData];

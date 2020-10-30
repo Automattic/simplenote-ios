@@ -26,6 +26,12 @@ extension SPNoteListViewController {
 //
 extension SPNoteListViewController {
 
+    /// Sets up the Excerpt Maker
+    @objc
+    func configureExcerptMaker() {
+        excerptMaker = ExcerptMaker()
+    }
+
     /// Sets up the Feedback Generator!
     ///
     @objc
@@ -335,19 +341,16 @@ extension SPNoteListViewController {
     ///
     @objc
     var searchQuery: SearchQuery? {
-        guard case let .searching(query, _) = notesListController.state else {
+        guard case let .searching(query) = notesListController.state else {
             return nil
         }
 
         return query
     }
 
-    var excerptMaker: ExcerptMaker? {
-        guard case let .searching(_, excerptMaker) = notesListController.state else {
-            return nil
-        }
-
-        return excerptMaker
+    @objc
+    func updateExcerptMaker() {
+        excerptMaker.update(withKeywords: searchQuery?.keywords)
     }
 }
 
@@ -562,11 +565,7 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        if let excerptMaker = excerptMaker {
-            cell.bodyText = excerptMaker.excerpt(from: note.content).filter({ !$0.isNewline })
-        } else {
-            cell.bodyText = note.bodyPreview
-        }
+        cell.bodyText = excerptMaker.excerpt(from: note)
 
         cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor

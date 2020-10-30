@@ -5,18 +5,7 @@ import SimplenoteSearch
 //
 enum NotesListState: Equatable {
     case results
-    case searching(query: SearchQuery, excerptMaker: ExcerptMaker)
-
-    static func == (lhs: NotesListState, rhs: NotesListState) -> Bool {
-        switch (lhs, rhs) {
-        case (.results, .results):
-            return true
-        case (.searching(let lhsQuery, _), .searching(let rhsQuery, _)):
-            return lhsQuery == rhsQuery
-        default:
-            return false
-        }
-    }
+    case searching(query: SearchQuery)
 }
 
 
@@ -106,7 +95,7 @@ extension NotesListState {
             default:
                 break
             }
-        case .searching(let query, _):
+        case .searching(let query):
             subpredicates += [
                 NSPredicate.predicateForNotes(deleted: false),
                 NSPredicate.predicateForNotes(query: query)
@@ -119,7 +108,7 @@ extension NotesListState {
     /// Returns a NSPredicate to filter out Tags in the current state
     ///
     func predicateForTags() -> NSPredicate? {
-        guard case let .searching(query, _) = self else {
+        guard case let .searching(query) = self else {
             return nil
         }
 

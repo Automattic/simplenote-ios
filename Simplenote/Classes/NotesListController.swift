@@ -207,8 +207,7 @@ extension NotesListController {
             state = .results
             return
         }
-        let excerptMaker = ExcerptMaker(keywords: query.keywords)
-        state = .searching(query: query, excerptMaker: excerptMaker)
+        state = .searching(query: query)
     }
 
     /// Sets the receiver in "Results Mode"
