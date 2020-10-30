@@ -25,9 +25,9 @@ class InterlinkViewController: UIViewController {
     ///
     private var kvoOffsetToken: NSKeyValueObservation?
 
-    /// Controller
+    /// ResultsController
     ///
-    private let controller = InterlinkController()
+    private let controller = InterlinkResultsController()
 
     /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
     ///

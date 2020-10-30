@@ -2,9 +2,9 @@ import Foundation
 import SimplenoteFoundation
 
 
-// MARK: - InterlinkController
+// MARK: - InterlinkResultsController
 //
-class InterlinkController {
+class InterlinkResultsController {
 
     /// View Context
     ///
@@ -35,7 +35,7 @@ class InterlinkController {
 
 // MARK: - Public API
 //
-extension InterlinkController {
+extension InterlinkResultsController {
 
     /// Refreshes the Autocomplete Results. Returns `true` when there are matches.
     ///
@@ -60,7 +60,7 @@ extension InterlinkController {
 
 // MARK: - Private
 //
-private extension InterlinkController {
+private extension InterlinkResultsController {
 
     /// Initializes the Results Controller
     ///
