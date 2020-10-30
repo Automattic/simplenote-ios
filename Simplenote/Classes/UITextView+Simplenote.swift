@@ -3,7 +3,7 @@ import UIKit
 import SimplenoteInterlinks
 
 
-// MARK: - UITextView's Simplenote Methods
+// MARK: - UITextView State
 //
 extension UITextView {
 
@@ -14,27 +14,19 @@ extension UITextView {
         return selectedRange.length > 0
     }
 
-    /// Returns the Selected Text's bounds
+    /// Indicates if there's an ongoing Undo Operation in the Text Editor
     ///
-    @objc
-    var selectedBounds: CGRect {
-        guard selectedRange.length > 0 else {
-            return .zero
-        }
-
-        return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
+    var isUndoingEditOP: Bool {
+        undoManager?.isUndoing == true
     }
 
-    /// Returns the NSTextAttachment of the specified kind, ad a given Index. If possible
+    /// Indicates if the user is Editing an Interlink
     ///
-    func attachment<T: NSTextAttachment>(ofType: T.Type, at index: Int) -> T? {
-        guard index < textStorage.length else {
-            return nil
-        }
-
-        return attributedText.attribute(.attachment, at: index, effectiveRange: nil) as? T
+    var isEditingInterlink: Bool {
+        interlinkKeywordAtSelectedLocation != nil
     }
 }
+
 
 // MARK: - Updating!
 //
@@ -53,7 +45,7 @@ extension UITextView {
 }
 
 
-// MARK: - Private!
+// MARK: - Undo Stack
 //
 private extension UITextView {
 
@@ -124,22 +116,25 @@ extension UITextView {
 }
 
 
-// MARK: - Geometry
+// MARK: - Attachments
 //
 extension UITextView {
 
-    /// Returns the "Editing Rect": We rely on this calculation to determine the "available area" in which Interlinks Autocomplete
-    /// can be presented.
+    /// Returns the NSTextAttachment of the specified kind, ad a given Index. If possible
     ///
-    /// - Note: `contentInset.bottom` is expected to contain the bottom padding required by the keyboard. Capisce?
-    ///
-    func editingRect() -> CGRect {
-        let paddingTop = safeAreaInsets.top
-        let paddingBottom = safeAreaInsets.bottom + contentInset.bottom
-        let editingHeight = frame.height - paddingTop - paddingBottom
+    func attachment<T: NSTextAttachment>(ofType: T.Type, at index: Int) -> T? {
+        guard index < textStorage.length else {
+            return nil
+        }
 
-        return CGRect(x: .zero, y: paddingTop, width: frame.width, height: editingHeight)
+        return attributedText.attribute(.attachment, at: index, effectiveRange: nil) as? T
     }
+}
+
+
+// MARK: - Geometry
+//
+extension UITextView {
 
     /// Returns the Bounding Rect for the specified `Range<String.Index>`
     ///
@@ -157,10 +152,34 @@ extension UITextView {
         return rect.offsetBy(dx: textContainerInset.left, dy: textContainerInset.top)
     }
 
+    /// Returns the "Editing Rect": We rely on this calculation to determine the "available area" in which Interlinks Autocomplete
+    /// can be presented.
+    ///
+    /// - Note: `contentInset.bottom` is expected to contain the bottom padding required by the keyboard. Capisce?
+    ///
+    func editingRect() -> CGRect {
+        let paddingTop = safeAreaInsets.top
+        let paddingBottom = safeAreaInsets.bottom + contentInset.bottom
+        let editingHeight = frame.height - paddingTop - paddingBottom
+
+        return CGRect(x: .zero, y: paddingTop, width: frame.width, height: editingHeight)
+    }
+
     /// Returns the Window Location for the text at the specified range
     ///
     func locationInSuperviewForText(in range: Range<String.Index>) -> CGRect {
         let rectInEditor = boundingRect(for: range)
         return superview?.convert(rectInEditor, from: self) ?? rectInEditor
+    }
+
+    /// Returns the Selected Text's bounds
+    ///
+    @objc
+    var selectedBounds: CGRect {
+        guard selectedRange.length > 0 else {
+            return .zero
+        }
+
+        return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
     }
 }

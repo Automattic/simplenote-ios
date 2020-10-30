@@ -95,36 +95,6 @@ extension SPNoteEditorViewController {
 }
 
 
-// MARK: - Internal State
-//
-extension SPNoteEditorViewController {
-
-    /// Indicates if there's an ongoing Undo Operation in the Text Editor
-    ///
-    var isUndoingEditOP: Bool {
-        noteEditorTextView.undoManager?.isUndoing == true
-    }
-
-    /// Indicates if the Selected Range's Length is non zero: at least one character is highlighted
-    ///
-    var isSelectingText: Bool {
-        noteEditorTextView.selectedRange.length != .zero
-    }
-
-    /// Indicates if the TextView is being dragged
-    ///
-    var isDragging: Bool {
-        noteEditorTextView.isDragging
-    }
-
-    /// Indicates if the user is Editing an Interlink
-    ///
-    var isEditingInterlink: Bool {
-        noteEditorTextView.interlinkKeywordAtSelectedLocation != nil
-    }
-}
-
-
 // MARK: - Keyboard Handling
 //
 extension SPNoteEditorViewController: KeyboardObservable {
@@ -639,7 +609,9 @@ private extension SPNoteEditorViewController {
     /// Indicates if we should process Interlink Lookup
     ///
     var mustProcessInterlinkLookup: Bool {
-        isUndoingEditOP == false && isSelectingText == false && isEditingNote
+        noteEditorTextView.isUndoingEditOP == false &&
+            noteEditorTextView.isTextSelected == false &&
+            noteEditorTextView.isFirstResponder
     }
 
     /// Indicates if we should dismiss the Interlink Window
@@ -649,7 +621,10 @@ private extension SPNoteEditorViewController {
             return false
         }
 
-        return isSelectingText || isDragging || !isEditingInterlink || !isEditingNote
+        return noteEditorTextView.isTextSelected ||
+            noteEditorTextView.isDragging ||
+            !noteEditorTextView.isEditingInterlink ||
+            !noteEditorTextView.isFirstResponder
     }
 
     /// Indicates if the Interlink Window is visible
