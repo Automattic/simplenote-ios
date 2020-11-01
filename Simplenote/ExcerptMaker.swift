@@ -28,9 +28,7 @@ final class ExcerptMaker: NSObject {
             return note.bodyPreview
         }
 
-        let nsContent = content as NSString
-
-        let bodyRange = note.bodyRange
+        let bodyRange = NoteContentHelper(content: note.content).bodyRange
         guard bodyRange.location != NSNotFound else {
             return nil
         }
@@ -42,7 +40,8 @@ final class ExcerptMaker: NSObject {
             return note.bodyPreview
         }
 
-        var excerpt = (nsContent.substring(with: excerptRange) as NSString).replacingNewlinesWithSpaces()
+        var excerpt = content.nsString.substring(with: excerptRange)
+        excerpt = excerpt.nsString.replacingNewlinesWithSpaces()
         if excerptRange.location > bodyRange.location {
             excerpt = "…" + excerpt
         }

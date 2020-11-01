@@ -5,6 +5,7 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
+@class SearchQuery;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -57,7 +58,7 @@
 
 - (void)save;
 
-// We can't use `SearchQuery` as a type here because it doesn't work from swift code :-(
+// TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
 - (void)updateWithSearchQuery:(id)query;
 
 @end
