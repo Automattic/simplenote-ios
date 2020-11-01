@@ -1,11 +1,27 @@
 import Foundation
 
+// MARK: - NoteContentHelper
+//
 struct NoteContentHelper {
-    let content: String?
 
-    /// Range of title in content
+    private init() {
+
+    }
+
+    /// Returns structure of the content: range of title and body
     ///
-    var titleRange: NSRange {
+    /// - Parameters:
+    ///     - content: note content
+    ///
+    static func structure(of content: String?) -> (title: NSRange, body: NSRange) {
+        let titleRange = self.titleRange(in: content)
+        return (
+            title: titleRange,
+            body: bodyRange(in: content, titleRange: titleRange)
+        )
+    }
+
+    private static func titleRange(in content: String?) -> NSRange {
         guard let content = content else {
             return NSRange(location: NSNotFound, length: 0)
         }
@@ -29,14 +45,12 @@ struct NoteContentHelper {
             return newlineSearchRange
         }
 
-        return NSRange(location: firstCharacterRange.location,
-                       length: newlineRange.location - firstCharacterRange.location)
+        return rangeByTrimmingTrailingWhitespacesAndNewlines(in: content,
+                                                             firstCharacterLocation: firstCharacterRange.location,
+                                                             endRangeLocation: newlineRange.location)
     }
 
-    /// Range of body in content
-    ///
-    var bodyRange: NSRange {
-        let titleRange = self.titleRange
+    private static func bodyRange(in content: String?, titleRange: NSRange) -> NSRange {
         guard titleRange.location != NSNotFound, let content = content else {
             return titleRange
         }
@@ -53,7 +67,23 @@ struct NoteContentHelper {
             return firstCharacterRange
         }
 
-        return NSRange(location: firstCharacterRange.location,
-                       length: content.fullRange.length - firstCharacterRange.location)
+        return rangeByTrimmingTrailingWhitespacesAndNewlines(in: content,
+                                                             firstCharacterLocation: firstCharacterRange.location,
+                                                             endRangeLocation: content.fullRange.length)
+    }
+
+    private static func rangeByTrimmingTrailingWhitespacesAndNewlines(in content: String, firstCharacterLocation: Int, endRangeLocation: Int) -> NSRange {
+        // Look for the last character
+        let lastCharacterSearchRange = NSRange(location: firstCharacterLocation,
+                                               length: endRangeLocation - firstCharacterLocation)
+        let lastCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
+                                                                   options: [.backwards],
+                                                                   range: lastCharacterSearchRange)
+        guard lastCharacterRange.location != NSNotFound else {
+            return lastCharacterRange
+        }
+
+        return NSRange(location: firstCharacterLocation,
+                       length: (lastCharacterRange.location + 1) - firstCharacterLocation)
     }
 }

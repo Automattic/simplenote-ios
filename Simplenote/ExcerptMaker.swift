@@ -7,6 +7,8 @@ final class ExcerptMaker: NSObject {
     private var regexp: NSRegularExpression?
     private var keywords: [String]?
 
+    /// Update with search keywords
+    ///
     @objc
     func update(withKeywords keywords: [String]?) {
         guard keywords != self.keywords else {
@@ -23,12 +25,14 @@ final class ExcerptMaker: NSObject {
         regexp = NSRegularExpression.regexForExcerpt(withKeywords: keywords)
     }
 
+    /// Generate and return excerpt from the note. Excerpt is based on keywords
+    ///
     func excerpt(from note: Note) -> String? {
         guard let regexp = regexp, let content = note.content else {
             return note.bodyPreview
         }
 
-        let bodyRange = NoteContentHelper(content: note.content).bodyRange
+        let bodyRange = NoteContentHelper.structure(of: note.content).body
         guard bodyRange.location != NSNotFound else {
             return nil
         }
