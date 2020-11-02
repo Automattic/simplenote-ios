@@ -32,19 +32,26 @@ final class ExcerptMaker: NSObject {
             return note.bodyPreview
         }
 
-        let bodyRange = NoteContentHelper.structure(of: note.content).body
+        let foldedContent = content.folding(options: [.diacriticInsensitive], locale: .current)
+
+        let bodyRange = NoteContentHelper.structure(of: foldedContent).body
         guard bodyRange.location != NSNotFound else {
             return nil
         }
 
-        let excerptRange = regexp.rangeOfFirstMatch(in: content,
+        let excerptRange = regexp.rangeOfFirstMatch(in: foldedContent,
                                                     options: [],
                                                     range: bodyRange)
         guard excerptRange.location != NSNotFound else {
             return note.bodyPreview
         }
 
-        var excerpt = content.nsString.substring(with: excerptRange)
+        var excerpt: String = {
+            if foldedContent.nsString.length == content.nsString.length {
+                return content.nsString.substring(with: excerptRange)
+            }
+            return foldedContent.nsString.substring(with: excerptRange)
+        }()
         excerpt = excerpt.nsString.replacingNewlinesWithSpaces()
         if excerptRange.location > bodyRange.location {
             excerpt = "…" + excerpt
