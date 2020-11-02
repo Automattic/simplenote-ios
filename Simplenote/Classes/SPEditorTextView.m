@@ -10,8 +10,6 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
-#import "NSString+Attributed.h"
-#import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
