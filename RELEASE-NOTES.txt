@@ -1,3 +1,7 @@
+4.28
+-----
+-   Searching for a note is showing relevant excerpts #956
+
 4.27
 -----
 -   New Note History interface #762
