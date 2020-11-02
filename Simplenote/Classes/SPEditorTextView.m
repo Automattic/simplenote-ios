@@ -165,18 +165,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
-- (CGFloat)tagsViewPadding
-{
-    return 2 * CGRectGetHeight(self.tagView.bounds);
-}
-
-- (UIEdgeInsets)adjustedContentInset
-{
-    UIEdgeInsets contentInsets = super.adjustedContentInset;
-    contentInsets.bottom += self.tagsViewPadding;
-    return contentInsets;
-}
-
 - (void)setTagView:(SPTagView *)tagView
 {
     if (_tagView) {
