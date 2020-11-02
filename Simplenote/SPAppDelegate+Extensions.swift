@@ -119,3 +119,63 @@ extension SPAppDelegate: UIViewControllerRestoration {
         return appDelegate.viewController(restorationIdentifier: restorationIdentifier)
     }
 }
+
+
+// MARK: - Pin Lock
+//
+// TODO: Let's move these API(s) over to PinLockManager!
+//
+extension SPAppDelegate {
+
+    @objc
+    func getPin() -> String? {
+        KeychainManager.pinlock
+    }
+
+    @objc
+    func setPin(_ pin: String) {
+        KeychainManager.pinlock = pin
+    }
+
+    @objc
+    func removePin() {
+        KeychainManager.pinlock = nil
+        allowBiometryInsteadOfPin = false
+    }
+}
+
+
+// MARK: - SimperiumDelegate
+//
+extension SPAppDelegate: SimperiumDelegate {
+
+    public func simperiumDidLogin(_ simperium: Simperium!) {
+        // Store the Token: Required by the Share Extension!
+        if let token = simperium.user.authToken {
+            KeychainManager.extensionToken = token
+        }
+
+        // Tracker!
+        SPTracker.refreshMetadata(withEmail: simperium.user.email)
+
+        // Shortcuts!
+        ShortcutsHandler.shared.registerSimplenoteActivities()
+
+        // Now that the user info is present, cache it for use by the crash logging system.
+        let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
+        CrashLoggingShim.cacheUser(simperium.user)
+        CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
+    }
+
+    public func simperiumDidLogout(_ simperium: Simperium!) {
+        // Nuke Extension Token
+        KeychainManager.extensionToken = nil
+
+        // Tracker!
+        SPTracker.refreshMetadataForAnonymousUser()
+    }
+
+    public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
+        SPTracker.refreshMetadataForAnonymousUser()
+    }
+}

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-23 10:54:03+0000 */
+/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "调试";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "调试已禁用";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "诊断";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "禁用 Markdown 格式";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "输入您的密码";
 
+/* Error Title */
+"Error" = "错误";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "常见问题解答或与我们联系";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "面容 ID";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "忘记密码？";
 
+/* FAQ or contact us */
+"Get Help" = "获取帮助";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "太棒了！能否写下评论，告知我们您具体喜欢哪些方面？";
+
+/* Display help web page */
+"Help" = "帮助";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "与分析工具分享使用数据，帮助我们改善 Simplenote。";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "需要重置";
 
+/* Response Title */
+"Response" = "回应";
+
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "设置";
+
+/* Share Action */
+"Share" = "共享";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "共享分析数据";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "排序方式：";
+
+/* Title for the response's Status Code */
+"Status Code" = "状态码";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "系统默认";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "欢迎使用 iOS 版 Simplenote！\n\n要添加笔记，请轻点“加号”按钮。\n\n弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。\n\n您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。\n\n要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。\n\n您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。\n\n您可以通过 Mac、Android 设备或网络浏览器 (http:\/\/simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 调试已启用 🐞";
 

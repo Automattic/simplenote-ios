@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-22 14:54:04+0000 */
+/* Translation-Revision-Date: 2020-10-15 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -178,8 +178,14 @@
    Display internal debug status */
 "Debug" = "איתור באגים";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "האפשרות לאיתור באגים מושבתת";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "אבחונים";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "להשבית את העיצוב של Markdown";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
+/* Error Title */
+"Error" = "שגיאה";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "שאלות נפוצות או יצירת קשר";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "זיהוי פנים";
 
@@ -230,8 +242,14 @@
 /* Password Reset Action */
 "Forgotten password?" = "שכחת את הסיסמה?";
 
+/* FAQ or contact us */
+"Get Help" = "לקבלת עזרה";
+
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "נהדר! רוצה לשלוח לנו חוות דעת ולספר לנו מה אהבת?";
+
+/* Display help web page */
+"Help" = "עזרה";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "שיתוף נתוני השימוש שלך בכלי הניתוח שלנו יעזור לנו לשפר את Simplenote.";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "נדרש איפוס";
 
+/* Response Title */
+"Response" = "תשובה";
+
 /* Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "הגדרות";
+
+/* Share Action */
+"Share" = "שיתוף";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "שיתוף הניתוח";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "למיין לפי:";
+
+/* Title for the response's Status Code */
+"Status Code" = "קוד מצב";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "ברירת המחדל לפי המערכת";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞האפשרות לאיתור באגים מופעלת 🐞";
 

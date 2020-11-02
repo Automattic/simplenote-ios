@@ -33,9 +33,9 @@ class SPAuthHandler {
     func loginWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         simperiumService.authenticate(withUsername: username, password: password, success: {
             onCompletion(nil)
-        }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumLoginErrorCode: Int(responseCode))
-            onCompletion(wrappedError)
+        }, failure: { (statusCode, response, error) in
+            let error = SPAuthError(loginErrorCode: statusCode, response: response, error: error)
+            onCompletion(error)
         })
     }
 
@@ -52,9 +52,9 @@ class SPAuthHandler {
     func validateWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         simperiumService.validate(withUsername: username, password: password, success: {
             onCompletion(nil)
-        }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumLoginErrorCode: Int(responseCode))
-            onCompletion(wrappedError)
+        }, failure: { (statusCode, response, error) in
+            let error = SPAuthError(loginErrorCode: statusCode, response: response, error: error)
+            onCompletion(error)
         })
     }
 
@@ -71,9 +71,9 @@ class SPAuthHandler {
     func signupWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         simperiumService.signup(withUsername: username, password: password, success: {
             onCompletion(nil)
-        }, failure: { (responseCode, _, _) in
-            let wrappedError = SPAuthError(simperiumSignupErrorCode: Int(responseCode))
-            onCompletion(wrappedError)
+        }, failure: { (statusCode, response, error) in
+            let error = SPAuthError(signupErrorCode: statusCode, response: response, error: error)
+            onCompletion(error)
         })
     }
 

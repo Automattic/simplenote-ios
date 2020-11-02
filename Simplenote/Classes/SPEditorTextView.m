@@ -24,11 +24,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 @interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) SPEditorTapRecognizerDelegate *internalRecognizerDelegate;
 @property (strong, nonatomic) NSArray *textCommands;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
-@property (nonatomic) NSInteger lastCursorPosition;
 
 @end
 
@@ -67,14 +67,17 @@ NSInteger const ChecklistCursorAdjustment = 2;
                                                  selector:@selector(didEndEditing:)
                                                      name:UITextViewTextDidEndEditingNotification
                                                    object:nil];
-        
 
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                                        initWithTarget:self
-                                                        action:@selector(onTextTapped:)];
-        tapGestureRecognizer.delegate = self;
+
+        SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
+        recognizerDelegate.parentTextView = self;
+        self.internalRecognizerDelegate = recognizerDelegate;
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                               action:@selector(onTextTapped:)];
         tapGestureRecognizer.cancelsTouchesInView = NO;
-        
+        tapGestureRecognizer.delegate = recognizerDelegate;
+
         [self addGestureRecognizer:tapGestureRecognizer];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
@@ -122,7 +125,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
     [self positionTagView];
 }
-
 
 - (void)layoutSubviews
 {
@@ -245,26 +247,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setEditable:NO];
 }
 
-// Fixes are modified versions of https://gist.github.com/agiletortoise/a24ccbf2d33aafb2abc1
-
-#pragma mark fixes for UITextView bugs in iOS 7
-
-- (UITextPosition *)closestPositionToPoint:(CGPoint)point
-{
-    point.y -= self.textContainerInset.top;
-    point.x -= self.textContainerInset.left;
-    
-    NSUInteger glyphIndex = [self.layoutManager glyphIndexForPoint:point inTextContainer:self.textContainer];
-    NSUInteger characterIndex = [self.layoutManager characterIndexForGlyphAtIndex:glyphIndex];
-    
-    if (characterIndex >= self.text.length - 1 && ![self.text hasSuffix:@"\n"])
-        characterIndex ++;
-    
-    UITextPosition *pos = [self positionFromPosition:self.beginningOfDocument offset:characterIndex];
-    
-    return pos;
-}
-
 - (void)scrollRangeToVisible:(NSRange)range
 {
     [super scrollRangeToVisible:range];
@@ -276,41 +258,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 }
 
-- (NSUInteger)characterIndexForPoint:(CGPoint)point
-{
-    if (self.text.length == 0) {
-        return 0;
-    }
-    
-    CGRect r1;
-    if ([[self.text substringFromIndex:self.text.length-1] isEqualToString:@"\n"]) {
-        r1 = [super caretRectForPosition:[super positionFromPosition:self.endOfDocument offset:-1]];
-        CGRect sr = [super caretRectForPosition:[super positionFromPosition:self.beginningOfDocument offset:0]];
-        r1.origin.x = sr.origin.x;
-        r1.origin.y += self.font.lineHeight;
-    } else {
-        r1 = [super caretRectForPosition:[super positionFromPosition:self.endOfDocument offset:0]];
-    }
-    
-    if ((point.x > r1.origin.x && point.y >= r1.origin.y) || point.y >= r1.origin.y+r1.size.height) {
-        return [super offsetFromPosition:self.beginningOfDocument toPosition:self.endOfDocument];
-    }
-    
-    CGFloat fraction;
-    NSUInteger index = [self.textStorage.layoutManagers[0] characterIndexForPoint:point inTextContainer:self.textContainer fractionOfDistanceBetweenInsertionPoints:&fraction];
-    
-    return index;
-}
-
-- (CGRect)firstRectForRange:(UITextRange *)range
-{
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        CGRect r1= [self caretRectForPosition:[self positionWithinRange:range farthestInDirection:UITextLayoutDirectionRight]];
-        CGRect r2= [self caretRectForPosition:[self positionWithinRange:range farthestInDirection:UITextLayoutDirectionLeft]];
-        return CGRectUnion(r1,r2);
-    }
-    return [super firstRectForRange:range];
-}
 
 // From https://gist.github.com/rcabaco/6765778
 #pragma mark Keyboard Commands
@@ -543,25 +490,17 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (void)onTextTapped:(UITapGestureRecognizer *)recognizer
 {
-    CGPoint locationInView = [recognizer locationInView:self];
-
-    CGPoint locationInContainer = locationInView;
-    locationInContainer.x -= self.textContainerInset.left;
-    locationInContainer.y -= self.textContainerInset.top;
-
-    NSUInteger characterIndex = [self.layoutManager characterIndexForPoint:locationInContainer
-                                                           inTextContainer:self.textContainer
-                                  fractionOfDistanceBetweenInsertionPoints:NULL];
+    NSUInteger characterIndex = [recognizer characterIndexInTextView:self];
 
     if (characterIndex < self.textStorage.length) {
         if ([self handlePressedAttachmentAtIndex:characterIndex] ||
             [self handlePressedLinkAtIndex:characterIndex]) {
-
             recognizer.cancelsTouchesInView = YES;
             return;
         }
     }
 
+    CGPoint locationInView = [recognizer locationInView:self];
     [self handlePressedLocation:locationInView];
     recognizer.cancelsTouchesInView = NO;
 }
@@ -574,37 +513,12 @@ NSInteger const ChecklistCursorAdjustment = 2;
     UITextPosition *position = [self closestPositionToPoint:point];
     UITextRange *range = [self textRangeFromPosition:position toPosition:position];
     [self setSelectedTextRange:range];
-
-    // Using a UIGestureRecognizer kills the select/all menu controller from showing if you tap
-    // on the same cursor location twice, so we're controlling the menu manually.
-    NSInteger startOffset = [self offsetFromPosition:self.beginningOfDocument toPosition:position];
-    UIMenuController *menuController = [UIMenuController sharedMenuController];
-
-    if (self.lastCursorPosition != startOffset) {
-        [menuController dismissIfNeeded];
-        self.lastCursorPosition = startOffset;
-        return;
-    }
-
-    if (menuController.isMenuVisible) {
-        [menuController setMenuVisible:NO animated:YES];
-        return;
-    }
-
-    // Failsafe: Sometimes `caretRectForPosition` might return a seriously incorrect frame
-    // Ref. https://github.com/Automattic/simplenote-ios/issues/858
-    CGRect caretFrame = [self caretRectForPosition:position];
-
-    if (!CGRectIntersectsRect(self.bounds, caretFrame)) {
-        return;
-    }
-    [menuController displayFromTargetRect:caretFrame inView:self];
 }
 
 - (BOOL)handlePressedAttachmentAtIndex:(NSUInteger)characterIndex
 {
-    NSRange range;
-    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&range];
+    NSRange attachmentRange;
+    SPTextAttachment *attachment = [self.attributedText attribute:NSAttachmentAttributeName atIndex:characterIndex effectiveRange:&attachmentRange];
     if ([attachment isKindOfClass:[SPTextAttachment class]] == false) {
         return NO;
     }
@@ -612,18 +526,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     BOOL wasChecked = attachment.isChecked;
     attachment.isChecked = !wasChecked;
 
-    if (self.selectedRange.location == self.text.length) {
-        // If the current selection is the end of the note, the keyboard has never shown,
-        // so set the selected location to the checkbox. Must happen before `textViewDidChange`.
-        self.selectedRange = NSMakeRange(characterIndex, self.selectedRange.length);
+    // iOS 13 Bugfix:
+    // Move the TextView Selection to the end of the TextAttachment's line
+    // This prevents the UIMenuController from showing up after toggling multiple TextAttachments in a row.
+    [self selectEndOfLineForRange:attachmentRange];
+
+    // iOS 14 Bugfix:
+    // Ensure the Attachment is onscreen. This prevents iOS 14 from bouncing back to the selected location
+    if (@available(iOS 14.0, *)) {
+        [self scrollRangeToVisible:self.selectedRange];
     }
 
     [self.delegate textViewDidChange:self];
-    [self.layoutManager invalidateDisplayForCharacterRange:range];
+    [self.layoutManager invalidateDisplayForCharacterRange:attachmentRange];
 
     return YES;
 }
-
 
 - (BOOL)handlePressedLinkAtIndex:(NSUInteger)characterIndex
 {
@@ -639,6 +557,21 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self.editorTextDelegate textView:self receivedInteractionWithURL:link];
 
     return YES;
+}
+
+- (void)selectEndOfLineForRange:(NSRange)range
+{
+    NSRange lineRange = [self.text lineRangeForRange:range];
+    if (lineRange.location == NSNotFound) {
+        return;
+    }
+
+    NSInteger endOfLine = NSMaxRange(lineRange) - 1;
+    if (endOfLine < 0 || endOfLine > self.textStorage.length) {
+        return;
+    }
+
+    self.selectedRange = NSMakeRange(endOfLine, 0);
 }
 
 - (BOOL)performsAggressiveLinkWorkaround

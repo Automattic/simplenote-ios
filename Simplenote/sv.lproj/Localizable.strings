@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-07-16 12:22:04+0000 */
+/* Translation-Revision-Date: 2020-10-09 10:02:12+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -172,14 +172,20 @@
 "Current Collaborators" = "Nuvarande redigerare";
 
 /* Theme: Dark */
-"Dark" = "Mörkt";
+"Dark" = "Mörk";
 
 /* Debug Screen Title
    Display internal debug status */
 "Debug" = "Felsök";
 
+/* Indicates that Extended Debugging has been disabled */
+"Debug Disabled" = "Felsökning inaktiverad";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Radera anteckningar";
+
+/* Title displayed in the extended diagnostics UI */
+"Diagnostics" = "Diagnostik";
 
 /* No comment provided by engineer. */
 "Disable Markdown formatting" = "Inaktivera Markdown-formatering";
@@ -221,6 +227,12 @@
 /* Pin Lock */
 "Enter your passcode" = "Ange lösenkod";
 
+/* Error Title */
+"Error" = "Fel";
+
+/* Get Help Description Label */
+"FAQ or contact us" = "Vanliga frågor eller kontakta oss";
+
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Ansiktsidentifiering";
 
@@ -228,10 +240,16 @@
 "FailedAttempts" = "FailedAttempts";
 
 /* Password Reset Action */
-"Forgotten password?" = "Har du glömt lösenordet?";
+"Forgotten password?" = "Glömt lösenordet?";
+
+/* FAQ or contact us */
+"Get Help" = "Skaffa hjälp";
 
 /* No comment provided by engineer. */
 "Great! Mind leaving a review to tell us what you like?" = "Vad kul! Har du lust att lämna en recension och berätta för oss vad du gillar?";
+
+/* Display help web page */
+"Help" = "Hjälp";
 
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Hjälp oss att förbättra Simplenote genom att dela användningsdata med vårt analysverktyg.";
@@ -255,7 +273,7 @@
 "Leave a review" = "Lämna en recension";
 
 /* Theme: Light */
-"Light" = "Ljust";
+"Light" = "Ljus";
 
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Timeout för lås";
@@ -426,6 +444,9 @@
 /* Password Reset Required Alert Title */
 "Reset Required" = "Återställning krävs";
 
+/* Response Title */
+"Response" = "Svar";
+
 /* Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
 
@@ -456,6 +477,9 @@
 
 /* Title of options screen */
 "Settings" = "Inställningar";
+
+/* Share Action */
+"Share" = "Dela";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Dela analys";
@@ -495,6 +519,9 @@
 
 /* Sort By Title */
 "Sort by:" = "Sortera efter:";
+
+/* Title for the response's Status Code */
+"Status Code" = "Statuskod";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Systemstandard";
@@ -639,4 +666,7 @@
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
+
+/* Indicates that Extended Debugging has been enabled */
+"🐞 Debug Enabled 🐞" = "🐞 Felsökning aktiverad 🐞";
 

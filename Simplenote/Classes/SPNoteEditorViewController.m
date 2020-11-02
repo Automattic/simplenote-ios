@@ -234,22 +234,16 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (void)startListeningToThemeNotifications
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(themeWillChange) name:VSThemeManagerThemeWillChangeNotification object:nil];
-    [nc addObserver:self selector:@selector(themeDidChange) name:VSThemeManagerThemeDidChangeNotification object:nil];
-}
-
-- (void)themeWillChange
-{
-    if (self.currentNote == nil) {
-        return;
-    }
-
-    [self save];
-    [self.noteEditorTextView endEditing:YES];
+    [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
 - (void)themeDidChange
 {
+    if (self.currentNote != nil) {
+        [self save];
+        [self.noteEditorTextView endEditing:YES];
+    }
+
     [self applyStyle];
 }
 
@@ -1081,7 +1075,7 @@ CGFloat const SPSelectedAreaPadding                 = 20;
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
     
     // Don't allow "3d press" on our checkbox images
-    return interaction != UITextItemInteractionPresentActions;
+    return NO;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {

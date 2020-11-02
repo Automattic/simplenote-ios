@@ -228,7 +228,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
         statusLabel = [[UILabel alloc] init];
         statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        statusLabel.textColor = [UIColor colorWithName:UIColorNameActionViewStatusFontColor];
+        statusLabel.textColor = [UIColor simplenoteSecondaryTextColor];
         statusLabel.adjustsFontSizeToFitWidth = YES;
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         statusLabel.textAlignment = NSTextAlignmentCenter;
@@ -263,7 +263,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
         actionButtonArray = [NSMutableArray arrayWithCapacity:actionButtonCount];
         
         UIColor *actionButtonBackgroundColor = [UIColor simplenoteBackgroundColor];
-        UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+        UIColor *actionButtonBackgroundDisabledColor = [UIColor simplenoteSecondaryTextColor];
         UIImage *actionButtonBackgroundImage = [[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         UIImage *actionButtonBackgroundDisabledImage = [[[UIImage imageNamed:@"action_button_background"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageWithOverlayColor:actionButtonBackgroundDisabledColor];
         UIImage *actionButtonBackgroundHighlightImage = [[UIImage imageNamed:@"action_button_background_highlighted"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -313,7 +313,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 
         UIColor *tintColor = [UIColor simplenoteTintColor];
         UIColor *backgroundColor = [UIColor simplenoteBackgroundColor];
-        UIColor *disabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+        UIColor *disabledColor = [UIColor simplenoteSecondaryTextColor];
 
         for (NSString *title in buttonTitles) {
             SPButton *newButton = [SPButton new];
@@ -401,7 +401,7 @@ actionButtonImages:(NSArray *)actionButtonImages actionButtonTitles:(NSArray *)a
 - (void)refreshButtonImages
 {
     UIColor *actionButtonBackgroundColor = [UIColor simplenoteBackgroundColor];
-    UIColor *actionButtonBackgroundDisabledColor = [UIColor colorWithName:UIColorNameActionViewButtonDisabledColor];
+    UIColor *actionButtonBackgroundDisabledColor = [UIColor simplenoteSecondaryTextColor];
 
     for (SPActionButton *button in actionButtonArray) {
         UIImage *disabledImage = [[button imageForState:UIControlStateDisabled] imageWithOverlayColor:actionButtonBackgroundDisabledColor];

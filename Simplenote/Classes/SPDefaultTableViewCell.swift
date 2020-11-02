@@ -42,7 +42,7 @@ private extension SPDefaultTableViewCell {
 
         backgroundColor = .simplenoteTableViewCellBackgroundColor
         selectedBackgroundView = backgroundView
-        detailTextLabel?.textColor = UIColor.color(name: .tableViewDetailTextLabelColor)
+        detailTextLabel?.textColor = .simplenoteSecondaryTextColor
         textLabel?.textColor = .simplenoteTextColor
     }
 }

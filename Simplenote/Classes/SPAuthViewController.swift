@@ -162,6 +162,10 @@ class SPAuthViewController: UIViewController {
     ///
     let mode: AuthenticationMode
 
+    /// Indicates if the Extended Debug Mode is enabled
+    ///
+    var debugEnabled = false
+
 
 
     /// NSCodable Required Initializer
@@ -392,13 +396,12 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func handleError(error: SPAuthError) {
-        guard error.shouldBePresentedOnscreen else {
-            return
-        }
-
         switch error {
         case .signupUserAlreadyExists:
             presentUserAlreadyExistsError(error: error)
+        case .unknown(let statusCode, let response, let error) where debugEnabled:
+            let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
+            presentDebugDetails(details: details)
         default:
             presentGenericError(error: error)
         }
@@ -412,6 +415,16 @@ private extension SPAuthViewController {
         }
 
         present(alertController, animated: true, completion: nil)
+    }
+
+    func presentDebugDetails(details: NSAttributedString) {
+        let supportViewController = SPDiagnosticsViewController()
+        supportViewController.attributedText = details
+
+        let navigationController = SPNavigationController(rootViewController: supportViewController)
+        navigationController.modalPresentationStyle = .formSheet
+
+        present(navigationController, animated: true, completion: nil)
     }
 
     func presentGenericError(error: SPAuthError) {
