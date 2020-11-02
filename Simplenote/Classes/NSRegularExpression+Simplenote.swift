@@ -48,6 +48,10 @@ extension NSRegularExpression {
         }
 
         let escapedKeywords = keywords.map(NSRegularExpression.escapedPattern).joined(separator: "|")
+        /// Patter explanation:
+        /// Leading: word boundary + word character + up to `excerptLeadingLength` word characters
+        /// Main: word boundary + optional word characters + one of the keywords + optional word characters + word boundary
+        /// Trailing: up to `excerptTrailingLength` word characters + word character + word boundary
         let pattern = "(?:\\b\\w[\\w\\W]{0,\(Constants.excerptLeadingLength)})?\\b(?:\\w*(?:\(escapedKeywords))\\w*)\\b(?:[\\w\\W]{0,\(Constants.excerptTrailingLength)}\\w\\b)?"
 
         return try! NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .useUnicodeWordBoundaries])
