@@ -112,7 +112,7 @@ extension NotesListState {
             return nil
         }
 
-        return NSPredicate.predicateForTag(query: query)
+        return NSPredicate.predicateForTags(in: query)
     }
 
     /// Returns a collection of NSSortDescriptors that, once applied to a Notes collection, the specified SortMode will be reflected
