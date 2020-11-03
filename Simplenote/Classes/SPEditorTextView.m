@@ -174,7 +174,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
     CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height + self.contentInset.top;
+    CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
