@@ -17,6 +17,7 @@ NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
+// TODO: Add intrinsicContentSize support to TagView
 CGFloat const TagViewHeight = 44;
 CGFloat const TextViewTopInsets = 8;
 CGFloat const TextViewBottomInsets = TagViewHeight * 2;
