@@ -19,8 +19,9 @@ NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the g
 
 // TODO: Add intrinsicContentSize support to TagView
 CGFloat const TagViewHeight = 44;
-CGFloat const TextViewTopInsets = 8;
-CGFloat const TextViewBottomInsets = TagViewHeight * 2;
+CGFloat const TextViewTopContainerInset = 8;
+CGFloat const TextViewBottomContainerInset = TagViewHeight * 2;
+CGFloat const TextViewBottomScrollerInset = TagViewHeight;
 
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
@@ -76,7 +77,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (void)setupTextContainerInsets
 {
     UIEdgeInsets containerInsets = self.textContainerInset;
-    containerInsets.top += TextViewTopInsets;
+    containerInsets.top += TextViewTopContainerInset;
+    containerInsets.bottom += TextViewBottomContainerInset;
     self.textContainerInset = containerInsets;
 }
 
