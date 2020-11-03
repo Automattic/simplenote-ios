@@ -560,7 +560,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (UIViewController *)nextViewControllerForInteractivePush
 {
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
-    previewViewController.markdownText = [self.noteEditorTextView getPlainTextContent];
+    previewViewController.markdownText = [self.noteEditorTextView plainText];
     
     return previewViewController;
 }
@@ -653,7 +653,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
-    _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
+    _noteEditorTextView.text = [_noteEditorTextView plainText];
     [_noteEditorTextView processChecklists];
     
     _searchString = nil;
@@ -835,7 +835,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         _currentNote.modificationDate = [NSDate date];
 
         // Force an update of the note's content preview in case only tags changed
@@ -854,10 +854,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)willReceiveNewContent {
     
     self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
+    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView plainText];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
     }
 }

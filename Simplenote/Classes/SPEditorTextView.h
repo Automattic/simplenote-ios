@@ -25,7 +25,6 @@
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;
-- (NSString *)getPlainTextContent;
 - (void)insertOrRemoveChecklist;
 
 /// iOS 13.0 + 13.1 had an usability issue that rendered link interactions within a UITextView next to impossible.
