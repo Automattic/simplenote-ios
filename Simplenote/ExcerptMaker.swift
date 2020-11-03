@@ -5,12 +5,15 @@ import Foundation
 @objc
 final class ExcerptMaker: NSObject {
     private var regexp: NSRegularExpression?
+
+    /// Keywords
+    ///
     var keywords: [String]? {
         didSet {
             guard oldValue != keywords else {
                 return
             }
-
+            refreshRegexp()
         }
     }
 
