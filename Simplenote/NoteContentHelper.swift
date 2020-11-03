@@ -14,62 +14,55 @@ struct NoteContentHelper {
     ///     - content: note content
     ///
     static func structure(of content: String?) -> (title: NSRange, body: NSRange) {
-        let titleRange = self.titleRange(in: content)
+        let titleRange = trimmedTextRange(in: content, startingFrom: 0, endAtNewline: true)
+        let bodyRange: NSRange
+        if titleRange.isNotFound {
+            bodyRange = .notFound
+        } else {
+            bodyRange = trimmedTextRange(in: content, startingFrom: NSMaxRange(titleRange), endAtNewline: false)
+        }
+
         return (
             title: titleRange,
-            body: bodyRange(in: content, titleRange: titleRange)
+            body: bodyRange
         )
     }
 
-    private static func titleRange(in content: String?) -> NSRange {
+    private static func trimmedTextRange(in content: String?, startingFrom startLocation: Int, endAtNewline: Bool) -> NSRange {
         guard let content = content else {
-            return NSRange(location: NSNotFound, length: 0)
+            return .notFound
         }
         let fullRange = content.nsString.fullRange
 
         // Look for the first character ignoring whitespaces and newlines
+        let firstCharacterSearchRange = NSRange(location: startLocation,
+                                                length: fullRange.length - startLocation)
         let firstCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
                                                                     options: [],
-                                                                    range: fullRange)
-        guard firstCharacterRange.location != NSNotFound else {
-            return firstCharacterRange
+                                                                    range: firstCharacterSearchRange)
+        guard !firstCharacterRange.isNotFound else {
+            return .notFound
         }
 
-        // Look for the next newline
-        let newlineSearchRange = NSRange(location: firstCharacterRange.location,
-                                         length: fullRange.length - firstCharacterRange.location)
-        let newlineRange = content.nsString.rangeOfCharacter(from: .newlines,
-                                                             options: [],
-                                                             range: newlineSearchRange)
-        guard newlineRange.location != NSNotFound else {
-            return newlineSearchRange
-        }
+        let endRangeLocation: Int = {
+            if endAtNewline {
+                // Look for the next newline
+                let newlineSearchRange = NSRange(location: firstCharacterRange.location,
+                                                 length: fullRange.length - firstCharacterRange.location)
+                let newlineRange = content.nsString.rangeOfCharacter(from: .newlines,
+                                                                     options: [],
+                                                                     range: newlineSearchRange)
+                if !newlineRange.isNotFound {
+                    return newlineRange.location
+                }
+            }
+
+            return fullRange.length
+        }()
 
         return rangeByTrimmingTrailingWhitespacesAndNewlines(in: content,
                                                              firstCharacterLocation: firstCharacterRange.location,
-                                                             endRangeLocation: newlineRange.location)
-    }
-
-    private static func bodyRange(in content: String?, titleRange: NSRange) -> NSRange {
-        guard titleRange.location != NSNotFound, let content = content else {
-            return titleRange
-        }
-
-        let fullRange = content.nsString.fullRange
-
-        // Look for the first character after title
-        let untrimmedBodyRange = NSRange(location: NSMaxRange(titleRange),
-                                         length: fullRange.length - NSMaxRange(titleRange))
-        let firstCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
-                                                                    options: [],
-                                                                    range: untrimmedBodyRange)
-        guard firstCharacterRange.location != NSNotFound else {
-            return firstCharacterRange
-        }
-
-        return rangeByTrimmingTrailingWhitespacesAndNewlines(in: content,
-                                                             firstCharacterLocation: firstCharacterRange.location,
-                                                             endRangeLocation: content.fullRange.length)
+                                                             endRangeLocation: endRangeLocation)
     }
 
     private static func rangeByTrimmingTrailingWhitespacesAndNewlines(in content: String, firstCharacterLocation: Int, endRangeLocation: Int) -> NSRange {
@@ -79,8 +72,8 @@ struct NoteContentHelper {
         let lastCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
                                                                    options: [.backwards],
                                                                    range: lastCharacterSearchRange)
-        guard lastCharacterRange.location != NSNotFound else {
-            return lastCharacterRange
+        guard !lastCharacterRange.isNotFound else {
+            return .notFound
         }
 
         return NSRange(location: firstCharacterLocation,
