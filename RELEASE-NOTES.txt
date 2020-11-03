@@ -1,5 +1,6 @@
 4.28
 -----
+-   Fixed a bug that affected Text Selection #973
  
 4.27
 -----
