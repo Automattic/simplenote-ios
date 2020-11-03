@@ -85,7 +85,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self addSubview:self.tagView];
 }
 
-
 - (void)startListeningToNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
