@@ -7,7 +7,6 @@
 //
 
 #import "SPTagView.h"
-#import "VSThemeManager.h"
 #import "SPTagStub.h"
 #import <Simperium/Simperium.h>
 #import "SPAppDelegate.h"
@@ -135,11 +134,6 @@
     
     bounds.origin.y -= bounds.size.height;
     autoCompleteScrollView.frame = bounds;
-}
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
 }
 
 - (BOOL)setupWithTagNames:(NSArray *)tagNames {
