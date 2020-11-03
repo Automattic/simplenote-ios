@@ -350,7 +350,7 @@ extension SPNoteListViewController {
 
     @objc
     func updateExcerptMaker() {
-        excerptMaker.update(withKeywords: searchQuery?.keywords)
+        excerptMaker.keywords = searchQuery?.keywords
     }
 }
 

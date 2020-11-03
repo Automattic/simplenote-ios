@@ -5,18 +5,16 @@ import Foundation
 @objc
 final class ExcerptMaker: NSObject {
     private var regexp: NSRegularExpression?
-    private var keywords: [String]?
+    var keywords: [String]? {
+        didSet {
+            guard oldValue != keywords else {
+                return
+            }
 
-    /// Update with search keywords
-    ///
-    @objc
-    func update(withKeywords keywords: [String]?) {
-        guard keywords != self.keywords else {
-            return
         }
+    }
 
-        self.keywords = keywords
-
+    private func refreshRegexp() {
         guard let keywords = keywords, !keywords.isEmpty else {
             regexp = nil
             return
