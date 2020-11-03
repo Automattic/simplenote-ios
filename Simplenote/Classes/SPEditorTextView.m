@@ -172,9 +172,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
     CGFloat height      = CGRectGetHeight(self.tagView.frame);
 
-    CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
+    // When the Keyboard is absent we'll always honor the Safe Area Insets
+    CGFloat paddingY    = MAX(self.contentInset.bottom, self.safeAreaInsets.bottom);
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
     CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
+
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
