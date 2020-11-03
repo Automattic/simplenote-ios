@@ -403,23 +403,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
                            allowsMultiplePerLine:NO];
 }
 
-// Processes content of note editor, and replaces special string attachments with their plain
-// text counterparts. Currently supports markdown checklists.
-- (NSString *)getPlainTextContent
-{
-    NSMutableAttributedString *adjustedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
-    // Replace checkbox images with their markdown syntax equivalent
-    [adjustedString enumerateAttribute:NSAttachmentAttributeName inRange:[adjustedString.string rangeOfString:adjustedString.string] options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-        if ([value isKindOfClass:[SPTextAttachment class]]) {
-            SPTextAttachment *attachment = (SPTextAttachment *)value;
-            NSString *checkboxMarkdown = attachment.isChecked ? MarkdownChecked : MarkdownUnchecked;
-            [adjustedString replaceCharactersInRange:range withString:checkboxMarkdown];
-        }
-    }];
-    
-    return adjustedString.string;
-}
-
 - (void)insertOrRemoveChecklist
 {
     NSRange lineRange = [self.text lineRangeForRange:self.selectedRange];
