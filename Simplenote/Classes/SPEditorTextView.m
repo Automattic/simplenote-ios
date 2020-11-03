@@ -10,8 +10,6 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
-#import "NSString+Attributed.h"
-#import "UIDevice+Extensions.h"
 #import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
@@ -19,8 +17,14 @@ NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
+// TODO: Add intrinsicContentSize support to TagView
+CGFloat const TagViewHeight = 44;
+CGFloat const TextViewTopInsets = 8;
+CGFloat const TextViewBottomInsets = TagViewHeight * 2;
+
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
+
 
 @interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
@@ -48,44 +52,54 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.scrollEnabled = YES;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
-        
-        // add tag view
-        
-        CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-        _tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, tagViewHeight)];
-        _tagView.isAccessibilityElement = NO;
-        
-        [self addSubview:_tagView];
-        
-        UIEdgeInsets contentInset = self.contentInset;
-        contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
-        self.contentInset = contentInset;
 
+        [self setupTagsEditor];
+        [self setupTextContainerInsets];
+        [self setupGestureRecognizers];
+        [self startListeningToNotifications];
         [self startObservingProperties];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didEndEditing:)
-                                                     name:UITextViewTextDidEndEditingNotification
-                                                   object:nil];
-
-
-        SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
-        recognizerDelegate.parentTextView = self;
-        recognizerDelegate.excludedView = self.tagView;
-        self.internalRecognizerDelegate = recognizerDelegate;
-
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                               action:@selector(onTextTapped:)];
-        tapGestureRecognizer.cancelsTouchesInView = NO;
-        tapGestureRecognizer.delegate = recognizerDelegate;
-
-        [self addGestureRecognizer:tapGestureRecognizer];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
         [self setEditable:NO];
     }
 
     return self;
+}
+
+- (void)setupTagsEditor
+{
+    self.tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, TagViewHeight)];
+    self.tagView.isAccessibilityElement = NO;
+    [self addSubview:self.tagView];
+}
+
+- (void)setupTextContainerInsets
+{
+    UIEdgeInsets containerInsets = self.textContainerInset;
+    containerInsets.top += TextViewTopInsets;
+    self.textContainerInset = containerInsets;
+}
+
+- (void)setupGestureRecognizers
+{
+    SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
+    recognizerDelegate.parentTextView = self;
+    recognizerDelegate.excludedView = self.tagView;
+    self.internalRecognizerDelegate = recognizerDelegate;
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(onTextTapped:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.delegate = recognizerDelegate;
+    [self addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)startListeningToNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didEndEditing:)
+                                                 name:UITextViewTextDidEndEditingNotification
+                                               object:nil];
 }
 
 - (void)startObservingProperties
@@ -154,7 +168,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
     CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height - height + self.contentInset.top;
+    CGFloat contentMinY = self.contentSize.height + self.contentInset.top;
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
