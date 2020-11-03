@@ -552,9 +552,60 @@ extension SPNoteEditorViewController {
 
     @objc
     func refreshStyle() {
+        refreshTextEditor()
+        refreshKeyboardStyle()
+        refreshBackground()
+    }
+
+    private func refreshTextEditor() {
+        let headlineFont = UIFont.preferredFont(for: .title1, weight: .bold)
+        let defaultFont = UIFont.preferredFont(forTextStyle: .body)
+        let textColor = UIColor.simplenoteNoteHeadlineColor
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+
+        noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
+        noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+
+        noteEditorTextView.interactiveTextStorage.defaultStyle = [
+            .font               : defaultFont,
+            .foregroundColor    : textColor,
+            .paragraphStyle     : paragraphStyle
+        ]
+
+        noteEditorTextView.interactiveTextStorage.headlineStyle = [
+            .font               : headlineFont,
+            .foregroundColor    : textColor,
+        ]
+    }
+
+    private func refreshKeyboardStyle() {
+        let keyboardAppearance: UIKeyboardAppearance = SPUserInterface.isDark ? .dark : .default
+        noteEditorTextView.keyboardAppearance = keyboardAppearance
+        tagView.keyboardAppearance = keyboardAppearance
+    }
+
+    private func refreshBackground() {
+        let backgroundColor: UIColor = isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
+        noteEditorTextView.backgroundColor = backgroundColor
+        tagView.backgroundColor = backgroundColor
+        bottomView.backgroundColor = backgroundColor
+        view.backgroundColor = backgroundColor
     }
 }
 
+
+// MARK: - Metrics
+//
+private enum Metrics {
+    static let lineSpacingMultiplerPad: CGFloat = 0.40
+    static let lineSpacingMultiplerPhone: CGFloat = 0.20
+
+    static var lineSpacingMultipler: CGFloat {
+        UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
+    }
+}
 
 // MARK: - NSCoder Keys
 //
