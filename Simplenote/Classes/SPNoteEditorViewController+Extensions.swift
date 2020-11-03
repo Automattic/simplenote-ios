@@ -546,6 +546,16 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK - Style
+//
+extension SPNoteEditorViewController {
+
+    @objc
+    func refreshStyle() {
+    }
+}
+
+
 // MARK: - NSCoder Keys
 //
 private enum CodingKeys: String {

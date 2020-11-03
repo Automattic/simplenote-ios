@@ -1,6 +1,5 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
-#import "VSThemeManager.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "SPTagView.h"
@@ -118,48 +117,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-}
-
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
-- (void)refreshStyle
-{    
-    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle1 weight:UIFontWeightBold];
-    UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
-
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-
-    _tagView = _noteEditorTextView.tagView;
-
-    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
-
-    UIKeyboardAppearance keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
-    self.noteEditorTextView.keyboardAppearance = keyboardAppearance;
-    self.tagView.keyboardAppearance = keyboardAppearance;
-
-    UIColor *backgroundColor = self.previewing ? [UIColor simplenoteBackgroundPreviewColor] : [UIColor simplenoteBackgroundColor];
-    self.noteEditorTextView.backgroundColor = backgroundColor;
-    self.tagView.backgroundColor = backgroundColor;
-    self.bottomView.backgroundColor = backgroundColor;
-    self.view.backgroundColor = backgroundColor;
-
-    self.noteEditorTextView.interactiveTextStorage.tokens = @{
-        SPDefaultTokenName : @{
-                NSFontAttributeName : bodyFont,
-                NSForegroundColorAttributeName : fontColor,
-                NSParagraphStyleAttributeName : paragraphStyle
-        },
-        SPHeadlineTokenName : @{
-                NSFontAttributeName : headlineFont,
-                NSForegroundColorAttributeName: fontColor,
-        }
-    };
 }
 
 - (void)viewDidLoad
