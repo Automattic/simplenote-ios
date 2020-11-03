@@ -19,11 +19,12 @@ NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the g
 
 // TODO: Add intrinsicContentSize support to TagView
 CGFloat const TagViewHeight = 44;
+
 CGFloat const TextViewContanerInsetsTop = 8;
 CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
-CGFloat const TextViewScrollerInsetsBottom = TagViewHeight;
 
-CGFloat const TextViewDefaultBottomScrollInset = 0;
+CGFloat const TextViewScrollerExtraInsetsBottom = TagViewHeight;
+CGFloat const TextViewScrollerDefaultBottomInset = 0;
 
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
@@ -53,7 +54,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
         self.scrollEnabled = YES;
-        self.bottomScrollerInset = TextViewDefaultBottomScrollInset;
+        self.bottomScrollerInset = TextViewScrollerDefaultBottomInset;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
 
@@ -266,13 +267,13 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (void)setBottomScrollerInset:(CGFloat)bottomInset
 {
     UIEdgeInsets updated = self.scrollIndicatorInsets;
-    updated.bottom = bottomInset + TextViewScrollerInsetsBottom;
+    updated.bottom = bottomInset + TextViewScrollerExtraInsetsBottom;
     self.scrollIndicatorInsets = updated;
 }
 
 - (CGFloat)bottomScrollerInset
 {
-    return self.scrollIndicatorInsets.bottom - TextViewScrollerInsetsBottom;
+    return self.scrollIndicatorInsets.bottom - TextViewScrollerExtraInsetsBottom;
 }
 
 
