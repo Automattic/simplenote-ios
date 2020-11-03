@@ -243,7 +243,35 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setContentOffset:scrollOffset animated:NO];
 }
 
-#pragma mark Notifications
+
+#pragma mark - Properties
+
+- (void)setBottomContentInset:(CGFloat)bottomInset
+{
+    UIEdgeInsets updated = self.contentInset;
+    updated.bottom = bottomInset;
+    self.contentInset = updated;
+}
+
+- (CGFloat)bottomContentInset
+{
+    return self.contentInset.bottom;
+}
+
+- (void)setBottomScrollerInset:(CGFloat)bottomInset
+{
+    UIEdgeInsets updated = self.scrollIndicatorInsets;
+    updated.bottom = bottomInset + TextViewBottomScrollerInset;
+    self.scrollIndicatorInsets = updated;
+}
+
+- (CGFloat)bottomScrollerInset
+{
+    return self.scrollIndicatorInsets.bottom - TextViewBottomScrollerInset;
+}
+
+
+#pragma mark - Notifications
 
 - (void)didEndEditing:(NSNotification *)notification
 {
