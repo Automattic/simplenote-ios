@@ -552,46 +552,54 @@ extension SPNoteEditorViewController {
 
     @objc
     func refreshStyle() {
+        refreshRootView()
+        refreshBottomView()
+        refreshTagsEditor()
         refreshTextEditor()
-        refreshKeyboardStyle()
-        refreshBackground()
+        refreshTextStorage()
+    }
+
+    private func refreshRootView() {
+        view.backgroundColor = backgroundColor
+    }
+
+    private func refreshBottomView() {
+        bottomView.backgroundColor = backgroundColor
     }
 
     private func refreshTextEditor() {
+        noteEditorTextView.backgroundColor = backgroundColor
+        noteEditorTextView.keyboardAppearance = .simplenoteKeyboardAppearance
+        noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
+        noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+    }
+
+    private func refreshTagsEditor() {
+        tagView.backgroundColor = backgroundColor
+        tagView.keyboardAppearance = .simplenoteKeyboardAppearance
+    }
+
+    private func refreshTextStorage() {
         let headlineFont = UIFont.preferredFont(for: .title1, weight: .bold)
         let defaultFont = UIFont.preferredFont(forTextStyle: .body)
         let textColor = UIColor.simplenoteNoteHeadlineColor
+        let lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+        let textStorage = noteEditorTextView.interactiveTextStorage
 
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
-
-        noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
-        noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
-
-        noteEditorTextView.interactiveTextStorage.defaultStyle = [
+        textStorage.defaultStyle = [
             .font               : defaultFont,
             .foregroundColor    : textColor,
-            .paragraphStyle     : paragraphStyle
+            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
         ]
 
-        noteEditorTextView.interactiveTextStorage.headlineStyle = [
+        textStorage.headlineStyle = [
             .font               : headlineFont,
             .foregroundColor    : textColor,
         ]
     }
 
-    private func refreshKeyboardStyle() {
-        let keyboardAppearance: UIKeyboardAppearance = SPUserInterface.isDark ? .dark : .default
-        noteEditorTextView.keyboardAppearance = keyboardAppearance
-        tagView.keyboardAppearance = keyboardAppearance
-    }
-
-    private func refreshBackground() {
-        let backgroundColor: UIColor = isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
-        noteEditorTextView.backgroundColor = backgroundColor
-        tagView.backgroundColor = backgroundColor
-        bottomView.backgroundColor = backgroundColor
-        view.backgroundColor = backgroundColor
+    private var backgroundColor: UIColor {
+        isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
     }
 }
 
