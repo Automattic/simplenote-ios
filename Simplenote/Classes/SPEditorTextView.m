@@ -53,6 +53,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.verticalMoveLastCaretRect = CGRectZero;
 
         [self setupTagsEditor];
+        [self setupTextContainerInsets];
         [self setupGestureRecognizers];
         [self startListeningToNotifications];
         [self startObservingProperties];
@@ -62,6 +63,20 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 
     return self;
+}
+
+- (void)setupTagsEditor
+{
+    self.tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, TagViewHeight)];
+    self.tagView.isAccessibilityElement = NO;
+    [self addSubview:self.tagView];
+}
+
+- (void)setupTextContainerInsets
+{
+    UIEdgeInsets containerInsets = self.textContainerInset;
+    containerInsets.top += TextViewTopInsets;
+    self.textContainerInset = containerInsets;
 }
 
 - (void)setupGestureRecognizers
@@ -76,13 +91,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     tapGestureRecognizer.cancelsTouchesInView = NO;
     tapGestureRecognizer.delegate = recognizerDelegate;
     [self addGestureRecognizer:tapGestureRecognizer];
-}
-
-- (void)setupTagsEditor
-{
-    self.tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, TagViewHeight)];
-    self.tagView.isAccessibilityElement = NO;
-    [self addSubview:self.tagView];
 }
 
 - (void)startListeningToNotifications
