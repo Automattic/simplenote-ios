@@ -4,9 +4,29 @@ import Foundation
 //
 extension SPEditorTextView {
 
-    /// Processes content of note editor, and replaces special string attachments with their plain text counterparts. Currently supports markdown checklists.
+    /// Text with attachments converted to markdown
     @objc
     var plainText: String {
         return NSAttributedStringToMarkdownConverter.convert(string: attributedText)
+    }
+
+    /// Selected text with attachments converted to markdown
+    var plainSelectedText: String? {
+        guard selectedRange.location != NSNotFound else {
+            return nil
+        }
+
+        let selectedAttributedText = attributedText.attributedSubstring(from: selectedRange)
+        return NSAttributedStringToMarkdownConverter.convert(string: selectedAttributedText)
+    }
+
+    open override func copy(_ sender: Any?) {
+        UIPasteboard.general.string = plainSelectedText
+    }
+
+    open override func cut(_ sender: Any?) {
+        let text = plainSelectedText
+        super.cut(sender)
+        UIPasteboard.general.string = text
     }
 }
