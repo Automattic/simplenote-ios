@@ -39,7 +39,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 // UIKit Components
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) UILabel                   *searchDetailLabel;
-@property (nonatomic, strong) SPTagView                 *tagView;
 @property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
