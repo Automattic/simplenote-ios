@@ -228,17 +228,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     /// Notes:
     /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
     /// -   And we don't consider `adjusted top insets` since that deals with navbar overlaps, and doesn't affect our calculations.
-    if (self.contentSize.height <= self.bounds.size.height - self.contentInset.top - self.adjustedContentInset.bottom) {
+
+    CGFloat visibleHeight = self.bounds.size.height
+                                - self.textContainerInset.top
+                                - self.textContainerInset.bottom
+                                - self.contentInset.bottom;
+    if (self.contentSize.height <= visibleHeight) {
         return;
     }
 
     CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
-    CGPoint scrollOffset = CGPointMake(0, yOffset);
 
-    if (self.contentOffset.y == scrollOffset.y) {
+    if (self.contentOffset.y == yOffset) {
         return;
     }
 
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:animated];
 }
 
