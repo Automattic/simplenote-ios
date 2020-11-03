@@ -53,7 +53,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.verticalMoveLastCaretRect = CGRectZero;
 
         [self setupTagsEditor];
-        [self setupTextContainerInsets];
         [self setupGestureRecognizers];
         [self startListeningToNotifications];
         [self startObservingProperties];
@@ -86,13 +85,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self addSubview:self.tagView];
 }
 
-- (void)setupTextContainerInsets
-{
-    UIEdgeInsets containerInsets = self.textContainerInset;
-    containerInsets.top += TextViewTopInsets;
-    containerInsets.bottom += TextViewBottomInsets;
-    self.textContainerInset = containerInsets;
-}
 
 - (void)startListeningToNotifications
 {
