@@ -21,7 +21,6 @@
 #import "SPAcitivitySafari.h"
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
-#import "UIDevice+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
