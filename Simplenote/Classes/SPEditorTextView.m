@@ -131,7 +131,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 
 - (NSDictionary *)typingAttributes
 {
-    return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
+    return self.text.length == 0 ? self.interactiveTextStorage.headlineStyle : self.interactiveTextStorage.defaultStyle;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
