@@ -141,6 +141,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
         let newKeyboardIsVisible    = newKeyboardHeight != .zero
         let animationOptions        = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
         let adjustedBottomInsets    = newKeyboardFloats ? .zero : newKeyboardHeight
+        let adjustedIndicatorInsets = max(newKeyboardHeight - view.safeAreaInsets.bottom, .zero)
 
         guard noteEditorTextView.contentInset.bottom != adjustedBottomInsets else {
             return
@@ -153,8 +154,8 @@ extension SPNoteEditorViewController: KeyboardObservable {
         self.noteEditorTextView.enableScrollSmoothening = true
 
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
-            self.noteEditorTextView.bottomContentInset = adjustedBottomInsets
-            self.noteEditorTextView.bottomScrollerInset = adjustedBottomInsets
+            self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
+            self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedIndicatorInsets
         }, completion: { _ in
             self.noteEditorTextView.enableScrollSmoothening = false
         })
