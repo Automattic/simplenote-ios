@@ -24,9 +24,6 @@ CGFloat const TagViewHeight = 44;
 CGFloat const TextViewContanerInsetsTop = 8;
 CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
 
-CGFloat const TextViewScrollerExtraInsetsBottom = TagViewHeight;
-CGFloat const TextViewScrollerDefaultBottomInset = 0;
-
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
 
@@ -55,7 +52,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
         self.scrollEnabled = YES;
-        self.bottomScrollerInset = TextViewScrollerDefaultBottomInset;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
 
@@ -255,33 +251,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat yOffset = self.bounds.origin.y - self.contentInset.top;
     CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:NO];
-}
-
-
-#pragma mark - Properties
-
-- (void)setBottomContentInset:(CGFloat)bottomInset
-{
-    UIEdgeInsets updated = self.contentInset;
-    updated.bottom = bottomInset;
-    self.contentInset = updated;
-}
-
-- (CGFloat)bottomContentInset
-{
-    return self.contentInset.bottom;
-}
-
-- (void)setBottomScrollerInset:(CGFloat)bottomInset
-{
-    UIEdgeInsets updated = self.scrollIndicatorInsets;
-    updated.bottom = bottomInset + TextViewScrollerExtraInsetsBottom;
-    self.scrollIndicatorInsets = updated;
-}
-
-- (CGFloat)bottomScrollerInset
-{
-    return self.scrollIndicatorInsets.bottom - TextViewScrollerExtraInsetsBottom;
 }
 
 
