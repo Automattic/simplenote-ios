@@ -32,6 +32,10 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
             return true
         }
 
+        if textView.isDragging {
+            return false
+        }
+
         let characterIndex = gestureRecognizer.characterIndex(in: textView)
         if textView.attachment(ofType: SPTextAttachment.self, at: characterIndex) != nil {
             return true

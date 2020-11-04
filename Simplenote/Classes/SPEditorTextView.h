@@ -22,15 +22,6 @@
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 
-/// Allows you to set `contentInset.bottom`
-///
-@property (nonatomic, assign) CGFloat bottomContentInset;
-
-/// Allows you to set `scrollIndicatorInsets` while considering (automatically) an extra padding, to be allocated by the TagsEditor
-///
-@property (nonatomic, assign) CGFloat bottomScrollerInset;
-
-
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;
