@@ -17,13 +17,10 @@ NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
 // TODO: Add intrinsicContentSize support to TagView
-CGFloat const TagViewHeight = 44;
+static CGFloat const TagViewHeight = 44;
 
-CGFloat const TextViewContanerInsetsTop = 8;
-CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
-
-CGFloat const TextViewScrollerExtraInsetsBottom = TagViewHeight;
-CGFloat const TextViewScrollerDefaultBottomInset = 0;
+static CGFloat const TextViewContanerInsetsTop = 8;
+static CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
 
 // TODO: Drop this the second SplitViewController is implemented
 static CGFloat const TextViewRegularByRegularPadding = 64;
@@ -61,7 +58,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.alwaysBounceHorizontal = NO;
         self.alwaysBounceVertical = YES;
         self.scrollEnabled = YES;
-        self.bottomScrollerInset = TextViewScrollerDefaultBottomInset;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
 
@@ -268,33 +264,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat yOffset = self.bounds.origin.y - self.contentInset.top;
     CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:NO];
-}
-
-
-#pragma mark - Properties
-
-- (void)setBottomContentInset:(CGFloat)bottomInset
-{
-    UIEdgeInsets updated = self.contentInset;
-    updated.bottom = bottomInset;
-    self.contentInset = updated;
-}
-
-- (CGFloat)bottomContentInset
-{
-    return self.contentInset.bottom;
-}
-
-- (void)setBottomScrollerInset:(CGFloat)bottomInset
-{
-    UIEdgeInsets updated = self.scrollIndicatorInsets;
-    updated.bottom = bottomInset + TextViewScrollerExtraInsetsBottom;
-    self.scrollIndicatorInsets = updated;
-}
-
-- (CGFloat)bottomScrollerInset
-{
-    return self.scrollIndicatorInsets.bottom - TextViewScrollerExtraInsetsBottom;
 }
 
 

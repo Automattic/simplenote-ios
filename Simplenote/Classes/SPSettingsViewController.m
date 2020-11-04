@@ -579,10 +579,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             switch (indexPath.row) {
                 case SPOptionsHelpRowTitle: {
                     NSURL *url = [NSURL URLWithString:@"https://simplenote.com/help"];
-
-                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                       [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-                    }
+                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 
                     break;
                 }
