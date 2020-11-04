@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, SPTagsListBottomRow) {
 };
 
 static const NSInteger SPTagListRequestBatchSize        = 20;
-static const NSTimeInterval SPTagListRefreshDelay       = 0.5;
 static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 
 
@@ -397,7 +396,6 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     NSString *tagName = [self tagAtTableViewIndexPath:indexPath].name;
 
     cell.textField.text = tagName;
-    cell.textField.delegate = self;
     cell.iconImage = nil;
     cell.delegate = self;
 }
@@ -558,16 +556,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         appDelegate.selectedTag = nil;
         [appDelegate.noteListViewController update];
     }
-    
-    BOOL lastTag = [self numberOfTags] == 1;
 
-    if ([[SPObjectManager sharedManager] removeTag:tag] && !lastTag) {
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.tableView endUpdates];
-    } else {
-        [self.tableView reloadData];
-    }
+    [[SPObjectManager sharedManager] removeTag:tag];
 }
 
 - (void)renameTagAction:(Tag *)tag {
@@ -582,6 +572,7 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
     SPTagListViewCell *cell = [self cellForTag:tag];
 
     cell.textField.enabled = YES;
+    cell.textField.delegate = self;
     [cell.textField becomeFirstResponder];
 }
 
@@ -613,19 +604,31 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
 }
 
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    SPTagListViewCell *cell = [self cellForTag:self.renameTag];
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    Tag *renameTag = self.renameTag;
+    if (!renameTag) {
+        return;
+    }
+
+    self.renameTag = nil;
+
+    SPTagListViewCell *cell = [self cellForTag:renameTag];
     if (self.isEditing) {
         [cell setSelected:NO animated:YES];
     }
 
+    textField.enabled = NO;
+    textField.delegate = nil;
+
+    NSString *orignalTagName = renameTag.name;
+    NSString *newTagName = textField.text;
+
     // see if tag already exists, if not rename. If it does, revert back to original name
-    BOOL renameTag = ![[SPObjectManager sharedManager] tagExists:textField.text];
+    BOOL shouldRenameTag = ![[SPObjectManager sharedManager] tagExists:newTagName];
     
-    if (renameTag) {
-        NSString *orignalTagName = self.renameTag.name;
-        NSString *newTagName = textField.text;
-        [[SPObjectManager sharedManager] editTag:self.renameTag title:newTagName];
+    if (shouldRenameTag) {
+        [[SPObjectManager sharedManager] editTag:renameTag title:newTagName];
         
         // see if this is the current tag
 		SPAppDelegate *appDelegate = [SPAppDelegate sharedDelegate];
@@ -635,13 +638,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         }
     }
     else {
-        textField.text = self.renameTag.name;
+        textField.text = orignalTagName;
     }
-    
-    self.renameTag = nil;
-
-    cell.textField.text = textField.text;
-    cell.textField.enabled = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -714,20 +712,8 @@ static const NSInteger SPTagListEmptyStateSectionCount  = 1;
         return;
     }
     
-    [self.reloadTimer invalidate];
-    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:SPTagListRefreshDelay
-                                                        target:self
-                                                      selector:@selector(delayedReloadData)
-                                                      userInfo:nil
-                                                       repeats:NO];
-}
-
-- (void)delayedReloadData {
     [self.tableView reloadData];
-    [self.reloadTimer invalidate];
-    self.reloadTimer = nil;
 }
-
 
 #pragma mark - KeyboardNotifications
 
