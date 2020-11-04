@@ -56,7 +56,7 @@
     [self clearHighlights:animated];
     
     highlightViews = [NSMutableArray arrayWithCapacity:range.length];
-    
+
     [self.layoutManager enumerateLineFragmentsForGlyphRange:range
                                                  usingBlock:^(CGRect rect, CGRect usedRect, NSTextContainer *textContainer, NSRange glyphRange, BOOL *stop) {
                                                      
@@ -67,7 +67,8 @@
                                                      
                                                      CGRect highlightRect = [self.layoutManager boundingRectForGlyphRange:highlightRange
                                                                                                           inTextContainer:textContainer];
-                                                     
+                                                     highlightRect.origin.y += self.textContainerInset.top;
+
                                                      if (block)
                                                          block(highlightRect);
                                                      
@@ -107,17 +108,12 @@
 }
 
 - (UIView *)createHighlightViewForAttributedString:(NSAttributedString *)attributedString frame:(CGRect)frame {
-    
-    frame.origin.y += 8;
-    
+
     VSTheme *theme = [[VSThemeManager sharedManager] theme];
     CGFloat horizontalPadding = [theme floatForKey:@"searchHighlightHorizontalPadding"];
-    CGFloat verticalPadding = [theme floatForKey:@"searchHighlightVerticalPadding"];
-    
+
     frame.size.width += 2 * horizontalPadding;
     frame.origin.x -= horizontalPadding;
-    frame.size.height += 2 * verticalPadding;
-    frame.origin.y -= verticalPadding;
     
     UILabel *highlightLabel = [[UILabel alloc] initWithFrame:frame];
     

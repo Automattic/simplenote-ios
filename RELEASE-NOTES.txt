@@ -1,5 +1,7 @@
 4.28
 -----
+-   Fixed a bug that affected Text Selection #973
+ 
 -   Fixed a bug that toggled Edition while dragging the Editor #972
 
 4.27

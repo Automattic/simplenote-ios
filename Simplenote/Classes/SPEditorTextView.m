@@ -19,8 +19,9 @@ NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the g
 
 // TODO: Add intrinsicContentSize support to TagView
 CGFloat const TagViewHeight = 44;
-CGFloat const TextViewTopInsets = 8;
-CGFloat const TextViewBottomInsets = TagViewHeight * 2;
+
+CGFloat const TextViewContanerInsetsTop = 8;
+CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
 
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
@@ -76,7 +77,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (void)setupTextContainerInsets
 {
     UIEdgeInsets containerInsets = self.textContainerInset;
-    containerInsets.top += TextViewTopInsets;
+    containerInsets.top += TextViewContanerInsetsTop;
+    containerInsets.bottom += TextViewContanerInsetsBottom;
     self.textContainerInset = containerInsets;
 }
 
@@ -166,9 +168,11 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
     CGFloat height      = CGRectGetHeight(self.tagView.frame);
 
-    CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
+    // When the Keyboard is absent we'll always honor the Safe Area Insets
+    CGFloat paddingY    = MAX(self.contentInset.bottom, self.safeAreaInsets.bottom);
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height + self.contentInset.top;
+    CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
+
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
@@ -179,18 +183,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     _lockTagEditorPosition = lockTagEditorPosition;
     [self positionTagView];
-}
-
-- (CGFloat)tagsViewPadding
-{
-    return 2 * CGRectGetHeight(self.tagView.bounds);
-}
-
-- (UIEdgeInsets)adjustedContentInset
-{
-    UIEdgeInsets contentInsets = super.adjustedContentInset;
-    contentInsets.bottom += self.tagsViewPadding;
-    return contentInsets;
 }
 
 - (void)setTagView:(SPTagView *)tagView
@@ -234,17 +226,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     /// Notes:
     /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
     /// -   And we don't consider `adjusted top insets` since that deals with navbar overlaps, and doesn't affect our calculations.
-    if (self.contentSize.height <= self.bounds.size.height - self.contentInset.top - self.adjustedContentInset.bottom) {
+
+    CGFloat visibleHeight = self.bounds.size.height
+                                - self.textContainerInset.top
+                                - self.textContainerInset.bottom
+                                - self.contentInset.bottom;
+    if (self.contentSize.height <= visibleHeight) {
         return;
     }
 
     CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
-    CGPoint scrollOffset = CGPointMake(0, yOffset);
 
-    if (self.contentOffset.y == scrollOffset.y) {
+    if (self.contentOffset.y == yOffset) {
         return;
     }
 
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:animated];
 }
 
@@ -255,7 +252,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setContentOffset:scrollOffset animated:NO];
 }
 
-#pragma mark Notifications
+
+#pragma mark - Notifications
 
 - (void)didEndEditing:(NSNotification *)notification
 {
