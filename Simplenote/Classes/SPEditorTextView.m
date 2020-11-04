@@ -10,8 +10,6 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
-#import "VSThemeManager.h"
-#import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
 NSString *const MarkdownUnchecked = @"- [ ]";
@@ -26,6 +24,14 @@ CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
 
 CGFloat const TextViewScrollerExtraInsetsBottom = TagViewHeight;
 CGFloat const TextViewScrollerDefaultBottomInset = 0;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewRegularByRegularPadding = 64;
+static CGFloat const TextViewDefaultPadding = 20;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewMaximumWidthPad = 640;
+static CGFloat const TextViewMaximumWidthPhone = 0;
 
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
@@ -125,11 +131,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     ];
 }
 
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (NSDictionary *)typingAttributes
 {
     return self.text.length == 0 ? self.interactiveTextStorage.headlineStyle : self.interactiveTextStorage.defaultStyle;
@@ -148,18 +149,30 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)horizontalPadding
+{
+    return [UIDevice isPad] && !self.isHorizontallyCompact ? TextViewRegularByRegularPadding : TextViewDefaultPadding;
+}
+
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)maximumWidth
+{
+    return [UIDevice isPad] ? TextViewMaximumWidthPad : TextViewMaximumWidthPhone;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
+
+    CGFloat padding = self.horizontalPadding;
     padding += self.safeAreaInsets.left;
 
-    CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
+    CGFloat maxWidth = self.maximumWidth;
     CGFloat width = self.bounds.size.width;
     
     if (width - 2 * padding > maxWidth && maxWidth > 0) {
-        padding = (width - maxWidth) / 2.0;
+        padding = (width - maxWidth) * 0.5;
     }
 
     self.textContainer.lineFragmentPadding = padding;
