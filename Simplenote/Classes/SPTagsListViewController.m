@@ -6,7 +6,6 @@
 #import "SPTagListViewCell.h"
 #import "Tag.h"
 
-#import "VSThemeManager.h"
 #import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 

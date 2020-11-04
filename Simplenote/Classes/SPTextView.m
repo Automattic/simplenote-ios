@@ -9,10 +9,14 @@
 
 #import "SPTextView.h"
 #import <CoreFoundation/CFStringTokenizer.h>
-#import "VSThemeManager.h"
 #import "NSString+Search.h"
 #import "SPInteractiveTextStorage.h"
 #import "Simplenote-Swift.h"
+
+
+CGFloat const TextViewHighlightHorizontalPadding = 3;
+CGFloat const TextViewHighlightCornerRadius = 3;
+
 
 @implementation SPTextView
 
@@ -109,11 +113,8 @@
 
 - (UIView *)createHighlightViewForAttributedString:(NSAttributedString *)attributedString frame:(CGRect)frame {
 
-    VSTheme *theme = [[VSThemeManager sharedManager] theme];
-    CGFloat horizontalPadding = [theme floatForKey:@"searchHighlightHorizontalPadding"];
-
-    frame.size.width += 2 * horizontalPadding;
-    frame.origin.x -= horizontalPadding;
+    frame.size.width += 2 * TextViewHighlightHorizontalPadding;
+    frame.origin.x -= TextViewHighlightHorizontalPadding;
     
     UILabel *highlightLabel = [[UILabel alloc] initWithFrame:frame];
     
@@ -128,7 +129,7 @@
     
     highlightLabel.textAlignment = NSTextAlignmentCenter;
     highlightLabel.backgroundColor = [UIColor simplenoteEditorSearchHighlightSelectedColor];
-    highlightLabel.layer.cornerRadius = [theme floatForKey:@"searhHighlightCornerRadius"];
+    highlightLabel.layer.cornerRadius = TextViewHighlightCornerRadius;
     highlightLabel.clipsToBounds = YES;
     highlightLabel.layer.shouldRasterize = YES;
     highlightLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];

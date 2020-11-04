@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 @class SPTagStub;
 
+
+extern CGVector const TagPillSpacing;
+
 @interface SPTagPill : UIButton {
     
     id target;
     SEL deletionAction;
 }
-
 
 - (instancetype)initWithTagStub:(SPTagStub *)tagStub target:(id)target action:(SEL)action deletionAction:(SEL)deletionAction;
 

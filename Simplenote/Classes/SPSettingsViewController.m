@@ -2,7 +2,6 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "VSThemeManager.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
