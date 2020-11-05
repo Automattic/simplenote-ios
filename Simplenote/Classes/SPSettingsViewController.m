@@ -5,7 +5,6 @@
 #import "StatusChecker.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
-#import "UIDevice+Extensions.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "Simplenote-Swift.h"
 #import "Simperium+Simplenote.h"

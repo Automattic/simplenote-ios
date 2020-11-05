@@ -7,7 +7,6 @@
 //
 
 #import "VSTheme+Extensions.h"
-#import "UIDevice+Extensions.h"
 #import "Simplenote-Swift.h"
 
 @implementation VSTheme (Extensions)
