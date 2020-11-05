@@ -7,23 +7,20 @@
 //
 
 #import "SPEntryListViewController.h"
-#import "VSThemeManager.h"
 #import "Simplenote-Swift.h"
 #import "SPEntryListCell.h"
 #import "SPEntryListAutoCompleteCell.h"
 
 static NSString *cellIdentifier = @"primaryCell";
 static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
+static CGFloat const EntryListTextFieldSidePadding = 15;
+static CGFloat const EntryListCellHeight = 44;
 
 @implementation SPEntryListViewController
 
-- (void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
 }
 
 - (void)viewDidLoad {
@@ -46,14 +43,13 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                     yOrigin,
                                                                     self.view.frame.size.width,
-                                                                    [self.theme floatForKey:@"collaboratorCellHeight"])];
+                                                                    EntryListCellHeight)];
     entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:entryFieldBackground];
     
-    CGFloat padding = [self.theme floatForKey:@"collaboratorCellSidePadding"];
-    entryTextField = [[SPTextField alloc] initWithFrame:CGRectMake(padding,
+    entryTextField = [[SPTextField alloc] initWithFrame:CGRectMake(EntryListTextFieldSidePadding,
                                                                    0,
-                                                                   entryFieldBackground.frame.size.width - 2 * padding,
+                                                                   entryFieldBackground.frame.size.width - 2 * EntryListTextFieldSidePadding,
                                                                    entryFieldBackground.frame.size.height)];
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -77,7 +73,7 @@ static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
     primaryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, yOrigin + entryTextField.frame.size.height,
                                                                      self.view.frame.size.width, self.view.frame.size.height - (yOrigin + entryTextField.frame.size.height))
                                                     style:UITableViewStyleGrouped];
-    primaryTableView.rowHeight = [self.theme floatForKey:@"collaboratorCellHeight"];
+    primaryTableView.rowHeight = EntryListCellHeight;
     primaryTableView.delegate = self;
     primaryTableView.dataSource = self;
     primaryTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

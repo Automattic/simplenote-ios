@@ -6,7 +6,6 @@
 #pragma mark - External
 
 #import <Simperium/Simperium.h>
-#import "VSThemeManager.h"
 
 
 #pragma mark - Simplenote-Y
