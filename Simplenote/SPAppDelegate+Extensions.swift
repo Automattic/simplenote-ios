@@ -81,7 +81,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
     func configureStateRestoration() {
         EditorFactory.shared.restorationClass = SPAppDelegate.self
 
-        tagListViewController.restorationIdentifier = SPTagsListViewController.defaultRestorationIdentifier
+        tagListViewController.restorationIdentifier = TagListViewController.defaultRestorationIdentifier
         tagListViewController.restorationClass = SPAppDelegate.self
 
         noteListViewController.restorationIdentifier = SPNoteListViewController.defaultRestorationIdentifier
