@@ -7,7 +7,6 @@
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPSettingsViewController.h"
-#import "SPTagsListViewController.h"
 #import "SPAddCollaboratorsViewController.h"
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
@@ -116,7 +115,7 @@
 		[self setSelectedTag:selectedTag];
 	}
 
-    self.tagListViewController = [SPTagsListViewController new];
+    self.tagListViewController = [TagListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
