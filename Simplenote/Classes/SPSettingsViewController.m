@@ -2,11 +2,9 @@
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
 #import "DTPinLockController.h"
-#import "VSThemeManager.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
-#import "UIDevice+Extensions.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "Simplenote-Swift.h"
 #import "Simperium+Simplenote.h"
@@ -581,10 +579,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             switch (indexPath.row) {
                 case SPOptionsHelpRowTitle: {
                     NSURL *url = [NSURL URLWithString:@"https://simplenote.com/help"];
-
-                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                       [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-                    }
+                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 
                     break;
                 }

@@ -21,8 +21,6 @@
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
-#import "VSThemeManager.h"
-#import "VSTheme.h"
 #import "DTPinLockController.h"
 #import "SPTracker.h"
 

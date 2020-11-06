@@ -10,7 +10,6 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
-#import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
 NSString *const MarkdownUnchecked = @"- [ ]";
@@ -18,9 +17,18 @@ NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
 // TODO: Add intrinsicContentSize support to TagView
-CGFloat const TagViewHeight = 44;
-CGFloat const TextViewTopInsets = 8;
-CGFloat const TextViewBottomInsets = TagViewHeight * 2;
+static CGFloat const TagViewHeight = 44;
+
+static CGFloat const TextViewContanerInsetsTop = 8;
+static CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewRegularByRegularPadding = 64;
+static CGFloat const TextViewDefaultPadding = 20;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewMaximumWidthPad = 640;
+static CGFloat const TextViewMaximumWidthPhone = 0;
 
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
@@ -76,7 +84,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 - (void)setupTextContainerInsets
 {
     UIEdgeInsets containerInsets = self.textContainerInset;
-    containerInsets.top += TextViewTopInsets;
+    containerInsets.top += TextViewContanerInsetsTop;
+    containerInsets.bottom += TextViewContanerInsetsBottom;
     self.textContainerInset = containerInsets;
 }
 
@@ -118,14 +127,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
     ];
 }
 
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (NSDictionary *)typingAttributes
 {
-    return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
+    return self.text.length == 0 ? self.interactiveTextStorage.headlineStyle : self.interactiveTextStorage.defaultStyle;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -141,18 +145,30 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)horizontalPadding
+{
+    return [UIDevice isPad] && !self.isHorizontallyCompact ? TextViewRegularByRegularPadding : TextViewDefaultPadding;
+}
+
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)maximumWidth
+{
+    return [UIDevice isPad] ? TextViewMaximumWidthPad : TextViewMaximumWidthPhone;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
+
+    CGFloat padding = self.horizontalPadding;
     padding += self.safeAreaInsets.left;
 
-    CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
+    CGFloat maxWidth = self.maximumWidth;
     CGFloat width = self.bounds.size.width;
     
     if (width - 2 * padding > maxWidth && maxWidth > 0) {
-        padding = (width - maxWidth) / 2.0;
+        padding = (width - maxWidth) * 0.5;
     }
 
     self.textContainer.lineFragmentPadding = padding;
@@ -166,9 +182,12 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
     CGFloat height      = CGRectGetHeight(self.tagView.frame);
 
+    /// When the keyboard is presented, we're explicitly removing the bottom safeAreaInsets: TextView automatically accounts for them.
+    /// For that reason, when positioning the TagView we'd need to add them manually
     CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height + self.contentInset.top;
+    CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
+
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
@@ -179,18 +198,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     _lockTagEditorPosition = lockTagEditorPosition;
     [self positionTagView];
-}
-
-- (CGFloat)tagsViewPadding
-{
-    return 2 * CGRectGetHeight(self.tagView.bounds);
-}
-
-- (UIEdgeInsets)adjustedContentInset
-{
-    UIEdgeInsets contentInsets = super.adjustedContentInset;
-    contentInsets.bottom += self.tagsViewPadding;
-    return contentInsets;
 }
 
 - (void)setTagView:(SPTagView *)tagView
@@ -234,17 +241,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     /// Notes:
     /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
     /// -   And we don't consider `adjusted top insets` since that deals with navbar overlaps, and doesn't affect our calculations.
-    if (self.contentSize.height <= self.bounds.size.height - self.contentInset.top - self.adjustedContentInset.bottom) {
+
+    CGFloat visibleHeight = self.bounds.size.height
+                                - self.textContainerInset.top
+                                - self.textContainerInset.bottom
+                                - self.contentInset.bottom;
+    if (self.contentSize.height <= visibleHeight) {
         return;
     }
 
     CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
-    CGPoint scrollOffset = CGPointMake(0, yOffset);
 
-    if (self.contentOffset.y == scrollOffset.y) {
+    if (self.contentOffset.y == yOffset) {
         return;
     }
 
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:animated];
 }
 
@@ -255,7 +267,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setContentOffset:scrollOffset animated:NO];
 }
 
-#pragma mark Notifications
+
+#pragma mark - Notifications
 
 - (void)didEndEditing:(NSNotification *)notification
 {
