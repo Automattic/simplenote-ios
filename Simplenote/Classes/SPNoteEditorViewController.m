@@ -780,6 +780,14 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self cancelSaveTimers];
 }
 
+- (void)saveIfNeeded
+{
+    if (self.currentNote == nil || self.modified == NO) {
+        return;
+    }
+
+    [self save];
+}
 
 - (void)save
 {
@@ -857,7 +865,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [_tagView endEditing:YES];
 }
 
-- (void)newButtonAction:(id)sender {
+- (void)newButtonAction:(id)sender
+{
+    [self saveIfNeeded];
 
     if (self.currentNote.isBlank) {
         [_noteEditorTextView becomeFirstResponder];
