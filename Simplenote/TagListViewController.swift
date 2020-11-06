@@ -106,8 +106,6 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(menuDidChangeVisibility), name: UIMenuController.didHideMenuNotification, object: nil)
         nc.addObserver(self, selector: #selector(tagsSortOrderWasUpdated), name: NSNotification.Name.SPAlphabeticalTagSortPreferenceChanged, object: nil)
         nc.addObserver(self, selector: #selector(themeDidChange), name: NSNotification.Name.SPSimplenoteThemeChanged, object: nil)
-        // TODO: start listening when app becomes active?
-        nc.addObserver(self, selector: #selector(stopListeningToKeyboardNotifications), name: UIApplication.willResignActiveNotification, object: nil)
     }
 
     func startListeningToKeyboardNotifications() {
@@ -116,7 +114,6 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc
     func stopListeningToKeyboardNotifications() {
         let nc = NotificationCenter.default
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
