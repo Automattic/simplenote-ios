@@ -505,15 +505,7 @@ private extension TagListViewController {
 
     func openNoteListForTagName(_ tagName: String?) {
         let appDelegate = SPAppDelegate.shared()
-        // Only perform a fetch if the view has actually changed
-        let fetchNeeded = appDelegate.selectedTag != tagName
-
         appDelegate.selectedTag = tagName
-        // TODO: Move to AppDelegate::setSelectedTag ?
-        if fetchNeeded {
-            appDelegate.noteListViewController.update()
-        }
-
         appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
     }
 }
@@ -537,7 +529,6 @@ private extension TagListViewController {
         let appDelegate = SPAppDelegate.shared()
         if appDelegate.selectedTag == tag.name {
             appDelegate.selectedTag = nil
-            appDelegate.noteListViewController.update()
         }
 
         SPObjectManager.shared().removeTag(tag)
@@ -613,7 +604,6 @@ extension TagListViewController: UITextFieldDelegate {
             let appDelegate = SPAppDelegate.shared()
             if appDelegate.selectedTag == originalTagName {
                 appDelegate.selectedTag = newTagName
-                appDelegate.noteListViewController.update()
             }
         } else {
             textField.text = originalTagName
