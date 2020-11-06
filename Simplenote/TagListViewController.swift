@@ -76,8 +76,8 @@ private extension TagListViewController {
 
     func configureTableView() {
         tableView.register(SPTagListViewCell.loadNib(), forCellReuseIdentifier: SPTagListViewCell.reuseIdentifier)
-
         tableView.separatorInsetReference = .fromAutomaticInsets
+
         if #available(iOS 13.0, *) {
             tableView.automaticallyAdjustsScrollIndicatorInsets = false
         }
