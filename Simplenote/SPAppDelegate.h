@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
 
 @property (strong, nonatomic) SPSidebarContainerViewController          *sidebarViewController;
-@property (strong, nonatomic) TagListViewController                  *tagListViewController;
+@property (strong, nonatomic) TagListViewController                     *tagListViewController;
 @property (strong, nonatomic) SPNoteListViewController                  *noteListViewController;
 @property (strong, nonatomic) SPNavigationController                    *navigationController;
 

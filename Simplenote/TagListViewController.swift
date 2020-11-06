@@ -503,7 +503,7 @@ extension TagListViewController: SPTagListViewCellDelegate {
     }
 }
 
-// MARK: -
+// MARK: - Helper Methods
 //
 private extension TagListViewController {
     func setEditing(_ editing: Bool) {
@@ -538,6 +538,7 @@ private extension TagListViewController {
 }
 
 // MARK: - UIGestureRecognizerDelegate
+//
 extension TagListViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
