@@ -565,7 +565,7 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        cell.bodyText = excerptMaker.excerpt(from: note)
+        cell.bodyText = excerptMaker.bodyExcerpt(from: note)
 
         cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor

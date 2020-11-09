@@ -28,7 +28,7 @@ final class ExcerptMaker: NSObject {
 
     /// Generate and return excerpt from the note. Excerpt is based on keywords
     ///
-    func excerpt(from note: Note) -> String? {
+    func bodyExcerpt(from note: Note) -> String? {
         guard let regexp = regexp, let content = note.content else {
             return note.bodyPreview
         }
