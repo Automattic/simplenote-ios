@@ -14,6 +14,10 @@ struct NoteContentHelper {
     ///     - content: note content
     ///
     static func structure(of content: String?) -> (title: NSRange, body: NSRange) {
+        guard let content = content, !content.isEmpty else {
+            return (title: .notFound, body: .notFound)
+        }
+
         let titleRange = trimmedTextRange(in: content, startingFrom: 0, endAtNewline: true)
         let bodyRange: NSRange
         if titleRange.isNotFound {
@@ -28,10 +32,7 @@ struct NoteContentHelper {
         )
     }
 
-    private static func trimmedTextRange(in content: String?, startingFrom startLocation: Int, endAtNewline: Bool) -> NSRange {
-        guard let content = content else {
-            return .notFound
-        }
+    private static func trimmedTextRange(in content: String, startingFrom startLocation: Int, endAtNewline: Bool) -> NSRange {
         let fullRange = content.nsString.fullRange
 
         // Look for the first character ignoring whitespaces and newlines
