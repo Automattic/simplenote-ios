@@ -319,6 +319,12 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
+		
+		let snackbar = Snackbar(message: "Some message")
+		print(snackbar)
+		snackbar.show()
+		return
+		
         let informationViewController = NoteInformationViewController(note: note)
 
         let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
