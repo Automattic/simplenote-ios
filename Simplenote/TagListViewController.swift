@@ -655,22 +655,30 @@ private extension TagListViewController {
             }
 
             // Reload if number of sections is different
+            // Results controller supports only tags section. We show/hide tags section based on the number of tags®
             guard self.tableView.numberOfSections == self.numberOfSections(in: self.tableView) else {
                 self.setEditing(false)
                 self.tableView.reloadData()
                 return
             }
 
-            let transposedSections = sectionsChangeset.transposed(toSection: Section.tags.rawValue)
-            let transposedObjects = objectsChangeset.transposed(toSection: Section.tags.rawValue)
-
-            self.tableView.performBatchChanges(sectionsChangeset: transposedSections,
-                                               objectsChangeset: transposedObjects)
+            self.reloadTable(withSectionsChangeset: sectionsChangeset.transposed(toSection: Section.tags.rawValue),
+                             objectsChangeset: objectsChangeset.transposed(toSection: Section.tags.rawValue))
         }
     }
 
     func stopListeningForChanges() {
         resultsController.onDidChangeContent = nil
+    }
+
+    func reloadTable(withSectionsChangeset sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
+        self.tableView.performBatchUpdates({
+            // Disable animation for row updates
+            let animations = ResultsTableAnimations(delete: .fade, insert: .fade, move: .fade, update: .none)
+            self.tableView.performChanges(sectionsChangeset: sectionsChangeset,
+                                          objectsChangeset: objectsChangeset,
+                                          animations: animations)
+        }, completion: nil)
     }
 }
 
