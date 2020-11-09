@@ -1,6 +1,5 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
-#import "VSThemeManager.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "SPTagView.h"
@@ -21,7 +20,6 @@
 #import "SPAcitivitySafari.h"
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
-#import "UIDevice+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
@@ -40,7 +38,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 // UIKit Components
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) UILabel                   *searchDetailLabel;
-@property (nonatomic, strong) SPTagView                 *tagView;
 @property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
@@ -120,48 +117,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-}
-
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
-- (void)refreshStyle
-{    
-    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle1 weight:UIFontWeightBold];
-    UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
-
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-
-    _tagView = _noteEditorTextView.tagView;
-
-    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
-
-    UIKeyboardAppearance keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
-    self.noteEditorTextView.keyboardAppearance = keyboardAppearance;
-    self.tagView.keyboardAppearance = keyboardAppearance;
-
-    UIColor *backgroundColor = self.previewing ? [UIColor simplenoteBackgroundPreviewColor] : [UIColor simplenoteBackgroundColor];
-    self.noteEditorTextView.backgroundColor = backgroundColor;
-    self.tagView.backgroundColor = backgroundColor;
-    self.bottomView.backgroundColor = backgroundColor;
-    self.view.backgroundColor = backgroundColor;
-
-    self.noteEditorTextView.interactiveTextStorage.tokens = @{
-        SPDefaultTokenName : @{
-                NSFontAttributeName : bodyFont,
-                NSForegroundColorAttributeName : fontColor,
-                NSParagraphStyleAttributeName : paragraphStyle
-        },
-        SPHeadlineTokenName : @{
-                NSFontAttributeName : headlineFont,
-                NSForegroundColorAttributeName: fontColor,
-        }
-    };
 }
 
 - (void)viewDidLoad
@@ -561,7 +516,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (UIViewController *)nextViewControllerForInteractivePush
 {
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
-    previewViewController.markdownText = [self.noteEditorTextView getPlainTextContent];
+    previewViewController.markdownText = [self.noteEditorTextView plainText];
     
     return previewViewController;
 }
@@ -654,7 +609,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
-    _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
+    _noteEditorTextView.text = [_noteEditorTextView plainText];
     [_noteEditorTextView processChecklists];
     
     _searchString = nil;
@@ -852,7 +807,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         _currentNote.modificationDate = [NSDate date];
 
         // Force an update of the note's content preview in case only tags changed
@@ -871,10 +826,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)willReceiveNewContent {
     
     self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
+    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView plainText];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
     }
 }

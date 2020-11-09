@@ -6,7 +6,6 @@
 #pragma mark - External
 
 #import <Simperium/Simperium.h>
-#import "VSThemeManager.h"
 
 
 #pragma mark - Simplenote-Y
@@ -21,12 +20,14 @@
 #import "SPNotifications.h"
 #import "SPObjectManager.h"
 #import "SPRatingsHelper.h"
+#import "SPSettingsViewController.h"
+#import "SPTagListViewCell.h"
 #import "SPTextView.h"
 #import "SPTextField.h"
 #import "SPTableViewController.h"
 #import "SPNoteListViewController.h"
-#import "SPTagsListViewController.h"
 #import "SPNoteEditorViewController.h"
+#import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "SPTracker.h"
 #import "WPAuthHandler.h"

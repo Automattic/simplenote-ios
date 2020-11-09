@@ -41,8 +41,12 @@ struct KeychainItemWrapper {
         mutating get {
             do {
                 return try item.readPassword()
+
+            } catch KeychainError.noPassword {
+                return nil
+
             } catch {
-                NSLog("Error Reading Keychain Item \(item.service).\(item.account)")
+                NSLog("Error Reading Keychain Item \(item.service).\(item.account): \(error)")
                 return nil
             }
         }

@@ -8,7 +8,6 @@
 
 #import "SPMarkdownParser.h"
 #import "html.h"
-#import "VSThemeManager.h"
 #import "Simplenote-Swift.h"
 
 

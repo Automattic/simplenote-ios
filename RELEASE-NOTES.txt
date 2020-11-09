@@ -1,3 +1,8 @@
+4.28
+-----
+-   Fixed a bug that affected Text Selection #973
+-   Fixed a bug that toggled Edition while dragging the Editor #972
+
 4.27
 -----
 -   New Note History interface #762
@@ -6,6 +11,7 @@
 -   Updated Navigation Bar's behavior #918
 -   Adjusted Notes List Metrics #929
 -   Fixed a bug that caused the Search Bar to look extra big #930
+-   Fixed a bug affecting Tags Autocomplete #964
 
 4.26
 -----

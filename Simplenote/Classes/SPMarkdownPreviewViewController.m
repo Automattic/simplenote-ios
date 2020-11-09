@@ -8,7 +8,6 @@
 
 #import "SPMarkdownPreviewViewController.h"
 #import "SPMarkdownParser.h"
-#import "UIDevice+Extensions.h"
 #import "Simplenote-Swift.h"
 
 @import WebKit;
