@@ -35,49 +35,30 @@ struct NoteContentHelper {
     private static func trimmedTextRange(in content: String, startingFrom startLocation: Int, endAtNewline: Bool) -> NSRange {
         let fullRange = content.nsString.fullRange
 
-        // Look for the first character ignoring whitespaces and newlines
-        let firstCharacterSearchRange = NSRange(location: startLocation,
-                                                length: fullRange.length - startLocation)
-        let firstCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
-                                                                    options: [],
-                                                                    range: firstCharacterSearchRange)
-        guard !firstCharacterRange.isNotFound else {
+        guard let firstCharacterLocation = content.locationOfFirstCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
+                                                                            startingFrom: startLocation) else {
             return .notFound
         }
 
         let endRangeLocation: Int = {
-            if endAtNewline {
-                // Look for the next newline
-                let newlineSearchRange = NSRange(location: firstCharacterRange.location,
-                                                 length: fullRange.length - firstCharacterRange.location)
-                let newlineRange = content.nsString.rangeOfCharacter(from: .newlines,
-                                                                     options: [],
-                                                                     range: newlineSearchRange)
-                if !newlineRange.isNotFound {
-                    return newlineRange.location
-                }
+            if !endAtNewline {
+                return fullRange.length
             }
 
-            return fullRange.length
+            // Look for the next newline
+            let newlineLocation = content.locationOfFirstCharacter(from: CharacterSet.newlines,
+                                                                   startingFrom: firstCharacterLocation)
+
+            return newlineLocation ?? fullRange.length
         }()
 
-        return rangeByTrimmingTrailingWhitespacesAndNewlines(in: content,
-                                                             firstCharacterLocation: firstCharacterRange.location,
-                                                             endRangeLocation: endRangeLocation)
-    }
-
-    private static func rangeByTrimmingTrailingWhitespacesAndNewlines(in content: String, firstCharacterLocation: Int, endRangeLocation: Int) -> NSRange {
-        // Look for the last character
-        let lastCharacterSearchRange = NSRange(location: firstCharacterLocation,
-                                               length: endRangeLocation - firstCharacterLocation)
-        let lastCharacterRange = content.nsString.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
-                                                                   options: [.backwards],
-                                                                   range: lastCharacterSearchRange)
-        guard !lastCharacterRange.isNotFound else {
+        guard let lastCharacterLocation = content.locationOfFirstCharacter(from: CharacterSet.whitespacesAndNewlines.inverted,
+                                                                            startingFrom: endRangeLocation,
+                                                                            backwards: true) else {
             return .notFound
         }
 
         return NSRange(location: firstCharacterLocation,
-                       length: (lastCharacterRange.location + 1) - firstCharacterLocation)
+                       length: lastCharacterLocation + 1 - firstCharacterLocation)
     }
 }

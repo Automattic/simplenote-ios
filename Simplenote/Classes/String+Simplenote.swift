@@ -46,3 +46,35 @@ extension String {
         return output
     }
 }
+
+// MARK: - Searching for the first / last characters
+//
+extension String {
+
+    /// Find and return the location of the first / last character from the specified character set
+    ///
+    func locationOfFirstCharacter(from searchSet: CharacterSet,
+                                  startingFrom startLocation: Int,
+                                  backwards: Bool = false) -> Int? {
+        let fullRange = nsString.fullRange
+        guard startLocation <= fullRange.length else {
+            return nil
+        }
+
+        let range: NSRange = {
+            if backwards {
+                return NSRange(location: 0,
+                               length: startLocation)
+            }
+
+            return NSRange(location: startLocation,
+                           length: fullRange.length - startLocation)
+        }()
+
+        let characterRange = nsString.rangeOfCharacter(from: searchSet,
+                                                       options: backwards ? [.backwards] : [],
+                                                       range: range)
+
+        return characterRange.isNotFound ? nil : characterRange.location
+    }
+}
