@@ -451,7 +451,6 @@
 		37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextAttachment.swift; sourceTree = "<group>"; };
 		37FD30461FC4CFA1008D0B78 /* KeychainMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainMigrator.swift; sourceTree = "<group>"; };
 		37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
-		3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		3D0CDFF82DFBC35A68B2C1C7 /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
 		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -528,9 +527,7 @@
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
-		A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution adhoc.xcconfig"; sourceTree = "<group>"; };
 		B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPDiagnosticsViewController.xib; path = Classes/SPDiagnosticsViewController.xib; sourceTree = "<group>"; };
 		B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IndexPath+Simplenote.swift"; path = "Classes/IndexPath+Simplenote.swift"; sourceTree = "<group>"; };
 		B5095DC824632E3300812711 /* SimplenoteConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteConstants.swift; path = Classes/SimplenoteConstants.swift; sourceTree = "<group>"; };
@@ -1010,17 +1007,14 @@
 				6AE4CF60906DA6D08F64E5B3 /* Pods-Automattic-Simplenote.release.xcconfig */,
 				9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */,
 				6BCBD402CC18FF32DD97B404 /* Pods-Automattic-Simplenote.distribution appstore.xcconfig */,
-				B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */,
 				0DA93AA95D399BBE1733B6EF /* Pods-Automattic-SimplenoteShare.debug.xcconfig */,
 				3D0CDFF82DFBC35A68B2C1C7 /* Pods-Automattic-SimplenoteShare.release.xcconfig */,
 				697B9622931545E466B5E186 /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */,
 				7B29128DBC9F14CBA5F4683F /* Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig */,
-				A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */,
 				AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */,
 				3F6CECDC2FEA90B9E5C920F5 /* Pods-SimplenoteTests.release.xcconfig */,
 				30BBEDD4EB11FC7D576AE690 /* Pods-SimplenoteTests.distribution internal.xcconfig */,
 				A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */,
-				3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */,
 				9F2210B2EE42B513C4C92372 /* Pods-Automattic-Simplenote.distribution alpha.xcconfig */,
 				C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */,
 				593EA1C08A9F76E3833C3E80 /* Pods-SimplenoteTests.distribution alpha.xcconfig */,
@@ -2597,14 +2591,6 @@
 			};
 			name = "Distribution AppStore";
 		};
-		3F1BB4B3243199FF006D1A04 /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution AdHoc";
-		};
 		3FA60140242C5AAE0068FC52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2764,37 +2750,6 @@
 				TEST_TARGET_NAME = Simplenote;
 			};
 			name = "Distribution AppStore";
-		};
-		3FA60145242C5AAE0068FC52 /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = "Distribution AdHoc";
 		};
 		46A3C9D517DFA81A002865AE /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3476,195 +3431,6 @@
 			};
 			name = "Distribution AppStore";
 		};
-		B5C7BF9D230C59F5000DEC91 /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution AdHoc";
-		};
-		B5CCE3221FCC6B6A006B123B /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"SDK_VERSION_IOS13=$(SDK_VERSION_IOS13)",
-					"SDK_VERSION_MAJOR=$(SDK_VERSION_MAJOR)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Distribution AdHoc";
-		};
-		B5CCE3231FCC6B6A006B123B /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B303123B163A5C7805D10DC7 /* Pods-Automattic-Simplenote.distribution adhoc.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc. (PZYM8XX95Q)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc. (PZYM8XX95Q)";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"APPSTORE_DISTRIBUTION=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
-				PRODUCT_NAME = Simplenote;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AdHoc";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_AD_HOC $(SP_IOS_SDK)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Distribution AdHoc";
-		};
-		B5CCE3241FCC6B6A006B123B /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A774E3E4F5041D36FBE400BD /* Pods-Automattic-SimplenoteShare.distribution adhoc.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc. (PZYM8XX95Q)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc. (PZYM8XX95Q)";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PZYM8XX95Q;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"APPSTORE_DISTRIBUTION=1",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote AdHoc Share";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-			};
-			name = "Distribution AdHoc";
-		};
-		B5CCE3251FCC6B6A006B123B /* Distribution AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CD7AC6920BF4B4D8D0F2920 /* Pods-SimplenoteTests.distribution adhoc.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteTests/SimplenoteTests-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Simplenote.app/Simplenote";
-			};
-			name = "Distribution AdHoc";
-		};
 		B5EB1EF71C204EBE0080A1B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DA93AA95D399BBE1733B6EF /* Pods-Automattic-SimplenoteShare.debug.xcconfig */;
@@ -3950,7 +3716,6 @@
 				3F1BB4B0243199FF006D1A04 /* Distribution Internal */,
 				3F1BB4B1243199FF006D1A04 /* Distribution Alpha */,
 				3F1BB4B2243199FF006D1A04 /* Distribution AppStore */,
-				3F1BB4B3243199FF006D1A04 /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3963,7 +3728,6 @@
 				3FA60142242C5AAE0068FC52 /* Distribution Internal */,
 				3FA60143242C5AAE0068FC52 /* Distribution Alpha */,
 				3FA60144242C5AAE0068FC52 /* Distribution AppStore */,
-				3FA60145242C5AAE0068FC52 /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3976,7 +3740,6 @@
 				B50789FD1C1F4F63009F097A /* Distribution Internal */,
 				8C3FEBDD23EAE03A00EE55E6 /* Distribution Alpha */,
 				B50789F91C1F4F5A009F097A /* Distribution AppStore */,
-				B5CCE3231FCC6B6A006B123B /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3989,7 +3752,6 @@
 				B58218A11FCC45170094ECA1 /* Distribution Internal */,
 				8C3FEBDF23EAE03A00EE55E6 /* Distribution Alpha */,
 				B58218A21FCC45170094ECA1 /* Distribution AppStore */,
-				B5CCE3251FCC6B6A006B123B /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4002,7 +3764,6 @@
 				B5C7BF9B230C59F5000DEC91 /* Distribution Internal */,
 				8C3FEBE023EAE03A00EE55E6 /* Distribution Alpha */,
 				B5C7BF9C230C59F5000DEC91 /* Distribution AppStore */,
-				B5C7BF9D230C59F5000DEC91 /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4015,7 +3776,6 @@
 				B5EB1EF91C204EBE0080A1B3 /* Distribution Internal */,
 				8C3FEBDE23EAE03A00EE55E6 /* Distribution Alpha */,
 				B5EB1EFA1C204EBE0080A1B3 /* Distribution AppStore */,
-				B5CCE3241FCC6B6A006B123B /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4028,7 +3788,6 @@
 				B50789FA1C1F4F63009F097A /* Distribution Internal */,
 				8C3FEBDC23EAE03A00EE55E6 /* Distribution Alpha */,
 				B50789F61C1F4F5A009F097A /* Distribution AppStore */,
-				B5CCE3221FCC6B6A006B123B /* Distribution AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
