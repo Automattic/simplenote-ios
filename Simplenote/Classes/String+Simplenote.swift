@@ -45,6 +45,16 @@ extension String {
 
         return output
     }
+
+    /// Returns a new string dropping specified prefix
+    ///
+    func droppingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else {
+            return self
+        }
+
+        return String(dropFirst(prefix.count))
+    }
 }
 
 // MARK: - Searching for the first / last characters

@@ -12,4 +12,10 @@ extension NSRange {
     var isNotFound: Bool {
         return location == NSNotFound
     }
+
+    /// Return a new range capped at maxLength
+    ///
+    func capped(at maxLength: Int) -> NSRange {
+        return NSRange(location: location, length: min(length, maxLength))
+    }
 }

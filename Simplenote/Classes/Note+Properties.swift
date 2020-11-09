@@ -39,3 +39,45 @@ extension Note {
         }
     }
 }
+
+// MARK: - Previews
+//
+extension Note {
+
+    /// Create title and body previews from content
+    @objc
+    func createPreview() {
+        let (titleRange, bodyRange) = NoteContentHelper.structure(of: content)
+
+        self.titlePreview = titlePreview(with: titleRange)
+        self.bodyPreview = bodyPreview(with: bodyRange)
+
+        updateTagsArray()
+    }
+
+    private func titlePreview(with range: NSRange) -> String {
+        guard !range.isNotFound else {
+            return NSLocalizedString("New note...", comment: "Empty Note Placeholder")
+        }
+
+        let result = content.nsString.substring(with: range)
+        return result.droppingPrefix(Constants.titleMarkdownPrefix)
+    }
+
+    private func bodyPreview(with range: NSRange) -> String? {
+        guard !range.isNotFound else {
+            return nil
+        }
+
+        let cappedRange = range.capped(at: Constants.bodyPreviewCap)
+        let result = content.nsString.substring(with: cappedRange)
+        return result.replacingNewlinesWithSpaces()
+    }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let titleMarkdownPrefix = "# "
+    static let bodyPreviewCap = 500
+}
