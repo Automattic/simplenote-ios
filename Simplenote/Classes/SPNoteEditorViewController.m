@@ -175,6 +175,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureRootView];
     [self configureSearchToolbar];
     [self configureLayout];
+    [self configureInterlinksProcessor];
     [self refreshVoiceoverSupport];
 }
 
@@ -289,7 +290,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
-    [self reprocessInterlinkLookupWithCoordinator:coordinator];
+    [self refreshInterlinkLookupWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -746,7 +747,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
     
     [_noteEditorTextView processChecklists];
-    [self processInterlinkLookup];
+    [self.interlinkProcessor processInterlinkLookup];
     
     // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
     // See UITextView+Simplenote
@@ -793,7 +794,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
-    [self dismissInterlinkLookupIfNeeded];
+    [self.interlinkProcessor dismissInterlinkLookupIfNeeded];
 }
 
 

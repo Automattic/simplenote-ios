@@ -6,54 +6,31 @@ import SimplenoteFoundation
 //
 class InterlinkResultsController {
 
-    /// View Context
-    ///
-    private let viewContext: NSManagedObjectContext
-
     /// ResultsController: In charge of CoreData Queries!
     ///
-    private lazy var resultsController = ResultsController<Note>(viewContext: viewContext, sortedBy: [
-        NSSortDescriptor(keyPath: \Note.content, ascending: true)
-    ])
+    private let resultsController: ResultsController<Note>
 
-    /// In-Memory Filtered Notes
-    /// -   Our Storage does not split `Title / Body`. Filtering by keywords in the title require a NSPredicate + Block
-    /// -   The above is awfully underperformant.
-    /// -   Most efficient approach code wise / speed involves simply keeping a FRC instance, and filtering it as needed
+    /// Limits the maximum number of results to fetch
     ///
-    private var notes = [Note]()
+    var maximumNumberOfResults = Settings.defaultMaximumResults
 
 
     /// Designated Initializer
     ///
-    init(viewContext: NSManagedObjectContext = SPAppDelegate.shared().managedObjectContext) {
-        self.viewContext = viewContext
-        setupResultsController()
-    }
-}
+    init(viewContext: NSManagedObjectContext) {
+        resultsController = ResultsController<Note>(viewContext: viewContext, sortedBy: [
+            NSSortDescriptor(keyPath: \Note.content, ascending: true)
+        ])
 
-
-// MARK: - Public API
-//
-extension InterlinkResultsController {
-
-    /// Refreshes the Autocomplete Results. Returns `true` when there are matches.
-    ///
-    func refreshInterlinks(for keyword: String, excluding excludedID: NSManagedObjectID?) -> Bool {
-        notes = filter(notes: resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
-        return notes.count > .zero
+        resultsController.predicate = NSPredicate.predicateForNotes(deleted: false)
+        try? resultsController.performFetch()
     }
 
-    /// Returns the number of notes
+    /// Returns the collection of Notes filtered by the specified Keyword in their title, excluding a specific ObjectID
+    /// - Important: Returns `nil` when there are no results!
     ///
-    var numberOfNotes: Int {
-        notes.count
-    }
-
-    /// Returns the Note at the specified Index
-    ///
-    func note(at index: Int) -> Note {
-        notes[index]
+    func searchNotes(byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
+        filter(notes: resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
     }
 }
 
@@ -62,13 +39,6 @@ extension InterlinkResultsController {
 //
 private extension InterlinkResultsController {
 
-    /// Initializes the Results Controller
-    ///
-    func setupResultsController() {
-        resultsController.predicate = NSPredicate.predicateForNotes(deleted: false)
-        try? resultsController.performFetch()
-    }
-
     /// Filters a collection of notes by their Title contents, excluding a specific Object ID.
     ///
     /// - Important: Why do we perform an *in memory* filtering?
@@ -76,7 +46,7 @@ private extension InterlinkResultsController {
     ///     - RegExes aren't diacritic + case insensitve friendly
     ///     - It's easier and anyone can follow along!
     ///
-    func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?, limit: Int = Settings.maximumNumberOfResults) -> [Note] {
+    func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
         let normalizedKeyword = keyword.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
         var output = [Note]()
 
@@ -90,12 +60,12 @@ private extension InterlinkResultsController {
 
             output.append(note)
 
-            if output.count >= limit {
+            if output.count >= maximumNumberOfResults {
                 break
             }
         }
 
-        return output
+        return output.isEmpty ? nil : output
     }
 }
 
@@ -103,5 +73,5 @@ private extension InterlinkResultsController {
 // MARK: - Settings!
 //
 private enum Settings {
-    static let maximumNumberOfResults = 15
+    static let defaultMaximumResults = 15
 }

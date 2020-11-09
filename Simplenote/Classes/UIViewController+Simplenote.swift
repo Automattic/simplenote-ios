@@ -29,15 +29,18 @@ extension UIViewController {
 
     /// Attaches a children ViewController (if needed)
     ///
-    func attach(child: UIViewController) {
-        view.addSubview(child.view)
-        addChild(child)
+    func attachWithAnimation(to parent: UIViewController) {
+        parent.view.addSubview(view)
+        parent.addChild(self)
+        view.fadeIn()
     }
 
     /// Detaches the receiver from its parent
     ///
-    func detach() {
-        view.removeFromSuperview()
-        removeFromParent()
+    func detachWithAnimation() {
+        view.fadeOut { _ in
+            self.view.removeFromSuperview()
+            self.removeFromParent()
+        }
     }
 }

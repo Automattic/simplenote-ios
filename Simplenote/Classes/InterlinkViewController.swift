@@ -25,13 +25,17 @@ class InterlinkViewController: UIViewController {
     ///
     private var kvoOffsetToken: NSKeyValueObservation?
 
-    /// ResultsController
-    ///
-    private let controller = InterlinkResultsController()
-
     /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
     ///
     var onInsertInterlink: ((String) -> Void)?
+
+    /// Interlink Notes to be presented onScreen
+    ///
+    var notes = [Note]() {
+        didSet {
+            refreshTableViewIfNeeded()
+        }
+    }
 
 
 
@@ -66,20 +70,6 @@ extension InterlinkViewController {
         refreshConstraints(keywordRange: keywordRange, in: textView)
         refreshInnerPadding(for: textView)
         startObservingContentOffset(in: textView)
-    }
-
-    /// Refreshes the Autocomplete Results. Returns `true` when there are visible rows.
-    /// - Important:
-    ///     By design, whenever there are no results we won't be refreshing the TableView. Instead, we'll stick to the "old results".
-    ///     This way we get to avoid the awkward visual effect of "empty autocomplete view"
-    ///
-    func refreshInterlinks(for keyword: String, excluding excludedID: NSManagedObjectID?) -> Bool {
-        guard controller.refreshInterlinks(for: keyword, excluding: excludedID) else {
-            return false
-        }
-
-        refreshTableViewIfNeeded()
-        return true
     }
 }
 
@@ -128,11 +118,11 @@ private extension InterlinkViewController {
 extension InterlinkViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        controller.numberOfNotes
+        notes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let note = controller.note(at: indexPath.row)
+        let note = notes[indexPath.row]
         note.ensurePreviewStringsAreAvailable()
 
         let tableViewCell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
@@ -149,7 +139,7 @@ extension InterlinkViewController: UITableViewDataSource {
 extension InterlinkViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let note = controller.note(at: indexPath.row)
+        let note = notes[indexPath.row]
         performInterlinkInsert(for: note)
     }
 }

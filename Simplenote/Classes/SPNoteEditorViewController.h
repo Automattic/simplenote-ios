@@ -5,7 +5,7 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
-@class InterlinkViewController;
+@class InterlinkProcessor;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -29,8 +29,8 @@
 // Information
 @property (nonatomic, weak) UIViewController *informationViewController;
 
-// Interlinking
-@property (nonatomic, strong) InterlinkViewController *interlinkViewController;
+// Interlinks
+@property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
 
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
