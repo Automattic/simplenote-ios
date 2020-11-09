@@ -31,6 +31,7 @@ class Snackbar {
 class SnackbarPresenter {
 	
 	var snackbar: Snackbar?
+	var viewController: SnackbarViewController?
 	
 	deinit {
 		print("SnackbarPresenter deinit")
@@ -45,7 +46,8 @@ class SnackbarPresenter {
 		
 		snackbar = sender
 		
-		let snackView = prepareView()
+//		let snackView = prepareView()
+		let snackView = prepareViewFromXIB()
 		presentView(snackView)
 		
 		// Puts the view onscreen and returns.
@@ -68,6 +70,20 @@ class SnackbarPresenter {
 		return view
 	}
 	
+	func prepareViewFromXIB() -> UIView {
+		
+		let vc = SnackbarViewController()
+		let view = vc.view!
+		
+		let frame = view.frame
+		let newFrame = CGRect(x: 0, y: 0, width: frame.width - 30, height: frame.height)
+		vc.view.frame = newFrame
+		
+		viewController = vc
+		
+		return view
+	}
+
 	func presentView(_ view: UIView) {
 		
 		// Determine where the view goes in the host window.
@@ -104,6 +120,7 @@ class SnackbarPresenter {
 					print("Done fade.")
 					
 					self.snackbar = nil
+					self.viewController = nil
 				}
 			}
 		}
