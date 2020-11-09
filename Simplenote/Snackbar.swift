@@ -46,14 +46,9 @@ class SnackbarPresenter {
 		snackbar = sender
 		
 		let snackView = prepareView()
-		positionView(snackView)
+		presentView(snackView)
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-			print("Hiding snackbar")
-			
-			snackView.removeFromSuperview()
-			self.snackbar = nil
-		}
+		// Puts the view onscreen and returns.
 	}
 	
 	func prepareView() -> UIView {
@@ -73,7 +68,7 @@ class SnackbarPresenter {
 		return view
 	}
 	
-	func positionView(_ view: UIView) {
+	func presentView(_ view: UIView) {
 		
 		// Determine where the view goes in the host window.
 		
@@ -83,13 +78,34 @@ class SnackbarPresenter {
 		
 		// View center should be window width / 2 and window height - offset - (view height / 2)
 		
-		let offset: CGFloat = 70 // Magic number alert!
 		let viewHeight = view.frame.height
+		let offset: CGFloat = 50 // Magic number alert!
 		view.center.x = window.frame.size.width / 2
-		view.center.y = window.frame.size.height - offset - (viewHeight / 2.0)
+		view.center.y = window.frame.size.height - offset - (viewHeight / 2.0) // Half the view height + the gap from view to screen edge.
 		print(view.center)
+		print(window.frame.height)
 		
 		// Now push the view down offscreen.
-//		view.center.y = view.center.y + offset + (viewHeight / 2.0)
+		view.center.y = view.center.y + offset + viewHeight
+		print(view.center.y)
+		
+		UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+			view.center.y = view.center.y - offset - viewHeight
+		}) { _ in
+			print("Animation complete.")
+
+			DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+				print("Hiding snackbar")
+
+				UIView.animate(withDuration: 0.66, delay: 0.0, options: []) {
+					view.alpha = 0
+				} completion: { (Bool) in
+					view.removeFromSuperview()
+					print("Done fade.")
+					
+					self.snackbar = nil
+				}
+			}
+		}
 	}
 }
