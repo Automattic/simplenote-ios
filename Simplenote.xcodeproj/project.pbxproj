@@ -112,7 +112,7 @@
 		46A3C9C417DFA81A002865AE /* Simplenote-DB5.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2FCA5F21789118A00FC229D /* Simplenote-DB5.plist */; };
 		4A4A4BC825593FC400876C29 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A4BC725593FC400876C29 /* Snackbar.swift */; };
 		4A4A4BD02559541100876C29 /* SnackbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A4BCF2559541100876C29 /* SnackbarViewController.swift */; };
-		4A4A4BD82559545400876C29 /* SnackbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4A4BD72559545400876C29 /* SnackbarView.xib */; };
+		4A4A4BE62559585300876C29 /* SnackbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4A4BE52559585300876C29 /* SnackbarView.xib */; };
 		74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
 		74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */; };
 		74388F4722CFFAB6001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
@@ -484,7 +484,7 @@
 		46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simplenote-Info.plist"; sourceTree = "<group>"; };
 		4A4A4BC725593FC400876C29 /* Snackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snackbar.swift; sourceTree = "<group>"; };
 		4A4A4BCF2559541100876C29 /* SnackbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarViewController.swift; sourceTree = "<group>"; };
-		4A4A4BD72559545400876C29 /* SnackbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnackbarView.xib; sourceTree = "<group>"; };
+		4A4A4BE52559585300876C29 /* SnackbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnackbarView.xib; sourceTree = "<group>"; };
 		593EA1C08A9F76E3833C3E80 /* Pods-SimplenoteTests.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		697B9622931545E466B5E186 /* Pods-Automattic-SimplenoteShare.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		6AE4CF60906DA6D08F64E5B3 /* Pods-Automattic-Simplenote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.release.xcconfig"; sourceTree = "<group>"; };
@@ -1701,7 +1701,7 @@
 				B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */,
 				4A4A4BC725593FC400876C29 /* Snackbar.swift */,
 				4A4A4BCF2559541100876C29 /* SnackbarViewController.swift */,
-				4A4A4BD72559545400876C29 /* SnackbarView.xib */,
+				4A4A4BE52559585300876C29 /* SnackbarView.xib */,
 			);
 			path = Simplenote;
 			sourceTree = "<group>";
@@ -2028,7 +2028,7 @@
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
-				4A4A4BD82559545400876C29 /* SnackbarView.xib in Resources */,
+				4A4A4BE62559585300876C29 /* SnackbarView.xib in Resources */,
 				B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */,
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
