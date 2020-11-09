@@ -2,10 +2,12 @@
 #import <Simperium/Simperium.h>
 
 
+@class InterlinkProcessor;
+@class InterlinkViewController;
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
-@class InterlinkProcessor;
+@class SPTagView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -21,6 +23,7 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
+@property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) NSString *searchString;
 
 // History

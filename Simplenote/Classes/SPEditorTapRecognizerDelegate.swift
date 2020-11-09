@@ -16,6 +16,11 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     @objc
     weak var parentTextView: UITextView?
 
+    /// View that, when interacted upon, should cause the recognizer to bail out
+    ///
+    @objc
+    weak var excludedView: UIView?
+
 
     /// TextView only performs linkification when the `editable` flag is disabled.
     /// We're allowing Edition by means of a TapGestureRecognizer, which also allows us to deal with Tap events performed over TextAttachments
@@ -27,12 +32,24 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
             return true
         }
 
+        if textView.isDragging {
+            return false
+        }
+
         let characterIndex = gestureRecognizer.characterIndex(in: textView)
         if textView.attachment(ofType: SPTextAttachment.self, at: characterIndex) != nil {
             return true
         }
 
         return textView.isFirstResponder == false
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let excludedView = excludedView, let touchView = touch.view else {
+            return true
+        }
+
+        return touchView.isDescendant(of: excludedView) == false
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

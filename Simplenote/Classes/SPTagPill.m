@@ -10,6 +10,8 @@
 #import "SPTagStub.h"
 #import "Simplenote-Swift.h"
 
+CGVector const TagPillSpacing = {15, 10};
+
 @interface SPTagPill ()
 
 @property (nonatomic) BOOL performDeletionAction;
@@ -23,7 +25,7 @@
 - (id)initWithTagStub:(SPTagStub *)tagStub target:(id)t action:(SEL)a deletionAction:(SEL)da {
     
     self = [self init];
-    
+
     if (self) {
         
         [self setTitle:tagStub.tag forState:UIControlStateNormal];
@@ -51,14 +53,8 @@
     [super sizeToFit];
     
     CGRect frame = self.frame;
-    frame.size.width += 2 * [self.theme floatForKey:@"tagViewItemSideSpacing"];
+    frame.size.width += 2 * TagPillSpacing.dx;
     self.frame = frame;
-}
-
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
 }
 
 - (UIColor *)color {
@@ -76,8 +72,8 @@
     
     if (!_deletionOverlayView) {
         
-        CGFloat horizontalSpacing = [self.theme floatForKey:@"tagViewItemSideSpacing"];
-        CGFloat verticalSpacing = 10.0;
+        CGFloat horizontalSpacing = TagPillSpacing.dx;
+        CGFloat verticalSpacing = TagPillSpacing.dy;
         
         _deletionOverlayView = [[UIView alloc] initWithFrame:CGRectMake(horizontalSpacing / 2.0,
                                                                         verticalSpacing / 2.0,

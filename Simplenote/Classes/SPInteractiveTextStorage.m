@@ -74,25 +74,22 @@ NSString *const SPHeadlineTokenName = @"SPHeadlineTokenName";
 
 - (void)applyTokenAttributesToRange:(NSRange)searchRange {
     
-    if (!self.tokens) {
+    if (!self.defaultStyle || !self.headlineStyle) {
         return;
     }
-    
-    NSDictionary *defaultAttributes     = self.tokens[SPDefaultTokenName];
-    NSDictionary *headlineAttributes    = self.tokens[SPHeadlineTokenName];
-    
+
     // If the range contains the first line, make sure to set the header's attribute
     if (searchRange.location == 0) {
         NSString *rawString = _backingStore.string;
         NSRange firstLineRange = [rawString lineRangeForRange:NSMakeRange(0, 0)];
-        [self addAttributes:headlineAttributes range:firstLineRange];
+        [self addAttributes:self.headlineStyle range:firstLineRange];
         
         NSRange remainingRange = NSMakeRange(firstLineRange.location + firstLineRange.length, searchRange.length - firstLineRange.length);
         if (remainingRange.location < rawString.length && remainingRange.length <= rawString.length) {
-            [self addAttributes:defaultAttributes range:remainingRange];
+            [self addAttributes:self.defaultStyle range:remainingRange];
         }
     } else {
-        [self addAttributes:defaultAttributes range:searchRange];
+        [self addAttributes:self.defaultStyle range:searchRange];
     }
 }
 
