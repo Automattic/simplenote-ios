@@ -347,11 +347,6 @@ extension SPNoteListViewController {
 
         return query
     }
-
-    @objc
-    func updateExcerptMaker() {
-        excerptMaker.keywords = searchQuery?.keywords
-    }
 }
 
 
@@ -565,7 +560,7 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        cell.bodyText = excerptMaker.bodyExcerpt(from: note)
+        cell.bodyText = excerptMaker.bodyExcerpt(from: note, withKeywords: searchQuery?.keywords)
 
         cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor

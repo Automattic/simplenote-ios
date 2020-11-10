@@ -2,61 +2,127 @@ import Foundation
 
 // MARK: - ExcerptMaker: Generate excerpt from a note with specified keywords
 //
-@objc
-final class ExcerptMaker: NSObject {
-    private var regexp: NSRegularExpression?
+final class ExcerptMaker {
+    private let leadingLimit: String.IndexDistance
+    private let trailingLimit: String.IndexDistance
 
-    /// Keywords
-    ///
-    var keywords: [String]? {
-        didSet {
-            guard oldValue != keywords else {
-                return
+    init(leadingLimit: String.IndexDistance = 30, trailingLimit: String.IndexDistance = 300) {
+        self.leadingLimit = leadingLimit
+        self.trailingLimit = trailingLimit
+    }
+
+    func excerpt(from content: String,
+                 matching keywords: [String],
+                 in range: Range<String.Index>? = nil) -> Excerpt {
+        let range = range ?? content.startIndex..<content.endIndex
+
+        var leadingWordsRange: [Range<String.Index>] = []
+        var matchingWordsRange: [Range<String.Index>] = []
+        var trailingWordsRange: [Range<String.Index>] = []
+
+        content.enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { (_, wordRange, _, stop) in
+
+            if self.trailingLimit > 0, let lastMatch = matchingWordsRange.last {
+                if content.distance(from: lastMatch.upperBound, to: wordRange.upperBound) > self.trailingLimit {
+                    stop = true
+                    return
+                }
+
+                trailingWordsRange.append(wordRange)
             }
-            refreshRegexp()
+
+            for keyword in keywords {
+                if content.range(of: keyword, options: [.caseInsensitive, .diacriticInsensitive], range: wordRange, locale: Locale.current) != nil {
+                    matchingWordsRange.append(wordRange)
+                    break
+                }
+            }
+
+            if self.leadingLimit > 0 && matchingWordsRange.isEmpty {
+                leadingWordsRange.append(wordRange)
+            }
         }
-    }
 
-    private func refreshRegexp() {
-        guard let keywords = keywords, !keywords.isEmpty else {
-            regexp = nil
-            return
+        guard let firstMatch = matchingWordsRange.first, let lastMatch = matchingWordsRange.last else {
+            return Excerpt(content: content, range: range, matches: matchingWordsRange)
         }
 
-        regexp = NSRegularExpression.regexForExcerpt(withKeywords: keywords)
-    }
+        let lowerBound: String.Index = {
+            if leadingLimit == 0 {
+                return range.lowerBound
+            }
 
+            let upperBound = firstMatch.lowerBound
+            var lowerBound = upperBound
+
+            for range in leadingWordsRange.reversed() {
+                if content.distance(from: range.lowerBound, to: upperBound) > leadingLimit {
+                    break
+                }
+
+                lowerBound = range.lowerBound
+            }
+
+            return lowerBound
+        }()
+
+        let upperBound: String.Index = {
+            if trailingLimit == 0 {
+                return range.upperBound
+            }
+            return trailingWordsRange.last?.upperBound ?? lastMatch.upperBound
+        }()
+
+        return Excerpt(content: content, range: lowerBound..<upperBound, matches: matchingWordsRange)
+    }
+}
+
+extension ExcerptMaker {
     /// Generate and return excerpt from the note. Excerpt is based on keywords
     ///
-    func bodyExcerpt(from note: Note) -> String? {
-        guard let regexp = regexp, let content = note.content else {
+    func bodyExcerpt(from note: Note, withKeywords keywords: [String]?) -> String? {
+        guard let keywords = keywords, !keywords.isEmpty, let content = note.content else {
             return note.bodyPreview
         }
 
-        let foldedContent = content.folding(options: [.diacriticInsensitive], locale: .current)
+        let bodyRange = NoteContentHelper.structure(of: content).body
+        let body = content.nsString.substring(with: bodyRange).replacingNewlinesWithSpaces()
 
-        let bodyRange = NoteContentHelper.structure(of: foldedContent).body
-        guard bodyRange.location != NSNotFound else {
-            return nil
+        return excerpt(from: body, matching: keywords).normalized.content
+    }
+}
+
+struct Excerpt {
+    let content: String
+    let range: Range<String.Index>
+    let matches: [Range<String.Index>]
+
+    var nsMatches: [NSRange] {
+        return matches.map {
+            NSRange($0, in: content)
+        }
+    }
+
+    init(content: String, range: Range<String.Index>, matches: [Range<String.Index>]) {
+        self.content = content
+        self.range = range
+        self.matches = matches
+    }
+
+    var normalized: Excerpt {
+        if range.lowerBound == content.startIndex && range.upperBound == content.endIndex {
+            return self
         }
 
-        let excerptRange = regexp.rangeOfFirstMatch(in: foldedContent,
-                                                    options: [],
-                                                    range: bodyRange)
-        guard excerptRange.location != NSNotFound else {
-            return note.bodyPreview
+        let newContent = String(content[range])
+        let newRange = newContent.startIndex..<newContent.endIndex
+        let offset = content.distance(from: content.startIndex, to: range.lowerBound)
+        let newMatches: [Range<String.Index>] = matches.map {
+            let lower = content.index($0.lowerBound, offsetBy: -offset)
+            let upper = content.index($0.upperBound, offsetBy: -offset)
+            return lower..<upper
         }
 
-        var excerpt: String = {
-            if foldedContent.nsString.length == content.nsString.length {
-                return content.nsString.substring(with: excerptRange)
-            }
-            return foldedContent.nsString.substring(with: excerptRange)
-        }()
-        excerpt = excerpt.nsString.replacingNewlinesWithSpaces()
-        if excerptRange.location > bodyRange.location {
-            excerpt = "…" + excerpt
-        }
-        return excerpt
+        return Excerpt(content: newContent, range: newRange, matches: newMatches)
     }
 }
