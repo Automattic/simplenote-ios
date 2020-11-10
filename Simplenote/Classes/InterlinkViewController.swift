@@ -161,8 +161,8 @@ private extension InterlinkViewController {
     /// Returns the target Size.Height
     ///
     func calculateHeight() -> CGFloat {
-        let targetVisibleCells = min(Double(notes.count), Metrics.maximumVisibleCells)
-        return CGFloat(targetVisibleCells) * Metrics.defaultCellHeight
+        let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
+        return min(fullHeight, Metrics.maximumTableHeight)
     }
 }
 
