@@ -578,6 +578,10 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
 
+    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView {
+        navigationBarBackground
+    }
+
     func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
         noteEditorTextView
     }

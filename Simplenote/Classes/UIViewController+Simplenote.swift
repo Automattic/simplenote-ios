@@ -27,10 +27,10 @@ extension UIViewController {
         leafViewController.present(self, animated: true, completion: nil)
     }
 
-    /// Attaches a children ViewController (if needed)
+    /// Attaches a children ViewController (if needed) below the specified sibling view
     ///
-    func attachWithAnimation(to parent: UIViewController) {
-        parent.view.addSubview(view)
+    func attachWithAnimation(to parent: UIViewController, below siblingView: UIView) {
+        parent.view.insertSubview(view, belowSubview: siblingView)
         parent.addChild(self)
         view.fadeIn()
     }

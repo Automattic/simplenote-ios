@@ -5,7 +5,17 @@ import Foundation
 // MARK: - InterlinkPresentationContextProvider
 //
 protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
+
+    /// View in the parent's hierarchy that should always appear above the Autocomplete UI
+    ///
+    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView
+
+    /// Parent TextView that is triggering the Autocomplete event
+    ///
     func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView
+
+    /// Parent ViewController!
+    ///
     func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController
 }
 
@@ -92,7 +102,7 @@ private extension InterlinkProcessor {
 
     func presentInterlinkController() {
         let interlinkViewController = InterlinkViewController()
-        interlinkViewController.attachWithAnimation(to: parentViewController)
+        interlinkViewController.attachWithAnimation(to: parentViewController, below: parentOverlayView)
         self.presentedViewController = interlinkViewController
     }
 
@@ -136,6 +146,14 @@ private extension InterlinkProcessor {
         }
 
         return context
+    }
+
+    var parentOverlayView: UIView {
+        guard let parent = contextProvider?.parentOverlayViewForInterlinkProcessor(self) else {
+            fatalError("☠️ InterlinkProcessor: Please set a valid contextProvider!")
+        }
+
+        return parent
     }
 
     var parentTextView: UITextView {
