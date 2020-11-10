@@ -605,6 +605,57 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Search Map
+//
+extension SPNoteEditorViewController {
+
+    @objc
+    func updateSearchMap(with searchRangeValues: [NSValue]) {
+        if searchMapView == nil {
+            let searchMapView = SearchMapView()
+            searchMapView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(searchMapView)
+            NSLayoutConstraint.activate([
+                searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top + 10),
+                searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom - 10),
+                searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
+                searchMapView.widthAnchor.constraint(equalToConstant: 15.0)
+            ])
+
+            self.searchMapView = searchMapView
+        }
+
+        let ranges = searchRangeValues.map({ $0.rangeValue })
+        let boundingRects = noteEditorTextView.boundingRectsForCharacterRanges(ranges: ranges)
+        let usedRect = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer)
+
+        guard usedRect.size.height > CGFloat.leastNormalMagnitude else {
+            searchMapView?.update(with: [])
+            return
+        }
+
+        let positions = boundingRects.map {
+            return max($0.midY / usedRect.size.height, CGFloat.leastNormalMagnitude)
+        }
+
+        searchMapView?.onSelectionChange = { [weak self] index in
+            guard let self = self else {
+                return
+            }
+
+            self.highlightSearchResult(at: index)
+        }
+
+        searchMapView?.update(with: positions)
+    }
+
+    @objc
+    func hideSearchMap() {
+        searchMapView?.removeFromSuperview()
+        searchMapView = nil
+    }
+}
+
 
 // MARK: - Metrics
 //

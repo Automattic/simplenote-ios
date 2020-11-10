@@ -30,3 +30,13 @@ extension SPEditorTextView {
         UIPasteboard.general.string = text
     }
 }
+
+extension SPEditorTextView {
+
+    func boundingRectsForCharacterRanges(ranges: [NSRange]) -> [CGRect] {
+        return ranges.map {
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: $0, actualCharacterRange: nil)
+            return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        }
+    }
+}

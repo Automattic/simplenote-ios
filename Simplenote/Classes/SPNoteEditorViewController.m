@@ -211,7 +211,9 @@ CGFloat const SPSelectedAreaPadding = 20;
         self.searchResultRanges = [searchText rangesForTerms:self.searchString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+
+            [self updateSearchMapWith:self.searchResultRanges];
+
             UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
             [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];
             
@@ -226,9 +228,8 @@ CGFloat const SPSelectedAreaPadding = 20;
                                  
                                  self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
-            
-            self.highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+
+            [self highlightSearchResultAtIndex:0];
         });
     });
 }
@@ -571,20 +572,20 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
 }
 
-- (void)highlightNextSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+- (void)highlightNextSearchResult:(id)sender
+{
+    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count)];
 }
 
-- (void)highlightPrevSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MAX(0, self.highlightedSearchResultIndex - 1);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+- (void)highlightPrevSearchResult:(id)sender
+{
+    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1)];
 }
 
-- (void)highlightSearchResultAtIndex:(NSInteger)index {
-    
+- (void)highlightSearchResultAtIndex:(NSInteger)index
+{
+    self.highlightedSearchResultIndex = index;
+
     NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
@@ -604,7 +605,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 }
 
 - (void)endSearching:(id)sender {
-    
+    [self hideSearchMap];
+
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
