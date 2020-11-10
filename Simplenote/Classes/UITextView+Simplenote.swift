@@ -3,7 +3,7 @@ import UIKit
 import SimplenoteInterlinks
 
 
-// MARK: - UITextView's Simplenote Methods
+// MARK: - UITextView State
 //
 extension UITextView {
 
@@ -14,15 +14,18 @@ extension UITextView {
         return selectedRange.length > 0
     }
 
-    /// Returns the Selected Text's bounds
+    /// Indicates if there's an ongoing Undo Operation in the Text Editor
     ///
-    @objc
-    var selectedBounds: CGRect {
-        guard selectedRange.length > 0 else {
-            return .zero
-        }
+    var isUndoingEditOP: Bool {
+        undoManager?.isUndoing == true
+    }
 
-        return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
+    /// Indicates if the user is Editing an Interlink
+    ///
+    var isEditingInterlink: Bool {
+        interlinkKeywordAtSelectedLocation != nil
+    }
+}
 
 
 // MARK: - Interlinks
