@@ -140,15 +140,22 @@ private extension InterlinkViewController {
     }
 
     /// Returns the target Origin.Y
-    /// - Important: We'll always prefer "above the cursor location"
+    /// -   Parameters:
+    ///     - height: The new target height
+    ///     - range: Anchor's Range
+    ///     - textView: Sibling TextView
+    ///
+    /// - Important: We'll always prefer either the "location above the cursor" whenever the **Maxed Out TableView** can be fit (that is: +3.5 results!)
     ///
     func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
-        let containerFrame = textView.editingRect()
-        let anchor = textView.locationInSuperviewForText(in: range)
-        let locationAbove = anchor.minY - height - Metrics.resultsPadding
-        let locationBelow = anchor.maxY + Metrics.resultsPadding
+        let anchorFrame = textView.locationInSuperviewForText(in: range)
+        let minimumLocationForFullHeight = anchorFrame.minY - Metrics.resultsPadding - Metrics.maximumTableHeight
 
-        return locationAbove > containerFrame.minY ? locationAbove : locationBelow
+        if minimumLocationForFullHeight > textView.editingRect().minY {
+            return anchorFrame.minY - Metrics.resultsPadding - height
+        }
+
+        return anchorFrame.maxY + Metrics.resultsPadding
     }
 
     /// Returns the target Size.Height
@@ -166,6 +173,7 @@ private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
     static let maximumVisibleCells = 3.5
+    static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
     static let resultsPadding = CGFloat(12)
 }
 
