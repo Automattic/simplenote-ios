@@ -35,7 +35,7 @@ class InterlinkResultsControllerTests: XCTestCase {
     func testSearchNotesByKeywordsOnlyReturnsNotesThatContainTheSpecifiedKeywordInTheirTitle() {
         let (matching, _) = insertSampleEntities()
 
-        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: nil) else {
+        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: nil) else {
             XCTFail()
             return
         }
@@ -49,7 +49,7 @@ class InterlinkResultsControllerTests: XCTestCase {
         let (_, _) = insertSampleEntities()
 
         resultsController.maximumNumberOfResults = 1
-        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: nil) else {
+        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: nil) else {
             XCTFail()
             return
         }
@@ -63,7 +63,7 @@ class InterlinkResultsControllerTests: XCTestCase {
         let (matching, _) = insertSampleEntities()
 
         let excluded = matching.randomElement()!
-        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: excluded.objectID) else {
+        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: excluded.objectID) else {
             XCTFail()
             return
         }
@@ -74,25 +74,6 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
     ///
-    func testSearchNotesByKeywordsMatchesMultipleKeywords() {
-        let matching = [
-            storage.insertSampleNote(contents: "keywordA something something keywordB"),
-            storage.insertSampleNote(contents: "Something keywordA keywordB")
-        ]
-
-        storage.save()
-
-        guard let results = resultsController.searchNotes(byTitleKeywords: "keyworda keywordb", excluding: nil) else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertEqual(results.count, matching.count)
-    }
-
-
-    /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
-    ///
     func testSearchNotesByKeywordsIsDicriticAndCaseInsensitive() {
         let matching = [
             storage.insertSampleNote(contents: "DíäcrìtIcs"),
@@ -100,7 +81,7 @@ class InterlinkResultsControllerTests: XCTestCase {
 
         storage.save()
 
-        guard let results = resultsController.searchNotes(byTitleKeywords: "diacritics", excluding: nil) else {
+        guard let results = resultsController.searchNotes(byTitleKeyword: "diacritics", excluding: nil) else {
             XCTFail()
             return
         }
