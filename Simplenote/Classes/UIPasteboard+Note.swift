@@ -8,7 +8,7 @@ extension UIPasteboard {
     /// Copies the Internal Link (Markdown Reference) into the OS Pasteboard
     ///
     func copyInternalLink(to note: Note) {
-        guard let link = note.internalLink else {
+        guard let link = note.markdownInternalLink else {
             return
         }
 
