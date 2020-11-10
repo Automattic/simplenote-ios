@@ -15,11 +15,8 @@ class InterlinkViewController: UIViewController {
     ///
     @IBOutlet private var tableLeadingConstraint: NSLayoutConstraint!
     @IBOutlet private var tableTrailingConstraint: NSLayoutConstraint!
-
-    /// Layout Constraints: Container
-    ///
-    private weak var topConstraint: NSLayoutConstraint?
-    private weak var heightConstraint: NSLayoutConstraint?
+    @IBOutlet private var tableTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var tableHeightConstraint: NSLayoutConstraint!
 
     /// KVO
     ///
@@ -29,7 +26,7 @@ class InterlinkViewController: UIViewController {
     ///
     var notes = [Note]() {
         didSet {
-            refreshTableViewIfNeeded()
+            tableView?.reloadData()
         }
     }
 
@@ -41,15 +38,6 @@ class InterlinkViewController: UIViewController {
         setupRootView()
         setupBackgroundView()
         setupTableView()
-    }
-
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        guard let superview = parent?.view else {
-            return
-        }
-
-        setupConstraints(superview: superview)
     }
 }
 
@@ -63,7 +51,6 @@ extension InterlinkViewController {
     ///
     func anchorView(around keywordRange: Range<String.Index>, in textView: UITextView) {
         refreshConstraints(keywordRange: keywordRange, in: textView)
-        refreshInnerPadding(for: textView)
         startObservingContentOffset(in: textView)
     }
 }
@@ -74,7 +61,7 @@ extension InterlinkViewController {
 private extension InterlinkViewController {
 
     func setupRootView() {
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.frame = UIScreen.main.bounds
         view.backgroundColor = .clear
     }
 
@@ -90,21 +77,6 @@ private extension InterlinkViewController {
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
         tableView.layer.cornerRadius = Metrics.cornerRadius
-    }
-
-    func setupConstraints(superview: UIView) {
-        let topConstraint = view.topAnchor.constraint(equalTo: superview.topAnchor)
-        let heightConstraint = view.heightAnchor.constraint(equalToConstant: Metrics.defaultHeight)
-
-        NSLayoutConstraint.activate([
-            view.leftAnchor.constraint(equalTo: superview.leftAnchor),
-            view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-            topConstraint,
-            heightConstraint
-        ])
-
-        self.topConstraint = topConstraint
-        self.heightConstraint = heightConstraint
     }
 }
 
@@ -134,38 +106,28 @@ extension InterlinkViewController: UITableViewDataSource {
 //
 private extension InterlinkViewController {
 
-    /// Updates the layout constraints so that the receiver shows up **around** the specified Keyword in a given TextView
+    /// Updates the layout constraints so that the receiver shows up **around** the specified Keyword in the specified TextView
     ///
     func refreshConstraints(keywordRange: Range<String.Index>, in textView: UITextView) {
         let targetHeight = calculateHeight()
         let targetLocation = calculateLocation(for: targetHeight, around: keywordRange, in: textView)
+        let targetPadding = textView.textContainer.lineFragmentPadding
 
-        topConstraint?.constant = targetLocation
-        heightConstraint?.constant = targetHeight
-    }
-
-    /// Updates the inner TableView's leading / trailing padding
-    ///
-    func refreshInnerPadding(for textView: UITextView) {
-        let padding = textView.textContainer.lineFragmentPadding
-
-        tableLeadingConstraint.constant = padding
-        tableTrailingConstraint.constant = padding
+        tableTopConstraint.constant = targetLocation
+        tableHeightConstraint.constant = targetHeight
+        tableLeadingConstraint.constant = targetPadding
+        tableTrailingConstraint.constant = targetPadding
     }
 
     /// Starts tracking ContentOffset changes in our sibling TextView
     ///
     func startObservingContentOffset(in textView: UITextView) {
         kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
-            guard let topConstraint = self?.topConstraint,
-                  let oldOffsetY = value.oldValue?.y,
-                  let newOffsetY = value.newValue?.y,
-                  oldOffsetY != newOffsetY
-            else {
+            guard let oldY = value.oldValue?.y, let newY = value.newValue?.y, oldY != newY else {
                 return
             }
 
-            topConstraint.constant += oldOffsetY - newOffsetY
+            self?.tableTopConstraint.constant += oldY - newY
         }
     }
 
@@ -183,20 +145,6 @@ private extension InterlinkViewController {
     ///
     func calculateHeight() -> CGFloat {
         Metrics.defaultHeight
-    }
-}
-
-
-// MARK: - Private API(s)
-//
-private extension InterlinkViewController {
-
-    func refreshTableViewIfNeeded() {
-        guard isViewLoaded else {
-            return
-        }
-
-        tableView.reloadData()
     }
 }
 
