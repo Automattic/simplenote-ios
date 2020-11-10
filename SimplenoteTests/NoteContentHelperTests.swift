@@ -5,16 +5,14 @@ import XCTest
 // MARK: - NoteContentHelperTests Tests
 //
 class NoteContentHelperTests: XCTestCase {
-    private let emptyRange = NSRange(location: NSNotFound, length: 0)
-
     /// Empty title and body when content is nil
     ///
     func testEmptyTitleAndBodyRangeWhenContentIsNil() {
         let content: String? = nil
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, emptyRange)
-        XCTAssertEqual(structure.body, emptyRange)
+        XCTAssertNil(structure.title)
+        XCTAssertNil(structure.body)
     }
 
     /// Empty title and body when content is empty
@@ -23,8 +21,8 @@ class NoteContentHelperTests: XCTestCase {
         let content = ""
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, emptyRange)
-        XCTAssertEqual(structure.body, emptyRange)
+        XCTAssertNil(structure.title)
+        XCTAssertNil(structure.body)
     }
 
     /// Test title and empty body when content has only one line
@@ -33,8 +31,8 @@ class NoteContentHelperTests: XCTestCase {
         let content = "A lala lala long long le long long long YEAH!"
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, NSRange(location: 0, length: content.nsString.length))
-        XCTAssertEqual(structure.body, emptyRange)
+        XCTAssertEqual(structure.title, content.startIndex..<content.endIndex)
+        XCTAssertNil(structure.body)
     }
 
     /// Test title and body
@@ -43,8 +41,8 @@ class NoteContentHelperTests: XCTestCase {
         let content = "Title!\n\nBody"
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, content.nsString.range(of: "Title!"))
-        XCTAssertEqual(structure.body, content.nsString.range(of: "Body"))
+        XCTAssertEqual(structure.title, content.range(of: "Title!"))
+        XCTAssertEqual(structure.body, content.range(of: "Body"))
     }
 
     /// Test title doesn't include leading and trailing whitespaces and newlines
@@ -53,8 +51,8 @@ class NoteContentHelperTests: XCTestCase {
         let content = "  \n\n  \n  Title! \n\n\n   \n "
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, content.nsString.range(of: "Title!"))
-        XCTAssertEqual(structure.body, emptyRange)
+        XCTAssertEqual(structure.title, content.range(of: "Title!"))
+        XCTAssertNil(structure.body)
     }
 
     /// Test body doesn't include leading and trailing whitespaces and newlines
@@ -63,7 +61,7 @@ class NoteContentHelperTests: XCTestCase {
         let content = "\n\r\n# Title!\n\n\n\nLINE1\n\n\r\n\nLINE2\n\nLINE3\n\r\n\n"
 
         let structure = NoteContentHelper.structure(of: content)
-        XCTAssertEqual(structure.title, content.nsString.range(of: "# Title!"))
-        XCTAssertEqual(structure.body, content.nsString.range(of: "LINE1\n\n\r\n\nLINE2\n\nLINE3"))
+        XCTAssertEqual(structure.title, content.range(of: "# Title!"))
+        XCTAssertEqual(structure.body, content.range(of: "LINE1\n\n\r\n\nLINE2\n\nLINE3"))
     }
 }

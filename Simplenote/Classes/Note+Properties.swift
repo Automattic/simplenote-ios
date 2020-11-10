@@ -49,29 +49,30 @@ extension Note {
     func createPreview() {
         let (titleRange, bodyRange) = NoteContentHelper.structure(of: content)
 
-        self.titlePreview = titlePreview(with: titleRange)
-        self.bodyPreview = bodyPreview(with: bodyRange)
+        titlePreview = titlePreview(with: titleRange)
+        bodyPreview = bodyPreview(with: bodyRange)
 
         updateTagsArray()
     }
 
-    private func titlePreview(with range: NSRange) -> String {
-        guard !range.isNotFound else {
+    private func titlePreview(with range: Range<String.Index>?) -> String {
+        guard let range = range, let content = content else {
             return NSLocalizedString("New note...", comment: "Empty Note Placeholder")
         }
 
-        let result = content.nsString.substring(with: range)
+        let result = String(content[range])
         return result.droppingPrefix(Constants.titleMarkdownPrefix)
     }
 
-    private func bodyPreview(with range: NSRange) -> String? {
-        guard !range.isNotFound else {
+    private func bodyPreview(with range: Range<String.Index>?) -> String? {
+        guard let range = range, let content = content else {
             return nil
         }
 
-        let cappedRange = range.capped(at: Constants.bodyPreviewCap)
-        let result = content.nsString.substring(with: cappedRange)
-        return result.replacingNewlinesWithSpaces()
+        let upperBound = content.index(range.lowerBound, offsetBy: Constants.bodyPreviewCap, limitedBy: range.upperBound) ?? range.upperBound
+        let cappedRange = range.lowerBound..<upperBound
+
+        return String(content[cappedRange]).replacingNewlinesWithSpaces()
     }
 }
 

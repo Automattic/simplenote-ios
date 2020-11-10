@@ -64,27 +64,25 @@ extension String {
     /// Find and return the location of the first / last character from the specified character set
     ///
     func locationOfFirstCharacter(from searchSet: CharacterSet,
-                                  startingFrom startLocation: Int,
-                                  backwards: Bool = false) -> Int? {
-        let fullRange = nsString.fullRange
-        guard startLocation <= fullRange.length else {
+                                  startingFrom startLocation: String.Index,
+                                  backwards: Bool = false) -> String.Index? {
+
+        guard startLocation <= endIndex else {
             return nil
         }
 
-        let range: NSRange = {
+        let range: Range<String.Index> = {
             if backwards {
-                return NSRange(location: 0,
-                               length: startLocation)
+                return startIndex..<startLocation
             }
 
-            return NSRange(location: startLocation,
-                           length: fullRange.length - startLocation)
+            return startLocation..<endIndex
         }()
 
-        let characterRange = nsString.rangeOfCharacter(from: searchSet,
-                                                       options: backwards ? [.backwards] : [],
-                                                       range: range)
+        let characterRange = rangeOfCharacter(from: searchSet,
+                                              options: backwards ? .backwards : [],
+                                              range: range)
 
-        return characterRange.isNotFound ? nil : characterRange.location
+        return characterRange?.lowerBound
     }
 }

@@ -86,9 +86,8 @@ extension ExcerptMaker {
         }
 
         let bodyRange = NoteContentHelper.structure(of: content).body
-        let body = content.nsString.substring(with: bodyRange).replacingNewlinesWithSpaces()
-
-        return excerpt(from: body, matching: keywords).normalized.content
+        let excerptString = excerpt(from: content, matching: keywords, in: bodyRange).normalized.content
+        return excerptString.replacingNewlinesWithSpaces()
     }
 }
 
