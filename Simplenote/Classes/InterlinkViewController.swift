@@ -47,12 +47,12 @@ class InterlinkViewController: UIViewController {
 //
 extension InterlinkViewController {
 
-    /// Relocates the receiver so that it shows up around a given Keyword in a TextView.
+    /// Relocates the receiver so that it shows up around a given Keyword in a **Sibling TextView**
     /// - Important: We'll start listening for Content Offset changes, and the UI will be automatically repositioned
     ///
-    func anchorView(around keywordRange: Range<String.Index>, in textView: UITextView) {
-        refreshConstraints(keywordRange: keywordRange, in: textView)
-        startObservingContentOffset(in: textView)
+    func anchorView(around keywordRange: Range<String.Index>, in siblingTextView: UITextView) {
+        refreshConstraints(keywordRange: keywordRange, in: siblingTextView)
+        startObservingContentOffset(in: siblingTextView)
     }
 }
 
