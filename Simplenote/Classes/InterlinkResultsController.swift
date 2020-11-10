@@ -29,8 +29,8 @@ class InterlinkResultsController {
     /// Returns the collection of Notes filtered by the specified Keyword in their title, excluding a specific ObjectID
     /// - Important: Returns `nil` when there are no results!
     ///
-    func searchNotes(byTitleKeywords keywords: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
-        filter(notes: resultsController.fetchedObjects, byTitleKeywords: keywords, excluding: excludedID)
+    func searchNotes(byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
+        filter(notes: resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
     }
 }
 
@@ -46,26 +46,21 @@ private extension InterlinkResultsController {
     ///     - RegExes aren't diacritic + case insensitve friendly
     ///     - It's easier and anyone can follow along!
     ///
-    func filter(notes: [Note], byTitleKeywords keywords: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
+    func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
         let comparisonOptions: NSString.CompareOptions = [.diacriticInsensitive, .caseInsensitive]
-        let normalizedKeywords = keywords.folding(options: comparisonOptions, locale: nil).components(separatedBy: .whitespaces)
+        let normalizedKeyword = keyword.folding(options: comparisonOptions, locale: nil)
         var output = [Note]()
 
         for note in notes where note.objectID != excludedID {
             note.ensurePreviewStringsAreAvailable()
 
-            guard let title = note.titlePreview else {
+            guard let title = note.titlePreview,
+                  let _ = title.range(of: normalizedKeyword, options: comparisonOptions, range: title.fullRange, locale: .current)
+            else {
                 continue
             }
 
-            for keyword in normalizedKeywords where keyword.isEmpty == false {
-                guard let _ = title.range(of: keyword, options: comparisonOptions, range: title.fullRange, locale: .current) else {
-                    continue
-                }
-
-                output.append(note)
-                break
-            }
+            output.append(note)
 
             if output.count >= maximumNumberOfResults {
                 break
