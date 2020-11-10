@@ -52,7 +52,7 @@ class InterlinkProcessor: NSObject {
     func processInterlinkLookup() {
         guard mustProcessInterlinkLookup,
               let (_, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
-              let notes = resultsController.searchNotes(byTitleKeywords: keywordText, excluding: excludedEntityID)
+              let notes = resultsController.searchNotes(byTitleKeyword: keywordText, excluding: excludedEntityID)
         else {
             dismissInterlinkLookup()
             return
