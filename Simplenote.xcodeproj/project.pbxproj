@@ -88,7 +88,6 @@
 		46A3C99B17DFA81A002865AE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C641788A54900785EF3 /* Tag.m */; };
 		46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C5C73F17CAD2FD003B9795 /* NSString+Bullets.m */; };
 		46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */; };
-		46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5E8179EDAFB0095CD24 /* SPTagsListViewController.m */; };
 		46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E7D17B49F4600F13AD9 /* DTPinDigitView.m */; };
 		46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B60017A063020095CD24 /* SPTagEntryField.m */; };
 		46A3C9A717DFA81A002865AE /* DTPinLockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2911E8117B49F4600F13AD9 /* DTPinLockController.m */; };
@@ -158,6 +157,8 @@
 		B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */; };
 		B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */; };
 		B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */; };
+		B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511AED9255A0A2A005B2159 /* InterlinkResultsController.swift */; };
+		B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511AEE8255A0A5E005B2159 /* InterlinkResultsControllerTests.swift */; };
 		B512AF941C20B0C400FE76D8 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */; };
 		B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */; };
@@ -540,6 +541,8 @@
 		B50F47A21D1D78EA00822748 /* SPRatingsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPRatingsHelper.h; path = Classes/SPRatingsHelper.h; sourceTree = "<group>"; };
 		B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPRatingsHelper.m; path = Classes/SPRatingsHelper.m; sourceTree = "<group>"; };
 		B50F47A51D1D791B00822748 /* NSURL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Extensions.swift"; path = "Classes/NSURL+Extensions.swift"; sourceTree = "<group>"; };
+		B511AED9255A0A2A005B2159 /* InterlinkResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkResultsController.swift; path = Classes/InterlinkResultsController.swift; sourceTree = "<group>"; };
+		B511AEE8255A0A5E005B2159 /* InterlinkResultsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterlinkResultsControllerTests.swift; sourceTree = "<group>"; };
 		B512AF8E1C209DD900FE76D8 /* Simplenote-Share-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Share-Bridging-Header.h"; sourceTree = "<group>"; };
 		B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteTableViewCell.swift; path = Classes/SPNoteTableViewCell.swift; sourceTree = "<group>"; };
 		B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteTableViewCell.xib; path = Classes/SPNoteTableViewCell.xib; sourceTree = "<group>"; };
@@ -1090,6 +1093,22 @@
 			name = Card;
 			sourceTree = "<group>";
 		};
+		B511AECA255A0A01005B2159 /* Interlinks */ = {
+			isa = PBXGroup;
+			children = (
+				B511AED9255A0A2A005B2159 /* InterlinkResultsController.swift */,
+			);
+			name = Interlinks;
+			sourceTree = "<group>";
+		};
+		B511AEE7255A0A3E005B2159 /* Interlinks */ = {
+			isa = PBXGroup;
+			children = (
+				B511AEE8255A0A5E005B2159 /* InterlinkResultsControllerTests.swift */,
+			);
+			name = Interlinks;
+			sourceTree = "<group>";
+		};
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1348,6 +1367,7 @@
 			children = (
 				B5B85BA6235173D900AD5221 /* Helpers */,
 				B52F35D422F3573300724793 /* Extensions */,
+				B511AEE7255A0A3E005B2159 /* Interlinks */,
 				B5B9AB4122EA6FE1001CB0AD /* Themes */,
 				B55AC57822D27B7F00D8CEB2 /* Settings */,
 				B55AC57B22D27BA300D8CEB2 /* Tools */,
@@ -1719,6 +1739,7 @@
 			isa = PBXGroup;
 			children = (
 				B59035FB251294D400034BAF /* Diagnostics */,
+				B511AECA255A0A01005B2159 /* Interlinks */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
 				B5A6846B23CE84B900398BBC /* Notes List */,
 				A6C0589124AD2B00006BC572 /* Note History */,
@@ -2260,6 +2281,7 @@
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
+				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
 				B5BA5B2A25520F79002AAD43 /* NSMutableParagraphStyle+Simplenote.swift in Sources */,
@@ -2425,6 +2447,7 @@
 			files = (
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
+				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
