@@ -22,7 +22,7 @@ final class ExcerptMaker {
 
         content.enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { (_, wordRange, _, stop) in
 
-            if self.trailingLimit > 0, let firstMatch = matchingWordsRange.last {
+            if self.trailingLimit > 0, let firstMatch = matchingWordsRange.first {
                 if content.distance(from: firstMatch.upperBound, to: wordRange.upperBound) > self.trailingLimit {
                     stop = true
                     return
