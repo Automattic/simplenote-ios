@@ -57,6 +57,8 @@ class InterlinkProcessor: NSObject {
     ///
     ///     1.  There is Highlighted Text in the editor (or)
     ///     2.  There is no Interlink `[keyword` at the selected location
+    ///     3.  The editor is being dragged
+    ///     4.  The editor is no longer the first responder
     ///
     @objc
     func dismissInterlinkLookupIfNeeded() {
