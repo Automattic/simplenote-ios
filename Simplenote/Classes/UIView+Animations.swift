@@ -21,4 +21,22 @@ extension UIView {
             self.alpha = animationAlpha
         }
     }
+
+    /// Performs a FadeIn animation
+    ///
+    func fadeIn(onCompletion: ((Bool) -> Void)? = nil) {
+        alpha = .zero
+
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
+            self.alpha = UIKitConstants.alpha1_0
+        }, completion: onCompletion)
+    }
+
+    /// Performs a FadeOut animation
+    ///
+    func fadeOut(onCompletion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration, animations: {
+            self.alpha = UIKitConstants.alpha0_0
+        }, completion: onCompletion)
+    }
 }
