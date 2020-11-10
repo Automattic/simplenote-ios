@@ -41,7 +41,7 @@ class InterlinkProcessor: NSObject {
     @objc
     func processInterlinkLookup() {
         guard mustProcessInterlinkLookup,
-              let (markdownRange, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
+              let (_, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
               let notes = resultsController.searchNotes(byTitleKeyword: keywordText, excluding: excludedEntityID)
         else {
             dismissInterlinkLookup()
@@ -49,8 +49,8 @@ class InterlinkProcessor: NSObject {
         }
 
         ensureInterlinkControllerIsOnScreen()
+        refreshInterlinkController(notes: notes)
         relocateInterlinkController(around: keywordRange)
-        refreshInterlinkController(notes: notes, range: markdownRange)
     }
 
     /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
@@ -100,7 +100,7 @@ private extension InterlinkProcessor {
         presentedViewController?.anchorView(around: range, in: parentTextView)
     }
 
-    func refreshInterlinkController(notes: [Note], range: Range<String.Index>) {
+    func refreshInterlinkController(notes: [Note]) {
         presentedViewController?.notes = notes
     }
 }

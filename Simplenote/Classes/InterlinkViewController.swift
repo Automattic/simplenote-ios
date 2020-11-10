@@ -38,6 +38,7 @@ class InterlinkViewController: UIViewController {
         setupRootView()
         setupBackgroundView()
         setupTableView()
+        setupShadowLayer()
     }
 }
 
@@ -66,13 +67,19 @@ private extension InterlinkViewController {
     }
 
     func setupBackgroundView() {
-        backgroundView.layer.cornerRadius = Metrics.cornerRadius
         backgroundView.backgroundColor = .simplenoteAutocompleteBackgroundColor
+    }
+
+    func setupShadowLayer() {
+        let backgroundLayer = backgroundView.layer
+        backgroundLayer.cornerRadius = Metrics.cornerRadius
+        backgroundLayer.shadowRadius = Shadow.radius
+        backgroundLayer.shadowOpacity = Shadow.opacity
+        backgroundLayer.shadowOffset = Shadow.offset
     }
 
     func setupTableView() {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
-        tableView.layoutMargins = .zero
         tableView.backgroundColor = .clear
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
@@ -96,6 +103,7 @@ extension InterlinkViewController: UITableViewDataSource {
         let tableViewCell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
         tableViewCell.title = note.titlePreview
         tableViewCell.backgroundColor = .clear
+        tableViewCell.separatorInset = .zero
 
         return tableViewCell
     }
@@ -122,7 +130,7 @@ private extension InterlinkViewController {
     /// Starts tracking ContentOffset changes in our sibling TextView
     ///
     func startObservingContentOffset(in textView: UITextView) {
-        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (textView, value) in
+        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (_, value) in
             guard let oldY = value.oldValue?.y, let newY = value.newValue?.y, oldY != newY else {
                 return
             }
@@ -132,6 +140,7 @@ private extension InterlinkViewController {
     }
 
     /// Returns the target Origin.Y
+    /// - Important: We'll always prefer "above the cursor location"
     ///
     func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
         let containerFrame = textView.editingRect()
@@ -144,7 +153,8 @@ private extension InterlinkViewController {
     /// Returns the target Size.Height
     ///
     func calculateHeight() -> CGFloat {
-        Metrics.defaultHeight
+        let targetVisibleCells = min(Double(notes.count), Metrics.maximumVisibleCells)
+        return CGFloat(targetVisibleCells) * Metrics.defaultCellHeight
     }
 }
 
@@ -153,5 +163,12 @@ private extension InterlinkViewController {
 //
 private enum Metrics {
     static let cornerRadius = CGFloat(10)
-    static let defaultHeight = CGFloat(154)
+    static let defaultCellHeight = CGFloat(44)
+    static let maximumVisibleCells = 3.5
+}
+
+private enum Shadow {
+    static let opacity = Float(0.2)
+    static let offset = CGSize(width: 0, height: 4)
+    static let radius = CGFloat(48)
 }
