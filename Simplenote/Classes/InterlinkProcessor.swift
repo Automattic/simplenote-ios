@@ -80,7 +80,7 @@ class InterlinkProcessor: NSObject {
     ///
     @objc
     func dismissInterlinkLookupIfNeeded() {
-        guard mustDismissInterlinkLookup else {
+        guard isInterlinkLookupOnScreen, mustDismissInterlinkLookup else {
             return
         }
 
@@ -137,6 +137,10 @@ private extension InterlinkProcessor {
 // MARK: - State
 //
 private extension InterlinkProcessor {
+
+    var isInterlinkLookupOnScreen: Bool {
+        presentedViewController?.parent != nil
+    }
 
     var mustProcessInterlinkLookup: Bool {
         let editor = parentTextView

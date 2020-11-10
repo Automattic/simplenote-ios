@@ -47,13 +47,15 @@ private extension InterlinkResultsController {
     ///     - It's easier and anyone can follow along!
     ///
     func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
-        let normalizedKeyword = keyword.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
+        let comparisonOptions: NSString.CompareOptions = [.diacriticInsensitive, .caseInsensitive]
+        let normalizedKeyword = keyword.folding(options: comparisonOptions, locale: nil).trimmingCharacters(in: .whitespacesAndNewlines)
         var output = [Note]()
 
         for note in notes where note.objectID != excludedID {
             note.ensurePreviewStringsAreAvailable()
-            guard let normalizedTitle = note.titlePreview?.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil),
-                  normalizedTitle.contains(normalizedKeyword)
+
+            guard let title = note.titlePreview,
+                  let _ = title.range(of: normalizedKeyword, options: comparisonOptions, range: title.fullRange, locale: .current)
             else {
                 continue
             }

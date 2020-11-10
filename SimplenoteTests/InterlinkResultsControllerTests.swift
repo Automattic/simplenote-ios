@@ -32,7 +32,7 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that only Notes with matching keywords in their title are returned by `searchNotes:byTitleKeyword:`
     ///
-    func testSearchNotesByKeywordOnlyReturnsNotesThatContainTheSpecifiedKeywordInTheirTitle() {
+    func testSearchNotesByKeywordsOnlyReturnsNotesThatContainTheSpecifiedKeywordInTheirTitle() {
         let (matching, _) = insertSampleEntities()
 
         guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: nil) else {
@@ -45,7 +45,7 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that `searchNotes:byTitleKeyword:` limits the output count to the value defined by `maximumNumberOfResults`
     ///
-    func testSearchNotesByKeywordRespectsTheMaximumNumberOfResultsLimit() {
+    func testSearchNotesByKeywordsRespectsTheMaximumNumberOfResultsLimit() {
         let (_, _) = insertSampleEntities()
 
         resultsController.maximumNumberOfResults = 1
@@ -59,7 +59,7 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that `searchNotes:byTitleKeyword:` excludes the specified entity
     ///
-    func testSearchNotesByKeywordExcludesTheSpecifiedObjectID() {
+    func testSearchNotesByKeywordsExcludesTheSpecifiedObjectID() {
         let (matching, _) = insertSampleEntities()
 
         let excluded = matching.randomElement()!
@@ -70,6 +70,23 @@ class InterlinkResultsControllerTests: XCTestCase {
 
         XCTAssertFalse(results.contains(excluded))
         XCTAssertEqual(results.count, matching.count - 1)
+    }
+
+    /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
+    ///
+    func testSearchNotesByKeywordsIsDicriticAndCaseInsensitive() {
+        let matching = [
+            storage.insertSampleNote(contents: "DíäcrìtIcs"),
+        ]
+
+        storage.save()
+
+        guard let results = resultsController.searchNotes(byTitleKeyword: "diacritics", excluding: nil) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(results.count, matching.count)
     }
 }
 
