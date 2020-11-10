@@ -145,9 +145,10 @@ private extension InterlinkViewController {
     func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
         let containerFrame = textView.editingRect()
         let anchor = textView.locationInSuperviewForText(in: range)
-        let locationOnTop = anchor.minY - height
+        let locationAbove = anchor.minY - height - Metrics.resultsPadding
+        let locationBelow = anchor.maxY + Metrics.resultsPadding
 
-        return locationOnTop > containerFrame.minY ? locationOnTop : anchor.maxY
+        return locationAbove > containerFrame.minY ? locationAbove : locationBelow
     }
 
     /// Returns the target Size.Height
@@ -165,6 +166,7 @@ private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
     static let maximumVisibleCells = 3.5
+    static let resultsPadding = CGFloat(12)
 }
 
 private enum Shadow {
