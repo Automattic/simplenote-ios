@@ -25,10 +25,6 @@ class InterlinkViewController: UIViewController {
     ///
     private var kvoOffsetToken: NSKeyValueObservation?
 
-    /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
-    ///
-    var onInsertInterlink: ((String) -> Void)?
-
     /// Interlink Notes to be presented onScreen
     ///
     var notes = [Note]() {
@@ -36,7 +32,6 @@ class InterlinkViewController: UIViewController {
             refreshTableViewIfNeeded()
         }
     }
-
 
 
     // MARK: - Overridden API(s)

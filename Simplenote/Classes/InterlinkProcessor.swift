@@ -87,9 +87,6 @@ extension InterlinkProcessor {
 
     func refreshInterlinkController(notes: [Note], range: Range<String.Index>) {
         presentedViewController?.notes = notes
-        presentedViewController?.onInsertInterlink = { _ in
-// TODO
-        }
     }
 
     func presentInterlinkController() {
