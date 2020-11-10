@@ -10,12 +10,6 @@ protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
 }
 
 
-// MARK: - InterlinkProcessorDelegate
-//
-protocol InterlinkProcessorDelegate: NSObjectProtocol {
-    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
-}
-
 // MARK: - InterlinkProcessorDatasource
 //
 protocol InterlinkProcessorDatasource: NSObjectProtocol {
@@ -32,7 +26,6 @@ class InterlinkProcessor: NSObject {
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
-    weak var delegate: InterlinkProcessorDelegate?
     weak var datasource: InterlinkProcessorDatasource?
 
 
@@ -94,14 +87,9 @@ extension InterlinkProcessor {
 
     func refreshInterlinkController(notes: [Note], range: Range<String.Index>) {
         presentedViewController?.notes = notes
-        presentedViewController?.onInsertInterlink = { [weak self] text in
-            self?.notifyInsertText(text: text, in: range)
-            self?.dismissInterlinkController()
+        presentedViewController?.onInsertInterlink = { _ in
+// TODO
         }
-    }
-
-    func notifyInsertText(text: String, in range: Range<String.Index>) {
-        delegate?.interlinkProcessor(self, insert: text, in: range)
     }
 
     func presentInterlinkController() {
