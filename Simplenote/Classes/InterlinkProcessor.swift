@@ -29,7 +29,7 @@ class InterlinkProcessor: NSObject {
     weak var datasource: InterlinkProcessorDatasource?
 
 
-    /// Displays the Interlink Lookup Window at the cursor's location when all of the following are **true**:
+    /// Displays the Interlink Lookup UI at the cursor's location when all of the following are **true**:
     ///
     ///     1. The Editor isn't Undoing nor Highlighting
     ///     2. The Editor is the first responder
@@ -53,7 +53,7 @@ class InterlinkProcessor: NSObject {
         refreshInterlinkController(notes: notes, range: markdownRange)
     }
 
-    /// Dismisses the Interlink Window when ANY of the following evaluates **true**:
+    /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
     ///
     ///     1.  There is Highlighted Text in the editor (or)
     ///     2.  There is no Interlink `[keyword` at the selected location
@@ -66,12 +66,19 @@ class InterlinkProcessor: NSObject {
 
         dismissInterlinkController()
     }
+
+    /// Dismisses the Interlink UI (if it's onscreen!)
+    ///
+    func dismissInterlinkController() {
+        presentedViewController?.detachWithAnimation()
+        presentedViewController = nil
+    }
 }
 
 
 // MARK: - Presenting
 //
-extension InterlinkProcessor {
+private extension InterlinkProcessor {
 
     func ensureInterlinkControllerIsOnScreen() {
         if let _ = presentedViewController {
@@ -93,11 +100,6 @@ extension InterlinkProcessor {
         let interlinkViewController = InterlinkViewController()
         interlinkViewController.attachWithAnimation(to: parentViewController)
         self.presentedViewController = interlinkViewController
-    }
-
-    func dismissInterlinkController() {
-        presentedViewController?.detachWithAnimation()
-        presentedViewController = nil
     }
 }
 
