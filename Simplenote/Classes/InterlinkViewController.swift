@@ -139,8 +139,7 @@ extension InterlinkViewController: UITableViewDataSource {
 extension InterlinkViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let note = notes[indexPath.row]
-        performInterlinkInsert(for: note)
+// TODO: Insert
     }
 }
 
@@ -197,6 +196,7 @@ private extension InterlinkViewController {
     /// Returns the target Size.Height
     ///
     func calculateHeight() -> CGFloat {
+// TODO: Depends on the actual results onscreen
         Metrics.defaultHeight
     }
 }
@@ -205,14 +205,6 @@ private extension InterlinkViewController {
 // MARK: - Private API(s)
 //
 private extension InterlinkViewController {
-
-    func performInterlinkInsert(for note: Note) {
-        guard let markdownInterlink = note.markdownInternalLink else {
-            return
-        }
-
-        onInsertInterlink?(markdownInterlink)
-    }
 
     func refreshTableViewIfNeeded() {
         guard isViewLoaded else {
