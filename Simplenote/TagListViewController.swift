@@ -76,6 +76,7 @@ private extension TagListViewController {
 
     func configureTableView() {
         tableView.register(SPTagListViewCell.loadNib(), forCellReuseIdentifier: SPTagListViewCell.reuseIdentifier)
+        tableView.separatorInsetReference = .fromAutomaticInsets
 
         if #available(iOS 13.0, *) {
             tableView.automaticallyAdjustsScrollIndicatorInsets = false
@@ -274,6 +275,7 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.isSelected = shouldSelectCell(at: indexPath)
+        cell.adjustSeparatorWidth(width: .full)
     }
 
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
