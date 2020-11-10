@@ -89,6 +89,7 @@ private extension InterlinkViewController {
         tableView.backgroundColor = .clear
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
+        tableView.layer.cornerRadius = Metrics.cornerRadius
     }
 
     func setupConstraints(superview: UIView) {
