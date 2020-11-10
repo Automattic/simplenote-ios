@@ -44,7 +44,7 @@ class InterlinkProcessor: NSObject {
               let (markdownRange, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
               let notes = resultsController.searchNotes(byTitleKeyword: keywordText, excluding: excludedEntityID)
         else {
-            dismissInterlinkController()
+            dismissInterlinkLookup()
             return
         }
 
@@ -64,12 +64,12 @@ class InterlinkProcessor: NSObject {
             return
         }
 
-        dismissInterlinkController()
+        dismissInterlinkLookup()
     }
 
     /// Dismisses the Interlink UI (if it's onscreen!)
     ///
-    func dismissInterlinkController() {
+    func dismissInterlinkLookup() {
         presentedViewController?.detachWithAnimation()
         presentedViewController = nil
     }
@@ -88,18 +88,18 @@ private extension InterlinkProcessor {
         presentInterlinkController()
     }
 
+    func presentInterlinkController() {
+        let interlinkViewController = InterlinkViewController()
+        interlinkViewController.attachWithAnimation(to: parentViewController)
+        self.presentedViewController = interlinkViewController
+    }
+
     func relocateInterlinkController(around range: Range<String.Index>) {
         presentedViewController?.anchorView(around: range, in: parentTextView)
     }
 
     func refreshInterlinkController(notes: [Note], range: Range<String.Index>) {
         presentedViewController?.notes = notes
-    }
-
-    func presentInterlinkController() {
-        let interlinkViewController = InterlinkViewController()
-        interlinkViewController.attachWithAnimation(to: parentViewController)
-        self.presentedViewController = interlinkViewController
     }
 }
 

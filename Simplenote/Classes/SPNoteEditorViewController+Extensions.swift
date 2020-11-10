@@ -565,7 +565,7 @@ extension SPNoteEditorViewController {
     ///
     @objc(refreshInterlinkLookupWithCoordinator:)
     func refreshInterlinkLookupWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
-        interlinkProcessor.dismissInterlinkController()
+        interlinkProcessor.dismissInterlinkLookup()
 
         coordinator.animate(alongsideTransition: nil) { _ in
             self.interlinkProcessor.processInterlinkLookup()
