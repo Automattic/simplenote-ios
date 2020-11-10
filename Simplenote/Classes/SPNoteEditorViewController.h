@@ -2,6 +2,7 @@
 #import <Simperium/Simperium.h>
 
 
+@class InterlinkProcessor;
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
@@ -29,6 +30,9 @@
 
 // Information
 @property (nonatomic, weak) UIViewController *informationViewController;
+
+// Interlinks
+@property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
 
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;

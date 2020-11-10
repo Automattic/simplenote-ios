@@ -92,6 +92,16 @@ extension SPNoteEditorViewController {
             bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
+
+    /// Sets up the Interlinks Processor
+    ///
+    @objc
+    func configureInterlinksProcessor() {
+        interlinkProcessor = InterlinkProcessor()
+        interlinkProcessor.datasource = self
+        interlinkProcessor.delegate = self
+        interlinkProcessor.contextProvider = self
+    }
 }
 
 
@@ -548,6 +558,60 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Interlinks
+//
+extension SPNoteEditorViewController {
+
+    /// Dismisses (if needed) and reprocessess Interlink Lookup whenever the current Transition concludes
+    ///
+    @objc(refreshInterlinkLookupWithCoordinator:)
+    func refreshInterlinkLookupWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
+        interlinkProcessor.dismissInterlinkController()
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.interlinkProcessor.processInterlinkLookup()
+        }
+    }
+}
+
+
+// MARK: - InterlinkProcessorPresentationContextProvider
+//
+extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
+
+    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
+        noteEditorTextView
+    }
+
+    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController {
+        self
+    }
+}
+
+
+// MARK: - InterlinkProcessorDatasource
+//
+extension SPNoteEditorViewController: InterlinkProcessorDatasource {
+
+    var interlinkExcudedEntityID: NSManagedObjectID? {
+        currentNote?.objectID
+    }
+
+    var interlinkViewContext: NSManagedObjectContext {
+        SPAppDelegate.shared().managedObjectContext
+    }
+}
+
+
+// MARK: - InterlinkProcessorDelegate
+//
+extension SPNoteEditorViewController: InterlinkProcessorDelegate {
+
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
+    }
+}
+
+
 // MARK - Style
 //
 extension SPNoteEditorViewController {
@@ -616,6 +680,7 @@ private enum Metrics {
         UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
     }
 }
+
 
 // MARK: - NSCoder Keys
 //
