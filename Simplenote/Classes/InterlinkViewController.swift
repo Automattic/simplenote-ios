@@ -129,16 +129,6 @@ extension InterlinkViewController: UITableViewDataSource {
 }
 
 
-// MARK: - UITableViewDelegate
-//
-extension InterlinkViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-// TODO: Insert
-    }
-}
-
-
 // MARK: - Geometry
 //
 private extension InterlinkViewController {
@@ -191,7 +181,6 @@ private extension InterlinkViewController {
     /// Returns the target Size.Height
     ///
     func calculateHeight() -> CGFloat {
-// TODO: Depends on the actual results onscreen
         Metrics.defaultHeight
     }
 }
