@@ -301,6 +301,7 @@
 		B5C2EDD3255ACB4900C09B32 /* InterlinkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDD0255ACB4800C09B32 /* InterlinkProcessor.swift */; };
 		B5C2EDD4255ACB4900C09B32 /* InterlinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */; };
 		B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */; };
+		B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
 		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
@@ -705,6 +706,7 @@
 		B5C2EDD0255ACB4800C09B32 /* InterlinkProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkProcessor.swift; path = Classes/InterlinkProcessor.swift; sourceTree = "<group>"; };
 		B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkViewController.swift; path = Classes/InterlinkViewController.swift; sourceTree = "<group>"; };
 		B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PassthruView.swift; path = Classes/PassthruView.swift; sourceTree = "<group>"; };
+		B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+Simplenote.swift"; path = "Classes/NSAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
@@ -1290,6 +1292,7 @@
 				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */,
+				B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				B5BA5B2925520F79002AAD43 /* NSMutableParagraphStyle+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
@@ -2402,6 +2405,7 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
+				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
