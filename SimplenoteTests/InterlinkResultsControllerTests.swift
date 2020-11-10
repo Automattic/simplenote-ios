@@ -32,10 +32,10 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that only Notes with matching keywords in their title are returned by `searchNotes:byTitleKeyword:`
     ///
-    func testSearchNotesByKeywordOnlyReturnsNotesThatContainTheSpecifiedKeywordInTheirTitle() {
+    func testSearchNotesByKeywordsOnlyReturnsNotesThatContainTheSpecifiedKeywordInTheirTitle() {
         let (matching, _) = insertSampleEntities()
 
-        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: nil) else {
+        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: nil) else {
             XCTFail()
             return
         }
@@ -45,11 +45,11 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that `searchNotes:byTitleKeyword:` limits the output count to the value defined by `maximumNumberOfResults`
     ///
-    func testSearchNotesByKeywordRespectsTheMaximumNumberOfResultsLimit() {
+    func testSearchNotesByKeywordsRespectsTheMaximumNumberOfResultsLimit() {
         let (_, _) = insertSampleEntities()
 
         resultsController.maximumNumberOfResults = 1
-        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: nil) else {
+        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: nil) else {
             XCTFail()
             return
         }
@@ -59,17 +59,53 @@ class InterlinkResultsControllerTests: XCTestCase {
 
     /// Verifies that `searchNotes:byTitleKeyword:` excludes the specified entity
     ///
-    func testSearchNotesByKeywordExcludesTheSpecifiedObjectID() {
+    func testSearchNotesByKeywordsExcludesTheSpecifiedObjectID() {
         let (matching, _) = insertSampleEntities()
 
         let excluded = matching.randomElement()!
-        guard let results = resultsController.searchNotes(byTitleKeyword: Settings.sampleMatchingKeyword, excluding: excluded.objectID) else {
+        guard let results = resultsController.searchNotes(byTitleKeywords: Settings.sampleMatchingKeyword, excluding: excluded.objectID) else {
             XCTFail()
             return
         }
 
         XCTAssertFalse(results.contains(excluded))
         XCTAssertEqual(results.count, matching.count - 1)
+    }
+
+    /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
+    ///
+    func testSearchNotesByKeywordsMatchesMultipleKeywords() {
+        let matching = [
+            storage.insertSampleNote(contents: "keywordA something something keywordB"),
+            storage.insertSampleNote(contents: "Something keywordA keywordB")
+        ]
+
+        storage.save()
+
+        guard let results = resultsController.searchNotes(byTitleKeywords: "keyworda keywordb", excluding: nil) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(results.count, matching.count)
+    }
+
+
+    /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
+    ///
+    func testSearchNotesByKeywordsIsDicriticAndCaseInsensitive() {
+        let matching = [
+            storage.insertSampleNote(contents: "DíäcrìtIcs"),
+        ]
+
+        storage.save()
+
+        guard let results = resultsController.searchNotes(byTitleKeywords: "diacritics", excluding: nil) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(results.count, matching.count)
     }
 }
 
