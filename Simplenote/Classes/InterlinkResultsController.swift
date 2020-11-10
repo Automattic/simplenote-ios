@@ -48,7 +48,7 @@ private extension InterlinkResultsController {
     ///
     func filter(notes: [Note], byTitleKeyword keyword: String, excluding excludedID: NSManagedObjectID?) -> [Note]? {
         let comparisonOptions: NSString.CompareOptions = [.diacriticInsensitive, .caseInsensitive]
-        let normalizedKeyword = keyword.folding(options: comparisonOptions, locale: nil)
+        let normalizedKeyword = keyword.folding(options: comparisonOptions, locale: nil).trimmingCharacters(in: .whitespacesAndNewlines)
         var output = [Note]()
 
         for note in notes where note.objectID != excludedID {
