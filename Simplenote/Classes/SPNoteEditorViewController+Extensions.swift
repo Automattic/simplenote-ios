@@ -99,6 +99,7 @@ extension SPNoteEditorViewController {
     func configureInterlinksProcessor() {
         interlinkProcessor = InterlinkProcessor()
         interlinkProcessor.datasource = self
+        interlinkProcessor.delegate = self
         interlinkProcessor.contextProvider = self
     }
 }
@@ -602,6 +603,17 @@ extension SPNoteEditorViewController: InterlinkProcessorDatasource {
 
     var interlinkViewContext: NSManagedObjectContext {
         SPAppDelegate.shared().managedObjectContext
+    }
+}
+
+
+// MARK: - InterlinkProcessorDelegate
+//
+extension SPNoteEditorViewController: InterlinkProcessorDelegate {
+
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
+        noteEditorTextView.insertText(text: text, in: range)
+        processor.dismissInterlinkLookup()
     }
 }
 

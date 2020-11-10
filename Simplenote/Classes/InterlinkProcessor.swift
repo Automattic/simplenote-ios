@@ -20,6 +20,12 @@ protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
 }
 
 
+// MARK: - InterlinkProcessorDelegate
+//
+protocol InterlinkProcessorDelegate: NSObjectProtocol {
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
+}
+
 // MARK: - InterlinkProcessorDatasource
 //
 protocol InterlinkProcessorDatasource: NSObjectProtocol {
@@ -36,6 +42,7 @@ class InterlinkProcessor: NSObject {
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
+    weak var delegate: InterlinkProcessorDelegate?
     weak var datasource: InterlinkProcessorDatasource?
 
 
@@ -51,7 +58,7 @@ class InterlinkProcessor: NSObject {
     @objc
     func processInterlinkLookup() {
         guard mustProcessInterlinkLookup,
-              let (_, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
+              let (markdownRange, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
               let notes = resultsController.searchNotes(byTitleKeyword: keywordText, excluding: excludedEntityID)
         else {
             dismissInterlinkLookup()
@@ -61,6 +68,7 @@ class InterlinkProcessor: NSObject {
         ensureInterlinkControllerIsOnScreen()
         refreshInterlinkController(notes: notes)
         relocateInterlinkController(around: keywordRange)
+        setupInterlinkEventListeners(replacementRange: markdownRange)
     }
 
     /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
@@ -112,6 +120,16 @@ private extension InterlinkProcessor {
 
     func refreshInterlinkController(notes: [Note]) {
         presentedViewController?.notes = notes
+    }
+
+    func setupInterlinkEventListeners(replacementRange: Range<String.Index>) {
+        presentedViewController?.onInsertInterlink = { [weak self] text in
+            guard let self = self else {
+                return
+            }
+
+            self.delegate?.interlinkProcessor(self, insert: text, in: replacementRange)
+        }
     }
 }
 
