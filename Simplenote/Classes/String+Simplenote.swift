@@ -23,6 +23,12 @@ extension String {
 //
 extension String {
 
+    /// Returns the Range enclosing all of the receiver's contents
+    ///
+    var fullRange: Range<String.Index> {
+        startIndex ..< endIndex
+    }
+
     /// Truncates the receiver's full words, up to a specified maximum length.
     /// - Note: Whenever this is not possible (ie. the receiver doesn't have words), regular truncation will be performed
     ///
