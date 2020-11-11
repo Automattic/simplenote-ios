@@ -81,6 +81,7 @@ class InterlinkProcessor: NSObject {
 
     /// Dismisses the Interlink UI (if it's onscreen!)
     ///
+    @objc
     func dismissInterlinkLookup() {
         presentedViewController?.detachWithAnimation()
         presentedViewController = nil
