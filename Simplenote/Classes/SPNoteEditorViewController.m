@@ -229,7 +229,7 @@ CGFloat const SPSelectedAreaPadding = 20;
                                  self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
 
-            [self highlightSearchResultAtIndex:0];
+            [self highlightSearchResultAtIndex:0 animated:YES];
         });
     });
 }
@@ -574,15 +574,15 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)highlightNextSearchResult:(id)sender
 {
-    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count)];
+    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
 }
 
 - (void)highlightPrevSearchResult:(id)sender
 {
-    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1)];
+    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
 }
 
-- (void)highlightSearchResultAtIndex:(NSInteger)index
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
 {
     self.highlightedSearchResultIndex = index;
 
@@ -594,12 +594,12 @@ CGFloat const SPSelectedAreaPadding = 20;
         self.nextSearchButton.enabled = index < searchResultCount - 1;
         
         [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
-                           animated:YES
+                           animated:animated
                           withBlock:^(CGRect highlightFrame) {
 
                               // scroll to block
                               highlightFrame.origin.y += highlightFrame.size.height;
-                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
+                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
                           }];
     }
 }

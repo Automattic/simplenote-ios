@@ -57,7 +57,7 @@
 - (void)bounceMarkdownPreview;
 
 - (void)ensureSearchIsDismissed;
-- (void)highlightSearchResultAtIndex:(NSInteger)index;
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;

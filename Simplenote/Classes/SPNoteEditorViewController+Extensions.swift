@@ -643,7 +643,7 @@ extension SPNoteEditorViewController {
                 return
             }
 
-            self.highlightSearchResult(at: index)
+            self.highlightSearchResult(at: index, animated: false)
         }
 
         searchMapView?.update(with: positions)
