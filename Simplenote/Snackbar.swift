@@ -3,9 +3,19 @@ import Foundation
 class Snackbar {
     
     fileprivate let message: String
+    fileprivate let actionTitle: String?
+    fileprivate let actionCompletion: (() -> Void)?
     
     init(message: String) {
         self.message = message
+        self.actionTitle = nil
+        self.actionCompletion = nil
+    }
+    
+    init(message: String, actionTitle: String, actionCompletion: @escaping () -> Void) {
+        self.message = message
+        self.actionTitle = actionTitle
+        self.actionCompletion = actionCompletion
     }
     
     deinit {
@@ -47,6 +57,7 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
         }
         
         snackbar = sender
+        wasActionTapped = false
         
 //        let snackView = prepareView()
         let snackView = prepareViewFromXIB()
@@ -146,7 +157,11 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
         } completion: { (Bool) in
             view.removeFromSuperview()
             print("Done fade.")
-
+            
+            if self.wasActionTapped, let completion = self.snackbar?.actionCompletion {
+                completion()
+            }
+            
             self.snackbar = nil
             self.viewController = nil
         }

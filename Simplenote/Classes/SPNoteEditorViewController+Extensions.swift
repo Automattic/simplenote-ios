@@ -320,7 +320,11 @@ extension SPNoteEditorViewController {
     @objc
     func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
 
-        let snackbar = Snackbar(message: "Some message")
+        let snackbar = Snackbar(message: "Hello!", actionTitle: "Do it!") {
+            print("Callback code executed!")
+        }
+        
+//        let snackbar = Snackbar(message: "Yoyo!")
         print(snackbar)
         snackbar.show()
         return
