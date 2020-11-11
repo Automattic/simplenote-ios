@@ -12,8 +12,6 @@ class Snackbar {
 	
 	var message: String
 	
-	static var presenter = SnackbarPresenter()
-	
 	init(message: String = "Test message") {
 		self.message = message
 	}
@@ -24,14 +22,19 @@ class Snackbar {
 	
 	func show() {
 		print("Displaying snackbar")
-		Snackbar.presenter.present(self)
+		SnackbarPresenter.shared.present(self)
 	}
 }
 
 class SnackbarPresenter {
 	
+	static let shared = SnackbarPresenter()
+	
 	var snackbar: Snackbar?
 	var viewController: SnackbarViewController?
+	
+	// Prevent use outside the shared instance.
+	private init() {}
 	
 	deinit {
 		print("SnackbarPresenter deinit")
