@@ -10,7 +10,7 @@ import Foundation
 
 class Snackbar {
 	
-	var message: String
+	private var message: String
 	
 	init(message: String = "Test message") {
 		self.message = message
@@ -30,8 +30,8 @@ class SnackbarPresenter {
 	
 	static let shared = SnackbarPresenter()
 	
-	var snackbar: Snackbar?
-	var viewController: SnackbarViewController?
+	private var snackbar: Snackbar?
+	private var viewController: SnackbarViewController?
 	
 	// Prevent use outside the shared instance.
 	private init() {}
@@ -56,7 +56,7 @@ class SnackbarPresenter {
 		// Puts the view onscreen and returns.
 	}
 	
-	func prepareView() -> UIView {
+	private func prepareView() -> UIView {
 		
 		// Prep a test view for display.
 		// Limit to 80% of the host window.
@@ -73,7 +73,7 @@ class SnackbarPresenter {
 		return view
 	}
 	
-	func prepareViewFromXIB() -> UIView {
+	private func prepareViewFromXIB() -> UIView {
 		
 		let vc = SnackbarViewController()
 		let view = vc.view!
@@ -87,7 +87,7 @@ class SnackbarPresenter {
 		return view
 	}
 
-	func presentView(_ view: UIView) {
+	private func presentView(_ view: UIView) {
 		
 		// Determine where the view goes in the host window.
 		
@@ -121,7 +121,7 @@ class SnackbarPresenter {
 		}
 	}
 	
-	func removeView(_ view: UIView) {
+	private func removeView(_ view: UIView) {
 		
 		// Results in action button not working.
 		UIView.animate(withDuration: 0.66, delay: 2.4, options: []) {
@@ -135,7 +135,7 @@ class SnackbarPresenter {
 		}
 	}
 	
-	func removeViewAsync(_ view: UIView) {
+	private func removeViewAsync(_ view: UIView) {
 		
 		// Allows action button to accept inputs.
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
