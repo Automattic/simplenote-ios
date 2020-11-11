@@ -26,13 +26,18 @@ class Snackbar {
     }
 }
 
-    class SnackbarPresenter {
+class SnackbarPresenter {
 
     static let shared = SnackbarPresenter()
 
     private var snackbar: Snackbar?
     private var viewController: SnackbarViewController?
 
+    // TODO: Switch to UIKitConstants here.
+    /// Only in use during testing so we have extra time to play with the action button.
+    /// Should use UIKitConstants.animationLongDuration.
+    private let animationDurationLongTest = TimeInterval(2.4)
+    
     // Prevent use outside the shared instance.
     private init() {}
 
@@ -108,7 +113,7 @@ class Snackbar {
         view.center.y = view.center.y + offset + viewHeight
         print(view.center.y)
         
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration, delay: UIKitConstants.animationDelayZero, options: [], animations: {
             view.center.y = view.center.y - offset - viewHeight
         }) { _ in
             print("Animation complete.")
@@ -124,8 +129,8 @@ class Snackbar {
     private func removeView(_ view: UIView) {
         
         // Results in action button not working.
-        UIView.animate(withDuration: 0.66, delay: 2.4, options: []) {
-            view.alpha = 0
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: animationDurationLongTest, options: []) {
+            view.alpha = UIKitConstants.alpha0_0
         } completion: { (Bool) in
             view.removeFromSuperview()
             print("Done fade.")
@@ -137,12 +142,12 @@ class Snackbar {
 	
     private func removeViewAsync(_ view: UIView) {
         
-        // Allows action button to accept inputs.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+        /// Allows action button to accept inputs.
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDurationLongTest) {
             print("Hiding snackbar")
 
-            UIView.animate(withDuration: 0.66, delay: 0.0, options: []) {
-                view.alpha = 0
+            UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: UIKitConstants.animationDelayZero, options: []) {
+                view.alpha = UIKitConstants.alpha0_0
             } completion: { (Bool) in
                 view.removeFromSuperview()
                 print("Done fade.")
