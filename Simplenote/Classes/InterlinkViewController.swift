@@ -179,6 +179,6 @@ private enum Metrics {
 
 private enum Shadow {
     static let opacity = Float(0.2)
-    static let offset = CGSize(width: 0, height: 4)
-    static let radius = CGFloat(48)
+    static let offset = CGSize(width: 0, height: 32)
+    static let radius = CGFloat(64)
 }
