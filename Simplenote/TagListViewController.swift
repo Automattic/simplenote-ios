@@ -1,4 +1,5 @@
 import Foundation
+import SimplenoteFoundation
 
 // MARK: - TagListViewController
 //
@@ -8,23 +9,14 @@ final class TagListViewController: UIViewController {
     @IBOutlet private weak var rightBorderWidthConstraint: NSLayoutConstraint!
 
     private lazy var tagsHeaderView: SPTagHeaderView = SPTagHeaderView.instantiateFromNib()
-    private lazy var fetchedResultsController: NSFetchedResultsController<Tag> = {
-        let context = SPAppDelegate.shared().managedObjectContext
-        let entity = NSEntityDescription.entity(forEntityName: "Tag", in: context)
 
-        let fetchRequest = NSFetchRequest<Tag>()
-        fetchRequest.entity = entity
-        fetchRequest.fetchBatchSize = Constants.tagListBatchSize
-        fetchRequest.sortDescriptors = sortDescriptors
-
-        return NSFetchedResultsController(fetchRequest: fetchRequest,
-                                          managedObjectContext: context,
-                                          sectionNameKeyPath: nil,
-                                          cacheName: nil)
+    private lazy var resultsController: ResultsController<Tag> = {
+        let mainContext = SPAppDelegate.shared().managedObjectContext
+        return ResultsController(viewContext: mainContext,
+                                 sortedBy: sortDescriptors)
     }()
 
     private var renameTag: Tag?
-    private var isVisible: Bool = false
 
     override var shouldAutorotate: Bool {
         return false
@@ -45,25 +37,23 @@ final class TagListViewController: UIViewController {
 
         refreshStyle()
 
-        configureFetchResultsController()
+        performFetch()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
-        reloadDataAsynchronously()
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        isVisible = true
+        tableView.reloadData()
+        startListeningForChanges()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setEditing(false)
+
         stopListeningToKeyboardNotifications()
-        isVisible = false
+        stopListeningForChanges()
     }
 }
 
@@ -103,11 +93,6 @@ private extension TagListViewController {
         UIMenuController.shared.menuItems = [renameItem]
         UIMenuController.shared.update()
     }
-
-    func configureFetchResultsController() {
-        fetchedResultsController.delegate = self
-        performFetch()
-    }
 }
 
 // MARK: - Notifications
@@ -119,8 +104,6 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(menuDidChangeVisibility), name: UIMenuController.didHideMenuNotification, object: nil)
         nc.addObserver(self, selector: #selector(tagsSortOrderWasUpdated), name: NSNotification.Name.SPAlphabeticalTagSortPreferenceChanged, object: nil)
         nc.addObserver(self, selector: #selector(themeDidChange), name: NSNotification.Name.SPSimplenoteThemeChanged, object: nil)
-        // TODO: start listening when app becomes active?
-        nc.addObserver(self, selector: #selector(stopListeningToKeyboardNotifications), name: UIApplication.willResignActiveNotification, object: nil)
     }
 
     func startListeningToKeyboardNotifications() {
@@ -129,7 +112,6 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc
     func stopListeningToKeyboardNotifications() {
         let nc = NotificationCenter.default
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -193,7 +175,7 @@ private extension TagListViewController {
     }
 
     func indexPath(for tag: Tag) -> IndexPath? {
-        guard let indexPath = fetchedResultsController.indexPath(forObject: tag) else {
+        guard let indexPath = resultsController.indexPath(forObject: tag) else {
             return nil
         }
 
@@ -201,24 +183,18 @@ private extension TagListViewController {
     }
 
     func tag(at indexPath: IndexPath) -> Tag? {
-        guard indexPath.row < fetchedResultsController.fetchedObjects?.count ?? 0
+        guard indexPath.row < numberOfTags
                 && Section(rawValue: indexPath.section) == .tags else {
             return nil
         }
 
         // Our FRC has just one section!
         let indexPath = IndexPath(row: indexPath.row, section: 0)
-        return fetchedResultsController.object(at: indexPath)
+        return resultsController.object(at: indexPath)
     }
 
     var numberOfTags: Int {
-        return fetchedResultsController.sections?.first?.numberOfObjects ?? 0
-    }
-
-    func reloadDataAsynchronously() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
+        return resultsController.numberOfObjects
     }
 }
 
@@ -316,8 +292,10 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
+        stopListeningForChanges()
         SPObjectManager.shared().moveTag(from: sourceIndexPath.row,
                                          to: destinationIndexPath.row)
+        startListeningForChanges()
     }
 
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -526,15 +504,7 @@ private extension TagListViewController {
 
     func openNoteListForTagName(_ tagName: String?) {
         let appDelegate = SPAppDelegate.shared()
-        // Only perform a fetch if the view has actually changed
-        let fetchNeeded = appDelegate.selectedTag != tagName
-
         appDelegate.selectedTag = tagName
-        // TODO: Move to AppDelegate::setSelectedTag ?
-        if fetchNeeded {
-            appDelegate.noteListViewController.update()
-        }
-
         appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
     }
 }
@@ -558,7 +528,6 @@ private extension TagListViewController {
         let appDelegate = SPAppDelegate.shared()
         if appDelegate.selectedTag == tag.name {
             appDelegate.selectedTag = nil
-            appDelegate.noteListViewController.update()
         }
 
         SPObjectManager.shared().removeTag(tag)
@@ -634,7 +603,6 @@ extension TagListViewController: UITextFieldDelegate {
             let appDelegate = SPAppDelegate.shared()
             if appDelegate.selectedTag == originalTagName {
                 appDelegate.selectedTag = newTagName
-                appDelegate.noteListViewController.update()
             }
         } else {
             textField.text = originalTagName
@@ -647,7 +615,7 @@ extension TagListViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Fetched results controller
+// MARK: - Results Controller
 //
 private extension TagListViewController {
     var sortDescriptors: [NSSortDescriptor] {
@@ -666,27 +634,50 @@ private extension TagListViewController {
     }
 
     func performFetch() {
-        do {
-            try fetchedResultsController.performFetch()
-            tableView.reloadData()
-        } catch {
-            fatalError("Unresolved error \(error)")
-        }
+        try? resultsController.performFetch()
+        tableView.reloadData()
     }
 
     func refreshSortDescriptorsAndPerformFetch() {
-        fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
+        resultsController.sortDescriptors = sortDescriptors
         performFetch()
     }
-}
 
-// MARK: - NSFetchedResultsControllerDelegate
-//
-extension TagListViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if isVisible {
-            tableView.reloadData()
+    func startListeningForChanges() {
+        resultsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+            guard let self = self else {
+                return
+            }
+
+            guard self.tableView.window != nil else {
+                return
+            }
+
+            // Reload if number of sections is different
+            // Results controller supports only tags section. We show/hide tags section based on the number of tags®
+            guard self.tableView.numberOfSections == self.numberOfSections(in: self.tableView) else {
+                self.setEditing(false)
+                self.tableView.reloadData()
+                return
+            }
+
+            self.reloadTable(with: sectionsChangeset.transposed(toSection: Section.tags.rawValue),
+                             objectsChangeset: objectsChangeset.transposed(toSection: Section.tags.rawValue))
         }
+    }
+
+    func stopListeningForChanges() {
+        resultsController.onDidChangeContent = nil
+    }
+
+    func reloadTable(with sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
+        self.tableView.performBatchUpdates({
+            // Disable animation for row updates
+            let animations = ResultsTableAnimations(delete: .fade, insert: .fade, move: .fade, update: .none)
+            self.tableView.performChanges(sectionsChangeset: sectionsChangeset,
+                                          objectsChangeset: objectsChangeset,
+                                          animations: animations)
+        }, completion: nil)
     }
 }
 
