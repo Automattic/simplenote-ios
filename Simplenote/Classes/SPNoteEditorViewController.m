@@ -583,23 +583,19 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
-- (void)highlightSearchResultAtIndex:(NSInteger)index {
-    
+- (void)highlightSearchResultAtIndex:(NSInteger)index
+{
     NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
         self.prevSearchButton.enabled = index > 0;
         self.nextSearchButton.enabled = index < searchResultCount - 1;
-        
-        [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
-                           animated:YES
-                          withBlock:^(CGRect highlightFrame) {
 
-                              // scroll to block
-                              highlightFrame.origin.y += highlightFrame.size.height;
-                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
-                          }];
+        NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
+        [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
+            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
+        }];
     }
 }
 
