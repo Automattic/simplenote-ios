@@ -13,10 +13,7 @@ final class TagListViewController: UIViewController {
     private lazy var resultsController: ResultsController<Tag> = {
         let mainContext = SPAppDelegate.shared().managedObjectContext
         return ResultsController(viewContext: mainContext,
-                                 sectionNameKeyPath: nil,
-                                 matching: nil,
-                                 sortedBy: sortDescriptors,
-                                 limit: 0)
+                                 sortedBy: sortDescriptors)
     }()
 
     private var renameTag: Tag?
@@ -662,7 +659,7 @@ private extension TagListViewController {
                 return
             }
 
-            self.reloadTable(withSectionsChangeset: sectionsChangeset.transposed(toSection: Section.tags.rawValue),
+            self.reloadTable(with: sectionsChangeset.transposed(toSection: Section.tags.rawValue),
                              objectsChangeset: objectsChangeset.transposed(toSection: Section.tags.rawValue))
         }
     }
@@ -671,7 +668,7 @@ private extension TagListViewController {
         resultsController.onDidChangeContent = nil
     }
 
-    func reloadTable(withSectionsChangeset sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
+    func reloadTable(with sectionsChangeset: ResultsSectionsChangeset, objectsChangeset: ResultsObjectsChangeset) {
         self.tableView.performBatchUpdates({
             // Disable animation for row updates
             let animations = ResultsTableAnimations(delete: .fade, insert: .fade, move: .fade, update: .none)
