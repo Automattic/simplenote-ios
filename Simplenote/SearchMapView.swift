@@ -15,7 +15,7 @@ final class SearchMapView: UIView {
             guard oldValue != lastSelectedIndex, let index = lastSelectedIndex else {
                 return
             }
-            
+
             feedbackGenerator.selectionChanged()
             onSelectionChange?(index)
         }
@@ -23,6 +23,8 @@ final class SearchMapView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        isAccessibilityElement = false
 
         feedbackGenerator.prepare()
 
