@@ -7,11 +7,11 @@ import UIKit
 @objcMembers
 class SPNoteTableViewCell: UITableViewCell {
 
-    /// Master View
+    /// Title Label
     ///
     @IBOutlet private var titleLabel: UILabel!
 
-    /// Accessory StackView
+    /// Body Label
     ///
     @IBOutlet private var bodyLabel: UILabel!
 
