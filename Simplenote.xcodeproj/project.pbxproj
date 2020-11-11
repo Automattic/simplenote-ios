@@ -121,7 +121,6 @@
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		A604DB6E255BDE9A00B802CA /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB6D255BDE9A00B802CA /* ContentSlice.swift */; };
-		A625EA6525517EAB007887D6 /* NSRange+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A625EA6425517EAB007887D6 /* NSRange+Simplenote.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A66224FD2546B460003A949E /* TableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66224FC2546B460003A949E /* TableHeaderViewCell.swift */; };
@@ -504,7 +503,6 @@
 		9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		A604DB6D255BDE9A00B802CA /* ContentSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSlice.swift; sourceTree = "<group>"; };
-		A625EA6425517EAB007887D6 /* NSRange+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+Simplenote.swift"; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A66224FC2546B460003A949E /* TableHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderViewCell.swift; sourceTree = "<group>"; };
@@ -1320,7 +1318,6 @@
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */,
 				A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */,
-				A625EA6425517EAB007887D6 /* NSRange+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2403,7 +2400,6 @@
 				46A3C9A117DFA81A002865AE /* SPTagsListViewController.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
-				A625EA6525517EAB007887D6 /* NSRange+Simplenote.swift in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
 				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
 				A6E11A78254F3D38009C48FC /* NoteContentHelper.swift in Sources */,
