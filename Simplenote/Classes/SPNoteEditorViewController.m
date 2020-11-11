@@ -720,7 +720,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.editingNote = NO;
-    
+
+    [self.interlinkProcessor dismissInterlinkLookup];
     [self cancelSaveTimers];
     [self save];
 }

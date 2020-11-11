@@ -17,6 +17,13 @@ extension SPNoteEditorViewController {
 
         ensureEmptyNoteIsDeleted()
     }
+
+    /// Whenever a ViewController is presented, let's ensure Interlink is dismissed!
+    ///
+    override public func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+        interlinkProcessor.dismissInterlinkLookup()
+    }
 }
 
 
