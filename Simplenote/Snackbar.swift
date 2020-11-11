@@ -10,9 +10,9 @@ import Foundation
 
 class Snackbar {
     
-    private var message: String
+    fileprivate let message: String
     
-    init(message: String = "Test message") {
+    init(message: String) {
         self.message = message
     }
     
@@ -81,13 +81,14 @@ class SnackbarPresenter {
     private func prepareViewFromXIB() -> UIView {
         
         let vc = SnackbarViewController()
-        let view = vc.view!
         
+        let view = vc.view!
         let frame = view.frame
         let newFrame = CGRect(x: 0, y: 0, width: frame.width - 30, height: frame.height)
         vc.view.frame = newFrame
         
         viewController = vc
+        vc.messageLabel.text = snackbar?.message
         
         return view
     }
