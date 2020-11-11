@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol SnackbarViewControllerDelegate: AnyObject {
+    func snackbarActionWasTapped(sender: SnackbarViewController)
+}
+
 class SnackbarViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
+    
+    weak var delegate: SnackbarViewControllerDelegate?
     
     deinit {
         print("VC deinit.")
@@ -24,6 +30,7 @@ class SnackbarViewController: UIViewController {
     }
     
     @IBAction func actionButtonTapped(_ sender: UIButton) {
-        print("Button tapped!")
+        actionButton.isEnabled = false
+        delegate?.snackbarActionWasTapped(sender: self)
     }
 }

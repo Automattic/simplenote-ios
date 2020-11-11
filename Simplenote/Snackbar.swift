@@ -26,12 +26,14 @@ class Snackbar {
     }
 }
 
-class SnackbarPresenter {
-
+class SnackbarPresenter: SnackbarViewControllerDelegate {
+    
     static let shared = SnackbarPresenter()
 
     private var snackbar: Snackbar?
     private var viewController: SnackbarViewController?
+    
+    private var wasActionTapped = false
 
     // TODO: Switch to UIKitConstants here.
     /// Only in use during testing so we have extra time to play with the action button.
@@ -54,7 +56,7 @@ class SnackbarPresenter {
         
         snackbar = sender
         
-    //		let snackView = prepareView()
+//        let snackView = prepareView()
         let snackView = prepareViewFromXIB()
         presentView(snackView)
         
@@ -81,6 +83,7 @@ class SnackbarPresenter {
     private func prepareViewFromXIB() -> UIView {
         
         let vc = SnackbarViewController()
+        vc.delegate = self
         
         let view = vc.view!
         let frame = view.frame
@@ -93,6 +96,16 @@ class SnackbarPresenter {
         return view
     }
 
+    func snackbarActionWasTapped(sender: SnackbarViewController) {
+        print("Delegate called for tap.")
+        
+        wasActionTapped = true
+        
+        // Remove the view!
+        let view = (viewController?.view)!
+        self.removeViewNow(view)
+    }
+    
     private func presentView(_ view: UIView) {
         
         // Determine where the view goes in the host window.
@@ -118,19 +131,25 @@ class SnackbarPresenter {
             view.center.y = view.center.y - offset - viewHeight
         }) { _ in
             print("Animation complete.")
-            
-            // Using the delay param results in the UIButton not receiving inputs.
-            // Using the asyncAfter allows the button to work correctly.
-            
-    //			self.removeView(view)
-            self.removeViewAsync(view)
+            self.removeViewAfterTimeout(view)
         }
     }
 
-    private func removeView(_ view: UIView) {
+    private func removeViewAfterTimeout(_ view: UIView) {
+        print("Starting countdown to fade...")
         
-        // Results in action button not working.
-        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: animationDurationLongTest, options: []) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDurationLongTest) {
+            if !self.wasActionTapped {
+                print("Hiding snackbar after timeout...")
+                self.removeViewNow(view)
+            }
+        }
+    }
+    
+    private func removeViewNow(_ view: UIView) {
+        print("Starting fade...")
+
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: UIKitConstants.animationDelayZero, options: []) {
             view.alpha = UIKitConstants.alpha0_0
         } completion: { (Bool) in
             view.removeFromSuperview()
@@ -138,24 +157,6 @@ class SnackbarPresenter {
 
             self.snackbar = nil
             self.viewController = nil
-        }
-    }
-	
-    private func removeViewAsync(_ view: UIView) {
-        
-        /// Allows action button to accept inputs.
-        DispatchQueue.main.asyncAfter(deadline: .now() + animationDurationLongTest) {
-            print("Hiding snackbar")
-
-            UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: UIKitConstants.animationDelayZero, options: []) {
-                view.alpha = UIKitConstants.alpha0_0
-            } completion: { (Bool) in
-                view.removeFromSuperview()
-                print("Done fade.")
-
-                self.snackbar = nil
-                self.viewController = nil
-            }
         }
     }
 }
