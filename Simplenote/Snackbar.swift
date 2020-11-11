@@ -86,15 +86,21 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
     private func prepareViewFromXIB() -> UIView {
         
         let vc = SnackbarViewController()
-        vc.delegate = self
         
         let view = vc.view!
         let frame = view.frame
         let newFrame = CGRect(x: 0, y: 0, width: frame.width - 30, height: frame.height)
         vc.view.frame = newFrame
         
+        let snack = snackbar!
+        vc.configureMessageLabel(message: snack.message)
+        
+        if let title = snack.actionTitle {
+            vc.configureActionButton(title: title)
+            vc.delegate = self
+        }
+        
         viewController = vc
-        vc.messageLabel.text = snackbar?.message
         
         return view
     }

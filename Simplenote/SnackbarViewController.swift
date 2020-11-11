@@ -19,6 +19,17 @@ class SnackbarViewController: UIViewController {
         super.viewDidLoad()
         view.layer.cornerRadius = 12
         view.backgroundColor = .lightGray
+        
+        actionButton.isHidden = true
+    }
+    
+    func configureActionButton(title: String) {
+        actionButton.isHidden = false
+        actionButton.setTitle(title, for: .normal)
+    }
+    
+    func configureMessageLabel(message: String) {
+        messageLabel.text = message
     }
     
     @IBAction func actionButtonTapped(_ sender: UIButton) {

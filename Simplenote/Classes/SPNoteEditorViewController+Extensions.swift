@@ -320,15 +320,6 @@ extension SPNoteEditorViewController {
     @objc
     func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
 
-        let snackbar = Snackbar(message: "Hello!", actionTitle: "Do it!") {
-            print("Callback code executed!")
-        }
-        
-//        let snackbar = Snackbar(message: "Yoyo!")
-        print(snackbar)
-        snackbar.show()
-        return
-
         let informationViewController = NoteInformationViewController(note: note)
 
         let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
@@ -538,6 +529,10 @@ extension SPNoteEditorViewController {
 
     @IBAction
     func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
+        
+        displaySnackbarWithAction()
+        return
+        
         guard let note = currentNote else {
             assertionFailure()
             return
@@ -548,12 +543,30 @@ extension SPNoteEditorViewController {
 
     @objc
     private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
+        
+        displaySnackbar()
+        return
+        
         guard let note = currentNote else {
             assertionFailure()
             return
         }
 
         presentInformationController(for: note, from: sender)
+    }
+    
+    func displaySnackbar() {
+        
+        let snackbar = Snackbar(message: "Simple snackbar")
+        snackbar.show()
+    }
+    
+    func displaySnackbarWithAction() {
+        
+        let snackbar = Snackbar(message: "Snackbar with action!", actionTitle: "Boom!") {
+            print("Callback code executed!")
+        }
+        snackbar.show()
     }
 }
 
