@@ -554,7 +554,7 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        cell.bodyText = ExcerptMaker.bodyExcerpt(from: note, withKeywords: searchQuery?.keywords)
+        cell.bodyText = bodyExcerpt(from: note, withKeywords: searchQuery?.keywords)
 
         cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor
@@ -834,6 +834,30 @@ extension SPNoteListViewController {
     }
 }
 
+// MARK: - Excerpt
+//
+private extension SPNoteListViewController {
+
+    func bodyExcerpt(from note: Note, withKeywords keywords: [String]?) -> String? {
+        guard let keywords = keywords, !keywords.isEmpty, let content = note.content else {
+            return note.bodyPreview
+        }
+
+        guard let bodyRange = NoteContentHelper.structure(of: content).body else {
+            return note.bodyPreview
+        }
+        let excerpt = content.contentSlice(matching: keywords,
+                                           in: bodyRange,
+                                           leadingLimit: Constants.excerptLeadingLimit,
+                                           trailingLimit: Constants.excerptTrailingLimit)
+
+        let shouldAddEllipsis = excerpt.range.lowerBound > bodyRange.lowerBound
+        let excerptString = (shouldAddEllipsis ? "…" : "") + excerpt.normalized.content
+
+        return excerptString.replacingNewlinesWithSpaces()
+    }
+}
+
 
 // MARK: - Private Types
 //
@@ -861,4 +885,11 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+
+    /// Leading limit for body excerpt
+    ///
+    static let excerptLeadingLimit = 30
+
+    /// Trailing limit for body excerpt
+    static let excerptTrailingLimit = 300
 }

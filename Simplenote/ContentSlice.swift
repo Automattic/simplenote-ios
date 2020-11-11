@@ -1,23 +1,39 @@
 import Foundation
 
-struct Excerpt {
+// MARK: - ContentSlice
+//
+struct ContentSlice {
+    /// Original content
+    ///
     let content: String
+
+    /// Sliced range
+    ///
     let range: Range<String.Index>
+
+    /// Ranges of matched words
+    ///
     let matches: [Range<String.Index>]
 
+    /// NSRange version of `matches`
+    ///
     var nsMatches: [NSRange] {
         return matches.map {
             NSRange($0, in: content)
         }
     }
 
+    /// Constructor
+    ///
     init(content: String, range: Range<String.Index>, matches: [Range<String.Index>]) {
         self.content = content
         self.range = range
         self.matches = matches
     }
 
-    var normalized: Excerpt {
+    /// Return content sliced to the range
+    ///
+    var normalized: ContentSlice {
         if range.lowerBound == content.startIndex && range.upperBound == content.endIndex {
             return self
         }
@@ -31,6 +47,6 @@ struct Excerpt {
             return lower..<upper
         }
 
-        return Excerpt(content: newContent, range: newRange, matches: newMatches)
+        return ContentSlice(content: newContent, range: newRange, matches: newMatches)
     }
 }

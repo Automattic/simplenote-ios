@@ -86,3 +86,84 @@ extension String {
         return characterRange?.lowerBound
     }
 }
+
+// MARK: - Searching for keywords
+//
+extension String {
+
+    /// Finds keywords in a string and optionally trims around the first match
+    ///
+    /// - Parameters:
+    ///     - keywords: A list of keywords
+    ///     - range: Range of the string. If nil full range is used
+    ///     - leadingLimit: Limit result string to a certain characters before the first match. Only full words are used. Provide 0 to have no limit.
+    ///     - trailingLimit: Limit result string to a certain characters after the first match. Only full words are used. Provide 0 to have no limit.
+    ///
+    func contentSlice(matching keywords: [String],
+                      in range: Range<String.Index>? = nil,
+                      leadingLimit: String.IndexDistance = 0,
+                      trailingLimit: String.IndexDistance = 0) -> ContentSlice {
+
+        let range = range ?? startIndex..<endIndex
+
+        var leadingWordsRange: [Range<String.Index>] = []
+        var matchingWordsRange: [Range<String.Index>] = []
+        var trailingWordsRange: [Range<String.Index>] = []
+
+        enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { (_, wordRange, _, stop) in
+
+            if trailingLimit > 0, let firstMatch = matchingWordsRange.first {
+                if distance(from: firstMatch.upperBound, to: wordRange.upperBound) > trailingLimit {
+                    stop = true
+                    return
+                }
+
+                trailingWordsRange.append(wordRange)
+            }
+
+            for keyword in keywords {
+                if self.range(of: keyword, options: [.caseInsensitive, .diacriticInsensitive], range: wordRange, locale: Locale.current) != nil {
+                    matchingWordsRange.append(wordRange)
+                    break
+                }
+            }
+
+            if leadingLimit > 0 && matchingWordsRange.isEmpty {
+                leadingWordsRange.append(wordRange)
+            }
+        }
+
+        // If there are no matches, return the whole string
+        guard let firstMatch = matchingWordsRange.first, let lastMatch = matchingWordsRange.last else {
+            return ContentSlice(content: self, range: range, matches: matchingWordsRange)
+        }
+
+        let lowerBound: String.Index = {
+            if leadingLimit == 0 {
+                return range.lowerBound
+            }
+
+            let upperBound = firstMatch.lowerBound
+            var lowerBound = upperBound
+
+            for range in leadingWordsRange.reversed() {
+                if distance(from: range.lowerBound, to: upperBound) > leadingLimit {
+                    break
+                }
+
+                lowerBound = range.lowerBound
+            }
+
+            return lowerBound
+        }()
+
+        let upperBound: String.Index = {
+            if trailingLimit == 0 {
+                return range.upperBound
+            }
+            return trailingWordsRange.last?.upperBound ?? lastMatch.upperBound
+        }()
+
+        return ContentSlice(content: self, range: lowerBound..<upperBound, matches: matchingWordsRange)
+    }
+}
