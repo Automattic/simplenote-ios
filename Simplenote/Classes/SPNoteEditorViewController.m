@@ -15,7 +15,6 @@
 #import "SPTracker.h"
 #import "NSString+Bullets.h"
 #import "SPTransitionController.h"
-#import "NSString+Search.h"
 #import "SPTextView.h"
 #import "NSString+Attributed.h"
 #import "SPAcitivitySafari.h"
@@ -253,8 +252,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     NSString *searchText = _noteEditorTextView.text;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        self.searchResultRanges = [searchText rangesForTerms:self.searchQuery.keywords];
+
+        self.searchResultRanges = [self searchResultRangesIn:(searchText ? searchText : @"")
+                                                withKeywords:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

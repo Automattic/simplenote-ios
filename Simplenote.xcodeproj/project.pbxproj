@@ -79,7 +79,6 @@
 		46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD4B17848E8500E55842 /* SPAppDelegate.m */; };
 		46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17D217A2E2A000383575 /* SPObjectManager.m */; };
 		46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E29ADD7A1784905800E55842 /* SPNoteListViewController.m */; };
-		46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = E265DBF817CE99D200070550 /* NSString+Search.m */; };
 		46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E21F57B817C1244E001F02D3 /* SPEditorTextView.m */; };
 		46A3C99417DFA81A002865AE /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C621788A54900785EF3 /* Note.m */; };
 		46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */; };
@@ -784,8 +783,6 @@
 		E25C39DC17A452C300B2591A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPEntryListAutoCompleteCell.h; path = Classes/SPEntryListAutoCompleteCell.h; sourceTree = "<group>"; };
 		E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPEntryListAutoCompleteCell.m; path = Classes/SPEntryListAutoCompleteCell.m; sourceTree = "<group>"; };
-		E265DBF717CE99D200070550 /* NSString+Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Search.h"; path = "Classes/NSString+Search.h"; sourceTree = "<group>"; };
-		E265DBF817CE99D200070550 /* NSString+Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Search.m"; path = "Classes/NSString+Search.m"; sourceTree = "<group>"; };
 		E26AC90E179DA25F00C4BFB6 /* SPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSettingsViewController.h; path = Classes/SPSettingsViewController.h; sourceTree = "<group>"; };
 		E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPSettingsViewController.m; path = Classes/SPSettingsViewController.m; sourceTree = "<group>"; };
 		E277B5E7179EDAFB0095CD24 /* SPTagsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagsListViewController.h; path = Classes/SPTagsListViewController.h; sourceTree = "<group>"; };
@@ -1014,8 +1011,6 @@
 				467D9C751788D0FF00785EF3 /* NSString+Condensing.m */,
 				467D9C761788D0FF00785EF3 /* NSString+Metadata.h */,
 				467D9C771788D0FF00785EF3 /* NSString+Metadata.m */,
-				E265DBF717CE99D200070550 /* NSString+Search.h */,
-				E265DBF817CE99D200070550 /* NSString+Search.m */,
 				B5B8AE7C1AB9F8BD0082775D /* UIDevice+Extensions.h */,
 				B5B8AE7D1AB9F8BD0082775D /* UIDevice+Extensions.m */,
 				E2465A1B17AD69320097B19B /* UIImage+Colorization.h */,
@@ -2383,7 +2378,6 @@
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
-				46A3C99117DFA81A002865AE /* NSString+Search.m in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */,
