@@ -4,18 +4,27 @@ import UIKit
 final class SearchMapView: UIView {
     private var barViews: [UIView] = []
 
+    /// Feedback generator is used to notify the user about changes in selection
+    ///
+    private lazy var feedbackGenerator = UISelectionFeedbackGenerator()
+
     var onSelectionChange: ((Int) -> Void)?
+
     private var lastSelectedIndex: Int? {
         didSet {
             guard oldValue != lastSelectedIndex, let index = lastSelectedIndex else {
                 return
             }
+            
+            feedbackGenerator.selectionChanged()
             onSelectionChange?(index)
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        feedbackGenerator.prepare()
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
         addGestureRecognizer(panGestureRecognizer)
