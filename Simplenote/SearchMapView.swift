@@ -58,13 +58,17 @@ final class SearchMapView: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        barViewIndex(withPoint: point) == nil ? nil : self
+        return barView(with: point)
     }
 
-    private func barViewIndex(withPoint point: CGPoint) -> Int? {
-        return barViews.firstIndex {
-            $0.frame.insetBy(dx: -5, dy: -5).contains(point)
-        }
+    private func barView(with point: CGPoint) -> UIView? {
+        return barViews.filter {
+            $0.frame.insetBy(dx: -10, dy: -5).contains(point)
+        }.sorted {
+            let distance1 = abs($0.frame.midY - point.y)
+            let distance2 = abs($1.frame.midY - point.y)
+            return distance1 < distance2
+        }.first
     }
 
     @objc
@@ -72,8 +76,14 @@ final class SearchMapView: UIView {
         switch gestureRecognizer.state {
         case .began, .changed, .ended:
             let location = gestureRecognizer.location(in: self)
-            lastSelectedIndex = barViewIndex(withPoint: location)
+            guard let selectedView = barView(with: location) else {
+                lastSelectedIndex = nil
+                return
+            }
 
+            lastSelectedIndex = barViews.firstIndex(of: selectedView)
+
+            // reset after a tap
             if gestureRecognizer.state == .ended {
                 lastSelectedIndex = nil
             }
