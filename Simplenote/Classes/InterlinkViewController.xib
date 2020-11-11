@@ -25,33 +25,21 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qq8-Vx-6eu">
-                    <rect key="frame" x="0.0" y="12" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="12" width="300" height="50"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ghw-1k-vS5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5dy-RE-x21">
-                                <rect key="frame" x="0.0" y="0.0" width="174" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hBq-2A-wyb">
-                                    <rect key="frame" x="0.0" y="0.0" width="174" height="0.0"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <vibrancyEffect>
-                                    <blurEffect style="regular"/>
-                                </vibrancyEffect>
-                            </visualEffectView>
-                        </subviews>
                     </view>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <vibrancyEffect>
-                        <blurEffect style="regular"/>
+                        <blurEffect style="systemThickMaterial"/>
                     </vibrancyEffect>
                 </visualEffectView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-It-s4R">
-                    <rect key="frame" x="0.0" y="12" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="12" width="300" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="T9c-Ge-tZ2"/>
                         <constraint firstAttribute="height" constant="50" id="pJU-Uf-0Oq"/>
                     </constraints>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,7 +57,7 @@
                 <constraint firstItem="Qq8-Vx-6eu" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="Zgt-ck-r79"/>
                 <constraint firstItem="Qq8-Vx-6eu" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="cXk-mu-fCC"/>
                 <constraint firstItem="Qq8-Vx-6eu" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="pVp-WF-lOe"/>
-                <constraint firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="rCB-bk-lF3"/>
+                <constraint firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" priority="999" id="rCB-bk-lF3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-84.057971014492765" y="-3.0133928571428572"/>

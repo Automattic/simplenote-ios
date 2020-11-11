@@ -72,7 +72,7 @@ class InterlinkResultsControllerTests: XCTestCase {
         XCTAssertEqual(results.count, matching.count - 1)
     }
 
-    /// Verifies that `searchNotes:byTitleKeyword:` matches multiple title keywords
+    /// Verifies that `searchNotes:byTitleKeyword:` is diacritic insensitive with regards of the Note Content
     ///
     func testSearchNotesByKeywordsIsDicriticAndCaseInsensitive() {
         let matching = [
@@ -82,6 +82,23 @@ class InterlinkResultsControllerTests: XCTestCase {
         storage.save()
 
         guard let results = resultsController.searchNotes(byTitleKeyword: "diacritics", excluding: nil) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(results.count, matching.count)
+    }
+
+    /// Verifies that `searchNotes:byTitleKeyword:` is diacritic insensitive with a special keyword
+    ///
+    func testSearchNotesByKeywordsIsDicriticAndCaseInsensitiveWithKeywordUsingSpecialCharacters() {
+        let matching = [
+            storage.insertSampleNote(contents: "diacritics"),
+        ]
+
+        storage.save()
+
+        guard let results = resultsController.searchNotes(byTitleKeyword: "DíäcrìtIcs", excluding: nil) else {
             XCTFail()
             return
         }
