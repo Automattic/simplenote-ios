@@ -112,19 +112,43 @@ class SnackbarPresenter {
 			view.center.y = view.center.y - offset - viewHeight
 		}) { _ in
 			print("Animation complete.")
+			
+			// Using the delay param results in the UIButton not receiving inputs.
+			// Using the asyncAfter allows the button to work correctly.
+			
+//			self.removeView(view)
+			self.removeViewAsync(view)
+		}
+	}
+	
+	func removeView(_ view: UIView) {
+		
+		// Results in action button not working.
+		UIView.animate(withDuration: 0.66, delay: 2.4, options: []) {
+			view.alpha = 0
+		} completion: { (Bool) in
+			view.removeFromSuperview()
+			print("Done fade.")
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-				print("Hiding snackbar")
+			self.snackbar = nil
+			self.viewController = nil
+		}
+	}
+	
+	func removeViewAsync(_ view: UIView) {
+		
+		// Allows action button to accept inputs.
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+			print("Hiding snackbar")
 
-				UIView.animate(withDuration: 0.66, delay: 0.0, options: []) {
-					view.alpha = 0
-				} completion: { (Bool) in
-					view.removeFromSuperview()
-					print("Done fade.")
-					
-					self.snackbar = nil
-					self.viewController = nil
-				}
+			UIView.animate(withDuration: 0.66, delay: 0.0, options: []) {
+				view.alpha = 0
+			} completion: { (Bool) in
+				view.removeFromSuperview()
+				print("Done fade.")
+
+				self.snackbar = nil
+				self.viewController = nil
 			}
 		}
 	}
