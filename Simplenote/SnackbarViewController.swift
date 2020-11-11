@@ -1,11 +1,3 @@
-//
-//  SnackbarViewController.swift
-//  Simplenote
-//
-//  Created by Kevin LaCoste on 2020-11-09.
-//  Copyright © 2020 Automattic. All rights reserved.
-//
-
 import UIKit
 
 protocol SnackbarViewControllerDelegate: AnyObject {
