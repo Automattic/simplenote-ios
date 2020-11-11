@@ -31,16 +31,14 @@ class Snackbar {
 class SnackbarPresenter: SnackbarViewControllerDelegate {
     
     static let shared = SnackbarPresenter()
+    
+    private let DurationShort = 1.5
+    private let DurationLong = 2.75
 
     private var snackbar: Snackbar?
     private var viewController: SnackbarViewController?
     
     private var wasActionTapped = false
-
-    // TODO: Switch to UIKitConstants here.
-    /// Only in use during testing so we have extra time to play with the action button.
-    /// Should use UIKitConstants.animationLongDuration.
-    private let animationDurationLongTest = TimeInterval(2.4)
     
     // Prevent use outside the shared instance.
     private init() {}
@@ -147,7 +145,10 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
     private func removeViewAfterTimeout(_ view: UIView) {
         print("Starting countdown to fade...")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + animationDurationLongTest) {
+        let duration = (snackbar?.actionTitle != nil) ? DurationLong : DurationShort
+        print(duration)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             if !self.wasActionTapped {
                 print("Hiding snackbar after timeout...")
                 self.removeViewNow(view)
