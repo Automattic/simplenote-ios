@@ -52,7 +52,6 @@
     
     self = [super init];
     if (self) {
-        [self configureExcerptMaker];
         [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];

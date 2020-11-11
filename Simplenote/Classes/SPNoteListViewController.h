@@ -8,7 +8,6 @@
 @class SPSortBar;
 @class NotesListController;
 @class SearchDisplayController;
-@class ExcerptMaker;
 
 @interface SPNoteListViewController : UIViewController<SPSidebarContainerDelegate>
 
@@ -28,7 +27,6 @@
 @property (nonatomic) CGFloat                                               keyboardHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
-@property (nonatomic, strong) ExcerptMaker                                  *excerptMaker;
 
 - (void)update;
 - (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;

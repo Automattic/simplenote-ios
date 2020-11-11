@@ -3,17 +3,16 @@ import Foundation
 // MARK: - ExcerptMaker: Generate excerpt from a note with specified keywords
 //
 final class ExcerptMaker {
-    private let leadingLimit: String.IndexDistance
-    private let trailingLimit: String.IndexDistance
+    private init() {
 
-    init(leadingLimit: String.IndexDistance = 30, trailingLimit: String.IndexDistance = 300) {
-        self.leadingLimit = leadingLimit
-        self.trailingLimit = trailingLimit
     }
 
-    func excerpt(from content: String,
+    static func excerpt(from content: String,
                  matching keywords: [String],
-                 in range: Range<String.Index>? = nil) -> Excerpt {
+                 in range: Range<String.Index>? = nil,
+                 leadingLimit: String.IndexDistance = Constants.excerptLeadingLimit,
+                 trailingLimit: String.IndexDistance = Constants.excerptTrailingLimit) -> Excerpt {
+        
         let range = range ?? content.startIndex..<content.endIndex
 
         var leadingWordsRange: [Range<String.Index>] = []
@@ -22,8 +21,8 @@ final class ExcerptMaker {
 
         content.enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { (_, wordRange, _, stop) in
 
-            if self.trailingLimit > 0, let firstMatch = matchingWordsRange.first {
-                if content.distance(from: firstMatch.upperBound, to: wordRange.upperBound) > self.trailingLimit {
+            if trailingLimit > 0, let firstMatch = matchingWordsRange.first {
+                if content.distance(from: firstMatch.upperBound, to: wordRange.upperBound) > trailingLimit {
                     stop = true
                     return
                 }
@@ -38,7 +37,7 @@ final class ExcerptMaker {
                 }
             }
 
-            if self.leadingLimit > 0 && matchingWordsRange.isEmpty {
+            if leadingLimit > 0 && matchingWordsRange.isEmpty {
                 leadingWordsRange.append(wordRange)
             }
         }
@@ -80,48 +79,24 @@ final class ExcerptMaker {
 extension ExcerptMaker {
     /// Generate and return excerpt from the note. Excerpt is based on keywords
     ///
-    func bodyExcerpt(from note: Note, withKeywords keywords: [String]?) -> String? {
+    static func bodyExcerpt(from note: Note, withKeywords keywords: [String]?) -> String? {
         guard let keywords = keywords, !keywords.isEmpty, let content = note.content else {
             return note.bodyPreview
         }
 
-        let bodyRange = NoteContentHelper.structure(of: content).body
-        let excerptString = excerpt(from: content, matching: keywords, in: bodyRange).normalized.content
+        guard let bodyRange = NoteContentHelper.structure(of: content).body else {
+            return note.bodyPreview
+        }
+        let excerpt = ExcerptMaker.excerpt(from: content, matching: keywords, in: bodyRange)
+
+        let shouldAddEllipsis = excerpt.range.lowerBound > bodyRange.lowerBound
+        let excerptString = (shouldAddEllipsis ? "…" : "") + excerpt.normalized.content
+
         return excerptString.replacingNewlinesWithSpaces()
     }
 }
 
-struct Excerpt {
-    let content: String
-    let range: Range<String.Index>
-    let matches: [Range<String.Index>]
-
-    var nsMatches: [NSRange] {
-        return matches.map {
-            NSRange($0, in: content)
-        }
-    }
-
-    init(content: String, range: Range<String.Index>, matches: [Range<String.Index>]) {
-        self.content = content
-        self.range = range
-        self.matches = matches
-    }
-
-    var normalized: Excerpt {
-        if range.lowerBound == content.startIndex && range.upperBound == content.endIndex {
-            return self
-        }
-
-        let newContent = String(content[range])
-        let newRange = newContent.startIndex..<newContent.endIndex
-        let offset = content.distance(from: content.startIndex, to: range.lowerBound)
-        let newMatches: [Range<String.Index>] = matches.map {
-            let lower = content.index($0.lowerBound, offsetBy: -offset)
-            let upper = content.index($0.upperBound, offsetBy: -offset)
-            return lower..<upper
-        }
-
-        return Excerpt(content: newContent, range: newRange, matches: newMatches)
-    }
+private struct Constants {
+    static let excerptLeadingLimit = 30
+    static let excerptTrailingLimit = 300
 }
