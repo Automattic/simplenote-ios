@@ -29,6 +29,8 @@ class StringSimplenoteTests: XCTestCase {
 //
 extension StringSimplenoteTests {
 
+    /// Tests that droppingPrefix returns string without a specified prefix
+    ///
     func testDroppingPrefixReturnsStringWithoutSpecifiedPrefix() {
         let sample = "uno dos tres catorce!"
         let prefix = "uno "
@@ -37,6 +39,8 @@ extension StringSimplenoteTests {
         XCTAssertEqual(sample.droppingPrefix(prefix), expected)
     }
 
+    /// Tests that droppingPrefix returns empty string if string is a prefix
+    ///
     func testDroppingPrefixReturnsEmptyStringIfOriginalStringIsPrefix() {
         let prefix = "uno "
         let expected = ""
@@ -44,6 +48,8 @@ extension StringSimplenoteTests {
         XCTAssertEqual(prefix.droppingPrefix(prefix), expected)
     }
 
+    /// Tests that droppingPrefix returns original string if string doesn't have a prefix
+    ///
     func testDroppingPrefixReturnsOriginalStringIfPrefixIsNotFound() {
         let sample = "uno dos tres catorce!"
         let prefix = "dos"
@@ -51,4 +57,51 @@ extension StringSimplenoteTests {
 
         XCTAssertEqual(sample.droppingPrefix(prefix), expected)
     }
+}
+
+// MARK: - String locationOfFirstCharacter Tests
+//
+extension StringSimplenoteTests {
+
+    /// Verifies that providing incorrect starting location returns nil
+    ///
+    func testLocationOfFirstCharacterReturnsNilWhenStartingLocationIsAfterEndIndex() {
+        let sample = " test "
+        XCTAssertNil(sample.locationOfFirstCharacter(from: .alphanumerics, startingFrom: (sample + sample).endIndex))
+    }
+
+    /// Verifies correct location of first character in standard direction
+    ///
+    func testLocationOfFirstCharacterStandardDirection() {
+        let sample = " test "
+        let expected = sample.index(after: sample.startIndex)
+        let actual = sample.locationOfFirstCharacter(from: .alphanumerics, startingFrom: sample.startIndex)
+        XCTAssertEqual(actual, expected)
+    }
+
+    /// Verifies searching backwards from the start location of the string returns nil
+    ///
+    func testLocationOfFirstCharacterBackwardDirectionFromStartIndexReturnNil() {
+        let sample = " test "
+        let actual = sample.locationOfFirstCharacter(from: .alphanumerics, startingFrom: sample.startIndex, backwards: true)
+        XCTAssertNil(actual)
+    }
+
+    /// Verifies correct location of first character in backwards direction
+    ///
+    func testLocationOfFirstCharacterBackwardDirection() {
+        let sample = " test "
+        let expected = sample.index(sample.endIndex, offsetBy: -2)
+        let actual = sample.locationOfFirstCharacter(from: .alphanumerics, startingFrom: sample.endIndex, backwards: true)
+        XCTAssertEqual(actual, expected)
+    }
+
+    /// Verifies searching from the end location of the string returns nil
+    ///
+    func testLocationOfFirstCharacterStandardDirectionFromEndIndexReturnNil() {
+        let sample = " test "
+        let actual = sample.locationOfFirstCharacter(from: .alphanumerics, startingFrom: sample.endIndex)
+        XCTAssertNil(actual)
+    }
+
 }
