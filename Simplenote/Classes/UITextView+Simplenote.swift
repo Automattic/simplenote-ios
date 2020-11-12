@@ -28,6 +28,78 @@ extension UITextView {
 }
 
 
+// MARK: - Updating!
+//
+extension UITextView {
+
+    /// Inserts the specified Text at a given range.
+    /// - Note: Resulting selected range will end up at the right hand side of the newly inserted text.
+    ///
+    func insertText(text: String, in range: Range<String.Index>) {
+        registerUndoCheckpointAndPerform { storage in
+            let range = NSRange(range, in: self.text)
+            storage.replaceCharacters(in: range, with: text)
+
+            let insertedTextRange = NSRange(text.fullRange, in: text)
+            self.selectedRange = NSRange(location: range.location + insertedTextRange.length, length: .zero)
+        }
+    }
+}
+
+
+// MARK: - Undo Stack
+//
+private extension UITextView {
+
+    /// Registers an Undo Checkpoint, and performs a given block `in a transactional fashion`: an Undo Group will wrap its execution
+    ///
+    ///     1.  Registers an Undo Operation which is expected to restore the TextView to its previous state
+    ///     2.  Wraps up a given `Block` within an Undo Group
+    ///     3.  Post a TextDidChange Notification
+    ///
+    @discardableResult
+    func registerUndoCheckpointAndPerform(block: (NSTextStorage) -> Void) -> Bool {
+        guard let undoManager = undoManager else {
+            return false
+        }
+
+        undoManager.beginUndoGrouping()
+        registerUndoCheckpoint(in: undoManager, storage: textStorage)
+        block(textStorage)
+        undoManager.endUndoGrouping()
+
+        notifyDidChangeText()
+
+        return true
+    }
+
+    /// Registers an Undo Checkpoint, which is expected to restore the receiver to its previous state:
+    ///
+    ///     1.  Restores the full contents of our TextStorage
+    ///     2.  Reverts the SelectedRange
+    ///     3.  Post a textDidChange Notification
+    ///
+    func registerUndoCheckpoint(in undoManager: UndoManager, storage: NSTextStorage) {
+        let oldSelectedRange = selectedRange
+        let oldText = storage.attributedSubstring(from: storage.fullRange)
+
+        undoManager.registerUndo(withTarget: self) { textView in
+            // Register an Undo *during* an Undo? > Also known as Redo!
+            textView.registerUndoCheckpoint(in: undoManager, storage: storage)
+
+            // And the actual Undo!
+            storage.replaceCharacters(in: storage.fullRange, with: oldText)
+            textView.selectedRange = oldSelectedRange
+            textView.notifyDidChangeText()
+        }
+    }
+
+    func notifyDidChangeText() {
+        delegate?.textViewDidChange?(self)
+    }
+}
+
+
 // MARK: - Interlinks
 //
 extension UITextView {

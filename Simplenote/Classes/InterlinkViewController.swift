@@ -22,6 +22,10 @@ class InterlinkViewController: UIViewController {
     ///
     private var kvoOffsetToken: NSKeyValueObservation?
 
+    /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
+    ///
+    var onInsertInterlink: ((String) -> Void)?
+
     /// Interlink Notes to be presented onScreen
     ///
     var notes = [Note]() {
@@ -109,6 +113,17 @@ extension InterlinkViewController: UITableViewDataSource {
 }
 
 
+// MARK: - UITableViewDelegate
+//
+extension InterlinkViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let note = notes[indexPath.row]
+        performInterlinkInsert(for: note)
+    }
+}
+
+
 // MARK: - Geometry
 //
 private extension InterlinkViewController {
@@ -162,6 +177,20 @@ private extension InterlinkViewController {
     func calculateHeight() -> CGFloat {
         let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
         return min(fullHeight, Metrics.maximumTableHeight)
+    }
+}
+
+
+// MARK: - Private API(s)
+//
+private extension InterlinkViewController {
+
+    func performInterlinkInsert(for note: Note) {
+        guard let markdownInterlink = note.markdownInternalLink else {
+            return
+        }
+
+        onInsertInterlink?(markdownInterlink)
     }
 }
 

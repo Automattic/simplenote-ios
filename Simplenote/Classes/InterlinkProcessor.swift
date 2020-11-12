@@ -20,10 +20,17 @@ protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
 }
 
 
-// MARK: - InterlinkProcessorDatasource
+// MARK: - InterlinkProcessorDelegate
 //
-protocol InterlinkProcessorDatasource: NSObjectProtocol {
-    var interlinkExcudedEntityID: NSManagedObjectID? { get }
+protocol InterlinkProcessorDelegate: NSObjectProtocol {
+
+    /// Invoked whenever an Autocomplete Row has been selected: The handler should insert the specified text at a given range
+    ///
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
+
+    /// Represents the Entity that should be excluded when presenting Autocomplete results
+    ///
+    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID?
 }
 
 
@@ -36,7 +43,7 @@ class InterlinkProcessor: NSObject {
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
-    weak var datasource: InterlinkProcessorDatasource?
+    weak var delegate: InterlinkProcessorDelegate?
 
     /// Designated Initializer
     ///
@@ -56,7 +63,7 @@ class InterlinkProcessor: NSObject {
     @objc
     func processInterlinkLookup() {
         guard mustProcessInterlinkLookup,
-              let (_, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
+              let (markdownRange, keywordRange, keywordText) = parentTextView.interlinkKeywordAtSelectedLocation,
               let notes = resultsController.searchNotes(byTitleKeyword: keywordText, excluding: excludedEntityID)
         else {
             dismissInterlinkLookup()
@@ -66,6 +73,7 @@ class InterlinkProcessor: NSObject {
         ensureInterlinkControllerIsOnScreen()
         refreshInterlinkController(notes: notes)
         relocateInterlinkController(around: keywordRange)
+        setupInterlinkEventListeners(replacementRange: markdownRange)
     }
 
     /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
@@ -119,6 +127,16 @@ private extension InterlinkProcessor {
     func refreshInterlinkController(notes: [Note]) {
         presentedViewController?.notes = notes
     }
+
+    func setupInterlinkEventListeners(replacementRange: Range<String.Index>) {
+        presentedViewController?.onInsertInterlink = { [weak self] text in
+            guard let self = self else {
+                return
+            }
+
+            self.delegate?.interlinkProcessor(self, insert: text, in: replacementRange)
+        }
+    }
 }
 
 
@@ -147,7 +165,7 @@ private extension InterlinkProcessor {
 private extension InterlinkProcessor {
 
     var excludedEntityID: NSManagedObjectID? {
-        datasource?.interlinkExcudedEntityID
+        delegate?.excludedEntityIdentifierForInterlinkProcessor(self)
     }
 
     var parentOverlayView: UIView {

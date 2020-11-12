@@ -105,7 +105,7 @@ extension SPNoteEditorViewController {
     @objc
     func configureInterlinksProcessor() {
         interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
-        interlinkProcessor.datasource = self
+        interlinkProcessor.delegate = self
         interlinkProcessor.contextProvider = self
     }
 }
@@ -610,17 +610,22 @@ extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvi
 }
 
 
-// MARK: - InterlinkProcessorDatasource
+// MARK: - InterlinkProcessorDelegate
 //
-extension SPNoteEditorViewController: InterlinkProcessorDatasource {
+extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 
-    var interlinkExcudedEntityID: NSManagedObjectID? {
+    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
         currentNote?.objectID
+    }
+
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
+        noteEditorTextView.insertText(text: text, in: range)
+        processor.dismissInterlinkLookup()
     }
 }
 
 
-// MARK - Style
+// MARK: - Style
 //
 extension SPNoteEditorViewController {
 
