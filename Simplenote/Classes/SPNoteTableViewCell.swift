@@ -80,7 +80,7 @@ class SPNoteTableViewCell: UITableViewCell {
     /// Highlighted Keywords
     /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
     ///
-    var keywords: String?
+    var keywords: [String]?
 
     /// Highlighted Keywords's Tint Color
     /// - Note: Once the cell is fully initialized, please remember to run `refreshAttributedStrings`
@@ -422,7 +422,7 @@ private extension NSAttributedString {
     static func previewString(from string: String,
                               font: UIFont,
                               textColor: UIColor,
-                              highlighing keywords: String?,
+                              highlighing keywords: [String]?,
                               highlightColor: UIColor,
                               paragraphStyle: NSParagraphStyle) -> NSAttributedString
     {
@@ -434,7 +434,7 @@ private extension NSAttributedString {
 
         output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)
 
-        if let keywords = keywords {
+        if let keywords = keywords, !keywords.isEmpty {
             output.apply(color: highlightColor, toSubstringsMatching: keywords)
         }
 

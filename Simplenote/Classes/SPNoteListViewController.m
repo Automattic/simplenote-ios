@@ -14,7 +14,6 @@
 #import "Note.h"
 
 #import "NSMutableAttributedString+Styling.h"
-#import "NSString+Search.h"
 
 #import <StoreKit/StoreKit.h>
 #import <Simperium/Simperium.h>
@@ -439,7 +438,7 @@
     [editor displayNote:note];
 
     if (self.isSearchActive) {
-        [editor setSearchString:self.searchText];
+        [editor updateWithSearchQuery:self.searchQuery];
     }
 
     // Failsafe:

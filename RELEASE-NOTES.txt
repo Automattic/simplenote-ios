@@ -1,5 +1,6 @@
 4.28
 -----
+-   Searching for a note is showing relevant excerpts #956
 -   Tags List now extend to the edge of the screen, in landscape mode #989
 -   Fixed a bug that affected Text Selection #973
 -   Fixed a bug that toggled Edition while dragging the Editor #972

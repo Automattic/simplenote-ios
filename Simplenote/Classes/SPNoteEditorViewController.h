@@ -21,8 +21,9 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
+
 @property (nonatomic, strong) SPTagView *tagView;
-@property (nonatomic, strong) NSString *searchString;
+
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
@@ -48,7 +49,6 @@
 - (void)newButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
-- (void)setSearchString:(NSString *)string;
 - (void)clearNote;
 - (void)endEditing;
 - (void)bounceMarkdownPreview;
@@ -60,5 +60,8 @@
 - (void)didDeleteCurrentNote;
 
 - (void)save;
+
+// TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
+- (void)updateWithSearchQuery:(id)query;
 
 @end
