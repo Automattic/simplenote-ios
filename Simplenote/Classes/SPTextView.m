@@ -9,7 +9,6 @@
 
 #import "SPTextView.h"
 #import <CoreFoundation/CFStringTokenizer.h>
-#import "NSString+Search.h"
 #import "SPInteractiveTextStorage.h"
 #import "Simplenote-Swift.h"
 

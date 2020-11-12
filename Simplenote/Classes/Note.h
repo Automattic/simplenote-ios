@@ -91,7 +91,6 @@
 - (void)setTagsFromList:(NSArray *)tagList;
 - (void)stripTag:(NSString *)tag;
 - (void)ensurePreviewStringsAreAvailable;
-- (void)createPreview;
 - (NSDictionary *)noteDictionaryWithContent:(BOOL)include;
 - (BOOL)isList;
 

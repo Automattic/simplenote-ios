@@ -1,11 +1,11 @@
 import Foundation
-
+import SimplenoteSearch
 
 // MARK: - NotesListState
 //
 enum NotesListState: Equatable {
     case results
-    case searching(keyword: String)
+    case searching(query: SearchQuery)
 }
 
 
@@ -95,10 +95,10 @@ extension NotesListState {
             default:
                 break
             }
-        case .searching(let keyword):
+        case .searching(let query):
             subpredicates += [
                 NSPredicate.predicateForNotes(deleted: false),
-                NSPredicate.predicateForNotes(searchText: keyword)
+                NSPredicate.predicateForNotes(query: query)
             ]
         }
 
@@ -108,11 +108,11 @@ extension NotesListState {
     /// Returns a NSPredicate to filter out Tags in the current state
     ///
     func predicateForTags() -> NSPredicate? {
-        guard case let .searching(keyword) = self else {
+        guard case let .searching(query) = self else {
             return nil
         }
 
-        return NSPredicate.predicateForTag(keyword: keyword)
+        return NSPredicate.predicateForTags(in: query)
     }
 
     /// Returns a collection of NSSortDescriptors that, once applied to a Notes collection, the specified SortMode will be reflected

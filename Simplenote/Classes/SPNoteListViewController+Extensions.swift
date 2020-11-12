@@ -334,12 +334,12 @@ extension SPNoteListViewController {
     /// Returns the SearchText
     ///
     @objc
-    var searchText: String? {
-        guard case let .searching(keyword) = notesListController.state else {
+    var searchQuery: SearchQuery? {
+        guard case let .searching(query) = notesListController.state else {
             return nil
         }
 
-        return keyword
+        return query
     }
 }
 
@@ -554,9 +554,9 @@ private extension SPNoteListViewController {
 
         cell.rendersInCondensedMode = Options.shared.condensedNotesList
         cell.titleText = note.titlePreview
-        cell.bodyText = note.bodyPreview
+        cell.bodyText = note.bodyExcerpt(keywords: searchQuery?.keywords)
 
-        cell.keywords = searchText
+        cell.keywords = searchQuery?.keywords
         cell.keywordsTintColor = .simplenoteTintColor
 
         cell.prefixText = prefixText(for: note)
@@ -732,7 +732,7 @@ private extension SPNoteListViewController {
         let editorViewController = EditorFactory.shared.build()
         editorViewController.display(note)
         editorViewController.isPreviewing = true
-        editorViewController.searchString = searchText
+        editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
     }
@@ -839,7 +839,7 @@ extension SPNoteListViewController {
 //
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
-    static let copyLink = NSLocalizedString("Copy Link", comment: "Copies Link to a Note")
+    static let copyLink = NSLocalizedString("Copy Internal Link", comment: "Copies Link to a Note")
     static let delete = NSLocalizedString("Move to Trash", comment: "Deletes a note")
     static let pin = NSLocalizedString("Pin to Top", comment: "Pins a note")
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
