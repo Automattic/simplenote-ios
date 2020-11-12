@@ -2,7 +2,7 @@ import XCTest
 @testable import Simplenote
 
 
-// MARK: - NSString Simplenote Tests
+// MARK: - String Truncation Tests
 //
 class StringSimplenoteTests: XCTestCase {
 
@@ -22,5 +22,33 @@ class StringSimplenoteTests: XCTestCase {
         let expected = "uno dos"
 
         XCTAssertEqual(sample.truncateWords(upTo: 10), expected)
+    }
+}
+
+// MARK: - String droppingPrefix Tests
+//
+extension StringSimplenoteTests {
+
+    func testDroppingPrefixReturnsStringWithoutSpecifiedPrefix() {
+        let sample = "uno dos tres catorce!"
+        let prefix = "uno "
+        let expected = "dos tres catorce!"
+
+        XCTAssertEqual(sample.droppingPrefix(prefix), expected)
+    }
+
+    func testDroppingPrefixReturnsEmptyStringIfOriginalStringIsPrefix() {
+        let prefix = "uno "
+        let expected = ""
+
+        XCTAssertEqual(prefix.droppingPrefix(prefix), expected)
+    }
+
+    func testDroppingPrefixReturnsOriginalStringIfPrefixIsNotFound() {
+        let sample = "uno dos tres catorce!"
+        let prefix = "dos"
+        let expected = sample
+
+        XCTAssertEqual(sample.droppingPrefix(prefix), expected)
     }
 }
