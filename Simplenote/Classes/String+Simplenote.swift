@@ -77,13 +77,7 @@ extension String {
             return nil
         }
 
-        let range: Range<String.Index> = {
-            if backwards {
-                return startIndex..<startLocation
-            }
-
-            return startLocation..<endIndex
-        }()
+        let range = backwards ? startIndex..<startLocation : startLocation..<endIndex
 
         let characterRange = rangeOfCharacter(from: searchSet,
                                               options: backwards ? .backwards : [],

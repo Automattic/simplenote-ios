@@ -115,9 +115,10 @@
 		74F6637F22BADB5000FA147E /* ExtensionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6637E22BADB5000FA147E /* ExtensionPresentationController.swift */; };
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
-		A604DB6E255BDE9A00B802CA /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB6D255BDE9A00B802CA /* ContentSlice.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
+		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
+		A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
 		A66224FD2546B460003A949E /* TableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66224FC2546B460003A949E /* TableHeaderViewCell.swift */; };
 		A681C72C254172B600F369C2 /* NoteMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C72B254172B600F369C2 /* NoteMetrics.swift */; };
 		A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */; };
@@ -136,7 +137,6 @@
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
 		A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */; };
-		A6E11A78254F3D38009C48FC /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E11A77254F3D38009C48FC /* NoteContentHelper.swift */; };
 		A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */; };
 		A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */; };
 		A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */; };
@@ -502,9 +502,10 @@
 		9F2210B2EE42B513C4C92372 /* Pods-Automattic-Simplenote.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
-		A604DB6D255BDE9A00B802CA /* ContentSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSlice.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
+		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
+		A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteContentHelper.swift; path = Classes/NoteContentHelper.swift; sourceTree = "<group>"; };
 		A66224FC2546B460003A949E /* TableHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderViewCell.swift; sourceTree = "<group>"; };
 		A681C72B254172B600F369C2 /* NoteMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMetrics.swift; sourceTree = "<group>"; };
 		A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Simplenote.swift"; sourceTree = "<group>"; };
@@ -523,7 +524,6 @@
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
 		A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Simplenote.swift"; sourceTree = "<group>"; };
-		A6E11A77254F3D38009C48FC /* NoteContentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelper.swift; sourceTree = "<group>"; };
 		A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryControllerDelegate.swift; sourceTree = "<group>"; };
 		A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryVersion.swift; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 				467D9C641788A54900785EF3 /* Tag.m */,
 				A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */,
 				A681C72B254172B600F369C2 /* NoteMetrics.swift */,
-				A604DB6D255BDE9A00B802CA /* ContentSlice.swift */,
+				A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1465,8 +1465,8 @@
 				74F454EC22DD4BC0000C66DB /* KeyboardObservable.swift */,
 				B5185CFA23427F2F0060145A /* SearchDisplayController.swift */,
 				B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */,
-				A6E11A77254F3D38009C48FC /* NoteContentHelper.swift */,
 				A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */,
+				A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2232,6 +2232,7 @@
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
+				A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */,
 				B5A6846D23CE84D400398BBC /* NotesListController.swift in Sources */,
 				B52BB74822CFBD540042C162 /* UIActivityViewController+Simplenote.swift in Sources */,
 				B5BA5B1C25520ECF002AAD43 /* UIKeyboardAppearance+Simplenote.swift in Sources */,
@@ -2394,7 +2395,7 @@
 				A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
 				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
-				A6E11A78254F3D38009C48FC /* NoteContentHelper.swift in Sources */,
+				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
@@ -2407,7 +2408,6 @@
 				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
 				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,
 				B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */,
-				A604DB6E255BDE9A00B802CA /* ContentSlice.swift in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */,
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,

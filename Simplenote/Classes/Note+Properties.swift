@@ -76,9 +76,48 @@ extension Note {
     }
 }
 
+// MARK: - Excerpt
+//
+extension Note {
+
+    /// Returns excerpt of the content around the first match of one of the keywords
+    ///
+    func bodyExcerpt(keywords: [String]?) -> String? {
+        guard let keywords = keywords, !keywords.isEmpty, let content = content else {
+            return bodyPreview
+        }
+
+        guard let bodyRange = NoteContentHelper.structure(of: content).body else {
+            return nil
+        }
+        
+        let excerpt = content.contentSlice(matching: keywords,
+                                           in: bodyRange,
+                                           leadingLimit: Constants.excerptLeadingLimit,
+                                           trailingLimit: Constants.excerptTrailingLimit)
+
+        let shouldAddEllipsis = excerpt.range.lowerBound > bodyRange.lowerBound
+        let excerptString = (shouldAddEllipsis ? "…" : "") + excerpt.normalized.content
+
+        return excerptString.replacingNewlinesWithSpaces()
+    }
+}
+
 // MARK: - Constants
 //
 private struct Constants {
+    /// Markdown prefix to be removed from title preview
+    ///
     static let titleMarkdownPrefix = "# "
+
+    /// Limit for body preview
+    ///
     static let bodyPreviewCap = 500
+
+    /// Leading limit for body excerpt
+    ///
+    static let excerptLeadingLimit = 30
+
+    /// Trailing limit for body excerpt
+    static let excerptTrailingLimit = 300
 }

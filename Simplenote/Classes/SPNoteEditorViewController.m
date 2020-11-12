@@ -208,7 +208,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
-        self.searchResultRanges = [self searchResultRangesIn:(searchText ? searchText : @"")
+        self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
                                                 withKeywords:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{

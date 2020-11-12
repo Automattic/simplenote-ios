@@ -2,11 +2,7 @@ import Foundation
 
 // MARK: - NoteContentHelper
 //
-struct NoteContentHelper {
-
-    private init() {
-
-    }
+enum NoteContentHelper {
 
     /// Returns structure of the content: range of title and body
     ///
