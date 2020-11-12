@@ -620,46 +620,56 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
+    /// Show search map keyword ranges
+    ///
     @objc
-    func updateSearchMap(with searchRangeValues: [NSValue]) {
-        if searchMapView == nil {
-            let searchMapView = SearchMapView()
-            searchMapView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(searchMapView)
-            NSLayoutConstraint.activate([
-                searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top + 10),
-                searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom - 10),
-                searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
-                searchMapView.widthAnchor.constraint(equalToConstant: 15.0)
-            ])
+    func showSearchMap(with searchRangeValues: [NSValue]) {
+        createSearchMapViewIfNeeded()
+        // trigger layout to get correct height
+        searchMapView.superview?.layoutSubviews()
 
-            self.searchMapView = searchMapView
-        }
+        let editorRect = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer)
+        let editorHeight = max(editorRect.size.height,
+                               searchMapView?.frame.size.height ?? 0)
 
-        let ranges = searchRangeValues.map({ $0.rangeValue })
-        let boundingRects = noteEditorTextView.boundingRectsForCharacterRanges(ranges: ranges)
-        let usedRect = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer)
-
-        guard usedRect.size.height > CGFloat.leastNormalMagnitude else {
+        guard editorHeight > CGFloat.leastNormalMagnitude else {
             searchMapView?.update(with: [])
             return
         }
 
-        let positions = boundingRects.map {
-            return max($0.midY / usedRect.size.height, CGFloat.leastNormalMagnitude)
+        // Value from 0 to 1
+        let searchBarPositions: [CGFloat] = searchRangeValues.map {
+            let boundingRect = noteEditorTextView.boundingRectForCharacterRange($0.rangeValue)
+            return max(boundingRect.midY / editorHeight, CGFloat.leastNormalMagnitude)
         }
 
-        searchMapView?.onSelectionChange = { [weak self] index in
-            guard let self = self else {
-                return
-            }
-
-            self.highlightSearchResult(at: index, animated: false)
-        }
-
-        searchMapView?.update(with: positions)
+        searchMapView?.update(with: searchBarPositions)
     }
 
+    private func createSearchMapViewIfNeeded() {
+        guard searchMapView == nil else {
+            return
+        }
+
+        let searchMapView = SearchMapView()
+        
+        view.addSubview(searchMapView)
+        NSLayoutConstraint.activate([
+            searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top + noteEditorTextView.textContainerInset.top),
+            searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom - noteEditorTextView.textContainerInset.bottom),
+            searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
+            searchMapView.widthAnchor.constraint(equalToConstant: Metrics.searchMapWidth)
+        ])
+
+        searchMapView.onSelectionChange = { [weak self] index in
+            self?.highlightSearchResult(at: index, animated: false)
+        }
+
+        self.searchMapView = searchMapView
+    }
+
+    /// Hide search map
+    ///
     @objc
     func hideSearchMap() {
         searchMapView?.removeFromSuperview()
@@ -677,6 +687,9 @@ private enum Metrics {
     static var lineSpacingMultipler: CGFloat {
         UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
     }
+
+    static let searchMapWidth: CGFloat = 15.0
+
 }
 
 // MARK: - NSCoder Keys

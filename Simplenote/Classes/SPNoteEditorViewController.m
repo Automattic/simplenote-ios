@@ -213,7 +213,7 @@ CGFloat const SPSelectedAreaPadding = 20;
         
         dispatch_async(dispatch_get_main_queue(), ^{
 
-            [self updateSearchMapWith:self.searchResultRanges];
+            [self showSearchMapWith:self.searchResultRanges];
 
             UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
             [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];

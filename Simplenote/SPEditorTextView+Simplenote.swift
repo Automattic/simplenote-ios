@@ -32,11 +32,10 @@ extension SPEditorTextView {
 }
 
 extension SPEditorTextView {
-
-    func boundingRectsForCharacterRanges(ranges: [NSRange]) -> [CGRect] {
-        return ranges.map {
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: $0, actualCharacterRange: nil)
-            return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
-        }
+    /// Bounding rect for a character range
+    ///
+    func boundingRectForCharacterRange(_ range: NSRange) -> CGRect {
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
     }
 }
