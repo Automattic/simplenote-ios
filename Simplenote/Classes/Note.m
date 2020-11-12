@@ -226,26 +226,6 @@ SEL notifySelector;
     [self createPreview];
 }
 
-- (void)createPreview
-{
-    NSString *aString = self.content;
-    if (aString.length > 500) {
-        aString = [aString substringToIndex:500];
-    }
-    
-    [aString generatePreviewStrings:^(NSString *title, NSString *body) {
-        self.titlePreview = title;
-        self.bodyPreview = body;
-    }];
-
-    if (self.titlePreview.length == 0) {
-        self.titlePreview = NSLocalizedString(@"New note...", @"Empty Note Placeholder");
-        self.bodyPreview = nil;
-    }
-    
-    [self updateTagsArray];
-}
-
 - (BOOL)pinned {
     BOOL b;
     [self willAccessValueForKey:@"pinned"];

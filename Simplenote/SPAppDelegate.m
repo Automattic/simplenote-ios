@@ -112,7 +112,7 @@
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
     if (selectedTag != nil) {
-		[self setSelectedTag:selectedTag];
+		_selectedTag = selectedTag;
 	}
 
     self.tagListViewController = [TagListViewController new];
@@ -489,6 +489,15 @@
     [self.simperium save];
 }
 
+- (void)setSelectedTag:(NSString *)selectedTag {
+    BOOL tagsEqual = _selectedTag == selectedTag || (_selectedTag != nil && selectedTag != nil && [_selectedTag isEqual:selectedTag]);
+    if (tagsEqual) {
+        return;
+    }
+
+    _selectedTag = selectedTag;
+    [_noteListViewController update];
+}
 
 #pragma mark ================================================================================
 #pragma mark SPBucket delegate
@@ -533,7 +542,6 @@
                 // if selected tag is deleted, swap the note list view controller
                 if ([key isEqual:self.selectedTag]) {
                     self.selectedTag = nil;
-                    [self.noteListViewController update];
                 }
                 break;
             }

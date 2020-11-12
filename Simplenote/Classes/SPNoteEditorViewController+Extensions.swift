@@ -563,6 +563,17 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Searching
+//
+extension SPNoteEditorViewController {
+
+    /// Returns ranges of keywords in a given text
+    ///
+    @objc
+    func searchResultRanges(in text: String, withKeywords keywords: [String]) -> [NSRange] {
+        return text.contentSlice(matching: keywords)?.nsMatches ?? []
+    }
+}
 
 // MARK: - Interlinks
 //

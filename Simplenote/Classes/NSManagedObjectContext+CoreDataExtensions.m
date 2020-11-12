@@ -95,10 +95,10 @@
         
     }
     
-    NSPredicate *masterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
     
     return [self fetchObjectForEntityName:entityName
-                            withPredicate:masterPredicate];
+                            withPredicate:compoundPredicate];
     
     
 }
