@@ -66,7 +66,6 @@ extension InterlinkViewController {
 private extension InterlinkViewController {
 
     func setupRootView() {
-        view.frame = UIScreen.main.bounds
         view.backgroundColor = .clear
     }
 

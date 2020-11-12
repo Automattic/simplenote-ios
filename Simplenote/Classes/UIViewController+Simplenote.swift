@@ -31,13 +31,16 @@ extension UIViewController {
     ///
     func attachWithAnimation(to parent: UIViewController, below siblingView: UIView) {
         parent.view.insertSubview(view, belowSubview: siblingView)
+        parent.view.pinSubviewToAllEdges(view)
         parent.addChild(self)
         view.fadeIn()
+        didMove(toParent: parent)
     }
 
     /// Detaches the receiver from its parent
     ///
     func detachWithAnimation() {
+        willMove(toParent: nil)
         view.fadeOut { _ in
             self.view.removeFromSuperview()
             self.removeFromParent()

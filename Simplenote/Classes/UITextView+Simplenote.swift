@@ -105,13 +105,11 @@ extension UITextView {
     /// Returns the Interlinking Keyword at the current Location (if any)
     ///
     var interlinkKeywordAtSelectedLocation: (Range<String.Index>, Range<String.Index>, String)? {
-        guard let text = text else {
+        guard let text = text, let range = Range(selectedRange, in: text) else{
             return nil
         }
 
-        return text.indexFromLocation(selectedRange.location).flatMap { index in
-            text.interlinkKeyword(at: index)
-        }
+        return text.interlinkKeyword(at: range.lowerBound)
     }
 }
 
@@ -139,7 +137,7 @@ extension UITextView {
     /// Returns the Bounding Rect for the specified `Range<String.Index>`
     ///
     func boundingRect(for range: Range<String.Index>) -> CGRect {
-        let nsRange = text.utf16NSRange(from: range)
+        let nsRange = NSRange(range, in: text)
         return boundingRect(for: nsRange)
     }
 
@@ -180,6 +178,7 @@ extension UITextView {
             return .zero
         }
 
-        return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
     }
 }
