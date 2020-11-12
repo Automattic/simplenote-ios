@@ -5,7 +5,7 @@
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
-@class SearchQuery;
+@class SPTagView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -21,6 +21,9 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
+
+@property (nonatomic, strong) SPTagView *tagView;
+
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;

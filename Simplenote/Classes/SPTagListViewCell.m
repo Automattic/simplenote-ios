@@ -40,7 +40,9 @@
 - (void)reset {
     self.accessoryType = UITableViewCellAccessoryNone;
     self.iconImage = nil;
+    self.textField.delegate = nil;
     self.textField.enabled = NO;
+    self.delegate = nil;
 }
 
 - (void)refreshStyle {

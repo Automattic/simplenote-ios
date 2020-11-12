@@ -7,10 +7,10 @@
 //
 
 #import "SPEntryListCell.h"
-#import "VSThemeManager.h"
 #import "Simplenote-Swift.h"
 
 
+static CGFloat const EntryListCellSidePadding = 15;
 
 @implementation SPEntryListCell
 
@@ -57,29 +57,22 @@
     CGFloat primaryLabelHeight = primaryLabel.font.lineHeight;
     CGFloat secondaryLabelHeight = secondaryLabel.text.length > 0 ? secondaryLabel.font.lineHeight : 0;
     CGFloat cellHeight = self.bounds.size.height;
-    CGFloat padding = [self.theme floatForKey:@"collaboratorCellSidePadding"];
     
-    
-    checkmarkImageView.frame = CGRectMake(self.bounds.size.width - checkmarkImageView.bounds.size.width - padding,
+    checkmarkImageView.frame = CGRectMake(self.bounds.size.width - checkmarkImageView.bounds.size.width - EntryListCellSidePadding,
                                           (cellHeight - checkmarkImageView.bounds.size.height) / 2.0,
                                           checkmarkImageView.frame.size.width,
                                           checkmarkImageView.frame.size.height);
     
-    primaryLabel.frame = CGRectMake(padding,
+    primaryLabel.frame = CGRectMake(EntryListCellSidePadding,
                                     (cellHeight - (primaryLabelHeight + secondaryLabelHeight)) / 2.0,
-                                    checkmarkImageView.frame.origin.x - 2 * padding,
+                                    checkmarkImageView.frame.origin.x - 2 * EntryListCellSidePadding,
                                     primaryLabelHeight);
     
-    secondaryLabel.frame = CGRectMake(padding,
+    secondaryLabel.frame = CGRectMake(EntryListCellSidePadding,
                                     primaryLabelHeight + primaryLabel.frame.origin.y,
-                                    checkmarkImageView.frame.origin.x - 2 * padding,
+                                    checkmarkImageView.frame.origin.x - 2 * EntryListCellSidePadding,
                                     secondaryLabelHeight);
     
-}
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

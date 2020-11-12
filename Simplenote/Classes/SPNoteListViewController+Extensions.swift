@@ -863,7 +863,7 @@ private extension SPNoteListViewController {
 //
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
-    static let copyLink = NSLocalizedString("Copy Link", comment: "Copies Link to a Note")
+    static let copyLink = NSLocalizedString("Copy Internal Link", comment: "Copies Link to a Note")
     static let delete = NSLocalizedString("Move to Trash", comment: "Deletes a note")
     static let pin = NSLocalizedString("Pin to Top", comment: "Pins a note")
     static let share = NSLocalizedString("Share...", comment: "Shares a note")

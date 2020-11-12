@@ -9,18 +9,17 @@
 import Foundation
 
 
+enum KeychainError: Error {
+    case noPassword
+    case unexpectedPasswordData
+    case unexpectedItemData
+    case unhandledError(status: OSStatus)
+}
+
 /// Ref. https://developer.apple.com/library/content/samplecode/GenericKeychain/Listings/GenericKeychain_KeychainPasswordItem_swift.html
 ///
 struct KeychainPasswordItem {
-    // MARK: Types
-    
-    enum KeychainError: Error {
-        case noPassword
-        case unexpectedPasswordData
-        case unexpectedItemData
-        case unhandledError(status: OSStatus)
-    }
-    
+
     // MARK: Properties
     
     let service: String

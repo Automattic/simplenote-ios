@@ -1,6 +1,11 @@
 4.28
 -----
 -   Searching for a note is showing relevant excerpts #956
+-   Tags List now extend to the edge of the screen, in landscape mode #989
+-   Fixed a bug that affected Text Selection #973
+-   Fixed a bug that toggled Edition while dragging the Editor #972
+-   Fixed an issue that caused changes not to be persisted immediately #996
+-   Fixed a bug that affected search highlight navigation #1009
 
 4.27
 -----
@@ -10,6 +15,7 @@
 -   Updated Navigation Bar's behavior #918
 -   Adjusted Notes List Metrics #929
 -   Fixed a bug that caused the Search Bar to look extra big #930
+-   Fixed a bug affecting Tags Autocomplete #964
 
 4.26
 -----

@@ -559,6 +559,75 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK - Style
+//
+extension SPNoteEditorViewController {
+
+    @objc
+    func refreshStyle() {
+        refreshRootView()
+        refreshBottomView()
+        refreshTagsEditor()
+        refreshTextEditor()
+        refreshTextStorage()
+    }
+
+    private func refreshRootView() {
+        view.backgroundColor = backgroundColor
+    }
+
+    private func refreshBottomView() {
+        bottomView.backgroundColor = backgroundColor
+    }
+
+    private func refreshTextEditor() {
+        noteEditorTextView.backgroundColor = backgroundColor
+        noteEditorTextView.keyboardAppearance = .simplenoteKeyboardAppearance
+        noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
+        noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+    }
+
+    private func refreshTagsEditor() {
+        tagView.backgroundColor = backgroundColor
+        tagView.keyboardAppearance = .simplenoteKeyboardAppearance
+    }
+
+    private func refreshTextStorage() {
+        let headlineFont = UIFont.preferredFont(for: .title1, weight: .bold)
+        let defaultFont = UIFont.preferredFont(forTextStyle: .body)
+        let textColor = UIColor.simplenoteNoteHeadlineColor
+        let lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+        let textStorage = noteEditorTextView.interactiveTextStorage
+
+        textStorage.defaultStyle = [
+            .font               : defaultFont,
+            .foregroundColor    : textColor,
+            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
+        ]
+
+        textStorage.headlineStyle = [
+            .font               : headlineFont,
+            .foregroundColor    : textColor,
+        ]
+    }
+
+    private var backgroundColor: UIColor {
+        isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
+    }
+}
+
+
+// MARK: - Metrics
+//
+private enum Metrics {
+    static let lineSpacingMultiplerPad: CGFloat = 0.40
+    static let lineSpacingMultiplerPhone: CGFloat = 0.20
+
+    static var lineSpacingMultipler: CGFloat {
+        UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
+    }
+}
+
 // MARK: - NSCoder Keys
 //
 private enum CodingKeys: String {

@@ -7,7 +7,6 @@
 //
 
 #import "SPTagView.h"
-#import "VSThemeManager.h"
 #import "SPTagStub.h"
 #import <Simperium/Simperium.h>
 #import "SPAppDelegate.h"
@@ -91,7 +90,7 @@
 - (void)layoutSubviews
 {
     CGFloat xOrigin = 0.0;
-    CGFloat spacing = [self.theme floatForKey:@"tagViewItemSideSpacing"];
+    CGFloat spacing = TagPillSpacing.dx;
     
     // position tags
     for (UIView *view in tagPills) {
@@ -135,11 +134,6 @@
     
     bounds.origin.y -= bounds.size.height;
     autoCompleteScrollView.frame = bounds;
-}
-
-- (VSTheme *)theme {
-    
-    return [[VSThemeManager sharedManager] theme];
 }
 
 - (BOOL)setupWithTagNames:(NSArray *)tagNames {
@@ -409,14 +403,12 @@
     if (_activeDeletionPill) {
         return;
     }
-    
-    CGFloat spacing = [self.theme floatForKey:@"tagViewItemSpacing"];
-    
+
     if (tagScrollView.contentSize.width > tagScrollView.bounds.size.width &&
-        addTagField.frame.origin.x + addTagField.frame.size.width+ 2 * spacing - tagScrollView.contentOffset.x > tagScrollView.bounds.size.width) {
+        addTagField.frame.origin.x + addTagField.frame.size.width - tagScrollView.contentOffset.x > tagScrollView.bounds.size.width) {
 
         CGPoint offset = CGPointMake(MIN(tagScrollView.contentSize.width - tagScrollView.bounds.size.width,
-                                         addTagField.frame.origin.x + addTagField.frame.size.width + 2 * spacing - tagScrollView.bounds.size.width),
+                                         addTagField.frame.origin.x + addTagField.frame.size.width - tagScrollView.bounds.size.width),
                                      0);
         
         [tagScrollView setContentOffset:offset animated:animated];

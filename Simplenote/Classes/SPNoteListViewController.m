@@ -14,8 +14,6 @@
 #import "Note.h"
 
 #import "NSMutableAttributedString+Styling.h"
-#import "UIDevice+Extensions.h"
-#import "VSThemeManager.h"
 
 #import <StoreKit/StoreKit.h>
 #import <Simperium/Simperium.h>

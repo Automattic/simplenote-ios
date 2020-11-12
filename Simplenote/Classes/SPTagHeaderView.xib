@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,11 +26,12 @@
                     <state key="normal" title="Button"/>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="HJL-3a-kMx"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="aHp-el-CsD" secondAttribute="bottom" constant="5" id="9NS-Yr-ko2"/>
                 <constraint firstItem="FwE-o8-Mhf" firstAttribute="top" secondItem="t2U-RY-Ulw" secondAttribute="top" constant="5" id="HtV-gc-dUn"/>
-                <constraint firstItem="aHp-el-CsD" firstAttribute="leading" secondItem="t2U-RY-Ulw" secondAttribute="leading" constant="16" id="Kac-Yu-sTd"/>
+                <constraint firstItem="aHp-el-CsD" firstAttribute="leading" secondItem="HJL-3a-kMx" secondAttribute="leading" constant="16" id="Kac-Yu-sTd"/>
                 <constraint firstItem="HJL-3a-kMx" firstAttribute="bottom" secondItem="FwE-o8-Mhf" secondAttribute="bottom" constant="5" id="LAc-OD-rdq"/>
                 <constraint firstAttribute="trailing" secondItem="FwE-o8-Mhf" secondAttribute="trailing" constant="16" id="XsG-YJ-tsE"/>
                 <constraint firstItem="FwE-o8-Mhf" firstAttribute="centerY" secondItem="t2U-RY-Ulw" secondAttribute="centerY" id="hnq-Tl-QsJ"/>
@@ -38,7 +39,6 @@
                 <constraint firstItem="FwE-o8-Mhf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aHp-el-CsD" secondAttribute="trailing" constant="10" id="nZZ-mB-RMj"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="HJL-3a-kMx"/>
             <connections>
                 <outlet property="actionButton" destination="FwE-o8-Mhf" id="YNd-cV-4oq"/>
                 <outlet property="titleLabel" destination="aHp-el-CsD" id="uxr-qy-pBU"/>
