@@ -17,6 +17,13 @@ extension SPNoteEditorViewController {
 
         ensureEmptyNoteIsDeleted()
     }
+
+    /// Whenever a ViewController is presented, let's ensure Interlink is dismissed!
+    ///
+    override public func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+        interlinkProcessor.dismissInterlinkLookup()
+    }
 }
 
 
@@ -91,6 +98,15 @@ extension SPNoteEditorViewController {
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+
+    /// Sets up the Interlinks Processor
+    ///
+    @objc
+    func configureInterlinksProcessor() {
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
+        interlinkProcessor.datasource = self
+        interlinkProcessor.contextProvider = self
     }
 }
 
@@ -559,6 +575,51 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Interlinks
+//
+extension SPNoteEditorViewController {
+
+    /// Dismisses (if needed) and reprocessess Interlink Lookup whenever the current Transition concludes
+    ///
+    @objc(refreshInterlinkLookupWithCoordinator:)
+    func refreshInterlinkLookupWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
+        interlinkProcessor.dismissInterlinkLookup()
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.interlinkProcessor.processInterlinkLookup()
+        }
+    }
+}
+
+
+// MARK: - InterlinkProcessorPresentationContextProvider
+//
+extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
+
+    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView {
+        navigationBarBackground
+    }
+
+    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
+        noteEditorTextView
+    }
+
+    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController {
+        self
+    }
+}
+
+
+// MARK: - InterlinkProcessorDatasource
+//
+extension SPNoteEditorViewController: InterlinkProcessorDatasource {
+
+    var interlinkExcudedEntityID: NSManagedObjectID? {
+        currentNote?.objectID
+    }
+}
+
+
 // MARK - Style
 //
 extension SPNoteEditorViewController {
@@ -627,6 +688,7 @@ private enum Metrics {
         UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
     }
 }
+
 
 // MARK: - NSCoder Keys
 //
