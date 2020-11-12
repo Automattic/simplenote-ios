@@ -23,13 +23,14 @@ protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
 // MARK: - InterlinkProcessorDelegate
 //
 protocol InterlinkProcessorDelegate: NSObjectProtocol {
-    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
-}
 
-// MARK: - InterlinkProcessorDatasource
-//
-protocol InterlinkProcessorDatasource: NSObjectProtocol {
-    var interlinkExcudedEntityID: NSManagedObjectID? { get }
+    /// Invoked whenever an Autocomplete Row has been selected: The handler should insert the specified text at a given range
+    ///
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
+
+    /// Represents the Entity that should be excluded when presenting Autocomplete results
+    ///
+    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID?
 }
 
 
@@ -43,7 +44,6 @@ class InterlinkProcessor: NSObject {
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
     weak var delegate: InterlinkProcessorDelegate?
-    weak var datasource: InterlinkProcessorDatasource?
 
     /// Designated Initializer
     ///
@@ -165,7 +165,7 @@ private extension InterlinkProcessor {
 private extension InterlinkProcessor {
 
     var excludedEntityID: NSManagedObjectID? {
-        datasource?.interlinkExcudedEntityID
+        delegate?.excludedEntityIdentifierForInterlinkProcessor(self)
     }
 
     var parentOverlayView: UIView {
