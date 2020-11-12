@@ -104,7 +104,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureInterlinksProcessor() {
-        interlinkProcessor = InterlinkProcessor()
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
         interlinkProcessor.datasource = self
         interlinkProcessor.contextProvider = self
     }
@@ -605,10 +605,6 @@ extension SPNoteEditorViewController: InterlinkProcessorDatasource {
 
     var interlinkExcudedEntityID: NSManagedObjectID? {
         currentNote?.objectID
-    }
-
-    var interlinkViewContext: NSManagedObjectContext {
-        SPAppDelegate.shared().managedObjectContext
     }
 }
 

@@ -32,12 +32,18 @@ protocol InterlinkProcessorDatasource: NSObjectProtocol {
 //
 class InterlinkProcessor: NSObject {
 
+    private let viewContext: NSManagedObjectContext
     private var presentedViewController: InterlinkViewController?
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
     weak var datasource: InterlinkProcessorDatasource?
 
+    /// Designated Initializer
+    ///
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
+    }
 
     /// Displays the Interlink Lookup UI at the cursor's location when all of the following are **true**:
     ///
@@ -94,7 +100,7 @@ class InterlinkProcessor: NSObject {
 private extension InterlinkProcessor {
 
     func ensureInterlinkControllerIsOnScreen() {
-        if let _ = presentedViewController {
+        guard presentedViewController == nil else {
             return
         }
 
@@ -103,8 +109,9 @@ private extension InterlinkProcessor {
 
     func presentInterlinkController() {
         let interlinkViewController = InterlinkViewController()
+        interlinkViewController.view.frame = UIScreen.main.bounds
         interlinkViewController.attachWithAnimation(to: parentViewController, below: parentOverlayView)
-        self.presentedViewController = interlinkViewController
+        presentedViewController = interlinkViewController
     }
 
     func relocateInterlinkController(around range: Range<String.Index>) {
@@ -143,14 +150,6 @@ private extension InterlinkProcessor {
 
     var excludedEntityID: NSManagedObjectID? {
         datasource?.interlinkExcudedEntityID
-    }
-
-    var viewContext: NSManagedObjectContext {
-        guard let context = datasource?.interlinkViewContext else {
-            fatalError("☠️ InterlinkProcessor: Please set a valid datasource!")
-        }
-
-        return context
     }
 
     var parentOverlayView: UIView {
