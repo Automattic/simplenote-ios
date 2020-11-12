@@ -24,7 +24,6 @@ protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
 //
 protocol InterlinkProcessorDatasource: NSObjectProtocol {
     var interlinkExcudedEntityID: NSManagedObjectID? { get }
-    var interlinkViewContext: NSManagedObjectContext { get }
 }
 
 
