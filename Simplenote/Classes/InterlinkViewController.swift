@@ -95,6 +95,11 @@ private extension InterlinkViewController {
 //
 extension InterlinkViewController: UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        // "Drops" the last separator!
+        .leastNonzeroMagnitude
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         notes.count
     }
