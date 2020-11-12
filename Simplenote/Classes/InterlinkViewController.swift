@@ -76,6 +76,7 @@ private extension InterlinkViewController {
     func setupShadowLayer() {
         let backgroundLayer = backgroundView.layer
         backgroundLayer.cornerRadius = Metrics.cornerRadius
+        backgroundLayer.masksToBounds = true
         backgroundLayer.shadowRadius = Shadow.radius
         backgroundLayer.shadowOpacity = Shadow.opacity
         backgroundLayer.shadowOffset = Shadow.offset
