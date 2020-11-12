@@ -14,7 +14,6 @@
 #import "SPTracker.h"
 #import "NSString+Bullets.h"
 #import "SPTransitionController.h"
-#import "NSString+Search.h"
 #import "SPTextView.h"
 #import "NSString+Attributed.h"
 #import "SPAcitivitySafari.h"
@@ -25,7 +24,7 @@
 #import "SPConstants.h"
 
 @import SafariServices;
-
+@import SimplenoteSearch;
 
 CGFloat const SPSelectedAreaPadding = 20;
 
@@ -61,6 +60,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 // Search
 @property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
+@property (nonatomic, strong) SearchQuery               *searchQuery;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -201,15 +201,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!self.searching || _searchString.length == 0 || self.searchResultRanges) {
+    if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges) {
         return;
     }
     
     NSString *searchText = _noteEditorTextView.text;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        self.searchResultRanges = [searchText rangesForTerms:self.searchString];
+
+        self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
+                                                withKeywords:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -563,14 +564,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 #pragma mark search
 
-- (void)setSearchString:(NSString *)string {
-    
-    if (string.length > 0) {
-        self.searching = YES;
-        _searchString = string;
-        self.searchResultRanges = nil;
-        [self.navigationController setToolbarHidden:NO animated:YES];
+- (void)updateWithSearchQuery:(SearchQuery *)searchQuery
+{
+    if (!searchQuery || searchQuery.isEmpty) {
+        return;
     }
+
+    self.searching = YES;
+    _searchQuery = searchQuery;
+    self.searchResultRanges = nil;
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 - (void)highlightNextSearchResult:(id)sender {
@@ -585,23 +588,19 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
 }
 
-- (void)highlightSearchResultAtIndex:(NSInteger)index {
-    
+- (void)highlightSearchResultAtIndex:(NSInteger)index
+{
     NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
         self.prevSearchButton.enabled = index > 0;
         self.nextSearchButton.enabled = index < searchResultCount - 1;
-        
-        [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
-                           animated:YES
-                          withBlock:^(CGRect highlightFrame) {
 
-                              // scroll to block
-                              highlightFrame.origin.y += highlightFrame.size.height;
-                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
-                          }];
+        NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
+        [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
+            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
+        }];
     }
 }
 
@@ -613,7 +612,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.text = [_noteEditorTextView plainText];
     [_noteEditorTextView processChecklists];
     
-    _searchString = nil;
+    _searchQuery = nil;
     self.searchResultRanges = nil;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];

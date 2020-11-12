@@ -37,9 +37,11 @@ extension UITextView {
     ///
     func insertText(text: String, in range: Range<String.Index>) {
         registerUndoCheckpointAndPerform { storage in
-            let range = self.text.utf16NSRange(from: range)
+            let range = NSRange(range, in: self.text)
             storage.replaceCharacters(in: range, with: text)
-            self.selectedRange = NSRange(location: range.location + text.count, length: .zero)
+
+            let insertedTextRange = NSRange(text.fullRange, in: text)
+            self.selectedRange = NSRange(location: range.location + insertedTextRange.length, length: .zero)
         }
     }
 }
