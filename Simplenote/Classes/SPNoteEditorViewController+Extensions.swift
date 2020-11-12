@@ -555,7 +555,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func searchResultRanges(in text: String, withKeywords keywords: [String]) -> [NSRange] {
-        return text.contentSlice(matching: keywords).nsMatches
+        return text.contentSlice(matching: keywords)?.nsMatches ?? []
     }
 }
 

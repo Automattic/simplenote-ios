@@ -119,6 +119,7 @@
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
+		A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */; };
 		A66224FD2546B460003A949E /* TableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66224FC2546B460003A949E /* TableHeaderViewCell.swift */; };
 		A681C72C254172B600F369C2 /* NoteMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C72B254172B600F369C2 /* NoteMetrics.swift */; };
 		A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */; };
@@ -506,6 +507,7 @@
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
 		A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteContentHelper.swift; path = Classes/NoteContentHelper.swift; sourceTree = "<group>"; };
+		A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringContentSliceTests.swift; sourceTree = "<group>"; };
 		A66224FC2546B460003A949E /* TableHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderViewCell.swift; sourceTree = "<group>"; };
 		A681C72B254172B600F369C2 /* NoteMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMetrics.swift; sourceTree = "<group>"; };
 		A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1192,6 +1194,7 @@
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
 				B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */,
 				B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */,
+				A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2452,6 +2455,7 @@
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
+				A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,

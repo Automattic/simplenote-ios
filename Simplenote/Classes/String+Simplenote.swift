@@ -102,7 +102,11 @@ extension String {
     func contentSlice(matching keywords: [String],
                       in range: Range<String.Index>? = nil,
                       leadingLimit: String.IndexDistance = 0,
-                      trailingLimit: String.IndexDistance = 0) -> ContentSlice {
+                      trailingLimit: String.IndexDistance = 0) -> ContentSlice? {
+
+        guard !keywords.isEmpty else {
+            return nil
+        }
 
         let range = range ?? startIndex..<endIndex
 
@@ -133,9 +137,9 @@ extension String {
             }
         }
 
-        // If there are no matches, return the whole string
+        // No matches => return nil
         guard let firstMatch = matchingWordsRange.first, let lastMatch = matchingWordsRange.last else {
-            return ContentSlice(content: self, range: range, matches: matchingWordsRange)
+            return nil
         }
 
         let lowerBound: String.Index = {

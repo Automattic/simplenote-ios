@@ -27,7 +27,9 @@ extension NSMutableAttributedString {
     /// Applies a given UIColor instance to substrings matching a given Keyword
     ///
     func apply(color: UIColor, toSubstringsMatching keywords: [String]) {
-        let excerpt = string.contentSlice(matching: keywords)
+        guard let excerpt = string.contentSlice(matching: keywords) else {
+            return
+        }
         for range in excerpt.nsMatches {
             addAttribute(.foregroundColor, value: color, range: range)
         }

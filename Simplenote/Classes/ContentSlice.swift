@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - ContentSlice
 //
-struct ContentSlice {
+struct ContentSlice: Equatable {
     /// Original content
     ///
     let content: String
@@ -23,30 +23,17 @@ struct ContentSlice {
         }
     }
 
+    /// Content sliced to the range
+    ///
+    var slicedContent: String {
+        return String(content[range])
+    }
+
     /// Constructor
     ///
     init(content: String, range: Range<String.Index>, matches: [Range<String.Index>]) {
         self.content = content
         self.range = range
         self.matches = matches
-    }
-
-    /// Return content sliced to the range
-    ///
-    var normalized: ContentSlice {
-        if range.lowerBound == content.startIndex && range.upperBound == content.endIndex {
-            return self
-        }
-
-        let newContent = String(content[range])
-        let newRange = newContent.startIndex..<newContent.endIndex
-        let offset = content.distance(from: content.startIndex, to: range.lowerBound)
-        let newMatches: [Range<String.Index>] = matches.map {
-            let lower = content.index($0.lowerBound, offsetBy: -offset)
-            let upper = content.index($0.upperBound, offsetBy: -offset)
-            return lower..<upper
-        }
-
-        return ContentSlice(content: newContent, range: newRange, matches: newMatches)
     }
 }

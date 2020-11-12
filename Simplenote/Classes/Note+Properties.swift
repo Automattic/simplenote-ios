@@ -91,13 +91,15 @@ extension Note {
             return nil
         }
         
-        let excerpt = content.contentSlice(matching: keywords,
-                                           in: bodyRange,
-                                           leadingLimit: Constants.excerptLeadingLimit,
-                                           trailingLimit: Constants.excerptTrailingLimit)
+        guard let excerpt = content.contentSlice(matching: keywords,
+                                                 in: bodyRange,
+                                                 leadingLimit: Constants.excerptLeadingLimit,
+                                                 trailingLimit: Constants.excerptTrailingLimit) else {
+            return bodyPreview
+        }
 
         let shouldAddEllipsis = excerpt.range.lowerBound > bodyRange.lowerBound
-        let excerptString = (shouldAddEllipsis ? "…" : "") + excerpt.normalized.content
+        let excerptString = (shouldAddEllipsis ? "…" : "") + excerpt.slicedContent
 
         return excerptString.replacingNewlinesWithSpaces()
     }
