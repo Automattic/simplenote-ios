@@ -108,6 +108,7 @@ extension UITextView {
             return .zero
         }
 
-        return layoutManager.boundingRect(forGlyphRange: selectedRange, in: textContainer)
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
     }
 }

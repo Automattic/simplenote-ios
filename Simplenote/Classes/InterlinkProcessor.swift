@@ -108,7 +108,6 @@ private extension InterlinkProcessor {
 
     func presentInterlinkController() {
         let interlinkViewController = InterlinkViewController()
-        interlinkViewController.view.frame = UIScreen.main.bounds
         interlinkViewController.attachWithAnimation(to: parentViewController, below: parentOverlayView)
         presentedViewController = interlinkViewController
     }
