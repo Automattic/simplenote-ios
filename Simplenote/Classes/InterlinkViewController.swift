@@ -42,7 +42,6 @@ class InterlinkViewController: UIViewController {
         setupRootView()
         setupBackgroundView()
         setupTableView()
-        setupShadowLayer()
     }
 }
 
@@ -71,15 +70,10 @@ private extension InterlinkViewController {
 
     func setupBackgroundView() {
         backgroundView.backgroundColor = .simplenoteAutocompleteBackgroundColor
-    }
 
-    func setupShadowLayer() {
-        let backgroundLayer = backgroundView.layer
-        backgroundLayer.cornerRadius = Metrics.cornerRadius
-        backgroundLayer.masksToBounds = true
-        backgroundLayer.shadowRadius = Shadow.radius
-        backgroundLayer.shadowOpacity = Shadow.opacity
-        backgroundLayer.shadowOffset = Shadow.offset
+        let layer = backgroundView.layer
+        layer.cornerRadius = Metrics.cornerRadius
+        layer.masksToBounds = true
     }
 
     func setupTableView() {

@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InterlinkViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="backgroundView" destination="Qq8-Vx-6eu" id="eE3-X8-3Fs"/>
+                <outlet property="backgroundView" destination="ZZD-kk-l5T" id="vLO-Vd-nH7"/>
                 <outlet property="tableHeightConstraint" destination="pJU-Uf-0Oq" id="8xE-WM-Fgp"/>
                 <outlet property="tableLeadingConstraint" destination="YkW-MZ-sEN" id="ewM-9i-2qp"/>
                 <outlet property="tableTopConstraint" destination="1aU-WG-N13" id="UWn-PU-7Am"/>
@@ -24,16 +24,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="383"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qq8-Vx-6eu">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZD-kk-l5T">
                     <rect key="frame" x="0.0" y="12" width="300" height="50"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ghw-1k-vS5">
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vc0-Cc-xE6">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zf0-S2-dKX">
+                                <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="V4a-WP-o2X">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <vibrancyEffect>
+                                    <blurEffect style="regular"/>
+                                </vibrancyEffect>
+                            </visualEffectView>
+                        </subviews>
                     </view>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <vibrancyEffect>
-                        <blurEffect style="regular"/>
-                    </vibrancyEffect>
+                    <blurEffect style="regular"/>
                 </visualEffectView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-It-s4R">
                     <rect key="frame" x="0.0" y="12" width="300" height="50"/>
@@ -51,12 +61,12 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="ZZD-kk-l5T" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="13c-vt-Ev3"/>
                 <constraint firstItem="0Ce-It-s4R" firstAttribute="top" secondItem="URg-NP-0Et" secondAttribute="top" constant="12" id="1aU-WG-N13"/>
-                <constraint firstItem="Qq8-Vx-6eu" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="Xwk-gn-w1X"/>
+                <constraint firstItem="ZZD-kk-l5T" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="6gN-vH-S7l"/>
+                <constraint firstItem="ZZD-kk-l5T" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="JTo-O4-SK4"/>
+                <constraint firstItem="ZZD-kk-l5T" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="U49-aZ-qMs"/>
                 <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" secondItem="URg-NP-0Et" secondAttribute="leading" id="YkW-MZ-sEN"/>
-                <constraint firstItem="Qq8-Vx-6eu" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="Zgt-ck-r79"/>
-                <constraint firstItem="Qq8-Vx-6eu" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="cXk-mu-fCC"/>
-                <constraint firstItem="Qq8-Vx-6eu" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="pVp-WF-lOe"/>
                 <constraint firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" priority="999" id="rCB-bk-lF3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
