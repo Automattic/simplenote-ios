@@ -157,19 +157,19 @@ extension UITextView {
     ///
     /// - Note: `contentInset.bottom` is expected to contain the bottom padding required by the keyboard. Capisce?
     ///
-    func editingRect() -> CGRect {
-        let paddingTop = safeAreaInsets.top
+    func editingRectInWindow() -> CGRect {
+        let paddingTop = frame.minY + safeAreaInsets.top
         let paddingBottom = safeAreaInsets.bottom + contentInset.bottom
         let editingHeight = frame.height - paddingTop - paddingBottom
 
-        return CGRect(x: .zero, y: paddingTop, width: frame.width, height: editingHeight)
+        return CGRect(x: frame.minX, y: paddingTop, width: frame.width, height: editingHeight)
     }
 
     /// Returns the Window Location for the text at the specified range
     ///
-    func locationInSuperviewForText(in range: Range<String.Index>) -> CGRect {
+    func locationInWindowForText(in range: Range<String.Index>) -> CGRect {
         let rectInEditor = boundingRect(for: range)
-        return superview?.convert(rectInEditor, from: self) ?? rectInEditor
+        return window?.convert(rectInEditor, from: self) ?? rectInEditor
     }
 
     /// Returns the Selected Text's bounds

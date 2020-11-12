@@ -121,7 +121,11 @@ private extension InterlinkProcessor {
     }
 
     func relocateInterlinkController(around range: Range<String.Index>) {
-        presentedViewController?.anchorView(around: range, in: parentTextView)
+        let keywordFrame = parentTextView.locationInWindowForText(in: range)
+        let editingFrame = parentTextView.editingRectInWindow()
+
+        presentedViewController?.relocateInterface(around: keywordFrame, in: editingFrame)
+        lastKnownEditorOffset = parentTextView.contentOffset
     }
 
     func refreshInterlinkController(notes: [Note]) {
