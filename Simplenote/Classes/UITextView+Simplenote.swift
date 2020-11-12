@@ -69,7 +69,7 @@ extension UITextView {
     /// Returns the Bounding Rect for the specified `Range<String.Index>`
     ///
     func boundingRect(for range: Range<String.Index>) -> CGRect {
-        let nsRange = text.utf16NSRange(from: range)
+        let nsRange = NSRange(range, in: text)
         return boundingRect(for: nsRange)
     }
 
