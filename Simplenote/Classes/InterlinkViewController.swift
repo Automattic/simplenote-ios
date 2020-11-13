@@ -10,6 +10,7 @@ class InterlinkViewController: UIViewController {
     ///
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: UIVisualEffectView!
+    @IBOutlet private var shadowView: SPShadowView!
 
     /// Layout Constraints: Inner TableView
     ///
@@ -42,7 +43,7 @@ class InterlinkViewController: UIViewController {
         setupRootView()
         setupBackgroundView()
         setupTableView()
-        setupShadowLayer()
+        setupShadowView()
     }
 }
 
@@ -71,14 +72,8 @@ private extension InterlinkViewController {
 
     func setupBackgroundView() {
         backgroundView.backgroundColor = .simplenoteAutocompleteBackgroundColor
-    }
-
-    func setupShadowLayer() {
-        let backgroundLayer = backgroundView.layer
-        backgroundLayer.cornerRadius = Metrics.cornerRadius
-        backgroundLayer.shadowRadius = Shadow.radius
-        backgroundLayer.shadowOpacity = Shadow.opacity
-        backgroundLayer.shadowOffset = Shadow.offset
+        backgroundView.layer.cornerRadius = Metrics.cornerRadius
+        backgroundView.layer.masksToBounds = true
     }
 
     func setupTableView() {
@@ -86,7 +81,12 @@ private extension InterlinkViewController {
         tableView.backgroundColor = .clear
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
+        tableView.layer.masksToBounds = true
         tableView.layer.cornerRadius = Metrics.cornerRadius
+    }
+
+    func setupShadowView() {
+        shadowView.cornerRadius = Metrics.cornerRadius
     }
 }
 
@@ -94,6 +94,11 @@ private extension InterlinkViewController {
 // MARK: - UITableViewDataSource
 //
 extension InterlinkViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        // "Drops" the last separator!
+        .leastNonzeroMagnitude
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         notes.count
@@ -203,10 +208,4 @@ private enum Metrics {
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
     static let resultsPadding = CGFloat(12)
-}
-
-private enum Shadow {
-    static let opacity = Float(0.2)
-    static let offset = CGSize(width: 0, height: 32)
-    static let radius = CGFloat(64)
 }

@@ -4,16 +4,74 @@ import UIKit
 //
 // SPShadowView draws outside shadow, while everyting inside is kept transparent
 //
+@IBDesignable
 final class SPShadowView: UIView {
-    private let cornerRadius: CGFloat
-    private let roundedCorners: UIRectCorner
-    private let maskLayer: CAShapeLayer = CAShapeLayer()
+    private let maskLayer = CAShapeLayer()
+
+    /// Corner Radius
+    ///
+    @IBInspectable
+    var cornerRadius: CGFloat = .zero {
+        didSet {
+            updatePath()
+        }
+    }
+
+    /// Defines the Shadow Path's rounded corners
+    ///
+    var roundedCorners: UIRectCorner = .allCorners {
+        didSet {
+            updatePath()
+        }
+    }
 
     /// Shadow color
     ///
-    var shadowColor = UIColor.black {
-        didSet {
-            configureShadow()
+    @IBInspectable
+    var shadowColor: UIColor? {
+        get {
+            layer.shadowColor.map {
+                UIColor(cgColor: $0)
+            }
+        }
+        set {
+            layer.shadowColor = newValue?.cgColor
+        }
+    }
+
+    /// Shadow Offset
+    ///
+    @IBInspectable
+    var shadowOffset: CGSize {
+        get {
+            layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+        }
+    }
+
+    /// Shadow Opacity
+    ///
+    @IBInspectable
+    var shadowOpacity: CGFloat {
+        get {
+            CGFloat(layer.shadowOpacity)
+        }
+        set {
+            layer.shadowOpacity = Float(newValue)
+        }
+    }
+
+    /// Shadow Radius
+    ///
+    @IBInspectable
+    var shadowRadius: CGFloat {
+        get {
+            layer.shadowRadius
+        }
+        set {
+            layer.shadowRadius = newValue
         }
     }
 
@@ -37,9 +95,11 @@ final class SPShadowView: UIView {
         configure()
     }
 
-    @available(*, unavailable)
+    /// NSCoder support!
+    ///
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configure()
     }
 }
 
@@ -61,10 +121,10 @@ private extension SPShadowView {
     /// Configuration of the shadow
     ///
     func configureShadow() {
-        layer.shadowColor = shadowColor.cgColor
-        layer.shadowOffset = Constants.shadowOffset
-        layer.shadowOpacity = Constants.shadowOpacity
-        layer.shadowRadius = Constants.shadowRadius
+        shadowColor = Constants.shadowColor
+        shadowOffset = Constants.shadowOffset
+        shadowOpacity = Constants.shadowOpacity
+        shadowRadius = Constants.shadowRadius
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }
@@ -99,7 +159,8 @@ private extension SPShadowView {
 //
 private extension SPShadowView {
     struct Constants {
-        static let shadowOpacity: Float = 0.1
+        static let shadowColor = UIColor.black
+        static let shadowOpacity: CGFloat = 0.1
         static let shadowRadius: CGFloat = 4.0
         static let shadowOffset = CGSize(width: 0, height: -2)
     }
