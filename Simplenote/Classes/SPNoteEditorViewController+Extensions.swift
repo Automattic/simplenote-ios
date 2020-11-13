@@ -714,7 +714,7 @@ extension SPNoteEditorViewController {
         var textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
         textContainerHeight = textContainerHeight + noteEditorTextView.textContainerInset.top + noteEditorTextView.textContainerInset.bottom
 
-        let textContainerMinHeight = noteEditorTextView.editingRect().size.height
+        let textContainerMinHeight = noteEditorTextView.editingRectInWindow().size.height
         return max(textContainerHeight, textContainerMinHeight)
     }
 
