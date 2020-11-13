@@ -622,18 +622,23 @@ extension SPNoteEditorViewController {
 
     /// Show search map keyword ranges
     ///
+    // TODO: Use `Range` when `SPNoteEditorViewController` is fully swift
     @objc
     func showSearchMap(with searchRangeValues: [NSValue]) {
         createSearchMapViewIfNeeded()
-        // trigger layout to get correct height
+        guard let searchMapView = searchMapView else {
+            return
+        }
+
+        // trigger layout to get correct height. The height is used as a minimum editor height in search terms positions calculation
         searchMapView.superview?.layoutSubviews()
 
         let editorRect = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer)
         let editorHeight = max(editorRect.size.height,
-                               searchMapView?.frame.size.height ?? 0)
+                               searchMapView.frame.size.height)
 
         guard editorHeight > CGFloat.leastNormalMagnitude else {
-            searchMapView?.update(with: [])
+            searchMapView.update(with: [])
             return
         }
 
@@ -643,7 +648,7 @@ extension SPNoteEditorViewController {
             return max(boundingRect.midY / editorHeight, CGFloat.leastNormalMagnitude)
         }
 
-        searchMapView?.update(with: searchBarPositions)
+        searchMapView.update(with: searchBarPositions)
     }
 
     private func createSearchMapViewIfNeeded() {
