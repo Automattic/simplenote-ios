@@ -15,13 +15,8 @@ class InterlinkViewController: UIViewController {
     /// Layout Constraints: Inner TableView
     ///
     @IBOutlet private var tableLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet private var tableTrailingConstraint: NSLayoutConstraint!
     @IBOutlet private var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet private var tableHeightConstraint: NSLayoutConstraint!
-
-    /// KVO
-    ///
-    private var kvoOffsetToken: NSKeyValueObservation?
 
     /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
     ///
@@ -52,12 +47,26 @@ class InterlinkViewController: UIViewController {
 //
 extension InterlinkViewController {
 
-    /// Relocates the receiver so that it shows up around a given Keyword in a **Sibling TextView**
-    /// - Important: We'll start listening for Content Offset changes, and the UI will be automatically repositioned
+    /// Relocates the receiver so that it shows up **around** the specified Anchor Frame, in a given ViewPort.
+    /// - Important: Both frames must be expressed in Window Coordinates. Capisce?
     ///
-    func anchorView(around keywordRange: Range<String.Index>, in siblingTextView: UITextView) {
-        refreshConstraints(keywordRange: keywordRange, in: siblingTextView)
-        startObservingContentOffset(in: siblingTextView)
+    func relocateInterface(around anchor: CGRect, in viewport: CGRect) {
+        let anchorFrame = view.convert(anchor, from: nil)
+        let editingRect = view.convert(viewport, from: nil)
+
+        let targetHeight = calculateHeight()
+        let targetTop = calculateTopLocation(for: targetHeight, around: anchorFrame, in: editingRect)
+        let targetLeading = calculateLeadingLocation(around: anchorFrame, in: editingRect)
+
+        tableTopConstraint.constant = targetTop
+        tableHeightConstraint.constant = targetHeight
+        tableLeadingConstraint.constant = targetLeading
+    }
+
+    /// Adjusts the Interlink TableView by the specified offset
+    ///
+    func relocateInterface(by deltaY: CGFloat) {
+        tableTopConstraint.constant += deltaY
     }
 }
 
@@ -133,49 +142,53 @@ extension InterlinkViewController: UITableViewDelegate {
 //
 private extension InterlinkViewController {
 
-    /// Updates the layout constraints so that the receiver shows up **around** the specified Keyword in the specified TextView
+    /// Returns the Target Origin.Y
     ///
-    func refreshConstraints(keywordRange: Range<String.Index>, in textView: UITextView) {
-        let targetHeight = calculateHeight()
-        let targetLocation = calculateLocation(for: targetHeight, around: keywordRange, in: textView)
-        let targetPadding = textView.textContainer.lineFragmentPadding
-
-        tableTopConstraint.constant = targetLocation
-        tableHeightConstraint.constant = targetHeight
-        tableLeadingConstraint.constant = targetPadding
-        tableTrailingConstraint.constant = targetPadding
-    }
-
-    /// Starts tracking ContentOffset changes in our sibling TextView
-    ///
-    func startObservingContentOffset(in textView: UITextView) {
-        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (_, value) in
-            guard let oldY = value.oldValue?.y, let newY = value.newValue?.y, oldY != newY else {
-                return
-            }
-
-            self?.tableTopConstraint.constant += oldY - newY
-        }
-    }
-
-    /// Returns the target Origin.Y
     /// -   Parameters:
     ///     - height: The new target height
-    ///     - range: Anchor's Range
-    ///     - textView: Sibling TextView
+    ///     - anchor: Frame around which we should position the TableView
+    ///     - viewport: Editor's visible frame
     ///
-    /// - Important: We'll always prefer either the "location above the cursor" whenever the **Maxed Out TableView** can be fit (that is: +3.5 results!)
+    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
     ///
-    func calculateLocation(for height: CGFloat, around range: Range<String.Index>, in textView: UITextView) -> CGFloat {
-        let anchorFrame = textView.locationInSuperviewForText(in: range)
-        let minimumLocationForFullHeight = anchorFrame.minY - Metrics.resultsPadding - Metrics.maximumTableHeight
+    func calculateTopLocation(for height: CGFloat, around anchor: CGRect, in viewport: CGRect) -> CGFloat {
+        let minimumLocationForFullHeight = anchor.minY - Metrics.defaultTableInsets.top - Metrics.maximumTableHeight
+        let locationAbove = anchor.minY - Metrics.defaultTableInsets.top - height
+        let locationBelow = anchor.maxY + Metrics.defaultTableInsets.top
 
-        if minimumLocationForFullHeight > textView.editingRect().minY {
-            return anchorFrame.minY - Metrics.resultsPadding - height
+        let deltaAbove = minimumLocationForFullHeight - viewport.minY
+        let deltaBelow = viewport.maxY - locationBelow - height
+        let dispayingAboveClips = deltaAbove < .zero
+        let dispayingBelowClips = deltaBelow < .zero
+
+        if dispayingAboveClips == false && dispayingBelowClips == false ||
+            dispayingAboveClips == false && deltaAbove > deltaBelow ||
+            dispayingAboveClips && dispayingBelowClips && deltaAbove > deltaBelow
+        {
+            return locationAbove
         }
 
-        return anchorFrame.maxY + Metrics.resultsPadding
+        return locationBelow
     }
+
+    /// Returns the Target Origin.X
+    ///
+    /// -   Parameters:
+    ///     - anchor: Frame around which we should position the TableView
+    ///     - viewport: Editor's visible frame
+    ///
+    /// -   Note: We'll align the Table **Text**, horizontally, with regards of the anchor frame. That's why we consider layout margins!
+    /// -   Important: Whenever we overflow horizontally, we'll simply ensure there's enough breathing room on the right hand side
+    ///
+    func calculateLeadingLocation(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
+        let maximumX = anchor.minX + Metrics.defaultTableWidth + tableView.layoutMargins.right
+        if viewport.width > maximumX {
+            return anchor.minX - tableView.layoutMargins.left
+        }
+
+        return anchor.minX + viewport.width - maximumX
+    }
+
 
     /// Returns the target Size.Height
     ///
@@ -205,7 +218,8 @@ private extension InterlinkViewController {
 private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
+    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 0, right: 20)
+    static let defaultTableWidth = CGFloat(300)
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
-    static let resultsPadding = CGFloat(12)
 }

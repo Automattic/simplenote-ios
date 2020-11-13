@@ -15,7 +15,6 @@
                 <outlet property="tableHeightConstraint" destination="pJU-Uf-0Oq" id="8xE-WM-Fgp"/>
                 <outlet property="tableLeadingConstraint" destination="YkW-MZ-sEN" id="ewM-9i-2qp"/>
                 <outlet property="tableTopConstraint" destination="1aU-WG-N13" id="UWn-PU-7Am"/>
-                <outlet property="tableTrailingConstraint" destination="rCB-bk-lF3" id="Kao-66-ddb"/>
                 <outlet property="tableView" destination="0Ce-It-s4R" id="rdg-1f-23L"/>
                 <outlet property="view" destination="URg-NP-0Et" id="xef-Np-8pC"/>
             </connections>
@@ -26,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1j-Rs-BRd" customClass="SPShadowView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="12" width="300" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -44,7 +43,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZD-kk-l5T">
-                    <rect key="frame" x="0.0" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="12" width="300" height="50"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vc0-Cc-xE6">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,10 +64,10 @@
                     <blurEffect style="regular"/>
                 </visualEffectView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-It-s4R">
-                    <rect key="frame" x="0.0" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="12" width="300" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="T9c-Ge-tZ2"/>
+                        <constraint firstAttribute="width" priority="999" constant="300" id="T9c-Ge-tZ2"/>
                         <constraint firstAttribute="height" constant="50" id="pJU-Uf-0Oq"/>
                     </constraints>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,9 +86,10 @@
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="Jda-bL-BQO"/>
                 <constraint firstItem="ZZD-kk-l5T" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="U49-aZ-qMs"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="Xos-pY-37F"/>
-                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" secondItem="URg-NP-0Et" secondAttribute="leading" id="YkW-MZ-sEN"/>
+                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" secondItem="URg-NP-0Et" secondAttribute="leading" priority="999" id="YkW-MZ-sEN"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="cl7-N9-OKH"/>
-                <constraint firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" priority="999" id="rCB-bk-lF3"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ce-It-s4R" secondAttribute="trailing" constant="16" id="hN1-X0-aCU"/>
+                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="URg-NP-0Et" secondAttribute="leading" constant="16" id="m4j-uj-bVK"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="wq5-ce-lmK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

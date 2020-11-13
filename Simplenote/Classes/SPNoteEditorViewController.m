@@ -639,6 +639,9 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     // Slowly Fade-In the NavigationBar's Blur
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+
+    // Relocate Interlink Suggestions (if they're even onscreen!)
+    [self.interlinkProcessor refreshInterlinkControllerWithNewOffset:scrollView.contentOffset isDragging:scrollView.isDragging];
 }
 
 

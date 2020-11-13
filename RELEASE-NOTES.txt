@@ -1,5 +1,6 @@
 4.28
 -----
+-   Typing `[` will now allow you to pick Interlinking Notes right from the editor #914
 -   Searching for a note is showing relevant excerpts #956
 -   Added Search Minimap to quickly navigate search hits #953
 -   Tags List now extend to the edge of the screen, in landscape mode #989
