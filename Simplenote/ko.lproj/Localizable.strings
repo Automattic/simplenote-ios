@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-19 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@자";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@자";
-
-/* Number of words in a note */
-"%@ Word" = "단어 %@개";
-
-/* Number of words in a note */
-"%@ Words" = "단어 %@개";
 
 /* Number of found search results */
 "%d Result" = "결과 %d개";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
-/* Title of Back button for Markdown preview */
-"Back" = "뒤로";
-
 /* The Simplenote blog */
 "Blog" = "블로그";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "문자";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "협업";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "참여";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "내부 링크 복사";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "별로";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "개선 방안을 말해 주시겠어요?";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "로그인할 수 없음";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "새 메모 만들기";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "생성됨";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "진단";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "키보드 비활성화";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "완료";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "휴지통 비우기";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "마크다운 형식 사용";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "비밀번호를 잊으셨나요?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "사용 데이터를 분석 도구와 공유하여 Simplenote를 개선하도록 도와주세요.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "내역";
-
-/* Action - view the version history of a note */
-"History..." = "내역...";
 
 /* No comment provided by engineer. */
 "I like it" = "좋아요";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "마지막으로 본 시간";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "yyyy MMM";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "마크다운";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "토글 마크다운";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "메뉴";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "수정됨";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "수정됨: 오래된 항목";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "휴지통으로 이동";
 
 /* Label to create a new note */
 "New note" = "새 메모";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "괜찮습니다.";
 
-/* No comment provided by engineer. */
-"Note not published" = "메모 게시 안 됨";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "메모";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "메모 열기";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "패스코드";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "대기 중";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "메모 고정";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "상단에 고정";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "핀 토클";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "고정됨";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "이메일을 통해 워드프레스닷컴 계정을 활성화하고 다시 시도하세요.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "개인 정보 설정";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "게시";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "메모 게시";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "게시 상태 전환";
-
-/* No comment provided by engineer. */
-"Published" = "게시됨";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "게시 중...";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "연결";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "휴지통 비우기";
@@ -451,7 +458,7 @@
 "Restore Note" = "메모 복구";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "검색";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "보안";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "보내기";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "테스트 충돌 보내기";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "설정";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "공유";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "분석 공유";
 
-/* No comment provided by engineer. */
-"Share note" = "메모 공유";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "이제 도구 모음에서 작업 메뉴를 통해 메모 공유에 액세스할 수 있습니다.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "휴지통";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "휴지통";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ 잠금해제";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "고정 해제";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "메모 고정 취소";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "메모 게시 취소";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "게시 취소 중...";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "사용자명";
-
-/* Represents a snapshot in time for a note */
-"Version" = "버전";
 
 /* App version number */
 "Version %@" = "버전 %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";
 
+/* Number of words in the note */
+"Words" = "단어";
+
 /* Work at Automattic */
 "Work With Us" = "채용 공고";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "비밀번호가 안전하지 않으므로 초기화해야 합니다. 비밀번호 요구 사항은 다음과 같습니다.";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "다른 사람과 협업할 수 있습니다.";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "이 메모를 다른 사람과 공유하려면 이메일 주소를 추가하세요. 그러면 두 사람 모두 메모를 수정할 수 있습니다.";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "이 메모는 다른 장치에서 삭제됐습니다.";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "이전 버전에 메모 복원";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "메모 옵션 표시";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "현재 메모 닫기";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "현재 메모 내용 공유";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "현재 메모에 태그 추가";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "현재 메모에서 태그 제거";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "휴지통으로 현재 메모 이동";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "이전 버전을 사용하려면 인터넷에 연결해야 합니다.";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "이 버전으로 전환";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "버전 패치";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "iOS용 Simplenote 시작하기\n\n메모를 추가하려면 더하기 버튼을 누르세요.\n\n메모를 탐색하려면 목록을 누르세요 메모를 보려면 제목을 누르고 메모를 수정하려면 메모 내용을 누르세요.\n\n메모 목록 상단의 검색 필드에 검색어를 입력해서 모든 메모를 검색할 수 있습니다.\n\n태그를 보려면 왼쪽 상단의 화살표 버튼을 누르거나 메모 목록을 옆으로 쓸어 넘기세요. 메모 에디터 하단에서 메모에 태그를 추가하고 사이드바를 사용해서 메모를 정리할 수 있습니다.\n\n필요한 경우 더욱 다양한 메모 옵션을 사용할 수 있습니다. 다른 사용자를 메모 공유자로 추가하거나 메모를 웹 페이지로 게시할 수 있습니다.\n\nMac, Android 장치나 웹 브라우저(http:\/\/simplenote.com)에서 Simplenote를 사용할 수 있습니다. 어디에 있든 메모 내용이 자동으로 업데이트됩니다.";

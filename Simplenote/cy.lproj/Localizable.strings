@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-06-15 15:27:25+0000 */
+/* Translation-Revision-Date: 2020-11-06 10:53:26+0000 */
 /* Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: cy_GB */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ Character";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ Characters";
-
-/* Number of words in a note */
-"%@ Word" = "%@ Gair";
-
-/* Number of words in a note */
-"%@ Words" = "%@ Gair";
 
 /* Number of found search results */
 "%d Result" = "%d Canlyniad";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "Authenticated";
 
-/* Title of Back button for Markdown preview */
-"Back" = "Nôl";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "Canslo";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "Characters";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "Cydweithredu";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribute";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "Copy Internal Link";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "Gallai Fod yn Well";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Dwedwch wrthym sut y gallwn ni ei wella?";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Couldn't Sign In";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "Creu nodyn newydd";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "Created";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disable Markdown formatting";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Cau'r bysellfwrdd";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "Gorffen";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Clirio'r sbwriel";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Enable Markdown formatting";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "Hanes";
-
-/* Action - view the version history of a note */
-"History..." = "Hanes...";
 
 /* No comment provided by engineer. */
 "I like it" = "Rydw i'n ei Hoffi";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown toggle";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "Dewislen";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "Modified";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "Move to Trash";
 
 /* Label to create a new note */
 "New note" = "Nodyn newydd";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "Dim Diolch";
 
-/* No comment provided by engineer. */
-"Note not published" = "Nodyn heb ei gyhoeddi";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "Nodiadau";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Agor nodyn";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Cod cyfrin";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "Pinio'r nodyn";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "Pinio'r i'r top";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Pinio'r togl";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Piniwyd";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "Privacy Settings";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "Cyhoeddi";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "Cyhoeddi nodyn";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Cyhoeddi togl";
-
-/* No comment provided by engineer. */
-"Published" = "Cyhoeddwyd";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "Wrthi'n cyhoeddi...";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "Reachability";
+
+/* References section header on Info Card */
+"References" = "Cyfeiriadau";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Cael gwared â'r holl nodiadau o'r sbwriel";
@@ -451,7 +458,7 @@
 "Restore Note" = "Adfer Nodyn";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "Search";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "Diogelwch";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Anfon";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "Send a Test Crash";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "Gosodiadau";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "Rhannu";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Share Analytics";
 
-/* No comment provided by engineer. */
-"Share note" = "Rhannu nodyn";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "Sbwriel";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Sbwriel";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Diffodd y cod cyfrin";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Datgloi %@";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "Unpin";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "Dadbinio'r nodyn";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "Dad-gyhoeddi'r nodyn";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "Wrthi'n dad-gyhoeddi...";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "Username";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Fersiwn";
 
 /* App version number */
 "Version %@" = "Version %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Beth ydych chi'n ei feddwl Simplenote?";
 
+/* Number of words in the note */
+"Words" = "Gair";
+
 /* Work at Automattic */
 "Work With Us" = "Work With Us";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Your password is insecure and must be reset. The password requirements are:";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Galluogi i eraill gydweithredu";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "Ychwanegwch gyfeiriad e-bost i rannu'r nodyn hwn gyda rhywun. Yna byddwch chi'n dau yn gallu gwneud newidiadau iddo.";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "Dilëwyd y nodyn hwn ar ddyfais arall.";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Adfer y nodyn i'r fersiwn blaenorol";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Dangos y dewisiadau ar gyfer y nodyn";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Cau'r nodyn cyfredol";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Rhannu cynnwys y nodyn cyfredol";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Ychwanegu tag i'r nodyn cyfredol";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tynnu'r tag o'r nodyn cyfredol";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Symud y nodyn cyfredol i'r sbwriel";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Cysylltwch â'r rhyngrwyd i gael mynediad at fersiynau blaenorol";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Newid i'r fersiwn hwn";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Wrthi'n ôl y fersiwn";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";

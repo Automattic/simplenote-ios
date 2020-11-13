@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ حرف";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ أحرف";
-
-/* Number of words in a note */
-"%@ Word" = "%@ من الكلمات";
-
-/* Number of words in a note */
-"%@ Words" = "%@ من الكلمات";
 
 /* Number of found search results */
 "%d Result" = "%d من النتائج";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "مصادَق عليه";
 
-/* Title of Back button for Markdown preview */
-"Back" = "رجوع";
-
 /* The Simplenote blog */
 "Blog" = "المدونة";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "إلغاء";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "أحرف";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "تشارك";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "مساهمة";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "نسخ الرابط الداخلي";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "قد يكون أفضل";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "هل بإمكانك إبلاغنا بكيفية تحسين ذلك؟";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "تعذر تسجيل الدخول";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "إنشاء ملاحظة جديدة";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "تاريخ الإنشاء";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "التشخيصات";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "تعطيل تنسيق الضبط";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "تجاهل لوحة المفاتيح";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "تم";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "إفراغ سلة المهملات";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "تمكين تنسيق الضبط";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "هل نسيت كلمة المرور؟";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "ساعدنا على تحسين Simplenote عن طريق مشاركة بيانات الاستخدام مع أداة التحليلات الخاصة بنا.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "سجل الأحداث";
-
-/* Action - view the version history of a note */
-"History..." = "سجل الأحداث...";
 
 /* No comment provided by engineer. */
 "I like it" = "يعجبني هذا";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "آخر عرض";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "الضبط";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "تشغيل الضبط";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "القائمة";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "معدَّل";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "تاريخ التعديل: الأقدم";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "نقل إلى سلة المهملات";
 
 /* Label to create a new note */
 "New note" = "ملاحظة جديدة";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "لا شكرًا";
 
-/* No comment provided by engineer. */
-"Note not published" = "لم يتم نشر الملاحظة";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "ملاحظات";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "فتح الملاحظة";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "رمز المرور";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "معلّق";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "تثبيت الملاحظة";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "تثبيت في المقدمة";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "تبديل التثبيت";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "تم التثبيت";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "يرجى تنشيط حساب ووردبريس.كوم الخاص بك عبر البريد الإلكتروني والمحاولة مجددًا.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "إعدادات الخصوصية";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "نشر";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "نشر الملاحظة";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "تبديل النشر";
-
-/* No comment provided by engineer. */
-"Published" = "منشور";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "جار النشر...";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "إمكانية الوصول";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "إزالة كل الملاحظات من سلة المهملات";
@@ -451,7 +458,7 @@
 "Restore Note" = "استعادة الملاحظة";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "بحث";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "الأمان";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "إرسال";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "إرسال اختبار أعطال";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "إعدادات";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "مشاركة";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "مشاركة التحليلات";
 
-/* No comment provided by engineer. */
-"Share note" = "مشاركة الملاحظة";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "يمكن الوصول إلى مشاركة الملاحظات من خلال قائمة الإجراءات من شريط الأدوات.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "سلة المهملات";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "سلة المهملات";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "إيقاف رمز المرور";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "إلغاء تأمين %@";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "إلغاء التثبيت";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "إلغاء تثبيت الملاحظة";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "إلغاء نشر الملاحظة";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "جارٍ إلغاء النشر...";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "اسم المستخدم";
-
-/* Represents a snapshot in time for a note */
-"Version" = "النسخة";
 
 /* App version number */
 "Version %@" = "الإصدار %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
 
+/* Number of words in the note */
+"Words" = "الكلمات";
+
 /* Work at Automattic */
 "Work With Us" = "العمل معنا";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "كلمة مرورك غير آمنة وتجب إعادة تعيينها. فيما يأتي متطلبات كلمة المرور:";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "تمكين الآخرين للتعاون";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "أضف عنوان بريد إلكتروني لمشاركة هذه الملاحظة مع شخص ما. بعدها يمكنكما إجراء التغييرات عليها.";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "تم حذف هذه الملاحظة من جهاز آخر.";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "استعادة ملاحظة إلى إصدار سابق";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "عرض خيارات للملاحظة";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "إغلاق الملاحظة الحالية";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "مشاركة محتوى الملاحظة الحالية";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "إضافة وسم إلى الملاحظة الحالية";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "إزالة وسم من الملاحظة الحالية";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "نقل الملاحظة الحالية إلى سلة المهملات";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "الاتصال بالإنترنت للوصول إلى الإصدارات السابقة";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "التحول إلى هذا الإصدار";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "جلب الإصدار";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "أهلاً بك في Simplenote لنظام التشغيل iOS!\n\nلإضافة ملاحظة، انقر فوق زر علامة الزائد.\n\nانقر على القائمة لتصفح ملاحظاتك. انقر فوق عنوان لعرض ملاحظة، ثم انقر فوق محتوياتها لتغييرها.\n\nيمكنك البحث في جميع ملاحظاتك بالكتابة في حقل البحث أعلى قائمة الملاحظات.\n\nانقر فوق زر السهم أعلى اليسار أو اسحب بإصبعك عبر قائمة الملاحظات لعرض الوسوم. يمكنك إضافة وسوم إلى ملاحظة بأسفل محرر الملاحظات، ثم استخدام الشريط الجانبي لمساعدتك في المحافظة على التنظيم.\n\nهناك المزيد من خيارات الملاحظات إذا كنت بحاجة إليها. حيث يمكنك إضافة أفراد آخرين كمساهمين إلى ملاحظة أو نشر ملاحظة كصفحة ويب.\n\nاستخدم Simplenote على جهاز Mac أو جهاز Android الخاص بك أو في متصفح الويب على http:\/\/simplenote.com. تبقى ملاحظاتك مُحدَّثة في كل مكان تلقائيًا.";
