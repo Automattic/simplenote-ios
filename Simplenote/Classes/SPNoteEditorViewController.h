@@ -7,6 +7,7 @@
 @class SPBlurEffectView;
 @class SPEditorTextView;
 @class SPTagView;
+@class SearchMapView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -42,6 +43,8 @@
 @property (nonatomic, strong) NSArray *keyboardNotificationTokens;
 @property (nonatomic) BOOL isKeyboardVisible;
 
+@property (nonatomic, strong) SearchMapView *searchMapView;
+
 // State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
@@ -58,6 +61,7 @@
 - (void)bounceMarkdownPreview;
 
 - (void)ensureSearchIsDismissed;
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
