@@ -303,6 +303,11 @@
 		B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE054C1AB75902002417BF /* NSProcessInfo+Util.m */; };
 		B5BE05541AB75C3B002417BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BE05521AB75C3B002417BF /* Settings.m */; };
 		B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */; };
+		B5C2EDD2255ACB4900C09B32 /* InterlinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C2EDCF255ACB4800C09B32 /* InterlinkViewController.xib */; };
+		B5C2EDD3255ACB4900C09B32 /* InterlinkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDD0255ACB4800C09B32 /* InterlinkProcessor.swift */; };
+		B5C2EDD4255ACB4900C09B32 /* InterlinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */; };
+		B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */; };
+		B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
 		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
@@ -707,6 +712,11 @@
 		B5BE05511AB75C3B002417BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Classes/Settings.h; sourceTree = "<group>"; };
 		B5BE05521AB75C3B002417BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Classes/Settings.m; sourceTree = "<group>"; };
 		B5BFAEBA21519DCA00918DC8 /* SPPrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPrivacyViewController.swift; sourceTree = "<group>"; };
+		B5C2EDCF255ACB4800C09B32 /* InterlinkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InterlinkViewController.xib; path = Classes/InterlinkViewController.xib; sourceTree = "<group>"; };
+		B5C2EDD0255ACB4800C09B32 /* InterlinkProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkProcessor.swift; path = Classes/InterlinkProcessor.swift; sourceTree = "<group>"; };
+		B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkViewController.swift; path = Classes/InterlinkViewController.swift; sourceTree = "<group>"; };
+		B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PassthruView.swift; path = Classes/PassthruView.swift; sourceTree = "<group>"; };
+		B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+Simplenote.swift"; path = "Classes/NSAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
@@ -1100,7 +1110,10 @@
 		B511AECA255A0A01005B2159 /* Interlinks */ = {
 			isa = PBXGroup;
 			children = (
+				B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */,
+				B5C2EDCF255ACB4800C09B32 /* InterlinkViewController.xib */,
 				B511AED9255A0A2A005B2159 /* InterlinkResultsController.swift */,
+				B5C2EDD0255ACB4800C09B32 /* InterlinkProcessor.swift */,
 			);
 			name = Interlinks;
 			sourceTree = "<group>";
@@ -1287,6 +1300,7 @@
 				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
 				B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */,
+				B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */,
 				B56A696822F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift */,
 				B5BA5B2925520F79002AAD43 /* NSMutableParagraphStyle+Simplenote.swift */,
 				74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */,
@@ -1328,9 +1342,9 @@
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
-				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
+				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1574,6 +1588,8 @@
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
+				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
+				B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
 				E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */,
 				E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */,
@@ -1596,8 +1612,7 @@
 				A68ABCA724ABFB5300715EBD /* SPShadowView.swift */,
 				A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */,
 				A6E1E7A724BE656D008A44BC /* SPCardView.swift */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
-				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,				A604DB21255A993E00B802CA /* SearchMapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2025,6 +2040,7 @@
 				B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */,
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */,
+				B5C2EDD2255ACB4900C09B32 /* InterlinkViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */,
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
@@ -2277,6 +2293,7 @@
 				46A3C96C17DFA81A002865AE /* SPSettingsViewController.m in Sources */,
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
+				B5C2EDD3255ACB4900C09B32 /* InterlinkProcessor.swift in Sources */,
 				B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
@@ -2399,12 +2416,14 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
+				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				46A3C9A217DFA81A002865AE /* DTPinDigitView.m in Sources */,
 				A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
 				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
+				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
@@ -2428,6 +2447,7 @@
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
 				B570D2D92360F16F006E1C85 /* UIBlurEffect+Simplenote.swift in Sources */,
+				B5C2EDD4255ACB4900C09B32 /* InterlinkViewController.swift in Sources */,
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
