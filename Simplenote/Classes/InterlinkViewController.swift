@@ -149,7 +149,7 @@ private extension InterlinkViewController {
     ///     - anchor: Frame around which we should position the TableView
     ///     - viewport: Editor's visible frame
     ///
-    /// - Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
+    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
     ///
     func calculateTopLocation(for height: CGFloat, around anchor: CGRect, in viewport: CGRect) -> CGFloat {
         let minimumLocationForFullHeight = anchor.minY - Metrics.defaultTableInsets.top - Metrics.maximumTableHeight
@@ -161,7 +161,8 @@ private extension InterlinkViewController {
         let dispayingAboveClips = deltaAbove < .zero
         let dispayingBelowClips = deltaBelow < .zero
 
-        if !dispayingAboveClips && deltaAbove > deltaBelow ||
+        if dispayingAboveClips == false && dispayingBelowClips == false ||
+            dispayingAboveClips == false && deltaAbove > deltaBelow ||
             dispayingAboveClips && dispayingBelowClips && deltaAbove > deltaBelow
         {
             return locationAbove
@@ -172,13 +173,20 @@ private extension InterlinkViewController {
 
     /// Returns the Target Origin.X
     ///
+    /// -   Parameters:
+    ///     - anchor: Frame around which we should position the TableView
+    ///     - viewport: Editor's visible frame
+    ///
+    /// -   Note: We'll align the Table **Text**, horizontally, with regards of the anchor frame. That's why we consider layout margins!
+    /// -   Important: Whenever we overflow horizontally, we'll simply ensure there's enough breathing room on the right hand side
+    ///
     func calculateLeadingLocation(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
-        if viewport.width > anchor.minX + Metrics.defaultTableWidth {
-            return anchor.minX
+        let maximumX = anchor.minX + Metrics.defaultTableWidth + tableView.layoutMargins.right
+        if viewport.width > maximumX {
+            return anchor.minX - tableView.layoutMargins.left
         }
 
-        let overflowX = viewport.width - anchor.minX - Metrics.defaultTableWidth
-        return anchor.minX + overflowX - Metrics.defaultTableInsets.right
+        return anchor.minX + viewport.width - maximumX
     }
 
 
@@ -210,7 +218,7 @@ private extension InterlinkViewController {
 private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
-    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 12)
+    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 0, right: 20)
     static let defaultTableWidth = CGFloat(300)
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)

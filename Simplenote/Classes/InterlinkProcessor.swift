@@ -156,10 +156,10 @@ private extension InterlinkProcessor {
 extension InterlinkProcessor {
 
     /// Relocates the Interlink UI (whenever it's visible) to match the new TextView's Content Offset.
-    /// - Important: Whenever the **Maximum Allowed Scroll Offset** is exceeded, we'll just dismiss the UI
+    /// - Important: Whenever the **Maximum Allowed Scroll Offset** is exceeded (and the scroll event is user initiated), we'll just dismiss the UI
     ///
-    @objc(refreshInterlinkControllerWithNewOffset:)
-    func refreshInterlinkController(contentOffset: CGPoint) {
+    @objc(refreshInterlinkControllerWithNewOffset:isDragging:)
+    func refreshInterlinkController(contentOffset: CGPoint, isDragging: Bool) {
         guard let interlinkViewController = presentedViewController else {
             return
         }
@@ -173,7 +173,9 @@ extension InterlinkProcessor {
         }
 
         interlinkViewController.relocateInterface(by: oldY - contentOffset.y)
-        dismissInterlinkLookupIfNeeded(initialY: initialY, currentY: contentOffset.y)
+        if isDragging {
+            dismissInterlinkLookupIfNeeded(initialY: initialY, currentY: contentOffset.y)
+        }
     }
 
     /// Dismisses the Interlink Lookup whenever the **Maximum Allowed Scroll Offset** is exceeded

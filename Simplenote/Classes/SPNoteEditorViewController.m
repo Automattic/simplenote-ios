@@ -639,7 +639,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
 
     // Relocate Interlink Suggestions (if they're even onscreen!)
-    [self.interlinkProcessor refreshInterlinkControllerWithNewOffset:scrollView.contentOffset];
+    [self.interlinkProcessor refreshInterlinkControllerWithNewOffset:scrollView.contentOffset isDragging:scrollView.isDragging];
 }
 
 
