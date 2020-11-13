@@ -63,7 +63,7 @@ extension InterlinkViewController {
         tableLeadingConstraint.constant = targetLeading
     }
 
-    ///
+    /// Adjusts the Interlink TableView by the specified offset
     ///
     func relocateInterface(by deltaY: CGFloat) {
         tableTopConstraint.constant += deltaY
