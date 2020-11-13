@@ -18,10 +18,6 @@ class InterlinkViewController: UIViewController {
     @IBOutlet private var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet private var tableHeightConstraint: NSLayoutConstraint!
 
-    /// KVO
-    ///
-    private var kvoOffsetToken: NSKeyValueObservation?
-
     /// Closure to be executed whenever a Note is selected. The Interlink URL will be passed along.
     ///
     var onInsertInterlink: ((String) -> Void)?
@@ -66,6 +62,11 @@ extension InterlinkViewController {
         tableHeightConstraint.constant = targetHeight
         tableLeadingConstraint.constant = targetLeading
     }
+
+    ///
+    ///
+    func relocateInterface(by deltaY: CGFloat) {
+        tableTopConstraint.constant += deltaY
     }
 }
 
@@ -141,18 +142,8 @@ extension InterlinkViewController: UITableViewDelegate {
 //
 private extension InterlinkViewController {
 
-    /// Starts tracking ContentOffset changes in our sibling TextView
+    /// Returns the Target Origin.Y
     ///
-    func startObservingContentOffset(in textView: UITextView) {
-        kvoOffsetToken = textView.observe(\UITextView.contentOffset, options: [.old, .new]) { [weak self] (_, value) in
-            guard let oldY = value.oldValue?.y, let newY = value.newValue?.y, oldY != newY else {
-                return
-            }
-
-            self?.tableTopConstraint.constant += oldY - newY
-        }
-    }
-
     /// -   Parameters:
     ///     - height: The new target height
     ///     - anchor: Frame around which we should position the TableView

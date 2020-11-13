@@ -40,6 +40,8 @@ class InterlinkProcessor: NSObject {
 
     private let viewContext: NSManagedObjectContext
     private var presentedViewController: InterlinkViewController?
+    private var lastKnownEditorOffset: CGPoint?
+    private var initialEditorOffset: CGPoint?
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
     weak var contextProvider: InterlinkProcessorPresentationContextProvider?
@@ -73,6 +75,7 @@ class InterlinkProcessor: NSObject {
         ensureInterlinkControllerIsOnScreen()
         refreshInterlinkController(notes: notes)
         relocateInterlinkController(around: keywordRange)
+        trackLastKnownScrollOffsets()
         setupInterlinkEventListeners(replacementRange: markdownRange)
     }
 
@@ -125,7 +128,11 @@ private extension InterlinkProcessor {
         let editingFrame = parentTextView.editingRectInWindow()
 
         presentedViewController?.relocateInterface(around: keywordFrame, in: editingFrame)
+    }
+
+    func trackLastKnownScrollOffsets() {
         lastKnownEditorOffset = parentTextView.contentOffset
+        initialEditorOffset = parentTextView.contentOffset
     }
 
     func refreshInterlinkController(notes: [Note]) {
@@ -140,6 +147,43 @@ private extension InterlinkProcessor {
 
             self.delegate?.interlinkProcessor(self, insert: text, in: replacementRange)
         }
+    }
+}
+
+
+// MARK: - Scrolling
+//
+extension InterlinkProcessor {
+
+    /// Relocates the Interlink UI (whenever it's visible) to match the new TextView's Content Offset.
+    /// - Important: Whenever the **Maximum Allowed Scroll Offset** is exceeded, we'll just dismiss the UI
+    ///
+    @objc(refreshInterlinkControllerWithNewOffset:)
+    func refreshInterlinkController(contentOffset: CGPoint) {
+        guard let interlinkViewController = presentedViewController else {
+            return
+        }
+
+        defer {
+            lastKnownEditorOffset = contentOffset
+        }
+
+        guard let oldY = lastKnownEditorOffset?.y, let initialY = initialEditorOffset?.y else {
+            return
+        }
+
+        interlinkViewController.relocateInterface(by: oldY - contentOffset.y)
+        dismissInterlinkLookupIfNeeded(initialY: initialY, currentY: contentOffset.y)
+    }
+
+    /// Dismisses the Interlink Lookup whenever the **Maximum Allowed Scroll Offset** is exceeded
+    ///
+    private func dismissInterlinkLookupIfNeeded(initialY: CGFloat, currentY: CGFloat) {
+        guard abs(currentY - initialY) > Settings.maximumAllowedScrollOffset else {
+            return
+        }
+
+        dismissInterlinkLookup()
     }
 }
 
@@ -195,4 +239,11 @@ private extension InterlinkProcessor {
 
         return parent
     }
+}
+
+
+// MARK: - Settings
+//
+private enum Settings {
+    static let maximumAllowedScrollOffset = CGFloat(20)
 }
