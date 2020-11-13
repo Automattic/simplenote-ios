@@ -213,7 +213,9 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                 withKeywords:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+
+            [self showSearchMapWith:self.searchResultRanges];
+
             UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
             [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];
             
@@ -228,9 +230,8 @@ CGFloat const SPSelectedAreaPadding = 20;
                                  
                                  self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
-            
-            self.highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+
+            [self highlightSearchResultAtIndex:0 animated:YES];
         });
     });
 }
@@ -576,20 +577,20 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
-- (void)highlightNextSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
-}
-
-- (void)highlightPrevSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MAX(0, self.highlightedSearchResultIndex - 1);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
-}
-
-- (void)highlightSearchResultAtIndex:(NSInteger)index
+- (void)highlightNextSearchResult:(id)sender
 {
+    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
+}
+
+- (void)highlightPrevSearchResult:(id)sender
+{
+    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
+}
+
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
+{
+    self.highlightedSearchResultIndex = index;
+
     NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
@@ -599,13 +600,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 
         NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
         [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
-            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
+            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
         }];
     }
 }
 
 - (void)endSearching:(id)sender {
-    
+    [self hideSearchMap];
+
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     

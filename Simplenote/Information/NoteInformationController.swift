@@ -174,5 +174,5 @@ private struct Localization {
     static let created = NSLocalizedString("Created", comment: "Note Creation Date")
     static let words = NSLocalizedString("Words", comment: "Number of words in the note")
     static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
-    static let references = NSLocalizedString("References", comment: "References section header on Info Card")
+    static let references = NSLocalizedString("Referenced In", comment: "References section header on Info Card")
 }

@@ -682,6 +682,73 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Search Map
+//
+extension SPNoteEditorViewController {
+
+    /// Show search map keyword ranges
+    ///
+    // TODO: Use `Range` when `SPNoteEditorViewController` is fully swift
+    @objc
+    func showSearchMap(with searchRangeValues: [NSValue]) {
+        createSearchMapViewIfNeeded()
+        searchMapView?.update(with: searchBarPositions(with: searchRangeValues))
+    }
+
+    /// Returns position relative to the total text container height.
+    /// Position value is from 0 to 1
+    ///
+    private func searchBarPositions(with searchRangeValues: [NSValue]) -> [CGFloat] {
+        let textContainerHeight = textContainerHeightForSearchMap()
+        guard textContainerHeight > CGFloat.leastNormalMagnitude else {
+            return []
+        }
+
+        return searchRangeValues.map {
+            let boundingRect = noteEditorTextView.boundingRect(for: $0.rangeValue)
+            return max(boundingRect.midY / textContainerHeight, CGFloat.leastNormalMagnitude)
+        }
+    }
+
+    private func textContainerHeightForSearchMap() -> CGFloat {
+        var textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
+        textContainerHeight = textContainerHeight + noteEditorTextView.textContainerInset.top + noteEditorTextView.textContainerInset.bottom
+
+        let textContainerMinHeight = noteEditorTextView.editingRect().size.height
+        return max(textContainerHeight, textContainerMinHeight)
+    }
+
+    private func createSearchMapViewIfNeeded() {
+        guard searchMapView == nil else {
+            return
+        }
+
+        let searchMapView = SearchMapView()
+        
+        view.addSubview(searchMapView)
+        NSLayoutConstraint.activate([
+            searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top),
+            searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom),
+            searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
+            searchMapView.widthAnchor.constraint(equalToConstant: Metrics.searchMapWidth)
+        ])
+
+        searchMapView.onSelectionChange = { [weak self] index in
+            self?.highlightSearchResult(at: index, animated: false)
+        }
+
+        self.searchMapView = searchMapView
+    }
+
+    /// Hide search map
+    ///
+    @objc
+    func hideSearchMap() {
+        searchMapView?.removeFromSuperview()
+        searchMapView = nil
+    }
+}
+
 
 // MARK: - Metrics
 //
@@ -692,6 +759,9 @@ private enum Metrics {
     static var lineSpacingMultipler: CGFloat {
         UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
     }
+
+    static let searchMapWidth: CGFloat = 15.0
+
 }
 
 
