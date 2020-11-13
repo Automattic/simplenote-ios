@@ -692,29 +692,30 @@ extension SPNoteEditorViewController {
     @objc
     func showSearchMap(with searchRangeValues: [NSValue]) {
         createSearchMapViewIfNeeded()
-        guard let searchMapView = searchMapView else {
-            return
+        searchMapView?.update(with: searchBarPositions(with: searchRangeValues))
+    }
+
+    /// Returns position relative to the total text container height.
+    /// Position value is from 0 to 1
+    ///
+    private func searchBarPositions(with searchRangeValues: [NSValue]) -> [CGFloat] {
+        let textContainerHeight = textContainerHeightForSearchMap()
+        guard textContainerHeight > CGFloat.leastNormalMagnitude else {
+            return []
         }
 
-        // trigger layout to get correct height. The height is used as a minimum editor height in search terms positions calculation
-        searchMapView.superview?.layoutSubviews()
-
-        let editorRect = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer)
-        let editorHeight = max(editorRect.size.height,
-                               searchMapView.frame.size.height)
-
-        guard editorHeight > CGFloat.leastNormalMagnitude else {
-            searchMapView.update(with: [])
-            return
+        return searchRangeValues.map {
+            let boundingRect = noteEditorTextView.boundingRect(for: $0.rangeValue)
+            return max(boundingRect.midY / textContainerHeight, CGFloat.leastNormalMagnitude)
         }
+    }
 
-        // Value from 0 to 1
-        let searchBarPositions: [CGFloat] = searchRangeValues.map {
-            let boundingRect = noteEditorTextView.boundingRectForCharacterRange($0.rangeValue)
-            return max(boundingRect.midY / editorHeight, CGFloat.leastNormalMagnitude)
-        }
+    private func textContainerHeightForSearchMap() -> CGFloat {
+        var textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
+        textContainerHeight = textContainerHeight + noteEditorTextView.textContainerInset.top + noteEditorTextView.textContainerInset.bottom
 
-        searchMapView.update(with: searchBarPositions)
+        let textContainerMinHeight = noteEditorTextView.editingRect().size.height
+        return max(textContainerHeight, textContainerMinHeight)
     }
 
     private func createSearchMapViewIfNeeded() {
@@ -726,8 +727,8 @@ extension SPNoteEditorViewController {
         
         view.addSubview(searchMapView)
         NSLayoutConstraint.activate([
-            searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top + noteEditorTextView.textContainerInset.top),
-            searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom - noteEditorTextView.textContainerInset.bottom),
+            searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top),
+            searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom),
             searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
             searchMapView.widthAnchor.constraint(equalToConstant: Metrics.searchMapWidth)
         ])
