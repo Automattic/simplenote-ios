@@ -1,6 +1,16 @@
-4.27
+4.28
 -----
  
+4.27
+-----
+-   New Note History interface #762
+-   New Note Options interface #763
+-   New Note Information interface #836
+-   Updated Navigation Bar's behavior #918
+-   Adjusted Notes List Metrics #929
+-   Fixed a bug that caused the Search Bar to look extra big #930
+-   Fixed a bug affecting Tags Autocomplete #964
+
 4.26
 -----
 -   Fixed a bug that affected scrolling in iOS 14 #916

@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ 文字";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ 文字";
-
-/* Number of words in a note */
-"%@ Word" = "%@語";
-
-/* Number of words in a note */
-"%@ Words" = "%@単語";
 
 /* Number of found search results */
 "%d Result" = "%d件の検索結果";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "認証済み";
 
-/* Title of Back button for Markdown preview */
-"Back" = "戻る";
-
 /* The Simplenote blog */
 "Blog" = "ブログ";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "キャンセル";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "文字";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "共同編集";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "参加";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "内部リンクをコピー";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "不満がある";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "改善方法についてご意見いただけますか ?";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "ログインできません";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "新規ノートを作成";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "作成日";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診断";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "キーボードを閉じる";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "完了";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "ゴミ箱を空にする";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Markdown フォーマットを有効化";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "パスワードを忘れましたか ?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "弊社の分析ツールに使用データを提供し、Simplenote の品質向上にご協力ください。";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "履歴";
-
-/* Action - view the version history of a note */
-"History..." = "履歴…";
 
 /* No comment provided by engineer. */
 "I like it" = "満足している";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "yyyy年M月";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown 切り替え";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "メニュー";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "更新日";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "更新日 :最も古い";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "ゴミ箱へ移動";
 
 /* Label to create a new note */
 "New note" = "新規ノート";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "いいえ";
 
-/* No comment provided by engineer. */
-"Note not published" = "非公開ノート";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "メモ";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "ノートを開く";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "保留中";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "ノートを上部固定";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "上部に固定";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "固定切り替え";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "上部固定中";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "メールから WordPress.com アカウントを有効にして、もう一度試してください。";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "プライバシー設定";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "公開";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "ノートを公開";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "公開の切り替え";
-
-/* No comment provided by engineer. */
-"Published" = "公開済み";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "公開中";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "到達の可能性";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "ゴミ箱からノートを完全消去";
@@ -451,7 +458,7 @@
 "Restore Note" = "ノートを復元";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "検索";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "セキュリティ";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "送信";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "テストクラッシュを送信";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "設定";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "共有";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "分析を共有";
 
-/* No comment provided by engineer. */
-"Share note" = "ノートを共有";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "ノートの共有はツールバーのアクションメニューからアクセスできます。";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "ゴミ箱";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "ゴミ箱に移動";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "パスコードを無効化";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ のブロックを解除";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "ピンを外す";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "固定表示を解除";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "ノートを非公開";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "非公開設定中…";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "ユーザー名";
-
-/* Represents a snapshot in time for a note */
-"Version" = "バージョン";
 
 /* App version number */
 "Version %@" = "バージョン %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
 
+/* Number of words in the note */
+"Words" = "単語";
+
 /* Work at Automattic */
 "Work With Us" = "求人情報";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "パスワードが安全でないため、リセットする必要があります。パスワードの要件は次のとおりです。";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "ノートの共同編集を有効化";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "ノートを共同編集したい人のメールアドレスを入力してください。その人も編集できるようになります。";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "このノートは他のデバイスから削除されました。";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "以前のバージョンにノートを復元";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "ノートのオプションを表示";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "現在のノートを閉じる";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "現在のノートのコンテンツを共有";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "現在のノートにタグを追加";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "現在のノートからタグを削除";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "現在のノートをゴミ箱へ移動";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "以前のバージョンにアクセスするにはインターネットに接続してください。";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "このバージョンにスイッチ";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "バージョンを取得中";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Simplenote for iOS へようこそ !\n\nノートを新規作成するには、「＋」ボタンをタップしてください。\n\n一覧を使ってノートをブラウズできます。ノートの内容を表示するにはタイトルをタップしてください。次の画面で本文をタップすると編集できます。\n\nノートを検索するには、ノート一覧の上に検索キーワードを入力してください。\n\n左上の矢印ボタンをタップするか、ノート一覧画面で左から右にスワイプするとタグを表示できます。タグを追加するには、エディタの一番下をタップして入力してください。\n\nノートには他にもオプションがあります。共同編集者を追加したり、ノートを Web ページとして公開したりできます。\n\nhttp:\/\/simplenote.com で Mac・Android アプリやブラウザからのアクセス方法をご覧いただけます。ノートはすべてのデバイスで自動的に更新されます。";

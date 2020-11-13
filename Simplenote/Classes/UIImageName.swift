@@ -15,20 +15,24 @@ enum UIImageName: Int, CaseIterable {
     case chevronLeft
     case chevronRight
     case collaborate
+    case copy
     case cross
     case crossOutlined
     case crossBig
     case crossBigOutlined
     case editor
     case ellipsis
+    case ellipsisOutlined
     case hideKeyboard
     case history
     case info
     case link
     case menu
     case newNote
+    case note
     case pin
     case pinSmall
+    case published
     case restore
     case settings
     case simplenoteLogo
@@ -76,6 +80,8 @@ extension UIImageName {
             return "icon_chevron_right"
         case .collaborate:
             return "icon_collaborate"
+        case .copy:
+            return "icon_copy"
         case .cross:
             return "icon_cross"
         case .crossOutlined:
@@ -88,6 +94,8 @@ extension UIImageName {
             return "icon_editor"
         case .ellipsis:
             return "icon_ellipsis"
+        case .ellipsisOutlined:
+            return "icon_ellipsis_outline"
         case .hideKeyboard:
             return "icon_hide_keyboard"
         case .history:
@@ -100,10 +108,14 @@ extension UIImageName {
             return "icon_menu"
         case .newNote:
             return "icon_new_note"
+        case .note:
+            return "icon_note"
         case .pin:
             return "icon_pin"
         case .pinSmall:
             return "icon_pin_small"
+        case .published:
+            return "icon_published"
         case .restore:
             return "icon_restore"
         case .settings:

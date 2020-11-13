@@ -27,6 +27,7 @@
 #import "SPNoteListViewController.h"
 #import "SPTagsListViewController.h"
 #import "SPNoteEditorViewController.h"
+#import "SPAddCollaboratorsViewController.h"
 #import "SPTracker.h"
 #import "WPAuthHandler.h"
 
@@ -37,6 +38,5 @@
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Search.h"
 #import "NSString+Condensing.h"
-#import "NSTextStorage+Highlight.h"
 #import "Simperium+Simplenote.h"
 #import "SPNavigationController.h"

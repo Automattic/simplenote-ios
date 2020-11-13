@@ -36,10 +36,20 @@ extension SPAppDelegate {
     ///         For such reason, we're opting for simply pushing another VC.
     ///
     private func replaceNoteEditor(_ editorViewController: SPNoteEditorViewController) {
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
     }
 }
 
+// MARK: - Initialization
+//
+extension SPAppDelegate {
+
+    @objc
+    func configureVersionsController() {
+        versionsController = VersionsController(bucket: simperium.notesBucket)
+    }
+}
 
 // MARK: - URL Handlers
 //

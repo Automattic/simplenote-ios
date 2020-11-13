@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-16 11:54:04+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ знак";
-
-/* Number of Characters in a note */
-"%@ Characters" = "Знаков: %@";
-
-/* Number of words in a note */
-"%@ Word" = "%@ слово";
-
-/* Number of words in a note */
-"%@ Words" = "%@ слов";
 
 /* Number of found search results */
 "%d Result" = "%d Найдено";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "Прошедший проверку";
 
-/* Title of Back button for Markdown preview */
-"Back" = "Назад";
-
 /* The Simplenote blog */
 "Blog" = "Блог";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "Отмена";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "Символы";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "Партнер";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Принять участие";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "Скопировать внутреннюю ссылку";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "Нужно доработать";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Посоветуйте, как нам стать лучше.";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Не удалось войти";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "Создать новую заметку";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "Создано";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Диагностика";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Выключить форматирование Markdown";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Скрыть клавиатуру";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "Готово";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Очистить корзину";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Включить форматирование Markdown";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "Неудачные попытки";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "Забыли пароль?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Помогите нам улучшить Simplenote — предоставьте данные об использовании нашему средству аналитики.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "История";
-
-/* Action - view the version history of a note */
-"History..." = "История…";
 
 /* No comment provided by engineer. */
 "I like it" = "Мне нравится";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "Последнее прочитанное";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "МММ гггг";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Переключатель Markdown";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "Меню";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "Изменено";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Дата изменения: сначала старые";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "Удалить";
 
 /* Label to create a new note */
 "New note" = "Новая заметка";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "Нет, спасибо";
 
-/* No comment provided by engineer. */
-"Note not published" = "Заметка не опубликована";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "Заметки";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Открыть заметку";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Пароль";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "На утверждении";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "Закрепить заметку";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "В топ";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Переключатель закрепления";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Закреплено";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Активируйте учетную запись WordPress.com через эл. почту или повторите попытку.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "Настройки конфиденциальности";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "Публикация";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "Публикация заметки";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Переключатель публикации";
-
-/* No comment provided by engineer. */
-"Published" = "Опубликовать";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "Публикация…";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "Удобный доступ";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Удалить все заметки из корзины";
@@ -451,7 +458,7 @@
 "Restore Note" = "Восстановить заметку";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "Поиск";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "Безопасность";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Отправить";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "Отправить данные о сбое";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "Настройки";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "Поделиться";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Поделиться аналитическими данными";
 
-/* No comment provided by engineer. */
-"Share note" = "Поделиться заметкой";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Функция отправки заметок теперь находится в меню действий на панели инструментов.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "Корзина";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Удалить";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Отключить пароль";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Разблокировать %@";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "Открепить";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "Открепить заметку";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "Не публиковать заметку";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "Отмена публикации…";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "Имя пользователя";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Версия";
 
 /* App version number */
 "Version %@" = "Версия %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Каково ваше мнение о Simplenote?";
 
+/* Number of words in the note */
+"Words" = "Слова";
+
 /* Work at Automattic */
 "Work With Us" = "Сотрудничество";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Ваш пароль ненадежен, его необходимо сменить. Требования к паролю:";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Разрешить другим сотрудничать";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "Эта заметка была удалена на другом устройстве";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Восстановить предыдущую версию заметки";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Показать опции заметки";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Закрыть текущую заметку";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Поделится содержанием данной заметки";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Добавить тег к текущей заметке";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Отправить текущую заметку в корзину";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Подключитесь к интернету доя доступа к предыдущим вариантам";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Оставить этот вариант";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Извлечение версии";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
