@@ -162,8 +162,8 @@ extension UITextView {
         let paddingBottom = safeAreaInsets.bottom + contentInset.bottom
         let editingHeight = frame.height - paddingTop - paddingBottom
 
-        let output = CGRect(x: .zero, y: .zero, width: frame.width, height: editingHeight)
-        return convert(output, to: nil)
+        let output = CGRect(x: frame.minX, y: paddingTop, width: frame.width, height: editingHeight)
+        return superview?.convert(output, to: nil) ?? output
     }
 
     /// Returns the Window Location for the text at the specified range
