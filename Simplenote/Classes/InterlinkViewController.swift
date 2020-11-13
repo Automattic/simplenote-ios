@@ -51,8 +51,8 @@ extension InterlinkViewController {
     /// - Important: Both frames must be expressed in Window Coordinates. Capisce?
     ///
     func relocateInterface(around anchor: CGRect, in viewport: CGRect) {
-        let anchorFrame = view.convertFromWindowCoordinates(anchor)
-        let editingRect = view.convertFromWindowCoordinates(viewport)
+        let anchorFrame = view.convert(anchor, from: nil)
+        let editingRect = view.convert(viewport, from: nil)
 
         let targetHeight = calculateHeight()
         let targetTop = calculateTopLocation(for: targetHeight, around: anchorFrame, in: editingRect)

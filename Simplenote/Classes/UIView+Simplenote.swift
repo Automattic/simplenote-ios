@@ -36,13 +36,6 @@ extension UIView {
         return output
     }
 
-    /// Converts a Frame, expressed in Window Coordinates, into the receiver's coordinate system
-    ///
-    func convertFromWindowCoordinates(_ frame: CGRect) -> CGRect {
-        window?.convert(frame, to: self) ?? frame
-    }
-
-
     /// Returns the enclosing TextView, if any
     ///
     @objc

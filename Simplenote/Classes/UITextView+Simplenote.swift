@@ -169,7 +169,7 @@ extension UITextView {
     ///
     func locationInWindowForText(in range: Range<String.Index>) -> CGRect {
         let rectInEditor = boundingRect(for: range)
-        return window?.convert(rectInEditor, from: self) ?? rectInEditor
+        return convert(rectInEditor, to: nil)
     }
 
     /// Returns the Selected Text's bounds
