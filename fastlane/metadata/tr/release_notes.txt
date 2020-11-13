@@ -1,0 +1,7 @@
+- Yeni Not Geçmişi arayüzü
+- Yeni Not Seçenekleri arayüzü
+- Yeni Not Bilgisi arayüzü
+- Gezinme Çubuğu'nun davranışı güncellendi
+- Düzeltilmiş Notlar Listesi Metrikleri
+- Arama Çubuğunun çok büyük görünmesine neden olan bir hata düzeltildi
+- Etiketlerin Otomatik Tamamlanmasını etkileyen bir hata düzeltildi

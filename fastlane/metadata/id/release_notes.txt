@@ -1,0 +1,7 @@
+- Antarmuka Riwayat Catatan baru
+- Antarmuka Opsi Catatan baru
+- Antarmuka Informasi Catatan baru
+- Perilaku Bilah Navigasi diperbarui
+- Metrik Daftar Catatan disesuaikan
+- Memperbaiki bug yang menyebabkan Bilah Pencarian terlihat sangat besar
+- Memperbaiki bug yang memengaruhi Pengisi Tag Otomatis
