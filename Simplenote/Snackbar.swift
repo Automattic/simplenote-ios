@@ -23,7 +23,6 @@ class Snackbar {
     }
     
     func show() {
-        print("Displaying snackbar")
         SnackbarPresenter.shared.present(self)
     }
 }
@@ -32,9 +31,6 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
     
     static let shared = SnackbarPresenter()
     
-    private let DurationShort = 1.5
-    private let DurationLong = 2.75
-
     private var snackbar: Snackbar?
     private var viewController: SnackbarViewController?
     
@@ -57,45 +53,25 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
         snackbar = sender
         wasActionTapped = false
         
-//        let snackView = prepareView()
         let snackView = prepareViewFromXIB()
         presentView(snackView)
         
         // Puts the view onscreen and returns.
     }
 
-    private func prepareView() -> UIView {
-        
-        // Prep a test view for display.
-        // Limit to 80% of the host window.
-        
-        let window = UIApplication.shared.keyWindow!
-        let width: CGFloat = window.frame.size.width * 0.8
-        let height: CGFloat = 60 // Should come from text size?
-        
-        let rect = CGRect(x: 0, y: 0, width: width, height: height)
-        let view = UIView(frame: rect)
-        view.backgroundColor = .lightGray
-        view.layer.cornerRadius = rect.height / 2
-        
-        return view
-    }
-
     private func prepareViewFromXIB() -> UIView {
         
-        let vc = SnackbarViewController()
-        
-        let view = vc.view!
-        let frame = view.frame
-        let newFrame = CGRect(x: 0, y: 0, width: frame.width - 30, height: frame.height)
-        vc.view.frame = newFrame
-        
         let snack = snackbar!
-        vc.configureMessageLabel(message: snack.message)
+        let vc = SnackbarViewController()
+        var view = vc.view!
         
         if let title = snack.actionTitle {
-            vc.configureActionButton(title: title)
+            vc.configureActiveSnackbar(message: snack.message, buttonTitle: title)
             vc.delegate = self
+            view = vc.activeSnackView
+        } else {
+            vc.configureSimpleSnackbar(message: snack.message)
+            view = vc.simpleSnackView
         }
         
         viewController = vc
@@ -109,44 +85,37 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
         wasActionTapped = true
         
         // Remove the view!
-        let view = (viewController?.view)!
+        let view = (viewController?.activeView())!
         self.removeViewNow(view)
     }
     
     private func presentView(_ view: UIView) {
         
-        // Determine where the view goes in the host window.
+//        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         let window = UIApplication.shared.keyWindow!
-        
         window.addSubview(view)
+
+        let conX = view.centerXAnchor.constraint(equalTo: window.centerXAnchor)
+        let conBottom = view.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: view.frame.height)
         
-        // View center should be window width / 2 and window height - offset - (view height / 2)
-        
-        let viewHeight = view.frame.height
-        let offset: CGFloat = 50 // Magic number alert!
-        view.center.x = window.frame.size.width / 2
-        view.center.y = window.frame.size.height - offset - (viewHeight / 2.0) // Half the view height + the gap from view to screen edge.
-        print(view.center)
-        print(window.frame.height)
-        
-        // Now push the view down offscreen.
-        view.center.y = view.center.y + offset + viewHeight
-        print(view.center.y)
-        
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration, delay: UIKitConstants.animationDelayZero, options: [], animations: {
-            view.center.y = view.center.y - offset - viewHeight
+        NSLayoutConstraint.activate([conX, conBottom])
+        window.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.25, animations: {
+            conBottom.constant = (-view.frame.size.height/2) - window.safeAreaInsets.bottom
+            window.layoutIfNeeded()
         }) { _ in
             print("Animation complete.")
             self.removeViewAfterTimeout(view)
         }
     }
-
+    
     private func removeViewAfterTimeout(_ view: UIView) {
         print("Starting countdown to fade...")
         
-        let duration = (snackbar?.actionTitle != nil) ? DurationLong : DurationShort
-        print(duration)
+        let duration = (snackbar?.actionTitle != nil) ? Constants.DurationLong : Constants.DurationShort
         
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             if !self.wasActionTapped {
@@ -173,4 +142,11 @@ class SnackbarPresenter: SnackbarViewControllerDelegate {
             self.viewController = nil
         }
     }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let DurationShort = 1.5
+    static let DurationLong = 2.75
 }

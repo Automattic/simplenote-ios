@@ -4,15 +4,19 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SnackbarViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="actionButton" destination="ONv-6m-bm2" id="MBQ-cv-BdN"/>
-                <outlet property="messageLabel" destination="80l-s1-xzf" id="j6V-9h-E90"/>
-                <outlet property="view" destination="iN0-l3-epB" id="fBD-vH-rjc"/>
+                <outlet property="actionButton" destination="p4z-Wa-YOi" id="zA2-Mx-hQD"/>
+                <outlet property="activeMessageLabel" destination="u1z-wp-wCn" id="vsD-Ju-ney"/>
+                <outlet property="activeSnackView" destination="3MS-fc-fpW" id="pRj-lz-GHJ"/>
+                <outlet property="simpleMessageLabel" destination="Kqd-h0-whe" id="efd-hf-Sq8"/>
+                <outlet property="simpleSnackView" destination="63y-ri-B8D" id="mUk-Xu-NOH"/>
+                <outlet property="view" destination="2Ss-HJ-A54" id="p8B-3A-l6o"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -53,10 +57,115 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="108.69565217391305" y="143.97321428571428"/>
         </view>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Ss-HJ-A54">
+            <rect key="frame" x="0.0" y="0.0" width="344" height="278"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MS-fc-fpW">
+                    <rect key="frame" x="57" y="64" width="230" height="52.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4z-Wa-YOi">
+                            <rect key="frame" x="153" y="11" width="49" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="3LF-vp-HIU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="actionButtonTapped:" destination="-1" eventType="touchUpInside" id="TbZ-La-JjO"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1z-wp-wCn">
+                            <rect key="frame" x="28" y="16" width="117" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    <constraints>
+                        <constraint firstItem="u1z-wp-wCn" firstAttribute="top" secondItem="3MS-fc-fpW" secondAttribute="top" constant="16" id="ClR-cf-6ms"/>
+                        <constraint firstItem="u1z-wp-wCn" firstAttribute="leading" secondItem="3MS-fc-fpW" secondAttribute="leading" constant="28" id="Gnm-pf-702"/>
+                        <constraint firstAttribute="bottom" secondItem="u1z-wp-wCn" secondAttribute="bottom" constant="16" id="I4u-T6-pGg"/>
+                        <constraint firstItem="p4z-Wa-YOi" firstAttribute="leading" secondItem="u1z-wp-wCn" secondAttribute="trailing" constant="8" symbolic="YES" id="Jji-TS-xfo"/>
+                        <constraint firstAttribute="trailing" secondItem="p4z-Wa-YOi" secondAttribute="trailing" constant="28" id="ZMW-9W-Z8n"/>
+                        <constraint firstItem="p4z-Wa-YOi" firstAttribute="firstBaseline" secondItem="u1z-wp-wCn" secondAttribute="firstBaseline" id="gOE-j6-rN8"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63y-ri-B8D">
+                    <rect key="frame" x="85.5" y="178" width="173" height="52.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-h0-whe">
+                            <rect key="frame" x="28" y="16" width="117" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    <constraints>
+                        <constraint firstItem="Kqd-h0-whe" firstAttribute="top" secondItem="63y-ri-B8D" secondAttribute="top" constant="16" id="F2Y-1k-Tgg"/>
+                        <constraint firstItem="Kqd-h0-whe" firstAttribute="leading" secondItem="63y-ri-B8D" secondAttribute="leading" constant="28" id="KYd-Gb-I6j"/>
+                        <constraint firstAttribute="trailing" secondItem="Kqd-h0-whe" secondAttribute="trailing" constant="28" id="dds-ru-GzA"/>
+                        <constraint firstAttribute="bottom" secondItem="Kqd-h0-whe" secondAttribute="bottom" constant="16" id="iGH-7J-Owg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Q7b-j8-hdR"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="3MS-fc-fpW" firstAttribute="centerX" secondItem="2Ss-HJ-A54" secondAttribute="centerX" id="SQ7-92-qPT"/>
+                <constraint firstItem="3MS-fc-fpW" firstAttribute="top" secondItem="Q7b-j8-hdR" secondAttribute="top" constant="20" id="VPi-B5-Twd"/>
+                <constraint firstItem="Q7b-j8-hdR" firstAttribute="bottom" secondItem="63y-ri-B8D" secondAttribute="bottom" constant="47.5" id="b19-0r-78u"/>
+                <constraint firstItem="63y-ri-B8D" firstAttribute="centerX" secondItem="2Ss-HJ-A54" secondAttribute="centerX" id="myR-PK-GYh"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="130.43478260869566" y="356.91964285714283"/>
+        </view>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vrz-c9-iYc">
+            <rect key="frame" x="0.0" y="0.0" width="469" height="266"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGu-v6-ufY">
+                    <rect key="frame" x="148" y="107" width="173" height="52.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgU-vv-kEX">
+                            <rect key="frame" x="28" y="16" width="117" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    <constraints>
+                        <constraint firstItem="xgU-vv-kEX" firstAttribute="leading" secondItem="gGu-v6-ufY" secondAttribute="leading" constant="28" id="Bsj-Na-g4a"/>
+                        <constraint firstAttribute="trailing" secondItem="xgU-vv-kEX" secondAttribute="trailing" constant="28" id="Dhz-u4-T02"/>
+                        <constraint firstAttribute="bottom" secondItem="xgU-vv-kEX" secondAttribute="bottom" constant="16" id="Eui-wa-Pc0"/>
+                        <constraint firstItem="xgU-vv-kEX" firstAttribute="top" secondItem="gGu-v6-ufY" secondAttribute="top" constant="16" id="nZf-Wx-k1O"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ghB-eU-KvL"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="gGu-v6-ufY" firstAttribute="centerX" secondItem="vrz-c9-iYc" secondAttribute="centerX" id="OSd-hJ-eRx"/>
+                <constraint firstItem="gGu-v6-ufY" firstAttribute="centerY" secondItem="vrz-c9-iYc" secondAttribute="centerY" id="Rdd-bu-Jyr"/>
+                <constraint firstItem="gGu-v6-ufY" firstAttribute="centerX" secondItem="vrz-c9-iYc" secondAttribute="centerX" id="hNu-fU-uQd"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="109" y="633"/>
+        </view>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
