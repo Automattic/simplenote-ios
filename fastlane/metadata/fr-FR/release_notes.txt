@@ -1,1 +1,0 @@
-- Ajout d’un lien d’aide dans Réglages et À propos

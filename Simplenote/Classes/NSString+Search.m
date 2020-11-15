@@ -12,9 +12,8 @@
 
 @implementation NSString (Search)
 
-- (NSArray *)constructRangesForWords {
-    
-    
+- (NSArray<NSValue *> *)wordRangesFilteredWithBlock:(BOOL (^)(NSString *))filterBlock
+{
 	CFStringTokenizerRef tokenRef = CFStringTokenizerCreate(NULL,
 															(CFStringRef)self,
 															CFRangeMake(0, self.length),
@@ -22,9 +21,8 @@
 															NULL);
 	
 	CFStringTokenizerTokenType tokenType;
-    
-	// Helpers: Alloc just once (way faster performance!)
-	NSMutableArray *wordBoxes = [NSMutableArray arrayWithCapacity:self.length/3];
+
+	NSMutableArray *wordBoxes = [NSMutableArray array];
 	const unichar *src = (unichar*)[self cStringUsingEncoding:NSUTF16StringEncoding];
 	NSString* word;
     CFRange wordRange;
@@ -40,34 +38,30 @@
 		if (word == nil) {
 			continue;
         }
-		
-        [wordBoxes addObject:@{
-			@"word"	: word,
-			@"range": [NSValue valueWithRange:tempRange]
-		}];
+
+        if (filterBlock(word)) {
+            [wordBoxes addObject:[NSValue valueWithRange:tempRange]];
+        }
 	}
     
 	CFRelease(tokenRef);
     
     return wordBoxes;
-    
 }
 
 - (NSArray<NSValue *> *)rangesForTerms:(NSString *)terms
 {
-	NSMutableArray *rangesFound = [NSMutableArray arrayWithCapacity:5];
-    
 	NSArray *termsArray = [terms componentsSeparatedByString:@" "];
-	NSArray* wordRanges = [self constructRangesForWords];
-	
-	for (NSDictionary *wordDict in wordRanges) {
-		for (NSString *term in termsArray) {
-			if ([wordDict[@"word"] rangeOfString:term
-                                         options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch].location != NSNotFound)
-				[rangesFound addObject: wordDict[@"range"]];
-		}
-	}
-	return rangesFound;
+
+    return [self wordRangesFilteredWithBlock:^BOOL(NSString *word) {
+        for (NSString *term in termsArray) {
+            if ([word rangeOfString:term
+                            options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch].location != NSNotFound) {
+                return YES;
+            }
+        }
+        return NO;
+    }];
 }
 
 

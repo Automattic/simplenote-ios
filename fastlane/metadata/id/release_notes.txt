@@ -1,1 +1,0 @@
-- Menambahkan link untuk bantuan pada Pengaturan dan Tentang

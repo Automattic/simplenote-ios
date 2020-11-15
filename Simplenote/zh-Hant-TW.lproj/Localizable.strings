@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-16 11:54:04+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ 個字元";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ 個字元";
-
-/* Number of words in a note */
-"%@ Word" = "%@ 字";
-
-/* Number of words in a note */
-"%@ Words" = "%@ 字";
 
 /* Number of found search results */
 "%d Result" = "%d 個搜尋結果";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "已驗證";
 
-/* Title of Back button for Markdown preview */
-"Back" = "上一步";
-
 /* The Simplenote blog */
 "Blog" = "網誌";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "字元";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "協作";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "參與";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "複製內部連結";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "可以再好一點";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "你可以告訴我們哪裡該改進嗎？";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "無法登入";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "建立新筆記";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "建立時間";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診斷";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "停用 Markdown 格式";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "收起鍵盤";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "完成";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "清空垃圾桶";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "啟用 Markdown 格式";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "忘記密碼了嗎？";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "請透過我們的分析工具分享使用情形資料，協助我們改善 Simplenote。";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "歷史紀錄";
-
-/* Action - view the version history of a note */
-"History..." = "歷史紀錄…";
 
 /* No comment provided by engineer. */
 "I like it" = "我喜歡";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "上次上線";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown 切換開關";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "選單";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "修改時間";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改時間：最舊";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "移至垃圾桶";
 
 /* Label to create a new note */
 "New note" = "新增筆記";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "不用了，謝謝";
 
-/* No comment provided by engineer. */
-"Note not published" = "筆記未發表";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "筆記";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "開啟筆記";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密碼";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "待確認";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "釘選筆記";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "釘選至最上方";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "釘選開關";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "已釘選";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "請透過電子郵件啟用你的 WordPress.com 帳號，並再試一次。";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "隱私權設定";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "發表";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "發表筆記";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "發表開關";
-
-/* No comment provided by engineer. */
-"Published" = "已發表";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "正在發表…";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "可達性";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "移除垃圾桶的所有筆記";
@@ -451,7 +458,7 @@
 "Restore Note" = "還原筆記";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "搜尋";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "安全性";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "傳送";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "傳送故障測試";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "設定";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "分享";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "分享分析資料";
 
-/* No comment provided by engineer. */
-"Share note" = "分享筆記";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "你現可從工具列的動作選單存取分享筆記。";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "垃圾桶";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "移至垃圾桶";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "關閉密碼";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "解除鎖定 %@";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "取消釘選";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "取消釘選筆記";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "取消發表筆記";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "正在取消發表...";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "使用者名稱";
-
-/* Represents a snapshot in time for a note */
-"Version" = "版本";
 
 /* App version number */
 "Version %@" = "版本 %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "你覺得 Simplenote 如何？";
 
+/* Number of words in the note */
+"Words" = "字";
+
 /* Work at Automattic */
 "Work With Us" = "與我們合作";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "你的密碼不安全，必須重設。密碼設定要求如下：";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "將其他人加入協作";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "新增電子郵件地址，將此筆記與他人分享。這樣雙方都能變更筆記內容。";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "此筆記已在另一部裝置上刪除。";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "將筆記還原至先前版本";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "顯示筆記選項";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "關閉目前筆記";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "分享目前筆記的內容";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "將標籤新增至目前筆記";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "移除目前筆記的標籤";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "將目前筆記移至垃圾桶";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "連線至網際網路以存取先前版本";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "切換至此版本";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "正在擷取此版本";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "歡迎使用 Simplenote iOS 版！\n\n若要新增筆記，請點選加號按鈕。\n\n撥動清單即可瀏覽你的筆記。點選標題可瀏覽筆記，然後點選內容則可進行變更。\n\n你可以在筆記清單頂端的搜尋欄位內輸入關鍵字搜尋你全部的筆記。\n\n點選左上方的箭號按鈕或撥動筆記清單可檢視標籤。在筆記編輯器底部可將標籤新增至筆記，然後使用側選單可協助你妥善整理筆記。\n\n若有需要，還有更多筆記選項可供使用。你可以將其他人新增為筆記的協作者，或是將筆記發表至網頁。\n\n前往 http:\/\/simplenote.com 將 Simplenote 下載至你的 Mac、Android 裝置或在網頁瀏覽器中使用。你的筆記將會隨時隨地保持更新。";

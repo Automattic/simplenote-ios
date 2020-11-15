@@ -1,1 +1,0 @@
-- Lagt till en länk för att hjälpa till i ”Inställningar” och ”Om”

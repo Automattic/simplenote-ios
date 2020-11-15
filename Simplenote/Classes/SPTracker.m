@@ -50,19 +50,10 @@
     [self trackAutomatticEventWithName:@"editor_note_restored" properties:nil];
 }
 
-+ (void)trackEditorNotePublished
++ (void)trackEditorNotePublishEnabled:(BOOL)isOn
 {
-    [self trackAutomatticEventWithName:@"editor_note_published" properties:nil];
-}
-
-+ (void)trackEditorNoteUnpublished
-{
-    [self trackAutomatticEventWithName:@"editor_note_unpublished" properties:nil];
-}
-
-+ (void)trackEditorPublishedUrlPressed
-{
-    [self trackAutomatticEventWithName:@"editor_note_published_url_pressed" properties:nil];
+    NSString *name = isOn ? @"editor_note_published" : @"editor_note_unpublished";
+    [self trackAutomatticEventWithName:name properties:nil];
 }
 
 + (void)trackEditorNoteContentShared
@@ -95,24 +86,16 @@
     [self trackAutomatticEventWithName:@"editor_tag_removed" properties:nil];
 }
 
-+ (void)trackEditorNotePinned
++ (void)trackEditorNotePinEnabled:(BOOL)isOn
 {
-    [self trackAutomatticEventWithName:@"editor_note_pinned" properties:nil];
+    NSString *name = isOn ? @"editor_note_pinned" : @"editor_note_unpinned";
+    [self trackAutomatticEventWithName:name properties:nil];
 }
 
-+ (void)trackEditorNoteUnpinned
++ (void)trackEditorNoteMarkdownEnabled:(BOOL)isOn
 {
-    [self trackAutomatticEventWithName:@"editor_note_unpinned" properties:nil];
-}
-
-+ (void)trackEditorNoteMarkdownEnabled
-{
-    [self trackAutomatticEventWithName:@"editor_note_markdown_enabled" properties:nil];
-}
-
-+ (void)trackEditorNoteMarkdownDisabled
-{
-    [self trackAutomatticEventWithName:@"editor_note_markdown_disabled" properties:nil];
+    NSString *name = isOn ? @"editor_note_markdown_enabled" : @"editor_note_markdown_disabled";
+    [self trackAutomatticEventWithName:name properties:nil];
 }
 
 + (void)trackEditorActivitiesAccessed
@@ -135,7 +118,15 @@
     [self trackAutomatticEventWithName:@"editor_versions_accessed" properties:nil];
 }
 
++ (void)trackEditorCopiedInternalLink
+{
+    [self trackAutomatticEventWithName:@"editor_copied_internal_link" properties:nil];
+}
 
++ (void)trackEditorCopiedPublicLink
+{
+    [self trackAutomatticEventWithName:@"editor_copied_public_link" properties:nil];
+}
 
 #pragma mark - Note List
 

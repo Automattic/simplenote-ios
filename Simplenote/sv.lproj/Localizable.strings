@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-09 10:02:12+0000 */
+/* Translation-Revision-Date: 2020-11-02 12:29:29+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ tecken";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ tecken";
-
-/* Number of words in a note */
-"%@ Word" = "%@ ord";
-
-/* Number of words in a note */
-"%@ Words" = "%@ ord";
 
 /* Number of found search results */
 "%d Result" = "%d resultat";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
 
-/* Title of Back button for Markdown preview */
-"Back" = "Tillbaka";
-
 /* The Simplenote blog */
 "Blog" = "Blogg";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "Avbryt";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "bokstäver";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "Samarbeta";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bidra";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "Kopiera intern länk";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Kopiera länk";
+
 /* No comment provided by engineer. */
 "Could be better" = "Kunde vara bättre";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Kan du berätta för oss vad vi kan förbättra?";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Kunde inte hämta historik";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Det gick inte att logga in";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "Skapa ny anteckning";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "Skapad";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostik";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Inaktivera Markdown-formatering";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Avfärda historik";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Avfärda information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Göm tangentbord";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "Klar";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Töm papperskorgen";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Aktivera Markdown-formatering";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Hämtar version";
+
 /* Password Reset Action */
 "Forgotten password?" = "Glömt lösenordet?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Hjälp oss att förbättra Simplenote genom att dela användningsdata med vårt analysverktyg.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "Historik";
-
-/* Action - view the version history of a note */
-"History..." = "Historik...";
 
 /* No comment provided by engineer. */
 "I like it" = "Jag gillar den";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "Sågs senast";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown-växling";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "Meny";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "Modifierad";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modifierad: Äldsta";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "Flytta till papperskorgen";
 
 /* Label to create a new note */
 "New note" = "Ny anteckning";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "Nej, tack";
 
-/* No comment provided by engineer. */
-"Note not published" = "Anteckning inte publicerad";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "Anteckningar";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Öppna anteckning";
+
+/* Note Options Title */
+"Options" = "Alternativ";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Lösenkod";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Väntande";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "Nåla fast anteckning";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "Nåla fast högst upp";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Slå på\/av fastnålning";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Fastnålad";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Aktivera ditt WordPress.com-konto via e-post och försök igen.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "Inställningar för integritet";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "Publicera";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "Publicera anteckning";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Publicera på\/av";
-
-/* No comment provided by engineer. */
-"Published" = "Publicerad";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "Publicerar...";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "Nåbarhet";
+
+/* References section header on Info Card */
+"References" = "Referenser";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Ta bort alla anteckningar från papperskorgen";
@@ -451,7 +458,7 @@
 "Restore Note" = "Återställ anteckning";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "Sök";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "Säkerhet";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Skicka";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Välj en version";
 
 /* For debugging use */
 "Send a Test Crash" = "Skicka en testkrasch";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "Inställningar";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "Dela";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Dela analys";
 
-/* No comment provided by engineer. */
-"Share note" = "Dela anteckning";
+/* Shares a note */
+"Share..." = "Dela …";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Det går nu att dela anteckningar via åtgärdsmenyn i verktygsfältet.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "Papperskorgen";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Kasta bort";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Stäng av lösenkod";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "Lås upp %@";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "Lossa";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "Ta bort nål";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "Sluta publicera anteckning";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "Slutar publicera...";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "Användarnamn";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Version";
 
 /* App version number */
 "Version %@" = "Version %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
 
+/* Number of words in the note */
+"Words" = "ord";
+
 /* Work at Automattic */
 "Work With Us" = "Jobba med oss";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Ditt lösenord är osäkert och måste återställas. Lösenordskraven är:";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Gör så att andra kan hjälpa till och redigera";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "Lägg till en e-postadress för att dela denna anteckning med någon, då kan ni båda göra ändringar.";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "Denna anteckning har blivit borttagen på en annan enhet.";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Återställ anteckning till tidigare version";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Visa alternativ för anteckning";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Stäng nuvarande anteckning";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Dela innehåll i nuvarande anteckning";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Lägg till en etikett för anteckningen";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Ta bort etikett från den nuvarande anteckningen";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Kasta anteckningen i papperskorgen";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Anslut till ett nätverk för att se tidigare versioner";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Välj denna version";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Hämtar version";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Välkommen till Simplenote för iOS!\n\nFör att skapa en anteckning, tryck på plus-knappen.\n\nScrolla i listan för att se dina anteckningar. Tryck på en rubrik för att visa en anteckning, sedan på dess innehåll för att ändra det.\n\nDu kan söka bland dina anteckningar genom att skriva i sökfältet högst upp i anteckningslistan.\n\nTryck på pilen eller dra från vänster för att visa sidopanelen och dina etiketter. Du kan lägga till etiketter för en anteckning längst ner i redigeraren och sedan använda sidopanelen för att filtrera anteckningar.\n\nDet finns fler inställningar för dina anteckningar om du behöver dem. Du kan bjuda in andra att redigera en anteckning, publicera en anteckning som en webbsida, med mera.\n\nAnvänd Simplenote på din Mac, din Android-platta eller -telefon och direkt i din webbläsare på http:\/\/simplenote.com. Dina anteckningar synkroniseras automatiskt mellan alla dina enheter.";
