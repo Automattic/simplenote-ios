@@ -1,19 +1,7 @@
-/* Translation-Revision-Date: 2020-10-16 15:54:04+0000 */
+/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
-
-/* Number of Characters in a note */
-"%@ Character" = "%@ Zeichen";
-
-/* Number of Characters in a note */
-"%@ Characters" = "%@ Zeichen";
-
-/* Number of words in a note */
-"%@ Word" = "%@ Wort";
-
-/* Number of words in a note */
-"%@ Words" = "%@ Wörter";
 
 /* Number of found search results */
 "%d Result" = "%d Ergebnis";
@@ -106,9 +94,6 @@
 /* User Authenticated */
 "Authenticated" = "Authentifiziert";
 
-/* Title of Back button for Markdown preview */
-"Back" = "Zurück";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -123,7 +108,10 @@
    Verb, cancel an alert dialog */
 "Cancel" = "Abbrechen";
 
-/* Verb - work with others on a note */
+/* Number of characters in the note */
+"Characters" = "Zeichen";
+
+/* Opens the Collaborate UI */
 "Collaborate" = "Zusammenarbeiten";
 
 /* No comment provided by engineer. */
@@ -138,6 +126,13 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Beitragen";
 
+/* Copies the Note's Interlink */
+"Copy Internal Link" = "Internen Link kopieren";
+
+/* Copies Link to a Note
+   Copies the Note's Public Link */
+"Copy Link" = "Copy Link";
+
 /* No comment provided by engineer. */
 "Could be better" = "Könnte besser sein";
 
@@ -150,6 +145,9 @@
 /* No comment provided by engineer. */
 "Could you tell us how we could improve?" = "Könntest du uns Verbesserungsvorschläge machen?";
 
+/* Error message shown when trying to view history of a note without an internet connection */
+"Couldn't Retrieve History" = "Couldn't Retrieve History";
+
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Anmeldung nicht möglich";
 
@@ -159,7 +157,8 @@
 /* No comment provided by engineer. */
 "Create a new note" = "Neue Notiz erstellen";
 
-/* Sort Mode: Creation Date */
+/* Note Creation Date
+   Sort Mode: Creation Date */
 "Created" = "Erstellt";
 
 /* Sort Mode: Creation Date, descending */
@@ -187,13 +186,21 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnose";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown-Formatierung deaktivieren";
 
-/* No comment provided by engineer. */
+/* Accessibility label describing a button used to dismiss a history view of the note */
+"Dismiss History" = "Dismiss History";
+
+/* Accessibility label describing a button used to dismiss an information view of the note */
+"Dismiss Information" = "Dismiss Information";
+
+/* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Tastatur ausblenden";
 
-/* Done toolbar button
+/* Dismisses the Note Information UI
+   Dismisses the Note Options UI
+   Done toolbar button
    Verb: Close current view */
 "Done" = "Fertig";
 
@@ -212,7 +219,7 @@
 /* Remove all notes from the trash */
 "Empty trash" = "Papierkorb leeren";
 
-/* No comment provided by engineer. */
+/* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Markdown-Formatierung aktivieren";
 
 /* Number of objects enqueued for processing */
@@ -239,6 +246,9 @@
 /* Show a message when user enter 3 wrong passcodes */
 "FailedAttempts" = "FailedAttempts";
 
+/* Accessibility hint used when previous versions of a note are being fetched */
+"Fetching Version" = "Fetching Version";
+
 /* Password Reset Action */
 "Forgotten password?" = "Passwort vergessen?";
 
@@ -254,14 +264,18 @@
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Hilf uns, Simplenote zu verbessern, indem du Nutzungsdaten für unser Analysetool bereitstellst.";
 
-/* Noun - the version history of a note */
+/* Opens the Note's History */
 "History" = "Verlauf";
-
-/* Action - view the version history of a note */
-"History..." = "Verlauf…";
 
 /* No comment provided by engineer. */
 "I like it" = "Gefällt mir";
+
+/* Card title showing information about the note (metrics, references)
+   Note Information Button (metrics + references) */
+"Information" = "Information";
+
+/* Insert Checklist Button */
+"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
 
 /* Last Message timestamp */
 "LastSeen" = "Zuletzt angesehen";
@@ -305,16 +319,14 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Special formatting that can be turned on for notes */
+/* Toggles the Markdown State */
 "Markdown" = "Markdown";
 
-/* Switch which marks a note as using Markdown formatting or not */
-"Markdown toggle" = "Markdown-Schalter";
-
-/* Terminoligy used for sidebar UI element where tags are displayed */
+/* Note Options Button */
 "Menu" = "Menü";
 
-/* Sort Mode: Modified Date */
+/* Note Modification Date
+   Sort Mode: Modified Date */
 "Modified" = "Geändert";
 
 /* Sort Mode: Modified Date, descending */
@@ -322,6 +334,10 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Geändert: Älteste";
+
+/* Delete Action
+   Deletes a note */
+"Move to Trash" = "In Papierkorb verschieben";
 
 /* Label to create a new note */
 "New note" = "Neue Notiz";
@@ -341,11 +357,7 @@
 /* No comment provided by engineer. */
 "No thanks" = "Nein danke";
 
-/* No comment provided by engineer. */
-"Note not published" = "Notiz nicht veröffentlicht";
-
-/* Notes Header (Search Mode)
-   Plural form of notes */
+/* Notes Header (Search Mode) */
 "Notes" = "Notizen";
 
 /* Dismisses an AlertController */
@@ -365,6 +377,9 @@
 
 /* Select a note to view in the note editor */
 "Open note" = "Notiz öffnen";
+
+/* Note Options Title */
+"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Passcode";
@@ -387,17 +402,12 @@
 /* Number of changes pending to be sent */
 "Pendings" = "Ausstehend";
 
-/* Action to mark a note as pinned */
+/* Pin State Accessibility Hint */
 "Pin note" = "Notiz anheften";
 
-/* Denotes when note is pinned to the top of the note list */
+/* Pins a note
+   Toggles the Pinned State */
 "Pin to Top" = "An Anfang heften";
-
-/* Switch which marks a note as pinned or unpinned */
-"Pin toggle" = "Umschalter Anheften";
-
-/* Pinned notes are stuck to the note of the note list */
-"Pinned" = "Angeheftet";
 
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Aktiviere dein WordPress.com-Konto per E-Mail und versuche es erneut.";
@@ -411,19 +421,13 @@
 /* Privacy Settings */
 "Privacy Settings" = "Datenschutzeinstellungen";
 
-/* Verb - Publishing a note creates  URL and for any note in a user's account, making it viewable to others */
+/* Publishes a Note to the Web */
 "Publish" = "Veröffentlichen";
 
-/* Action which published a note to a web page */
+/* Publish Accessibility Hint */
 "Publish note" = "Notiz veröffentlichen";
 
-/* Switch which marks a note as published or unpublished */
-"Publish toggle" = "Umschalter Veröffentlichung";
-
-/* No comment provided by engineer. */
-"Published" = "Veröffentlicht";
-
-/* Message shown when a note is in the processes of being published */
+/* Indicates the Note is being published */
 "Publishing..." = "Veröffentlichung läuft…";
 
 /* Prompt when setting up a passcode */
@@ -431,6 +435,9 @@
 
 /* Reachs Internet */
 "Reachability" = "Erreichbarkeit";
+
+/* References section header on Info Card */
+"References" = "References";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Alle Notizen aus Papierkorb entfernen";
@@ -451,7 +458,7 @@
 "Restore Note" = "Notiz wiederherstellen";
 
 /* Search Placeholder
-   Using Search instead of Back if user is searching */
+   Search Title */
 "Search" = "Suche";
 
 /* Tags Header (Search Mode) */
@@ -463,8 +470,8 @@
 /* No comment provided by engineer. */
 "Security" = "Sicherheit";
 
-/* Verb - send the content of the note by email, message, etc */
-"Send" = "Senden";
+/* Accessibility label describing a slider used to reset the current note to a previous version */
+"Select a Version" = "Select a Version";
 
 /* For debugging use */
 "Send a Test Crash" = "Testabsturz senden";
@@ -478,14 +485,15 @@
 /* Title of options screen */
 "Settings" = "Einstellungen";
 
-/* Share Action */
+/* Opens the Share Sheet
+   Share Action */
 "Share" = "Teilen";
 
 /* Option to disable Analytics. */
 "Share Analytics" = "Analysen teilen";
 
-/* No comment provided by engineer. */
-"Share note" = "Notiz teilen";
+/* Shares a note */
+"Share..." = "Share...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Du kannst Notizen jetzt über das Aktionsmenü in der Toolbar teilen.";
@@ -562,22 +570,22 @@
 /* Title: Trash Tag is selected */
 "Trash-noun" = "Papierkorb";
 
-/* Trash (verb) - the action of deleting a note */
-"Trash-verb" = "Papierkorb";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Passcode deaktivieren";
 
 /* Message shown when gaining entry to app via a passcode */
 "Unlock %@" = "%@ entsperren";
 
-/* Action to mark a note as unpinned */
+/* Unpins a note */
+"Unpin" = "Lösen";
+
+/* Pin State Accessibility Hint */
 "Unpin note" = "Notiz lösen";
 
-/* Action which unpublishes a note */
+/* Publish Accessibility Hint */
 "Unpublish note" = "Veröffentlichung von Notiz rückgängig machen";
 
-/* Message shown when a note is in the processes of being unpublished */
+/* Indicates the Note is being unpublished */
 "Unpublishing..." = "Veröffentlichung wird aufgehoben…";
 
 /* Alert title displayed in settings when an account has unsynced notes */
@@ -591,9 +599,6 @@
 
 /* A user's Simplenote account */
 "Username" = "Benutzername";
-
-/* Represents a snapshot in time for a note */
-"Version" = "Version";
 
 /* App version number */
 "Version %@" = "Version %@";
@@ -610,6 +615,9 @@
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Was hältst du von Simplenote?";
 
+/* Number of words in the note */
+"Words" = "Wörter";
+
 /* Work at Automattic */
 "Work With Us" = "Mit uns arbeiten";
 
@@ -625,44 +633,17 @@
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Dein Passwort ist nicht sicher und muss zurückgesetzt werden. Das Passwort muss folgende Anforderungen erfüllen:";
 
-/* Accessibility hint on button which shows the current collaborators on a note */
-"collaborate-accessibility-hint" = "Mitarbeit durch andere Personen ermöglichen";
-
 /* No comment provided by engineer. */
 "collaborators-description" = "Füge eine E-Mail-Adresse hinzu, um diese Notiz mit jemandem zu teilen. Dann könnt ihr beide Änderungen daran vornehmen.";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "Diese Notiz wurde auf einem anderen Gerät gelöscht.";
 
-/* Accessibility hint on button which shows the history of a note */
-"history-accessibility-hint" = "Vorherige Version der Notiz wiederherstellen";
-
-/* VoiceOver accessibiliity hint on button which shows or hides the menu */
-"menu-accessibility-hint" = "Optionen für Notiz anzeigen";
-
-/* VoiceOver accessibiliity hint on the button that closes the notes editor and navigates back to the note list */
-"notes-accessibility-hint" = "Aktuelle Notiz schließen";
-
-/* Accessibility hint on share button */
-"share-accessibility-hint" = "Inhalt der aktuellen Notiz teilen";
-
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Tag zur aktuellen Notiz hinzufügen";
 
 /* No comment provided by engineer. */
 "tag-delete-accessibility-hint" = "Tag aus aktueller Notiz entfernen";
-
-/* Accessibility hint on button which moves a note to the trash */
-"trash-accessibility-hint" = "Aktuelle Notiz in den Papierkorb verschieben";
-
-/* Error alert message shown when trying to view history of a note without an internet connection */
-"version-alert-message" = "Stelle eine Verbindung mit dem Internet her, um auf frühere Versionen zuzugreifen";
-
-/* Accessiblity hint describing how to reset the current note to a previous version */
-"version-cell-accessibility-hint" = "Zu dieser Version wechseln";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"version-cell-fetching-accessibility-hint" = "Version wird abgerufen";
 
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Willkommen bei Simplenote für iOS!\n\nTippe auf das Pluszeichen, um eine Notiz hinzuzufügen.\n\nBlättere die Liste durch, um deine Notizen zu durchsuchen. Tippe auf einen Titel, um eine Notiz anzuzeigen, und tippe dann auf den Inhalt, um sie zu bearbeiten.\n\nDu kannst alle Notizen durchsuchen, indem du im Suchfeld am oberen Rand der Notizliste Text eingibst.\n\nTippe auf die Pfeilschaltfläche oben links oder wische über die Notizliste, um deine Tags anzuzeigen. Du kannst einer Notiz am unteren Rand des Notiz-Editors Tags hinzufügen und dann die Seitenleiste verwenden, um den Überblick zu behalten.\n\nEs gibt noch mehr Notizoptionen, falls du noch welche benötigst. Du kannst andere Personen als Mitwirkende zu einer Notiz hinzufügen oder eine Notiz als Webseite veröffentlichen.\n\nVerwende Simplenote auf deinem Mac, Android-Gerät oder in deinem Webbrowser unter http:\/\/simplenote.com. Deine Notizen werden überall automatisch aktualisiert.";

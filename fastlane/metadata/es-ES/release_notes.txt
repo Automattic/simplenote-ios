@@ -1,1 +1,7 @@
-- ﻿﻿Se ha añadido un enlace a la ayuda de Ajustes y Acerca de.
+- Nueva interfaz del historial de notas
+- Nueva interfaz de opciones de notas
+- Nueva interfaz de información de notas
+- Se ha actualizado el comportamiento de la barra de navegación
+- Se han ajustado las métricas de la lista de notas
+- Se ha corregido un error que hacía que la barra de búsqueda fuera demasiado grande
+- Se ha corregido un error que afectaba a la función Autocompletar etiquetas

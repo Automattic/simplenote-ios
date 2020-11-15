@@ -1,1 +1,7 @@
-- Link toegevoegd voor hulp bij Instellingen en Over
+- Nieuwe interface notitiegeschiedenis
+- Nieuwe interface notitieopties
+- Nieuwe interface notitie-informatie
+- Bijgewerkt gedrag navigatiebalk
+- Statistieken notitielijst aangepast
+- Een bug verholpen waardoor de zoekbalk extra groot werd weergegeven
+- Een bug verholpen met betrekking tot automatisch aanvullen van tags

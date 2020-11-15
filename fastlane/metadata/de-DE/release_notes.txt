@@ -1,1 +1,7 @@
-- Hilfreichen Link in „Einstellungen“ und „Info“ hinzugefügt
+- Neue Benutzeroberfläche für den Notizverlauf
+- Neue Benutzeroberfläche für die Notizoptionen
+- Neue Benutzeroberfläche für die Informationen zu Notizen
+- Aktualisiertes Verhalten der Navigationsleiste
+- Angepasste Metriken der Notizliste
+- Fehler behoben, der dazu führte, dass die Suchleiste zu groß aussah
+- Fehler behoben, der sich auf die automatische Vervollständigung von Tags auswirkte

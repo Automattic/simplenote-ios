@@ -1,1 +1,7 @@
-- Adicionado um link para obter ajuda em Configurações e Sobre
+- Nova interface: Histórico de anotações
+- Nova interface: Opções de anotação
+- Nova interface: Informações de anotação
+- Comportamento da barra de navegação atualizado
+- Métricas da lista de anotações ajustadas
+- Correção de um bug que ampliava a barra de busca
+- Correção de um bug que afetava o preenchimento automático de tags
