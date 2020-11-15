@@ -1,3 +1,6 @@
+4.29
+-----
+ 
 4.28
 -----
 -   Typing `[` will now allow you to pick Interlinking Notes right from the editor #914
