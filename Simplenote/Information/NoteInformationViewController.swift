@@ -59,6 +59,7 @@ final class NoteInformationViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         configureHeaderLayoutMargins()
+        refreshPreferredSize()
     }
 }
 
