@@ -330,5 +330,5 @@ private struct Localization {
 }
 
 private struct Consts {
-    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 8.0, right: 0.0)
+    static let headerExtraLayoutMargins = UIEdgeInsets(top: 13.0, left: 0.0, bottom: 13.0, right: 0.0)
 }
