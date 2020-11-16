@@ -14,6 +14,8 @@ final class NoteInformationViewController: UIViewController {
     private var sections: [NoteInformationController.Section] = []
     private let controller: NoteInformationController
 
+    private var onDismissCallback: (() -> Void)?
+
     /// Designated initializer
     ///
     /// - Parameters:
@@ -166,6 +168,7 @@ private extension NoteInformationViewController {
 private extension NoteInformationViewController {
     @IBAction func handleTapOnDismissButton() {
         dismiss(animated: true, completion: nil)
+        onDismissCallback?()
     }
 }
 
@@ -271,12 +274,21 @@ extension NoteInformationViewController {
 
     /// Configure view controller to be presented as a card
     ///
-    func configureToPresentAsCard() {
+    func configureToPresentAsCard(onDismissCallback: (() -> Void)? = nil) {
+        self.onDismissCallback = onDismissCallback
+
         let transitioningManager = SPCardTransitioningManager()
         self.transitioningManager = transitioningManager
+        transitioningManager.presentationDelegate = self
 
         transitioningDelegate = transitioningManager
         modalPresentationStyle = .custom
+    }
+}
+
+extension NoteInformationViewController: SPCardPresentationControllerDelegate {
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
+        onDismissCallback?()
     }
 }
 
