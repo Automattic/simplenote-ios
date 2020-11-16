@@ -8,6 +8,7 @@ final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var dismissButton: UIButton!
     @IBOutlet private weak var headerStackView: UIStackView!
+    private lazy var blurEffectView = SPBlurEffectView()
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
@@ -61,6 +62,11 @@ final class NoteInformationViewController: UIViewController {
         configureHeaderLayoutMargins()
         refreshPreferredSize()
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateAdditionalSafeAreaInsets()
+    }
 }
 
 // MARK: - Controller
@@ -95,20 +101,28 @@ private extension NoteInformationViewController {
         configureTableView()
         screenTitleLabel.text = Localization.information
 
-        removeHeaderViewIfNeeded()
+        configureHeaderView()
 
         refreshStyle()
     }
 
     func configureTableView() {
+        // Otherwise additional safe area insets don't work :/
+        tableView.contentInsetAdjustmentBehavior = .always
+
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier)
         tableView.register(TableHeaderViewCell.self, forCellReuseIdentifier: TableHeaderViewCell.reuseIdentifier)
         tableView.tableFooterView = UIView()
     }
 
-    func configureAccessibility() {
-        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+    func configureHeaderView() {
+        guard navigationController == nil else {
+            headerStackView.isHidden = true
+            return
+        }
+
+        configureBlurEffectView()
     }
 
     func configureHeaderLayoutMargins() {
@@ -122,16 +136,32 @@ private extension NoteInformationViewController {
         headerStackView.layoutMargins = layoutMargins
     }
 
-    func removeHeaderViewIfNeeded() {
-        guard navigationController != nil else {
-            return
-        }
+    func configureBlurEffectView() {
+        view.insertSubview(blurEffectView, belowSubview: headerStackView)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: headerStackView.bottomAnchor)
+        ])
+    }
 
-        headerStackView.isHidden = true
+    func configureAccessibility() {
+        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
     }
 
     func refreshPreferredSize() {
-        preferredContentSize = tableView.intrinsicContentSize
+        preferredContentSize = tableView.contentSize
+    }
+
+    func updateAdditionalSafeAreaInsets() {
+        guard !headerStackView.isHidden else {
+            additionalSafeAreaInsets = .zero
+            return
+        }
+
+        additionalSafeAreaInsets = UIEdgeInsets(top: headerStackView.frame.maxY, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -300,5 +330,5 @@ private struct Localization {
 }
 
 private struct Consts {
-    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 0.0, right: 0.0)
+    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 8.0, right: 0.0)
 }
