@@ -264,6 +264,8 @@ extension SPNoteEditorViewController {
         ensureSearchIsDismissed()
         save()
 
+        dimLinksInEditor()
+
         let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
         viewController.configureToPresentAsCard(presentationDelegate: self)
         historyViewController = viewController
@@ -288,6 +290,7 @@ extension SPNoteEditorViewController {
     }
 
     private func cleanUpAfterHistoryDismissal() {
+        restoreDefaultLinksDimmingInEditor()
         historyViewController = nil
     }
 }
@@ -346,7 +349,11 @@ extension SPNoteEditorViewController {
             self.informationViewController = navigationController
             present(navigationController, animated: true, completion: nil)
         } else {
-            informationViewController.configureToPresentAsCard()
+            dimLinksInEditor()
+
+            informationViewController.configureToPresentAsCard(onDismissCallback: { [weak self] in
+                self?.restoreDefaultLinksDimmingInEditor()
+            })
             self.informationViewController = informationViewController
             present(informationViewController, animated: true, completion: nil)
         }
@@ -361,6 +368,7 @@ extension SPNoteEditorViewController {
             return
         }
 
+        restoreDefaultLinksDimmingInEditor()
         informationViewController.dismiss(animated: false) { [weak self] in
             guard let self = self,
                   let note = self.currentNote,
@@ -490,6 +498,14 @@ private extension SPNoteEditorViewController {
 
     func restoreOriginalNoteContent() {
         updateEditor(with: currentNote.content)
+    }
+
+    func dimLinksInEditor() {
+        noteEditorTextView.tintAdjustmentMode = .dimmed
+    }
+
+    func restoreDefaultLinksDimmingInEditor() {
+        noteEditorTextView.tintAdjustmentMode = .automatic
     }
 }
 
