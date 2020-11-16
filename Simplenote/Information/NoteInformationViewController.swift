@@ -113,7 +113,11 @@ private extension NoteInformationViewController {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier)
         tableView.register(TableHeaderViewCell.self, forCellReuseIdentifier: TableHeaderViewCell.reuseIdentifier)
-        tableView.tableFooterView = UIView()
+
+        // remove separator for last cell if we're in popover
+        if popoverPresentationController != nil {
+            tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        }
     }
 
     func configureHeaderView() {
