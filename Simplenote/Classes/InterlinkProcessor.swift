@@ -41,6 +41,7 @@ class InterlinkProcessor: NSObject {
     private let viewContext: NSManagedObjectContext
     private var presentedViewController: InterlinkViewController?
     private var lastKnownEditorOffset: CGPoint?
+    private var lastKnownKeywordRange: Range<String.Index>?
     private var initialEditorOffset: CGPoint?
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
@@ -55,10 +56,10 @@ class InterlinkProcessor: NSObject {
 
     /// Displays the Interlink Lookup UI at the cursor's location when all of the following are **true**:
     ///
-    ///     1. The Editor isn't Undoing nor Highlighting
-    ///     2. The Editor is the first responder
-    ///     3. There is an interlink `[keyword` at the current location
-    ///     4. There are Notes with `keyword` in their title
+    ///     1.  The Editor isn't Undoing nor Highlighting
+    ///     2.  The Editor is the first responder
+    ///     3.  There is an interlink `[keyword` at the current location
+    ///     4.  There are Notes with `keyword` in their title
     ///
     ///  Otherwise we'll simply dismiss the Autocomplete View, if any.
     ///
@@ -75,15 +76,18 @@ class InterlinkProcessor: NSObject {
         ensureInterlinkControllerIsOnScreen()
         refreshInterlinkController(notes: notes)
         relocateInterlinkController(around: keywordRange)
-        trackLastKnownScrollOffsets()
         setupInterlinkEventListeners(replacementRange: markdownRange)
+
+        initialEditorOffset = parentTextView.contentOffset
+        lastKnownEditorOffset = parentTextView.contentOffset
+        lastKnownKeywordRange = keywordRange
     }
 
     /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
     ///
     ///     1.  There is Highlighted Text in the editor (or)
     ///     2.  There is no Interlink `[keyword` at the selected location
-    ///     3.  The editor is being dragged
+    ///     3.  There is a `[keyword` at the current location, but it's not the same we've seen before (!!
     ///     4.  The editor is no longer the first responder
     ///
     @objc
@@ -128,11 +132,6 @@ private extension InterlinkProcessor {
         let editingFrame = parentTextView.editingRectInWindow()
 
         presentedViewController?.relocateInterface(around: keywordFrame, in: editingFrame)
-    }
-
-    func trackLastKnownScrollOffsets() {
-        lastKnownEditorOffset = parentTextView.contentOffset
-        initialEditorOffset = parentTextView.contentOffset
     }
 
     func refreshInterlinkController(notes: [Note]) {
@@ -204,8 +203,15 @@ private extension InterlinkProcessor {
     }
 
     var mustDismissInterlinkLookup: Bool {
-        let editor = parentTextView
-        return editor.isDragging || editor.isTextSelected || !editor.isFirstResponder || !editor.isEditingInterlink
+        if parentTextView.isTextSelected || !parentTextView.isFirstResponder {
+            return true
+        }
+
+        guard let (_, keywordRange, _) = parentTextView.interlinkKeywordAtSelectedLocation else {
+            return true
+        }
+
+        return keywordRange.lowerBound != lastKnownKeywordRange?.lowerBound
     }
 }
 
