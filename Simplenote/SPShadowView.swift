@@ -161,7 +161,7 @@ private extension SPShadowView {
     struct Constants {
         static let shadowColor = UIColor.black
         static let shadowOpacity: CGFloat = 0.1
-        static let shadowRadius: CGFloat = 4.0
+        static let shadowRadius: CGFloat = 20.0
         static let shadowOffset = CGSize(width: 0, height: -2)
     }
 }
