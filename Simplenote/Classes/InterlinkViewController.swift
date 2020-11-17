@@ -152,12 +152,14 @@ private extension InterlinkViewController {
     /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
     ///
     func calculateTopLocation(for height: CGFloat, around anchor: CGRect, in viewport: CGRect) -> CGFloat {
-        let minimumLocationForFullHeight = anchor.minY - Metrics.defaultTableInsets.top - Metrics.maximumTableHeight
         let locationAbove = anchor.minY - Metrics.defaultTableInsets.top - height
         let locationBelow = anchor.maxY + Metrics.defaultTableInsets.top
 
-        let deltaAbove = minimumLocationForFullHeight - viewport.minY
-        let deltaBelow = viewport.maxY - locationBelow - height
+        /// Always consider the *Maximum Height* when determining if we should render above or below
+        /// - Why: Perhaps deleting a character yields way more results, and we intend to avoid flickering!
+        ///
+        let deltaAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight
+        let deltaBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight
         let dispayingAboveClips = deltaAbove < .zero
         let dispayingBelowClips = deltaBelow < .zero
 
