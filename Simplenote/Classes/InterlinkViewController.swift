@@ -191,13 +191,16 @@ private extension InterlinkViewController {
 
 
     /// Returns the target Size.Height for the current ViewPort metrics
-    /// - Important: We're **SIMPLIFYING** the availableHeight calculations, by assuming the cursor might be in the top / bottom edge.
     ///
     func calculateHeight(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
         let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
-        let availableHeight = viewport.height - anchor.height - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
 
-        return min(fullHeight, min(Metrics.maximumTableHeight, availableHeight))
+        let (viewportAboveCursor, viewportBelowCursor) = viewport.split(by: anchor)
+        let maximumAvailableHeight = max(viewportAboveCursor.height, viewportBelowCursor.height)
+        let insetAvailableHeight = maximumAvailableHeight - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
+        let cappedAvailableHeight = min(insetAvailableHeight, Metrics.maximumTableHeight)
+
+        return max(min(fullHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
     }
 }
 
@@ -225,4 +228,5 @@ private enum Metrics {
     static let defaultTableWidth = CGFloat(300)
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
+    static let minimumTableHeight = defaultCellHeight
 }
