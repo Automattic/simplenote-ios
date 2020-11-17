@@ -29,7 +29,7 @@ class SPPlaceholderView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.alpha = Constants.imageViewAlpha
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
@@ -83,6 +83,8 @@ class SPPlaceholderView: UIView {
 private extension SPPlaceholderView {
 
     func configureSubviews() {
+        imageView.heightAnchor.constraint(equalToConstant: Constants.imageViewHeight).isActive = true
+
         addFillingSubview(stackView)
         refreshStyle()
     }
@@ -146,6 +148,7 @@ private extension SPPlaceholderView {
 //
 private enum Constants {
     static let imageViewAlpha = CGFloat(0.5)
+    static let imageViewHeight = CGFloat(72)
     static let numberOfLines = 0
     static let stackViewDefaultSpacing = CGFloat(25)
     static let stackViewCondensedSpacing = CGFloat(5)

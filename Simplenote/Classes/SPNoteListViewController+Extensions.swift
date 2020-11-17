@@ -298,15 +298,20 @@ extension SPNoteListViewController {
             }
 
             if let searchQuery = searchQuery, !searchQuery.isEmpty {
-                let title = NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
-
-                let action = String(format: NSLocalizedString("Create a new note titled \"%@\"", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchQuery.searchText)
-
-                return .text(title, action)
+                return .text(Localization.EmptyState.searchTitle,
+                             Localization.EmptyState.searchAction(with: searchQuery.searchText))
             }
 
-            let text = NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
-            return .pictureAndText(.simplenoteLogo, text)
+            switch notesListController.filter {
+            case .everything:
+                return .pictureAndText(.allNotes, Localization.EmptyState.allNotes)
+            case .deleted:
+                return .pictureAndText(.trash, Localization.EmptyState.trash)
+            case .untagged:
+                return .pictureAndText(.untagged, Localization.EmptyState.untagged)
+            case .tag(name: let name):
+                return .pictureAndText(.tag, Localization.EmptyState.tagged(with: name))
+            }
         }()
     }
 
@@ -861,4 +866,26 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+}
+
+private enum Localization {
+
+    enum EmptyState {
+        static let allNotes = NSLocalizedString("Create your first note", comment: "Message shown in note list when no notes are in the current view")
+
+        static let trash = NSLocalizedString("Your trash is empty", comment: "Message shown in note list when no notes are in the trash")
+
+        static let untagged = NSLocalizedString("No untagged notes", comment: "Message shown in note list when no notes are untagged")
+
+
+        static func tagged(with tag: String) -> String {
+            return String(format: NSLocalizedString("No notes tagged “%@”", comment: "Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag"), tag)
+        }
+
+        static let searchTitle = NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+
+        static func searchAction(with searchTerm: String) -> String {
+            return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
+        }
+    }
 }
