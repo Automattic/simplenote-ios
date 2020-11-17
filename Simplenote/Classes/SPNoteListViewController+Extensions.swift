@@ -178,6 +178,7 @@ extension SPNoteListViewController {
             ///
             guard let _ = self.view.window else {
                 self.tableView.reloadData()
+                self.displayPlaceholdersIfNeeded()
                 return
             }
 
