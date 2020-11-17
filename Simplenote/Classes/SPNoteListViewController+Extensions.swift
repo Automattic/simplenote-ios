@@ -360,7 +360,7 @@ extension SPNoteListViewController {
         if case let .tag(name) = notesListController.filter {
             note.addTag(name)
         }
-        open(note, animated: true)
+        open(note, ignoringSearchQuery: true, animated: true)
     }
 }
 

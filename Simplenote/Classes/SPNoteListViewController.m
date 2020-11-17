@@ -427,6 +427,11 @@
 
 - (void)openNote:(Note *)note animated:(BOOL)animated
 {
+    [self openNote:note ignoringSearchQuery:NO animated:animated];
+}
+
+- (void)openNote:(Note *)note ignoringSearchQuery:(BOOL)ignoringSearchQuery animated:(BOOL)animated
+{
     [SPTracker trackListNoteOpened];
 
     // SearchBar: Always resign FirstResponder status
@@ -437,7 +442,7 @@
     SPNoteEditorViewController *editor = [[EditorFactory shared] build];
     [editor displayNote:note];
 
-    if (self.isSearchActive) {
+    if (!ignoringSearchQuery && self.isSearchActive) {
         [editor updateWithSearchQuery:self.searchQuery];
     }
 
