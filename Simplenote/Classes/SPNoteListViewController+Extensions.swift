@@ -87,12 +87,6 @@ extension SPNoteListViewController {
     @objc
     func configurePlaceholderView() {
         placeholderView = SPPlaceholderView()
-        placeholderView.isUserInteractionEnabled = false
-
-        placeholderView.imageView.image = .image(name: .simplenoteLogo)
-        placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
-
-        placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
     }
 
     /// Sets up the Search StackView
@@ -297,20 +291,22 @@ extension SPNoteListViewController {
         }
 
         placeholderView.isHidden = false
+
         placeholderView.displayMode = {
             if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
-                return .picture
+                return .generic
             }
 
-            return isSearchActive ? .text : .pictureAndText
-        }()
+            if let searchQuery = searchQuery, !searchQuery.isEmpty {
+                let title = NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
 
-        placeholderView.textLabel.text = {
-            if isSearchActive {
-                return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+                let action = String(format: NSLocalizedString("Create a new note titled \"%@\"", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchQuery.searchText)
+
+                return .text(title, action)
             }
 
-            return NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
+            let text = NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
+            return .pictureAndText(.simplenoteLogo, text)
         }()
     }
 

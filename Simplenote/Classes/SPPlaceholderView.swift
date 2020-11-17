@@ -4,20 +4,20 @@ import UIKit
 
 // MARK: - SPPlaceholderView
 //
-@objcMembers
+@objc
 class SPPlaceholderView: UIView {
 
     /// DisplayMode: Defines the way in which the Placeholder behaves
     ///
     enum DisplayMode {
-        case picture
-        case pictureAndText
-        case text
+        case generic
+        case pictureAndText(UIImageName, String)
+        case text(String, String)
     }
 
     /// Placeholder's Display Mode
     ///
-    var displayMode: DisplayMode = .pictureAndText {
+    var displayMode: DisplayMode = .generic {
         didSet {
             displayModeWasChanged()
         }
@@ -26,7 +26,7 @@ class SPPlaceholderView: UIView {
 
     /// Placeholder Image
     ///
-    private(set) lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.alpha = Constants.imageViewAlpha
         imageView.contentMode = .center
@@ -35,7 +35,17 @@ class SPPlaceholderView: UIView {
 
     /// Placeholder TextLabel
     ///
-    private(set) lazy var textLabel: UILabel = {
+    private lazy var textLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = Constants.numberOfLines
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+
+    /// Placeholder ActionLabel
+    ///
+    private lazy var actionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = Constants.numberOfLines
@@ -46,9 +56,8 @@ class SPPlaceholderView: UIView {
     /// Internal StackView
     ///
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [imageView, textLabel])
+        let stackView = UIStackView(arrangedSubviews: [imageView, textLabel, actionLabel])
         stackView.axis = .vertical
-        stackView.spacing = Constants.stackViewSpacing
         return stackView
     }()
 
@@ -58,13 +67,13 @@ class SPPlaceholderView: UIView {
     init() {
         super.init(frame: .zero)
         configureSubviews()
-        configureLayout()
+        setupGestureRecognizer()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureSubviews()
-        configureLayout()
+        setupGestureRecognizer()
     }
 }
 
@@ -74,23 +83,61 @@ class SPPlaceholderView: UIView {
 private extension SPPlaceholderView {
 
     func configureSubviews() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
+        addFillingSubview(stackView)
+        refreshStyle()
     }
 
-    func configureLayout() {
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+    func refreshStyle() {
+        imageView.tintColor = .simplenotePlaceholderImageColor
+        actionLabel.textColor = .simplenoteBlue50Color
+
+        switch displayMode {
+        case .text:
+            textLabel.textColor = .simplenoteTextColor
+            textLabel.font = .preferredFont(forTextStyle: .title3)
+
+            stackView.spacing = Constants.stackViewCondensedSpacing
+
+        default:
+            textLabel.textColor = .simplenotePlaceholderTextColor
+            textLabel.font = .preferredFont(forTextStyle: .body)
+
+            stackView.spacing = Constants.stackViewDefaultSpacing
+        }
     }
 
     func displayModeWasChanged() {
-        imageView.isHidden = !displayMode.displaysPicture
-        textLabel.isHidden = !displayMode.displaysText
-        textLabel.font = displayMode.textFont
+        switch displayMode {
+        case .generic:
+            imageView.image = .image(name: .simplenoteLogo)
+            textLabel.text = nil
+            actionLabel.text = nil
+
+        case .pictureAndText(let imageName, let text):
+            imageView.image = .image(name: imageName)
+            textLabel.text = text
+            actionLabel.text = nil
+
+        case .text(let text, let action):
+            imageView.image = nil
+            textLabel.text = text
+            actionLabel.text = action
+        }
+
+        imageView.isHidden = imageView.image == nil
+        textLabel.isHidden = textLabel.text == nil
+        actionLabel.isHidden = actionLabel.text == nil
+
+        refreshStyle()
+    }
+
+    func setupGestureRecognizer() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+
+    @objc
+    func handleTap() {
+
     }
 }
 
@@ -100,35 +147,6 @@ private extension SPPlaceholderView {
 private enum Constants {
     static let imageViewAlpha = CGFloat(0.5)
     static let numberOfLines = 0
-    static let stackViewSpacing = CGFloat(25)
-}
-
-
-// MARK: - SPPlaceholderView.DisplayMode Properties
-//
-extension SPPlaceholderView.DisplayMode {
-
-    var displaysPicture: Bool {
-        guard self == .text else {
-            return true
-        }
-
-        return false
-    }
-
-    var displaysText: Bool {
-        guard self == .picture else {
-            return true
-        }
-
-        return false
-    }
-
-    var textFont: UIFont {
-        guard self == .text else {
-            return .preferredFont(forTextStyle: .body)
-        }
-
-        return .preferredFont(forTextStyle: .title3)
-    }
+    static let stackViewDefaultSpacing = CGFloat(25)
+    static let stackViewCondensedSpacing = CGFloat(5)
 }
