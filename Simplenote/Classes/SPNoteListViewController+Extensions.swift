@@ -136,9 +136,15 @@ extension SPNoteListViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
 
+        let placeholderVerticalCenterConstraint = placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        placeholderViewVerticalCenterConstraint = placeholderVerticalCenterConstraint
+
+        let placeholderTopConstraint = placeholderView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: Constants.searchEmptyStateTopMargin)
+        placeholderViewTopConstraint = placeholderTopConstraint
+
         NSLayoutConstraint.activate([
             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            placeholderVerticalCenterConstraint,
             placeholderView.leadingAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.leadingAnchor),
             placeholderView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor),
             placeholderView.topAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor),
@@ -317,6 +323,14 @@ extension SPNoteListViewController {
                 return .pictureAndText(imageName: .tag, text: Localization.EmptyState.tagged(with: name))
             }
         }()
+
+        if case .text = placeholderView.displayMode {
+            placeholderViewVerticalCenterConstraint.isActive = false
+            placeholderViewTopConstraint.isActive = true
+        } else {
+            placeholderViewTopConstraint.isActive = false
+            placeholderViewVerticalCenterConstraint.isActive = true
+        }
     }
 
     /// Indicates if the Deleted Notes are onScreen
@@ -882,6 +896,8 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+
+    static let searchEmptyStateTopMargin = CGFloat(128)
 }
 
 private enum Localization {
