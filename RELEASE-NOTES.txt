@@ -1,6 +1,7 @@
 4.29
 -----
- 
+-   Updated Empty State placeholders #956
+
 4.28
 -----
 -   Typing `[` will now allow you to pick Interlinking Notes right from the editor #914
