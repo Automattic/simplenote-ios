@@ -121,6 +121,8 @@ private extension InterlinkProcessor {
         let interlinkViewController = InterlinkViewController()
         interlinkViewController.attachWithAnimation(to: parentViewController, below: parentOverlayView)
         presentedViewController = interlinkViewController
+
+        SPTracker.trackEditorInterlinkAutocompleteViewed()
     }
 
     func relocateInterlinkController(around range: Range<String.Index>) {
