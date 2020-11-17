@@ -41,6 +41,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
+@property (nonatomic) BOOL isInserting;
+@property (nonatomic) BOOL isDeletingBackward;
 
 @end
 
@@ -223,6 +225,20 @@ NSInteger const ChecklistCursorAdjustment = 2;
     
     self.editable = YES;
     return [super becomeFirstResponder];
+}
+
+- (void)insertText:(NSString *)text
+{
+    self.isInserting = YES;
+    [super insertText:text];
+    self.isInserting = NO;
+}
+
+- (void)deleteBackward
+{
+    self.isDeletingBackward = YES;
+    [super deleteBackward];
+    self.isDeletingBackward = NO;
 }
 
 - (BOOL)resignFirstResponder

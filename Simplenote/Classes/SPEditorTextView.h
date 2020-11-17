@@ -22,6 +22,9 @@
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 
+@property (nonatomic, readonly) BOOL isInserting;
+@property (nonatomic, readonly) BOOL isDeletingBackward;
+
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;
