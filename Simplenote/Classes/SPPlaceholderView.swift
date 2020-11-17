@@ -68,12 +68,18 @@ class SPPlaceholderView: UIView {
         super.init(frame: .zero)
         configureSubviews()
         setupGestureRecognizer()
+        startListeningToNotifications()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureSubviews()
         setupGestureRecognizer()
+        startListeningToNotifications()
+    }
+
+    deinit {
+        stopListeningToNotifications()
     }
 }
 
@@ -144,6 +150,23 @@ private extension SPPlaceholderView {
     }
 }
 
+// MARK: - Theme
+//
+private extension  SPPlaceholderView {
+    func startListeningToNotifications() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(themeDidChange), name: .SPSimplenoteThemeChanged, object: nil)
+    }
+
+    func stopListeningToNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    func themeDidChange() {
+        refreshStyle()
+    }
+}
 
 // MARK: - Constants
 //
