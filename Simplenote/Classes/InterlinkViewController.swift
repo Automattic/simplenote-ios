@@ -54,7 +54,7 @@ extension InterlinkViewController {
         let anchorFrame = view.convert(anchor, from: nil)
         let editingRect = view.convert(viewport, from: nil)
 
-        let targetHeight = calculateHeight()
+        let targetHeight = calculateHeight(around: anchorFrame, in: editingRect)
         let targetTop = calculateTopLocation(for: targetHeight, around: anchorFrame, in: editingRect)
         let targetLeading = calculateLeadingLocation(around: anchorFrame, in: editingRect)
 
@@ -190,11 +190,14 @@ private extension InterlinkViewController {
     }
 
 
-    /// Returns the target Size.Height
+    /// Returns the target Size.Height for the current ViewPort metrics
+    /// - Important: We're **SIMPLIFYING** the availableHeight calculations, by assuming the cursor might be in the top / bottom edge.
     ///
-    func calculateHeight() -> CGFloat {
+    func calculateHeight(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
         let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
-        return min(fullHeight, Metrics.maximumTableHeight)
+        let availableHeight = viewport.height - anchor.height - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
+
+        return min(fullHeight, min(Metrics.maximumTableHeight, availableHeight))
     }
 }
 
@@ -218,7 +221,7 @@ private extension InterlinkViewController {
 private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
-    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 0, right: 20)
+    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
     static let defaultTableWidth = CGFloat(300)
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
