@@ -83,22 +83,6 @@ class InterlinkProcessor: NSObject {
         lastKnownKeywordRange = keywordRange
     }
 
-    /// Dismisses the Interlink UI when ANY of the following evaluates **true**:
-    ///
-    ///     1.  There is Highlighted Text in the editor (or)
-    ///     2.  There is no Interlink `[keyword` at the selected location
-    ///     3.  There is a `[keyword` at the current location, but it's not the same we've seen before (!!
-    ///     4.  The editor is no longer the first responder
-    ///
-    @objc
-    func dismissInterlinkLookupIfNeeded() {
-        guard isInterlinkLookupOnScreen, mustDismissInterlinkLookup else {
-            return
-        }
-
-        dismissInterlinkLookup()
-    }
-
     /// Dismisses the Interlink UI (if it's onscreen!)
     ///
     @objc
@@ -200,18 +184,6 @@ private extension InterlinkProcessor {
     var mustProcessInterlinkLookup: Bool {
         let editor = parentTextView
         return editor.isFirstResponder && !editor.isTextSelected && !editor.isUndoingEditOP
-    }
-
-    var mustDismissInterlinkLookup: Bool {
-        if parentTextView.isTextSelected || !parentTextView.isFirstResponder {
-            return true
-        }
-
-        guard let (_, keywordRange, _) = parentTextView.interlinkKeywordAtSelectedLocation else {
-            return true
-        }
-
-        return keywordRange.lowerBound != lastKnownKeywordRange?.lowerBound
     }
 }
 
