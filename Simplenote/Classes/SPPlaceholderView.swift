@@ -11,8 +11,8 @@ class SPPlaceholderView: UIView {
     ///
     enum DisplayMode {
         case generic
-        case pictureAndText(UIImageName, String)
-        case text(String, String)
+        case pictureAndText(imageName: UIImageName, text: String)
+        case text(text: String, actionText: String, actionHandler: () -> Void)
     }
 
     /// Placeholder's Display Mode
@@ -92,18 +92,15 @@ private extension SPPlaceholderView {
     func refreshStyle() {
         imageView.tintColor = .simplenotePlaceholderImageColor
         actionLabel.textColor = .simplenoteBlue50Color
+        textLabel.textColor = .simplenotePlaceholderTextColor
 
         switch displayMode {
         case .text:
-            textLabel.textColor = .simplenoteTextColor
             textLabel.font = .preferredFont(forTextStyle: .title3)
-
             stackView.spacing = Constants.stackViewCondensedSpacing
 
         default:
-            textLabel.textColor = .simplenotePlaceholderTextColor
             textLabel.font = .preferredFont(forTextStyle: .body)
-
             stackView.spacing = Constants.stackViewDefaultSpacing
         }
     }
@@ -120,7 +117,7 @@ private extension SPPlaceholderView {
             textLabel.text = text
             actionLabel.text = nil
 
-        case .text(let text, let action):
+        case .text(let text, let action, _):
             imageView.image = nil
             textLabel.text = text
             actionLabel.text = action
@@ -139,7 +136,11 @@ private extension SPPlaceholderView {
 
     @objc
     func handleTap() {
+        guard case DisplayMode.text(_, _, let actionHandler) = displayMode else {
+            return
+        }
 
+        actionHandler()
     }
 }
 

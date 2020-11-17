@@ -298,19 +298,23 @@ extension SPNoteListViewController {
             }
 
             if let searchQuery = searchQuery, !searchQuery.isEmpty {
-                return .text(Localization.EmptyState.searchTitle,
-                             Localization.EmptyState.searchAction(with: searchQuery.searchText))
+                let actionHandler: () -> Void = { [weak self] in
+                    self?.openNewNote(with: searchQuery.searchText)
+                }
+                return .text(text: Localization.EmptyState.searchTitle,
+                             actionText: Localization.EmptyState.searchAction(with: searchQuery.searchText),
+                             actionHandler: actionHandler)
             }
 
             switch notesListController.filter {
             case .everything:
-                return .pictureAndText(.allNotes, Localization.EmptyState.allNotes)
+                return .pictureAndText(imageName: .allNotes, text: Localization.EmptyState.allNotes)
             case .deleted:
-                return .pictureAndText(.trash, Localization.EmptyState.trash)
+                return .pictureAndText(imageName: .trash, text: Localization.EmptyState.trash)
             case .untagged:
-                return .pictureAndText(.untagged, Localization.EmptyState.untagged)
+                return .pictureAndText(imageName: .untagged, text: Localization.EmptyState.untagged)
             case .tag(name: let name):
-                return .pictureAndText(.tag, Localization.EmptyState.tagged(with: name))
+                return .pictureAndText(imageName: .tag, text: Localization.EmptyState.tagged(with: name))
             }
         }()
     }
@@ -345,6 +349,18 @@ extension SPNoteListViewController {
         }
 
         return query
+    }
+
+    /// Creates and opens new note with a given text
+    ///
+    func openNewNote(with content: String) {
+        SPTracker.trackListNoteCreated()
+        let note = NoteFactory.newNote()
+        note.content = content
+        if case let .tag(name) = notesListController.filter {
+            note.addTag(name)
+        }
+        open(note, animated: true)
     }
 }
 

@@ -117,6 +117,7 @@
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		A604DB22255A993E00B802CA /* SearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB21255A993E00B802CA /* SearchMapView.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
+		A643F24A25640C8C00955C11 /* NoteFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A643F24925640C8C00955C11 /* NoteFactory.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
@@ -512,6 +513,7 @@
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		A604DB21255A993E00B802CA /* SearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapView.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
+		A643F24925640C8C00955C11 /* NoteFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFactory.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
 		A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteContentHelper.swift; path = Classes/NoteContentHelper.swift; sourceTree = "<group>"; };
@@ -1588,7 +1590,6 @@
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
 				E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */,
@@ -1612,7 +1613,8 @@
 				A68ABCA724ABFB5300715EBD /* SPShadowView.swift */,
 				A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */,
 				A6E1E7A724BE656D008A44BC /* SPCardView.swift */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
+				A604DB21255A993E00B802CA /* SearchMapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1791,6 +1793,7 @@
 				17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */,
 				17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */,
 				B5796548250684EC00DFD6F7 /* EditorFactory.swift */,
+				A643F24925640C8C00955C11 /* NoteFactory.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2265,6 +2268,7 @@
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
 				A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */,
+				A643F24A25640C8C00955C11 /* NoteFactory.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5E951E424FEE26E004B10B8 /* NSURL+Links.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
