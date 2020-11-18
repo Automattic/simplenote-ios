@@ -1,6 +1,7 @@
 4.29
 -----
- 
+-   Home screen quick actions #950
+
 4.28
 -----
 -   Typing `[` will now allow you to pick Interlinking Notes right from the editor #914
