@@ -51,12 +51,13 @@ extension InterlinkViewController {
     /// - Important: Both frames must be expressed in Window Coordinates. Capisce?
     ///
     func relocateInterface(around anchor: CGRect, in viewport: CGRect) {
-        let anchorFrame = view.convert(anchor, from: nil)
-        let editingRect = view.convert(viewport, from: nil)
+        let anchorFrame         = view.convert(anchor, from: nil)
+        let editingRect         = view.convert(viewport, from: nil)
 
-        let targetHeight = calculateHeight(around: anchorFrame, in: editingRect)
-        let targetTop = calculateTopLocation(for: targetHeight, around: anchorFrame, in: editingRect)
-        let targetLeading = calculateLeadingLocation(around: anchorFrame, in: editingRect)
+        let targetOrientation   = calculateVerticalOrientation(around: anchorFrame, in: editingRect)
+        let targetHeight        = calculateHeight(around: anchorFrame, in: editingRect, orientation: targetOrientation)
+        let targetTop           = calculateTopLocation(for: targetHeight, around: anchorFrame, orientation: targetOrientation)
+        let targetLeading       = calculateLeadingLocation(around: anchorFrame, in: editingRect)
 
         tableTopConstraint.constant = targetTop
         tableHeightConstraint.constant = targetHeight
@@ -142,34 +143,6 @@ extension InterlinkViewController: UITableViewDelegate {
 //
 private extension InterlinkViewController {
 
-    /// Returns the Target Origin.Y
-    ///
-    /// -   Parameters:
-    ///     - height: The new target height
-    ///     - anchor: Frame around which we should position the TableView
-    ///     - viewport: Editor's visible frame
-    ///
-    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
-    ///
-    func calculateTopLocation(for height: CGFloat, around anchor: CGRect, in viewport: CGRect) -> CGFloat {
-        let locationAbove = anchor.minY - Metrics.defaultTableInsets.top - height
-        let locationBelow = anchor.maxY + Metrics.defaultTableInsets.top
-
-        /// We'll always prefer displaying the Autocomplete UI **above** the cursor, whenever such location does not produce clipping.
-        /// Even if there's more room at the bottom (that's why a simple max calculation isn't enough!)
-        ///
-        /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
-        ///
-        let paddingAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight - Metrics.defaultTableInsets.top
-        let paddingBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight - Metrics.defaultTableInsets.top
-
-        if (paddingAbove >= .zero) || (paddingAbove < .zero && paddingBelow < .zero && paddingAbove > paddingBelow) {
-            return locationAbove
-        }
-
-        return locationBelow
-    }
-
     /// Returns the Target Origin.X
     ///
     /// -   Parameters:
@@ -188,18 +161,51 @@ private extension InterlinkViewController {
         return anchor.minX + viewport.width - maximumX
     }
 
+    /// We'll always prefer displaying the Autocomplete UI **above** the cursor, whenever such location does not produce clipping.
+    /// Even if there's more room at the bottom (that's why a simple max calculation isn't enough!)
+    ///
+    /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
+    ///
+    func calculateVerticalOrientation(around anchor: CGRect, in viewport: CGRect) -> Orientation {
+        let paddingAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight
+        let paddingBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight
+
+        if (paddingAbove >= .zero) || (paddingAbove < .zero && paddingBelow < .zero && paddingAbove > paddingBelow) {
+            return .above
+        }
+
+        return .below
+    }
+
+    /// Returns the Target Origin.Y
+    ///
+    /// -   Parameters:
+    ///     - height: The new target height
+    ///     - anchor: Frame around which we should position the TableView
+    ///     - orientation: Autocomplete's required Orientation
+    ///
+    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
+    ///
+    func calculateTopLocation(for height: CGFloat, around anchor: CGRect, orientation: Orientation) -> CGFloat {
+        switch orientation {
+        case .above:
+            return anchor.minY - Metrics.defaultTableInsets.top - height
+        case .below:
+            return anchor.maxY + Metrics.defaultTableInsets.top
+        }
+    }
 
     /// Returns the target Size.Height for the current ViewPort metrics
     ///
-    func calculateHeight(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
-        let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
+    func calculateHeight(around anchor: CGRect, in viewport: CGRect, orientation: Orientation) -> CGFloat {
+        let maximumRequiredHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
 
-        let (viewportAboveCursor, viewportBelowCursor) = viewport.split(by: anchor)
-        let maximumAvailableHeight = max(viewportAboveCursor.height, viewportBelowCursor.height)
+        let (viewportBelowCursor, viewportAboveCursor) = viewport.split(by: anchor)
+        let maximumAvailableHeight = orientation == .above ? viewportAboveCursor.height : viewportBelowCursor.height
         let insetAvailableHeight = maximumAvailableHeight - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
         let cappedAvailableHeight = min(insetAvailableHeight, Metrics.maximumTableHeight)
 
-        return max(min(fullHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
+        return max(min(maximumRequiredHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
     }
 }
 
@@ -215,6 +221,14 @@ private extension InterlinkViewController {
 
         onInsertInterlink?(markdownInterlink)
     }
+}
+
+
+// MARK: - Defines the vertical orientation in which we'll display our Autocomplete UI
+//
+private enum Orientation {
+    case above
+    case below
 }
 
 
