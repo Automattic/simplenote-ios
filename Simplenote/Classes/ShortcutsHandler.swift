@@ -66,6 +66,71 @@ class ShortcutsHandler: NSObject {
     }
 }
 
+// MARK: - Application Shortcuts
+//
+extension ShortcutsHandler {
+    private var shortcutUserInfoNoteIdentifierKey: String {
+        return "simperium_key"
+    }
+
+    @objc(updateApplicationShortcutsWithRecentNote:)
+    func updateApplicationShortcuts(with recentNote: Note?) {
+        UIApplication.shared.shortcutItems = [
+            searchItem,
+            newNoteItem,
+            noteItem(with: recentNote)
+        ].compactMap({ $0 })
+    }
+
+    @objc
+    func handleApplicationShortcut(_ shortcut: UIApplicationShortcutItem) {
+        guard let type = ApplicationShortcutItemType(rawValue: shortcut.type) else {
+            return
+        }
+
+        switch type {
+        case .search:
+            SPAppDelegate.shared().presentSearch()
+        case .newNote:
+            SPAppDelegate.shared().presentNewNoteEditor()
+        case .note:
+            if let simperiumKey = shortcut.userInfo?[shortcutUserInfoNoteIdentifierKey] as? String {
+                SPAppDelegate.shared().presentNote(withUniqueIdentifier: simperiumKey)
+            }
+        }
+    }
+
+    private var searchItem: UIApplicationShortcutItem {
+        let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.allNotes.lightAssetFilename)
+        return UIApplicationShortcutItem(type: ApplicationShortcutItemType.search.rawValue,
+                                         localizedTitle: NSLocalizedString("Search", comment: "Home screen quick action: Search"),
+                                         localizedSubtitle: nil,
+                                         icon: icon,
+                                         userInfo: nil)
+    }
+
+    private var newNoteItem: UIApplicationShortcutItem {
+        let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.newNote.lightAssetFilename)
+        return UIApplicationShortcutItem(type: ApplicationShortcutItemType.newNote.rawValue,
+                                         localizedTitle: NSLocalizedString("New Note", comment: "Home screen quick action: New Note"),
+                                         localizedSubtitle: nil,
+                                         icon: icon,
+                                         userInfo: nil)
+    }
+
+    private func noteItem(with note: Note?) -> UIApplicationShortcutItem? {
+        guard let note = note, let simperiumKey = note.simperiumKey else {
+            return nil
+        }
+
+        let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.allNotes.lightAssetFilename)
+        return UIApplicationShortcutItem(type: ApplicationShortcutItemType.note.rawValue,
+                                         localizedTitle: NSLocalizedString("Recent", comment: "Home screen quick action: Recent Note"),
+                                         localizedSubtitle: note.titlePreview,
+                                         icon: icon,
+                                         userInfo: [shortcutUserInfoNoteIdentifierKey: simperiumKey as NSSecureCoding])
+    }
+}
 
 // MARK: - Private Methods
 //

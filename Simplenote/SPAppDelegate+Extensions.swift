@@ -51,7 +51,7 @@ extension SPAppDelegate {
     }
 }
 
-// MARK: - URL Handlers
+// MARK: - URL Handlers and Deep Linking
 //
 extension SPAppDelegate {
 
@@ -68,6 +68,23 @@ extension SPAppDelegate {
         replaceNoteEditor(editorViewController)
 
         return true
+    }
+
+    func presentSearch() {
+        dismissAllModals(animated: false, completion: nil)
+        sidebarViewController.hideSidebar(withAnimation: false)
+        if navigationController.viewControllers.contains(noteListViewController) {
+            navigationController.popToViewController(noteListViewController, animated: false)
+        }
+
+        DispatchQueue.main.async {
+            self.noteListViewController.startSearching()
+        }
+    }
+
+    @objc(dismissAllModalsAnimated:completion:)
+    func dismissAllModals(animated: Bool, completion: (() -> Void)?) {
+        navigationController.dismiss(animated: animated, completion: completion)
     }
 }
 

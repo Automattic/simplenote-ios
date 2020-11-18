@@ -178,6 +178,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UIApplicationShortcutItem *shortcutItem = launchOptions[UIApplicationLaunchOptionsShortcutItemKey];
+    if (shortcutItem) {
+        self.shortcutItemToProcess = shortcutItem;
+    }
+
 	// Once the UI is wired, Auth Simperium
 	[self authenticateSimperium];
 
@@ -207,6 +212,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [self ensurePinlockIsDismissed];
+    if (self.shortcutItemToProcess) {
+        [[ShortcutsHandler shared] handleApplicationShortcut:self.shortcutItemToProcess];
+        self.shortcutItemToProcess = nil;
+    }
     [SPTracker trackApplicationOpened];
 }
 
@@ -233,6 +242,11 @@
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
+{
+    self.shortcutItemToProcess = shortcutItem;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // For the passcode lock, store the current clock time for comparison when returning to the app
@@ -246,6 +260,8 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
+
+    [[ShortcutsHandler shared] updateApplicationShortcutsWithRecentNote:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -411,18 +427,6 @@
 #pragma mark ================================================================================
 #pragma mark Other
 #pragma mark ================================================================================
-
-- (void)dismissAllModalsAnimated:(BOOL)animated completion:(void(^)())completion
-{
-    [self.navigationController dismissViewControllerAnimated:animated
-                                                  completion:^{
-                                                      
-                                                      if (completion) {
-                                                          completion();
-                                                      }
-                                                  }];
-    
-}
 
 - (void)presentSettingsViewController
 {

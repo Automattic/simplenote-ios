@@ -116,6 +116,7 @@
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		A604DB22255A993E00B802CA /* SearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB21255A993E00B802CA /* SearchMapView.swift */; };
+		A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
@@ -511,6 +512,7 @@
 		9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		A604DB21255A993E00B802CA /* SearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapView.swift; sourceTree = "<group>"; };
+		A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationShortcutItemType.swift; path = Classes/ApplicationShortcutItemType.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 			children = (
 				B550F93022BA65CD00091939 /* ActivityType.swift */,
 				B550F93222BA6A3300091939 /* ShortcutsHandler.swift */,
+				A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */,
 				B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */,
 				B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */,
 			);
@@ -1588,7 +1591,6 @@
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
 				E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */,
@@ -1612,7 +1614,8 @@
 				A68ABCA724ABFB5300715EBD /* SPShadowView.swift */,
 				A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */,
 				A6E1E7A724BE656D008A44BC /* SPCardView.swift */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
+				A604DB21255A993E00B802CA /* SearchMapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2304,6 +2307,7 @@
 				A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */,
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
+				A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
