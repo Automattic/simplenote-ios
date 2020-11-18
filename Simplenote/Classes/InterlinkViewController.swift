@@ -50,17 +50,18 @@ extension InterlinkViewController {
     /// Relocates the receiver so that it shows up **around** the specified Anchor Frame, in a given ViewPort.
     /// - Important: Both frames must be expressed in Window Coordinates. Capisce?
     ///
-    func relocateInterface(around anchor: CGRect, in viewport: CGRect) {
-        let anchorFrame = view.convert(anchor, from: nil)
-        let editingRect = view.convert(viewport, from: nil)
+    func relocateInterface(around anchorInWindow: CGRect, in viewportInWindow: CGRect) {
+        let anchor                          = view.convert(anchorInWindow, from: nil)
+        let viewport                        = view.convert(viewportInWindow, from: nil)
 
-        let targetHeight = calculateHeight()
-        let targetTop = calculateTopLocation(for: targetHeight, around: anchorFrame, in: editingRect)
-        let targetLeading = calculateLeadingLocation(around: anchorFrame, in: editingRect)
+        let (orientation, viewportSlice)    = calculateViewportSlice(around: anchor, in: viewport)
+        let height                          = calculateHeight(viewport: viewportSlice)
+        let topLocation                     = calculateTopLocation(for: height, around: anchor, orientation: orientation)
+        let leading                         = calculateLeadingLocation(around: anchor, in: viewportSlice)
 
-        tableTopConstraint.constant = targetTop
-        tableHeightConstraint.constant = targetHeight
-        tableLeadingConstraint.constant = targetLeading
+        tableTopConstraint.constant         = topLocation
+        tableHeightConstraint.constant      = height
+        tableLeadingConstraint.constant     = leading
     }
 
     /// Adjusts the Interlink TableView by the specified offset
@@ -142,35 +143,6 @@ extension InterlinkViewController: UITableViewDelegate {
 //
 private extension InterlinkViewController {
 
-    /// Returns the Target Origin.Y
-    ///
-    /// -   Parameters:
-    ///     - height: The new target height
-    ///     - anchor: Frame around which we should position the TableView
-    ///     - viewport: Editor's visible frame
-    ///
-    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
-    ///
-    func calculateTopLocation(for height: CGFloat, around anchor: CGRect, in viewport: CGRect) -> CGFloat {
-        let minimumLocationForFullHeight = anchor.minY - Metrics.defaultTableInsets.top - Metrics.maximumTableHeight
-        let locationAbove = anchor.minY - Metrics.defaultTableInsets.top - height
-        let locationBelow = anchor.maxY + Metrics.defaultTableInsets.top
-
-        let deltaAbove = minimumLocationForFullHeight - viewport.minY
-        let deltaBelow = viewport.maxY - locationBelow - height
-        let dispayingAboveClips = deltaAbove < .zero
-        let dispayingBelowClips = deltaBelow < .zero
-
-        if dispayingAboveClips == false && dispayingBelowClips == false ||
-            dispayingAboveClips == false && deltaAbove > deltaBelow ||
-            dispayingAboveClips && dispayingBelowClips && deltaAbove > deltaBelow
-        {
-            return locationAbove
-        }
-
-        return locationBelow
-    }
-
     /// Returns the Target Origin.X
     ///
     /// -   Parameters:
@@ -189,12 +161,51 @@ private extension InterlinkViewController {
         return anchor.minX + viewport.width - maximumX
     }
 
-
-    /// Returns the target Size.Height
+    /// We'll always prefer displaying the Autocomplete UI **above** the cursor, whenever such location does not produce clipping.
+    /// Even if there's more room at the bottom (that's why a simple max calculation isn't enough!)
     ///
-    func calculateHeight() -> CGFloat {
-        let fullHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
-        return min(fullHeight, Metrics.maximumTableHeight)
+    /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
+    ///
+    func calculateViewportSlice(around anchor: CGRect, in viewport: CGRect) -> (Orientation, CGRect) {
+        /// Nosebleed: In iOS the (0, 0) is top left. For that reason we're inverting the Above / Below subframes.
+        ///
+        let (viewportBelow, viewportAbove)  = viewport.split(by: anchor)
+        let deltaAbove                      = viewportAbove.height - Metrics.maximumTableHeight
+        let deltaBelow                      = viewportBelow.height - Metrics.maximumTableHeight
+
+        if (deltaAbove >= .zero) || (deltaAbove < .zero && deltaBelow < .zero && deltaAbove > deltaBelow) {
+            return (.above, viewportAbove)
+        }
+
+        return (.below, viewportBelow)
+    }
+
+    /// Returns the target Size.Height for the specified viewport metrics
+    ///
+    func calculateHeight(viewport: CGRect) -> CGFloat {
+        let requiredHeight          = CGFloat(notes.count) * Metrics.defaultCellHeight
+        let availableHeight         = viewport.height - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
+        let cappedAvailableHeight   = min(availableHeight, Metrics.maximumTableHeight)
+
+        return max(min(requiredHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
+    }
+
+    /// Returns the Target Origin.Y
+    ///
+    /// -   Parameters:
+    ///     - height: The new target height
+    ///     - anchor: Frame around which we should position the TableView
+    ///     - orientation: Defines the orientation in which we'll render out Autocomplete UI
+    ///
+    /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
+    ///
+    func calculateTopLocation(for height: CGFloat, around anchor: CGRect, orientation: Orientation) -> CGFloat {
+        switch orientation {
+        case .above:
+            return anchor.minY - Metrics.defaultTableInsets.top - height
+        case .below:
+            return anchor.maxY + Metrics.defaultTableInsets.top
+        }
     }
 }
 
@@ -213,13 +224,22 @@ private extension InterlinkViewController {
 }
 
 
+// MARK: - Defines the vertical orientation in which we'll display our Autocomplete UI
+//
+private enum Orientation {
+    case above
+    case below
+}
+
+
 // MARK: - Metrics
 //
 private enum Metrics {
     static let cornerRadius = CGFloat(10)
     static let defaultCellHeight = CGFloat(44)
-    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 0, right: 20)
+    static let defaultTableInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
     static let defaultTableWidth = CGFloat(300)
     static let maximumVisibleCells = 3.5
     static let maximumTableHeight = defaultCellHeight * CGFloat(maximumVisibleCells)
+    static let minimumTableHeight = defaultCellHeight
 }
