@@ -167,6 +167,8 @@ private extension InterlinkViewController {
     /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
     ///
     func calculateViewportSlice(around anchor: CGRect, in viewport: CGRect) -> (Orientation, CGRect) {
+        /// Nosebleed: In iOS the (0, 0) is top left. For that reason we're inverting the Above / Below subframes.
+        ///
         let (viewportBelow, viewportAbove)  = viewport.split(by: anchor)
         let deltaAbove                      = viewportAbove.height - Metrics.maximumTableHeight
         let deltaBelow                      = viewportBelow.height - Metrics.maximumTableHeight
