@@ -100,7 +100,7 @@ extension ShortcutsHandler {
     }
 
     private var searchItem: UIApplicationShortcutItem {
-        let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.allNotes.lightAssetFilename)
+        let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.search.lightAssetFilename)
         return UIApplicationShortcutItem(type: ApplicationShortcutItemType.search.rawValue,
                                          localizedTitle: NSLocalizedString("Search", comment: "Home screen quick action: Search"),
                                          localizedSubtitle: nil,

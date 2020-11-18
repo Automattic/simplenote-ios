@@ -34,6 +34,7 @@ enum UIImageName: Int, CaseIterable {
     case pinSmall
     case published
     case restore
+    case search
     case settings
     case simplenoteLogo
     case share
@@ -118,6 +119,8 @@ extension UIImageName {
             return "icon_published"
         case .restore:
             return "icon_restore"
+        case .search:
+            return "icon_search"
         case .settings:
             return "icon_settings"
         case .simplenoteLogo:
