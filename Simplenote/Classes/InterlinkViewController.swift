@@ -50,18 +50,18 @@ extension InterlinkViewController {
     /// Relocates the receiver so that it shows up **around** the specified Anchor Frame, in a given ViewPort.
     /// - Important: Both frames must be expressed in Window Coordinates. Capisce?
     ///
-    func relocateInterface(around anchor: CGRect, in viewport: CGRect) {
-        let anchorFrame         = view.convert(anchor, from: nil)
-        let editingRect         = view.convert(viewport, from: nil)
+    func relocateInterface(around anchorInWindow: CGRect, in viewportInWindow: CGRect) {
+        let anchor                          = view.convert(anchorInWindow, from: nil)
+        let viewport                        = view.convert(viewportInWindow, from: nil)
 
-        let targetOrientation   = calculateVerticalOrientation(around: anchorFrame, in: editingRect)
-        let targetHeight        = calculateHeight(around: anchorFrame, in: editingRect, orientation: targetOrientation)
-        let targetTop           = calculateTopLocation(for: targetHeight, around: anchorFrame, orientation: targetOrientation)
-        let targetLeading       = calculateLeadingLocation(around: anchorFrame, in: editingRect)
+        let (orientation, viewportSlice)    = calculateViewportSlice(around: anchor, in: viewport)
+        let height                          = calculateHeight(viewport: viewportSlice)
+        let topLocation                     = calculateTopLocation(for: height, around: anchor, orientation: orientation)
+        let leading                         = calculateLeadingLocation(around: anchor, in: viewportSlice)
 
-        tableTopConstraint.constant = targetTop
-        tableHeightConstraint.constant = targetHeight
-        tableLeadingConstraint.constant = targetLeading
+        tableTopConstraint.constant         = topLocation
+        tableHeightConstraint.constant      = height
+        tableLeadingConstraint.constant     = leading
     }
 
     /// Adjusts the Interlink TableView by the specified offset
@@ -166,15 +166,26 @@ private extension InterlinkViewController {
     ///
     /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
     ///
-    func calculateVerticalOrientation(around anchor: CGRect, in viewport: CGRect) -> Orientation {
-        let paddingAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight
-        let paddingBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight
+    func calculateViewportSlice(around anchor: CGRect, in viewport: CGRect) -> (Orientation, CGRect) {
+        let (viewportBelow, viewportAbove)  = viewport.split(by: anchor)
+        let deltaAbove                      = viewportAbove.height - Metrics.maximumTableHeight
+        let deltaBelow                      = viewportBelow.height - Metrics.maximumTableHeight
 
-        if (paddingAbove >= .zero) || (paddingAbove < .zero && paddingBelow < .zero && paddingAbove > paddingBelow) {
-            return .above
+        if (deltaAbove >= .zero) || (deltaAbove < .zero && deltaBelow < .zero && deltaAbove > deltaBelow) {
+            return (.above, viewportAbove)
         }
 
-        return .below
+        return (.below, viewportBelow)
+    }
+
+    /// Returns the target Size.Height for the specified viewport metrics
+    ///
+    func calculateHeight(viewport: CGRect) -> CGFloat {
+        let requiredHeight          = CGFloat(notes.count) * Metrics.defaultCellHeight
+        let availableHeight         = viewport.height - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
+        let cappedAvailableHeight   = min(availableHeight, Metrics.maximumTableHeight)
+
+        return max(min(requiredHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
     }
 
     /// Returns the Target Origin.Y
@@ -182,7 +193,7 @@ private extension InterlinkViewController {
     /// -   Parameters:
     ///     - height: The new target height
     ///     - anchor: Frame around which we should position the TableView
-    ///     - orientation: Autocomplete's required Orientation
+    ///     - orientation: Defines the orientation in which we'll render out Autocomplete UI
     ///
     /// -   Important: We'll always prefer the orientation that results in the **Least Clipped Surface™**
     ///
@@ -193,19 +204,6 @@ private extension InterlinkViewController {
         case .below:
             return anchor.maxY + Metrics.defaultTableInsets.top
         }
-    }
-
-    /// Returns the target Size.Height for the current ViewPort metrics
-    ///
-    func calculateHeight(around anchor: CGRect, in viewport: CGRect, orientation: Orientation) -> CGFloat {
-        let maximumRequiredHeight = CGFloat(notes.count) * Metrics.defaultCellHeight
-
-        let (viewportBelowCursor, viewportAboveCursor) = viewport.split(by: anchor)
-        let maximumAvailableHeight = orientation == .above ? viewportAboveCursor.height : viewportBelowCursor.height
-        let insetAvailableHeight = maximumAvailableHeight - Metrics.defaultTableInsets.top - Metrics.defaultTableInsets.bottom
-        let cappedAvailableHeight = min(insetAvailableHeight, Metrics.maximumTableHeight)
-
-        return max(min(maximumRequiredHeight, cappedAvailableHeight), Metrics.minimumTableHeight)
     }
 }
 

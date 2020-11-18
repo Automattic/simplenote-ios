@@ -6,18 +6,6 @@ import XCTest
 //
 class CGRectSimplenoteTests: XCTestCase {
 
-    /// Verifies that `splity(by:)` returns zero CGRect.zero in the upper slice and self in the lower slice whenever the anchor is invalid
-    ///
-    func testSplitByRectReturnsTheReceiversRectWheneverTheInputIsInvalid() {
-        let input = CGRect(x: .zero, y: .zero, width: 300, height: 300)
-        let anchor = CGRect(x: -1, y: -1, width: .zero, height: .zero)
-
-        let (above, below) = input.split(by: anchor)
-
-        XCTAssertEqual(above, .zero)
-        XCTAssertEqual(below, input)
-    }
-
     /// Verifies that `splity(by:)` returns a zero height lower slice whenever the anchor has Zero location and Height
     ///
     func testSplitByRectReturnsEmptyLowerSliceWheneverTheInputHasZeroHeight() {
