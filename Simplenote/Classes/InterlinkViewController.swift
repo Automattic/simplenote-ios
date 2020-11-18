@@ -155,18 +155,15 @@ private extension InterlinkViewController {
         let locationAbove = anchor.minY - Metrics.defaultTableInsets.top - height
         let locationBelow = anchor.maxY + Metrics.defaultTableInsets.top
 
-        /// Always consider the *Maximum Height* when determining if we should render above or below
-        /// - Why: Perhaps deleting a character yields way more results, and we intend to avoid flickering!
+        /// We'll always prefer displaying the Autocomplete UI **above** the cursor, whenever such location does not produce clipping.
+        /// Even if there's more room at the bottom (that's why a simple max calculation isn't enough!)
         ///
-        let deltaAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight
-        let deltaBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight
-        let dispayingAboveClips = deltaAbove < .zero
-        let dispayingBelowClips = deltaBelow < .zero
+        /// - Important: In order to avoid flipping Up / Down, we'll consider the Maximum Heigh tour TableView can acquire
+        ///
+        let paddingAbove = anchor.minY - viewport.minY - Metrics.maximumTableHeight - Metrics.defaultTableInsets.top
+        let paddingBelow = viewport.maxY - anchor.maxY - Metrics.maximumTableHeight - Metrics.defaultTableInsets.top
 
-        if dispayingAboveClips == false && dispayingBelowClips == false ||
-            dispayingAboveClips == false && deltaAbove > deltaBelow ||
-            dispayingAboveClips && dispayingBelowClips && deltaAbove > deltaBelow
-        {
+        if (paddingAbove >= .zero) || (paddingAbove < .zero && paddingBelow < .zero && paddingAbove > paddingBelow) {
             return locationAbove
         }
 
