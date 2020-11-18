@@ -84,6 +84,11 @@ extension SPAppDelegate {
         }
 
         DispatchQueue.main.async {
+            // Switch from trash to all notes as trash doesn't have search
+            if self.selectedTag == kSimplenoteTrashKey {
+                self.selectedTag = nil
+            }
+
             self.noteListViewController.startSearching()
         }
     }
