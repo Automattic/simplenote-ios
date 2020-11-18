@@ -10,18 +10,18 @@ extension CGRect {
     /// - Note: We rely on this API to determine the available editing area above and below the cursor
     /// - Important: **For simplicity's sake** we won't return an optional. If the parameters are invalid, we'll just pass along the "non split receiver"
     ///
-    func split(by rect: CGRect) -> (upperSlice: CGRect, lowerSlice: CGRect) {
+    func split(by rect: CGRect) -> (aboveSlice: CGRect, belowSlice: CGRect) {
         guard contains(rect) else {
             return (.zero, self)
         }
 
-        var lowerSlice = self
-        lowerSlice.size.height = rect.minY - minY
+        var belowSlice = self
+        belowSlice.size.height = rect.minY - minY
 
-        var upperSlice = self
-        upperSlice.origin.y = rect.maxY
-        upperSlice.size.height = height - lowerSlice.height - rect.height
+        var aboveSlice = self
+        aboveSlice.origin.y = rect.maxY
+        aboveSlice.size.height = maxY - rect.maxY
 
-        return (upperSlice, lowerSlice)
+        return (aboveSlice, belowSlice)
     }
 }

@@ -12,10 +12,10 @@ class CGRectSimplenoteTests: XCTestCase {
         let input = CGRect(x: .zero, y: .zero, width: 300, height: 300)
         let anchor = CGRect(x: -1, y: -1, width: .zero, height: .zero)
 
-        let (upper, lower) = input.split(by: anchor)
+        let (above, below) = input.split(by: anchor)
 
-        XCTAssertEqual(upper, .zero)
-        XCTAssertEqual(lower, input)
+        XCTAssertEqual(above, .zero)
+        XCTAssertEqual(below, input)
     }
 
     /// Verifies that `splity(by:)` returns a zero height lower slice whenever the anchor has Zero location and Height
@@ -24,11 +24,11 @@ class CGRectSimplenoteTests: XCTestCase {
         let input = CGRect(x: .zero, y: .zero, width: 300, height: 300)
         let anchor = CGRect(x: .zero, y: .zero, width: 0, height: 0)
 
-        let expectedLower = CGRect(x: .zero, y: .zero, width: 300, height: 0)
-        let (upper, lower) = input.split(by: anchor)
+        let expectedBelow = CGRect(x: .zero, y: .zero, width: 300, height: 0)
+        let (above, below) = input.split(by: anchor)
 
-        XCTAssertEqual(upper, input)
-        XCTAssertEqual(lower, expectedLower)
+        XCTAssertEqual(above, input)
+        XCTAssertEqual(below, expectedBelow)
     }
 
     /// Verifies that `splity(by:)` returns the expected Slices
@@ -37,11 +37,11 @@ class CGRectSimplenoteTests: XCTestCase {
         let input = CGRect(x: .zero, y: .zero, width: 300, height: 300)
         let anchor = CGRect(x: .zero, y: 100, width: .zero, height: 100)
 
-        let expectedUpper = CGRect(x: .zero, y: 200, width: 300, height: 100)
-        let expectedLower = CGRect(x: .zero, y: .zero, width: 300, height: 100)
-        let (upper, lower) = input.split(by: anchor)
+        let expectedAbove = CGRect(x: .zero, y: 200, width: 300, height: 100)
+        let expectedBelow = CGRect(x: .zero, y: .zero, width: 300, height: 100)
+        let (above, below) = input.split(by: anchor)
 
-        XCTAssertEqual(upper, expectedUpper)
-        XCTAssertEqual(lower, expectedLower)
+        XCTAssertEqual(above, expectedAbove)
+        XCTAssertEqual(below, expectedBelow)
     }
 }
