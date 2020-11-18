@@ -261,7 +261,7 @@
     // Save any pending changes
     [self.noteEditorViewController save];
 
-    [[ShortcutsHandler shared] updateApplicationShortcutsWithRecentNote:nil];
+    [self updateHomeScreenQuickActions];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

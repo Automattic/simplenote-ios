@@ -39,6 +39,12 @@ extension SPAppDelegate {
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
     }
+
+    @objc
+    func updateHomeScreenQuickActions() {
+        let note = SPObjectManager.shared().recentlyModifiedNote
+        ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
+    }
 }
 
 // MARK: - Initialization

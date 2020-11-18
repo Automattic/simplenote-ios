@@ -66,15 +66,14 @@ class ShortcutsHandler: NSObject {
     }
 }
 
-// MARK: - Application Shortcuts
+// MARK: - Home Screen Quick Actions
 //
 extension ShortcutsHandler {
     private var shortcutUserInfoNoteIdentifierKey: String {
         return "simperium_key"
     }
 
-    @objc(updateApplicationShortcutsWithRecentNote:)
-    func updateApplicationShortcuts(with recentNote: Note?) {
+    func updateHomeScreenQuickActions(with recentNote: Note?) {
         UIApplication.shared.shortcutItems = [
             searchItem,
             newNoteItem,
