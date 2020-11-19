@@ -298,33 +298,38 @@ extension SPNoteListViewController {
         }
 
         placeholderView.isHidden = false
+        placeholderView.displayMode = placeholderDisplayMode
 
-        placeholderView.displayMode = {
-            if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
-                return .generic
+        updatePlaceholderPosition()
+    }
+
+    private var placeholderDisplayMode: SPPlaceholderView.DisplayMode {
+        if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
+            return .generic
+        }
+
+        if let searchQuery = searchQuery, !searchQuery.isEmpty {
+            let actionHandler: () -> Void = { [weak self] in
+                self?.openNewNote(with: searchQuery.searchText)
             }
+            return .text(text: Localization.EmptyState.searchTitle,
+                         actionText: Localization.EmptyState.searchAction(with: searchQuery.searchText),
+                         actionHandler: actionHandler)
+        }
 
-            if let searchQuery = searchQuery, !searchQuery.isEmpty {
-                let actionHandler: () -> Void = { [weak self] in
-                    self?.openNewNote(with: searchQuery.searchText)
-                }
-                return .text(text: Localization.EmptyState.searchTitle,
-                             actionText: Localization.EmptyState.searchAction(with: searchQuery.searchText),
-                             actionHandler: actionHandler)
-            }
+        switch notesListController.filter {
+        case .everything:
+            return .pictureAndText(imageName: .allNotes, text: Localization.EmptyState.allNotes)
+        case .deleted:
+            return .pictureAndText(imageName: .trash, text: Localization.EmptyState.trash)
+        case .untagged:
+            return .pictureAndText(imageName: .untagged, text: Localization.EmptyState.untagged)
+        case .tag(name: let name):
+            return .pictureAndText(imageName: .tag, text: Localization.EmptyState.tagged(with: name))
+        }
+    }
 
-            switch notesListController.filter {
-            case .everything:
-                return .pictureAndText(imageName: .allNotes, text: Localization.EmptyState.allNotes)
-            case .deleted:
-                return .pictureAndText(imageName: .trash, text: Localization.EmptyState.trash)
-            case .untagged:
-                return .pictureAndText(imageName: .untagged, text: Localization.EmptyState.untagged)
-            case .tag(name: let name):
-                return .pictureAndText(imageName: .tag, text: Localization.EmptyState.tagged(with: name))
-            }
-        }()
-
+    private func updatePlaceholderPosition() {
         if case .text = placeholderView.displayMode {
             placeholderViewVerticalCenterConstraint.isActive = false
             placeholderViewTopConstraint.isActive = true
