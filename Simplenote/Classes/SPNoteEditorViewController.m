@@ -392,6 +392,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     self.modified = NO;
     self.previewing = NO;
+
+    [self updateHomeScreenQuickActions];
 }
 
 - (void)clearNote
@@ -824,6 +826,8 @@ CGFloat const SPSelectedAreaPadding = 20;
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:_currentNote];
         
         self.modified = NO;
+
+        [self updateHomeScreenQuickActions];
 	}
 }
 

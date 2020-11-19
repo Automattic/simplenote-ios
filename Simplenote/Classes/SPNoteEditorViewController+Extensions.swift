@@ -774,6 +774,19 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Quick Actions
+//
+extension SPNoteEditorViewController {
+    @objc
+    func updateHomeScreenQuickActions() {
+        guard let note = currentNote else {
+            return
+        }
+
+        ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
+    }
+}
+
 
 // MARK: - Metrics
 //

@@ -35,6 +35,7 @@
 - (void)openNote:(Note *)note animated:(BOOL)animated;
 - (void)openNote:(Note *)note ignoringSearchQuery:(BOOL)ignoringSearchQuery animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
+- (void)startSearching;
 - (void)endSearching;
 
 @end
