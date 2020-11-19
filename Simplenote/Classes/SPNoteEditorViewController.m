@@ -754,7 +754,11 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
-    [self.interlinkProcessor dismissInterlinkLookupIfNeeded];
+    if (self.noteEditorTextView.isInserting || self.noteEditorTextView.isDeletingBackward) {
+        return;
+    }
+
+    [self.interlinkProcessor dismissInterlinkLookup];
 }
 
 
