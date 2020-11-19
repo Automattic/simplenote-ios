@@ -76,26 +76,61 @@ extension SPAppDelegate {
         return true
     }
 
+    /// Opens search
+    ///
     func presentSearch() {
-        dismissAllModals(animated: false, completion: nil)
-        sidebarViewController.hideSidebar(withAnimation: false)
-        if navigationController.viewControllers.contains(noteListViewController) {
-            navigationController.popToViewController(noteListViewController, animated: false)
-        }
+        popToNoteList()
 
-        DispatchQueue.main.async {
+        UIView.performWithoutAnimation {
             // Switch from trash to all notes as trash doesn't have search
-            if self.selectedTag == kSimplenoteTrashKey {
-                self.selectedTag = nil
+            if selectedTag == kSimplenoteTrashKey {
+                selectedTag = nil
             }
 
-            self.noteListViewController.startSearching()
+            noteListViewController.startSearching()
         }
     }
 
+    /// Opens editor with a new note
+    ///
+    func presentNewNoteEditor() {
+        presentNote(nil)
+    }
+
+    /// Opens a note with specified simperium key
+    ///
+    func presentNoteWithSimperiumKey(_ simperiumKey: String) {
+        guard let note = simperium.loadNote(simperiumKey: simperiumKey) else {
+            return
+        }
+
+        presentNote(note)
+    }
+
+    /// Opens a note
+    ///
+    @objc
+    func presentNote(_ note: Note?) {
+        popToNoteList()
+
+        noteListViewController.open(note, animated: false)
+        showPasscodeLockIfNecessary()
+    }
+
+    /// Dismisses all modals
+    ///
     @objc(dismissAllModalsAnimated:completion:)
     func dismissAllModals(animated: Bool, completion: (() -> Void)?) {
         navigationController.dismiss(animated: animated, completion: completion)
+    }
+
+    private func popToNoteList() {
+        dismissAllModals(animated: false, completion: nil)
+        sidebarViewController.hideSidebar(withAnimation: false)
+
+        if navigationController.viewControllers.contains(noteListViewController) {
+            navigationController.popToViewController(noteListViewController, animated: false)
+        }
     }
 }
 

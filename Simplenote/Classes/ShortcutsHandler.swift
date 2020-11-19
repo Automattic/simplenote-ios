@@ -94,7 +94,7 @@ extension ShortcutsHandler {
             SPAppDelegate.shared().presentNewNoteEditor()
         case .note:
             if let simperiumKey = shortcut.userInfo?[shortcutUserInfoNoteIdentifierKey] as? String {
-                SPAppDelegate.shared().presentNote(withUniqueIdentifier: simperiumKey)
+                SPAppDelegate.shared().presentNoteWithSimperiumKey(simperiumKey)
             }
         }
     }
@@ -142,6 +142,6 @@ private extension ShortcutsHandler {
             return
         }
 
-        SPAppDelegate.shared().presentNote(withUniqueIdentifier: uniqueIdentifier)
+        SPAppDelegate.shared().presentNoteWithSimperiumKey(uniqueIdentifier)
     }
 }

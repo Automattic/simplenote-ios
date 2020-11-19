@@ -33,15 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
 
-@property (strong, nonatomic, nullable) UIApplicationShortcutItem       *shortcutItemToProcess;
-
 - (void)presentSettingsViewController;
 
 - (void)save;
 - (void)logoutAndReset:(id)sender;
 
-- (void)presentNewNoteEditor;
-- (void)presentNoteWithUniqueIdentifier:(nullable NSString *)uuid;
+- (void)showPasscodeLockIfNecessary;
 
 + (SPAppDelegate *)sharedDelegate;
 

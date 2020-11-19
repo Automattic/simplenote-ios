@@ -178,11 +178,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIApplicationShortcutItem *shortcutItem = launchOptions[UIApplicationLaunchOptionsShortcutItemKey];
-    if (shortcutItem) {
-        self.shortcutItemToProcess = shortcutItem;
-    }
-
 	// Once the UI is wired, Auth Simperium
 	[self authenticateSimperium];
 
@@ -212,10 +207,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [self ensurePinlockIsDismissed];
-    if (self.shortcutItemToProcess) {
-        [[ShortcutsHandler shared] handleApplicationShortcut:self.shortcutItemToProcess];
-        self.shortcutItemToProcess = nil;
-    }
     [SPTracker trackApplicationOpened];
 }
 
@@ -244,7 +235,7 @@
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
 {
-    self.shortcutItemToProcess = shortcutItem;
+    [[ShortcutsHandler shared] handleApplicationShortcut:shortcutItem];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -694,39 +685,6 @@
     
     return YES;
 }
-
-- (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
-{
-    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid];
-    if (note == nil) {
-        return;
-    }
-
-    [self presentNote:note];
-}
-
-- (void)presentNewNoteEditor
-{
-    [self presentNote:nil];
-}
-
-- (void)presentNote:(Note *)note
-{
-    // Hide any modals
-    [self dismissAllModalsAnimated:NO completion:nil];
-    
-    // If root tag list is currently being viewed, push All Notes instead
-    [self.sidebarViewController hideSidebarWithAnimation:NO];
-    
-    // Little trick to postpone until next run loop to ensure controllers have a chance to pop
-    double delayInSeconds = 0.05;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.noteListViewController openNote:note animated:NO];
-        [self showPasscodeLockIfNecessary];
-    });
-}
-
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock
