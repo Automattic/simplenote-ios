@@ -38,8 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)save;
 - (void)logoutAndReset:(id)sender;
 
-- (void)presentNewNoteEditor;
-- (void)presentNoteWithUniqueIdentifier:(nullable NSString *)uuid;
+- (void)showPasscodeLockIfNecessary;
 
 + (SPAppDelegate *)sharedDelegate;
 

@@ -392,6 +392,11 @@
     [self invalidateSearchTimer];
 }
 
+- (void)startSearching
+{
+    [self.searchController.searchBar becomeFirstResponder];
+}
+
 - (void)endSearching
 {
     [self.searchController dismiss];

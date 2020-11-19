@@ -51,7 +51,7 @@ extension SPAppDelegate {
     }
 }
 
-// MARK: - URL Handlers
+// MARK: - URL Handlers and Deep Linking
 //
 extension SPAppDelegate {
 
@@ -68,6 +68,65 @@ extension SPAppDelegate {
         replaceNoteEditor(editorViewController)
 
         return true
+    }
+
+    /// Opens search
+    ///
+    func presentSearch() {
+        popToNoteList()
+
+        UIView.performWithoutAnimation {
+            // Switch from trash to all notes as trash doesn't have search
+            if selectedTag == kSimplenoteTrashKey {
+                selectedTag = nil
+            }
+
+            noteListViewController.startSearching()
+        }
+
+        showPasscodeLockIfNecessary()
+    }
+
+    /// Opens editor with a new note
+    ///
+    func presentNewNoteEditor() {
+        presentNote(nil)
+    }
+
+    /// Opens a note with specified simperium key
+    ///
+    func presentNoteWithSimperiumKey(_ simperiumKey: String) {
+        guard let note = simperium.loadNote(simperiumKey: simperiumKey) else {
+            return
+        }
+
+        presentNote(note)
+    }
+
+    /// Opens a note
+    ///
+    @objc
+    func presentNote(_ note: Note?) {
+        popToNoteList()
+
+        noteListViewController.open(note, animated: false)
+        showPasscodeLockIfNecessary()
+    }
+
+    /// Dismisses all modals
+    ///
+    @objc(dismissAllModalsAnimated:completion:)
+    func dismissAllModals(animated: Bool, completion: (() -> Void)?) {
+        navigationController.dismiss(animated: animated, completion: completion)
+    }
+
+    private func popToNoteList() {
+        dismissAllModals(animated: false, completion: nil)
+        sidebarViewController.hideSidebar(withAnimation: false)
+
+        if navigationController.viewControllers.contains(noteListViewController) {
+            navigationController.popToViewController(noteListViewController, animated: false)
+        }
     }
 }
 
@@ -170,6 +229,7 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Shortcuts!
         ShortcutsHandler.shared.registerSimplenoteActivities()
+        ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
         let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
@@ -183,6 +243,9 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Tracker!
         SPTracker.refreshMetadataForAnonymousUser()
+
+        // Shortcuts!
+        ShortcutsHandler.shared.clearHomeScreenQuickActions()
     }
 
     public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
