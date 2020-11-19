@@ -87,12 +87,6 @@ extension SPNoteListViewController {
     @objc
     func configurePlaceholderView() {
         placeholderView = SPPlaceholderView()
-        placeholderView.isUserInteractionEnabled = false
-
-        placeholderView.imageView.image = .image(name: .simplenoteLogo)
-        placeholderView.imageView.tintColor = .simplenotePlaceholderImageColor
-
-        placeholderView.textLabel.textColor = .simplenotePlaceholderTextColor
     }
 
     /// Sets up the Search StackView
@@ -142,9 +136,19 @@ extension SPNoteListViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
 
+        let placeholderVerticalCenterConstraint = placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        placeholderViewVerticalCenterConstraint = placeholderVerticalCenterConstraint
+
+        let placeholderTopConstraint = placeholderView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: Constants.searchEmptyStateTopMargin)
+        placeholderViewTopConstraint = placeholderTopConstraint
+
         NSLayoutConstraint.activate([
             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            placeholderVerticalCenterConstraint,
+            placeholderView.leadingAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.leadingAnchor),
+            placeholderView.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor),
+            placeholderView.topAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor),
+            placeholderView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -174,6 +178,7 @@ extension SPNoteListViewController {
             ///
             guard let _ = self.view.window else {
                 self.tableView.reloadData()
+                self.displayPlaceholdersIfNeeded()
                 return
             }
 
@@ -293,21 +298,45 @@ extension SPNoteListViewController {
         }
 
         placeholderView.isHidden = false
-        placeholderView.displayMode = {
-            if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
-                return .picture
+        placeholderView.displayMode = placeholderDisplayMode
+
+        updatePlaceholderPosition()
+    }
+
+    private var placeholderDisplayMode: SPPlaceholderView.DisplayMode {
+        if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
+            return .generic
+        }
+
+        if let searchQuery = searchQuery, !searchQuery.isEmpty {
+            let actionHandler: () -> Void = { [weak self] in
+                self?.openNewNote(with: searchQuery.searchText)
             }
+            return .text(text: Localization.EmptyState.searchTitle,
+                         actionText: Localization.EmptyState.searchAction(with: searchQuery.searchText),
+                         actionHandler: actionHandler)
+        }
 
-            return isSearchActive ? .text : .pictureAndText
-        }()
+        switch notesListController.filter {
+        case .everything:
+            return .pictureAndText(imageName: .allNotes, text: Localization.EmptyState.allNotes)
+        case .deleted:
+            return .pictureAndText(imageName: .trash, text: Localization.EmptyState.trash)
+        case .untagged:
+            return .pictureAndText(imageName: .untagged, text: Localization.EmptyState.untagged)
+        case .tag(name: let name):
+            return .pictureAndText(imageName: .tag, text: Localization.EmptyState.tagged(with: name))
+        }
+    }
 
-        placeholderView.textLabel.text = {
-            if isSearchActive {
-                return NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
-            }
-
-            return NSLocalizedString("No Notes", comment: "Message shown in note list when no notes are in the current view")
-        }()
+    private func updatePlaceholderPosition() {
+        if case .text = placeholderView.displayMode {
+            placeholderViewVerticalCenterConstraint.isActive = false
+            placeholderViewTopConstraint.isActive = true
+        } else {
+            placeholderViewTopConstraint.isActive = false
+            placeholderViewVerticalCenterConstraint.isActive = true
+        }
     }
 
     /// Indicates if the Deleted Notes are onScreen
@@ -340,6 +369,18 @@ extension SPNoteListViewController {
         }
 
         return query
+    }
+
+    /// Creates and opens new note with a given text
+    ///
+    func openNewNote(with content: String) {
+        SPTracker.trackListNoteCreated()
+        let note = SPObjectManager.shared().newDefaultNote()
+        note.content = content
+        if case let .tag(name) = notesListController.filter {
+            note.addTag(name)
+        }
+        open(note, ignoringSearchQuery: true, animated: true)
     }
 }
 
@@ -861,4 +902,28 @@ private enum Constants {
     /// Ref. https://developer.apple.com/documentation/uikit/uiview/1622566-layoutmargins
     ///
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+
+    static let searchEmptyStateTopMargin = CGFloat(128)
+}
+
+private enum Localization {
+
+    enum EmptyState {
+        static let allNotes = NSLocalizedString("Create your first note", comment: "Message shown in note list when no notes are in the current view")
+
+        static let trash = NSLocalizedString("Your trash is empty", comment: "Message shown in note list when no notes are in the trash")
+
+        static let untagged = NSLocalizedString("No untagged notes", comment: "Message shown in note list when no notes are untagged")
+
+
+        static func tagged(with tag: String) -> String {
+            return String(format: NSLocalizedString("No notes tagged “%@”", comment: "Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag"), tag)
+        }
+
+        static let searchTitle = NSLocalizedString("No Results", comment: "Message shown when no notes match a search string")
+
+        static func searchAction(with searchTerm: String) -> String {
+            return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
+        }
+    }
 }

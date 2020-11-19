@@ -16,6 +16,8 @@
 @property (nonatomic, assign, readonly) BOOL                                isIndexingNotes;
 @property (nonatomic, strong) UIImpactFeedbackGenerator                     *feedbackGenerator;
 @property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
+@property (nonatomic, strong) NSLayoutConstraint                            *placeholderViewVerticalCenterConstraint;
+@property (nonatomic, strong) NSLayoutConstraint                            *placeholderViewTopConstraint;
 @property (nonatomic, strong) SPSortBar                                     *sortBar;
 @property (nonatomic, strong) UITableView                                   *tableView;
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
@@ -31,6 +33,7 @@
 - (void)update;
 - (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;
 - (void)openNote:(Note *)note animated:(BOOL)animated;
+- (void)openNote:(Note *)note ignoringSearchQuery:(BOOL)ignoringSearchQuery animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;
 - (void)startSearching;
 - (void)endSearching;

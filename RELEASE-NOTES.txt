@@ -1,6 +1,8 @@
 4.29
 -----
+-   Updated Empty State placeholders #951
 -   Home screen quick actions #950
+
 
 4.28
 -----

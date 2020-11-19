@@ -439,6 +439,15 @@ private extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
+    @objc
+    func newNote() -> Note {
+        let note = SPObjectManager.shared().newDefaultNote()
+        if let tagName = SPAppDelegate.shared().filteredTagName {
+            note.addTag(tagName)
+        }
+        return note
+    }
+
     func delete(note: Note) {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)

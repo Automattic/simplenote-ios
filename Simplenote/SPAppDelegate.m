@@ -635,10 +635,7 @@
     // Support opening Simplenote and optionally creating a new note
     if ([[url host] isEqualToString:@"new"]) {
         
-        Note *newNote = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                              inManagedObjectContext:self.managedObjectContext];
-        newNote.creationDate = [NSDate date];
-        newNote.modificationDate = [NSDate date];
+        Note *newNote = [[SPObjectManager sharedManager] newDefaultNote];
         
         NSArray *params = [[url query] componentsSeparatedByString:@"&"];
         for (NSString *param in params) {

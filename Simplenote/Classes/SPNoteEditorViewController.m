@@ -895,19 +895,8 @@ CGFloat const SPSelectedAreaPadding = 20;
         [SPTracker trackEditorNoteCreated];
     }
 
-	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
-    Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:context];
-    newNote.modificationDate = [NSDate date];
-    newNote.creationDate = [NSDate date];
+    Note *newNote = [self newNote];
 
-    // Set the note's markdown tag according to the global preference (defaults NO for new accounts)
-    newNote.markdown = [[Options shared] markdown];
-
-    NSString *filteredTagName = [[SPAppDelegate sharedDelegate] filteredTagName];
-    if (filteredTagName.length > 0) {
-        [newNote addTag:filteredTagName];
-    }
-    
     // animate current note off the screen and begin editing new note
     BOOL animateContentView = _noteEditorTextView.text.length;
     
