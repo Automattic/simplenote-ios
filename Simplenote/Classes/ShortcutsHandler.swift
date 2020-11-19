@@ -73,6 +73,24 @@ extension ShortcutsHandler {
         return "simperium_key"
     }
 
+    /// Clears home screen quick actions
+    ///
+    func clearHomeScreenQuickActions() {
+        UIApplication.shared.shortcutItems = nil
+    }
+
+    /// Updates home screen quick actions in case they are empty
+    ///
+    @objc
+    func updateHomeScreenQuickActionsIfNeeded() {
+        guard UIApplication.shared.shortcutItems?.isEmpty != false else {
+            return
+        }
+        updateHomeScreenQuickActions(with: nil)
+    }
+
+    /// Updates home screen quick actions
+    ///
     func updateHomeScreenQuickActions(with recentNote: Note?) {
         UIApplication.shared.shortcutItems = [
             searchItem,
@@ -81,6 +99,8 @@ extension ShortcutsHandler {
         ].compactMap({ $0 })
     }
 
+    /// Handles an application shortcut
+    ///
     @objc
     func handleApplicationShortcut(_ shortcut: UIApplicationShortcutItem) {
         guard let type = ApplicationShortcutItemType(rawValue: shortcut.type) else {

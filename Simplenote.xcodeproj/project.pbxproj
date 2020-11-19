@@ -117,7 +117,6 @@
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		A604DB22255A993E00B802CA /* SearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB21255A993E00B802CA /* SearchMapView.swift */; };
 		A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */; };
-		A60A1A2C2565633B0041701E /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1A2B2565633B0041701E /* SPObjectManager+Simplenote.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
@@ -514,7 +513,6 @@
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		A604DB21255A993E00B802CA /* SearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapView.swift; sourceTree = "<group>"; };
 		A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationShortcutItemType.swift; path = Classes/ApplicationShortcutItemType.swift; sourceTree = "<group>"; };
-		A60A1A2B2565633B0041701E /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
@@ -1483,7 +1481,6 @@
 				174838281BBDCAA400E834AF /* SPMarkdownParser.m */,
 				E22A17D117A2E2A000383575 /* SPObjectManager.h */,
 				E22A17D217A2E2A000383575 /* SPObjectManager.m */,
-				A60A1A2B2565633B0041701E /* SPObjectManager+Simplenote.swift */,
 				B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */,
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
@@ -2407,7 +2404,6 @@
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
-				A60A1A2C2565633B0041701E /* SPObjectManager+Simplenote.swift in Sources */,
 				46A3C99817DFA81A002865AE /* SPEntryListCell.m in Sources */,
 				B5E951E124FEDAD4004B10B8 /* UIPasteboard+Note.swift in Sources */,
 				A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */,

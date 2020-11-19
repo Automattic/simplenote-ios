@@ -184,7 +184,9 @@
     // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
     [[MigrationsHandler new] ensureUpdateIsHandled];
     [self setupAppRatings];
-    
+
+    [[ShortcutsHandler shared] updateHomeScreenQuickActionsIfNeeded];
+
     // Initialize UI
     [self loadLastSelectedNote];
     [self loadSelectedTheme];
@@ -251,8 +253,6 @@
     
     // Save any pending changes
     [self.noteEditorViewController save];
-
-    [self updateHomeScreenQuickActions];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

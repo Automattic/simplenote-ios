@@ -39,12 +39,6 @@ extension SPAppDelegate {
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
     }
-
-    @objc
-    func updateHomeScreenQuickActions() {
-        let note = SPObjectManager.shared().recentlyModifiedNote
-        ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
-    }
 }
 
 // MARK: - Initialization
@@ -233,6 +227,7 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Shortcuts!
         ShortcutsHandler.shared.registerSimplenoteActivities()
+        ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
         let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
@@ -246,6 +241,9 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Tracker!
         SPTracker.refreshMetadataForAnonymousUser()
+
+        // Shortcuts!
+        ShortcutsHandler.shared.clearHomeScreenQuickActions()
     }
 
     public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
