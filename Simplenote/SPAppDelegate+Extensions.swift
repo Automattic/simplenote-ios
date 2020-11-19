@@ -83,6 +83,8 @@ extension SPAppDelegate {
 
             noteListViewController.startSearching()
         }
+
+        showPasscodeLockIfNecessary()
     }
 
     /// Opens editor with a new note
