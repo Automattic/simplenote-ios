@@ -370,7 +370,7 @@ extension SPNoteListViewController {
     ///
     func openNewNote(with content: String) {
         SPTracker.trackListNoteCreated()
-        let note = NoteFactory.newNote()
+        let note = SPObjectManager.shared().newDefaultNote()
         note.content = content
         if case let .tag(name) = notesListController.filter {
             note.addTag(name)

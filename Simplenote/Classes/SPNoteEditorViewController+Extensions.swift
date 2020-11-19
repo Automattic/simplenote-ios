@@ -441,7 +441,7 @@ extension SPNoteEditorViewController {
 
     @objc
     func newNote() -> Note {
-        let note = NoteFactory.newNote()
+        let note = SPObjectManager.shared().newDefaultNote()
         if let tagName = SPAppDelegate.shared().filteredTagName {
             note.addTag(tagName)
         }
