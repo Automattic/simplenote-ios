@@ -7,7 +7,7 @@ class SPAboutViewController: UIViewController {
     private let footerView = UIView()
     private let tableView = UITableView()
     private let containerView = UIStackView()
-    private let doneButton = UIButton(type: .custom)
+    private let doneButton = RoundedCrossButton()
 
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -34,17 +34,18 @@ private extension SPAboutViewController {
 
     func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setTitle(NSLocalizedString("Done", comment: "Verb: Close current view"), for: .normal)
-        doneButton.setTitleColor(.white, for: .normal)
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
-        doneButton.contentHorizontalAlignment = .right
+
+        doneButton.style = .blue
 
         view.addSubview(doneButton)
 
         NSLayoutConstraint.activate([
-            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-            ])
+            doneButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: Constants.doneButtonTopMargin),
+            doneButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            doneButton.widthAnchor.constraint(equalToConstant: Constants.doneButtonWidth),
+            doneButton.heightAnchor.constraint(equalToConstant: Constants.doneButtonWidth),
+        ])
     }
 
     func setupContainerView() {
@@ -275,9 +276,10 @@ private extension SPAboutViewController {
 //
 private enum Constants {
 
-    static let headerHeight: CGFloat    = 170
-    static let footerHeight: CGFloat    = 60
-    static let doneButtonWidth: CGFloat = 100
+    static let headerHeight: CGFloat        = 170
+    static let footerHeight: CGFloat        = 60
+    static let doneButtonWidth: CGFloat     = 30
+    static let doneButtonTopMargin: CGFloat = 13
 
     static let privacyString    = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
     static let privacyURLString = "https://simplenote.com/privacy/"
