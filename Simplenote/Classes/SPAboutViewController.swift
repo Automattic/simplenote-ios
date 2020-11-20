@@ -3,11 +3,9 @@ import UIKit
 
 class SPAboutViewController: UIViewController {
 
-    private let footerView = UIView()
     private let tableView = UITableView()
     private let containerView = UIStackView()
     private let doneButton = RoundedCrossButton()
-
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -85,7 +83,7 @@ private extension SPAboutViewController {
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         appNameLabel.text = Bundle.main.infoDictionary!["CFBundleName"] as? String
         appNameLabel.textColor = UIColor.white
-        appNameLabel.font = UIFontMetrics.default.scaledFont(for: UIFont.boldSystemFont(ofSize: 34))
+        appNameLabel.font = UIFont.preferredFont(for: .largeTitle, weight: .bold)
         appNameLabel.textAlignment = .center
         stackView.addArrangedSubview(appNameLabel)
 
@@ -94,7 +92,7 @@ private extension SPAboutViewController {
         versionLabel.translatesAutoresizingMaskIntoConstraints = false
         versionLabel.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
         versionLabel.textColor = UIColor.white
-        versionLabel.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 17))
+        versionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         versionLabel.textAlignment = .center
         stackView.addArrangedSubview(versionLabel)
 
@@ -102,67 +100,77 @@ private extension SPAboutViewController {
     }
     
     func setupFooterView() {
-        footerView.translatesAutoresizingMaskIntoConstraints = false
-
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 2.0
-        footerView.addSubview(stackView)
+        stackView.spacing = 20.0
 
-        let serviceTextView = UITextView()
-        serviceTextView.translatesAutoresizingMaskIntoConstraints = false
-        serviceTextView.backgroundColor = UIColor.clear
-        serviceTextView.font = UIFont.systemFont(ofSize: 14)
-        serviceTextView.textAlignment = NSTextAlignment.center
-        serviceTextView.textColor = UIColor.white
-        serviceTextView.isEditable = false
-        serviceTextView.isScrollEnabled = false
+        stackView.addArrangedSubview(footerServiceTextView())
+        stackView.addArrangedSubview(footerCopyrightLabel())
 
-        // Set up attributed string with clickable links for privacy and terms
+        containerView.addArrangedSubview(stackView)
+    }
+
+    func footerServiceTextView() -> UITextView {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.backgroundColor = UIColor.clear
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.textContainerInset = .zero
+        textView.linkTextAttributes = [.foregroundColor: UIColor.simplenoteBlue10Color]
+
+        let privacyText = footerAttributedText(Constants.privacyString, withLink: Constants.privacyURLString)
+        let termsOfServiceText = footerAttributedText(Constants.termsString, withLink: Constants.termsURLString)
+        let californiaStringText = footerAttributedText(Constants.californiaString, withLink: Constants.californiaURLString)
+
+        let text = NSMutableAttributedString()
+        text.append(privacyText)
+        text.append(footerAttributedText(", "))
+        text.append(termsOfServiceText)
+        text.append(footerAttributedText("\n"))
+        text.append(californiaStringText)
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 15
 
-        let serviceString = String(format: "%@ \u{2022} %@ \n %@", Constants.privacyString, Constants.termsString, Constants.californiaString)
-        let serviceAttrString = NSMutableAttributedString(string: serviceString, attributes: [
-            .foregroundColor: UIColor.white,
-            .paragraphStyle: paragraphStyle,
-            .font: UIFont.systemFont(ofSize: 14)
+        text.addAttribute(.paragraphStyle, value: paragraphStyle, range: text.fullRange)
+        textView.attributedText = text
+
+        return textView
+    }
+
+    func footerAttributedText(_ text: String, withLink link: String) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: [
+            .font: UIFont.preferredFont(forTextStyle: .footnote),
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .link: link
         ])
+    }
 
-        let foundationString = serviceAttrString.foundationString
-        let rangeOfPrivacy = foundationString.range(of: Constants.privacyString)
-        let rangeOfTerms = foundationString.range(of: Constants.termsString)
-        let rangeOfNotice = foundationString.range(of: Constants.californiaString)
+    func footerAttributedText(_ text: String) -> NSAttributedString {
+        return NSAttributedString(string: text, attributes: [
+            .foregroundColor: UIColor.simplenoteBlue10Color,
+            .font: UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 13))
+        ])
+    }
 
-        serviceAttrString.addAttribute(.link, value: Constants.privacyURLString, range: rangeOfPrivacy)
-        serviceAttrString.addAttribute(.link, value: Constants.termsURLString, range: rangeOfTerms)
-        serviceAttrString.addAttribute(.link, value: Constants.californiaURLString, range: rangeOfNotice)
+    func footerCopyrightLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = footerCopyrightString()
+        return label
+    }
 
-        serviceTextView.attributedText = serviceAttrString
-        
-        let linkAttributes: [String : Any] = [NSAttributedString.Key.foregroundColor.rawValue: UIColor.white]
-        serviceTextView.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary(linkAttributes)
-        
-        let copyrightLabel = UILabel()
-        copyrightLabel.translatesAutoresizingMaskIntoConstraints = false
-        copyrightLabel.font = UIFont.systemFont(ofSize: 14)
-        copyrightLabel.textAlignment = NSTextAlignment.center
-        copyrightLabel.textColor = UIColor.white
-        copyrightLabel.text = createCopyrightString()
-
-        stackView.addArrangedSubview(serviceTextView)
-        stackView.addArrangedSubview(copyrightLabel)
-
-        containerView.addArrangedSubview(footerView)
-
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: footerView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: footerView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
+    func footerCopyrightString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return String(format: "\u{00A9} Automattic %@", formatter.string(from: Date()))
     }
 
     func setupTableView() {
@@ -234,17 +242,7 @@ extension SPAboutViewController: UITableViewDelegate {
 //
 private extension SPAboutViewController {
 
-    func createCopyrightString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        return String(format: "\u{00A9} %@ Automattic", formatter.string(from: Date()))
-    }
 
-    // Helper function inserted by Swift 4.2 migrator.
-    func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
-        guard let input = input else { return nil }
-        return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
-    }
 }
 
 
@@ -258,10 +256,10 @@ private enum Constants {
     static let doneButtonTopMargin: CGFloat = 13
 
     static let privacyString    = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
-    static let privacyURLString = "https://simplenote.com/privacy/"
+    static let privacyURLString = "https://automattic.com/privacy/"
     static let termsString      = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
     static let termsURLString   = "https://simplenote.com/terms/"
-    static let californiaString = NSLocalizedString("California Users Privacy Notice", comment: "Simplenote terms of service")
+    static let californiaString = NSLocalizedString("Privacy Notice for California Users", comment: "Simplenote terms of service")
     static let californiaURLString = "https://automattic.com/privacy/#california-consumer-privacy-act-ccpa"
 
     static let titles: [String] = [
