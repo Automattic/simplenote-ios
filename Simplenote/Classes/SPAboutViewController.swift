@@ -3,7 +3,7 @@ import UIKit
 
 class SPAboutViewController: UIViewController {
 
-    private let tableView = UITableView()
+    private let tableView = HuggableTableView(frame: .zero, style: .grouped)
     private let containerView = UIStackView()
     private let doneButton = RoundedCrossButton()
 
@@ -16,8 +16,9 @@ class SPAboutViewController: UIViewController {
         
         view.backgroundColor = .simplenoteBlue50Color
 
-        setupDoneButton()
         setupContainerView()
+        setupDoneButton()
+
         setupHeaderView()
         setupTableView()
         setupFooterView()
@@ -46,21 +47,36 @@ private extension SPAboutViewController {
     }
 
     func setupContainerView() {
+        let scrollView = UIScrollView()
+
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.axis = .vertical
         containerView.alignment = .fill
-        containerView.spacing = 10.0
-        view.insertSubview(containerView, belowSubview: doneButton)
+        containerView.spacing = 36.0
 
-        let bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            containerView.topAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: 29),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14.0)
-            ])
+        scrollView.addFillingSubview(containerView, edgeInsets: UIEdgeInsets(top: 72, left: 0, bottom: 14, right: 0))
+        view.addFillingSubview(scrollView)
+
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     }
 
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorColor = .simplenoteBlue30Color
+        tableView.backgroundColor = UIColor.clear
+        // Removing unneeded paddings
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.indicatorStyle = .white
+
+        containerView.addArrangedSubview(tableView)
+    }
+}
+
+// MARK: - Header Configuration
+//
+private extension SPAboutViewController {
     func setupHeaderView() {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +114,11 @@ private extension SPAboutViewController {
 
         containerView.addArrangedSubview(stackView)
     }
-    
+}
+
+// MARK: - Footer Configuration
+//
+private extension SPAboutViewController {
     func setupFooterView() {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -172,18 +192,6 @@ private extension SPAboutViewController {
         formatter.dateFormat = "yyyy"
         return String(format: "\u{00A9} Automattic %@", formatter.string(from: Date()))
     }
-
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
-        tableView.separatorColor = .simplenoteBlue30Color
-        tableView.backgroundColor = UIColor.clear
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.indicatorStyle = .white
-
-        containerView.addArrangedSubview(tableView)
-    }
 }
 
 
@@ -200,24 +208,25 @@ extension SPAboutViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
 
         cell.textLabel?.text = Constants.titles[indexPath.row]
         cell.detailTextLabel?.text = Constants.descriptions[indexPath.row]
         
-        cell.textLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.textColor = UIColor.white
-        cell.backgroundColor = UIColor.clear
-        
+        cell.textLabel?.textColor = .white
+        cell.detailTextLabel?.textColor = .simplenoteBlue10Color
+        cell.detailTextLabel?.font = .preferredFont(forTextStyle: .subheadline)
+        cell.backgroundColor = .clear
+
         let bgColorView = UIView()
         bgColorView.backgroundColor = .simplenoteBlue30Color
         cell.selectedBackgroundView = bgColorView
         
-        let arrowAccessoryView = UIImageView(image: UIImage(named: "icon_arrow_top_right"))
-        arrowAccessoryView.tintColor = .white
-        arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        let arrowAccessoryView = UIImageView(image: .image(name: .arrowTopRight))
+        arrowAccessoryView.tintColor = .simplenoteBlue10Color
+        arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         cell.accessoryView = arrowAccessoryView
-        
+
         return cell
     }
 }
@@ -235,14 +244,6 @@ extension SPAboutViewController: UITableViewDelegate {
     @objc func onDoneTap(_ sender:UIButton) {
         dismiss(animated: true)
     }
-}
-
-
-// MARK: - Private Helpers
-//
-private extension SPAboutViewController {
-
-
 }
 
 
@@ -266,26 +267,26 @@ private enum Constants {
         NSLocalizedString("Blog", comment: "The Simplenote blog"),
         "Twitter",
         NSLocalizedString("Get Help", comment: "FAQ or contact us"),
-        NSLocalizedString("Apps", comment: "Other Simplenote apps"),
+        NSLocalizedString("Rate Us", comment: "Rate on the App Store"),
         NSLocalizedString("Contribute", comment: "Contribute to the Simplenote apps on github"),
-        NSLocalizedString("Work With Us", comment: "Work at Automattic")
+        NSLocalizedString("Careers", comment: "Work at Automattic")
     ]
 
     static let descriptions: [String] = [
         "simplenote.com/blog",
         "@simplenoteapp",
         NSLocalizedString("FAQ or contact us", comment: "Get Help Description Label"),
-        "simplenote.com",
-        "GitHub.com",
-        NSLocalizedString("Are you a developer? Automattic is hiring.", comment: "Automattic hiring description")
+        "App Store",
+        "github.com",
+        NSLocalizedString("Are you a developer? We’re hiring.", comment: "Automattic hiring description")
     ]
 
     static let urls: [URL] = [
-        URL(string: "https://simplenote.com/blog")!,
+        URL(string: "https://simplenote.com/blog/")!,
         URL(string: "https://twitter.com/simplenoteapp")!,
-        URL(string: "https://simplenote.com/help")!,
-        URL(string: "https://simplenote.com")!,
+        URL(string: "https://simplenote.com/help/")!,
+        URL(string: "https://apps.apple.com/app/id289429962")!,
         URL(string: "https://github.com/automattic/simplenote-ios")!,
-        URL(string: "https://automattic.com/work-with-us")!
+        URL(string: "https://automattic.com/work-with-us/")!
     ]
 }
