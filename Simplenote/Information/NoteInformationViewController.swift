@@ -174,23 +174,11 @@ private extension NoteInformationViewController {
 private extension NoteInformationViewController {
     func refreshStyle() {
         styleScreenTitleLabel()
-        styleDismissButton()
         styleTableView()
     }
 
     func styleScreenTitleLabel() {
         screenTitleLabel.textColor = .simplenoteNoteHeadlineColor
-    }
-
-    func styleDismissButton() {
-        dismissButton.layer.masksToBounds = true
-
-        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
-
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
-
-        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 
     func styleTableView() {
