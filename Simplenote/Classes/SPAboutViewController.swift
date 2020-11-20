@@ -2,8 +2,7 @@ import UIKit
 
 
 class SPAboutViewController: UIViewController {
-    
-    private let headerView = UIView()
+
     private let footerView = UIView()
     private let tableView = UITableView()
     private let containerView = UIStackView()
@@ -59,34 +58,26 @@ private extension SPAboutViewController {
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            containerView.topAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: -14.0),
+            containerView.topAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: 29),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14.0)
             ])
     }
 
     func setupHeaderView() {
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.axis = .vertical
-        stackView.spacing = 0
-        headerView.addSubview(stackView)
+        stackView.spacing = 6
 
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: headerView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor)
-            ])
-
-        let imageView = UIImageView(image: UIImage(named: "logo_about"))
+        let imageView = UIImageView(image: .image(name: .simplenoteLogo))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
+        imageView.tintColor = .white
+        
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 100)
-            ])
+            imageView.widthAnchor.constraint(equalToConstant: 60),
+            imageView.heightAnchor.constraint(equalToConstant: 60)
+        ])
 
         stackView.addArrangedSubview(imageView)
 
@@ -94,35 +85,20 @@ private extension SPAboutViewController {
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
         appNameLabel.text = Bundle.main.infoDictionary!["CFBundleName"] as? String
         appNameLabel.textColor = UIColor.white
-        appNameLabel.font = UIFont.systemFont(ofSize: 24)
-        appNameLabel.textAlignment = NSTextAlignment.center
+        appNameLabel.font = UIFontMetrics.default.scaledFont(for: UIFont.boldSystemFont(ofSize: 34))
+        appNameLabel.textAlignment = .center
         stackView.addArrangedSubview(appNameLabel)
-
-        NSLayoutConstraint.activate([
-            appNameLabel.widthAnchor.constraint(equalToConstant: 320),
-            appNameLabel.heightAnchor.constraint(equalToConstant: 24)
-            ])
-
-        let spacer = UIView()
-        spacer.translatesAutoresizingMaskIntoConstraints = false
-        spacer.heightAnchor.constraint(equalToConstant: 3.0).isActive = true
-        stackView.addArrangedSubview(spacer)
 
         let versionLabel = UILabel()
         let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         versionLabel.translatesAutoresizingMaskIntoConstraints = false
         versionLabel.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
         versionLabel.textColor = UIColor.white
-        versionLabel.font = UIFont.systemFont(ofSize: 14)
-        versionLabel.textAlignment = NSTextAlignment.center
+        versionLabel.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 17))
+        versionLabel.textAlignment = .center
         stackView.addArrangedSubview(versionLabel)
 
-        NSLayoutConstraint.activate([
-            versionLabel.widthAnchor.constraint(equalToConstant: 320),
-            versionLabel.heightAnchor.constraint(equalToConstant: 14)
-            ])
-
-        containerView.addArrangedSubview(headerView)
+        containerView.addArrangedSubview(stackView)
     }
     
     func setupFooterView() {
