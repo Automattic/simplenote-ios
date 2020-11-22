@@ -6,6 +6,7 @@ class SPAboutViewController: UIViewController {
     private let tableView = HuggableTableView(frame: .zero, style: .grouped)
     private let containerView = UIStackView()
     private let doneButton = RoundedCrossButton()
+    private var viewSpinner: ViewSpinner?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -87,7 +88,9 @@ private extension SPAboutViewController {
         let imageView = UIImageView(image: .image(name: .simplenoteLogo))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .white
-        
+
+        viewSpinner = ViewSpinner(view: imageView)
+
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 60),
             imageView.heightAnchor.constraint(equalToConstant: 60)

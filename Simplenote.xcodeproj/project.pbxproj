@@ -137,6 +137,7 @@
 		A6BBDA3E25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */; };
 		A6BBDA46255034E6005C8343 /* SPEditorTextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */; };
 		A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */; };
+		A6BF0E3D256820E7008DE8E0 /* ViewSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BF0E3C256820E7008DE8E0 /* ViewSpinner.swift */; };
 		A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */; };
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
@@ -537,6 +538,7 @@
 		A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringToMarkdownConverter.swift; sourceTree = "<group>"; };
 		A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPEditorTextView+Simplenote.swift"; sourceTree = "<group>"; };
 		A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedCrossButton.swift; path = Classes/RoundedCrossButton.swift; sourceTree = "<group>"; };
+		A6BF0E3C256820E7008DE8E0 /* ViewSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSpinner.swift; sourceTree = "<group>"; };
 		A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteHistoryViewController.swift; path = Classes/SPNoteHistoryViewController.swift; sourceTree = "<group>"; };
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
@@ -1628,6 +1630,7 @@
 				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				A604DB21255A993E00B802CA /* SearchMapView.swift */,
 				A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */,
+				A6BF0E3C256820E7008DE8E0 /* ViewSpinner.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2484,6 +2487,7 @@
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				B5BA5B082551FB3C002AAD43 /* UIDevice+Simplenote.swift in Sources */,
 				A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */,
+				A6BF0E3D256820E7008DE8E0 /* ViewSpinner.swift in Sources */,
 				B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */,
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
