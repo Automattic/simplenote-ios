@@ -40,8 +40,6 @@ private extension SPAboutViewController {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
 
-        doneButton.style = .blue
-
         view.addSubview(doneButton)
 
         NSLayoutConstraint.activate([
@@ -58,12 +56,12 @@ private extension SPAboutViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.axis = .vertical
         containerView.alignment = .fill
-        containerView.spacing = 36.0
+        containerView.spacing = Constants.containerSpacing
 
-        scrollView.addFillingSubview(containerView, edgeInsets: UIEdgeInsets(top: 72, left: 0, bottom: 14, right: 0))
+        scrollView.addFillingSubview(containerView, edgeInsets: Constants.containerEdgeInsets)
         view.addFillingSubview(scrollView)
 
-        containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -(Constants.containerEdgeInsets.left + Constants.containerEdgeInsets.right)).isActive = true
     }
 
     func setupTableView() {
@@ -85,42 +83,48 @@ private extension SPAboutViewController {
 private extension SPAboutViewController {
     func setupHeaderView() {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.axis = .vertical
-        stackView.spacing = 6
+        stackView.spacing = Constants.headerViewSpacing
 
+        let logoView = self.logoView()
+        setupSpinner(with: logoView)
+
+        stackView.addArrangedSubview(logoView)
+        stackView.addArrangedSubview(appNameLabel())
+        stackView.addArrangedSubview(versionLabel())
+
+        containerView.addArrangedSubview(stackView)
+    }
+
+    func logoView() -> UIView {
         let imageView = UIImageView(image: .image(name: .simplenoteLogo))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .white
-
-        setupSpinner(with: imageView)
-
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 60),
-            imageView.heightAnchor.constraint(equalToConstant: 60)
+            imageView.widthAnchor.constraint(equalToConstant: Constants.logoWidth),
+            imageView.heightAnchor.constraint(equalToConstant: Constants.logoWidth)
         ])
+        return imageView
+    }
 
-        stackView.addArrangedSubview(imageView)
+    func appNameLabel() -> UIView {
+        let label = UILabel()
+        label.text = Bundle.main.infoDictionary!["CFBundleName"] as? String
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(for: .largeTitle, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }
 
-        let appNameLabel = UILabel()
-        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        appNameLabel.text = Bundle.main.infoDictionary!["CFBundleName"] as? String
-        appNameLabel.textColor = UIColor.white
-        appNameLabel.font = UIFont.preferredFont(for: .largeTitle, weight: .bold)
-        appNameLabel.textAlignment = .center
-        stackView.addArrangedSubview(appNameLabel)
-
-        let versionLabel = UILabel()
+    func versionLabel() -> UIView {
+        let label = UILabel()
         let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-        versionLabel.translatesAutoresizingMaskIntoConstraints = false
-        versionLabel.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
-        versionLabel.textColor = UIColor.white
-        versionLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        versionLabel.textAlignment = .center
-        stackView.addArrangedSubview(versionLabel)
-
-        containerView.addArrangedSubview(stackView)
+        label.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        return label
     }
 }
 
@@ -129,10 +133,9 @@ private extension SPAboutViewController {
 private extension SPAboutViewController {
     func setupFooterView() {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 20.0
+        stackView.spacing = Constants.footerViewSpacing
 
         stackView.addArrangedSubview(footerServiceTextView())
         stackView.addArrangedSubview(footerCopyrightLabel())
@@ -149,6 +152,12 @@ private extension SPAboutViewController {
         textView.textContainerInset = .zero
         textView.linkTextAttributes = [.foregroundColor: UIColor.simplenoteBlue10Color]
 
+        textView.attributedText = footerAttributedText()
+
+        return textView
+    }
+
+    func footerAttributedText() -> NSMutableAttributedString {
         let privacyText = footerAttributedText(Constants.privacyString, withLink: Constants.privacyURLString)
         let termsOfServiceText = footerAttributedText(Constants.termsString, withLink: Constants.termsURLString)
         let californiaStringText = footerAttributedText(Constants.californiaString, withLink: Constants.californiaURLString)
@@ -165,9 +174,8 @@ private extension SPAboutViewController {
         paragraphStyle.lineSpacing = 15
 
         text.addAttribute(.paragraphStyle, value: paragraphStyle, range: text.fullRange)
-        textView.attributedText = text
 
-        return textView
+        return text
     }
 
     func footerAttributedText(_ text: String, withLink link: String) -> NSAttributedString {
@@ -181,7 +189,7 @@ private extension SPAboutViewController {
     func footerAttributedText(_ text: String) -> NSAttributedString {
         return NSAttributedString(string: text, attributes: [
             .foregroundColor: UIColor.simplenoteBlue10Color,
-            .font: UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 13))
+            .font: UIFont.preferredFont(forTextStyle: .footnote)
         ])
     }
 
@@ -310,10 +318,14 @@ private extension SPAboutViewController {
 //
 private enum Constants {
 
-    static let headerHeight: CGFloat        = 170
-    static let footerHeight: CGFloat        = 60
-    static let doneButtonWidth: CGFloat     = 30
+    static let doneButtonWidth: CGFloat = 30
     static let doneButtonTopMargin: CGFloat = 13
+    static let logoWidth: CGFloat = 60
+
+    static let containerEdgeInsets = UIEdgeInsets(top: 72, left: 0, bottom: 14, right: 0)
+    static let containerSpacing: CGFloat = 36
+    static let headerViewSpacing: CGFloat = 6
+    static let footerViewSpacing: CGFloat = 20
 
     static let privacyString    = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
     static let privacyURLString = "https://automattic.com/privacy/"
