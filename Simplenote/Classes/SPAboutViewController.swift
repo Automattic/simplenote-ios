@@ -167,6 +167,7 @@ private extension SPAboutViewController {
         text.append(privacyText)
         text.append(footerAttributedText(", "))
         text.append(termsOfServiceText)
+        text.append(footerAttributedText(","))
         text.append(footerAttributedText("\n"))
         text.append(californiaStringText)
 
