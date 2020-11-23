@@ -39,6 +39,7 @@ private extension SPAboutViewController {
     func setupDoneButton() {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.addTarget(self, action: #selector(onDoneTap(_:)), for: .touchUpInside)
+        doneButton.style = .blue
 
         view.addSubview(doneButton)
 
