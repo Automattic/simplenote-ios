@@ -24,6 +24,11 @@ class SPAboutViewController: UIViewController {
         setupTableView()
         setupFooterView()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewSpinner?.stop()
+    }
 }
 
 
@@ -89,7 +94,7 @@ private extension SPAboutViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.tintColor = .white
 
-        viewSpinner = ViewSpinner(view: imageView)
+        setupSpinner(with: imageView)
 
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 60),
@@ -116,6 +121,32 @@ private extension SPAboutViewController {
         stackView.addArrangedSubview(versionLabel)
 
         containerView.addArrangedSubview(stackView)
+    }
+
+    func setupSpinner(with view: UIView) {
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLogoGestureRecognizer(_:)))
+        gestureRecognizer.minimumPressDuration = 0.5
+        view.addGestureRecognizer(gestureRecognizer)
+        view.isUserInteractionEnabled = true
+
+        viewSpinner = ViewSpinner(view: view)
+        viewSpinner?.onMaxVelocity = { [weak self] in
+            self?.viewSpinner?.stop()
+        }
+    }
+
+    @objc
+    private func handleLogoGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .began:
+            viewSpinner?.start()
+        case .ended, .cancelled, .failed:
+            viewSpinner?.stop()
+        case .possible, .changed:
+            break
+        @unknown default:
+            break
+        }
     }
 }
 
