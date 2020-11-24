@@ -365,4 +365,16 @@ extension UIColor {
         UIColor(lightColor: .spBlue50,
                 darkColor: .spBlue50)
     }
+
+    static var simplenoteLockScreenBackgroudColor: UIColor {
+        return UIColor(studioColor: .blue50)
+    }
+
+    static var simplenoteLockScreenButtonColor: UIColor {
+        return UIColor(studioColor: .blue40)
+    }
+
+    static var simplenoteLockScreenHighlightedButtonColor: UIColor {
+        return UIColor(studioColor: .blue20)
+    }
 }

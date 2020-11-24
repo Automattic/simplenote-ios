@@ -124,6 +124,9 @@
 		A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */; };
 		A64DE701255D4570001D0526 /* NoteBodyExcerptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE700255D4570001D0526 /* NoteBodyExcerptTests.swift */; };
 		A66224FD2546B460003A949E /* TableHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66224FC2546B460003A949E /* TableHeaderViewCell.swift */; };
+		A66E41D0256D08E6000C6FCB /* PinLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66E41CE256D08E6000C6FCB /* PinLockViewController.swift */; };
+		A66E41D1256D08E6000C6FCB /* PinLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66E41CF256D08E6000C6FCB /* PinLockViewController.xib */; };
+		A66E41E1256D0F44000C6FCB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66E41E0256D0F44000C6FCB /* RoundedButton.swift */; };
 		A681C72C254172B600F369C2 /* NoteMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C72B254172B600F369C2 /* NoteMetrics.swift */; };
 		A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */; };
 		A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */; };
@@ -523,6 +526,9 @@
 		A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringContentSliceTests.swift; sourceTree = "<group>"; };
 		A64DE700255D4570001D0526 /* NoteBodyExcerptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBodyExcerptTests.swift; sourceTree = "<group>"; };
 		A66224FC2546B460003A949E /* TableHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderViewCell.swift; sourceTree = "<group>"; };
+		A66E41CE256D08E6000C6FCB /* PinLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockViewController.swift; sourceTree = "<group>"; };
+		A66E41CF256D08E6000C6FCB /* PinLockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinLockViewController.xib; sourceTree = "<group>"; };
+		A66E41E0256D0F44000C6FCB /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Classes/RoundedButton.swift; sourceTree = "<group>"; };
 		A681C72B254172B600F369C2 /* NoteMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMetrics.swift; sourceTree = "<group>"; };
 		A681C7332541772D00F369C2 /* NumberFormatter+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Simplenote.swift"; sourceTree = "<group>"; };
 		A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuggableTableView.swift; sourceTree = "<group>"; };
@@ -1072,6 +1078,16 @@
 				8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */,
 			);
 			path = config;
+			sourceTree = "<group>";
+		};
+		A66E41CD256D08BE000C6FCB /* PinLock */ = {
+			isa = PBXGroup;
+			children = (
+				A66E41CE256D08E6000C6FCB /* PinLockViewController.swift */,
+				A66E41CF256D08E6000C6FCB /* PinLockViewController.xib */,
+			);
+			name = PinLock;
+			path = Classes/PinLock;
 			sourceTree = "<group>";
 		};
 		A690032F253D85C40087D0D2 /* Controllers */ = {
@@ -1625,6 +1641,7 @@
 				A6E1E7A724BE656D008A44BC /* SPCardView.swift */,
 				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A66E41E0256D0F44000C6FCB /* RoundedButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1775,6 +1792,7 @@
 		E29ADD751784902700E55842 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A66E41CD256D08BE000C6FCB /* PinLock */,
 				B59035FB251294D400034BAF /* Diagnostics */,
 				B511AECA255A0A01005B2159 /* Interlinks */,
 				B56A695122F9CCF400B90398 /* Onboarding */,
@@ -2046,6 +2064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
+				A66E41D1256D08E6000C6FCB /* PinLockViewController.xib in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */,
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
@@ -2340,6 +2359,7 @@
 				375D24BB21E01131007AB25A /* html.c in Sources */,
 				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
+				A66E41E1256D0F44000C6FCB /* RoundedButton.swift in Sources */,
 				E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
 				B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */,
@@ -2407,6 +2427,7 @@
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
+				A66E41D0256D08E6000C6FCB /* PinLockViewController.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
