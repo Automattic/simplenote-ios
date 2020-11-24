@@ -46,8 +46,8 @@ private extension SPAboutViewController {
         NSLayoutConstraint.activate([
             doneButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: Constants.doneButtonTopMargin),
             doneButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            doneButton.widthAnchor.constraint(equalToConstant: Constants.doneButtonWidth),
-            doneButton.heightAnchor.constraint(equalToConstant: Constants.doneButtonWidth),
+            doneButton.widthAnchor.constraint(equalToConstant: Constants.doneButtonSideSize),
+            doneButton.heightAnchor.constraint(equalToConstant: Constants.doneButtonSideSize),
         ])
     }
 
@@ -120,8 +120,8 @@ private extension SPAboutViewController {
 
     func versionLabel() -> UIView {
         let label = UILabel()
-        let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-        label.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber!)
+        let versionNumber = Bundle.main.shortVersionString
+        label.text = String(format: NSLocalizedString("Version %@", comment: "App version number"), versionNumber)
         label.textColor = UIColor.white
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textAlignment = .center
@@ -173,7 +173,7 @@ private extension SPAboutViewController {
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        paragraphStyle.lineSpacing = 15
+        paragraphStyle.lineSpacing = Constants.footerLineSpacing
 
         text.addAttribute(.paragraphStyle, value: paragraphStyle, range: text.fullRange)
 
@@ -242,7 +242,7 @@ extension SPAboutViewController: UITableViewDataSource {
         
         let arrowAccessoryView = UIImageView(image: .image(name: .arrowTopRight))
         arrowAccessoryView.tintColor = .simplenoteBlue10Color
-        arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: Constants.cellAccessorySideSize, height: Constants.cellAccessorySideSize)
         cell.accessoryView = arrowAccessoryView
 
         return cell
@@ -269,7 +269,7 @@ extension SPAboutViewController: UITableViewDelegate {
 private extension SPAboutViewController {
     func setupSpinner(with view: UIView) {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleSpinnerGestureRecognizer(_:)))
-        gestureRecognizer.minimumPressDuration = 0.5
+        gestureRecognizer.minimumPressDuration = Constants.logoMinPressDuration
         view.addGestureRecognizer(gestureRecognizer)
         view.isUserInteractionEnabled = true
 
@@ -320,14 +320,18 @@ private extension SPAboutViewController {
 //
 private enum Constants {
 
-    static let doneButtonWidth: CGFloat = 30
+    static let doneButtonSideSize: CGFloat = 30
     static let doneButtonTopMargin: CGFloat = 13
     static let logoWidth: CGFloat = 60
+    static let cellAccessorySideSize: CGFloat = 24
 
     static let containerEdgeInsets = UIEdgeInsets(top: 72, left: 0, bottom: 14, right: 0)
     static let containerSpacing: CGFloat = 36
     static let headerViewSpacing: CGFloat = 6
     static let footerViewSpacing: CGFloat = 20
+    static let footerLineSpacing: CGFloat = 15
+
+    static let logoMinPressDuration: TimeInterval = 0.5
 
     static let privacyString    = NSLocalizedString("Privacy Policy", comment: "Simplenote privacy policy")
     static let privacyURLString = "https://automattic.com/privacy/"
