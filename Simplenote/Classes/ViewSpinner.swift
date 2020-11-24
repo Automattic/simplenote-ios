@@ -31,7 +31,7 @@ final class ViewSpinner {
         velocity = 0.0
         angle = 0.0
 
-        displayLink = CADisplayLink(target: self, selector: #selector(update))
+        displayLink = CADisplayLink(target: self, selector: #selector(update(_:)))
         displayLink?.add(to: .current, forMode: .common)
     }
 
@@ -60,11 +60,7 @@ final class ViewSpinner {
     }
 
     @objc
-    private func update() {
-        guard let displayLink = displayLink else {
-            return
-        }
-
+    private func update(_ displayLink: CADisplayLink) {
         let timeDelta = displayLink.targetTimestamp - displayLink.timestamp
 
         let prevVelocity = velocity
