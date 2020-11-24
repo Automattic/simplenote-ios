@@ -2,7 +2,7 @@
 -----
 -   Updated Empty State placeholders #951
 -   Home screen quick actions #950
-
+-   Adjusted About screen metrics #952
 
 4.28
 -----

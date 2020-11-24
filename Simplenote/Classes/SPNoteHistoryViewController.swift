@@ -72,7 +72,6 @@ private extension SPNoteHistoryViewController {
         styleSlider()
         styleRestoreButton()
         styleActivityIndicator()
-        styleDismissButton()
     }
 
     func styleDateLabel() {
@@ -96,17 +95,6 @@ private extension SPNoteHistoryViewController {
         restoreButton.setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
 
         restoreButton.setTitle(Localization.restoreButtonTitle, for: .normal)
-    }
-
-    func styleDismissButton() {
-        dismissButton.layer.masksToBounds = true
-
-        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
-
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
-
-        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 
     func styleActivityIndicator() {

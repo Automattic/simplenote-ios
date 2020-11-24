@@ -9,6 +9,7 @@ enum UIImageName: Int, CaseIterable {
     case add
     case allNotes
     case archive
+    case arrowTopRight
     case checklist
     case checkmarkChecked
     case checkmarkUnchecked
@@ -69,6 +70,8 @@ extension UIImageName {
             return "icon_allnotes"
         case .archive:
             return "icon_archive"
+        case .arrowTopRight:
+            return "icon_arrow_top_right"
         case .checklist:
             return "icon_checklist"
         case .checkmarkChecked:
