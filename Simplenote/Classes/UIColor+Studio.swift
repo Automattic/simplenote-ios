@@ -111,7 +111,7 @@ extension UIColor {
 
     @objc
     static var simplenoteAutocompleteBackgroundColor: UIColor {
-        UIColor(lightColor: .white, darkColor: .darkGray1, lightColorAlpha: UIKitConstants.alpha0_2)
+        UIColor(lightColor: .white, darkColor: .darkGray1).withAlphaComponent(UIKitConstants.alpha0_8)
     }
 
     @objc
