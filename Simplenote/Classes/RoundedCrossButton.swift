@@ -2,23 +2,13 @@ import UIKit
 
 // MARK: RoundedCrossButton
 //
-class RoundedCrossButton: UIButton {
+class RoundedCrossButton: RoundedButton {
 
     /// Style
     ///
     enum Style {
         case standard
         case blue
-    }
-
-    override var bounds: CGRect {
-        didSet {
-            guard bounds.size != oldValue.size else {
-                return
-            }
-
-            updateCornerRadius()
-        }
     }
 
     var style: Style = .standard {
@@ -47,14 +37,7 @@ class RoundedCrossButton: UIButton {
 private extension RoundedCrossButton {
     func configure() {
         startListeningToNotifications()
-
-        layer.masksToBounds = true
-        updateCornerRadius()
         refreshStyle()
-    }
-
-    func updateCornerRadius() {
-        layer.cornerRadius = min(frame.height, frame.width) / 2
     }
 
     func refreshStyle() {
