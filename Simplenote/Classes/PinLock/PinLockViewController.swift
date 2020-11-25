@@ -34,7 +34,7 @@ class PinLockViewController: UIViewController {
     }
 }
 
-// MARK: - Private
+// MARK: - Setup
 //
 private extension PinLockViewController {
     func setup() {
@@ -72,27 +72,75 @@ private extension PinLockViewController {
     }
 }
 
-// MARK: - Buttons
+// MARK: - Pincode
 //
 private extension PinLockViewController {
-    @objc
-    func handleTapOnKeypadButton(_ button: UIButton) {
-        guard let index = keypadButtons.firstIndex(of: button),
-              inputValues.count < Constants.pinLength else {
+    func addDigit(_ digit: Int) {
+        guard inputValues.count < Constants.pinLength else {
             return
         }
 
-        inputValues.append(index)
-
+        inputValues.append(digit)
     }
 
-    @IBAction
-    private func handleTapOnCancelButton() {
+    func removeLastDigit() {
         guard !inputValues.isEmpty else {
             return
         }
 
         inputValues.removeLast()
+    }
+}
+
+// MARK: - Buttons
+//
+private extension PinLockViewController {
+    @objc
+    func handleTapOnKeypadButton(_ button: UIButton) {
+        guard let index = keypadButtons.firstIndex(of: button) else {
+            return
+        }
+
+        addDigit(index)
+
+    }
+
+    @IBAction
+    private func handleTapOnCancelButton() {
+        removeLastDigit()
+    }
+}
+
+// MARK: - External keyboard
+//
+extension PinLockViewController {
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        var commands = (0..<10).map {
+            UIKeyCommand(input: String($0), modifierFlags: [], action: #selector(handleKeypress(_:)))
+        }
+
+        let backspaceCommand = UIKeyCommand(input: "\u{8}", modifierFlags: [], action: #selector(handleBackspace))
+        commands.append(backspaceCommand)
+
+        return commands
+    }
+
+    @objc
+    private func handleKeypress(_ keyCommand: UIKeyCommand) {
+        guard let digit = Int(keyCommand.input ?? "") else {
+            return
+        }
+
+        addDigit(digit)
+    }
+
+    @objc
+    private func handleBackspace() {
+        removeLastDigit()
     }
 }
 
