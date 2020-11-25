@@ -71,5 +71,5 @@ private extension PinLockProgressView {
 //
 private enum Constants {
     static let buttonBorderWidth: CGFloat = 1.0
-    static let buttonSideSize: CGFloat = 15.0
+    static let buttonSideSize: CGFloat = 14.0
 }

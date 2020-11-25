@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PinLockViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="EY1-yW-LpJ" id="pU7-Wr-CkJ"/>
+                <outlet property="messageLabel" destination="amM-I9-F7S" id="FwI-Ox-zxH"/>
                 <outlet property="progressView" destination="ZqA-yv-5ub" id="mbM-z7-b03"/>
                 <outlet property="titleLabel" destination="WOh-Ux-wmS" id="EEN-uz-p6o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,11 +33,11 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-Ix-uIM">
-                    <rect key="frame" x="65" y="201.5" width="284" height="503"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-Ix-uIM">
+                    <rect key="frame" x="65" y="193.5" width="284" height="519"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="1oZ-M4-eDV">
-                            <rect key="frame" x="0.0" y="0.0" width="284" height="101"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="1oZ-M4-eDV">
+                            <rect key="frame" x="0.0" y="0.0" width="284" height="142"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOh-Ux-wmS">
                                     <rect key="frame" x="118" y="0.0" width="48" height="24"/>
@@ -45,12 +46,18 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ZqA-yv-5ub" customClass="PinLockProgressView" customModule="Simplenote" customModuleProvider="target">
-                                    <rect key="frame" x="142" y="51" width="0.0" height="50"/>
+                                    <rect key="frame" x="142" y="49" width="0.0" height="50"/>
                                 </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Failed Passcode Attempts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amM-I9-F7S">
+                                    <rect key="frame" x="47" y="124" width="190" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Z1C-0F-Pl0">
-                            <rect key="frame" x="0.0" y="151" width="284" height="352"/>
+                            <rect key="frame" x="0.0" y="167" width="284" height="352"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="NE9-h3-DyR">
                                     <rect key="frame" x="0.0" y="0.0" width="284" height="76"/>
