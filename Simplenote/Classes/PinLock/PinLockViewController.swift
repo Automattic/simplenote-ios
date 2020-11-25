@@ -8,6 +8,7 @@ class PinLockViewController: UIViewController {
     }
 
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var messageLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var progressView: PinLockProgressView!
     @IBOutlet private var keypadButtons: [UIButton] = []
@@ -40,6 +41,7 @@ private extension PinLockViewController {
     func setup() {
         view.backgroundColor = .simplenoteLockScreenBackgroudColor
         setupTitleLabel()
+        setupMessageLabel()
         setupCancelButton()
         setupProgressView()
         setupKeypadButtons()
@@ -64,6 +66,10 @@ private extension PinLockViewController {
 
     func setupTitleLabel() {
         titleLabel.text = Localization.enterYourPasscode
+    }
+
+    func setupMessageLabel() {
+        messageLabel.textColor = .simplenoteLockScreenMessageColor
     }
 
     func updateCancelButton() {
