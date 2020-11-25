@@ -7,28 +7,10 @@ class PinLockViewController: UIViewController {
         return .lightContent
     }
 
-    @IBOutlet private var keypadButtons: [UIButton] = [] {
-        didSet {
-            for button in keypadButtons {
-                button.setBackgroundImage(UIColor.simplenoteLockScreenButtonColor.dynamicImageRepresentation(), for: .normal)
-                button.setBackgroundImage(UIColor.simplenoteLockScreenHighlightedButtonColor.dynamicImageRepresentation(), for: .highlighted)
-                button.addTarget(self, action: #selector(handleTapOnKeypadButton(_:)), for: .touchUpInside)
-            }
-        }
-    }
-
-    @IBOutlet private var cancelButton: UIButton! {
-        didSet {
-            cancelButton.setTitleColor(.white, for: .normal)
-            updateCancelButton()
-        }
-    }
-
-    @IBOutlet private var progressView: PinLockProgressView! {
-        didSet {
-            progressView.length = Constants.pinLength
-        }
-    }
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var progressView: PinLockProgressView!
+    @IBOutlet private var keypadButtons: [UIButton] = []
 
     private var inputValues: [Int] = [] {
         didSet {
@@ -57,6 +39,31 @@ class PinLockViewController: UIViewController {
 private extension PinLockViewController {
     func setup() {
         view.backgroundColor = .simplenoteLockScreenBackgroudColor
+        setupTitleLabel()
+        setupCancelButton()
+        setupProgressView()
+        setupKeypadButtons()
+    }
+
+    func setupCancelButton() {
+        cancelButton.setTitleColor(.white, for: .normal)
+        updateCancelButton()
+    }
+
+    func setupProgressView() {
+        progressView.length = Constants.pinLength
+    }
+
+    func setupKeypadButtons() {
+        for button in keypadButtons {
+            button.setBackgroundImage(UIColor.simplenoteLockScreenButtonColor.dynamicImageRepresentation(), for: .normal)
+            button.setBackgroundImage(UIColor.simplenoteLockScreenHighlightedButtonColor.dynamicImageRepresentation(), for: .highlighted)
+            button.addTarget(self, action: #selector(handleTapOnKeypadButton(_:)), for: .touchUpInside)
+        }
+    }
+
+    func setupTitleLabel() {
+        titleLabel.text = Localization.enterYourPasscode
     }
 
     func updateCancelButton() {
@@ -92,6 +99,7 @@ private extension PinLockViewController {
 // MARK: - Localization
 //
 private enum Localization {
+    static let enterYourPasscode = NSLocalizedString("Enter your passcode", comment: "Title on the PinLock screen asking to enter a passcode")
     static let deleteButton = NSLocalizedString("Delete", comment: "PinLock screen \"delete\" button")
     static let cancelButton = NSLocalizedString("Cancel", comment: "PinLock screen \"cancel\" button")
 }
