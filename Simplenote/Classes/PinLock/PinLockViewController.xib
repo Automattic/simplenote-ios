@@ -135,26 +135,32 @@
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                             <state key="normal" title="0"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EY1-yW-LpJ">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEI-Lo-gGb">
                                             <rect key="frame" x="208" y="0.0" width="76" height="76"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="handleTapOnCancelButton" destination="-1" eventType="touchUpInside" id="9Hu-Yv-bSW"/>
-                                            </connections>
-                                        </button>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                     </subviews>
                                 </stackView>
                             </subviews>
                         </stackView>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EY1-yW-LpJ">
+                    <rect key="frame" x="298" y="821" width="51" height="33"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="handleTapOnCancelButton" destination="-1" eventType="touchUpInside" id="9Hu-Yv-bSW"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemTealColor"/>
             <constraints>
                 <constraint firstItem="kUd-Ix-uIM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="EaN-W5-Zci"/>
+                <constraint firstItem="EY1-yW-LpJ" firstAttribute="trailing" secondItem="Z1C-0F-Pl0" secondAttribute="trailing" id="V2R-j1-Ij6"/>
                 <constraint firstItem="kUd-Ix-uIM" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="d85-ya-WaS"/>
+                <constraint firstAttribute="bottomMargin" secondItem="EY1-yW-LpJ" secondAttribute="bottom" constant="8" id="oQl-6D-5Ae"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
