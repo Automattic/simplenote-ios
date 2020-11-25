@@ -13,6 +13,7 @@ class PinLockViewController: UIViewController {
     @IBOutlet private weak var progressView: PinLockProgressView!
     @IBOutlet private var keypadButtons: [UIButton] = []
 
+    private let controller: PinLockController
     private var inputValues: [Int] = [] {
         didSet {
             progressView.progress = inputValues.count
@@ -20,8 +21,9 @@ class PinLockViewController: UIViewController {
         }
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(controller: PinLockController) {
+        self.controller = controller
+        super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
     }
 
@@ -33,6 +35,18 @@ class PinLockViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        controller.configurationObserver = { [weak self] (configuration, transition) in
+            self?.update(with: configuration, transition: transition)
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        controller.configurationObserver = nil
+    }
 }
 
 // MARK: - Setup
@@ -40,7 +54,6 @@ class PinLockViewController: UIViewController {
 private extension PinLockViewController {
     func setup() {
         view.backgroundColor = .simplenoteLockScreenBackgroudColor
-        setupTitleLabel()
         setupMessageLabel()
         setupCancelButton()
         setupProgressView()
@@ -64,17 +77,33 @@ private extension PinLockViewController {
         }
     }
 
-    func setupTitleLabel() {
-        titleLabel.text = Localization.enterYourPasscode
-    }
-
     func setupMessageLabel() {
         messageLabel.textColor = .simplenoteLockScreenMessageColor
     }
 
+    func update(with configuration: PinLockControllerConfiguration, transition: PinLockControllerTransition) {
+        inputValues = []
+        updateTitleLabel(with: configuration)
+        updateMessageLabel(with: configuration)
+    }
+
+    func updateTitleLabel(with configuration: PinLockControllerConfiguration) {
+        titleLabel.text = configuration.title
+    }
+
+    func updateMessageLabel(with configuration: PinLockControllerConfiguration) {
+        messageLabel.text = configuration.message
+    }
+
     func updateCancelButton() {
-        cancelButton.setTitle(inputValues.isEmpty ? Localization.cancelButton : Localization.deleteButton,
-                              for: .normal)
+        if inputValues.isEmpty {
+            cancelButton.setTitle(Localization.cancelButton, for: .normal)
+            cancelButton.isHidden = !controller.isCancellable
+            return
+        }
+
+        cancelButton.isHidden = false
+        cancelButton.setTitle(Localization.deleteButton, for: .normal)
     }
 }
 
@@ -87,6 +116,11 @@ private extension PinLockViewController {
         }
 
         inputValues.append(digit)
+
+        if inputValues.count == Constants.pinLength {
+            let pin = inputValues.compactMap(String.init).joined()
+            controller.handlePin(pin)
+        }
     }
 
     func removeLastDigit() {
@@ -153,6 +187,7 @@ extension PinLockViewController {
 // MARK: - Localization
 //
 private enum Localization {
+
     static let enterYourPasscode = NSLocalizedString("Enter your passcode", comment: "Title on the PinLock screen asking to enter a passcode")
     static let deleteButton = NSLocalizedString("Delete", comment: "PinLock screen \"delete\" button")
     static let cancelButton = NSLocalizedString("Cancel", comment: "PinLock screen \"cancel\" button")

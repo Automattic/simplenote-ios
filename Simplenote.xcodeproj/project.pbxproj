@@ -149,6 +149,8 @@
 		A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */; };
 		A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */; };
 		A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */; };
+		A6E02758256E52F3002054DF /* PinLockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E02757256E52F3002054DF /* PinLockController.swift */; };
+		A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E02777256E9487002054DF /* PinLockSetupController.swift */; };
 		A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */; };
 		A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */; };
 		A6E1E79A24B7DB96008A44BC /* SPManagedObject+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */; };
@@ -554,6 +556,8 @@
 		A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewSpinner.swift; path = Classes/ViewSpinner.swift; sourceTree = "<group>"; };
 		A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Simplenote.swift"; sourceTree = "<group>"; };
 		A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
+		A6E02757256E52F3002054DF /* PinLockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockController.swift; sourceTree = "<group>"; };
+		A6E02777256E9487002054DF /* PinLockSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockSetupController.swift; sourceTree = "<group>"; };
 		A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryControllerDelegate.swift; sourceTree = "<group>"; };
 		A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPHistoryVersion.swift; sourceTree = "<group>"; };
 		A6E1E79924B7DB96008A44BC /* SPManagedObject+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Version.swift"; sourceTree = "<group>"; };
@@ -1091,6 +1095,8 @@
 			children = (
 				A66E41CE256D08E6000C6FCB /* PinLockViewController.swift */,
 				A66E41CF256D08E6000C6FCB /* PinLockViewController.xib */,
+				A6E02757256E52F3002054DF /* PinLockController.swift */,
+				A6E02777256E9487002054DF /* PinLockSetupController.swift */,
 			);
 			name = PinLock;
 			path = Classes/PinLock;
@@ -2339,6 +2345,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
+				A6E02758256E52F3002054DF /* PinLockController.swift in Sources */,
 				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
 				B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */,
 				A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */,
@@ -2436,6 +2443,7 @@
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
+				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				A66E41D0256D08E6000C6FCB /* PinLockViewController.swift in Sources */,
