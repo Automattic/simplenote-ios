@@ -11,6 +11,7 @@ class PinLockViewController: UIViewController {
     @IBOutlet private weak var messageLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var progressView: PinLockProgressView!
+    @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet private var keypadButtons: [UIButton] = []
 
     private let controller: PinLockController
@@ -38,8 +39,8 @@ class PinLockViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        controller.configurationObserver = { [weak self] (configuration, transition) in
-            self?.update(with: configuration, transition: transition)
+        controller.configurationObserver = { [weak self] (configuration, animation) in
+            self?.update(with: configuration, animation: animation)
         }
     }
 
@@ -81,7 +82,18 @@ private extension PinLockViewController {
         messageLabel.textColor = .simplenoteLockScreenMessageColor
     }
 
-    func update(with configuration: PinLockControllerConfiguration, transition: PinLockControllerTransition) {
+    func update(with configuration: PinLockControllerConfiguration, animation: UIView.ReloadAnimation?) {
+        guard let animation = animation else {
+            update(with: configuration)
+            return
+        }
+
+        headerStackView.reload(with: animation, in: view) { [weak self] in
+            self?.update(with: configuration)
+        }
+    }
+
+    func update(with configuration: PinLockControllerConfiguration) {
         inputValues = []
         updateTitleLabel(with: configuration)
         updateMessageLabel(with: configuration)
@@ -92,7 +104,9 @@ private extension PinLockViewController {
     }
 
     func updateMessageLabel(with configuration: PinLockControllerConfiguration) {
-        messageLabel.text = configuration.message
+        // Use `space` to preserve the height of `messageLabel` even if it's empty
+        let text = configuration.message ?? " "
+        messageLabel.text = text
     }
 
     func updateCancelButton() {

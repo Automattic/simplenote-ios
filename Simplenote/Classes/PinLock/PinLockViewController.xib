@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PinLockViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="EY1-yW-LpJ" id="pU7-Wr-CkJ"/>
+                <outlet property="headerStackView" destination="1oZ-M4-eDV" id="VlI-cn-LTl"/>
                 <outlet property="messageLabel" destination="amM-I9-F7S" id="FwI-Ox-zxH"/>
                 <outlet property="progressView" destination="ZqA-yv-5ub" id="mbM-z7-b03"/>
                 <outlet property="titleLabel" destination="WOh-Ux-wmS" id="EEN-uz-p6o"/>
