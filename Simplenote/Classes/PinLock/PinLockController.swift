@@ -25,4 +25,8 @@ protocol PinLockController: class {
     /// Handle pin entered in VC
     ///
     func handlePin(_ pin: String)
+
+    /// Handle tap on `cancel` button in VC
+    ///
+    func handleCancellation()
 }

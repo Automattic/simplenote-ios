@@ -137,12 +137,14 @@ private extension PinLockViewController {
         }
     }
 
-    func removeLastDigit() {
+    @discardableResult
+    func removeLastDigit() -> Bool {
         guard !inputValues.isEmpty else {
-            return
+            return false
         }
 
         inputValues.removeLast()
+        return true
     }
 }
 
@@ -161,7 +163,9 @@ private extension PinLockViewController {
 
     @IBAction
     private func handleTapOnCancelButton() {
-        removeLastDigit()
+        if !removeLastDigit() {
+            controller.handleCancellation()
+        }
     }
 }
 

@@ -1,12 +1,19 @@
 import Foundation
 
+// MARK: - PinLockSetupControllerDelegate
+//
+protocol PinLockSetupControllerDelegate: class {
+    func pinLockSetupController(_ controller: PinLockSetupController, didSelectPin pin: String)
+    func pinLockSetupControllerDidCancel(_ controller: PinLockSetupController)
+}
+
 // MARK: - PinLockSetupController
 //
 class PinLockSetupController: PinLockController {
     private var configuration: PinLockControllerConfiguration = PinLockControllerConfiguration(title: Localization.createPasscode, message: nil)
 
     var isCancellable: Bool {
-        return false
+        return true
     }
 
     var configurationObserver: ((PinLockControllerConfiguration, UIView.ReloadAnimation?) -> Void)? {
@@ -16,9 +23,12 @@ class PinLockSetupController: PinLockController {
     }
 
     private var pin: String?
+    private weak var delegate: PinLockSetupControllerDelegate?
 
-    /// Handle pin entered in the view controller
-    ///
+    init(delegate: PinLockSetupControllerDelegate) {
+        self.delegate = delegate
+    }
+
     func handlePin(_ pin: String) {
         guard !pin.isEmpty else {
             self.pin = nil
@@ -40,7 +50,11 @@ class PinLockSetupController: PinLockController {
             return
         }
 
-        // Set pin
+        delegate?.pinLockSetupController(self, didSelectPin: pin)
+    }
+
+    func handleCancellation() {
+        delegate?.pinLockSetupControllerDidCancel(self)
     }
 }
 
