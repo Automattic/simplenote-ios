@@ -1,4 +1,5 @@
 import Foundation
+import SimplenoteFoundation
 
 // MARK: - SPObjectManager
 //
@@ -23,4 +24,18 @@ extension SPObjectManager {
         return note
     }
 
+    @objc
+    func notesWithTag(_ tag: Tag?) -> [Note] {
+        guard let tagName = tag?.name else {
+            return []
+        }
+
+        let request = NSFetchRequest<Note>(entityName: Note.entityName)
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            .predicateForNotes(tag: tagName),
+            .predicateForNotes(deleted: false)
+        ])
+
+        return (try? managedObjectContext.fetch(request)) ?? []
+    }
 }
