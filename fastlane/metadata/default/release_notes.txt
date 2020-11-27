@@ -1,7 +1,8 @@
-- New Note History interface
-- New Note Options interface
-- New Note Information interface
-- Updated Navigation Bar's behavior
-- Adjusted Notes List Metrics
-- Fixed a bug that caused the Search Bar to look extra big
-- Fixed a bug affecting Tags Autocomplete
+- Typing "[" will now allow you to pick Interlinking Notes right from the editor
+- Searching for a note is showing relevant excerpts
+- Added Search Minimap to quickly navigate search hits
+- Tags List now extend to the edge of the screen, in landscape mode
+- Fixed a bug that affected Text Selection
+- Fixed a bug that toggled Edition while dragging the Editor
+- Fixed an issue that caused changes not to be persisted immediately
+- Fixed a bug that affected search highlight navigation

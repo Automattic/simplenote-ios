@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-26 16:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Katılımda Bulunun";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Dahili Bağlantıyı Kopyala";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "Bağlantıyı kopyala";
 
 /* No comment provided by engineer. */
 "Could be better" = "Daha İyi Olabilir";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "Bize nasıl daha iyi olabileceğimizi belirtir misiniz?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "Geçmiş Alınamadı.";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Oturum Açılamadı";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "Markdown biçimlendirmesini devre dışı bırak";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "Geçmişi Göz Ardı Et";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "Bilgiyi Göz Ardı Et";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Klavyeyi kapat";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "Başarısız Denemeler";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "Sürüm Alınıyor";
 
 /* Password Reset Action */
 "Forgotten password?" = "Parolayı mı unuttunuz?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "Bilgi";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Yeni bir Kontrol Listesi Öğesi ekler";
 
 /* Last Message timestamp */
 "LastSeen" = "Son Görülen";
@@ -379,7 +379,7 @@
 "Open note" = "Notu aç";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "Seçenekler";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Geçiş kodu";
@@ -437,7 +437,7 @@
 "Reachability" = "Erişilebilirlik";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Referans Verildiği Yer";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
@@ -471,7 +471,7 @@
 "Security" = "Güvenlik";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "Sürüm Seç";
 
 /* For debugging use */
 "Send a Test Crash" = "Yanıt Vermeyen Test İletisi Gönder";
@@ -493,7 +493,7 @@
 "Share Analytics" = "Analizleri paylaş";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "Paylaş...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Notların paylaşılmasına şimdi araç çubuğundaki işlem menüsünden erişilebilir.";

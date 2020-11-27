@@ -1,7 +1,8 @@
-- Nueva interfaz del historial de notas
-- Nueva interfaz de opciones de notas
-- Nueva interfaz de información de notas
-- Se ha actualizado el comportamiento de la barra de navegación
-- Se han ajustado las métricas de la lista de notas
-- Se ha corregido un error que hacía que la barra de búsqueda fuera demasiado grande
-- Se ha corregido un error que afectaba a la función Autocompletar etiquetas
+- Ahora, al escribir "[", podrás elegir la vinculación de notas directamente desde el editor
+- Al buscar una nota se muestran los extractos coincidentes
+- Se ha añadido una búsqueda de minimapa para examinar rápidamente los resultados de búsqueda
+- Ahora, la lista de etiquetas se extiende hasta el borde de la pantalla en modo horizontal
+- Se ha corregido un error que afectaba a la selección de texto
+- Se ha corregido un error que activaba/desactivaba la edición al arrastrar el Editor
+- Se ha corregido un problema que hacía que los cambios no se aplicaran inmediatamente
+- Se ha corregido un error que afectaba a la navegación destacada de búsqueda

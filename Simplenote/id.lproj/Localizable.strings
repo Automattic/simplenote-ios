@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-13 14:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Kontribusi";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Salin Tautan Internal";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "Salin tautan";
 
 /* No comment provided by engineer. */
 "Could be better" = "Bisa Lebih Baik";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "Menurut Anda, penyempurnaan apa yang dapat kami lakukan?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "Tidak Dapat Mengambil Riwayat";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Tidak Dapat Masuk";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "Nonaktifkan pemformatan Markdown";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "Tutup Riwayat";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "Tutup Informasi";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Abaikan keyboard";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "PercobaanGagal";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "Mengambil Versi";
 
 /* Password Reset Action */
 "Forgotten password?" = "Lupa kata sandi?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "Informasi";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Masukkan Item Daftar Periksa baru";
 
 /* Last Message timestamp */
 "LastSeen" = "Terakhir Dilihat";
@@ -379,7 +379,7 @@
 "Open note" = "Buka catatan";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "Opsi-opsi";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Kode sandi";
@@ -437,7 +437,7 @@
 "Reachability" = "Keterjangkauan";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Referenced In";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Buang semua catatan dari sampah";
@@ -471,7 +471,7 @@
 "Security" = "Keamanan";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "Pilih Versi";
 
 /* For debugging use */
 "Send a Test Crash" = "Kirim Uji Kesalahan";
@@ -493,7 +493,7 @@
 "Share Analytics" = "Berbagi analitik";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "Bagikan...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Berbagi catatan kini dapat diakses melalui menu tindakan dari bilah peralatan.";

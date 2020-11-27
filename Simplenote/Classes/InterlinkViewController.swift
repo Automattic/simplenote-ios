@@ -14,7 +14,7 @@ class InterlinkViewController: UIViewController {
 
     /// Layout Constraints: Inner TableView
     ///
-    @IBOutlet private var tableLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet private var tableLeftConstraint: NSLayoutConstraint!
     @IBOutlet private var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet private var tableHeightConstraint: NSLayoutConstraint!
 
@@ -91,6 +91,7 @@ private extension InterlinkViewController {
         tableView.backgroundColor = .clear
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
+        tableView.alwaysBounceVertical = false
         tableView.layer.masksToBounds = true
         tableView.layer.cornerRadius = Metrics.cornerRadius
     }
@@ -152,7 +153,7 @@ private extension InterlinkViewController {
     /// -   Note: We'll align the Table **Text**, horizontally, with regards of the anchor frame. That's why we consider layout margins!
     /// -   Important: Whenever we overflow horizontally, we'll simply ensure there's enough breathing room on the right hand side
     ///
-    func calculateLeadingLocation(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
+    func calculateLeftLocation(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
         let maximumX = anchor.minX + Metrics.defaultTableWidth + tableView.layoutMargins.right
         if viewport.width > maximumX {
             return anchor.minX - tableView.layoutMargins.left

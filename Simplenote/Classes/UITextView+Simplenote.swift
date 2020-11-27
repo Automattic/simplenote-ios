@@ -19,12 +19,6 @@ extension UITextView {
     var isUndoingEditOP: Bool {
         undoManager?.isUndoing == true
     }
-
-    /// Indicates if the user is Editing an Interlink
-    ///
-    var isEditingInterlink: Bool {
-        interlinkKeywordAtSelectedLocation != nil
-    }
 }
 
 
