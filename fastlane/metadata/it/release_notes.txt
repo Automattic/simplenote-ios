@@ -1,7 +1,8 @@
-- Nuova interfaccia di cronologia delle note
-- Nuova interfaccia delle opzioni delle note
-- Nuova interfaccia delle note
-- Comportamento aggiornato della barra di navigazione
-- Metriche dell'elenco delle note corrette
-- Corretto un bug che causava la visualizzazione molto grande della barra di ricerca
-- Corretto un bug che interessava il completamento automatico dei tag
+- Digitando "[" ora potrai scegliere Note di interlink direttamente dall'editor
+- La ricerca di una nota mostrerà estratti pertinenti
+- È stata aggiunta la minimappa di ricerca per muoversi rapidamente nei risultati della ricerca
+- L'elenco dei tag ora si estende fino al margine dello schermata in modalità orizzontale
+- È stato corretto un bug che interessava la selezione del testo
+- È stato corretto un bug che attivava/disattivava l'editazione durante il trascinamento dell'editor
+- È stato corretto un problema che causava il mancato mantenimento immediato delle modifiche
+- È stato corretto un bug che interessava la navigazione tra le evidenziazioni della ricerca

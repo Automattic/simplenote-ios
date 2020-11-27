@@ -1,7 +1,0 @@
-- Nytt Anteckningshistorik-gränssnitt
-- Nytt Anteckningsalternativ-gränssnitt
-- Nytt Anteckningsinformation-gränssnitt
-- Navigeringsfältets beteende har uppdaterats
-- Anteckningslistans mått har justerats
-- Ett fel som fick sökfältet att se extra stort ut har åtgärdats
-- Ett fel som påverkade automatiskt slutförande av etiketter har åtgärdats

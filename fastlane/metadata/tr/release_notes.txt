@@ -1,7 +1,8 @@
-- Yeni Not Geçmişi arayüzü
-- Yeni Not Seçenekleri arayüzü
-- Yeni Not Bilgisi arayüzü
-- Gezinme Çubuğu'nun davranışı güncellendi
-- Düzeltilmiş Notlar Listesi Metrikleri
-- Arama Çubuğunun çok büyük görünmesine neden olan bir hata düzeltildi
-- Etiketlerin Otomatik Tamamlanmasını etkileyen bir hata düzeltildi
+-  "[" karakterini yazarak artık doğrudan düzenleyiciden Birbirine Bağlanan Notları seçebilirsiniz
+- Bir not arandığında ilgili alıntılar gösterilir
+- Eklenen Arama Mini Haritası ile arama sonuçlarına hızlıca gidilebilir
+- Etiketler Listesi artık yatay modda ekranın kenarına kadar uzanır
+- Metin Seçimini etkileyen bir hata düzeltilmiştir
+- Düzenleyiciyi sürüklerken Sürümü değiştiren bir hata düzeltilmiştir 
+- Değişikliklerin kalıcı olmamasına neden olan bir sorun düzeltilmiştir
+- Arama vurgusu gezinmesini etkileyen bir hata düzeltilmiştir 
