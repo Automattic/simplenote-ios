@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-26 09:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Beitragen";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Internen Link kopieren";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "Link kopieren";
 
 /* No comment provided by engineer. */
 "Could be better" = "Könnte besser sein";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "Könntest du uns Verbesserungsvorschläge machen?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "Verlauf konnte nicht abgerufen werden";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Anmeldung nicht möglich";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "Markdown-Formatierung deaktivieren";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "Verlauf verwerfen";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "Informationen verwerfen";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Tastatur ausblenden";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "Version wird abgerufen";
 
 /* Password Reset Action */
 "Forgotten password?" = "Passwort vergessen?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "Informationen";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Fügt einen weiteren Punkt auf der Checkliste hinzu";
 
 /* Last Message timestamp */
 "LastSeen" = "Zuletzt angesehen";
@@ -379,7 +379,7 @@
 "Open note" = "Notiz öffnen";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "Optionen";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Passcode";
@@ -437,7 +437,7 @@
 "Reachability" = "Erreichbarkeit";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Referenziert in";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Alle Notizen aus Papierkorb entfernen";
@@ -471,7 +471,7 @@
 "Security" = "Sicherheit";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "Wähle eine Version aus";
 
 /* For debugging use */
 "Send a Test Crash" = "Testabsturz senden";
@@ -493,7 +493,7 @@
 "Share Analytics" = "Analysen teilen";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "Teilen …";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Du kannst Notizen jetzt über das Aktionsmenü in der Toolbar teilen.";

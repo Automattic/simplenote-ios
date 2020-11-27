@@ -126,11 +126,11 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribute";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Copy Internal Link";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
+/* Copies the Note's Public Link */
 "Copy Link" = "Copy Link";
 
 /* No comment provided by engineer. */
@@ -437,7 +437,7 @@
 "Reachability" = "Reachability";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Referenced In";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Remove all notes from trash";

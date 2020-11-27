@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-25 10:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "参加";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "内部リンクをコピー";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "リンクをコピー";
 
 /* No comment provided by engineer. */
 "Could be better" = "不満がある";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "改善方法についてご意見いただけますか ?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "履歴を取得できませんでした";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "ログインできません";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "履歴を閉じる";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "情報を閉じる";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "キーボードを閉じる";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "バージョンを取得中";
 
 /* Password Reset Action */
 "Forgotten password?" = "パスワードを忘れましたか ?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "情報";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "新しいチェックリストアイテムを挿入";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -379,7 +379,7 @@
 "Open note" = "ノートを開く";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "オプション";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
@@ -437,7 +437,7 @@
 "Reachability" = "到達の可能性";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "参照先";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "ゴミ箱からノートを完全消去";
@@ -471,7 +471,7 @@
 "Security" = "セキュリティ";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "バージョンを選択";
 
 /* For debugging use */
 "Send a Test Crash" = "テストクラッシュを送信";
@@ -493,7 +493,7 @@
 "Share Analytics" = "分析を共有";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "共有...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "ノートの共有はツールバーのアクションメニューからアクセスできます。";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 12:29:29+0000 */
+/* Translation-Revision-Date: 2020-11-24 14:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -126,11 +126,11 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bidra";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Kopiera intern länk";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
+/* Copies the Note's Public Link */
 "Copy Link" = "Kopiera länk";
 
 /* No comment provided by engineer. */
@@ -275,7 +275,7 @@
 "Information" = "Information";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Infogar ett nytt checklisteobjekt";
 
 /* Last Message timestamp */
 "LastSeen" = "Sågs senast";
@@ -437,7 +437,7 @@
 "Reachability" = "Nåbarhet";
 
 /* References section header on Info Card */
-"References" = "Referenser";
+"Referenced In" = "Refereras i";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Ta bort alla anteckningar från papperskorgen";

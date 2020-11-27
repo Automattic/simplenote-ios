@@ -91,6 +91,7 @@ private extension InterlinkViewController {
         tableView.backgroundColor = .clear
         tableView.separatorColor = .simplenoteDividerColor
         tableView.tableFooterView = UIView()
+        tableView.alwaysBounceVertical = false
         tableView.layer.masksToBounds = true
         tableView.layer.cornerRadius = Metrics.cornerRadius
     }
