@@ -36,6 +36,7 @@
 + (void)trackEditorCollaboratorsAccessed;
 + (void)trackEditorCopiedInternalLink;
 + (void)trackEditorCopiedPublicLink;
++ (void)trackEditorInterlinkAutocompleteViewed;
 
 #pragma mark - Note List
 + (void)trackListNoteCreated;

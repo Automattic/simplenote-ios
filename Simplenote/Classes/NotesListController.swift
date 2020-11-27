@@ -1,5 +1,6 @@
 import Foundation
 import SimplenoteFoundation
+import SimplenoteSearch
 
 
 // MARK: - NotesListController
@@ -201,12 +202,12 @@ extension NotesListController {
     ///
     @objc
     func refreshSearchResults(keyword: String) {
-        guard !keyword.isEmpty else {
+        let query = SearchQuery(searchText: keyword)
+        guard !query.isEmpty else {
             state = .results
             return
         }
-
-        state = .searching(keyword: keyword)
+        state = .searching(query: query)
     }
 
     /// Sets the receiver in "Results Mode"
@@ -302,7 +303,7 @@ private extension NotesListController {
     ///
     var sortModeForActiveState: SortMode {
         switch state {
-        case .searching(_):
+        case .searching:
             return searchSortMode
         case .results:
             return sortMode

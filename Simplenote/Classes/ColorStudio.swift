@@ -2,7 +2,7 @@ import Foundation
 
 
 // MARK: - Color Studio Constants
-//         Ref. https://github.com/Automattic/color-studio/blob/master/dist/colors.json
+//         Ref. https://github.com/Automattic/color-studio
 //
 enum ColorStudio: String {
     case black          = "000000"
@@ -120,6 +120,7 @@ enum ColorStudio: String {
     case spBlue100      = "05102e"
     case spGray1        = "f9f9f9"
     case spGray2        = "efeff0"
+    case spGray3        = "ededed"
     case spYellow0      = "FE9500"
     case spYellow10     = "FE9F0A"
     case white          = "FFFFFF"

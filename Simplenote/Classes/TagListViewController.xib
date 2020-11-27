@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPTagsListViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TagListViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="rightBorderView" destination="zpC-BW-MFx" id="UMy-UH-y2v"/>
                 <outlet property="rightBorderWidthConstraint" destination="3Io-dC-Xdn" id="N2N-Iq-nRg"/>
@@ -32,24 +33,29 @@
                 </tableView>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-BW-MFx" userLabel="Border View">
                     <rect key="frame" x="413" y="0.0" width="1" height="896"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="3Io-dC-Xdn"/>
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="zpC-BW-MFx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Utf-Gw-xnT"/>
                 <constraint firstAttribute="trailing" secondItem="dMw-N6-gUa" secondAttribute="trailing" id="WwN-pP-oJT"/>
                 <constraint firstAttribute="bottom" secondItem="zpC-BW-MFx" secondAttribute="bottom" id="ZZY-IF-D93"/>
                 <constraint firstAttribute="bottom" secondItem="dMw-N6-gUa" secondAttribute="bottom" id="h4I-wd-bbB"/>
-                <constraint firstItem="dMw-N6-gUa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pfu-gA-vNg"/>
+                <constraint firstItem="dMw-N6-gUa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pfu-gA-vNg"/>
                 <constraint firstAttribute="trailing" secondItem="zpC-BW-MFx" secondAttribute="trailing" id="v6n-hw-aVx"/>
                 <constraint firstItem="dMw-N6-gUa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="z1r-bb-Try"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

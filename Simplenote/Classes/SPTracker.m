@@ -128,6 +128,12 @@
     [self trackAutomatticEventWithName:@"editor_copied_public_link" properties:nil];
 }
 
++ (void)trackEditorInterlinkAutocompleteViewed
+{
+    [self trackAutomatticEventWithName:@"editor_interlink_autocomplete_viewed" properties:nil];
+}
+
+
 #pragma mark - Note List
 
 + (void)trackListNoteCreated

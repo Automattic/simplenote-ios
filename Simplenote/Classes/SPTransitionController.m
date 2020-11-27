@@ -1,6 +1,5 @@
 #import "Simplenote-Swift.h"
 
-#import "UIDevice+Extensions.h"
 #import "SPTransitionController.h"
 #import "SPMarkdownPreviewViewController.h"
 #import "SPInteractivePushPopAnimationController.h"

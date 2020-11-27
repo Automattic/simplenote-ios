@@ -6,8 +6,8 @@
         "repositoryURL": "git@github.com:Automattic/SimplenoteFoundation-Swift.git",
         "state": {
           "branch": null,
-          "revision": "150e363b46f7c0d479a474c2c0a8d00648bbab97",
-          "version": "1.1.0"
+          "revision": "b21479caeffbff6d544d0aeeec8e627acd8e350c",
+          "version": "1.2.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "git@github.com:Automattic/SimplenoteSearch-Swift.git",
         "state": {
           "branch": null,
-          "revision": "a0f72ae7441d0311c41b47dfa4046bc9e23823bf",
-          "version": "1.1.0"
+          "revision": "a876c38aa0511f34fea85d93886e588c71b8b231",
+          "version": "1.2.0"
         }
       }
     ]

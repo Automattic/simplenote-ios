@@ -1,6 +1,5 @@
 #import "SPNoteEditorViewController.h"
 #import "Note.h"
-#import "VSThemeManager.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
 #import "SPTagView.h"
@@ -15,19 +14,17 @@
 #import "SPTracker.h"
 #import "NSString+Bullets.h"
 #import "SPTransitionController.h"
-#import "NSString+Search.h"
 #import "SPTextView.h"
 #import "NSString+Attributed.h"
 #import "SPAcitivitySafari.h"
 #import "SPNavigationController.h"
 #import "SPMarkdownPreviewViewController.h"
-#import "UIDevice+Extensions.h"
 #import "SPInteractivePushPopAnimationController.h"
 #import "Simplenote-Swift.h"
 #import "SPConstants.h"
 
 @import SafariServices;
-
+@import SimplenoteSearch;
 
 CGFloat const SPSelectedAreaPadding = 20;
 
@@ -40,7 +37,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 // UIKit Components
 @property (nonatomic, strong) SPBlurEffectView          *navigationBarBackground;
 @property (nonatomic, strong) UILabel                   *searchDetailLabel;
-@property (nonatomic, strong) SPTagView                 *tagView;
 @property (nonatomic, strong) UIBarButtonItem           *nextSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *prevSearchButton;
 @property (nonatomic, strong) UIBarButtonItem           *doneSearchButton;
@@ -64,6 +60,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 // Search
 @property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
+@property (nonatomic, strong) SearchQuery               *searchQuery;
 
 // if a newly created tag is deleted within a certain time span,
 // the tag will be completely deleted - note just removed from the
@@ -122,48 +119,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     _noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 }
 
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
-- (void)refreshStyle
-{    
-    UIFont *bodyFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    UIFont *headlineFont = [UIFont preferredFontFor:UIFontTextStyleTitle1 weight:UIFontWeightBold];
-    UIColor *fontColor = [UIColor simplenoteNoteHeadlineColor];
-
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineSpacing = bodyFont.lineHeight * [self.theme floatForKey:@"noteBodyLineHeightPercentage"];
-
-    _tagView = _noteEditorTextView.tagView;
-
-    self.noteEditorTextView.checklistsFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.noteEditorTextView.checklistsTintColor = [UIColor simplenoteNoteBodyPreviewColor];
-
-    UIKeyboardAppearance keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
-    self.noteEditorTextView.keyboardAppearance = keyboardAppearance;
-    self.tagView.keyboardAppearance = keyboardAppearance;
-
-    UIColor *backgroundColor = self.previewing ? [UIColor simplenoteBackgroundPreviewColor] : [UIColor simplenoteBackgroundColor];
-    self.noteEditorTextView.backgroundColor = backgroundColor;
-    self.tagView.backgroundColor = backgroundColor;
-    self.bottomView.backgroundColor = backgroundColor;
-    self.view.backgroundColor = backgroundColor;
-
-    self.noteEditorTextView.interactiveTextStorage.tokens = @{
-        SPDefaultTokenName : @{
-                NSFontAttributeName : bodyFont,
-                NSForegroundColorAttributeName : fontColor,
-                NSParagraphStyleAttributeName : paragraphStyle
-        },
-        SPHeadlineTokenName : @{
-                NSFontAttributeName : headlineFont,
-                NSForegroundColorAttributeName: fontColor,
-        }
-    };
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -175,6 +130,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureRootView];
     [self configureSearchToolbar];
     [self configureLayout];
+    [self configureInterlinksProcessor];
     [self refreshVoiceoverSupport];
 }
 
@@ -245,18 +201,21 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)highlightSearchResultsIfNeeded
 {
-    if (!self.searching || _searchString.length == 0 || self.searchResultRanges) {
+    if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges) {
         return;
     }
     
     NSString *searchText = _noteEditorTextView.text;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        self.searchResultRanges = [searchText rangesForTerms:self.searchString];
+
+        self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
+                                                withKeywords:self.searchQuery.keywords];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+
+            [self showSearchMapWith:self.searchResultRanges];
+
             UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
             [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];
             
@@ -271,9 +230,8 @@ CGFloat const SPSelectedAreaPadding = 20;
                                  
                                  self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
-            
-            self.highlightedSearchResultIndex = 0;
-            [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+
+            [self highlightSearchResultAtIndex:0 animated:YES];
         });
     });
 }
@@ -289,6 +247,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
+    [self refreshInterlinkLookupWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -560,7 +519,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (UIViewController *)nextViewControllerForInteractivePush
 {
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
-    previewViewController.markdownText = [self.noteEditorTextView getPlainTextContent];
+    previewViewController.markdownText = [self.noteEditorTextView plainText];
     
     return previewViewController;
 }
@@ -606,57 +565,56 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 #pragma mark search
 
-- (void)setSearchString:(NSString *)string {
-    
-    if (string.length > 0) {
-        self.searching = YES;
-        _searchString = string;
-        self.searchResultRanges = nil;
-        [self.navigationController setToolbarHidden:NO animated:YES];
+- (void)updateWithSearchQuery:(SearchQuery *)searchQuery
+{
+    if (!searchQuery || searchQuery.isEmpty) {
+        return;
     }
+
+    self.searching = YES;
+    _searchQuery = searchQuery;
+    self.searchResultRanges = nil;
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
-- (void)highlightNextSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+- (void)highlightNextSearchResult:(id)sender
+{
+    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
 }
 
-- (void)highlightPrevSearchResult:(id)sender {
-    
-    self.highlightedSearchResultIndex = MAX(0, self.highlightedSearchResultIndex - 1);
-    [self highlightSearchResultAtIndex:self.highlightedSearchResultIndex];
+- (void)highlightPrevSearchResult:(id)sender
+{
+    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
 }
 
-- (void)highlightSearchResultAtIndex:(NSInteger)index {
-    
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
+{
+    self.highlightedSearchResultIndex = index;
+
     NSInteger searchResultCount = self.searchResultRanges.count;
     if (index >= 0 && index < searchResultCount) {
         
         // enable or disbale search result puttons accordingly
         self.prevSearchButton.enabled = index > 0;
         self.nextSearchButton.enabled = index < searchResultCount - 1;
-        
-        [_noteEditorTextView highlightRange:[(NSValue *)self.searchResultRanges[index] rangeValue]
-                           animated:YES
-                          withBlock:^(CGRect highlightFrame) {
 
-                              // scroll to block
-                              highlightFrame.origin.y += highlightFrame.size.height;
-                              [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:YES];
-                          }];
+        NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
+        [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
+            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
+        }];
     }
 }
 
 - (void)endSearching:(id)sender {
-    
+    [self hideSearchMap];
+
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
     
-    _noteEditorTextView.text = [_noteEditorTextView getPlainTextContent];
+    _noteEditorTextView.text = [_noteEditorTextView plainText];
     [_noteEditorTextView processChecklists];
     
-    _searchString = nil;
+    _searchQuery = nil;
     self.searchResultRanges = nil;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
@@ -681,6 +639,9 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     // Slowly Fade-In the NavigationBar's Blur
     [self.navigationBarBackground adjustAlphaMatchingContentOffsetOf:scrollView];
+
+    // Relocate Interlink Suggestions (if they're even onscreen!)
+    [self.interlinkProcessor refreshInterlinkControllerWithNewOffset:scrollView.contentOffset isDragging:scrollView.isDragging];
 }
 
 
@@ -745,6 +706,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     }
     
     [_noteEditorTextView processChecklists];
+    [self.interlinkProcessor processInterlinkLookup];
     
     // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
     // See UITextView+Simplenote
@@ -762,7 +724,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.editingNote = NO;
-    
+
+    [self.interlinkProcessor dismissInterlinkLookup];
     [self cancelSaveTimers];
     [self save];
 }
@@ -787,6 +750,15 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     /// This API is expected to only be called in iOS (13.0.x, 13.1.x)
     [self presentSafariViewControllerAtURL:url];
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    if (self.noteEditorTextView.isInserting || self.noteEditorTextView.isDeletingBackward) {
+        return;
+    }
+
+    [self.interlinkProcessor dismissInterlinkLookup];
 }
 
 
@@ -825,6 +797,14 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self cancelSaveTimers];
 }
 
+- (void)saveIfNeeded
+{
+    if (self.currentNote == nil || self.modified == NO) {
+        return;
+    }
+
+    [self save];
+}
 
 - (void)save
 {
@@ -835,7 +815,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 	if (self.modified || _currentNote.deleted == YES)
 	{
         // Update note
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         _currentNote.modificationDate = [NSDate date];
 
         // Force an update of the note's content preview in case only tags changed
@@ -854,10 +834,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)willReceiveNewContent {
     
     self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
-    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView getPlainTextContent];
+    self.noteContentBeforeRemoteUpdate = [_noteEditorTextView plainText];
 	
     if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
-        _currentNote.content = [_noteEditorTextView getPlainTextContent];
+        _currentNote.content = [_noteEditorTextView plainText];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
     }
 }
@@ -902,7 +882,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [_tagView endEditing:YES];
 }
 
-- (void)newButtonAction:(id)sender {
+- (void)newButtonAction:(id)sender
+{
+    [self saveIfNeeded];
 
     if (self.currentNote.isBlank) {
         [_noteEditorTextView becomeFirstResponder];

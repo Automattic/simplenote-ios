@@ -22,10 +22,12 @@
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 
+@property (nonatomic, readonly) BOOL isInserting;
+@property (nonatomic, readonly) BOOL isDeletingBackward;
+
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;
-- (NSString *)getPlainTextContent;
 - (void)insertOrRemoveChecklist;
 
 /// iOS 13.0 + 13.1 had an usability issue that rendered link interactions within a UITextView next to impossible.

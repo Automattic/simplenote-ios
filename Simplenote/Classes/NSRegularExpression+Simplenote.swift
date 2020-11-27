@@ -1,7 +1,7 @@
 import Foundation
 
 
-// MARK: - NSRegularExpression
+// MARK: - NSRegularExpression (Checklists)
 //
 extension NSRegularExpression {
 

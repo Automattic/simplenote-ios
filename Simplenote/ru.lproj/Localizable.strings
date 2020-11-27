@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-26 10:54:03+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Принять участие";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Скопировать внутреннюю ссылку";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "Копировать ссылку";
 
 /* No comment provided by engineer. */
 "Could be better" = "Нужно доработать";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "Посоветуйте, как нам стать лучше.";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "Не удалось загрузить историю";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Не удалось войти";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "Выключить форматирование Markdown";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "Скрыть историю";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "Скрыть информацию";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Скрыть клавиатуру";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "Неудачные попытки";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "Получение сведений о версии";
 
 /* Password Reset Action */
 "Forgotten password?" = "Забыли пароль?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "Информация";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Будет вставлен новый пункт контрольного списка";
 
 /* Last Message timestamp */
 "LastSeen" = "Последнее прочитанное";
@@ -379,7 +379,7 @@
 "Open note" = "Открыть заметку";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "Опции";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Пароль";
@@ -437,7 +437,7 @@
 "Reachability" = "Удобный доступ";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Упоминание в";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Удалить все заметки из корзины";
@@ -471,7 +471,7 @@
 "Security" = "Безопасность";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "Выбрать версию";
 
 /* For debugging use */
 "Send a Test Crash" = "Отправить данные о сбое";
@@ -493,7 +493,7 @@
 "Share Analytics" = "Поделиться аналитическими данными";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "Поделиться...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Функция отправки заметок теперь находится в меню действий на панели инструментов.";

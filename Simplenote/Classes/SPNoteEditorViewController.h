@@ -2,9 +2,12 @@
 #import <Simperium/Simperium.h>
 
 
+@class InterlinkProcessor;
 @class Note;
 @class SPBlurEffectView;
 @class SPEditorTextView;
+@class SPTagView;
+@class SearchMapView;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -20,7 +23,9 @@
 
 @property (nonatomic, strong) Note *currentNote;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
-@property (nonatomic, strong) NSString *searchString;
+
+@property (nonatomic, strong) SPTagView *tagView;
+
 
 // History
 @property (nonatomic, weak) UIViewController *historyViewController;
@@ -28,12 +33,17 @@
 // Information
 @property (nonatomic, weak) UIViewController *informationViewController;
 
+// Interlinks
+@property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
+
 // Voiceover
 @property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
 @property (nonatomic, strong) NSArray *keyboardNotificationTokens;
 @property (nonatomic) BOOL isKeyboardVisible;
+
+@property (nonatomic, strong) SearchMapView *searchMapView;
 
 // State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
@@ -46,17 +56,20 @@
 - (void)newButtonAction:(id)sender;
 
 - (void)displayNote:(Note *)note;
-- (void)setSearchString:(NSString *)string;
 - (void)clearNote;
 - (void)endEditing;
 - (void)bounceMarkdownPreview;
 
 - (void)ensureSearchIsDismissed;
+- (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
 - (void)didDeleteCurrentNote;
 
 - (void)save;
+
+// TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
+- (void)updateWithSearchQuery:(id)query;
 
 @end

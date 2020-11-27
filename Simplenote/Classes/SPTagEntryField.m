@@ -8,7 +8,8 @@
 
 #import "SPTagEntryField.h"
 #import "Simplenote-Swift.h"
-#import "VSThemeManager.h"
+
+CGFloat const TagEntryFieldPadding = 40;
 
 @implementation SPTagEntryField
 
@@ -45,11 +46,6 @@
     return self;
 }
 
-- (VSTheme *)theme
-{    
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (void)setText:(NSString *)text
 {
     [super setText:text];
@@ -68,7 +64,7 @@
     
     CGRect frame = self.frame;
     
-    frame.size.width += 8 * [self.theme floatForKey:@"tagViewItemPadding"];
+    frame.size.width += 2 * TagEntryFieldPadding;
     frame.size.height = self.frame.size.height;
     
     self.frame = frame;

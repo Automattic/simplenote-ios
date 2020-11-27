@@ -17,6 +17,13 @@ extension SPNoteEditorViewController {
 
         ensureEmptyNoteIsDeleted()
     }
+
+    /// Whenever a ViewController is presented, let's ensure Interlink is dismissed!
+    ///
+    override public func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+        interlinkProcessor.dismissInterlinkLookup()
+    }
 }
 
 
@@ -91,6 +98,15 @@ extension SPNoteEditorViewController {
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+
+    /// Sets up the Interlinks Processor
+    ///
+    @objc
+    func configureInterlinksProcessor() {
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
+        interlinkProcessor.delegate = self
+        interlinkProcessor.contextProvider = self
     }
 }
 
@@ -545,6 +561,207 @@ extension SPNoteEditorViewController {
 
         presentInformationController(for: note, from: sender)
     }
+}
+
+// MARK: - Searching
+//
+extension SPNoteEditorViewController {
+
+    /// Returns ranges of keywords in a given text
+    ///
+    @objc
+    func searchResultRanges(in text: String, withKeywords keywords: [String]) -> [NSRange] {
+        return text.contentSlice(matching: keywords)?.nsMatches ?? []
+    }
+}
+
+// MARK: - Interlinks
+//
+extension SPNoteEditorViewController {
+
+    /// Dismisses (if needed) and reprocessess Interlink Lookup whenever the current Transition concludes
+    ///
+    @objc(refreshInterlinkLookupWithCoordinator:)
+    func refreshInterlinkLookupWithCoordinator(coordinator: UIViewControllerTransitionCoordinator) {
+        interlinkProcessor.dismissInterlinkLookup()
+
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.interlinkProcessor.processInterlinkLookup()
+        }
+    }
+}
+
+
+// MARK: - InterlinkProcessorPresentationContextProvider
+//
+extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
+
+    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView {
+        navigationBarBackground
+    }
+
+    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
+        noteEditorTextView
+    }
+
+    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController {
+        self
+    }
+}
+
+
+// MARK: - InterlinkProcessorDelegate
+//
+extension SPNoteEditorViewController: InterlinkProcessorDelegate {
+
+    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
+        currentNote?.objectID
+    }
+
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
+        noteEditorTextView.insertText(text: text, in: range)
+        processor.dismissInterlinkLookup()
+    }
+}
+
+
+// MARK: - Style
+//
+extension SPNoteEditorViewController {
+
+    @objc
+    func refreshStyle() {
+        refreshRootView()
+        refreshBottomView()
+        refreshTagsEditor()
+        refreshTextEditor()
+        refreshTextStorage()
+    }
+
+    private func refreshRootView() {
+        view.backgroundColor = backgroundColor
+    }
+
+    private func refreshBottomView() {
+        bottomView.backgroundColor = backgroundColor
+    }
+
+    private func refreshTextEditor() {
+        noteEditorTextView.backgroundColor = backgroundColor
+        noteEditorTextView.keyboardAppearance = .simplenoteKeyboardAppearance
+        noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
+        noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+    }
+
+    private func refreshTagsEditor() {
+        tagView.backgroundColor = backgroundColor
+        tagView.keyboardAppearance = .simplenoteKeyboardAppearance
+    }
+
+    private func refreshTextStorage() {
+        let headlineFont = UIFont.preferredFont(for: .title1, weight: .bold)
+        let defaultFont = UIFont.preferredFont(forTextStyle: .body)
+        let textColor = UIColor.simplenoteNoteHeadlineColor
+        let lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+        let textStorage = noteEditorTextView.interactiveTextStorage
+
+        textStorage.defaultStyle = [
+            .font               : defaultFont,
+            .foregroundColor    : textColor,
+            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
+        ]
+
+        textStorage.headlineStyle = [
+            .font               : headlineFont,
+            .foregroundColor    : textColor,
+        ]
+    }
+
+    private var backgroundColor: UIColor {
+        isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
+    }
+}
+
+// MARK: - Search Map
+//
+extension SPNoteEditorViewController {
+
+    /// Show search map keyword ranges
+    ///
+    // TODO: Use `Range` when `SPNoteEditorViewController` is fully swift
+    @objc
+    func showSearchMap(with searchRangeValues: [NSValue]) {
+        createSearchMapViewIfNeeded()
+        searchMapView?.update(with: searchBarPositions(with: searchRangeValues))
+    }
+
+    /// Returns position relative to the total text container height.
+    /// Position value is from 0 to 1
+    ///
+    private func searchBarPositions(with searchRangeValues: [NSValue]) -> [CGFloat] {
+        let textContainerHeight = textContainerHeightForSearchMap()
+        guard textContainerHeight > CGFloat.leastNormalMagnitude else {
+            return []
+        }
+
+        return searchRangeValues.map {
+            let boundingRect = noteEditorTextView.boundingRect(for: $0.rangeValue)
+            return max(boundingRect.midY / textContainerHeight, CGFloat.leastNormalMagnitude)
+        }
+    }
+
+    private func textContainerHeightForSearchMap() -> CGFloat {
+        var textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
+        textContainerHeight = textContainerHeight + noteEditorTextView.textContainerInset.top + noteEditorTextView.textContainerInset.bottom
+
+        let textContainerMinHeight = noteEditorTextView.editingRectInWindow().size.height
+        return max(textContainerHeight, textContainerMinHeight)
+    }
+
+    private func createSearchMapViewIfNeeded() {
+        guard searchMapView == nil else {
+            return
+        }
+
+        let searchMapView = SearchMapView()
+        
+        view.addSubview(searchMapView)
+        NSLayoutConstraint.activate([
+            searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top),
+            searchMapView.bottomAnchor.constraint(equalTo: noteEditorTextView.bottomAnchor, constant: -noteEditorTextView.adjustedContentInset.bottom),
+            searchMapView.trailingAnchor.constraint(equalTo: noteEditorTextView.trailingAnchor),
+            searchMapView.widthAnchor.constraint(equalToConstant: Metrics.searchMapWidth)
+        ])
+
+        searchMapView.onSelectionChange = { [weak self] index in
+            self?.highlightSearchResult(at: index, animated: false)
+        }
+
+        self.searchMapView = searchMapView
+    }
+
+    /// Hide search map
+    ///
+    @objc
+    func hideSearchMap() {
+        searchMapView?.removeFromSuperview()
+        searchMapView = nil
+    }
+}
+
+
+// MARK: - Metrics
+//
+private enum Metrics {
+    static let lineSpacingMultiplerPad: CGFloat = 0.40
+    static let lineSpacingMultiplerPhone: CGFloat = 0.20
+
+    static var lineSpacingMultipler: CGFloat {
+        UIDevice.isPad ? lineSpacingMultiplerPad : lineSpacingMultiplerPhone
+    }
+
+    static let searchMapWidth: CGFloat = 15.0
+
 }
 
 

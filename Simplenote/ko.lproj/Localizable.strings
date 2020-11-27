@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-13 13:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "참여";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "내부 링크 복사";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "링크 복사";
 
 /* No comment provided by engineer. */
 "Could be better" = "별로";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "개선 방안을 말해 주시겠어요?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "내역을 가져올 수 없음";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "로그인할 수 없음";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "내역 해제";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "정보 해제";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "키보드 비활성화";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "버전 가져오기";
 
 /* Password Reset Action */
 "Forgotten password?" = "비밀번호를 잊으셨나요?";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "정보";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "새 체크리스트 항목 삽입";
 
 /* Last Message timestamp */
 "LastSeen" = "마지막으로 본 시간";
@@ -379,7 +379,7 @@
 "Open note" = "메모 열기";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "옵션";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "패스코드";
@@ -437,7 +437,7 @@
 "Reachability" = "연결";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Referenced In";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "휴지통 비우기";
@@ -471,7 +471,7 @@
 "Security" = "보안";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "버전 선택";
 
 /* For debugging use */
 "Send a Test Crash" = "테스트 충돌 보내기";
@@ -493,7 +493,7 @@
 "Share Analytics" = "분석 공유";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "공유...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "이제 도구 모음에서 작업 메뉴를 통해 메모 공유에 액세스할 수 있습니다.";

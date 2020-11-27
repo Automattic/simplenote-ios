@@ -7,7 +7,6 @@
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
 #import "SPSettingsViewController.h"
-#import "SPTagsListViewController.h"
 #import "SPAddCollaboratorsViewController.h"
 
 #import "NSManagedObjectContext+CoreDataExtensions.h"
@@ -22,8 +21,6 @@
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
-#import "VSThemeManager.h"
-#import "VSTheme.h"
 #import "DTPinLockController.h"
 #import "SPTracker.h"
 
@@ -115,10 +112,10 @@
     // check to see if the app terminated with a previously selected tag
     NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
     if (selectedTag != nil) {
-		[self setSelectedTag:selectedTag];
+		_selectedTag = selectedTag;
 	}
 
-    self.tagListViewController = [SPTagsListViewController new];
+    self.tagListViewController = [TagListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
 
     self.navigationController = [[SPNavigationController alloc] initWithRootViewController:_noteListViewController];
@@ -492,6 +489,15 @@
     [self.simperium save];
 }
 
+- (void)setSelectedTag:(NSString *)selectedTag {
+    BOOL tagsEqual = _selectedTag == selectedTag || (_selectedTag != nil && selectedTag != nil && [_selectedTag isEqual:selectedTag]);
+    if (tagsEqual) {
+        return;
+    }
+
+    _selectedTag = selectedTag;
+    [_noteListViewController update];
+}
 
 #pragma mark ================================================================================
 #pragma mark SPBucket delegate
@@ -536,7 +542,6 @@
                 // if selected tag is deleted, swap the note list view controller
                 if ([key isEqual:self.selectedTag]) {
                     self.selectedTag = nil;
-                    [self.noteListViewController update];
                 }
                 break;
             }

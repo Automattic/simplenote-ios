@@ -10,7 +10,12 @@ extension UIView {
     func addFillingSubview(_ view: UIView,
                            edgeInsets: UIEdgeInsets = .zero,
                            target: AnchorTarget = .bounds) {
+        addSubview(view)
+        pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
+    }
 
+
+    func pinSubviewToAllEdges(_ view: UIView, edgeInsets: UIEdgeInsets = .zero, target: AnchorTarget = .bounds) {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         let layoutGuide: UILayoutGuide?
@@ -23,7 +28,6 @@ extension UIView {
             layoutGuide = safeAreaLayoutGuide
         }
 
-        addSubview(view)
         let constraints = [
             view.leadingAnchor.constraint(equalTo: layoutGuide?.leadingAnchor ?? leadingAnchor, constant: edgeInsets.left),
             view.trailingAnchor.constraint(equalTo: layoutGuide?.trailingAnchor ?? trailingAnchor, constant: -edgeInsets.right),

@@ -10,17 +10,29 @@
 #import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
-#import "NSString+Attributed.h"
-#import "UIDevice+Extensions.h"
-#import "VSTheme+Extensions.h"
 #import "Simplenote-Swift.h"
 
 NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
+// TODO: Add intrinsicContentSize support to TagView
+static CGFloat const TagViewHeight = 44;
+
+static CGFloat const TextViewContanerInsetsTop = 8;
+static CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewRegularByRegularPadding = 64;
+static CGFloat const TextViewDefaultPadding = 20;
+
+// TODO: Drop this the second SplitViewController is implemented
+static CGFloat const TextViewMaximumWidthPad = 640;
+static CGFloat const TextViewMaximumWidthPhone = 0;
+
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
+
 
 @interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
@@ -29,6 +41,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
+@property (nonatomic) BOOL isInserting;
+@property (nonatomic) BOOL isDeletingBackward;
 
 @end
 
@@ -48,44 +62,55 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.scrollEnabled = YES;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
-        
-        // add tag view
-        
-        CGFloat tagViewHeight = [self.theme floatForKey:@"tagViewHeight"];
-        _tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, tagViewHeight)];
-        _tagView.isAccessibilityElement = NO;
-        
-        [self addSubview:_tagView];
-        
-        UIEdgeInsets contentInset = self.contentInset;
-        contentInset.top += [self.theme floatForKey:@"noteTopPadding"];
-        self.contentInset = contentInset;
 
+        [self setupTagsEditor];
+        [self setupTextContainerInsets];
+        [self setupGestureRecognizers];
+        [self startListeningToNotifications];
         [self startObservingProperties];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didEndEditing:)
-                                                     name:UITextViewTextDidEndEditingNotification
-                                                   object:nil];
-
-
-        SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
-        recognizerDelegate.parentTextView = self;
-        recognizerDelegate.excludedView = self.tagView;
-        self.internalRecognizerDelegate = recognizerDelegate;
-
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                               action:@selector(onTextTapped:)];
-        tapGestureRecognizer.cancelsTouchesInView = NO;
-        tapGestureRecognizer.delegate = recognizerDelegate;
-
-        [self addGestureRecognizer:tapGestureRecognizer];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
         [self setEditable:NO];
     }
 
     return self;
+}
+
+- (void)setupTagsEditor
+{
+    self.tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, TagViewHeight)];
+    self.tagView.isAccessibilityElement = NO;
+    [self addSubview:self.tagView];
+}
+
+- (void)setupTextContainerInsets
+{
+    UIEdgeInsets containerInsets = self.textContainerInset;
+    containerInsets.top += TextViewContanerInsetsTop;
+    containerInsets.bottom += TextViewContanerInsetsBottom;
+    self.textContainerInset = containerInsets;
+}
+
+- (void)setupGestureRecognizers
+{
+    SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
+    recognizerDelegate.parentTextView = self;
+    recognizerDelegate.excludedView = self.tagView;
+    self.internalRecognizerDelegate = recognizerDelegate;
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(onTextTapped:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    tapGestureRecognizer.delegate = recognizerDelegate;
+    [self addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)startListeningToNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didEndEditing:)
+                                                 name:UITextViewTextDidEndEditingNotification
+                                               object:nil];
 }
 
 - (void)startObservingProperties
@@ -104,14 +129,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
     ];
 }
 
-- (VSTheme *)theme
-{
-    return [[VSThemeManager sharedManager] theme];
-}
-
 - (NSDictionary *)typingAttributes
 {
-    return [self.interactiveTextStorage.tokens objectForKey:SPDefaultTokenName];
+    return self.text.length == 0 ? self.interactiveTextStorage.headlineStyle : self.interactiveTextStorage.defaultStyle;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -127,18 +147,30 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self positionTagView];
 }
 
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)horizontalPadding
+{
+    return [UIDevice isPad] && !self.isHorizontallyCompact ? TextViewRegularByRegularPadding : TextViewDefaultPadding;
+}
+
+// TODO: Drop this the second SplitViewController is implemented
+- (CGFloat)maximumWidth
+{
+    return [UIDevice isPad] ? TextViewMaximumWidthPad : TextViewMaximumWidthPhone;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    CGFloat padding = [self.theme floatForKey:@"noteSidePadding" contextView:self];
+
+    CGFloat padding = self.horizontalPadding;
     padding += self.safeAreaInsets.left;
 
-    CGFloat maxWidth = [self.theme floatForKey:@"noteMaxWidth"];
+    CGFloat maxWidth = self.maximumWidth;
     CGFloat width = self.bounds.size.width;
     
     if (width - 2 * padding > maxWidth && maxWidth > 0) {
-        padding = (width - maxWidth) / 2.0;
+        padding = (width - maxWidth) * 0.5;
     }
 
     self.textContainer.lineFragmentPadding = padding;
@@ -152,9 +184,12 @@ NSInteger const ChecklistCursorAdjustment = 2;
     CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
     CGFloat height      = CGRectGetHeight(self.tagView.frame);
 
+    /// When the keyboard is presented, we're explicitly removing the bottom safeAreaInsets: TextView automatically accounts for them.
+    /// For that reason, when positioning the TagView we'd need to add them manually
     CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
     CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height - height + self.contentInset.top;
+    CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
+
     CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
     CGFloat xOrigin     = self.safeAreaInsets.left;
 
@@ -165,18 +200,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     _lockTagEditorPosition = lockTagEditorPosition;
     [self positionTagView];
-}
-
-- (CGFloat)tagsViewPadding
-{
-    return 2 * CGRectGetHeight(self.tagView.bounds);
-}
-
-- (UIEdgeInsets)adjustedContentInset
-{
-    UIEdgeInsets contentInsets = super.adjustedContentInset;
-    contentInsets.bottom += self.tagsViewPadding;
-    return contentInsets;
 }
 
 - (void)setTagView:(SPTagView *)tagView
@@ -204,6 +227,20 @@ NSInteger const ChecklistCursorAdjustment = 2;
     return [super becomeFirstResponder];
 }
 
+- (void)insertText:(NSString *)text
+{
+    self.isInserting = YES;
+    [super insertText:text];
+    self.isInserting = NO;
+}
+
+- (void)deleteBackward
+{
+    self.isDeletingBackward = YES;
+    [super deleteBackward];
+    self.isDeletingBackward = NO;
+}
+
 - (BOOL)resignFirstResponder
 {
     // TODO: Only invalidate when resigning.
@@ -220,17 +257,22 @@ NSInteger const ChecklistCursorAdjustment = 2;
     /// Notes:
     /// -   We consider `adjusted bottom inset` because that's how we inject the Tags Editor padding!
     /// -   And we don't consider `adjusted top insets` since that deals with navbar overlaps, and doesn't affect our calculations.
-    if (self.contentSize.height <= self.bounds.size.height - self.contentInset.top - self.adjustedContentInset.bottom) {
+
+    CGFloat visibleHeight = self.bounds.size.height
+                                - self.textContainerInset.top
+                                - self.textContainerInset.bottom
+                                - self.contentInset.bottom;
+    if (self.contentSize.height <= visibleHeight) {
         return;
     }
 
     CGFloat yOffset = self.contentSize.height + self.adjustedContentInset.bottom - self.bounds.size.height;
-    CGPoint scrollOffset = CGPointMake(0, yOffset);
 
-    if (self.contentOffset.y == scrollOffset.y) {
+    if (self.contentOffset.y == yOffset) {
         return;
     }
 
+    CGPoint scrollOffset = CGPointMake(0, yOffset);
     [self setContentOffset:scrollOffset animated:animated];
 }
 
@@ -241,7 +283,8 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self setContentOffset:scrollOffset animated:NO];
 }
 
-#pragma mark Notifications
+
+#pragma mark - Notifications
 
 - (void)didEndEditing:(NSNotification *)notification
 {
@@ -387,23 +430,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     [self.textStorage processChecklistsWithColor:self.checklistsTintColor
                                       sizingFont:self.checklistsFont
                            allowsMultiplePerLine:NO];
-}
-
-// Processes content of note editor, and replaces special string attachments with their plain
-// text counterparts. Currently supports markdown checklists.
-- (NSString *)getPlainTextContent
-{
-    NSMutableAttributedString *adjustedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
-    // Replace checkbox images with their markdown syntax equivalent
-    [adjustedString enumerateAttribute:NSAttachmentAttributeName inRange:[adjustedString.string rangeOfString:adjustedString.string] options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-        if ([value isKindOfClass:[SPTextAttachment class]]) {
-            SPTextAttachment *attachment = (SPTextAttachment *)value;
-            NSString *checkboxMarkdown = attachment.isChecked ? MarkdownChecked : MarkdownUnchecked;
-            [adjustedString replaceCharactersInRange:range withString:checkboxMarkdown];
-        }
-    }];
-    
-    return adjustedString.string;
 }
 
 - (void)insertOrRemoveChecklist

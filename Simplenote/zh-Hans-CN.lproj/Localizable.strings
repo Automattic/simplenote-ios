@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-11-27 08:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -126,12 +126,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "贡献";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "复制内部链接";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "复制链接";
 
 /* No comment provided by engineer. */
 "Could be better" = "还可以更好";
@@ -146,7 +146,7 @@
 "Could you tell us how we could improve?" = "您可以告诉我们如何改进吗？";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "无法检索历史记录";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "无法登录";
@@ -190,10 +190,10 @@
 "Disable Markdown formatting" = "禁用 Markdown 格式";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "忽略历史记录";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "忽略信息";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "关闭键盘";
@@ -247,7 +247,7 @@
 "FailedAttempts" = "失败尝试次数";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "正在提取版本";
 
 /* Password Reset Action */
 "Forgotten password?" = "忘记密码？";
@@ -272,10 +272,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "信息";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "插入新的检查清单项";
 
 /* Last Message timestamp */
 "LastSeen" = "上一次查看时间";
@@ -379,7 +379,7 @@
 "Open note" = "打开笔记";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "选项";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密码";
@@ -437,7 +437,7 @@
 "Reachability" = "可访问性";
 
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "引用于";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "从回收站中移除所有笔记";
@@ -471,7 +471,7 @@
 "Security" = "安全";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "选择版本";
 
 /* For debugging use */
 "Send a Test Crash" = "发送测试崩溃";
@@ -493,7 +493,7 @@
 "Share Analytics" = "共享分析数据";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "分享...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "现在可通过工具栏上的操作菜单访问共享笔记。";
