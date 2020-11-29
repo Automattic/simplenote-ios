@@ -28,6 +28,12 @@ extension UIView {
             }
             return left
         }
+
+        /// Opposite direction
+        ///
+        var opposite: SlideDirection {
+            return self == .leading ? .trailing : .leading
+        }
     }
 
     /// Animates a visibility switch, when applicable.
@@ -93,17 +99,9 @@ extension UIView {
     /// Slide the view out of the container view
     ///
     func slideOut(in containerView: UIView, direction: SlideDirection, onCompletion: ((Bool) -> Void)? = nil) {
-        let frameInContainer = convert(bounds, to: containerView)
+        let targetTransform = slideTransformation(in: containerView, for: direction)
 
-        let targetTransform: CGAffineTransform = {
-            if direction.isLeft {
-                return transform.translatedBy(x: -frameInContainer.maxX, y: 0)
-            } else {
-                return transform.translatedBy(x: containerView.frame.width - frameInContainer.minX, y: 0)
-            }
-        }()
-
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration, delay: 0.0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration, animations: {
             self.transform = targetTransform
         }, completion: onCompletion)
     }
@@ -111,20 +109,23 @@ extension UIView {
     /// Slide the view in from the outside of container view
     ///
     func slideIn(in containerView: UIView, direction: SlideDirection, onCompletion: ((Bool) -> Void)? = nil) {
-        let frameInContainer = convert(bounds, to: containerView)
         let originalTransform = transform
 
-        transform = {
-            if direction.isLeft {
-                return transform.translatedBy(x: containerView.frame.width - frameInContainer.minX, y: 0)
-            } else {
-                return transform.translatedBy(x: -frameInContainer.maxX, y: 0)
-            }
-        }()
+        transform = slideTransformation(in: containerView, for: direction.opposite)
 
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration, delay: 0.0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration, animations: {
             self.transform = originalTransform
         }, completion: onCompletion)
+    }
+
+    private func slideTransformation(in containerView: UIView, for side: SlideDirection) -> CGAffineTransform {
+        let frameInContainer = convert(bounds, to: containerView)
+
+        if side.isLeft {
+            return transform.translatedBy(x: -frameInContainer.maxX, y: 0)
+        }
+
+        return transform.translatedBy(x: containerView.frame.width - frameInContainer.minX, y: 0)
     }
 
     /// Shake the view
