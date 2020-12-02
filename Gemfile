@@ -1,5 +1,5 @@
 source 'https://rubygems.org' do
-  gem 'cocoapods', '1.7.5'
+  gem 'cocoapods', '~> 1.10'
   gem 'cocoapods-repo-update', '~> 0.0.3'
   gem 'xcpretty-travis-formatter'
   gem 'octokit', "~> 4.0"
