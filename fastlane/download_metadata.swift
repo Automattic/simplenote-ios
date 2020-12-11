@@ -10,7 +10,7 @@ let baseFolder = "./metadata"
 
 // iTunes Connect language code: GlotPress code
 let languages = [
-    "ar": "ar",
+    "ar-SA": "ar",
     "de-DE": "de",
     "default": "en-us", // Technically not a real GlotPress language
     "en-US": "en-us", // Technically not a real GlotPress language
