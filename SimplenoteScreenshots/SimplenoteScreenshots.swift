@@ -67,7 +67,7 @@ class SimplenoteScreenshots: XCTestCase {
             return true
         }
 
-        let collaborateButton = app.buttons["Collaborate"]
+        let collaborateButton = app.staticTexts["Collaborate"].firstMatch
         XCTAssertTrue(collaborateButton.waitForExistence(timeout: 3))
 
         collaborateButton.tap()
@@ -90,7 +90,7 @@ class SimplenoteScreenshots: XCTestCase {
         // menu.
         doneButton.tap()
 
-        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "Notes")).firstMatch
+        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "All Notes")).firstMatch
         XCTAssertTrue(backButton.waitForExistence(timeout: 3))
         backButton.tap()
 
@@ -161,10 +161,7 @@ class SimplenoteScreenshots: XCTestCase {
     }
 
     func logout(using app: XCUIApplication) {
-        let menu = app.otherElements.matching(identifier: "menu").firstMatch
-        XCTAssertTrue(menu.waitForExistence(timeout: 10))
-
-        menu.tap()
+        getMenuButtonElement(from: app).tap()
 
         let settings = app.textFields["Settings"]
         XCTAssertTrue(settings.waitForExistence(timeout: 3))
@@ -176,9 +173,13 @@ class SimplenoteScreenshots: XCTestCase {
     }
 
     func openMenu(using app: XCUIApplication) {
-        let menu = app.otherElements.matching(identifier: "menu").firstMatch
+        getMenuButtonElement(from: app).tap()
+    }
+
+    func getMenuButtonElement(from app: XCUIApplication) -> XCUIElement {
+        let menu = app.buttons.matching(identifier: "menu").firstMatch
         XCTAssertTrue(menu.waitForExistence(timeout: 10))
-        menu.tap()
+        return menu
     }
 
     func loadPasscodeScreen(using app: XCUIApplication) {
