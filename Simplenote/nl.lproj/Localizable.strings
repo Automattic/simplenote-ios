@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-01 11:32:11+0000 */
+/* Translation-Revision-Date: 2020-12-10 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -83,7 +83,7 @@
 "Appearance" = "Weergave";
 
 /* Automattic hiring description */
-"Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
+"Are you a developer? We’re hiring." = "Ben je ontwikkelaar? Wij zijn op zoek naar nieuwe collega's.";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Weet je zeker dat je de prullenbak wilt leegmaken? Deze actie kan niet ongedaan worden gemaakt.";
@@ -103,7 +103,7 @@
 "Cancel" = "Annuleren";
 
 /* Work at Automattic */
-"Careers" = "Careers";
+"Careers" = "Carrières";
 
 /* Number of characters in the note */
 "Characters" = "Tekens";
@@ -155,10 +155,10 @@
 "Create a new note" = "Een nieuwe notitie maken";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
-"Create a new note titled “%@”" = "Create a new note titled “%@”";
+"Create a new note titled “%@”" = "Een nieuwe opmerking maken met de titel '%@'";
 
 /* Message shown in note list when no notes are in the current view */
-"Create your first note" = "Create your first note";
+"Create your first note" = "Voeg je eerste opmerking toe";
 
 /* Note Creation Date
    Sort Mode: Creation Date */
@@ -342,7 +342,7 @@
 "Move to Trash" = "Verplaatsen naar prullenbak";
 
 /* Home screen quick action: New Note */
-"New Note" = "New Note";
+"New Note" = "Nieuwe opmerking";
 
 /* Label to create a new note */
 "New note" = "Nieuwe notitie";
@@ -357,13 +357,13 @@
 "No Results" = "Geen resultaten";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
-"No notes tagged “%@”" = "No notes tagged “%@”";
+"No notes tagged “%@”" = "Geen opmerkingen getagd met '%@'";
 
 /* No comment provided by engineer. */
 "No thanks" = "Nee, liever niet";
 
 /* Message shown in note list when no notes are untagged */
-"No untagged notes" = "No untagged notes";
+"No untagged notes" = "Geen niet-getagde opmerkingen";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Notities";
@@ -442,7 +442,7 @@
 "Publishing..." = "Publiceren...";
 
 /* Rate on the App Store */
-"Rate Us" = "Rate Us";
+"Rate Us" = "Beoordeel ons";
 
 /* Prompt when setting up a passcode */
 "Re-enter a passcode" = "Voer een wachtwoordpasscode opnieuw in";
@@ -649,7 +649,7 @@
 "Your password is insecure and must be reset. The password requirements are:" = "Je wachtwoord is onveilig en moet opnieuw worden ingesteld. De wachtwoordvereisten zijn:";
 
 /* Message shown in note list when no notes are in the trash */
-"Your trash is empty" = "Your trash is empty";
+"Your trash is empty" = "Je prullenbak is leeg";
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Voeg een e-mailadres toe om deze notitie met iemand te delen. Dan kunnen jullie hem beide wijzigen.";

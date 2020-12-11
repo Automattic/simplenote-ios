@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-01 11:32:11+0000 */
+/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -83,7 +83,7 @@
 "Appearance" = "外观";
 
 /* Automattic hiring description */
-"Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
+"Are you a developer? We’re hiring." = "您是开发人员吗？ 我们正在招贤纳士。";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "是否确定要清空回收站？此操作无法撤消。";
@@ -103,7 +103,7 @@
 "Cancel" = "取消";
 
 /* Work at Automattic */
-"Careers" = "Careers";
+"Careers" = "招贤纳士";
 
 /* Number of characters in the note */
 "Characters" = "字符";
@@ -155,10 +155,10 @@
 "Create a new note" = "创建新笔记";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
-"Create a new note titled “%@”" = "Create a new note titled “%@”";
+"Create a new note titled “%@”" = "创建标题为“%@”的新笔记";
 
 /* Message shown in note list when no notes are in the current view */
-"Create your first note" = "Create your first note";
+"Create your first note" = "创建您的第一个笔记";
 
 /* Note Creation Date
    Sort Mode: Creation Date */
@@ -342,7 +342,7 @@
 "Move to Trash" = "移动到回收站";
 
 /* Home screen quick action: New Note */
-"New Note" = "New Note";
+"New Note" = "新建笔记";
 
 /* Label to create a new note */
 "New note" = "新建笔记";
@@ -357,13 +357,13 @@
 "No Results" = "无结果";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
-"No notes tagged “%@”" = "No notes tagged “%@”";
+"No notes tagged “%@”" = "没有标记为“%@”的笔记";
 
 /* No comment provided by engineer. */
 "No thanks" = "不用了，谢谢";
 
 /* Message shown in note list when no notes are untagged */
-"No untagged notes" = "No untagged notes";
+"No untagged notes" = "没有未标记的笔记";
 
 /* Notes Header (Search Mode) */
 "Notes" = "笔记";
@@ -442,7 +442,7 @@
 "Publishing..." = "正在发布...";
 
 /* Rate on the App Store */
-"Rate Us" = "Rate Us";
+"Rate Us" = "给我们评分";
 
 /* Prompt when setting up a passcode */
 "Re-enter a passcode" = "再次输入密码";
@@ -451,7 +451,7 @@
 "Reachability" = "可访问性";
 
 /* Home screen quick action: Recent Note */
-"Recent" = "Recent";
+"Recent" = "最近";
 
 /* References section header on Info Card */
 "Referenced In" = "引用于";
@@ -649,7 +649,7 @@
 "Your password is insecure and must be reset. The password requirements are:" = "您的密码不安全，需要重置。密码要求：";
 
 /* Message shown in note list when no notes are in the trash */
-"Your trash is empty" = "Your trash is empty";
+"Your trash is empty" = "您的回收站为空";
 
 /* No comment provided by engineer. */
 "collaborators-description" = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";
