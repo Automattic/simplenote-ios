@@ -1,8 +1,3 @@
-- Agora, ao digitar "[", você poderá escolher as anotações interligadas diretamente no editor
-- Pesquisar uma anotação mostra resumos relevantes
-- O Minimapa de pesquisa foi adicionado para você navegar rapidamente entre os resultados de pesquisa
-- Agora a Lista de tags se ajusta à tela no modo paisagem
-- Corrigimos um bug que afetava a seleção de texto
-- Corrigimos um bug que ativava ou desativava a opção de edição ao arrastar o editor
-- Corrigimos um problema que fazia com que as alterações não fossem salvas imediatamente
-- Corrigimos um bug que afetava a navegação com destaque de termos
+- Atualização de marcadores de posição de estado vazio
+- Ações rápidas na tela Home
+- Ajustes de métricas na tela Sobre

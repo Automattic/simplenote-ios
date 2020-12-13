@@ -1,8 +1,3 @@
--  "[" karakterini yazarak artık doğrudan düzenleyiciden Birbirine Bağlanan Notları seçebilirsiniz
-- Bir not arandığında ilgili alıntılar gösterilir
-- Eklenen Arama Mini Haritası ile arama sonuçlarına hızlıca gidilebilir
-- Etiketler Listesi artık yatay modda ekranın kenarına kadar uzanır
-- Metin Seçimini etkileyen bir hata düzeltilmiştir
-- Düzenleyiciyi sürüklerken Sürümü değiştiren bir hata düzeltilmiştir 
-- Değişikliklerin kalıcı olmamasına neden olan bir sorun düzeltilmiştir
-- Arama vurgusu gezinmesini etkileyen bir hata düzeltilmiştir 
+- - Boş Durum yer tutucuları güncellendi
+- Ana ekranda hızlı eylemler
+- Hakkında ekranı ölçümleri ayarlandı

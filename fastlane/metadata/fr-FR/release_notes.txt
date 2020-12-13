@@ -1,8 +1,3 @@
-- La saisie de « [ » vous permet désormais de sélectionner Notes d’interconnexion directement dans l’Éditeur
-- La recherche d’une note affiche des extraits pertinents
-- Ajout d’une mini-carte de recherche pour pouvoir parcourir rapidement les résultats de recherche
-- La liste des étiquettes est désormais étendue jusqu’au bord de l’écran, en mode paysage
-- Résolution d’un bug qui affectait la sélection de texte
-- Résolution d’un bug qui ouvrait/fermait le mode Édition pendant que vous faisiez glisser l’Éditeur
-- Résolution d’une erreur qui ne permettait pas aux modifications d’être conservées immédiatement
-- Résolution d’un bug qui affectait la navigation parmi les résultats de recherche mis en surbrillance
+- Mise à jour des textes indicatifs de l’état vide
+- Actions rapides sur l’écran d’accueil
+- Réglage des dimensions de l’écran À propos
