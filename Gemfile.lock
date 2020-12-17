@@ -284,6 +284,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
   cocoapods (~> 1.10)!
@@ -298,4 +299,4 @@ DEPENDENCIES
   xcpretty-travis-formatter!
 
 BUNDLED WITH
-   2.1.4
+   2.2.1
