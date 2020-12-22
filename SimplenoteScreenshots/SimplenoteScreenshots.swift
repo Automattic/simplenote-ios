@@ -81,9 +81,7 @@ class SimplenoteScreenshots: XCTestCase {
         // menu.
         doneButton.tap()
 
-        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "All Notes")).firstMatch
-        XCTAssertTrue(backButton.waitForExistence(timeout: 3))
-        backButton.tap()
+        goBackFromEditor(using: app)
 
         // Before taking a screenshot of the notes, make sure the review prompt header is not on
         // screen.
@@ -161,6 +159,12 @@ class SimplenoteScreenshots: XCTestCase {
         let logOut = app.staticTexts["Log Out"]
         XCTAssertTrue(logOut.waitForExistence(timeout: 3))
         logOut.tap()
+    }
+
+    func goBackFromEditor(using app: XCUIApplication) {
+        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "All Notes")).firstMatch
+        XCTAssertTrue(backButton.waitForExistence(timeout: 3))
+        backButton.tap()
     }
 
     func openMenu(using app: XCUIApplication) {
