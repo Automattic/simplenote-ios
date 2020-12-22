@@ -47,39 +47,7 @@ class SimplenoteScreenshots: XCTestCase {
 
         firstNote.tap()
 
-        let actionButton = app.buttons.matching(identifier: "note-menu").firstMatch
-        XCTAssertTrue(actionButton.waitForExistence(timeout: 10))
-
         takeScreenshot("1-note")
-
-        actionButton.tap()
-
-        let collaborateButton = app.staticTexts["Collaborate"].firstMatch
-        XCTAssertTrue(collaborateButton.waitForExistence(timeout: 3))
-
-        collaborateButton.tap()
-
-        // Let's wait for the screen to be presented
-        let doneButton = app.buttons["Done"]
-        XCTAssertTrue(doneButton.waitForExistence(timeout: 3))
-
-        // The collaborators screen will ask to access our contacts the first time it's presented.
-        //
-        // Let's wait to see if a system dialog appeared and dismiss it if so.
-        let systemAlert = XCUIApplication(bundleIdentifier: "com.apple.springboard").alerts.firstMatch
-        if systemAlert.waitForExistence(timeout: 2) {
-            // It doesn't matter whether we allow or deny access in the Simulator for the kind of
-            // screenshots we want to make.
-            systemAlert.buttons.firstMatch.tap()
-        }
-
-        // The index 3 is _intentional_ as that's the desired position of the screenshot in the App
-        // Store
-        takeScreenshot("3-collaborators")
-
-        // Tapping done in the collaborate view dismisses the collaborate screen _and_ the action
-        // menu.
-        doneButton.tap()
 
         goBackFromEditor(using: app)
 
@@ -98,6 +66,28 @@ class SimplenoteScreenshots: XCTestCase {
         }
 
         takeScreenshot("2-all-notes")
+
+        let interlinkingNote = app.cells[noteForInterlinkingScreenshot]
+        XCTAssertTrue(interlinkingNote.waitForExistence(timeout: 5))
+        interlinkingNote.tap()
+
+        let noteTextView = app.textViews.firstMatch
+
+        XCTAssertTrue(noteTextView.waitForExistence(timeout: 1))
+
+        noteTextView.tap()
+
+        let interlinkingTriggerString = "\n[L"
+        noteTextView.typeText(interlinkingTriggerString)
+
+        takeScreenshot("3-interlinking")
+
+        // Reset for the next test
+        (0 ..< interlinkingTriggerString.count).forEach { _ in
+            noteTextView.typeText(XCUIKeyboardKey.delete.rawValue)
+        }
+
+        goBackFromEditor(using: app)
 
         openMenu(using: app)
 
@@ -202,6 +192,7 @@ class SimplenoteScreenshots: XCTestCase {
     }
 
     let noteForDetailScreenshot = "Lemon Cake & Blueberry"
+    let noteForInterlinkingScreenshot = "Colors"
 }
 
 extension XCUIElement {
