@@ -30,9 +30,8 @@ class SimplenoteScreenshots: XCTestCase {
 
         let password = app.secureTextFields["Password"]
         XCTAssertTrue(password.waitForExistence(timeout: 10))
-        // -.-'
         password.tap()
-        password.pasteText(text: ScreenshotsCredentials.testUserPassword)
+        password.typeText(ScreenshotsCredentials.testUserPassword)
 
         // Need to check for the login button again, otherwise we'll attempt to press the one from
         // the previous screen.
@@ -193,19 +192,4 @@ class SimplenoteScreenshots: XCTestCase {
 
     let noteForDetailScreenshot = "Lemon Cake & Blueberry"
     let noteForInterlinkingScreenshot = "Colors"
-}
-
-extension XCUIElement {
-
-    func pasteText(text: String) -> Void {
-        let previousPasteboardContents = UIPasteboard.general.string
-        UIPasteboard.general.string = text
-
-        self.press(forDuration: 1.2)
-        XCUIApplication().menuItems.firstMatch.tap()
-
-        if let string = previousPasteboardContents {
-            UIPasteboard.general.string = string
-        }
-    }
 }
