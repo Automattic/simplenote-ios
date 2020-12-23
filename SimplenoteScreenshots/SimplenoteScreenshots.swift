@@ -74,7 +74,14 @@ class SimplenoteScreenshots: XCTestCase {
 
         XCTAssertTrue(noteTextView.waitForExistence(timeout: 1))
 
-        noteTextView.tap()
+        // The next step is to type in the note to bring up the inter-note linking view.
+        // The natural thing to do here would be tapping the note:
+        //
+        // noteTextView.tap()
+        //
+        // Doing so works on iOS, but fails on iPad Pro 12.9" 2nd and 3rd generation, on Xcode 12.3.
+        // Luckily, tapping the app itself does the job, too.
+        app.tap()
 
         let interlinkingTriggerString = "\n[L"
         noteTextView.typeText(interlinkingTriggerString)
