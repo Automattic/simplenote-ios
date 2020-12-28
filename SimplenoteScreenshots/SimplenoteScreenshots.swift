@@ -74,14 +74,20 @@ class SimplenoteScreenshots: XCTestCase {
 
         XCTAssertTrue(noteTextView.waitForExistence(timeout: 1))
 
-        // The next step is to type in the note to bring up the inter-note linking view.
-        // The natural thing to do here would be tapping the note:
+        // We need to add text at the end of the note. There is no dedicated API to do so. Our best
+        // bet is to try to scroll the text view to the bottom and tap there. There are no APIs for
+        // that either, so our next best bet is to 1) swipe up real fast to simulate a scroll to the
+        // bottom; 2) tap in the bottom right corner of the text view.
         //
-        // noteTextView.tap()
+        // Fun (?) fact worth tracking here for future reference. On the iPad Simulator^, tapping on
+        // the `noteTextView` `XCUIElement` doesn't work. Luckily, tapping on the `XCUICoordinate`
+        // works. Another option could have been to call `tap()` on the `XCUIApplication` itself,
+        // but that might result in tapping in the middle of the text on a small screen.
         //
-        // Doing so works on iOS, but fails on iPad Pro 12.9" 2nd and 3rd generation, on Xcode 12.3.
-        // Luckily, tapping the app itself does the job, too.
-        app.tap()
+        // ^: iPad Pro 12.9" 2nd and 3rd generation Simulator on Xcode 12.3.
+        noteTextView.swipeUp(velocity: .fast)
+        let lowerRightCorner = noteTextView.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
+        lowerRightCorner.tap()
 
         let interlinkingTriggerString = "\n[L"
         noteTextView.typeText(interlinkingTriggerString)
