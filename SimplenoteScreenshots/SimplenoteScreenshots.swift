@@ -30,8 +30,7 @@ class SimplenoteScreenshots: XCTestCase {
 
         let password = app.secureTextFields["Password"]
         XCTAssertTrue(password.waitForExistence(timeout: 10))
-        password.tap()
-        password.typeText(ScreenshotsCredentials.testUserPassword)
+        password.typeSecureText(ScreenshotsCredentials.testUserPassword, using: app)
 
         // Need to check for the login button again, otherwise we'll attempt to press the one from
         // the previous screen.
@@ -205,4 +204,63 @@ class SimplenoteScreenshots: XCTestCase {
 
     let noteForDetailScreenshot = "Lemon Cake & Blueberry"
     let noteForInterlinkingScreenshot = "Colors"
+}
+
+extension XCUIElement {
+
+    /// Workaround to type text into secure text fields due to the different behaviors across
+    /// Simulators.
+    func typeSecureText(_ text: String, using app: XCUIApplication) -> Void {
+        tap()
+
+        // At the time of writing, typing in a secure text field didn't work in some of the
+        // Simulators on which we want to take screenshots. On top of that, the workaround to type
+        // in the secure text field doesn't work in some other Simulators. Therefore, we need to
+        // know which approach to use at runtime.
+        if requiresSecureTextFieldWorkaround(using: app) {
+            paste(text: text)
+        } else {
+            typeText(text)
+        }
+    }
+
+    private func requiresSecureTextFieldWorkaround(using app: XCUIApplication) -> Bool {
+        // At the time of writing, these tests run on the following iOS 14.3 Simulators as defined
+        // in the Fastfile.
+        //
+        // - iPhone 8 Plus
+        // - iPhone Xs
+        // - iPad Pro 12.9" 2nd generation
+        // - iPad Pro 12.9" 3rd generation
+        //
+        // Of those, the only one requiring the secure text field workaround is the iPhone 8 Plus
+        // one.
+        return app.isDeviceIPhone8Plus()
+    }
+
+    private func paste(text: String) -> Void {
+        let previousPasteboardContents = UIPasteboard.general.string
+        UIPasteboard.general.string = text
+
+        self.press(forDuration: 1.2)
+        XCUIApplication().menuItems.firstMatch.tap()
+
+        if let string = previousPasteboardContents {
+            UIPasteboard.general.string = string
+        }
+    }
+}
+
+extension XCUIApplication {
+
+    func isDeviceIPhone8Plus(_ device: XCUIDevice = .shared) -> Bool {
+        let iPhone8PlusScreenHeight = CGFloat(736)
+
+        let frame = windows.element(boundBy: 0).frame
+
+        switch device.orientation {
+        case .landscapeLeft, .landscapeRight: return frame.width == iPhone8PlusScreenHeight
+        case _: return frame.height == iPhone8PlusScreenHeight
+        }
+    }
 }
