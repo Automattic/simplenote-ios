@@ -207,7 +207,6 @@ extension PinLockViewController {
 // MARK: - Localization
 //
 private enum Localization {
-
     static let enterYourPasscode = NSLocalizedString("Enter your passcode", comment: "Title on the PinLock screen asking to enter a passcode")
     static let deleteButton = NSLocalizedString("Delete", comment: "PinLock screen \"delete\" button")
     static let cancelButton = NSLocalizedString("Cancel", comment: "PinLock screen \"cancel\" button")
