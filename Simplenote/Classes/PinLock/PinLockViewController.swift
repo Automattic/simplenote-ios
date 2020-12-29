@@ -28,6 +28,7 @@ class PinLockViewController: UIViewController {
         if #available(iOS 13.0, *) {
             isModalInPresentation = true
         }
+        modalPresentationStyle = .fullScreen
     }
 
     required init?(coder: NSCoder) {
@@ -49,6 +50,31 @@ class PinLockViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         controller.configurationObserver = nil
+    }
+}
+
+// MARK: - Orientation
+//
+extension PinLockViewController {
+    override public var shouldAutorotate: Bool {
+        if UIDevice.isPad {
+            return super.shouldAutorotate
+        }
+        return false
+    }
+
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.isPad {
+            return super.supportedInterfaceOrientations
+        }
+        return [.portrait, .portraitUpsideDown]
+    }
+
+    override public var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        if UIDevice.isPad {
+            return super.preferredInterfaceOrientationForPresentation
+        }
+        return .portrait
     }
 }
 

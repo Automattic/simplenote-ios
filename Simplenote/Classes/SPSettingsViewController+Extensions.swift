@@ -10,8 +10,9 @@ extension SPSettingsViewController {
     func showPinLockSetupViewController() {
         let controller = PinLockSetupController(delegate: self)
         let viewController = PinLockViewController(controller: controller)
-        viewController.modalPresentationStyle = .formSheet
-
+        if traitCollection.verticalSizeClass != .compact {
+            viewController.modalPresentationStyle = .formSheet
+        }
         navigationController?.present(viewController, animated: true, completion: nil)
     }
 }
