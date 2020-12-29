@@ -91,6 +91,10 @@ class SimplenoteScreenshots: XCTestCase {
         let interlinkingTriggerString = "\n[L"
         noteTextView.typeText(interlinkingTriggerString)
 
+        // Before taking the screenshot, let's make sure the inter note liking window appeared by
+        // checking the text of one of its notes is on screen
+        XCTAssertTrue(app.staticTexts["Blueberry Recipes"].firstMatch.waitForExistence(timeout: 1))
+
         takeScreenshot("3-interlinking")
 
         // Reset for the next test
