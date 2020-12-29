@@ -125,7 +125,7 @@ end
   desc "Updates a release branch for a new beta release"
   lane :new_beta_release do | options |
     UI.message('TEST - Skip beta pre-build checks') # ios_betabuild_prechecks(options)
-    ios_update_metadata(options)
+    UI.message('TEST - Skip metadata update') # ios_update_metadata(options)
     violations = ios_lint_localizations(input_dir: 'Simplenote', abort_on_violations: false)
     unless (violations.nil? || violations.empty?)
       abort = UI.confirm("Violations found, we suggest fixing them in GlotPress first and retrying the beta afterwards. Abort?")
