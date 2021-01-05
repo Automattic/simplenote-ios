@@ -6,9 +6,17 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 class SPPinLockManager: NSObject {
-    @objc static func shouldBypassPinLock() -> Bool {
+
+    enum Biometry {
+        case touchID
+        case faceID
+    }
+
+    @objc
+    static func shouldBypassPinLock() -> Bool {
         guard let lastUsedString = KeychainManager.timestamp else {
             return false
         }
@@ -18,7 +26,7 @@ class SPPinLockManager: NSObject {
             return false
         }
         
-        let maxTimeoutSeconds = getPinLockTimeoutSeconds()
+        let maxTimeoutSeconds = pinLockTimeoutSeconds
         // User has timeout set to 'Off' setting (0)
         if (maxTimeoutSeconds == 0) {
             return false
@@ -37,7 +45,7 @@ class SPPinLockManager: NSObject {
         return intervalSinceLastUsed < maxTimeoutSeconds;
     }
     
-    static func getPinLockTimeoutSeconds() -> Int {
+    private static var pinLockTimeoutSeconds: Int {
         let timeoutPref = UserDefaults.standard.integer(forKey: kPinTimeoutPreferencesKey)
         let timeoutValues = [0, 15, 30, 60, 120, 180, 240, 300]
         
@@ -48,11 +56,68 @@ class SPPinLockManager: NSObject {
         return timeoutValues[timeoutPref]
     }
     
-    @objc static func storeLastUsedTime() {
+    @objc
+    static func storeLastUsedTime() {
+        guard isEnabled else {
+            return
+        }
+
         var ts = timespec()
         clock_gettime(CLOCK_MONOTONIC_RAW, &ts)
 
         let nowTime = String(format: "%ld", ts.tv_sec)
         KeychainManager.timestamp = nowTime
+    }
+
+    @objc
+    static var isEnabled: Bool {
+        pin?.isEmpty == false
+    }
+
+    @objc
+    static var shouldUseBiometry: Bool {
+        get {
+            Options.shared.useBiometryInsteadOfPin
+        }
+
+        set {
+            Options.shared.useBiometryInsteadOfPin = newValue
+        }
+    }
+
+    static var supportedBiometry: Biometry? {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return nil
+        }
+
+        switch context.biometryType {
+        case .none:
+            return nil
+        case .touchID:
+            return .touchID
+        case .faceID:
+            return .faceID
+        @unknown default:
+            return nil
+        }
+    }
+
+    @objc
+    static var pin: String? {
+        get {
+            KeychainManager.pinlock
+        }
+
+        set {
+            KeychainManager.pinlock = newValue
+        }
+    }
+
+    @objc
+    static func removePin() {
+        pin = nil
+        shouldUseBiometry = false
     }
 }

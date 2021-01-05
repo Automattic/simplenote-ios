@@ -122,6 +122,16 @@ extension Options {
             NotificationCenter.default.post(name: .SPSimplenoteThemeChanged, object: nil)
         }
     }
+
+    var useBiometryInsteadOfPin: Bool {
+        get {
+            defaults.bool(forKey: .useBiometryInsteadOfPin)
+        }
+
+        set {
+            defaults.set(newValue, forKey: .useBiometryInsteadOfPin)
+        }
+    }
 }
 
 
@@ -151,6 +161,7 @@ extension Options {
         defaults.removeObject(forKey: .listSortMode)
         defaults.removeObject(forKey: .markdown)
         defaults.removeObject(forKey: .searchSortMode)
+        defaults.removeObject(forKey: .useBiometryInsteadOfPin)
     }
     
     /// Returns the number of Preview Lines we should use, per note

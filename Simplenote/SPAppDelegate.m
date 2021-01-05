@@ -193,7 +193,7 @@
     
     // Check to see if first time user
     if ([self isFirstLaunch]) {        
-        [self removePin];
+        [SPPinLockManager removePin];
         [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
@@ -243,7 +243,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // For the passcode lock, store the current clock time for comparison when returning to the app
-    if ([self passcodeLockIsEnabled] && [self.window isKeyWindow]) {
+    if ([self.window isKeyWindow]) {
         [SPPinLockManager storeLastUsedTime];
     }
     
@@ -465,7 +465,7 @@
             [[Options shared] reset];
             
 			// remove the pin lock
-			[self removePin];
+            [SPPinLockManager removePin];
 			
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];
@@ -700,14 +700,14 @@
 
 -(void)showPasscodeLockIfNecessary
 {
-    if (![self passcodeLockIsEnabled] || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
+    if (!SPPinLockManager.isEnabled || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
         return;
 	}
     
-    BOOL useBiometry = self.allowBiometryInsteadOfPin;
+    BOOL useBiometry = SPPinLockManager.shouldUseBiometry;
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
 	controller.pinLockDelegate = self;
-	controller.pin = [self getPin];
+	controller.pin = SPPinLockManager.pin;
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	
 	// no animation to cover up app right away
@@ -715,12 +715,6 @@
     self.pinLockWindow.rootViewController = controller;
     [self.pinLockWindow makeKeyAndVisible];
 	[controller fixLayout];
-}
-
-- (BOOL)passcodeLockIsEnabled {
-    NSString *pin = [self getPin];
-    
-    return pin != nil && pin.length != 0;
 }
 
 - (void)pinLockControllerDidFinishUnlocking
@@ -732,21 +726,6 @@
                          [self.pinLockWindow removeFromSuperview];
                          self.pinLockWindow = nil;
                      }];
-}
-
-- (BOOL)allowBiometryInsteadOfPin
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL useTouchID = [userDefaults boolForKey:kSimplenoteUseBiometryKey];
-
-    return useTouchID;
-}
-
-- (void)setAllowBiometryInsteadOfPin:(BOOL)allowBiometryInsteadOfPin
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:allowBiometryInsteadOfPin forKey:kSimplenoteUseBiometryKey];
-    [userDefaults synchronize];
 }
 
 - (BOOL)isPresentingPinLock

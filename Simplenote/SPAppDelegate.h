@@ -31,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
-@property (assign, nonatomic) BOOL                                      allowBiometryInsteadOfPin;
-
 - (void)presentSettingsViewController;
 
 - (void)save;
