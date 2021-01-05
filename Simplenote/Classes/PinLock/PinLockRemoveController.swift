@@ -15,13 +15,10 @@ final class PinLockRemoveController: PinLockBaseController, PinLockController {
         return true
     }
 
-    private let pin: String
+    private var attempts: Int = 1
     private weak var delegate: PinLockRemoveControllerDelegate?
 
-    private var attempts: Int = 1
-
-    init(pin: String, delegate: PinLockRemoveControllerDelegate) {
-        self.pin = pin
+    init(delegate: PinLockRemoveControllerDelegate) {
         self.delegate = delegate
 
         super.init()
@@ -29,13 +26,14 @@ final class PinLockRemoveController: PinLockBaseController, PinLockController {
     }
 
     func handlePin(_ pin: String) {
-        guard pin == self.pin else {
+        guard SPPinLockManager.validatePin(pin) else {
             let configuration = PinLockControllerConfiguration(title: Localization.title, message: Localization.failedAttempts(attempts))
             switchTo(configuration, with: .shake)
             attempts += 1
             return
         }
 
+        SPPinLockManager.removePin()
         delegate?.pinLockRemoveControllerDidComplete(self)
     }
 

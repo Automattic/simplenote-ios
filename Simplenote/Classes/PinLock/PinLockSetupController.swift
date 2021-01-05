@@ -3,7 +3,7 @@ import Foundation
 // MARK: - PinLockSetupControllerDelegate
 //
 protocol PinLockSetupControllerDelegate: class {
-    func pinLockSetupController(_ controller: PinLockSetupController, didSelectPin pin: String)
+    func pinLockSetupControllerDidComplete(_ controller: PinLockSetupController)
     func pinLockSetupControllerDidCancel(_ controller: PinLockSetupController)
 }
 
@@ -44,8 +44,9 @@ final class PinLockSetupController: PinLockBaseController, PinLockController {
                      with: .slideTrailing)
             return
         }
-
-        delegate?.pinLockSetupController(self, didSelectPin: pin)
+        
+        SPPinLockManager.setPin(pin)
+        delegate?.pinLockSetupControllerDidComplete(self)
     }
 
     func handleCancellation() {

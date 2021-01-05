@@ -8,8 +8,8 @@ extension SPSettingsViewController {
     @objc
     func showPinLockViewController() {
         let controller: PinLockController
-        if let pin = SPPinLockManager.pin {
-            controller = PinLockRemoveController(pin: pin, delegate: self)
+        if SPPinLockManager.isEnabled {
+            controller = PinLockRemoveController(delegate: self)
         } else {
             controller = PinLockSetupController(delegate: self)
         }
@@ -29,11 +29,8 @@ extension SPSettingsViewController {
 // MARK: - PinLockSetupControllerDelegate
 //
 extension SPSettingsViewController: PinLockSetupControllerDelegate {
-    func pinLockSetupController(_ controller: PinLockSetupController, didSelectPin pin: String) {
+    func pinLockSetupControllerDidComplete(_ controller: PinLockSetupController) {
         SPTracker.trackSettingsPinlockEnabled(true)
-
-        SPPinLockManager.pin = pin
-
         dismissPresentedViewController()
     }
 
@@ -48,9 +45,6 @@ extension SPSettingsViewController: PinLockSetupControllerDelegate {
 extension SPSettingsViewController: PinLockRemoveControllerDelegate {
     func pinLockRemoveControllerDidComplete(_ controller: PinLockRemoveController) {
         SPTracker.trackSettingsPinlockEnabled(false)
-
-        SPPinLockManager.removePin()
-
         dismissPresentedViewController()
     }
 

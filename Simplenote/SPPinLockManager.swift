@@ -1,20 +1,19 @@
-//
-//  SPPinLockManager.swift
-//  Simplenote
-//
-//  Helper functions for accessing the apps pin lock settings
-//
-
 import Foundation
 import LocalAuthentication
 
+// MARK: - SPPinLockManager
+//
 class SPPinLockManager: NSObject {
 
+    /// Biometry
+    ///
     enum Biometry {
         case touchID
         case faceID
     }
 
+    /// Should we bypass pin lock due to timeout settings?
+    ///
     @objc
     static func shouldBypassPinLock() -> Bool {
         guard let lastUsedSeconds = Int(KeychainManager.timestamp ?? "0"),
@@ -51,7 +50,9 @@ class SPPinLockManager: NSObject {
         
         return timeoutValues[timeoutPref]
     }
-    
+
+    /// Store last time the app was used
+    ///
     @objc
     static func storeLastUsedTime() {
         guard isEnabled else {
@@ -65,11 +66,50 @@ class SPPinLockManager: NSObject {
         KeychainManager.timestamp = nowTime
     }
 
+    /// Is pin enabled
+    ///
     @objc
     static var isEnabled: Bool {
         pin?.isEmpty == false
     }
 
+    /// Set pin
+    ///
+    static func setPin(_ pin: String) {
+        self.pin = pin
+    }
+
+    /// Remove pin
+    ///
+    @objc
+    static func removePin() {
+        pin = nil
+        shouldUseBiometry = false
+    }
+
+    /// Check if provided pin is valid
+    ///
+    static func validatePin(_ pin: String) -> Bool {
+        isEnabled && pin == self.pin
+    }
+
+    @objc
+    static var pin: String? {
+        get {
+            KeychainManager.pinlock
+        }
+
+        set {
+            KeychainManager.pinlock = newValue
+        }
+    }
+}
+
+// MARK: - Biometry
+//
+extension SPPinLockManager {
+    /// Should the app try to use biometry?
+    ///
     @objc
     static var shouldUseBiometry: Bool {
         get {
@@ -81,6 +121,8 @@ class SPPinLockManager: NSObject {
         }
     }
 
+    /// Supported biometry option or nil if there is no support
+    ///
     static var supportedBiometry: Biometry? {
         let context = LAContext()
         var error: NSError?
@@ -98,22 +140,5 @@ class SPPinLockManager: NSObject {
         @unknown default:
             return nil
         }
-    }
-
-    @objc
-    static var pin: String? {
-        get {
-            KeychainManager.pinlock
-        }
-
-        set {
-            KeychainManager.pinlock = newValue
-        }
-    }
-
-    @objc
-    static func removePin() {
-        pin = nil
-        shouldUseBiometry = false
     }
 }
