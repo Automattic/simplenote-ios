@@ -21,7 +21,6 @@
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
-#import "DTPinLockController.h"
 #import "SPTracker.h"
 
 @import Contacts;
@@ -39,7 +38,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SPBucketDelegate, PinLockDelegate>
+@interface SPAppDelegate () <SPBucketDelegate>
 
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
@@ -208,26 +207,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self ensurePinlockIsDismissed];
+    [self ensurePasscodeLockIsDismissed];
     [SPTracker trackApplicationOpened];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [SPTracker trackApplicationClosed];
-}
-
-- (void)ensurePinlockIsDismissed
-{
-    // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
-    if (self.pinLockWindow != nil
-        && [self.pinLockWindow isKeyWindow]
-        && [SPPinLockManager shouldBypassPinLock]) {
-        // Bring the main window to the front, which 'dismisses' the pin lock window
-        [self.window makeKeyAndVisible];
-        [self.pinLockWindow removeFromSuperview];
-        self.pinLockWindow = nil;
-    }
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -682,66 +668,6 @@
     
     return YES;
 }
-
-#pragma mark ================================================================================
-#pragma mark Passcode Lock
-#pragma mark ================================================================================
-
-- (UIViewController*)topMostController
-{
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-    
-    return topController;
-}
-
--(void)showPasscodeLockIfNecessary
-{
-    if (!SPPinLockManager.isEnabled || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
-        return;
-	}
-    
-    BOOL useBiometry = SPPinLockManager.shouldUseBiometry;
-    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
-	controller.pinLockDelegate = self;
-	controller.pin = SPPinLockManager.pin;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	
-	// no animation to cover up app right away
-    self.pinLockWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.pinLockWindow.rootViewController = controller;
-    [self.pinLockWindow makeKeyAndVisible];
-	[controller fixLayout];
-}
-
-- (void)pinLockControllerDidFinishUnlocking
-{
-    [UIView animateWithDuration:0.3
-                     animations:^{ self.pinLockWindow.alpha = 0.0; }
-                     completion:^(BOOL finished) {
-                         [self.window makeKeyAndVisible];
-                         [self.pinLockWindow removeFromSuperview];
-                         self.pinLockWindow = nil;
-                     }];
-}
-
-- (BOOL)isPresentingPinLock
-{
-    return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
-}
-
-- (BOOL)isRequestingContactsPermission
-{
-    NSArray *topChildren = self.topMostController.childViewControllers;
-    BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];
-    BOOL isNotDeterminedAuth = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusNotDetermined;
-    
-    return isShowingCollaborators && isNotDeterminedAuth;
-}
-
 
 #pragma mark ================================================================================
 #pragma mark App Tracking

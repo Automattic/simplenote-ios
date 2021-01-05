@@ -228,3 +228,59 @@ extension SPAppDelegate: SimperiumDelegate {
         SPTracker.refreshMetadataForAnonymousUser()
     }
 }
+
+
+// MARK: - Passcode
+//
+extension SPAppDelegate {
+    /// Show passcode lock if passcode is enabled
+    ///
+    @objc
+    func showPasscodeLockIfNecessary() {
+        guard SPPinLockManager.isEnabled, !isPresentingPasscodeLock else {
+            return
+        }
+
+        let controller = PinLockVerifyController(delegate: self)
+        let viewController = PinLockViewController(controller: controller)
+
+        pinLockWindow = UIWindow(frame: UIScreen.main.bounds)
+        pinLockWindow?.rootViewController = viewController
+        pinLockWindow?.makeKeyAndVisible()
+    }
+
+    /// Dismiss the passcode lock window if the user has returned to the app before their preferred timeout length
+    ///
+    @objc
+    func ensurePasscodeLockIsDismissed() {
+
+        guard pinLockWindow?.isKeyWindow == true, SPPinLockManager.shouldBypassPinLock() else {
+            return
+        }
+
+        dismissPasscodeLock()
+    }
+
+    private func dismissPasscodeLock() {
+        window.makeKeyAndVisible()
+        pinLockWindow?.removeFromSuperview()
+        pinLockWindow = nil
+    }
+
+    private var isPresentingPasscodeLock: Bool {
+        return pinLockWindow?.isKeyWindow == true
+    }
+}
+
+
+// MARK: - PinLockVerifyControllerDelegate
+//
+extension SPAppDelegate: PinLockVerifyControllerDelegate {
+    func pinLockVerifyControllerDidComplete(_ controller: PinLockVerifyController) {
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+            self.pinLockWindow?.alpha = 0.0
+        } completion: { (_) in
+            self.dismissPasscodeLock()
+        }
+    }
+}

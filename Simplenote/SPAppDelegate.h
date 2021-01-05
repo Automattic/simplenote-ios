@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)save;
 - (void)logoutAndReset:(id)sender;
 
-- (void)showPasscodeLockIfNecessary;
-
 + (SPAppDelegate *)sharedDelegate;
 
 @end
