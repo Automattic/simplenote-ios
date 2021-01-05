@@ -130,7 +130,6 @@ extension UIView {
 
     /// Shake the view
     ///
-    @objc
     func shake(onCompletion: ((Bool) -> Void)? = nil) {
         let translation: CGFloat = 2.0
         let leftTranslation = transform.translatedBy(x: translation, y: 0.0)

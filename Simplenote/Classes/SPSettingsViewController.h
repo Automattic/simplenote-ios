@@ -2,7 +2,7 @@
 #import "DTPinLockController.h"
 #import "SPTableViewController.h"
 
-@interface SPSettingsViewController : SPTableViewController <PinLockDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface SPSettingsViewController : SPTableViewController <UIPickerViewDelegate, UIPickerViewDataSource> {
     
     //Preferences
     NSNumber *sortOrderPref;

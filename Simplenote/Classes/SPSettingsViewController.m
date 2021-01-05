@@ -1,7 +1,6 @@
 #import "SPSettingsViewController.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
-#import "DTPinLockController.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
@@ -612,68 +611,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     cell.selectedBackgroundView.backgroundColor = [UIColor simplenoteLightBlueColor];
     cell.textLabel.textColor = [UIColor simplenoteTextColor];
     cell.detailTextLabel.textColor = [UIColor simplenoteSecondaryTextColor];
-}
-
-
-- (void)showPinLockViewController
-{
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    if (pin.length == 0) {
-        [self showPinLockSetupViewController];
-        return;
-    }
-
-    PinLockControllerMode mode = PinLockControllerModeRemovePin;
-    
-    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:mode];
-    controller.pinLockDelegate = self;
-    controller.pin = pin;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:controller
-                                            animated:YES
-                                          completion:nil];
-    
-    if ([UIDevice isPad]) {
-        [controller fixLayout];
-    }
-}
-
-
-#pragma mark - PinLock Delegate
-
-- (void)pinLockController:(DTPinLockController *)pinLockController didFinishSelectingNewPin:(NSString *)newPin
-{
-    [SPTracker trackSettingsPinlockEnabled:YES];
-    
-    [[SPAppDelegate sharedDelegate] setPin:newPin];
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)pinLockControllerDidFinishRemovingPin
-{
-    [SPTracker trackSettingsPinlockEnabled:NO];
-    
-    [[SPAppDelegate sharedDelegate] removePin];
-    [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
-    
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-
-}
-
-- (void)pinLockControllerDidCancel
-{
-    // Make sure the UI is consistent
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    if (pin.length == 0) {
-        [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
-    }
-    
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 

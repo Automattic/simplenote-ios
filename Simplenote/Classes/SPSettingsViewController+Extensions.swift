@@ -4,11 +4,20 @@ import UIKit
 //
 extension SPSettingsViewController {
 
-    /// Show view controller to setup pin
-    ///
+    /// Show pin setup or pin remove view controller
     @objc
-    func showPinLockSetupViewController() {
-        let controller = PinLockSetupController(delegate: self)
+    func showPinLockViewController() {
+        let controller: PinLockController
+        if let pin = SPAppDelegate.shared().getPin() {
+            controller = PinLockRemoveController(pin: pin, delegate: self)
+        } else {
+            controller = PinLockSetupController(delegate: self)
+        }
+
+        showPinLockViewController(with: controller)
+    }
+
+    private func showPinLockViewController(with controller: PinLockController) {
         let viewController = PinLockViewController(controller: controller)
         if traitCollection.verticalSizeClass != .compact {
             viewController.modalPresentationStyle = .formSheet
@@ -30,6 +39,23 @@ extension SPSettingsViewController: PinLockSetupControllerDelegate {
 
     func pinLockSetupControllerDidCancel(_ controller: PinLockSetupController) {
         SPAppDelegate.shared().allowBiometryInsteadOfPin = false
+        dismissPresentedViewController()
+    }
+}
+
+// MARK: - PinLockRemoveControllerDelegate
+//
+extension SPSettingsViewController: PinLockRemoveControllerDelegate {
+    func pinLockRemoveControllerDidComplete(_ controller: PinLockRemoveController) {
+        SPTracker.trackSettingsPinlockEnabled(false)
+
+        SPAppDelegate.shared().removePin()
+        SPAppDelegate.shared().allowBiometryInsteadOfPin = false
+
+        dismissPresentedViewController()
+    }
+
+    func pinLockRemoveControllerDidCancel(_ controller: PinLockRemoveController) {
         dismissPresentedViewController()
     }
 }

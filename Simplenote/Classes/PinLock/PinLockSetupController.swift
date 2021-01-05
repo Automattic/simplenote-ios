@@ -9,17 +9,9 @@ protocol PinLockSetupControllerDelegate: class {
 
 // MARK: - PinLockSetupController
 //
-class PinLockSetupController: PinLockController {
-    private var configuration: PinLockControllerConfiguration = PinLockControllerConfiguration(title: Localization.createPasscode, message: nil)
-
+final class PinLockSetupController: PinLockBaseController, PinLockController {
     var isCancellable: Bool {
         return true
-    }
-
-    var configurationObserver: ((PinLockControllerConfiguration, UIView.ReloadAnimation?) -> Void)? {
-        didSet {
-            configurationObserver?(configuration, nil)
-        }
     }
 
     private var pin: String?
@@ -27,6 +19,9 @@ class PinLockSetupController: PinLockController {
 
     init(delegate: PinLockSetupControllerDelegate) {
         self.delegate = delegate
+
+        super.init()
+        configuration = PinLockControllerConfiguration(title: Localization.createPasscode, message: nil)
     }
 
     func handlePin(_ pin: String) {
@@ -64,11 +59,6 @@ private extension PinLockSetupController {
     func switchToPinConfirmation() {
         let configuration = PinLockControllerConfiguration(title: Localization.confirmPasscode, message: nil)
         switchTo(configuration, with: .slideLeading)
-    }
-
-    func switchTo(_ configuration: PinLockControllerConfiguration, with animation: UIView.ReloadAnimation) {
-        self.configuration = configuration
-        configurationObserver?(configuration, animation)
     }
 }
 
