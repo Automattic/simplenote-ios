@@ -17,18 +17,14 @@ class SPPinLockManager: NSObject {
 
     @objc
     static func shouldBypassPinLock() -> Bool {
-        guard let lastUsedString = KeychainManager.timestamp else {
+        guard let lastUsedSeconds = Int(KeychainManager.timestamp ?? "0"),
+              lastUsedSeconds > 0 else {
             return false
         }
-        
-        let lastUsedSeconds = Int(lastUsedString);
-        if lastUsedSeconds == 0 {
-            return false
-        }
-        
+
         let maxTimeoutSeconds = pinLockTimeoutSeconds
         // User has timeout set to 'Off' setting (0)
-        if (maxTimeoutSeconds == 0) {
+        if maxTimeoutSeconds == 0 {
             return false
         }
         
@@ -37,11 +33,11 @@ class SPPinLockManager: NSObject {
         let nowSeconds = max(0, Int(ts.tv_sec)) // The running clock time of the device
         
         // User may have recently rebooted their device, so we'll enforce lock screen
-        if (lastUsedSeconds! > nowSeconds) {
+        if lastUsedSeconds > nowSeconds {
             return false
         }
         
-        let intervalSinceLastUsed = nowSeconds - lastUsedSeconds!
+        let intervalSinceLastUsed = nowSeconds - lastUsedSeconds
         return intervalSinceLastUsed < maxTimeoutSeconds;
     }
     
