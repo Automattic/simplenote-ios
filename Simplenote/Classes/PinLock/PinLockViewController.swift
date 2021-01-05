@@ -35,6 +35,10 @@ class PinLockViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        removeNotificationListeners()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -45,6 +49,11 @@ class PinLockViewController: UIViewController {
         controller.configurationObserver = { [weak self] (configuration, animation) in
             self?.update(with: configuration, animation: animation)
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        controller.viewDidAppear()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -87,6 +96,7 @@ private extension PinLockViewController {
         setupCancelButton()
         setupProgressView()
         setupKeypadButtons()
+        setupNotificationListeners()
     }
 
     func setupCancelButton() {
@@ -227,6 +237,23 @@ extension PinLockViewController {
     @objc
     private func handleBackspace() {
         removeLastDigit()
+    }
+}
+
+// MARK: - Notifications
+//
+private extension PinLockViewController {
+    func setupNotificationListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    func removeNotificationListeners() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    func applicationDidBecomeActive() {
+        controller.applicationDidBecomeActive()
     }
 }
 

@@ -141,4 +141,26 @@ extension SPPinLockManager {
             return nil
         }
     }
+
+    /// Verify biometry
+    ///
+    static func verifyBiometry(completion: @escaping (_ success: Bool) -> Void) {
+        guard shouldUseBiometry, supportedBiometry != nil else {
+            completion(false)
+            return
+        }
+
+        let context = LAContext()
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localization.biometryReason) { (success, _) in
+            DispatchQueue.main.async {
+                completion(success)
+            }
+        }
+    }
+}
+
+// MARK: - Localization
+//
+private struct Localization {
+    static let biometryReason = NSLocalizedString("To unlock the application", comment: "Touch ID reason/explanation")
 }

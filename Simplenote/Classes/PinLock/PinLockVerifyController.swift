@@ -13,6 +13,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
     }
 
     private var attempts: Int = 1
+    private var hasShownBiometryVerification: Bool = false
     private weak var delegate: PinLockVerifyControllerDelegate?
 
     init(delegate: PinLockVerifyControllerDelegate) {
@@ -34,6 +35,38 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
 
     func handleCancellation() {
         
+    }
+
+    func viewDidAppear() {
+        verifyBiometry()
+    }
+
+    func applicationDidBecomeActive() {
+        verifyBiometry()
+    }
+}
+
+// MARK: - Biometry
+//
+private extension PinLockVerifyController {
+
+    func verifyBiometry() {
+        guard UIApplication.shared.applicationState == .active,
+              !hasShownBiometryVerification else {
+            return
+        }
+
+        hasShownBiometryVerification = true
+
+        SPPinLockManager.verifyBiometry { [weak self] (success) in
+            guard let self = self else {
+                return
+            }
+
+            if success {
+                self.delegate?.pinLockVerifyControllerDidComplete(self)
+            }
+        }
     }
 }
 
