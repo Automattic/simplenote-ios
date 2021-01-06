@@ -162,6 +162,9 @@
 		A6E6CE3125A59587005A92DB /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */; };
 		A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */; };
 		A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */; };
+		A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */; };
+		A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE7425A5B4A3005A92DB /* MockPinLockManager.swift */; };
+		A6E6CE8325A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -576,6 +579,9 @@
 		A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthentication.swift; sourceTree = "<group>"; };
 		A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockBaseControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLockControllerConfiguration+Tests.swift"; sourceTree = "<group>"; };
+		A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockSetupControllerTests.swift; sourceTree = "<group>"; };
+		A6E6CE7425A5B4A3005A92DB /* MockPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPinLockManager.swift; sourceTree = "<group>"; };
+		A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockControllerConfigurationObserver.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1150,9 +1156,21 @@
 		A6E6CE5425A5A6CC005A92DB /* PinLock */ = {
 			isa = PBXGroup;
 			children = (
+				A6E6CE7325A5B489005A92DB /* Helpers */,
 				A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */,
+				A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */,
 			);
 			path = PinLock;
+			sourceTree = "<group>";
+		};
+		A6E6CE7325A5B489005A92DB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */,
+				A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */,
+				A6E6CE7425A5B4A3005A92DB /* MockPinLockManager.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		B511AECA255A0A01005B2159 /* Interlinks */ = {
@@ -1493,7 +1511,6 @@
 				B5421F3D23CE7A1C004DDC19 /* MockupStorage.swift */,
 				B5421F3E23CE7A1C004DDC19 /* MockupStorage+Sample.swift */,
 				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
-				A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2535,11 +2552,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */,
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
+				A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */,
 				A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */,
 				A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
@@ -2552,6 +2571,7 @@
 				B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */,
 				B57DE27A2501806B00B4D435 /* StringSimplenoteTests.swift in Sources */,
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,
+				A6E6CE8325A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift in Sources */,
 				B5421F3F23CE7A1C004DDC19 /* MockupStorage.swift in Sources */,
 				A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */,
 				B536989B25646D3900817E30 /* CGRectSimplenoteTests.swift in Sources */,

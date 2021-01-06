@@ -5,24 +5,19 @@ import XCTest
 //
 class PinLockBaseControllerTests: XCTestCase {
     private let controller = PinLockBaseController()
+    private let configurationObserver = PinLockControllerConfigurationObserver()
 
     func testSettingAnObserverWillImmediatelyCallItWithCurrentConfiguration() {
         // Given
         let configuration = PinLockControllerConfiguration.random()
 
         // When
-        var actualConfiguration: PinLockControllerConfiguration?
-        var actualAnimation: UIView.ReloadAnimation?
-
         controller.configuration = configuration
-        controller.configurationObserver = { (configuration, animation) in
-            actualConfiguration = configuration
-            actualAnimation = animation
-        }
+        controller.configurationObserver = configurationObserver.handler
 
         // Then
-        XCTAssertEqual(actualConfiguration, configuration)
-        XCTAssertNil(actualAnimation)
+        XCTAssertEqual(configurationObserver.configurations, [configuration])
+        XCTAssertEqual(configurationObserver.animations, [nil])
     }
 
     func testSwitchToConfigurationCallsObserver() {
@@ -31,18 +26,11 @@ class PinLockBaseControllerTests: XCTestCase {
         let animation = UIView.ReloadAnimation.slideLeading
 
         // When
-        var actualConfiguration: PinLockControllerConfiguration?
-        var actualAnimation: UIView.ReloadAnimation?
-
-        controller.configurationObserver = { (configuration, animation) in
-            actualConfiguration = configuration
-            actualAnimation = animation
-        }
-
+        controller.configurationObserver = configurationObserver.handler
         controller.switchTo(configuration, with: animation)
 
         // Then
-        XCTAssertEqual(actualConfiguration, configuration)
-        XCTAssertEqual(actualAnimation, animation)
+        XCTAssertEqual(configurationObserver.lastConfiguration, configuration)
+        XCTAssertEqual(configurationObserver.lastAnimation, animation)
     }
 }
