@@ -103,11 +103,9 @@ class SPPinLockManager: NSObject {
             KeychainManager.pinlock = newValue
         }
     }
-}
 
-// MARK: - Biometry
-//
-extension SPPinLockManager {
+    // MARK: - Biometry
+
     /// Should the app try to use biometry?
     ///
     @objc

@@ -49,7 +49,7 @@ class PinLockRemoveControllerTests: XCTestCase {
         XCTAssertEqual(delegate.numberOfTimesCompleteIsCalled, 0)
         XCTAssertEqual(delegate.numberOfTimesCancelIsCalled, 1)
 
-        XCTAssertEqual(pinLockManager.setPinInvocations, [])
+        XCTAssertEqual(pinLockManager.numberOfTimesRemovePinIsCalled, 0)
     }
 }
 

@@ -14,10 +14,12 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
 
     private var attempts: Int = 1
     private var hasShownBiometryVerification: Bool = false
-    private lazy var pinLockManager = SPPinLockManager.shared
+    private let pinLockManager: SPPinLockManager
     private weak var delegate: PinLockVerifyControllerDelegate?
 
-    init(delegate: PinLockVerifyControllerDelegate) {
+    init(pinLockManager: SPPinLockManager = SPPinLockManager.shared,
+         delegate: PinLockVerifyControllerDelegate) {
+        self.pinLockManager = pinLockManager
         self.delegate = delegate
 
         super.init()

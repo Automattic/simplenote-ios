@@ -166,6 +166,7 @@
 		A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE7425A5B4A3005A92DB /* MockPinLockManager.swift */; };
 		A6E6CE8325A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */; };
 		A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */; };
+		A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -584,6 +585,7 @@
 		A6E6CE7425A5B4A3005A92DB /* MockPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPinLockManager.swift; sourceTree = "<group>"; };
 		A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockControllerConfigurationObserver.swift; sourceTree = "<group>"; };
 		A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockRemoveControllerTests.swift; sourceTree = "<group>"; };
+		A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockVerifyControllerTests.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1162,6 +1164,7 @@
 				A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */,
 				A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */,
 				A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */,
+				A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */,
 			);
 			path = PinLock;
 			sourceTree = "<group>";
@@ -2561,6 +2564,7 @@
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
+				A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */,
 				A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */,
 				A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */,
 				A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */,
