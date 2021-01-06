@@ -83,8 +83,6 @@ extension SPAppDelegate {
 
             noteListViewController.startSearching()
         }
-
-        showPasscodeLockIfNecessary()
     }
 
     /// Opens editor with a new note
@@ -110,7 +108,6 @@ extension SPAppDelegate {
         popToNoteList()
 
         noteListViewController.open(note, animated: false)
-        showPasscodeLockIfNecessary()
     }
 
     /// Dismisses all modals
@@ -252,8 +249,7 @@ extension SPAppDelegate {
     /// Dismiss the passcode lock window if the user has returned to the app before their preferred timeout length
     ///
     @objc
-    func ensurePasscodeLockIsDismissed() {
-
+    func dismissPasscodeLockIfPossible() {
         guard pinLockWindow?.isKeyWindow == true, SPPinLockManager.shared.shouldBypassPinLock else {
             return
         }
