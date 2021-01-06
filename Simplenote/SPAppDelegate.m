@@ -192,7 +192,7 @@
     
     // Check to see if first time user
     if ([self isFirstLaunch]) {        
-        [SPPinLockManager removePin];
+        [[SPPinLockManager shared] removePin];
         [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
@@ -230,7 +230,7 @@
 {
     // For the passcode lock, store the current clock time for comparison when returning to the app
     if ([self.window isKeyWindow]) {
-        [SPPinLockManager storeLastUsedTime];
+        [[SPPinLockManager shared] storeLastUsedTime];
     }
     
     [self showPasscodeLockIfNecessary];
@@ -451,7 +451,7 @@
             [[Options shared] reset];
             
 			// remove the pin lock
-            [SPPinLockManager removePin];
+            [[SPPinLockManager shared] removePin];
 			
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];

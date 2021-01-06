@@ -1,21 +1,21 @@
 import Foundation
-import LocalAuthentication
 
 // MARK: - SPPinLockManager
 //
 class SPPinLockManager: NSObject {
 
-    /// Biometry
-    ///
-    enum Biometry {
-        case touchID
-        case faceID
+    @objc
+    static let shared = SPPinLockManager()
+
+    private let biometricAuthentication: BiometricAuthentication
+
+    init(biometricAuthentication: BiometricAuthentication = BiometricAuthentication()) {
+        self.biometricAuthentication = biometricAuthentication
     }
 
     /// Should we bypass pin lock due to timeout settings?
     ///
-    @objc
-    static func shouldBypassPinLock() -> Bool {
+    var shouldBypassPinLock: Bool {
         guard let lastUsedSeconds = Int(KeychainManager.timestamp ?? "0"),
               lastUsedSeconds > 0 else {
             return false
@@ -40,7 +40,7 @@ class SPPinLockManager: NSObject {
         return intervalSinceLastUsed < maxTimeoutSeconds;
     }
     
-    private static var pinLockTimeoutSeconds: Int {
+    private var pinLockTimeoutSeconds: Int {
         let timeoutPref = UserDefaults.standard.integer(forKey: kPinTimeoutPreferencesKey)
         let timeoutValues = [0, 15, 30, 60, 120, 180, 240, 300]
         
@@ -54,7 +54,7 @@ class SPPinLockManager: NSObject {
     /// Store last time the app was used
     ///
     @objc
-    static func storeLastUsedTime() {
+    func storeLastUsedTime() {
         guard isEnabled else {
             return
         }
@@ -69,32 +69,32 @@ class SPPinLockManager: NSObject {
     /// Is pin enabled
     ///
     @objc
-    static var isEnabled: Bool {
+    var isEnabled: Bool {
         pin?.isEmpty == false
     }
 
     /// Set pin
     ///
-    static func setPin(_ pin: String) {
+    func setPin(_ pin: String) {
         self.pin = pin
     }
 
     /// Remove pin
     ///
     @objc
-    static func removePin() {
+    func removePin() {
         pin = nil
         shouldUseBiometry = false
     }
 
     /// Check if provided pin is valid
     ///
-    static func validatePin(_ pin: String) -> Bool {
+    func validatePin(_ pin: String) -> Bool {
         isEnabled && pin == self.pin
     }
 
     @objc
-    static var pin: String? {
+    private var pin: String? {
         get {
             KeychainManager.pinlock
         }
@@ -111,7 +111,7 @@ extension SPPinLockManager {
     /// Should the app try to use biometry?
     ///
     @objc
-    static var shouldUseBiometry: Bool {
+    var shouldUseBiometry: Bool {
         get {
             Options.shared.useBiometryInsteadOfPin
         }
@@ -121,46 +121,16 @@ extension SPPinLockManager {
         }
     }
 
-    /// Supported biometry option or nil if there is no support
-    ///
-    static var supportedBiometry: Biometry? {
-        let context = LAContext()
-        var error: NSError?
-        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-            return nil
-        }
-
-        switch context.biometryType {
-        case .none:
-            return nil
-        case .touchID:
-            return .touchID
-        case .faceID:
-            return .faceID
-        @unknown default:
-            return nil
-        }
+    var availableBiometry: BiometricAuthentication.Biometry? {
+        biometricAuthentication.availableBiometry
     }
 
-    /// Verify biometry
-    ///
-    static func verifyBiometry(completion: @escaping (_ success: Bool) -> Void) {
-        guard shouldUseBiometry, supportedBiometry != nil else {
+    func evaluateBiometry(completion: @escaping (_ success: Bool) -> Void) {
+        guard shouldUseBiometry else {
             completion(false)
             return
         }
 
-        let context = LAContext()
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localization.biometryReason) { (success, _) in
-            DispatchQueue.main.async {
-                completion(success)
-            }
-        }
+        biometricAuthentication.evaluate(completion: completion)
     }
-}
-
-// MARK: - Localization
-//
-private struct Localization {
-    static let biometryReason = NSLocalizedString("To unlock the application", comment: "Touch ID reason/explanation")
 }

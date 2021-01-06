@@ -14,6 +14,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
 
     private var attempts: Int = 1
     private var hasShownBiometryVerification: Bool = false
+    private lazy var pinLockManager = SPPinLockManager.shared
     private weak var delegate: PinLockVerifyControllerDelegate?
 
     init(delegate: PinLockVerifyControllerDelegate) {
@@ -24,7 +25,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
     }
 
     func handlePin(_ pin: String) {
-        guard SPPinLockManager.validatePin(pin) else {
+        guard pinLockManager.validatePin(pin) else {
             switchToFailedAttempt(withTitle: Localization.title, attempts: attempts)
             attempts += 1
             return
@@ -58,7 +59,7 @@ private extension PinLockVerifyController {
 
         hasShownBiometryVerification = true
 
-        SPPinLockManager.verifyBiometry { [weak self] (success) in
+        pinLockManager.evaluateBiometry { [weak self] (success) in
             guard let self = self else {
                 return
             }

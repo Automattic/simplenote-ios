@@ -367,7 +367,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                         cell.textLabel.text = [self biometryTitle];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-                        self.biometrySwitch.on = SPPinLockManager.shouldUseBiometry;
+                        self.biometrySwitch.on = SPPinLockManager.shared.shouldUseBiometry;
                         cell.accessoryView = self.biometrySwitch;
                         cell.tag = kTagTouchID;
                         
@@ -460,7 +460,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 }
 
 - (BOOL)isPinLockEnabled {
-    return SPPinLockManager.isEnabled;
+    return SPPinLockManager.shared.isEnabled;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -658,7 +658,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)touchIdSwitchDidChangeValue:(UISwitch *)sender
 {
-    SPPinLockManager.shouldUseBiometry = sender.on;
+    SPPinLockManager.shared.shouldUseBiometry = sender.on;
 
     if (![self isPinLockEnabled]) {
         [self showPinLockViewController];
