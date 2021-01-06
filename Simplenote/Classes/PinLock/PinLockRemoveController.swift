@@ -16,10 +16,12 @@ final class PinLockRemoveController: PinLockBaseController, PinLockController {
     }
 
     private var attempts: Int = 1
-    private lazy var pinLockManager = SPPinLockManager.shared
+    private let pinLockManager: SPPinLockManager
     private weak var delegate: PinLockRemoveControllerDelegate?
 
-    init(delegate: PinLockRemoveControllerDelegate) {
+    init(pinLockManager: SPPinLockManager = SPPinLockManager.shared,
+         delegate: PinLockRemoveControllerDelegate) {
+        self.pinLockManager = pinLockManager
         self.delegate = delegate
 
         super.init()
