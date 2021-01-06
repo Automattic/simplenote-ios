@@ -2902,8 +2902,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
@@ -2935,7 +2934,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Release";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -3563,7 +3562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
@@ -3587,7 +3586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Release Share";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Share";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
