@@ -274,7 +274,7 @@ extension SPAppDelegate {
 extension SPAppDelegate: PinLockVerifyControllerDelegate {
     func pinLockVerifyControllerDidComplete(_ controller: PinLockVerifyController) {
         UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
-            self.pinLockWindow?.alpha = 0.0
+            self.pinLockWindow?.alpha = UIKitConstants.alpha0_0
         } completion: { (_) in
             self.dismissPasscodeLock()
         }
