@@ -6,7 +6,9 @@ import XCTest
 class PinLockVerifyControllerTests: XCTestCase {
     private lazy var delegate = MockPinLockVerifyControllerDelegate()
     private lazy var pinLockManager = MockPinLockManager()
-    private lazy var controller = PinLockVerifyController(pinLockManager: pinLockManager, delegate: delegate)
+    private lazy var controller = PinLockVerifyController(pinLockManager: pinLockManager,
+                                                          application: MockApplication(),
+                                                          delegate: delegate)
 
     private lazy var configurationObserver = PinLockControllerConfigurationObserver()
 

@@ -167,6 +167,9 @@
 		A6E6CE8325A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */; };
 		A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */; };
 		A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */; };
+		A6E6CEB925A60463005A92DB /* ApplicationStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */; };
+		A6E6CEC125A604AE005A92DB /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */; };
+		A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEC825A6053A005A92DB /* MockApplication.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -586,6 +589,9 @@
 		A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockControllerConfigurationObserver.swift; sourceTree = "<group>"; };
 		A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockRemoveControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockVerifyControllerTests.swift; sourceTree = "<group>"; };
+		A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStateProvider.swift; sourceTree = "<group>"; };
+		A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
+		A6E6CEC825A6053A005A92DB /* MockApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplication.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1420,6 +1426,7 @@
 				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
+				A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1517,6 +1524,7 @@
 				B5421F3D23CE7A1C004DDC19 /* MockupStorage.swift */,
 				B5421F3E23CE7A1C004DDC19 /* MockupStorage+Sample.swift */,
 				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
+				A6E6CEC825A6053A005A92DB /* MockApplication.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1567,6 +1575,7 @@
 				A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */,
 				A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */,
 				A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */,
+				A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2383,6 +2392,7 @@
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
+				A6E6CEC125A604AE005A92DB /* UIApplication+Simplenote.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
@@ -2507,6 +2517,7 @@
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
+				A6E6CEB925A60463005A92DB /* ApplicationStateProvider.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
 				B52F35D122F3254800724793 /* Theme.swift in Sources */,
@@ -2572,6 +2583,7 @@
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
+				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
 				A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */,
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
