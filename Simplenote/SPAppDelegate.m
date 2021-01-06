@@ -207,13 +207,24 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self ensurePasscodeLockIsDismissed];
     [SPTracker trackApplicationOpened];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [SPTracker trackApplicationClosed];
+
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self.window isKeyWindow]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
+
+    [self showPasscodeLockIfNecessary];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [self dismissPasscodeLockIfPossible];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -228,12 +239,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // For the passcode lock, store the current clock time for comparison when returning to the app
-    if ([self.window isKeyWindow]) {
-        [SPPinLockManager storeLastUsedTime];
-    }
-    
-    [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];
     
