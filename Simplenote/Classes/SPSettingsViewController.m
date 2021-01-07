@@ -618,7 +618,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)showPinLockViewController
 {
     NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    PinLockControllerMode mode = pin.length ? PinLockControllerModeRemovePin : PinLockControllerModeSetPin;
+    if (pin.length == 0) {
+        [self showPinLockSetupViewController];
+        return;
+    }
+
+    PinLockControllerMode mode = PinLockControllerModeRemovePin;
     
     DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:mode];
     controller.pinLockDelegate = self;
