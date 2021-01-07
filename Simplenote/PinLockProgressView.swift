@@ -48,6 +48,7 @@ private extension PinLockProgressView {
             let button = RoundedButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.isUserInteractionEnabled = false
+            button.isAccessibilityElement = false
             button.setBackgroundImage(UIColor.clear.dynamicImageRepresentation(), for: .normal)
             button.setBackgroundImage(UIColor.white.dynamicImageRepresentation(), for: .highlighted)
             button.layer.borderWidth = Constants.buttonBorderWidth

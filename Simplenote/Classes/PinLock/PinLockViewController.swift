@@ -135,6 +135,10 @@ private extension PinLockViewController {
         inputValues = []
         updateTitleLabel(with: configuration)
         updateMessageLabel(with: configuration)
+
+        if configuration.message?.isEmpty == false {
+            setAccessibilityFocus(messageLabel)
+        }
     }
 
     func updateTitleLabel(with configuration: PinLockControllerConfiguration) {
@@ -254,6 +258,22 @@ private extension PinLockViewController {
     @objc
     func applicationDidBecomeActive() {
         controller.applicationDidBecomeActive()
+    }
+}
+
+// MARK: - Accessibility
+//
+extension PinLockViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        controller.handleCancellation()
+        return true
+    }
+
+    private func setAccessibilityFocus(_ element: UIView) {
+        guard !element.accessibilityElementIsFocused() else {
+            return
+        }
+        UIAccessibility.post(notification: .layoutChanged, argument: element)
     }
 }
 
