@@ -22,6 +22,8 @@ class PinLockViewController: UIViewController {
         }
     }
 
+    private let feedbackGenerator = UINotificationFeedbackGenerator()
+
     init(controller: PinLockController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
@@ -130,7 +132,10 @@ private extension PinLockViewController {
             self?.update(with: configuration)
         }
 
-        self.announceUpdate(with: configuration)
+        announceUpdate(with: configuration)
+        if animation == .shake {
+            feedbackGenerator.notificationOccurred(.error)
+        }
     }
 
     func update(with configuration: PinLockControllerConfiguration) {
