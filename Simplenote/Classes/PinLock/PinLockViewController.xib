@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PinLockViewController" customModule="Simplenote" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="EY1-yW-LpJ" id="pU7-Wr-CkJ"/>
+                <outlet property="messageLabel" destination="amM-I9-F7S" id="FwI-Ox-zxH"/>
+                <outlet property="progressView" destination="ZqA-yv-5ub" id="mbM-z7-b03"/>
+                <outlet property="titleLabel" destination="WOh-Ux-wmS" id="EEN-uz-p6o"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="keypadButtons" destination="He8-HI-UVX" collectionClass="NSMutableArray" id="GFC-o1-Neq"/>
+                <outletCollection property="keypadButtons" destination="vYD-BP-2G8" collectionClass="NSMutableArray" id="4Ka-a1-dkp"/>
+                <outletCollection property="keypadButtons" destination="nsZ-02-d4z" collectionClass="NSMutableArray" id="IYL-pf-fBd"/>
+                <outletCollection property="keypadButtons" destination="ROd-Mk-dWc" collectionClass="NSMutableArray" id="aUG-UT-kJ1"/>
+                <outletCollection property="keypadButtons" destination="BjF-OJ-s6n" collectionClass="NSMutableArray" id="pHe-5Y-F0o"/>
+                <outletCollection property="keypadButtons" destination="Kb3-N4-0L1" collectionClass="NSMutableArray" id="Bqk-JW-hEv"/>
+                <outletCollection property="keypadButtons" destination="ycp-6v-0pD" collectionClass="NSMutableArray" id="7rI-Fk-27o"/>
+                <outletCollection property="keypadButtons" destination="yD5-B4-rkf" collectionClass="NSMutableArray" id="skx-KI-kX5"/>
+                <outletCollection property="keypadButtons" destination="th7-BP-TaK" collectionClass="NSMutableArray" id="N3W-mu-MKx"/>
+                <outletCollection property="keypadButtons" destination="OLO-MV-4cd" collectionClass="NSMutableArray" id="X7s-0y-0rs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-Ix-uIM">
+                    <rect key="frame" x="65" y="193.5" width="284" height="519"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="1oZ-M4-eDV">
+                            <rect key="frame" x="0.0" y="0.0" width="284" height="142"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOh-Ux-wmS">
+                                    <rect key="frame" x="118" y="0.0" width="48" height="24"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ZqA-yv-5ub" customClass="PinLockProgressView" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="142" y="49" width="0.0" height="50"/>
+                                </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Failed Passcode Attempts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amM-I9-F7S">
+                                    <rect key="frame" x="47" y="124" width="190" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Z1C-0F-Pl0">
+                            <rect key="frame" x="0.0" y="167" width="284" height="352"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="NE9-h3-DyR">
+                                    <rect key="frame" x="0.0" y="0.0" width="284" height="76"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYD-BP-2G8" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="76" id="59Y-T1-eRv"/>
+                                                <constraint firstAttribute="width" secondItem="vYD-BP-2G8" secondAttribute="height" multiplier="1:1" id="Ze8-bJ-9hg"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="1"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsZ-02-d4z" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="2"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROd-Mk-dWc" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="208" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="3"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="5xf-f4-VCV">
+                                    <rect key="frame" x="0.0" y="92" width="284" height="76"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BjF-OJ-s6n" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="4"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kb3-N4-0L1" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="5"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycp-6v-0pD" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="208" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="6"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="WiL-Pd-nca">
+                                    <rect key="frame" x="0.0" y="184" width="284" height="76"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yD5-B4-rkf" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="7"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="th7-BP-TaK" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="8"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLO-MV-4cd" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="208" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="9"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-VL-ArF">
+                                    <rect key="frame" x="0.0" y="276" width="284" height="76"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkt-tY-cgq">
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="He8-HI-UVX" customClass="RoundedButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="104" y="0.0" width="76" height="76"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <state key="normal" title="0"/>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEI-Lo-gGb">
+                                            <rect key="frame" x="208" y="0.0" width="76" height="76"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EY1-yW-LpJ">
+                    <rect key="frame" x="298" y="821" width="51" height="33"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="handleTapOnCancelButton" destination="-1" eventType="touchUpInside" id="9Hu-Yv-bSW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemTealColor"/>
+            <constraints>
+                <constraint firstItem="kUd-Ix-uIM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="EaN-W5-Zci"/>
+                <constraint firstItem="EY1-yW-LpJ" firstAttribute="trailing" secondItem="Z1C-0F-Pl0" secondAttribute="trailing" id="V2R-j1-Ij6"/>
+                <constraint firstItem="kUd-Ix-uIM" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="d85-ya-WaS"/>
+                <constraint firstAttribute="bottomMargin" secondItem="EY1-yW-LpJ" secondAttribute="bottom" constant="8" id="oQl-6D-5Ae"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
