@@ -35,6 +35,10 @@ class PinLockViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        removeNotificationListeners()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -45,6 +49,11 @@ class PinLockViewController: UIViewController {
         controller.configurationObserver = { [weak self] (configuration, animation) in
             self?.update(with: configuration, animation: animation)
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        controller.viewDidAppear()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -87,6 +96,7 @@ private extension PinLockViewController {
         setupCancelButton()
         setupProgressView()
         setupKeypadButtons()
+        setupNotificationListeners()
     }
 
     func setupCancelButton() {
@@ -230,10 +240,26 @@ extension PinLockViewController {
     }
 }
 
+// MARK: - Notifications
+//
+private extension PinLockViewController {
+    func setupNotificationListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    func removeNotificationListeners() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    func applicationDidBecomeActive() {
+        controller.applicationDidBecomeActive()
+    }
+}
+
 // MARK: - Localization
 //
 private enum Localization {
-    static let enterYourPasscode = NSLocalizedString("Enter your passcode", comment: "Title on the PinLock screen asking to enter a passcode")
     static let deleteButton = NSLocalizedString("Delete", comment: "PinLock screen \"delete\" button")
     static let cancelButton = NSLocalizedString("Cancel", comment: "PinLock screen \"cancel\" button")
 }

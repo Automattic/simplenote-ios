@@ -29,4 +29,19 @@ protocol PinLockController: class {
     /// Handle tap on `cancel` button in VC
     ///
     func handleCancellation()
+
+    /// Handle view did appear event
+    ///
+    func viewDidAppear()
+
+    /// Handle application become active
+    ///
+    func applicationDidBecomeActive()
+}
+
+/// Default impementation
+///
+extension PinLockController {
+    func viewDidAppear() {}
+    func applicationDidBecomeActive() {}
 }

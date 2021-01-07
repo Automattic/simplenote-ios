@@ -21,7 +21,6 @@
 #import "SPRatingsHelper.h"
 #import "WPAuthHandler.h"
 
-#import "DTPinLockController.h"
 #import "SPTracker.h"
 
 @import Contacts;
@@ -39,7 +38,7 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SPBucketDelegate, PinLockDelegate>
+@interface SPAppDelegate () <SPBucketDelegate>
 
 @property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
@@ -193,7 +192,7 @@
     
     // Check to see if first time user
     if ([self isFirstLaunch]) {        
-        [self removePin];
+        [SPPinLockManager removePin];
         [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
@@ -208,26 +207,24 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self ensurePinlockIsDismissed];
     [SPTracker trackApplicationOpened];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [SPTracker trackApplicationClosed];
+
+    // For the passcode lock, store the current clock time for comparison when returning to the app
+    if ([self.window isKeyWindow]) {
+        [SPPinLockManager storeLastUsedTime];
+    }
+
+    [self showPasscodeLockIfNecessary];
 }
 
-- (void)ensurePinlockIsDismissed
+- (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Dismiss the pin lock window if the user has returned to the app before their preferred timeout length
-    if (self.pinLockWindow != nil
-        && [self.pinLockWindow isKeyWindow]
-        && [SPPinLockManager shouldBypassPinLock]) {
-        // Bring the main window to the front, which 'dismisses' the pin lock window
-        [self.window makeKeyAndVisible];
-        [self.pinLockWindow removeFromSuperview];
-        self.pinLockWindow = nil;
-    }
+    [self dismissPasscodeLockIfPossible];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -242,12 +239,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // For the passcode lock, store the current clock time for comparison when returning to the app
-    if ([self passcodeLockIsEnabled] && [self.window isKeyWindow]) {
-        [SPPinLockManager storeLastUsedTime];
-    }
-    
-    [self showPasscodeLockIfNecessary];
     UIViewController *viewController = self.window.rootViewController;
     [viewController.view setNeedsLayout];
     
@@ -465,7 +456,7 @@
             [[Options shared] reset];
             
 			// remove the pin lock
-			[self removePin];
+            [SPPinLockManager removePin];
 			
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];
@@ -682,87 +673,6 @@
     
     return YES;
 }
-
-#pragma mark ================================================================================
-#pragma mark Passcode Lock
-#pragma mark ================================================================================
-
-- (UIViewController*)topMostController
-{
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-    
-    return topController;
-}
-
--(void)showPasscodeLockIfNecessary
-{
-    if (![self passcodeLockIsEnabled] || [self isPresentingPinLock] || [self isRequestingContactsPermission]) {
-        return;
-	}
-    
-    BOOL useBiometry = self.allowBiometryInsteadOfPin;
-    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:useBiometry ? PinLockControllerModeUnlockAllowTouchID :PinLockControllerModeUnlock];
-	controller.pinLockDelegate = self;
-	controller.pin = [self getPin];
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	
-	// no animation to cover up app right away
-    self.pinLockWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.pinLockWindow.rootViewController = controller;
-    [self.pinLockWindow makeKeyAndVisible];
-	[controller fixLayout];
-}
-
-- (BOOL)passcodeLockIsEnabled {
-    NSString *pin = [self getPin];
-    
-    return pin != nil && pin.length != 0;
-}
-
-- (void)pinLockControllerDidFinishUnlocking
-{
-    [UIView animateWithDuration:0.3
-                     animations:^{ self.pinLockWindow.alpha = 0.0; }
-                     completion:^(BOOL finished) {
-                         [self.window makeKeyAndVisible];
-                         [self.pinLockWindow removeFromSuperview];
-                         self.pinLockWindow = nil;
-                     }];
-}
-
-- (BOOL)allowBiometryInsteadOfPin
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL useTouchID = [userDefaults boolForKey:kSimplenoteUseBiometryKey];
-
-    return useTouchID;
-}
-
-- (void)setAllowBiometryInsteadOfPin:(BOOL)allowBiometryInsteadOfPin
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:allowBiometryInsteadOfPin forKey:kSimplenoteUseBiometryKey];
-    [userDefaults synchronize];
-}
-
-- (BOOL)isPresentingPinLock
-{
-    return self.pinLockWindow && [self.pinLockWindow isKeyWindow];
-}
-
-- (BOOL)isRequestingContactsPermission
-{
-    NSArray *topChildren = self.topMostController.childViewControllers;
-    BOOL isShowingCollaborators = [topChildren count] > 0 && [topChildren[0] isKindOfClass:[SPAddCollaboratorsViewController class]];
-    BOOL isNotDeterminedAuth = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusNotDetermined;
-    
-    return isShowingCollaborators && isNotDeterminedAuth;
-}
-
 
 #pragma mark ================================================================================
 #pragma mark App Tracking
