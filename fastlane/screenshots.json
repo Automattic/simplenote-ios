@@ -116,7 +116,7 @@
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-03.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPhone Xs Max-3-collaborators-light.png",
+			"screenshot": "iPhone Xs Max-3-interlinking-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
@@ -159,7 +159,7 @@
 			"device": "iPad Pro (12.9-inch) (2nd generation)",
 			"filename": "iPad Pro (12.9-inch) (2nd generation)-03.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-3-collaborators-light.png",
+			"screenshot": "iPad Pro (12.9-inch) (2nd generation)-3-interlinking-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
@@ -202,7 +202,7 @@
 			"device": "iPad Pro (12.9-inch) (3rd generation)",
 			"filename": "iPad Pro (12.9-inch) (3rd generation)-03.png",
 			"background": "#FFFFFF",
-			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-3-collaborators-light.png",
+			"screenshot": "iPad Pro (12.9-inch) (3rd generation)-3-interlinking-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
