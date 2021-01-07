@@ -8,7 +8,7 @@ extension SPSettingsViewController {
     @objc
     func showPinLockViewController() {
         let controller: PinLockController
-        if SPPinLockManager.isEnabled {
+        if SPPinLockManager.shared.isEnabled {
             controller = PinLockRemoveController(delegate: self)
         } else {
             controller = PinLockSetupController(delegate: self)
@@ -35,7 +35,7 @@ extension SPSettingsViewController: PinLockSetupControllerDelegate {
     }
 
     func pinLockSetupControllerDidCancel(_ controller: PinLockSetupController) {
-        SPPinLockManager.shouldUseBiometry = false
+        SPPinLockManager.shared.shouldUseBiometry = false
         dismissPresentedViewController()
     }
 }
@@ -67,18 +67,18 @@ private extension SPSettingsViewController {
 extension SPSettingsViewController {
     @objc
     var isBiometryAvailable: Bool {
-        SPPinLockManager.supportedBiometry != nil
+        SPPinLockManager.shared.availableBiometry != nil
     }
 
     @objc
     var biometryTitle: String? {
-        SPPinLockManager.supportedBiometry?.title
+        SPPinLockManager.shared.availableBiometry?.title
     }
 }
 
-// MARK: - SPPinLockManager.Biometry
+// MARK: - BiometricAuthentication.Biometry
 //
-private extension SPPinLockManager.Biometry {
+private extension BiometricAuthentication.Biometry {
     var title: String {
         switch self {
         case .touchID:

@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - PinLockControllerConfiguration
 //
-struct PinLockControllerConfiguration {
+struct PinLockControllerConfiguration: Equatable {
     /// PinLock screen title
     let title: String
 

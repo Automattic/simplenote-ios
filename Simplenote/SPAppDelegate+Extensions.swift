@@ -234,7 +234,7 @@ extension SPAppDelegate {
     ///
     @objc
     func showPasscodeLockIfNecessary() {
-        guard SPPinLockManager.isEnabled, !isPresentingPasscodeLock else {
+        guard SPPinLockManager.shared.isEnabled, !isPresentingPasscodeLock else {
             return
         }
 
@@ -250,7 +250,7 @@ extension SPAppDelegate {
     ///
     @objc
     func dismissPasscodeLockIfPossible() {
-        guard pinLockWindow?.isKeyWindow == true, SPPinLockManager.shouldBypassPinLock() else {
+        guard pinLockWindow?.isKeyWindow == true, SPPinLockManager.shared.shouldBypassPinLock else {
             return
         }
 
