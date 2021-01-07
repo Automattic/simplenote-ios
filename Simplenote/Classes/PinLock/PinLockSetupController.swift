@@ -18,7 +18,7 @@ final class PinLockSetupController: PinLockBaseController, PinLockController {
     private let pinLockManager: SPPinLockManager
     private weak var delegate: PinLockSetupControllerDelegate?
 
-    init(pinLockManager: SPPinLockManager = SPPinLockManager.shared,
+    init(pinLockManager: SPPinLockManager = .shared,
          delegate: PinLockSetupControllerDelegate) {
         self.pinLockManager = pinLockManager
         self.delegate = delegate
