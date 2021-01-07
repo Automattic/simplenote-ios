@@ -69,4 +69,15 @@ class NoteBodyExcerptTests: XCTestCase {
         let actual = note.bodyExcerpt(keywords: ["version"])
         XCTAssertEqual(actual, expected)
     }
+
+    /// Verifies that certain character sequence doesn't crash the app
+    ///
+    func testCertainCharacterSequenceDoesntCrash() {
+        let body = "t\n\u{30bf}\nglo\u{0300}b"
+        note = storage.insertSampleNote(contents: "Title\n\(body)")
+
+        let expected = body.replacingOccurrences(of: "\n", with: " ")
+        let actual = note.bodyExcerpt(keywords: ["t"])
+        XCTAssertEqual(actual, expected)
+    }
 }

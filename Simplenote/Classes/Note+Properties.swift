@@ -83,7 +83,7 @@ extension Note {
     /// Returns excerpt of the content around the first match of one of the keywords
     ///
     func bodyExcerpt(keywords: [String]?) -> String? {
-        guard let keywords = keywords, !keywords.isEmpty, let content = content else {
+        guard let keywords = keywords, !keywords.isEmpty, let content = content?.precomposedStringWithCanonicalMapping else {
             return bodyPreview
         }
 
