@@ -129,16 +129,14 @@ private extension PinLockViewController {
         headerStackView.reload(with: animation, in: view) { [weak self] in
             self?.update(with: configuration)
         }
+
+        self.announceUpdate(with: configuration)
     }
 
     func update(with configuration: PinLockControllerConfiguration) {
         inputValues = []
         updateTitleLabel(with: configuration)
         updateMessageLabel(with: configuration)
-
-        if configuration.message?.isEmpty == false {
-            setAccessibilityFocus(messageLabel)
-        }
     }
 
     func updateTitleLabel(with configuration: PinLockControllerConfiguration) {
@@ -269,11 +267,15 @@ extension PinLockViewController {
         return true
     }
 
-    private func setAccessibilityFocus(_ element: UIView) {
-        guard !element.accessibilityElementIsFocused() else {
-            return
+    private func announceUpdate(with configuration: PinLockControllerConfiguration) {
+        let message = [configuration.message, configuration.title]
+            .compactMap({ $0 })
+            .joined(separator: "\n")
+
+        // The message wasn't playing without using a delay :shrug:
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            UIAccessibility.post(notification: .announcement, argument: message)
         }
-        UIAccessibility.post(notification: .layoutChanged, argument: element)
     }
 }
 
