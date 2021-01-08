@@ -18,6 +18,6 @@ extension SPTagEntryField {
             return
         }
 
-        text = ((text ?? "") as NSString).replacingCharacters(in: selectedRange, with: tag)
+        insertText(tag)
     }
 }
