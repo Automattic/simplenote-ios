@@ -12,8 +12,8 @@ extension UITextField {
             return
         }
 
-        let tag = TagTextFieldInputValidator().sanitize(tag: pasteboardText)
-        guard !tag.isEmpty else {
+        guard let tag = TagTextFieldInputValidator().preprocessForPasting(tag: pasteboardText),
+              !tag.isEmpty else {
             return
         }
 

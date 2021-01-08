@@ -309,9 +309,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *text = textField.text ? textField.text : @"";
-    NSString *updatedText = [text stringByReplacingCharactersInRange:range withString:string];
-    return [self textField:textField shouldChangeTo:updatedText];
+    return [self validateInput:textField range:range replacement:string];
 }
 
 - (void)tagEntryFieldDidChange:(SPTagEntryField *)tagTextField {

@@ -12,21 +12,25 @@ struct TagTextFieldInputValidator {
         case endingWithWhitespace(_ trimmedTag: String)
     }
 
-    /// Validate a tag
+    /// Validate text field input
     ///
-    func validate(tag: String) -> Result {
+    func validateInput(originalText: String, range: Range<String.Index>, replacement: String) -> Result {
         let charset = CharacterSet.whitespacesAndNewlines
-        var tag = tag
+
         var isEndingWithWhitespace = false
 
-        if let whitespaceRange = tag.rangeOfCharacter(from: charset) {
-            // Whitespace is not at the end of the tag
-            if whitespaceRange.upperBound != tag.endIndex {
+        if let whitespaceRange = replacement.rangeOfCharacter(from: charset) {
+            if whitespaceRange.upperBound == replacement.endIndex,
+               range.upperBound == originalText.endIndex {
+                isEndingWithWhitespace = true
+            } else {
                 return .invalid
             }
+        }
 
+        var tag = originalText.replacingCharacters(in: range, with: replacement)
+        if isEndingWithWhitespace {
             tag = tag.trimmingCharacters(in: charset)
-            isEndingWithWhitespace = true
         }
 
         if validateLength(tag: tag) {
@@ -39,12 +43,12 @@ struct TagTextFieldInputValidator {
         return .invalid
     }
 
-    /// Trim whitespaces and replace internal whitespaces with -
+    /// Trim whitespaces and return the first part before whitespace or newline
     ///
-    func sanitize(tag: String) -> String {
+    func preprocessForPasting(tag: String) -> String? {
         return tag.components(separatedBy: .whitespacesAndNewlines)
             .filter({ !$0.isEmpty })
-            .joined(separator: "-")
+            .first
     }
 
     /// Indicates if the receivers length is within allowed values

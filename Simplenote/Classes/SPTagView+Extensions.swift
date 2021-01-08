@@ -4,9 +4,14 @@ import UIKit
 //
 extension SPTagView {
     @objc
-    func textField(_ textField: UITextField, shouldChangeTo string: String) -> Bool {
+    func validateInput(_ textField: UITextField, range: NSRange, replacement: String) -> Bool {
+        let text = (textField.text ?? "")
+        guard let range = Range(range, in: text) else {
+            return true
+        }
+
         let validator = TagTextFieldInputValidator()
-        let result = validator.validate(tag: string)
+        let result = validator.validateInput(originalText: text, range: range, replacement: replacement)
         switch result {
         case .valid:
             return true

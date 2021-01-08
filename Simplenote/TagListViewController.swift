@@ -554,10 +554,13 @@ private extension TagListViewController {
 //
 extension TagListViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let tag = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: string)
+        let text = (textField.text ?? "")
+        guard let range = Range(range, in: text) else {
+            return true
+        }
 
         let validator = TagTextFieldInputValidator()
-        let result = validator.validate(tag: tag)
+        let result = validator.validateInput(originalText: text, range: range, replacement: string)
         switch result {
         case .valid:
             return true

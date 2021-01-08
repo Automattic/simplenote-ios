@@ -6,9 +6,29 @@ import XCTest
 class TagTextFieldInputValidatorTests: XCTestCase {
     let validator = TagTextFieldInputValidator()
 
-    func testValidationFailsWhenTagHasWhiteSpaceOrNewline() {
+    func testValidationSucceeds() {
+        let text = ""
+        let range = text.endIndex..<text.endIndex
+
+        let expectedResult = TagTextFieldInputValidator.Result.valid
+        let replacements = [
+            "",
+            "t",
+            "tag",
+            String(repeating: "a", count: 256)
+        ]
+
+        for replacement in replacements {
+            XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
+        }
+    }
+
+    func testValidationFailsWhenReplacementHasWhiteSpaceOrNewline() {
+        let text = "tag"
+        let range = text.endIndex..<text.endIndex
+
         let expectedResult = TagTextFieldInputValidator.Result.invalid
-        let tags = [
+        let replacements = [
             " tag",
             "t ag",
             " tag ",
@@ -19,54 +39,69 @@ class TagTextFieldInputValidatorTests: XCTestCase {
             "\ntag ",
         ]
 
-        for tag in tags {
-            XCTAssertEqual(validator.validate(tag: tag), expectedResult)
+        for replacement in replacements {
+            XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
         }
     }
 
-    func testSpecialCaseWhenTagOnlyHasWhitespaceAtTheEnd() {
-        let expectedResult = TagTextFieldInputValidator.Result.endingWithWhitespace("tag")
+    func testValidationFailsWhenReplacingTextInTheMiddleAndReplacementHasWhiteSpaceOrNewline() {
+        let text = "tag"
+        let midIndex = text.index(text.startIndex, offsetBy: 1)
+        let range = midIndex..<midIndex
 
-        let tags = [
+        let expectedResult = TagTextFieldInputValidator.Result.invalid
+        let replacements = [
+            " tag",
+            "t ag",
+            " tag ",
+            "tag  ",
+            "tag ",
+            "tag\n",
+            "\ntag",
+            "t\nag",
+            "\ntag\n",
+            "\ntag ",
+        ]
+
+        for replacement in replacements {
+            XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
+        }
+    }
+
+    func testReplacingTextWithWhitespaceAtTheEnd() {
+        let text = "tag"
+        let range = text.endIndex..<text.endIndex
+
+        let expectedResult = TagTextFieldInputValidator.Result.endingWithWhitespace("tagtag")
+        let replacements = [
             "tag ",
             "tag\n",
         ]
 
-        for tag in tags {
-            XCTAssertEqual(validator.validate(tag: tag), expectedResult)
+        for replacement in replacements {
+            XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
         }
     }
 
     func testValidationFailsWhenTagExceedsLengthLimit() {
-        let tag = String(repeating: "a", count: 257)
+        let text = "t"
+        let range = text.endIndex..<text.endIndex
+        let replacement = String(repeating: "a", count: 256)
         let expectedResult = TagTextFieldInputValidator.Result.invalid
 
-        XCTAssertEqual(validator.validate(tag: tag), expectedResult)
+        XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
     }
 
-    func testValidationSucceeds() {
-        let expectedResult = TagTextFieldInputValidator.Result.valid
-        let tags = [
-            "",
-            "t",
-            "tag",
-            String(repeating: "a", count: 256)
-        ]
 
-        for tag in tags {
-            XCTAssertEqual(validator.validate(tag: tag), expectedResult)
-        }
-    }
-
-    func testSanitizationReplacesWhitespacesAndNewlines() {
+    func testPreprocessingForPastingTrimsWhitespacesAndNewlinesAndReturnsFirstPart() {
         let cases = [
             "tag": "tag",
             " tag ": "tag",
-            "\nt \n ag": "t-ag"
+            "\nt \n ag": "t"
         ]
 
         for (tag, expected) in cases {
-            XCTAssertEqual(validator.sanitize(tag: tag), expected)
+            XCTAssertEqual(validator.preprocessForPasting(tag: tag), expected)
         }
     }
 }
