@@ -38,4 +38,12 @@ struct TagTextFieldInputValidator {
 
         return .invalid
     }
+
+    /// Trim whitespaces and replace internal whitespaces with -
+    ///
+    func sanitize(tag: String) -> String {
+        return tag.components(separatedBy: .whitespacesAndNewlines)
+            .filter({ !$0.isEmpty })
+            .joined(separator: "-")
+    }
 }
