@@ -170,6 +170,7 @@
 		A6F4879925A79D130050CFA8 /* ApplicationStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */; };
 		A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */; };
 		A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */; };
+		A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -592,6 +593,7 @@
 		A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationStateProvider.swift; path = Classes/ApplicationStateProvider.swift; sourceTree = "<group>"; };
 		A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Simplenote.swift"; path = "Classes/UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
 		A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricAuthentication.swift; path = Classes/BiometricAuthentication.swift; sourceTree = "<group>"; };
+		A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagTextFieldInputValidator.swift; path = Classes/TagTextFieldInputValidator.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1576,6 +1578,7 @@
 				A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */,
 				A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */,
 				A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */,
+				A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2393,6 +2396,7 @@
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
+				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,

@@ -554,26 +554,20 @@ private extension TagListViewController {
 //
 extension TagListViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // Scenario #A: Space was pressed
-        if string.hasPrefix(" ") {
+        let tag = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: string)
+
+        let validator = TagTextFieldInputValidator()
+        let result = validator.validate(tag: tag)
+        switch result {
+        case .valid:
+            return true
+        case .endingWithWhitespace(let text):
+            textField.text = text
             textField.endEditing(true)
             return false
+        case .invalid:
+            return false
         }
-
-        // Scenario #B: New String was either typed or pasted
-        let filteredString = (string as NSString).substringUpToFirstSpace
-        let updatedString = ((textField.text ?? "") as NSString).replacingCharacters(in: range, with: filteredString)
-        let editContainsSpaces = filteredString.count < string.count
-
-        if updatedString.isValidTagName {
-            textField.text = updatedString
-        }
-
-        if editContainsSpaces {
-            textField.endEditing(true)
-        }
-
-        return false
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
