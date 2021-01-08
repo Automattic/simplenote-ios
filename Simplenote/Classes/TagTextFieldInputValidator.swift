@@ -6,7 +6,7 @@ struct TagTextFieldInputValidator {
 
     /// Validation Result
     ///
-    enum Result {
+    enum Result: Equatable {
         case valid
         case invalid
         case endingWithWhitespace(_ trimmedTag: String)
@@ -29,7 +29,7 @@ struct TagTextFieldInputValidator {
             isEndingWithWhitespace = true
         }
 
-        if tag.isValidTagName {
+        if validateLength(tag: tag) {
             if isEndingWithWhitespace {
                 return .endingWithWhitespace(tag)
             }
@@ -46,4 +46,17 @@ struct TagTextFieldInputValidator {
             .filter({ !$0.isEmpty })
             .joined(separator: "-")
     }
+
+    /// Indicates if the receivers length is within allowed values
+    /// - Important: `Tag.name` is used as the entity's `simperiumKey`, and the backend imposes a length.
+    ///              For that reason we must check on the `encoded` lenght (and not the actual raw string length)
+    private func validateLength(tag: String) -> Bool {
+        tag.byEncodingAsTagHash.count <= Constants.maximumTagLength
+    }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let maximumTagLength = 256
 }

@@ -175,6 +175,7 @@
 		A6F4881325A884CE0050CFA8 /* UITextInput+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */; };
 		A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */; };
 		A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */; };
+		A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -602,6 +603,7 @@
 		A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextInput+Simplenote.swift"; path = "Classes/UITextInput+Simplenote.swift"; sourceTree = "<group>"; };
 		A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagListTextField.swift; path = Classes/TagListTextField.swift; sourceTree = "<group>"; };
 		A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Tag.swift"; path = "Classes/UITextField+Tag.swift"; sourceTree = "<group>"; };
+		A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldInputValidatorTests.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1195,6 +1197,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		A6F4883025A891900050CFA8 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */,
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
 		B511AECA255A0A01005B2159 /* Interlinks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,6 +1490,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				A6F4883025A891900050CFA8 /* Tags */,
 				A6E6CE5425A5A6CC005A92DB /* PinLock */,
 				B5B85BA6235173D900AD5221 /* Helpers */,
 				B52F35D422F3573300724793 /* Extensions */,
@@ -2602,6 +2613,7 @@
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
+				A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */,
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
