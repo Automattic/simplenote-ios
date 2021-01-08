@@ -170,6 +170,12 @@
 		A6F4879925A79D130050CFA8 /* ApplicationStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */; };
 		A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */; };
 		A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */; };
+		A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */; };
+		A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */; };
+		A6F4881325A884CE0050CFA8 /* UITextInput+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */; };
+		A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */; };
+		A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */; };
+		A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -592,6 +598,12 @@
 		A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationStateProvider.swift; path = Classes/ApplicationStateProvider.swift; sourceTree = "<group>"; };
 		A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Simplenote.swift"; path = "Classes/UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
 		A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricAuthentication.swift; path = Classes/BiometricAuthentication.swift; sourceTree = "<group>"; };
+		A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagTextFieldInputValidator.swift; path = Classes/TagTextFieldInputValidator.swift; sourceTree = "<group>"; };
+		A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SPTagView+Extensions.swift"; path = "Classes/SPTagView+Extensions.swift"; sourceTree = "<group>"; };
+		A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextInput+Simplenote.swift"; path = "Classes/UITextInput+Simplenote.swift"; sourceTree = "<group>"; };
+		A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagListTextField.swift; path = Classes/TagListTextField.swift; sourceTree = "<group>"; };
+		A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Tag.swift"; path = "Classes/UITextField+Tag.swift"; sourceTree = "<group>"; };
+		A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldInputValidatorTests.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1185,6 +1197,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		A6F4883025A891900050CFA8 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */,
+			);
+			path = Tags;
+			sourceTree = "<group>";
+		};
 		B511AECA255A0A01005B2159 /* Interlinks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1427,6 +1447,7 @@
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
+				A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1469,6 +1490,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				A6F4883025A891900050CFA8 /* Tags */,
 				A6E6CE5425A5A6CC005A92DB /* PinLock */,
 				B5B85BA6235173D900AD5221 /* Helpers */,
 				B52F35D422F3573300724793 /* Extensions */,
@@ -1576,6 +1598,7 @@
 				A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */,
 				A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */,
 				A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */,
+				A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1717,8 +1740,11 @@
 				E2B0863418070045001ED52D /* SPTagPill.m */,
 				E2F0C33D1797077300CF9413 /* SPTagView.h */,
 				E2F0C33E1797077300CF9413 /* SPTagView.m */,
+				A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */,
 				E277B5FF17A063020095CD24 /* SPTagEntryField.h */,
 				E277B60017A063020095CD24 /* SPTagEntryField.m */,
+				A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */,
+				A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */,
 			);
 			name = "Tag View";
 			sourceTree = "<group>";
@@ -2393,6 +2419,7 @@
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
+				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
@@ -2452,6 +2479,7 @@
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
+				A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */,
 				B50CA5262513EC5400A4742D /* NSAttributedString+AuthError.swift in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
 				B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */,
@@ -2507,6 +2535,7 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
+				A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */,
 				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
@@ -2514,6 +2543,7 @@
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
 				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
 				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
+				A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */,
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
@@ -2560,6 +2590,7 @@
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */,
+				A6F4881325A884CE0050CFA8 /* UITextInput+Simplenote.swift in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);
@@ -2582,6 +2613,7 @@
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
+				A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */,
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,

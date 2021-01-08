@@ -29,8 +29,4 @@ class SimplenoteConstants: NSObject {
     /// Simplenote: Published Notes base URL
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
-
-    /// Tag(s) Max Length
-    ///
-    static let maximumTagLength = 256
 }
