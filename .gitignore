@@ -35,7 +35,6 @@ SimplenoteScreenshots/Credentials/
 # Bundler
 /vendor/
 /vendor/bundle/
-.bundle/
 
 # Dependencies
 /vendor/

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-02 11:32:12+0000 */
+/* Translation-Revision-Date: 2020-12-04 19:44:12+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -82,11 +82,8 @@
 /* No comment provided by engineer. */
 "Appearance" = "Aparência";
 
-/* Other Simplenote apps */
-"Apps" = "Aplicativos";
-
 /* Automattic hiring description */
-"Are you a developer? Automattic is hiring." = "Você é um desenvolvedor? A Automattic está contratando.";
+"Are you a developer? We’re hiring." = "Você trabalha com desenvolvimento? Estamos contratando.";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Tem certeza de que deseja esvaziar a lixeira? Essa ação não pode ser desfeita.";
@@ -100,13 +97,13 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
 
-/* Simplenote terms of service */
-"California Users Privacy Notice" = "Aviso de privacidade para usuários da California";
-
 /* Cancel Action
    Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Cancelar";
+
+/* Work at Automattic */
+"Careers" = "Carreira";
 
 /* Number of characters in the note */
 "Characters" = "Caracteres";
@@ -126,12 +123,12 @@
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribuir";
 
-/* Copies the Note's Interlink */
+/* Copies Link to a Note
+   Copies the Note's Interlink */
 "Copy Internal Link" = "Copiar link interno";
 
-/* Copies Link to a Note
-   Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
+/* Copies the Note's Public Link */
+"Copy Link" = "Copiar link";
 
 /* No comment provided by engineer. */
 "Could be better" = "Poderia ser melhor";
@@ -146,7 +143,7 @@
 "Could you tell us how we could improve?" = "Poderia nos dizer o que podemos fazer para melhorar?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
+"Couldn't Retrieve History" = "Não foi possível recuperar o histórico";
 
 /* Alert dialog title displayed on sign in error */
 "Couldn't Sign In" = "Não foi possível entrar";
@@ -156,6 +153,12 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Criar uma nova anotação";
+
+/* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
+"Create a new note titled “%@”" = "Criar uma nova nota com o título “%@”";
+
+/* Message shown in note list when no notes are in the current view */
+"Create your first note" = "Crie sua primeira nota";
 
 /* Note Creation Date
    Sort Mode: Creation Date */
@@ -190,18 +193,17 @@
 "Disable Markdown formatting" = "Desativar formatação Markdown";
 
 /* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
+"Dismiss History" = "Ignorar histórico";
 
 /* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
+"Dismiss Information" = "Ignorar informações";
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Dispensar teclado";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
-   Done toolbar button
-   Verb: Close current view */
+   Done toolbar button */
 "Done" = "Concluído";
 
 /* Edit Tags Action: Visible in the Tags List */
@@ -247,7 +249,7 @@
 "FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
+"Fetching Version" = "Buscando versão";
 
 /* Password Reset Action */
 "Forgotten password?" = "Esqueceu a senha?";
@@ -272,10 +274,10 @@
 
 /* Card title showing information about the note (metrics, references)
    Note Information Button (metrics + references) */
-"Information" = "Information";
+"Information" = "Informações";
 
 /* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+"Inserts a new Checklist Item" = "Insere um novo item de lista de verificação";
 
 /* Last Message timestamp */
 "LastSeen" = "Visto pela última vez";
@@ -339,6 +341,9 @@
    Deletes a note */
 "Move to Trash" = "Mover para a lixeira";
 
+/* Home screen quick action: New Note */
+"New Note" = "Nova nota";
+
 /* Label to create a new note */
 "New note" = "Nova anotação";
 
@@ -348,14 +353,17 @@
 /* Cancels Empty Trash Action */
 "No" = "Não";
 
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "Nenhuma anotação";
-
 /* Message shown when no notes match a search string */
 "No Results" = "Nenhum resultado";
 
+/* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
+"No notes tagged “%@”" = "Nenhuma nota com a tag “%@”";
+
 /* No comment provided by engineer. */
 "No thanks" = "Não, obrigado!";
+
+/* Message shown in note list when no notes are untagged */
+"No untagged notes" = "Nenhuma nota sem tags";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Anotações";
@@ -379,7 +387,7 @@
 "Open note" = "Anotação em aberto";
 
 /* Note Options Title */
-"Options" = "Options";
+"Options" = "Opções";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Senha";
@@ -415,6 +423,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Visualizar";
 
+/* Simplenote terms of service */
+"Privacy Notice for California Users" = "Aviso de privacidade para usuários residentes da Califórnia";
+
 /* Simplenote privacy policy */
 "Privacy Policy" = "Política de privacidade";
 
@@ -430,14 +441,20 @@
 /* Indicates the Note is being published */
 "Publishing..." = "Publicando...";
 
+/* Rate on the App Store */
+"Rate Us" = "Classifique-nos";
+
 /* Prompt when setting up a passcode */
 "Re-enter a passcode" = "Insira novamente uma senha";
 
 /* Reachs Internet */
 "Reachability" = "Acessibilidade";
 
+/* Home screen quick action: Recent Note */
+"Recent" = "Recente";
+
 /* References section header on Info Card */
-"References" = "References";
+"Referenced In" = "Mencionado em";
 
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Remover todas as anotações da lixeira";
@@ -457,7 +474,8 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Restaurar anotação";
 
-/* Search Placeholder
+/* Home screen quick action: Search
+   Search Placeholder
    Search Title */
 "Search" = "Pesquisar";
 
@@ -471,7 +489,7 @@
 "Security" = "Segurança";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
+"Select a Version" = "Selecione uma versão";
 
 /* For debugging use */
 "Send a Test Crash" = "Enviar uma falha de teste";
@@ -493,7 +511,7 @@
 "Share Analytics" = "Compartilhar dados analíticos";
 
 /* Shares a note */
-"Share..." = "Share...";
+"Share..." = "Compartilhar...";
 
 /* No comment provided by engineer. */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Agora, o compartilhamento de notas é acessado através do menu de ação da barra de ferramentas.";
@@ -618,9 +636,6 @@
 /* Number of words in the note */
 "Words" = "Palavras";
 
-/* Work at Automattic */
-"Work With Us" = "Trabalhe conosco";
-
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Sim";
 
@@ -632,6 +647,9 @@
 
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Sua senha é vulnerável e deve ser redefinida. Os requisitos para a senha são:";
+
+/* Message shown in note list when no notes are in the trash */
+"Your trash is empty" = "Sua lixeira está vazia";
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Adicione um endereço de email para compartilhar esta anotação com alguém. Em seguida, ambos poderão fazer alterações.";

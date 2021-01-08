@@ -1,7 +1,3 @@
-- Nuova interfaccia di cronologia delle note
-- Nuova interfaccia delle opzioni delle note
-- Nuova interfaccia delle note
-- Comportamento aggiornato della barra di navigazione
-- Metriche dell'elenco delle note corrette
-- Corretto un bug che causava la visualizzazione molto grande della barra di ricerca
-- Corretto un bug che interessava il completamento automatico dei tag
+- Aggiornati i segnaposti di stato vuoti
+- Azioni rapide nella schermata Home 
+- Metriche della schermata delle informazioni modificate

@@ -13,7 +13,7 @@
                 <outlet property="backgroundView" destination="ZZD-kk-l5T" id="vLO-Vd-nH7"/>
                 <outlet property="shadowView" destination="J1j-Rs-BRd" id="F6m-io-a8C"/>
                 <outlet property="tableHeightConstraint" destination="pJU-Uf-0Oq" id="8xE-WM-Fgp"/>
-                <outlet property="tableLeadingConstraint" destination="YkW-MZ-sEN" id="ewM-9i-2qp"/>
+                <outlet property="tableLeftConstraint" destination="YkW-MZ-sEN" id="dLy-Pg-tWY"/>
                 <outlet property="tableTopConstraint" destination="1aU-WG-N13" id="UWn-PU-7Am"/>
                 <outlet property="tableView" destination="0Ce-It-s4R" id="rdg-1f-23L"/>
                 <outlet property="view" destination="URg-NP-0Et" id="xef-Np-8pC"/>
@@ -86,7 +86,7 @@
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="Jda-bL-BQO"/>
                 <constraint firstItem="ZZD-kk-l5T" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="U49-aZ-qMs"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="Xos-pY-37F"/>
-                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" secondItem="URg-NP-0Et" secondAttribute="leading" priority="999" id="YkW-MZ-sEN"/>
+                <constraint firstItem="0Ce-It-s4R" firstAttribute="left" secondItem="URg-NP-0Et" secondAttribute="left" priority="999" id="YkW-MZ-sEN"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="cl7-N9-OKH"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ce-It-s4R" secondAttribute="trailing" constant="16" id="hN1-X0-aCU"/>
                 <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="URg-NP-0Et" secondAttribute="leading" constant="16" id="m4j-uj-bVK"/>

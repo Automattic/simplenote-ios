@@ -159,7 +159,6 @@
 		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
 		A6E1E7A824BE656D008A44BC /* SPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A724BE656D008A44BC /* SPCardView.swift */; };
 		A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */; };
-		A6E6CE3125A59587005A92DB /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */; };
 		A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */; };
 		A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */; };
 		A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */; };
@@ -167,9 +166,10 @@
 		A6E6CE8325A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */; };
 		A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */; };
 		A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */; };
-		A6E6CEB925A60463005A92DB /* ApplicationStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */; };
-		A6E6CEC125A604AE005A92DB /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */; };
 		A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CEC825A6053A005A92DB /* MockApplication.swift */; };
+		A6F4879925A79D130050CFA8 /* ApplicationStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */; };
+		A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */; };
+		A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */; };
 		A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */; };
 		A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */; };
 		B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */; };
@@ -581,7 +581,6 @@
 		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
 		A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockVerifyController.swift; sourceTree = "<group>"; };
-		A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthentication.swift; sourceTree = "<group>"; };
 		A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockBaseControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLockControllerConfiguration+Tests.swift"; sourceTree = "<group>"; };
 		A6E6CE6B25A5ABD6005A92DB /* PinLockSetupControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockSetupControllerTests.swift; sourceTree = "<group>"; };
@@ -589,9 +588,10 @@
 		A6E6CE8225A5B4E4005A92DB /* PinLockControllerConfigurationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockControllerConfigurationObserver.swift; sourceTree = "<group>"; };
 		A6E6CE9025A5B970005A92DB /* PinLockRemoveControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockRemoveControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE9E25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLockVerifyControllerTests.swift; sourceTree = "<group>"; };
-		A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStateProvider.swift; sourceTree = "<group>"; };
-		A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
 		A6E6CEC825A6053A005A92DB /* MockApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApplication.swift; sourceTree = "<group>"; };
+		A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationStateProvider.swift; path = Classes/ApplicationStateProvider.swift; sourceTree = "<group>"; };
+		A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Simplenote.swift"; path = "Classes/UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
+		A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricAuthentication.swift; path = Classes/BiometricAuthentication.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		AE066B9C23C9166D41F1A732 /* Pods-SimplenoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1426,7 +1426,7 @@
 				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
-				A6E6CEC025A604AE005A92DB /* UIApplication+Simplenote.swift */,
+				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1574,8 +1574,8 @@
 				B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */,
 				A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */,
 				A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */,
-				A6E6CE3025A59587005A92DB /* BiometricAuthentication.swift */,
-				A6E6CEB825A60463005A92DB /* ApplicationStateProvider.swift */,
+				A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */,
+				A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2053,7 +2053,7 @@
 				};
 			};
 			buildConfigurationList = E29ADD3317848E8500E55842 /* Build configuration list for PBXProject "Simplenote" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2374,6 +2374,8 @@
 				B52BB74A22CFC0670042C162 /* FileManager+Simplenote.swift in Sources */,
 				3762530620F54FFB00C1F239 /* SPAboutViewController.swift in Sources */,
 				B5C2EDD3255ACB4900C09B32 /* InterlinkProcessor.swift in Sources */,
+				A6F4879925A79D130050CFA8 /* ApplicationStateProvider.swift in Sources */,
+				A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */,
 				B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
@@ -2392,7 +2394,6 @@
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
-				A6E6CEC125A604AE005A92DB /* UIApplication+Simplenote.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
@@ -2475,7 +2476,6 @@
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
 				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
-				A6E6CE3125A59587005A92DB /* BiometricAuthentication.swift in Sources */,
 				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
 				B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */,
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
@@ -2517,7 +2517,6 @@
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
-				A6E6CEB925A60463005A92DB /* ApplicationStateProvider.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
 				B52F35D122F3254800724793 /* Theme.swift in Sources */,
@@ -2560,6 +2559,7 @@
 				B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */,
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
+				A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
 			);

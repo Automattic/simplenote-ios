@@ -1,7 +1,3 @@
-- New Note History interface
-- New Note Options interface
-- New Note Information interface
-- Updated Navigation Bar's behavior
-- Adjusted Notes List Metrics
-- Fixed a bug that caused the Search Bar to look extra big
-- Fixed a bug affecting Tags Autocomplete
+-   Updated Empty State placeholders
+-   Home screen quick actions
+-   Adjusted About screen metrics

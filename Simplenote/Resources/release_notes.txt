@@ -1,8 +1,3 @@
-- Typing "[" will now allow you to pick Interlinking Notes right from the editor
-- Searching for a note is showing relevant excerpts
-- Added Search Minimap to quickly navigate search hits
-- Tags List now extend to the edge of the screen, in landscape mode
-- Fixed a bug that affected Text Selection
-- Fixed a bug that toggled Edition while dragging the Editor
-- Fixed an issue that caused changes not to be persisted immediately
-- Fixed a bug that affected search highlight navigation
+-   Updated Empty State placeholders 
+-   Home screen quick actions 
+-   Adjusted About screen metrics

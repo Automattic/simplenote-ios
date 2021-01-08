@@ -18,7 +18,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
     private let application: ApplicationStateProvider
     private weak var delegate: PinLockVerifyControllerDelegate?
 
-    init(pinLockManager: SPPinLockManager = SPPinLockManager.shared,
+    init(pinLockManager: SPPinLockManager = .shared,
          application: ApplicationStateProvider = UIApplication.shared,
          delegate: PinLockVerifyControllerDelegate) {
         self.pinLockManager = pinLockManager
