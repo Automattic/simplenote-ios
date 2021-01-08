@@ -309,21 +309,9 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    // Scenario #A: Space was pressed
-    if ([string hasPrefix:@" "]) {
-        [self processTextInFieldToTag];
-        return NO;
-    }
-
-    // Scenario #B: New String was either typed or pasted
-    NSString *filteredString = [string substringUpToFirstSpace];
-    NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:filteredString];
-
-    if (updatedString.isValidTagName) {
-        textField.text = updatedString;
-    }
-
-    return NO;
+    NSString *text = textField.text ? textField.text : @"";
+    NSString *updatedText = [text stringByReplacingCharactersInRange:range withString:string];
+    return [self textField:textField shouldChangeTo:updatedText];
 }
 
 - (void)tagEntryFieldDidChange:(SPTagEntryField *)tagTextField {
