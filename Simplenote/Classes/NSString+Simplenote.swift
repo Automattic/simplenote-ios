@@ -12,13 +12,6 @@ extension NSString {
         NSRange(location: .zero, length: length)
     }
 
-    /// Returns the receiver's substring "up to the first space"
-    ///
-    @objc
-    var substringUpToFirstSpace: String {
-        components(separatedBy: .space).first ?? String(self)
-    }
-
     /// Encodes the receiver as a `Tag Hash`
     ///
     @objc
