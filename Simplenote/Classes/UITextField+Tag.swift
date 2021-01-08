@@ -1,9 +1,12 @@
 import UIKit
 
-// MARK: - SPTagEntryField
+// MARK: - UITextField
 //
-extension SPTagEntryField {
-    open override func paste(_ sender: Any?) {
+extension UITextField {
+    /// Preprocess pasteboard content before pasting into tag text field
+    ///
+    @objc
+    func pasteTag() {
         guard let selectedRange = selectedRange,
               let pasteboardText = UIPasteboard.general.string, !pasteboardText.isEmpty else {
             return
