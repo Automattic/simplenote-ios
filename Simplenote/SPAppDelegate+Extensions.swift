@@ -242,6 +242,7 @@ extension SPAppDelegate {
         let viewController = PinLockViewController(controller: controller)
 
         pinLockWindow = UIWindow(frame: UIScreen.main.bounds)
+        pinLockWindow?.accessibilityViewIsModal = true
         pinLockWindow?.rootViewController = viewController
         pinLockWindow?.makeKeyAndVisible()
     }

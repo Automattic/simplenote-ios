@@ -22,6 +22,8 @@ class PinLockViewController: UIViewController {
         }
     }
 
+    private let feedbackGenerator = UINotificationFeedbackGenerator()
+
     init(controller: PinLockController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
@@ -128,6 +130,11 @@ private extension PinLockViewController {
 
         headerStackView.reload(with: animation, in: view) { [weak self] in
             self?.update(with: configuration)
+        }
+
+        announceUpdate(with: configuration)
+        if animation == .shake {
+            feedbackGenerator.notificationOccurred(.error)
         }
     }
 
@@ -254,6 +261,26 @@ private extension PinLockViewController {
     @objc
     func applicationDidBecomeActive() {
         controller.applicationDidBecomeActive()
+    }
+}
+
+// MARK: - Accessibility
+//
+extension PinLockViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        controller.handleCancellation()
+        return true
+    }
+
+    private func announceUpdate(with configuration: PinLockControllerConfiguration) {
+        let message = [configuration.message, configuration.title]
+            .compactMap({ $0 })
+            .joined(separator: "\n")
+
+        // The message wasn't playing without using a delay :shrug:
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            UIAccessibility.post(notification: .announcement, argument: message)
+        }
     }
 }
 
