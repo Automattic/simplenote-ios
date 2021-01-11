@@ -76,7 +76,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4EO-Ld-5U7">
                     <rect key="frame" x="24" y="738" width="366" height="104"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-td-to0" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-td-to0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="G6D-b1-grq"/>
@@ -92,7 +92,7 @@
                                 <action selector="handleTapOnPrimaryButton" destination="-1" eventType="touchUpInside" id="qh8-mi-DWe"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-5Z-lb0">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-5Z-lb0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="60" width="366" height="44"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <state key="normal" title="Button"/>
@@ -119,11 +119,6 @@
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
-    <designables>
-        <designable name="zlP-td-to0">
-            <size key="intrinsicContentSize" width="51" height="33"/>
-        </designable>
-    </designables>
     <resources>
         <image name="icon_info" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">

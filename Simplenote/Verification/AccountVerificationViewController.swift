@@ -37,8 +37,8 @@ class AccountVerificationViewController: UIViewController {
     @IBOutlet private weak var iconView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var textLabel: UILabel!
-    @IBOutlet private weak var primaryButton: SPSquaredButton!
-    @IBOutlet private weak var secondaryButton: UIButton!
+    @IBOutlet private weak var primaryButton: ActivityIndicatorButton!
+    @IBOutlet private weak var secondaryButton: ActivityIndicatorButton!
 
     @IBOutlet private weak var dismissButton: UIButton!
 
@@ -78,7 +78,7 @@ extension AccountVerificationViewController {
     }
 
     @IBAction private func handleTapOnPrimaryButton() {
-
+        
     }
 
     @IBAction private func handleTapOnSecondaryButton() {
@@ -98,6 +98,7 @@ private extension AccountVerificationViewController {
 
         primaryButton.backgroundColor = .simplenoteBlue50Color
         primaryButton.setTitleColor(.white, for: .normal)
+        primaryButton.layer.cornerRadius = Constants.primaryButtonCornerRadius
 
         secondaryButton.backgroundColor = .clear
         secondaryButton.setTitleColor(.simplenoteTintColor, for: .normal)
@@ -140,6 +141,7 @@ private extension AccountVerificationViewController {
 //
 private struct Constants {
     static let scrollContentInset = UIEdgeInsets(top: 72, left: 0, bottom: 20, right: 0)
+    static let primaryButtonCornerRadius: CGFloat = 8
 }
 
 // MARK: - Localization
