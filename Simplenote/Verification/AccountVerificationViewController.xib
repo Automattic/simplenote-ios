@@ -109,6 +109,9 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="950" constant="460" id="tvt-eH-Fhb"/>
+                    </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBx-Fi-Wtl" customClass="RoundedCrossButton" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="368" y="60" width="30" height="30"/>
@@ -124,14 +127,15 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="cW6-wg-7zh" secondAttribute="leading" id="8x3-w4-tvJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cW6-wg-7zh" secondAttribute="leading" constant="50" id="8x3-w4-tvJ"/>
                 <constraint firstItem="pBx-Fi-Wtl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Jil-1W-dOO"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cW6-wg-7zh" secondAttribute="trailing" id="YeB-E1-c76"/>
+                <constraint firstItem="cW6-wg-7zh" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Tht-co-xCp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cW6-wg-7zh" secondAttribute="trailing" id="YeB-E1-c76"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cW6-wg-7zh" secondAttribute="bottom" constant="20" id="hIv-yN-KEW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pBx-Fi-Wtl" secondAttribute="trailing" constant="16" id="nnD-JB-K55"/>
                 <constraint firstItem="cW6-wg-7zh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pUc-7V-GFO"/>
             </constraints>
-            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
+            <point key="canvasLocation" x="-225" y="33"/>
         </view>
     </objects>
     <resources>

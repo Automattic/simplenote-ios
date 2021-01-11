@@ -7,15 +7,18 @@ class AccountVerificationViewController: UIViewController {
     /// Configuration
     ///
     struct Configuration: Equatable {
-        static let review = Configuration(title: Localization.Review.title,
+        static let review = Configuration(iconName: .warning,
+                                          title: Localization.Review.title,
                                           messageTemplate: Localization.Review.messageTemplate,
                                           primaryButton: Localization.Review.confirm,
                                           secondaryButton: Localization.Review.changeEmail)
 
-        static let verify = Configuration(title: Localization.Verify.title,
+        static let verify = Configuration(iconName: .mail,
+                                          title: Localization.Verify.title,
                                           messageTemplate: Localization.Verify.messageTemplate,
                                           primaryButton: nil,
                                           secondaryButton: Localization.Verify.resendEmail)
+        let iconName: UIImageName
 
         let title: String
         let messageTemplate: String
@@ -23,10 +26,12 @@ class AccountVerificationViewController: UIViewController {
         let primaryButton: String?
         let secondaryButton: String
 
-        private init(title: String,
+        private init(iconName: UIImageName,
+                     title: String,
                      messageTemplate: String,
                      primaryButton: String?,
                      secondaryButton: String) {
+            self.iconName = iconName
             self.title = title
             self.messageTemplate = messageTemplate
             self.primaryButton = primaryButton
@@ -62,7 +67,7 @@ class AccountVerificationViewController: UIViewController {
         if #available(iOS 13.0, *) {
             isModalInPresentation = true
         }
-        modalPresentationStyle = .formSheet
+        modalPresentationStyle = .fullScreen
     }
 
     required init?(coder: NSCoder) {
@@ -148,7 +153,7 @@ private extension AccountVerificationViewController {
     func transitionToVerificationScreen() {
         contentStackView.reload(with: .slideLeading, in: view) {
             self.configuration = .verify
-            
+
             self.primaryButton.inProgress = false
             self.secondaryButton.inProgress = false
             self.updateButtons(isEnabled: true)
@@ -172,6 +177,7 @@ private extension AccountVerificationViewController {
 
         primaryButton.backgroundColor = .simplenoteBlue50Color
         primaryButton.setTitleColor(.white, for: .normal)
+        primaryButton.activityIndicatorColor = .white
         primaryButton.layer.cornerRadius = Constants.primaryButtonCornerRadius
 
         secondaryButton.backgroundColor = .clear
@@ -187,6 +193,7 @@ private extension AccountVerificationViewController {
     func refreshContent() {
         let message = String(format: configuration.messageTemplate, email)
 
+        iconView.image = UIImage.image(name: configuration.iconName)
         titleLabel.text = configuration.title
         textLabel.attributedText = attributedText(message, highlighting: email)
         primaryButton.setTitle(configuration.primaryButton, for: .normal)

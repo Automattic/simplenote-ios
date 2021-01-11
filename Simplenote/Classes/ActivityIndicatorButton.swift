@@ -22,6 +22,18 @@ class ActivityIndicatorButton: UIButton {
         }
     }
 
+    /// Activity indicator color
+    ///
+    var activityIndicatorColor: UIColor? {
+        get {
+            return activityIndicator.color
+        }
+
+        set {
+            activityIndicator.color = newValue
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
