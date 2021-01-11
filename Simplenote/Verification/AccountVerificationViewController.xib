@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountVerificationViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="contentStackView" destination="cW6-wg-7zh" id="Cgm-vX-b2a"/>
                 <outlet property="dismissButton" destination="pBx-Fi-Wtl" id="7Q5-JL-hmw"/>
                 <outlet property="iconView" destination="Q9z-N1-9ym" id="kqI-yS-NtP"/>
                 <outlet property="primaryButton" destination="zlP-td-to0" id="YkH-FO-bj1"/>
@@ -26,43 +27,89 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkd-ij-s0B">
-                    <rect key="frame" x="0.0" y="44" width="414" height="694"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cW6-wg-7zh">
+                    <rect key="frame" x="0.0" y="44" width="414" height="798"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="sfD-sz-Zis">
-                            <rect key="frame" x="24" y="0.0" width="366" height="185.5"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkd-ij-s0B">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="694"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_info" translatesAutoresizingMaskIntoConstraints="NO" id="Q9z-N1-9ym">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="72"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="72" id="2zj-0Y-Hx7"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaF-hI-Ufw">
-                                    <rect key="frame" x="0.0" y="98" width="366" height="41"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaH-wT-lje">
-                                    <rect key="frame" x="0.0" y="165" width="366" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="sfD-sz-Zis">
+                                    <rect key="frame" x="24" y="0.0" width="366" height="185.5"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_info" translatesAutoresizingMaskIntoConstraints="NO" id="Q9z-N1-9ym">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="72"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="72" id="2zj-0Y-Hx7"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaF-hI-Ufw">
+                                            <rect key="frame" x="0.0" y="98" width="366" height="41"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaH-wT-lje">
+                                            <rect key="frame" x="0.0" y="165" width="366" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                             </subviews>
-                        </stackView>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="sfD-sz-Zis" secondAttribute="trailing" constant="24" id="1rb-nl-Vz3"/>
+                                <constraint firstItem="sfD-sz-Zis" firstAttribute="top" secondItem="Jkd-ij-s0B" secondAttribute="top" id="5QZ-Px-Kgv"/>
+                                <constraint firstItem="sfD-sz-Zis" firstAttribute="width" secondItem="Jkd-ij-s0B" secondAttribute="width" constant="-48" id="c9a-aI-rPA"/>
+                                <constraint firstItem="sfD-sz-Zis" firstAttribute="leading" secondItem="Jkd-ij-s0B" secondAttribute="leading" constant="24" id="rKv-b4-ukV"/>
+                                <constraint firstAttribute="bottom" secondItem="sfD-sz-Zis" secondAttribute="bottom" id="yH6-TD-LFF"/>
+                            </constraints>
+                            <viewLayoutGuide key="contentLayoutGuide" id="Y9l-gg-D6w"/>
+                            <viewLayoutGuide key="frameLayoutGuide" id="3ur-uv-znW"/>
+                        </scrollView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OaH-91-MPN">
+                            <rect key="frame" x="0.0" y="694" width="414" height="104"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4EO-Ld-5U7">
+                                    <rect key="frame" x="24" y="0.0" width="366" height="104"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-td-to0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="G6D-b1-grq"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <state key="normal" title="Button"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="handleTapOnPrimaryButton" destination="-1" eventType="touchUpInside" id="qh8-mi-DWe"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-5Z-lb0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="60" width="366" height="44"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="handleTapOnSecondaryButton" destination="-1" eventType="touchUpInside" id="xri-do-t5v"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="4EO-Ld-5U7" firstAttribute="leading" secondItem="OaH-91-MPN" secondAttribute="leading" constant="24" id="6R4-Ia-obm"/>
+                                <constraint firstItem="4EO-Ld-5U7" firstAttribute="top" secondItem="OaH-91-MPN" secondAttribute="top" id="LlW-2H-0II"/>
+                                <constraint firstAttribute="bottom" secondItem="4EO-Ld-5U7" secondAttribute="bottom" id="ZZv-u0-s56"/>
+                                <constraint firstAttribute="trailing" secondItem="4EO-Ld-5U7" secondAttribute="trailing" constant="24" id="pEp-UW-Hb5"/>
+                            </constraints>
+                        </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="sfD-sz-Zis" secondAttribute="trailing" constant="24" id="1rb-nl-Vz3"/>
-                        <constraint firstItem="sfD-sz-Zis" firstAttribute="top" secondItem="Jkd-ij-s0B" secondAttribute="top" id="5QZ-Px-Kgv"/>
-                        <constraint firstItem="sfD-sz-Zis" firstAttribute="width" secondItem="Jkd-ij-s0B" secondAttribute="width" constant="-48" id="c9a-aI-rPA"/>
-                        <constraint firstItem="sfD-sz-Zis" firstAttribute="leading" secondItem="Jkd-ij-s0B" secondAttribute="leading" constant="24" id="rKv-b4-ukV"/>
-                        <constraint firstAttribute="bottom" secondItem="sfD-sz-Zis" secondAttribute="bottom" id="yH6-TD-LFF"/>
-                    </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="Y9l-gg-D6w"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="3ur-uv-znW"/>
-                </scrollView>
+                </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBx-Fi-Wtl" customClass="RoundedCrossButton" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="368" y="60" width="30" height="30"/>
                     <constraints>
@@ -73,48 +120,16 @@
                         <action selector="handleTapOnDismissButton" destination="-1" eventType="touchUpInside" id="e1B-QT-erJ"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4EO-Ld-5U7">
-                    <rect key="frame" x="24" y="738" width="366" height="104"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-td-to0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="G6D-b1-grq"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <state key="normal" title="Button"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="handleTapOnPrimaryButton" destination="-1" eventType="touchUpInside" id="qh8-mi-DWe"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-5Z-lb0" customClass="ActivityIndicatorButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="60" width="366" height="44"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="handleTapOnSecondaryButton" destination="-1" eventType="touchUpInside" id="xri-do-t5v"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Jkd-ij-s0B" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Asi-q0-Q6L"/>
-                <constraint firstItem="Jkd-ij-s0B" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DZp-HL-MJS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="cW6-wg-7zh" secondAttribute="leading" id="8x3-w4-tvJ"/>
                 <constraint firstItem="pBx-Fi-Wtl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Jil-1W-dOO"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4EO-Ld-5U7" secondAttribute="bottom" constant="20" id="cha-Sg-byr"/>
-                <constraint firstItem="4EO-Ld-5U7" firstAttribute="top" secondItem="Jkd-ij-s0B" secondAttribute="bottom" id="cuT-gU-xyI"/>
-                <constraint firstItem="4EO-Ld-5U7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="kuX-2E-jhs"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4EO-Ld-5U7" secondAttribute="trailing" constant="24" id="lw8-gk-gzV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cW6-wg-7zh" secondAttribute="trailing" id="YeB-E1-c76"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cW6-wg-7zh" secondAttribute="bottom" constant="20" id="hIv-yN-KEW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pBx-Fi-Wtl" secondAttribute="trailing" constant="16" id="nnD-JB-K55"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jkd-ij-s0B" secondAttribute="trailing" id="v5I-eA-hcD"/>
+                <constraint firstItem="cW6-wg-7zh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pUc-7V-GFO"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>

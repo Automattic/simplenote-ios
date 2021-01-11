@@ -6,7 +6,7 @@ class AccountVerificationViewController: UIViewController {
 
     /// Configuration
     ///
-    struct Configuration {
+    struct Configuration: Equatable {
         static let review = Configuration(title: Localization.Review.title,
                                           messageTemplate: Localization.Review.messageTemplate,
                                           primaryButton: Localization.Review.confirm,
@@ -42,10 +42,17 @@ class AccountVerificationViewController: UIViewController {
 
     @IBOutlet private weak var dismissButton: UIButton!
 
+    @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
 
-    private var configuration: Configuration
+    private var configuration: Configuration {
+        didSet {
+            refreshStyle()
+            refreshContent()
+        }
+    }
     private let email: String
+    private let controller = AccountVerificationController()
 
     init(configuration: Configuration, email: String) {
         self.configuration = configuration
@@ -70,19 +77,86 @@ class AccountVerificationViewController: UIViewController {
     }
 }
 
+// MARK: - Private
+//
+private extension AccountVerificationViewController {
+    func confirmEmail() {
+        primaryButton.inProgress = true
+        updateButtons(isEnabled: false)
+
+        controller.confirmEmail { [weak self] in
+            self?.transitionToVerificationScreen()
+        }
+    }
+
+    func resendVerificationEmail() {
+        secondaryButton.inProgress = true
+        updateButtons(isEnabled: false)
+
+        controller.resendVerificationEmail { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            self.secondaryButton.inProgress = false
+            self.updateButtons(isEnabled: true)
+        }
+    }
+}
+
 // MARK: - Buttons
 //
 extension AccountVerificationViewController {
     @IBAction private func handleTapOnDismissButton() {
-        dismiss(animated: true, completion: nil)
+        dismiss()
     }
 
     @IBAction private func handleTapOnPrimaryButton() {
-        
+        guard configuration == .review else {
+            return
+        }
+
+        confirmEmail()
     }
 
     @IBAction private func handleTapOnSecondaryButton() {
+        switch configuration {
+        case .review:
+            if let url = URL(string: SimplenoteConstants.settingsURL) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                dismiss()
+            }
 
+        case .verify:
+            resendVerificationEmail()
+
+        default:
+            return
+        }
+    }
+
+    private func updateButtons(isEnabled: Bool) {
+        [primaryButton, secondaryButton].forEach {
+            $0?.isEnabled = isEnabled
+        }
+    }
+}
+
+// MARK: - Transitions
+//
+private extension AccountVerificationViewController {
+    func transitionToVerificationScreen() {
+        contentStackView.reload(with: .slideLeading, in: view) {
+            self.configuration = .verify
+            
+            self.primaryButton.inProgress = false
+            self.secondaryButton.inProgress = false
+            self.updateButtons(isEnabled: true)
+        }
+    }
+
+    func dismiss() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
