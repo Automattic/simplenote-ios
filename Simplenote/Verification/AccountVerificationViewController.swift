@@ -241,7 +241,7 @@ private struct Localization {
 
     struct Verify {
         static let title = NSLocalizedString("Verify Your Email", comment: "Title -> Verify your email screen")
-        static let messageTemplate = NSLocalizedString("An email has been sent to %1$@ with a link for you to click on to verify your email address. Happy note-ing!", comment: "Message -> Verify your email screen. Parameter: %1$@ - email address")
+        static let messageTemplate = NSLocalizedString("An email has been sent to %1$@ with a link for verification. Happy note-ing!", comment: "Message -> Verify your email screen. Parameter: %1$@ - email address")
 
         static let resendEmail = NSLocalizedString("Resend Email", comment: "Resend email button -> Verify your email screen")
     }
