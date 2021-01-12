@@ -7,17 +7,12 @@ extension SPAppDelegate {
 
     @objc
     func print() {
-        guard let bucket = simperium.bucket(forName: "Settings") else {
+        guard let bucket = simperium.bucket(forName: "Settings123") else {
             return
         }
 
-
-
         let objects = bucket.allObjects()?.compactMap { $0 as? SPObject } ?? []
-        NSLog("# Objects \(objects.count)")
-
-
-        
+        NSLog("# Objects 123 \(objects.count)")
     }
 
     /// Returns the actual Selected Tag Name **Excluding** navigation tags, such as Trash or Untagged Notes.
