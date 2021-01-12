@@ -317,7 +317,7 @@ extension SPNoteTableViewCell {
 
         let result = insets.top + paddingBetweenLabels + CGFloat(numberLines) * lineHeight + insets.bottom
 
-        return result.rounded(.up)
+        return max(result.rounded(.up), Constants.minCellHeight)
     }
 }
 
@@ -440,4 +440,10 @@ private extension NSAttributedString {
 
         return output
     }
+}
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let minCellHeight: CGFloat = 44
 }
