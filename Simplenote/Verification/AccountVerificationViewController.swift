@@ -173,15 +173,18 @@ private extension AccountVerificationViewController {
         iconView.tintColor = .simplenoteTitleColor
 
         titleLabel.textColor = .simplenoteTextColor
+        titleLabel.font = UIFont.preferredFont(for: .largeTitle, weight: .bold)
         textLabel.textColor = .simplenoteTextColor
 
         primaryButton.backgroundColor = .simplenoteBlue50Color
         primaryButton.setTitleColor(.white, for: .normal)
         primaryButton.activityIndicatorColor = .white
         primaryButton.layer.cornerRadius = Constants.primaryButtonCornerRadius
+        primaryButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
         secondaryButton.backgroundColor = .clear
         secondaryButton.setTitleColor(.simplenoteTintColor, for: .normal)
+        secondaryButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
         scrollView.contentInset = Constants.scrollContentInset
     }
