@@ -11,8 +11,13 @@ extension SPAppDelegate {
             return
         }
 
+
+
         let objects = bucket.allObjects()?.compactMap { $0 as? SPObject } ?? []
         NSLog("# Objects \(objects.count)")
+
+
+        
     }
 
     /// Returns the actual Selected Tag Name **Excluding** navigation tags, such as Trash or Untagged Notes.
