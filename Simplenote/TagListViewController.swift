@@ -414,6 +414,8 @@ private extension TagListViewController {
             return
         }
 
+        setEditing(false)
+
         switch row {
         case .allNotes:
             allNotesWasPressed()
@@ -440,6 +442,8 @@ private extension TagListViewController {
     }
 
     func didSelectBottomRow(at indexPath: IndexPath) {
+        setEditing(false)
+
         SPTracker.trackListUntaggedViewed()
         openNoteListForTagName(kSimplenoteUntaggedKey)
     }
