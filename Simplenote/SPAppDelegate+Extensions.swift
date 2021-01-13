@@ -38,20 +38,6 @@ extension SPAppDelegate {
 //
 extension SPAppDelegate {
 
-    @objc
-    func print() {
-        guard let bucket = simperium.bucket(forName: "Settings") else {
-            return
-        }
-
-        let objects = bucket.allObjects() ?? []
-        NSLog("# Objects \(objects.count)")
-
-        for case let object as SPObject in objects {
-            NSLog("#   Object [\(object.simperiumKey.debugDescription)]: \(object.dictionary.debugDescription))")
-        }
-    }
-    
     /// Returns the actual Selected Tag Name **Excluding** navigation tags, such as Trash or Untagged Notes.
     ///
     /// TODO: This should be gone... **the second** the AppDelegate is Swift-y. We should simply keep a `NoteListFilter` instance.
