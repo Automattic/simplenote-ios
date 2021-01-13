@@ -76,11 +76,11 @@ private extension TagListViewController {
     }
 
     func configureTableHeaderView() {
-        tagsHeaderView.titleLabel.text = NSLocalizedString("Tags", comment: "")
+        tagsHeaderView.titleLabel.text = Localization.tags
         tagsHeaderView.titleLabel.font = .preferredFont(for: .title2, weight: .bold)
 
         let actionButton = tagsHeaderView.actionButton
-        actionButton?.setTitle(NSLocalizedString("Edit", comment: "Edit Tags Action: Visible in the Tags List"), for: .normal)
+        actionButton?.setTitle(Localization.edit, for: .normal)
         actionButton?.addTarget(self, action: #selector(editTagsTap), for: .touchUpInside)
     }
 
@@ -90,7 +90,7 @@ private extension TagListViewController {
 
     func configureMenuController() {
         let renameSelector = sel_registerName("rename:")
-        let renameItem = UIMenuItem(title: NSLocalizedString("Rename", comment: "Rename a tag"), action: renameSelector)
+        let renameItem = UIMenuItem(title: Localization.rename, action: renameSelector)
 
         UIMenuController.shared.menuItems = [renameItem]
         UIMenuController.shared.update()
@@ -347,15 +347,15 @@ private extension TagListViewController {
 
         switch row {
         case .allNotes:
-            cell.title = NSLocalizedString("All Notes", comment: "")
+            cell.title = Localization.allNotes
             cell.imageView?.image = .image(name: .allNotes)
             cell.accessibilityIdentifier = "all-notes"
         case .trash:
-            cell.title = NSLocalizedString("Trash-noun", comment: "")
+            cell.title = Localization.trash
             cell.imageView?.image = .image(name: .trash)
             cell.accessibilityIdentifier = nil
         case .settings:
-            cell.title = NSLocalizedString("Settings", comment: "")
+            cell.title = Localization.settings
             cell.imageView?.image = .image(name: .settings)
             cell.accessibilityIdentifier = "settings"
         }
@@ -369,7 +369,7 @@ private extension TagListViewController {
     }
 
     func configureBottomCell(_ cell: Value1TableViewCell, at indexPath: IndexPath) {
-        cell.title = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
+        cell.title = Localization.untaggedNotes
         cell.imageView?.image = .image(name: .untagged)
         cell.accessibilityIdentifier = nil
 
@@ -473,14 +473,29 @@ extension TagListViewController: TagListViewCellDelegate {
         renameTag(tag)
     }
 
-    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell) {
-        SPTracker.trackTagMenuDeleted()
-
-        guard let indexPath = tableView.indexPath(for: cell) else {
+    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell, source: TagListViewCellDeletionSource) {
+        guard let indexPath = tableView.indexPath(for: cell), let tag = tag(at: indexPath) else {
             return
         }
 
-        removeTag(at: indexPath)
+        let alertController = UIAlertController(title: Localization.TagDeletionConfirmation.title(with: tag.name ?? ""),
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+
+        alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { (_) in
+            switch source {
+            case .accessory:
+                SPTracker.trackTagRowDeleted()
+            case .menu:
+                SPTracker.trackTagMenuDeleted()
+            }
+
+            self.removeTag(at: indexPath)
+        }
+
+        alertController.addCancelActionWithTitle(Localization.TagDeletionConfirmation.cancellationButton)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -499,7 +514,7 @@ private extension TagListViewController {
     }
 
     func refreshEditTagsButton(isEditing: Bool) {
-        let title = isEditing ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Edit", comment: "")
+        let title = isEditing ? Localization.done : Localization.edit
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
@@ -735,4 +750,29 @@ private enum SystemRow: Int, CaseIterable {
 //
 private struct Constants {
     static let tagListBatchSize = 20
+}
+
+// MARK: - Localization
+//
+private struct Localization {
+    static let edit = NSLocalizedString("Edit", comment: "Edit Tags Action: Visible in the Tags List")
+    static let rename = NSLocalizedString("Rename", comment: "Rename a tag")
+    static let done = NSLocalizedString("Done", comment: "")
+
+    static let allNotes = NSLocalizedString("All Notes", comment: "")
+    static let trash = NSLocalizedString("Trash-noun", comment: "")
+    static let settings = NSLocalizedString("Settings", comment: "")
+
+    static let tags = NSLocalizedString("Tags", comment: "")
+    static let untaggedNotes = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
+
+    struct TagDeletionConfirmation {
+        static func title(with tagName: String) -> String {
+            let template = NSLocalizedString("Are you sure you want to delete \"%1$@\"?", comment: "Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name")
+            return String(format: template, tagName)
+        }
+
+        static let confirmationButton = NSLocalizedString("Delete Tag", comment: "Confirmation button of deletion confirmation message for a tag.")
+        static let cancellationButton = NSLocalizedString("Cancel", comment: "Cancellation button of deletion confirmation message for a tag.")
+    }
 }

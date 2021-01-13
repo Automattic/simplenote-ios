@@ -1,9 +1,16 @@
 import UIKit
 
+// MARK: - TagListViewCellDeletionSource - source from where the tag is deleted
+//
+enum TagListViewCellDeletionSource {
+    case menu
+    case accessory
+}
+
 // MARK: - TagListViewCellDelegate
 //
 protocol TagListViewCellDelegate: class {
-    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell)
+    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell, source: TagListViewCellDeletionSource)
     func tagListViewCellShouldRenameTag(_ cell: TagListViewCell)
 }
 
@@ -110,7 +117,7 @@ extension TagListViewCell {
 
     @objc
     override func delete(_ sender: Any?) {
-        delegate?.tagListViewCellShouldDeleteTag(self)
+        delegate?.tagListViewCellShouldDeleteTag(self, source: .menu)
     }
 
     @objc
@@ -119,6 +126,6 @@ extension TagListViewCell {
     }
 
     @IBAction private func handleTapOnTrashButton() {
-        delegate?.tagListViewCellShouldDeleteTag(self)
+        delegate?.tagListViewCellShouldDeleteTag(self, source: .accessory)
     }
 }
