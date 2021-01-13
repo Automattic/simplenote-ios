@@ -1,10 +1,57 @@
 import Foundation
 
 
+// MARK: - Initialization
+//
+extension SPAppDelegate {
+
+    @objc
+    func setupSimperium() {
+        simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
+
+#if USE_VERBOSE_LOGGING
+        simperium.verboseLoggingEnabled = true
+        NSLog("[Simperium] Verbose logging Enabled")
+#else
+        simperium.verboseLoggingEnabled = false
+#endif
+
+        simperium.authenticationViewControllerClass    = SPOnboardingViewController.self
+        simperium.authenticator.providerString         = "simplenote.com"
+
+        simperium.authenticationShouldBeEmbeddedInNavigationController = true
+        simperium.delegate = self
+
+        let buckets = [Note.self, Tag.self, Settings.self, Preferences.self].compactMap { entityType in
+            simperium.bucket(forName: entityType.classNameWithoutNamespaces)
+        }
+
+        for bucket in buckets {
+            bucket.notifyWhileIndexing = true
+            bucket.delegate = self
+        }
+    }
+}
+
+
 // MARK: - Internal Methods
 //
 extension SPAppDelegate {
 
+    @objc
+    func print() {
+        guard let bucket = simperium.bucket(forName: "Settings") else {
+            return
+        }
+
+        let objects = bucket.allObjects() ?? []
+        NSLog("# Objects \(objects.count)")
+
+        for case let object as SPObject in objects {
+            NSLog("#   Object [\(object.simperiumKey.debugDescription)]: \(object.dictionary.debugDescription))")
+        }
+    }
+    
     /// Returns the actual Selected Tag Name **Excluding** navigation tags, such as Trash or Untagged Notes.
     ///
     /// TODO: This should be gone... **the second** the AppDelegate is Swift-y. We should simply keep a `NoteListFilter` instance.

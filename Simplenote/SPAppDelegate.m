@@ -38,9 +38,8 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SPBucketDelegate>
+@interface SPAppDelegate ()
 
-@property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
@@ -64,34 +63,6 @@
 #pragma mark ================================================================================
 #pragma mark Frameworks Setup
 #pragma mark ================================================================================
-
-- (void)setupSimperium
-{
-	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel context:self.managedObjectContext coordinator:self.persistentStoreCoordinator];
-		  
-#if USE_VERBOSE_LOGGING
-    [_simperium setVerboseLoggingEnabled:YES];
-    NSLog(@"verbose logging enabled");
-#else
-    [_simperium setVerboseLoggingEnabled:NO];
-#endif
-    
-    _simperium.authenticationViewControllerClass    = [SPOnboardingViewController class];
-    _simperium.authenticator.providerString         = @"simplenote.com";
-	
-
-    [_simperium setAuthenticationShouldBeEmbeddedInNavigationController:YES];
-    [_simperium setAllBucketDelegates:self];
-    [_simperium setDelegate:self];
-    
-    NSArray *buckets = @[NSStringFromClass([Note class]),
-                         NSStringFromClass([Tag class]),
-                         NSStringFromClass([Settings class])];
-    
-    for (NSString *bucketName in buckets) {
-        [_simperium bucketForName:bucketName].notifyWhileIndexing = YES;
-    }
-}
 
 - (void)authenticateSimperium
 {

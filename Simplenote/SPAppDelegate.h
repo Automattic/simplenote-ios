@@ -11,12 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SPAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SPAppDelegate : UIResponder <UIApplicationDelegate, SPBucketDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nullable, strong, nonatomic) UIWindow *pinLockWindow;
 
-@property (strong, nonatomic, readonly) Simperium						*simperium;
+@property (strong, nonatomic) Simperium						            *simperium;
 @property (strong, nonatomic, readonly) NSManagedObjectContext			*managedObjectContext;
 @property (strong, nonatomic, readonly) NSManagedObjectModel			*managedObjectModel;
 @property (strong, nonatomic, readonly) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
