@@ -2974,7 +2974,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOAPODS=1",
-					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -2993,7 +2992,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(SP_IOS_SDK)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG USE_VERBOSE_LOGGING $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3136,7 +3135,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
 					"USE_APPCENTER=1",
-					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -3155,7 +3153,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Alpha";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_INTERNAL $(SP_IOS_SDK)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_INTERNAL USE_VERBOSE_LOGGING $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
@@ -3434,7 +3432,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
 					"USE_APPCENTER=1",
-					"USE_VERBOSE_LOGGING=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
@@ -3453,7 +3450,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_INTERNAL $(SP_IOS_SDK)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_INTERNAL USE_VERBOSE_LOGGING $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
