@@ -65,7 +65,9 @@ private extension TagListViewController {
     }
 
     func configureTableView() {
-        tableView.register(SPTagListViewCell.loadNib(), forCellReuseIdentifier: SPTagListViewCell.reuseIdentifier)
+        tableView.register(TagListViewCell.loadNib(), forCellReuseIdentifier: TagListViewCell.reuseIdentifier)
+        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+
         tableView.separatorInsetReference = .fromAutomaticInsets
 
         if #available(iOS 13.0, *) {
@@ -166,12 +168,12 @@ private extension TagListViewController {
 // MARK: - Helper Methods
 //
 private extension TagListViewController {
-    func cell(for tag: Tag) -> SPTagListViewCell? {
+    func cell(for tag: Tag) -> TagListViewCell? {
         guard let indexPath = indexPath(for: tag) else {
             return nil
         }
 
-        return tableView.cellForRow(at: indexPath) as? SPTagListViewCell
+        return tableView.cellForRow(at: indexPath) as? TagListViewCell
     }
 
     func indexPath(for tag: Tag) -> IndexPath? {
@@ -244,9 +246,24 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(ofType: SPTagListViewCell.self, for: indexPath)
-        configure(cell, at: indexPath)
-        return cell
+        guard let section = Section(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        switch section {
+        case .system:
+            let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+            configureSystemCell(cell, at: indexPath)
+            return cell
+        case .tags:
+            let cell = tableView.dequeueReusableCell(ofType: TagListViewCell.self, for: indexPath)
+            configureTagCell(cell, at: indexPath)
+            return cell
+        case .bottom:
+            let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+            configureBottomCell(cell, at: indexPath)
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -308,73 +325,56 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return Section(rawValue: indexPath.section) == .tags
+        return false
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        let isTagRow = Section(rawValue: indexPath.section) == .tags
-        return isTagRow && tableView.isEditing ? .delete : .none
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else {
-            return
-        }
-
-        SPTracker.trackTagRowDeleted()
-        removeTag(at: indexPath)
+        return .none
     }
 }
 
 // MARK: - Cell Setup
 //
 private extension TagListViewController {
-    func configure(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            return
-        }
 
-        switch section {
-        case .system:
-            configureSystemCell(cell, at: indexPath)
-        case .tags:
-            configureTagCell(cell, at: indexPath)
-        case .bottom:
-            configureBottomCell(cell, at: indexPath)
-        }
-    }
-
-    func configureSystemCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
+    func configureSystemCell(_ cell: Value1TableViewCell, at indexPath: IndexPath) {
         guard let row = SystemRow(rawValue: indexPath.row) else {
             return
         }
 
+        cell.hasClearBackground = true
+        cell.imageTintColor = .simplenoteTintColor
+
         switch row {
         case .allNotes:
-            cell.textField.text = NSLocalizedString("All Notes", comment: "")
-            cell.iconImage = .image(name: .allNotes)
+            cell.title = NSLocalizedString("All Notes", comment: "")
+            cell.imageView?.image = .image(name: .allNotes)
             cell.accessibilityIdentifier = "all-notes"
         case .trash:
-            cell.textField.text = NSLocalizedString("Trash-noun", comment: "")
-            cell.iconImage = .image(name: .trash)
+            cell.title = NSLocalizedString("Trash-noun", comment: "")
+            cell.imageView?.image = .image(name: .trash)
+            cell.accessibilityIdentifier = nil
         case .settings:
-            cell.textField.text = NSLocalizedString("Settings", comment: "")
-            cell.iconImage = .image(name: .settings)
+            cell.title = NSLocalizedString("Settings", comment: "")
+            cell.imageView?.image = .image(name: .settings)
             cell.accessibilityIdentifier = "settings"
         }
     }
 
-    func configureTagCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
+    func configureTagCell(_ cell: TagListViewCell, at indexPath: IndexPath) {
         let tagName = tag(at: indexPath)?.name
 
         cell.textField.text = tagName
-        cell.iconImage = nil
         cell.delegate = self
     }
 
-    func configureBottomCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
-        cell.textField.text = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
-        cell.iconImage = .image(name: .untagged)
+    func configureBottomCell(_ cell: Value1TableViewCell, at indexPath: IndexPath) {
+        cell.title = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
+        cell.imageView?.image = .image(name: .untagged)
+        cell.accessibilityIdentifier = nil
+
+        cell.hasClearBackground = true
+        cell.imageTintColor = .simplenoteTintColor
     }
 
     func shouldSelectCell(at indexPath: IndexPath) -> Bool {
@@ -458,10 +458,11 @@ private extension TagListViewController {
     }
 }
 
-// MARK: - SPTagListViewCellDelegate
+// MARK: - TagListViewCellDelegate
 //
-extension TagListViewController: SPTagListViewCellDelegate {
-    func tagListViewCellShouldRenameTag(_ cell: SPTagListViewCell!) {
+extension TagListViewController: TagListViewCellDelegate {
+
+    func tagListViewCellShouldRenameTag(_ cell: TagListViewCell) {
         SPTracker.trackTagMenuRenamed()
 
         guard let indexPath = tableView.indexPath(for: cell),
@@ -472,7 +473,7 @@ extension TagListViewController: SPTagListViewCellDelegate {
         renameTag(tag)
     }
 
-    func tagListViewCellShouldDeleteTag(_ cell: SPTagListViewCell!) {
+    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell) {
         SPTracker.trackTagMenuDeleted()
 
         guard let indexPath = tableView.indexPath(for: cell) else {
