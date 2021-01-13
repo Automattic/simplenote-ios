@@ -23,9 +23,6 @@ class TagListViewCell: UITableViewCell {
 
     @IBOutlet private weak var trashButton: UIButton!
     @IBOutlet private weak var trashButtonContainer: UIView!
-    @IBOutlet private weak var trashButtonContainerSeparator: UIView!
-    @IBOutlet private weak var trashButtonContainerSeparatorWidth: NSLayoutConstraint!
-
 
     /// Delegate
     ///
@@ -66,10 +63,8 @@ class TagListViewCell: UITableViewCell {
         super.setEditing(editing, animated: animated)
 
         let changesBlock = {
-            [self.trashButtonContainer, self.trashButtonContainerSeparator].forEach {
-                $0?.isHidden = !editing
-                $0?.alpha = editing ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
-            }
+            self.trashButtonContainer.isHidden = !editing
+            self.trashButtonContainer.alpha = editing ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
         }
 
         if animated {
@@ -97,13 +92,6 @@ private extension TagListViewCell {
         refreshCellStyle()
         refreshSelectionStyle()
         refreshComponentsStyle()
-
-        if #available(iOS 13.0, *) {
-            trashButtonContainerSeparator.backgroundColor = .separator
-        } else {
-            trashButtonContainerSeparator.backgroundColor = .simplenoteDividerColor
-        }
-        trashButtonContainerSeparatorWidth.constant = Constants.separatorWidth
     }
 
     func refreshCellStyle() {
@@ -141,13 +129,5 @@ extension TagListViewCell {
 
     @IBAction private func handleTapOnTrashButton() {
         delegate?.tagListViewCellShouldDeleteTag(self, source: .accessory)
-    }
-}
-
-// MARK: - Constants
-//
-private struct Constants {
-    static var separatorWidth: CGFloat {
-        return UIScreen.main.pointToPixelRatio
     }
 }

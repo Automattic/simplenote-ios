@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,12 +20,12 @@
                         <rect key="frame" x="16" y="10" width="382" height="61"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jm9-sw-6Ik" customClass="TagListTextField" customModule="Simplenote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="19.5" width="332" height="22"/>
+                                <rect key="frame" x="0.0" y="19.5" width="344" height="22"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                             </textField>
                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jFN-ER-yU0">
-                                <rect key="frame" x="342" y="18.5" width="40" height="24"/>
+                                <rect key="frame" x="354" y="18.5" width="28" height="24"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6Y-YF-32N">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -43,7 +42,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="q6Y-YF-32N" secondAttribute="bottom" id="GqR-Ea-6xw"/>
-                                    <constraint firstAttribute="trailing" secondItem="q6Y-YF-32N" secondAttribute="trailing" constant="16" id="HO7-iy-yII"/>
+                                    <constraint firstAttribute="trailing" secondItem="q6Y-YF-32N" secondAttribute="trailing" constant="4" id="HO7-iy-yII"/>
                                     <constraint firstItem="q6Y-YF-32N" firstAttribute="top" secondItem="jFN-ER-yU0" secondAttribute="top" id="Qv4-c2-Pzc"/>
                                     <constraint firstItem="q6Y-YF-32N" firstAttribute="leading" secondItem="jFN-ER-yU0" secondAttribute="leading" id="veV-af-BEd"/>
                                 </constraints>
@@ -53,21 +52,11 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="DR6-NP-WgF"/>
                         </constraints>
                     </stackView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPM-Lr-DzW">
-                        <rect key="frame" x="398" y="0.0" width="1" height="81"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="1" id="ONf-F5-cQu"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="tPM-Lr-DzW" secondAttribute="bottom" id="3iO-9M-amZ"/>
                     <constraint firstItem="x3h-12-Oue" firstAttribute="leading" secondItem="xp1-lh-lT4" secondAttribute="leading" constant="16" id="Ghl-Mq-Les"/>
                     <constraint firstAttribute="trailing" secondItem="x3h-12-Oue" secondAttribute="trailing" constant="16" id="PqQ-C2-nHh"/>
                     <constraint firstItem="x3h-12-Oue" firstAttribute="top" secondItem="xp1-lh-lT4" secondAttribute="top" constant="10" id="ebW-kb-CwU"/>
-                    <constraint firstItem="tPM-Lr-DzW" firstAttribute="leading" secondItem="x3h-12-Oue" secondAttribute="trailing" id="fim-KK-31M"/>
-                    <constraint firstItem="tPM-Lr-DzW" firstAttribute="top" secondItem="xp1-lh-lT4" secondAttribute="top" id="hv8-bW-JPJ"/>
                     <constraint firstAttribute="bottom" secondItem="x3h-12-Oue" secondAttribute="bottom" constant="10" id="nqv-dk-7j6"/>
                 </constraints>
             </tableViewCellContentView>
@@ -77,16 +66,11 @@
                 <outlet property="textField" destination="jm9-sw-6Ik" id="SPs-LU-ssh"/>
                 <outlet property="trashButton" destination="q6Y-YF-32N" id="NAI-GT-2BC"/>
                 <outlet property="trashButtonContainer" destination="jFN-ER-yU0" id="HVw-9M-TF5"/>
-                <outlet property="trashButtonContainerSeparator" destination="tPM-Lr-DzW" id="uSt-Xw-Wev"/>
-                <outlet property="trashButtonContainerSeparatorWidth" destination="ONf-F5-cQu" id="clT-rc-4Bi"/>
             </connections>
             <point key="canvasLocation" x="-679.71014492753625" y="30.46875"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="icon_trash" width="24" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
