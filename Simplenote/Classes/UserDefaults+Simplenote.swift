@@ -15,6 +15,7 @@ extension UserDefaults {
         case theme
         case themeLegacy = "SPThemePref"
         case wordPressSessionKey = "SPAuthSessionKey"
+        case useBiometryInsteadOfPin = "SimplenoteUseTouchID"
     }
 }
 

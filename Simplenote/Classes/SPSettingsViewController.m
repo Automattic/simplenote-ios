@@ -1,11 +1,9 @@
 #import "SPSettingsViewController.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
-#import "DTPinLockController.h"
 #import "StatusChecker.h"
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
-#import <LocalAuthentication/LocalAuthentication.h>
 #import "Simplenote-Swift.h"
 #import "Simperium+Simplenote.h"
 
@@ -16,8 +14,6 @@ NSString *const SPThemePref                                         = @"SPThemeP
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
-@property (nonatomic, assign) BOOL          biometryIsAvailable;
-@property (nonatomic, copy) NSString        *biometryTitle;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
 @property (nonatomic, strong) UIToolbar     *doneToolbar;
@@ -175,31 +171,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self checkForBiometry];
-    
     [self.tableView reloadData];
-}
-
-- (void)checkForBiometry
-{
-    if ([LAContext class]) {
-        LAContext *context = [LAContext new];
-        NSError *error;
-        if([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                                error:&error]) {
-            self.biometryIsAvailable = YES;
-
-            BOOL faceIDAvailable = NO;
-            if (context.biometryType == LABiometryTypeFaceID) {
-                faceIDAvailable = YES;
-            }
-
-            self.biometryTitle = (faceIDAvailable) ?
-                NSLocalizedString(@"Face ID", @"Offer to enable Face ID support if available and passcode is on.") :
-                NSLocalizedString(@"Touch ID", @"Offer to enable Touch ID support if available and passcode is on.");
-        }
-    }
 }
 
 - (void)doneAction:(id)sender
@@ -235,9 +207,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsSecurity: {
-            int rowsToRemove = self.biometryIsAvailable ? 0 : 1;
-            int disabledPinLockRows = [self biometryIsAvailable] ? 2 : 1;
-            return [self pinLockIsEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
+            int rowsToRemove = [self isBiometryAvailable] ? 0 : 1;
+            int disabledPinLockRows = [self isBiometryAvailable] ? 2 : 1;
+            return [self isPinLockEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
             
         case SPOptionsViewSectionsAccount: {
@@ -378,7 +350,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 case SPOptionsSecurityRowRowPasscode: {
                     cell.textLabel.text = NSLocalizedString(@"Passcode", @"A 4-digit code to lock the app when it is closed");
                     
-                    if ([self pinLockIsEnabled])
+                    if ([self isPinLockEnabled])
                         cell.detailTextLabel.text = NSLocalizedString(@"On", nil);
                     else
                         cell.detailTextLabel.text = NSLocalizedString(@"Off", nil);
@@ -391,13 +363,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
                 }
                 case SPOptionsSecurityRowRowBiometry: {
-                    if ([self biometryIsAvailable]) {
-                        cell.textLabel.text = self.biometryTitle;
+                    if ([self isBiometryAvailable]) {
+                        cell.textLabel.text = [self biometryTitle];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        
-                        BOOL isBiometryOn = [[SPAppDelegate sharedDelegate] allowBiometryInsteadOfPin];
-                        
-                        self.biometrySwitch.on = isBiometryOn;
+
+                        self.biometrySwitch.on = SPPinLockManager.shared.shouldUseBiometry;
                         cell.accessoryView = self.biometrySwitch;
                         cell.tag = kTagTouchID;
                         
@@ -489,10 +459,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     return cell;
 }
 
-- (BOOL)pinLockIsEnabled {
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    
-    return pin != nil && pin.length > 0;
+- (BOOL)isPinLockEnabled {
+    return SPPinLockManager.shared.isEnabled;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -615,63 +583,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 }
 
 
-- (void)showPinLockViewController
-{
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    PinLockControllerMode mode = pin.length ? PinLockControllerModeRemovePin : PinLockControllerModeSetPin;
-    
-    DTPinLockController *controller = [[DTPinLockController alloc] initWithMode:mode];
-    controller.pinLockDelegate = self;
-    controller.pin = pin;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.modalPresentationStyle = UIModalPresentationFormSheet;
-    
-    [self.navigationController presentViewController:controller
-                                            animated:YES
-                                          completion:nil];
-    
-    if ([UIDevice isPad]) {
-        [controller fixLayout];
-    }
-}
-
-
-#pragma mark - PinLock Delegate
-
-- (void)pinLockController:(DTPinLockController *)pinLockController didFinishSelectingNewPin:(NSString *)newPin
-{
-    [SPTracker trackSettingsPinlockEnabled:YES];
-    
-    [[SPAppDelegate sharedDelegate] setPin:newPin];
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)pinLockControllerDidFinishRemovingPin
-{
-    [SPTracker trackSettingsPinlockEnabled:NO];
-    
-    [[SPAppDelegate sharedDelegate] removePin];
-    [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
-    
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-
-}
-
-- (void)pinLockControllerDidCancel
-{
-    // Make sure the UI is consistent
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    if (pin.length == 0) {
-        [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:NO];
-    }
-    
-    [self.tableView reloadData];
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 #pragma mark - Helpers
 
 - (void)showDebugInformation
@@ -747,10 +658,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)touchIdSwitchDidChangeValue:(UISwitch *)sender
 {
-    [[SPAppDelegate sharedDelegate] setAllowBiometryInsteadOfPin:sender.on];
-    
-    NSString *pin = [[SPAppDelegate sharedDelegate] getPin];
-    if (pin.length == 0) {
+    SPPinLockManager.shared.shouldUseBiometry = sender.on;
+
+    if (![self isPinLockEnabled]) {
         [self showPinLockViewController];
     }
 }
