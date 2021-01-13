@@ -63,8 +63,12 @@ class TagListViewCell: UITableViewCell {
         super.setEditing(editing, animated: animated)
 
         let changesBlock = {
-            self.trashButtonContainer.isHidden = !editing
-            self.trashButtonContainer.alpha = editing ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_0
+            let isHidden = !editing
+            guard self.trashButtonContainer.isHidden != isHidden else {
+                return
+            }
+            self.trashButtonContainer.isHidden = isHidden
+            self.trashButtonContainer.alpha = isHidden ? UIKitConstants.alpha0_0 : UIKitConstants.alpha1_0
         }
 
         if animated {
