@@ -26,12 +26,7 @@ class SPPrivacyViewController: SPTableViewController {
     /// Indicates if Analytics are Enabled
     ///
     private var isAnalyticsEnabled: Bool {
-        let simperium = SPAppDelegate.shared().simperium
-        guard let preferences = simperium.preferencesObject() else {
-            return true
-        }
-
-        return preferences.analytics_enabled?.boolValue ==  true
+        Options.shared.analytics
     }
 
 
@@ -96,13 +91,7 @@ extension SPPrivacyViewController {
     /// Updates the Analytics Setting
     ///
     @objc func switchDidChange(sender: UISwitch) {
-        let simperium = SPAppDelegate.shared().simperium
-        guard let preferences = simperium.preferencesObject() else {
-            return
-        }
-
-        preferences.analytics_enabled = NSNumber(booleanLiteral: sender.isOn)
-        simperium.save()
+        Options.shared.analytics = sender.isOn
     }
 
     /// Opens the `kAutomatticAnalyticLearnMoreURL` in Apple's Safari.

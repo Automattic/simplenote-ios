@@ -5,6 +5,7 @@ import Foundation
 //
 extension UserDefaults {
     enum Key: String {
+        case analytics
         case condensedNotes = "SPCondensedNoteListPref"
         case firstLaunch = "SPFirstLaunch"
         case lastKnownVersion
@@ -27,6 +28,16 @@ extension UserDefaults {
     /// Returns the Booolean associated with the specified Key.
     ///
     func bool(forKey key: Key) -> Bool {
+        return bool(forKey: key.rawValue)
+    }
+
+    /// Returns the Booolean associated with the specified Key. Falls back to the default value, when empty
+    ///
+    func bool(forKey key: Key, defaultValue: Bool) -> Bool {
+        guard containsObject(forKey: key) else {
+            return defaultValue
+        }
+
         return bool(forKey: key.rawValue)
     }
 

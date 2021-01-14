@@ -112,7 +112,9 @@
 
 - (void)setupCrashLogging
 {
+    BOOL analyticsDisabled = ![[Options shared] analytics];
     [CrashLogging startWithSimperium: self.simperium];
+    [CrashLogging cacheOptOutSetting:analyticsDisabled];
 }
 
 - (void)setupThemeNotifications

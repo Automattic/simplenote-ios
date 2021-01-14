@@ -5,7 +5,7 @@
 #import "SPTracker.h"
 #import "SPDebugViewController.h"
 #import "Simplenote-Swift.h"
-#import "Simperium+Simplenote.h"
+
 
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";

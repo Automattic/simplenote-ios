@@ -22,7 +22,7 @@ extension SPAppDelegate {
         simperium.authenticationShouldBeEmbeddedInNavigationController = true
         simperium.delegate = self
 
-        let buckets = [Note.self, Tag.self, Settings.self, Preferences.self].compactMap { entityType in
+        let buckets = [Note.self, Tag.self, Settings.self].compactMap { entityType in
             simperium.bucket(forName: entityType.classNameWithoutNamespaces)
         }
 
@@ -238,9 +238,7 @@ extension SPAppDelegate: SimperiumDelegate {
         ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
-        let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
         CrashLoggingShim.cacheUser(simperium.user)
-        CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
     }
 
     public func simperiumDidLogout(_ simperium: Simperium!) {

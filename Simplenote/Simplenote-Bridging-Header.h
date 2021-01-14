@@ -39,5 +39,4 @@
 #import "UIImage+Colorization.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "NSString+Condensing.h"
-#import "Simperium+Simplenote.h"
 #import "SPNavigationController.h"

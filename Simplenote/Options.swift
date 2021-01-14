@@ -33,6 +33,18 @@ class Options: NSObject {
 //
 extension Options {
 
+    /// Indicates if Analytics are Enabled
+    ///
+    @objc
+    var analytics: Bool {
+        get {
+            return defaults.bool(forKey: .analytics, defaultValue: true)
+        }
+        set {
+            defaults.set(newValue, forKey: .analytics)
+        }
+    }
+
     /// Indicates if the Notes List should be condensed (or not)
     ///
     @objc

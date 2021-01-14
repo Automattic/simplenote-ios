@@ -1,7 +1,7 @@
 #import "SPTracker.h"
 #import "SPAutomatticTracker.h"
 #import "SPAppDelegate.h"
-#import "Simperium+Simplenote.h"
+#import "Simplenote-Swift.h"
 
 
 @implementation SPTracker
@@ -383,10 +383,7 @@
 
 + (BOOL)isTrackingDisabled
 {
-    Preferences *preferences = [[[SPAppDelegate sharedDelegate] simperium] preferencesObject];
-    NSNumber *enabled = [preferences analytics_enabled];
-
-    return [enabled boolValue] == false;
+    return [[Options shared] analytics] == false;
 }
 
 @end
