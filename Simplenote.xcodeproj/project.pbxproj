@@ -735,6 +735,8 @@
 		B575736B232D454300443C2E /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Helpers.swift"; path = "Classes/UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5786C2025B08CAD00A6713A /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
+		B5786C2725B08D5C00A6713A /* MIGRATIONS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MIGRATIONS.md; sourceTree = "<group>"; };
 		B5796548250684EC00DFD6F7 /* EditorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditorFactory.swift; path = Classes/EditorFactory.swift; sourceTree = "<group>"; };
 		B57DE27725013C6600B4D435 /* Simperium+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Simperium+Simplenote.swift"; path = "Classes/Simperium+Simplenote.swift"; sourceTree = "<group>"; };
 		B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSimplenoteTests.swift; sourceTree = "<group>"; };
@@ -4062,13 +4064,14 @@
 		467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B5786C2025B08CAD00A6713A /* Simplenote 6.xcdatamodel */,
 				B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */,
 				B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */,
 				B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */,
 				467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */,
 				467D9C5E1788A4FB00785EF3 /* Simplenote.xcdatamodel */,
 			);
-			currentVersion = B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */;
+			currentVersion = B5786C2025B08CAD00A6713A /* Simplenote 6.xcdatamodel */;
 			name = Simplenote.xcdatamodeld;
 			path = ../Simplenote.xcdatamodeld;
 			sourceTree = "<group>";
