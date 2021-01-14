@@ -14,6 +14,10 @@ class SimplenoteConstants: NSObject {
     ///
     static let resetPasswordURL = "https://app.simplenote.com/reset/?redirect=simplenote://launch&email="
 
+    /// Settings URL
+    ///
+    static let settingsURL = "https://app.simplenote.com/settings"
+
     /// Simplenote: Scheme
     ///
     static let simplenoteScheme = "simplenote"
