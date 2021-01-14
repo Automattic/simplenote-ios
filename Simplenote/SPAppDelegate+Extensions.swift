@@ -1,6 +1,39 @@
 import Foundation
 
 
+// MARK: - Initialization
+//
+extension SPAppDelegate {
+
+    @objc
+    func setupSimperium() {
+        simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
+
+#if USE_VERBOSE_LOGGING
+        simperium.verboseLoggingEnabled = true
+        NSLog("[Simperium] Verbose logging Enabled")
+#else
+        simperium.verboseLoggingEnabled = false
+#endif
+
+        simperium.authenticationViewControllerClass    = SPOnboardingViewController.self
+        simperium.authenticator.providerString         = "simplenote.com"
+
+        simperium.authenticationShouldBeEmbeddedInNavigationController = true
+        simperium.delegate = self
+
+        let buckets = [Note.self, Tag.self, Settings.self, Preferences.self].compactMap { entityType in
+            simperium.bucket(forName: entityType.classNameWithoutNamespaces)
+        }
+
+        for bucket in buckets {
+            bucket.notifyWhileIndexing = true
+            bucket.delegate = self
+        }
+    }
+}
+
+
 // MARK: - Internal Methods
 //
 extension SPAppDelegate {

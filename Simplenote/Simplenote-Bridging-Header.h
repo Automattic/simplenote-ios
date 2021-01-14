@@ -12,6 +12,7 @@
 
 #import "Note.h"
 #import "Tag.h"
+#import "Settings.h"
 #import "PersonTag.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
