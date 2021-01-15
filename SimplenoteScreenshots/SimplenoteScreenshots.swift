@@ -129,29 +129,27 @@ class SimplenoteScreenshots: XCTestCase {
         openMenu(using: app)
         loadPasscodeScreen(using: app)
         // Set the passcode
-        // Writing the value here in clear because anyways one can see it being typed.
-        type("1234", onFirstKeyboardOf: app)
+        // Writing the value here in clear because one can see it being typed anyways.
+        typeOnPassCodeScreen(1234, using: app)
         // Confirm it
-        type("1234", onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(1234, using: app)
 
         // Kill the app and relaunch it so we can take a screenshot of the lock screen
         app.terminate()
         app.launch()
 
-        // Assuming that if a keyboard is on screen, then the passcode screen has loaded
-        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 10))
-
-        // The screenshot for the passcode should have only 3 characters inserted
-        type("123", onFirstKeyboardOf: app)
+        // The screenshot for the passcode should have only 3 characters inserted.
+        // (Typing in the passcode screen also ensures it's visible first)
+        typeOnPassCodeScreen(123, using: app)
 
         takeScreenshot("6-passcode")
 
-        type("4", onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(4, using: app)
 
         // Now, disable the passcode so we're not blocked by it on next launch.
         openMenu(using: app)
         loadPasscodeScreen(using: app)
-        type(ScreenshotsCredentials.testUserPasscode, onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(1234, using: app)
     }
 
     func logout(using app: XCUIApplication) {
@@ -191,8 +189,24 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(passcodeCell.waitForExistence(timeout: 3))
         passcodeCell.tap()
 
-        // Let's just assume that if a keyboard is on screen, then the passcode screen has loaded
-        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        // The passcode screen has custom button views mimicking the default iOS passcode one.
+        // Let's check a few numbers are on screen as a mean to verify it loaded
+        XCTAssertTrue(app.staticTexts["1"].waitForExistence(timeout: 3))
+        // No need to wait once the first wait succeeded. Really, these other assertions are almost
+        // superfluous.
+        XCTAssertTrue(app.staticTexts["9"].exists)
+        XCTAssertTrue(app.staticTexts["0"].exists)
+    }
+
+    func typeOnPassCodeScreen(_ input: Int, using app: XCUIApplication) {
+        // This converts an Int into an [Int] of its digits
+        let digits = "\(input.magnitude)".compactMap(\.wholeNumberValue)
+
+        digits.forEach { digit in
+            let input = app.staticTexts["\(digit)"].firstMatch
+            XCTAssertTrue(input.waitForExistence(timeout: 3))
+            input.tap()
+        }
     }
 
     func type(_ text: String, onFirstKeyboardOf app: XCUIApplication) {
