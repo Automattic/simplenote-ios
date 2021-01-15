@@ -6,7 +6,7 @@ import Foundation
 extension SPAppDelegate {
 
     /// Simperium Initialization
-    /// - Important: Invoking `accountBucket` will initialize such as a Dynamic Bucket (backed by JSONStorage)
+    /// - Important: Buckets that don't have a backing `SPManagedObject` will be dynamic. Invoking `bucketForName` will initialize sync'ing!
     ///
     @objc
     func setupSimperium() {
