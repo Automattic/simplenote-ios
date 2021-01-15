@@ -44,7 +44,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 2.5.1)
   - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
-  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, commit `77b8c3d`)
+  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, commit `118cb1b`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -63,12 +63,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Simperium:
-    :commit: 77b8c3d
+    :commit: 118cb1b
     :git: https://github.com/Simperium/simperium-ios.git
 
 CHECKOUT OPTIONS:
   Simperium:
-    :commit: 77b8c3d
+    :commit: 118cb1b
     :git: https://github.com/Simperium/simperium-ios.git
 
 SPEC CHECKSUMS:
@@ -84,6 +84,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: e7fdb1e27370359a7a5ca1b172cb7c807d03c8bb
+PODFILE CHECKSUM: 575bc17632ba30de81099dbce1a30b1518f8ee04
 
 COCOAPODS: 1.10.0
