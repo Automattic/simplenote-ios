@@ -5,6 +5,10 @@ import Foundation
 //
 extension Simperium {
 
+    var allBuckets: [SPBucket] {
+        [ accountBucket, notesBucket, preferencesBucket, settingsBucket, tagsBucket ]
+    }
+
     /// Bucket: Account
     /// - Note: Since it's **dynamic** (InMemory JSON Storage), we don't really have an Account class
     ///

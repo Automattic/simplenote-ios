@@ -25,15 +25,7 @@ extension SPAppDelegate {
         simperium.authenticationShouldBeEmbeddedInNavigationController = true
         simperium.delegate = self
 
-        let buckets = [
-            simperium.accountBucket,
-            simperium.notesBucket,
-            simperium.preferencesBucket,
-            simperium.settingsBucket,
-            simperium.tagsBucket,
-        ]
-
-        for bucket in buckets {
+        for bucket in simperium.allBuckets {
             bucket.notifyWhileIndexing = true
             bucket.delegate = self
         }
