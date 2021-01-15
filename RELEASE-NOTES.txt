@@ -1,6 +1,7 @@
 4.31
 -----
 -   Updated minimum row height when note list is in condensed mode #1045
+-   Updated tags editing experience #1042
 
 4.30
 -----
