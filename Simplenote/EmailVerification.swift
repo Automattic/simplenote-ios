@@ -21,14 +21,13 @@ extension EmailVerification {
     /// Initializes an EmailVerification entity from a dictionary
     ///
     init?(payload: [AnyHashable: Any]) {
-        guard let token = payload[CodingKeys.token.rawValue] as? String,
-              let rawStatus = payload[CodingKeys.status.rawValue] as? String,
+        guard let rawStatus = payload[CodingKeys.status.rawValue] as? String,
               let parsedStatus = EmailVerificationStatus(rawValue: rawStatus)
         else {
             return nil
         }
 
-        self.token = token
+        self.token = payload[CodingKeys.token.rawValue] as? String
         self.status = parsedStatus
     }
 }
