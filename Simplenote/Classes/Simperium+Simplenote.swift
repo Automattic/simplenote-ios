@@ -13,7 +13,7 @@ extension Simperium {
     /// - Note: Since it's **dynamic** (InMemory JSON Storage), we don't really have an Account class
     ///
     var accountBucket: SPBucket {
-        bucket(forName: SimplenoteConstants.accountBucketName)
+        bucket(forName: Simperium.accountBucketName)
     }
 
     /// Bucket: Notes
@@ -71,4 +71,11 @@ extension Simperium {
 
         return EmailVerification(payload: payload)
     }
+}
+
+
+// MARK: - Constants
+//
+extension Simperium {
+    static let accountBucketName = "Account"
 }

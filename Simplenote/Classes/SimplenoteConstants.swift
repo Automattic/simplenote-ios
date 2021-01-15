@@ -6,10 +6,6 @@ import Foundation
 @objcMembers
 class SimplenoteConstants: NSObject {
 
-    /// Simperium: Account Bucket Name
-    ///
-    static let accountBucketName = "Account"
-
     /// Password Validation Rules
     ///
     static let passwordRules = "minlength: 8; maxlength: 50;"
