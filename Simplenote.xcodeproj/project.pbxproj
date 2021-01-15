@@ -297,6 +297,7 @@
 		B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */; };
 		B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5796548250684EC00DFD6F7 /* EditorFactory.swift */; };
 		B579F386251A4EC5000AA93F /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59560DF251A46D500A06788 /* KeychainManager.swift */; };
+		B57CFA4925B11AA800ABA284 /* EmailVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57CFA4825B11AA800ABA284 /* EmailVerification.swift */; };
 		B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57DE27725013C6600B4D435 /* Simperium+Simplenote.swift */; };
 		B57DE27A2501806B00B4D435 /* StringSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */; };
 		B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */; };
@@ -736,6 +737,7 @@
 		B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5796548250684EC00DFD6F7 /* EditorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditorFactory.swift; path = Classes/EditorFactory.swift; sourceTree = "<group>"; };
+		B57CFA4825B11AA800ABA284 /* EmailVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerification.swift; sourceTree = "<group>"; };
 		B57DE27725013C6600B4D435 /* Simperium+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Simperium+Simplenote.swift"; path = "Classes/Simperium+Simplenote.swift"; sourceTree = "<group>"; };
 		B57DE2792501806B00B4D435 /* StringSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSimplenoteTests.swift; sourceTree = "<group>"; };
 		B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+ImageRepresentation.swift"; path = "Classes/UIView+ImageRepresentation.swift"; sourceTree = "<group>"; };
@@ -1029,6 +1031,7 @@
 		467D9C601788A53700785EF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B57CFA4825B11AA800ABA284 /* EmailVerification.swift */,
 				B594E61421508247001577EE /* Preferences.h */,
 				B594E61321508247001577EE /* Preferences.m */,
 				B5BE05511AB75C3B002417BF /* Settings.h */,
@@ -2460,6 +2463,7 @@
 				B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */,
 				A6A648A425AC3AC00074A094 /* AccountVerificationViewController.swift in Sources */,
 				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
+				B57CFA4925B11AA800ABA284 /* EmailVerification.swift in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
 				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
