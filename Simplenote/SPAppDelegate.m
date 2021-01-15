@@ -541,10 +541,6 @@
         [_noteListViewController setWaitingForIndex:NO];
         [self indexSpotlightItems];
     }
-
-    if ([bucket.name isEqualToString:SimplenoteConstants.accountBucketName]) {
-        [self debugEmailVerification];
-    }
 }
 
 

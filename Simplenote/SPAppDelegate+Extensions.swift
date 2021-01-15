@@ -5,17 +5,6 @@ import Foundation
 //
 extension SPAppDelegate {
 
-    @objc
-    func debugEmailVerification() {
-        guard let verification = simperium.emailVerificationEntity else {
-            return
-        }
-
-        NSLog("# Email Verification")
-        NSLog("### Status: \(verification.status)")
-        NSLog("### Token: \(verification.token)")
-    }
-
     /// Simperium Initialization
     /// - Important: Invoking `accountBucket` will initialize such as a Dynamic Bucket (backed by JSONStorage)
     ///
