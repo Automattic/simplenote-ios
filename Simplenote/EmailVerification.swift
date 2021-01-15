@@ -4,8 +4,13 @@ import Foundation
 // MARK: - EmailVerification
 //
 struct EmailVerification {
-    let token: String
-    let status: String
+    let token: String?
+    let status: EmailVerificationStatus
+}
+
+enum EmailVerificationStatus: String {
+    case sent
+    case verified
 }
 
 
@@ -17,13 +22,14 @@ extension EmailVerification {
     ///
     init?(payload: [AnyHashable: Any]) {
         guard let token = payload[CodingKeys.token.rawValue] as? String,
-              let status = payload[CodingKeys.status.rawValue] as? String
+              let rawStatus = payload[CodingKeys.status.rawValue] as? String,
+              let parsedStatus = EmailVerificationStatus(rawValue: rawStatus)
         else {
             return nil
         }
 
         self.token = token
-        self.status = status
+        self.status = parsedStatus
     }
 }
 
