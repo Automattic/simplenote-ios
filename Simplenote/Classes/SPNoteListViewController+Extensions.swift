@@ -571,6 +571,12 @@ extension SPNoteListViewController: UITableViewDelegate {
             self.show(editorViewController, sender: self)
         }
     }
+
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        var insets = SPNoteTableViewCell.separatorInsets
+        insets.left -= cell.layoutMargins.left
+        cell.separatorInset = insets
+    }
 }
 
 
