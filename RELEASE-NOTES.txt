@@ -1,6 +1,7 @@
 4.31
 -----
- 
+-   Updated tags editing experience #1042
+
 4.30
 -----
 -   New passcode interface #761

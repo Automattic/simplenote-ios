@@ -46,6 +46,16 @@ class Value1TableViewCell: UITableViewCell {
         }
     }
 
+    /// Image tint color
+    ///
+    var imageTintColor: UIColor? {
+        didSet {
+            if oldValue != imageTintColor {
+                reloadTextStyles()
+            }
+        }
+    }
+
 
     // MARK: - Initializers
 
@@ -86,7 +96,7 @@ private extension Value1TableViewCell {
         let detailTextColor: UIColor = selectable ? .simplenoteSecondaryTextColor : .simplenotePlaceholderTextColor
         textLabel?.textColor = textColor
         detailTextLabel?.textColor = detailTextColor
-        imageView?.tintColor = textColor
+        imageView?.tintColor = imageTintColor ?? textColor
         selectionStyle = selectable ? .default : .none
     }
 }
