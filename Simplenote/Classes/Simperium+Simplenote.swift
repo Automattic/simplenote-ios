@@ -52,3 +52,19 @@ extension Simperium {
         return notesBucket.object(forKey: simperiumKey) as? Note
     }
 }
+
+
+// MARK: - System Entities
+//
+extension Simperium {
+
+    /// Returns the Email Verification Entity, if it's been Sync'ed (and can be parsed)
+    ///
+    var emailVerificationEntity: EmailVerification? {
+        guard let payload = accountBucket.object(forKey: SPCredentials.simperiumEmailVerificationObjectKey) as? [AnyHashable: Any] else {
+            return nil
+        }
+
+        return EmailVerification(payload: payload)
+    }
+}
