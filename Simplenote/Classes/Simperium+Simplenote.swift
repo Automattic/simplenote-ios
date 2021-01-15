@@ -5,13 +5,34 @@ import Foundation
 //
 extension Simperium {
 
-    /// Notes Bucket
+    /// Bucket: Account
+    /// - Note: Since it's **dynamic** (InMemory JSON Storage), we don't really have an Account class
+    ///
+    var accountBucket: SPBucket {
+        bucket(forName: SimplenoteConstants.accountBucketName)
+    }
+
+    /// Bucket: Notes
     ///
     var notesBucket: SPBucket {
         bucket(forName: Note.classNameWithoutNamespaces)
     }
 
-    /// Tags Bucket
+    /// Bucket: Preferences
+    ///
+    @objc
+    var preferencesBucket: SPBucket {
+        bucket(forName: Preferences.classNameWithoutNamespaces)
+    }
+
+    /// Bucket: Settings
+    ///
+    @objc
+    var settingsBucket: SPBucket {
+        bucket(forName: Settings.classNameWithoutNamespaces)
+    }
+
+    /// Bucket: Tags
     ///
     @objc
     var tagsBucket: SPBucket {

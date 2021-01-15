@@ -5,6 +5,9 @@ import Foundation
 //
 extension SPAppDelegate {
 
+    /// Simperium Initialization
+    /// - Important: Invoking `accountBucket` will initialize such as a Dynamic Bucket (backed by JSONStorage)
+    ///
     @objc
     func setupSimperium() {
         simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
@@ -22,9 +25,13 @@ extension SPAppDelegate {
         simperium.authenticationShouldBeEmbeddedInNavigationController = true
         simperium.delegate = self
 
-        let buckets = [Note.self, Tag.self, Settings.self, Preferences.self].compactMap { entityType in
-            simperium.bucket(forName: entityType.classNameWithoutNamespaces)
-        }
+        let buckets = [
+            simperium.accountBucket,
+            simperium.notesBucket,
+            simperium.preferencesBucket,
+            simperium.settingsBucket,
+            simperium.tagsBucket,
+        ]
 
         for bucket in buckets {
             bucket.notifyWhileIndexing = true
