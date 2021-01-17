@@ -660,6 +660,7 @@ private extension SPNoteListViewController {
             UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
+                self.setEmptyTrashEnabled()
                 completion(true)
             }
         ]
