@@ -326,16 +326,16 @@ private extension SPAppDelegate {
             return
         }
         verificationController = AccountVerificationController(email: email)
-        verificationController?.onStateChange = { [weak self] (state) in
-            switch state {
-            case .unknown:
-                break
-            case .unverified:
+        verificationController?.onStateChange = { [weak self] (oldState, state) in
+            switch (oldState, state) {
+            case (.unknown, .unverified):
                 self?.showVerificationViewController(with: .review)
-            case .verificationInProgress:
+            case (.unknown, .verificationInProgress):
                 self?.showVerificationViewController(with: .verify)
-            case .verified:
+            case (.unverified, .verified), (.verificationInProgress, .verified):
                 self?.dismissVerificationViewController()
+            default:
+                break
             }
         }
     }

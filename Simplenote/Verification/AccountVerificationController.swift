@@ -22,7 +22,7 @@ class AccountVerificationController: NSObject {
                 return
             }
 
-            onStateChange?(state)
+            onStateChange?(oldValue, state)
         }
     }
 
@@ -32,7 +32,7 @@ class AccountVerificationController: NSObject {
 
     /// Callback is invoked when state changes
     ///
-    var onStateChange: ((State) -> Void)?
+    var onStateChange: ((_ oldState: State, _ state: State) -> Void)?
 
     /// Initialize with user's email
     ///
@@ -45,13 +45,17 @@ class AccountVerificationController: NSObject {
     ///
     @objc
     func update(with rawData: Any?) {
+        guard !email.isEmpty else {
+            return
+        }
+
         guard let rawData = rawData as? [AnyHashable: Any],
               let emailVerification = EmailVerification(payload: rawData) else {
             state = .unverified
             return
         }
 
-        if !email.isEmpty, emailVerification.tokenEmail == email {
+        if emailVerification.tokenEmail == email {
             state = .verified
         } else if emailVerification.status == .sent {
             state = .verificationInProgress
