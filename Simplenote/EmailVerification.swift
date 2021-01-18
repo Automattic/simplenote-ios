@@ -30,6 +30,13 @@ extension EmailVerification {
         self.token = payload[CodingKeys.token.rawValue] as? String
         self.status = parsedStatus
     }
+
+    var tokenEmail: String? {
+        guard let email = token?.split(separator: ":", maxSplits: 1).first else {
+            return nil
+        }
+        return String(email)
+    }
 }
 
 // MARK: - CodingKeys
