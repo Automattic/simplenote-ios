@@ -240,6 +240,8 @@ extension SPAppDelegate: SimperiumDelegate {
         let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
         CrashLoggingShim.cacheUser(simperium.user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
+
+        setupVerificationController()
     }
 
     public func simperiumDidLogout(_ simperium: Simperium!) {
@@ -251,6 +253,8 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Shortcuts!
         ShortcutsHandler.shared.clearHomeScreenQuickActions()
+
+        destroyVerificationController()
     }
 
     public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
@@ -311,5 +315,48 @@ extension SPAppDelegate: PinLockVerifyControllerDelegate {
         } completion: { (_) in
             self.dismissPasscodeLock()
         }
+    }
+}
+
+// MARK: - Account Verification
+//
+private extension SPAppDelegate {
+    func setupVerificationController() {
+        guard let email = simperium.user?.email, !email.isEmpty else {
+            return
+        }
+        verificationController = AccountVerificationController(email: email)
+        verificationController?.onStateChange = { [weak self] (state) in
+            switch state {
+            case .unknown:
+                break
+            case .unverified:
+                self?.showVerificationViewController(with: .review)
+            case .verificationInProgress:
+                self?.showVerificationViewController(with: .verify)
+            case .verified:
+                self?.dismissVerificationViewController()
+            }
+        }
+    }
+
+    func destroyVerificationController() {
+        verificationController = nil
+    }
+
+    func showVerificationViewController(with configuration: AccountVerificationViewController.Configuration) {
+        guard let controller = verificationController, verificationViewController == nil else {
+            return
+        }
+
+        let viewController = AccountVerificationViewController(configuration: configuration, controller: controller)
+        verificationViewController = viewController
+
+        viewController.presentFromRootViewController()
+    }
+
+    func dismissVerificationViewController() {
+        verificationViewController?.dismiss(animated: true, completion: nil)
+        verificationViewController = nil
     }
 }

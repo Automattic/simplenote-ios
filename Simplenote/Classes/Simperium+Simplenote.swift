@@ -12,12 +12,14 @@ extension Simperium {
     /// Bucket: Account
     /// - Note: Since it's **dynamic** (InMemory JSON Storage), we don't really have an Account class
     ///
+    @objc
     var accountBucket: SPBucket {
         bucket(forName: Simperium.accountBucketName)
     }
 
     /// Bucket: Notes
     ///
+    @objc
     var notesBucket: SPBucket {
         bucket(forName: Note.classNameWithoutNamespaces)
     }
@@ -54,22 +56,6 @@ extension Simperium {
     @objc(loadNoteWithSimperiumKey:)
     func loadNote(simperiumKey: String) -> Note? {
         return notesBucket.object(forKey: simperiumKey) as? Note
-    }
-}
-
-
-// MARK: - System Entities
-//
-extension Simperium {
-
-    /// Returns the Email Verification Entity, if it's been Sync'ed (and can be parsed)
-    ///
-    var emailVerificationEntity: EmailVerification? {
-        guard let payload = accountBucket.object(forKey: SPCredentials.simperiumEmailVerificationObjectKey) as? [AnyHashable: Any] else {
-            return nil
-        }
-
-        return EmailVerification(payload: payload)
     }
 }
 
