@@ -38,17 +38,29 @@ class NSStringSimplenoteTests: XCTestCase {
         let sampleA = NSString(stringLiteral: "\u{0073}\u{0323}\u{0307}")
         let sampleB = NSString(stringLiteral: "\u{0073}\u{0307}\u{0323}")
         let sampleC = NSString(stringLiteral: "\u{1E69}")
+        let sampleD = NSString(stringLiteral: "\u{0065}\u{0301}")
+        let sampleE = NSString(stringLiteral: "\u{00E9}")
 
         let hashA = sampleA.byEncodingAsTagHash
         let hashB = sampleB.byEncodingAsTagHash
         let hashC = sampleC.byEncodingAsTagHash
+        let hashD = sampleD.byEncodingAsTagHash
+        let hashE = sampleE.byEncodingAsTagHash
 
         XCTAssertNotEqual(sampleA, sampleB)
         XCTAssertNotEqual(sampleA, sampleC)
+        XCTAssertNotEqual(sampleA, sampleD)
+        XCTAssertNotEqual(sampleA, sampleE)
         XCTAssertNotEqual(sampleB, sampleC)
+        XCTAssertNotEqual(sampleB, sampleD)
+        XCTAssertNotEqual(sampleB, sampleE)
+        XCTAssertNotEqual(sampleC, sampleD)
+        XCTAssertNotEqual(sampleC, sampleE)
+        XCTAssertNotEqual(sampleD, sampleE)
 
         XCTAssertEqual(hashA, hashB)
         XCTAssertEqual(hashA, hashC)
         XCTAssertEqual(hashB, hashC)
+        XCTAssertEqual(hashD, hashE)
     }
 }
