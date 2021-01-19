@@ -60,6 +60,7 @@ class AccountVerificationViewController: UIViewController {
         didSet {
             refreshStyle()
             refreshContent()
+            trackScreen()
         }
     }
 
@@ -85,6 +86,11 @@ class AccountVerificationViewController: UIViewController {
 
         refreshStyle()
         refreshContent()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreen()
     }
 }
 
@@ -234,6 +240,21 @@ private extension AccountVerificationViewController {
         }
 
         return attributedMessage
+    }
+}
+
+// MARK: - Tracks
+//
+private extension AccountVerificationViewController {
+    func trackScreen() {
+        switch configuration {
+        case .review:
+            SPTracker.trackVerificationReviewScreenViewed()
+        case .verify:
+            SPTracker.trackVerificationVerifyScreenViewed()
+        default:
+            break
+        }
     }
 }
 

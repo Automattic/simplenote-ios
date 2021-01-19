@@ -3,6 +3,15 @@ import Foundation
 // MARK: - Verification
 //
 extension SPTracker {
+
+    static func trackVerificationReviewScreenViewed() {
+        trackAutomatticEvent(withName: "verification_review_screen_viewed", properties: nil)
+    }
+
+    static func trackVerificationVerifyScreenViewed() {
+        trackAutomatticEvent(withName: "verification_verify_screen_viewed", properties: nil)
+    }
+
     static func trackVerificationConfirmButtonTapped() {
         trackAutomatticEvent(withName: "verification_confirm_button_tapped", properties: nil)
     }
