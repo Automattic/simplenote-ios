@@ -117,7 +117,22 @@ extension SPNoteEditorViewController {
     
     @objc
     func inputModeDidChange(_ notification: Notification) {
-
+        guard let userInfo = notification.userInfo,
+              let inputMode = userInfo["UITextInputFromInputModeKey"] as? UITextInputMode,
+              let lang = inputMode.primaryLanguage else {
+            return
+        }
+        
+        let direction = NSLocale.characterDirection(forLanguage: lang)
+        
+        switch direction {
+        case .leftToRight:
+            print("ltr")
+        case .rightToLeft:
+            print("rtl")
+        default:
+            print("default")
+        }
     }
 }
 
