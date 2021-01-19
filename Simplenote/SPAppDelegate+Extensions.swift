@@ -5,6 +5,9 @@ import Foundation
 //
 extension SPAppDelegate {
 
+    /// Simperium Initialization
+    /// - Important: Buckets that don't have a backing `SPManagedObject` will be dynamic. Invoking `bucketForName` will initialize sync'ing!
+    ///
     @objc
     func setupSimperium() {
         simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
@@ -22,11 +25,7 @@ extension SPAppDelegate {
         simperium.authenticationShouldBeEmbeddedInNavigationController = true
         simperium.delegate = self
 
-        let buckets = [Note.self, Tag.self, Settings.self, Preferences.self].compactMap { entityType in
-            simperium.bucket(forName: entityType.classNameWithoutNamespaces)
-        }
-
-        for bucket in buckets {
+        for bucket in simperium.allBuckets {
             bucket.notifyWhileIndexing = true
             bucket.delegate = self
         }

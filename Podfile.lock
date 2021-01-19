@@ -9,7 +9,7 @@ PODS:
     - AppCenter/Core
   - AppCenter/Distribute (2.5.3):
     - AppCenter/Core
-  - Automattic-Tracks-iOS (0.6.0):
+  - Automattic-Tracks-iOS (0.7.0):
     - CocoaLumberjack (~> 3)
     - Reachability (~> 3)
     - Sentry (~> 4)
@@ -23,19 +23,19 @@ PODS:
   - Sentry (4.5.0):
     - Sentry/Core (= 4.5.0)
   - Sentry/Core (4.5.0)
-  - Simperium (1.1.0):
-    - Simperium/DiffMatchPach (= 1.1.0)
-    - Simperium/JRSwizzle (= 1.1.0)
-    - Simperium/SocketTrust (= 1.1.0)
-    - Simperium/SPReachability (= 1.1.0)
-    - Simperium/SSKeychain (= 1.1.0)
-  - Simperium/DiffMatchPach (1.1.0)
-  - Simperium/JRSwizzle (1.1.0)
-  - Simperium/SocketTrust (1.1.0)
-  - Simperium/SPReachability (1.1.0)
-  - Simperium/SSKeychain (1.1.0)
+  - Simperium (1.2.0):
+    - Simperium/DiffMatchPach (= 1.2.0)
+    - Simperium/JRSwizzle (= 1.2.0)
+    - Simperium/SocketTrust (= 1.2.0)
+    - Simperium/SPReachability (= 1.2.0)
+    - Simperium/SSKeychain (= 1.2.0)
+  - Simperium/DiffMatchPach (1.2.0)
+  - Simperium/JRSwizzle (1.2.0)
+  - Simperium/SocketTrust (1.2.0)
+  - Simperium/SPReachability (1.2.0)
+  - Simperium/SSKeychain (1.2.0)
   - Sodium-Fork (0.8.2)
-  - UIDeviceIdentifier (1.5.0)
+  - UIDeviceIdentifier (1.6.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.11)
 
@@ -44,7 +44,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 2.5.1)
   - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
-  - Simperium (~> 1.1)
+  - Simperium (= 1.2)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -64,17 +64,17 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
-  Automattic-Tracks-iOS: c525679cbf91ac8bcbcbed01bdaa564867173182
+  Automattic-Tracks-iOS: 208742591b1cd9abbc8914b37d6ebdb569f22e78
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
-  Simperium: dfda7c17ab5aeb21079c1e070c93720905df63ac
+  Simperium: c4caa6a11164acfcf6117c60aa3f486cdb947d29
   Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
-  UIDeviceIdentifier: a79ccdfc940373835a7d8e9fc7541e6bf61b6319
+  UIDeviceIdentifier: f4bf3b343581a1beacdbf5fb1a8825bd5f05a4a4
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 80e2ba348292edc2d96028af198f40fdf18a6c05
+PODFILE CHECKSUM: c819c0b7afdba316e2ca8629042147e8fda31362
 
 COCOAPODS: 1.10.0
