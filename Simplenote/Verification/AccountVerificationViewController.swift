@@ -124,6 +124,7 @@ private extension AccountVerificationViewController {
 extension AccountVerificationViewController {
     @IBAction private func handleTapOnDismissButton() {
         dismiss()
+        SPTracker.trackVerificationDismissed()
     }
 
     @IBAction private func handleTapOnPrimaryButton() {
@@ -134,6 +135,7 @@ extension AccountVerificationViewController {
         verifyEmail(onSuccess: { [weak self] in
             self?.transitionToVerificationScreen()
         })
+        SPTracker.trackVerificationConfirmButtonTapped()
     }
 
     @IBAction private func handleTapOnSecondaryButton() {
@@ -143,9 +145,11 @@ extension AccountVerificationViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 dismiss()
             }
+            SPTracker.trackVerificationChangeEmailButtonTapped()
 
         case .verify:
             verifyEmail()
+            SPTracker.trackVerificationResendEmailButtonTapped()
 
         default:
             return
