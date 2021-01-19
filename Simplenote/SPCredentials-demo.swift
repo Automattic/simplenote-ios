@@ -15,47 +15,33 @@ class SPCredentials: NSObject {
     ///
     static let googleAnalyticsID = "not-required"
 
-    /// iTunes: AppID
+    /// iTunes
     ///
     static let iTunesAppID = "not-required"
-
-    /// iTunes: Review URL
-    ///
     static let iTunesReviewURL = URL(string: "http://not.required")!
 
-    /// Sentry DSN
+    /// Sentry
     ///
     static let sentryDSN = "https://00000000000000000000000000000000@sentry.io/00000000"
 
-    /// Simperium: AppID
+    /// Simperium: Credentials
     ///
     static let simperiumAppID = "history-analyst-dad"
-
-    /// Simperium: API Key
-    ///
     static let simperiumApiKey = "6805ca9a091e45ada8a9d8988367f14e"
 
-    /// Simperium: Preferences Object Key
+    /// Simperium: Reserved Object Keys
     ///
+    static let simperiumEmailVerificationObjectKey = "not-required"
     static let simperiumPreferencesObjectKey = "not-required"
-
-    /// Simperium: Settings Object Key
-    ///
     static let simperiumSettingsObjectKey = "not-required"
 
-    /// Simplenote's Send Feedback URL
+    /// Simplenote's Send Feedback
     ///
     static let simplenoteFeedbackURL = URL(string: "https://not.required")!
-
-    /// Simplenote's Send Feedback Mail
-    ///
     static let simplenoteFeedbackMail = "not.required@not.required.com"
 
-    /// WordPressSSO: Client ID
+    /// WordPressSSO
     ///
     static let wpcomClientID = "not-required"
-
-    /// WordPressSSO: Redirect URL
-    ///
     static let wpcomRedirectURL = "not-required"
 }
