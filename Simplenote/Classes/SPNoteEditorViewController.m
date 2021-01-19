@@ -101,6 +101,8 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                  selector:@selector(didReceiveVoiceOverNotification:)
                                                      name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                    object:nil];
+        
+
 
         // Apply the current style right away!
         [self startListeningToThemeNotifications];
@@ -132,6 +134,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureInterlinksProcessor];
     [self refreshVoiceoverSupport];
+    [self configureKeyboardObserver];
 }
 
 - (void)viewWillAppear:(BOOL)animated

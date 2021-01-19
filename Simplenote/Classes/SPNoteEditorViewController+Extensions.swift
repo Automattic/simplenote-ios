@@ -108,6 +108,17 @@ extension SPNoteEditorViewController {
         interlinkProcessor.delegate = self
         interlinkProcessor.contextProvider = self
     }
+    
+    @objc
+    func configureKeyboardObserver() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(inputModeDidChange), name: UITextInputMode.currentInputModeDidChangeNotification, object: nil)
+    }
+    
+    @objc
+    func inputModeDidChange(_ notification: Notification) {
+
+    }
 }
 
 
