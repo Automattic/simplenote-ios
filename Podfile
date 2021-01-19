@@ -1,4 +1,7 @@
-source 'https://cdn.cocoapods.org/'
+# Switching to non CDN source, since Simperium 1.2 was published, but not yet available
+source 'https://github.com/CocoaPods/Specs.git'
+# source 'https://cdn.cocoapods.org/'
+
 
 unless ['BUNDLE_BIN_PATH', 'BUNDLE_GEMFILE'].any? { |k| ENV.key?(k) }
 	raise 'Please run CocoaPods via `bundle exec`'
@@ -29,8 +32,7 @@ abstract_target 'Automattic' do
 		#
 		pod 'Automattic-Tracks-iOS', '~> 0.6'
 #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
-		# pod 'Simperium', '~> 1.1', 
-		pod 'Simperium', :git => 'https://github.com/Simperium/simperium-ios.git', :commit => '118cb1b'
+		pod 'Simperium', '1.2'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
 
 		# Testing Target
