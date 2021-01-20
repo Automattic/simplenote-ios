@@ -29,6 +29,8 @@
 @property (nonatomic) CGFloat                                               keyboardHeight;
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
+@property (nonatomic, strong) UIBarButtonItem
+    *emptyTrashButton;
 
 - (void)update;
 - (void)setEmptyTrashEnabled;
