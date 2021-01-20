@@ -382,6 +382,16 @@ extension SPNoteListViewController {
         }
         open(note, ignoringSearchQuery: true, animated: true)
     }
+    
+    /// Sets the state of the trash button
+    ///
+    @objc
+    func refreshEmptyTrashState() {
+        let isTrashOnScreen = self.isDeletedFilterActive
+        let isNotEmpty = !self.isListEmpty
+        
+        self.emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
+    }
 }
 
 
