@@ -184,6 +184,7 @@ extension SPNoteListViewController {
 
             self.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
                 self.displayPlaceholdersIfNeeded()
+                self.refreshEmptyTrashState()
             }
         }
     }
@@ -670,7 +671,6 @@ private extension SPNoteListViewController {
             UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
-                self.setEmptyTrashEnabled()
                 completion(true)
             }
         ]
