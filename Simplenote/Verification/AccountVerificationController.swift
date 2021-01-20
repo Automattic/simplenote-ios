@@ -87,13 +87,12 @@ class AccountVerificationController: NSObject {
     }
 
     private var verificationURLRequest: URLRequest? {
-        guard let base64EncodedEmail = email.data(using: .utf8)?.base64EncodedString() else {
+        guard let base64EncodedEmail = email.data(using: .utf8)?.base64EncodedString(),
+              let verificationURL = URL(string: SimplenoteConstants.verificationURL) else {
             return nil
         }
 
-        let verificationURL = Constants.verificationURL.appendingPathComponent(base64EncodedEmail)
-
-        var request = URLRequest(url: verificationURL,
+        var request = URLRequest(url: verificationURL.appendingPathComponent(base64EncodedEmail),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: Constants.timeoutInterval)
         request.httpMethod = "GET"
@@ -106,5 +105,4 @@ class AccountVerificationController: NSObject {
 //
 private struct Constants {
     static let timeoutInterval: TimeInterval = 30
-    static let verificationURL = URL(string: "https://app.simplenote.com/account/verify-email/")!
 }
