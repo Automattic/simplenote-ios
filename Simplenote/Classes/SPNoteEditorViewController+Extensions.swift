@@ -108,6 +108,13 @@ extension SPNoteEditorViewController {
         interlinkProcessor.delegate = self
         interlinkProcessor.contextProvider = self
     }
+    
+    /// Sets up the Keyboard
+    ///
+    @objc
+    func configureTextViewKeyboard() {
+        noteEditorTextView?.keyboardDismissMode = UIScrollView.KeyboardDismissMode.interactive
+    }
 }
 
 

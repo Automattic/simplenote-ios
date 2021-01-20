@@ -48,8 +48,6 @@ CGFloat const TextViewHighlightCornerRadius = 3;
         caret position.
      */
         self.textContainer.heightTracksTextView = NO;
-
-        self.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     }
     return self;
 }
