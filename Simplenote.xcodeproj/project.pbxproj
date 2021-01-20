@@ -153,6 +153,9 @@
 		A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */; };
 		A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */; };
 		A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B1E25B840A400F12A85 /* MockAccountVerificationRemote.swift */; };
+		A6CC0B2D25B84FF200F12A85 /* AccountVerificationRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B2C25B84FF200F12A85 /* AccountVerificationRemoteTests.swift */; };
+		A6CC0B3625B8502800F12A85 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B3525B8502800F12A85 /* MockURLSession.swift */; };
+		A6CC0B4425B8505700F12A85 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B4325B8505700F12A85 /* MockURLSessionDataTask.swift */; };
 		A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */; };
 		A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */; };
 		A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */; };
@@ -590,6 +593,9 @@
 		A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemote.swift; sourceTree = "<group>"; };
 		A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationControllerTests.swift; sourceTree = "<group>"; };
 		A6CC0B1E25B840A400F12A85 /* MockAccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountVerificationRemote.swift; sourceTree = "<group>"; };
+		A6CC0B2C25B84FF200F12A85 /* AccountVerificationRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemoteTests.swift; sourceTree = "<group>"; };
+		A6CC0B3525B8502800F12A85 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		A6CC0B4325B8505700F12A85 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewSpinner.swift; path = Classes/ViewSpinner.swift; sourceTree = "<group>"; };
 		A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Simplenote.swift"; sourceTree = "<group>"; };
 		A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
@@ -1198,6 +1204,7 @@
 			children = (
 				A6CC0B1D25B8408900F12A85 /* Helpers */,
 				A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */,
+				A6CC0B2C25B84FF200F12A85 /* AccountVerificationRemoteTests.swift */,
 			);
 			path = Verification;
 			sourceTree = "<group>";
@@ -1208,6 +1215,15 @@
 				A6CC0B1E25B840A400F12A85 /* MockAccountVerificationRemote.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A6CC0B3425B8501B00F12A85 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A6CC0B3525B8502800F12A85 /* MockURLSession.swift */,
+				A6CC0B4325B8505700F12A85 /* MockURLSessionDataTask.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		A6E1E79C24BDDF30008A44BC /* Card */ = {
@@ -1591,6 +1607,7 @@
 		B5B85BA6235173D900AD5221 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A6CC0B3425B8501B00F12A85 /* Network */,
 				B5421F3B23CE7A14004DDC19 /* Constants.swift */,
 				B5421F3D23CE7A1C004DDC19 /* MockupStorage.swift */,
 				B5421F3E23CE7A1C004DDC19 /* MockupStorage+Sample.swift */,
@@ -2661,6 +2678,8 @@
 				A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */,
 				A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */,
 				A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */,
+				A6CC0B4425B8505700F12A85 /* MockURLSessionDataTask.swift in Sources */,
+				A6CC0B3625B8502800F12A85 /* MockURLSession.swift in Sources */,
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B58218A51FCC45330094ECA1 /* KeychainMigratorTests.swift in Sources */,
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
@@ -2672,6 +2691,7 @@
 				A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
+				A6CC0B2D25B84FF200F12A85 /* AccountVerificationRemoteTests.swift in Sources */,
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
 				A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */,
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
