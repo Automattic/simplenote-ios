@@ -500,20 +500,12 @@
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
 
-    [self setEmptyTrashEnabled];
+    [self refreshEmptyTrashState];
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];
     [self updateNavigationBar];
     [self hideRatingViewIfNeeded];
-}
-
-- (void)setEmptyTrashEnabled
-{
-    BOOL isTrashOnScreen = self.isDeletedFilterActive;
-    BOOL isNotEmpty = !self.isListEmpty;
-
-    self.emptyTrashButton.enabled = isTrashOnScreen && isNotEmpty;
 }
 
 
