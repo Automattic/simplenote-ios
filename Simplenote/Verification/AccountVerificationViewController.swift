@@ -258,6 +258,31 @@ private extension AccountVerificationViewController {
     }
 }
 
+// MARK: - Orientation
+//
+extension AccountVerificationViewController {
+    override public var shouldAutorotate: Bool {
+        if UIDevice.isPad {
+            return super.shouldAutorotate
+        }
+        return false
+    }
+
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.isPad {
+            return super.supportedInterfaceOrientations
+        }
+        return [.portrait, .portraitUpsideDown]
+    }
+
+    override public var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        if UIDevice.isPad {
+            return super.preferredInterfaceOrientationForPresentation
+        }
+        return .portrait
+    }
+}
+
 // MARK: - Constants
 //
 private struct Constants {
