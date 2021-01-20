@@ -16,16 +16,6 @@ class NSStringSimplenoteTests: XCTestCase {
 
         XCTAssertTrue(expectedSet.isSuperset(of: escapedSet))
     }
-    
-    /// Verifies that `byEncodingAsTagHash` effectively escapes special characters
-    ///
-    func testByEncodingAsTagHashEncodesAllOfSpecialCharacters() {
-        let string = String("TáßvĒёи兔子@#$%^&*+-=_`~/?., ><{}[]\\()\"|':;")
-        let hash = string.byEncodingAsTagHash
-        let expected = "t%C3%A1%C3%9Fv%C4%93%D1%91%D0%B8%E5%85%94%E5%AD%90%40%23%24%25%5E%26%2A%2B%2D%3D%5F%60%7E%2F%3F%2E%2C%20%3E%3C%7B%7D%5B%5D%5C%28%29%22%7C%27%3A%3B"
-        
-        XCTAssertEqual(hash, expected)
-    }
 
     /// Verifies that `byEncodingAsTagHash` allows us to properly compare Unicode Strings that would otherwise evaluate as not equal.
     /// Although our (three) sample strings yield the exact same character`ṩ`, regular `isEqualString` API returns `false`.
@@ -41,26 +31,23 @@ class NSStringSimplenoteTests: XCTestCase {
         let sampleD = NSString(stringLiteral: "\u{0065}\u{0301}")
         let sampleE = NSString(stringLiteral: "\u{00E9}")
 
-        let hashA = sampleA.byEncodingAsTagHash
-        let hashB = sampleB.byEncodingAsTagHash
-        let hashC = sampleC.byEncodingAsTagHash
-        let hashD = sampleD.byEncodingAsTagHash
-        let hashE = sampleE.byEncodingAsTagHash
+        testNonEqualStringsCreateSameHash([sampleA, sampleB, sampleC])
+        testNonEqualStringsCreateSameHash([sampleD, sampleE])
+    }
+}
 
-        XCTAssertNotEqual(sampleA, sampleB)
-        XCTAssertNotEqual(sampleA, sampleC)
-        XCTAssertNotEqual(sampleA, sampleD)
-        XCTAssertNotEqual(sampleA, sampleE)
-        XCTAssertNotEqual(sampleB, sampleC)
-        XCTAssertNotEqual(sampleB, sampleD)
-        XCTAssertNotEqual(sampleB, sampleE)
-        XCTAssertNotEqual(sampleC, sampleD)
-        XCTAssertNotEqual(sampleC, sampleE)
-        XCTAssertNotEqual(sampleD, sampleE)
-
-        XCTAssertEqual(hashA, hashB)
-        XCTAssertEqual(hashA, hashC)
-        XCTAssertEqual(hashB, hashC)
-        XCTAssertEqual(hashD, hashE)
+extension NSStringSimplenoteTests {
+    func testNonEqualStringsCreateSameHash(_ samples: [NSString]) {
+        var count = 0
+        
+        while count + 1 < samples.count {
+            var testCount = count + 1
+            while testCount < samples.count {
+                XCTAssertNotEqual(samples[count], samples[testCount])
+                XCTAssertEqual(samples[count].byEncodingAsTagHash, samples[testCount].byEncodingAsTagHash)
+                testCount += 1
+            }
+            count += 1
+        }
     }
 }
