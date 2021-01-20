@@ -113,7 +113,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureTextViewKeyboard() {
-        noteEditorTextView?.keyboardDismissMode = UIScrollView.KeyboardDismissMode.interactive
+        noteEditorTextView?.keyboardDismissMode = .interactive
     }
 }
 
