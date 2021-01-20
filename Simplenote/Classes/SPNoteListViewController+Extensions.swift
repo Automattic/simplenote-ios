@@ -391,7 +391,7 @@ extension SPNoteListViewController {
         let isTrashOnScreen = self.isDeletedFilterActive
         let isNotEmpty = !self.isListEmpty
         
-        self.emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
+        emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
 }
 
