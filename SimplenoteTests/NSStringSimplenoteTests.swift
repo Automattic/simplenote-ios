@@ -47,7 +47,7 @@ class NSStringSimplenoteTests: XCTestCase {
 }
 
 extension NSStringSimplenoteTests {
-    func testNonEqualStringsCreateSameHash(_ samples: [NSString]) {
+    private func testNonEqualStringsCreateSameHash(_ samples: [NSString]) {
         var count = 0
         
         while count + 1 < samples.count {
