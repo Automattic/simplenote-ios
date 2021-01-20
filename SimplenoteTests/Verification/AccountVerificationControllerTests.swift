@@ -15,7 +15,11 @@ class AccountVerificationControllerTests: XCTestCase {
     private lazy var inProgressVerification: [String: Any] = ["status": "sent"]
     private lazy var verifiedVerification: [String: Any] = ["token": "\(email):0:123",
                                                             "status": "verified"]
+}
 
+// MARK: - Verify
+//
+extension AccountVerificationControllerTests {
     func testVerifyCallsRemoteWithProvidedEmail() {
         // When
         let expectedResult = Bool.random()
@@ -29,7 +33,11 @@ class AccountVerificationControllerTests: XCTestCase {
         // Then
         XCTAssertEqual(verificationResult, expectedResult)
     }
+}
 
+// MARK: - State
+//
+extension AccountVerificationControllerTests {
     func testInitialStateIsUnknown() {
         XCTAssertEqual(controller.state, .unknown)
     }
@@ -58,5 +66,48 @@ class AccountVerificationControllerTests: XCTestCase {
     func testStateIsVerifiedIfTokenEmailMatchesAccountEmail() {
         controller.update(with: verifiedVerification)
         XCTAssertEqual(controller.state, .verified)
+    }
+}
+
+// MARK: - OnStateChange
+//
+extension AccountVerificationControllerTests {
+    func testOnStateChangeIsCalledWhenStateChanges() {
+        // Given
+        let expectedStateChangeHistory: [AccountVerificationController.State] = [
+            .unknown, .unverified,
+            .unverified, .verified
+        ]
+        var stateChangeHistory: [AccountVerificationController.State] = []
+        controller.onStateChange = { (oldState, state) in
+            stateChangeHistory.append(oldState)
+            stateChangeHistory.append(state)
+        }
+
+        // When
+        controller.update(with: unverifiedVerification)
+        controller.update(with: verifiedVerification)
+
+        // Then
+        XCTAssertEqual(stateChangeHistory, expectedStateChangeHistory)
+    }
+
+    func testOnlyUniqueStateChangesAreReportedViaCallback() {
+        // Given
+        let expectedStateChangeHistory: [AccountVerificationController.State] = [
+            .unknown, .unverified
+        ]
+        var stateChangeHistory: [AccountVerificationController.State] = []
+        controller.onStateChange = { (oldState, state) in
+            stateChangeHistory.append(oldState)
+            stateChangeHistory.append(state)
+        }
+
+        // When
+        controller.update(with: unverifiedVerification)
+        controller.update(with: unverifiedVerification)
+
+        // Then
+        XCTAssertEqual(stateChangeHistory, expectedStateChangeHistory)
     }
 }
