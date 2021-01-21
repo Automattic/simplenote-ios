@@ -6,46 +6,40 @@ import XCTest
 //
 class EmailVerificationTests: XCTestCase {
 
-    func testEmailVerificationCorrectlyParsesSentStatusWithEmail() {
-        let rawSent = [ "status": "SENT:1234" ]
-        let parsedSent = EmailVerification(payload: rawSent)
-        XCTAssertEqual(parsedSent?.status, .sent(email: "1234"))
+    func testEmailVerificationCorrectlyParsesToken() {
+        let payload = [
+            "token": #"{"username": "1234"}"#
+        ]
+        let parsed = EmailVerification(payload: payload)
+        XCTAssertEqual(parsed.token?.username, "1234")
     }
 
-    func testEmailVerificationCorrectlyParsesSentStatusWithoutEmail() {
-        let rawSent = [ "status": "SENT" ]
-        let parsedSent = EmailVerification(payload: rawSent)
-        XCTAssertEqual(parsedSent?.status, .sent(email: nil))
+    func testEmailVerificationCorrectlyParsesPending() {
+        let payload = [
+            "pending": [
+                "sent_to": "1234"
+            ]
+        ]
+        let parsed = EmailVerification(payload: payload)
+        XCTAssertEqual(parsed.pending?.email, "1234")
     }
 
-    func testEmailVerificationCorrectlyParsesVerifiedStatus() {
-        let rawVerified = [ "status": "verified" ]
-        let parsedVerified = EmailVerification(payload: rawVerified)
-        XCTAssertEqual(parsedVerified?.status, .verified)
+    func testEmailVerificationCorrectlyParsesEmptyPayload() {
+        let payload: [AnyHashable: Any] = [:]
+        let parsed = EmailVerification(payload: payload)
+        XCTAssertNil(parsed.token)
+        XCTAssertNil(parsed.pending)
     }
 
-    func testEmailVerificationCorrectlyParsesVerifiedStatusAndDisregardsAnyExtraColonSeparatedValues() {
-        let rawVerified = [ "status": "verified:1234" ]
-        let parsedVerified = EmailVerification(payload: rawVerified)
-        XCTAssertEqual(parsedVerified?.status, .verified)
-    }
-
-    func testEmailVerificationCorrectlyParsesTokenFields() {
-        let rawVerified = [ "status": "verified:1234", "token": "yosemite" ]
-        let parsedVerified = EmailVerification(payload: rawVerified)
-        XCTAssertEqual(parsedVerified?.token, "yosemite")
-    }
-}
-
-
-// MARK: - EmailVerificationStatus Helpers
-//
-private extension EmailVerificationStatus {
-
-    init?(payload: [String: String]) {
-        let data = try! JSONEncoder().encode(payload)
-        let string = String(data: data, encoding: .utf8)!
-
-        self.init(rawValue: string)
+    func testEmailVerificationIgnoresBrokenPayload() {
+        let payload : [AnyHashable: Any] = [
+            "token": #"{"user": "1234"}"#,
+            "pending": [
+                "sent": "1234"
+            ]
+        ]
+        let parsed = EmailVerification(payload: payload)
+        XCTAssertNil(parsed.token)
+        XCTAssertNil(parsed.pending)
     }
 }
