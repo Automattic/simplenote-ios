@@ -6,6 +6,7 @@
 -   New passcode interface #761
 -   Fixed a bug that caused a crash while searching #1055
 -   Fixed predictive text entry when working with tags #1041
+-   Added account verification screen #1086
 
 4.29
 -----

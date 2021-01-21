@@ -4,74 +4,66 @@ import Foundation
 // MARK: - EmailVerification
 //
 struct EmailVerification {
-    let token: String?
-    let status: EmailVerificationStatus
+    let token: EmailVerificationToken?
+    let pending: EmailVerificationPending?
 }
 
-enum EmailVerificationStatus: Equatable {
-    case sent(email: String?)
-    case verified
+// MARK: - EmailVerificationToken
+//
+struct EmailVerificationToken: Decodable {
+    let username: String
 }
 
+// MARK: - EmailVerificationPending
+//
+struct EmailVerificationPending {
+    let email: String
+}
 
-// MARK: - Public API(s)
+// MARK: - Init from payload
 //
 extension EmailVerification {
 
     /// Initializes an EmailVerification entity from a dictionary
     ///
+    init(payload: [AnyHashable: Any]) {
+        token = {
+            guard let dataString = payload[EmailVerificationKeys.token.rawValue] as? String,
+                  let data = dataString.data(using: .utf8) else {
+                return nil
+            }
+
+            return try? JSONDecoder().decode(EmailVerificationToken.self, from: data)
+        }()
+
+
+        pending = {
+            guard let payload = payload[EmailVerificationKeys.pending.rawValue] as? [AnyHashable: Any] else {
+                return nil
+            }
+
+            return EmailVerificationPending(payload: payload)
+        }()
+    }
+}
+
+extension EmailVerificationPending {
     init?(payload: [AnyHashable: Any]) {
-        guard let rawStatus = payload[EmailVerificationKeys.status.rawValue] as? String,
-            let parsedStatus = EmailVerificationStatus(rawValue: rawStatus)
-        else {
+        guard let email = payload[EmailVerificationPendingKeys.email.rawValue] as? String else {
             return nil
         }
 
-        self.token = payload[EmailVerificationKeys.token.rawValue] as? String
-        self.status = parsedStatus
-    }
-
-    var tokenEmail: String? {
-        guard let email = token?.split(separator: ":", maxSplits: 1).first else {
-            return nil
-        }
-        return String(email)
+        self.email = email
     }
 }
-
-
-// MARK: - EmailVerificationStatus Parsing
-//
-extension EmailVerificationStatus {
-
-    init?(rawValue: String) {
-        let tokens = rawValue.lowercased().split(separator: ":", maxSplits: 2).map {
-            String($0)
-        }
-
-        switch tokens.first {
-        case EmailStatusKeys.verified.rawValue:
-            self = .verified
-
-        case EmailStatusKeys.sent.rawValue:
-            let value = tokens.last != tokens.first ? tokens.last : nil
-            self = .sent(email: value)
-
-        default:
-            return nil
-        }
-    }
-}
-
 
 // MARK: - CodingKeys
 //
 private enum EmailVerificationKeys: String {
     case token
-    case status
+    case pending
 }
 
-private enum EmailStatusKeys: String {
-    case verified
-    case sent
+private enum EmailVerificationPendingKeys: String {
+    case email = "sent_to"
 }
