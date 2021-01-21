@@ -46,17 +46,14 @@ class NSStringSimplenoteTests: XCTestCase {
 }
 
 extension NSStringSimplenoteTests {
-    private func testNonEqualStringsCreateSameHash(_ samples: [NSString]) {
-        var count = 0
+    private func testNonEqualStringsCreateSameHash(_ samples: [String]) {
+        let sampleToTest = samples[0]
         
-        while count + 1 < samples.count {
-            var testCount = count + 1
-            while testCount < samples.count {
-                XCTAssertNotEqual(samples[count], samples[testCount])
-                XCTAssertEqual(samples[count].byEncodingAsTagHash, samples[testCount].byEncodingAsTagHash)
-                testCount += 1
-            }
-            count += 1
+        for i in 1..<samples.count {
+            XCTAssertNotEqual((sampleToTest as NSString), (samples[i] as NSString))
+            print("sample to test: \(sampleToTest) sample to comare: \(samples[i])")
+            XCTAssertEqual(sampleToTest.byEncodingAsTagHash, samples[i].byEncodingAsTagHash)
+            print("sample to test: \(sampleToTest.byEncodingAsTagHash) sample to comare: \(samples[i].byEncodingAsTagHash)")
         }
     }
 }
