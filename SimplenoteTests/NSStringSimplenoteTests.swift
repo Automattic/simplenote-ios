@@ -35,14 +35,13 @@ class NSStringSimplenoteTests: XCTestCase {
     /// - Note: When using the `Swift.String` class, the same comparison is actually correct.
     ///
     func testNonEqualStringsCreateSameHash() {
-        let sampleA = NSString(stringLiteral: "\u{0073}\u{0323}\u{0307}")
-        let sampleB = NSString(stringLiteral: "\u{0073}\u{0307}\u{0323}")
-        let sampleC = NSString(stringLiteral: "\u{1E69}")
-        let sampleD = NSString(stringLiteral: "\u{0065}\u{0301}")
-        let sampleE = NSString(stringLiteral: "\u{00E9}")
-
-        testNonEqualStringsCreateSameHash([sampleA, sampleB, sampleC])
-        testNonEqualStringsCreateSameHash([sampleD, sampleE])
+        let differentStringsOneHashSamples = [
+            ["\u{0073}\u{0323}\u{0307}", "\u{0073}\u{0307}\u{0323}", "\u{1E69}"], // ṩ
+            ["\u{0065}\u{0301}", "\u{00E9}"] // é
+        ]
+        
+        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[0])
+        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[1])
     }
 }
 
