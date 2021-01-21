@@ -54,15 +54,16 @@ class AccountVerificationController: NSObject {
             return
         }
 
-        guard let rawData = rawData as? [AnyHashable: Any],
-              let emailVerification = EmailVerification(payload: rawData) else {
+        guard let rawData = rawData as? [AnyHashable: Any] else {
             state = .unverified
             return
         }
 
-        if emailVerification.tokenEmail == email {
+        let emailVerification = EmailVerification(payload: rawData)
+
+        if emailVerification.token?.username == email {
             state = .verified
-        } else if emailVerification.status == .sent {
+        } else if emailVerification.pending != nil {
             state = .verificationInProgress
         } else {
             state = .unverified
