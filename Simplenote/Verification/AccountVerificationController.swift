@@ -63,7 +63,7 @@ class AccountVerificationController: NSObject {
 
         if emailVerification.token?.username == email {
             state = .verified
-        } else if emailVerification.pending != nil {
+        } else if emailVerification.sentTo != nil {
             state = .verificationInProgress
         } else {
             state = .unverified

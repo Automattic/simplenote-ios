@@ -16,30 +16,26 @@ class EmailVerificationTests: XCTestCase {
 
     func testEmailVerificationCorrectlyParsesPending() {
         let payload = [
-            "pending": [
-                "sent_to": "1234"
-            ]
+            "sent_to": "1234"
         ]
         let parsed = EmailVerification(payload: payload)
-        XCTAssertEqual(parsed.pending?.email, "1234")
+        XCTAssertEqual(parsed.sentTo, "1234")
     }
 
     func testEmailVerificationCorrectlyParsesEmptyPayload() {
         let payload: [AnyHashable: Any] = [:]
         let parsed = EmailVerification(payload: payload)
         XCTAssertNil(parsed.token)
-        XCTAssertNil(parsed.pending)
+        XCTAssertNil(parsed.sentTo)
     }
 
     func testEmailVerificationIgnoresBrokenPayload() {
         let payload : [AnyHashable: Any] = [
             "token": #"{"user": "1234"}"#,
-            "pending": [
-                "sent": "1234"
-            ]
+            "sent_to": 1234
         ]
         let parsed = EmailVerification(payload: payload)
         XCTAssertNil(parsed.token)
-        XCTAssertNil(parsed.pending)
+        XCTAssertNil(parsed.sentTo)
     }
 }
