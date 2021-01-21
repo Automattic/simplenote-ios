@@ -34,10 +34,15 @@ class AccountVerificationController: NSObject {
     ///
     var onStateChange: ((_ oldState: State, _ state: State) -> Void)?
 
+    /// Remote service
+    ///
+    private let remote: AccountVerificationRemote
+
     /// Initialize with user's email
     ///
-    init(email: String) {
+    init(email: String, remote: AccountVerificationRemote = .init()) {
         self.email = email
+        self.remote = remote
         super.init()
     }
 
@@ -67,42 +72,6 @@ class AccountVerificationController: NSObject {
     /// Send verification request
     ///
     func verify(completion: @escaping (_ success: Bool) -> Void) {
-        guard let request = verificationURLRequest else {
-            completion(false)
-            return
-        }
-
-        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                guard let response = response as? HTTPURLResponse, response.statusCode / 100 == 2 else {
-                    completion(false)
-                    return
-                }
-
-                completion(true)
-            }
-        }
-
-        dataTask.resume()
+        remote.verify(email: email, completion: completion)
     }
-
-    private var verificationURLRequest: URLRequest? {
-        guard let base64EncodedEmail = email.data(using: .utf8)?.base64EncodedString(),
-              let verificationURL = URL(string: SimplenoteConstants.verificationURL) else {
-            return nil
-        }
-
-        var request = URLRequest(url: verificationURL.appendingPathComponent(base64EncodedEmail),
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: Constants.timeoutInterval)
-        request.httpMethod = "GET"
-
-        return request
-    }
-}
-
-// MARK: - Constants
-//
-private struct Constants {
-    static let timeoutInterval: TimeInterval = 30
 }
