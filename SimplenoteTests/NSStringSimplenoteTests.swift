@@ -34,7 +34,7 @@ class NSStringSimplenoteTests: XCTestCase {
     ///
     /// - Note: When using the `Swift.String` class, the same comparison is actually correct.
     ///
-    func testByEncodingTagAsHashAllowsUsToProperlyCompareStringsThatEvaluateAsNotEqualOtherwise() {
+    func testNonEqualStringsCreateSameHash() {
         let sampleA = NSString(stringLiteral: "\u{0073}\u{0323}\u{0307}")
         let sampleB = NSString(stringLiteral: "\u{0073}\u{0307}\u{0323}")
         let sampleC = NSString(stringLiteral: "\u{1E69}")
