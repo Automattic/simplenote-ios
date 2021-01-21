@@ -319,6 +319,7 @@ private struct Localization {
     static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
     static let done = NSLocalizedString("Done", comment: "Dismisses the Note Information UI")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
+    static let document = NSLocalizedString("Document", comment: "Card title showing information about the note (metrics, references)")
 }
 
 private struct Consts {
