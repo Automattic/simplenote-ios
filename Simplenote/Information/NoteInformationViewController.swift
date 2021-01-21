@@ -243,9 +243,9 @@ extension NoteInformationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, value: value)
             return cell
-        case .reference(_, let title, let date):
+        case .reference(_, let title, let reference):
             let cell = tableView.dequeueReusableCell(ofType: SubtitleTableViewCell.self, for: indexPath)
-            configure(cell: cell, withTitle: title, date: date)
+            configure(cell: cell, withTitle: title, reference: reference)
             return cell
         case .header(let title):
             let cell = tableView.dequeueReusableCell(ofType: TableHeaderViewCell.self, for: indexPath)
@@ -261,9 +261,9 @@ extension NoteInformationViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = value
     }
 
-    private func configure(cell: SubtitleTableViewCell, withTitle title: String, date: String) {
+    private func configure(cell: SubtitleTableViewCell, withTitle title: String, reference: String) {
         cell.title = title
-        cell.value = date
+        cell.value = reference
     }
 
     private func configure(cell: TableHeaderViewCell, withTitle title: String) {
