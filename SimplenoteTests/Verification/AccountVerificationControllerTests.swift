@@ -10,11 +10,9 @@ class AccountVerificationControllerTests: XCTestCase {
     private lazy var controller = AccountVerificationController(email: email, remote: remote)
 
     private lazy var invalidVerification: [String: Any] = [:]
-    private lazy var unverifiedVerification: [String: Any] = ["token": "321:0:123",
-                                                              "status": "verified"]
-    private lazy var inProgressVerification: [String: Any] = ["status": "sent"]
-    private lazy var verifiedVerification: [String: Any] = ["token": "\(email):0:123",
-                                                            "status": "verified"]
+    private lazy var unverifiedVerification: [String: Any] = ["token": #"{"username": "123"}"#]
+    private lazy var inProgressVerification: [String: Any] = ["pending": ["sent_to": "123"]]
+    private lazy var verifiedVerification: [String: Any] = ["token": "{\"username\": \"\(email)\"}"]
 }
 
 // MARK: - Verify
