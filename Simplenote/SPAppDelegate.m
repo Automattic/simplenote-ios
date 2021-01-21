@@ -619,17 +619,7 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     if (!self.simperium.user.authenticated) {
-        if ([WPAuthHandler isWPAuthenticationUrl: url]) {
-            SPUser *newUser = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
-            if (newUser != nil) {
-                self.simperium.user = newUser;
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                [self.simperium authenticationDidSucceedForUsername:newUser.email token:newUser.authToken];
-
-                [SPTracker trackWPCCLoginSucceeded];
-            }
-        }
-
+        [self performDotcomAuthenticationWithURL:url];
         return YES;
     }
 
@@ -671,6 +661,24 @@
     }
     
     return YES;
+}
+
+- (void)performDotcomAuthenticationWithURL:(NSURL *)url
+{
+    if (![WPAuthHandler isWPAuthenticationUrl:url]) {
+        return;
+    }
+
+    SPUser *user = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
+    if (user == nil) {
+        return;
+    }
+
+    self.simperium.user = user;
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.simperium authenticationDidSucceedForUsername:user.email token:user.authToken];
+
+    [SPTracker trackWPCCLoginSucceeded];
 }
 
 #pragma mark ================================================================================
