@@ -95,11 +95,12 @@ private extension NoteInformationViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(handleTapOnDismissButton))
+        
     }
 
     func configureViews() {
         configureTableView()
-        screenTitleLabel.text = Localization.information
+        configureScreenTitleLabel()
 
         configureHeaderView()
 
@@ -153,6 +154,15 @@ private extension NoteInformationViewController {
 
     func configureAccessibility() {
         dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+    }
+    
+    func configureScreenTitleLabel() {
+        screenTitleLabel.text = Localization.information
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            screenTitleLabel.isHidden = true
+            dismissButton.isHidden = true
+        }
     }
 
     func refreshPreferredSize() {
