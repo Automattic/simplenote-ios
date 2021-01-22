@@ -38,9 +38,8 @@
 #pragma mark Private Properties
 #pragma mark ================================================================================
 
-@interface SPAppDelegate () <SPBucketDelegate>
+@interface SPAppDelegate ()
 
-@property (strong, nonatomic) Simperium                     *simperium;
 @property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
@@ -64,34 +63,6 @@
 #pragma mark ================================================================================
 #pragma mark Frameworks Setup
 #pragma mark ================================================================================
-
-- (void)setupSimperium
-{
-	self.simperium = [[Simperium alloc] initWithModel:self.managedObjectModel context:self.managedObjectContext coordinator:self.persistentStoreCoordinator];
-		  
-#if USE_VERBOSE_LOGGING
-    [_simperium setVerboseLoggingEnabled:YES];
-    NSLog(@"verbose logging enabled");
-#else
-    [_simperium setVerboseLoggingEnabled:NO];
-#endif
-    
-    _simperium.authenticationViewControllerClass    = [SPOnboardingViewController class];
-    _simperium.authenticator.providerString         = @"simplenote.com";
-	
-
-    [_simperium setAuthenticationShouldBeEmbeddedInNavigationController:YES];
-    [_simperium setAllBucketDelegates:self];
-    [_simperium setDelegate:self];
-    
-    NSArray *buckets = @[NSStringFromClass([Note class]),
-                         NSStringFromClass([Tag class]),
-                         NSStringFromClass([Settings class])];
-    
-    for (NSString *bucketName in buckets) {
-        [_simperium bucketForName:bucketName].notifyWhileIndexing = YES;
-    }
-}
 
 - (void)authenticateSimperium
 {
@@ -491,7 +462,7 @@
 
 - (void)bucket:(SPBucket *)bucket didChangeObjectForKey:(NSString *)key forChangeType:(SPBucketChangeType)change memberNames:(NSArray *)memberNames
 {
-    if ([bucket.name isEqualToString:NSStringFromClass([Note class])]) {
+    if ([bucket isEqual:[_simperium notesBucket]]) {
         // Note change
         switch (change) {
             case SPBucketChangeTypeUpdate:
@@ -520,7 +491,7 @@
             default:
                 break;
         }
-    } else if ([bucket.name isEqualToString:NSStringFromClass([Tag class])]) {
+    } else if ([bucket isEqual:[_simperium tagsBucket]]) {
         // Tag deleted
         switch (change) {
             case SPBucketChangeTypeDelete:
@@ -534,14 +505,16 @@
             default:
                 break;
         }
-    } else if ([bucket.name isEqualToString:NSStringFromClass([Settings class])]) {
+    } else if ([bucket isEqual:[_simperium settingsBucket]]) {
         [[SPRatingsHelper sharedInstance] reloadSettings];
+    } else if ([bucket isEqual:[_simperium accountBucket]] && [key isEqualToString:SPCredentials.simperiumEmailVerificationObjectKey]) {
+        [_verificationController updateWith:[bucket objectForKey:key]];
     }
 }
 
 - (void)bucket:(SPBucket *)bucket willChangeObjectsForKeys:(NSSet *)keys
 {
-    if ([bucket.name isEqualToString:@"Note"]) {
+    if ([bucket isEqual:[_simperium notesBucket]]) {
         for (NSString *key in keys) {
             if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
                 [self.noteEditorViewController willReceiveNewContent];
@@ -552,23 +525,25 @@
 
 - (void)bucket:(SPBucket *)bucket didReceiveObjectForKey:(NSString *)key version:(NSString *)version data:(NSDictionary *)data
 {
-    if ([bucket.name isEqualToString:@"Note"]) {
+    if ([bucket isEqual:[_simperium notesBucket]]) {
         [self.versionsController didReceiveObjectForSimperiumKey:key version:[version integerValue] data:data];
     }
 }
 
 - (void)bucketWillStartIndexing:(SPBucket *)bucket
 {
-    if ([bucket.name isEqualToString:@"Note"]) {
+    if ([bucket isEqual:[_simperium notesBucket]]) {
         [_noteListViewController setWaitingForIndex:YES];
     }
 }
 
 - (void)bucketDidFinishIndexing:(SPBucket *)bucket
 {
-    if ([bucket.name isEqualToString:@"Note"]) {
+    if ([bucket isEqual:[_simperium notesBucket]]) {
         [_noteListViewController setWaitingForIndex:NO];
         [self indexSpotlightItems];
+    } else if ([bucket isEqual:[_simperium accountBucket]]) {
+        [_verificationController updateWith:[bucket objectForKey:SPCredentials.simperiumEmailVerificationObjectKey]];
     }
 }
 

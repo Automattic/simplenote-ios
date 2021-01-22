@@ -95,4 +95,9 @@
 + (void)trackWPCCLoginSucceeded;
 + (void)trackWPCCLoginFailed;
 
+#pragma mark -
+
++ (void)trackAutomatticEventWithName:(NSString *)name
+                          properties:(NSDictionary *)properties;
+
 @end
