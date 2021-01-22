@@ -4,44 +4,39 @@ import Foundation
 // MARK: - EmailVerification
 //
 struct EmailVerification {
-    let token: String?
-    let status: EmailVerificationStatus
+    let token: EmailVerificationToken?
+    let sentTo: String?
 }
 
-enum EmailVerificationStatus: String {
-    case sent
-    case verified
+// MARK: - EmailVerificationToken
+//
+struct EmailVerificationToken: Decodable {
+    let username: String
 }
 
-
-// MARK: - Public API(s)
+// MARK: - Init from payload
 //
 extension EmailVerification {
 
     /// Initializes an EmailVerification entity from a dictionary
     ///
-    init?(payload: [AnyHashable: Any]) {
-        guard let rawStatus = payload[CodingKeys.status.rawValue] as? String,
-              let parsedStatus = EmailVerificationStatus(rawValue: rawStatus)
-        else {
-            return nil
-        }
+    init(payload: [AnyHashable: Any]) {
+        token = {
+            guard let dataString = payload[EmailVerificationKeys.token.rawValue] as? String,
+                  let data = dataString.data(using: .utf8) else {
+                return nil
+            }
 
-        self.token = payload[CodingKeys.token.rawValue] as? String
-        self.status = parsedStatus
-    }
+            return try? JSONDecoder().decode(EmailVerificationToken.self, from: data)
+        }()
 
-    var tokenEmail: String? {
-        guard let email = token?.split(separator: ":", maxSplits: 1).first else {
-            return nil
-        }
-        return String(email)
+        sentTo = payload[EmailVerificationKeys.sentTo.rawValue] as? String
     }
 }
 
 // MARK: - CodingKeys
 //
-private enum CodingKeys: String {
+private enum EmailVerificationKeys: String {
     case token
-    case status
+    case sentTo = "sent_to"
 }

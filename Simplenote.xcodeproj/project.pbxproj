@@ -297,6 +297,7 @@
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
 		B570D2D92360F16F006E1C85 /* UIBlurEffect+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570D2D82360F16F006E1C85 /* UIBlurEffect+Simplenote.swift */; };
+		B57401A025B7D9960058960E /* EmailVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574019F25B7D9960058960E /* EmailVerificationTests.swift */; };
 		B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */; };
 		B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5757369232C567000443C2E /* UIImage+Dynamic.swift */; };
 		B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575736B232D454300443C2E /* UIColor+Helpers.swift */; };
@@ -745,6 +746,7 @@
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
 		B570D2D82360F16F006E1C85 /* UIBlurEffect+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIBlurEffect+Simplenote.swift"; path = "Classes/UIBlurEffect+Simplenote.swift"; sourceTree = "<group>"; };
+		B574019F25B7D9960058960E /* EmailVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationTests.swift; sourceTree = "<group>"; };
 		B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIBezierPath+Simplenote.swift"; path = "Classes/UIBezierPath+Simplenote.swift"; sourceTree = "<group>"; };
 		B5757369232C567000443C2E /* UIImage+Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Dynamic.swift"; path = "Classes/UIImage+Dynamic.swift"; sourceTree = "<group>"; };
 		B575736B232D454300443C2E /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Helpers.swift"; path = "Classes/UIColor+Helpers.swift"; sourceTree = "<group>"; };
@@ -1551,6 +1553,14 @@
 			path = Extractors;
 			sourceTree = "<group>";
 		};
+		B57401A825B7D9B30058960E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B574019F25B7D9960058960E /* EmailVerificationTests.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1560,6 +1570,7 @@
 				B5B85BA6235173D900AD5221 /* Helpers */,
 				B52F35D422F3573300724793 /* Extensions */,
 				B511AEE7255A0A3E005B2159 /* Interlinks */,
+				B57401A825B7D9B30058960E /* Model */,
 				B5B9AB4122EA6FE1001CB0AD /* Themes */,
 				B55AC57822D27B7F00D8CEB2 /* Settings */,
 				B55AC57B22D27BA300D8CEB2 /* Tools */,
@@ -2695,6 +2706,7 @@
 				B5421F4023CE7A1C004DDC19 /* MockupStorage+Sample.swift in Sources */,
 				A6F4883225A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift in Sources */,
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
+				B57401A025B7D9960058960E /* EmailVerificationTests.swift in Sources */,
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
 				A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */,
