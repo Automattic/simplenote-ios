@@ -593,6 +593,11 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+    if (!self.simperium.user.authenticated) {
+        [self performDotcomAuthenticationWithURL:url];
+        return YES;
+    }
+
     // URL: Open a Note!
     if ([self handleOpenNoteWithUrl:url]) {
         return YES;
@@ -628,25 +633,27 @@
         [_simperium save];
         
         [self presentNote:newNote];
-    } else if ([WPAuthHandler isWPAuthenticationUrl: url]) {
-        if (self.simperium.user.authenticated) {
-            // We're already signed in
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSignInErrorNotificationName
-                                                                object:nil];
-            return NO;
-        }
-        
-        SPUser *newUser = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
-        if (newUser != nil) {
-            self.simperium.user = newUser;
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            [self.simperium authenticationDidSucceedForUsername:newUser.email token:newUser.authToken];
-            
-            [SPTracker trackWPCCLoginSucceeded];
-        }
     }
     
     return YES;
+}
+
+- (void)performDotcomAuthenticationWithURL:(NSURL *)url
+{
+    if (![WPAuthHandler isWPAuthenticationUrl:url]) {
+        return;
+    }
+
+    SPUser *user = [WPAuthHandler authorizeSimplenoteUserFromUrl:url forAppId:[SPCredentials simperiumAppID]];
+    if (user == nil) {
+        return;
+    }
+
+    self.simperium.user = user;
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.simperium authenticationDidSucceedForUsername:user.email token:user.authToken];
+
+    [SPTracker trackWPCCLoginSucceeded];
 }
 
 #pragma mark ================================================================================

@@ -132,6 +132,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureInterlinksProcessor];
     [self refreshVoiceoverSupport];
+    [self configureTextViewKeyboard];
 }
 
 - (void)viewWillAppear:(BOOL)animated

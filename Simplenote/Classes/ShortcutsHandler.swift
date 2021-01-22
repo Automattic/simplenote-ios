@@ -11,6 +11,12 @@ class ShortcutsHandler: NSObject {
     @objc
     static var shared = ShortcutsHandler()
 
+    /// Is User authenticated?
+    ///
+    private var isAuthenticated: Bool {
+        return SPAppDelegate.shared().simperium.user?.authenticated() == true
+    }
+
     /// Supported Activities
     ///
     private let activities = [
@@ -26,7 +32,6 @@ class ShortcutsHandler: NSObject {
     ///     2. Not keeping the Activities around... also causes `becomeCurrent` to fail. That's why `activities` is
     ///        an ivar!
     ///
-    @objc
     func registerSimplenoteActivities() {
         for (index, activity) in activities.enumerated() {
             let delay = DispatchTime.now() + DispatchTimeInterval.seconds(index)
@@ -51,6 +56,10 @@ class ShortcutsHandler: NSObject {
     func handleUserActivity(_ userActivity: NSUserActivity) -> Bool {
         guard let type = ActivityType(rawValue: userActivity.activityType) else {
             return false
+        }
+
+        guard isAuthenticated else {
+            return type == .launch
         }
 
         switch type {
@@ -103,7 +112,7 @@ extension ShortcutsHandler {
     ///
     @objc
     func handleApplicationShortcut(_ shortcut: UIApplicationShortcutItem) {
-        guard let type = ApplicationShortcutItemType(rawValue: shortcut.type) else {
+        guard isAuthenticated, let type = ApplicationShortcutItemType(rawValue: shortcut.type) else {
             return
         }
 

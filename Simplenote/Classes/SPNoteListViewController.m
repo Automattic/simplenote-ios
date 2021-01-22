@@ -30,7 +30,6 @@
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
 @property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
@@ -135,7 +134,6 @@
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
-    self.tableView.separatorInset = SPNoteTableViewCell.separatorInsets;
     [self.tableView reloadData];
 }
 
@@ -501,9 +499,8 @@
     [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
-    BOOL isNotEmpty = !self.isListEmpty;
 
-    self.emptyTrashButton.enabled = isTrashOnScreen && isNotEmpty;
+    [self refreshEmptyTrashState];
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];

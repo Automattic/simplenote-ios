@@ -58,7 +58,6 @@
 		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
-		46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
 		46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */; };
@@ -149,6 +148,7 @@
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
+		A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2721725AF0C1E00593731 /* TagListViewCell.swift */; };
 		A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */; };
 		A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */; };
 		A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */; };
@@ -255,7 +255,7 @@
 		B543C7E123CF76D900003A80 /* NotesListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E023CF76D900003A80 /* NotesListState.swift */; };
 		B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E223CF76EA00003A80 /* NotesListFilter.swift */; };
 		B543C7E523CF775C00003A80 /* NSSortDescriptor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */; };
-		B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* SPTagListViewCell.xib */; };
+		B546BE97234E64F200A126DA /* TagListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE96234E64F200A126DA /* TagListViewCell.xib */; };
 		B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */; };
 		B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */; };
 		B5476BB223D88F49000E7723 /* SPTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BB123D88F49000E7723 /* SPTagTableViewCell.swift */; };
@@ -590,6 +590,7 @@
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
+		A6C2721725AF0C1E00593731 /* TagListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewCell.swift; sourceTree = "<group>"; };
 		A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemote.swift; sourceTree = "<group>"; };
 		A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationControllerTests.swift; sourceTree = "<group>"; };
@@ -692,7 +693,7 @@
 		B543C7E023CF76D900003A80 /* NotesListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListState.swift; path = Classes/NotesListState.swift; sourceTree = "<group>"; };
 		B543C7E223CF76EA00003A80 /* NotesListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListFilter.swift; path = Classes/NotesListFilter.swift; sourceTree = "<group>"; };
 		B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSSortDescriptor+Simplenote.swift"; path = "Classes/NSSortDescriptor+Simplenote.swift"; sourceTree = "<group>"; };
-		B546BE96234E64F200A126DA /* SPTagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagListViewCell.xib; path = Classes/SPTagListViewCell.xib; sourceTree = "<group>"; };
+		B546BE96234E64F200A126DA /* TagListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TagListViewCell.xib; path = Classes/TagListViewCell.xib; sourceTree = "<group>"; };
 		B546BE9D234F6CB700A126DA /* SPTagHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagHeaderView.swift; path = Classes/SPTagHeaderView.swift; sourceTree = "<group>"; };
 		B546BE9F234F6DA000A126DA /* SPTagHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPTagHeaderView.xib; path = Classes/SPTagHeaderView.xib; sourceTree = "<group>"; };
 		B5476BB123D88F49000E7723 /* SPTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPTagTableViewCell.swift; path = Classes/SPTagTableViewCell.swift; sourceTree = "<group>"; };
@@ -864,8 +865,6 @@
 		E225E23E180DB1DF005A71A0 /* sv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E225E23F180DB4DD005A71A0 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E225E240180DB61A005A71A0 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagListViewCell.h; path = Classes/SPTagListViewCell.h; sourceTree = "<group>"; };
-		E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagListViewCell.m; path = Classes/SPTagListViewCell.m; sourceTree = "<group>"; };
 		E22A17CE17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+CoreDataExtensions.h"; path = "Classes/NSManagedObjectContext+CoreDataExtensions.h"; sourceTree = "<group>"; };
 		E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+CoreDataExtensions.m"; path = "Classes/NSManagedObjectContext+CoreDataExtensions.m"; sourceTree = "<group>"; };
 		E22A17D117A2E2A000383575 /* SPObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPObjectManager.h; path = Simplenote/Classes/SPObjectManager.h; sourceTree = SOURCE_ROOT; };
@@ -1402,9 +1401,8 @@
 		B546BE9A234E758E00A126DA /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				E22A17C817A2D5AD00383575 /* SPTagListViewCell.h */,
-				E22A17C917A2D5AD00383575 /* SPTagListViewCell.m */,
-				B546BE96234E64F200A126DA /* SPTagListViewCell.xib */,
+				B546BE96234E64F200A126DA /* TagListViewCell.xib */,
+				A6C2721725AF0C1E00593731 /* TagListViewCell.swift */,
 				B5476BB123D88F49000E7723 /* SPTagTableViewCell.swift */,
 				B5476BB323D89035000E7723 /* SPTagTableViewCell.xib */,
 				B513F2B32319A8D50021CFA4 /* SPNoteTableViewCell.swift */,
@@ -2237,7 +2235,7 @@
 				B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */,
 				E280453C180DAE0200670073 /* Localizable.strings in Resources */,
 				B5AB169A22FA128000B4EBA5 /* SPSheetController.xib in Resources */,
-				B546BE97234E64F200A126DA /* SPTagListViewCell.xib in Resources */,
+				B546BE97234E64F200A126DA /* TagListViewCell.xib in Resources */,
 				B56C8CA2234CEAF100FE55F4 /* TagListViewController.xib in Resources */,
 				B50789FF1C1F5592009F097A /* markdown-default.css in Resources */,
 				B5476BB423D89035000E7723 /* SPTagTableViewCell.xib in Resources */,
@@ -2439,7 +2437,6 @@
 				B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */,
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
-				46A3C96217DFA81A002865AE /* SPTagListViewCell.m in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
@@ -2470,6 +2467,7 @@
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */,
+				A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */,
 				B5476BB223D88F49000E7723 /* SPTagTableViewCell.swift in Sources */,
 				B52AC186233587F8007B2E75 /* UITraitCollection+Simplenote.swift in Sources */,
 				A6A648BB25AC85D40074A094 /* AccountVerificationController.swift in Sources */,
