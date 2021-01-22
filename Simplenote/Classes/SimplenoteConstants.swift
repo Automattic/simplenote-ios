@@ -16,7 +16,7 @@ class SimplenoteConstants: NSObject {
 
     /// Settings URL
     ///
-    static let settingsURL = "https://app.simplenote.com/login?redirect=/settings"
+    static let settingsURL = "https://app.simplenote.com/settings"
 
     /// Verification URL
     ///
