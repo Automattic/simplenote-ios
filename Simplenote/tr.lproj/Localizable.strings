@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-21 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "İptal";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Karakter";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "4 basamaklı bir parola seçin";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "İşbirliği Yap";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Sıkıştırılmış Not Listesi";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Parolanızı tekrar girin";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Katılımda Bulunun";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Hata Ayıklama Devre Dışı";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Sil";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notları Sil";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Sıraya Alındı";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Parola girin";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Parola girin";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Parolanızı girin";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "Başarısız Denemeler";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Sürüm Alınıyor";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Bizi Değerlendirin";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Yeniden bir parola girin";
-
 /* Reachs Internet */
 "Reachability" = "Erişilebilirlik";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Geri Bildirim Gönder";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Parolayı Ayarla";
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Parolayı Kapat";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ öğesinin kilidini aç";
 
 /* Unpins a note */
 "Unpin" = "Sabitlemeyi kaldır";
