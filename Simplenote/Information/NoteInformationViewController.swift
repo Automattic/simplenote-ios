@@ -90,7 +90,7 @@ private extension NoteInformationViewController {
 //
 private extension NoteInformationViewController {
     func configureNavigation() {
-        title = Localization.information
+        title = Localization.document
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Localization.done,
                                                             style: .done,
                                                             target: self,
@@ -157,7 +157,7 @@ private extension NoteInformationViewController {
     }
     
     func configureScreenTitleLabel() {
-        screenTitleLabel.text = Localization.information
+        screenTitleLabel.text = Localization.document
         
         if UIDevice.current.userInterfaceIdiom == .phone {
             screenTitleLabel.isHidden = true
