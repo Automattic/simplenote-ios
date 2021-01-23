@@ -40,8 +40,9 @@ class NSStringSimplenoteTests: XCTestCase {
             ["\u{0065}\u{0301}", "\u{00E9}"] // é
         ]
         
-        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[0])
-        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[1])
+        for sample in differentStringsOneHashSamples {
+            testNonEqualStringsCreateSameHash(sample)
+        }
     }
 }
 
