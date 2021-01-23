@@ -52,9 +52,7 @@ extension NSStringSimplenoteTests {
         
         for i in 1..<samples.count {
             XCTAssertNotEqual((sampleToTest as NSString), (samples[i] as NSString))
-            print("sample to test: \(sampleToTest) sample to comare: \(samples[i])")
             XCTAssertEqual(sampleToTest.byEncodingAsTagHash, samples[i].byEncodingAsTagHash)
-            print("sample to test: \(sampleToTest.byEncodingAsTagHash) sample to comare: \(samples[i].byEncodingAsTagHash)")
         }
     }
 }
