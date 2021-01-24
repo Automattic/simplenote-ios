@@ -1,8 +1,3 @@
-- Door '[' te typen kan je nu gekoppelde notities rechtstreeks kiezen uit de editor
-- Bij het zoeken naar een notitie worden relevante samenvattingen weergegeven
-Zoeken op kleine kaart toegevoegd, om snel naar zoekresultaten te gaan
-- Tags-lijsten strekken nu tot aan de rand van het scherm in liggende stand
-- Een bug opgelost m.b.t. het selecteren van tekst
-- Een bug opgelost waarbij bewerken werd in-/uitgeschakeld als de editor werd gesleept
-- Een probleem opgelost waardoor wijzigingen niet onmiddellijk van kracht bleven
-- Een bug opgelost m.b.t. navigatie van gemarkeerde zoektermen
+- Placeholders voor lege statussen zijn bijgewerkt
+- Snelle acties op het startscherm
+- Statistieken op het scherm 'Over' aangepast

@@ -8,11 +8,14 @@ final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var dismissButton: UIButton!
     @IBOutlet private weak var headerStackView: UIStackView!
+    private lazy var blurEffectView = SPBlurEffectView()
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
     private var sections: [NoteInformationController.Section] = []
     private let controller: NoteInformationController
+
+    private var onDismissCallback: (() -> Void)?
 
     /// Designated initializer
     ///
@@ -57,6 +60,12 @@ final class NoteInformationViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         configureHeaderLayoutMargins()
+        refreshPreferredSize()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateAdditionalSafeAreaInsets()
     }
 }
 
@@ -92,20 +101,32 @@ private extension NoteInformationViewController {
         configureTableView()
         screenTitleLabel.text = Localization.information
 
-        removeHeaderViewIfNeeded()
+        configureHeaderView()
 
         refreshStyle()
     }
 
     func configureTableView() {
+        // Otherwise additional safe area insets don't work :/
+        tableView.contentInsetAdjustmentBehavior = .always
+
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
         tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: SubtitleTableViewCell.reuseIdentifier)
         tableView.register(TableHeaderViewCell.self, forCellReuseIdentifier: TableHeaderViewCell.reuseIdentifier)
-        tableView.tableFooterView = UIView()
+
+        // remove separator for last cell if we're in popover
+        if popoverPresentationController != nil {
+            tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        }
     }
 
-    func configureAccessibility() {
-        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+    func configureHeaderView() {
+        guard navigationController == nil else {
+            headerStackView.isHidden = true
+            return
+        }
+
+        configureBlurEffectView()
     }
 
     func configureHeaderLayoutMargins() {
@@ -119,16 +140,32 @@ private extension NoteInformationViewController {
         headerStackView.layoutMargins = layoutMargins
     }
 
-    func removeHeaderViewIfNeeded() {
-        guard navigationController != nil else {
-            return
-        }
+    func configureBlurEffectView() {
+        view.insertSubview(blurEffectView, belowSubview: headerStackView)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: headerStackView.bottomAnchor)
+        ])
+    }
 
-        headerStackView.isHidden = true
+    func configureAccessibility() {
+        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
     }
 
     func refreshPreferredSize() {
-        preferredContentSize = tableView.intrinsicContentSize
+        preferredContentSize = tableView.contentSize
+    }
+
+    func updateAdditionalSafeAreaInsets() {
+        guard !headerStackView.isHidden else {
+            additionalSafeAreaInsets = .zero
+            return
+        }
+
+        additionalSafeAreaInsets = UIEdgeInsets(top: headerStackView.frame.maxY, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -137,23 +174,11 @@ private extension NoteInformationViewController {
 private extension NoteInformationViewController {
     func refreshStyle() {
         styleScreenTitleLabel()
-        styleDismissButton()
         styleTableView()
     }
 
     func styleScreenTitleLabel() {
         screenTitleLabel.textColor = .simplenoteNoteHeadlineColor
-    }
-
-    func styleDismissButton() {
-        dismissButton.layer.masksToBounds = true
-
-        dismissButton.setImage(UIImage.image(name: .cross)?.withRenderingMode(.alwaysTemplate), for: .normal)
-
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonBackgroundColor.dynamicImageRepresentation(), for: .normal)
-        dismissButton.setBackgroundImage(UIColor.simplenoteCardDismissButtonHighlightedBackgroundColor.dynamicImageRepresentation(), for: .highlighted)
-
-        dismissButton.tintColor = .simplenoteCardDismissButtonTintColor
     }
 
     func styleTableView() {
@@ -166,6 +191,7 @@ private extension NoteInformationViewController {
 private extension NoteInformationViewController {
     @IBAction func handleTapOnDismissButton() {
         dismiss(animated: true, completion: nil)
+        onDismissCallback?()
     }
 }
 
@@ -271,12 +297,21 @@ extension NoteInformationViewController {
 
     /// Configure view controller to be presented as a card
     ///
-    func configureToPresentAsCard() {
+    func configureToPresentAsCard(onDismissCallback: (() -> Void)? = nil) {
+        self.onDismissCallback = onDismissCallback
+
         let transitioningManager = SPCardTransitioningManager()
         self.transitioningManager = transitioningManager
+        transitioningManager.presentationDelegate = self
 
         transitioningDelegate = transitioningManager
         modalPresentationStyle = .custom
+    }
+}
+
+extension NoteInformationViewController: SPCardPresentationControllerDelegate {
+    func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason) {
+        onDismissCallback?()
     }
 }
 
@@ -287,5 +322,5 @@ private struct Localization {
 }
 
 private struct Consts {
-    static let headerExtraLayoutMargins = UIEdgeInsets(top: 16.0, left: 0.0, bottom: 0.0, right: 0.0)
+    static let headerExtraLayoutMargins = UIEdgeInsets(top: 13.0, left: 0.0, bottom: 13.0, right: 0.0)
 }

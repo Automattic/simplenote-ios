@@ -116,6 +116,7 @@
 		74F6638122BADBD200FA147E /* ExtensionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */; };
 		74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F6638222BADD0300FA147E /* SharePresentationController.swift */; };
 		A604DB22255A993E00B802CA /* SearchMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A604DB21255A993E00B802CA /* SearchMapView.swift */; };
+		A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
@@ -135,10 +136,13 @@
 		A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A69F861B25408085005140F2 /* NoteInformationViewController.xib */; };
 		A6BBDA3E25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */; };
 		A6BBDA46255034E6005C8343 /* SPEditorTextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */; };
+		A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */; };
 		A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */; };
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
+		A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */; };
+		A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */; };
 		A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */; };
 		A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */; };
 		A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */; };
@@ -201,6 +205,8 @@
 		B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */; };
 		B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */; };
 		B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */; };
+		B536988D25646C9400817E30 /* CGRect+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536988C25646C9400817E30 /* CGRect+Simplenote.swift */; };
+		B536989B25646D3900817E30 /* CGRectSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536989A25646D3900817E30 /* CGRectSimplenoteTests.swift */; };
 		B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537730E252E14C600BC78C5 /* OptionsViewController.swift */; };
 		B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B537732A252E176C00BC78C5 /* OptionsViewController.xib */; };
 		B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537733A252E29D300BC78C5 /* SwitchTableViewCell.swift */; };
@@ -511,6 +517,7 @@
 		9F225454D6472EDCA812A4C5 /* Pods-Automattic-Simplenote.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		A22187FB12EF52A765E6D4EC /* Pods-SimplenoteTests.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution appstore.xcconfig"; sourceTree = "<group>"; };
 		A604DB21255A993E00B802CA /* SearchMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapView.swift; sourceTree = "<group>"; };
+		A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationShortcutItemType.swift; path = Classes/ApplicationShortcutItemType.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
@@ -530,10 +537,13 @@
 		A69F861B25408085005140F2 /* NoteInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteInformationViewController.xib; sourceTree = "<group>"; };
 		A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringToMarkdownConverter.swift; sourceTree = "<group>"; };
 		A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPEditorTextView+Simplenote.swift"; sourceTree = "<group>"; };
+		A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedCrossButton.swift; path = Classes/RoundedCrossButton.swift; sourceTree = "<group>"; };
 		A6C0589224AD2B8F006BC572 /* SPNoteHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPNoteHistoryViewController.swift; path = Classes/SPNoteHistoryViewController.swift; sourceTree = "<group>"; };
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
+		A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
+		A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewSpinner.swift; path = Classes/ViewSpinner.swift; sourceTree = "<group>"; };
 		A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Simplenote.swift"; sourceTree = "<group>"; };
 		A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryControllerDelegate.swift; sourceTree = "<group>"; };
@@ -591,6 +601,8 @@
 		B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSimpleTextPrintFormatter.swift; path = Classes/SPSimpleTextPrintFormatter.swift; sourceTree = "<group>"; };
 		B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextView+Simplenote.swift"; path = "Classes/UITextView+Simplenote.swift"; sourceTree = "<group>"; };
 		B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPRatingsPromptView.swift; path = Classes/SPRatingsPromptView.swift; sourceTree = "<group>"; };
+		B536988C25646C9400817E30 /* CGRect+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CGRect+Simplenote.swift"; path = "Classes/CGRect+Simplenote.swift"; sourceTree = "<group>"; };
+		B536989A25646D3900817E30 /* CGRectSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectSimplenoteTests.swift; sourceTree = "<group>"; };
 		B537730E252E14C600BC78C5 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionsViewController.swift; path = Classes/OptionsViewController.swift; sourceTree = "<group>"; };
 		B537732A252E176C00BC78C5 /* OptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OptionsViewController.xib; path = Classes/OptionsViewController.xib; sourceTree = "<group>"; };
 		B537733A252E29D300BC78C5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwitchTableViewCell.swift; path = Classes/SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1206,6 +1218,7 @@
 		B52F35D422F3573300724793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B536989A25646D3900817E30 /* CGRectSimplenoteTests.swift */,
 				374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */,
 				B51F6DD62460D7C20074DDD9 /* NSPredicateEmailTests.swift */,
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
@@ -1266,6 +1279,7 @@
 			children = (
 				B550F93022BA65CD00091939 /* ActivityType.swift */,
 				B550F93222BA6A3300091939 /* ShortcutsHandler.swift */,
+				A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */,
 				B550F93522BA7E9100091939 /* NSUserActivity+Simplenote.swift */,
 				B550F93722BA814D00091939 /* NSUserActivity+Shortcuts.swift */,
 			);
@@ -1296,6 +1310,7 @@
 			children = (
 				B5E951E224FEE25A004B10B8 /* Links */,
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
+				B536988C25646C9400817E30 /* CGRect+Simplenote.swift */,
 				F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */,
 				B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */,
 				B52BB74922CFC0670042C162 /* FileManager+Simplenote.swift */,
@@ -1478,6 +1493,7 @@
 				174838281BBDCAA400E834AF /* SPMarkdownParser.m */,
 				E22A17D117A2E2A000383575 /* SPObjectManager.h */,
 				E22A17D217A2E2A000383575 /* SPObjectManager.m */,
+				A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */,
 				B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */,
 				37E10E7920B3477800864E43 /* WPAuthHandler.h */,
 				37E10E7620B3368700864E43 /* WPAuthHandler.m */,
@@ -1588,7 +1604,6 @@
 				B5F3000023F446FC007A7C59 /* SortBar */,
 				B546BE9A234E758E00A126DA /* TableViewCells */,
 				E2922AB3180C7322003AF914 /* Tag View */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */,
 				B5DF733F22A54EE800602CE7 /* SPDefaultTableViewCell.swift */,
 				E25C39DE17A4772900B2591A /* SPEntryListAutoCompleteCell.h */,
@@ -1612,7 +1627,10 @@
 				A68ABCA724ABFB5300715EBD /* SPShadowView.swift */,
 				A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */,
 				A6E1E7A724BE656D008A44BC /* SPCardView.swift */,
-				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
+				A604DB21255A993E00B802CA /* SearchMapView.swift */,
+				A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */,
+				A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1975,7 +1993,7 @@
 				};
 			};
 			buildConfigurationList = E29ADD3317848E8500E55842 /* Build configuration list for PBXProject "Simplenote" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2304,6 +2322,7 @@
 				A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */,
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
+				A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */,
 				46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */,
 				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
@@ -2334,6 +2353,7 @@
 				A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */,
+				A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
 				B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */,
@@ -2400,6 +2420,7 @@
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
+				A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */,
 				46A3C99817DFA81A002865AE /* SPEntryListCell.m in Sources */,
 				B5E951E124FEDAD4004B10B8 /* UIPasteboard+Note.swift in Sources */,
 				A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */,
@@ -2460,8 +2481,10 @@
 				37FD30481FC4CFA2008D0B78 /* KeychainMigrator.swift in Sources */,
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,
+				A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
+				B536988D25646C9400817E30 /* CGRect+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
 				B5BA5B082551FB3C002AAD43 /* UIDevice+Simplenote.swift in Sources */,
 				A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */,
@@ -2494,6 +2517,7 @@
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,
 				B5421F3F23CE7A1C004DDC19 /* MockupStorage.swift in Sources */,
 				A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */,
+				B536989B25646D3900817E30 /* CGRectSimplenoteTests.swift in Sources */,
 				B576076824CFA2250097D295 /* NSStringSimplenoteTests.swift in Sources */,
 				A64DE701255D4570001D0526 /* NoteBodyExcerptTests.swift in Sources */,
 			);

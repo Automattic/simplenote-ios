@@ -9,6 +9,7 @@ enum UIImageName: Int, CaseIterable {
     case add
     case allNotes
     case archive
+    case arrowTopRight
     case checklist
     case checkmarkChecked
     case checkmarkUnchecked
@@ -34,6 +35,7 @@ enum UIImageName: Int, CaseIterable {
     case pinSmall
     case published
     case restore
+    case search
     case settings
     case simplenoteLogo
     case share
@@ -68,6 +70,8 @@ extension UIImageName {
             return "icon_allnotes"
         case .archive:
             return "icon_archive"
+        case .arrowTopRight:
+            return "icon_arrow_top_right"
         case .checklist:
             return "icon_checklist"
         case .checkmarkChecked:
@@ -118,6 +122,8 @@ extension UIImageName {
             return "icon_published"
         case .restore:
             return "icon_restore"
+        case .search:
+            return "icon_search"
         case .settings:
             return "icon_settings"
         case .simplenoteLogo:

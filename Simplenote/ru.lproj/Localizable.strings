@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-26 10:54:03+0000 */
+/* Translation-Revision-Date: 2020-12-09 08:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -82,11 +82,8 @@
 /* No comment provided by engineer. */
 "Appearance" = "Внешний вид";
 
-/* Other Simplenote apps */
-"Apps" = "Приложения";
-
 /* Automattic hiring description */
-"Are you a developer? Automattic is hiring." = "Вы разработчик? Automattic расширяет штат.";
+"Are you a developer? We’re hiring." = "Вы разработчик? У нас есть вакансии.";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Очистить корзину? Это действие нельзя отменить.";
@@ -100,13 +97,13 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Создавая учетную запись, вы принимаете наши";
 
-/* Simplenote terms of service */
-"California Users Privacy Notice" = "Заявление о защите конфиденциальности пользователей из Калифорнии";
-
 /* Cancel Action
    Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "Отмена";
+
+/* Work at Automattic */
+"Careers" = "Вакансии";
 
 /* Number of characters in the note */
 "Characters" = "Символы";
@@ -157,6 +154,12 @@
 /* No comment provided by engineer. */
 "Create a new note" = "Создать новую заметку";
 
+/* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
+"Create a new note titled “%@”" = "Создать новую заметку под названием “%@”";
+
+/* Message shown in note list when no notes are in the current view */
+"Create your first note" = "Создание первой заметки";
+
 /* Note Creation Date
    Sort Mode: Creation Date */
 "Created" = "Создано";
@@ -200,8 +203,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
-   Done toolbar button
-   Verb: Close current view */
+   Done toolbar button */
 "Done" = "Готово";
 
 /* Edit Tags Action: Visible in the Tags List */
@@ -339,6 +341,9 @@
    Deletes a note */
 "Move to Trash" = "Удалить";
 
+/* Home screen quick action: New Note */
+"New Note" = "Новая заметка...";
+
 /* Label to create a new note */
 "New note" = "Новая заметка";
 
@@ -348,14 +353,17 @@
 /* Cancels Empty Trash Action */
 "No" = "Нет";
 
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "Нет заметок";
-
 /* Message shown when no notes match a search string */
 "No Results" = "Нет результатов";
 
+/* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
+"No notes tagged “%@”" = "Нет заметок с тегом “%@”";
+
 /* No comment provided by engineer. */
 "No thanks" = "Нет, спасибо";
+
+/* Message shown in note list when no notes are untagged */
+"No untagged notes" = "Нет заметок без тегов";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Заметки";
@@ -415,6 +423,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Предварительный просмотр";
 
+/* Simplenote terms of service */
+"Privacy Notice for California Users" = "Заявление о защите конфиденциальности для пользователей из Калифорнии";
+
 /* Simplenote privacy policy */
 "Privacy Policy" = "Политика конфиденциальности";
 
@@ -430,11 +441,17 @@
 /* Indicates the Note is being published */
 "Publishing..." = "Публикация…";
 
+/* Rate on the App Store */
+"Rate Us" = "Оцените нас";
+
 /* Prompt when setting up a passcode */
 "Re-enter a passcode" = "Повторно ввести пароль";
 
 /* Reachs Internet */
 "Reachability" = "Удобный доступ";
+
+/* Home screen quick action: Recent Note */
+"Recent" = "Недавние";
 
 /* References section header on Info Card */
 "Referenced In" = "Упоминание в";
@@ -457,7 +474,8 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Восстановить заметку";
 
-/* Search Placeholder
+/* Home screen quick action: Search
+   Search Placeholder
    Search Title */
 "Search" = "Поиск";
 
@@ -618,9 +636,6 @@
 /* Number of words in the note */
 "Words" = "Слова";
 
-/* Work at Automattic */
-"Work With Us" = "Сотрудничество";
-
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Да";
 
@@ -632,6 +647,9 @@
 
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "Ваш пароль ненадежен, его необходимо сменить. Требования к паролю:";
+
+/* Message shown in note list when no notes are in the trash */
+"Your trash is empty" = "Корзина пуста";
 
 /* No comment provided by engineer. */
 "collaborators-description" = "Добавьте адрес электронной почто, чтобы делиться этой заметкой с кем-нибудь.\nПозже вы сможете изменить его. ";

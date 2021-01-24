@@ -1,8 +1,3 @@
-- Durch die Eingabe von "[" kannst du jetzt direkt im Editor verknüpfte Notizen auswählen
-- Wenn du nach einer Notiz suchst, werden dir auch relevante Auszüge angezeigt
-- Es wurde eine kleine Suchkarte hinzugefügt, um die Suchergebnisse schnell zu überblicken
-- Die Schlagwortliste wurde im Landschaftsmodus nun bis zur Ecke des Bildschirms erweitert
-- Fehler behoben, der sich auf die Textauswahl auswirkte
-- Fehler behoben, der die Edition umschaltete, wenn man den Editor verschoben hat
-- Fehler behoben, der dazu führte, dass Änderungen nicht sofort bestehen blieben
-- Fehler behoben, der die hervorgehobene Navigation der Suche beeinträchtigte
+- Platzhalter für leere Bundesländer aktualisiert
+- Schnellaktionen auf der Startseite
+- Metriken des „Über“-Bildschirms angepasst

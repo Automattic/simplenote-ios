@@ -184,7 +184,9 @@
     // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
     [[MigrationsHandler new] ensureUpdateIsHandled];
     [self setupAppRatings];
-    
+
+    [[ShortcutsHandler shared] updateHomeScreenQuickActionsIfNeeded];
+
     // Initialize UI
     [self loadLastSelectedNote];
     [self loadSelectedTheme];
@@ -231,6 +233,11 @@
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
+{
+    [[ShortcutsHandler shared] handleApplicationShortcut:shortcutItem];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -411,18 +418,6 @@
 #pragma mark ================================================================================
 #pragma mark Other
 #pragma mark ================================================================================
-
-- (void)dismissAllModalsAnimated:(BOOL)animated completion:(void(^)())completion
-{
-    [self.navigationController dismissViewControllerAnimated:animated
-                                                  completion:^{
-                                                      
-                                                      if (completion) {
-                                                          completion();
-                                                      }
-                                                  }];
-    
-}
 
 - (void)presentSettingsViewController
 {
@@ -640,10 +635,7 @@
     // Support opening Simplenote and optionally creating a new note
     if ([[url host] isEqualToString:@"new"]) {
         
-        Note *newNote = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                              inManagedObjectContext:self.managedObjectContext];
-        newNote.creationDate = [NSDate date];
-        newNote.modificationDate = [NSDate date];
+        Note *newNote = [[SPObjectManager sharedManager] newDefaultNote];
         
         NSArray *params = [[url query] componentsSeparatedByString:@"&"];
         for (NSString *param in params) {
@@ -690,39 +682,6 @@
     
     return YES;
 }
-
-- (void)presentNoteWithUniqueIdentifier:(NSString *)uuid
-{
-    Note *note = [self.simperium loadNoteWithSimperiumKey:uuid];
-    if (note == nil) {
-        return;
-    }
-
-    [self presentNote:note];
-}
-
-- (void)presentNewNoteEditor
-{
-    [self presentNote:nil];
-}
-
-- (void)presentNote:(Note *)note
-{
-    // Hide any modals
-    [self dismissAllModalsAnimated:NO completion:nil];
-    
-    // If root tag list is currently being viewed, push All Notes instead
-    [self.sidebarViewController hideSidebarWithAnimation:NO];
-    
-    // Little trick to postpone until next run loop to ensure controllers have a chance to pop
-    double delayInSeconds = 0.05;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.noteListViewController openNote:note animated:NO];
-        [self showPasscodeLockIfNecessary];
-    });
-}
-
 
 #pragma mark ================================================================================
 #pragma mark Passcode Lock

@@ -188,24 +188,6 @@
     
 }
 
-
--(NSArray *)notesWithTag:(Tag *)tag
-{
-    if (!tag.name)
-        return nil;
-    
-    NSMutableArray *predicateList = [NSMutableArray arrayWithCapacity:3];
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"deleted == %@", [NSNumber numberWithBool:NO]]];
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"tags CONTAINS[c] %@", tag.name]];
-    NSString *regEx = [NSString stringWithFormat:@".*\"%@\".*", tag.name];
-    [predicateList addObject: [NSPredicate predicateWithFormat: @"tags MATCHES[c] %@", regEx]];
-    
-    NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
-    
-	NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
-    return [context fetchObjectsForEntityName:@"Note" withPredicate:compound];
-}
-
 - (void)moveTagFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
     
     NSArray *tagList = [self tags];

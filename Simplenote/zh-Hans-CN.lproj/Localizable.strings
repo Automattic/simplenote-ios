@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-11-27 08:54:03+0000 */
+/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -82,11 +82,8 @@
 /* No comment provided by engineer. */
 "Appearance" = "外观";
 
-/* Other Simplenote apps */
-"Apps" = "应用程序";
-
 /* Automattic hiring description */
-"Are you a developer? Automattic is hiring." = "您是开发人员吗？Automattic 正在招聘。";
+"Are you a developer? We’re hiring." = "您是开发人员吗？ 我们正在招贤纳士。";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "是否确定要清空回收站？此操作无法撤消。";
@@ -100,13 +97,13 @@
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "创建帐户即表示，您同意我们的";
 
-/* Simplenote terms of service */
-"California Users Privacy Notice" = "加州用户隐私声明";
-
 /* Cancel Action
    Dismissing an interface
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
+
+/* Work at Automattic */
+"Careers" = "招贤纳士";
 
 /* Number of characters in the note */
 "Characters" = "字符";
@@ -157,6 +154,12 @@
 /* No comment provided by engineer. */
 "Create a new note" = "创建新笔记";
 
+/* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
+"Create a new note titled “%@”" = "创建标题为“%@”的新笔记";
+
+/* Message shown in note list when no notes are in the current view */
+"Create your first note" = "创建您的第一个笔记";
+
 /* Note Creation Date
    Sort Mode: Creation Date */
 "Created" = "创建日期";
@@ -200,8 +203,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
-   Done toolbar button
-   Verb: Close current view */
+   Done toolbar button */
 "Done" = "完成";
 
 /* Edit Tags Action: Visible in the Tags List */
@@ -339,6 +341,9 @@
    Deletes a note */
 "Move to Trash" = "移动到回收站";
 
+/* Home screen quick action: New Note */
+"New Note" = "新建笔记";
+
 /* Label to create a new note */
 "New note" = "新建笔记";
 
@@ -348,14 +353,17 @@
 /* Cancels Empty Trash Action */
 "No" = "否";
 
-/* Message shown in note list when no notes are in the current view */
-"No Notes" = "无笔记";
-
 /* Message shown when no notes match a search string */
 "No Results" = "无结果";
 
+/* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
+"No notes tagged “%@”" = "没有标记为“%@”的笔记";
+
 /* No comment provided by engineer. */
 "No thanks" = "不用了，谢谢";
+
+/* Message shown in note list when no notes are untagged */
+"No untagged notes" = "没有未标记的笔记";
 
 /* Notes Header (Search Mode) */
 "Notes" = "笔记";
@@ -415,6 +423,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "预览";
 
+/* Simplenote terms of service */
+"Privacy Notice for California Users" = "面向加州用户的隐私声明";
+
 /* Simplenote privacy policy */
 "Privacy Policy" = "隐私政策";
 
@@ -430,11 +441,17 @@
 /* Indicates the Note is being published */
 "Publishing..." = "正在发布...";
 
+/* Rate on the App Store */
+"Rate Us" = "给我们评分";
+
 /* Prompt when setting up a passcode */
 "Re-enter a passcode" = "再次输入密码";
 
 /* Reachs Internet */
 "Reachability" = "可访问性";
+
+/* Home screen quick action: Recent Note */
+"Recent" = "最近";
 
 /* References section header on Info Card */
 "Referenced In" = "引用于";
@@ -457,7 +474,8 @@
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
 
-/* Search Placeholder
+/* Home screen quick action: Search
+   Search Placeholder
    Search Title */
 "Search" = "搜索";
 
@@ -618,9 +636,6 @@
 /* Number of words in the note */
 "Words" = "字数";
 
-/* Work at Automattic */
-"Work With Us" = "与我们合作";
-
 /* Proceeds with the Empty Trash OP */
 "Yes" = "是";
 
@@ -632,6 +647,9 @@
 
 /* Password Requirements: Title */
 "Your password is insecure and must be reset. The password requirements are:" = "您的密码不安全，需要重置。密码要求：";
+
+/* Message shown in note list when no notes are in the trash */
+"Your trash is empty" = "您的回收站为空";
 
 /* No comment provided by engineer. */
 "collaborators-description" = "添加电子邮件地址即可与他人分享此笔记。而且，您与协作者均可对笔记作出更改。";

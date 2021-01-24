@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Tags
 
-- (NSArray *)notesWithTag:(Tag *)tag;
 - (void)editTag:(Tag *)tag title:(NSString *)newTitle;
 - (BOOL)removeTagName:(NSString *)tagName;
 - (BOOL)removeTag:(Tag *)tag;

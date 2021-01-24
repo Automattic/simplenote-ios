@@ -1,6 +1,12 @@
-4.29
+4.30
 -----
  
+4.29
+-----
+-   Updated Empty State placeholders #951
+-   Home screen quick actions #950
+-   Adjusted About screen metrics #952
+
 4.28
 -----
 -   Typing `[` will now allow you to pick Interlinking Notes right from the editor #914
