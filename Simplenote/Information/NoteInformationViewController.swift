@@ -50,7 +50,10 @@ final class NoteInformationViewController: UIViewController {
         configureViews()
         configureAccessibility()
         configureNavigation()
-        configureDragBar()
+        
+        if !UIDevice.isPad {
+            configureDragBar()
+        }
 
         refreshPreferredSize()
 
