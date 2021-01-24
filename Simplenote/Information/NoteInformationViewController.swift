@@ -50,6 +50,7 @@ final class NoteInformationViewController: UIViewController {
         configureViews()
         configureAccessibility()
         configureNavigation()
+        configureDragBar()
 
         refreshPreferredSize()
 
@@ -176,6 +177,24 @@ private extension NoteInformationViewController {
         }
 
         additionalSafeAreaInsets = UIEdgeInsets(top: headerStackView.frame.maxY, left: 0, bottom: 0, right: 0)
+    }
+    
+    func configureDragBar() {
+        let dragBar = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 5))
+        dragBar.backgroundColor = UIColor.black
+        dragBar.alpha = 0.2
+        dragBar.layer.cornerRadius = 2.5
+        dragBar.layer.masksToBounds = true
+        
+        view.addSubview(dragBar)
+        
+        dragBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dragBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            dragBar.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            dragBar.widthAnchor.constraint(equalToConstant: 36),
+            dragBar.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 }
 
