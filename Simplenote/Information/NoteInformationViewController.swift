@@ -271,10 +271,17 @@ extension NoteInformationViewController: UITableViewDataSource {
     }
 
     private func updateSeparator(for cell: UITableViewCell, at indexPath: IndexPath) {
-        if indexPath.row == sections[indexPath.section].rows.count - 1 {
-            cell.adjustSeparatorWidth(width: .full)
-        } else {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        
+        switch row {
+        case .header(_):
             cell.adjustSeparatorWidth(width: .standard)
+        default:
+            if indexPath.row == sections[indexPath.section].rows.count - 1 {
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            } else {
+                cell.adjustSeparatorWidth(width: .standard)
+            }
         }
     }
 
