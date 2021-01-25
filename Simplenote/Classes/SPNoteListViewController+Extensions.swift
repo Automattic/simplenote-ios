@@ -924,8 +924,6 @@ extension SPNoteListViewController {
     private func keyboardStopSearching() {
         endSearching()
     }
-
-
 }
 
 // MARK: - Keyboard (List)
@@ -1005,10 +1003,5 @@ private enum Localization {
         static func searchAction(with searchTerm: String) -> String {
             return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
         }
-    }
-
-    enum Shortcuts {
-        static let search = NSLocalizedString("Search", comment: "Keyboard shortcut: Search")
-        static let newNote = NSLocalizedString("New Note", comment: "Keyboard shortcut: New Note")
     }
 }
