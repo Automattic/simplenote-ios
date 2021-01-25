@@ -543,6 +543,8 @@
     self.searchBar.userInteractionEnabled = YES;
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
+
+    [self becomeFirstResponder];
 }
 
 

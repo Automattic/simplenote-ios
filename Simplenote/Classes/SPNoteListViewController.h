@@ -39,4 +39,6 @@
 - (void)startSearching;
 - (void)endSearching;
 
+- (void)sidebarButtonAction:(id)sender;
+
 @end

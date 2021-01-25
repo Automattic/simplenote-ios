@@ -893,6 +893,66 @@ extension SPNoteListViewController {
 }
 
 
+// MARK: - Keyboard
+//
+extension SPNoteListViewController {
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    open override var keyCommands: [UIKeyCommand]? {
+        [
+            UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search),
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
+            UIKeyCommand(input: "\r", modifierFlags: [.command], action: #selector(keyboardShowSidebar)),
+            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(keyboardShowSidebar))
+        ] + tableCommands
+    }
+
+    @objc
+    private func keyboardShowSidebar() {
+        sidebarButtonAction(nil)
+    }
+
+    @objc
+    private func keyboardStartSearching() {
+        startSearching()
+    }
+
+    @objc
+    private func keyboardStopSearching() {
+        endSearching()
+    }
+}
+
+// MARK: - Keyboard (List)
+//
+private extension SPNoteListViewController {
+    var tableCommands: [UIKeyCommand] {
+        [
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
+            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(keyboardSelect))
+        ]
+    }
+
+    @objc
+    func keyboardUp() {
+        tableView?.selectPrevRow()
+    }
+
+    @objc
+    func keyboardDown() {
+        tableView?.selectNextRow()
+    }
+
+    @objc
+    func keyboardSelect() {
+        tableView?.executeSelection()
+    }
+}
+
+
 // MARK: - Private Types
 //
 private enum ActionTitle {
@@ -942,5 +1002,9 @@ private enum Localization {
         static func searchAction(with searchTerm: String) -> String {
             return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
         }
+    }
+
+    enum Shortcuts {
+        static let search = NSLocalizedString("Search", comment: "Keyboard shortcut: Search")
     }
 }
