@@ -80,6 +80,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Are you sure you want to empty the trash? This cannot be undone.";
 
@@ -93,13 +96,23 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
 
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
+
 /* Work at Automattic */
 "Careers" = "Careers";
+
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
 
 /* Number of characters in the note */
 "Characters" = "Characters";
@@ -121,6 +134,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Confirm";
 
 /* Title on the PinLock screen asking to confirm a passcode */
 "Confirm your passcode" = "Confirm your passcode";
@@ -193,6 +209,9 @@
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Delete Tag";
 
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "This note was deleted on another device.";
@@ -422,6 +441,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Preview";
 
@@ -461,6 +483,9 @@
 /* Rename a tag */
 "Rename" = "Rename";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "Reset";
 
@@ -472,6 +497,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Restore Note";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -617,6 +645,9 @@
 /* A user's Simplenote account */
 "Username" = "Username";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "Version %@";
 
@@ -632,6 +663,9 @@
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "What do you think about Simplenote?";
 
@@ -643,6 +677,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Yesterday";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Your email address is not valid";
