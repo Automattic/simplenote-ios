@@ -202,6 +202,13 @@ private extension ShareViewController {
     
     @objc
     func keyboardDidShow(notification: NSNotification) {
+        guard let notificationInfo = notification.userInfo,
+              let keyboardFrame = notificationInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardSize = keyboardFrame.cgRectValue
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        textView.contentInset = contentInsets
     }
 }
 
