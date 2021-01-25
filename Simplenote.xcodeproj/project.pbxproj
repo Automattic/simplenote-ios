@@ -169,6 +169,7 @@
 		A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */; };
 		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
 		A6E1E7A824BE656D008A44BC /* SPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A724BE656D008A44BC /* SPCardView.swift */; };
+		A6E4872625BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */; };
 		A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */; };
 		A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */; };
 		A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */; };
@@ -611,6 +612,7 @@
 		A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationAnimator.swift; sourceTree = "<group>"; };
 		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
+		A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIKeyCommand+Simplenote.swift"; path = "Classes/UIKeyCommand+Simplenote.swift"; sourceTree = "<group>"; };
 		A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockVerifyController.swift; sourceTree = "<group>"; };
 		A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockBaseControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLockControllerConfiguration+Tests.swift"; sourceTree = "<group>"; };
@@ -1512,6 +1514,7 @@
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
 				A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */,
+				A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2617,6 +2620,7 @@
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
+				A6E4872625BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift in Sources */,
 				A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */,
 				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
