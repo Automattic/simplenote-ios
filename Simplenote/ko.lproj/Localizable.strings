@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "문자";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "협업";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "메모 요약 목록";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "참여";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "디버그 해제";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "삭제";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "활성화됨";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "패스코드 입력";
-
-/* Touch ID fallback title */
-"Enter passcode" = "패스코드 입력";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "패스코드 입력";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "버전 가져오기";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "평가하기";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "패스코드 다시 입력";
-
 /* Reachs Internet */
 "Reachability" = "연결";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "의견 보내기";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "패스코드 설정";
 
 /* Title of options screen */
 "Settings" = "설정";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ 잠금해제";
 
 /* Unpins a note */
 "Unpin" = "고정 해제";

@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Characters";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Collaborate";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribute";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug Disabled";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Delete";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enqueued";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Enter a passcode";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Enter passcode";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Enter your passcode";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Fetching Version";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Rate Us";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Re-enter a passcode";
-
 /* Reachs Internet */
 "Reachability" = "Reachability";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Send feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Set Passcode";
 
 /* Title of options screen */
 "Settings" = "تنظیمات";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Turn off Passcode";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Unlock %@";
 
 /* Unpins a note */
 "Unpin" = "برداشتنِ سنجاق";
