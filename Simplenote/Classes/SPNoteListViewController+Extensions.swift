@@ -747,7 +747,6 @@ private extension SPNoteListViewController {
 // MARK: - Services
 //
 private extension SPNoteListViewController {
-
     func delete(note: Note) {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
@@ -793,6 +792,21 @@ private extension SPNoteListViewController {
         editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
+    }
+}
+
+
+// MARK: - Services (Internal)
+//
+extension SPNoteListViewController {
+    @objc
+    func createNewNote() {
+        SPTracker.trackListNoteCreated()
+
+        // the editor view will create a note. Passing no note ensures that an emty note isn't added
+        // to the FRC before the animation occurs
+        tableView.setEditing(false, animated: false)
+        open(nil, animated: true)
     }
 }
 
@@ -902,10 +916,11 @@ extension SPNoteListViewController {
 
     open override var keyCommands: [UIKeyCommand]? {
         [
+            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardNewNote), title: Localization.Shortcuts.newNote),
             UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search),
             UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
             UIKeyCommand(input: "\r", modifierFlags: [.command], action: #selector(keyboardShowSidebar)),
-            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(keyboardShowSidebar))
+            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(keyboardShowSidebar)),
         ] + tableCommands
     }
 
@@ -922,6 +937,10 @@ extension SPNoteListViewController {
     @objc
     private func keyboardStopSearching() {
         endSearching()
+    }
+
+    @objc private func keyboardNewNote() {
+        createNewNote()
     }
 }
 
@@ -1006,5 +1025,6 @@ private enum Localization {
 
     enum Shortcuts {
         static let search = NSLocalizedString("Search", comment: "Keyboard shortcut: Search")
+        static let newNote = NSLocalizedString("New Note", comment: "Keyboard shortcut: New Note")
     }
 }

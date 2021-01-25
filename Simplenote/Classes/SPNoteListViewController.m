@@ -302,13 +302,7 @@
 #pragma mark - BarButtonActions
 
 - (void)addButtonAction:(id)sender {
-    
-    [SPTracker trackListNoteCreated];
-    
-    // the editor view will create a note. Passing no note ensures that an emty note isn't added
-    // to the FRC before the animation occurs
-    [self.tableView setEditing:NO];   
-    [self openNote:nil animated:YES];
+    [self createNewNote];
 }
 
 - (void)sidebarButtonAction:(id)sender {
