@@ -306,13 +306,13 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.nextSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronRightImage
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(highlightNextSearchResult:)];
+                                                            action:@selector(highlightNextSearchResult)];
     self.nextSearchButton.width = 34.0;
 
     self.prevSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronLeftImage
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(highlightPrevSearchResult:)];
+                                                            action:@selector(highlightPrevSearchResult)];
     self.prevSearchButton.width = 34.0;
     
     
@@ -580,12 +580,12 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
-- (void)highlightNextSearchResult:(id)sender
+- (void)highlightNextSearchResult
 {
     [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
 }
 
-- (void)highlightPrevSearchResult:(id)sender
+- (void)highlightPrevSearchResult
 {
     [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
 }

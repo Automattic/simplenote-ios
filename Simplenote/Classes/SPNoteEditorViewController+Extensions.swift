@@ -794,6 +794,93 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Keyboard
+//
+extension SPNoteEditorViewController {
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    open override var keyCommands: [UIKeyCommand]? {
+        guard presentedViewController == nil else {
+            return nil
+        }
+
+        var commands = [
+            UIKeyCommand(input: "n",
+                         modifierFlags: [.command],
+                         action: #selector(keyboardCreateNewNote),
+                         title: Localization.Shortcuts.newNote),
+        ]
+
+        if currentNote?.markdown == true {
+            commands.append(UIKeyCommand(input: "p",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardToggleMarkdownPreview),
+                                         title: Localization.Shortcuts.toggleMarkdown))
+        }
+
+        if searching {
+            commands.append(contentsOf: [
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command],
+                             action: #selector(keyboardHighlightNextMatch),
+                             title: Localization.Shortcuts.nextMatch),
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command, .shift],
+                             action: #selector(keyboardHighlightPrevMatch),
+                             title: Localization.Shortcuts.previousMatch),
+            ])
+        }
+
+        if noteEditorTextView.isFirstResponder {
+            commands.append(UIKeyCommand(input: "c",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardInsertChecklist),
+                                         title: Localization.Shortcuts.insertChecklist))
+        } else {
+            commands.append(UIKeyCommand(input: "\t",
+                                         modifierFlags: [],
+                                         action: #selector(keyboardFocusOnEditor)))
+        }
+        return commands
+    }
+
+    @objc
+    private func keyboardCreateNewNote() {
+        newButtonAction(createNoteButton)
+    }
+
+    @objc
+    private func keyboardToggleMarkdownPreview() {
+        let previewViewController = SPMarkdownPreviewViewController()
+        previewViewController.markdownText = noteEditorTextView.plainText
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
+
+    @objc
+    private func keyboardInsertChecklist() {
+        insertChecklistAction(checklistButton)
+    }
+
+    @objc
+    private func keyboardHighlightNextMatch() {
+        highlightNextSearchResult()
+    }
+
+    @objc
+    private func keyboardHighlightPrevMatch() {
+        highlightPrevSearchResult()
+    }
+
+    @objc
+    private func keyboardFocusOnEditor() {
+        noteEditorTextView.becomeFirstResponder()
+        noteEditorTextView.selectedTextRange = noteEditorTextView.textRange(from: noteEditorTextView.beginningOfDocument,
+                                                                            to: noteEditorTextView.beginningOfDocument)
+    }
+}
+
 
 // MARK: - Metrics
 //
@@ -814,4 +901,17 @@ private enum Metrics {
 //
 private enum CodingKeys: String {
     case currentNoteKey
+}
+
+
+// MARK: - Localization
+//
+private enum Localization {
+    enum Shortcuts {
+        static let newNote = NSLocalizedString("New Note", comment: "Keyboard shortcut: New Note")
+        static let nextMatch = NSLocalizedString("Next Match", comment: "Keyboard shortcut: Note search, Next Match")
+        static let previousMatch = NSLocalizedString("Previous Match", comment: "Keyboard shortcut: Note search, Previous Match")
+        static let insertChecklist = NSLocalizedString("Insert Checklist", comment: "Keyboard shortcut: Insert Checklist")
+        static let toggleMarkdown = NSLocalizedString("Toggle Markdown", comment: "Keyboard shortcut: Toggle Markdown")
+    }
 }

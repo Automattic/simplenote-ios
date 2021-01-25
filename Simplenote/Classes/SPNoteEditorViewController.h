@@ -49,6 +49,7 @@
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
+@property (nonatomic, readonly) BOOL searching;
 
 - (void)dismissEditor:(id)sender;
 - (void)insertChecklistAction:(id)sender;
@@ -62,6 +63,8 @@
 
 - (void)ensureSearchIsDismissed;
 - (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated;
+- (void)highlightNextSearchResult;
+- (void)highlightPrevSearchResult;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;
