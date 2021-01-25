@@ -75,6 +75,7 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        registerKeyboardNotifications()
         textView.textContainerInset = Constants.textViewInsets
         loadContent()
     }
@@ -192,6 +193,15 @@ private extension ShareViewController {
             self.originalNote = note
             self.textView.text = note.content
         }
+    }
+    
+    func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardDidShow(notification: NSNotification) {
     }
 }
 
