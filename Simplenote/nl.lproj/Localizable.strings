@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Annuleren";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Tekens";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Samenwerken";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Beknopte notitielijst";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bijdragen";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug uitgeschakeld";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Verwijderen";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notities verwijderen";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Voer een wachtwoordcode in";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Voer een wachtwoordcode in";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Voer je wachtwoordcode in";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Gezichts-ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "Mislukte pogingen";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Versie ophalen";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Beoordeel ons";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Voer een wachtwoordpasscode opnieuw in";
-
 /* Reachs Internet */
 "Reachability" = "Bereikbaarheid";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Stuur feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Wachtwoordcode instellen";
 
 /* Title of options screen */
 "Settings" = "Instellingen";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Wachtwoordcode uitschakelen";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ ontgrendelen";
 
 /* Unpins a note */
 "Unpin" = "Losgemaakt";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-20 14:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "תווים";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "שיתוף פעולה בעריכה";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "לאשר את קוד הסיסמה שלך";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "שיתוף";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "האפשרות לאיתור באגים מושבתת";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "מחיקה";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "להזין קוד סיסמה";
-
-/* Touch ID fallback title */
-"Enter passcode" = "הזנת קוד סיסמה";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "זיהוי פנים";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "ניסיונות שנכשלו";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "מוריד גרסה";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "נשמח לקבל ממך דירוג";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "הזנה מחדש של קוד הסיסמה";
-
 /* Reachs Internet */
 "Reachability" = "נגישות";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "שליחת משוב";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "הגדרת קוד סיסמה";
 
 /* Title of options screen */
 "Settings" = "הגדרות";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "השבתת קוד סיסמה";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "ביטול נעילה %@";
 
 /* Unpins a note */
 "Unpin" = "להסיר את הנעץ";

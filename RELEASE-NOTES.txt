@@ -1,6 +1,12 @@
-4.30
+4.31
 -----
  
+4.30
+-----
+-   New passcode interface #761
+-   Fixed a bug that caused a crash while searching #1055
+-   Fixed predictive text entry when working with tags #1041
+
 4.29
 -----
 -   Updated Empty State placeholders #951

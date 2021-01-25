@@ -81,6 +81,11 @@ CGFloat const TagEntryFieldPadding = 40;
     });
 }
 
+- (void)paste:(id)sender
+{
+    [self pasteTag];
+}
+
 /// Stop this madness, in the name of your king!
 ///
 /// As you may know, the TagsEditor is contained within a UITextView instance. Meaning that resigning firstResponder status

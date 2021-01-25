@@ -46,4 +46,6 @@
 - (void)clearAllTags;
 - (BOOL)setupWithTagNames:(NSArray *)tagNames;
 
+- (void)processTextInFieldToTag;
+
 @end

@@ -1,3 +1,3 @@
-- Aggiornati i segnaposti di stato vuoti
-- Azioni rapide nella schermata Home 
-- Metriche della schermata delle informazioni modificate
+- Nuova interfaccia PIN
+- Corretto un bug che causava un arresto anomalo durante la ricerca
+- Risolto il problema con l'immissione di testo predittivo quando si lavora con i tag

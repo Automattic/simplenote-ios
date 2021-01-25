@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "キャンセル";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "文字";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "共同編集";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "参加";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "デバッグ無効";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "削除";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "ノートを削除";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "待機状態";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "パスコードを入力";
-
-/* Touch ID fallback title */
-"Enter passcode" = "パスコードを入力";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "パスコードを入力してください";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "バージョンを取得中";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "評価してください";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "パスコードを再入力";
-
 /* Reachs Internet */
 "Reachability" = "到達の可能性";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "意見を送る";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "パスコードを設定";
 
 /* Title of options screen */
 "Settings" = "設定";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "パスコードを無効化";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ のブロックを解除";
 
 /* Unpins a note */
 "Unpin" = "ピンを外す";
