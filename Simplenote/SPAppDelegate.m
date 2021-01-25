@@ -632,7 +632,7 @@
         }
         [_simperium save];
         
-        [self presentNote:newNote];
+        [self presentNote:newNote animated:NO];
     }
     
     return YES;

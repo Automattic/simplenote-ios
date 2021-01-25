@@ -756,18 +756,20 @@ extension TagListViewController {
     }
 
     override var keyCommands: [UIKeyCommand]? {
-        var commands = tableCommands
-        commands.append(UIKeyCommand(input: "\r", modifierFlags: [.command], action: #selector(keyboardShowSidebar)))
-        if isFirstResponder {
-            commands.append(UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(keyboardShowSidebar)))
-            commands.append(contentsOf: tableCommands)
+        guard isFirstResponder else {
+            return nil
         }
+
+        var commands = [
+            UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(keyboardHideSidebar))
+        ]
+        commands.append(contentsOf: tableCommands)
 
         return commands
     }
 
     @objc
-    private func keyboardShowSidebar() {
+    private func keyboardHideSidebar() {
         let appDelegate = SPAppDelegate.shared()
         appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
     }

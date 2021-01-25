@@ -538,7 +538,9 @@
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 
-    [self becomeFirstResponder];
+    if (!self.isSearchActive) {
+        [self becomeFirstResponder];
+    }
 }
 
 

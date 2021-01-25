@@ -916,22 +916,8 @@ extension SPNoteListViewController {
 
     open override var keyCommands: [UIKeyCommand]? {
         [
-            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardNewNote), title: Localization.Shortcuts.newNote),
-            UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search),
             UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
-            UIKeyCommand(input: "\r", modifierFlags: [.command], action: #selector(keyboardShowSidebar)),
-            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(keyboardShowSidebar)),
         ] + tableCommands
-    }
-
-    @objc
-    private func keyboardShowSidebar() {
-        sidebarButtonAction(nil)
-    }
-
-    @objc
-    private func keyboardStartSearching() {
-        startSearching()
     }
 
     @objc
@@ -939,9 +925,7 @@ extension SPNoteListViewController {
         endSearching()
     }
 
-    @objc private func keyboardNewNote() {
-        createNewNote()
-    }
+
 }
 
 // MARK: - Keyboard (List)
