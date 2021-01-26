@@ -8,6 +8,7 @@ final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var dismissButton: UIButton!
     @IBOutlet private weak var headerStackView: UIStackView!
+    @IBOutlet weak var dragBar: SPDragBar!
     private lazy var blurEffectView = SPBlurEffectView()
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
@@ -183,16 +184,12 @@ private extension NoteInformationViewController {
     }
     
     func configureDragBar() {
-        let dragBar = SPDragBar(frame: CGRect(x: 0, y: 0, width: 36, height: 5))
-        
-        headerStackView.addSubview(dragBar)
-        
         dragBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dragBar.heightAnchor.constraint(equalToConstant: 5),
             dragBar.widthAnchor.constraint(equalToConstant: 36),
-            dragBar.topAnchor.constraint(equalTo: headerStackView.topAnchor, constant: 5),
-            dragBar.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor)
+            dragBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            dragBar.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }

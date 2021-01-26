@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteInformationViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="dismissButton" destination="7HZ-2J-9ef" id="rrw-yc-zdP"/>
+                <outlet property="dragBar" destination="lD2-IA-haD" id="als-5f-v3X"/>
                 <outlet property="headerStackView" destination="qBv-kl-fOD" id="eEl-cs-unx"/>
                 <outlet property="screenTitleLabel" destination="9ul-2d-OoP" id="pZb-Nb-szF"/>
                 <outlet property="tableView" destination="HfE-pa-isg" id="5Gu-fK-38o"/>
@@ -22,14 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HfE-pa-isg" customClass="HuggableTableView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="dIp-Oc-ZbT"/>
-                        <outlet property="delegate" destination="-1" id="fhS-m2-l5Y"/>
-                    </connections>
-                </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-kl-fOD">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                     <subviews>
@@ -57,6 +51,19 @@
                         </button>
                     </subviews>
                 </stackView>
+                <tableView contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HfE-pa-isg" customClass="HuggableTableView" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="dIp-Oc-ZbT"/>
+                        <outlet property="delegate" destination="-1" id="fhS-m2-l5Y"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lD2-IA-haD" customClass="SPDragBar" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="187" y="5" width="36" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,5 +83,8 @@
     </objects>
     <resources>
         <image name="icon_cross" width="16" height="16"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
