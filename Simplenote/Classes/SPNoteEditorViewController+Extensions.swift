@@ -709,17 +709,22 @@ extension SPNoteEditorViewController {
         tagView.keyboardAppearance = .simplenoteKeyboardAppearance
     }
 
-    private func refreshTextStorage() {
+    private func refreshTextStorage(with textDirection: NSWritingDirection = .natural) {
         let headlineFont = UIFont.preferredFont(for: .title1, weight: .bold)
         let defaultFont = UIFont.preferredFont(forTextStyle: .body)
         let textColor = UIColor.simplenoteNoteHeadlineColor
-        let lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = defaultFont.lineHeight * Metrics.lineSpacingMultipler
+        paragraphStyle.baseWritingDirection = textDirection
+        
         let textStorage = noteEditorTextView.interactiveTextStorage
+        
 
         textStorage.defaultStyle = [
             .font               : defaultFont,
             .foregroundColor    : textColor,
-            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
+            .paragraphStyle     : paragraphStyle
         ]
 
         textStorage.headlineStyle = [
