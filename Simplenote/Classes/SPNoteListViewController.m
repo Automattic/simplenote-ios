@@ -443,15 +443,11 @@
         [editor updateWithSearchQuery:self.searchQuery];
     }
 
-    // Failsafe:
-    // We were getting (a whole lot!) of crash reports with the exception
-    // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
-    // as a safety net. Ref. Issue #345
     if (self.navigationController.visibleViewController != self) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController setViewControllers:@[self, editor] animated:animated];
+    } else {
+        [self.navigationController pushViewController:editor animated:animated];
     }
-
-    [self.navigationController pushViewController:editor animated:animated];
 }
 
 - (void)emptyAction:(id)sender
