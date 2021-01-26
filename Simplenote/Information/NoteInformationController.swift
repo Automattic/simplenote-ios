@@ -143,9 +143,9 @@ private extension NoteInformationController {
 
         let referenceRows = references.map { (note) -> Row in
             let date = DateFormatter.dateFormatter.string(from: note.modificationDate)
-            let value = String(references.count) +
-                " \(references.count > 1 ? "References" : "Reference")" +
-                ", Last Modified \(date)"
+            let value = "\(Localization.interlinkReferences(references.count)), "
+                + "\(NSLocalizedString("Last Modified", comment: "Date of note last modified")) "
+                + date
             
             return .reference(interLink: note.plainInternalLink,
                               title: note.titlePreview,
