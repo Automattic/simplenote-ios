@@ -159,9 +159,8 @@ private extension NoteInformationViewController {
     func configureScreenTitleLabel() {
         screenTitleLabel.text = Localization.document
         
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            screenTitleLabel.isHidden = true
-            dismissButton.isHidden = true
+        if UIDevice.isPad {
+            headerStackView.isHidden = true
         }
     }
 
