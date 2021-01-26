@@ -51,10 +51,7 @@ final class NoteInformationViewController: UIViewController {
         configureViews()
         configureAccessibility()
         configureNavigation()
-        
-        if !UIDevice.isPad {
-            configureDragBar()
-        }
+        configureDragBar()
 
         refreshPreferredSize()
 
@@ -184,13 +181,17 @@ private extension NoteInformationViewController {
     }
     
     func configureDragBar() {
-        dragBar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dragBar.heightAnchor.constraint(equalToConstant: 5),
-            dragBar.widthAnchor.constraint(equalToConstant: 36),
-            dragBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
-            dragBar.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        if navigationController == nil {
+            dragBar.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                dragBar.heightAnchor.constraint(equalToConstant: 5),
+                dragBar.widthAnchor.constraint(equalToConstant: 36),
+                dragBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+                dragBar.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ])
+        } else {
+            dragBar.isHidden = true
+        }
     }
 }
 
