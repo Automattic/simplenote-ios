@@ -91,6 +91,13 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
+
+    if (!self.navigatingUsingKeyboard) {
+        [self.tableView deselectSelectedRowAnimated:YES];
+        self.selectedNote = nil;
+    }
+
+    self.navigatingUsingKeyboard = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -134,7 +141,7 @@
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
-    [self.tableView reloadData];
+    [self reloadTableData];
 }
 
 - (void)updateTableHeaderSize {
@@ -220,7 +227,7 @@
 
     // Refresh the Table's UI
     [self.tableView applySimplenotePlainStyle];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
@@ -334,9 +341,12 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
-    [self.tableView reloadData];
+    [self reloadTableData];
     [self displaySortBar];
     [self refreshTitle];
 }
@@ -374,10 +384,13 @@
 {
     [SPTracker trackListNotesSearched];
 
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     [self.notesListController refreshSearchResultsWithKeyword:keyword];
 
     [self.tableView scrollToTopWithAnimation:NO];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     [self displayPlaceholdersIfNeeded];
 
@@ -430,6 +443,9 @@
 - (void)openNote:(Note *)note ignoringSearchQuery:(BOOL)ignoringSearchQuery animated:(BOOL)animated
 {
     [SPTracker trackListNoteOpened];
+
+    self.selectedNote = note;
+    [self updateCurrentSelection];
 
     // SearchBar: Always resign FirstResponder status
     // Why: https://github.com/Automattic/simplenote-ios/issues/616
@@ -534,7 +550,7 @@
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 
-    if (!self.isSearchActive) {
+    if (![self.searchBar isFirstResponder]) {
         [self becomeFirstResponder];
     }
 }

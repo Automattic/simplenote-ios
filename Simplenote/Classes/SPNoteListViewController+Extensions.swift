@@ -177,7 +177,7 @@ extension SPNoteListViewController {
             /// In this snipept we're preventing a beautiful `_Bug_Detected_In_Client_Of_UITableView_Invalid_Number_Of_Rows_In_Section` exception
             ///
             guard let _ = self.view.window else {
-                self.tableView.reloadData()
+                self.reloadTableData()
                 self.displayPlaceholdersIfNeeded()
                 return
             }
@@ -186,6 +186,7 @@ extension SPNoteListViewController {
                 self.displayPlaceholdersIfNeeded()
                 self.refreshEmptyTrashState()
             }
+            self.updateCurrentSelection()
         }
     }
 }
@@ -248,7 +249,7 @@ extension SPNoteListViewController {
         notesListController.searchSortMode = Options.shared.searchSortMode
         notesListController.performFetch()
 
-        tableView.reloadData()
+        reloadTableData()
     }
 
     /// Refreshes the receiver's Title, to match the current filter
@@ -544,7 +545,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        selectedNote = nil
 
         switch notesListController.object(at: indexPath) {
         case let note as Note:
@@ -647,6 +648,32 @@ private extension SPNoteListViewController {
     }
 }
 
+
+// MARK: - Table
+//
+extension SPNoteListViewController {
+    @objc
+    func reloadTableData() {
+        tableView.reloadData()
+        updateCurrentSelection()
+    }
+
+    @objc
+    func updateCurrentSelection() {
+        tableView.deselectSelectedRow()
+        if let note = selectedNote, let indexPath = notesListController.indexPath(forObject: note) {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+
+    private func updateSelectedNoteBasedOnSelectedIndexPath() {
+        if let indexPath = tableView.indexPathForSelectedRow, let note = notesListController.object(at: indexPath) as? Note {
+            selectedNote = note
+        } else {
+            selectedNote = nil
+        }
+    }
+}
 
 // MARK: - Row Actions
 //
@@ -939,16 +966,21 @@ private extension SPNoteListViewController {
 
     @objc
     func keyboardUp() {
+        navigatingUsingKeyboard = true
         tableView?.selectPrevRow()
+        updateSelectedNoteBasedOnSelectedIndexPath()
     }
 
     @objc
     func keyboardDown() {
+        navigatingUsingKeyboard = true
         tableView?.selectNextRow()
+        updateSelectedNoteBasedOnSelectedIndexPath()
     }
 
     @objc
     func keyboardSelect() {
+        navigatingUsingKeyboard = true
         tableView?.executeSelection()
     }
 }
