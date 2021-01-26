@@ -183,11 +183,7 @@ private extension NoteInformationViewController {
     }
     
     func configureDragBar() {
-        let dragBar = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 5))
-        dragBar.backgroundColor = UIColor.black
-        dragBar.alpha = 0.2
-        dragBar.layer.cornerRadius = 2.5
-        dragBar.layer.masksToBounds = true
+        let dragBar = SPDragBar(frame: CGRect(x: 0, y: 0, width: 36, height: 5))
         
         view.addSubview(dragBar)
         
