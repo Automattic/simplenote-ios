@@ -761,7 +761,7 @@ extension TagListViewController {
         }
 
         var commands = [
-            UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(keyboardHideSidebar))
+            UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardHideSidebar))
         ]
         commands.append(contentsOf: tableCommands)
 

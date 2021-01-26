@@ -22,7 +22,7 @@ extension SPSidebarContainerViewController {
         if !(currentFirstResponder is UITextView) &&
             !(currentFirstResponder is UITextField) {
 
-            commands.append(UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(keyboardGoBack)))
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputLeadingArrow, modifierFlags: [], action: #selector(keyboardGoBack)))
         }
 
         return commands
