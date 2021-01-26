@@ -185,14 +185,14 @@ private extension NoteInformationViewController {
     func configureDragBar() {
         let dragBar = SPDragBar(frame: CGRect(x: 0, y: 0, width: 36, height: 5))
         
-        view.addSubview(dragBar)
+        headerStackView.addSubview(dragBar)
         
         dragBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dragBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
-            dragBar.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            dragBar.heightAnchor.constraint(equalToConstant: 5),
             dragBar.widthAnchor.constraint(equalToConstant: 36),
-            dragBar.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            dragBar.topAnchor.constraint(equalTo: headerStackView.topAnchor, constant: 5),
+            dragBar.centerXAnchor.constraint(equalTo: headerStackView.centerXAnchor)
         ])
     }
 }
