@@ -180,4 +180,12 @@ private struct Localization {
     static let words = NSLocalizedString("Words", comment: "Number of words in the note")
     static let characters = NSLocalizedString("Characters", comment: "Number of characters in the note")
     static let references = NSLocalizedString("Referenced In", comment: "References section header on Info Card")
+    
+    private static let referenceSigular = NSLocalizedString("%i Reference", comment: "Count of interlink references to a note")
+    private static let referencePlural = NSLocalizedString("%i References", comment: "Count of interlink references to a note")
+    
+    static func interlinkReferences(_ references: Int) -> String {
+        let template = references > 1 ? referencePlural : referenceSigular
+        return String(format: template, references)
+    }
 }
