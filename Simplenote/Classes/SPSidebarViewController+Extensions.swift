@@ -45,11 +45,13 @@ extension SPSidebarContainerViewController {
 
     @objc
     private func keyboardStartSearching() {
+        SPTracker.trackShortcutSearch()
         SPAppDelegate.shared().presentSearch(animated: true)
     }
 
     @objc
     private func keyboardCreateNewNote() {
+        SPTracker.trackShortcutCreateNote()
         SPAppDelegate.shared().presentNewNoteEditor(animated: true)
     }
 }

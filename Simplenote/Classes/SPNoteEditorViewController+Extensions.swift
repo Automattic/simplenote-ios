@@ -848,11 +848,13 @@ extension SPNoteEditorViewController {
 
     @objc
     private func keyboardCreateNewNote() {
+        SPTracker.trackShortcutCreateNote()
         newButtonAction(createNoteButton)
     }
 
     @objc
     private func keyboardToggleMarkdownPreview() {
+        SPTracker.trackShortcutToggleMarkdownPreview()
         let previewViewController = SPMarkdownPreviewViewController()
         previewViewController.markdownText = noteEditorTextView.plainText
         navigationController?.pushViewController(previewViewController, animated: true)
@@ -860,16 +862,19 @@ extension SPNoteEditorViewController {
 
     @objc
     private func keyboardInsertChecklist() {
+        SPTracker.trackShortcutInsertChecklist()
         insertChecklistAction(checklistButton)
     }
 
     @objc
     private func keyboardHighlightNextMatch() {
+        SPTracker.trackShortcutSearchNext()
         highlightNextSearchResult()
     }
 
     @objc
     private func keyboardHighlightPrevMatch() {
+        SPTracker.trackShortcutSearchPrev()
         highlightPrevSearchResult()
     }
 

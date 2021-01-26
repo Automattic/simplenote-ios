@@ -18,6 +18,7 @@ extension SPMarkdownPreviewViewController {
 
     @objc
     private func keyboardToggleMarkdownPreview() {
+        SPTracker.trackShortcutToggleMarkdownPreview()
         navigationController?.popViewController(animated: true)
     }
 }
