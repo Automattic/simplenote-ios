@@ -202,13 +202,22 @@ private extension ShareViewController {
     
     @objc
     func keyboardDidChangeFrame(notification: NSNotification) {
-        guard let notificationInfo = notification.userInfo,
-              let keyboardFrame = notificationInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        let keyboardSize = keyboardFrame.cgRectValue
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        let textViewFrame = textView.convert(textView.frame, to: nil)
+        let textViewTotalHeight = textViewFrame.origin.y + textViewFrame.height
+        let diff = textViewTotalHeight - keyboardFrame.origin.y
+        print("inset offset value: \(diff)")
+            
+        refreshTextViewInsets(with: diff)
+    }
+    
+    func refreshTextViewInsets(with intersectionHeight: CGFloat) {
+        
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: intersectionHeight, right: 0)
         textView.contentInset = contentInsets
+        textView.scrollIndicatorInsets = contentInsets
     }
 }
 
