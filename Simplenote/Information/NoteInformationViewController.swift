@@ -181,8 +181,7 @@ private extension NoteInformationViewController {
     }
     
     func configureDragBar() {
-        if navigationController == nil {
-        } else {
+        if navigationController != nil {
             dragBar.isHidden = true
         }
     }
