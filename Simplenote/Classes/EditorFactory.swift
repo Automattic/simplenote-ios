@@ -14,6 +14,10 @@ class EditorFactory: NSObject {
     ///
     var restorationClass: UIViewControllerRestoration.Type?
 
+    /// Scroll position cache
+    ///
+    private let scrollPositionCache = NoteScrollPositionCache()
+
     /// You shall not pass!
     ///
     private override init() {
@@ -28,6 +32,7 @@ class EditorFactory: NSObject {
         let controller = SPNoteEditorViewController()
         controller.restorationClass = restorationClass
         controller.restorationIdentifier = SPNoteEditorViewController.defaultRestorationIdentifier
+        controller.scrollPositionCache = scrollPositionCache
         return controller
     }
 }

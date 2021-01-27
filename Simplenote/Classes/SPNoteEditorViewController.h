@@ -8,6 +8,7 @@
 @class SPEditorTextView;
 @class SPTagView;
 @class SearchMapView;
+@class NoteScrollPositionCache;
 
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
@@ -50,6 +51,8 @@
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
 @property (nonatomic, readonly) BOOL searching;
+
+@property (nonatomic, strong) NoteScrollPositionCache *scrollPositionCache;
 
 - (void)dismissEditor:(id)sender;
 - (void)insertChecklistAction:(id)sender;

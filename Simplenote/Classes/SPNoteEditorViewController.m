@@ -144,6 +144,11 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self startListeningToKeyboardNotifications];
 
     [self refreshNavigationBarButtons];
+
+    // Async here to make sure all the frames are correct
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self restoreScrollPosition];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -242,6 +247,8 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self stopListeningToKeyboardNotifications];
+
+    [self saveScrollPosition];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -366,7 +373,9 @@ CGFloat const SPSelectedAreaPadding = 20;
         _noteEditorTextView.text = nil;
         return;
     }
-    
+
+    [self saveScrollPosition];
+
     _currentNote = note;
     [self.noteEditorTextView scrollToTop];
 

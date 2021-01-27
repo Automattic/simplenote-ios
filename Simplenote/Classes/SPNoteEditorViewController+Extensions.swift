@@ -887,6 +887,34 @@ extension SPNoteEditorViewController {
 }
 
 
+// MARK: - Scroll position
+//
+extension SPNoteEditorViewController {
+    @objc
+    func saveScrollPosition() {
+        guard let key = currentNote?.simperiumKey else {
+            return
+        }
+
+        scrollPositionCache.store(position: noteEditorTextView.contentOffset.y,
+                                  for: key)
+    }
+
+    @objc
+    func restoreScrollPosition() {
+        guard let key = currentNote?.simperiumKey,
+              let offsetY = scrollPositionCache.position(for: key) else {
+            noteEditorTextView.scrollToTop()
+            return
+        }
+
+        let offset = CGPoint(x: 0, y: offsetY)
+
+        noteEditorTextView.contentOffset = noteEditorTextView.boundedContentOffset(from: offset)
+    }
+}
+
+
 // MARK: - Metrics
 //
 private enum Metrics {
