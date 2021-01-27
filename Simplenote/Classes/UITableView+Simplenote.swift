@@ -56,7 +56,7 @@ extension UITableView {
     var firstIndexPath: IndexPath? {
         let indexPath = IndexPath(row: 0, section: 0)
         if numberOfRows(inSection: 0) == 0 {
-            return nextIndexPath(after: indexPath)
+            return self.indexPath(after: indexPath)
         }
 
         return indexPath
@@ -69,7 +69,7 @@ extension UITableView {
             return nil
         }
 
-        return nextIndexPath(after: indexPath)
+        return self.indexPath(after: indexPath)
     }
 
     /// Returns index path before currently selected index path
@@ -79,21 +79,7 @@ extension UITableView {
             return nil
         }
 
-        var row = indexPath.row
-        var section = indexPath.section
-
-        while true {
-            if row == 0 {
-                if section == 0 {
-                    return nil
-                }
-
-                section -= 1
-                row = numberOfRows(inSection: section)
-            } else {
-                return IndexPath(row: row - 1, section: section)
-            }
-        }
+        return self.indexPath(before: indexPath)
     }
 
     /// Selects row after currently selected row or first row if no row is currently selected
@@ -143,7 +129,8 @@ extension UITableView {
 // MARK: - Navigation (Private)
 //
 private extension UITableView {
-    func nextIndexPath(after prevIndexPath: IndexPath) -> IndexPath? {
+
+    func indexPath(after prevIndexPath: IndexPath) -> IndexPath? {
         var row = prevIndexPath.row
         var section = prevIndexPath.section
 
@@ -160,6 +147,24 @@ private extension UITableView {
                 row = -1
             } else {
                 return IndexPath(row: row, section: section)
+            }
+        }
+    }
+
+    func indexPath(before nextIndexPath: IndexPath) -> IndexPath? {
+        var row = nextIndexPath.row
+        var section = nextIndexPath.section
+
+        while true {
+            if row == 0 {
+                if section == 0 {
+                    return nil
+                }
+
+                section -= 1
+                row = numberOfRows(inSection: section)
+            } else {
+                return IndexPath(row: row - 1, section: section)
             }
         }
     }
