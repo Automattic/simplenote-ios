@@ -1,3 +1,7 @@
+4.32
+-----
+-   Added support for keyboard navigation and shortcuts #1092
+
 4.31
 -----
 -   Added account verification screen #1086
