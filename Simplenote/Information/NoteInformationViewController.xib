@@ -59,10 +59,13 @@
                         <outlet property="delegate" destination="-1" id="fhS-m2-l5Y"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lD2-IA-haD" customClass="SPDragBar" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="187" y="5" width="36" height="5"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lD2-IA-haD" customClass="SPDragBar" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="189" y="5" width="36" height="5"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="HdR-fd-31k"/>
+                        <constraint firstAttribute="height" constant="5" id="Ver-Mc-ruf"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -72,9 +75,11 @@
                 <constraint firstAttribute="bottom" secondItem="HfE-pa-isg" secondAttribute="bottom" id="Fr2-jA-fFN"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JtQ-ZA-WOi"/>
                 <constraint firstItem="qBv-kl-fOD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kky-qU-XXe"/>
+                <constraint firstItem="lD2-IA-haD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WtO-HV-AKc"/>
                 <constraint firstItem="qBv-kl-fOD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XR7-XE-p8V"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hrp-6V-pUL"/>
                 <constraint firstAttribute="trailing" secondItem="qBv-kl-fOD" secondAttribute="trailing" id="nD9-Ze-Dqy"/>
+                <constraint firstItem="lD2-IA-haD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="pYF-Ho-feS"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
