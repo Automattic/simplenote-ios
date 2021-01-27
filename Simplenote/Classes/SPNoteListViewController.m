@@ -538,6 +538,9 @@
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 
+    // We want this VC to be first responder to support keyboard shortcuts.
+    // We don't want to steal first responder from the search bar in case it's already active.
+    // It Can happen if we open the app directly into search mode from the home screen quick action
     if (!self.isSearchActive) {
         [self becomeFirstResponder];
     }
