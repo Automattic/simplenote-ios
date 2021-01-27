@@ -942,9 +942,14 @@ extension SPNoteListViewController {
     }
 
     open override var keyCommands: [UIKeyCommand]? {
-        [
-            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
-        ] + tableCommands
+        var commands = tableCommands
+        if isSearchActive {
+            commands.append(contentsOf: [
+                UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)),
+                UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching))
+            ])
+        }
+        return commands
     }
 
     @objc
