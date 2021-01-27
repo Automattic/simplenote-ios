@@ -197,11 +197,11 @@ private extension ShareViewController {
     
     func registerKeyboardNotifications() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+                                               selector: #selector(keyboardDidChangeFrame(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
     
     @objc
-    func keyboardDidShow(notification: NSNotification) {
+    func keyboardDidChangeFrame(notification: NSNotification) {
         guard let notificationInfo = notification.userInfo,
               let keyboardFrame = notificationInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
             return
