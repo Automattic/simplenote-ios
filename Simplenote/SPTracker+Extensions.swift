@@ -57,7 +57,7 @@ extension SPTracker {
         trackShortcut("markdown")
     }
 
-    static func trackShortcutInsertChecklist() {
-        trackShortcut("insert_checklist")
+    static func trackShortcutToggleChecklist() {
+        trackShortcut("toggle_checklist")
     }
 }

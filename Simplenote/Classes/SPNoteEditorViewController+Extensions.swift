@@ -862,7 +862,7 @@ extension SPNoteEditorViewController {
 
     @objc
     private func keyboardInsertChecklist() {
-        SPTracker.trackShortcutInsertChecklist()
+        SPTracker.trackShortcutToggleChecklist()
         insertChecklistAction(checklistButton)
     }
 
