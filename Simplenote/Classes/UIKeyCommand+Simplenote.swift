@@ -12,6 +12,10 @@ extension UIKeyCommand {
         return UIApplication.isRTL ? UIKeyCommand.inputLeftArrow : UIKeyCommand.inputRightArrow
     }
 
+    static let inputReturn = "\r"
+
+    static let inputTab = "\t"
+
     convenience init(input: String,
                      modifierFlags: UIKeyModifierFlags,
                      action: Selector,

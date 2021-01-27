@@ -13,7 +13,6 @@ extension SPSidebarContainerViewController {
         }
 
         var commands = [
-            UIKeyCommand(input: "\r", modifierFlags: [.command], action: #selector(keyboardGoBack)),
             UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardCreateNewNote), title: Localization.Shortcuts.newNote),
             UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search),
         ]

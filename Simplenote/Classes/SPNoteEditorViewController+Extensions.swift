@@ -826,6 +826,8 @@ extension SPNoteEditorViewController {
                                          title: Localization.Shortcuts.toggleMarkdown))
         }
 
+
+
         if searching {
             commands.append(contentsOf: [
                 UIKeyCommand(input: "g",
@@ -845,10 +847,16 @@ extension SPNoteEditorViewController {
                                          action: #selector(keyboardInsertChecklist),
                                          title: Localization.Shortcuts.insertChecklist))
         } else {
-            commands.append(UIKeyCommand(input: "\t",
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputTab,
                                          modifierFlags: [],
                                          action: #selector(keyboardFocusOnEditor)))
         }
+
+        commands.append(UIKeyCommand(input: UIKeyCommand.inputReturn,
+                                     modifierFlags: [.command],
+                                     action: #selector(keyboardGoBack),
+                                     title: Localization.Shortcuts.endEditing))
+
         return commands
     }
 
@@ -887,6 +895,11 @@ extension SPNoteEditorViewController {
         noteEditorTextView.becomeFirstResponder()
         noteEditorTextView.selectedTextRange = noteEditorTextView.textRange(from: noteEditorTextView.beginningOfDocument,
                                                                             to: noteEditorTextView.beginningOfDocument)
+    }
+
+    @objc
+    private func keyboardGoBack() {
+        dismissEditor(nil)
     }
 }
 
@@ -950,5 +963,6 @@ private enum Localization {
         static let previousMatch = NSLocalizedString("Previous Match", comment: "Keyboard shortcut: Note search, Previous Match")
         static let insertChecklist = NSLocalizedString("Insert Checklist", comment: "Keyboard shortcut: Insert Checklist")
         static let toggleMarkdown = NSLocalizedString("Toggle Markdown", comment: "Keyboard shortcut: Toggle Markdown")
+        static let endEditing = NSLocalizedString("End Editing", comment: "Keyboard shortcut: End Editing")
     }
 }
