@@ -459,11 +459,7 @@
         [editor updateWithSearchQuery:self.searchQuery];
     }
 
-    if (self.navigationController.visibleViewController != self) {
-        [self.navigationController setViewControllers:@[self, editor] animated:animated];
-    } else {
-        [self.navigationController pushViewController:editor animated:animated];
-    }
+    [self.navigationController setViewControllers:@[self, editor] animated:animated];
 }
 
 - (void)emptyAction:(id)sender

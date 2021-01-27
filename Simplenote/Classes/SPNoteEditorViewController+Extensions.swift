@@ -438,6 +438,12 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteContentShared()
 
     }
+
+    func presentMarkdownPreview() {
+        let previewViewController = SPMarkdownPreviewViewController()
+        previewViewController.markdownText = noteEditorTextView.plainText
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
 }
 
 
@@ -855,9 +861,7 @@ extension SPNoteEditorViewController {
     @objc
     private func keyboardToggleMarkdownPreview() {
         SPTracker.trackShortcutToggleMarkdownPreview()
-        let previewViewController = SPMarkdownPreviewViewController()
-        previewViewController.markdownText = noteEditorTextView.plainText
-        navigationController?.pushViewController(previewViewController, animated: true)
+        presentMarkdownPreview()
     }
 
     @objc
