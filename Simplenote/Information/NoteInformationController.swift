@@ -143,9 +143,7 @@ private extension NoteInformationController {
 
         let referenceRows = references.map { (note) -> Row in
             let date = DateFormatter.dateFormatter.string(from: note.modificationDate)
-            let value = "\(Localization.interlinkReferences(references.count)), "
-                + "\(NSLocalizedString("Last Modified", comment: "Date of note last modified")) "
-                + date
+            let value = "\(Localization.interlinkReferences(references.count)), \(Localization.lastModified(date))"
             
             return .reference(interLink: note.plainInternalLink,
                               title: note.titlePreview,
@@ -187,5 +185,10 @@ private struct Localization {
     static func interlinkReferences(_ references: Int) -> String {
         let template = references > 1 ? referencePlural : referenceSigular
         return String(format: template, references)
+    }
+    
+    private static let lastModified = NSLocalizedString("Last Modified %1$@", comment: "Date of note last modified. Parameter: %1$@ - formatted date")
+    static func lastModified(_ dateString: String) -> String {
+        return String(format: lastModified, dateString)
     }
 }
