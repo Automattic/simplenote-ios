@@ -75,7 +75,7 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        registerKeyboardNotifications()
+//        registerKeyboardNotifications()
         textView.textContainerInset = Constants.textViewInsets
         loadContent()
     }
@@ -194,31 +194,31 @@ private extension ShareViewController {
             self.textView.text = note.content
         }
     }
-    
-    func registerKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardDidChangeFrame(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-    }
-    
-    @objc
-    func keyboardDidChangeFrame(notification: NSNotification) {
-        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        let textViewFrame = textView.convert(textView.frame, to: nil)
-        let textViewTotalHeight = textViewFrame.origin.y + textViewFrame.height
-        let diff = textViewTotalHeight - keyboardFrame.origin.y
-        print("inset offset value: \(diff)")
-            
-        refreshTextViewInsets(with: diff)
-    }
-    
-    func refreshTextViewInsets(with intersectionHeight: CGFloat) {
-        
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: intersectionHeight, right: 0)
-        textView.contentInset = contentInsets
-        textView.scrollIndicatorInsets = contentInsets
-    }
+//
+//    func registerKeyboardNotifications() {
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(keyboardDidChangeFrame(notification:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+//    }
+//
+//    @objc
+//    func keyboardDidChangeFrame(notification: NSNotification) {
+//        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+//            return
+//        }
+//        let textViewFrame = textView.convert(textView.frame, to: nil)
+//        let textViewTotalHeight = textViewFrame.origin.y + textViewFrame.height
+//        let diff = textViewTotalHeight - keyboardFrame.origin.y
+//        print("inset offset value: \(diff)")
+//
+//        refreshTextViewInsets(with: diff)
+//    }
+//
+//    func refreshTextViewInsets(with intersectionHeight: CGFloat) {
+//
+//        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: intersectionHeight, right: 0)
+//        textView.contentInset = contentInsets
+//        textView.scrollIndicatorInsets = contentInsets
+//    }
 }
 
 

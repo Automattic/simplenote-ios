@@ -71,7 +71,7 @@ final class ExtensionPresentationController: UIPresentationController {
     }
 
     override func containerViewWillLayoutSubviews() {
-        presentedView?.frame = frameOfPresentedViewInContainerView
+//        presentedView?.frame = frameOfPresentedViewInContainerView
         presentedView?.layer.cornerRadius = Appearance.cornerRadius
         presentedView?.clipsToBounds = true
     }
