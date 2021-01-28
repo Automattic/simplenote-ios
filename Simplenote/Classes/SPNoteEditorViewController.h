@@ -9,22 +9,24 @@
 @class SPTagView;
 @class SearchMapView;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
 // Navigation Bar
-@property (nonatomic, strong, readonly) SPBlurEffectView * _Nonnull navigationBarBackground;
+@property (nonatomic, strong, readonly) SPBlurEffectView * navigationBarBackground;
 
 // Navigation Buttons
-@property (nonatomic, strong) UIBarButtonItem * _Nonnull actionButton;
-@property (nonatomic, strong) UIBarButtonItem * _Nonnull checklistButton;
-@property (nonatomic, strong) UIBarButtonItem * _Nonnull keyboardButton;
-@property (nonatomic, strong) UIBarButtonItem * _Nonnull createNoteButton;
-@property (nonatomic, strong) UIBarButtonItem * _Nonnull informationButton;
+@property (nonatomic, strong) UIBarButtonItem * actionButton;
+@property (nonatomic, strong) UIBarButtonItem * checklistButton;
+@property (nonatomic, strong) UIBarButtonItem * keyboardButton;
+@property (nonatomic, strong) UIBarButtonItem * createNoteButton;
+@property (nonatomic, strong) UIBarButtonItem * informationButton;
 
-@property (nonatomic, strong, readonly) Note * _Nonnull note;
-@property (nonatomic, strong) SPEditorTextView * _Nonnull noteEditorTextView;
+@property (nonatomic, strong, readonly) Note * note;
+@property (nonatomic, strong) SPEditorTextView * noteEditorTextView;
 
-@property (nonatomic, strong) SPTagView * _Nonnull tagView;
+@property (nonatomic, strong) SPTagView * tagView;
 
 
 // History
@@ -34,10 +36,10 @@
 @property (nonatomic, weak) UIViewController * _Nullable informationViewController;
 
 // Interlinks
-@property (nonatomic, strong) InterlinkProcessor * _Nonnull interlinkProcessor;
+@property (nonatomic, strong) InterlinkProcessor * interlinkProcessor;
 
 // Voiceover
-@property (nonatomic, strong) UIView * _Nonnull bottomView;
+@property (nonatomic, strong) UIView * bottomView;
 
 // Keyboard!
 @property (nonatomic, strong) NSArray * _Nullable keyboardNotificationTokens;
@@ -50,7 +52,7 @@
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
 
-- (instancetype _Nonnull)initWithNote:(Note * _Nonnull)note;
+- (instancetype _Nonnull)initWithNote:(Note *)note;
 
 - (void)dismissEditor:(id _Nullable )sender;
 - (void)insertChecklistAction:(id _Nullable )sender;
@@ -73,3 +75,5 @@
 - (void)updateWithSearchQuery:(id _Nullable )query;
 
 @end
+
+NS_ASSUME_NONNULL_END
