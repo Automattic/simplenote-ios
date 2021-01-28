@@ -14,19 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
 // Navigation Bar
-@property (nonatomic, strong, readonly) SPBlurEffectView * navigationBarBackground;
+@property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;
 
 // Navigation Buttons
-@property (nonatomic, strong) UIBarButtonItem * actionButton;
-@property (nonatomic, strong) UIBarButtonItem * checklistButton;
-@property (nonatomic, strong) UIBarButtonItem * keyboardButton;
-@property (nonatomic, strong) UIBarButtonItem * createNoteButton;
-@property (nonatomic, strong) UIBarButtonItem * informationButton;
+@property (nonatomic, strong) UIBarButtonItem *actionButton;
+@property (nonatomic, strong) UIBarButtonItem *checklistButton;
+@property (nonatomic, strong) UIBarButtonItem *keyboardButton;
+@property (nonatomic, strong) UIBarButtonItem *createNoteButton;
+@property (nonatomic, strong) UIBarButtonItem *informationButton;
 
-@property (nonatomic, strong, readonly) Note * note;
-@property (nonatomic, strong) SPEditorTextView * noteEditorTextView;
+@property (nonatomic, strong, readonly) Note *note;
+@property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 
-@property (nonatomic, strong) SPTagView * tagView;
+@property (nonatomic, strong) SPTagView *tagView;
 
 
 // History
@@ -36,10 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) UIViewController * _Nullable informationViewController;
 
 // Interlinks
-@property (nonatomic, strong) InterlinkProcessor * interlinkProcessor;
+@property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
 
 // Voiceover
-@property (nonatomic, strong) UIView * bottomView;
+@property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
 @property (nonatomic, strong) NSArray * _Nullable keyboardNotificationTokens;
