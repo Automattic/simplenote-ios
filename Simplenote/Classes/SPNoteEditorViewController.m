@@ -591,30 +591,30 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)highlightNextSearchResult
 {
-    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
+    [self highlightSearchResultAtIndex:(self.highlightedSearchResultIndex + 1) animated:YES];
 }
 
 - (void)highlightPrevSearchResult
 {
-    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
+    [self highlightSearchResultAtIndex:(self.highlightedSearchResultIndex - 1) animated:YES];
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
 {
+    NSInteger searchResultCount = self.searchResultRanges.count;
+
+    index = MIN(index, searchResultCount - 1);
+    index = MAX(index, 0);
     self.highlightedSearchResultIndex = index;
 
-    NSInteger searchResultCount = self.searchResultRanges.count;
-    if (index >= 0 && index < searchResultCount) {
-        
-        // enable or disbale search result puttons accordingly
-        self.prevSearchButton.enabled = index > 0;
-        self.nextSearchButton.enabled = index < searchResultCount - 1;
+    // enable or disbale search result puttons accordingly
+    self.prevSearchButton.enabled = index > 0;
+    self.nextSearchButton.enabled = index < searchResultCount - 1;
 
-        NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
-        [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
-            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
-        }];
-    }
+    NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
+    [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
+        [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
+    }];
 }
 
 - (void)endSearching:(id)sender {
