@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
 
-- (instancetype _Nonnull)initWithNote:(Note *)note;
+- (instancetype)initWithNote:(Note *)note;
 
 - (void)dismissEditor:(id _Nullable )sender;
 - (void)insertChecklistAction:(id _Nullable )sender;
