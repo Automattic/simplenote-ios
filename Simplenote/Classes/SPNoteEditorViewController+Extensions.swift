@@ -482,21 +482,16 @@ extension SPNoteEditorViewController {
 
         SPTracker.trackEditorNoteCreated()
 
-        let snapshotRect = CGRect(x: 0,
-                                  y: noteEditorTextView.adjustedContentInset.top,
-                                  width: noteEditorTextView.frame.width,
-                                  height: noteEditorTextView.frame.height - noteEditorTextView.adjustedContentInset.top)
+        presentNewNoteReplacingCurrentEditor()
+    }
 
-        guard let snapshotView = view.resizableSnapshotView(from: snapshotRect, afterScreenUpdates: false, withCapInsets: .zero),
-              let navigationController = navigationController else {
+    private func presentNewNoteReplacingCurrentEditor() {
+        guard let navigationController = navigationController,
+              let snapshotView = createAndAddEditorSnapshotView() else {
             return
         }
 
-        snapshotView.frame.origin.y = noteEditorTextView.adjustedContentInset.top
-
-        navigationController.view.addSubview(snapshotView)
-
-        let viewControllers: [UIViewController] = navigationController.viewControllers.map{
+        let viewControllers: [UIViewController] = navigationController.viewControllers.map {
             if $0 == self {
                 return EditorFactory.shared.build(with: nil)
             }
@@ -510,6 +505,23 @@ extension SPNoteEditorViewController {
         } completion: { (_) in
             snapshotView.removeFromSuperview()
         }
+    }
+
+    private func createAndAddEditorSnapshotView() -> UIView? {
+        let snapshotRect = CGRect(x: 0,
+                                  y: noteEditorTextView.adjustedContentInset.top,
+                                  width: noteEditorTextView.frame.width,
+                                  height: noteEditorTextView.frame.height - noteEditorTextView.adjustedContentInset.top)
+
+        guard let snapshotView = view.resizableSnapshotView(from: snapshotRect, afterScreenUpdates: false, withCapInsets: .zero),
+              let navigationController = navigationController else {
+            return nil
+        }
+
+        snapshotView.frame.origin.y = snapshotRect.origin.y
+        navigationController.view.addSubview(snapshotView)
+
+        return snapshotView
     }
 }
 
