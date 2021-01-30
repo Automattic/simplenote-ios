@@ -7,7 +7,6 @@ final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet weak var dragBar: SPDragBar!
-    private lazy var blurEffectView = SPBlurEffectView()
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
@@ -100,7 +99,6 @@ private extension NoteInformationViewController {
 
     func configureViews() {
         configureTableView()
-        configureHeaderView()
         styleTableView()
     }
 
@@ -118,15 +116,6 @@ private extension NoteInformationViewController {
         }
     }
 
-    func configureHeaderView() {
-        guard navigationController == nil else {
-            headerStackView.isHidden = true
-            return
-        }
-
-        configureBlurEffectView()
-    }
-
     func configureHeaderLayoutMargins() {
         headerStackView.isLayoutMarginsRelativeArrangement = true
 
@@ -136,17 +125,6 @@ private extension NoteInformationViewController {
 
         // Sync layout margins with table view so labels are aligned
         headerStackView.layoutMargins = layoutMargins
-    }
-
-    func configureBlurEffectView() {
-        view.insertSubview(blurEffectView, belowSubview: headerStackView)
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-            blurEffectView.bottomAnchor.constraint(equalTo: headerStackView.bottomAnchor)
-        ])
     }
 
     func configureAccessibility() {
