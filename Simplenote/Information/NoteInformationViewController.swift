@@ -5,7 +5,6 @@ import SimplenoteFoundation
 //
 final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var screenTitleLabel: UILabel!
     @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet weak var dragBar: SPDragBar!
     private lazy var blurEffectView = SPBlurEffectView()
@@ -101,11 +100,8 @@ private extension NoteInformationViewController {
 
     func configureViews() {
         configureTableView()
-        configureScreenTitleLabel()
-
         configureHeaderView()
-
-        refreshStyle()
+        styleTableView()
     }
 
     func configureTableView() {
@@ -156,14 +152,6 @@ private extension NoteInformationViewController {
     func configureAccessibility() {
         //TO DO: Should we do something for accessibility for dismissing the info sheet now that the dismiss button is gone?
     }
-    
-    func configureScreenTitleLabel() {
-        screenTitleLabel.text = Localization.document
-        
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            screenTitleLabel.isHidden = true
-        }
-    }
 
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
@@ -186,15 +174,6 @@ private extension NoteInformationViewController {
 // MARK: - Styling
 //
 private extension NoteInformationViewController {
-    func refreshStyle() {
-        styleScreenTitleLabel()
-        styleTableView()
-    }
-
-    func styleScreenTitleLabel() {
-        screenTitleLabel.textColor = .simplenoteNoteHeadlineColor
-    }
-
     func styleTableView() {
         tableView.separatorColor = .simplenoteDividerColor
     }
@@ -308,7 +287,7 @@ private extension NoteInformationViewController {
 
     @objc
     private func themeDidChange() {
-        refreshStyle()
+        styleTableView()
     }
 }
 

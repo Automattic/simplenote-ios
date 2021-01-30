@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="dragBar" destination="lD2-IA-haD" id="als-5f-v3X"/>
                 <outlet property="headerStackView" destination="qBv-kl-fOD" id="eEl-cs-unx"/>
-                <outlet property="screenTitleLabel" destination="9ul-2d-OoP" id="pZb-Nb-szF"/>
                 <outlet property="tableView" destination="HfE-pa-isg" id="5Gu-fK-38o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,16 +22,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-kl-fOD">
+                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-kl-fOD">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ul-2d-OoP">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                 </stackView>
                 <tableView contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HfE-pa-isg" customClass="HuggableTableView" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
