@@ -12,7 +12,9 @@ class SPDragBar: UIView {
     }
     
     private func configure() {
-        backgroundColor = SPUserInterface.isDark ? .white : .black
+        let color = UIColor(lightColor: ColorStudio.black, darkColor: ColorStudio.white)
+        
+        backgroundColor = color
         alpha = 0.2
         layer.cornerRadius = 2.5
         layer.masksToBounds = true
