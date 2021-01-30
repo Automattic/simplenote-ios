@@ -6,7 +6,6 @@ import SimplenoteFoundation
 final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var screenTitleLabel: UILabel!
-    @IBOutlet private weak var dismissButton: UIButton!
     @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet weak var dragBar: SPDragBar!
     private lazy var blurEffectView = SPBlurEffectView()
@@ -155,7 +154,7 @@ private extension NoteInformationViewController {
     }
 
     func configureAccessibility() {
-        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
+        //TO DO: Should we do something for accessibility for dismissing the info sheet now that the dismiss button is gone?
     }
     
     func configureScreenTitleLabel() {
@@ -163,7 +162,6 @@ private extension NoteInformationViewController {
         
         if UIDevice.current.userInterfaceIdiom == .phone {
             screenTitleLabel.isHidden = true
-            dismissButton.isHidden = true
         }
     }
 
