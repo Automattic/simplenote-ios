@@ -5,7 +5,7 @@ import SimplenoteFoundation
 //
 final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var dragBar: SPDragBar!
+    @IBOutlet private weak var dragBar: SPDragBar!
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
@@ -122,7 +122,7 @@ private extension NoteInformationViewController {
         preferredContentSize = tableView.contentSize
     }
     
-    func configureDragBar() {
+    private func configureDragBar() {
         dragBar.isHidden = navigationController != nil
     }
 }
