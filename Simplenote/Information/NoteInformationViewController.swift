@@ -5,7 +5,6 @@ import SimplenoteFoundation
 //
 final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet weak var dragBar: SPDragBar!
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
@@ -58,13 +57,12 @@ final class NoteInformationViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        configureHeaderLayoutMargins()
         refreshPreferredSize()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateAdditionalSafeAreaInsets()
+        additionalSafeAreaInsets = Consts.tableViewSafeAreaInsets
     }
 }
 
@@ -116,32 +114,12 @@ private extension NoteInformationViewController {
         }
     }
 
-    func configureHeaderLayoutMargins() {
-        headerStackView.isLayoutMarginsRelativeArrangement = true
-
-        var layoutMargins = Consts.headerExtraLayoutMargins
-        layoutMargins.left += tableView.layoutMargins.left
-        layoutMargins.right += tableView.layoutMargins.right
-
-        // Sync layout margins with table view so labels are aligned
-        headerStackView.layoutMargins = layoutMargins
-    }
-
     func configureAccessibility() {
         //TO DO: Should we do something for accessibility for dismissing the info sheet now that the dismiss button is gone?
     }
 
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
-    }
-
-    func updateAdditionalSafeAreaInsets() {
-        guard !headerStackView.isHidden else {
-            additionalSafeAreaInsets = .zero
-            return
-        }
-
-        additionalSafeAreaInsets = UIEdgeInsets(top: headerStackView.frame.maxY, left: 0, bottom: 0, right: 0)
     }
     
     func configureDragBar() {
@@ -301,5 +279,5 @@ private struct Localization {
 }
 
 private struct Consts {
-    static let headerExtraLayoutMargins = UIEdgeInsets(top: 13.0, left: 0.0, bottom: 13.0, right: 0.0)
+    static let tableViewSafeAreaInsets = UIEdgeInsets(top: 26, left: 0, bottom: 0, right: 0)
 }

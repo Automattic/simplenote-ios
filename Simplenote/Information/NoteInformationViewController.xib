@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteInformationViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="dragBar" destination="lD2-IA-haD" id="als-5f-v3X"/>
-                <outlet property="headerStackView" destination="qBv-kl-fOD" id="eEl-cs-unx"/>
                 <outlet property="tableView" destination="HfE-pa-isg" id="5Gu-fK-38o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,9 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-kl-fOD">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                </stackView>
                 <tableView contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HfE-pa-isg" customClass="HuggableTableView" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,11 +44,8 @@
                 <constraint firstAttribute="trailing" secondItem="HfE-pa-isg" secondAttribute="trailing" id="17g-xl-0dG"/>
                 <constraint firstAttribute="bottom" secondItem="HfE-pa-isg" secondAttribute="bottom" id="Fr2-jA-fFN"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JtQ-ZA-WOi"/>
-                <constraint firstItem="qBv-kl-fOD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kky-qU-XXe"/>
                 <constraint firstItem="lD2-IA-haD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WtO-HV-AKc"/>
-                <constraint firstItem="qBv-kl-fOD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XR7-XE-p8V"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hrp-6V-pUL"/>
-                <constraint firstAttribute="trailing" secondItem="qBv-kl-fOD" secondAttribute="trailing" id="nD9-Ze-Dqy"/>
                 <constraint firstItem="lD2-IA-haD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="pYF-Ho-feS"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
