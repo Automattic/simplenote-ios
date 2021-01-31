@@ -76,6 +76,7 @@ class ShareViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
 //        registerKeyboardNotifications()
+        let _ = addKeyboardObservers()
         textView.textContainerInset = Constants.textViewInsets
         loadContent()
     }
@@ -219,6 +220,29 @@ private extension ShareViewController {
 //        textView.contentInset = contentInsets
 //        textView.scrollIndicatorInsets = contentInsets
 //    }
+}
+
+extension ShareViewController: KeyboardObservable {
+    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        let keyboardFrame = endFrame ?? .zero
+        setEdgeInsets(keyboardFrame: keyboardFrame)
+        print("insets")
+    }
+    
+    private func setEdgeInsets(keyboardFrame: CGRect) {
+        let keyboardTop = UIScreen.main.bounds.height - keyboardFrame.size.height
+        let textViewBottom = textView.frame.height + textView.center.y
+        let offset = textViewBottom - keyboardTop
+        
+        textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        textView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+    }
+    
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        //leaving blank for now
+    }
+    
+    
 }
 
 
