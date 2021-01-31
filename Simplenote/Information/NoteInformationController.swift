@@ -23,6 +23,10 @@ final class NoteInformationController {
         /// Header
         ///
         case header(title: String)
+        
+        /// Spacer
+        ///
+        case spacer
     }
 
     /// Observer sends changes in data
@@ -150,10 +154,14 @@ private extension NoteInformationController {
                               reference: value)
         }
 
+        let spacer = Section(rows: [
+            Row.spacer
+        ])
         let header = Section(rows: [
             Row.header(title: Localization.references)
         ])
         return [
+            spacer,
             header,
             Section(rows: referenceRows)
         ]
