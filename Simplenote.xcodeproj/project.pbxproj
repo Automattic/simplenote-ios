@@ -4084,8 +4084,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Automattic/SimplenoteSearch-Swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				branch = "issue/860-localize-tag-search";
+				kind = branch;
 			};
 		};
 		B59CACFA2541E05400958330 /* XCRemoteSwiftPackageReference "SimplenoteInterlinks-Swift" */ = {
