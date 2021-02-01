@@ -22,12 +22,20 @@ class EditorFactory: NSObject {
 
     /// Returns a new Editor Instance
     ///
-    func build() -> SPNoteEditorViewController {
+    func build(with note: Note?) -> SPNoteEditorViewController {
         assert(restorationClass != nil)
 
-        let controller = SPNoteEditorViewController()
+        let controller = SPNoteEditorViewController(note: note ?? newNote())
         controller.restorationClass = restorationClass
         controller.restorationIdentifier = SPNoteEditorViewController.defaultRestorationIdentifier
         return controller
+    }
+
+    private func newNote() -> Note {
+        let note = SPObjectManager.shared().newDefaultNote()
+        if let tagName = SPAppDelegate.shared().filteredTagName {
+            note.addTag(tagName)
+        }
+        return note
     }
 }
