@@ -61,7 +61,7 @@ class AccountVerificationController: NSObject {
 
         let emailVerification = EmailVerification(payload: rawData)
 
-        if emailVerification.token?.username == email {
+        if emailVerification.token?.username.lowercased() == email.lowercased() {
             state = .verified
         } else if emailVerification.sentTo != nil {
             state = .verificationInProgress

@@ -1,3 +1,0 @@
-- Nouvelle interface de code d’accès
-- Résolution d’un bogue qui entraînait un incident lors de la recherche
-- Résolution de la saisie de texte prédictive lors de l’utilisation d’étiquettes
