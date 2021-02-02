@@ -119,10 +119,6 @@ private extension NoteInformationViewController {
         }
     }
 
-    func configureAccessibility() {
-        //TO DO: Should we do something for accessibility for dismissing the info sheet now that the dismiss button is gone?
-    }
-
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
