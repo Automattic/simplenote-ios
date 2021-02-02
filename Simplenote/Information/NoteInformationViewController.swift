@@ -45,7 +45,6 @@ final class NoteInformationViewController: UIViewController {
         super.viewDidLoad()
 
         configureViews()
-        configureAccessibility()
         configureNavigation()
         configureDragBar()
 
