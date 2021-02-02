@@ -16,8 +16,7 @@ extension UIActivityViewController {
 
         let print = SPSimpleTextPrintFormatter(text: content)
         let source = SimplenoteActivityItemSource(note: note)
-
-        let link = BookLinkActivityItemProvider(note: note)
+        let link = PDFLinkActivityItemProvider(note: note)
 
         self.init(activityItems: [print, source, link], applicationActivities: nil)
     }
