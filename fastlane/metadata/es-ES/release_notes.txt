@@ -1,3 +1,0 @@
-- Nueva interfaz de código de acceso
-- Se ha corregido un error que provocaba un bloqueo del sistema al realizar una búsqueda
-- Se ha corregido la entrada de texto predictivo al trabajar con etiquetas

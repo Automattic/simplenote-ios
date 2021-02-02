@@ -1,3 +1,0 @@
--   New passcode interface
--   Fixed a bug that caused a crash while searching
--   Fixed predictive text entry when working with tags

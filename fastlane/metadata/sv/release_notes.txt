@@ -1,3 +1,0 @@
-– Nytt lösenordsgränssnitt
-– Åtgärdade en bugg som orsakade en krasch vid sökning
-– Åtgärdade förutsägande textinmatning vid arbete med taggar

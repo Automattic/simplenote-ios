@@ -1,3 +1,0 @@
-- - Yeni parola arayüzü
-- Arama yaparken kilitlenmeye neden olan bir hata düzeltildi
-- Etiketlerle çalışırken tahmini metin girişiyle ilgili sorun düzeltildi
