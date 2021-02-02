@@ -80,12 +80,17 @@ extension UIView {
             return
         }
 
-        guard let snapshot = snapshotView(afterScreenUpdates: true) else {
+        guard let superview = superview, let snapshot = snapshotView(afterScreenUpdates: true) else {
             viewUpdateBlock()
             return
         }
 
-        superview?.insertSubview(snapshot, aboveSubview: self)
+        superview.insertSubview(snapshot, aboveSubview: self)
+        pinSubviewToAllEdges(snapshot)
+
+        superview.setNeedsLayout()
+        superview.layoutIfNeeded()
+
         viewUpdateBlock()
 
         let slideDirection: SlideDirection = animation == .slideLeading ? .leading : .trailing

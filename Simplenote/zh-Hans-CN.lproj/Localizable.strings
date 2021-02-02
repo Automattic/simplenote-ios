@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "字符";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "协作";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "压缩的笔记列表";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "贡献";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "调试已禁用";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "删除";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "已排入队列数";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "输入密码";
-
-/* Touch ID fallback title */
-"Enter passcode" = "输入密码";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "输入您的密码";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "面容 ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "失败尝试次数";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在提取版本";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "给我们评分";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "再次输入密码";
-
 /* Reachs Internet */
 "Reachability" = "可访问性";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "发送反馈";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "设置密码";
 
 /* Title of options screen */
 "Settings" = "设置";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "关闭密码";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "解锁 %@";
 
 /* Unpins a note */
 "Unpin" = "取消钉选";

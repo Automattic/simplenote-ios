@@ -99,6 +99,7 @@
 
 /* Cancel Action
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Abbrechen";
 
@@ -107,6 +108,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Zeichen";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Zusammenarbeiten";
@@ -119,6 +123,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Notizenliste Kurzfassung";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Confirm your passcode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Beitragen";
@@ -183,6 +190,9 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Fehlersuche deaktiviert";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Löschen";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notizen löschen";
 
@@ -227,13 +237,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "In der Warteschlange";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Gib einen Passcode ein";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Gib einen Passcode ein";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Gib deinen Passcode ein";
 
 /* Error Title */
@@ -244,9 +248,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Version wird abgerufen";
@@ -444,9 +445,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Bewerte uns";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Passcode erneut eingeben";
-
 /* Reachs Internet */
 "Reachability" = "Erreichbarkeit";
 
@@ -496,9 +494,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Feedback senden";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Passcode festlegen";
 
 /* Title of options screen */
 "Settings" = "Einstellungen";
@@ -590,9 +585,6 @@
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Passcode deaktivieren";
-
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ entsperren";
 
 /* Unpins a note */
 "Unpin" = "Lösen";

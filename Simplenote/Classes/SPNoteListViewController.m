@@ -30,7 +30,6 @@
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
-@property (nonatomic, strong) UIBarButtonItem                       *emptyTrashButton;
 
 @property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
@@ -419,16 +418,6 @@
 
 #pragma mark - Public API
 
-- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated
-{
-    Note *note = [self.notesListController noteForSimperiumKey:simperiumKey];
-    if (!note) {
-        return;
-    }
-
-    [self openNote:note animated:animated];
-}
-
 - (void)openNote:(Note *)note animated:(BOOL)animated
 {
     [self openNote:note ignoringSearchQuery:NO animated:animated];
@@ -443,8 +432,7 @@
     [self.searchBar resignFirstResponder];
 
     // Always a new Editor!
-    SPNoteEditorViewController *editor = [[EditorFactory shared] build];
-    [editor displayNote:note];
+    SPNoteEditorViewController *editor = [[EditorFactory shared] buildWith:note];
 
     if (!ignoringSearchQuery && self.isSearchActive) {
         [editor updateWithSearchQuery:self.searchQuery];
@@ -500,9 +488,8 @@
     [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
-    BOOL isNotEmpty = !self.isListEmpty;
 
-    self.emptyTrashButton.enabled = isTrashOnScreen && isNotEmpty;
+    [self refreshEmptyTrashState];
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];

@@ -1,6 +1,38 @@
 import Foundation
 
 
+// MARK: - Initialization
+//
+extension SPAppDelegate {
+
+    /// Simperium Initialization
+    /// - Important: Buckets that don't have a backing `SPManagedObject` will be dynamic. Invoking `bucketForName` will initialize sync'ing!
+    ///
+    @objc
+    func setupSimperium() {
+        simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
+
+#if USE_VERBOSE_LOGGING
+        simperium.verboseLoggingEnabled = true
+        NSLog("[Simperium] Verbose logging Enabled")
+#else
+        simperium.verboseLoggingEnabled = false
+#endif
+
+        simperium.authenticationViewControllerClass    = SPOnboardingViewController.self
+        simperium.authenticator.providerString         = "simplenote.com"
+
+        simperium.authenticationShouldBeEmbeddedInNavigationController = true
+        simperium.delegate = self
+
+        for bucket in simperium.allBuckets {
+            bucket.notifyWhileIndexing = true
+            bucket.delegate = self
+        }
+    }
+}
+
+
 // MARK: - Internal Methods
 //
 extension SPAppDelegate {
@@ -63,8 +95,7 @@ extension SPAppDelegate {
             return false
         }
 
-        let editorViewController = EditorFactory.shared.build()
-        editorViewController.display(note)
+        let editorViewController = EditorFactory.shared.build(with: note)
         replaceNoteEditor(editorViewController)
 
         return true
@@ -150,7 +181,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
         sidebarViewController.restorationClass = SPAppDelegate.self
     }
 
-    func viewController(restorationIdentifier: String) -> UIViewController? {
+    func viewController(restorationIdentifier: String, coder: NSCoder) -> UIViewController? {
         switch restorationIdentifier {
         case tagListViewController.restorationIdentifier:
             return tagListViewController
@@ -159,8 +190,12 @@ extension SPAppDelegate: UIViewControllerRestoration {
             return noteListViewController
 
         case SPNoteEditorViewController.defaultRestorationIdentifier:
-            // Yea! always a new instance (we're not keeping a reference to the active editor anymore)
-            return EditorFactory.shared.build()
+            guard let simperiumKey = coder.decodeObject(forKey: SPNoteEditorViewController.CodingKeys.currentNoteKey.rawValue) as? String,
+                  let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
+            else {
+                return nil
+            }
+            return EditorFactory.shared.build(with: note)
 
         case navigationController.restorationIdentifier:
             return navigationController
@@ -182,7 +217,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
             return nil
         }
 
-        return appDelegate.viewController(restorationIdentifier: restorationIdentifier)
+        return appDelegate.viewController(restorationIdentifier: restorationIdentifier, coder: coder)
     }
 }
 
@@ -208,6 +243,8 @@ extension SPAppDelegate: SimperiumDelegate {
         let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
         CrashLoggingShim.cacheUser(simperium.user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
+
+        setupVerificationController()
     }
 
     public func simperiumDidLogout(_ simperium: Simperium!) {
@@ -219,6 +256,8 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Shortcuts!
         ShortcutsHandler.shared.clearHomeScreenQuickActions()
+
+        destroyVerificationController()
     }
 
     public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
@@ -279,5 +318,48 @@ extension SPAppDelegate: PinLockVerifyControllerDelegate {
         } completion: { (_) in
             self.dismissPasscodeLock()
         }
+    }
+}
+
+// MARK: - Account Verification
+//
+private extension SPAppDelegate {
+    func setupVerificationController() {
+        guard let email = simperium.user?.email, !email.isEmpty else {
+            return
+        }
+        verificationController = AccountVerificationController(email: email)
+        verificationController?.onStateChange = { [weak self] (oldState, state) in
+            switch (oldState, state) {
+            case (.unknown, .unverified):
+                self?.showVerificationViewController(with: .review)
+            case (.unknown, .verificationInProgress):
+                self?.showVerificationViewController(with: .verify)
+            case (.unverified, .verified), (.verificationInProgress, .verified):
+                self?.dismissVerificationViewController()
+            default:
+                break
+            }
+        }
+    }
+
+    func destroyVerificationController() {
+        verificationController = nil
+    }
+
+    func showVerificationViewController(with configuration: AccountVerificationViewController.Configuration) {
+        guard let controller = verificationController, verificationViewController == nil else {
+            return
+        }
+
+        let viewController = AccountVerificationViewController(configuration: configuration, controller: controller)
+        verificationViewController = viewController
+
+        viewController.presentFromRootViewController()
+    }
+
+    func dismissVerificationViewController() {
+        verificationViewController?.dismiss(animated: true, completion: nil)
+        verificationViewController = nil
     }
 }

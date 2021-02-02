@@ -40,8 +40,9 @@ class NSStringSimplenoteTests: XCTestCase {
             ["\u{0065}\u{0301}", "\u{00E9}"] // é
         ]
         
-        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[0])
-        testNonEqualStringsCreateSameHash(differentStringsOneHashSamples[1])
+        for sample in differentStringsOneHashSamples {
+            testNonEqualStringsCreateSameHash(sample)
+        }
     }
 }
 
@@ -51,9 +52,7 @@ extension NSStringSimplenoteTests {
         
         for i in 1..<samples.count {
             XCTAssertNotEqual((sampleToTest as NSString), (samples[i] as NSString))
-            print("sample to test: \(sampleToTest) sample to comare: \(samples[i])")
             XCTAssertEqual(sampleToTest.byEncodingAsTagHash, samples[i].byEncodingAsTagHash)
-            print("sample to test: \(sampleToTest.byEncodingAsTagHash) sample to comare: \(samples[i].byEncodingAsTagHash)")
         }
     }
 }

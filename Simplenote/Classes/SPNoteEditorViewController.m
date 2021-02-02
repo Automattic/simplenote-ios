@@ -75,36 +75,10 @@ CGFloat const SPSelectedAreaPadding = 20;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (instancetype)init {
-    
+- (instancetype _Nonnull)initWithNote:(Note * _Nonnull)note {
     self = [super init];
     if (self) {
-        // Editor
-        [self configureTextView];
-        [self configureBottomView];
-
-        // TagView
-        _tagView = _noteEditorTextView.tagView;
-        _noteEditorTextView.tagView.tagDelegate = self;
-
-        // Notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(dismissEditor:)
-                                                     name:SPTransitionControllerPopGestureTriggeredNotificationName
-                                                   object:nil];
-        
-        
-        // voiceover status is tracked because the tag view is anchored
-        // to the bottom of the screen when voiceover is enabled to allow
-        // easier access
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveVoiceOverNotification:)
-                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
-                                                   object:nil];
-
-        // Apply the current style right away!
-        [self startListeningToThemeNotifications];
-        [self refreshStyle];
+        _note = note;
     }
     
     return self;
@@ -125,6 +99,12 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     self.navigationItem.title = nil;
 
+    // Editor
+    [self configureTextView];
+    [self configureBottomView];
+
+    [self configureTagView];
+
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
@@ -132,6 +112,14 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureInterlinksProcessor];
     [self refreshVoiceoverSupport];
+    [self configureTextViewKeyboard];
+
+    [self startListeningToNotifications];
+    [self startListeningToThemeNotifications];
+
+    [self refreshStyle];
+
+    [self displayNote];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -149,18 +137,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewDidAppear:animated];
 
-    /// Note:
-    /// This must happen in viewDidAppear (and not before) because of State Restoration.
-    /// Decode happens right after `viewWillAppear`, and this way we get to avoid spurious empty notes.
-    ///
-    if (!_currentNote) {
-        [self newButtonAction:nil];
-    } else {
-        [_noteEditorTextView processChecklists];
-        self.userActivity = [NSUserActivity openNoteActivityFor:_currentNote];
-    }
-
+    self.userActivity = [NSUserActivity openNoteActivityFor:self.note];
     [self ensureEditorIsFirstResponder];
+}
+
+- (void)configureTagView
+{
+    _tagView = _noteEditorTextView.tagView;
+    _noteEditorTextView.tagView.tagDelegate = self;
 }
 
 - (void)configureNavigationBarBackground
@@ -178,7 +162,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)ensureEditorIsFirstResponder
 {
-    if ((_currentNote.content.length == 0) && !self.isShowingHistory && !self.isPreviewing) {
+    if ((self.note.content.length == 0) && !self.isShowingHistory && !self.isPreviewing) {
         [_noteEditorTextView becomeFirstResponder];
     }
 }
@@ -191,11 +175,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)themeDidChange
 {
-    if (self.currentNote != nil) {
-        [self save];
-        [self.noteEditorTextView endEditing:YES];
-    }
-
+    [self save];
+    [self.noteEditorTextView endEditing:YES];
     [self refreshStyle];
 }
 
@@ -326,24 +307,19 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
-- (void)didReceiveVoiceOverNotification:(NSNotification *)notification
-{
-    [self refreshVoiceoverSupport];
-}
-
 - (void)ensureNoteIsVisibleInList
 {
     // TODO: This should definitely be handled by the Note List itself. Please!
+    // This code is only called in limited amount of cases. It is not called when you press back button in the nav bar.
+    // Do we need this code? :thinking:
     SPNoteListViewController *listController = [[SPAppDelegate sharedDelegate] noteListViewController];
-    if (_currentNote) {
-        
-        NSIndexPath *notePath = [listController.notesListController indexPathForObject:_currentNote];
-        
-        if (![[listController.tableView indexPathsForVisibleRows] containsObject:notePath])
-            [listController.tableView scrollToRowAtIndexPath:notePath
-                                            atScrollPosition:UITableViewScrollPositionTop
-                                                    animated:NO];
-    }
+
+    NSIndexPath *notePath = [listController.notesListController indexPathForObject:self.note];
+
+    if (notePath && ![[listController.tableView indexPathsForVisibleRows] containsObject:notePath])
+        [listController.tableView scrollToRowAtIndexPath:notePath
+                                        atScrollPosition:UITableViewScrollPositionTop
+                                                animated:NO];
 }
 
 - (void)dismissEditor:(id)sender
@@ -359,31 +335,23 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)displayNote:(Note *)note
+- (void)displayNote
 {
-    if (!note) {
-        _noteEditorTextView.text = nil;
-        return;
-    }
-    
-    _currentNote = note;
     [self.noteEditorTextView scrollToTop];
 
     // Synchronously set the TextView's contents. Otherwise we risk race conditions with `highlightSearchResults`
-    self.noteEditorTextView.attributedText = [note.content attributedString];
+    self.noteEditorTextView.attributedText = [self.note.content attributedString];
 
     // Push off Checklist Processing to smoothen out push animation
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.noteEditorTextView processChecklists];
     });
 
-    [self dismissHistoryControllerAnimated:NO];
-
     // mark note as read
-    note.unread = NO;
+    self.note.unread = NO;
     
     // update tags field
-    NSArray *tags = note.tagsArray;
+    NSArray *tags = self.note.tagsArray;
     if (tags.count > 0) {
         [_tagView setupWithTagNames:tags];
     } else {
@@ -394,16 +362,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.previewing = NO;
 
     [self updateHomeScreenQuickActions];
-}
-
-- (void)clearNote
-{
-    _currentNote = nil;
-    _noteEditorTextView.text = @"";
-    
-    [self endSearching:nil];
-    
-    [_tagView clearAllTags];
 }
 
 - (void)endEditing
@@ -528,7 +486,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (BOOL)interactivePushPopAnimationControllerShouldBeginPush:(SPInteractivePushPopAnimationController *)controller touchPoint:(CGPoint)touchPoint
 {
-    if (!self.currentNote.markdown) {
+    if (!self.note.markdown) {
         return NO;
     }
 
@@ -801,7 +759,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)saveIfNeeded
 {
-    if (self.currentNote == nil || self.modified == NO) {
+    if (self.modified == NO) {
         return;
     }
 
@@ -810,24 +768,24 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)save
 {
-    if (_currentNote == nil || self.isShowingHistory || [self isDictatingText]) {
+    if (self.isShowingHistory || [self isDictatingText]) {
 		return;
     }
 
-	if (self.modified || _currentNote.deleted == YES)
+	if (self.modified || self.note.deleted == YES)
 	{
         // Update note
-        _currentNote.content = [_noteEditorTextView plainText];
-        _currentNote.modificationDate = [NSDate date];
+        self.note.content = [_noteEditorTextView plainText];
+        self.note.modificationDate = [NSDate date];
 
         // Force an update of the note's content preview in case only tags changed
-        [_currentNote createPreview];
+        [self.note createPreview];
         
         
         // Simperum: save
         [[SPAppDelegate sharedDelegate] save];
         [SPTracker trackEditorNoteEdited];
-        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:_currentNote];
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:self.note];
         
         self.modified = NO;
 
@@ -840,25 +798,25 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
     self.noteContentBeforeRemoteUpdate = [_noteEditorTextView plainText];
 	
-    if (_currentNote != nil && ![_noteEditorTextView.text isEqualToString:@""]) {
-        _currentNote.content = [_noteEditorTextView plainText];
+    if (![_noteEditorTextView.text isEqualToString:@""]) {
+        self.note.content = [_noteEditorTextView plainText];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
     }
 }
 
 - (void)didReceiveNewContent {
     
-    NSUInteger newLocation = [self newCursorLocation:_currentNote.content
+    NSUInteger newLocation = [self newCursorLocation:self.note.content
                                              oldText:self.noteContentBeforeRemoteUpdate
                                      currentLocation:self.cursorLocationBeforeRemoteUpdate];
 	
-	_noteEditorTextView.attributedText = [_currentNote.content attributedString];
+	_noteEditorTextView.attributedText = [self.note.content attributedString];
     [_noteEditorTextView processChecklists];
 	
 	NSRange newRange = NSMakeRange(newLocation, 0);
 	[_noteEditorTextView setSelectedRange:newRange];
 	
-	NSArray *tags = _currentNote.tagsArray;
+	NSArray *tags = self.note.tagsArray;
 	if (tags.count > 0) {
 		[_tagView setupWithTagNames:tags];
     }
@@ -871,7 +829,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertController addCancelActionWithTitle:cancelTitle handler:^(UIAlertAction *action) {
-        [self clearNote];
+        [self endSearching:nil];
         [self dismissEditor:nil];
     }];
 
@@ -884,59 +842,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     [self endEditing];
     [_tagView endEditing:YES];
-}
-
-- (void)newButtonAction:(id)sender
-{
-    [self saveIfNeeded];
-
-    if (self.currentNote.isBlank) {
-        [_noteEditorTextView becomeFirstResponder];
-        return;
-    }
-    
-    if ([sender isEqual:self.createNoteButton]) {
-        [SPTracker trackEditorNoteCreated];
-    }
-
-    Note *newNote = [self newNote];
-
-    // animate current note off the screen and begin editing new note
-    BOOL animateContentView = _noteEditorTextView.text.length;
-    
-    if (animateContentView) {
-        
-        CGRect snapshotRect = CGRectMake(0,
-                                         _noteEditorTextView.contentInset.top,
-                                         self.view.frame.size.width,
-                                         _noteEditorTextView.frame.size.height - _noteEditorTextView.contentInset.top);
-        UIView *snapshot = [self.noteEditorTextView resizableSnapshotViewFromRect:snapshotRect
-                                                 afterScreenUpdates:NO
-                                                      withCapInsets:UIEdgeInsetsZero ];
-
-        snapshot.frame = snapshotRect;
-        [self.view addSubview:snapshot];
-        [self displayNote:newNote];
-
-        [UIView animateWithDuration:0.2
-                         animations:^{
-                             
-                             CGRect newFrame = snapshot.frame;
-                             newFrame.origin.y += newFrame.size.height;
-                             
-                             snapshot.frame = newFrame;
-
-                         } completion:^(BOOL finished) {
-                             
-                             [snapshot removeFromSuperview];
-                             [self.noteEditorTextView becomeFirstResponder];
-
-                         }];
-
-    } else {
-
-        [self displayNote:newNote];
-    }
 }
 
 - (void)insertChecklistAction:(id)sender {
@@ -980,7 +885,7 @@ CGFloat const SPSelectedAreaPadding = 20;
                                         repeats:NO];
     }
     
-    [_currentNote addTag:tagName];
+    [self.note addTag:tagName];
 
     self.modified = YES;
     [self save];
@@ -990,12 +895,12 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (BOOL)tagView:(SPTagView *)tagView shouldCreateTagName:(NSString *)tagName {
     
-    return ![_currentNote hasTag:tagName];
+    return ![self.note hasTag:tagName];
 }
 
 - (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName {
     
-    [_currentNote stripTag:tagName];
+    [self.note stripTag:tagName];
     self.modified = YES;
     
     NSString *deletedTagBuffer = _deletedTagBuffer;
