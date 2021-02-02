@@ -667,10 +667,8 @@ extension SPNoteListViewController {
     }
 
     private func updateSelectedNoteBasedOnSelectedIndexPath() {
-        if let indexPath = tableView.indexPathForSelectedRow, let note = notesListController.object(at: indexPath) as? Note {
-            selectedNote = note
-        } else {
-            selectedNote = nil
+        selectedNote = tableView.indexPathForSelectedRow.flatMap { indexPath in
+            notesListController.object(at: indexPath) as? Note
         }
     }
 }
