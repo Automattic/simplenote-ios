@@ -250,20 +250,6 @@ extension NoteInformationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(ofType: TableHeaderViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title)
             return cell
-        case .spacer:
-            let cell = tableView.dequeueReusableCell(ofType: UITableViewCell.self, for: indexPath)
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = sections[indexPath.section].rows[indexPath.row]
-        
-        switch row {
-        case .spacer:
-            return 10
-        default:
-            return tableView.rowHeight
         }
     }
 
