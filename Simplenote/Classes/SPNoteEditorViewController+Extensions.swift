@@ -440,6 +440,10 @@ private extension SPNoteEditorViewController {
     }
 
     func presentMarkdownPreview() {
+        guard navigationController?.topViewController == self else {
+            return
+        }
+
         let previewViewController = SPMarkdownPreviewViewController()
         previewViewController.markdownText = noteEditorTextView.plainText
         navigationController?.pushViewController(previewViewController, animated: true)
