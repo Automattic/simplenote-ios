@@ -68,7 +68,7 @@ private extension SubtitleTableViewCell {
         textLabel?.textColor = textColor
         detailTextLabel?.textColor = detailTextColor
 
-        textLabel?.font = UIFont.preferredFont(for: .body, weight: .regular).italic()
+        textLabel?.font = UIFont.preferredFont(for: .body, weight: .regular)
         detailTextLabel?.font = UIFont.preferredFont(for: .subheadline, weight: .regular)
     }
 }
