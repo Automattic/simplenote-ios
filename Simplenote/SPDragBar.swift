@@ -18,5 +18,7 @@ class SPDragBar: UIView {
         alpha = 0.2
         layer.cornerRadius = 2.5
         layer.masksToBounds = true
+        
+        isAccessibilityElement = true
     }
 }

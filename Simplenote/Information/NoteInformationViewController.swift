@@ -129,6 +129,17 @@ private extension NoteInformationViewController {
     
     private func configureDragBar() {
         dragBar.isHidden = navigationController != nil
+        dragBar.accessibilityLabel = Localization.dismissAccessibilityLabel
+
+        if UIAccessibility.isVoiceOverRunning == true {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(informationSheetToBeDismissed))
+            dragBar.addGestureRecognizer(gestureRecognizer)
+        }
+    }
+    
+    @objc
+    func informationSheetToBeDismissed() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
