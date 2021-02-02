@@ -64,6 +64,11 @@ final class NoteInformationViewController: UIViewController {
         super.viewDidLayoutSubviews()
         additionalSafeAreaInsets = Consts.tableViewSafeAreaInsets
     }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        dismiss(animated: true, completion: nil)
+        return true
+    }
 }
 
 // MARK: - Controller
