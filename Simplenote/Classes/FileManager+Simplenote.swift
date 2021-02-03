@@ -14,19 +14,12 @@ extension FileManager {
 
         return url
     }
-
-    /// Writes a given Note to the Documents folder
+    
+    /// Writes a given String to the documents folder
     ///
-    class func writeToDocuments(note: Note) -> URL? {
-        guard let payload = note.content else {
-            return nil
-        }
-
-        let filename = String(format: "%@.txt", note.simperiumKey)
-        let targetURL = FileManager.documentsURL.appendingPathComponent(filename)
-
+    class func writeStringToDocuments(string: String, to targetURL: URL) -> URL? {
         do {
-            try payload.write(to: targetURL, atomically: true, encoding: .utf8)
+            try string.write(to: targetURL, atomically: true, encoding: .utf8)
         } catch {
             NSLog("Note Exporter Failure: \(error)")
             return nil
