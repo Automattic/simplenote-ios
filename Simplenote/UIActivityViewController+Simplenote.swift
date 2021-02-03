@@ -13,10 +13,11 @@ extension UIActivityViewController {
         guard let content = note.content else {
             return nil
         }
+        let shareFilename = note.exportFilename()
 
         let print = SPSimpleTextPrintFormatter(text: content)
-        let source = SimplenoteActivityItemSource(note: note)
-        let link = PDFLinkActivityItemProvider(content: content, filename: String(format: "%@.pdf", note.exportFilename()))
+        let source = SimplenoteActivityItemSource(content: content, filename: String(format: "%@.txt", shareFilename))
+        let link = PDFLinkActivityItemProvider(content: content, filename: String(format: "%@.pdf", shareFilename))
 
         self.init(activityItems: [print, source, link], applicationActivities: nil)
     }
