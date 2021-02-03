@@ -2,23 +2,22 @@ import Foundation
 
 public class PDFLinkActivityItemProvider : UIActivityItemProvider {
     public let targetURL: URL
-    public let filename: String
-    public let note: Note
+    public let content: String
+    private lazy var documentURL = shareToPDF()
     
-    public init(note: Note) {
-        self.note = note
-        self.filename = String(format: "%@.pdf", "Thisisastring")
+    public init(content: String, filename: String) {
         self.targetURL = FileManager.documentsURL.appendingPathComponent(filename)
+        self.content = content
         
         super.init(placeholderItem: targetURL)
     }
     
     public override var item: Any {
-        guard activityType?.rawValue != "com.apple.UIKit.activity.RemoteOpenInApplication",
-        let url = SimplenotePDFExporter().exportNoteToFiles(note: note, filename: filename) else {
-            return note.content as Any
-        }
-        
-        return url
+        documentURL ?? content
+    }
+    
+    private func shareToPDF() -> URL? {
+        let data = SimplenotePDFExporter.exportStringToPDFData(content)
+        return FileManager.writeDataToDocuments(data: data, to: targetURL)
     }
 }
