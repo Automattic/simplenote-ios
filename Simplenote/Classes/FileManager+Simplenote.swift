@@ -34,4 +34,17 @@ extension FileManager {
 
         return targetURL
     }
+    
+    /// Writes a data file to the Documents Folder
+    ///
+    class func writeDataToDocuments(data: Data, to targetURL: URL) -> URL? {
+        do {
+            try data.write(to: targetURL)
+        } catch {
+            NSLog("Note Exporter Failure: \(error)")
+            return nil
+        }
+
+        return targetURL
+    }
 }
