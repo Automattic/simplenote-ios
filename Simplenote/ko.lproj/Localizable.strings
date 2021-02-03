@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 15:54:08+0000 */
+/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "개발자이십니까? 채용 모집 중입니다.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "휴지통을 비우시겠습니까? 이 작업은 되돌릴 수 없습니다.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
 
 /* Work at Automattic */
 "Careers" = "채용";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
+
 /* Number of characters in the note */
 "Characters" = "문자";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "네 자리 패스코드 선택";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "협업";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "메모 요약 목록";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "확인";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "패스코드 확인";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "참여";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "디버그 해제";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "삭제";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "태그 삭제";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "진단";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "활성화됨";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "패스코드 입력";
-
-/* Touch ID fallback title */
-"Enter passcode" = "패스코드 입력";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "패스코드 입력";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "버전 가져오기";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "이메일을 통해 워드프레스닷컴 계정을 활성화하고 다시 시도하세요.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "미리보기";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "평가하기";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "패스코드 다시 입력";
-
 /* Reachs Internet */
 "Reachability" = "연결";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "이름 변경";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "재설정";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "메모 복구";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "의견 보내기";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "패스코드 설정";
 
 /* Title of options screen */
 "Settings" = "설정";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ 잠금해제";
-
 /* Unpins a note */
 "Unpin" = "고정 해제";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "사용자명";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "버전 %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "어제";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "이메일 주소가 올바르지 않습니다.";

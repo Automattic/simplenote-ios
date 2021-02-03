@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "האם יש לך ניסיון בפיתוח? אנחנו מחפשים עובדים.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "האם ברצונך לרוקן את הפח? לא ניתן לבטל את הפעולה.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
 
 /* Work at Automattic */
 "Careers" = "משרות";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
+
 /* Number of characters in the note */
 "Characters" = "תווים";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "שיתוף פעולה בעריכה";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "פעם נוספת";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "לאשר את קוד הסיסמה שלך";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "שיתוף";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "האפשרות לאיתור באגים מושבתת";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "מחיקה";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "למחוק תגית";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "אבחונים";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "להזין קוד סיסמה";
-
-/* Touch ID fallback title */
-"Enter passcode" = "הזנת קוד סיסמה";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "זיהוי פנים";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "ניסיונות שנכשלו";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "מוריד גרסה";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "יש להפעיל את החשבון שלך ב-WordPress.com באמצעות האימייל ולנסות שוב.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "תצוגה מקדימה";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "נשמח לקבל ממך דירוג";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "הזנה מחדש של קוד הסיסמה";
-
 /* Reachs Internet */
 "Reachability" = "נגישות";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "שינוי שם";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "איפוס";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "שליחת משוב";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "הגדרת קוד סיסמה";
 
 /* Title of options screen */
 "Settings" = "הגדרות";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "השבתת קוד סיסמה";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "ביטול נעילה %@";
-
 /* Unpins a note */
 "Unpin" = "להסיר את הנעץ";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "שם משתמש";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "גרסה %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";

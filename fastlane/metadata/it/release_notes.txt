@@ -1,3 +1,0 @@
-- Aggiornati i segnaposti di stato vuoti
-- Azioni rapide nella schermata Home 
-- Metriche della schermata delle informazioni modificate

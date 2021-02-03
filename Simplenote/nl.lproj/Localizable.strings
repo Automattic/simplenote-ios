@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 15:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-26 11:32:58+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Ben je ontwikkelaar? Wij zijn op zoek naar nieuwe collega's.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Weet je zeker dat je de prullenbak wilt leegmaken? Deze actie kan niet ongedaan worden gemaakt.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Annuleren";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
 
 /* Work at Automattic */
 "Careers" = "Carrières";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
+
 /* Number of characters in the note */
 "Characters" = "Tekens";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Kies een viercijferige pincode";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Samenwerken";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Beknopte notitielijst";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Bevestigen";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Bevestig je pincode";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bijdragen";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug uitgeschakeld";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Verwijderen";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notities verwijderen";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Tag verwijderen";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnoses";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Voer een wachtwoordcode in";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Voer een wachtwoordcode in";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Voer je wachtwoordcode in";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Gezichts-ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "Mislukte pogingen";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Versie ophalen";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Activeer je WordPress.com-account via e-mail en probeer het nogmaals.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Voorbeeld bekijken";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Beoordeel ons";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Voer een wachtwoordpasscode opnieuw in";
-
 /* Reachs Internet */
 "Reachability" = "Bereikbaarheid";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "Hernoemen";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "Resetten";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Stuur feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Wachtwoordcode instellen";
 
 /* Title of options screen */
 "Settings" = "Instellingen";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Wachtwoordcode uitschakelen";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ ontgrendelen";
-
 /* Unpins a note */
 "Unpin" = "Losgemaakt";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "Gebruikersnaam";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "Versie %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Gisteren";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Je e-mailadres is niet geldig.";

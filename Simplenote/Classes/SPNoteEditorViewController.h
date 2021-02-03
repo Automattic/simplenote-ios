@@ -10,6 +10,8 @@
 @class SearchMapView;
 @class NoteScrollPositionCache;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
 
 // Navigation Bar
@@ -22,17 +24,17 @@
 @property (nonatomic, strong) UIBarButtonItem *createNoteButton;
 @property (nonatomic, strong) UIBarButtonItem *informationButton;
 
-@property (nonatomic, strong) Note *currentNote;
+@property (nonatomic, strong, readonly) Note *note;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 
 @property (nonatomic, strong) SPTagView *tagView;
 
 
 // History
-@property (nonatomic, weak) UIViewController *historyViewController;
+@property (nonatomic, weak) UIViewController * _Nullable historyViewController;
 
 // Information
-@property (nonatomic, weak) UIViewController *informationViewController;
+@property (nonatomic, weak) UIViewController * _Nullable informationViewController;
 
 // Interlinks
 @property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
@@ -41,10 +43,10 @@
 @property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
-@property (nonatomic, strong) NSArray *keyboardNotificationTokens;
+@property (nonatomic, strong) NSArray * _Nullable keyboardNotificationTokens;
 @property (nonatomic) BOOL isKeyboardVisible;
 
-@property (nonatomic, strong) SearchMapView *searchMapView;
+@property (nonatomic, strong) SearchMapView * _Nullable searchMapView;
 
 // State
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
@@ -54,13 +56,12 @@
 
 @property (nonatomic, strong) NoteScrollPositionCache *scrollPositionCache;
 
-- (void)dismissEditor:(id)sender;
-- (void)insertChecklistAction:(id)sender;
-- (void)keyboardButtonAction:(id)sender;
-- (void)newButtonAction:(id)sender;
+- (instancetype)initWithNote:(Note *)note;
 
-- (void)displayNote:(Note *)note;
-- (void)clearNote;
+- (void)dismissEditor:(id _Nullable )sender;
+- (void)insertChecklistAction:(id _Nullable )sender;
+- (void)keyboardButtonAction:(id _Nullable )sender;
+
 - (void)endEditing;
 - (void)bounceMarkdownPreview;
 
@@ -74,8 +75,11 @@
 - (void)didDeleteCurrentNote;
 
 - (void)save;
+- (void)saveIfNeeded;
 
 // TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
-- (void)updateWithSearchQuery:(id)query;
+- (void)updateWithSearchQuery:(id _Nullable )query;
 
 @end
+
+NS_ASSUME_NONNULL_END

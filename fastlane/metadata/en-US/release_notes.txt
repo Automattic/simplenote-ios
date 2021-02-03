@@ -1,3 +1,0 @@
--   Updated Empty State placeholders
--   Home screen quick actions
--   Adjusted About screen metrics

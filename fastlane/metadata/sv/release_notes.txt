@@ -1,3 +1,0 @@
-- Platshållare för Tomt tillstånd har uppdaterats
-- Snabbåtgärder på startskärmen
-- Om skärmstatistik har justerats

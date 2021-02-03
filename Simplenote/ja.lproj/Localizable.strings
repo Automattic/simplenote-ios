@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "開発者の方ですか ? 人材を募集中です。";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "ゴミ箱を空にしてもよいですか ?この操作は元に戻すことができません。";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "キャンセル";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
 
 /* Work at Automattic */
 "Careers" = "キャリア";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
+
 /* Number of characters in the note */
 "Characters" = "文字";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "4桁のパスコードを選択してください";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "共同編集";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "確認";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "パスコードを確認";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "参加";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "デバッグ無効";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "削除";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "ノートを削除";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "タグを削除";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診断";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "待機状態";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "パスコードを入力";
-
-/* Touch ID fallback title */
-"Enter passcode" = "パスコードを入力";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "パスコードを入力してください";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "バージョンを取得中";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "メールから WordPress.com アカウントを有効にして、もう一度試してください。";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "プレビュー";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "評価してください";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "パスコードを再入力";
-
 /* Reachs Internet */
 "Reachability" = "到達の可能性";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "タイトル変更";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "リセット";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "意見を送る";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "パスコードを設定";
 
 /* Title of options screen */
 "Settings" = "設定";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "パスコードを無効化";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ のブロックを解除";
-
 /* Unpins a note */
 "Unpin" = "ピンを外す";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "ユーザー名";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "バージョン %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨日";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "無効なメールアドレスです。";

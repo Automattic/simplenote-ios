@@ -811,8 +811,7 @@ private extension SPNoteListViewController {
     }
 
     func previewingViewController(for note: Note) -> SPNoteEditorViewController {
-        let editorViewController = EditorFactory.shared.build()
-        editorViewController.display(note)
+        let editorViewController = EditorFactory.shared.build(with: note)
         editorViewController.isPreviewing = true
         editorViewController.update(withSearchQuery: searchQuery)
 

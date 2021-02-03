@@ -1,3 +1,0 @@
-- - Boş Durum yer tutucuları güncellendi
-- Ana ekranda hızlı eylemler
-- Hakkında ekranı ölçümleri ayarlandı

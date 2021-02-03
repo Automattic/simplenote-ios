@@ -45,7 +45,7 @@ extension SPNoteEditorViewController {
         informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
         informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
 
-        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
+        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(handleTapOnCreateNewNoteButton))
         createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
 
         keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
@@ -113,10 +113,30 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureTextViewKeyboard() {
-        noteEditorTextView?.keyboardDismissMode = .interactive
+        noteEditorTextView.keyboardDismissMode = .interactive
     }
 }
 
+
+// MARK: - Notifications
+//
+extension SPNoteEditorViewController {
+    @objc
+    func startListeningToNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dismissEditor(_:)),
+                                               name: NSNotification.Name(rawValue: SPTransitionControllerPopGestureTriggeredNotificationName),
+                                               object: nil)
+
+        // voiceover status is tracked because the tag view is anchored
+        // to the bottom of the screen when voiceover is enabled to allow
+        // easier access
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshVoiceoverSupport),
+                                               name: UIAccessibility.voiceOverStatusDidChangeNotification,
+                                               object: nil)
+    }
+}
 
 // MARK: - Keyboard Handling
 //
@@ -221,16 +241,18 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
-    var simperium: Simperium {
+    /// NSCoder Keys
+    ///
+    enum CodingKeys: String {
+        case currentNoteKey
+    }
+
+    private var simperium: Simperium {
         SPAppDelegate.shared().simperium
     }
 
     open override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-
-        guard let note = currentNote else {
-            return
-        }
 
         // Always make sure the object is persisted before proceeding
         if note.objectID.isTemporaryID {
@@ -238,17 +260,6 @@ extension SPNoteEditorViewController {
         }
 
         coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
-    }
-
-    open override func decodeRestorableState(with coder: NSCoder) {
-        guard let simperiumKey = coder.decodeObject(forKey: CodingKeys.currentNoteKey.rawValue) as? String,
-            let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
-            else {
-                navigationController?.popViewController(animated: false)
-                return
-        }
-
-        display(note)
     }
 }
 
@@ -273,7 +284,7 @@ extension SPNoteEditorViewController {
 
         dimLinksInEditor()
 
-        let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
+        let viewController = SPNoteHistoryViewController(note: note, delegate: self)
         viewController.configureToPresentAsCard(presentationDelegate: self)
         historyViewController = viewController
 
@@ -377,12 +388,10 @@ extension SPNoteEditorViewController {
 
         restoreDefaultLinksDimmingInEditor()
         informationViewController.dismiss(animated: false) { [weak self] in
-            guard let self = self,
-                  let note = self.currentNote,
-                  let informationButton = self.informationButton else {
+            guard let self = self else {
                 return
             }
-            self.presentInformationController(for: note, from: informationButton)
+            self.presentInformationController(for: self.note, from: self.informationButton)
         }
     }
 }
@@ -456,15 +465,6 @@ private extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
-    @objc
-    func newNote() -> Note {
-        let note = SPObjectManager.shared().newDefaultNote()
-        if let tagName = SPAppDelegate.shared().filteredTagName {
-            note.addTag(tagName)
-        }
-        return note
-    }
-
     func delete(note: Note) {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)
@@ -473,17 +473,65 @@ extension SPNoteEditorViewController {
 
     @objc
     func ensureEmptyNoteIsDeleted() {
-        guard let note = currentNote else {
-            return
-        }
-
         guard note.isBlank, noteEditorTextView.text.isEmpty else {
             save()
             return
         }
 
         SPObjectManager.shared().trashNote(note)
-        currentNote = nil
+    }
+
+    @objc
+    private func handleTapOnCreateNewNoteButton() {
+        saveIfNeeded()
+
+        if note.isBlank {
+            noteEditorTextView.becomeFirstResponder()
+            return
+        }
+
+        SPTracker.trackEditorNoteCreated()
+
+        presentNewNoteReplacingCurrentEditor()
+    }
+
+    private func presentNewNoteReplacingCurrentEditor() {
+        guard let navigationController = navigationController,
+              let snapshotView = createAndAddEditorSnapshotView() else {
+            return
+        }
+
+        let viewControllers: [UIViewController] = navigationController.viewControllers.map {
+            if $0 == self {
+                return EditorFactory.shared.build(with: nil)
+            }
+            return $0
+        }
+
+        navigationController.setViewControllers(viewControllers, animated: false)
+
+        UIView.animate(withDuration: 0.2) {
+            snapshotView.transform = .init(translationX: 0, y: snapshotView.frame.height)
+        } completion: { (_) in
+            snapshotView.removeFromSuperview()
+        }
+    }
+
+    private func createAndAddEditorSnapshotView() -> UIView? {
+        let snapshotRect = CGRect(x: 0,
+                                  y: noteEditorTextView.adjustedContentInset.top,
+                                  width: noteEditorTextView.frame.width,
+                                  height: noteEditorTextView.frame.height - noteEditorTextView.adjustedContentInset.top)
+
+        guard let snapshotView = view.resizableSnapshotView(from: snapshotRect, afterScreenUpdates: false, withCapInsets: .zero),
+              let navigationController = navigationController else {
+            return nil
+        }
+
+        snapshotView.frame.origin.y = snapshotRect.origin.y
+        navigationController.view.addSubview(snapshotView)
+
+        return snapshotView
     }
 }
 
@@ -523,7 +571,7 @@ private extension SPNoteEditorViewController {
     }
 
     func restoreOriginalNoteContent() {
-        updateEditor(with: currentNote.content)
+        updateEditor(with: note.content)
     }
 
     func dimLinksInEditor() {
@@ -586,21 +634,11 @@ extension SPNoteEditorViewController {
 
     @IBAction
     func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
-        guard let note = currentNote else {
-            assertionFailure()
-            return
-        }
-
         presentOptionsController(for: note, from: sender)
     }
 
     @objc
     private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
-        guard let note = currentNote else {
-            assertionFailure()
-            return
-        }
-
         presentInformationController(for: note, from: sender)
     }
 }
@@ -657,7 +695,7 @@ extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvi
 extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 
     func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
-        currentNote?.objectID
+        note.objectID
     }
 
     func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
@@ -796,10 +834,6 @@ extension SPNoteEditorViewController {
 extension SPNoteEditorViewController {
     @objc
     func updateHomeScreenQuickActions() {
-        guard let note = currentNote else {
-            return
-        }
-
         ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
     }
 }
@@ -823,7 +857,7 @@ extension SPNoteEditorViewController {
                          title: Localization.Shortcuts.newNote),
         ]
 
-        if currentNote?.markdown == true {
+        if note.markdown == true {
             commands.append(UIKeyCommand(input: "p",
                                          modifierFlags: [.command, .shift],
                                          action: #selector(keyboardToggleMarkdownPreview),
@@ -867,7 +901,7 @@ extension SPNoteEditorViewController {
     @objc
     private func keyboardCreateNewNote() {
         SPTracker.trackShortcutCreateNote()
-        newButtonAction(createNoteButton)
+        presentNewNoteReplacingCurrentEditor()
     }
 
     @objc
@@ -913,7 +947,7 @@ extension SPNoteEditorViewController {
 extension SPNoteEditorViewController {
     @objc
     func saveScrollPosition() {
-        guard let key = currentNote?.simperiumKey else {
+        guard let key = note.simperiumKey else {
             return
         }
 
@@ -923,7 +957,7 @@ extension SPNoteEditorViewController {
 
     @objc
     func restoreScrollPosition() {
-        guard let key = currentNote?.simperiumKey,
+        guard let key = note.simperiumKey,
               let offsetY = scrollPositionCache.position(for: key) else {
             noteEditorTextView.scrollToTop()
             return
@@ -948,13 +982,6 @@ private enum Metrics {
 
     static let searchMapWidth: CGFloat = 15.0
 
-}
-
-
-// MARK: - NSCoder Keys
-//
-private enum CodingKeys: String {
-    case currentNoteKey
 }
 
 

@@ -1,3 +1,0 @@
-- Atualização de marcadores de posição de estado vazio
-- Ações rápidas na tela Home
-- Ajustes de métricas na tela Sobre

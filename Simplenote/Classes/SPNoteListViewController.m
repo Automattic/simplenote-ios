@@ -425,16 +425,6 @@
 
 #pragma mark - Public API
 
-- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated
-{
-    Note *note = [self.notesListController noteForSimperiumKey:simperiumKey];
-    if (!note) {
-        return;
-    }
-
-    [self openNote:note animated:animated];
-}
-
 - (void)openNote:(Note *)note animated:(BOOL)animated
 {
     [self openNote:note ignoringSearchQuery:NO animated:animated];
@@ -452,8 +442,7 @@
     [self.searchBar resignFirstResponder];
 
     // Always a new Editor!
-    SPNoteEditorViewController *editor = [[EditorFactory shared] build];
-    [editor displayNote:note];
+    SPNoteEditorViewController *editor = [[EditorFactory shared] buildWith:note];
 
     if (!ignoringSearchQuery && self.isSearchActive) {
         [editor updateWithSearchQuery:self.searchQuery];

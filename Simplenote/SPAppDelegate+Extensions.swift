@@ -83,6 +83,7 @@ extension SPAppDelegate {
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
+
         return true
     }
 
@@ -172,7 +173,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
         sidebarViewController.restorationClass = SPAppDelegate.self
     }
 
-    func viewController(restorationIdentifier: String) -> UIViewController? {
+    func viewController(restorationIdentifier: String, coder: NSCoder) -> UIViewController? {
         switch restorationIdentifier {
         case tagListViewController.restorationIdentifier:
             return tagListViewController
@@ -181,8 +182,12 @@ extension SPAppDelegate: UIViewControllerRestoration {
             return noteListViewController
 
         case SPNoteEditorViewController.defaultRestorationIdentifier:
-            // Yea! always a new instance (we're not keeping a reference to the active editor anymore)
-            return EditorFactory.shared.build()
+            guard let simperiumKey = coder.decodeObject(forKey: SPNoteEditorViewController.CodingKeys.currentNoteKey.rawValue) as? String,
+                  let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
+            else {
+                return nil
+            }
+            return EditorFactory.shared.build(with: note)
 
         case navigationController.restorationIdentifier:
             return navigationController
@@ -204,7 +209,7 @@ extension SPAppDelegate: UIViewControllerRestoration {
             return nil
         }
 
-        return appDelegate.viewController(restorationIdentifier: restorationIdentifier)
+        return appDelegate.viewController(restorationIdentifier: restorationIdentifier, coder: coder)
     }
 }
 
