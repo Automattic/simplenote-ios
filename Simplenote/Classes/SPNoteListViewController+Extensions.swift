@@ -747,7 +747,6 @@ private extension SPNoteListViewController {
 // MARK: - Services
 //
 private extension SPNoteListViewController {
-
     func delete(note: Note) {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
@@ -792,6 +791,21 @@ private extension SPNoteListViewController {
         editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
+    }
+}
+
+
+// MARK: - Services (Internal)
+//
+extension SPNoteListViewController {
+    @objc
+    func createNewNote() {
+        SPTracker.trackListNoteCreated()
+
+        // the editor view will create a note. Passing no note ensures that an emty note isn't added
+        // to the FRC before the animation occurs
+        tableView.setEditing(false, animated: false)
+        open(nil, animated: true)
     }
 }
 
@@ -888,6 +902,53 @@ extension SPNoteListViewController {
 
         feedbackGenerator.impactOccurred()
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - Keyboard
+//
+extension SPNoteListViewController {
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    open override var keyCommands: [UIKeyCommand]? {
+        [
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
+        ] + tableCommands
+    }
+
+    @objc
+    private func keyboardStopSearching() {
+        endSearching()
+    }
+}
+
+// MARK: - Keyboard (List)
+//
+private extension SPNoteListViewController {
+    var tableCommands: [UIKeyCommand] {
+        [
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
+            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(keyboardSelect))
+        ]
+    }
+
+    @objc
+    func keyboardUp() {
+        tableView?.selectPrevRow()
+    }
+
+    @objc
+    func keyboardDown() {
+        tableView?.selectNextRow()
+    }
+
+    @objc
+    func keyboardSelect() {
+        tableView?.executeSelection()
     }
 }
 

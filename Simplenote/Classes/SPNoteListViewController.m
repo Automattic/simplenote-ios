@@ -302,13 +302,7 @@
 #pragma mark - BarButtonActions
 
 - (void)addButtonAction:(id)sender {
-    
-    [SPTracker trackListNoteCreated];
-    
-    // the editor view will create a note. Passing no note ensures that an emty note isn't added
-    // to the FRC before the animation occurs
-    [self.tableView setEditing:NO];   
-    [self openNote:nil animated:YES];
+    [self createNewNote];
 }
 
 - (void)sidebarButtonAction:(id)sender {
@@ -532,6 +526,13 @@
     self.searchBar.userInteractionEnabled = YES;
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
+
+    // We want this VC to be first responder to support keyboard shortcuts.
+    // We don't want to steal first responder from the search bar in case it's already active.
+    // It Can happen if we open the app directly into search mode from the home screen quick action
+    if (!self.isSearchActive) {
+        [self becomeFirstResponder];
+    }
 }
 
 
