@@ -8,6 +8,7 @@
 @class SPEditorTextView;
 @class SPTagView;
 @class SearchMapView;
+@class NoteScrollPositionCache;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isEditingNote) BOOL editingNote;
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
+@property (nonatomic, readonly) BOOL searching;
+
+@property (nonatomic, strong) NoteScrollPositionCache *scrollPositionCache;
 
 - (instancetype)initWithNote:(Note *)note;
 
@@ -63,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)ensureSearchIsDismissed;
 - (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated;
+- (void)highlightNextSearchResult;
+- (void)highlightPrevSearchResult;
 
 - (void)willReceiveNewContent;
 - (void)didReceiveNewContent;

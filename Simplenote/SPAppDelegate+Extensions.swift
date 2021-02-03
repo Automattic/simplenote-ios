@@ -57,20 +57,6 @@ extension SPAppDelegate {
     var noteEditorViewController: SPNoteEditorViewController? {
         navigationController.firstChild(ofType: SPNoteEditorViewController.self)
     }
-
-    /// This API drops (whatever) Editor Instance you may have, and pushes the List + Editor into the NavigationController's Stack
-    ///
-    /// - Note: This is used for Interlinking Navigation. Long Press over the Editor (or Markdown Preview) is expected to perform a *push* animation.
-    ///         In both scenarios, there's already an Editor onScreen, and the standard SDK behavior is to "pop".
-    ///
-    /// - Note: Furthermore, when pressing an Interlink from the Editor, the "Link Text Interaction" injects a floating view, so that the link appears to "float".
-    ///         Refreshing the Editor's contents right there (with any kind of animation) ends up interacting with this "Floating Link" behavior.
-    ///         For such reason, we're opting for simply pushing another VC.
-    ///
-    private func replaceNoteEditor(_ editorViewController: SPNoteEditorViewController) {
-        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
-        navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
-    }
 }
 
 // MARK: - Initialization
@@ -95,8 +81,8 @@ extension SPAppDelegate {
             return false
         }
 
-        let editorViewController = EditorFactory.shared.build(with: note)
-        replaceNoteEditor(editorViewController)
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
 
         return true
     }

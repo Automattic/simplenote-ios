@@ -116,12 +116,13 @@ extension UITableView {
 
     /// Deselects selected row if any
     ///
-    func deselectSelectedRow() {
+    @objc(deselectSelectedRowAnimated:)
+    func deselectSelectedRow(animated: Bool = false) {
         guard let indexPath = indexPathForSelectedRow else {
             return
         }
 
-        deselectRow(at: indexPath, animated: false)
+        deselectRow(at: indexPath, animated: animated)
     }
 }
 

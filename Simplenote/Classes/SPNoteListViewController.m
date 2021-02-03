@@ -91,6 +91,13 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
+
+    if (!self.navigatingUsingKeyboard) {
+        [self.tableView deselectSelectedRowAnimated:YES];
+        self.selectedNote = nil;
+    }
+
+    self.navigatingUsingKeyboard = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -134,7 +141,7 @@
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
-    [self.tableView reloadData];
+    [self reloadTableData];
 }
 
 - (void)updateTableHeaderSize {
@@ -220,7 +227,7 @@
 
     // Refresh the Table's UI
     [self.tableView applySimplenotePlainStyle];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
@@ -334,9 +341,12 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
-    [self.tableView reloadData];
+    [self reloadTableData];
     [self displaySortBar];
     [self refreshTitle];
 }
@@ -374,10 +384,13 @@
 {
     [SPTracker trackListNotesSearched];
 
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     [self.notesListController refreshSearchResultsWithKeyword:keyword];
 
     [self.tableView scrollToTopWithAnimation:NO];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     [self displayPlaceholdersIfNeeded];
 
@@ -421,6 +434,9 @@
 {
     [SPTracker trackListNoteOpened];
 
+    self.selectedNote = note;
+    [self updateCurrentSelection];
+
     // SearchBar: Always resign FirstResponder status
     // Why: https://github.com/Automattic/simplenote-ios/issues/616
     [self.searchBar resignFirstResponder];
@@ -432,15 +448,7 @@
         [editor updateWithSearchQuery:self.searchQuery];
     }
 
-    // Failsafe:
-    // We were getting (a whole lot!) of crash reports with the exception
-    // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
-    // as a safety net. Ref. Issue #345
-    if (self.navigationController.visibleViewController != self) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    }
-
-    [self.navigationController pushViewController:editor animated:animated];
+    [self.navigationController setViewControllers:@[self, editor] animated:animated];
 }
 
 - (void)emptyAction:(id)sender
@@ -530,7 +538,7 @@
     // We want this VC to be first responder to support keyboard shortcuts.
     // We don't want to steal first responder from the search bar in case it's already active.
     // It Can happen if we open the app directly into search mode from the home screen quick action
-    if (!self.isSearchActive) {
+    if (![self.searchBar isFirstResponder]) {
         [self becomeFirstResponder];
     }
 }

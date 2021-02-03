@@ -177,7 +177,7 @@ extension SPNoteListViewController {
             /// In this snipept we're preventing a beautiful `_Bug_Detected_In_Client_Of_UITableView_Invalid_Number_Of_Rows_In_Section` exception
             ///
             guard let _ = self.view.window else {
-                self.tableView.reloadData()
+                self.reloadTableData()
                 self.displayPlaceholdersIfNeeded()
                 return
             }
@@ -186,6 +186,7 @@ extension SPNoteListViewController {
                 self.displayPlaceholdersIfNeeded()
                 self.refreshEmptyTrashState()
             }
+            self.updateCurrentSelection()
         }
     }
 }
@@ -248,7 +249,7 @@ extension SPNoteListViewController {
         notesListController.searchSortMode = Options.shared.searchSortMode
         notesListController.performFetch()
 
-        tableView.reloadData()
+        reloadTableData()
     }
 
     /// Refreshes the receiver's Title, to match the current filter
@@ -544,7 +545,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        selectedNote = nil
 
         switch notesListController.object(at: indexPath) {
         case let note as Note:
@@ -647,6 +648,30 @@ private extension SPNoteListViewController {
     }
 }
 
+
+// MARK: - Table
+//
+extension SPNoteListViewController {
+    @objc
+    func reloadTableData() {
+        tableView.reloadData()
+        updateCurrentSelection()
+    }
+
+    @objc
+    func updateCurrentSelection() {
+        tableView.deselectSelectedRow()
+        if let note = selectedNote, let indexPath = notesListController.indexPath(forObject: note) {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+
+    private func updateSelectedNoteBasedOnSelectedIndexPath() {
+        selectedNote = tableView.indexPathForSelectedRow.flatMap { indexPath in
+            notesListController.object(at: indexPath) as? Note
+        }
+    }
+}
 
 // MARK: - Row Actions
 //
@@ -914,9 +939,14 @@ extension SPNoteListViewController {
     }
 
     open override var keyCommands: [UIKeyCommand]? {
-        [
-            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)),
-        ] + tableCommands
+        var commands = tableCommands
+        if isSearchActive {
+            commands.append(contentsOf: [
+                UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)),
+                UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching))
+            ])
+        }
+        return commands
     }
 
     @objc
@@ -932,22 +962,28 @@ private extension SPNoteListViewController {
         [
             UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
             UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
-            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(keyboardSelect))
+            UIKeyCommand(input: UIKeyCommand.inputReturn, modifierFlags: [], action: #selector(keyboardSelect)),
+            UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardSelect)),
         ]
     }
 
     @objc
     func keyboardUp() {
+        navigatingUsingKeyboard = true
         tableView?.selectPrevRow()
+        updateSelectedNoteBasedOnSelectedIndexPath()
     }
 
     @objc
     func keyboardDown() {
+        navigatingUsingKeyboard = true
         tableView?.selectNextRow()
+        updateSelectedNoteBasedOnSelectedIndexPath()
     }
 
     @objc
     func keyboardSelect() {
+        navigatingUsingKeyboard = true
         tableView?.executeSelection()
     }
 }
