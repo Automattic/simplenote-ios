@@ -2,9 +2,9 @@
 
 ### Login
 
-- [ ] Logout
-- [ ] Login with wrong password fails
-- [ ] Login with correct password succeeds
+- [ ] Logout (A)
+- [ ] Login with wrong password fails (A)
+- [ ] Login with correct password succeeds (A)
 
 ### Sync
 
@@ -25,16 +25,16 @@
 
 ### Note editor
 
-- [ ] Can preview markdown by swiping
-- [ ] Can flip to edit mode (from markdown preview) by swiping
+- [ ] Can preview markdown by swiping (A)
+- [ ] Can flip to edit mode (from markdown preview) by swiping (A)
 - [ ] Using the Insert checklist item from the format menu inserts a checklist
-- [ ] "Undo" undoes the last edit
-- [ ] Typing `- [x]` creates a checked checklist item
-- [ ] Typing `- [ ]` created an unchecked checklist item
+- [ ] "Undo" undoes the last edit (A)
+- [ ] Typing `- [x]` creates a checked checklist item (A)
+- [ ] Typing `- [ ]` created an unchecked checklist item (A)
 - [ ] Typing `-`, `+`, or `*` creates a list
 - [ ] All list bullet types render to markdown lists
-- [ ] Added URL is linkified
-- [ ] Long-tapping on link opens the link in new window (regular tap in preview)
+- [ ] Added URL is linkified (A)
+- [ ] Long-tapping on link opens the link in new window (regular tap in preview) (A)
 
 ### Tags & search
 
@@ -51,10 +51,10 @@
 
 ### Trash
 
-- [ ] Can view trashed notes by selecting `Trash`
-- [ ] Can delete note forever from trash screen
-- [ ] Can restore note from trash screen
-- [ ] Can trash note
+- [ ] Can view trashed notes by selecting `Trash` (A)
+- [ ] Can delete note forever from trash screen (A)
+- [ ] Can restore note from trash screen (A)
+- [ ] Can trash note (A)
 
 ### Settings
 
