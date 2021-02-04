@@ -4,8 +4,7 @@ struct SimplenotePDFExporter {
     public static func exportStringToPDFData(_ string: String) -> Data {
         let format = UIGraphicsPDFRendererFormat()
         
-        let pageRect = CGRect(x: 0, y: 0, width: Consts.pageWidth, height: Consts.pageHeight)
-        let renderer = UIGraphicsPDFRenderer(bounds: pageRect, format: format)
+        let renderer = UIGraphicsPDFRenderer(bounds: Constants.pageBounds, format: format)
         
         let data = renderer.pdfData { (context) in
             context.beginPage()
@@ -19,7 +18,8 @@ struct SimplenotePDFExporter {
     }
 }
 
-private struct Consts {
+private struct Constants {
     static let pageWidth = 8.5 * 72.0
     static let pageHeight = 8.5 * 72.0
+    static let pageBounds = CGRect(x: 0, y: 0, width: Constants.pageWidth, height: Constants.pageHeight)
 }
