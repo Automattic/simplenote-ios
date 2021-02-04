@@ -6,12 +6,19 @@ struct SimplenotePDFExporter {
         
         let renderer = UIGraphicsPDFRenderer(bounds: Constants.pageBounds, format: format)
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .natural
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        
         let data = renderer.pdfData { (context) in
             context.beginPage()
             let attributes = [
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: Constants.pdfFontSize)
             ]
-            string.draw(at: .zero, withAttributes: attributes)
+            
+            let attributedText = NSAttributedString(string: string, attributes: attributes)
+            attributedText.draw(in: Constants.textBounds)
         }
         
         return data
@@ -20,6 +27,8 @@ struct SimplenotePDFExporter {
 
 private struct Constants {
     static let pageWidth = 8.5 * 72.0
-    static let pageHeight = 8.5 * 72.0
+    static let pageHeight = 11 * 72.0
     static let pageBounds = CGRect(x: 0, y: 0, width: Constants.pageWidth, height: Constants.pageHeight)
+    static let textBounds = CGRect(x: 30, y: 30, width: Constants.pageWidth - 60, height: Constants.pageHeight - 60)
+    static let pdfFontSize = CGFloat(16)
 }
