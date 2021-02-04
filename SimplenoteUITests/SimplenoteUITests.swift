@@ -171,6 +171,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 4
         Preview.leavePreviewViaBackButton()
+        NoteEditor.setFocus()
         NoteEditorAssert.editorShown()
         NoteEditorAssert.wholeTextShown(text: complexLinkRawText)
     }

@@ -22,6 +22,10 @@ class NoteEditor {
         return app.textViews.element.value as! String
     }
 
+    class func setFocus() {
+        app.textViews.firstMatch.tap()
+    }
+    
     class func undo() {
         app.textViews.element.tap(withNumberOfTaps: 2, numberOfTouches: 3)
         app.otherElements["UIUndoInteractiveHUD"].children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 1).tap()
