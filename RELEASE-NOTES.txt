@@ -1,6 +1,12 @@
-4.31
+4.32
 -----
  
+4.31
+-----
+-   Added account verification screen #1086
+-   Updated minimum row height when note list is in condensed mode #1045
+-   Updated tags editing experience #1042
+
 4.30
 -----
 -   New passcode interface #761

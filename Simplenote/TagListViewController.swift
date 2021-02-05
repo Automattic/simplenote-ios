@@ -65,7 +65,9 @@ private extension TagListViewController {
     }
 
     func configureTableView() {
-        tableView.register(SPTagListViewCell.loadNib(), forCellReuseIdentifier: SPTagListViewCell.reuseIdentifier)
+        tableView.register(TagListViewCell.loadNib(), forCellReuseIdentifier: TagListViewCell.reuseIdentifier)
+        tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
+
         tableView.separatorInsetReference = .fromAutomaticInsets
 
         if #available(iOS 13.0, *) {
@@ -74,11 +76,11 @@ private extension TagListViewController {
     }
 
     func configureTableHeaderView() {
-        tagsHeaderView.titleLabel.text = NSLocalizedString("Tags", comment: "")
+        tagsHeaderView.titleLabel.text = Localization.tags
         tagsHeaderView.titleLabel.font = .preferredFont(for: .title2, weight: .bold)
 
         let actionButton = tagsHeaderView.actionButton
-        actionButton?.setTitle(NSLocalizedString("Edit", comment: "Edit Tags Action: Visible in the Tags List"), for: .normal)
+        actionButton?.setTitle(Localization.edit, for: .normal)
         actionButton?.addTarget(self, action: #selector(editTagsTap), for: .touchUpInside)
     }
 
@@ -88,7 +90,7 @@ private extension TagListViewController {
 
     func configureMenuController() {
         let renameSelector = sel_registerName("rename:")
-        let renameItem = UIMenuItem(title: NSLocalizedString("Rename", comment: "Rename a tag"), action: renameSelector)
+        let renameItem = UIMenuItem(title: Localization.rename, action: renameSelector)
 
         UIMenuController.shared.menuItems = [renameItem]
         UIMenuController.shared.update()
@@ -166,12 +168,12 @@ private extension TagListViewController {
 // MARK: - Helper Methods
 //
 private extension TagListViewController {
-    func cell(for tag: Tag) -> SPTagListViewCell? {
+    func cell(for tag: Tag) -> TagListViewCell? {
         guard let indexPath = indexPath(for: tag) else {
             return nil
         }
 
-        return tableView.cellForRow(at: indexPath) as? SPTagListViewCell
+        return tableView.cellForRow(at: indexPath) as? TagListViewCell
     }
 
     func indexPath(for tag: Tag) -> IndexPath? {
@@ -244,9 +246,24 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(ofType: SPTagListViewCell.self, for: indexPath)
-        configure(cell, at: indexPath)
-        return cell
+        guard let section = Section(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        switch section {
+        case .system:
+            let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+            configureSystemCell(cell, at: indexPath)
+            return cell
+        case .tags:
+            let cell = tableView.dequeueReusableCell(ofType: TagListViewCell.self, for: indexPath)
+            configureTagCell(cell, at: indexPath)
+            return cell
+        case .bottom:
+            let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
+            configureBottomCell(cell, at: indexPath)
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -308,73 +325,56 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return Section(rawValue: indexPath.section) == .tags
+        return false
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        let isTagRow = Section(rawValue: indexPath.section) == .tags
-        return isTagRow && tableView.isEditing ? .delete : .none
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else {
-            return
-        }
-
-        SPTracker.trackTagRowDeleted()
-        removeTag(at: indexPath)
+        return .none
     }
 }
 
 // MARK: - Cell Setup
 //
 private extension TagListViewController {
-    func configure(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            return
-        }
 
-        switch section {
-        case .system:
-            configureSystemCell(cell, at: indexPath)
-        case .tags:
-            configureTagCell(cell, at: indexPath)
-        case .bottom:
-            configureBottomCell(cell, at: indexPath)
-        }
-    }
-
-    func configureSystemCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
+    func configureSystemCell(_ cell: Value1TableViewCell, at indexPath: IndexPath) {
         guard let row = SystemRow(rawValue: indexPath.row) else {
             return
         }
 
+        cell.hasClearBackground = true
+        cell.imageTintColor = .simplenoteTintColor
+
         switch row {
         case .allNotes:
-            cell.textField.text = NSLocalizedString("All Notes", comment: "")
-            cell.iconImage = .image(name: .allNotes)
+            cell.title = Localization.allNotes
+            cell.imageView?.image = .image(name: .allNotes)
             cell.accessibilityIdentifier = "all-notes"
         case .trash:
-            cell.textField.text = NSLocalizedString("Trash-noun", comment: "")
-            cell.iconImage = .image(name: .trash)
+            cell.title = Localization.trash
+            cell.imageView?.image = .image(name: .trash)
+            cell.accessibilityIdentifier = nil
         case .settings:
-            cell.textField.text = NSLocalizedString("Settings", comment: "")
-            cell.iconImage = .image(name: .settings)
+            cell.title = Localization.settings
+            cell.imageView?.image = .image(name: .settings)
             cell.accessibilityIdentifier = "settings"
         }
     }
 
-    func configureTagCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
+    func configureTagCell(_ cell: TagListViewCell, at indexPath: IndexPath) {
         let tagName = tag(at: indexPath)?.name
 
         cell.textField.text = tagName
-        cell.iconImage = nil
         cell.delegate = self
     }
 
-    func configureBottomCell(_ cell: SPTagListViewCell, at indexPath: IndexPath) {
-        cell.textField.text = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
-        cell.iconImage = .image(name: .untagged)
+    func configureBottomCell(_ cell: Value1TableViewCell, at indexPath: IndexPath) {
+        cell.title = Localization.untaggedNotes
+        cell.imageView?.image = .image(name: .untagged)
+        cell.accessibilityIdentifier = nil
+
+        cell.hasClearBackground = true
+        cell.imageTintColor = .simplenoteTintColor
     }
 
     func shouldSelectCell(at indexPath: IndexPath) -> Bool {
@@ -414,6 +414,8 @@ private extension TagListViewController {
             return
         }
 
+        setEditing(false)
+
         switch row {
         case .allNotes:
             allNotesWasPressed()
@@ -440,6 +442,8 @@ private extension TagListViewController {
     }
 
     func didSelectBottomRow(at indexPath: IndexPath) {
+        setEditing(false)
+
         SPTracker.trackListUntaggedViewed()
         openNoteListForTagName(kSimplenoteUntaggedKey)
     }
@@ -458,10 +462,11 @@ private extension TagListViewController {
     }
 }
 
-// MARK: - SPTagListViewCellDelegate
+// MARK: - TagListViewCellDelegate
 //
-extension TagListViewController: SPTagListViewCellDelegate {
-    func tagListViewCellShouldRenameTag(_ cell: SPTagListViewCell!) {
+extension TagListViewController: TagListViewCellDelegate {
+
+    func tagListViewCellShouldRenameTag(_ cell: TagListViewCell) {
         SPTracker.trackTagMenuRenamed()
 
         guard let indexPath = tableView.indexPath(for: cell),
@@ -472,14 +477,33 @@ extension TagListViewController: SPTagListViewCellDelegate {
         renameTag(tag)
     }
 
-    func tagListViewCellShouldDeleteTag(_ cell: SPTagListViewCell!) {
-        SPTracker.trackTagMenuDeleted()
-
-        guard let indexPath = tableView.indexPath(for: cell) else {
+    func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell, source: TagListViewCellDeletionSource) {
+        guard let indexPath = tableView.indexPath(for: cell), let tag = tag(at: indexPath) else {
             return
         }
 
-        removeTag(at: indexPath)
+        let alertController = UIAlertController(title: Localization.TagDeletionConfirmation.title(with: tag.name ?? ""),
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+
+        alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { (_) in
+            switch source {
+            case .accessory:
+                SPTracker.trackTagRowDeleted()
+            case .menu:
+                SPTracker.trackTagMenuDeleted()
+            }
+
+            self.removeTag(at: indexPath)
+        }
+
+        alertController.addCancelActionWithTitle(Localization.TagDeletionConfirmation.cancellationButton)
+        
+        alertController.popoverPresentationController?.sourceRect = cell.bounds
+        alertController.popoverPresentationController?.sourceView = cell
+        alertController.popoverPresentationController?.permittedArrowDirections = .any
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -498,7 +522,7 @@ private extension TagListViewController {
     }
 
     func refreshEditTagsButton(isEditing: Bool) {
-        let title = isEditing ? NSLocalizedString("Done", comment: "") : NSLocalizedString("Edit", comment: "")
+        let title = isEditing ? Localization.done : Localization.edit
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
@@ -734,4 +758,29 @@ private enum SystemRow: Int, CaseIterable {
 //
 private struct Constants {
     static let tagListBatchSize = 20
+}
+
+// MARK: - Localization
+//
+private struct Localization {
+    static let edit = NSLocalizedString("Edit", comment: "Edit Tags Action: Visible in the Tags List")
+    static let rename = NSLocalizedString("Rename", comment: "Rename a tag")
+    static let done = NSLocalizedString("Done", comment: "")
+
+    static let allNotes = NSLocalizedString("All Notes", comment: "")
+    static let trash = NSLocalizedString("Trash-noun", comment: "")
+    static let settings = NSLocalizedString("Settings", comment: "")
+
+    static let tags = NSLocalizedString("Tags", comment: "")
+    static let untaggedNotes = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
+
+    struct TagDeletionConfirmation {
+        static func title(with tagName: String) -> String {
+            let template = NSLocalizedString("Are you sure you want to delete \"%1$@\"?", comment: "Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name")
+            return String(format: template, tagName)
+        }
+
+        static let confirmationButton = NSLocalizedString("Delete Tag", comment: "Confirmation button of deletion confirmation message for a tag.")
+        static let cancellationButton = NSLocalizedString("Cancel", comment: "Cancellation button of deletion confirmation message for a tag.")
+    }
 }

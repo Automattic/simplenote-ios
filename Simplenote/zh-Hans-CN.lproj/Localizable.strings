@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "您是开发人员吗？ 我们正在招贤纳士。";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "是否确定要清空回收站？此操作无法撤消。";
 
@@ -98,19 +101,29 @@
 "By creating an account you agree to our" = "创建帐户即表示，您同意我们的";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
 
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
+
 /* Work at Automattic */
 "Careers" = "招贤纳士";
+
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
 
 /* Number of characters in the note */
 "Characters" = "字符";
 
 /* Title on the PinLock screen asking to create a passcode */
-"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
+"Choose a 4 digit passcode" = "选择一个 4 位数密码";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "协作";
@@ -124,8 +137,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "压缩的笔记列表";
 
+/* Confirm button -> Review you account screen */
+"Confirm" = "确认";
+
 /* Title on the PinLock screen asking to confirm a passcode */
-"Confirm your passcode" = "Confirm your passcode";
+"Confirm your passcode" = "确认您的密码";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "贡献";
@@ -195,6 +211,9 @@
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "删除笔记";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "删除标签";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "诊断";
@@ -421,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "请通过电子邮件激活您的 WordPress.com 帐户，然后重试。";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "预览";
 
@@ -460,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "重命名";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "重置";
 
@@ -471,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "恢复笔记";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -610,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "用户名";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "版本 %@";
 
@@ -622,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "您觉得 Simplenote 怎么样？";
 
@@ -633,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "您输入的电子邮件地址无效。";

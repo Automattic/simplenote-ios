@@ -184,6 +184,7 @@ extension SPNoteListViewController {
 
             self.tableView.performBatchChanges(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset) { _ in
                 self.displayPlaceholdersIfNeeded()
+                self.refreshEmptyTrashState()
             }
         }
     }
@@ -382,6 +383,16 @@ extension SPNoteListViewController {
         }
         open(note, ignoringSearchQuery: true, animated: true)
     }
+    
+    /// Sets the state of the trash button
+    ///
+    @objc
+    func refreshEmptyTrashState() {
+        let isTrashOnScreen = self.isDeletedFilterActive
+        let isNotEmpty = !self.isListEmpty
+        
+        emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
+    }
 }
 
 
@@ -570,6 +581,12 @@ extension SPNoteListViewController: UITableViewDelegate {
             editorViewController.isPreviewing = false
             self.show(editorViewController, sender: self)
         }
+    }
+
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        var insets = SPNoteTableViewCell.separatorInsets
+        insets.left -= cell.layoutMargins.left
+        cell.separatorInset = insets
     }
 }
 

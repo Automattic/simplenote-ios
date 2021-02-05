@@ -8,15 +8,17 @@
 @class SPNoteEditorViewController;
 @class SPNavigationController;
 @class VersionsController;
+@class AccountVerificationController;
+@class AccountVerificationViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SPAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SPAppDelegate : UIResponder <UIApplicationDelegate, SPBucketDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nullable, strong, nonatomic) UIWindow *pinLockWindow;
 
-@property (strong, nonatomic, readonly) Simperium						*simperium;
+@property (strong, nonatomic) Simperium						            *simperium;
 @property (strong, nonatomic, readonly) NSManagedObjectContext			*managedObjectContext;
 @property (strong, nonatomic, readonly) NSManagedObjectModel			*managedObjectModel;
 @property (strong, nonatomic, readonly) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
@@ -27,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SPNavigationController                    *navigationController;
 
 @property (strong, nonatomic) VersionsController                        *versionsController;
+
+@property (weak, nonatomic) AccountVerificationViewController           *verificationViewController;
+@property (strong, nonatomic, nullable) AccountVerificationController   *verificationController;
 
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;

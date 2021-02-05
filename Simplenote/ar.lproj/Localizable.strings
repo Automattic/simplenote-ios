@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-04 15:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "هل أنت مطوِّر؟ إننا نوفِّر فرص عمل.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "هل تريد بالتأكيد حذف \"%1$@\"؟";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "هل أنت متأكد من رغبتك في إفراغ سلة المهملات؟ يتعذر التراجع عن هذا.";
 
@@ -98,19 +101,29 @@
 "By creating an account you agree to our" = "بموجب إنشائك لحساب فأنت توافق على";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "إلغاء";
 
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "يتعذر تأكيد الحساب";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "يتعذر إرسال رسالة البريد الإلكتروني الخاصة بالتحقُّق";
+
 /* Work at Automattic */
 "Careers" = "مِهن";
+
+/* Change email button -> Review you account screen */
+"Change Email" = "تغيير البريد الإلكتروني";
 
 /* Number of characters in the note */
 "Characters" = "أحرف";
 
 /* Title on the PinLock screen asking to create a passcode */
-"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
+"Choose a 4 digit passcode" = "اختيار رمز مرور مكوَّن من 4 أرقام";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "تشارك";
@@ -124,8 +137,11 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "قائمة الملاحظات الموجزة";
 
+/* Confirm button -> Review you account screen */
+"Confirm" = "تأكيد";
+
 /* Title on the PinLock screen asking to confirm a passcode */
-"Confirm your passcode" = "Confirm your passcode";
+"Confirm your passcode" = "تأكيد رمز المرور الخاص بك";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "مساهمة";
@@ -195,6 +211,9 @@
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "حذف الملاحظات";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "حذف الوسم";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "التشخيصات";
@@ -421,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "يرجى تنشيط حساب ووردبريس.كوم الخاص بك عبر البريد الإلكتروني والمحاولة مجددًا.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "يرجى التحقُّق من إعدادات الشبكة لديك والمحاولة مرة أخرى.";
+
 /* Title of Markdown preview screen */
 "Preview" = "معاينة";
 
@@ -460,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "إعادة التسمية";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "إعادة إرسال البريد الإلكتروني";
+
 /* Reset Action */
 "Reset" = "إعادة تعيين";
 
@@ -471,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "مراجعة حسابك";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -610,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "اسم المستخدم";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "التحقُّق من بريدك الإلكتروني";
+
 /* App version number */
 "Version %@" = "الإصدار %@";
 
@@ -622,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "لقد أرسلنا بريدًا إلكترونيًا للتحقق إلى %1$@. يرجى التحقُّق من علبة الوارد لديك واتباع الإرشادات.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
 
@@ -633,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "أمس";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "لقد قمت بالتسجيل في Simplenote باستخدام البريد الإلكتروني %1$@.\n\nقد تؤدي التحسينات التي يتم إجراؤها على أمان الحساب إلى فقدان الحساب إذا لم يعد لديك حق الوصول إلى عنوان البريد الإلكتروني هذا.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "عنوان البريد الإلكتروني الخاص بك غير صالح.";

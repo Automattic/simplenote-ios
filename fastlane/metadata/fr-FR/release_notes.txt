@@ -1,3 +1,3 @@
-- Nouvelle interface de code d’accès
-- Résolution d’un bogue qui entraînait un incident lors de la recherche
-- Résolution de la saisie de texte prédictive lors de l’utilisation d’étiquettes
+- Ajout de l’écran de vérification du compte
+- Mise à jour de la hauteur de ligne minimale lorsque la liste des notes est en mode condensé 
+- Mise à jour de l’expérience de modification des étiquettes

@@ -1,0 +1,3 @@
+- Bildschirm für Kontoverifizierung hinzugefügt
+- Bei Notizenliste in Kurzfassung die minimale Zeilenhöhe aktualisiert
+- Umgebung zur Bearbeitung von Schlagwörtern aktualisiert
