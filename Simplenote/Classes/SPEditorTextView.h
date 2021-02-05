@@ -21,6 +21,8 @@
 @property (nonatomic, readonly) BOOL isInserting;
 @property (nonatomic, readonly) BOOL isDeletingBackward;
 
+@property (nonatomic, strong) void (^onContentPositionChange)(void);
+
 - (void)scrollToBottomWithAnimation:(BOOL)animated;
 - (void)scrollToTop;
 - (void)processChecklists;

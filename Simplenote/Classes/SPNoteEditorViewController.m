@@ -104,7 +104,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
     
-    [self refreshVoiceoverSupport];
     [self configureTextViewKeyboard];
 
     [self startListeningToNotifications];
@@ -112,6 +111,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     [self refreshStyle];
 
+    [self configureTextViewObservers];
     [self displayNote];
 }
 

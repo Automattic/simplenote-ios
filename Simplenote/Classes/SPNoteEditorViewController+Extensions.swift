@@ -97,8 +97,33 @@ extension SPNoteEditorViewController {
     func configureTextViewKeyboard() {
         noteEditorTextView.keyboardDismissMode = .interactive
     }
+
+    /// Sets up text view observers
+    ///
+    @objc
+    func configureTextViewObservers() {
+        noteEditorTextView.onContentPositionChange = { [weak self] in
+            self?.updateTagListPosition()
+        }
+    }
 }
 
+
+// MARK: - Layout
+//
+extension SPNoteEditorViewController {
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        // We need to reset transform to prevent tagView from loosing `safeArea`
+        // We restore trasform back in viewDidLayoutSubviews
+        tagListViewController.view.transform = .identity
+    }
+
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateTagListPosition()
+    }
+}
 
 // MARK: - Notifications
 //
@@ -114,7 +139,7 @@ extension SPNoteEditorViewController {
         // to the bottom of the screen when voiceover is enabled to allow
         // easier access
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshVoiceoverSupport),
+                                               selector: #selector(refreshVoiceOverSupport),
                                                name: UIAccessibility.voiceOverStatusDidChangeNotification,
                                                object: nil)
     }
@@ -193,20 +218,19 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
 // MARK: - Voiceover Support
 //
-extension SPNoteEditorViewController {
+private extension SPNoteEditorViewController {
 
     /// Indicates if VoiceOver is running
     ///
-    @objc
-    var voiceoverEnabled: Bool {
+    var isVoiceOverEnabled: Bool {
         UIAccessibility.isVoiceOverRunning
     }
 
     /// Whenver VoiceOver is enabled, this API will lock the Tags List in position
     ///
     @objc
-    func refreshVoiceoverSupport() {
-        // TODO:
+    func refreshVoiceOverSupport() {
+        updateTagListPosition()
     }
 }
 
@@ -695,7 +719,6 @@ extension SPNoteEditorViewController {
             tagView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tagView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tagView.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
         tagListBottomConstraint = tagView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         tagListBottomConstraint.isActive = true
@@ -703,6 +726,19 @@ extension SPNoteEditorViewController {
         tagListViewController.didMove(toParent: self)
 
         tagListViewController.delegate = self
+    }
+
+    private func updateTagListPosition() {
+        guard !isVoiceOverEnabled else {
+            tagListViewController.view.transform = .identity
+            return
+        }
+
+        let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom
+        let maxContentY = noteEditorTextView.convert(CGPoint(x: 0, y: contentHeight), to: view).y
+
+        tagListViewController.view.transform = .identity
+        tagListViewController.view.transform = .init(translationX: 0, y: max(maxContentY - tagListViewController.view.frame.origin.y, 0))
     }
 }
 
@@ -717,7 +753,7 @@ extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
 
     func tagListIsEditing(_ tagList: NoteEditorTagListViewController) {
         // Note: When Voiceover is enabled, the Tags Editor is docked!
-        guard !voiceoverEnabled else {
+        guard !isVoiceOverEnabled else {
             return
         }
 
