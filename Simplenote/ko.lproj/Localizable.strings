@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "개발자이십니까? 채용 모집 중입니다.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "\"%1$@\"을(를) 삭제하시겠습니까?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "휴지통을 비우시겠습니까? 이 작업은 되돌릴 수 없습니다.";
@@ -108,16 +108,16 @@
 "Cancel" = "취소";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "계정을 확인할 수 없음";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "인증 이메일을 보낼 수 없음";
 
 /* Work at Automattic */
 "Careers" = "채용";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "이메일 변경";
 
 /* Number of characters in the note */
 "Characters" = "문자";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "이메일을 통해 워드프레스닷컴 계정을 활성화하고 다시 시도하세요.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "네트워크 설정을 확인하고 다시 시도해 주세요.";
 
 /* Title of Markdown preview screen */
 "Preview" = "미리보기";
@@ -483,7 +483,7 @@
 "Rename" = "이름 변경";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "이메일 다시 보내기";
 
 /* Reset Action */
 "Reset" = "재설정";
@@ -498,7 +498,7 @@
 "Restore Note" = "메모 복구";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "계정 검토";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "사용자명";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "이메일 확인";
 
 /* App version number */
 "Version %@" = "버전 %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@(으)로 인증 이메일을 보내드렸습니다. 받은 편지함을 확인하고 지침에 따라 주세요.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";
@@ -669,7 +669,7 @@
 "Yesterday" = "어제";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "이메일 %1$@을(를) 사용하여 Simplenote에 등록하셨습니다.\n\n더는 이 이메일 주소에 액세스하는 권한이 없는 경우 계정 보안 향상으로 인해 계정을 상실하실 수 있습니다.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "이메일 주소가 올바르지 않습니다.";
