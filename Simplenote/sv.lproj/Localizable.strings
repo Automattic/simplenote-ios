@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-29 00:18:18+0000 */
+/* Translation-Revision-Date: 2021-02-03 15:19:36+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "Är du en utvecklare? Vi letar efter medarbetare.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "Är du säker att du vill ta bort ”%1$@”?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Är du säker på att du vill tömma papperskorgen?  Detta kan inte göras ogjort.";
@@ -111,7 +111,7 @@
 "Cannot Confirm Account" = "Kan inte bekräfta konto";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Kan inte skicka e-postverifiering";
 
 /* Work at Automattic */
 "Careers" = "Karriärer";
@@ -120,7 +120,7 @@
 "Change Email" = "Ändra e-post";
 
 /* Number of characters in the note */
-"Characters" = "bokstäver";
+"Characters" = "Tecken";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
@@ -210,7 +210,7 @@
 "Delete" = "Ta bort";
 
 /* Verb: Delete notes and log out of the app */
-"Delete Notes" = "Radera anteckningar";
+"Delete Notes" = "Ta bort anteckningar";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Ta bort etikett";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Aktivera ditt WordPress.com-konto via e-post och försök igen.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Kontrollera dina nätverksinställningar och försök igen.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Förhandsgranska";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Vi har skickat en e-postverifiering till %1$@. Kontrollera din inkorg och följ instruktionerna.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Igår";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Du är registrerad hos Simplenote med e-postadressen %1$@.\n\nFörbättringar av kontosäkerhet kan leda till kontoförlust om du inte längre har tillgång till den här e-postadressen.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";

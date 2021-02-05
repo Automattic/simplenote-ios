@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-03 16:54:43+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "Вы разработчик? У нас есть вакансии.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "Вы уверены, что хотите удалить адрес %1$@?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Очистить корзину? Это действие нельзя отменить.";
@@ -108,16 +108,16 @@
 "Cancel" = "Отмена";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "Не удалось подтвердить учётную запись";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Не удалось отправить письмо с подтверждением";
 
 /* Work at Automattic */
 "Careers" = "Вакансии";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "Изменить адрес электронной почты";
 
 /* Number of characters in the note */
 "Characters" = "Символы";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Активируйте учетную запись WordPress.com через эл. почту или повторите попытку.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Проверьте настройки сети и повторите попытку.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Предварительный просмотр";
@@ -483,7 +483,7 @@
 "Rename" = "Переименовать";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "Отправить ещё раз";
 
 /* Reset Action */
 "Reset" = "Сброс";
@@ -498,7 +498,7 @@
 "Restore Note" = "Восстановить заметку";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Проверить учётную запись";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "Имя пользователя";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "Проверить адрес электронной почты";
 
 /* App version number */
 "Version %@" = "Версия %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "На адрес %1$@ отправлено письмо с подтверждением. Проверьте свой почтовый ящик и следуйте инструкциям.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Каково ваше мнение о Simplenote?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Вчера";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Вы зарегистрированы в Simplenote с адресом электронной почты %1$@.\n\nВ результате повышения безопасности учётной записи вы можете её потерять, если лишитесь доступа к этому адресу электронной почты.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Ваш адрес электронной почты не действителен.";
