@@ -8,6 +8,7 @@
 @class SPEditorTextView;
 @class SPTagView;
 @class SearchMapView;
+@class NoteEditorTagListViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) Note *note;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 
-@property (nonatomic, strong) SPTagView *tagView;
-
+@property (nonatomic, strong) NoteEditorTagListViewController *tagListViewController;
+@property (nonatomic, strong) NSLayoutConstraint *tagListBottomConstraint;
 
 // History
 @property (nonatomic, weak) UIViewController * _Nullable historyViewController;
@@ -37,9 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Interlinks
 @property (nonatomic, strong) InterlinkProcessor *interlinkProcessor;
-
-// Voiceover
-@property (nonatomic, strong) UIView *bottomView;
 
 // Keyboard!
 @property (nonatomic, strong) NSArray * _Nullable keyboardNotificationTokens;

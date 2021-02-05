@@ -52,22 +52,12 @@ extension SPNoteEditorViewController {
         keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
     }
 
-    /// Sets up the Bottom View:
-    /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
-    ///
-    @objc
-    func configureBottomView() {
-        bottomView = UIView()
-        bottomView.isHidden = true
-    }
-
     /// Sets up the Root ViewController
     ///
     @objc
     func configureRootView() {
         view.addSubview(noteEditorTextView)
         view.addSubview(navigationBarBackground)
-        view.addSubview(bottomView)
     }
 
     /// Sets up the Layout
@@ -76,7 +66,6 @@ extension SPNoteEditorViewController {
     func configureLayout() {
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         noteEditorTextView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
@@ -90,13 +79,6 @@ extension SPNoteEditorViewController {
             noteEditorTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
             noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            bottomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
 
@@ -200,6 +182,8 @@ extension SPNoteEditorViewController: KeyboardObservable {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
             self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
+            self.tagListBottomConstraint.constant = -editorBottomInsets
+            self.view.layoutIfNeeded()
         }, completion: { _ in
             self.noteEditorTextView.enableScrollSmoothening = false
         })
@@ -222,17 +206,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func refreshVoiceoverSupport() {
-        let enabled = voiceoverEnabled
-        updateTagsEditor(locked: enabled)
-    }
-
-    /// Whenever the Tags Editor must be locked:
-    ///     - We'll fix the editor's position at the bottom of the TextView
-    ///     - And we'll display the `bottomView`: covers the spacing between Bottom / SafeArea.bottom
-    ///
-    func updateTagsEditor(locked: Bool) {
-        bottomView.isHidden = !locked
-        noteEditorTextView.lockTagEditorPosition = locked
+        // TODO:
     }
 }
 
@@ -695,6 +669,53 @@ extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 }
 
 
+// MARK: - Tags
+//
+extension SPNoteEditorViewController {
+    @objc
+    func configureTagListViewController() {
+        tagListViewController = NoteEditorTagListViewController(note: note)
+        addChild(tagListViewController)
+        let tagView = tagListViewController.view!
+
+        tagView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tagView)
+
+        NSLayoutConstraint.activate([
+            tagView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tagView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        tagView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+
+        tagListBottomConstraint = tagView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        tagListBottomConstraint.isActive = true
+
+        tagListViewController.didMove(toParent: self)
+
+        tagListViewController.delegate = self
+    }
+}
+
+
+// MARK: - NoteEditorTagListViewControllerDelegate
+//
+extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
+    func tagListDidUpdate(_ tagList: NoteEditorTagListViewController) {
+        modified = true
+        save()
+    }
+
+    func tagListIsEditing(_ tagList: NoteEditorTagListViewController) {
+        // Note: When Voiceover is enabled, the Tags Editor is docked!
+        guard !voiceoverEnabled else {
+            return
+        }
+
+        noteEditorTextView.scrollToBottom(withAnimation: true)
+    }
+}
+
+
 // MARK: - Style
 //
 extension SPNoteEditorViewController {
@@ -702,7 +723,6 @@ extension SPNoteEditorViewController {
     @objc
     func refreshStyle() {
         refreshRootView()
-        refreshBottomView()
         refreshTagsEditor()
         refreshTextEditor()
         refreshTextStorage()
@@ -710,10 +730,6 @@ extension SPNoteEditorViewController {
 
     private func refreshRootView() {
         view.backgroundColor = backgroundColor
-    }
-
-    private func refreshBottomView() {
-        bottomView.backgroundColor = backgroundColor
     }
 
     private func refreshTextEditor() {
@@ -724,8 +740,7 @@ extension SPNoteEditorViewController {
     }
 
     private func refreshTagsEditor() {
-        tagView.backgroundColor = backgroundColor
-        tagView.keyboardAppearance = .simplenoteKeyboardAppearance
+        tagListViewController.view.backgroundColor = backgroundColor
     }
 
     private func refreshTextStorage() {

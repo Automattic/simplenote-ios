@@ -7,7 +7,6 @@
 //
 
 #import "SPTextView.h"
-@class SPTagView;
 
 @protocol SPEditorTextViewDelegate <UITextViewDelegate>
 - (void)textView:(UITextView *)textView receivedInteractionWithURL:(NSURL *)url;
@@ -16,9 +15,6 @@
 
 @interface SPEditorTextView : SPTextView
 
-@property (nonatomic) BOOL lockTagEditorPosition;
-
-@property (nonatomic, strong) SPTagView *tagView;
 @property (nonatomic, strong) UIFont *checklistsFont;
 @property (nonatomic, strong) UIColor *checklistsTintColor;
 

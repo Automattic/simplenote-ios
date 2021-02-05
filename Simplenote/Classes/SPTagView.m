@@ -32,38 +32,52 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        /// Note:
-        /// `scrollEnabled = NO` causes layout issues when `UITextField` becomes the first responder, in
-        /// certain documents. We're simply always allowing scroll, and fixing a glitch!
-        ///
-        tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        tagScrollView.scrollsToTop = NO;
-        tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        tagScrollView.alwaysBounceHorizontal = YES;
-        tagScrollView.showsHorizontalScrollIndicator = NO;
-        tagScrollView.delegate = self;
-        tagScrollView.scrollEnabled = YES;
-        [self addSubview:tagScrollView];
-        
-        autoCompleteScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        autoCompleteScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        autoCompleteScrollView.alwaysBounceHorizontal = YES;
-        autoCompleteScrollView.showsHorizontalScrollIndicator = NO;
-        autoCompleteScrollView.delegate = self;
-        autoCompleteScrollView.hidden = YES;
-        [self addSubview:autoCompleteScrollView];
-    
-        addTagField = [SPTagEntryField tagEntryField];
-        addTagField.delegate = self;
-        addTagField.tagDelegate = self;
-        [tagScrollView addSubview:addTagField];
-        
-        tagPills = [NSMutableArray array];
-
-        [self ensureRightToLeftSupportIsInitialized];
+        [self configure];
     }
     
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self configure];
+    }
+    return self;
+}
+
+- (void)configure
+{
+    /// Note:
+    /// `scrollEnabled = NO` causes layout issues when `UITextField` becomes the first responder, in
+    /// certain documents. We're simply always allowing scroll, and fixing a glitch!
+    ///
+    tagScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    tagScrollView.scrollsToTop = NO;
+    tagScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    tagScrollView.alwaysBounceHorizontal = YES;
+    tagScrollView.showsHorizontalScrollIndicator = NO;
+    tagScrollView.delegate = self;
+    tagScrollView.scrollEnabled = YES;
+    [self addSubview:tagScrollView];
+
+    autoCompleteScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    autoCompleteScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    autoCompleteScrollView.alwaysBounceHorizontal = YES;
+    autoCompleteScrollView.showsHorizontalScrollIndicator = NO;
+    autoCompleteScrollView.delegate = self;
+    autoCompleteScrollView.hidden = YES;
+    [self addSubview:autoCompleteScrollView];
+
+    addTagField = [SPTagEntryField tagEntryField];
+    addTagField.delegate = self;
+    addTagField.tagDelegate = self;
+    [tagScrollView addSubview:addTagField];
+
+    tagPills = [NSMutableArray array];
+
+    [self ensureRightToLeftSupportIsInitialized];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
@@ -227,11 +241,13 @@
             tagCompletionPills = [NSArray arrayWithArray:fields];
             
             autoCompleteScrollView.hidden = NO;
+            [_tagDelegate tagView:self didChangeAutocompleteVisibility:YES];
             return;
         }
     }
     
     autoCompleteScrollView.hidden = YES;
+    [_tagDelegate tagView:self didChangeAutocompleteVisibility:NO];
 }
 
 -(NSArray *)allTags {
@@ -288,11 +304,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
     [self hideActiveDeletionPill];
-    
-    if ([self.tagDelegate respondsToSelector:@selector(tagViewWillBeginEditing:)]) {
-        [self.tagDelegate tagViewWillBeginEditing:self];
-    }
-    
+        
     [self updateAutoCompletionsForString:textField.text];
     [self setNeedsLayout];
     
@@ -343,9 +355,6 @@
     [self hideActiveDeletionPill];
     
     [self processTextInFieldToTag];
-    if ([self.tagDelegate respondsToSelector:@selector(tagViewDidEndEditing:)]) {
-        [self.tagDelegate tagViewDidEndEditing:self];
-    }
 }
 
 - (void)processTextInFieldToTag {

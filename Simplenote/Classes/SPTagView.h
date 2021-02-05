@@ -18,12 +18,11 @@
 - (BOOL)tagView:(SPTagView *)tagView shouldCreateTagName:(NSString *)tagName;
 - (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName;
 - (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName;
+- (void)tagView:(SPTagView *)tagView didChangeAutocompleteVisibility:(BOOL)isVisible;
 
 @optional
 
-- (void)tagViewWillBeginEditing:(SPTagView *)tagView;
 - (void)tagViewDidBeginEditing:(SPTagView *)tagView;
-- (void)tagViewDidEndEditing:(SPTagView *)tagView;
 - (void)tagViewDidChange:(SPTagView *)tagView;
 
 @end
