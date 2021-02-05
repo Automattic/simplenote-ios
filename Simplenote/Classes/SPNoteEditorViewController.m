@@ -124,6 +124,11 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self startListeningToKeyboardNotifications];
 
     [self refreshNavigationBarButtons];
+
+    // Async here to make sure all the frames are correct
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self restoreScrollPosition];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -209,6 +214,8 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self stopListeningToKeyboardNotifications];
+
+    [self saveScrollPosition];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -273,13 +280,13 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.nextSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronRightImage
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(highlightNextSearchResult:)];
+                                                            action:@selector(highlightNextSearchResult)];
     self.nextSearchButton.width = 34.0;
 
     self.prevSearchButton = [[UIBarButtonItem alloc] initWithImage:chevronLeftImage
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(highlightPrevSearchResult:)];
+                                                            action:@selector(highlightPrevSearchResult)];
     self.prevSearchButton.width = 34.0;
     
     
@@ -516,32 +523,32 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
-- (void)highlightNextSearchResult:(id)sender
+- (void)highlightNextSearchResult
 {
-    [self highlightSearchResultAtIndex:MIN(self.highlightedSearchResultIndex + 1, self.searchResultRanges.count) animated:YES];
+    [self highlightSearchResultAtIndex:(self.highlightedSearchResultIndex + 1) animated:YES];
 }
 
-- (void)highlightPrevSearchResult:(id)sender
+- (void)highlightPrevSearchResult
 {
-    [self highlightSearchResultAtIndex:MAX(0, self.highlightedSearchResultIndex - 1) animated:YES];
+    [self highlightSearchResultAtIndex:(self.highlightedSearchResultIndex - 1) animated:YES];
 }
 
 - (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
 {
+    NSInteger searchResultCount = self.searchResultRanges.count;
+
+    index = MIN(index, searchResultCount - 1);
+    index = MAX(index, 0);
     self.highlightedSearchResultIndex = index;
 
-    NSInteger searchResultCount = self.searchResultRanges.count;
-    if (index >= 0 && index < searchResultCount) {
-        
-        // enable or disbale search result puttons accordingly
-        self.prevSearchButton.enabled = index > 0;
-        self.nextSearchButton.enabled = index < searchResultCount - 1;
+    // enable or disbale search result puttons accordingly
+    self.prevSearchButton.enabled = index > 0;
+    self.nextSearchButton.enabled = index < searchResultCount - 1;
 
-        NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
-        [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
-            [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
-        }];
-    }
+    NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
+    [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
+        [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
+    }];
 }
 
 - (void)endSearching:(id)sender {

@@ -421,6 +421,16 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteContentShared()
 
     }
+
+    func presentMarkdownPreview() {
+        guard navigationController?.topViewController == self else {
+            return
+        }
+
+        let previewViewController = SPMarkdownPreviewViewController()
+        previewViewController.markdownText = noteEditorTextView.plainText
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
 }
 
 
@@ -843,6 +853,137 @@ extension SPNoteEditorViewController {
     }
 }
 
+// MARK: - Keyboard
+//
+extension SPNoteEditorViewController {
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    open override var keyCommands: [UIKeyCommand]? {
+        guard presentedViewController == nil else {
+            return nil
+        }
+
+        var commands = [
+            UIKeyCommand(input: "n",
+                         modifierFlags: [.command],
+                         action: #selector(keyboardCreateNewNote),
+                         title: Localization.Shortcuts.newNote),
+        ]
+
+        if note.markdown == true {
+            commands.append(UIKeyCommand(input: "p",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardToggleMarkdownPreview),
+                                         title: Localization.Shortcuts.toggleMarkdown))
+        }
+
+
+
+        if searching {
+            commands.append(contentsOf: [
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command],
+                             action: #selector(keyboardHighlightNextMatch),
+                             title: Localization.Shortcuts.nextMatch),
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command, .shift],
+                             action: #selector(keyboardHighlightPrevMatch),
+                             title: Localization.Shortcuts.previousMatch),
+            ])
+        }
+
+        if noteEditorTextView.isFirstResponder {
+            commands.append(UIKeyCommand(input: "c",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardInsertChecklist),
+                                         title: Localization.Shortcuts.insertChecklist))
+        } else {
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputTab,
+                                         modifierFlags: [],
+                                         action: #selector(keyboardFocusOnEditor)))
+        }
+
+        commands.append(UIKeyCommand(input: UIKeyCommand.inputReturn,
+                                     modifierFlags: [.command],
+                                     action: #selector(keyboardGoBack),
+                                     title: Localization.Shortcuts.endEditing))
+
+        return commands
+    }
+
+    @objc
+    private func keyboardCreateNewNote() {
+        SPTracker.trackShortcutCreateNote()
+        presentNewNoteReplacingCurrentEditor()
+    }
+
+    @objc
+    private func keyboardToggleMarkdownPreview() {
+        SPTracker.trackShortcutToggleMarkdownPreview()
+        presentMarkdownPreview()
+    }
+
+    @objc
+    private func keyboardInsertChecklist() {
+        SPTracker.trackShortcutToggleChecklist()
+        insertChecklistAction(checklistButton)
+    }
+
+    @objc
+    private func keyboardHighlightNextMatch() {
+        SPTracker.trackShortcutSearchNext()
+        highlightNextSearchResult()
+    }
+
+    @objc
+    private func keyboardHighlightPrevMatch() {
+        SPTracker.trackShortcutSearchPrev()
+        highlightPrevSearchResult()
+    }
+
+    @objc
+    private func keyboardFocusOnEditor() {
+        noteEditorTextView.becomeFirstResponder()
+        noteEditorTextView.selectedTextRange = noteEditorTextView.textRange(from: noteEditorTextView.beginningOfDocument,
+                                                                            to: noteEditorTextView.beginningOfDocument)
+    }
+
+    @objc
+    private func keyboardGoBack() {
+        dismissEditor(nil)
+    }
+}
+
+
+// MARK: - Scroll position
+//
+extension SPNoteEditorViewController {
+    @objc
+    func saveScrollPosition() {
+        guard let key = note.simperiumKey else {
+            return
+        }
+
+        scrollPositionCache.store(position: noteEditorTextView.contentOffset.y,
+                                  for: key)
+    }
+
+    @objc
+    func restoreScrollPosition() {
+        guard let key = note.simperiumKey,
+              let offsetY = scrollPositionCache.position(for: key) else {
+            noteEditorTextView.scrollToTop()
+            return
+        }
+
+        let offset = CGPoint(x: 0, y: offsetY)
+
+        noteEditorTextView.contentOffset = noteEditorTextView.boundedContentOffset(from: offset)
+    }
+}
+
 
 // MARK: - Metrics
 //
@@ -856,4 +997,18 @@ private enum Metrics {
 
     static let searchMapWidth: CGFloat = 15.0
 
+}
+
+
+// MARK: - Localization
+//
+private enum Localization {
+    enum Shortcuts {
+        static let newNote = NSLocalizedString("New Note", comment: "Keyboard shortcut: New Note")
+        static let nextMatch = NSLocalizedString("Next Match", comment: "Keyboard shortcut: Note search, Next Match")
+        static let previousMatch = NSLocalizedString("Previous Match", comment: "Keyboard shortcut: Note search, Previous Match")
+        static let insertChecklist = NSLocalizedString("Insert Checklist", comment: "Keyboard shortcut: Insert Checklist")
+        static let toggleMarkdown = NSLocalizedString("Toggle Markdown", comment: "Keyboard shortcut: Toggle Markdown")
+        static let endEditing = NSLocalizedString("End Editing", comment: "Keyboard shortcut: End Editing")
+    }
 }

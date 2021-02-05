@@ -57,20 +57,6 @@ extension SPAppDelegate {
     var noteEditorViewController: SPNoteEditorViewController? {
         navigationController.firstChild(ofType: SPNoteEditorViewController.self)
     }
-
-    /// This API drops (whatever) Editor Instance you may have, and pushes the List + Editor into the NavigationController's Stack
-    ///
-    /// - Note: This is used for Interlinking Navigation. Long Press over the Editor (or Markdown Preview) is expected to perform a *push* animation.
-    ///         In both scenarios, there's already an Editor onScreen, and the standard SDK behavior is to "pop".
-    ///
-    /// - Note: Furthermore, when pressing an Interlink from the Editor, the "Link Text Interaction" injects a floating view, so that the link appears to "float".
-    ///         Refreshing the Editor's contents right there (with any kind of animation) ends up interacting with this "Floating Link" behavior.
-    ///         For such reason, we're opting for simply pushing another VC.
-    ///
-    private func replaceNoteEditor(_ editorViewController: SPNoteEditorViewController) {
-        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
-        navigationController.setViewControllers([noteListViewController, editorViewController], animated: true)
-    }
 }
 
 // MARK: - Initialization
@@ -95,31 +81,37 @@ extension SPAppDelegate {
             return false
         }
 
-        let editorViewController = EditorFactory.shared.build(with: note)
-        replaceNoteEditor(editorViewController)
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
 
         return true
     }
 
     /// Opens search
     ///
-    func presentSearch() {
-        popToNoteList()
+    func presentSearch(animated: Bool = false) {
+        popToNoteList(animated: animated)
 
-        UIView.performWithoutAnimation {
+        let block = {
             // Switch from trash to all notes as trash doesn't have search
-            if selectedTag == kSimplenoteTrashKey {
-                selectedTag = nil
+            if self.selectedTag == kSimplenoteTrashKey {
+                self.selectedTag = nil
             }
 
-            noteListViewController.startSearching()
+            self.noteListViewController.startSearching()
+        }
+
+        if animated {
+            block()
+        } else {
+            UIView.performWithoutAnimation(block)
         }
     }
 
     /// Opens editor with a new note
     ///
-    func presentNewNoteEditor() {
-        presentNote(nil)
+    func presentNewNoteEditor(animated: Bool = false) {
+        presentNote(nil, animated: animated)
     }
 
     /// Opens a note with specified simperium key
@@ -135,10 +127,10 @@ extension SPAppDelegate {
     /// Opens a note
     ///
     @objc
-    func presentNote(_ note: Note?) {
-        popToNoteList()
+    func presentNote(_ note: Note?, animated: Bool = false) {
+        popToNoteList(animated: animated)
 
-        noteListViewController.open(note, animated: false)
+        noteListViewController.open(note, animated: animated)
     }
 
     /// Dismisses all modals
@@ -148,12 +140,12 @@ extension SPAppDelegate {
         navigationController.dismiss(animated: animated, completion: completion)
     }
 
-    private func popToNoteList() {
-        dismissAllModals(animated: false, completion: nil)
-        sidebarViewController.hideSidebar(withAnimation: false)
+    private func popToNoteList(animated: Bool = false) {
+        dismissAllModals(animated: animated, completion: nil)
+        sidebarViewController.hideSidebar(withAnimation: animated)
 
         if navigationController.viewControllers.contains(noteListViewController) {
-            navigationController.popToViewController(noteListViewController, animated: false)
+            navigationController.popToViewController(noteListViewController, animated: animated)
         }
     }
 }
