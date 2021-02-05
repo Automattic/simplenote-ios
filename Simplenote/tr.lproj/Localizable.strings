@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "Bir geliştirici misiniz? Yeni çalışma arkadaşları arıyoruz.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "\"%1$@\" dosyasını silmek istediğinizden emin misiniz?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
@@ -108,16 +108,16 @@
 "Cancel" = "İptal";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "Hesap Onaylanamıyor";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Doğrulama E-postası Gönderilemiyor";
 
 /* Work at Automattic */
 "Careers" = "Kariyer";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "E-posta Değiştir";
 
 /* Number of characters in the note */
 "Characters" = "Karakter";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Lütfen WordPress.com hesabınızı e-posta aracılığıyla etkinleştirin ve tekrar deneyin.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Lütfen ağ ayarlarınızı kontrol edip tekrar deneyin.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Önizleme";
@@ -483,7 +483,7 @@
 "Rename" = "Yeniden Adlandır";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "E-postayı yeniden gönder";
 
 /* Reset Action */
 "Reset" = "Sıfırla";
@@ -498,7 +498,7 @@
 "Restore Note" = "Notu Geri Yükle";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Hesabınızı İnceleyin";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "Kullanıcı adı";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "Eposta Adresinizi Doğrulayın";
 
 /* App version number */
 "Version %@" = "Sürüm %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@ adresine bir doğrulama e-postası gönderdik. Lütfen gelen kutunuzu kontrol edin ve talimatları izleyin.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Dün";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "%1$@ e-postasını kullanarak Simplenote'a kaydoldunuz.\n\nBu e-posta adresine artık erişiminiz yoksa, hesap güvenliğindeki iyileştirmeler hesap kaybına neden olabilir.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "E-posta adresiniz geçerli değil.";

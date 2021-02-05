@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-03 16:54:40+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "¿Eres desarrollador? Buscamos personal.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "¿Seguro que quieres eliminar \"%1$@\"?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "¿Seguro que quieres vaciar la papelera? Esta acción no se puede deshacer.";
@@ -108,16 +108,16 @@
 "Cancel" = "Cancelar";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "No se ha podido confirmar la cuenta";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "No se ha podido enviar el correo electrónico de verificación";
 
 /* Work at Automattic */
 "Careers" = "Empleos";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "Cambiar correo electrónico";
 
 /* Number of characters in the note */
 "Characters" = "Caracteres";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Activa tu cuenta de WordPress.com por correo electrónico e inténtalo de nuevo.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Comprueba tus ajustes de red y vuelve a intentarlo.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Vista previa";
@@ -483,7 +483,7 @@
 "Rename" = "Renombrar";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "Volver a enviar correo electrónico";
 
 /* Reset Action */
 "Reset" = "Restablecer";
@@ -498,7 +498,7 @@
 "Restore Note" = "Restaurar Nota";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Revisa tu cuenta";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "Usuario";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "Verifica tu correo electrónico";
 
 /* App version number */
 "Version %@" = "Versión %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Hemos enviado un correo electrónico de verificación a %1$@. Revisa tu bandeja de entrada y sigue las instrucciones.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "¿Qué opinas de Simplenote?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Ayer";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Tienes una cuenta registrada en Simplenote con el correo electrónico %1$@.\n\nPuede que pierdas el acceso a la cuenta debido a las mejoras en la seguridad si ya no tienes acceso a esa dirección de correo electrónico.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Su dirección de correo electrónico no es valida.";

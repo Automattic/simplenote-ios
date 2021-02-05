@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-03 10:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -108,16 +108,16 @@
 "Cancel" = "Cancel";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "Tidak Dapat Mengonfirmasi Akun";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Tidak Dapat Mengirimkan Email Verifikasi";
 
 /* Work at Automattic */
 "Careers" = "Karier";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "Ubah Email";
 
 /* Number of characters in the note */
 "Characters" = "Karakter";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Harap aktifkan akun WordPress.com Anda melalui email dan coba lagi.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Harap periksa pengaturan jaringan Anda lalu coba lagi.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Pratinjau";
@@ -483,7 +483,7 @@
 "Rename" = "Ubah Nama";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "Kirim Ulang Email";
 
 /* Reset Action */
 "Reset" = "Atur Ulang";
@@ -498,7 +498,7 @@
 "Restore Note" = "Pulihkan Catatan";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Tinjau Akun Anda";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "Nama pengguna";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "Verifikasi Email Anda";
 
 /* App version number */
 "Version %@" = "Versi %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Kami telah mengirimkan email verifikasi ke %1$@. Harap periksa kotak masuk Anda dan ikuti instruksi berikut.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Apa pendapat Anda tentang Simplenote?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Kemarin";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Anda terdaftar pada SImplenote menggunakan email %1$@.\n\nPeningkatan keamanan akun dapat menyebabkan akun hilang jika Anda tidak lagi memiliki akses ke alamat email ini.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Alamat email Anda tidak valid.";

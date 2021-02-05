@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-04 14:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "Bist du Entwickler? Wir stellen weitere Mitarbeiter ein.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "Willst du „%1$@“ wirklich löschen?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Soll der Papierkorb wirklich geleert werden? Dies kann nicht rückgängig gemacht werden.";
@@ -108,16 +108,16 @@
 "Cancel" = "Abbrechen";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "Konto kann nicht bestätigt werden";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Verifizierungs-E-Mail kann nicht gesendet werden";
 
 /* Work at Automattic */
 "Careers" = "Jobs";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "E-Mail-Adresse ändern";
 
 /* Number of characters in the note */
 "Characters" = "Zeichen";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "Aktiviere dein WordPress.com-Konto per E-Mail und versuche es erneut.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Prüfe bitte deine Netzwerkeinstellungen und versuche es noch einmal.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Vorschau";
@@ -483,7 +483,7 @@
 "Rename" = "Umbenennen";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "E-Mail erneut senden";
 
 /* Reset Action */
 "Reset" = "Zurücksetzen";
@@ -498,7 +498,7 @@
 "Restore Note" = "Notiz wiederherstellen";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Konto prüfen";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "Benutzername";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "E-Mail-Adresse bestätigen";
 
 /* App version number */
 "Version %@" = "Version %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Wir haben an %1$@ eine Verifizierungs-E-Mail gesendet. Sieh bitte in deinem Posteingang nach und befolge die Anweisungen.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Was hältst du von Simplenote?";
@@ -669,7 +669,7 @@
 "Yesterday" = "Gestern";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Du bist mit der E-Mail-Adresse %1$@ bei Simplenote registriert.\n\nVerbesserungen der Kontosicherheit können zum Verlust des Kontos führen, wenn du keinen Zugriff mehr auf diese E-Mail-Adresse hast.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Deine E-Mail-Adresse ist ungültig.";

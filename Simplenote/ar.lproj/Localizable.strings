@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-04 15:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -86,7 +86,7 @@
 "Are you a developer? We’re hiring." = "هل أنت مطوِّر؟ إننا نوفِّر فرص عمل.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "هل تريد بالتأكيد حذف \"%1$@\"؟";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "هل أنت متأكد من رغبتك في إفراغ سلة المهملات؟ يتعذر التراجع عن هذا.";
@@ -108,16 +108,16 @@
 "Cancel" = "إلغاء";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "يتعذر تأكيد الحساب";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "يتعذر إرسال رسالة البريد الإلكتروني الخاصة بالتحقُّق";
 
 /* Work at Automattic */
 "Careers" = "مِهن";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "تغيير البريد الإلكتروني";
 
 /* Number of characters in the note */
 "Characters" = "أحرف";
@@ -441,7 +441,7 @@
 "Please activate your WordPress.com account via email and try again." = "يرجى تنشيط حساب ووردبريس.كوم الخاص بك عبر البريد الإلكتروني والمحاولة مجددًا.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "يرجى التحقُّق من إعدادات الشبكة لديك والمحاولة مرة أخرى.";
 
 /* Title of Markdown preview screen */
 "Preview" = "معاينة";
@@ -483,7 +483,7 @@
 "Rename" = "إعادة التسمية";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "إعادة إرسال البريد الإلكتروني";
 
 /* Reset Action */
 "Reset" = "إعادة تعيين";
@@ -498,7 +498,7 @@
 "Restore Note" = "استعادة الملاحظة";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "مراجعة حسابك";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -639,7 +639,7 @@
 "Username" = "اسم المستخدم";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "التحقُّق من بريدك الإلكتروني";
 
 /* App version number */
 "Version %@" = "الإصدار %@";
@@ -654,7 +654,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "لقد أرسلنا بريدًا إلكترونيًا للتحقق إلى %1$@. يرجى التحقُّق من علبة الوارد لديك واتباع الإرشادات.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
@@ -669,7 +669,7 @@
 "Yesterday" = "أمس";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "لقد قمت بالتسجيل في Simplenote باستخدام البريد الإلكتروني %1$@.\n\nقد تؤدي التحسينات التي يتم إجراؤها على أمان الحساب إلى فقدان الحساب إذا لم يعد لديك حق الوصول إلى عنوان البريد الإلكتروني هذا.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "عنوان البريد الإلكتروني الخاص بك غير صالح.";
