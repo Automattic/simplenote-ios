@@ -66,10 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.31-whats-new"
+msgctxt "v4.32-whats-new"
 msgid ""
-"-   Added account verification screen\n"
-"-   Updated minimum row height when note list is in condensed mode\n"
-"-   Updated tags editing experience\n"
+"- Added support for keyboard navigation and shortcuts\n"
 msgstr ""
 
