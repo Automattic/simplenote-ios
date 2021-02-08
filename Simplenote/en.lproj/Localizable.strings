@@ -10,6 +10,12 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
 
+/* Count of interlink references to a note */
+"%i Reference" = "%i Reference";
+
+/* Count of interlink references to a note */
+"%i References" = "%i References";
+
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum of 8 characters";
 
@@ -231,6 +237,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Dismiss keyboard";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Document";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -253,6 +262,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Enable Markdown formatting";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "End Editing";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enqueued";
@@ -293,12 +305,17 @@
 /* No comment provided by engineer. */
 "I like it" = "I like it";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Information";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Insert Checklist";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Last Modified %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -362,7 +379,8 @@
    Deletes a note */
 "Move to Trash" = "Move to Trash";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "New Note";
 
 /* Label to create a new note */
@@ -370,6 +388,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "New note...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Next Match";
 
 /* Cancels Empty Trash Action */
 "No" = "No";
@@ -447,6 +468,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Preview";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Previous Match";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Privacy Notice for California Users";
 
@@ -502,6 +526,7 @@
 "Review Your Account" = "Review Your Account";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Search";
@@ -608,6 +633,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Today";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Toggle Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Toggle tag sidebar";
