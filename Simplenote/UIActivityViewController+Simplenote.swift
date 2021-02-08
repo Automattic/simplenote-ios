@@ -18,5 +18,9 @@ extension UIActivityViewController {
         let source = SimplenoteActivityItemSource(note: note)
 
         self.init(activityItems: [print, source], applicationActivities: nil)
+        
+        excludedActivityTypes = [
+            UIActivity.ActivityType.openInIBooks
+        ]
     }
 }
