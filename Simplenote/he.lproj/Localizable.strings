@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-20 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "האם יש לך ניסיון בפיתוח? אנחנו מחפשים עובדים.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "האם ברצונך למחוק את \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "האם ברצונך לרוקן את הפח? לא ניתן לבטל את הפעולה.";
 
@@ -98,13 +101,23 @@
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "ביטול";
 
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "אין אפשרות לאמת את החשבון";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "אין אפשרות לשלוח אימייל לאימות";
+
 /* Work at Automattic */
 "Careers" = "משרות";
+
+/* Change email button -> Review you account screen */
+"Change Email" = "לשנות כתובת אימייל";
 
 /* Number of characters in the note */
 "Characters" = "תווים";
@@ -123,6 +136,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "פעם נוספת";
 
 /* Title on the PinLock screen asking to confirm a passcode */
 "Confirm your passcode" = "לאשר את קוד הסיסמה שלך";
@@ -195,6 +211,9 @@
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "למחוק תגית";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "אבחונים";
@@ -421,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "יש להפעיל את החשבון שלך ב-WordPress.com באמצעות האימייל ולנסות שוב.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "עליך לבדוק את הגדרות הרשת ולנסות שוב.";
+
 /* Title of Markdown preview screen */
 "Preview" = "תצוגה מקדימה";
 
@@ -460,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "שינוי שם";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "לשלוח אימייל מחדש";
+
 /* Reset Action */
 "Reset" = "איפוס";
 
@@ -471,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "לבדוק את החשבון שלך";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -610,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "שם משתמש";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "לאמת את כתובת האימייל שלך";
+
 /* App version number */
 "Version %@" = "גרסה %@";
 
@@ -622,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "שלחנו את האימות לכתובת האימייל %1$@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
 
@@ -633,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "החשבון שלך רשום עם Simplenote באמצעות האימייל %1$@.\n\nשיפורים באבטחת החשבון עלולים לגרום לאבדן החשבון אם אין לך עוד גישה לכתובת האימייל הזאת.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";

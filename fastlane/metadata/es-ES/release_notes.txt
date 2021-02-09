@@ -1,3 +1,3 @@
-- Nueva interfaz de código de acceso
-- Se ha corregido un error que provocaba un bloqueo del sistema al realizar una búsqueda
-- Se ha corregido la entrada de texto predictivo al trabajar con etiquetas
+- Se ha añadido la pantalla de verificación de la cuenta
+- Se ha actualizado la altura mínima de la fila cuando la lista de notas está en modo condensado
+- Se ha actualizado la experiencia de edición de etiquetas

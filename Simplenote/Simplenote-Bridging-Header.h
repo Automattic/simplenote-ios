@@ -12,6 +12,7 @@
 
 #import "Note.h"
 #import "Tag.h"
+#import "Settings.h"
 #import "PersonTag.h"
 #import "SPAppDelegate.h"
 #import "SPConstants.h"
@@ -21,7 +22,6 @@
 #import "SPObjectManager.h"
 #import "SPRatingsHelper.h"
 #import "SPSettingsViewController.h"
-#import "SPTagListViewCell.h"
 #import "SPTextView.h"
 #import "SPTextField.h"
 #import "SPTableViewController.h"

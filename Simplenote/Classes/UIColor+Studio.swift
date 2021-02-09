@@ -386,4 +386,8 @@ extension UIColor {
     static var simplenoteLockScreenMessageColor: UIColor {
         return UIColor(studioColor: .spBlue5)
     }
+
+    static var simplenoteVerificationScreenBackgroundColor: UIColor {
+        return UIColor(lightColor: .white, darkColor: .darkGray2)
+    }
 }
