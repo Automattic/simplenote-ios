@@ -509,7 +509,7 @@ extension TagListViewController: TagListViewCellDelegate {
         }
 
         alertController.addCancelActionWithTitle(Localization.TagDeletionConfirmation.cancellationButton)
-        
+
         alertController.popoverPresentationController?.sourceRect = cell.bounds
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.permittedArrowDirections = .any

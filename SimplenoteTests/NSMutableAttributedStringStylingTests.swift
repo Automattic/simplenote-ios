@@ -12,7 +12,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let string = "This is a badly formed todo - [ ] Buy avocados - []"
         let regex = NSRegularExpression.regexForChecklists
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
-        
+
         XCTAssertTrue(matches.isEmpty)
     }
 
@@ -52,7 +52,7 @@ class NSMutableAttributedStringStylingTests: XCTestCase {
         let string = "ToDo\n\n- [ ] Buy avocados\n- [ ] Ship it\n- [x ] Malformed!\n- [x] Correct."
         let regex = NSRegularExpression.regexForChecklists
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
-        
+
         XCTAssertEqual(matches.count, 3)
     }
 

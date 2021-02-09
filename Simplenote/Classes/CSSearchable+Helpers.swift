@@ -18,14 +18,14 @@ extension CSSearchableItemAttributeSet {
         title = note.titlePreview
         contentDescription = note.bodyPreview
     }
-    
+
 }
 
 extension CSSearchableItem {
 
     convenience init(note: Note) {
         let attributeSet = CSSearchableItemAttributeSet(note: note)
-        self.init(uniqueIdentifier: note.simperiumKey, domainIdentifier:"notes", attributeSet: attributeSet)
+        self.init(uniqueIdentifier: note.simperiumKey, domainIdentifier: "notes", attributeSet: attributeSet)
     }
 
 }
@@ -40,19 +40,19 @@ extension CSSearchableIndex {
             }
         }
     }
-    
+
     @objc func indexSearchableNotes(_ notes: [Note]) {
         let items = notes.map {
             return CSSearchableItem(note: $0)
         }
-        
+
         indexSearchableItems(items) { error in
             if let error = error {
                 NSLog("Couldn't index notes in spotlight: \(error.localizedDescription)")
             }
         }
     }
-    
+
     @objc func deleteSearchableNote(_ note: Note) {
         deleteSearchableNotes([note])
     }
@@ -61,7 +61,7 @@ extension CSSearchableIndex {
         let ids = notes.map {
             return $0.simperiumKey!
         }
-        
+
         deleteSearchableItems(withIdentifiers: ids) { error in
             if let error = error {
                 NSLog("Couldn't delete notes from spotlight index: \(error.localizedDescription)")

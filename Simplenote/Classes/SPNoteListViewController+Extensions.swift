@@ -384,14 +384,14 @@ extension SPNoteListViewController {
         }
         open(note, ignoringSearchQuery: true, animated: true)
     }
-    
+
     /// Sets the state of the trash button
     ///
     @objc
     func refreshEmptyTrashState() {
         let isTrashOnScreen = self.isDeletedFilterActive
         let isNotEmpty = !self.isListEmpty
-        
+
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
 }
@@ -860,13 +860,13 @@ extension SPNoteListViewController {
 
     @objc(keyboardWillChangeFrame:)
     func keyboardWillChangeFrame(note: Notification) {
-        
+
         guard let _ = view.window else {
             // No window means we aren't in the view hierarchy.
             // Asking UITableView to refresh layout when not in the view hierarcy results in console warnings.
             return
         }
-        
+
         guard let keyboardFrame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }

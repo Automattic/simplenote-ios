@@ -4,7 +4,7 @@ import Foundation
 // MARK: - SPTextInputViewDelegate
 //
 @objc
-protocol SPTextInputViewDelegate : NSObjectProtocol {
+protocol SPTextInputViewDelegate: NSObjectProtocol {
 
     @objc optional
     func textInputDidBeginEditing(_ textInput: SPTextInputView)

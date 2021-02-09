@@ -20,7 +20,7 @@ extension NSTextStorage {
 
             addAttribute(.backgroundColor, value: color, range: range)
         }
-        
+
         endEditing()
     }
 }
