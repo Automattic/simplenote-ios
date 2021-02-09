@@ -109,7 +109,7 @@ extension Note {
 ///
 extension Note {
     
-    ///Returns a unique identifier for a note that can be used to create a file name
+    /// Returns a unique identifier for a note that can be used to create a file name
     ///
     func exportFilename() -> String {
         return simperiumKey + String(Int(modificationDate.timeIntervalSince1970))
