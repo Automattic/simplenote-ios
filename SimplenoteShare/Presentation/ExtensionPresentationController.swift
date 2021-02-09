@@ -37,7 +37,6 @@ final class ExtensionPresentationController: UIPresentationController {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
 
-
     // MARK: Presentation Controller Overrides
 
     override var frameOfPresentedViewInContainerView: CGRect {
@@ -91,7 +90,6 @@ final class ExtensionPresentationController: UIPresentationController {
         })
     }
 }
-
 
 // MARK: - Constants
 //
