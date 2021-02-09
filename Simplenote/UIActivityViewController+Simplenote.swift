@@ -13,10 +13,9 @@ extension UIActivityViewController {
         guard let content = note.content else {
             return nil
         }
-        let shareFilename = note.exportFilename()
 
         let print = SPSimpleTextPrintFormatter(text: content)
-        let source = SimplenoteActivityItemSource(content: content, filename: String(format: "%@.txt", shareFilename))
+        let source = SimplenoteActivityItemSource(content: content, identifier: note.simperiumKey)
 
         self.init(activityItems: [print, source], applicationActivities: nil)
     }
