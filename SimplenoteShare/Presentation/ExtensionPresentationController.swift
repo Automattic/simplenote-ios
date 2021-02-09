@@ -161,9 +161,6 @@ private extension ExtensionPresentationController {
     struct Appearance {
         static let dimmingViewBGColor                  = UIColor(white: 0.0, alpha: 0.5)
         static let cornerRadius: CGFloat               = 4.0
-        static let widthRatio: CGFloat                 = 0.90
-        static let widthRatioCompactVertical: CGFloat  = 0.90
         static let heightRatio: CGFloat                = 0.90
-        static let heightRatioCompactVertical: CGFloat = 0.80
     }
 }
