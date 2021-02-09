@@ -54,6 +54,10 @@ class ShareViewController: UIViewController {
         button.accessibilityIdentifier = "Save Button"
         return button
     }()
+    
+    /// Keyboard Observer Tokens
+    ///
+    private var keyboardObserverTokens: [Any] = []
 
 
     // MARK: Initialization
@@ -63,10 +67,15 @@ class ShareViewController: UIViewController {
     init(context: NSExtensionContext?) {
         self.context = context
         super.init(nibName: type(of: self).nibName, bundle: nil)
+        keyboardObserverTokens = addKeyboardObservers()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        removeKeyboardObservers(with: keyboardObserverTokens)
     }
 
 
@@ -90,6 +99,13 @@ class ShareViewController: UIViewController {
     }
 }
 
+extension ShareViewController: KeyboardObservable {
+    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    }
+    
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    }
+}
 
 // MARK: - Actions
 //
