@@ -7,7 +7,6 @@
 //
 
 #import "SPEditorTextView.h"
-#import "SPTagView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
 #import "Simplenote-Swift.h"
@@ -16,11 +15,8 @@ NSString *const MarkdownUnchecked = @"- [ ]";
 NSString *const MarkdownChecked = @"- [x]";
 NSString *const TextAttachmentCharacterCode = @"\U0000fffc"; // Represents the glyph of an NSTextAttachment
 
-// TODO: Add intrinsicContentSize support to TagView
-static CGFloat const TagViewHeight = 44;
-
 static CGFloat const TextViewContanerInsetsTop = 8;
-static CGFloat const TextViewContanerInsetsBottom = TagViewHeight * 2;
+static CGFloat const TextViewContanerInsetsBottom = 88;
 
 // TODO: Drop this the second SplitViewController is implemented
 static CGFloat const TextViewRegularByRegularPadding = 64;
@@ -63,24 +59,15 @@ NSInteger const ChecklistCursorAdjustment = 2;
         self.verticalMoveStartCaretRect = CGRectZero;
         self.verticalMoveLastCaretRect = CGRectZero;
 
-        [self setupTagsEditor];
         [self setupTextContainerInsets];
         [self setupGestureRecognizers];
         [self startListeningToNotifications];
-        [self startObservingProperties];
 
         // Why: Data Detectors simply don't work if `isEditable = YES`
         [self setEditable:NO];
     }
 
     return self;
-}
-
-- (void)setupTagsEditor
-{
-    self.tagView = [[SPTagView alloc] initWithFrame:CGRectMake(0, 0, 0, TagViewHeight)];
-    self.tagView.isAccessibilityElement = NO;
-    [self addSubview:self.tagView];
 }
 
 - (void)setupTextContainerInsets
@@ -95,7 +82,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     SPEditorTapRecognizerDelegate *recognizerDelegate = [SPEditorTapRecognizerDelegate new];
     recognizerDelegate.parentTextView = self;
-    recognizerDelegate.excludedView = self.tagView;
     self.internalRecognizerDelegate = recognizerDelegate;
 
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -113,38 +99,9 @@ NSInteger const ChecklistCursorAdjustment = 2;
                                                object:nil];
 }
 
-- (void)startObservingProperties
-{
-    for (NSString *keyPath in self.observedKeyPaths) {
-        [self addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
-    }
-}
-
-- (NSArray<NSString *> *)observedKeyPaths
-{
-    return @[
-        NSStringFromSelector(@selector(contentSize)),
-        NSStringFromSelector(@selector(contentOffset)),
-        NSStringFromSelector(@selector(contentInset))
-    ];
-}
-
 - (NSDictionary *)typingAttributes
 {
     return self.text.length == 0 ? self.interactiveTextStorage.headlineStyle : self.interactiveTextStorage.defaultStyle;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (object != self) {
-        return;
-    }
-
-    if (![self.observedKeyPaths containsObject:keyPath]) {
-        return;
-    }
-
-    [self positionTagView];
 }
 
 // TODO: Drop this the second SplitViewController is implemented
@@ -174,49 +131,6 @@ NSInteger const ChecklistCursorAdjustment = 2;
     }
 
     self.textContainer.lineFragmentPadding = padding;
-    
-    // position tag view at bottom
-    [self positionTagView];
-}
-
-- (void)positionTagView
-{
-    CGFloat width       = self.bounds.size.width - self.safeAreaInsets.left - self.safeAreaInsets.right;
-    CGFloat height      = CGRectGetHeight(self.tagView.frame);
-
-    /// When the keyboard is presented, we're explicitly removing the bottom safeAreaInsets: TextView automatically accounts for them.
-    /// For that reason, when positioning the TagView we'd need to add them manually
-    CGFloat paddingY    = self.contentInset.bottom + self.safeAreaInsets.bottom;
-    CGFloat boundsMinY  = self.bounds.size.height - height + self.contentOffset.y - paddingY;
-    CGFloat contentMinY = self.contentSize.height + self.textContainerInset.top - self.textContainerInset.bottom;
-
-    CGFloat yOrigin     = self.lockTagEditorPosition ? boundsMinY : MAX(boundsMinY, contentMinY);
-    CGFloat xOrigin     = self.safeAreaInsets.left;
-
-    self.tagView.frame  = CGRectMake(xOrigin, yOrigin, width, height);
-}
-
-- (void)setLockTagEditorPosition:(BOOL)lockTagEditorPosition
-{
-    _lockTagEditorPosition = lockTagEditorPosition;
-    [self positionTagView];
-}
-
-- (void)setTagView:(SPTagView *)tagView
-{
-    if (_tagView) {
-        [_tagView removeFromSuperview];
-    }
-    
-    [self addSubview:tagView];
-    _tagView = tagView;
-    [self setNeedsLayout];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    // Limit a recognized touch to the SPTextView, so that taps on tags still work as expected
-    return ![touch.view isDescendantOfView:self.tagView];
 }
 
 - (BOOL)becomeFirstResponder

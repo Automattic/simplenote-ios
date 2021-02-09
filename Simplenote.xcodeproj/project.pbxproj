@@ -148,6 +148,8 @@
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
+		A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */; };
+		A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */; };
 		A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */; };
 		A6C0DFB525C1581D00B9BE39 /* UIScrollView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */; };
 		A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2721725AF0C1E00593731 /* TagListViewCell.swift */; };
@@ -597,6 +599,8 @@
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
+		A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorTagListViewController.swift; sourceTree = "<group>"; };
+		A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditorTagListViewController.xib; sourceTree = "<group>"; };
 		A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteScrollPositionCache.swift; sourceTree = "<group>"; };
 		A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Simplenote.swift"; path = "Classes/UIScrollView+Simplenote.swift"; sourceTree = "<group>"; };
 		A6C2721725AF0C1E00593731 /* TagListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewCell.swift; sourceTree = "<group>"; };
@@ -1212,6 +1216,15 @@
 				A6E1E78824B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift */,
 			);
 			name = "Note History";
+			sourceTree = "<group>";
+		};
+		A6C0DFE425C18DFF00B9BE39 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */,
+				A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */,
+			);
+			path = Tags;
 			sourceTree = "<group>";
 		};
 		A6CC0B0E25B83FC800F12A85 /* Verification */ = {
@@ -1960,6 +1973,7 @@
 		E29ADD751784902700E55842 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A6C0DFE425C18DFF00B9BE39 /* Tags */,
 				A6A648A125AC3A5A0074A094 /* Verification */,
 				A66E41CD256D08BE000C6FCB /* PinLock */,
 				B59035FB251294D400034BAF /* Diagnostics */,
@@ -2241,6 +2255,7 @@
 				B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */,
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
 				B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */,
+				A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */,
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */,
 				A6A648A525AC3AC00074A094 /* AccountVerificationViewController.xib in Resources */,
@@ -2533,6 +2548,7 @@
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
+				A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */,
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
