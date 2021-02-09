@@ -15,6 +15,12 @@ extension FileManager {
         return url
     }
     
+    /// User's Temporary Directory
+    ///
+    class var temporaryDirectoryURL: URL {
+        return FileManager.default.temporaryDirectory
+    }
+    
     /// Writes a given String to the documents folder
     ///
     class func writeStringToURL(string: String, to targetURL: URL) -> URL? {

@@ -14,7 +14,7 @@ class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {
     ///
     init(content: String, filename: String) {
         self.content = content
-        self.targetURL = FileManager.documentsURL.appendingPathComponent(filename)
+        self.targetURL = FileManager.temporaryDirectoryURL.appendingPathComponent(filename)
         super.init()
     }
 
