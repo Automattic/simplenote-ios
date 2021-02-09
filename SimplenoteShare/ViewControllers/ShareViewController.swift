@@ -59,6 +59,7 @@ class ShareViewController: UIViewController {
     ///
     private var keyboardObserverTokens: [Any] = []
 
+    private var keyboardInputChanging: Bool = false
 
     // MARK: Initialization
 
@@ -68,6 +69,7 @@ class ShareViewController: UIViewController {
         self.context = context
         super.init(nibName: type(of: self).nibName, bundle: nil)
         keyboardObserverTokens = addKeyboardObservers()
+        setInputModeObserver()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -102,7 +104,9 @@ class ShareViewController: UIViewController {
 extension ShareViewController: KeyboardObservable {
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         guard let beginFrame = beginFrame,
-              let endFrame = endFrame else {
+              let endFrame = endFrame,
+              keyboardInputChanging == false else {
+            print("Keyboad input changed")
             return
         }
         //BeginFrame y will be larger IF the keyboard was hidden
@@ -121,7 +125,10 @@ extension ShareViewController: KeyboardObservable {
     
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         guard let beginFrame = beginFrame,
-              let endFrame = endFrame else {
+              let endFrame = endFrame,
+              keyboardInputChanging == false else {
+            print("Keyboad input changed")
+            keyboardInputChanging = true
             return
         }
         
@@ -142,6 +149,17 @@ extension ShareViewController: KeyboardObservable {
                 self.textView.scrollIndicatorInsets = insets
             }
         }
+    }
+    
+    private func setInputModeObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(inputModeDidChange),
+                                               name: UITextInputMode.currentInputModeDidChangeNotification,
+                                               object: nil)
+    }
+
+    @objc func inputModeDidChange(_ notification: Notification) {
+        keyboardInputChanging = true
     }
 }
 
