@@ -46,15 +46,14 @@ final class ExtensionPresentationController: UIPresentationController {
         removeKeyboardObservers(with: tokens)
     }
 
-
     // MARK: Presentation Controller Overrides
 
     override var frameOfPresentedViewInContainerView: CGRect {
         var frame: CGRect = .zero
         if let containerView = containerView {
             frame.size = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView.bounds.size)
-            frame.origin.x = (containerView.frame.width - frame.width) / 2.0
-            frame.origin.y = (containerView.frame.height - frame.height) / 2.0
+            frame.origin.x = .zero
+            frame.origin.y = (containerView.frame.height - frame.height)
         }
         return frame
     }
@@ -65,9 +64,7 @@ final class ExtensionPresentationController: UIPresentationController {
             return parentSize
         }
 
-        let widthRatio = traitCollection.verticalSizeClass != .compact ? Appearance.widthRatio : Appearance.widthRatioCompactVertical
-        let heightRatio = traitCollection.verticalSizeClass != .compact ? Appearance.heightRatio : Appearance.heightRatioCompactVertical
-        return CGSize(width: (parentSize.width * widthRatio), height: (parentSize.height * heightRatio))
+        return CGSize(width: (parentSize.width), height: (parentSize.height * Appearance.heightRatio))
     }
 
     override func containerViewWillLayoutSubviews() {
@@ -166,7 +163,7 @@ private extension ExtensionPresentationController {
         static let cornerRadius: CGFloat               = 4.0
         static let widthRatio: CGFloat                 = 0.90
         static let widthRatioCompactVertical: CGFloat  = 0.90
-        static let heightRatio: CGFloat                = 0.80
+        static let heightRatio: CGFloat                = 0.90
         static let heightRatioCompactVertical: CGFloat = 0.80
     }
 }
