@@ -116,7 +116,7 @@ extension SPNoteEditorViewController {
         super.viewWillLayoutSubviews()
         // We need to reset transform to prevent tagView from loosing `safeArea`
         // We restore trasform back in viewDidLayoutSubviews
-        tagListViewController.view.transform = .identity
+        tagView.transform = .identity
     }
 
     open override func viewDidLayoutSubviews() {
@@ -710,7 +710,6 @@ extension SPNoteEditorViewController {
     func configureTagListViewController() {
         tagListViewController = NoteEditorTagListViewController(note: note)
         addChild(tagListViewController)
-        let tagView = tagListViewController.view!
 
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
@@ -730,15 +729,19 @@ extension SPNoteEditorViewController {
 
     private func updateTagListPosition() {
         guard !isVoiceOverEnabled else {
-            tagListViewController.view.transform = .identity
+            tagView.transform = .identity
             return
         }
 
         let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom
         let maxContentY = noteEditorTextView.convert(CGPoint(x: 0, y: contentHeight), to: view).y
 
-        tagListViewController.view.transform = .identity
-        tagListViewController.view.transform = .init(translationX: 0, y: max(maxContentY - tagListViewController.view.frame.origin.y, 0))
+        tagView.transform = .identity
+        tagView.transform = .init(translationX: 0, y: max(maxContentY - tagView.frame.origin.y, 0))
+    }
+
+    private var tagView: UIView {
+        return tagListViewController.view
     }
 }
 
@@ -786,7 +789,7 @@ extension SPNoteEditorViewController {
     }
 
     private func refreshTagsEditor() {
-        tagListViewController.view.backgroundColor = backgroundColor
+        tagView.backgroundColor = backgroundColor
     }
 
     private func refreshTextStorage() {
