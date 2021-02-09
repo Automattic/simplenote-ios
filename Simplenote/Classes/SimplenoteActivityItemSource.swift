@@ -27,6 +27,19 @@ class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {
             return content
         }
 
-        return FileManager.writeStringToURL(string: content, to: targetURL) ?? content
+        return writeStringToURL(string: content, to: targetURL) ?? content
+    }
+
+    /// Writes a given String to the documents folder
+    ///
+    private func writeStringToURL(string: String, to targetURL: URL) -> URL? {
+        do {
+            try string.write(to: targetURL, atomically: true, encoding: .utf8)
+        } catch {
+            NSLog("Note Exporter Failure: \(error)")
+            return nil
+        }
+
+        return targetURL
     }
 }
