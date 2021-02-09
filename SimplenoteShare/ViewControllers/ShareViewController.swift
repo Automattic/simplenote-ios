@@ -101,9 +101,47 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController: KeyboardObservable {
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let beginFrame = beginFrame,
+              let endFrame = endFrame else {
+            return
+        }
+        //BeginFrame y will be larger IF the keyboard was hidden
+        if beginFrame.origin.y > endFrame.origin.y {
+            UIView.animate(withDuration: Constants.animationTimeInterval) {
+                let insets = self.makeEdgeInsets(from: endFrame)
+                self.textView.contentInset = insets
+                self.textView.scrollIndicatorInsets = insets
+            }
+        }
+    }
+    
+    private func makeEdgeInsets(from keyboardFrame: CGRect) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
     }
     
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let beginFrame = beginFrame,
+              let endFrame = endFrame else {
+            return
+        }
+        
+        //BeginFrame y will be larger IF the keyboard was hidden
+        if beginFrame.origin.y < endFrame.origin.y {
+            print(beginFrame)
+            print(endFrame)
+            UIView.animate(withDuration: Constants.animationTimeInterval) {
+                var insets = UIEdgeInsets()
+                
+                if UIDevice.isPad {
+                    insets = self.makeEdgeInsets(from: endFrame)
+                } else {
+                    insets = Constants.textViewInsets
+                }
+                
+                self.textView.contentInset = insets
+                self.textView.scrollIndicatorInsets = insets
+            }
+        }
     }
 }
 
@@ -211,9 +249,17 @@ private extension ShareViewController {
     }
 }
 
+extension UIDevice {
+    static var isPad: Bool {
+        current.userInterfaceIdiom == .pad
+    }
+}
+
 
 // MARK: - Constants
 //
 private struct Constants {
     static let textViewInsets =  UIEdgeInsets(top: 8.0, left: 12.0, bottom: 8.0, right: 12.0)
+    static let insetBottomBuffer = CGFloat(5.0)
+    static let animationTimeInterval = TimeInterval(0.5)
 }
