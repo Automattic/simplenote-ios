@@ -27,6 +27,6 @@ class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {
             return content
         }
 
-        return FileManager.writeStringToDocuments(string: content, to: targetURL) ?? content
+        return FileManager.writeStringToURL(string: content, to: targetURL) ?? content
     }
 }

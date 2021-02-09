@@ -17,7 +17,7 @@ extension FileManager {
     
     /// Writes a given String to the documents folder
     ///
-    class func writeStringToDocuments(string: String, to targetURL: URL) -> URL? {
+    class func writeStringToURL(string: String, to targetURL: URL) -> URL? {
         do {
             try string.write(to: targetURL, atomically: true, encoding: .utf8)
         } catch {
