@@ -12,9 +12,9 @@ class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {
 
     /// Designated Initializer
     ///
-    init(content: String, filename: String) {
+    init(content: String, identifier: String) {
         self.content = content
-        self.targetURL = FileManager.temporaryDirectoryURL.appendingPathComponent(filename)
+        self.targetURL = FileManager.default.temporaryDirectory.appendingPathComponent(identifier + ".txt")
         super.init()
     }
 
