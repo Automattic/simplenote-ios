@@ -35,16 +35,8 @@ final class ExtensionPresentationController: UIPresentationController {
         self.presentDirection = presentDirection
         self.dismissDirection = dismissDirection
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        self.keyboardNotificationTokens = self.addKeyboardObservers()
     }
 
-    deinit {
-        guard let tokens = keyboardNotificationTokens else {
-            return
-        }
-
-        removeKeyboardObservers(with: tokens)
-    }
 
     // MARK: Presentation Controller Overrides
 
@@ -97,51 +89,6 @@ final class ExtensionPresentationController: UIPresentationController {
         coordinator.animate(alongsideTransition: { _ in
             self.dimmingView.alpha = Constants.zeroAlpha
         })
-    }
-}
-
-
-// MARK: - KeyboardObservable Conformance
-//
-extension ExtensionPresentationController: KeyboardObservable {
-
-    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        let keyboardFrame = endFrame ?? .zero
-        let duration = animationDuration ?? Constants.defaultAnimationDuration
-        animate(with: presentedView!.convert(keyboardFrame, from: nil), duration: duration, animationCurve: animationCurve)
-    }
-
-    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        // TODO:
-        // We should really animate (again) here, but not doing so. The layout mechanism is broken when called twice.
-    }
-
-    private func animate(with keyboardFrame: CGRect, duration: TimeInterval, animationCurve: UInt?) {
-        let presentedFrame = frameOfPresentedViewInContainerView
-        let translatedFrame = getTranslationFrame(keyboardFrame: keyboardFrame, presentedFrame: presentedFrame)
-        var animationOptions: UIView.AnimationOptions = []
-        if let animationCurve = animationCurve {
-            animationOptions = UIView.AnimationOptions(rawValue: animationCurve)
-        }
-        
-        UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
-            self.presentedView?.frame = translatedFrame
-        })
-    }
-
-    private func getTranslationFrame(keyboardFrame: CGRect, presentedFrame: CGRect) -> CGRect {
-        let keyboardTopPadding = traitCollection.verticalSizeClass != .compact ? Constants.bottomKeyboardMarginPortrait : Constants.bottomKeyboardMarginLandscape
-        let keyboardTop = UIScreen.main.bounds.height - (keyboardFrame.size.height + keyboardTopPadding)
-        let presentedViewBottom = presentedFrame.origin.y + presentedFrame.height
-        let offset = presentedViewBottom - keyboardTop
-
-        guard offset > 0.0  else {
-            return presentedFrame
-        }
-
-        let newHeight = presentedFrame.size.height - offset
-        let frame = CGRect(x: presentedFrame.origin.x, y: presentedFrame.origin.y, width: presentedFrame.size.width, height: newHeight)
-        return frame
     }
 }
 
