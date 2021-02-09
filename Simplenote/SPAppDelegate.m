@@ -190,6 +190,7 @@
     }
 
     [self showPasscodeLockIfNecessary];
+    [self cleanupScrollPositionCache];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
