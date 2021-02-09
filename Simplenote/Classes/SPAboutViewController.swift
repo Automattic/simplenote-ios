@@ -300,7 +300,7 @@ private extension SPAboutViewController {
         }
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addCancelActionWithTitle(NSLocalizedString("OK", comment: ""))
+        alertController.addCancelActionWithTitle(NSLocalizedString("OK", comment: "Closes alert controller for spinner on About view"))
         present(alertController, animated: true, completion: nil)
     }
 
