@@ -276,7 +276,7 @@ extension SPNoteListViewController {
     /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
     ///
     func refreshSearchText(appendFilterFor tag: Tag) {
-        let keyword = String.searchOperatorForTags.tagsKeyword + tag.name
+        let keyword = SearchQuerySettings.default.tagsKeyword + tag.name
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
@@ -630,12 +630,11 @@ private extension SPNoteListViewController {
         let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
         cell.leftImage = .image(name: .tag)
         cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
-        cell.titleText = String.searchOperatorForTags.tagsKeyword + tag.name
+        cell.titleText = SearchQuerySettings.default.tagsKeyword + tag.name
         
         //Display localized tag search
-        if searchPrefixIsLocalizedTag() {
-            cell.titleText = String.searchOperatorForTags.localizedTagKeyword + tag.name
-        }
+        let prefix = searchPrefixIsLocalizedTag() ? SearchQuerySettings.default.localizedTagKeyword : SearchQuerySettings.default.tagsKeyword
+        cell.titleText = prefix + tag.name
 
         return cell
     }
@@ -660,7 +659,7 @@ private extension SPNoteListViewController {
         
         let prefix = searchText.prefix(through: first).base.lowercased()
         
-        return prefix == String.searchOperatorForTags.localizedTagKeyword
+        return prefix == SearchQuerySettings.default.localizedTagKeyword
     }
 }
 
