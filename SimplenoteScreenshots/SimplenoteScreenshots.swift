@@ -155,7 +155,7 @@ class SimplenoteScreenshots: XCTestCase {
     func logout(using app: XCUIApplication) {
         getMenuButtonElement(from: app).tap()
 
-        let settings = app.textFields["Settings"]
+        let settings = app.staticTexts["Settings"]
         XCTAssertTrue(settings.waitForExistence(timeout: 3))
         settings.tap()
 
