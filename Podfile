@@ -24,7 +24,6 @@ abstract_target 'Automattic' do
 		pod 'Gridicons', '~> 0.18'
 		pod 'AppCenter', '~> 2.5.1'
 		pod 'AppCenter/Distribute', '~> 2.5.1'
-		pod 'SwiftLint'
 
 		# Automattic
 		#

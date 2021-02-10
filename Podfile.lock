@@ -35,7 +35,6 @@ PODS:
   - Simperium/SPReachability (1.4.0)
   - Simperium/SSKeychain (1.4.0)
   - Sodium-Fork (0.8.2)
-  - SwiftLint (0.42.0)
   - UIDeviceIdentifier (1.6.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.11)
@@ -46,7 +45,6 @@ DEPENDENCIES:
   - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
   - Simperium (= 1.4)
-  - SwiftLint
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -60,7 +58,6 @@ SPEC REPOS:
     - Sentry
     - Simperium
     - Sodium-Fork
-    - SwiftLint
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
@@ -74,11 +71,10 @@ SPEC CHECKSUMS:
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
   Simperium: e198df96d0eec12ff1ab408ab2e775b4623c5525
   Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
-  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   UIDeviceIdentifier: f4bf3b343581a1beacdbf5fb1a8825bd5f05a4a4
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: b8e9ccc572dd159626e9bbe1b6c9f14cd4319d25
+PODFILE CHECKSUM: 1c0b34c545c1da8087f8f769802995f9b44aa31b
 
 COCOAPODS: 1.10.0
