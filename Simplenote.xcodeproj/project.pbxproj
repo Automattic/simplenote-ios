@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -148,10 +148,10 @@
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
-		A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */; };
-		A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */; };
 		A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */; };
 		A6C0DFB525C1581D00B9BE39 /* UIScrollView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */; };
+		A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */; };
+		A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */; };
 		A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2721725AF0C1E00593731 /* TagListViewCell.swift */; };
 		A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */; };
 		A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */; };
@@ -599,10 +599,10 @@
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
-		A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorTagListViewController.swift; sourceTree = "<group>"; };
-		A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditorTagListViewController.xib; sourceTree = "<group>"; };
 		A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteScrollPositionCache.swift; sourceTree = "<group>"; };
 		A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Simplenote.swift"; path = "Classes/UIScrollView+Simplenote.swift"; sourceTree = "<group>"; };
+		A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorTagListViewController.swift; sourceTree = "<group>"; };
+		A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditorTagListViewController.xib; sourceTree = "<group>"; };
 		A6C2721725AF0C1E00593731 /* TagListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewCell.swift; sourceTree = "<group>"; };
 		A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemote.swift; sourceTree = "<group>"; };
@@ -2066,6 +2066,7 @@
 			buildConfigurationList = 46A3C9D417DFA81A002865AE /* Build configuration list for PBXNativeTarget "Simplenote" */;
 			buildPhases = (
 				C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */,
+				AD6CEDDC25D37DC100744BFB /* ShellScript */,
 				46A3C96117DFA81A002865AE /* Sources */,
 				46A3C9B017DFA81A002865AE /* Frameworks */,
 				46A3C9C117DFA81A002865AE /* Resources */,
@@ -2385,6 +2386,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		AD6CEDDC25D37DC100744BFB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/xcrun --sdk macosx swift run swiftlint --path Simplenote\n";
 		};
 		B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */ = {
 			isa = PBXShellScriptBuildPhase;
