@@ -12,6 +12,8 @@ class SimplenoteScreenshots: XCTestCase {
         setupSnapshot(app)
         app.launch()
 
+        dismissVerifyEmailIfNeeded(using: app)
+
         let login = app.buttons["Log In"]
 
         if login.waitForExistence(timeout: 3) == false {
@@ -37,6 +39,8 @@ class SimplenoteScreenshots: XCTestCase {
         let newLogin = app.buttons["Log In"]
         XCTAssertTrue(newLogin.waitForExistence(timeout: 10))
         newLogin.tap()
+
+        dismissVerifyEmailIfNeeded(using: app)
 
         let firstNote = app.cells[noteForDetailScreenshot]
         // Super long timeout in case the test user has many notes and the connection is a bit slow
@@ -146,10 +150,17 @@ class SimplenoteScreenshots: XCTestCase {
 
         typeOnPassCodeScreen(4, using: app)
 
+        dismissVerifyEmailIfNeeded(using: app)
+
         // Now, disable the passcode so we're not blocked by it on next launch.
         openMenu(using: app)
         loadPasscodeScreen(using: app)
         typeOnPassCodeScreen(1234, using: app)
+    }
+
+    func dismissVerifyEmailIfNeeded(using app: XCUIApplication) {
+        guard app.staticTexts["Verify Your Email"].waitForExistence(timeout: 10) else { return }
+        app.buttons["icon cross"].tap()
     }
 
     func logout(using app: XCUIApplication) {
