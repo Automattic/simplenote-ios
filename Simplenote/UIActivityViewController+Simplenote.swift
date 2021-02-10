@@ -15,7 +15,7 @@ extension UIActivityViewController {
         }
 
         let print = SPSimpleTextPrintFormatter(text: content)
-        let source = SimplenoteActivityItemSource(note: note)
+        let source = SimplenoteActivityItemSource(content: content, identifier: note.simperiumKey)
 
         self.init(activityItems: [print, source], applicationActivities: nil)
         
