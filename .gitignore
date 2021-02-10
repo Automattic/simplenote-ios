@@ -40,8 +40,6 @@ SimplenoteScreenshots/Credentials/
 /vendor/
 Pods/
 Carthage/Build
-.build/
-Package.resolved
 
 # Fastlane
 fastlane/Preview.html
