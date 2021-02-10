@@ -15,7 +15,8 @@ struct TagTextFieldInputValidator {
     /// Validate text field input
     ///
     func validateInput(originalText: String, range: Range<String.Index>, replacement: String) -> Result {
-        let charset = CharacterSet.whitespacesAndNewlines
+        var charset = CharacterSet.whitespacesAndNewlines
+        charset.insert(",")
 
         var isEndingWithWhitespace = false
 

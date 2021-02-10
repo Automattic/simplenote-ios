@@ -193,6 +193,7 @@
 }
 
 - (SPTagPill *)newTagPillWithString:(NSString *)string {
+    
     SPTagPill *pill = [[SPTagPill alloc] initWithTagStub:[[SPTagStub alloc] initWithTag:string]
                                                   target:self
                                                   action:@selector(tagPillTapped:)
@@ -365,9 +366,8 @@
 
     if (name.length > 0 && [self.tagDelegate tagView:self shouldCreateTagName:name] && !containsEmailAddress) {
         
-        NSString *cleanedName = [name stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];
-        [self newTagPillWithString:cleanedName];
-        [self.tagDelegate tagView:self didCreateTagName:cleanedName];
+        [self newTagPillWithString:name];
+        [self.tagDelegate tagView:self didCreateTagName:name];
         
     } else {
         
