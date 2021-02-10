@@ -24,7 +24,7 @@
         "repositoryURL": "git@github.com:Automattic/SimplenoteSearch-Swift.git",
         "state": {
           "branch": "issue/860-localize-tag-search",
-          "revision": "e1cfdbc00ea63188d655714c3b2c427408d1eda0",
+          "revision": "3a0dbfdf1298631d3a3a856449ea20d885bf0d86",
           "version": null
         }
       }
