@@ -214,9 +214,11 @@ class SimplenoteScreenshots: XCTestCase {
         let digits = "\(input.magnitude)".compactMap(\.wholeNumberValue)
 
         digits.forEach { digit in
-            let input = app.staticTexts["\(digit)"].firstMatch
+            let input = app.staticTexts["\(digit)"]
             XCTAssertTrue(input.waitForExistence(timeout: 3))
-            input.tap()
+            // Both the custom UIButton and its UILabel match the "\(digit)" query. We need to pick
+            // one for the tap to work.
+            input.firstMatch.tap()
         }
     }
 
