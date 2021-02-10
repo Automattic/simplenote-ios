@@ -63,7 +63,7 @@ final class NoteInformationViewController: UIViewController {
         super.viewDidLayoutSubviews()
         additionalSafeAreaInsets = Consts.tableViewSafeAreaInsets
     }
-    
+
     override func accessibilityPerformEscape() -> Bool {
         dismiss(animated: true, completion: nil)
         return true
@@ -96,7 +96,7 @@ private extension NoteInformationViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(handleTapOnDismissButton))
-        
+
     }
 
     func configureViews() {
@@ -121,7 +121,7 @@ private extension NoteInformationViewController {
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
-    
+
     private func configureDragBar() {
         dragBar.isHidden = navigationController != nil
         dragBar.accessibilityLabel = Localization.dismissAccessibilityLabel
@@ -131,7 +131,7 @@ private extension NoteInformationViewController {
             dragBar.addGestureRecognizer(gestureRecognizer)
         }
     }
-    
+
     @objc
     func informationSheetToBeDismissed() {
         dismiss(animated: true, completion: nil)
@@ -222,9 +222,9 @@ extension NoteInformationViewController: UITableViewDataSource {
 
     private func updateSeparator(for cell: UITableViewCell, at indexPath: IndexPath) {
         let row = sections[indexPath.section].rows[indexPath.row]
-        
+
         switch row {
-        case .header(_):
+        case .header:
             cell.adjustSeparatorWidth(width: .standard)
         default:
             if indexPath.row == sections[indexPath.section].rows.count - 1 {

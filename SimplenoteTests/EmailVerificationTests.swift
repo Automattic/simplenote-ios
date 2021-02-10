@@ -30,7 +30,7 @@ class EmailVerificationTests: XCTestCase {
     }
 
     func testEmailVerificationIgnoresBrokenPayload() {
-        let payload : [AnyHashable: Any] = [
+        let payload: [AnyHashable: Any] = [
             "token": #"{"user": "1234"}"#,
             "sent_to": 1234
         ]
