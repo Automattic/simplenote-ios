@@ -12,7 +12,7 @@ protocol NoteEditorTagListViewControllerDelegate: class {
 @objc
 class NoteEditorTagListViewController: UIViewController {
 
-    @IBOutlet private weak var tagView: SPTagView! {
+    @IBOutlet private weak var tagView: TagView! {
         didSet {
             tagView.tagDelegate = self
             tagView.backgroundColor = .clear
@@ -52,16 +52,16 @@ class NoteEditorTagListViewController: UIViewController {
 
     @objc
     func reload() {
-        if let tags = note.tagsArray as? [String], !tags.isEmpty {
-            tagView.setup(withTagNames: tags)
-        } else {
-            tagView.clearAllTags()
-        }
+        let tags = note.tagsArray?
+            .compactMap({ $0 as? String })
+            .filter({ ($0 as NSString).isValidEmailAddress == false })
+
+        tagView.setup(withTagNames: tags ?? [])
     }
 
     @objc(scrollEntryFieldToVisibleAnimated:)
     func scrollEntryFieldToVisible(animated: Bool) {
-        tagView.scrollEntryFieldToVisible(animated)
+        tagView.scrollEntryFieldToVisible(animated: animated)
     }
 }
 
@@ -85,12 +85,22 @@ extension NoteEditorTagListViewController {
 
 // MARK: - SPTagViewDelegate
 //
-extension NoteEditorTagListViewController: SPTagViewDelegate {
-    func tagView(_ tagView: SPTagView!, shouldCreateTagName tagName: String!) -> Bool {
-        return !note.hasTag(tagName)
+extension NoteEditorTagListViewController: TagViewDelegate {
+    func tagView(_ tagView: TagView, shouldCreateTagWithName tagName: String) -> Bool {
+        let isEmailAddress = (tagName as NSString).isValidEmailAddress
+
+        if isEmailAddress {
+            let alertController = UIAlertController(title: Localization.CollaborationAlert.title.localizedUppercase,
+                                                    message: Localization.CollaborationAlert.message,
+                                                    preferredStyle: .alert)
+            alertController.addCancelActionWithTitle(Localization.CollaborationAlert.cancelAction)
+            present(alertController, animated: true, completion: nil)
+        }
+
+        return !note.hasTag(tagName) && !isEmailAddress
     }
 
-    func tagView(_ tagView: SPTagView!, didCreateTagName tagName: String!) {
+    func tagView(_ tagView: TagView, didCreateTagWithName tagName: String) {
         if !objectManager.tagExists(tagName) {
             objectManager.createTag(from: tagName)
 
@@ -107,7 +117,7 @@ extension NoteEditorTagListViewController: SPTagViewDelegate {
         SPTracker.trackEditorTagAdded()
     }
 
-    func tagView(_ tagView: SPTagView!, didRemoveTagName tagName: String!) {
+    func tagView(_ tagView: TagView, didRemoveTagWithName tagName: String) {
         note.stripTag(tagName)
 
         if let recentlyCreatedTag = recentlyCreatedTag, recentlyCreatedTag == tagName {
@@ -122,17 +132,17 @@ extension NoteEditorTagListViewController: SPTagViewDelegate {
         SPTracker.trackEditorTagRemoved()
     }
 
-    func tagViewDidBeginEditing(_ tagView: SPTagView!) {
+    func tagViewDidBeginEditing(_ tagView: TagView) {
         delegate?.tagListIsEditing(self)
     }
 
-    func tagViewDidChange(_ tagView: SPTagView!) {
+    func tagViewDidChange(_ tagView: TagView) {
         delegate?.tagListIsEditing(self)
     }
 
-    func tagView(_ tagView: SPTagView!, didChangeAutocompleteVisibility isVisible: Bool) {
-        tagViewTopConstraint.constant = isVisible ? tagView.frame.height : 0
-    }
+//    func tagView(_ tagView: TagView!, didChangeAutocompleteVisibility isVisible: Bool) {
+//        tagViewTopConstraint.constant = isVisible ? tagView.frame.height : 0
+//    }
 }
 
 
@@ -140,4 +150,15 @@ extension NoteEditorTagListViewController: SPTagViewDelegate {
 //
 private struct Constants {
     static let clearRecentlyCreatedTagTimeout: TimeInterval = 3.5
+}
+
+
+// MARK: - Localization
+//
+private struct Localization {
+    enum CollaborationAlert {
+        static let title = NSLocalizedString("Collaboration has moved", comment: "")
+        static let message = NSLocalizedString("Sharing notes is now accessed through the action menu from the toolbar.", comment: "")
+        static let cancelAction = NSLocalizedString("OK", comment: "");
+    }
 }

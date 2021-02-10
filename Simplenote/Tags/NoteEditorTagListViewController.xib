@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="431" height="155"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-Bd-Ige" customClass="SPTagView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-Bd-Ige" customClass="TagView" customModule="Simplenote" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="44" width="431" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>

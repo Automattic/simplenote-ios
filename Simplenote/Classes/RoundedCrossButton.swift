@@ -9,6 +9,7 @@ class RoundedCrossButton: RoundedButton {
     enum Style {
         case standard
         case blue
+        case tagPill
     }
 
     var style: Style = .standard {
@@ -55,6 +56,11 @@ private extension RoundedCrossButton {
             setBackgroundImage(UIColor.simplenoteBlue60Color.dynamicImageRepresentation(), for: .highlighted)
 
             tintColor = .white
+
+        case .tagPill:
+            setBackgroundImage(UIColor.simplenoteTagPillDeleteBackgroundColor.dynamicImageRepresentation(), for: .normal)
+
+            tintColor = .simplenoteTagPillBackgroundColor
         }
     }
 }

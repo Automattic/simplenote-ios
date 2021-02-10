@@ -390,4 +390,16 @@ extension UIColor {
     static var simplenoteVerificationScreenBackgroundColor: UIColor {
         return UIColor(lightColor: .white, darkColor: .darkGray2)
     }
+
+    static var simplenoteTagPillBackgroundColor: UIColor {
+        return UIColor(lightColor: .gray5, darkColor: .gray60)
+    }
+
+    static var simplenoteTagPillDeleteBackgroundColor: UIColor {
+        return UIColor(lightColor: .gray50, darkColor: .gray20)
+    }
+
+    static var simplenoteTagPillTextColor: UIColor {
+        return UIColor(lightColor: .gray100, darkColor: .white)
+    }
 }
