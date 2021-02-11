@@ -17,7 +17,7 @@ class EditorFactory: NSObject {
     /// Scroll position cache
     ///
     let scrollPositionCache: NoteScrollPositionCache = {
-        let fileURL = FileManager.documentsURL.appendingPathComponent(Constants.filename)
+        let fileURL = FileManager.default.documentsURL.appendingPathComponent(Constants.filename)
         return NoteScrollPositionCache(storage: FileStorage(fileURL: fileURL))
     }()
 
