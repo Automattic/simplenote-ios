@@ -132,6 +132,8 @@
 		A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */; };
 		A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA724ABFB5300715EBD /* SPShadowView.swift */; };
 		A6900346253D87060087D0D2 /* VersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6900345253D87060087D0D2 /* VersionsController.swift */; };
+		A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A694ABAA25D1549D00CC3A2D /* FileStorage.swift */; };
+		A694ABB325D1687200CC3A2D /* NoteScrollPositionCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */; };
 		A69F850F253EC2B2005140F2 /* SPCardConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */; };
 		A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */; };
 		A69F861C25408085005140F2 /* NoteInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69F861A25408085005140F2 /* NoteInformationViewController.swift */; };
@@ -582,6 +584,8 @@
 		A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		A68ABCA724ABFB5300715EBD /* SPShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPShadowView.swift; sourceTree = "<group>"; };
 		A6900345253D87060087D0D2 /* VersionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsController.swift; sourceTree = "<group>"; };
+		A694ABAA25D1549D00CC3A2D /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileStorage.swift; path = Classes/FileStorage.swift; sourceTree = "<group>"; };
+		A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteScrollPositionCacheTests.swift; sourceTree = "<group>"; };
 		A69F850E253EC2B2005140F2 /* SPCardConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardConfigurable.swift; sourceTree = "<group>"; };
 		A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+Simplenote.swift"; sourceTree = "<group>"; };
 		A69F861A25408085005140F2 /* NoteInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationViewController.swift; sourceTree = "<group>"; };
@@ -1476,6 +1480,7 @@
 				B58218A41FCC45330094ECA1 /* KeychainMigratorTests.swift */,
 				A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */,
 				A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */,
+				A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1702,6 +1707,7 @@
 				A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */,
 				A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */,
 				A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */,
+				A694ABAA25D1549D00CC3A2D /* FileStorage.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2499,6 +2505,7 @@
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
+				A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */,
@@ -2726,6 +2733,7 @@
 			files = (
 				A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */,
 				A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */,
+				A694ABB325D1687200CC3A2D /* NoteScrollPositionCacheTests.swift in Sources */,
 				A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */,
 				A6CC0B4425B8505700F12A85 /* MockURLSessionDataTask.swift in Sources */,
 				A6CC0B3625B8502800F12A85 /* MockURLSession.swift in Sources */,

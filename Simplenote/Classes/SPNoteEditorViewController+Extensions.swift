@@ -142,6 +142,16 @@ extension SPNoteEditorViewController {
                                                selector: #selector(refreshVoiceOverSupport),
                                                name: UIAccessibility.voiceOverStatusDidChangeNotification,
                                                object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleAppDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+    }
+
+    @objc
+    private func handleAppDidEnterBackground() {
+        saveScrollPosition()
     }
 }
 
