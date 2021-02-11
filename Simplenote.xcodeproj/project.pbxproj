@@ -394,6 +394,7 @@
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
+		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
@@ -869,6 +870,7 @@
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
+		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1543,6 +1545,7 @@
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
 				A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */,
+				BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */,
 				A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */,
 				A6E4875725BEF3C700D0CE3B /* UIResponder+Simplenote.swift */,
 				A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */,
@@ -2630,6 +2633,7 @@
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */,
 				B5476BB923D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift in Sources */,
+				BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
 				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
@@ -4137,7 +4141,7 @@
 			repositoryURL = "git@github.com:Automattic/SimplenoteSearch-Swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.3.0;
 			};
 		};
 		B59CACFA2541E05400958330 /* XCRemoteSwiftPackageReference "SimplenoteInterlinks-Swift" */ = {
