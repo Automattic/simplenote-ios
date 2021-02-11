@@ -202,7 +202,7 @@ extension NotesListController {
     ///
     @objc
     func refreshSearchResults(keyword: String) {
-        let query = SearchQuery(searchText: keyword, settings: .default)
+        let query = SearchQuery(searchText: keyword)
         guard !query.isEmpty else {
             state = .results
             return
