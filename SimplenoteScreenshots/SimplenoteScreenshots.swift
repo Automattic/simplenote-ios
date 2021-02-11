@@ -12,6 +12,14 @@ class SimplenoteScreenshots: XCTestCase {
         setupSnapshot(app)
         app.launch()
 
+        // The tests have been known to fail in the passcode screen inconsistently.
+        //
+        // This becomes a problem when running the screenshots automation through Fastlane because
+        // it retries three times. A failure in the passcode screen results in the PIN screen not
+        // being disabled, which in turn would result in the passcode screen being presented at
+        // launch, preventing the test from proceeding.
+        dismissPasscodeScreenIfNeeded(using: app)
+
         dismissVerifyEmailIfNeeded(using: app)
 
         let login = app.buttons["Log In"]
@@ -200,13 +208,27 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(passcodeCell.waitForExistence(timeout: 3))
         passcodeCell.tap()
 
-        // The passcode screen has custom button views mimicking the default iOS passcode one.
-        // Let's check a few numbers are on screen as a mean to verify it loaded
-        XCTAssertTrue(app.staticTexts["1"].waitForExistence(timeout: 3))
-        // No need to wait once the first wait succeeded. Really, these other assertions are almost
-        // superfluous.
-        XCTAssertTrue(app.staticTexts["9"].exists)
-        XCTAssertTrue(app.staticTexts["0"].exists)
+        let expectation = XCTNSPredicateExpectation(
+            predicate: NSPredicate { _, _ in self.isPasscodeScreenVisible(using: app) },
+            object: .none
+        )
+        wait(for: [expectation], timeout: 5)
+    }
+
+    func dismissPasscodeScreenIfNeeded(using app: XCUIApplication) {
+        guard isPasscodeScreenVisible(using: app) else { return }
+        typeOnPassCodeScreen(1234, using: app)
+    }
+
+    func isPasscodeScreenVisible(using app: XCUIApplication) -> Bool {
+        // Check there's a button for each line of the custom number keypad.
+        //
+        // We only need to wait for the first number, if that's on screen, then the others should be
+        // on screen already, too.
+        return app.staticTexts["1"].waitForExistence(timeout: 3)
+            && app.staticTexts["4"].exists
+            && app.staticTexts["7"].exists
+            && app.staticTexts["0"].exists
     }
 
     func typeOnPassCodeScreen(_ input: Int, using app: XCUIApplication) {
