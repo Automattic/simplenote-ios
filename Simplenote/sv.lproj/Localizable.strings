@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 17:54:53+0000 */
+/* Translation-Revision-Date: 2021-02-03 15:19:36+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Är du en utvecklare? Vi letar efter medarbetare.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Är du säker att du vill ta bort ”%1$@”?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Är du säker på att du vill tömma papperskorgen?  Detta kan inte göras ogjort.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "Genom att skapa ett konto godkänner du våra";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Avbryt";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Kan inte bekräfta konto";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Kan inte skicka e-postverifiering";
 
 /* Work at Automattic */
 "Careers" = "Karriärer";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Ändra e-post";
+
 /* Number of characters in the note */
-"Characters" = "bokstäver";
+"Characters" = "Tecken";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Samarbeta";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Komprimerad anteckningslista";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Bekräfta";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Bekräfta din låskod";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Bidra";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Felsökning inaktiverad";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Ta bort";
+
 /* Verb: Delete notes and log out of the app */
-"Delete Notes" = "Radera anteckningar";
+"Delete Notes" = "Ta bort anteckningar";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Ta bort etikett";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostik";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "I kö";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Ange en lösenkod";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Ange en lösenkod";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Ange lösenkod";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Ansiktsidentifiering";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Hämtar version";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Aktivera ditt WordPress.com-konto via e-post och försök igen.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Kontrollera dina nätverksinställningar och försök igen.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Förhandsgranska";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Betygsätt oss";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Ange lösenkoden en gång till";
-
 /* Reachs Internet */
 "Reachability" = "Nåbarhet";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "Ändra namn";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Skicka e-post igen";
+
 /* Reset Action */
 "Reset" = "Återställ";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Granska ditt konto";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Skicka feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Ställ in lösenkod";
 
 /* Title of options screen */
 "Settings" = "Inställningar";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Stäng av lösenkod";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Lås upp %@";
-
 /* Unpins a note */
 "Unpin" = "Lossa";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "Användarnamn";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verifiera din e-post";
+
 /* App version number */
 "Version %@" = "Version %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Vi har skickat en e-postverifiering till %1$@. Kontrollera din inkorg och följ instruktionerna.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Igår";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Du är registrerad hos Simplenote med e-postadressen %1$@.\n\nFörbättringar av kontosäkerhet kan leda till kontoförlust om du inte längre har tillgång till den här e-postadressen.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";

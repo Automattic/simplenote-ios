@@ -1,7 +1,7 @@
 {
   "project_name": "simplenote-ios",
   "branch": "trunk",
-  "pinned_hash": "fc384dcd40147a10fdc71242eedfde261bb3e387",
+  "pinned_hash": "2ed6e69e0620cd85fddd186ef4cc82290219a70e",
   "files_to_copy": [
     {
       "file": "iOS/simplenote/SPCredentials.swift",
@@ -21,6 +21,11 @@
     {
       "file": "iOS/simplenote/project.env",
       "destination": ".configure-files/project.env",
+      "encrypt": true
+    },
+    {
+      "file": "iOS/app_store_connect_fastlane_api_key.json",
+      "destination": ".configure-files/app_store_connect_fastlane_api_key.json",
       "encrypt": true
     }
   ],

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Bir geliştirici misiniz? Yeni çalışma arkadaşları arıyoruz.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "\"%1$@\" dosyasını silmek istediğinizden emin misiniz?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "İptal";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Hesap Onaylanamıyor";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Doğrulama E-postası Gönderilemiyor";
 
 /* Work at Automattic */
 "Careers" = "Kariyer";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "E-posta Değiştir";
+
 /* Number of characters in the note */
 "Characters" = "Karakter";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "4 basamaklı bir parola seçin";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "İşbirliği Yap";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Sıkıştırılmış Not Listesi";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Onayla";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Parolanızı tekrar girin";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Katılımda Bulunun";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Hata Ayıklama Devre Dışı";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Sil";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notları Sil";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Etiketi sil";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Tanılamalar";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Sıraya Alındı";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Parola girin";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Parola girin";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Parolanızı girin";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "Başarısız Denemeler";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Sürüm Alınıyor";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Lütfen WordPress.com hesabınızı e-posta aracılığıyla etkinleştirin ve tekrar deneyin.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Lütfen ağ ayarlarınızı kontrol edip tekrar deneyin.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Önizleme";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Bizi Değerlendirin";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Yeniden bir parola girin";
-
 /* Reachs Internet */
 "Reachability" = "Erişilebilirlik";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "Yeniden Adlandır";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "E-postayı yeniden gönder";
+
 /* Reset Action */
 "Reset" = "Sıfırla";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Notu Geri Yükle";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Hesabınızı İnceleyin";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Geri Bildirim Gönder";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Parolayı Ayarla";
 
 /* Title of options screen */
 "Settings" = "Ayarlar";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Parolayı Kapat";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "%@ öğesinin kilidini aç";
-
 /* Unpins a note */
 "Unpin" = "Sabitlemeyi kaldır";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "Kullanıcı adı";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Eposta Adresinizi Doğrulayın";
+
 /* App version number */
 "Version %@" = "Sürüm %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@ adresine bir doğrulama e-postası gönderdik. Lütfen gelen kutunuzu kontrol edin ve talimatları izleyin.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Simplenote hakkında ne düşünüyorsunuz?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Dün";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "%1$@ e-postasını kullanarak Simplenote'a kaydoldunuz.\n\nBu e-posta adresine artık erişiminiz yoksa, hesap güvenliğindeki iyileştirmeler hesap kaybına neden olabilir.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "E-posta adresiniz geçerli değil.";

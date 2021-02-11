@@ -30,9 +30,10 @@
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 @property (nonatomic, strong) UIBarButtonItem                               *emptyTrashButton;
+@property (nonatomic, weak) Note                                            *selectedNote;
+@property (nonatomic) BOOL                                                  navigatingUsingKeyboard;
 
 - (void)update;
-- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated;
 - (void)openNote:(Note *)note animated:(BOOL)animated;
 - (void)openNote:(Note *)note ignoringSearchQuery:(BOOL)ignoringSearchQuery animated:(BOOL)animated;
 - (void)setWaitingForIndex:(BOOL)waiting;

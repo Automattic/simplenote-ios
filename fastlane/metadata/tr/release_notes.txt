@@ -1,3 +1,3 @@
-- - Boş Durum yer tutucuları güncellendi
-- Ana ekranda hızlı eylemler
-- Hakkında ekranı ölçümleri ayarlandı
+- Hesap doğrulama ekranı eklendi
+- Not listesi yoğun moddayken minimum satır yüksekliği güncellendi 
+- Etiket düzenleme deneyimi güncellendi

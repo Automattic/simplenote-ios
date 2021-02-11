@@ -40,7 +40,7 @@ extension UIView {
 
     func pinSubviewToCenter(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let constraints = [
             view.centerXAnchor.constraint(equalTo: centerXAnchor),
             view.centerYAnchor.constraint(equalTo: centerYAnchor)

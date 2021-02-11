@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 12:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-03 16:54:38+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Sei uno sviluppatore? Stiamo assumendo.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Desideri eliminare \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Desideri svuotare il cestino? Questa operazione non può essere annullata.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "Se crei un account, accetti i nostri";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Annulla";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Impossibile confermare l'account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Impossibile inviare l'e-mail di verifica";
 
 /* Work at Automattic */
 "Careers" = "Opportunità di lavoro";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Cambia e-mail";
+
 /* Number of characters in the note */
 "Characters" = "Caratteri";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Scegli un PIN di 4 cifre";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Collabora";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Elenco note ristretto";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Conferma";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Conferma il PIN";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribuisci";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug disattivato";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Elimina";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Cancella note";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Elimina tag";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostica";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "In coda";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Inserisci un PIN";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Inserisci il PIN";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Inserisci il tuo PIN";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "Tentativi non riusciti";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Recupero della versione";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Attiva l'account WordPress.com via e-mail e riprova.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Controlla le impostazioni di rete e riprova.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Visualizzare in anteprima";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Valutaci";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Inserisci nuovamente il PIN";
-
 /* Reachs Internet */
 "Reachability" = "Raggiungibilità";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "Rinomina";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Invia di nuovo l'e-mail";
+
 /* Reset Action */
 "Reset" = "Ripristina";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Ripristina la nota";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Verifica il tuo account";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Invia un feedback";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Imposta il PIN";
 
 /* Title of options screen */
 "Settings" = "Impostazioni";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Disabilita il PIN";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Sblocca %@";
-
 /* Unpins a note */
 "Unpin" = "Sgancia";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "Nome utente";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verifica la tua e-mail";
+
 /* App version number */
 "Version %@" = "Versione %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Abbiamo inviato un'e-mail di verifica a %1$@. Controlla la tua casella di posta in arrivo e segui le istruzioni.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Che cosa pensi di Simplenote?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Ieri";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Sei registrato su Simplenote con l'e-mail %1$@.\n\nI miglioramenti alla sicurezza dell'account possono comportare la perdita dell'account se non hai più accesso a questo indirizzo e-mail.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Il tuo indirizzo email non è valido.";

@@ -23,7 +23,7 @@ extension UIView {
         ///
         var isLeft: Bool {
             let left = self == .leading
-            if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+            if UIApplication.isRTL {
                 return !left
             }
             return left

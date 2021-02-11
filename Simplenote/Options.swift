@@ -163,7 +163,7 @@ extension Options {
         defaults.removeObject(forKey: .searchSortMode)
         defaults.removeObject(forKey: .useBiometryInsteadOfPin)
     }
-    
+
     /// Returns the number of Preview Lines we should use, per note
     ///
     @objc

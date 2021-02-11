@@ -66,10 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.30-whats-new"
+msgctxt "v4.32-whats-new"
 msgid ""
-"-   New passcode interface\n"
-"-   Fixed a bug that caused a crash while searching\n"
-"-   Fixed predictive text entry when working with tags\n"
+"- Added support for keyboard navigation and shortcuts\n"
 msgstr ""
 

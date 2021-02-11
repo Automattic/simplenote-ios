@@ -158,7 +158,6 @@
     [[ShortcutsHandler shared] updateHomeScreenQuickActionsIfNeeded];
 
     // Initialize UI
-    [self loadLastSelectedNote];
     [self loadSelectedTheme];
     
     // Check to see if first time user
@@ -191,6 +190,7 @@
     }
 
     [self showPasscodeLockIfNecessary];
+    [self cleanupScrollPositionCache];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -223,12 +223,7 @@
     if (_selectedTag) {
         [[NSUserDefaults standardUserDefaults] setObject:_selectedTag forKey:kSelectedTagKey];
     }
-    
-    NSString *currentNoteKey = self.noteEditorViewController.currentNote.simperiumKey;
-    if (currentNoteKey) {
-        [[NSUserDefaults standardUserDefaults] setObject:currentNoteKey forKey:kSelectedNoteKey];
-    }
-    
+
     // Save any pending changes
     [self.noteEditorViewController save];
 }
@@ -294,17 +289,6 @@
 
 
 #pragma mark - Launch Helpers
-
-- (void)loadLastSelectedNote
-{
-    NSString *selectedNoteKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedNoteKey];
-    if (selectedNoteKey) {
-        [self.noteListViewController openNoteWithSimperiumKey:selectedNoteKey animated:NO];
-    }
-
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSelectedNoteKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSelectedTagKey];
-}
 
 - (void)loadSelectedTheme
 {
@@ -417,7 +401,6 @@
             [self.noteListViewController update];
 			
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-			[defaults removeObjectForKey:kSelectedNoteKey];
 			[defaults removeObjectForKey:kSelectedTagKey];
 			[defaults synchronize];
 			
@@ -467,7 +450,7 @@
         switch (change) {
             case SPBucketChangeTypeUpdate:
             {
-                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didReceiveNewContent];
                 }
                 Note *note = [bucket objectForKey:key];
@@ -482,7 +465,7 @@
                 break;
 			case SPBucketChangeTypeDelete:
             {
-                if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+                if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didDeleteCurrentNote];
                 }
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
@@ -516,7 +499,7 @@
 {
     if ([bucket isEqual:[_simperium notesBucket]]) {
         for (NSString *key in keys) {
-            if ([key isEqualToString:self.noteEditorViewController.currentNote.simperiumKey]) {
+            if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                 [self.noteEditorViewController willReceiveNewContent];
             }
         }
@@ -632,7 +615,7 @@
         }
         [_simperium save];
         
-        [self presentNote:newNote];
+        [self presentNote:newNote animated:NO];
     }
     
     return YES;

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-04 14:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "你是開發人員嗎？ 我們在招募人才。";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "是否確定要刪除「%1$@」？";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "確定要清空垃圾桶？此動作無法復原。";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "取消";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "無法確認帳號";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "無法傳送驗證電子郵件";
 
 /* Work at Automattic */
 "Careers" = "工作機會";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "變更電子郵件";
+
 /* Number of characters in the note */
 "Characters" = "字元";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "選擇 4 位數的密碼";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "協作";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "精簡版筆記清單";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "確認";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "確認你的密碼";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "參與";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "偵錯模式已停用";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "刪除";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "刪除筆記";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "刪除標籤";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診斷";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "加入佇列";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "輸入密碼";
-
-/* Touch ID fallback title */
-"Enter passcode" = "輸入密碼";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "輸入你的密碼";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "FailedAttempts";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在擷取版本";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "請透過電子郵件啟用你的 WordPress.com 帳號，並再試一次。";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "請檢查您的網路設定，然後再試一次。";
+
 /* Title of Markdown preview screen */
 "Preview" = "預覽";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "幫我們評分";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "重新輸入密碼";
-
 /* Reachs Internet */
 "Reachability" = "可達性";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "重新命名";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "重新傳送電子郵件";
+
 /* Reset Action */
 "Reset" = "重設";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "還原筆記";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "檢閱你的帳號";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "傳送回饋意見";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "設定密碼";
 
 /* Title of options screen */
 "Settings" = "設定";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "關閉密碼";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "解除鎖定 %@";
-
 /* Unpins a note */
 "Unpin" = "取消釘選";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "使用者名稱";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "驗證你的電子郵件";
+
 /* App version number */
 "Version %@" = "版本 %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "我們已傳送一封驗證電子郵件到 %1$@。 請檢查你的收件匣並依照指示操作。";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "你覺得 Simplenote 如何？";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "你已使用電子郵件地址  %1$@ 註冊 Simplenote。\n\n如果你不再擁有存取此電子郵件地址的權限，對帳號安全性的改善項目可能導致帳號遺失。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "你的電子郵件地址無效。";

@@ -1,3 +1,3 @@
-- Atualização de marcadores de posição de estado vazio
-- Ações rápidas na tela Home
-- Ajustes de métricas na tela Sobre
+- Adicionamos uma tela de verificação de conta
+- Atualizamos a altura mínima da linha quando a lista de anotações está no modo resumido
+- Atualizamos a experiência de edição de tags

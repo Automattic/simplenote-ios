@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-12-10 17:54:54+0000 */
+/* Translation-Revision-Date: 2021-02-03 10:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -85,6 +85,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Apakah Anda pengembang? Kami membuka lowongan.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Anda yakin ingin mengosongkan tempat sampah? Ini tidak dapat dibatalkan.";
 
@@ -98,15 +101,29 @@
 "By creating an account you agree to our" = "Dengan membuat akun, Anda menyetujui";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
+   PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
+
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Tidak Dapat Mengonfirmasi Akun";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Tidak Dapat Mengirimkan Email Verifikasi";
 
 /* Work at Automattic */
 "Careers" = "Karier";
 
+/* Change email button -> Review you account screen */
+"Change Email" = "Ubah Email";
+
 /* Number of characters in the note */
 "Characters" = "Karakter";
+
+/* Title on the PinLock screen asking to create a passcode */
+"Choose a 4 digit passcode" = "Pilih kode sandi 4 digit";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Kolaborasi";
@@ -119,6 +136,12 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Daftar Catatan Ringkas";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Konfirmasi";
+
+/* Title on the PinLock screen asking to confirm a passcode */
+"Confirm your passcode" = "Konfirmasi kode sandi Anda";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Kontribusi";
@@ -183,8 +206,14 @@
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug Dinonaktifkan";
 
+/* PinLock screen \"delete\" button */
+"Delete" = "Hapus";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Hapus Catatan";
+
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Hapus label";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostik";
@@ -227,13 +256,7 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Dalam antrean";
 
-/* Message shown on passcode lock screen */
-"Enter a passcode" = "Masukkan kode sandi";
-
-/* Touch ID fallback title */
-"Enter passcode" = "Masukkan kode sandi";
-
-/* Pin Lock */
+/* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Masukkan kode sandi Anda";
 
 /* Error Title */
@@ -244,9 +267,6 @@
 
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
-
-/* Show a message when user enter 3 wrong passcodes */
-"FailedAttempts" = "PercobaanGagal";
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Mengambil Versi";
@@ -420,6 +440,9 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Harap aktifkan akun WordPress.com Anda melalui email dan coba lagi.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Harap periksa pengaturan jaringan Anda lalu coba lagi.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Pratinjau";
 
@@ -444,9 +467,6 @@
 /* Rate on the App Store */
 "Rate Us" = "Beri Rating";
 
-/* Prompt when setting up a passcode */
-"Re-enter a passcode" = "Masukkan ulang kode sandi";
-
 /* Reachs Internet */
 "Reachability" = "Keterjangkauan";
 
@@ -462,6 +482,9 @@
 /* Rename a tag */
 "Rename" = "Ubah Nama";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Kirim Ulang Email";
+
 /* Reset Action */
 "Reset" = "Atur Ulang";
 
@@ -473,6 +496,9 @@
 
 /* Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
+
+/* Title -> Review you account screen */
+"Review Your Account" = "Tinjau Akun Anda";
 
 /* Home screen quick action: Search
    Search Placeholder
@@ -496,9 +522,6 @@
 
 /* No comment provided by engineer. */
 "Send feedback" = "Kirim Masukan";
-
-/* Prompt when setting up a passcode */
-"Set Passcode" = "Atur Kode Sandi";
 
 /* Title of options screen */
 "Settings" = "Settings";
@@ -591,9 +614,6 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Matikan Kode Sandi";
 
-/* Message shown when gaining entry to app via a passcode */
-"Unlock %@" = "Buka kunci %@";
-
 /* Unpins a note */
 "Unpin" = "Lapas sematan";
 
@@ -618,6 +638,9 @@
 /* A user's Simplenote account */
 "Username" = "Nama pengguna";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verifikasi Email Anda";
+
 /* App version number */
 "Version %@" = "Versi %@";
 
@@ -630,6 +653,9 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Kami telah mengirimkan email verifikasi ke %1$@. Harap periksa kotak masuk Anda dan ikuti instruksi berikut.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Apa pendapat Anda tentang Simplenote?";
 
@@ -641,6 +667,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Kemarin";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Anda terdaftar pada SImplenote menggunakan email %1$@.\n\nPeningkatan keamanan akun dapat menyebabkan akun hilang jika Anda tidak lagi memiliki akses ke alamat email ini.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Alamat email Anda tidak valid.";

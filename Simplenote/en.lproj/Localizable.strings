@@ -10,6 +10,12 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
 
+/* Count of interlink references to a note */
+"%i Reference" = "%i Reference";
+
+/* Count of interlink references to a note */
+"%i References" = "%i References";
+
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum of 8 characters";
 
@@ -80,6 +86,9 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
 
+/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
+"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Are you sure you want to empty the trash? This cannot be undone.";
 
@@ -93,13 +102,23 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
 
+/* Error message title. Review you account screen */
+"Cannot Confirm Account" = "Cannot Confirm Account";
+
+/* Error message title. Verify your email screen */
+"Cannot Send Verification Email" = "Cannot Send Verification Email";
+
 /* Work at Automattic */
 "Careers" = "Careers";
+
+/* Change email button -> Review you account screen */
+"Change Email" = "Change Email";
 
 /* Number of characters in the note */
 "Characters" = "Characters";
@@ -121,6 +140,9 @@
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
+
+/* Confirm button -> Review you account screen */
+"Confirm" = "Confirm";
 
 /* Title on the PinLock screen asking to confirm a passcode */
 "Confirm your passcode" = "Confirm your passcode";
@@ -194,6 +216,9 @@
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
 
+/* Confirmation button of deletion confirmation message for a tag. */
+"Delete Tag" = "Delete Tag";
+
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "This note was deleted on another device.";
 
@@ -211,6 +236,9 @@
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Dismiss keyboard";
+
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Document";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -234,6 +262,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Enable Markdown formatting";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "End Editing";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enqueued";
@@ -274,12 +305,17 @@
 /* No comment provided by engineer. */
 "I like it" = "I like it";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Information";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Insert Checklist";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Inserts a new Checklist Item";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Last Modified %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -343,7 +379,8 @@
    Deletes a note */
 "Move to Trash" = "Move to Trash";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "New Note";
 
 /* Label to create a new note */
@@ -351,6 +388,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "New note...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Next Match";
 
 /* Cancels Empty Trash Action */
 "No" = "No";
@@ -422,8 +462,14 @@
 /* Error message displayed when user has not verified their WordPress.com account */
 "Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
 
+/* Error message. Account verification */
+"Please check your network settings and try again." = "Please check your network settings and try again.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Preview";
+
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Previous Match";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Privacy Notice for California Users";
@@ -461,6 +507,9 @@
 /* Rename a tag */
 "Rename" = "Rename";
 
+/* Resend email button -> Verify your email screen */
+"Resend Email" = "Resend Email";
+
 /* Reset Action */
 "Reset" = "Reset";
 
@@ -473,7 +522,11 @@
 /* Restore a note to a previous version */
 "Restore Note" = "Restore Note";
 
+/* Title -> Review you account screen */
+"Review Your Account" = "Review Your Account";
+
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Search";
@@ -581,6 +634,9 @@
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Today";
 
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Toggle Markdown";
+
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Toggle tag sidebar";
 
@@ -617,6 +673,9 @@
 /* A user's Simplenote account */
 "Username" = "Username";
 
+/* Title -> Verify your email screen */
+"Verify Your Email" = "Verify Your Email";
+
 /* App version number */
 "Version %@" = "Version %@";
 
@@ -632,6 +691,9 @@
 /* A welcome note for new iOS users */
 "welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
 
+/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "What do you think about Simplenote?";
 
@@ -643,6 +705,9 @@
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Yesterday";
+
+/* Message -> Review you account screen. Parameter: %1$@ - email address */
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Your email address is not valid";

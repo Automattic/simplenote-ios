@@ -91,6 +91,13 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
+
+    if (!self.navigatingUsingKeyboard) {
+        [self.tableView deselectSelectedRowAnimated:YES];
+        self.selectedNote = nil;
+    }
+
+    self.navigatingUsingKeyboard = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -134,7 +141,7 @@
 {
     self.noteRowHeight = SPNoteTableViewCell.cellHeight;
     self.tagRowHeight = SPTagTableViewCell.cellHeight;
-    [self.tableView reloadData];
+    [self reloadTableData];
 }
 
 - (void)updateTableHeaderSize {
@@ -220,7 +227,7 @@
 
     // Refresh the Table's UI
     [self.tableView applySimplenotePlainStyle];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
@@ -302,13 +309,7 @@
 #pragma mark - BarButtonActions
 
 - (void)addButtonAction:(id)sender {
-    
-    [SPTracker trackListNoteCreated];
-    
-    // the editor view will create a note. Passing no note ensures that an emty note isn't added
-    // to the FRC before the animation occurs
-    [self.tableView setEditing:NO];   
-    [self openNote:nil animated:YES];
+    [self createNewNote];
 }
 
 - (void)sidebarButtonAction:(id)sender {
@@ -340,9 +341,12 @@
 
 - (void)searchDisplayControllerWillBeginSearch:(SearchDisplayController *)controller
 {
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
-    [self.tableView reloadData];
+    [self reloadTableData];
     [self displaySortBar];
     [self refreshTitle];
 }
@@ -380,10 +384,13 @@
 {
     [SPTracker trackListNotesSearched];
 
+    self.selectedNote = nil;
+    [self.tableView deselectSelectedRowAnimated:NO];
+
     [self.notesListController refreshSearchResultsWithKeyword:keyword];
 
     [self.tableView scrollToTopWithAnimation:NO];
-    [self.tableView reloadData];
+    [self reloadTableData];
 
     [self displayPlaceholdersIfNeeded];
 
@@ -418,16 +425,6 @@
 
 #pragma mark - Public API
 
-- (void)openNoteWithSimperiumKey:(NSString *)simperiumKey animated:(BOOL)animated
-{
-    Note *note = [self.notesListController noteForSimperiumKey:simperiumKey];
-    if (!note) {
-        return;
-    }
-
-    [self openNote:note animated:animated];
-}
-
 - (void)openNote:(Note *)note animated:(BOOL)animated
 {
     [self openNote:note ignoringSearchQuery:NO animated:animated];
@@ -437,27 +434,21 @@
 {
     [SPTracker trackListNoteOpened];
 
+    self.selectedNote = note;
+    [self updateCurrentSelection];
+
     // SearchBar: Always resign FirstResponder status
     // Why: https://github.com/Automattic/simplenote-ios/issues/616
     [self.searchBar resignFirstResponder];
 
     // Always a new Editor!
-    SPNoteEditorViewController *editor = [[EditorFactory shared] build];
-    [editor displayNote:note];
+    SPNoteEditorViewController *editor = [[EditorFactory shared] buildWith:note];
 
     if (!ignoringSearchQuery && self.isSearchActive) {
         [editor updateWithSearchQuery:self.searchQuery];
     }
 
-    // Failsafe:
-    // We were getting (a whole lot!) of crash reports with the exception
-    // 'Pushing the same view controller instance more than once is not supported'. This is intended to act
-    // as a safety net. Ref. Issue #345
-    if (self.navigationController.visibleViewController != self) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-    }
-
-    [self.navigationController pushViewController:editor animated:animated];
+    [self.navigationController setViewControllers:@[self, editor] animated:animated];
 }
 
 - (void)emptyAction:(id)sender
@@ -543,6 +534,13 @@
     self.searchBar.userInteractionEnabled = YES;
 
     self.navigationController.navigationBar.userInteractionEnabled = YES;
+
+    // We want this VC to be first responder to support keyboard shortcuts.
+    // We don't want to steal first responder from the search bar in case it's already active.
+    // It Can happen if we open the app directly into search mode from the home screen quick action
+    if (![self.searchBar isFirstResponder]) {
+        [self becomeFirstResponder];
+    }
 }
 
 

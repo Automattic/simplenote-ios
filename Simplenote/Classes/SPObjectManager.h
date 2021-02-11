@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (SPObjectManager *)sharedManager;
 
-- (NSArray *)notes;
-- (NSArray *)tags;
+- (NSArray<Note *> *)notes;
+- (NSArray<Tag *> *)tags;
 
 
 #pragma mark - Tags

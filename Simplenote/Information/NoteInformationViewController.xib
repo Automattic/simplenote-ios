@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteInformationViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="dismissButton" destination="7HZ-2J-9ef" id="rrw-yc-zdP"/>
-                <outlet property="headerStackView" destination="qBv-kl-fOD" id="eEl-cs-unx"/>
-                <outlet property="screenTitleLabel" destination="9ul-2d-OoP" id="pZb-Nb-szF"/>
+                <outlet property="dragBar" destination="lD2-IA-haD" id="als-5f-v3X"/>
                 <outlet property="tableView" destination="HfE-pa-isg" id="5Gu-fK-38o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,33 +29,14 @@
                         <outlet property="delegate" destination="-1" id="fhS-m2-l5Y"/>
                     </connections>
                 </tableView>
-                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qBv-kl-fOD">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ul-2d-OoP">
-                            <rect key="frame" x="0.0" y="5" width="376" height="20.5"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HZ-2J-9ef" customClass="RoundedCrossButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="384" y="0.0" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="zYd-Xa-72n"/>
-                                <constraint firstAttribute="width" constant="30" id="zd7-TM-xEa"/>
-                            </constraints>
-                            <state key="normal" image="icon_cross"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="handleTapOnDismissButton" destination="-1" eventType="touchUpInside" id="qgF-a7-uKd"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lD2-IA-haD" customClass="SPDragBar" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="189" y="5" width="36" height="5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="HdR-fd-31k"/>
+                        <constraint firstAttribute="height" constant="5" id="Ver-Mc-ruf"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,10 +44,9 @@
                 <constraint firstAttribute="trailing" secondItem="HfE-pa-isg" secondAttribute="trailing" id="17g-xl-0dG"/>
                 <constraint firstAttribute="bottom" secondItem="HfE-pa-isg" secondAttribute="bottom" id="Fr2-jA-fFN"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JtQ-ZA-WOi"/>
-                <constraint firstItem="qBv-kl-fOD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kky-qU-XXe"/>
-                <constraint firstItem="qBv-kl-fOD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XR7-XE-p8V"/>
+                <constraint firstItem="lD2-IA-haD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WtO-HV-AKc"/>
                 <constraint firstItem="HfE-pa-isg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hrp-6V-pUL"/>
-                <constraint firstAttribute="trailing" secondItem="qBv-kl-fOD" secondAttribute="trailing" id="nD9-Ze-Dqy"/>
+                <constraint firstItem="lD2-IA-haD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="pYF-Ho-feS"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -75,6 +54,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_cross" width="16" height="16"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
