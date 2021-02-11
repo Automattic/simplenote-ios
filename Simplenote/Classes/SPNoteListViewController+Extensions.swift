@@ -631,10 +631,6 @@ private extension SPNoteListViewController {
         cell.leftImage = .image(name: .tag)
         cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
         cell.titleText = SearchQuerySettings.default.tagsKeyword + tag.name
-        
-        //Display localized tag search
-        let prefix = searchPrefixIsLocalizedTag() ? SearchQuerySettings.default.localizedTagKeyword : SearchQuerySettings.default.tagsKeyword
-        cell.titleText = prefix + tag.name
 
         return cell
     }
@@ -649,17 +645,6 @@ private extension SPNoteListViewController {
         }
 
         return DateFormatter.listDateFormatter.string(from: date)
-    }
-    
-    func searchPrefixIsLocalizedTag() -> Bool {
-        guard let searchText = searchBar.text,
-              let first = searchText.firstIndex(of: ":") else {
-            return false
-        }
-        
-        let prefix = searchText.prefix(through: first).base.lowercased()
-        
-        return prefix == SearchQuerySettings.default.localizedTagKeyword
     }
 }
 
