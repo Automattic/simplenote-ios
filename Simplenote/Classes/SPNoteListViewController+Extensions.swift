@@ -895,9 +895,8 @@ extension SPNoteListViewController {
 
 extension SearchQuerySettings {
     static var `default`: SearchQuerySettings {
-    return SearchQuerySettings(
-                            tagsKeyword: "tag:",
-                            localizedTagKeyword: NSLocalizedString("tag:", comment: "Search Operator for tags. Please preserve the semicolons when translating!"))
+        let localizedKeyword = NSLocalizedString("tag:", comment: "Search Operator for tags. Please preserve the semicolons when translating!")
+        return SearchQuerySettings(tagsKeyword: "tag:", localizedTagKeyword: localizedKeyword)
     }
 }
 
