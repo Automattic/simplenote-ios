@@ -98,7 +98,7 @@ private extension TagViewCell {
     func setupMinConstraints() {
         let minHeight = Constants.marginsWhenDeleteIsVisible.top + Constants.deleteButtonSideSize + Constants.marginsWhenDeleteIsVisible.bottom
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: minHeight),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight),
             widthAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: Constants.widthConstraintMultiplier)
         ])
     }
