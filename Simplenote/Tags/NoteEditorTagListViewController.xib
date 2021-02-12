@@ -29,6 +29,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8UY-Bd-Ige" secondAttribute="bottom" priority="999" id="40T-o4-eg2"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8UY-Bd-Ige" secondAttribute="bottom" constant="8" id="W7b-tL-Mwh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8UY-Bd-Ige" secondAttribute="trailing" id="nEX-xJ-YUe"/>
                 <constraint firstItem="8UY-Bd-Ige" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="nw1-Mv-n3h"/>
                 <constraint firstItem="8UY-Bd-Ige" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rYs-XI-9fP"/>
