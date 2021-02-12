@@ -90,7 +90,7 @@ extension SPNoteEditorViewController {
         interlinkProcessor.delegate = self
         interlinkProcessor.contextProvider = self
     }
-    
+
     /// Sets up the Keyboard
     ///
     @objc
@@ -142,6 +142,16 @@ extension SPNoteEditorViewController {
                                                selector: #selector(refreshVoiceOverSupport),
                                                name: UIAccessibility.voiceOverStatusDidChangeNotification,
                                                object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleAppDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+    }
+
+    @objc
+    private func handleAppDidEnterBackground() {
+        saveScrollPosition()
     }
 }
 
@@ -800,14 +810,14 @@ extension SPNoteEditorViewController {
         let textStorage = noteEditorTextView.interactiveTextStorage
 
         textStorage.defaultStyle = [
-            .font               : defaultFont,
-            .foregroundColor    : textColor,
-            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
+            .font: defaultFont,
+            .foregroundColor: textColor,
+            .paragraphStyle: NSMutableParagraphStyle(lineSpacing: lineSpacing)
         ]
 
         textStorage.headlineStyle = [
-            .font               : headlineFont,
-            .foregroundColor    : textColor,
+            .font: headlineFont,
+            .foregroundColor: textColor,
         ]
     }
 
@@ -858,7 +868,7 @@ extension SPNoteEditorViewController {
         }
 
         let searchMapView = SearchMapView()
-        
+
         view.addSubview(searchMapView)
         NSLayoutConstraint.activate([
             searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top),

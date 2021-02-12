@@ -277,7 +277,7 @@ extension SPNoteListViewController {
     /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
     ///
     func refreshSearchText(appendFilterFor tag: Tag) {
-        let keyword = String.searchOperatorForTags + tag.name
+        let keyword = SearchQuerySettings.default.tagsKeyword + tag.name
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
@@ -384,14 +384,14 @@ extension SPNoteListViewController {
         }
         open(note, ignoringSearchQuery: true, animated: true)
     }
-    
+
     /// Sets the state of the trash button
     ///
     @objc
     func refreshEmptyTrashState() {
         let isTrashOnScreen = self.isDeletedFilterActive
         let isNotEmpty = !self.isListEmpty
-        
+
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
 }
@@ -631,7 +631,8 @@ private extension SPNoteListViewController {
         let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
         cell.leftImage = .image(name: .tag)
         cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
-        cell.titleText = String.searchOperatorForTags + tag.name
+        cell.titleText = SearchQuerySettings.default.tagsKeyword + tag.name
+
         return cell
     }
 
@@ -860,13 +861,13 @@ extension SPNoteListViewController {
 
     @objc(keyboardWillChangeFrame:)
     func keyboardWillChangeFrame(note: Notification) {
-        
+
         guard let _ = view.window else {
             // No window means we aren't in the view hierarchy.
             // Asking UITableView to refresh layout when not in the view hierarcy results in console warnings.
             return
         }
-        
+
         guard let keyboardFrame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }

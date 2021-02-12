@@ -16,7 +16,10 @@ class EditorFactory: NSObject {
 
     /// Scroll position cache
     ///
-    private let scrollPositionCache = NoteScrollPositionCache()
+    let scrollPositionCache: NoteScrollPositionCache = {
+        let fileURL = FileManager.default.documentsURL.appendingPathComponent(Constants.filename)
+        return NoteScrollPositionCache(storage: FileStorage(fileURL: fileURL))
+    }()
 
     /// You shall not pass!
     ///
@@ -43,4 +46,11 @@ class EditorFactory: NSObject {
         }
         return note
     }
+}
+
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let filename = ".scroll-cache"
 }

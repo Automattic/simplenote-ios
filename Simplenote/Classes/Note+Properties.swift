@@ -90,7 +90,7 @@ extension Note {
         guard let bodyRange = NoteContentHelper.structure(of: content).body else {
             return nil
         }
-        
+
         guard let excerpt = content.contentSlice(matching: keywords,
                                                  in: bodyRange,
                                                  leadingLimit: Constants.excerptLeadingLimit,

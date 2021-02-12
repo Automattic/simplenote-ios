@@ -126,7 +126,7 @@ extension ExtensionPresentationController: KeyboardObservable {
         if let animationCurve = animationCurve {
             animationOptions = UIView.AnimationOptions(rawValue: animationCurve)
         }
-        
+
         UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
             self.presentedView?.frame = translatedFrame
         })
