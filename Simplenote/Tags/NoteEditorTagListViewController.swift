@@ -14,12 +14,11 @@ class NoteEditorTagListViewController: UIViewController {
 
     @IBOutlet private weak var tagView: TagView! {
         didSet {
-            tagView.tagDelegate = self
+            tagView.delegate = self
             tagView.backgroundColor = .clear
             tagView.keyboardAppearance = .simplenoteKeyboardAppearance
         }
     }
-    @IBOutlet private weak var tagViewTopConstraint: NSLayoutConstraint!
 
     private let note: Note
     private let objectManager = SPObjectManager.shared()
@@ -83,49 +82,68 @@ extension NoteEditorTagListViewController {
 }
 
 
+// MARK: - Object Manager
+//
+private extension NoteEditorTagListViewController {
+    func createTagIfNotExists(tagName: String) {
+        guard !objectManager.tagExists(tagName) else {
+            return
+        }
+
+        objectManager.createTag(from: tagName)
+
+        recentlyCreatedTag = tagName
+        recentlyCreatedTagTimer = Timer.scheduledTimer(withTimeInterval: Constants.clearRecentlyCreatedTagTimeout, repeats: false) { [weak self] (_) in
+            self?.recentlyCreatedTagTimer = nil
+            self?.recentlyCreatedTag = nil
+        }
+    }
+
+    func deleteTagIfCreatedRecently(tagName: String) {
+        guard let recentlyCreatedTag = recentlyCreatedTag, recentlyCreatedTag == tagName else {
+            return
+        }
+
+        self.recentlyCreatedTag = nil
+        self.recentlyCreatedTagTimer = nil
+
+        objectManager.removeTagName(recentlyCreatedTag)
+    }
+}
+
+
 // MARK: - SPTagViewDelegate
 //
 extension NoteEditorTagListViewController: TagViewDelegate {
-    func tagView(_ tagView: TagView, shouldCreateTagWithName tagName: String) -> Bool {
-        let isEmailAddress = (tagName as NSString).isValidEmailAddress
+    func tagView(_ tagView: TagView, wantsToCreateTagWithName tagName: String) {
+        guard !note.hasTag(tagName) else {
+            return
+        }
 
-        if isEmailAddress {
+        let isEmailAddress = (tagName as NSString).isValidEmailAddress
+        guard !isEmailAddress else {
             let alertController = UIAlertController(title: Localization.CollaborationAlert.title.localizedUppercase,
                                                     message: Localization.CollaborationAlert.message,
                                                     preferredStyle: .alert)
             alertController.addCancelActionWithTitle(Localization.CollaborationAlert.cancelAction)
             present(alertController, animated: true, completion: nil)
+            return
         }
 
-        return !note.hasTag(tagName) && !isEmailAddress
-    }
-
-    func tagView(_ tagView: TagView, didCreateTagWithName tagName: String) {
-        if !objectManager.tagExists(tagName) {
-            objectManager.createTag(from: tagName)
-
-            recentlyCreatedTag = tagName
-            recentlyCreatedTagTimer = Timer.scheduledTimer(withTimeInterval: Constants.clearRecentlyCreatedTagTimeout, repeats: false) { [weak self] (_) in
-                self?.recentlyCreatedTagTimer = nil
-                self?.recentlyCreatedTag = nil
-            }
-        }
+        createTagIfNotExists(tagName: tagName)
 
         note.addTag(tagName)
+        tagView.add(tag: tagName)
+
         delegate?.tagListDidUpdate(self)
 
         SPTracker.trackEditorTagAdded()
     }
 
-    func tagView(_ tagView: TagView, didRemoveTagWithName tagName: String) {
+    func tagView(_ tagView: TagView, wantsToRemoveTagWithName tagName: String) {
         note.stripTag(tagName)
-
-        if let recentlyCreatedTag = recentlyCreatedTag, recentlyCreatedTag == tagName {
-            self.recentlyCreatedTag = nil
-            self.recentlyCreatedTagTimer = nil
-
-            objectManager.removeTagName(recentlyCreatedTag)
-        }
+        deleteTagIfCreatedRecently(tagName: tagName)
+        tagView.remove(tag: tagName)
 
         delegate?.tagListDidUpdate(self)
 
@@ -139,10 +157,6 @@ extension NoteEditorTagListViewController: TagViewDelegate {
     func tagViewDidChange(_ tagView: TagView) {
         delegate?.tagListIsEditing(self)
     }
-
-//    func tagView(_ tagView: TagView!, didChangeAutocompleteVisibility isVisible: Bool) {
-//        tagViewTopConstraint.constant = isVisible ? tagView.frame.height : 0
-//    }
 }
 
 

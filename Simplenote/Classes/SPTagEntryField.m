@@ -18,7 +18,7 @@ CGFloat const TagEntryFieldPadding = 40;
     self = [super init];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         self.textColor = [UIColor simplenoteTagViewTextColor];
         self.placeholdTextColor = [UIColor simplenoteTagViewPlaceholderColor];
         self.textAlignment = NSTextAlignmentLeft;

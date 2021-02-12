@@ -1,11 +1,11 @@
 import UIKit
 
+
 // MARK: - TagViewDelegate
 //
 protocol TagViewDelegate: class {
-    func tagView(_ tagView: TagView, shouldCreateTagWithName name: String) -> Bool
-    func tagView(_ tagView: TagView, didCreateTagWithName name: String)
-    func tagView(_ tagView: TagView, didRemoveTagWithName name: String)
+    func tagView(_ tagView: TagView, wantsToCreateTagWithName name: String)
+    func tagView(_ tagView: TagView, wantsToRemoveTagWithName name: String)
 
     func tagViewDidBeginEditing(_ tagView: TagView)
     func tagViewDidChange(_ tagView: TagView)
@@ -16,16 +16,16 @@ protocol TagViewDelegate: class {
 //
 class TagView: UIView {
 
-    private lazy var tagStackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = Constants.tagsStackViewSpacing
         return stackView
     }()
 
-    private lazy var tagScrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.scrollsToTop = false
@@ -43,7 +43,7 @@ class TagView: UIView {
 
     /// Delegate
     ///
-    weak var tagDelegate: TagViewDelegate?
+    weak var delegate: TagViewDelegate?
 
     /// Keyboard appearance
     ///
@@ -70,24 +70,39 @@ class TagView: UIView {
     /// Setup with a list of tag names
     ///
     func setup(withTagNames tagNames: [String]) {
-        clearAll()
+        removeAllTags()
 
         for tagName in tagNames {
-            tagStackView.addArrangedSubview(cell(for: tagName))
+            add(tag: tagName)
         }
     }
 
+    func add(tag tagName: String) {
+        stackView.addArrangedSubview(cell(for: tagName))
+        updateStackViewVisibility()
+    }
+
+    func remove(tag tagName: String) {
+        guard let cell = tagCells.first(where: { $0.tagName == tagName }) else {
+            return
+        }
+
+        cell.removeFromSuperview()
+        updateStackViewVisibility()
+    }
+
     override func endEditing(_ force: Bool) -> Bool {
-        clearEditing()
+        hideDeleteButton()
         return super.endEditing(force)
     }
 
     func scrollEntryFieldToVisible(animated: Bool) {
-        guard !isEditingTag else {
+        guard !isShowingDeleteButton else {
             return
         }
 
-        tagScrollView.scrollRectToVisible(addTagField.frame, animated: animated)
+        scrollView.scrollRectToVisible(addTagField.frame.insetBy(dx: -Constants.wrappingStackViewMargins.right, dy: 0),
+                                       animated: animated)
     }
 }
 
@@ -100,15 +115,38 @@ private extension TagView {
     }
 
     func setupViewHierarchy() {
-        let stackView = UIStackView(arrangedSubviews: [tagStackView, addTagField])
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 16
+        setupHiddenCell()
 
-        tagScrollView.addFillingSubview(stackView, edgeInsets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
+        let wrappingStackView = UIStackView(arrangedSubviews: [stackView, addTagField])
+        wrappingStackView.axis = .horizontal
+        wrappingStackView.alignment = .center
+        wrappingStackView.distribution = .fill
+        wrappingStackView.spacing = Constants.wrappingStackViewSpacing
 
-        addFillingSubview(tagScrollView)
+        scrollView.addFillingSubview(wrappingStackView, edgeInsets: Constants.wrappingStackViewMargins)
+        wrappingStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
+
+        addFillingSubview(scrollView)
+    }
+
+    /// Sets up hidden cell to make sure view has correct height even if there are no tags
+    ///
+    func setupHiddenCell() {
+        let hiddenCell = TagViewCell(tagName: "A")
+        hiddenCell.translatesAutoresizingMaskIntoConstraints = false
+        hiddenCell.isHidden = true
+        hiddenCell.isAccessibilityElement = false
+
+        addSubview(hiddenCell)
+        NSLayoutConstraint.activate([
+            hiddenCell.topAnchor.constraint(equalTo: topAnchor, constant: Constants.hiddenCellVerticalMargin),
+            hiddenCell.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.hiddenCellVerticalMargin),
+            hiddenCell.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
+    }
+
+    func updateStackViewVisibility() {
+        stackView.isHidden = stackView.arrangedSubviews.isEmpty
     }
 }
 
@@ -117,24 +155,34 @@ private extension TagView {
 //
 private extension TagView {
     var tagCells: [TagViewCell] {
-        return (tagStackView.arrangedSubviews as? [TagViewCell]) ?? []
+        return (stackView.arrangedSubviews as? [TagViewCell]) ?? []
     }
 
     func cell(for tagName: String) -> TagViewCell {
         let cell = TagViewCell(tagName: tagName)
-        cell.onEditingBegin = { [weak self] in
-            self?.clearEditing(except: tagName)
+
+        cell.onTap = { [weak self, weak cell] in
+            guard let self = self, let cell = cell else {
+                return
+            }
+            self.toggleDeleteButton(for: cell)
         }
+
         cell.onDelete = { [weak self] in
-            self?.removeTag(with: tagName)
+            guard let self = self else {
+                return
+            }
+            self.delegate?.tagView(self, wantsToRemoveTagWithName: tagName)
         }
+
         return cell
     }
 
-    func clearAll() {
-        for view in tagStackView.arrangedSubviews {
+    func removeAllTags() {
+        for view in stackView.arrangedSubviews {
             view.removeFromSuperview()
         }
+        updateStackViewVisibility()
     }
 }
 
@@ -142,13 +190,19 @@ private extension TagView {
 // MARK: - Editing
 //
 private extension TagView {
-    var isEditingTag: Bool {
-        tagCells.contains(where: { $0.isEditing })
+    var isShowingDeleteButton: Bool {
+        tagCells.contains(where: { $0.isDeleteButtonVisible })
     }
 
-    func clearEditing(except tagName: String? = nil) {
+    func toggleDeleteButton(for cell: TagViewCell) {
+        let newValue = !cell.isDeleteButtonVisible
+        hideDeleteButton()
+        cell.isDeleteButtonVisible = newValue
+    }
+
+    func hideDeleteButton() {
         for cell in tagCells {
-            cell.isEditing = cell.tagName == tagName
+            cell.isDeleteButtonVisible = false
         }
     }
 }
@@ -178,41 +232,25 @@ private extension TagView {
     }
 
     func processTextInFieldToTag() {
-        let tagName = addTagField.text ?? ""
-
-        if !tagName.isEmpty && tagDelegate?.tagView(self, shouldCreateTagWithName: tagName) == true {
-
-            tagStackView.addArrangedSubview(cell(for: tagName))
-            tagDelegate?.tagView(self, didCreateTagWithName: tagName)
-        }
-
-        addTagField.text = ""
-//        updateAutoComplete()
-    }
-
-    func removeTag(with tagName: String) {
-        guard let cell = tagCells.first(where: { $0.tagName == tagName }) else {
+        guard let tagName = addTagField.text, !tagName.isEmpty else {
             return
         }
 
-        cell.removeFromSuperview()
-        tagDelegate?.tagView(self, didRemoveTagWithName: tagName)
+        delegate?.tagView(self, wantsToCreateTagWithName: tagName)
+        addTagField.text = ""
+
+        scrollEntryFieldToVisible(animated: true)
     }
 }
 
 // MARK: - UITextFieldDelegate
 //
 extension TagView: UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        clearEditing()
-//        updateAutoComplete()
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        hideDeleteButton()
 
-        DispatchQueue.main.async {
-            self.tagDelegate?.tagViewDidBeginEditing(self)
-            self.scrollEntryFieldToVisible(animated: true)
-        }
-
-        return true
+        delegate?.tagViewDidBeginEditing(self)
+        scrollEntryFieldToVisible(animated: true)
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -225,7 +263,7 @@ extension TagView: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        clearEditing()
+        hideDeleteButton()
         processTextInFieldToTag()
     }
 }
@@ -235,13 +273,24 @@ extension TagView: UITextFieldDelegate {
 //
 extension TagView: SPTagEntryFieldDelegate {
     func tagEntryFieldDidChange(_ tagTextField: SPTagEntryField!) {
-        clearEditing()
+        hideDeleteButton()
 
         DispatchQueue.main.async {
             self.scrollEntryFieldToVisible(animated: true)
         }
 
-        tagDelegate?.tagViewDidChange(self)
-//        updateAutoComplete()
+        delegate?.tagViewDidChange(self)
     }
+}
+
+
+// MARK: - Constants
+//
+private struct Constants {
+    static let wrappingStackViewSpacing: CGFloat = 16
+    static let wrappingStackViewMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+
+    static let tagsStackViewSpacing: CGFloat = 8
+
+    static let hiddenCellVerticalMargin: CGFloat = 8
 }

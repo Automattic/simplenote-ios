@@ -770,7 +770,10 @@ extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
             return
         }
 
-        noteEditorTextView.scrollToBottom(withAnimation: true)
+        // Without async it doesn't work due to race condition with keyboard frame changes
+        DispatchQueue.main.async {
+            self.noteEditorTextView.scrollToBottom(withAnimation: true)
+        }
     }
 }
 

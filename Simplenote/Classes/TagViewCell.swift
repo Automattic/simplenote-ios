@@ -37,7 +37,7 @@ class TagViewCell: RoundedView {
 
     /// Is delete button visible?
     ///
-    var isEditing: Bool {
+    var isDeleteButtonVisible: Bool {
         get {
             return !deleteButton.isHidden
         }
@@ -47,9 +47,9 @@ class TagViewCell: RoundedView {
         }
     }
 
-    /// Callback is invoked when cell switches to editing mode
+    /// Callback is invoked when user taps on the cell
     ///
-    var onEditingBegin: (() -> Void)?
+    var onTap: (() -> Void)?
 
     /// Calback is invoked when user taps on delete button
     ///
@@ -72,13 +72,13 @@ class TagViewCell: RoundedView {
 // MARK: - Private
 //
 private extension TagViewCell {
-
     func configure() {
         deleteButton.isHidden = true
         setupViewHierarchy()
         refreshStyle()
         setupLabels()
         setupGestureRecognizer()
+        setupAccessibility()
     }
 
     func setupViewHierarchy() {
@@ -104,18 +104,36 @@ private extension TagViewCell {
 
     @objc
     func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        if isEditing {
+        if isDeleteButtonVisible {
             let point = gestureRecognizer.location(in: deleteButton)
-            if deleteButton.bounds.insetBy(dx: -10, dy: -10).contains(point) {
+            let insetBounds = deleteButton.bounds.insetBy(dx: Constants.deleteButtonHitAreaInset,
+                                                          dy: Constants.deleteButtonHitAreaInset)
+            if insetBounds.contains(point) {
                 onDelete?()
                 return
             }
         }
 
-        isEditing = !isEditing
-        if isEditing {
-            onEditingBegin?()
-        }
+        onTap?()
+    }
+}
+
+
+// MARK: - Accessibility
+//
+extension TagViewCell {
+    private func setupAccessibility() {
+        isAccessibilityElement = true
+        accessibilityLabel = tagName
+
+        let deleteAction = UIAccessibilityCustomAction(name: Localization.removeTagHint, target: self, selector: #selector(accessibilityRemoveTag))
+        accessibilityCustomActions = [deleteAction]
+    }
+
+    @objc
+    private func accessibilityRemoveTag() -> Bool {
+        onDelete?()
+        return true
     }
 }
 
@@ -128,4 +146,13 @@ private struct Constants {
 
     static let deleteButtonImageInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     static let deleteButtonSideSize: CGFloat = 18
+
+    static let deleteButtonHitAreaInset: CGFloat = -10
+}
+
+
+// MARK: - Localization
+//
+private struct Localization {
+    static let removeTagHint = NSLocalizedString("tag-delete-accessibility-hint", comment: "Remove a tag from the current note")
 }

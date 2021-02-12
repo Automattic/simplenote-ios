@@ -311,7 +311,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTagViewTextColor: UIColor {
-        UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+        UIColor(lightColor: .gray60, darkColor: .gray5)
     }
 
     @objc

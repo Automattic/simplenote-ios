@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoteEditorTagListViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
                 <outlet property="tagView" destination="8UY-Bd-Ige" id="CDy-9P-kxK"/>
-                <outlet property="tagViewTopConstraint" destination="nw1-Mv-n3h" id="PHY-qP-2kP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,12 +20,9 @@
             <rect key="frame" x="0.0" y="0.0" width="431" height="155"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-Bd-Ige" customClass="TagView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="44" width="431" height="44"/>
+                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-Bd-Ige" customClass="TagView" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="431" height="77"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="B5U-6p-XfN"/>
-                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
