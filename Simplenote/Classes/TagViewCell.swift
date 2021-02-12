@@ -3,6 +3,9 @@ import UIKit
 // MARK: - TagViewCell
 //
 class TagViewCell: RoundedView {
+
+    private var stackViewConstraints: EdgeConstraints!
+
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
@@ -15,6 +18,7 @@ class TagViewCell: RoundedView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(for: .subheadline, weight: .medium)
+        label.textAlignment = .center
         return label
     }()
 
@@ -22,7 +26,7 @@ class TagViewCell: RoundedView {
         let button = RoundedCrossButton()
         button.style = .tagPill
         button.isUserInteractionEnabled = false
-        button.imageEdgeInsets = Constants.deleteButtonImageInsets
+        button.contentMode = .scaleAspectFit
 
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: Constants.deleteButtonSideSize),
@@ -44,6 +48,7 @@ class TagViewCell: RoundedView {
 
         set {
             deleteButton.isHidden = !newValue
+            updateStackViewConstraints()
         }
     }
 
@@ -75,6 +80,7 @@ private extension TagViewCell {
     func configure() {
         deleteButton.isHidden = true
         setupViewHierarchy()
+        setupMinConstraints()
         refreshStyle()
         setupLabels()
         setupGestureRecognizer()
@@ -85,7 +91,16 @@ private extension TagViewCell {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(deleteButton)
 
-        addFillingSubview(stackView, edgeInsets: Constants.margins, target: .bounds)
+        stackViewConstraints = addFillingSubview(stackView)
+        updateStackViewConstraints()
+    }
+
+    func setupMinConstraints() {
+        let minHeight = Constants.marginsWhenDeleteIsVisible.top + Constants.deleteButtonSideSize + Constants.marginsWhenDeleteIsVisible.bottom
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: minHeight),
+            widthAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: Constants.widthConstraintMultiplier)
+        ])
     }
 
     func setupLabels() {
@@ -100,6 +115,11 @@ private extension TagViewCell {
     func refreshStyle() {
         backgroundColor = .simplenoteTagPillBackgroundColor
         titleLabel.textColor = .simplenoteTagPillTextColor
+    }
+
+    func updateStackViewConstraints() {
+        let edgeInsets = isDeleteButtonVisible ? Constants.marginsWhenDeleteIsVisible : Constants.margins
+        stackViewConstraints.update(with: edgeInsets)
     }
 
     @objc
@@ -141,12 +161,14 @@ extension TagViewCell {
 // MARK: - Constants
 //
 private struct Constants {
-    static let margins = UIEdgeInsets(top: 7, left: 12, bottom: 7, right: 12)
+    static let margins = UIEdgeInsets(top: 5, left: 12, bottom: 5, right: 12)
+    static let marginsWhenDeleteIsVisible = UIEdgeInsets(top: 5, left: 12, bottom: 5, right: 5)
+
     static let stackViewSpacing: CGFloat = 8
 
-    static let deleteButtonImageInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-    static let deleteButtonSideSize: CGFloat = 18
+    static let widthConstraintMultiplier: CGFloat = 1.3
 
+    static let deleteButtonSideSize: CGFloat = 20
     static let deleteButtonHitAreaInset: CGFloat = -10
 }
 
