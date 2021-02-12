@@ -59,42 +59,42 @@
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-01.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-1-note-light.png",
+			"screenshot": "iPhone 8-1-note-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_1.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-02.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-2-all-notes-dark.png",
+			"screenshot": "iPhone 8-2-all-notes-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_2.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-03.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-3-interlinking-light.png",
+			"screenshot": "iPhone 8-3-interlinking-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-04.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-4-menu-dark.png",
+			"screenshot": "iPhone 8-4-menu-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_4.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-05.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-5-search-light.png",
+			"screenshot": "iPhone 8-5-search-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_5.txt"
 		},
 		{
 			"device": "iPhone 8 Plus",
 			"filename": "iPhone 8 Plus-06.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone 8 Plus-6-passcode-dark.png",
+			"screenshot": "iPhone 8-6-passcode-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		},
 
@@ -102,42 +102,42 @@
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-01.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-1-note-light.png",
+			"screenshot": "iPhone X-1-note-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_1.txt"
 		},
 		{
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-02.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-2-all-notes-dark.png",
+			"screenshot": "iPhone X-2-all-notes-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_2.txt"
 		},
 		{
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-03.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-3-interlinking-light.png",
+			"screenshot": "iPhone X-3-interlinking-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_3.txt"
 		},
 		{
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-04.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-4-menu-dark.png",
+			"screenshot": "iPhone X-4-menu-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_4.txt"
 		},
 		{
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-05.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-5-search-light.png",
+			"screenshot": "iPhone X-5-search-light.png",
 			"text": "metadata/{locale}/app_store_screenshot_5.txt"
 		},
 		{
 			"device": "iPhone Xs Max",
 			"filename": "iPhone Xs Max-06.png",
 			"background": "#3361CC",
-			"screenshot": "iPhone Xs Max-6-passcode-dark.png",
+			"screenshot": "iPhone X-6-passcode-dark.png",
 			"text": "metadata/{locale}/app_store_screenshot_6.txt"
 		},
 

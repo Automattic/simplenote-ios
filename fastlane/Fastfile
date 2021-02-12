@@ -680,13 +680,13 @@ end
 
 def screenshot_devices()
   [
-    "iPhone Xs Max",
-    "iPhone 8 Plus",
+    "iPhone X",
+    "iPhone 8",
     "iPad Pro (12.9-inch) (2nd generation)",
     "iPad Pro (12.9-inch) (3rd generation)",
   ]
 end
 
 def simulator_version
-  '14.3'
+  '14.4'
 end
