@@ -111,6 +111,8 @@
 		A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */; };
 		A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DF30725A44F0F00FDADF3 /* PinLockRemoveController.swift */; };
 		A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60DF30F25A4524100FDADF3 /* PinLockBaseController.swift */; };
+		A61471A825D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61471A625D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift */; };
+		A61471A925D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61471A725D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib */; };
 		A61471B825D70C190065D849 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61471B625D70C190065D849 /* PopoverViewController.xib */; };
 		A61471B925D70C190065D849 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61471B725D70C190065D849 /* PopoverViewController.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
@@ -568,6 +570,8 @@
 		A60A1A1D25655D840041701E /* ApplicationShortcutItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationShortcutItemType.swift; path = Classes/ApplicationShortcutItemType.swift; sourceTree = "<group>"; };
 		A60DF30725A44F0F00FDADF3 /* PinLockRemoveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockRemoveController.swift; sourceTree = "<group>"; };
 		A60DF30F25A4524100FDADF3 /* PinLockBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockBaseController.swift; sourceTree = "<group>"; };
+		A61471A625D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorTagSuggestionsViewController.swift; sourceTree = "<group>"; };
+		A61471A725D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditorTagSuggestionsViewController.xib; sourceTree = "<group>"; };
 		A61471B625D70C190065D849 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopoverViewController.xib; path = Classes/PopoverViewController.xib; sourceTree = "<group>"; };
 		A61471B725D70C190065D849 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Classes/PopoverViewController.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
@@ -1222,6 +1226,8 @@
 			children = (
 				A6C0DFE525C18E3300B9BE39 /* NoteEditorTagListViewController.swift */,
 				A6C0DFE625C18E3300B9BE39 /* NoteEditorTagListViewController.xib */,
+				A61471A625D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift */,
+				A61471A725D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -2265,6 +2271,7 @@
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
 				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
+				A61471A925D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib in Resources */,
 				A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
@@ -2524,6 +2531,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
+				A61471A825D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift in Sources */,
 				A6E02758256E52F3002054DF /* PinLockController.swift in Sources */,
 				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
 				B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */,
