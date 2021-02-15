@@ -5,7 +5,7 @@ import UIKit
 //
 class PopoverViewController: UIViewController {
 
-    /// Autocomplete TableView
+    /// Container view
     ///
     @IBOutlet private var containerView: UIView!
     @IBOutlet private var backgroundView: UIVisualEffectView!
