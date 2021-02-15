@@ -59,11 +59,11 @@ class AllNotes {
     class func waitForLoad() {
         let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
         let predicate = NSPredicate { _, _ in
-            allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists
+            allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists == false
         }
         
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
-        XCTWaiter().wait(for: [expectation], timeout: 30)
+        XCTWaiter().wait(for: [expectation], timeout: 10)
     }
 }
 
