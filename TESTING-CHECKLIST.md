@@ -1,4 +1,5 @@
 ## Testing
+Note:(A) means Automated Test. If automated UI tests were executed for the app, there's no need to run tests marked with (A) manually.
 
 ### Login
 
@@ -27,7 +28,7 @@
 
 - [ ] Can preview markdown by swiping (A)
 - [ ] Can flip to edit mode (from markdown preview) by swiping (A)
-- [ ] Using the Insert checklist item from the format menu inserts a checklist
+- [ ] Using the Insert checklist item from the format menu inserts a checklist (A)
 - [ ] "Undo" undoes the last edit (A)
 - [ ] Typing `- [x]` creates a checked checklist item (A)
 - [ ] Typing `- [ ]` created an unchecked checklist item (A)
