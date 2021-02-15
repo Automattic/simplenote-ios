@@ -959,12 +959,17 @@ extension SPNoteListViewController {
 //
 private extension SPNoteListViewController {
     var tableCommands: [UIKeyCommand] {
-        [
+        var commands = [
             UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
             UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
-            UIKeyCommand(input: UIKeyCommand.inputReturn, modifierFlags: [], action: #selector(keyboardSelect)),
-            UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardSelect)),
+            UIKeyCommand(input: UIKeyCommand.inputReturn, modifierFlags: [], action: #selector(keyboardSelect))
         ]
+
+        if isFirstResponder {
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardSelect)))
+        }
+
+        return commands
     }
 
     @objc
