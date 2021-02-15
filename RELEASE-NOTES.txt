@@ -1,6 +1,7 @@
 4.33
 -----
 -   Updating new-note and collaborate icons #1103
+-   Updating tags editor #990
  
 4.32
 -----
