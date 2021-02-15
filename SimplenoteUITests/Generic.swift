@@ -22,17 +22,12 @@ func logOut() -> Bool {
     return app.buttons[uidButton_LogIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
-
-//public func trackTest(_ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
-//    print("\(message) called from \(function) \(file):\(line)")
-//}
-
 public func trackTest(_ function: String = #function) {
     print(">> Test: \(function)")
     stepIndex = 1
 }
 
-func LogStep(){
+func logStep(){
     print(">>>> Step " + String(stepIndex))
     stepIndex += 1
 }

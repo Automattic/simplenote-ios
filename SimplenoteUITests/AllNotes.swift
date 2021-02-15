@@ -55,12 +55,15 @@ class AllNotes {
             cell.buttons[uidButton_NoteCell_Trash].tap()
         }
     }
-
+    
     class func waitForLoad() {
         let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
-        sleep(4)
-        while allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists {
+        let predicate = NSPredicate { _, _ in
+            allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists
         }
+        
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
+        XCTWaiter().wait(for: [expectation], timeout: 30)
     }
 }
 

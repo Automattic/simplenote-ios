@@ -155,27 +155,27 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         
         trackTest()
 
-        LogStep()
+        logStep()
             AllNotes.addNoteTap()
             NoteEditorAssert.editorShown()
 
-        LogStep()
+        logStep()
             NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
             NoteEditor.leaveEditor()
             AllNotesAssert.noteExists(noteName: noteNameInitial)
 
-        LogStep()
+        logStep()
             AllNotes.openNote(noteName: noteNameInitial)
             NoteEditor.markdownEnable()
             NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextInitial)
             NoteEditorAssert.checkboxForTextNotShown(text: noteTextInitial)
         
-        LogStep()
+        logStep()
             NoteEditor.swipeToPreview()
             PreviewAssert.substringShown(text: noteTextInitial)
             PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 0)
         
-        LogStep()
+        logStep()
             Preview.leavePreviewViaBackButton()
             NoteEditor.setFocus()
             NoteEditor.insertChecklist()
@@ -183,12 +183,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
             AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
             AllNotesAssert.noteAbsent(noteName: noteNameInitial)
         
-        LogStep()
+        logStep()
             AllNotes.openNote(noteName: noteNameWithCheckbox)
             NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextWithCheckbox)
             NoteEditorAssert.checkboxForTextShownOnce(text: noteTextWithCheckbox)
         
-        LogStep()
+        logStep()
             NoteEditor.swipeToPreview()
             PreviewAssert.substringShown(text: noteNameInitial)
             PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
