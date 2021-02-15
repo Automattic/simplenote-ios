@@ -743,7 +743,7 @@ extension SPNoteEditorViewController {
             return
         }
 
-        let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom
+        let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom + Metrics.additionalTagViewAndEditorCollisionDistance
         let maxContentY = noteEditorTextView.convert(CGPoint(x: 0, y: contentHeight), to: view).y
 
         tagView.transform = .identity
@@ -1048,7 +1048,7 @@ private enum Metrics {
     }
 
     static let searchMapWidth: CGFloat = 15.0
-
+    static let additionalTagViewAndEditorCollisionDistance: CGFloat = 16.0
 }
 
 
