@@ -1,11 +1,3 @@
-//
-//  TrashClass.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
 class Trash {
@@ -27,12 +19,11 @@ class Trash {
     class func empty() {
         Trash.open()
         let emptyTrashButton = app.buttons[uidButton_Trash_EmptyTrash]
-        //let emptyTrashButton = app.navigationBars.firstMatch.buttons[uidButton_Trash_EmptyTrash]
-
-        if emptyTrashButton.isEnabled {
-            emptyTrashButton.tap()
-            app.alerts.scrollViews.otherElements.buttons[uidButton_Yes].tap()
-        }
+                
+        guard emptyTrashButton.isEnabled else { return }
+        
+        emptyTrashButton.tap()
+        app.alerts.scrollViews.otherElements.buttons[uidButton_Yes].tap()
     }
 
     class func getNotesNumber() -> Int {

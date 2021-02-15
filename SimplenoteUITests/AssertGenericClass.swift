@@ -1,56 +1,53 @@
-//
-//  AssertGenericClass.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
-let notExpectedEnding = " is NOT as expected"
-let notFoundEnding = " NOT found"
-let notAbsentEnding = " NOT absent"
+let notExpectedEnding = " is NOT as expected",
+    notFoundEnding = " NOT found",
+    notAbsentEnding = " NOT absent"
 
-let inAllNotesEnding = " in \"All Notes\""
-let inTrashEnding = " in \"Trash\""
-let inEditorEnding = " in Note Editor"
-let inNotePreviewEnding = " in Note Preview"
-let inWebViewEnding = " in WebView"
+let inAllNotesEnding = " in \"All Notes\"",
+    inTrashEnding = " in \"Trash\"",
+    inEditorEnding = " in Note Editor",
+    inNotePreviewEnding = " in Note Preview",
+    inWebViewEnding = " in WebView"
 
-let buttonNotFound = " button" + notFoundEnding
-let labelNotFound = " label" + notFoundEnding
-let labelNotAbsent = " label" + notAbsentEnding
+let checkboxNotFound = " checkbox" + notFoundEnding,
+    checkboxNotAbsent = " checkbox" + notAbsentEnding,
+    textViewNotFound = " TextView" + notFoundEnding,
+    buttonNotFound = " button" + notFoundEnding,
+    labelNotFound = " label" + notFoundEnding,
+    labelNotAbsent = " label" + notAbsentEnding
 
-let alertHeadingNotFound = " alert heading" + notFoundEnding
-let alertContentNotFound = " alert content" + notFoundEnding
-let alertButtonNotFound = " alert button" + notFoundEnding
+let alertHeadingNotFound = " alert heading" + notFoundEnding,
+    alertContentNotFound = " alert content" + notFoundEnding,
+    alertButtonNotFound = " alert button" + notFoundEnding
 
-let navBarNotFound = " navigation bar" + notFoundEnding
-let imageNotFound = " image" + notFoundEnding
+let navBarNotFound = " navigation bar" + notFoundEnding,
+    imageNotFound = " image" + notFoundEnding
 
-let noteNotFoundInAllNotes = "\" Note" + notFoundEnding + inAllNotesEnding
-let noteNotAbsentInAllNotes = " Note" + notAbsentEnding + inAllNotesEnding
-let noteNotFoundInTrash = " Note" + notFoundEnding + inTrashEnding
-let noteNotAbsentInTrash = " Note" + notAbsentEnding + inTrashEnding
+let noteNotFoundInAllNotes = "\" Note" + notFoundEnding + inAllNotesEnding,
+    noteNotAbsentInAllNotes = " Note" + notAbsentEnding + inAllNotesEnding,
+    noteNotFoundInTrash = " Note" + notFoundEnding + inTrashEnding,
+    noteNotAbsentInTrash = " Note" + notAbsentEnding + inTrashEnding
 
-let numberOfNotesInAllNotesNotExpected = "Notes Number" + inAllNotesEnding + notExpectedEnding
-let numberOfNotesInTrashNotExpected = "Notes Number" + inTrashEnding + notExpectedEnding
+let numberOfNotesInAllNotesNotExpected = "Notes Number" + inAllNotesEnding + notExpectedEnding,
+    numberOfNotesInTrashNotExpected = "Notes Number" + inTrashEnding + notExpectedEnding
 
-let linkContainerNotFoundInEditor = "\" link container" + notFoundEnding + inEditorEnding
-let linkNotFoundInEditor = "\" link" + notFoundEnding + inEditorEnding
-let linkNotFoundInPreview = "\" link" + notFoundEnding + inNotePreviewEnding
+let linkContainerNotFoundInEditor = "\" link container" + notFoundEnding + inEditorEnding,
+    linkNotFoundInEditor = "\" link" + notFoundEnding + inEditorEnding,
+    linkNotFoundInPreview = "\" link" + notFoundEnding + inNotePreviewEnding
 
-let textNotFoundInEditor = "\" text" + notFoundEnding + inEditorEnding
-let textNotFoundInPreview = "\" text" + notFoundEnding + inNotePreviewEnding
-let textNotFoundInWebView = "\" text" + notFoundEnding + inWebViewEnding
+let textNotFoundInEditor = "\" text" + notFoundEnding + inEditorEnding,
+    textNotFoundInPreview = "\" text" + notFoundEnding + inNotePreviewEnding,
+    textNotFoundInWebView = "\" text" + notFoundEnding + inWebViewEnding
 
-let numberOfBoxesInPreviewNotExpected = "Boxes number" + inNotePreviewEnding + notExpectedEnding
-let numberOfCheckedBoxesInPreviewNotExpected = "Checked boxes number" + inNotePreviewEnding + notExpectedEnding
-let numberOfEmptyBoxesInPreviewNotExpected = "Empty boxes number" + inNotePreviewEnding + notExpectedEnding
+let numberOfBoxesInPreviewNotExpected = "Boxes number" + inNotePreviewEnding + notExpectedEnding,
+    numberOfCheckedBoxesInPreviewNotExpected = "Checked boxes number" + inNotePreviewEnding + notExpectedEnding,
+    numberOfEmptyBoxesInPreviewNotExpected = "Empty boxes number" + inNotePreviewEnding + notExpectedEnding
 
-let maxLoadTimeout = 20.0
-let minLoadTimeout = 1.0
+let checkboxFoundMoreThanOnce = "Checkbox found more than once"
+
+let maxLoadTimeout = 20.0,
+    minLoadTimeout = 1.0
 
 class Assert {
 

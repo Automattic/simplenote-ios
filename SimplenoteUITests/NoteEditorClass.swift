@@ -1,11 +1,3 @@
-//
-//  NoteEditorClass.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
 class NoteEditor {
@@ -46,6 +38,10 @@ class NoteEditor {
         app.navigationBars[uidNavBar_NoteEditor_Options].buttons[uidButton_Done].tap()
     }
 
+    class func insertChecklist() {
+        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_Checklist].tap()
+    }
+    
     class func markdownEnable() {
         swipeToPreview()
 
@@ -59,10 +55,10 @@ class NoteEditor {
     class func markdownDisable() {
         swipeToPreview()
 
-        if app.navigationBars[uidNavBar_NoteEditor_Preview].exists {
-            Preview.leavePreviewViaBackButton()
-            toggleMarkdownState()
-        }
+        guard app.navigationBars[uidNavBar_NoteEditor_Preview].exists else { return }
+        
+        Preview.leavePreviewViaBackButton()
+        toggleMarkdownState()
     }
 
     class func pressLink(containerText: String, linkifiedText: String) {
@@ -70,6 +66,54 @@ class NoteEditor {
         app.textViews[containerText].links[linkifiedText].press(forDuration: 1.3)
         sleep(4)
     }
+    
+    class func getAllTextViews() -> XCUIElementQuery {
+        // If we are in Note Editor, and there a zero TextViews,
+        // we should try setting focus first
+        if app.descendants(matching: .textView).count < 1 {
+            NoteEditor.setFocus()
+        }
+        
+        return app.descendants(matching: .textView)
+    }
+    
+    class func getCheckboxesForTextCount(text: String) -> Int {
+        let textViews = getAllTextViews()
+        var matchesCounter = 0
+        
+        for index in 0...textViews.count - 1
+        {
+            let currentLabel = textViews.element(boundBy: index).label
+
+            if currentLabel == text {
+                matchesCounter += 1
+            }
+        }
+        
+        let logMsg = ">>>>>> Found " + String(matchesCounter) + " Checkboxe(s) for '" + text + "'"
+        print(logMsg)
+        return matchesCounter
+    }
+    
+    class func textViewsWithExactTextCount(text: String) -> Int {
+        let textViews = getAllTextViews()
+        var matchesCounter = 0
+
+        for index in 0...textViews.count - 1
+        {
+            let currentValue = textViews.element(boundBy: index).value as! String
+            let currentValueStripped = currentValue.replacingOccurrences(of: "\u{fffc}", with: "")
+
+            if currentValueStripped == text {
+                matchesCounter += 1
+            }
+        }
+        
+        let logMsg = ">>>>>> Found " + String(matchesCounter) + " TextViews with '" + text + "' text"
+        print(logMsg)
+        return matchesCounter
+    }
+    
 }
 
 class NoteEditorAssert {
@@ -94,6 +138,21 @@ class NoteEditorAssert {
         XCTAssertEqual(text, NoteEditor.getEditorText(), "Note Editor text" + notExpectedEnding)
     }
 
+    class func textViewWithExactContentShownOnce(text: String) {
+        let actualTextViewsWithExactContentCount = NoteEditor.textViewsWithExactTextCount(text: text)
+        XCTAssertEqual(1, actualTextViewsWithExactContentCount)
+    }
+        
+    class func checkboxForTextShownOnce(text: String) {
+        let actualCheckboxesForTextCount = NoteEditor.getCheckboxesForTextCount(text: text)
+        XCTAssertEqual(1, actualCheckboxesForTextCount)
+    }
+    
+    class func checkboxForTextNotShown(text: String) {
+        let actualCheckboxesForTextCount = NoteEditor.getCheckboxesForTextCount(text: text)
+        XCTAssertEqual(0, actualCheckboxesForTextCount)
+    }
+    
     class func substringShown(text: String) {
         let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
         let textView = app.textViews.element(matching: textPredicate)

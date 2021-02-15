@@ -1,11 +1,3 @@
-//
-//  AllNotesClass.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
 class AllNotes {
@@ -18,11 +10,11 @@ class AllNotes {
         return app.navigationBars[uidNavBar_AllNotes].exists
     }
 
-    class func open() {
-        if !isOpen() {
-            app.navigationBars.element.buttons[uidButton_Menu].tap()
-            app.tables.staticTexts[uidButton_AllNotes].tap()
-        }
+    class func open() {        
+        guard !isOpen() else { return }
+        
+        app.navigationBars.element.buttons[uidButton_Menu].tap()
+        app.tables.staticTexts[uidButton_AllNotes].tap()
     }
 
     class func addNoteTap() {

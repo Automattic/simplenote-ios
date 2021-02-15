@@ -397,7 +397,6 @@
 		D864B1A225CAE57100F9B73E /* AssertGenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1A125CAE57100F9B73E /* AssertGenericClass.swift */; };
 		D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1AA25CAE59400F9B73E /* EmailLogin.swift */; };
 		D864B1B425CAE5C900F9B73E /* NoteEditorClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1B325CAE5C900F9B73E /* NoteEditorClass.swift */; };
-		D864B1BD25CAE5E100F9B73E /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1BC25CAE5E100F9B73E /* Playground.swift */; };
 		D864B1C625CAE5F800F9B73E /* PreviewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1C525CAE5F800F9B73E /* PreviewClass.swift */; };
 		D864B1CF25CAE61F00F9B73E /* TrashClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1CE25CAE61F00F9B73E /* TrashClass.swift */; };
 		D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1D725CAE63E00F9B73E /* UIDs.swift */; };
@@ -887,7 +886,6 @@
 		D864B1A125CAE57100F9B73E /* AssertGenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertGenericClass.swift; sourceTree = "<group>"; };
 		D864B1AA25CAE59400F9B73E /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		D864B1B325CAE5C900F9B73E /* NoteEditorClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorClass.swift; sourceTree = "<group>"; };
-		D864B1BC25CAE5E100F9B73E /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		D864B1C525CAE5F800F9B73E /* PreviewClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewClass.swift; sourceTree = "<group>"; };
 		D864B1CE25CAE61F00F9B73E /* TrashClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashClass.swift; sourceTree = "<group>"; };
 		D864B1D725CAE63E00F9B73E /* UIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDs.swift; sourceTree = "<group>"; };
@@ -1831,7 +1829,6 @@
 				D864B1A125CAE57100F9B73E /* AssertGenericClass.swift */,
 				D864B1AA25CAE59400F9B73E /* EmailLogin.swift */,
 				D864B1B325CAE5C900F9B73E /* NoteEditorClass.swift */,
-				D864B1BC25CAE5E100F9B73E /* Playground.swift */,
 				D864B1C525CAE5F800F9B73E /* PreviewClass.swift */,
 				D864B1CE25CAE61F00F9B73E /* TrashClass.swift */,
 				D864B1D725CAE63E00F9B73E /* UIDs.swift */,
@@ -2883,7 +2880,6 @@
 				D864B18225CAE4BE00F9B73E /* SimplenoteUITests.swift in Sources */,
 				D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */,
 				D864B1CF25CAE61F00F9B73E /* TrashClass.swift in Sources */,
-				D864B1BD25CAE5E100F9B73E /* Playground.swift in Sources */,
 				D864B1C625CAE5F800F9B73E /* PreviewClass.swift in Sources */,
 				D864B19225CAE54300F9B73E /* AllNotesClass.swift in Sources */,
 				D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */,

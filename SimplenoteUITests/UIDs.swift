@@ -1,11 +1,3 @@
-//
-//  UIDs.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 // Strings to locate controls by
 let uidPicture_AppLogo = "simplenote-logo"
 

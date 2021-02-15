@@ -1,11 +1,3 @@
-//
-//  PreviewClass.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
 class Preview {
@@ -59,25 +51,30 @@ class PreviewAssert {
     }
 
     class func boxesStates(expectedCheckedBoxesNumber: Int, expectedEmptyBoxesNumber: Int) {
-        let boxesCount = app.switches.count
-        var checkedBoxesNumber: Int = 0
-        var emptyBoxesNumber: Int = 0
+        let expectedBoxesCount = expectedCheckedBoxesNumber + expectedEmptyBoxesNumber,
+            actualBoxesCount = app.switches.count
+        
+        var actualCheckedBoxesCount = 0,
+            actualEmptyBoxesCount = 0
 
-        print("Number of boxes found: " + String(boxesCount))
-
-        for index in 0...boxesCount - 1 {
+        print("Number of boxes found: " + String(actualBoxesCount))
+        
+        XCTAssertEqual(expectedBoxesCount, actualBoxesCount, numberOfBoxesInPreviewNotExpected)
+        
+        if actualBoxesCount < 1 { return }
+        
+        for index in 0...actualBoxesCount - 1 {
             let box = app.descendants(matching: .switch).element(boundBy: index)
             print("Current box debug description: " + box.value.debugDescription)
 
             if box.value.debugDescription == "Optional(1)" {
-                checkedBoxesNumber += 1
+                actualCheckedBoxesCount += 1
             } else if box.value.debugDescription == "Optional(0)" {
-                emptyBoxesNumber += 1
+                actualEmptyBoxesCount += 1
             }
         }
-        
-        XCTAssertEqual(expectedCheckedBoxesNumber + expectedEmptyBoxesNumber, boxesCount, numberOfBoxesInPreviewNotExpected)
-        XCTAssertEqual(expectedCheckedBoxesNumber, checkedBoxesNumber, numberOfCheckedBoxesInPreviewNotExpected)
-        XCTAssertEqual(expectedEmptyBoxesNumber, emptyBoxesNumber, numberOfEmptyBoxesInPreviewNotExpected)
+
+        XCTAssertEqual(expectedCheckedBoxesNumber, actualCheckedBoxesCount, numberOfCheckedBoxesInPreviewNotExpected)
+        XCTAssertEqual(expectedEmptyBoxesNumber, actualEmptyBoxesCount, numberOfEmptyBoxesInPreviewNotExpected)
     }
 }

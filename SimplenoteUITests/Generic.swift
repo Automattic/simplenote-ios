@@ -1,11 +1,6 @@
-//
-//  Generic.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 19.11.2020.
-//  Copyright © 2020 Automattic. All rights reserved.
-//
 import XCTest
+
+var stepIndex = 0
 
 func attemptLogOut() -> Bool {
     let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
@@ -25,6 +20,21 @@ func logOut() -> Bool {
     app.tables.staticTexts[uidCell_Settings].tap()
     app.tables.staticTexts[uidButton_Settings_LogOut].tap()
     return app.buttons[uidButton_LogIn].waitForExistence(timeout: maxLoadTimeout)
+}
+
+
+//public func trackTest(_ message: String, file: String = #file, function: String = #function, line: Int = #line ) {
+//    print("\(message) called from \(function) \(file):\(line)")
+//}
+
+public func trackTest(_ function: String = #function) {
+    print(">> Test: \(function)")
+    stepIndex = 1
+}
+
+func LogStep(){
+    print(">>>> Step " + String(stepIndex))
+    stepIndex += 1
 }
 
 class Table {

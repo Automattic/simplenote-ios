@@ -1,11 +1,3 @@
-//
-//  SimplenoteUITests.swift
-//  SimplenoteUITests
-//
-//  Created by Sergiy Fedosov on 03.02.2021.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import XCTest
 
 let app = XCUIApplication()
@@ -18,14 +10,9 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
     let testDataNotExistingPassword = "ABCD"
 
     override func setUpWithError() throws {
-        app.launchArguments = ["enable-testing"]
         continueAfterFailure = true
         app.launch()
         let _ = attemptLogOut()
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testLogInWithNoEmailNoPassword() throws {
@@ -90,17 +77,6 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
         _ = logOut()
         Assert.signUpLogInScreenShown()
     }
-
-    // Test below is automatically generated one, disabled for now to save time
-    /*
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }*/
 }
 
 class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
@@ -115,7 +91,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         "Sign up now")
 
     override class func setUp() {
-        app.launchArguments = ["enable-testing"]
         app.launch()
         let _ = attemptLogOut()
         EmailLogin.open()
@@ -132,20 +107,16 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         AllNotes.open()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testCanPreviewMarkdownBySwiping() throws {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: complexLinkRawText)
-        NoteEditorAssert.wholeTextShown(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
 
         // Step 3
         NoteEditor.swipeToPreview()
@@ -157,12 +128,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: complexLinkRawText)
-        NoteEditorAssert.wholeTextShown(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
 
         // Step 3
         NoteEditor.swipeToPreview()
@@ -173,35 +144,82 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         Preview.leavePreviewViaBackButton()
         NoteEditor.setFocus()
         NoteEditorAssert.editorShown()
-        NoteEditorAssert.wholeTextShown(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
     }
 
+    func testUsingInsertChecklistInsertsChecklist() throws {
+        let noteTextInitial = "Inserting checkbox with a button",
+            noteNameInitial = noteTextInitial,
+            noteTextWithCheckbox = " " + noteTextInitial,
+            noteNameWithCheckbox = "- [ ]" + noteTextWithCheckbox
+        
+        trackTest()
+
+        LogStep()
+            AllNotes.addNoteTap()
+            NoteEditorAssert.editorShown()
+
+        LogStep()
+            NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
+            NoteEditor.leaveEditor()
+            AllNotesAssert.noteExists(noteName: noteNameInitial)
+
+        LogStep()
+            AllNotes.openNote(noteName: noteNameInitial)
+            NoteEditor.markdownEnable()
+            NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextInitial)
+            NoteEditorAssert.checkboxForTextNotShown(text: noteTextInitial)
+        
+        LogStep()
+            NoteEditor.swipeToPreview()
+            PreviewAssert.substringShown(text: noteTextInitial)
+            PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 0)
+        
+        LogStep()
+            Preview.leavePreviewViaBackButton()
+            NoteEditor.setFocus()
+            NoteEditor.insertChecklist()
+            NoteEditor.leaveEditor()
+            AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
+            AllNotesAssert.noteAbsent(noteName: noteNameInitial)
+        
+        LogStep()
+            AllNotes.openNote(noteName: noteNameWithCheckbox)
+            NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextWithCheckbox)
+            NoteEditorAssert.checkboxForTextShownOnce(text: noteTextWithCheckbox)
+        
+        LogStep()
+            NoteEditor.swipeToPreview()
+            PreviewAssert.substringShown(text: noteNameInitial)
+            PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
+    }
+    
     func testUndoUndoesTheLastEdit() throws {
         let editorText = "ABCD"
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.clearAndEnterText(enteredValue: editorText)
-        NoteEditorAssert.wholeTextShown(text: editorText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: editorText)
 
         // Step 3
         NoteEditor.undo()
-        NoteEditorAssert.wholeTextShown(text: "")
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: "")
     }
 
     func testAddedURLIsLinkified() throws {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.wholeTextShown(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
 
         // Step 3
         NoteEditor.leaveEditor()
@@ -216,12 +234,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.wholeTextShown(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
 
         // Step 3
         NoteEditor.leaveEditor()
@@ -243,12 +261,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.wholeTextShown(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
 
         // Step 3
         NoteEditor.swipeToPreview()
@@ -267,7 +285,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
@@ -279,8 +297,9 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 4
         AllNotes.openNote(noteName: completeText)
-        NoteEditorAssert.substringShown(text: checklistText)
-
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: checklistText)
+        NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
+        
         // Step 5
         NoteEditor.swipeToPreview()
         PreviewAssert.substringShown(text: checklistText)
@@ -293,7 +312,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 1
         AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown();
+        NoteEditorAssert.editorShown()
 
         // Step 2
         NoteEditor.markdownEnable()
@@ -305,7 +324,8 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 4
         AllNotes.openNote(noteName: completeText)
-        NoteEditorAssert.substringShown(text: checklistText)
+        NoteEditorAssert.textViewWithExactContentShownOnce(text: checklistText)
+        NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
 
         // Step 5
         NoteEditor.swipeToPreview()
@@ -317,7 +337,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 class SimplenoteUISmokeTestsTrash: XCTestCase {
 
     override class func setUp() {
-        app.launchArguments = ["enable-testing"]
         app.launch()
         let _ = attemptLogOut()
         EmailLogin.open()
@@ -332,10 +351,6 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         AllNotes.clearAllNotes()
         Trash.empty()
         AllNotes.open()
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testCanViewTrashedNotes() throws {
