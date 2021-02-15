@@ -707,9 +707,12 @@ extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 extension SPNoteEditorViewController {
     @objc
     func configureTagListViewController() {
+        let popoverPresenter = self.popoverPresenter
+        popoverPresenter.dismissOnInteractionWithPassthruView = true
         tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
-        addChild(tagListViewController)
 
+        addChild(tagListViewController)
+        
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
 

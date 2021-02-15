@@ -10,6 +10,7 @@ class NoteEditorTagSuggestionsViewController: UIViewController {
             tableView.separatorColor = .simplenoteDividerColor
             tableView.tableFooterView = UIView()
             tableView.alwaysBounceVertical = false
+            tableView.backgroundColor = .clear
 
             tableView.maxNumberOfVisibleRows = Metrics.maxNumberOfVisibleRows
         }
@@ -39,6 +40,11 @@ class NoteEditorTagSuggestionsViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
     }
 
     /// Update with keywords. Tags containing keywords that are not already in the note will be suggested

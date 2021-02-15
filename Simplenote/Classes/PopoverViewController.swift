@@ -20,6 +20,22 @@ class PopoverViewController: UIViewController {
 
     private let viewController: UIViewController
 
+    private var passthruView: PassthruView? {
+        return view as? PassthruView
+    }
+
+    /// Callback is invoked when interacted with passthru view
+    ///
+    var onInteractionWithPassthruView: (() -> Void)? {
+        get {
+            passthruView?.onInteraction
+        }
+
+        set {
+            passthruView?.onInteraction = newValue
+        }
+    }
+
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
