@@ -1,75 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InterlinkViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
-                <outlet property="backgroundView" destination="ZZD-kk-l5T" id="vLO-Vd-nH7"/>
-                <outlet property="shadowView" destination="J1j-Rs-BRd" id="F6m-io-a8C"/>
-                <outlet property="tableHeightConstraint" destination="pJU-Uf-0Oq" id="8xE-WM-Fgp"/>
-                <outlet property="tableLeftConstraint" destination="YkW-MZ-sEN" id="dLy-Pg-tWY"/>
-                <outlet property="tableTopConstraint" destination="1aU-WG-N13" id="UWn-PU-7Am"/>
                 <outlet property="tableView" destination="0Ce-It-s4R" id="rdg-1f-23L"/>
                 <outlet property="view" destination="URg-NP-0Et" id="xef-Np-8pC"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="URg-NP-0Et" customClass="PassthruView" customModule="Simplenote" customModuleProvider="target">
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="URg-NP-0Et">
             <rect key="frame" x="0.0" y="0.0" width="414" height="383"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1j-Rs-BRd" customClass="SPShadowView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="10"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                            <size key="value" width="0.0" height="1"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                            <real key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                            <real key="value" value="0.29999999999999999"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZD-kk-l5T">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vc0-Cc-xE6">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zf0-S2-dKX">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="V4a-WP-o2X">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="0.0"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <vibrancyEffect>
-                                    <blurEffect style="regular"/>
-                                </vibrancyEffect>
-                            </visualEffectView>
-                        </subviews>
-                    </view>
-                    <blurEffect style="regular"/>
-                </visualEffectView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-It-s4R">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-It-s4R" customClass="HuggableTableView" customModule="Simplenote" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="383"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="width" priority="999" constant="300" id="T9c-Ge-tZ2"/>
-                        <constraint firstAttribute="height" constant="50" id="pJU-Uf-0Oq"/>
-                    </constraints>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Esx-ah-OCX"/>
@@ -79,18 +31,10 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="ZZD-kk-l5T" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="13c-vt-Ev3"/>
-                <constraint firstItem="0Ce-It-s4R" firstAttribute="top" secondItem="URg-NP-0Et" secondAttribute="top" constant="12" id="1aU-WG-N13"/>
-                <constraint firstItem="ZZD-kk-l5T" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="6gN-vH-S7l"/>
-                <constraint firstItem="ZZD-kk-l5T" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="JTo-O4-SK4"/>
-                <constraint firstItem="J1j-Rs-BRd" firstAttribute="top" secondItem="0Ce-It-s4R" secondAttribute="top" id="Jda-bL-BQO"/>
-                <constraint firstItem="ZZD-kk-l5T" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="U49-aZ-qMs"/>
-                <constraint firstItem="J1j-Rs-BRd" firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="Xos-pY-37F"/>
-                <constraint firstItem="0Ce-It-s4R" firstAttribute="left" secondItem="URg-NP-0Et" secondAttribute="left" priority="999" id="YkW-MZ-sEN"/>
-                <constraint firstItem="J1j-Rs-BRd" firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="cl7-N9-OKH"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Ce-It-s4R" secondAttribute="trailing" constant="16" id="hN1-X0-aCU"/>
-                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="URg-NP-0Et" secondAttribute="leading" constant="16" id="m4j-uj-bVK"/>
-                <constraint firstItem="J1j-Rs-BRd" firstAttribute="leading" secondItem="0Ce-It-s4R" secondAttribute="leading" id="wq5-ce-lmK"/>
+                <constraint firstItem="0Ce-It-s4R" firstAttribute="leading" secondItem="URg-NP-0Et" secondAttribute="leading" id="Hqb-TN-3TT"/>
+                <constraint firstAttribute="bottom" secondItem="0Ce-It-s4R" secondAttribute="bottom" id="Vfg-fa-SrO"/>
+                <constraint firstAttribute="trailing" secondItem="0Ce-It-s4R" secondAttribute="trailing" id="Ymq-H4-RuN"/>
+                <constraint firstItem="0Ce-It-s4R" firstAttribute="top" secondItem="URg-NP-0Et" secondAttribute="top" id="ZPp-e2-opk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-84.057971014492765" y="-3.0133928571428572"/>

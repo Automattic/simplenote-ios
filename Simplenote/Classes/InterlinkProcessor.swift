@@ -1,25 +1,6 @@
 import Foundation
 
 
-
-// MARK: - InterlinkPresentationContextProvider
-//
-protocol InterlinkProcessorPresentationContextProvider: NSObjectProtocol {
-
-    /// View in the parent's hierarchy that should always appear above the Autocomplete UI
-    ///
-    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView
-
-    /// Parent TextView that is triggering the Autocomplete event
-    ///
-    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView
-
-    /// Parent ViewController!
-    ///
-    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController
-}
-
-
 // MARK: - InterlinkProcessorDelegate
 //
 protocol InterlinkProcessorDelegate: NSObjectProtocol {
@@ -27,10 +8,6 @@ protocol InterlinkProcessorDelegate: NSObjectProtocol {
     /// Invoked whenever an Autocomplete Row has been selected: The handler should insert the specified text at a given range
     ///
     func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
-
-    /// Represents the Entity that should be excluded when presenting Autocomplete results
-    ///
-    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID?
 }
 
 
@@ -39,19 +16,29 @@ protocol InterlinkProcessorDelegate: NSObjectProtocol {
 class InterlinkProcessor: NSObject {
 
     private let viewContext: NSManagedObjectContext
-    private var presentedViewController: InterlinkViewController?
+    private let popoverPresenter: PopoverPresenter
+    private let parentTextView: UITextView
+    private let excludedEntityID: NSManagedObjectID
+
+    private weak var interlinkViewController: InterlinkViewController?
+
     private var lastKnownEditorOffset: CGPoint?
     private var lastKnownKeywordRange: Range<String.Index>?
     private var initialEditorOffset: CGPoint?
     private lazy var resultsController = InterlinkResultsController(viewContext: viewContext)
 
-    weak var contextProvider: InterlinkProcessorPresentationContextProvider?
     weak var delegate: InterlinkProcessorDelegate?
 
     /// Designated Initializer
     ///
-    init(viewContext: NSManagedObjectContext) {
+    init(viewContext: NSManagedObjectContext,
+         popoverPresenter: PopoverPresenter,
+         parentTextView: UITextView,
+         excludedEntityID: NSManagedObjectID) {
         self.viewContext = viewContext
+        self.popoverPresenter = popoverPresenter
+        self.parentTextView = parentTextView
+        self.excludedEntityID = excludedEntityID
     }
 
     /// Displays the Interlink Lookup UI at the cursor's location when all of the following are **true**:
@@ -73,9 +60,7 @@ class InterlinkProcessor: NSObject {
             return
         }
 
-        ensureInterlinkControllerIsOnScreen()
-        refreshInterlinkController(notes: notes)
-        relocateInterlinkController(around: keywordRange)
+        showInterlinkController(with: notes, around: keywordRange)
         setupInterlinkEventListeners(replacementRange: markdownRange)
 
         initialEditorOffset = parentTextView.contentOffset
@@ -87,8 +72,8 @@ class InterlinkProcessor: NSObject {
     ///
     @objc
     func dismissInterlinkLookup() {
-        presentedViewController?.detachWithAnimation()
-        presentedViewController = nil
+        popoverPresenter.dismiss()
+        interlinkViewController = nil
     }
 }
 
@@ -97,35 +82,32 @@ class InterlinkProcessor: NSObject {
 //
 private extension InterlinkProcessor {
 
-    func ensureInterlinkControllerIsOnScreen() {
-        guard presentedViewController == nil else {
+    func showInterlinkController(with notes: [Note], around range: Range<String.Index>) {
+        let keywordFrame = parentTextView.locationInWindowForText(in: range)
+
+        guard !popoverPresenter.isPresented else {
+            refreshInterlinkController(notes: notes)
+            popoverPresenter.relocate(around: keywordFrame)
             return
         }
 
-        presentInterlinkController()
-    }
+        let viewController = InterlinkViewController()
+        interlinkViewController = viewController
+        refreshInterlinkController(notes: notes)
 
-    func presentInterlinkController() {
-        let interlinkViewController = InterlinkViewController()
-        interlinkViewController.attachWithAnimation(to: parentViewController, below: parentOverlayView)
-        presentedViewController = interlinkViewController
+        popoverPresenter.show(viewController,
+                              around: keywordFrame,
+                              desiredHeight: viewController.desiredHeight)
 
         SPTracker.trackEditorInterlinkAutocompleteViewed()
     }
 
-    func relocateInterlinkController(around range: Range<String.Index>) {
-        let keywordFrame = parentTextView.locationInWindowForText(in: range)
-        let editingFrame = parentTextView.editingRectInWindow()
-
-        presentedViewController?.relocateInterface(around: keywordFrame, in: editingFrame)
-    }
-
     func refreshInterlinkController(notes: [Note]) {
-        presentedViewController?.notes = notes
+        interlinkViewController?.notes = notes
     }
 
     func setupInterlinkEventListeners(replacementRange: Range<String.Index>) {
-        presentedViewController?.onInsertInterlink = { [weak self] text in
+        interlinkViewController?.onInsertInterlink = { [weak self] text in
             guard let self = self else {
                 return
             }
@@ -145,10 +127,6 @@ extension InterlinkProcessor {
     ///
     @objc(refreshInterlinkControllerWithNewOffset:isDragging:)
     func refreshInterlinkController(contentOffset: CGPoint, isDragging: Bool) {
-        guard let interlinkViewController = presentedViewController else {
-            return
-        }
-
         defer {
             lastKnownEditorOffset = contentOffset
         }
@@ -157,7 +135,7 @@ extension InterlinkProcessor {
             return
         }
 
-        interlinkViewController.relocateInterface(by: oldY - contentOffset.y)
+        popoverPresenter.relocate(by: oldY - contentOffset.y)
         if isDragging {
             dismissInterlinkLookupIfNeeded(initialY: initialY, currentY: contentOffset.y)
         }
@@ -178,48 +156,9 @@ extension InterlinkProcessor {
 // MARK: - State
 //
 private extension InterlinkProcessor {
-
-    var isInterlinkLookupOnScreen: Bool {
-        presentedViewController?.parent != nil
-    }
-
     var mustProcessInterlinkLookup: Bool {
         let editor = parentTextView
         return editor.isFirstResponder && !editor.isTextSelected && !editor.isUndoingEditOP
-    }
-}
-
-
-// MARK: - Delegate Wrappers
-//
-private extension InterlinkProcessor {
-
-    var excludedEntityID: NSManagedObjectID? {
-        delegate?.excludedEntityIdentifierForInterlinkProcessor(self)
-    }
-
-    var parentOverlayView: UIView {
-        guard let parent = contextProvider?.parentOverlayViewForInterlinkProcessor(self) else {
-            fatalError("☠️ InterlinkProcessor: Please set a valid contextProvider!")
-        }
-
-        return parent
-    }
-
-    var parentTextView: UITextView {
-        guard let parent = contextProvider?.parentTextViewForInterlinkProcessor(self) else {
-            fatalError("☠️ InterlinkProcessor: Please set a valid contextProvider!")
-        }
-
-        return parent
-    }
-
-    var parentViewController: UIViewController {
-        guard let parent = contextProvider?.parentViewControllerForInterlinkProcessor(self) else {
-            fatalError("☠️ InterlinkProcessor: Please set a valid contextProvider!")
-        }
-
-        return parent
     }
 }
 
