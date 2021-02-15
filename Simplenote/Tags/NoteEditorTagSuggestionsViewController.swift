@@ -93,6 +93,11 @@ extension NoteEditorTagSuggestionsViewController: UITableViewDataSource {
         cell.separatorInset = .zero
         return cell
     }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        // "Drops" the last separator!
+        .leastNonzeroMagnitude
+    }
 }
 
 
