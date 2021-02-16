@@ -12,8 +12,6 @@
                 <outlet property="backgroundView" destination="ZZD-kk-l5T" id="qtg-b7-9Gr"/>
                 <outlet property="containerLeftConstraint" destination="tlN-Bu-zsm" id="kxU-Vv-S0w"/>
                 <outlet property="containerMaxHeightConstraint" destination="qFL-0w-6D3" id="ieM-EN-hGD"/>
-                <outlet property="containerTopToBottomConstraint" destination="wTC-1b-rhI" id="HBv-wZ-rbL"/>
-                <outlet property="containerTopToTopConstraint" destination="L9L-3d-8l6" id="qxf-HC-0B3"/>
                 <outlet property="containerView" destination="w5c-DK-13l" id="uv8-F9-RLX"/>
                 <outlet property="shadowView" destination="J1j-Rs-BRd" id="WaX-Uj-fdG"/>
                 <outlet property="view" destination="URg-NP-0Et" id="xef-Np-8pC"/>
@@ -25,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1j-Rs-BRd" customClass="SPShadowView" customModule="Simplenote" customModuleProvider="target">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="50" width="300" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -43,7 +41,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZD-kk-l5T">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="50" width="300" height="50"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vc0-Cc-xE6">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +62,7 @@
                     <blurEffect style="regular"/>
                 </visualEffectView>
                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5c-DK-13l">
-                    <rect key="frame" x="16" y="12" width="300" height="50"/>
+                    <rect key="frame" x="16" y="50" width="300" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="qFL-0w-6D3"/>
@@ -76,7 +74,7 @@
             <constraints>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="trailing" secondItem="w5c-DK-13l" secondAttribute="trailing" id="GQW-Zr-OPQ"/>
                 <constraint firstItem="w5c-DK-13l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="URg-NP-0Et" secondAttribute="leading" constant="16" id="Jqg-de-oqa"/>
-                <constraint firstItem="w5c-DK-13l" firstAttribute="top" secondItem="URg-NP-0Et" secondAttribute="top" constant="12" id="L9L-3d-8l6"/>
+                <constraint firstItem="w5c-DK-13l" firstAttribute="top" secondItem="URg-NP-0Et" secondAttribute="top" constant="50" placeholder="YES" id="L9L-3d-8l6"/>
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="bottom" secondItem="w5c-DK-13l" secondAttribute="bottom" id="OWv-8b-18z"/>
                 <constraint firstItem="ZZD-kk-l5T" firstAttribute="bottom" secondItem="w5c-DK-13l" secondAttribute="bottom" id="Ven-kl-5Fy"/>
                 <constraint firstItem="ZZD-kk-l5T" firstAttribute="top" secondItem="w5c-DK-13l" secondAttribute="top" id="Vk8-Oc-6T3"/>
@@ -85,15 +83,9 @@
                 <constraint firstItem="J1j-Rs-BRd" firstAttribute="top" secondItem="w5c-DK-13l" secondAttribute="top" id="mrP-al-Lvg"/>
                 <constraint firstItem="ZZD-kk-l5T" firstAttribute="leading" secondItem="w5c-DK-13l" secondAttribute="leading" id="nhs-nR-Anb"/>
                 <constraint firstItem="w5c-DK-13l" firstAttribute="left" secondItem="URg-NP-0Et" secondAttribute="left" priority="999" id="tlN-Bu-zsm"/>
-                <constraint firstItem="w5c-DK-13l" firstAttribute="bottom" secondItem="URg-NP-0Et" secondAttribute="top" constant="12" id="wTC-1b-rhI"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="w5c-DK-13l" secondAttribute="trailing" constant="16" id="wY4-ah-MFc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="wTC-1b-rhI"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="-84.057971014492765" y="-3.0133928571428572"/>
         </view>
     </objects>

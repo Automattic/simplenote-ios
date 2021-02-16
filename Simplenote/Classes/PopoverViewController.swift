@@ -15,8 +15,11 @@ class PopoverViewController: UIViewController {
     ///
     @IBOutlet private(set) var containerLeftConstraint: NSLayoutConstraint!
     @IBOutlet private(set) var containerMaxHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private(set) var containerTopToTopConstraint: NSLayoutConstraint!
-    @IBOutlet private(set) var containerTopToBottomConstraint: NSLayoutConstraint!
+
+    /// Setting the following constraints via XIB resulted in weird behaviour
+    ///
+    private(set) var containerTopToTopConstraint: NSLayoutConstraint!
+    private(set) var containerTopToBottomConstraint: NSLayoutConstraint!
 
     private let viewController: UIViewController
 
@@ -49,6 +52,8 @@ class PopoverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupContainerConstraints()
+
         setupRootView()
         setupBackgroundView()
         setupContainerView()
@@ -61,6 +66,12 @@ class PopoverViewController: UIViewController {
 // MARK: - Initialization
 //
 private extension PopoverViewController {
+
+    func setupContainerConstraints() {
+        containerTopToTopConstraint = containerView.topAnchor.constraint(equalTo: view.topAnchor)
+        containerTopToBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.topAnchor)
+        containerTopToTopConstraint.isActive = true
+    }
 
     func setupRootView() {
         view.backgroundColor = .clear
