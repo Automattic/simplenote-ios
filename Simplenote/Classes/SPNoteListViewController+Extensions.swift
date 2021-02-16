@@ -941,10 +941,11 @@ extension SPNoteListViewController {
     open override var keyCommands: [UIKeyCommand]? {
         var commands = tableCommands
         if isSearchActive {
-            commands.append(contentsOf: [
-                UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)),
-                UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching))
-            ])
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)))
+
+            if searchBar.isFirstResponder {
+                commands.append(UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)))
+            }
         }
         return commands
     }
