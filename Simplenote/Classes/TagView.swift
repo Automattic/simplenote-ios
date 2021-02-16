@@ -41,6 +41,12 @@ class TagView: UIView {
         return field
     }()
 
+    private var autohideDeleteButtonTimer: Timer? {
+        didSet {
+            oldValue?.invalidate()
+        }
+    }
+
     /// Delegate
     ///
     weak var delegate: TagViewDelegate?
@@ -77,11 +83,15 @@ class TagView: UIView {
         }
     }
 
+    /// Add a tag with specified name
+    ///
     func add(tag tagName: String) {
         stackView.addArrangedSubview(cell(for: tagName))
         updateStackViewVisibility()
     }
 
+    /// Remove a tag with specified name
+    ///
     func remove(tag tagName: String) {
         guard let cell = tagCells.first(where: { $0.tagName == tagName }) else {
             return
@@ -198,9 +208,19 @@ private extension TagView {
         let newValue = !cell.isDeleteButtonVisible
         hideDeleteButton()
         cell.isDeleteButtonVisible = newValue
+
+        if newValue {
+            autohideDeleteButtonTimer = Timer.scheduledTimer(withTimeInterval: Constants.autohideDeleteButtonTimeout,
+                                                             repeats: false,
+                                                             block: { [weak self] (_) in
+                                                                self?.hideDeleteButton()
+                                                             })
+        }
     }
 
     func hideDeleteButton() {
+        autohideDeleteButtonTimer = nil
+
         for cell in tagCells {
             cell.isDeleteButtonVisible = false
         }
@@ -293,4 +313,6 @@ private struct Constants {
     static let tagsStackViewSpacing: CGFloat = 8
 
     static let hiddenCellVerticalMargin: CGFloat = 8
+
+    static let autohideDeleteButtonTimeout: TimeInterval = 4.0
 }
