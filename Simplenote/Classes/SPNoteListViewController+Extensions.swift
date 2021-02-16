@@ -943,6 +943,8 @@ extension SPNoteListViewController {
         if isSearchActive {
             commands.append(UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)))
 
+            // We add this shortcut only when search bar is first responder because when it's not we don't want to clear the search.
+            // The shortcut that actually focuses on the searchbar is located in `SPSidebarContainerViewController`. This is done to make shortcut work from multiple screens
             if searchBar.isFirstResponder {
                 commands.append(UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)))
             }
