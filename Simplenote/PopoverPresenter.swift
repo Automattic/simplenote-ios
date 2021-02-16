@@ -23,6 +23,11 @@ final class PopoverPresenter {
     ///
     var dismissOnInteractionWithPassthruView: Bool = false
 
+
+    /// Dismiss on container frame change
+    ///
+    var dismissOnContainerFrameChange: Bool = false
+
     /// Init
     ///
     init(containerViewController: UIViewController,
@@ -47,6 +52,13 @@ final class PopoverPresenter {
                 self?.dismiss()
             }
         }
+
+        popoverController?.onViewSizeChange = { [weak self] in
+            if self?.dismissOnContainerFrameChange == true {
+                self?.dismiss()
+            }
+        }
+
         popoverController?.attachWithAnimation(to: containerViewController, below: siblingView)
 
         relocate(around: anchorInWindow)

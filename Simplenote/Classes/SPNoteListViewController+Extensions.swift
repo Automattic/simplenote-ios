@@ -911,7 +911,7 @@ extension SPNoteListViewController {
 
         let presenter = PopoverPresenter(containerViewController: self, viewportProvider: viewportProvider)
         presenter.dismissOnInteractionWithPassthruView = true
-
+        presenter.dismissOnContainerFrameChange = true
         return presenter
     }
 
