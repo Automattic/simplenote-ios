@@ -115,13 +115,15 @@ extension SPNoteEditorViewController {
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // We need to reset transform to prevent tagView from loosing `safeArea`
-        // We restore trasform back in viewDidLayoutSubviews
+        // We restore transform back in viewDidLayoutSubviews
         tagView.transform = .identity
     }
 
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateTagListPosition()
+        DispatchQueue.main.async {
+            self.updateTagListPosition()
+        }
     }
 }
 
@@ -746,8 +748,12 @@ extension SPNoteEditorViewController {
         let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom + Metrics.additionalTagViewAndEditorCollisionDistance
         let maxContentY = noteEditorTextView.convert(CGPoint(x: 0, y: contentHeight), to: view).y
 
-        tagView.transform = .identity
-        tagView.transform = .init(translationX: 0, y: max(maxContentY - tagView.frame.origin.y, 0))
+        let tagViewY = tagView.frame.origin.y - tagView.transform.ty
+        let translationY = max(maxContentY - tagViewY, 0)
+
+        if tagView.transform.ty != translationY {
+            tagView.transform = .init(translationX: 0, y: translationY)
+        }
     }
 
     private var tagView: UIView {
