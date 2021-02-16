@@ -493,6 +493,13 @@ end
       # But fail completely after those 3 retries
       stop_after_first_error: true,
 
+      # Run one Simulator at a time. One of the screenshots requires adding
+      # text to a note but because we're using the same account across all the
+      # Simulators, editing the note on one will result in the changes
+      # appearing on the other making for unexpected and inconsistent
+      # screnshots
+      concurrent_simulators: false,
+
       # Allow the caller to invoke dark mode
       dark_mode: options[:mode].to_s.downcase == "dark"
     )
@@ -673,13 +680,13 @@ end
 
 def screenshot_devices()
   [
-    "iPhone Xs Max",
-    "iPhone 8 Plus",
+    "iPhone X",
+    "iPhone 8",
     "iPad Pro (12.9-inch) (2nd generation)",
     "iPad Pro (12.9-inch) (3rd generation)",
   ]
 end
 
 def simulator_version
-  '13.4'
+  '14.4'
 end
