@@ -66,10 +66,6 @@ extension SPNoteListViewController {
         sortBar.onSortModePress = { [weak self] in
             self?.sortModeWasPressed()
         }
-
-        sortBar.onSortOrderPress = { [weak self] in
-            self?.sortOrderWasPressed()
-        }
     }
 
     /// Sets up the Results Controller
@@ -902,32 +898,33 @@ extension SPNoteListViewController {
 //
 extension SPNoteListViewController {
 
-    @IBAction
-    func sortOrderWasPressed() {
-        feedbackGenerator.impactOccurred()
-        Options.shared.searchSortMode = notesListController.searchSortMode.inverse
-    }
-
-    @IBAction
-    func sortModeWasPressed() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
-            alertController.addDefaultActionWithTitle(mode.kind) { _ in
-                Options.shared.searchSortMode = mode
+    private var popoverPresenter: PopoverPresenter {
+        let viewportProvider: () -> CGRect = { [weak self] in
+            guard let self = self else {
+                return .zero
             }
+
+            let bounds = self.view.bounds.inset(by: self.view.safeAreaInsets)
+
+            return self.view.convert(bounds, to: nil)
         }
 
-        alertController.addCancelActionWithTitle(ActionTitle.cancel)
+        let presenter = PopoverPresenter(containerViewController: self, viewportProvider: viewportProvider)
+        presenter.dismissOnInteractionWithPassthruView = true
 
-        let popoverPresentationController = alertController.popoverPresentationController
-        popoverPresentationController?.sourceRect = sortBar.dividerView.frame
-        popoverPresentationController?.sourceView = sortBar.dividerView
-        popoverPresentationController?.permittedArrowDirections = .any
-        self.popoverController = popoverPresentationController
+        return presenter
+    }
 
-        feedbackGenerator.impactOccurred()
-        present(alertController, animated: true, completion: nil)
+    private func sortModeWasPressed() {
+        let presenter = popoverPresenter
+
+        let viewController = SortModePickerViewController(currentSelection: Options.shared.searchSortMode)
+        viewController.onSelectionCallback = { sortMode in
+            Options.shared.searchSortMode = sortMode
+            presenter.dismiss()
+        }
+
+        presenter.show(viewController, around: sortBar.convert(sortBar.bounds, to: nil))
     }
 }
 
