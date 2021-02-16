@@ -296,16 +296,16 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
-  cocoapods (~> 1.10)!
-  cocoapods-repo-update (~> 0.0.3)!
-  dotenv!
-  fastlane (~> 2)!
+  cocoapods (~> 1.10)
+  cocoapods-repo-update (~> 0.0.3)
+  dotenv
+  fastlane (~> 2)
   fastlane-plugin-appcenter (= 1.8.0)
   fastlane-plugin-sentry
   fastlane-plugin-wpmreleasetoolkit!
-  octokit (~> 4.0)!
+  octokit (~> 4.0)
   rmagick (~> 3.2.0)
-  xcpretty-travis-formatter!
+  xcpretty-travis-formatter
 
 BUNDLED WITH
-   2.2.4
+   2.2.10
