@@ -121,6 +121,8 @@ extension SPNoteEditorViewController {
 
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // Adding async here to break a strange layout loop
+        // It happens when add tag field is first responder and device is rotated
         DispatchQueue.main.async {
             self.updateTagListPosition()
         }
