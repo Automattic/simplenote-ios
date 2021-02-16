@@ -941,10 +941,13 @@ extension SPNoteListViewController {
     open override var keyCommands: [UIKeyCommand]? {
         var commands = tableCommands
         if isSearchActive {
-            commands.append(contentsOf: [
-                UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)),
-                UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching))
-            ])
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)))
+
+            // We add this shortcut only when search bar is first responder because when it's not we don't want to clear the search.
+            // The shortcut that actually focuses on the searchbar is located in `SPSidebarContainerViewController`. This is done to make shortcut work from multiple screens
+            if searchBar.isFirstResponder {
+                commands.append(UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStopSearching)))
+            }
         }
         return commands
     }
@@ -959,12 +962,17 @@ extension SPNoteListViewController {
 //
 private extension SPNoteListViewController {
     var tableCommands: [UIKeyCommand] {
-        [
+        var commands = [
             UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
             UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
-            UIKeyCommand(input: UIKeyCommand.inputReturn, modifierFlags: [], action: #selector(keyboardSelect)),
-            UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardSelect)),
+            UIKeyCommand(input: UIKeyCommand.inputReturn, modifierFlags: [], action: #selector(keyboardSelect))
         ]
+
+        if isFirstResponder {
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardSelect)))
+        }
+
+        return commands
     }
 
     @objc
