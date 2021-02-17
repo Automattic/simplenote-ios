@@ -18,6 +18,7 @@ class AllNotes {
     }
 
     class func addNoteTap() {
+        print(">>> Adding new note...")
         app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NewNote].tap()
     }
 

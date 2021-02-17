@@ -23,12 +23,12 @@ func logOut() -> Bool {
 }
 
 public func trackTest(_ function: String = #function) {
-    print(">> Test: \(function)")
+    print("> Test: \(function)")
     stepIndex = 1
 }
 
 func logStep(){
-    print(">>>> Step " + String(stepIndex))
+    print(">> Step " + String(stepIndex))
     stepIndex += 1
 }
 

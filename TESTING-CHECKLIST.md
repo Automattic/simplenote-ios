@@ -1,5 +1,5 @@
 ## Testing
-Note:(A) means Automated Test. If automated UI tests were executed for the app, there's no need to run tests marked with (A) manually.
+Note: (A) means Automated Test. If automated UI tests were executed for the app, there's no need to run tests marked with (A) manually.
 
 ### Login
 
@@ -32,8 +32,8 @@ Note:(A) means Automated Test. If automated UI tests were executed for the app, 
 - [ ] "Undo" undoes the last edit (A)
 - [ ] Typing `- [x]` creates a checked checklist item (A)
 - [ ] Typing `- [ ]` created an unchecked checklist item (A)
-- [ ] Typing `-`, `+`, or `*` creates a list
-- [ ] All list bullet types render to markdown lists
+- [ ] Typing `-`, `+`, or `*` creates a list (A)
+- [ ] All list bullet types render to markdown lists (A)
 - [ ] Added URL is linkified (A)
 - [ ] Long-tapping on link opens the link in new window (regular tap in preview) (A)
 

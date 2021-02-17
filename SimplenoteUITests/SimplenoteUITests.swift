@@ -116,12 +116,13 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: complexLinkRawText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: complexLinkRawText)
 
         // Step 3
         NoteEditor.swipeToPreview()
         PreviewAssert.previewShown()
-        PreviewAssert.wholeTextShown(text: complexLinkPreviewText)
+        PreviewAssert.staticTextWithExactValueShownOnce(value: complexLinkPreviewText)
+        //PreviewAssert.wholeTextShown(text: complexLinkPreviewText)
     }
 
     func testCanFlipToEditMode() throws {
@@ -133,18 +134,19 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: complexLinkRawText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: complexLinkRawText)
 
         // Step 3
         NoteEditor.swipeToPreview()
         PreviewAssert.previewShown()
-        PreviewAssert.wholeTextShown(text: complexLinkPreviewText)
+        PreviewAssert.staticTextWithExactValueShownOnce(value: complexLinkPreviewText)
+        //PreviewAssert.wholeTextShown(text: complexLinkPreviewText)
 
         // Step 4
         Preview.leavePreviewViaBackButton()
         NoteEditor.setFocus()
         NoteEditorAssert.editorShown()
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: complexLinkRawText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: complexLinkRawText)
     }
 
     func testUsingInsertChecklistInsertsChecklist() throws {
@@ -156,42 +158,40 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackTest()
 
         logStep()
-            AllNotes.addNoteTap()
-            NoteEditorAssert.editorShown()
+        AllNotes.addNoteTap()
+        NoteEditorAssert.editorShown()
 
         logStep()
-            NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
-            NoteEditor.leaveEditor()
-            AllNotesAssert.noteExists(noteName: noteNameInitial)
+        NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
+        NoteEditor.leaveEditor()
+        AllNotesAssert.noteExists(noteName: noteNameInitial)
 
         logStep()
-            AllNotes.openNote(noteName: noteNameInitial)
-            NoteEditor.markdownEnable()
-            NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextInitial)
-            NoteEditorAssert.checkboxForTextNotShown(text: noteTextInitial)
-        
+        AllNotes.openNote(noteName: noteNameInitial)
+        NoteEditor.markdownEnable()
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextInitial)
+
         logStep()
-            NoteEditor.swipeToPreview()
-            PreviewAssert.substringShown(text: noteTextInitial)
-            PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 0)
-        
+        NoteEditor.swipeToPreview()
+        PreviewAssert.staticTextWithExactValueShownOnce(value: noteTextInitial)
+        PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 0)
+
         logStep()
-            Preview.leavePreviewViaBackButton()
-            NoteEditor.setFocus()
-            NoteEditor.insertChecklist()
-            NoteEditor.leaveEditor()
-            AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
-            AllNotesAssert.noteAbsent(noteName: noteNameInitial)
-        
+        Preview.leavePreviewViaBackButton()
+        NoteEditor.setFocus()
+        NoteEditor.insertChecklist()
+        NoteEditor.leaveEditor()
+        AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
+        AllNotesAssert.noteAbsent(noteName: noteNameInitial)
+
         logStep()
-            AllNotes.openNote(noteName: noteNameWithCheckbox)
-            NoteEditorAssert.textViewWithExactContentShownOnce(text: noteTextWithCheckbox)
-            NoteEditorAssert.checkboxForTextShownOnce(text: noteTextWithCheckbox)
-        
+        AllNotes.openNote(noteName: noteNameWithCheckbox)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextWithCheckbox)
+
         logStep()
-            NoteEditor.swipeToPreview()
-            PreviewAssert.substringShown(text: noteNameInitial)
-            PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
+        NoteEditor.swipeToPreview()
+        PreviewAssert.staticTextWithExactValueShownOnce(value: noteNameInitial)
+        PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
     }
     
     func testUndoUndoesTheLastEdit() throws {
@@ -203,11 +203,11 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 2
         NoteEditor.clearAndEnterText(enteredValue: editorText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: editorText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: editorText)
 
         // Step 3
         NoteEditor.undo()
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: "")
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: "")
     }
 
     func testAddedURLIsLinkified() throws {
@@ -219,7 +219,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
         // Step 3
         NoteEditor.leaveEditor()
@@ -239,7 +239,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
         // Step 3
         NoteEditor.leaveEditor()
@@ -266,7 +266,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         // Step 2
         NoteEditor.markdownEnable()
         NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: usualLinkText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
         // Step 3
         NoteEditor.swipeToPreview()
@@ -297,12 +297,13 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 4
         AllNotes.openNote(noteName: completeText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: checklistText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: checklistText)
         NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
         
         // Step 5
         NoteEditor.swipeToPreview()
-        PreviewAssert.substringShown(text: checklistText)
+        //PreviewAssert.substringShown(text: checklistText)
+        PreviewAssert.staticTextWithExactLabelShownOnce(label: checklistText)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 1, expectedEmptyBoxesNumber: 0)
     }
 
@@ -324,13 +325,45 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 4
         AllNotes.openNote(noteName: completeText)
-        NoteEditorAssert.textViewWithExactContentShownOnce(text: checklistText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: checklistText)
         NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
 
         // Step 5
         NoteEditor.swipeToPreview()
-        PreviewAssert.substringShown(text: checklistText)
+        //PreviewAssert.substringShown(text: checklistText)
+        PreviewAssert.staticTextWithExactLabelShownOnce(label: checklistText)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
+    }
+    
+    func testBulletedLists() throws {
+        let noteTitle = "Bulleted Lists"
+        let noteContent = "\n\nMinuses:\n\n- Minus1\nMinus2\nMinus3" +
+            "\n\nPluses:\n\n+ Plus1\nPlus2\nPlus3" +
+            "\n\nAsterisks:\n\n* Asterisk1\nAsterisk2\nAsterisk3"
+        
+        trackTest()
+
+        logStep()
+        AllNotes.addNoteTap()
+        NoteEditorAssert.editorShown()
+
+        logStep()
+        NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
+        NoteEditor.leaveEditor()
+        AllNotesAssert.noteExists(noteName: noteTitle)
+
+        logStep()
+        AllNotes.openNote(noteName: noteTitle)
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["- Minus1", "- Minus2", "- Minus3"])
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["+ Plus1", "+ Plus2", "+ Plus3"])
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
+        
+        logStep()
+        NoteEditor.markdownEnable()
+        NoteEditor.swipeToPreview()
+        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Minus1", "• Minus2", "• Minus3"])
+        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Plus1", "• Plus2", "• Plus3"])
+        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
     }
 }
 

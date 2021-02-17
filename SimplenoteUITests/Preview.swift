@@ -6,6 +6,10 @@ class Preview {
         return app.webViews.descendants(matching: .staticText).element.value as! String
     }
 
+    class func getAllStaticTexts() -> XCUIElementQuery {
+        return app.webViews.descendants(matching: .staticText)
+    }
+    
     class func leavePreviewViaBackButton() {
         app.navigationBars[uidNavBar_NoteEditor_Preview].buttons[uidButton_Back].tap()
     }
@@ -16,12 +20,28 @@ class Preview {
         link.tap()
         sleep(3)
     }
+    
+    class func getStaticTextsWithExactValueCount(value: String) -> Int {
+        let predicate = NSPredicate(format: "value == '" + value + "'")
+        let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
+        let matchesCount = matchingStaticTexts.count
+        print(">>> Found " + String(matchesCount) + " StaticTexts(s) with '" + value + "' value")
+        return matchesCount
+    }
+    
+    class func getStaticTextsWithExactLabelCount(label: String) -> Int {
+        let predicate = NSPredicate(format: "label == '" + label + "'")
+        let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
+        let matchesCount = matchingStaticTexts.count
+        print(">>> Found " + String(matchesCount) + " StaticTexts(s) with '" + label + "' label")
+        return matchesCount
+    }
 }
 
 class PreviewAssert {
 
     class func linkShown(linkText: String) {
-        let linkPredicate = NSPredicate(format: "label MATCHES '" + linkText + "'")
+        let linkPredicate = NSPredicate(format: "label == '" + linkText + "'")
         let link = app.links.element(matching: linkPredicate)
 
         XCTAssertTrue(link.exists, "\"" + linkText + linkNotFoundInPreview)
@@ -38,14 +58,23 @@ class PreviewAssert {
     class func wholeTextShown(text: String) {
         XCTAssertEqual(text, Preview.getText(), "Preview text" + notExpectedEnding);
     }
-
-    class func substringShown(text: String) {
-        let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
-        let staticText = app.staticTexts.element(matching: textPredicate)
-
-        XCTAssertTrue(staticText.exists, "\"" + text + textNotFoundInPreview)
+    
+    class func staticTextWithExactLabelShownOnce(label: String) {
+        let matchesCount = Preview.getStaticTextsWithExactLabelCount(label: label)
+        XCTAssertEqual(1, matchesCount)
     }
-
+    
+    class func staticTextWithExactValueShownOnce(value: String) {
+        let matchesCount = Preview.getStaticTextsWithExactValueCount(value: value)
+        XCTAssertEqual(1, matchesCount)
+    }
+    
+    class func staticTextWithExactValuesShownOnce(valuesArray: Array<String>) {
+        for value in valuesArray {
+            PreviewAssert.staticTextWithExactValueShownOnce(value: value)
+        }
+    }
+    
     class func boxesTotalNumber(expectedSwitchesNumber: Int) {
         XCTAssertEqual(expectedSwitchesNumber, app.switches.count, numberOfBoxesInPreviewNotExpected)
     }
