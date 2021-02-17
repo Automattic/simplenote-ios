@@ -1,3 +1,0 @@
-- Penambahan layar verifikasi akun
-- Pembaruan ketinggian baris minimum saat daftar catatan ditampilkan dalam mode ringkas
-- Pembaruan pengalaman penyuntingan tag

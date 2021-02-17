@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:59+0000 */
+/* Translation-Revision-Date: 2021-02-05 09:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "密码尝试失败 %i 次";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Reference";
+
+/* Count of interlink references to a note */
+"%i References" = "%i References";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 至少需要有 8 个字符";
@@ -86,7 +92,7 @@
 "Are you a developer? We’re hiring." = "您是开发人员吗？ 我们正在招贤纳士。";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "是否确定要删除“%1$@”？";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "是否确定要清空回收站？此操作无法撤消。";
@@ -108,16 +114,16 @@
 "Cancel" = "取消";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "无法确认帐户";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "无法发送验证电子邮件";
 
 /* Work at Automattic */
 "Careers" = "招贤纳士";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "更改电子邮件地址";
 
 /* Number of characters in the note */
 "Characters" = "字符";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "关闭键盘";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Document";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "启用 Markdown 格式";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "End Editing";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "已排入队列数";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "我喜欢";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "信息";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Insert Checklist";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "插入新的检查清单项";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Last Modified %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "上一次查看时间";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "移动到回收站";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "新建笔记";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "新建笔记...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Next Match";
 
 /* Cancels Empty Trash Action */
 "No" = "否";
@@ -441,10 +462,13 @@
 "Please activate your WordPress.com account via email and try again." = "请通过电子邮件激活您的 WordPress.com 帐户，然后重试。";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "请检查您的网络设置，然后重试。";
 
 /* Title of Markdown preview screen */
 "Preview" = "预览";
+
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Previous Match";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "面向加州用户的隐私声明";
@@ -483,7 +507,7 @@
 "Rename" = "重命名";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "重发电子邮件";
 
 /* Reset Action */
 "Reset" = "重置";
@@ -498,9 +522,10 @@
 "Restore Note" = "恢复笔记";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "检查您的帐户";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "搜索";
@@ -602,6 +627,9 @@
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
 
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Toggle Markdown";
+
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "切换标签侧边栏";
 
@@ -639,7 +667,7 @@
 "Username" = "用户名";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "验证您的电子邮件";
 
 /* App version number */
 "Version %@" = "版本 %@";
@@ -654,7 +682,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "我们已向 %1$@ 发送了一封验证电子邮件。 请检查您的收件箱并按照说明执行操作。";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "您觉得 Simplenote 怎么样？";
@@ -669,7 +697,7 @@
 "Yesterday" = "昨天";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "您已使用电子邮件 %1$@ 注册 Simplenote。\n\n如果您无法再访问此电子邮件地址，那么帐户安全性的改进可能会导致您无法找回帐户。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "您输入的电子邮件地址无效。";
