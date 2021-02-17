@@ -1,3 +1,0 @@
-- Aggiunta schermata di verifica dell'account
-- Aggiornata altezza minima delle righe quando l'elenco delle note è in modalità ridotta
-- Aggiornata l'esperienza di editing dei tag
