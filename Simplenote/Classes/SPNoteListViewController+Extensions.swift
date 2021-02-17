@@ -865,16 +865,22 @@ extension SPNoteListViewController {
         }
 
         keyboardHeight = keyboardFrame.intersection(view.frame).height
-        refreshTableViewBottomInsets()
+        refreshTableViewBottomInsets(animated: true)
     }
 
-    func refreshTableViewBottomInsets() {
+    func refreshTableViewBottomInsets(animated: Bool = false) {
         let bottomInsets = bottomInsetsForTableView
 
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+        let updates = {
             self.tableView.contentInset.bottom = bottomInsets
             self.tableView.scrollIndicatorInsets.bottom = bottomInsets
             self.view.layoutIfNeeded()
+        }
+
+        if animated {
+            UIView.animate(withDuration: UIKitConstants.animationShortDuration, animations: updates)
+        } else {
+            updates()
         }
     }
 
