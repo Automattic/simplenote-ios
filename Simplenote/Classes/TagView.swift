@@ -128,7 +128,10 @@ class TagView: UIView {
             return
         }
 
-        scrollView.scrollRectToVisible(addTagField.frame.insetBy(dx: -Constants.wrappingStackViewMargins.right, dy: 0),
+        layoutIfNeeded()
+
+        let addTagFieldFrame = addTagField.convert(addTagField.bounds, to: scrollView)
+        scrollView.scrollRectToVisible(addTagFieldFrame.insetBy(dx: -Constants.wrappingStackViewMargins.right, dy: 0),
                                        animated: animated)
     }
 }
