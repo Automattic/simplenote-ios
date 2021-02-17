@@ -75,7 +75,7 @@ class HuggableTableView: UITableView {
         let rect = rectForRow(at: IndexPath(row: lastRow, section: 0))
 
         let fractionalPart = min(numberOfRows, CGFloat(totalRows)).truncatingRemainder(dividingBy: 1)
-        if fractionalPart > 0.01 {
+        if fractionalPart > .leastNormalMagnitude {
             return rect.minY + rect.height * fractionalPart
         }
 

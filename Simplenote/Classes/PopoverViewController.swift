@@ -104,15 +104,7 @@ private extension PopoverViewController {
     }
 
     func setupContainerViewController() {
-        if viewController.parent != nil && viewController.parent != self {
-            viewController.willMove(toParent: nil)
-            viewController.view.removeFromSuperview()
-            viewController.removeFromParent()
-        }
-
-        addChild(viewController)
-        containerView.addFillingSubview(viewController.view)
-        viewController.didMove(toParent: self)
+        viewController.attach(to: self, attachmentView: .into(containerView))
     }
 }
 
