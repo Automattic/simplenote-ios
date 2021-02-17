@@ -336,6 +336,7 @@
     NSTimeInterval const delay = 0.2;
     self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:delay repeats:NO block:^(NSTimer * _Nonnull timer) {
         [self performSearchWithKeyword:keyword];
+        [self updateSortBarVisibility];
     }];    
 }
 
@@ -347,7 +348,7 @@
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
     [self reloadTableData];
-    [self displaySortBar];
+    [self updateSortBarVisibility];
     [self refreshTitle];
 }
 
@@ -366,7 +367,7 @@
     [self.notesListController endSearch];
     [self update];
 
-    [self dismissSortBar];
+    [self updateSortBarVisibility];
 }
 
 

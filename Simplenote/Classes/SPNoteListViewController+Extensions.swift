@@ -847,6 +847,12 @@ extension SPNoteListViewController {
         // We'll need to refresh the bottom insets. The keyboard may have been dismissed already!
         sortBar.animateVisibility(isHidden: true)
         refreshTableViewBottomInsets()
+    func updateSortBarVisibility() {
+        let wasHidden = sortBar.isHidden
+        sortBar.animateVisibility(isHidden: searchQuery == nil)
+        if wasHidden != sortBar.isHidden {
+            refreshTableViewBottomInsets()
+        }
     }
 }
 
@@ -885,7 +891,7 @@ extension SPNoteListViewController {
     var bottomInsetsForTableView: CGFloat {
         // Keyboard offScreen + Search Active: Seriously, consider the Search Bar
         guard keyboardHeight > .zero else {
-            return isSearchActive ? sortBar.frame.height : .zero
+            return sortBar.isHidden ? .zero : sortBar.frame.height
         }
 
         // Keyboard onScreen: the SortBar falls below the keyboard
