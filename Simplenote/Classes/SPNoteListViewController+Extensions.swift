@@ -912,6 +912,7 @@ extension SPNoteListViewController {
         let presenter = PopoverPresenter(containerViewController: self, viewportProvider: viewportProvider)
         presenter.dismissOnInteractionWithPassthruView = true
         presenter.dismissOnContainerFrameChange = true
+        presenter.centerContentRelativeToAnchor = view.frame.width > Constants.centeredSortPopoverThreshold
         return presenter
     }
 
@@ -1015,6 +1016,8 @@ private enum Constants {
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
 
     static let searchEmptyStateTopMargin = CGFloat(128)
+
+    static let centeredSortPopoverThreshold = CGFloat(500)
 }
 
 private enum Localization {
