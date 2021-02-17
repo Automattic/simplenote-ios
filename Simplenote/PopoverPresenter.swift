@@ -47,7 +47,10 @@ final class PopoverPresenter {
                 self?.dismiss()
             }
         }
-        popoverController?.attachWithAnimation(to: containerViewController, below: siblingView)
+
+        popoverController?.attach(to: containerViewController,
+                                  attachmentView: siblingView.map({ .below($0) }),
+                                  animated: true)
 
         relocate(around: anchorInWindow)
     }
@@ -91,7 +94,7 @@ final class PopoverPresenter {
     }
 
     func dismiss() {
-        popoverController?.detachWithAnimation()
+        popoverController?.detach(animated: true)
         popoverController = nil
     }
 }
