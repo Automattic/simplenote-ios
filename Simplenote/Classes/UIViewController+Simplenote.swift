@@ -29,10 +29,14 @@ extension UIViewController {
 
     /// Attaches a children ViewController (if needed) below the specified sibling view
     ///
-    func attachWithAnimation(to parent: UIViewController, below siblingView: UIView) {
-        parent.view.insertSubview(view, belowSubview: siblingView)
-        parent.view.pinSubviewToAllEdges(view)
+    func attachWithAnimation(to parent: UIViewController, below siblingView: UIView? = nil) {
         parent.addChild(self)
+        if let siblingView = siblingView {
+            parent.view.insertSubview(view, belowSubview: siblingView)
+        } else {
+            parent.view.addSubview(view)
+        }
+        parent.view.pinSubviewToAllEdges(view)
         view.fadeIn()
         didMove(toParent: parent)
     }

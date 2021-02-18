@@ -86,9 +86,19 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureInterlinksProcessor() {
-        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
+        let viewportProvider = { [weak self] () -> CGRect in
+            self?.noteEditorTextView.editingRectInWindow() ?? .zero
+        }
+
+        let popoverPresenter = PopoverPresenter(containerViewController: self,
+                                                viewportProvider: viewportProvider,
+                                                siblingView: navigationBarBackground)
+
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext,
+                                                popoverPresenter: popoverPresenter,
+                                                parentTextView: noteEditorTextView,
+                                                excludedEntityID: note.objectID)
         interlinkProcessor.delegate = self
-        interlinkProcessor.contextProvider = self
     }
 
     /// Sets up the Keyboard
@@ -684,32 +694,9 @@ extension SPNoteEditorViewController {
 }
 
 
-// MARK: - InterlinkProcessorPresentationContextProvider
-//
-extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
-
-    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView {
-        navigationBarBackground
-    }
-
-    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
-        noteEditorTextView
-    }
-
-    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController {
-        self
-    }
-}
-
-
 // MARK: - InterlinkProcessorDelegate
 //
 extension SPNoteEditorViewController: InterlinkProcessorDelegate {
-
-    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
-        note.objectID
-    }
-
     func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
         noteEditorTextView.insertText(text: text, in: range)
         processor.dismissInterlinkLookup()
