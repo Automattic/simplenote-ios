@@ -1,6 +1,6 @@
 import XCTest
 
-var stepIndex = 0
+private var stepIndex = 0
 
 func attemptLogOut() -> Bool {
     let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
