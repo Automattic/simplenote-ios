@@ -13,33 +13,27 @@ CGFloat const TagEntryFieldPadding = 40;
 
 @implementation SPTagEntryField
 
-+ (SPTagEntryField *)tagEntryField
-{
-    SPTagEntryField *newTagText = [SPTagEntryField new];
-    newTagText.backgroundColor = [UIColor clearColor];
-    newTagText.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    newTagText.textColor = [UIColor simplenoteTagViewTextColor];
-    newTagText.placeholdTextColor = [UIColor simplenoteTagViewPlaceholderColor];
-    newTagText.textAlignment = NSTextAlignmentLeft;
-    newTagText.placeholder = NSLocalizedString(@"Add a tag...", nil);
-    newTagText.returnKeyType = UIReturnKeyNext;
-    newTagText.autocorrectionType = UITextAutocorrectionTypeNo;
-    newTagText.autocapitalizationType = UITextAutocapitalizationTypeNone;
-
-    [newTagText setPlaceholder:NSLocalizedString(@"Add a tag...", @"Placeholder test in textfield when adding a new tag to a note")];
-    
-    newTagText.accessibilityLabel = NSLocalizedString(@"Add tag", @"Label on button to add a new tag to a note");
-    newTagText.accessibilityHint = NSLocalizedString(@"tag-add-accessibility-hint", @"Accessibility hint for adding a tag to a note");
-    
-    [newTagText sizeField];
-
-    return newTagText;
-}
-
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        self.textColor = [UIColor simplenoteTagViewTextColor];
+        self.placeholdTextColor = [UIColor simplenoteTagViewPlaceholderColor];
+        self.textAlignment = NSTextAlignmentLeft;
+        self.placeholder = NSLocalizedString(@"Add a tag...", nil);
+        self.returnKeyType = UIReturnKeyNext;
+        self.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
+        [self setPlaceholder:NSLocalizedString(@"Add a tag...", @"Placeholder test in textfield when adding a new tag to a note")];
+
+        self.accessibilityLabel = NSLocalizedString(@"Add tag", @"Label on button to add a new tag to a note");
+        self.accessibilityHint = NSLocalizedString(@"tag-add-accessibility-hint", @"Accessibility hint for adding a tag to a note");
+
+        [self sizeField];
+
         [self addTarget:self action:@selector(onTextChanged:) forControlEvents:UIControlEventEditingChanged];
     }
 

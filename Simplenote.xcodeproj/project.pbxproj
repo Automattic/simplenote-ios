@@ -61,10 +61,8 @@
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
 		46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E22A17CF17A2E1CE00383575 /* NSManagedObjectContext+CoreDataExtensions.m */; };
-		46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */ = {isa = PBXBuildFile; fileRef = E277B5FA179F714C0095CD24 /* SPTagStub.m */; };
 		46A3C96C17DFA81A002865AE /* SPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */; };
 		46A3C96E17DFA81A002865AE /* SPPopoverContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */; };
-		46A3C97717DFA81A002865AE /* SPTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F0C33E1797077300CF9413 /* SPTagView.m */; };
 		46A3C97817DFA81A002865AE /* PersonTag.m in Sources */ = {isa = PBXBuildFile; fileRef = E25C39D517A42C4900B2591A /* PersonTag.m */; };
 		46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = E219EAF617C5322400179B40 /* SPInteractiveTextStorage.m */; };
 		46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E28A760E178CBE6D008659DE /* SPNoteEditorViewController.m */; };
@@ -144,6 +142,8 @@
 		A6A648BB25AC85D40074A094 /* AccountVerificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A648BA25AC85D40074A094 /* AccountVerificationController.swift */; };
 		A6A8968E25D5779D00A7B390 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
 		A6ABB689256D95EB00E2A076 /* PinLockProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6ABB688256D95EB00E2A076 /* PinLockProgressView.swift */; };
+		A6AF712425D408A0000B76F9 /* TagViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AF712325D408A0000B76F9 /* TagViewCell.swift */; };
+		A6AF712C25D4163B000B76F9 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AF712B25D4163B000B76F9 /* RoundedView.swift */; };
 		A6BBDA3E25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */; };
 		A6BBDA46255034E6005C8343 /* SPEditorTextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */; };
 		A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */; };
@@ -193,7 +193,7 @@
 		A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */; };
 		A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */; };
 		A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */; };
-		A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */; };
+		A6F487FD25A880000050CFA8 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F487FC25A880000050CFA8 /* TagView.swift */; };
 		A6F4881325A884CE0050CFA8 /* UITextInput+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */; };
 		A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */; };
 		A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */; };
@@ -412,8 +412,6 @@
 		E215C79E180B228800AD36B5 /* SPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C79C180B228800AD36B5 /* SPTextField.m */; };
 		E280453C180DAE0200670073 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E280453E180DAE0200670073 /* Localizable.strings */; };
 		E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2922AC1180CA06B003AF914 /* SPSidebarContainerViewController.m */; };
-		E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */; };
-		E2B0863618070045001ED52D /* SPTagPill.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B0863418070045001ED52D /* SPTagPill.m */; };
 		F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A2FD01DE8B1FB002DEB0E /* CSSearchable+Helpers.swift */; };
 		F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F920265A2294661C0061B1DE /* BuildConfiguration.swift */; };
 		F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E197D32283D05C0092B3E1 /* CrashLogging.swift */; };
@@ -615,6 +613,8 @@
 		A6A648BA25AC85D40074A094 /* AccountVerificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationController.swift; sourceTree = "<group>"; };
 		A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+Simplenote.swift"; path = "Classes/FileManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6ABB688256D95EB00E2A076 /* PinLockProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockProgressView.swift; sourceTree = "<group>"; };
+		A6AF712325D408A0000B76F9 /* TagViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagViewCell.swift; path = Classes/TagViewCell.swift; sourceTree = "<group>"; };
+		A6AF712B25D4163B000B76F9 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedView.swift; path = Classes/RoundedView.swift; sourceTree = "<group>"; };
 		A6BBDA3D25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringToMarkdownConverter.swift; sourceTree = "<group>"; };
 		A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPEditorTextView+Simplenote.swift"; sourceTree = "<group>"; };
 		A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedCrossButton.swift; path = Classes/RoundedCrossButton.swift; sourceTree = "<group>"; };
@@ -664,7 +664,7 @@
 		A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Simplenote.swift"; path = "Classes/UIApplication+Simplenote.swift"; sourceTree = "<group>"; };
 		A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BiometricAuthentication.swift; path = Classes/BiometricAuthentication.swift; sourceTree = "<group>"; };
 		A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagTextFieldInputValidator.swift; path = Classes/TagTextFieldInputValidator.swift; sourceTree = "<group>"; };
-		A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SPTagView+Extensions.swift"; path = "Classes/SPTagView+Extensions.swift"; sourceTree = "<group>"; };
+		A6F487FC25A880000050CFA8 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagView.swift; path = Classes/TagView.swift; sourceTree = "<group>"; };
 		A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextInput+Simplenote.swift"; path = "Classes/UITextInput+Simplenote.swift"; sourceTree = "<group>"; };
 		A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagListTextField.swift; path = Classes/TagListTextField.swift; sourceTree = "<group>"; };
 		A6F4882225A8889E0050CFA8 /* UITextField+Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Tag.swift"; path = "Classes/UITextField+Tag.swift"; sourceTree = "<group>"; };
@@ -939,8 +939,6 @@
 		E25C39DF17A4772900B2591A /* SPEntryListAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPEntryListAutoCompleteCell.m; path = Classes/SPEntryListAutoCompleteCell.m; sourceTree = "<group>"; };
 		E26AC90E179DA25F00C4BFB6 /* SPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPSettingsViewController.h; path = Classes/SPSettingsViewController.h; sourceTree = "<group>"; };
 		E26AC90F179DA25F00C4BFB6 /* SPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPSettingsViewController.m; path = Classes/SPSettingsViewController.m; sourceTree = "<group>"; };
-		E277B5F9179F714C0095CD24 /* SPTagStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagStub.h; path = Classes/SPTagStub.h; sourceTree = "<group>"; };
-		E277B5FA179F714C0095CD24 /* SPTagStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagStub.m; path = Classes/SPTagStub.m; sourceTree = "<group>"; };
 		E277B5FF17A063020095CD24 /* SPTagEntryField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagEntryField.h; path = Classes/SPTagEntryField.h; sourceTree = "<group>"; };
 		E277B60017A063020095CD24 /* SPTagEntryField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagEntryField.m; path = Classes/SPTagEntryField.m; sourceTree = "<group>"; };
 		E280453D180DAE0200670073 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -964,18 +962,12 @@
 		E29ADD7A1784905800E55842 /* SPNoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SPNoteListViewController.m; path = Classes/SPNoteListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E29ADD821784B12400E55842 /* SPTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTransitionController.h; path = Classes/SPTransitionController.h; sourceTree = "<group>"; };
 		E29ADD831784B12400E55842 /* SPTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTransitionController.m; path = Classes/SPTransitionController.m; sourceTree = "<group>"; };
-		E2B0862C1806FFB3001ED52D /* SPTagCompletionPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagCompletionPill.h; path = Classes/SPTagCompletionPill.h; sourceTree = "<group>"; };
-		E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagCompletionPill.m; path = Classes/SPTagCompletionPill.m; sourceTree = "<group>"; };
-		E2B0863318070045001ED52D /* SPTagPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagPill.h; path = Classes/SPTagPill.h; sourceTree = "<group>"; };
-		E2B0863418070045001ED52D /* SPTagPill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagPill.m; path = Classes/SPTagPill.m; sourceTree = "<group>"; };
 		E2C5C73E17CAD2FD003B9795 /* NSString+Bullets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Bullets.h"; path = "Classes/NSString+Bullets.h"; sourceTree = "<group>"; };
 		E2C5C73F17CAD2FD003B9795 /* NSString+Bullets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Bullets.m"; path = "Classes/NSString+Bullets.m"; sourceTree = "<group>"; };
 		E2CBF76817D4FC5C005CB405 /* NSString+Attributed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Attributed.h"; path = "Classes/NSString+Attributed.h"; sourceTree = "<group>"; };
 		E2CBF76917D4FC5C005CB405 /* NSString+Attributed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Attributed.m"; path = "Classes/NSString+Attributed.m"; sourceTree = "<group>"; };
 		E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPEntryListViewController.h; path = Classes/SPEntryListViewController.h; sourceTree = "<group>"; };
 		E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPEntryListViewController.m; path = Classes/SPEntryListViewController.m; sourceTree = "<group>"; };
-		E2F0C33D1797077300CF9413 /* SPTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTagView.h; path = Classes/SPTagView.h; sourceTree = "<group>"; };
-		E2F0C33E1797077300CF9413 /* SPTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTagView.m; path = Classes/SPTagView.m; sourceTree = "<group>"; };
 		E2F149421799F4BD00DC9690 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		E2F149471799F5A500DC9690 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E2F1494A1799F5BC00DC9690 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1118,8 +1110,6 @@
 				E25C39D517A42C4900B2591A /* PersonTag.m */,
 				E283709817D7B46300AB562D /* SPAcitivitySafari.h */,
 				E283709917D7B46300AB562D /* SPAcitivitySafari.m */,
-				E277B5F9179F714C0095CD24 /* SPTagStub.h */,
-				E277B5FA179F714C0095CD24 /* SPTagStub.m */,
 				467D9C631788A54900785EF3 /* Tag.h */,
 				467D9C641788A54900785EF3 /* Tag.m */,
 				A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */,
@@ -1893,6 +1883,7 @@
 				A681C73B2541AC8D00F369C2 /* HuggableTableView.swift */,
 				A604DB21255A993E00B802CA /* SearchMapView.swift */,
 				A66E41E0256D0F44000C6FCB /* RoundedButton.swift */,
+				A6AF712B25D4163B000B76F9 /* RoundedView.swift */,
 				A6ABB688256D95EB00E2A076 /* PinLockProgressView.swift */,
 				A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */,
 				A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */,
@@ -1905,13 +1896,8 @@
 		E2922AB3180C7322003AF914 /* Tag View */ = {
 			isa = PBXGroup;
 			children = (
-				E2B0862C1806FFB3001ED52D /* SPTagCompletionPill.h */,
-				E2B0862D1806FFB3001ED52D /* SPTagCompletionPill.m */,
-				E2B0863318070045001ED52D /* SPTagPill.h */,
-				E2B0863418070045001ED52D /* SPTagPill.m */,
-				E2F0C33D1797077300CF9413 /* SPTagView.h */,
-				E2F0C33E1797077300CF9413 /* SPTagView.m */,
-				A6F487FC25A880000050CFA8 /* SPTagView+Extensions.swift */,
+				A6F487FC25A880000050CFA8 /* TagView.swift */,
+				A6AF712325D408A0000B76F9 /* TagViewCell.swift */,
 				E277B5FF17A063020095CD24 /* SPTagEntryField.h */,
 				E277B60017A063020095CD24 /* SPTagEntryField.m */,
 				A6F4881A25A8881B0050CFA8 /* TagListTextField.swift */,
@@ -2591,7 +2577,6 @@
 				A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
-				46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */,
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
@@ -2631,7 +2616,6 @@
 				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
-				46A3C97717DFA81A002865AE /* SPTagView.m in Sources */,
 				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
@@ -2657,7 +2641,6 @@
 				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
 				A66E41E1256D0F44000C6FCB /* RoundedButton.swift in Sources */,
-				E2B0862F1806FFB3001ED52D /* SPTagCompletionPill.m in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
 				B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */,
 				A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */,
@@ -2673,7 +2656,9 @@
 				46A3C97E17DFA81A002865AE /* SPNoteEditorViewController.m in Sources */,
 				E2922AC3180CA06B003AF914 /* SPSidebarContainerViewController.m in Sources */,
 				46A3C98017DFA81A002865AE /* UIImage+Colorization.m in Sources */,
+				A6AF712425D408A0000B76F9 /* TagViewCell.swift in Sources */,
 				B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */,
+				A6AF712C25D4163B000B76F9 /* RoundedView.swift in Sources */,
 				A69F861C25408085005140F2 /* NoteInformationViewController.swift in Sources */,
 				375D24BC21E01131007AB25A /* html_smartypants.c in Sources */,
 				A6900346253D87060087D0D2 /* VersionsController.swift in Sources */,
@@ -2758,9 +2743,8 @@
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
 				A6E4872625BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift in Sources */,
-				A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */,
+				A6F487FD25A880000050CFA8 /* TagView.swift in Sources */,
 				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
-				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,

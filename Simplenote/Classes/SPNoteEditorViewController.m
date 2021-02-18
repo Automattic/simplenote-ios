@@ -2,7 +2,6 @@
 #import "Note.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
-#import "SPTagView.h"
 #import "SPEditorTextView.h"
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"

@@ -1,21 +1,40 @@
 import UIKit
 
 extension UIView {
+    struct EdgeConstraints {
+        let leading: NSLayoutConstraint
+        let trailing: NSLayoutConstraint
+        let top: NSLayoutConstraint
+        let bottom: NSLayoutConstraint
+
+        func update(with edgeInsets: UIEdgeInsets) {
+            leading.constant = edgeInsets.left
+            trailing.constant = -edgeInsets.right
+            top.constant = edgeInsets.top
+            bottom.constant = -edgeInsets.bottom
+        }
+
+        func activate() {
+            NSLayoutConstraint.activate([leading, trailing, top, bottom])
+        }
+    }
+
     enum AnchorTarget {
         case bounds
         case safeArea
         case layoutMargins
     }
 
+    @discardableResult
     func addFillingSubview(_ view: UIView,
                            edgeInsets: UIEdgeInsets = .zero,
-                           target: AnchorTarget = .bounds) {
+                           target: AnchorTarget = .bounds) -> EdgeConstraints {
         addSubview(view)
-        pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
+        return pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
     }
 
-
-    func pinSubviewToAllEdges(_ view: UIView, edgeInsets: UIEdgeInsets = .zero, target: AnchorTarget = .bounds) {
+    @discardableResult
+    func pinSubviewToAllEdges(_ view: UIView, edgeInsets: UIEdgeInsets = .zero, target: AnchorTarget = .bounds) -> EdgeConstraints {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         let layoutGuide: UILayoutGuide?
@@ -28,14 +47,14 @@ extension UIView {
             layoutGuide = safeAreaLayoutGuide
         }
 
-        let constraints = [
-            view.leadingAnchor.constraint(equalTo: layoutGuide?.leadingAnchor ?? leadingAnchor, constant: edgeInsets.left),
-            view.trailingAnchor.constraint(equalTo: layoutGuide?.trailingAnchor ?? trailingAnchor, constant: -edgeInsets.right),
-            view.topAnchor.constraint(equalTo: layoutGuide?.topAnchor ?? topAnchor, constant: edgeInsets.top),
-            view.bottomAnchor.constraint(equalTo: layoutGuide?.bottomAnchor ?? bottomAnchor, constant: -edgeInsets.bottom)
-        ]
+        let constraints = EdgeConstraints(leading: view.leadingAnchor.constraint(equalTo: layoutGuide?.leadingAnchor ?? leadingAnchor),
+                                          trailing: view.trailingAnchor.constraint(equalTo: layoutGuide?.trailingAnchor ?? trailingAnchor),
+                                          top: view.topAnchor.constraint(equalTo: layoutGuide?.topAnchor ?? topAnchor),
+                                          bottom: view.bottomAnchor.constraint(equalTo: layoutGuide?.bottomAnchor ?? bottomAnchor))
+        constraints.update(with: edgeInsets)
+        constraints.activate()
 
-        NSLayoutConstraint.activate(constraints)
+        return constraints
     }
 
     func pinSubviewToCenter(_ view: UIView) {
