@@ -267,7 +267,7 @@ private extension TagView {
         switch result {
         case .valid:
             return true
-        case .endingWithWhitespace(let text):
+        case .endingWithDisallowedCharacter(let text):
             textField.text = text
             processTextInFieldToTag()
             return false
