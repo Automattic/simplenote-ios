@@ -128,7 +128,10 @@ class TagView: UIView {
             return
         }
 
-        scrollView.scrollRectToVisible(addTagField.frame.insetBy(dx: -Constants.wrappingStackViewMargins.right, dy: 0),
+        layoutIfNeeded()
+
+        let addTagFieldFrame = addTagField.convert(addTagField.bounds, to: scrollView)
+        scrollView.scrollRectToVisible(addTagFieldFrame.insetBy(dx: -Constants.wrappingStackViewMargins.right, dy: 0),
                                        animated: animated)
     }
 }
@@ -154,6 +157,11 @@ private extension TagView {
         wrappingStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
 
         addFillingSubview(scrollView)
+
+        if UIApplication.isRTL {
+            scrollView.transform = CGAffineTransform(rotationAngle: .pi)
+            wrappingStackView.transform =  CGAffineTransform(rotationAngle: .pi)
+        }
     }
 
     /// Sets up hidden cell to make sure view has correct height even if there are no tags
