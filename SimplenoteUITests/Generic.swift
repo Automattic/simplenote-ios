@@ -22,7 +22,7 @@ func logOut() -> Bool {
     return app.buttons[uidButton_LogIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
-public func trackTest(_ function: String = #function) {
+func trackTest(_ function: String = #function) {
     print("> Test: \(function)")
     stepIndex = 1
 }
