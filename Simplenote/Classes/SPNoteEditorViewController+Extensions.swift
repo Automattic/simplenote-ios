@@ -86,14 +86,6 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureInterlinksProcessor() {
-        let viewportProvider = { [weak self] () -> CGRect in
-            self?.noteEditorTextView.editingRectInWindow() ?? .zero
-        }
-
-        let popoverPresenter = PopoverPresenter(containerViewController: self,
-                                                viewportProvider: viewportProvider,
-                                                siblingView: navigationBarBackground)
-
         interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext,
                                                 popoverPresenter: popoverPresenter,
                                                 parentTextView: noteEditorTextView,
@@ -115,6 +107,16 @@ extension SPNoteEditorViewController {
         noteEditorTextView.onContentPositionChange = { [weak self] in
             self?.updateTagListPosition()
         }
+    }
+
+    private var popoverPresenter: PopoverPresenter {
+        let viewportProvider = { [weak self] () -> CGRect in
+            self?.noteEditorTextView.editingRectInWindow() ?? .zero
+        }
+
+        return PopoverPresenter(containerViewController: self,
+                                viewportProvider: viewportProvider,
+                                siblingView: navigationBarBackground)
     }
 }
 
@@ -709,9 +711,12 @@ extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 extension SPNoteEditorViewController {
     @objc
     func configureTagListViewController() {
-        tagListViewController = NoteEditorTagListViewController(note: note)
-        addChild(tagListViewController)
+        let popoverPresenter = self.popoverPresenter
+        popoverPresenter.dismissOnInteractionWithPassthruView = true
+        tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
 
+        addChild(tagListViewController)
+        
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
 

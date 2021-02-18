@@ -22,6 +22,7 @@ class NoteEditorTagListViewController: UIViewController {
 
     private let note: Note
     private let objectManager = SPObjectManager.shared()
+    private let popoverPresenter: PopoverPresenter
 
     // if a newly created tag is deleted within a certain time span,
     // the tag will be completely deleted - note just removed from the
@@ -33,10 +34,24 @@ class NoteEditorTagListViewController: UIViewController {
         }
     }
 
+    private lazy var suggestionsViewController: NoteEditorTagSuggestionsViewController = {
+        let viewController = NoteEditorTagSuggestionsViewController(note: note)
+        viewController.onSelectionCallback = { [weak self] tagName in
+            guard let self = self else {
+                return
+            }
+
+            self.tagView.addTagFieldText = nil
+            self.tagView(self.tagView, wantsToCreateTagWithName: tagName)
+        }
+        return viewController
+    }()
+
     weak var delegate: NoteEditorTagListViewControllerDelegate?
 
-    init(note: Note) {
+    init(note: Note, popoverPresenter: PopoverPresenter) {
         self.note = note
+        self.popoverPresenter = popoverPresenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -47,6 +62,10 @@ class NoteEditorTagListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reload()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        popoverPresenter.dismiss()
     }
 
     @objc
@@ -138,6 +157,8 @@ extension NoteEditorTagListViewController: TagViewDelegate {
         delegate?.tagListDidUpdate(self)
 
         SPTracker.trackEditorTagAdded()
+
+        updateSuggestions()
     }
 
     func tagView(_ tagView: TagView, wantsToRemoveTagWithName tagName: String) {
@@ -148,14 +169,33 @@ extension NoteEditorTagListViewController: TagViewDelegate {
         delegate?.tagListDidUpdate(self)
 
         SPTracker.trackEditorTagRemoved()
+
+        updateSuggestions()
     }
 
     func tagViewDidBeginEditing(_ tagView: TagView) {
         delegate?.tagListIsEditing(self)
+        updateSuggestions()
     }
 
     func tagViewDidChange(_ tagView: TagView) {
         delegate?.tagListIsEditing(self)
+        updateSuggestions()
+    }
+
+    private func updateSuggestions() {
+        suggestionsViewController.update(with: tagView.addTagFieldText)
+
+        if suggestionsViewController.isEmpty {
+            popoverPresenter.dismiss()
+            return
+        }
+
+        if popoverPresenter.isPresented {
+            popoverPresenter.relocate(around: tagView.addTagFieldFrameInWindow)
+        } else {
+            popoverPresenter.show(suggestionsViewController, around: tagView.addTagFieldFrameInWindow)
+        }
     }
 }
 

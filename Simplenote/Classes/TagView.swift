@@ -63,6 +63,23 @@ class TagView: UIView {
         }
     }
 
+    var addTagFieldText: String? {
+        get {
+            addTagField.text
+        }
+
+        set {
+            addTagField.text = newValue
+        }
+    }
+
+    var addTagFieldFrameInWindow: CGRect {
+        var frame = addTagField.convert(addTagField.bounds, to: self)
+        frame.origin.y = 0
+        frame.size.height = frame.size.height
+        return convert(frame, to: nil)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()

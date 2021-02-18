@@ -19,6 +19,10 @@ final class PopoverPresenter {
         return popoverController != nil
     }
 
+    /// Should popover be dismissed when user interacts with passthru view
+    ///
+    var dismissOnInteractionWithPassthruView: Bool = false
+
     /// Init
     ///
     init(containerViewController: UIViewController,
@@ -38,7 +42,15 @@ final class PopoverPresenter {
         self.desiredHeight = desiredHeight
 
         popoverController = PopoverViewController(viewController: viewController)
-        popoverController?.attachWithAnimation(to: containerViewController, below: siblingView)
+        popoverController?.onInteractionWithPassthruView = { [weak self] in
+            if self?.dismissOnInteractionWithPassthruView == true {
+                self?.dismiss()
+            }
+        }
+
+        popoverController?.attach(to: containerViewController,
+                                  attachmentView: siblingView.map({ .below($0) }),
+                                  animated: true)
 
         relocate(around: anchorInWindow)
     }
@@ -82,7 +94,7 @@ final class PopoverPresenter {
     }
 
     func dismiss() {
-        popoverController?.detachWithAnimation()
+        popoverController?.detach(animated: true)
         popoverController = nil
     }
 }
