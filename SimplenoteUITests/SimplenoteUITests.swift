@@ -157,26 +157,26 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         
         trackTest()
 
-        logStep()
+        trackStep()
         AllNotes.addNoteTap()
         NoteEditorAssert.editorShown()
 
-        logStep()
+        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
         NoteEditor.leaveEditor()
         AllNotesAssert.noteExists(noteName: noteNameInitial)
 
-        logStep()
+        trackStep()
         AllNotes.openNote(noteName: noteNameInitial)
         NoteEditor.markdownEnable()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextInitial)
 
-        logStep()
+        trackStep()
         NoteEditor.swipeToPreview()
         PreviewAssert.staticTextWithExactValueShownOnce(value: noteTextInitial)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 0)
 
-        logStep()
+        trackStep()
         Preview.leavePreviewViaBackButton()
         NoteEditor.setFocus()
         NoteEditor.insertChecklist()
@@ -184,11 +184,11 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
         AllNotesAssert.noteAbsent(noteName: noteNameInitial)
 
-        logStep()
+        trackStep()
         AllNotes.openNote(noteName: noteNameWithCheckbox)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextWithCheckbox)
 
-        logStep()
+        trackStep()
         NoteEditor.swipeToPreview()
         PreviewAssert.staticTextWithExactValueShownOnce(value: noteNameInitial)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
@@ -343,22 +343,22 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         
         trackTest()
 
-        logStep()
+        trackStep()
         AllNotes.addNoteTap()
         NoteEditorAssert.editorShown()
 
-        logStep()
+        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
         NoteEditor.leaveEditor()
         AllNotesAssert.noteExists(noteName: noteTitle)
 
-        logStep()
+        trackStep()
         AllNotes.openNote(noteName: noteTitle)
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["- Minus1", "- Minus2", "- Minus3"])
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["+ Plus1", "+ Plus2", "+ Plus3"])
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
         
-        logStep()
+        trackStep()
         NoteEditor.markdownEnable()
         NoteEditor.swipeToPreview()
         PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Minus1", "• Minus2", "• Minus3"])
