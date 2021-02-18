@@ -27,7 +27,7 @@ func trackTest(_ function: String = #function) {
     stepIndex = 1
 }
 
-func logStep(){
+func trackStep() {
     print(">> Step " + String(stepIndex))
     stepIndex += 1
 }
