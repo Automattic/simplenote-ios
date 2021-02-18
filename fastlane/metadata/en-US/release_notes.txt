@@ -1,3 +1,0 @@
--   Added account verification screen
--   Updated minimum row height when note list is in condensed mode
--   Updated tags editing experience
