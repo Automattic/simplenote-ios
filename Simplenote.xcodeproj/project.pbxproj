@@ -132,6 +132,8 @@
 		A68A4345256FEE3000D1CA5D /* SPSettingsViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A4344256FEE3000D1CA5D /* SPSettingsViewController+Extensions.swift */; };
 		A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */; };
 		A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68ABCA724ABFB5300715EBD /* SPShadowView.swift */; };
+		A68DA85C25DBE1F20003657B /* SortModePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68DA85A25DBE1F20003657B /* SortModePickerViewController.swift */; };
+		A68DA85D25DBE1F20003657B /* SortModePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68DA85B25DBE1F20003657B /* SortModePickerViewController.xib */; };
 		A6900346253D87060087D0D2 /* VersionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6900345253D87060087D0D2 /* VersionsController.swift */; };
 		A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A694ABAA25D1549D00CC3A2D /* FileStorage.swift */; };
 		A694ABB325D1687200CC3A2D /* NoteScrollPositionCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */; };
@@ -608,6 +610,8 @@
 		A68A4344256FEE3000D1CA5D /* SPSettingsViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPSettingsViewController+Extensions.swift"; path = "Classes/SPSettingsViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A68ABCA524ABFA5800715EBD /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		A68ABCA724ABFB5300715EBD /* SPShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPShadowView.swift; sourceTree = "<group>"; };
+		A68DA85A25DBE1F20003657B /* SortModePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SortModePickerViewController.swift; path = Classes/SortModePickerViewController.swift; sourceTree = "<group>"; };
+		A68DA85B25DBE1F20003657B /* SortModePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SortModePickerViewController.xib; path = Classes/SortModePickerViewController.xib; sourceTree = "<group>"; };
 		A6900345253D87060087D0D2 /* VersionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionsController.swift; sourceTree = "<group>"; };
 		A694ABAA25D1549D00CC3A2D /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileStorage.swift; path = Classes/FileStorage.swift; sourceTree = "<group>"; };
 		A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteScrollPositionCacheTests.swift; sourceTree = "<group>"; };
@@ -1217,6 +1221,15 @@
 			path = Classes/PinLock;
 			sourceTree = "<group>";
 		};
+		A68DA85925DBE1CB0003657B /* Sort Mode */ = {
+			isa = PBXGroup;
+			children = (
+				A68DA85A25DBE1F20003657B /* SortModePickerViewController.swift */,
+				A68DA85B25DBE1F20003657B /* SortModePickerViewController.xib */,
+			);
+			name = "Sort Mode";
+			sourceTree = "<group>";
+		};
 		A690032F253D85C40087D0D2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1675,6 +1688,7 @@
 		B5A6846B23CE84B900398BBC /* Notes List */ = {
 			isa = PBXGroup;
 			children = (
+				A68DA85925DBE1CB0003657B /* Sort Mode */,
 				E29ADD791784905800E55842 /* SPNoteListViewController.h */,
 				E29ADD7A1784905800E55842 /* SPNoteListViewController.m */,
 				B53C5A59230330CD00DA2143 /* SPNoteListViewController+Extensions.swift */,
@@ -2347,6 +2361,7 @@
 				A6A648A525AC3AC00074A094 /* AccountVerificationViewController.xib in Resources */,
 				B5C2EDD2255ACB4900C09B32 /* InterlinkViewController.xib in Resources */,
 				B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */,
+				A68DA85D25DBE1F20003657B /* SortModePickerViewController.xib in Resources */,
 				B53929492398642800ACEE00 /* SPRatingsPromptView.xib in Resources */,
 				B537732B252E176C00BC78C5 /* OptionsViewController.xib in Resources */,
 				B56A696222F9D53400B90398 /* SPAuthViewController.xib in Resources */,
@@ -2808,6 +2823,7 @@
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
 				B570D2D92360F16F006E1C85 /* UIBlurEffect+Simplenote.swift in Sources */,
 				B5C2EDD4255ACB4900C09B32 /* InterlinkViewController.swift in Sources */,
+				A68DA85C25DBE1F20003657B /* SortModePickerViewController.swift in Sources */,
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,

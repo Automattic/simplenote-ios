@@ -23,6 +23,16 @@ final class PopoverPresenter {
     ///
     var dismissOnInteractionWithPassthruView: Bool = false
 
+
+    /// Dismiss on container frame change
+    ///
+    var dismissOnContainerFrameChange: Bool = false
+
+
+    /// Center content relative to anchor
+    ///
+    var centerContentRelativeToAnchor: Bool = false
+
     /// Init
     ///
     init(containerViewController: UIViewController,
@@ -44,6 +54,12 @@ final class PopoverPresenter {
         popoverController = PopoverViewController(viewController: viewController)
         popoverController?.onInteractionWithPassthruView = { [weak self] in
             if self?.dismissOnInteractionWithPassthruView == true {
+                self?.dismiss()
+            }
+        }
+
+        popoverController?.onViewSizeChange = { [weak self] in
+            if self?.dismissOnContainerFrameChange == true {
                 self?.dismiss()
             }
         }
@@ -114,6 +130,9 @@ private extension PopoverPresenter {
     /// -   Important: Whenever we overflow horizontally, we'll simply ensure there's enough breathing room on the right hand side
     ///
     func calculateLeftLocation(around anchor: CGRect, in viewport: CGRect) -> CGFloat {
+        if centerContentRelativeToAnchor {
+            return anchor.midX - Metrics.defaultContentWidth / 2.0
+        }
 
         let maximumX = anchor.minX + Metrics.defaultContentWidth + containerViewController.view.layoutMargins.right
         if viewport.width > maximumX {

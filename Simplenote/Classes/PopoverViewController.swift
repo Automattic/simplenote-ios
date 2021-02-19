@@ -39,6 +39,11 @@ class PopoverViewController: UIViewController {
         }
     }
 
+    /// Callback is invoked on view size change
+    ///
+    var onViewSizeChange: (() -> Void)?
+
+
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
@@ -59,6 +64,11 @@ class PopoverViewController: UIViewController {
         setupContainerView()
         setupShadowView()
         setupContainerViewController()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        onViewSizeChange?()
     }
 }
 
