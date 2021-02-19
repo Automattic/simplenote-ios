@@ -3,6 +3,7 @@
 -   Updating new-note and collaborate icons #1103
 -   Updating tags editor #990
 -   Updating sort bar #1067
+-   Removing trailing comma from tags when used as delimiter #1120
  
 4.32
 -----

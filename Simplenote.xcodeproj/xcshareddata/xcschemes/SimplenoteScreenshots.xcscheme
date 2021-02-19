@@ -40,6 +40,16 @@
                ReferencedContainer = "container:Simplenote.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D864B15325CAE25000F9B73E"
+               BuildableName = "SimplenoteUITests.xctest"
+               BlueprintName = "SimplenoteUITests"
+               ReferencedContainer = "container:Simplenote.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -69,15 +79,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46A3C96017DFA81A002865AE"
-            BuildableName = "Simplenote.app"
-            BlueprintName = "Simplenote"
-            ReferencedContainer = "container:Simplenote.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

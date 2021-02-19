@@ -602,7 +602,7 @@ extension TagListViewController: UITextFieldDelegate {
         switch result {
         case .valid:
             return true
-        case .endingWithWhitespace(let text):
+        case .endingWithDisallowedCharacter(let text):
             textField.text = text
             textField.endEditing(true)
             return false

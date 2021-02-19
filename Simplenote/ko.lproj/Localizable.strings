@@ -15,6 +15,12 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "실패한 패스코드 시도 %i번";
 
+/* Count of interlink references to a note */
+"%i Reference" = "%i Reference";
+
+/* Count of interlink references to a note */
+"%i References" = "%i References";
+
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 최소 8자";
 
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "키보드 비활성화";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Document";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "마크다운 형식 사용";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "End Editing";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "활성화됨";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "좋아요";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "정보";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Insert Checklist";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "새 체크리스트 항목 삽입";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Last Modified %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "마지막으로 본 시간";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "휴지통으로 이동";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "새 메모";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "새 메모...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Next Match";
 
 /* Cancels Empty Trash Action */
 "No" = "아니요";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "미리보기";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Previous Match";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "캘리포니아 사용자를 위한 개인정보 공지";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "계정 검토";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "검색";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "오늘";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Toggle Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "태그 사이드바 토글";

@@ -3,39 +3,44 @@ import Foundation
 // MARK: - TagTextFieldInputValidator
 //
 struct TagTextFieldInputValidator {
+    private var disallowedCharacterSet: CharacterSet {
+        get {
+            var whitespaceCharset = CharacterSet.whitespacesAndNewlines
+            whitespaceCharset.insert(",")
+            return whitespaceCharset
+        }
+    }
 
     /// Validation Result
     ///
     enum Result: Equatable {
         case valid
         case invalid
-        case endingWithWhitespace(_ trimmedTag: String)
+        case endingWithDisallowedCharacter(_ trimmedTag: String)
     }
 
     /// Validate text field input
     ///
     func validateInput(originalText: String, range: Range<String.Index>, replacement: String) -> Result {
-        let charset = CharacterSet.whitespacesAndNewlines
+        var isEndingWithDisallowedCharacter = false
 
-        var isEndingWithWhitespace = false
-
-        if let whitespaceRange = replacement.rangeOfCharacter(from: charset) {
-            if whitespaceRange.upperBound == replacement.endIndex,
+        if let disallowedCharacterRange = replacement.rangeOfCharacter(from: disallowedCharacterSet) {
+            if disallowedCharacterRange.upperBound == replacement.endIndex,
                range.upperBound == originalText.endIndex {
-                isEndingWithWhitespace = true
+                isEndingWithDisallowedCharacter = true
             } else {
                 return .invalid
             }
         }
 
         var tag = originalText.replacingCharacters(in: range, with: replacement)
-        if isEndingWithWhitespace {
-            tag = tag.trimmingCharacters(in: charset)
+        if isEndingWithDisallowedCharacter {
+            tag = tag.trimmingCharacters(in: disallowedCharacterSet)
         }
 
         if validateLength(tag: tag) {
-            if isEndingWithWhitespace {
-                return .endingWithWhitespace(tag)
+            if isEndingWithDisallowedCharacter {
+                return .endingWithDisallowedCharacter(tag)
             }
             return .valid
         }
@@ -43,10 +48,10 @@ struct TagTextFieldInputValidator {
         return .invalid
     }
 
-    /// Trim whitespaces and return the first part before whitespace or newline
+    /// Trim disallowed characters and return the first part before whitespace or newline
     ///
     func preprocessForPasting(tag: String) -> String? {
-        return tag.components(separatedBy: .whitespacesAndNewlines)
+        return tag.components(separatedBy: disallowedCharacterSet)
             .filter({ !$0.isEmpty })
             .first
     }

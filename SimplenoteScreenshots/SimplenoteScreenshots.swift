@@ -12,6 +12,16 @@ class SimplenoteScreenshots: XCTestCase {
         setupSnapshot(app)
         app.launch()
 
+        // The tests have been known to fail in the passcode screen inconsistently.
+        //
+        // This becomes a problem when running the screenshots automation through Fastlane because
+        // it retries three times. A failure in the passcode screen results in the PIN screen not
+        // being disabled, which in turn would result in the passcode screen being presented at
+        // launch, preventing the test from proceeding.
+        dismissPasscodeScreenIfNeeded(using: app)
+
+        dismissVerifyEmailIfNeeded(using: app)
+
         let login = app.buttons["Log In"]
 
         if login.waitForExistence(timeout: 3) == false {
@@ -30,9 +40,7 @@ class SimplenoteScreenshots: XCTestCase {
 
         let password = app.secureTextFields["Password"]
         XCTAssertTrue(password.waitForExistence(timeout: 10))
-        // -.-'
-        password.tap()
-        password.pasteText(text: ScreenshotsCredentials.testUserPassword)
+        password.typeSecureText(ScreenshotsCredentials.testUserPassword, using: app)
 
         // Need to check for the login button again, otherwise we'll attempt to press the one from
         // the previous screen.
@@ -40,59 +48,18 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(newLogin.waitForExistence(timeout: 10))
         newLogin.tap()
 
-        let firstNote = app.cells["Lemon Cake & Blueberry"]
+        dismissVerifyEmailIfNeeded(using: app)
+
+        let firstNote = app.cells[noteForDetailScreenshot]
         // Super long timeout in case the test user has many notes and the connection is a bit slow
 
         XCTAssertTrue(firstNote.waitForExistence(timeout: 20))
 
         firstNote.tap()
 
-        let actionButton = app.buttons.matching(identifier: "note-menu").firstMatch
-        XCTAssertTrue(actionButton.waitForExistence(timeout: 10))
-
         takeScreenshot("1-note")
 
-        actionButton.tap()
-
-        // The collaborators screen will ask to access our contacts. Before loading the screen,
-        // let's setup an handler to dismiss the alert, so it doesn't come in the screenshots.
-        // Fastlane's snapshot _should_ do this for us, but it seems to happen unreliably.
-        //
-        // This logic is super rough, but for the context of this test script where we know we'll
-        // only get one alert, it'll do us. Obviously, when the time comes to refine the script by
-        // adopting the `BaseScreen` pattern from the WooCommerce iOS repo, this should logic should
-        // be improved as well.
-        addUIInterruptionMonitor(withDescription: "Any system dialog") { alert in
-            alert.buttons.firstMatch.tap()
-            return true
-        }
-
-        let collaborateButton = app.buttons["Collaborate"]
-        XCTAssertTrue(collaborateButton.waitForExistence(timeout: 3))
-
-        collaborateButton.tap()
-
-        // Let's wait for the screen to be presented
-        let doneButton = app.buttons["Done"]
-        XCTAssertTrue(doneButton.waitForExistence(timeout: 3))
-
-        // Now that we know the collaborators picker screen is presented, we also know that a system
-        // dialog to grant access to the contacts might have been shown. If it has, interacting with
-        // the app will trigger the UI interruption monitor. If it hasn't, this interaction won't
-        // result in any UI change (with how the UI is laid out at the time of writing this).
-        app.tap()
-
-        // The index 3 is _intentional_ as that's the desired position of the screenshot in the App
-        // Store
-        takeScreenshot("3-collaborators")
-
-        // Tapping done in the collaborate view dismisses the collaborate screen _and_ the action
-        // menu.
-        doneButton.tap()
-
-        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "Notes")).firstMatch
-        XCTAssertTrue(backButton.waitForExistence(timeout: 3))
-        backButton.tap()
+        goBackFromEditor(using: app)
 
         // Before taking a screenshot of the notes, make sure the review prompt header is not on
         // screen.
@@ -109,6 +76,45 @@ class SimplenoteScreenshots: XCTestCase {
         }
 
         takeScreenshot("2-all-notes")
+
+        let interlinkingNote = app.cells[noteForInterlinkingScreenshot]
+        XCTAssertTrue(interlinkingNote.waitForExistence(timeout: 5))
+        interlinkingNote.tap()
+
+        let noteTextView = app.textViews.firstMatch
+
+        XCTAssertTrue(noteTextView.waitForExistence(timeout: 1))
+
+        // We need to add text at the end of the note. There is no dedicated API to do so. Our best
+        // bet is to try to scroll the text view to the bottom and tap there. There are no APIs for
+        // that either, so our next best bet is to 1) swipe up real fast to simulate a scroll to the
+        // bottom; 2) tap in the bottom right corner of the text view.
+        //
+        // Fun (?) fact worth tracking here for future reference. On the iPad Simulator^, tapping on
+        // the `noteTextView` `XCUIElement` doesn't work. Luckily, tapping on the `XCUICoordinate`
+        // works. Another option could have been to call `tap()` on the `XCUIApplication` itself,
+        // but that might result in tapping in the middle of the text on a small screen.
+        //
+        // ^: iPad Pro 12.9" 2nd and 3rd generation Simulator on Xcode 12.3.
+        noteTextView.swipeUp(velocity: .fast)
+        let lowerRightCorner = noteTextView.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
+        lowerRightCorner.tap()
+
+        let interlinkingTriggerString = "\n[L"
+        noteTextView.typeText(interlinkingTriggerString)
+
+        // Before taking the screenshot, let's make sure the inter note liking window appeared by
+        // checking the text of one of its notes is on screen
+        XCTAssertTrue(app.staticTexts["Blueberry Recipes"].firstMatch.waitForExistence(timeout: 1))
+
+        takeScreenshot("3-interlinking")
+
+        // Reset for the next test
+        (0 ..< interlinkingTriggerString.count).forEach { _ in
+            noteTextView.typeText(XCUIKeyboardKey.delete.rawValue)
+        }
+
+        goBackFromEditor(using: app)
 
         openMenu(using: app)
 
@@ -135,38 +141,40 @@ class SimplenoteScreenshots: XCTestCase {
         openMenu(using: app)
         loadPasscodeScreen(using: app)
         // Set the passcode
-        // Writing the value here in clear because anyways one can see it being typed.
-        type("1234", onFirstKeyboardOf: app)
+        // Writing the value here in clear because one can see it being typed anyways.
+        typeOnPassCodeScreen(1234, using: app)
         // Confirm it
-        type("1234", onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(1234, using: app)
 
         // Kill the app and relaunch it so we can take a screenshot of the lock screen
         app.terminate()
         app.launch()
 
-        // Assuming that if a keyboard is on screen, then the passcode screen has loaded
-        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 10))
-
-        // The screenshot for the passcode should have only 3 characters inserted
-        type("123", onFirstKeyboardOf: app)
+        // The screenshot for the passcode should have only 3 characters inserted.
+        // (Typing in the passcode screen also ensures it's visible first)
+        typeOnPassCodeScreen(123, using: app)
 
         takeScreenshot("6-passcode")
 
-        type("4", onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(4, using: app)
+
+        dismissVerifyEmailIfNeeded(using: app)
 
         // Now, disable the passcode so we're not blocked by it on next launch.
         openMenu(using: app)
         loadPasscodeScreen(using: app)
-        type(ScreenshotsCredentials.testUserPasscode, onFirstKeyboardOf: app)
+        typeOnPassCodeScreen(1234, using: app)
+    }
+
+    func dismissVerifyEmailIfNeeded(using app: XCUIApplication) {
+        guard app.staticTexts["Verify Your Email"].waitForExistence(timeout: 10) else { return }
+        app.buttons["icon cross"].tap()
     }
 
     func logout(using app: XCUIApplication) {
-        let menu = app.otherElements.matching(identifier: "menu").firstMatch
-        XCTAssertTrue(menu.waitForExistence(timeout: 10))
+        getMenuButtonElement(from: app).tap()
 
-        menu.tap()
-
-        let settings = app.textFields["Settings"]
+        let settings = app.staticTexts["Settings"]
         XCTAssertTrue(settings.waitForExistence(timeout: 3))
         settings.tap()
 
@@ -175,10 +183,20 @@ class SimplenoteScreenshots: XCTestCase {
         logOut.tap()
     }
 
+    func goBackFromEditor(using app: XCUIApplication) {
+        let backButton = app.buttons.matching(NSPredicate(format: "label = %@", "All Notes")).firstMatch
+        XCTAssertTrue(backButton.waitForExistence(timeout: 3))
+        backButton.tap()
+    }
+
     func openMenu(using app: XCUIApplication) {
-        let menu = app.otherElements.matching(identifier: "menu").firstMatch
+        getMenuButtonElement(from: app).tap()
+    }
+
+    func getMenuButtonElement(from app: XCUIApplication) -> XCUIElement {
+        let menu = app.buttons.matching(identifier: "menu").firstMatch
         XCTAssertTrue(menu.waitForExistence(timeout: 10))
-        menu.tap()
+        return menu
     }
 
     func loadPasscodeScreen(using app: XCUIApplication) {
@@ -190,8 +208,40 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(passcodeCell.waitForExistence(timeout: 3))
         passcodeCell.tap()
 
-        // Let's just assume that if a keyboard is on screen, then the passcode screen has loaded
-        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        let expectation = XCTNSPredicateExpectation(
+            predicate: NSPredicate { _, _ in self.isPasscodeScreenVisible(using: app) },
+            object: .none
+        )
+        wait(for: [expectation], timeout: 5)
+    }
+
+    func dismissPasscodeScreenIfNeeded(using app: XCUIApplication) {
+        guard isPasscodeScreenVisible(using: app) else { return }
+        typeOnPassCodeScreen(1234, using: app)
+    }
+
+    func isPasscodeScreenVisible(using app: XCUIApplication) -> Bool {
+        // Check there's a button for each line of the custom number keypad.
+        //
+        // We only need to wait for the first number, if that's on screen, then the others should be
+        // on screen already, too.
+        return app.staticTexts["1"].waitForExistence(timeout: 3)
+            && app.staticTexts["4"].exists
+            && app.staticTexts["7"].exists
+            && app.staticTexts["0"].exists
+    }
+
+    func typeOnPassCodeScreen(_ input: Int, using app: XCUIApplication) {
+        // This converts an Int into an [Int] of its digits
+        let digits = "\(input.magnitude)".compactMap(\.wholeNumberValue)
+
+        digits.forEach { digit in
+            let input = app.staticTexts["\(digit)"]
+            XCTAssertTrue(input.waitForExistence(timeout: 3))
+            // Both the custom UIButton and its UILabel match the "\(digit)" query. We need to pick
+            // one for the tap to work.
+            input.firstMatch.tap()
+        }
     }
 
     func type(_ text: String, onFirstKeyboardOf app: XCUIApplication) {
@@ -204,11 +254,44 @@ class SimplenoteScreenshots: XCTestCase {
 
         snapshot("\(title)-\(mode)")
     }
+
+    let noteForDetailScreenshot = "Lemon Cake & Blueberry"
+    let noteForInterlinkingScreenshot = "Colors"
 }
 
 extension XCUIElement {
 
-    func pasteText(text: String) -> Void {
+    /// Workaround to type text into secure text fields due to the different behaviors across
+    /// Simulators.
+    func typeSecureText(_ text: String, using app: XCUIApplication) -> Void {
+        tap()
+
+        // At the time of writing, typing in a secure text field didn't work in some of the
+        // Simulators on which we want to take screenshots. On top of that, the workaround to type
+        // in the secure text field doesn't work in some other Simulators. Therefore, we need to
+        // know which approach to use at runtime.
+        if requiresSecureTextFieldWorkaround(using: app) {
+            paste(text: text)
+        } else {
+            typeText(text)
+        }
+    }
+
+    private func requiresSecureTextFieldWorkaround(using app: XCUIApplication) -> Bool {
+        // At the time of writing, these tests run on the following iOS 14.3 Simulators as defined
+        // in the Fastfile.
+        //
+        // - iPhone 8 Plus
+        // - iPhone Xs
+        // - iPad Pro 12.9" 2nd generation
+        // - iPad Pro 12.9" 3rd generation
+        //
+        // Of those, the only one requiring the secure text field workaround is the iPhone 8 Plus
+        // one.
+        return app.isDeviceIPhone8Plus()
+    }
+
+    private func paste(text: String) -> Void {
         let previousPasteboardContents = UIPasteboard.general.string
         UIPasteboard.general.string = text
 
@@ -217,6 +300,20 @@ extension XCUIElement {
 
         if let string = previousPasteboardContents {
             UIPasteboard.general.string = string
+        }
+    }
+}
+
+extension XCUIApplication {
+
+    func isDeviceIPhone8Plus(_ device: XCUIDevice = .shared) -> Bool {
+        let iPhone8PlusScreenHeight = CGFloat(736)
+
+        let frame = windows.element(boundBy: 0).frame
+
+        switch device.orientation {
+        case .landscapeLeft, .landscapeRight: return frame.width == iPhone8PlusScreenHeight
+        case _: return frame.height == iPhone8PlusScreenHeight
         }
     }
 }

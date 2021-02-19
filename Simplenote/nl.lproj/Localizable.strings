@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:58+0000 */
+/* Translation-Revision-Date: 2021-02-05 10:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Reference";
+
+/* Count of interlink references to a note */
+"%i References" = "%i References";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimaal 8 tekens";
@@ -86,7 +92,7 @@
 "Are you a developer? We’re hiring." = "Ben je ontwikkelaar? Wij zijn op zoek naar nieuwe collega's.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
+"Are you sure you want to delete \"%1$@\"?" = "Weet je zeker dat je '%1$@' wilt verwijderen?";
 
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Weet je zeker dat je de prullenbak wilt leegmaken? Deze actie kan niet ongedaan worden gemaakt.";
@@ -108,16 +114,16 @@
 "Cancel" = "Annuleren";
 
 /* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
+"Cannot Confirm Account" = "Account kan niet worden bevestigd";
 
 /* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
+"Cannot Send Verification Email" = "Verificatiemail kan niet worden verzonden";
 
 /* Work at Automattic */
 "Careers" = "Carrières";
 
 /* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
+"Change Email" = "E-mail wijzigen";
 
 /* Number of characters in the note */
 "Characters" = "Tekens";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Toetsenbord sluiten";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Document";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Markdown-opmaak inschakelen";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "End Editing";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "Ik vind het leuk";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Informatie";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Insert Checklist";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Voegt een nieuwe afvinktaak toe";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Last Modified %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Laatst bekeken om";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "Verplaatsen naar prullenbak";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "Nieuwe opmerking";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "Nieuwe notitie …";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Next Match";
 
 /* Cancels Empty Trash Action */
 "No" = "Nee";
@@ -441,10 +462,13 @@
 "Please activate your WordPress.com account via email and try again." = "Activeer je WordPress.com-account via e-mail en probeer het nogmaals.";
 
 /* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
+"Please check your network settings and try again." = "Controleer je netwerkinstellingen en probeer het nogmaals.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Voorbeeld bekijken";
+
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Previous Match";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Privacyverklaring voor gebruikers in Californië";
@@ -483,7 +507,7 @@
 "Rename" = "Hernoemen";
 
 /* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
+"Resend Email" = "E-mail opnieuw verzenden";
 
 /* Reset Action */
 "Reset" = "Resetten";
@@ -498,9 +522,10 @@
 "Restore Note" = "Notitie herstellen";
 
 /* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
+"Review Your Account" = "Controleer je account";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Zoeken";
@@ -602,6 +627,9 @@
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Vandaag";
 
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Toggle Markdown";
+
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Tag-sidebar tonen\/verbergen";
 
@@ -639,7 +667,7 @@
 "Username" = "Gebruikersnaam";
 
 /* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
+"Verify Your Email" = "Verifieer je e-mail";
 
 /* App version number */
 "Version %@" = "Versie %@";
@@ -654,7 +682,7 @@
 "WebSocket" = "WebSocket";
 
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We hebben een verificatiemail verzonden naar %1$@. Controleer je postvak IN en volg de instructies.";
 
 /* No comment provided by engineer. */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";
@@ -669,7 +697,7 @@
 "Yesterday" = "Gisteren";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Je staat geregistreerd bij Simplenote met het e-mailadres %1$@.\n\nVerbeteringen aan accountbeveiliging kunnen leiden tot accountverlies als je geen toegang meer hebt tot dit e-mailadres.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Je e-mailadres is niet geldig.";

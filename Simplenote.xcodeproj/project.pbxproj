@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -402,6 +402,16 @@
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
+		D864B16925CAE47C00F9B73E /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B16825CAE47C00F9B73E /* Generic.swift */; };
+		D864B18225CAE4BE00F9B73E /* SimplenoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */; };
+		D864B19225CAE54300F9B73E /* AllNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B19125CAE54300F9B73E /* AllNotes.swift */; };
+		D864B1A225CAE57100F9B73E /* AssertGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1A125CAE57100F9B73E /* AssertGeneric.swift */; };
+		D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1AA25CAE59400F9B73E /* EmailLogin.swift */; };
+		D864B1B425CAE5C900F9B73E /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1B325CAE5C900F9B73E /* NoteEditor.swift */; };
+		D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1C525CAE5F800F9B73E /* Preview.swift */; };
+		D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1CE25CAE61F00F9B73E /* Trash.swift */; };
+		D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1D725CAE63E00F9B73E /* UIDs.swift */; };
+		D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
 		E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C798180B130B00AD36B5 /* SPTableViewController.m */; };
@@ -455,6 +465,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = B5EB1EEB1C204EBD0080A1B3;
 			remoteInfo = SimplenoteShare;
+		};
+		D864B15925CAE25000F9B73E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 46A3C96017DFA81A002865AE;
+			remoteInfo = Simplenote;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -885,6 +902,18 @@
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
+		D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D864B16825CAE47C00F9B73E /* Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
+		D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplenoteUITests.swift; sourceTree = "<group>"; };
+		D864B19125CAE54300F9B73E /* AllNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotes.swift; sourceTree = "<group>"; };
+		D864B1A125CAE57100F9B73E /* AssertGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertGeneric.swift; sourceTree = "<group>"; };
+		D864B1AA25CAE59400F9B73E /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
+		D864B1B325CAE5C900F9B73E /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
+		D864B1C525CAE5F800F9B73E /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		D864B1CE25CAE61F00F9B73E /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
+		D864B1D725CAE63E00F9B73E /* UIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDs.swift; sourceTree = "<group>"; };
+		D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		D864B1F025CAE87800F9B73E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
 		E215C790180B115C00AD36B5 /* SPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPNavigationController.h; path = Classes/SPNavigationController.h; sourceTree = "<group>"; };
@@ -1007,6 +1036,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D864B15125CAE25000F9B73E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,6 +1854,24 @@
 			name = SortBar;
 			sourceTree = "<group>";
 		};
+		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D864B1F025CAE87800F9B73E /* Info.plist */,
+				D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */,
+				D864B16825CAE47C00F9B73E /* Generic.swift */,
+				D864B19125CAE54300F9B73E /* AllNotes.swift */,
+				D864B1A125CAE57100F9B73E /* AssertGeneric.swift */,
+				D864B1AA25CAE59400F9B73E /* EmailLogin.swift */,
+				D864B1B325CAE5C900F9B73E /* NoteEditor.swift */,
+				D864B1C525CAE5F800F9B73E /* Preview.swift */,
+				D864B1CE25CAE61F00F9B73E /* Trash.swift */,
+				D864B1D725CAE63E00F9B73E /* UIDs.swift */,
+				D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */,
+			);
+			path = SimplenoteUITests;
+			sourceTree = "<group>";
+		};
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1884,6 +1938,7 @@
 				B58218981FCC45170094ECA1 /* SimplenoteTests */,
 				467D9C6F1788CF2400785EF3 /* External */,
 				3FA6013A242C5AAE0068FC52 /* SimplenoteScreenshots */,
+				D864B15525CAE25000F9B73E /* SimplenoteUITests */,
 				E29ADD3A17848E8500E55842 /* Frameworks */,
 				E29ADD3917848E8500E55842 /* Products */,
 				564CAA42AA330D16FDBDD081 /* Pods */,
@@ -1898,6 +1953,7 @@
 				B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */,
 				B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */,
 				3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */,
+				D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2085,6 +2141,7 @@
 			buildConfigurationList = 46A3C9D417DFA81A002865AE /* Build configuration list for PBXNativeTarget "Simplenote" */;
 			buildPhases = (
 				C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */,
+				AD6CEDDC25D37DC100744BFB /* SwiftLint */,
 				46A3C96117DFA81A002865AE /* Sources */,
 				46A3C9B017DFA81A002865AE /* Frameworks */,
 				46A3C9C117DFA81A002865AE /* Resources */,
@@ -2148,6 +2205,24 @@
 			productReference = B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		D864B15325CAE25000F9B73E /* SimplenoteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D864B16025CAE25000F9B73E /* Build configuration list for PBXNativeTarget "SimplenoteUITests" */;
+			buildPhases = (
+				D864B15025CAE25000F9B73E /* Sources */,
+				D864B15125CAE25000F9B73E /* Frameworks */,
+				D864B15225CAE25000F9B73E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D864B15A25CAE25000F9B73E /* PBXTargetDependency */,
+			);
+			name = SimplenoteUITests;
+			productName = SimplenoteUITests;
+			productReference = D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2155,7 +2230,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SP;
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
@@ -2207,6 +2282,10 @@
 							};
 						};
 					};
+					D864B15325CAE25000F9B73E = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 46A3C96017DFA81A002865AE;
+					};
 				};
 			};
 			buildConfigurationList = E29ADD3317848E8500E55842 /* Build configuration list for PBXProject "Simplenote" */;
@@ -2252,6 +2331,7 @@
 				3FA60138242C5AAD0068FC52 /* SimplenoteScreenshots */,
 				B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */,
 				3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */,
+				D864B15325CAE25000F9B73E /* SimplenoteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2315,6 +2395,13 @@
 				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D864B15225CAE25000F9B73E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2407,6 +2494,25 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		AD6CEDDC25D37DC100744BFB /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Scripts/swiftlint.sh\"\n";
 		};
 		B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2826,6 +2932,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D864B15025CAE25000F9B73E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D864B1A225CAE57100F9B73E /* AssertGeneric.swift in Sources */,
+				D864B1B425CAE5C900F9B73E /* NoteEditor.swift in Sources */,
+				D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */,
+				D864B18225CAE4BE00F9B73E /* SimplenoteUITests.swift in Sources */,
+				D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */,
+				D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */,
+				D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */,
+				D864B19225CAE54300F9B73E /* AllNotes.swift in Sources */,
+				D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */,
+				D864B16925CAE47C00F9B73E /* Generic.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2858,6 +2981,11 @@
 			isa = PBXTargetDependency;
 			target = B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */;
 			targetProxy = B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */;
+		};
+		D864B15A25CAE25000F9B73E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 46A3C96017DFA81A002865AE /* Simplenote */;
+			targetProxy = D864B15925CAE25000F9B73E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3940,6 +4068,171 @@
 			};
 			name = "Distribution AppStore";
 		};
+		D864B15B25CAE25000F9B73E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Simplenote;
+			};
+			name = Debug;
+		};
+		D864B15C25CAE25000F9B73E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Simplenote;
+			};
+			name = Release;
+		};
+		D864B15D25CAE25000F9B73E /* Distribution Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Simplenote;
+			};
+			name = "Distribution Internal";
+		};
+		D864B15E25CAE25000F9B73E /* Distribution Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Simplenote;
+			};
+			name = "Distribution Alpha";
+		};
+		D864B15F25CAE25000F9B73E /* Distribution AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.SimplenoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Simplenote;
+			};
+			name = "Distribution AppStore";
+		};
 		E29ADD6217848E8500E55842 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */;
@@ -4131,6 +4424,18 @@
 				B5EB1EF91C204EBE0080A1B3 /* Distribution Internal */,
 				8C3FEBDE23EAE03A00EE55E6 /* Distribution Alpha */,
 				B5EB1EFA1C204EBE0080A1B3 /* Distribution AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D864B16025CAE25000F9B73E /* Build configuration list for PBXNativeTarget "SimplenoteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D864B15B25CAE25000F9B73E /* Debug */,
+				D864B15C25CAE25000F9B73E /* Release */,
+				D864B15D25CAE25000F9B73E /* Distribution Internal */,
+				D864B15E25CAE25000F9B73E /* Distribution Alpha */,
+				D864B15F25CAE25000F9B73E /* Distribution AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

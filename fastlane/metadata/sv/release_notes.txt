@@ -1,3 +1,1 @@
-– La till skärm för verifiering av konto
- – Uppdaterade minsta radhöjd när anteckningslistan är i komprimerat läge
- – Uppdaterade taggredigeringsupplevelse
+- Tillagt stöd för tangentbordsnavigering och genvägar
