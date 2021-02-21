@@ -32,6 +32,12 @@ func trackStep() {
     stepIndex += 1
 }
 
+func getToAllNotes() {
+    WebView.tapDone()
+    Preview.leavePreviewViaBackButton()
+    NoteEditor.leaveEditor()
+}
+
 class Table {
 
     class func getNotesNumber() -> Int {
@@ -65,7 +71,9 @@ class Table {
 class WebView {
 
     class func tapDone() {
-        app.buttons[uidButton_Done].tap()
+        let doneButton = app.buttons[uidButton_Done]
+        guard doneButton.exists else { return }
+        doneButton.tap()
     }
 }
 
@@ -76,5 +84,19 @@ class WebViewAssert {
         let staticText = app.staticTexts.element(matching: textPredicate)
 
         XCTAssertTrue(staticText.exists, "\"" + textToFind + textNotFoundInWebView)
+    }
+}
+
+class Alert {
+
+    class func closeAny() {
+        let alert = app.alerts.element
+        guard alert.exists else { return }
+
+        let confirmPredicate = NSPredicate(format: "label == '" + uidButton_Accept + "' || label == 'AnythingElse'")
+        let confirmationButton = alert.buttons.element(matching: confirmPredicate)
+        guard confirmationButton.exists else { return }
+
+        confirmationButton.tap()
     }
 }

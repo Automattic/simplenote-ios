@@ -5,27 +5,33 @@ class AllNotes {
     class func openNote(noteName: String) {
         app.tables.cells[noteName].tap()
     }
-    
+
     class func isOpen() -> Bool {
         return app.navigationBars[uidNavBar_AllNotes].exists
     }
 
-    class func open() {        
+    class func open() {
         guard !isOpen() else { return }
-        
+
         app.navigationBars.element.buttons[uidButton_Menu].tap()
         app.tables.staticTexts[uidButton_AllNotes].tap()
     }
 
     class func addNoteTap() {
-        print(">>> Adding new note...")
         app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NewNote].tap()
     }
 
-    class func createNoteAndLeaveEditor (noteName: String) {
+    class func createNoteAndLeaveEditor(noteName: String) {
+        print(">>> Creating note: " + noteName)
         AllNotes.addNoteTap()
         NoteEditor.clearAndEnterText(enteredValue: noteName)
         NoteEditor.leaveEditor()
+    }
+
+    class func createNotes(noteNamesArray: Array<String>) {
+        for noteName in noteNamesArray {
+            createNoteAndLeaveEditor(noteName: noteName)
+        }
     }
 
     class func trashNote(noteName: String) {
@@ -37,6 +43,8 @@ class AllNotes {
     }
 
     class func clearAllNotes() {
+        AllNotes.open()
+
         let notesNumber = AllNotes.getNotesNumber()
         let cellsNum = app.tables.element.children(matching: .cell).count
         var startingIndex: Int
@@ -56,13 +64,13 @@ class AllNotes {
             cell.buttons[uidButton_NoteCell_Trash].tap()
         }
     }
-    
+
     class func waitForLoad() {
         let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
         let predicate = NSPredicate { _, _ in
             allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists == false
         }
-        
+
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
         XCTWaiter().wait(for: [expectation], timeout: 10)
     }
@@ -71,7 +79,14 @@ class AllNotes {
 class AllNotesAssert {
 
     class func noteExists(noteName: String) {
+        print(">>> Asseting existence of note: " + noteName)
         XCTAssertTrue(app.tables.cells[noteName].exists, "\"" + noteName + noteNotFoundInAllNotes)
+    }
+
+    class func notesExist(noteNamesArray: Array<String>) {
+        for noteName in noteNamesArray {
+            AllNotesAssert.noteExists(noteName: noteName)
+        }
     }
 
     class func noteAbsent(noteName: String) {

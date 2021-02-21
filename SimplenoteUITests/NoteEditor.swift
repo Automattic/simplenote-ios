@@ -17,7 +17,7 @@ class NoteEditor {
     class func setFocus() {
         app.textViews.firstMatch.tap()
     }
-    
+
     class func undo() {
         app.textViews.element.tap(withNumberOfTaps: 2, numberOfTouches: 3)
         app.otherElements["UIUndoInteractiveHUD"].children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 1).tap()
@@ -29,7 +29,10 @@ class NoteEditor {
     }
 
     class func leaveEditor() {
-        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_AllNotes].tap()
+        let backButton = app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_AllNotes]
+        guard backButton.exists else { return }
+
+        backButton.tap()
     }
 
     class func toggleMarkdownState() {
@@ -41,7 +44,7 @@ class NoteEditor {
     class func insertChecklist() {
         app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_Checklist].tap()
     }
-    
+
     class func markdownEnable() {
         swipeToPreview()
 
@@ -54,9 +57,8 @@ class NoteEditor {
 
     class func markdownDisable() {
         swipeToPreview()
-
         guard app.navigationBars[uidNavBar_NoteEditor_Preview].exists else { return }
-        
+
         Preview.leavePreviewViaBackButton()
         toggleMarkdownState()
     }
@@ -66,28 +68,27 @@ class NoteEditor {
         app.textViews[containerText].links[linkifiedText].press(forDuration: 1.3)
         sleep(4)
     }
-    
+
     class func getAllTextViews() -> XCUIElementQuery {
         // If we are in Note Editor, and there's zero TextViews, we should try setting focus first
         if app.descendants(matching: .textView).count < 1 {
             NoteEditor.setFocus()
         }
-        
+
         return app.descendants(matching: .textView)
     }
-    
+
     class func getCheckboxesForTextCount(text: String) -> Int {
         let matchesCount = NoteEditor.getTextViewsWithExactLabelCount(label: text)
         print(">>> ^ Found " + String(matchesCount) + " Checkboxe(s) for '" + text + "'")
         return matchesCount
     }
-    
+
     class func getTextViewsWithExactValueCount(value: String) -> Int {
         let textViews = getAllTextViews()
         var matchesCounter = 0
 
-        for index in 0...textViews.count - 1
-        {
+        for index in 0...textViews.count - 1 {
             let currentValue = textViews.element(boundBy: index).value as! String
             let currentValueStripped = currentValue.replacingOccurrences(of: "\u{fffc}", with: "")
 
@@ -95,11 +96,11 @@ class NoteEditor {
                 matchesCounter += 1
             }
         }
-        
+
         print(">>> Found " + String(matchesCounter) + " TextView(s) with '" + value + "' value")
         return matchesCounter
     }
-    
+
     class func getTextViewsWithExactLabelCount(label: String) -> Int {
         let _ = getAllTextViews()// To initialize the editor
         let predicate = NSPredicate(format: "label == '" + label + "'")
@@ -108,7 +109,7 @@ class NoteEditor {
         print(">>> Found " + String(matchesCount) + " TextView(s) with '" + label + "' label")
         return matchesCount
     }
-    
+
 }
 
 class NoteEditorAssert {
@@ -133,23 +134,28 @@ class NoteEditorAssert {
         let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
         XCTAssertEqual(1, matchesCount)
     }
-        
+
+    class func textViewWithExactValueNotShown(value: String) {
+        let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
+        XCTAssertEqual(0, matchesCount)
+    }
+
     class func textViewWithExactLabelShownOnce(label: String) {
         let matchesCount = NoteEditor.getTextViewsWithExactLabelCount(label: label)
         XCTAssertEqual(1, matchesCount)
     }
-    
+
     class func textViewWithExactLabelsShownOnce(labelsArray: Array<String>) {
         for label in labelsArray {
             NoteEditorAssert.textViewWithExactLabelShownOnce(label: label)
         }
     }
-    
+
     class func checkboxForTextShownOnce(text: String) {
         let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
         XCTAssertEqual(1, matchesCount)
     }
-    
+
     class func checkboxForTextNotShown(text: String) {
         let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
         XCTAssertEqual(0, matchesCount)

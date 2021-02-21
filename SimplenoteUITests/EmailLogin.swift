@@ -7,6 +7,13 @@ class EmailLogin {
         app.buttons[uidButton_LogInWithEmail].tap()
     }
 
+    class func close() {
+        let backButton = app.navigationBars["Log In"].buttons[uidButton_Back]
+        guard backButton.exists else { return }
+
+        backButton.tap()
+    }
+
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
         enterPassword(enteredValue: password)
