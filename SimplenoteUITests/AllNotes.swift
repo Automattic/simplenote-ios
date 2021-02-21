@@ -79,7 +79,7 @@ class AllNotes {
 class AllNotesAssert {
 
     class func noteExists(noteName: String) {
-        print(">>> Asseting existence of note: " + noteName)
+        print(">>> Asserting note existsence: " + noteName)
         XCTAssertTrue(app.tables.cells[noteName].exists, "\"" + noteName + noteNotFoundInAllNotes)
     }
 

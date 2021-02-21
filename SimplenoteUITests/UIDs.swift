@@ -2,6 +2,7 @@
 let uidPicture_AppLogo = "simplenote-logo"
 
 let uidNavBar_AllNotes = "All Notes"
+let uidNavBar_LogIn = "Log In"
 let uidNavBar_NoteEditor_Preview = "Preview"
 let uidNavBar_NoteEditor_Options = "Options"
 

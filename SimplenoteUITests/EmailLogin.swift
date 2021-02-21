@@ -8,7 +8,7 @@ class EmailLogin {
     }
 
     class func close() {
-        let backButton = app.navigationBars["Log In"].buttons[uidButton_Back]
+        let backButton = app.navigationBars[uidNavBar_LogIn].buttons[uidButton_Back]
         guard backButton.exists else { return }
 
         backButton.tap()
