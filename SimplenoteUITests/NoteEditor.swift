@@ -29,26 +29,26 @@ class NoteEditor {
     }
 
     class func leaveEditor() {
-        let backButton = app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_AllNotes]
+        let backButton = app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorAllNotes]
         guard backButton.exists else { return }
 
         backButton.tap()
     }
 
     class func toggleMarkdownState() {
-        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_Menu].tap()
-        app.tables.staticTexts[uidText_NoteEditor_Options_Markdown].tap()
-        app.navigationBars[uidNavBar_NoteEditor_Options].buttons[uidButton_Done].tap()
+        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorMenu].tap()
+        app.tables.staticTexts[UID.Text.NoteEditorOptionsMarkdown].tap()
+        app.navigationBars[UID.NavBar.NoteEditorOptions].buttons[UID.Button.Done].tap()
     }
 
     class func insertChecklist() {
-        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NoteEditor_Checklist].tap()
+        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorChecklist].tap()
     }
 
     class func markdownEnable() {
         swipeToPreview()
 
-        if app.navigationBars[uidNavBar_NoteEditor_Preview].exists {
+        if app.navigationBars[UID.NavBar.NoteEditorPreview].exists {
             Preview.leavePreviewViaBackButton()
         } else {
             toggleMarkdownState()
@@ -57,7 +57,7 @@ class NoteEditor {
 
     class func markdownDisable() {
         swipeToPreview()
-        guard app.navigationBars[uidNavBar_NoteEditor_Preview].exists else { return }
+        guard app.navigationBars[UID.NavBar.NoteEditorPreview].exists else { return }
 
         Preview.leavePreviewViaBackButton()
         toggleMarkdownState()
@@ -121,13 +121,13 @@ class NoteEditorAssert {
     }
 
     class func editorShown() {
-        let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
+        let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
 
-        XCTAssertTrue(allNotesNavBar.waitForExistence(timeout: minLoadTimeout), uidNavBar_AllNotes + navBarNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[uidButton_NoteEditor_AllNotes].waitForExistence(timeout: minLoadTimeout), uidButton_NoteEditor_AllNotes + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[uidButton_NoteEditor_Checklist].waitForExistence(timeout: minLoadTimeout), uidButton_NoteEditor_Checklist + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[uidButton_NoteEditor_Information].waitForExistence(timeout: minLoadTimeout), uidButton_NoteEditor_Information + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[uidButton_NoteEditor_Menu].waitForExistence(timeout: minLoadTimeout), uidButton_NoteEditor_Menu + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.AllNotes + navBarNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorAllNotes].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorAllNotes + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorChecklist].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorChecklist + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorInformation].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorInformation + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorMenu].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorMenu + buttonNotFound)
     }
 
     class func textViewWithExactValueShownOnce(value: String) {
@@ -145,8 +145,8 @@ class NoteEditorAssert {
         XCTAssertEqual(1, matchesCount)
     }
 
-    class func textViewWithExactLabelsShownOnce(labelsArray: Array<String>) {
-        for label in labelsArray {
+    class func textViewWithExactLabelsShownOnce(labels: [String]) {
+        for label in labels {
             NoteEditorAssert.textViewWithExactLabelShownOnce(label: label)
         }
     }

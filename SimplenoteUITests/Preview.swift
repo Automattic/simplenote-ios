@@ -11,7 +11,7 @@ class Preview {
     }
 
     class func leavePreviewViaBackButton() {
-        let backButton = app.navigationBars[uidNavBar_NoteEditor_Preview].buttons[uidButton_Back]
+        let backButton = app.navigationBars[UID.NavBar.NoteEditorPreview].buttons[UID.Button.Back]
         guard backButton.exists else { return }
 
         backButton.tap()
@@ -51,11 +51,11 @@ class PreviewAssert {
     }
 
     class func previewShown() {
-        let previewNavBar = app.navigationBars[uidNavBar_NoteEditor_Preview]
+        let previewNavBar = app.navigationBars[UID.NavBar.NoteEditorPreview]
 
-        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), uidNavBar_NoteEditor_Preview + navBarNotFound)
-        XCTAssertTrue(previewNavBar.buttons[uidButton_Back].waitForExistence(timeout: minLoadTimeout), uidButton_Back + buttonNotFound)
-        XCTAssertTrue(previewNavBar.staticTexts[uidText_NoteEditor_Preview].waitForExistence(timeout: minLoadTimeout), uidText_NoteEditor_Preview + labelNotFound)
+        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.NoteEditorPreview + navBarNotFound)
+        XCTAssertTrue(previewNavBar.buttons[UID.Button.Back].waitForExistence(timeout: minLoadTimeout), UID.Button.Back + buttonNotFound)
+        XCTAssertTrue(previewNavBar.staticTexts[UID.Text.NoteEditorPreview].waitForExistence(timeout: minLoadTimeout), UID.Text.NoteEditorPreview + labelNotFound)
     }
 
     class func wholeTextShown(text: String) {
@@ -72,8 +72,8 @@ class PreviewAssert {
         XCTAssertEqual(1, matchesCount)
     }
 
-    class func staticTextWithExactValuesShownOnce(valuesArray: Array<String>) {
-        for value in valuesArray {
+    class func staticTextWithExactValuesShownOnce(values: [String]) {
+        for value in values {
             PreviewAssert.staticTextWithExactValueShownOnce(value: value)
         }
     }

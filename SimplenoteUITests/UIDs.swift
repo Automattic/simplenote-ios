@@ -1,53 +1,61 @@
-// Strings to locate controls by
-let uidPicture_AppLogo = "simplenote-logo"
+enum UID {
+	enum Picture {
+		static let AppLogo = "simplenote-logo"
+	}
 
-let uidNavBar_AllNotes = "All Notes"
-let uidNavBar_LogIn = "Log In"
-let uidNavBar_NoteEditor_Preview = "Preview"
-let uidNavBar_NoteEditor_Options = "Options"
+	enum Cell {
+		static let Settings = "Settings"
+	}
 
-// Buttons
-let uidButton_NewNote = "New note"
-let uidButton_Done = "Done"
-let uidButton_Back = "Back"
-let uidButton_Accept = "Accept"
-let uidButton_Yes = "Yes"
-let uidButton_Menu = "menu"
-let uidButton_SignUp = "Sign Up"
-let uidButton_LogIn = "Log In"
-let uidButton_LogInWithEmail = "Log in with email"
+	enum NavBar {
+		static let AllNotes = "All Notes"
+		static let LogIn = "Log In"
+		static let NoteEditorPreview = "Preview"
+		static let NoteEditorOptions = "Options"
+	}
 
-let uidButton_AllNotes = "All Notes"
-let uidButton_Trash = "Trash"
-let uidButton_Settings_LogOut = "Log Out"
+	enum Button {
+		static let NewNote = "New note"
+		static let Done = "Done"
+		static let Back = "Back"
+		static let Accept = "Accept"
+		static let Yes = "Yes"
+		static let Menu = "menu"
+		static let SignUp = "Sign Up"
+		static let LogIn = "Log In"
+		static let LogInWithEmail = "Log in with email"
+		static let AllNotes = "All Notes"
+		static let Trash = "Trash"
+		static let SettingsLogOut = "Log Out"
+		static let NoteEditorAllNotes = "All Notes"
+		static let NoteEditorChecklist = "Inserts a new Checklist Item"
+		static let NoteEditorInformation = "Information"
+		static let NoteEditorMenu = "note-menu"
+		static let NoteCellTrash = "icon trash"
+		static let TrashRestore = "icon restore"
+		static let TrashEmptyTrash = "Empty"
+	}
 
-let uidButton_NoteEditor_AllNotes = "All Notes"
-let uidButton_NoteEditor_Checklist = "Inserts a new Checklist Item"
-let uidButton_NoteEditor_Information = "Information"
-let uidButton_NoteEditor_Menu = "note-menu"
+	enum Text {
+		static let NoteEditorPreview = "Preview"
+		static let NoteEditorOptionsMarkdown = "Markdown"
+		static let AllNotesInProgress = "In progress"
+	}
 
-let uidButton_NoteCell_Trash = "icon trash"
+	enum TextField {
+		static let Email = "Email"
+		static let Password = "Password"
+	}
+}
 
-let uidButton_Trash_Restore = "icon restore"
-let uidButton_Trash_EmptyTrash = "Empty"
+enum Text {
+	static let AppName = "Simplenote"
+	static let AppTagline = "The simplest way to keep notes."
+	static let AlertHeadingSorry = "Sorry!"
+	static let AlertContentLoginFailed = "Could not login with the provided email address and password."
+	static let LoginEmailInvalid = "Your email address is not valid"
+	static let LoginPasswordShort = "Password must contain at least 4 characters"
+}
 
-let uidCell_Settings = "Settings"
-
-let uidText_NoteEditor_Preview = "Preview"
-let uidText_NoteEditor_Options_Markdown = "Markdown"
-let uidText_AllNotes_InProgress = "In progress"
-
-let uidTextField_Email = "Email"
-let uidTextField_Password = "Password"
-
-// Alerts and Texts
-let text_AppName = "Simplenote"
-let text_AppTagline = "The simplest way to keep notes."
-let text_AlertHeading_Sorry = "Sorry!"
-let text_AlertContent_LoginFailed = "Could not login with the provided email address and password."
-let text_LoginEmailInvalid = "Your email address is not valid"
-let text_LoginPasswordShort = "Password must contain at least 4 characters"
-
-// Test Account
 let testDataExistingEmail = "simplenoteuitest@mailinator.com"
 let testDataExistingPassword = "qazxswedc"

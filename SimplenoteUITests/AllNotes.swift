@@ -7,18 +7,18 @@ class AllNotes {
     }
 
     class func isOpen() -> Bool {
-        return app.navigationBars[uidNavBar_AllNotes].exists
+        return app.navigationBars[UID.NavBar.AllNotes].exists
     }
 
     class func open() {
         guard !isOpen() else { return }
 
-        app.navigationBars.element.buttons[uidButton_Menu].tap()
-        app.tables.staticTexts[uidButton_AllNotes].tap()
+        app.navigationBars.element.buttons[UID.Button.Menu].tap()
+        app.tables.staticTexts[UID.Button.AllNotes].tap()
     }
 
     class func addNoteTap() {
-        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NewNote].tap()
+        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NewNote].tap()
     }
 
     class func createNoteAndLeaveEditor(noteName: String) {
@@ -28,8 +28,8 @@ class AllNotes {
         NoteEditor.leaveEditor()
     }
 
-    class func createNotes(names: Array<String>) {
-        for noteName in noteNamesArray {
+    class func createNotes(names: [String]) {
+        for noteName in names {
             createNoteAndLeaveEditor(noteName: noteName)
         }
     }
@@ -61,14 +61,14 @@ class AllNotes {
         for _ in 0..<notesNumber {
             let cell = app.tables.cells.element(boundBy: startingIndex)
             cell.swipeLeft()
-            cell.buttons[uidButton_NoteCell_Trash].tap()
+            cell.buttons[UID.Button.NoteCellTrash].tap()
         }
     }
 
     class func waitForLoad() {
-        let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
+        let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
         let predicate = NSPredicate { _, _ in
-            allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists == false
+            allNotesNavBar.staticTexts[UID.Text.AllNotesInProgress].exists == false
         }
 
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
@@ -83,8 +83,8 @@ class AllNotesAssert {
         XCTAssertTrue(app.tables.cells[noteName].exists, "\"" + noteName + noteNotFoundInAllNotes)
     }
 
-    class func notesExist(noteNamesArray: Array<String>) {
-        for noteName in noteNamesArray {
+    class func notesExist(names: [String]) {
+        for noteName in names {
             AllNotesAssert.noteExists(noteName: noteName)
         }
     }
@@ -99,6 +99,6 @@ class AllNotesAssert {
     }
 
     class func screenShown() {
-        XCTAssertTrue(app.navigationBars[uidNavBar_AllNotes].waitForExistence(timeout: maxLoadTimeout), uidNavBar_AllNotes + navBarNotFound)
+        XCTAssertTrue(app.navigationBars[UID.NavBar.AllNotes].waitForExistence(timeout: maxLoadTimeout), UID.NavBar.AllNotes + navBarNotFound)
     }
 }

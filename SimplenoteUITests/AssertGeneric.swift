@@ -74,10 +74,10 @@ class Assert {
     }
 
     class func signUpLogInScreenShown() {
-        XCTAssertTrue(app.images[uidPicture_AppLogo].waitForExistence(timeout: minLoadTimeout), uidPicture_AppLogo + imageNotFound)
-        XCTAssertTrue(app.staticTexts[text_AppName].waitForExistence(timeout: minLoadTimeout), text_AppName + labelNotFound)
-        XCTAssertTrue(app.staticTexts[text_AppTagline].waitForExistence(timeout: minLoadTimeout), text_AppTagline + labelNotFound)
-        XCTAssertTrue(app.buttons[uidButton_SignUp].waitForExistence(timeout: minLoadTimeout), uidButton_SignUp + buttonNotFound)
-        XCTAssertTrue(app.buttons[uidButton_LogIn].waitForExistence(timeout: minLoadTimeout), uidButton_LogIn + buttonNotFound)
+        XCTAssertTrue(app.images[UID.Picture.AppLogo].waitForExistence(timeout: minLoadTimeout), UID.Picture.AppLogo + imageNotFound)
+        XCTAssertTrue(app.staticTexts[Text.AppName].waitForExistence(timeout: minLoadTimeout), Text.AppName + labelNotFound)
+        XCTAssertTrue(app.staticTexts[Text.AppTagline].waitForExistence(timeout: minLoadTimeout), Text.AppTagline + labelNotFound)
+        XCTAssertTrue(app.buttons[UID.Button.SignUp].waitForExistence(timeout: minLoadTimeout), UID.Button.SignUp + buttonNotFound)
+        XCTAssertTrue(app.buttons[UID.Button.LogIn].waitForExistence(timeout: minLoadTimeout), UID.Button.LogIn + buttonNotFound)
     }
 }

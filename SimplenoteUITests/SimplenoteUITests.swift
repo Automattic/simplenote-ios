@@ -24,46 +24,46 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
         EmailLogin.open()
         EmailLogin.logIn(email: "", password: "")
 
-        Assert.labelExists(labelText: text_LoginEmailInvalid)
-        Assert.labelExists(labelText: text_LoginPasswordShort)
+        Assert.labelExists(labelText: Text.LoginEmailInvalid)
+        Assert.labelExists(labelText: Text.LoginPasswordShort)
     }
 
     func testLogInWithNoEmail() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: "", password: testDataExistingPassword)
 
-        Assert.labelExists(labelText: text_LoginEmailInvalid)
-        Assert.labelAbsent(labelText: text_LoginPasswordShort)
+        Assert.labelExists(labelText: Text.LoginEmailInvalid)
+        Assert.labelAbsent(labelText: Text.LoginPasswordShort)
     }
 
     func testLogInWithInvalidEmail() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataInvalidEmail, password: testDataExistingPassword)
 
-        Assert.labelExists(labelText: text_LoginEmailInvalid)
-        Assert.labelAbsent(labelText: text_LoginPasswordShort)
+        Assert.labelExists(labelText: Text.LoginEmailInvalid)
+        Assert.labelAbsent(labelText: Text.LoginPasswordShort)
     }
 
     func testLogInWithNoPassword() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: "")
 
-        Assert.labelAbsent(labelText: text_LoginEmailInvalid)
-        Assert.labelExists(labelText: text_LoginPasswordShort)
+        Assert.labelAbsent(labelText: Text.LoginEmailInvalid)
+        Assert.labelExists(labelText: Text.LoginPasswordShort)
     }
 
     func testLogInWithTooShortPassword() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataInvalidPassword)
 
-        Assert.labelAbsent(labelText: text_LoginEmailInvalid)
-        Assert.labelExists(labelText: text_LoginPasswordShort)
+        Assert.labelAbsent(labelText: Text.LoginEmailInvalid)
+        Assert.labelExists(labelText: Text.LoginPasswordShort)
     }
 
     func testLogInWithExistingEmailIncorrectPassword() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataNotExistingPassword)
-        Assert.alertExistsAndClose(headingText: text_AlertHeading_Sorry, content: text_AlertContent_LoginFailed, buttonText: uidButton_Accept)
+        Assert.alertExistsAndClose(headingText: Text.AlertHeadingSorry, content: Text.AlertContentLoginFailed, buttonText: UID.Button.Accept)
     }
 
     func testLogInWithCorrectCredentials() throws {
@@ -199,69 +199,69 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
     }
 
-    func testUndoUndoesTheLastEdit() throws {
-        let editorText = "ABCD"
+	func testUndoUndoesTheLastEdit() throws {
+		let editorText = "ABCD"
 
-        // Step 1
-        AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown()
+		// Step 1
+		AllNotes.addNoteTap()
+		NoteEditorAssert.editorShown()
 
-        // Step 2
-        NoteEditor.clearAndEnterText(enteredValue: editorText)
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: editorText)
+		// Step 2
+		NoteEditor.clearAndEnterText(enteredValue: editorText)
+		NoteEditorAssert.textViewWithExactValueShownOnce(value: editorText)
 
-        // Step 3
-        NoteEditor.undo()
-        NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: "ABC")
-    }
+		// Step 3
+		NoteEditor.undo()
+		NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
+		NoteEditorAssert.textViewWithExactValueShownOnce(value: "ABC")
+	}
 
-    func testAddedURLIsLinkified() throws {
+	func testAddedURLIsLinkified() throws {
 
-        // Step 1
-        AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown()
+		// Step 1
+		AllNotes.addNoteTap()
+		NoteEditorAssert.editorShown()
 
-        // Step 2
-        NoteEditor.markdownEnable()
-        NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
+		// Step 2
+		NoteEditor.markdownEnable()
+		NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
+		NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
-        // Step 3
-        NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: usualLinkText)
+		// Step 3
+		NoteEditor.leaveEditor()
+		AllNotesAssert.noteExists(noteName: usualLinkText)
 
-        // Step 4
-        AllNotes.openNote(noteName: usualLinkText)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
-    }
+		// Step 4
+		AllNotes.openNote(noteName: usualLinkText)
+		NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+	}
 
-    func testLongTappingOnLinkOpensLinkInNewWindow() throws {
+	func testLongTappingOnLinkOpensLinkInNewWindow() throws {
 
-        // Step 1
-        AllNotes.addNoteTap()
-        NoteEditorAssert.editorShown()
+		// Step 1
+		AllNotes.addNoteTap()
+		NoteEditorAssert.editorShown()
 
-        // Step 2
-        NoteEditor.markdownEnable()
-        NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
+		// Step 2
+		NoteEditor.markdownEnable()
+		NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
+		NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
-        // Step 3
-        NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: usualLinkText)
+		// Step 3
+		NoteEditor.leaveEditor()
+		AllNotesAssert.noteExists(noteName: usualLinkText)
 
-        // Step 4
-        AllNotes.openNote(noteName: usualLinkText)
-        //NoteEditorAssert.editorText(text: usualURL)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+		// Step 4
+		AllNotes.openNote(noteName: usualLinkText)
+		//NoteEditorAssert.editorText(text: usualURL)
+		NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
 
-        // Step 5
-        NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
-        for text in webViewTexts {
-            WebViewAssert.textShownOnScreen(textToFind: text)
-        }
-    }
+		// Step 5
+		NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
+		for text in webViewTexts {
+			WebViewAssert.textShownOnScreen(textToFind: text)
+		}
+	}
 
     func testTappingOnLinkInPreviewOpensLinkInNewWindow() throws {
 
@@ -314,7 +314,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     }
 
     func testCreateUncheckedItem() throws {
-        let checklistText = "Unchecked Item"
+		let checklistText = "Unchecked Item"
         let completeText = "- [ ]" + checklistText
 
         // Step 1
@@ -360,16 +360,16 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         AllNotes.openNote(noteName: noteTitle)
-        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["- Minus1", "- Minus2", "- Minus3"])
-        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["+ Plus1", "+ Plus2", "+ Plus3"])
-        NoteEditorAssert.textViewWithExactLabelsShownOnce(labelsArray: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["- Minus1", "- Minus2", "- Minus3"])
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["+ Plus1", "+ Plus2", "+ Plus3"])
+        NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
 
         trackStep()
         NoteEditor.markdownEnable()
         NoteEditor.swipeToPreview()
-        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Minus1", "• Minus2", "• Minus3"])
-        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Plus1", "• Plus2", "• Plus3"])
-        PreviewAssert.staticTextWithExactValuesShownOnce(valuesArray: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
+        PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Minus1", "• Minus2", "• Minus3"])
+        PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Plus1", "• Plus2", "• Plus3"])
+        PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
     }
 }
 
@@ -402,8 +402,8 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 
         // Step 2
         AllNotes.open()
-        AllNotes.createNotes(noteNamesArray: noteNamesArray)
-        AllNotesAssert.notesExist(noteNamesArray: noteNamesArray)
+        AllNotes.createNotes(names: noteNamesArray)
+        AllNotesAssert.notesExist(names: noteNamesArray)
         AllNotesAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
@@ -431,17 +431,17 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 
         // Step 2
         AllNotes.open()
-        AllNotes.createNotes(noteNamesArray: noteNamesArray)
-        AllNotesAssert.notesExist(noteNamesArray: noteNamesArray)
+        AllNotes.createNotes(names: noteNamesArray)
+        AllNotesAssert.notesExist(names: noteNamesArray)
         AllNotesAssert.notesNumber(expectedNotesNumber: 3)
 
-        // Step 3
-        AllNotes.trashNote(noteName: noteOneName)
-        AllNotes.trashNote(noteName: noteTwoName)
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+		// Step 3
+		AllNotes.trashNote(noteName: noteOneName)
+		AllNotes.trashNote(noteName: noteTwoName)
+		AllNotesAssert.noteAbsent(noteName: noteOneName)
+		AllNotesAssert.noteAbsent(noteName: noteTwoName)
+		AllNotesAssert.noteExists(noteName: noteThreeName)
+		AllNotesAssert.notesNumber(expectedNotesNumber: 1)
 
         //Step 4
         Trash.open()
@@ -475,8 +475,8 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 
         // Step 2
         AllNotes.open()
-        AllNotes.createNotes(noteNamesArray: noteNamesArray)
-        AllNotesAssert.notesExist(noteNamesArray: noteNamesArray)
+        AllNotes.createNotes(names: noteNamesArray)
+        AllNotesAssert.notesExist(names: noteNamesArray)
         AllNotesAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
@@ -517,8 +517,8 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 
         // Step 2
         AllNotes.open()
-        AllNotes.createNotes(noteNamesArray: noteNamesArray)
-        AllNotesAssert.notesExist(noteNamesArray: noteNamesArray)
+        AllNotes.createNotes(names: noteNamesArray)
+        AllNotesAssert.notesExist(names: noteNamesArray)
         AllNotesAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
@@ -539,7 +539,7 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 
         //Step 6
         AllNotes.open()
-        AllNotesAssert.notesExist(noteNamesArray: noteNamesArray)
+        AllNotesAssert.notesExist(names: noteNamesArray)
         AllNotesAssert.notesNumber(expectedNotesNumber: 3)
     }
 
