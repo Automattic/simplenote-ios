@@ -28,7 +28,7 @@ class AllNotes {
         NoteEditor.leaveEditor()
     }
 
-    class func createNotes(noteNamesArray: Array<String>) {
+    class func createNotes(names: Array<String>) {
         for noteName in noteNamesArray {
             createNoteAndLeaveEditor(noteName: noteName)
         }
