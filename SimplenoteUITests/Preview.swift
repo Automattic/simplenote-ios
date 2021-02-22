@@ -9,9 +9,12 @@ class Preview {
     class func getAllStaticTexts() -> XCUIElementQuery {
         return app.webViews.descendants(matching: .staticText)
     }
-    
+
     class func leavePreviewViaBackButton() {
-        app.navigationBars[uidNavBar_NoteEditor_Preview].buttons[uidButton_Back].tap()
+        let backButton = app.navigationBars[UID.NavBar.NoteEditorPreview].buttons[UID.Button.Back]
+        guard backButton.exists else { return }
+
+        backButton.tap()
     }
 
     class func tapLink(linkText: String) {
@@ -20,7 +23,7 @@ class Preview {
         link.tap()
         sleep(3)
     }
-    
+
     class func getStaticTextsWithExactValueCount(value: String) -> Int {
         let predicate = NSPredicate(format: "value == '" + value + "'")
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
@@ -28,7 +31,7 @@ class Preview {
         print(">>> Found " + String(matchesCount) + " StaticTexts(s) with '" + value + "' value")
         return matchesCount
     }
-    
+
     class func getStaticTextsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
@@ -48,33 +51,33 @@ class PreviewAssert {
     }
 
     class func previewShown() {
-        let previewNavBar = app.navigationBars[uidNavBar_NoteEditor_Preview]
+        let previewNavBar = app.navigationBars[UID.NavBar.NoteEditorPreview]
 
-        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), uidNavBar_NoteEditor_Preview + navBarNotFound)
-        XCTAssertTrue(previewNavBar.buttons[uidButton_Back].waitForExistence(timeout: minLoadTimeout), uidButton_Back + buttonNotFound)
-        XCTAssertTrue(previewNavBar.staticTexts[uidText_NoteEditor_Preview].waitForExistence(timeout: minLoadTimeout), uidText_NoteEditor_Preview + labelNotFound)
+        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.NoteEditorPreview + navBarNotFound)
+        XCTAssertTrue(previewNavBar.buttons[UID.Button.Back].waitForExistence(timeout: minLoadTimeout), UID.Button.Back + buttonNotFound)
+        XCTAssertTrue(previewNavBar.staticTexts[UID.Text.NoteEditorPreview].waitForExistence(timeout: minLoadTimeout), UID.Text.NoteEditorPreview + labelNotFound)
     }
 
     class func wholeTextShown(text: String) {
-        XCTAssertEqual(text, Preview.getText(), "Preview text" + notExpectedEnding);
+        XCTAssertEqual(text, Preview.getText(), "Preview text" + notExpectedEnding)
     }
-    
+
     class func staticTextWithExactLabelShownOnce(label: String) {
         let matchesCount = Preview.getStaticTextsWithExactLabelCount(label: label)
         XCTAssertEqual(1, matchesCount)
     }
-    
+
     class func staticTextWithExactValueShownOnce(value: String) {
         let matchesCount = Preview.getStaticTextsWithExactValueCount(value: value)
         XCTAssertEqual(1, matchesCount)
     }
-    
-    class func staticTextWithExactValuesShownOnce(valuesArray: Array<String>) {
-        for value in valuesArray {
+
+    class func staticTextWithExactValuesShownOnce(values: [String]) {
+        for value in values {
             PreviewAssert.staticTextWithExactValueShownOnce(value: value)
         }
     }
-    
+
     class func boxesTotalNumber(expectedSwitchesNumber: Int) {
         XCTAssertEqual(expectedSwitchesNumber, app.switches.count, numberOfBoxesInPreviewNotExpected)
     }
@@ -82,16 +85,16 @@ class PreviewAssert {
     class func boxesStates(expectedCheckedBoxesNumber: Int, expectedEmptyBoxesNumber: Int) {
         let expectedBoxesCount = expectedCheckedBoxesNumber + expectedEmptyBoxesNumber,
             actualBoxesCount = app.switches.count
-        
+
         var actualCheckedBoxesCount = 0,
             actualEmptyBoxesCount = 0
 
         print("Number of boxes found: " + String(actualBoxesCount))
-        
+
         XCTAssertEqual(expectedBoxesCount, actualBoxesCount, numberOfBoxesInPreviewNotExpected)
-        
+
         if actualBoxesCount < 1 { return }
-        
+
         for index in 0...actualBoxesCount - 1 {
             let box = app.descendants(matching: .switch).element(boundBy: index)
             print("Current box debug description: " + box.value.debugDescription)

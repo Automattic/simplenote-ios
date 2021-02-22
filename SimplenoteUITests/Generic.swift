@@ -3,7 +3,7 @@ import XCTest
 private var stepIndex = 0
 
 func attemptLogOut() -> Bool {
-    let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
+    let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
     var loggedOut: Bool = false
 
     if allNotesNavBar.exists {
@@ -16,10 +16,10 @@ func attemptLogOut() -> Bool {
 }
 
 func logOut() -> Bool {
-    app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_Menu].tap()
-    app.tables.staticTexts[uidCell_Settings].tap()
-    app.tables.staticTexts[uidButton_Settings_LogOut].tap()
-    return app.buttons[uidButton_LogIn].waitForExistence(timeout: maxLoadTimeout)
+    app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.Menu].tap()
+    app.tables.staticTexts[UID.Cell.Settings].tap()
+    app.tables.staticTexts[UID.Button.SettingsLogOut].tap()
+    return app.buttons[UID.Button.LogIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
 func trackTest(_ function: String = #function) {
@@ -30,6 +30,12 @@ func trackTest(_ function: String = #function) {
 func trackStep() {
     print(">> Step " + String(stepIndex))
     stepIndex += 1
+}
+
+func getToAllNotes() {
+    WebView.tapDone()
+    Preview.leavePreviewViaBackButton()
+    NoteEditor.leaveEditor()
 }
 
 class Table {
@@ -58,14 +64,16 @@ class Table {
     class func trashNote(noteName: String) {
         app.tables.cells[noteName].swipeLeft()
         sleep(1)
-        app.tables.cells[noteName].buttons[uidButton_NoteCell_Trash].tap()
+        app.tables.cells[noteName].buttons[UID.Button.NoteCellTrash].tap()
     }
 }
 
 class WebView {
 
     class func tapDone() {
-        app.buttons[uidButton_Done].tap()
+        let doneButton = app.buttons[UID.Button.Done]
+        guard doneButton.exists else { return }
+        doneButton.tap()
     }
 }
 
@@ -76,5 +84,19 @@ class WebViewAssert {
         let staticText = app.staticTexts.element(matching: textPredicate)
 
         XCTAssertTrue(staticText.exists, "\"" + textToFind + textNotFoundInWebView)
+    }
+}
+
+class Alert {
+
+    class func closeAny() {
+        let alert = app.alerts.element
+        guard alert.exists else { return }
+
+        let confirmPredicate = NSPredicate(format: "label == '" + UID.Button.Accept + "' || label == 'AnythingElse'")
+        let confirmationButton = alert.buttons.element(matching: confirmPredicate)
+        guard confirmationButton.exists else { return }
+
+        confirmationButton.tap()
     }
 }

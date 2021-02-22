@@ -5,27 +5,33 @@ class AllNotes {
     class func openNote(noteName: String) {
         app.tables.cells[noteName].tap()
     }
-    
+
     class func isOpen() -> Bool {
-        return app.navigationBars[uidNavBar_AllNotes].exists
+        return app.navigationBars[UID.NavBar.AllNotes].exists
     }
 
-    class func open() {        
+    class func open() {
         guard !isOpen() else { return }
-        
-        app.navigationBars.element.buttons[uidButton_Menu].tap()
-        app.tables.staticTexts[uidButton_AllNotes].tap()
+
+        app.navigationBars.element.buttons[UID.Button.Menu].tap()
+        app.tables.staticTexts[UID.Button.AllNotes].tap()
     }
 
     class func addNoteTap() {
-        print(">>> Adding new note...")
-        app.navigationBars[uidNavBar_AllNotes].buttons[uidButton_NewNote].tap()
+        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NewNote].tap()
     }
 
-    class func createNoteAndLeaveEditor (noteName: String) {
+    class func createNoteAndLeaveEditor(noteName: String) {
+        print(">>> Creating note: " + noteName)
         AllNotes.addNoteTap()
         NoteEditor.clearAndEnterText(enteredValue: noteName)
         NoteEditor.leaveEditor()
+    }
+
+    class func createNotes(names: [String]) {
+        for noteName in names {
+            createNoteAndLeaveEditor(noteName: noteName)
+        }
     }
 
     class func trashNote(noteName: String) {
@@ -37,6 +43,8 @@ class AllNotes {
     }
 
     class func clearAllNotes() {
+        AllNotes.open()
+
         let notesNumber = AllNotes.getNotesNumber()
         let cellsNum = app.tables.element.children(matching: .cell).count
         var startingIndex: Int
@@ -53,16 +61,16 @@ class AllNotes {
         for _ in 0..<notesNumber {
             let cell = app.tables.cells.element(boundBy: startingIndex)
             cell.swipeLeft()
-            cell.buttons[uidButton_NoteCell_Trash].tap()
+            cell.buttons[UID.Button.NoteCellTrash].tap()
         }
     }
-    
+
     class func waitForLoad() {
-        let allNotesNavBar = app.navigationBars[uidNavBar_AllNotes]
+        let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
         let predicate = NSPredicate { _, _ in
-            allNotesNavBar.staticTexts[uidText_AllNotes_InProgress].exists == false
+            allNotesNavBar.staticTexts[UID.Text.AllNotesInProgress].exists == false
         }
-        
+
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
         XCTWaiter().wait(for: [expectation], timeout: 10)
     }
@@ -71,7 +79,14 @@ class AllNotes {
 class AllNotesAssert {
 
     class func noteExists(noteName: String) {
+        print(">>> Asserting note existsence: " + noteName)
         XCTAssertTrue(app.tables.cells[noteName].exists, "\"" + noteName + noteNotFoundInAllNotes)
+    }
+
+    class func notesExist(names: [String]) {
+        for noteName in names {
+            AllNotesAssert.noteExists(noteName: noteName)
+        }
     }
 
     class func noteAbsent(noteName: String) {
@@ -84,6 +99,6 @@ class AllNotesAssert {
     }
 
     class func screenShown() {
-        XCTAssertTrue(app.navigationBars[uidNavBar_AllNotes].waitForExistence(timeout: maxLoadTimeout), uidNavBar_AllNotes + navBarNotFound)
+        XCTAssertTrue(app.navigationBars[UID.NavBar.AllNotes].waitForExistence(timeout: maxLoadTimeout), UID.NavBar.AllNotes + navBarNotFound)
     }
 }

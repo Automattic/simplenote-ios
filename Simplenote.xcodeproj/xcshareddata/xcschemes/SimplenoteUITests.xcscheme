@@ -21,6 +21,77 @@
                BlueprintName = "SimplenoteUITests"
                ReferencedContainer = "container:Simplenote.xcodeproj">
             </BuildableReference>
+            <SelectedTests>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithExistingEmailIncorrectPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithInvalidEmail()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmail()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmailNoPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithTooShortPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogOut()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testAddedURLIsLinkified()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testBulletedLists()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanFlipToEditMode()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanPreviewMarkdownBySwiping()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateCheckedItem()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testLongTappingOnLinkOpensLinkInNewWindow()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testTappingOnLinkInPreviewOpensLinkInNewWindow()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testUndoUndoesTheLastEdit()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testUsingInsertChecklistInsertsChecklist()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNoteForeverIndividually()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNotesForeverViaEmpty()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanRestoreNote()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanTrashNote()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanViewTrashedNotes()">
+               </Test>
+            </SelectedTests>
          </TestableReference>
       </Testables>
    </TestAction>

@@ -3,13 +3,13 @@ import XCTest
 class Trash {
 
     class func open() {
-        app.navigationBars.element.buttons[uidButton_Menu].tap()
-        app.tables.staticTexts[uidButton_Trash].tap()
+        app.navigationBars.element.buttons[UID.Button.Menu].tap()
+        app.tables.staticTexts[UID.Button.Trash].tap()
     }
 
     class func restoreNote(noteName: String) {
         app.tables.cells[noteName].swipeLeft()
-        app.tables.cells[noteName].buttons[uidButton_Trash_Restore].tap()
+        app.tables.cells[noteName].buttons[UID.Button.TrashRestore].tap()
     }
 
     class func deleteNote(noteName: String) {
@@ -18,12 +18,11 @@ class Trash {
 
     class func empty() {
         Trash.open()
-        let emptyTrashButton = app.buttons[uidButton_Trash_EmptyTrash]
-                
+        let emptyTrashButton = app.buttons[UID.Button.TrashEmptyTrash]
         guard emptyTrashButton.isEnabled else { return }
-        
-        emptyTrashButton.tap()
-        app.alerts.scrollViews.otherElements.buttons[uidButton_Yes].tap()
+
+		emptyTrashButton.tap()
+        app.alerts.scrollViews.otherElements.buttons[UID.Button.Yes].tap()
     }
 
     class func getNotesNumber() -> Int {
