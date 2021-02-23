@@ -29,26 +29,26 @@ class NoteEditor {
     }
 
     class func leaveEditor() {
-        let backButton = app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorAllNotes]
+        let backButton = app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.noteEditorAllNotes]
         guard backButton.exists else { return }
 
         backButton.tap()
     }
 
     class func toggleMarkdownState() {
-        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorMenu].tap()
-        app.tables.staticTexts[UID.Text.NoteEditorOptionsMarkdown].tap()
-        app.navigationBars[UID.NavBar.NoteEditorOptions].buttons[UID.Button.Done].tap()
+        app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.noteEditorMenu].tap()
+        app.tables.staticTexts[UID.Text.noteEditorOptionsMarkdown].tap()
+        app.navigationBars[UID.NavBar.noteEditorOptions].buttons[UID.Button.done].tap()
     }
 
     class func insertChecklist() {
-        app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.NoteEditorChecklist].tap()
+        app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.noteEditorChecklist].tap()
     }
 
     class func markdownEnable() {
         swipeToPreview()
 
-        if app.navigationBars[UID.NavBar.NoteEditorPreview].exists {
+        if app.navigationBars[UID.NavBar.noteEditorPreview].exists {
             Preview.leavePreviewViaBackButton()
         } else {
             toggleMarkdownState()
@@ -57,7 +57,7 @@ class NoteEditor {
 
     class func markdownDisable() {
         swipeToPreview()
-        guard app.navigationBars[UID.NavBar.NoteEditorPreview].exists else { return }
+        guard app.navigationBars[UID.NavBar.noteEditorPreview].exists else { return }
 
         Preview.leavePreviewViaBackButton()
         toggleMarkdownState()
@@ -121,13 +121,13 @@ class NoteEditorAssert {
     }
 
     class func editorShown() {
-        let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
+        let allNotesNavBar = app.navigationBars[UID.NavBar.allNotes]
 
-        XCTAssertTrue(allNotesNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.AllNotes + navBarNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorAllNotes].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorAllNotes + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorChecklist].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorChecklist + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorInformation].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorInformation + buttonNotFound)
-        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.NoteEditorMenu].waitForExistence(timeout: minLoadTimeout), UID.Button.NoteEditorMenu + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.allNotes + navBarNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.noteEditorAllNotes].waitForExistence(timeout: minLoadTimeout), UID.Button.noteEditorAllNotes + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.noteEditorChecklist].waitForExistence(timeout: minLoadTimeout), UID.Button.noteEditorChecklist + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.noteEditorInformation].waitForExistence(timeout: minLoadTimeout), UID.Button.noteEditorInformation + buttonNotFound)
+        XCTAssertTrue(allNotesNavBar.buttons[UID.Button.noteEditorMenu].waitForExistence(timeout: minLoadTimeout), UID.Button.noteEditorMenu + buttonNotFound)
     }
 
     class func textViewWithExactValueShownOnce(value: String) {

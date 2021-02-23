@@ -1,60 +1,67 @@
 enum UID {
+	
 	enum Picture {
-		static let AppLogo = "simplenote-logo"
+		static let appLogo = "simplenote-logo"
 	}
 
 	enum Cell {
-		static let Settings = "Settings"
+		static let settings = "Settings"
 	}
 
 	enum NavBar {
-		static let AllNotes = "All Notes"
-		static let LogIn = "Log In"
-		static let NoteEditorPreview = "Preview"
-		static let NoteEditorOptions = "Options"
+		static let allNotes = "All Notes"
+		static let logIn = "Log In"
+		static let noteEditorPreview = "Preview"
+		static let noteEditorOptions = "Options"
 	}
 
 	enum Button {
-		static let NewNote = "New note"
-		static let Done = "Done"
-		static let Back = "Back"
-		static let Accept = "Accept"
-		static let Yes = "Yes"
-		static let Menu = "menu"
-		static let SignUp = "Sign Up"
-		static let LogIn = "Log In"
-		static let LogInWithEmail = "Log in with email"
-		static let AllNotes = "All Notes"
-		static let Trash = "Trash"
-		static let SettingsLogOut = "Log Out"
-		static let NoteEditorAllNotes = "All Notes"
-		static let NoteEditorChecklist = "Inserts a new Checklist Item"
-		static let NoteEditorInformation = "Information"
-		static let NoteEditorMenu = "note-menu"
-		static let NoteCellTrash = "icon trash"
-		static let TrashRestore = "icon restore"
-		static let TrashEmptyTrash = "Empty"
+		static let newNote = "New note"
+		static let done = "Done"
+		static let back = "Back"
+		static let accept = "Accept"
+		static let yes = "Yes"
+		static let menu = "menu"
+		static let signUp = "Sign Up"
+		static let logIn = "Log In"
+		static let logInWithEmail = "Log in with email"
+		static let allNotes = "All Notes"
+		static let trash = "Trash"
+		static let settingsLogOut = "Log Out"
+		static let noteEditorAllNotes = "All Notes"
+		static let noteEditorChecklist = "Inserts a new Checklist Item"
+		static let noteEditorInformation = "Information"
+		static let noteEditorMenu = "note-menu"
+		static let noteCellTrash = "icon trash"
+		static let trashRestore = "icon restore"
+		static let trashEmptyTrash = "Empty"
+		static let clearText = "Clear text"
+		static let cancel = "Cancel"
 	}
 
 	enum Text {
-		static let NoteEditorPreview = "Preview"
-		static let NoteEditorOptionsMarkdown = "Markdown"
-		static let AllNotesInProgress = "In progress"
+		static let noteEditorPreview = "Preview"
+		static let noteEditorOptionsMarkdown = "Markdown"
+		static let allNotesInProgress = "In progress"
 	}
 
 	enum TextField {
-		static let Email = "Email"
-		static let Password = "Password"
+		static let email = "Email"
+		static let password = "Password"
+	}
+
+	enum SearchField {
+		static let search = "Search notes or tags"
 	}
 }
 
 enum Text {
-	static let AppName = "Simplenote"
-	static let AppTagline = "The simplest way to keep notes."
-	static let AlertHeadingSorry = "Sorry!"
-	static let AlertContentLoginFailed = "Could not login with the provided email address and password."
-	static let LoginEmailInvalid = "Your email address is not valid"
-	static let LoginPasswordShort = "Password must contain at least 4 characters"
+	static let appName = "Simplenote"
+	static let appTagline = "The simplest way to keep notes."
+	static let alertHeadingSorry = "Sorry!"
+	static let alertContentLoginFailed = "Could not login with the provided email address and password."
+	static let loginEmailInvalid = "Your email address is not valid"
+	static let loginPasswordShort = "Password must contain at least 4 characters"
 }
 
 let testDataExistingEmail = "simplenoteuitest@mailinator.com"
