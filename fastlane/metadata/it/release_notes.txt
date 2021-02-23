@@ -1,0 +1,1 @@
+- Aggiunta del supporto per la navigazione da tastiera e per le scorciatoie
