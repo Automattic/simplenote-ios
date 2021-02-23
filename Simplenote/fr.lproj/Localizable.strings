@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 16:54:39+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i échecs de code PIN";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i Référence";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i Références";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 caractères minimum";
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "Activer la mise en forme en Markdown";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "Terminer les modifications";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "En file d'attente";
@@ -308,13 +308,13 @@
 "Information" = "Information";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "Insérer une liste de contrôle";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Insère un nouvel élément de liste de contrôle";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "Dernière modification de %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Dernière consultation";
@@ -389,7 +389,7 @@
 "New note..." = "Nouvelle note...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "Correspondance suivante";
 
 /* Cancels Empty Trash Action */
 "No" = "Non";
@@ -468,7 +468,7 @@
 "Preview" = "Aperçu";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "Correspondance précédente";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Message de confidentialité pour les utilisateurs en Californie";
@@ -628,7 +628,7 @@
 "Today" = "Aujourd'hui";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "Activer\/Désactiver Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Activer\/désactiver la barre de tag";

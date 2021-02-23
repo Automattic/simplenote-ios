@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-04 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i tentativas de senha com falha";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i Referência";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i Referências";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Mínimo de oito caracteres";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "Dispensar teclado";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "Documento";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "Ativar formatação Markdown";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "Concluir edição";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Enfileirado";
@@ -308,13 +308,13 @@
 "Information" = "Informações";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "Inserir lista de verificação";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Insere um novo item de lista de verificação";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "Última modificação %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Visto pela última vez";
@@ -389,7 +389,7 @@
 "New note..." = "Nova nota...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "Próximo resultado";
 
 /* Cancels Empty Trash Action */
 "No" = "Não";
@@ -468,7 +468,7 @@
 "Preview" = "Visualizar";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "Resultado anterior";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Aviso de privacidade para usuários residentes da Califórnia";
@@ -628,7 +628,7 @@
 "Today" = "Hoje";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "Alternar markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Exibir a barra lateral de tags";

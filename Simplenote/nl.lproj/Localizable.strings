@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-05 10:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-19 17:25:08+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i Referentie";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i Referenties";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimaal 8 tekens";
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "Markdown-opmaak inschakelen";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "Bewerken beëindigen";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
@@ -308,13 +308,13 @@
 "Information" = "Informatie";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "Checklist invoegen";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Voegt een nieuwe afvinktaak toe";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "Laatst aangepast %$1";
 
 /* Last Message timestamp */
 "LastSeen" = "Laatst bekeken om";
@@ -389,7 +389,7 @@
 "New note..." = "Nieuwe notitie …";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "Volgende resultaat";
 
 /* Cancels Empty Trash Action */
 "No" = "Nee";
@@ -468,7 +468,7 @@
 "Preview" = "Voorbeeld bekijken";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "Vorig resultaat";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Privacyverklaring voor gebruikers in Californië";
@@ -628,7 +628,7 @@
 "Today" = "Vandaag";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "Markdown in-\/uitschakelen";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Tag-sidebar tonen\/verbergen";
