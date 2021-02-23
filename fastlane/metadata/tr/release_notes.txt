@@ -1,0 +1,1 @@
+- Klavye gezintisi ve kısayollar için destek eklendi

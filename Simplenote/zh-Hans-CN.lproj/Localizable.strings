@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-05 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-19 17:23:57+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "密码尝试失败 %i 次";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i 参考";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i 参考";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 至少需要有 8 个字符";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "关闭键盘";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "文档";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "启用 Markdown 格式";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "结束编辑";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "已排入队列数";
@@ -308,13 +308,13 @@
 "Information" = "信息";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "插入清单";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "插入新的检查清单项";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "上次修改日期：%1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "上一次查看时间";
@@ -389,7 +389,7 @@
 "New note..." = "新建笔记...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "下个匹配项";
 
 /* Cancels Empty Trash Action */
 "No" = "否";
@@ -468,7 +468,7 @@
 "Preview" = "预览";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "上个匹配项";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "面向加州用户的隐私声明";
@@ -628,7 +628,7 @@
 "Today" = "今天";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "切换 Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "切换标签侧边栏";
