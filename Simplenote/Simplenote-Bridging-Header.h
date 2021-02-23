@@ -18,6 +18,7 @@
 #import "SPConstants.h"
 #import "SPEditorTextView.h"
 #import "SPInteractiveTextStorage.h"
+#import "SPMarkdownPreviewViewController.h"
 #import "SPNotifications.h"
 #import "SPObjectManager.h"
 #import "SPRatingsHelper.h"

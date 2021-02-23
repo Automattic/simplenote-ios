@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-04 14:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-19 10:54:08+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "嘗試輸入密碼失敗 %i 次";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i 參考";
+
+/* Count of interlink references to a note */
+"%i References" = "%i 參考資料";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 長度至少為 8 個字元";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "收起鍵盤";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "內容";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "啟用 Markdown 格式";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "結束編輯";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "加入佇列";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "我喜歡";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "資訊";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "插入檢查清單";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "插入新的檢查清單項目";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "最後修改時間：%1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "上次上線";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "移至垃圾桶";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "新增筆記";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "新筆記...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "下一個符合項目";
 
 /* Cancels Empty Trash Action */
 "No" = "否";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "預覽";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "上一個符合項目";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "加州使用者的隱私權聲明";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "檢閱你的帳號";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "搜尋";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "今天";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "切換 Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "切換標籤側選單";

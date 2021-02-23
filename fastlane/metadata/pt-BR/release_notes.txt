@@ -1,3 +1,1 @@
-- Adicionamos uma tela de verificação de conta
-- Atualizamos a altura mínima da linha quando a lista de anotações está no modo resumido
-- Atualizamos a experiência de edição de tags
+- Suporte adicionado para atalhos e navegação do teclado

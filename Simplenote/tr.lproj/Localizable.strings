@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Başarısız Parola Denemesi";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Referans";
+
+/* Count of interlink references to a note */
+"%i References" = "%i Referanslar";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "En az 8 karakter";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Klavyeyi kapat";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Belge";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Markdown biçimlendirmesini etkinleştir";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "Düzenlemeyi Bitir";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Sıraya Alındı";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "Beğendim";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Bilgi";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Kontrol Listesi Ekle";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Yeni bir Kontrol Listesi Öğesi ekler";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Son Değişiklik %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Son Görülen";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "Çöpe taşı";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "Yeni Not";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "Yeni not...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Sonraki Eşleşme";
 
 /* Cancels Empty Trash Action */
 "No" = "Hayır";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Önizleme";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Önceki Eşleşme";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Kaliforniya'daki Kullanıcılar için Gizlilik Bildirimi";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "Hesabınızı İnceleyin";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Ara";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Bugün";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Markdown'u Aç\/Kapat";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Etiket kenar çubuğunu aç\/kapat";

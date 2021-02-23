@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-04 14:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-19 17:24:42+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i fehlgeschlagene Passcode-Versuche";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Referenz";
+
+/* Count of interlink references to a note */
+"%i References" = "%i Referenzen";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "– Es muss mindestens 8 Zeichen lang sein.";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Tastatur ausblenden";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Dokument";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Markdown-Formatierung aktivieren";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "Bearbeitung beenden";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "In der Warteschlange";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "Gefällt mir";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Informationen";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Checkliste einfügen";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Fügt einen weiteren Punkt auf der Checkliste hinzu";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Zuletzt geändert: %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Zuletzt angesehen";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "In Papierkorb verschieben";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "Neue Notiz";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "Neue Notiz…";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Nächster Treffer";
 
 /* Cancels Empty Trash Action */
 "No" = "Nein";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Vorschau";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Vorheriger Treffer";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Datenschutzhinweis für Benutzer in Kalifornien";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "Konto prüfen";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Suche";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Heute";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Markdown umschalten";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Schlagwort-Seitenleiste umschalten";

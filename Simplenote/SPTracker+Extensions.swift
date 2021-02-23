@@ -28,3 +28,36 @@ extension SPTracker {
         trackAutomatticEvent(withName: "verification_dismissed", properties: nil)
     }
 }
+
+
+// MARK: - Shortcuts
+//
+extension SPTracker {
+    private static func trackShortcut(_ value: String) {
+        trackAutomatticEvent(withName: "shortcut_used", properties: ["shortcut": value])
+    }
+
+    static func trackShortcutSearch() {
+        trackShortcut("focus_search")
+    }
+
+    static func trackShortcutSearchNext() {
+        trackShortcut("search_next")
+    }
+
+    static func trackShortcutSearchPrev() {
+        trackShortcut("search_previous")
+    }
+
+    static func trackShortcutCreateNote() {
+        trackShortcut("create_note")
+    }
+
+    static func trackShortcutToggleMarkdownPreview() {
+        trackShortcut("markdown")
+    }
+
+    static func trackShortcutToggleChecklist() {
+        trackShortcut("toggle_checklist")
+    }
+}
