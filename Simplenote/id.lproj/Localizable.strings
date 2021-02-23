@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 10:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i Upaya Kode Sandi Gagal";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i Referensi";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i Referensi";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum 8 karakter";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "Abaikan keyboard";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "Dokumen";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "Aktifkan pemformatan Markdown";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "Akhiri Penyuntingan";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Dalam antrean";
@@ -308,13 +308,13 @@
 "Information" = "Informasi";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "Masukkan Daftar Periksa";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Masukkan Item Daftar Periksa baru";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "Terakhir Diubah %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Terakhir Dilihat";
@@ -389,7 +389,7 @@
 "New note..." = "Catatan baru...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "Hasil Berikutnya";
 
 /* Cancels Empty Trash Action */
 "No" = "Tidak";
@@ -468,7 +468,7 @@
 "Preview" = "Pratinjau";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "Hasil Sebelumnya";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Pemberitahuan Privasi untuk Pengguna di California";
@@ -628,7 +628,7 @@
 "Today" = "Hari ini";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "Tombol Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Panel sisi label pilihan";

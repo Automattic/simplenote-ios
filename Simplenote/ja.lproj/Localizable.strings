@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 10:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "パスコードを%i回誤入力しました";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i 参考資料";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i 参考資料";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8文字以上入力してください";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "キーボードを閉じる";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "文書";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "Markdown フォーマットを有効化";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "編集を終了";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "待機状態";
@@ -308,13 +308,13 @@
 "Information" = "情報";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "チェックリストを挿入";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "新しいチェックリストアイテムを挿入";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "最終更新日 %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "LastSeen";
@@ -389,7 +389,7 @@
 "New note..." = "新規ノート…";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "次の一致";
 
 /* Cancels Empty Trash Action */
 "No" = "いいえ";
@@ -468,7 +468,7 @@
 "Preview" = "プレビュー";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "前の一致";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "カリフォルニア州のユーザーへのプライバシー通知";
@@ -628,7 +628,7 @@
 "Today" = "今日";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "Markdown を切り替え";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "タグサイドバーを切り替え";

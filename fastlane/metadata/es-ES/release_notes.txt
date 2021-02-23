@@ -1,0 +1,1 @@
+- Ahora se admiten los atajos y la navegación con el teclado.

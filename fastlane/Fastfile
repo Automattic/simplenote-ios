@@ -638,7 +638,7 @@ end
       readonly: options[:readonly] || is_ci,
       app_identifier: ["com.codality.NotationalFlow",
                        "com.codality.NotationalFlow.Share"],
-      template_name: "NotationalFlow Keychain Access",
+      template_name: "NotationalFlow Keychain Access (Distribution)",
     )
   end
 

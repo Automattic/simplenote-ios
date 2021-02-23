@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i ניסיונות קוד סיסמה שנכשלו";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "הפניה %i";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i הפניות";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- לפחות שמונה תווים";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "ביטול מקלדת";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "מסמך";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "להפעיל את העיצוב של Markdown";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "לסיים לערוך";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
@@ -308,13 +308,13 @@
 "Information" = "מידע";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "להוסיף רשימת משימות";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "להוסיף פריט חדש של רשימת משימות";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "תאריך שינוי אחרון %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "נראה לאחרונה";
@@ -389,7 +389,7 @@
 "New note..." = "פתק חדש...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "התוצאה הבאה";
 
 /* Cancels Empty Trash Action */
 "No" = "לא";
@@ -468,7 +468,7 @@
 "Preview" = "תצוגה מקדימה";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "התוצאה הקודמת";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "הצהרת פרטיות למשתמשים מקליפורניה";
@@ -628,7 +628,7 @@
 "Today" = "היום";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "לשנות Markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "החלפת מצב סרגל צדדי";

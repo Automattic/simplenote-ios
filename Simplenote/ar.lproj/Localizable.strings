@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-04 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-02-18 11:54:03+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i محاولات فاشلة لإدخال رمز المرور";
 
 /* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
+"%i Reference" = "%i المرجع";
 
 /* Count of interlink references to a note */
-"%i References" = "%i References";
+"%i References" = "%i المرجع";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 أحرف بحد أقصى";
@@ -237,7 +237,7 @@
 "Dismiss keyboard" = "تجاهل لوحة المفاتيح";
 
 /* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
+"Document" = "مستند";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -263,7 +263,7 @@
 "Enable Markdown formatting" = "تمكين تنسيق الضبط";
 
 /* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
+"End Editing" = "إنهاء التحرير";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "بقائمة الانتظار";
@@ -308,13 +308,13 @@
 "Information" = "معلومات";
 
 /* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
+"Insert Checklist" = "إدراج قائمة التحقُّق";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "إدراج عنصر في قائمة الاختيار الجديدة";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
+"Last Modified %1$@" = "آخر تعديل في %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "آخر عرض";
@@ -389,7 +389,7 @@
 "New note..." = "ملاحظة جديدة...";
 
 /* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
+"Next Match" = "التطابق التالي";
 
 /* Cancels Empty Trash Action */
 "No" = "لا";
@@ -468,7 +468,7 @@
 "Preview" = "معاينة";
 
 /* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
+"Previous Match" = "التطابق السابق";
 
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "إشعار الخصوصية الخاص بالمستخدمين في كاليفورنيا";
@@ -628,7 +628,7 @@
 "Today" = "اليوم";
 
 /* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
+"Toggle Markdown" = "تبديل الضبط";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "تبديل الشريط الجانبي للوسوم";
