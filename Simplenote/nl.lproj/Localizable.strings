@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-19 17:25:08+0000 */
+/* Translation-Revision-Date: 2021-02-23 03:24:10+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -314,7 +314,7 @@
 "Inserts a new Checklist Item" = "Voegt een nieuwe afvinktaak toe";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Laatst aangepast %$1";
+"Last Modified %1$@" = "Laatst aangepast %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Laatst bekeken om";
