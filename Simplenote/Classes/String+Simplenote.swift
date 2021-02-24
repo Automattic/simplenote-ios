@@ -171,3 +171,10 @@ extension String {
         return ContentSlice(content: self, range: lowerBound..<upperBound, matches: matchingWordsRange)
     }
 }
+
+// MARK: Substring Instance Count
+extension String {
+    func occurancesOf(_ string: String) -> Int {
+        return components(separatedBy: string).count - 1
+    }
+}
