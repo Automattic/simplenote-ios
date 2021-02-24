@@ -141,12 +141,12 @@ private extension NoteInformationController {
             return []
         }
 
-        let referenceRows = references.map { (note) -> Row in
-            let date = DateFormatter.dateFormatter.string(from: note.modificationDate)
-            let value = "\(Localization.interlinkReferences(references.count)), \(Localization.lastModified(date))"
+        let referenceRows = references.map { (referenceNote) -> Row in
+            let date = DateFormatter.dateFormatter.string(from: referenceNote.modificationDate)
+            let value = "\(Localization.interlinkReferences(note.instancesOfInternalLinkIn(referenceNote.content))), \(Localization.lastModified(date))"
 
-            return .reference(interLink: note.plainInternalLink,
-                              title: note.titlePreview,
+            return .reference(interLink: referenceNote.plainInternalLink,
+                              title: referenceNote.titlePreview,
                               reference: value)
         }
 
