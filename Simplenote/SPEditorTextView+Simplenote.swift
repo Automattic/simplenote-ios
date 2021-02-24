@@ -30,3 +30,26 @@ extension SPEditorTextView {
         UIPasteboard.general.string = text
     }
 }
+
+
+// MARK: - Observer content position
+//
+extension SPEditorTextView {
+    open override var contentSize: CGSize {
+        didSet {
+            onContentPositionChange?()
+        }
+    }
+
+    open override var contentOffset: CGPoint {
+        didSet {
+            onContentPositionChange?()
+        }
+    }
+
+    open override var contentInset: UIEdgeInsets {
+        didSet {
+            onContentPositionChange?()
+        }
+    }
+}

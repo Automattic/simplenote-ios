@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1240"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D864B15325CAE25000F9B73E"
+               BuildableName = "SimplenoteUITests.xctest"
+               BlueprintName = "SimplenoteUITests"
+               ReferencedContainer = "container:Simplenote.xcodeproj">
+            </BuildableReference>
+            <SelectedTests>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithExistingEmailIncorrectPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithInvalidEmail()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmail()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmailNoPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithTooShortPassword()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsLogin/testLogOut()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testAddedURLIsLinkified()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testBulletedLists()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanFlipToEditMode()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanPreviewMarkdownBySwiping()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateCheckedItem()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testLongTappingOnLinkOpensLinkInNewWindow()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testTappingOnLinkInPreviewOpensLinkInNewWindow()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testUndoUndoesTheLastEdit()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testUsingInsertChecklistInsertsChecklist()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNoteForeverIndividually()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNotesForeverViaEmpty()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanRestoreNote()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanTrashNote()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsTrash/testCanViewTrashedNotes()">
+               </Test>
+            </SelectedTests>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

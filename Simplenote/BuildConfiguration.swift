@@ -29,7 +29,7 @@ enum BuildConfiguration: String {
     }
 }
 
-extension BuildConfiguration : CustomStringConvertible {
+extension BuildConfiguration: CustomStringConvertible {
     var description: String {
         return self.rawValue
     }

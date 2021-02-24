@@ -355,3 +355,17 @@ private extension SPAppDelegate {
         verificationViewController = nil
     }
 }
+
+
+// MARK: - Scroll position cache
+//
+extension SPAppDelegate {
+    @objc
+    func cleanupScrollPositionCache() {
+        let allNotes = SPObjectManager.shared().notes()
+        let allIdentifiers: [String] = allNotes.compactMap { note in 
+            note.deleted ? nil : note.simperiumKey
+        }
+        EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
+    }
+}

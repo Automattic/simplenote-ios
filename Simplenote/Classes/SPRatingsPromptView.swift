@@ -198,31 +198,31 @@ private extension State {
     var title: String {
         switch self {
         case .initial:
-            return NSLocalizedString("What do you think about Simplenote?", comment: "")
+            return NSLocalizedString("What do you think about Simplenote?", comment: "Rating view initial title")
         case .liked:
-            return NSLocalizedString("Great! Mind leaving a review to tell us what you like?", comment: "")
+            return NSLocalizedString("Great! Mind leaving a review to tell us what you like?", comment: "Rating view liked title")
         case .disliked:
-            return NSLocalizedString("Could you tell us how we could improve?", comment: "")
+            return NSLocalizedString("Could you tell us how we could improve?", comment: "Rating view disliked title")
         }
     }
 
     var leftTitle: String {
         switch self {
         case .initial:
-            return NSLocalizedString("I like it", comment: "")
+            return NSLocalizedString("I like it", comment: "Rating view - initial - liked button")
         case .liked:
-            return NSLocalizedString("Leave a review", comment: "")
+            return NSLocalizedString("Leave a review", comment: "Rating view - liked - leave review button")
         case .disliked:
-            return NSLocalizedString("Send feedback", comment: "")
+            return NSLocalizedString("Send feedback", comment: "Rating view - disliked - send feedback button")
         }
     }
 
     var rightTitle: String {
         switch self {
         case .initial:
-            return NSLocalizedString("Could be better", comment: "")
+            return NSLocalizedString("Could be better", comment: "Rating view - initial - could be better button")
         case .liked, .disliked:
-            return NSLocalizedString("No thanks", comment: "")
+            return NSLocalizedString("No thanks", comment: "Rating view - liked or disliked - no thanks button")
         }
     }
 }

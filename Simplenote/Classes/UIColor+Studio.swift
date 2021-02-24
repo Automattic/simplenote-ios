@@ -93,7 +93,7 @@ extension UIColor {
     static var simplenoteGray80Color: UIColor {
         UIColor(studioColor: .gray80)
     }
-    
+
     @objc
     static var simplenoteGray100Color: UIColor {
         UIColor(studioColor: .gray100)
@@ -311,7 +311,7 @@ extension UIColor {
 
     @objc
     static var simplenoteTagViewTextColor: UIColor {
-        UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+        UIColor(lightColor: .gray60, darkColor: .gray5)
     }
 
     @objc
@@ -389,5 +389,17 @@ extension UIColor {
 
     static var simplenoteVerificationScreenBackgroundColor: UIColor {
         return UIColor(lightColor: .white, darkColor: .darkGray2)
+    }
+
+    static var simplenoteTagPillBackgroundColor: UIColor {
+        return UIColor(lightColor: .gray5, darkColor: .gray60)
+    }
+
+    static var simplenoteTagPillDeleteBackgroundColor: UIColor {
+        return UIColor(lightColor: .gray50, darkColor: .gray20)
+    }
+
+    static var simplenoteTagPillTextColor: UIColor {
+        return UIColor(lightColor: .gray100, darkColor: .white)
     }
 }

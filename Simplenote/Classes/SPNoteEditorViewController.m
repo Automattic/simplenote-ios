@@ -2,12 +2,10 @@
 #import "Note.h"
 #import "SPAppDelegate.h"
 #import "SPNoteListViewController.h"
-#import "SPTagView.h"
 #import "SPEditorTextView.h"
 #import "SPObjectManager.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "JSONKit+Simplenote.h"
-#import "SPPopoverContainerViewController.h"
 #import "UITextView+Simplenote.h"
 #import "SPObjectManager.h"
 #import "SPInteractiveTextStorage.h"
@@ -31,7 +29,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @interface SPNoteEditorViewController ()<SPEditorTextViewDelegate,
                                         SPInteractivePushViewControllerProvider,
                                         SPInteractiveDismissableViewController,
-                                        SPTagViewDelegate,
                                         UIActionSheetDelegate,
                                         UIPopoverPresentationControllerDelegate>
 // UIKit Components
@@ -61,11 +58,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, strong) SearchQuery               *searchQuery;
-
-// if a newly created tag is deleted within a certain time span,
-// the tag will be completely deleted - note just removed from the
-// current note. This helps prevent against tag spam by mistyping
-@property (nonatomic, strong) NSString                  *deletedTagBuffer;
 
 @end
 
@@ -101,17 +93,15 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     // Editor
     [self configureTextView];
-    [self configureBottomView];
-
-    [self configureTagView];
 
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
     [self configureSearchToolbar];
     [self configureLayout];
+    [self configureTagListViewController];
     [self configureInterlinksProcessor];
-    [self refreshVoiceoverSupport];
+    
     [self configureTextViewKeyboard];
 
     [self startListeningToNotifications];
@@ -119,6 +109,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     [self refreshStyle];
 
+    [self configureTextViewObservers];
     [self displayNote];
 }
 
@@ -144,12 +135,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     self.userActivity = [NSUserActivity openNoteActivityFor:self.note];
     [self ensureEditorIsFirstResponder];
-}
-
-- (void)configureTagView
-{
-    _tagView = _noteEditorTextView.tagView;
-    _noteEditorTextView.tagView.tagDelegate = self;
 }
 
 - (void)configureNavigationBarBackground
@@ -265,12 +250,12 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    if (!self.tagView.isFirstResponder) {
+    if (!self.tagListViewController.isFirstResponder) {
         return;
     }
 
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self.tagView scrollEntryFieldToVisible:NO];
+        [self.tagListViewController scrollEntryFieldToVisibleAnimated:NO];
     } completion:nil];
 }
 
@@ -356,14 +341,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     // mark note as read
     self.note.unread = NO;
-    
-    // update tags field
-    NSArray *tags = self.note.tagsArray;
-    if (tags.count > 0) {
-        [_tagView setupWithTagNames:tags];
-    } else {
-        [_tagView clearAllTags];
-    }
 
     self.modified = NO;
     self.previewing = NO;
@@ -514,7 +491,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     // This dispatch is to prevent the animations executed when ending editing
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tagView endEditing:YES];
+        [self.tagListViewController.view endEditing:YES];
     });
 }
 
@@ -822,11 +799,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 	
 	NSRange newRange = NSMakeRange(newLocation, 0);
 	[_noteEditorTextView setSelectedRange:newRange];
-	
-	NSArray *tags = self.note.tagsArray;
-	if (tags.count > 0) {
-		[_tagView setupWithTagNames:tags];
-    }
+
+    [_tagListViewController reload];
 }
 
 - (void)didDeleteCurrentNote {
@@ -848,82 +822,13 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)keyboardButtonAction:(id)sender {
     
     [self endEditing];
-    [_tagView endEditing:YES];
+    [self.tagListViewController.view endEditing:YES];
 }
 
 - (void)insertChecklistAction:(id)sender {
     [_noteEditorTextView insertOrRemoveChecklist];
     
     [SPTracker trackEditorChecklistInserted];
-}
-
-#pragma mark SPAddTagDelegate methods
-
-- (void)tagViewDidChange:(SPTagView *)tagView
-{
-    // Note: When Voiceover is enabled, the Tags Editor is docked!
-    if (self.voiceoverEnabled) {
-        return;
-    }
-
-    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
-}
-
-- (void)tagViewDidBeginEditing:(SPTagView *)tagView
-{
-    // Note: When Voiceover is enabled, the Tags Editor is docked!
-    if (self.voiceoverEnabled) {
-        return;
-    }
-
-    [self.noteEditorTextView scrollToBottomWithAnimation:YES];
-}
-
-- (void)tagView:(SPTagView *)tagView didCreateTagName:(NSString *)tagName
-{
-    if (![[SPObjectManager sharedManager] tagExists:tagName]) {
-        [[SPObjectManager sharedManager] createTagFromString:tagName];
-        
-        _deletedTagBuffer = tagName;
-        [NSTimer scheduledTimerWithTimeInterval:3.5
-                                         target:self
-                                       selector:@selector(clearDeletedTagBuffer)
-                                       userInfo:nil
-                                        repeats:NO];
-    }
-    
-    [self.note addTag:tagName];
-
-    self.modified = YES;
-    [self save];
-    
-    [SPTracker trackEditorTagAdded];
-}
-
-- (BOOL)tagView:(SPTagView *)tagView shouldCreateTagName:(NSString *)tagName {
-    
-    return ![self.note hasTag:tagName];
-}
-
-- (void)tagView:(SPTagView *)tagView didRemoveTagName:(NSString *)tagName {
-    
-    [self.note stripTag:tagName];
-    self.modified = YES;
-    
-    NSString *deletedTagBuffer = _deletedTagBuffer;
-    if (deletedTagBuffer && [deletedTagBuffer isEqualToString:tagName]) {
-        [[SPObjectManager sharedManager] removeTagName:deletedTagBuffer];
-        [self clearDeletedTagBuffer];
-    }
-    
-    [self save];
-    
-	[SPTracker trackEditorTagRemoved];
-}
-
-- (void)clearDeletedTagBuffer {
-    
-    _deletedTagBuffer = nil;
 }
 
 - (NSUInteger)newCursorLocation:(NSString *)newText oldText:(NSString *)oldText currentLocation:(NSUInteger)location

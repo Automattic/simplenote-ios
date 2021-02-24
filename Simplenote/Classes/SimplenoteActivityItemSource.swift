@@ -7,24 +7,39 @@ class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {
 
     /// The Note that's about to be exported
     ///
-    private let note: Note
+    private let content: String
+    private let targetURL: URL
 
     /// Designated Initializer
     ///
-    init(note: Note) {
-        self.note = note
+    init(content: String, identifier: String) {
+        self.content = content
+        self.targetURL = FileManager.default.temporaryDirectory.appendingPathComponent(identifier + ".txt")
         super.init()
     }
 
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return note.content ?? String()
+        return content
     }
 
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         guard activityType?.isWordPressActivity == true else {
-            return note.content
+            return content
         }
 
-        return FileManager.writeToDocuments(note: note) ?? note.content
+        return writeStringToURL(string: content, to: targetURL) ?? content
+    }
+
+    /// Writes a given String to the documents folder
+    ///
+    private func writeStringToURL(string: String, to targetURL: URL) -> URL? {
+        do {
+            try string.write(to: targetURL, atomically: true, encoding: .utf8)
+        } catch {
+            NSLog("Note Exporter Failure: \(error)")
+            return nil
+        }
+
+        return targetURL
     }
 }

@@ -89,7 +89,7 @@ class SPPrivacyViewController: SPTableViewController {
 }
 
 
-// MARK - Event Handlers
+// MARK: - Event Handlers
 //
 extension SPPrivacyViewController {
 

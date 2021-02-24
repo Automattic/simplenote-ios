@@ -14,7 +14,7 @@ class SPAboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .simplenoteBlue50Color
 
         setupContainerView()
@@ -230,7 +230,7 @@ extension SPAboutViewController: UITableViewDataSource {
 
         cell.textLabel?.text = Constants.titles[indexPath.row]
         cell.detailTextLabel?.text = Constants.descriptions[indexPath.row]
-        
+
         cell.textLabel?.textColor = .white
         cell.detailTextLabel?.textColor = .simplenoteBlue10Color
         cell.detailTextLabel?.font = .preferredFont(forTextStyle: .subheadline)
@@ -239,7 +239,7 @@ extension SPAboutViewController: UITableViewDataSource {
         let bgColorView = UIView()
         bgColorView.backgroundColor = .simplenoteBlue30Color
         cell.selectedBackgroundView = bgColorView
-        
+
         let arrowAccessoryView = UIImageView(image: .image(name: .arrowTopRight))
         arrowAccessoryView.tintColor = .simplenoteBlue10Color
         arrowAccessoryView.frame = CGRect(x: 0, y: 0, width: Constants.cellAccessorySideSize, height: Constants.cellAccessorySideSize)
@@ -253,13 +253,13 @@ extension SPAboutViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate Conformance
 //
 extension SPAboutViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIApplication.shared.open(Constants.urls[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: false)
     }
-    
-    @objc func onDoneTap(_ sender:UIButton) {
+
+    @objc func onDoneTap(_ sender: UIButton) {
         dismiss(animated: true)
     }
 }
@@ -300,7 +300,7 @@ private extension SPAboutViewController {
         }
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addCancelActionWithTitle(NSLocalizedString("OK", comment: ""))
+        alertController.addCancelActionWithTitle(NSLocalizedString("OK", comment: "Closes alert controller for spinner on About view"))
         present(alertController, animated: true, completion: nil)
     }
 

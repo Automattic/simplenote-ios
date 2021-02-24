@@ -5,6 +5,12 @@ import UIKit
 // MARK: - UIAlertController's Simplenote Methods
 //
 extension UIViewController {
+    /// View to use to attach another view controller
+    ///
+    enum AttachmentView {
+        case below(UIView)
+        case into(UIView)
+    }
 
     /// Presents the receiver from the RootViewController's leaf
     ///
@@ -27,23 +33,58 @@ extension UIViewController {
         leafViewController.present(self, animated: true, completion: nil)
     }
 
+
     /// Attaches a children ViewController (if needed) below the specified sibling view
     ///
-    func attachWithAnimation(to parent: UIViewController, below siblingView: UIView) {
-        parent.view.insertSubview(view, belowSubview: siblingView)
-        parent.view.pinSubviewToAllEdges(view)
+    func attach(to parent: UIViewController, attachmentView: AttachmentView? = nil, animated: Bool = false) {
+        guard self.parent != parent else {
+            return
+        }
+        detach()
+
         parent.addChild(self)
-        view.fadeIn()
-        didMove(toParent: parent)
+
+        let attachmentView = attachmentView ?? .into(parent.view)
+        switch attachmentView {
+        case .below(let siblingView):
+            siblingView.superview?.insertSubview(view, belowSubview: siblingView)
+            siblingView.superview?.pinSubviewToAllEdges(view)
+        case .into(let containerView):
+            containerView.addFillingSubview(view)
+        }
+
+        let taskBlock = {
+            self.didMove(toParent: parent)
+        }
+
+        if animated {
+            view.fadeIn { _ in
+                taskBlock()
+            }
+        } else {
+            taskBlock()
+        }
     }
 
     /// Detaches the receiver from its parent
     ///
-    func detachWithAnimation() {
-        willMove(toParent: nil)
-        view.fadeOut { _ in
+    func detach(animated: Bool = false) {
+        guard parent != nil else {
+            return
+        }
+
+        let taskBlock = {
             self.view.removeFromSuperview()
             self.removeFromParent()
+        }
+
+        willMove(toParent: nil)
+        if animated {
+            view.fadeOut { _ in
+                taskBlock()
+            }
+        } else {
+            taskBlock()
         }
     }
 }

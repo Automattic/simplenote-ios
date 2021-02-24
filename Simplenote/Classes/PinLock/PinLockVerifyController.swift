@@ -40,7 +40,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
     }
 
     func handleCancellation() {
-        
+
     }
 
     func viewDidAppear() {

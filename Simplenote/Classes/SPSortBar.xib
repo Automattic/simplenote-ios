@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,17 +25,6 @@
                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dB-bC-kqa" userLabel="Container View">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-M1-JhX">
-                            <rect key="frame" x="358" y="0.0" width="56" height="49"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="56" id="AqC-SO-xEW"/>
-                                <constraint firstAttribute="height" constant="49" id="gLt-hX-R1A"/>
-                            </constraints>
-                            <state key="normal" image="icon_sort_order"/>
-                            <connections>
-                                <action selector="sortOrderWasPressed" destination="vX3-hf-sh0" eventType="touchUpInside" id="AlG-XD-BmA"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RW-3j-JYk" userLabel="CenterView">
                             <rect key="frame" x="174.5" y="0.0" width="65" height="49"/>
                             <subviews>
@@ -71,11 +60,8 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="6RW-3j-JYk" secondAttribute="bottom" id="7Dt-tp-zci"/>
-                        <constraint firstItem="Rez-M1-JhX" firstAttribute="top" secondItem="9dB-bC-kqa" secondAttribute="top" id="Voy-uO-ijI"/>
-                        <constraint firstAttribute="bottom" secondItem="Rez-M1-JhX" secondAttribute="bottom" id="hfn-7M-FDt"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="top" secondItem="9dB-bC-kqa" secondAttribute="top" id="rbn-un-kPb"/>
                         <constraint firstItem="6RW-3j-JYk" firstAttribute="centerX" secondItem="9dB-bC-kqa" secondAttribute="centerX" id="u3W-Ew-9as"/>
-                        <constraint firstItem="Rez-M1-JhX" firstAttribute="trailing" secondItem="9dB-bC-kqa" secondAttribute="trailing" id="wXN-SS-kcl"/>
                     </constraints>
                 </view>
             </subviews>
@@ -98,7 +84,6 @@
                 <outlet property="descriptionLabel" destination="DuL-w7-cVY" id="EoN-zv-tCW"/>
                 <outlet property="dividerHeightConstraint" destination="t6Z-h5-vb8" id="09N-b7-MYm"/>
                 <outlet property="dividerView" destination="WTw-zs-k6p" id="BYa-Gb-Xum"/>
-                <outlet property="sortOrderButton" destination="Rez-M1-JhX" id="SJS-cF-HBg"/>
                 <outlet property="titleLabel" destination="XhY-d9-S1B" id="0By-75-pVa"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="-126.5625"/>
@@ -110,7 +95,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon_sort_order" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
