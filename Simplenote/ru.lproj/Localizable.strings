@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 16:54:43+0000 */
+/* Translation-Revision-Date: 2021-02-18 17:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "Неудачные попытки ввода кода доступа: %i";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Указатель";
+
+/* Count of interlink references to a note */
+"%i References" = "%i Ссылки";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "— Не менее 8 символов";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Скрыть клавиатуру";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Документ";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Включить форматирование Markdown";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "Завершить редактирование";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "Требуется";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "Мне нравится";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Информация";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Вставить чек-лист";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Будет вставлен новый пункт контрольного списка";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Последнее изменение %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Последнее прочитанное";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "Удалить";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "Новая заметка...";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "Новая заметка...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Следующее совпадение";
 
 /* Cancels Empty Trash Action */
 "No" = "Нет";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Предварительный просмотр";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Предыдущее совпадение";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Заявление о защите конфиденциальности для пользователей из Калифорнии";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "Проверить учётную запись";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Поиск";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Сегодня";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Переключить разметку";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Боковая панель переключения меток";

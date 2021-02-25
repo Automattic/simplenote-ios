@@ -1,3 +1,1 @@
-- Hesap doğrulama ekranı eklendi
-- Not listesi yoğun moddayken minimum satır yüksekliği güncellendi 
-- Etiket düzenleme deneyimi güncellendi
+- Klavye gezintisi ve kısayollar için destek eklendi

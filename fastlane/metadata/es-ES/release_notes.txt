@@ -1,3 +1,1 @@
-- Se ha añadido la pantalla de verificación de la cuenta
-- Se ha actualizado la altura mínima de la fila cuando la lista de notas está en modo condensado
-- Se ha actualizado la experiencia de edición de etiquetas
+- Ahora se admiten los atajos y la navegación con el teclado.

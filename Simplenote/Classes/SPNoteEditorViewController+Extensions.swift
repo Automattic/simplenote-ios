@@ -45,7 +45,7 @@ extension SPNoteEditorViewController {
         informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
         informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
 
-        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(newButtonAction(_:)))
+        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(handleTapOnCreateNewNoteButton))
         createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
 
         keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
@@ -113,10 +113,30 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureTextViewKeyboard() {
-        noteEditorTextView?.keyboardDismissMode = .interactive
+        noteEditorTextView.keyboardDismissMode = .interactive
     }
 }
 
+
+// MARK: - Notifications
+//
+extension SPNoteEditorViewController {
+    @objc
+    func startListeningToNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dismissEditor(_:)),
+                                               name: NSNotification.Name(rawValue: SPTransitionControllerPopGestureTriggeredNotificationName),
+                                               object: nil)
+
+        // voiceover status is tracked because the tag view is anchored
+        // to the bottom of the screen when voiceover is enabled to allow
+        // easier access
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(refreshVoiceoverSupport),
+                                               name: UIAccessibility.voiceOverStatusDidChangeNotification,
+                                               object: nil)
+    }
+}
 
 // MARK: - Keyboard Handling
 //
@@ -221,16 +241,18 @@ extension SPNoteEditorViewController {
 //
 extension SPNoteEditorViewController {
 
-    var simperium: Simperium {
+    /// NSCoder Keys
+    ///
+    enum CodingKeys: String {
+        case currentNoteKey
+    }
+
+    private var simperium: Simperium {
         SPAppDelegate.shared().simperium
     }
 
     open override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
-
-        guard let note = currentNote else {
-            return
-        }
 
         // Always make sure the object is persisted before proceeding
         if note.objectID.isTemporaryID {
@@ -238,17 +260,6 @@ extension SPNoteEditorViewController {
         }
 
         coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
-    }
-
-    open override func decodeRestorableState(with coder: NSCoder) {
-        guard let simperiumKey = coder.decodeObject(forKey: CodingKeys.currentNoteKey.rawValue) as? String,
-            let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
-            else {
-                navigationController?.popViewController(animated: false)
-                return
-        }
-
-        display(note)
     }
 }
 
@@ -273,7 +284,7 @@ extension SPNoteEditorViewController {
 
         dimLinksInEditor()
 
-        let viewController = SPNoteHistoryViewController(note: currentNote, delegate: self)
+        let viewController = SPNoteHistoryViewController(note: note, delegate: self)
         viewController.configureToPresentAsCard(presentationDelegate: self)
         historyViewController = viewController
 
@@ -377,12 +388,10 @@ extension SPNoteEditorViewController {
 
         restoreDefaultLinksDimmingInEditor()
         informationViewController.dismiss(animated: false) { [weak self] in
-            guard let self = self,
-                  let note = self.currentNote,
-                  let informationButton = self.informationButton else {
+            guard let self = self else {
                 return
             }
-            self.presentInformationController(for: note, from: informationButton)
+            self.presentInformationController(for: self.note, from: self.informationButton)
         }
     }
 }
@@ -438,6 +447,16 @@ private extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteContentShared()
 
     }
+
+    func presentMarkdownPreview() {
+        guard navigationController?.topViewController == self else {
+            return
+        }
+
+        let previewViewController = SPMarkdownPreviewViewController()
+        previewViewController.markdownText = noteEditorTextView.plainText
+        navigationController?.pushViewController(previewViewController, animated: true)
+    }
 }
 
 
@@ -445,15 +464,6 @@ private extension SPNoteEditorViewController {
 // MARK: - Services
 //
 extension SPNoteEditorViewController {
-
-    @objc
-    func newNote() -> Note {
-        let note = SPObjectManager.shared().newDefaultNote()
-        if let tagName = SPAppDelegate.shared().filteredTagName {
-            note.addTag(tagName)
-        }
-        return note
-    }
 
     func delete(note: Note) {
         SPTracker.trackEditorNoteDeleted()
@@ -463,17 +473,65 @@ extension SPNoteEditorViewController {
 
     @objc
     func ensureEmptyNoteIsDeleted() {
-        guard let note = currentNote else {
-            return
-        }
-
         guard note.isBlank, noteEditorTextView.text.isEmpty else {
             save()
             return
         }
 
         SPObjectManager.shared().trashNote(note)
-        currentNote = nil
+    }
+
+    @objc
+    private func handleTapOnCreateNewNoteButton() {
+        saveIfNeeded()
+
+        if note.isBlank {
+            noteEditorTextView.becomeFirstResponder()
+            return
+        }
+
+        SPTracker.trackEditorNoteCreated()
+
+        presentNewNoteReplacingCurrentEditor()
+    }
+
+    private func presentNewNoteReplacingCurrentEditor() {
+        guard let navigationController = navigationController,
+              let snapshotView = createAndAddEditorSnapshotView() else {
+            return
+        }
+
+        let viewControllers: [UIViewController] = navigationController.viewControllers.map {
+            if $0 == self {
+                return EditorFactory.shared.build(with: nil)
+            }
+            return $0
+        }
+
+        navigationController.setViewControllers(viewControllers, animated: false)
+
+        UIView.animate(withDuration: 0.2) {
+            snapshotView.transform = .init(translationX: 0, y: snapshotView.frame.height)
+        } completion: { (_) in
+            snapshotView.removeFromSuperview()
+        }
+    }
+
+    private func createAndAddEditorSnapshotView() -> UIView? {
+        let snapshotRect = CGRect(x: 0,
+                                  y: noteEditorTextView.adjustedContentInset.top,
+                                  width: noteEditorTextView.frame.width,
+                                  height: noteEditorTextView.frame.height - noteEditorTextView.adjustedContentInset.top)
+
+        guard let snapshotView = view.resizableSnapshotView(from: snapshotRect, afterScreenUpdates: false, withCapInsets: .zero),
+              let navigationController = navigationController else {
+            return nil
+        }
+
+        snapshotView.frame.origin.y = snapshotRect.origin.y
+        navigationController.view.addSubview(snapshotView)
+
+        return snapshotView
     }
 }
 
@@ -513,7 +571,7 @@ private extension SPNoteEditorViewController {
     }
 
     func restoreOriginalNoteContent() {
-        updateEditor(with: currentNote.content)
+        updateEditor(with: note.content)
     }
 
     func dimLinksInEditor() {
@@ -576,21 +634,11 @@ extension SPNoteEditorViewController {
 
     @IBAction
     func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
-        guard let note = currentNote else {
-            assertionFailure()
-            return
-        }
-
         presentOptionsController(for: note, from: sender)
     }
 
     @objc
     private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
-        guard let note = currentNote else {
-            assertionFailure()
-            return
-        }
-
         presentInformationController(for: note, from: sender)
     }
 }
@@ -647,7 +695,7 @@ extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvi
 extension SPNoteEditorViewController: InterlinkProcessorDelegate {
 
     func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
-        currentNote?.objectID
+        note.objectID
     }
 
     func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
@@ -786,11 +834,138 @@ extension SPNoteEditorViewController {
 extension SPNoteEditorViewController {
     @objc
     func updateHomeScreenQuickActions() {
-        guard let note = currentNote else {
+        ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
+    }
+}
+
+// MARK: - Keyboard
+//
+extension SPNoteEditorViewController {
+    open override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    open override var keyCommands: [UIKeyCommand]? {
+        guard presentedViewController == nil else {
+            return nil
+        }
+
+        var commands = [
+            UIKeyCommand(input: "n",
+                         modifierFlags: [.command],
+                         action: #selector(keyboardCreateNewNote),
+                         title: Localization.Shortcuts.newNote),
+        ]
+
+        if note.markdown == true {
+            commands.append(UIKeyCommand(input: "p",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardToggleMarkdownPreview),
+                                         title: Localization.Shortcuts.toggleMarkdown))
+        }
+
+
+
+        if searching {
+            commands.append(contentsOf: [
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command],
+                             action: #selector(keyboardHighlightNextMatch),
+                             title: Localization.Shortcuts.nextMatch),
+                UIKeyCommand(input: "g",
+                             modifierFlags: [.command, .shift],
+                             action: #selector(keyboardHighlightPrevMatch),
+                             title: Localization.Shortcuts.previousMatch),
+            ])
+        }
+
+        if noteEditorTextView.isFirstResponder {
+            commands.append(UIKeyCommand(input: "c",
+                                         modifierFlags: [.command, .shift],
+                                         action: #selector(keyboardInsertChecklist),
+                                         title: Localization.Shortcuts.insertChecklist))
+        } else {
+            commands.append(UIKeyCommand(input: UIKeyCommand.inputTab,
+                                         modifierFlags: [],
+                                         action: #selector(keyboardFocusOnEditor)))
+        }
+
+        commands.append(UIKeyCommand(input: UIKeyCommand.inputReturn,
+                                     modifierFlags: [.command],
+                                     action: #selector(keyboardGoBack),
+                                     title: Localization.Shortcuts.endEditing))
+
+        return commands
+    }
+
+    @objc
+    private func keyboardCreateNewNote() {
+        SPTracker.trackShortcutCreateNote()
+        presentNewNoteReplacingCurrentEditor()
+    }
+
+    @objc
+    private func keyboardToggleMarkdownPreview() {
+        SPTracker.trackShortcutToggleMarkdownPreview()
+        presentMarkdownPreview()
+    }
+
+    @objc
+    private func keyboardInsertChecklist() {
+        SPTracker.trackShortcutToggleChecklist()
+        insertChecklistAction(checklistButton)
+    }
+
+    @objc
+    private func keyboardHighlightNextMatch() {
+        SPTracker.trackShortcutSearchNext()
+        highlightNextSearchResult()
+    }
+
+    @objc
+    private func keyboardHighlightPrevMatch() {
+        SPTracker.trackShortcutSearchPrev()
+        highlightPrevSearchResult()
+    }
+
+    @objc
+    private func keyboardFocusOnEditor() {
+        noteEditorTextView.becomeFirstResponder()
+        noteEditorTextView.selectedTextRange = noteEditorTextView.textRange(from: noteEditorTextView.beginningOfDocument,
+                                                                            to: noteEditorTextView.beginningOfDocument)
+    }
+
+    @objc
+    private func keyboardGoBack() {
+        dismissEditor(nil)
+    }
+}
+
+
+// MARK: - Scroll position
+//
+extension SPNoteEditorViewController {
+    @objc
+    func saveScrollPosition() {
+        guard let key = note.simperiumKey else {
             return
         }
 
-        ShortcutsHandler.shared.updateHomeScreenQuickActions(with: note)
+        scrollPositionCache.store(position: noteEditorTextView.contentOffset.y,
+                                  for: key)
+    }
+
+    @objc
+    func restoreScrollPosition() {
+        guard let key = note.simperiumKey,
+              let offsetY = scrollPositionCache.position(for: key) else {
+            noteEditorTextView.scrollToTop()
+            return
+        }
+
+        let offset = CGPoint(x: 0, y: offsetY)
+
+        noteEditorTextView.contentOffset = noteEditorTextView.boundedContentOffset(from: offset)
     }
 }
 
@@ -810,8 +985,15 @@ private enum Metrics {
 }
 
 
-// MARK: - NSCoder Keys
+// MARK: - Localization
 //
-private enum CodingKeys: String {
-    case currentNoteKey
+private enum Localization {
+    enum Shortcuts {
+        static let newNote = NSLocalizedString("New Note", comment: "Keyboard shortcut: New Note")
+        static let nextMatch = NSLocalizedString("Next Match", comment: "Keyboard shortcut: Note search, Next Match")
+        static let previousMatch = NSLocalizedString("Previous Match", comment: "Keyboard shortcut: Note search, Previous Match")
+        static let insertChecklist = NSLocalizedString("Insert Checklist", comment: "Keyboard shortcut: Insert Checklist")
+        static let toggleMarkdown = NSLocalizedString("Toggle Markdown", comment: "Keyboard shortcut: Toggle Markdown")
+        static let endEditing = NSLocalizedString("End Editing", comment: "Keyboard shortcut: End Editing")
+    }
 }

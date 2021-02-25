@@ -5,10 +5,7 @@ import SimplenoteFoundation
 //
 final class NoteInformationViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var screenTitleLabel: UILabel!
-    @IBOutlet private weak var dismissButton: UIButton!
-    @IBOutlet private weak var headerStackView: UIStackView!
-    private lazy var blurEffectView = SPBlurEffectView()
+    @IBOutlet private weak var dragBar: SPDragBar!
 
     private var transitioningManager: UIViewControllerTransitioningDelegate?
 
@@ -48,8 +45,8 @@ final class NoteInformationViewController: UIViewController {
         super.viewDidLoad()
 
         configureViews()
-        configureAccessibility()
         configureNavigation()
+        configureDragBar()
 
         refreshPreferredSize()
 
@@ -59,13 +56,17 @@ final class NoteInformationViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        configureHeaderLayoutMargins()
         refreshPreferredSize()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateAdditionalSafeAreaInsets()
+        additionalSafeAreaInsets = Consts.tableViewSafeAreaInsets
+    }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        dismiss(animated: true, completion: nil)
+        return true
     }
 }
 
@@ -90,20 +91,17 @@ private extension NoteInformationViewController {
 //
 private extension NoteInformationViewController {
     func configureNavigation() {
-        title = Localization.information
+        title = Localization.document
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Localization.done,
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(handleTapOnDismissButton))
+        
     }
 
     func configureViews() {
         configureTableView()
-        screenTitleLabel.text = Localization.information
-
-        configureHeaderView()
-
-        refreshStyle()
+        styleTableView()
     }
 
     func configureTableView() {
@@ -120,67 +118,29 @@ private extension NoteInformationViewController {
         }
     }
 
-    func configureHeaderView() {
-        guard navigationController == nil else {
-            headerStackView.isHidden = true
-            return
-        }
-
-        configureBlurEffectView()
-    }
-
-    func configureHeaderLayoutMargins() {
-        headerStackView.isLayoutMarginsRelativeArrangement = true
-
-        var layoutMargins = Consts.headerExtraLayoutMargins
-        layoutMargins.left += tableView.layoutMargins.left
-        layoutMargins.right += tableView.layoutMargins.right
-
-        // Sync layout margins with table view so labels are aligned
-        headerStackView.layoutMargins = layoutMargins
-    }
-
-    func configureBlurEffectView() {
-        view.insertSubview(blurEffectView, belowSubview: headerStackView)
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-            blurEffectView.bottomAnchor.constraint(equalTo: headerStackView.bottomAnchor)
-        ])
-    }
-
-    func configureAccessibility() {
-        dismissButton.accessibilityLabel = Localization.dismissAccessibilityLabel
-    }
-
     func refreshPreferredSize() {
         preferredContentSize = tableView.contentSize
     }
+    
+    private func configureDragBar() {
+        dragBar.isHidden = navigationController != nil
+        dragBar.accessibilityLabel = Localization.dismissAccessibilityLabel
 
-    func updateAdditionalSafeAreaInsets() {
-        guard !headerStackView.isHidden else {
-            additionalSafeAreaInsets = .zero
-            return
+        if UIAccessibility.isVoiceOverRunning == true {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(informationSheetToBeDismissed))
+            dragBar.addGestureRecognizer(gestureRecognizer)
         }
-
-        additionalSafeAreaInsets = UIEdgeInsets(top: headerStackView.frame.maxY, left: 0, bottom: 0, right: 0)
+    }
+    
+    @objc
+    func informationSheetToBeDismissed() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - Styling
 //
 private extension NoteInformationViewController {
-    func refreshStyle() {
-        styleScreenTitleLabel()
-        styleTableView()
-    }
-
-    func styleScreenTitleLabel() {
-        screenTitleLabel.textColor = .simplenoteNoteHeadlineColor
-    }
-
     func styleTableView() {
         tableView.separatorColor = .simplenoteDividerColor
     }
@@ -233,9 +193,9 @@ extension NoteInformationViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(ofType: Value1TableViewCell.self, for: indexPath)
             configure(cell: cell, withTitle: title, value: value)
             return cell
-        case .reference(_, let title, let date):
+        case .reference(_, let title, let reference):
             let cell = tableView.dequeueReusableCell(ofType: SubtitleTableViewCell.self, for: indexPath)
-            configure(cell: cell, withTitle: title, date: date)
+            configure(cell: cell, withTitle: title, reference: reference)
             return cell
         case .header(let title):
             let cell = tableView.dequeueReusableCell(ofType: TableHeaderViewCell.self, for: indexPath)
@@ -251,9 +211,9 @@ extension NoteInformationViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = value
     }
 
-    private func configure(cell: SubtitleTableViewCell, withTitle title: String, date: String) {
+    private func configure(cell: SubtitleTableViewCell, withTitle title: String, reference: String) {
         cell.title = title
-        cell.value = date
+        cell.value = reference
     }
 
     private func configure(cell: TableHeaderViewCell, withTitle title: String) {
@@ -261,10 +221,17 @@ extension NoteInformationViewController: UITableViewDataSource {
     }
 
     private func updateSeparator(for cell: UITableViewCell, at indexPath: IndexPath) {
-        if indexPath.row == sections[indexPath.section].rows.count - 1 {
-            cell.adjustSeparatorWidth(width: .full)
-        } else {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        
+        switch row {
+        case .header(_):
             cell.adjustSeparatorWidth(width: .standard)
+        default:
+            if indexPath.row == sections[indexPath.section].rows.count - 1 {
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            } else {
+                cell.adjustSeparatorWidth(width: .standard)
+            }
         }
     }
 
@@ -287,7 +254,7 @@ private extension NoteInformationViewController {
 
     @objc
     private func themeDidChange() {
-        refreshStyle()
+        styleTableView()
     }
 }
 
@@ -316,11 +283,11 @@ extension NoteInformationViewController: SPCardPresentationControllerDelegate {
 }
 
 private struct Localization {
-    static let information = NSLocalizedString("Information", comment: "Card title showing information about the note (metrics, references)")
     static let done = NSLocalizedString("Done", comment: "Dismisses the Note Information UI")
     static let dismissAccessibilityLabel = NSLocalizedString("Dismiss Information", comment: "Accessibility label describing a button used to dismiss an information view of the note")
+    static let document = NSLocalizedString("Document", comment: "Card title showing information about the note (metrics, references)")
 }
 
 private struct Consts {
-    static let headerExtraLayoutMargins = UIEdgeInsets(top: 13.0, left: 0.0, bottom: 13.0, right: 0.0)
+    static let tableViewSafeAreaInsets = UIEdgeInsets(top: 26, left: 0, bottom: 0, right: 0)
 }

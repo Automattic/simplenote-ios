@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-03 15:19:36+0000 */
+/* Translation-Revision-Date: 2021-02-16 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -14,6 +14,12 @@
 
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i felaktiga inmatningar";
+
+/* Count of interlink references to a note */
+"%i Reference" = "%i Referenser";
+
+/* Count of interlink references to a note */
+"%i References" = "%i Referenser";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minst 8 tecken";
@@ -230,6 +236,9 @@
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Göm tangentbord";
 
+/* Card title showing information about the note (metrics, references) */
+"Document" = "Dokument";
+
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done toolbar button */
@@ -252,6 +261,9 @@
 
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Aktivera Markdown-formatering";
+
+/* Keyboard shortcut: End Editing */
+"End Editing" = "Sluta redigering";
 
 /* Number of objects enqueued for processing */
 "Enqueued" = "I kö";
@@ -292,12 +304,17 @@
 /* No comment provided by engineer. */
 "I like it" = "Jag gillar den";
 
-/* Card title showing information about the note (metrics, references)
-   Note Information Button (metrics + references) */
+/* Note Information Button (metrics + references) */
 "Information" = "Information";
+
+/* Keyboard shortcut: Insert Checklist */
+"Insert Checklist" = "Infoga checklista";
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Infogar ett nytt checklisteobjekt";
+
+/* Date of note last modified. Parameter: %1$@ - formatted date */
+"Last Modified %1$@" = "Senast modifierat %1$@";
 
 /* Last Message timestamp */
 "LastSeen" = "Sågs senast";
@@ -361,7 +378,8 @@
    Deletes a note */
 "Move to Trash" = "Flytta till papperskorgen";
 
-/* Home screen quick action: New Note */
+/* Home screen quick action: New Note
+   Keyboard shortcut: New Note */
 "New Note" = "Ny anteckning";
 
 /* Label to create a new note */
@@ -369,6 +387,9 @@
 
 /* Empty Note Placeholder */
 "New note..." = "Ny anteckning ...";
+
+/* Keyboard shortcut: Note search, Next Match */
+"Next Match" = "Nästa matchning";
 
 /* Cancels Empty Trash Action */
 "No" = "Nej";
@@ -446,6 +467,9 @@
 /* Title of Markdown preview screen */
 "Preview" = "Förhandsgranska";
 
+/* Keyboard shortcut: Note search, Previous Match */
+"Previous Match" = "Föregående matchning";
+
 /* Simplenote terms of service */
 "Privacy Notice for California Users" = "Integritetsnotis för användare i Kalifornien";
 
@@ -501,6 +525,7 @@
 "Review Your Account" = "Granska ditt konto";
 
 /* Home screen quick action: Search
+   Keyboard shortcut: Search
    Search Placeholder
    Search Title */
 "Search" = "Sök";
@@ -601,6 +626,9 @@
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Idag";
+
+/* Keyboard shortcut: Toggle Markdown */
+"Toggle Markdown" = "Växla markdown";
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Slå på\/av etiketter i sidopanelen";

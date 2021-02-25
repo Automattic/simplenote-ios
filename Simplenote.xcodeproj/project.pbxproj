@@ -148,6 +148,8 @@
 		A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */; };
 		A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */; };
 		A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */; };
+		A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */; };
+		A6C0DFB525C1581D00B9BE39 /* UIScrollView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */; };
 		A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2721725AF0C1E00593731 /* TagListViewCell.swift */; };
 		A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */; };
 		A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */; };
@@ -158,6 +160,7 @@
 		A6CC0B4425B8505700F12A85 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B4325B8505700F12A85 /* MockURLSessionDataTask.swift */; };
 		A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */; };
 		A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */; };
+		A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DB2C1425BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift */; };
 		A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */; };
 		A6E02758256E52F3002054DF /* PinLockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E02757256E52F3002054DF /* PinLockController.swift */; };
 		A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E02777256E9487002054DF /* PinLockSetupController.swift */; };
@@ -169,6 +172,9 @@
 		A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */; };
 		A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */; };
 		A6E1E7A824BE656D008A44BC /* SPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1E7A724BE656D008A44BC /* SPCardView.swift */; };
+		A6E4872625BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */; };
+		A6E4875025BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4874F25BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift */; };
+		A6E4875825BEF3C700D0CE3B /* UIResponder+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4875725BEF3C700D0CE3B /* UIResponder+Simplenote.swift */; };
 		A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */; };
 		A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */; };
 		A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */; };
@@ -383,6 +389,7 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
+		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
@@ -590,6 +597,8 @@
 		A6C0589324AD2B8F006BC572 /* SPNoteHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteHistoryViewController.xib; path = Classes/SPNoteHistoryViewController.xib; sourceTree = "<group>"; };
 		A6C0589824AD47CB006BC572 /* SPSnappingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPSnappingSlider.swift; sourceTree = "<group>"; };
 		A6C0589A24AD5205006BC572 /* SPNoteHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPNoteHistoryController.swift; sourceTree = "<group>"; };
+		A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteScrollPositionCache.swift; sourceTree = "<group>"; };
+		A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Simplenote.swift"; path = "Classes/UIScrollView+Simplenote.swift"; sourceTree = "<group>"; };
 		A6C2721725AF0C1E00593731 /* TagListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewCell.swift; sourceTree = "<group>"; };
 		A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemote.swift; sourceTree = "<group>"; };
@@ -600,6 +609,7 @@
 		A6CC0B4325B8505700F12A85 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewSpinner.swift; path = Classes/ViewSpinner.swift; sourceTree = "<group>"; };
 		A6D5AE6425483F8A00326C76 /* NSTextStorage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Simplenote.swift"; sourceTree = "<group>"; };
+		A6DB2C1425BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPMarkdownPreviewViewController+Extensions.swift"; path = "Classes/SPMarkdownPreviewViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		A6E02757256E52F3002054DF /* PinLockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockController.swift; sourceTree = "<group>"; };
 		A6E02777256E9487002054DF /* PinLockSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockSetupController.swift; sourceTree = "<group>"; };
@@ -611,6 +621,9 @@
 		A6E1E7A124BDE456008A44BC /* SPCardPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationAnimator.swift; sourceTree = "<group>"; };
 		A6E1E7A324BDE472008A44BC /* SPCardPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardPresentationController.swift; sourceTree = "<group>"; };
 		A6E1E7A724BE656D008A44BC /* SPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCardView.swift; sourceTree = "<group>"; };
+		A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIKeyCommand+Simplenote.swift"; path = "Classes/UIKeyCommand+Simplenote.swift"; sourceTree = "<group>"; };
+		A6E4874F25BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPSidebarViewController+Extensions.swift"; path = "Classes/SPSidebarViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A6E4875725BEF3C700D0CE3B /* UIResponder+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIResponder+Simplenote.swift"; path = "Classes/UIResponder+Simplenote.swift"; sourceTree = "<group>"; };
 		A6E6CDFF25A4B0A9005A92DB /* PinLockVerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockVerifyController.swift; sourceTree = "<group>"; };
 		A6E6CE5B25A5A7F7005A92DB /* PinLockBaseControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLockBaseControllerTests.swift; sourceTree = "<group>"; };
 		A6E6CE6325A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLockControllerConfiguration+Tests.swift"; sourceTree = "<group>"; };
@@ -847,6 +860,7 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
+		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1512,6 +1526,9 @@
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
 				A6F4881225A884CE0050CFA8 /* UITextInput+Simplenote.swift */,
+				A6E4872525BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift */,
+				A6E4875725BEF3C700D0CE3B /* UIResponder+Simplenote.swift */,
+				A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1674,6 +1691,7 @@
 				A6F487AE25A79D550050CFA8 /* BiometricAuthentication.swift */,
 				A6F4879825A79D130050CFA8 /* ApplicationStateProvider.swift */,
 				A6F487EC25A85F970050CFA8 /* TagTextFieldInputValidator.swift */,
+				A6C0DFA625C0992D00B9BE39 /* NoteScrollPositionCache.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1802,6 +1820,7 @@
 				A6ABB688256D95EB00E2A076 /* PinLockProgressView.swift */,
 				A6BF0E342567B29B008DE8E0 /* RoundedCrossButton.swift */,
 				A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */,
+				BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */,
 				A6A648B225AC7EA40074A094 /* ActivityIndicatorButton.swift */,
 			);
 			name = Views;
@@ -1964,12 +1983,14 @@
 				E20DED0317AE07340086AB5F /* SPPopoverContainerViewController.m */,
 				E2922AC0180CA06B003AF914 /* SPSidebarContainerViewController.h */,
 				E2922AC1180CA06B003AF914 /* SPSidebarContainerViewController.m */,
+				A6E4874F25BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift */,
 				E215C797180B130B00AD36B5 /* SPTableViewController.h */,
 				E215C798180B130B00AD36B5 /* SPTableViewController.m */,
 				A6DE79CD2552E6CB00BC69C6 /* TagListViewController.swift */,
 				B56C8CA1234CEAF100FE55F4 /* TagListViewController.xib */,
 				17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */,
 				17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */,
+				A6DB2C1425BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift */,
 				B5796548250684EC00DFD6F7 /* EditorFactory.swift */,
 			);
 			name = ViewControllers;
@@ -2437,6 +2458,7 @@
 				B53971A31AB8DCDC00B1A582 /* SPTracker.m in Sources */,
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
+				A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
@@ -2456,6 +2478,7 @@
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
 				B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
+				A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
 				46A3C96A17DFA81A002865AE /* SPTagStub.m in Sources */,
@@ -2548,6 +2571,7 @@
 				B5476BB723D89AF7000E7723 /* SPSectionHeaderView.swift in Sources */,
 				B5377349252E2A4200BC78C5 /* Value1TableViewCell.swift in Sources */,
 				B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */,
+				A6C0DFB525C1581D00B9BE39 /* UIScrollView+Simplenote.swift in Sources */,
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
 				46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */,
 				375D24BA21E01131007AB25A /* document.c in Sources */,
@@ -2561,6 +2585,7 @@
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
+				A6E4875025BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift in Sources */,
 				A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */,
 				B50CA5262513EC5400A4742D /* NSAttributedString+AuthError.swift in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
@@ -2609,14 +2634,17 @@
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
 				B56A696122F9D53400B90398 /* SPAuthError.swift in Sources */,
+				A6E4875825BEF3C700D0CE3B /* UIResponder+Simplenote.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
+				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
+				A6E4872625BEB6E500D0CE3B /* UIKeyCommand+Simplenote.swift in Sources */,
 				A6F487FD25A880000050CFA8 /* SPTagView+Extensions.swift in Sources */,
 				B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */,
 				E2B0863618070045001ED52D /* SPTagPill.m in Sources */,

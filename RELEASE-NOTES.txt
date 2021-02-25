@@ -1,5 +1,10 @@
+4.33
+-----
+ 
 4.32
 -----
+-   Added support for keyboard navigation and shortcuts #1092
+
  
 4.31
 -----

@@ -56,5 +56,5 @@ private extension TableHeaderViewCell {
 }
 
 private struct Constants {
-    static let titleLabelExtraInsets = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+    static let titleLabelExtraInsets = UIEdgeInsets(top: 8, left: 0, bottom: -2, right: 0)
 }

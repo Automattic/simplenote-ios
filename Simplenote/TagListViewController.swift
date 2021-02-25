@@ -44,8 +44,9 @@ final class TagListViewController: UIViewController {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
 
-        tableView.reloadData()
+        reloadTableView()
         startListeningForChanges()
+        becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,6 +55,8 @@ final class TagListViewController: UIViewController {
 
         stopListeningToKeyboardNotifications()
         stopListeningForChanges()
+
+        resignFirstResponder()
     }
 }
 
@@ -147,7 +150,7 @@ private extension TagListViewController {
         rightBorderView.backgroundColor = .simplenoteDividerColor
         tagsHeaderView.refreshStyle()
         tableView.applySimplenotePlainStyle()
-        tableView.reloadData()
+        reloadTableView()
     }
 }
 
@@ -267,7 +270,6 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.isSelected = shouldSelectCell(at: indexPath)
         cell.adjustSeparatorWidth(width: .full)
     }
 
@@ -289,18 +291,7 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            return
-        }
-
-        switch section {
-        case .system:
-            didSelectSystemRow(at: indexPath)
-        case .tags:
-            didSelectTag(at: indexPath)
-        case .bottom:
-            didSelectBottomRow(at: indexPath)
-        }
+        didSelectRow(at: indexPath, isTraversing: false)
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -330,6 +321,11 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
+    }
+
+    func reloadTableView() {
+        tableView.reloadData()
+        updateCurrentSelection()
     }
 }
 
@@ -376,32 +372,36 @@ private extension TagListViewController {
         cell.hasClearBackground = true
         cell.imageTintColor = .simplenoteTintColor
     }
+}
 
-    func shouldSelectCell(at indexPath: IndexPath) -> Bool {
-        guard let section = Section(rawValue: indexPath.section) else {
-            return false
-        }
+// MARK: - Selection
+//
+private extension TagListViewController {
+    func updateCurrentSelection() {
+        tableView.selectRow(at: currentSelection, animated: false, scrollPosition: .none)
+    }
 
-        let selectedTag = SPAppDelegate.shared().selectedTag
-
-        switch section {
-        case .system:
-            guard let row = SystemRow(rawValue: indexPath.row) else {
-                return false
+    var currentSelection: IndexPath? {
+        let filter = NotesListFilter(selectedTag: SPAppDelegate.shared().selectedTag)
+        switch filter {
+        case .everything:
+            return IndexPath(row: SystemRow.allNotes.rawValue,
+                             section: Section.system.rawValue)
+        case .deleted:
+            return IndexPath(row: SystemRow.trash.rawValue,
+                             section: Section.system.rawValue)
+        case .untagged:
+            return IndexPath(row: 0,
+                             section: Section.bottom.rawValue)
+        case .tag(let tagName):
+            guard let index = resultsController.fetchedObjects.firstIndex(where: {
+                $0.name == tagName
+            }) else {
+                return nil
             }
-            switch row {
-            case .allNotes:
-                return selectedTag == nil
-            case .trash:
-                return selectedTag == kSimplenoteTrashKey
-            case .settings:
-                return false
-            }
 
-        case .tags:
-            return selectedTag == tag(at: indexPath)?.name
-        case .bottom:
-            return selectedTag == kSimplenoteUntaggedKey
+            return IndexPath(row: index,
+                             section: Section.tags.rawValue)
         }
     }
 }
@@ -409,56 +409,67 @@ private extension TagListViewController {
 // MARK: - Row Press Handlers
 //
 private extension TagListViewController {
-    func didSelectSystemRow(at indexPath: IndexPath) {
+
+    func didSelectRow(at indexPath: IndexPath, isTraversing: Bool) {
+        guard let section = Section(rawValue: indexPath.section) else {
+            return
+        }
+
+        switch section {
+        case .system:
+            didSelectSystemRow(at: indexPath, isTraversing: isTraversing)
+        case .tags:
+            didSelectTag(at: indexPath, isTraversing: isTraversing)
+        case .bottom:
+            didSelectBottomRow(at: indexPath, isTraversing: isTraversing)
+        }
+    }
+
+    func didSelectSystemRow(at indexPath: IndexPath, isTraversing: Bool) {
         guard let row = SystemRow(rawValue: indexPath.row) else {
             return
         }
 
-        setEditing(false)
+        if !isTraversing {
+            setEditing(false)
+        }
 
         switch row {
         case .allNotes:
-            allNotesWasPressed()
+            openNoteListForTagName(nil, isTraversing: isTraversing)
         case .trash:
-            trashWasPressed()
+            SPTracker.trackTrashViewed()
+            openNoteListForTagName(kSimplenoteTrashKey, isTraversing: isTraversing)
         case .settings:
-            tableView.deselectRow(at: indexPath, animated: true)
-            settingsWasPressed()
+            if isTraversing {
+                return
+            }
+            updateCurrentSelection()
+            SPAppDelegate.shared().presentSettingsViewController()
         }
     }
 
-    func didSelectTag(at indexPath: IndexPath) {
+    func didSelectTag(at indexPath: IndexPath, isTraversing: Bool) {
         guard let tag = tag(at: indexPath) else {
             return
         }
 
-        if isEditing {
+        if isEditing && !isTraversing {
             SPTracker.trackTagRowRenamed()
             renameTag(tag)
         } else {
             SPTracker.trackListTagViewed()
-            openNoteListForTagName(tag.name)
+            openNoteListForTagName(tag.name, isTraversing: isTraversing)
         }
     }
 
-    func didSelectBottomRow(at indexPath: IndexPath) {
-        setEditing(false)
+    func didSelectBottomRow(at indexPath: IndexPath, isTraversing: Bool) {
+        if !isTraversing {
+            setEditing(false)
+        }
 
         SPTracker.trackListUntaggedViewed()
-        openNoteListForTagName(kSimplenoteUntaggedKey)
-    }
-
-    func allNotesWasPressed() {
-        openNoteListForTagName(nil)
-    }
-
-    func trashWasPressed() {
-        SPTracker.trackTrashViewed()
-        openNoteListForTagName(kSimplenoteTrashKey)
-    }
-
-    func settingsWasPressed() {
-        SPAppDelegate.shared().presentSettingsViewController()
+        openNoteListForTagName(kSimplenoteUntaggedKey, isTraversing: isTraversing)
     }
 }
 
@@ -519,6 +530,7 @@ private extension TagListViewController {
         super.setEditing(editing, animated: true)
         tableView.setEditing(editing, animated: true)
         refreshEditTagsButton(isEditing: editing)
+        updateCurrentSelection()
     }
 
     func refreshEditTagsButton(isEditing: Bool) {
@@ -526,10 +538,12 @@ private extension TagListViewController {
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
-    func openNoteListForTagName(_ tagName: String?) {
+    func openNoteListForTagName(_ tagName: String?, isTraversing: Bool) {
         let appDelegate = SPAppDelegate.shared()
         appDelegate.selectedTag = tagName
-        appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
+        if !isTraversing {
+            appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
+        }
     }
 }
 
@@ -604,9 +618,8 @@ extension TagListViewController: UITextFieldDelegate {
 
         self.renameTag = nil
 
-        let tagCell = cell(for: renameTag)
         if isEditing {
-            tagCell?.setSelected(false, animated: true)
+            updateCurrentSelection()
         }
 
         textField.isEnabled = false
@@ -656,7 +669,7 @@ private extension TagListViewController {
 
     func performFetch() {
         try? resultsController.performFetch()
-        tableView.reloadData()
+        reloadTableView()
     }
 
     func refreshSortDescriptorsAndPerformFetch() {
@@ -678,7 +691,7 @@ private extension TagListViewController {
             // Results controller supports only tags section. We show/hide tags section based on the number of tags®
             guard self.tableView.numberOfSections == self.numberOfSections(in: self.tableView) else {
                 self.setEditing(false)
-                self.tableView.reloadData()
+                self.reloadTableView()
                 return
             }
 
@@ -699,6 +712,7 @@ private extension TagListViewController {
                                           objectsChangeset: objectsChangeset,
                                           animations: animations)
         }, completion: nil)
+        updateCurrentSelection()
     }
 }
 
@@ -735,6 +749,75 @@ private extension TagListViewController {
             self.tableView.contentInset = contentInsets
             self.tableView.scrollIndicatorInsets = .zero
         })
+    }
+}
+
+// MARK: - Keyboard Support
+//
+extension TagListViewController {
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        guard isFirstResponder else {
+            return nil
+        }
+
+        var commands = [
+            UIKeyCommand(input: UIKeyCommand.inputTrailingArrow, modifierFlags: [], action: #selector(keyboardHideSidebar))
+        ]
+        commands.append(contentsOf: tableCommands)
+
+        return commands
+    }
+
+    @objc
+    private func keyboardHideSidebar() {
+        let appDelegate = SPAppDelegate.shared()
+        appDelegate.sidebarViewController.hideSidebar(withAnimation: true)
+    }
+}
+
+// MARK: - Keyboard support (List)
+//
+private extension TagListViewController {
+    var tableCommands: [UIKeyCommand] {
+        [
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(keyboardUp)),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(keyboardDown)),
+            UIKeyCommand(input: "\r", modifierFlags: [], action: #selector(keyboardSelect))
+        ]
+    }
+
+    @objc
+    func keyboardUp() {
+        tableView?.selectPrevRow()
+        updateSelectionWhileTraversing()
+    }
+
+    @objc
+    func keyboardDown() {
+        tableView?.selectNextRow()
+        updateSelectionWhileTraversing()
+    }
+
+    @objc
+    func keyboardSelect() {
+        tableView?.executeSelection()
+    }
+
+    func updateSelectionWhileTraversing() {
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+
+        // Skip for settings
+        if indexPath.section == Section.system.rawValue && indexPath.row == SystemRow.settings.rawValue {
+            return
+        }
+
+        didSelectRow(at: indexPath, isTraversing: true)
     }
 }
 

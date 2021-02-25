@@ -25,7 +25,6 @@ extern NSString *const kShareExtensionGroupName;
 extern NSString *const kSimplenoteWPServiceName;
 
 extern NSString *const kSelectedTagKey;
-extern NSString *const kSelectedNoteKey;
 extern NSString *const kSimplenoteTrashKey;
 extern NSString *const kSimplenoteUntaggedKey;
 extern NSString *const kSimplenoteUseBiometryKey;
