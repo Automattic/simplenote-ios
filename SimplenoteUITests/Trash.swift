@@ -3,7 +3,7 @@ import XCTest
 class Trash {
 
     class func open() {
-        app.navigationBars.element.buttons[UID.Button.menu].tap()
+		Sidebar.open()
         app.tables.staticTexts[UID.Button.trash].tap()
     }
 

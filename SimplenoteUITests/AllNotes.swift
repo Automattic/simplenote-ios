@@ -7,24 +7,31 @@ class AllNotes {
     }
 
     class func isOpen() -> Bool {
+		//Warning for future: this works only for 'All Notes' obviously
+		//Will not work when a tag is selected.
         return app.navigationBars[UID.NavBar.allNotes].exists
     }
 
     class func open() {
         guard !isOpen() else { return }
 
-        app.navigationBars.element.buttons[UID.Button.menu].tap()
+		Sidebar.open()
         app.tables.staticTexts[UID.Button.allNotes].tap()
     }
 
     class func addNoteTap() {
-        app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.newNote].tap()
+		app.navigationBars.buttons[UID.Button.newNote].tap()
     }
 
-    class func createNoteAndLeaveEditor(noteName: String) {
-        print(">>> Creating note: " + noteName)
+	class func createNoteAndLeaveEditor(noteName: String, tagsOptional: [String] = []) {
+        print(">>> Creating a note: " + noteName)
         AllNotes.addNoteTap()
         NoteEditor.clearAndEnterText(enteredValue: noteName)
+
+		for tag in tagsOptional {
+			NoteEditor.addTag(tagName: tag)
+		}
+
         NoteEditor.leaveEditor()
     }
 
@@ -61,7 +68,7 @@ class AllNotes {
         for _ in 0..<notesNumber {
             let cell = app.tables.cells.element(boundBy: startingIndex)
             cell.swipeLeft()
-            cell.buttons[UID.Button.noteCellTrash].tap()
+            cell.buttons[UID.Button.itemTrash].tap()
         }
     }
 
@@ -118,7 +125,7 @@ class AllNotesAssert {
 
     class func notesNumber(expectedNotesNumber: Int) {
         let actualNotesNumber = AllNotes.getNotesNumber()
-        XCTAssertEqual(expectedNotesNumber, actualNotesNumber, numberOfNotesInAllNotesNotExpected)
+        XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
     }
 
     class func screenShown() {

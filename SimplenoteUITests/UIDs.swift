@@ -1,11 +1,11 @@
 enum UID {
-	
+
 	enum Picture {
 		static let appLogo = "simplenote-logo"
 	}
 
 	enum Cell {
-		static let settings = "Settings"
+		static let settings = "settings"
 	}
 
 	enum NavBar {
@@ -18,6 +18,7 @@ enum UID {
 	enum Button {
 		static let newNote = "New note"
 		static let done = "Done"
+		static let edit = "Edit"
 		static let back = "Back"
 		static let accept = "Accept"
 		static let yes = "Yes"
@@ -32,11 +33,13 @@ enum UID {
 		static let noteEditorChecklist = "Inserts a new Checklist Item"
 		static let noteEditorInformation = "Information"
 		static let noteEditorMenu = "note-menu"
-		static let noteCellTrash = "icon trash"
+		static let itemTrash = "icon trash"
 		static let trashRestore = "icon restore"
 		static let trashEmptyTrash = "Empty"
 		static let clearText = "Clear text"
 		static let cancel = "Cancel"
+		static let dismissKeyboard = "Dismiss keyboard"
+		static let deleteTagConfirmation = "Delete Tag"
 	}
 
 	enum Text {
@@ -48,6 +51,7 @@ enum UID {
 	enum TextField {
 		static let email = "Email"
 		static let password = "Password"
+		static let tag = "Tag..."
 	}
 
 	enum SearchField {

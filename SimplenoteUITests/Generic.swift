@@ -17,9 +17,9 @@ func attemptLogOut() -> Bool {
 }
 
 func logOut() -> Bool {
-    app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.menu].tap()
-    app.tables.staticTexts[UID.Cell.settings].tap()
-    app.tables.staticTexts[UID.Button.settingsLogOut].tap()
+	Sidebar.open()
+	Sidebar.getButtonSettings().tap()
+	app.tables.staticTexts[UID.Button.settingsLogOut].tap()
     return app.buttons[UID.Button.logIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
@@ -42,8 +42,9 @@ func getToAllNotes() {
 class Table {
 
     class func getCellsNumber() -> Int {
-        // We need to count only the table cells that have X = 0 (this is a case for notes)
-        // Otherwise we will include invisible elements from left pane, which are still found
+        // We need to count only the table cells that have X = 0
+        // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
+		// or the elements from Notes List when Settings are open
         let cellsNum = app.tables.element.children(matching: .cell).count
         var notesNum: Int = 0
 
@@ -65,7 +66,7 @@ class Table {
     class func trashCell(noteName: String) {
 		Table.getCell(label: noteName).swipeLeft()
         sleep(1)
-		Table.getCell(label: noteName).buttons[UID.Button.noteCellTrash].tap()
+		Table.getCell(label: noteName).buttons[UID.Button.itemTrash].tap()
     }
 
 	class func getCell(label: String) -> XCUIElement {

@@ -22,11 +22,18 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
 		AllNotes.waitForLoad()
 		AllNotes.clearAllNotes()
 		Trash.empty()
+		Sidebar.open()
+		Sidebar.tagsDeleteAll()
 		AllNotes.open()
-		AllNotes.createNotes(names: [godzillaNoteName + "\n\n" + godzillaInfo,
-									 kingKongNoteName + "\n\n" + kingKongInfo,
-									 mechagodzillaNoteName + "\n\n" + mechagodzillaInfo,
-									 diacriticNoteName + "\n\n" + diacriticInfo])
+
+		AllNotes.createNoteAndLeaveEditor(noteName: godzillaNoteName + "\n\n" + godzillaInfo,
+										  tagsOptional: ["sea-monster", "reptile", "prehistoric"])
+		AllNotes.createNoteAndLeaveEditor(noteName: kingKongNoteName + "\n\n" + kingKongInfo,
+										  tagsOptional: ["ape", "prehistoric"])
+		AllNotes.createNoteAndLeaveEditor(noteName: mechagodzillaNoteName + "\n\n" + mechagodzillaInfo,
+										  tagsOptional: ["man-made", "robot"])
+		AllNotes.createNoteAndLeaveEditor(noteName: diacriticNoteName + "\n\n" + diacriticInfo,
+										  tagsOptional: ["language", "diacritic"])
 	}
 
 	override func setUpWithError() throws {
@@ -60,6 +67,22 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
 		AllNotes.searchForText(text: "")
 		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
 		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+	}
+
+	func testTagsTapping() throws {
+		trackTest()
+		
+		trackStep()
+		Sidebar.tagSelect(tagName: "ape")
+		AllNotesAssert.noteExists(noteName: kingKongNoteName)
+
+		trackStep()
+		Sidebar.tagSelect(tagName: "reptile")
+		AllNotesAssert.noteExists(noteName: godzillaNoteName)
+
+		trackStep()
+		Sidebar.tagSelect(tagName: "robot")
+		AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
 	}
 
 	func testCanSearchByKeyword() throws {
