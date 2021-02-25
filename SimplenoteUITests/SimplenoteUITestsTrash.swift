@@ -11,7 +11,6 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
 	}
 
 	override func setUpWithError() throws {
-		continueAfterFailure = true
 		AllNotes.clearAllNotes()
 		Trash.empty()
 		AllNotes.open()

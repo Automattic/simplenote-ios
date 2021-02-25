@@ -42,6 +42,6 @@ class TrashAssert {
 
     class func notesNumber(expectedNotesNumber: Int) {
         let actualNotesNumber = Trash.getNotesNumber()
-        XCTAssertEqual(expectedNotesNumber, actualNotesNumber, numberOfNotesInTrashNotExpected)
+        XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInTrashNotExpected)
     }
 }

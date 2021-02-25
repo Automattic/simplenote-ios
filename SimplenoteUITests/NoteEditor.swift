@@ -132,17 +132,17 @@ class NoteEditorAssert {
 
     class func textViewWithExactValueShownOnce(value: String) {
         let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func textViewWithExactValueNotShown(value: String) {
         let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
-        XCTAssertEqual(0, matchesCount)
+        XCTAssertEqual(matchesCount, 0)
     }
 
     class func textViewWithExactLabelShownOnce(label: String) {
         let matchesCount = NoteEditor.getTextViewsWithExactLabelCount(label: label)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func textViewWithExactLabelsShownOnce(labels: [String]) {
@@ -153,11 +153,11 @@ class NoteEditorAssert {
 
     class func checkboxForTextShownOnce(text: String) {
         let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func checkboxForTextNotShown(text: String) {
         let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
-        XCTAssertEqual(0, matchesCount)
+        XCTAssertEqual(matchesCount, 0)
     }
 }

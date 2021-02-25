@@ -20,7 +20,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     }
 
     override func setUpWithError() throws {
-        continueAfterFailure = true
         getToAllNotes()
         AllNotes.clearAllNotes()
         Trash.empty()

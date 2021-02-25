@@ -11,7 +11,6 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 	}
 
 	override func setUpWithError() throws {
-		continueAfterFailure = true
 		Alert.closeAny()
 		EmailLogin.close()
 		let _ = attemptLogOut()

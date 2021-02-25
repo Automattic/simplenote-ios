@@ -30,7 +30,6 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
 	}
 
 	override func setUpWithError() throws {
-		continueAfterFailure = true
 		AllNotes.searchForText(text: "")
 		AllNotes.searchCancel()
 	}

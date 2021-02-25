@@ -64,12 +64,12 @@ class PreviewAssert {
 
     class func staticTextWithExactLabelShownOnce(label: String) {
         let matchesCount = Preview.getStaticTextsWithExactLabelCount(label: label)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func staticTextWithExactValueShownOnce(value: String) {
         let matchesCount = Preview.getStaticTextsWithExactValueCount(value: value)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func staticTextWithExactValuesShownOnce(values: [String]) {
@@ -106,7 +106,7 @@ class PreviewAssert {
             }
         }
 
-        XCTAssertEqual(expectedCheckedBoxesNumber, actualCheckedBoxesCount, numberOfCheckedBoxesInPreviewNotExpected)
-        XCTAssertEqual(expectedEmptyBoxesNumber, actualEmptyBoxesCount, numberOfEmptyBoxesInPreviewNotExpected)
+        XCTAssertEqual(actualCheckedBoxesCount, expectedCheckedBoxesNumber, numberOfCheckedBoxesInPreviewNotExpected)
+        XCTAssertEqual(actualEmptyBoxesCount, expectedEmptyBoxesNumber, numberOfEmptyBoxesInPreviewNotExpected)
     }
 }

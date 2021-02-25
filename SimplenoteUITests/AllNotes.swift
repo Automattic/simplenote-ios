@@ -103,7 +103,7 @@ class AllNotesAssert {
     class func noteExists(noteName: String) {
         print(">>> Asserting that note is shown once: " + noteName)
 		let matchesCount = Table.getCellsWithExactLabelCount(label: noteName)
-		XCTAssertEqual(1, matchesCount)
+		XCTAssertEqual(matchesCount, 1)
     }
 
     class func notesExist(names: [String]) {
