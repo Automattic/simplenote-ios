@@ -402,8 +402,11 @@
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
+		D843AD6F25E3E633007E5B15 /* SimplenoteUITestsLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */; };
+		D843AD7825E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */; };
+		D843AD8F25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD8E25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift */; };
 		D864B16925CAE47C00F9B73E /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B16825CAE47C00F9B73E /* Generic.swift */; };
-		D864B18225CAE4BE00F9B73E /* SimplenoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */; };
+		D864B18225CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */; };
 		D864B19225CAE54300F9B73E /* AllNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B19125CAE54300F9B73E /* AllNotes.swift */; };
 		D864B1A225CAE57100F9B73E /* AssertGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1A125CAE57100F9B73E /* AssertGeneric.swift */; };
 		D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1AA25CAE59400F9B73E /* EmailLogin.swift */; };
@@ -902,9 +905,12 @@
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
+		D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsLogin.swift; sourceTree = "<group>"; };
+		D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsTrash.swift; sourceTree = "<group>"; };
+		D843AD8E25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsSearch.swift; sourceTree = "<group>"; };
 		D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D864B16825CAE47C00F9B73E /* Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
-		D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplenoteUITests.swift; sourceTree = "<group>"; };
+		D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsNoteEditor.swift; sourceTree = "<group>"; };
 		D864B19125CAE54300F9B73E /* AllNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotes.swift; sourceTree = "<group>"; };
 		D864B1A125CAE57100F9B73E /* AssertGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertGeneric.swift; sourceTree = "<group>"; };
 		D864B1AA25CAE59400F9B73E /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
@@ -1857,14 +1863,17 @@
 		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D864B1F025CAE87800F9B73E /* Info.plist */,
-				D864B18125CAE4BE00F9B73E /* SimplenoteUITests.swift */,
-				D864B16825CAE47C00F9B73E /* Generic.swift */,
 				D864B19125CAE54300F9B73E /* AllNotes.swift */,
 				D864B1A125CAE57100F9B73E /* AssertGeneric.swift */,
 				D864B1AA25CAE59400F9B73E /* EmailLogin.swift */,
+				D864B16825CAE47C00F9B73E /* Generic.swift */,
+				D864B1F025CAE87800F9B73E /* Info.plist */,
 				D864B1B325CAE5C900F9B73E /* NoteEditor.swift */,
 				D864B1C525CAE5F800F9B73E /* Preview.swift */,
+				D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */,
+				D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */,
+				D843AD8E25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift */,
+				D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */,
 				D864B1CE25CAE61F00F9B73E /* Trash.swift */,
 				D864B1D725CAE63E00F9B73E /* UIDs.swift */,
 				D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */,
@@ -2938,14 +2947,17 @@
 			files = (
 				D864B1A225CAE57100F9B73E /* AssertGeneric.swift in Sources */,
 				D864B1B425CAE5C900F9B73E /* NoteEditor.swift in Sources */,
+				D843AD7825E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift in Sources */,
 				D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */,
-				D864B18225CAE4BE00F9B73E /* SimplenoteUITests.swift in Sources */,
+				D864B18225CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift in Sources */,
 				D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */,
 				D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */,
 				D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */,
+				D843AD8F25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift in Sources */,
 				D864B19225CAE54300F9B73E /* AllNotes.swift in Sources */,
 				D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */,
 				D864B16925CAE47C00F9B73E /* Generic.swift in Sources */,
+				D843AD6F25E3E633007E5B15 /* SimplenoteUITestsLogin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

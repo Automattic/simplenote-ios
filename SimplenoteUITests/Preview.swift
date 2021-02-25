@@ -11,7 +11,7 @@ class Preview {
     }
 
     class func leavePreviewViaBackButton() {
-        let backButton = app.navigationBars[UID.NavBar.NoteEditorPreview].buttons[UID.Button.Back]
+        let backButton = app.navigationBars[UID.NavBar.noteEditorPreview].buttons[UID.Button.back]
         guard backButton.exists else { return }
 
         backButton.tap()
@@ -51,11 +51,11 @@ class PreviewAssert {
     }
 
     class func previewShown() {
-        let previewNavBar = app.navigationBars[UID.NavBar.NoteEditorPreview]
+        let previewNavBar = app.navigationBars[UID.NavBar.noteEditorPreview]
 
-        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.NoteEditorPreview + navBarNotFound)
-        XCTAssertTrue(previewNavBar.buttons[UID.Button.Back].waitForExistence(timeout: minLoadTimeout), UID.Button.Back + buttonNotFound)
-        XCTAssertTrue(previewNavBar.staticTexts[UID.Text.NoteEditorPreview].waitForExistence(timeout: minLoadTimeout), UID.Text.NoteEditorPreview + labelNotFound)
+        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.noteEditorPreview + navBarNotFound)
+        XCTAssertTrue(previewNavBar.buttons[UID.Button.back].waitForExistence(timeout: minLoadTimeout), UID.Button.back + buttonNotFound)
+        XCTAssertTrue(previewNavBar.staticTexts[UID.Text.noteEditorPreview].waitForExistence(timeout: minLoadTimeout), UID.Text.noteEditorPreview + labelNotFound)
     }
 
     class func wholeTextShown(text: String) {
@@ -64,12 +64,12 @@ class PreviewAssert {
 
     class func staticTextWithExactLabelShownOnce(label: String) {
         let matchesCount = Preview.getStaticTextsWithExactLabelCount(label: label)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func staticTextWithExactValueShownOnce(value: String) {
         let matchesCount = Preview.getStaticTextsWithExactValueCount(value: value)
-        XCTAssertEqual(1, matchesCount)
+        XCTAssertEqual(matchesCount, 1)
     }
 
     class func staticTextWithExactValuesShownOnce(values: [String]) {
@@ -106,7 +106,7 @@ class PreviewAssert {
             }
         }
 
-        XCTAssertEqual(expectedCheckedBoxesNumber, actualCheckedBoxesCount, numberOfCheckedBoxesInPreviewNotExpected)
-        XCTAssertEqual(expectedEmptyBoxesNumber, actualEmptyBoxesCount, numberOfEmptyBoxesInPreviewNotExpected)
+        XCTAssertEqual(actualCheckedBoxesCount, expectedCheckedBoxesNumber, numberOfCheckedBoxesInPreviewNotExpected)
+        XCTAssertEqual(actualEmptyBoxesCount, expectedEmptyBoxesNumber, numberOfEmptyBoxesInPreviewNotExpected)
     }
 }

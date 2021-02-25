@@ -3,30 +3,30 @@ import XCTest
 class Trash {
 
     class func open() {
-        app.navigationBars.element.buttons[UID.Button.Menu].tap()
-        app.tables.staticTexts[UID.Button.Trash].tap()
+        app.navigationBars.element.buttons[UID.Button.menu].tap()
+        app.tables.staticTexts[UID.Button.trash].tap()
     }
 
     class func restoreNote(noteName: String) {
         app.tables.cells[noteName].swipeLeft()
-        app.tables.cells[noteName].buttons[UID.Button.TrashRestore].tap()
+        app.tables.cells[noteName].buttons[UID.Button.trashRestore].tap()
     }
 
     class func deleteNote(noteName: String) {
-        Table.trashNote(noteName: noteName)
+        Table.trashCell(noteName: noteName)
     }
 
     class func empty() {
         Trash.open()
-        let emptyTrashButton = app.buttons[UID.Button.TrashEmptyTrash]
+        let emptyTrashButton = app.buttons[UID.Button.trashEmptyTrash]
         guard emptyTrashButton.isEnabled else { return }
 
 		emptyTrashButton.tap()
-        app.alerts.scrollViews.otherElements.buttons[UID.Button.Yes].tap()
+        app.alerts.scrollViews.otherElements.buttons[UID.Button.yes].tap()
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getNotesNumber()
+        return Table.getCellsNumber()
     }
 }
 
@@ -42,6 +42,6 @@ class TrashAssert {
 
     class func notesNumber(expectedNotesNumber: Int) {
         let actualNotesNumber = Trash.getNotesNumber()
-        XCTAssertEqual(expectedNotesNumber, actualNotesNumber, numberOfNotesInTrashNotExpected)
+        XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInTrashNotExpected)
     }
 }

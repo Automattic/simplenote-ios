@@ -1,9 +1,10 @@
 import XCTest
 
+let app = XCUIApplication()
 private var stepIndex = 0
 
 func attemptLogOut() -> Bool {
-    let allNotesNavBar = app.navigationBars[UID.NavBar.AllNotes]
+    let allNotesNavBar = app.navigationBars[UID.NavBar.allNotes]
     var loggedOut: Bool = false
 
     if allNotesNavBar.exists {
@@ -16,10 +17,10 @@ func attemptLogOut() -> Bool {
 }
 
 func logOut() -> Bool {
-    app.navigationBars[UID.NavBar.AllNotes].buttons[UID.Button.Menu].tap()
-    app.tables.staticTexts[UID.Cell.Settings].tap()
-    app.tables.staticTexts[UID.Button.SettingsLogOut].tap()
-    return app.buttons[UID.Button.LogIn].waitForExistence(timeout: maxLoadTimeout)
+    app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.menu].tap()
+    app.tables.staticTexts[UID.Cell.settings].tap()
+    app.tables.staticTexts[UID.Button.settingsLogOut].tap()
+    return app.buttons[UID.Button.logIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
 func trackTest(_ function: String = #function) {
@@ -40,7 +41,7 @@ func getToAllNotes() {
 
 class Table {
 
-    class func getNotesNumber() -> Int {
+    class func getCellsNumber() -> Int {
         // We need to count only the table cells that have X = 0 (this is a case for notes)
         // Otherwise we will include invisible elements from left pane, which are still found
         let cellsNum = app.tables.element.children(matching: .cell).count
@@ -61,17 +62,44 @@ class Table {
         return notesNum
     }
 
-    class func trashNote(noteName: String) {
-        app.tables.cells[noteName].swipeLeft()
+    class func trashCell(noteName: String) {
+		Table.getCell(label: noteName).swipeLeft()
         sleep(1)
-        app.tables.cells[noteName].buttons[UID.Button.NoteCellTrash].tap()
+		Table.getCell(label: noteName).buttons[UID.Button.noteCellTrash].tap()
     }
+
+	class func getCell(label: String) -> XCUIElement {
+		let cell = app.tables.cells[label]
+		return cell
+	}
+
+	class func getCellsWithExactLabelCount(label: String) -> Int {
+		let predicate = NSPredicate(format: "label == '" + label + "'")
+		let matchingCells = app.cells.matching(predicate)
+		let matchesCount = matchingCells.count
+		print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
+		return matchesCount
+	}
+
+	class func getContentOfCell(noteName: String) -> String {
+		let cell = Table.getCell(label: noteName)
+		guard cell.exists else { return "" }
+
+		// We need to find a child element of the cell from above,
+		// a static text that has a content different from note name -
+		// this is the one we need.
+		let predicate = NSPredicate(format: "label != '" + noteName + "'")
+		let staticTextWithContent = cell.staticTexts.element(matching: predicate)
+		guard staticTextWithContent.exists else { return "" }
+
+		return staticTextWithContent.label
+	}
 }
 
 class WebView {
 
     class func tapDone() {
-        let doneButton = app.buttons[UID.Button.Done]
+        let doneButton = app.buttons[UID.Button.done]
         guard doneButton.exists else { return }
         doneButton.tap()
     }
@@ -93,7 +121,7 @@ class Alert {
         let alert = app.alerts.element
         guard alert.exists else { return }
 
-        let confirmPredicate = NSPredicate(format: "label == '" + UID.Button.Accept + "' || label == 'AnythingElse'")
+        let confirmPredicate = NSPredicate(format: "label == '" + UID.Button.accept + "' || label == 'AnythingElse'")
         let confirmationButton = alert.buttons.element(matching: confirmPredicate)
         guard confirmationButton.exists else { return }
 
