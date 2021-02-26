@@ -311,11 +311,9 @@ private extension SPAuthViewController {
 
         lockdownInterface()
 
-        controller.signupWithCredentials(username: email, password: password) { error in
+        controller.signupWithCredentials(username: email) { error in
             if let error = error {
                 self.handleError(error: error)
-            } else {
-                SPTracker.trackUserAccountCreated()
             }
 
             self.unlockInterface()
