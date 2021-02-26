@@ -1,20 +1,17 @@
 import XCTest
 
-class AllNotes {
+class NoteList {
 
     class func openNote(noteName: String) {
         app.tables.cells[noteName].tap()
     }
 
-    class func isOpen() -> Bool {
-        //Warning for future: this works only for 'All Notes' obviously
-        //Will not work when a tag is selected.
+    class func isAllNotesListOpen() -> Bool {
         return app.navigationBars[UID.NavBar.allNotes].exists
     }
 
-    class func open() {
-        guard !isOpen() else { return }
-
+    class func openAllNotes() {
+        guard !NoteList.isAllNotesListOpen() else { return }
         Sidebar.open()
         app.tables.staticTexts[UID.Button.allNotes].tap()
     }
@@ -25,7 +22,7 @@ class AllNotes {
 
     class func createNoteAndLeaveEditor(noteName: String, tags: [String] = []) {
         print(">>> Creating a note: " + noteName)
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditor.clearAndEnterText(enteredValue: noteName)
 
         for tag in tags {
@@ -49,10 +46,10 @@ class AllNotes {
         return Table.getCellsNumber()
     }
 
-    class func clearAllNotes() {
-        AllNotes.open()
+    class func trashAllNotes() {
+        NoteList.openAllNotes()
 
-        let notesNumber = AllNotes.getNotesNumber()
+        let notesNumber = NoteList.getNotesNumber()
         let cellsNum = app.tables.element.children(matching: .cell).count
         var startingIndex: Int
 
@@ -105,7 +102,7 @@ class AllNotes {
     }
 }
 
-class AllNotesAssert {
+class NoteListAssert {
 
     class func noteExists(noteName: String) {
         print(">>> Asserting that note is shown once: " + noteName)
@@ -115,7 +112,7 @@ class AllNotesAssert {
 
     class func notesExist(names: [String]) {
         for noteName in names {
-            AllNotesAssert.noteExists(noteName: noteName)
+            NoteListAssert.noteExists(noteName: noteName)
         }
     }
 
@@ -124,11 +121,11 @@ class AllNotesAssert {
     }
 
     class func notesNumber(expectedNotesNumber: Int) {
-        let actualNotesNumber = AllNotes.getNotesNumber()
+        let actualNotesNumber = NoteList.getNotesNumber()
         XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
     }
 
-    class func screenShown() {
+    class func allNotesScreenShown() {
         XCTAssertTrue(app.navigationBars[UID.NavBar.allNotes].waitForExistence(timeout: maxLoadTimeout), UID.NavBar.allNotes + navBarNotFound)
     }
 
