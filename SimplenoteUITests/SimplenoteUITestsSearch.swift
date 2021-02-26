@@ -14,96 +14,114 @@ let diacriticInfo = "A diacritic (also diacritical mark, diacritical point, diac
 
 class SimplenoteUISmokeTestsSearch: XCTestCase {
 
-	override class func setUp() {
-		app.launch()
-		let _ = attemptLogOut()
-		EmailLogin.open()
-		EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-		AllNotes.waitForLoad()
-		AllNotes.clearAllNotes()
-		Trash.empty()
-		AllNotes.open()
-		AllNotes.createNotes(names: [godzillaNoteName + "\n\n" + godzillaInfo,
-									 kingKongNoteName + "\n\n" + kingKongInfo,
-									 mechagodzillaNoteName + "\n\n" + mechagodzillaInfo,
-									 diacriticNoteName + "\n\n" + diacriticInfo])
-	}
+    override class func setUp() {
+        app.launch()
+        let _ = attemptLogOut()
+        EmailLogin.open()
+        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        AllNotes.waitForLoad()
+        AllNotes.clearAllNotes()
+        Trash.empty()
+        Sidebar.open()
+        Sidebar.tagsDeleteAll()
+        AllNotes.open()
+        AllNotes.createNoteAndLeaveEditor(noteName: godzillaNoteName + "\n\n" + godzillaInfo, tags: ["sea-monster", "reptile", "prehistoric"])
+        AllNotes.createNoteAndLeaveEditor(noteName: kingKongNoteName + "\n\n" + kingKongInfo, tags: ["ape", "prehistoric"])
+        AllNotes.createNoteAndLeaveEditor(noteName: mechagodzillaNoteName + "\n\n" + mechagodzillaInfo, tags: ["man-made", "robot"])
+        AllNotes.createNoteAndLeaveEditor(noteName: diacriticNoteName + "\n\n" + diacriticInfo, tags: ["language", "diacritic"])
+}
 
-	override func setUpWithError() throws {
-		AllNotes.searchForText(text: "")
-		AllNotes.searchCancel()
-	}
+    override func setUpWithError() throws {
+        AllNotes.searchForText(text: "")
+        AllNotes.searchCancel()
+    }
 
-	func testClearingSearchFieldUpdatesFilteredNotes() throws {
-		trackTest()
+    func testClearingSearchFieldUpdatesFilteredNotes() throws {
+        trackTest()
 
-		trackStep()
-		AllNotes.open()
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        trackStep()
+        AllNotes.open()
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
 
-		trackStep()
-		AllNotes.searchForText(text: "Japan")
-		AllNotesAssert.notesExist(names: [godzillaNoteName, mechagodzillaNoteName])
+        trackStep()
+        AllNotes.searchForText(text: "Japan")
+        AllNotesAssert.notesExist(names: [godzillaNoteName, mechagodzillaNoteName])
 
-		trackStep()
-		AllNotes.searchCancel()
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        trackStep()
+        AllNotes.searchCancel()
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
 
-		trackStep()
-		AllNotes.searchForText(text: "weapon")
-		AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
-		AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        trackStep()
+        AllNotes.searchForText(text: "weapon")
+        AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
+        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
 
-		trackStep()
-		AllNotes.searchForText(text: "")
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
-	}
+        trackStep()
+        AllNotes.searchForText(text: "")
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+    }
 
-	func testCanSearchByKeyword() throws {
-		trackTest()
+    func testTagsTapping() throws {
+        trackTest()
 
-		trackStep()
-		AllNotes.open()
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        trackStep()
+        Sidebar.tagSelect(tagName: "ape")
+        AllNotesAssert.noteExists(noteName: kingKongNoteName)
 
-		trackStep()
-		AllNotes.searchForText(text: "Godzilla")
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        trackStep()
+        Sidebar.tagSelect(tagName: "reptile")
+        AllNotesAssert.noteExists(noteName: godzillaNoteName)
 
-		trackStep()
-		AllNotes.searchForText(text: "Gorilla")
-		AllNotesAssert.notesExist(names: [kingKongNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        trackStep()
+        Sidebar.tagSelect(tagName: "robot")
+        AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
+    }
 
-		trackStep()
-		AllNotes.searchForText(text: "Gaelic")
-		AllNotesAssert.notesExist(names: [diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 1)
-	}
+    func testCanSearchByKeyword() throws {
+        trackTest()
 
-	func testCanSeeExcerpts() throws {
-		trackTest()
+        trackStep()
+        AllNotes.open()
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
 
-		trackStep()
-		AllNotes.open()
-		AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-		AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        trackStep()
+        AllNotes.searchForText(text: "Godzilla")
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
 
-		trackStep()
-		AllNotes.searchForText(text: "Hepburn")
-		AllNotesAssert.noteContentIsShownInSearch(noteName: godzillaNoteName, expectedContent: "Godzilla (Japanese: ゴジラ, Hepburn: Gojira, /ɡɒdˈzɪlə/; [ɡoꜜdʑiɾa] (About this soundlisten)) is a fictional monster, or kaiju, originating from a series of Japanese films. The character first appeared in the 1954 film Godzilla and became a worldwide pop culture icon, appearing in various media, including 32 films produced by Toho")
+        trackStep()
+        AllNotes.searchForText(text: "Gorilla")
+        AllNotesAssert.notesExist(names: [kingKongNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
 
-		trackStep()
-		AllNotes.searchForText(text: "1962")
-		AllNotesAssert.noteContentIsShownInSearch(noteName: kingKongNoteName, expectedContent: "…King Kong vs. Godzilla (1962), pitting a larger Kong against Toho's own Godzilla, and King Kong Escapes (1967), based on The King Kong Show (1966–1969) from Rankin/Bass Productions. In 1976, Dino De Laurentiis produced a modern remake of the original film directed by John Guillermin")
+        trackStep()
+        AllNotes.searchForText(text: "Gaelic")
+        AllNotesAssert.notesExist(names: [diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+    }
 
-		trackStep()
-		AllNotes.searchForText(text: "archenemy")
-		AllNotesAssert.noteContentIsShownInSearch(noteName: mechagodzillaNoteName, expectedContent: "…commonly considered to be an archenemy of Godzilla")
-	}
+    func testCanSeeExcerpts() throws {
+        trackTest()
+
+        trackStep()
+        AllNotes.open()
+        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+
+        trackStep()
+        AllNotes.searchForText(text: "Hepburn")
+        AllNotesAssert.noteContentIsShownInSearch(noteName: godzillaNoteName, expectedContent: "Godzilla (Japanese: ゴジラ, Hepburn: Gojira, /ɡɒdˈzɪlə/; [ɡoꜜdʑiɾa] (About this soundlisten)) is a fictional monster, or kaiju, originating from a series of Japanese films. The character first appeared in the 1954 film Godzilla and became a worldwide pop culture icon, appearing in various media, including 32 films produced by Toho")
+
+        trackStep()
+        AllNotes.searchForText(text: "1962")
+        AllNotesAssert.noteContentIsShownInSearch(noteName: kingKongNoteName, expectedContent: "…King Kong vs. Godzilla (1962), pitting a larger Kong against Toho's own Godzilla, and King Kong Escapes (1967), based on The King Kong Show (1966–1969) from Rankin/Bass Productions. In 1976, Dino De Laurentiis produced a modern remake of the original film directed by John Guillermin")
+
+        trackStep()
+        AllNotes.searchForText(text: "archenemy")
+        AllNotesAssert.noteContentIsShownInSearch(noteName: mechagodzillaNoteName, expectedContent: "…commonly considered to be an archenemy of Godzilla")
+    }
 }

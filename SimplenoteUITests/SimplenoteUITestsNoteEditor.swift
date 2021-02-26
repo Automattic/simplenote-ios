@@ -113,69 +113,69 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
     }
 
-	func testUndoUndoesTheLastEdit() throws {
-		let editorText = "ABCD"
+    func testUndoUndoesTheLastEdit() throws {
+        let editorText = "ABCD"
 
-		// Step 1
-		AllNotes.addNoteTap()
-		NoteEditorAssert.editorShown()
+        // Step 1
+        AllNotes.addNoteTap()
+        NoteEditorAssert.editorShown()
 
-		// Step 2
-		NoteEditor.clearAndEnterText(enteredValue: editorText)
-		NoteEditorAssert.textViewWithExactValueShownOnce(value: editorText)
+        // Step 2
+        NoteEditor.clearAndEnterText(enteredValue: editorText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: editorText)
 
-		// Step 3
-		NoteEditor.undo()
-		NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
-		NoteEditorAssert.textViewWithExactValueShownOnce(value: "ABC")
-	}
+        // Step 3
+        NoteEditor.undo()
+        NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: "ABC")
+    }
 
-	func testAddedURLIsLinkified() throws {
+    func testAddedURLIsLinkified() throws {
 
-		// Step 1
-		AllNotes.addNoteTap()
-		NoteEditorAssert.editorShown()
+        // Step 1
+        AllNotes.addNoteTap()
+        NoteEditorAssert.editorShown()
 
-		// Step 2
-		NoteEditor.markdownEnable()
-		NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-		NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
+        // Step 2
+        NoteEditor.markdownEnable()
+        NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
-		// Step 3
-		NoteEditor.leaveEditor()
-		AllNotesAssert.noteExists(noteName: usualLinkText)
+        // Step 3
+        NoteEditor.leaveEditor()
+        AllNotesAssert.noteExists(noteName: usualLinkText)
 
-		// Step 4
-		AllNotes.openNote(noteName: usualLinkText)
-		NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
-	}
+        // Step 4
+        AllNotes.openNote(noteName: usualLinkText)
+        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+    }
 
-	func testLongTappingOnLinkOpensLinkInNewWindow() throws {
+    func testLongTappingOnLinkOpensLinkInNewWindow() throws {
 
-		// Step 1
-		AllNotes.addNoteTap()
-		NoteEditorAssert.editorShown()
+        // Step 1
+        AllNotes.addNoteTap()
+        NoteEditorAssert.editorShown()
 
-		// Step 2
-		NoteEditor.markdownEnable()
-		NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
-		NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
+        // Step 2
+        NoteEditor.markdownEnable()
+        NoteEditor.clearAndEnterText(enteredValue: usualLinkText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: usualLinkText)
 
-		// Step 3
-		NoteEditor.leaveEditor()
-		AllNotesAssert.noteExists(noteName: usualLinkText)
+        // Step 3
+        NoteEditor.leaveEditor()
+        AllNotesAssert.noteExists(noteName: usualLinkText)
 
-		// Step 4
-		AllNotes.openNote(noteName: usualLinkText)
-		//NoteEditorAssert.editorText(text: usualURL)
-		NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+        // Step 4
+        AllNotes.openNote(noteName: usualLinkText)
+        //NoteEditorAssert.editorText(text: usualURL)
+        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
 
-		// Step 5
-		NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
-		for text in webViewTexts {
-			WebViewAssert.textShownOnScreen(textToFind: text)
-		}
-	}
+        // Step 5
+        NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
+        for text in webViewTexts {
+            WebViewAssert.textShownOnScreen(textToFind: text)
+        }
+    }
 
     func testTappingOnLinkInPreviewOpensLinkInNewWindow() throws {
 
@@ -228,7 +228,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     }
 
     func testCreateUncheckedItem() throws {
-		let checklistText = "Unchecked Item"
+        let checklistText = "Unchecked Item"
         let completeText = "- [ ]" + checklistText
 
         // Step 1

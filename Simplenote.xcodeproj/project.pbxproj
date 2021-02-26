@@ -415,6 +415,7 @@
 		D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1CE25CAE61F00F9B73E /* Trash.swift */; };
 		D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1D725CAE63E00F9B73E /* UIDs.swift */; };
 		D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */; };
+		D8E2D8E325E7DE090001315B /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2D8E225E7DE090001315B /* Sidebar.swift */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
 		E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C798180B130B00AD36B5 /* SPTableViewController.m */; };
@@ -920,6 +921,7 @@
 		D864B1D725CAE63E00F9B73E /* UIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDs.swift; sourceTree = "<group>"; };
 		D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
 		D864B1F025CAE87800F9B73E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8E2D8E225E7DE090001315B /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
 		DF3BADF5A954AA00BCF9B169 /* Pods-Automattic-Simplenote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Simplenote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote.debug.xcconfig"; sourceTree = "<group>"; };
 		E215C790180B115C00AD36B5 /* SPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPNavigationController.h; path = Classes/SPNavigationController.h; sourceTree = "<group>"; };
@@ -1870,6 +1872,7 @@
 				D864B1F025CAE87800F9B73E /* Info.plist */,
 				D864B1B325CAE5C900F9B73E /* NoteEditor.swift */,
 				D864B1C525CAE5F800F9B73E /* Preview.swift */,
+				D8E2D8E225E7DE090001315B /* Sidebar.swift */,
 				D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */,
 				D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */,
 				D843AD8E25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift */,
@@ -2957,6 +2960,7 @@
 				D864B19225CAE54300F9B73E /* AllNotes.swift in Sources */,
 				D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */,
 				D864B16925CAE47C00F9B73E /* Generic.swift in Sources */,
+				D8E2D8E325E7DE090001315B /* Sidebar.swift in Sources */,
 				D843AD6F25E3E633007E5B15 /* SimplenoteUITestsLogin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
