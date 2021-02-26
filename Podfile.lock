@@ -44,7 +44,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 2.5.1)
   - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
-  - Simperium (= 1.4)
+  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, branch `issue/new-auth-api`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -56,11 +56,20 @@ SPEC REPOS:
     - Gridicons
     - Reachability
     - Sentry
-    - Simperium
     - Sodium-Fork
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
+
+EXTERNAL SOURCES:
+  Simperium:
+    :branch: issue/new-auth-api
+    :git: https://github.com/Simperium/simperium-ios.git
+
+CHECKOUT OPTIONS:
+  Simperium:
+    :commit: 204ac100c605bb1911913cf786dc85fc7daa447f
+    :git: https://github.com/Simperium/simperium-ios.git
 
 SPEC CHECKSUMS:
   AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
@@ -75,6 +84,6 @@ SPEC CHECKSUMS:
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 1c0b34c545c1da8087f8f769802995f9b44aa31b
+PODFILE CHECKSUM: 6684a59cfac50cbc77dc1c11273e4bb1a502c993
 
 COCOAPODS: 1.10.0
