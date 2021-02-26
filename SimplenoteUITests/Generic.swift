@@ -17,9 +17,9 @@ func attemptLogOut() -> Bool {
 }
 
 func logOut() -> Bool {
-	Sidebar.open()
-	Sidebar.getButtonSettings().tap()
-	app.tables.staticTexts[UID.Button.settingsLogOut].tap()
+    Sidebar.open()
+    Sidebar.getButtonSettings().tap()
+    app.tables.staticTexts[UID.Button.settingsLogOut].tap()
     return app.buttons[UID.Button.logIn].waitForExistence(timeout: maxLoadTimeout)
 }
 
@@ -44,7 +44,7 @@ class Table {
     class func getCellsNumber() -> Int {
         // We need to count only the table cells that have X = 0
         // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
-		// or the elements from Notes List when Settings are open
+        // or the elements from Notes List when Settings are open
         let cellsNum = app.tables.element.children(matching: .cell).count
         var notesNum: Int = 0
 
@@ -64,37 +64,37 @@ class Table {
     }
 
     class func trashCell(noteName: String) {
-		Table.getCell(label: noteName).swipeLeft()
+        Table.getCell(label: noteName).swipeLeft()
         sleep(1)
-		Table.getCell(label: noteName).buttons[UID.Button.itemTrash].tap()
+        Table.getCell(label: noteName).buttons[UID.Button.itemTrash].tap()
     }
 
-	class func getCell(label: String) -> XCUIElement {
-		let cell = app.tables.cells[label]
-		return cell
-	}
+    class func getCell(label: String) -> XCUIElement {
+        let cell = app.tables.cells[label]
+        return cell
+    }
 
-	class func getCellsWithExactLabelCount(label: String) -> Int {
-		let predicate = NSPredicate(format: "label == '" + label + "'")
-		let matchingCells = app.cells.matching(predicate)
-		let matchesCount = matchingCells.count
-		print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
-		return matchesCount
-	}
+    class func getCellsWithExactLabelCount(label: String) -> Int {
+        let predicate = NSPredicate(format: "label == '" + label + "'")
+        let matchingCells = app.cells.matching(predicate)
+        let matchesCount = matchingCells.count
+        print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
+        return matchesCount
+    }
 
-	class func getContentOfCell(noteName: String) -> String {
-		let cell = Table.getCell(label: noteName)
-		guard cell.exists else { return "" }
+    class func getContentOfCell(noteName: String) -> String {
+        let cell = Table.getCell(label: noteName)
+        guard cell.exists else { return "" }
 
-		// We need to find a child element of the cell from above,
-		// a static text that has a content different from note name -
-		// this is the one we need.
-		let predicate = NSPredicate(format: "label != '" + noteName + "'")
-		let staticTextWithContent = cell.staticTexts.element(matching: predicate)
-		guard staticTextWithContent.exists else { return "" }
+        // We need to find a child element of the cell from above,
+        // a static text that has a content different from note name -
+        // this is the one we need.
+        let predicate = NSPredicate(format: "label != '" + noteName + "'")
+        let staticTextWithContent = cell.staticTexts.element(matching: predicate)
+        guard staticTextWithContent.exists else { return "" }
 
-		return staticTextWithContent.label
-	}
+        return staticTextWithContent.label
+    }
 }
 
 class WebView {

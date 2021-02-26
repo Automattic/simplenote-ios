@@ -2,22 +2,22 @@ import XCTest
 
 class NoteEditor {
 
-	class func dismissKeyboard() {
-		let dismissKeyboardButton = app.buttons[UID.Button.dismissKeyboard]
-		guard dismissKeyboardButton.exists else { return }
+    class func dismissKeyboard() {
+        let dismissKeyboardButton = app.buttons[UID.Button.dismissKeyboard]
+        guard dismissKeyboardButton.exists else { return }
 
-		dismissKeyboardButton.tap()
-	}
+        dismissKeyboardButton.tap()
+    }
 
-	class func addTag(tagName: String) {
-		NoteEditor.dismissKeyboard()
-		let tagInput = app.textFields[UID.TextField.tag]
-		guard tagInput.exists else { return }
+    class func addTag(tagName: String) {
+        NoteEditor.dismissKeyboard()
+        let tagInput = app.textFields[UID.TextField.tag]
+        guard tagInput.exists else { return }
 
-		print(">>> Adding tag: " + tagName)
-		tagInput.tap()
-		tagInput.typeText(tagName + "\n")
-	}
+        print(">>> Adding tag: " + tagName)
+        tagInput.tap()
+        tagInput.typeText(tagName + "\n")
+    }
 
     class func clearText() {
         app.textViews.element.clearAndEnterText(text: "")

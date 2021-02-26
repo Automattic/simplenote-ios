@@ -3,7 +3,7 @@ import XCTest
 class Trash {
 
     class func open() {
-		Sidebar.open()
+        Sidebar.open()
         app.tables.staticTexts[UID.Button.trash].tap()
     }
 
@@ -21,7 +21,7 @@ class Trash {
         let emptyTrashButton = app.buttons[UID.Button.trashEmptyTrash]
         guard emptyTrashButton.isEnabled else { return }
 
-		emptyTrashButton.tap()
+        emptyTrashButton.tap()
         app.alerts.scrollViews.otherElements.buttons[UID.Button.yes].tap()
     }
 
