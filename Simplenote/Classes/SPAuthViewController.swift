@@ -190,6 +190,8 @@ class SPAuthViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationController()
         startListeningToNotifications()
+
+        passwordInputView.isHidden = mode.isPasswordHidden
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -499,7 +501,10 @@ private extension SPAuthViewController {
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+        guard !mode.isPasswordHidden else {
+            return .success
+        }
+        return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
     }
 
     /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
@@ -550,7 +555,11 @@ extension SPAuthViewController: SPTextInputViewDelegate {
         case emailInputView:
             switch performUsernameValidation() {
             case .success:
-                passwordInputView.becomeFirstResponder()
+                if mode.isPasswordHidden {
+                    performPrimaryActionIfPossible()
+                } else {
+                    passwordInputView.becomeFirstResponder()
+                }
 
             case let error:
                 displayEmailValidationWarning(error.description)
@@ -584,6 +593,7 @@ struct AuthenticationMode {
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
+    let isPasswordHidden: Bool
 }
 
 
@@ -600,7 +610,8 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil)
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden:              false)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -612,7 +623,8 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
+                     isPasswordHidden:              true)
     }
 }
 
