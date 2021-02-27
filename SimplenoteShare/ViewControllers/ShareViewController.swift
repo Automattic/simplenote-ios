@@ -105,14 +105,16 @@ extension ShareViewController: KeyboardObservable {
             return
         }
 
+        let newKeyboardFloats = endFrame.maxY < view.frame.height
         let offset = UIScreen.main.bounds.height - endFrame.origin.y + Constants.insetBottomBuffer
+        let newEdgeInset = newKeyboardFloats ? .zero : offset
 
         UIView.animate(withDuration: Constants.animationTimeInterval) {
-            self.textView.contentInset.bottom = offset
-            self.textView.scrollIndicatorInsets.bottom = offset
+            self.textView.contentInset.bottom = newEdgeInset
+            self.textView.scrollIndicatorInsets.bottom = newEdgeInset
         }
     }
-    
+
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         //currently not used
     }
