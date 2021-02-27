@@ -105,6 +105,20 @@ class InterlinkResultsControllerTests: XCTestCase {
 
         XCTAssertEqual(results.count, matching.count)
     }
+
+    func testNoteInterlinkReferenceCountReturnsCorrectNumberOfReferences() {
+        let simperiumKey = "123456abcdefg"
+        let plainInternalLink = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + simperiumKey
+        let noteContentWithOneReference = "This note refers to \(plainInternalLink) one time"
+        let noteContentWithTwoReferences = "This note refers to \(plainInternalLink) two times: \(plainInternalLink)"
+        let noteContentWithOutRefernces = "No references"
+        let contentWithKeyNotLink = "this note hase the \(simperiumKey) but not a link"
+
+        XCTAssertEqual(Note.instancesOfReferenceToNoteWith(simperiumKey: simperiumKey, in: noteContentWithOneReference), 1)
+        XCTAssertEqual(Note.instancesOfReferenceToNoteWith(simperiumKey: simperiumKey, in: noteContentWithTwoReferences), 2)
+        XCTAssertEqual(Note.instancesOfReferenceToNoteWith(simperiumKey: simperiumKey, in: noteContentWithOutRefernces), 0)
+        XCTAssertEqual(Note.instancesOfReferenceToNoteWith(simperiumKey: simperiumKey, in: contentWithKeyNotLink), 0)
+    }
 }
 
 
