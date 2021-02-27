@@ -143,7 +143,9 @@ private extension NoteInformationController {
 
         let referenceRows = references.map { (referenceNote) -> Row in
             let date = DateFormatter.dateFormatter.string(from: referenceNote.modificationDate)
-            let value = "\(Localization.interlinkReferences(note.instancesOfInternalLinkIn(referenceNote.content))), \(Localization.lastModified(date))"
+            let value = Localization.interlinkReferences(Note.instancesOfReferenceToNoteWith(simperiumKey: note.simperiumKey, in: referenceNote.content)) +
+                        ", " +
+                        Localization.lastModified(date)
 
             return .reference(interLink: referenceNote.plainInternalLink,
                               title: referenceNote.titlePreview,

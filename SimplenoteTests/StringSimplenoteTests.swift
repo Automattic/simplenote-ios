@@ -120,6 +120,4 @@ extension StringSimplenoteTests {
         XCTAssertEqual(sampleD.occurancesOf(testValue), 0)
         XCTAssertEqual(sampleE.occurancesOf(testValue), 5)
     }
-
-
 }

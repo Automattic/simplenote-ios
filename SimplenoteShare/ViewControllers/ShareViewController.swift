@@ -55,7 +55,6 @@ class ShareViewController: UIViewController {
         return button
     }()
 
-
     // MARK: Initialization
 
     /// Designated Initializer
