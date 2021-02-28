@@ -9,7 +9,7 @@ class EmailLogin {
 
     class func close() {
         let backButton = app.navigationBars[UID.NavBar.logIn].buttons[UID.Button.back]
-        guard backButton.exists else { return }
+        guard backButton.isHittable else { return }
 
         backButton.tap()
     }

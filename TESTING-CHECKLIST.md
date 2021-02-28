@@ -39,11 +39,11 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 ### Tags & search
 
-- [ ] Can filter by tag when clicking on tag in tag drawer
+- [ ] Can filter by tag when clicking on tag in tag drawer (A)
 - [ ] Searching in the search field highlights matches in note list
 - [ ] Searching in the search field highlights matches in the note editor
 - [ ] Clearing the search field immediately updates filtered notes (A)
-- [ ] Clicking on different tags or All Notes or Trash immediately updates filtered notes
+- [ ] Clicking on different tags or All Notes or Trash immediately updates filtered notes (A)
 - [ ] Can search by keyword (A)
 - [ ] Tag auto-completes appear when typing in search field
 - [ ] Typing `tag:` and something else, like `tag:te` results in autocomplete tag results including that something else, e.g. `test`

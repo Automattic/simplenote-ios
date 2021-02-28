@@ -3,6 +3,7 @@ import XCTest
 class Trash {
 
     class func open() {
+        print(">>> Opening \"Trash\"")
         Sidebar.open()
         app.tables.staticTexts[UID.Button.trash].tap()
     }
